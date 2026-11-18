@@ -76,4 +76,43 @@ curvas de nivel; donde los dos lados no casan (un tramo de calle corrido más de
 hojas) la calle puede quedar cortada; en el sur, donde la franja es ancha y el caserío disperso,
 las manzanas reconstruidas son genéricas.
 
+## Calce de los planos viejos sobre 1936 (`calce.py`)
+
+La línea de tiempo se construye hacia atrás desde 1936: cada plano viejo se lleva a la grilla
+del mosaico (0,5 m/px). Necesita `clases-costura.png` y `mosaico-costura.tif` (pasos 3 y 4).
+
+```sh
+for m in 1911-princeton-plano-de-caracas-razetti 1889-bnf-mestre \
+         1843-nypl-jesurun-facsimil-muller-stapler 1772-pares-agi-exato-mapa; do
+  $PY tools/geo/calce.py $m        # ~15 s a ~1 min cada uno
+done
+# → fuentes/derivados/<año>/calzado.tif (RGBA, alfa 0 fuera del plano), calzado.json, qa-calce.jpg
+#   y los GCP con su residuo en tools/geo/gcp/calce-<carpeta>.json (van a git)
+```
+
+Para 1919 se usa el Razetti de **1911** (Princeton): dibuja las manzanas en gris liso; el de 1919
+(UMN) las dibuja vacías y no deja segmentar lo construido. El Pimentel de 1578 no se calza (es un
+esquema): se codifica a mano en `tools/geo/epocas/`.
+
+Cómo funciona:
+
+1. **GCP manuales**: las cuatro esquinas de la Plaza Bolívar (Principal, La Torre, Gradillas,
+   Monjas) leídas a ojo en cada plano (`semillas`, por índice de esquina) y en 1936
+   (`gcp/plaza-1936.json`), más `anclas` sueltas si hacen falta. El *Exato mapa* de 1772 está
+   girado 90° (el poniente arriba): las semillas ya lo resuelven.
+2. **Callejidad**: cada plano se reduce a ~2 m/px y a una imagen 0–1 de "es calle" con un
+   `perfil` de color (umbrales en CIELAB/HSV; `alguna` = máximo, `condiciones` = producto).
+   En 1936 es la clase *calle*. `marco` y `excluir` sacan leyendas y cartelas.
+3. **Etapas** (de la plaza hacia afuera, de grueso a fino: radio 0,7 → 4,5 km, ventanas de 140 →
+   100 m, búsqueda ±40 → ±12 m): el plano viejo se deforma con el calce actual, en una malla de
+   puntos se busca por correlación normalizada el corrimiento entre las dos redes de calles y
+   cada pico nítido es un GCP automático. La búsqueda es menor que media manzana, así que no se
+   salta a la calle vecina.
+4. **Depuración**: se quitan los GCP automáticos con residuo dejando uno fuera (fórmula de Rippa,
+   sin reajustar n veces) mayor que `umbral_residuo_m`; se reajusta el TPS (`tps.py`, con
+   `suavizado`) en los dos sentidos.
+
+Los residuos LOO que se reportan (metros sobre 1936) mezclan el error del calce con el del dibujo
+original: un plano 1:10.000 tiene ~10 m por milímetro de dibujo.
+
 Tests: `.venv/bin/python -m pytest tools/geo/tests -q`.

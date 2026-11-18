@@ -1,0 +1,13 @@
+{
+ "nota": "Esquinas de la Plaza Bolívar en el mosaico DCN 1936 (px a 0,5 m/px), leídas a mano a escala 1:1. Índice (i, j): i hacia el este, j hacia el sur; (0, 0) = esquina noroeste de la plaza.",
+ "clases": "fuentes/derivados/1936/segmentacion/mosaico/clases-costura.png",
+ "clases_calle": [1],
+ "factor": 4,
+ "mosaico": "fuentes/derivados/1936/mosaico-costura.tif",
+ "semillas": [
+  {"i": 0, "j": 0, "px": 8883, "py": 6709, "manual": true, "nota": "esquina Principal (noroeste de la plaza)"},
+  {"i": 1, "j": 0, "px": 9088, "py": 6754, "manual": true, "nota": "esquina La Torre (noreste de la plaza)"},
+  {"i": 0, "j": 1, "px": 8850, "py": 6911, "manual": true, "nota": "esquina Monjas (suroeste de la plaza)"},
+  {"i": 1, "j": 1, "px": 9048, "py": 6954, "manual": true, "nota": "esquina Gradillas (sureste de la plaza)"}
+ ]
+}
