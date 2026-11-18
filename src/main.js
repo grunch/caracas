@@ -6,6 +6,7 @@ import { cargarPak } from './pak.js'
 import { geometriaCiudad } from './ciudad.js'
 import { crearMaterialCiudad } from './material.js'
 import { acercar } from './animar.js'
+import { crearTeselasFinas } from './teselas.js'
 import { crearLineaDeTiempo, crearSecuencia, escalaCrece } from './epocas.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
@@ -107,9 +108,22 @@ async function cargarTextura(url, esColor) {
 function ponerTextura(uniforme, t) {
   const anterior = uniforme.value
   uniforme.value = t
+  // las ranuras de teselas inactivas usan el plano general de respaldo: que no queden con el liberado
+  ciudad.U.uFino.value = ciudad.U.uFino.value.map((v) => (v === anterior ? t : v))
   anterior?.dispose()
   pedirCuadro(3)
 }
+
+// --- teselas finas: de cerca, las cuatro de 3072 px que rodean lo que se mira ---
+const DIST_TESELAS_M = 2000 // más cerca que esto, un texel de la textura de 8192 (~1,1 m) ocupa más de un píxel
+let teselas = null
+fetch('plano/laminas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))).then((laminas) => {
+  if (laminas.tesela > maxTextura) return // la GPU no las admite: queda la textura general
+  teselas = crearTeselasFinas({
+    laminas, cargar: (url) => cargarTextura(url, true), U: ciudad.U, pedirCuadro, respaldo: () => ciudad.U.uMapa.value,
+  })
+  pedirCuadro(3) // si la cámara ya está cerca y el render quedó quieto, que empiece a pedir teselas
+}).catch((e) => console.warn(`teselas: ${e.message}`))
 
 // --- la ciudad y la ola ---
 const DURACION_OLA_S = 5
@@ -208,6 +222,10 @@ renderer.setAnimationLoop((t) => {
   }
   if (pendientes <= 0) return
   pendientes--
+  if (teselas) {
+    const { px, py } = coords.aPixel(cam.now.x, cam.now.z)
+    teselas.update(px, py, cam.now.dist < DIST_TESELAS_M)
+  }
   renderer.render(scene, camera)
 })
 
@@ -215,6 +233,7 @@ document.body.classList.add('listo')
 window.lab = {
   renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, relieveU, sueloEn, ready: true,
   get relieve() { return relieve },
+  get teselas() { return teselas },
   get lineaDeTiempo() { return lineaDeTiempo },
 }
 

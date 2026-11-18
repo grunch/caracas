@@ -7,7 +7,8 @@
  *   paredes de cal en sus tonos de siempre.
  * aInfo = (distancia a la plaza, semilla, estilo, pisos); pisos = 0 marca el suelo.
  */
-import { MeshLambertMaterial, Vector2, DataTexture } from 'three'
+import { MeshLambertMaterial, Vector2, Vector4, DataTexture } from 'three'
+import { RANURAS } from './teselas.js'
 import { GLSL_RELIEVE, uniformsRelieve } from './relieve.js'
 import { SIN_LINEA_DE_TIEMPO } from './epocas.js'
 
@@ -54,6 +55,25 @@ const FRAGMENTO_COMUN = /* glsl */ `
   varying vec3 vMundo; varying float vTecho; varying vec4 vInfo; varying float vBase;
   float azarF(float n) { return fract(sin(n * 12.9898) * 43758.5453); }
 
+  // las teselas finas de 3072 px (src/teselas.js): de cerca reemplazan a la textura general
+  uniform sampler2D uFino[${RANURAS}]; uniform vec4 uFinoRect[${RANURAS}]; uniform float uFinoOn[${RANURAS}];
+
+  vec3 finoEn(sampler2D t, vec4 r, float on, vec2 hoja, vec3 base) {
+    vec2 local = (hoja - r.xy) / (r.zw - r.xy);
+    float adentro = step(0.0, local.x) * step(local.x, 1.0) * step(0.0, local.y) * step(local.y, 1.0);
+    return mix(base, texture2D(t, vec2(local.x, 1.0 - local.y)).rgb, on * adentro);
+  }
+
+  /** El plano en un punto de la hoja (coordenadas normalizadas, y hacia abajo). */
+  vec3 planoEn(vec2 hoja) {
+    vec3 c = texture2D(uMapa, vec2(hoja.x, 1.0 - hoja.y)).rgb;
+    c = finoEn(uFino[0], uFinoRect[0], uFinoOn[0], hoja, c);
+    c = finoEn(uFino[1], uFinoRect[1], uFinoOn[1], hoja, c);
+    c = finoEn(uFino[2], uFinoRect[2], uFinoOn[2], hoja, c);
+    c = finoEn(uFino[3], uFinoRect[3], uFinoOn[3], hoja, c);
+    return c;
+  }
+
   /** Cuánta tinta hay en el plano en ese punto: 0 papel, 1 trazo. */
   float tintaDe(vec3 papel) { return 1.0 - smoothstep(0.35, 0.85, dot(papel, vec3(0.299, 0.587, 0.114))); }
 
@@ -92,7 +112,7 @@ const FRAGMENTO_COLOR = /* glsl */ `
   if (vInfo.w > 0.5 && vExiste < 0.02) discard; // la casa todavía no existe (o ya no) en esta época
   vec2 uvPlano = (vMundo.xz / uMetro + uPlaza) / uHoja;
   vec2 uv = vec2(uvPlano.x, 1.0 - uvPlano.y);
-  vec3 papel = texture2D(uMapa, uv).rgb;
+  vec3 papel = planoEn(uvPlano);
   float esSuelo = step(vInfo.w, 0.5);
   float publico = step(8.5, vInfo.z);
 
@@ -123,13 +143,16 @@ export function crearMaterialCiudad({
     uHoja: { value: new Vector2(plano.ancho, plano.alto) },
     uPlaza: { value: new Vector2(plano.plaza[0], plano.plaza[1]) },
     uMetro: { value: metro },
+    uFino: { value: Array.from({ length: RANURAS }, () => mapa) },
+    uFinoRect: { value: Array.from({ length: RANURAS }, () => new Vector4(0, 0, 1, 1)) },
+    uFinoOn: { value: new Array(RANURAS).fill(0) },
     // la línea de tiempo: de qué época a cuál, y el frente de esa ola en metros (hasta que arranca, la reserva)
     uEpocaDe: { value: SIN_LINEA_DE_TIEMPO },
     uEpocaA: { value: SIN_LINEA_DE_TIEMPO },
     uOlaEpoca: { value: 0 },
     uEtapas: { value: 6 },
-    uCrece: { value: TODO_EDIFICADO },
-    uCreceEscala: { value: new Vector2(1, 1) }, // hoja normalizada → crece.png normalizado (ver escalaCrece) // hasta que llegue crece.png: todo edificado desde la primera época
+    uCrece: { value: TODO_EDIFICADO }, // hasta que llegue crece.png: todo edificado desde la primera época
+    uCreceEscala: { value: new Vector2(1, 1) }, // hoja normalizada → crece.png normalizado (ver escalaCrece)
   }
   const material = new MeshLambertMaterial({ color: 0xf1e6cd })
   material.onBeforeCompile = (s) => {
