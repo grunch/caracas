@@ -13,7 +13,7 @@ import { GLSL_RELIEVE, uniformsRelieve } from './relieve.js'
 const VERTICE_COMUN = /* glsl */ `
   attribute vec4 aInfo;
   uniform float uOla, uAnchoOla;
-  varying vec3 vMundo; varying float vTecho; varying vec4 vInfo;
+  varying vec3 vMundo; varying float vTecho; varying vec4 vInfo; varying float vBase;
   float azar(float n) { return fract(sin(n * 12.9898) * 43758.5453); }`
 
 const VERTICE_OLA = /* glsl */ `
@@ -21,11 +21,12 @@ const VERTICE_OLA = /* glsl */ `
   float sube = smoothstep(0.0, 1.0, (uOla - aInfo.x - azar(aInfo.y) * 60.0) / uAnchoOla);
   transformed.y *= sube;
   vTecho = step(0.5, normal.y);
-  vInfo = aInfo;`
+  vInfo = aInfo;
+  vBase = 0.0; // altura del suelo bajo la casa (la pone el relieve)`
 
 const FRAGMENTO_COMUN = /* glsl */ `
   uniform sampler2D uMapa, uSuelo; uniform vec2 uHoja, uPlaza; uniform float uMetro, uColor;
-  varying vec3 vMundo; varying float vTecho; varying vec4 vInfo;
+  varying vec3 vMundo; varying float vTecho; varying vec4 vInfo; varying float vBase;
   float azarF(float n) { return fract(sin(n * 12.9898) * 43758.5453); }
 
   /** Cuánta tinta hay en el plano en ese punto: 0 papel, 1 trazo. */
@@ -72,7 +73,7 @@ const FRAGMENTO_COLOR = /* glsl */ `
   // color: suelo pintado; techo de teja (los públicos, azotea clara); pared de cal con zócalo
   vec3 azotea = vec3(0.66, 0.63, 0.57) * (0.92 + 0.12 * azarF(vInfo.y * 2.3));
   vec3 techo = mix(teja(vInfo.y), azotea, publico);
-  vec3 pared = cal(vInfo.y) * mix(0.72, 1.0, step(0.8, vMundo.y));
+  vec3 pared = cal(vInfo.y) * mix(0.72, 1.0, step(0.8, vMundo.y - vBase)); // zócalo desde la base de la casa
   vec3 enColor = mix(mix(pared, techo, vTecho), sueloColor(uv, papel), esSuelo);
 
   diffuseColor.rgb = mix(enTinta, enColor, uColor);`
@@ -121,7 +122,8 @@ function parchearRelieveVertex(s) {
       void main() {`)
     .replace('#include <beginnormal_vertex>', `#include <beginnormal_vertex>
       if (aInfo.w < 0.5) objectNormal = normalSuelo(position.xz);`)
-    .replace('#include <project_vertex>', `transformed.y += aInfo.w < 0.5 ? sueloEn(position.xz)
+    .replace('#include <project_vertex>', `vBase = aInfo.w < 0.5 ? sueloEn(position.xz) : sueloEn(aAncla);
+      transformed.y += aInfo.w < 0.5 ? sueloEn(position.xz)
         : apoyoCasa(aAncla, transformed.xz, position.y < 0.01);
       #include <project_vertex>`)
 }
