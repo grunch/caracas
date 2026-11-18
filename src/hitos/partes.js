@@ -10,6 +10,7 @@ import { torre, fachadaBarroca, portadaLateral, cupulaConTambor, ventanas, igles
 import { palacio, portico, remateConEscudo, frenteNeogotico } from './palacios.js'
 
 const ALTO_LOSA_M = 0.25
+const MARGEN_TOLDO_M = 0.7 // lo que un toldo pasa de su largo: el alero y el giro
 /** Los pisos de una terraza: material y parámetros del dibujo (van en el color del vértice). */
 const PISOS = Object.freeze({ tierra: [MAT.TIERRA, 0], jardin: [MAT.JARDIN, 0], damero: [MAT.JARDIN, 1] })
 
@@ -45,6 +46,9 @@ const ladosDe = (ancho, fondo) => [
 
 /** El pintor en (a, b) mirando hacia `mira` = [da, db] (por omisión, hacia +b). */
 const frente = (p, { a = 0, b = 0, h = 0, mira = [0, 1] }) => p.mirando(a, h, b, mira[0], mira[1])
+
+/** El constructor de un tipo de parte, o undefined: solo los registrados (no lo heredado de Object, como 'constructor'). */
+export const parteDe = (tipo) => (Object.hasOwn(PARTES, tipo) ? PARTES[tipo] : undefined)
 
 export const PARTES = Object.freeze({
   /** Un cuerpo de edificio centrado en (a, b): paredes, tejado y, si se piden, ventanas altas en los dos largos. */
@@ -153,6 +157,7 @@ export const PARTES = Object.freeze({
 
   /** Los puestos del mercado: hileras de toldos de lona a lo largo de a, con huecos y desorden. */
   puestos(p, { ancho, fondo, filas = 6, paso = 4.1, semilla = 1852, falta = 0.14, pasillo = 6 }) {
+    if (!(Number.isFinite(paso) && paso > 0)) throw new Error(`puestos: el paso debe ser mayor que cero (vino ${paso})`)
     const azar = azarDe(semilla)
     const porFila = Math.floor(ancho / paso)
     for (let f = 0; f < filas; f++) {
@@ -160,9 +165,11 @@ export const PARTES = Object.freeze({
       for (let k = 0; k < porFila; k++) {
         const a = -ancho / 2 + (k + 0.5) * paso
         const [r1, r2, r3, r4] = [azar(), azar(), azar(), azar()]
-        if (Math.abs(a) < pasillo / 2 || r1 < falta) continue // el pasillo del medio y los que faltan
-        const q = p.en(a + (r2 - 0.5) * 0.8, 0, b + (r3 - 0.5) * 1.2, (r4 - 0.5) * 0.24).apoyado()
-        puesto(q, { largo: 3.1 + r2 * 0.9, ancho: 2.5 + r3 * 0.9, alto: 1.9 + r4 * 0.45, lona: r1 > 0.7 ? TONO.CAL_SOMBRA : TONO.LONA })
+        const [donde, largo] = [a + (r2 - 0.5) * 0.8, 3.1 + r2 * 0.9]
+        // el pasillo del medio queda libre (el toldo entero, con su alero y su giro, no solo su centro) y algunos faltan
+        if (Math.abs(donde) - largo / 2 - MARGEN_TOLDO_M < pasillo / 2 || r1 < falta) continue
+        const q = p.en(donde, 0, b + (r3 - 0.5) * 1.2, (r4 - 0.5) * 0.24).apoyado()
+        puesto(q, { largo, ancho: 2.5 + r3 * 0.9, alto: 1.9 + r4 * 0.45, lona: r1 > 0.7 ? TONO.CAL_SOMBRA : TONO.LONA })
       }
     }
   },

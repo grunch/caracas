@@ -53,12 +53,23 @@ describe('piezas básicas', () => {
     ['dos', 2, 8.9, 1], ['cuatro', 2, 8.9, 0], ['una', 2, 8.9, 1],
   ])('tejado a %s aguas: alto pedido, alero volado y material de teja', (tipo, alto, anchoConAlero, hastiales) => {
     const d = dibujar((p) => piezas.tejado(p.en(0, 6, 0), { largo: 20, ancho: 8, alto, tipo }))
-    expect(d.caja.min[1]).toBeCloseTo(6)
+    // el alero baja siguiendo la pendiente: pasa por el borde de la pared a la altura del pintor
+    expect(d.caja.min[1]).toBeCloseTo(tipo === 'una' ? 6 : 6 - alto * (0.45 / 4))
     expect(d.caja.max[1]).toBeCloseTo(6 + alto)
     expect(d.caja.max[2] - d.caja.min[2]).toBeCloseTo(anchoConAlero)
     expect(d.materiales.has(MAT.TEJA)).toBe(true)
     expect(d.materiales.has(MAT.LISO)).toBe(hastiales === 1)
     expect(sinNaN(d)).toBe(true)
+  })
+
+  test('tejado a dos aguas: el hastial llega a la cumbrera y el faldón pasa por el borde de la pared (sin rendija)', () => {
+    const d = dibujar((p) => piezas.tejado(p, { largo: 10, ancho: 8, alto: 2, alero: 0.5 }))
+    let hastial = 0
+    for (let i = 0; i < d.vertices; i++) if (d.hitos[i * 4 + 2] === MAT.LISO) hastial = Math.max(hastial, d.posiciones[i * 3 + 1])
+    expect(hastial).toBeCloseTo(2)
+    // el faldón va de (z = 0, y = 2) a (z = 4,5, y = −0,25): en z = 4 (la pared) vale 0
+    expect(d.caja.min[1]).toBeCloseTo(-0.25)
+    expect(2 + ((d.caja.min[1] - 2) / 4.5) * 4).toBeCloseTo(0)
   })
 
   test('tejado a cuatro aguas de planta cuadrada: pirámide (cumbrera de largo cero) sin NaN', () => {

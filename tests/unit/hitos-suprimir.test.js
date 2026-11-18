@@ -41,6 +41,10 @@ describe('seSolapan', () => {
     expect(seSolapan(cuadrado(0, 0, 100), cuadrado(40, 40, 5))).toBe(true)
     expect(seSolapan(cuadrado(40, 40, 5), cuadrado(0, 0, 100))).toBe(true)
   })
+  test('calcados uno sobre el otro (mismos vértices) se pisan', () => {
+    const triangulo = [[100, 100], [110, 110], [90, 110]]
+    expect(seSolapan(triangulo, triangulo.map((v) => [...v]))).toBe(true)
+  })
   test('separados no se pisan', () => {
     expect(seSolapan(cuadrado(0, 0, 10), cuadrado(11, 0, 10))).toBe(false)
   })

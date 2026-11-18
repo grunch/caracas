@@ -105,6 +105,9 @@ const FRAGMENTO = /* glsl */ `
       // en tinta el césped va punteado sobre el papel, no rayado como lo oscuro
       trazo = max(brocal * 0.8, cesped * step(0.86, azar2(floor(vUv * 9.0))) * 0.7);
       claro = 1.0;
+      // y el damero, a pluma: las baldosas oscuras con una raya fina, solo en lo pavimentado
+      float baldosa = vColor.z * (1.0 - damero) * (1.0 - cesped) * (1.0 - brocal);
+      trazo = max(trazo, baldosa * 0.4 * step(0.5, fract((vUv.x + vUv.y) / 0.3)));
     } else if (es(${glsl(MAT.TIERRA)})) {
       tono *= 0.9 + 0.16 * azar2(floor(vUv * 1.7)) + 0.06 * azar2(floor(vUv * 0.4));
       trazo = 0.35 * step(0.93, azar2(floor(vUv * 4.0)));
