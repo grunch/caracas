@@ -3,6 +3,9 @@ import { gunzipSync } from 'node:zlib'
 import { codificarPak } from '../../tools/pak.mjs'
 import { decodificarPak } from '../../src/pak.js'
 
+/** ArrayBuffer propio y del tamaño exacto (el .buffer de un Buffer de Node puede ser el pool compartido). */
+const descomprimir = (gz) => new Uint8Array(gunzipSync(gz)).buffer
+
 const TIPOS = { manzanas: Float32Array, techos: Uint16Array }
 
 describe('pak', () => {
@@ -12,7 +15,7 @@ describe('pak', () => {
       techos: { datos: new Uint16Array([1, 2, 3, 4, 65535, 0, 7, 8]), registro: 8 },
     }
     const gz = codificarPak(partes)
-    const salida = decodificarPak(gunzipSync(gz).buffer, TIPOS)
+    const salida = decodificarPak(descomprimir(gz), TIPOS)
     expect(Array.from(salida.manzanas)).toEqual([1.5, -2.25, 3, 4, 5.5, 6])
     expect(salida.techos).toBeInstanceOf(Uint16Array)
     expect(Array.from(salida.techos)).toEqual([1, 2, 3, 4, 65535, 0, 7, 8])
@@ -32,7 +35,7 @@ describe('pak', () => {
 
   test('rechaza partes sin tipo conocido al decodificar', () => {
     const gz = codificarPak({ raro: { datos: new Uint8Array(4), registro: 4 } })
-    expect(() => decodificarPak(gunzipSync(gz).buffer, TIPOS)).toThrow(/raro/)
+    expect(() => decodificarPak(descomprimir(gz), TIPOS)).toThrow(/raro/)
   })
 })
 
