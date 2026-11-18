@@ -7,6 +7,7 @@ import { MAT } from './lienzo.js'
 import { TONO, losa, zocalo, verja, escalinata, cuerpo } from './piezas.js'
 import { farol, estatuaEcuestre, puesto, tramoDeGaleria, portada } from './objetos.js'
 import { torre, fachadaBarroca, portadaLateral, cupulaConTambor, ventanas, iglesia } from './iglesias.js'
+import { palacio, portico, remateConEscudo, frenteNeogotico } from './palacios.js'
 
 const ALTO_LOSA_M = 0.25
 /** Los pisos de una terraza: material y parámetros del dibujo (van en el color del vértice). */
@@ -70,6 +71,18 @@ export const PARTES = Object.freeze({
 
   /** Iglesia paramétrica (nave, fachada, torres, cúpula) en el marco del hito: el origen, al pie de la fachada. */
   iglesia(p, medidas) { iglesia(p, medidas) },
+
+  /** Palacio de crujías alrededor de un patio, centrado en (a, b). */
+  palacio(p, { a = 0, b = 0, ...medidas }) { palacio(p.en(a, 0, b), medidas) },
+
+  /** Pórtico de columnas con frontón sobre un frente. */
+  portico(p, { a, b, mira, ...medidas }) { portico(frente(p, { a, b, mira }), medidas) },
+
+  /** Remate central con escudo y asta, a la altura h de un frente. */
+  remateConEscudo(p, { a, b, h, mira, ...medidas }) { remateConEscudo(frente(p, { a, b, h, mira }), medidas) },
+
+  /** Cuerpo de frente neogótico centrado en (a, b), con el frente hacia `mira`. */
+  frenteNeogotico(p, { a, b, mira, ...medidas }) { frenteNeogotico(frente(p, { a, b, mira }), medidas) },
 
   /**
    * Terraza: una losa que es plana donde el terreno baja y lo sigue donde sube, con su zócalo de piedra.
