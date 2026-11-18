@@ -36,8 +36,16 @@ PROB_UN_PISO = {'republicano': 0.7, 'guzmancista': 0.5, 'quinta': 0.6}
 
 
 def _azar(semilla, sal):
-    """Número en [0, 1) determinista por semilla (y una sal para no repetir el mismo número)."""
-    return ((semilla * 2654435761 + sal * 40503) & 0xFFFFFFFF) / 0x100000000
+    """Número en [0, 1) determinista por semilla y sal. Se mezclan con un hash de 32 bits (el
+    finalizador de murmur3): con una suma lineal, sales distintas daban números casi iguales y el
+    estilo de una casa decidía también sus pisos."""
+    x = (semilla * 0x9E3779B1 + sal * 0x85EBCA77) & 0xFFFFFFFF
+    x ^= x >> 16
+    x = (x * 0x7FEB352D) & 0xFFFFFFFF
+    x ^= x >> 15
+    x = (x * 0x846CA68B) & 0xFFFFFFFF
+    x ^= x >> 16
+    return x / 0x100000000
 
 
 def _estilo(nace, dist_m, area_m2, semilla):

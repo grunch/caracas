@@ -75,7 +75,10 @@ const PASOS = [
     cmd: () => [PY, 'tools/geo/calce.py', carpeta],
   })),
   {
-    id: 'epocas-1578', entradas: ['tools/geo/epocas/1578-pimentel.json', `${D}/mosaico.json`],
+    // plaza-1936.json da las semillas de las esquinas y la ruta de las clases (clases-costura.png)
+    id: 'epocas-1578',
+    entradas: ['tools/geo/epocas/1578-pimentel.json', 'tools/geo/gcp/plaza-1936.json', `${D}/mosaico.json`,
+      `${D}/segmentacion/mosaico/clases-costura.png`],
     salidas: ['fuentes/derivados/1578/ciudad-1578.json'],
     codigo: GEO('epocas_1578', 'vectorizar'),
     cmd: () => [PY, 'tools/geo/epocas_1578.py'],

@@ -65,3 +65,20 @@ def test_asignar_reescribe_estilo_y_pisos_sin_tocar_lo_demas():
 def test_sin_vida_falla_claro():
     with pytest.raises(ValueError, match='vida'):
         asignar({'vertices': [], 'techos': [], 'manzanas': 0}, METRO, plaza=(0, 0))
+
+
+def test_estilo_y_pisos_son_independientes_con_las_proporciones_definidas():
+    """Sobre todas las semillas, cada estilo reparte sus pisos como dice PISOS / PROB_UN_PISO."""
+    from collections import Counter
+    from tools.geo.estilos import PROB_UN_PISO
+    pisos = {}
+    for semilla in range(65536):
+        for nace, dist in ((2, 400), (3, 400), (4, 400), (5, 600)):
+            e, p = estilo_y_pisos(nace, dist, 150.0, ESTILO['colonial'], semilla)
+            pisos.setdefault(e, Counter())[p] += 1
+    rep = pisos[ESTILO['republicano']]
+    assert rep[1] / (rep[1] + rep[2]) == pytest.approx(PROB_UN_PISO['republicano'], abs=0.02)
+    guz = pisos[ESTILO['guzmancista']]
+    assert guz[1] / (guz[1] + guz[2]) == pytest.approx(PROB_UN_PISO['guzmancista'], abs=0.02)
+    mod = pisos[ESTILO['moderno']]
+    assert set(mod) == {2, 3, 4} and min(mod.values()) / sum(mod.values()) > 0.25

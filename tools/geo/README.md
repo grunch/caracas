@@ -260,6 +260,6 @@ node tools/empacar-ciudad.mjs fuentes/derivados/epocas/ciudad-estilos.json
 | 1936, a menos de 1,8 km de la plaza | ecléctico 65 % · moderno (4) 35 % | 2–3 · 2–4 |
 | 1936, afueras | quinta (5) si ≥ 300 m²; rancho (6) si < 60 m² y a más de 2,5 km; si no, casa de las orillas (7) | 1–2 · 1 · 1 |
 
-Los edificios públicos (9) quedan como los dejó el vectorizador. Con los datos actuales: colonial 3185,
-republicano 2223, guzmancista 3932, ecléctico 15734, moderno 6381, quinta 139, rancho 13740, orillas 13059,
+Los edificios públicos (9) quedan como los dejó el vectorizador. Con los datos actuales: colonial 3152,
+republicano 2311, guzmancista 3887, ecléctico 15607, moderno 6498, quinta 139, rancho 13740, orillas 13059,
 público 626.
