@@ -1,5 +1,7 @@
 # Caracas histórica en 3D
 
+Antes de abrir un PR, leer **`AGENTS.md`** (máximo 3000 líneas de código por PR, flujo de revisión).
+
 Sitio estático que levanta en 3D la Caracas de un plano antiguo (base candidata: Ricard, 1874) y la hace crecer con los planos posteriores. Inspirado en baires.mormon.garden (@mormonnegro): **los specs están en `specs/`; leerlos antes de diseñar cualquier cosa** (`specs/README.md` es el índice; `specs/06-adaptacion-caracas.md`, el plan por fases).
 
 ## Estructura
