@@ -6,7 +6,7 @@ import { cargarPak } from './pak.js'
 import { geometriaCiudad } from './ciudad.js'
 import { crearMaterialCiudad } from './material.js'
 import { acercar } from './animar.js'
-import { crearLineaDeTiempo, escalaCrece } from './epocas.js'
+import { crearLineaDeTiempo, crearSecuencia, escalaCrece } from './epocas.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
 import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo } from './relieve.js'
@@ -128,21 +128,19 @@ cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vid
 const DURACION_EPOCA_S = 3.5
 const OLA_EPOCA_MAX_M = 9000 // más que la distancia de la plaza a la esquina más lejana de la hoja
 let lineaDeTiempo = null
+let secuencia = null
 fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))).then(({ epocas, celda_m }) => {
   const U = ciudad.U
-  let primera = true
-  lineaDeTiempo = crearLineaDeTiempo({
-    contenedor: document.getElementById('epocas'),
-    epocas,
-    alElegir(i) {
-      // la nueva ola parte de la época que regía (en reposo, la última elegida)
-      U.uEpocaDe.value = primera ? i : U.uEpocaA.value
-      U.uEpocaA.value = i
-      U.uOlaEpoca.value = primera ? OLA_EPOCA_MAX_M : 0
-      primera = false
-      pedirCuadro(3)
-    },
+  // arranca en la primera época sin ola; después, una ola por vez (lo elegido durante una, espera)
+  U.uEpocaDe.value = U.uEpocaA.value = 0
+  U.uOlaEpoca.value = OLA_EPOCA_MAX_M
+  secuencia = crearSecuencia((de, a) => {
+    U.uEpocaDe.value = de
+    U.uEpocaA.value = a
+    U.uOlaEpoca.value = 0
+    pedirCuadro(3)
   })
+  lineaDeTiempo = crearLineaDeTiempo({ contenedor: document.getElementById('epocas'), epocas, alElegir: (i) => secuencia.elegir(i) })
   cargarTextura('plano/crece.png', false).then((t) => {
     const { width: cols, height: rows } = t.image
     U.uCreceEscala.value.fromArray(escalaCrece(meta.plano, { cols, rows }, celda_m ?? 8))
@@ -201,6 +199,7 @@ renderer.setAnimationLoop((t) => {
   const { uOlaEpoca } = ciudad.U
   if (uOlaEpoca.value < OLA_EPOCA_MAX_M) {
     uOlaEpoca.value = acercar(uOlaEpoca.value, OLA_EPOCA_MAX_M, (OLA_EPOCA_MAX_M / DURACION_EPOCA_S) * dt)
+    if (uOlaEpoca.value >= OLA_EPOCA_MAX_M) secuencia?.termino()
     pedirCuadro(2)
   }
   if (uColor.value !== colorObjetivo) {

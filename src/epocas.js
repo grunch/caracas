@@ -4,6 +4,40 @@
  * Las funciones puras de acá son el espejo de lo que hace el shader (src/material.js).
  */
 
+/**
+ * Época de reserva mientras la línea de tiempo no arrancó (o si crece.json no carga): mayor que todas,
+ * así se ve la ciudad final — todo lo que nació y nada de lo que murió.
+ */
+export const SIN_LINEA_DE_TIEMPO = 99
+
+/**
+ * Las olas de época, una por vez: lo que se elige mientras una ola avanza espera a que termine
+ * (si no, lo que la ola todavía no alcanzó saltaría de golpe). `lanzar(de, a)` arranca una ola.
+ */
+export function crearSecuencia(lanzar, inicial = 0) {
+  let rige = inicial
+  let enCurso = false
+  let espera = null
+  const arrancar = (a) => {
+    if (a === rige) return
+    lanzar(rige, a)
+    rige = a
+    enCurso = true
+  }
+  return {
+    elegir(a) { if (enCurso) espera = a; else arrancar(a) },
+    termino() {
+      enCurso = false
+      if (espera !== null) {
+        const a = espera
+        espera = null
+        arrancar(a)
+      }
+    },
+    get rige() { return rige },
+  }
+}
+
 /** ¿La casa se ve en la época e? muere = 0 es "nunca muere". */
 export const visibleEn = (nace, muere, e) => nace <= e && (muere === 0 || e < muere)
 

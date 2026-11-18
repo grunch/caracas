@@ -52,3 +52,45 @@ describe('escalaCrece', () => {
     expect(ey).toBeCloseTo(1, 6)
   })
 })
+
+import { crearSecuencia, SIN_LINEA_DE_TIEMPO } from '../../src/epocas.js'
+
+describe('crearSecuencia', () => {
+  test('una época elegida durante una ola espera a que termine (sin saltos en lo lejano)', () => {
+    const olas = []
+    const s = crearSecuencia((de, a) => olas.push([de, a]))
+    s.elegir(5) // 0 → 5
+    s.elegir(1) // en curso: queda en espera
+    expect(olas).toEqual([[0, 5]])
+    s.termino()
+    expect(olas).toEqual([[0, 5], [5, 1]])
+    s.termino()
+    s.termino() // sin espera: no hace nada
+    expect(olas).toHaveLength(2)
+  })
+
+  test('de varias elecciones durante una ola, solo cuenta la última', () => {
+    const olas = []
+    const s = crearSecuencia((de, a) => olas.push([de, a]))
+    s.elegir(5)
+    s.elegir(1)
+    s.elegir(3)
+    s.termino()
+    expect(olas).toEqual([[0, 5], [5, 3]])
+  })
+
+  test('elegir la época que ya rige no lanza otra ola', () => {
+    const olas = []
+    const s = crearSecuencia((de, a) => olas.push([de, a]))
+    s.elegir(0)
+    expect(olas).toEqual([])
+  })
+})
+
+describe('sin línea de tiempo', () => {
+  test('la época de reserva muestra la ciudad final: todo lo nacido, nada de lo que murió', () => {
+    expect(vivo(5, 0, SIN_LINEA_DE_TIEMPO)).toBe(1)
+    expect(vivo(0, 0, SIN_LINEA_DE_TIEMPO)).toBe(1)
+    expect(vivo(0, 4, SIN_LINEA_DE_TIEMPO)).toBe(0)
+  })
+})

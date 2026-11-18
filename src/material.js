@@ -9,6 +9,7 @@
  */
 import { MeshLambertMaterial, Vector2, DataTexture } from 'three'
 import { GLSL_RELIEVE, uniformsRelieve } from './relieve.js'
+import { SIN_LINEA_DE_TIEMPO } from './epocas.js'
 
 // la época que rige en un punto y cuánto está en pie una casa (espejo de src/epocas.js)
 const GLSL_EPOCAS = /* glsl */ `
@@ -122,8 +123,9 @@ export function crearMaterialCiudad({
     uHoja: { value: new Vector2(plano.ancho, plano.alto) },
     uPlaza: { value: new Vector2(plano.plaza[0], plano.plaza[1]) },
     uMetro: { value: metro },
-    uEpocaDe: { value: 0 }, // la línea de tiempo: de qué época a cuál, y el frente de esa ola en metros
-    uEpocaA: { value: 0 },
+    // la línea de tiempo: de qué época a cuál, y el frente de esa ola en metros (hasta que arranca, la reserva)
+    uEpocaDe: { value: SIN_LINEA_DE_TIEMPO },
+    uEpocaA: { value: SIN_LINEA_DE_TIEMPO },
     uOlaEpoca: { value: 0 },
     uEtapas: { value: 6 },
     uCrece: { value: TODO_EDIFICADO },
