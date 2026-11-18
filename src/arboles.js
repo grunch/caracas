@@ -12,6 +12,7 @@ import {
 } from 'three'
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
 import { GLSL_RELIEVE } from './relieve.js'
+import { GLSL_EPOCAS } from './shader/epocas.js'
 
 const BYTES_POR_ARBOL = 8 // 4 × Uint16 LE: x, y (px del mosaico), radio (dm), nace (época)
 const DM_POR_M = 10
@@ -55,11 +56,6 @@ function geometriaArbol() {
   return mergeGeometries([parte(copa, 0), parte(tronco, 1)])
 }
 
-// la época que rige en un punto y si el árbol ya nació (espejo de src/epocas.js y src/material.js)
-const GLSL_EPOCAS = /* glsl */ `
-  uniform float uEpocaDe, uEpocaA, uOlaEpoca;
-  float epocaAqui(float dist) { return mix(uEpocaDe, uEpocaA, smoothstep(0.0, uAnchoOla, uOlaEpoca - dist)); }`
-
 const VERTICE = /* glsl */ `
   uniform float uOla, uAnchoOla;
   ${GLSL_EPOCAS}
@@ -75,7 +71,7 @@ const VERTICE = /* glsl */ `
     float s = aArbol.y;
     // sube con la ola, como las casas; y en la línea de tiempo, crece cuando nace su lugar
     float sube = smoothstep(0.0, 1.0, (uOla - dist - azar(s) * 60.0) / uAnchoOla);
-    float nacio = smoothstep(aArbol.x - 0.5, aArbol.x, epocaAqui(dist));
+    float nacio = vivoEn(vec2(aArbol.x, 0.0), epocaAqui(dist)); // los árboles no mueren
     vec3 p = position;
     vec3 n = normal;
     if (aParte < 0.5) {
