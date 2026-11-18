@@ -119,6 +119,15 @@ describe('iglesia paramétrica', () => {
     const d = dibujar((p) => iglesia(p, { ...base, fachada: 'neogotica', torres }))
     expect(d.caja.max[1]).toBeGreaterThan(34)
     expect(d.sano).toBe(true)
+    // la puerta y el rosetón van en la cara de afuera de la torre (a 1 m de la fachada), no enterrados en ella
+    const enLaCara = { puerta: false, roseton: false }
+    for (let i = 0; i < d.vertices; i++) {
+      const [x, y, z] = [d.posiciones[i * 3], d.posiciones[i * 3 + 1], d.posiciones[i * 3 + 2]]
+      if (Math.abs(x + 1.06) > 0.001 || Math.abs(z) > 3) continue
+      if (y < 0.5) enLaCara.puerta = true
+      if (y > 8 && y < 11) enLaCara.roseton = true
+    }
+    expect(enLaCara).toEqual({ puerta: true, roseton: true })
   })
 
   test('cúpula y dos fachadas (Santa Teresa)', () => {
