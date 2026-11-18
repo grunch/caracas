@@ -5,9 +5,9 @@
 import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { createReadStream } from 'node:fs'
-import { mkdir, readFile, stat, writeFile } from 'node:fs/promises'
+import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas } from './datos-lib.mjs'
+import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas, resolverOriginales } from './datos-lib.mjs'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
 const PY = process.env.PY ?? '.venv/bin/python'
@@ -68,7 +68,8 @@ const PASOS = [
   // --- la línea de tiempo: los planos viejos calzados sobre 1936, la ciudad de 1578 y las épocas ---
   ...CALCES.map(([año, carpeta]) => ({
     id: `calce-${año}`,
-    entradas: [`fuentes/mapas/${carpeta}/ficha.json`, `tools/geo/gcp/calce-${carpeta}.json`, 'tools/geo/gcp/plaza-1936.json',
+    entradas: [`original:${carpeta}`, `fuentes/mapas/${carpeta}/ficha.json`, `tools/geo/gcp/calce-${carpeta}.json`,
+      'tools/geo/gcp/plaza-1936.json',
       `${D}/mosaico.json`, `${D}/segmentacion/mosaico/clases-costura.png`],
     salidas: [`fuentes/derivados/${año}/calzado.tif`, `fuentes/derivados/${año}/calzado.json`],
     codigo: GEO('calce', 'calce_correlacion', 'tps'),
@@ -159,9 +160,17 @@ function argumentos(argv) {
 }
 
 /** Los pasos con las teselas que corresponden como salidas del plano. */
+/** Los archivos de cada carpeta de fuentes/mapas/ que usan los calces (para resolver original:<carpeta>). */
+async function archivosDeCalces() {
+  const archivos = {}
+  for (const [, carpeta] of CALCES) archivos[carpeta] = await readdir(path.join(RAIZ, 'fuentes/mapas', carpeta)).catch(() => [])
+  return archivos
+}
+
 async function pasosCompletos() {
   const teselas = salidasDeTeselas(await leerJsonSiHay('public/plano/laminas.json'))
-  return PASOS.map((p) => (p.id === 'plano' ? { ...p, salidas: [...p.salidas, ...teselas] } : p))
+  const pasos = PASOS.map((p) => (p.id === 'plano' ? { ...p, salidas: [...p.salidas, ...teselas] } : p))
+  return resolverOriginales(pasos, await archivosDeCalces())
 }
 
 // firmas del código de cada paso: si cambia un script, ese paso (y lo que sigue) se vuelve a correr

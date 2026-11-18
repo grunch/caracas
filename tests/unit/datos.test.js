@@ -124,3 +124,18 @@ describe('salidasDeTeselas', () => {
     expect(salidasDeTeselas(null)).toEqual([])
   })
 })
+
+import { resolverOriginales } from '../../tools/datos-lib.mjs'
+
+describe('resolverOriginales', () => {
+  test('cambia original:<carpeta> por el archivo original.* que hay en esa carpeta', () => {
+    const pasos = [{ id: 'calce-1889', entradas: ['original:1889-x', 'otra.json'], salidas: ['s'] }]
+    const [p] = resolverOriginales(pasos, { '1889-x': ['ficha.json', 'original.jpg', 'vista.jpg'] })
+    expect(p.entradas).toEqual(['fuentes/mapas/1889-x/original.jpg', 'otra.json'])
+    expect(pasos[0].entradas[0]).toBe('original:1889-x') // no muta
+  })
+
+  test('si la carpeta no tiene original, falla claro', () => {
+    expect(() => resolverOriginales([{ id: 'a', entradas: ['original:x'], salidas: [] }], { x: ['ficha.json'] })).toThrow(/original.*x/)
+  })
+})

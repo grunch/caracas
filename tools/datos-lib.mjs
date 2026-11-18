@@ -56,3 +56,18 @@ export function salidasDeTeselas(laminas) {
   for (let j = 0; j < laminas.rows; j++) for (let i = 0; i < laminas.cols; i++) salidas.push(`public/plano/f/${i}-${j}.webp`)
   return salidas
 }
+
+/**
+ * Cambia cada entrada `original:<carpeta>` por el `original.*` de esa carpeta de fuentes/mapas/
+ * (la extensión varía según el escaneo). `archivos`: { carpeta: [nombres de archivo] }.
+ */
+export function resolverOriginales(pasos, archivos) {
+  const resolver = (e) => {
+    if (!e.startsWith('original:')) return e
+    const carpeta = e.slice('original:'.length)
+    const original = (archivos[carpeta] ?? []).find((n) => /^original\.[a-z0-9]+$/i.test(n))
+    if (!original) throw new Error(`datos: no hay original.* en fuentes/mapas/${carpeta}`)
+    return `fuentes/mapas/${carpeta}/${original}`
+  }
+  return pasos.map((p) => ({ ...p, entradas: p.entradas.map(resolver) }))
+}
