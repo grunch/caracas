@@ -125,3 +125,56 @@ describe('extruirTechos: aPared (dónde está cada punto de la pared)', () => {
     expect(paredesVistas).toBe(2 * 7)
   })
 })
+
+import { EPOCAS_HISTORIA, empacarHistoria, historiaEnEpoca } from '../../src/ciudad.js'
+
+describe('historia: estilo y pisos por época', () => {
+  // el cuadrado: colonial de un piso hasta 1843, republicano en 1889, de dos pisos desde 1911;
+  // el triángulo: siempre colonial de un piso
+  const historia = new Uint8Array([16, 16, 16, 17, 33, 33, 16, 16, 16, 16, 16, 16])
+  const g = extruirTechos({ vertices, techos, historia }, coords)
+
+  test('empacarHistoria mete tres épocas en cada número y historiaEnEpoca las saca', () => {
+    const bytes = [16, 16, 17, 17, 34, 57]
+    const h = empacarHistoria(bytes)
+    expect(h).toEqual([16 + 256 * 16 + 65536 * 17, 17 + 256 * 34 + 65536 * 57])
+    expect(h.every((v) => Math.fround(v) === v)).toBe(true) // exactos en Float32
+    expect(Math.fround(255 + 256 * 255 + 65536 * 255)).toBe(16777215)
+    expect(bytes.map((_, e) => historiaEnEpoca(h, e))).toEqual([
+      { estilo: 0, pisos: 1 }, { estilo: 0, pisos: 1 }, { estilo: 1, pisos: 1 },
+      { estilo: 1, pisos: 1 }, { estilo: 2, pisos: 2 }, { estilo: 9, pisos: 3 },
+    ])
+    expect(EPOCAS_HISTORIA).toBe(6)
+  })
+
+  test('fuera de las épocas rige la más cercana (99 = sin línea de tiempo: la última)', () => {
+    const h = empacarHistoria([16, 16, 17, 17, 34, 57])
+    expect(historiaEnEpoca(h, 99)).toEqual({ estilo: 9, pisos: 3 })
+    expect(historiaEnEpoca(h, -1)).toEqual({ estilo: 0, pisos: 1 })
+    expect(historiaEnEpoca(h, 3.6)).toEqual({ estilo: 2, pisos: 2 })
+  })
+
+  test('cada vértice lleva la historia de su casa (aHistoria, 2 números)', () => {
+    expect(g.historias.length / 2).toBe(g.posiciones.length / 3)
+    const cuadrado = empacarHistoria([16, 16, 16, 17, 33, 33])
+    for (let v = 0; v < 20; v++) expect([g.historias[v * 2], g.historias[v * 2 + 1]]).toEqual(cuadrado)
+    const ultimo = g.historias.length / 2 - 1
+    expect([g.historias[ultimo * 2], g.historias[ultimo * 2 + 1]]).toEqual(empacarHistoria([16, 16, 16, 16, 16, 16]))
+  })
+
+  test('la geometría no cambia: la altura sigue saliendo de los pisos de "techos"', () => {
+    const sin = extruirTechos({ vertices, techos }, coords)
+    expect(g.posiciones).toEqual(sin.posiciones)
+    expect(g.info).toEqual(sin.info)
+  })
+
+  test('sin historia, todas las épocas valen lo que dice "techos"', () => {
+    const sin = extruirTechos({ vertices, techos }, coords)
+    expect([sin.historias[0], sin.historias[1]]).toEqual(empacarHistoria(Array(6).fill(1 + 16 * 2)))
+    expect(historiaEnEpoca([sin.historias[0], sin.historias[1]], 0)).toEqual({ estilo: 1, pisos: 2 })
+  })
+
+  test('una historia que no acompaña a los techos falla claro', () => {
+    expect(() => extruirTechos({ vertices, techos, historia: new Uint8Array(6) }, coords)).toThrow(/historia/)
+  })
+})

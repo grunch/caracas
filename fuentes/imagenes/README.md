@@ -26,6 +26,9 @@ Qué implica para el modelo: en 1772–1843, 1 piso (2 solo cerca de la plaza), 
 con cumbrera paralela al frente (T33), lotes en tira con patio al fondo (lotes rectos), iglesias
 con torre como hitos (T40) y calles de tierra sin arbolado.
 
+Aplicado en `tools/geo/estilos.py` (T31c): en 1772 todo es colonial de un piso, con altos solo en casas de
+esquina cerca de la plaza (35 % de las esquinas del centro).
+
 ## ~1860 (antes de 1876) · Plaza de San Pablo, grabado de C. Aagaard (`1860-blog-plaza-san-pablo-aagaard`) → época 1843
 
 Vista a nivel de calle de la plaza donde después se hizo el Teatro Municipal. **Fecha a verificar**: llegó
@@ -43,6 +46,9 @@ como "siglo XVIII", pero el pie la atribuye a Cornelio Aagaard, que sería del X
 Qué implica: las plazas de 1772–1843 van de tierra con fuente y sin arbolado (los árboles de plaza llegan
 con Guzmán Blanco); las ventanas coloniales son pocas pero **altas, con reja volada**; los altos con balcón
 van en las esquinas; hace falta el tipo "edificio de arcada" para conventos y hospitales (T40).
+
+Aplicado en (T31c): `tools/geo/vectorizar.py` marca las casas de esquina (`esquinas`) y `estilos.py` pone ahí
+los dos pisos de 1772–1889; a media cuadra, un piso.
 
 ## 1843 (a verificar) · Calle del centro con torre al fondo (`1843-banesco-calle-de-caracas`) → épocas 1843 y 1889
 
@@ -63,6 +69,9 @@ confirmar**; la torre del fondo parece la de la Catedral.
 Qué implica: subir la altura de piso de las casas del centro (≈ 5 m de fachada, no 4,2), ventanas
 altas con reja volada y repisa como rasgo principal de colonial y republicano, cornisa continua, aceras
 desde mediados del XIX, y dos pisos con balcón en las esquinas (no repartidos al azar).
+
+Aplicado en `tools/geo/estilos.py` (T31c): dos pisos en las esquinas (50 % de las del centro en 1843) y 15 % de
+fachadas de pretil en el centro en 1843. La altura de piso y las ventanas quedan para las fachadas.
 
 ## 1852 · El mercado en la Plaza Mayor, hoy Plaza Bolívar (`1852-facebook-mercado-plaza-mayor`) → época 1843
 
@@ -115,6 +124,9 @@ patios llevan árboles (ya en `arboles.bin`, falta darles `nace` temprano); el c
 palmas (para "el valle antes de la ciudad"); el relieve del Ávila debe leerse grande y plegado desde el
 suroeste: buena vista de control para comparar con el visor.
 
+Aplicado en (T31c): vista de control `calvario` de `tests/e2e/capturas-estilos.mjs`; en 1843, 97 % de las casas
+son de un piso y ninguna pasa de dos.
+
 ## ~1903 (1900–1906) · Panorámica desde El Calvario, foto (`1903-commons-panoramica-de-caracas`) → épocas 1889 y 1911
 
 **Fotografía** de 6477 px (Library of Congress), desde El Calvario hacia el noreste: la referencia más
@@ -143,6 +155,10 @@ Qué implica: en 1889–1911 la mayoría de las casas sigue siendo de un piso co
 de dos y tres pisos del estilo ecléctico: hoy da 2–3 pisos); agregar un tipo "galpón" (zinc a dos aguas,
 largo) cerca de las estaciones; los hitos de la lista son los que hacen el perfil (T40/T41); chaguaramos
 como árbol alto suelto; y esta vista sirve de **vista de control** en el visor (cámara en El Calvario).
+
+Aplicado en `tools/geo/estilos.py` (T31c): en 1889 y 1911, 97 % y 93 % de un piso; lo ecléctico de 1911 ya no es
+de 2–3 pisos (19 casas de tres en toda la ciudad, en el núcleo); estilo 8 **galpón** (zinc) para las huellas
+largas de los patios de Caño Amarillo (desde 1889) y Palo Grande (desde 1911).
 
 ## 1910 · Plaza Bolívar, foto (`1910-commons-plaza-bolivar`) → épocas 1889 y 1911
 
@@ -206,6 +222,9 @@ el estilo **de comercio**: vidriera, toldo y letrero en la planta baja de los es
 moderno, y avisos en bandera (sirve para T32); las calles del centro ya van asfaltadas con acera. Los
 pisos de 2 a 4 solo aquí, en el núcleo comercial: fuera de él, la ciudad de 1936 sigue baja.
 
+Aplicado en `tools/geo/estilos.py` (T31c): los 3–4 pisos solo en el núcleo comercial (el eje de la plaza al
+Teatro Municipal, hasta 240 m): 70 casas en 1936.
+
 ## Años 30 (a verificar) · Sobre los techos, hacia los cerros (`1935-pinterest-vista-hacia-los-cerros`) → época 1936
 
 Foto sin pie ni fuente. Si es Caracas, mira al sur (cerros bajos, no el Ávila). Lugar y fecha a verificar.
@@ -221,6 +240,9 @@ Foto sin pie ni fuente. Si es Caracas, mira al sur (cerros bajos, no el Ávila).
 Qué implica: confirma lo de la panorámica de 1903 para la época de 1936: mayoría de un piso con teja, y
 los edificios de varios pisos concentrados en pocas cuadras. Reducir la proporción de "moderno" y
 "ecléctico" altos fuera del núcleo comercial.
+
+Aplicado en `tools/geo/estilos.py` (T31c): en 1936, 92 % de las casas de un piso; fuera del núcleo no hay nada de
+tres pisos y lo moderno casi no existe.
 
 ## 1930 · Calle Real de La Pastora, foto (`1930-facebook-calle-real-la-pastora`) → épocas 1911 y 1936 (barrios)
 
@@ -244,6 +266,9 @@ republicana de pretil** (no ranchos ni quintas: mi regla manda demasiadas casas 
 calles en pendiente; postes y cables como rasgo del siglo XX. Vista de control para el relieve: desde
 La Pastora, el Ávila llena el fondo de la calle.
 
+Aplicado en `tools/geo/estilos.py` (T31c): en los barrios de 1936, 78 % de fachadas de pretil de un piso; rancho
+solo lo de menos de 45 m² a más de 2,5 km. Vista de control `pastora-norte`.
+
 ## 1892 (a verificar) · Calle de La Pastora con la iglesia, foto (`1892-pinterest-la-pastora`) → época 1889 (barrios)
 
 Calle de barrio a nivel de peatón, 38 años antes que la de la calle Real (1930): el mismo barrio, antes
@@ -266,6 +291,10 @@ pretil republicano llega a La Pastora después (foto de 1930): la misma casa cam
 Alturas desparejas entre casas vecinas (variar la altura de piso por semilla ±15 %). Hito: iglesia de
 La Pastora, dos torres con cúpulas (T41).
 
+Aplicado en `tools/geo/estilos.py` (T31c): cada casa tiene un estilo **por época** (`historia`): en los barrios
+de 1889 solo 8 % tiene pretil (el resto, colonial o casa de las orillas) y en 1936, 78 %. Vista de control
+`pastora-sur`.
+
 ## ~1930 (lugar a verificar) · Calle comercial con tranvía junto a una plaza (`1930-pinterest-calle-comercial-con-tranvia`) → época 1936
 
 Foto nítida a nivel de peatón: la mejor referencia del **centro comercial** en la última época (la de
@@ -285,6 +314,9 @@ Qué implica: en 1936 los costados de las plazas del centro llevan **dos pisos c
 y balcón corrido arriba** (el estilo ecléctico de comercio, para T32); **rieles y cables de tranvía**
 en las calles principales (dato para T62 y para el suelo de las calles); árboles de plaza de copa
 grande, mayores que los de patio.
+
+Aplicado en `tools/geo/estilos.py` (T31c): en el núcleo de 1936 la mitad de las casas tiene dos pisos o más y 70 %
+es ecléctica o moderna.
 
 ## 1880 · Cuatro fotos de la Caracas de Guzmán Blanco (`1880-runrun-*`) → época 1889
 
@@ -379,6 +411,9 @@ Vista desde dentro de la plaza hacia una esquina (cuál, a verificar).
 Qué implica: en 1936 las **esquinas de la Plaza Bolívar tienen edificios de 3–4 pisos de ángulo curvo**
 (el "moderno/ecléctico alto" va aquí, no repartido por la ciudad); la plaza se modela **en terraza, con
 escalinatas y baranda** (el relieve ya da el desnivel).
+
+Aplicado en `tools/geo/estilos.py` (T31c): los 3–4 pisos salen por probabilidad dentro del núcleo (14 % y 5 %),
+no puestos a mano en las esquinas de la plaza: eso queda para los hitos (T41).
 
 ## Después de 1936 (guardadas para épocas futuras)
 

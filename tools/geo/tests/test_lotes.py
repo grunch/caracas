@@ -273,3 +273,44 @@ def test_sin_pelos_no_toca_una_casa_angosta_y_sola():
     casas[5:9, 5:40] = 1         # 2 m de ancho, sin vecinas
     casas[20:38, 5:40] = 2
     assert np.array_equal(sin_pelos(casas, radio_px=3), casas)
+
+
+# --- esquinas de la manzana y casas de esquina ---
+
+def test_esquinas_de_una_manzana_rectangular():
+    from tools.geo.lotes import esquinas_de_manzana
+    m = np.zeros((120, 220), bool)
+    m[10:110, 10:210] = True
+    esquinas = esquinas_de_manzana(m, 0.5)
+    assert len(esquinas) == 4
+    assert sorted((round(x, -1), round(y, -1)) for x, y in esquinas) == [(10, 10), (10, 110), (210, 10), (210, 110)]
+
+
+def test_una_muesca_chica_no_hace_esquinas_y_un_rincon_tampoco():
+    from tools.geo.lotes import esquinas_de_manzana
+    m = np.zeros((240, 240), bool)
+    m[20:220, 20:220] = True
+    m[20:30, 100:112] = False      # muesca de 6 × 5 m en el lado norte: lados cortos
+    assert len(esquinas_de_manzana(m, 0.5)) == 4
+    ele = np.zeros((240, 240), bool)
+    ele[20:220, 20:120] = True
+    ele[120:220, 20:220] = True    # una L: 5 esquinas salientes y un rincón entrante que no cuenta
+    assert len(esquinas_de_manzana(ele, 0.5)) == 5
+
+
+def test_una_manzana_redonda_no_tiene_esquinas():
+    from tools.geo.lotes import esquinas_de_manzana
+    yy, xx = np.mgrid[:200, :200]
+    assert esquinas_de_manzana((xx - 100) ** 2 + (yy - 100) ** 2 < 80 ** 2, 0.5) == []
+
+
+def test_casas_de_esquina_toma_la_casa_mas_cercana_a_cada_esquina():
+    from tools.geo.lotes import casas_de_esquina
+    casas = np.zeros((100, 100), int)
+    casas[0:30, 0:20] = 1          # en la esquina (0, 0)
+    casas[0:30, 22:60] = 2         # la vecina, a 11 m: no llega
+    casas[80:100, 90:100] = 3      # lejos de toda esquina dada
+    assert casas_de_esquina(casas, [(0, 0)], radio_px=12) == {1}
+    assert casas_de_esquina(casas, [(0, 0), (70, 99)], radio_px=12) == {1}
+    assert casas_de_esquina(casas, [(21, 0)], radio_px=12) in ({1}, {2})  # una sola por esquina
+    assert casas_de_esquina(casas, [], radio_px=12) == set()

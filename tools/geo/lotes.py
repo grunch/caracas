@@ -35,6 +35,8 @@ GROSOR_FINO_M = 15.0               # … y si además es más angosta que esto
 LLENO_MINIMO = 0.5                 # … y llena menos que esto de su rectángulo mínimo, va con semillas
 PELO_MINIMO_PX = 16                # una tira fina de menos píxeles que esto es una miga del borde
 CASI_CUADRADA = 0.8                # proporción desde la cual el lado "largo" se echa a la suerte
+LADO_ESQUINA_M = 12.0              # una esquina tiene dos lados de al menos este largo (una muesca no)
+GIRO_ESQUINA = (math.radians(50), math.radians(130))   # cuánto dobla el borde en una esquina
 
 
 def lotes_por_semillas(manzana, frente_px):
@@ -308,3 +310,38 @@ def sin_pelos(casas, radio_px):
     limpias = np.where(cambia, de_quien[cercano], etiquetas).astype(casas.dtype)
     borde = int(radio_px)
     return limpias[borde:limpias.shape[0] - borde, borde:limpias.shape[1] - borde] if borde else limpias
+
+
+def esquinas_de_manzana(manzana, metro):
+    """Esquinas de la manzana, [(x, y), …] en píxeles: los vértices salientes de su borde simplificado
+    donde se cruzan dos lados largos casi a escuadra (las muescas, los rincones y las curvas no)."""
+    borde = lados_de(manzana, TOLERANCIA_LADOS_M / metro)[0]
+    if len(borde) < 3:
+        return []
+    antes, despues = borde - np.roll(borde, 1, axis=0), np.roll(borde, -1, axis=0) - borde
+    cruz = antes[:, 0] * despues[:, 1] - antes[:, 1] * despues[:, 0]
+    giro = np.abs(np.arctan2(cruz, (antes * despues).sum(axis=1)))
+    x, y = borde[:, 0], borde[:, 1]
+    sentido = np.sign(np.dot(x, np.roll(y, -1)) - np.dot(y, np.roll(x, -1)))
+    largo_min = LADO_ESQUINA_M / metro
+    es = ((np.sign(cruz) == sentido) & (giro >= GIRO_ESQUINA[0]) & (giro <= GIRO_ESQUINA[1])
+          & (np.hypot(*antes.T) >= largo_min) & (np.hypot(*despues.T) >= largo_min))
+    return [(float(px), float(py)) for px, py in borde[es]]
+
+
+def casas_de_esquina(casas, esquinas, radio_px):
+    """Etiquetas de las casas que hacen esquina: de cada esquina, la casa más cercana a `radio_px` o menos."""
+    alto, ancho = casas.shape
+    r = int(math.ceil(radio_px))
+    salida = set()
+    for ex, ey in esquinas:
+        x0, y0 = max(0, int(ex) - r), max(0, int(ey) - r)
+        ventana = casas[y0:int(ey) + r + 1, x0:int(ex) + r + 1]
+        ys, xs = np.nonzero(ventana)
+        if not len(ys):
+            continue
+        d2 = (xs + x0 + 0.5 - ex) ** 2 + (ys + y0 + 0.5 - ey) ** 2
+        k = int(np.argmin(d2))
+        if d2[k] <= radio_px ** 2:
+            salida.add(int(ventana[ys[k], xs[k]]))
+    return salida

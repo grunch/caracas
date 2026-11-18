@@ -27,15 +27,18 @@ const VERTICE = /* glsl */ `
   void main() {
     float sube = smoothstep(0.0, 1.0, (uOla - aHito.x - azar(aHito.y) * 60.0) / uAnchoOla);
     vExiste = vivoEn(aVida, epocaAqui(aHito.x));
+    vSube = sube;
+    // acostado, o fuera de su época: fuera de la vista, sin tocar el relieve (no cuesta ni un fragmento)
+    if (sube < 0.01 || vExiste < 0.02) { gl_Position = vec4(2.0, 2.0, 2.0, 1.0); return; }
     // el piso: plano a la altura del ancla donde el terreno baja; donde sube, lo sigue
     float piso = max(sueloEn(aAncla.xy), sueloEn(aAncla.zw));
-    float y = aHito.w > 0.5 ? min(sueloEn(position.xz), piso) - ${glsl(MARGEN_PIE_M)} : piso + position.y * sube * vExiste;
+    float y = piso + position.y * sube * vExiste;
+    if (aHito.w > 0.5) y = min(sueloEn(position.xz), piso) - ${glsl(MARGEN_PIE_M)};
     vMundo = vec3(position.x, y, position.z);
     vNormal = normal;
     vColor = aColor;
     vUv = aUv;
     vMat = aHito.z;
-    vSube = sube;
     vAlto = position.y;
     gl_Position = projectionMatrix * viewMatrix * vec4(vMundo, 1.0);
   }`

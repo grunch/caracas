@@ -4,14 +4,14 @@ import { GLSL_DIBUJO, GLSL_VANOS } from './vanos.js'
 /**
  * Techos y fachadas según el estilo de cada casa (aInfo.z, tools/geo/estilos.py):
  * 0 colonial · 1 republicano · 2 guzmancista · 3 ecléctico · 4 moderno · 5 quinta · 6 rancho ·
- * 7 casa de las orillas · 9 edificio público.
+ * 7 casa de las orillas · 8 galpón de estación · 9 edificio público.
  * No hay texturas de fachada: todo sale de las coordenadas de la pared (aPared, src/ciudad.js), la
  * altura sobre la base de la casa, los pisos, el estilo y la semilla. fachadaEn() da el color de la
  * pared y la tinta que le toca en el grabado; de lejos, los detalles se apagan a su tono medio.
  */
 export const GLSL_FACHADA = /* glsl */ `
   const float ESTILO_COLONIAL = 0.0, ESTILO_REPUBLICANO = 1.0, ESTILO_GUZMANCISTA = 2.0, ESTILO_ECLECTICO = 3.0,
-    ESTILO_MODERNO = 4.0, ESTILO_QUINTA = 5.0, ESTILO_RANCHO = 6.0, ESTILO_ORILLAS = 7.0, ESTILO_PUBLICO = 9.0;
+    ESTILO_MODERNO = 4.0, ESTILO_QUINTA = 5.0, ESTILO_RANCHO = 6.0, ESTILO_ORILLAS = 7.0, ESTILO_GALPON = 8.0, ESTILO_PUBLICO = 9.0;
   bool es(float estilo, float cual) { return abs(estilo - cual) < 0.5; }
 
   /** La teja criolla: cada techo un poco distinto, algunos más gastados u oscuros. */
@@ -26,7 +26,7 @@ export const GLSL_FACHADA = /* glsl */ `
 
   vec3 techoColor(float semilla, float estilo) {
     if (es(estilo, ESTILO_PUBLICO) || es(estilo, ESTILO_MODERNO)) return azotea(semilla);
-    if (es(estilo, ESTILO_RANCHO)) return zinc(semilla);
+    if (es(estilo, ESTILO_RANCHO) || es(estilo, ESTILO_GALPON)) return zinc(semilla);
     if (es(estilo, ESTILO_ECLECTICO) && azar(semilla * 6.1) < 0.5) return azotea(semilla);
     return teja(semilla);
   }
@@ -59,6 +59,8 @@ export const GLSL_FACHADA = /* glsl */ `
     if (es(estilo, ESTILO_REPUBLICANO) || es(estilo, ESTILO_GUZMANCISTA)) return pastel(semilla);
     if (es(estilo, ESTILO_PUBLICO)) return mix(vec3(0.88, 0.85, 0.78), vec3(0.78, 0.74, 0.66), azar(semilla * 3.1)); // piedra clara
     if (es(estilo, ESTILO_ORILLAS)) return cal(semilla) * 0.9; // cal más gastada
+    // los galpones de las estaciones: revoque liso gris claro o ladrillo a la vista
+    if (es(estilo, ESTILO_GALPON)) return azar(semilla * 9.7) < 0.6 ? vec3(0.80, 0.78, 0.72) : vec3(0.62, 0.40, 0.31);
     return cal(semilla);
   }
 
@@ -88,6 +90,7 @@ export const GLSL_FACHADA = /* glsl */ `
     if (es(estilo, ESTILO_QUINTA)) return Medidas(4.0, 0.65, 0.85, 2.85, 0.7, 2.9, 0.2, 0.55);
     if (es(estilo, ESTILO_RANCHO)) return Medidas(3.0, 0.35, 1.05, 1.8, 0.45, 2.0, 0.5, 0.12);
     if (es(estilo, ESTILO_ORILLAS)) return Medidas(3.4, 0.5, 1.0, 2.6, 0.6, 2.8, 0.45, 0.3);
+    if (es(estilo, ESTILO_GALPON)) return Medidas(6.0, 0.8, 2.2, 3.3, 1.5, 3.4, 0.5, 0.15); // muro largo, ventanas altas, portón
     return Medidas(4.2, 0.7, 0.8, 2.7, 1.1, 3.3, 0.0, 1.0); // público
   }
 
@@ -222,7 +225,7 @@ export const GLSL_FACHADA = /* glsl */ `
       cornisa(c, k, t - 0.2, 0.35, w2);
       alero(c, k, 1.0, u, t, 0.2, w2);
     }
-    else if (es(estilo, ESTILO_ORILLAS) || es(estilo, ESTILO_RANCHO)) alero(c, k, 0.0, u, t, m.remate, w2);
+    else if (es(estilo, ESTILO_ORILLAS) || es(estilo, ESTILO_RANCHO) || es(estilo, ESTILO_GALPON)) alero(c, k, 0.0, u, t, m.remate, w2);
     else if (es(estilo, ESTILO_MODERNO)) pretil(c, k, t, m.remate, w2);
     else if (es(estilo, ESTILO_GUZMANCISTA)) {
       balaustrada(c, k, x, p, t, 0.55, w2);
