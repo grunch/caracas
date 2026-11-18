@@ -1,7 +1,7 @@
 /**
  * El material de la ciudad (y del suelo): MeshLambert parcheado.
  * - La ola: cada casa sube cuando el frente, que sale de la plaza, la alcanza (desfase por semilla).
- * - Tinta (uColor = 0): el techo y el suelo son el propio plano; las paredes, papel.
+ * - Tinta (uColor = 0): el suelo es el propio plano; las casas, papel con fachadas y tejados a pluma.
  * - Color (uColor = 1): el suelo se pinta según la segmentación (uSuelo: R agua · G vegetación ·
  *   B edificado · A manzana) con el dibujo del plano tenue debajo, sin sus rótulos (uRotulos);
  *   techos de teja criolla y paredes de cal en sus tonos de siempre.
@@ -11,11 +11,13 @@ import { MeshLambertMaterial, Vector2, Vector4, DataTexture } from 'three'
 import { RANURAS } from './teselas.js'
 import { GLSL_RELIEVE, uniformsRelieve } from './relieve.js'
 import { SIN_LINEA_DE_TIEMPO } from './epocas.js'
-import { GLSL_AZAR } from './shader/comun.js'
+import { GLSL_AZAR, GLSL_PRETIL } from './shader/comun.js'
 import { GLSL_EPOCAS, GLSL_CRECE } from './shader/epocas.js'
 import { GLSL_PLANO, uniformsPlanoEpocas } from './shader/plano.js'
 import { GLSL_SUELO } from './shader/suelo.js'
 import { GLSL_FACHADA } from './shader/fachada.js'
+import { GLSL_TECHO } from './shader/techo.js'
+import { CUBIERTA } from './techos.js'
 import { GLSL_HOY } from './shader/hoy.js'
 import { VERTICE_COMUN, VERTICE_OLA } from './shader/vertice.js'
 
@@ -26,31 +28,42 @@ const FRAGMENTO_COMUN = /* glsl */ `
   varying vec3 vMundo; varying float vTecho; varying float vBase; varying vec2 vPared;
   // lo que es igual en toda la casa (o en toda la pared) va sin interpolar: interpolado, la semilla
   // y el largo tiemblan en la última cifra y azar() lo vuelve ruido de píxel a píxel
-  flat varying vec4 vInfo; flat varying float vLargo;
+  flat varying vec4 vInfo; flat varying float vLargo; flat varying float vAltoPiso; flat varying float vCubierta; flat varying float vLuz;
+  flat varying float vPretil; // cuánto sube el pretil sobre esta pared en la época que rige
+  varying vec3 vFaldon; // del techo: s, t y el largo del faldón (src/shader/techo.js)
   varying vec2 vTerreno;
   ${GLSL_AZAR}
+  ${GLSL_PRETIL}
   ${GLSL_EPOCAS}
   ${GLSL_CRECE}
   ${GLSL_PLANO}
   ${GLSL_FACHADA}
+  ${GLSL_TECHO}
   ${GLSL_SUELO}
   ${GLSL_HOY}`
 
 const FRAGMENTO_COLOR = /* glsl */ `
   if (vInfo.w > 0.5 && vExiste < 0.02) discard; // la casa todavía no existe (o ya no) en esta época
+  // el alero vuela sobre la calle solo si la fachada de la época no lleva pretil
+  float volado = max(1.0 - step(0.5, abs(vCubierta - ${CUBIERTA.ALERO}.0)), step(${CUBIERTA.VOLADA}.0 - 0.5, vCubierta));
+  if (volado > 0.5 && conPretil(vInfo.z) > 0.5) discard;
   vec2 uvPlano = (vMundo.xz / uMetro + uPlaza) / uHoja;
   vec2 uv = vec2(uvPlano.x, 1.0 - uvPlano.y);
   vec3 papel = planoEn(uvPlano);
   float esSuelo = step(vInfo.w, 0.5);
-  // la fachada (src/shader/fachada.js), con sus derivadas tomadas acá, fuera de toda rama
+  // la fachada (src/shader/fachada.js) y el techo (src/shader/techo.js), con sus derivadas tomadas acá, fuera de toda rama
   vec2 wPared = max(fwidth(vec2(vPared.x, vMundo.y - vBase)), vec2(1e-4));
-  vec4 fachada = fachadaEn(vec2(vPared.x, vLargo), vMundo.y - vBase, vInfo, paredColor(vInfo.y, vInfo.z, vMundo.y - vBase), wPared);
+  vec2 wTecho = max(fwidth(vFaldon.xy), vec2(1e-4));
+  gAltoPiso = max(vAltoPiso, 1.0);
+  gPretil = vPretil;
+  vec4 casa = vTecho > 0.5 ? techoEn(vFaldon, vCubierta, vInfo.y, vLuz, wTecho)
+    : fachadaEn(vec2(vPared.x, vLargo), vMundo.y - vBase, vInfo, paredColor(vInfo.y, vInfo.z, vMundo.y - vBase), wPared);
 
-  // tinta: el techo y el suelo son el plano; la pared, papel con sus vanos y molduras a pluma
-  vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, fachada.a), papel, vTecho);
+  // tinta: el suelo es el plano; la casa, papel con sus vanos, molduras y tejados a pluma
+  vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), papel, esSuelo);
 
   // color: suelo pintado; techo y fachada según la casa
-  vec3 enColor = mix(mix(fachada.rgb, techoColor(vInfo.y, vInfo.z), vTecho), sueloColor(uv, papel), esSuelo);
+  vec3 enColor = mix(casa.rgb, sueloColor(uv, papel), esSuelo);
 
   diffuseColor.rgb = mix(enTinta, enColor, uColor);
 
