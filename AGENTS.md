@@ -31,6 +31,11 @@ tarea (o subtarea) del plan y actualiza su fila (número de PR, estado).
 5. Se espera la revisión de **CodeRabbit** y **Codex**; se corrigen los comentarios que apliquen en la
    misma rama y se responde cada hilo. No se mergea sin revisión.
 
+## Referencias visuales
+
+Antes de tocar estilos, fachadas, techos o lotes, leer `fuentes/imagenes/README.md`: las observaciones de
+las pinturas y fotos de época mandan sobre las reglas inventadas.
+
 ## Datos
 
 - Nunca se suben escaneos, mosaicos, `.pak`, `.bin`, `.webp` del plano ni otros binarios generados

@@ -26,3 +26,4 @@ fuentes/derivados/
 .claude/worktrees/
 public/datos/manifiesto.json
 .cache/
+fuentes/imagenes/**/original.*
