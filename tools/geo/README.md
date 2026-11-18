@@ -14,10 +14,15 @@ npm run datos                  # solo los pasos viejos (como make), verifica con
 npm run datos -- --desde costura   # fuerza un paso y todo lo que le sigue
 npm run datos -- --forzar          # todo desde cero
 npm run datos -- --verificar       # solo verifica conteos (tools/datos-esperados.json) y rehace el manifiesto
+npm run datos -- --marcar          # da los datos actuales por generados con el código actual (sin correr nada)
 ```
 
-`tools/datos.mjs` define los pasos de abajo con sus entradas y salidas; un paso corre si le falta una
-salida, si alguna entrada es más nueva o si la produce un paso que corre. Al final compara los conteos
+`tools/datos.mjs` define los pasos de abajo con sus entradas, salidas y código; un paso corre si le falta
+una salida, si alguna entrada es más nueva, si la produce un paso que corre o si **cambió su código**
+(se compara el sha256 de sus scripts con el guardado en `.cache/datos/firmas.json`, no la fecha: un
+`git checkout` le cambia la fecha a todo). La primera vez no hay firmas y corre todo; si los datos ya
+están al día, `--marcar` las guarda sin correr nada. Las teselas de `public/plano/f/` y
+`public/datos/ciudad.json` son salidas del paso `plano`. Al final compara los conteos
 con `tools/datos-esperados.json` (sale con error si se van de la tolerancia) y escribe
 `public/datos/manifiesto.json` con el sha256 de cada archivo publicado. La plaza se lee de `mosaico.json`.
 

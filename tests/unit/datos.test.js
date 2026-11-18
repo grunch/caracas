@@ -57,3 +57,32 @@ describe('verificarConteos', () => {
     expect(errores[1]).toMatch(/manzanas/)
   })
 })
+
+import { salidasDeTeselas, firmasCambiadas } from '../../tools/datos-lib.mjs'
+
+describe('código del paso', () => {
+  const al_dia = { 'clases.png': 1, 'ciudad.json': 4 }
+  const paso = { id: 'vectorizar', entradas: ['clases.png'], salidas: ['ciudad.json'] }
+
+  test('si cambió el código de un paso, corre ese paso y los que dependen de él', () => {
+    const pasos2 = [paso, { id: 'empacar', entradas: ['ciudad.json'], salidas: ['ciudad.pak'] }]
+    const t = { ...al_dia, 'ciudad.pak': 5 }
+    expect(pendientes(pasos2, t, { codigoCambiado: new Set(['vectorizar']) })).toEqual(['vectorizar', 'empacar'])
+  })
+
+  test('firmasCambiadas compara la firma actual del código con la guardada', () => {
+    expect([...firmasCambiadas({ a: 'h1', b: 'h2', c: 'h3' }, { a: 'h1', b: 'viejo' })]).toEqual(['b', 'c'])
+  })
+})
+
+describe('salidasDeTeselas', () => {
+  test('una tesela por celda de la grilla de laminas.json', () => {
+    expect(salidasDeTeselas({ cols: 2, rows: 2 })).toEqual([
+      'public/plano/f/0-0.webp', 'public/plano/f/1-0.webp', 'public/plano/f/0-1.webp', 'public/plano/f/1-1.webp',
+    ])
+  })
+
+  test('sin laminas.json todavía no hay teselas que declarar', () => {
+    expect(salidasDeTeselas(null)).toEqual([])
+  })
+})
