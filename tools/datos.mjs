@@ -5,15 +5,23 @@
 import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { createReadStream } from 'node:fs'
-import { mkdir, readFile, stat, writeFile } from 'node:fs/promises'
+import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas } from './datos-lib.mjs'
+import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas, resolverOriginales, fichasDeEpocas } from './datos-lib.mjs'
 import { salidasPlanosEpocas } from './planos-epocas-lib.mjs'
 import { leerCalzados } from './planos-epocas.mjs'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
 const PY = process.env.PY ?? '.venv/bin/python'
 const D = 'fuentes/derivados/1936'
+const E = 'fuentes/derivados/epocas'
+// planos de la línea de tiempo que se calzan sobre 1936: [año, carpeta en fuentes/mapas/]
+const CALCES = [
+  [1911, '1911-princeton-plano-de-caracas-razetti'],
+  [1889, '1889-bnf-mestre'],
+  [1843, '1843-nypl-jesurun-facsimil-muller-stapler'],
+  [1772, '1772-pares-agi-exato-mapa'],
+]
 const HOJA = (n) => `fuentes/mapas/1936-archiveorg-caracas-dcn-hoja${n}/original.tif`
 const PLANO = ['primero', 'chico', 'medio-4k', 'medio'].map((n) => `public/plano/${n}.webp`)
 const leerJson = async (ruta) => JSON.parse(await readFile(path.join(RAIZ, ruta), 'utf8'))
@@ -59,10 +67,47 @@ const PASOS = [
         '--escala', String(metro), '--plaza', plaza.join(',')]
     },
   },
+  // --- la línea de tiempo: los planos viejos calzados sobre 1936, la ciudad de 1578 y las épocas ---
+  ...CALCES.map(([año, carpeta]) => ({
+    id: `calce-${año}`,
+    entradas: [`original:${carpeta}`, `fuentes/mapas/${carpeta}/ficha.json`, `tools/geo/gcp/calce-${carpeta}.json`,
+      'tools/geo/gcp/plaza-1936.json',
+      `${D}/mosaico.json`, `${D}/segmentacion/mosaico/clases-costura.png`],
+    salidas: [`fuentes/derivados/${año}/calzado.tif`, `fuentes/derivados/${año}/calzado.json`],
+    codigo: GEO('calce', 'calce_correlacion', 'tps'),
+    cmd: () => [PY, 'tools/geo/calce.py', carpeta],
+  })),
   {
-    id: 'empacar', entradas: [`${D}/ciudad-1936.json`], salidas: ['public/datos/ciudad.pak'],
+    // plaza-1936.json da las semillas de las esquinas y la ruta de las clases (clases-costura.png)
+    id: 'epocas-1578',
+    entradas: ['tools/geo/epocas/1578-pimentel.json', 'tools/geo/gcp/plaza-1936.json', `${D}/mosaico.json`,
+      `${D}/segmentacion/mosaico/clases-costura.png`],
+    salidas: ['fuentes/derivados/1578/ciudad-1578.json'],
+    codigo: GEO('epocas_1578', 'vectorizar'),
+    cmd: () => [PY, 'tools/geo/epocas_1578.py'],
+  },
+  {
+    id: 'epocas',
+    entradas: ['tools/geo/epocas/epocas.json', `${D}/ciudad-1936.json`, 'fuentes/derivados/1578/ciudad-1578.json',
+      ...CALCES.map(([año]) => `fuentes/derivados/${año}/calzado.tif`)],
+    salidas: [`${E}/ciudad-epocas.json`, `${E}/crece.json`, 'public/datos/crece.json', 'public/plano/crece.png'],
+    codigo: GEO('epocas', 'calce_correlacion', 'vectorizar'),
+    cmd: () => [PY, 'tools/geo/epocas.py'],
+  },
+  {
+    id: 'estilos', entradas: [`${E}/ciudad-epocas.json`, `${D}/mosaico.json`], salidas: [`${E}/ciudad-estilos.json`],
+    codigo: GEO('estilos'),
+    cmd: async () => {
+      const { plaza, metro } = await leerJson(`${D}/mosaico.json`)
+      return [PY, 'tools/geo/estilos.py', `${E}/ciudad-epocas.json`, `${E}/ciudad-estilos.json`,
+        '--escala', String(metro), '--plaza', plaza.join(',')]
+    },
+  },
+  {
+    // la ciudad que se publica: la de las épocas, con estilos (la de 1936 sola no tiene "vida")
+    id: 'empacar', entradas: [`${E}/ciudad-estilos.json`], salidas: ['public/datos/ciudad.pak'],
     codigo: ['tools/empacar-ciudad.mjs', 'tools/empacar-lib.mjs', 'tools/pak.mjs', 'src/ciudad.js'],
-    cmd: () => ['node', 'tools/empacar-ciudad.mjs', `${D}/ciudad-1936.json`],
+    cmd: () => ['node', 'tools/empacar-ciudad.mjs', `${E}/ciudad-estilos.json`],
   },
   {
     id: 'jardines', codigo: GEO('jardines'),
@@ -96,9 +141,10 @@ const PASOS = [
     cmd: () => ['node', 'tools/plano.mjs', `${D}/mosaico-costura.tif`, `${D}/mosaico.json`],
   },
   {
-    // los planos viejos calzados sobre 1936 (tools/geo/calce.py, fuera de este pipeline): una textura con
-    // alfa por época; entradas y salidas según los calzado.json que haya (se suman en pasosCompletos)
-    id: 'planos-epocas', entradas: [], salidas: [],
+    // los planos viejos calzados sobre 1936 (pasos calce-<año>): una textura con alfa por época; las
+    // salidas según el recorte de cada calzado.json (se suman en pasosCompletos)
+    id: 'planos-epocas', salidas: ['public/plano/epocas.json'],
+    entradas: CALCES.flatMap(([año]) => ['tif', 'json'].map((x) => `fuentes/derivados/${año}/calzado.${x}`)),
     codigo: ['tools/planos-epocas.mjs', 'tools/planos-epocas-lib.mjs'],
     cmd: () => ['node', 'tools/planos-epocas.mjs'],
   },
@@ -123,16 +169,27 @@ function argumentos(argv) {
   return a
 }
 
-/** Los pasos con las teselas del plano y los planos calzados de cada época que corresponden. */
-async function pasosCompletos() {
+/** Los archivos de cada carpeta de fuentes/mapas/ que usan los calces (para resolver original:<carpeta>). */
+async function archivosDeCalces() {
+  const archivos = {}
+  for (const [, carpeta] of CALCES) archivos[carpeta] = await readdir(path.join(RAIZ, 'fuentes/mapas', carpeta)).catch(() => [])
+  return archivos
+}
+
+/** `regenerar`: si se va a planificar una regeneración (solo ahí se exigen los escaneos originales). */
+async function pasosCompletos({ regenerar = true } = {}) {
   const teselas = salidasDeTeselas(await leerJsonSiHay('public/plano/laminas.json'))
-  const calzados = await leerCalzados(path.join(RAIZ, 'fuentes', 'derivados'))
-  const deCalzados = calzados.flatMap(({ año }) => ['tif', 'json'].map((x) => `fuentes/derivados/${año}/calzado.${x}`))
-  return PASOS.map((p) => {
+  // epocas.py copia a crece.json (público) los créditos y la licencia de la ficha de cada plano
+  const fichas = fichasDeEpocas((await leerJsonSiHay('tools/geo/epocas/epocas.json')) ?? {})
+  // las texturas de cada plano de época dependen del recorte de su calce (calzado.json, si ya está)
+  const planosEpocas = salidasPlanosEpocas(await leerCalzados(path.join(RAIZ, 'fuentes', 'derivados')))
+  const pasos = PASOS.map((p) => {
     if (p.id === 'plano') return { ...p, salidas: [...p.salidas, ...teselas] }
-    if (p.id === 'planos-epocas') return { ...p, entradas: deCalzados, salidas: salidasPlanosEpocas(calzados) }
+    if (p.id === 'epocas') return { ...p, entradas: [...new Set([...p.entradas, ...fichas])] }
+    if (p.id === 'planos-epocas') return { ...p, salidas: planosEpocas }
     return p
   })
+  return resolverOriginales(pasos, await archivosDeCalces(), { exigir: regenerar })
 }
 
 // firmas del código de cada paso: si cambia un script, ese paso (y lo que sigue) se vuelve a correr
@@ -188,7 +245,8 @@ async function verificar(pasos) {
 }
 
 const opciones = argumentos(process.argv.slice(2))
-let pasos = await pasosCompletos()
+const regenerar = !opciones.verificar && !opciones.marcar
+let pasos = await pasosCompletos({ regenerar })
 const firmas = await firmasActuales(pasos)
 if (opciones.marcar) {
   // los datos actuales se dan por generados con el código actual (p. ej. al adoptar este comando)
@@ -208,7 +266,7 @@ if (opciones.marcar) {
     await guardarFirmas({ ...((await leerJsonSiHay(FIRMAS)) ?? {}), [id]: firmas[id] })
   }
 }
-pasos = await pasosCompletos() // el plano pudo cambiar la grilla de teselas
+pasos = await pasosCompletos({ regenerar }) // el plano pudo cambiar la grilla de teselas
 const errores = await verificar(pasos)
 if (errores.length) {
   console.error(`\nconteos fuera de lo esperado:\n  ${errores.join('\n  ')}`)
