@@ -1,6 +1,7 @@
 /**
- * Los árboles del plano de 1936 (datos/arboles.bin, ver specs/02): una sola InstancedMesh, un árbol por
- * instancia (copa low‑poly abollada + tronco), un draw call para los ~6 mil.
+ * Los árboles del plano de 1936 y el monte del valle antes de la ciudad (datos/arboles.bin, ver
+ * specs/02): una sola InstancedMesh, un árbol por instancia (copa low‑poly abollada + tronco), un draw
+ * call para todos. Los del monte (silvestres) mueren cuando su lugar se urbaniza y solo se ven en color.
  * - Follaje en tres tonos (sombra, media tinta, luz) con el borde movido "como a mano"; en tinta, papel
  *   con la sombra rayada y el contorno a pluma (specs/04).
  * - Comparte con la ciudad los uniforms de tinta/color, la ola, las épocas y el relieve (ciudad.U): se
@@ -14,28 +15,37 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
 import { GLSL_RELIEVE } from './relieve.js'
 import { GLSL_EPOCAS } from './shader/epocas.js'
 
-const BYTES_POR_ARBOL = 8 // 4 × Uint16 LE: x, y (px del mosaico), radio (dm), nace (época)
+const BYTES_POR_ARBOL = 8 // 4 × Uint16 LE: x, y (px del mosaico), radio (dm), vida (nace + 8·muere + 64·silvestre)
 const DM_POR_M = 10
 const SOL = new Vector3(-1200, 2000, 900).normalize() // la misma dirección que la luz de main.js
 
-/** arboles.bin → { n, x, y (px), radio (m), nace (época) }. */
+/**
+ * arboles.bin → { n, x, y (px), radio (m), nace, muere (épocas; muere = 0: no muere), silvestre (0/1) }.
+ * Los silvestres son el monte del valle antes de la ciudad: mueren cuando su lugar se urbaniza.
+ */
 export function decodificarArboles(buffer) {
   if (buffer.byteLength % BYTES_POR_ARBOL !== 0) throw new Error(`arboles: ${buffer.byteLength} bytes no es múltiplo de 8 bytes`)
   const n = buffer.byteLength / BYTES_POR_ARBOL
   const v = new DataView(buffer)
-  const datos = { n, x: new Uint16Array(n), y: new Uint16Array(n), radio: new Float32Array(n), nace: new Uint16Array(n) }
+  const datos = {
+    n, x: new Uint16Array(n), y: new Uint16Array(n), radio: new Float32Array(n),
+    nace: new Uint16Array(n), muere: new Uint16Array(n), silvestre: new Uint8Array(n),
+  }
   for (let i = 0; i < n; i++) {
     const o = i * BYTES_POR_ARBOL
     datos.x[i] = v.getUint16(o, true)
     datos.y[i] = v.getUint16(o + 2, true)
     datos.radio[i] = v.getUint16(o + 4, true) / DM_POR_M
-    datos.nace[i] = v.getUint16(o + 6, true)
+    const vida = v.getUint16(o + 6, true)
+    datos.nace[i] = vida & 7
+    datos.muere[i] = (vida >> 3) & 7
+    datos.silvestre[i] = (vida >> 6) & 1
   }
   return datos
 }
 
-/** Del plano al mundo: posiciones (x, z), radios, nace y una semilla estable (0–65535) por árbol. */
-export function instanciasArboles({ n, x, y, radio, nace }, coords) {
+/** Del plano al mundo: posiciones (x, z), radios, nace, muere, silvestre y una semilla estable (0–65535) por árbol. */
+export function instanciasArboles({ n, x, y, radio, nace, muere, silvestre }, coords) {
   const posiciones = new Float32Array(n * 2)
   const semillas = new Float32Array(n)
   for (let i = 0; i < n; i++) {
@@ -44,7 +54,11 @@ export function instanciasArboles({ n, x, y, radio, nace }, coords) {
     posiciones[i * 2 + 1] = p.z
     semillas[i] = (((x[i] * 73856093) ^ (y[i] * 19349663)) >>> 0) % 65536
   }
-  return { posiciones, radios: Float32Array.from(radio), nace: Float32Array.from(nace), semillas }
+  return {
+    posiciones, radios: Float32Array.from(radio), nace: Float32Array.from(nace), semillas,
+    muere: muere ? Float32Array.from(muere) : new Float32Array(n),
+    silvestre: silvestre ? Float32Array.from(silvestre) : new Float32Array(n),
+  }
 }
 
 /** Un árbol de radio 1: tronco (aParte = 1) y copa abollada (aParte = 0) un poco achatada. */
@@ -57,21 +71,22 @@ function geometriaArbol() {
 }
 
 const VERTICE = /* glsl */ `
-  uniform float uOla, uAnchoOla;
+  uniform float uOla, uAnchoOla, uColor;
   ${GLSL_EPOCAS}
   ${GLSL_RELIEVE}
-  attribute vec2 aArbol; // nace, semilla
+  attribute vec4 aArbol; // nace, muere (0 = no muere), semilla, silvestre
   attribute float aParte;
-  varying vec3 vNormal, vMundo; varying float vParte, vSemilla;
+  varying vec3 vNormal, vMundo; varying float vParte, vSemilla, vSilvestre;
   float azar(float n) { return fract(sin(n * 12.9898) * 43758.5453); }
   void main() {
     vec3 centro = (instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
     float radio = length(instanceMatrix[0].xyz);
     float dist = length(centro.xz);
-    float s = aArbol.y;
+    float s = aArbol.z;
     // sube con la ola, como las casas; y en la línea de tiempo, crece cuando nace su lugar
     float sube = smoothstep(0.0, 1.0, (uOla - dist - azar(s) * 60.0) / uAnchoOla);
-    float nacio = vivoEn(vec2(aArbol.x, 0.0), epocaAqui(dist)); // los árboles no mueren
+    // los del monte mueren cuando su lugar se urbaniza, y solo se ven en color
+    float nacio = vivoEn(aArbol.xy, epocaAqui(dist)) * mix(1.0, uColor, aArbol.w);
     vec3 p = position;
     vec3 n = normal;
     if (aParte < 0.5) {
@@ -91,12 +106,13 @@ const VERTICE = /* glsl */ `
     vNormal = normalize(mat3(modelMatrix) * n);
     vParte = aParte;
     vSemilla = s;
+    vSilvestre = aArbol.w;
     gl_Position = projectionMatrix * viewMatrix * vec4(vMundo, 1.0);
   }`
 
 const FRAGMENTO = /* glsl */ `
   uniform float uColor; uniform vec3 uSol;
-  varying vec3 vNormal, vMundo; varying float vParte, vSemilla;
+  varying vec3 vNormal, vMundo; varying float vParte, vSemilla, vSilvestre;
   float azar3(vec3 p) { return fract(sin(dot(p, vec3(12.9898, 78.233, 37.719))) * 43758.5453); }
   void main() {
     vec3 N = normalize(vNormal);
@@ -112,7 +128,12 @@ const FRAGMENTO = /* glsl */ `
     // color: tres verdes (valores lineales: la salida pasa a sRGB); el tronco, madera
     vec3 verde = tono < 0.5 ? vec3(0.035, 0.07, 0.025) : tono < 1.5 ? vec3(0.10, 0.17, 0.045) : vec3(0.30, 0.38, 0.09);
     verde *= 0.85 + 0.3 * fract(vSemilla * 0.618);
+    // el monte: unos más secos y amarillentos que otros, como la sabana del valle
+    verde = mix(verde, verde * vec3(1.25, 1.05, 0.7), vSilvestre * fract(vSemilla * 0.377));
     vec3 enColor = vParte > 0.5 ? vec3(0.12, 0.07, 0.04) : mix(verde, verde * 0.45, borde);
+    // de lejos un árbol es un punto: sin esto, la sombra y el borde serían pimienta sobre el campo
+    float lejos = smoothstep(1200.0, 4500.0, distance(cameraPosition, vMundo));
+    enColor = mix(enColor, vec3(0.085, 0.14, 0.04) * (0.85 + 0.3 * fract(vSemilla * 0.618)), 0.8 * lejos);
 
     // tinta: papel, la sombra rayada en diagonal (más tupida en la sombra), contorno a pluma
     vec3 papel = vec3(0.80, 0.69, 0.50), tinta = vec3(0.024, 0.015, 0.011);
@@ -127,11 +148,11 @@ const FRAGMENTO = /* glsl */ `
 
 /** La malla de los árboles; `U` son los uniforms de la ciudad (crearMaterialCiudad), compartidos. */
 export function crearArboles({ datos, coords, U, sol = SOL }) {
-  const { posiciones, radios, nace, semillas } = instanciasArboles(datos, coords)
+  const { posiciones, radios, nace, muere, semillas, silvestre } = instanciasArboles(datos, coords)
   const geometria = geometriaArbol()
-  const arbol = new Float32Array(datos.n * 2)
-  for (let i = 0; i < datos.n; i++) [arbol[i * 2], arbol[i * 2 + 1]] = [nace[i], semillas[i]]
-  geometria.setAttribute('aArbol', new InstancedBufferAttribute(arbol, 2))
+  const arbol = new Float32Array(datos.n * 4)
+  for (let i = 0; i < datos.n; i++) arbol.set([nace[i], muere[i], semillas[i], silvestre[i]], i * 4)
+  geometria.setAttribute('aArbol', new InstancedBufferAttribute(arbol, 4))
 
   const comunes = ['uColor', 'uOla', 'uAnchoOla', 'uEpocaDe', 'uEpocaA', 'uOlaEpoca',
     'tRelieve', 'uRelieveHoja', 'uRelieveCelda', 'uExageracion']

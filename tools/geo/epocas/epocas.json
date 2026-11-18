@@ -3,6 +3,9 @@
  "escala": 2,
  "escala_crece": 16,
  "umbral": 0.5,
+ "urbanizado": {"nota": "lo urbanizado de cada época = lo edificado cerrado (une las manzanas a través de las calles), con los huecos chicos rellenos (plazas) y la calle del borde (tools/geo/valle.py)",
+                "cierre_m": 25, "holgura_m": 10, "hueco_m2": 40000},
+ "monte": {"semilla": 1578},
  "epocas": [
   {"año": 1578, "plano": "1578-commons-pimentel", "corto": "esquema de Pimentel (1578)",
    "obras": "Pimentel dibuja 25 manzanas alrededor de la plaza, con la iglesia, las casas del cabildo, San Francisco y calles de 32 pies."},

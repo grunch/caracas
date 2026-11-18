@@ -63,7 +63,8 @@ node tools/empacar-ciudad.mjs $D/ciudad-1936.json
 #     época en que aparece (public/plano/crece.png + ciudad.pak) → public/datos/arboles.bin (specs/02)
 $PY tools/geo/jardines.py $D/segmentacion/mosaico/clases-costura.png $D/segmentacion/mosaico/arboles.json \
     $D/segmentacion/mosaico/jardines.json
-node tools/arboles.mjs $D/segmentacion/mosaico/arboles.json $D/mosaico.json $D/segmentacion/mosaico/jardines.json
+node tools/arboles.mjs $D/segmentacion/mosaico/arboles.json $D/mosaico.json $D/segmentacion/mosaico/jardines.json \
+  $D/segmentacion/mosaico/clases-costura.png   # + el monte: los árboles silvestres (crece.png G y B)
 
 # 7. suelo: máscara RGBA para el modo color (R agua · G vegetación · B edificado · A manzana)
 node tools/suelo.mjs $D/segmentacion/mosaico/clases-costura.png
@@ -206,7 +207,8 @@ Después de los calces y de `epocas_1578.py`:
 ```sh
 $PY tools/geo/epocas.py
 # → fuentes/derivados/epocas/ciudad-epocas.json (ciudad-1936.json + casas de 1578 + "vida"),
-#   crece.json, crece.png, qa-<año>.jpg; copia crece.json a public/datos/ y crece.png a public/plano/
+#   crece.json, crece.png (R edificado, G urbanizado, B el monte: tools/geo/valle.py), qa-<año>.jpg y
+#   qa-urbano-<año>.jpg; copia crece.json a public/datos/ y crece.png a public/plano/
 node tools/empacar-ciudad.mjs fuentes/derivados/epocas/ciudad-epocas.json   # ciudad.pak con la parte vida
 ```
 

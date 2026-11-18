@@ -27,6 +27,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   // lo que es igual en toda la casa (o en toda la pared) va sin interpolar: interpolado, la semilla
   // y el largo tiemblan en la última cifra y azar() lo vuelve ruido de píxel a píxel
   flat varying vec4 vInfo; flat varying float vLargo;
+  varying vec2 vTerreno;
   ${GLSL_AZAR}
   ${GLSL_EPOCAS}
   ${GLSL_CRECE}
@@ -127,6 +128,7 @@ function parchearRelieveVertex(s) {
     .replace('#include <beginnormal_vertex>', `#include <beginnormal_vertex>
       if (aInfo.w < 0.5) objectNormal = normalSuelo(position.xz);`)
     .replace('#include <project_vertex>', `vBase = aInfo.w < 0.5 ? sueloEn(position.xz) : sueloEn(aAncla);
+      vTerreno = aInfo.w < 0.5 ? terrenoEn(position.xz) : vec2(0.0);
       transformed.y += aInfo.w < 0.5 ? sueloEn(position.xz)
         : apoyoCasa(aAncla, transformed.xz, position.y < 0.01);
       #include <project_vertex>`)

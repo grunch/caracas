@@ -11,6 +11,7 @@ export const VERTICE_COMUN = /* glsl */ `
   // lo que es igual en toda la casa (o en toda la pared) va sin interpolar: interpolado, la semilla
   // y el largo tiemblan en la última cifra y azar() lo vuelve ruido de píxel a píxel
   flat varying vec4 vInfo; flat varying float vLargo;
+  varying vec2 vTerreno; // del suelo: altura sobre la plaza (m, sin exagerar) y pendiente (m/m)
   ${GLSL_AZAR}`
 
 /** Después de begin_vertex: la ola levanta la casa y la línea de tiempo decide si está en pie. */
