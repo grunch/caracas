@@ -306,6 +306,15 @@ def test_superponer_tine_de_rojo_lo_cubierto():
     assert tuple(out[1, 1]) == (220, 30, 30) and tuple(out[0, 0]) == (200, 200, 200)
 
 
+def test_descargar_rechaza_un_error_de_overpass_y_conserva_la_cache(tmp_path):
+    destino = tmp_path / "osm.json"
+    destino.write_text('{"elements": [{"type": "way"}]}')
+    malo = b'{"elements": [], "remark": "runtime error: Query timed out in \\"query\\" at line 3 after 301 seconds."}'
+    with pytest.raises(ValueError, match="runtime error"):
+        osm.descargar(destino, (0, 0, 1, 1), forzar=True, abrir=lambda p, timeout: _Respuesta(malo))
+    assert json.loads(destino.read_text())["elements"] == [{"type": "way"}]
+
+
 def test_descargar_reintenta_con_pausa_si_overpass_esta_ocupado(tmp_path):
     import urllib.error
     respuestas = [urllib.error.HTTPError("u", 502, "Bad Gateway", {}, None), _Respuesta(b'{"elements": []}')]

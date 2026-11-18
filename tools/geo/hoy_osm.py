@@ -85,6 +85,9 @@ def descargar(destino, bbox, forzar=False, abrir=urllib.request.urlopen, dormir=
         raise ValueError(f"Overpass no devolvió JSON: {crudo[:200]!r}") from err
     if not isinstance(datos, dict) or "elements" not in datos:
         raise ValueError("la respuesta de Overpass no trae 'elements'")
+    # un timeout o falta de memoria llega con HTTP 200, datos parciales y el error en "remark"
+    if "error" in str(datos.get("remark", "")).lower():
+        raise ValueError(f"Overpass devolvió datos incompletos: {datos['remark']}")
     destino.parent.mkdir(parents=True, exist_ok=True)
     temporal = destino.with_suffix(".parcial")
     temporal.write_bytes(crudo)
