@@ -60,7 +60,7 @@ const PASOS = [
   {
     id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`],
     salidas: [`${D}/ciudad-1936.json`],
-    codigo: GEO('vectorizar'),
+    codigo: GEO('vectorizar', 'lotes'),
     cmd: async () => {
       const { plaza, metro } = await leerJson(`${D}/mosaico.json`)
       return [PY, 'tools/geo/vectorizar.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/ciudad-1936.json`,
