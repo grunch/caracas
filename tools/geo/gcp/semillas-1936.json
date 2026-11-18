@@ -1,0 +1,106 @@
+{
+ "1936-hoja1": {
+  "original": "fuentes/mapas/1936-archiveorg-caracas-dcn-hoja1/original.tif",
+  "x_m": [
+   -2500,
+   1500
+  ],
+  "y_m": [
+   -3500,
+   3500
+  ],
+  "semillas_nota": "esquinas de la cuadrícula leídas a ojo en una reducción 1/8 (±3 px reducidos = ±24 px); solo orientan la primera pasada",
+  "semillas": [
+   {
+    "x_m": -2500,
+    "y_m": 3500,
+    "px": 1512,
+    "py": 1024
+   },
+   {
+    "x_m": 1500,
+    "y_m": 3500,
+    "px": 14040,
+    "py": 840
+   },
+   {
+    "x_m": 1500,
+    "y_m": -3500,
+    "px": 14264,
+    "py": 22920
+   },
+   {
+    "x_m": -2500,
+    "y_m": -3500,
+    "px": 1720,
+    "py": 22920
+   }
+  ],
+  "parametros": {
+   "radio": 160,
+   "bloque": 48,
+   "ventana": 400
+  },
+  "excluir": [
+   [
+    -2500,
+    -3500
+   ]
+  ],
+  "manuales": [],
+  "excluir_nota": "(-2500,-3500) cae bajo el cajetín del título: el detector se engancha al borde grueso del recuadro",
+  "umbral_atipico_px": 20,
+  "extension_lineas_m": {
+   "x_max": 1760
+  }
+ },
+ "1936-hoja2": {
+  "original": "fuentes/mapas/1936-archiveorg-caracas-dcn-hoja2/original.tif",
+  "x_m": [
+   2000,
+   6000
+  ],
+  "y_m": [
+   -3500,
+   3500
+  ],
+  "semillas_nota": "esquinas de la cuadrícula leídas a ojo en una reducción 1/8 (±3 px reducidos = ±24 px); solo orientan la primera pasada",
+  "semillas": [
+   {
+    "x_m": 2000,
+    "y_m": 3500,
+    "px": 800,
+    "py": 920
+   },
+   {
+    "x_m": 4500,
+    "y_m": 3500,
+    "px": 8600,
+    "py": 920
+   },
+   {
+    "x_m": 2000,
+    "y_m": -3500,
+    "px": 800,
+    "py": 22840
+   },
+   {
+    "x_m": 4500,
+    "y_m": -3500,
+    "px": 8616,
+    "py": 22936
+   }
+  ],
+  "parametros": {
+   "radio": 160,
+   "bloque": 48,
+   "ventana": 400
+  },
+  "excluir": [],
+  "manuales": [],
+  "umbral_atipico_px": 20,
+  "extension_lineas_m": {
+   "x_min": 1700
+  }
+ }
+}

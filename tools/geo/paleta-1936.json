@@ -1,0 +1,33 @@
+{
+  "_comentario": "Prototipos de color CIELAB (L 0-100, a, b; OpenCV float, iluminante D65) del plano DCN 1936 1:5.000. Calibrados el 2026-11-18 con k-means (k=16) sobre 5 recortes de la hoja 1 y medianas de ventanas a mano. Coordenadas = píxeles de fuentes/mapas/1936-archiveorg-caracas-dcn-hoja1/original.tif. 'fondos' se comparan contra la imagen suavizada; 'tintas' contra el píxel crudo. Cada prototipo lleva dónde se muestreó.",
+  "fondos": [
+    {"clase": "naranja", "lab": [87.0, 5.7, 26.9], "muestra": "manzana edificada, centro (Miraflores), mediana de x=13300..13450 y=9750..9830"},
+    {"clase": "naranja", "lab": [91.9, 2.9, 23.5], "muestra": "manzana edificada más clara (impresión desigual), Guaire x=11200..11350 y=14050..14130"},
+    {"clase": "naranja", "lab": [82.5, 8.5, 26.0], "muestra": "naranja más saturado/sucio en manzanas del centro, percentil bajo de la misma ventana"},
+    {"clase": "crema", "lab": [99.5, -3.6, 10.7], "muestra": "patio del centro x=13280..13340 y=9900..9960"},
+    {"clase": "crema", "lab": [98.5, -4.0, 13.1], "muestra": "calles y patios, centroide k-means sobre los 5 recortes"},
+    {"clase": "crema", "lab": [99.9, -0.6, 1.6], "muestra": "papel blanco (calles del Guaire, campos de San Juan), centroide k-means"},
+    {"clase": "crema", "lab": [93.5, -1.0, 11.0], "muestra": "crema con suciedad del papel, calles del Guaire x=11010..11070 y=14600..14640"},
+    {"clase": "verde", "lab": [87.5, -29.8, 41.3], "muestra": "verde de jardines y trazos de cultivo, centroide k-means (San Juan)"},
+    {"clase": "verde", "lab": [92.0, -16.0, 28.0], "muestra": "verde claro de jardín del Palacio de Miraflores x=12940..12970 y=10180..10210 (suavizado)"},
+    {"clase": "azul", "lab": [80.0, -5.5, -14.0], "muestra": "río Guaire (rayas azules) x=11200..11260 y=14770..14785, percentil bajo de b"}
+  ],
+  "tintas": [
+    {"clase": "negro", "lab": [31.3, 6.8, 3.0], "muestra": "texto negro y bordes de manzana, centroide k-means"},
+    {"clase": "negro", "lab": [47.5, 4.0, 8.8], "muestra": "rayado marrón de edificios públicos (Correos x=13815..13860 y=10370) y bordes antialiasados"},
+    {"clase": "negro", "lab": [62.0, 5.0, 12.0], "muestra": "borde antialiasado de líneas negras sobre naranja, centroide k-means L=65.7"},
+    {"clase": "rojo", "lab": [67.2, 33.2, 31.0], "muestra": "texto rojo de esquinas (Pineda, Llaguno) y curvas de nivel, centroide k-means"},
+    {"clase": "rojo", "lab": [76.0, 22.0, 24.0], "muestra": "curvas de nivel rojo-naranja claras y bordes del texto rojo, centroide k-means L=77.5"},
+    {"clase": "azul", "lab": [77.4, -4.9, -14.3], "muestra": "líneas azules de ríos y quebradas, centroide k-means (Guaire, cerros)"},
+    {"clase": "verde", "lab": [87.5, -29.8, 41.3], "muestra": "árboles y trazos de cultivo, centroide k-means (San Juan)"},
+    {"clase": "verde", "lab": [68.5, -17.9, 26.8], "muestra": "verde oscuro de la sombra de los árboles, centroide k-means"},
+    {"clase": "verde", "lab": [94.4, -16.7, 26.9], "muestra": "verde pálido (borde de trazos de cultivo), centroide k-means"},
+    {"clase": "gris", "lab": [85.0, 1.5, 11.9], "muestra": "punteado gris del sombreado de cerros, centroide k-means (cerros x=3400..4800 y=4400..5400)"},
+    {"clase": "gris", "lab": [79.7, -1.0, 10.5], "muestra": "punteado gris oscuro de cerros, percentil 10 de x=3500..3600 y=5000..5100"},
+    {"clase": "crema", "lab": [99.5, -3.6, 10.7], "muestra": "fondo claro (no tinta), patio del centro"},
+    {"clase": "crema", "lab": [99.9, -0.6, 1.6], "muestra": "fondo blanco (no tinta)"},
+    {"clase": "crema", "lab": [94.0, -1.0, 12.0], "muestra": "fondo claro entre puntos del punteado de cerros (no tinta)"},
+    {"clase": "naranja", "lab": [87.0, 5.7, 26.9], "muestra": "fondo naranja (no tinta)"},
+    {"clase": "naranja", "lab": [91.9, 2.9, 23.5], "muestra": "fondo naranja claro (no tinta)"}
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "titulo": "Plano de Caracas (E.E.U.U. de Venezuela, Ministerio de Obras Públicas, Departamento de Cartografía Nacional; levantamiento aerofotogramétrico con fotografías tomadas en 1946)",
+  "año": 1950,
+  "año_representado": 1946,
+  "autor": "Departamento de Cartografía Nacional (MOP, Venezuela)",
+  "editor": "De Agostini - Editorial Geográfica - Caracas (pie de imprenta en la hoja)",
+  "institucion": "University of Alberta Libraries, William C. Wonders Map Collection (Zaborski Collection), vía Internet Archive",
+  "signatura": "Internet Archive WCWdb_18051",
+  "url_fuente": "https://archive.org/details/WCWdb_18051",
+  "url_descarga": "https://archive.org/download/WCWdb_18051/WCWdb_18051_images.zip (archivo WCWdb_18051_01.tif extraído sin modificar)",
+  "licencia": null,
+  "dominio_publico": "dudoso",
+  "ancho": 14954,
+  "alto": 9952,
+  "bytes": 446467678,
+  "formato": "image/tiff",
+  "sha256": "37d269be911aeb4825f4722dfab7bcbd89db6d68bc3ff1162c5a922d30a63b03",
+  "escala": "1:10.000",
+  "muestra_interior_manzanas": "no",
+  "tipo": "plano",
+  "notas": "Escaneo a 400 ppi, TIFF original extraído del ZIP 'Generic Raw Book Zip' de Internet Archive (bytes sin cambios). Fecha de catálogo 1950 ('[1950?]' a mano en la hoja); Princeton tiene un 'Plano de Caracas' DCN 1946 con la misma nota de levantamiento (princeton-4j03d351f), probablemente la misma edición o una anterior. Curvas de nivel, cuadrícula métrica, nombres de esquinas. Manzanas en color liso; solo se dibujan contornos de edificios públicos/iglesias y algunos patios (Capitolio). No hay licencia indicada en Internet Archive; obra oficial venezolana de 1946-1950: probablemente en dominio público en Venezuela (60 años desde la publicación para personas jurídicas), dudoso en EE.UU. (restauración URAA). 'Propiedad artística y literaria' impreso en la hoja. Ojo: Princeton marca su ejemplar del 'Plano de Caracas' DCN 1946 como 'In Copyright' y de acceso restringido; conviene revisar los derechos antes de publicar derivados."
+}

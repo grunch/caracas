@@ -1,0 +1,22 @@
+{
+  "titulo": "Plano topográfico de la Ciudad de Carácas, capital de la República de Venezuela",
+  "año": 1843,
+  "año_representado": null,
+  "autor": "Ángel Jacob Jesurún",
+  "editor": null,
+  "institucion": "Wikimedia Commons (fuente citada: guiaccs.com)",
+  "signatura": null,
+  "url_fuente": "https://commons.wikimedia.org/wiki/File:Plano_topogr%C3%A1fico_de_la_ciudad_de_Caracas,_%C3%81ngel_Jacob_Jesur%C3%BAn,_1843.jpg",
+  "url_descarga": "https://upload.wikimedia.org/wikipedia/commons/8/84/Plano_topogr%C3%A1fico_de_la_ciudad_de_Caracas%2C_%C3%81ngel_Jacob_Jesur%C3%BAn%2C_1843.jpg",
+  "licencia": "Public domain (Wikimedia Commons)",
+  "dominio_publico": true,
+  "ancho": 3229,
+  "alto": 2896,
+  "bytes": 1593092,
+  "formato": "JPG",
+  "sha256": "a18eda0235b83e10a1287e955feaa655077f966b92921e8c36c4d8c672c76133",
+  "escala": "Escala de 600 varas castellanas (gráfica)",
+  "muestra_interior_manzanas": "no",
+  "tipo": "plano",
+  "notas": "Manzanas sombreadas, sin parcelas ni patios. Cuadrícula numerada de esquinas y calles; parroquias marcadas con líneas de colores. Al pie dice 'Carácas, año 1843'."
+}

@@ -1,0 +1,22 @@
+{
+  "titulo": "\"Exato mapa de la ciudad de Caracas\"",
+  "año": 1772,
+  "año_representado": null,
+  "autor": "Juan Vicente Bolívar y Ponte (atribución en Commons)",
+  "editor": null,
+  "institucion": "Archivo General de Indias (Sevilla), vía PARES",
+  "signatura": "ES.41091.AGI//MP-VENEZUELA,174",
+  "url_fuente": "https://pares.cultura.gob.es/ParesBusquedas20/catalogo/description/26112",
+  "url_descarga": "https://pares.cultura.gob.es/ParesBusquedas20/ViewImage.do?accion=42&txt_descarga=1&dbCode=22956460&txt_id_imagen=1&txt_zoom=10&txt_contraste=0&txt_polarizado=&txt_brillo=10.0&txt_contrast=1.0&txt_totalImagenes=1&txt_transformacion=-1",
+  "licencia": "Imagen de PARES (Portal de Archivos Españoles), descarga libre desde el visor; marca de agua '© Archivos Estatales, https://pares.cultura.gob.es'. Obra original de dominio público por antigüedad.",
+  "dominio_publico": true,
+  "ancho": 1925,
+  "alto": 1734,
+  "bytes": 823575,
+  "formato": "JPG",
+  "sha256": "4696d038a55b8088302a496b6eb4678b11173d98d3a15c589530cf78ee7bb62b",
+  "escala": "Escala de varas castellanas (gráfica)",
+  "muestra_interior_manzanas": "si",
+  "tipo": "plano",
+  "notas": "Fecha en PARES: 1772-07-09. Ocupación parcial, no patios: el centro aparece macizo en rojo, y en la periferia se distinguen las partes construidas de los solares y huertos. Distingue en rojo lo construido de los solares o huertos sin construir dentro de cada manzana. La descarga de PARES (zoom 10, el máximo) supera a la copia de Commons File:Exato_mapa_de_la_ciudad_de_Caracas,_1772.jpg (1600x1419), que no se conservó."
+}

@@ -1,0 +1,22 @@
+{
+  "titulo": "Plano topográfico de la ciudad de Caracas (1843), ejemplar con sello de Angel Jacob Jesurun",
+  "año": 1843,
+  "año_representado": null,
+  "autor": "Angel Jacob Jesurun (atribuido por sello)",
+  "editor": "Litografía de Müller & Stapler (Caracas)",
+  "institucion": "Biblioteca Nacional de Venezuela, Colección Archivo de Planos (según guiaccs.com); imagen de guiaccs.com",
+  "signatura": null,
+  "url_fuente": "https://guiaccs.com/planos/la-ciudad-de-la-independencia/",
+  "url_descarga": "https://guiaccs.com/wp-content/uploads/2017/11/Plano-Jesurun-1843.jpg",
+  "licencia": "Sin licencia declarada en guiaccs.com (© del sitio para sus textos); el plano de 1843 es de dominio público",
+  "dominio_publico": true,
+  "ancho": 4577,
+  "alto": 4202,
+  "bytes": 11593184,
+  "formato": "image/jpeg",
+  "sha256": "e29520df7a2812fdfd186191be5f9db0fc906597987f00f927e760db54de0731",
+  "escala": null,
+  "muestra_interior_manzanas": "no",
+  "tipo": "plano",
+  "notas": "Imagen publicada en guiaccs.com ('Caracas del valle al mar', I. González Viso, F. Vegas, M. I. Peña): reproducción web, no escaneo institucional; el archivo JPEG se guarda sin modificar. Versión de 4577x4202, mayor que la de Commons (1843-commons-jesurun, 3229x2896, ejemplar 'sin sello'). Litografía en blanco y negro: manzanas numeradas con rayado (tramas distintas según la parroquia o el uso), edificios públicos en blanco con letra, cultivos punteados. Las manzanas van rayadas enteras, sin distinguir edificado de patio."
+}

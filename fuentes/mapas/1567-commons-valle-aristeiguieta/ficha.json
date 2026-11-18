@@ -1,0 +1,22 @@
+{
+  "titulo": "Plano topográfico de una parte del Valle de los Caracas, 1567",
+  "año": null,
+  "año_representado": 1567,
+  "autor": "Florentino Aristeiguieta (según Commons)",
+  "editor": null,
+  "institucion": "Wikimedia Commons (fuente citada: guiaccs.com)",
+  "signatura": null,
+  "url_fuente": "https://commons.wikimedia.org/wiki/File:Plano_topogr%C3%A1fico_de_una_parte_del_Valle_de_los_Caracas,_1567.jpg",
+  "url_descarga": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Plano_topogr%C3%A1fico_de_una_parte_del_Valle_de_los_Caracas%2C_1567.jpg",
+  "licencia": "Public domain (Wikimedia Commons)",
+  "dominio_publico": true,
+  "ancho": 768,
+  "alto": 720,
+  "bytes": 101693,
+  "formato": "JPG",
+  "sha256": "7c977eb90683a433cfb39eaa226e8b88e957e9a6eab926f348738d36dd269672",
+  "escala": null,
+  "muestra_interior_manzanas": "no",
+  "tipo": "valle",
+  "notas": "Reconstrucción posterior del valle en 1567, no un documento de 1567. Resolución baja (768x720)."
+}

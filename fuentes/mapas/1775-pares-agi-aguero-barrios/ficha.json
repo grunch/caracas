@@ -1,0 +1,22 @@
+{
+  "titulo": "\"Plan de la ciudad de Caracas, con divición de sus barrios\"",
+  "año": 1775,
+  "año_representado": null,
+  "autor": "Joseph Carlos de Agüero",
+  "editor": null,
+  "institucion": "Archivo General de Indias (Sevilla), vía PARES",
+  "signatura": "ES.41091.AGI//MP-VENEZUELA,180",
+  "url_fuente": "https://pares.cultura.gob.es/ParesBusquedas20/catalogo/description/26118",
+  "url_descarga": "https://pares.cultura.gob.es/ParesBusquedas20/ViewImage.do?accion=42&txt_descarga=1&dbCode=21127049&txt_id_imagen=1&txt_zoom=10&txt_contraste=0&txt_polarizado=&txt_brillo=10.0&txt_contrast=1.0&txt_totalImagenes=1&txt_transformacion=-1",
+  "licencia": "Imagen de PARES (Portal de Archivos Españoles), descarga libre desde el visor; marca de agua '© Archivos Estatales, https://pares.cultura.gob.es'. Obra original de dominio público por antigüedad.",
+  "dominio_publico": true,
+  "ancho": 1700,
+  "alto": 2437,
+  "bytes": 732693,
+  "formato": "JPG",
+  "sha256": "a6b6946e8ac20ac34c0c378de34425cca81b682ee34da73340062f5a60b5e94f",
+  "escala": null,
+  "muestra_interior_manzanas": "no",
+  "tipo": "plano",
+  "notas": "Fecha en PARES: 1775-01-31. Manzanas coloreadas por barrio y sin detalle interior. Supera a la copia de Commons File:Plan_of_the_City_of_Caracas_with_its_Division_in_Neighborhoods._1775.jpg (824x1173), que no se conservó. El IGN tiene un facsímil de 1990 (ficha 023401)."
+}

@@ -1,0 +1,22 @@
+{
+  "titulo": "Plano de Caracas, 1911",
+  "año": 1911,
+  "año_representado": null,
+  "autor": "Ricardo Razetti",
+  "editor": "[Caracas] : Lit. y Tip. del Comercio, 1911",
+  "institucion": "Princeton University Library, Historic Maps Collection",
+  "signatura": "D Alcove 30, Drawer 7 HMC01.6069; ark:/88435/05741v14j; catálogo 9965523213506421",
+  "url_fuente": "https://maps.princeton.edu/catalog/princeton-05741v14j",
+  "url_descarga": "https://figgy.princeton.edu/downloads/6f0c9751-2fe1-4170-b3b3-79955ac2fe61/file/73cd6fe5-0bd0-4198-96da-01b33fb3dfb5",
+  "licencia": "No Known Copyright (http://rightsstatements.org/vocab/NKC/1.0/). Princeton University Library reasonably believes that the Item is not restricted by copyright or related rights, but a conclusive determination could not be made.",
+  "dominio_publico": true,
+  "ancho": 8489,
+  "alto": 5980,
+  "bytes": 50791168,
+  "formato": "image/tiff",
+  "sha256": "2a99ec0c9a1866fee46ef59cef8b9e0721e78dd5e6e28ab49f3006680a748cec",
+  "escala": null,
+  "muestra_interior_manzanas": "no",
+  "tipo": "plano",
+  "notas": "TIFF sin compresión, paleta de 256 colores (así lo entrega Princeton), 8489x5980. IIIF: https://iiif-cloud.princeton.edu/iiif/2/d4%2F43%2Fdb%2Fd443db1cf7e541aab85e5e5e34e7b127%2Fintermediate_file. Litografía a color: manzanas en gris liso, edificios públicos en rojo numerados, tranvías en rojo, relieve con normales, curvas de cota. No dibuja el edificado privado ni patios."
+}

@@ -1,0 +1,22 @@
+{
+  "titulo": "Guía de Caracas",
+  "año": 1942,
+  "año_representado": null,
+  "autor": "Rafael Arreaza de la Cora",
+  "editor": "Caracas, Venezuela : Librería Caracas, 1942",
+  "institucion": "Princeton University Library",
+  "signatura": "princeton-m613n244m; catálogo 9968093363506421",
+  "url_fuente": "https://maps.princeton.edu/catalog/princeton-m613n244m",
+  "url_descarga": null,
+  "licencia": "In Copyright (http://rightsstatements.org/vocab/InC/1.0/); dct_accessRights_s: Restricted",
+  "dominio_publico": false,
+  "ancho": null,
+  "alto": null,
+  "bytes": null,
+  "formato": null,
+  "sha256": null,
+  "escala": null,
+  "muestra_interior_manzanas": "desconocido",
+  "tipo": "plano",
+  "notas": "NO DESCARGADO: Princeton lo marca 'In Copyright' y acceso restringido (solo miniatura pública). Metadatos obtenidos del agregador geodiscovery.uwm.edu porque maps.princeton.edu exige verificación anti-bot."
+}

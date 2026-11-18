@@ -1,0 +1,22 @@
+{
+  "titulo": "Plano de Caracas, 1906, según el original del ingeniero Ricardo Razetti",
+  "año": 1906,
+  "año_representado": null,
+  "autor": "Ricardo Razetti",
+  "editor": null,
+  "institucion": "Biblioteca Nacional de Venezuela (según guiaccs.com); imagen de guiaccs.com",
+  "signatura": null,
+  "url_fuente": "https://guiaccs.com/planos/la-busqueda-de-el-paraiso/",
+  "url_descarga": "https://guiaccs.com/wp-content/uploads/2017/11/Plano-1906.jpg",
+  "licencia": "Sin licencia declarada en guiaccs.com",
+  "dominio_publico": true,
+  "ancho": 3264,
+  "alto": 2368,
+  "bytes": 5415781,
+  "formato": "image/jpeg",
+  "sha256": "fc52c1c36e094605efab211e19d186aa6ed86f09bda9b7b082bacf1618562232",
+  "escala": null,
+  "muestra_interior_manzanas": "no",
+  "tipo": "plano",
+  "notas": "Imagen publicada en guiaccs.com ('Caracas del valle al mar', I. González Viso, F. Vegas, M. I. Peña): reproducción web, no escaneo institucional; el archivo JPEG se guarda sin modificar. FOTO con teléfono (EXIF: iPhone 6, Photoshop, 2016), no escaneo. Publicado en 1906: dominio público en EE.UU.; en Venezuela depende de la fecha de muerte de Razetti. El EXIF trae datos GPS."
+}

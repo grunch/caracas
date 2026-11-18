@@ -1,0 +1,150 @@
+{
+ "salida": "fuentes/derivados/1936",
+ "metro": 0.5,
+ "extension_m": [
+  -2900,
+  -3700,
+  6400,
+  3700
+ ],
+ "marco_m": [
+  -2750,
+  -3500,
+  6250,
+  3500
+ ],
+ "cuadricula_x_m": [
+  -2500,
+  6000
+ ],
+ "cuadricula_y_m": [
+  -3500,
+  3500
+ ],
+ "costura_m": 1720,
+ "plaza_m": [
+  1584.1,
+  280.5
+ ],
+ "hojas": [
+  {
+   "nombre": "1936-hoja1",
+   "fuente": "1936-archiveorg-caracas-dcn-hoja1",
+   "original": "fuentes/mapas/1936-archiveorg-caracas-dcn-hoja1/original.tif",
+   "gcp": "tools/geo/gcp/1936-hoja1.json",
+   "x_desde_m": -1000000000.0,
+   "x_hasta_m": 1720,
+   "borde_fondo_px": 300,
+   "lineas": "tools/geo/gcp/1936-hoja1-lineas.json"
+  },
+  {
+   "nombre": "1936-hoja2",
+   "fuente": "1936-archiveorg-caracas-dcn-hoja2",
+   "original": "fuentes/mapas/1936-archiveorg-caracas-dcn-hoja2/original.tif",
+   "gcp": "tools/geo/gcp/1936-hoja2.json",
+   "x_desde_m": 1720,
+   "x_hasta_m": 1000000000.0,
+   "borde_fondo_px": 300,
+   "lineas": "tools/geo/gcp/1936-hoja2-lineas.json"
+  }
+ ],
+ "qa": [
+  {
+   "nombre": "costura norte",
+   "centro_m": [
+    1720,
+    2500
+   ],
+   "lado_m": 300
+  },
+  {
+   "nombre": "costura, Pza. Bolivar",
+   "centro_m": [
+    1720,
+    500
+   ],
+   "lado_m": 300
+  },
+  {
+   "nombre": "costura sur",
+   "centro_m": [
+    1720,
+    -2000
+   ],
+   "lado_m": 300
+  },
+  {
+   "nombre": "costura, borde sur",
+   "centro_m": [
+    1720,
+    -3500
+   ],
+   "lado_m": 300
+  },
+  {
+   "nombre": "pliegue y=0, hoja 1",
+   "centro_m": [
+    -1000,
+    0
+   ],
+   "lado_m": 300
+  },
+  {
+   "nombre": "pliegue y=0, hoja 2",
+   "centro_m": [
+    4000,
+    0
+   ],
+   "lado_m": 300
+  },
+  {
+   "nombre": "pliegue x=+2000, hoja 2",
+   "centro_m": [
+    2000,
+    -1500
+   ],
+   "lado_m": 300
+  },
+  {
+   "nombre": "centro, hoja 1",
+   "centro_m": [
+    500,
+    1000
+   ],
+   "lado_m": 300
+  },
+  {
+   "nombre": "Plaza Bolivar",
+   "centro_m": [
+    1584.1,
+    280.5
+   ],
+   "lado_m": 300
+  },
+  {
+   "nombre": "pliegue x=+2000 con salto",
+   "centro_m": [
+    2000,
+    -2500
+   ],
+   "lado_m": 300
+  },
+  {
+   "nombre": "hoja 2, este",
+   "centro_m": [
+    5500,
+    -1000
+   ],
+   "lado_m": 300
+  },
+  {
+   "nombre": "esquina SE",
+   "centro_m": [
+    6000,
+    -3500
+   ],
+   "lado_m": 300
+  }
+ ],
+ "notas": "Mosaico métrico a 0,5 m/px, norte arriba, en las coordenadas de la cuadrícula impresa del plano DCN 1936 (x al este, y al norte, metros; el origen es el propio de esa cuadrícula, no la Plaza Bolívar). Cada hoja se rectificó con un modelo denso: 133 cruces de la cuadrícula de 500 m detectados automáticamente (semillas: 4 esquinas por hoja leídas a ojo, solo para orientar) más ~7900 muestras de las líneas trazadas entre cruces; la inversa píxel→metro se ajusta con dos TPS escalares (x con las verticales, y con las horizontales) y se invierte por Newton. Sin GCP manuales; excluido a mano el cruce (-2500,-3500) de la hoja 1 (bajo el cajetín del título). Faltan por tapados (-2500,-3000) en la hoja 1 y (+2000,-2000), (+2000,-1500) en la hoja 2. Costura: corte vertical recto en x=+1720 m; no hay ninguna línea de cuadrícula común a las dos hojas (la hoja 1 llega a x≈+1675…+1748 m, cortada por el escaneo; la hoja 2 empieza en x≈+1745…+1772 m, borde del papel). Donde una hoja no llega se usa la otra; la franja que no está en ninguna queda en color papel #f1e6cd: casi nula al norte, ~20-25 m a la altura de la Plaza Bolívar y hasta ~100 m en el borde sur. Fuera del marco se conserva el margen impreso (rótulos de coordenadas, sellos, cajetín) tal cual; 'marco' = guarda interior x −2750…+6250, y −3500…+3500 m (medida en el mosaico: −2751,5 y +6251,2 m). Pliegues: el papel estuvo doblado justo sobre las líneas y=0 (ambas hojas) y x=+2000 (hoja 2); allí la línea impresa se desdobla o salta hasta ~2 m y el ajuste continuo reparte el salto. Plaza Bolívar: rótulo 'Plaza Bolívar' en la hoja 1, manzana ajardinada con caminos en aspa y estatua central; la Iglesia Catedral ocupa la manzana al ESTE de la plaza, el Palacio de la Gobernación al norte, el Palacio Federal al suroeste y el Min. del Exterior al noroeste; esquinas La Torre, Gradillas, Principal y Las Monjas. Se tomó el centro del pedestal de la estatua (píxel ≈ (14393, 10995) de la hoja 1) → (+1584,1, +280,5) m. Residuos: 'rms'/'max'/'por_hoja' = dejando uno fuera con TPS solo de cruces (conservador; los máximos son cruces de esquina, extrapolados, y de pliegue); 'remedicion_en_mosaico' = cruces y líneas re-detectados en el mosaico final frente a la cuadrícula ideal (sus máximos salen de los pliegues y de los bordes del cajetín, que no son cuadrícula)."
+}

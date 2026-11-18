@@ -1,0 +1,22 @@
+{
+  "titulo": "Plano de Caracas",
+  "año": 1946,
+  "año_representado": null,
+  "autor": "Venezuela. Dirección de Cartografía Nacional",
+  "editor": "[Caracas] : Departamento de Cartografía Nacional, 1946. 'Printed in Italy.'",
+  "institucion": "Princeton University Library",
+  "signatura": "princeton-4j03d351f; catálogo 9968093373506421",
+  "url_fuente": "https://maps.princeton.edu/catalog/princeton-4j03d351f",
+  "url_descarga": null,
+  "licencia": "In Copyright (http://rightsstatements.org/vocab/InC/1.0/); dct_accessRights_s: Restricted",
+  "dominio_publico": false,
+  "ancho": null,
+  "alto": null,
+  "bytes": null,
+  "formato": null,
+  "sha256": null,
+  "escala": null,
+  "muestra_interior_manzanas": "no",
+  "tipo": "plano",
+  "notas": "NO DESCARGADO (restringido en Princeton). 'Levantamiento aerofotogramétrico con fotografías tomadas en 1946', relieve con curvas. Casi seguro la misma edición que el ejemplar de U. Alberta en Internet Archive ya descargado en 1950-archiveorg-plano-de-caracas-dcn (14954x9952)."
+}

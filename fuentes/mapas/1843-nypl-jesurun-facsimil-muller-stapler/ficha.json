@@ -1,0 +1,22 @@
+{
+  "titulo": "Plano topográfico de la Ciudad de Carácas (Jesurún 1843), facsímil litográfico",
+  "año": null,
+  "año_representado": 1843,
+  "autor": "Ángel Jacob Jesurún (original de 1843)",
+  "editor": "Litografía de Müller & Stapler",
+  "institucion": "New York Public Library (copia en Wikimedia Commons)",
+  "signatura": "NYPL b13925947, image ID 5382478",
+  "url_fuente": "https://commons.wikimedia.org/wiki/File:Plano_topografico_de_la_ciudad_de_Caracas_(NYPL_b13925947-5382478).tiff",
+  "url_descarga": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Plano_topografico_de_la_ciudad_de_Caracas_%28NYPL_b13925947-5382478%29.tiff",
+  "licencia": "Public domain (Wikimedia Commons)",
+  "dominio_publico": true,
+  "ancho": 7216,
+  "alto": 5412,
+  "bytes": 117490002,
+  "formato": "TIFF",
+  "sha256": "f010aea63c330fd92d4046014080fdbb282eeb13a0aef60e5831374c5b172fbc",
+  "escala": null,
+  "muestra_interior_manzanas": "no",
+  "tipo": "plano",
+  "notas": "Al examinarlo resulta ser un FACSÍMIL en blanco y negro del plano de Jesurún de 1843 (lámina No. 16 de un atlas o recopilación, impreso por Lit. de Müller & Stapler; fecha del facsímil desconocida). Sin fecha ni autor en Commons (de un atlas o guía de la colección NYPL). El sitio de NYPL bloquea el acceso automatizado. Hay una versión JPG en Commons (6056x4708); se guardó el TIFF (7216x5412)."
+}

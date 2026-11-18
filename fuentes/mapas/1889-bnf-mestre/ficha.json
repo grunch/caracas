@@ -1,0 +1,22 @@
+{
+  "titulo": "Plano topografico de la ciudad de Caracas, levantado en 1889 vajo la direccion del general don Vicente S. Mestre",
+  "año": 1889,
+  "año_representado": null,
+  "autor": "Vicente S. Mestre (1858-1919)",
+  "editor": "J. Lebègue (Bruxelles)",
+  "institucion": "Bibliothèque nationale de France (copia en Wikimedia Commons)",
+  "signatura": "ark:/12148/btv1b53027837n",
+  "url_fuente": "https://commons.wikimedia.org/wiki/File:Plano_topografico_de_la_ciudad_de_Caracas,_levantado_en_1889_vajo_la_direccion_-_del_general_don_Vicente_S._Mestre_-_btv1b53027837n.jpg",
+  "url_descarga": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Plano_topografico_de_la_ciudad_de_Caracas%2C_levantado_en_1889_vajo_la_direccion_-_del_general_don_Vicente_S._Mestre_-_btv1b53027837n.jpg",
+  "licencia": "Public domain (Wikimedia Commons)",
+  "dominio_publico": true,
+  "ancho": 11457,
+  "alto": 8218,
+  "bytes": 12247949,
+  "formato": "JPG",
+  "sha256": "1ffbc7c2305185ef6b1ee5193e41bc70b57eb888833b40185ff6dfaebf6df222",
+  "escala": "1:5 000",
+  "muestra_interior_manzanas": "no",
+  "tipo": "plano",
+  "notas": "Gallica bloquea el acceso automatizado (Cloudflare 403), así que se bajó la copia de Commons (11457x8218). Manzanas en color liso, sin patios privados; solo se dibujan las plantas de edificios públicos y templos. Calles y manzanas muy precisas. También está indexado en Europeana (9200517/ark__12148_btv1b53027837n)."
+}

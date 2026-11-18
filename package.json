@@ -1,0 +1,26 @@
+{
+  "name": "caracas-historica",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "e2e": "playwright test",
+    "catalogo": "node tools/catalogo.mjs"
+  },
+  "dependencies": {
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@vitest/coverage-v8": "^5.1.1",
+    "sharp": "^0.35.5",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.1"
+  }
+}

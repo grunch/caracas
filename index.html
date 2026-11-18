@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#1d1a17">
+  <title>Caracas, de 1874 a 1940</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root{--fondo:#1d1a17;--papel:#f1e6cd;--tinta:#2a221b;--claro:#efe4cd;--sobre:#fff6e2;--hoy:#a03220}
+    html,body{margin:0;height:100%;overflow:hidden;background:var(--fondo);color:var(--claro);
+      font:15px/1.4 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+      overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+    #view,#view canvas{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+    #loading{position:fixed;inset:0;display:grid;place-items:center;font-size:19px;font-style:italic;letter-spacing:.08em;transition:opacity .8s}
+    body.listo #loading{opacity:0;pointer-events:none}
+    .panel{position:fixed;color:var(--tinta);background:var(--papel);border:1px solid var(--tinta);outline:1px solid #2a221b99;outline-offset:2px;box-shadow:0 5px 24px #0007}
+    #botones{position:fixed;right:calc(26px + env(safe-area-inset-right,0px));bottom:calc(26px + env(safe-area-inset-bottom,0px));display:flex;gap:12px;z-index:5}
+    #botones .panel{position:static;font:inherit;font-size:16px;letter-spacing:.02em;padding:10px 18px;min-height:44px;cursor:pointer}
+    #botones .panel:hover{background:var(--sobre)}
+    #botones .panel:active{transform:translateY(1px)}
+  </style>
+</head>
+<body>
+  <div id="view"></div>
+  <div id="loading">Desplegando el plano…</div>
+  <div id="botones"><button id="alzar" class="panel" type="button" hidden>Levantar la ciudad</button></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

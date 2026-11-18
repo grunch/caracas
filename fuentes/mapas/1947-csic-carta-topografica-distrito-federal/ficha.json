@@ -1,0 +1,22 @@
+{
+  "titulo": "Carta topográfica del distrito federal [de Caracas]",
+  "año": 1947,
+  "año_representado": null,
+  "autor": null,
+  "editor": null,
+  "institucion": "CSIC (Spanish National Research Council), vía Europeana / Simurg",
+  "signatura": "990009200310204201",
+  "url_fuente": "https://csic-primo.hosted.exlibrisgroup.com/primo-explore/fulldisplay?vid=34CSIC_VU1&lang=es_ES&docid=34CSIC_ALMA_DS21115971050004201",
+  "url_descarga": "http://simurg.csic.es/iiif/2/%2F1%2Fcd%2F3c%2F01a3%2F65d64adbbfa4ad2fc521bd36%2Fv1%2Fcontent%2F990009200310204201_001%281%29.tif/full/500,/0/default.jpg",
+  "licencia": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "dominio_publico": false,
+  "ancho": null,
+  "alto": null,
+  "bytes": null,
+  "formato": null,
+  "sha256": null,
+  "escala": "Recuadro de la ciudad de Caracas a 1:25.000",
+  "muestra_interior_manzanas": "no",
+  "tipo": "valle",
+  "notas": "NO DESCARGADO: licencia CC BY-NC-SA 4.0, no es dominio público. Contiene un cuadro de la ciudad de Caracas a 1:25.000. El enlace IIIF de Europeana (solo una vista previa de 500 px) daba 404 al probarlo."
+}

@@ -1,0 +1,22 @@
+{
+  "titulo": "Plano y guía de Caracas",
+  "año": 1960,
+  "año_representado": null,
+  "autor": null,
+  "editor": null,
+  "institucion": "Map & Data Library, University of Toronto Libraries",
+  "signatura": "Call Number 2487; mdl:2487",
+  "url_fuente": "https://collections.library.utoronto.ca/view/mdl:2487",
+  "url_descarga": null,
+  "licencia": "For rights and reproduction information please contact mdl@library.utoronto.ca",
+  "dominio_publico": false,
+  "ancho": 7847,
+  "alto": 5398,
+  "bytes": 56920951,
+  "formato": "image/jp2",
+  "sha256": null,
+  "escala": "ca. 1:36,000",
+  "muestra_interior_manzanas": "desconocido",
+  "tipo": "plano",
+  "notas": "NO DESCARGADO: plano de 1960 (fuera del periodo y probablemente con derechos vigentes; la institución remite a pedir permiso). El registro expone un JP2 de 7847x5398 (56.9 MB, fileId 9109bac3-cc92-4596-89a5-612ac535782f). A escala 1:36.000 no sirve como plano base."
+}

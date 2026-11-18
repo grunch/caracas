@@ -1,0 +1,22 @@
+{
+  "titulo": "Plano de la ciudad y parroquias foráneas (Caracas, 1897)",
+  "año": 1897,
+  "año_representado": null,
+  "autor": "Ricardo Razetti",
+  "editor": null,
+  "institucion": "Biblioteca Nacional de Venezuela (según guiaccs.com); imagen de guiaccs.com",
+  "signatura": null,
+  "url_fuente": "https://guiaccs.com/planos/la-ciudad-de-razetti/",
+  "url_descarga": "https://guiaccs.com/wp-content/uploads/2017/11/PLano-1897.jpg",
+  "licencia": "Sin licencia declarada en guiaccs.com",
+  "dominio_publico": true,
+  "ancho": 2760,
+  "alto": 2280,
+  "bytes": 6517913,
+  "formato": "image/jpeg",
+  "sha256": "1bbdf1994b99a50e1865f09c18a9561e0c8d7616bf7551e1976cfa68704b6ff5",
+  "escala": "1:10.000",
+  "muestra_interior_manzanas": "no",
+  "tipo": "plano",
+  "notas": "Imagen publicada en guiaccs.com ('Caracas del valle al mar', I. González Viso, F. Vegas, M. I. Peña): reproducción web, no escaneo institucional; el archivo JPEG se guarda sin modificar. Es una FOTO con teléfono (EXIF: iPhone 6, retocada en Photoshop, 2016), con perspectiva y reflejos; no es un escaneo. Manzanas en color liso, edificios públicos en rojo, con anuncios comerciales. Publicado en 1897: dominio público en EE.UU.; en Venezuela depende de la fecha de muerte de Razetti (desconocida aquí). El EXIF trae datos GPS de la toma; ojo si se redistribuye."
+}

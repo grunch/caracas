@@ -1,0 +1,22 @@
+{
+  "titulo": "Caracas. No. 7. Distrito Federal, Departamento Libertador (Ministerio de Obras Públicas, Dirección de Cartografía Nacional) — hoja 2 de 2",
+  "año": 1936,
+  "año_representado": null,
+  "autor": "Ministerio de Obras Públicas, Dirección de Cartografía Nacional (Venezuela). Restitución fotogramétrica; dibujo D. Viera, J. Nunés, S. Marichal; jefe del Servicio de Topógrafos Luis Felipe Vegas",
+  "editor": "Impreso por Prof. G. De Agostini, Milano ('Printed in Italy')",
+  "institucion": "University of Alberta Libraries, William C. Wonders Map Collection, vía Internet Archive",
+  "signatura": "Internet Archive WCWdb_18053 (archivo WCWdb_18053_02.tif)",
+  "url_fuente": "https://archive.org/details/WCWdb_18053",
+  "url_descarga": "https://archive.org/download/WCWdb_18053/WCWdb_18053_images.zip (archivo WCWdb_18053_02.tif extraído sin modificar)",
+  "licencia": null,
+  "dominio_publico": "dudoso",
+  "ancho": 14816,
+  "alto": 23777,
+  "bytes": 1056842254,
+  "formato": "image/tiff",
+  "sha256": "471b8dfce10234e194290fe3afc0778c2813d9ff96764ee31ff1bdabaf30626d",
+  "escala": "1:5.000",
+  "muestra_interior_manzanas": "si",
+  "tipo": "plano",
+  "notas": "Plano fotogramétrico (fotografiado marzo 1936, restituido marzo-diciembre 1936, cámara RMK 21, altura de vuelo 800-1000 m; 'Hecho para: Estudios Generales'). Escaneo a 400 ppi, TIFF original extraído del ZIP 'Generic Raw Book Zip' de Internet Archive. Es la hoja 2; la otra mitad está en la carpeta 1936-archiveorg-caracas-dcn-hoja1. Dibuja el EDIFICADO en color naranja y los patios/solares sin construir en blanco dentro de cada manzana, edificios públicos con rayado y nombre, cotas de esquina, curvas de nivel, cultivos y arbolado. Sello 'War Department Map Collection' / 'DUPLICATE' (ejemplar de la colección del Army Map Service). Sin licencia indicada en Internet Archive; obra oficial venezolana de 1936: muy probablemente dominio público en Venezuela (más de 60 años desde la publicación), dudoso en EE.UU. Ojo: Princeton marca su ejemplar del 'Plano de Caracas' DCN 1946 como 'In Copyright' y de acceso restringido; conviene revisar los derechos antes de publicar derivados."
+}

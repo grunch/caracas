@@ -1,0 +1,17 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+# escaneos originales y derivados pesados: fuera de git (catalogados en fuentes/catalogo.json)
+fuentes/mapas/**/original.*
+fuentes/mapas/**/vista.jpg
+public/plano/*.webp
+public/plano/f/
+public/datos/*.pak
+public/datos/*.bin
+.env
+.claude/settings.local.json
+.venv/
+__pycache__/
+fuentes/derivados/

@@ -1,0 +1,22 @@
+{
+  "titulo": "Plano de Caracas por Ricardo Razetti, ingeniero, 1919",
+  "año": 1919,
+  "año_representado": null,
+  "autor": "Ricardo Razetti",
+  "editor": "Litografía y Tipografía del Comercio (Caracas)",
+  "institucion": "University of Minnesota, Borchert Map Library (UMedia, colección City Maps)",
+  "signatura": "G5284 .C2 1919 .C6; UMN_ALMA:9912638940001701; CONTENTdm p16022coll205:239",
+  "url_fuente": "https://umedia.lib.umn.edu/item/p16022coll205:239",
+  "url_descarga": "https://cdm16022.contentdm.oclc.org/digital/api/collection/p16022coll205/id/239/download",
+  "licencia": "Use of this item may be governed by US and international copyright laws. You may be able to use this item, but copyright and other considerations may apply. For possible additional information or guidance on your use, please contact the contributing organization.",
+  "dominio_publico": true,
+  "ancho": 8000,
+  "alto": 6227,
+  "bytes": 8296041,
+  "formato": "image/jp2",
+  "sha256": "963d25e8a6e6d2ece337bfd2ab204018e3409dd1603c375e7bd179ae98ae4b34",
+  "escala": "1:10.000",
+  "muestra_interior_manzanas": "no",
+  "tipo": "plano",
+  "notas": "Mismo ítem que el registro de UC Berkeley GeoData (geodata.lib.berkeley.edu/catalog/p16022coll205:239), que solo cosecha metadatos de UMN. Archivo JP2 original del CONTENTdm (IIIF info.json: 8000x6227). Manzanas como cuadrículas vacías; solo edificios públicos en negro, con índice de edificios, nomenclatura de esquinas y límites de parroquias. Impreso dice 'La reproducción de este plano es propiedad del autor'; publicado en 1919, por tanto dominio público en EE.UU. (publicado antes de 1930)."
+}

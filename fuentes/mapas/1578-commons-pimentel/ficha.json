@@ -1,0 +1,22 @@
+{
+  "titulo": "El primer dibujo de Caracas (plano de Juan de Pimentel, 1578)",
+  "año": 1578,
+  "año_representado": null,
+  "autor": "Juan de Pimentel",
+  "editor": null,
+  "institucion": "Wikimedia Commons (fuente citada: guiaccs.com; original en la Relación geográfica de Caracas, 1578)",
+  "signatura": null,
+  "url_fuente": "https://commons.wikimedia.org/wiki/File:El_primer_dibujo_de_Caracas,_Juan_de_Pimentel,_1578.jpg",
+  "url_descarga": "https://upload.wikimedia.org/wikipedia/commons/2/29/El_primer_dibujo_de_Caracas%2C_Juan_de_Pimentel%2C_1578.jpg",
+  "licencia": "Public domain (Wikimedia Commons)",
+  "dominio_publico": true,
+  "ancho": 3055,
+  "alto": 2168,
+  "bytes": 638455,
+  "formato": "JPG",
+  "sha256": "ecd20bb264370a3fc450c77b7f5099e52ecea3eb14aa9199036f643ff220b2e2",
+  "escala": null,
+  "muestra_interior_manzanas": "no",
+  "tipo": "plano",
+  "notas": "Parece un redibujo o calco en blanco y negro, no un escaneo directo del manuscrito. Copias más pequeñas en Commons: File:Caracas1578.jpg (769x543) y File:First_Map_of_Caracas,_1578.jpg (900x883, tomado de Gasparini 1978)."
+}
