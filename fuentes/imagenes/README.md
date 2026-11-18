@@ -221,3 +221,25 @@ Foto sin pie ni fuente. Si es Caracas, mira al sur (cerros bajos, no el Ávila).
 Qué implica: confirma lo de la panorámica de 1903 para la época de 1936: mayoría de un piso con teja, y
 los edificios de varios pisos concentrados en pocas cuadras. Reducir la proporción de "moderno" y
 "ecléctico" altos fuera del núcleo comercial.
+
+## 1930 · Calle Real de La Pastora, foto (`1930-facebook-calle-real-la-pastora`) → épocas 1911 y 1936 (barrios)
+
+Calle de barrio a nivel de peatón, en el borde norte de la ciudad, mirando al norte: la referencia de
+cómo era la ciudad **fuera del centro** en la última época.
+
+- **Casas de un piso en hilera continua**, a los dos lados, de frente angosto (5–8 m): **pretil o
+  cornisa recta con molduras** tapando el tejado (fachada republicana sobre casa de teja), **una puerta
+  y una o dos ventanas altas con reja** por casa, zócalo de otro color. Algunas con frontón o remate
+  curvo sobre la puerta.
+- **Aceras altas con escalones** para salvar la pendiente: la calle sube, y cada casa entra a su nivel.
+- **Calle ancha empedrada**, sin asfaltar en 1930, sin árboles; un solo carro estacionado, gente a pie
+  y niños en la calle.
+- **Postes de madera con muchos cables** a los dos lados.
+- **El Ávila empieza donde termina la calle**: ladera empinada con monte bajo, caminos en zigzag, unas
+  pocas casas sueltas y sin ranchos. El borde de la ciudad es neto también en 1930.
+
+Qué implica: fuera del núcleo comercial, la época de 1936 es de **casas de un piso con fachada
+republicana de pretil** (no ranchos ni quintas: mi regla manda demasiadas casas de barrio a "rancho" y
+"orillas"); calles **empedradas** en los barrios y asfalto solo en el centro; aceras escalonadas en las
+calles en pendiente; postes y cables como rasgo del siglo XX. Vista de control para el relieve: desde
+La Pastora, el Ávila llena el fondo de la calle.
