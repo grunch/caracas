@@ -159,6 +159,37 @@ en la máscara de calles de 1936 (desde la plaza hacia afuera, ajustadas al cruc
 cada manzana se parte en cuatro solares y en cada "casa" va una casa de un piso, de 8 m de
 fondo, sobre la calle del norte o la del sur, con el corral atrás.
 
+### Épocas: desde cuándo existe cada casa (`epocas.py`)
+
+Después de los calces y de `epocas_1578.py`:
+
+```sh
+$PY tools/geo/epocas.py
+# → fuentes/derivados/epocas/ciudad-epocas.json (ciudad-1936.json + casas de 1578 + "vida"),
+#   crece.json, crece.png, qa-<año>.jpg; copia crece.json a public/datos/ y crece.png a public/plano/
+node tools/empacar-ciudad.mjs fuentes/derivados/epocas/ciudad-epocas.json   # ciudad.pak con la parte vida
+```
+
+En cada plano calzado se segmenta lo edificado por color, con un perfil por plano en
+`tools/geo/epocas/epocas.json`: rojo en 1772, rayado en 1843, durazno en 1889, gris en 1911.
+Después se aplica una apertura para borrar vías y marcos, un cierre para tapar rótulos y se quitan
+las manchas chicas y las componentes angostas; la máscara se ensancha unos metros para absorber el
+error del calce.
+
+Cada huella se mide entera, aunque otro techo la pise (los polígonos del vectorizador pueden
+encimarse). Una casa "está" en una época cuando al menos la mitad (≥ 50 %, `umbral` de
+`epocas.json`) de su huella cae en lo edificado de esa época.
+
+- **Casas de 1936**: nacen en la primera época (1772…1911) desde la cual están en esa época y en
+  todas las siguientes; si no están en 1911, nacen en 1936. No mueren.
+- **Casas de 1578** (nacen en 1578): una casa de 1936 les pasa la posta si, ella sola, cubre al
+  menos el 30 % (`PISADA_MINIMA`) de la huella de la de 1578. Si hay varias, gana la que nace
+  primero: la de 1578 muere en esa época. Si ninguna llega al 30 %, muere en la primera época
+  (1772…1911) en que su lugar no está edificado (< 50 %); si sigue edificado hasta 1911, muere
+  en 1936.
+
+Los años de la línea de tiempo son 1578 · 1772 · 1843 · 1889 · 1911 · 1936.
+
 Los residuos LOO que se reportan (metros sobre 1936) mezclan el error del calce con el del dibujo
 original: un plano 1:10.000 tiene ~10 m por milímetro de dibujo.
 
