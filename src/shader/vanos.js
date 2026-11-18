@@ -83,13 +83,12 @@ export const GLSL_VANOS = /* glsl */ `
     return vec3(0.5 * (m.alfeizar + m.dintel), min(m.medio, tope), 0.5 * (m.dintel - m.alfeizar));
   }
 
-  /** El marco del vano y lo que lleva encima: liso en las republicanas y las quintas; con guardapolvo
-   *  (frontón bajo) en las ventanas guzmancistas y públicas; con dintel y clave en las eclécticas; la
-   *  portada de cal alrededor de la puerta colonial. Las modernas, las orillas y los ranchos, sin marco. */
+  /** El marco del vano y lo que lleva encima: liso en las quintas; con guardapolvo (frontón bajo) en las
+   *  ventanas guzmancistas y públicas; con dintel y clave en las eclécticas. Las coloniales, las republicanas, las
+   *  modernas, las orillas y los ranchos, sin marco (en la vista de 1812 los muros son lisos). */
   void marco(inout vec3 c, inout float k, float tipo, float estilo, vec2 q, vec2 e, float w) {
     float g = 0.0;
-    if (es(estilo, ESTILO_COLONIAL)) g = es(tipo, PUERTA) ? 0.3 : 0.0;
-    else if (es(estilo, ESTILO_REPUBLICANO) || es(estilo, ESTILO_QUINTA)) g = 0.1;
+    if (es(estilo, ESTILO_QUINTA)) g = 0.1;
     else if (es(estilo, ESTILO_GUZMANCISTA) || es(estilo, ESTILO_ECLECTICO) || es(estilo, ESTILO_PUBLICO)) g = 0.15;
     if (g <= 0.0) return;
     vec3 claro = c * 1.1 + 0.03;

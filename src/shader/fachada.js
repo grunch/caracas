@@ -78,8 +78,9 @@ export const GLSL_FACHADA = /* glsl */ `
    *  balaustrada o pretil) en lo alto de la pared. */
   struct Medidas { float pano; float medio; float alfeizar; float dintel; float puertaMedio; float puertaAlto; float ciegos; float remate; };
   Medidas medidas(float estilo) {
-    if (es(estilo, ESTILO_COLONIAL)) return Medidas(5.2, 0.75, 0.45, 2.75, 1.15, 3.2, 0.35, 0.55);
-    if (es(estilo, ESTILO_REPUBLICANO)) return Medidas(3.6, 0.6, 0.85, 2.95, 0.75, 3.1, 0.15, 0.6);
+    // colonial y republicano, como en la vista de 1812: muro liso, pocas ventanas chicas y altas, puerta grande
+    if (es(estilo, ESTILO_COLONIAL)) return Medidas(6.0, 0.5, 1.1, 2.6, 1.15, 3.2, 0.55, 0.45);
+    if (es(estilo, ESTILO_REPUBLICANO)) return Medidas(4.2, 0.55, 1.0, 2.8, 0.85, 3.1, 0.35, 0.35);
     if (es(estilo, ESTILO_GUZMANCISTA)) return Medidas(3.4, 0.55, 0.6, 2.6, 0.7, 3.0, 0.1, 1.05);
     if (es(estilo, ESTILO_ECLECTICO)) return Medidas(3.3, 0.6, 0.75, 2.75, 0.75, 3.05, 0.1, 1.0);
     if (es(estilo, ESTILO_MODERNO)) return Medidas(4.4, 1.6, 0.95, 2.55, 0.9, 2.9, 0.05, 0.8);
