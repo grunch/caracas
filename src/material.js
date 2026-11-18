@@ -3,8 +3,8 @@
  * - La ola: cada casa sube cuando el frente, que sale de la plaza, la alcanza (desfase por semilla).
  * - Tinta (uColor = 0): el techo y el suelo son el propio plano; las paredes, papel.
  * - Color (uColor = 1): el suelo se pinta según la segmentación (uSuelo: R agua · G vegetación ·
- *   B edificado · A manzana) con el dibujo del plano tenue debajo; techos de teja criolla y
- *   paredes de cal en sus tonos de siempre.
+ *   B edificado · A manzana) con el dibujo del plano tenue debajo, sin sus rótulos (uRotulos);
+ *   techos de teja criolla y paredes de cal en sus tonos de siempre.
  * aInfo = (distancia a la plaza, semilla, estilo, pisos); pisos = 0 marca el suelo.
  */
 import { MeshLambertMaterial, Vector2, Vector4, DataTexture } from 'three'
@@ -27,6 +27,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   // lo que es igual en toda la casa (o en toda la pared) va sin interpolar: interpolado, la semilla
   // y el largo tiemblan en la última cifra y azar() lo vuelve ruido de píxel a píxel
   flat varying vec4 vInfo; flat varying float vLargo;
+  varying vec2 vTerreno;
   ${GLSL_AZAR}
   ${GLSL_EPOCAS}
   ${GLSL_CRECE}
@@ -58,6 +59,8 @@ const FRAGMENTO_COLOR = /* glsl */ `
 
 /** 1×1 blanco: en "desde cuándo", edificado desde la primera época (no recorta nada). */
 const TODO_EDIFICADO = Object.assign(new DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1), { needsUpdate: true })
+/** 1×1 en cero: sin rótulos, hasta que llegue su máscara (el plano se marca entero). */
+const SIN_ROTULOS = Object.assign(new DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1), { needsUpdate: true })
 /** 1×1 negro: lo de hoy, hasta que lleguen sus texturas (no estampa nada). */
 const SIN_HOY = Object.assign(new DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1), { needsUpdate: true })
 
@@ -71,6 +74,7 @@ export function crearMaterialCiudad({
     uColor: { value: 0 }, // 0 tinta · 1 color
     uMapa: { value: mapa },
     uSuelo: { value: suelo },
+    uRotulos: { value: SIN_ROTULOS }, // rótulos del plano de 1936 (src/shader/suelo.js)
     uHoja: { value: new Vector2(plano.ancho, plano.alto) },
     uPlaza: { value: new Vector2(plano.plaza[0], plano.plaza[1]) },
     uMetro: { value: metro },
@@ -124,6 +128,7 @@ function parchearRelieveVertex(s) {
     .replace('#include <beginnormal_vertex>', `#include <beginnormal_vertex>
       if (aInfo.w < 0.5) objectNormal = normalSuelo(position.xz);`)
     .replace('#include <project_vertex>', `vBase = aInfo.w < 0.5 ? sueloEn(position.xz) : sueloEn(aAncla);
+      vTerreno = aInfo.w < 0.5 ? terrenoEn(position.xz) : vec2(0.0);
       transformed.y += aInfo.w < 0.5 ? sueloEn(position.xz)
         : apoyoCasa(aAncla, transformed.xz, position.y < 0.01);
       #include <project_vertex>`)

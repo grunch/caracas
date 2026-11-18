@@ -53,7 +53,9 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T33 | Techos de teja de verdad: dos y cuatro aguas como geometría, con alero; azoteas en los públicos y los modernos | T31 | el perfil de tejados se ve de costado | ⏳ |
 | T34 | Árboles 3D desde `arboles.json` (5.926) y los patios con vegetación, en color | — | árboles en plazas, patios y quebradas | ✅ #19 |
 | T35 | Luz y acabado: sombras, luz tibia y sombra azulada, bruma, contorno por profundidad y grano de papel en tinta | — | el look de grabado de `specs/04` | ⏳ |
+| T36 | **Color sin rótulos**: máscara de la tinta del plano que es letra, cifra o símbolo (`tools/geo/rotulos.py` → `plano/rotulos.webp`); en color, ahí el plano no se marca | T07 | en color no se leen "PALACIO FEDERAL", las cotas ni las letras de parroquia; los bordes de manzana siguen | 🔄 #28 |
 | T37 | Lotes rectos: cada manzana se parte en solares rectangulares perpendiculares a su calle (antes, cuñas que se juntaban en el centro) | T04 | en el centro los techos son tiras rectas, sin abanicos | 🔄 #26 |
+| T38 | **El valle antes de la ciudad**: lo urbanizado por época (`crece.png` G) y el monte (B); en color, lo que la época todavía no urbanizó es campo sin el dibujo del plano; árboles silvestres que mueren al urbanizarse su lugar; plazas sin jardín ni árboles antes de 1889 | T24, T34 | en 1578 se ve una aldea de 25 manzanas en un valle de sabana, con sus quebradas, el Guaire y el Ávila, sin manzanas ni calles fantasma | 🔄 #27 |
 
 ## Fase 4 · Contenido
 

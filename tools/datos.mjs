@@ -91,7 +91,9 @@ const PASOS = [
     entradas: ['tools/geo/epocas/epocas.json', `${D}/ciudad-1936.json`, 'fuentes/derivados/1578/ciudad-1578.json',
       ...CALCES.map(([año]) => `fuentes/derivados/${año}/calzado.tif`)],
     salidas: [`${E}/ciudad-epocas.json`, `${E}/crece.json`, 'public/datos/crece.json', 'public/plano/crece.png'],
-    codigo: GEO('epocas', 'calce_correlacion', 'vectorizar'),
+    // relieve.bin (tools/geo/relieve.py, fuera de este pipeline) da las cuestas y la altura del monte
+    opcionales: ['public/datos/relieve.bin'],
+    codigo: GEO('epocas', 'valle', 'calce_correlacion', 'vectorizar', 'segmentar_clases'),
     cmd: () => [PY, 'tools/geo/epocas.py'],
   },
   {
@@ -120,18 +122,36 @@ const PASOS = [
     // crece.png/crece.json (tools/geo/epocas.py, fuera de este pipeline) dan la época de cada árbol si
     // están; sin ellos todos nacen en la primera: son opcionales (si aparecen o cambian, el paso se rehace)
     id: 'arboles',
-    entradas: [`${D}/segmentacion/mosaico/arboles.json`, `${D}/segmentacion/mosaico/jardines.json`, `${D}/mosaico.json`, 'public/datos/ciudad.pak'],
+    // y el monte del valle (los árboles silvestres) sale de crece.png (G y B) y de la segmentación de 1936
+    entradas: [`${D}/segmentacion/mosaico/arboles.json`, `${D}/segmentacion/mosaico/jardines.json`, `${D}/mosaico.json`,
+      'public/datos/ciudad.pak', `${D}/segmentacion/mosaico/clases-costura.png`],
     opcionales: ['public/plano/crece.png', 'public/datos/crece.json'],
     salidas: ['public/datos/arboles.bin'],
-    codigo: ['tools/arboles.mjs', 'tools/arboles-lib.mjs', 'src/pak.js', 'src/epocas.js'],
+    codigo: ['tools/arboles.mjs', 'tools/arboles-lib.mjs', 'tools/silvestres-lib.mjs', 'src/pak.js', 'src/epocas.js'],
     cmd: () => ['node', 'tools/arboles.mjs', `${D}/segmentacion/mosaico/arboles.json`, `${D}/mosaico.json`,
-      `${D}/segmentacion/mosaico/jardines.json`],
+      `${D}/segmentacion/mosaico/jardines.json`, `${D}/segmentacion/mosaico/clases-costura.png`],
   },
   {
     id: 'suelo', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`],
     salidas: ['public/plano/suelo.webp', 'public/plano/suelo-2k.webp'],
     codigo: ['tools/suelo.mjs', 'tools/suelo-lib.mjs'],
     cmd: () => ['node', 'tools/suelo.mjs', `${D}/segmentacion/mosaico/clases-costura.png`],
+  },
+  {
+    // lo que en el plano es letra, cifra o símbolo y no dibujo: en modo color no se marca
+    id: 'rotulos', entradas: [`${D}/mosaico-costura.tif`, `${D}/mosaico.json`, 'tools/geo/paleta-1936.json'],
+    salidas: [`${D}/segmentacion/mosaico/rotulos.png`],
+    codigo: GEO('rotulos', 'segmentar', 'segmentar_color', 'segmentar_morfologia', 'segmentar_parametros'),
+    cmd: async () => {
+      const { metro } = await leerJson(`${D}/mosaico.json`)
+      return [PY, 'tools/geo/rotulos.py', `${D}/mosaico-costura.tif`, `${D}/segmentacion/mosaico/rotulos.png`, '--escala', String(metro)]
+    },
+  },
+  {
+    id: 'rotulos-textura', entradas: [`${D}/segmentacion/mosaico/rotulos.png`],
+    salidas: ['public/plano/rotulos.webp', 'public/plano/rotulos-2k.webp'],
+    codigo: ['tools/rotulos.mjs', 'tools/rotulos-lib.mjs'],
+    cmd: () => ['node', 'tools/rotulos.mjs', `${D}/segmentacion/mosaico/rotulos.png`],
   },
   {
     id: 'plano', entradas: [`${D}/mosaico-costura.tif`, `${D}/mosaico.json`],

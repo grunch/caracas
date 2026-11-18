@@ -117,11 +117,15 @@ Los árboles 3D (`src/arboles.js`), sin cabecera: registros de **4 × Uint16 lit
 | 0 | `x` | centro de la copa en **píxeles del mosaico de 1936**, redondeado (0 … 18599; 1 px = 0,5 m) |
 | 1 | `y` | ídem (0 … 14799, crece hacia el sur) |
 | 2 | `radio` | radio de la copa en **decímetros** |
-| 3 | `nace` | primera época (0 = 1578 … 5 = 1936, como `vida`) en que el árbol se ve; no muere |
+| 3 | `vida` | `nace + 8·muere + 64·silvestre`: `nace` y `muere` son épocas (0 = 1578 … 5 = 1936), como la `vida` de `ciudad.pak` (`muere` = primera época en que ya no está; 0 = no muere); `silvestre` = 1 en los árboles del monte |
 
 Lo escribe `tools/arboles.mjs` (paso `arboles` de `npm run datos`) desde `arboles.json` (los símbolos de árbol que detecta `segmentar_arboles.py`) más `jardines.json` (`tools/geo/jardines.py`: los canteros de plazas y patios, que el plano pinta como manchas verdes sin símbolo, con un árbol cada ~13 m). La semilla de cada árbol (forma, giro, tono) sale de `x`, `y` en el visor.
 
 `nace`: un árbol del plano fuera de lo edificado (quebradas, haciendas, cerros: `crece.png` dice "nunca") existió siempre (0); en la ciudad, nace con su celda de `crece.png`. Un árbol de jardín nace con lo último que se edificó a 24 m o menos (el patio aparece con su casa). Y su tronco (el centro de la copa) nunca queda dentro de una casa en pie; la copa sí puede asomar sobre el techo del vecino, como un árbol de patio o de calle: si su copa (medio radio de margen) pisa un techo de `ciudad.pak` que después desaparece (`muere > 0`, las casas de 1578), espera a que muera; si el centro de la copa cae bajo un techo que no muere (`muere = 0`, nazca cuando nazca), el árbol se descarta (19 de 6.361). Sin `crece.png` ni `ciudad.pak`, todos nacen en 0 y no se descarta ninguno.
+
+Hasta Guzmán Blanco las plazas eran de tierra (la Plaza Mayor fue mercado hasta 1874) y las calles no tenían árboles: un árbol del plano que está en lo urbanizado antes de 1889 (`crece.png` G < 3) y en una plaza o una calle (desde su centro, en 8 rumbos, lo primero de ciudad que se encuentra en la segmentación de 1936 es calle en 6 o más) no nace antes de la época 3 (1889). Los de los patios no cambian.
+
+**Árboles silvestres** (`silvestre = 1`, `tools/silvestres-lib.mjs`): el monte del valle antes de la ciudad. Nacen en 0 y mueren cuando su lugar se urbaniza (`muere` = la etapa de `crece.png` G); fuera de la ciudad de 1936 no mueren (`muere = 0`), salvo donde el plano de 1936 dibuja un sembradío, un camino o una casa suelta (clases cultivo, calle, patio, edificado: mueren en 5). No hay en lo ya urbanizado en 1578, en el agua ni fuera del marco. Se plantan con una grilla de 19,5 m con un candidato sacudido por celda (azar reproducible, semilla 1578, propio de cada celda), que queda con probabilidad `monte × ralo`: `monte` es `crece.png` B y `ralo` baja de 1 a 0,2 entre 2 y 3,8 km de la plaza (de cerca no se ve el valle entero y de lejos un árbol es menos que un píxel); no se plantan a menos de 6 m de un árbol del plano. Radio de 1,6 a 6,5 m, mayor en el monte cerrado. El visor solo los muestra en color (en tinta el plano queda como está). Hoy: 6.342 del plano + 25.934 silvestres = 32.276 (258 KB). Un visor anterior a este formato leería `vida` como `nace`: los silvestres le quedarían sin nacer.
 
 ### `datos/relieve.bin`
 `Uint16[ w, h, alturas… ]`, con las alturas en **decímetros**. Se sube como textura half‑float (canal R) y el vertex shader la muestrea.
@@ -177,7 +181,13 @@ se apoya en la esquina noroeste del mosaico de 1936: el píxel (fila i, columna 
 [j·8, (j+1)·8) m al este y [i·8, (i+1)·8) m al sur. Tiene ⌈ancho/8⌉ × ⌈alto/8⌉ píxeles; si el
 mosaico no mide un múltiplo de 8 m, la última columna y la última fila son parciales (se calculan con
 los puntos que caen dentro) y el PNG sobra unos metros al este y al sur, así que se coloca con
-`celda_m` y no estirándolo al mosaico. En R, desde qué época está edificado cada punto en esa época y en todas las siguientes, con la codificación "desde cuándo" de abajo (E = 6); G y B quedan en 0.
+`celda_m` y no estirándolo al mosaico. En R, desde qué época está edificado cada punto en esa época y en todas las siguientes, con la codificación "desde cuándo" de abajo (E = 6).
+
+En **G**, desde qué época está **urbanizado** (misma codificación; `tools/geo/valle.py`): no solo las casas sino las manzanas con sus calles, plazas y solares. Lo urbanizado de cada época es su máscara de lo edificado con un cierre de 25 m (une las manzanas a través de las calles), los huecos de hasta 4 ha rellenos (plazas, corazones de manzana) y 10 m de holgura (la calle del borde); en 1578, la envolvente convexa de los 100 solares de Pimentel (las 25 manzanas, con calles y plaza) más la holgura; en 1936, lo mismo sobre las clases edificado, edificio público y patio. Es monótono (la etapa de un punto es la primera época en que es ciudad: una vez ciudad, siempre ciudad), la referencia es 1936 (lo que ahí no es ciudad no lo fue nunca: los marcos y cartelas de los planos viejos no urbanizan el campo) y nunca es posterior a R. Parámetros en `tools/geo/epocas/epocas.json` (`urbanizado`). El visor lo usa en color para pintar como campo, sin el dibujo del plano, lo que la época todavía no urbanizó (`src/shader/valle.js`).
+
+En **B**, el **monte**: cuánta vegetación silvestre le toca a cada punto (0–255, no depende de la época). El valle es una sabana abierta (0,10) con manchones de monte (ruido reproducible, semilla en `epocas.json`), monte tupido junto al agua (0,92 en la ribera; cae con la distancia, a razón de 1/e cada 45 m), ralo en las cuestas (pendiente de 0,18 a 0,55, con `datos/relieve.bin` si está) y algo más cerrado en lo alto del Ávila (desde 1.400 m s. n. m.); 0 en el agua y fuera del plano. Lo leen el visor (el tono del campo) y `tools/arboles.mjs` (dónde van los árboles silvestres).
+
+El visor carga `crece.png` **sin mipmaps** (son etapas codificadas: promediadas, el borde de la ciudad cambiaría de época a lo lejos).
 
 ### Texturas (`plano/*.webp`)
 | archivo | uso |
@@ -185,6 +195,7 @@ los puntos que caen dentro) y el PNG sobra unos metros al este y al sur, así qu
 | `primero.webp` 1024, `chico.webp` 2048, `medio-4k.webp`, `medio.webp` 8192, `f/{i}-{j}.webp` 3072 | el escaneo, en LOD |
 | `<año>/chico.webp` 2048, `<año>/medio.webp` 4096, `<año>/grande.webp` 8192 + `epocas.json` | el plano calzado de cada época, con alfa (ver abajo) |
 | `suelo.webp` / `suelo-2k.webp` | máscara RGB: **R río · G patio · B edificado** (del plano base) |
+| `rotulos.webp` 4096 / `rotulos-2k.webp` | *Caracas:* un canal, sin pérdida: **cuánto del texel es rótulo** del plano de 1936 (nombres, cotas, letras de parroquia, punteado del tranvía). En color, ahí el dibujo del plano no se marca (`tools/geo/rotulos.py` → `tools/rotulos-lib.mjs`) |
 | `calles.webp` / `-2k` | R desde cuándo hay piedra, G desde cuándo es lisa (madera/asfalto), B cuánto del punto es calle |
 | `crece.webp` / `-2k` | por punto, "desde qué etapa": R urbanizado/ganado al río, G fondos, B edificado |
 | `despeje.webp` / `-2k` | R demolido (avenida/plaza abierta), G verde nuevo, B calzada de avenidas nuevas |

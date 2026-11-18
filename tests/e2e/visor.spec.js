@@ -34,6 +34,18 @@ test('la C alterna entre tinta y color', async ({ page }) => {
   await page.waitForFunction(() => window.lab.ciudad.U.uColor.value === 0)
 })
 
+test('al prender el color se pide la máscara de rótulos del plano, y sin ella el color anda igual', async ({ page }) => {
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  // hasta entonces no se baja: en tinta el plano se ve entero
+  const pedido = page.waitForRequest((r) => /\/plano\/rotulos(-2k)?\.webp$/.test(new URL(r.url()).pathname))
+  await page.keyboard.press('KeyC')
+  await pedido
+  // la ciudad de demostración de CI no trae la máscara: queda la de respaldo o la real, nunca nada
+  await page.waitForFunction(() => window.lab.ciudad.U.uColor.value === 1)
+  expect(await page.evaluate(() => window.lab.ciudad.U.uRotulos.value?.isTexture === true)).toBe(true)
+})
+
 test('Espacio sobre un botón con foco activa ese botón, no levanta la ciudad', async ({ page }) => {
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
