@@ -18,6 +18,7 @@ Se toma **un plano topográfico antiguo escaneado en altísima resolución** (do
 | [04-render-y-shaders.md](04-render-y-shaders.md) | El material único, la ola, tinta⇄color, fachadas y techos procedurales, relieve, contorno |
 | [05-epocas-hitos-modos.md](05-epocas-hitos-modos.md) | Línea de tiempo, edificios con nombre y fichas, "lo de hoy", buscador, caminar/volar/manejar |
 | [06-adaptacion-caracas.md](06-adaptacion-caracas.md) | Qué cambia para Caracas, fuentes a buscar, plan por fases, riesgos |
+| [07-plan-de-implementacion.md](07-plan-de-implementacion.md) | **Plan vivo**: tareas (un PR cada una), dependencias, criterios y estado |
 
 ## Resumen técnico
 
