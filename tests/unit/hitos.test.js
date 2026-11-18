@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest'
 import { Mesh } from 'three'
 import { HITOS, validarHitos, construirHitos, geometriaHitos, crearHitos, suprimirTechos, zonasDeSupresion } from '../../src/hitos.js'
-import { PARTES, tramosSinHuecos, azarDe } from '../../src/hitos/partes.js'
+import { PARTES, parteDe, tramosSinHuecos, azarDe } from '../../src/hitos/partes.js'
 import { rectanguloPx, METRO, EJE_DAMERO } from '../../src/hitos/datos/marco.js'
 import { crearMaterialHitos } from '../../src/hitos/material.js'
 import { crearLienzo, MAT } from '../../src/hitos/lienzo.js'
@@ -75,6 +75,7 @@ describe('validarHitos', () => {
     ['muere antes de nacer', [{ ...valido, nace: 3, muere: 2 }], /vida inválida/],
     ['época que no existe', [{ ...valido, nace: 6 }], /vida inválida/],
     ['parte desconocida', [{ ...valido, partes: [{ tipo: 'platillo' }] }], /desconocido/],
+    ['parte con nombre heredado de Object', [{ ...valido, partes: [{ tipo: 'constructor' }] }], /desconocido/],
     ['parte con vida inválida', [{ ...valido, partes: [{ tipo: 'faroles', nace: 4, muere: 4 }] }], /parte 0: vida inválida/],
     ['sin partes', [{ ...valido, partes: [] }], /sin partes/],
     ['polígono fuera de la hoja', [{ ...valido, suprime: [[[0, 0], [10, 0], [10, 99999]]] }], /polígono/],
@@ -139,6 +140,9 @@ describe('construirHitos', () => {
 
   test('una parte de tipo desconocido es un error', () => {
     expect(() => construirHitos([{ ...valido, partes: [{ tipo: 'platillo' }] }], coords)).toThrow(/desconocido/)
+    expect(() => construirHitos([{ ...valido, partes: [{ tipo: 'constructor' }] }], coords)).toThrow(/desconocido/)
+    expect(parteDe('toString')).toBeUndefined()
+    expect(parteDe('faroles')).toBe(PARTES.faroles)
   })
 })
 
@@ -225,9 +229,11 @@ describe('las partes', () => {
     expect(a.vertices).toBeGreaterThan(1000)
     expect([...a.posiciones.slice(0, 300)]).toEqual([...b.posiciones.slice(0, 300)])
     expect(materiales(a).has(MAT.LONA)).toBe(true)
-    const apoyos = new Set()
-    for (let i = 0; i < a.vertices; i++) apoyos.add(a.anclas[i * 4 + 2])
-    expect([...apoyos].every((x) => Math.abs(x) > 2.5)).toBe(true)
+    // el pasillo (6 m) queda libre de toldos enteros, no solo de sus centros
+    for (let i = 0; i < a.vertices; i++) expect(Math.abs(a.posiciones[i * 3])).toBeGreaterThan(3)
+    const justo = dibujar('puestos', { ancho: 10, fondo: 20, paso: 4, pasillo: 6, falta: 0 })
+    for (let i = 0; i < justo.vertices; i++) expect(Math.abs(justo.posiciones[i * 3])).toBeGreaterThan(3)
+    expect(() => dibujar('puestos', { ancho: 60, fondo: 50, paso: 0 })).toThrow(/paso/)
   })
 })
 

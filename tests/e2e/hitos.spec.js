@@ -100,9 +100,12 @@ test('con la ciudad real, las casas genéricas no pisan la Plaza Bolívar', asyn
     const g = window.lab.scene.children.find((m) => m.geometry?.attributes?.aPared).geometry
     const { aAncla, aVida } = g.attributes
     let n = 0
-    // el recuadro de la plaza (86 × 82 m) alrededor de su centro, con margen: ningún techo con vida tiene el ancla ahí
+    // el recuadro de la plaza (86 × 82 m) alrededor de su centro, con margen: ningún techo que viva con ella tiene el ancla ahí
     for (let i = 0; i < aAncla.count; i++) {
-      if (Math.abs(aAncla.getX(i) - 4) < 36 && Math.abs(aAncla.getY(i) - 2.5) < 34 && aVida.getX(i) < 6) n++
+      // la plaza es hito desde la época 1: cuenta el techo que vive en alguna época de 1 a 5
+      const [nace, muere] = [aVida.getX(i), aVida.getY(i)]
+      const viveConLaPlaza = nace < 6 && (muere === 0 || muere > 1)
+      if (Math.abs(aAncla.getX(i) - 4) < 36 && Math.abs(aAncla.getY(i) - 2.5) < 34 && viveConLaPlaza) n++
     }
     return n
   })

@@ -11,7 +11,7 @@
  */
 import { BufferGeometry, BufferAttribute, Mesh } from 'three'
 import { crearLienzo } from './hitos/lienzo.js'
-import { PARTES } from './hitos/partes.js'
+import { parteDe } from './hitos/partes.js'
 import { crearMaterialHitos } from './hitos/material.js'
 import { METRO } from './hitos/datos/marco.js'
 import { plazaBolivar } from './hitos/datos/plaza-bolivar.js'
@@ -51,7 +51,7 @@ export function validarHitos(hitos, plano) {
     }
     if (!h.partes?.length) problemas.push(`${de}: sin partes`)
     for (const [i, parte] of (h.partes ?? []).entries()) {
-      if (!PARTES[parte.tipo]) problemas.push(`${de}: parte ${i} de tipo desconocido "${parte.tipo}"`)
+      if (!parteDe(parte.tipo)) problemas.push(`${de}: parte ${i} de tipo desconocido "${parte.tipo}"`)
       vida(`${de} · parte ${i}`, { nace: parte.nace ?? h.nace, muere: parte.muere ?? h.muere })
     }
   }
@@ -67,7 +67,7 @@ export function construirHitos(hitos, coords) {
     const desde = lienzo.vertices
     const p = lienzo.hito({ origen: coords.aMundo(h.x, h.y), eje: h.eje, nace: h.nace ?? 0, muere: h.muere ?? 0, semilla: i + 1 })
     for (const { tipo, nace, muere, ...medidas } of h.partes) {
-      const dibujar = PARTES[tipo]
+      const dibujar = parteDe(tipo)
       if (!dibujar) throw new Error(`hito ${h.id}: parte de tipo desconocido "${tipo}"`)
       dibujar(p.con({ nace, muere }), medidas)
     }

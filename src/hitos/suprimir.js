@@ -19,12 +19,15 @@ export function puntoEnPoligono([x, y], poligono) {
   return dentro
 }
 
+const centroDe = (poligono) => [0, 1].map((k) => poligono.reduce((s, v) => s + v[k], 0) / poligono.length)
 const giro = ([ax, ay], [bx, by], [cx, cy]) => (bx - ax) * (cy - ay) - (by - ay) * (cx - ax)
 const seCruzan = (a, b, c, d) => giro(a, b, c) * giro(a, b, d) < 0 && giro(c, d, a) * giro(c, d, b) < 0
 
 /** ¿Se pisan dos polígonos simples? (un vértice de uno dentro del otro, o dos lados que se cruzan) */
 export function seSolapan(p, q) {
   if (p.some((v) => puntoEnPoligono(v, q)) || q.some((v) => puntoEnPoligono(v, p))) return true
+  // calcados uno sobre el otro, los vértices caen en el borde y los lados no se cruzan: decide el centro
+  if (puntoEnPoligono(centroDe(p), q) || puntoEnPoligono(centroDe(q), p)) return true
   for (let i = 0; i < p.length; i++) {
     for (let j = 0; j < q.length; j++) {
       if (seCruzan(p[i], p[(i + 1) % p.length], q[j], q[(j + 1) % q.length])) return true
