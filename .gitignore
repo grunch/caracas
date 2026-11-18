@@ -15,3 +15,4 @@ public/datos/*.bin
 .venv/
 __pycache__/
 fuentes/derivados/
+.claude/worktrees/
