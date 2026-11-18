@@ -285,3 +285,9 @@ Qué implica: en 1936 los costados de las plazas del centro llevan **dos pisos c
 y balcón corrido arriba** (el estilo ecléctico de comercio, para T32); **rieles y cables de tranvía**
 en las calles principales (dato para T62 y para el suelo de las calles); árboles de plaza de copa
 grande, mayores que los de patio.
+
+## Fuera del período (no guardadas)
+
+- **Plaza Miranda y av. Baralt, años 50–60** (`1955-pinterest-plaza-miranda-av-baralt`, solo ficha):
+  foto de prensa con **derechos reservados de El Nacional** y posterior a 1936. Muestra la ciudad ya
+  transformada (avenida ensanchada, edificios modernos, tráfico). No guía ninguna época del sitio.
