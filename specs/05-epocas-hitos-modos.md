@@ -39,7 +39,8 @@ las plazas de cada época; cada hito con su ancla en el relieve.
 - **Partes** (`src/hitos/partes.js`): cada `tipo` tiene su constructor; una parte puede tener su propia vida
   (`nace`, `muere`), y así un mismo hito cambia con las épocas. Hoy: `terraza`, `verjaPerimetral`,
   `escalinatas`, `faroles`, `estatuaEcuestre`, `galeriasDeMercado`, `puestos`; `cuerpo`, `torre`,
-  `fachadaBarroca`, `portadaLateral`, `ventanas`, `cupula`, `iglesia`.
+  `fachadaBarroca`, `portadaLateral`, `ventanas`, `cupula`, `iglesia`; `palacio`, `portico`,
+  `remateConEscudo`, `frenteNeogotico`.
 - **Piezas** (`src/hitos/piezas.js`) y **objetos** (`src/hitos/objetos.js`): caja, tronco (cilindro, ochavo,
   cono), cúpula, barra, bulto, tejado (una, dos o cuatro aguas), cuerpo con tejado, arquería calada, vano y
   disco pintados, frontón triangular y de volutas, columna, cornisa, escalinata, verja, losa y zócalo; con
@@ -90,6 +91,20 @@ nave + fachada `clasica`, `neogotica` o `barroca` + torres con remate de `cupuli
 | Panteón Nacional | 1889 | neogótico de dos torres con aguja | la reforma de ~1930 (el plano de 1936 dibuja tres torres) |
 
 La Candelaria no se ubicó con confianza en el plano: queda pendiente.
+
+**Los edificios civiles** (`src/hitos/datos/civiles.js`, con `src/hitos/palacios.js`: palacio de crujías
+alrededor de un patio con cubierta de `azotea`, `teja` o `mansarda`, pórtico de columnas, remate con escudo y
+frente neogótico):
+| Hito | Desde | Rasgos | Qué es incierto |
+|---|---|---|---|
+| Casa Amarilla | 1889 | palacio de esquina de dos pisos, balcones, cornisa y remate central con escudo y asta, frente al lado oeste de la plaza | el grabado de ~1875 no tiene fecha firme ni color |
+| Capitolio | 1889 | cuatro alas alrededor del jardín, pabellones de esquina, pórticos al norte y al sur, cúpula dorada en el ala norte (donde el plano dibuja el óvalo) | sin imagen de referencia: alzado genérico |
+| Universidad | 1889 | frente neogótico hacia el Capitolio: ventanas ojivales, contrafuertes con pináculo, crestería y gablete central con aguja | que la fachada de la foto de 1880 sea esta |
+| Miraflores | 1911 | palacio de mansardas de pizarra con pabellones | planta simplificada; si ya estaba en 1889 |
+
+Pendientes, por no ubicarlos con confianza en el plano de 1936 o por falta de referencia: Teatro Municipal
+(el plano rotula el Teatro Nacional en Los Cipreses, que es otro), Hotel Majestic, el monumento de El
+Calvario, Caño Amarillo y el Mercado Principal.
 
 Lo que falta verificar va en `verificar` de cada definición (fechas, orientación de la estatua, galerías
 con arcos a los dos lados…). Límite conocido: la plaza real es una explanada a nivel, hundida respecto de
