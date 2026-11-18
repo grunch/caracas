@@ -133,6 +133,20 @@ Cómo funciona:
    sin reajustar n veces) mayor que `umbral_residuo_m`; se reajusta el TPS (`tps.py`, con
    `suavizado`) en los dos sentidos.
 
+### 1578: el esquema de Pimentel (`epocas_1578.py`)
+
+```sh
+$PY tools/geo/epocas_1578.py
+# → fuentes/derivados/1578/ciudad-1578.json (65 casas + los 100 solares con su estado) y qa-1578.jpg
+```
+
+`tools/geo/epocas/1578-pimentel.json` es la lectura a mano del dibujo: 5 × 5 manzanas con la
+plaza al centro y 4 solares cada una (casa, vacío, iglesia, cabildo, convento, plaza); cada
+manzana lleva su índice real desde la Plaza Bolívar. Las esquinas de esas 25 manzanas se buscan
+en la máscara de calles de 1936 (desde la plaza hacia afuera, ajustadas al cruce más cercano);
+cada manzana se parte en cuatro solares y en cada "casa" va una casa de un piso, de 8 m de
+fondo, sobre la calle del norte o la del sur, con el corral atrás.
+
 Los residuos LOO que se reportan (metros sobre 1936) mezclan el error del calce con el del dibujo
 original: un plano 1:10.000 tiene ~10 m por milímetro de dibujo.
 

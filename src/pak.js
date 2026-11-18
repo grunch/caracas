@@ -2,7 +2,11 @@
  * Lector del contenedor .pak (ver specs/02): u32 LE n · cabecera JSON de n bytes ·
  * partes con "byte shuffle" por registro. Recibe el buffer YA descomprimido.
  */
-export function decodificarPak(buffer, tipos) {
+/**
+ * `avisar` recibe un mensaje por cada parte que el visor no conoce: se saltea en vez de fallar, para que
+ * datos generados por una versión más nueva del pipeline no dejen al visor sin ciudad.
+ */
+export function decodificarPak(buffer, tipos, avisar = (m) => console.warn(m)) {
   if (buffer.byteLength < 4) throw new Error('pak: buffer truncado (sin cabecera)')
   const n = new DataView(buffer).getUint32(0, true)
   if (4 + n > buffer.byteLength) throw new Error('pak: buffer truncado (cabecera incompleta)')
@@ -11,7 +15,12 @@ export function decodificarPak(buffer, tipos) {
   let desde = 4 + n
   for (const { nombre, bytes, registro } of partes) {
     const Tipo = tipos[nombre]
-    if (!Tipo) throw new Error(`pak: parte sin tipo conocido: ${nombre}`)
+    if (!Tipo) {
+      if (desde + bytes > buffer.byteLength) throw new Error(`pak: buffer truncado en la parte ${nombre}`)
+      avisar(`pak: se saltea la parte "${nombre}", que este visor no conoce`)
+      desde += bytes
+      continue
+    }
     if (!(registro > 0) || bytes % registro !== 0 || bytes % Tipo.BYTES_PER_ELEMENT !== 0) {
       throw new Error(`pak: ${nombre} tiene un registro inválido (${bytes} bytes, registro ${registro})`)
     }
