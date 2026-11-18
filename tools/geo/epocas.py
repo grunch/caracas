@@ -162,8 +162,9 @@ def muere(fr, nace, umbral):
 def vida_de_1578(ciudad78, etiquetas36, nace36, construido, escala):
     """[[0, muere], …] de las casas de 1578.
 
-    construido: máscaras de las épocas 1..4. Si una casa de 1936 la pisa (≥ PISADA_MINIMA),
-    muere cuando esa nace; si no, en la primera época en que su lugar no está edificado.
+    construido: máscaras de las épocas 1..4. Si casas de 1936 la pisan (cada una ≥ PISADA_MINIMA
+    de su huella), muere cuando nace la primera de ellas; si no, en la primera época en que su
+    lugar no está edificado.
     """
     etiquetas78 = etiquetar_techos(ciudad78, etiquetas36.shape, escala)
     n78 = len(ciudad78["techos"])
@@ -172,9 +173,10 @@ def vida_de_1578(ciudad78, etiquetas36, nace36, construido, escala):
     vida = []
     for k in range(n78):
         bajo = etiquetas36[etiquetas78 == k + 1]
-        pisada = bajo[bajo > 0]
-        if bajo.size and pisada.size / bajo.size >= PISADA_MINIMA:
-            vida.append([0, max(1, int(np.min(nace36[pisada - 1])))])
+        techos, cuantos = np.unique(bajo[bajo > 0], return_counts=True)
+        pisan = techos[cuantos >= PISADA_MINIMA * max(bajo.size, 1)]  # cada una por sí sola
+        if pisan.size:
+            vida.append([0, max(1, int(np.min(nace36[pisan - 1])))])
         else:
             vida.append([0, int(sin_pisar[k])])
     return vida

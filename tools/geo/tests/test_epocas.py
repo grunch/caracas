@@ -146,6 +146,21 @@ def test_vida_de_las_casas_de_1578_pasa_la_posta_a_la_de_1936_que_la_pisa():
     assert vida == [[0, 1], [0, 2]]
 
 
+def test_la_posta_es_solo_de_las_casas_de_1936_que_por_si_solas_pisan_lo_suficiente():
+    # Arrange: una casa de 1578 de 10×10; la de 1772 apenas la roza (1 columna = 10 %),
+    # la de 1936 la cubre en un 60 %
+    c78 = ciudad_de([cuadrado(10, 10, 10)])
+    c36 = ciudad_de([cuadrado(9, 10, 2), cuadrado(14, 10, 6)])
+    etiquetas36 = ep.etiquetar_techos(c36, forma=(40, 40), escala=1.0)
+    construido = [np.ones((40, 40), bool) for _ in range(4)]
+
+    # Act
+    vida = ep.vida_de_1578(c78, etiquetas36, nace36=np.array([1, 5]), construido=construido, escala=1.0)
+
+    # Assert
+    assert vida == [[0, 5]]
+
+
 def test_conteo_de_casas_por_epoca():
     vida = [[0, 0], [1, 0], [0, 1], [3, 5], [5, 0]]
     assert ep.casas_por_epoca(vida, cuantas=6) == [2, 2, 2, 3, 3, 3]
