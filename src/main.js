@@ -204,10 +204,11 @@ function levantar(arriba = olaObjetivo === 0) {
   pedirCuadro(3)
 }
 
-// --- tinta ⇄ color: la máscara de suelo se baja la primera vez que se prende el color ---
+// --- tinta ⇄ color: la máscara de suelo y la de rótulos del plano se bajan la primera vez que se prende el color ---
 const DURACION_COLOR_S = 1.2
 let colorObjetivo = 0
 let sueloPedido = null
+let rotulosPlanoPedidos = null
 function alternarColor(prender = colorObjetivo === 0) {
   colorObjetivo = prender ? 1 : 0
   const boton = document.getElementById('color')
@@ -218,6 +219,10 @@ function alternarColor(prender = colorObjetivo === 0) {
     sueloPedido ??= cargarTextura(liviano ? 'plano/suelo-2k.webp' : 'plano/suelo.webp', false)
       .then((t) => ponerTextura(ciudad.U.uSuelo, t))
       .catch((e) => { sueloPedido = null; console.warn(`suelo: ${e.message}`) })
+    // sin la máscara de rótulos el color anda igual: el plano se marca entero, con sus nombres
+    rotulosPlanoPedidos ??= cargarTextura(liviano ? 'plano/rotulos-2k.webp' : 'plano/rotulos.webp', false)
+      .then((t) => ponerTextura(ciudad.U.uRotulos, t))
+      .catch((e) => { rotulosPlanoPedidos = null; console.warn(`rótulos del plano: ${e.message}`) })
   }
   pedirCuadro(3)
 }

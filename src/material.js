@@ -3,8 +3,8 @@
  * - La ola: cada casa sube cuando el frente, que sale de la plaza, la alcanza (desfase por semilla).
  * - Tinta (uColor = 0): el techo y el suelo son el propio plano; las paredes, papel.
  * - Color (uColor = 1): el suelo se pinta según la segmentación (uSuelo: R agua · G vegetación ·
- *   B edificado · A manzana) con el dibujo del plano tenue debajo; techos de teja criolla y
- *   paredes de cal en sus tonos de siempre.
+ *   B edificado · A manzana) con el dibujo del plano tenue debajo, sin sus rótulos (uRotulos);
+ *   techos de teja criolla y paredes de cal en sus tonos de siempre.
  * aInfo = (distancia a la plaza, semilla, estilo, pisos); pisos = 0 marca el suelo.
  */
 import { MeshLambertMaterial, Vector2, Vector4, DataTexture } from 'three'
@@ -23,7 +23,10 @@ import { VERTICE_COMUN, VERTICE_OLA } from './shader/vertice.js'
 const FRAGMENTO_COMUN = /* glsl */ `
   uniform float uAnchoOla, uColor;
   varying float vExiste;
-  varying vec3 vMundo; varying float vTecho; varying vec4 vInfo; varying float vBase;
+  varying vec3 vMundo; varying float vTecho; varying float vBase; varying vec2 vPared;
+  // lo que es igual en toda la casa (o en toda la pared) va sin interpolar: interpolado, la semilla
+  // y el largo tiemblan en la última cifra y azar() lo vuelve ruido de píxel a píxel
+  flat varying vec4 vInfo; flat varying float vLargo;
   ${GLSL_AZAR}
   ${GLSL_EPOCAS}
   ${GLSL_CRECE}
@@ -38,12 +41,15 @@ const FRAGMENTO_COLOR = /* glsl */ `
   vec2 uv = vec2(uvPlano.x, 1.0 - uvPlano.y);
   vec3 papel = planoEn(uvPlano);
   float esSuelo = step(vInfo.w, 0.5);
+  // la fachada (src/shader/fachada.js), con sus derivadas tomadas acá, fuera de toda rama
+  vec2 wPared = max(fwidth(vec2(vPared.x, vMundo.y - vBase)), vec2(1e-4));
+  vec4 fachada = fachadaEn(vec2(vPared.x, vLargo), vMundo.y - vBase, vInfo, paredColor(vInfo.y, vInfo.z, vMundo.y - vBase), wPared);
 
-  // tinta: el techo y el suelo son el plano; la pared, papel
-  vec3 enTinta = mix(diffuseColor.rgb, papel, vTecho);
+  // tinta: el techo y el suelo son el plano; la pared, papel con sus vanos y molduras a pluma
+  vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, fachada.a), papel, vTecho);
 
-  // color: suelo pintado; techo y pared según la casa (src/shader/fachada.js)
-  vec3 enColor = mix(mix(paredColor(vInfo.y, vInfo.z, vMundo.y - vBase), techoColor(vInfo.y, vInfo.z), vTecho), sueloColor(uv, papel), esSuelo);
+  // color: suelo pintado; techo y fachada según la casa
+  vec3 enColor = mix(mix(fachada.rgb, techoColor(vInfo.y, vInfo.z), vTecho), sueloColor(uv, papel), esSuelo);
 
   diffuseColor.rgb = mix(enTinta, enColor, uColor);
 
@@ -52,6 +58,8 @@ const FRAGMENTO_COLOR = /* glsl */ `
 
 /** 1×1 blanco: en "desde cuándo", edificado desde la primera época (no recorta nada). */
 const TODO_EDIFICADO = Object.assign(new DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1), { needsUpdate: true })
+/** 1×1 en cero: sin rótulos, hasta que llegue su máscara (el plano se marca entero). */
+const SIN_ROTULOS = Object.assign(new DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1), { needsUpdate: true })
 /** 1×1 negro: lo de hoy, hasta que lleguen sus texturas (no estampa nada). */
 const SIN_HOY = Object.assign(new DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1), { needsUpdate: true })
 
@@ -65,6 +73,7 @@ export function crearMaterialCiudad({
     uColor: { value: 0 }, // 0 tinta · 1 color
     uMapa: { value: mapa },
     uSuelo: { value: suelo },
+    uRotulos: { value: SIN_ROTULOS }, // rótulos del plano de 1936 (src/shader/suelo.js)
     uHoja: { value: new Vector2(plano.ancho, plano.alto) },
     uPlaza: { value: new Vector2(plano.plaza[0], plano.plaza[1]) },
     uMetro: { value: metro },

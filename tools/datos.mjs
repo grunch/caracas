@@ -60,7 +60,7 @@ const PASOS = [
   {
     id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`],
     salidas: [`${D}/ciudad-1936.json`],
-    codigo: GEO('vectorizar'),
+    codigo: GEO('vectorizar', 'lotes'),
     cmd: async () => {
       const { plaza, metro } = await leerJson(`${D}/mosaico.json`)
       return [PY, 'tools/geo/vectorizar.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/ciudad-1936.json`,
@@ -132,6 +132,22 @@ const PASOS = [
     salidas: ['public/plano/suelo.webp', 'public/plano/suelo-2k.webp'],
     codigo: ['tools/suelo.mjs', 'tools/suelo-lib.mjs'],
     cmd: () => ['node', 'tools/suelo.mjs', `${D}/segmentacion/mosaico/clases-costura.png`],
+  },
+  {
+    // lo que en el plano es letra, cifra o símbolo y no dibujo: en modo color no se marca
+    id: 'rotulos', entradas: [`${D}/mosaico-costura.tif`, `${D}/mosaico.json`, 'tools/geo/paleta-1936.json'],
+    salidas: [`${D}/segmentacion/mosaico/rotulos.png`],
+    codigo: GEO('rotulos', 'segmentar', 'segmentar_color', 'segmentar_morfologia', 'segmentar_parametros'),
+    cmd: async () => {
+      const { metro } = await leerJson(`${D}/mosaico.json`)
+      return [PY, 'tools/geo/rotulos.py', `${D}/mosaico-costura.tif`, `${D}/segmentacion/mosaico/rotulos.png`, '--escala', String(metro)]
+    },
+  },
+  {
+    id: 'rotulos-textura', entradas: [`${D}/segmentacion/mosaico/rotulos.png`],
+    salidas: ['public/plano/rotulos.webp', 'public/plano/rotulos-2k.webp'],
+    codigo: ['tools/rotulos.mjs', 'tools/rotulos-lib.mjs'],
+    cmd: () => ['node', 'tools/rotulos.mjs', `${D}/segmentacion/mosaico/rotulos.png`],
   },
   {
     id: 'plano', entradas: [`${D}/mosaico-costura.tif`, `${D}/mosaico.json`],

@@ -79,3 +79,49 @@ describe('extruirTechos con vida', () => {
     expect(Array.from(new Set(sin.vidas))).toEqual([0])
   })
 })
+
+describe('extruirTechos: aPared (dónde está cada punto de la pared)', () => {
+  const g = extruirTechos({ vertices, techos }, coords)
+  const n = g.posiciones.length / 3
+  const esPared = (v) => Math.abs(g.normales[v * 3 + 1]) < 0.5
+
+  test('un par (metros desde la esquina de arranque, largo de la pared) por vértice', () => {
+    expect(g.paredes).toBeInstanceOf(Float32Array)
+    expect(g.paredes.length).toBe(n * 2)
+  })
+
+  test('techos (y todo lo que no es pared) llevan 0, 0', () => {
+    for (let v = 0; v < n; v++) {
+      if (esPared(v)) continue
+      expect([g.paredes[v * 2], g.paredes[v * 2 + 1]]).toEqual([0, 0])
+    }
+  })
+
+  test('cada pared lleva su largo en metros y u va de 0 a ese largo', () => {
+    // el cuadrado mide 5 m por lado; el triángulo: 5 m de base y dos lados de √(2.5² + 4²)
+    const largos = new Set()
+    for (let v = 0; v < n; v++) if (esPared(v)) largos.add(+g.paredes[v * 2 + 1].toFixed(3))
+    expect([...largos].sort((a, b) => a - b)).toEqual([+Math.hypot(2.5, 4).toFixed(3), 5])
+    for (let v = 0; v < n; v++) {
+      if (!esPared(v)) continue
+      const [u, largo] = [g.paredes[v * 2], g.paredes[v * 2 + 1]]
+      expect(u === 0 || Math.abs(u - largo) < 1e-5).toBe(true)
+    }
+  })
+
+  test('u crece a lo largo de cada pared: es la distancia en planta a la esquina de arranque', () => {
+    // en cada triángulo de pared, lo que cambia u entre dos vértices es lo que se mueven en planta
+    let paredesVistas = 0
+    for (let t = 0; t < g.indices.length; t += 3) {
+      const [a, b, c] = [g.indices[t], g.indices[t + 1], g.indices[t + 2]]
+      if (!esPared(a)) continue
+      for (const [p, q] of [[a, b], [b, c], [a, c]]) {
+        const du = Math.abs(g.paredes[p * 2] - g.paredes[q * 2])
+        const dxz = Math.hypot(g.posiciones[p * 3] - g.posiciones[q * 3], g.posiciones[p * 3 + 2] - g.posiciones[q * 3 + 2])
+        expect(du).toBeCloseTo(dxz, 4) // u sigue la planta: lo que avanza en u es lo que avanza la pared
+      }
+      paredesVistas++
+    }
+    expect(paredesVistas).toBe(2 * 7)
+  })
+})

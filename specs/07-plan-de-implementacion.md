@@ -50,10 +50,12 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T30 | Teselas finas de 3072 px en el material (las 4 que rodean la vista), para nitidez de cerca | — | de cerca se leen los nombres de las esquinas | ✅ #10 |
 | T31 | Estilos y alturas por época: colonial, republicano, guzmancista (neoclásico), ecléctico, casa de las afueras, rancho; pisos según época y zona | T24 | el índice de estilo de cada casa sale de su época y su lugar | 🔄 #20 |
 | T31b | **Referencias visuales por época**: pinturas, grabados y fotos en `fuentes/imagenes/` (con ficha y observaciones en su README) que calibran estilos, pisos, techos y lotes de cada época. Tarea continua: cada imagen nueva se anota y, si contradice el modelo, se ajusta | — | cada época tiene al menos una referencia y sus reglas la citan | 🔄 (anotadas: 1812, San Pablo ~1860, calle de 1843, mercado de 1852, vista de J. Thomas de 1839 en dos copias, foto panorámica ~1903, Plaza Bolívar 1910, Catedral 1867, Gradillas 1950, años 30 sobre los techos, La Pastora 1892 y 1930, calle con tranvía ~1930, cuatro fotos de 1880, Casa Amarilla ~1875) |
-| T32 | Fachadas procedurales por estilo: puertas, ventanas con rejas, aleros, zócalo, cornisas; LOD por distancia | T31 | a nivel de calle se distinguen los estilos | ⏳ |
+| T32 | Fachadas procedurales por estilo: puertas, ventanas con rejas, aleros, zócalo, cornisas; LOD por distancia | T31 | a nivel de calle se distinguen los estilos | ✅ #24 |
 | T33 | Techos de teja de verdad: dos y cuatro aguas como geometría, con alero; azoteas en los públicos y los modernos | T31 | el perfil de tejados se ve de costado | ⏳ |
 | T34 | Árboles 3D desde `arboles.json` (5.926) y los patios con vegetación, en color | — | árboles en plazas, patios y quebradas | ✅ #19 |
 | T35 | Luz y acabado: sombras, luz tibia y sombra azulada, bruma, contorno por profundidad y grano de papel en tinta | — | el look de grabado de `specs/04` | ⏳ |
+| T36 | **Color sin rótulos**: máscara de la tinta del plano que es letra, cifra o símbolo (`tools/geo/rotulos.py` → `plano/rotulos.webp`); en color, ahí el plano no se marca | T07 | en color no se leen "PALACIO FEDERAL", las cotas ni las letras de parroquia; los bordes de manzana siguen | 🔄 #28 |
+| T37 | Lotes rectos: cada manzana se parte en solares rectangulares perpendiculares a su calle (antes, cuñas que se juntaban en el centro) | T04 | en el centro los techos son tiras rectas, sin abanicos | ✅ #26 |
 
 ## Fase 4 · Contenido
 
@@ -97,4 +99,4 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 - **Derechos**: nada se publica (T73) sin la revisión del responsable; cada fuente conserva su licencia en `ficha.json`.
 - **Datos fuera de git**: sin T11 y T12, un cambio en el pipeline puede romper el sitio sin que ningún test lo vea.
 - **Conflictos en `src/material.js` y `src/main.js`**: varias tareas los tocan; conviene separar el shader en módulos (vértice, suelo, fachadas) dentro de T35 o antes, si los conflictos se repiten.
-- **Rendimiento**: 59 mil casas con fachadas procedurales; medir en cada tarea de la fase 3.
+- **Rendimiento**: 34 mil casas con fachadas procedurales; medir en cada tarea de la fase 3.
