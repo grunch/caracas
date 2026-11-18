@@ -16,7 +16,12 @@ pagina.on('console', (m) => { if (m.type() === 'warning' || m.type() === 'error'
 await pagina.goto(`${url}?capture&sinintro`)
 await pagina.waitForFunction(() => window.lab?.ready && window.lab.relieve && window.lab.lineaDeTiempo, null, { timeout: 120000 })
 await pagina.evaluate(() => window.lab.levantar(true))
-await pagina.waitForFunction(() => window.lab.ciudad.U.uOla.value > 8000, null, { polling: 1000, timeout: 600000 })
+// la ola termina cuando el suelo de la esquina más lejana de la hoja ya se hinchó entero (como capturas.mjs)
+await pagina.waitForFunction(() => {
+  const { relieve, relieveU, sueloEn, coords: { hoja } } = window.lab
+  const [x, z] = [hoja.x0 + hoja.ancho, hoja.z0 + hoja.alto]
+  return Math.abs(sueloEn(x, z) - relieve.alturaEn(x, z) * relieveU.uExageracion.value) < 1e-6
+}, null, { polling: 2000, timeout: 900000 })
 const dosCuadros = () => pagina.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
 
 const años = await pagina.evaluate(() => [...document.querySelectorAll('#epocas .años button:not(.andar)')].map((b) => b.textContent))

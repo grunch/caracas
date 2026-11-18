@@ -56,6 +56,29 @@ test('el papel de relleno bajo el alfa es un color claro (no deja borde negro al
   expect(PAPEL.r + PAPEL.g + PAPEL.b).toBeGreaterThan(600)
 })
 
+import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import path from 'node:path'
+import { leerCalzados } from '../../tools/planos-epocas.mjs'
+
+describe('leerCalzados', () => {
+  test('lee el calzado.json de cada carpeta de año; ignora las que no tienen calce y las que no son años', async () => {
+    const dir = await mkdtemp(path.join(tmpdir(), 'calzados-'))
+    try {
+      for (const c of ['1843', '1578', '1936', 'epocas']) await mkdir(path.join(dir, c))
+      await writeFile(path.join(dir, '1843', 'calzado.json'), JSON.stringify(calzados[0]))
+      await writeFile(path.join(dir, 'epocas', 'calzado.json'), '{}')
+      expect(await leerCalzados(dir)).toEqual([calzados[0]])
+    } finally {
+      await rm(dir, { recursive: true })
+    }
+  })
+
+  test('sin carpeta de derivados, ninguno', async () => {
+    expect(await leerCalzados('/no/existe')).toEqual([])
+  })
+})
+
 describe('rellenarTransparente', () => {
   test('pone papel en el RGB de los píxeles con alfa 0 y deja intactos los demás (sin mutar la entrada)', () => {
     const rgba = new Uint8Array([10, 20, 30, 255, 0, 0, 0, 0, 50, 60, 70, 128])
