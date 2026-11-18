@@ -6,6 +6,7 @@ import { cargarPak } from './pak.js'
 import { geometriaCiudad } from './ciudad.js'
 import { crearMaterialCiudad } from './material.js'
 import { acercar } from './animar.js'
+import { crearLineaDeTiempo, crearSecuencia, escalaCrece } from './epocas.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
 import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo } from './relieve.js'
@@ -115,13 +116,37 @@ const DURACION_OLA_S = 5
 let olaObjetivo = 0
 // la ola llega hasta la esquina más lejana de la hoja (el terreno se hincha en toda ella)
 let olaMax = Math.hypot(Math.max(-hoja.x0, hoja.x0 + hoja.ancho), Math.max(-hoja.z0, hoja.z0 + hoja.alto)) + ciudad.U.uAnchoOla.value
-cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array }).then((datos) => {
+cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array }).then((datos) => {
   const g = geometriaCiudad(datos, coords)
   olaMax = Math.max(olaMax, g.boundingSphere.center.length() + g.boundingSphere.radius + 400)
   scene.add(new Mesh(g, ciudad.material))
   document.getElementById('alzar').hidden = false
   pedirCuadro(3)
 }).catch((e) => console.warn(`ciudad: ${e.message}`))
+
+// --- la línea de tiempo: 1578 → 1936; cada época llega como una ola desde la plaza ---
+const DURACION_EPOCA_S = 3.5
+const OLA_EPOCA_MAX_M = 9000 // más que la distancia de la plaza a la esquina más lejana de la hoja
+let lineaDeTiempo = null
+let secuencia = null
+fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))).then(({ epocas, celda_m }) => {
+  const U = ciudad.U
+  // arranca en la primera época sin ola; después, una ola por vez (lo elegido durante una, espera)
+  U.uEpocaDe.value = U.uEpocaA.value = 0
+  U.uOlaEpoca.value = OLA_EPOCA_MAX_M
+  secuencia = crearSecuencia((de, a) => {
+    U.uEpocaDe.value = de
+    U.uEpocaA.value = a
+    U.uOlaEpoca.value = 0
+    pedirCuadro(3)
+  })
+  lineaDeTiempo = crearLineaDeTiempo({ contenedor: document.getElementById('epocas'), epocas, alElegir: (i) => secuencia.elegir(i) })
+  cargarTextura('plano/crece.png', false).then((t) => {
+    const { width: cols, height: rows } = t.image
+    U.uCreceEscala.value.fromArray(escalaCrece(meta.plano, { cols, rows }, celda_m ?? 8))
+    ponerTextura(U.uCrece, t)
+  }).catch((e) => console.warn(`crece: ${e.message}`))
+}).catch((e) => console.warn(`épocas: ${e.message}`)) // sin crece.json (p. ej. la demo de CI): la ciudad entera, sin línea de tiempo
 
 function levantar(arriba = olaObjetivo === 0) {
   olaObjetivo = arriba ? olaMax : 0
@@ -171,6 +196,12 @@ renderer.setAnimationLoop((t) => {
     uOla.value = acercar(uOla.value, olaObjetivo, (olaMax / DURACION_OLA_S) * dt)
     pedirCuadro(2)
   }
+  const { uOlaEpoca } = ciudad.U
+  if (uOlaEpoca.value < OLA_EPOCA_MAX_M) {
+    uOlaEpoca.value = acercar(uOlaEpoca.value, OLA_EPOCA_MAX_M, (OLA_EPOCA_MAX_M / DURACION_EPOCA_S) * dt)
+    if (uOlaEpoca.value >= OLA_EPOCA_MAX_M) secuencia?.termino()
+    pedirCuadro(2)
+  }
   if (uColor.value !== colorObjetivo) {
     uColor.value = acercar(uColor.value, colorObjetivo, dt / DURACION_COLOR_S)
     pedirCuadro(2)
@@ -184,6 +215,7 @@ document.body.classList.add('listo')
 window.lab = {
   renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, relieveU, sueloEn, ready: true,
   get relieve() { return relieve },
+  get lineaDeTiempo() { return lineaDeTiempo },
 }
 
 /** Papel con una cuadrícula de 100 m, hasta que exista plano/primero.webp. */

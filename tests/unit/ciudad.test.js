@@ -65,3 +65,17 @@ describe('extruirTechos', () => {
     expect(extruirTechos({ vertices: inverso, techos: t }, coords).indices.length / 3).toBe(10)
   })
 })
+
+describe('extruirTechos con vida', () => {
+  test('cada vértice lleva [nace, muere] de su techo; sin vida, [0, 0] (siempre visible)', () => {
+    const vida = new Uint32Array([2, 0 + 8 * 4]) // techo 0 nace en 2; techo 1 nace en 0 y muere en 4
+    const g = extruirTechos({ vertices, techos, vida }, coords)
+    const n = g.posiciones.length / 3
+    expect(g.vidas.length).toBe(n * 2)
+    const pares = new Set()
+    for (let v = 0; v < n; v++) pares.add(`${g.vidas[v * 2]},${g.vidas[v * 2 + 1]}`)
+    expect([...pares].sort()).toEqual(['0,4', '2,0'])
+    const sin = extruirTechos({ vertices, techos }, coords)
+    expect(Array.from(new Set(sin.vidas))).toEqual([0])
+  })
+})

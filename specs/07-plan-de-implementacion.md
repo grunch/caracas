@@ -41,6 +41,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T23 | Época 1578: el plano de Pimentel codificado (25 manzanas, solares "casa") y casas coloniales generadas | — | 25 manzanas alrededor de la plaza, solo con casa donde Pimentel la dibuja | ✅ #9 |
 | T24 | Datos de épocas: máscaras por época, `nace`/`muere` por casa, `crece.json`, parte `vida` en `ciudad.pak` | T22, T23 | cada casa tiene su vida; conteos por época plausibles | ✅ #11 |
 | T25 | **Interfaz de la línea de tiempo**: botonera 1578 · 1772 · 1843 · 1889 · 1919 · 1936, la ola por época, ▶ que las recorre, pie con la fuente del plano | T24 | la ciudad crece hacia adelante como en BA | 🔄 #13 |
+| T25b | **El plano de cada año** sobre la hoja: los planos calzados (`fuentes/derivados/<año>/calzado.tif`) teselados por época, y la hoja cambia de plano con la ola | T25 | en 1843 la hoja muestra el Jesurún calzado, no el plano de 1936 | ⏳ |
 
 ## Fase 3 · Calidad del render
 
