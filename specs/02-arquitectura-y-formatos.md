@@ -131,6 +131,19 @@ Lo escribe `tools/arboles.mjs` (paso `arboles` de `npm run datos`) desde `arbole
 ### `datos/calles.bin` + `calles.json`
 `calles.json` = array ordenado de nombres de calles actuales. `calles.bin` = `Uint16`, **6 por registro**: posición, dirección, índice de nombre, largo y tipo *(inferido)*. Se indexa en una grilla de 300 m para buscar "calles cerca de (x,z)".
 
+*Caracas (implementado, `tools/planos-epocas.mjs`, paso `planos-epocas` de `npm run datos`):* de cada plano
+calzado sobre 1936 (`fuentes/derivados/<año>/calzado.tif`, de `tools/geo/calce.py`) salen `plano/<año>/*.webp`
+**RGBA**: alfa 0 fuera del plano (ahí se ve el de 1936) y, debajo del alfa 0, papel claro para que el filtrado no
+oscurezca el borde. Cada textura cubre **solo el recorte** del calzado (`recorte` = [x0, y0, x1, y1] en píxeles
+del mosaico de 1936), no la hoja entera. Niveles: `chico` siempre; `medio` y `grande` si el recorte no es más
+chico que ellos (sin agrandar): 1772 y 1843 llegan a 4096, 1889 y 1911 a 8192. No hay teselas finas: los planos
+viejos son más gruesos que el de 1936 y 8192 ya está cerca de su resolución propia. `plano/epocas.json`:
+`{"planos":[{"año":1843,"plano":"<carpeta>","recorte":[…],"niveles":[{"url":"plano/1843/chico.webp","lado":2048},…]}]}`.
+El visor (`src/planos.js`) baja el plano de una época la primera vez que se elige (chico, y en equipos que no son
+livianos el mayor que admite la GPU), guarda solo los dos de la ola en curso y uno precargado (chico), y el shader
+(`src/shader/plano.js`) funde el de la época "de" con el de la "a" con el frente de la ola, como las casas.
+1578 no tiene plano calzable (Pimentel es un esquema): usa el de 1772, el más cercano en el tiempo. 1936 usa el suyo.
+
 *Caracas (implementado, `tools/geo/hoy.py`):* `calles.json` = array JSON de los nombres únicos (tag `name` de OSM, sin
 corregir), ordenados por código de carácter (`sorted` de Python). `calles.bin` = registros de **6 × Uint16
 little‑endian (12 bytes)**, sin cabecera (n = `byteLength / 12`). Cada registro es un **tramo** de una calle con
@@ -170,6 +183,7 @@ los puntos que caen dentro) y el PNG sobra unos metros al este y al sur, así qu
 | archivo | uso |
 |---|---|
 | `primero.webp` 1024, `chico.webp` 2048, `medio-4k.webp`, `medio.webp` 8192, `f/{i}-{j}.webp` 3072 | el escaneo, en LOD |
+| `<año>/chico.webp` 2048, `<año>/medio.webp` 4096, `<año>/grande.webp` 8192 + `epocas.json` | el plano calzado de cada época, con alfa (ver abajo) |
 | `suelo.webp` / `suelo-2k.webp` | máscara RGB: **R río · G patio · B edificado** (del plano base) |
 | `calles.webp` / `-2k` | R desde cuándo hay piedra, G desde cuándo es lisa (madera/asfalto), B cuánto del punto es calle |
 | `crece.webp` / `-2k` | por punto, "desde qué etapa": R urbanizado/ganado al río, G fondos, B edificado |

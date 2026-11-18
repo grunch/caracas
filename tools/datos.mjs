@@ -8,6 +8,8 @@ import { createReadStream } from 'node:fs'
 import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas, resolverOriginales, fichasDeEpocas } from './datos-lib.mjs'
+import { salidasPlanosEpocas } from './planos-epocas-lib.mjs'
+import { leerCalzados } from './planos-epocas.mjs'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
 const PY = process.env.PY ?? '.venv/bin/python'
@@ -139,6 +141,14 @@ const PASOS = [
     cmd: () => ['node', 'tools/plano.mjs', `${D}/mosaico-costura.tif`, `${D}/mosaico.json`],
   },
   {
+    // los planos viejos calzados sobre 1936 (pasos calce-<año>): una textura con alfa por época; las
+    // salidas según el recorte de cada calzado.json (se suman en pasosCompletos)
+    id: 'planos-epocas', salidas: ['public/plano/epocas.json'],
+    entradas: CALCES.flatMap(([año]) => ['tif', 'json'].map((x) => `fuentes/derivados/${año}/calzado.${x}`)),
+    codigo: ['tools/planos-epocas.mjs', 'tools/planos-epocas-lib.mjs'],
+    cmd: () => ['node', 'tools/planos-epocas.mjs'],
+  },
+  {
     // la única descarga del pipeline: solo si falta la caché (o con --descargar); sin código propio,
     // así un cambio en hoy.py no vuelve a pedirle a Overpass
     id: 'hoy-osm', entradas: [], salidas: [OSM_HOY], codigo: [],
@@ -159,7 +169,6 @@ function argumentos(argv) {
   return a
 }
 
-/** Los pasos con las teselas que corresponden como salidas del plano. */
 /** Los archivos de cada carpeta de fuentes/mapas/ que usan los calces (para resolver original:<carpeta>). */
 async function archivosDeCalces() {
   const archivos = {}
@@ -172,9 +181,12 @@ async function pasosCompletos({ regenerar = true } = {}) {
   const teselas = salidasDeTeselas(await leerJsonSiHay('public/plano/laminas.json'))
   // epocas.py copia a crece.json (público) los créditos y la licencia de la ficha de cada plano
   const fichas = fichasDeEpocas((await leerJsonSiHay('tools/geo/epocas/epocas.json')) ?? {})
+  // las texturas de cada plano de época dependen del recorte de su calce (calzado.json, si ya está)
+  const planosEpocas = salidasPlanosEpocas(await leerCalzados(path.join(RAIZ, 'fuentes', 'derivados')))
   const pasos = PASOS.map((p) => {
     if (p.id === 'plano') return { ...p, salidas: [...p.salidas, ...teselas] }
     if (p.id === 'epocas') return { ...p, entradas: [...new Set([...p.entradas, ...fichas])] }
+    if (p.id === 'planos-epocas') return { ...p, salidas: planosEpocas }
     return p
   })
   return resolverOriginales(pasos, await archivosDeCalces(), { exigir: regenerar })

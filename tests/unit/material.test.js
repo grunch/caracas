@@ -59,3 +59,41 @@ describe('material con "lo de hoy"', () => {
     expect(U.tHoyCerca.value).toBeTruthy()
   })
 })
+
+describe('material con el plano de cada época', () => {
+  /** Muestreadores del fragment: cada nombre de `uniform sampler2D a, b[4];` (los arreglos cuentan su largo). */
+  function muestreadores(fragment) {
+    return [...fragment.matchAll(/uniform\s+sampler2D\s+([^;]+);/g)]
+      .flatMap((m) => m[1].split(','))
+      .reduce((n, decl) => n + Number(decl.match(/\[\s*(\d+)\s*\]/)?.[1] ?? 1), 0)
+  }
+
+  test('el fragment recibe el plano de la época "de" y el de la "a", con su rectángulo en la hoja', () => {
+    const { fragmentShader } = compilar()
+    expect(fragmentShader).toContain('uniform sampler2D uPlanoDe, uPlanoA;')
+    expect(fragmentShader).toContain('uniform vec4 uPlanoDeRect, uPlanoARect;')
+  })
+
+  test('la hoja pasa de un plano al otro con el frente de la ola, como las casas', () => {
+    const { fragmentShader } = compilar()
+    // la misma función que usa epocaAqui, a la distancia de la plaza de ese punto de la hoja
+    expect(fragmentShader).toMatch(/float frenteEpoca\(float dist\)/)
+    expect(fragmentShader).toMatch(/epocaAqui\(float dist\) \{ return mix\(uEpocaDe, uEpocaA, frenteEpoca\(dist\)\)/)
+    expect(fragmentShader).toContain('mix(planoDeEpoca(uPlanoDe, uPlanoDeRect, hoja, c), planoDeEpoca(uPlanoA, uPlanoARect, hoja, c), frenteEpoca(dist))')
+    // fuera del plano viejo (alfa 0) queda el de 1936
+    expect(fragmentShader).toContain('mix(base, p.rgb, p.a * adentro)')
+  })
+
+  test('arranca sin planos de época: ranuras transparentes (se ve 1936)', () => {
+    const { U } = crearMaterialCiudad({ plano: { ancho: 100, alto: 100, plaza: [50, 50] }, metro: 1, mapa: null })
+    for (const r of ['uPlanoDe', 'uPlanoA']) {
+      expect(U[r].value.image.data[3]).toBe(0)
+      expect(U[`${r}Rect`].value.toArray()).toEqual([0, 0, 1, 1])
+    }
+  })
+
+  test('no pasa de los 16 muestreadores de fragment que garantiza WebGL2', () => {
+    expect(muestreadores(compilar().fragmentShader)).toBeLessThanOrEqual(16)
+    expect(muestreadores('uniform sampler2D a, b[4]; uniform sampler2D c;')).toBe(6)
+  })
+})

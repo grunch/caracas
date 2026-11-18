@@ -4,7 +4,9 @@
  */
 export const GLSL_EPOCAS = /* glsl */ `
   uniform float uEpocaDe, uEpocaA, uOlaEpoca;
-  float epocaAqui(float dist) { return mix(uEpocaDe, uEpocaA, smoothstep(0.0, uAnchoOla, uOlaEpoca - dist)); }
+  /** Cuánto pasó el frente de la ola a dist metros de la plaza: 0 rige la época "de", 1 la "a". */
+  float frenteEpoca(float dist) { return smoothstep(0.0, uAnchoOla, uOlaEpoca - dist); }
+  float epocaAqui(float dist) { return mix(uEpocaDe, uEpocaA, frenteEpoca(dist)); }
   float vivoEn(vec2 vida, float e) {
     float nacio = smoothstep(vida.x - 0.5, vida.x, e);
     return vida.y < 0.5 ? nacio : nacio * (1.0 - smoothstep(vida.y - 0.5, vida.y, e));
