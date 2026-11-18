@@ -25,3 +25,21 @@ Grabado a vuelo de pájaro del centro antes del terremoto, mirando al norte, con
 Qué implica para el modelo: en 1772–1843, 1 piso (2 solo cerca de la plaza), tejado a dos aguas
 con cumbrera paralela al frente (T33), lotes en tira con patio al fondo (lotes rectos), iglesias
 con torre como hitos (T40) y calles de tierra sin arbolado.
+
+## ~1860 (antes de 1876) · Plaza de San Pablo, grabado de C. Aagaard (`1860-blog-plaza-san-pablo-aagaard`) → época 1843
+
+Vista a nivel de calle de la plaza donde después se hizo el Teatro Municipal. **Fecha a verificar**: llegó
+como "siglo XVIII", pero el pie la atribuye a Cornelio Aagaard, que sería del XIX.
+
+- **Plaza de tierra, sin árboles**, con una **fuente de pila al centro** rodeada de una verja baja, y
+  **postes con cadena** bordeando la calle.
+- **Casas de un piso con frente continuo**: paños lisos de cal, **ventanas altas y verticales con reja
+  volada** que casi llegan al piso, portones, **alero** y tejado de teja con la cumbrera paralela a la calle.
+- **Casas de dos pisos en las esquinas** (izquierda y derecha), con **balcón** corrido en el alto.
+- Al fondo, un edificio largo de **un piso con arcada o vanos en arco** (convento u hospital) y una
+  **espadaña o torre chica** de iglesia; detrás, las lomas.
+- Gente a pie y a caballo; calle de tierra.
+
+Qué implica: las plazas de 1772–1843 van de tierra con fuente y sin arbolado (los árboles de plaza llegan
+con Guzmán Blanco); las ventanas coloniales son pocas pero **altas, con reja volada**; los altos con balcón
+van en las esquinas; hace falta el tipo "edificio de arcada" para conventos y hospitales (T40).
