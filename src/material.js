@@ -11,102 +11,24 @@ import { MeshLambertMaterial, Vector2, Vector4, DataTexture } from 'three'
 import { RANURAS } from './teselas.js'
 import { GLSL_RELIEVE, uniformsRelieve } from './relieve.js'
 import { SIN_LINEA_DE_TIEMPO } from './epocas.js'
+import { GLSL_AZAR } from './shader/comun.js'
+import { GLSL_EPOCAS, GLSL_CRECE } from './shader/epocas.js'
+import { GLSL_PLANO } from './shader/plano.js'
+import { GLSL_SUELO } from './shader/suelo.js'
+import { GLSL_FACHADA } from './shader/fachada.js'
+import { VERTICE_COMUN, VERTICE_OLA } from './shader/vertice.js'
 
-// la época que rige en un punto y cuánto está en pie una casa (espejo de src/epocas.js)
-const GLSL_EPOCAS = /* glsl */ `
-  uniform float uEpocaDe, uEpocaA, uOlaEpoca;
-  float epocaAqui(float dist) { return mix(uEpocaDe, uEpocaA, smoothstep(0.0, uAnchoOla, uOlaEpoca - dist)); }
-  float vivoEn(vec2 vida, float e) {
-    float nacio = smoothstep(vida.x - 0.5, vida.x, e);
-    return vida.y < 0.5 ? nacio : nacio * (1.0 - smoothstep(vida.y - 0.5, vida.y, e));
-  }`
-
-const VERTICE_COMUN = /* glsl */ `
-  attribute vec4 aInfo; attribute vec2 aVida;
-  uniform float uOla, uAnchoOla;
-  varying float vExiste;
-  ${GLSL_EPOCAS}
-  varying vec3 vMundo; varying float vTecho; varying vec4 vInfo; varying float vBase;
-  float azar(float n) { return fract(sin(n * 12.9898) * 43758.5453); }`
-
-const VERTICE_OLA = /* glsl */ `
-  // cuánto se levantó esta casa: la ola sale de la plaza; cada una a su tiempo
-  float sube = smoothstep(0.0, 1.0, (uOla - aInfo.x - azar(aInfo.y) * 60.0) / uAnchoOla);
-  // y en la línea de tiempo: la casa está en pie si ya nació y todavía no se fue, en la época de acá
-  vExiste = vivoEn(aVida, epocaAqui(aInfo.x));
-  transformed.y *= sube * vExiste;
-  vTecho = step(0.5, normal.y);
-  vInfo = aInfo;
-  vBase = 0.0; // altura del suelo bajo la casa (la pone el relieve)`
-
+// el fragment: los módulos de src/shader/ en orden de dependencia (suelo usa plano, épocas y crece)
 const FRAGMENTO_COMUN = /* glsl */ `
-  uniform float uAnchoOla, uEtapas; uniform sampler2D uCrece;
+  uniform float uAnchoOla, uColor;
   varying float vExiste;
-  ${GLSL_EPOCAS}
-  /** Desde qué época está edificado el punto (crece.png, R "desde cuándo"); nunca = muy lejos. */
-  // crece.png: celdas de celda_m desde la esquina noroeste de la hoja (la última puede sobrar al este/sur)
-  uniform vec2 uCreceEscala;
-  float edificadoDesde(vec2 hoja) {
-    vec2 c = hoja * uCreceEscala;
-    float v = texture2D(uCrece, vec2(c.x, 1.0 - c.y)).r;
-    return v <= 0.0 ? 99.0 : uEtapas * (1.0 - v);
-  }
-  uniform sampler2D uMapa, uSuelo; uniform vec2 uHoja, uPlaza; uniform float uMetro, uColor;
   varying vec3 vMundo; varying float vTecho; varying vec4 vInfo; varying float vBase;
-  float azarF(float n) { return fract(sin(n * 12.9898) * 43758.5453); }
-
-  // las teselas finas de 3072 px (src/teselas.js): de cerca reemplazan a la textura general
-  uniform sampler2D uFino[${RANURAS}]; uniform vec4 uFinoRect[${RANURAS}]; uniform float uFinoOn[${RANURAS}];
-
-  vec3 finoEn(sampler2D t, vec4 r, float on, vec2 hoja, vec3 base) {
-    vec2 local = (hoja - r.xy) / (r.zw - r.xy);
-    float adentro = step(0.0, local.x) * step(local.x, 1.0) * step(0.0, local.y) * step(local.y, 1.0);
-    return mix(base, texture2D(t, vec2(local.x, 1.0 - local.y)).rgb, on * adentro);
-  }
-
-  /** El plano en un punto de la hoja (coordenadas normalizadas, y hacia abajo). */
-  vec3 planoEn(vec2 hoja) {
-    vec3 c = texture2D(uMapa, vec2(hoja.x, 1.0 - hoja.y)).rgb;
-    c = finoEn(uFino[0], uFinoRect[0], uFinoOn[0], hoja, c);
-    c = finoEn(uFino[1], uFinoRect[1], uFinoOn[1], hoja, c);
-    c = finoEn(uFino[2], uFinoRect[2], uFinoOn[2], hoja, c);
-    c = finoEn(uFino[3], uFinoRect[3], uFinoOn[3], hoja, c);
-    return c;
-  }
-
-  /** Cuánta tinta hay en el plano en ese punto: 0 papel, 1 trazo. */
-  float tintaDe(vec3 papel) { return 1.0 - smoothstep(0.35, 0.85, dot(papel, vec3(0.299, 0.587, 0.114))); }
-
-  /** La teja criolla: cada techo un poco distinto, algunos más gastados u oscuros. */
-  vec3 teja(float semilla) {
-    vec3 nueva = vec3(0.71, 0.38, 0.26), vieja = vec3(0.55, 0.36, 0.28);
-    return mix(nueva, vieja, azarF(semilla * 1.7)) * (0.9 + 0.2 * azarF(semilla * 3.1));
-  }
-
-  /** La cal: blanca las más; si no, crema, ocre, rosa viejo o añil claro. */
-  vec3 cal(float semilla) {
-    float k = azarF(semilla * 5.3);
-    if (k < 0.45) return vec3(0.93, 0.91, 0.85);
-    if (k < 0.65) return vec3(0.92, 0.85, 0.70);
-    if (k < 0.80) return vec3(0.86, 0.72, 0.50);
-    if (k < 0.92) return vec3(0.85, 0.68, 0.62);
-    return vec3(0.72, 0.78, 0.84);
-  }
-
-  /** El suelo pintado: calles de tierra, patios, cultivos, el río; el plano queda como un dibujo tenue. */
-  vec3 sueloColor(vec2 uv, vec3 papel) {
-    vec4 s = texture2D(uSuelo, uv);
-    // en épocas anteriores, lo que todavía no estaba edificado vuelve a ser campo
-    float yaEstaba = step(edificadoDesde(vec2(uv.x, 1.0 - uv.y)), epocaAqui(length(vMundo.xz)) + 0.5);
-    s.ba *= yaEstaba;
-    float urbano = smoothstep(0.08, 0.35, texture(uSuelo, uv, 5.0).a); // manzanas alrededor: ciudad
-    vec3 c = mix(vec3(0.62, 0.60, 0.42), vec3(0.72, 0.64, 0.50), urbano);  // pasto seco o tierra apisonada
-    c = mix(c, vec3(0.52, 0.46, 0.34), s.a * (1.0 - s.b));                // patios: tierra más oscura
-    c = mix(c, vec3(0.66, 0.40, 0.30), s.b);                               // lo edificado, visto desde arriba
-    c = mix(c, vec3(0.46, 0.56, 0.31), s.g);                               // cultivos, jardines, plazas
-    c = mix(c, vec3(0.47, 0.45, 0.37), s.r);                               // el Guaire y las quebradas: barro
-    return c * (1.0 - 0.4 * tintaDe(papel));
-  }`
+  ${GLSL_AZAR}
+  ${GLSL_EPOCAS}
+  ${GLSL_CRECE}
+  ${GLSL_PLANO}
+  ${GLSL_FACHADA}
+  ${GLSL_SUELO}`
 
 const FRAGMENTO_COLOR = /* glsl */ `
   if (vInfo.w > 0.5 && vExiste < 0.02) discard; // la casa todavía no existe (o ya no) en esta época
@@ -119,11 +41,8 @@ const FRAGMENTO_COLOR = /* glsl */ `
   // tinta: el techo y el suelo son el plano; la pared, papel
   vec3 enTinta = mix(diffuseColor.rgb, papel, vTecho);
 
-  // color: suelo pintado; techo de teja (los públicos, azotea clara); pared de cal con zócalo
-  vec3 azotea = vec3(0.66, 0.63, 0.57) * (0.92 + 0.12 * azarF(vInfo.y * 2.3));
-  vec3 techo = mix(teja(vInfo.y), azotea, publico);
-  vec3 pared = cal(vInfo.y) * mix(0.72, 1.0, step(0.8, vMundo.y - vBase)); // zócalo desde la base de la casa
-  vec3 enColor = mix(mix(pared, techo, vTecho), sueloColor(uv, papel), esSuelo);
+  // color: suelo pintado; techo y pared según la casa (src/shader/fachada.js)
+  vec3 enColor = mix(mix(paredColor(vInfo.y, vMundo.y - vBase), techoColor(vInfo.y, publico), vTecho), sueloColor(uv, papel), esSuelo);
 
   diffuseColor.rgb = mix(enTinta, enColor, uColor);`
 
