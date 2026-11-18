@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+import { hayDato } from './datos.js'
 
 test('el visor arranca y expone window.lab', async ({ page }) => {
   const errores = []
@@ -46,7 +47,7 @@ test('de cerca carga las teselas finas que rodean lo que se mira', async ({ page
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
   // laminas.json está en el repo, las teselas no (datos fuera de git): sin la primera, no hay qué probar
-  const hay = await page.evaluate(async () => (await fetch('plano/f/0-0.webp', { method: 'HEAD' })).ok)
+  const hay = await hayDato(page, 'plano/f/0-0.webp', 'image/webp')
   test.skip(!hay, 'sin teselas en plano/f/ (datos fuera del repo)')
   await page.evaluate(() => window.lab.cam.jump({ x: 0, z: 0, dist: 600 }))
   await page.waitForFunction(() => window.lab.teselas?.cargadas.length >= 4, null, { timeout: 30000 })
