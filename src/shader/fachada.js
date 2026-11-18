@@ -78,9 +78,10 @@ export const GLSL_FACHADA = /* glsl */ `
    *  balaustrada o pretil) en lo alto de la pared. */
   struct Medidas { float pano; float medio; float alfeizar; float dintel; float puertaMedio; float puertaAlto; float ciegos; float remate; };
   Medidas medidas(float estilo) {
-    // colonial y republicano, como en la vista de 1812: muro liso, pocas ventanas chicas y altas, puerta grande
-    if (es(estilo, ESTILO_COLONIAL)) return Medidas(6.0, 0.5, 1.1, 2.6, 1.15, 3.2, 0.55, 0.45);
-    if (es(estilo, ESTILO_REPUBLICANO)) return Medidas(4.2, 0.55, 1.0, 2.8, 0.85, 3.1, 0.35, 0.35);
+    // colonial y republicano, como en la litografía de la calle de Caracas (1843): muro liso, una ventana
+    // alta y angosta cada 3,5 m (casi de piso a techo), puerta grande, cornisa corrida y alero corto
+    if (es(estilo, ESTILO_COLONIAL)) return Medidas(3.8, 0.48, 0.55, 3.25, 1.1, 3.3, 0.3, 0.55);
+    if (es(estilo, ESTILO_REPUBLICANO)) return Medidas(3.4, 0.5, 0.5, 3.25, 0.85, 3.3, 0.15, 0.55);
     if (es(estilo, ESTILO_GUZMANCISTA)) return Medidas(3.4, 0.55, 0.6, 2.6, 0.7, 3.0, 0.1, 1.05);
     if (es(estilo, ESTILO_ECLECTICO)) return Medidas(3.3, 0.6, 0.75, 2.75, 0.75, 3.05, 0.1, 1.0);
     if (es(estilo, ESTILO_MODERNO)) return Medidas(4.4, 1.6, 0.95, 2.55, 0.9, 2.9, 0.05, 0.8);
@@ -217,7 +218,10 @@ export const GLSL_FACHADA = /* glsl */ `
   void remate(inout vec3 c, inout float k, float estilo, float semilla, Medidas m, float x, float p, float u, float t, vec2 w2) {
     if (t > m.remate + 0.1) return;
     bool quintaColonial = es(estilo, ESTILO_QUINTA) && azar(semilla * 4.1) < 0.5;
-    if (es(estilo, ESTILO_COLONIAL) || quintaColonial) alero(c, k, 1.0, u, t, m.remate, w2);
+    if (es(estilo, ESTILO_COLONIAL) || quintaColonial) { // la cornisa corrida y, encima, el alero corto
+      cornisa(c, k, t - 0.2, 0.35, w2);
+      alero(c, k, 1.0, u, t, 0.2, w2);
+    }
     else if (es(estilo, ESTILO_ORILLAS) || es(estilo, ESTILO_RANCHO)) alero(c, k, 0.0, u, t, m.remate, w2);
     else if (es(estilo, ESTILO_MODERNO)) pretil(c, k, t, m.remate, w2);
     else if (es(estilo, ESTILO_GUZMANCISTA)) {

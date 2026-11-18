@@ -71,7 +71,7 @@ export const GLSL_VANOS = /* glsl */ `
     if (es(estilo, ESTILO_RANCHO)) return abs(i - puerta) < 1.5 && r < 0.6 ? VENTANA : NADA;
     if (es(estilo, ESTILO_ORILLAS)) return abs(i - puerta) < 2.5 && r < 0.65 ? VENTANA : NADA;
     if (r < m.ciegos) return NADA;
-    return r > 0.9 && !es(estilo, ESTILO_COLONIAL) ? PUERTA : VENTANA;
+    return r > 0.9 && !es(estilo, ESTILO_COLONIAL) && !es(estilo, ESTILO_REPUBLICANO) ? PUERTA : VENTANA;
   }
 
   /** El rectángulo del vano dentro del piso: (centro en y, medio ancho, medio alto). */
@@ -84,11 +84,12 @@ export const GLSL_VANOS = /* glsl */ `
   }
 
   /** El marco del vano y lo que lleva encima: liso en las quintas; con guardapolvo (frontón bajo) en las
-   *  ventanas guzmancistas y públicas; con dintel y clave en las eclécticas. Las coloniales, las republicanas, las
-   *  modernas, las orillas y los ranchos, sin marco (en la vista de 1812 los muros son lisos). */
+   *  ventanas guzmancistas y públicas; con dintel y clave en las eclécticas; en las coloniales y las republicanas, solo la
+   *  puerta (las ventanas llevan su reja volada). Las modernas, las orillas y los ranchos, sin marco. */
   void marco(inout vec3 c, inout float k, float tipo, float estilo, vec2 q, vec2 e, float w) {
     float g = 0.0;
-    if (es(estilo, ESTILO_QUINTA)) g = 0.1;
+    if (es(estilo, ESTILO_COLONIAL) || es(estilo, ESTILO_REPUBLICANO)) g = es(tipo, PUERTA) ? 0.22 : 0.0;
+    else if (es(estilo, ESTILO_QUINTA)) g = 0.1;
     else if (es(estilo, ESTILO_GUZMANCISTA) || es(estilo, ESTILO_ECLECTICO) || es(estilo, ESTILO_PUBLICO)) g = 0.15;
     if (g <= 0.0) return;
     vec3 claro = c * 1.1 + 0.03;
@@ -115,26 +116,35 @@ export const GLSL_VANOS = /* glsl */ `
     }
   }
 
-  /** Reja colonial de balaustres torneados, volada: su caja de madera, la repisa abajo, el tejadillo
-   *  arriba y la sombra que echa en la pared. */
-  void rejaDeMadera(inout vec3 c, inout float k, float semilla, float estilo, vec2 q, vec2 e, vec2 w2) {
+  /** La reja volada (litografía de la calle de Caracas, 1843): su bastidor, la repisa moldurada abajo,
+   *  el sombrerete arriba y la sombra que echa en la pared. */
+  void volada(inout vec3 c, inout float k, vec2 q, vec2 e, vec2 w2, vec3 bastidorColor, vec3 sombrereteColor) {
     float w = max(w2.x, w2.y);
-    vec3 mad = madera(semilla, estilo) * 0.85;
     float dentro = lleno(caja(q, e), w);
-    float torneado = 0.035 + 0.03 * abs(sin(q.y * 9.0)); // el balaustre se hincha y se adelgaza
-    float balaustres = barras(q.x + e.x, 0.13, torneado, w2.x) * dentro;
-    float travesanos = (banda(q.y, -e.y, -e.y + 0.08, w2.y) + banda(q.y, e.y - 0.08, e.y, w2.y)) * dentro;
     float bastidor = lleno(caja(q, e + 0.09), w) * (1.0 - dentro);
     float repisa = banda(q.y, -e.y - 0.24, -e.y - 0.09, w2.y) * lleno(abs(q.x) - e.x - 0.18, w2.x);
     float sobre = q.y - e.y - 0.09;
-    float tejadillo = banda(sobre, 0.0, 0.2, w2.y) * lleno(abs(q.x) - (e.x + 0.24 - 0.7 * sobre), w2.x);
+    float sombrerete = banda(sobre, 0.0, 0.2, w2.y) * lleno(abs(q.x) - (e.x + 0.24 - 0.7 * sobre), w2.x);
     float sombra = banda(q.y, -e.y - 0.6, -e.y - 0.24, w2.y) * smoothstep(-e.y - 0.6, -e.y - 0.24, q.y)
       * lleno(abs(q.x) - e.x - 0.15, w2.x);
     c *= 1.0 - 0.35 * sombra;
-    c = mix(c, mad, max(max(balaustres, travesanos), max(bastidor, repisa)));
-    c = mix(c, vec3(0.50, 0.31, 0.23), tejadillo);
-    k = max(k, max(max(balaustres, travesanos), 0.5 * max(bastidor, repisa)));
-    k = max(k, max(tejadillo * (0.3 + 0.7 * barras(q.x, 0.1, 0.03, w2.x)), 0.4 * sombra));
+    c = mix(c, bastidorColor, max(bastidor, repisa));
+    c = mix(c, sombrereteColor, sombrerete);
+    c *= 1.0 - 0.3 * banda(q.y, -e.y - 0.13, -e.y - 0.09, w2.y) * lleno(abs(q.x) - e.x - 0.18, w2.x); // la moldura de la repisa
+    k = max(k, max(0.5 * max(bastidor, repisa), 0.4 * sombra));
+    k = max(k, max(trazo(caja(q, e + 0.09), 0.012, w), sombrerete * (0.3 + 0.7 * barras(q.x, 0.1, 0.03, w2.x))));
+  }
+
+  /** Reja colonial de balaustres torneados, de madera, volada. */
+  void rejaDeMadera(inout vec3 c, inout float k, float semilla, float estilo, vec2 q, vec2 e, vec2 w2) {
+    vec3 mad = madera(semilla, estilo) * 0.85;
+    float dentro = lleno(caja(q, e), max(w2.x, w2.y));
+    float torneado = 0.035 + 0.03 * abs(sin(q.y * 9.0)); // el balaustre se hincha y se adelgaza
+    float balaustres = barras(q.x + e.x, 0.13, torneado, w2.x) * dentro;
+    float travesanos = (banda(q.y, -e.y, -e.y + 0.08, w2.y) + banda(q.y, e.y - 0.08, e.y, w2.y)) * dentro;
+    c = mix(c, mad, max(balaustres, travesanos));
+    k = max(k, max(balaustres, travesanos));
+    volada(c, k, q, e, w2, mad, vec3(0.50, 0.31, 0.23));
   }
 
   /** Reja de hierro de las ventanas bajas: barrotes finos y dos travesaños. */
@@ -147,12 +157,16 @@ export const GLSL_VANOS = /* glsl */ `
     k = max(k, hierro);
   }
 
-  /** Las rejas: de madera torneada y voladas en las coloniales; de hierro en las ventanas bajas de las
-   *  demás. Las modernas, las orillas y los ranchos, sin reja. */
+  /** Las rejas: de madera torneada y voladas en las coloniales; de hierro y voladas, sobre repisa y bajo
+   *  sombrerete de mampostería, en las republicanas; de hierro en las ventanas bajas de las demás. Las
+   *  modernas, las orillas y los ranchos, sin reja. */
   void enrejado(inout vec3 c, inout float k, float estilo, float semilla, float piso, vec2 q, vec2 e, vec2 w2) {
     if (es(estilo, ESTILO_MODERNO) || es(estilo, ESTILO_RANCHO) || es(estilo, ESTILO_ORILLAS)) return;
     if (es(estilo, ESTILO_COLONIAL)) rejaDeMadera(c, k, semilla, estilo, q, e, w2);
-    else if (piso < 0.5) rejaDeHierro(c, k, q, e, w2);
+    else if (es(estilo, ESTILO_REPUBLICANO)) {
+      rejaDeHierro(c, k, q, e, w2);
+      volada(c, k, q, e, w2, HIERRO, paredBase(semilla, estilo) * 1.08);
+    } else if (piso < 0.5) rejaDeHierro(c, k, q, e, w2);
   }
 
   /** El balcón de una puerta de balcón: la losa de piedra, los barrotes y el pasamanos de hierro. */
