@@ -60,8 +60,11 @@ describe('techos: la geometría llega al fragment', () => {
     expect(GLSL_TECHO).not.toContain('fwidth')
   })
 
-  test('cada fragmento calcula o el techo o la fachada, no los dos', () => {
-    expect(fragmentShader).toMatch(/vec4 casa = vTecho > 0\.5 \? techoEn\(vFaldon, vCubierta, vInfo\.y, vLuz, wTecho\)\s*: fachadaEn\(/)
+  test('cada fragmento calcula o el techo o la fachada, y el suelo ninguno de los dos (con if: el render por software los salta)', () => {
+    expect(fragmentShader).toMatch(/if \(esSuelo < 0\.5\) \{\s*if \(vTecho < 0\.5\) casa = fachadaEn\(/)
+    expect(fragmentShader).toContain('else if (vAlzada > 0.0) casa = techoEn(vFaldon, vCubierta, vInfo.y, vLuz, wTecho);')
+    expect(fragmentShader).toContain('else casa = techoLlano(vCubierta, vInfo.y);')
+    expect(fragmentShader.indexOf('vec2 wTecho')).toBeLessThan(fragmentShader.indexOf('casa = techoEn('))
   })
 })
 
@@ -147,7 +150,13 @@ describe('techos: qué dibuja cada cubierta', () => {
 
   test('en tinta la casa es papel con trazos: ya no se pega el plano sobre el techo', () => {
     const { fragmentShader } = compilar()
-    expect(fragmentShader).toContain('vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), papel, esSuelo);')
+    expect(fragmentShader).toContain('vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), papel, acostada);')
     expect(fragmentShader).not.toMatch(/papel, vTecho\)/)
+  })
+
+  test('acostada en la hoja (antes de la ola) la casa todavía es el plano: el grabado aparece al levantarse', () => {
+    const { vertexShader, fragmentShader } = compilar()
+    expect(vertexShader).toMatch(/vAlzada = sube;/)
+    expect(fragmentShader).toContain('float acostada = max(esSuelo, 1.0 - smoothstep(0.0, 0.3, vAlzada));')
   })
 })

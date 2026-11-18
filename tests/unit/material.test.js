@@ -131,7 +131,7 @@ describe('color sin rótulos', () => {
   test('la tinta no cambia: el suelo sigue siendo el plano entero', () => {
     const { fragmentShader } = compilar()
     // (la casa es papel con los trazos de su fachada y de su tejado: src/shader/fachada.js y techo.js)
-    expect(fragmentShader).toContain('vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), papel, esSuelo);')
+    expect(fragmentShader).toContain('vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), papel, acostada);')
     expect(fragmentShader.match(/uRotulos/g)).toHaveLength(2) // la declaración y sueloColor: nada más la usa
   })
 

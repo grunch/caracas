@@ -114,6 +114,15 @@ export const GLSL_TECHO = /* glsl */ `
     k = max(k, 0.5 + 0.4 * rayadoPantalla(0.6));
   }
 
+  /** El tono medio de un techo, sin dibujo: lo que se ve de la casa acostada en la hoja, antes de la ola. */
+  vec4 techoLlano(float cubierta, float semilla) {
+    if (cubierta > CUB_VOLADA - 0.5) cubierta -= CUB_VOLADA;
+    if (es(cubierta, CUB_AZOTEA)) return vec4(azotea(semilla), 0.0);
+    if (es(cubierta, CUB_ZINC)) return vec4(zinc(semilla), 0.0);
+    if (es(cubierta, CUB_PATIO)) return vec4(0.70, 0.64, 0.50, 0.0);
+    return vec4(teja(semilla) * 0.84, 0.0);
+  }
+
   /**
    * El techo en un punto: rgb, su color; a, su tinta en el grabado. faldon = (s, t, largo); luz = cuánto
    * mira la cara al sol (coseno); w2 = metros por píxel a lo largo y a lo alto del faldón (las derivadas, tomadas

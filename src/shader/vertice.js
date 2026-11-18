@@ -12,6 +12,7 @@ export const VERTICE_COMUN = /* glsl */ `
   // y el largo tiemblan en la última cifra y azar() lo vuelve ruido de píxel a píxel
   flat varying vec4 vInfo; flat varying float vLargo; flat varying float vAltoPiso; flat varying float vCubierta; flat varying float vLuz;
   flat varying float vPretil; // cuánto sube el pretil sobre esta pared en la época que rige
+  flat varying float vAlzada; // cuánto se levantó la casa (0 acostada en la hoja … 1 en pie)
   varying vec3 vFaldon; // del techo: s, t y el largo del faldón (src/shader/techo.js)
   varying vec2 vTerreno; // del suelo: altura sobre la plaza (m, sin exagerar) y pendiente (m/m)
   const vec3 SOL = vec3(-0.4800, 0.8000, 0.3600); // hacia el sol de la escena (src/main.js)
@@ -53,6 +54,7 @@ export const VERTICE_OLA = /* glsl */ `
     transformed.y *= mix(de.y, a.y, frente) / aInfo.w;
   }
   transformed.y *= sube * vExiste;
+  vAlzada = sube;
   vPared = aPared.xy; // dónde está en su pared (src/ciudad.js), para la fachada
   vLargo = aPared.y;
   vAltoPiso = aPared.z;

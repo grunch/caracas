@@ -30,6 +30,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   // y el largo tiemblan en la última cifra y azar() lo vuelve ruido de píxel a píxel
   flat varying vec4 vInfo; flat varying float vLargo; flat varying float vAltoPiso; flat varying float vCubierta; flat varying float vLuz;
   flat varying float vPretil; // cuánto sube el pretil sobre esta pared en la época que rige
+  flat varying float vAlzada; // cuánto se levantó la casa (0 acostada en la hoja … 1 en pie)
   varying vec3 vFaldon; // del techo: s, t y el largo del faldón (src/shader/techo.js)
   varying vec2 vTerreno;
   ${GLSL_AZAR}
@@ -56,11 +57,19 @@ const FRAGMENTO_COLOR = /* glsl */ `
   vec2 wTecho = max(fwidth(vFaldon.xy), vec2(1e-4));
   gAltoPiso = max(vAltoPiso, 1.0);
   gPretil = vPretil;
-  vec4 casa = vTecho > 0.5 ? techoEn(vFaldon, vCubierta, vInfo.y, vLuz, wTecho)
-    : fachadaEn(vec2(vPared.x, vLargo), vMundo.y - vBase, vInfo, paredColor(vInfo.y, vInfo.z, vMundo.y - vBase), wPared);
+  // cada fragmento calcula o el techo o la fachada (y el suelo, ninguno de los dos): con if, que el
+  // render por software salta enteros. Acostada en la hoja, el techo va en su tono medio, sin dibujo
+  vec4 casa = vec4(diffuseColor.rgb, 0.0);
+  if (esSuelo < 0.5) {
+    if (vTecho < 0.5) casa = fachadaEn(vec2(vPared.x, vLargo), vMundo.y - vBase, vInfo, paredColor(vInfo.y, vInfo.z, vMundo.y - vBase), wPared);
+    else if (vAlzada > 0.0) casa = techoEn(vFaldon, vCubierta, vInfo.y, vLuz, wTecho);
+    else casa = techoLlano(vCubierta, vInfo.y);
+  }
 
-  // tinta: el suelo es el plano; la casa, papel con sus vanos, molduras y tejados a pluma
-  vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), papel, esSuelo);
+  // tinta: el suelo es el plano; la casa, papel con sus vanos, molduras y tejados a pluma. Acostada en la
+  // hoja (antes de la ola) la casa todavía es el plano: el grabado aparece a medida que se levanta
+  float acostada = max(esSuelo, 1.0 - smoothstep(0.0, 0.3, vAlzada));
+  vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), papel, acostada);
 
   // color: suelo pintado; techo y fachada según la casa
   vec3 enColor = mix(casa.rgb, sueloColor(uv, papel), esSuelo);
