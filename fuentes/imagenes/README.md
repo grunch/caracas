@@ -157,3 +157,26 @@ La misma plaza del mercado de 1852, ya convertida en paseo. Foto a nivel de peat
 Qué implica: hito "Plaza Bolívar" con dos estados: **mercado** (1772–1843, ver 1852) y **plaza
 ajardinada con la estatua ecuestre, faroles y árboles grandes** (desde 1889); la estatua y la torre de
 la Catedral van como hitos modelados (T40), y los árboles de la plaza nacen en la época de 1889.
+
+## 1867 · La Catedral desde la Plaza Mayor (`1867-commons-catedral`) → épocas 1843 y 1889 (hito: Catedral)
+
+La Catedral vista desde la plaza, con el Ávila detrás. Referencia directa para modelarla (T40).
+
+- **Torre a la izquierda (esquina de la fachada)**: tres cuerpos cuadrados blancos con vanos de arco
+  (campanas) y **reloj**, balconcillo con baranda entre cuerpos, y **remate ochavado con cupulín
+  oscuro**. Unas 3 veces la altura del muro de la nave.
+- **Fachada principal barroca** al pie de la torre: dos o tres cuerpos con **columnas pareadas, nichos
+  y un frontón curvo de volutas** con remates; portón de arco. Queda de perfil en esta vista (mira al
+  oeste, hacia la calle; la plaza está al sur… a verificar la orientación con el plano).
+- **Costado largo hacia la plaza**: un **muro blanco, alto y casi ciego**, de una sola altura, con una
+  **portada lateral de frontón** y columnas, **dos o tres ventanas con balcón y tejadillo** arriba, y
+  otra portada menor al fondo con remate.
+- **Tejado de teja a dos aguas, alto y oscuro**, sobre toda la nave, con una linterna o lucernario
+  pequeño asomando a media nave.
+- **La plaza delante es de tierra**, abierta, con poca gente: en 1867 todavía no hay jardines ni
+  estatua (coincide con el mercado de 1852 y confirma que la plaza ajardinada es posterior).
+- A la izquierda, una casa de dos pisos con balcón, pegada a la torre.
+
+Qué implica: la Catedral se modela como **nave larga de muro ciego con tejado a dos aguas + torre de
+tres cuerpos con remate ochavado en una esquina + fachada barroca en el frente corto**; la plaza sigue
+de tierra en 1867, así que el paso a plaza ajardinada va entre 1867 y 1889.
