@@ -464,7 +464,7 @@ así que los patios se abren por regla (y los que el plano sí dibuja se conserv
   solar con su piso, sus paredes y su tapia.
 - `src/shader/techo.js`: un tono de teja por casa, del marrón grisáceo al naranja de teja nueva (una
   de cada ocho); piso de patio más oscuro que la calle.
-- `tools/arboles-lib.mjs`: un árbol en algunos patios y en más de la mitad de los solares.
+- `tools/arboles-lib.mjs`: un árbol en algunos patios (15 %) y en buena parte de los solares (40 %).
 
 ## Después de 1936 (guardadas para épocas futuras)
 
