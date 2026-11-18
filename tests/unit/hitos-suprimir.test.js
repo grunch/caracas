@@ -45,6 +45,12 @@ describe('seSolapan', () => {
     const triangulo = [[100, 100], [110, 110], [90, 110]]
     expect(seSolapan(triangulo, triangulo.map((v) => [...v]))).toBe(true)
   })
+  test('una huella cóncava no pisa lo que cae en su hueco, aunque su centro quede ahí', () => {
+    const ce = [[0, 0], [10, 0], [10, 2], [2, 2], [2, 8], [10, 8], [10, 10], [0, 10]]
+    const enElHueco = [[5, 4], [6, 4], [6, 6], [5, 6]]
+    expect(seSolapan(ce, enElHueco)).toBe(false)
+    expect(seSolapan(enElHueco, ce)).toBe(false)
+  })
   test('separados no se pisan', () => {
     expect(seSolapan(cuadrado(0, 0, 10), cuadrado(11, 0, 10))).toBe(false)
   })
