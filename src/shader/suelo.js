@@ -1,10 +1,11 @@
 /**
  * El suelo pintado en modo color: calles de tierra, patios, cultivos, el río; el plano queda como un
- * dibujo tenue. Necesita GLSL_PLANO (tintaDe), GLSL_EPOCAS y GLSL_CRECE.
+ * dibujo tenue, sin sus rótulos. Necesita GLSL_PLANO (tintaDe, planoViejo), GLSL_EPOCAS y GLSL_CRECE.
  * uSuelo: R agua · G vegetación · B edificado · A manzana (tools/suelo-lib.mjs).
+ * uRotulos: cuánto del punto es letra, cifra o símbolo del plano de 1936 (tools/rotulos-lib.mjs).
  */
 export const GLSL_SUELO = /* glsl */ `
-  uniform sampler2D uSuelo;
+  uniform sampler2D uSuelo, uRotulos;
   vec3 sueloColor(vec2 uv, vec3 papel) {
     vec4 s = texture2D(uSuelo, uv);
     // en épocas anteriores, lo que todavía no estaba edificado vuelve a ser campo
@@ -16,5 +17,8 @@ export const GLSL_SUELO = /* glsl */ `
     c = mix(c, vec3(0.66, 0.40, 0.30), s.b);                               // lo edificado, visto desde arriba
     c = mix(c, vec3(0.46, 0.56, 0.31), s.g);                               // cultivos, jardines, plazas
     c = mix(c, vec3(0.47, 0.45, 0.37), s.r);                               // el Guaire y las quebradas: barro
-    return c * (1.0 - 0.4 * tintaDe(papel));
+    // los nombres, las cotas y el tranvía del plano de 1936 no se marcan: solo queda el dibujo
+    // (×2: en el borde de un texel de rótulo el filtrado bilineal da 0,5, y ahí tiene que tapar entero)
+    float rotulo = min(1.0, 2.0 * texture2D(uRotulos, uv).r) * (1.0 - planoViejo);
+    return c * (1.0 - 0.4 * tintaDe(papel) * (1.0 - rotulo));
   }`

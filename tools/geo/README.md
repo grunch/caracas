@@ -67,6 +67,11 @@ node tools/arboles.mjs $D/segmentacion/mosaico/arboles.json $D/mosaico.json $D/s
 
 # 7. suelo: máscara RGBA para el modo color (R agua · G vegetación · B edificado · A manzana)
 node tools/suelo.mjs $D/segmentacion/mosaico/clases-costura.png
+# 7b. rótulos: la tinta del plano que es letra, cifra o símbolo (nombres, cotas, letras de parroquia,
+#     el punteado del tranvía) y no dibujo → $D/segmentacion/mosaico/rotulos.png (255 = rótulo), y de
+#     ahí la textura de un canal del modo color: public/plano/rotulos.webp (4096) y rotulos-2k.webp
+$PY tools/geo/rotulos.py $D/mosaico-costura.tif $D/segmentacion/mosaico/rotulos.png --escala 0.5
+node tools/rotulos.mjs $D/segmentacion/mosaico/rotulos.png
 # 8. plano: LOD y teselas del mosaico cosido → public/plano/, y bloque "plano" de public/datos/ciudad.json
 node tools/plano.mjs $D/mosaico-costura.tif $D/mosaico.json
 
