@@ -21,7 +21,7 @@ export const GLSL_VALLE = /* glsl */ `
 
   float azar2(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
   /** Ruido de valor en 0–1, suave. */
-  float ruido(vec2 p) {
+  float ruidoValle(vec2 p) {
     vec2 i = floor(p), f = fract(p);
     f = f * f * (3.0 - 2.0 * f);
     return mix(mix(azar2(i), azar2(i + vec2(1.0, 0.0)), f.x), mix(azar2(i + vec2(0.0, 1.0)), azar2(i + vec2(1.0, 1.0)), f.x), f.y);
@@ -63,23 +63,23 @@ export const GLSL_VALLE = /* glsl */ `
   vec3 valleColor(vec4 s, float ribera, float e, vec2 hoja) {
     vec2 m = vMundo.xz;
     float altura = vTerreno.x, cuesta = vTerreno.y;
-    float manchas = 0.6 * ruido(m / 420.0) + 0.4 * ruido(m / 110.0);
+    float manchas = 0.6 * ruidoValle(m / 420.0) + 0.4 * ruidoValle(m / 110.0);
     // el llano: sabana seca, pajiza; las lomas, de un verde oliva
     vec3 c = mix(SABANA, SABANA_VERDE, smoothstep(0.3, 0.7, manchas));
     c = mix(c, LOMA, 0.7 * smoothstep(0.07, 0.3, cuesta + 0.1 * (manchas - 0.5)));
     // el Ávila: ocre pálido, malva arriba; sus pliegues los marcan la luz y el monte de las quebradas
-    float cerro = smoothstep(170.0, 420.0, altura + 90.0 * (ruido(m / 260.0) - 0.5));
+    float cerro = smoothstep(170.0, 420.0, altura + 90.0 * (ruidoValle(m / 260.0) - 0.5));
     c = mix(c, mix(AVILA, AVILA_ALTO, smoothstep(420.0, 900.0, altura)), 0.9 * cerro);
     // el monte: manchones de copas donde crece.png dice, y el bosque de galería de las quebradas
     float monte = creceEn(hoja).b;
-    float copas = smoothstep(0.36, 0.7, monte + 0.5 * detalle(13.0) * (ruido(m / 13.0) - 0.5) + 0.25 * (ruido(m / 55.0) - 0.5));
+    float copas = smoothstep(0.36, 0.7, monte + 0.5 * detalle(13.0) * (ruidoValle(m / 13.0) - 0.5) + 0.25 * (ruidoValle(m / 55.0) - 0.5));
     float galeria = smoothstep(0.03, 0.3, ribera);
     c = mix(c, RIBERA, 0.5 * galeria);
-    c = mix(c, mix(MONTE, RIBERA, 0.6 * ruido(m / 29.0)), 0.6 * copas);
+    c = mix(c, mix(MONTE, RIBERA, 0.6 * ruidoValle(m / 29.0)), 0.6 * copas);
     // en 1936, los sembradíos que dibuja el plano
     c = mix(c, CULTIVO_1936, s.g * (1.0 - s.a) * smoothstep(4.5, 5.0, e));
-    c *= 1.0 + 0.12 * detalle(4.0) * (ruido(m / 4.0) - 0.5);
+    c *= 1.0 + 0.12 * detalle(4.0) * (ruidoValle(m / 4.0) - 0.5);
     // el Guaire y las quebradas, con su playa
     c = mix(c, PLAYA, 0.45 * smoothstep(0.3, 0.65, ribera) * (1.0 - s.r));
-    return mix(c, AGUA_CLARA * (1.0 + 0.16 * detalle(7.0) * (ruido(m / 7.0) - 0.5)), s.r);
+    return mix(c, AGUA_CLARA * (1.0 + 0.16 * detalle(7.0) * (ruidoValle(m / 7.0) - 0.5)), s.r);
   }`

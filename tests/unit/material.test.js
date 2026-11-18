@@ -97,3 +97,13 @@ describe('material con el plano de cada época', () => {
     expect(muestreadores('uniform sampler2D a, b[4]; uniform sampler2D c;')).toBe(6)
   })
 })
+
+describe('el fragment armado', () => {
+  test('ninguna función GLSL queda definida dos veces entre los módulos del shader', () => {
+    const { fragmentShader } = compilar()
+    const definidas = [...fragmentShader.matchAll(/^\s*(?:float|vec[234]|bool|void|mat[234]|Medidas)\s+(\w+)\s*\(([^)]*)\)\s*\{/gm)]
+      .map((m) => `${m[1]}(${m[2].split(',').map((a) => a.trim().split(/\s+/).slice(0, -1).join(' ')).join(',')})`)
+    const repetidas = definidas.filter((f, i) => definidas.indexOf(f) !== i)
+    expect(repetidas).toEqual([])
+  })
+})

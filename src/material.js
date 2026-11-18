@@ -23,7 +23,10 @@ import { VERTICE_COMUN, VERTICE_OLA } from './shader/vertice.js'
 const FRAGMENTO_COMUN = /* glsl */ `
   uniform float uAnchoOla, uColor;
   varying float vExiste;
-  varying vec3 vMundo; varying float vTecho; varying vec4 vInfo; varying float vBase;
+  varying vec3 vMundo; varying float vTecho; varying float vBase; varying vec2 vPared;
+  // lo que es igual en toda la casa (o en toda la pared) va sin interpolar: interpolado, la semilla
+  // y el largo tiemblan en la última cifra y azar() lo vuelve ruido de píxel a píxel
+  flat varying vec4 vInfo; flat varying float vLargo;
   varying vec2 vTerreno;
   ${GLSL_AZAR}
   ${GLSL_EPOCAS}
@@ -39,12 +42,15 @@ const FRAGMENTO_COLOR = /* glsl */ `
   vec2 uv = vec2(uvPlano.x, 1.0 - uvPlano.y);
   vec3 papel = planoEn(uvPlano);
   float esSuelo = step(vInfo.w, 0.5);
+  // la fachada (src/shader/fachada.js), con sus derivadas tomadas acá, fuera de toda rama
+  vec2 wPared = max(fwidth(vec2(vPared.x, vMundo.y - vBase)), vec2(1e-4));
+  vec4 fachada = fachadaEn(vec2(vPared.x, vLargo), vMundo.y - vBase, vInfo, paredColor(vInfo.y, vInfo.z, vMundo.y - vBase), wPared);
 
-  // tinta: el techo y el suelo son el plano; la pared, papel
-  vec3 enTinta = mix(diffuseColor.rgb, papel, vTecho);
+  // tinta: el techo y el suelo son el plano; la pared, papel con sus vanos y molduras a pluma
+  vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, fachada.a), papel, vTecho);
 
-  // color: suelo pintado; techo y pared según la casa (src/shader/fachada.js)
-  vec3 enColor = mix(mix(paredColor(vInfo.y, vInfo.z, vMundo.y - vBase), techoColor(vInfo.y, vInfo.z), vTecho), sueloColor(uv, papel), esSuelo);
+  // color: suelo pintado; techo y fachada según la casa
+  vec3 enColor = mix(mix(fachada.rgb, techoColor(vInfo.y, vInfo.z), vTecho), sueloColor(uv, papel), esSuelo);
 
   diffuseColor.rgb = mix(enTinta, enColor, uColor);
 
