@@ -146,7 +146,9 @@ class _Reparto:
 
     def tramo(self, desde, hasta, cierra, tras_patio):
         """Reparte lo macizo entre `desde` y `hasta`. `cierra`: termina en un ala (después viene un patio
-        del plano o una calle); si no, puede terminar en el solar. `tras_patio`: arranca con un ala."""
+        del plano o una calle); si no, puede terminar en el solar. `tras_patio`: arranca con un ala.
+        En un tramo que cierra, `patios_max` no rige: no hay solar donde terminar, y cerrar todo el resto
+        con un ala la haría mucho más honda que ALA_MAXIMA_M; se siguen alternando patios y alas."""
         v = desde
         if tras_patio and hasta - v > 1e-6:
             w = self.fondo_de_ala(hasta - v, cierra)

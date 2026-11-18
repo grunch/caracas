@@ -121,6 +121,9 @@ def test_si_el_fondo_da_a_otra_calle_se_cierra_con_un_ala_y_no_con_solar():
         assert not de_tipo(alas, SOLAR)
         ultima = max(alas, key=lambda a: a[4])
         assert ultima[0] == CRUZADA and ultima[4] == 46 and (ultima[1], ultima[3]) == (0, 12)
+        # sin solar donde terminar, el tope de patios no rige: patios y alas hasta la otra calle, ninguna de más de 9 m
+        assert len(de_tipo(alas, PATIO)) >= 2
+        assert all(a[4] - a[2] <= 9 + 1e-6 for a in de_tipo(alas, CRUZADA))
 
 
 def test_un_patio_del_plano_se_conserva_donde_esta():
