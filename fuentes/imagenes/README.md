@@ -83,3 +83,26 @@ las **arquerías perimetrales** y los puestos del mercado (hito nuevo para T40: 
 Mayor", con `muere` en 1889: Guzmán Blanco lo quita y hace la Plaza Bolívar ajardinada con la estatua,
 hacia 1874). Los jardines en X y los árboles de la plaza que hoy salen del plano de 1936 no deben verse
 antes de 1889.
+
+## ~1840 (a verificar) · Vista de la ciudad con el Ávila (`1840-camaradecaracas-vista-desde-el-calvario`) → épocas 1772 y 1843
+
+Litografía **en color**, tomada desde una loma al suroeste (El Calvario, probablemente) mirando al
+noreste. Llegó como ilustración de la época del obispo Diez Madroñero (1757–1769), pero por su estilo
+parece del siglo XIX. Es la **referencia de color y del conjunto**.
+
+- **Un mar de tejados rojos**, bajo y parejo: casi todo de un piso, con algunos altos sueltos. Tejas de
+  rojo anaranjado a marrón, gastadas de forma despareja.
+- **Paredes blancas y crema**; no se ven colores fuertes.
+- **Tejados a dos y a cuatro aguas**, con las crujías formando patios: se ven los huecos de los patios
+  entre los techos, con **árboles asomando** (los patios tienen vegetación).
+- **Dos torres** sobresalen, y nada más: la de la Catedral (centro derecha) y otra a la izquierda.
+- **Palmas** sueltas y matas en el borde de la ciudad; al norte, entre la ciudad y el cerro, **sabana
+  abierta sin casas**.
+- **El Ávila**: enorme, verde grisáceo, con pliegues claros y la falda limpia; la ciudad llega solo hasta
+  el pie. En primer plano, loma con pasto verde oscuro, vacas y una cruz.
+- El borde de la ciudad es **neto**: se pasa de casas a campo sin suburbio.
+
+Qué implica: confirma teja + cal como paleta de 1772–1843 y la variación de tono de los techos; los
+patios llevan árboles (ya en `arboles.bin`, falta darles `nace` temprano); el campo es sabana verde con
+palmas (para "el valle antes de la ciudad"); el relieve del Ávila debe leerse grande y plegado desde el
+suroeste: buena vista de control para comparar con el visor.
