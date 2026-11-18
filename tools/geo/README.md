@@ -41,7 +41,19 @@ node tools/empacar-ciudad.mjs $D/ciudad-1936.json
 
 # 7. plano: LOD y teselas del mosaico cosido → public/plano/, y bloque "plano" de public/datos/ciudad.json
 node tools/plano.mjs $D/mosaico-costura.tif $D/mosaico.json
+
+# 8. calce con el mundo: cuadrícula 1936 ⇄ UTM 19N con los puntos de control OSM de
+#    gcp/1936-wgs84.json (px/py en el mosaico; reescribe transformación y residuos)
+.venv/bin/python tools/geo/gcp1936.py --modelo similitud
+
+# 9. relieve: DEM Copernicus GLO-30 (lo baja si falta) → public/datos/relieve.bin (930×740, 10 m),
+#    sin edificios y corregido con las cotas del plano (gcp/1936-cotas.json)
+.venv/bin/python tools/geo/relieve.py --dem /tmp/Copernicus_DSM_COG_10_N10_00_W067_00_DEM.tif
 ```
+
+El calce y las cotas se midieron sobre `mosaico.tif`; `mosaico-costura.tif` tiene la misma geometría
+(solo rellena la franja de la costura), así que valen para los dos. `geo1936.py` es el módulo para
+llevar cualquier dato de OSM o WGS84 al plano (`wgs84_a_grid`, `grid_a_px`) y al revés.
 
 Los pasos 1–3 son lentos (minutos); la costura tarda ~20 s, el vectorizador ~30 s y el plano ~1 min.
 Si cambia el mosaico (paso 2) hay que repetir todo lo que sigue.
