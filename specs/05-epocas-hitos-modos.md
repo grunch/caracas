@@ -95,7 +95,9 @@ Lo que falta verificar va en `verificar` de cada definición (fechas, orientaci�
 con arcos a los dos lados…). Límite conocido: la plaza real es una explanada a nivel, hundida respecto de
 la calle al norte; acá no se puede cavar la hoja, así que es plana solo en la mitad baja.
 
-Capturas para comparar con las referencias: `ANGLE=gl node tests/e2e/capturas-hitos.mjs`.
+Capturas para comparar con las referencias: con el visor servido (`npx vite --port 5199 --strictPort` en otra
+terminal, o la URL de uno que ya esté andando como primer argumento),
+`ANGLE=gl node tests/e2e/capturas-hitos.mjs [url] [carpeta] [vistas-json]`.
 
 ## Fichas (`fichas.js` + `ficha.js`)
 

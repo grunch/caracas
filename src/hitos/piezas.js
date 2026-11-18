@@ -75,11 +75,11 @@ export function bulto(p, centro, [rx, ry, rz], { color = TONO.BRONCE, lados = 7,
 
 /**
  * Tejado centrado, con la cumbrera a lo largo de x. `tipo`: 'dos' aguas (con hastiales de pared), 'cuatro'
- * aguas o 'una' (cae hacia +z). El alero vuela `alero` metros. uv en metros: u a lo largo, v pendiente abajo.
+ * aguas o 'una' (cae hacia +z). `alto` es el de la cumbrera sobre el borde de las paredes; el alero vuela
+ * `alero` metros y baja siguiendo la pendiente. uv en metros: u a lo largo, v pendiente abajo.
  */
 export function tejado(p, { largo, ancho, alto, tipo = 'dos', alero = 0.45, color = TONO.TEJA, hastial = TONO.CAL, mat = MAT.TEJA }) {
   const [L, W] = [largo / 2 + (tipo === 'dos' ? 0 : alero), ancho / 2 + alero]
-  const faldon = Math.hypot(W, alto)
   const tris = []
   if (tipo === 'una') {
     const f = Math.hypot(2 * W, alto)
@@ -89,18 +89,21 @@ export function tejado(p, { largo, ancho, alto, tipo = 'dos', alero = 0.45, colo
       ...cuadro([-L, 0, -W], [L, 0, -W], [L, alto, -W], [-L, alto, -W])]), { color: hastial, flota: true })
     return
   }
+  // el faldón pasa por el borde de la pared (y = 0) y sigue bajando hasta el alero: sin rendija bajo el tejado
+  const e = -alto * (alero / (ancho / 2))
+  const faldon = Math.hypot(W, alto - e)
   // cumbrera: en cuatro aguas se acorta medio ancho por lado (pirámide si la planta es cuadrada)
   const c = tipo === 'cuatro' ? Math.max(0, L - W) : L
   for (const s of [-1, 1]) {
-    tris.push(...cuadro([-c, alto, 0], [c, alto, 0], [L, 0, s * W], [-L, 0, s * W], [[-c, 0], [c, 0], [L, faldon], [-L, faldon]]))
+    tris.push(...cuadro([-c, alto, 0], [c, alto, 0], [L, e, s * W], [-L, e, s * W], [[-c, 0], [c, 0], [L, faldon], [-L, faldon]]))
   }
   if (tipo === 'cuatro') {
-    for (const s of [-1, 1]) tris.push([[s * c, alto, 0], [s * L, 0, -W], [s * L, 0, W], [0, 0], [-W, faldon], [W, faldon]])
+    for (const s of [-1, 1]) tris.push([[s * c, alto, 0], [s * L, e, -W], [s * L, e, W], [0, 0], [-W, faldon], [W, faldon]])
   }
   p.geo(deTriangulos(tris), { color, mat, flota: true })
   if (tipo === 'dos') {
     const w = ancho / 2
-    p.geo(deTriangulos([-1, 1].map((s) => [[s * largo / 2, 0, -w], [s * largo / 2, alto * (w / W), 0], [s * largo / 2, 0, w]])), { color: hastial, flota: true })
+    p.geo(deTriangulos([-1, 1].map((s) => [[s * largo / 2, 0, -w], [s * largo / 2, alto, 0], [s * largo / 2, 0, w]])), { color: hastial, flota: true })
   }
 }
 

@@ -1,4 +1,5 @@
 // Capturas de los hitos (no es un test): node tests/e2e/capturas-hitos.mjs [url] [carpeta] [vistas-json]
+// No levanta el servidor: antes, `npx vite --port 5199 --strictPort` (o pasar la URL de uno que ya esté andando).
 // Cada vista: { epoca, color (true/false), x, z, dist, yaw, pitch }. Chromium headless con SwiftShader.
 // Con GPU: ANGLE=gl node tests/e2e/capturas-hitos.mjs … (mucho más rápido que SwiftShader).
 // Para comparar con las referencias de fuentes/imagenes (los montajes los arma quien las mira).

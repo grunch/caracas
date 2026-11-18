@@ -24,7 +24,7 @@ const lineales = new Map()
 /** Color sRGB (0xrrggbb) → [r, g, b] lineal; un array [r, g, b] pasa tal cual (parámetros, no color). */
 export function lineal(color) {
   if (Array.isArray(color)) return color
-  if (!lineales.has(color)) lineales.set(color, new Color(color).toArray())
+  if (!lineales.has(color)) lineales.set(color, Object.freeze(new Color(color).toArray())) // congelado: es de todos
   return lineales.get(color)
 }
 
@@ -57,7 +57,7 @@ export function crearLienzo() {
       /** Agrandado o achicado parejo (una estatua más grande que el natural). */
       escalado: (k) => hijo({ matriz: estado.matriz.clone().multiply(new Matrix4().makeScale(k, k, k)) }),
       /** Con otra vida (épocas en que está en pie). */
-      con: ({ nace = estado.vida[0], muere = estado.vida[1] }) => hijo({ vida: [nace, muere] }),
+      con: ({ nace, muere }) => hijo({ vida: [nace ?? estado.vida[0], muere ?? estado.vida[1]] }),
       /** Lo que se dibuje se apoya en el terreno bajo el origen de este pintor (un farol, un puesto). */
       apoyado: () => { const o = origen(); return hijo({ apoyo: { x: o.x, z: o.z } }) },
       /** Cada vértice se apoya en el terreno que tiene debajo (rejas, pretiles, losas). */

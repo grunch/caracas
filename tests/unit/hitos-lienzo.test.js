@@ -23,6 +23,8 @@ describe('lineal', () => {
     expect(lineal(0xffffff)).toEqual([1, 1, 1])
     expect(lineal(0x808080)[0]).toBeCloseTo(0.2159, 3)
     expect(lineal([43, 41, 1])).toEqual([43, 41, 1])
+    // el color cacheado es de todos: no se puede cambiar
+    expect(Object.isFrozen(lineal(0xffffff))).toBe(true)
   })
 })
 
@@ -111,9 +113,13 @@ describe('crearLienzo', () => {
     const p = lienzo.hito({ origen: { x: 0, z: 0 }, nace: 1 })
     p.con({ nace: 3, muere: 4 }).geo(cubo())
     p.con({}).geo(cubo())
+    p.con({ nace: null, muere: undefined }).geo(cubo()) // null y undefined heredan, como en validarHitos
+    p.con({ nace: 0 }).geo(cubo()) // el 0 explícito vale
     const d = lienzo.datos()
     expect(de(d.vidas, 0, 2)).toEqual([3, 4])
     expect(de(d.vidas, 24, 2)).toEqual([1, 0])
+    expect(de(d.vidas, 48, 2)).toEqual([1, 0])
+    expect(de(d.vidas, 72, 2)).toEqual([0, 0])
   })
 
   test('una geometría sin normales es un error', () => {
