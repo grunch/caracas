@@ -63,9 +63,11 @@ function leerCasas({ vertices, techos, vida = null, historia = null, marcos = nu
     const v = vida ? vida[t / 4] : 0
     const centro = anillo.reduce((s, p) => [s[0] + p[0] / cuantos, s[1] + p[1] / cuantos], [0, 0])
     const casa = { ...desempacarTecho(techos[t + 2]), semilla: techos[t + 3], nace: v % 8, muere: Math.floor(v / 8) }
+    const marco = conMarco.get(t / 4) ?? null
     const bytes = historia?.subarray((t / 4) * EPOCAS_HISTORIA, (t / 4 + 1) * EPOCAS_HISTORIA)
     casas.push({
-      ...casa, centro, huella: cuantos >= 3 ? simplificar(anillo, tolerancia) : null, etapas: etapasDe(casa, bytes), marco: conMarco.get(t / 4) ?? null,
+      ...casa, centro, huella: cuantos >= 3 ? simplificar(anillo, tolerancia) : null, marco,
+      etapas: etapasDe(casa, bytes, { conAlas: Boolean(marco?.alas.length) }),
       // sin historia (datos viejos, la ciudad de demostración), todas las épocas valen lo de `techos`
       historia: empacarHistoria(bytes ?? Array(EPOCAS_HISTORIA).fill((casa.estilo & 15) + 16 * Math.min(casa.pisos, 15))),
     })

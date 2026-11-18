@@ -23,6 +23,8 @@ export const CUBIERTA = Object.freeze({ PARED: 0, TEJA: 1, AZOTEA: 2, ZINC: 3, A
 const COLONIAL = 0, REPUBLICANO = 1, GUZMANCISTA = 2, ECLECTICO = 3, MODERNO = 4, QUINTA = 5, RANCHO = 6, ORILLAS = 7, GALPON = 8, PUBLICO = 9
 /** Las fachadas de pretil tapan el tejado desde la calle (espejo de conPretil, src/shader/comun.js). */
 const DE_PRETIL = [REPUBLICANO, GUZMANCISTA, ECLECTICO]
+/** Las fachadas de las casas de patio (src/alas.js): con otra, la casa se techa entera. */
+export const ESTILOS_DE_PATIO = Object.freeze([COLONIAL, REPUBLICANO, GUZMANCISTA, ORILLAS])
 export const EPOCAS = 6
 
 /**
@@ -82,16 +84,18 @@ export function cubiertaDe(estilo, semilla, epoca) {
  * partida donde cambia la forma de su techo (la cubierta o los pisos). Cambiar de fachada (de colonial
  * a republicana) no hace otra etapa: es la misma casa, a la que el shader le sube el pretil. Cada
  * etapa trae el estilo con que arranca, sus pisos, su vida [nace, muere) y si en algún momento lleva
- * alero o pretil. Sin historia, una sola etapa con lo que dice el techo.
+ * alero o pretil. Sin historia, una sola etapa con lo que dice el techo. `conAlas`: la casa trae alas
+ * del dato (es de patio mientras su fachada lo sea).
  */
-export function etapasDe({ estilo, pisos, semilla, nace = 0, muere = 0 }, historia = null) {
+export function etapasDe({ estilo, pisos, semilla, nace = 0, muere = 0 }, historia = null, { conAlas = false } = {}) {
   const pretil = DE_PRETIL.includes(estilo)
   if (!historia) return [{ estilo, pisos, nace, muere, conAlero: !pretil, conPretil: pretil }]
   const etapas = []
   let clave = null
   for (let e = nace; e < (muere || EPOCAS); e++) {
     const [est, alt] = [historia[e] % 16, Math.floor(historia[e] / 16) || pisos]
-    const nueva = `${cubiertaDe(est, semilla, e)}·${alt}·${est === QUINTA}·${est === GALPON}`
+    // una casa con alas (conAlas) cambia de forma también cuando deja de ser de patio: pasa a techarse entera
+    const nueva = `${cubiertaDe(est, semilla, e)}·${alt}·${est === QUINTA}·${est === GALPON}·${conAlas && ESTILOS_DE_PATIO.includes(est)}`
     if (nueva !== clave) {
       if (etapas.length) etapas[etapas.length - 1].muere = e
       etapas.push({ estilo: est, pisos: alt, nace: e, muere, conAlero: false, conPretil: false })

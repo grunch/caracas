@@ -10,7 +10,7 @@
  * huecos), en el marco del lote que trae el dato: lo levanta src/alzado.js. Las alas que tocan el borde
  * del lote se estiran hacia afuera, para cubrir los salientes de la huella que el rectángulo no abarca.
  */
-import { CUBIERTA, PRETIL_M, altoDePiso, azar, cubiertaDe } from './techos.js'
+import { CUBIERTA, ESTILOS_DE_PATIO, PRETIL_M, altoDePiso, azar, cubiertaDe } from './techos.js'
 
 /** Tipos de ala (tools/geo/alas.py). */
 export const ALA = Object.freeze({ PATIO: 0, SOLAR: 1, FRENTE: 2, CRUZADA: 3, LATERAL_IZQ: 4, LATERAL_DER: 5, ESQUINA_IZQ: 6, ESQUINA_DER: 7, FONDO: 8 })
@@ -19,8 +19,7 @@ export const CALLE = Object.freeze({ DER: 1, FONDO: 2, IZQ: 4 })
 export const CAMPOS_MARCO = 11
 export const CAMPOS_ALA = 5
 
-const COLONIAL = 0, REPUBLICANO = 1, GUZMANCISTA = 2, ORILLAS = 7
-const ESTILOS_DE_PATIO = [COLONIAL, REPUBLICANO, GUZMANCISTA, ORILLAS]
+const COLONIAL = 0, ORILLAS = 7
 const MARGEN_M = 40 // cuánto se estiran hacia afuera las alas del borde del lote
 const TAPIA_M = 2.6
 const ALTO_MINIMO_ALA_M = 2.3 // bajo el alero de un ala hay un corredor

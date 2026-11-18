@@ -320,3 +320,20 @@ describe('etapasDe: la casa a lo largo de las épocas', () => {
     expect(etapasDe({ estilo: COLONIAL, pisos: 2, semilla: 1, nace: 5, muere: 0 }, h)[0].pisos).toBe(2)
   })
 })
+
+describe('etapasDe: una casa con alas', () => {
+  const b = (estilo, pisos = 1) => estilo + 16 * pisos
+  // semilla con la ecléctica de teja (no de azotea): la cubierta y los pisos no cambian
+  const semilla = [...Array(200).keys()].find((s) => cubiertaDe(ECLECTICO, s, 4) === CUBIERTA.TEJA)
+  const historia = [b(COLONIAL), b(COLONIAL), b(REPUBLICANO), b(REPUBLICANO), b(ECLECTICO), b(ECLECTICO)]
+  const casaDe = { estilo: ECLECTICO, pisos: 1, semilla, nace: 1, muere: 0 }
+
+  test('cuando deja de ser de patio empieza otra etapa (se techa entera), aunque siga con teja y los mismos pisos', () => {
+    const etapas = etapasDe(casaDe, historia, { conAlas: true })
+    expect(etapas.map((e) => [e.estilo, e.nace, e.muere])).toEqual([[COLONIAL, 1, 4], [ECLECTICO, 4, 0]])
+  })
+
+  test('sin alas, es la misma etapa como siempre', () => {
+    expect(etapasDe(casaDe, historia)).toHaveLength(1)
+  })
+})
