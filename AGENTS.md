@@ -8,9 +8,11 @@ Leer también `CLAUDE.md` (convenciones del proyecto) y `specs/` (qué se constr
   (`tests/**`, `tools/geo/tests/**`, `**/*.md`, `specs/**`).
 - Si una tarea es más grande, se divide en tareas más chicas, **un PR por tarea**, cada una con valor
   propio y tests verdes. Cuando una depende de otra, se apilan (la rama de la segunda sale de la primera).
-- Para medir antes de abrir el PR:
+- Para medir, siempre contra la **rama base del PR** (en un PR apilado, la rama de la que sale; si no,
+  `main`), así no se cuentan las líneas del PR anterior:
   ```
-  git diff --stat origin/main...HEAD -- . ':(exclude)tests' ':(exclude)tools/geo/tests' ':(exclude)*.md' ':(exclude)specs' | tail -1
+  BASE=$(gh pr view --json baseRefName -q .baseRefName 2>/dev/null || echo main)   # o la rama base, si el PR aún no existe
+  git diff --stat "origin/$BASE...HEAD" -- . ':(exclude)tests' ':(exclude)tools/geo/tests' ':(exclude)*.md' ':(exclude)specs' | tail -1
   ```
 
 ## Flujo de PRs
