@@ -51,7 +51,7 @@ test('los hitos son una sola malla con los atributos de su material y los unifor
   expect(hitos.atributos).toEqual(['aAncla', 'aColor', 'aHito', 'aUv', 'aVida', 'normal', 'position'])
   expect(hitos.triangulos).toBeGreaterThan(1000)
   expect(hitos.comparte).toBe(true)
-  expect(hitos.ids).toContain('plaza-bolivar')
+  expect(hitos.ids).toEqual(expect.arrayContaining(['plaza-bolivar', 'catedral', 'santa-capilla', 'panteon']))
   // el shader compila y dibuja, en color y en tinta
   await colorDeLaPlaza(page, 3)
   await page.evaluate(() => { window.lab.ciudad.U.uColor.value = 0; window.lab.renderer.render(window.lab.scene, window.lab.camera) })
@@ -71,6 +71,18 @@ test('al cambiar de época cambia lo que se ve en la Plaza Bolívar: vacía, mer
   expect(distancia(jardin, damero)).toBeLessThan(25)
   // la estatua de bronce sobre piedra oscura: el centro es más oscuro que la tierra del mercado
   expect(jardin[0] + jardin[1] + jardin[2]).toBeLessThan(mercado[0] + mercado[1] + mercado[2])
+})
+
+test('la Catedral aparece en 1772 y Santa Capilla recién en 1889', async ({ page }) => {
+  await listo(page)
+  // el tejado de la nave de la Catedral (al este de la plaza) y el de Santa Capilla (al norte), desde arriba
+  const catedral = { x: 80, z: -12, lado: 20 }
+  const capilla = { x: 0, z: -175, lado: 12 }
+  const [c0, c1, c5] = [await colorDeLaPlaza(page, 0, catedral), await colorDeLaPlaza(page, 1, catedral), await colorDeLaPlaza(page, 5, catedral)]
+  expect(distancia(c0, c1)).toBeGreaterThan(12)
+  expect(distancia(c1, c5)).toBeLessThan(6)
+  const [s2, s3] = [await colorDeLaPlaza(page, 2, capilla), await colorDeLaPlaza(page, 3, capilla)]
+  expect(distancia(s2, s3)).toBeGreaterThan(12)
 })
 
 test('acostada la ciudad, los hitos no se dibujan (la hoja queda limpia)', async ({ page }) => {

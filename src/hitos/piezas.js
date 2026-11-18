@@ -11,7 +11,7 @@ import { MAT } from './lienzo.js'
 
 /** La paleta (sRGB): cal, teja, piedra, bronce… Los tonos salen de las fotos y grabados de fuentes/imagenes. */
 export const TONO = Object.freeze({
-  CAL: 0xe9e2d0, CAL_SOMBRA: 0xcfc6b0, TEJA: 0x9a4f33, TEJA_VIEJA: 0x7d4a36, PIEDRA: 0x8a8378,
+  CAL: 0xe9e2d0, CAL_SOMBRA: 0xcfc6b0, TEJA: 0xa9614a, TEJA_VIEJA: 0x7d4a36, PIEDRA: 0x8a8378,
   PIEDRA_OSCURA: 0x5e5850, PIEDRA_CLARA: 0xbdb6a6, BRONCE: 0x4d4a36, HIERRO: 0x23262a, MADERA: 0x5d4631,
   TIERRA: 0xb39a72, LONA: 0xd8cfb8, LOSA: 0xcbc3b0, VANO: 0x2b2622, PIZARRA: 0x4b4f55, VIDRIO: 0xf2e7b8,
   OCRE: 0xd9b25a, ZINC: 0x9aa3a6, COBRE: 0x5f8274,
