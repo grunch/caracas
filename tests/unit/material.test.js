@@ -141,3 +141,16 @@ describe('color sin rótulos', () => {
     expect(U.uRotulos.value.image.data[0]).toBe(0)
   })
 })
+
+describe('la historia de cada casa en el shader', () => {
+  test('el vértice elige estilo y pisos de la época que rige y lleva la altura a esos pisos', () => {
+    const { vertexShader, fragmentShader } = compilar()
+    expect(vertexShader).toContain('attribute vec2 aHistoria')
+    expect(vertexShader).toContain('vec2 enEpoca(vec2 historia, float epoca)')
+    expect(vertexShader).toMatch(/vInfo\.zw = frente < 0\.5 \? de : a/)
+    expect(vertexShader).toMatch(/transformed\.y \*= mix\(de\.y, a\.y, frente\) \/ aInfo\.w/)
+    // el suelo (pisos = 0) no tiene historia: no se toca
+    expect(vertexShader).toMatch(/if \(aInfo\.w > 0\.5\) \{[^}]*enEpoca/)
+    expect(fragmentShader).toContain('ESTILO_GALPON')
+  })
+})
