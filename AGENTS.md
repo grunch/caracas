@@ -15,6 +15,11 @@ Leer también `CLAUDE.md` (convenciones del proyecto) y `specs/` (qué se constr
   git diff --stat "origin/$BASE...HEAD" -- . ':(exclude)tests' ':(exclude)tools/geo/tests' ':(exclude)*.md' ':(exclude)specs' | tail -1
   ```
 
+## Plan
+
+Las tareas, su orden y su estado están en `specs/07-plan-de-implementacion.md`. Cada PR corresponde a una
+tarea (o subtarea) del plan y actualiza su fila (número de PR, estado).
+
 ## Flujo de PRs
 
 1. Rama nueva desde `main` (o desde la rama de la que depende): `feat/…`, `fix/…`, `refactor/…`, `chore/…`.
