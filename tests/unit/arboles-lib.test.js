@@ -164,10 +164,10 @@ describe('arbolesDePatio', () => {
     expect(arbolesDePatio(ciudad(400), 0.5)).toEqual(arboles)
     const enSolar = arboles.filter((a) => a.y > 140)
     const enPatio = arboles.filter((a) => a.y <= 140)
-    expect(enPatio.length).toBeGreaterThan(400 * 0.2)
-    expect(enPatio.length).toBeLessThan(400 * 0.4)
-    expect(enSolar.length).toBeGreaterThan(400 * 0.5)
-    expect(enSolar.length).toBeLessThan(400 * 0.7)
+    expect(enPatio.length).toBeGreaterThan(400 * 0.08)
+    expect(enPatio.length).toBeLessThan(400 * 0.22)
+    expect(enSolar.length).toBeGreaterThan(400 * 0.3)
+    expect(enSolar.length).toBeLessThan(400 * 0.5)
     for (const a of arboles) {
       const u = (a.x - 100) % 24
       const [v0, v1, u0, u1] = a.y > 140 ? [140, 180, 0, 24] : [114, 126, 8, 24]
@@ -184,7 +184,7 @@ describe('arbolesDePatio', () => {
     const b = (estilo) => estilo + 16
     const seVuelveModerna = Uint8Array.from(Array.from({ length: 200 }, () => [b(COLONIAL), b(COLONIAL), b(COLONIAL), b(COLONIAL), b(MODERNO), b(MODERNO)]).flat())
     const arboles = arbolesDePatio(ciudad(200, seVuelveModerna), 0.5)
-    expect(arboles.length).toBeGreaterThan(50)
+    expect(arboles.length).toBeGreaterThan(30)
     expect(arboles.every((a) => a.nace === 1 && a.muere === 4)).toBe(true)
     const siempreModerna = Uint8Array.from(Array.from({ length: 200 }, () => Array(6).fill(b(MODERNO))).flat())
     expect(arbolesDePatio(ciudad(200, siempreModerna), 0.5)).toEqual([])

@@ -51,9 +51,9 @@ $PY tools/geo/segmentar.py $D/mosaico.tif $D/segmentacion/mosaico --escala 0.5
 $PY tools/geo/costura.py --mosaico $D/mosaico.tif --meta $D/mosaico.json \
     --clases $D/segmentacion/mosaico/clases.png
 
-# 5. vectorizar: manzanas → lotes rectos (lotes.py) → techos (--plaza = "plaza" de mosaico.json, en píxeles)
+# 5. vectorizar: manzanas → lotes rectos (lotes.py) → techos, marcos y alas (--plaza = "plaza" de mosaico.json, en píxeles)
 $PY tools/geo/vectorizar.py $D/segmentacion/mosaico/clases-costura.png $D/ciudad-1936.json \
-    --escala 0.5 --plaza 8968.2,6839
+    --escala 0.5 --plaza 8968.2,6839 --patios $D/patios-de-casas.png
 
 # 6. empacar: techos → public/datos/ciudad.pak
 node tools/empacar-ciudad.mjs $D/ciudad-1936.json
@@ -67,7 +67,7 @@ node tools/arboles.mjs $D/segmentacion/mosaico/arboles.json $D/mosaico.json $D/s
   $D/segmentacion/mosaico/clases-costura.png   # + el monte: los árboles silvestres (crece.png G y B)
 
 # 7. suelo: máscara RGBA para el modo color (R agua · G vegetación · B edificado · A manzana)
-node tools/suelo.mjs $D/segmentacion/mosaico/clases-costura.png
+node tools/suelo.mjs $D/segmentacion/mosaico/clases-costura.png $D/patios-de-casas.png
 # 7b. rótulos: la tinta del plano que es letra, cifra o símbolo (nombres, cotas, letras de parroquia,
 #     el punteado del tranvía) y no dibujo → $D/segmentacion/mosaico/rotulos.png (255 = rótulo), y de
 #     ahí la textura de un canal del modo color: public/plano/rotulos.webp (4096) y rotulos-2k.webp
@@ -111,6 +111,13 @@ manzana (o la cruzan, si mide menos de 20 m). Los frentes van de 9 a 14 m, al az
 de la manzana. Una casa es lo edificado de un lote: si la manzana está toda edificada en el plano,
 las casas salen largas, pero rectas. Las tiras de menos de 3 m de ancho y los pedazos de menos de
 30 m² se unen a la casa vecina.
+
+**Casas de patio** (`alas.py`, dentro del paso 5): cada casa que da a una calle recibe su marco (el
+rectángulo del lote, con el frente sobre la línea de fachada de su cuadra) y, si el lote da para
+patios, sus alas: crujía al frente, patios con alas laterales, alas cruzadas y solar. Van en
+`ciudad-1936.json` como `marcos` y `alas` (`specs/02`, `specs/03` §3). Con `--patios <png>` el
+vectorizador deja además la máscara de los patios y solares que abrió por regla
+(`patios-de-casas.png`), que `tools/suelo.mjs` descuenta de lo edificado.
 
 Las hileras angostas que siguen una calle curva (sin dirección dominante, menos de 15 m de grosor
 y que llenan menos de la mitad de su rectángulo mínimo) conservan el método anterior: semillas

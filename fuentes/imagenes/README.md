@@ -416,6 +416,56 @@ escalinatas y baranda** (el relieve ya da el desnivel).
 Aplicado en `tools/geo/estilos.py` (T31c): los 3–4 pisos salen por probabilidad dentro del núcleo (14 % y 5 %),
 no puestos a mano en las esquinas de la plaza: eso queda para los hitos (T41).
 
+## Hoy · Vista aérea de un pueblo colonial conservado (`0000-usuario-aerea-pueblo-colonial`) → épocas 1772 y 1843 (patrón de las manzanas)
+
+Imagen satelital actual de un pueblo hispano-colonial que conserva su tejido (lugar sin identificar; no
+es Caracas). La aportó el responsable del proyecto como **la referencia de cómo se veían desde arriba
+las casas de Caracas en 1772**: lo que importa es el patrón, no el lugar. Las manzanas miden unos
+100 m, como las del damero de Caracas. Licencia dudosa (captura de un proveedor comercial): **no se
+publica**.
+
+- **Cada manzana es un anillo cerrado de casas**: sobre cada una de sus cuatro calles corre una
+  **banda continua de tejado** (la crujía del frente, de 5 a 8 m de fondo) con la **cumbrera paralela
+  a la calle**, un faldón hacia la calle y otro hacia adentro. La banda no se corta de casa en casa:
+  cambia el tono de la teja, no la línea.
+- **Detrás de la crujía, cada casa** (lote de 10 a 15 m de frente y 25 a 50 de fondo) tiene **alas
+  laterales y alas cruzadas alrededor de uno, dos o tres patios** rectangulares: los tejados forman un
+  **peine o una grilla de alas angostas** (4 a 6 m cada una, a una o a dos aguas, que desaguan al
+  patio) alrededor de esos huecos. Desde arriba la manzana parece un gofre de teja: cumbreras largas
+  sobre las calles, alas cortas perpendiculares y muchos patios chicos y oscuros. **No** hay tapas
+  grandes que cubran un lote entero, ni abanicos.
+- **Los patios** son chicos (4 a 8 m), de tierra o de laja, casi siempre a la sombra de sus paredes;
+  alguno tiene un árbol.
+- **Solares y corrales en el corazón de la manzana** en las menos densas: tierra pelada, algún árbol,
+  tapias bajas entre lote y lote.
+- **En las esquinas**, las crujías de las dos calles se unen con una **limatesa** (a cuatro aguas).
+- **La teja**: cada casa de un tono algo distinto, del marrón grisáceo de la teja vieja al **naranja
+  vivo** de los tejados rehechos; las cumbreras y las uniones de las alas se leen como líneas.
+- **Calles** angostas, rectas, de tierra o de piedra, **sin árboles**: los árboles están en los patios,
+  en los solares y en la plaza.
+- **La plaza**: una manzana abierta, con un rectángulo empedrado y unos pocos árboles.
+
+Coincide con las otras referencias: «una crujía al frente y otras alrededor del patio» (1812), «una
+crujía al frente y alas más bajas alrededor del patio» (1839), el mar de tejados de la foto de ~1903 y
+las «crujías alrededor de patios» de la vista de 1880 desde El Calvario.
+
+Qué implica para el modelo (T33b): las casas de teja de fachada colonial, republicana, guzmancista o
+de orillas son **casas de patio**. El plano de 1936 pinta macizas casi todas las manzanas del centro,
+así que los patios se abren por regla (y los que el plano sí dibuja se conservan):
+
+- `tools/geo/alas.py` (en el vectorizador) le da a cada casa que da a la calle su **marco**: el
+  rectángulo del lote con el frente sobre la **línea de fachada de su cuadra** (una recta ajustada al
+  borde de la manzana, la misma para todas las casas de ese lado), y la corta en **alas**: la crujía
+  del frente (7 a 8,5 m, la misma en toda la manzana, para que la cumbrera corra seguida), y hacia el
+  fondo, patios de 4 a 6 m con una o dos alas laterales, alas cruzadas de 5,5 a 7 m y el solar. Tres o
+  cuatro patios en el centro, dos o tres en los barrios, uno o dos en las orillas.
+- `src/alas.js` las techa: crujía y alas cruzadas a dos aguas con la cumbrera paralela a la calle,
+  alas laterales a media agua hacia el patio, inglete (limatesa y limahoya) en las esquinas; patios y
+  solar con su piso, sus paredes y su tapia.
+- `src/shader/techo.js`: un tono de teja por casa, del marrón grisáceo al naranja de teja nueva (una
+  de cada ocho); piso de patio más oscuro que la calle.
+- `tools/arboles-lib.mjs`: un árbol en algunos patios y en más de la mitad de los solares.
+
 ## Después de 1936 (guardadas para épocas futuras)
 
 El sitio termina hoy en 1936. Estas imágenes se guardan con `epocas: []` y `epocas_futuras` para cuando

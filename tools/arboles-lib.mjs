@@ -171,8 +171,8 @@ export function esDePlaza(claseEn, x, y, { pasoPx, maxPx }) {
 export const naceEnPlaza = (nace, dePlaza) => (dePlaza ? Math.max(nace, JARDINES_DESDE) : nace)
 
 const EPOCAS = 6
-const ARBOL_EN_PATIO = 0.3 // de los patios en que cabe, cuántos tienen su árbol
-const ARBOL_EN_SOLAR = 0.6
+const ARBOL_EN_PATIO = 0.15 // de los patios en que cabe, cuántos tienen su árbol
+const ARBOL_EN_SOLAR = 0.4
 const PATIO_CON_ARBOL_M = 4 // lado mínimo del patio para que le quepa un árbol
 const RADIO_PATIO_M = [1.6, 2.6]
 const RADIO_SOLAR_M = [2.2, 3.8]
@@ -180,7 +180,7 @@ const RADIO_SOLAR_M = [2.2, 3.8]
 /**
  * Los árboles de los patios y los solares de las casas de patio (marcos y alas de ciudad.pak, tools/geo/alas.py):
  * el plano de 1936 no los dibuja (pinta la manzana maciza), así que van por regla, como en la vista aérea
- * del pueblo colonial: un árbol en algunos patios y en más de la mitad de los solares. Nacen con su casa
+ * del pueblo colonial: un árbol en algunos patios y en buena parte de los solares. Nacen con su casa
  * y mueren cuando la casa deja de ser de patio (pasa a ecléctica, moderna…: ahí el visor la techa entera)
  * o cuando muere. Determinista: el azar sale del número de techo y del ala. → [{x, y, r (px), nace, muere}]
  */
