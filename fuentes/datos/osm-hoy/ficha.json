@@ -1,0 +1,13 @@
+{
+  "titulo": "Calles, vías férreas y agua de la Caracas actual (capa «lo de hoy»)",
+  "tipo": "vectorial (calles, rieles, ríos y quebradas, lagunas)",
+  "autor": "Colaboradores de OpenStreetMap",
+  "institucion": "OpenStreetMap Foundation",
+  "url_fuente": "https://www.openstreetmap.org/copyright",
+  "licencia": "Open Database License (ODbL) 1.0",
+  "atribucion_requerida": "© colaboradores de OpenStreetMap",
+  "dominio_publico": false,
+  "obtencion": "Una consulta a Overpass API (https://overpass-api.de/api/interpreter) por el rectángulo del mosaico de 1936 en WGS84 más 200 m de margen, con User-Agent genérico «caracas-historica/0.1»; la consulta exacta está en tools/geo/hoy_osm.py (consulta) y la respuesta cruda queda en fuentes/derivados/hoy/osm.json (fuera de git), con la fecha de la base en osm3s.timestamp_osm_base",
+  "uso": "tools/geo/hoy.py la lleva al plano de 1936 (geo1936) y genera public/plano/hoy-lejos.webp, public/plano/hoy-cerca.webp, public/datos/calles.json y public/datos/calles.bin: obras derivadas de la base de datos de OSM, bajo la misma ODbL",
+  "notas": "El visor tiene que mostrar «© colaboradores de OpenStreetMap» con enlace a https://www.openstreetmap.org/copyright mientras la capa esté visible (specs/05, «Ver lo de hoy»). Los nombres de calles van tal como figuran en OSM, sin corregir."
+}

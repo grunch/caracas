@@ -70,7 +70,17 @@ node tools/plano.mjs $D/mosaico-costura.tif $D/mosaico.json
 # 9. relieve: DEM Copernicus GLO-30 (lo baja si falta) → public/datos/relieve.bin (930×740, 10 m),
 #    sin edificios y corregido con las cotas del plano (gcp/1936-cotas.json)
 .venv/bin/python tools/geo/relieve.py --dem /tmp/Copernicus_DSM_COG_10_N10_00_W067_00_DEM.tif
+
+# 10. lo de hoy: calles, rieles y agua de OSM (Overpass, una consulta; caché en fuentes/derivados/hoy/osm.json,
+#     se baja solo si falta o con --descargar) → public/plano/hoy-lejos.webp (2048), hoy-cerca.webp (8192),
+#     public/datos/calles.json y calles.bin (formatos en specs/02). Con --qa: recorte del centro con OSM
+#     en rojo y el desfase medido contra las calles de la segmentación (qa-hoy.jpg + qa-hoy.json).
+.venv/bin/python tools/geo/hoy.py --qa fuentes/derivados/hoy/qa-hoy.jpg
 ```
+
+En `npm run datos` son los pasos `hoy-osm` (solo asegura la caché: la única descarga del pipeline, así que
+después corre sin red) y `hoy`. `npm run datos -- --descargar` vuelve a pedirle a Overpass. Datos ©
+colaboradores de OpenStreetMap, ODbL (`fuentes/datos/osm-hoy/ficha.json`).
 
 El calce y las cotas se midieron sobre `mosaico.tif`; `mosaico-costura.tif` tiene la misma geometría
 (solo rellena la franja de la costura), así que valen para los dos. `geo1936.py` es el módulo para
