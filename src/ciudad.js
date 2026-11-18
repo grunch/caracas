@@ -1,8 +1,10 @@
 /**
  * La ciudad levantada: huellas de los techos (polígonos en píxeles del plano) extruidas
  * en una sola geometría. Cada vértice lleva aInfo = (distancia de su casa a la plaza,
- * semilla, estilo, pisos) para que el shader haga la ola y el estilo de la fachada, y
- * aAncla = (x, z) del centroide de su casa: la altura del terreno a la que sube entera.
+ * semilla, estilo, pisos) para que el shader haga la ola y el estilo de la fachada,
+ * aAncla = (x, z) del centroide de su casa: la altura del terreno a la que sube entera, y
+ * aPared = (metros desde la esquina de arranque de su pared, largo de esa pared): las coordenadas
+ * con las que el shader dibuja la fachada (src/shader/fachada.js); los techos llevan (0, 0).
  *
  * Datos (ciudad.pak): vertices Float32 [px, py, …]; techos Uint32 de a 4:
  * [primer vértice, cuántos, empacarTecho({pisos, estilo}), semilla].
@@ -11,25 +13,29 @@ import { ShapeUtils, Vector2, BufferGeometry, BufferAttribute } from 'three'
 
 export const ALTO_PISO = 4.2 // m: casas coloniales y republicanas de techo alto
 
+const SIN_PARED = [0, 0]
+
 export const empacarTecho = ({ pisos, estilo }) => ((estilo & 0xff) << 8) | (pisos & 0xff)
 export const desempacarTecho = (v) => ({ pisos: v & 0xff, estilo: (v >> 8) & 0xff })
 
-/** Devuelve arrays planos (posiciones, normales, info, vidas, anclas, indices); sin three.js de por medio. */
+/** Devuelve arrays planos (posiciones, normales, info, vidas, anclas, paredes, indices); sin three.js de por medio. */
 export function extruirTechos({ vertices, techos, vida = null }, coords) {
   const posiciones = []
   const normales = []
   const info = []
   const vidas = [] // [nace, muere] por vértice (src/epocas.js); sin vida, siempre visible
   const anclas = []
+  const paredes = [] // [u, largo] por vértice: dónde está en su pared (0, 0 en los techos)
   const indices = []
   let vidaTecho = [0, 0]
 
-  const vertice = (x, y, z, n, datos, ancla) => {
+  const vertice = (x, y, z, n, datos, ancla, pared = SIN_PARED) => {
     posiciones.push(x, y, z)
     normales.push(n[0], n[1], n[2])
     info.push(...datos)
     vidas.push(vidaTecho[0], vidaTecho[1])
     anclas.push(ancla.x, ancla.y)
+    paredes.push(pared[0], pared[1])
     return posiciones.length / 3 - 1
   }
   // agrega el triángulo con el giro que haga que su cara mire hacia n
@@ -70,8 +76,9 @@ export function extruirTechos({ vertices, techos, vida = null }, coords) {
       const largo = a.distanceTo(b)
       if (largo < 1e-6) continue
       const n = [((b.y - a.y) / largo) * signo, 0, (-(b.x - a.x) / largo) * signo]
-      const [v0, v1, v2, v3] = [vertice(a.x, 0, a.y, n, datos, centro), vertice(b.x, 0, b.y, n, datos, centro),
-        vertice(b.x, alto, b.y, n, datos, centro), vertice(a.x, alto, a.y, n, datos, centro)]
+      const [enA, enB] = [[0, largo], [largo, largo]]
+      const [v0, v1, v2, v3] = [vertice(a.x, 0, a.y, n, datos, centro, enA), vertice(b.x, 0, b.y, n, datos, centro, enB),
+        vertice(b.x, alto, b.y, n, datos, centro, enB), vertice(a.x, alto, a.y, n, datos, centro, enA)]
       triangulo(v0, v1, v2, n)
       triangulo(v0, v2, v3, n)
     }
@@ -82,18 +89,20 @@ export function extruirTechos({ vertices, techos, vida = null }, coords) {
     info: new Float32Array(info),
     vidas: new Float32Array(vidas),
     anclas: new Float32Array(anclas),
+    paredes: new Float32Array(paredes),
     indices: posiciones.length / 3 > 65535 ? new Uint32Array(indices) : new Uint16Array(indices),
   }
 }
 
 export function geometriaCiudad(datos, coords) {
-  const { posiciones, normales, info, vidas, anclas, indices } = extruirTechos(datos, coords)
+  const { posiciones, normales, info, vidas, anclas, paredes, indices } = extruirTechos(datos, coords)
   const g = new BufferGeometry()
   g.setAttribute('position', new BufferAttribute(posiciones, 3))
   g.setAttribute('normal', new BufferAttribute(normales, 3))
   g.setAttribute('aInfo', new BufferAttribute(info, 4))
   g.setAttribute('aVida', new BufferAttribute(vidas, 2))
   g.setAttribute('aAncla', new BufferAttribute(anclas, 2))
+  g.setAttribute('aPared', new BufferAttribute(paredes, 2))
   g.setIndex(new BufferAttribute(indices, 1))
   g.computeBoundingSphere()
   return g
