@@ -70,7 +70,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 |---|---|---|---|---|
 | T50a | "Lo de hoy", datos: calles, vías y agua de OSM rasterizadas sobre el plano (usa `geo1936.py`) → `hoy-lejos/cerca.webp`, `calles.bin/json` | T20 | desfase con las calles de 1936 < 10 m en el centro (QA) | 🔄 #16 (datos) |
 | T50b | "Lo de hoy", visor: estampa en rojo con H, leyenda © OpenStreetMap | T50a | con H se estampa en rojo la Caracas actual | 🔄 #18 |
-| T51 | Nombres de las calles de hoy en un canvas 2D sobre la vista | T50a, T50b | etiquetas alineadas, sin choques | ⏳ |
+| T51 | Nombres de las calles de hoy en un canvas 2D sobre la vista | T50a, T50b | etiquetas alineadas, sin choques | 🔄 #22 |
 | T52 | **Esquinas**: leer del plano de 1936 los nombres en rojo de cada cruce (OCR asistido + curado) → diccionario esquina → píxel | — | ≥ 90 % de las esquinas del centro con nombre verificado | ✅ #14 |
 | T53 | Buscador: "de esquina a esquina" con el diccionario + Nominatim para direcciones modernas, con respuesta en prosa | T51, T52 | "De La Torre a Veroes" ubica en el plano | ⏳ |
 
