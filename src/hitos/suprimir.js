@@ -3,8 +3,10 @@
  * se decide cuáles: las que pisan la zona de supresión de un hito (polígonos en píxeles del plano). No se
  * borran: se les cambia la vida (src/epocas.js) para que no nazcan mientras el hito esté en pie.
  */
-const NUNCA = 7 // nace en una época que no existe (hay 6: 0–5)
 const ETAPAS_POR_VIDA = 8 // vida = nace + 8 · muere (ver src/ciudad.js)
+// Un intervalo vacío: nace y muere en la época 7, que no existe (hay 6: 0–5). No alcanza con "nace en 7":
+// sin línea de tiempo el visor pone la época en 99 (SIN_LINEA_DE_TIEMPO) y esa casa aparecería.
+export const NUNCA = 7 + ETAPAS_POR_VIDA * 7
 
 /** ¿Está el punto dentro del polígono [[x, y]…]? (regla par‑impar) */
 export function puntoEnPoligono([x, y], poligono) {

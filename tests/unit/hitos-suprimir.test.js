@@ -1,8 +1,16 @@
 import { describe, test, expect } from 'vitest'
-import { puntoEnPoligono, seSolapan, suprimirTechos, zonasDeSupresion, vidaSinHito } from '../../src/hitos/suprimir.js'
+import { puntoEnPoligono, seSolapan, suprimirTechos, zonasDeSupresion, vidaSinHito, NUNCA } from '../../src/hitos/suprimir.js'
+import { SIN_LINEA_DE_TIEMPO } from '../../src/epocas.js'
 
 const cuadrado = (x, y, lado) => [[x, y], [x + lado, y], [x + lado, y + lado], [x, y + lado]]
-const NUNCA = 7
+
+/** vivoEn del shader (src/shader/epocas.js), en JS: cuánto está en pie una vida empacada en la época e. */
+function vivoEn(vida, e) {
+  const suave = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t) }
+  const [nace, muere] = [vida % 8, Math.floor(vida / 8)]
+  const nacio = suave(nace - 0.5, nace, e)
+  return muere < 0.5 ? nacio : nacio * (1 - suave(muere - 0.5, muere, e))
+}
 
 /** Un techo por anillo: vertices planos y techos de a 4 (inicio, cuántos, empacado, semilla). */
 function ciudadDe(anillos, vida = null) {
@@ -54,6 +62,16 @@ describe('vidaSinHito', () => {
   })
   test('si para cuando el hito se va la casa ya habría muerto, no nace nunca', () => {
     expect(vidaSinHito(1 + 8 * 3, 1, 3)).toBe(NUNCA)
+  })
+})
+
+describe('NUNCA', () => {
+  test('no está en pie en ninguna época, tampoco sin línea de tiempo (época 99)', () => {
+    for (const e of [0, 1, 2, 3, 4, 5, SIN_LINEA_DE_TIEMPO]) expect(vivoEn(NUNCA, e)).toBe(0)
+  })
+  test('sin línea de tiempo se ve la ciudad final: la casa que el hito reemplazó no está, la que vuelve cuando el hito se va, sí', () => {
+    expect(vivoEn(vidaSinHito(1, 3, 0), SIN_LINEA_DE_TIEMPO)).toBe(0)
+    expect(vivoEn(vidaSinHito(2, 1, 3), SIN_LINEA_DE_TIEMPO)).toBe(1)
   })
 })
 
