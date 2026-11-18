@@ -20,3 +20,40 @@ export function tablaSuelo() {
   for (let c = 0; c < 256; c++) tabla.set(rgbaDeClase(c), c * 4)
   return tabla
 }
+
+/**
+ * Máscara RGBA a `lado` px de lado mayor. RGB y A se redimensionan por separado: sharp premultiplica
+ * por alfa al redimensionar, y el agua y los cultivos tienen A = 0 (no son manzana) — juntos se perderían.
+ */
+export async function generarMascara({ datos, ancho, alto }, lado) {
+  const { default: sharp } = await import('sharp')
+  const tabla = new Uint32Array(tablaSuelo().buffer)
+  const n = ancho * alto
+  const rgb = Buffer.alloc(n * 3)
+  const a = Buffer.alloc(n)
+  for (let i = 0; i < n; i++) {
+    const v = tabla[datos[i]] // little-endian: R en el byte bajo
+    rgb[i * 3] = v & 0xff
+    rgb[i * 3 + 1] = (v >> 8) & 0xff
+    rgb[i * 3 + 2] = (v >> 16) & 0xff
+    a[i] = v >>> 24
+  }
+  const achicar = (buf, canales) => sharp(buf, { raw: { width: ancho, height: alto, channels: canales }, limitInputPixels: false })
+    .resize(lado, lado, { fit: 'inside' }).raw().toBuffer({ resolveWithObject: true })
+  const [color, alfa] = await Promise.all([achicar(rgb, 3), achicar(a, 1)])
+  const { width, height } = color.info
+  const data = Buffer.alloc(width * height * 4)
+  for (let i = 0; i < width * height; i++) {
+    data[i * 4] = color.data[i * 3]
+    data[i * 4 + 1] = color.data[i * 3 + 1]
+    data[i * 4 + 2] = color.data[i * 3 + 2]
+    data[i * 4 + 3] = alfa.data[i]
+  }
+  return { data, width, height }
+}
+
+/** WebP sin pérdida que conserva RGB bajo alfa 0 (por defecto el codificador lo descarta). */
+export async function codificarMascara({ data, width, height }) {
+  const { default: sharp } = await import('sharp')
+  return sharp(data, { raw: { width, height, channels: 4 } }).webp({ lossless: true, exact: true }).toBuffer()
+}

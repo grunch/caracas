@@ -130,7 +130,8 @@ function alternarColor(prender = colorObjetivo === 0) {
 document.getElementById('alzar').addEventListener('click', () => levantar())
 document.getElementById('color').addEventListener('click', () => alternarColor())
 addEventListener('keydown', (e) => {
-  if (e.repeat || e.target.closest?.('input, textarea')) return
+  // los controles con foco conservan su teclado (Espacio activa el botón, se escribe en los campos)
+  if (e.repeat || e.target.closest?.('input, textarea, select, button, a, [role="button"]')) return
   if (e.code === 'Space') { e.preventDefault(); levantar() }
   if (e.code === 'KeyC' && !e.metaKey && !e.ctrlKey) alternarColor()
 })

@@ -30,3 +30,30 @@ describe('tablaSuelo', () => {
     expect(Array.from(t.subarray(200 * 4, 200 * 4 + 4))).toEqual([0, 0, 0, 0])
   })
 })
+
+import sharp from 'sharp'
+import { generarMascara, codificarMascara } from '../../tools/suelo-lib.mjs'
+
+describe('generarMascara', () => {
+  // 8×8 clases: mitad izquierda agua (R, A=0), mitad derecha cultivo (G, A=0)
+  const ancho = 8
+  const alto = 8
+  const clases = Buffer.alloc(ancho * alto)
+  for (let y = 0; y < alto; y++) for (let x = 0; x < ancho; x++) clases[y * ancho + x] = x < 4 ? 7 : 6
+
+  test('al achicar, el agua y los cultivos no se pierden aunque su alfa sea 0', async () => {
+    const { data, width, height } = await generarMascara({ datos: clases, ancho, alto }, 4)
+    expect([width, height]).toEqual([4, 4])
+    const px = (x, y) => Array.from(data.subarray((y * width + x) * 4, (y * width + x) * 4 + 4))
+    expect(px(0, 0)).toEqual([255, 0, 0, 0])
+    expect(px(3, 3)).toEqual([0, 255, 0, 0])
+  })
+
+  test('el WebP conserva los canales bajo alfa 0', async () => {
+    const mascara = await generarMascara({ datos: clases, ancho, alto }, 4)
+    const webp = await codificarMascara(mascara)
+    const { data } = await sharp(webp).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+    expect(data[0]).toBeGreaterThan(240) // R del agua
+    expect(data[(3 * 4 + 3) * 4 + 1]).toBeGreaterThan(240) // G del cultivo
+  })
+})

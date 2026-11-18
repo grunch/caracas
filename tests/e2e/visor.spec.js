@@ -32,3 +32,12 @@ test('la C alterna entre tinta y color', async ({ page }) => {
   await expect(boton).toHaveAttribute('aria-pressed', 'false')
   await page.waitForFunction(() => window.lab.ciudad.U.uColor.value === 0)
 })
+
+test('Espacio sobre un botón con foco activa ese botón, no levanta la ciudad', async ({ page }) => {
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  await page.locator('#color').focus()
+  await page.keyboard.press('Space')
+  await expect(page.locator('#color')).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.locator('#alzar')).toHaveText('Levantar la ciudad')
+})
