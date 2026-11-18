@@ -51,7 +51,7 @@ $PY tools/geo/segmentar.py $D/mosaico.tif $D/segmentacion/mosaico --escala 0.5
 $PY tools/geo/costura.py --mosaico $D/mosaico.tif --meta $D/mosaico.json \
     --clases $D/segmentacion/mosaico/clases.png
 
-# 5. vectorizar: manzanas → lotes → techos (--plaza = "plaza" de mosaico.json, en píxeles)
+# 5. vectorizar: manzanas → lotes rectos (lotes.py) → techos (--plaza = "plaza" de mosaico.json, en píxeles)
 $PY tools/geo/vectorizar.py $D/segmentacion/mosaico/clases-costura.png $D/ciudad-1936.json \
     --escala 0.5 --plaza 8968.2,6839
 
@@ -94,8 +94,26 @@ El calce y las cotas se midieron sobre `mosaico.tif`; `mosaico-costura.tif` tien
 (solo rellena la franja de la costura), así que valen para los dos. `geo1936.py` es el módulo para
 llevar cualquier dato de OSM o WGS84 al plano (`wgs84_a_grid`, `grid_a_px`) y al revés.
 
-Los pasos 1–3 son lentos (minutos); la costura tarda ~20 s, el vectorizador ~30 s y el plano ~1 min.
+Los pasos 1–3 son lentos (minutos); la costura tarda ~20 s, el vectorizador ~45 s y el plano ~1 min.
 Si cambia el mosaico (paso 2) hay que repetir todo lo que sigue.
+
+## Los lotes (paso 5)
+
+`lotes.py` parte cada manzana en solares rectos. La mira en su propio marco (girada según la
+dirección dominante de sus lados, con el lado largo a lo largo): a los dos lados cortos dan lotes
+de 20–26 m de fondo y el resto da a los lados largos, en tiras que llegan hasta la mitad de la
+manzana (o la cruzan, si mide menos de 20 m). Los frentes van de 9 a 14 m, al azar con la semilla
+de la manzana. Una casa es lo edificado de un lote: si la manzana está toda edificada en el plano,
+las casas salen largas, pero rectas. Las tiras de menos de 3 m de ancho y los pedazos de menos de
+30 m² se unen a la casa vecina.
+
+Las hileras angostas que siguen una calle curva (sin dirección dominante, menos de 15 m de grosor
+y que llenan menos de la mitad de su rectángulo mínimo) conservan el método anterior: semillas
+cada 12 m sobre el borde y cada punto a la más cercana. Ese método, en las manzanas macizas,
+daba cuñas que se juntaban en el centro.
+
+Límites: en una manzana con un lado en diagonal los lotes siguen la dirección dominante, no esa
+calle; donde dos manzanas quedaron pegadas por la segmentación, se reparten como una sola.
 
 ## La costura (paso 4)
 
@@ -269,6 +287,6 @@ node tools/empacar-ciudad.mjs fuentes/derivados/epocas/ciudad-estilos.json
 | 1936, a menos de 1,8 km de la plaza | ecléctico 65 % · moderno (4) 35 % | 2–3 · 2–4 |
 | 1936, afueras | quinta (5) si ≥ 300 m²; rancho (6) si < 60 m² y a más de 2,5 km; si no, casa de las orillas (7) | 1–2 · 1 · 1 |
 
-Los edificios públicos (9) quedan como los dejó el vectorizador. Con los datos actuales: colonial 3152,
-republicano 2311, guzmancista 3887, ecléctico 15607, moderno 6498, quinta 139, rancho 13740, orillas 13059,
+Los edificios públicos (9) quedan como los dejó el vectorizador. Con los datos actuales: colonial 2941,
+republicano 2074, guzmancista 3066, ecléctico 9139, moderno 3649, quinta 179, rancho 2548, orillas 9764,
 público 626.
