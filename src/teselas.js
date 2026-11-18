@@ -42,9 +42,15 @@ export function crearTeselasFinas({ laminas, cargar, U, pedirCuadro, respaldo })
     let e = cache.get(nombre)
     if (!e) {
       e = { textura: null, uso: 0 }
+      // un pedido cuya entrada ya fue expulsada (o reemplazada) no toca el caché: si trae textura, se libera
+      const vigente = () => cache.get(nombre) === e
       e.pedida = cargar(`plano/f/${nombre}.webp`)
-        .then((t) => { e.textura = t; pedirCuadro(3) })
-        .catch(() => cache.delete(nombre))
+        .then((t) => {
+          if (!vigente()) return t.dispose()
+          e.textura = t
+          pedirCuadro(3)
+        })
+        .catch(() => { if (vigente()) cache.delete(nombre) })
       cache.set(nombre, e)
     }
     e.uso = ++reloj

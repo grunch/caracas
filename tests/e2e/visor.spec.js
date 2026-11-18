@@ -45,8 +45,9 @@ test('Espacio sobre un botón con foco activa ese botón, no levanta la ciudad',
 test('de cerca carga las teselas finas que rodean lo que se mira', async ({ page }) => {
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
-  const hay = await page.evaluate(async () => (await fetch('plano/laminas.json')).ok)
-  test.skip(!hay, 'sin plano/laminas.json (datos fuera del repo)')
+  // laminas.json está en el repo, las teselas no (datos fuera de git): sin la primera, no hay qué probar
+  const hay = await page.evaluate(async () => (await fetch('plano/f/0-0.webp', { method: 'HEAD' })).ok)
+  test.skip(!hay, 'sin teselas en plano/f/ (datos fuera del repo)')
   await page.evaluate(() => window.lab.cam.jump({ x: 0, z: 0, dist: 600 }))
   await page.waitForFunction(() => window.lab.teselas?.cargadas.length >= 4, null, { timeout: 30000 })
   await page.waitForFunction(() => window.lab.ciudad.U.uFinoOn.value.some((v) => v === 1), null, { timeout: 30000 })

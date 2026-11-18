@@ -57,3 +57,44 @@ describe('crearTeselasFinas', () => {
     expect(U.uFino.value).toEqual(Array(4).fill('respaldo'))
   })
 })
+
+describe('crearTeselasFinas con pedidos lentos', () => {
+  const laminas = { ancho: 30720, alto: 30720, tesela: 3072, cols: 10, rows: 10 }
+  const ranuras = () => ({
+    uFino: { value: Array(4).fill('respaldo') },
+    uFinoRect: { value: Array.from({ length: 4 }, () => ({ fromArray() {} })) },
+    uFinoOn: { value: [0, 0, 0, 0] },
+  })
+  const esperar = () => new Promise((r) => setTimeout(r, 0))
+
+  test('un pedido viejo que falla después de ser expulsado no borra el pedido nuevo de la misma tesela', async () => {
+    const pendientes = []
+    const cargar = (url) => new Promise((ok, mal) => pendientes.push({ url, ok, mal }))
+    const U = ranuras()
+    const t = crearTeselasFinas({ laminas, cargar, U, pedirCuadro: () => {}, respaldo: () => 'respaldo' })
+    t.update(100, 100, true) // pide el bloque de la esquina
+    for (let k = 1; k <= 3; k++) t.update(100 + k * 6144, 100 + k * 6144, true) // lo expulsa del caché
+    t.update(100, 100, true) // vuelve: pedidos nuevos para las mismas teselas
+    const nuevo = pendientes.filter((p) => p.url.endsWith('/0-0.webp')).at(-1)
+    const textura = { liberada: false, dispose() { this.liberada = true } }
+    nuevo.ok(textura)
+    await esperar()
+    pendientes.filter((p) => p.url.endsWith('/0-0.webp') && p !== nuevo).forEach((p) => p.mal(new Error('404')))
+    await esperar()
+    expect(t.cargadas).toContain('0-0')
+    expect(textura.liberada).toBe(false)
+  })
+
+  test('una textura que llega después de que su tesela fue expulsada se libera enseguida', async () => {
+    const pendientes = []
+    const cargar = (url) => new Promise((ok) => pendientes.push({ url, ok }))
+    const t = crearTeselasFinas({ laminas, cargar, U: ranuras(), pedirCuadro: () => {}, respaldo: () => 'respaldo' })
+    t.update(100, 100, true)
+    for (let k = 1; k <= 3; k++) t.update(100 + k * 6144, 100 + k * 6144, true)
+    const tarde = { liberada: false, dispose() { this.liberada = true } }
+    pendientes.find((p) => p.url.endsWith('/0-0.webp')).ok(tarde)
+    await esperar()
+    expect(t.cargadas).not.toContain('0-0')
+    expect(tarde.liberada).toBe(true)
+  })
+})
