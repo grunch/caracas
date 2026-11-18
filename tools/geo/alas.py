@@ -64,7 +64,7 @@ def patios_segun_distancia(distancia_m, azar=1.0):
     return 1
 
 
-def _huecos_utiles(huecos, crujia, interior, fondo):
+def _huecos_utiles(huecos, interior, fondo):
     """Los patios del plano, recortados al interior del lote, ordenados hacia el fondo y unidos si se
     solapan a lo largo de v: [(u0, v0, u1, v1)]."""
     utiles = []
@@ -184,7 +184,7 @@ def repartir(ancho, fondo, semilla, patios_max, calles=0, huecos=(), crujia=None
     c, (i0, i1) = r.crujia, r.interior
     if ancho < ANCHO_MINIMO_M or i1 - i0 < PATIO_ANCHO_MINIMO_M + 0.5:
         return []
-    utiles = _huecos_utiles(huecos, c, r.interior, fondo)
+    utiles = _huecos_utiles(huecos, r.interior, fondo)
     if utiles and utiles[0][1] < c + ALA_MINIMA_M:   # el primer patio del plano, casi pegado a la crujía: llega hasta él
         c = r.crujia = utiles[0][1]
         r.interior = (i0, i1) = (c if r.esquinas[0] else 0.0, ancho - c if r.esquinas[1] else ancho)
@@ -231,7 +231,7 @@ def _libres(lados, manzana, a_px, metro):
 def _huecos_de(grilla, metro):
     """Los patios encerrados en la casa: huecos de la grilla (en el marco del lote) que no tocan su borde."""
     vacio = np.pad(~grilla, 1, constant_values=True)
-    etiquetas, n = ndimage.label(vacio)
+    etiquetas, _ = ndimage.label(vacio)
     huecos = []
     for k, zona in enumerate(ndimage.find_objects(etiquetas), start=1):
         if k == etiquetas[0, 0] or zona is None:
