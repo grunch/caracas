@@ -143,9 +143,17 @@ Después se aplica una apertura para borrar vías y marcos, un cierre para tapar
 las manchas chicas y las componentes angostas; la máscara se ensancha unos metros para absorber el
 error del calce.
 
-Cada casa de 1936 nace en la primera época desde la cual más de la mitad de su huella cae en lo
-edificado de esa época y de todas las siguientes. Las casas de 1578 mueren cuando nace la de 1936
-que las pisa; si ninguna las pisa, mueren en la primera época en que su lugar no está edificado.
+Cada huella se mide entera, aunque otro techo la pise (los polígonos del vectorizador pueden
+encimarse). Una casa "está" en una época cuando al menos la mitad (≥ 50 %, `umbral` de
+`epocas.json`) de su huella cae en lo edificado de esa época.
+
+- **Casas de 1936**: nacen en la primera época (1772…1911) desde la cual están en esa época y en
+  todas las siguientes; si no están en 1911, nacen en 1936. No mueren.
+- **Casas de 1578** (nacen en 1578): una casa de 1936 les pasa la posta si, ella sola, cubre al
+  menos el 30 % (`PISADA_MINIMA`) de la huella de la de 1578. Si hay varias, gana la que nace
+  primero: la de 1578 muere en esa época. Si ninguna llega al 30 %, muere en la primera época
+  (1772…1911) en que su lugar no está edificado (< 50 %); si sigue edificado hasta 1911, muere
+  en 1936.
 
 Los años de la línea de tiempo son 1578 · 1772 · 1843 · 1889 · 1911 · 1936.
 
