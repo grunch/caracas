@@ -1,0 +1,198 @@
+{
+ "descripcion": "Cotas impresas en el plano DCN 1936 (triángulo en las esquinas; metros), leídas a ojo sobre recortes de fuentes/derivados/1936/mosaico.tif; px/py = el triángulo, en píxeles del mosaico (±5 px). Miden el sesgo del DEM y lo corrigen en el centro.",
+ "fuente": "Dirección de Cartografía Nacional, plano de Caracas 1936 (fuentes/mapas/1936-archiveorg-caracas-dcn-hoja*/ficha.json)",
+ "cotas": [
+  {
+   "valor": 902.299,
+   "px": 8166.5,
+   "py": 7582.0,
+   "lugar": "Teatro Municipal, NO"
+  },
+  {
+   "valor": 903.78,
+   "px": 8423.0,
+   "py": 7646.0,
+   "lugar": "Teatro Municipal, NE"
+  },
+  {
+   "valor": 900.353,
+   "px": 8148.0,
+   "py": 7719.0,
+   "lugar": "Teatro Municipal, O"
+  },
+  {
+   "valor": 898.455,
+   "px": 8368.0,
+   "py": 7913.0,
+   "lugar": "Teatro Municipal, S"
+  },
+  {
+   "valor": 903.1,
+   "px": 8690.0,
+   "py": 7708.0,
+   "lugar": "Santa Teresa, NO"
+  },
+  {
+   "valor": 901.476,
+   "px": 8897.0,
+   "py": 7754.0,
+   "lugar": "Santa Teresa, NE"
+  },
+  {
+   "valor": 898.92,
+   "px": 8638.0,
+   "py": 7978.0,
+   "lugar": "Plaza Henry Clay, SO"
+  },
+  {
+   "valor": 891.261,
+   "px": 6848.0,
+   "py": 8225.0,
+   "lugar": "Capuchinos, NO"
+  },
+  {
+   "valor": 889.2,
+   "px": 7107.0,
+   "py": 8322.0,
+   "lugar": "Capuchinos, E"
+  },
+  {
+   "valor": 975.92,
+   "px": 8074.0,
+   "py": 5019.0,
+   "lugar": "Plaza La Pastora, S"
+  },
+  {
+   "valor": 938.131,
+   "px": 9022.0,
+   "py": 5914.0,
+   "lugar": "Las Mercedes"
+  },
+  {
+   "valor": 943.404,
+   "px": 9354.0,
+   "py": 5367.0,
+   "lugar": "Plaza del Panteón"
+  },
+  {
+   "valor": 950.645,
+   "px": 9411.0,
+   "py": 5055.0,
+   "lugar": "Panteón, N"
+  },
+  {
+   "valor": 930.386,
+   "px": 10458.0,
+   "py": 5422.0,
+   "lugar": "San José"
+  },
+  {
+   "valor": 964.159,
+   "px": 9524.0,
+   "py": 4462.0,
+   "lugar": "Hospital Vargas, O"
+  },
+  {
+   "valor": 891.538,
+   "px": 11055.0,
+   "py": 6824.0,
+   "lugar": "Candelaria, NO"
+  },
+  {
+   "valor": 896.053,
+   "px": 11341.0,
+   "py": 6870.0,
+   "lugar": "Candelaria, NE"
+  },
+  {
+   "valor": 890.773,
+   "px": 11014.0,
+   "py": 7103.0,
+   "lugar": "Candelaria, SO"
+  },
+  {
+   "valor": 892.935,
+   "px": 8565.0,
+   "py": 8326.0,
+   "lugar": "La Cárcel, N"
+  },
+  {
+   "valor": 888.779,
+   "px": 8516.0,
+   "py": 8591.0,
+   "lugar": "La Cárcel, SO"
+  },
+  {
+   "valor": 886.009,
+   "px": 8740.0,
+   "py": 8644.0,
+   "lugar": "La Cárcel, SE"
+  },
+  {
+   "valor": 893.992,
+   "px": 9043.0,
+   "py": 8423.0,
+   "lugar": "Santa Rosalía, N"
+  },
+  {
+   "valor": 884.797,
+   "px": 9001.0,
+   "py": 8697.0,
+   "lugar": "Santa Rosalía, S"
+  },
+  {
+   "valor": 905.597,
+   "px": 9924.0,
+   "py": 6644.0,
+   "lugar": "Plaza España, O"
+  },
+  {
+   "valor": 901.681,
+   "px": 10184.0,
+   "py": 6679.0,
+   "lugar": "Plaza España, E"
+  },
+  {
+   "valor": 911.183,
+   "px": 8798.0,
+   "py": 7180.0,
+   "lugar": "San Francisco, NE"
+  },
+  {
+   "valor": 908.94,
+   "px": 8748.0,
+   "py": 7448.0,
+   "lugar": "San Francisco, S"
+  },
+  {
+   "valor": 919.674,
+   "px": 8890.0,
+   "py": 6720.0,
+   "lugar": "Plaza Bolívar, NO"
+  },
+  {
+   "valor": 919.549,
+   "px": 9088.0,
+   "py": 6754.0,
+   "lugar": "Plaza Bolívar, NE"
+  },
+  {
+   "valor": 917.119,
+   "px": 8850.0,
+   "py": 6918.0,
+   "lugar": "Plaza Bolívar, SO"
+  },
+  {
+   "valor": 915.109,
+   "px": 9045.0,
+   "py": 6954.0,
+   "lugar": "Plaza Bolívar, SE"
+  },
+  {
+   "valor": 919.138,
+   "px": 9305.0,
+   "py": 7009.0,
+   "lugar": "Plaza El Venezolano, NO"
+  }
+ ]
+}
