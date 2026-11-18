@@ -291,3 +291,5 @@ grande, mayores que los de patio.
 - **Plaza Miranda y av. Baralt, años 50–60** (`1955-pinterest-plaza-miranda-av-baralt`, solo ficha):
   foto de prensa con **derechos reservados de El Nacional** y posterior a 1936. Muestra la ciudad ya
   transformada (avenida ensanchada, edificios modernos, tráfico). No guía ninguna época del sitio.
+- **Plaza Altamira, años 50** (`1955-pinterest-plaza-altamira`, solo ficha, sin descargar): posterior
+  a 1936 y, casi seguro, fuera del área del plano (al este de Chacao).
