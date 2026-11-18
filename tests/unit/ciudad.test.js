@@ -1,13 +1,49 @@
 import { describe, test, expect } from 'vitest'
-import { extruirTechos, ALTO_PISO, empacarTecho, desempacarTecho } from '../../src/ciudad.js'
+import { extruirTechos, geometriaCiudad, empacarTecho, desempacarTecho, marcoDelLote } from '../../src/ciudad.js'
+import { CUBIERTA, altoDePiso } from '../../src/techos.js'
+import { rectanguloMinimo } from '../../src/poligono.js'
 
-// un cuadrado de 10×10 px y un triángulo; metro = 0.5 → 5×5 m
-const vertices = new Float32Array([0, 0, 10, 0, 10, 10, 0, 10, 20, 0, 30, 0, 25, 8])
-const techos = new Uint32Array([
-  0, 4, empacarTecho({ pisos: 2, estilo: 1 }), 123,
-  4, 3, empacarTecho({ pisos: 1, estilo: 0 }), 456,
+const COLONIAL = 0, REPUBLICANO = 1, MODERNO = 4
+const METRO = 0.5
+const coords = { aMundo: (px, py) => ({ x: px * METRO, z: py * METRO }) }
+
+/** Arma los datos del pak a partir de casas { puntos: [[x, z] en metros…], estilo, pisos, semilla, vida }. */
+function ciudadDe(casas) {
+  const vertices = []
+  const techos = []
+  const vida = []
+  for (const { puntos, estilo = COLONIAL, pisos = 1, semilla = 7, nace = 1, muere = 0 } of casas) {
+    techos.push(vertices.length / 2, puntos.length, empacarTecho({ pisos, estilo }), semilla)
+    for (const [x, z] of puntos) vertices.push(x / METRO, z / METRO)
+    vida.push(nace + 8 * muere)
+  }
+  return { vertices: new Float32Array(vertices), techos: new Uint32Array(techos), vida: new Uint32Array(vida) }
+}
+const rect = (x0, z0, x1, z1) => [[x0, z0], [x1, z0], [x1, z1], [x0, z1]]
+
+/** Los vértices de la geometría como objetos, para preguntar cómodo. */
+function vertices(g) {
+  return Array.from({ length: g.posiciones.length / 3 }, (_, v) => ({
+    x: g.posiciones[v * 3], y: g.posiciones[v * 3 + 1], z: g.posiciones[v * 3 + 2],
+    n: [g.normales[v * 3], g.normales[v * 3 + 1], g.normales[v * 3 + 2]],
+    semilla: g.info[v * 4 + 1], estilo: g.info[v * 4 + 2],
+    pared: [g.paredes[v * 3], g.paredes[v * 3 + 1], g.paredes[v * 3 + 2]],
+    faldon: [g.cubiertas[v * 4], g.cubiertas[v * 4 + 1], g.cubiertas[v * 4 + 2]], cubierta: g.cubiertas[v * 4 + 3],
+  }))
+}
+const esPared = (v) => v.cubierta === CUBIERTA.PARED
+
+// una cuadra: tres casas de 10 m de frente y 24 de fondo sobre la calle (z < 0), y otras tres a sus espaldas
+const SEMILLA_DEL_MEDIO = 11
+const cuadra = (estilo) => ciudadDe([
+  { puntos: rect(0, 0, 10, 24), estilo, semilla: 5 },
+  { puntos: rect(10, 0, 20, 24), estilo, semilla: SEMILLA_DEL_MEDIO },
+  { puntos: rect(20, 0, 30, 24), estilo, semilla: 6 },
+  { puntos: rect(0, 24, 10, 48), estilo, semilla: 8 },
+  { puntos: rect(10, 24, 20, 48), estilo, semilla: 9 },
+  { puntos: rect(20, 24, 30, 48), estilo, semilla: 10 },
 ])
-const coords = { aMundo: (px, py) => ({ x: px * 0.5, z: py * 0.5 }) }
+const delMedio = (g) => vertices(g).filter((v) => v.semilla === SEMILLA_DEL_MEDIO)
 
 describe('empacarTecho', () => {
   test('ida y vuelta de pisos y estilo', () => {
@@ -15,124 +51,332 @@ describe('empacarTecho', () => {
   })
 })
 
-describe('extruirTechos', () => {
-  const g = extruirTechos({ vertices, techos }, coords)
+describe('extruirTechos: los búferes', () => {
+  const g = extruirTechos(cuadra(COLONIAL), coords)
+  const n = g.posiciones.length / 3
 
-  test('techo triangulado + una pared (2 triángulos) por lado', () => {
-    // cuadrado: 2 triángulos de techo + 4 lados·2 · triángulo: 1 + 3·2 → 17 triángulos
-    expect(g.indices.length / 3).toBe(17)
+  test('un valor por vértice en cada atributo, y los índices apuntan a vértices que existen', () => {
+    expect(n).toBeGreaterThan(0)
+    expect(g.normales.length).toBe(n * 3)
+    expect(g.info.length).toBe(n * 4)
+    expect(g.vidas.length).toBe(n * 2)
+    expect(g.anclas.length).toBe(n * 2)
+    expect(g.paredes.length).toBe(n * 3)
+    expect(g.cubiertas.length).toBe(n * 4)
+    expect(g.indices.length % 3).toBe(0)
+    expect(Math.max(...g.indices)).toBeLessThan(n)
+    for (const a of [g.posiciones, g.normales, g.paredes, g.cubiertas]) expect(a.every(Number.isFinite)).toBe(true)
   })
 
-  test('la altura del techo es pisos × ALTO_PISO, el pie en el suelo', () => {
-    const ys = new Set()
-    for (let k = 1; k < g.posiciones.length; k += 3) ys.add(+g.posiciones[k].toFixed(3))
-    expect([...ys].sort((a, b) => a - b)).toEqual([0, ALTO_PISO, 2 * ALTO_PISO].map((v) => +v.toFixed(3)))
+  test('es determinista: los mismos datos dan la misma geometría', () => {
+    const otra = extruirTechos(cuadra(COLONIAL), coords)
+    expect(otra.posiciones).toEqual(g.posiciones)
+    expect(otra.indices).toEqual(g.indices)
+    expect(otra.cubiertas).toEqual(g.cubiertas)
   })
 
-  test('aInfo lleva la distancia a la plaza, la semilla y el estilo', () => {
-    // vértice 0 del primer techo está en (0,0): distancia al centroide del techo = (2.5,2.5)
-    expect(g.info[0]).toBeCloseTo(Math.hypot(2.5, 2.5), 3)
-    expect(g.info[1]).toBe(123)
-    expect(g.info[2]).toBe(1)
-  })
-
-  test('las normales de las paredes miran hacia afuera', () => {
-    const p = g.posiciones
-    const n = g.normales
-    // toda normal horizontal apunta en sentido contrario al centroide de su techo (aprox.)
-    let malas = 0
-    for (let v = 0; v < p.length / 3; v++) {
-      if (Math.abs(n[v * 3 + 1]) > 0.5) continue
-      const cx = p[v * 3] < 7 ? 2.5 : 12.5
-      const cz = p[v * 3] < 7 ? 2.5 : 1.33
-      if ((p[v * 3] - cx) * n[v * 3] + (p[v * 3 + 2] - cz) * n[v * 3 + 2] < 0) malas++
+  test('cada triángulo mira hacia donde dice su normal', () => {
+    const p = (i) => [g.posiciones[i * 3], g.posiciones[i * 3 + 1], g.posiciones[i * 3 + 2]]
+    let alReves = 0
+    for (let t = 0; t < g.indices.length; t += 3) {
+      const [a, b, c] = [p(g.indices[t]), p(g.indices[t + 1]), p(g.indices[t + 2])]
+      const [u, v] = [[b[0] - a[0], b[1] - a[1], b[2] - a[2]], [c[0] - a[0], c[1] - a[1], c[2] - a[2]]]
+      const cruz = [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]]
+      const k = g.indices[t] * 3
+      if (cruz[0] * g.normales[k] + cruz[1] * g.normales[k + 1] + cruz[2] * g.normales[k + 2] < -1e-6) alReves++
     }
-    expect(malas).toBe(0)
+    expect(alReves).toBe(0)
   })
 
-  test('aAncla lleva el centroide (x, z) de la casa en todos sus vértices', () => {
-    // el cuadrado ocupa los primeros 4 (techo) + 4·4 (paredes) = 20 vértices
-    for (let v = 0; v < 20; v++) expect([g.anclas[v * 2], g.anclas[v * 2 + 1]]).toEqual([2.5, 2.5])
-    const ultimo = g.anclas.length / 2 - 1
-    expect(g.anclas[ultimo * 2]).toBeCloseTo(12.5, 3)
-    expect(g.anclas[ultimo * 2 + 1]).toBeCloseTo(4 / 3, 3)
-    expect(g.anclas.length / 2).toBe(g.posiciones.length / 3)
+  test('aInfo lleva la distancia a la plaza, la semilla, el estilo y los pisos; aAncla, el centroide de la casa', () => {
+    const sola = extruirTechos(ciudadDe([{ puntos: rect(0, 0, 5, 5), estilo: REPUBLICANO, pisos: 2, semilla: 123 }]), coords)
+    for (let v = 0; v < sola.posiciones.length / 3; v++) {
+      expect(sola.info[v * 4]).toBeCloseTo(Math.hypot(2.5, 2.5), 3)
+      expect([sola.info[v * 4 + 1], sola.info[v * 4 + 2], sola.info[v * 4 + 3]]).toEqual([123, REPUBLICANO, 2])
+      expect([sola.anclas[v * 2], sola.anclas[v * 2 + 1]]).toEqual([2.5, 2.5])
+    }
+  })
+
+  test('cada vértice lleva [nace, muere] de su casa; sin vida, [0, 0] (siempre visible)', () => {
+    const datos = ciudadDe([{ puntos: rect(0, 0, 5, 5), nace: 2 }, { puntos: rect(40, 0, 45, 5), nace: 0, muere: 4 }])
+    const con = extruirTechos(datos, coords)
+    const pares = new Set()
+    for (let v = 0; v < con.vidas.length / 2; v++) pares.add(`${con.vidas[v * 2]},${con.vidas[v * 2 + 1]}`)
+    expect([...pares].sort()).toEqual(['0,4', '2,0'])
+    const sin = extruirTechos({ vertices: datos.vertices, techos: datos.techos }, coords)
+    expect(Array.from(new Set(sin.vidas))).toEqual([0])
   })
 
   test('acepta polígonos en ambos sentidos de giro', () => {
-    const inverso = new Float32Array([0, 10, 10, 10, 10, 0, 0, 0])
-    const t = new Uint32Array([0, 4, empacarTecho({ pisos: 1, estilo: 0 }), 1])
-    expect(extruirTechos({ vertices: inverso, techos: t }, coords).indices.length / 3).toBe(10)
+    const derecho = extruirTechos(ciudadDe([{ puntos: rect(0, 0, 10, 8) }]), coords)
+    const inverso = extruirTechos(ciudadDe([{ puntos: rect(0, 0, 10, 8).reverse() }]), coords)
+    expect(inverso.indices.length).toBe(derecho.indices.length)
+  })
+
+  test('las huellas que no dan un polígono se saltean sin romper', () => {
+    const datos = ciudadDe([{ puntos: [[0, 0], [5, 0]] }, { puntos: [[0, 0], [5, 0], [10, 0]] }, { puntos: rect(20, 0, 30, 8) }])
+    const g2 = extruirTechos(datos, coords)
+    expect(g2.indices.length).toBeGreaterThan(0)
+    expect(new Set(vertices(g2).map((v) => Math.round(v.x / 20)))).toEqual(new Set([1, 2])) // solo la tercera (x de 20 a 30)
+  })
+
+  test('sin casas, búferes vacíos', () => {
+    const vacio = extruirTechos({ vertices: new Float32Array(0), techos: new Uint32Array(0) }, coords)
+    expect(vacio.posiciones.length).toBe(0)
+    expect(vacio.indices.length).toBe(0)
   })
 })
 
-describe('extruirTechos con vida', () => {
-  test('cada vértice lleva [nace, muere] de su techo; sin vida, [0, 0] (siempre visible)', () => {
-    const vida = new Uint32Array([2, 0 + 8 * 4]) // techo 0 nace en 2; techo 1 nace en 0 y muere en 4
-    const g = extruirTechos({ vertices, techos, vida }, coords)
-    const n = g.posiciones.length / 3
-    expect(g.vidas.length).toBe(n * 2)
-    const pares = new Set()
-    for (let v = 0; v < n; v++) pares.add(`${g.vidas[v * 2]},${g.vidas[v * 2 + 1]}`)
-    expect([...pares].sort()).toEqual(['0,4', '2,0'])
-    const sin = extruirTechos({ vertices, techos }, coords)
-    expect(Array.from(new Set(sin.vidas))).toEqual([0])
-  })
-})
+describe('extruirTechos: la casa colonial entre medianeras', () => {
+  const g = extruirTechos(cuadra(COLONIAL), coords)
+  const casa = delMedio(g)
+  const alto = altoDePiso(COLONIAL, SEMILLA_DEL_MEDIO)
+  const tejas = casa.filter((v) => v.cubierta === CUBIERTA.TEJA || v.cubierta === CUBIERTA.TEJA + CUBIERTA.VOLADA)
 
-describe('extruirTechos: aPared (dónde está cada punto de la pared)', () => {
-  const g = extruirTechos({ vertices, techos }, coords)
-  const n = g.posiciones.length / 3
-  const esPared = (v) => Math.abs(g.normales[v * 3 + 1]) < 0.5
-
-  test('un par (metros desde la esquina de arranque, largo de la pared) por vértice', () => {
-    expect(g.paredes).toBeInstanceOf(Float32Array)
-    expect(g.paredes.length).toBe(n * 2)
+  test('la pared del frente va del suelo a pisos × alto de piso de la casa', () => {
+    const frente = casa.filter((v) => esPared(v) && Math.abs(v.z) < 1e-4 && v.n[2] < -0.9)
+    expect(frente.length).toBeGreaterThanOrEqual(4)
+    expect(Math.min(...frente.map((v) => v.y))).toBe(0)
+    expect(Math.max(...frente.map((v) => v.y))).toBeCloseTo(alto, 4)
+    for (const v of frente) expect(v.pared[2]).toBeCloseTo(alto, 4) // y la fachada sabe su alto de piso
   })
 
-  test('techos (y todo lo que no es pared) llevan 0, 0', () => {
-    for (let v = 0; v < n; v++) {
-      if (esPared(v)) continue
-      expect([g.paredes[v * 2], g.paredes[v * 2 + 1]]).toEqual([0, 0])
+  test('la cumbrera es paralela a la calle: los puntos más altos del tejado corren a lo largo del frente', () => {
+    const cumbre = Math.max(...tejas.map((v) => v.y))
+    const arriba = tejas.filter((v) => v.y > cumbre - 1e-3)
+    const [xs, zs] = [arriba.map((v) => v.x), arriba.map((v) => v.z)]
+    expect(Math.max(...xs) - Math.min(...xs)).toBeCloseTo(10, 3) // de medianera a medianera
+    expect(Math.max(...zs) - Math.min(...zs)).toBeLessThan(1e-3) // a una sola distancia de la calle
+    expect(zs[0]).toBeGreaterThanOrEqual(3) // en el medio de una crujía de 6 a 7,5 m
+    expect(zs[0]).toBeLessThanOrEqual(3.75)
+    expect(cumbre).toBeGreaterThan(alto + 1.2)
+  })
+
+  test('los faldones miran hacia arriba, inclinados 24° a 30° los de la crujía', () => {
+    for (const v of tejas) expect(v.n[1]).toBeGreaterThan(0.8)
+    const frente = tejas.filter((v) => v.n[2] < -0.3 && v.z < 4) // el faldón que cae a la calle
+    expect(frente.length).toBeGreaterThan(0)
+    for (const v of frente) {
+      const grados = (Math.acos(v.n[1]) * 180) / Math.PI
+      expect(grados).toBeGreaterThanOrEqual(24 - 1e-3)
+      expect(grados).toBeLessThanOrEqual(30 + 1e-3)
     }
   })
 
-  test('cada pared lleva su largo en metros y u va de 0 a ese largo', () => {
-    // el cuadrado mide 5 m por lado; el triángulo: 5 m de base y dos lados de √(2.5² + 4²)
-    const largos = new Set()
-    for (let v = 0; v < n; v++) if (esPared(v)) largos.add(+g.paredes[v * 2 + 1].toFixed(3))
-    expect([...largos].sort((a, b) => a - b)).toEqual([+Math.hypot(2.5, 4).toFixed(3), 5])
-    for (let v = 0; v < n; v++) {
-      if (!esPared(v)) continue
-      const [u, largo] = [g.paredes[v * 2], g.paredes[v * 2 + 1]]
-      expect(u === 0 || Math.abs(u - largo) < 1e-5).toBe(true)
-    }
+  test('el alero vuela 0,5 a 0,8 m sobre la calle, más bajo que la pared, con su cara de abajo', () => {
+    const vuelo = -Math.min(...tejas.map((v) => v.z))
+    expect(vuelo).toBeGreaterThanOrEqual(0.5 - 1e-3)
+    expect(vuelo).toBeLessThanOrEqual(0.8 + 1e-3)
+    const punta = tejas.filter((v) => v.z < -0.4)
+    for (const v of punta) expect(v.y).toBeLessThan(alto)
+    expect(punta.every((v) => v.cubierta === CUBIERTA.TEJA + CUBIERTA.VOLADA)).toBe(true) // marcado: el shader lo quita si hay pretil
+    const debajo = casa.filter((v) => v.cubierta === CUBIERTA.ALERO)
+    expect(debajo.length).toBeGreaterThanOrEqual(4)
+    for (const v of debajo) expect(v.n[1]).toBe(-1)
+    // hacia los vecinos y hacia el fondo no vuela nada
+    expect(Math.min(...casa.map((v) => v.x))).toBeGreaterThanOrEqual(10 - 1e-4)
+    expect(Math.max(...casa.map((v) => v.x))).toBeLessThanOrEqual(20 + 1e-4)
+    expect(Math.max(...casa.map((v) => v.z))).toBeLessThanOrEqual(24 + 1e-4)
   })
 
-  test('u crece a lo largo de cada pared: es la distancia en planta a la esquina de arranque', () => {
-    // en cada triángulo de pared, lo que cambia u entre dos vértices es lo que se mueven en planta
-    let paredesVistas = 0
+  test('las coordenadas del tejado: t baja desde la cumbrera (0) hasta el largo del faldón, alero incluido', () => {
+    for (const v of tejas) {
+      expect(v.faldon[1]).toBeGreaterThanOrEqual(-1e-4)
+      expect(v.faldon[1]).toBeLessThanOrEqual(v.faldon[2] + 1e-4)
+    }
+    const cumbre = Math.max(...tejas.map((v) => v.y))
+    for (const v of tejas.filter((q) => q.y > cumbre - 1e-3)) expect(v.faldon[1]).toBeCloseTo(0, 4)
+    const punta = tejas.filter((v) => v.z < -0.4)
+    for (const v of punta) expect(v.faldon[1]).toBeCloseTo(v.faldon[2], 3) // la punta del alero es el final del faldón
+  })
+
+  test('detrás de la crujía queda un patio: ahí no hay tejado, y sus paredes bajan hasta el suelo', () => {
+    const p = (i) => ({ x: g.posiciones[i * 3], z: g.posiciones[i * 3 + 2] })
+    let techado = 0
     for (let t = 0; t < g.indices.length; t += 3) {
-      const [a, b, c] = [g.indices[t], g.indices[t + 1], g.indices[t + 2]]
-      if (!esPared(a)) continue
-      for (const [p, q] of [[a, b], [b, c], [a, c]]) {
-        const du = Math.abs(g.paredes[p * 2] - g.paredes[q * 2])
-        const dxz = Math.hypot(g.posiciones[p * 3] - g.posiciones[q * 3], g.posiciones[p * 3 + 2] - g.posiciones[q * 3 + 2])
-        expect(du).toBeCloseTo(dxz, 4) // u sigue la planta: lo que avanza en u es lo que avanza la pared
-      }
-      paredesVistas++
+      const [i, j, k] = [g.indices[t], g.indices[t + 1], g.indices[t + 2]]
+      if (g.info[i * 4 + 1] !== SEMILLA_DEL_MEDIO || g.cubiertas[i * 4 + 3] !== CUBIERTA.TEJA || g.normales[i * 3 + 1] < 0) continue
+      const [a, b, c] = [p(i), p(j), p(k)]
+      if (Math.min(a.z, b.z, c.z) < -1e-3) continue // el alero no cuenta
+      techado += Math.abs((b.x - a.x) * (c.z - a.z) - (c.x - a.x) * (b.z - a.z)) / 2
     }
-    expect(paredesVistas).toBe(2 * 7)
+    expect(techado).toBeLessThan(10 * 24 - 12)
+    expect(techado).toBeGreaterThan(10 * 24 * 0.6)
+    const adentro = casa.filter((v) => esPared(v) && v.x > 10.5 && v.x < 19.5 && v.z > 6 && v.z < 23.5)
+    expect(adentro.length).toBeGreaterThanOrEqual(8)
+    expect(Math.min(...adentro.map((v) => v.y))).toBe(0)
+  })
+})
+
+describe('extruirTechos: según el estilo', () => {
+  test('republicana: nada vuela sobre la calle, y la pared del frente sube 0,75 m de pretil sobre el arranque del tejado', () => {
+    const casa = delMedio(extruirTechos(cuadra(REPUBLICANO), coords))
+    const alto = altoDePiso(REPUBLICANO, SEMILLA_DEL_MEDIO)
+    expect(Math.min(...casa.map((v) => v.z))).toBeGreaterThanOrEqual(-1e-4)
+    expect(casa.some((v) => v.cubierta === CUBIERTA.ALERO)).toBe(false)
+    // el tejado arranca a la altura de la casa, en la línea del frente
+    const arranque = casa.filter((v) => v.cubierta === CUBIERTA.TEJA && Math.abs(v.z) < 1e-4)
+    expect(arranque.length).toBeGreaterThan(0)
+    for (const v of arranque) expect(v.y).toBeCloseTo(alto, 3)
+    // los vértices de arriba de la pared del frente suben con el pretil (lo aplica el shader); los del pie, no
+    const frente = casa.filter((v) => esPared(v) && Math.abs(v.z) < 1e-4 && v.n[2] < -0.9)
+    for (const v of frente) expect(v.faldon[0]).toBe(v.y > 0.1 ? 0.75 : 0)
+    for (const v of frente) expect(v.faldon[1]).toBe(0.75) // toda la pared sabe que lleva pretil (para su fachada)
+    // el pretil tiene cara de adentro: un paño sobre la línea del frente que mira hacia el fondo y nace sin altura
+    const adentro = casa.filter((v) => esPared(v) && Math.abs(v.z) < 1e-4 && v.n[2] > 0.9)
+    expect(adentro.length).toBeGreaterThanOrEqual(4)
+    expect(new Set(adentro.map((v) => v.faldon[0]))).toEqual(new Set([0, 0.75]))
+    for (const v of adentro) expect(v.y).toBeCloseTo(alto, 3)
+    // las medianeras no llevan pretil
+    expect(casa.some((v) => esPared(v) && Math.abs(v.n[0]) > 0.9 && v.faldon[1] > 0)).toBe(false)
+  })
+
+  test('moderna: azotea plana, más baja que el pretil que la rodea', () => {
+    const g = extruirTechos(ciudadDe([{ puntos: rect(0, 0, 6, 6), estilo: MODERNO, pisos: 3, semilla: 4, nace: 5 }]), coords)
+    const alto = 3 * altoDePiso(MODERNO, 4)
+    const losa = vertices(g).filter((v) => v.cubierta === CUBIERTA.AZOTEA)
+    expect(losa.length).toBeGreaterThanOrEqual(4)
+    for (const v of losa) {
+      expect(v.n).toEqual([0, 1, 0])
+      expect(v.y).toBeCloseTo(alto - 0.7, 3)
+    }
+    expect(Math.max(...vertices(g).filter(esPared).map((v) => v.y))).toBeCloseTo(alto, 3)
+  })
+})
+
+describe('extruirTechos: la fachada de cada pared (aPared)', () => {
+  const g = extruirTechos(ciudadDe([{ puntos: rect(0, 0, 10, 8), semilla: 3 }]), coords)
+  const todos = vertices(g)
+
+  test('los tejados no llevan pared (largo 0) y las paredes no llevan cubierta', () => {
+    for (const v of todos.filter((q) => !esPared(q))) expect(v.pared[1]).toBe(0)
+    expect(todos.filter(esPared).every((v) => v.faldon[2] === 0)).toBe(true)
+    for (const v of todos.filter(esPared)) expect(Math.abs(v.n[1])).toBeLessThan(1e-6)
+  })
+
+  test('cada pared lleva su largo en metros, u va de 0 a ese largo y el alto de piso es el de la casa', () => {
+    const paredes = todos.filter((v) => esPared(v) && v.pared[1] > 0)
+    expect(new Set(paredes.map((v) => +v.pared[1].toFixed(3)))).toEqual(new Set([8, 10]))
+    for (const v of paredes) {
+      expect(v.pared[0]).toBeGreaterThanOrEqual(0)
+      expect(v.pared[0]).toBeLessThanOrEqual(v.pared[1] + 1e-5)
+      expect(v.pared[2]).toBeCloseTo(altoDePiso(COLONIAL, 3), 4)
+    }
+  })
+
+  test('u crece a lo largo de cada pared: es la distancia en planta', () => {
+    let vistos = 0
+    for (let t = 0; t < g.indices.length; t += 3) {
+      const [a, b, c] = [todos[g.indices[t]], todos[g.indices[t + 1]], todos[g.indices[t + 2]]]
+      if (!esPared(a) || a.pared[1] === 0) continue
+      for (const [p, q] of [[a, b], [b, c], [a, c]]) {
+        expect(Math.abs(p.pared[0] - q.pared[0])).toBeCloseTo(Math.hypot(p.x - q.x, p.z - q.z), 4)
+      }
+      vistos++
+    }
+    expect(vistos).toBeGreaterThanOrEqual(8)
+  })
+
+  test('las paredes miran hacia afuera', () => {
+    for (const v of todos.filter(esPared)) expect((v.x - 5) * v.n[0] + (v.z - 4) * v.n[2]).toBeGreaterThan(0)
+  })
+
+  test('los hastiales suben hasta la cumbrera: la pared de la medianera pasa de la altura del alero', () => {
+    // una casa cuadrada no lleva caderas: sus costados son hastiales
+    const casa = vertices(extruirTechos(ciudadDe([{ puntos: rect(0, 0, 8, 8), semilla: 3 }]), coords))
+    const alto = altoDePiso(COLONIAL, 3)
+    const cumbre = Math.max(...casa.filter((v) => v.cubierta === CUBIERTA.TEJA).map((v) => v.y))
+    expect(Math.max(...casa.filter(esPared).map((v) => v.y))).toBeCloseTo(cumbre, 4)
+    expect(cumbre).toBeGreaterThan(alto + 1)
+  })
+
+  test('una casa larga y suelta lleva caderas (cuatro aguas): ninguna pared pasa de la altura del alero', () => {
+    const alto = altoDePiso(COLONIAL, 3)
+    expect(Math.max(...todos.filter(esPared).map((v) => v.y))).toBeCloseTo(alto, 4)
+    expect(todos.some((v) => v.cubierta === CUBIERTA.TEJA && Math.abs(v.n[0]) > 0.3)).toBe(true)
+  })
+})
+
+describe('extruirTechos: huellas dentadas e irregulares', () => {
+  test('los dientes del trazado a píxeles se quitan: la misma casa dentada da los mismos triángulos', () => {
+    const limpia = extruirTechos(ciudadDe([{ puntos: rect(0, 0, 10, 8) }]), coords)
+    const dentada = [[0, 0], [3, 0.2], [6, -0.2], [10, 0], [10.2, 4], [10, 8], [5, 8.2], [0, 8], [-0.2, 3]]
+    expect(extruirTechos(ciudadDe([{ puntos: dentada }]), coords).indices.length).toBe(limpia.indices.length)
+    // sin tolerancia, cada diente es una pared más
+    expect(extruirTechos(ciudadDe([{ puntos: dentada }]), coords, { tolerancia: 0 }).indices.length).toBeGreaterThan(limpia.indices.length)
+  })
+
+  test('un polígono irregular (una U) cae en crujías bajas: sin patio, tejado solo sobre la huella', () => {
+    const u = [[0, 0], [30, 0], [30, 24], [24, 24], [24, 4], [6, 4], [6, 24], [0, 24]]
+    const g = extruirTechos(ciudadDe([{ puntos: u, semilla: 9 }]), coords)
+    const todos = vertices(g)
+    const alto = altoDePiso(COLONIAL, 9)
+    const tejas = todos.filter((v) => v.cubierta === CUBIERTA.TEJA && v.n[1] > 0)
+    expect(tejas.length).toBeGreaterThan(8)
+    expect(Math.max(...tejas.map((v) => v.y))).toBeLessThanOrEqual(alto + 1.6 + 1e-3)
+    // ningún tejado sobre el hueco de la U
+    expect(tejas.some((v) => v.x > 6.5 && v.x < 23.5 && v.z > 4.5 && v.z < 30)).toBe(false)
+  })
+})
+
+describe('extruirTechos: el frente', () => {
+  test('una casa suelta pone la cumbrera a lo largo de su lado largo', () => {
+    const g = extruirTechos(ciudadDe([{ puntos: rect(0, 0, 6, 14) }]), coords)
+    const tejas = vertices(g).filter((v) => v.cubierta === CUBIERTA.TEJA && v.n[1] > 0)
+    const cumbre = Math.max(...tejas.map((v) => v.y))
+    const arriba = tejas.filter((v) => v.y > cumbre - 1e-3)
+    expect(Math.max(...arriba.map((v) => v.z)) - Math.min(...arriba.map((v) => v.z))).toBeGreaterThan(5)
+    expect(Math.max(...arriba.map((v) => v.x)) - Math.min(...arriba.map((v) => v.x))).toBeLessThan(1e-3)
+  })
+
+  test('las casas de la fundación (que mueren) no cuentan como vecinas de las que vienen después', () => {
+    // una casa vieja, que muere en 1843, ocupa la calle de la cuadra: el frente sigue dando a z < 0
+    const datos = cuadra(COLONIAL)
+    const vieja = ciudadDe([{ puntos: rect(-5, -12, 35, -1), nace: 0, muere: 2, semilla: 99 }])
+    const junto = {
+      vertices: new Float32Array([...datos.vertices, ...vieja.vertices]),
+      techos: new Uint32Array([...datos.techos, datos.vertices.length / 2, 4, vieja.techos[2], 99]),
+      vida: new Uint32Array([...datos.vida, ...vieja.vida]),
+    }
+    const con = delMedio(extruirTechos(junto, coords))
+    const sin = delMedio(extruirTechos(datos, coords))
+    expect(con.map((v) => [v.x, v.y, v.z])).toEqual(sin.map((v) => [v.x, v.y, v.z]))
+  })
+})
+
+describe('marcoDelLote', () => {
+  const r = rectanguloMinimo(rect(2, 3, 12, 9)) // 10 × 6
+
+  test('para cada lado elegido como frente: origen en una esquina, eu a lo largo del frente y ev hacia adentro', () => {
+    for (let frente = 0; frente < 4; frente++) {
+      const m = marcoDelLote(r, frente)
+      expect(Math.hypot(...m.eu)).toBeCloseTo(1, 9)
+      expect(m.eu[0] * m.ev[0] + m.eu[1] * m.ev[1]).toBeCloseTo(0, 9)
+      expect(m.ancho * m.fondo).toBeCloseTo(60, 6)
+      // el centro del lote cae adentro: a medio ancho y medio fondo del origen
+      const centro = [m.origen[0] + (m.eu[0] * m.ancho + m.ev[0] * m.fondo) / 2, m.origen[1] + (m.eu[1] * m.ancho + m.ev[1] * m.fondo) / 2]
+      expect(centro[0]).toBeCloseTo(7, 6)
+      expect(centro[1]).toBeCloseTo(6, 6)
+    }
+  })
+
+  test('el ancho es el largo del lado del frente', () => {
+    const anchos = [0, 1, 2, 3].map((k) => marcoDelLote(r, k).ancho)
+    expect(anchos[0]).toBeCloseTo(anchos[2], 9)
+    expect(anchos[1]).toBeCloseTo(anchos[3], 9)
+    expect(anchos[0] + anchos[1]).toBeCloseTo(16, 6)
   })
 })
 
 import { EPOCAS_HISTORIA, empacarHistoria, historiaEnEpoca } from '../../src/ciudad.js'
 
 describe('historia: estilo y pisos por época', () => {
-  // el cuadrado: colonial de un piso hasta 1843, republicano en 1889, de dos pisos desde 1911;
-  // el triángulo: siempre colonial de un piso
-  const historia = new Uint8Array([16, 16, 16, 17, 33, 33, 16, 16, 16, 16, 16, 16])
-  const g = extruirTechos({ vertices, techos, historia }, coords)
+  // la primera: colonial de un piso hasta 1843, republicana en 1889 y 1911, y de dos pisos en 1936;
+  // la segunda: siempre colonial de un piso
+  const datos = ciudadDe([{ puntos: rect(0, 0, 10, 8), semilla: 21, nace: 1 }, { puntos: rect(40, 0, 50, 8), semilla: 22, nace: 1 }])
+  const historia = new Uint8Array([16, 16, 16, 17, 17, 33, 16, 16, 16, 16, 16, 16])
+  const g = extruirTechos({ ...datos, historia }, coords)
+  const deLaCasa = (semilla) => vertices(g).map((v, k) => ({ ...v, k })).filter((v) => v.semilla === semilla)
 
   test('empacarHistoria mete tres épocas en cada número y historiaEnEpoca las saca', () => {
     const bytes = [16, 16, 17, 17, 34, 57]
@@ -156,25 +400,65 @@ describe('historia: estilo y pisos por época', () => {
 
   test('cada vértice lleva la historia de su casa (aHistoria, 2 números)', () => {
     expect(g.historias.length / 2).toBe(g.posiciones.length / 3)
-    const cuadrado = empacarHistoria([16, 16, 16, 17, 33, 33])
-    for (let v = 0; v < 20; v++) expect([g.historias[v * 2], g.historias[v * 2 + 1]]).toEqual(cuadrado)
-    const ultimo = g.historias.length / 2 - 1
-    expect([g.historias[ultimo * 2], g.historias[ultimo * 2 + 1]]).toEqual(empacarHistoria([16, 16, 16, 16, 16, 16]))
+    const primera = empacarHistoria([16, 16, 16, 17, 17, 33])
+    for (const v of deLaCasa(21)) expect([g.historias[v.k * 2], g.historias[v.k * 2 + 1]]).toEqual(primera)
+    const segunda = empacarHistoria([16, 16, 16, 16, 16, 16])
+    for (const v of deLaCasa(22)) expect([g.historias[v.k * 2], g.historias[v.k * 2 + 1]]).toEqual(segunda)
   })
 
-  test('la geometría no cambia: la altura sigue saliendo de los pisos de "techos"', () => {
-    const sin = extruirTechos({ vertices, techos }, coords)
-    expect(g.posiciones).toEqual(sin.posiciones)
-    expect(g.info).toEqual(sin.info)
+  test('cambiar de fachada no rehace la casa; cambiar de pisos sí: una etapa nueva, con su vida', () => {
+    const vidas = new Set(deLaCasa(21).map((v) => `${g.vidas[v.k * 2]},${g.vidas[v.k * 2 + 1]}`))
+    expect([...vidas].sort()).toEqual(['1,5', '5,0']) // colonial → republicana (1 a 4) y, en 1936, la de dos pisos
+    expect(new Set(deLaCasa(22).map((v) => `${g.vidas[v.k * 2]},${g.vidas[v.k * 2 + 1]}`))).toEqual(new Set(['1,0']))
+    // cada etapa va hecha con sus pisos: el shader no tiene que estirarla (aInfo.w = pisos de la etapa)
+    const pisosPorVida = new Set(deLaCasa(21).map((v) => `${g.vidas[v.k * 2]}:${g.info[v.k * 4 + 3]}`))
+    expect([...pisosPorVida].sort()).toEqual(['1:1', '5:2'])
+    const altoDe = (nace) => Math.max(...deLaCasa(21).filter((v) => g.vidas[v.k * 2] === nace && esPared(v) && v.pared[1] > 0).map((v) => v.y))
+    expect(altoDe(5)).toBeGreaterThan(altoDe(1) * 1.5)
+  })
+
+  test('la etapa que pasa de colonial a republicana lleva las dos cosas: alero, y pretil para cuando le toque', () => {
+    const etapa = deLaCasa(21).filter((v) => g.vidas[v.k * 2] === 1)
+    expect(etapa.some((v) => v.cubierta === CUBIERTA.ALERO)).toBe(true)
+    expect(etapa.some((v) => v.cubierta === CUBIERTA.TEJA + CUBIERTA.VOLADA)).toBe(true)
+    // el pretil: vértices de pared que suben 0,75 m cuando la época lo pide (aTecho.x), en paredes marcadas (aTecho.y)
+    const suben = etapa.filter((v) => esPared(v) && v.faldon[0] > 0)
+    expect(suben.length).toBeGreaterThanOrEqual(4)
+    for (const v of suben) expect(v.faldon.slice(0, 2)).toEqual([0.75, 0.75])
+    // la que es siempre colonial no lleva pretil
+    expect(deLaCasa(22).some((v) => esPared(v) && v.faldon[1] > 0)).toBe(false)
   })
 
   test('sin historia, todas las épocas valen lo que dice "techos"', () => {
-    const sin = extruirTechos({ vertices, techos }, coords)
+    const sin = extruirTechos(ciudadDe([{ puntos: rect(0, 0, 10, 8), estilo: REPUBLICANO, pisos: 2 }]), coords)
     expect([sin.historias[0], sin.historias[1]]).toEqual(empacarHistoria(Array(6).fill(1 + 16 * 2)))
     expect(historiaEnEpoca([sin.historias[0], sin.historias[1]], 0)).toEqual({ estilo: 1, pisos: 2 })
   })
 
   test('una historia que no acompaña a los techos falla claro', () => {
-    expect(() => extruirTechos({ vertices, techos, historia: new Uint8Array(6) }, coords)).toThrow(/historia/)
+    expect(() => extruirTechos({ ...datos, historia: new Uint8Array(6) }, coords)).toThrow(/historia/)
+  })
+})
+
+describe('geometriaCiudad', () => {
+  const g = geometriaCiudad(cuadra(COLONIAL), coords)
+  const n = g.attributes.position.count
+
+  test('una sola geometría con todos los atributos que lee el shader', () => {
+    const tamaños = { position: 3, normal: 3, aInfo: 4, aVida: 2, aAncla: 2, aPared: 3, aTecho: 4, aHistoria: 2 }
+    for (const [nombre, tamaño] of Object.entries(tamaños)) {
+      expect(g.attributes[nombre].itemSize, nombre).toBe(tamaño)
+      expect(g.attributes[nombre].count, nombre).toBe(n)
+    }
+    expect(g.index.count % 3).toBe(0)
+    expect(g.boundingSphere.radius).toBeGreaterThan(20)
+  })
+
+  test('las normales van en un byte por componente (normalizado) y la vida en bytes: son millones de vértices', () => {
+    expect(g.attributes.normal.array).toBeInstanceOf(Int8Array)
+    expect(g.attributes.normal.normalized).toBe(true)
+    expect(g.attributes.aVida.array).toBeInstanceOf(Uint8Array)
+    const crudo = extruirTechos(cuadra(COLONIAL), coords)
+    for (let k = 0; k < 300; k++) expect(g.attributes.normal.array[k] / 127).toBeCloseTo(crudo.normales[k], 1)
   })
 })

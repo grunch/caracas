@@ -52,13 +52,14 @@ export const GLSL_VANOS = /* glsl */ `
   const vec3 HIERRO = vec3(0.09, 0.09, 0.10);
 
   /** Qué va en el paño i del piso. Arriba, ventanas (o puertas de balcón: todas en el primer piso de
-   *  las guzmancistas, algunas en las eclécticas y las públicas). En la planta baja, una puerta por
+   *  las guzmancistas y de las coloniales de dos pisos, algunas en las eclécticas y las públicas). En la planta baja, una puerta por
    *  pared (en el medio, en las públicas); las modernas, vidrieras de local; los ranchos y las orillas,
    *  una o dos ventanas junto a la puerta; el resto, ventanas con algún paño ciego. */
   float tipoDeVano(Medidas m, float estilo, float sem, float i, float n, float piso) {
     float r = azar(sem + i * 7.77 + piso * 3.17);
     if (piso > 0.5) {
-      if (es(estilo, ESTILO_GUZMANCISTA) && piso < 1.5) return BALCON;
+      // los altos coloniales de las esquinas (calle de 1843) y los guzmancistas: balcón en el primer piso
+      if ((es(estilo, ESTILO_GUZMANCISTA) || es(estilo, ESTILO_COLONIAL)) && piso < 1.5) return BALCON;
       if ((es(estilo, ESTILO_ECLECTICO) || es(estilo, ESTILO_PUBLICO)) && r < 0.6) return BALCON;
       return VENTANA;
     }
@@ -78,7 +79,8 @@ export const GLSL_VANOS = /* glsl */ `
   vec3 rectVano(float tipo, Medidas m, float p) {
     float tope = max(0.5 * p - 0.3, 0.3); // que quede muro entre paño y paño
     if (es(tipo, PUERTA)) return vec3(0.5 * m.puertaAlto, min(m.puertaMedio, tope), 0.5 * m.puertaAlto);
-    if (es(tipo, VIDRIERA)) return vec3(1.7, max(0.5 * p - 0.25, 0.4), 1.3);
+    float vidrio = min(2.6, gAltoPiso - 1.1); // deja lugar al letrero
+    if (es(tipo, VIDRIERA)) return vec3(0.4 + 0.5 * vidrio, max(0.5 * p - 0.25, 0.4), 0.5 * vidrio);
     if (es(tipo, BALCON)) return vec3(0.5 * (0.15 + m.dintel), min(m.medio, tope), 0.5 * (m.dintel - 0.15));
     return vec3(0.5 * (m.alfeizar + m.dintel), min(m.medio, tope), 0.5 * (m.dintel - m.alfeizar));
   }
@@ -262,14 +264,15 @@ export const GLSL_VANOS = /* glsl */ `
   void porche(inout vec3 c, inout float k, float estilo, float i, float n, float piso, float x, float y, float p, vec2 w2) {
     if (!es(estilo, ESTILO_QUINTA) || piso > 0.5 || n < 2.5 || i < 0.5 || i > n - 1.5) return;
     float columna = lleno(0.5 * p - abs(x) - 0.2, w2.x);
-    float hueco = banda(y, 0.35, 3.1, w2.y) * (1.0 - columna);
-    float viga = banda(y, 3.1, 3.4, w2.y);
+    float hv = min(3.1, gAltoPiso - 0.75); // la viga, bajo el alero
+    float hueco = banda(y, 0.35, hv, w2.y) * (1.0 - columna);
+    float viga = banda(y, hv, hv + 0.3, w2.y);
     float baranda = banda(y, 0.35, 1.15, w2.y) * hueco;
     float balaustres = max(barras(x, 0.16, 0.05, w2.x) * baranda, banda(y, 1.1, 1.17, w2.y) * hueco);
     c *= 1.0 - 0.5 * hueco;
-    c = mix(c, c * (0.85 + 0.25 * cos((0.5 * p - abs(x)) * 7.8)), columna * step(y, 3.1)); // la columna, redonda
+    c = mix(c, c * (0.85 + 0.25 * cos((0.5 * p - abs(x)) * 7.8)), columna * step(y, hv)); // la columna, redonda
     c = mix(c, vec3(0.9, 0.88, 0.82), balaustres);
     c = mix(c, c * 1.08 + 0.02, viga);
     k = max(k, hueco * rayadoPantalla(0.55)) * (1.0 - balaustres); // los balaustres, en papel
-    k = max(k, max(trazo(0.5 * p - abs(x) - 0.2, 0.012, w2.x) * step(y, 3.1), trazo(y - 3.1, 0.012, w2.y)));
+    k = max(k, max(trazo(0.5 * p - abs(x) - 0.2, 0.012, w2.x) * step(y, hv), trazo(y - hv, 0.012, w2.y)));
   }`

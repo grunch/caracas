@@ -113,7 +113,10 @@ test('la línea de tiempo arranca en la primera época y lleva la ciudad a la el
   await expect(botones.nth(n - 1)).toHaveAttribute('aria-pressed', 'true')
   await expect(page.locator('#epocas .pie')).toContainText(await botones.nth(n - 1).textContent())
   // la época de destino se fija y la ola arranca (cuánto tarda en llegar depende de la velocidad del render)
-  await page.waitForFunction((k) => window.lab.ciudad.U.uEpocaA.value === k && window.lab.ciudad.U.uOlaEpoca.value > 0, n - 1, { timeout: 20000 })
+  // (los botones llevan el índice de época de crece.json: la 0, 1578, no se muestra)
+  const ultima = Number(await botones.nth(n - 1).getAttribute('data-indice'))
+  expect(await botones.first().textContent()).toBe('1772')
+  await page.waitForFunction((k) => window.lab.ciudad.U.uEpocaA.value === k && window.lab.ciudad.U.uOlaEpoca.value > 0, ultima, { timeout: 20000 })
 })
 
 test('al elegir 1843 la hoja recibe el plano de Jesurún calzado: la ola va hacia su textura', async ({ page }) => {
@@ -177,8 +180,9 @@ test('el material de la ciudad compila con las fachadas, en tinta y en color', a
   await page.waitForFunction(() => window.lab?.ready === true)
   const dosCuadros = () => page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
   if (await hayDato(page, 'datos/ciudad.pak', 'octet-stream')) {
-    // con la ciudad: sus paredes traen dónde está cada punto de la pared (aPared)
-    await page.waitForFunction(() => window.lab.scene.children.some((m) => m.geometry?.attributes?.aPared?.itemSize === 2), null, { timeout: 60000 })
+    // con la ciudad: sus paredes traen dónde está cada punto de la pared (aPared) y sus techos, el faldón (aTecho)
+    await page.waitForFunction(() => window.lab.scene.children.some((m) => m.geometry?.attributes?.aPared?.itemSize === 3
+      && m.geometry.attributes.aTecho?.itemSize === 4), null, { timeout: 60000 })
   }
   await page.evaluate(() => window.lab.pedirCuadro(4))
   await dosCuadros()

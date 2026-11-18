@@ -10,7 +10,7 @@ import { HITOS, crearHitos, suprimirTechos, zonasDeSupresion } from './hitos.js'
 import { acercar } from './animar.js'
 import { texturasHoy, HOY_CERCA } from './hoy.js'
 import { crearTeselasFinas } from './teselas.js'
-import { crearLineaDeTiempo, crearSecuencia, escalaCrece } from './epocas.js'
+import { crearLineaDeTiempo, crearSecuencia, escalaCrece, PRIMERA_EPOCA } from './epocas.js'
 import { crearPlanosDeEpoca, planoDeEpoca } from './planos.js'
 import { SIN_PLANO } from './shader/plano.js'
 import { crearCoords } from './coords.js'
@@ -187,9 +187,9 @@ Promise.all([fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.re
     })
     const planoDe = (i) => planoDeEpoca(epocas[i]?.año, indice.planos)?.año ?? null
     // arranca en la primera época sin ola; después, una ola por vez (lo elegido durante una, espera)
-    U.uEpocaDe.value = U.uEpocaA.value = 0
+    U.uEpocaDe.value = U.uEpocaA.value = PRIMERA_EPOCA
     U.uOlaEpoca.value = OLA_EPOCA_MAX_M
-    planos.usar(planoDe(0), planoDe(0))
+    planos.usar(planoDe(PRIMERA_EPOCA), planoDe(PRIMERA_EPOCA))
     secuencia = crearSecuencia((de, a) => {
       const esperar = new Promise((ok) => setTimeout(ok, ESPERA_PLANO_MS))
       Promise.race([planos.preparar(planoDe(a)), esperar]).then(() => {
@@ -200,8 +200,10 @@ Promise.all([fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.re
         U.uOlaEpoca.value = 0
         pedirCuadro(3)
       })
+    }, PRIMERA_EPOCA)
+    lineaDeTiempo = crearLineaDeTiempo({
+      contenedor: document.getElementById('epocas'), epocas, alElegir: (i) => secuencia.elegir(i), desde: PRIMERA_EPOCA,
     })
-    lineaDeTiempo = crearLineaDeTiempo({ contenedor: document.getElementById('epocas'), epocas, alElegir: (i) => secuencia.elegir(i) })
     cargarTextura('plano/crece.png', false).then((t) => {
       // etapas codificadas: un mipmap las promediaría y el borde de la ciudad cambiaría de época a lo lejos
       t.generateMipmaps = false

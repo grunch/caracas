@@ -81,7 +81,18 @@ export function vivo(nace, muere, e) {
  * La botonera de años y el ▶ que los recorre. `alElegir(indice)` mueve la ciudad; `pie` muestra de
  * dónde sale cada época. Devuelve { elegir(indice), get actual }.
  */
-export function crearLineaDeTiempo({ contenedor, epocas, alElegir, segundosPorEpoca = 4 }) {
+/**
+ * La primera época que se muestra. La 0 (1578, el esquema de Pimentel) queda fuera de la línea de tiempo:
+ * solo dice qué solares tenían casa, no hay ninguna imagen de la ciudad hasta 1812, y lo que se mostraba
+ * era más invento que reconstrucción. Sus datos siguen en ciudad.pak (los índices de época no cambian).
+ */
+export const PRIMERA_EPOCA = 1
+
+/** El índice de época dentro de lo que se muestra: de `desde` a la última. */
+export const acotarEpoca = (i, desde, cuantas) => Math.max(desde, Math.min(cuantas - 1, i))
+
+/** `desde`: índice de la primera época con botón; los índices son siempre los de crece.json. */
+export function crearLineaDeTiempo({ contenedor, epocas, alElegir, segundosPorEpoca = 4, desde = 0 }) {
   const botones = epocas.map((e, i) => {
     const b = Object.assign(document.createElement('button'), { type: 'button', textContent: String(e.año) })
     b.dataset.indice = String(i)
@@ -90,21 +101,21 @@ export function crearLineaDeTiempo({ contenedor, epocas, alElegir, segundosPorEp
     return b
   })
   const andar = Object.assign(document.createElement('button'), { type: 'button', className: 'andar', textContent: '▶' })
-  andar.title = `Ver crecer la ciudad, de ${epocas[0].año} a ${epocas.at(-1).año}`
+  andar.title = `Ver crecer la ciudad, de ${epocas[desde].año} a ${epocas.at(-1).año}`
   andar.setAttribute('aria-label', andar.title)
   const fila = Object.assign(document.createElement('div'), { className: 'años' })
   fila.setAttribute('role', 'group')
   fila.setAttribute('aria-label', 'Línea de tiempo: la ciudad en cada año')
-  fila.append(...botones, andar)
+  fila.append(...botones.slice(desde), andar)
   const pie = Object.assign(document.createElement('div'), { className: 'pie' })
   pie.setAttribute('aria-live', 'polite')
   contenedor.replaceChildren(fila, pie)
   contenedor.hidden = false
 
-  let actual = 0
+  let actual = desde
   let reloj = null
   function elegir(i) {
-    actual = Math.max(0, Math.min(epocas.length - 1, i))
+    actual = acotarEpoca(i, desde, epocas.length)
     botones.forEach((b, k) => { b.classList.toggle('on', k === actual); b.setAttribute('aria-pressed', String(k === actual)) })
     const e = epocas[actual]
     pie.textContent = `La ciudad hacia ${e.año}, según el ${e.corto}.${e.obras ? ` ${e.obras}` : ''}`
@@ -117,10 +128,10 @@ export function crearLineaDeTiempo({ contenedor, epocas, alElegir, segundosPorEp
   }
   andar.addEventListener('click', () => {
     if (reloj) return parar()
-    if (actual === epocas.length - 1) elegir(0)
+    if (actual === epocas.length - 1) elegir(desde)
     andar.textContent = '❚❚'
     reloj = setInterval(() => (actual < epocas.length - 1 ? elegir(actual + 1) : parar()), segundosPorEpoca * 1000)
   })
-  elegir(0)
+  elegir(desde)
   return { elegir, parar, get actual() { return actual } }
 }
