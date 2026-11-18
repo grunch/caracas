@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+import { hayDato } from './datos.js'
 
 test('el visor arranca y expone window.lab', async ({ page }) => {
   const errores = []
@@ -40,6 +41,20 @@ test('Espacio sobre un botón con foco activa ese botón, no levanta la ciudad',
   await page.keyboard.press('Space')
   await expect(page.locator('#color')).toHaveAttribute('aria-pressed', 'true')
   await expect(page.locator('#alzar')).toHaveText('Levantar la ciudad')
+})
+
+test('la línea de tiempo arranca en la primera época y lleva la ciudad a la elegida', async ({ page }) => {
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  const hay = await hayDato(page, 'datos/crece.json', 'json')
+  test.skip(!hay, 'sin datos/crece.json (datos fuera del repo)')
+  const botones = page.locator('#epocas .años button:not(.andar)')
+  await expect(botones.first()).toHaveAttribute('aria-pressed', 'true')
+  const n = await botones.count()
+  await botones.nth(n - 1).click()
+  await expect(botones.nth(n - 1)).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.locator('#epocas .pie')).toContainText(await botones.nth(n - 1).textContent())
+  await page.waitForFunction((k) => window.lab.ciudad.U.uEpocaA.value === k && window.lab.ciudad.U.uOlaEpoca.value >= 9000, n - 1, { timeout: 20000 })
 })
 
 test('el relieve se hincha con la ola: acostado es liso, levantado aparece el Ávila', async ({ page }) => {

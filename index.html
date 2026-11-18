@@ -20,11 +20,21 @@
     #botones .panel:hover{background:var(--sobre)}
     #botones .panel:active{transform:translateY(1px)}
     #botones .panel.on{color:#f7eedb;background:var(--tinta)}
+    #epocas{top:calc(26px + env(safe-area-inset-top,0px));left:50%;transform:translate(-50%);z-index:4;padding:5px 6px;max-width:min(640px,100vw - 28px);box-sizing:border-box}
+    #epocas[hidden]{display:none}
+    #epocas .años{display:flex;flex-wrap:wrap;justify-content:center;gap:2px}
+    #epocas button{font:inherit;font-size:16px;letter-spacing:.04em;font-variant-numeric:lining-nums;color:inherit;background:0 0;border:0;min-height:36px;padding:6px 13px;cursor:pointer}
+    #epocas button:hover{background:var(--sobre)}
+    #epocas button.on{color:#f7eedb;background:var(--tinta)}
+    #epocas button.andar{border-left:1px solid #2a221b33;margin-left:4px;padding:6px 11px;font-size:13px}
+    #epocas .pie{text-align:center;opacity:.85;text-wrap:balance;margin:5px 6px 3px;font-size:12.5px;font-style:italic}
+    @media (max-width:640px){#epocas button{min-height:44px;padding:6px 6px;font-size:14px;letter-spacing:0}}
   </style>
 </head>
 <body>
   <div id="view"></div>
   <div id="loading">Desplegando el plano…</div>
+  <div id="epocas" class="panel" hidden></div>
   <div id="botones"><button id="color" class="panel" type="button" aria-pressed="false" title="Ver en color (C)">Color</button><button id="alzar" class="panel" type="button" hidden>Levantar la ciudad</button></div>
   <script type="module" src="/src/main.js"></script>
 </body>

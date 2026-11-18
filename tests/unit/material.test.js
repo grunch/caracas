@@ -21,3 +21,13 @@ describe('material de la ciudad', () => {
     expect(fragmentShader).not.toContain('step(0.8, vMundo.y)')
   })
 })
+
+import { SIN_LINEA_DE_TIEMPO } from '../../src/epocas.js'
+
+describe('material sin línea de tiempo', () => {
+  test('hasta que la línea de tiempo arranca, las épocas valen la de reserva (se ve la ciudad entera)', () => {
+    const { U } = crearMaterialCiudad({ plano: { ancho: 100, alto: 100, plaza: [50, 50] }, metro: 1, mapa: null })
+    expect(U.uEpocaDe.value).toBe(SIN_LINEA_DE_TIEMPO)
+    expect(U.uEpocaA.value).toBe(SIN_LINEA_DE_TIEMPO)
+  })
+})
