@@ -321,6 +321,25 @@ Capitolio?). Farol de varios brazos al lado.
 Qué implica: confirma la ciudad baja de teja en 1880; fija la fecha de la Plaza Bolívar ajardinada;
 agrega tres hitos guzmancistas (teatro, iglesia de cúpula, fachada neogótica) y los faroles de plaza.
 
+## ~1875 (a verificar; llegó como 1806) · La Casa Amarilla (`1875-camaradecaracas-casa-amarilla`) → época 1889 (hito)
+
+Grabado del Palacio de Gobierno, en una esquina frente a la Plaza Bolívar. **No es de 1806**: la ropa
+(sombrero de copa, crinolina) y los coches son de mediados o fines del XIX, y la fachada es la
+neoclásica. Referencia directa para modelarla (T40).
+
+- **Edificio de esquina, de dos pisos**, de planta rectangular larga; **cornisa volada con canes** y
+  pretil bajo; **pilastras o cadenas en las esquinas**; faja entre pisos.
+- **Planta baja**: ventanas altas en hilera con **guardapolvo curvo adornado**, portón central alto.
+- **Piso alto**: ventanas rectangulares con marco y **balcón individual de hierro** cada una; sobre el
+  portón, un **balcón mayor** y un **remate central alto con escudo y venera**, con **asta de bandera**.
+- En el extremo izquierdo, un cuerpo con **galería de tres arcos** en el alto.
+- **Acera con brocal** en la esquina; calle de tierra o empedrado; coches de caballos.
+- Al lado (izquierda), una casa de un piso con tejado: el palacio dobla la altura de sus vecinas.
+
+Qué implica: es el patrón del **edificio público guzmancista** (estilo 9 en la época de 1889): dos
+pisos, balcones individuales, cornisa fuerte y remate central con escudo. Los coches sirven para T62
+(victoria o calesa de dos caballos hacia 1875).
+
 ## Fuera del período (no guardadas)
 
 - **Plaza Miranda y av. Baralt, años 50–60** (`1955-pinterest-plaza-miranda-av-baralt`, solo ficha):
