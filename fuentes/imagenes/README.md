@@ -187,7 +187,8 @@ La Catedral vista desde la plaza, con el Ávila detrás. Referencia directa para
   oscuro**. Unas 3 veces la altura del muro de la nave.
 - **Fachada principal barroca** al pie de la torre: dos o tres cuerpos con **columnas pareadas, nichos
   y un frontón curvo de volutas** con remates; portón de arco. Queda de perfil en esta vista (mira al
-  oeste, hacia la calle; la plaza está al sur… a verificar la orientación con el plano).
+  oeste). *Orientación resuelta al modelarla (T40) con el plano de 1936 y las fotos de 1866 y 1874: la
+  fachada y la torre dan al oeste, sobre la plaza, con la torre al norte; el terreno baja hacia el sur.*
 - **Costado largo hacia la plaza**: un **muro blanco, alto y casi ciego**, de una sola altura, con una
   **portada lateral de frontón** y columnas, **dos o tres ventanas con balcón y tejadillo** arriba, y
   otra portada menor al fondo con remate.

@@ -4,8 +4,9 @@
  * metros, en el marco del hito: a a lo largo del eje, b a su derecha.
  */
 import { MAT } from './lienzo.js'
-import { TONO, losa, zocalo, verja, escalinata } from './piezas.js'
+import { TONO, losa, zocalo, verja, escalinata, cuerpo } from './piezas.js'
 import { farol, estatuaEcuestre, puesto, tramoDeGaleria, portada } from './objetos.js'
+import { torre, fachadaBarroca, portadaLateral, cupulaConTambor, ventanas, iglesia } from './iglesias.js'
 
 const ALTO_LOSA_M = 0.25
 const MARGEN_TOLDO_M = 0.7 // lo que un toldo pasa de su largo: el alero y el giro
@@ -42,10 +43,38 @@ const ladosDe = (ancho, fondo) => [
   ['oeste', [-ancho / 2, 0], [0, 1], [-1, 0], fondo], ['este', [ancho / 2, 0], [0, 1], [1, 0], fondo],
 ]
 
+/** El pintor en (a, b) mirando hacia `mira` = [da, db] (por omisión, hacia +b). */
+const frente = (p, { a = 0, b = 0, h = 0, mira = [0, 1] }) => p.mirando(a, h, b, mira[0], mira[1])
+
 /** El constructor de un tipo de parte, o undefined: solo los registrados (no lo heredado de Object, como 'constructor'). */
 export const parteDe = (tipo) => (Object.hasOwn(PARTES, tipo) ? PARTES[tipo] : undefined)
 
 export const PARTES = Object.freeze({
+  /** Un cuerpo de edificio centrado en (a, b): paredes, tejado y, si se piden, ventanas altas en los dos largos. */
+  cuerpo(p, { a = 0, b = 0, giro = 0, ventanas: v = null, ...medidas }) {
+    const q = p.en(a, 0, b, giro)
+    cuerpo(q, medidas)
+    if (v) for (const s of [-1, 1]) ventanas(q.mirando(0, 0, (s * medidas.ancho) / 2, 0, s), { largo: medidas.largo * 0.86, ...v })
+  },
+
+  /** Torre de cuerpos apilados con su remate, con el centro en (a, b). */
+  torre(p, { a = 0, b = 0, ...medidas }) { torre(p.en(a, 0, b), medidas) },
+
+  /** Fachada barroca de columnas pareadas y frontón de volutas, centrada en (a, b) y mirando a `mira`. */
+  fachadaBarroca(p, { a, b, mira, ...medidas }) { fachadaBarroca(frente(p, { a, b, mira }), medidas) },
+
+  /** Portada lateral de columnas y frontón sobre un muro. */
+  portadaLateral(p, { a, b, mira, ...medidas }) { portadaLateral(frente(p, { a, b, mira }), medidas) },
+
+  /** Hilera de ventanas (con balcón y tejadillo si se pide) sobre un muro. */
+  ventanas(p, { a, b, mira, ...medidas }) { ventanas(frente(p, { a, b, mira }), medidas) },
+
+  /** Cúpula sobre tambor, con el arranque a la altura h. */
+  cupula(p, { a = 0, b = 0, h = 0, ...medidas }) { cupulaConTambor(p.en(a, h, b), medidas) },
+
+  /** Iglesia paramétrica (nave, fachada, torres, cúpula) en el marco del hito: el origen, al pie de la fachada. */
+  iglesia(p, medidas) { iglesia(p, medidas) },
+
   /**
    * Terraza: una losa que es plana donde el terreno baja y lo sigue donde sube, con su zócalo de piedra.
    * `piso`: 'tierra' (la plaza del mercado), 'jardin' (canteros en X y caminos lisos) o 'damero' (lo mismo

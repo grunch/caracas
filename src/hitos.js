@@ -15,11 +15,13 @@ import { parteDe } from './hitos/partes.js'
 import { crearMaterialHitos } from './hitos/material.js'
 import { METRO } from './hitos/datos/marco.js'
 import { plazaBolivar } from './hitos/datos/plaza-bolivar.js'
+import { catedral } from './hitos/datos/catedral.js'
+import { iglesias } from './hitos/datos/iglesias.js'
 
 export { suprimirTechos, zonasDeSupresion } from './hitos/suprimir.js'
 
 /** Todos los hitos, en el orden en que se dibujan. */
-export const HITOS = Object.freeze([plazaBolivar])
+export const HITOS = Object.freeze([plazaBolivar, catedral, ...iglesias])
 
 const EPOCAS = 6 // 0 = 1578 … 5 = 1936 (src/epocas.js)
 const esEpoca = (e) => Number.isInteger(e) && e >= 0 && e < EPOCAS

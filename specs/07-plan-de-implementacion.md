@@ -63,8 +63,8 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 
 | ID | Tarea | Depende de | Listo cuando | Estado |
 |---|---|---|---|---|
-| T40 | Hitos modelados I: el marco de los hitos (`src/hitos.js`) y la **Plaza Bolívar** por épocas (mercado → plaza ajardinada con la estatua); después Catedral, Capitolio, Panteón, Santa Capilla, San Francisco, Teatro Municipal (plantas desde el plano de 1936, alturas desde fotos) | T24 | la plaza y 6 edificios con nombre, cada uno en sus años | 🔄 #31 |
-| T41 | Hitos modelados II: Miraflores, Universidad, El Calvario, Caño Amarillo, Mercado Principal, Santa Teresa, Candelaria, Altagracia… | T40 | 8 edificios más | ⏳ |
+| T40 | Hitos modelados I: el marco de los hitos (`src/hitos.js`) y la **Plaza Bolívar** por épocas (mercado → plaza ajardinada con la estatua); después Catedral, Capitolio, Panteón, Santa Capilla, San Francisco, Teatro Municipal (plantas desde el plano de 1936, alturas desde fotos) | T24 | la plaza y 6 edificios con nombre, cada uno en sus años | 🔄 #31 (marco y plaza) · #32 (Catedral, San Francisco, Santa Capilla, Panteón) |
+| T41 | Hitos modelados II: Miraflores, Universidad, El Calvario, Caño Amarillo, Mercado Principal, Santa Teresa, Candelaria, Altagracia… | T40 | 8 edificios más | 🔄 #32 (Santa Teresa, Altagracia, La Pastora) |
 | T42 | Marcas (etiquetas 3D por época, niveles, declutter, velo al pasar el mouse) | T25 | las marcas cambian con el año | ⏳ |
 | T43 | Fichas con fotos de época (Commons, autor, fecha, licencia) y visor de fotos | T42 | cada marca abre su ficha con fotos acreditadas | ⏳ |
 | T44 | Intro y "Acerca": qué estás viendo, la Caracas de cada época, fuentes y créditos (incluida la inspiración de @mormonnegro) | T25 | intro con todas las fuentes y licencias | ⏳ |

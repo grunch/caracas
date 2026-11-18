@@ -38,7 +38,8 @@ las plazas de cada época; cada hito con su ancla en el relieve.
   Torre). Las medidas de las partes van en metros en ese marco: `a` a lo largo del eje, `b` a su derecha.
 - **Partes** (`src/hitos/partes.js`): cada `tipo` tiene su constructor; una parte puede tener su propia vida
   (`nace`, `muere`), y así un mismo hito cambia con las épocas. Hoy: `terraza`, `verjaPerimetral`,
-  `escalinatas`, `faroles`, `estatuaEcuestre`, `galeriasDeMercado`, `puestos`.
+  `escalinatas`, `faroles`, `estatuaEcuestre`, `galeriasDeMercado`, `puestos`; `cuerpo`, `torre`,
+  `fachadaBarroca`, `portadaLateral`, `ventanas`, `cupula`, `iglesia`.
 - **Piezas** (`src/hitos/piezas.js`) y **objetos** (`src/hitos/objetos.js`): caja, tronco (cilindro, ochavo,
   cono), cúpula, barra, bulto, tejado (una, dos o cuatro aguas), cuerpo con tejado, arquería calada, vano y
   disco pintados, frontón triangular y de volutas, columna, cornisa, escalinata, verja, losa y zócalo; con
@@ -67,6 +68,28 @@ las plazas de cada época; cada hito con su ancla en el relieve.
 | 1772, 1843 | **el mercado**: explanada de tierra, galerías de arcos de un piso alrededor con portadas de arco y frontón al medio de cada lado y en las esquinas, hileras de puestos con toldo de lona | grabado de 1852 |
 | 1889 | **la plaza ajardinada**: piso liso y claro, canteros en X, estatua ecuestre de Bolívar (caballo encabritado) sobre pedestal alto de piedra oscura con gradas y bolardos, faroles de varios brazos en las entradas y de pie en los caminos, reja perimetral, terraza con escalinatas del lado bajo | fotos de 1874, ~1880 y ~1930 |
 | 1911, 1936 | lo mismo, con el piso de mosaico en damero | foto de ~1900 |
+
+**La Catedral** (`catedral`, desde 1772), en la esquina de La Torre, con la planta del recuadro del plano de
+1936 y el alzado de la foto de 1866, el grabado de 1867 y las fotos de 1874 y 1910: la **fachada barroca mira
+al oeste, a la plaza** (tres calles, dos cuerpos de columnas pareadas, frontón de volutas con pináculos y
+cruz), con la **torre a su izquierda** (al norte): tres cuerpos blancos (vanos apilados · reloj y balconcillo ·
+campanas), tambor ochavado y cupulín oscuro con una figura. Detrás, la nave larga de tejado alto con su
+lucernario; al sur, el cuerpo bajo de muro casi ciego con portada de frontón y ventanas de balcón con
+tejadillo. La torre mide unas tres veces el muro de la nave.
+
+**Las iglesias del perfil** (`src/hitos/datos/iglesias.js`): una iglesia paramétrica (`src/hitos/iglesias.js`:
+nave + fachada `clasica`, `neogotica` o `barroca` + torres con remate de `cupulin`, `aguja`, `chapitel` o
+`cupula` + cúpula sobre tambor), ubicada por el rótulo del plano de 1936:
+| Hito | Desde | Rasgos | Qué es incierto |
+|---|---|---|---|
+| San Francisco | 1772 | nave larga, fachada al norte, un campanario | lado del campanario; ya existía en 1578 |
+| Altagracia | 1772 | nave, una torre con cúpula | orientación y fecha |
+| La Pastora | 1772 | dos torres con cúpula hacia su plaza | fecha |
+| Santa Capilla | 1889 | neogótica, torre central con aguja | fecha exacta |
+| Santa Teresa | 1889 | dos fachadas y cúpula al centro | sin imagen de frente |
+| Panteón Nacional | 1889 | neogótico de dos torres con aguja | la reforma de ~1930 (el plano de 1936 dibuja tres torres) |
+
+La Candelaria no se ubicó con confianza en el plano: queda pendiente.
 
 Lo que falta verificar va en `verificar` de cada definición (fechas, orientación de la estatua, galerías
 con arcos a los dos lados…). Límite conocido: la plaza real es una explanada a nivel, hundida respecto de
