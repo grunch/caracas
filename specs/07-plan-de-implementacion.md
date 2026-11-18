@@ -53,6 +53,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T33 | Techos de teja de verdad: dos y cuatro aguas como geometría, con alero; azoteas en los públicos y los modernos | T31 | el perfil de tejados se ve de costado | ⏳ |
 | T34 | Árboles 3D desde `arboles.json` (5.926) y los patios con vegetación, en color | — | árboles en plazas, patios y quebradas | ✅ #19 |
 | T35 | Luz y acabado: sombras, luz tibia y sombra azulada, bruma, contorno por profundidad y grano de papel en tinta | — | el look de grabado de `specs/04` | ⏳ |
+| T38 | **El valle antes de la ciudad**: lo urbanizado por época (`crece.png` G) y el monte (B); en color, lo que la época todavía no urbanizó es campo sin el dibujo del plano; árboles silvestres que mueren al urbanizarse su lugar; plazas sin jardín ni árboles antes de 1889 | T24, T34 | en 1578 se ve una aldea de 25 manzanas en un valle de sabana, con sus quebradas, el Guaire y el Ávila, sin manzanas ni calles fantasma | 🔄 |
 
 ## Fase 4 · Contenido
 
