@@ -51,7 +51,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T31 | Estilos y alturas por época: colonial, republicano, guzmancista (neoclásico), ecléctico, casa de las afueras, rancho; pisos según época y zona | T24 | el índice de estilo de cada casa sale de su época y su lugar | ⏳ |
 | T32 | Fachadas procedurales por estilo: puertas, ventanas con rejas, aleros, zócalo, cornisas; LOD por distancia | T31 | a nivel de calle se distinguen los estilos | ⏳ |
 | T33 | Techos de teja de verdad: dos y cuatro aguas como geometría, con alero; azoteas en los públicos y los modernos | T31 | el perfil de tejados se ve de costado | ⏳ |
-| T34 | Árboles 3D desde `arboles.json` (5.926) y los patios con vegetación, en color | — | árboles en plazas, patios y quebradas | ⏳ |
+| T34 | Árboles 3D desde `arboles.json` (5.926) y los patios con vegetación, en color | — | árboles en plazas, patios y quebradas | 🔄 #19 |
 | T35 | Luz y acabado: sombras, luz tibia y sombra azulada, bruma, contorno por profundidad y grano de papel en tinta | — | el look de grabado de `specs/04` | ⏳ |
 
 ## Fase 4 · Contenido
