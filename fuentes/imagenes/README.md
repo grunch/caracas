@@ -94,6 +94,10 @@ como ilustración de la época del obispo Diez Madroñero, 1757–1769, pero es 
 clara y terrosa, no roja; el Ávila ocre y malva pálido, con bruma; el campo, sabana seca amarillenta**
 más que verde.
 
+Una tercera copia, `1830-ciudadccs-caracas` (640 px, la hoja entera con márgenes), llegó fechada en
+1830: parece la misma litografía, a verificar. No agrega detalle; deja abierta la duda de la fecha
+(1830 o 1839).
+
 - **Un mar de tejados rojos**, bajo y parejo: casi todo de un piso, con algunos altos sueltos. Tejas de
   rojo anaranjado a marrón, gastadas de forma despareja.
 - **Paredes blancas y crema**; no se ven colores fuertes.
