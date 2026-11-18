@@ -286,6 +286,41 @@ y balcón corrido arriba** (el estilo ecléctico de comercio, para T32); **riele
 en las calles principales (dato para T62 y para el suelo de las calles); árboles de plaza de copa
 grande, mayores que los de patio.
 
+## 1880 · Cuatro fotos de la Caracas de Guzmán Blanco (`1880-runrun-*`) → época 1889
+
+Fotos de 1880 (fotógrafo y archivo sin identificar): cubren el hueco entre 1867 y 1892.
+
+**Desde El Calvario** (`1880-runrun-vista-desde-el-calvario`): la ciudad hacia el sureste, con los cerros
+bajos del sur al fondo.
+- **Mar de tejados de un piso**, con crujías alrededor de patios; **calles rectas** que se pierden hacia
+  el valle; al fondo, **campo abierto** hasta los cerros: la ciudad termina a pocas cuadras.
+- **Dos edificios nuevos sobresalen juntos**: uno **grande, de planta ancha y cubierta clara curva o de
+  metal** (¿el Teatro Guzmán Blanco, hoy Municipal?) y una **iglesia blanca de cúpula** a su lado (según
+  el título, la Asunción; ¿la basílica de Santa Teresa?). A verificar.
+- En primer plano, **casas pobres de ladera**: bajas, de teja, escalonadas en la falda de El Calvario.
+- Árboles sueltos en patios; una arboleda donde estaría una plaza.
+
+**Plaza Bolívar** (`…-plaza-bolivar-a` y `-b`): **en 1880 la plaza ya es jardín**.
+- **Árboles ya crecidos** (copas de 6–8 m) en canteros, **caminos anchos de piso liso y claro**.
+- **Faroles de hierro fundido** muy ornamentados: de pie, de un farol, a lo largo de los caminos, y
+  grandes de varios brazos en las entradas.
+- El **pedestal de piedra con placas** de la estatua ecuestre, sobre gradas, rodeado de bolardos.
+- **La torre de la Catedral** detrás, con reloj y remate ochavado.
+- Con la vista de 1867 (plaza de tierra) acota el cambio: **la plaza ajardinada se hizo entre 1867 y
+  1880**. En la línea de tiempo, jardines, árboles y estatua van desde la época de 1889.
+
+**Estatua de Guzmán Blanco** (`…-estatua-guzman-blanco`): estatua **ecuestre** de bronce, saludando con
+el sombrero, sobre pedestal alto, delante de una **fachada neogótica** blanca de un piso alto: ventanas
+ojivales, **pináculos**, crestería calada y un **gablete central con aguja** (¿la Universidad, frente al
+Capitolio?). Farol de varios brazos al lado.
+- Hito efímero: por lo que se recuerda, las estatuas de Guzmán se derribaron en 1889; **a verificar**. Si
+  es así, en la línea de tiempo solo cabría entre 1843 y 1889 y no aparece en ninguna época: sirve como
+  ficha/anécdota, no como modelo.
+- La **fachada neogótica** sí es un hito a modelar (T40): está en la época de 1889 y siguientes.
+
+Qué implica: confirma la ciudad baja de teja en 1880; fija la fecha de la Plaza Bolívar ajardinada;
+agrega tres hitos guzmancistas (teatro, iglesia de cúpula, fachada neogótica) y los faroles de plaza.
+
 ## Fuera del período (no guardadas)
 
 - **Plaza Miranda y av. Baralt, años 50–60** (`1955-pinterest-plaza-miranda-av-baralt`, solo ficha):
