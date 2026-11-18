@@ -14,6 +14,7 @@ import { crearPlanosDeEpoca, planoDeEpoca } from './planos.js'
 import { SIN_PLANO } from './shader/plano.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
+import { cargarCalles, crearRotulos } from './calles.js'
 import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo } from './relieve.js'
 
 const params = new URLSearchParams(location.search)
@@ -232,6 +233,23 @@ function alternarHoy(prender = hoyObjetivo === 0) {
   boton.classList.toggle('on', prender)
   document.body.classList.toggle('hoy', prender)
   if (prender) hoyPedido ??= cargarHoy().catch((e) => { hoyPedido = null; console.warn(`hoy: ${e.message}`) })
+  if (prender) callesPedidas ??= cargarRotulos().catch((e) => { callesPedidas = null; console.warn(`calles: ${e.message}`) })
+  pedirCuadro(3)
+}
+
+// --- los nombres de las calles de hoy: un canvas 2D sobre la vista, sin eventos (src/calles.js) ---
+let rotulos = null
+let callesPedidas = null
+async function cargarRotulos() {
+  const indice = await cargarCalles('datos/', coords)
+  const lienzo = Object.assign(document.createElement('canvas'), { id: 'calles' })
+  lienzo.setAttribute('aria-hidden', 'true')
+  lienzo.style.pointerEvents = 'none'
+  renderer.domElement.after(lienzo)
+  rotulos = crearRotulos({
+    lienzo, indice, altura: sueloEn,
+    tamaño: () => ({ ancho: innerWidth, alto: innerHeight, dpr: params.has('capture') ? 1 : devicePixelRatio }),
+  })
   pedirCuadro(3)
 }
 
@@ -296,6 +314,7 @@ renderer.setAnimationLoop((t) => {
     const { px, py } = coords.aPixel(cam.now.x, cam.now.z)
     teselas.update(px, py, cam.now.dist < DIST_TESELAS_M)
   }
+  rotulos?.dibujar({ camera, dist: cam.now.dist, x: cam.now.x, z: cam.now.z, opacidad: ciudad.U.uHoy.value })
   renderer.render(scene, camera)
 })
 
@@ -306,6 +325,7 @@ window.lab = {
   get relieve() { return relieve },
   get teselas() { return teselas },
   get arboles() { return arboles },
+  get calles() { return rotulos },
   get lineaDeTiempo() { return lineaDeTiempo },
   get planos() { return planos },
 }
