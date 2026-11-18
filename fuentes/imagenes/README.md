@@ -243,3 +243,25 @@ republicana de pretil** (no ranchos ni quintas: mi regla manda demasiadas casas 
 "orillas"); calles **empedradas** en los barrios y asfalto solo en el centro; aceras escalonadas en las
 calles en pendiente; postes y cables como rasgo del siglo XX. Vista de control para el relieve: desde
 La Pastora, el Ávila llena el fondo de la calle.
+
+## 1892 (a verificar) · Calle de La Pastora con la iglesia, foto (`1892-pinterest-la-pastora`) → época 1889 (barrios)
+
+Calle de barrio a nivel de peatón, 38 años antes que la de la calle Real (1930): el mismo barrio, antes
+de las fachadas de pretil.
+
+- **Lado izquierdo, casas coloniales pobres**: de un piso, **bajas** (alero a unos 3 m), **tejado de teja
+  muy gastado y combado, con alero volado sobre la acera**, paredes de cal **desconchadas**, puertas y
+  ventanas chicas de madera, alguna con reja. Frente continuo pero cada casa a su altura: la línea de
+  aleros sube y baja.
+- **Lado derecho, casas mejores**: más altas, con **aleros de canes de madera muy volados**, ventanas
+  altas con reja y repisa, cornisa.
+- **Calle empedrada de piedra bruta**, con cuneta al centro; **acera de lajas**, alta de un lado.
+- **Iglesia de dos torres con cúpulas** al fondo, blanca, con su tejado a dos aguas: lo único alto.
+- **Un poste de telégrafo o teléfono** de crucetas: en 1892 ya hay cables.
+- Al fondo, el valle abierto.
+
+Qué implica: en 1889 los barrios son de **casa colonial baja de alero** (estilo 0 o 7, sin pretil); el
+pretil republicano llega a La Pastora después (foto de 1930): la misma casa cambia de fachada entre
+1889 y 1936, así que el estilo de una casa vieja no debería quedar fijo en "colonial" para siempre.
+Alturas desparejas entre casas vecinas (variar la altura de piso por semilla ±15 %). Hito: iglesia de
+La Pastora, dos torres con cúpulas (T41).

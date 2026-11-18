@@ -12,6 +12,10 @@
   "alto": 480,
   "formato": "JPEG",
   "tipo": "vista (grabado o litografía, reproducida de un libro)",
-  "epocas": [2],
-  "notas": "El pie impreso dice «El Mercado de Caracas en 1852 (Hoy Plaza Bolívar)». Autor y obra de origen sin identificar: A VERIFICAR (parece reproducción de un libro). La URL de Facebook caduca; falta una fuente estable y la licencia."
+  "epocas": [
+    2
+  ],
+  "notas": "El pie impreso dice «El Mercado de Caracas en 1852 (Hoy Plaza Bolívar)». Autor y obra de origen sin identificar: A VERIFICAR (parece reproducción de un libro). La URL de Facebook caduca; falta una fuente estable y la licencia.",
+  "cita": "Lámina con el pie impreso «El Mercado de Caracas en 1852 (Hoy Plaza Bolívar)», reproducida de un libro sin identificar. Sin fuente estable: buscar la lámina original (el pie sugiere una obra ilustrada sobre la Caracas antigua).",
+  "recuperable": false
 }
