@@ -1,15 +1,27 @@
 // Lógica pura de tools/arboles.mjs: los árboles del plano de 1936 → public/datos/arboles.bin (specs/02).
 import { desdeCuando } from '../src/epocas.js'
 
-export const BYTES_POR_ARBOL = 8 // 4 × Uint16 LE: x, y (px del mosaico), radio (dm), nace (época)
+export const BYTES_POR_ARBOL = 8 // 4 × Uint16 LE: x, y (px del mosaico), radio (dm), vida
 const DM_POR_M = 10
 const MAX_U16 = 0xffff
+const MAX_EPOCA = 7 // nace y muere van en 3 bits cada uno
 
-/** [{x, y, r (px), nace}] → bytes de arboles.bin; `metro` = metros por píxel del mosaico. */
+/** La vida de un árbol en un u16: nace + 8·muere (como `vida` de ciudad.pak; muere = 0, no muere) + 64 si es silvestre. */
+export function vidaArbol({ nace, muere = 0, silvestre = false }, i = 0) {
+  const enteros = Number.isInteger(nace) && Number.isInteger(muere) && nace >= 0 && muere >= 0
+  if (!enteros || nace > MAX_EPOCA || muere > MAX_EPOCA || (muere !== 0 && muere <= nace)) {
+    throw new Error(`árbol ${i}: vida inválida (nace ${nace}, muere ${muere})`)
+  }
+  return nace + 8 * muere + (silvestre ? 64 : 0)
+}
+
+/**
+ * [{x, y, r (px), nace, muere?, silvestre?}] → bytes de arboles.bin; `metro` = metros por píxel del mosaico.
+ */
 export function codificarArboles(arboles, metro) {
   const salida = new Uint8Array(arboles.length * BYTES_POR_ARBOL)
   const v = new DataView(salida.buffer)
-  arboles.forEach(({ x, y, r, nace }, i) => {
+  arboles.forEach(({ x, y, r, ...vida }, i) => {
     const [px, py] = [Math.round(x), Math.round(y)]
     if (!(px >= 0 && px <= MAX_U16 && py >= 0 && py <= MAX_U16)) throw new Error(`árbol ${i}: (${x}, ${y}) fuera de Uint16`)
     const dm = Math.round(r * metro * DM_POR_M)
@@ -18,19 +30,20 @@ export function codificarArboles(arboles, metro) {
     v.setUint16(o, px, true)
     v.setUint16(o + 2, py, true)
     v.setUint16(o + 4, dm, true)
-    v.setUint16(o + 6, nace, true)
+    v.setUint16(o + 6, vidaArbol(vida, i), true)
   })
   return salida
 }
 
 /**
- * Desde qué época está edificado el píxel (x, y) del mosaico según crece.png (R, "desde cuándo";
- * celdas de `celdaPx` píxeles desde la esquina noroeste). Nunca, o fuera de la imagen: Infinity.
+ * Desde qué época está edificado (canal 0, R) o urbanizado (canal 1, G) el píxel (x, y) del mosaico
+ * según crece.png ("desde cuándo"; celdas de `celdaPx` píxeles desde la esquina noroeste). Nunca, fuera
+ * de la imagen o si la imagen no trae ese canal: Infinity.
  */
-export function desdeEnCrece({ datos, cols, rows, canales, celdaPx, etapas }, x, y) {
+export function desdeEnCrece({ datos, cols, rows, canales, celdaPx, etapas }, x, y, canal = 0) {
   const [j, i] = [Math.floor(x / celdaPx), Math.floor(y / celdaPx)]
-  if (j < 0 || i < 0 || j >= cols || i >= rows) return Infinity
-  return desdeCuando(datos[(i * cols + j) * canales] / 255, etapas)
+  if (canal >= canales || j < 0 || i < 0 || j >= cols || i >= rows) return Infinity
+  return desdeCuando(datos[(i * cols + j) * canales + canal] / 255, etapas)
 }
 
 /**
@@ -122,3 +135,35 @@ export function naceArbol({ x, y, r }, { desde, casas }) {
   }
   return nace
 }
+
+const CLASE_CALLE = 1
+const CLASES_DE_CIUDAD = new Set([1, 2, 3, 4]) // calle, patio, edificado, edificio público
+const RUMBOS = 8
+const RUMBOS_DE_PLAZA = 6
+export const JARDINES_DESDE = 3 // 1889: los jardines de Guzmán Blanco (la Plaza Bolívar es de 1874)
+
+/**
+ * ¿El árbol está en una plaza o en una calle? Desde su centro se mira en 8 rumbos hasta `maxPx`: lo
+ * primero de ciudad que se encuentra (calle, patio o casa; el verde del cantero y su contorno no
+ * cuentan) es calle en casi todos. Un jardín de patio da con su patio o su casa. `claseEn(x, y)` lee
+ * la segmentación de 1936.
+ */
+export function esDePlaza(claseEn, x, y, { pasoPx, maxPx }) {
+  let calles = 0
+  for (let k = 0; k < RUMBOS; k++) {
+    const [dx, dy] = [Math.cos((k * 2 * Math.PI) / RUMBOS), Math.sin((k * 2 * Math.PI) / RUMBOS)]
+    for (let d = pasoPx; d <= maxPx; d += pasoPx) {
+      const clase = claseEn(x + dx * d, y + dy * d)
+      if (!CLASES_DE_CIUDAD.has(clase)) continue
+      if (clase === CLASE_CALLE) calles++
+      break
+    }
+  }
+  return calles >= RUMBOS_DE_PLAZA
+}
+
+/**
+ * Hasta Guzmán Blanco las plazas eran de tierra (la Plaza Mayor, un mercado) y las calles no tenían
+ * árboles: un árbol de plaza o de calle no aparece antes de 1889. Los de los patios, sí.
+ */
+export const naceEnPlaza = (nace, dePlaza) => (dePlaza ? Math.max(nace, JARDINES_DESDE) : nace)

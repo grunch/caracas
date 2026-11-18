@@ -100,12 +100,22 @@ describe('material con el plano de cada época', () => {
   })
 })
 
+describe('el fragment armado', () => {
+  test('ninguna función GLSL queda definida dos veces entre los módulos del shader', () => {
+    const { fragmentShader } = compilar()
+    const definidas = [...fragmentShader.matchAll(/^\s*(?:float|vec[234]|bool|void|mat[234]|Medidas)\s+(\w+)\s*\(([^)]*)\)\s*\{/gm)]
+      .map((m) => `${m[1]}(${m[2].split(',').map((a) => a.trim().split(/\s+/).slice(0, -1).join(' ')).join(',')})`)
+    const repetidas = definidas.filter((f, i) => definidas.indexOf(f) !== i)
+    expect(repetidas).toEqual([])
+  })
+})
+
 describe('color sin rótulos', () => {
   test('en color, donde la máscara marca un rótulo, la tinta del plano no oscurece el suelo', () => {
     const { fragmentShader } = compilar()
     expect(fragmentShader).toContain('uniform sampler2D uSuelo, uRotulos;')
     expect(fragmentShader).toContain('float rotulo = min(1.0, 2.0 * texture2D(uRotulos, uv).r) * (1.0 - planoViejo);')
-    expect(fragmentShader).toContain('return c * (1.0 - 0.4 * tintaDe(papel) * (1.0 - rotulo));')
+    expect(fragmentShader).toContain('* (1.0 - 0.4 * tintaDe(papel) * dibujo * (1.0 - rotulo));')
   })
 
   test('la máscara es del plano de 1936: donde la hoja muestra el de otra época, no se aplica', () => {
@@ -120,7 +130,8 @@ describe('color sin rótulos', () => {
 
   test('la tinta no cambia: el techo y el suelo siguen siendo el plano entero', () => {
     const { fragmentShader } = compilar()
-    expect(fragmentShader).toContain('vec3 enTinta = mix(diffuseColor.rgb, papel, vTecho);')
+    // (la pared lleva además los trazos de su fachada: src/shader/fachada.js)
+    expect(fragmentShader).toContain('vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, fachada.a), papel, vTecho);')
     expect(fragmentShader.match(/uRotulos/g)).toHaveLength(2) // la declaración y sueloColor: nada más la usa
   })
 

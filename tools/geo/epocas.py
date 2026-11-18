@@ -13,8 +13,9 @@ Línea de tiempo (índice de época → año): 0 → 1578 (Pimentel), 1 → 1772
 4. Salidas: fuentes/derivados/epocas/ciudad-epocas.json (el JSON del vectorizador con los
    techos de 1578 agregados y "vida": [[nace, muere], …], 0 = desde siempre / nunca muere),
    crece.json (metadatos por época, como specs/02) y crece.png (R = desde qué época está
-   edificado cada punto, codificado como en specs/02), más láminas QA por época. crece.json va
-   también a public/datos/ y crece.png a public/plano/.
+   edificado cada punto, G = desde cuál está urbanizado —manzanas con sus calles, tools/geo/valle.py—,
+   los dos codificados como en specs/02, y B = el monte del valle), más láminas QA por época.
+   crece.json va también a public/datos/ y crece.png a public/plano/.
 
 Uso (desde el checkout con los datos): python tools/geo/epocas.py
 """
@@ -32,13 +33,17 @@ from skimage import draw  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import valle  # noqa: E402
 from calce_correlacion import callejidad  # noqa: E402
+from segmentar_clases import AGUA, DESCONOCIDO, EDIFICADO, EDIFICIO_PUBLICO, MARGEN, PATIO  # noqa: E402
 from vectorizar import DE_LA_MANZANA  # noqa: E402
 
 AQUI = Path(__file__).resolve().parent
 NUNCA = 255                 # etapa de lo que nunca está edificado
 CUANTAS = 6                 # épocas de la línea de tiempo
 ULTIMA = CUANTAS - 1        # 1936
+CASAS_1936 = (EDIFICADO, EDIFICIO_PUBLICO, PATIO)   # lo que urbaniza en 1936 (los árboles sueltos no)
+AGUA_MINIMA = 0.15          # parte de una celda de crece.png con agua para que cuente como agua
 CONSTRUIDOS_1578 = ("casa", "iglesia", "cabildo", "convento")
 SIN_LICENCIA = "sin licencia declarada (derechos por verificar)"
 PISADA_MINIMA = 0.3         # fracción de una casa de 1578 cubierta por una de 1936 para pasarle la posta
@@ -258,6 +263,28 @@ def reducir_etapas(etapa, factor):
     return salida
 
 
+# --- el valle: lo urbanizado y el monte ----------------------------------------------------------
+
+def urbanizados(solares, construido, casas36, forma, escala, m_px, cfg):
+    """Lo urbanizado de cada época: 1578 (la envolvente de las 25 manzanas), los planos calzados y 1936."""
+    medidas = (m_px, cfg["cierre_m"], cfg["holgura_m"], cfg["hueco_m2"])
+    de_1578 = valle.urbanizado(valle.envolvente(solares, forma, escala), m_px, 0, cfg["holgura_m"], 0)
+    return [de_1578, *(valle.urbanizado(m, *medidas) for m in construido), valle.urbanizado(casas36, *medidas)]
+
+
+def canales_del_valle(urbanos, etapa_r, clases, factor_clases, celda_m, semilla, altura):
+    """(G, B) de crece.png: etapa desde la que cada celda es ciudad, y el monte (uint8).
+
+    etapa_r: las etapas de lo edificado ya reducidas (canal R); clases: la segmentación de 1936, a
+    factor_clases píxeles por celda de crece.png.
+    """
+    paso = int(round(urbanos[0].shape[1] / etapa_r.shape[1]))
+    etapa_g = np.minimum(reducir_etapas(valle.urbanizado_desde(urbanos), paso), etapa_r)
+    agua = valle.fraccion(clases == AGUA, factor_clases) >= AGUA_MINIMA
+    fuera = valle.fraccion(np.isin(clases, (MARGEN, DESCONOCIDO)), factor_clases) > 0.5
+    return etapa_g, valle.monte(agua, celda_m, semilla, altura=altura, fuera=fuera)
+
+
 # --- programa ----------------------------------------------------------------------------------
 
 def alinear(img, x0, y0, escala):
@@ -354,8 +381,13 @@ def main():
     m1578 = mascara_de_solares(ciudad78["solares"], forma, escala)
     m1936 = _reducir(np.isin(clases, DE_LA_MANZANA).astype(np.uint8), escala) > 0
     construidas = [m1578, *construido, m1936]
-    r = desde_cuando(reducir_etapas(etapas_por_punto(construidas), config["escala_crece"] // escala))
-    png = np.dstack([np.zeros_like(r), np.zeros_like(r), r])  # BGR: solo el canal R
+    etapa_r = reducir_etapas(etapas_por_punto(construidas), config["escala_crece"] // escala)
+    casas36 = _reducir(np.isin(clases, CASAS_1936).astype(np.uint8), escala) > 0
+    urbanos = urbanizados(ciudad78["solares"], construido, casas36, forma, escala, metro * escala, config["urbanizado"])
+    altura = valle.leer_relieve(raiz / "public/datos/relieve.bin", etapa_r.shape)  # sin relieve: monte sin cuestas
+    etapa_g, monte = canales_del_valle(urbanos, etapa_r, clases, config["escala_crece"], crece["celda_m"],
+                                       config["monte"]["semilla"], altura)
+    png = np.dstack([monte, desde_cuando(etapa_g), desde_cuando(etapa_r)])  # BGR
     escribir_imagen(salida / "crece.png", png)
     (raiz / "public/plano").mkdir(parents=True, exist_ok=True)
     escribir_imagen(raiz / "public/plano/crece.png", png)
@@ -364,8 +396,11 @@ def main():
     vista = cv2.cvtColor(_reducir(tifffile.imread(raiz / plaza["mosaico"]), 4), cv2.COLOR_RGB2BGR)
     for e, m in zip(epocas, construidas):
         guardar_lamina(salida / f"qa-{e['año']}.jpg", vista, _reducir(m.astype(np.uint8), 4 // escala) > 0)
-    for e, c in zip(epocas, casas):
-        print(f"{e['año']}: {c} casas")
+    for e, u in zip(epocas, urbanos):
+        guardar_lamina(salida / f"qa-urbano-{e['año']}.jpg", vista, _reducir(u.astype(np.uint8), 4 // escala) > 0,
+                       color=(255, 128, 0))
+    for e, c, u in zip(epocas, casas, urbanos):
+        print(f"{e['año']}: {c} casas · {u.sum() * (metro * escala) ** 2 / 1e6:.2f} km² urbanizados")
     print(f"→ {salida}")
 
 

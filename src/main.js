@@ -1,6 +1,6 @@
 import {
   WebGLRenderer, Scene, PerspectiveCamera, PlaneGeometry, Mesh, BufferAttribute,
-  CanvasTexture, TextureLoader, SRGBColorSpace, Color, Timer, HemisphereLight, DirectionalLight,
+  CanvasTexture, TextureLoader, SRGBColorSpace, Color, Timer, HemisphereLight, DirectionalLight, LinearFilter,
 } from 'three'
 import { cargarPak } from './pak.js'
 import { geometriaCiudad } from './ciudad.js'
@@ -192,6 +192,9 @@ Promise.all([fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.re
     })
     lineaDeTiempo = crearLineaDeTiempo({ contenedor: document.getElementById('epocas'), epocas, alElegir: (i) => secuencia.elegir(i) })
     cargarTextura('plano/crece.png', false).then((t) => {
+      // etapas codificadas: un mipmap las promediaría y el borde de la ciudad cambiaría de época a lo lejos
+      t.generateMipmaps = false
+      t.minFilter = LinearFilter
       const { width: cols, height: rows } = t.image
       U.uCreceEscala.value.fromArray(escalaCrece(meta.plano, { cols, rows }, celda_m ?? 8))
       ponerTextura(U.uCrece, t)
