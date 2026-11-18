@@ -35,7 +35,7 @@ jobs:
       - name: Navegador para Playwright
         run: npx playwright install --with-deps chromium
       - name: E2E
-        run: npx playwright test --reporter=line
+        run: npx playwright test --reporter=line,html
       - name: Reporte de Playwright
         if: failure()
         uses: actions/upload-artifact@v4
