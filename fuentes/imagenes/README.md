@@ -110,3 +110,32 @@ Qué implica: confirma teja + cal como paleta de 1772–1843 y la variación de 
 patios llevan árboles (ya en `arboles.bin`, falta darles `nace` temprano); el campo es sabana verde con
 palmas (para "el valle antes de la ciudad"); el relieve del Ávila debe leerse grande y plegado desde el
 suroeste: buena vista de control para comparar con el visor.
+
+## ~1903 (1900–1906) · Panorámica desde El Calvario, foto (`1903-commons-panoramica-de-caracas`) → épocas 1889 y 1911
+
+**Fotografía** de 6477 px (Library of Congress), desde El Calvario hacia el noreste: la referencia más
+confiable para fin de siglo, y la misma vista que la litografía de 1839 (sirve para comparar 60 años).
+La identificación de edificios es a ojo, a verificar.
+
+- **La ciudad sigue siendo baja**: un mar de tejados de teja de un piso, con muy pocos altos. Sesenta
+  años después de 1839, el perfil casi no cambió; cambian los hitos.
+- **Tejados a dos y cuatro aguas con crujías alrededor de patios**; se ven claros los **patios con
+  árboles** y los corredores con techo propio.
+- **Zinc**: en primer plano (zona de la estación, Caño Amarillo) hay **galpones y depósitos con techo de
+  chapa**, a dos aguas, largos; también casas con corredor de zinc. El zinc ya existe en 1900 para
+  galpones, no solo para ranchos.
+- **Hitos que sobresalen** (de izquierda a derecha): una iglesia de dos torres en lo alto (¿La
+  Pastora?); un **palacio con mansardas** sobre un basamento con muro de contención (Miraflores); una
+  iglesia de **dos torres con cúpulas** (¿el Panteón?); una **fachada barroca ancha con torre**; una
+  **aguja neogótica** (¿Santa Capilla?); y a la derecha la **torre de la Catedral**. En primer plano, el
+  **monumento con estatua sobre pedestal** de El Calvario.
+- **Arbolado**: una arboleda densa en el centro (¿la Plaza Bolívar ya ajardinada u otra plaza?),
+  **chaguaramos** (palmas reales) muy altos sueltos, y los cerros con monte bajo y agaves.
+- **Al norte y al este, campo abierto**: entre la ciudad y el Ávila todavía hay potreros y cultivos sin
+  casas. El Ávila, pelado y plegado.
+- **Postes** de telégrafo o luz, y muros de contención y terrazas en la ladera del oeste.
+
+Qué implica: en 1889–1911 la mayoría de las casas sigue siendo de un piso con teja (bajar la proporción
+de dos y tres pisos del estilo ecléctico: hoy da 2–3 pisos); agregar un tipo "galpón" (zinc a dos aguas,
+largo) cerca de las estaciones; los hitos de la lista son los que hacen el perfil (T40/T41); chaguaramos
+como árbol alto suelto; y esta vista sirve de **vista de control** en el visor (cámara en El Calvario).

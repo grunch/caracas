@@ -27,3 +27,4 @@ fuentes/derivados/
 public/datos/manifiesto.json
 .cache/
 fuentes/imagenes/**/original.*
+fuentes/imagenes/**/vista.jpg
