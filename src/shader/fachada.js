@@ -1,35 +1,19 @@
-import { ALTO_PISO } from '../ciudad.js'
 import { GLSL_DIBUJO, GLSL_VANOS } from './vanos.js'
 
 /**
- * Techos y fachadas según el estilo de cada casa (aInfo.z, tools/geo/estilos.py):
+ * Fachadas según el estilo de cada casa (aInfo.z, tools/geo/estilos.py):
  * 0 colonial · 1 republicano · 2 guzmancista · 3 ecléctico · 4 moderno · 5 quinta · 6 rancho ·
  * 7 casa de las orillas · 8 galpón de estación · 9 edificio público.
  * No hay texturas de fachada: todo sale de las coordenadas de la pared (aPared, src/ciudad.js), la
  * altura sobre la base de la casa, los pisos, el estilo y la semilla. fachadaEn() da el color de la
  * pared y la tinta que le toca en el grabado; de lejos, los detalles se apagan a su tono medio.
+ * El alto de piso es el de cada pared (aPared.z → gAltoPiso): las casas no miden todas lo mismo. Los
+ * techos van aparte (src/shader/techo.js).
  */
 export const GLSL_FACHADA = /* glsl */ `
   const float ESTILO_COLONIAL = 0.0, ESTILO_REPUBLICANO = 1.0, ESTILO_GUZMANCISTA = 2.0, ESTILO_ECLECTICO = 3.0,
     ESTILO_MODERNO = 4.0, ESTILO_QUINTA = 5.0, ESTILO_RANCHO = 6.0, ESTILO_ORILLAS = 7.0, ESTILO_GALPON = 8.0, ESTILO_PUBLICO = 9.0;
   bool es(float estilo, float cual) { return abs(estilo - cual) < 0.5; }
-
-  /** La teja criolla: cada techo un poco distinto, algunos más gastados u oscuros. */
-  vec3 teja(float semilla) {
-    vec3 nueva = vec3(0.71, 0.38, 0.26), vieja = vec3(0.55, 0.36, 0.28);
-    return mix(nueva, vieja, azar(semilla * 1.7)) * (0.9 + 0.2 * azar(semilla * 3.1));
-  }
-  /** Azotea de cemento o de baldosa clara. */
-  vec3 azotea(float semilla) { return vec3(0.66, 0.63, 0.57) * (0.92 + 0.12 * azar(semilla * 2.3)); }
-  /** Zinc: gris azulado, con óxido en las más viejas. */
-  vec3 zinc(float semilla) { return mix(vec3(0.55, 0.57, 0.58), vec3(0.50, 0.36, 0.27), azar(semilla * 4.7) * 0.8); }
-
-  vec3 techoColor(float semilla, float estilo) {
-    if (es(estilo, ESTILO_PUBLICO) || es(estilo, ESTILO_MODERNO)) return azotea(semilla);
-    if (es(estilo, ESTILO_RANCHO) || es(estilo, ESTILO_GALPON)) return zinc(semilla);
-    if (es(estilo, ESTILO_ECLECTICO) && azar(semilla * 6.1) < 0.5) return azotea(semilla);
-    return teja(semilla);
-  }
 
   /** La cal: blanca las más; si no, crema, ocre, rosa viejo o añil claro. */
   vec3 cal(float semilla) {
@@ -70,7 +54,9 @@ export const GLSL_FACHADA = /* glsl */ `
     return paredBase(semilla, estilo) * zocalo;
   }
 
-  const float ALTO_PISO = ${ALTO_PISO.toFixed(2)};
+  /** Alto de piso de la pared que se está dibujando (lo pone el main, de aPared.z) y cuánto sube sobre
+   *  ella el pretil en la época que rige (0 si la pared o la fachada de la época no lo llevan). */
+  float gAltoPiso = 4.2, gPretil = 0.0;
   const vec3 TINTA = vec3(0.16, 0.13, 0.11);
   const vec3 OSCURO = vec3(0.10, 0.09, 0.085); // el adentro de un vano abierto
 
@@ -92,6 +78,14 @@ export const GLSL_FACHADA = /* glsl */ `
     if (es(estilo, ESTILO_ORILLAS)) return Medidas(3.4, 0.5, 1.0, 2.6, 0.6, 2.8, 0.45, 0.3);
     if (es(estilo, ESTILO_GALPON)) return Medidas(6.0, 0.8, 2.2, 3.3, 1.5, 3.4, 0.5, 0.15); // muro largo, ventanas altas, portón
     return Medidas(4.2, 0.7, 0.8, 2.7, 1.1, 3.3, 0.0, 1.0); // público
+  }
+
+  /** Las medidas a la altura de esta pared: en un piso bajo, puerta y ventanas se achican para caber
+   *  bajo el remate; en uno muy alto se estiran (ventanas casi de piso a techo, calle de 1843). */
+  Medidas aMedida(Medidas m) {
+    float e = gAltoPiso > 4.6 ? min(gAltoPiso / 4.6, 1.2) : clamp((gAltoPiso - m.remate - 0.1) / m.puertaAlto, 0.5, 1.0);
+    m.alfeizar *= e; m.dintel *= e; m.puertaAlto *= e;
+    return m;
   }
 
   /** La carpintería de la casa: marrón, verde o azul gris (las coloniales, casi siempre marrón). */
@@ -133,7 +127,7 @@ export const GLSL_FACHADA = /* glsl */ `
   /** Almohadillado de la planta baja (eclécticas y públicas): hiladas de sillares con sus juntas. */
   void almohadillado(inout vec3 c, inout float k, float estilo, float piso, float u, float h, vec2 w2) {
     if (!(es(estilo, ESTILO_ECLECTICO) || es(estilo, ESTILO_PUBLICO)) || piso > 0.5) return;
-    float en = banda(h, 0.8, ALTO_PISO - 0.45, w2.y);
+    float en = banda(h, 0.8, gAltoPiso - 0.45, w2.y);
     float fila = floor((h - 0.8) / 0.5);
     float junta = max(barras(h - 0.8, 0.5, 0.035, w2.y), barras(u + 0.6 * mod(fila, 2.0), 1.2, 0.035, w2.x));
     c *= 1.0 - 0.3 * junta * en;
@@ -164,13 +158,13 @@ export const GLSL_FACHADA = /* glsl */ `
   void losas(inout vec3 c, inout float k, float estilo, float piso, float pisos, float y, vec2 w2) {
     if (piso > pisos - 1.5) return;
     if (es(estilo, ESTILO_MODERNO)) {
-      c = mix(c, c * 0.86, banda(y, ALTO_PISO - 0.32, ALTO_PISO + 0.01, w2.y));
-      k = max(k, trazo(y - (ALTO_PISO - 0.32), 0.015, w2.y));
+      c = mix(c, c * 0.86, banda(y, gAltoPiso - 0.32, gAltoPiso + 0.01, w2.y));
+      k = max(k, trazo(y - (gAltoPiso - 0.32), 0.015, w2.y));
       return;
     }
-    c = mix(c, c * 1.08 + 0.02, banda(y, ALTO_PISO - 0.3, ALTO_PISO - 0.14, w2.y));
-    c *= 1.0 - 0.3 * banda(y, ALTO_PISO - 0.36, ALTO_PISO - 0.3, w2.y);
-    k = max(k, max(trazo(y - (ALTO_PISO - 0.3), 0.012, w2.y), trazo(y - (ALTO_PISO - 0.14), 0.012, w2.y)));
+    c = mix(c, c * 1.08 + 0.02, banda(y, gAltoPiso - 0.3, gAltoPiso - 0.14, w2.y));
+    c *= 1.0 - 0.3 * banda(y, gAltoPiso - 0.36, gAltoPiso - 0.3, w2.y);
+    k = max(k, max(trazo(y - (gAltoPiso - 0.3), 0.012, w2.y), trazo(y - (gAltoPiso - 0.14), 0.012, w2.y)));
   }
 
   // --- el remate: t = cuánto falta hasta lo alto de la pared ---
@@ -243,7 +237,7 @@ export const GLSL_FACHADA = /* glsl */ `
 
   /** Cuánto de la pared son vanos, para el tono medio de lejos. */
   float cobertura(Medidas m) {
-    return clamp(2.0 * m.medio / m.pano * (m.dintel - m.alfeizar) / ALTO_PISO * (1.0 - 0.5 * m.ciegos), 0.0, 0.6);
+    return clamp(2.0 * m.medio / m.pano * (m.dintel - m.alfeizar) / gAltoPiso * (1.0 - 0.5 * m.ciegos), 0.0, 0.6);
   }
 
   /** La fachada de una pared: rgb, su color; a, su tinta en el grabado. pared = (metros desde la esquina,
@@ -254,10 +248,11 @@ export const GLSL_FACHADA = /* glsl */ `
     float largo = pared.y;
     if (largo < 0.01 || info.w < 0.5) return vec4(base, 0.0);
     float u = pared.x, semilla = info.y, estilo = info.z, pisos = info.w;
-    Medidas m = medidas(estilo);
+    float alto = pisos * gAltoPiso + gPretil, t = alto - h;
+    if (t < -0.12) return vec4(base, 0.0); // el hastial: la pared que sube hasta la cumbrera, lisa
+    Medidas m = aMedida(medidas(estilo));
     float sem = fract(semilla * 0.0137) * 97.0 + fract(largo * 0.731) * 13.0; // cada pared, su reparto
-    float alto = pisos * ALTO_PISO, t = alto - h;
-    float piso = clamp(floor(h / ALTO_PISO), 0.0, pisos - 1.0), y = h - piso * ALTO_PISO;
+    float piso = clamp(floor(h / gAltoPiso), 0.0, pisos - 1.0), y = h - piso * gAltoPiso;
     float n = largo < 1.8 ? 0.0 : max(1.0, floor(largo / m.pano + 0.3));
     float p = largo / max(n, 1.0);
     float i = clamp(floor(u / p), 0.0, max(n - 1.0, 0.0));

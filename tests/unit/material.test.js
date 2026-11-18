@@ -36,7 +36,7 @@ describe('material sin línea de tiempo', () => {
 describe('estilos en el shader', () => {
   test('techo y pared se eligen por el estilo de la casa (aInfo.z)', () => {
     const { fragmentShader } = compilar()
-    expect(fragmentShader).toContain('techoColor(vInfo.y, vInfo.z)')
+    expect(fragmentShader).toContain('techoEn(vFaldon, vCubierta, vInfo.y, vLuz, wTecho)') // el techo, por su cubierta (aTecho.w)
     for (const estilo of ['ESTILO_MODERNO', 'ESTILO_RANCHO', 'ESTILO_PUBLICO', 'ESTILO_ORILLAS']) expect(fragmentShader).toContain(estilo)
   })
 })
@@ -128,10 +128,10 @@ describe('color sin rótulos', () => {
     expect(fragmentShader.indexOf('vec3 papel = planoEn(uvPlano);')).toBeLessThan(fragmentShader.indexOf('sueloColor(uv, papel)'))
   })
 
-  test('la tinta no cambia: el techo y el suelo siguen siendo el plano entero', () => {
+  test('la tinta no cambia: el suelo sigue siendo el plano entero', () => {
     const { fragmentShader } = compilar()
-    // (la pared lleva además los trazos de su fachada: src/shader/fachada.js)
-    expect(fragmentShader).toContain('vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, fachada.a), papel, vTecho);')
+    // (la casa es papel con los trazos de su fachada y de su tejado: src/shader/fachada.js y techo.js)
+    expect(fragmentShader).toContain('vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), papel, acostada);')
     expect(fragmentShader.match(/uRotulos/g)).toHaveLength(2) // la declaración y sueloColor: nada más la usa
   })
 

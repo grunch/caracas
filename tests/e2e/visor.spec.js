@@ -180,8 +180,9 @@ test('el material de la ciudad compila con las fachadas, en tinta y en color', a
   await page.waitForFunction(() => window.lab?.ready === true)
   const dosCuadros = () => page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
   if (await hayDato(page, 'datos/ciudad.pak', 'octet-stream')) {
-    // con la ciudad: sus paredes traen dónde está cada punto de la pared (aPared)
-    await page.waitForFunction(() => window.lab.scene.children.some((m) => m.geometry?.attributes?.aPared?.itemSize === 2), null, { timeout: 60000 })
+    // con la ciudad: sus paredes traen dónde está cada punto de la pared (aPared) y sus techos, el faldón (aTecho)
+    await page.waitForFunction(() => window.lab.scene.children.some((m) => m.geometry?.attributes?.aPared?.itemSize === 3
+      && m.geometry.attributes.aTecho?.itemSize === 4), null, { timeout: 60000 })
   }
   await page.evaluate(() => window.lab.pedirCuadro(4))
   await dosCuadros()

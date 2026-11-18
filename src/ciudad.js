@@ -1,22 +1,32 @@
 /**
- * La ciudad levantada: huellas de los techos (polígonos en píxeles del plano) extruidas
- * en una sola geometría. Cada vértice lleva aInfo = (distancia de su casa a la plaza,
- * semilla, estilo, pisos) para que el shader haga la ola y el estilo de la fachada,
- * aAncla = (x, z) del centroide de su casa: la altura del terreno a la que sube entera, y
- * aPared = (metros desde la esquina de arranque de su pared, largo de esa pared): las coordenadas
- * con las que el shader dibuja la fachada (src/shader/fachada.js); los techos llevan (0, 0), y
+ * La ciudad levantada: las huellas de las casas (polígonos en píxeles del plano) en una sola
+ * geometría, cada una con sus paredes y su techo de verdad (src/techos.js y src/alzado.js): tejados a
+ * dos aguas con la cumbrera paralela a la calle, alas y patio en los lotes profundos, azoteas, zinc.
+ *
+ * Cada vértice lleva aInfo = (distancia de su casa a la plaza, semilla, estilo, pisos) para la ola y
+ * el estilo; aAncla = (x, z) del centroide de su casa: la altura del terreno a la que sube entera;
+ * aPared = (metros desde la esquina de arranque de su pared, largo de esa pared, alto de piso): las
+ * coordenadas con las que el shader dibuja la fachada (src/shader/fachada.js; largo 0 = sin vanos); y
+ * aTecho = (s a lo largo del alero, t bajando desde la cumbrera, largo del faldón, cubierta): las del
+ * tejado (src/shader/techo.js; cubierta 0 = pared).
+ *
  * aHistoria = el estilo y los pisos de su casa en cada época (empacarHistoria): el shader elige los de
- * la época que rige y lleva la altura, hecha con los pisos de `techos`, a los de esa época.
+ * la época que rige. Si con las épocas cambia la forma del techo (otra cubierta, otros pisos), la casa
+ * va una vez por etapa (etapasDe, src/techos.js), cada una con su vida; si solo cambia la fachada, es
+ * la misma geometría y el shader le sube el pretil o le quita el alero.
  *
  * Datos (ciudad.pak): vertices Float32 [px, py, …]; techos Uint32 de a 4:
- * [primer vértice, cuántos, empacarTecho({pisos, estilo}), semilla]; historia (opcional) Uint8 de a 6:
- * por techo, un byte por época = estilo + 16·pisos (specs/02).
+ * [primer vértice, cuántos, empacarTecho({pisos, estilo}), semilla]; vida Uint32: nace + 8 · muere;
+ * historia (opcional) Uint8 de a 6: por techo, un byte por época = estilo + 16·pisos (specs/02).
  */
-import { ShapeUtils, Vector2, BufferGeometry, BufferAttribute } from 'three'
+import { BufferGeometry, BufferAttribute } from 'three'
+import { simplificar, rectanguloMinimo, areaConSigno, crearIndice } from './poligono.js'
+import { planDeTecho, elegirFrente, etapasDe, LADO_LIBRE } from './techos.js'
+import { alzarCasa } from './alzado.js'
 
-export const ALTO_PISO = 4.2 // m: casas coloniales y republicanas de techo alto
-
-const SIN_PARED = [0, 0]
+export const TOLERANCIA_HUELLA_M = 0.6 // los dientes del trazado a píxeles que se le quitan a cada huella
+const SONDAS_M = [2, 4] // a qué distancia de cada lado se mira si hay calle o hay vecino (las calles miden 5 m o más)
+const SONDAS_A_LO_LARGO = [0.2, 0.5, 0.8]
 
 export const empacarTecho = ({ pisos, estilo }) => ((estilo & 0xff) << 8) | (pisos & 0xff)
 export const desempacarTecho = (v) => ({ pisos: v & 0xff, estilo: (v >> 8) & 0xff })
@@ -31,102 +41,168 @@ export function historiaEnEpoca([h0, h1], e) {
   return { estilo: byte % 16, pisos: Math.floor(byte / 16) }
 }
 
-/** Devuelve arrays planos (posiciones, normales, info, vidas, anclas, paredes, historias, indices); sin three.js de por medio. */
-export function extruirTechos({ vertices, techos, vida = null, historia = null }, coords) {
+/** Las casas del pak, con su huella en metros (la original y la simplificada) y su vida. */
+function leerCasas({ vertices, techos, vida = null, historia = null }, coords, tolerancia) {
   if (historia && historia.length !== (techos.length / 4) * EPOCAS_HISTORIA) {
     throw new Error(`ciudad: la historia trae ${historia.length} bytes y hacen falta ${EPOCAS_HISTORIA} por techo`)
   }
-  const posiciones = []
-  const normales = []
-  const info = []
-  const vidas = [] // [nace, muere] por vértice (src/epocas.js); sin vida, siempre visible
-  const anclas = []
-  const paredes = [] // [u, largo] por vértice: dónde está en su pared (0, 0 en los techos)
-  const historias = [] // empacarHistoria de su casa, por vértice
-  const indices = []
-  let vidaTecho = [0, 0]
-  let historiaTecho = [0, 0]
-
-  const vertice = (x, y, z, n, datos, ancla, pared = SIN_PARED) => {
-    posiciones.push(x, y, z)
-    normales.push(n[0], n[1], n[2])
-    info.push(...datos)
-    vidas.push(vidaTecho[0], vidaTecho[1])
-    anclas.push(ancla.x, ancla.y)
-    paredes.push(pared[0], pared[1])
-    historias.push(historiaTecho[0], historiaTecho[1])
-    return posiciones.length / 3 - 1
-  }
-  // agrega el triángulo con el giro que haga que su cara mire hacia n
-  const triangulo = (a, b, c, n) => {
-    const p = (k) => [posiciones[k * 3], posiciones[k * 3 + 1], posiciones[k * 3 + 2]]
-    const [pa, pb, pc] = [p(a), p(b), p(c)]
-    const u = [pb[0] - pa[0], pb[1] - pa[1], pb[2] - pa[2]]
-    const v = [pc[0] - pa[0], pc[1] - pa[1], pc[2] - pa[2]]
-    const cruz = [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]]
-    const mira = cruz[0] * n[0] + cruz[1] * n[1] + cruz[2] * n[2]
-    indices.push(...(mira >= 0 ? [a, b, c] : [a, c, b]))
-  }
-
+  const casas = []
   for (let t = 0; t < techos.length; t += 4) {
-    const [inicio, cuantos, empacado, semilla] = [techos[t], techos[t + 1], techos[t + 2], techos[t + 3]]
-    const { pisos, estilo } = desempacarTecho(empacado)
-    const v = vida ? vida[t / 4] : 0
-    vidaTecho = [v % 8, Math.floor(v / 8)]
-    // sin historia (datos viejos, la ciudad de demostración), todas las épocas valen lo de `techos`
-    historiaTecho = empacarHistoria(historia
-      ? historia.subarray((t / 4) * EPOCAS_HISTORIA, (t / 4 + 1) * EPOCAS_HISTORIA)
-      : Array(EPOCAS_HISTORIA).fill((estilo & 15) + 16 * Math.min(pisos, 15)))
-    const alto = pisos * ALTO_PISO
+    const [inicio, cuantos] = [techos[t], techos[t + 1]]
     const anillo = []
     for (let k = 0; k < cuantos; k++) {
       const { x, z } = coords.aMundo(vertices[(inicio + k) * 2], vertices[(inicio + k) * 2 + 1])
-      anillo.push(new Vector2(x, z))
+      anillo.push([x, z])
     }
-    const centro = anillo.reduce((s, p) => s.add(p), new Vector2()).divideScalar(cuantos)
-    const datos = [centro.length(), semilla & 0xffff, estilo, pisos]
-
-    // techo
-    const arriba = [0, 1, 0]
-    const base = anillo.map((p) => vertice(p.x, alto, p.y, arriba, datos, centro))
-    for (const [a, b, c] of ShapeUtils.triangulateShape(anillo, [])) triangulo(base[a], base[b], base[c], arriba)
-
-    // paredes: normal hacia afuera según el sentido de giro del anillo
-    const signo = ShapeUtils.area(anillo) > 0 ? 1 : -1
-    for (let k = 0; k < cuantos; k++) {
-      const a = anillo[k]
-      const b = anillo[(k + 1) % cuantos]
-      const largo = a.distanceTo(b)
-      if (largo < 1e-6) continue
-      const n = [((b.y - a.y) / largo) * signo, 0, (-(b.x - a.x) / largo) * signo]
-      const [enA, enB] = [[0, largo], [largo, largo]]
-      const [v0, v1, v2, v3] = [vertice(a.x, 0, a.y, n, datos, centro, enA), vertice(b.x, 0, b.y, n, datos, centro, enB),
-        vertice(b.x, alto, b.y, n, datos, centro, enB), vertice(a.x, alto, a.y, n, datos, centro, enA)]
-      triangulo(v0, v1, v2, n)
-      triangulo(v0, v2, v3, n)
-    }
+    const v = vida ? vida[t / 4] : 0
+    const centro = anillo.reduce((s, p) => [s[0] + p[0] / cuantos, s[1] + p[1] / cuantos], [0, 0])
+    const casa = { ...desempacarTecho(techos[t + 2]), semilla: techos[t + 3], nace: v % 8, muere: Math.floor(v / 8) }
+    const bytes = historia?.subarray((t / 4) * EPOCAS_HISTORIA, (t / 4 + 1) * EPOCAS_HISTORIA)
+    casas.push({
+      ...casa, centro, huella: cuantos >= 3 ? simplificar(anillo, tolerancia) : null, etapas: etapasDe(casa, bytes),
+      // sin historia (datos viejos, la ciudad de demostración), todas las épocas valen lo de `techos`
+      historia: empacarHistoria(bytes ?? Array(EPOCAS_HISTORIA).fill((casa.estilo & 15) + 16 * Math.min(casa.pisos, 15))),
+    })
   }
+  return casas
+}
+
+/**
+ * Qué parte de lo que hay justo afuera de cada lado del rectángulo está sin casas (0..1): los lados
+ * van en orden v0, u1, v1, u0, con la normal hacia afuera.
+ */
+function ladosLibres(rect, indice, propia) {
+  const { u, v, esquinas } = rect
+  const normales = [[-v[0], -v[1]], u, v, [-u[0], -u[1]]]
+  return normales.map((n, k) => {
+    const [a, b] = [esquinas[k], esquinas[(k + 1) % 4]]
+    let libres = 0
+    for (const t of SONDAS_A_LO_LARGO) {
+      for (const d of SONDAS_M) {
+        if (!indice.ocupado(a[0] + (b[0] - a[0]) * t + n[0] * d, a[1] + (b[1] - a[1]) * t + n[1] * d, propia)) libres++
+      }
+    }
+    return libres / (SONDAS_A_LO_LARGO.length * SONDAS_M.length)
+  })
+}
+
+/**
+ * El marco del lote: origen en la esquina izquierda del frente, `eu` a lo largo del frente y `ev`
+ * hacia el fondo (unitarios, en el mundo). `frente` es el índice del lado (v0, u1, v1, u0).
+ */
+export function marcoDelLote(rect, frente) {
+  const { u, v, esquinas, ancho, fondo } = rect
+  const menos = (p) => [-p[0], -p[1]]
+  const [eu, ev] = [[u, v], [v, menos(u)], [menos(u), menos(v)], [menos(v), u]][frente]
+  const deFrente = frente % 2 === 0
+  return { origen: esquinas[frente], eu, ev, ancho: deFrente ? ancho : fondo, fondo: deFrente ? fondo : ancho }
+}
+
+const VERTICES_POR_CASA = 128 // para reservar de entrada; si hacen falta más, los búferes crecen
+const CAMPOS = { posiciones: 3, normales: 3, info: 4, vidas: 2, anclas: 2, paredes: 3, cubiertas: 4, historias: 2 }
+
+/** Los búferes de la geometría, escritos en su lugar (un push por número sobre un array común cuesta el doble). */
+function crearBuferes(capacidad) {
+  const b = { vertices: 0, capacidad, triangulos: 0, indices: new Uint32Array(capacidad * 2) }
+  for (const [nombre, tamaño] of Object.entries(CAMPOS)) b[nombre] = new Float32Array(capacidad * tamaño)
+  return b
+}
+
+const agrandado = (viejo, largo) => { const nuevo = new viejo.constructor(largo); nuevo.set(viejo); return nuevo }
+
+function crecer(b) {
+  b.capacidad *= 2
+  for (const [nombre, tamaño] of Object.entries(CAMPOS)) b[nombre] = agrandado(b[nombre], b.capacidad * tamaño)
+}
+
+/** Lo que escribe src/alzado.js, llevado del marco del lote al mundo y a los búferes de la geometría. */
+function escritor(b, casa, etapa, { origen: o, eu, ev }) {
+  const dist = Math.hypot(casa.centro[0], casa.centro[1])
+  const semilla = casa.semilla & 0xffff
   return {
-    posiciones: new Float32Array(posiciones),
-    normales: new Float32Array(normales),
-    info: new Float32Array(info),
-    vidas: new Float32Array(vidas),
-    anclas: new Float32Array(anclas),
-    paredes: new Float32Array(paredes),
-    historias: new Float32Array(historias),
-    indices: posiciones.length / 3 > 65535 ? new Uint32Array(indices) : new Uint16Array(indices),
+    vertice(pu, pv, y, n, pared, techo) {
+      if (b.vertices === b.capacidad) crecer(b)
+      const k = b.vertices++
+      b.posiciones[k * 3] = o[0] + pu * eu[0] + pv * ev[0]
+      b.posiciones[k * 3 + 1] = y
+      b.posiciones[k * 3 + 2] = o[1] + pu * eu[1] + pv * ev[1]
+      b.normales[k * 3] = n[0] * eu[0] + n[2] * ev[0]
+      b.normales[k * 3 + 1] = n[1]
+      b.normales[k * 3 + 2] = n[0] * eu[1] + n[2] * ev[1]
+      b.info.set([dist, semilla, etapa.estilo, etapa.pisos], k * 4)
+      b.vidas[k * 2] = etapa.nace
+      b.vidas[k * 2 + 1] = etapa.muere
+      b.historias[k * 2] = casa.historia[0]
+      b.historias[k * 2 + 1] = casa.historia[1]
+      b.anclas[k * 2] = casa.centro[0]
+      b.anclas[k * 2 + 1] = casa.centro[1]
+      b.paredes.set(pared, k * 3)
+      b.cubiertas.set(techo, k * 4)
+      return k
+    },
+    // agrega el triángulo con el giro que haga que su cara mire hacia n
+    triangulo(i, j, k, n) {
+      const m = [n[0] * eu[0] + n[2] * ev[0], n[1], n[0] * eu[1] + n[2] * ev[1]]
+      const p = b.posiciones
+      const e1 = [p[j * 3] - p[i * 3], p[j * 3 + 1] - p[i * 3 + 1], p[j * 3 + 2] - p[i * 3 + 2]]
+      const e2 = [p[k * 3] - p[i * 3], p[k * 3 + 1] - p[i * 3 + 1], p[k * 3 + 2] - p[i * 3 + 2]]
+      const cruz = [e1[1] * e2[2] - e1[2] * e2[1], e1[2] * e2[0] - e1[0] * e2[2], e1[0] * e2[1] - e1[1] * e2[0]]
+      const derecho = cruz[0] * m[0] + cruz[1] * m[1] + cruz[2] * m[2] >= 0
+      if ((b.triangulos + 1) * 3 > b.indices.length) b.indices = agrandado(b.indices, b.indices.length * 2)
+      b.indices.set(derecho ? [i, j, k] : [i, k, j], b.triangulos++ * 3)
+    },
   }
 }
 
+/** El frente y el marco del lote de una casa, con su huella en ese marco; null si no da un polígono. */
+function proyectar(casa, numero, indice) {
+  const rect = casa.huella && rectanguloMinimo(casa.huella)
+  if (!rect || rect.area < 1e-6) return null
+  const libres = casa.muere === 0 ? ladosLibres(rect, indice, numero) : [1, 1, 1, 1]
+  const frente = elegirFrente([rect.ancho, rect.fondo, rect.ancho, rect.fondo], libres)
+  const marco = marcoDelLote(rect, frente)
+  const { origen: o, eu, ev } = marco
+  const anillo = casa.huella.map(([x, z]) => [(x - o[0]) * eu[0] + (z - o[1]) * eu[1], (x - o[0]) * ev[0] + (z - o[1]) * ev[1]])
+  const esLibre = (k) => libres[(frente + k) % 4] >= LADO_LIBRE
+  return { marco, anillo, libres: { der: esLibre(1), fondo: esLibre(2), izq: esLibre(3) }, lleno: Math.abs(areaConSigno(casa.huella)) / rect.area }
+}
+
+/** El plan del techo de una etapa de la casa. */
+const planDeEtapa = (casa, etapa, { marco, libres, lleno }) => planDeTecho({
+  ancho: marco.ancho, fondo: marco.fondo, estilo: etapa.estilo, pisos: etapa.pisos, semilla: casa.semilla, nace: etapa.nace,
+  libres, lleno, conAlero: etapa.conAlero, conPretil: etapa.conPretil,
+})
+
+/** Devuelve arrays planos (posiciones, normales, info, vidas, anclas, paredes, cubiertas, historias, indices); sin three.js de por medio. */
+export function extruirTechos(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M } = {}) {
+  const casas = leerCasas(datos, coords, tolerancia)
+  // las casas que mueren (las de la fundación) se enciman con las que vienen después: no cuentan como vecinas
+  const indice = crearIndice(casas.map((c) => (c.muere === 0 ? c.huella : null)))
+  const b = crearBuferes(Math.max(64, casas.length * VERTICES_POR_CASA))
+  casas.forEach((casa, numero) => {
+    const lote = proyectar(casa, numero, indice)
+    if (!lote) return
+    for (const etapa of casa.etapas) {
+      alzarCasa({ anillo: lote.anillo, plan: planDeEtapa(casa, etapa, lote), libres: lote.libres }, escritor(b, casa, etapa, lote.marco))
+    }
+  })
+  const salida = {}
+  for (const [nombre, tamaño] of Object.entries(CAMPOS)) salida[nombre] = b[nombre].slice(0, b.vertices * tamaño)
+  const indices = b.indices.subarray(0, b.triangulos * 3)
+  return { ...salida, indices: b.vertices > 65535 ? indices.slice() : new Uint16Array(indices) }
+}
+
 export function geometriaCiudad(datos, coords) {
-  const { posiciones, normales, info, vidas, anclas, paredes, historias, indices } = extruirTechos(datos, coords)
+  const { posiciones, normales, info, vidas, anclas, paredes, cubiertas, historias, indices } = extruirTechos(datos, coords)
   const g = new BufferGeometry()
   g.setAttribute('position', new BufferAttribute(posiciones, 3))
-  g.setAttribute('normal', new BufferAttribute(normales, 3))
+  // las normales en un byte por componente y la vida en bytes: son millones de vértices
+  g.setAttribute('normal', new BufferAttribute(Int8Array.from(normales, (v) => Math.round(v * 127)), 3, true))
   g.setAttribute('aInfo', new BufferAttribute(info, 4))
-  g.setAttribute('aVida', new BufferAttribute(vidas, 2))
+  g.setAttribute('aVida', new BufferAttribute(Uint8Array.from(vidas), 2))
   g.setAttribute('aAncla', new BufferAttribute(anclas, 2))
-  g.setAttribute('aPared', new BufferAttribute(paredes, 2))
+  g.setAttribute('aPared', new BufferAttribute(paredes, 3))
+  g.setAttribute('aTecho', new BufferAttribute(cubiertas, 4))
   g.setAttribute('aHistoria', new BufferAttribute(historias, 2))
   g.setIndex(new BufferAttribute(indices, 1))
   g.computeBoundingSphere()
