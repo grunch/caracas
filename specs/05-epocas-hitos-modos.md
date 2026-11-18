@@ -22,15 +22,57 @@ Formato compacto, una fila por marca:
 
 ## Hitos (`src/hitos.js`)
 
-Un objeto por edificio:
+*Referencia (baires):* un objeto por edificio, con `planta` (multipolígono en píxeles del plano) y `partes`
+(cuerpos con altura y techo propios); constructores paramétricos para iglesias, columnatas, arcos, cúpulas;
+las plazas de cada época; cada hito con su ancla en el relieve.
+
+*Caracas (implementado, T40):* cada hito es una definición declarativa en `src/hitos/datos/*.js`:
 ```js
-granRex: { nombre:'Cine Gran Rex', año:1937, x:11250, y:8732, ux:.9994, uy:.0354,
-           largo:44.8, ancho:36.7, planta:[[[x,y],…]], partes:[{x,y,ux,uy,largo,ancho},…] }
+{ id: 'plaza-bolivar', nombre: 'Plaza Bolívar', x: 8976, y: 6844, eje: [0.9861, 0.1659],   // píxeles del plano de 1936
+  nace: 1, muere: 0,                    // épocas (0 = 1578 … 5 = 1936); muere = 0: no muere
+  planta: [[[x, y], …]], suprime: [[[x, y], …]],   // polígonos en píxeles
+  fuente: '…', verificar: ['…'],        // de dónde sale y qué no está probado: nunca se inventa
+  partes: [{ tipo: 'terraza', nace: 3, muere: 4, ancho: 86, fondo: 82, piso: 'jardin' }, …] }
 ```
-- `planta` = multipolígono en píxeles del plano (para que encaje en la manzana); `partes` = cuerpos con altura y techo propios.
-- Constructores paramétricos *(inferido)*: nave + torres + cúpula para las iglesias (usa `ciudad.json.iglesias`), columnatas y pórticos (Catedral), arcos (Cabildo, Recova), cúpulas (Congreso), torres (Obelisco), muelles, barcos en los diques y trenes animados en las vías (`trenes`, con línea y posición).
-- Las plazas de cada época (la Plaza de Mayo cambia varias veces): fuentes, caminos de granza, césped, monumentos.
-- Cada hito tiene un ancla para apoyarlo en el relieve y su tono codificado en la semilla.
+- **Marco**: `x, y` en píxeles del mosaico (0,5 m/px) y `eje` (la dirección del damero, de Principal a La
+  Torre). Las medidas de las partes van en metros en ese marco: `a` a lo largo del eje, `b` a su derecha.
+- **Partes** (`src/hitos/partes.js`): cada `tipo` tiene su constructor; una parte puede tener su propia vida
+  (`nace`, `muere`), y así un mismo hito cambia con las épocas. Hoy: `terraza`, `verjaPerimetral`,
+  `escalinatas`, `faroles`, `estatuaEcuestre`, `galeriasDeMercado`, `puestos`.
+- **Piezas** (`src/hitos/piezas.js`) y **objetos** (`src/hitos/objetos.js`): caja, tronco (cilindro, ochavo,
+  cono), cúpula, barra, bulto, tejado (una, dos o cuatro aguas), cuerpo con tejado, arquería calada, vano y
+  disco pintados, frontón triangular y de volutas, columna, cornisa, escalinata, verja, losa y zócalo; con
+  ellas, el farol (de pie o de varios brazos), la estatua ecuestre, el puesto de mercado, el tramo de
+  galería y la portada.
+- **Una sola malla** (`lienzo.js` junta todo; un draw call): por vértice, posición, normal, `aColor`,
+  `aHito` = (distancia del hito a la plaza, semilla, material, pie), `aVida` = (nace, muere), `aAncla` =
+  (ancla x, z · apoyo x, z) y `aUv`.
+- **Material propio** (`src/hitos/material.js`) con los uniforms de la ciudad, como los árboles: la misma
+  ola, las mismas épocas (`vivoEn`), el relieve y tinta ⇄ color. El detalle lo pone el shader según el
+  material del vértice: tejas, sillares, barrotes de reja (con descarte), los canteros en X y el damero de
+  la plaza, la tierra del mercado, la lona, el reloj. En tinta: papel, con lo oscuro rayado a pluma.
+- **Relieve**: el piso de cada objeto es el más alto entre el terreno en el **ancla** del hito y en su
+  **apoyo** (el punto bajo el objeto). Así una terraza es plana donde el terreno baja (con su zócalo y sus
+  escalinatas) y lo sigue donde sube. Los "pies" (vértices en y = 0) bajan hasta el terreno.
+- **Las casas genéricas** que pisan la zona `suprime` de un hito no se borran: al cargar la ciudad se les
+  quitan de la vida las épocas en que el hito está en pie (`src/hitos/suprimir.js`, prueba de solape de
+  polígonos; función pura).
+- `validarHitos` revisa ids únicos, que todo caiga dentro de la hoja, épocas válidas, tipos de parte
+  conocidos y que cada hito traiga `fuente` y `verificar`.
+
+**La Plaza Bolívar** (`plaza-bolivar`), según las imágenes de `fuentes/imagenes`:
+| Época | Qué se ve | De dónde sale |
+|---|---|---|
+| 1578 | la plaza vacía | — |
+| 1772, 1843 | **el mercado**: explanada de tierra, galerías de arcos de un piso alrededor con portadas de arco y frontón al medio de cada lado y en las esquinas, hileras de puestos con toldo de lona | grabado de 1852 |
+| 1889 | **la plaza ajardinada**: piso liso y claro, canteros en X, estatua ecuestre de Bolívar (caballo encabritado) sobre pedestal alto de piedra oscura con gradas y bolardos, faroles de varios brazos en las entradas y de pie en los caminos, reja perimetral, terraza con escalinatas del lado bajo | fotos de 1874, ~1880 y ~1930 |
+| 1911, 1936 | lo mismo, con el piso de mosaico en damero | foto de ~1900 |
+
+Lo que falta verificar va en `verificar` de cada definición (fechas, orientación de la estatua, galerías
+con arcos a los dos lados…). Límite conocido: la plaza real es una explanada a nivel, hundida respecto de
+la calle al norte; acá no se puede cavar la hoja, así que es plana solo en la mitad baja.
+
+Capturas para comparar con las referencias: `ANGLE=gl node tests/e2e/capturas-hitos.mjs`.
 
 ## Fichas (`fichas.js` + `ficha.js`)
 

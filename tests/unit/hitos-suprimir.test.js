@@ -1,0 +1,101 @@
+import { describe, test, expect } from 'vitest'
+import { puntoEnPoligono, seSolapan, suprimirTechos, zonasDeSupresion, vidaSinHito } from '../../src/hitos/suprimir.js'
+
+const cuadrado = (x, y, lado) => [[x, y], [x + lado, y], [x + lado, y + lado], [x, y + lado]]
+const NUNCA = 7
+
+/** Un techo por anillo: vertices planos y techos de a 4 (inicio, cuántos, empacado, semilla). */
+function ciudadDe(anillos, vida = null) {
+  const vertices = anillos.flat(2)
+  let inicio = 0
+  const techos = anillos.flatMap((a) => { const t = [inicio, a.length, 1, 0]; inicio += a.length; return t })
+  return { vertices: new Float32Array(vertices), techos: new Uint32Array(techos), vida: vida && new Uint32Array(vida) }
+}
+
+describe('puntoEnPoligono', () => {
+  test('distingue adentro de afuera, también en un polígono cóncavo', () => {
+    const ele = [[0, 0], [10, 0], [10, 4], [4, 4], [4, 10], [0, 10]]
+    expect(puntoEnPoligono([2, 8], ele)).toBe(true)
+    expect(puntoEnPoligono([8, 2], ele)).toBe(true)
+    expect(puntoEnPoligono([8, 8], ele)).toBe(false)
+    expect(puntoEnPoligono([-1, 5], ele)).toBe(false)
+  })
+})
+
+describe('seSolapan', () => {
+  test('se pisan si uno contiene un vértice del otro', () => {
+    expect(seSolapan(cuadrado(0, 0, 10), cuadrado(8, 8, 10))).toBe(true)
+  })
+  test('se pisan en cruz, sin vértices adentro', () => {
+    expect(seSolapan([[4, -5], [6, -5], [6, 15], [4, 15]], [[-5, 4], [15, 4], [15, 6], [-5, 6]])).toBe(true)
+  })
+  test('uno dentro del otro también cuenta', () => {
+    expect(seSolapan(cuadrado(0, 0, 100), cuadrado(40, 40, 5))).toBe(true)
+    expect(seSolapan(cuadrado(40, 40, 5), cuadrado(0, 0, 100))).toBe(true)
+  })
+  test('separados no se pisan', () => {
+    expect(seSolapan(cuadrado(0, 0, 10), cuadrado(11, 0, 10))).toBe(false)
+  })
+})
+
+describe('vidaSinHito', () => {
+  test('hito de siempre (desde 0): la casa no nace nunca', () => {
+    expect(vidaSinHito(0, 0, 0)).toBe(NUNCA)
+    expect(vidaSinHito(2 + 8 * 4, 0, 0)).toBe(NUNCA)
+  })
+  test('la casa que estaba antes del hito vive hasta que el hito nace', () => {
+    expect(vidaSinHito(1, 3, 0)).toBe(1 + 8 * 3)
+    // y si ya moría antes, conserva su muerte
+    expect(vidaSinHito(1 + 8 * 2, 3, 0)).toBe(1 + 8 * 2)
+  })
+  test('la casa que nace con el hito en pie espera a que el hito se vaya', () => {
+    expect(vidaSinHito(2, 1, 3)).toBe(3)
+    expect(vidaSinHito(4, 1, 3)).toBe(4)
+  })
+  test('si para cuando el hito se va la casa ya habría muerto, no nace nunca', () => {
+    expect(vidaSinHito(1 + 8 * 3, 1, 3)).toBe(NUNCA)
+  })
+})
+
+describe('suprimirTechos', () => {
+  const zona = { poligono: cuadrado(100, 100, 50), desde: 0, hasta: 0 }
+
+  test('apaga solo los techos que pisan la zona y no toca el array original', () => {
+    // Arrange
+    const ciudad = ciudadDe([cuadrado(110, 110, 10), cuadrado(300, 300, 10), cuadrado(145, 145, 10)], [0, 0, 2])
+    // Act
+    const vida = suprimirTechos(ciudad, [zona])
+    // Assert
+    expect([...vida]).toEqual([NUNCA, 0, NUNCA])
+    expect([...ciudad.vida]).toEqual([0, 0, 2])
+  })
+
+  test('sin el array de vida (ciudad de demostración) todos vivían siempre', () => {
+    const vida = suprimirTechos(ciudadDe([cuadrado(110, 110, 10), cuadrado(300, 300, 10)]), [zona])
+    expect([...vida]).toEqual([NUNCA, 0])
+  })
+
+  test('sin zonas devuelve una copia igual', () => {
+    const ciudad = ciudadDe([cuadrado(110, 110, 10)], [3])
+    const vida = suprimirTechos(ciudad, [])
+    expect([...vida]).toEqual([3])
+    expect(vida).not.toBe(ciudad.vida)
+  })
+
+  test('un hito que nace tarde deja vivir a la casa hasta entonces', () => {
+    const vida = suprimirTechos(ciudadDe([cuadrado(110, 110, 10)], [1]), [{ ...zona, desde: 3 }])
+    expect([...vida]).toEqual([1 + 8 * 3])
+  })
+})
+
+describe('zonasDeSupresion', () => {
+  test('junta los polígonos de cada hito con sus épocas', () => {
+    const zonas = zonasDeSupresion([
+      { nace: 1, muere: 0, suprime: [cuadrado(0, 0, 5), cuadrado(9, 9, 5)] },
+      { nace: 3, muere: 5, suprime: [cuadrado(20, 20, 5)] },
+      { nace: 0 },
+    ])
+    expect(zonas.map((z) => [z.desde, z.hasta])).toEqual([[1, 0], [1, 0], [3, 5]])
+    expect(zonas[2].poligono).toEqual(cuadrado(20, 20, 5))
+  })
+})

@@ -6,6 +6,7 @@ import { cargarPak } from './pak.js'
 import { geometriaCiudad } from './ciudad.js'
 import { crearMaterialCiudad } from './material.js'
 import { cargarArboles } from './arboles.js'
+import { HITOS, crearHitos, suprimirTechos, zonasDeSupresion } from './hitos.js'
 import { acercar } from './animar.js'
 import { texturasHoy, HOY_CERCA } from './hoy.js'
 import { crearTeselasFinas } from './teselas.js'
@@ -137,7 +138,8 @@ let olaObjetivo = 0
 let olaMax = Math.hypot(Math.max(-hoja.x0, hoja.x0 + hoja.ancho), Math.max(-hoja.z0, hoja.z0 + hoja.alto)) + ciudad.U.uAnchoOla.value
 let arboles = null
 cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array }).then((datos) => {
-  const g = geometriaCiudad(datos, coords)
+  // donde hay un hito modelado a mano, la casa genérica de ese lugar no nace (src/hitos/suprimir.js)
+  const g = geometriaCiudad({ ...datos, vida: suprimirTechos(datos, zonasDeSupresion(HITOS)) }, coords)
   olaMax = Math.max(olaMax, g.boundingSphere.center.length() + g.boundingSphere.radius + 400)
   scene.add(new Mesh(g, ciudad.material))
   document.getElementById('alzar').hidden = false
@@ -150,6 +152,13 @@ cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vid
     pedirCuadro(3)
   })
 }).catch((e) => console.warn(`árboles: ${e.message}`))
+
+// --- los hitos: edificios y lugares modelados a mano, en una sola malla con los uniforms de la ciudad ---
+let hitos = null
+try {
+  hitos = crearHitos({ coords, U: ciudad.U, sol: sol.position })
+  scene.add(hitos)
+} catch (e) { console.warn(`hitos: ${e.message}`) }
 
 // --- la línea de tiempo: 1578 → 1936; cada época llega como una ola desde la plaza ---
 const DURACION_EPOCA_S = 3.5
@@ -335,6 +344,7 @@ window.lab = {
   get relieve() { return relieve },
   get teselas() { return teselas },
   get arboles() { return arboles },
+  get hitos() { return hitos },
   get calles() { return rotulos },
   get lineaDeTiempo() { return lineaDeTiempo },
   get planos() { return planos },
