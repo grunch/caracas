@@ -1,0 +1,20 @@
+{
+  "año": null,
+  "autor": null,
+  "institucion": null,
+  "url_fuente": null,
+  "licencia": null,
+  "dominio_publico": "dudoso",
+  "formato": "JPEG",
+  "tipo": "fotografía",
+  "titulo": "Plaza Bolívar de Caracas hacia 1900",
+  "año_representado": 1900,
+  "url_descarga": "https://www.monedasdevenezuela.com/wp-content/uploads/2015/06/plazabolivar-1900-copia.jpg",
+  "ancho": 1186,
+  "alto": 542,
+  "epocas": [
+    3,
+    4
+  ],
+  "notas": "Tomada de monedasdevenezuela.com (lleva sus marcas de agua); fotógrafo y archivo de origen sin identificar. Título y año según quien la aportó: A VERIFICAR."
+}
