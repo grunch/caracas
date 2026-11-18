@@ -62,3 +62,46 @@ describe('partesDeCiudad', () => {
     expect(() => partesDeCiudad({ ...json, vertices: [1, 2, 3] })).toThrow(/pares/)
   })
 })
+
+describe('historia: el estilo y los pisos de cada techo en cada época', () => {
+  const historia = [[16, 16, 17, 17, 34, 51], [57, 57, 57, 57, 57, 57]]
+
+  test('sin "historia" no agrega la parte', () => {
+    expect(partesDeCiudad(json).historia).toBeUndefined()
+  })
+
+  test('empaca un byte por época (estilo + 16·pisos): Uint8, registro 6', () => {
+    const p = partesDeCiudad({ ...json, historia })
+    expect(p.historia.registro).toBe(6)
+    expect(p.historia.datos).toBeInstanceOf(Uint8Array)
+    expect(Array.from(p.historia.datos)).toEqual(historia.flat())
+  })
+
+  test('rechaza una historia que no acompaña a los techos o que no trae seis épocas', () => {
+    expect(() => partesDeCiudad({ ...json, historia: [historia[0]] })).toThrow(/historia/)
+    expect(() => partesDeCiudad({ ...json, historia: [historia[0], [57, 57]] })).toThrow(/6 épocas/)
+    expect(() => partesDeCiudad({ ...json, historia: 'x' })).toThrow(/historia/)
+  })
+
+  test('rechaza bytes que no son enteros de 0 a 255 o que no tienen pisos', () => {
+    for (const malo of [256, -1, 1.5, '17', null, 3]) {
+      expect(() => partesDeCiudad({ ...json, historia: [[16, 16, 16, 16, 16, malo], historia[1]] })).toThrow(/historia/)
+    }
+  })
+
+  test('va y vuelve por el .pak, y un visor anterior saltea la parte', async () => {
+    const { codificarPak } = await import('../../tools/pak.mjs')
+    const { decodificarPak } = await import('../../src/pak.js')
+    const { gunzipSync } = await import('node:zlib')
+    const crudo = gunzipSync(codificarPak(partesDeCiudad({ ...json, vida: [[0, 1], [3, 0]], historia })))
+    const buffer = () => crudo.buffer.slice(crudo.byteOffset, crudo.byteOffset + crudo.byteLength)
+    const tipos = { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array }
+    const leido = decodificarPak(buffer(), { ...tipos, historia: Uint8Array })
+    expect(Array.from(leido.historia)).toEqual(historia.flat())
+    const avisos = []
+    const sinHistoria = decodificarPak(buffer(), tipos, (m) => avisos.push(m))
+    expect(sinHistoria.historia).toBeUndefined()
+    expect(Array.from(sinHistoria.vida)).toEqual([8, 3])
+    expect(avisos.join()).toMatch(/historia/)
+  })
+})

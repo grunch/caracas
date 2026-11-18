@@ -4,7 +4,7 @@ import { empacarTecho } from '../src/ciudad.js'
 export const EPOCAS = 8 // nace y muere caben en 3 bits: nace + 8·muere
 export const CUANTAS_EPOCAS = 6 // épocas de la línea de tiempo: 0 → 1578 … 5 → 1936
 
-export function partesDeCiudad({ vertices, techos, vida }) {
+export function partesDeCiudad({ vertices, techos, vida, historia }) {
   if (vertices.length % 2 !== 0) throw new Error('ciudad: los vértices deben venir de a pares (px, py)')
   const nVertices = vertices.length / 2
   const datosTechos = new Uint32Array(techos.length * 4)
@@ -19,7 +19,28 @@ export function partesDeCiudad({ vertices, techos, vida }) {
     techos: { datos: datosTechos, registro: 16 },
   }
   if (vida !== undefined) partes.vida = { datos: empacarVida(vida, techos.length), registro: 4 }
+  if (historia !== undefined) partes.historia = { datos: empacarHistorias(historia, techos.length), registro: CUANTAS_EPOCAS }
   return partes
+}
+
+/** [[byte × 6 épocas], …] por techo (tools/geo/estilos.py: estilo + 16·pisos) → Uint8, 6 por techo. */
+export function empacarHistorias(historia, cuantosTechos) {
+  if (!Array.isArray(historia) || historia.length !== cuantosTechos) {
+    throw new Error(`ciudad: "historia" tiene que ser una lista con una entrada por techo (${cuantosTechos})`)
+  }
+  const datos = new Uint8Array(cuantosTechos * CUANTAS_EPOCAS)
+  historia.forEach((bytes, k) => {
+    if (!Array.isArray(bytes) || bytes.length !== CUANTAS_EPOCAS) {
+      throw new Error(`ciudad: la historia del techo ${k} tiene que traer ${CUANTAS_EPOCAS} épocas`)
+    }
+    for (const b of bytes) {
+      if (!Number.isInteger(b) || b < 16 || b > 255) {
+        throw new Error(`ciudad: la historia del techo ${k} trae ${b}; se espera estilo + 16·pisos (16…255)`)
+      }
+    }
+    datos.set(bytes, k * CUANTAS_EPOCAS)
+  })
+  return datos
 }
 
 /** [[nace, muere], …] (0 = desde siempre / nunca muere) → Uint32 nace + 8·muere por techo. */

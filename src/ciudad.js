@@ -4,10 +4,13 @@
  * semilla, estilo, pisos) para que el shader haga la ola y el estilo de la fachada,
  * aAncla = (x, z) del centroide de su casa: la altura del terreno a la que sube entera, y
  * aPared = (metros desde la esquina de arranque de su pared, largo de esa pared): las coordenadas
- * con las que el shader dibuja la fachada (src/shader/fachada.js); los techos llevan (0, 0).
+ * con las que el shader dibuja la fachada (src/shader/fachada.js); los techos llevan (0, 0), y
+ * aHistoria = el estilo y los pisos de su casa en cada época (empacarHistoria): el shader elige los de
+ * la época que rige y lleva la altura, hecha con los pisos de `techos`, a los de esa época.
  *
  * Datos (ciudad.pak): vertices Float32 [px, py, …]; techos Uint32 de a 4:
- * [primer vértice, cuántos, empacarTecho({pisos, estilo}), semilla].
+ * [primer vértice, cuántos, empacarTecho({pisos, estilo}), semilla]; historia (opcional) Uint8 de a 6:
+ * por techo, un byte por época = estilo + 16·pisos (specs/02).
  */
 import { ShapeUtils, Vector2, BufferGeometry, BufferAttribute } from 'three'
 
@@ -18,16 +21,31 @@ const SIN_PARED = [0, 0]
 export const empacarTecho = ({ pisos, estilo }) => ((estilo & 0xff) << 8) | (pisos & 0xff)
 export const desempacarTecho = (v) => ({ pisos: v & 0xff, estilo: (v >> 8) & 0xff })
 
-/** Devuelve arrays planos (posiciones, normales, info, vidas, anclas, paredes, indices); sin three.js de por medio. */
-export function extruirTechos({ vertices, techos, vida = null }, coords) {
+export const EPOCAS_HISTORIA = 6 // un byte por época de la línea de tiempo: estilo + 16·pisos
+/** Los 6 bytes de la historia de una casa → 2 números de 3 bytes (exactos en Float32): el atributo aHistoria. */
+export const empacarHistoria = (b) => [b[0] + 256 * b[1] + 65536 * b[2], b[3] + 256 * b[4] + 65536 * b[5]]
+/** Espejo de enEpoca() del shader (src/shader/vertice.js): estilo y pisos en la época e (se redondea y se acota). */
+export function historiaEnEpoca([h0, h1], e) {
+  const k = Math.min(EPOCAS_HISTORIA - 1, Math.max(0, Math.round(e)))
+  const byte = Math.floor((k < 3 ? h0 : h1) / 256 ** (k % 3)) % 256
+  return { estilo: byte % 16, pisos: Math.floor(byte / 16) }
+}
+
+/** Devuelve arrays planos (posiciones, normales, info, vidas, anclas, paredes, historias, indices); sin three.js de por medio. */
+export function extruirTechos({ vertices, techos, vida = null, historia = null }, coords) {
+  if (historia && historia.length !== (techos.length / 4) * EPOCAS_HISTORIA) {
+    throw new Error(`ciudad: la historia trae ${historia.length} bytes y hacen falta ${EPOCAS_HISTORIA} por techo`)
+  }
   const posiciones = []
   const normales = []
   const info = []
   const vidas = [] // [nace, muere] por vértice (src/epocas.js); sin vida, siempre visible
   const anclas = []
   const paredes = [] // [u, largo] por vértice: dónde está en su pared (0, 0 en los techos)
+  const historias = [] // empacarHistoria de su casa, por vértice
   const indices = []
   let vidaTecho = [0, 0]
+  let historiaTecho = [0, 0]
 
   const vertice = (x, y, z, n, datos, ancla, pared = SIN_PARED) => {
     posiciones.push(x, y, z)
@@ -36,6 +54,7 @@ export function extruirTechos({ vertices, techos, vida = null }, coords) {
     vidas.push(vidaTecho[0], vidaTecho[1])
     anclas.push(ancla.x, ancla.y)
     paredes.push(pared[0], pared[1])
+    historias.push(historiaTecho[0], historiaTecho[1])
     return posiciones.length / 3 - 1
   }
   // agrega el triángulo con el giro que haga que su cara mire hacia n
@@ -54,6 +73,10 @@ export function extruirTechos({ vertices, techos, vida = null }, coords) {
     const { pisos, estilo } = desempacarTecho(empacado)
     const v = vida ? vida[t / 4] : 0
     vidaTecho = [v % 8, Math.floor(v / 8)]
+    // sin historia (datos viejos, la ciudad de demostración), todas las épocas valen lo de `techos`
+    historiaTecho = empacarHistoria(historia
+      ? historia.subarray((t / 4) * EPOCAS_HISTORIA, (t / 4 + 1) * EPOCAS_HISTORIA)
+      : Array(EPOCAS_HISTORIA).fill((estilo & 15) + 16 * Math.min(pisos, 15)))
     const alto = pisos * ALTO_PISO
     const anillo = []
     for (let k = 0; k < cuantos; k++) {
@@ -90,12 +113,13 @@ export function extruirTechos({ vertices, techos, vida = null }, coords) {
     vidas: new Float32Array(vidas),
     anclas: new Float32Array(anclas),
     paredes: new Float32Array(paredes),
+    historias: new Float32Array(historias),
     indices: posiciones.length / 3 > 65535 ? new Uint32Array(indices) : new Uint16Array(indices),
   }
 }
 
 export function geometriaCiudad(datos, coords) {
-  const { posiciones, normales, info, vidas, anclas, paredes, indices } = extruirTechos(datos, coords)
+  const { posiciones, normales, info, vidas, anclas, paredes, historias, indices } = extruirTechos(datos, coords)
   const g = new BufferGeometry()
   g.setAttribute('position', new BufferAttribute(posiciones, 3))
   g.setAttribute('normal', new BufferAttribute(normales, 3))
@@ -103,6 +127,7 @@ export function geometriaCiudad(datos, coords) {
   g.setAttribute('aVida', new BufferAttribute(vidas, 2))
   g.setAttribute('aAncla', new BufferAttribute(anclas, 2))
   g.setAttribute('aPared', new BufferAttribute(paredes, 2))
+  g.setAttribute('aHistoria', new BufferAttribute(historias, 2))
   g.setIndex(new BufferAttribute(indices, 1))
   g.computeBoundingSphere()
   return g

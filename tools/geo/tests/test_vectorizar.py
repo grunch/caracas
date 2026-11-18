@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from shapely.geometry import Polygon, box
+from shapely.geometry import Point, Polygon, box
 
 from tools.geo.vectorizar import CLASE, vectorizar
 
@@ -60,3 +60,25 @@ def test_ignora_manchas_menores_al_area_minima():
     c = np.full((100, 100), CLASE['calle'], np.uint8)
     c[10:13, 10:13] = CLASE['edificado']  # 1,5 × 1,5 m
     assert vectorizar(c, METRO, plaza=(0, 0))['techos'] == []
+
+
+def test_marca_las_casas_de_esquina_una_por_esquina():
+    res = vectorizar(manzana_con_patio(), METRO, plaza=(130, 130))
+    assert len(res['esquinas']) == len(res['techos']) and set(res['esquinas']) <= {0, 1}
+    de_esquina = [p for p, e in zip(poligonos(res), res['esquinas']) if e]
+    assert len(de_esquina) == 4
+    for x, y in ((30, 30), (230, 30), (230, 230), (30, 230)):  # cada esquina de la manzana toca una sola
+        assert sum(p.distance(Point(x, y)) < 3 for p in de_esquina) == 1
+
+
+def test_un_edificio_publico_no_es_casa_de_esquina():
+    c = np.full((200, 200), CLASE['calle'], np.uint8)
+    c[40:160, 40:160] = CLASE['publico']
+    assert vectorizar(c, METRO, plaza=(0, 0))['esquinas'] == [0]
+
+
+def test_una_casa_suelta_no_hace_esquina():
+    c = np.full((200, 200), CLASE['calle'], np.uint8)
+    c[40:100, 40:90] = CLASE['edificado']  # 30 × 25 m: dos o tres lotes, no una manzana
+    res = vectorizar(c, METRO, plaza=(0, 0))
+    assert res['techos'] and not any(res['esquinas'])
