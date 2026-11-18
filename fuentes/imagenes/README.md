@@ -180,3 +180,24 @@ La Catedral vista desde la plaza, con el Ávila detrás. Referencia directa para
 Qué implica: la Catedral se modela como **nave larga de muro ciego con tejado a dos aguas + torre de
 tres cuerpos con remate ochavado en una esquina + fachada barroca en el frente corto**; la plaza sigue
 de tierra en 1867, así que el paso a plaza ajardinada va entre 1867 y 1889.
+
+## 1950 · De Gradillas a Sociedad, foto (`1950-commons-gradillas-a-sociedad`) → época 1936 (con cuidado)
+
+Calle comercial a una cuadra de la Plaza Bolívar (Gradillas es su esquina sureste), mirando al sur.
+**Es de 1950, catorce años después de la última época**: marca hacia dónde iba el centro, no cómo era
+exactamente en 1936 (los carros, el autobús y parte de los avisos son posteriores).
+
+- **Calle angosta** (la del damero colonial, sin ensanchar), **asfaltada**, con **aceras con brocal**
+  angostas y llenas de gente.
+- **Edificios de dos a cuatro pisos** a los dos lados, de frente continuo: plantas bajas **todas de
+  comercio**, con vidrieras, **toldos y marquesinas** y santamarías; arriba, ventanas y balcones.
+- **Avisos por todas partes**: letreros en bandera, perpendiculares a la fachada y luminosos, uno
+  detrás de otro (peletería, almacenes, relojes con reloj de calle), y **cables y pasacalles** de lado
+  a lado. El rasgo más fuerte de la calle.
+- Al fondo, la calle baja hacia el sur y se ven los cerros.
+- Carros y autobús de fines de los 40.
+
+Qué implica: en 1936 las cuadras comerciales del centro (alrededor de la plaza y hacia el sur) llevan
+el estilo **de comercio**: vidriera, toldo y letrero en la planta baja de los estilos ecléctico y
+moderno, y avisos en bandera (sirve para T32); las calles del centro ya van asfaltadas con acera. Los
+pisos de 2 a 4 solo aquí, en el núcleo comercial: fuera de él, la ciudad de 1936 sigue baja.
