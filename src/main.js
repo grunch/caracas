@@ -7,6 +7,7 @@ import { geometriaCiudad } from './ciudad.js'
 import { crearMaterialCiudad } from './material.js'
 import { cargarArboles } from './arboles.js'
 import { acercar } from './animar.js'
+import { texturasHoy, HOY_CERCA } from './hoy.js'
 import { crearTeselasFinas } from './teselas.js'
 import { crearLineaDeTiempo, crearSecuencia, escalaCrece } from './epocas.js'
 import { crearCoords } from './coords.js'
@@ -195,13 +196,44 @@ function alternarColor(prender = colorObjetivo === 0) {
   pedirCuadro(3)
 }
 
+// --- lo de hoy (H): la Caracas actual en rojo; sus texturas se bajan la primera vez que se prende ---
+const DURACION_HOY_S = 0.8
+let hoyObjetivo = 0
+let hoyPedido = null
+function alternarHoy(prender = hoyObjetivo === 0) {
+  hoyObjetivo = prender ? 1 : 0
+  const boton = document.getElementById('hoy')
+  boton.setAttribute('aria-pressed', String(prender))
+  boton.classList.toggle('on', prender)
+  document.body.classList.toggle('hoy', prender)
+  if (prender) hoyPedido ??= cargarHoy().catch((e) => { hoyPedido = null; console.warn(`hoy: ${e.message}`) })
+  pedirCuadro(3)
+}
+
+/** La de lejos primero (sin ella no hay nada que estampar); la de cerca, después y si se puede. */
+async function cargarHoy() {
+  const U = ciudad.U
+  const [lejos, cerca] = texturasHoy({ maxTextura, liviano })
+  const t = await cargarTextura(lejos, false) // datos, no color: sin sRGB
+  U.uHoyLejosRes.value.set(t.image.width, t.image.height)
+  ponerTextura(U.tHoyLejos, t)
+  if (cerca !== HOY_CERCA) return
+  cargarTextura(cerca, false).then((c) => {
+    U.uHoyCercaRes.value.set(c.image.width, c.image.height)
+    ponerTextura(U.tHoyCerca, c)
+    U.uHoyCercaOn.value = 1
+  }).catch((e) => console.warn(`hoy de cerca: ${e.message}`))
+}
+
 document.getElementById('alzar').addEventListener('click', () => levantar())
 document.getElementById('color').addEventListener('click', () => alternarColor())
+document.getElementById('hoy').addEventListener('click', () => alternarHoy())
 addEventListener('keydown', (e) => {
   // los controles con foco conservan su teclado (Espacio activa el botón, se escribe en los campos)
   if (e.repeat || e.target.closest?.('input, textarea, select, button, a, [role="button"]')) return
   if (e.code === 'Space') { e.preventDefault(); levantar() }
   if (e.code === 'KeyC' && !e.metaKey && !e.ctrlKey) alternarColor()
+  if (e.code === 'KeyH' && !e.metaKey && !e.ctrlKey) alternarHoy()
 })
 
 // la altura del suelo tal como se dibuja: la cámara mira siempre al terreno
@@ -229,6 +261,10 @@ renderer.setAnimationLoop((t) => {
     uColor.value = acercar(uColor.value, colorObjetivo, dt / DURACION_COLOR_S)
     pedirCuadro(2)
   }
+  if (ciudad.U.uHoy.value !== hoyObjetivo) {
+    ciudad.U.uHoy.value = acercar(ciudad.U.uHoy.value, hoyObjetivo, dt / DURACION_HOY_S)
+    pedirCuadro(2)
+  }
   if (pendientes <= 0) return
   pendientes--
   if (teselas) {
@@ -238,9 +274,10 @@ renderer.setAnimationLoop((t) => {
   renderer.render(scene, camera)
 })
 
+if (params.has('hoy')) alternarHoy(true)
 document.body.classList.add('listo')
 window.lab = {
-  renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, relieveU, sueloEn, ready: true,
+  renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, relieveU, sueloEn, ready: true,
   get relieve() { return relieve },
   get teselas() { return teselas },
   get arboles() { return arboles },
