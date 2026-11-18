@@ -13,6 +13,8 @@ public/datos/*.bin
 # generados por tools/geo/epocas.py
 public/datos/crece.json
 public/plano/crece.png
+# generados por tools/geo/hoy.py (OSM, ODbL)
+public/datos/calles.json
 .env
 .claude/settings.local.json
 .venv/

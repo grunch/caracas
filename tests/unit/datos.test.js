@@ -34,6 +34,16 @@ describe('pendientes', () => {
     expect(() => pendientes(pasos, {}, { forzar: true })).toThrow(/hoja\.tif/)
   })
 
+  test('un paso sin entradas (una descarga con caché) solo corre si falta su salida', () => {
+    const conDescarga = [
+      { id: 'osm', entradas: [], salidas: ['osm.json'] },
+      { id: 'hoy', entradas: ['osm.json'], salidas: ['hoy.webp'] },
+    ]
+    expect(pendientes(conDescarga, { 'osm.json': 5, 'hoy.webp': 9 })).toEqual([])
+    expect(pendientes(conDescarga, { 'hoy.webp': 9 })).toEqual(['osm', 'hoy'])
+    expect(pendientes(conDescarga, { 'osm.json': 5 })).toEqual(['hoy'])
+  })
+
   test('una entrada de origen que falta es un error claro', () => {
     expect(() => pendientes(pasos, {})).toThrow(/hoja\.tif/)
   })

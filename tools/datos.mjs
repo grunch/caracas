@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Uso: npm run datos [-- --forzar | --desde <paso> | --verificar]
+// Uso: npm run datos [-- --forzar | --desde <paso> | --verificar | --descargar]
 // Regenera todos los datos del sitio desde los escaneos originales (como make: solo los pasos viejos),
 // verifica los conteos contra tools/datos-esperados.json y escribe public/datos/manifiesto.json (sha256).
 import { spawn } from 'node:child_process'
@@ -17,6 +17,8 @@ const PLANO = ['primero', 'chico', 'medio-4k', 'medio'].map((n) => `public/plano
 const leerJson = async (ruta) => JSON.parse(await readFile(path.join(RAIZ, ruta), 'utf8'))
 const leerJsonSiHay = (ruta) => leerJson(ruta).catch(() => null)
 const GEO = (...nombres) => nombres.map((n) => `tools/geo/${n}.py`)
+const OSM_HOY = 'fuentes/derivados/hoy/osm.json'
+const DESCARGAR = process.argv.includes('--descargar') // vuelve a bajar OSM aunque haya caché
 
 const PASOS = [
   ...[1, 2].map((n) => ({
@@ -72,6 +74,18 @@ const PASOS = [
     salidas: ['public/plano/laminas.json', 'public/datos/ciudad.json', ...PLANO],
     codigo: ['tools/plano.mjs', 'tools/plano-lib.mjs'],
     cmd: () => ['node', 'tools/plano.mjs', `${D}/mosaico-costura.tif`, `${D}/mosaico.json`],
+  },
+  {
+    // la única descarga del pipeline: solo si falta la caché (o con --descargar); sin código propio,
+    // así un cambio en hoy.py no vuelve a pedirle a Overpass
+    id: 'hoy-osm', entradas: [], salidas: [OSM_HOY], codigo: [],
+    cmd: () => [PY, 'tools/geo/hoy.py', '--solo-descargar', '--osm', OSM_HOY, ...(DESCARGAR ? ['--descargar'] : [])],
+  },
+  {
+    id: 'hoy', entradas: [OSM_HOY, `${D}/mosaico.json`, 'tools/geo/gcp/1936-wgs84.json'],
+    salidas: ['public/plano/hoy-lejos.webp', 'public/plano/hoy-cerca.webp', 'public/datos/calles.json', 'public/datos/calles.bin'],
+    codigo: GEO('hoy', 'hoy_osm', 'geo1936'),
+    cmd: () => [PY, 'tools/geo/hoy.py', '--osm', OSM_HOY],
   },
 ]
 
@@ -148,7 +162,8 @@ if (opciones.marcar) {
   console.log('firmas del código guardadas: los pasos quedan al día')
 } else if (!opciones.verificar) {
   const guardadas = (await leerJsonSiHay(FIRMAS)) ?? {}
-  const ids = pendientes(pasos, await tiempos(pasos), { ...opciones, codigoCambiado: firmasCambiadas(firmas, guardadas) })
+  const codigoCambiado = new Set([...firmasCambiadas(firmas, guardadas), ...(DESCARGAR ? ['hoy-osm'] : [])])
+  const ids = pendientes(pasos, await tiempos(pasos), { ...opciones, codigoCambiado })
   console.log(ids.length ? `pasos a correr: ${ids.join(' → ')}` : 'todo al día')
   for (const id of ids) {
     const paso = pasos.find((p) => p.id === id)
