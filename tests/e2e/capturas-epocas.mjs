@@ -29,6 +29,11 @@ for (const [i, año] of años.entries()) {
   if (i === 0) continue // 1578 muestra el plano de 1772 (ver src/planos.js)
   await pagina.evaluate((k) => window.lab.lineaDeTiempo.elegir(k), i)
   await pagina.waitForFunction((k) => window.lab.ciudad.U.uEpocaA.value === k, i, { timeout: 60000 })
+  // si la ola salió con 1936 (el plano tardó más que la espera), la captura espera a que llegue el del año
+  const conPlano = await pagina.evaluate((a) => fetch(`plano/${a}/chico.webp`).then((r) => (r.headers.get('content-type') ?? '').includes('webp')), año)
+  if (conPlano) {
+    await pagina.waitForFunction((a) => window.lab.ciudad.U.uPlanoA.value.image?.src?.includes(`plano/${a}/`), año, { timeout: 120000 })
+  }
   // con SwiftShader cada cuadro tarda: se adelanta la ola hasta casi el final y se la deja terminar
   await pagina.evaluate(() => { window.lab.ciudad.U.uOlaEpoca.value = 8999 })
   await pagina.waitForTimeout(6000) // el nivel mejor del plano
