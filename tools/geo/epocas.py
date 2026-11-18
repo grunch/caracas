@@ -217,11 +217,15 @@ def casas_por_epoca(vida, cuantas=CUANTAS):
 
 
 def unir(ciudad_a, vida_a, ciudad_b, vida_b):
-    """Techos de b agregados a los de a (índices de vértices corridos) y la vida de los dos."""
+    """Techos de b agregados a los de a (índices de vértices corridos) y la vida de los dos. Si alguna
+    trae "esquinas" (una por techo, tools/geo/vectorizar.py), se unen también; la que no, va en ceros."""
     corrimiento = len(ciudad_a["vertices"]) // 2
     techos_b = [[t[0] + corrimiento, *t[1:]] for t in ciudad_b["techos"]]
-    return {**ciudad_a, "vertices": list(ciudad_a["vertices"]) + list(ciudad_b["vertices"]),
-            "techos": list(ciudad_a["techos"]) + techos_b, "vida": list(vida_a) + list(vida_b)}
+    union = {**ciudad_a, "vertices": list(ciudad_a["vertices"]) + list(ciudad_b["vertices"]),
+             "techos": list(ciudad_a["techos"]) + techos_b, "vida": list(vida_a) + list(vida_b)}
+    if "esquinas" in ciudad_a or "esquinas" in ciudad_b:
+        union["esquinas"] = [q for c in (ciudad_a, ciudad_b) for q in c.get("esquinas", [0] * len(c["techos"]))]
+    return union
 
 
 def metadatos(epoca, ficha, casas):

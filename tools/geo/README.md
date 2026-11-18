@@ -274,24 +274,69 @@ rojas) y letras de parroquia, que se descartan a mano.
 
 ### Estilos y alturas por época (`estilos.py`)
 
-Después de `epocas.py`: a cada casa, el estilo de la época en que nace y del lugar donde está, y sus pisos
-según el estilo (determinista por la semilla). `npm run datos` lo corre y empaca su salida.
+Después de `epocas.py`: a cada casa, su **historia**: un estilo y unos pisos **por época**, desde que nace
+(determinista por la semilla). Las reglas salen de las pinturas y fotos de `fuentes/imagenes/README.md`, que
+mandan. `npm run datos` lo corre y empaca su salida (`historia` en `ciudad.pak`, ver `specs/02`).
 
 ```sh
 $PY tools/geo/estilos.py fuentes/derivados/epocas/ciudad-epocas.json fuentes/derivados/epocas/ciudad-estilos.json \
-    --escala 0.5 --plaza 8968.2,6839
+    --escala 0.5 --plaza 8968.2,6839 --tabla      # --tabla imprime el histograma de abajo
 node tools/empacar-ciudad.mjs fuentes/derivados/epocas/ciudad-estilos.json
 ```
 
-| Nace en | Estilo (índice) | Pisos |
-|---|---|---|
-| 1578, 1772 | colonial (0) | 1 |
-| 1843 | colonial 70 % · republicano (1) 30 % | 1 · 1–2 |
-| 1889 | republicano 50 % · guzmancista (2) 50 % | 1–2 |
-| 1911 | guzmancista 35 % · ecléctico (3) 65 % | 1–2 · 2–3 |
-| 1936, a menos de 1,8 km de la plaza | ecléctico 65 % · moderno (4) 35 % | 2–3 · 2–4 |
-| 1936, afueras | quinta (5) si ≥ 300 m²; rancho (6) si < 60 m² y a más de 2,5 km; si no, casa de las orillas (7) | 1–2 · 1 · 1 |
+Índices de estilo (los que lee `src/shader/fachada.js`): 0 colonial · 1 republicano (pretil) · 2 guzmancista ·
+3 ecléctico · 4 moderno · 5 quinta · 6 rancho · 7 casa de las orillas (colonial baja de alero) ·
+**8 galpón de estación** (zinc) · 9 edificio público.
 
-Los edificios públicos (9) quedan como los dejó el vectorizador. Con los datos actuales: colonial 2941,
-republicano 2074, guzmancista 3066, ecléctico 9139, moderno 3649, quinta 179, rancho 2548, orillas 9764,
-público 626.
+Cada casa tiene dos números al azar fijos (uno para la fachada, otro para los pisos) y la regla compara cada
+uno con probabilidades que **solo suben con las épocas**: una casa nunca vuelve atrás. Las probabilidades
+dependen del lugar, en metros desde la Plaza Bolívar:
+
+- **centralidad** `c`: 1 hasta 350 m de la plaza, 0 desde 1100 m (La Pastora), lineal en el medio;
+- **núcleo comercial** `n`: 1 hasta 70 m del eje que baja de la plaza al Teatro Municipal, 0 desde 240 m;
+- **esquina**: `"esquinas"` del vectorizador (1 si la casa es la más cercana, a 6 m o menos, de un vértice
+  saliente y casi a escuadra de su manzana, con dos lados de 12 m o más; las manzanas de menos de 4 casas no
+  tienen esquinas). Hoy: 3.123 de 33.921.
+
+| Regla | 1578 | 1772 | 1843 | 1889 | 1911 | 1936 |
+|---|---|---|---|---|---|---|
+| fachada de pretil o más nueva: centro → barrio | — | — | 15 % → 0 | 55 % → 8 % | 80 % → 35 % | 92 % → 78 % |
+| guzmancista o más nueva: centro → barrio | — | — | — | 25 % → 2 % | 45 % → 6 % | 55 % → 14 % |
+| ecléctica o moderna: núcleo · centro → barrio | — | — | — | — | 35 % · 8 % → 0 | 70 % · 16 % → 5 % |
+| moderna: núcleo · centro → barrio | — | — | — | — | — | 22 % · 3 % → 0 |
+| dos pisos, casa de esquina: centro → barrio | — | 35 % → 0 | 50 % → 0 | 60 % → 3 % | 65 % → 5 % | 70 % → 8 % |
+| dos pisos, a media cuadra: centro → barrio | — | — | 2 % → 0 | 4 % → 0 | 7 % → 1 % | 10 % → 3 % |
+| dos pisos o más en el núcleo | — | — | — | — | 30 % | 50 % |
+| tres pisos o más (× núcleo) | — | — | — | — | 4 % | 14 % |
+| cuatro pisos (× núcleo) | — | — | — | — | — | 5 % |
+
+Lo que no llega al pretil es colonial; las casas nacidas desde 1843 en los barrios, de un piso, son en su
+mayoría (75 % × (1 − c)) **casas de las orillas**. Lo de tres pisos o más es siempre ecléctico o moderno. Aparte:
+
+- **quinta**: nace en 1911 o 1936, a más de 1,8 km, de 200 m² o más y compacta (largo ≤ 2 × ancho); 1 o 2 pisos;
+- **rancho**: nace en 1936, a más de 2,5 km y de menos de 45 m²;
+- **galpón**: huella de 22 m o más de largo y ≥ 1,8 veces su ancho, en el patio de una estación (`ESTACIONES`:
+  Caño Amarillo desde 1889, Palo Grande desde 1911). Los planos de 1889 y 1911 no dibujan esos patios como
+  edificados, así que `estilos.py` hace **nacer el galpón con su estación** (corrige su `vida`);
+- los **edificios públicos** (9) quedan como los dejó el vectorizador, en todas las épocas.
+
+Con los datos actuales (casas en pie por época; entre paréntesis, por pisos):
+
+| Estilo | 1578 | 1772 | 1843 | 1889 | 1911 | 1936 |
+|---|---|---|---|---|---|---|
+| colonial (0) | 65 | 1954 (1p: 1937 · 2p: 17) | 2359 (1p: 2298 · 2p: 61) | 2721 (1p: 2610 · 2p: 111) | 2405 (1p: 2203 · 2p: 202) | 2178 (1p: 1857 · 2p: 321) |
+| republicano (1) | — | — | 271 (1p: 263 · 2p: 8) | 1055 (1p: 1009 · 2p: 46) | 3280 (1p: 3085 · 2p: 195) | 18114 (1p: 17249 · 2p: 865) |
+| guzmancista (2) | — | — | — | 727 (1p: 708 · 2p: 19) | 1495 (1p: 1385 · 2p: 110) | 3876 (1p: 3618 · 2p: 258) |
+| eclectico (3) | — | — | — | — | 362 (1p: 305 · 2p: 38 · 3p: 19) | 2015 (1p: 1779 · 2p: 175 · 3p: 39 · 4p: 22) |
+| moderno (4) | — | — | — | — | — | 190 (1p: 147 · 2p: 34 · 3p: 5 · 4p: 4) |
+| quinta (5) | — | — | — | — | 133 (1p: 78 · 2p: 55) | 987 (1p: 592 · 2p: 395) |
+| rancho (6) | — | — | — | — | — | 1810 |
+| orillas (7) | — | — | 689 | 2176 | 2905 | 4050 |
+| galpon (8) | — | — | — | 48 | 75 | 75 |
+| publico (9) | — | 14 (2p: 8 · 3p: 6) | 20 (2p: 14 · 3p: 6) | 42 (2p: 34 · 3p: 8) | 91 (2p: 81 · 3p: 10) | 626 (2p: 610 · 3p: 16) |
+| **casas en pie** | 65 | 1968 | 3339 | 6769 | 10746 | 33921 |
+| de un piso | 100 % | 98 % | 97 % | 97 % | 93 % | 92 % |
+| de 3 o 4 pisos | 0 | 0 | 0 | 0 | 19 | 70 |
+
+Para mirar el resultado contra las referencias: `GPU=1 node tests/e2e/capturas-estilos.mjs <url> <carpeta>`
+(desde El Calvario, sobre el centro y a nivel de calle en La Pastora, en 1843, 1889, 1911 y 1936).

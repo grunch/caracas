@@ -4,7 +4,8 @@ Cada manzana se divide en lotes rectos, de frente angosto y perpendiculares a su
 (tools/geo/lotes.py). Lo edificado de cada lote es una casa; los pedazos muy chicos se unen a
 la casa vecina. Los edificios públicos (rayados en el plano) van enteros. Salida: vértices en
 píxeles del plano y techos [primer vértice, cuántos, pisos, estilo, semilla], el formato de
-src/ciudad.js.
+src/ciudad.js, más "esquinas": por techo, 1 si la casa hace esquina en su manzana (ahí iban los
+altos con balcón, fuentes/imagenes/README.md; lo usa tools/geo/estilos.py).
 
 Uso: vectorizar.py <clases.png> <salida.json> --escala <m/px> --plaza <px,py>
 """
@@ -22,7 +23,7 @@ from skimage import measure
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from lotes import fundir_chicos, lotes_de_manzana, sin_pelos  # noqa: E402
+from lotes import casas_de_esquina, esquinas_de_manzana, fundir_chicos, lotes_de_manzana, sin_pelos  # noqa: E402
 
 CLASE = {'desconocido': 0, 'calle': 1, 'patio': 2, 'edificado': 3, 'publico': 4,
          'verde': 5, 'cultivo': 6, 'agua': 7, 'cerro': 8, 'margen': 9}
@@ -33,6 +34,8 @@ AREA_FUSION_M2 = 30.0    # un pedazo de casa más chico que esto se une a la cas
 ANCHO_MINIMO_M = 3.0     # lo que mide menos que esto de ancho no es un ala de la casa: va con la vecina
 AREA_MINIMA_M2 = 6.0     # menos que esto es ruido de la segmentación
 TOLERANCIA_M = 0.35      # simplificación de los contornos
+RADIO_ESQUINA_M = 6.0    # la casa de esquina llega a menos de esto del vértice de la manzana
+CASAS_PARA_ESQUINA = 4   # con menos casas que estas, la manzana no tiene casas de esquina
 DE_LA_MANZANA = (CLASE['edificado'], CLASE['publico'], CLASE['patio'], CLASE['verde'])
 
 
@@ -64,9 +67,10 @@ def poligono_de(mascara, desplazamiento, tolerancia_px):
     return figura if figura.is_valid and not figura.is_empty else None
 
 
-def agregar_techo(salida, figura, pisos, estilo, semilla):
+def agregar_techo(salida, figura, pisos, estilo, semilla, esquina=False):
     puntos = list(figura.exterior.coords)[:-1]
     salida['techos'].append([len(salida['vertices']) // 2, len(puntos), pisos, estilo, semilla])
+    salida['esquinas'].append(int(esquina))
     for x, y in puntos:
         salida['vertices'].extend((round(x, 2), round(y, 2)))
 
@@ -93,6 +97,9 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
     casas = measure.label(np.where(edificado, lotes, 0), background=0, connectivity=2)
     casas = measure.label(sin_pelos(casas, ANCHO_MINIMO_M / 2 / metro), background=0, connectivity=2)
     casas = fundir_chicos(casas, AREA_FUSION_M2 / metro ** 2)
+    # una casa suelta o un par de casas no son una manzana con esquinas a la calle
+    hay_esquinas = len(np.unique(casas)) - 1 >= CASAS_PARA_ESQUINA
+    de_esquina = casas_de_esquina(casas, esquinas_de_manzana(manzana, metro), RADIO_ESQUINA_M / metro) if hay_esquinas else set()
     for casa, zona in enumerate(ndimage.find_objects(casas), start=1):
         if zona is None:
             continue
@@ -103,14 +110,15 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
         if figura is None:
             continue
         semilla = semilla_de(figura.centroid.x, figura.centroid.y)
-        agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla)
+        agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla,
+                      esquina=casa in de_esquina)
 
 
 def vectorizar(clases, metro, plaza):
     clases = np.asarray(clases)
     area_min_px = AREA_MINIMA_M2 / metro ** 2
     tolerancia_px = TOLERANCIA_M / metro
-    salida = {'vertices': [], 'techos': [], 'manzanas': 0}
+    salida = {'vertices': [], 'techos': [], 'esquinas': [], 'manzanas': 0}
 
     def distancia_m(f):
         return math.hypot(f.centroid.x - plaza[0], f.centroid.y - plaza[1]) * metro

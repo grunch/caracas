@@ -291,3 +291,11 @@ def test_unir_ciudades_agrega_techos_y_corre_los_indices():
     assert len(u["techos"]) == 3 and u["techos"][1][0] == 4 and u["techos"][2][0] == 8
     assert len(u["vertices"]) == 24
     assert u["vida"] == [[1, 0], [0, 1], [1, 3]]
+    assert "esquinas" not in u
+
+
+def test_unir_lleva_las_esquinas_de_las_dos_ciudades():
+    a = {**ciudad_de([cuadrado(0, 0, 1)]), "esquinas": [1]}
+    b = ciudad_de([cuadrado(5, 5, 1), cuadrado(9, 9, 1)])
+    assert ep.unir(a, [[1, 0]], b, [[0, 1], [1, 3]])["esquinas"] == [1, 0, 0]
+    assert ep.unir(b, [[0, 1], [1, 3]], a, [[1, 0]])["esquinas"] == [0, 0, 1]

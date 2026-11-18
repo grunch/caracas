@@ -136,7 +136,7 @@ let olaObjetivo = 0
 // la ola llega hasta la esquina más lejana de la hoja (el terreno se hincha en toda ella)
 let olaMax = Math.hypot(Math.max(-hoja.x0, hoja.x0 + hoja.ancho), Math.max(-hoja.z0, hoja.z0 + hoja.alto)) + ciudad.U.uAnchoOla.value
 let arboles = null
-cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array }).then((datos) => {
+cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array }).then((datos) => {
   const g = geometriaCiudad(datos, coords)
   olaMax = Math.max(olaMax, g.boundingSphere.center.length() + g.boundingSphere.radius + 400)
   scene.add(new Mesh(g, ciudad.material))
