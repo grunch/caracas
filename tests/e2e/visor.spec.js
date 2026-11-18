@@ -104,6 +104,23 @@ test('la línea de tiempo arranca en la primera época y lleva la ciudad a la el
   await page.waitForFunction((k) => window.lab.ciudad.U.uEpocaA.value === k && window.lab.ciudad.U.uOlaEpoca.value > 0, n - 1, { timeout: 20000 })
 })
 
+test('al elegir 1843 la hoja recibe el plano de Jesurún calzado: la ola va hacia su textura', async ({ page }) => {
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  const hay = (await hayDato(page, 'datos/crece.json', 'json')) && (await hayDato(page, 'plano/1843/chico.webp', 'image/webp'))
+  test.skip(!hay, 'sin crece.json o sin los planos de época (datos fuera del repo)')
+  await page.locator('#epocas .años button', { hasText: '1843' }).click()
+  // la ola arranca cuando llegó el plano (o a los 2,5 s, con 1936): la ranura "a" apunta a la textura de 1843
+  await page.waitForFunction(() => {
+    const { uPlanoA, uEpocaA } = window.lab.ciudad.U
+    return uEpocaA.value === 2 && /plano\/1843\//.test(uPlanoA.value.image?.src ?? '')
+  }, null, { timeout: 30000 })
+  expect(await page.evaluate(() => window.lab.planos.cargados)).toContain(1843)
+  const rect = await page.evaluate(() => window.lab.ciudad.U.uPlanoARect.value.toArray())
+  expect(rect[0]).toBeGreaterThan(0)
+  expect(rect[2]).toBeLessThan(1)
+})
+
 test('el relieve se hincha con la ola: acostado es liso, levantado aparece el Ávila', async ({ page }) => {
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
@@ -157,4 +174,17 @@ test('el material de la ciudad compila con las fachadas, en tinta y en color', a
   await page.waitForFunction(() => window.lab.ciudad.U.uColor.value === 1)
   await dosCuadros()
   expect(errores).toEqual([])
+})
+
+test('con lo de hoy, los nombres de las calles se dibujan sobre la vista y se borran al apagarlo', async ({ page }) => {
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  const hay = await hayDato(page, 'datos/calles.bin', 'octet-stream')
+  test.skip(!hay, 'sin datos/calles.bin (dato pesado fuera de git)')
+  await page.evaluate(() => window.lab.cam.jump({ x: 0, z: 0, dist: 1200, yaw: 0, pitch: 1.3 }))
+  await page.keyboard.press('KeyH')
+  await page.waitForFunction(() => window.lab.calles?.cuantas > 0, null, { timeout: 60000 })
+  await expect(page.locator('#calles')).toHaveCSS('pointer-events', 'none')
+  await page.keyboard.press('KeyH')
+  await page.waitForFunction(() => window.lab.calles.cuantas === 0, null, { timeout: 60000 })
 })

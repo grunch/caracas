@@ -41,7 +41,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T23 | Época 1578: el plano de Pimentel codificado (25 manzanas, solares "casa") y casas coloniales generadas | — | 25 manzanas alrededor de la plaza, solo con casa donde Pimentel la dibuja | ✅ #9 |
 | T24 | Datos de épocas: máscaras por época, `nace`/`muere` por casa, `crece.json`, parte `vida` en `ciudad.pak` | T22, T23 | cada casa tiene su vida; conteos por época plausibles | ✅ #11 |
 | T25 | **Interfaz de la línea de tiempo**: botonera 1578 · 1772 · 1843 · 1889 · 1911 · 1936, la ola por época, ▶ que las recorre, pie con la fuente del plano | T24 | la ciudad crece hacia adelante como en BA | ✅ #13 |
-| T25b | **El plano de cada año** sobre la hoja: los planos calzados (`fuentes/derivados/<año>/calzado.tif`) teselados por época, y la hoja cambia de plano con la ola | T25 | en 1843 la hoja muestra el Jesurún calzado, no el plano de 1936 | ⏳ |
+| T25b | **El plano de cada año** sobre la hoja: los planos calzados (`fuentes/derivados/<año>/calzado.tif`) teselados por época, y la hoja cambia de plano con la ola | T25 | en 1843 la hoja muestra el Jesurún calzado, no el plano de 1936 | 🔄 #23 |
 
 ## Fase 3 · Calidad del render
 
@@ -70,7 +70,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 |---|---|---|---|---|
 | T50a | "Lo de hoy", datos: calles, vías y agua de OSM rasterizadas sobre el plano (usa `geo1936.py`) → `hoy-lejos/cerca.webp`, `calles.bin/json` | T20 | desfase con las calles de 1936 < 10 m en el centro (QA) | ✅ #16 |
 | T50b | "Lo de hoy", visor: estampa en rojo con H, leyenda © OpenStreetMap | T50a | con H se estampa en rojo la Caracas actual | ✅ #18 |
-| T51 | Nombres de las calles de hoy en un canvas 2D sobre la vista | T50a, T50b | etiquetas alineadas, sin choques | ⏳ |
+| T51 | Nombres de las calles de hoy en un canvas 2D sobre la vista | T50a, T50b | etiquetas alineadas, sin choques | 🔄 #22 |
 | T52 | **Esquinas**: leer del plano de 1936 los nombres en rojo de cada cruce (OCR asistido + curado) → diccionario esquina → píxel | — | ≥ 90 % de las esquinas del centro con nombre verificado | ✅ #14 |
 | T53 | Buscador: "de esquina a esquina" con el diccionario + Nominatim para direcciones modernas, con respuesta en prosa | T51, T52 | "De La Torre a Veroes" ubica en el plano | ⏳ |
 
