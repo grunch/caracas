@@ -205,3 +205,19 @@ Qué implica: en 1936 las cuadras comerciales del centro (alrededor de la plaza 
 el estilo **de comercio**: vidriera, toldo y letrero en la planta baja de los estilos ecléctico y
 moderno, y avisos en bandera (sirve para T32); las calles del centro ya van asfaltadas con acera. Los
 pisos de 2 a 4 solo aquí, en el núcleo comercial: fuera de él, la ciudad de 1936 sigue baja.
+
+## Años 30 (a verificar) · Sobre los techos, hacia los cerros (`1935-pinterest-vista-hacia-los-cerros`) → época 1936
+
+Foto sin pie ni fuente. Si es Caracas, mira al sur (cerros bajos, no el Ávila). Lugar y fecha a verificar.
+
+- **La ciudad de los años 30 sigue baja**: techos de teja de un piso hasta donde alcanza la vista, con
+  **algunos edificios de dos pisos y azotea** intercalados (frente con pretil y ventanas en hilera).
+- **Aparecen cubiertas nuevas**: un **edificio grande de planta ancha con techo a cuatro aguas de poca
+  pendiente** (mercado, estación o teatro) y, cerca, **una o dos cúpulas** de iglesia.
+- **Postes y cables** en casi todas las calles; **chimeneas y tanques** en algunos techos.
+- **Árboles altos sueltos** saliendo de patios y plazas.
+- Al fondo, **cerros bajos con monte**, sin casas en las laderas.
+
+Qué implica: confirma lo de la panorámica de 1903 para la época de 1936: mayoría de un piso con teja, y
+los edificios de varios pisos concentrados en pocas cuadras. Reducir la proporción de "moderno" y
+"ecléctico" altos fuera del núcleo comercial.
