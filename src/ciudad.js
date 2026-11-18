@@ -14,16 +14,19 @@ export const empacarTecho = ({ pisos, estilo }) => ((estilo & 0xff) << 8) | (pis
 export const desempacarTecho = (v) => ({ pisos: v & 0xff, estilo: (v >> 8) & 0xff })
 
 /** Devuelve arrays planos (posiciones, normales, info, indices); sin three.js de por medio. */
-export function extruirTechos({ vertices, techos }, coords) {
+export function extruirTechos({ vertices, techos, vida = null }, coords) {
   const posiciones = []
   const normales = []
   const info = []
+  const vidas = [] // [nace, muere] por vértice (src/epocas.js); sin vida, siempre visible
   const indices = []
+  let vidaTecho = [0, 0]
 
   const vertice = (x, y, z, n, datos) => {
     posiciones.push(x, y, z)
     normales.push(n[0], n[1], n[2])
     info.push(...datos)
+    vidas.push(vidaTecho[0], vidaTecho[1])
     return posiciones.length / 3 - 1
   }
   // agrega el triángulo con el giro que haga que su cara mire hacia n
@@ -40,6 +43,8 @@ export function extruirTechos({ vertices, techos }, coords) {
   for (let t = 0; t < techos.length; t += 4) {
     const [inicio, cuantos, empacado, semilla] = [techos[t], techos[t + 1], techos[t + 2], techos[t + 3]]
     const { pisos, estilo } = desempacarTecho(empacado)
+    const v = vida ? vida[t / 4] : 0
+    vidaTecho = [v % 8, Math.floor(v / 8)]
     const alto = pisos * ALTO_PISO
     const anillo = []
     for (let k = 0; k < cuantos; k++) {
@@ -72,16 +77,18 @@ export function extruirTechos({ vertices, techos }, coords) {
     posiciones: new Float32Array(posiciones),
     normales: new Float32Array(normales),
     info: new Float32Array(info),
+    vidas: new Float32Array(vidas),
     indices: posiciones.length / 3 > 65535 ? new Uint32Array(indices) : new Uint16Array(indices),
   }
 }
 
 export function geometriaCiudad(datos, coords) {
-  const { posiciones, normales, info, indices } = extruirTechos(datos, coords)
+  const { posiciones, normales, info, vidas, indices } = extruirTechos(datos, coords)
   const g = new BufferGeometry()
   g.setAttribute('position', new BufferAttribute(posiciones, 3))
   g.setAttribute('normal', new BufferAttribute(normales, 3))
   g.setAttribute('aInfo', new BufferAttribute(info, 4))
+  g.setAttribute('aVida', new BufferAttribute(vidas, 2))
   g.setIndex(new BufferAttribute(indices, 1))
   g.computeBoundingSphere()
   return g

@@ -6,6 +6,7 @@ import { cargarPak } from './pak.js'
 import { geometriaCiudad } from './ciudad.js'
 import { crearMaterialCiudad } from './material.js'
 import { acercar } from './animar.js'
+import { crearLineaDeTiempo } from './epocas.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
 
@@ -95,13 +96,35 @@ function ponerTextura(uniforme, t) {
 const DURACION_OLA_S = 5
 let olaObjetivo = 0
 let olaMax = 0
-cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array }).then((datos) => {
+cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array }).then((datos) => {
   const g = geometriaCiudad(datos, coords)
   olaMax = g.boundingSphere.center.length() + g.boundingSphere.radius + 400
   scene.add(new Mesh(g, ciudad.material))
   document.getElementById('alzar').hidden = false
   pedirCuadro(3)
 }).catch((e) => console.warn(`ciudad: ${e.message}`))
+
+// --- la línea de tiempo: 1578 → 1936; cada época llega como una ola desde la plaza ---
+const DURACION_EPOCA_S = 3.5
+const OLA_EPOCA_MAX_M = 9000 // más que la distancia de la plaza a la esquina más lejana de la hoja
+let lineaDeTiempo = null
+fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))).then(({ epocas }) => {
+  const U = ciudad.U
+  let primera = true
+  lineaDeTiempo = crearLineaDeTiempo({
+    contenedor: document.getElementById('epocas'),
+    epocas,
+    alElegir(i) {
+      // la nueva ola parte de la época que regía (en reposo, la última elegida)
+      U.uEpocaDe.value = primera ? i : U.uEpocaA.value
+      U.uEpocaA.value = i
+      U.uOlaEpoca.value = primera ? OLA_EPOCA_MAX_M : 0
+      primera = false
+      pedirCuadro(3)
+    },
+  })
+  cargarTextura('plano/crece.png', false).then((t) => ponerTextura(U.uCrece, t)).catch((e) => console.warn(`crece: ${e.message}`))
+}).catch((e) => console.warn(`épocas: ${e.message}`)) // sin crece.json (p. ej. la demo de CI): la ciudad entera, sin línea de tiempo
 
 function levantar(arriba = olaObjetivo === 0) {
   olaObjetivo = arriba ? olaMax : 0
@@ -148,6 +171,11 @@ renderer.setAnimationLoop((t) => {
     uOla.value = acercar(uOla.value, olaObjetivo, (olaMax / DURACION_OLA_S) * dt)
     pedirCuadro(2)
   }
+  const { uOlaEpoca } = ciudad.U
+  if (uOlaEpoca.value < OLA_EPOCA_MAX_M) {
+    uOlaEpoca.value = acercar(uOlaEpoca.value, OLA_EPOCA_MAX_M, (OLA_EPOCA_MAX_M / DURACION_EPOCA_S) * dt)
+    pedirCuadro(2)
+  }
   if (uColor.value !== colorObjetivo) {
     uColor.value = acercar(uColor.value, colorObjetivo, dt / DURACION_COLOR_S)
     pedirCuadro(2)
@@ -158,7 +186,7 @@ renderer.setAnimationLoop((t) => {
 })
 
 document.body.classList.add('listo')
-window.lab = { renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, ready: true }
+window.lab = { renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, get lineaDeTiempo() { return lineaDeTiempo }, ready: true }
 
 /** Papel con una cuadrícula de 100 m, hasta que exista plano/primero.webp. */
 function cuadriculaProvisoria() {

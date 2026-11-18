@@ -7,22 +7,43 @@
  *   paredes de cal en sus tonos de siempre.
  * aInfo = (distancia a la plaza, semilla, estilo, pisos); pisos = 0 marca el suelo.
  */
-import { MeshLambertMaterial, Vector2 } from 'three'
+import { MeshLambertMaterial, Vector2, DataTexture } from 'three'
+
+// la época que rige en un punto y cuánto está en pie una casa (espejo de src/epocas.js)
+const GLSL_EPOCAS = /* glsl */ `
+  uniform float uEpocaDe, uEpocaA, uOlaEpoca;
+  float epocaAqui(float dist) { return mix(uEpocaDe, uEpocaA, smoothstep(0.0, uAnchoOla, uOlaEpoca - dist)); }
+  float vivoEn(vec2 vida, float e) {
+    float nacio = smoothstep(vida.x - 0.5, vida.x, e);
+    return vida.y < 0.5 ? nacio : nacio * (1.0 - smoothstep(vida.y - 0.5, vida.y, e));
+  }`
 
 const VERTICE_COMUN = /* glsl */ `
-  attribute vec4 aInfo;
+  attribute vec4 aInfo; attribute vec2 aVida;
   uniform float uOla, uAnchoOla;
+  varying float vExiste;
+  ${GLSL_EPOCAS}
   varying vec3 vMundo; varying float vTecho; varying vec4 vInfo;
   float azar(float n) { return fract(sin(n * 12.9898) * 43758.5453); }`
 
 const VERTICE_OLA = /* glsl */ `
   // cuánto se levantó esta casa: la ola sale de la plaza; cada una a su tiempo
   float sube = smoothstep(0.0, 1.0, (uOla - aInfo.x - azar(aInfo.y) * 60.0) / uAnchoOla);
-  transformed.y *= sube;
+  // y en la línea de tiempo: la casa está en pie si ya nació y todavía no se fue, en la época de acá
+  vExiste = vivoEn(aVida, epocaAqui(aInfo.x));
+  transformed.y *= sube * vExiste;
   vTecho = step(0.5, normal.y);
   vInfo = aInfo;`
 
 const FRAGMENTO_COMUN = /* glsl */ `
+  uniform float uAnchoOla, uEtapas; uniform sampler2D uCrece;
+  varying float vExiste;
+  ${GLSL_EPOCAS}
+  /** Desde qué época está edificado el punto (crece.png, R "desde cuándo"); nunca = muy lejos. */
+  float edificadoDesde(vec2 uv) {
+    float v = texture2D(uCrece, uv).r;
+    return v <= 0.0 ? 99.0 : uEtapas * (1.0 - v);
+  }
   uniform sampler2D uMapa, uSuelo; uniform vec2 uHoja, uPlaza; uniform float uMetro, uColor;
   varying vec3 vMundo; varying float vTecho; varying vec4 vInfo;
   float azarF(float n) { return fract(sin(n * 12.9898) * 43758.5453); }
@@ -49,6 +70,9 @@ const FRAGMENTO_COMUN = /* glsl */ `
   /** El suelo pintado: calles de tierra, patios, cultivos, el río; el plano queda como un dibujo tenue. */
   vec3 sueloColor(vec2 uv, vec3 papel) {
     vec4 s = texture2D(uSuelo, uv);
+    // en épocas anteriores, lo que todavía no estaba edificado vuelve a ser campo
+    float yaEstaba = step(edificadoDesde(uv), epocaAqui(length(vMundo.xz)) + 0.5);
+    s.ba *= yaEstaba;
     float urbano = smoothstep(0.08, 0.35, texture(uSuelo, uv, 5.0).a); // manzanas alrededor: ciudad
     vec3 c = mix(vec3(0.62, 0.60, 0.42), vec3(0.72, 0.64, 0.50), urbano);  // pasto seco o tierra apisonada
     c = mix(c, vec3(0.52, 0.46, 0.34), s.a * (1.0 - s.b));                // patios: tierra más oscura
@@ -59,6 +83,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   }`
 
 const FRAGMENTO_COLOR = /* glsl */ `
+  if (vInfo.w > 0.5 && vExiste < 0.02) discard; // la casa todavía no existe (o ya no) en esta época
   vec2 uvPlano = (vMundo.xz / uMetro + uPlaza) / uHoja;
   vec2 uv = vec2(uvPlano.x, 1.0 - uvPlano.y);
   vec3 papel = texture2D(uMapa, uv).rgb;
@@ -76,6 +101,9 @@ const FRAGMENTO_COLOR = /* glsl */ `
 
   diffuseColor.rgb = mix(enTinta, enColor, uColor);`
 
+/** 1×1 blanco: en "desde cuándo", edificado desde la primera época (no recorta nada). */
+const TODO_EDIFICADO = Object.assign(new DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1), { needsUpdate: true })
+
 export function crearMaterialCiudad({ plano, metro, mapa, suelo = null }) {
   const U = {
     uOla: { value: 0 }, // radio del frente de la ola, en metros
@@ -86,6 +114,11 @@ export function crearMaterialCiudad({ plano, metro, mapa, suelo = null }) {
     uHoja: { value: new Vector2(plano.ancho, plano.alto) },
     uPlaza: { value: new Vector2(plano.plaza[0], plano.plaza[1]) },
     uMetro: { value: metro },
+    uEpocaDe: { value: 0 }, // la línea de tiempo: de qué época a cuál, y el frente de esa ola en metros
+    uEpocaA: { value: 0 },
+    uOlaEpoca: { value: 0 },
+    uEtapas: { value: 6 },
+    uCrece: { value: TODO_EDIFICADO }, // hasta que llegue crece.png: todo edificado desde la primera época
   }
   const material = new MeshLambertMaterial({ color: 0xf1e6cd })
   material.onBeforeCompile = (s) => {
