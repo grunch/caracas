@@ -16,6 +16,7 @@ import { GLSL_EPOCAS, GLSL_CRECE } from './shader/epocas.js'
 import { GLSL_PLANO } from './shader/plano.js'
 import { GLSL_SUELO } from './shader/suelo.js'
 import { GLSL_FACHADA } from './shader/fachada.js'
+import { GLSL_HOY } from './shader/hoy.js'
 import { VERTICE_COMUN, VERTICE_OLA } from './shader/vertice.js'
 
 // el fragment: los módulos de src/shader/ en orden de dependencia (suelo usa plano, épocas y crece)
@@ -28,7 +29,8 @@ const FRAGMENTO_COMUN = /* glsl */ `
   ${GLSL_CRECE}
   ${GLSL_PLANO}
   ${GLSL_FACHADA}
-  ${GLSL_SUELO}`
+  ${GLSL_SUELO}
+  ${GLSL_HOY}`
 
 const FRAGMENTO_COLOR = /* glsl */ `
   if (vInfo.w > 0.5 && vExiste < 0.02) discard; // la casa todavía no existe (o ya no) en esta época
@@ -43,10 +45,15 @@ const FRAGMENTO_COLOR = /* glsl */ `
   // color: suelo pintado; techo y pared según la casa (src/shader/fachada.js)
   vec3 enColor = mix(mix(paredColor(vInfo.y, vInfo.z, vMundo.y - vBase), techoColor(vInfo.y, vInfo.z), vTecho), sueloColor(uv, papel), esSuelo);
 
-  diffuseColor.rgb = mix(enTinta, enColor, uColor);`
+  diffuseColor.rgb = mix(enTinta, enColor, uColor);
+
+  // lo de hoy (H): la ciudad actual en rojo, sobre el suelo en los dos modos; los techos, en su color
+  diffuseColor.rgb = mix(diffuseColor.rgb, hoyEn(uvPlano, diffuseColor.rgb), esSuelo);`
 
 /** 1×1 blanco: en "desde cuándo", edificado desde la primera época (no recorta nada). */
 const TODO_EDIFICADO = Object.assign(new DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1), { needsUpdate: true })
+/** 1×1 negro: lo de hoy, hasta que lleguen sus texturas (no estampa nada). */
+const SIN_HOY = Object.assign(new DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1), { needsUpdate: true })
 
 export function crearMaterialCiudad({
   plano, metro, mapa, suelo = null, relieve = uniformsRelieve({ x0: 0, z0: 0, ancho: 1, alto: 1 }),
@@ -71,6 +78,13 @@ export function crearMaterialCiudad({
     uEtapas: { value: 6 },
     uCrece: { value: TODO_EDIFICADO }, // hasta que llegue crece.png: todo edificado desde la primera época
     uCreceEscala: { value: new Vector2(1, 1) }, // hoja normalizada → crece.png normalizado (ver escalaCrece)
+    // lo de hoy (src/shader/hoy.js): 0 apagado · 1 prendido; las resoluciones eligen lejos o cerca
+    uHoy: { value: 0 },
+    tHoyLejos: { value: SIN_HOY },
+    tHoyCerca: { value: SIN_HOY },
+    uHoyCercaOn: { value: 0 },
+    uHoyLejosRes: { value: new Vector2(1, 1) },
+    uHoyCercaRes: { value: new Vector2(1, 1) },
   }
   const material = new MeshLambertMaterial({ color: 0xf1e6cd })
   material.onBeforeCompile = (s) => {

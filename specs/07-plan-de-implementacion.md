@@ -51,7 +51,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T31 | Estilos y alturas por época: colonial, republicano, guzmancista (neoclásico), ecléctico, casa de las afueras, rancho; pisos según época y zona | T24 | el índice de estilo de cada casa sale de su época y su lugar | 🔄 (este PR) |
 | T32 | Fachadas procedurales por estilo: puertas, ventanas con rejas, aleros, zócalo, cornisas; LOD por distancia | T31 | a nivel de calle se distinguen los estilos | ⏳ |
 | T33 | Techos de teja de verdad: dos y cuatro aguas como geometría, con alero; azoteas en los públicos y los modernos | T31 | el perfil de tejados se ve de costado | ⏳ |
-| T34 | Árboles 3D desde `arboles.json` (5.926) y los patios con vegetación, en color | — | árboles en plazas, patios y quebradas | ⏳ |
+| T34 | Árboles 3D desde `arboles.json` (5.926) y los patios con vegetación, en color | — | árboles en plazas, patios y quebradas | 🔄 #19 |
 | T35 | Luz y acabado: sombras, luz tibia y sombra azulada, bruma, contorno por profundidad y grano de papel en tinta | — | el look de grabado de `specs/04` | ⏳ |
 
 ## Fase 4 · Contenido
@@ -69,7 +69,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | ID | Tarea | Depende de | Listo cuando | Estado |
 |---|---|---|---|---|
 | T50a | "Lo de hoy", datos: calles, vías y agua de OSM rasterizadas sobre el plano (usa `geo1936.py`) → `hoy-lejos/cerca.webp`, `calles.bin/json` | T20 | desfase con las calles de 1936 < 10 m en el centro (QA) | 🔄 #16 (datos) |
-| T50b | "Lo de hoy", visor: estampa en rojo con H, leyenda © OpenStreetMap | T50a | con H se estampa en rojo la Caracas actual | ⏳ |
+| T50b | "Lo de hoy", visor: estampa en rojo con H, leyenda © OpenStreetMap | T50a | con H se estampa en rojo la Caracas actual | 🔄 #18 |
 | T51 | Nombres de las calles de hoy en un canvas 2D sobre la vista | T50a, T50b | etiquetas alineadas, sin choques | ⏳ |
 | T52 | **Esquinas**: leer del plano de 1936 los nombres en rojo de cada cruce (OCR asistido + curado) → diccionario esquina → píxel | — | ≥ 90 % de las esquinas del centro con nombre verificado | ✅ #14 |
 | T53 | Buscador: "de esquina a esquina" con el diccionario + Nominatim para direcciones modernas, con respuesta en prosa | T51, T52 | "De La Torre a Veroes" ubica en el plano | ⏳ |

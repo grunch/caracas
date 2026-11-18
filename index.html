@@ -20,6 +20,15 @@
     #botones .panel:hover{background:var(--sobre)}
     #botones .panel:active{transform:translateY(1px)}
     #botones .panel.on{color:#f7eedb;background:var(--tinta)}
+    #botones #hoy{color:var(--hoy)}
+    #botones #hoy.on{color:#f7eedb;background:var(--hoy)}
+    #leyenda{right:calc(26px + env(safe-area-inset-right,0px));bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:5;padding:9px 14px;max-width:min(300px,100vw - 52px);font-size:13.5px}
+    body:not(.hoy) #leyenda{display:none}
+    #leyenda p{margin:0}
+    #leyenda .titulo{font-style:italic;margin-bottom:5px}
+    #leyenda .linea{display:inline-block;width:26px;height:3px;background:var(--hoy);vertical-align:middle;margin-right:8px}
+    #leyenda .fuente{margin-top:6px;font-size:12px;opacity:.85}
+    #leyenda a{color:inherit}
     #epocas{top:calc(26px + env(safe-area-inset-top,0px));left:50%;transform:translate(-50%);z-index:4;padding:5px 6px;max-width:min(640px,100vw - 28px);box-sizing:border-box}
     #epocas[hidden]{display:none}
     #epocas .años{display:flex;flex-wrap:wrap;justify-content:center;gap:2px}
@@ -35,7 +44,12 @@
   <div id="view"></div>
   <div id="loading">Desplegando el plano…</div>
   <div id="epocas" class="panel" hidden></div>
-  <div id="botones"><button id="color" class="panel" type="button" aria-pressed="false" title="Ver en color (C)">Color</button><button id="alzar" class="panel" type="button" hidden>Levantar la ciudad</button></div>
+  <div id="botones"><button id="color" class="panel" type="button" aria-pressed="false" title="Ver en color (C)">Color</button><button id="hoy" class="panel" type="button" aria-pressed="false" title="Ver la ciudad de hoy (H)">Ver lo de hoy</button><button id="alzar" class="panel" type="button" hidden>Levantar la ciudad</button></div>
+  <div id="leyenda" class="panel" role="note" aria-label="Leyenda de lo de hoy">
+    <p class="titulo">La ciudad de hoy, sobre el plano</p>
+    <p><span class="linea" aria-hidden="true"></span>calles, vías y quebradas actuales</p>
+    <p class="fuente">Mapa actual: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© colaboradores de OpenStreetMap</a> (ODbL)</p>
+  </div>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

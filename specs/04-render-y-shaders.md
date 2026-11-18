@@ -71,6 +71,8 @@ Azotea de baldosa colorada (gastada; algunas, blanqueadas a la cal) con pretil, 
 
 Follaje en tres tonos (sombra, media tinta, luz) con el borde movido "como a mano"; en tinta, sombra rayada. Instancias baratas (billboard o low‑poly) para ~36k árboles.
 
+*Caracas (implementado, `src/arboles.js`):* ~6.400 árboles en una sola `InstancedMesh` (un draw call): copa de icosaedro (80 triángulos) abollada en el vertex shader según la semilla de cada árbol, con giro y alto propios, y un tronco de 5 caras. `ShaderMaterial` propio que comparte con la ciudad los objetos uniform de `uColor`, la ola, las épocas y el relieve: se apoyan en `sueloEn` del centro, suben con la ola y crecen cuando su época (`nace`) llega a su lugar. Tres tonos por la luz del sol cuantizada, con manchas para que el corte no sea limpio; el borde, donde la copa se da vuelta, con el grosor movido al azar. En tinta: papel, sombra rayada en diagonal (más tupida en la sombra, en espacio de pantalla) y el contorno y el tronco a pluma. Por ahora están en tinta y en color (no solo en color).
+
 ## Velo (hover)
 
 "Lo que se puede tocar se aclara al pasarle el mouse, como con un resaltador." Se aclara solo el edificio (por su ancla), o lo que esté dentro del radio de la marca. El suelo entra solo cuando la marca es una plaza, un dique o una avenida.

@@ -46,7 +46,7 @@ const PASOS = [
     id: 'segmentar', entradas: [`${D}/mosaico.tif`, 'tools/geo/paleta-1936.json'],
     codigo: GEO('segmentar', 'segmentar_arboles', 'segmentar_clases', 'segmentar_color', 'segmentar_marco',
       'segmentar_morfologia', 'segmentar_parametros', 'segmentar_salidas', 'segmentar_texturas', 'segmentar_topologia'),
-    salidas: [`${D}/segmentacion/mosaico/clases.png`],
+    salidas: [`${D}/segmentacion/mosaico/clases.png`, `${D}/segmentacion/mosaico/arboles.json`],
     cmd: () => [PY, 'tools/geo/segmentar.py', `${D}/mosaico.tif`, `${D}/segmentacion/mosaico`, '--escala', '0.5'],
   },
   {
@@ -107,6 +107,24 @@ const PASOS = [
     cmd: () => ['node', 'tools/empacar-ciudad.mjs', `${E}/ciudad-estilos.json`],
   },
   {
+    id: 'jardines', codigo: GEO('jardines'),
+    entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/segmentacion/mosaico/arboles.json`],
+    salidas: [`${D}/segmentacion/mosaico/jardines.json`],
+    cmd: () => [PY, 'tools/geo/jardines.py', `${D}/segmentacion/mosaico/clases-costura.png`,
+      `${D}/segmentacion/mosaico/arboles.json`, `${D}/segmentacion/mosaico/jardines.json`],
+  },
+  {
+    // crece.png/crece.json (tools/geo/epocas.py, fuera de este pipeline) dan la época de cada árbol si
+    // están; sin ellos todos nacen en la primera: son opcionales (si aparecen o cambian, el paso se rehace)
+    id: 'arboles',
+    entradas: [`${D}/segmentacion/mosaico/arboles.json`, `${D}/segmentacion/mosaico/jardines.json`, `${D}/mosaico.json`, 'public/datos/ciudad.pak'],
+    opcionales: ['public/plano/crece.png', 'public/datos/crece.json'],
+    salidas: ['public/datos/arboles.bin'],
+    codigo: ['tools/arboles.mjs', 'tools/arboles-lib.mjs', 'src/pak.js', 'src/epocas.js'],
+    cmd: () => ['node', 'tools/arboles.mjs', `${D}/segmentacion/mosaico/arboles.json`, `${D}/mosaico.json`,
+      `${D}/segmentacion/mosaico/jardines.json`],
+  },
+  {
     id: 'suelo', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`],
     salidas: ['public/plano/suelo.webp', 'public/plano/suelo-2k.webp'],
     codigo: ['tools/suelo.mjs', 'tools/suelo-lib.mjs'],
@@ -163,7 +181,7 @@ async function guardarFirmas(firmas) {
 }
 
 async function tiempos(pasos) {
-  const rutas = [...new Set(pasos.flatMap((p) => [...p.entradas, ...p.salidas]))]
+  const rutas = [...new Set(pasos.flatMap((p) => [...p.entradas, ...(p.opcionales ?? []), ...p.salidas]))]
   const t = {}
   for (const r of rutas) {
     try { t[r] = (await stat(path.join(RAIZ, r))).mtimeMs } catch { /* no existe */ }
@@ -186,7 +204,8 @@ const sha256 = (ruta) => new Promise((ok, mal) => {
 
 async function verificar(pasos) {
   const ciudad = await leerJson(`${D}/ciudad-1936.json`)
-  const medidos = { techos: ciudad.techos.length, manzanas: ciudad.manzanas }
+  const arboles = await leerJson(`${D}/segmentacion/mosaico/arboles.json`)
+  const medidos = { techos: ciudad.techos.length, manzanas: ciudad.manzanas, arboles: arboles.length }
   const { _nota, ...esperados } = await leerJson('tools/datos-esperados.json')
   const errores = verificarConteos(medidos, esperados)
   const publicos = pasos.flatMap((p) => p.salidas).filter((s) => s.startsWith('public/'))

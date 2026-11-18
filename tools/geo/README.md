@@ -58,6 +58,13 @@ $PY tools/geo/vectorizar.py $D/segmentacion/mosaico/clases-costura.png $D/ciudad
 # 6. empacar: techos → public/datos/ciudad.pak
 node tools/empacar-ciudad.mjs $D/ciudad-1936.json
 
+# 6b. árboles: a los símbolos detectados (arboles.json) se suman los de los canteros de plazas y patios,
+#     que el plano dibuja como manchas verdes sin símbolo (jardines.json); después cada uno recibe la
+#     época en que aparece (public/plano/crece.png + ciudad.pak) → public/datos/arboles.bin (specs/02)
+$PY tools/geo/jardines.py $D/segmentacion/mosaico/clases-costura.png $D/segmentacion/mosaico/arboles.json \
+    $D/segmentacion/mosaico/jardines.json
+node tools/arboles.mjs $D/segmentacion/mosaico/arboles.json $D/mosaico.json $D/segmentacion/mosaico/jardines.json
+
 # 7. suelo: máscara RGBA para el modo color (R agua · G vegetación · B edificado · A manzana)
 node tools/suelo.mjs $D/segmentacion/mosaico/clases-costura.png
 # 8. plano: LOD y teselas del mosaico cosido → public/plano/, y bloque "plano" de public/datos/ciudad.json
