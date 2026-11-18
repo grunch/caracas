@@ -32,3 +32,22 @@ describe('material sin línea de tiempo', () => {
     expect(U.uEpocaA.value).toBe(SIN_LINEA_DE_TIEMPO)
   })
 })
+
+describe('material con "lo de hoy"', () => {
+  test('el fragment incluye el shader de hoy y lo aplica solo al suelo, después de tinta y color', () => {
+    const { fragmentShader } = compilar()
+    expect(fragmentShader).toContain('uniform sampler2D tHoyLejos, tHoyCerca;')
+    const composicion = fragmentShader.indexOf('diffuseColor.rgb = mix(enTinta, enColor, uColor);')
+    const estampa = fragmentShader.indexOf('diffuseColor.rgb = mix(diffuseColor.rgb, hoyEn(uvPlano, diffuseColor.rgb), esSuelo);')
+    expect(composicion).toBeGreaterThan(-1)
+    expect(estampa).toBeGreaterThan(composicion)
+  })
+
+  test('arranca apagado, con texturas de respaldo y sin la de cerca', () => {
+    const { U } = crearMaterialCiudad({ plano: { ancho: 100, alto: 100, plaza: [50, 50] }, metro: 1, mapa: null })
+    expect(U.uHoy.value).toBe(0)
+    expect(U.uHoyCercaOn.value).toBe(0)
+    expect(U.tHoyLejos.value).toBeTruthy()
+    expect(U.tHoyCerca.value).toBeTruthy()
+  })
+})
