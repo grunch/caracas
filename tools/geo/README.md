@@ -239,3 +239,27 @@ $PY tools/geo/esquinas.py qa --radio 3000               # → $D/qa-esquinas.jpg
 El detector no lee: solo propone. La mitad larga del trabajo es mirar las fichas. En la ventana de
 1,5 km alrededor de la plaza salen ~450 candidatos; un tercio son trozos de curvas de nivel (también
 rojas) y letras de parroquia, que se descartan a mano.
+
+### Estilos y alturas por época (`estilos.py`)
+
+Después de `epocas.py`: a cada casa, el estilo de la época en que nace y del lugar donde está, y sus pisos
+según el estilo (determinista por la semilla). `npm run datos` lo corre y empaca su salida.
+
+```sh
+$PY tools/geo/estilos.py fuentes/derivados/epocas/ciudad-epocas.json fuentes/derivados/epocas/ciudad-estilos.json \
+    --escala 0.5 --plaza 8968.2,6839
+node tools/empacar-ciudad.mjs fuentes/derivados/epocas/ciudad-estilos.json
+```
+
+| Nace en | Estilo (índice) | Pisos |
+|---|---|---|
+| 1578, 1772 | colonial (0) | 1 |
+| 1843 | colonial 70 % · republicano (1) 30 % | 1 · 1–2 |
+| 1889 | republicano 50 % · guzmancista (2) 50 % | 1–2 |
+| 1911 | guzmancista 35 % · ecléctico (3) 65 % | 1–2 · 2–3 |
+| 1936, a menos de 1,8 km de la plaza | ecléctico 65 % · moderno (4) 35 % | 2–3 · 2–4 |
+| 1936, afueras | quinta (5) si ≥ 300 m²; rancho (6) si < 60 m² y a más de 2,5 km; si no, casa de las orillas (7) | 1–2 · 1 · 1 |
+
+Los edificios públicos (9) quedan como los dejó el vectorizador. Con los datos actuales: colonial 3185,
+republicano 2223, guzmancista 3932, ecléctico 15734, moderno 6381, quinta 139, rancho 13740, orillas 13059,
+público 626.

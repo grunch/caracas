@@ -36,13 +36,12 @@ const FRAGMENTO_COLOR = /* glsl */ `
   vec2 uv = vec2(uvPlano.x, 1.0 - uvPlano.y);
   vec3 papel = planoEn(uvPlano);
   float esSuelo = step(vInfo.w, 0.5);
-  float publico = step(8.5, vInfo.z);
 
   // tinta: el techo y el suelo son el plano; la pared, papel
   vec3 enTinta = mix(diffuseColor.rgb, papel, vTecho);
 
   // color: suelo pintado; techo y pared según la casa (src/shader/fachada.js)
-  vec3 enColor = mix(mix(paredColor(vInfo.y, vMundo.y - vBase), techoColor(vInfo.y, publico), vTecho), sueloColor(uv, papel), esSuelo);
+  vec3 enColor = mix(mix(paredColor(vInfo.y, vInfo.z, vMundo.y - vBase), techoColor(vInfo.y, vInfo.z), vTecho), sueloColor(uv, papel), esSuelo);
 
   diffuseColor.rgb = mix(enTinta, enColor, uColor);`
 

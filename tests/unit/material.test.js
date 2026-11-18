@@ -17,7 +17,7 @@ describe('material de la ciudad', () => {
   test('el zócalo se mide desde la base de la casa, no desde la altura absoluta', () => {
     const { vertexShader, fragmentShader } = compilar()
     expect(vertexShader).toMatch(/vBase\s*=\s*aInfo\.w < 0\.5 \? sueloEn\(position\.xz\) : sueloEn\(aAncla\)/)
-    expect(fragmentShader).toContain('paredColor(vInfo.y, vMundo.y - vBase)')
+    expect(fragmentShader).toContain('paredColor(vInfo.y, vInfo.z, vMundo.y - vBase)')
     expect(fragmentShader).toContain('step(0.8, sobreLaBase)')
     expect(fragmentShader).not.toContain('step(0.8, vMundo.y)')
   })
@@ -30,5 +30,13 @@ describe('material sin línea de tiempo', () => {
     const { U } = crearMaterialCiudad({ plano: { ancho: 100, alto: 100, plaza: [50, 50] }, metro: 1, mapa: null })
     expect(U.uEpocaDe.value).toBe(SIN_LINEA_DE_TIEMPO)
     expect(U.uEpocaA.value).toBe(SIN_LINEA_DE_TIEMPO)
+  })
+})
+
+describe('estilos en el shader', () => {
+  test('techo y pared se eligen por el estilo de la casa (aInfo.z)', () => {
+    const { fragmentShader } = compilar()
+    expect(fragmentShader).toContain('techoColor(vInfo.y, vInfo.z)')
+    for (const estilo of ['ESTILO_MODERNO', 'ESTILO_RANCHO', 'ESTILO_PUBLICO', 'ESTILO_ORILLAS']) expect(fragmentShader).toContain(estilo)
   })
 })
