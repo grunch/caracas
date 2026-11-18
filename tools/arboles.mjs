@@ -9,11 +9,14 @@ import { gunzipSync } from 'node:zlib'
 import path from 'node:path'
 import sharp from 'sharp'
 import { decodificarPak } from '../src/pak.js'
-import { codificarArboles, naceArbol, casasQueMueren, desdeEnCrece, desdeDelEntorno } from './arboles-lib.mjs'
+import {
+  codificarArboles, naceArbol, casasQueMueren, techosQueQuedan, bajoUnTecho, desdeEnCrece, desdeDelEntorno,
+} from './arboles-lib.mjs'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
 const ETAPAS = 6
 const ENTORNO_JARDIN = 3 // celdas de crece.png (8 m) alrededor de un árbol de jardín
+const CELDA_TECHOS_PX = 100 // grilla para buscar techos bajo un árbol
 
 const [entrada, mosaico, jardines] = process.argv.slice(2)
 if (!entrada || !mosaico) {
@@ -44,9 +47,12 @@ const grilla = crece && {
 const desde = grilla ? (x, y) => desdeEnCrece(grilla, x, y) : () => Infinity
 const desdeJardin = grilla ? (x, y) => desdeDelEntorno(grilla, x, y, ENTORNO_JARDIN) : () => Infinity
 const casas = ciudad ? casasQueMueren(ciudad) : []
-const conNace = arboles.map((a) => ({ ...a, nace: naceArbol(a, { desde: a.jardin ? desdeJardin : desde, casas }) }))
+// el centro de la copa bajo un techo que queda en pie: el árbol estaría siempre adentro de una casa
+const bajoTecho = ciudad ? bajoUnTecho(techosQueQuedan(ciudad), CELDA_TECHOS_PX) : () => false
+const libres = arboles.filter((a) => !bajoTecho(a.x, a.y))
+const conNace = libres.map((a) => ({ ...a, nace: naceArbol(a, { desde: a.jardin ? desdeJardin : desde, casas }) }))
 
 const salida = path.resolve(RAIZ, 'public/datos/arboles.bin')
 await writeFile(salida, codificarArboles(conNace, metro))
 const porEpoca = Array.from({ length: ETAPAS }, (_, e) => conNace.filter((a) => a.nace === e).length)
-console.log(`${conNace.length} árboles (nacen por época: ${porEpoca.join(' · ')}; ${casas.length} casas que mueren) → ${salida}`)
+console.log(`${conNace.length} árboles (${arboles.length - libres.length} descartados bajo un techo; nacen por época: ${porEpoca.join(' · ')}; ${casas.length} casas que mueren) → ${salida}`)

@@ -71,9 +71,10 @@ const PASOS = [
   },
   {
     // crece.png/crece.json (tools/geo/epocas.py, fuera de este pipeline) dan la época de cada árbol si
-    // están; sin ellos todos nacen en la primera. Con `--desde arboles` se rehace con los nuevos.
+    // están; sin ellos todos nacen en la primera: son opcionales (si aparecen o cambian, el paso se rehace)
     id: 'arboles',
     entradas: [`${D}/segmentacion/mosaico/arboles.json`, `${D}/segmentacion/mosaico/jardines.json`, `${D}/mosaico.json`, 'public/datos/ciudad.pak'],
+    opcionales: ['public/plano/crece.png', 'public/datos/crece.json'],
     salidas: ['public/datos/arboles.bin'],
     codigo: ['tools/arboles.mjs', 'tools/arboles-lib.mjs', 'src/pak.js', 'src/epocas.js'],
     cmd: () => ['node', 'tools/arboles.mjs', `${D}/segmentacion/mosaico/arboles.json`, `${D}/mosaico.json`,
@@ -136,7 +137,7 @@ async function guardarFirmas(firmas) {
 }
 
 async function tiempos(pasos) {
-  const rutas = [...new Set(pasos.flatMap((p) => [...p.entradas, ...p.salidas]))]
+  const rutas = [...new Set(pasos.flatMap((p) => [...p.entradas, ...(p.opcionales ?? []), ...p.salidas]))]
   const t = {}
   for (const r of rutas) {
     try { t[r] = (await stat(path.join(RAIZ, r))).mtimeMs } catch { /* no existe */ }

@@ -4,7 +4,8 @@
 /**
  * Pasos a correr, en orden. Un paso corre si: se fuerza; está en --desde o después; le falta una
  * salida; alguna entrada la produce un paso que corre; o alguna entrada es más nueva que sus salidas.
- * `tiempos`: { ruta: mtime } solo de lo que existe.
+ * `tiempos`: { ruta: mtime } solo de lo que existe. `opcionales`: entradas que pueden faltar (sin ellas el
+ * paso tiene un respaldo); si están, o las produce otro paso, cuentan como las demás.
  */
 export function pendientes(pasos, tiempos, { forzar = false, desde = null, codigoCambiado = new Set() } = {}) {
   const desdeIdx = desde === null ? Infinity : pasos.findIndex((p) => p.id === desde)
@@ -18,9 +19,10 @@ export function pendientes(pasos, tiempos, { forzar = false, desde = null, codig
   const sucias = new Set()
   const correr = []
   pasos.forEach((p, i) => {
+    const entradas = [...p.entradas, ...(p.opcionales ?? []).filter((e) => e in tiempos || producidas.has(e))]
     const faltaSalida = p.salidas.some((s) => !(s in tiempos))
-    const entradaSucia = p.entradas.some((e) => sucias.has(e))
-    const masNueva = Math.max(...p.entradas.map((e) => tiempos[e] ?? -Infinity)) >
+    const entradaSucia = entradas.some((e) => sucias.has(e))
+    const masNueva = Math.max(...entradas.map((e) => tiempos[e] ?? -Infinity)) >
       Math.min(...p.salidas.map((s) => tiempos[s] ?? -Infinity))
     if (forzar || i >= desdeIdx || faltaSalida || entradaSucia || masNueva || codigoCambiado.has(p.id)) {
       correr.push(p.id)

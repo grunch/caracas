@@ -76,6 +76,39 @@ export function casasQueMueren({ vertices, techos, vida }) {
   return casas
 }
 
+/** Los anillos de los techos que nunca mueren (con vida: muere = 0; sin vida, todos). */
+export function techosQueQuedan({ vertices, techos, vida }) {
+  const anillos = []
+  for (let t = 0; t < techos.length / 4; t++) {
+    if (vida && vida[t] >= 8) continue
+    const [inicio, cuantos] = [techos[t * 4], techos[t * 4 + 1]]
+    anillos.push(Array.from(vertices.subarray(inicio * 2, (inicio + cuantos) * 2)))
+  }
+  return anillos
+}
+
+/**
+ * `(x, y) → bool`: ¿el punto cae dentro de alguno de los anillos? Con una grilla de `celdaPx` para no
+ * probar los ~60 mil techos por árbol.
+ */
+export function bajoUnTecho(anillos, celdaPx) {
+  const grilla = new Map()
+  const clave = (i, j) => `${i},${j}`
+  for (const anillo of anillos) {
+    const xs = anillo.filter((_, k) => k % 2 === 0)
+    const ys = anillo.filter((_, k) => k % 2 === 1)
+    for (let i = Math.floor(Math.min(...xs) / celdaPx); i <= Math.floor(Math.max(...xs) / celdaPx); i++) {
+      for (let j = Math.floor(Math.min(...ys) / celdaPx); j <= Math.floor(Math.max(...ys) / celdaPx); j++) {
+        const k = clave(i, j)
+        if (!grilla.has(k)) grilla.set(k, [])
+        grilla.get(k).push(anillo)
+      }
+    }
+  }
+  return (x, y) => (grilla.get(clave(Math.floor(x / celdaPx), Math.floor(y / celdaPx))) ?? [])
+    .some((anillo) => dentroOCerca(anillo, x, y, 0))
+}
+
 /**
  * Desde qué época se ve un árbol de 1936. Fuera de lo edificado (quebradas, haciendas, cerros) existió
  * siempre; en la ciudad, nace con su barrio (crece.png). Y nunca dentro de una casa en pie: si su copa

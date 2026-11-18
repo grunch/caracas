@@ -1,5 +1,7 @@
 import { describe, test, expect } from 'vitest'
-import { codificarArboles, naceArbol, casasQueMueren, desdeEnCrece, desdeDelEntorno, dentroOCerca } from '../../tools/arboles-lib.mjs'
+import {
+  codificarArboles, naceArbol, casasQueMueren, techosQueQuedan, bajoUnTecho, desdeEnCrece, desdeDelEntorno, dentroOCerca,
+} from '../../tools/arboles-lib.mjs'
 import { decodificarArboles } from '../../src/arboles.js'
 
 const comoArrayBuffer = (b) => b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength)
@@ -75,6 +77,24 @@ describe('casasQueMueren', () => {
     const vida = new Uint32Array([5 + 8 * 0, 0 + 8 * 2])
     expect(casasQueMueren({ vertices, techos, vida })).toEqual([{ anillo: [20, 20, 30, 20, 30, 30], muere: 2 }])
     expect(casasQueMueren({ vertices, techos })).toEqual([])
+  })
+})
+
+describe('techosQueQuedan y bajoUnTecho', () => {
+  const vertices = new Float32Array([0, 0, 10, 0, 10, 10, 0, 10, 200, 200, 230, 200, 230, 230, 200, 230])
+  const techos = new Uint32Array([0, 4, 0, 1, 4, 4, 0, 2])
+
+  test('los techos que nunca mueren (o todos, si no hay vida)', () => {
+    expect(techosQueQuedan({ vertices, techos, vida: new Uint32Array([1, 8 * 3]) })).toEqual([[0, 0, 10, 0, 10, 10, 0, 10]])
+    expect(techosQueQuedan({ vertices, techos })).toHaveLength(2)
+  })
+
+  test('un árbol con el centro bajo un techo que queda en pie se descarta; al lado, no', () => {
+    const bajo = bajoUnTecho(techosQueQuedan({ vertices, techos }), 64)
+    expect(bajo(5, 5)).toBe(true)
+    expect(bajo(215, 215)).toBe(true)
+    expect(bajo(12, 5)).toBe(false)
+    expect(bajo(100, 100)).toBe(false)
   })
 })
 

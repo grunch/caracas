@@ -92,6 +92,22 @@ describe('código del paso', () => {
     expect(pendientes(conArboles, { ...t, 'mosaico.tif': 5 })).toEqual(['segmentar', 'arboles'])
   })
 
+  test('una entrada opcional que falta no es error; si está, cuenta su fecha', () => {
+    const conOpcional = [{ id: 'arboles', entradas: ['arboles.json'], opcionales: ['crece.png'], salidas: ['arboles.bin'] }]
+    expect(pendientes(conOpcional, { 'arboles.json': 1, 'arboles.bin': 3 })).toEqual([])
+    expect(pendientes(conOpcional, { 'arboles.json': 1, 'crece.png': 2, 'arboles.bin': 3 })).toEqual([])
+    // crece.png aparece o cambia después de arboles.bin: el paso se rehace
+    expect(pendientes(conOpcional, { 'arboles.json': 1, 'crece.png': 5, 'arboles.bin': 3 })).toEqual(['arboles'])
+  })
+
+  test('una entrada opcional que produce un paso que corre ensucia al que la usa', () => {
+    const pasos2 = [
+      { id: 'epocas', entradas: ['x'], salidas: ['crece.png'] },
+      { id: 'arboles', entradas: [], opcionales: ['crece.png'], salidas: ['arboles.bin'] },
+    ]
+    expect(pendientes(pasos2, { x: 9, 'crece.png': 2, 'arboles.bin': 3 })).toEqual(['epocas', 'arboles'])
+  })
+
   test('firmasCambiadas compara la firma actual del código con la guardada', () => {
     expect([...firmasCambiadas({ a: 'h1', b: 'h2', c: 'h3' }, { a: 'h1', b: 'viejo' })]).toEqual(['b', 'c'])
   })
