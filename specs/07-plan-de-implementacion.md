@@ -27,18 +27,18 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 
 | ID | Tarea | Depende de | Listo cuando | Estado |
 |---|---|---|---|---|
-| T10 | **CI en GitHub Actions**: vitest, pytest (solo sintéticos), build y Playwright con datos de prueba | — | cada PR muestra checks verdes o rojos | ⏳ |
-| T11 | **Pipeline reproducible**: `npm run datos` corre todo el pipeline de 1936 (y luego el de las épocas) con caché por paso y verifica conteos esperados | T08 | desde los `original.tif`, un comando regenera `public/` idéntico (hash) | ⏳ |
-| T12 | **Fixture de datos chica** para E2E y CI: un recorte de 1 km² alrededor de la plaza (plano, `.pak`, suelo) generado por el pipeline | T11 | los E2E corren en CI sin los datos pesados | ⏳ |
+| T10 | **CI en GitHub Actions**: vitest, pytest (solo sintéticos), build y Playwright con datos de prueba | — | cada PR muestra checks verdes o rojos | 🔄 #5 |
+| T11 | **Pipeline reproducible**: `npm run datos` corre todo el pipeline de 1936 (y luego el de las épocas) con caché por paso y verifica conteos esperados | T08 | desde los `original.tif`, un comando regenera `public/` idéntico (hash) | 🔄 #6 |
+| T12 | **Fixture sintética** para E2E y CI: plano, `.pak`, suelo y relieve **generados** (sin recortes de los mapas: el repo es público y los derechos del plano de 1936 están en revisión). Hoy el CI usa `tools/demo-ciudad.mjs`; falta cubrir suelo, teselas y relieve | T11 | los E2E que hoy se saltean sin datos corren en CI | ⏳ |
 
 ## Fase 2 · Terminar lo que está en curso
 
 | ID | Tarea | Depende de | Listo cuando | Estado |
 |---|---|---|---|---|
-| T20 | Relieve, datos: transformación cuadrícula 1936 ⇄ WGS84 (`geo1936.py`), DEM Copernicus → `relieve.bin`, validado con las cotas de las esquinas | — | residuos de la transformación < 10 m; sesgo del DEM contra las cotas corregido | 🔄 |
-| T21 | Relieve, visor: terreno bajo el plano y la ciudad, casas apoyadas en su ancla, la ola hincha el terreno | T20 | el Ávila y El Calvario se ven; ninguna casa flota | 🔄 |
-| T22 | Calce de los planos de 1919, 1889, 1843 y 1772 sobre el de 1936 (GCPs + TPS) | — | residuos < 15 m en el centro; superposiciones de QA revisadas | 🔄 |
-| T23 | Época 1578: el plano de Pimentel codificado (25 manzanas, solares "casa") y casas coloniales generadas | — | 25 manzanas alrededor de la plaza, solo con casa donde Pimentel la dibuja | 🔄 |
+| T20 | Relieve, datos: transformación cuadrícula 1936 ⇄ WGS84 (`geo1936.py`), DEM Copernicus → `relieve.bin`, validado con las cotas de las esquinas | — | residuos de la transformación < 10 m; sesgo del DEM contra las cotas corregido | 🔄 #8 |
+| T21 | Relieve, visor: terreno bajo el plano y la ciudad, casas apoyadas en su ancla, la ola hincha el terreno | T20 | el Ávila y El Calvario se ven; ninguna casa flota | 🔄 #8 (junto con T20) |
+| T22 | Calce de los planos de 1919, 1889, 1843 y 1772 sobre el de 1936 (GCPs + TPS) | — | residuos < 15 m en el centro; superposiciones de QA revisadas | 🔄 #7 |
+| T23 | Época 1578: el plano de Pimentel codificado (25 manzanas, solares "casa") y casas coloniales generadas | — | 25 manzanas alrededor de la plaza, solo con casa donde Pimentel la dibuja | 🔄 #9 |
 | T24 | Datos de épocas: máscaras por época, `nace`/`muere` por casa, `crece.json`, parte `vida` en `ciudad.pak` | T22, T23 | cada casa tiene su vida; conteos por época plausibles | 🔄 |
 | T25 | **Interfaz de la línea de tiempo**: botonera 1578 · 1772 · 1843 · 1889 · 1919 · 1936, la ola por época, ▶ que las recorre, pie con la fuente del plano | T24 | la ciudad crece hacia adelante como en BA | ⏳ |
 
@@ -46,7 +46,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 
 | ID | Tarea | Depende de | Listo cuando | Estado |
 |---|---|---|---|---|
-| T30 | Teselas finas de 3072 px en el material (las 4 que rodean la vista), para nitidez de cerca | — | de cerca se leen los nombres de las esquinas | ⏳ |
+| T30 | Teselas finas de 3072 px en el material (las 4 que rodean la vista), para nitidez de cerca | — | de cerca se leen los nombres de las esquinas | 🔄 #10 |
 | T31 | Estilos y alturas por época: colonial, republicano, guzmancista (neoclásico), ecléctico, casa de las afueras, rancho; pisos según época y zona | T24 | el índice de estilo de cada casa sale de su época y su lugar | ⏳ |
 | T32 | Fachadas procedurales por estilo: puertas, ventanas con rejas, aleros, zócalo, cornisas; LOD por distancia | T31 | a nivel de calle se distinguen los estilos | ⏳ |
 | T33 | Techos de teja de verdad: dos y cuatro aguas como geometría, con alero; azoteas en los públicos y los modernos | T31 | el perfil de tejados se ve de costado | ⏳ |
