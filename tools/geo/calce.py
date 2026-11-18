@@ -204,7 +204,11 @@ def _enlaces_de_etapa(base, viejo, calce, etapa, contexto):
     m_por_px = metro * fb
     ventana = int(round(etapa["ventana_m"] / m_por_px))
     busqueda = int(round(etapa["busqueda_m"] / m_por_px))
-    movil, dentro = remuestrear(viejo, calce, (0, 0, base.shape[1], base.shape[0]), 8, fb, fv)
+    marco = (0, 0, base.shape[1], base.shape[0])
+    movil, dentro = remuestrear(viejo, calce, marco, 8, fb, fv)
+    if contexto.get("util") is not None:  # área útil del plano (sin leyendas ni cartelas)
+        util, _ = remuestrear(contexto["util"].astype(np.float32), calce, marco, 8, fb, fv)
+        dentro &= util > 0.99
     plaza = [(c + 0.5) / fb - 0.5 for c in contexto["plaza"]]
     puntos = malla(base.shape, etapa["paso_m"] / m_por_px, plaza, etapa["radio_m"] / m_por_px,
                    ventana + busqueda + 1)
@@ -223,7 +227,9 @@ def calzar(base, viejo, manuales, contexto, etapas=ETAPAS_POR_OMISION):
     """Calce por etapas. base/viejo = callejidad reducida (1/factor_base, 1/factor_viejo).
 
     contexto: factor_base, factor_viejo, metro (m/px del mosaico), plaza (px del mosaico),
-    umbral_residuo_m, suavizado. Devuelve (calce, gcps, quitados).
+    umbral_residuo_m, suavizado y, opcional, util (máscara del área útil del viejo reducido:
+    ninguna ventana de correlación puede tocar lo que queda afuera). Devuelve
+    (calce, gcps, quitados).
     """
     metro, suavizado = contexto["metro"], contexto.get("suavizado", 0.0)
     gcps, quitados = list(manuales), []
@@ -303,9 +309,9 @@ def main():
     base, forma_1936 = callejidad_1936(config_1936, raiz)
     mascara = mascara_marco(rgb.shape[:2], config.get("marco"), config.get("excluir", ()))
     viejo = callejidad(reducir(rgb, config["factor"]), config["perfil"])
-    viejo = viejo * (reducir(mascara.astype(np.float32), config["factor"]) > 0.99)
+    util = reducir(mascara.astype(np.float32), config["factor"]) > 0.99
     contexto = {"factor_base": config_1936["factor"], "factor_viejo": config["factor"],
-                "metro": meta["metro"], "plaza": meta["plaza"],
+                "metro": meta["metro"], "plaza": meta["plaza"], "util": util,
                 "umbral_residuo_m": config["umbral_residuo_m"], "suavizado": config.get("suavizado", 0.0)}
     calce, gcps, quitados = calzar(base, viejo, manuales_de(config, config_1936), contexto,
                                    config.get("etapas", ETAPAS_POR_OMISION))

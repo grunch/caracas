@@ -136,6 +136,26 @@ def test_calzar_recupera_una_deformacion_conocida():
     assert np.max(np.hypot(x - rx, y - ry)) < 2.5
 
 
+def test_enlaces_no_usan_ventanas_que_tocan_lo_que_queda_fuera_del_area_util():
+    # Arrange: el viejo es el mismo damero; su mitad izquierda (x < 300) es "leyenda"
+    base = damero(forma=(600, 600), paso=50.0, origen=(25.0, 25.0))
+    viejo = base.copy()
+    util = np.ones(viejo.shape, bool)
+    util[:, :300] = False
+    manuales = [{"px": float(x), "py": float(y), "x36": float(x), "y36": float(y), "manual": True}
+                for x in (100.0, 500.0) for y in (100.0, 500.0)]
+    calce = ca.Calce.ajustar(manuales, metro=1.0)
+    etapa = {"radio_m": 400, "paso_m": 20, "ventana_m": 30, "busqueda_m": 10, "calidad": 0.5}
+    contexto = {"factor_base": 1, "factor_viejo": 1, "metro": 1.0, "plaza": (300.0, 300.0)}
+
+    # Act
+    sin_mascara = ca._enlaces_de_etapa(base, viejo, calce, etapa, contexto)
+    con_mascara = ca._enlaces_de_etapa(base, viejo, calce, etapa, {**contexto, "util": util})
+
+    # Assert: sin máscara hay enlaces en la leyenda; con máscara, ninguna ventana la toca
+    assert any(g["px"] < 300 for g in sin_mascara)
+    assert con_mascara and min(g["px"] for g in con_mascara) >= 300 + 30
+
 
 def _gcps_afines(n=6, ruido=0.0, semilla=0):
     rng = np.random.default_rng(semilla)
