@@ -40,3 +40,17 @@ describe('planoDesdeMosaico', () => {
     expect(() => planoDesdeMosaico({ ...mosaico, metro: undefined })).toThrow(/metro/)
   })
 })
+
+import { ciudadConPlano } from '../../tools/plano-lib.mjs'
+
+describe('ciudadConPlano', () => {
+  const plano = { ancho: 10, alto: 10, metro: 0.5, plaza: [5, 5], marco: [0, 0, 10, 10], interior: [0, 0, 10, 10], origen_m: null }
+
+  test('reemplaza el bloque plano y conserva lo demás (menos la nota provisoria)', () => {
+    expect(ciudadConPlano({ nombre: 'Caracas', otra: 1, _nota: 'x', plano: { viejo: true } }, plano)).toEqual({ nombre: 'Caracas', otra: 1, plano })
+  })
+
+  test('si ciudad.json no existe, lo arma desde cero', () => {
+    expect(ciudadConPlano(null, plano)).toEqual({ nombre: 'Caracas', plano })
+  })
+})

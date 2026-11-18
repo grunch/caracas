@@ -7,6 +7,25 @@ y Node (`npm ci`). Los datos (originales y derivados) no van a git.
 
 Entradas: `fuentes/mapas/1936-archiveorg-caracas-dcn-hoja{1,2}/original.tif` (TIFF sin comprimir).
 
+## Todo de una vez
+
+```sh
+npm run datos                  # solo los pasos viejos (como make), verifica conteos y escribe el manifiesto
+npm run datos -- --desde costura   # fuerza un paso y todo lo que le sigue
+npm run datos -- --forzar          # todo desde cero
+npm run datos -- --verificar       # solo verifica conteos (tools/datos-esperados.json) y rehace el manifiesto
+npm run datos -- --marcar          # da los datos actuales por generados con el código actual (sin correr nada)
+```
+
+`tools/datos.mjs` define los pasos de abajo con sus entradas, salidas y código; un paso corre si le falta
+una salida, si alguna entrada es más nueva, si la produce un paso que corre o si **cambió su código**
+(se compara el sha256 de sus scripts con el guardado en `.cache/datos/firmas.json`, no la fecha: un
+`git checkout` le cambia la fecha a todo). La primera vez no hay firmas y corre todo; si los datos ya
+están al día, `--marcar` las guarda sin correr nada. Las teselas de `public/plano/f/` y
+`public/datos/ciudad.json` son salidas del paso `plano`. Al final compara los conteos
+con `tools/datos-esperados.json` (sale con error si se van de la tolerancia) y escribe
+`public/datos/manifiesto.json` con el sha256 de cada archivo publicado. La plaza se lee de `mosaico.json`.
+
 ## Pasos
 
 ```sh
@@ -39,7 +58,9 @@ $PY tools/geo/vectorizar.py $D/segmentacion/mosaico/clases-costura.png $D/ciudad
 # 6. empacar: techos → public/datos/ciudad.pak
 node tools/empacar-ciudad.mjs $D/ciudad-1936.json
 
-# 7. plano: LOD y teselas del mosaico cosido → public/plano/, y bloque "plano" de public/datos/ciudad.json
+# 7. suelo: máscara RGBA para el modo color (R agua · G vegetación · B edificado · A manzana)
+node tools/suelo.mjs $D/segmentacion/mosaico/clases-costura.png
+# 8. plano: LOD y teselas del mosaico cosido → public/plano/, y bloque "plano" de public/datos/ciudad.json
 node tools/plano.mjs $D/mosaico-costura.tif $D/mosaico.json
 
 # 8. calce con el mundo: cuadrícula 1936 ⇄ UTM 19N con los puntos de control OSM de

@@ -16,3 +16,5 @@ public/datos/*.bin
 __pycache__/
 fuentes/derivados/
 .claude/worktrees/
+public/datos/manifiesto.json
+.cache/

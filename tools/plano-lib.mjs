@@ -37,3 +37,9 @@ export function planoDesdeMosaico({ metro, ancho, alto, origen_m, marco, plaza }
   const caja = marco ?? [0, 0, ancho, alto]
   return { ancho, alto, metro, plaza: [...plaza], marco: [...caja], interior: [...caja], origen_m: origen_m ? [...origen_m] : null }
 }
+
+/** public/datos/ciudad.json con el bloque "plano" nuevo; si todavía no existe (null), se arma desde cero. */
+export function ciudadConPlano(ciudad, plano) {
+  const { _nota, ...resto } = ciudad ?? { nombre: 'Caracas' }
+  return { ...resto, plano }
+}
