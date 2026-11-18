@@ -124,3 +124,39 @@ describe('salidasDeTeselas', () => {
     expect(salidasDeTeselas(null)).toEqual([])
   })
 })
+
+import { resolverOriginales } from '../../tools/datos-lib.mjs'
+
+describe('resolverOriginales', () => {
+  test('cambia original:<carpeta> por el archivo original.* que hay en esa carpeta', () => {
+    const pasos = [{ id: 'calce-1889', entradas: ['original:1889-x', 'otra.json'], salidas: ['s'] }]
+    const [p] = resolverOriginales(pasos, { '1889-x': ['ficha.json', 'original.jpg', 'vista.jpg'] })
+    expect(p.entradas).toEqual(['fuentes/mapas/1889-x/original.jpg', 'otra.json'])
+    expect(pasos[0].entradas[0]).toBe('original:1889-x') // no muta
+  })
+
+  test('si la carpeta no tiene original, falla claro', () => {
+    expect(() => resolverOriginales([{ id: 'a', entradas: ['original:x'], salidas: [] }], { x: ['ficha.json'] })).toThrow(/original.*x/)
+  })
+})
+
+import { fichasDeEpocas } from '../../tools/datos-lib.mjs'
+
+describe('fichasDeEpocas', () => {
+  test('la ficha de cada plano de la línea de tiempo (sus créditos van a crece.json)', () => {
+    const config = { epocas: [{ año: 1578, plano: '1578-a' }, { año: 1936, plano: '1936-b' }] }
+    expect(fichasDeEpocas(config)).toEqual(['fuentes/mapas/1578-a/ficha.json', 'fuentes/mapas/1936-b/ficha.json'])
+  })
+
+  test('sin épocas, ninguna', () => {
+    expect(fichasDeEpocas({})).toEqual([])
+  })
+})
+
+describe('resolverOriginales sin exigir', () => {
+  test('con exigir: false, lo que falta queda como está (para --verificar y --marcar)', () => {
+    const pasos = [{ id: 'a', entradas: ['original:x', 'original:y'], salidas: [] }]
+    const [p] = resolverOriginales(pasos, { x: ['original.tif'] }, { exigir: false })
+    expect(p.entradas).toEqual(['fuentes/mapas/x/original.tif', 'original:y'])
+  })
+})
