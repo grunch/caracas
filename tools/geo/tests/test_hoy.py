@@ -380,3 +380,45 @@ def test_qa_mide_el_desfase_contra_las_calles_de_1936(tmp_path, monkeypatch):
     assert informe["desfase_m"] == pytest.approx([3.0, -2.0], abs=0.25)
     assert cv2.imread(str(tmp_path / "qa" / "qa.jpg")).shape == (200, 300, 3)
     assert json.loads((tmp_path / "qa" / "qa.json").read_text())["desfase_px"] == informe["desfase_px"]
+
+
+def test_qa_falla_si_no_puede_escribir_la_imagen(tmp_path, monkeypatch):
+    import hoy_qa
+    monkeypatch.setattr(hoy_qa.cv2, "imwrite", lambda *a, **k: False)
+    with pytest.raises(OSError, match="qa.jpg"):
+        hoy_qa._escribir_jpg(tmp_path / "qa.jpg", np.zeros((4, 4, 3), np.uint8))
+
+
+# --- casos borde (revisión) ------------------------------------------------------------------
+def test_descargar_exige_que_elements_sea_una_lista(tmp_path):
+    with pytest.raises(ValueError):
+        osm.descargar(tmp_path / "osm.json", (0, 0, 1, 1), abrir=lambda p, timeout: _Respuesta(b'{"elements": {}}'))
+    assert not (tmp_path / "osm.json").exists()
+
+
+def test_elementos_ignora_posiciones_nulas_y_areas_sin_geometria():
+    via = _way({"highway": "residential"}, [0, 100, 200], [0, 0, 0])
+    via["geometry"].insert(1, None)
+    laguna = {"type": "way", "id": 3, "tags": {"natural": "water"}, "geometry": []}
+    corta = _way({"natural": "water"}, [0, 10, 0], [0, 0, 0], id_=4)
+    els = osm.elementos({"elements": [via, laguna, corta]}, TRANSF)
+    assert len(els) == 1
+    assert np.allclose(els[0]["lineas"][0], [[0, 0], [100, 0], [200, 0]], atol=1e-4)
+
+
+def test_desfase_sin_senal_devuelve_none():
+    import hoy_qa
+    calles = np.zeros((200, 200), np.float32)
+    calles[90:110, :] = 1
+    assert hoy_qa.desfase(np.zeros((200, 200), np.float32), calles, maximo_px=20) is None
+
+
+def test_calles_no_codifica_centros_fuera_del_mosaico_al_redondear():
+    els = [_elem("calle", [[999.5, 0], [999.9, 200]], nombre="Borde")]
+    _, reg = hoy.calles(els, ancho_px=1000, alto_px=1000)
+    assert reg[0][0] == 999
+
+
+def test_escribir_webp_no_deja_temporales(tmp_path):
+    hoy.escribir_webp(tmp_path / "x.webp", np.zeros((8, 8, 3), np.uint8))
+    assert [p.name for p in tmp_path.iterdir()] == ["x.webp"]

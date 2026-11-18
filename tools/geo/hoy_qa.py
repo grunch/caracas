@@ -31,7 +31,7 @@ def _subpixel(r, i, j):
 
 
 def desfase(a, b, maximo_px=DESFASE_MAX_PX):
-    """(dx, dy) en px tal que `b` ≈ `a` corrida (dx, dy), buscando solo hasta ±maximo_px.
+    """(dx, dy) en px tal que `b` ≈ `a` corrida (dx, dy), buscando solo hasta ±maximo_px; None sin señal.
 
     Correlación normalizada en una ventana chica: la cuadrícula es casi periódica (una cuadra ≈ 200 px)
     y una búsqueda global puede saltar a la cuadra de al lado.
@@ -39,7 +39,12 @@ def desfase(a, b, maximo_px=DESFASE_MAX_PX):
     m = maximo_px
     a = np.asarray(a, np.float32)
     b = np.asarray(b, np.float32)
-    r = cv2.matchTemplate(b, np.ascontiguousarray(a[m:-m, m:-m]), cv2.TM_CCOEFF_NORMED)
+    plantilla = np.ascontiguousarray(a[m:-m, m:-m])
+    if np.ptp(plantilla) == 0 or np.ptp(b) == 0:
+        return None  # una máscara vacía o pareja no dice nada del desfase
+    r = cv2.matchTemplate(b, plantilla, cv2.TM_CCOEFF_NORMED)
+    if not np.isfinite(r).all() or np.ptp(r) < 1e-6:
+        return None
     i, j = np.unravel_index(int(np.argmax(r)), r.shape)
     fx, fy = _subpixel(r, i, j)
     return float(j - m + fx), float(i - m + fy)
@@ -57,17 +62,23 @@ def _ventana(centro, forma):
     return x0, y0, x0 + ancho, y0 + alto
 
 
+def _escribir_jpg(ruta, rgb):
+    if not cv2.imwrite(str(ruta), rgb[..., ::-1], [cv2.IMWRITE_JPEG_QUALITY, 88]):
+        raise OSError(f"no se pudo escribir {ruta}")
+
+
 def generar(elems, meta, ruta_tif, ruta_clases, salida):
-    """Escribe la imagen de control y un JSON con el desfase; devuelve el desfase en metros."""
+    """Escribe la imagen de control y un JSON con el desfase (None si no hay calles para medirlo)."""
     plaza = meta["plaza"]
     x0, y0, x1, y1 = _ventana(plaza, VENTANA_DESFASE_PX)
     osm = hoy.rasterizar(elems, VENTANA_DESFASE_PX, VENTANA_DESFASE_PX, origen=(x0, y0))[..., 0]
     clases = cv2.imread(str(ruta_clases), cv2.IMREAD_UNCHANGED)
     calles_1936 = (clases[y0:y1, x0:x1] == CALLE).astype(np.float32)
-    dx, dy = desfase(osm.astype(np.float32) / 255.0, calles_1936)
+    d = desfase(osm.astype(np.float32) / 255.0, calles_1936)
     metro = meta["metro"]
-    informe = {"ventana_px": [x0, y0, x1, y1], "desfase_px": [round(dx, 2), round(dy, 2)],
-               "desfase_m": [round(dx * metro, 2), round(dy * metro, 2)],
+    informe = {"ventana_px": [x0, y0, x1, y1],
+               "desfase_px": None if d is None else [round(d[0], 2), round(d[1], 2)],
+               "desfase_m": None if d is None else [round(d[0] * metro, 2), round(d[1] * metro, 2)],
                "nota": "corrimiento de las calles de 1936 respecto de OSM (x al este, y al sur)"}
     qx0, qy0, qx1, qy1 = _ventana(plaza, VENTANA_QA_PX)
     plano = tifffile.imread(ruta_tif)[qy0:qy1, qx0:qx1]
@@ -75,6 +86,6 @@ def generar(elems, meta, ruta_tif, ruta_clases, salida):
     cobertura = np.maximum.reduce([rojo[..., 0], rojo[..., 1], rojo[..., 2]])
     Path(salida).parent.mkdir(parents=True, exist_ok=True)
     gris = np.repeat(cv2.cvtColor(plano, cv2.COLOR_RGB2GRAY)[..., None], 3, axis=2)  # el rojo se distingue
-    cv2.imwrite(str(salida), superponer(gris, cobertura, 0.5)[..., ::-1], [cv2.IMWRITE_JPEG_QUALITY, 88])
+    _escribir_jpg(salida, superponer(gris, cobertura, 0.5))
     Path(salida).with_suffix(".json").write_text(json.dumps(informe, indent=1) + "\n", encoding="utf-8")
     return informe

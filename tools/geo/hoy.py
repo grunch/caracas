@@ -144,7 +144,7 @@ def calles(elems, ancho_px, alto_px):
     if len(nombres) > 0xFFFF:
         raise ValueError("demasiados nombres para un índice Uint16")
     indice = {n: i for i, n in enumerate(nombres)}
-    reg = np.array([[round(mx), round(my), round(dx * DIRECCION) + CENTRO_U16, round(dy * DIRECCION) + CENTRO_U16,
+    reg = np.array([[min(round(mx), ancho_px - 1), min(round(my), alto_px - 1), round(dx * DIRECCION) + CENTRO_U16, round(dy * DIRECCION) + CENTRO_U16,
                      indice[n], min(0xFFFF, round(largo))] for n, mx, my, dx, dy, largo in filas],
                    dtype=np.int64).reshape(-1, 6)
     orden = np.lexsort((reg[:, 1], reg[:, 0], reg[:, 4], -reg[:, 5]))
@@ -156,12 +156,21 @@ def codificar_calles(registros):
 
 
 # --- salida ----------------------------------------------------------------------------------
+def escribir_atomico(ruta, datos):
+    """Temporal en el mismo directorio y rename: nunca queda un archivo a medias con fecha nueva
+    (tools/datos.mjs decide por fechas y lo daría por bueno)."""
+    ruta = Path(ruta)
+    temporal = ruta.with_name(ruta.name + ".parcial")
+    temporal.write_bytes(datos)
+    temporal.replace(ruta)
+
+
 def escribir_webp(ruta, rgb):
     """WebP sin pérdida (calidad > 100 en OpenCV): los tres canales quedan intactos."""
     ok, datos = cv2.imencode(".webp", np.ascontiguousarray(rgb[..., ::-1]), [cv2.IMWRITE_WEBP_QUALITY, 101])
     if not ok:
         raise RuntimeError(f"no se pudo codificar {ruta}")
-    Path(ruta).write_bytes(datos.tobytes())
+    escribir_atomico(ruta, datos.tobytes())
 
 
 def leer_webp(ruta):
@@ -176,8 +185,8 @@ def generar(osm_json, meta, dir_plano, dir_datos, transf):
         escribir_webp(Path(dir_plano) / archivo, img)
         print(f"  {archivo}: {img.shape[1]}×{img.shape[0]}")
     nombres, reg = calles(elems, ancho, alto)
-    Path(dir_datos, "calles.json").write_text(json.dumps(nombres, ensure_ascii=False) + "\n", encoding="utf-8")
-    Path(dir_datos, "calles.bin").write_bytes(codificar_calles(reg))
+    escribir_atomico(Path(dir_datos, "calles.json"), (json.dumps(nombres, ensure_ascii=False) + "\n").encode("utf-8"))
+    escribir_atomico(Path(dir_datos, "calles.bin"), codificar_calles(reg))
     por_capa = {c: sum(e["capa"] == c for e in elems) for c in CANAL}
     print(f"  elementos {por_capa} · calles.bin {len(reg)} tramos · calles.json {len(nombres)} nombres")
     return elems

@@ -83,7 +83,7 @@ def descargar(destino, bbox, forzar=False, abrir=urllib.request.urlopen, dormir=
         datos = json.loads(crudo)
     except ValueError as err:
         raise ValueError(f"Overpass no devolvió JSON: {crudo[:200]!r}") from err
-    if not isinstance(datos, dict) or "elements" not in datos:
+    if not isinstance(datos, dict) or not isinstance(datos.get("elements"), list):
         raise ValueError("la respuesta de Overpass no trae 'elements'")
     # un timeout o falta de memoria llega con HTTP 200, datos parciales y el error en "remark"
     if "error" in str(datos.get("remark", "")).lower():
@@ -139,8 +139,9 @@ def clasificar(tags):
 
 
 def _a_px(geometria, transf):
-    lat = np.array([g["lat"] for g in geometria], dtype=float)
-    lon = np.array([g["lon"] for g in geometria], dtype=float)
+    validas = [g for g in geometria if g is not None]  # Overpass pone null si no conoce la posición
+    lat = np.array([g["lat"] for g in validas], dtype=float)
+    lon = np.array([g["lon"] for g in validas], dtype=float)
     px, py = geo.grid_a_px(*geo.wgs84_a_grid(lat, lon, transf))
     return np.c_[px, py]
 
@@ -172,9 +173,9 @@ def unir_anillos(tramos, tolerancia=1e-6):
 
 def _lineas(el, transf, area):
     if el["type"] == "way":
-        linea = _a_px(el.get("geometry", []), transf)
-        if area and not np.allclose(linea[0], linea[-1]):
-            return []
+        linea = _a_px(el.get("geometry") or [], transf)
+        if area:
+            return [linea] if len(linea) >= 4 and np.allclose(linea[0], linea[-1]) else []
         return [linea] if len(linea) >= 2 else []
     tramos = [_a_px(m["geometry"], transf) for m in el.get("members", [])
               if m.get("type") == "way" and m.get("role") in ("outer", "inner") and m.get("geometry")]
