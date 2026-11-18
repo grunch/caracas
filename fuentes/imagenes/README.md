@@ -43,3 +43,23 @@ como "siglo XVIII", pero el pie la atribuye a Cornelio Aagaard, que sería del X
 Qué implica: las plazas de 1772–1843 van de tierra con fuente y sin arbolado (los árboles de plaza llegan
 con Guzmán Blanco); las ventanas coloniales son pocas pero **altas, con reja volada**; los altos con balcón
 van en las esquinas; hace falta el tipo "edificio de arcada" para conventos y hospitales (T40).
+
+## 1843 (a verificar) · Calle del centro con torre al fondo (`1843-banesco-calle-de-caracas`) → épocas 1843 y 1889
+
+Litografía a nivel de calle, la mejor referencia de fachadas hasta ahora. **Calle, autor y fecha sin
+confirmar**; la torre del fondo parece la de la Catedral.
+
+- **Frente continuo** a los dos lados, todas las casas alineadas, **acera angosta** de losa y calzada de
+  tierra o empedrado; sin árboles en la calle.
+- **Casas de un piso muy altas** (5–6 m de fachada): **ventanas verticales casi de piso a techo**, con
+  **reja volada sobre repisa moldurada** y guardapolvo arriba; una ventana cada 3–4 m, portón con marco.
+- **Cornisa moldurada continua y alero corto** de teja; **zócalo** marcado. Algunas con **pretil y
+  remates** (lado derecho): el paso de lo colonial a lo republicano.
+- **Casa de dos pisos en la esquina** (izquierda): **balcón volado de madera o hierro** en el alto, alero
+  ancho, ventana con reja de barrotes abajo y un adorno tallado sobre el portón.
+- La **torre de iglesia** domina la calle: tres o cuatro veces la altura de las casas.
+- Coche de caballos, gente a pie, un asta o poste alto.
+
+Qué implica: subir la altura de piso de las casas del centro (≈ 5 m de fachada, no 4,2), ventanas
+altas con reja volada y repisa como rasgo principal de colonial y republicano, cornisa continua, aceras
+desde mediados del XIX, y dos pisos con balcón en las esquinas (no repartidos al azar).
