@@ -1,0 +1,37 @@
+{
+ "nota": "Línea de tiempo (épocas 0..5). 'perfil' es el color de lo edificado en cada plano calzado (formato de calce_correlacion.callejidad); 'cierre_m' tapa rótulos y bordes, 'area_minima_m2' quita manchas y 'holgura_m' ensancha la máscara para absorber el error del calce. 'obras' solo dice lo que se ve en el plano.",
+ "escala": 2,
+ "escala_crece": 16,
+ "umbral": 0.5,
+ "epocas": [
+  {"año": 1578, "plano": "1578-commons-pimentel", "corto": "esquema de Pimentel (1578)",
+   "obras": "Pimentel dibuja 25 manzanas alrededor de la plaza, con la iglesia, las casas del cabildo, San Francisco y calles de 32 pies."},
+  {"año": 1772, "plano": "1772-pares-agi-exato-mapa", "corto": "Exato mapa (1772)",
+   "obras": "El plano marca en rojo lo edificado y en amarillo los solares y huertos; el damero ya llena el valle entre las quebradas y el Guaire.",
+   "perfil": {"canal": "a", "umbral": 150, "sentido": "mayor", "suavizado_px": 0.5, "suave": 3},
+   "cierre_m": 4, "area_minima_m2": 150, "holgura_m": 6},
+  {"año": 1843, "plano": "1843-nypl-jesurun-facsimil-muller-stapler", "corto": "plano de Jesurún (1843)",
+   "obras": "Jesurún rotula el Campo de Marte al sureste del casco.",
+   "perfil": {"canal": "L", "umbral": 185, "sentido": "menor", "suavizado_px": 3, "suave": 5},
+   "apertura_m": 4, "cierre_m": 5, "area_minima_m2": 600, "ancho_minimo_m": 14, "holgura_m": 6},
+  {"año": 1889, "plano": "1889-bnf-mestre", "corto": "plano de Mestre (1889)",
+   "obras": "Ya llegan el Ferrocarril La Guaira–Caracas y el Ferrocarril Central hacia Petare; el plano rotula el Capitolio y el Hipódromo.",
+   "perfil": {"alguna": [
+    {"condiciones": [{"canal": "b", "umbral": 148, "sentido": "mayor", "suavizado_px": 1, "suave": 1.5},
+                     {"canal": "L", "umbral": 185, "sentido": "mayor", "suavizado_px": 1, "suave": 5}]},
+    {"canal": "a", "umbral": 142, "sentido": "mayor", "suavizado_px": 1, "suave": 2}]},
+   "apertura_m": 3, "cierre_m": 4, "area_minima_m2": 300, "ancho_minimo_m": 14, "holgura_m": 5},
+  {"año": 1911, "plano": "1911-princeton-plano-de-caracas-razetti", "corto": "plano de Razetti (1911)",
+   "obras": "Razetti dibuja los tranvías eléctricos y el Hipódromo de El Paraíso.",
+   "perfil": {"alguna": [
+    {"condiciones": [{"canal": "L", "umbral": 182, "sentido": "menor", "suavizado_px": 1, "suave": 4},
+                     {"canal": "L", "umbral": 115, "sentido": "mayor", "suavizado_px": 1, "suave": 4},
+                     {"canal": "s", "umbral": 75, "sentido": "menor", "suavizado_px": 1, "suave": 4},
+                     {"canal": "b", "umbral": 147, "sentido": "menor", "suavizado_px": 1, "suave": 1.5},
+                     {"canal": "b", "umbral": 133, "sentido": "mayor", "suavizado_px": 1, "suave": 1.5}]},
+    {"canal": "a", "umbral": 155, "sentido": "mayor", "suavizado_px": 1, "suave": 3}]},
+   "apertura_m": 3, "cierre_m": 5, "area_minima_m2": 300, "ancho_minimo_m": 14, "holgura_m": 6},
+  {"año": 1936, "plano": "1936-archiveorg-caracas-dcn-hoja1", "corto": "plano del DCN (1936)",
+   "obras": "La Cartografía Nacional restituye la ciudad de fotos aéreas tomadas en marzo de 1936 y dibuja lo edificado casa por casa."}
+ ]
+}

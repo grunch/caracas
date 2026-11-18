@@ -21,6 +21,23 @@ describe('partesDeCiudad', () => {
     expect(() => partesDeCiudad({ ...json, techos: [[4, 3, 1, 0, 0]] })).toThrow(/vértices/)
   })
 
+  test('sin "vida" no agrega la parte', () => {
+    expect(partesDeCiudad(json).vida).toBeUndefined()
+  })
+
+  test('empaca la vida de cada techo como nace + 8·muere (Uint32, registro 4)', () => {
+    const p = partesDeCiudad({ ...json, vida: [[0, 1], [3, 0]] })
+    expect(p.vida.registro).toBe(4)
+    expect(p.vida.datos).toBeInstanceOf(Uint32Array)
+    expect(Array.from(p.vida.datos)).toEqual([8, 3])
+  })
+
+  test('rechaza una vida que no acompaña a los techos o que muere antes de nacer', () => {
+    expect(() => partesDeCiudad({ ...json, vida: [[0, 0]] })).toThrow(/vida/)
+    expect(() => partesDeCiudad({ ...json, vida: [[2, 1], [0, 0]] })).toThrow(/muere/)
+    expect(() => partesDeCiudad({ ...json, vida: [[8, 0], [0, 0]] })).toThrow(/época/)
+  })
+
   test('rechaza una cantidad impar de coordenadas', () => {
     expect(() => partesDeCiudad({ ...json, vertices: [1, 2, 3] })).toThrow(/pares/)
   })
