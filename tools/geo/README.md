@@ -116,3 +116,38 @@ Los residuos LOO que se reportan (metros sobre 1936) mezclan el error del calce 
 original: un plano 1:10.000 tiene ~10 m por milímetro de dibujo.
 
 Tests: `.venv/bin/python -m pytest tools/geo/tests -q`.
+
+## Esquinas (`esquinas.py`)
+
+En Caracas las direcciones se dan "de esquina a esquina", y el plano de 1936 rotula en rojo
+(cursiva terracota, casi siempre en diagonal en el ángulo de la manzana) el nombre de la mayoría
+de las esquinas, con la cota (▲ y metros) al lado. `tools/geo/esquinas/1936-esquinas.json` es el
+diccionario curado `nombre → píxel del cruce` (va a git):
+
+```json
+{"nombre": "La Torre", "px": [9088.0, 6754.0], "fuente": "plano DCN 1936", "verificado": true, "cota_m": 919.549, "notas": ""}
+```
+
+`px` es el cruce de los ejes de calle al que pertenece el rótulo (no el centro del texto), en
+píxeles del mosaico. `verificado: false` marca lo dudoso (rótulo cortado por la costura o tapado,
+cruce ambiguo, nombre que puede ser de lugar o de calle) y `notas` dice por qué. Los nombres se
+transcriben como dice el plano, corrigiendo solo erratas evidentes de imprenta ("Sanra" → "Santa",
+"Crisro" → "Cristo"); la errata queda anotada.
+
+```sh
+# 1. candidatos: rótulos rojos (umbral Lab + letras agrupadas), cruces (esqueleto de la clase calle
+#    + terreno libre/desconocido, que es donde caen las cotas) y asociación rótulo → cruce más cercano
+#    → $S/candidatos.json, $S/crops/NNNN.png (rótulo enderezado + contexto), $S/hoja-*.jpg, $S/vistas/
+$PY tools/geo/esquinas.py detectar --salida $S          # ventana de 3,2 km alrededor de la plaza
+
+# 2. lectura a ojo de las fichas → lecturas.json: {"<id>": {"nombre", "cota_m", "verificado",
+#    "notas", "px"} | {"descartar": "…"}, "manual-NNN": {… con "px"}}
+
+# 3. diccionario y lámina de control (la lámina no va a git)
+$PY tools/geo/esquinas.py componer --candidatos $S/candidatos.json --lecturas lecturas.json
+$PY tools/geo/esquinas.py qa --radio 3000               # → $D/qa-esquinas.jpg
+```
+
+El detector no lee: solo propone. La mitad larga del trabajo es mirar las fichas. En la ventana de
+1,5 km alrededor de la plaza salen ~450 candidatos; un tercio son trozos de curvas de nivel (también
+rojas) y letras de parroquia, que se descartan a mano.
