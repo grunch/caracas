@@ -54,6 +54,21 @@ test('de cerca carga las teselas finas que rodean lo que se mira', async ({ page
   await page.waitForFunction(() => window.lab.ciudad.U.uFinoOn.value.some((v) => v === 1), null, { timeout: 30000 })
 })
 
+test('la línea de tiempo arranca en la primera época y lleva la ciudad a la elegida', async ({ page }) => {
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  const hay = await hayDato(page, 'datos/crece.json', 'json')
+  test.skip(!hay, 'sin datos/crece.json (datos fuera del repo)')
+  const botones = page.locator('#epocas .años button:not(.andar)')
+  await expect(botones.first()).toHaveAttribute('aria-pressed', 'true')
+  const n = await botones.count()
+  await botones.nth(n - 1).click()
+  await expect(botones.nth(n - 1)).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.locator('#epocas .pie')).toContainText(await botones.nth(n - 1).textContent())
+  // la época de destino se fija y la ola arranca (cuánto tarda en llegar depende de la velocidad del render)
+  await page.waitForFunction((k) => window.lab.ciudad.U.uEpocaA.value === k && window.lab.ciudad.U.uOlaEpoca.value > 0, n - 1, { timeout: 20000 })
+})
+
 test('el relieve se hincha con la ola: acostado es liso, levantado aparece el Ávila', async ({ page }) => {
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
@@ -63,7 +78,8 @@ test('el relieve se hincha con la ola: acostado es liso, levantado aparece el Á
   expect(await page.evaluate(({ x, z }) => window.lab.sueloEn(x, z), AVILA)).toBe(0)
   expect(await page.evaluate(({ x, z }) => window.lab.relieve.alturaEn(x, z), AVILA)).toBeGreaterThan(300)
   await page.evaluate(() => window.lab.levantar(true))
-  await page.waitForFunction(({ x, z }) => window.lab.sueloEn(x, z) > 300, AVILA, { timeout: 15000 })
+  // la ola tarda 5 s en un equipo normal; con render por software y la máquina cargada, bastante más
+  await page.waitForFunction(({ x, z }) => window.lab.sueloEn(x, z) > 300, AVILA, { timeout: 60000 })
   // la cámara mira al suelo: su objetivo va a la altura del terreno
   await page.waitForTimeout(1500)
   const { y, suelo } = await page.evaluate(() => {

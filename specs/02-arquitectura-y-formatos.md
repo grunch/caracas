@@ -99,6 +99,16 @@ gzip(
 
 `crece.pak` (épocas) trae `manzanas, techos, muros, mueT, mueM`. `patios.pak`: `u32 n` + 2 arrays u16 en disposición *planar* (primero el byte bajo de todos, después el alto) → celdas de una grilla de 8 m con máscara de bits (árbol, aljibe…).
 
+**Caracas: `datos/ciudad.pak`** (lo escribe `tools/empacar-ciudad.mjs` desde el JSON del vectorizador):
+
+| parte | tipo | registro (bytes) | contenido |
+|---|---|---|---|
+| `vertices` | Float32 | 8 (px, py) | vértices de las huellas, en píxeles del mosaico de 1936 |
+| `techos` | Uint32 | 16 (4 u32) | `[primer vértice, cuántos, empacarTecho({pisos, estilo}), semilla]` (`src/ciudad.js`) |
+| `vida` *(opcional)* | Uint32 | 4 | una por techo, en el mismo orden: `nace + 8·muere` |
+
+`vida` sale de `tools/geo/epocas.py` (`"vida": [[nace, muere], …]` en el JSON). Épocas: 0 = 1578 (Pimentel), 1 = 1772 (*Exato mapa*), 2 = 1843 (Jesurún), 3 = 1889 (Mestre), 4 = 1911 (Razetti), 5 = 1936 (DCN). `nace` = primera época en que el techo existe; `muere` = primera época en que ya no está, 0 = no muere. Un techo se ve en la época `e` si `nace ≤ e` y (`muere = 0` o `e < muere`). Los techos de 1936 tienen `muere = 0`; al final van las casas de 1578 que no llegan a 1936, con `nace = 0`. Si el JSON no trae `vida`, el `.pak` no lleva esa parte. El lector (`src/pak.js`) rechaza las partes sin tipo, así que el visor tiene que declarar `vida: Uint32Array` antes de cargar un `.pak` que la traiga.
+
 ### `datos/relieve.bin`
 `Uint16[ w, h, alturas… ]`, con las alturas en **decímetros**. Se sube como textura half‑float (canal R) y el vertex shader la muestrea.
 
@@ -116,6 +126,12 @@ Marcas de la ciudad actual: `[{nombre, x, y, nivel, rio:bool, nota}]` (x,y en p�
             "corto":"plano de Latzina (1888)","obras":"Se abrió la Avenida de Mayo…",
             "casas":21220,"renovadas":593}, …]}
 ```
+Caracas (`tools/geo/epocas.py`): `plano` es la carpeta de `fuentes/mapas/`; `titulo`, `autor`, `fuente` (institución · URL) y `licencia` vienen de su `ficha.json`; `obras` aparece solo si el plano lo muestra; `casas` = techos visibles en esa época según `vida`. No hay `renovadas`. `celda_m` (8) es el lado de cada píxel de `plano/crece.png` en metros. Ese PNG
+se apoya en la esquina noroeste del mosaico de 1936: el píxel (fila i, columna j) cubre
+[j·8, (j+1)·8) m al este y [i·8, (i+1)·8) m al sur. Tiene ⌈ancho/8⌉ × ⌈alto/8⌉ píxeles; si el
+mosaico no mide un múltiplo de 8 m, la última columna y la última fila son parciales (se calculan con
+los puntos que caen dentro) y el PNG sobra unos metros al este y al sur, así que se coloca con
+`celda_m` y no estirándolo al mosaico. En R, desde qué época está edificado cada punto en esa época y en todas las siguientes, con la codificación "desde cuándo" de abajo (E = 6); G y B quedan en 0.
 
 ### Texturas (`plano/*.webp`)
 | archivo | uso |

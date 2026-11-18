@@ -10,9 +10,14 @@ public/plano/*.webp
 public/plano/f/
 public/datos/*.pak
 public/datos/*.bin
+# generados por tools/geo/epocas.py
+public/datos/crece.json
+public/plano/crece.png
 .env
 .claude/settings.local.json
 .venv/
 __pycache__/
 fuentes/derivados/
 .claude/worktrees/
+public/datos/manifiesto.json
+.cache/

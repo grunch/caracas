@@ -101,5 +101,14 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   goal.y = suelo(goal.x, goal.z)
   Object.assign(now, goal)
   aplicar()
-  return { goal, now, update, jump: (v) => { Object.assign(goal, v); goal.y = suelo(goal.x, goal.z); Object.assign(now, goal); aplicar() } }
+  /** Salta la cámara (sin animación) y pide cuadros: con el render quieto, si no, la vista no cambia. */
+  function jump(v) {
+    Object.assign(goal, v)
+    goal.y = suelo(goal.x, goal.z)
+    Object.assign(now, goal)
+    aplicar()
+    pedirCuadro(3)
+  }
+
+  return { goal, now, update, jump }
 }

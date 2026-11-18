@@ -27,20 +27,21 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 
 | ID | Tarea | Depende de | Listo cuando | Estado |
 |---|---|---|---|---|
-| T10 | **CI en GitHub Actions**: vitest, pytest (solo sintéticos), build y Playwright con datos de prueba | — | cada PR muestra checks verdes o rojos | ⏳ |
-| T11 | **Pipeline reproducible**: `npm run datos` corre todo el pipeline de 1936 (y luego el de las épocas) con caché por paso y verifica conteos esperados | T08 | desde los `original.tif`, un comando regenera `public/` idéntico (hash) | ⏳ |
+| T10 | **CI en GitHub Actions**: vitest, pytest (solo sintéticos), build y Playwright con datos de prueba | — | cada PR muestra checks verdes o rojos | ✅ #5 |
+| T11 | **Pipeline reproducible**: `npm run datos` corre todo el pipeline de 1936 (y luego el de las épocas) con caché por paso y verifica conteos esperados | T08 | desde los `original.tif`, un comando regenera `public/` idéntico (hash) | ✅ #6 |
 | T12 | **Fixture de datos chica** para E2E y CI: un recorte de 1 km² alrededor de la plaza (plano, `.pak`, suelo) generado por el pipeline | T11 | los E2E corren en CI sin los datos pesados | ⏳ |
 
 ## Fase 2 · Terminar lo que está en curso
 
 | ID | Tarea | Depende de | Listo cuando | Estado |
 |---|---|---|---|---|
-| T20 | Relieve, datos: transformación cuadrícula 1936 ⇄ WGS84 (`geo1936.py`), DEM Copernicus → `relieve.bin`, validado con las cotas de las esquinas | — | residuos de la transformación < 10 m; sesgo del DEM contra las cotas corregido | 🔄 |
-| T21 | Relieve, visor: terreno bajo el plano y la ciudad, casas apoyadas en su ancla, la ola hincha el terreno | T20 | el Ávila y El Calvario se ven; ninguna casa flota | 🔄 |
-| T22 | Calce de los planos de 1919, 1889, 1843 y 1772 sobre el de 1936 (GCPs + TPS) | — | residuos < 15 m en el centro; superposiciones de QA revisadas | 🔄 |
-| T23 | Época 1578: el plano de Pimentel codificado (25 manzanas, solares "casa") y casas coloniales generadas | — | 25 manzanas alrededor de la plaza, solo con casa donde Pimentel la dibuja | 🔄 |
-| T24 | Datos de épocas: máscaras por época, `nace`/`muere` por casa, `crece.json`, parte `vida` en `ciudad.pak` | T22, T23 | cada casa tiene su vida; conteos por época plausibles | 🔄 |
-| T25 | **Interfaz de la línea de tiempo**: botonera 1578 · 1772 · 1843 · 1889 · 1919 · 1936, la ola por época, ▶ que las recorre, pie con la fuente del plano | T24 | la ciudad crece hacia adelante como en BA | ⏳ |
+| T20 | Relieve, datos: transformación cuadrícula 1936 ⇄ WGS84 (`geo1936.py`), DEM Copernicus → `relieve.bin`, validado con las cotas de las esquinas | — | residuos de la transformación < 10 m; sesgo del DEM contra las cotas corregido | ✅ #8 |
+| T21 | Relieve, visor: terreno bajo el plano y la ciudad, casas apoyadas en su ancla, la ola hincha el terreno | T20 | el Ávila y El Calvario se ven; ninguna casa flota | ✅ #8 |
+| T22 | Calce de los planos de 1919, 1889, 1843 y 1772 sobre el de 1936 (GCPs + TPS) | — | residuos < 15 m en el centro; superposiciones de QA revisadas | ✅ #7 |
+| T23 | Época 1578: el plano de Pimentel codificado (25 manzanas, solares "casa") y casas coloniales generadas | — | 25 manzanas alrededor de la plaza, solo con casa donde Pimentel la dibuja | ✅ #9 |
+| T24 | Datos de épocas: máscaras por época, `nace`/`muere` por casa, `crece.json`, parte `vida` en `ciudad.pak` | T22, T23 | cada casa tiene su vida; conteos por época plausibles | ✅ #11 |
+| T25 | **Interfaz de la línea de tiempo**: botonera 1578 · 1772 · 1843 · 1889 · 1919 · 1936, la ola por época, ▶ que las recorre, pie con la fuente del plano | T24 | la ciudad crece hacia adelante como en BA | 🔄 #13 |
+| T25b | **El plano de cada año** sobre la hoja: los planos calzados (`fuentes/derivados/<año>/calzado.tif`) teselados por época, y la hoja cambia de plano con la ola | T25 | en 1843 la hoja muestra el Jesurún calzado, no el plano de 1936 | ⏳ |
 
 ## Fase 3 · Calidad del render
 
@@ -69,7 +70,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 |---|---|---|---|---|
 | T50 | "Lo de hoy": calles, vías y costa de OSM rasterizadas sobre el plano (usa `geo1936.py`) | T20 | con H se estampa en rojo la Caracas actual | ⏳ |
 | T51 | Nombres de las calles de hoy en un canvas 2D sobre la vista | T50 | etiquetas alineadas, sin choques | ⏳ |
-| T52 | **Esquinas**: leer del plano de 1936 los nombres en rojo de cada cruce (OCR asistido + curado) → diccionario esquina → píxel | — | ≥ 90 % de las esquinas del centro con nombre verificado | ⏳ |
+| T52 | **Esquinas**: leer del plano de 1936 los nombres en rojo de cada cruce (OCR asistido + curado) → diccionario esquina → píxel | — | ≥ 90 % de las esquinas del centro con nombre verificado | ✅ #14 |
 | T53 | Buscador: "de esquina a esquina" con el diccionario + Nominatim para direcciones modernas, con respuesta en prosa | T51, T52 | "De La Torre a Veroes" ubica en el plano | ⏳ |
 
 ## Fase 6 · Recorridos
