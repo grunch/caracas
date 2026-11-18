@@ -63,3 +63,23 @@ confirmar**; la torre del fondo parece la de la Catedral.
 Qué implica: subir la altura de piso de las casas del centro (≈ 5 m de fachada, no 4,2), ventanas
 altas con reja volada y repisa como rasgo principal de colonial y republicano, cornisa continua, aceras
 desde mediados del XIX, y dos pisos con balcón en las esquinas (no repartidos al azar).
+
+## 1852 · El mercado en la Plaza Mayor, hoy Plaza Bolívar (`1852-facebook-mercado-plaza-mayor`) → época 1843
+
+La plaza principal **era el mercado**: lo más importante que el modelo tiene que cambiar en el centro.
+Autor y obra de origen sin identificar.
+
+- **La plaza entera cubierta de puestos**: hileras de **toldos y tenderetes de lona a dos aguas** sobre
+  postes, sombrillas, cestas en el piso, burros con carga y una multitud. **Piso de tierra, sin árboles
+  ni jardines.**
+- **Arquerías de un piso rodeando la plaza** (las galerías o "canastillas" del mercado), con **portadas
+  monumentales de arco y frontón** en el medio de cada lado y en las esquinas.
+- A la derecha, un **edificio de dos pisos** con ventanas arriba y arcos abajo, tejado a cuatro aguas.
+- A la izquierda, casas de un piso con tejado y la **fachada barroca de una iglesia o capilla con
+  espadaña** asomando detrás; al fondo, las lomas.
+
+Qué implica: en las épocas 1772 y 1843 la Plaza Mayor va **sin jardines ni árboles**, de tierra, con
+las **arquerías perimetrales** y los puestos del mercado (hito nuevo para T40: "Mercado de la Plaza
+Mayor", con `muere` en 1889: Guzmán Blanco lo quita y hace la Plaza Bolívar ajardinada con la estatua,
+hacia 1874). Los jardines en X y los árboles de la plaza que hoy salen del plano de 1936 no deben verse
+antes de 1889.
