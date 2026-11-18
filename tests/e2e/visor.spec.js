@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+import { hayDato } from './datos.js'
 
 test('el visor arranca y expone window.lab', async ({ page }) => {
   const errores = []
@@ -45,7 +46,7 @@ test('Espacio sobre un botón con foco activa ese botón, no levanta la ciudad',
 test('la línea de tiempo arranca en la primera época y lleva la ciudad a la elegida', async ({ page }) => {
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
-  const hay = await page.evaluate(async () => (await fetch('datos/crece.json')).ok)
+  const hay = await hayDato(page, 'datos/crece.json', 'json')
   test.skip(!hay, 'sin datos/crece.json (datos fuera del repo)')
   const botones = page.locator('#epocas .años button:not(.andar)')
   await expect(botones.first()).toHaveAttribute('aria-pressed', 'true')

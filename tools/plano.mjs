@@ -6,7 +6,7 @@ import { mkdir, writeFile, readFile } from 'node:fs/promises'
 import path from 'node:path'
 import os from 'node:os'
 import sharp from 'sharp'
-import { grillaTeselas, nivelesLOD, planoDesdeMosaico, TESELA } from './plano-lib.mjs'
+import { grillaTeselas, nivelesLOD, planoDesdeMosaico, ciudadConPlano, TESELA } from './plano-lib.mjs'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
 const SALIDA = path.join(RAIZ, 'public', 'plano')
@@ -39,9 +39,12 @@ await writeFile(path.join(SALIDA, 'laminas.json'), JSON.stringify({ ancho, alto,
 
 if (mosaicoJson) {
   const archivoCiudad = path.join(RAIZ, 'public', 'datos', 'ciudad.json')
-  const ciudad = JSON.parse(await readFile(archivoCiudad, 'utf8'))
+  // si falta (es una salida de este paso), se arma desde cero
+  const ciudad = await readFile(archivoCiudad, 'utf8').then(JSON.parse, (e) => {
+    if (e.code === 'ENOENT') return null
+    throw e
+  })
   const plano = planoDesdeMosaico(JSON.parse(await readFile(mosaicoJson, 'utf8')))
-  const { _nota, ...resto } = ciudad
-  await writeFile(archivoCiudad, JSON.stringify({ ...resto, plano }, null, 2) + '\n')
+  await writeFile(archivoCiudad, JSON.stringify(ciudadConPlano(ciudad, plano), null, 2) + '\n')
   console.log('  public/datos/ciudad.json actualizado')
 }

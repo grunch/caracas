@@ -7,6 +7,25 @@ y Node (`npm ci`). Los datos (originales y derivados) no van a git.
 
 Entradas: `fuentes/mapas/1936-archiveorg-caracas-dcn-hoja{1,2}/original.tif` (TIFF sin comprimir).
 
+## Todo de una vez
+
+```sh
+npm run datos                  # solo los pasos viejos (como make), verifica conteos y escribe el manifiesto
+npm run datos -- --desde costura   # fuerza un paso y todo lo que le sigue
+npm run datos -- --forzar          # todo desde cero
+npm run datos -- --verificar       # solo verifica conteos (tools/datos-esperados.json) y rehace el manifiesto
+npm run datos -- --marcar          # da los datos actuales por generados con el código actual (sin correr nada)
+```
+
+`tools/datos.mjs` define los pasos de abajo con sus entradas, salidas y código; un paso corre si le falta
+una salida, si alguna entrada es más nueva, si la produce un paso que corre o si **cambió su código**
+(se compara el sha256 de sus scripts con el guardado en `.cache/datos/firmas.json`, no la fecha: un
+`git checkout` le cambia la fecha a todo). La primera vez no hay firmas y corre todo; si los datos ya
+están al día, `--marcar` las guarda sin correr nada. Las teselas de `public/plano/f/` y
+`public/datos/ciudad.json` son salidas del paso `plano`. Al final compara los conteos
+con `tools/datos-esperados.json` (sale con error si se van de la tolerancia) y escribe
+`public/datos/manifiesto.json` con el sha256 de cada archivo publicado. La plaza se lee de `mosaico.json`.
+
 ## Pasos
 
 ```sh
@@ -39,7 +58,9 @@ $PY tools/geo/vectorizar.py $D/segmentacion/mosaico/clases-costura.png $D/ciudad
 # 6. empacar: techos → public/datos/ciudad.pak
 node tools/empacar-ciudad.mjs $D/ciudad-1936.json
 
-# 7. plano: LOD y teselas del mosaico cosido → public/plano/, y bloque "plano" de public/datos/ciudad.json
+# 7. suelo: máscara RGBA para el modo color (R agua · G vegetación · B edificado · A manzana)
+node tools/suelo.mjs $D/segmentacion/mosaico/clases-costura.png
+# 8. plano: LOD y teselas del mosaico cosido → public/plano/, y bloque "plano" de public/datos/ciudad.json
 node tools/plano.mjs $D/mosaico-costura.tif $D/mosaico.json
 
 # 8. calce con el mundo: cuadrícula 1936 ⇄ UTM 19N con los puntos de control OSM de
@@ -173,3 +194,38 @@ Los residuos LOO que se reportan (metros sobre 1936) mezclan el error del calce 
 original: un plano 1:10.000 tiene ~10 m por milímetro de dibujo.
 
 Tests: `.venv/bin/python -m pytest tools/geo/tests -q`.
+
+## Esquinas (`esquinas.py`)
+
+En Caracas las direcciones se dan "de esquina a esquina", y el plano de 1936 rotula en rojo
+(cursiva terracota, casi siempre en diagonal en el ángulo de la manzana) el nombre de la mayoría
+de las esquinas, con la cota (▲ y metros) al lado. `tools/geo/esquinas/1936-esquinas.json` es el
+diccionario curado `nombre → píxel del cruce` (va a git):
+
+```json
+{"nombre": "La Torre", "px": [9088.0, 6754.0], "fuente": "plano DCN 1936", "verificado": true, "cota_m": 919.549, "notas": ""}
+```
+
+`px` es el cruce de los ejes de calle al que pertenece el rótulo (no el centro del texto), en
+píxeles del mosaico. `verificado: false` marca lo dudoso (rótulo cortado por la costura o tapado,
+cruce ambiguo, nombre que puede ser de lugar o de calle) y `notas` dice por qué. Los nombres se
+transcriben como dice el plano, corrigiendo solo erratas evidentes de imprenta ("Sanra" → "Santa",
+"Crisro" → "Cristo"); la errata queda anotada.
+
+```sh
+# 1. candidatos: rótulos rojos (umbral Lab + letras agrupadas), cruces (esqueleto de la clase calle
+#    + terreno libre/desconocido, que es donde caen las cotas) y asociación rótulo → cruce más cercano
+#    → $S/candidatos.json, $S/crops/NNNN.png (rótulo enderezado + contexto), $S/hoja-*.jpg, $S/vistas/
+$PY tools/geo/esquinas.py detectar --salida $S          # ventana de 3,2 km alrededor de la plaza
+
+# 2. lectura a ojo de las fichas → lecturas.json: {"<id>": {"nombre", "cota_m", "verificado",
+#    "notas", "px"} | {"descartar": "…"}, "manual-NNN": {… con "px"}}
+
+# 3. diccionario y lámina de control (la lámina no va a git)
+$PY tools/geo/esquinas.py componer --candidatos $S/candidatos.json --lecturas lecturas.json
+$PY tools/geo/esquinas.py qa --radio 3000               # → $D/qa-esquinas.jpg
+```
+
+El detector no lee: solo propone. La mitad larga del trabajo es mirar las fichas. En la ventana de
+1,5 km alrededor de la plaza salen ~450 candidatos; un tercio son trozos de curvas de nivel (también
+rojas) y letras de parroquia, que se descartan a mano.

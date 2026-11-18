@@ -19,3 +19,5 @@ public/plano/crece.png
 __pycache__/
 fuentes/derivados/
 .claude/worktrees/
+public/datos/manifiesto.json
+.cache/
