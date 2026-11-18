@@ -139,3 +139,16 @@ describe('resolverOriginales', () => {
     expect(() => resolverOriginales([{ id: 'a', entradas: ['original:x'], salidas: [] }], { x: ['ficha.json'] })).toThrow(/original.*x/)
   })
 })
+
+import { fichasDeEpocas } from '../../tools/datos-lib.mjs'
+
+describe('fichasDeEpocas', () => {
+  test('la ficha de cada plano de la línea de tiempo (sus créditos van a crece.json)', () => {
+    const config = { epocas: [{ año: 1578, plano: '1578-a' }, { año: 1936, plano: '1936-b' }] }
+    expect(fichasDeEpocas(config)).toEqual(['fuentes/mapas/1578-a/ficha.json', 'fuentes/mapas/1936-b/ficha.json'])
+  })
+
+  test('sin épocas, ninguna', () => {
+    expect(fichasDeEpocas({})).toEqual([])
+  })
+})

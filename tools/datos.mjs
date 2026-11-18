@@ -7,7 +7,7 @@ import { createHash } from 'node:crypto'
 import { createReadStream } from 'node:fs'
 import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas, resolverOriginales } from './datos-lib.mjs'
+import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas, resolverOriginales, fichasDeEpocas } from './datos-lib.mjs'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
 const PY = process.env.PY ?? '.venv/bin/python'
@@ -169,7 +169,13 @@ async function archivosDeCalces() {
 
 async function pasosCompletos() {
   const teselas = salidasDeTeselas(await leerJsonSiHay('public/plano/laminas.json'))
-  const pasos = PASOS.map((p) => (p.id === 'plano' ? { ...p, salidas: [...p.salidas, ...teselas] } : p))
+  // epocas.py copia a crece.json (público) los créditos y la licencia de la ficha de cada plano
+  const fichas = fichasDeEpocas((await leerJsonSiHay('tools/geo/epocas/epocas.json')) ?? {})
+  const pasos = PASOS.map((p) => {
+    if (p.id === 'plano') return { ...p, salidas: [...p.salidas, ...teselas] }
+    if (p.id === 'epocas') return { ...p, entradas: [...new Set([...p.entradas, ...fichas])] }
+    return p
+  })
   return resolverOriginales(pasos, await archivosDeCalces())
 }
 

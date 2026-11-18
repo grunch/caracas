@@ -71,3 +71,6 @@ export function resolverOriginales(pasos, archivos) {
   }
   return pasos.map((p) => ({ ...p, entradas: p.entradas.map(resolver) }))
 }
+
+/** Las fichas de los planos de la línea de tiempo (tools/geo/epocas/epocas.json): epocas.py copia sus créditos. */
+export const fichasDeEpocas = (config) => (config.epocas ?? []).map((e) => `fuentes/mapas/${e.plano}/ficha.json`)
