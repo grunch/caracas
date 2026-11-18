@@ -1,6 +1,10 @@
 import { test, expect } from '@playwright/test'
 import { hayDato } from './datos.js'
 
+// Vista chica: estos tests dibujan la ciudad levantada varias veces y en CI el render es por software
+// (SwiftShader); a tamaño completo le quitan la CPU a los tests del visor, que corren en paralelo.
+test.use({ viewport: { width: 400, height: 300 } })
+
 const listo = async (page) => {
   await page.goto('/?sinintro&capture')
   await page.waitForFunction(() => window.lab?.ready === true)
