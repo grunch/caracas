@@ -117,7 +117,7 @@ test('la línea de tiempo arranca en la primera época y lleva la ciudad a la el
 })
 
 test('al elegir 1843 la hoja recibe el plano de Jesurún calzado: la ola va hacia su textura', async ({ page }) => {
-  await page.goto('/?sinintro')
+  await page.goto('/?sinintro&planos')
   await page.waitForFunction(() => window.lab?.ready === true)
   const hay = (await hayDato(page, 'datos/crece.json', 'json')) && (await hayDato(page, 'plano/1843/chico.webp', 'image/webp'))
   test.skip(!hay, 'sin crece.json o sin los planos de época (datos fuera del repo)')
@@ -199,4 +199,13 @@ test('con lo de hoy, los nombres de las calles se dibujan sobre la vista y se bo
   await expect(page.locator('#calles')).toHaveCSS('pointer-events', 'none')
   await page.keyboard.press('KeyH')
   await page.waitForFunction(() => window.lab.calles.cuantas === 0, null, { timeout: 60000 })
+})
+
+test('sin ?planos, la hoja muestra siempre el plano de 1936 (no se pega el plano viejo encima)', async ({ page }) => {
+  const pedidos = []
+  page.on('request', (r) => pedidos.push(r.url()))
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  await page.waitForTimeout(1500)
+  expect(pedidos.filter((u) => u.includes('plano/epocas.json'))).toEqual([])
 })

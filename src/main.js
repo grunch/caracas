@@ -163,7 +163,9 @@ let planos = null
 // el plano calzado de cada época (plano/epocas.json, tools/planos-epocas.mjs); sin él, siempre 1936
 // (con un tope: si el índice no responde, la línea de tiempo arranca igual)
 const ESPERA_INDICE_MS = 5000
-const indicePlanos = Promise.race([
+// Apagado por omisión: el plano viejo pegado como un parche sobre el de 1936 se ve mal. Queda detrás de
+// ?planos hasta rehacerlo (T25b): en tinta, la hoja muestra siempre el plano de 1936.
+const indicePlanos = !params.has('planos') ? Promise.resolve({ planos: [] }) : Promise.race([
   fetch('plano/epocas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))),
   new Promise((_, mal) => setTimeout(() => mal(new Error('plano/epocas.json no respondió')), ESPERA_INDICE_MS)),
 ]).catch((e) => { console.warn(`planos de época: ${e.message}`); return { planos: [] } })
