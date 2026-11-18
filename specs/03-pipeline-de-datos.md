@@ -31,7 +31,7 @@ Consejo práctico para el nuevo proyecto: probar primero un **clasificador por t
 ## 3. Vectorización
 
 - **Manzanas**: polígonos a partir de la máscara (todo lo que no es calle ni río), simplificados con Douglas‑Peucker → parte `manzanas`.
-- **Lotes**: subdivisión sintética de cada manzana en lotes de frente angosto y fondo largo, perpendiculares a la calle (en BA, ~8,66 m de frente colonial; 17.143 lotes). *(inferido)*
+- **Lotes**: subdivisión sintética de cada manzana en lotes de frente angosto y fondo largo, perpendiculares a la calle (en BA, ~8,66 m de frente colonial; 17.143 lotes). *(inferido)* En Caracas: `tools/geo/lotes.py`, lotes rectos de 9–14 m de frente en el marco girado de cada manzana (ver `tools/geo/README.md`, «Los lotes»).
 - **Edificado por lote**: intersección del lote con la máscara B → la(s) huella(s) construida(s). Cada huella → un **techo** (registro u16: posición, medidas, orientación, pisos, estilo, semilla).
 - **Muros**: los bordes de las huellas que dan a la calle o a un patio → **muros** (fachadas y medianeras), con su largo y "desde dónde lo tapa el vecino" (para dibujar avisos en las medianeras que asoman).
 - **Árboles**: detectar los símbolos de árbol (o rellenar las zonas de quinta con Poisson disk) → `arboles` (x, y, radio).

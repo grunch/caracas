@@ -54,6 +54,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T34 | Árboles 3D desde `arboles.json` (5.926) y los patios con vegetación, en color | — | árboles en plazas, patios y quebradas | ✅ #19 |
 | T35 | Luz y acabado: sombras, luz tibia y sombra azulada, bruma, contorno por profundidad y grano de papel en tinta | — | el look de grabado de `specs/04` | ⏳ |
 | T36 | **Color sin rótulos**: máscara de la tinta del plano que es letra, cifra o símbolo (`tools/geo/rotulos.py` → `plano/rotulos.webp`); en color, ahí el plano no se marca | T07 | en color no se leen "PALACIO FEDERAL", las cotas ni las letras de parroquia; los bordes de manzana siguen | 🔄 #28 |
+| T37 | Lotes rectos: cada manzana se parte en solares rectangulares perpendiculares a su calle (antes, cuñas que se juntaban en el centro) | T04 | en el centro los techos son tiras rectas, sin abanicos | 🔄 #26 |
 
 ## Fase 4 · Contenido
 
@@ -97,4 +98,4 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 - **Derechos**: nada se publica (T73) sin la revisión del responsable; cada fuente conserva su licencia en `ficha.json`.
 - **Datos fuera de git**: sin T11 y T12, un cambio en el pipeline puede romper el sitio sin que ningún test lo vea.
 - **Conflictos en `src/material.js` y `src/main.js`**: varias tareas los tocan; conviene separar el shader en módulos (vértice, suelo, fachadas) dentro de T35 o antes, si los conflictos se repiten.
-- **Rendimiento**: 59 mil casas con fachadas procedurales; medir en cada tarea de la fase 3.
+- **Rendimiento**: 34 mil casas con fachadas procedurales; medir en cada tarea de la fase 3.
