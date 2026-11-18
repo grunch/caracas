@@ -43,6 +43,41 @@ test('Espacio sobre un botón con foco activa ese botón, no levanta la ciudad',
   await expect(page.locator('#alzar')).toHaveText('Levantar la ciudad')
 })
 
+test('la H prende y apaga lo de hoy: botón, leyenda y estampa', async ({ page }) => {
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  const boton = page.locator('#hoy')
+  const leyenda = page.locator('#leyenda')
+  await expect(boton).toHaveAttribute('aria-pressed', 'false')
+  await expect(leyenda).toBeHidden()
+  await page.keyboard.press('KeyH')
+  await expect(boton).toHaveAttribute('aria-pressed', 'true')
+  await expect(leyenda).toBeVisible()
+  await expect(leyenda.getByRole('link', { name: /OpenStreetMap/ })).toHaveAttribute('href', 'https://www.openstreetmap.org/copyright')
+  await page.waitForFunction(() => window.lab.ciudad.U.uHoy.value === 1)
+  await boton.click()
+  await expect(boton).toHaveAttribute('aria-pressed', 'false')
+  await expect(leyenda).toBeHidden()
+  await page.waitForFunction(() => window.lab.ciudad.U.uHoy.value === 0)
+})
+
+test('la H no hace nada con el foco en un botón', async ({ page }) => {
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  await page.locator('#color').focus()
+  await page.keyboard.press('KeyH')
+  await expect(page.locator('#hoy')).toHaveAttribute('aria-pressed', 'false')
+})
+
+test('lo de hoy baja su textura de lejos la primera vez que se prende', async ({ page }) => {
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  const hay = await hayDato(page, 'plano/hoy-lejos.webp', 'image/webp')
+  test.skip(!hay, 'sin plano/hoy-lejos.webp (dato pesado fuera de git)')
+  await page.keyboard.press('KeyH')
+  await page.waitForFunction(() => window.lab.ciudad.U.tHoyLejos.value.image?.width === 2048, null, { timeout: 30000 })
+})
+
 test('de cerca carga las teselas finas que rodean lo que se mira', async ({ page }) => {
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
