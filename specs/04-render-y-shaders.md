@@ -48,6 +48,8 @@ El corazón del sitio es **un material compartido** que hace casi todo en la GPU
   - patios y fondos: tierra oscura con pasto ralo; matas pintadas lejos de la cámara (`uMatas`) y árboles 3D reales cerca.
   - río: marrón grisáceo con oleaje suave y playa mojada en la costa natural; **murallón** de piedra donde se le ganó tierra.
   - plazas y parques nuevos: césped.
+
+*Caracas (implementado, `src/shader/suelo.js`):* el plano queda bajo el color como un dibujo tenue (el suelo se oscurece hasta un 40 % donde hay tinta), pero **sin sus rótulos**: donde `uRotulos` (`plano/rotulos.webp`) marca letra, cifra o símbolo, la tinta no oscurece. Quedan los bordes de manzana y de calle, los contornos, las curvas de nivel y los senderos; se van los nombres de edificios y esquinas, las cotas, las letras de las parroquias y el punteado del tranvía. Solo vale para el plano de 1936: donde la hoja muestra el plano calzado de otra época, la máscara no se aplica. En tinta el plano se ve entero.
 - En color, el contorno casi desaparece y a lo lejos todo se aclara con **bruma**.
 
 *Caracas (implementado, `src/shader/valle.js` + `src/shader/suelo.js`): **el valle antes de la ciudad**.* En color, donde la época que rige en ese punto (`epocaAqui`, así que cambia con la ola) todavía no urbanizó (`crece.png` G, ver specs/02), el suelo no es el plano pintado sino campo, y **el dibujo del plano no se ve** (ni manzanas, ni calles, ni rótulos de lo que vendrá). En tinta no cambia nada.

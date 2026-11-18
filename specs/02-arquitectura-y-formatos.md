@@ -195,6 +195,7 @@ El visor carga `crece.png` **sin mipmaps** (son etapas codificadas: promediadas,
 | `primero.webp` 1024, `chico.webp` 2048, `medio-4k.webp`, `medio.webp` 8192, `f/{i}-{j}.webp` 3072 | el escaneo, en LOD |
 | `<año>/chico.webp` 2048, `<año>/medio.webp` 4096, `<año>/grande.webp` 8192 + `epocas.json` | el plano calzado de cada época, con alfa (ver abajo) |
 | `suelo.webp` / `suelo-2k.webp` | máscara RGB: **R río · G patio · B edificado** (del plano base) |
+| `rotulos.webp` 4096 / `rotulos-2k.webp` | *Caracas:* un canal, sin pérdida: **cuánto del texel es rótulo** del plano de 1936 (nombres, cotas, letras de parroquia, punteado del tranvía). En color, ahí el dibujo del plano no se marca (`tools/geo/rotulos.py` → `tools/rotulos-lib.mjs`) |
 | `calles.webp` / `-2k` | R desde cuándo hay piedra, G desde cuándo es lisa (madera/asfalto), B cuánto del punto es calle |
 | `crece.webp` / `-2k` | por punto, "desde qué etapa": R urbanizado/ganado al río, G fondos, B edificado |
 | `despeje.webp` / `-2k` | R demolido (avenida/plaza abierta), G verde nuevo, B calzada de avenidas nuevas |

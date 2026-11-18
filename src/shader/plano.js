@@ -30,18 +30,26 @@ export const GLSL_PLANO = /* glsl */ `
     return c;
   }
 
-  /** Un plano de época (RGBA, cubre el rectángulo r de la hoja) sobre base. */
-  vec3 planoDeEpoca(sampler2D t, vec4 r, vec2 hoja, vec3 base) {
+  /** Un plano de época (RGBA, cubre el rectángulo r de la hoja) sobre base; en tapa, cuánto la tapa. */
+  vec3 planoDeEpoca(sampler2D t, vec4 r, vec2 hoja, vec3 base, out float tapa) {
     vec2 local = (hoja - r.xy) / (r.zw - r.xy);
     float adentro = step(0.0, local.x) * step(local.x, 1.0) * step(0.0, local.y) * step(local.y, 1.0);
     vec4 p = texture2D(t, vec2(local.x, 1.0 - local.y));
+    tapa = p.a * adentro;
     return mix(base, p.rgb, p.a * adentro);
   }
+
+  /** Cuánto del último planoEn() es el plano de otra época y no el de 1936 (lo usa el suelo en color). */
+  float planoViejo = 0.0;
 
   vec3 planoEn(vec2 hoja) {
     vec3 c = plano1936(hoja);
     float dist = length((hoja * uHoja - uPlaza) * uMetro); // metros a la plaza, como aInfo.x de las casas
-    return mix(planoDeEpoca(uPlanoDe, uPlanoDeRect, hoja, c), planoDeEpoca(uPlanoA, uPlanoARect, hoja, c), frenteEpoca(dist));
+    float frente = frenteEpoca(dist), tapaDe, tapaA;
+    vec3 de = planoDeEpoca(uPlanoDe, uPlanoDeRect, hoja, c, tapaDe);
+    vec3 a = planoDeEpoca(uPlanoA, uPlanoARect, hoja, c, tapaA);
+    planoViejo = mix(tapaDe, tapaA, frente);
+    return mix(de, a, frente);
   }
 
   /** Cuánta tinta hay en el plano en ese punto: 0 papel, 1 trazo. */
