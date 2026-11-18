@@ -158,6 +158,24 @@ test('los árboles llegan después de la ciudad: una malla instanciada con un á
   expect(malla).toEqual({ instanciada: true, count: bytes / 8, enEscena: true, mismoColor: true })
 })
 
+test('el material de la ciudad compila con las fachadas, en tinta y en color', async ({ page }) => {
+  const errores = []
+  page.on('console', (m) => { if (m.type() === 'error' && /shader|WebGLProgram|GLSL/i.test(m.text())) errores.push(m.text()) })
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  const dosCuadros = () => page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
+  if (await hayDato(page, 'datos/ciudad.pak', 'octet-stream')) {
+    // con la ciudad: sus paredes traen dónde está cada punto de la pared (aPared)
+    await page.waitForFunction(() => window.lab.scene.children.some((m) => m.geometry?.attributes?.aPared?.itemSize === 2), null, { timeout: 60000 })
+  }
+  await page.evaluate(() => window.lab.pedirCuadro(4))
+  await dosCuadros()
+  await page.evaluate(() => window.lab.alternarColor(true))
+  await page.waitForFunction(() => window.lab.ciudad.U.uColor.value === 1)
+  await dosCuadros()
+  expect(errores).toEqual([])
+})
+
 test('con lo de hoy, los nombres de las calles se dibujan sobre la vista y se borran al apagarlo', async ({ page }) => {
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
