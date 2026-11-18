@@ -13,7 +13,7 @@ import { GLSL_RELIEVE, uniformsRelieve } from './relieve.js'
 import { SIN_LINEA_DE_TIEMPO } from './epocas.js'
 import { GLSL_AZAR } from './shader/comun.js'
 import { GLSL_EPOCAS, GLSL_CRECE } from './shader/epocas.js'
-import { GLSL_PLANO } from './shader/plano.js'
+import { GLSL_PLANO, uniformsPlanoEpocas } from './shader/plano.js'
 import { GLSL_SUELO } from './shader/suelo.js'
 import { GLSL_FACHADA } from './shader/fachada.js'
 import { GLSL_HOY } from './shader/hoy.js'
@@ -72,6 +72,7 @@ export function crearMaterialCiudad({
     uFino: { value: Array.from({ length: RANURAS }, () => mapa) },
     uFinoRect: { value: Array.from({ length: RANURAS }, () => new Vector4(0, 0, 1, 1)) },
     uFinoOn: { value: new Array(RANURAS).fill(0) },
+    ...uniformsPlanoEpocas(), // el plano de cada época (src/planos.js): uPlanoDe/A y sus rectángulos
     // la línea de tiempo: de qué época a cuál, y el frente de esa ola en metros (hasta que arranca, la reserva)
     uEpocaDe: { value: SIN_LINEA_DE_TIEMPO },
     uEpocaA: { value: SIN_LINEA_DE_TIEMPO },

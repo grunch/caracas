@@ -8,6 +8,8 @@ import { createReadStream } from 'node:fs'
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas } from './datos-lib.mjs'
+import { salidasPlanosEpocas } from './planos-epocas-lib.mjs'
+import { leerCalzados } from './planos-epocas.mjs'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
 const PY = process.env.PY ?? '.venv/bin/python'
@@ -94,6 +96,13 @@ const PASOS = [
     cmd: () => ['node', 'tools/plano.mjs', `${D}/mosaico-costura.tif`, `${D}/mosaico.json`],
   },
   {
+    // los planos viejos calzados sobre 1936 (tools/geo/calce.py, fuera de este pipeline): una textura con
+    // alfa por época; entradas y salidas según los calzado.json que haya (se suman en pasosCompletos)
+    id: 'planos-epocas', entradas: [], salidas: [],
+    codigo: ['tools/planos-epocas.mjs', 'tools/planos-epocas-lib.mjs'],
+    cmd: () => ['node', 'tools/planos-epocas.mjs'],
+  },
+  {
     // la única descarga del pipeline: solo si falta la caché (o con --descargar); sin código propio,
     // así un cambio en hoy.py no vuelve a pedirle a Overpass
     id: 'hoy-osm', entradas: [], salidas: [OSM_HOY], codigo: [],
@@ -114,10 +123,16 @@ function argumentos(argv) {
   return a
 }
 
-/** Los pasos con las teselas que corresponden como salidas del plano. */
+/** Los pasos con las teselas del plano y los planos calzados de cada época que corresponden. */
 async function pasosCompletos() {
   const teselas = salidasDeTeselas(await leerJsonSiHay('public/plano/laminas.json'))
-  return PASOS.map((p) => (p.id === 'plano' ? { ...p, salidas: [...p.salidas, ...teselas] } : p))
+  const calzados = await leerCalzados(path.join(RAIZ, 'fuentes', 'derivados'))
+  const deCalzados = calzados.flatMap(({ año }) => ['tif', 'json'].map((x) => `fuentes/derivados/${año}/calzado.${x}`))
+  return PASOS.map((p) => {
+    if (p.id === 'plano') return { ...p, salidas: [...p.salidas, ...teselas] }
+    if (p.id === 'planos-epocas') return { ...p, entradas: deCalzados, salidas: salidasPlanosEpocas(calzados) }
+    return p
+  })
 }
 
 // firmas del código de cada paso: si cambia un script, ese paso (y lo que sigue) se vuelve a correr

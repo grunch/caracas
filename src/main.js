@@ -10,6 +10,8 @@ import { acercar } from './animar.js'
 import { texturasHoy, HOY_CERCA } from './hoy.js'
 import { crearTeselasFinas } from './teselas.js'
 import { crearLineaDeTiempo, crearSecuencia, escalaCrece } from './epocas.js'
+import { crearPlanosDeEpoca, planoDeEpoca } from './planos.js'
+import { SIN_PLANO } from './shader/plano.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
 import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo } from './relieve.js'
@@ -151,26 +153,45 @@ cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vid
 // --- la línea de tiempo: 1578 → 1936; cada época llega como una ola desde la plaza ---
 const DURACION_EPOCA_S = 3.5
 const OLA_EPOCA_MAX_M = 9000 // más que la distancia de la plaza a la esquina más lejana de la hoja
+// la ola espera al plano de su época (el nivel chico) hasta este tiempo; si no llega, sale igual con el
+// de 1936 debajo y el plano viejo aparece cuando llegue
+const ESPERA_PLANO_MS = 2500
 let lineaDeTiempo = null
 let secuencia = null
-fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))).then(({ epocas, celda_m }) => {
-  const U = ciudad.U
-  // arranca en la primera época sin ola; después, una ola por vez (lo elegido durante una, espera)
-  U.uEpocaDe.value = U.uEpocaA.value = 0
-  U.uOlaEpoca.value = OLA_EPOCA_MAX_M
-  secuencia = crearSecuencia((de, a) => {
-    U.uEpocaDe.value = de
-    U.uEpocaA.value = a
-    U.uOlaEpoca.value = 0
-    pedirCuadro(3)
-  })
-  lineaDeTiempo = crearLineaDeTiempo({ contenedor: document.getElementById('epocas'), epocas, alElegir: (i) => secuencia.elegir(i) })
-  cargarTextura('plano/crece.png', false).then((t) => {
-    const { width: cols, height: rows } = t.image
-    U.uCreceEscala.value.fromArray(escalaCrece(meta.plano, { cols, rows }, celda_m ?? 8))
-    ponerTextura(U.uCrece, t)
-  }).catch((e) => console.warn(`crece: ${e.message}`))
-}).catch((e) => console.warn(`épocas: ${e.message}`)) // sin crece.json (p. ej. la demo de CI): la ciudad entera, sin línea de tiempo
+let planos = null
+// el plano calzado de cada época (plano/epocas.json, tools/planos-epocas.mjs); sin él, siempre 1936
+const indicePlanos = fetch('plano/epocas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))))
+  .catch((e) => { console.warn(`planos de época: ${e.message}`); return { planos: [] } })
+Promise.all([fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))), indicePlanos])
+  .then(([{ epocas, celda_m }, indice]) => {
+    const U = ciudad.U
+    planos = crearPlanosDeEpoca({
+      planos: indice.planos, hoja: meta.plano, cargar: (url) => cargarTextura(url, true), U, pedirCuadro,
+      vacio: SIN_PLANO, liviano, maxTextura,
+    })
+    const planoDe = (i) => planoDeEpoca(epocas[i]?.año, indice.planos)?.año ?? null
+    // arranca en la primera época sin ola; después, una ola por vez (lo elegido durante una, espera)
+    U.uEpocaDe.value = U.uEpocaA.value = 0
+    U.uOlaEpoca.value = OLA_EPOCA_MAX_M
+    planos.usar(planoDe(0), planoDe(0))
+    secuencia = crearSecuencia((de, a) => {
+      const esperar = new Promise((ok) => setTimeout(ok, ESPERA_PLANO_MS))
+      Promise.race([planos.preparar(planoDe(a)), esperar]).then(() => {
+        planos.usar(planoDe(de), planoDe(a))
+        planos.preparar(planoDe(a + 1)) // ▶ las recorre en orden: la siguiente, precargada
+        U.uEpocaDe.value = de
+        U.uEpocaA.value = a
+        U.uOlaEpoca.value = 0
+        pedirCuadro(3)
+      })
+    })
+    lineaDeTiempo = crearLineaDeTiempo({ contenedor: document.getElementById('epocas'), epocas, alElegir: (i) => secuencia.elegir(i) })
+    cargarTextura('plano/crece.png', false).then((t) => {
+      const { width: cols, height: rows } = t.image
+      U.uCreceEscala.value.fromArray(escalaCrece(meta.plano, { cols, rows }, celda_m ?? 8))
+      ponerTextura(U.uCrece, t)
+    }).catch((e) => console.warn(`crece: ${e.message}`))
+  }).catch((e) => console.warn(`épocas: ${e.message}`)) // sin crece.json (p. ej. la demo de CI): la ciudad entera, sin línea de tiempo
 
 function levantar(arriba = olaObjetivo === 0) {
   olaObjetivo = arriba ? olaMax : 0
@@ -282,6 +303,7 @@ window.lab = {
   get teselas() { return teselas },
   get arboles() { return arboles },
   get lineaDeTiempo() { return lineaDeTiempo },
+  get planos() { return planos },
 }
 
 /** Papel con una cuadrícula de 100 m, hasta que exista plano/primero.webp. */
