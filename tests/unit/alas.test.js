@@ -269,6 +269,10 @@ describe('alinearHuella', () => {
     expect(alinearHuella([[0, 3], [12, 3], [12, 30], [0, 30]], 12, 30)).toEqual([[0, 3], [12, 3], [12, 30], [0, 30]])
   })
 
+  test('dos vértices llevados a la misma esquina dejan uno: la esquina no se pierde', () => {
+    expect(alinearHuella([[0, 1], [1, 0], [12, 0], [12, 40], [0, 40]], 12, 40, { izq: true })).toEqual([[0, 0], [12, 0], [12, 40], [0, 40]])
+  })
+
   test('si al alinear deja de ser un polígono, queda como vino', () => {
     const fina = [[0, 0.2], [12, 0.4], [12, 1.2], [0, 1.1]]
     expect(alinearHuella(fina, 12, 1.2)).toBe(fina)
@@ -313,6 +317,21 @@ describe('extruirTechos con casas de patio', () => {
     const g = extruirTechos(datos(MODERNO), coords)
     expect(cuenta(g, CUBIERTA.PATIO) + cuenta(g, CUBIERTA.SOLAR)).toBe(0)
     expect(cuenta(g, CUBIERTA.AZOTEA)).toBeGreaterThanOrEqual(4)
+  })
+
+  test('cuando no es de patio, el techo cubre también lo que la huella sobresale del rectángulo del lote', () => {
+    const saliente = [[0, 0], [12, 0], [12, 14], [13, 14], [13, 17], [12, 17], [12, 40], [0, 40]]
+    const d = { ...datos(MODERNO), vertices: Float32Array.from(saliente.flat().map((m) => m / METRO)), techos: Uint32Array.from([0, 8, empacarTecho({ pisos: 1, estilo: MODERNO }), 21]) }
+    const g = extruirTechos(d, coords)
+    let techado = 0
+    for (let t = 0; t < g.indices.length; t += 3) {
+      const [i, j, k] = [g.indices[t], g.indices[t + 1], g.indices[t + 2]]
+      if (g.cubiertas[i * 4 + 3] !== CUBIERTA.AZOTEA || g.normales[i * 3 + 1] < 0.5) continue
+      const p = (v) => [g.posiciones[v * 3], g.posiciones[v * 3 + 2]]
+      const [a, b, c] = [p(i), p(j), p(k)]
+      techado += Math.abs((b[0] - a[0]) * (c[1] - a[1]) - (c[0] - a[0]) * (b[1] - a[1])) / 2
+    }
+    expect(techado).toBeCloseTo(12 * 40 + 3, 4)
   })
 
   test('una casa simple (marco sin alas) se techa entera, con la crujía de su manzana', () => {

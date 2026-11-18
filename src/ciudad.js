@@ -173,11 +173,14 @@ export function alinearHuella(anillo, ancho, fondo, calles = {}) {
     calles.izq && cerca(u, 0) ? 0 : calles.der && cerca(u, ancho) ? ancho : u,
     cerca(v, 0) ? 0 : calles.fondo && cerca(v, fondo) ? fondo : v,
   ])
-  // fuera los repetidos y los que quedan en medio de un tramo recto
-  const n = llevado.length
-  const limpio = llevado.filter((p, k) => {
-    const [a, b] = [llevado[(k + n - 1) % n], llevado[(k + 1) % n]]
-    if (Math.hypot(p[0] - a[0], p[1] - a[1]) < 1e-4) return false
+  // fuera los repetidos (dos vértices llevados a la misma esquina) y, después, los que quedan en medio de un tramo recto
+  const unicos = llevado.filter((p, k) => {
+    const a = llevado[(k + llevado.length - 1) % llevado.length]
+    return Math.hypot(p[0] - a[0], p[1] - a[1]) >= 1e-4
+  })
+  const n = unicos.length
+  const limpio = unicos.filter((p, k) => {
+    const [a, b] = [unicos[(k + n - 1) % n], unicos[(k + 1) % n]]
     return Math.abs((b[0] - a[0]) * (p[1] - a[1]) - (b[1] - a[1]) * (p[0] - a[0])) > 1e-6 || (p[0] - a[0]) * (b[0] - p[0]) + (p[1] - a[1]) * (b[1] - p[1]) < 0
   })
   return limpio.length >= 3 && Math.abs(areaConSigno(limpio)) > 0.5 * Math.abs(areaConSigno(anillo)) ? limpio : anillo
@@ -185,10 +188,12 @@ export function alinearHuella(anillo, ancho, fondo, calles = {}) {
 
 /**
  * La casa en el marco que trae el dato (tools/geo/alas.py): el frente sobre la línea de fachada de su
- * cuadra. Con alas, el rectángulo del lote es el del dato; sin alas (casa simple), el de la huella.
+ * cuadra. Con alas, el rectángulo del lote es el del dato (sin los salientes de la huella, que cubren las
+ * alas del borde); sin alas (casa simple, o la etapa en que la casa ya no es de patio), el de la huella entera.
  */
-function proyectarEnMarco(casa) {
-  const { eu, ev, calles, alas, crujia } = casa.marco
+function proyectarEnMarco(casa, conAlas = casa.marco.alas.length > 0) {
+  const { eu, ev, calles, crujia } = casa.marco
+  const alas = conAlas ? casa.marco.alas : []
   let { origen: o, ancho, fondo } = casa.marco
   let anillo = casa.huella.map(([x, z]) => [(x - o[0]) * eu[0] + (z - o[1]) * eu[1], (x - o[0]) * ev[0] + (z - o[1]) * ev[1]])
   if (!alas.length) {
@@ -210,7 +215,11 @@ function proyectarEnMarco(casa) {
 
 /** El frente y el marco del lote de una casa, con su huella en ese marco; null si no da un polígono. */
 function proyectar(casa, numero, indice) {
-  if (casa.huella && casa.marco) return proyectarEnMarco(casa)
+  if (casa.huella && casa.marco) {
+    const lote = proyectarEnMarco(casa)
+    // para las etapas en que no es de patio, el rectángulo de la huella entera: el techo cubre también sus salientes
+    return lote && lote.alas.length ? { ...lote, entero: proyectarEnMarco(casa, false) } : lote
+  }
   const rect = casa.huella && rectanguloMinimo(casa.huella)
   if (!rect || rect.area < 1e-6) return null
   const libres = casa.muere === 0 ? ladosLibres(rect, indice, numero) : [1, 1, 1, 1]
@@ -228,9 +237,11 @@ function planDeEtapa(casa, etapa, { marco, libres, lleno, alas, crujia }) {
     ancho: marco.ancho, fondo: marco.fondo, estilo: etapa.estilo, pisos: etapa.pisos, semilla: casa.semilla, nace: etapa.nace,
     conAlero: etapa.conAlero, conPretil: etapa.conPretil,
   }
-  if (alas?.length && esDePatio(etapa.estilo, casa.semilla, etapa.nace)) return planDeAlas({ ...comun, alas })
-  return planDeTecho({ ...comun, libres, lleno, crujia })
+  return alas?.length ? planDeAlas({ ...comun, alas }) : planDeTecho({ ...comun, libres, lleno, crujia })
 }
+
+/** El lote con que se levanta una etapa: el de las alas si en ella la casa es de patio; si no, el de la huella entera. */
+const loteDeEtapa = (casa, etapa, lote) => (lote.entero && !esDePatio(etapa.estilo, casa.semilla, etapa.nace) ? lote.entero : lote)
 
 /** Devuelve arrays planos (posiciones, normales, info, vidas, anclas, paredes, cubiertas, historias, indices); sin three.js de por medio. */
 export function extruirTechos(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M } = {}) {
@@ -242,7 +253,8 @@ export function extruirTechos(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M 
     const lote = proyectar(casa, numero, indice)
     if (!lote) return
     for (const etapa of casa.etapas) {
-      alzarCasa({ anillo: lote.anillo, plan: planDeEtapa(casa, etapa, lote), libres: lote.libres }, escritor(b, casa, etapa, lote.marco))
+      const suyo = loteDeEtapa(casa, etapa, lote)
+      if (suyo) alzarCasa({ anillo: suyo.anillo, plan: planDeEtapa(casa, etapa, suyo), libres: suyo.libres }, escritor(b, casa, etapa, suyo.marco))
     }
   })
   const salida = {}
