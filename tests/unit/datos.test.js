@@ -152,3 +152,11 @@ describe('fichasDeEpocas', () => {
     expect(fichasDeEpocas({})).toEqual([])
   })
 })
+
+describe('resolverOriginales sin exigir', () => {
+  test('con exigir: false, lo que falta queda como está (para --verificar y --marcar)', () => {
+    const pasos = [{ id: 'a', entradas: ['original:x', 'original:y'], salidas: [] }]
+    const [p] = resolverOriginales(pasos, { x: ['original.tif'] }, { exigir: false })
+    expect(p.entradas).toEqual(['fuentes/mapas/x/original.tif', 'original:y'])
+  })
+})

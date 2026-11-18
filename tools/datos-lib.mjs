@@ -59,13 +59,15 @@ export function salidasDeTeselas(laminas) {
 
 /**
  * Cambia cada entrada `original:<carpeta>` por el `original.*` de esa carpeta de fuentes/mapas/
- * (la extensión varía según el escaneo). `archivos`: { carpeta: [nombres de archivo] }.
+ * (la extensión varía según el escaneo). `archivos`: { carpeta: [nombres de archivo] }. Con
+ * `exigir: false`, lo que no se encuentra queda como está (para modos que no regeneran).
  */
-export function resolverOriginales(pasos, archivos) {
+export function resolverOriginales(pasos, archivos, { exigir = true } = {}) {
   const resolver = (e) => {
     if (!e.startsWith('original:')) return e
     const carpeta = e.slice('original:'.length)
     const original = (archivos[carpeta] ?? []).find((n) => /^original\.[a-z0-9]+$/i.test(n))
+    if (!original && !exigir) return e // sin regenerar (--verificar, --marcar) los originales no hacen falta
     if (!original) throw new Error(`datos: no hay original.* en fuentes/mapas/${carpeta}`)
     return `fuentes/mapas/${carpeta}/${original}`
   }

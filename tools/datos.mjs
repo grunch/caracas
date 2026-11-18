@@ -167,7 +167,8 @@ async function archivosDeCalces() {
   return archivos
 }
 
-async function pasosCompletos() {
+/** `regenerar`: si se va a planificar una regeneración (solo ahí se exigen los escaneos originales). */
+async function pasosCompletos({ regenerar = true } = {}) {
   const teselas = salidasDeTeselas(await leerJsonSiHay('public/plano/laminas.json'))
   // epocas.py copia a crece.json (público) los créditos y la licencia de la ficha de cada plano
   const fichas = fichasDeEpocas((await leerJsonSiHay('tools/geo/epocas/epocas.json')) ?? {})
@@ -176,7 +177,7 @@ async function pasosCompletos() {
     if (p.id === 'epocas') return { ...p, entradas: [...new Set([...p.entradas, ...fichas])] }
     return p
   })
-  return resolverOriginales(pasos, await archivosDeCalces())
+  return resolverOriginales(pasos, await archivosDeCalces(), { exigir: regenerar })
 }
 
 // firmas del código de cada paso: si cambia un script, ese paso (y lo que sigue) se vuelve a correr
@@ -232,7 +233,8 @@ async function verificar(pasos) {
 }
 
 const opciones = argumentos(process.argv.slice(2))
-let pasos = await pasosCompletos()
+const regenerar = !opciones.verificar && !opciones.marcar
+let pasos = await pasosCompletos({ regenerar })
 const firmas = await firmasActuales(pasos)
 if (opciones.marcar) {
   // los datos actuales se dan por generados con el código actual (p. ej. al adoptar este comando)
@@ -252,7 +254,7 @@ if (opciones.marcar) {
     await guardarFirmas({ ...((await leerJsonSiHay(FIRMAS)) ?? {}), [id]: firmas[id] })
   }
 }
-pasos = await pasosCompletos() // el plano pudo cambiar la grilla de teselas
+pasos = await pasosCompletos({ regenerar }) // el plano pudo cambiar la grilla de teselas
 const errores = await verificar(pasos)
 if (errores.length) {
   console.error(`\nconteos fuera de lo esperado:\n  ${errores.join('\n  ')}`)
