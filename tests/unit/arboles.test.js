@@ -11,6 +11,8 @@ const datos = {
   y: new Uint16Array([500, 400]),
   radio: new Float32Array([4, 2.5]),
   nace: new Uint16Array([0, 3]),
+  muere: new Uint16Array([2, 0]),
+  silvestre: new Uint8Array([1, 0]),
 }
 
 describe('instanciasArboles', () => {
@@ -21,9 +23,18 @@ describe('instanciasArboles', () => {
     expect([...inst.posiciones]).toEqual([0, 0, 50, -50])
     expect([...inst.radios]).toEqual([4, 2.5])
     expect([...inst.nace]).toEqual([0, 3])
+    expect([...inst.muere]).toEqual([2, 0])
+    expect([...inst.silvestre]).toEqual([1, 0])
     expect(inst.semillas.length).toBe(2)
     expect([...instanciasArboles(datos, coords).semillas]).toEqual([...inst.semillas])
     expect(inst.semillas[0]).not.toBe(inst.semillas[1])
+  })
+
+  test('datos sin muere ni silvestre (un arboles.bin viejo ya decodificado): nadie muere, ninguno es silvestre', () => {
+    const { muere, silvestre, ...viejos } = datos
+    const inst = instanciasArboles(viejos, coords)
+    expect([...inst.muere]).toEqual([0, 0])
+    expect([...inst.silvestre]).toEqual([0, 0])
   })
 })
 
@@ -55,5 +66,17 @@ describe('crearArboles', () => {
     expect(vertexShader).toContain('sueloEn(')
     expect(vertexShader).toContain('aArbol')
     expect(vertexShader).toMatch(/epocaAqui/)
+  })
+
+  test('cada instancia lleva nace, muere, semilla y silvestre; el shader la esconde cuando muere', () => {
+    const a = malla.geometry.attributes.aArbol
+    expect(a.itemSize).toBe(4)
+    expect([a.array[0], a.array[1], a.array[3]]).toEqual([0, 2, 1])
+    expect([a.array[4], a.array[5], a.array[7]]).toEqual([3, 0, 0])
+    expect(malla.material.vertexShader).toMatch(/vivoEn\(aArbol\.xy/)
+  })
+
+  test('el monte (los silvestres) solo se ve en color: en tinta el plano queda como estaba', () => {
+    expect(malla.material.vertexShader).toMatch(/mix\(1\.0, uColor, aArbol\.w\)/)
   })
 })

@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import {
-  codificarArboles, naceArbol, casasQueMueren, techosQueQuedan, bajoUnTecho, desdeEnCrece, desdeDelEntorno, dentroOCerca,
+  codificarArboles, naceArbol, esDePlaza, naceEnPlaza, casasQueMueren, techosQueQuedan, bajoUnTecho, desdeEnCrece, desdeDelEntorno, dentroOCerca,
 } from '../../tools/arboles-lib.mjs'
 import { decodificarArboles } from '../../src/arboles.js'
 
@@ -112,5 +112,36 @@ describe('naceArbol', () => {
   test('nunca aparece dentro de una casa que todavía está en pie: espera a que muera', () => {
     expect(naceArbol({ x: 5, y: 5, r: 4 }, { desde: () => 0, casas })).toBe(3)
     expect(naceArbol({ x: 5, y: 5, r: 4 }, { desde: () => 5, casas })).toBe(5)
+  })
+})
+
+describe('esDePlaza: los árboles de plaza y de calle no son coloniales', () => {
+  // 1 calle · 2 patio · 3 edificado · 5 verde · 8 cerro (tools/geo/segmentar_clases.py)
+  const medidas = { pasoPx: 2, maxPx: 60 }
+  const cantero = (x, y) => Math.hypot(x - 100, y - 100) < 10
+
+  test('un cantero rodeado de calle (una plaza) sí', () => {
+    const plaza = (x, y) => (cantero(x, y) ? 5 : 1)
+    expect(esDePlaza(plaza, 100, 100, medidas)).toBe(true)
+  })
+
+  test('un jardín de patio, rodeado de patio y casas, no', () => {
+    const patio = (x, y) => (cantero(x, y) ? 5 : x < 100 ? 2 : 3)
+    expect(esDePlaza(patio, 100, 100, medidas)).toBe(false)
+  })
+
+  test('el contorno de tinta del cantero (que se lee como cerro) no cuenta: se sigue mirando', () => {
+    const plaza = (x, y) => (cantero(x, y) ? 5 : Math.hypot(x - 100, y - 100) < 14 ? 8 : 1)
+    expect(esDePlaza(plaza, 100, 100, medidas)).toBe(true)
+  })
+
+  test('un árbol del campo, sin ciudad alrededor, no', () => {
+    expect(esDePlaza(() => 8, 100, 100, medidas)).toBe(false)
+  })
+
+  test('naceEnPlaza: en plaza no antes de 1889 (época 3); los demás y los que nacen después, igual', () => {
+    expect(naceEnPlaza(0, true)).toBe(3)
+    expect(naceEnPlaza(4, true)).toBe(4)
+    expect(naceEnPlaza(1, false)).toBe(1)
   })
 })
