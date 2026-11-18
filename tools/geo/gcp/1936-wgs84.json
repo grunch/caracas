@@ -1,0 +1,236 @@
+{
+ "descripcion": "Puntos de control cuadrícula DCN 1936 (mosaico a 0,5 m/px) ⇄ WGS84. lat/lon: centroide del polígono OSM (UTM 19N) consultado en noviembre de 2026; px/py: el mismo rasgo en fuentes/derivados/1936/mosaico.tif, medido a ojo sobre recortes con el contorno OSM superpuesto.",
+ "fuente": "© colaboradores de OpenStreetMap, ODbL 1.0 (https://www.openstreetmap.org/copyright)",
+ "crs": "EPSG:32619",
+ "puntos": [
+  {
+   "nombre": "Plaza Bolívar",
+   "osm": "way/295080406",
+   "lat": 10.5059993,
+   "lon": -66.9146252,
+   "px": 8968.0,
+   "py": 6839.0,
+   "nota": "centro de la plaza"
+  },
+  {
+   "nombre": "Panteón Nacional",
+   "osm": "way/253790141",
+   "lat": 10.5131506,
+   "lon": -66.9125613,
+   "px": 9408.6,
+   "py": 5251.6,
+   "nota": "centro del edificio"
+  },
+  {
+   "nombre": "Plaza La Pastora",
+   "osm": "way/237468620",
+   "lat": 10.5144916,
+   "lon": -66.9185188,
+   "px": 8110.1,
+   "py": 4963.5,
+   "nota": "centro de la plaza"
+  },
+  {
+   "nombre": "Plaza Las Mercedes",
+   "osm": "way/354178060",
+   "lat": 10.5102596,
+   "lon": -66.913651,
+   "px": 9175.2,
+   "py": 5894.8,
+   "nota": "centro de la plaza"
+  },
+  {
+   "nombre": "Plaza Capuchinos",
+   "osm": "way/217819699",
+   "lat": 10.4995457,
+   "lon": -66.9239176,
+   "px": 6934.8,
+   "py": 8267.4,
+   "nota": "baricentro del triángulo; el contorno de hoy es más grande"
+  },
+  {
+   "nombre": "Teatro Municipal",
+   "osm": "way/158624810",
+   "lat": 10.5020453,
+   "lon": -66.9174769,
+   "px": 8349.5,
+   "py": 7714.0,
+   "nota": "centro de la sala oval"
+  },
+  {
+   "nombre": "Basílica de Santa Teresa",
+   "osm": "way/216619661",
+   "lat": 10.5017376,
+   "lon": -66.9154606,
+   "px": 8791.5,
+   "py": 7777.2,
+   "nota": "centro del templo"
+  },
+  {
+   "nombre": "Plaza Sucre (Catia; en 1936, Plaza La Libertad)",
+   "osm": "way/181459452",
+   "lat": 10.5168325,
+   "lon": -66.9457029,
+   "px": 2184.1,
+   "py": 4452.2,
+   "nota": "centro de la plaza"
+  },
+  {
+   "nombre": "Plaza Pérez Bonalde (Catia)",
+   "osm": "way/220397393",
+   "lat": 10.5094411,
+   "lon": -66.9475474,
+   "px": 1768.5,
+   "py": 6089.4,
+   "nota": "centro de la rotonda"
+  },
+  {
+   "nombre": "Plaza Madariaga (El Paraíso)",
+   "osm": "way/217699488",
+   "lat": 10.4902737,
+   "lon": -66.9241915,
+   "px": 6893.3,
+   "py": 10330.4,
+   "nota": "medido en el vértice norte del parque"
+  },
+  {
+   "nombre": "Iglesia San José",
+   "osm": "way/988022003",
+   "lat": 10.5128043,
+   "lon": -66.9070452,
+   "px": 10625.0,
+   "py": 5322.1,
+   "nota": "centro de la nave"
+  },
+  {
+   "nombre": "Quinta de Anauco",
+   "osm": "way/232072818",
+   "lat": 10.5119906,
+   "lon": -66.8992419,
+   "px": 12327.9,
+   "py": 5515.3,
+   "nota": "centro de la casa"
+  },
+  {
+   "nombre": "Iglesia Inmaculada Concepción (Las Delicias)",
+   "osm": "way/385013164",
+   "lat": 10.4952435,
+   "lon": -66.8761273,
+   "px": 17414.6,
+   "py": 9212.5,
+   "nota": "dudoso: el contorno OSM no coincide con el templo dibujado"
+  }
+ ],
+ "transformacion": {
+  "modelo": "similitud",
+  "centro_grid": [
+   1367.35,
+   329.6384615384616
+  ],
+  "matriz": [
+   [
+    1.0006089738050785,
+    -0.005047487815943441
+   ],
+   [
+    0.005047487815943441,
+    1.0006089738050785
+   ]
+  ],
+  "traslacion": [
+   728013.8506376287,
+   1162164.171919345
+  ],
+  "escala": 1.000621704537986,
+  "rotacion_grados": 0.28902128963524537
+ },
+ "residuos": {
+  "n": 13,
+  "rms_m": 5.09,
+  "max_m": 8.77,
+  "por_punto": [
+   {
+    "nombre": "Plaza Bolívar",
+    "de_m": -1.75,
+    "dn_m": 0.1,
+    "loo_m": 1.9
+   },
+   {
+    "nombre": "Panteón Nacional",
+    "de_m": -6.04,
+    "dn_m": 2.7,
+    "loo_m": 7.27
+   },
+   {
+    "nombre": "Plaza La Pastora",
+    "de_m": -3.16,
+    "dn_m": -0.47,
+    "loo_m": 3.51
+   },
+   {
+    "nombre": "Plaza Las Mercedes",
+    "de_m": -4.0,
+    "dn_m": 0.96,
+    "loo_m": 4.48
+   },
+   {
+    "nombre": "Plaza Capuchinos",
+    "de_m": -2.66,
+    "dn_m": 1.06,
+    "loo_m": 3.18
+   },
+   {
+    "nombre": "Teatro Municipal",
+    "de_m": 0.35,
+    "dn_m": 0.29,
+    "loo_m": 0.5
+   },
+   {
+    "nombre": "Basílica de Santa Teresa",
+    "de_m": 0.65,
+    "dn_m": 2.37,
+    "loo_m": 2.67
+   },
+   {
+    "nombre": "Plaza Sucre (Catia; en 1936, Plaza La Libertad)",
+    "de_m": 8.71,
+    "dn_m": 1.01,
+    "loo_m": 12.11
+   },
+   {
+    "nombre": "Plaza Pérez Bonalde (Catia)",
+    "de_m": 1.51,
+    "dn_m": -0.08,
+    "loo_m": 2.1
+   },
+   {
+    "nombre": "Plaza Madariaga (El Paraíso)",
+    "de_m": 5.0,
+    "dn_m": -5.16,
+    "loo_m": 8.4
+   },
+   {
+    "nombre": "Iglesia San José",
+    "de_m": -1.49,
+    "dn_m": 4.79,
+    "loo_m": 5.6
+   },
+   {
+    "nombre": "Quinta de Anauco",
+    "de_m": -4.01,
+    "dn_m": -3.25,
+    "loo_m": 6.05
+   },
+   {
+    "nombre": "Iglesia Inmaculada Concepción (Las Delicias)",
+    "de_m": 6.89,
+    "dn_m": -4.3,
+    "loo_m": 14.7
+   }
+  ]
+ },
+ "dejando_uno_fuera": {
+  "rms_m": 6.86,
+  "max_m": 14.7
+ }
+}

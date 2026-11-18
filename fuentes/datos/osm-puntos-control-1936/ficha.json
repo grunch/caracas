@@ -1,0 +1,12 @@
+{
+  "titulo": "Posiciones actuales de 13 lugares de Caracas (puntos de control del calce 1936 ⇄ WGS84)",
+  "tipo": "puntos de control",
+  "autor": "Colaboradores de OpenStreetMap",
+  "institucion": "OpenStreetMap Foundation",
+  "url_fuente": "https://www.openstreetmap.org/copyright",
+  "licencia": "Open Database License (ODbL) 1.0",
+  "atribucion_requerida": "© colaboradores de OpenStreetMap",
+  "dominio_publico": false,
+  "uso": "tools/geo/gcp/1936-wgs84.json guarda cada lugar con su id de OSM; tools/geo/geo1936.py ajusta con ellos la transformación de la cuadrícula de 1936 a UTM 19N",
+  "notas": "Consultas puntuales (Overpass, Nominatim, API 0.6) con User-Agent genérico. La misma atribución hará falta para la capa «lo de hoy» (T50)."
+}

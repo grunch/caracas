@@ -1,0 +1,13 @@
+{
+  "titulo": "Copernicus DEM GLO-30, hoja Copernicus_DSM_COG_10_N10_00_W067_00_DEM",
+  "tipo": "modelo de elevación (DSM, 30 m)",
+  "autor": "DLR e.V. y Airbus Defence and Space GmbH, bajo el programa Copernicus",
+  "institucion": "Unión Europea y Agencia Espacial Europea (ESA)",
+  "url_descarga": "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N10_00_W067_00_DEM/Copernicus_DSM_COG_10_N10_00_W067_00_DEM.tif",
+  "url_licencia": null,
+  "licencia": "© DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved",
+  "atribucion_requerida": "© DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved",
+  "dominio_publico": false,
+  "uso": "tools/geo/relieve.py lo remuestrea a 10 m sobre la cuadrícula de 1936, le quita los edificios (apertura morfológica) y lo corrige con las cotas del plano → public/datos/relieve.bin (derivado, fuera de git)",
+  "notas": "Según el PR #8, la licencia del Copernicus DEM GLO-30 permite uso, copia y redistribución libres y gratuitos con esta atribución. Falta enlazar el texto oficial de la licencia (url_licencia) y mostrar la atribución en el «Acerca» del sitio (T44) antes de publicar."
+}

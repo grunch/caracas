@@ -9,9 +9,12 @@ import { acercar } from './animar.js'
 import { crearTeselasFinas } from './teselas.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
+import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo } from './relieve.js'
 
 const params = new URLSearchParams(location.search)
 const COLOR_FONDO = 0x1d1a17
+const EXAGERACION = 1.3 // el valle se lee mejor con el relieve un poco exagerado
+const SUBDIVISION_HOJA = [384, 306] // la hoja se hincha con el relieve (≈ 24 m por cuadro)
 
 const meta = await fetch('datos/ciudad.json')
   .then((r) => { if (!r.ok) throw new Error(`datos/ciudad.json: ${r.status}`); return r.json() })
@@ -52,15 +55,31 @@ scene.add(new HemisphereLight(0xfff4e0, 0x6b5a48, 1.6))
 const sol = new DirectionalLight(0xfff1d6, 2.2)
 sol.position.set(-1200, 2000, 900)
 scene.add(sol)
-const ciudad = crearMaterialCiudad({ plano: meta.plano, metro: meta.plano.metro, mapa: cuadriculaProvisoria() })
+// el relieve: sus uniforms van en el material; sin relieve.bin la hoja queda lisa
+const relieveU = uniformsRelieve(hoja)
+relieveU.uExageracion.value = Number(params.get('exagerar')) || EXAGERACION
+let relieve = null
+const ciudad = crearMaterialCiudad({ plano: meta.plano, metro: meta.plano.metro, mapa: cuadriculaProvisoria(), relieve: relieveU })
 
-// --- la hoja del plano: el suelo, con el mismo material (pisos = 0 en aInfo) ---
-const suelo = new PlaneGeometry(hoja.ancho, hoja.alto).rotateX(-Math.PI / 2)
+// --- la hoja del plano: el suelo, con el mismo material (pisos = 0 en aInfo), subdividida para
+// apoyarse en el relieve ---
+const suelo = new PlaneGeometry(hoja.ancho, hoja.alto, ...SUBDIVISION_HOJA).rotateX(-Math.PI / 2)
 suelo.translate(hoja.x0 + hoja.ancho / 2, 0, hoja.z0 + hoja.alto / 2)
 suelo.setAttribute('aInfo', new BufferAttribute(new Float32Array(suelo.attributes.position.count * 4), 4))
+suelo.setAttribute('aAncla', new BufferAttribute(new Float32Array(suelo.attributes.position.count * 2), 2))
 scene.add(new Mesh(suelo, ciudad.material))
 
 cargarPlano().catch(() => { /* todavía no hay escaneo procesado: queda la cuadrícula */ })
+cargarRelieve().catch((e) => console.warn(`relieve: ${e.message}`))
+
+async function cargarRelieve() {
+  const r = await fetch('datos/relieve.bin')
+  if (!r.ok) throw new Error(`datos/relieve.bin: ${r.status}`)
+  relieve = crearRelieve(decodificarRelieve(await r.arrayBuffer()), hoja)
+  ponerRelieve(relieveU, relieve)
+  document.getElementById('alzar').hidden = false
+  pedirCuadro(3)
+}
 
 /**
  * Carga progresiva: primero.webp (1024) para el primer cuadro, después chico (2048) y medio
@@ -108,10 +127,11 @@ fetch('plano/laminas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Er
 // --- la ciudad y la ola ---
 const DURACION_OLA_S = 5
 let olaObjetivo = 0
-let olaMax = 0
+// la ola llega hasta la esquina más lejana de la hoja (el terreno se hincha en toda ella)
+let olaMax = Math.hypot(Math.max(-hoja.x0, hoja.x0 + hoja.ancho), Math.max(-hoja.z0, hoja.z0 + hoja.alto)) + ciudad.U.uAnchoOla.value
 cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array }).then((datos) => {
   const g = geometriaCiudad(datos, coords)
-  olaMax = g.boundingSphere.center.length() + g.boundingSphere.radius + 400
+  olaMax = Math.max(olaMax, g.boundingSphere.center.length() + g.boundingSphere.radius + 400)
   scene.add(new Mesh(g, ciudad.material))
   document.getElementById('alzar').hidden = false
   pedirCuadro(3)
@@ -150,7 +170,10 @@ addEventListener('keydown', (e) => {
   if (e.code === 'KeyC' && !e.metaKey && !e.ctrlKey) alternarColor()
 })
 
-const cam = crearCamara(camera, renderer.domElement, { pedirCuadro, hoja })
+// la altura del suelo tal como se dibuja: la cámara mira siempre al terreno
+const sueloEn = (x, z) => alturaSuelo(relieve, x, z,
+  { ola: ciudad.U.uOla.value, anchoOla: ciudad.U.uAnchoOla.value, exageracion: relieveU.uExageracion.value })
+const cam = crearCamara(camera, renderer.domElement, { pedirCuadro, hoja, suelo: sueloEn })
 
 const reloj = new Timer()
 renderer.setAnimationLoop((t) => {
@@ -176,7 +199,11 @@ renderer.setAnimationLoop((t) => {
 })
 
 document.body.classList.add('listo')
-window.lab = { renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, get teselas() { return teselas }, ready: true }
+window.lab = {
+  renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, relieveU, sueloEn, ready: true,
+  get relieve() { return relieve },
+  get teselas() { return teselas },
+}
 
 /** Papel con una cuadrícula de 100 m, hasta que exista plano/primero.webp. */
 function cuadriculaProvisoria() {
