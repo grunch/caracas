@@ -8,6 +8,7 @@ export const VERTICE_COMUN = /* glsl */ `
   varying float vExiste;
   ${GLSL_EPOCAS}
   varying vec3 vMundo; varying float vTecho; varying vec4 vInfo; varying float vBase;
+  varying vec2 vTerreno; // del suelo: altura sobre la plaza (m, sin exagerar) y pendiente (m/m)
   ${GLSL_AZAR}`
 
 /** Después de begin_vertex: la ola levanta la casa y la línea de tiempo decide si está en pie. */

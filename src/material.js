@@ -24,6 +24,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   uniform float uAnchoOla, uColor;
   varying float vExiste;
   varying vec3 vMundo; varying float vTecho; varying vec4 vInfo; varying float vBase;
+  varying vec2 vTerreno;
   ${GLSL_AZAR}
   ${GLSL_EPOCAS}
   ${GLSL_CRECE}
@@ -118,6 +119,7 @@ function parchearRelieveVertex(s) {
     .replace('#include <beginnormal_vertex>', `#include <beginnormal_vertex>
       if (aInfo.w < 0.5) objectNormal = normalSuelo(position.xz);`)
     .replace('#include <project_vertex>', `vBase = aInfo.w < 0.5 ? sueloEn(position.xz) : sueloEn(aAncla);
+      vTerreno = aInfo.w < 0.5 ? terrenoEn(position.xz) : vec2(0.0);
       transformed.y += aInfo.w < 0.5 ? sueloEn(position.xz)
         : apoyoCasa(aAncla, transformed.xz, position.y < 0.01);
       #include <project_vertex>`)

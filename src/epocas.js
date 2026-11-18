@@ -56,6 +56,13 @@ export const epocaAqui = ({ de, a, ola, ancho }, dist) => de + (a - de) * suave(
 export const desdeCuando = (valor, E) => (valor <= 0 ? Infinity : Math.round(E * (1 - valor)))
 
 /**
+ * El valor "desde cuándo" que hay que alcanzar para existir en la época `e` (puede ser fraccionaria, en
+ * plena ola): `valor ≥ umbralDesde(e, E)` ⇔ la etapa codificada es ≤ e. Así decide el shader del suelo
+ * qué es ciudad y qué sigue siendo campo (crece.png G, src/shader/valle.js).
+ */
+export const umbralDesde = (e, E) => 1 - (e + 0.5) / E
+
+/**
  * Escala de la hoja (0–1) a crece.png (0–1): la imagen tiene `cols × rows` celdas de `celdaM` metros
  * desde la esquina noroeste; con `metro` m/px, la hoja de `ancho × alto` px ocupa solo parte de ella.
  */

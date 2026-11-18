@@ -109,6 +109,13 @@ export const GLSL_RELIEVE = /* glsl */ `
     float dz = sueloEn(xz + vec2(0.0, d.y)) - sueloEn(xz - vec2(0.0, d.y));
     return normalize(vec3(-dx / (2.0 * d.x), 1.0, -dz / (2.0 * d.y)));
   }
+  // el terreno tal cual es (sin la ola ni la exageración): altura sobre la plaza (m) y pendiente (m/m)
+  vec2 terrenoEn(vec2 xz) {
+    vec2 d = uRelieveCelda;
+    float dx = relieveCrudo(xz + vec2(d.x, 0.0)) - relieveCrudo(xz - vec2(d.x, 0.0));
+    float dz = relieveCrudo(xz + vec2(0.0, d.y)) - relieveCrudo(xz - vec2(0.0, d.y));
+    return vec2(relieveCrudo(xz), length(vec2(dx / (2.0 * d.x), dz / (2.0 * d.y))));
+  }
   // las casas suben enteras a la altura de su ancla; el pie baja hasta el suelo para no flotar
   float apoyoCasa(vec2 ancla, vec2 xz, bool esPie) {
     float s = sueloEn(ancla);
