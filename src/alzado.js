@@ -35,8 +35,8 @@ export function coordsFaldon(f, u, v) {
   return [dv * f.caida[0] - du * f.caida[1], (du * f.caida[0] + dv * f.caida[1]) * Math.hypot(1, f.tan)]
 }
 
-/** Largo del faldón de la cumbrera al alero, medido sobre la pendiente. */
-export const largoFaldon = (f) => (f.tan === 0 ? 0 : Math.max(...f.region.map(([u, v]) => coordsFaldon(f, u, v)[1])))
+/** Largo del faldón de la cumbrera al alero, medido sobre la pendiente (sobre su `base`, si la región está estirada: src/alas.js). */
+export const largoFaldon = (f) => (f.tan === 0 ? 0 : Math.max(...(f.base ?? f.region).map(([u, v]) => coordsFaldon(f, u, v)[1])))
 
 /** Normal del faldón en el marco del lote: se inclina hacia donde cae. */
 export function normalFaldon(f) {
@@ -74,7 +74,7 @@ function tejados(casa, salida) {
     const [n, largo] = [normalFaldon(f), largoConAlero(casa, f)]
     const pared = [0, 0, plan.altoPiso]
     // el patio no lleva tejado sino piso, un poco sobre el terreno para que la cuesta no lo tape
-    const [alto, cubierta] = f.hueco ? [() => PISO_PATIO_M, CUBIERTA.PATIO] : [(u, v) => alturaDe(f, u, v), f.cubierta]
+    const [alto, cubierta] = f.hueco ? [() => PISO_PATIO_M, f.piso ?? CUBIERTA.PATIO] : [(u, v) => alturaDe(f, u, v), f.cubierta]
     const indices = poligono.map(([u, v]) => salida.vertice(u, v, alto(u, v), n, pared, [...coordsFaldon(f, u, v), largo, cubierta]))
     for (const [a, b, c] of ShapeUtils.triangulateShape(poligono.map(([u, v]) => new Vector2(u, v)), [])) {
       salida.triangulo(indices[a], indices[b], indices[c], n)
@@ -97,8 +97,9 @@ function muro(salida, p0, p1, abajo, arriba, n, pared0, pared1, pretil = null) {
     salida.vertice(p1[0], p1[1], Math.max(arriba[1], abajo[1]), normal, pared1, techo(1)),
     salida.vertice(p0[0], p0[1], Math.max(arriba[0], abajo[0]), normal, pared0, techo(1)),
   ]
-  salida.triangulo(v[0], v[1], v[2], normal)
-  salida.triangulo(v[0], v[2], v[3], normal)
+  // un paño en cuña (sin altura en una punta) es un solo triángulo; con pretil, el shader le da altura a las dos
+  if (pretil || arriba[1] - abajo[1] >= 1e-4) salida.triangulo(v[0], v[1], v[2], normal)
+  if (pretil || arriba[0] - abajo[0] >= 1e-4) salida.triangulo(v[0], v[2], v[3], normal)
 }
 
 /**

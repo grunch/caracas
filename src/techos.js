@@ -1,23 +1,24 @@
 /**
  * El techo de cada casa, como en las pinturas y fotos de época (fuentes/imagenes/README.md): tejados
- * de teja a dos aguas con la cumbrera paralela a la calle, una crujía al frente y alas más bajas
- * alrededor del patio; pretil al frente en las republicanas; azoteas en las modernas; zinc en los
+ * de teja a dos aguas con la cumbrera paralela a la calle, una crujía al frente y cuerpos más bajos
+ * detrás (las casas de patio, con sus alas alrededor de los patios, van en src/alas.js); pretil al frente en las republicanas; azoteas en las modernas; zinc en los
  * ranchos y los galpones. La casa cambia con las épocas (etapasDe): si cambia la forma del techo es
  * otra etapa, con su propia geometría; si solo cambia la fachada, la misma.
  *
  * Todo se arma en el marco del lote: u corre a lo largo del frente (0..ancho) y v hacia el fondo
  * (0 en la calle). Un plan es una lista de faldones: regiones convexas que cubren el lote, cada una
- * con su plano (cumbre − tan · avance en el sentido de la caída). El patio es un faldón hueco, a
+ * con su plano (cumbre − tan · avance en el sentido de la caída). Un patio es un faldón hueco, a
  * altura 0. src/ciudad.js recorta los faldones con la huella de la casa y levanta paredes hasta ellos.
  * Todo puro y determinista por la semilla de la casa.
  */
 
 /**
- * Qué cubre cada superficie (aTecho.w, lo lee src/shader/techo.js). PATIO es el piso del patio. ALERO
+ * Qué cubre cada superficie (aTecho.w, lo lee src/shader/techo.js). PATIO es el piso del patio y SOLAR,
+ * la tierra del solar del fondo (src/alas.js). ALERO
  * es la cara de abajo de un alero; la de arriba lleva su cubierta + VOLADA: el shader quita las dos
  * cuando la fachada de la época tiene pretil.
  */
-export const CUBIERTA = Object.freeze({ PARED: 0, TEJA: 1, AZOTEA: 2, ZINC: 3, ALERO: 4, PATIO: 5, VOLADA: 8 })
+export const CUBIERTA = Object.freeze({ PARED: 0, TEJA: 1, AZOTEA: 2, ZINC: 3, ALERO: 4, PATIO: 5, SOLAR: 6, VOLADA: 8 })
 
 const COLONIAL = 0, REPUBLICANO = 1, GUZMANCISTA = 2, ECLECTICO = 3, MODERNO = 4, QUINTA = 5, RANCHO = 6, ORILLAS = 7, GALPON = 8, PUBLICO = 9
 /** Las fachadas de pretil tapan el tejado desde la calle (espejo de conPretil, src/shader/comun.js). */
@@ -37,18 +38,16 @@ const VARIACION_ALTO = 0.15 // cada casa, ±15 %: la línea de aleros sube y baj
 
 export const PRETIL_M = 0.75 // lo que sube el pretil sobre el arranque del tejado en las republicanas
 const BORDE_AZOTEA_M = 0.7
-const TAPIA_M = 2.6 // la tapia que cierra un patio hacia afuera
 const ALTO_MINIMO_ALA_M = 2.3 // bajo el alero de un ala hay un corredor
 const FONDO_UNA_CRUJIA_M = 10.5 // hasta acá, la casa es una sola crujía
 const RESTO_MINIMO_M = 3.5 // menos que esto detrás de la crujía no hace un ala
 const ANCHO_SIN_PATIO_M = 7.5
-const ANCHO_DOS_ALAS_M = 11.5
 const SUBIDA_MAXIMA_M = 2.8
 const LLENO_MINIMO = 0.6 // menos que esto del rectángulo: polígono irregular, va con crujías paralelas
 const FONDO_CRUJIA_PARALELA_M = 7
+const NAVE_PUBLICA_M = 13
 const SUBIDA_IRREGULAR_M = 1.6
 const TAN_ZINC = Math.tan((14 * Math.PI) / 180)
-const TAN_ALA = 0.38
 /** Desde qué parte despejada un lado de la casa da a la calle (o a un callejón) y no a un vecino. */
 export const LADO_LIBRE = 0.5
 
@@ -126,9 +125,7 @@ export function elegirFrente(largos, libres) {
 const rect = (u0, u1, v0, v1) => [[u0, v0], [u1, v0], [u1, v1], [u0, v1]]
 const faldon = (region, cubierta, cumbre, origen, caida, tan, extra = {}) => ({ region, cubierta, cumbre, origen, caida, tan, borde: 0, ...extra })
 const plano = (region, h, cubierta, borde = 0) => faldon(region, cubierta, h, region[0], [0, 0], 0, { borde })
-const patio = (region) => faldon(region, CUBIERTA.PARED, 0, region[0], [0, 0], 0, { borde: TAPIA_M, hueco: true })
 const transponer = (f) => ({ ...f, region: f.region.map(([a, b]) => [b, a]), origen: [f.origen[1], f.origen[0]], caida: [f.caida[1], f.caida[0]] })
-const acotar = (x, a, b) => Math.min(b, Math.max(a, x))
 
 /**
  * Dos aguas sobre el rectángulo, con la cumbrera a lo largo de u en el medio de v; `alero` = altura
@@ -154,12 +151,6 @@ function dosAguasAlFondo({ u0, u1, v0, v1, ...resto }) {
   return dosAguas({ u0: v0, u1: v1, v0: u0, v1: u1, ...resto }).map(transponer)
 }
 
-/** Media agua: un solo plano que baja desde `alto`, en el borde de arriba, en el sentido `hacia`. */
-function mediaAgua({ u0, u1, v0, v1, alto, tan, hacia, cubierta }) {
-  const origen = [hacia[0] < 0 ? u1 : u0, hacia[1] < 0 ? v1 : v0]
-  return faldon(rect(u0, u1, v0, v1), cubierta, alto, origen, hacia, tan)
-}
-
 /** La pendiente que no sube más de `subida` en `medio` metros. */
 const tanAcotada = (tan, medio, subida = SUBIDA_MAXIMA_M) => (medio > 1e-6 ? Math.min(tan, subida / medio) : tan)
 
@@ -167,10 +158,10 @@ const tanAcotada = (tan, medio, subida = SUBIDA_MAXIMA_M) => (medio > 1e-6 ? Mat
  * Crujías paralelas, bajas, cada una a dos aguas y con la cumbrera a lo largo del lado largo: para los
  * polígonos irregulares, donde no hay frente ni patio que seguir (el mar de tejados de la foto de 1903).
  */
-function crujiasParalelas({ L, D, alero, tan, cubierta }) {
+function crujiasParalelas({ L, D, alero, tan, cubierta, nave = FONDO_CRUJIA_PARALELA_M }) {
   const aLoLargoDeU = D <= L
   const ancho = aLoLargoDeU ? D : L
-  const n = Math.max(1, Math.round(ancho / FONDO_CRUJIA_PARALELA_M))
+  const n = Math.max(1, Math.round(ancho / nave))
   const paso = ancho / n
   const medidas = { alero, cubierta, tan: tanAcotada(tan, paso / 2, SUBIDA_IRREGULAR_M) }
   return Array.from({ length: n }, (_, i) => (aLoLargoDeU
@@ -191,47 +182,27 @@ function azotea({ L, D, alto, semilla }) {
   ]
 }
 
-/** Lo que va detrás de la crujía del frente: un cuerpo más bajo, o alas y patio. */
-function fondoDeLote({ L, D, c, alero, tan, cubierta, semilla }) {
-  const R = D - c
-  if (L < ANCHO_SIN_PATIO_M) {
-    // lote angosto: un cuerpo con la cumbrera hacia el fondo, más bajo que la crujía
-    const bajo = Math.max(alero - 0.4, ALTO_MINIMO_ALA_M)
-    return dosAguasAlFondo({ u0: 0, u1: L, v0: c, v1: D, alero: bajo, tan: tanAcotada(tan, L / 2, 1.3), cubierta })
-  }
-  const unaSola = L < ANCHO_DOS_ALAS_M
-  const a = unaSola ? acotar(L * 0.45, 3.4, 4.5) : Math.min((L - acotar(L * 0.4, 4, 9)) / 2, 5)
-  // el ala del fondo, si queda patio suficiente; un patio de más de 14 m se acorta con un fondo más hondo
-  let r = R >= 9 ? 3.8 + azar(semilla, 14) : 0
-  if (R - r > 14) r = R - 14
-  const hasta = D - r
-  const tanAla = Math.max(0.05, Math.min(TAN_ALA, (alero - ALTO_MINIMO_ALA_M) / a))
-  const ala = (u0, u1, hacia) => mediaAgua({ u0, u1, v0: c, v1: hasta, alto: alero, tan: tanAla, hacia, cubierta })
-  const lista = []
-  if (unaSola) {
-    const aLaIzquierda = azar(semilla, 13) < 0.5
-    lista.push(aLaIzquierda ? ala(0, a, [1, 0]) : ala(L - a, L, [-1, 0]))
-    lista.push(patio(aLaIzquierda ? rect(a, L, c, hasta) : rect(0, L - a, c, hasta)))
-  } else {
-    lista.push(ala(0, a, [1, 0]), ala(L - a, L, [-1, 0]), patio(rect(a, L - a, c, hasta)))
-  }
-  if (r > 6.5) {
-    const bajo = Math.max(alero - 0.4, ALTO_MINIMO_ALA_M)
-    lista.push(...dosAguas({ u0: 0, u1: L, v0: hasta, v1: D, alero: bajo, tan: tanAcotada(tan, r / 2, 2.2), cubierta }))
-  } else if (r > 0) {
-    const alto = alero - 0.2
-    const tanFondo = Math.max(0.05, Math.min(TAN_ALA, (alto - ALTO_MINIMO_ALA_M) / r))
-    lista.push(mediaAgua({ u0: 0, u1: L, v0: hasta, v1: D, alto, tan: tanFondo, hacia: [0, -1], cubierta }))
-  }
-  return lista
+/**
+ * Lo que va detrás de la crujía del frente en una casa sin alas (chica, o sin marco): un cuerpo más bajo
+ * con la cumbrera hacia el fondo si el lote es angosto; si no, crujías bajas paralelas a la calle. Los
+ * patios no se inventan acá: las casas de patio traen sus alas del dato (src/alas.js).
+ */
+function fondoDeLote({ L, D, c, alero, tan, cubierta }) {
+  const bajo = Math.max(alero - 0.4, ALTO_MINIMO_ALA_M)
+  if (L < ANCHO_SIN_PATIO_M) return dosAguasAlFondo({ u0: 0, u1: L, v0: c, v1: D, alero: bajo, tan: tanAcotada(tan, L / 2, 1.3), cubierta })
+  const n = Math.max(1, Math.round((D - c) / FONDO_CRUJIA_PARALELA_M))
+  const paso = (D - c) / n
+  return Array.from({ length: n }, (_, i) => dosAguas({
+    u0: 0, u1: L, v0: c + i * paso, v1: c + (i + 1) * paso, alero: bajo, tan: tanAcotada(tan, paso / 2, SUBIDA_IRREGULAR_M), cubierta,
+  })).flat()
 }
 
 /** La casa de teja: la crujía del frente con la cumbrera paralela a la calle y, si el lote da, el resto. */
-function casaDeTeja({ L, D, alero, tan, cubierta, semilla, caderaIzq, caderaDer }) {
-  const c0 = 6 + 1.5 * azar(semilla, 12)
+function casaDeTeja({ L, D, alero, tan, cubierta, semilla, caderaIzq, caderaDer, fondoCrujia }) {
+  const c0 = fondoCrujia ?? 6 + 1.5 * azar(semilla, 12)
   const c = D <= FONDO_UNA_CRUJIA_M || D - c0 < RESTO_MINIMO_M ? D : c0
   const crujia = dosAguas({ u0: 0, u1: L, v0: 0, v1: c, alero, tan: tanAcotada(tan, c / 2), cubierta, caderaIzq, caderaDer })
-  return c < D ? [...crujia, ...fondoDeLote({ L, D, c, alero, tan, cubierta, semilla })] : crujia
+  return c < D ? [...crujia, ...fondoDeLote({ L, D, c, alero, tan, cubierta })] : crujia
 }
 
 /** Dos (o cuatro) aguas con la cumbrera siguiendo el lado largo: ranchos, quintas y galpones. */
@@ -244,12 +215,13 @@ function aLoLargo({ L, D, cuatro = false, ...resto }) {
  * El plan del techo de una casa (o de una de sus etapas). `ancho` (a lo largo del frente) y `fondo`
  * son los lados de su rectángulo; `libres` dice qué otros lados dan a la calle (izq, der, fondo);
  * `lleno`, qué parte del rectángulo ocupa la huella; `conAlero` y `conPretil`, si en algún momento de
- * la etapa la fachada lleva lo uno o lo otro (por defecto, lo que diga el estilo). Devuelve las
+ * la etapa la fachada lleva lo uno o lo otro (por defecto, lo que diga el estilo); `crujia`, el fondo de
+ * la crujía del frente si lo fija la manzana (si no, sale de la semilla). Devuelve las
  * medidas del lote, la altura de la pared del frente (`alto` = pisos × altoPiso, donde arranca el
  * tejado), cuánto vuela el alero, cuánto sube el pretil sobre ese arranque, y los faldones.
  */
 export function planDeTecho({
-  ancho: L, fondo: D, estilo, pisos, semilla, nace = 5, libres = {}, lleno = 1,
+  ancho: L, fondo: D, estilo, pisos, semilla, nace = 5, libres = {}, lleno = 1, crujia = null,
   conAlero = !DE_PRETIL.includes(estilo), conPretil = DE_PRETIL.includes(estilo),
 }) {
   const altoPiso = altoDePiso(estilo, semilla)
@@ -263,14 +235,17 @@ export function planDeTecho({
   }
   const medidas = { ...base, alero: conAlero ? 0.5 + 0.3 * azar(semilla, 9) : 0, pretil: conPretil ? PRETIL_M : 0 }
   const tan = Math.tan(((25 + 5 * azar(semilla, 11)) * Math.PI) / 180)
-  if (lleno < LLENO_MINIMO) return { ...medidas, faldones: crujiasParalelas({ L, D, alero: alto, tan, cubierta }) }
+  // (las grandes —conventos, mercados—, con naves más anchas)
+  if (lleno < LLENO_MINIMO) return { ...medidas, faldones: crujiasParalelas({ L, D, alero: alto, tan, cubierta, nave: Math.min(L, D) > 40 ? NAVE_PUBLICA_M : undefined }) }
+  // lo público de teja (iglesias, conventos, cuarteles hasta 1843): naves anchas, a lo largo
+  if (estilo === PUBLICO) return { ...medidas, faldones: crujiasParalelas({ L, D, alero: alto, tan, cubierta, nave: NAVE_PUBLICA_M }) }
   if (estilo === QUINTA) return { ...medidas, faldones: aLoLargo({ L, D, alero: alto, tan, cubierta, cuatro: true }) }
   // en una esquina, el extremo de la crujía que da a la otra calle va a cuatro aguas (si el largo alcanza):
   // el alero, o el pretil, dan la vuelta a la esquina
   const cadera = (libre) => Boolean(libre)
   return {
     ...medidas,
-    faldones: casaDeTeja({ L, D, alero: alto, tan, cubierta, semilla, caderaIzq: cadera(libres.izq), caderaDer: cadera(libres.der) }),
+    faldones: casaDeTeja({ L, D, alero: alto, tan, cubierta, semilla, caderaIzq: cadera(libres.izq), caderaDer: cadera(libres.der), fondoCrujia: crujia ?? undefined }),
   }
 }
 

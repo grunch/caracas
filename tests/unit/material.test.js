@@ -16,7 +16,7 @@ function compilar() {
 describe('material de la ciudad', () => {
   test('el zócalo se mide desde la base de la casa, no desde la altura absoluta', () => {
     const { vertexShader, fragmentShader } = compilar()
-    expect(vertexShader).toMatch(/vBase\s*=\s*aInfo\.w < 0\.5 \? sueloEn\(position\.xz\) : sueloEn\(aAncla\)/)
+    expect(vertexShader).toMatch(/vBase\s*=\s*aInfo\.w < 0\.5 \|\| esPiso \? sueloEn\(position\.xz\) : sueloEn\(aAncla\)/)
     expect(fragmentShader).toContain('paredColor(vInfo.y, vInfo.z, vMundo.y - vBase)')
     expect(fragmentShader).toContain('step(0.8, sobreLaBase)')
     expect(fragmentShader).not.toContain('step(0.8, vMundo.y)')

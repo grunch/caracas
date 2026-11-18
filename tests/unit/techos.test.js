@@ -139,47 +139,50 @@ describe('planDeTecho: casa colonial chica', () => {
   })
 })
 
-describe('planDeTecho: lote profundo (crujía al frente, alas y patio)', () => {
+describe('planDeTecho: lote profundo sin alas (crujía al frente y cuerpos bajos detrás)', () => {
   const plan = casa({ ancho: 12, fondo: 26 })
-  const tejados = plan.faldones.filter((f) => !f.hueco)
-  const patio = plan.faldones.find((f) => f.hueco)
+  const frenteDe = (p) => p.faldones.find((f) => f.caida[1] < -0.9 && f.region.some((q) => q[1] === 0))
 
   test('la crujía del frente tiene 6 a 7,5 m de fondo y su cumbrera es paralela a la calle', () => {
-    const frente = tejados.find((f) => f.caida[1] < -0.9 && f.region.some((p) => p[1] === 0))
-    const fondoCrujia = 2 * Math.max(...frente.region.map((p) => p[1]))
+    const fondoCrujia = 2 * Math.max(...frenteDe(plan).region.map((p) => p[1]))
     expect(fondoCrujia).toBeGreaterThanOrEqual(6)
     expect(fondoCrujia).toBeLessThanOrEqual(7.5)
   })
 
-  test('deja un patio al centro, detrás de la crujía y sin tocar las medianeras', () => {
-    expect(patio).toBeTruthy()
-    const us = patio.region.map((p) => p[0]), vs = patio.region.map((p) => p[1])
-    expect(Math.min(...us)).toBeGreaterThan(3)
-    expect(Math.max(...us)).toBeLessThan(9)
-    expect(Math.min(...vs)).toBeGreaterThanOrEqual(6)
-    expect(alturaDe(patio, 6, 12)).toBe(0)
+  test('con la crujía de la manzana, el fondo de la crujía es ese: la cumbrera corre seguida por la cuadra', () => {
+    for (const semilla of [1, 2, 3]) {
+      expect(2 * Math.max(...frenteDe(casa({ ancho: 12, fondo: 26, semilla, crujia: 7.2 })).region.map((p) => p[1]))).toBeCloseTo(7.2, 9)
+    }
   })
 
-  test('las alas caen hacia el patio y no pasan de la cumbrera del frente', () => {
-    const cumbre = Math.max(...tejados.map((f) => f.cumbre))
-    const alas = tejados.filter((f) => Math.abs(f.caida[0]) > 0.9)
-    expect(alas.length).toBeGreaterThanOrEqual(2)
-    const izq = alas.find((f) => f.region.every((p) => p[0] <= 6))
-    expect(izq.caida[0]).toBeGreaterThan(0) // el ala de la izquierda baja hacia la derecha (el patio)
-    for (const f of alas) expect(f.cumbre).toBeLessThanOrEqual(cumbre)
-    // ninguna ala baja de 2 m: debajo hay un corredor
-    for (const f of alas) for (const [u, v] of f.region) expect(alturaDe(f, u, v)).toBeGreaterThanOrEqual(2)
+  test('no inventa patios (las casas de patio traen sus alas del dato): detrás van crujías bajas paralelas a la calle', () => {
+    expect(plan.faldones.some((f) => f.hueco)).toBe(false)
+    const cumbre = Math.max(...plan.faldones.map((f) => f.cumbre))
+    const detras = plan.faldones.filter((f) => f.region.every((p) => p[1] >= 6))
+    expect(detras.length).toBeGreaterThanOrEqual(4)
+    for (const f of detras) {
+      expect(Math.abs(f.caida[0])).toBeLessThan(1e-9)
+      expect(f.cumbre).toBeLessThan(cumbre)
+      for (const [u, v] of f.region) expect(alturaDe(f, u, v)).toBeGreaterThanOrEqual(2)
+    }
   })
 
-  test('todo lo que no es patio está techado: las regiones cubren el lote', () => {
+  test('todo está techado: las regiones cubren el lote', () => {
     expect(areaDe(plan)).toBeCloseTo(12 * 26, 6)
     for (const f of plan.faldones) expect(esConvexa(f.region)).toBe(true)
   })
 
   test('faldonEn encuentra el faldón de cada punto; fuera del lote, ninguno', () => {
     expect(faldonEn(plan, 6, 1)).toBeTruthy()
-    expect(faldonEn(plan, 6, 12)).toBe(patio)
+    expect(faldonEn(plan, 6, 12)).toBeTruthy()
     expect(faldonEn(plan, -1, 5)).toBeNull()
+  })
+
+  test('lo público de teja va con naves anchas, sin patio', () => {
+    const convento = casa({ ancho: 40, fondo: 52, estilo: PUBLICO, pisos: 2 })
+    expect(convento.faldones.some((f) => f.hueco)).toBe(false)
+    expect(convento.faldones).toHaveLength(6) // tres naves de 13 m
+    expect(areaDe(convento)).toBeCloseTo(40 * 52, 6)
   })
 
   test('un lote angosto y profundo no lleva patio: crujía al frente y un cuerpo atrás, más bajo', () => {
