@@ -8,6 +8,7 @@
  * aInfo = (distancia a la plaza, semilla, estilo, pisos); pisos = 0 marca el suelo.
  */
 import { MeshLambertMaterial, Vector2 } from 'three'
+import { GLSL_RELIEVE, uniformsRelieve } from './relieve.js'
 
 const VERTICE_COMUN = /* glsl */ `
   attribute vec4 aInfo;
@@ -76,8 +77,11 @@ const FRAGMENTO_COLOR = /* glsl */ `
 
   diffuseColor.rgb = mix(enTinta, enColor, uColor);`
 
-export function crearMaterialCiudad({ plano, metro, mapa, suelo = null }) {
+export function crearMaterialCiudad({
+  plano, metro, mapa, suelo = null, relieve = uniformsRelieve({ x0: 0, z0: 0, ancho: 1, alto: 1 }),
+}) {
   const U = {
+    ...relieve, // tRelieve, uRelieveHoja, uRelieveCelda, uExageracion (ver relieve.js)
     uOla: { value: 0 }, // radio del frente de la ola, en metros
     uAnchoOla: { value: 260 }, // cuánto tarda una casa en subir entera, en metros de frente
     uColor: { value: 0 }, // 0 tinta · 1 color
@@ -95,9 +99,29 @@ export function crearMaterialCiudad({ plano, metro, mapa, suelo = null }) {
       .replace('#include <begin_vertex>', `#include <begin_vertex>${VERTICE_OLA}`)
       .replace('#include <worldpos_vertex>', `#include <worldpos_vertex>
         vMundo = (modelMatrix * vec4(transformed, 1.0)).xyz;`)
+    parchearRelieveVertex(s)
     s.fragmentShader = s.fragmentShader
       .replace('#include <common>', `#include <common>${FRAGMENTO_COMUN}`)
       .replace('#include <color_fragment>', `#include <color_fragment>${FRAGMENTO_COLOR}`)
   }
   return { material, U }
+}
+
+/**
+ * Relieve (solo vertex): todo se apoya en el terreno. El suelo (pisos = 0) se desplaza y toma
+ * la normal del terreno, para que Lambert sombree la cuesta. Cada casa sube entera a la altura
+ * del suelo en su ancla (si no, en la cuesta el techo quedaría inclinado) y el pie de sus
+ * paredes baja hasta el suelo para que no flote. Va antes de project_vertex, después de la ola.
+ * Las geometrías están en coordenadas del mundo: position.xz es el punto del terreno.
+ */
+function parchearRelieveVertex(s) {
+  s.vertexShader = s.vertexShader
+    .replace('void main() {', `attribute vec2 aAncla;
+      ${GLSL_RELIEVE}
+      void main() {`)
+    .replace('#include <beginnormal_vertex>', `#include <beginnormal_vertex>
+      if (aInfo.w < 0.5) objectNormal = normalSuelo(position.xz);`)
+    .replace('#include <project_vertex>', `transformed.y += aInfo.w < 0.5 ? sueloEn(position.xz)
+        : apoyoCasa(aAncla, transformed.xz, position.y < 0.01);
+      #include <project_vertex>`)
 }

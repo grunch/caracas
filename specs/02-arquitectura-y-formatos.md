@@ -102,6 +102,8 @@ gzip(
 ### `datos/relieve.bin`
 `Uint16[ w, h, alturas… ]`, con las alturas en **decímetros**. Se sube como textura half‑float (canal R) y el vertex shader la muestrea.
 
+*Caracas (implementado):* little‑endian, alturas sobre el nivel del mar (EGM2008); fila 0 = borde norte de la hoja, columna 0 = borde oeste; la grilla cubre la hoja entera y la celda (i, j) es el centro del píxel ((j+½)·ancho/w, (i+½)·alto/h) del plano. 930×740 celdas de 10 m (`tools/geo/relieve.py`, desde Copernicus GLO‑30). En la GPU va **relativa a la Plaza Bolívar** (y = 0 en la plaza), para que el half‑float sea fino en el valle. `src/relieve.js` expone `alturaEn(x, z)` (bilineal) para la cámara y los modos.
+
 ### `datos/calles.bin` + `calles.json`
 `calles.json` = array ordenado de nombres de calles actuales. `calles.bin` = `Uint16`, **6 por registro**: posición, dirección, índice de nombre, largo y tipo *(inferido)*. Se indexa en una grilla de 300 m para buscar "calles cerca de (x,z)".
 

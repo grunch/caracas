@@ -90,3 +90,39 @@ def test_codificar_rechaza_alturas_fuera_de_rango():
         rl.codificar(np.array([[-5.0]]))
     with pytest.raises(ValueError):
         rl.codificar(np.array([[7000.0]]))
+
+
+def _geotiff(ruta, z, paso_grados, punto=True):
+    """GeoTIFF mínimo en lon/lat (EPSG:4326) con la esquina en (−67, 11)."""
+    import tifffile
+    claves = (1, 1, 0, 3, 1024, 0, 1, 2, 1025, 0, 1, 2 if punto else 1, 2048, 0, 1, 4326)
+    tifffile.imwrite(ruta, z.astype(np.float32), extratags=[
+        (33550, 12, 3, (paso_grados, paso_grados, 0.0), False),
+        (33922, 12, 6, (0.0, 0.0, 0.0, -67.0, 11.0, 0.0), False),
+        (34735, 3, len(claves), claves, False),
+    ])
+
+
+def test_leer_dem_respeta_pixel_es_punto_o_area(tmp_path):
+    z = np.zeros((4, 4))
+    _geotiff(tmp_path / "p.tif", z, 0.25, punto=True)
+    _geotiff(tmp_path / "a.tif", z, 0.25, punto=False)
+    _, gp = rl.leer_dem(tmp_path / "p.tif")
+    _, ga = rl.leer_dem(tmp_path / "a.tif")
+    assert (gp["lon0"], gp["lat0"]) == (-67.0, 11.0)
+    assert (ga["lon0"], ga["lat0"]) == (-66.875, 10.875)
+
+
+def test_main_escribe_relieve_bin_e_informe(tmp_path):
+    paso = 0.01
+    filas, cols = np.mgrid[0:101, 0:101]
+    z = 900.0 + 50.0 * cols * paso + 0.0 * filas  # sube hacia el este (cols: 0…1° de longitud)
+    _geotiff(tmp_path / "dem.tif", z, paso)
+    salida = tmp_path / "relieve.bin"
+    informe = rl.main(["--dem", str(tmp_path / "dem.tif"), "--salida", str(salida), "--paso", "100",
+                       "--informe", str(tmp_path / "informe.json")])
+    alturas = rl.decodificar(salida.read_bytes())
+    assert alturas.shape == (74, 93)
+    assert alturas[:, -1].mean() > alturas[:, 0].mean()  # el este más alto
+    assert 870 < alturas.min() < alturas.max() < 1000  # las cotas del centro tiran hacia sus valores
+    assert "corregido" in informe and informe["corregido"]["n"] >= 10
