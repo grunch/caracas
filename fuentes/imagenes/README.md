@@ -340,10 +340,58 @@ Qué implica: es el patrón del **edificio público guzmancista** (estilo 9 en l
 pisos, balcones individuales, cornisa fuerte y remate central con escudo. Los coches sirven para T62
 (victoria o calesa de dos caballos hacia 1875).
 
-## Fuera del período (no guardadas)
+## 1866 → 1900 · La Plaza Bolívar, cuatro momentos (`1866-`, `1874-`, `1880-` y `1900-monedas-plaza-bolivar`) → épocas 1843, 1889 y 1911
 
-- **Plaza Miranda y av. Baralt, años 50–60** (`1955-pinterest-plaza-miranda-av-baralt`, solo ficha):
-  foto de prensa con **derechos reservados de El Nacional** y posterior a 1936. Muestra la ciudad ya
-  transformada (avenida ensanchada, edificios modernos, tráfico). No guía ninguna época del sitio.
-- **Plaza Altamira, años 50** (`1955-pinterest-plaza-altamira`, solo ficha, sin descargar): posterior
-  a 1936 y, casi seguro, fuera del área del plano (al este de Chacao).
+Serie de monedasdevenezuela.com (con marcas de agua; fechas según quien las aportó, a verificar). Con el
+mercado de 1852, la vista de 1867, las fotos de 1880 y la de 1910, la plaza queda documentada de punta a
+punta.
+
+- **1866, sin estatua**: plaza **de tierra, vacía**, con un **muro bajo o pretil de mampostería** y un
+  desnivel con escalones (la plaza no es plana: baja hacia el sur); farol de pie suelto. La **torre de la
+  Catedral** completa y nítida: **tres cuerpos, reloj en el segundo, remate ochavado con una figura
+  encima**; al lado, el **costado de la nave, blanco, con ventanas de balcón** y tejado de teja. Al
+  fondo, casas de un piso con tejado y el Ávila. Coincide con el grabado de 1867.
+- **1874, estatua recién puesta**: la **estatua ecuestre** sobre pedestal oscuro con **verja de hierro
+  baja** alrededor; faroles de pie; árboles jóvenes y una palma; detrás, la **fachada barroca de la
+  Catedral** entera (tres calles, frontón con volutas) y su torre.
+- **~1880 (el archivo dice 1890)**: plaza **pavimentada**, con **árboles ya altos**, un **chaguaramo**,
+  **faroles grandes de varios brazos sobre pedestal** y verja; gente posando al pie del pedestal.
+- **~1900**: lo mismo con árboles más grandes y piso de **mosaico o baldosa en damero**; señoras de falda
+  larga y sombrero. La torre de la Catedral detrás.
+
+Qué implica: fija la secuencia de la plaza para el hito (T40): **mercado (hasta ~1865) → plaza de tierra
+con pretil (1866–1873) → estatua con verja y árboles jóvenes (1874) → jardín arbolado con faroles
+(1880 en adelante)**. En nuestras épocas: 1843 = mercado; 1889 y 1911 = jardín con estatua. Y da la
+mejor imagen de la **torre y la fachada de la Catedral** para modelarlas.
+
+## ~1930 · Una esquina de la Plaza Bolívar (`1930-eltroudi-esquina-plaza-bolivar`) → época 1936
+
+Vista desde dentro de la plaza hacia una esquina (cuál, a verificar).
+
+- **Edificio de esquina de cuatro pisos, con el ángulo curvo** (chaflán redondeado), balcones corridos
+  con baranda en cada piso, cornisas marcadas y **comercio abajo** (pastelería, letreros); a su lado,
+  otro de tres o cuatro pisos con miradores.
+- A la derecha, un **muro alto y liso con ventanas angostas de arco** (¿el costado de la Catedral?).
+- **La plaza está elevada sobre la calle**: escalinata ancha de ocho o nueve gradas, **baranda de
+  hierro** y **faroles de cuatro brazos** sobre columnas en las esquinas.
+- **Cables de tranvía y de luz** cruzando la esquina; mucha gente de traje claro.
+
+Qué implica: en 1936 las **esquinas de la Plaza Bolívar tienen edificios de 3–4 pisos de ángulo curvo**
+(el "moderno/ecléctico alto" va aquí, no repartido por la ciudad); la plaza se modela **en terraza, con
+escalinatas y baranda** (el relieve ya da el desnivel).
+
+## Después de 1936 (guardadas para épocas futuras)
+
+El sitio termina hoy en 1936. Estas imágenes se guardan con `epocas: []` y `epocas_futuras` para cuando
+se agregue una época de los años 40–50 (haría falta también el plano de 1950 ya descargado).
+
+- **Hotel Majestic, 1948** (`1948-commons-hotel-majestic`, Nationaal Archief, 2640 px): el hotel de
+  **cinco pisos con torre de cúpula en la esquina**, toldos en cada ventana y comercio abajo, visto
+  desde el **pórtico de columnas del Teatro Municipal**; plazoleta con estatua, carros y autobuses de
+  los 40, un edificio racionalista bajo al lado. **El Majestic es de 1930**: sirve desde ya como hito de
+  la época 1936 (T41).
+- **Plaza Altamira, años 50** (`1955-pinterest-plaza-altamira`): vista aérea con el obelisco, el espejo
+  de agua, edificios de 8–10 pisos y el Ávila. Fuera del área del plano de 1936.
+- **Plaza Miranda y av. Baralt, fines de los 50** (`1955-pinterest-plaza-miranda-av-baralt` y su versión
+  restaurada `1955-usuario-plaza-miranda-restaurada`): avenida ancha asfaltada, edificios modernos con
+  parasoles, plaza de losas, mucho tráfico. **Derechos reservados de El Nacional: no publicar.**

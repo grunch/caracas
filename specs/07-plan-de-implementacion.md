@@ -49,7 +49,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 |---|---|---|---|---|
 | T30 | Teselas finas de 3072 px en el material (las 4 que rodean la vista), para nitidez de cerca | — | de cerca se leen los nombres de las esquinas | ✅ #10 |
 | T31 | Estilos y alturas por época: colonial, republicano, guzmancista (neoclásico), ecléctico, casa de las afueras, rancho; pisos según época y zona | T24 | el índice de estilo de cada casa sale de su época y su lugar | 🔄 #20 |
-| T31b | **Referencias visuales por época**: pinturas, grabados y fotos en `fuentes/imagenes/` (con ficha y observaciones en su README) que calibran estilos, pisos, techos y lotes de cada época. Tarea continua: cada imagen nueva se anota y, si contradice el modelo, se ajusta | — | cada época tiene al menos una referencia y sus reglas la citan | 🔄 (anotadas: 1812, San Pablo ~1860, calle de 1843, mercado de 1852, vista de J. Thomas de 1839 en dos copias, foto panorámica ~1903, Plaza Bolívar 1910, Catedral 1867, Gradillas 1950, años 30 sobre los techos, La Pastora 1892 y 1930, calle con tranvía ~1930, cuatro fotos de 1880, Casa Amarilla ~1875) |
+| T31b | **Referencias visuales por época**: pinturas, grabados y fotos en `fuentes/imagenes/` (con ficha y observaciones en su README) que calibran estilos, pisos, techos y lotes de cada época. Tarea continua: cada imagen nueva se anota y, si contradice el modelo, se ajusta | — | cada época tiene al menos una referencia y sus reglas la citan | 🔄 (anotadas: 1812, San Pablo ~1860, calle de 1843, mercado de 1852, vista de J. Thomas de 1839 en dos copias, foto panorámica ~1903, Plaza Bolívar 1910, Catedral 1867, Gradillas 1950, años 30 sobre los techos, La Pastora 1892 y 1930, calle con tranvía ~1930, cuatro fotos de 1880, Casa Amarilla ~1875, Plaza Bolívar 1866–1900, esquina de la plaza ~1930; y cuatro posteriores a 1936 para épocas futuras) |
 | T32 | Fachadas procedurales por estilo: puertas, ventanas con rejas, aleros, zócalo, cornisas; LOD por distancia | T31 | a nivel de calle se distinguen los estilos | ✅ #24 |
 | T33 | Techos de teja de verdad: dos y cuatro aguas como geometría, con alero; azoteas en los públicos y los modernos | T31 | el perfil de tejados se ve de costado | ⏳ |
 | T34 | Árboles 3D desde `arboles.json` (5.926) y los patios con vegetación, en color | — | árboles en plazas, patios y quebradas | ✅ #19 |
@@ -93,6 +93,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T71 | `edificios.html`: la ciudad edificio por edificio (scrollytelling) | T43 | recorre todos los hitos | ⏳ |
 | T72 | Accesibilidad (WCAG 2.2 AA en la interfaz) y SEO básico | T44 | auditoría sin errores graves | ⏳ |
 | T73 | **Publicación** en Cloudflare Pages con dominio | T70 y la revisión de derechos | el sitio está en línea | ⛔ derechos del plano de 1936 (los revisa el responsable) |
+| T80 | **Épocas posteriores a 1936** (años 40–50): calzar el plano de 1950, extender el área si hace falta y usar las referencias con `epocas_futuras` de `fuentes/imagenes/` | T25 | una época más en la línea de tiempo | ⏳ (idea; no priorizada) |
 
 ## Riesgos que el plan vigila
 

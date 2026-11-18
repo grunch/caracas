@@ -1,15 +1,18 @@
 {
-  "titulo": "Plaza Altamira, Caracas (años 1950)",
-  "año_representado": null,
-  "año_aproximado": "años 1950 (según quien la aportó)",
+  "año": null,
   "autor": null,
   "institucion": null,
   "url_fuente": null,
-  "url_descarga": "https://i.pinimg.com/1200x/4d/cc/68/4dcc680fab5b89fcae4cf710f5f6258b.jpg",
   "licencia": null,
   "dominio_publico": "dudoso",
+  "formato": "JPEG",
   "tipo": "fotografía",
+  "titulo": "Plaza Altamira, Caracas (años 1950)",
+  "año_aproximado": "años 1950",
+  "url_descarga": "https://i.pinimg.com/1200x/4d/cc/68/4dcc680fab5b89fcae4cf710f5f6258b.jpg",
+  "ancho": 902,
+  "alto": 678,
   "epocas": [],
-  "guardada": false,
-  "notas": "NO se descargó ni se revisó: queda fuera del período del sitio (termina en 1936; la urbanización Altamira y su plaza son de los años 40) y, por lo que se recuerda, fuera del área del plano de 1936, que llega por el este hasta la zona de Chacao. A verificar si alguna vez se extiende el sitio a los años 50."
+  "epocas_futuras": "años 50",
+  "notas": "Vista aérea, sin fuente (Pinterest). Posterior a 1936 y, casi seguro, fuera del área del plano de 1936 (al este de Chacao): se guarda para una futura época de los años 50, que además necesitaría ampliar el área."
 }
