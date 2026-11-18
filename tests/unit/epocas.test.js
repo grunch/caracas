@@ -94,3 +94,18 @@ describe('sin línea de tiempo', () => {
     expect(vivo(0, 4, SIN_LINEA_DE_TIEMPO)).toBe(0)
   })
 })
+
+import { acotarEpoca, PRIMERA_EPOCA } from '../../src/epocas.js'
+
+describe('la primera época visible', () => {
+  test('la línea de tiempo arranca en 1772: 1578 (época 0) no se muestra', () => {
+    expect(PRIMERA_EPOCA).toBe(1)
+  })
+
+  test('acotarEpoca no deja elegir antes de la primera visible ni después de la última', () => {
+    expect(acotarEpoca(0, 1, 6)).toBe(1)
+    expect(acotarEpoca(3, 1, 6)).toBe(3)
+    expect(acotarEpoca(9, 1, 6)).toBe(5)
+    expect(acotarEpoca(0, 0, 6)).toBe(0)
+  })
+})
