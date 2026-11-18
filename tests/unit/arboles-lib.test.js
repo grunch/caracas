@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import {
-  codificarArboles, naceArbol, esDePlaza, naceEnPlaza, casasQueMueren, techosQueQuedan, bajoUnTecho, desdeEnCrece, desdeDelEntorno, dentroOCerca,
+  codificarArboles, naceArbol, esDePlaza, naceEnPlaza, casasQueMueren, techosQueQuedan, bajoUnTecho, desdeEnCrece, desdeDelEntorno, dentroOCerca, arbolesDePatio,
 } from '../../tools/arboles-lib.mjs'
 import { decodificarArboles } from '../../src/arboles.js'
 
@@ -143,5 +143,54 @@ describe('esDePlaza: los árboles de plaza y de calle no son coloniales', () => 
     expect(naceEnPlaza(0, true)).toBe(3)
     expect(naceEnPlaza(4, true)).toBe(4)
     expect(naceEnPlaza(1, false)).toBe(1)
+  })
+})
+
+describe('arbolesDePatio', () => {
+  const COLONIAL = 0, MODERNO = 4
+  // casas de patio de 12 × 40 m (24 × 80 px), una al lado de la otra, con un patio y un solar cada una
+  const marco = (techo, ox, primera) => [techo, ox, 100, 1, 0, 24, 80, 0, 14, primera, 3]
+  const alasDe = () => [2, 0, 0, 24, 14, /* patio */ 0, 8, 14, 24, 26, /* solar */ 1, 0, 40, 24, 80]
+  const ciudad = (cuantas, historia = null) => ({
+    techos: Uint32Array.from(Array.from({ length: cuantas }, (_, k) => [k * 4, 4, (COLONIAL << 8) | 1, 100 + k]).flat()),
+    vida: Uint32Array.from(Array.from({ length: cuantas }, () => 1)),
+    marcos: Float32Array.from(Array.from({ length: cuantas }, (_, k) => marco(k, 100 + 24 * k, 3 * k)).flat()),
+    alas: Float32Array.from(Array.from({ length: cuantas }, alasDe).flat()),
+    ...(historia ? { historia } : {}),
+  })
+
+  test('planta árboles en algunos patios y en más solares, dentro de su patio o su solar, y es determinista', () => {
+    const arboles = arbolesDePatio(ciudad(400), 0.5)
+    expect(arbolesDePatio(ciudad(400), 0.5)).toEqual(arboles)
+    const enSolar = arboles.filter((a) => a.y > 140)
+    const enPatio = arboles.filter((a) => a.y <= 140)
+    expect(enPatio.length).toBeGreaterThan(400 * 0.2)
+    expect(enPatio.length).toBeLessThan(400 * 0.4)
+    expect(enSolar.length).toBeGreaterThan(400 * 0.5)
+    expect(enSolar.length).toBeLessThan(400 * 0.7)
+    for (const a of arboles) {
+      const u = (a.x - 100) % 24
+      const [v0, v1, u0, u1] = a.y > 140 ? [140, 180, 0, 24] : [114, 126, 8, 24]
+      expect(a.y - a.r).toBeGreaterThanOrEqual(v0 - 1e-6)
+      expect(a.y + a.r).toBeLessThanOrEqual(v1 + 1e-6)
+      expect(u - a.r).toBeGreaterThanOrEqual(u0 - 1e-6)
+      expect(u + a.r).toBeLessThanOrEqual(u1 + 1e-6)
+      expect(a.nace).toBe(1)
+      expect(a.muere).toBe(0)
+    }
+  })
+
+  test('el árbol muere cuando la casa deja de ser de patio; la que nunca lo fue no tiene', () => {
+    const b = (estilo) => estilo + 16
+    const seVuelveModerna = Uint8Array.from(Array.from({ length: 200 }, () => [b(COLONIAL), b(COLONIAL), b(COLONIAL), b(COLONIAL), b(MODERNO), b(MODERNO)]).flat())
+    const arboles = arbolesDePatio(ciudad(200, seVuelveModerna), 0.5)
+    expect(arboles.length).toBeGreaterThan(50)
+    expect(arboles.every((a) => a.nace === 1 && a.muere === 4)).toBe(true)
+    const siempreModerna = Uint8Array.from(Array.from({ length: 200 }, () => Array(6).fill(b(MODERNO))).flat())
+    expect(arbolesDePatio(ciudad(200, siempreModerna), 0.5)).toEqual([])
+  })
+
+  test('sin marcos (datos viejos) no hay árboles de patio', () => {
+    expect(arbolesDePatio({ techos: new Uint32Array(4) }, 0.5)).toEqual([])
   })
 })

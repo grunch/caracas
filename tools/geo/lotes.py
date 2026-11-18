@@ -203,20 +203,33 @@ def lotes_rectos(manzana, poligonos, angulo, metro, rng):
     return lotes
 
 
-def lotes_de_manzana(manzana, metro, semilla):
-    """Etiqueta (> 0) cada píxel de la manzana con su lote; 0 fuera de la manzana."""
+def direccion_de_manzana(manzana, metro):
+    """(borde simplificado de la manzana, ángulo de sus lados en [0, π/2)). El ángulo es None si la
+    manzana no tiene dirección: sin polígono, o una hilera curva y angosta (va con semillas)."""
     manzana = np.asarray(manzana, bool)
     poligonos = lados_de(manzana, TOLERANCIA_LADOS_M / metro)
     if len(poligonos[0]) < 3:
-        return manzana.astype(np.int32)
+        return poligonos, None
     angulo, alineacion = orientacion(poligonos)
     if alineacion < ALINEACION_MINIMA:
         # sin dirección dominante: la del rectángulo mínimo, salvo que sea una hilera curva
         (_, (ancho, alto), grados) = cv2.minAreaRect(poligonos[0].astype(np.float32))
         grosor = 2 * cv2.distanceTransform(np.pad(manzana, 1).astype(np.uint8), cv2.DIST_L2, 5).max() * metro
         if grosor < GROSOR_FINO_M and manzana.sum() < LLENO_MINIMO * (ancho + 1) * (alto + 1):
-            return lotes_por_semillas(manzana, FRENTE_M / metro)
+            return poligonos, None
         angulo = math.radians(grados) % (math.pi / 2)
+    return poligonos, angulo
+
+
+def lotes_de_manzana(manzana, metro, semilla, direccion=None):
+    """Etiqueta (> 0) cada píxel de la manzana con su lote; 0 fuera de la manzana. `direccion`: lo que
+    da direccion_de_manzana, si ya se calculó."""
+    manzana = np.asarray(manzana, bool)
+    poligonos, angulo = direccion if direccion is not None else direccion_de_manzana(manzana, metro)
+    if len(poligonos[0]) < 3:
+        return manzana.astype(np.int32)
+    if angulo is None:
+        return lotes_por_semillas(manzana, FRENTE_M / metro)
     rng = np.random.default_rng(int(semilla))
     exterior = poligonos[0]
     c, s = math.cos(angulo), math.sin(angulo)

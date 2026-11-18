@@ -7,6 +7,13 @@ píxeles del plano y techos [primer vértice, cuántos, pisos, estilo, semilla],
 src/ciudad.js, más "esquinas": por techo, 1 si la casa hace esquina en su manzana (ahí iban los
 altos con balcón, fuentes/imagenes/README.md; lo usa tools/geo/estilos.py).
 
+Las casas de patio (tools/geo/alas.py) llevan además su marco y sus alas, para que el visor las teche
+como un peine de alas alrededor de patios y no con una tapa: "marcos" [techo, ox, oy, eux, euy, ancho,
+fondo, calles, crujía, primera ala, cuántas] (origen y medidas en píxeles; uno por cada casa que da a la
+calle, con su frente sobre la línea de fachada de la cuadra) y "alas" [tipo, u0, v0, u1, v1] en píxeles
+del marco (ninguna si la casa es simple; specs/02). Con --patios, además, la máscara de los patios y solares que se abrieron
+por regla (el plano los pinta edificados): la usa tools/suelo.mjs para que el suelo ahí sea de patio.
+
 Uso: vectorizar.py <clases.png> <salida.json> --escala <m/px> --plaza <px,py>
 """
 import argparse
@@ -23,7 +30,10 @@ from skimage import measure
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from lotes import casas_de_esquina, esquinas_de_manzana, fundir_chicos, lotes_de_manzana, sin_pelos  # noqa: E402
+from alas import CRUJIA_M, PATIO, SOLAR, alas_de_casa, frentes_de_manzana  # noqa: E402
+from lotes import (  # noqa: E402
+    casas_de_esquina, direccion_de_manzana, esquinas_de_manzana, fundir_chicos, lotes_de_manzana, sin_pelos,
+)
 
 CLASE = {'desconocido': 0, 'calle': 1, 'patio': 2, 'edificado': 3, 'publico': 4,
          'verde': 5, 'cultivo': 6, 'agua': 7, 'cerro': 8, 'margen': 9}
@@ -87,13 +97,26 @@ def techos_publicos(clases, salida, area_min_px, tolerancia_px, metro):
             agregar_techo(salida, figura, pisos, ESTILO_PUBLICO, semilla_de(figura.centroid.x, figura.centroid.y))
 
 
+def agregar_alas(salida, techo, marco, alas, origen, metro):
+    """El marco y las alas de la casa `techo`, llevados de la manzana a los píxeles del plano."""
+    ox, oy = marco['origen'][0] + origen[0], marco['origen'][1] + origen[1]
+    salida['marcos'].append([techo, round(ox, 2), round(oy, 2), round(marco['eu'][0], 5), round(marco['eu'][1], 5),
+                             round(marco['ancho'] / metro, 2), round(marco['fondo'] / metro, 2), marco['calles'],
+                             round(marco['crujia'] / metro, 2), len(salida['alas']), len(alas)])
+    salida['alas'].extend(alas)
+
+
 def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro):
     x, y = origen
     edificado = manzana & (clases == CLASE['edificado'])
     if edificado.sum() < area_min_px:
         return
     salida['manzanas'] += 1
-    lotes = lotes_de_manzana(manzana, metro, semilla_de(int(x), int(y)))
+    direccion = direccion_de_manzana(manzana, metro)
+    lotes = lotes_de_manzana(manzana, metro, semilla_de(int(x), int(y)), direccion)
+    # de toda la manzana: las líneas de fachada y el fondo de la crujía (la cumbrera corre seguida por la cuadra)
+    frentes = frentes_de_manzana(manzana, direccion[0][0], metro)
+    crujia = CRUJIA_M[0] + (CRUJIA_M[1] - CRUJIA_M[0]) * (semilla_de(int(x) + 17, int(y) + 29) / 0xFFFF)
     casas = measure.label(np.where(edificado, lotes, 0), background=0, connectivity=2)
     casas = measure.label(sin_pelos(casas, ANCHO_MINIMO_M / 2 / metro), background=0, connectivity=2)
     casas = fundir_chicos(casas, AREA_FUSION_M2 / metro ** 2)
@@ -112,13 +135,21 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
         semilla = semilla_de(figura.centroid.x, figura.centroid.y)
         agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla,
                       esquina=casa in de_esquina)
+        # la casa en su ventana, con 10 m de manzana alrededor para ver qué lados dan a la calle
+        margen = int(math.ceil(10 / metro))
+        f0, c0 = max(0, zona[0].start - margen), max(0, zona[1].start - margen)
+        ventana = (slice(f0, zona[0].stop + margen), slice(c0, zona[1].stop + margen))
+        con_alas = alas_de_casa(casas[ventana] == casa, manzana[ventana], direccion[1], metro, semilla, distancia_m(figura),
+                                [(fx - c0, fy - f0, dx, dy) for fx, fy, dx, dy in frentes], crujia)
+        if con_alas:
+            agregar_alas(salida, len(salida['techos']) - 1, *con_alas, (x + c0, y + f0), metro)
 
 
 def vectorizar(clases, metro, plaza):
     clases = np.asarray(clases)
     area_min_px = AREA_MINIMA_M2 / metro ** 2
     tolerancia_px = TOLERANCIA_M / metro
-    salida = {'vertices': [], 'techos': [], 'esquinas': [], 'manzanas': 0}
+    salida = {'vertices': [], 'techos': [], 'esquinas': [], 'manzanas': 0, 'marcos': [], 'alas': []}
 
     def distancia_m(f):
         return math.hypot(f.centroid.x - plaza[0], f.centroid.y - plaza[1]) * metro
@@ -133,12 +164,24 @@ def vectorizar(clases, metro, plaza):
     return salida
 
 
+def mascara_de_patios(ciudad, forma):
+    """Máscara (uint8, 255 = patio) de los patios y solares de las casas de patio, en píxeles del plano."""
+    mascara = np.zeros(forma, np.uint8)
+    for _, ox, oy, eux, euy, _, _, _, _, primera, cuantas in ciudad['marcos']:
+        for tipo, u0, v0, u1, v1 in ciudad['alas'][primera:primera + cuantas]:
+            if tipo in (PATIO, SOLAR):
+                esquinas = [(ox + u * eux - v * euy, oy + u * euy + v * eux) for u, v in ((u0, v0), (u1, v0), (u1, v1), (u0, v1))]
+                cv2.fillPoly(mascara, [np.round(np.array(esquinas) * 16).astype(np.int32)], 255, shift=4)
+    return mascara
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument('clases')
     ap.add_argument('salida')
     ap.add_argument('--escala', type=float, required=True, help='metros por píxel')
     ap.add_argument('--plaza', required=True, help='px,py de la Plaza Bolívar')
+    ap.add_argument('--patios', help='PNG donde dejar la máscara de los patios abiertos por regla')
     a = ap.parse_args()
     clases = cv2.imread(a.clases, cv2.IMREAD_UNCHANGED)
     if clases is None or clases.ndim != 2:
@@ -147,7 +190,11 @@ def main():
     res = vectorizar(clases, a.escala, plaza)
     with open(a.salida, 'w') as f:
         json.dump(res, f)
-    print(f"{res['manzanas']} manzanas, {len(res['techos'])} techos → {a.salida}")
+    if a.patios and not cv2.imwrite(a.patios, mascara_de_patios(res, clases.shape)):
+        raise SystemExit(f'no se pudo escribir {a.patios}')
+    patios = sum(1 for ala in res['alas'] if ala[0] == PATIO)
+    print(f"{res['manzanas']} manzanas, {len(res['techos'])} techos, {sum(1 for m in res['marcos'] if m[10])} casas de patio "
+          f"({len(res['alas'])} alas, {patios} patios) → {a.salida}")
 
 
 if __name__ == '__main__':
