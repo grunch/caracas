@@ -117,6 +117,25 @@ gzip(
 ### `datos/calles.bin` + `calles.json`
 `calles.json` = array ordenado de nombres de calles actuales. `calles.bin` = `Uint16`, **6 por registro**: posición, dirección, índice de nombre, largo y tipo *(inferido)*. Se indexa en una grilla de 300 m para buscar "calles cerca de (x,z)".
 
+*Caracas (implementado, `tools/geo/hoy.py`):* `calles.json` = array JSON de los nombres únicos (tag `name` de OSM, sin
+corregir), ordenados por código de carácter (`sorted` de Python). `calles.bin` = registros de **6 × Uint16
+little‑endian (12 bytes)**, sin cabecera (n = `byteLength / 12`). Cada registro es un **tramo** de una calle con
+nombre: las polilíneas de OSM se cortan donde giran más de 35° y cada pieza se parte en partes iguales de
+hasta 200 m; se descartan los tramos de menos de 20 m y los que tienen el punto medio fuera del mosaico.
+
+| u16 | campo | codificación |
+|---|---|---|
+| 0 | `x` | punto medio del tramo (a lo largo de la línea), en **píxeles del mosaico de 1936** redondeados (0 … 18599; 1 px = 0,5 m) |
+| 1 | `y` | ídem (0 … 14799, crece hacia el sur) |
+| 2 | `dx` | dirección unitaria de punta a punta del tramo: `dx = (u − 32768) / 32767` |
+| 3 | `dy` | ídem; orientada para leer: `dx > 0`, y si es vertical `dy = −1` (de abajo hacia arriba) |
+| 4 | `nombre` | índice en `calles.json` |
+| 5 | `largo` | largo del tramo en metros, redondeado (máx. 65535) |
+
+Los registros van ordenados por `largo` descendente (después por nombre, `x`, `y`): el visor puede priorizar
+las etiquetas tomando los primeros. No lleva tipo de vía. Datos © colaboradores de OpenStreetMap (ODbL),
+ficha en `fuentes/datos/osm-hoy/ficha.json`.
+
 ### `datos/hoy.json`
 Marcas de la ciudad actual: `[{nombre, x, y, nivel, rio:bool, nota}]` (x,y en píxeles del plano base). `rio:true` agrega "En 1867, esto era río."
 
@@ -144,6 +163,16 @@ los puntos que caen dentro) y el PNG sobra unos metros al este y al sur, así qu
 | `hoy-lejos.webp` (2048), `hoy-cerca.webp` (8192) | calles, vías y costa de OSM rasterizadas y alineadas al plano |
 | `fotos/{id}.webp`, `fotos/m/{id}.webp` | fotos de las fichas (grande y miniatura), máx. ~720 px |
 | `autor.webp` | avatar |
+
+*Caracas (implementado, `tools/geo/hoy.py`):* `hoy-lejos.webp` (2048×1630) y `hoy-cerca.webp` (8192×6518) cubren
+el mosaico entero de 1936 (esquina (0,0) = píxel (0,0) del mosaico; escala por eje = lado de la textura / lado
+del mosaico). **RGB sin pérdida, sin alfa**: **R calles · G vías férreas · B agua**; cada canal es la
+**cobertura** (0–255, antialias por sobremuestreo 4×) de esa capa, así que el shader estampa rojo con
+`max(r, g, b)` o pesa cada capa por separado. Ancho dibujado en metros según el tipo de OSM (avenidas 11–22 m,
+calles 6–8 m, rieles 4–5 m, ríos 15 m, quebradas 4 m), nunca menos de 1 px de la textura. De lejos: autopistas,
+troncales, primarias, secundarias y terciarias (con sus enlaces), rieles, ríos, canales y lagunas; de cerca
+además las calles residenciales, sin clasificar, de convivencia y peatonales y las quebradas. No entran los
+túneles ni lo entubado, ni el metro bajo tierra (`tunnel`, `location=underground`, `layer < 0` en rieles).
 
 Codificación "desde cuándo" en un canal: con `E` etapas, la etapa `e` (contando desde 1) vale aprox. `(E+1−e)/E` (1 = primera, 1/E = última, 0 = nunca). Así, un solo `step` en el shader decide si algo existe en el año que se mira.
 
