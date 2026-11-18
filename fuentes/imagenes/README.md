@@ -265,3 +265,23 @@ pretil republicano llega a La Pastora después (foto de 1930): la misma casa cam
 1889 y 1936, así que el estilo de una casa vieja no debería quedar fijo en "colonial" para siempre.
 Alturas desparejas entre casas vecinas (variar la altura de piso por semilla ±15 %). Hito: iglesia de
 La Pastora, dos torres con cúpulas (T41).
+
+## ~1930 (lugar a verificar) · Calle comercial con tranvía junto a una plaza (`1930-pinterest-calle-comercial-con-tranvia`) → época 1936
+
+Foto nítida a nivel de peatón: la mejor referencia del **centro comercial** en la última época (la de
+Gradillas es de 1950). Podría ser un costado de la Plaza Bolívar; sin confirmar.
+
+- **Calzada lisa (asfalto o macadam) con rieles de tranvía** en curva: dos vías. **Cables aéreos** del
+  tranvía y de luz, y **postes altos** con farol de brazo.
+- **Edificios de dos pisos** en hilera: planta baja de **comercio con toldos de lona inclinados** sobre
+  toda la acera, uno junto a otro, y **letreros** sobre las puertas y en bandera; arriba, **balcón
+  corrido con baranda** y ventanas con postigos; cornisa y pretil. Detrás asoma uno de tres pisos.
+- **Acera con brocal**, ancha, llena de gente de sombrero y traje claro.
+- **Árboles muy grandes** del lado de la plaza, con el tronco pintado de cal en la base y alcorque
+  redondo: dan sombra a media calle.
+- **Carros** de fines de los 20 estacionados junto a la plaza.
+
+Qué implica: en 1936 los costados de las plazas del centro llevan **dos pisos con comercio abajo, toldo
+y balcón corrido arriba** (el estilo ecléctico de comercio, para T32); **rieles y cables de tranvía**
+en las calles principales (dato para T62 y para el suelo de las calles); árboles de plaza de copa
+grande, mayores que los de patio.
