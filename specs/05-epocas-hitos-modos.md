@@ -41,7 +41,7 @@ granRex: { nombre:'Cine Gran Rex', año:1937, x:11250, y:8732, ux:.9994, uy:.035
 ## "Ver lo de hoy" (H)
 
 - Estampa en **rojo** sobre el plano las calles, vías y costa actuales (OSM). De lejos, solo avenidas, vías y costa; de cerca, todas las calles con borde afilado; muy de cerca, solo el contorno de la calle, a dos trazos. La **tierra ganada al río** va rayada (patrón estable en pantalla; cada nivel dobla el anterior).
-- Los nombres de calles van en un `<canvas>` 2D superpuesto, alineados con cada calle. La medición de texto se cachea, hay un máximo de ~90 etiquetas y una grilla anticolisión de 13 px, y solo se muestran con la cámara entre 1500 y 3600 m de distancia.
+- Los nombres de calles van en un `<canvas>` 2D superpuesto, alineados con cada calle. La medición de texto se cachea, hay un máximo de ~90 etiquetas y una grilla anticolisión de 13 px, y solo se muestran con la cámara entre 1500 y 3600 m de distancia. *Caracas (implementado, `src/calles.js`):* entre 300 y 3600 m (con rampas en los bordes), porque los tramos de `calles.bin` son de hasta 200 m y de lejos casi ningún nombre entra en su tramo; italic serif de 14 px en rojo `#8f2a1a` con halo de papel, sin repetir el mismo nombre a menos de 280 px.
 - Marcas rojas desde `hoy.json`.
 - Leyenda con © OpenStreetMap (ODbL).
 

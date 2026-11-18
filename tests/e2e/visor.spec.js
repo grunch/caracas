@@ -140,3 +140,16 @@ test('los árboles llegan después de la ciudad: una malla instanciada con un á
   })
   expect(malla).toEqual({ instanciada: true, count: bytes / 8, enEscena: true, mismoColor: true })
 })
+
+test('con lo de hoy, los nombres de las calles se dibujan sobre la vista y se borran al apagarlo', async ({ page }) => {
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  const hay = await hayDato(page, 'datos/calles.bin', 'octet-stream')
+  test.skip(!hay, 'sin datos/calles.bin (dato pesado fuera de git)')
+  await page.evaluate(() => window.lab.cam.jump({ x: 0, z: 0, dist: 1200, yaw: 0, pitch: 1.3 }))
+  await page.keyboard.press('KeyH')
+  await page.waitForFunction(() => window.lab.calles?.cuantas > 0, null, { timeout: 60000 })
+  await expect(page.locator('#calles')).toHaveCSS('pointer-events', 'none')
+  await page.keyboard.press('KeyH')
+  await page.waitForFunction(() => window.lab.calles.cuantas === 0, null, { timeout: 60000 })
+})
