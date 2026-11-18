@@ -84,11 +84,15 @@ Mayor", con `muere` en 1889: Guzmán Blanco lo quita y hace la Plaza Bolívar aj
 hacia 1874). Los jardines en X y los árboles de la plaza que hoy salen del plano de 1936 no deben verse
 antes de 1889.
 
-## ~1840 (a verificar) · Vista de la ciudad con el Ávila (`1840-camaradecaracas-vista-desde-el-calvario`) → épocas 1772 y 1843
+## 1839 · Vista de Caracas, de John Thomas (`1839-commons-vista-de-caracas` y `1840-camaradecaracas-vista-desde-el-calvario`) → época 1843 (y guía para 1772)
 
 Litografía **en color**, tomada desde una loma al suroeste (El Calvario, probablemente) mirando al
-noreste. Llegó como ilustración de la época del obispo Diez Madroñero (1757–1769), pero por su estilo
-parece del siglo XIX. Es la **referencia de color y del conjunto**.
+noreste. Hay dos reproducciones de la misma litografía: la de Commons (recortada a lo alto, colores
+claros y más fieles; da autor y año) y la de la Cámara de Caracas (más ancha, color saturado; llegó
+como ilustración de la época del obispo Diez Madroñero, 1757–1769, pero es esta misma de 1839). Es la
+**referencia de color y del conjunto**. Para los tonos, guiarse por la de Commons: **teja anaranjada
+clara y terrosa, no roja; el Ávila ocre y malva pálido, con bruma; el campo, sabana seca amarillenta**
+más que verde.
 
 - **Un mar de tejados rojos**, bajo y parejo: casi todo de un piso, con algunos altos sueltos. Tejas de
   rojo anaranjado a marrón, gastadas de forma despareja.

@@ -1,9 +1,9 @@
 {
   "titulo": "Vista de Caracas con el Ávila al fondo (litografía coloreada)",
-  "año_representado": null,
-  "año_aproximado": "probablemente hacia 1830–1850 (por el estilo de la litografía)",
+  "año_representado": 1839,
+  "año_aproximado": null,
   "año": null,
-  "autor": null,
+  "autor": "John Thomas (identificada por la copia de Wikimedia Commons, 1839-commons-vista-de-caracas)",
   "institucion": null,
   "url_fuente": null,
   "url_descarga": "https://camaradecaracas.com/wp-content/uploads/2023/05/CDLC-80-FOTO-1.jpg",
@@ -13,6 +13,8 @@
   "alto": 640,
   "formato": "JPEG",
   "tipo": "vista panorámica (litografía coloreada)",
-  "epocas": [1, 2],
-  "notas": "Aportada como ilustración de la época del obispo Diez Madroñero (1757–1769), tomada de un artículo de la Cámara de Caracas. La imagen en sí parece una litografía romántica coloreada del siglo XIX (hacia 1830–1850), no una vista hecha en 1757–1769: autor y fecha A VERIFICAR. Aun así sirve para las dos épocas: la ciudad colonial cambió poco hasta mediados del XIX. La carpeta lleva 1840 como año aproximado, no como dato. Falta la URL del artículo y la licencia."
+  "epocas": [
+    2
+  ],
+  "notas": "Aportada como ilustración de la época del obispo Diez Madroñero (1757–1769), pero es la litografía de John Thomas de 1839 (la misma que 1839-commons-vista-de-caracas, en una reproducción más ancha y con el color saturado). La carpeta conserva \"1840\" en el nombre. Sirve también de guía para 1772: la ciudad colonial cambió poco hasta mediados del XIX. Faltan la URL del artículo y la licencia de esta reproducción."
 }
