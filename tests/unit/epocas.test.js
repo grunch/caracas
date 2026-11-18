@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { visibleEn, epocaAqui, vivo, desdeCuando } from '../../src/epocas.js'
+import { visibleEn, epocaAqui, vivo, desdeCuando, escalaCrece } from '../../src/epocas.js'
 
 describe('visibleEn', () => {
   test('una casa se ve desde que nace y hasta antes de morir (muere = 0: nunca)', () => {
@@ -41,5 +41,14 @@ describe('desdeCuando', () => {
     expect(desdeCuando(1 / 6, 6)).toBe(5)
     expect(desdeCuando(0, 6)).toBe(Infinity)
     expect(desdeCuando(4 / 6, 6)).toBe(2)
+  })
+})
+
+describe('escalaCrece', () => {
+  test('la hoja ocupa la parte de crece.png que le corresponde (la última celda sobra)', () => {
+    // 18600 × 14800 px a 0,5 m/px = 9300 × 7400 m; celdas de 8 m: 1163 × 925 celdas (9304 × 7400 m)
+    const [ex, ey] = escalaCrece({ ancho: 18600, alto: 14800, metro: 0.5 }, { cols: 1163, rows: 925 }, 8)
+    expect(ex).toBeCloseTo(9300 / 9304, 6)
+    expect(ey).toBeCloseTo(1, 6)
   })
 })

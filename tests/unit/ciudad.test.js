@@ -50,6 +50,15 @@ describe('extruirTechos', () => {
     expect(malas).toBe(0)
   })
 
+  test('aAncla lleva el centroide (x, z) de la casa en todos sus vértices', () => {
+    // el cuadrado ocupa los primeros 4 (techo) + 4·4 (paredes) = 20 vértices
+    for (let v = 0; v < 20; v++) expect([g.anclas[v * 2], g.anclas[v * 2 + 1]]).toEqual([2.5, 2.5])
+    const ultimo = g.anclas.length / 2 - 1
+    expect(g.anclas[ultimo * 2]).toBeCloseTo(12.5, 3)
+    expect(g.anclas[ultimo * 2 + 1]).toBeCloseTo(4 / 3, 3)
+    expect(g.anclas.length / 2).toBe(g.posiciones.length / 3)
+  })
+
   test('acepta polígonos en ambos sentidos de giro', () => {
     const inverso = new Float32Array([0, 10, 10, 10, 10, 0, 0, 0])
     const t = new Uint32Array([0, 4, empacarTecho({ pisos: 1, estilo: 0 }), 1])

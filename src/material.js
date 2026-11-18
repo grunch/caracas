@@ -8,6 +8,7 @@
  * aInfo = (distancia a la plaza, semilla, estilo, pisos); pisos = 0 marca el suelo.
  */
 import { MeshLambertMaterial, Vector2, DataTexture } from 'three'
+import { GLSL_RELIEVE, uniformsRelieve } from './relieve.js'
 
 // la época que rige en un punto y cuánto está en pie una casa (espejo de src/epocas.js)
 const GLSL_EPOCAS = /* glsl */ `
@@ -23,7 +24,7 @@ const VERTICE_COMUN = /* glsl */ `
   uniform float uOla, uAnchoOla;
   varying float vExiste;
   ${GLSL_EPOCAS}
-  varying vec3 vMundo; varying float vTecho; varying vec4 vInfo;
+  varying vec3 vMundo; varying float vTecho; varying vec4 vInfo; varying float vBase;
   float azar(float n) { return fract(sin(n * 12.9898) * 43758.5453); }`
 
 const VERTICE_OLA = /* glsl */ `
@@ -33,19 +34,23 @@ const VERTICE_OLA = /* glsl */ `
   vExiste = vivoEn(aVida, epocaAqui(aInfo.x));
   transformed.y *= sube * vExiste;
   vTecho = step(0.5, normal.y);
-  vInfo = aInfo;`
+  vInfo = aInfo;
+  vBase = 0.0; // altura del suelo bajo la casa (la pone el relieve)`
 
 const FRAGMENTO_COMUN = /* glsl */ `
   uniform float uAnchoOla, uEtapas; uniform sampler2D uCrece;
   varying float vExiste;
   ${GLSL_EPOCAS}
   /** Desde qué época está edificado el punto (crece.png, R "desde cuándo"); nunca = muy lejos. */
-  float edificadoDesde(vec2 uv) {
-    float v = texture2D(uCrece, uv).r;
+  // crece.png: celdas de celda_m desde la esquina noroeste de la hoja (la última puede sobrar al este/sur)
+  uniform vec2 uCreceEscala;
+  float edificadoDesde(vec2 hoja) {
+    vec2 c = hoja * uCreceEscala;
+    float v = texture2D(uCrece, vec2(c.x, 1.0 - c.y)).r;
     return v <= 0.0 ? 99.0 : uEtapas * (1.0 - v);
   }
   uniform sampler2D uMapa, uSuelo; uniform vec2 uHoja, uPlaza; uniform float uMetro, uColor;
-  varying vec3 vMundo; varying float vTecho; varying vec4 vInfo;
+  varying vec3 vMundo; varying float vTecho; varying vec4 vInfo; varying float vBase;
   float azarF(float n) { return fract(sin(n * 12.9898) * 43758.5453); }
 
   /** Cuánta tinta hay en el plano en ese punto: 0 papel, 1 trazo. */
@@ -71,7 +76,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   vec3 sueloColor(vec2 uv, vec3 papel) {
     vec4 s = texture2D(uSuelo, uv);
     // en épocas anteriores, lo que todavía no estaba edificado vuelve a ser campo
-    float yaEstaba = step(edificadoDesde(uv), epocaAqui(length(vMundo.xz)) + 0.5);
+    float yaEstaba = step(edificadoDesde(vec2(uv.x, 1.0 - uv.y)), epocaAqui(length(vMundo.xz)) + 0.5);
     s.ba *= yaEstaba;
     float urbano = smoothstep(0.08, 0.35, texture(uSuelo, uv, 5.0).a); // manzanas alrededor: ciudad
     vec3 c = mix(vec3(0.62, 0.60, 0.42), vec3(0.72, 0.64, 0.50), urbano);  // pasto seco o tierra apisonada
@@ -96,7 +101,7 @@ const FRAGMENTO_COLOR = /* glsl */ `
   // color: suelo pintado; techo de teja (los públicos, azotea clara); pared de cal con zócalo
   vec3 azotea = vec3(0.66, 0.63, 0.57) * (0.92 + 0.12 * azarF(vInfo.y * 2.3));
   vec3 techo = mix(teja(vInfo.y), azotea, publico);
-  vec3 pared = cal(vInfo.y) * mix(0.72, 1.0, step(0.8, vMundo.y));
+  vec3 pared = cal(vInfo.y) * mix(0.72, 1.0, step(0.8, vMundo.y - vBase)); // zócalo desde la base de la casa
   vec3 enColor = mix(mix(pared, techo, vTecho), sueloColor(uv, papel), esSuelo);
 
   diffuseColor.rgb = mix(enTinta, enColor, uColor);`
@@ -104,8 +109,11 @@ const FRAGMENTO_COLOR = /* glsl */ `
 /** 1×1 blanco: en "desde cuándo", edificado desde la primera época (no recorta nada). */
 const TODO_EDIFICADO = Object.assign(new DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1), { needsUpdate: true })
 
-export function crearMaterialCiudad({ plano, metro, mapa, suelo = null }) {
+export function crearMaterialCiudad({
+  plano, metro, mapa, suelo = null, relieve = uniformsRelieve({ x0: 0, z0: 0, ancho: 1, alto: 1 }),
+}) {
   const U = {
+    ...relieve, // tRelieve, uRelieveHoja, uRelieveCelda, uExageracion (ver relieve.js)
     uOla: { value: 0 }, // radio del frente de la ola, en metros
     uAnchoOla: { value: 260 }, // cuánto tarda una casa en subir entera, en metros de frente
     uColor: { value: 0 }, // 0 tinta · 1 color
@@ -118,7 +126,8 @@ export function crearMaterialCiudad({ plano, metro, mapa, suelo = null }) {
     uEpocaA: { value: 0 },
     uOlaEpoca: { value: 0 },
     uEtapas: { value: 6 },
-    uCrece: { value: TODO_EDIFICADO }, // hasta que llegue crece.png: todo edificado desde la primera época
+    uCrece: { value: TODO_EDIFICADO },
+    uCreceEscala: { value: new Vector2(1, 1) }, // hoja normalizada → crece.png normalizado (ver escalaCrece) // hasta que llegue crece.png: todo edificado desde la primera época
   }
   const material = new MeshLambertMaterial({ color: 0xf1e6cd })
   material.onBeforeCompile = (s) => {
@@ -128,9 +137,30 @@ export function crearMaterialCiudad({ plano, metro, mapa, suelo = null }) {
       .replace('#include <begin_vertex>', `#include <begin_vertex>${VERTICE_OLA}`)
       .replace('#include <worldpos_vertex>', `#include <worldpos_vertex>
         vMundo = (modelMatrix * vec4(transformed, 1.0)).xyz;`)
+    parchearRelieveVertex(s)
     s.fragmentShader = s.fragmentShader
       .replace('#include <common>', `#include <common>${FRAGMENTO_COMUN}`)
       .replace('#include <color_fragment>', `#include <color_fragment>${FRAGMENTO_COLOR}`)
   }
   return { material, U }
+}
+
+/**
+ * Relieve (solo vertex): todo se apoya en el terreno. El suelo (pisos = 0) se desplaza y toma
+ * la normal del terreno, para que Lambert sombree la cuesta. Cada casa sube entera a la altura
+ * del suelo en su ancla (si no, en la cuesta el techo quedaría inclinado) y el pie de sus
+ * paredes baja hasta el suelo para que no flote. Va antes de project_vertex, después de la ola.
+ * Las geometrías están en coordenadas del mundo: position.xz es el punto del terreno.
+ */
+function parchearRelieveVertex(s) {
+  s.vertexShader = s.vertexShader
+    .replace('void main() {', `attribute vec2 aAncla;
+      ${GLSL_RELIEVE}
+      void main() {`)
+    .replace('#include <beginnormal_vertex>', `#include <beginnormal_vertex>
+      if (aInfo.w < 0.5) objectNormal = normalSuelo(position.xz);`)
+    .replace('#include <project_vertex>', `vBase = aInfo.w < 0.5 ? sueloEn(position.xz) : sueloEn(aAncla);
+      transformed.y += aInfo.w < 0.5 ? sueloEn(position.xz)
+        : apoyoCasa(aAncla, transformed.xz, position.y < 0.01);
+      #include <project_vertex>`)
 }

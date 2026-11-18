@@ -21,6 +21,15 @@ export const epocaAqui = ({ de, a, ola, ancho }, dist) => de + (a - de) * suave(
 /** Decodifica "desde cuándo" (specs/02): con E etapas la primera vale 1, la última 1/E y "nunca" 0. */
 export const desdeCuando = (valor, E) => (valor <= 0 ? Infinity : Math.round(E * (1 - valor)))
 
+/**
+ * Escala de la hoja (0–1) a crece.png (0–1): la imagen tiene `cols × rows` celdas de `celdaM` metros
+ * desde la esquina noroeste; con `metro` m/px, la hoja de `ancho × alto` px ocupa solo parte de ella.
+ */
+export const escalaCrece = ({ ancho, alto, metro }, { cols, rows }, celdaM) => {
+  const celdaPx = celdaM / metro
+  return [ancho / (cols * celdaPx), alto / (rows * celdaPx)]
+}
+
 /** Cuánto está en pie una casa en la época (fraccionaria) `e`: sube al nacer, baja al morir. */
 export function vivo(nace, muere, e) {
   const nacio = suave(nace - 0.5, nace, e)

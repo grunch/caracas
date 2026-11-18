@@ -1,7 +1,8 @@
 /**
  * La ciudad levantada: huellas de los techos (polígonos en píxeles del plano) extruidas
  * en una sola geometría. Cada vértice lleva aInfo = (distancia de su casa a la plaza,
- * semilla, estilo, pisos) para que el shader haga la ola y el estilo de la fachada.
+ * semilla, estilo, pisos) para que el shader haga la ola y el estilo de la fachada, y
+ * aAncla = (x, z) del centroide de su casa: la altura del terreno a la que sube entera.
  *
  * Datos (ciudad.pak): vertices Float32 [px, py, …]; techos Uint32 de a 4:
  * [primer vértice, cuántos, empacarTecho({pisos, estilo}), semilla].
@@ -13,20 +14,22 @@ export const ALTO_PISO = 4.2 // m: casas coloniales y republicanas de techo alto
 export const empacarTecho = ({ pisos, estilo }) => ((estilo & 0xff) << 8) | (pisos & 0xff)
 export const desempacarTecho = (v) => ({ pisos: v & 0xff, estilo: (v >> 8) & 0xff })
 
-/** Devuelve arrays planos (posiciones, normales, info, indices); sin three.js de por medio. */
+/** Devuelve arrays planos (posiciones, normales, info, vidas, anclas, indices); sin three.js de por medio. */
 export function extruirTechos({ vertices, techos, vida = null }, coords) {
   const posiciones = []
   const normales = []
   const info = []
   const vidas = [] // [nace, muere] por vértice (src/epocas.js); sin vida, siempre visible
+  const anclas = []
   const indices = []
   let vidaTecho = [0, 0]
 
-  const vertice = (x, y, z, n, datos) => {
+  const vertice = (x, y, z, n, datos, ancla) => {
     posiciones.push(x, y, z)
     normales.push(n[0], n[1], n[2])
     info.push(...datos)
     vidas.push(vidaTecho[0], vidaTecho[1])
+    anclas.push(ancla.x, ancla.y)
     return posiciones.length / 3 - 1
   }
   // agrega el triángulo con el giro que haga que su cara mire hacia n
@@ -56,7 +59,7 @@ export function extruirTechos({ vertices, techos, vida = null }, coords) {
 
     // techo
     const arriba = [0, 1, 0]
-    const base = anillo.map((p) => vertice(p.x, alto, p.y, arriba, datos))
+    const base = anillo.map((p) => vertice(p.x, alto, p.y, arriba, datos, centro))
     for (const [a, b, c] of ShapeUtils.triangulateShape(anillo, [])) triangulo(base[a], base[b], base[c], arriba)
 
     // paredes: normal hacia afuera según el sentido de giro del anillo
@@ -67,8 +70,8 @@ export function extruirTechos({ vertices, techos, vida = null }, coords) {
       const largo = a.distanceTo(b)
       if (largo < 1e-6) continue
       const n = [((b.y - a.y) / largo) * signo, 0, (-(b.x - a.x) / largo) * signo]
-      const [v0, v1, v2, v3] = [vertice(a.x, 0, a.y, n, datos), vertice(b.x, 0, b.y, n, datos),
-        vertice(b.x, alto, b.y, n, datos), vertice(a.x, alto, a.y, n, datos)]
+      const [v0, v1, v2, v3] = [vertice(a.x, 0, a.y, n, datos, centro), vertice(b.x, 0, b.y, n, datos, centro),
+        vertice(b.x, alto, b.y, n, datos, centro), vertice(a.x, alto, a.y, n, datos, centro)]
       triangulo(v0, v1, v2, n)
       triangulo(v0, v2, v3, n)
     }
@@ -78,17 +81,19 @@ export function extruirTechos({ vertices, techos, vida = null }, coords) {
     normales: new Float32Array(normales),
     info: new Float32Array(info),
     vidas: new Float32Array(vidas),
+    anclas: new Float32Array(anclas),
     indices: posiciones.length / 3 > 65535 ? new Uint32Array(indices) : new Uint16Array(indices),
   }
 }
 
 export function geometriaCiudad(datos, coords) {
-  const { posiciones, normales, info, vidas, indices } = extruirTechos(datos, coords)
+  const { posiciones, normales, info, vidas, anclas, indices } = extruirTechos(datos, coords)
   const g = new BufferGeometry()
   g.setAttribute('position', new BufferAttribute(posiciones, 3))
   g.setAttribute('normal', new BufferAttribute(normales, 3))
   g.setAttribute('aInfo', new BufferAttribute(info, 4))
   g.setAttribute('aVida', new BufferAttribute(vidas, 2))
+  g.setAttribute('aAncla', new BufferAttribute(anclas, 2))
   g.setIndex(new BufferAttribute(indices, 1))
   g.computeBoundingSphere()
   return g

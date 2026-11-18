@@ -33,9 +33,16 @@ describe('pak', () => {
     expect(() => codificarPak({ techos: { datos: new Uint16Array(3), registro: 4 } })).toThrow(/registro/)
   })
 
-  test('rechaza partes sin tipo conocido al decodificar', () => {
-    const gz = codificarPak({ raro: { datos: new Uint8Array(4), registro: 4 } })
-    expect(() => decodificarPak(descomprimir(gz), TIPOS)).toThrow(/raro/)
+  test('ignora (avisando) las partes que el visor todavía no conoce: datos más nuevos que el código', () => {
+    const gz = codificarPak({
+      raro: { datos: new Uint8Array(4), registro: 4 },
+      techos: { datos: new Uint16Array([1, 2, 3, 4, 5, 6, 7, 8]), registro: 16 },
+    })
+    const avisos = []
+    const salida = decodificarPak(descomprimir(gz), TIPOS, (m) => avisos.push(m))
+    expect(salida.raro).toBeUndefined()
+    expect(Array.from(salida.techos)).toEqual([1, 2, 3, 4, 5, 6, 7, 8])
+    expect(avisos).toEqual([expect.stringMatching(/raro/)])
   })
 })
 

@@ -35,5 +35,6 @@ tarea (o subtarea) del plan y actualiza su fila (número de PR, estado).
 
 - Nunca se suben escaneos, mosaicos, `.pak`, `.bin`, `.webp` del plano ni otros binarios generados
   (ver `.gitignore`); se regeneran con los comandos de `tools/geo/README.md`.
-- Cada fuente conserva su licencia en `fuentes/mapas/*/ficha.json`. La decisión de publicar la toma el
+- Cada fuente conserva su licencia en su ficha: `fuentes/mapas/*/ficha.json` para los mapas y
+  `fuentes/datos/*/ficha.json` para los demás datos (modelos de elevación, OpenStreetMap…). La decisión de publicar la toma el
   responsable del proyecto.
