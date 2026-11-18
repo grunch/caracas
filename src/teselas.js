@@ -30,9 +30,11 @@ export function rectTesela(nombre, { ancho, alto, tesela }) {
 
 /**
  * Mantiene cargadas las teselas que tocan y las pone en las ranuras del shader
- * (U.uFino[k], U.uFinoRect[k], U.uFinoOn[k]). `cargar(url)` devuelve una promesa de textura.
+ * (U.uFino[k], U.uFinoRect[k], U.uFinoOn[k]). `cargar(url)` devuelve una promesa de textura;
+ * `respaldo()`, la textura viva que ocupa las ranuras inactivas (el shader muestrea todas, y una
+ * textura liberada que siguiera ahí la volvería a subir three.js y se perdería esa memoria).
  */
-export function crearTeselasFinas({ laminas, cargar, U, pedirCuadro }) {
+export function crearTeselasFinas({ laminas, cargar, U, pedirCuadro, respaldo }) {
   const cache = new Map() // nombre → { textura, pedida, uso }
   let reloj = 0
 
@@ -66,10 +68,8 @@ export function crearTeselasFinas({ laminas, cargar, U, pedirCuadro }) {
       const e = nombre ? pedir(nombre) : null
       const lista = Boolean(e?.textura)
       U.uFinoOn.value[k] = lista ? 1 : 0
-      if (lista) {
-        U.uFino.value[k] = e.textura
-        U.uFinoRect.value[k].fromArray(rectTesela(nombre, laminas))
-      }
+      U.uFino.value[k] = lista ? e.textura : respaldo()
+      if (lista) U.uFinoRect.value[k].fromArray(rectTesela(nombre, laminas))
     }
     descartarViejas(new Set(nombres))
   }

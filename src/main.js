@@ -88,6 +88,8 @@ async function cargarTextura(url, esColor) {
 function ponerTextura(uniforme, t) {
   const anterior = uniforme.value
   uniforme.value = t
+  // las ranuras de teselas inactivas usan el plano general de respaldo: que no queden con el liberado
+  ciudad.U.uFino.value = ciudad.U.uFino.value.map((v) => (v === anterior ? t : v))
   anterior?.dispose()
   pedirCuadro(3)
 }
@@ -97,7 +99,10 @@ const DIST_TESELAS_M = 2000 // más cerca que esto, un texel de la textura de 81
 let teselas = null
 fetch('plano/laminas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))).then((laminas) => {
   if (laminas.tesela > maxTextura) return // la GPU no las admite: queda la textura general
-  teselas = crearTeselasFinas({ laminas, cargar: (url) => cargarTextura(url, true), U: ciudad.U, pedirCuadro })
+  teselas = crearTeselasFinas({
+    laminas, cargar: (url) => cargarTextura(url, true), U: ciudad.U, pedirCuadro, respaldo: () => ciudad.U.uMapa.value,
+  })
+  pedirCuadro(3) // si la cámara ya está cerca y el render quedó quieto, que empiece a pedir teselas
 }).catch((e) => console.warn(`teselas: ${e.message}`))
 
 // --- la ciudad y la ola ---

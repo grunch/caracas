@@ -29,3 +29,31 @@ describe('rectTesela', () => {
     expect(rectTesela('2-1', laminas)).toEqual([6144 / 7000, 3072 / 4000, 1, 1])
   })
 })
+
+import { crearTeselasFinas } from '../../src/teselas.js'
+
+describe('crearTeselasFinas', () => {
+  const laminasGrandes = { ancho: 30720, alto: 30720, tesela: 3072, cols: 10, rows: 10 }
+  const ranuras = () => ({
+    uFino: { value: Array(4).fill('respaldo') },
+    uFinoRect: { value: Array.from({ length: 4 }, () => ({ fromArray() {} })) },
+    uFinoOn: { value: [0, 0, 0, 0] },
+  })
+  const textura = (nombre) => ({ nombre, liberada: false, dispose() { this.liberada = true } })
+  const esperar = () => new Promise((r) => setTimeout(r, 0))
+
+  test('una ranura inactiva vuelve a la textura de respaldo antes de liberar la suya', async () => {
+    const U = ranuras()
+    const t = crearTeselasFinas({ laminas: laminasGrandes, cargar: async (url) => textura(url), U, pedirCuadro: () => {}, respaldo: () => 'respaldo' })
+    t.update(100, 100, true)
+    await esperar()
+    t.update(100, 100, true) // ya cargadas: entran a las ranuras
+    // cruzar muchos bloques: el caché libera las viejas; ninguna ranura puede quedar apuntando a una liberada
+    for (let k = 0; k < 6; k++) {
+      t.update(100 + k * 6144, 100 + k * 6144, true)
+      expect(U.uFino.value.every((v) => v === 'respaldo' || !v.liberada)).toBe(true)
+    }
+    t.update(0, 0, false)
+    expect(U.uFino.value).toEqual(Array(4).fill('respaldo'))
+  })
+})
