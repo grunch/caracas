@@ -1,0 +1,128 @@
+{
+ "carpeta": "1843-nypl-jesurun-facsimil-muller-stapler",
+ "año": 1843,
+ "nota": "Facsímil del plano de Jesurún (1843). Blanco y negro: manzanas edificadas rayadas, calles en blanco. Norte arriba.",
+ "factor": 2,
+ "perfil": {
+  "canal": "L",
+  "umbral": 185,
+  "sentido": "mayor",
+  "suavizado_px": 1.5,
+  "suave": 8
+ },
+ "umbral_residuo_m": 25,
+ "suavizado": 0.03,
+ "margen_px": 600,
+ "semillas": [
+  {
+   "i": 0,
+   "j": 0,
+   "px": 3204,
+   "py": 2639,
+   "nota": "esquina noroeste de la Plaza Bolívar (Principal)"
+  },
+  {
+   "i": 1,
+   "j": 0,
+   "px": 3322,
+   "py": 2639,
+   "nota": "esquina noreste de la plaza (Torre), junto a la Catedral (A)"
+  },
+  {
+   "i": 0,
+   "j": 1,
+   "px": 3204,
+   "py": 2758,
+   "nota": "esquina suroeste de la plaza (Monjas)"
+  },
+  {
+   "i": 1,
+   "j": 1,
+   "px": 3322,
+   "py": 2759,
+   "nota": "esquina sureste de la plaza (Gradillas)"
+  }
+ ],
+ "anclas": [],
+ "residuos_m": {
+  "metodo": "dejando uno fuera (TPS sin ese GCP), en metros sobre 1936",
+  "n": 56,
+  "rms": 13.29,
+  "p90": 19.67,
+  "max": 24.82,
+  "descartados": 9,
+  "manuales": 4
+ },
+ "marco": [
+  1740,
+  1160,
+  4960,
+  4080
+ ],
+ "excluir": [
+  [
+   4474,
+   1150,
+   4978,
+   1553
+  ]
+ ],
+ "gcps": [
+  {"px": 3204, "py": 2639, "x36": 8883, "y36": 6709, "manual": true, "nota": "esquina noroeste de la Plaza Bolívar (Principal)", "loo_m": 14.88},
+  {"px": 3322, "py": 2639, "x36": 9088, "y36": 6754, "manual": true, "nota": "esquina noreste de la plaza (Torre), junto a la Catedral (A)", "loo_m": 24.82},
+  {"px": 3204, "py": 2758, "x36": 8850, "y36": 6911, "manual": true, "nota": "esquina suroeste de la plaza (Monjas)", "loo_m": 17.56},
+  {"px": 3322, "py": 2759, "x36": 9048, "y36": 6954, "manual": true, "nota": "esquina sureste de la plaza (Gradillas)", "loo_m": 13.4},
+  {"px": 2726.51, "py": 1690.02, "x36": 8413.5, "y36": 4865.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.48)", "loo_m": 18.91},
+  {"px": 2902.89, "py": 1735.7, "x36": 8693.5, "y36": 5047.12, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.40)", "loo_m": 7.67},
+  {"px": 3018.18, "py": 1876.73, "x36": 8830.15, "y36": 5333.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.36)", "loo_m": 9.9},
+  {"px": 2895.68, "py": 2073.54, "x36": 8513.79, "y36": 5588.32, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.34)", "loo_m": 11.02},
+  {"px": 4370.87, "py": 1838.38, "x36": 11059.87, "y36": 5613.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.33)", "loo_m": 10.8},
+  {"px": 2836.32, "py": 2177.33, "x36": 8383.43, "y36": 5705.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.55)", "loo_m": 9.42},
+  {"px": 2916.72, "py": 2157.93, "x36": 8514.82, "y36": 5705.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.58)", "loo_m": 11.13},
+  {"px": 3170.65, "py": 2257.14, "x36": 8933.84, "y36": 6010.05, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.33)", "loo_m": 16.74},
+  {"px": 2001.9, "py": 2632.39, "x36": 6714.18, "y36": 6305.9, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.37)", "loo_m": 15.58},
+  {"px": 2979.5, "py": 2469.15, "x36": 8553.5, "y36": 6282.97, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.38)", "loo_m": 19.65},
+  {"px": 3055.03, "py": 2450.54, "x36": 8654.76, "y36": 6285.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.60)", "loo_m": 19.7},
+  {"px": 3117.98, "py": 2432.88, "x36": 8817.93, "y36": 6296.66, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.72)", "loo_m": 12.48},
+  {"px": 2094.11, "py": 2692.47, "x36": 6873.5, "y36": 6434.88, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.32)", "loo_m": 13.87},
+  {"px": 3200.75, "py": 2491.15, "x36": 8973.5, "y36": 6405.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.46)", "loo_m": 15.7},
+  {"px": 4402.22, "py": 2320.14, "x36": 10914.4, "y36": 6414.4, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.45)", "loo_m": 11.81},
+  {"px": 3217.84, "py": 2566.24, "x36": 8960.62, "y36": 6545.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.38)", "loo_m": 8.85},
+  {"px": 3040.28, "py": 2681.07, "x36": 8533.58, "y36": 6711.02, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.42)", "loo_m": 10.77},
+  {"px": 3235.85, "py": 2640.44, "x36": 8973.5, "y36": 6700.11, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.38)", "loo_m": 11.53},
+  {"px": 3307.56, "py": 2621.99, "x36": 9113.5, "y36": 6700.1, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.41)", "loo_m": 5.64},
+  {"px": 3374.93, "py": 2606.3, "x36": 9253.5, "y36": 6703.31, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.58)", "loo_m": 9.4},
+  {"px": 3452.46, "py": 2594.95, "x36": 9373.91, "y36": 6710.22, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.45)", "loo_m": 2.12},
+  {"px": 3840.4, "py": 2550.74, "x36": 9926.45, "y36": 6716.62, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.37)", "loo_m": 23.05},
+  {"px": 4436.75, "py": 2476.35, "x36": 10885.5, "y36": 6690.52, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.45)", "loo_m": 15.51},
+  {"px": 3189.79, "py": 2731.01, "x36": 8785.5, "y36": 6834.16, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.37)", "loo_m": 22.33},
+  {"px": 3323.86, "py": 2694.21, "x36": 9113.5, "y36": 6839.8, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.32)", "loo_m": 7.29},
+  {"px": 3386.79, "py": 2677.22, "x36": 9253.5, "y36": 6843.01, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.43)", "loo_m": 13.51},
+  {"px": 3466.36, "py": 2665.91, "x36": 9367.7, "y36": 6851.71, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.37)", "loo_m": 3.18},
+  {"px": 2841.38, "py": 2851.43, "x36": 8094.82, "y36": 6965.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.40)", "loo_m": 6.42},
+  {"px": 4385.45, "py": 2642.12, "x36": 10776.49, "y36": 6968.09, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.34)", "loo_m": 14.87},
+  {"px": 3088.01, "py": 2891.11, "x36": 8531.93, "y36": 7127.97, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.40)", "loo_m": 11.48},
+  {"px": 3159.45, "py": 2882.82, "x36": 8658.72, "y36": 7135.69, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.57)", "loo_m": 5.67},
+  {"px": 3419.93, "py": 2821.2, "x36": 9232.94, "y36": 7142.06, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.53)", "loo_m": 19.22},
+  {"px": 3507.54, "py": 2812.06, "x36": 9370.28, "y36": 7145.94, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.51)", "loo_m": 11.72},
+  {"px": 3798.67, "py": 2800.2, "x36": 9792.84, "y36": 7126.67, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.56)", "loo_m": 20.44},
+  {"px": 3115.46, "py": 2963.68, "x36": 8516.54, "y36": 7258.25, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.41)", "loo_m": 5.8},
+  {"px": 3185.46, "py": 2957.17, "x36": 8645.5, "y36": 7261.61, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.65)", "loo_m": 13.94},
+  {"px": 3383.67, "py": 2927.3, "x36": 9097.29, "y36": 7258.26, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.31)", "loo_m": 15.25},
+  {"px": 3340.74, "py": 3013.8, "x36": 8944.36, "y36": 7410.36, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.37)", "loo_m": 4.08},
+  {"px": 3408.88, "py": 3002.51, "x36": 9091.71, "y36": 7412.95, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.32)", "loo_m": 3.41},
+  {"px": 3481.79, "py": 2987.49, "x36": 9218.19, "y36": 7401.92, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.37)", "loo_m": 7.7},
+  {"px": 3361.4, "py": 3089.66, "x36": 8957.0, "y36": 7552.73, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.39)", "loo_m": 13.41},
+  {"px": 3460.7, "py": 3154.68, "x36": 9079.35, "y36": 7665.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.33)", "loo_m": 8.35},
+  {"px": 3490.35, "py": 3231.81, "x36": 9083.86, "y36": 7812.78, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.33)", "loo_m": 3.28},
+  {"px": 3809.27, "py": 3181.87, "x36": 9640.17, "y36": 7845.0, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.31)", "loo_m": 7.3},
+  {"px": 3888.87, "py": 3170.38, "x36": 9780.05, "y36": 7849.29, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.59)", "loo_m": 13.61},
+  {"px": 3971.7, "py": 3160.77, "x36": 9923.43, "y36": 7805.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.40)", "loo_m": 19.75},
+  {"px": 3011.06, "py": 3387.72, "x36": 8096.31, "y36": 7945.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.30)", "loo_m": 6.78},
+  {"px": 3086.72, "py": 3381.29, "x36": 8225.5, "y36": 7961.79, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.35)", "loo_m": 7.49},
+  {"px": 3793.91, "py": 3348.1, "x36": 9533.5, "y36": 8112.35, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.36)", "loo_m": 16.19},
+  {"px": 4693.18, "py": 3263.82, "x36": 11025.5, "y36": 8133.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.31)", "loo_m": 14.13},
+  {"px": 3824.32, "py": 3425.11, "x36": 9498.82, "y36": 8273.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.47)", "loo_m": 15.57},
+  {"px": 3873.29, "py": 3586.79, "x36": 9485.5, "y36": 8553.5, "manual": false, "nota": "enlace automático por correlación de calles (calidad 0.34)", "loo_m": 3.63}
+ ]
+}
