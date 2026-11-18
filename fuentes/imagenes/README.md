@@ -139,3 +139,21 @@ Qué implica: en 1889–1911 la mayoría de las casas sigue siendo de un piso co
 de dos y tres pisos del estilo ecléctico: hoy da 2–3 pisos); agregar un tipo "galpón" (zinc a dos aguas,
 largo) cerca de las estaciones; los hitos de la lista son los que hacen el perfil (T40/T41); chaguaramos
 como árbol alto suelto; y esta vista sirve de **vista de control** en el visor (cámara en El Calvario).
+
+## 1910 · Plaza Bolívar, foto (`1910-commons-plaza-bolivar`) → épocas 1889 y 1911
+
+La misma plaza del mercado de 1852, ya convertida en paseo. Foto a nivel de peatón.
+
+- **Estatua ecuestre de Bolívar** en bronce, con el caballo encabritado, sobre un **pedestal alto de
+  piedra oscura** con gradas: el centro de la plaza. Con el pedestal, unas tres veces la altura de una
+  persona hasta la base de la estatua.
+- **Arbolado denso y alto** alrededor (copas anchas, sombra): la plaza ya es un jardín con árboles
+  grandes; el piso de los caminos es **liso y claro** (losa o cemento), no tierra.
+- **Faroles de hierro ornamentados de varios brazos**, sobre pedestal, muy altos.
+- **La torre de la Catedral** asoma detrás, al este: cuerpos cuadrados blancos, **reloj**, remate
+  ochavado con cupulín. Confirma que la torre de la litografía de la calle de 1843 es la de la Catedral.
+- Gente de paseo, de traje y sombrero: es el lugar social de la ciudad.
+
+Qué implica: hito "Plaza Bolívar" con dos estados: **mercado** (1772–1843, ver 1852) y **plaza
+ajardinada con la estatua ecuestre, faroles y árboles grandes** (desde 1889); la estatua y la torre de
+la Catedral van como hitos modelados (T40), y los árboles de la plaza nacen en la época de 1889.
