@@ -1,27 +1,36 @@
 """Vectorizador: de la imagen de clases (tools/geo/segmentar.py) a los techos de la ciudad.
 
-Cada manzana se divide en lotes sembrando puntos cada FRENTE_M metros a lo largo de su borde
-y asignando cada píxel a la semilla más cercana (los lotes salen angostos al frente y largos
-hacia el fondo, como los solares partidos). Lo edificado de cada lote es una casa; los
-edificios públicos (rayados en el plano) van enteros. Salida: vértices en píxeles del plano y
-techos [primer vértice, cuántos, pisos, estilo, semilla], el formato de src/ciudad.js.
+Cada manzana se divide en lotes rectos, de frente angosto y perpendiculares a su calle
+(tools/geo/lotes.py). Lo edificado de cada lote es una casa; los pedazos muy chicos se unen a
+la casa vecina. Los edificios públicos (rayados en el plano) van enteros. Salida: vértices en
+píxeles del plano y techos [primer vértice, cuántos, pisos, estilo, semilla], el formato de
+src/ciudad.js.
 
 Uso: vectorizar.py <clases.png> <salida.json> --escala <m/px> --plaza <px,py>
 """
 import argparse
 import json
 import math
+import sys
+from pathlib import Path
 
 import cv2
 import numpy as np
+from scipy import ndimage
 from shapely.geometry import Polygon
+from skimage import measure
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from lotes import fundir_chicos, lotes_de_manzana, sin_pelos  # noqa: E402
 
 CLASE = {'desconocido': 0, 'calle': 1, 'patio': 2, 'edificado': 3, 'publico': 4,
          'verde': 5, 'cultivo': 6, 'agua': 7, 'cerro': 8, 'margen': 9}
 ESTILO_COLONIAL = 0
 ESTILO_PUBLICO = 9
 
-FRENTE_M = 12.0          # frente típico de una casa del centro
+AREA_FUSION_M2 = 30.0    # un pedazo de casa más chico que esto se une a la casa vecina
+ANCHO_MINIMO_M = 3.0     # lo que mide menos que esto de ancho no es un ala de la casa: va con la vecina
 AREA_MINIMA_M2 = 6.0     # menos que esto es ruido de la segmentación
 TOLERANCIA_M = 0.35      # simplificación de los contornos
 DE_LA_MANZANA = (CLASE['edificado'], CLASE['publico'], CLASE['patio'], CLASE['verde'])
@@ -55,18 +64,6 @@ def poligono_de(mascara, desplazamiento, tolerancia_px):
     return figura if figura.is_valid and not figura.is_empty else None
 
 
-def lotes_de_manzana(manzana, frente_px):
-    """Etiqueta cada píxel de la manzana con el lote (semilla de borde más cercana)."""
-    contornos, _ = cv2.findContours(manzana.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-    borde = max(contornos, key=len)[:, 0, :]
-    paso = max(1, int(round(frente_px)))
-    semillas = borde[::paso]
-    sin_semilla = np.ones(manzana.shape, np.uint8)
-    sin_semilla[semillas[:, 1], semillas[:, 0]] = 0
-    _, etiquetas = cv2.distanceTransformWithLabels(sin_semilla, cv2.DIST_L2, 5, labelType=cv2.DIST_LABEL_PIXEL)
-    return np.where(manzana, etiquetas, 0)
-
-
 def agregar_techo(salida, figura, pisos, estilo, semilla):
     puntos = list(figura.exterior.coords)[:-1]
     salida['techos'].append([len(salida['vertices']) // 2, len(puntos), pisos, estilo, semilla])
@@ -92,18 +89,21 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
     if edificado.sum() < area_min_px:
         return
     salida['manzanas'] += 1
-    lotes = lotes_de_manzana(manzana, FRENTE_M / metro)
-    for lote in np.unique(lotes[edificado]):
-        m, partes, st, _ = cv2.connectedComponentsWithStats((edificado & (lotes == lote)).astype(np.uint8), connectivity=8)
-        for p in range(1, m):
-            if st[p, cv2.CC_STAT_AREA] < area_min_px:
-                continue
-            px, py, pw, ph = st[p, :4]
-            figura = poligono_de(partes[py:py + ph, px:px + pw] == p, (x + px, y + py), tolerancia_px)
-            if figura is None:
-                continue
-            semilla = semilla_de(figura.centroid.x, figura.centroid.y)
-            agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla)
+    lotes = lotes_de_manzana(manzana, metro, semilla_de(int(x), int(y)))
+    casas = measure.label(np.where(edificado, lotes, 0), background=0, connectivity=2)
+    casas = measure.label(sin_pelos(casas, ANCHO_MINIMO_M / 2 / metro), background=0, connectivity=2)
+    casas = fundir_chicos(casas, AREA_FUSION_M2 / metro ** 2)
+    for casa, zona in enumerate(ndimage.find_objects(casas), start=1):
+        if zona is None:
+            continue
+        mascara = casas[zona] == casa
+        if mascara.sum() < area_min_px:
+            continue
+        figura = poligono_de(mascara, (x + zona[1].start, y + zona[0].start), tolerancia_px)
+        if figura is None:
+            continue
+        semilla = semilla_de(figura.centroid.x, figura.centroid.y)
+        agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla)
 
 
 def vectorizar(clases, metro, plaza):

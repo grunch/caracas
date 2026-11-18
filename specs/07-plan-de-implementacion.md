@@ -53,6 +53,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T33 | Techos de teja de verdad: dos y cuatro aguas como geometría, con alero; azoteas en los públicos y los modernos | T31 | el perfil de tejados se ve de costado | ⏳ |
 | T34 | Árboles 3D desde `arboles.json` (5.926) y los patios con vegetación, en color | — | árboles en plazas, patios y quebradas | ✅ #19 |
 | T35 | Luz y acabado: sombras, luz tibia y sombra azulada, bruma, contorno por profundidad y grano de papel en tinta | — | el look de grabado de `specs/04` | ⏳ |
+| T37 | Lotes rectos: cada manzana se parte en solares rectangulares perpendiculares a su calle (antes, cuñas que se juntaban en el centro) | T04 | en el centro los techos son tiras rectas, sin abanicos | 🔄 #PR |
 
 ## Fase 4 · Contenido
 
@@ -96,4 +97,4 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 - **Derechos**: nada se publica (T73) sin la revisión del responsable; cada fuente conserva su licencia en `ficha.json`.
 - **Datos fuera de git**: sin T11 y T12, un cambio en el pipeline puede romper el sitio sin que ningún test lo vea.
 - **Conflictos en `src/material.js` y `src/main.js`**: varias tareas los tocan; conviene separar el shader en módulos (vértice, suelo, fachadas) dentro de T35 o antes, si los conflictos se repiten.
-- **Rendimiento**: 59 mil casas con fachadas procedurales; medir en cada tarea de la fase 3.
+- **Rendimiento**: 34 mil casas con fachadas procedurales; medir en cada tarea de la fase 3.
