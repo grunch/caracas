@@ -38,16 +38,18 @@ export async function generarMascara({ datos, ancho, alto }, lado) {
     rgb[i * 3 + 2] = (v >> 16) & 0xff
     a[i] = v >>> 24
   }
+  // b-w en el alfa: sin eso sharp sale en sRGB y devuelve tres canales iguales
   const achicar = (buf, canales) => sharp(buf, { raw: { width: ancho, height: alto, channels: canales }, limitInputPixels: false })
-    .resize(lado, lado, { fit: 'inside' }).raw().toBuffer({ resolveWithObject: true })
+    .resize(lado, lado, { fit: 'inside' }).toColourspace(canales === 1 ? 'b-w' : 'srgb').raw().toBuffer({ resolveWithObject: true })
   const [color, alfa] = await Promise.all([achicar(rgb, 3), achicar(a, 1)])
   const { width, height } = color.info
+  const [cc, ca] = [color.info.channels, alfa.info.channels] // se indexa con lo que sharp informa
   const data = Buffer.alloc(width * height * 4)
   for (let i = 0; i < width * height; i++) {
-    data[i * 4] = color.data[i * 3]
-    data[i * 4 + 1] = color.data[i * 3 + 1]
-    data[i * 4 + 2] = color.data[i * 3 + 2]
-    data[i * 4 + 3] = alfa.data[i]
+    data[i * 4] = color.data[i * cc]
+    data[i * 4 + 1] = color.data[i * cc + 1]
+    data[i * 4 + 2] = color.data[i * cc + 2]
+    data[i * 4 + 3] = alfa.data[i * ca]
   }
   return { data, width, height }
 }

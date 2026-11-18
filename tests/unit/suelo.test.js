@@ -57,3 +57,19 @@ describe('generarMascara', () => {
     expect(data[(3 * 4 + 3) * 4 + 1]).toBeGreaterThan(240) // G del cultivo
   })
 })
+
+describe('generarMascara con alfa mezclado', () => {
+  test('la manzana (alfa) queda en su lugar: mitad izquierda manzana, mitad derecha calle', async () => {
+    const ancho = 8
+    const alto = 8
+    const clases = Buffer.alloc(ancho * alto)
+    for (let y = 0; y < alto; y++) for (let x = 0; x < ancho; x++) clases[y * ancho + x] = x < 4 ? 2 : 1 // patio | calle
+    const { data, width } = await generarMascara({ datos: clases, ancho, alto }, 4)
+    const alfaFila = (y) => Array.from({ length: width }, (_, x) => data[(y * width + x) * 4 + 3])
+    for (let y = 0; y < 4; y++) {
+      const fila = alfaFila(y)
+      expect(fila[0]).toBeGreaterThan(240)
+      expect(fila[3]).toBeLessThan(15)
+    }
+  })
+})
