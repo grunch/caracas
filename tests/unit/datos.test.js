@@ -80,6 +80,18 @@ describe('código del paso', () => {
     expect(pendientes(pasos2, t, { codigoCambiado: new Set(['vectorizar']) })).toEqual(['vectorizar', 'empacar'])
   })
 
+  test('los árboles se rehacen si cambia la segmentación o la ciudad empacada', () => {
+    const conArboles = [
+      { id: 'segmentar', entradas: ['mosaico.tif'], salidas: ['clases.png', 'arboles.json'] },
+      { id: 'empacar', entradas: ['ciudad.json'], salidas: ['ciudad.pak'] },
+      { id: 'arboles', entradas: ['arboles.json', 'ciudad.pak'], salidas: ['arboles.bin'] },
+    ]
+    const t = { 'mosaico.tif': 1, 'clases.png': 2, 'arboles.json': 2, 'ciudad.json': 1, 'ciudad.pak': 2, 'arboles.bin': 3 }
+    expect(pendientes(conArboles, t)).toEqual([])
+    expect(pendientes(conArboles, { ...t, 'ciudad.pak': 4 })).toEqual(['arboles'])
+    expect(pendientes(conArboles, { ...t, 'mosaico.tif': 5 })).toEqual(['segmentar', 'arboles'])
+  })
+
   test('firmasCambiadas compara la firma actual del código con la guardada', () => {
     expect([...firmasCambiadas({ a: 'h1', b: 'h2', c: 'h3' }, { a: 'h1', b: 'viejo' })]).toEqual(['b', 'c'])
   })

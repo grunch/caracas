@@ -88,3 +88,20 @@ test('el relieve se hincha con la ola: acostado es liso, levantado aparece el Á
   })
   expect(Math.abs(y - suelo)).toBeLessThan(1)
 })
+
+test('los árboles llegan después de la ciudad: una malla instanciada con un árbol por registro', async ({ page }) => {
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  const hay = await hayDato(page, 'datos/arboles.bin', 'octet-stream')
+  test.skip(!hay, 'sin datos/arboles.bin (dato pesado fuera del repo)')
+  const bytes = await page.evaluate(async () => (await (await fetch('datos/arboles.bin')).arrayBuffer()).byteLength)
+  await page.waitForFunction(() => window.lab.arboles, null, { timeout: 60000 })
+  const malla = await page.evaluate(() => {
+    const m = window.lab.arboles
+    return {
+      instanciada: m.isInstancedMesh, count: m.count, enEscena: m.parent === window.lab.scene,
+      mismoColor: m.material.uniforms.uColor === window.lab.ciudad.U.uColor,
+    }
+  })
+  expect(malla).toEqual({ instanciada: true, count: bytes / 8, enEscena: true, mismoColor: true })
+})

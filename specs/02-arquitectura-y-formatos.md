@@ -109,6 +109,20 @@ gzip(
 
 `vida` sale de `tools/geo/epocas.py` (`"vida": [[nace, muere], …]` en el JSON). Épocas: 0 = 1578 (Pimentel), 1 = 1772 (*Exato mapa*), 2 = 1843 (Jesurún), 3 = 1889 (Mestre), 4 = 1911 (Razetti), 5 = 1936 (DCN). `nace` = primera época en que el techo existe; `muere` = primera época en que ya no está, 0 = no muere. Un techo se ve en la época `e` si `nace ≤ e` y (`muere = 0` o `e < muere`). Los techos de 1936 tienen `muere = 0`; al final van las casas de 1578 que no llegan a 1936, con `nace = 0`. Si el JSON no trae `vida`, el `.pak` no lleva esa parte. El lector (`src/pak.js`) rechaza las partes sin tipo, así que el visor tiene que declarar `vida: Uint32Array` antes de cargar un `.pak` que la traiga.
 
+### `datos/arboles.bin` *(Caracas, implementado)*
+Los árboles 3D (`src/arboles.js`), sin cabecera: registros de **4 × Uint16 little‑endian (8 bytes)**, n = `byteLength / 8`. Archivo suelto y no una parte de `ciudad.pak`: llega después de la ciudad y, si falta, el visor sigue sin árboles.
+
+| u16 | campo | codificación |
+|---|---|---|
+| 0 | `x` | centro de la copa en **píxeles del mosaico de 1936**, redondeado (0 … 18599; 1 px = 0,5 m) |
+| 1 | `y` | ídem (0 … 14799, crece hacia el sur) |
+| 2 | `radio` | radio de la copa en **decímetros** |
+| 3 | `nace` | primera época (0 = 1578 … 5 = 1936, como `vida`) en que el árbol se ve; no muere |
+
+Lo escribe `tools/arboles.mjs` (paso `arboles` de `npm run datos`) desde `arboles.json` (los símbolos de árbol que detecta `segmentar_arboles.py`) más `jardines.json` (`tools/geo/jardines.py`: los canteros de plazas y patios, que el plano pinta como manchas verdes sin símbolo, con un árbol cada ~13 m). La semilla de cada árbol (forma, giro, tono) sale de `x`, `y` en el visor.
+
+`nace`: un árbol del plano fuera de lo edificado (quebradas, haciendas, cerros: `crece.png` dice "nunca") existió siempre (0); en la ciudad, nace con su celda de `crece.png`. Un árbol de jardín nace con lo último que se edificó a 24 m o menos (el patio aparece con su casa). Y nunca aparece dentro de una casa en pie: si su copa (medio radio de margen) pisa un techo de `ciudad.pak` que después desaparece (`muere > 0`, las casas de 1578), espera a que muera. Sin `crece.png` ni `ciudad.pak`, todos nacen en 0.
+
 ### `datos/relieve.bin`
 `Uint16[ w, h, alturas… ]`, con las alturas en **decímetros**. Se sube como textura half‑float (canal R) y el vertex shader la muestrea.
 

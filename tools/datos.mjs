@@ -38,7 +38,7 @@ const PASOS = [
     id: 'segmentar', entradas: [`${D}/mosaico.tif`, 'tools/geo/paleta-1936.json'],
     codigo: GEO('segmentar', 'segmentar_arboles', 'segmentar_clases', 'segmentar_color', 'segmentar_marco',
       'segmentar_morfologia', 'segmentar_parametros', 'segmentar_salidas', 'segmentar_texturas', 'segmentar_topologia'),
-    salidas: [`${D}/segmentacion/mosaico/clases.png`],
+    salidas: [`${D}/segmentacion/mosaico/clases.png`, `${D}/segmentacion/mosaico/arboles.json`],
     cmd: () => [PY, 'tools/geo/segmentar.py', `${D}/mosaico.tif`, `${D}/segmentacion/mosaico`, '--escala', '0.5'],
   },
   {
@@ -61,6 +61,23 @@ const PASOS = [
     id: 'empacar', entradas: [`${D}/ciudad-1936.json`], salidas: ['public/datos/ciudad.pak'],
     codigo: ['tools/empacar-ciudad.mjs', 'tools/empacar-lib.mjs', 'tools/pak.mjs', 'src/ciudad.js'],
     cmd: () => ['node', 'tools/empacar-ciudad.mjs', `${D}/ciudad-1936.json`],
+  },
+  {
+    id: 'jardines', codigo: GEO('jardines'),
+    entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/segmentacion/mosaico/arboles.json`],
+    salidas: [`${D}/segmentacion/mosaico/jardines.json`],
+    cmd: () => [PY, 'tools/geo/jardines.py', `${D}/segmentacion/mosaico/clases-costura.png`,
+      `${D}/segmentacion/mosaico/arboles.json`, `${D}/segmentacion/mosaico/jardines.json`],
+  },
+  {
+    // crece.png/crece.json (tools/geo/epocas.py, fuera de este pipeline) dan la época de cada árbol si
+    // están; sin ellos todos nacen en la primera. Con `--desde arboles` se rehace con los nuevos.
+    id: 'arboles',
+    entradas: [`${D}/segmentacion/mosaico/arboles.json`, `${D}/segmentacion/mosaico/jardines.json`, `${D}/mosaico.json`, 'public/datos/ciudad.pak'],
+    salidas: ['public/datos/arboles.bin'],
+    codigo: ['tools/arboles.mjs', 'tools/arboles-lib.mjs', 'src/pak.js', 'src/epocas.js'],
+    cmd: () => ['node', 'tools/arboles.mjs', `${D}/segmentacion/mosaico/arboles.json`, `${D}/mosaico.json`,
+      `${D}/segmentacion/mosaico/jardines.json`],
   },
   {
     id: 'suelo', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`],
@@ -142,7 +159,8 @@ const sha256 = (ruta) => new Promise((ok, mal) => {
 
 async function verificar(pasos) {
   const ciudad = await leerJson(`${D}/ciudad-1936.json`)
-  const medidos = { techos: ciudad.techos.length, manzanas: ciudad.manzanas }
+  const arboles = await leerJson(`${D}/segmentacion/mosaico/arboles.json`)
+  const medidos = { techos: ciudad.techos.length, manzanas: ciudad.manzanas, arboles: arboles.length }
   const { _nota, ...esperados } = await leerJson('tools/datos-esperados.json')
   const errores = verificarConteos(medidos, esperados)
   const publicos = pasos.flatMap((p) => p.salidas).filter((s) => s.startsWith('public/'))

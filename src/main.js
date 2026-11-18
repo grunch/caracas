@@ -5,6 +5,7 @@ import {
 import { cargarPak } from './pak.js'
 import { geometriaCiudad } from './ciudad.js'
 import { crearMaterialCiudad } from './material.js'
+import { cargarArboles } from './arboles.js'
 import { acercar } from './animar.js'
 import { crearTeselasFinas } from './teselas.js'
 import { crearLineaDeTiempo, crearSecuencia, escalaCrece } from './epocas.js'
@@ -130,13 +131,21 @@ const DURACION_OLA_S = 5
 let olaObjetivo = 0
 // la ola llega hasta la esquina más lejana de la hoja (el terreno se hincha en toda ella)
 let olaMax = Math.hypot(Math.max(-hoja.x0, hoja.x0 + hoja.ancho), Math.max(-hoja.z0, hoja.z0 + hoja.alto)) + ciudad.U.uAnchoOla.value
+let arboles = null
 cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array }).then((datos) => {
   const g = geometriaCiudad(datos, coords)
   olaMax = Math.max(olaMax, g.boundingSphere.center.length() + g.boundingSphere.radius + 400)
   scene.add(new Mesh(g, ciudad.material))
   document.getElementById('alzar').hidden = false
   pedirCuadro(3)
-}).catch((e) => console.warn(`ciudad: ${e.message}`))
+}).catch((e) => console.warn(`ciudad: ${e.message}`)).then(() => {
+  // los árboles, después de la ciudad: una malla instanciada que comparte sus uniforms (src/arboles.js)
+  return cargarArboles('datos/arboles.bin', { coords, U: ciudad.U, sol: sol.position }).then((m) => {
+    arboles = m
+    scene.add(m)
+    pedirCuadro(3)
+  })
+}).catch((e) => console.warn(`árboles: ${e.message}`))
 
 // --- la línea de tiempo: 1578 → 1936; cada época llega como una ola desde la plaza ---
 const DURACION_EPOCA_S = 3.5
@@ -234,6 +243,7 @@ window.lab = {
   renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, relieveU, sueloEn, ready: true,
   get relieve() { return relieve },
   get teselas() { return teselas },
+  get arboles() { return arboles },
   get lineaDeTiempo() { return lineaDeTiempo },
 }
 
