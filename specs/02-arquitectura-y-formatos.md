@@ -124,7 +124,12 @@ Marcas de la ciudad actual: `[{nombre, x, y, nivel, rio:bool, nota}]` (x,y en p�
             "corto":"plano de Latzina (1888)","obras":"Se abrió la Avenida de Mayo…",
             "casas":21220,"renovadas":593}, …]}
 ```
-Caracas (`tools/geo/epocas.py`): `plano` es la carpeta de `fuentes/mapas/`; `titulo`, `autor`, `fuente` (institución · URL) y `licencia` vienen de su `ficha.json`; `obras` aparece solo si el plano lo muestra; `casas` = techos visibles en esa época según `vida`. No hay `renovadas`. Va acompañado de `plano/crece.png` (8 m/px, misma extensión que el mosaico de 1936): en R, desde qué época está edificado cada punto en esa época y en todas las siguientes, con la codificación "desde cuándo" de abajo (E = 6); G y B quedan en 0.
+Caracas (`tools/geo/epocas.py`): `plano` es la carpeta de `fuentes/mapas/`; `titulo`, `autor`, `fuente` (institución · URL) y `licencia` vienen de su `ficha.json`; `obras` aparece solo si el plano lo muestra; `casas` = techos visibles en esa época según `vida`. No hay `renovadas`. `celda_m` (8) es el lado de cada píxel de `plano/crece.png` en metros. Ese PNG
+se apoya en la esquina noroeste del mosaico de 1936: el píxel (fila i, columna j) cubre
+[j·8, (j+1)·8) m al este y [i·8, (i+1)·8) m al sur. Tiene ⌈ancho/8⌉ × ⌈alto/8⌉ píxeles; si el
+mosaico no mide un múltiplo de 8 m, la última columna y la última fila son parciales (se calculan con
+los puntos que caen dentro) y el PNG sobra unos metros al este y al sur, así que se coloca con
+`celda_m` y no estirándolo al mosaico. En R, desde qué época está edificado cada punto en esa época y en todas las siguientes, con la codificación "desde cuándo" de abajo (E = 6); G y B quedan en 0.
 
 ### Texturas (`plano/*.webp`)
 | archivo | uso |

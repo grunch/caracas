@@ -38,6 +38,26 @@ describe('partesDeCiudad', () => {
     expect(() => partesDeCiudad({ ...json, vida: [[8, 0], [0, 0]] })).toThrow(/época/)
   })
 
+  test('rechaza épocas fuera de las seis de la línea de tiempo (0…5)', () => {
+    for (const malo of [[6, 0], [7, 0], [0, 6], [0, 7], [-1, 0]]) {
+      expect(() => partesDeCiudad({ ...json, vida: [malo, [0, 0]] })).toThrow(/épocas 0…5/)
+    }
+    expect(Array.from(partesDeCiudad({ ...json, vida: [[5, 0], [0, 5]] }).vida.datos)).toEqual([5, 40])
+  })
+
+  test('rechaza épocas que no son enteros', () => {
+    for (const malo of [['2', 3], [1.5, 0], [0, '3'], [null, 0], [NaN, 0]]) {
+      expect(() => partesDeCiudad({ ...json, vida: [malo, [0, 0]] })).toThrow(/enter/)
+    }
+    expect(Array.from(partesDeCiudad({ ...json, vida: [[2, 3], [0, 0]] }).vida.datos)).toEqual([26, 0])
+  })
+
+  test('rechaza una "vida" presente que no es una lista', () => {
+    for (const malo of [null, {}, 'x', 3]) {
+      expect(() => partesDeCiudad({ ...json, vida: malo })).toThrow(/vida/)
+    }
+  })
+
   test('rechaza una cantidad impar de coordenadas', () => {
     expect(() => partesDeCiudad({ ...json, vertices: [1, 2, 3] })).toThrow(/pares/)
   })

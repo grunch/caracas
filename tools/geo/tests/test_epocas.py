@@ -39,6 +39,51 @@ def test_etapas_por_punto_y_reduccion_por_mayoria():
     assert r.tolist() == [[0, 1], [ep.NUNCA, ep.NUNCA]]
 
 
+def test_la_reduccion_conserva_la_celda_parcial_del_borde():
+    # Arrange: 5×3 px con factor 2 → 3×2 celdas; la última columna y la última fila son parciales
+    etapa = np.full((3, 5), ep.NUNCA, np.uint8)
+    etapa[:, 4] = 2                 # la columna parcial del borde este, edificada desde la época 2
+    etapa[2, 0:2] = 1               # la fila parcial del borde sur, a medias por celda
+
+    # Act
+    r = ep.reducir_etapas(etapa, 2)
+
+    # Assert
+    assert r.shape == (2, 3)
+    assert r.tolist() == [[ep.NUNCA, ep.NUNCA, 2], [1, ep.NUNCA, 2]]
+
+
+def test_reducir_rellena_hasta_la_grilla_sin_perder_el_borde():
+    img = np.full((5, 7), 200, np.uint8)
+    assert ep._reducir(img, 2).shape == (3, 4)
+    assert ep._reducir(img, 2)[2, 3] == 200
+
+
+def test_recorte_calzado_se_alinea_a_la_grilla_global_antes_de_reducir():
+    # Arrange: recorte de 5×3 px con origen impar (101, 51) y escala 2; un punto rojo en el
+    # píxel global (102, 52), que es la celda global (51, 26)
+    rgba = np.zeros((3, 5, 4), np.uint8)
+    rgba[..., 3] = 255
+    rgba[1, 1, :3] = (255, 0, 0)
+
+    # Act
+    reducido, (cx, cy) = ep.reducir_recorte(rgba, 101, 51, 2)
+
+    # Assert: celdas [100, 106) × [50, 54) → 3×2 desde (50, 25)
+    assert (cx, cy) == (50, 25) and reducido.shape == (2, 3, 4)
+    assert reducido[1, 1, 0] > 0 and reducido[..., 0].sum() == reducido[1, 1, 0]
+    assert reducido[0, 0, 3] < 128 <= reducido[1, 1, 3]   # la columna rellenada queda medio afuera
+
+
+def test_escribir_imagen_falla_nombrando_la_ruta(tmp_path, monkeypatch):
+    ruta = tmp_path / "x.png"
+    ep.escribir_imagen(ruta, np.zeros((2, 2), np.uint8))
+    assert ruta.exists()
+    monkeypatch.setattr(ep.cv2, "imwrite", lambda *a, **k: False)
+    with pytest.raises(OSError, match="x.png"):
+        ep.escribir_imagen(ruta, np.zeros((2, 2), np.uint8))
+
+
 def test_vida_empaca_nace_y_muere():
     assert ep.vida_empacada(2, 0) == 2
     assert ep.vida_empacada(0, 1) == 8
@@ -90,6 +135,36 @@ def test_edificado_descarta_componentes_angostas_como_un_marco():
     assert m[50, 50] and not m[100, 154]
 
 
+def test_edificado_descarta_un_marco_cerrado_contando_el_borde_de_adentro():
+    # Arrange: un marco de 8 px alrededor de un cuadrado de 100×100 y una manzana maciza
+    rgba = np.full((200, 200, 4), 240, np.uint8)
+    rgba[..., 3] = 255
+    rgba[10:126, 10:126, :3] = (220, 60, 60)
+    rgba[18:118, 18:118, :3] = 240            # el hueco: queda un borde de 8 px
+    rgba[140:190, 140:190, :3] = (220, 60, 60)
+    perfil = {"canal": "a", "umbral": 150, "sentido": "mayor"}
+
+    # Act
+    m = ep.edificado(rgba, perfil, cierre_px=1, area_minima_px=20, ancho_minimo_px=12)
+
+    # Assert: con el borde de adentro el marco mide ~8 px de ancho (no ~15) y se va
+    assert not m[12, 60] and m[165, 165]
+
+
+def test_ancho_medio_de_un_marco_cuenta_los_dos_bordes():
+    marco = np.zeros((120, 120), np.int32)
+    marco[10:110, 10:110] = 1
+    marco[18:102, 18:102] = 0
+    n, etiquetas, stats, _ = __import__("cv2").connectedComponentsWithStats(marco.astype(np.uint8))
+    assert ep._ancho_medio(etiquetas, stats[1], 1) == pytest.approx(8, abs=1)
+
+
+def test_mascara_en_el_marco_recorta_lo_que_sale_de_la_forma():
+    parcial = np.ones((3, 4), bool)
+    m = ep.en_marco(parcial, recorte=(8, 3, 12, 6), forma=(5, 10))
+    assert m.shape == (5, 10) and m.sum() == 4 and m[4, 9] and m[3, 8]
+
+
 def test_mascara_en_el_marco_completo_pone_el_recorte_en_su_lugar():
     parcial = np.ones((2, 3), bool)
     m = ep.en_marco(parcial, recorte=(4, 1, 7, 3), forma=(5, 10))
@@ -111,9 +186,23 @@ def test_fracciones_por_techo():
     mascara = np.zeros((40, 40), bool)
     mascara[0:10, 0:10] = True
     mascara[0:10, 20:25] = True
-    etiquetas = ep.etiquetar_techos(ciudad, forma=(40, 40), escala=1.0)
-    f = ep.fracciones(etiquetas, [mascara], cuantos=2)
+    huellas = ep.huellas(ciudad, forma=(40, 40), escala=1.0)
+    f = ep.fracciones(huellas, [mascara])
     assert f[:, 0] == pytest.approx([1.0, 0.5], abs=0.05)
+
+
+def test_fracciones_miden_cada_techo_en_su_huella_entera_aunque_otro_lo_pise():
+    # Arrange: un techo de 20×20 con otro de 10×10 adentro (pintado después); lo edificado de la
+    # época es justo el cuadrado de adentro
+    ciudad = ciudad_de([cuadrado(0, 0, 20), cuadrado(5, 5, 10)])
+    mascara = np.zeros((30, 30), bool)
+    mascara[5:15, 5:15] = True
+
+    # Act
+    f = ep.fracciones(ep.huellas(ciudad, forma=(30, 30), escala=1.0), [mascara])
+
+    # Assert: el de afuera tiene un 25 % edificado (no 0 %), el de adentro el 100 %
+    assert f[:, 0] == pytest.approx([0.25, 1.0], abs=0.01)
 
 
 def test_nace_es_la_primera_epoca_desde_la_que_existe_siempre():
@@ -135,12 +224,12 @@ def test_vida_de_las_casas_de_1578_pasa_la_posta_a_la_de_1936_que_la_pisa():
     # Arrange: dos casas de 1578; la primera la pisa una casa de 1936 que nace en 1772
     c78 = ciudad_de([cuadrado(0, 0, 10), cuadrado(50, 50, 10)])
     c36 = ciudad_de([cuadrado(2, 2, 10)])
-    etiquetas36 = ep.etiquetar_techos(c36, forma=(80, 80), escala=1.0)
+    huellas36 = ep.huellas(c36, forma=(80, 80), escala=1.0)
     construido = [np.zeros((80, 80), bool) for _ in range(4)]
     construido[0][45:65, 45:65] = True  # la segunda sigue en pie en 1772 y se pierde en 1843
 
     # Act
-    vida = ep.vida_de_1578(c78, etiquetas36, nace36=np.array([1]), construido=construido, escala=1.0)
+    vida = ep.vida_de_1578(c78, huellas36, nace36=np.array([1]), construido=construido, escala=1.0)
 
     # Assert
     assert vida == [[0, 1], [0, 2]]
@@ -151,14 +240,29 @@ def test_la_posta_es_solo_de_las_casas_de_1936_que_por_si_solas_pisan_lo_suficie
     # la de 1936 la cubre en un 60 %
     c78 = ciudad_de([cuadrado(10, 10, 10)])
     c36 = ciudad_de([cuadrado(9, 10, 2), cuadrado(14, 10, 6)])
-    etiquetas36 = ep.etiquetar_techos(c36, forma=(40, 40), escala=1.0)
+    huellas36 = ep.huellas(c36, forma=(40, 40), escala=1.0)
     construido = [np.ones((40, 40), bool) for _ in range(4)]
 
     # Act
-    vida = ep.vida_de_1578(c78, etiquetas36, nace36=np.array([1, 5]), construido=construido, escala=1.0)
+    vida = ep.vida_de_1578(c78, huellas36, nace36=np.array([1, 5]), construido=construido, escala=1.0)
 
     # Assert
     assert vida == [[0, 5]]
+
+
+def test_la_posta_mide_cada_casa_de_1936_en_su_huella_aunque_se_encimen():
+    # Arrange: la casa de 1578 queda bajo una de 1936 grande (nace en 1889) y bajo otra chica
+    # que se pinta después encima de las dos (nace en 1936)
+    c78 = ciudad_de([cuadrado(10, 10, 10)])
+    c36 = ciudad_de([cuadrado(0, 0, 40), cuadrado(10, 10, 10)])
+    huellas36 = ep.huellas(c36, forma=(40, 40), escala=1.0)
+    construido = [np.ones((40, 40), bool) for _ in range(4)]
+
+    # Act
+    vida = ep.vida_de_1578(c78, huellas36, nace36=np.array([3, 5]), construido=construido, escala=1.0)
+
+    # Assert: las dos la pisan enteras; gana la que nace primero
+    assert vida == [[0, 3]]
 
 
 def test_conteo_de_casas_por_epoca():
