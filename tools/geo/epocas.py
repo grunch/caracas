@@ -249,6 +249,14 @@ def vida_de_1936(nace36, ciudad):
     return vida, quitar
 
 
+def relevos(huellas36, vida36, quitar):
+    """(huellas, nace) de las casas de 1936 que quedan, con su nacimiento final (vida_de_1936): las que
+    pueden pasarle la posta a una de 1578. Un techo quitado no reemplaza nada, y un edificio público no
+    reemplaza antes de existir."""
+    quedan = [k for k in range(len(huellas36)) if k not in quitar]
+    return [huellas36[k] for k in quedan], np.array([vida36[k][0] for k in quedan], int)
+
+
 def sin_techos(ciudad, vida, quitar):
     """(ciudad, vida) sin los techos de `quitar`: los vértices, los marcos y las listas por techo se corren.
     No toca los originales."""
@@ -429,9 +437,8 @@ def main():
     construido = [construido_de_epoca(raiz, e, forma, escala, metro) for e in epocas[1:ULTIMA]]
     huellas36 = huellas(ciudad36, forma, escala)
     nace36 = nace(fracciones(huellas36, construido), primera=1, umbral=config["umbral"])
-    vida78 = vida_de_1578(ciudad78, huellas36, cerrar_cuadras(nace36, ciudad36.get("cuadras", [-1] * len(nace36))),
-                          construido, escala)
     vida36, quitar = vida_de_1936(nace36, ciudad36)
+    vida78 = vida_de_1578(ciudad78, *relevos(huellas36, vida36, quitar), construido, escala)
     ciudad = unir(*sin_techos(ciudad36, vida36, quitar), ciudad78, vida78)
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))
 

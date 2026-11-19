@@ -335,6 +335,27 @@ def test_los_edificios_publicos_nacen_recien_en_1889_y_las_casas_que_los_pisan_l
     assert quitar == {3}                          # el edificio ya estaba cuando nace su cuadra
 
 
+def test_la_posta_de_1578_sale_de_la_vida_final_de_1936():
+    # Arrange: casa 0 de 1578 bajo un edificio público de 1936 (crudo: 1772) y bajo una casa que le cede
+    # y se quita (su cuadra nace en 1911, con el edificio ya en pie); casa 1 de 1578 solo bajo esa casa quitada
+    c78 = ciudad_de([cuadrado(0, 0, 10), cuadrado(30, 0, 10)])
+    c36 = ciudad_de([cuadrado(0, 0, 10), cuadrado(0, 0, 10), cuadrado(30, 0, 10)])
+    c36["techos"][0][3] = ep.ESTILO_PUBLICO
+    c36["cuadras"], c36["cede"] = [-1, 0, 0], [-1, 0, 0]
+    vida36, quitar = ep.vida_de_1936(np.array([1, 4, 4]), c36)
+    construido = [np.ones((40, 40), bool) for _ in range(4)]
+    construido[1][:, 25:] = False   # el lugar de la casa 1 deja de estar edificado en 1843
+
+    # Act
+    huellas36, nace36 = ep.relevos(ep.huellas(c36, forma=(40, 40), escala=1.0), vida36, quitar)
+    vida = ep.vida_de_1578(c78, huellas36, nace36, construido=construido, escala=1.0)
+
+    # Assert: la casa vieja dura hasta que llega el edificio, no hasta su nacimiento crudo; la otra
+    # no la reemplaza un techo quitado
+    assert quitar == {1, 2}
+    assert vida == [[0, ep.PUBLICOS_DESDE], [0, 2]]
+
+
 def test_sin_cuadras_ni_cede_la_vida_es_la_de_siempre():
     ciudad = ciudad_de([cuadrado(0, 0, 10)] * 2)
     vida, quitar = ep.vida_de_1936(np.array([1, 3]), ciudad)
