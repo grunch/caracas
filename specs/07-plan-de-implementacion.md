@@ -29,7 +29,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 |---|---|---|---|---|
 | T10 | **CI en GitHub Actions**: vitest, pytest (solo sintéticos), build y Playwright con datos de prueba | — | cada PR muestra checks verdes o rojos | ✅ #5 |
 | T11 | **Pipeline reproducible**: `npm run datos` corre todo el pipeline de 1936 (y luego el de las épocas) con caché por paso y verifica conteos esperados | T08 | desde los `original.tif`, un comando regenera `public/` idéntico (hash) | ✅ #6 |
-| T12 | **Fixture de datos chica** para E2E y CI: un recorte de 1 km² alrededor de la plaza (plano, `.pak`, suelo) generado por el pipeline | T11 | los E2E corren en CI sin los datos pesados | 🔄 (en revisión): la muestra (`tools/muestra.mjs`) viaja como `muestra.tar.gz` en el release `datos-*` y el CI la baja con `npm run datos:bajar -- --muestra` |
+| T12 | **Fixture de datos chica** para E2E y CI: un recorte de 1 km² alrededor de la plaza (plano, `.pak`, suelo) generado por el pipeline | T11 | los E2E corren en CI sin los datos pesados | 🔄 #60: la muestra (`tools/muestra.mjs`) viaja como `muestra.tar.gz` en el release `datos-*` y el CI la baja con `npm run datos:bajar -- --muestra` |
 
 ## Fase 2 · Terminar lo que está en curso
 
