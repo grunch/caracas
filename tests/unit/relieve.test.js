@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest'
 import { DataUtils, HalfFloatType, RedFormat } from 'three'
 import {
-  decodificarRelieve, muestrear, crearRelieve, hinchado, alturaSuelo, texturaRelieve, uniformsRelieve,
+  decodificarRelieve, muestrear, crearRelieve, hinchado, alturaSuelo, texturaRelieve, uniformsRelieve, subdivisionDeLaHoja,
 } from '../../src/relieve.js'
 
 /** relieve.bin sintético: Uint16 LE [w, h, alturas en dm…] */
@@ -101,5 +101,15 @@ describe('texturaRelieve', () => {
     expect(U.uExageracion.value).toBe(1)
     expect(U.uRelieveHoja.value.toArray()).toEqual([-150, -100, 300, 200])
     expect(DataUtils.fromHalfFloat(U.tRelieve.value.image.data[0])).toBe(0)
+  })
+})
+
+describe('subdivisionDeLaHoja', () => {
+  test('con GPU, la hoja se subdivide fino para apoyarse en el relieve (≈ 24 m por cuadro)', () => {
+    expect(subdivisionDeLaHoja(false)).toEqual([384, 306])
+  })
+
+  test('con render por software, cuatro veces más grueso en cada lado: el suelo era el 90 % del cuadro', () => {
+    expect(subdivisionDeLaHoja(true)).toEqual([96, 77])
   })
 })
