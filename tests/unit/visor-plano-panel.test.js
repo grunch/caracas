@@ -22,7 +22,7 @@ function elementoFalso(etiqueta) {
     closest: (sel) => (sel.split(',').map((s) => s.trim()).includes(etiqueta) ? e : null),
     focus() { e.enfocado = true },
     showModal() { e.open = true },
-    close() { e.open = false; e.emitir('close') },
+    close() { e.open = false; queueMicrotask(() => e.emitir('close')) }, // como el <dialog> de verdad: el evento llega después
     getBoundingClientRect: () => ({ left: 0, top: 0 }),
     setPointerCapture: vi.fn(),
     /** Todo el texto de adentro, para leer el pie. */
@@ -232,6 +232,7 @@ describe('el panel del visor del plano de la época', () => {
     expect(cuerpo.hijos).toHaveLength(1)
     parte('cerrar').emitir('click')
     expect(visor.abierto).toBe(false)
+    await cuadros()
     expect(visor.boton.atributos['aria-expanded']).toBe('false')
     visor.abrir()
     expect(cuerpo.hijos).toHaveLength(1)
@@ -321,6 +322,21 @@ describe('el panel del visor del plano de la época', () => {
     expect(img().hidden).toBe(false)
     expect(parte('aviso').textContent).toBe('')
     aviso.mockRestore()
+  })
+
+  test('cerrar y abrir de corrido: el «close» atrasado no deja la apertura nueva a medias', async () => {
+    const visor = crearVisor()
+    visor.elegir(EPOCA)
+    visor.abrir()
+    await cuadros()
+    visor.cerrar()
+    visor.abrir() // el evento «close» de recién todavía no llegó
+    await cuadros()
+    expect(visor.abierto).toBe(true)
+    expect(visor.boton.atributos['aria-expanded']).toBe('true')
+    expect(parte('aviso').textContent).toBe('')
+    expect(img().hidden).toBe(false)
+    expect(img().src).toBe('plano/1772/medio.webp')
   })
 
   test('lo que llega después de cerrar no toca el panel', async () => {

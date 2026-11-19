@@ -74,7 +74,12 @@ export function crearVisorDePlano({ contenedor, indice, base, añoBase, liviano 
     entero.addEventListener('click', () => poner(encajar(imagen, vista())))
     // un click en el telón (fuera del panel) cierra
     dialogo.addEventListener('click', (e) => { if (e.target === dialogo) cerrar() })
-    dialogo.addEventListener('close', () => { pedido++; boton.setAttribute('aria-expanded', 'false') })
+    // «close» llega en una tarea aparte: si para entonces se volvió a abrir, no toca la apertura nueva
+    dialogo.addEventListener('close', () => {
+      if (dialogo.open) return
+      pedido++
+      boton.setAttribute('aria-expanded', 'false')
+    })
     // el teclado del visor no llega a la ciudad (C, H, M, Espacio…); Escape lo cierra el propio <dialog>
     dialogo.addEventListener('keydown', (e) => {
       e.stopPropagation()
