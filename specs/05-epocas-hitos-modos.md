@@ -313,6 +313,14 @@ que no reconoce lo consulta como dirección de hoy.
 Botones Caminar / Volar / Manejar (+ "Más rápido"). Se entra desde la vista actual (o desde la plaza, si la cámara está muy lejos). Esc vuelve al mapa con la cámara donde estaba. Un cartel muestra el modo ("A pie", "En avión", "En coche/En auto"), la altura o la velocidad ("300 m de altura", "40 km/h") y la calle más cercana.
 
 - **A pie**: primera persona a la altura de los ojos, WASD/flechas, arrastrar para mirar, Shift para correr; choca con las casas usando las máscaras y la grilla de patios.
+  *Caracas (T60, `src/a-pie.js` + `src/a-pie-modo.js`):*
+  - **Choques**: con las huellas de las casas en pie en la época elegida, sacadas de `ciudad.pak` (con la vida que dejan los hitos), en una rejilla de 20 m. Las casas de patio se chocan enteras.
+  - **Caminante**: es un círculo de 0,4 m que se desliza por las paredes; ojos a 1,6 m sobre el relieve; 2,5 m/s al paso y 7 m/s corriendo.
+  - **Entrada**: donde mira la vista o, a más de 1500 m, en la plaza, buscando el lugar libre más cercano.
+  - **Táctil**: joystick con el dedo de la mitad izquierda y mirar con el de la derecha.
+  - **Mientras dura**: la cámara del mapa queda en pausa (`cam.pausar`) y conserva su vista; las flechas y Espacio son del modo.
+  - **Cartel** «A pie»: va en el lugar del buscador y su ayuda se calla a los 12 s.
+  - **Límites**: los hitos (iglesias, Miraflores…) todavía no chocan, y no hay «Más rápido» ni la calle más cercana en el cartel.
 - **Volar**: avión low‑poly visible (con sombra); flechas/WASD giran, suben y bajan; Shift acelera; **Q/E cambian el año y la ciudad cambia abajo**.
 - **Manejar**: coche **de la época** con física simple sobre las calles; tercera persona o cabina (V), bocina (B), sonido (M), otro coche (N); Q/E cambian el año y, con él, el coche. Flota de ejemplo: volanta y coche de plaza (1867, con relincho), voiturette (corneta), doble faetón (1909: "como casi todos los 2.287 automóviles de fines de 1909"), Ford T (klaxon) y Ford V8 (de 1932 en adelante). Cada coche tiene geometría procedural, una ficha corta y sonido **sintetizado con WebAudio** (osciladores sawtooth/square + filtros lowpass/bandpass), sin archivos de audio.
 - Minimapa en canvas con `suelo/crece/despeje` en baja resolución.

@@ -196,3 +196,22 @@ describe('crearCamara con el teclado', () => {
     expect(cam.goal.pitch).toBe(1.5)
   })
 })
+
+describe('crearCamara en pausa (un modo de recorrido tiene la vista)', () => {
+  test('en pausa no atiende el ratón ni la rueda; al reanudar, sí', () => {
+    // Arrange
+    const oyentes = {}
+    const l = { addEventListener: (t, f) => { oyentes[t] = f }, setPointerCapture() {}, getBoundingClientRect: () => ({ left: 0, top: 0, width: 100, height: 100 }) }
+    const cam = crearCamara(new PerspectiveCamera(35, 1, 5, 60000), l, { pedirCuadro: () => {}, hoja })
+    cam.jump({ x: 0, z: 0, dist: 1000, yaw: 0, pitch: 1.0 })
+    const rueda = { deltaY: -500, deltaMode: 0, clientX: 50, clientY: 50, preventDefault() {} }
+
+    // Act / Assert
+    cam.pausar(true)
+    oyentes.wheel(rueda)
+    expect(cam.goal.dist).toBe(1000)
+    cam.pausar(false)
+    oyentes.wheel(rueda)
+    expect(cam.goal.dist).toBeLessThan(1000)
+  })
+})

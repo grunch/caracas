@@ -42,6 +42,15 @@ export const CON_TECLADO = Object.freeze([
   { como: '+ y −', que: 'acercan y alejan' },
 ].map(Object.freeze))
 
+/** A pie (src/a-pie-modo.js): primera persona por las calles de la época elegida. */
+export const A_PIE = Object.freeze([
+  { como: '«Caminar»', que: 'baja a la calle, donde mira la vista (o a la plaza, si estás lejos)' },
+  { como: 'WASD o flechas', que: 'caminan; con Mayús, corren. Las casas no se atraviesan' },
+  { como: 'Arrastrar', que: 'mira alrededor' },
+  { como: 'Con los dedos', que: 'el de la izquierda camina como un joystick; el de la derecha mira' },
+  { como: 'Esc o «Volver al mapa»', que: 'vuelve a la vista de antes' },
+].map(Object.freeze))
+
 /** Lo que está en pantalla y no tiene tecla: la línea de tiempo, los nombres y las fichas. */
 export const EN_PANTALLA = Object.freeze([
   { como: 'Los años, arriba', que: 'llevan la ciudad a ese año: la época llega como una ola desde la Plaza Bolívar' },
@@ -100,6 +109,7 @@ export function controlesVisibles(ids = ACCIONES.map((a) => a.id)) {
     { titulo: 'Con el ratón', filas: CON_RATON },
     { titulo: 'Con los dedos', tactil: true, filas: CON_DEDOS },
     { titulo: 'Con el teclado', filas: CON_TECLADO },
+    { titulo: 'A pie', filas: A_PIE },
     { titulo: 'En la pantalla', filas: EN_PANTALLA },
     { titulo: 'Botones y teclas', filas: acciones.map((a) => ({ como: a.boton, tecla: a.tecla, que: a.que })) },
   ]

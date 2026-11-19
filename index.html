@@ -56,6 +56,19 @@
     #firma:focus-visible{outline:2px solid var(--tinta);outline-offset:2px}
     /* hasta 1120 px el buscador ocupa la fila de arriba (src/buscador/buscador.css): la firma queda en la bienvenida y el Acerca */
     @media (max-width:1120px){#firma{display:none}}
+    /* el cartel del modo va donde el buscador (que a pie se oculta), con sus medidas (src/buscador/buscador.css) */
+    #modo{left:calc(26px + env(safe-area-inset-left,0px));top:calc(26px + env(safe-area-inset-top,0px));z-index:6;width:316px;box-sizing:border-box;
+      min-height:44px;padding:6px 14px;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 10px}
+    @media (max-width:1120px){#modo{top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translate(-50%);width:min(640px,100vw - 28px)}}
+    @media (max-height:500px) and (max-width:1120px){#modo{top:calc(10px + env(safe-area-inset-top,0px));left:calc(14px + env(safe-area-inset-left,0px));transform:none;width:min(320px,38vw)}}
+    #modo[hidden]{display:none}
+    #modo p{margin:0}
+    #modo .titulo{font-style:italic;letter-spacing:.04em}
+    #modo .ayuda{font-size:13px;line-height:1.35}
+    #modo.callado .ayuda,#modo .ayuda.dedos{display:none}
+    @media (hover:none) and (pointer:coarse){#modo .ayuda.raton{display:none}#modo:not(.callado) .ayuda.dedos{display:block}}
+    /* a pie: la caja de búsqueda y los nombres son del mapa; el modo tiene su cartel en esa esquina */
+    body.modo #buscar,body.modo #marcas,body.modo #alzar{display:none}
     @media (max-width:640px){#epocas button{min-height:44px;padding:6px 6px;font-size:14px;letter-spacing:0}
       /* el texto de cada año, en dos líneas a lo más: el resto de la pantalla es de la ciudad */
       #epocas .pie{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;font-size:12px;margin:4px 4px 2px}}
@@ -75,7 +88,12 @@
   <noscript><p>Este sitio necesita JavaScript y WebGL para levantar la ciudad en 3D.</p></noscript>
   <div id="marcas" role="group" aria-label="Lugares de la ciudad"></div>
   <div id="epocas" class="panel" hidden></div>
-  <div id="botones"><button id="ayuda" class="panel" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Acerca: qué estás viendo, cómo moverte y de dónde salen los datos" title="Qué estás viendo, cómo moverte y fuentes (?)">?</button><button id="nombres" class="panel on" type="button" aria-pressed="true" title="Mostrar u ocultar los nombres de los lugares (M)">Nombres</button><button id="color" class="panel" type="button" aria-pressed="false" title="Ver en color (C)">Color</button><button id="hoy" class="panel" type="button" aria-pressed="false" title="Ver la ciudad de hoy (H)">Ver lo de hoy</button><button id="alzar" class="panel" type="button" hidden>Levantar la ciudad</button></div>
+  <div id="botones"><button id="ayuda" class="panel" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Acerca: qué estás viendo, cómo moverte y de dónde salen los datos" title="Qué estás viendo, cómo moverte y fuentes (?)">?</button><button id="nombres" class="panel on" type="button" aria-pressed="true" title="Mostrar u ocultar los nombres de los lugares (M)">Nombres</button><button id="color" class="panel" type="button" aria-pressed="false" title="Ver en color (C)">Color</button><button id="hoy" class="panel" type="button" aria-pressed="false" title="Ver la ciudad de hoy (H)">Ver lo de hoy</button><button id="alzar" class="panel" type="button" hidden>Levantar la ciudad</button><button id="caminar" class="panel" type="button" aria-pressed="false" title="Baja a la calle y camina por la ciudad de la época elegida">Caminar</button></div>
+  <div id="modo" class="panel" role="status" hidden>
+    <p class="titulo">A pie</p>
+    <p class="ayuda raton">WASD o flechas para caminar, Mayús para correr, arrastra para mirar. Esc vuelve al mapa.</p>
+    <p class="ayuda dedos">El dedo de la izquierda camina; el de la derecha mira.</p>
+  </div>
   <div id="leyenda" class="panel" role="note" aria-label="Leyenda de lo de hoy">
     <p class="titulo">La ciudad de hoy, sobre el plano</p>
     <p><span class="linea" aria-hidden="true"></span>calles, vías y quebradas actuales</p>
