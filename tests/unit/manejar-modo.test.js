@@ -140,6 +140,39 @@ describe('crearModoManejar', () => {
   })
 })
 
+describe('crearModoManejar y la memoria de la GPU', () => {
+  const espiar = (malla) => {
+    const piezas = malla.children.map((p) => ({ geometria: 0, material: 0, p }))
+    for (const x of piezas) {
+      x.p.geometry.addEventListener('dispose', () => { x.geometria++ })
+      x.p.material.addEventListener('dispose', () => { x.material++ })
+    }
+    return piezas
+  }
+
+  test('el vehículo que se saca (N, otra época o Esc) suelta sus geometrías; los materiales compartidos quedan', () => {
+    // Arrange
+    const { modo, tecla, escena, ponerEpoca } = armar(4)
+    modo.entrar()
+    const primero = espiar(escena.children[0])
+    // Act: N cambia de vehículo
+    tecla('keydown', 'KeyN')
+    // Assert
+    expect(primero.every((x) => x.geometria === 1)).toBe(true)
+    expect(primero.every((x) => x.material === 0)).toBe(true)
+    // Act: otra época cambia de vehículo
+    const segundo = espiar(escena.children[0])
+    ponerEpoca(2)
+    modo.update(0.05)
+    expect(segundo.every((x) => x.geometria === 1)).toBe(true)
+    // Act: Esc se baja
+    const tercero = espiar(escena.children[0])
+    tecla('keydown', 'Escape')
+    expect(tercero.every((x) => x.geometria === 1)).toBe(true)
+    expect(escena.children.length).toBe(0)
+  })
+})
+
 describe('crearModoManejar y los controles con foco', () => {
   test('Espacio sobre un botón con foco lo activa: el modo no se lo queda (el mismo criterio que a pie y en avión)', () => {
     const { modo, tecla } = armar(4)

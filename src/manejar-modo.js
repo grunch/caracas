@@ -153,8 +153,15 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
   const punteros = new Map()
   const chocaEn = (x, z) => choca(rejilla, x, z, RADIO_M)
 
+  /** Saca el vehículo de la escena y suelta sus geometrías (los materiales son de toda la flota: quedan). */
+  function sacarVehiculo() {
+    if (!malla) return
+    escena.remove(malla)
+    malla.traverse((o) => o.geometry?.dispose())
+    malla = null
+  }
   function ponerVehiculo(v) {
-    if (malla) escena.remove(malla)
+    sacarVehiculo()
     vehiculo = v
     malla = crearVehiculo(v)
     escena.add(malla)
@@ -229,8 +236,7 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
     activo = false
     teclas.clear()
     punteros.clear()
-    escena.remove(malla)
-    malla = null
+    sacarVehiculo()
     sonido.parar()
     camera.near = antes.near
     camera.fov = antes.fov
