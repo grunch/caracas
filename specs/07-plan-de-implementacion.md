@@ -91,7 +91,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | ID | Tarea | Depende de | Listo cuando | Estado |
 |---|---|---|---|---|
 | T60 | A pie: primera persona, colisiones con las casas, sobre el relieve | T21 | se camina por el centro sin atravesar paredes | 🔄 #61 |
-| T61 | En avión: vuelo sobre el valle, Q/E cambian de época | T25 | se sobrevuela el Ávila | 🔄 (en revisión) |
+| T61 | En avión: vuelo sobre el valle, Q/E cambian de época | T25 | se sobrevuela el Ávila | 🔄 #62 |
 | T62 | Manejar: vehículos de cada época (carreta, coche de caballos, tranvía, Ford T) con sonido por WebAudio | T60 | se maneja el vehículo del año elegido | ⏳ |
 
 ## Fase 7 · Cierre
