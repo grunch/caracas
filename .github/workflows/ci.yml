@@ -51,6 +51,8 @@ jobs:
         run: npm run datos:bajar -- --muestra
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # el release de datos es del repo principal: en un fork, GITHUB_REPOSITORY no tiene ningún datos-*
+          DATOS_REPO: grunch/caracas
       - name: Navegador para Playwright
         run: npx playwright install --with-deps chromium
       - name: E2E

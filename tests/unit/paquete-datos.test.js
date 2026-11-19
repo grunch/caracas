@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import {
-  rutaSegura, archivosDelPaquete, elegirRelease, revisarListado, sumasQueNoCoinciden, etiquetaDeDatos,
+  rutaSegura, archivosDelPaquete, elegirRelease, revisarListado, sumasQueNoCoinciden, etiquetaDeDatos, exigirCompleto,
   ACTIVO, ACTIVO_MUESTRA, MANIFIESTO,
 } from '../../tools/paquete-datos-lib.mjs'
 
@@ -131,4 +131,14 @@ describe('etiquetaDeDatos', () => {
 test('el paquete y el manifiesto tienen nombre fijo', () => {
   expect(ACTIVO).toBe('datos.tar.gz')
   expect(MANIFIESTO).toBe('public/datos/manifiesto.json')
+})
+
+describe('exigirCompleto', () => {
+  test('un manifiesto de la muestra (trae su caja) no se publica como el paquete completo', () => {
+    expect(() => exigirCompleto({ conteos: {}, caja: { x0: 0, y0: 0, x1: 10, y1: 10 }, archivos: {} })).toThrow(/muestra/)
+  })
+
+  test('el manifiesto de los datos completos pasa', () => {
+    expect(() => exigirCompleto({ conteos: { techos: 1 }, archivos: { 'public/datos/ciudad.pak': 'abc' } })).not.toThrow()
+  })
 })

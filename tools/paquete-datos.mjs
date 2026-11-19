@@ -20,7 +20,7 @@ import path from 'node:path'
 import { Readable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
 import {
-  ACTIVO, ACTIVO_MUESTRA, MANIFIESTO, archivosDelPaquete, elegirRelease, etiquetaDeDatos, revisarListado, sumasQueNoCoinciden,
+  ACTIVO, ACTIVO_MUESTRA, MANIFIESTO, archivosDelPaquete, elegirRelease, etiquetaDeDatos, revisarListado, sumasQueNoCoinciden, exigirCompleto,
 } from './paquete-datos-lib.mjs'
 import { armarMuestra } from './muestra.mjs'
 
@@ -118,6 +118,7 @@ async function muestra() {
   const etiqueta = process.argv[3]
   if (!etiqueta?.startsWith('datos-')) throw new Error('uso: node tools/paquete-datos.mjs muestra datos-AAAA-MM-DD-<commit>')
   const manifiesto = JSON.parse(await readFile(path.join(RAIZ, MANIFIESTO), 'utf8'))
+  exigirCompleto(manifiesto)
   await exigirSumas(RAIZ, manifiesto, 'public/ no coincide con su manifiesto (baja ese release con npm run datos:bajar)')
   await mkdir(CACHE, { recursive: true })
   const { paquete, manifiesto: deMuestra } = await muestraEmpaquetada()
@@ -128,6 +129,7 @@ async function muestra() {
 
 async function publicar() {
   const manifiesto = JSON.parse(await readFile(path.join(RAIZ, MANIFIESTO), 'utf8'))
+  exigirCompleto(manifiesto)
   const archivos = archivosDelPaquete(manifiesto)
   await exigirSumas(RAIZ, manifiesto, 'public/ no está al día (corre npm run datos)')
   const commit = (await correr('git', ['rev-parse', 'HEAD'])).trim()

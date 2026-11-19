@@ -67,3 +67,14 @@ export function sumasQueNoCoinciden(manifiesto, medidas) {
 export function etiquetaDeDatos(fecha, commit) {
   return `${PREFIJO}${fecha.toISOString().slice(0, 10)}-${commit.slice(0, 7)}`
 }
+
+/**
+ * Lanza si el manifiesto es el de la muestra (tools/muestra.mjs: trae su `caja`): después de
+ * `npm run datos:bajar -- --muestra`, public/ tiene 1 km² que coincide con su manifiesto, y publicarlo
+ * daría un release con la muestra anunciada como los datos completos.
+ */
+export function exigirCompleto(manifiesto) {
+  if (manifiesto?.caja) {
+    throw new Error('public/ tiene la muestra (1 km² para los E2E), no los datos completos: bájalos con npm run datos:bajar o regéneralos con npm run datos')
+  }
+}
