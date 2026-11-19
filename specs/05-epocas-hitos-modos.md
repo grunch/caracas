@@ -236,6 +236,65 @@ no es un año), `verificacion_dp` (por qué es de dominio público, con las plan
 - Convierte lat/lon a píxel del plano (con la transformación de calce inversa) y responde en prosa: "En 1867: a dos cuadras al noreste de la Plaza de la Victoria. Según el plano, ya era ciudad, con las manzanas edificadas" / "eran las afueras: quintas y construcciones sueltas" / "era campo" / "era río". Si cae fuera del plano: "Queda fuera del plano de 1867: …".
 - Errores amables: "No encontré «…». Probá con calle y altura, una esquina o el nombre de un lugar."
 
+### Caracas: de esquina a esquina (implementado, `src/buscador.js` + `src/buscador/`)
+
+En la Caracas vieja las direcciones no llevan calle y número sino **esquinas**: "De La Torre a Veroes" es la
+cuadra entre esas dos esquinas. El buscador entiende eso primero, con el diccionario leído del plano de 1936
+(`tools/geo/esquinas/1936-esquinas.json`, 325 esquinas con nombre; va en un trozo aparte del bundle), y solo lo
+que no reconoce lo consulta como dirección de hoy.
+
+**Gramática** (sin distinguir mayúsculas, tildes, eñes ni signos; el artículo inicial es opcional: "Torre" =
+"La Torre"; se abren "esq.", "Sta.", "Sto.", "Dr.", "Pte.", "Av."):
+
+| Se escribe | Es | Ejemplos |
+|---|---|---|
+| `[de] X a Y` · `entre X y Y` · `X con Y` · `X - Y` | la **cuadra** entre dos esquinas | "De La Torre a Veroes", "torre a veroes", "entre Sociedad y Traposos", "Gradillas con Sociedad" |
+| `… n.º 12` · `nro 12` · `#12` · `, 12` | una casa de esa cuadra (el número se conserva; el plano no dice la puerta) | "Sociedad a Traposos n.º 12" |
+| `[esquina de] X` · `esq. X` · `X` | una **esquina** | "Esquina de Gradillas", "esq. El Conde", "Pele el Ojo" |
+| el nombre o un alias de un hito | un **lugar** | "Catedral", "Capitolio", "Plaza Bolívar" |
+| cualquier otra cosa | una **dirección de hoy** (Nominatim) | "Avenida Urdaneta", "Parque Carabobo" |
+
+- **Erratas**: se perdona una letra cambiada, de más, de menos o cruzada en nombres de 4 a 7 letras y dos en los
+  más largos ("Beroes", "Gradiyas"); en los de menos de 4, ninguna. Si la errata puede ser dos esquinas
+  ("Tore": ¿Torre o Toro?) no se adivina, salvo que con una de ellas salga una cuadra de verdad ("de la Tore a
+  Veroes").
+- **Nombres repetidos** (18 nombres están en dos o tres esquinas): para una cuadra se elige el par que sí es
+  vecino; para una esquina sola, la más cercana a la Plaza Bolívar, y la respuesta avisa que hay otras.
+- **¿Son los extremos de una cuadra?** Dos esquinas son vecinas si están a entre 15 y 250 m y no hay una
+  tercera más cerca de las dos que el 90 % de lo que las separa (`ADYACENCIA`). Eso descarta la diagonal de la
+  manzana y la esquina a dos cuadras sin suponer hacia dónde corren las calles (fuera del centro el damero
+  gira). Salen 576 cuadras; si las dos esquinas no son vecinas se dice ("no son esquinas vecinas en el plano de
+  1936: las separan unos 240 m") y se marca el punto medio.
+- **Sugerencias** mientras se escribe (sin red): primero los nombres que empiezan así, después los que tienen
+  una palabra que empieza así y al final los parecidos; entre iguales, los más cercanos a la plaza. Con una
+  esquina completa ("La Torre", "la torre a ") se ofrecen las cuadras que salen de ella. Combobox de ARIA: ↑ ↓,
+  Enter, Escape; `/` enfoca la caja.
+- **Direcciones de hoy**: solo al mandar a buscar (Enter o el botón), nunca por tecla; a lo sumo un pedido por
+  segundo, con las respuestas guardadas; `format=jsonv2`, `viewbox` del valle con `bounded=1`,
+  `countrycodes=ve`, `accept-language=es`, `limit=5`. Se manda la consulta y nada más. lat/lon → píxel con
+  `src/buscador/geo.js` (lo mínimo de `tools/geo/geo1936.py`, probado contra sus resultados). La respuesta es un
+  dato no confiable: se validan los números y los textos se escriben con `textContent`. Se muestra con
+  "© OpenStreetMap", en rojo (el color de "lo de hoy").
+- **Respuesta en prosa** (`src/buscador/prosa.js`), atada a la época elegida y sin inventar: dónde queda
+  respecto del hito a menos de 150 m ("la cuadra al norte de la Catedral"; si el hito todavía no existe en esa
+  época, "de donde esta reconstrucción pone después el Capitolio": `nace` es desde cuándo está modelado, no cuándo se construyó) o de la Plaza Bolívar ("a 5 cuadras al noreste"); hacia
+  dónde va y cuánto mide; qué cuadras salen de una esquina; si la lectura del nombre en el plano es dudosa
+  (`verificado: false`); y qué había: "En 1772 ya estaba edificada" (al menos el 20 % de un redondel de 32 m
+  está edificado en `crece.png` R), "ya era parte de la ciudad" o "todavía era campo: la ciudad llega aquí en
+  el plano de 1889" (`crece.png` G), con "Es ciudad desde el plano de …" cuando viene de antes. Una dirección
+  de hoy que cae sobre una cuadra o junto a una esquina del diccionario lo dice ("Hoy queda en la cuadra de La
+  Torre a Veroes"). Fuera de la hoja: "Queda fuera del plano de 1936: a 12,1 km al este de la Plaza Bolívar".
+  Sin `crece.json` (la ciudad de demostración) la respuesta no habla de años.
+- **En pantalla**: la cámara vuela al lugar (salta con `?capture` o `prefers-reduced-motion`) y queda un
+  alfiler que sigue al terreno (punto, hilo y cartel; en una cuadra, también el tramo entre las dos esquinas).
+  Lo quitan Escape, la × o una búsqueda nueva. `window.lab.buscador` = `{ buscar(texto), sugerir(texto),
+  limpiar(), resultado, indice, listo }`. Capturas de control: `node tests/e2e/capturas-buscador.mjs [url]
+  [carpeta]` (Nominatim simulado).
+- Límites: el número de casa no se ubica dentro de la cuadra; las esquinas son las de 1936 (un nombre que
+  cambió antes o después no está); la vecindad sale de la geometría del diccionario, no de las calles (una
+  esquina mal ubicada o sin nombre en el medio puede dar una "cuadra" larga o en diagonal); no hay todavía
+  nombres de calles de hoy en las sugerencias.
+
 ## Modos de recorrido (`modos.js`, `autos.js`)
 
 Botones Caminar / Volar / Manejar (+ "Más rápido"). Se entra desde la vista actual (o desde la plaza, si la cámara está muy lejos). Esc vuelve al mapa con la cámara donde estaba. Un cartel muestra el modo ("A pie", "En avión", "En coche/En auto"), la altura o la velocidad ("300 m de altura", "40 km/h") y la calle más cercana.
