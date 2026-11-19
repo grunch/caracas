@@ -13,6 +13,8 @@ import { visibleEn, vivo, epocaAqui, PRIMERA_EPOCA } from './epocas.js'
 const ULTIMA_EPOCA = 5
 /** El nivel n se ve con la cámara a menos de DIST_NIVEL[n] metros; el 1, siempre. */
 export const DIST_NIVEL = Object.freeze({ 2: 4200, 3: 1500 })
+/** Hasta qué distancia (m) se acerca la cámara al tocar una marca, según su nivel. */
+export const DIST_VUELO_M = Object.freeze({ 1: 1500, 2: 700, 3: 450 })
 /** Fracción de la distancia umbral dentro de la cual se conserva el nivel que ya se veía. */
 export const HISTERESIS_NIVEL = 0.08
 /** Del punto al borde de abajo del cartel (el hilo), en píxeles de pantalla. */
@@ -97,6 +99,12 @@ export function nivelPorDistancia(dist, previo = null, histeresis = HISTERESIS_N
   }
   return dentro(3) ? 3 : dentro(2) ? 2 : 1
 }
+
+/**
+ * A qué distancia queda la cámara al tocar una marca de ese nivel: se acerca hasta la del nivel, pero nunca se
+ * aleja, ni de donde está (`ahora`) ni de adonde ya iba (`destino`).
+ */
+export const distanciaDeVuelo = (nivel, { ahora, destino }) => Math.min(ahora, destino, DIST_VUELO_M[nivel])
 
 /**
  * Proyecta un punto del mundo con la matriz de vista y proyección (16 números por columnas, como

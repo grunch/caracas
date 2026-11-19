@@ -5,6 +5,9 @@ import { test, expect } from '@playwright/test'
 test.use({ viewport: { width: 900, height: 640 } })
 
 const listo = async (page) => {
+  // sin línea de tiempo, también con los datos reales: si crece.json llegara después de fijar los uniforms, la
+  // línea de tiempo volvería la época a la primera en medio del test
+  await page.route('**/datos/crece.json', (ruta) => ruta.fulfill({ status: 404 }))
   await page.goto('/?sinintro&capture')
   await page.waitForFunction(() => window.lab?.ready === true)
 }

@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest'
 import { PerspectiveCamera, Matrix4 } from 'three'
 import {
   normalizarMarcas, validarMarcas, vivaEn, nombreEn, presenciaEn, nivelPorDistancia, DIST_NIVEL,
-  aPantalla, cajaDe, seTapan, despejar, calcularMarcas, HILO_PX,
+  aPantalla, cajaDe, seTapan, despejar, calcularMarcas, distanciaDeVuelo, DIST_VUELO_M, HILO_PX,
 } from '../../src/marcas.js'
 import { MARCAS } from '../../src/marcas-datos.js'
 import { HITOS } from '../../src/hitos.js'
@@ -143,6 +143,22 @@ describe('nivelPorDistancia', () => {
     expect(nivelPorDistancia(justoAdentro, 2)).toBe(2)
     expect(nivelPorDistancia(DIST_NIVEL[3] * 0.8, 2)).toBe(3)
     expect(nivelPorDistancia(DIST_NIVEL[3] * 1.2, 3)).toBe(2)
+  })
+})
+
+describe('distanciaDeVuelo', () => {
+  test('al tocar una marca la cámara se acerca hasta la distancia de su nivel', () => {
+    expect(distanciaDeVuelo(3, { ahora: 3000, destino: 3000 })).toBe(DIST_VUELO_M[3])
+    expect(distanciaDeVuelo(1, { ahora: 3000, destino: 3000 })).toBe(DIST_VUELO_M[1])
+  })
+
+  test('nunca se aleja: ni de donde está la cámara ni de adonde ya iba', () => {
+    // ya está más cerca que el límite del nivel
+    expect(distanciaDeVuelo(1, { ahora: 300, destino: 300 })).toBe(300)
+    // en pleno alejamiento (está a 1000 y va hacia 2000): se queda en 1000
+    expect(distanciaDeVuelo(1, { ahora: 1000, destino: 2000 })).toBe(1000)
+    // en pleno acercamiento (está a 2000 y va hacia 200): lo conserva
+    expect(distanciaDeVuelo(1, { ahora: 2000, destino: 200 })).toBe(200)
   })
 })
 

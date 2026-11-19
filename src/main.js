@@ -19,7 +19,7 @@ import { cargarCalles, crearRotulos } from './calles.js'
 import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo, hinchado } from './relieve.js'
 import { vectorSol, ajustesDeAcabado, esRenderPorSoftware } from './luz.js'
 import { crearAcabado } from './acabado.js'
-import { normalizarMarcas } from './marcas.js'
+import { normalizarMarcas, distanciaDeVuelo } from './marcas.js'
 import { crearCapaMarcas } from './marcas-capa.js'
 import { MARCAS } from './marcas-datos.js'
 import './marcas.css'
@@ -317,7 +317,6 @@ const sueloEn = (x, z) => alturaSuelo(relieve, x, z,
 const cam = crearCamara(camera, renderer.domElement, { pedirCuadro, hoja, suelo: sueloEn })
 
 // --- las marcas (M): los nombres de los lugares, por época, en una capa de DOM sobre la vista (src/marcas.js) ---
-const DIST_VUELO_M = { 1: 1500, 2: 700, 3: 450 } // hasta dónde se acerca la cámara al tocar una marca, por nivel
 const sinAnimar = matchMedia('(prefers-reduced-motion: reduce)')
 const marcas = crearCapaMarcas({
   contenedor: document.getElementById('marcas'),
@@ -327,7 +326,7 @@ const marcas = crearCapaMarcas({
   alSobre: () => pedirCuadro(2),
   alAbrir(marca) {
     // la cámara vuela al lugar (nunca se aleja); T43 abrirá aquí la ficha, con marcas.alAbrirMarca o el evento
-    const destino = { x: marca.x, z: marca.z, dist: Math.min(cam.goal.dist, DIST_VUELO_M[marca.nivel]) }
+    const destino = { x: marca.x, z: marca.z, dist: distanciaDeVuelo(marca.nivel, { ahora: cam.now.dist, destino: cam.goal.dist }) }
     if (sinAnimar.matches) cam.jump(destino); else cam.volar(destino)
     marcas.alAbrirMarca?.(marca)
     dispatchEvent(new CustomEvent('abrirmarca', { detail: marca }))

@@ -153,6 +153,18 @@ describe('la capa de marcas', () => {
     expect([abierta.x1 - abierta.x0, abierta.y1 - abierta.y0]).toEqual([240, 58])
   })
 
+  test('abrir(id) una marca que todavía no se dibujó nunca: cuando aparece, aparece abierta', () => {
+    // Arrange: en 1772 el teatro no existe; su cartel no se creó
+    dibujar(1)
+    expect(raizDe('teatro')).toBeUndefined()
+    // Act
+    expect(capa.abrir('teatro')).toBe(true)
+    dibujar(5)
+    // Assert
+    expect(capa.abierta).toBe('teatro')
+    expect(raizDe('teatro').classList.contains('abierta')).toBe(true)
+  })
+
   test('una marca abierta o con el mouse encima que deja de verse suelta su estado', () => {
     dibujar(5)
     botonDe('teatro').emitir('pointerenter')

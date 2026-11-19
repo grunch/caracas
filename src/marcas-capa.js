@@ -75,6 +75,7 @@ export function crearCapaMarcas({ contenedor, marcas, tamaño, altura = () => 0,
     boton.addEventListener('click', () => abrir(marca.id))
     raiz.addEventListener('animationend', () => raiz.classList.remove('nueva'))
     contenedor.append(raiz)
+    if (estado.abierta === marca) raiz.classList.add('abierta') // se abrió (abrir(id)) antes de dibujarse nunca
     e = { raiz, boton, nombre, nota, texto: null, ver: false }
     elementos.set(marca.id, e)
     return e
