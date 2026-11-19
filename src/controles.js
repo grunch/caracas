@@ -50,7 +50,8 @@ const EN_BOTON = 'button, a, [role="button"]'
 export function accionDeTecla(e, ids = null) {
   if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return null
   if (e.target?.closest?.(EN_CAMPO)) return null
-  const accion = ACCIONES.find((a) => (a.codigo && a.codigo === e.code) || (a.letra && a.letra === e.key))
+  // el carácter manda sobre la tecla física: en un teclado AZERTY «?» se escribe con la tecla que acá es la M
+  const accion = ACCIONES.find((a) => a.letra && a.letra === e.key) ?? ACCIONES.find((a) => a.codigo && a.codigo === e.code)
   if (!accion || (ids && !ids.includes(accion.id))) return null
   if (!accion.conFoco && e.target?.closest?.(EN_BOTON)) return null
   return accion

@@ -82,7 +82,7 @@ export function crearAcerca({
   raiz = document.body, boton = null, mostrarIntro = false, alCerrarIntro = () => {}, alVerCrecer = () => {},
   pedirEpocas = async () => null, pedirCreditos = async () => null, desde = 0, acciones,
 }) {
-  const estado = { intro: false, abierta: false, volverA: null, datos: null, pedido: null }
+  const estado = { intro: false, abierta: false, volverA: null, volverDeIntro: null, datos: null, pedido: null }
 
   // --- la bienvenida ---
   const crecer = crear('button', { clase: 'principal', type: 'button', textContent: TEXTO_INTRO.crecer })
@@ -159,13 +159,41 @@ export function crearAcerca({
 
   const seccionActual = () => secciones.find((s) => s.ir.getAttribute('aria-current') === 'true')?.id ?? null
 
-  function irA(id) {
+  /** Lleva la lectura a una sección, sin tocar el foco. */
+  function desplazarA(id) {
     const s = secciones.find((x) => x.id === id)
-    if (!s) return false
+    if (!s) return null
     cuerpo.scrollTop = Math.max(0, s.nodo.offsetTop - cuerpo.offsetTop)
-    s.cabeza.focus({ preventScroll: true })
     marcar(s)
-    return true
+    return s
+  }
+
+  /** Va a una sección: la lectura y el foco (en su título). */
+  function irA(id) {
+    const s = desplazarA(id)
+    s?.cabeza.focus({ preventScroll: true })
+    return s !== null
+  }
+
+  /**
+   * Llegaron los datos: se dibuja de nuevo. Con el panel abierto, la lectura sigue en su sección y el foco
+   * solo se mueve si lo que lo tenía se reemplazó (va a su reemplazo: el mismo botón del índice o el mismo
+   * título); con el panel ya cerrado, no se toca ni la lectura ni el foco.
+   */
+  function ponerDatos(datos) {
+    const foco = document.activeElement
+    const lectura = seccionActual()
+    const deIndice = secciones.find((s) => s.ir === foco)?.id
+    const deTitulo = secciones.find((s) => s.cabeza === foco)?.id
+    const deCuerpo = cuerpo.contains(foco) && foco !== cuerpo
+    estado.datos = datos
+    dibujar()
+    if (!estado.abierta) return
+    if (lectura && lectura !== secciones[0].id) desplazarA(lectura)
+    const nueva = secciones.find((s) => s.id === (deIndice ?? deTitulo))
+    if (deIndice) nueva.ir.focus({ preventScroll: true })
+    else if (deTitulo) nueva.cabeza.focus({ preventScroll: true })
+    else if (deCuerpo) titulo.focus({ preventScroll: true }) // un enlace o un control del texto viejo
   }
 
   /** Abre el panel (en una sección, si se pide). Los datos se piden la primera vez. */
@@ -174,14 +202,8 @@ export function crearAcerca({
     if (!estado.abierta) estado.volverA = document.activeElement
     estado.abierta = true
     aislar()
-    estado.pedido ??= Promise.all([pedirEpocas().catch(() => null), pedirCreditos().catch(() => null)]).then(([epocas, creditos]) => {
-      const lectura = seccionActual()
-      estado.datos = { epocas, creditos }
-      const focoAdentro = cuerpo.contains(document.activeElement) && document.activeElement !== cuerpo
-      dibujar()
-      if (focoAdentro) titulo.focus({ preventScroll: true }) // lo que tenía el foco ya no existe
-      if (lectura && lectura !== secciones[0].id) irA(lectura) // llegaron los datos: se sigue leyendo donde se estaba
-    })
+    estado.pedido ??= Promise.all([pedirEpocas().catch(() => null), pedirCreditos().catch(() => null)])
+      .then(([epocas, creditos]) => ponerDatos({ epocas, creditos }))
     dibujar()
     acerca.classList.add('ver')
     document.body.classList.add('acerca')
@@ -205,6 +227,7 @@ export function crearAcerca({
 
   function abrirIntro() {
     if (estado.abierta) cerrar()
+    if (!estado.intro) estado.volverDeIntro = document.activeElement
     estado.intro = true
     aislar()
     intro.classList.add('ver')
@@ -218,7 +241,11 @@ export function crearAcerca({
     aislar()
     intro.classList.remove('ver')
     document.body.classList.remove('intro')
-    if (intro.contains(document.activeElement)) document.activeElement.blur?.()
+    // el foco vuelve a donde estaba; en la primera visita no estaba en ningún control: queda en la página
+    const { volverDeIntro } = estado
+    estado.volverDeIntro = null
+    if (volverDeIntro?.isConnected && volverDeIntro !== document.body) volverDeIntro.focus({ preventScroll: true })
+    else if (intro.contains(document.activeElement)) document.activeElement.blur?.()
     alCerrarIntro()
   }
 

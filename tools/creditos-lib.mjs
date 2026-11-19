@@ -131,5 +131,18 @@ export function armarCreditos({ epocas, desde, base, fichasMapas, fichasDatos, f
   }
 }
 
+/**
+ * Lo acreditado en `creditos` (el creditos.json ya escrito, o null) cuya ficha ya no está entre `rutas` (las
+ * entradas del paso): se quitó una fuente, y las fechas de las que quedan no lo delatan. Si devuelve algo, el
+ * paso se rehace.
+ */
+export function creditosSinOrigen(creditos, rutas) {
+  const falta = (carpeta) => ({ id }) => !rutas.includes(`fuentes/${carpeta}/${id}/ficha.json`)
+  return [...(creditos?.mapas ?? []).filter(falta('mapas')), ...(creditos?.datos ?? []).filter(falta('datos'))].map((x) => x.id)
+}
+
+/** Los package.json instalados de las dependencias del sitio: de ahí salen la versión y la licencia. */
+export const paquetesDeCreditos = (paquete) => Object.keys(paquete?.dependencies ?? {}).sort().map((n) => `node_modules/${n}/package.json`)
+
 /** Las fichas de planos que lee el paso (sus entradas en tools/datos.mjs). */
 export const fichasDeCreditos = (uso) => mapasUsados(uso).flatMap((g) => g.ids).map((id) => `fuentes/mapas/${id}/ficha.json`)

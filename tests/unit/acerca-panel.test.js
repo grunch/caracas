@@ -185,6 +185,15 @@ describe('la bienvenida y el panel «Acerca»', () => {
       expect(avisos).toEqual(['intro-cerrada'])
     })
 
+    test('abierta con el foco en un control, al cerrarla el foco vuelve a él', () => {
+      const acerca = armar()
+      boton.focus()
+      acerca.abrirIntro()
+      expect(doc.activeElement.textContent).toBe('Ver crecer la ciudad')
+      tecla('Escape')
+      expect(doc.activeElement).toBe(boton)
+    })
+
     test('se puede volver a abrir (?intro, o desde código)', () => {
       const acerca = armar()
       acerca.abrirIntro()
@@ -378,6 +387,49 @@ describe('la bienvenida y el panel «Acerca»', () => {
       acerca.cerrar()
       expect(boton.inert).toBe(false)
       expect(doc.activeElement).toBe(boton)
+    })
+
+    describe('cuando los datos llegan después', () => {
+      let soltar
+      const lento = () => new Promise((ok) => { soltar = () => ok(CREDITOS) })
+      const indiceDe = (texto) => botonDe(panel().porEtiqueta('nav')[0], texto)
+
+      test('con el foco en un botón del índice, el foco queda en ese mismo botón (el nuevo), dentro del panel', async () => {
+        const acerca = armar({ pedirCreditos: lento })
+        const pedido = acerca.abrir()
+        const viejo = indiceDe('Las épocas')
+        viejo.focus()
+        soltar()
+        await pedido
+        expect(doc.activeElement).not.toBe(viejo)
+        expect(doc.activeElement).toBe(indiceDe('Las épocas'))
+        expect(doc.activeElement.isConnected).toBe(true)
+      })
+
+      test('con el foco en «Cerrar», la lectura sigue en su sección y el foco no se mueve', async () => {
+        const acerca = armar({ pedirCreditos: lento })
+        const pedido = acerca.abrir('fuentes')
+        const x = panel().porClase('x')[0]
+        x.focus()
+        soltar()
+        await pedido
+        expect(acerca.seccion).toBe('fuentes')
+        expect(panel().porClase('cuerpo')[0].scrollTop).toBe(1500)
+        expect(doc.activeElement).toBe(x)
+      })
+
+      test('con el panel ya cerrado, se guardan para la próxima vez y el foco no vuelve al panel', async () => {
+        const acerca = armar({ pedirCreditos: lento })
+        boton.focus()
+        const pedido = acerca.abrir('fuentes')
+        acerca.cerrar()
+        soltar()
+        await pedido
+        expect(doc.activeElement).toBe(boton)
+        expect(acerca.listo).toBe(true)
+        acerca.abrir()
+        expect(panel().porClase('fuentes')).toHaveLength(4)
+      })
     })
 
     test('abrir el panel cierra la bienvenida, y abrir la bienvenida cierra el panel: nunca los dos', async () => {

@@ -3,7 +3,7 @@ import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import {
   SIN_LICENCIA, DOMINIO_SIN_ESTABLECER, derechosDeFicha, tituloComun, mapasUsados, entradaDeMapa, entradaDeDato, entradaDeFoto,
-  entradaDePrograma, armarCreditos, fichasDeCreditos,
+  entradaDePrograma, armarCreditos, fichasDeCreditos, creditosSinOrigen, paquetesDeCreditos,
 } from '../../tools/creditos-lib.mjs'
 
 const mapa = (extra = {}) => ({
@@ -192,6 +192,33 @@ describe('fichasDeCreditos', () => {
     expect(fichasDeCreditos({ epocas: EPOCAS, desde: 1, base: ['dcn-hoja1', 'dcn-hoja2'] })).toEqual([
       'fuentes/mapas/mestre/ficha.json', 'fuentes/mapas/dcn-hoja1/ficha.json', 'fuentes/mapas/dcn-hoja2/ficha.json',
     ])
+  })
+})
+
+describe('creditosSinOrigen', () => {
+  const creditos = { mapas: [{ id: 'mestre' }, { id: 'dcn-hoja1' }], datos: [{ id: 'osm' }, { id: 'dem' }], fotos: [{ id: 'f' }], programas: [] }
+  const rutas = ['public/datos/crece.json', 'fuentes/mapas/mestre/ficha.json', 'fuentes/mapas/dcn-hoja1/ficha.json', 'fuentes/mapas/dcn-hoja2/ficha.json', 'fuentes/datos/osm/ficha.json', 'fuentes/datos/dem/ficha.json']
+
+  it('con todas las fichas en su sitio, nada', () => {
+    expect(creditosSinOrigen(creditos, rutas)).toEqual([])
+  })
+
+  it('avisa de lo acreditado cuya ficha se quitó (un dato o un plano): el paso se rehace', () => {
+    expect(creditosSinOrigen(creditos, rutas.filter((r) => !r.includes('/dem/')))).toEqual(['dem'])
+    expect(creditosSinOrigen(creditos, rutas.filter((r) => !r.includes('/mestre/')))).toEqual(['mestre'])
+  })
+
+  it('sin creditos.json todavía, nada (el paso corre igual porque falta su salida)', () => {
+    expect(creditosSinOrigen(null, rutas)).toEqual([])
+  })
+})
+
+describe('paquetesDeCreditos', () => {
+  it('el package.json instalado de cada dependencia del sitio (no las de desarrollo), en orden', () => {
+    expect(paquetesDeCreditos({ dependencies: { three: '^0.187.0', alfa: '1' }, devDependencies: { vite: '8' } }))
+      .toEqual(['node_modules/alfa/package.json', 'node_modules/three/package.json'])
+    expect(paquetesDeCreditos({})).toEqual([])
+    expect(paquetesDeCreditos(null)).toEqual([])
   })
 })
 

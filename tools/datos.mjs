@@ -11,7 +11,7 @@ import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas, resolv
 import { salidasPlanosEpocas } from './planos-epocas-lib.mjs'
 import { salidasDeFotos, fotosSinOrigen } from './fotos-lib.mjs'
 import { leerCalzados } from './planos-epocas.mjs'
-import { fichasDeCreditos } from './creditos-lib.mjs'
+import { fichasDeCreditos, creditosSinOrigen, paquetesDeCreditos } from './creditos-lib.mjs'
 import { PRIMERA_EPOCA } from '../src/epocas.js'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
@@ -227,13 +227,16 @@ async function archivosDeImagenes() {
   return rutas.sort()
 }
 
-/** Las fichas que lee el paso `creditos`: las de los planos usados y todas las de fuentes/datos/. */
-async function fichasDelAcerca() {
+/**
+ * Lo que lee el paso `creditos` además de sus entradas fijas: las fichas de los planos usados, todas las de
+ * fuentes/datos/ y el package.json instalado de cada dependencia (su versión y su licencia).
+ */
+async function entradasDelAcerca() {
   const { epocas = [] } = (await leerJsonSiHay('tools/geo/epocas/epocas.json')) ?? {}
   const base = ((await leerJsonSiHay('tools/geo/mosaico-1936.json'))?.hojas ?? []).map((h) => h.fuente)
   const datos = (await readdir(path.join(RAIZ, 'fuentes/datos'), { withFileTypes: true }).catch(() => []))
     .filter((d) => d.isDirectory()).map((d) => `fuentes/datos/${d.name}/ficha.json`).sort()
-  return [...fichasDeCreditos({ epocas, desde: PRIMERA_EPOCA, base }), ...datos]
+  return [...fichasDeCreditos({ epocas, desde: PRIMERA_EPOCA, base }), ...datos, ...paquetesDeCreditos(await leerJsonSiHay('package.json'))]
 }
 
 /** `regenerar`: si se va a planificar una regeneración (solo ahí se exigen los escaneos originales). */
@@ -248,13 +251,15 @@ async function pasosCompletos({ regenerar = true } = {}) {
   const fotos = salidasDeFotos(manifiestoFotos)
   // una foto publicada cuya ficha u original se borró: el paso se rehace aunque las fechas digan que está al día
   const rehacerFotos = fotosSinOrigen(manifiestoFotos, imagenes).length > 0
-  const fichasCreditos = await fichasDelAcerca()
+  const entradasCreditos = await entradasDelAcerca()
+  // una fuente acreditada cuya ficha se quitó: el paso se rehace aunque las fechas digan que está al día
+  const rehacerCreditos = creditosSinOrigen(await leerJsonSiHay('public/datos/creditos.json'), entradasCreditos).length > 0
   const pasos = PASOS.map((p) => {
     if (p.id === 'fotos') return { ...p, entradas: imagenes, salidas: [...p.salidas, ...fotos], rehacer: rehacerFotos }
     if (p.id === 'plano') return { ...p, salidas: [...p.salidas, ...teselas] }
     if (p.id === 'epocas') return { ...p, entradas: [...new Set([...p.entradas, ...fichas])] }
     if (p.id === 'planos-epocas') return { ...p, salidas: planosEpocas }
-    if (p.id === 'creditos') return { ...p, entradas: [...p.entradas, ...fichasCreditos] }
+    if (p.id === 'creditos') return { ...p, entradas: [...p.entradas, ...entradasCreditos], rehacer: rehacerCreditos }
     return p
   })
   return resolverOriginales(pasos, await archivosDeCalces(), { exigir: regenerar })

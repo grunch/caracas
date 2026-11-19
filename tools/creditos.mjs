@@ -11,7 +11,7 @@
 // No baja nada ni ejecuta nada de lo que lee: solo JSON.
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { armarCreditos, mapasUsados } from './creditos-lib.mjs'
+import { armarCreditos, mapasUsados, paquetesDeCreditos } from './creditos-lib.mjs'
 import { PRIMERA_EPOCA } from '../src/epocas.js'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
@@ -33,9 +33,7 @@ for (const d of await readdir(path.join(RAIZ, 'fuentes/datos'), { withFileTypes:
 }
 const fotos = (await leerSiHay('public/datos/fotos.json'))?.fotos ?? []
 const paquetes = []
-for (const nombre of Object.keys((await leer('package.json')).dependencies ?? {}).sort()) {
-  paquetes.push(await leer(`node_modules/${nombre}/package.json`))
-}
+for (const ruta of paquetesDeCreditos(await leer('package.json'))) paquetes.push(await leer(ruta))
 
 const creditos = armarCreditos({ ...uso, fichasMapas, fichasDatos, fotos, paquetes })
 for (const m of creditos.mapas) console.log(`  ${m.año} · ${m.id}${m.hojas > 1 ? ` (${m.hojas} hojas)` : ''} · ${m.licencia}`)

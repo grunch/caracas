@@ -33,6 +33,13 @@ describe('accionDeTecla', () => {
     expect(accionDeTecla(tecla({ code: 'F1', key: 'F1' }))?.id).toBe('acerca')
   })
 
+  it('el carácter manda sobre la tecla física: en AZERTY «?» sale de la tecla que acá es la M', () => {
+    const azerty = { code: 'KeyM', key: '?', shiftKey: true }
+    expect(accionDeTecla(tecla(azerty))?.id).toBe('acerca')
+    expect(accionDeTecla(tecla(azerty, en(['button'])))?.id).toBe('acerca') // y vale con el foco en un botón
+    expect(accionDeTecla(tecla({ code: 'KeyM', key: 'm' }))?.id).toBe('nombres')
+  })
+
   it('no hay atajo para una tecla cualquiera', () => {
     expect(accionDeTecla(tecla({ code: 'KeyZ', key: 'z' }))).toBeNull()
   })
