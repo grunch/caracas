@@ -116,6 +116,15 @@ export function descargable(url) {
   } catch { return false }
 }
 
+/**
+ * Ids del manifiesto que ya no tienen su ficha o su original entre `rutas` (las entradas del paso): se borró
+ * una imagen después de publicarla, y las fechas de lo que queda no lo delatan.
+ */
+export function fotosSinOrigen(manifiesto, rutas) {
+  const con = (id, patron) => rutas.some((r) => r.startsWith(`fuentes/imagenes/${id}/`) && patron.test(r.slice(r.lastIndexOf('/') + 1)))
+  return (manifiesto?.fotos ?? []).map((f) => f.id).filter((id) => !con(id, /^ficha\.json$/) || !con(id, /^original\.[a-z0-9]+$/i))
+}
+
 /** Los archivos que tools/fotos.mjs escribe según el manifiesto (o ninguno si todavía no existe). */
 export const salidasDeFotos = (manifiesto) =>
   (manifiesto?.fotos ?? []).flatMap((f) => [`public/fotos/${f.id}.webp`, `public/fotos/m/${f.id}.webp`])

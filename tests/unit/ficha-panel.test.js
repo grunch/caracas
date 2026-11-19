@@ -172,7 +172,7 @@ describe('el panel de la ficha y el visor de fotos', () => {
     visor().porClase('sig')[0].emitir('click')
     visor().porClase('ant')[0].emitir('click')
     expect(fichas.visor.id).toBe('mercado')
-    expect(tecla('a').detenido).toBe(false) // las demás teclas siguen su camino
+    expect(tecla('/').detenido).toBe(true) // el visor es modal: los atajos de atrás (el buscador, C, H…) no se enteran
 
     tecla('Escape')
     expect(fichas.visor).toBe(null)

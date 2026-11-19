@@ -9,7 +9,7 @@ import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas, resolverOriginales, fichasDeEpocas } from './datos-lib.mjs'
 import { salidasPlanosEpocas } from './planos-epocas-lib.mjs'
-import { salidasDeFotos } from './fotos-lib.mjs'
+import { salidasDeFotos, fotosSinOrigen } from './fotos-lib.mjs'
 import { leerCalzados } from './planos-epocas.mjs'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
@@ -225,9 +225,12 @@ async function pasosCompletos({ regenerar = true } = {}) {
   // las texturas de cada plano de época dependen del recorte de su calce (calzado.json, si ya está)
   const planosEpocas = salidasPlanosEpocas(await leerCalzados(path.join(RAIZ, 'fuentes', 'derivados')))
   const imagenes = await archivosDeImagenes()
-  const fotos = salidasDeFotos(await leerJsonSiHay('public/datos/fotos.json'))
+  const manifiestoFotos = await leerJsonSiHay('public/datos/fotos.json')
+  const fotos = salidasDeFotos(manifiestoFotos)
+  // una foto publicada cuya ficha u original se borró: el paso se rehace aunque las fechas digan que está al día
+  const rehacerFotos = fotosSinOrigen(manifiestoFotos, imagenes).length > 0
   const pasos = PASOS.map((p) => {
-    if (p.id === 'fotos') return { ...p, entradas: imagenes, salidas: [...p.salidas, ...fotos] }
+    if (p.id === 'fotos') return { ...p, entradas: imagenes, salidas: [...p.salidas, ...fotos], rehacer: rehacerFotos }
     if (p.id === 'plano') return { ...p, salidas: [...p.salidas, ...teselas] }
     if (p.id === 'epocas') return { ...p, entradas: [...new Set([...p.entradas, ...fichas])] }
     if (p.id === 'planos-epocas') return { ...p, salidas: planosEpocas }
@@ -298,7 +301,7 @@ if (opciones.marcar) {
   console.log('firmas del código guardadas: los pasos quedan al día')
 } else if (!opciones.verificar) {
   const guardadas = (await leerJsonSiHay(FIRMAS)) ?? {}
-  const codigoCambiado = new Set([...firmasCambiadas(firmas, guardadas), ...(DESCARGAR ? ['hoy-osm'] : [])])
+  const codigoCambiado = new Set([...firmasCambiadas(firmas, guardadas), ...(DESCARGAR ? ['hoy-osm'] : []), ...pasos.filter((p) => p.rehacer).map((p) => p.id)])
   const ids = pendientes(pasos, await tiempos(pasos), { ...opciones, codigoCambiado })
   console.log(ids.length ? `pasos a correr: ${ids.join(' → ')}` : 'todo al día')
   for (const id of ids) {

@@ -3,7 +3,7 @@ import { readdirSync, readFileSync, existsSync } from 'node:fs'
 import path from 'node:path'
 import { MARCAS } from '../../src/marcas-datos.js'
 import {
-  elegibilidad, fechaDe, licenciaVisible, medidasDerivadas, entradaDeFoto, armarManifiesto, descargable, informe, salidasDeFotos,
+  elegibilidad, fechaDe, licenciaVisible, medidasDerivadas, entradaDeFoto, armarManifiesto, descargable, informe, salidasDeFotos, fotosSinOrigen,
 } from '../../tools/fotos-lib.mjs'
 
 const COMMONS = 'https://commons.wikimedia.org/wiki/File:Algo.jpg'
@@ -218,5 +218,17 @@ describe('las fichas de fuentes/imagenes/', () => {
       expect(fila.licencia, id).toMatch(/^(Dominio público|CC0)$/)
       expect(fila.epocas.every((e) => Number.isInteger(e) && e >= 1 && e <= 5), id).toBe(true)
     }
+  })
+})
+
+describe('fotosSinOrigen', () => {
+  const manifiesto = { fotos: [{ id: 'a' }, { id: 'b' }, { id: 'c' }] }
+  it('avisa de las fotos publicadas cuya ficha u original ya no está: el paso se rehace', () => {
+    const rutas = ['fuentes/imagenes/a/ficha.json', 'fuentes/imagenes/a/original.jpg', 'fuentes/imagenes/b/ficha.json', 'fuentes/imagenes/ab/original.jpg']
+    expect(fotosSinOrigen(manifiesto, rutas)).toEqual(['b', 'c'])
+  })
+  it('con todo en su lugar, o sin manifiesto, no hay nada que rehacer', () => {
+    expect(fotosSinOrigen({ fotos: [{ id: 'a' }] }, ['fuentes/imagenes/a/ficha.json', 'fuentes/imagenes/a/original.tiff'])).toEqual([])
+    expect(fotosSinOrigen(null, [])).toEqual([])
   })
 })
