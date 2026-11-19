@@ -38,8 +38,8 @@ function armar(epocaInicial = 4) {
     pedirCuadro: () => {}, cambiarEpoca: (d) => años.push(d), alCambiar: (dentro, v) => cambios.push([dentro, v?.id ?? null]),
     sonido: crearSonido(() => ctx),
   })
-  const tecla = (tipo, code) => {
-    const e = { code, target: null, repeat: false, prevenido: false, cortado: false, preventDefault() { this.prevenido = true }, stopImmediatePropagation() { this.cortado = true } }
+  const tecla = (tipo, code, target = null) => {
+    const e = { code, target, repeat: false, prevenido: false, cortado: false, preventDefault() { this.prevenido = true }, stopImmediatePropagation() { this.cortado = true } }
     oyentes[tipo](e)
     return e
   }
@@ -118,5 +118,14 @@ describe('crearModoManejar', () => {
     tecla('keydown', 'KeyW')
     for (let i = 0; i < 40; i++) modo.update(0.05)
     expect(ctx.anotado).toContain('start:ruido:')
+  })
+})
+
+describe('crearModoManejar y los controles con foco', () => {
+  test('Espacio sobre un botón con foco lo activa: el modo no se lo queda (el mismo criterio que a pie y en avión)', () => {
+    const { modo, tecla } = armar(4)
+    modo.entrar()
+    const boton = { closest: (s) => (s.includes('button') ? {} : null) }
+    expect(tecla('keydown', 'Space', boton)).toMatchObject({ prevenido: false, cortado: false })
   })
 })
