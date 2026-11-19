@@ -19,7 +19,7 @@ export const VERTICE_ACABADO = /* glsl */ `
   }`
 
 /** Desde qué salto (en píxeles de profundidad) hay arista, y a partir de cuál un salto hacia atrás es el eco de una silueta. */
-export const CONTORNO = Object.freeze({ desde: 0.35, hasta: 1.1, ecoDesde: 3.5, ecoHasta: 7.0, tinta: 0.82, enColor: 0.3 })
+export const CONTORNO = Object.freeze({ desde: 0.35, hasta: 1.1, ecoDesde: 3.5, ecoHasta: 7.0, tinta: 0.88, enColor: 0.3 })
 
 export const FRAGMENTO_ACABADO = /* glsl */ `
   uniform sampler2D tColor, tProf;

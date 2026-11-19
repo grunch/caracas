@@ -37,7 +37,7 @@ export const GLSL_SOMBRA = /* glsl */ `
   float rayadoSombra(float sombra, vec3 mundo) {
     float px = max(uVista.z, 1.0);
     float a = abs(fract((gl_FragCoord.x - gl_FragCoord.y) / (6.0 * px)) - 0.5) * 2.0;
-    float carga = 0.74 * sombra;
+    float carga = 0.8 * sombra;
     float linea = (1.0 - smoothstep(carga - 0.16, carga + 0.16, a)) * step(0.02, sombra);
     float metrosPorPixel = distance(cameraPosition, mundo) * uVista.y;
     return mix(linea, carga, smoothstep(0.6, 1.8, metrosPorPixel));
