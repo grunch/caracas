@@ -166,16 +166,13 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
     return True
 
 
-def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, cuadra_modelo=True,
-                      contar=True):
+def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, cuadra_modelo=True):
     """Las casas de una manzana. Las de solo casas (tools/geo/cuadra.py) van con la cuadra modelo: un anillo
-    de casas que dan a la calle y el centro abierto; las demás, con lo edificado del plano en cada lote. Sin
-    `contar`, no suma a las manzanas de 1936 (es una de sus cuadras pegadas, o la cuadra de antes de una calle
-    nueva: ver vectorizar)."""
+    de casas que dan a la calle y el centro abierto; las demás, con lo edificado del plano en cada lote. Recibe una cuadra
+    (vectorizar separa las manzanas en cuadras); las manzanas de 1936 las cuenta vectorizar."""
     x, y = origen
     if (manzana & (clases == CLASE['edificado'])).sum() < area_min_px:
         return
-    salida['manzanas'] += int(contar)
     salida['n_cuadras'] += 1
     direccion = direccion_de_manzana(manzana, metro)
     modelo = cuadra_modelo and direccion[1] is not None and es_de_solo_casas(clases, manzana, metro, CLASE['edificado'], CLASE['publico'])
@@ -222,11 +219,12 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
 CIERRE_DE_JUNTA_M = 6.0   # la cuadra de antes de una calle nueva se cierra con esto (las puntas de la calle)
 
 
-def _cuadras_de(clases, manzana, metro, cuadra_modelo):
-    """Las cuadras de una manzana de 1936: [(máscara, (x, y))]. Una sola, salvo en la cuadra modelo si la
-    manzana no se deja repartir por lados y son varias cuadras pegadas en el plano (tools/geo/lados.py)."""
-    if cuadra_modelo and es_de_solo_casas(clases, manzana, metro, CLASE['edificado'], CLASE['publico']) \
-            and lotes_por_lados(manzana, metro, 0) is None:
+def _cuadras_de(manzana, metro, cuadra_modelo):
+    """Las cuadras de una manzana de 1936: [(máscara, (x, y))]. Una sola, salvo si la manzana no se deja
+    repartir por lados y son varias cuadras pegadas en el plano (tools/geo/lados.py): entonces cada una va
+    por su cuenta y decide sola si va con la cuadra modelo (una manzana con un convento puede no serlo
+    entera y tener cuadras de casas)."""
+    if cuadra_modelo and lotes_por_lados(manzana, metro, 0) is None:
         piezas = cuadras_pegadas(manzana, metro)
         if piezas:
             return piezas
@@ -302,14 +300,16 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, calles_nuevas=None):
     lista, cajas = [], {}
     for k in range(1, n):
         x, y, w, h = stats[k, :4]
-        partes = _cuadras_de(clases[y:y + h, x:x + w], cuadras[y:y + h, x:x + w] == k, metro, cuadra_modelo)
-        for i, (parte, (dx, dy)) in enumerate(partes):
+        manzana = cuadras[y:y + h, x:x + w] == k
+        salida['manzanas'] += int((manzana & (clases[y:y + h, x:x + w] == CLASE['edificado'])).sum() >= area_min_px)
+        partes = _cuadras_de(manzana, metro, cuadra_modelo)
+        for parte, (dx, dy) in partes:
             etiqueta = k if len(partes) == 1 else n + len(cajas)
             ph, pw = parte.shape
             if len(partes) > 1:
                 cuadras[y + dy:y + dy + ph, x + dx:x + dx + pw][parte] = etiqueta
             cajas[etiqueta] = (x + dx, y + dy, pw, ph)
-            lista.append((etiqueta, parte, i == 0))
+            lista.append((etiqueta, parte))
     grupos = grupos_de_manzanas(cuadras, calles_nuevas) if calles_nuevas is not None and cuadra_modelo else []
     antes = []
     for grupo in grupos:
@@ -319,16 +319,16 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, calles_nuevas=None):
         if _va_por_lados(de_antes, cuadra, metro):
             antes.append((grupo, cuadra, (x, y), de_antes))
     de_grupo = {m: j for j, (grupo, *_) in enumerate(antes) for m in grupo['manzanas']}
-    for etiqueta, parte, contar in lista:
+    for etiqueta, parte in lista:
         x, y, w, h = cajas[etiqueta]
         salida['_junta'] = de_grupo.get(etiqueta, -1)
         techos_de_manzana(clases[y:y + h, x:x + w], parte, (x, y), salida, area_min_px, tolerancia_px, distancia_m, metro,
-                          cuadra_modelo, contar=contar)
+                          cuadra_modelo)
     salida['_antes'] = 1
     for j, (grupo, cuadra, (x, y), de_antes) in enumerate(antes):
         salida['_junta'] = j
         techos_de_manzana(de_antes, cuadra, (x, y), salida, area_min_px, tolerancia_px, distancia_m, metro,
-                          cuadra_modelo, contar=False)
+                          cuadra_modelo)
         salida['juntas'].append(_contornos_de(grupo))
     for privada in ('publicos', 'n_cuadras', '_junta', '_antes'):
         salida.pop(privada, None)

@@ -388,3 +388,18 @@ def test_una_plaza_nueva_ancha_tambien_era_casas_en_la_cuadra_de_antes():
     antes = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and a]
     plaza = box(100, 40, 200, 200)
     assert sum(p.intersection(plaza).area for p in antes) > 0.3 * plaza.area
+
+
+def test_una_manzana_de_varias_cuadras_con_un_convento_se_separa_y_la_cuadra_de_casas_va_con_el_modelo():
+    # tres cuadras pegadas por patios; dos son casi todas un convento: la manzana entera no es "de solo
+    # casas", pero la tercera sí, y va con la cuadra modelo
+    c = np.full((260, 420), CLASE['calle'], np.uint8)
+    for x0 in (30, 146, 262):
+        c[30:230, x0:x0 + 100] = CLASE['edificado']
+    c[30:230, 30:246] = CLASE['publico']
+    c[60:68, 130:146] = CLASE['patio']
+    c[180:188, 246:262] = CLASE['patio']
+    res = vectorizar(c, METRO, plaza=(210, 130))
+    assert res['manzanas'] == 1
+    de_la_tercera = [q for q, t in zip(res['cuadras'], res['techos']) if t[3] != 9]
+    assert de_la_tercera and all(q >= 0 for q in de_la_tercera)   # con la cuadra modelo
