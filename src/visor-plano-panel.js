@@ -129,7 +129,9 @@ export function crearVisorDePlano({ contenedor, indice, base, añoBase, liviano 
     lienzo.addEventListener('pointercancel', soltar)
     lienzo.addEventListener('wheel', (e) => {
       e.preventDefault()
-      acercar(Math.exp(-e.deltaY * ZOOM_POR_PIXEL_DE_RUEDA), enLienzo(e))
+      // la rueda puede venir en píxeles, líneas o páginas (como en src/camara.js)
+      const delta = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 100 : 1)
+      acercar(Math.exp(-delta * ZOOM_POR_PIXEL_DE_RUEDA), enLienzo(e))
     }, { passive: false })
     lienzo.addEventListener('dblclick', (e) => acercar(2, enLienzo(e)))
     addEventListener('resize', () => { if (dialogo.open) poner(estado) })

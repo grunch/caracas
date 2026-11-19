@@ -134,6 +134,24 @@ describe('el panel del visor del plano de la época', () => {
     expect(img().style.transform).toBe('translate(0px, 150px) scale(0.5)')
   })
 
+  test('la rueda acerca lo mismo venga en píxeles, en líneas o en páginas', async () => {
+    const visor = crearVisor()
+    visor.elegir(EPOCA)
+    visor.abrir()
+    await cuadros()
+    const lienzo = parte('lienzo')
+    const escalaCon = (evento) => {
+      dialogo().emitir('keydown', { key: '0', target: lienzo })
+      lienzo.emitir('wheel', { clientX: 500, clientY: 400, ...evento })
+      return visor.estado.k
+    }
+
+    const enPixeles = escalaCon({ deltaY: -48 })
+    expect(enPixeles).toBeGreaterThan(0.5)
+    expect(escalaCon({ deltaY: -3, deltaMode: 1 })).toBeCloseTo(enPixeles)
+    expect(escalaCon({ deltaY: -0.48, deltaMode: 2 })).toBeCloseTo(enPixeles)
+  })
+
   test('la rueda, los botones y el teclado acercan y mueven; 0 lo vuelve entero; las teclas no salen del visor', async () => {
     const visor = crearVisor()
     visor.elegir(EPOCA)
