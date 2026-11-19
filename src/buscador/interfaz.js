@@ -194,10 +194,11 @@ export function crearBuscador({ formulario, plano, coords, camera, cam, suelo, p
   /** Una dirección de hoy: Nominatim → píxel del plano → respuesta (o el aviso de que no está, o del error). */
   async function buscarModerna({ texto, parcial }) {
     const nada = () => { const r = { tipo: 'nada', titulo: '', texto: noEncontre(texto, parcial), px: null, osm: false }; avisar(r); return r }
-    if (!geo || texto.length < MIN_MODERNA) return nada()
+    // antes que nada: lo que estuviera pendiente o a la vista ya no vale (tampoco si esta consulta no sale a la red)
     const esta = ++pedido
     actual = null
     raiz.hidden = true
+    if (!geo || texto.length < MIN_MODERNA) return nada()
     avisar({ titulo: '', texto: `Buscando «${texto}» entre las direcciones de hoy…`, osm: false })
     let lugares
     try {

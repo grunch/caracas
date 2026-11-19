@@ -176,6 +176,22 @@ test('lo que no existe, lo que queda fuera del plano y la red caída se dicen co
   await expect(campo()).toBeFocused()
 })
 
+test('una respuesta que llega tarde no pisa lo que se buscó después', async () => {
+  responder = () => [URDANETA]
+  // la respuesta de la primera búsqueda queda retenida hasta que se suelte
+  let soltar
+  const retenida = new Promise((ok) => { soltar = ok })
+  await page.route(NOMINATIM, async (ruta) => { await retenida; await ruta.fallback() }, { times: 1 })
+  await buscar('Avenida Urdaneta tardía')
+  await expect(aviso()).toContainText('Buscando')
+  await buscar('zz') // muy corta para Nominatim: se responde acá mismo
+  await expect(aviso()).toContainText('No encontré «zz»')
+  soltar()
+  await page.waitForTimeout(1500)
+  await expect(aviso()).toContainText('No encontré «zz»')
+  await expect(cartel()).toBeHidden()
+})
+
 test('lo que responde Nominatim se escribe como texto, nunca como HTML', async () => {
   const malo = { ...URDANETA, name: '<img src=x onerror="window.pwned=1"><b>Urdaneta</b>' }
   responder = () => [{ ...URDANETA, lat: 'NaN" onload="x' }, malo]
