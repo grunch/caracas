@@ -112,6 +112,23 @@ describe('la caja del mapa de sombras', () => {
     }
   })
 
+  test('con un mapa chico (texeles enormes) correr el centro a la grilla no deja ningún punto afuera', () => {
+    // sin margen, y con el centro a medio texel de la grilla: lo peor que puede pasar
+    for (const tamaño of [16, 64, 256]) {
+      for (const corrimiento of [0, 13.7, 32.1, 101.9, 517.3]) {
+        const puntos = cuadrado(corrimiento, -corrimiento, 8000)
+        const c = ajustarSombra({ ...opciones, tamaño, margen: 0, puntos })
+        for (const p of puntos) {
+          const [x, y] = aLuz(p, c.base)
+          expect(x).toBeGreaterThanOrEqual(c.izquierda)
+          expect(x).toBeLessThanOrEqual(c.derecha)
+          expect(y).toBeGreaterThanOrEqual(c.abajo)
+          expect(y).toBeLessThanOrEqual(c.arriba)
+        }
+      }
+    }
+  })
+
   test('es cuadrada y su texel es el lado sobre el tamaño del mapa', () => {
     const c = ajustarSombra({ ...opciones, puntos: cuadrado(0, 0, 400) })
     expect(c.derecha - c.izquierda).toBeCloseTo(c.lado, 9)

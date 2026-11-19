@@ -9,13 +9,12 @@
  */
 import {
   InstancedMesh, ShaderMaterial, IcosahedronGeometry, CylinderGeometry, BufferAttribute,
-  InstancedBufferAttribute, Matrix4, Vector3,
+  InstancedBufferAttribute, Matrix4,
 } from 'three'
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
 import { GLSL_RELIEVE } from './relieve.js'
 import { GLSL_EPOCAS } from './shader/epocas.js'
-import { GLSL_SOMBRA, UNIFORMS_DE_LUZ } from './shader/sombra.js'
-import { vectorSol } from './luz.js'
+import { GLSL_SOMBRA, UNIFORMS_DE_LUZ, uniformsDeLuz } from './shader/sombra.js'
 
 const BYTES_POR_ARBOL = 8 // 4 × Uint16 LE: x, y (px del mosaico), radio (dm), vida (nace + 8·muere + 64·silvestre)
 const DM_POR_M = 10
@@ -160,9 +159,10 @@ export function crearArboles({ datos, coords, U }) {
 
   const comunes = ['uColor', 'uOla', 'uAnchoOla', 'uEpocaDe', 'uEpocaA', 'uOlaEpoca',
     'tRelieve', 'uRelieveHoja', 'uRelieveCelda', 'uExageracion']
-  // el sol y el mapa de sombras son los de la ciudad; sin ellos (un U a medias), el sol de siempre y sin sombras
+  // el sol y el mapa de sombras son los de la ciudad; sin ellos (un U a medias), los de respaldo: el sol de
+  // siempre y el mapa apagado (el sampler de sombra necesita su entrada aunque no se lea)
   const luz = Object.fromEntries(UNIFORMS_DE_LUZ.filter((k) => U[k]).map((k) => [k, U[k]]))
-  const uniforms = { uSol: { value: new Vector3(...vectorSol()) }, ...Object.fromEntries(comunes.map((k) => [k, U[k]])), ...luz }
+  const uniforms = { ...uniformsDeLuz(), ...Object.fromEntries(comunes.map((k) => [k, U[k]])), ...luz }
   const material = new ShaderMaterial({ uniforms, vertexShader: VERTICE, fragmentShader: FRAGMENTO })
   const malla = new InstancedMesh(geometria, material, datos.n)
   // vistos desde el sol (src/acabado.js): el mismo vértice, sin color

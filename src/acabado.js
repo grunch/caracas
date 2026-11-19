@@ -8,7 +8,7 @@
  *   corta en el suelo (src/luz.js). Tiran sombra las mallas con `castShadow` y `customDepthMaterial` (el
  *   mismo vértice que su material: la ola, las épocas, el relieve); el suelo solo la recibe. Los materiales
  *   la leen con los uniforms de `U` (src/shader/sombra.js). Si nada cambió desde el cuadro anterior (la
- *   caja, la ola, las épocas), el mapa no se rehace; con la ciudad acostada en la hoja no hay sombras.
+ *   caja, la ola, las épocas, el color, el relieve), el mapa no se rehace; con la ciudad acostada en la hoja no hay sombras.
  * - El acabado: la escena va a una textura del tamaño de la pantalla (sRGB de 8 bits, con su profundidad) y
  *   de ahí a la pantalla, píxel a píxel (sin filtro: no desenfoca la letra chica del plano).
  */
@@ -104,7 +104,8 @@ export function crearAcabado({ renderer, scene, camera, U, ajustes, limite, vist
       if (o.isMesh && o.castShadow && o.customDepthMaterial && o.visible) tiran.push([o, o.material])
       else if (o.visible) ocultos.push(o)
     }
-    const estado = `${firma}|${tiran.length}|${MUEVEN_LA_SOMBRA.map((k) => U[k]?.value).join(',')}`
+    // (el relieve llega después de arrancar y cambia de textura: con él cambian todas las alturas)
+    const estado = `${firma}|${tiran.length}|${U.tRelieve?.value?.uuid}|${MUEVEN_LA_SOMBRA.map((k) => U[k]?.value).join(',')}`
     if (estado === sombras.estado) return
     sombras.estado = estado
     for (const [o] of tiran) o.material = o.customDepthMaterial

@@ -88,7 +88,8 @@ export function ajustarSombra({ puntos, sol, tamaño, yMin, yMax, limite = null,
     // una vista que mira fuera de la hoja: no hay nada que sombrear; queda la caja de la hoja
     ;[x0, y0, x1, y1] = recortada[2] > recortada[0] && recortada[3] > recortada[1] ? recortada : l
   }
-  const pedido = Math.max(x1 - x0, y1 - y0, 1) + 2 * margen
+  // el centro se corre hasta medio texel al caer en la grilla: el lado deja lugar para eso (un texel entero)
+  const pedido = (Math.max(x1 - x0, y1 - y0, 1) + 2 * margen) / (1 - 1 / tamaño)
   const lado = PASO_DE_LADO ** Math.ceil(Math.log(pedido) / Math.log(PASO_DE_LADO))
   const texel = lado / tamaño
   const cx = Math.round((x0 + x1) / 2 / texel) * texel

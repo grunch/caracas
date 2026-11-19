@@ -34,55 +34,54 @@ const esSoftware = (page) => page.evaluate(() => {
   return /swiftshader|llvmpipe|softpipe|software|basic render/i.test(String(nombre))
 })
 
-test('el acabado está prendido: la pasada de contorno y grano; las sombras, si no dibuja la CPU', async ({ page }) => {
+// Cada test abre la página una sola vez: con render por software (CI) cargarla es lo que más tarda.
+
+test('el acabado está prendido: la escena pasa por su textura y llega a la pantalla; el sol es uno solo', async ({ page }) => {
   const errores = await abrir(page)
   const estado = await page.evaluate(() => window.lab.acabado.estado)
-  expect(estado.pasada).toBe(true)
-  expect(estado.contorno).toBe(true)
-  expect(estado.grano).toBe(true)
-  // con render por software (CI, los E2E) las sombras no se pagan; con GPU, el mapa entero (o 2048 en liviano)
+  expect(estado).toMatchObject({ pasada: true, contorno: true, grano: true })
+  // con render por software (CI) las sombras no se pagan; con GPU, el mapa entero (o 2048 en liviano)
   if (await esSoftware(page)) expect(estado.sombras).toBe(0)
   else expect(estado.sombras).toBeGreaterThanOrEqual(2048)
-  const gl = await dibujarYRevisar(page)
-  expect(gl).toMatchObject({ error: 0, rotos: 0 })
-  expect(errores).toEqual([])
-})
+  expect(await dibujarYRevisar(page)).toMatchObject({ error: 0, rotos: 0 })
 
-test('la escena se dibuja en su textura, del tamaño de la pantalla, y de ahí pasa a la pantalla', async ({ page }) => {
-  await abrir(page)
+  // la textura intermedia mide lo que la pantalla y trae su profundidad (de ahí sale el contorno)
   const medidas = await page.evaluate(() => {
     const { renderer, acabado } = window.lab
-    acabado.dibujar()
     const gl = renderer.getContext()
+    const px = new Uint8Array(4)
+    acabado.dibujar()
+    gl.readPixels(gl.drawingBufferWidth >> 1, gl.drawingBufferHeight >> 1, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px)
     return {
       ancho: acabado.destino.width, alto: acabado.destino.height, x: gl.drawingBufferWidth, y: gl.drawingBufferHeight,
-      profundidad: acabado.destino.depthTexture?.isDepthTexture === true,
+      profundidad: acabado.destino.depthTexture?.isDepthTexture === true, claro: px[0] + px[1] + px[2],
     }
   })
   expect(medidas.ancho).toBe(medidas.x)
   expect(medidas.alto).toBe(medidas.y)
   expect(medidas.profundidad).toBe(true)
-  // y la pantalla no queda en negro: el papel del plano llega hasta el canvas
-  const claro = await page.evaluate(() => {
-    const { renderer, acabado } = window.lab
-    acabado.dibujar()
-    const gl = renderer.getContext()
-    const px = new Uint8Array(4)
-    gl.readPixels(gl.drawingBufferWidth >> 1, gl.drawingBufferHeight >> 1, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px)
-    return px[0] + px[1] + px[2]
+  expect(medidas.claro).toBeGreaterThan(150) // la pantalla no queda en negro: el papel del plano llega al canvas
+
+  // la luz de la escena y el uniform de los shaders apuntan igual, entre 35° y 40° sobre el horizonte
+  const sol = await page.evaluate(() => {
+    const { scene, ciudad } = window.lab
+    const luz = scene.children.find((o) => o.isDirectionalLight)
+    return { luz: luz.position.clone().normalize().toArray(), uniforme: ciudad.U.uSol.value.toArray() }
   })
-  expect(claro).toBeGreaterThan(150)
+  for (let i = 0; i < 3; i++) expect(sol.luz[i]).toBeCloseTo(sol.uniforme[i], 6)
+  expect(sol.uniforme[1]).toBeGreaterThan(0.55)
+  expect(sol.uniforme[1]).toBeLessThan(0.65)
+  expect(errores).toEqual([])
 })
 
-test('con ?sombras=512 el mapa de sombras se dibuja (también por software) y sus shaders compilan', async ({ page }) => {
+test('con ?sombras=512 el mapa de sombras se dibuja (también por software), sus shaders compilan y no se rehace de más', async ({ page }) => {
   const errores = await abrir(page, '&sombras=512')
-  const estado = await page.evaluate(() => window.lab.acabado.estado)
-  expect(estado.sombras).toBe(512)
-  // con la ciudad acostada no hay sombras: ni mapa ni lectura
+  expect((await page.evaluate(() => window.lab.acabado.estado)).sombras).toBe(512)
+  // con la ciudad acostada no hay sombras: ni mapa ni lectura, y WebGL no se queja del mapa vacío
   expect(await page.evaluate(() => { window.lab.acabado.dibujar(); return [window.lab.acabado.estado.cuadrosDeSombra, window.lab.ciudad.U.uSombra.value.x] })).toEqual([0, 0])
+  expect(await dibujarYRevisar(page)).toMatchObject({ error: 0, rotos: 0 })
   await conSombras(page)
-  const gl = await dibujarYRevisar(page)
-  expect(gl).toMatchObject({ error: 0, rotos: 0 })
+  expect(await dibujarYRevisar(page)).toMatchObject({ error: 0, rotos: 0 })
   const luz = await page.evaluate(() => {
     const { ciudad, acabado, scene } = window.lab
     return {
@@ -98,12 +97,8 @@ test('con ?sombras=512 el mapa de sombras se dibuja (también por software) y su
   expect(luz.mapa).toBe(true)
   expect(luz.lado).toBe(512)
   expect(luz.tiran).toContain('hitos')
-  expect(errores).toEqual([])
-})
 
-test('el mapa de sombras no se rehace si nada cambió, y sí cuando la cámara se mueve', async ({ page }) => {
-  await abrir(page, '&sombras=256')
-  await conSombras(page)
+  // el mapa no se rehace si nada cambió, y sí cuando la cámara se mueve
   const cuenta = await page.evaluate(() => {
     const { acabado, cam } = window.lab
     acabado.dibujar()
@@ -117,6 +112,7 @@ test('el mapa de sombras no se rehace si nada cambió, y sí cuando la cámara s
   })
   expect(cuenta.b).toBe(cuenta.a)
   expect(cuenta.c).toBe(cuenta.a + 1)
+  expect(errores).toEqual([])
 })
 
 test('con ?sombras=0&contorno=0&grano=0 no hay ni mapa ni pasada: el render de siempre', async ({ page }) => {
@@ -125,25 +121,6 @@ test('con ?sombras=0&contorno=0&grano=0 no hay ni mapa ni pasada: el render de s
   expect(estado).toMatchObject({ sombras: 0, contorno: false, grano: false, pasada: false })
   expect(await page.evaluate(() => window.lab.acabado.destino)).toBeNull()
   expect(await page.evaluate(() => window.lab.ciudad.U.uSombra.value.x)).toBe(0)
-  const gl = await dibujarYRevisar(page)
-  expect(gl).toMatchObject({ error: 0, rotos: 0 })
+  expect(await dibujarYRevisar(page)).toMatchObject({ error: 0, rotos: 0 })
   expect(errores).toEqual([])
-})
-
-test('el contorno se puede apagar solo: queda la pasada, con el grano', async ({ page }) => {
-  await abrir(page, '&contorno=0')
-  const estado = await page.evaluate(() => window.lab.acabado.estado)
-  expect(estado).toMatchObject({ contorno: false, grano: true, pasada: true })
-})
-
-test('el sol es uno solo: la luz de la escena y el uniform de los shaders apuntan igual', async ({ page }) => {
-  await abrir(page)
-  const d = await page.evaluate(() => {
-    const { scene, ciudad } = window.lab
-    const sol = scene.children.find((o) => o.isDirectionalLight)
-    return { luz: sol.position.clone().normalize().toArray(), uniforme: ciudad.U.uSol.value.toArray() }
-  })
-  for (let i = 0; i < 3; i++) expect(d.luz[i]).toBeCloseTo(d.uniforme[i], 6)
-  expect(d.uniforme[1]).toBeGreaterThan(0.55) // entre 35° y 40° sobre el horizonte
-  expect(d.uniforme[1]).toBeLessThan(0.65)
 })

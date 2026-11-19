@@ -7,12 +7,11 @@
  *   en X de la plaza, el reloj), bajo la misma luz que la ciudad.
  * - Tinta: papel; lo oscuro se raya a pluma, más tupido cuanto más oscuro, y la sombra propia va rayada fina.
  */
-import { ShaderMaterial, DoubleSide, Vector3, Color } from 'three'
+import { ShaderMaterial, DoubleSide, Color } from 'three'
 import { GLSL_RELIEVE } from '../relieve.js'
 import { GLSL_EPOCAS } from '../shader/epocas.js'
 import { MAT } from './lienzo.js'
-import { GLSL_SOMBRA, UNIFORMS_DE_LUZ } from '../shader/sombra.js'
-import { vectorSol } from '../luz.js'
+import { GLSL_SOMBRA, UNIFORMS_DE_LUZ, uniformsDeLuz } from '../shader/sombra.js'
 
 const glsl = (n) => n.toFixed(1)
 const MARGEN_PIE_M = 0.5
@@ -174,9 +173,10 @@ export function crearMaterialHitos({ U }) {
   if (faltan.length) throw new Error(`hitos: faltan uniforms de la ciudad (${faltan.join(', ')})`)
   return new ShaderMaterial({
     uniforms: {
-      uSol: { value: new Vector3(...vectorSol()) },
+      // el sol y el mapa de sombras de la ciudad; sin ellos (un U a medias), los de respaldo: el sol de siempre
+      // y el mapa apagado (el sampler de sombra necesita su entrada aunque no se lea)
+      ...uniformsDeLuz(),
       ...Object.fromEntries(COMUNES.map((k) => [k, U[k]])),
-      // el sol y el mapa de sombras de la ciudad; sin ellos (un U a medias), el sol de siempre y sin sombras
       ...Object.fromEntries(UNIFORMS_DE_LUZ.filter((k) => U[k]).map((k) => [k, U[k]])),
       uLuzSol: { value: luz(LUZ_CIUDAD.sol) },
       uCielo: { value: luz(LUZ_CIUDAD.cielo) },

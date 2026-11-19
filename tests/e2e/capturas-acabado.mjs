@@ -95,7 +95,11 @@ for (const { nombre, epoca, modo, vista, ojo, mira } of (MEDIR ? MEDIDAS : CONTR
     await pagina.waitForTimeout(3500)
     epocaActual = epoca
   }
-  await pagina.evaluate((v) => { window.lab.cam.jump(v); window.lab.pedirCuadro(4) }, vista ?? { x: mira[0], z: mira[2], dist: 60, yaw: 0, pitch: 0.3 })
+  await pagina.evaluate((v) => {
+    if (window.camaraDelVisor) { window.lab.cam.update = window.camaraDelVisor; window.camaraDelVisor = null }
+    window.lab.cam.jump(v)
+    window.lab.pedirCuadro(4)
+  }, vista ?? { x: mira[0], z: mira[2], dist: 60, yaw: 0, pitch: 0.3 })
   await dosCuadros()
   await pagina.waitForTimeout(1500) // las teselas finas de cerca
   await pagina.evaluate(() => window.lab.pedirCuadro(4))
@@ -103,7 +107,10 @@ for (const { nombre, epoca, modo, vista, ojo, mira } of (MEDIR ? MEDIDAS : CONTR
   if (ojo) {
     await pagina.waitForTimeout(400)
     await pagina.evaluate(([o, m]) => {
-      const { camera, sueloEn } = window.lab
+      const { camera, sueloEn, cam } = window.lab
+      // la cámara del visor se queda quieta: si no, el próximo cuadro (la ola sigue pidiendo) pisaría la de mano
+      window.camaraDelVisor = cam.update
+      cam.update = () => false
       camera.position.set(o[0], sueloEn(o[0], o[2]) + o[1], o[2])
       camera.lookAt(m[0], sueloEn(m[0], m[2]) + m[1], m[2])
       camera.updateMatrixWorld()
