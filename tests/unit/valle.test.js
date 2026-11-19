@@ -49,7 +49,9 @@ describe('el valle antes de la ciudad, en el shader del suelo', () => {
   const { fragmentShader, vertexShader } = compilar()
 
   test('el suelo se mezcla entre el campo y la ciudad según lo urbanizado en la época que rige ahí', () => {
-    expect(fragmentShader).toContain('float ciudad = ciudadEn(hoja, epoca)')
+    expect(fragmentShader).toContain('float urbano = urbanoEn(uvPlano, epoca);')
+    expect(fragmentShader).toContain('float ciudad = ciudadDe(urbano);')
+    expect(GLSL_VALLE).toContain('float ciudadDe(float urbano) { return smoothstep(0.25, 0.75, urbano); }')
     expect(fragmentShader).toContain('float epoca = epocaAqui(length(vMundo.xz))')
     expect(fragmentShader).toContain('mix(campo, c, ciudad)')
   })

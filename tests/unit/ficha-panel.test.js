@@ -237,6 +237,13 @@ describe('el panel de la ficha y el visor de fotos', () => {
     expect(cerradas).toEqual(['plaza'])
   })
 
+  test('Escape dentro de un diálogo modal abierto (el visor del plano) no cierra la ficha de atrás', () => {
+    fichas.abrir('plaza')
+    const enDialogo = { closest: (sel) => (sel.includes('dialog[open]') ? enDialogo : null) }
+    expect(tecla('Escape', { target: enDialogo }).detenido).toBe(false)
+    expect(fichas.abierta).toBe('plaza')
+  })
+
   test('Escape en un campo de texto (el buscador) no cierra la ficha', () => {
     fichas.abrir('plaza')
     const campo = { closest: (sel) => (sel.includes('input') ? campo : null) }

@@ -43,18 +43,20 @@ export const GLSL_VALLE = /* glsl */ `
     return smoothstep(umbral - 0.04, umbral + 0.04, g) * step(0.002, g); // 0 = nunca, en cualquier época
   }
   /**
-   * Cuánto es ciudad el punto en la época e: 0 campo … 1 ciudad. El borde es neto pero no un serrucho
-   * de celdas: el promedio del punto y de ocho vecinos a ${BORDE_CIUDAD_M} m.
+   * Cuánto de lo que rodea al punto es ciudad en la época e (0 campo … 1 ciudad): el promedio del punto
+   * y de ocho vecinos a ${BORDE_CIUDAD_M} m. No es un serrucho de celdas.
    */
-  float ciudadEn(vec2 hoja, float e) {
+  float urbanoEn(vec2 hoja, float e) {
     vec2 d = ${BORDE_CIUDAD_M.toFixed(1)} / (uHoja * uMetro); // en la hoja normalizada
     float suma = 2.0 * yaUrbano(hoja, e);
     for (int k = 0; k < 8; k++) {
       float a = 0.7854 * float(k);
       suma += yaUrbano(hoja + d * vec2(cos(a), sin(a)), e);
     }
-    return smoothstep(0.25, 0.75, suma / 10.0);
+    return suma / 10.0;
   }
+  /** Cuánto es ciudad el punto, con el borde neto: de urbanoEn(). */
+  float ciudadDe(float urbano) { return smoothstep(0.25, 0.75, urbano); }
 
   /**
    * El campo: s = uSuelo en el punto (R agua · G vegetación · A manzana), ribera = el agua de alrededor

@@ -18,6 +18,7 @@ export const VERTICE_COMUN = /* glsl */ `
   flat varying float vAlzada; // cuánto se levantó la casa (0 acostada en la hoja … 1 en pie)
   varying vec3 vFaldon; // del techo: s, t y el largo del faldón (src/shader/techo.js)
   varying vec2 vTerreno; // del suelo: altura sobre la plaza (m, sin exagerar) y pendiente (m/m)
+  varying vec2 vPendiente; // del suelo: hacia dónde sube el terreno (m/m), para las laderas a pluma
   uniform vec3 uSol; // hacia el sol de la escena (src/luz.js)
   ${GLSL_AZAR}
   ${GLSL_PRETIL}
