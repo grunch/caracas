@@ -25,11 +25,46 @@ import { crearCapaMarcas } from './marcas-capa.js'
 import { MARCAS } from './marcas-datos.js'
 import './marcas.css'
 import { engancharFichas } from './ficha-panel.js'
+import { crearAcerca } from './acerca-panel.js'
+import { leerCreditos } from './acerca.js'
+import { debeMostrarIntro, recordarIntro } from './intro.js'
+import { accionDeTecla } from './controles.js'
 
 const params = new URLSearchParams(location.search)
 const COLOR_FONDO = 0x1d1a17
 const EXAGERACION = 1.3 // el valle se lee mejor con el relieve un poco exagerado
 const SUBDIVISION_HOJA = [384, 306] // la hoja se hincha con el relieve (≈ 24 m por cuadro)
+
+// --- la bienvenida y el «Acerca» (src/acerca-panel.js): antes que nada, para que la bienvenida se vea mientras
+// carga el plano y sus teclas valgan antes que las de los demás paneles. No esperan a nada ni frenan la carga ---
+const crecePedido = fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))))
+crecePedido.catch(() => {}) // sin crece.json (la demo de CI) no hay línea de tiempo: se avisa más abajo
+// lo que cada acción de src/controles.js hace acá; las funciones se declaran más abajo
+const HACER = {
+  levantar: () => levantar(),
+  color: () => alternarColor(),
+  hoy: () => alternarHoy(),
+  nombres: () => alternarMarcas(),
+  buscar: () => buscador.enfocar(),
+  acerca: () => acerca.abrir(),
+}
+let listo = false // el módulo terminó de arrancar: ya se puede levantar la ciudad
+let crecerPedido = false // «Ver crecer la ciudad» se tocó antes de tiempo: se cumple al estar listo
+let andarAlLlegar = false // …o antes de que llegara la línea de tiempo: echa a andar cuando llegue
+const almacen = () => localStorage
+const acerca = crearAcerca({
+  boton: document.getElementById('ayuda'), desde: PRIMERA_EPOCA, acciones: Object.keys(HACER),
+  mostrarIntro: debeMostrarIntro(params, almacen),
+  alCerrarIntro: () => recordarIntro(almacen),
+  alVerCrecer: () => { if (listo) verCrecer(); else crecerPedido = true },
+  pedirEpocas: () => crecePedido.then((j) => j.epocas),
+  pedirCreditos: () => leerCreditos((url) => fetch(url)),
+})
+/** Levanta la ciudad y echa a andar la línea de tiempo (si esta copia la trae). */
+function verCrecer() {
+  levantar(true)
+  if (lineaDeTiempo) lineaDeTiempo.andar(); else andarAlLlegar = true
+}
 
 const meta = await fetch('datos/ciudad.json')
   .then((r) => { if (!r.ok) throw new Error(`datos/ciudad.json: ${r.status}`); return r.json() })
@@ -57,9 +92,10 @@ const camera = new PerspectiveCamera(35, innerWidth / innerHeight, 5, 60000)
 // --- render bajo demanda: solo se dibuja mientras haya cuadros pedidos ---
 let pendientes = 3
 const pedirCuadro = (n = 2) => { pendientes = Math.max(pendientes, n) }
-// (lo que pasa dentro de la caja del buscador no cambia la vista: escribir no redibuja la ciudad)
+// (lo que pasa dentro de la caja del buscador, de la bienvenida o del «Acerca» no cambia la vista: escribir
+// o leer el panel con la rueda no redibuja la ciudad)
 for (const ev of ['pointerdown', 'pointerup', 'keydown', 'wheel', 'focus']) {
-  addEventListener(ev, (e) => { if (!e.target?.closest?.('#buscar')) pedirCuadro(3) }, { capture: true, passive: true })
+  addEventListener(ev, (e) => { if (!e.target?.closest?.('#buscar, #intro, #acerca')) pedirCuadro(3) }, { capture: true, passive: true })
 }
 addEventListener('resize', () => {
   renderer.setSize(innerWidth, innerHeight)
@@ -193,7 +229,7 @@ const indicePlanos = !params.has('planos') ? Promise.resolve({ planos: [] }) : P
   fetch('plano/epocas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))),
   new Promise((_, mal) => setTimeout(() => mal(new Error('plano/epocas.json no respondió')), ESPERA_INDICE_MS)),
 ]).catch((e) => { console.warn(`planos de época: ${e.message}`); return { planos: [] } })
-Promise.all([fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))), indicePlanos])
+Promise.all([crecePedido, indicePlanos])
   .then(([{ epocas, celda_m }, indice]) => {
     const U = ciudad.U
     planos = crearPlanosDeEpoca({
@@ -219,6 +255,7 @@ Promise.all([fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.re
     lineaDeTiempo = crearLineaDeTiempo({
       contenedor: document.getElementById('epocas'), epocas, alElegir: (i) => secuencia.elegir(i), desde: PRIMERA_EPOCA,
     })
+    if (andarAlLlegar) lineaDeTiempo.andar()
     cargarTextura('plano/crece.png', false).then((t) => {
       // etapas codificadas: un mipmap las promediaría y el borde de la ciudad cambiaría de época a lo lejos
       t.generateMipmaps = false
@@ -308,12 +345,12 @@ document.getElementById('alzar').addEventListener('click', () => levantar())
 document.getElementById('color').addEventListener('click', () => alternarColor())
 document.getElementById('hoy').addEventListener('click', () => alternarHoy())
 addEventListener('keydown', (e) => {
-  // los controles con foco conservan su teclado (Espacio activa el botón, se escribe en los campos)
-  if (e.repeat || e.target.closest?.('input, textarea, select, button, a, [role="button"]')) return
-  if (e.code === 'Space') { e.preventDefault(); levantar() }
-  if (e.code === 'KeyC' && !e.metaKey && !e.ctrlKey) alternarColor()
-  if (e.code === 'KeyH' && !e.metaKey && !e.ctrlKey) alternarHoy()
-  if (e.code === 'KeyM' && !e.metaKey && !e.ctrlKey) alternarMarcas()
+  // los atajos salen de la tabla de src/controles.js (la misma que muestra el «Acerca»); los controles con
+  // foco conservan su teclado (Espacio activa el botón, se escribe en los campos)
+  const accion = accionDeTecla(e, Object.keys(HACER))
+  if (!accion) return
+  e.preventDefault()
+  HACER[accion.id]()
 })
 
 // la altura del suelo tal como se dibuja: la cámara mira siempre al terreno
@@ -410,6 +447,8 @@ renderer.setAnimationLoop((t) => {
 
 if (params.has('hoy')) alternarHoy(true)
 document.body.classList.add('listo')
+listo = true
+if (crecerPedido) verCrecer()
 window.lab = {
   renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
   get relieve() { return relieve },
@@ -421,6 +460,7 @@ window.lab = {
   get planos() { return planos },
 }
 window.lab.buscador = buscador
+window.lab.acerca = acerca
 
 /** Papel con una cuadrícula de 100 m, hasta que exista plano/primero.webp. */
 function cuadriculaProvisoria() {

@@ -57,7 +57,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T33b | **Casas de patio**: cada casa de teja que da a la calle trae del vectorizador su marco (frente sobre la línea de fachada de la cuadra) y sus alas —crujía corrida sobre la calle, patios con alas laterales, alas cruzadas, solar—, y el visor las techa ala por ala, con inglete en las esquinas; patios del plano conservados, suelo de patio, árboles de patio, un tono de teja por casa. Referencia: vista aérea de un pueblo colonial (`fuentes/imagenes/0000-usuario-aerea-pueblo-colonial`) | T33, T37 | desde arriba, una manzana de 1772 es un gofre de teja: bandas con cumbrera sobre las calles, peine de alas y patios chicos; montaje lado a lado con la referencia | ✅ #37 |
 | T34 | Árboles 3D desde `arboles.json` (5.926) y los patios con vegetación, en color | — | árboles en plazas, patios y quebradas | ✅ #19 |
 | T35 | Luz y acabado: sombras, luz tibia y sombra azulada, bruma, contorno por profundidad y grano de papel en tinta | — | el look de grabado de `specs/04` | ✅ #38 |
-| T35b | **Tinta afinada** contra el original: la sombra en el piso es un rayado grueso y casi negro (en paredes y techos, más liviano); el contorno no marca las aristas entre las alas de un mismo tejado (id del techo en el alfa del cuadro, sin otra pasada) y se afloja antes con la distancia | T35 | montajes «baires · #38 · ahora» (cenital, oblicua, cerca, barrio): el centro de 1936 se lee por casas, no por alas; tiempo por cuadro como en T35 | 🔄 #40 |
+| T35b | **Tinta afinada** contra el original: la sombra en el piso es un rayado grueso y casi negro (en paredes y techos, más liviano); el contorno no marca las aristas entre las alas de un mismo tejado (id del techo en el alfa del cuadro, sin otra pasada) y se afloja antes con la distancia | T35 | montajes «baires · #38 · ahora» (cenital, oblicua, cerca, barrio): el centro de 1936 se lee por casas, no por alas; tiempo por cuadro como en T35 | ✅ #40 |
 | T36 | **Color sin rótulos**: máscara de la tinta del plano que es letra, cifra o símbolo (`tools/geo/rotulos.py` → `plano/rotulos.webp`); en color, ahí el plano no se marca | T07 | en color no se leen "PALACIO FEDERAL", las cotas ni las letras de parroquia; los bordes de manzana siguen | ✅ #28 |
 | T37 | Lotes rectos: cada manzana se parte en solares rectangulares perpendiculares a su calle (antes, cuñas que se juntaban en el centro) | T04 | en el centro los techos son tiras rectas, sin abanicos | ✅ #26 |
 | T38 | **El valle antes de la ciudad**: lo urbanizado por época (`crece.png` G) y el monte (B); en color, lo que la época todavía no urbanizó es campo sin el dibujo del plano; árboles silvestres que mueren al urbanizarse su lugar; plazas sin jardín ni árboles antes de 1889 | T24, T34 | en 1578 se ve una aldea de 25 manzanas en un valle de sabana, con sus quebradas, el Guaire y el Ávila, sin manzanas ni calles fantasma | ✅ #27 |
@@ -68,9 +68,9 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 |---|---|---|---|---|
 | T40 | Hitos modelados I: el marco de los hitos (`src/hitos.js`) y la **Plaza Bolívar** por épocas (mercado → plaza ajardinada con la estatua); después Catedral, Capitolio, Panteón, Santa Capilla, San Francisco, Teatro Municipal (plantas desde el plano de 1936, alturas desde fotos) | T24 | la plaza y 6 edificios con nombre, cada uno en sus años | ✅ #31 (marco y plaza) · #32 (Catedral, San Francisco, Santa Capilla, Panteón) · #33 (Capitolio) · ⏳ falta el Teatro Municipal |
 | T41 | Hitos modelados II: Miraflores, Universidad, El Calvario, Caño Amarillo, Mercado Principal, Santa Teresa, Candelaria, Altagracia… | T40 | 8 edificios más | ✅ #32 (Santa Teresa, Altagracia, La Pastora) · #33 (Casa Amarilla, Universidad, Miraflores) · ⏳ faltan El Calvario, Caño Amarillo, Mercado Principal, Candelaria, Hotel Majestic |
-| T42 | Marcas (etiquetas 3D por época, niveles, declutter, velo al pasar el mouse) | T25 | las marcas cambian con el año | 🔄 #39 |
-| T43 | Fichas con fotos de época (Commons, autor, fecha, licencia) y visor de fotos | T42 | cada marca abre su ficha con fotos acreditadas | 🔄 #43 |
-| T44 | Intro y "Acerca": qué estás viendo, la Caracas de cada época, fuentes y créditos (incluida la inspiración de @mormonnegro) | T25 | intro con todas las fuentes y licencias | ⏳ |
+| T42 | Marcas (etiquetas 3D por época, niveles, declutter, velo al pasar el mouse) | T25 | las marcas cambian con el año | ✅ #39 |
+| T43 | Fichas con fotos de época (Commons, autor, fecha, licencia) y visor de fotos | T42 | cada marca abre su ficha con fotos acreditadas | ✅ #43 |
+| T44 | Intro y "Acerca": qué estás viendo, la Caracas de cada época, fuentes y créditos (incluida la inspiración de @mormonnegro) | T25 | intro con todas las fuentes y licencias | 🔄 #PR |
 
 ## Fase 5 · Lo de hoy y el buscador
 
@@ -80,7 +80,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T50b | "Lo de hoy", visor: estampa en rojo con H, leyenda © OpenStreetMap | T50a | con H se estampa en rojo la Caracas actual | ✅ #18 |
 | T51 | Nombres de las calles de hoy en un canvas 2D sobre la vista | T50a, T50b | etiquetas alineadas, sin choques | ✅ #22 |
 | T52 | **Esquinas**: leer del plano de 1936 los nombres en rojo de cada cruce (OCR asistido + curado) → diccionario esquina → píxel | — | ≥ 90 % de las esquinas del centro con nombre verificado | ✅ #14 |
-| T53 | Buscador: "de esquina a esquina" con el diccionario + Nominatim para direcciones modernas, con respuesta en prosa | T51, T52 | "De La Torre a Veroes" ubica en el plano | 🔄 #41 |
+| T53 | Buscador: "de esquina a esquina" con el diccionario + Nominatim para direcciones modernas, con respuesta en prosa | T51, T52 | "De La Torre a Veroes" ubica en el plano | ✅ #41 |
 
 ## Fase 6 · Recorridos
 

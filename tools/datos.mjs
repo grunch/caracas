@@ -11,6 +11,8 @@ import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas, resolv
 import { salidasPlanosEpocas } from './planos-epocas-lib.mjs'
 import { salidasDeFotos, fotosSinOrigen } from './fotos-lib.mjs'
 import { leerCalzados } from './planos-epocas.mjs'
+import { fichasDeCreditos } from './creditos-lib.mjs'
+import { PRIMERA_EPOCA } from '../src/epocas.js'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
 const PY = process.env.PY ?? '.venv/bin/python'
@@ -189,6 +191,14 @@ const PASOS = [
     codigo: ['tools/fotos.mjs', 'tools/fotos-lib.mjs', 'src/marcas-datos.js'],
     cmd: () => ['node', 'tools/fotos.mjs'],
   },
+  {
+    // los créditos del «Acerca»: las fichas de las fuentes que el sitio usa (tools/creditos-lib.mjs); las
+    // fichas de los planos y de fuentes/datos/ se suman en pasosCompletos
+    id: 'creditos', salidas: ['public/datos/creditos.json'],
+    entradas: ['public/datos/crece.json', 'public/datos/fotos.json', 'tools/geo/mosaico-1936.json', 'package.json'],
+    codigo: ['tools/creditos.mjs', 'tools/creditos-lib.mjs', 'src/epocas.js'],
+    cmd: () => ['node', 'tools/creditos.mjs'],
+  },
 ]
 
 function argumentos(argv) {
@@ -217,6 +227,15 @@ async function archivosDeImagenes() {
   return rutas.sort()
 }
 
+/** Las fichas que lee el paso `creditos`: las de los planos usados y todas las de fuentes/datos/. */
+async function fichasDelAcerca() {
+  const { epocas = [] } = (await leerJsonSiHay('tools/geo/epocas/epocas.json')) ?? {}
+  const base = ((await leerJsonSiHay('tools/geo/mosaico-1936.json'))?.hojas ?? []).map((h) => h.fuente)
+  const datos = (await readdir(path.join(RAIZ, 'fuentes/datos'), { withFileTypes: true }).catch(() => []))
+    .filter((d) => d.isDirectory()).map((d) => `fuentes/datos/${d.name}/ficha.json`).sort()
+  return [...fichasDeCreditos({ epocas, desde: PRIMERA_EPOCA, base }), ...datos]
+}
+
 /** `regenerar`: si se va a planificar una regeneración (solo ahí se exigen los escaneos originales). */
 async function pasosCompletos({ regenerar = true } = {}) {
   const teselas = salidasDeTeselas(await leerJsonSiHay('public/plano/laminas.json'))
@@ -229,11 +248,13 @@ async function pasosCompletos({ regenerar = true } = {}) {
   const fotos = salidasDeFotos(manifiestoFotos)
   // una foto publicada cuya ficha u original se borró: el paso se rehace aunque las fechas digan que está al día
   const rehacerFotos = fotosSinOrigen(manifiestoFotos, imagenes).length > 0
+  const fichasCreditos = await fichasDelAcerca()
   const pasos = PASOS.map((p) => {
     if (p.id === 'fotos') return { ...p, entradas: imagenes, salidas: [...p.salidas, ...fotos], rehacer: rehacerFotos }
     if (p.id === 'plano') return { ...p, salidas: [...p.salidas, ...teselas] }
     if (p.id === 'epocas') return { ...p, entradas: [...new Set([...p.entradas, ...fichas])] }
     if (p.id === 'planos-epocas') return { ...p, salidas: planosEpocas }
+    if (p.id === 'creditos') return { ...p, entradas: [...p.entradas, ...fichasCreditos] }
     return p
   })
   return resolverOriginales(pasos, await archivosDeCalces(), { exigir: regenerar })

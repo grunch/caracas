@@ -242,6 +242,29 @@ Una fila por foto publicable, en orden de año. `epocas`: índices de época en 
 `fotos/m/{id}.webp`. Sin este archivo (la demo de CI) las fichas son solo texto. `public/fotos/` y
 `public/datos/fotos.json` no van a git.
 
+*Caracas, los créditos del «Acerca» (`datos/creditos.json`, `tools/creditos.mjs` + `tools/creditos-lib.mjs`):*
+```json
+{ "mapas": [ { "id": "1936-archiveorg-caracas-dcn-hoja1", "año": 1936, "titulo": "Caracas. No. 7. Distrito Federal…", "hojas": 2,
+      "autor": "…", "institucion": "…", "url": "https://archive.org/details/WCWdb_18053",
+      "licencia": "Sin licencia declarada en la fuente; derechos por verificar.", "porVerificar": true, "base": true, "epocas": [1936] } ],
+  "datos": [ { "id": "osm-hoy", "titulo": "…", "tipo": "…", "autor": "…", "institucion": "…", "url": "https://…",
+      "licencia": "Open Database License (ODbL) 1.0", "porVerificar": false, "atribucion": "© colaboradores de OpenStreetMap" } ],
+  "fotos": [ { "id": "…", "titulo": "…", "autor": "…", "fecha": "1910", "licencia": "Dominio público", "url": "https://…", "institucion": "…" } ],
+  "programas": [ { "nombre": "three", "version": "0.187.0", "licencia": "MIT", "url": "https://threejs.org/" } ] }
+```
+Solo lo que el sitio usa de verdad: los planos de la línea de tiempo (`plano` de cada época de `crece.json`, desde
+`PRIMERA_EPOCA`) y las hojas del plano base (`hojas[].fuente` de `tools/geo/mosaico-1936.json`, juntas en una
+fila), todas las fichas de `fuentes/datos/`, las fotos de `fotos.json` y las dependencias de `package.json`.
+`licencia` es el texto de la ficha (solo «Public domain» pasa a «Dominio público»); si la ficha no declara
+ninguna, o no da por establecido el dominio público, la fila dice eso y lleva `porVerificar: true`. **Nunca se
+escribe una licencia que la ficha no trae.** Sin fechas ni rutas: la misma entrada da los mismos bytes. No va a
+git; se regenera con `node tools/creditos.mjs` (o `npm run datos`, paso `creditos`). Sin este archivo (la demo de
+CI) el panel lo dice y enlaza al repositorio.
+
+Se eligió un paso del pipeline y no un `import` en el build porque qué fuentes se usan depende de datos generados
+que no están en git (`crece.json`: qué plano da cada año; `fotos.json`: qué fotos se publican): las fichas solas
+no alcanzan para saberlo.
+
 Codificación "desde cuándo" en un canal: con `E` etapas, la etapa `e` (contando desde 1) vale aprox. `(E+1−e)/E` (1 = primera, 1/E = última, 0 = nunca). Así, un solo `step` en el shader decide si algo existe en el año que se mira.
 
 ## Deploy

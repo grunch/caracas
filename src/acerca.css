@@ -1,0 +1,143 @@
+/* La bienvenida (#intro) y el panel «Acerca» (#acerca): dos hojas de papel sobre la vista (src/acerca-panel.js).
+   Los colores son los de index.html: --papel, --tinta, --sobre, --hoy. */
+#intro,#acerca{position:fixed;inset:0;z-index:40;display:grid;grid-template:minmax(0,1fr)/minmax(0,1fr);place-items:center;box-sizing:border-box;
+  padding:calc(20px + env(safe-area-inset-top,0px)) calc(20px + env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) calc(20px + env(safe-area-inset-left,0px));
+  background:#14110fb8;opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
+/* visible desde el primer instante: el foco entra enseguida (un elemento oculto no lo recibe) */
+#intro.ver,#acerca.ver{opacity:1;visibility:visible;transition:opacity .4s}
+#intro .hoja,#acerca .hoja{position:relative;box-sizing:border-box;max-height:100%;color:var(--tinta);background:var(--papel);
+  border:1px solid var(--tinta);outline:1px solid #2a221b99;outline-offset:2px;box-shadow:0 14px 60px #000a;
+  -webkit-user-select:text;user-select:text;transform:translateY(10px);transition:transform .4s}
+#intro.ver .hoja,#acerca.ver .hoja{transform:none}
+#intro h2,#acerca h2{margin:0;font-size:32px;font-weight:500;letter-spacing:.02em;line-height:1.12;font-variant-numeric:lining-nums;outline:0;text-wrap:balance}
+#intro .bajada,#acerca .bajada{margin:7px 0 0;font-size:16.5px;font-style:italic;line-height:1.4;opacity:.86;text-wrap:pretty}
+#intro :focus-visible,#acerca :focus-visible{outline:2px solid currentColor;outline-offset:2px}
+#intro a,#acerca a{color:#8a2a1a;text-underline-offset:2px}
+
+/* --- la bienvenida --- */
+#intro .hoja{width:min(600px,100%);overflow-y:auto;overscroll-behavior:contain;padding:30px 36px 26px}
+#intro-d{margin-top:18px;padding-top:16px;border-top:1px solid #2a221b44}
+#intro-d p{margin:0 0 11px;font-size:16.5px;line-height:1.55;text-wrap:pretty}
+#intro .como{margin:16px 0 0;font-size:14px;font-style:italic;line-height:1.45;opacity:.8}
+#intro .como.dedos{display:none}
+@media (hover:none) and (pointer:coarse){#intro .como.raton{display:none}#intro .como.dedos{display:block}}
+#intro .acciones{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:6px 14px;margin-top:12px}
+#intro button{font:inherit;font-size:16.5px;letter-spacing:.02em;min-height:46px;padding:10px 22px;cursor:pointer;color:var(--tinta);
+  background:0 0;border:1px solid var(--tinta);border-radius:0}
+#intro button:hover{background:var(--sobre)}
+#intro button:active{transform:translateY(1px)}
+#intro button.principal{color:#f7eedb;background:var(--tinta);outline:1px solid #2a221b99;outline-offset:2px}
+#intro button.principal:hover{background:#453a30}
+#intro button.principal:focus-visible{outline:2px solid var(--tinta);outline-offset:3px}
+#intro button.enlace{flex:1 1 100%;min-height:44px;padding:8px 0;border:0;font-size:14.5px;letter-spacing:0;text-align:left;
+  color:#8a2a1a;text-decoration:underline;text-underline-offset:3px}
+#intro button.enlace:hover{background:0 0;color:var(--tinta)}
+
+/* --- el panel --- */
+#acerca .hoja{display:grid;grid-template-columns:212px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);
+  width:min(920px,100%);height:min(860px,100%)}
+#acerca .cabeza{grid-column:1/-1;padding:24px 70px 18px 34px;border-bottom:1px solid #2a221b44}
+#acerca h2{font-size:28px}
+#acerca .bajada{font-size:15.5px}
+#acerca .x{position:absolute;right:12px;top:12px;width:44px;height:44px;padding:0;cursor:pointer;font:inherit;font-size:28px;line-height:40px;
+  color:inherit;background:0 0;border:0;border-radius:0;opacity:.7}
+#acerca .x:hover,#acerca .x:focus-visible{opacity:1;background:#2a221b14}
+#acerca nav{position:relative;display:flex;flex-direction:column;gap:2px;padding:20px 12px 20px 22px;border-right:1px solid #2a221b33;overflow-y:auto}
+#acerca nav button{font:inherit;font-size:13px;letter-spacing:.12em;text-transform:uppercase;text-align:left;line-height:1.3;min-height:40px;
+  padding:8px 12px;cursor:pointer;color:inherit;background:0 0;border:0;border-left:2px solid transparent;border-radius:0;opacity:.72}
+#acerca nav button:hover{opacity:1;background:#2a221b0f}
+#acerca nav button[aria-current]{opacity:1;border-left-color:var(--tinta);background:#2a221b14}
+#acerca .cuerpo{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:4px 40px 44px 34px;scroll-behavior:smooth}
+#acerca .cuerpo:focus-visible{outline-offset:-3px}
+#acerca section{max-width:38em;padding-top:22px}
+#acerca section+section{margin-top:26px;border-top:1px solid #2a221b44}
+#acerca h3{margin:0 0 12px;font-size:13.5px;font-weight:500;letter-spacing:.17em;text-transform:uppercase;line-height:1.3;outline:0}
+#acerca h4{margin:20px 0 7px;font-size:16px;font-weight:500;font-style:italic;letter-spacing:.01em;line-height:1.3}
+#acerca p{margin:0 0 11px;font-size:16px;line-height:1.56;text-wrap:pretty}
+#acerca p.nota,#acerca p.aviso{font-size:14px;font-style:italic;line-height:1.5;opacity:.82}
+#acerca p.nota{margin-top:14px}
+#acerca .rotulo{font-weight:500;font-variant:small-caps;letter-spacing:.07em;font-size:1.04em;margin-right:.55em}
+#acerca .rotulo::after{content:" ·";opacity:.55}
+#acerca code{font:13px/1 ui-monospace,Menlo,Consolas,monospace;overflow-wrap:anywhere}
+
+#acerca dl{margin:0;display:grid;grid-template-columns:minmax(0,15em) minmax(0,1fr);gap:0 18px}
+#acerca dt,#acerca dd{margin:0;padding:7px 0;border-top:1px solid #2a221b26;font-size:15px;line-height:1.45}
+#acerca dt{display:flex;align-items:baseline;justify-content:space-between;gap:4px 12px}
+#acerca dl dt:first-of-type,#acerca dl dd:first-of-type{border-top:0}
+#acerca kbd{font:inherit;font-size:12.5px;font-variant-numeric:lining-nums;letter-spacing:.03em;line-height:1.25;padding:1px 7px 2px;white-space:nowrap;
+  border:1px solid #2a221b99;border-bottom-width:2px;background:var(--sobre)}
+
+#acerca .epoca{margin-top:16px;padding-top:12px;border-top:1px solid #2a221b26;display:grid;grid-template-columns:4.1em minmax(0,1fr);column-gap:14px}
+#acerca .epoca h4{grid-row:1/span 2;margin:0;font-size:21px;font-style:normal;font-variant-numeric:lining-nums;letter-spacing:.03em;line-height:1.2}
+#acerca .epoca p{grid-column:2;margin:0 0 5px}
+#acerca .epoca .plano{font-size:13.5px;line-height:1.45;opacity:.8}
+#acerca cite{font-style:italic}
+
+#acerca .fuentes{list-style:none;margin:0;padding:0}
+#acerca .fuentes li{padding:10px 0 11px;border-top:1px solid #2a221b26;font-size:14px;line-height:1.45;overflow-wrap:break-word}
+#acerca .fuentes li:first-child{border-top:0;padding-top:2px}
+#acerca .fuentes li>span{display:block}
+#acerca .fuentes .titulo{font-size:15.5px;line-height:1.38}
+#acerca .fuentes .año{font-weight:500;font-variant-numeric:lining-nums;letter-spacing:.04em;margin-right:.6em}
+#acerca .fuentes .detalle{margin-top:2px;opacity:.86}
+#acerca .fuentes .uso{font-style:italic;opacity:.8}
+#acerca .fuentes .lic{margin-top:4px;padding-left:10px;border-left:2px solid #2a221b40}
+#acerca .fuentes .lic.verificar{border-left-color:var(--hoy)}
+#acerca .marca-verificar{font-weight:500;font-variant:small-caps;letter-spacing:.08em;color:var(--hoy)}
+#acerca .marca-verificar::after{content:" ·"}
+#acerca .fuentes .ir{margin-top:3px;font-size:13.5px}
+#acerca details{margin-top:20px}
+#acerca summary{font-size:16px;font-weight:500;font-style:italic;line-height:1.3;cursor:pointer;padding:6px 0;margin-bottom:4px}
+#acerca details .fuentes .titulo{font-size:14.5px}
+
+/* el «?» va primero entre los botones, cuadrado */
+#botones #ayuda{padding:10px 0;width:44px;font-size:19px;line-height:1}
+
+@media (max-width:760px){
+  #intro,#acerca{padding:calc(10px + env(safe-area-inset-top,0px)) calc(10px + env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) calc(10px + env(safe-area-inset-left,0px))}
+  #intro .hoja{padding:22px 20px 18px}
+  #intro h2{font-size:27px}
+  #intro .bajada{font-size:15.5px}
+  #intro-d{margin-top:14px;padding-top:13px}
+  #intro-d p{font-size:15.5px;line-height:1.5}
+  #intro .acciones{gap:4px 10px;margin-top:8px}
+  #intro button{flex:1 1 auto;padding:10px 14px}
+  /* el índice pasa arriba, en una fila que se desliza */
+  #acerca .hoja{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr);height:100%}
+  #acerca .cabeza{padding:16px 56px 12px 18px}
+  #acerca h2{font-size:22px}
+  #acerca .bajada{font-size:14px;margin-top:4px}
+  #acerca .x{right:4px;top:4px}
+  #acerca nav{flex-direction:row;gap:0;padding:0 6px;border-right:0;border-bottom:1px solid #2a221b33;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;touch-action:pan-x}
+  #acerca nav::-webkit-scrollbar{display:none}
+  #acerca nav button{flex:none;min-height:44px;padding:8px 11px;font-size:12px;letter-spacing:.1em;white-space:nowrap;border-left:0;border-bottom:2px solid transparent}
+  #acerca nav button[aria-current]{border-bottom-color:var(--tinta)}
+  #acerca .cuerpo{padding:0 18px 30px;touch-action:pan-y}
+  #acerca section{padding-top:18px}
+  #acerca section+section{margin-top:20px}
+  #acerca p{font-size:15.5px;line-height:1.52}
+  #acerca dl{grid-template-columns:minmax(0,1fr)}
+  #acerca dt{padding-bottom:0}
+  #acerca dd{border-top:0;padding-top:1px;opacity:.8}
+  #acerca dl dd:first-of-type{padding-top:1px}
+  #acerca .epoca{grid-template-columns:minmax(0,1fr)}
+  #acerca .epoca h4{grid-row:auto;margin-bottom:3px;font-size:19px}
+  #acerca .epoca p{grid-column:1}
+}
+/* teléfono acostado: la bienvenida entra sin recortarse (más ancha, sin bajada, todo en menos renglones) */
+@media (max-height:520px){
+  #intro .hoja{width:min(800px,100%);padding:14px 24px 12px}
+  #intro h2{font-size:22px}
+  #intro .bajada{display:none}
+  #intro-d{margin-top:8px;padding-top:8px}
+  #intro-d p{font-size:14px;line-height:1.4;margin-bottom:6px}
+  #intro .como{margin-top:6px;font-size:13px}
+  #intro .acciones{margin-top:6px;flex-wrap:nowrap}
+  #intro button{flex:none;min-height:44px;padding:8px 18px;font-size:15.5px}
+  #intro button.enlace{flex:1 1 auto;font-size:13.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  #intro,#acerca,#intro.ver,#acerca.ver,#intro .hoja,#acerca .hoja{transition:none}
+  #intro .hoja,#acerca .hoja{transform:none}
+  #acerca .cuerpo{scroll-behavior:auto}
+}

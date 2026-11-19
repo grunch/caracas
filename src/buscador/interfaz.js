@@ -261,14 +261,16 @@ export function crearBuscador({ formulario, plano, coords, camera, cam, suelo, p
   formulario.addEventListener('submit', (e) => { e.preventDefault(); buscar() })
   borrar.addEventListener('click', () => { campo.value = ''; borrar.hidden = true; cerrarLista(); limpiar(); campo.focus() })
   quitar.addEventListener('click', limpiar)
+  // el atajo «/» lo atiende src/main.js con la tabla de src/controles.js, y llama a `enfocar`
   addEventListener('keydown', (e) => {
     if (e.target.closest?.('input, textarea, select, [contenteditable]')) return
-    if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey) {
-      e.preventDefault()
-      campo.focus()
-      campo.select()
-    } else if (e.key === 'Escape' && (actual || !aviso.hidden)) limpiar()
+    if (e.key === 'Escape' && (actual || !aviso.hidden)) limpiar()
   })
+  /** Lleva el foco al campo, con lo escrito seleccionado. */
+  function enfocar() {
+    campo.focus()
+    campo.select()
+  }
   addEventListener('resize', () => { if (actual) actual.ancho = cartel.offsetWidth })
 
   const v = new Vector3()
@@ -300,7 +302,7 @@ export function crearBuscador({ formulario, plano, coords, camera, cam, suelo, p
   }
 
   return {
-    buscar, limpiar, dibujar, listo,
+    buscar, limpiar, dibujar, listo, enfocar,
     sugerir: (texto, max = MAX_SUGERENCIAS) => sugerir(indice, texto, max),
     get indice() { return indice },
     get resultado() { return actual && { ...actual.respuesta, tipo: actual.resultado.tipo, mundo: actual.mundo } },

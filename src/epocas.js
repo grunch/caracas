@@ -91,6 +91,9 @@ export const PRIMERA_EPOCA = 1
 /** El índice de época dentro de lo que se muestra: de `desde` a la última. */
 export const acotarEpoca = (i, desde, cuantas) => Math.max(desde, Math.min(cuantas - 1, i))
 
+/** El pie de la línea de tiempo (y el párrafo de cada época en el «Acerca»): de qué plano sale ese año. */
+export const pieDeEpoca = (e) => `La ciudad hacia ${e.año}, según el ${e.corto}.${e.obras ? ` ${e.obras}` : ''}`
+
 /** `desde`: índice de la primera época con botón; los índices son siempre los de crece.json. */
 export function crearLineaDeTiempo({ contenedor, epocas, alElegir, segundosPorEpoca = 4, desde = 0 }) {
   const botones = epocas.map((e, i) => {
@@ -118,7 +121,7 @@ export function crearLineaDeTiempo({ contenedor, epocas, alElegir, segundosPorEp
     actual = acotarEpoca(i, desde, epocas.length)
     botones.forEach((b, k) => { b.classList.toggle('on', k === actual); b.setAttribute('aria-pressed', String(k === actual)) })
     const e = epocas[actual]
-    pie.textContent = `La ciudad hacia ${e.año}, según el ${e.corto}.${e.obras ? ` ${e.obras}` : ''}`
+    pie.textContent = pieDeEpoca(e)
     alElegir(actual)
   }
   function parar() {
@@ -126,12 +129,14 @@ export function crearLineaDeTiempo({ contenedor, epocas, alElegir, segundosPorEp
     reloj = null
     andar.textContent = '▶'
   }
-  andar.addEventListener('click', () => {
-    if (reloj) return parar()
+  /** Arranca el recorrido (si ya anda, sigue): desde el año elegido, o desde el primero si está en el último. */
+  function echarAAndar() {
+    if (reloj) return
     if (actual === epocas.length - 1) elegir(desde)
     andar.textContent = '❚❚'
     reloj = setInterval(() => (actual < epocas.length - 1 ? elegir(actual + 1) : parar()), segundosPorEpoca * 1000)
-  })
+  }
+  andar.addEventListener('click', () => (reloj ? parar() : echarAAndar()))
   elegir(desde)
-  return { elegir, parar, get actual() { return actual } }
+  return { elegir, parar, andar: echarAAndar, get actual() { return actual }, get andando() { return reloj !== null } }
 }

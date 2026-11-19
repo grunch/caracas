@@ -21,6 +21,23 @@ Un panel tipo hoja de papel con:
 - Pie con la ayuda de controles y el botón **"Ver la ciudad"**. Enter, Espacio y Esc la cierran. En pantallas táctiles, el texto de controles se reemplaza por los gestos con los dedos.
 - Se saltea con `?sinintro`, `?limpio` o `?lugar=…`.
 
+*Caracas (implementado, T44):* la referencia junta todo en una hoja; acá son dos, porque la lista de fuentes es larga:
+- **Bienvenida** (`#intro`, `src/intro.js` + `src/acerca-panel.js`): una hoja corta sobre la vista, la primera vez —
+  título, bajada, dos párrafos (qué es, y qué es reconstrucción), una línea de cómo moverse (otra en pantallas
+  táctiles) y los botones **«Ver crecer la ciudad»** (levanta la ciudad y echa a andar el ▶) y **«Entrar»**, más el
+  enlace «Qué estoy viendo y de dónde salen los datos», que abre el Acerca. Esc, «Entrar» o un click afuera la
+  cierran. Queda anotada en `localStorage` (`caracas:intro-vista`, con try/catch: si el almacenamiento falla, se
+  muestra y no se recuerda); `?intro` la fuerza, `?sinintro` y `?capture` la saltean. No espera a nada ni frena
+  la carga: aparece mientras se despliega el plano.
+- **Acerca** (`#acerca`, botón «?» entre los botones de abajo, teclas `?` o `F1`): diálogo modal con índice y cinco
+  secciones — *Qué estás viendo* (qué sale del plano y qué es reconstrucción, y con qué error), *Cómo moverte*
+  (de la tabla de `src/controles.js`, la misma que atiende el teclado), *Las épocas* (un párrafo por año, con el
+  texto de la línea de tiempo de `crece.json`), *Fuentes y licencias* (de `datos/creditos.json`, ver `02`: cada
+  plano, dato, foto y biblioteca con la licencia que declara su ficha; lo pendiente, marcado «por verificar») y
+  *Créditos* (la inspiración de @mormonnegro, Claude, el repositorio). Foco atrapado, Esc, el foco vuelve a donde
+  estaba; en el teléfono ocupa la pantalla y el índice es una fila que se desliza. Sin `crece.json` o sin
+  `creditos.json` (la demo de CI) lo dice en su sección. Capturas: `ANGLE=gl node tests/e2e/capturas-intro.mjs`.
+
 ### 3. Visor principal
 Capas DOM sobre el `<canvas>` a pantalla completa:
 
@@ -49,8 +66,8 @@ Scrollytelling: a la izquierda, una lista larga de edificios por año; a la dere
 
 ## Controles
 
-**Escritorio**: arrastrar = mover · rueda = acercar · botón derecho = girar/inclinar · click en un nombre = ir · `Espacio` = plano ⇄ ciudad (acostar/levantar) · `H` = lo de hoy · `C` = color ⇄ tinta. *Caracas:* `M` = mostrar/ocultar los nombres de los lugares.
-**Táctil**: un dedo mueve; dos dedos acercan, giran e inclinan; tocar un nombre lleva al lugar.
+**Escritorio**: arrastrar = mover · rueda = acercar · botón derecho = girar/inclinar · click en un nombre = ir · `Espacio` = plano ⇄ ciudad (acostar/levantar) · `H` = lo de hoy · `C` = color ⇄ tinta. *Caracas:* `M` = mostrar/ocultar los nombres de los lugares; `/` = ir al buscador; `?` o `F1` = el Acerca. Todos los atajos salen de una sola tabla (`src/controles.js`), que también arma la ayuda.
+**Táctil**: un dedo mueve; dos dedos acercan, giran e inclinan; tocar un nombre lleva al lugar. *Caracas:* por ahora solo un dedo (mover) y tocar un nombre; los gestos de dos dedos quedan para T70, y la ayuda no los promete.
 **Modos** (ver `05`): WASD/flechas para moverse, Shift corre, Esc vuelve; en auto, V cambia la vista, B toca la bocina, M el sonido, N otro coche, y Q/E cambian de año.
 
 Parámetros URL útiles: `?limpio` (sin UI, para capturas), `?capture`, `?sinintro`, `?lugar=<nombre>`, `?hoy`, `?liviano` / `?pesado` (forzar calidad), `?chico`. *Caracas:* `?sombras=0` / `?sombras=N` (lado del mapa de sombras), `?contorno=0`, `?grano=0` (specs/04, Luz y acabado).
