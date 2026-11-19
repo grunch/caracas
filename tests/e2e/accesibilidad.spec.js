@@ -7,6 +7,8 @@ test.use({ viewport: { width: 900, height: 640 } })
 const REGLAS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']
 
 async function sinViolaciones(page, estado) {
+  // los paneles aparecen con un fundido: a mitad de camino, axe mediría el contraste de un texto medio transparente
+  await page.evaluate(() => Promise.all(document.getAnimations().map((a) => a.finished.catch(() => {}))))
   const { violations } = await new AxeBuilder({ page }).withTags(REGLAS).analyze()
   const resumen = violations.map((v) => `${v.impact} ${v.id}: ${v.help} (${v.nodes.map((n) => n.target.join(' ')).join(', ')})`)
   expect(resumen, estado).toEqual([])
