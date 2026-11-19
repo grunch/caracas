@@ -29,7 +29,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 |---|---|---|---|---|
 | T10 | **CI en GitHub Actions**: vitest, pytest (solo sintéticos), build y Playwright con datos de prueba | — | cada PR muestra checks verdes o rojos | ✅ #5 |
 | T11 | **Pipeline reproducible**: `npm run datos` corre todo el pipeline de 1936 (y luego el de las épocas) con caché por paso y verifica conteos esperados | T08 | desde los `original.tif`, un comando regenera `public/` idéntico (hash) | ✅ #6 |
-| T12 | **Fixture de datos chica** para E2E y CI: un recorte de 1 km² alrededor de la plaza (plano, `.pak`, suelo) generado por el pipeline | T11 | los E2E corren en CI sin los datos pesados | ⏳ |
+| T12 | **Fixture de datos chica** para E2E y CI: un recorte de 1 km² alrededor de la plaza (plano, `.pak`, suelo) generado por el pipeline | T11 | los E2E corren en CI sin los datos pesados | 🔄 (en revisión): la muestra (`tools/muestra.mjs`) viaja como `muestra.tar.gz` en el release `datos-*` y el CI la baja con `npm run datos:bajar -- --muestra` |
 
 ## Fase 2 · Terminar lo que está en curso
 
@@ -73,6 +73,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T40 | Hitos modelados I: el marco de los hitos (`src/hitos.js`) y la **Plaza Bolívar** por épocas (mercado → plaza ajardinada con la estatua); después Catedral, Capitolio, Panteón, Santa Capilla, San Francisco, Teatro Municipal (plantas desde el plano de 1936, alturas desde fotos) | T24 | la plaza y 6 edificios con nombre, cada uno en sus años | ✅ #31 (marco y plaza) · #32 (Catedral, San Francisco, Santa Capilla, Panteón) · #33 (Capitolio) · ⏳ falta el Teatro Municipal |
 | T41 | Hitos modelados II: Miraflores, Universidad, El Calvario, Caño Amarillo, Mercado Principal, Santa Teresa, Candelaria, Altagracia… | T40 | 8 edificios más | ✅ #32 (Santa Teresa, Altagracia, La Pastora) · #33 (Casa Amarilla, Universidad, Miraflores) · ⏳ faltan El Calvario, Caño Amarillo, Mercado Principal, Candelaria, Hotel Majestic |
 | T41a | Sustituir Miraflores genérico por el modelo aprobado con cuatro accesos desde 1911, integrado al lienzo común | T41 | épocas, ubicación, relieve y tinta/color conservados; límites documentados | ✅ #46 |
+| T41b | **El piso de los hitos sobre el relieve**: hoy queda plano a la altura de sus anclas (`src/hitos/material.js`), y donde el terreno sube, el relieve lo tapa: en 1772 el norte del piso de tierra del mercado de la Plaza Bolívar no se ve. Lo encontró la muestra de datos (T12), que trae el relieve real | T41a, T12 | con el relieve, el mercado se ve entero; `hitos.spec.js` deja de marcarlo como falla conocida | ⏳ |
 | T42 | Marcas (etiquetas 3D por época, niveles, declutter, velo al pasar el mouse) | T25 | las marcas cambian con el año | ✅ #39 |
 | T43 | Fichas con fotos de época (Commons, autor, fecha, licencia) y visor de fotos | T42 | cada marca abre su ficha con fotos acreditadas | ✅ #43 |
 | T44 | Intro y "Acerca": qué estás viendo, la Caracas de cada época, fuentes y créditos (incluida la inspiración de @mormonnegro) | T25 | intro con todas las fuentes y licencias | ✅ #44 |

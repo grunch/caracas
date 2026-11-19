@@ -3,7 +3,11 @@
 // un paquete (datos.tar.gz) en un release de GitHub con etiqueta datos-AAAA-MM-DD-<commit>.
 //
 //   npm run datos:bajar      baja el paquete más nuevo y lo pone en public/ (un clon nuevo, el build de Pages)
-//   npm run datos:publicar   empaqueta lo de public/datos/manifiesto.json y lo sube como release nuevo (gh)
+//   npm run datos:bajar -- --muestra   baja la muestra: 1 km² alrededor de la plaza (los E2E del CI, T12)
+//   npm run datos:publicar   empaqueta lo de public/datos/manifiesto.json y la muestra (tools/muestra.mjs), y
+//                            los sube como release nuevo (gh)
+//   node tools/paquete-datos.mjs muestra <etiqueta>   agrega (o reemplaza) la muestra en un release que ya
+//                            existe, armada con los datos de public/ (que tienen que ser los de ese release)
 //
 // El paquete bajado es un dato no confiable: se revisa el listado (solo archivos regulares dentro de
 // public/datos|plano|fotos), se extrae aparte y solo se copia si cada archivo tiene el sha256 del manifiesto.
@@ -16,8 +20,9 @@ import path from 'node:path'
 import { Readable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
 import {
-  ACTIVO, MANIFIESTO, archivosDelPaquete, elegirRelease, etiquetaDeDatos, revisarListado, sumasQueNoCoinciden,
+  ACTIVO, ACTIVO_MUESTRA, MANIFIESTO, archivosDelPaquete, elegirRelease, etiquetaDeDatos, revisarListado, sumasQueNoCoinciden,
 } from './paquete-datos-lib.mjs'
+import { armarMuestra } from './muestra.mjs'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
 const CACHE = path.join(RAIZ, '.cache/paquete-datos')
@@ -65,13 +70,14 @@ async function api(ruta) {
 }
 
 async function bajar() {
-  const elegido = elegirRelease(await api('releases?per_page=50'))
-  if (!elegido) throw new Error(`${REPO} no tiene ningún release datos-* con ${ACTIVO}: publícalo con npm run datos:publicar`)
+  const activo = process.argv.includes('--muestra') ? ACTIVO_MUESTRA : ACTIVO
+  const elegido = elegirRelease(await api('releases?per_page=50'), activo)
+  if (!elegido) throw new Error(`${REPO} no tiene ningún release datos-* con ${activo}: publícalo con npm run datos:publicar`)
   await rm(CACHE, { recursive: true, force: true })
   const extraido = path.join(CACHE, 'extraido')
   await mkdir(extraido, { recursive: true })
-  const paquete = path.join(CACHE, ACTIVO)
-  console.log(`bajando ${elegido.etiqueta}…`)
+  const paquete = path.join(CACHE, activo)
+  console.log(`bajando ${activo} de ${elegido.etiqueta}…`)
   const r = await fetch(elegido.url, { headers: { 'User-Agent': AGENTE } })
   if (!r.ok || !r.body) throw new Error(`${elegido.url}: ${r.status}`)
   await pipeline(Readable.fromWeb(r.body), createWriteStream(paquete))
@@ -91,6 +97,35 @@ async function bajar() {
   console.log(`${elegido.etiqueta}: ${archivos.length} archivos en public/ · conteos ${JSON.stringify(manifiesto.conteos)}`)
 }
 
+/** Empaqueta en `paquete` los `archivos` (rutas relativas a `base`). */
+async function empaquetar(base, archivos, paquete) {
+  const lista = `${paquete}.lista`
+  await writeFile(lista, archivos.join('\n') + '\n')
+  await correr('tar', ['-czf', paquete, '--owner=0', '--group=0', '--numeric-owner', '-C', base, '-T', lista])
+}
+
+/** La muestra armada con public/ y empaquetada: { paquete, manifiesto }. */
+async function muestraEmpaquetada() {
+  const base = path.join(CACHE, 'muestra')
+  const manifiesto = await armarMuestra(RAIZ, base)
+  const paquete = path.join(CACHE, ACTIVO_MUESTRA)
+  await empaquetar(base, archivosDelPaquete(manifiesto), paquete)
+  return { paquete, manifiesto }
+}
+
+/** Agrega (o reemplaza) la muestra en un release que ya existe: `node tools/paquete-datos.mjs muestra <etiqueta>`. */
+async function muestra() {
+  const etiqueta = process.argv[3]
+  if (!etiqueta?.startsWith('datos-')) throw new Error('uso: node tools/paquete-datos.mjs muestra datos-AAAA-MM-DD-<commit>')
+  const manifiesto = JSON.parse(await readFile(path.join(RAIZ, MANIFIESTO), 'utf8'))
+  await exigirSumas(RAIZ, manifiesto, 'public/ no coincide con su manifiesto (baja ese release con npm run datos:bajar)')
+  await mkdir(CACHE, { recursive: true })
+  const { paquete, manifiesto: deMuestra } = await muestraEmpaquetada()
+  await correr('gh', ['release', 'upload', etiqueta, paquete, '--repo', REPO, '--clobber'])
+  await rm(CACHE, { recursive: true, force: true })
+  console.log(`→ muestra en ${etiqueta}: ${Object.keys(deMuestra.archivos).length} archivos · conteos ${JSON.stringify(deMuestra.conteos)}`)
+}
+
 async function publicar() {
   const manifiesto = JSON.parse(await readFile(path.join(RAIZ, MANIFIESTO), 'utf8'))
   const archivos = archivosDelPaquete(manifiesto)
@@ -99,22 +134,22 @@ async function publicar() {
   const etiqueta = etiquetaDeDatos(new Date(), commit)
 
   await mkdir(CACHE, { recursive: true })
-  const lista = path.join(CACHE, 'archivos.txt')
   const paquete = path.join(CACHE, ACTIVO)
-  await writeFile(lista, archivos.join('\n') + '\n')
-  await correr('tar', ['-czf', paquete, '--owner=0', '--group=0', '--numeric-owner', '-C', RAIZ, '-T', lista])
+  await empaquetar(RAIZ, archivos, paquete)
+  const { paquete: deMuestra, manifiesto: mm } = await muestraEmpaquetada()
   const notas = `Datos generados del sitio (npm run datos) desde ${commit}.\n\nConteos: ${JSON.stringify(manifiesto.conteos)}\n` +
-    `Archivos: ${archivos.length} (sha256 en ${MANIFIESTO}).\n\nSe bajan con npm run datos:bajar.`
-  await correr('gh', ['release', 'create', etiqueta, paquete, '--repo', REPO, '--target', commit,
+    `Archivos: ${archivos.length} (sha256 en ${MANIFIESTO}).\n\nSe bajan con npm run datos:bajar.\n\n` +
+    `${ACTIVO_MUESTRA}: 1 km² alrededor de la plaza para los E2E del CI (${JSON.stringify(mm.conteos)}); npm run datos:bajar -- --muestra.`
+  await correr('gh', ['release', 'create', etiqueta, paquete, deMuestra, '--repo', REPO, '--target', commit,
     '--title', `Datos ${etiqueta.slice(6)}`, '--notes', notas, '--latest=false'])
   await rm(CACHE, { recursive: true, force: true })
   console.log(`→ release ${etiqueta} en ${REPO}`)
 }
 
-const ORDENES = { bajar, publicar }
+const ORDENES = { bajar, publicar, muestra }
 const orden = ORDENES[process.argv[2]]
 if (!orden) {
-  console.error('uso: node tools/paquete-datos.mjs bajar|publicar')
+  console.error('uso: node tools/paquete-datos.mjs bajar [--muestra] | publicar | muestra <etiqueta>')
   process.exit(2)
 }
 orden().catch((e) => {
