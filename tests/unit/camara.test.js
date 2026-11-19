@@ -126,3 +126,47 @@ describe('crearCamara con los dedos', () => {
     expect(cam.goal.dist).toBeGreaterThanOrEqual(40)
   })
 })
+
+describe('crearCamara con el teclado', () => {
+  const armar = () => {
+    const cam = crearCamara(new PerspectiveCamera(35, 1, 5, 60000), lienzo, { pedirCuadro: () => {}, hoja })
+    cam.jump({ x: 0, z: 0, dist: 1000, yaw: 0, pitch: 1.0 })
+    return cam
+  }
+
+  test('mover() corre el destino en la dirección de la pantalla, en proporción a la distancia', () => {
+    // Arrange: con yaw 0 la cámara mira hacia −z; arriba en la pantalla es −z y a la derecha es +x
+    const cam = armar()
+    // Act
+    cam.mover(0, -1)
+    const arriba = { ...cam.goal }
+    cam.mover(1, 1)
+    // Assert
+    expect(arriba.z).toBeLessThan(0)
+    expect(arriba.x).toBeCloseTo(0)
+    expect(cam.goal.x).toBeGreaterThan(0)
+    expect(cam.goal.z).toBeCloseTo(0)
+    expect(Math.abs(arriba.z)).toBeGreaterThan(20)        // un paso se nota
+    expect(Math.abs(arriba.z)).toBeLessThan(1000 * 0.25)  // y no salta
+  })
+
+  test('mover() respeta el giro: con la vista girada, «arriba» es otra dirección del suelo', () => {
+    const cam = armar()
+    cam.jump({ yaw: Math.PI / 2 })
+    cam.mover(0, -1)
+    expect(cam.goal.x).toBeLessThan(0)
+    expect(cam.goal.z).toBeCloseTo(0)
+  })
+
+  test('acercar() y girar() cambian el destino dentro de los límites', () => {
+    const cam = armar()
+    cam.acercar(1)
+    expect(cam.goal.dist).toBeLessThan(1000)
+    for (let i = 0; i < 200; i++) cam.acercar(1)
+    expect(cam.goal.dist).toBe(40)
+    cam.girar(1, 0)
+    expect(cam.goal.yaw).toBeGreaterThan(0)
+    for (let i = 0; i < 200; i++) cam.girar(0, 1)
+    expect(cam.goal.pitch).toBe(1.5)
+  })
+})

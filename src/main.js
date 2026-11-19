@@ -30,7 +30,7 @@ import { engancharFichas } from './ficha-panel.js'
 import { crearAcerca } from './acerca-panel.js'
 import { leerCreditos } from './acerca.js'
 import { debeMostrarIntro, recordarIntro } from './intro.js'
-import { accionDeTecla } from './controles.js'
+import { accionDeTecla, movimientoDeTecla } from './controles.js'
 import { esLiviano, proporcionDePixeles } from './calidad.js'
 
 const params = new URLSearchParams(location.search)
@@ -84,6 +84,9 @@ const liviano = esLiviano({ params, maxTextura, pantalla: { ancho: screen.width,
 renderer.setPixelRatio(proporcionDePixeles({ dpr: devicePixelRatio, liviano, captura: params.has('capture') }))
 renderer.setSize(innerWidth, innerHeight)
 document.getElementById('view').appendChild(renderer.domElement)
+// la vista no tiene texto: su nombre accesible dice qué es y cómo se mueve (el resto, en #sobre y en el «Acerca»)
+renderer.domElement.setAttribute('role', 'img')
+renderer.domElement.setAttribute('aria-label', 'La ciudad en 3D sobre el plano. Muévete con las flechas, gira con Mayús y las flechas, acércate con + y −.')
 renderer.domElement.addEventListener('webglcontextrestored', () => location.reload())
 const gl = renderer.getContext()
 const gpu = gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info')?.UNMASKED_RENDERER_WEBGL ?? gl.RENDERER)
@@ -361,6 +364,15 @@ document.getElementById('alzar').addEventListener('click', () => levantar())
 document.getElementById('color').addEventListener('click', () => alternarColor())
 document.getElementById('hoy').addEventListener('click', () => alternarHoy())
 addEventListener('keydown', (e) => {
+  // la vista con el teclado: flechas, Mayús y flechas, + y − (WCAG 2.1.1; la ayuda sale de la misma tabla)
+  const movimiento = movimientoDeTecla(e)
+  if (movimiento) {
+    e.preventDefault()
+    if (movimiento.tipo === 'mover') cam.mover(movimiento.dx, movimiento.dy)
+    else if (movimiento.tipo === 'girar') cam.girar(movimiento.giro, movimiento.inclinar)
+    else cam.acercar(movimiento.veces)
+    return
+  }
   // los atajos salen de la tabla de src/controles.js (la misma que muestra el «Acerca»); los controles con
   // foco conservan su teclado (Espacio activa el botón, se escribe en los campos)
   const accion = accionDeTecla(e, Object.keys(HACER))

@@ -12,6 +12,8 @@ const LIMITES = { distMin: 40, distMax: 9000, pitchMin: 0.18, pitchMax: 1.5 }
 const SUAVIDAD = 8
 const ALTURA_MINIMA_M = 12 // sobre el suelo que queda debajo de la cámara
 const INCLINAR_POR_PX = 0.004 // como el botón derecho
+// un toque de tecla (src/controles.js, movimientoDeTecla): llega amortiguado, como la rueda
+const PASO = Object.freeze({ mover: 0.08, girar: 0.08, inclinar: 0.05, acercar: 1.25 })
 
 export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0 }) {
   // arranca mirando la hoja entera, un poco inclinada, como un plano sobre la mesa
@@ -172,5 +174,29 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
     pedirCuadro(3)
   }
 
-  return { goal, now, update, jump, volar }
+  /** Con el teclado: corre el destino `dx` (derecha) y `dy` (abajo) pasos, en las direcciones de la pantalla. */
+  function mover(dx, dy) {
+    const paso = goal.dist * PASO.mover
+    const adelante = { x: -Math.sin(goal.yaw), z: -Math.cos(goal.yaw) }
+    const derecha = { x: Math.cos(goal.yaw), z: -Math.sin(goal.yaw) }
+    goal.x += (derecha.x * dx - adelante.x * dy) * paso
+    goal.z += (derecha.z * dx - adelante.z * dy) * paso
+    acotar()
+    pedirCuadro(3)
+  }
+  /** Acerca (`veces` > 0) o aleja (< 0), un paso por vez. */
+  function acercar(veces) {
+    goal.dist /= PASO.acercar ** veces
+    acotar()
+    pedirCuadro(3)
+  }
+  /** Gira (`giro` > 0: como los dedos en el sentido del reloj) e inclina (`inclinar` > 0: más desde arriba). */
+  function girar(giro, inclinar) {
+    goal.yaw += giro * PASO.girar
+    goal.pitch += inclinar * PASO.inclinar
+    acotar()
+    pedirCuadro(3)
+  }
+
+  return { goal, now, update, jump, volar, mover, acercar, girar }
 }
