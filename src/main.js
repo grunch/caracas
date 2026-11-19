@@ -16,9 +16,13 @@ import { SIN_PLANO } from './shader/plano.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
 import { cargarCalles, crearRotulos } from './calles.js'
-import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo } from './relieve.js'
+import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo, hinchado } from './relieve.js'
 import { vectorSol, ajustesDeAcabado, esRenderPorSoftware } from './luz.js'
 import { crearAcabado } from './acabado.js'
+import { normalizarMarcas } from './marcas.js'
+import { crearCapaMarcas } from './marcas-capa.js'
+import { MARCAS } from './marcas-datos.js'
+import './marcas.css'
 
 const params = new URLSearchParams(location.search)
 const COLOR_FONDO = 0x1d1a17
@@ -304,12 +308,40 @@ addEventListener('keydown', (e) => {
   if (e.code === 'Space') { e.preventDefault(); levantar() }
   if (e.code === 'KeyC' && !e.metaKey && !e.ctrlKey) alternarColor()
   if (e.code === 'KeyH' && !e.metaKey && !e.ctrlKey) alternarHoy()
+  if (e.code === 'KeyM' && !e.metaKey && !e.ctrlKey) alternarMarcas()
 })
 
 // la altura del suelo tal como se dibuja: la cámara mira siempre al terreno
 const sueloEn = (x, z) => alturaSuelo(relieve, x, z,
   { ola: ciudad.U.uOla.value, anchoOla: ciudad.U.uAnchoOla.value, exageracion: relieveU.uExageracion.value })
 const cam = crearCamara(camera, renderer.domElement, { pedirCuadro, hoja, suelo: sueloEn })
+
+// --- las marcas (M): los nombres de los lugares, por época, en una capa de DOM sobre la vista (src/marcas.js) ---
+const DIST_VUELO_M = { 1: 1500, 2: 700, 3: 450 } // hasta dónde se acerca la cámara al tocar una marca, por nivel
+const sinAnimar = matchMedia('(prefers-reduced-motion: reduce)')
+const marcas = crearCapaMarcas({
+  contenedor: document.getElementById('marcas'),
+  marcas: normalizarMarcas(MARCAS, { hitos: HITOS, coords }),
+  tamaño: () => ({ ancho: innerWidth, alto: innerHeight }),
+  altura: sueloEn,
+  alSobre: () => pedirCuadro(2),
+  alAbrir(marca) {
+    // la cámara vuela al lugar (nunca se aleja); T43 abrirá aquí la ficha, con marcas.alAbrirMarca o el evento
+    const destino = { x: marca.x, z: marca.z, dist: Math.min(cam.goal.dist, DIST_VUELO_M[marca.nivel]) }
+    if (sinAnimar.matches) cam.jump(destino); else cam.volar(destino)
+    marcas.alAbrirMarca?.(marca)
+    dispatchEvent(new CustomEvent('abrirmarca', { detail: marca }))
+  },
+})
+function alternarMarcas(prender = !marcas.prendida) {
+  marcas.mostrar(prender)
+  const boton = document.getElementById('nombres')
+  boton.setAttribute('aria-pressed', String(prender))
+  boton.classList.toggle('on', prender)
+  pedirCuadro(3)
+}
+document.getElementById('nombres').addEventListener('click', () => alternarMarcas())
+if (params.has('sinmarcas')) alternarMarcas(false)
 
 // --- la luz y el acabado: sombras arrojadas, contorno a tinta, bruma y grano de papel (src/acabado.js) ---
 const gl = renderer.getContext()
@@ -351,14 +383,21 @@ renderer.setAnimationLoop((t) => {
     const { px, py } = coords.aPixel(cam.now.x, cam.now.z)
     teselas.update(px, py, cam.now.dist < DIST_TESELAS_M)
   }
-  rotulos?.dibujar({ camera, dist: cam.now.dist, x: cam.now.x, z: cam.now.z, opacidad: ciudad.U.uHoy.value })
+  // las marcas primero: sus carteles tienen prioridad sobre los nombres de las calles
+  const { uEpocaDe, uEpocaA, uAnchoOla } = ciudad.U
+  const ocupados = marcas.dibujar({
+    camera, dist: cam.now.dist,
+    epoca: { de: uEpocaDe.value, a: uEpocaA.value, ola: uOlaEpoca.value, ancho: uAnchoOla.value },
+    sube: (d) => hinchado(d, uOla.value, uAnchoOla.value),
+  })
+  rotulos?.dibujar({ camera, dist: cam.now.dist, x: cam.now.x, z: cam.now.z, opacidad: ciudad.U.uHoy.value, ocupados })
   acabado.dibujar()
 })
 
 if (params.has('hoy')) alternarHoy(true)
 document.body.classList.add('listo')
 window.lab = {
-  renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, relieveU, sueloEn, acabado, ready: true,
+  renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, relieveU, sueloEn, acabado, ready: true,
   get relieve() { return relieve },
   get teselas() { return teselas },
   get arboles() { return arboles },
