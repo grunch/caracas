@@ -97,6 +97,32 @@ describe('crearCamara con los dedos', () => {
     expect(cam.goal.dist).toBe(1500)   // inclinar no acerca
   })
 
+  test('un deslizamiento rápido hacia arriba (un aviso por dedo) también inclina', () => {
+    const { l, cam } = armar()
+    l.mandar('pointerdown', 1, 40, 60)
+    l.mandar('pointerdown', 2, 60, 60)
+    l.mandar('pointermove', 1, 40, 45)
+    l.mandar('pointermove', 2, 60, 45)
+    expect(cam.goal.pitch).toBeLessThan(1.0)
+    expect(cam.goal.dist).toBe(1500)   // no lo tomó por un pellizco
+  })
+
+  test('si cambia el par de dedos (se apoyó un tercero y se levantó uno), el gesto arranca de nuevo sin saltos', () => {
+    // Arrange
+    const { l, cam } = armar()
+    l.mandar('pointerdown', 1, 40, 50)
+    l.mandar('pointerdown', 2, 60, 50)
+    l.mandar('pointerdown', 3, 90, 50)
+    l.mandar('pointerup', 1, 40, 50)
+    const antes = { ...cam.goal }
+
+    // Act: el tercer dedo apenas se mueve
+    l.mandar('pointermove', 3, 91, 50)
+
+    // Assert
+    expect(cam.goal).toMatchObject({ dist: antes.dist, yaw: antes.yaw, x: antes.x, z: antes.z })
+  })
+
   test('al levantar un dedo, el otro sigue arrastrando sin saltos', () => {
     // Arrange
     const { camera, l, cam } = armar()

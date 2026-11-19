@@ -54,6 +54,19 @@ describe('modoDeGesto', () => {
   test('separarlos, juntarlos, girarlos o moverlos en direcciones distintas: pellizcar', () => {
     expect(modoDeGesto(par(40, 50, 60, 50), par(32, 50, 68, 50))).toBe('pellizcar')
     expect(modoDeGesto(par(40, 50, 60, 50), par(40, 40, 60, 60))).toBe('pellizcar')
-    expect(modoDeGesto(par(40, 50, 60, 50), par(40, 50, 60, 36))).toBe('pellizcar')   // solo uno se movió
+    expect(modoDeGesto(par(40, 50, 60, 50), par(40, 50, 60, 10))).toBe('pellizcar')   // solo uno se movió, y mucho
+  })
+
+  test('un dedo bajó o subió y el otro todavía no avisó: espera al otro antes de decidir', () => {
+    // Arrange: los dos suben de y = 200 a y = 185, pero el navegador avisa primero uno solo
+    const inicio = par(40, 200, 60, 200)
+
+    // Act
+    const conUno = modoDeGesto(inicio, par(40, 185, 60, 200))
+    const conLosDos = modoDeGesto(inicio, par(40, 185, 60, 185))
+
+    // Assert
+    expect(conUno).toBeNull()
+    expect(conLosDos).toBe('inclinar')
   })
 })

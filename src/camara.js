@@ -21,7 +21,7 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   const rayo = new Raycaster()
   let arrastre = null
   const dedos = new Map() // pointerId → { x, y } de los punteros apoyados
-  let dos = null // el gesto con dos dedos en curso: { inicio, previo, modo, altura, ancla }
+  let dos = null // el gesto con dos dedos en curso: { ids, inicio, previo, modo, altura, ancla }
 
   // el plano horizontal a la altura del objetivo (fija durante un arrastre, para que no resbale)
   const alSuelo = (cx, cy, altura = now.y) => {
@@ -40,14 +40,19 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   lienzo.addEventListener('contextmenu', (e) => e.preventDefault())
   const empezarArrastre = (boton, x, y) => { arrastre = { boton, x, y, altura: now.y, ancla: alSuelo(x, y, now.y) } }
   const par = () => [...dedos.values()].slice(0, 2).map((d) => ({ ...d }))
+  const idsDelPar = () => [...dedos.keys()].slice(0, 2)
+  /** El gesto con dos dedos arranca (o vuelve a arrancar) desde donde están ahora los dos primeros. */
+  const empezarDos = () => {
+    const inicio = par()
+    const medio = { x: (inicio[0].x + inicio[1].x) / 2, y: (inicio[0].y + inicio[1].y) / 2 }
+    dos = { ids: idsDelPar(), inicio, previo: inicio, modo: null, altura: now.y, ancla: alSuelo(medio.x, medio.y, now.y) }
+  }
   lienzo.addEventListener('pointerdown', (e) => {
     lienzo.setPointerCapture(e.pointerId)
     dedos.set(e.pointerId, { x: e.clientX, y: e.clientY })
     if (dedos.size === 2) {
       arrastre = null
-      const inicio = par()
-      const medio = { x: (inicio[0].x + inicio[1].x) / 2, y: (inicio[0].y + inicio[1].y) / 2 }
-      dos = { inicio, previo: inicio, modo: null, altura: now.y, ancla: alSuelo(medio.x, medio.y, now.y) }
+      empezarDos()
     } else if (dedos.size === 1) {
       empezarArrastre(e.button, e.clientX, e.clientY)
     }
@@ -105,7 +110,11 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   }
   const soltar = (e) => {
     dedos.delete(e.pointerId)
-    if (dedos.size >= 2) return
+    if (dedos.size >= 2) {
+      // si se levantó uno de los dos del gesto, el par es otro: se arranca de nuevo, sin tomar el cambio por gesto
+      if (dos && dos.ids.includes(e.pointerId)) empezarDos()
+      return
+    }
     dos = null
     // si queda un dedo, sigue arrastrando desde donde está (sin salto)
     const [queda] = dedos.values()
