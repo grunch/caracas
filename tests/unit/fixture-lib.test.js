@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { cajaAlrededor, recortarCiudad, recortarArboles, reducirRelieve, nivelesReducidos } from '../../tools/fixture-lib.mjs'
+import { cajaAlrededor, recortarCiudad, recortarArboles, reducirRelieve, nivelesReducidos, teselaToca } from '../../tools/fixture-lib.mjs'
 
 describe('cajaAlrededor', () => {
   test('un cuadrado de lado `lado_m` alrededor de la plaza, en píxeles del plano', () => {
@@ -72,5 +72,15 @@ describe('nivelesReducidos', () => {
   test('cada plano de época con un solo nivel, del lado de la imagen reducida', () => {
     const epocas = { planos: [{ año: 1772, niveles: [{ url: 'plano/1772/chico.webp', lado: 2048 }, { url: 'plano/1772/medio.webp', lado: 4096 }] }] }
     expect(nivelesReducidos(epocas, 512)).toEqual({ planos: [{ año: 1772, niveles: [{ url: 'plano/1772/chico.webp', lado: 512 }] }] })
+  })
+})
+
+describe('teselaToca', () => {
+  test('la tesela toca la caja si se cruzan, aunque sea por un borde de adentro', () => {
+    const caja = { x0: 2500, y0: 100, x1: 3500, y1: 900 }
+    expect(teselaToca(0, 0, 3072, caja)).toBe(true)
+    expect(teselaToca(1, 0, 3072, caja)).toBe(true)
+    expect(teselaToca(2, 0, 3072, caja)).toBe(false)
+    expect(teselaToca(0, 1, 3072, caja)).toBe(false)
   })
 })

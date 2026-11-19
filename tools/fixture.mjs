@@ -13,14 +13,15 @@ import path from 'node:path'
 import sharp from 'sharp'
 import { codificarPak } from './pak.mjs'
 import { partesDeCiudad } from './empacar-lib.mjs'
-import { cajaAlrededor, nivelesReducidos, recortarArboles, recortarCiudad, reducirRelieve } from './fixture-lib.mjs'
+import { cajaAlrededor, nivelesReducidos, recortarArboles, recortarCiudad, reducirRelieve, teselaToca } from './fixture-lib.mjs'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
 const PUBLICO = path.join(RAIZ, 'public')
 const FIXTURE = path.join(RAIZ, 'tests/fixtures/publico')
 const LADO_M = 1000
 const LADO_PLANO_PX = 512 // las imágenes de la hoja entera
-const LADO_TESELA_PX = 128
+const LADO_TESELA_PX = 128 // las teselas finas lejos de la plaza
+const LADO_TESELA_CERCA_PX = 1536 // las que tocan la caja: de cerca, los E2E comparan el dibujo del plano
 const LADO_FOTO_PX = 480
 const CALIDAD = 55
 const MARCA_DE_LAS_FOTOS = 'plaza-bolivar'
@@ -71,7 +72,11 @@ async function generar() {
   for (const nombre of ['primero', 'chico', 'medio', 'medio-4k', 'suelo', 'suelo-2k', 'rotulos', 'rotulos-2k', 'hoy-cerca']) {
     await achicar(`plano/${nombre}.webp`, LADO_PLANO_PX)
   }
-  for (const tesela of await readdir(desde('plano/f'))) await achicar(`plano/f/${tesela}`, LADO_TESELA_PX)
+  const laminas = JSON.parse(await readFile(path.join(PUBLICO, 'plano/laminas.json'), 'utf8'))
+  for (const tesela of await readdir(desde('plano/f'))) {
+    const [col, fila] = tesela.replace('.webp', '').split('-').map(Number)
+    await achicar(`plano/f/${tesela}`, teselaToca(col, fila, laminas.tesela, caja) ? LADO_TESELA_CERCA_PX : LADO_TESELA_PX)
+  }
   const epocas = await leerJson('plano/epocas.json')
   for (const p of epocas.planos) await achicar(p.niveles[0].url, LADO_PLANO_PX)
   await escribir('plano/epocas.json', JSON.stringify(nivelesReducidos(epocas, LADO_PLANO_PX)))

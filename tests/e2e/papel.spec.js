@@ -24,7 +24,7 @@ async function abrir(page, { urbano }) {
   }))
   await page.route('**/plano/1772/chico.webp', (ruta) => ruta.fulfill({ body: plano, contentType: 'image/png' }))
   // sin la hoja ni sus máscaras, haya o no datos pesados: que no lleguen a mitad de una medición
-  await page.route(/\/plano\/(primero|chico|medio|suelo|rotulos)\.webp/, (ruta) => ruta.abort())
+  await page.route(/\/plano\/((primero|chico|medio|suelo|rotulos)(-[24]k)?\.webp|f\/)/, (ruta) => ruta.abort())
   await page.goto('/?sinintro&capture&sinmarcas')
   await page.waitForFunction(() => window.lab?.ready === true && window.lab.lineaDeTiempo && window.lab.ciudad.U.uCrece.value.image?.width === 4)
 }

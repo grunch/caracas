@@ -87,3 +87,8 @@ export function reducirRelieve(bytes, factor) {
 export function nivelesReducidos(epocas, lado) {
   return { ...epocas, planos: epocas.planos.map((p) => ({ ...p, niveles: [{ ...p.niveles[0], lado }] })) }
 }
+
+/** ¿La tesela (col, fila) de `lado` píxeles del plano (plano/laminas.json) toca la caja? */
+export function teselaToca(col, fila, lado, { x0, y0, x1, y1 }) {
+  return col * lado < x1 && (col + 1) * lado > x0 && fila * lado < y1 && (fila + 1) * lado > y0
+}
