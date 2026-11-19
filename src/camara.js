@@ -23,6 +23,7 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   const rayo = new Raycaster()
   let arrastre = null
   const dedos = new Map() // pointerId → { x, y } de los punteros apoyados
+  let pausada = false // un modo de recorrido (src/a-pie-modo.js) tiene la vista: no se atiende la entrada
   let dos = null // el gesto con dos dedos en curso: { ids, inicio, previo, modo, altura, ancla }
 
   // el plano horizontal a la altura del objetivo (fija durante un arrastre, para que no resbale)
@@ -50,6 +51,7 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
     dos = { ids: idsDelPar(), inicio, previo: inicio, modo: null, altura: now.y, ancla: alSuelo(medio.x, medio.y, now.y) }
   }
   lienzo.addEventListener('pointerdown', (e) => {
+    if (pausada) return
     lienzo.setPointerCapture(e.pointerId)
     dedos.set(e.pointerId, { x: e.clientX, y: e.clientY })
     if (dedos.size === 2) {
@@ -60,6 +62,7 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
     }
   })
   lienzo.addEventListener('pointermove', (e) => {
+    if (pausada) return
     if (dedos.has(e.pointerId)) dedos.set(e.pointerId, { x: e.clientX, y: e.clientY })
     if (dos && dedos.size >= 2) {
       moverConDos()
@@ -126,6 +129,7 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   lienzo.addEventListener('pointerup', soltar)
   lienzo.addEventListener('pointercancel', soltar)
   lienzo.addEventListener('wheel', (e) => {
+    if (pausada) return
     e.preventDefault()
     const p = alSuelo(e.clientX, e.clientY)
     const delta = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 100 : 1)
@@ -207,5 +211,13 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
     pedirCuadro(3)
   }
 
-  return { goal, now, update, jump, volar, mover, acercar, girar }
+  /** Deja de atender (o vuelve a atender) el ratón, los dedos y la rueda; suelta lo que estuviera apretado. */
+  function pausar(si) {
+    pausada = si
+    arrastre = null
+    dos = null
+    dedos.clear()
+  }
+
+  return { goal, now, update, jump, volar, mover, acercar, girar, pausar }
 }

@@ -32,6 +32,7 @@ import { leerCreditos } from './acerca.js'
 import { debeMostrarIntro, recordarIntro } from './intro.js'
 import { accionDeTecla, movimientoDeTecla } from './controles.js'
 import { esLiviano, proporcionDePixeles } from './calidad.js'
+import { crearModoAPie } from './a-pie-modo.js'
 
 const params = new URLSearchParams(location.search)
 const COLOR_FONDO = 0x1d1a17
@@ -192,9 +193,11 @@ let olaObjetivo = 0
 // la ola llega hasta la esquina más lejana de la hoja (el terreno se hincha en toda ella)
 let olaMax = Math.hypot(Math.max(-hoja.x0, hoja.x0 + hoja.ancho), Math.max(-hoja.z0, hoja.z0 + hoja.alto)) + ciudad.U.uAnchoOla.value
 let arboles = null
+let datosCiudad = null // las partes de ciudad.pak, con la vida que dejan los hitos: el modo a pie choca con ellas
 cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array }).then((datos) => {
   // donde hay un hito modelado a mano, la casa genérica de ese lugar no nace (src/hitos/suprimir.js)
-  const g = geometriaCiudad({ ...datos, vida: suprimirTechos(datos, zonasDeSupresion(HITOS)) }, coords)
+  datosCiudad = { ...datos, vida: suprimirTechos(datos, zonasDeSupresion(HITOS)) }
+  const g = geometriaCiudad(datosCiudad, coords)
   olaMax = Math.max(olaMax, g.boundingSphere.center.length() + g.boundingSphere.radius + 400)
   const casas = new Mesh(g, ciudad.material)
   // las casas tiran sombra: desde el sol se dibujan con el mismo vértice (src/acabado.js)
@@ -386,6 +389,31 @@ const sueloEn = (x, z) => alturaSuelo(relieve, x, z,
   { ola: ciudad.U.uOla.value, anchoOla: ciudad.U.uAnchoOla.value, exageracion: relieveU.uExageracion.value })
 const cam = crearCamara(camera, renderer.domElement, { pedirCuadro, hoja, suelo: sueloEn })
 
+// --- a pie (T60): primera persona por las calles de la época; mientras dura, la cámara del mapa espera ---
+const botonCaminar = document.getElementById('caminar')
+const avisoModo = document.getElementById('modo')
+let callarAyuda = null
+const aPie = crearModoAPie({
+  camera, lienzo: renderer.domElement, cam, coords, suelo: sueloEn, pedirCuadro,
+  casas: () => datosCiudad, epoca: () => ciudad.U.uEpocaA.value,
+  alCambiar: (dentro) => {
+    document.body.classList.toggle('modo', dentro)
+    document.body.classList.toggle('modo-caminar', dentro)
+    botonCaminar.textContent = dentro ? 'Volver al mapa' : 'Caminar'
+    botonCaminar.setAttribute('aria-pressed', String(dentro))
+    avisoModo.hidden = !dentro
+    avisoModo.classList.remove('callado')
+    clearTimeout(callarAyuda)
+    // la ayuda del modo se calla a los 12 s (specs/05); el nombre del modo queda
+    if (dentro) callarAyuda = setTimeout(() => avisoModo.classList.add('callado'), 12000)
+  },
+})
+botonCaminar.addEventListener('click', () => {
+  if (aPie.activo) { aPie.salir(); return }
+  levantar(true)
+  if (!aPie.entrar()) botonCaminar.title = 'Las casas todavía no llegaron: prueba en un momento'
+})
+
 // --- las marcas (M): los nombres de los lugares, por época, en una capa de DOM sobre la vista (src/marcas.js) ---
 const sinAnimar = matchMedia('(prefers-reduced-motion: reduce)')
 const marcas = crearCapaMarcas({
@@ -432,7 +460,9 @@ const reloj = new Timer()
 renderer.setAnimationLoop((t) => {
   reloj.update(t)
   const dt = pasoDeCuadro(reloj.getDelta(), porSoftware)
-  if (cam.update(dt)) pedirCuadro(2)
+  if (aPie.activo) {
+    if (aPie.update(dt)) pedirCuadro(2)
+  } else if (cam.update(dt)) pedirCuadro(2)
   const { uOla, uColor } = ciudad.U
   if (uOla.value !== olaObjetivo) {
     uOla.value = acercar(uOla.value, olaObjetivo, (olaMax / DURACION_OLA_S) * dt)
@@ -456,8 +486,10 @@ renderer.setAnimationLoop((t) => {
   pendientes--
   buscador.dibujar() // el alfiler del buscador sigue a su punto del terreno
   if (teselas) {
-    const { px, py } = coords.aPixel(cam.now.x, cam.now.z)
-    teselas.update(px, py, cam.now.dist < DIST_TESELAS_M)
+    // a pie, las teselas finas son las de donde está el caminante
+    const foco = aPie.activo ? { ...aPie.estado, dist: 0 } : cam.now
+    const { px, py } = coords.aPixel(foco.x, foco.z)
+    teselas.update(px, py, foco.dist < DIST_TESELAS_M)
   }
   // las marcas primero: sus carteles tienen prioridad sobre los nombres de las calles
   const { uEpocaDe, uEpocaA, uAnchoOla } = ciudad.U
@@ -476,7 +508,7 @@ document.body.classList.add('listo')
 listo = true
 if (crecerPedido) verCrecer()
 window.lab = {
-  renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
+  renderer, scene, camera, cam, aPie, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
   get relieve() { return relieve },
   get teselas() { return teselas },
   get arboles() { return arboles },
