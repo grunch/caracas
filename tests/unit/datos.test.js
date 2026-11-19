@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { pendientes, verificarConteos } from '../../tools/datos-lib.mjs'
+import { pendientes, verificarConteos, publicosDelManifiesto } from '../../tools/datos-lib.mjs'
 
 const pasos = [
   { id: 'mosaico', entradas: ['hoja.tif'], salidas: ['mosaico.tif'] },
@@ -158,5 +158,22 @@ describe('resolverOriginales sin exigir', () => {
     const pasos = [{ id: 'a', entradas: ['original:x', 'original:y'], salidas: [] }]
     const [p] = resolverOriginales(pasos, { x: ['original.tif'] }, { exigir: false })
     expect(p.entradas).toEqual(['fuentes/mapas/x/original.tif', 'original:y'])
+  })
+})
+
+describe('publicosDelManifiesto', () => {
+  test('las salidas en public/ y las entradas opcionales en public/ que existen (el relieve), sin repetir', () => {
+    // Arrange
+    const pasosConOpcionales = [
+      { id: 'a', salidas: ['fuentes/x.json', 'public/datos/crece.json'], opcionales: ['public/datos/relieve.bin'] },
+      { id: 'b', salidas: ['public/datos/ciudad.pak'], opcionales: ['public/datos/relieve.bin', 'public/datos/no-hay.bin', 'fuentes/y.tif'] },
+    ]
+    const existe = (r) => r !== 'public/datos/no-hay.bin'
+
+    // Act
+    const publicos = publicosDelManifiesto(pasosConOpcionales, existe)
+
+    // Assert
+    expect(publicos).toEqual(['public/datos/crece.json', 'public/datos/ciudad.pak', 'public/datos/relieve.bin'])
   })
 })
