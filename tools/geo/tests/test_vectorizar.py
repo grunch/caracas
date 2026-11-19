@@ -297,3 +297,55 @@ def test_cuadras_pegadas_en_el_plano_se_reparten_cada_una_por_sus_lados():
     # tres cuadras: tres líneas de fachada mirando al este y tres al oeste (una por cuadra), todas rectas
     assert len(lineas) == 4
     assert len(lineas[(1.0, 0.0)]) == 3 and len(lineas[(-1.0, 0.0)]) == 3
+
+
+# --- las calles nuevas (tools/geo/calles_nuevas.py): la cuadra de antes, entera, y las de después ---
+
+def dos_manzanas_y_una_calle_nueva():
+    """Dos manzanas de 1936 (48 × 100 m) separadas por una calle de 8 m que en 1772 no existía."""
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:126] = CLASE['edificado']
+    c[30:230, 142:238] = CLASE['edificado']
+    nuevas = np.zeros(c.shape, bool)
+    nuevas[30:230, 126:142] = True
+    return c, nuevas
+
+
+def test_una_calle_nueva_da_la_cuadra_de_antes_entera_y_las_de_despues_partidas():
+    c, nuevas = dos_manzanas_y_una_calle_nueva()
+    res = vectorizar(c, METRO, plaza=(130, 130), calles_nuevas=nuevas)
+    assert len(res['junta']) == len(res['antes']) == len(res['techos'])
+    assert len(res['juntas']) == 1 and res['juntas'][0]
+    polis = poligonos(res)
+    calle = box(127, 60, 141, 200)
+    antes = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and a]
+    despues = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and not a]
+    assert antes and despues
+    assert sum(p.intersection(calle).area for p in antes) > 0.9 * calle.area      # antes, la calle era casas
+    assert sum(p.intersection(calle).area for p in despues) < 1                    # después, es calle
+    assert len({q for q, a in zip(res['cuadras'], res['antes']) if a}) == 1        # una sola cuadra antes
+    assert len({q for q, a in zip(res['cuadras'], res['antes']) if not a}) == 2    # dos después
+    assert res['manzanas'] == 2   # la cuadra de antes no se cuenta como otra manzana de 1936
+
+
+def test_una_calle_nueva_entre_cuadras_pegadas_une_solo_las_dos_cuadras_que_separa():
+    # tres cuadras que el plano une por un patio (una sola "manzana" de 1936) y una cuarta, del otro lado
+    # de una calle nueva: la cuadra de antes es la cuarta con su vecina, no toda la manzana
+    c = np.full((260, 540), CLASE['calle'], np.uint8)
+    for x0 in (30, 146, 262):
+        c[30:230, x0:x0 + 100] = CLASE['edificado']
+    c[60:68, 130:146] = CLASE['patio']
+    c[180:188, 246:262] = CLASE['patio']
+    c[30:230, 378:478] = CLASE['edificado']
+    nuevas = np.zeros(c.shape, bool)
+    nuevas[30:230, 362:378] = True
+    res = vectorizar(c, METRO, plaza=(270, 130), calles_nuevas=nuevas)
+    assert len(res['juntas']) == 1
+    polis = poligonos(res)
+    antes = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and a]
+    assert antes and min(p.bounds[0] for p in antes) > 250   # solo la tercera y la cuarta cuadra
+
+
+def test_sin_calles_nuevas_ningun_techo_tiene_junta():
+    res = vectorizar(manzana_maciza(), METRO, plaza=(140, 140))
+    assert set(res['junta']) == {-1} and set(res['antes']) == {0} and res['juntas'] == []

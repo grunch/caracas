@@ -50,6 +50,21 @@ def _cruce(p1, d1, p2, d2):
     return p1 + t * d1
 
 
+def _fundir_en_linea(rectas, tolerancia_px):
+    """Dos lados seguidos casi paralelos y casi en la misma línea (un diente chico los separaba) son uno solo."""
+    salida = list(rectas)
+    k = 0
+    while len(salida) > 1 and k < len(salida):
+        (p1, d1), (p2, d2) = salida[k - 1], salida[k]
+        paralelos = abs(d1[0] * d2[1] - d1[1] * d2[0]) < math.sin(ANGULO_MINIMO)
+        en_linea = abs((p2[0] - p1[0]) * -d1[1] + (p2[1] - p1[1]) * d1[0]) < 2 * tolerancia_px
+        if paralelos and en_linea:
+            salida.pop(k)
+        else:
+            k += 1
+    return salida
+
+
 def _poligono(manzana, metro):
     """Los vértices (n, 2) del borde simplificado, en píxeles (coordenadas continuas), o None.
 
@@ -64,6 +79,7 @@ def _poligono(manzana, metro):
     borde = contorno[:, 0, :].astype(float) + 0.5
     rectas = [_recta(borde, a, b, tolerancia) for a, b in zip(simple, np.roll(simple, -1, axis=0))
               if np.hypot(*(b - a)) * metro >= LADO_MINIMO_M]
+    rectas = _fundir_en_linea(rectas, tolerancia)
     if not 3 <= len(rectas) <= MAXIMO_DE_LADOS:
         return None
     vertices = [_cruce(*rectas[k - 1], *rectas[k]) for k in range(len(rectas))]

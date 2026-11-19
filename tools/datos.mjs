@@ -61,13 +61,27 @@ const PASOS = [
       '--clases', `${D}/segmentacion/mosaico/clases.png`],
   },
   {
-    id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`],
+    // lo abierto en 1936 (calles, pasajes, plazas) que el plano de 1772 tiene edificado: ahí la cuadra de 1772 va entera
+    id: 'calles-nuevas',
+    entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, 'fuentes/derivados/1772/calzado.tif',
+      'fuentes/derivados/1772/calzado.json', 'tools/geo/epocas/epocas.json'],
+    salidas: [`${D}/calles-nuevas.png`],
+    codigo: GEO('calles_nuevas', 'calce_correlacion', 'epocas'),
+    cmd: async () => {
+      const { metro } = await leerJson(`${D}/mosaico.json`)
+      return [PY, 'tools/geo/calles_nuevas.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/calles-nuevas.png`,
+        '--escala', String(metro)]
+    },
+  },
+  {
+    id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/calles-nuevas.png`],
     salidas: [`${D}/ciudad-1936.json`, `${D}/patios-de-casas.png`],
-    codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados'),
+    codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'calles_nuevas'),
     cmd: async () => {
       const { plaza, metro } = await leerJson(`${D}/mosaico.json`)
       return [PY, 'tools/geo/vectorizar.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/ciudad-1936.json`,
-        '--escala', String(metro), '--plaza', plaza.join(','), '--patios', `${D}/patios-de-casas.png`]
+        '--escala', String(metro), '--plaza', plaza.join(','), '--patios', `${D}/patios-de-casas.png`,
+        '--calles-nuevas', `${D}/calles-nuevas.png`]
     },
   },
   // --- la línea de tiempo: los planos viejos calzados sobre 1936, la ciudad de 1578 y las épocas ---
