@@ -93,6 +93,7 @@ export function crearVisorDePlano({ contenedor, indice, base, añoBase, liviano 
     const punteros = new Map()
     const enLienzo = (e) => { const r = lienzo.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top } }
     const separacion = () => { const [a, b] = [...punteros.values()]; return Math.hypot(a.x - b.x, a.y - b.y) }
+    const medio = () => { const [a, b] = [...punteros.values()]; return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 } }
     lienzo.addEventListener('pointerdown', (e) => {
       if (e.button !== 0) return
       punteros.set(e.pointerId, enLienzo(e))
@@ -107,10 +108,13 @@ export function crearVisorDePlano({ contenedor, indice, base, añoBase, liviano 
         punteros.set(e.pointerId, ahora)
         return poner(mover(estado, ahora.x - antes.x, ahora.y - antes.y))
       }
+      // el punto del plano que estaba entre los dos dedos sigue entre los dos dedos: se corre con ellos y se acerca ahí
       const d0 = separacion()
+      const medio0 = medio()
       punteros.set(e.pointerId, ahora)
-      const [a, b] = [...punteros.values()]
-      if (d0 > 0) acercar(separacion() / d0, { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 })
+      const medio1 = medio()
+      const corrido = mover(estado, medio1.x - medio0.x, medio1.y - medio0.y)
+      poner(d0 > 0 ? acercarEn(corrido, separacion() / d0, medio1, limites()) : corrido)
     })
     const soltar = (e) => {
       punteros.delete(e.pointerId)

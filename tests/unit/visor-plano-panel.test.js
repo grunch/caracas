@@ -207,6 +207,23 @@ describe('el panel del visor del plano de la época', () => {
     expect(visor.estado.k).toBe(k)
   })
 
+  test('al pellizcar, el punto del plano que estaba entre los dedos sigue entre los dedos aunque se corran', async () => {
+    const visor = crearVisor()
+    visor.elegir(EPOCA)
+    visor.abrir()
+    await cuadros()
+    const lienzo = parte('lienzo')
+    lienzo.emitir('pointerdown', { button: 0, pointerId: 1, clientX: 100, clientY: 400 })
+    lienzo.emitir('pointerdown', { button: 0, pointerId: 2, clientX: 300, clientY: 400 })
+    const enPlano = (x, y, e) => [(x - e.x) / e.k, (y - e.y) / e.k]
+    const antes = enPlano(200, 400, visor.estado) // el punto medio, en píxeles del plano
+    lienzo.emitir('pointermove', { pointerId: 2, clientX: 500, clientY: 400 }) // el medio pasa de x = 200 a x = 300
+    expect(visor.estado.k).toBeCloseTo(1) // de 200 px a 400 px de separación
+    const despues = enPlano(300, 400, visor.estado)
+    expect(despues[0]).toBeCloseTo(antes[0])
+    expect(despues[1]).toBeCloseTo(antes[1])
+  })
+
   test('× y un click en el telón lo cierran; abrirlo dos veces no arma otro', async () => {
     const visor = crearVisor()
     visor.elegir(EPOCA)
