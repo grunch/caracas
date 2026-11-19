@@ -39,7 +39,9 @@ las pinturas y fotos de época mandan sobre las reglas inventadas.
 ## Datos
 
 - Nunca se suben escaneos, mosaicos, `.pak`, `.bin`, `.webp` del plano ni otros binarios generados
-  (ver `.gitignore`); se regeneran con los comandos de `tools/geo/README.md`.
+  (ver `.gitignore`); se regeneran con los comandos de `tools/geo/README.md`. Viajan en un release
+  `datos-*` de GitHub: `npm run datos:bajar` los trae a un clon nuevo (y al build de Pages) y
+  `npm run datos:publicar` sube los regenerados. El sitio publicado usa siempre el release más nuevo.
 - Cada fuente conserva su licencia en su ficha: `fuentes/mapas/*/ficha.json` para los mapas y
   `fuentes/datos/*/ficha.json` para los demás datos (modelos de elevación, OpenStreetMap…). La decisión de publicar la toma el
   responsable del proyecto.

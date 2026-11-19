@@ -12,7 +12,9 @@
     "coverage": "vitest run --coverage",
     "e2e": "playwright test",
     "catalogo": "node tools/catalogo.mjs",
-    "datos": "node tools/datos.mjs"
+    "datos": "node tools/datos.mjs",
+    "datos:bajar": "node tools/paquete-datos.mjs bajar",
+    "datos:publicar": "node tools/paquete-datos.mjs publicar"
   },
   "dependencies": {
     "three": "^0.187.0"
