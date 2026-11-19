@@ -17,11 +17,11 @@ const VISTAS = {
   oblicua: { x: 100, z: 200, dist: 450, yaw: 0.6, pitch: 0.75 },
   cerca: { x: 80, z: 180, dist: 170, yaw: 0.5, pitch: 0.55 },
   barrio: { x: 0, z: 0, dist: 1500, yaw: 0.3, pitch: 0.7 },
-  // `ojo` y `mira` = [x, metros sobre el suelo, z]: la cámara a mano (la del visor no baja de 12 m)
-  calle: { ojo: [-175, 7, -81], mira: [-45, 3.5, -63] },
+  // lo más bajo que deja la cámara del visor (12 m sobre el suelo), a lo largo de una calle del centro
+  calle: { x: 60, z: -200, dist: 60, yaw: 0.05, pitch: 0.2 },
 }
 const CONTROL = [2, 5].flatMap((epoca) => ['tinta', 'color'].flatMap((modo) =>
-  Object.entries(VISTAS).map(([vista, v]) => ({ nombre: `${vista}-${epoca === 2 ? 1843 : 1936}-${modo}`, epoca, modo, ...(v.ojo ? v : { vista: v }) }))))
+  Object.entries(VISTAS).map(([nombre, vista]) => ({ nombre: `${nombre}-${epoca === 2 ? 1843 : 1936}-${modo}`, epoca, modo, vista }))))
 const MEDIDAS = ['tinta', 'color'].flatMap((modo) => [
   { nombre: `valle-${modo}`, epoca: 5, modo, vista: { x: 0, z: 0, dist: 7000, yaw: 0, pitch: 0.8 } },
   { nombre: `centro-${modo}`, epoca: 5, modo, vista: { x: 0, z: 0, dist: 1500, yaw: 0, pitch: 0.8 } },
@@ -82,7 +82,7 @@ const medir = (n) => pagina.evaluate((n) => {
 let epocaActual = null
 let modoActual = null
 const filtro = new RegExp(process.env.FILTRO ?? '')
-for (const { nombre, epoca, modo, vista, ojo, mira } of (MEDIR ? MEDIDAS : CONTROL).filter((t) => filtro.test(t.nombre))) {
+for (const { nombre, epoca, modo, vista } of (MEDIR ? MEDIDAS : CONTROL).filter((t) => filtro.test(t.nombre))) {
   if (modo !== modoActual) {
     await pagina.evaluate((c) => { window.lab.alternarColor(c); window.lab.ciudad.U.uColor.value = c ? 1 : 0 }, modo !== 'tinta')
     await pagina.waitForTimeout(modoActual === null ? 2500 : 300) // la primera vez, la máscara de suelo
@@ -95,28 +95,11 @@ for (const { nombre, epoca, modo, vista, ojo, mira } of (MEDIR ? MEDIDAS : CONTR
     await pagina.waitForTimeout(3500)
     epocaActual = epoca
   }
-  await pagina.evaluate((v) => {
-    if (window.camaraDelVisor) { window.lab.cam.update = window.camaraDelVisor; window.camaraDelVisor = null }
-    window.lab.cam.jump(v)
-    window.lab.pedirCuadro(4)
-  }, vista ?? { x: mira[0], z: mira[2], dist: 60, yaw: 0, pitch: 0.3 })
+  await pagina.evaluate((v) => { window.lab.cam.jump(v); window.lab.pedirCuadro(4) }, vista)
   await dosCuadros()
   await pagina.waitForTimeout(1500) // las teselas finas de cerca
   await pagina.evaluate(() => window.lab.pedirCuadro(4))
   await dosCuadros()
-  if (ojo) {
-    await pagina.waitForTimeout(400)
-    await pagina.evaluate(([o, m]) => {
-      const { camera, sueloEn, cam } = window.lab
-      // la cámara del visor se queda quieta: si no, el próximo cuadro (la ola sigue pidiendo) pisaría la de mano
-      window.camaraDelVisor = cam.update
-      cam.update = () => false
-      camera.position.set(o[0], sueloEn(o[0], o[2]) + o[1], o[2])
-      camera.lookAt(m[0], sueloEn(m[0], m[2]) + m[1], m[2])
-      camera.updateMatrixWorld()
-      window.dibujarCuadro()
-    }, [ojo, mira])
-  }
   if (!MEDIR) await pagina.screenshot({ path: `${carpeta}/${nombre}.png`, timeout: 150000 })
   const t = MEDIR ? await medir(CUADROS_MEDIDOS) : null
   console.log('toma', nombre, t ? `${t.mediana.toFixed(2)} ms/cuadro (p90 ${t.p90.toFixed(2)}) · ${t.sombras} mapas de sombras` : '')
