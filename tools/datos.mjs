@@ -71,6 +71,12 @@ const PASOS = [
     cmd: () => [PY, 'tools/geo/calce.py', carpeta],
   })),
   {
+    // la única descarga del pipeline: solo si falta la caché (o con --descargar); sin código propio,
+    // así un cambio en hoy.py no vuelve a pedirle a Overpass (vectorizar corta con sus calles las manzanas unidas por un jardín)
+    id: 'hoy-osm', entradas: [], salidas: [OSM_HOY], codigo: [],
+    cmd: () => [PY, 'tools/geo/hoy.py', '--solo-descargar', '--osm', OSM_HOY, ...(DESCARGAR ? ['--descargar'] : [])],
+  },
+  {
     // lo abierto en 1936 (calles, pasajes, plazas) que el plano de 1772 tiene edificado: ahí la cuadra de 1772 va entera
     id: 'calles-nuevas',
     entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, 'fuentes/derivados/1772/calzado.tif',
@@ -84,14 +90,14 @@ const PASOS = [
     },
   },
   {
-    id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/calles-nuevas.png`],
+    id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/calles-nuevas.png`, OSM_HOY, 'tools/geo/gcp/1936-wgs84.json'],
     salidas: [`${D}/ciudad-1936.json`, `${D}/patios-de-casas.png`],
-    codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'calles_nuevas'),
+    codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'calles_nuevas', 'hoy_osm', 'geo1936'),
     cmd: async () => {
       const { plaza, metro } = await leerJson(`${D}/mosaico.json`)
       return [PY, 'tools/geo/vectorizar.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/ciudad-1936.json`,
         '--escala', String(metro), '--plaza', plaza.join(','), '--patios', `${D}/patios-de-casas.png`,
-        '--calles-nuevas', `${D}/calles-nuevas.png`]
+        '--calles-nuevas', `${D}/calles-nuevas.png`, '--osm', OSM_HOY]
     },
   },
   // --- la línea de tiempo: la ciudad de 1578 y las épocas (los calces van antes, después de la costura) ---
@@ -186,12 +192,6 @@ const PASOS = [
     entradas: CALCES.flatMap(([año]) => ['tif', 'json'].map((x) => `fuentes/derivados/${año}/calzado.${x}`)),
     codigo: ['tools/planos-epocas.mjs', 'tools/planos-epocas-lib.mjs'],
     cmd: () => ['node', 'tools/planos-epocas.mjs'],
-  },
-  {
-    // la única descarga del pipeline: solo si falta la caché (o con --descargar); sin código propio,
-    // así un cambio en hoy.py no vuelve a pedirle a Overpass
-    id: 'hoy-osm', entradas: [], salidas: [OSM_HOY], codigo: [],
-    cmd: () => [PY, 'tools/geo/hoy.py', '--solo-descargar', '--osm', OSM_HOY, ...(DESCARGAR ? ['--descargar'] : [])],
   },
   {
     id: 'hoy', entradas: [OSM_HOY, `${D}/mosaico.json`, 'tools/geo/gcp/1936-wgs84.json'],

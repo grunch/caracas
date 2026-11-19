@@ -16,7 +16,7 @@ Sitio estático que levanta en 3D la Caracas de un plano antiguo (base candidata
 ## Comandos
 `npm run dev` · `npm test` · `npm run coverage` · `npm run e2e` · `npm run build` · `npm run catalogo` · `npm run datos` · `npm run datos:bajar` · `npm run datos:publicar`
 
-Un clon nuevo no trae los datos generados (`public/datos`, `public/plano`, `public/fotos`): sin ellos el sitio no encuentra el plano. `npm run datos:bajar` los baja del release `datos-*` más nuevo y los verifica contra `manifiesto.json`. Quien los regenera (`npm run datos`, desde los escaneos originales) los sube con `npm run datos:publicar` (`gh`). El workflow `pages.yml` hace lo mismo y publica en GitHub Pages en cada push a `main`.
+Un clon nuevo no trae los datos generados (`public/datos`, `public/plano`, `public/fotos`): sin ellos el sitio no encuentra el plano. `npm run datos:bajar` los baja del release `datos-*` más nuevo y los verifica contra `manifiesto.json`; con `-- --muestra` baja solo la muestra (1 km² alrededor de la plaza, `tools/muestra.mjs`), que es lo que usan los E2E del CI. Quien los regenera (`npm run datos`, desde los escaneos originales) los sube con `npm run datos:publicar` (`gh`). El workflow `pages.yml` hace lo mismo y publica en GitHub Pages en cada push a `main`.
 
 ## Convenciones
 - Todo en español: identificadores, comentarios, UI. Copy en **tuteo venezolano** ("arrastra", "toca", "aquí").
