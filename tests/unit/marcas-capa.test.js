@@ -26,8 +26,8 @@ function elementoFalso(etiqueta) {
     emitir(tipo) { oyentes[tipo]?.({}) },
     matches: (sel) => sel === ':focus-visible' && e.enfocado,
     // el cartel mide según su texto: 7 px por letra
-    get offsetWidth() { return 16 + 7 * (e.hijos[0]?.textContent.length ?? 0) },
-    offsetHeight: 22,
+    get offsetWidth() { return e.medidaAbierta?.ancho ?? 16 + 7 * (e.hijos[0]?.textContent.length ?? 0) },
+    get offsetHeight() { return e.medidaAbierta?.alto ?? 22 },
   }
   return e
 }
@@ -139,6 +139,18 @@ describe('la capa de marcas', () => {
     expect(capa.abierta).toBe(null)
     expect(avisos.abiertas).toEqual(['plaza', 'teatro', 'teatro'])
     expect(capa.abrir('no-existe')).toBe(false)
+  })
+
+  test('la caja de una marca abierta es la de su cartel abierto (con la nota), y es la que se reserva', () => {
+    // Arrange: en 1772 la plaza tiene nota
+    const [cerrada] = dibujar(1)
+    botonDe('plaza').emitir('click')
+    botonDe('plaza').medidaAbierta = { ancho: 240, alto: 58 }
+    // Act
+    const [abierta] = dibujar(1)
+    // Assert
+    expect(cerrada.x1 - cerrada.x0).toBe(16 + 7 * 'Plaza Mayor'.length)
+    expect([abierta.x1 - abierta.x0, abierta.y1 - abierta.y0]).toEqual([240, 58])
   })
 
   test('una marca abierta o con el mouse encima que deja de verse suelta su estado', () => {

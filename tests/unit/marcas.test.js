@@ -205,6 +205,11 @@ describe('cajas y despeje', () => {
     expect(despejar(conGrande, { previas: new Set(['b']) }).map((x) => x.id)).toEqual(['a'])
   })
 
+  test('la marca abierta va primero, sea del nivel que sea: su cartel con la nota no se tapa', () => {
+    const c = [candidata('grande', 100, 100, { nivel: 1 }), candidata('abierta', 110, 100, { nivel: 3 })]
+    expect(despejar(c, { primera: 'abierta' }).map((x) => x.id)).toEqual(['abierta'])
+  })
+
   test('no modifica la lista de candidatas', () => {
     const c = Object.freeze([candidata('b', 110, 100, { nivel: 3 }), candidata('a', 100, 100, { nivel: 1 })])
     despejar(c)
@@ -258,6 +263,17 @@ describe('calcularMarcas', () => {
     const r = calcularMarcas(marcas, { ...base, medir: () => ({ ancho: 600, alto: 20 }) })
     expect(r.visibles.map((v) => v.id)).toEqual(['plaza'])
     expect(r.visibles[0].caja).toEqual(cajaDe(r.visibles[0], { ancho: 600, alto: 20 }))
+  })
+
+  test('la marca abierta se mide abierta (con su nota) y desplaza a las que su cartel tapa', () => {
+    // Arrange: cerrados, los tres carteles de 60 px entran; abierto, el de la esquina mide 400 px
+    const medir = (nombre, nivel, abierta) => (abierta ? { ancho: 400, alto: 60 } : { ancho: 60, alto: 20 })
+    // Act
+    const r = calcularMarcas(marcas, { ...base, medir, abierta: 'esquina' })
+    // Assert: queda ella, con su caja grande, y el teatro (lejos); la plaza, aunque es de nivel 1, cede
+    const esquina = r.visibles.find((v) => v.id === 'esquina')
+    expect(esquina.caja.x1 - esquina.caja.x0).toBeCloseTo(400)
+    expect(r.visibles.map((v) => v.id).sort()).toEqual(['esquina', 'teatro'])
   })
 
   test('recuerda el nivel anterior (histéresis) y las marcas que ya estaban', () => {

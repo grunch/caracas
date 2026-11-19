@@ -125,11 +125,12 @@ export function seTapan(a, b, margen = MARGEN_PX) {
 
 /**
  * Despeje voraz: entran primero las de más nivel; a igual nivel, las que ya estaban puestas (`previas`, para
- * que nada parpadee al mover la cámara) y después el orden de la lista. Devuelve las que quedan.
+ * que nada parpadee al mover la cámara) y después el orden de la lista. `primera` (la marca abierta, con su
+ * nota a la vista) entra antes que todas. Devuelve las que quedan.
  */
-export function despejar(candidatas, { previas = new Set(), margen = MARGEN_PX } = {}) {
-  const orden = candidatas.map((c, i) => ({ c, i })).sort((a, b) => a.c.nivel - b.c.nivel
-    || Number(previas.has(b.c.id)) - Number(previas.has(a.c.id)) || a.i - b.i)
+export function despejar(candidatas, { previas = new Set(), margen = MARGEN_PX, primera = null } = {}) {
+  const orden = candidatas.map((c, i) => ({ c, i })).sort((a, b) => Number(b.c.id === primera) - Number(a.c.id === primera)
+    || a.c.nivel - b.c.nivel || Number(previas.has(b.c.id)) - Number(previas.has(a.c.id)) || a.i - b.i)
   const puestas = []
   for (const { c } of orden) if (!puestas.some((p) => seTapan(p, c, margen))) puestas.push(c)
   return puestas
@@ -140,10 +141,11 @@ export function despejar(candidatas, { previas = new Set(), margen = MARGEN_PX }
  *  - `epoca`: { de, a, ola, ancho } como los uniforms de la ola de época (src/epocas.js `epocaAqui`)
  *  - `matriz`: proyección × vista de la cámara; `vista`: { ancho, alto } en píxeles CSS
  *  - `altura(x, z)`: el suelo tal como se dibuja; `sube(distPlaza)`: cuánto se levantó la ciudad ahí (0–1)
- *  - `medir(nombre, nivel)`: { ancho, alto } del cartel; `previas` / `nivelPrevio`: lo del cuadro anterior
+ *  - `medir(nombre, nivel, abierta)`: { ancho, alto } del cartel; `previas` / `nivelPrevio`: lo del cuadro anterior
+ *  - `abierta`: id de la marca abierta (su cartel es más grande, con la nota, y tiene prioridad sobre todos)
  */
 export function calcularMarcas(marcas, {
-  epoca, matriz, vista, dist, medir, altura = () => 0, sube = () => 1, previas = new Set(), nivelPrevio = null,
+  epoca, matriz, vista, dist, medir, altura = () => 0, sube = () => 1, previas = new Set(), nivelPrevio = null, abierta = null,
 }) {
   const nivel = nivelPorDistancia(dist, nivelPrevio)
   const candidatas = []
@@ -158,7 +160,7 @@ export function calcularMarcas(marcas, {
     const p = aPantalla(matriz, marca.x, y3, marca.z, vista.ancho, vista.alto)
     if (!p.visible) continue
     const punto = { x: p.x, y: p.y }
-    candidatas.push({ id: marca.id, marca, nivel: marca.nivel, nombre: rige.nombre, nota: rige.nota, ...punto, opacidad, caja: cajaDe(punto, medir(rige.nombre, marca.nivel)) })
+    candidatas.push({ id: marca.id, marca, nivel: marca.nivel, nombre: rige.nombre, nota: rige.nota, ...punto, opacidad, caja: cajaDe(punto, medir(rige.nombre, marca.nivel, marca.id === abierta)) })
   }
-  return { nivel, visibles: despejar(candidatas, { previas }) }
+  return { nivel, visibles: despejar(candidatas, { previas, primera: abierta }) }
 }

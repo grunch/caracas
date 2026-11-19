@@ -28,7 +28,10 @@ export function crearCapaMarcas({ contenedor, marcas, tamaño, altura = () => 0,
   })
   const estado = { visibles: [], nivel: null, prendida: true, sobre: null, abierta: null }
 
-  function medir(nombre, nivel) {
+  /** El cartel cerrado se mide en la regla (una vez por nombre); el abierto, con su nota, en el propio botón. */
+  function medir(nombre, nivel, abierta) {
+    const boton = abierta ? elementos.get(estado.abierta?.id)?.boton : null
+    if (boton?.offsetWidth > 0) return { ancho: boton.offsetWidth, alto: boton.offsetHeight }
     const clave = `${nivel}|${nombre}`
     let m = medidas.get(clave)
     if (!m) {
@@ -91,7 +94,7 @@ export function crearCapaMarcas({ contenedor, marcas, tamaño, altura = () => 0,
     matriz.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse)
     const previas = new Set(estado.visibles.map((v) => v.id))
     const { nivel, visibles } = calcularMarcas(marcas, {
-      epoca, matriz: matriz.elements, vista: tamaño(), dist, medir, altura, sube, previas, nivelPrevio: estado.nivel,
+      epoca, matriz: matriz.elements, vista: tamaño(), dist, medir, altura, sube, previas, nivelPrevio: estado.nivel, abierta: estado.abierta?.id ?? null,
     })
     const ahora = new Set()
     for (const v of visibles) {
