@@ -33,6 +33,7 @@ import { debeMostrarIntro, recordarIntro } from './intro.js'
 import { accionDeTecla, movimientoDeTecla } from './controles.js'
 import { esLiviano, proporcionDePixeles } from './calidad.js'
 import { crearModoAPie } from './a-pie-modo.js'
+import { crearModoVolar } from './volar-modo.js'
 
 const params = new URLSearchParams(location.search)
 const COLOR_FONDO = 0x1d1a17
@@ -389,30 +390,51 @@ const sueloEn = (x, z) => alturaSuelo(relieve, x, z,
   { ola: ciudad.U.uOla.value, anchoOla: ciudad.U.uAnchoOla.value, exageracion: relieveU.uExageracion.value })
 const cam = crearCamara(camera, renderer.domElement, { pedirCuadro, hoja, suelo: sueloEn })
 
-// --- a pie (T60): primera persona por las calles de la época; mientras dura, la cámara del mapa espera ---
-const botonCaminar = document.getElementById('caminar')
+// --- los modos de recorrido: a pie (T60) y en avión (T61); mientras duran, la cámara del mapa espera ---
 const avisoModo = document.getElementById('modo')
+const TEXTO_MODO = Object.freeze({
+  caminar: { boton: 'Caminar', titulo: 'A pie', raton: 'WASD o flechas para caminar, Mayús para correr, arrastra para mirar. Esc vuelve al mapa.', dedos: 'El dedo de la izquierda camina; el de la derecha mira.' },
+  volar: { boton: 'Volar', titulo: 'En avión', raton: 'A y D giran, W y S suben y bajan, Mayús acelera, Q y E cambian el año. Esc aterriza.', dedos: 'Un dedo gira y sube o baja.' },
+})
 let callarAyuda = null
+/** Lo común a los dos modos al entrar o salir: clases del body, botones y el cartel (su ayuda se calla a los 12 s). */
+function cambioDeModo(nombre, dentro) {
+  document.body.classList.toggle('modo', dentro)
+  document.body.classList.toggle(`modo-${nombre}`, dentro)
+  const boton = document.getElementById(nombre)
+  boton.textContent = dentro ? 'Volver al mapa' : TEXTO_MODO[nombre].boton
+  boton.setAttribute('aria-pressed', String(dentro))
+  avisoModo.hidden = !dentro
+  avisoModo.classList.remove('callado')
+  clearTimeout(callarAyuda)
+  if (!dentro) return
+  const t = TEXTO_MODO[nombre]
+  avisoModo.querySelector('.titulo').textContent = t.titulo
+  avisoModo.querySelector('.raton').textContent = t.raton
+  avisoModo.querySelector('.dedos').textContent = t.dedos
+  callarAyuda = setTimeout(() => avisoModo.classList.add('callado'), 12000)
+}
 const aPie = crearModoAPie({
   camera, lienzo: renderer.domElement, cam, coords, suelo: sueloEn, pedirCuadro,
-  casas: () => datosCiudad, epoca: () => ciudad.U.uEpocaA.value,
-  alCambiar: (dentro) => {
-    document.body.classList.toggle('modo', dentro)
-    document.body.classList.toggle('modo-caminar', dentro)
-    botonCaminar.textContent = dentro ? 'Volver al mapa' : 'Caminar'
-    botonCaminar.setAttribute('aria-pressed', String(dentro))
-    avisoModo.hidden = !dentro
-    avisoModo.classList.remove('callado')
-    clearTimeout(callarAyuda)
-    // la ayuda del modo se calla a los 12 s (specs/05); el nombre del modo queda
-    if (dentro) callarAyuda = setTimeout(() => avisoModo.classList.add('callado'), 12000)
-  },
+  casas: () => datosCiudad, epoca: () => ciudad.U.uEpocaA.value, alCambiar: (dentro) => cambioDeModo('caminar', dentro),
 })
-botonCaminar.addEventListener('click', () => {
+const enAvion = crearModoVolar({
+  camera, lienzo: renderer.domElement, cam, escena: scene, suelo: sueloEn, hoja, pedirCuadro,
+  cambiarEpoca: (d) => lineaDeTiempo?.elegir(lineaDeTiempo.actual + d), alCambiar: (dentro) => cambioDeModo('volar', dentro),
+})
+document.getElementById('caminar').addEventListener('click', (e) => {
   if (aPie.activo) { aPie.salir(); return }
+  enAvion.salir()
   levantar(true)
-  if (!aPie.entrar()) botonCaminar.title = 'Las casas todavía no llegaron: prueba en un momento'
+  if (!aPie.entrar()) e.currentTarget.title = 'Las casas todavía no llegaron: prueba en un momento'
 })
+document.getElementById('volar').addEventListener('click', () => {
+  if (enAvion.activo) { enAvion.salir(); return }
+  aPie.salir()
+  levantar(true)
+  enAvion.entrar()
+})
+let alturaMostrada = null
 
 // --- las marcas (M): los nombres de los lugares, por época, en una capa de DOM sobre la vista (src/marcas.js) ---
 const sinAnimar = matchMedia('(prefers-reduced-motion: reduce)')
@@ -462,6 +484,11 @@ renderer.setAnimationLoop((t) => {
   const dt = pasoDeCuadro(reloj.getDelta(), porSoftware)
   if (aPie.activo) {
     if (aPie.update(dt)) pedirCuadro(2)
+  } else if (enAvion.activo) {
+    if (enAvion.update(dt)) pedirCuadro(2)
+    // la altura en el cartel, de a 10 m (no cada cuadro: es una región que se anuncia)
+    const altura = Math.round(enAvion.altura / 10) * 10
+    if (altura !== alturaMostrada) avisoModo.querySelector('.titulo').textContent = `En avión · ${(alturaMostrada = altura)} m sobre el suelo`
   } else if (cam.update(dt)) pedirCuadro(2)
   const { uOla, uColor } = ciudad.U
   if (uOla.value !== olaObjetivo) {
@@ -487,7 +514,7 @@ renderer.setAnimationLoop((t) => {
   buscador.dibujar() // el alfiler del buscador sigue a su punto del terreno
   if (teselas) {
     // a pie, las teselas finas son las de donde está el caminante
-    const foco = aPie.activo ? { ...aPie.estado, dist: 0 } : cam.now
+    const foco = aPie.activo ? { ...aPie.estado, dist: 0 } : enAvion.activo ? { ...enAvion.estado, dist: enAvion.altura } : cam.now
     const { px, py } = coords.aPixel(foco.x, foco.z)
     teselas.update(px, py, foco.dist < DIST_TESELAS_M)
   }
@@ -508,7 +535,7 @@ document.body.classList.add('listo')
 listo = true
 if (crecerPedido) verCrecer()
 window.lab = {
-  renderer, scene, camera, cam, aPie, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
+  renderer, scene, camera, cam, aPie, enAvion, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
   get relieve() { return relieve },
   get teselas() { return teselas },
   get arboles() { return arboles },
