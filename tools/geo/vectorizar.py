@@ -324,11 +324,12 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, calles_nuevas=None, cal
         salida['manzanas'] += int((manzana & (clases[y:y + h, x:x + w] == CLASE['edificado'])).sum() >= area_min_px)
         libre = ~np.isin(clases[y:y + h, x:x + w], (CLASE['edificado'], CLASE['publico']))
         partes = _cuadras_de(manzana, metro, cuadra_modelo, None if calles_hoy is None else calles_hoy[y:y + h, x:x + w], libre)
+        # lo que el corte por la calle de hoy deja fuera de las partes no conserva el número de la manzana entera
+        cuadras[y:y + h, x:x + w][manzana] = 0
         for parte, (dx, dy) in partes:
             etiqueta = k if len(partes) == 1 else n + len(cajas)
             ph, pw = parte.shape
-            if len(partes) > 1:
-                cuadras[y + dy:y + dy + ph, x + dx:x + dx + pw][parte] = etiqueta
+            cuadras[y + dy:y + dy + ph, x + dx:x + dx + pw][parte] = etiqueta
             cajas[etiqueta] = (x + dx, y + dy, pw, ph)
             lista.append((etiqueta, parte))
     grupos = grupos_de_manzanas(cuadras, calles_nuevas) if calles_nuevas is not None and cuadra_modelo else []

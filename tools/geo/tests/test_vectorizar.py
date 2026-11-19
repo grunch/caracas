@@ -423,6 +423,20 @@ def test_dos_cuadras_unidas_por_una_calle_pintada_de_jardin_se_cortan_por_la_cal
     assert sum(p.intersection(box(137, 40, 143, 220)).area for p in polis) < 20   # nada sobre la calle
 
 
+def test_lo_que_corta_la_calle_de_hoy_no_queda_con_el_numero_de_la_manzana_entera():
+    # la misma manzana cortada por la calle de hoy, y una calle nueva que la cruza por arriba: el jardín que
+    # se lleva el corte no puede seguir con el número de la manzana entera (no tiene caja y rompía los grupos)
+    c = np.full((260, 300), CLASE['calle'], np.uint8)
+    c[30:230, 30:250] = CLASE['edificado']
+    c[30:230, 130:150] = CLASE['verde']
+    calles_hoy = np.zeros(c.shape, bool)
+    calles_hoy[:, 137:143] = True
+    calles_nuevas = np.zeros(c.shape, bool)
+    calles_nuevas[14:30, 30:250] = True
+    res = vectorizar(c, METRO, plaza=(140, 130), calles_nuevas=calles_nuevas, calles_hoy=calles_hoy)
+    assert res['manzanas'] == 1
+
+
 def test_calles_de_osm_se_dibujan_en_la_mascara_del_mosaico():
     from tools.geo.vectorizar import mascara_de_calles
     elems = [{'capa': 'calle', 'area': False, 'lineas': [np.array([[10.0, 50.0], [190.0, 50.0]])]},

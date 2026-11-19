@@ -90,7 +90,7 @@ const PASOS = [
     },
   },
   {
-    id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/calles-nuevas.png`, OSM_HOY],
+    id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/calles-nuevas.png`, OSM_HOY, 'tools/geo/gcp/1936-wgs84.json'],
     salidas: [`${D}/ciudad-1936.json`, `${D}/patios-de-casas.png`],
     codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'calles_nuevas', 'hoy_osm', 'geo1936'),
     cmd: async () => {
