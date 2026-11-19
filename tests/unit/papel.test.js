@@ -52,14 +52,15 @@ describe('el papel antes de la ciudad: la hoja en tinta de cada época', () => {
 
   test('dentro de la ciudad, antes de 1936, la hoja va sin rótulos; en el campo, papel en blanco', () => {
     const fn = cuerpo('papelDeEpoca')
-    expect(fn).toContain('vec3 ciudad = sinRotulos(hoja, papel, rotulo, s.a, px);')
+    expect(fn).toContain('vec3 ciudad = lineas > 0.0 ? sinRotulos(hoja, papel, rotulo, s.a, px) : papel;') // fuera de la ciudad no se rellena nada
+    expect(fn).toContain('if (tinte >= 1.0) return mix(ciudad, papel, talCual);') // y adentro no se graba el valle
     expect(fn).toContain('vec3 c3 = mix(blanco, ciudad, tinte);')
     expect(GLSL_PAPEL).toMatch(/const vec3 PAPEL_EN_BLANCO = vec3\(0\.9\d+, 0\.9\d+, 0\.[78]\d+\);/) // claro, apenas tibio
   })
 
   test('el borde no es la línea de la máscara: tiembla y se va en dos tiempos (primero el tinte, después las líneas)', () => {
     const fn = cuerpo('papelDeEpoca')
-    expect(fn).toMatch(/float c = urbano \+ 0\.3 \* pulso;/)
+    expect(fn).toMatch(/if \(urbano > 0\.02 && urbano < 0\.98\) c \+= 0\.3 \* \(0\.6 \* ruidoValle\(m \/ 34\.0\) \+ 0\.4 \* ruidoValle\(m \/ 8\.0\) - 0\.5\);/)
     const [, t0, t1, l0, l1] = fn.match(/tinte = smoothstep\(([\d.]+), ([\d.]+), c\), lineas = smoothstep\(([\d.]+), ([\d.]+), c\)/).map(Number)
     expect(l0).toBeLessThan(t0)
     expect(l1).toBeLessThanOrEqual(t0)

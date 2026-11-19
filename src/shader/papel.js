@@ -161,13 +161,15 @@ export const GLSL_PAPEL = /* glsl */ `
     float talCual = max(smoothstep(4.5, 5.0, epoca), planoViejo);
     if (talCual >= 1.0) return papel;
     vec2 m = vMundo.xz;
-    // el borde de la ciudad, a pulso
-    float pulso = 0.6 * ruidoValle(m / 34.0) + 0.4 * ruidoValle(m / 8.0) - 0.5;
-    float c = urbano + 0.3 * pulso;
+    // el borde de la ciudad, a pulso (el temblor solo se calcula cerca del borde)
+    float c = urbano;
+    if (urbano > 0.02 && urbano < 0.98) c += 0.3 * (0.6 * ruidoValle(m / 34.0) + 0.4 * ruidoValle(m / 8.0) - 0.5);
     float tinte = smoothstep(0.42, 0.62, c), lineas = smoothstep(0.22, 0.42, c);
-    vec3 ciudad = sinRotulos(hoja, papel, rotulo, s.a, px);
+    // la ciudad: el plano sin sus rótulos (fuera de ella no se rellena nada)
+    vec3 ciudad = lineas > 0.0 ? sinRotulos(hoja, papel, rotulo, s.a, px) : papel;
+    if (tinte >= 1.0) return mix(ciudad, papel, talCual);
     // el papel en blanco, apenas manchado, con el valle a pluma
-    vec3 blanco = PAPEL_EN_BLANCO * (0.975 + 0.05 * (0.6 * ruidoValle(m / 700.0) + 0.4 * ruidoValle(m / 95.0)));
+    vec3 blanco = PAPEL_EN_BLANCO * (0.975 + 0.05 * ruidoValle(m / 240.0));
     float galeria = smoothstep(0.03, 0.3, ribera) * (1.0 - smoothstep(0.3, 0.6, s.r));
     float seco = 1.0 - smoothstep(0.1, 0.4, max(s.r, ribera));
     float pluma = max(max(0.8 * aguasEn(s.r, ribera, wRibera), matasEn(m, galeria, px)), seco * max(0.8 * laderasEn(m, vTerreno.x, vPendiente, px), pajonalEn(m, vTerreno.y, px)));
