@@ -221,5 +221,10 @@ test('en pantalla angosta la caja no se sale ni pisa los años', async () => {
   expect(caja.x).toBeGreaterThanOrEqual(0)
   expect(caja.x + caja.width).toBeLessThanOrEqual(640)
   const años = page.locator('#epocas')
-  if (await años.isVisible()) expect((await años.boundingBox()).y).toBeGreaterThanOrEqual(caja.y + caja.height)
+  if (!(await años.isVisible())) return
+  // de pie, los años van debajo de la caja; con poco alto (640 × 480 es «teléfono acostado», T70), al lado:
+  // en los dos casos, sin encimarse
+  const a = await años.boundingBox()
+  const seEnciman = a.x < caja.x + caja.width && caja.x < a.x + a.width && a.y < caja.y + caja.height && caja.y < a.y + a.height
+  expect(seEnciman).toBe(false)
 })
