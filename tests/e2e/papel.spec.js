@@ -31,9 +31,11 @@ async function abrir(page, { urbano }) {
 async function tintaEn(page, epoca) {
   await page.evaluate((k) => window.lab.lineaDeTiempo.elegir(k), epoca)
   await page.waitForFunction((k) => window.lab.ciudad.U.uEpocaA.value === k, epoca)
+  // casi al final: el bucle la termina en el cuadro que sigue y avisa a la secuencia (si no, la próxima época esperaría)
+  await page.evaluate(() => { window.lab.ciudad.U.uOlaEpoca.value = 8999; window.lab.pedirCuadro(3) })
+  await page.waitForFunction(() => window.lab.ciudad.U.uOlaEpoca.value >= 9000)
   return page.evaluate(async () => {
-    const { ciudad: { U }, cam, coords: { hoja }, pedirCuadro, renderer, acabado } = window.lab
-    U.uOlaEpoca.value = 9000
+    const { cam, coords: { hoja }, pedirCuadro, renderer, acabado } = window.lab
     // el centro de la hoja: ahí la cuadrícula provisoria lleva su leyenda, y cualquier plano, dibujo
     cam.jump({ x: hoja.x0 + hoja.ancho / 2, z: hoja.z0 + hoja.alto / 2, dist: 700, yaw: 0, pitch: 1.5 })
     pedirCuadro(4)

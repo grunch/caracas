@@ -103,17 +103,17 @@ for (const i of epocas) {
   }
 }
 
-// la ola a medio camino: de 1772 a 1889, con el frente a 700 m de la plaza
+// la ola a medio camino: de 1772 a 1911, con el frente a 900 m de la plaza
 await elegir(1)
-await pagina.evaluate((v) => window.lab.cam.jump(v), VISTAS.medio ?? Object.values(VISTAS)[0])
+await pagina.evaluate((v) => window.lab.cam.jump(v), { x: 0, z: 200, dist: 4200, yaw: 0, pitch: 0.9 })
 await pagina.evaluate(() => {
-  // el frente se congela a 700 m: el bucle de dibujo no puede avanzarlo
+  // el frente se congela: el bucle de dibujo no puede avanzarlo
   const { U } = window.lab.ciudad
   U.uEpocaDe.value = 1
-  U.uEpocaA.value = 3
-  Object.defineProperty(U.uOlaEpoca, 'value', { get: () => 700, set: () => {}, configurable: true })
+  U.uEpocaA.value = 4
+  Object.defineProperty(U.uOlaEpoca, 'value', { get: () => 900, set: () => {}, configurable: true })
 })
-await foto('ola-1772-a-1889')
+await foto('ola-1772-a-1911')
 await pagina.evaluate(() => {
   const { U } = window.lab.ciudad
   Object.defineProperty(U.uOlaEpoca, 'value', { value: 9000, writable: true, configurable: true })
