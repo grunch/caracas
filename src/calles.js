@@ -109,7 +109,17 @@ export function celdasEtiqueta({ cx, cy, angulo, ancho, alto }, celda, w, h) {
   return [...res]
 }
 
-/** Ocupación de la pantalla: `ocupar(celdas)` las toma solo si todas están libres. */
+/** Celdas de `celda` px que toca una caja recta { x0, y0, x1, y1 }, recortada a la pantalla (puede dar ninguna). */
+export function celdasCaja({ x0, y0, x1, y1 }, celda, w, h) {
+  const cols = Math.ceil(w / celda)
+  const res = []
+  const [c0, c1] = [Math.max(0, Math.floor(x0 / celda)), Math.min(cols - 1, Math.floor(x1 / celda))]
+  const [f0, f1] = [Math.max(0, Math.floor(y0 / celda)), Math.min(Math.ceil(h / celda) - 1, Math.floor(y1 / celda))]
+  for (let f = f0; f <= f1; f++) for (let c = c0; c <= c1; c++) res.push(f * cols + c)
+  return res
+}
+
+/** Ocupación de la pantalla: `ocupar(celdas)` las toma solo si todas están libres; `reservar`, sin preguntar. */
 export function crearGrilla(w, h, celda = CELDA_COLISION_PX) {
   const ocupadas = new Uint8Array(Math.ceil(w / celda) * Math.ceil(h / celda))
   return {
@@ -118,6 +128,7 @@ export function crearGrilla(w, h, celda = CELDA_COLISION_PX) {
       for (const k of celdas) ocupadas[k] = 1
       return true
     },
+    reservar(celdas) { for (const k of celdas) ocupadas[k] = 1 },
     vaciar() { ocupadas.fill(0) },
   }
 }
@@ -146,7 +157,9 @@ export function opacidadPorDistancia(d, { min, max, borde }) {
 }
 
 /**
- * El dibujante: `dibujar({camera, dist, x, z, opacidad})` devuelve cuántas etiquetas puso.
+ * El dibujante: `dibujar({camera, dist, x, z, opacidad, ocupados})` devuelve cuántas etiquetas puso.
+ * `ocupados` son cajas { x0, y0, x1, y1 } en píxeles de la vista que ya tienen dueño (los carteles de las
+ * marcas, src/marcas.js): ahí no se escribe ninguna calle.
  * `tamaño()` da el tamaño CSS de la vista y el devicePixelRatio; `altura(x, z)`, el suelo tal como se dibuja.
  */
 export function crearRotulos({ lienzo, indice, tamaño, altura = () => 0, fuentePx = FUENTE_PX, banda = BANDA }) {
@@ -195,13 +208,14 @@ export function crearRotulos({ lienzo, indice, tamaño, altura = () => 0, fuente
     return { cx: pm.x, cy: pm.y, angulo: anguloLegible(sx, sy) }
   }
 
-  function dibujar({ camera, dist, x, z, opacidad = 1 }) {
+  function dibujar({ camera, dist, x, z, opacidad = 1, ocupados = [] }) {
     const alfa = opacidad * opacidadPorDistancia(dist, banda)
     if (alfa <= 0.01) { limpiar(); return 0 }
     const { ancho, alto } = preparar()
     ctx.clearRect(0, 0, ancho, alto)
     sucio = true
     grilla.vaciar()
+    for (const caja of ocupados) grilla.reservar(celdasCaja(caja, CELDA_COLISION_PX, ancho, alto))
     camera.updateMatrixWorld()
     Object.assign(ctx, {
       globalAlpha: alfa, font: fuente, textAlign: 'center', textBaseline: 'middle',

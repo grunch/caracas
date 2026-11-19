@@ -1,0 +1,39 @@
+/* Las marcas: cartel de papel con el nombre, hilo fino y punto sobre el lugar (src/marcas-capa.js). */
+#marcas{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:2;opacity:0;transition:opacity 1.2s}
+body.listo #marcas{opacity:1}
+#marcas[hidden]{display:none}
+.marca{position:absolute;top:0;left:0;opacity:0;visibility:hidden;will-change:transform;transition:opacity .3s,visibility .3s}
+.marca.ver{opacity:var(--o,1);visibility:visible}
+.marca.regla{visibility:hidden;transition:none}
+.marca .punto{position:absolute;top:-4px;left:-4px;width:6px;height:6px;border-radius:50%;background:var(--tinta);border:1px solid var(--papel);transition:transform .18s}
+.marca .hilo{position:absolute;bottom:3px;left:-.5px;width:1px;height:23px;background:var(--tinta);box-shadow:0 0 0 .5px #f1e6cd99}
+.marca .tag{position:absolute;bottom:26px;left:0;transform:translate(-50%);pointer-events:auto;cursor:pointer;font:inherit;color:var(--tinta);
+  white-space:nowrap;text-align:center;background:var(--papel);border:1px solid var(--tinta);border-radius:0;padding:2px 8px 3px;box-shadow:0 2px 10px #0005}
+.marca.regla .tag{pointer-events:none}
+.marca .tag b{display:block;font-weight:500;font-size:12.5px;letter-spacing:.06em;font-variant:small-caps}
+.marca.n1 .tag b{font-size:14.5px;letter-spacing:.09em}
+.marca.n3 .tag b{font-size:11.5px;letter-spacing:.02em;font-variant:normal;font-style:italic}
+.marca .tag i{display:none;white-space:normal;width:max-content;max-width:230px;margin:2px auto 1px;font-size:12.5px;line-height:1.3;opacity:.85}
+.marca .tag:hover,.marca .tag:focus-visible,.marca.sobre .tag{background:var(--sobre);outline:1px solid #2a221b99;outline-offset:2px}
+.marca.sobre .punto{transform:scale(1.7)}
+.marca.sobre{z-index:2}
+.marca .tag:active{transform:translate(-50%) translateY(1px)}
+/* el velo: con el mouse o el foco en una marca, las demás se apagan */
+#marcas.velo .marca.ver:not(.sobre):not(.abierta){opacity:calc(var(--o,1)*.45)}
+.marca.abierta{z-index:3}
+.marca.abierta .tag{background:var(--sobre);outline:1px solid #2a221b99;outline-offset:2px}
+.marca.abierta.con-nota .tag{padding:5px 11px 6px}
+.marca.abierta.con-nota .tag i{display:block}
+/* la marca que llega con su época: dos ondas en el punto y un filete que parpadea en el cartel */
+@keyframes marca-onda{0%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(6)}}
+@keyframes marca-filete{0%,100%{outline-color:#2a221b00;outline-offset:1px}18%,62%{outline-color:var(--tinta);outline-offset:3px}40%{outline-color:#2a221b66;outline-offset:2px}}
+.marca.nueva{z-index:2}
+.marca.nueva .tag{outline:1px solid #2a221b00;animation:marca-filete 2.6s ease-in-out both}
+.marca.nueva .punto::before,.marca.nueva .punto::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:1.5px solid var(--tinta);animation:marca-onda 1.25s ease-out 2 both}
+.marca.nueva .punto::after{animation-delay:.4s}
+@media (prefers-reduced-motion:reduce){
+  .marca,.marca .punto{transition:none}
+  .marca.nueva .tag,.marca.nueva .punto::before,.marca.nueva .punto::after{animation:none;opacity:0}
+  .marca.nueva .tag{opacity:1}
+}
+@media (pointer:coarse){.marca .tag{padding:6px 10px 7px}}

@@ -1,7 +1,7 @@
 import { describe, test, expect, vi, afterEach } from 'vitest'
 import { PerspectiveCamera } from 'three'
 import {
-  decodificarCalles, indexarTramos, anguloLegible, crearGrilla, celdasEtiqueta, crearMedidor, crearRotulos,
+  decodificarCalles, indexarTramos, anguloLegible, crearGrilla, celdasEtiqueta, celdasCaja, crearMedidor, crearRotulos,
   opacidadPorDistancia, cargarCalles, BYTES_TRAMO, MAX_ETIQUETAS,
 } from '../../src/calles.js'
 import { crearCoords } from '../../src/coords.js'
@@ -134,6 +134,21 @@ describe('grilla anticolisión', () => {
     expect(grilla.ocupar(c)).toBe(true)
     grilla.vaciar()
     expect(grilla.ocupar(b)).toBe(true)
+  })
+
+  test('una caja (el cartel de una marca) toma sus celdas aunque se salga de la pantalla', () => {
+    // Arrange · Act: de (−20, 5) a (30, 20) en una vista de 400 × 300 con celdas de 13
+    const celdas = celdasCaja({ x0: -20, y0: 5, x1: 30, y1: 20 }, 13, 400, 300)
+    // Assert: columnas 0–2, filas 0–1 (31 columnas por fila)
+    expect(celdas.sort((a, b) => a - b)).toEqual([0, 1, 2, 31, 32, 33])
+    expect(celdasCaja({ x0: 500, y0: 5, x1: 600, y1: 20 }, 13, 400, 300)).toEqual([])
+  })
+
+  test('reservar toma celdas sin preguntar: lo que cae ahí después no entra', () => {
+    const grilla = crearGrilla(400, 300, 13)
+    grilla.reservar(celdasCaja({ x0: 60, y0: 90, x1: 140, y1: 110 }, 13, 400, 300))
+    expect(grilla.ocupar(celdasEtiqueta({ cx: 100, cy: 100, angulo: 0, ancho: 80, alto: 12 }, 13, 400, 300))).toBe(false)
+    expect(grilla.ocupar(celdasEtiqueta({ cx: 300, cy: 250, angulo: 0, ancho: 80, alto: 12 }, 13, 400, 300))).toBe(true)
   })
 })
 
@@ -274,6 +289,17 @@ describe('rótulos sobre la vista', () => {
     const rotulos = crearRotulos({ lienzo, indice, tamaño, altura: (x, z) => { alturas.push([x, z]); return 0 } })
     rotulos.dibujar({ camera: camaraArriba(800), dist: 800, x: 0, z: 0, opacidad: 1 })
     expect(alturas.length).toBeGreaterThan(0)
+  })
+
+  test('las marcas tienen prioridad: una calle no se escribe sobre el cartel de una marca', () => {
+    // Arrange: sin marcas entran dos calles; la de la plaza cae en el centro de la vista
+    const { lienzo, escritos } = lienzoFalso()
+    const rotulos = crearRotulos({ lienzo, indice, tamaño })
+    // Act: el cartel de una marca ocupa el centro
+    const n = rotulos.dibujar({ camera: camaraArriba(800), dist: 800, x: 0, z: 0, opacidad: 1, ocupados: [{ x0: 360, y0: 285, x1: 440, y1: 315 }] })
+    // Assert
+    expect(n).toBe(1)
+    expect(escritos.map((e) => e.s)).not.toContain('Avenida Urdaneta')
   })
 })
 

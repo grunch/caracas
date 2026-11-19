@@ -110,5 +110,12 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
     pedirCuadro(3)
   }
 
-  return { goal, now, update, jump }
+  /** Vuela (con la misma amortiguación que el arrastre) hasta lo que se le pase: { x, z, dist, yaw, pitch }. */
+  function volar(v) {
+    Object.assign(goal, v)
+    acotar()
+    pedirCuadro(3)
+  }
+
+  return { goal, now, update, jump, volar }
 }
