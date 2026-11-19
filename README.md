@@ -30,6 +30,12 @@ npm run datos:bajar   # los datos del sitio (~90 MB), del release datos-* más n
 npm run dev
 ```
 
+Para los tests de punta a punta (`npm run e2e`), instala una vez el Chromium de Playwright, como lo hace el CI:
+
+```sh
+npx playwright install --with-deps chromium
+```
+
 Los datos generados (`public/datos`, `public/plano`, `public/fotos`) **no van a git**. Sin
 `npm run datos:bajar`, el sitio arranca pero no encuentra el plano. El script revisa el paquete antes de
 extraerlo y comprueba cada archivo contra el sha256 de `public/datos/manifiesto.json`.

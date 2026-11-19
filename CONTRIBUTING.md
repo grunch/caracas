@@ -20,6 +20,7 @@ reglas completas están en [`AGENTS.md`](AGENTS.md) (para personas y para agente
 git clone https://github.com/grunch/caracas.git && cd caracas
 npm install
 npm run datos:bajar        # los datos del sitio, que no van a git
+npx playwright install --with-deps chromium   # una vez: el navegador de los tests E2E (el mismo del CI)
 npm run dev
 ```
 
