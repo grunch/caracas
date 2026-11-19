@@ -13,6 +13,10 @@
   "url_descarga": null,
   "ancho": 1260,
   "alto": 1276,
-  "epocas": [1, 2],
-  "notas": "No es Caracas ni es de época: es un pueblo hispano-colonial conservado, visto hoy desde arriba. Vale por el PATRÓN de las manzanas (crujía corrida sobre la calle, peine de alas alrededor de patios, solares al centro), no por el lugar. Las manzanas miden unos 100 m. Imagen satelital de un proveedor comercial, con derechos de terceros: NO publicar."
+  "epocas": [
+    1,
+    2
+  ],
+  "notas": "No es Caracas ni es de época: es un pueblo hispano-colonial conservado, visto hoy desde arriba. Vale por el PATRÓN de las manzanas (crujía corrida sobre la calle, peine de alas alrededor de patios, solares al centro), no por el lugar. Las manzanas miden unos 100 m. Imagen satelital de un proveedor comercial, con derechos de terceros: NO publicar.",
+  "publicar": false
 }

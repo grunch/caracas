@@ -12,6 +12,13 @@
   "alto": 461,
   "formato": "JPEG",
   "tipo": "fotografía",
-  "epocas": [4],
-  "notas": "Foto a nivel de peatón. Par de «El mercado de 1852»: la misma plaza, antes y después de Guzmán Blanco."
+  "epocas": [
+    4
+  ],
+  "notas": "Foto a nivel de peatón. Par de «El mercado de 1852»: la misma plaza, antes y después de Guzmán Blanco.",
+  "pie": "La Plaza Bolívar en 1910: la estatua ecuestre, los faroles y los árboles ya crecidos.",
+  "marcas": [
+    "plaza-bolivar"
+  ],
+  "verificacion_dp": "Wikimedia Commons (2026-11-19): autor «Unknown author», fecha 1910, licencia «Public domain», plantilla {{PD-old}}; crédito: Archivo Fundación Fotografía Urbana (prodavinci.com). Foto de 1910 de autor desconocido: más de 110 años."
 }

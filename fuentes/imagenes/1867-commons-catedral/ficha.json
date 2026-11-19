@@ -12,6 +12,15 @@
   "alto": 397,
   "formato": "JPEG",
   "tipo": "vista (grabado o foto retocada, reproducida de un impreso)",
-  "epocas": [2, 3],
-  "notas": "Procedencia débil (un foro); fecha según Commons. Es la mejor referencia para modelar la Catedral: muestra el costado sur entero, visto desde la plaza."
+  "epocas": [
+    2,
+    3
+  ],
+  "notas": "Procedencia débil (un foro); fecha según Commons. Es la mejor referencia para modelar la Catedral: muestra el costado sur entero, visto desde la plaza.",
+  "pie": "La Plaza Mayor y la Catedral en 1867: la plaza todavía es de tierra, sin jardín ni estatua.",
+  "marcas": [
+    "catedral",
+    "plaza-bolivar"
+  ],
+  "verificacion_dp": "Wikimedia Commons (2026-11-19): autor «Unknown author», fecha 1867, licencia «Public domain», plantilla {{PD-Venezuela}}. Imagen de 1867: más de 150 años."
 }

@@ -141,8 +141,11 @@ export function crearCapaMarcas({ contenedor, marcas, tamaño, altura = () => 0,
     return true
   }
 
+  /** Cierra el cartel abierto (lo usa la ficha al cerrarse), sin avisar a nadie. */
+  const cerrar = () => ponerAbierta(null)
+
   return {
-    dibujar, mostrar, abrir, marcas,
+    dibujar, mostrar, abrir, cerrar, marcas,
     get prendida() { return estado.prendida },
     get nivel() { return estado.nivel },
     get sobre() { return estado.sobre?.id ?? null },
