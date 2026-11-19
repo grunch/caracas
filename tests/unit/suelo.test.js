@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { rgbaDeClase, tablaSuelo } from '../../tools/suelo-lib.mjs'
+import { rgbaDeClase, tablaSuelo, conPatios } from '../../tools/suelo-lib.mjs'
 
 describe('rgbaDeClase', () => {
   test.each([
@@ -71,5 +71,19 @@ describe('generarMascara con alfa mezclado', () => {
       expect(fila[0]).toBeGreaterThan(240)
       expect(fila[3]).toBeLessThan(15)
     }
+  })
+})
+
+describe('conPatios', () => {
+  test('lo edificado bajo la máscara de patios pasa a patio; lo demás no cambia; no toca lo que recibe', () => {
+    const clases = Uint8Array.from([3, 3, 1, 4, 5, 3])
+    const patios = Uint8Array.from([255, 0, 255, 255, 255, 200])
+    expect(Array.from(conPatios(clases, patios))).toEqual([2, 3, 1, 4, 5, 2])
+    expect(Array.from(clases)).toEqual([3, 3, 1, 4, 5, 3])
+    expect(rgbaDeClase(conPatios(clases, patios)[0])).toEqual([0, 0, 0, 255]) // manzana sin edificar: tierra de patio
+  })
+
+  test('la máscara tiene que medir lo mismo que las clases', () => {
+    expect(() => conPatios(new Uint8Array(4), new Uint8Array(3))).toThrow(/mide/)
   })
 })

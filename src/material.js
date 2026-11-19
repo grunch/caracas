@@ -203,7 +203,10 @@ function parchearRelieveVertex(s) {
 }
 
 /** Antes de proyectar: el suelo se hincha con el relieve y la casa se apoya en él (ver parchearRelieveVertex). */
-const VERTICE_APOYO = /* glsl */ `vBase = aInfo.w < 0.5 ? sueloEn(position.xz) : sueloEn(aAncla);
+const VERTICE_APOYO = /* glsl */ `
+      // el piso de un patio o de un solar se apoya en el terreno de cada punto: en la cuesta no lo tapa
+      bool esPiso = aInfo.w > 0.5 && aTecho.w > ${CUBIERTA.PATIO}.0 - 0.5 && aTecho.w < ${CUBIERTA.SOLAR}.0 + 0.5;
+      vBase = aInfo.w < 0.5 || esPiso ? sueloEn(position.xz) : sueloEn(aAncla);
       vTerreno = aInfo.w < 0.5 ? terrenoEn(position.xz) : vec2(0.0);
-      transformed.y += aInfo.w < 0.5 ? sueloEn(position.xz)
+      transformed.y += aInfo.w < 0.5 || esPiso ? sueloEn(position.xz)
         : apoyoCasa(aAncla, transformed.xz, position.y < 0.01);`

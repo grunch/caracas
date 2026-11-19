@@ -190,7 +190,7 @@ describe('extruirTechos: la casa colonial entre medianeras', () => {
     for (const v of punta) expect(v.faldon[1]).toBeCloseTo(v.faldon[2], 3) // la punta del alero es el final del faldón
   })
 
-  test('detrás de la crujía queda un patio: ahí no hay tejado, y sus paredes bajan hasta el suelo', () => {
+  test('sin marco ni alas no se inventan patios: la casa queda techada entera', () => {
     const p = (i) => ({ x: g.posiciones[i * 3], z: g.posiciones[i * 3 + 2] })
     let techado = 0
     for (let t = 0; t < g.indices.length; t += 3) {
@@ -200,11 +200,8 @@ describe('extruirTechos: la casa colonial entre medianeras', () => {
       if (Math.min(a.z, b.z, c.z) < -1e-3) continue // el alero no cuenta
       techado += Math.abs((b.x - a.x) * (c.z - a.z) - (c.x - a.x) * (b.z - a.z)) / 2
     }
-    expect(techado).toBeLessThan(10 * 24 - 12)
-    expect(techado).toBeGreaterThan(10 * 24 * 0.6)
-    const adentro = casa.filter((v) => esPared(v) && v.x > 10.5 && v.x < 19.5 && v.z > 6 && v.z < 23.5)
-    expect(adentro.length).toBeGreaterThanOrEqual(8)
-    expect(Math.min(...adentro.map((v) => v.y))).toBe(0)
+    expect(techado).toBeCloseTo(10 * 24, 3)
+    expect(casa.some((v) => v.cubierta === CUBIERTA.PATIO)).toBe(false)
   })
 })
 
