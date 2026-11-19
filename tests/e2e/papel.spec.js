@@ -23,8 +23,11 @@ async function abrir(page, { urbano }) {
     json: { planos: [{ año: 1772, plano: '1772-prueba', recorte: [0, 0, 10, 10], niveles: [{ url: 'plano/1772/chico.webp', lado: 64 }] }] },
   }))
   await page.route('**/plano/1772/chico.webp', (ruta) => ruta.fulfill({ body: plano, contentType: 'image/png' }))
-  // sin la hoja ni sus máscaras, haya o no datos pesados: que no lleguen a mitad de una medición
+  // sin la hoja ni sus máscaras (ni sus variantes -2k/-4k ni las teselas plano/f/), haya o no datos pesados: que
+  // no lleguen a mitad de una medición; y sin las casas ni los árboles (con la muestra de datos del CI hay casas
+  // en el centro de la hoja, y se mide el papel)
   await page.route(/\/plano\/((primero|chico|medio|suelo|rotulos)(-[24]k)?\.webp|f\/)/, (ruta) => ruta.abort())
+  await page.route(/\/datos\/(ciudad\.pak|arboles\.bin)/, (ruta) => ruta.abort())
   await page.goto('/?sinintro&capture&sinmarcas')
   await page.waitForFunction(() => window.lab?.ready === true && window.lab.lineaDeTiempo && window.lab.ciudad.U.uCrece.value.image?.width === 4)
 }

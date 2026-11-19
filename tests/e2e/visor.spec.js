@@ -35,13 +35,11 @@ test('la C alterna entre tinta y color', async ({ page }) => {
 })
 
 test('al prender el color se pide la máscara de rótulos del plano, y sin ella el color anda igual', async ({ page }) => {
+  // se baja al prender el color o, si hay línea de tiempo (la muestra de datos del CI), ya al arrancar: se escucha
+  // desde antes de abrir la página
+  const pedido = page.waitForRequest((r) => /\/plano\/rotulos(-2k)?\.webp$/.test(new URL(r.url()).pathname))
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
-  // con la ciudad de demostración no se baja hasta entonces (en tinta el plano se ve entero); con datos de
-  // épocas, la tinta de antes de 1936 ya la usa (el plano sin sus rótulos donde ya es ciudad) y puede estar pedida
-  const esRotulos = (url) => /\/plano\/rotulos(-2k)?\.webp$/.test(new URL(url).pathname)
-  const yaPedida = await page.evaluate(() => performance.getEntriesByType('resource').map((e) => e.name))
-  const pedido = yaPedida.some(esRotulos) ? Promise.resolve() : page.waitForRequest((r) => esRotulos(r.url()))
   await page.keyboard.press('KeyC')
   await pedido
   // la ciudad de demostración de CI no trae la máscara: queda la de respaldo o la real, nunca nada
