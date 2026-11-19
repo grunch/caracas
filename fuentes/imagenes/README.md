@@ -7,6 +7,33 @@ Pinturas, grabados y fotos de época que guían cómo se reconstruyen las casas 
 van acá, para que quien toque estilos (`tools/geo/estilos.py`), fachadas (`src/shader/fachada.js`),
 techos o lotes las tenga a mano.
 
+## Cuáles se muestran en el sitio (fichas, T43)
+
+Casi todas estas imágenes son **referencias internas**: sirven para reconstruir, no para publicar. El sitio
+muestra en las fichas solo las que `node tools/fotos.mjs` deja pasar (reglas en `specs/05`, lógica en
+`tools/fotos-lib.mjs`): las que su `ficha.json` **establece** como de dominio público (`dominio_publico: true`)
+o con licencia libre (CC0, CC BY, CC BY-SA), con la página de la fuente (`url_fuente`), autor y fecha, y con al
+menos una marca en `marcas`. Lo `dudoso`, lo que dice «derechos reservados» y lo que lleva `publicar: false`
+(la captura satelital, las fotos de El Nacional) **no se copia nunca a `public/`**. `node tools/fotos.mjs
+--solo-informe` lista qué entra y qué no, con el motivo.
+
+Campos de `ficha.json` que usa ese paso, además de los de siempre:
+
+| campo | qué es |
+|---|---|
+| `marcas` | ids de `src/marcas-datos.js` en cuyas fichas se muestra la imagen (sin esto, no se publica) |
+| `pie` | el pie en español que se muestra (si falta, `titulo`) |
+| `fecha` | la fecha como texto cuando no es un año («hacia 1900–1906»); si falta, `año` o `año_aproximado` |
+| `epocas` | en qué épocas la ficha la presenta como «de esta época» (índices de arriba) |
+| `verificacion_dp` | qué dice la fuente y por qué es de dominio público (plantillas de Commons, fecha de la consulta) |
+| `publicar` | `false` = jamás, diga lo que diga el resto |
+
+Para sumar una imagen de Wikimedia Commons: carpeta `<AÑO>-commons-<slug>/` con su `ficha.json` completa
+(autor, fecha y licencia **tal como los da Commons**, sin completar lo que falte), y `node tools/fotos.mjs
+--descargar` baja el original de `url_descarga` (solo de `upload.wikimedia.org`, con curl y de a una). Antes
+de asignarle marcas hay que **mirarla**: que sea Caracas, que sea el lugar y que la fecha sea coherente (ya
+llegaron imágenes con fecha equivocada: ver la Casa Amarilla «de 1806» o la vista «de 1830»).
+
 ## 1812 · Vista de Caracas (`1812-commons-vista-de-caracas`) → épocas 1772 y 1843
 
 Grabado a vuelo de pájaro del centro antes del terremoto, mirando al norte, con el Ávila al fondo.
