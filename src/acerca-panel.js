@@ -5,7 +5,7 @@
  * de las fuentes) van siempre como texto, y los enlaces, revisados (http o https) y con rel="noopener".
  */
 import { TEXTO_INTRO } from './intro.js'
-import { seccionesDeAcerca, enlaceSeguro, sitioDe } from './acerca.js'
+import { seccionesDeAcerca, enlaceSeguro, sitioDe, AUTOR } from './acerca.js'
 import './acerca.css'
 
 const ENFOCABLES = 'button, a[href], summary, [tabindex="0"]'
@@ -91,6 +91,7 @@ export function crearAcerca({
   const hojaIntro = crear('div', { clase: 'hoja', attrs: { role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'intro-t', 'aria-describedby': 'intro-d' } },
     crear('h2', { id: 'intro-t', textContent: TEXTO_INTRO.titulo }),
     crear('p', { clase: 'bajada', textContent: TEXTO_INTRO.bajada }),
+    crear('p', { clase: 'firma' }, 'Hecho por ', enlace(AUTOR.usuario, AUTOR.url)),
     crear('div', { id: 'intro-d' }, ...TEXTO_INTRO.parrafos.map((t) => crear('p', { textContent: t }))),
     crear('p', { clase: 'como raton', textContent: TEXTO_INTRO.conRaton }),
     crear('p', { clase: 'como dedos', textContent: TEXTO_INTRO.conDedos }),

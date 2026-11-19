@@ -44,6 +44,12 @@
     #epocas button.on{color:#f7eedb;background:var(--tinta)}
     #epocas button.andar{border-left:1px solid #2a221b33;margin-left:4px;padding:6px 11px;font-size:13px}
     #epocas .pie{text-align:center;opacity:.85;text-wrap:balance;margin:5px 6px 3px;font-size:12.5px;font-style:italic}
+    #firma{top:calc(26px + env(safe-area-inset-top,0px));right:calc(26px + env(safe-area-inset-right,0px));z-index:5;padding:8px 14px;min-height:44px;box-sizing:border-box;display:flex;align-items:center;gap:.3em;font-size:14px;letter-spacing:.02em;text-decoration:none}
+    #firma b{font-weight:600}
+    #firma:hover{background:var(--sobre)}
+    #firma:focus-visible{outline:2px solid var(--tinta);outline-offset:2px}
+    /* hasta 1120 px el buscador ocupa la fila de arriba (src/buscador/buscador.css): la firma queda en la bienvenida y el Acerca */
+    @media (max-width:1120px){#firma{display:none}}
     @media (max-width:640px){#epocas button{min-height:44px;padding:6px 6px;font-size:14px;letter-spacing:0}}
     @media (max-width:640px){#botones{left:calc(14px + env(safe-area-inset-left,0px));right:calc(14px + env(safe-area-inset-right,0px));flex-wrap:wrap;justify-content:flex-end;gap:8px}#botones .panel{padding:10px 12px;font-size:15px}#leyenda{bottom:calc(140px + env(safe-area-inset-bottom,0px))}}
   </style>
@@ -60,6 +66,7 @@
     <p class="fuente">Mapa actual: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© colaboradores de OpenStreetMap</a> (ODbL)</p>
   </div>
   <form id="buscar" role="search" hidden></form>
+  <a id="firma" class="panel" href="https://x.com/negrunch" target="_blank" rel="noopener" title="@negrunch en X">Hecho por <b>@negrunch</b></a>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

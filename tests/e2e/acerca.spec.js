@@ -39,6 +39,8 @@ test('la bienvenida sale una vez y se cierra con el teclado; «?» abre el Acerc
   await expect(intro).toBeVisible()
   await expect(intro.getByRole('button', { name: 'Ver crecer la ciudad' })).toBeFocused()
   await expect(intro).toContainText('son una reconstrucción')
+  await expect(intro.getByRole('link', { name: '@negrunch' })).toHaveAttribute('href', 'https://x.com/negrunch')
+  await expect(page.locator('#firma')).toBeHidden() // hasta 1120 px la esquina es del buscador
   await quieta(page) // la página arranca igual con la bienvenida puesta
   // es modal: las teclas no llegan a los atajos de atrás
   const nombres = page.locator('#nombres') // «M» muestra u oculta los nombres: el atajo más liviano de probar

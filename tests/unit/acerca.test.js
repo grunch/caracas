@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import {
+  AUTOR,
   REPOSITORIO, INSPIRACION, enlaceSeguro, sitioDe, enumerar, conMiles, validarCreditos, leerCreditos, epocasVisibles, queEstasViendo,
   bloqueDeEpoca, bloquesDeFuentes, seccionesDeAcerca,
 } from '../../src/acerca.js'
@@ -294,14 +295,30 @@ describe('seccionesDeAcerca', () => {
     expect(demo).toHaveLength(5)
   })
 
-  it('los créditos nombran la inspiración, a Claude y el repositorio, y a ninguna persona más', () => {
+  it('los créditos nombran al autor (con su cuenta de X), la inspiración, a Claude y el repositorio, y a ninguna persona más', () => {
     const creditos = seccion('creditos')
     const texto = textoDe(creditos)
+    expect(creditos.bloques[0].partes).toEqual(['Hecho por ', { texto: AUTOR.usuario, url: AUTOR.url }, '.'])
     expect(texto).toContain('@mormonnegro')
     expect(texto).toContain('Claude')
     const enlaces = creditos.bloques.flatMap((b) => b.partes).filter((p) => p.url).map((p) => p.url)
-    expect(enlaces).toEqual([INSPIRACION, REPOSITORIO])
-    expect(texto).not.toMatch(/@(?!mormonnegro)\w+|[\w.]+@[\w.]+\.\w+/) // ni otro usuario ni un correo
+    expect(enlaces).toEqual([AUTOR.url, INSPIRACION, REPOSITORIO])
+    expect(texto).not.toMatch(/@(?!mormonnegro|negrunch)\w+|[\w.]+@[\w.]+\.\w+/) // ni otro usuario ni un correo
+  })
+
+  it('el autor es @negrunch y su enlace va a su cuenta de X', () => {
+    expect(AUTOR).toEqual({ usuario: '@negrunch', url: 'https://x.com/negrunch' })
+    expect(Object.isFrozen(AUTOR)).toBe(true)
+  })
+
+  it('la firma de la esquina (index.html) es la del autor y abre su cuenta en otra pestaña', () => {
+    const html = readFileSync(new URL('../../index.html', import.meta.url), 'utf8')
+    const firma = html.match(/<a id="firma"[^>]*>[\s\S]*?<\/a>/)?.[0]
+    expect(firma).toBeTruthy()
+    expect(firma).toContain(`href="${AUTOR.url}"`)
+    expect(firma).toContain('target="_blank"')
+    expect(firma).toContain('rel="noopener"')
+    expect(firma.replace(/<[^>]+>/g, '')).toBe(`Hecho por ${AUTOR.usuario}`)
   })
 
   it('todos los enlaces del panel son http(s)', () => {

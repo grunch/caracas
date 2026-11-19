@@ -18,6 +18,7 @@
 
 /* --- la bienvenida --- */
 #intro .hoja{width:min(600px,100%);overflow-y:auto;overscroll-behavior:contain;padding:30px 36px 26px}
+#intro .firma{margin:9px 0 0;font-size:14px;letter-spacing:.02em}
 #intro-d{margin-top:18px;padding-top:16px;border-top:1px solid #2a221b44}
 #intro-d p{margin:0 0 11px;font-size:16.5px;line-height:1.55;text-wrap:pretty}
 #intro .como{margin:16px 0 0;font-size:14px;font-style:italic;line-height:1.45;opacity:.8}
