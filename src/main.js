@@ -31,6 +31,7 @@ import { crearAcerca } from './acerca-panel.js'
 import { leerCreditos } from './acerca.js'
 import { debeMostrarIntro, recordarIntro } from './intro.js'
 import { accionDeTecla } from './controles.js'
+import { esLiviano, proporcionDePixeles } from './calidad.js'
 
 const params = new URLSearchParams(location.search)
 const COLOR_FONDO = 0x1d1a17
@@ -78,7 +79,9 @@ const coords = crearCoords(meta.plano)
 const { hoja } = coords
 
 const renderer = new WebGLRenderer({ antialias: false, powerPreference: 'high-performance' })
-renderer.setPixelRatio(params.has('capture') ? 1 : Math.min(devicePixelRatio, 2))
+const maxTextura = renderer.capabilities.maxTextureSize
+const liviano = esLiviano({ params, maxTextura, pantalla: { ancho: screen.width, alto: screen.height }, memoria: navigator.deviceMemory })
+renderer.setPixelRatio(proporcionDePixeles({ dpr: devicePixelRatio, liviano, captura: params.has('capture') }))
 renderer.setSize(innerWidth, innerHeight)
 document.getElementById('view').appendChild(renderer.domElement)
 renderer.domElement.addEventListener('webglcontextrestored', () => location.reload())
@@ -86,9 +89,6 @@ const gl = renderer.getContext()
 const gpu = gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info')?.UNMASKED_RENDERER_WEBGL ?? gl.RENDERER)
 const porSoftware = esRenderPorSoftware(gpu) // SwiftShader en CI y en los E2E: cuadros de segundos
 
-const maxTextura = renderer.capabilities.maxTextureSize
-const liviano = params.has('liviano') || (!params.has('pesado') &&
-  (maxTextura < 8192 || Math.min(screen.width, screen.height) < 600 || (navigator.deviceMemory ?? 8) < 4))
 
 const scene = new Scene()
 scene.background = new Color(COLOR_FONDO)

@@ -26,9 +26,12 @@ export const CON_RATON = Object.freeze([
   { como: 'Botón derecho y arrastrar', que: 'gira e inclina la vista' },
 ].map(Object.freeze))
 
-/** Con los dedos (src/camara.js): por ahora, solo mover. */
+/** Con los dedos (src/camara.js, src/gestos.js). */
 export const CON_DEDOS = Object.freeze([
   { como: 'Arrastrar con un dedo', que: 'mueve el plano' },
+  { como: 'Separar o juntar dos dedos', que: 'acerca o aleja, hacia donde están los dedos' },
+  { como: 'Girar dos dedos', que: 'gira la vista' },
+  { como: 'Deslizar dos dedos hacia arriba o abajo', que: 'inclina la vista' },
   { como: 'Tocar un nombre', que: 'lleva al lugar y abre su ficha' },
 ].map(Object.freeze))
 
