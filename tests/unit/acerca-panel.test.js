@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 import { crearAcerca } from '../../src/acerca-panel.js'
 import { TEXTO_INTRO } from '../../src/intro.js'
-import { validarCreditos } from '../../src/acerca.js'
+import { validarCreditos, AUTOR } from '../../src/acerca.js'
 
 /** Un DOM mínimo: lo justo que usan la bienvenida y el panel (árbol, clases, atributos, eventos y foco). */
 function crearDom() {
@@ -119,6 +119,17 @@ describe('la bienvenida y el panel «Acerca»', () => {
       expect(doc.activeElement.textContent).toBe('Ver crecer la ciudad')
     })
 
+    test('firma «Hecho por @negrunch» con el enlace a su cuenta de X, en otra pestaña', () => {
+      // Act
+      armar({ mostrarIntro: true })
+
+      // Assert
+      const firma = intro().porEtiqueta('p').find((p) => p.className === 'firma')
+      expect(firma.textContent).toBe(`Hecho por ${AUTOR.usuario}`)
+      const [a] = firma.porEtiqueta('a')
+      expect(a).toMatchObject({ href: AUTOR.url, target: '_blank', rel: 'noopener', textContent: AUTOR.usuario })
+    })
+
     test('si no toca, no se muestra ni se lleva el foco', () => {
       const acerca = armar({ mostrarIntro: false })
       expect(acerca.intro).toBe(false)
@@ -159,14 +170,14 @@ describe('la bienvenida y el panel «Acerca»', () => {
       expect(acerca.intro).toBe(false)
     })
 
-    test('es modal: con ella abierta ninguna tecla llega a los atajos de atrás, y Tab da la vuelta entre sus botones', () => {
+    test('es modal: con ella abierta ninguna tecla llega a los atajos de atrás, y Tab da la vuelta entre su enlace y sus botones', () => {
       armar({ mostrarIntro: true })
       expect(oyentes['keydown:opciones']).toEqual({ capture: true })
       expect(tecla('c').cortado).toBe(true)
       expect(tecla(' ').cortado).toBe(true)
       const orden = []
-      for (let i = 0; i < 3; i++) { expect(tecla('Tab').prevenido).toBe(true); orden.push(doc.activeElement.textContent) }
-      expect(orden).toEqual([TEXTO_INTRO.mas, 'Entrar', 'Ver crecer la ciudad'])
+      for (let i = 0; i < 4; i++) { expect(tecla('Tab').prevenido).toBe(true); orden.push(doc.activeElement.textContent) }
+      expect(orden).toEqual([AUTOR.usuario, TEXTO_INTRO.mas, 'Entrar', 'Ver crecer la ciudad'])
       tecla('Tab', { shiftKey: true })
       expect(doc.activeElement.textContent).toBe('Entrar')
     })

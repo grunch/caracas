@@ -13,6 +13,8 @@ import { controlesVisibles } from './controles.js'
 
 export const REPOSITORIO = 'https://github.com/grunch/caracas'
 export const INSPIRACION = 'https://baires.mormon.garden'
+/** Quién hizo el sitio: la firma de la esquina (index.html), la bienvenida y los créditos. */
+export const AUTOR = Object.freeze({ usuario: '@negrunch', url: 'https://x.com/negrunch' })
 
 const esTexto = (t) => typeof t === 'string' && t.trim() !== ''
 
@@ -173,6 +175,7 @@ export function seccionesDeAcerca({ epocas = null, desde = 0, creditos = null, a
     { id: 'fuentes', titulo: 'Fuentes y licencias', bloques: bloquesDeFuentes(creditos) },
     {
       id: 'creditos', titulo: 'Créditos', bloques: [
+        { tipo: 'p', partes: ['Hecho por ', { texto: AUTOR.usuario, url: AUTOR.url }, '.'] },
         { tipo: 'p', partes: ['Este sitio está inspirado en ', { texto: 'baires.mormon.garden', url: INSPIRACION }, ', de @mormonnegro, que levantó así el Buenos Aires de 1867: de ahí vienen la idea y la manera de contarla. El código y los datos de Caracas se hicieron aparte.'] },
         { tipo: 'p', partes: ['Hecho con Claude, de Anthropic.'] },
         { tipo: 'p', partes: ['El código, las fichas de las fuentes y el método están en ', { texto: 'github.com/grunch/caracas', url: REPOSITORIO }, '.'] },
