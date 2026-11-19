@@ -49,7 +49,7 @@ Scrollytelling: a la izquierda, una lista larga de edificios por año; a la dere
 
 ## Controles
 
-**Escritorio**: arrastrar = mover · rueda = acercar · botón derecho = girar/inclinar · click en un nombre = ir · `Espacio` = plano ⇄ ciudad (acostar/levantar) · `H` = lo de hoy · `C` = color ⇄ tinta.
+**Escritorio**: arrastrar = mover · rueda = acercar · botón derecho = girar/inclinar · click en un nombre = ir · `Espacio` = plano ⇄ ciudad (acostar/levantar) · `H` = lo de hoy · `C` = color ⇄ tinta. *Caracas:* `M` = mostrar/ocultar los nombres de los lugares.
 **Táctil**: un dedo mueve; dos dedos acercan, giran e inclinan; tocar un nombre lleva al lugar.
 **Modos** (ver `05`): WASD/flechas para moverse, Shift corre, Esc vuelve; en auto, V cambia la vista, B toca la bocina, M el sonido, N otro coche, y Q/E cambian de año.
 

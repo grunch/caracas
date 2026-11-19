@@ -21,6 +21,7 @@ import { CUBIERTA } from './techos.js'
 import { GLSL_HOY } from './shader/hoy.js'
 import { VERTICE_COMUN, VERTICE_OLA } from './shader/vertice.js'
 import { GLSL_SOMBRA, uniformsDeLuz } from './shader/sombra.js'
+import { GLSL_ID_DE_TECHO } from './shader/acabado.js'
 
 // el fragment: los módulos de src/shader/ en orden de dependencia (suelo usa plano, épocas y crece)
 const FRAGMENTO_COMUN = /* glsl */ `
@@ -93,12 +94,19 @@ const FRAGMENTO_LUZ = /* glsl */ `
   float sol = solEn(vMundo, nMundo);
   vec3 conSol = (reflectedLight.indirectDiffuse + reflectedLight.directDiffuse * sol) * luzDeColor(sol);
   float propia = step(dot(nMundo, uSol), 0.0);
-  float raya = rayadoSombra((1.0 - sol) * mix(1.0, 0.42, propia), vMundo);
+  // el piso: la calle, el patio y el solar (ahí la sombra va gruesa y casi negra; src/shader/sombra.js)
+  float cubierta = mod(vCubierta, ${CUBIERTA.VOLADA}.0);
+  float piso = max(step(vInfo.w, 0.5), step(${CUBIERTA.PATIO}.0 - 0.5, cubierta) * step(cubierta, ${CUBIERTA.SOLAR}.0 + 0.5));
+  // (en los techos, entre la del piso y la de la pared: de arriba, casi todo lo que recibe sombra es tejado)
+  float raya = rayadoSombra((1.0 - sol) * mix(1.0, 0.42, propia), vMundo, max(piso, 0.4 * vTecho));
   // el papel del grabado casi no cambia con la cara: el volumen lo dan el rayado y el contorno
   vec3 papelParejo = mix(outgoingLight, diffuseColor.rgb * LUZ_PAREJA, 0.65);
-  vec3 conRaya = mix(papelParejo, TINTA_SOMBRA, 0.9 * raya);
+  vec3 conRaya = mix(papelParejo, TINTA_SOMBRA, raya);
   outgoingLight = mix(conRaya, conSol, uColor);
-  #include <opaque_fragment>`
+  #include <opaque_fragment>
+  // a qué casa pertenece este techo, en el alfa (nadie más lo usa: nada es transparente): el contorno
+  // (src/shader/acabado.js) no marca las aristas entre las alas de un mismo tejado. 0 = no es un techo
+  gl_FragColor.a = vTecho * (1.0 - piso) * ${GLSL_ID_DE_TECHO('vInfo.y')};`
 
 /** 1×1 blanco: en "desde cuándo", edificado desde la primera época (no recorta nada). */
 const TODO_EDIFICADO = Object.assign(new DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1), { needsUpdate: true })

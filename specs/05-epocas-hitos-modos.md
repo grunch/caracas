@@ -20,6 +20,48 @@ Formato compacto, una fila por marca:
 - Un mismo lugar puede tener varias filas, una por época: el Cabildo tiene 4 (1867, la reforma de Benoit, la demolición de los arcos en 1889 y la restauración de 1940).
 - Proyección a pantalla en cada cuadro (`will-change: transform`), oclusión simple y *declutter* por nivel y distancia; en táctil, "tocar cerca" con un radio de 9 px.
 
+*Caracas (implementado, T42):* tres módulos. `src/marcas.js` es la lógica pura (con tests); `src/marcas-capa.js`,
+la capa de DOM (`#marcas`: un `<button>` por lugar, con cartel, hilo y punto, como en la referencia);
+`src/marcas-datos.js`, los datos; `src/marcas.css`, los estilos.
+
+Una fila por lugar, como objeto (los píxeles son los del mosaico de 1936; las épocas, los índices de
+`src/epocas.js`: 1 = 1772 … 5 = 1936):
+```js
+{ id: 'capitolio', hito: 'capitolio',            // o x, y: la posición sale del hito modelado o va escrita
+  nace: 1, muere: 0,                             // como las casas: se ve si nace ≤ época < muere (0 = sigue)
+  nombres: [[1, 'Convento de las Concepciones'], [3, 'Capitolio', 'nota corta']],   // o nombre: '…' (y nota)
+  nivel: 2, alto: 14, radio: 30,                 // nivel 1–3; alto del edificio en m (el punto va arriba)
+  fuente: 'plano de Mestre de 1889 (1 «Capitolio») …', dudas: 'lo que falta cotejar' }
+```
+- **El nombre cambia con la época** dentro de la misma fila (`nombres`, ordenados por `desde`): Plaza Mayor →
+  Plaza Bolívar, Convento de San Francisco → Universidad, Plaza de San Pablo → Teatro Municipal. Cuando el
+  lugar pasa a ser otra cosa con años de por medio, van dos filas (Seminario → Concejo Municipal → Palacio de Justicia).
+- **Fuentes**: cada fila dice de qué plano sale su nombre (el rótulo de 1936, la leyenda numerada del plano de
+  1889, un rótulo del de 1911). Lo que es solo conocimiento general lleva `dudas` y aparece en la época cuyo
+  plano ya lo muestra, no antes. `validarMarcas` (un test la corre sobre los datos) exige id único, fuente,
+  nivel, vida y nombres coherentes y posición dentro de la hoja.
+- **Con la ola**: la época que rige en cada marca es la de su lugar (`epocaAqui` con los mismos uniforms que el
+  shader), así que las marcas cambian cuando el frente de la ola pasa por ellas; la opacidad es `vivo()` y el
+  nombre cambia a mitad de camino. La que llega a medio aparecer se anuncia con la onda y el filete (`.nueva`).
+- **Niveles**: el 1 se ve siempre; el 2, con la cámara a menos de 4200 m; el 3, a menos de 1500 m, con 8 % de
+  histéresis en cada umbral.
+- **Despeje** (`despejar`): voraz, por nivel; a igual nivel entran primero las que ya estaban en el cuadro
+  anterior (nada parpadea al mover la cámara) y después el orden de los datos. Dos marcas chocan si sus
+  carteles se tocan (5 px de aire) o si un cartel tapa el punto de otra. Los carteles se miden en el DOM, una
+  vez por nombre.
+- **Altura**: el punto va en el suelo tal como se dibuja (`sueloEn`) más el alto del edificio por lo que la
+  ola lo levantó. **Con la ciudad acostada las marcas se siguen viendo** (como en la referencia), apoyadas en el papel.
+- **Velo**: con el mouse o el foco sobre un cartel, ese se aclara y los demás bajan a un tercio de opacidad
+  (`#marcas.velo`). El velo sobre el edificio en el shader queda pendiente.
+- **Click / Enter**: la cámara vuela al lugar (`cam.volar`; con `prefers-reduced-motion`, `cam.jump`), el cartel
+  se abre con su nota y se avisa a quien escuche: `lab.marcas.alAbrirMarca = (marca) => …` o el evento
+  `abrirmarca` en `window` (`detail` = la marca). Ahí se engancha la ficha (T43).
+- **Convivencia con los nombres de calles**: las cajas de los carteles se reservan en la grilla de
+  `src/calles.js` antes de ubicar las calles (`ocupados`): una calle nunca se escribe sobre una marca.
+- **M** o el botón «Nombres» las muestran y ocultan; `?sinmarcas` arranca sin ellas. `window.lab.marcas`
+  expone `visibles`, `nivel`, `sobre`, `abierta`, `abrir(id)` y `mostrar(bool)`.
+- Capturas de control: `ANGLE=gl node tests/e2e/capturas-marcas.mjs [url] [carpeta]`.
+
 ## Hitos (`src/hitos.js`)
 
 *Referencia (baires):* un objeto por edificio, con `planta` (multipolígono en píxeles del plano) y `partes`

@@ -153,8 +153,7 @@ export function crearBuscador({ formulario, plano, coords, camera, cam, suelo, p
   function volar({ x, z }, metros) {
     const vista = { x, z, dist: Math.min(VISTA.max, Math.max(VISTA.punto, metros * VISTA.porMetro)), pitch: VISTA.pitch }
     if (!animar || matchMedia('(prefers-reduced-motion: reduce)').matches) return cam.jump(vista)
-    Object.assign(cam.goal, vista) // la cámara persigue su objetivo: llega volando
-    pedirCuadro(3)
+    cam.volar(vista)
   }
 
   function pintar() {
