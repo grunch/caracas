@@ -45,6 +45,8 @@
 #hallazgo.moderna .cartel{color:#f7eedb;background:var(--hoy);border-color:#5d1a10;outline-color:#5d1a1099}
 #hallazgo .x{position:absolute;top:2px;right:0;height:34px;font:inherit;font-size:20px;color:inherit;background:0 0;border:0;cursor:pointer}
 #hallazgo .x:hover{opacity:1}
+/* con el dedo, la × del cartel es un blanco de 44 px */
+@media (pointer:coarse){#hallazgo .cartel{padding-right:46px;min-height:44px}#hallazgo .x{top:0;width:44px;height:44px;padding:0}}
 @media (prefers-reduced-motion:reduce){#hallazgo .punto::before{animation:none;opacity:0}}
 
 /* sin lugar para la caja al lado de los años: la caja arriba, a lo ancho, y los años debajo */

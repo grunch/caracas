@@ -175,7 +175,7 @@ que no reconoce lo consulta como dirección de hoy.
   "© OpenStreetMap", en rojo (el color de "lo de hoy").
 - **Respuesta en prosa** (`src/buscador/prosa.js`), atada a la época elegida y sin inventar: dónde queda
   respecto del hito a menos de 150 m ("la cuadra al norte de la Catedral"; si el hito todavía no existe en esa
-  época, "de donde después se levantó el Capitolio") o de la Plaza Bolívar ("a 5 cuadras al noreste"); hacia
+  época, "de donde esta reconstrucción pone después el Capitolio": `nace` es desde cuándo está modelado, no cuándo se construyó) o de la Plaza Bolívar ("a 5 cuadras al noreste"); hacia
   dónde va y cuánto mide; qué cuadras salen de una esquina; si la lectura del nombre en el plano es dudosa
   (`verificado: false`); y qué había: "En 1772 ya estaba edificada" (al menos el 20 % de un redondel de 32 m
   está edificado en `crece.png` R), "ya era parte de la ciudad" o "todavía era campo: la ciudad llega aquí en

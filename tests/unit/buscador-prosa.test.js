@@ -84,7 +84,7 @@ describe('responder', () => {
   })
 
   test('un hito que todavía no existe en la época elegida no se da por hecho', () => {
-    expect(responde('De Padre Sierra a La Bolsa', ctx(1)).texto).toMatch(/^La cuadra (junto a|al \w+ de) donde después se levantó el Capitolio\./)
+    expect(responde('De Padre Sierra a La Bolsa', ctx(1)).texto).toMatch(/^La cuadra (junto a|al \w+ de) donde esta reconstrucción pone después el Capitolio\./)
     expect(responde('De Padre Sierra a La Bolsa', ctx(3)).texto).toMatch(/^La cuadra (que pasa junto al|al \w+ del) Capitolio\./)
   })
 
@@ -123,9 +123,11 @@ describe('responder', () => {
   })
 
   test('un lugar: dónde queda y si ya existía', () => {
-    expect(responde('Catedral', ctx(1))).toMatchObject({ titulo: 'Catedral de Caracas', texto: 'Queda a media cuadra al este de la Plaza Bolívar. En 1772 ya existía.' })
-    expect(responde('Capitolio', ctx(1)).texto).toMatch(/En 1772 todavía no existía: en esta reconstrucción aparece desde 1889\.$/)
-    expect(responde('Plaza Bolívar', ctx(1)).texto).toBe('En 1772 ya existía.')
+    expect(responde('Catedral', ctx(1))).toMatchObject({ titulo: 'Catedral de Caracas', texto: 'Queda a media cuadra al este de la Plaza Bolívar. En 1772 ya figura en esta reconstrucción.' })
+    expect(responde('Capitolio', ctx(1)).texto).toMatch(/En 1772 todavía no figura en esta reconstrucción: aparece desde 1889\.$/)
+    expect(responde('Plaza Bolívar', ctx(1)).texto).toBe('En 1772 ya figura en esta reconstrucción.')
+    // `nace` es desde cuándo está modelado, no cuándo se construyó: la prosa no habla de construir ni de existir
+    for (const q of ['Capitolio', 'Casa Amarilla', 'Universidad', 'De Padre Sierra a La Bolsa']) expect(responde(q, ctx(1)).texto).not.toMatch(/exist|levant|(?<!re)constru/)
     expect(responde('Catedral', SIN_EPOCAS).texto).toBe('Queda a media cuadra al este de la Plaza Bolívar.')
   })
 

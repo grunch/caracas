@@ -353,6 +353,14 @@ describe('sugerir', () => {
     expect(sugerir(indice, 'veroe')[0]).toMatchObject({ tipo: 'esquina', resultado: { tipo: 'esquina', esquina: { nombre: 'Veroes' } } })
   })
 
+  test('el número de casa escrito se conserva en la cuadra sugerida: en el texto y en el resultado', () => {
+    const [s] = sugerir(indice, 'Sociedad a Trapo #12')
+    expect(s.texto).toBe('De Sociedad a Traposos n.º 12')
+    expect(s.resultado).toMatchObject({ tipo: 'cuadra', numero: '12' })
+    expect(resolver(indice, s.texto)).toMatchObject({ tipo: 'cuadra', numero: '12' })
+    expect(sugerir(indice, 'Sociedad a Trapo')[0]).toMatchObject({ texto: 'De Sociedad a Traposos', resultado: { numero: null } })
+  })
+
   test('nada que sugerir', () => {
     expect(sugerir(indice, '')).toEqual([])
     expect(sugerir(indice, '   ')).toEqual([])

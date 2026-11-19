@@ -2,7 +2,7 @@
  * La respuesta del buscador, en prosa: dónde queda lo que se buscó (respecto del hito más cercano o de la
  * Plaza Bolívar) y qué había ahí en la época elegida. Solo dice lo que los datos sostienen: la vecindad de
  * las esquinas sale del diccionario; "edificada" y "ciudad", de plano/crece.png (R y G, specs/02); la vida
- * de los hitos, de sus definiciones. Puro: recibe todo en `ctx`.
+ * de los hitos, de sus definiciones (desde cuándo figuran en la reconstrucción, que no es cuándo se construyeron). Puro: recibe todo en `ctx`.
  *
  *   ctx = { indice, epoca (índice o null), primera (la primera época que se muestra), epocas ([{ año }] o null),
  *           etapas(px) → { edificado, urbanizado } | null }
@@ -46,7 +46,8 @@ function partes(px, lugar, ctx) {
   const e = epocaDe(ctx)
   const nombre = lugar.corto ?? lugar.nombre
   const existe = e === null || vivo(lugar.nace, lugar.muere, e) >= 0.5
-  const sitio = existe ? nombre : `donde después se levantó ${nombre}`
+  // `nace` dice desde cuándo el hito está en la reconstrucción, no cuándo se construyó: no se afirma más que eso
+  const sitio = existe ? nombre : `donde esta reconstrucción pone después ${nombre}`
   if (m < JUNTO_M) return { junto: true, distancia: 'junto', hacia: existe ? a(sitio) : `a ${sitio}` }
   return { junto: false, distancia: aQueDistancia(m), hacia: `al ${rumbo(px[0] - lugar.px[0], px[1] - lugar.px[1])} ${existe ? de(sitio) : `de ${sitio}`}` }
 }
@@ -87,9 +88,9 @@ export function fraseEpoca(etapas, ctx, o = 'a') {
 function fraseVida(lugar, ctx) {
   const e = epocaDe(ctx)
   if (e === null) return ''
-  if (vivo(lugar.nace, lugar.muere, e) >= 0.5) return `En ${año(ctx, e)} ya existía.`
-  if (lugar.muere > 0 && e >= lugar.muere) return `En ${año(ctx, e)} ya no existía.`
-  return `En ${año(ctx, e)} todavía no existía: en esta reconstrucción aparece desde ${año(ctx, lugar.nace)}.`
+  if (vivo(lugar.nace, lugar.muere, e) >= 0.5) return `En ${año(ctx, e)} ya figura en esta reconstrucción.`
+  if (lugar.muere > 0 && e >= lugar.muere) return `En ${año(ctx, e)} ya no figura en esta reconstrucción.`
+  return `En ${año(ctx, e)} todavía no figura en esta reconstrucción: aparece desde ${año(ctx, lugar.nace)}.`
 }
 
 const juntar = (...frases) => frases.filter(Boolean).join(' ')

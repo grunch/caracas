@@ -94,10 +94,11 @@ export function crearGeocodificador({
 
   function buscar(consulta) {
     const q = String(consulta ?? '').trim().slice(0, MAX_CONSULTA)
+    // cada búsqueda reemplaza a la que espera su turno, también si esta se responde sin salir a la red
+    const esta = ++ultimaBusqueda
     if (!q) return Promise.resolve([])
     const llave = q.toLowerCase()
     if (guardadas.has(llave)) return Promise.resolve(guardadas.get(llave))
-    const esta = ++ultimaBusqueda
     const resultado = turno.then(async () => {
       if (esta !== ultimaBusqueda) throw new ErrorDeBusqueda('reemplazada')
       const falta = ultimoPedido + intervalo - ahora()

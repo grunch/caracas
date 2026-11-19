@@ -247,10 +247,14 @@ function rango(nombre, escrito) {
 const rangoDe = (entrada, escrito) => entrada.claves.map((k) => rango(k, escrito)).filter((r) => r !== null).sort()[0] ?? null
 const porRango = (p, q) => p.rango - q.rango || p.orden - q.orden || p.texto.localeCompare(q.texto, 'es')
 
-const cuadrasDe = (indice, a, filtro = '') => indice.vecinas(a)
+/** Las cuadras que salen de `a`; el número de casa escrito, si lo hay, se conserva en el texto y en el resultado. */
+const cuadrasDe = (indice, a, filtro = '', numero = null) => indice.vecinas(a)
   .map((b) => ({ b, rango: filtro ? rangoDe(b, filtro) : 0 }))
   .filter((c) => c.rango !== null)
-  .map(({ b, rango: r }) => ({ tipo: 'cuadra', texto: `De ${a.nombre} a ${b.nombre}`, rango: r, orden: a.aLaPlaza, resultado: resultadoCuadra(indice, a, b) }))
+  .map(({ b, rango: r }) => ({
+    tipo: 'cuadra', texto: `De ${a.nombre} a ${b.nombre}${numero ? ` n.º ${numero}` : ''}`, rango: r, orden: a.aLaPlaza,
+    resultado: resultadoCuadra(indice, a, b, numero),
+  }))
 
 /**
  * Lo que se ofrece mientras se escribe: `[{ tipo, texto, resultado }]`, primero lo que empieza como lo
@@ -258,19 +262,19 @@ const cuadrasDe = (indice, a, filtro = '') => indice.vecinas(a)
  * esquina), las cuadras que salen de X.
  */
 export function sugerir(indice, consulta, max = 8) {
-  const crudo = normalizar(separarNumero(consulta).texto)
-  const n = sinPrefijos(crudo)
+  const { texto, numero } = separarNumero(consulta)
+  const n = sinPrefijos(normalizar(texto))
   if (!n) return []
   const limpiar = (lista) => lista.sort(porRango).slice(0, max).map(({ tipo, texto, resultado }) => ({ tipo, texto, resultado }))
 
   // "la torre a ve": la izquierda ya es una esquina; se completan sus cuadras
-  const palabras = `${n}${/\s$/.test(String(consulta)) ? ' ' : ''}`.split(' ')
+  const palabras = `${n}${!numero && /\s$/.test(String(consulta)) ? ' ' : ''}`.split(' ')
   for (let i = palabras.length - 1; i > 0; i--) {
     if (palabras[i] !== 'a') continue
     const izq = buscarNombre(indice, palabras.slice(0, i).join(' '), { soloEsquinas: true })
     if (!izq?.exacta) continue
     const filtro = clave(sinPrefijos(palabras.slice(i + 1).join(' ')))
-    const cuadras = izq.entradas.flatMap((a) => cuadrasDe(indice, a, filtro))
+    const cuadras = izq.entradas.flatMap((a) => cuadrasDe(indice, a, filtro, numero))
     if (cuadras.length) return limpiar(cuadras)
   }
 

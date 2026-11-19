@@ -216,7 +216,9 @@ export function crearBuscador({ formulario, plano, coords, camera, cam, suelo, p
 
   /** Lo que pasa al mandar a buscar: primero el diccionario; si no está ahí, las direcciones de hoy. */
   async function buscar(texto = campo.value) {
+    const esta = ++pedido
     await listo
+    if (esta !== pedido) return null // se borró o se buscó otra cosa mientras llegaba el diccionario
     campo.value = texto
     borrar.hidden = !texto
     const posibles = sugerir(indice, texto, 2)

@@ -114,6 +114,16 @@ describe('crearGeocodificador', () => {
     for (let i = 1; i < m.pedidos.length; i++) expect(m.pedidos[i].t - m.pedidos[i - 1].t).toBeGreaterThanOrEqual(INTERVALO_MS)
   })
 
+  test('una búsqueda ya guardada también descarta la que esperaba su turno', async () => {
+    const m = mundo()
+    const geo = crearGeocodificador(m)
+    await geo.buscar('uno')
+    const vieja = geo.buscar('dos')
+    expect(await geo.buscar('uno')).toHaveLength(1)
+    await expect(vieja).rejects.toMatchObject({ motivo: 'reemplazada' })
+    expect(m.pedidos).toHaveLength(1)
+  })
+
   test('la red caída, un error del servicio y una respuesta rota se distinguen', async () => {
     await expect(crearGeocodificador(mundo(() => new TypeError('Failed to fetch'))).buscar('x')).rejects.toMatchObject({ motivo: 'red' })
     await expect(crearGeocodificador(mundo(() => ({ ok: false, status: 503 }))).buscar('x')).rejects.toMatchObject({ motivo: 'servicio' })
