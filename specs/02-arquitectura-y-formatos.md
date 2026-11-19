@@ -25,6 +25,7 @@ src/hitos.js             edificios con nombre, modelados a mano (plantas, partes
 src/epocas.js            línea de tiempo ← datos/crece.pak + plano/crece.webp + despeje.webp
 src/calles.js (*)        nombres de calles de hoy en canvas 2D ← calles.bin/json
 marcas.js   (chunk)      lista de marcas por época: [nombre, x, y, radio, nivel, nota, {desde,hasta,ficha,radio}]
+                         (*) Caracas: src/marcas.js (lógica) + marcas-capa.js (DOM) + marcas-datos.js; formato en specs/05
 fichas.js   (chunk)      textos de fichas + catálogo de fotos (w,h,título,autor,fecha,licencia,fuente)
 ficha.js    (lazy)       panel de ficha y visor de fotos
 buscar.js   (lazy)       buscador de direcciones (USIG + Nominatim)
