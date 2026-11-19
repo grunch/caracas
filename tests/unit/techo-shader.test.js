@@ -48,10 +48,9 @@ describe('techos: la geometría llega al fragment', () => {
   })
 
   test('cuánto mira cada cara al sol va al fragment, para sombrear los faldones', () => {
-    expect(vertexShader).toMatch(/vLuz = dot\(normalize\(normal\), SOL\);/)
-    // el sol de la escena (src/main.js): (-1200, 2000, 900), normalizado
-    const largo = Math.hypot(-1200, 2000, 900)
-    expect(vertexShader).toContain(`const vec3 SOL = vec3(${(-1200 / largo).toFixed(4)}, ${(2000 / largo).toFixed(4)}, ${(900 / largo).toFixed(4)});`)
+    // el sol es un uniform (src/luz.js); el coseno se lleva a la escala con que se ajustaron los tonos del tejado
+    expect(vertexShader).toContain('uniform vec3 uSol;')
+    expect(vertexShader).toMatch(/vLuz = 0\.30 \+ 0\.76 \* dot\(normalize\(normal\), uSol\);/)
   })
 
   test('las derivadas del faldón se toman en main, fuera de toda rama; techoEn las recibe', () => {

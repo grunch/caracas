@@ -53,7 +53,7 @@ Scrollytelling: a la izquierda, una lista larga de edificios por año; a la dere
 **Táctil**: un dedo mueve; dos dedos acercan, giran e inclinan; tocar un nombre lleva al lugar.
 **Modos** (ver `05`): WASD/flechas para moverse, Shift corre, Esc vuelve; en auto, V cambia la vista, B toca la bocina, M el sonido, N otro coche, y Q/E cambian de año.
 
-Parámetros URL útiles: `?limpio` (sin UI, para capturas), `?capture`, `?sinintro`, `?lugar=<nombre>`, `?hoy`, `?liviano` / `?pesado` (forzar calidad), `?chico`.
+Parámetros URL útiles: `?limpio` (sin UI, para capturas), `?capture`, `?sinintro`, `?lugar=<nombre>`, `?hoy`, `?liviano` / `?pesado` (forzar calidad), `?chico`. *Caracas:* `?sombras=0` / `?sombras=N` (lado del mapa de sombras), `?contorno=0`, `?grano=0` (specs/04, Luz y acabado).
 
 ## Estética (sistema visual)
 

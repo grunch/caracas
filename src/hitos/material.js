@@ -11,6 +11,8 @@ import { ShaderMaterial, DoubleSide, Vector3, Color } from 'three'
 import { GLSL_RELIEVE } from '../relieve.js'
 import { GLSL_EPOCAS } from '../shader/epocas.js'
 import { MAT } from './lienzo.js'
+import { GLSL_SOMBRA, UNIFORMS_DE_LUZ } from '../shader/sombra.js'
+import { vectorSol } from '../luz.js'
 
 const glsl = (n) => n.toFixed(1)
 const MARGEN_PIE_M = 0.5
@@ -44,9 +46,10 @@ const VERTICE = /* glsl */ `
   }`
 
 const FRAGMENTO = /* glsl */ `
-  uniform float uColor; uniform vec3 uSol, uLuzSol, uCielo, uTierra, uPapel;
+  uniform float uColor; uniform vec3 uLuzSol, uCielo, uTierra, uPapel;
   varying vec3 vNormal, vMundo, vColor; varying vec2 vUv; varying float vExiste, vSube, vAlto;
   flat varying float vMat;
+  ${GLSL_SOMBRA}
   float azar2(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
   bool es(float m) { return abs(vMat - m) < 0.5; }
 
@@ -134,9 +137,12 @@ const FRAGMENTO = /* glsl */ `
     }
 
     // la luz de la ciudad (hemisferio + sol, como MeshLambert): difuso = albedo / π × irradiancia
-    vec3 luz = mix(uTierra, uCielo, N.y * 0.5 + 0.5) + uLuzSol * max(dot(N, uSol), 0.0);
+    // con la sombra arrojada (src/shader/sombra.js): en color, sin sol directo y más fría
+    float sol = solEn(vMundo, N);
+    vec3 ambiente = mix(uTierra, uCielo, N.y * 0.5 + 0.5), directa = uLuzSol * max(dot(N, uSol), 0.0);
+    vec3 luz = ambiente + directa;
     bool esLuz = es(${glsl(MAT.LUZ)});
-    vec3 enColor = esLuz ? tono : tono * luz * 0.3183;
+    vec3 enColor = esLuz ? tono : tono * (ambiente + directa * sol) * luzDeColor(sol) * 0.3183;
 
     // tinta: papel bajo la misma luz; lo oscuro, rayado en diagonal (más tupido cuanto más oscuro) y la
     // sombra propia con una raya fina; el material agrega su trazo
@@ -146,7 +152,9 @@ const FRAGMENTO = /* glsl */ `
     float sombra = 1.0 - smoothstep(-0.1, 0.25, dot(N, uSol));
     float raya = max(step(1.0 - 0.75 * oscuro, diag), 0.55 * sombra * step(0.72, otra));
     vec3 papel = uPapel * luz * 0.3183;
-    vec3 enTinta = mix(papel, vec3(0.024, 0.015, 0.011), clamp(max(raya * 0.85, trazo * 0.85), 0.0, 1.0));
+    // la sombra arrojada, rayada como en la ciudad (la propia ya tiene su raya fina)
+    float arrojada = rayadoSombra((1.0 - sol) * step(0.0, dot(N, uSol)), vMundo);
+    vec3 enTinta = mix(papel, TINTA_SOMBRA, clamp(max(max(raya, arrojada) * 0.85, trazo * 0.85), 0.0, 1.0));
     if (esLuz) enTinta = papel;
 
     gl_FragColor = vec4(mix(enTinta, enColor, uColor), 1.0);
@@ -161,13 +169,15 @@ export const LUZ_CIUDAD = Object.freeze({ cielo: [0xfff4e0, 1.6], tierra: [0x6b5
 const luz = ([color, intensidad]) => new Color(color).multiplyScalar(intensidad)
 
 /** `U`: los uniforms de la ciudad, compartidos; `sol`: la posición de la luz direccional. */
-export function crearMaterialHitos({ U, sol = new Vector3(-1200, 2000, 900) }) {
+export function crearMaterialHitos({ U }) {
   const faltan = COMUNES.filter((k) => !U[k])
   if (faltan.length) throw new Error(`hitos: faltan uniforms de la ciudad (${faltan.join(', ')})`)
   return new ShaderMaterial({
     uniforms: {
+      uSol: { value: new Vector3(...vectorSol()) },
       ...Object.fromEntries(COMUNES.map((k) => [k, U[k]])),
-      uSol: { value: sol.clone().normalize() },
+      // el sol y el mapa de sombras de la ciudad; sin ellos (un U a medias), el sol de siempre y sin sombras
+      ...Object.fromEntries(UNIFORMS_DE_LUZ.filter((k) => U[k]).map((k) => [k, U[k]])),
       uLuzSol: { value: luz(LUZ_CIUDAD.sol) },
       uCielo: { value: luz(LUZ_CIUDAD.cielo) },
       uTierra: { value: luz(LUZ_CIUDAD.tierra) },
@@ -175,6 +185,24 @@ export function crearMaterialHitos({ U, sol = new Vector3(-1200, 2000, 900) }) {
     },
     vertexShader: VERTICE,
     fragmentShader: FRAGMENTO,
+    side: DoubleSide,
+  })
+}
+
+/**
+ * Los hitos vistos desde el sol, para el mapa de sombras (src/acabado.js): el mismo vértice, sin color.
+ * Las rejas no tiran sombra (sus barrotes se dibujan en el fragment: desde el sol serían un muro).
+ */
+export function crearMaterialSombraHitos(material) {
+  return new ShaderMaterial({
+    uniforms: material.uniforms,
+    vertexShader: VERTICE,
+    fragmentShader: /* glsl */ `
+      varying float vExiste, vSube; flat varying float vMat;
+      void main() {
+        if (vExiste < 0.02 || vSube < 0.01 || abs(vMat - ${glsl(MAT.VERJA)}) < 0.5) discard;
+        gl_FragColor = vec4(1.0);
+      }`,
     side: DoubleSide,
   })
 }

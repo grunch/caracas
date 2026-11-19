@@ -12,7 +12,7 @@
 import { BufferGeometry, BufferAttribute, Mesh } from 'three'
 import { crearLienzo } from './hitos/lienzo.js'
 import { parteDe } from './hitos/partes.js'
-import { crearMaterialHitos } from './hitos/material.js'
+import { crearMaterialHitos, crearMaterialSombraHitos } from './hitos/material.js'
 import { METRO } from './hitos/datos/marco.js'
 import { plazaBolivar } from './hitos/datos/plaza-bolivar.js'
 import { catedral } from './hitos/datos/catedral.js'
@@ -94,11 +94,13 @@ export function geometriaHitos({ posiciones, normales, colores, hitos, vidas, an
 }
 
 /** La malla de los hitos; `U` son los uniforms de la ciudad (crearMaterialCiudad), compartidos. */
-export function crearHitos({ hitos = HITOS, coords, U, sol }) {
+export function crearHitos({ hitos = HITOS, coords, U }) {
   const problemas = validarHitos(hitos, { ancho: coords.hoja.ancho / coords.metro, alto: coords.hoja.alto / coords.metro })
   if (problemas.length) throw new Error(`hitos: ${problemas.join('; ')}`)
   const datos = construirHitos(hitos, coords)
-  const malla = new Mesh(geometriaHitos(datos), crearMaterialHitos({ U, sol }))
+  const malla = new Mesh(geometriaHitos(datos), crearMaterialHitos({ U }))
+  malla.customDepthMaterial = crearMaterialSombraHitos(malla.material)
+  malla.castShadow = true
   malla.frustumCulled = false // el relieve y la ola los mueven en el shader: la esfera de la CPU no sirve
   malla.name = 'hitos'
   malla.userData.rangos = datos.rangos
