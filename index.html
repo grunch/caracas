@@ -50,7 +50,12 @@
     #firma:focus-visible{outline:2px solid var(--tinta);outline-offset:2px}
     /* hasta 1120 px el buscador ocupa la fila de arriba (src/buscador/buscador.css): la firma queda en la bienvenida y el Acerca */
     @media (max-width:1120px){#firma{display:none}}
-    @media (max-width:640px){#epocas button{min-height:44px;padding:6px 6px;font-size:14px;letter-spacing:0}}
+    @media (max-width:640px){#epocas button{min-height:44px;padding:6px 6px;font-size:14px;letter-spacing:0}
+      /* el texto de cada año, en dos líneas a lo más: el resto de la pantalla es de la ciudad */
+      #epocas .pie{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;font-size:12px;margin:4px 4px 2px}}
+    /* teléfono acostado: los botones más bajos y apretados, pegados al borde */
+    @media (max-height:500px) and (max-width:1120px){#botones{bottom:calc(10px + env(safe-area-inset-bottom,0px));right:calc(14px + env(safe-area-inset-right,0px));gap:6px}
+      #botones .panel{padding:8px 12px;font-size:14.5px}#leyenda{bottom:calc(66px + env(safe-area-inset-bottom,0px))}}
     @media (max-width:640px){#botones{left:calc(14px + env(safe-area-inset-left,0px));right:calc(14px + env(safe-area-inset-right,0px));flex-wrap:wrap;justify-content:flex-end;gap:8px}#botones .panel{padding:10px 12px;font-size:15px}#leyenda{bottom:calc(140px + env(safe-area-inset-bottom,0px))}}
   </style>
 </head>

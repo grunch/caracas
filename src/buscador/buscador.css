@@ -54,3 +54,12 @@
   #buscar{top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translate(-50%);width:min(640px,100vw - 28px)}
   body #epocas{top:calc(70px + env(safe-area-inset-top,0px));left:14px;right:14px;transform:none;margin:0 auto;width:fit-content}
 }
+/* teléfono acostado: no hay alto para dos filas arriba; la caja y los años van lado a lado, y el texto de cada
+   año se calla (el «Ver el plano de…» queda) */
+@media (max-height:500px) and (max-width:1120px){
+  #buscar{top:calc(10px + env(safe-area-inset-top,0px));left:calc(14px + env(safe-area-inset-left,0px));transform:none;width:min(320px,38vw)}
+  body #epocas{top:calc(10px + env(safe-area-inset-top,0px));left:calc(24px + min(320px,38vw) + env(safe-area-inset-left,0px));
+    right:calc(14px + env(safe-area-inset-right,0px));margin:0;width:auto;max-width:none;padding:3px 4px}
+  body #epocas .pie{display:none}
+  body #epocas .ver-plano{margin:0 auto 2px}
+}

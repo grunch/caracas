@@ -67,7 +67,7 @@ Scrollytelling: a la izquierda, una lista larga de edificios por año; a la dere
 ## Controles
 
 **Escritorio**: arrastrar = mover · rueda = acercar · botón derecho = girar/inclinar · click en un nombre = ir · `Espacio` = plano ⇄ ciudad (acostar/levantar) · `H` = lo de hoy · `C` = color ⇄ tinta. *Caracas:* `M` = mostrar/ocultar los nombres de los lugares; `/` = ir al buscador; `?` o `F1` = el Acerca. Todos los atajos salen de una sola tabla (`src/controles.js`), que también arma la ayuda.
-**Táctil**: un dedo mueve; dos dedos acercan, giran e inclinan; tocar un nombre lleva al lugar. *Caracas:* por ahora solo un dedo (mover) y tocar un nombre; los gestos de dos dedos quedan para T70, y la ayuda no los promete.
+**Táctil**: un dedo mueve; dos dedos acercan, giran e inclinan; tocar un nombre lleva al lugar. *Caracas (T70):* un dedo mueve; separar o juntar dos dedos acerca o aleja hacia ellos, girarlos gira y lo que estaba entre los dedos sigue entre ellos; deslizarlos juntos hacia arriba o abajo inclina. El modo (pellizcar o inclinar) se decide una vez, cuando los dedos se movieron 12 px (`src/gestos.js`), porque el navegador avisa un dedo por vez.
 **Modos** (ver `05`): WASD/flechas para moverse, Shift corre, Esc vuelve; en auto, V cambia la vista, B toca la bocina, M el sonido, N otro coche, y Q/E cambian de año.
 
 Parámetros URL útiles: `?limpio` (sin UI, para capturas), `?capture`, `?sinintro`, `?lugar=<nombre>`, `?hoy`, `?liviano` / `?pesado` (forzar calidad), `?chico`. *Caracas:* `?sombras=0` / `?sombras=N` (lado del mapa de sombras), `?contorno=0`, `?grano=0` (specs/04, Luz y acabado).
@@ -89,6 +89,8 @@ Parámetros URL útiles: `?limpio` (sin UI, para capturas), `?capture`, `?sinint
 ## Responsive
 
 Breakpoints cuidados a mano: ≤350, ≤370, ≤640 (teléfono), 641–860, 641–1080, ≤1100, 1101–1440 y **teléfono acostado** (`height ≤ 500`). Objetivos táctiles de al menos 44px (`@media (pointer:coarse)`). En teléfono, la firma pasa a ser un avatar redondo de 46px y los paneles se reubican para no tapar el centro.
+
+*Caracas (T70):* de pie (≤ 640 px), el texto de cada año va en dos líneas a lo más. Acostado (`max-height:500px`, hasta 1120 px de ancho), el buscador y los años van lado a lado en la fila de arriba, el texto del año se calla (queda «Ver el plano de…») y los botones se aprietan contra el borde. La firma no tiene avatar (sería una imagen de X): en el teléfono está en la bienvenida y en el Acerca. Modo liviano (`src/calidad.js`): además de texturas de 4096 y sombras de 2048, dibuja a 1,5 píxeles por punto como mucho (2 en equipos completos).
 
 ## Accesibilidad
 

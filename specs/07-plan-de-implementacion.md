@@ -98,7 +98,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 
 | ID | Tarea | Depende de | Listo cuando | Estado |
 |---|---|---|---|---|
-| T70 | Responsive y modo liviano: paneles en el teléfono, gestos, rendimiento en gama media | T25 | 30 fps o más en un teléfono de gama media | ⏳ |
+| T70 | Responsive y modo liviano: paneles en el teléfono, gestos, rendimiento en gama media | T25 | 30 fps o más en un teléfono de gama media | 🔄 (en revisión) |
 | T71 | `edificios.html`: la ciudad edificio por edificio (scrollytelling) | T43 | recorre todos los hitos | ⏳ |
 | T72 | Accesibilidad (WCAG 2.2 AA en la interfaz) y SEO básico | T44 | auditoría sin errores graves | ⏳ |
 | T73 | **Publicación** en GitHub Pages (grunch.github.io/caracas): build en cada push a `main`, con los datos bajados del release `datos-*` (`npm run datos:bajar`) | la decisión de derechos (tomada por el responsable) | el sitio está en línea | ✅ #50 (caracas.city) |

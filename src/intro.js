@@ -40,7 +40,7 @@ export const TEXTO_INTRO = Object.freeze({
     'La línea de tiempo la lleva hacia atrás. Sobre el mismo plano se calzaron los de 1772, 1843, 1889 y 1911, y en cada año queda en pie solo lo que ese plano ya dibujaba; donde todavía no había ciudad, la hoja queda en blanco. Las alturas, las fachadas y los techos no salen de ningún plano: son una reconstrucción, hecha con las costumbres y las imágenes de cada época.',
   ]),
   conRaton: 'Arrastra para moverte, acércate con la rueda y gira con el botón derecho. Toca un nombre para ir al lugar.',
-  conDedos: 'Arrastra con un dedo para moverte y toca un nombre para ir al lugar.',
+  conDedos: 'Arrastra con un dedo para moverte, separa dos dedos para acercarte y gíralos para girar la vista. Toca un nombre para ir al lugar.',
   crecer: 'Ver crecer la ciudad',
   entrar: 'Entrar',
   mas: 'Qué estoy viendo y de dónde salen los datos',
