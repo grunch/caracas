@@ -54,7 +54,7 @@ test('la bienvenida sale una vez y se cierra con el teclado; «?» abre el Acerc
   const panel = page.getByRole('dialog', { name: 'Caracas, de 1772 a 1936' })
   await expect(panel).toBeVisible()
   await expect(panel.getByRole('heading', { level: 3 })).toHaveText(['Qué estás viendo', 'Cómo moverte', 'Las épocas', 'Fuentes y licencias', 'Créditos'])
-  await expect(panel.locator('kbd')).toHaveText(['Espacio', 'C', 'H', 'M', '/', '? o F1'])
+  await expect(panel.locator('kbd')).toHaveText(['Espacio', 'C', 'H', 'M', 'P', '/', '? o F1'])
   await expect(panel.getByText('no trae la línea de tiempo')).toBeVisible() // crece.json no está, como en la demo
   await panel.getByRole('navigation').getByRole('button', { name: 'Fuentes y licencias' }).click()
   const fuentes = panel.locator('section', { has: page.getByRole('heading', { name: 'Fuentes y licencias' }) })
