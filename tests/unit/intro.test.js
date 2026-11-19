@@ -75,7 +75,7 @@ describe('TEXTO_INTRO', () => {
 
   it('es breve y dice qué es reconstrucción', () => {
     expect(TEXTO_INTRO.parrafos).toHaveLength(2)
-    expect(TEXTO_INTRO.parrafos.join(' ').length).toBeLessThan(620)
+    expect(TEXTO_INTRO.parrafos.join(' ').length).toBeLessThan(700)
     expect(TEXTO_INTRO.parrafos[1]).toMatch(/reconstrucción/)
   })
 

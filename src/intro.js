@@ -37,7 +37,7 @@ export const TEXTO_INTRO = Object.freeze({
   bajada: 'La ciudad de un plano de 1936, levantada manzana por manzana, y los planos más viejos que la hacen crecer.',
   parrafos: Object.freeze([
     'Lo que ves es el plano de Caracas que la Dirección de Cartografía Nacional dibujó en 1936, tendido como una hoja sobre el relieve del valle. De ese dibujo se levanta la ciudad: las manzanas, lo edificado y los patios están donde el plano los pone.',
-    'La línea de tiempo la lleva hacia atrás. Sobre el mismo plano se calzaron los de 1772, 1843, 1889 y 1911, y en cada año queda en pie solo lo que ese plano ya dibujaba. Las alturas, las fachadas y los techos no salen de ningún plano: son una reconstrucción, hecha con las costumbres y las imágenes de cada época.',
+    'La línea de tiempo la lleva hacia atrás. Sobre el mismo plano se calzaron los de 1772, 1843, 1889 y 1911, y en cada año queda en pie solo lo que ese plano ya dibujaba; donde todavía no había ciudad, la hoja queda en blanco. Las alturas, las fachadas y los techos no salen de ningún plano: son una reconstrucción, hecha con las costumbres y las imágenes de cada época.',
   ]),
   conRaton: 'Arrastra para moverte, acércate con la rueda y gira con el botón derecho. Toca un nombre para ir al lugar.',
   conDedos: 'Arrastra con un dedo para moverte y toca un nombre para ir al lugar.',

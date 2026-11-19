@@ -117,7 +117,7 @@ describe('queEstasViendo', () => {
 
   it('dice qué es del plano y qué es reconstrucción, sin vender de más', () => {
     const parrafos = queEstasViendo([1772])
-    expect(parrafos.map((p) => p.rotulo)).toEqual(['El plano', 'Lo que sale del plano', 'Lo que es reconstrucción', 'Los edificios con nombre', 'Los años anteriores', 'El error', 'Lo de hoy', 'Los nombres y las fotos'])
+    expect(parrafos.map((p) => p.rotulo)).toEqual(['El plano', 'Lo que sale del plano', 'Lo que es reconstrucción', 'Los edificios con nombre', 'Los años anteriores', 'La hoja de cada año', 'El error', 'Lo de hoy', 'Los nombres y las fotos'])
     const texto = parrafos.map((p) => p.texto).join(' ')
     expect(texto).toMatch(/por regla/)
     expect(texto).toMatch(/verosímiles, no documentados/)
