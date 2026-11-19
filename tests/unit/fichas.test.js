@@ -65,7 +65,8 @@ describe('contenidoDeFicha', () => {
   it('al cambiar la época cambian el nombre, el texto que rige y las fotos «de esta época»', () => {
     const en1889 = contenido('plaza-bolivar', 3)
     expect(en1889.titulo).toBe('Plaza Bolívar')
-    expect(en1889.parrafos.map((p) => p.rige)).toEqual([false, true])
+    // el párrafo que rige va primero; los demás, después y en orden
+    expect(en1889.parrafos.map((p) => [p.año, p.rige])).toEqual([[1889, true], [1772, false]])
     expect(en1889.fotos.map((f) => [f.id, f.deEpoca])).toEqual([['estatua', true], ['mercado', false], ['damero', false]])
     expect(en1889.hayDeEpoca).toBe(true)
 
@@ -101,8 +102,8 @@ describe('contenidoDeFicha', () => {
   it('sin texto propio usa las notas de la marca, cada una en su época, sin repetir', () => {
     const c = contenidoDeFicha({ marca: marca('teatro-municipal'), ficha: undefined, fotos: [], epoca: 3 })
     expect(c.parrafos).toEqual([
-      { año: 1772, texto: 'La plaza y la iglesia de San Pablo.', rige: false },
       { año: 1889, texto: 'Donde estuvo la plaza de San Pablo.', rige: true },
+      { año: 1772, texto: 'La plaza y la iglesia de San Pablo.', rige: false },
     ])
     expect(contenidoDeFicha({ marca: marca('catuche'), ficha: undefined, fotos: [], epoca: 3 }).parrafos).toEqual([])
   })

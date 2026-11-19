@@ -330,7 +330,7 @@ const marcas = crearCapaMarcas({
   altura: sueloEn,
   alSobre: () => pedirCuadro(2),
   alAbrir(marca) {
-    // la cámara vuela al lugar (nunca se aleja); T43 abrirá aquí la ficha, con marcas.alAbrirMarca o el evento
+    // la cámara vuela al lugar (nunca se aleja); la ficha se abre con el evento (src/ficha-panel.js)
     const destino = { x: marca.x, z: marca.z, dist: distanciaDeVuelo(marca.nivel, { ahora: cam.now.dist, destino: cam.goal.dist }) }
     if (sinAnimar.matches) cam.jump(destino); else cam.volar(destino)
     marcas.alAbrirMarca?.(marca)

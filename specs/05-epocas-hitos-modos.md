@@ -172,8 +172,9 @@ tests); `src/ficha-panel.js`, el panel y el visor de fotos (DOM); `src/fichas-da
 - **Qué muestra** (`contenidoDeFicha`): el nombre que rige en la época elegida; «Hacia 1889» (o «Todavía no
   figura en 1772: aparece en 1936» / «Ya no figura en 1936: estuvo hasta 1911»); la lista de los nombres que
   tuvo, con los años de la línea de tiempo en que rigió cada uno (`1772–1843 Plaza Mayor · desde 1889 Plaza
-  Bolívar`); los párrafos, cada uno con el año desde el que vale, con el que rige a plena tinta y los demás
-  atenuados; «Hoy» y «Por verificar»; las fotos; y la fuente del nombre (el campo `fuente` de la marca).
+  Bolívar`); los párrafos, cada uno con el año desde el que vale: primero y a plena tinta el que rige, después
+  los demás, en orden y atenuados; «Hoy» y «Por verificar»; las fotos; y la fuente del nombre (el campo
+  `fuente` de la marca).
 - **Textos** (`src/fichas-datos.js`):
   ```js
   'plaza-bolivar': { textos: [[1, 'La plaza mayor era el mercado…'], [3, 'Sin el mercado, la plaza se hizo jardín…']],

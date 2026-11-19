@@ -50,7 +50,8 @@ function parrafosDe(marca, ficha) {
  * Todo lo que muestra la ficha de una marca en una época (entera):
  *   { id, epoca, año, existe, titulo, cuando, nombres: [{ nombre, periodo, rige }], parrafos: [{ año, texto, rige }],
  *     hoy, dudas, fuente, fotos: [{ …foto, deEpoca }], hayDeEpoca }
- * Las fotos «de esta época» van primero; el párrafo que rige es el último que empieza en la época o antes.
+ * Las fotos «de esta época» van primero; el párrafo que rige es el último que empieza en la época o antes, y
+ * también va primero.
  */
 export function contenidoDeFicha({ marca, ficha, fotos = [], epoca, años = AÑOS_DE_EPOCA }) {
   const existe = vivaEn(marca, epoca)
@@ -70,7 +71,9 @@ export function contenidoDeFicha({ marca, ficha, fotos = [], epoca, años = AÑO
     titulo: (rige ?? (todavia ? nombres[0] : nombres.at(-1))).nombre,
     cuando,
     nombres: nombres.length > 1 ? nombres : [],
-    parrafos: parrafos.map((p) => ({ año: años[p.desde], texto: p.texto, rige: p === actual })),
+    // el que rige va primero (es lo que se lee al abrir la ficha); después los demás, en orden
+    parrafos: [...parrafos.filter((p) => p === actual), ...parrafos.filter((p) => p !== actual)]
+      .map((p) => ({ año: años[p.desde], texto: p.texto, rige: p === actual })),
     hoy: ficha?.hoy ?? '', dudas: ficha?.dudas ?? '', fuente: marca.fuente ?? '',
     fotos: [...propias.filter((f) => f.deEpoca), ...propias.filter((f) => !f.deEpoca)],
     hayDeEpoca: propias.some((f) => f.deEpoca),

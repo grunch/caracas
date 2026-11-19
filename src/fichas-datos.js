@@ -29,14 +29,17 @@ export const FICHAS = Object.freeze({
   },
   calvario: {
     textos: [
-      [1, 'El cerro al oeste de la ciudad. Desde aquí se dibujaron las vistas de 1839: la ciudad baja, la torre de la Catedral y el Ávila al fondo.'],
-      [3, 'El plano de 1889 dibuja el paseo en la cima y cuenta su capilla entre los templos (XII, «el Calvario»). Desde aquí se tomaron las fotos panorámicas de comienzos del siglo XX.'],
+      [1, 'El cerro al oeste de la ciudad. Desde este lado se dibujó la vista de 1839: la ciudad baja, la torre de la Catedral y el Ávila al fondo.'],
+      [3, 'El plano de 1889 dibuja el paseo en la cima y cuenta su capilla entre los templos (XII, «el Calvario»). Desde aquí se tomaron las fotos panorámicas de comienzos del siglo XX, y aquí está el arco de la Federación.'],
       [5, 'El plano de 1936 lo rotula «Paseo Independencia» y marca la «Capilla del Calvario».'],
     ],
     dudas: 'En 1889 el paseo llevaba el nombre de Guzmán Blanco (dato general, sin cotejar); cuándo pasó a llamarse Independencia, tampoco se cotejó.',
   },
   catuche: {
-    textos: [[1, 'Una de las quebradas que bajan del Ávila y cruzan la ciudad. El plano de 1889 la rotula «Río Catuche»; el de 1936 la dibuja junto a la esquina de Puente Trinidad.']],
+    textos: [
+      [1, 'Una de las quebradas que bajan del Ávila y cruzan la ciudad. El plano de 1889 la rotula «Río Catuche»; el de 1936 la dibuja junto a la esquina de Puente Trinidad.'],
+      [2, 'Ferdinand Bellermann pintó en 1844–1845 el puente de la Trinidad, de arcos de mampostería sobre la quebrada honda, en el borde norte de la ciudad.'],
+    ],
   },
   caroata: {
     textos: [[1, 'La quebrada del oeste del casco. El plano de 1889 la rotula «Río Caroata»; el de 1936 la dibuja bajo los puentes Nuevo, Junín y Arauca.']],
@@ -49,22 +52,23 @@ export const FICHAS = Object.freeze({
   'plaza-bolivar': {
     textos: [
       [1, 'La plaza mayor era el mercado de la ciudad: una explanada de tierra rodeada de galerías de arcos, con hileras de puestos bajo toldos. Así la muestran un grabado fechado en 1852 y la pintura que Camille Pissarro hizo de ella por esos años.'],
-      [3, 'Sin el mercado, la plaza se hizo jardín: canteros, faroles, una reja alrededor y, en el centro, la estatua ecuestre de Bolívar, que las fotos fechan en 1874. El plano de 1889 ya la llama Plaza Bolívar.'],
-      [4, 'Las fotos de comienzos del siglo XX la muestran con el piso de mosaico en damero y los árboles ya crecidos.'],
+      [3, 'Hacia 1870 el mercado ya no está: la foto de Lessmann y la acuarela de Bolet muestran la plaza en obra, con los árboles recién plantados. Después llega el jardín, con canteros, faroles, una reja alrededor y, en el centro, la estatua ecuestre de Bolívar, que las fotos fechan en 1874. El plano de 1889 ya la llama Plaza Bolívar.'],
+      [4, 'Las fotos de 1910 a 1920 la muestran con el piso de mosaico en damero, los faroles de varios brazos y los árboles ya crecidos.'],
     ],
     hoy: 'la Plaza Bolívar, con la misma estatua.',
-    dudas: 'El nombre «Plaza Bolívar» es anterior a la estatua (dato general: un decreto de 1842); aquí cambia junto con el jardín, en 1889. El mercado se quitó hacia 1865, según las fechas de las fotos.',
+    dudas: 'El nombre «Plaza Bolívar» es anterior a la estatua (dato general: un decreto de 1842); aquí cambia junto con el jardín, en 1889.',
   },
   catedral: {
     textos: [
       [1, 'En la esquina de La Torre, con la fachada hacia la plaza y la torre a su izquierda, al norte. La torre es lo más alto de la ciudad colonial: en las vistas sobresale dos o tres veces sobre los tejados.'],
-      [3, 'El plano de 1889 la cuenta primera entre los templos (I). Las imágenes de 1867 a 1910 muestran la fachada barroca de dos cuerpos y la torre de tres, con reloj y cupulín.'],
+      [3, 'El plano de 1889 la cuenta primera entre los templos (I). Las imágenes de 1867 a 1920 muestran la fachada barroca de dos cuerpos y la torre de tres, con reloj y cupulín.'],
     ],
     dudas: 'No tenemos imagen de la Catedral anterior a la década de 1860: en 1772 y 1843 aparece con el aspecto de esas fotos.',
   },
   'casa-amarilla': {
     textos: [
-      [3, 'Frente al lado oeste de la plaza. El plano de 1889 la numera 5, «Casa amarilla»; las imágenes de la época muestran un palacio de esquina de dos pisos, con balcones y un remate central.'],
+      [3, 'Frente al lado oeste de la plaza. En 1870 era la Casa de Gobierno: un caserón de esquina de dos pisos, con balcones y tejado de teja, como lo pintó Ramón Bolet Peraza. El plano de 1889 la numera 5, «Casa amarilla».'],
+      [4, 'Una postal de hacia 1904 la muestra ya con la fachada de cornisa, balcones de hierro y remate central, frente a los árboles de la plaza.'],
       [5, 'El plano de 1936 la rotula «Min. del Exterior».'],
     ],
   },
@@ -72,6 +76,7 @@ export const FICHAS = Object.freeze({
     textos: [
       [1, 'Aquí estuvo el convento de las Concepciones, en la manzana al suroeste de la plaza.'],
       [3, 'El plano de 1889 numera dos edificios en la manzana: 1, «Capitolio», y 2, «Palacio Federal». El de 1936 dibuja cuatro alas alrededor de un jardín, con un óvalo en el ala norte.'],
+      [4, 'Una foto de entre 1915 y 1920 muestra por dentro un salón de planta ovalada, con una batalla pintada en la cúpula: el óvalo del plano.'],
     ],
     hoy: 'el Palacio Federal Legislativo.',
     dudas: `Que aquí estuvo el convento de las Concepciones es un dato general: ${SIN_LEYENDA}.`,
@@ -79,7 +84,7 @@ export const FICHAS = Object.freeze({
   universidad: {
     textos: [
       [1, 'El convento de San Francisco, junto a su iglesia.'],
-      [3, 'El plano de 1889 pone aquí la Universidad (3), frente al Capitolio; el de 1936, la «Universidad Central». Las fotos muestran una fachada neogótica, con ventanas ojivales y pináculos.'],
+      [3, 'El plano de 1889 pone aquí la Universidad (3), frente al Capitolio; el de 1936, la «Universidad Central». Las fotos muestran una fachada neogótica, con ventanas ojivales, pináculos y una torre de aguja.'],
     ],
     hoy: 'el Palacio de las Academias.',
     dudas: `Que antes fue el convento de San Francisco es un dato general: ${SIN_LEYENDA}.`,
@@ -87,6 +92,7 @@ export const FICHAS = Object.freeze({
   'san-francisco': {
     textos: [
       [1, 'La iglesia del convento franciscano. El primer esquema de la ciudad, de 1578, ya nombra San Francisco.'],
+      [2, 'Una litografía de hacia 1845 muestra su portada barroca y, al lado, el frente bajo del convento.'],
       [3, 'Templo VII en el plano de 1889; «Iglesia San Francisco» en el de 1936.'],
     ],
   },
@@ -142,18 +148,24 @@ export const FICHAS = Object.freeze({
     dudas: `El nombre anterior es un dato general: ${SIN_LEYENDA}.`,
   },
   'casa-natal': {
-    textos: [[2, 'La casa donde nació Simón Bolívar, a una cuadra de la plaza mayor. El plano de 1889 la numera 24, «Casa donde nació Bolívar»; el de 1936 la rotula «Casa Natal».']],
+    textos: [
+      [2, 'La casa donde nació Simón Bolívar, a una cuadra de la plaza mayor. El plano de 1889 la numera 24, «Casa donde nació Bolívar»; el de 1936 la rotula «Casa Natal».'],
+      [5, 'Una revista de 1930 muestra su patio cuadrado, con corredores de pilares de madera y una pila de piedra al centro.'],
+    ],
     dudas: 'La casa es anterior (Bolívar nació en 1783): aquí se marca desde 1843.',
   },
   'teatro-municipal': {
     textos: [
       [1, 'Aquí estaban la plaza y la iglesia de San Pablo.'],
-      [3, 'El Teatro Municipal se levantó donde estuvo San Pablo: el plano de 1889 lo numera 25.'],
+      [3, 'El teatro se levantó donde estuvo San Pablo: el plano de 1889 lo numera 25, «Teatro Municipal». En la foto de la década de 1880 el letrero del pórtico dice «Teatro Guzmán Blanco».'],
     ],
-    dudas: 'La demolición de San Pablo (hacia 1876) y el primer nombre del teatro (Guzmán Blanco) son datos generales, sin cotejar con el catálogo.',
+    dudas: 'La demolición de San Pablo (hacia 1876) es un dato general, sin cotejar con el catálogo.',
   },
   'santa-teresa': {
-    textos: [[3, 'Templo III del plano de 1889; «Iglesia Santa Teresa» en el de 1936.']],
+    textos: [
+      [3, 'Templo III del plano de 1889; «Iglesia Santa Teresa» en el de 1936.'],
+      [4, 'Una postal de 1912 muestra una de sus fachadas, de columnas pareadas y frontón, con las cúpulas detrás.'],
+    ],
     dudas: 'Antes hubo en el lugar un oratorio (dato general: San Felipe Neri), que no se marca.',
   },
   'teatro-nacional': {
@@ -182,7 +194,7 @@ export const FICHAS = Object.freeze({
     ],
   },
   'puente-hierro': {
-    textos: [[3, 'El puente sobre el Guaire, al sur de la ciudad. El plano de 1889 ya lo rotula «Puente de hierro».']],
+    textos: [[3, 'El puente sobre el Guaire, al sur de la ciudad. Una foto publicada en 1876 lo muestra recién hecho, con su hilera de chaguaramos; el plano de 1889 lo rotula «Puente de hierro».']],
   },
 
   // --- el norte ---
@@ -199,7 +211,7 @@ export const FICHAS = Object.freeze({
   },
   panteon: {
     textos: [
-      [2, 'La iglesia de la Santísima Trinidad, al norte de la ciudad.'],
+      [2, 'La iglesia de la Santísima Trinidad, al norte de la ciudad. Ferdinand Bellermann la dibujó en ruinas hacia 1842–1845.'],
       [3, 'La iglesia de la Trinidad, convertida en Panteón Nacional: el plano de 1889 lo numera 22.'],
       [5, 'El plano de 1936 dibuja tres torres: la fachada se había rehecho poco antes.'],
     ],
@@ -217,7 +229,7 @@ export const FICHAS = Object.freeze({
 
   // --- el oeste ---
   miraflores: {
-    textos: [[4, 'Un palacio de mansardas sobre un basamento, al noroeste del centro. El plano de 1936 lo rotula «Palacio Miraflores».']],
+    textos: [[4, 'Al noroeste del centro, sobre una terraza: un palacio de un piso alto con pabellones de mansarda, que ya se ve en las fotos tomadas desde El Calvario hacia 1900. El álbum del Centenario, de hacia 1911, lo llama «Residencia Presidencial»; el plano de 1936 lo rotula «Palacio Miraflores».']],
     hoy: 'el Palacio de Miraflores.',
     dudas: 'Si ya estaba en pie en 1889, por verificar: aquí aparece desde 1911.',
   },

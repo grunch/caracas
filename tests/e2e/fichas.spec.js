@@ -22,8 +22,10 @@ const PIXEL = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQ
 // en un instante también donde sí están, y el render por software no se pasa de tiempo.
 const PESADOS = /\/(datos\/(ciudad\.pak|arboles\.bin|relieve\.bin)|plano\/[^?]*\.(webp|png))(\?.*)?$/
 
-/** Sin línea de tiempo (la época se fija con los uniforms, como en marcas.spec.js) ni datos pesados. */
+/** Sin línea de tiempo (la época se fija con los uniforms, como en marcas.spec.js), datos pesados ni animaciones. */
 async function sinDatos(page) {
+  // sin animaciones: la cámara salta al lugar en vez de volar y el panel aparece sin fundido (menos esperas)
+  await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.route('**/datos/crece.json', (ruta) => ruta.fulfill({ status: 404 }))
   await page.route(PESADOS, (ruta) => ruta.fulfill({ status: 404 }))
 }

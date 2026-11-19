@@ -1,4 +1,7 @@
 import { describe, it, expect } from 'vitest'
+import { readdirSync, readFileSync, existsSync } from 'node:fs'
+import path from 'node:path'
+import { MARCAS } from '../../src/marcas-datos.js'
 import {
   elegibilidad, fechaDe, licenciaVisible, medidasDerivadas, entradaDeFoto, armarManifiesto, descargable, informe, salidasDeFotos,
 } from '../../tools/fotos-lib.mjs'
@@ -172,5 +175,41 @@ describe('salidasDeFotos', () => {
   it('dos archivos por foto del manifiesto; sin manifiesto, ninguno', () => {
     expect(salidasDeFotos({ fotos: [{ id: 'a' }, { id: 'b' }] })).toEqual(['public/fotos/a.webp', 'public/fotos/m/a.webp', 'public/fotos/b.webp', 'public/fotos/m/b.webp'])
     expect(salidasDeFotos(null)).toEqual([])
+  })
+})
+
+describe('las fichas de fuentes/imagenes/', () => {
+  const base = path.resolve(import.meta.dirname, '../../fuentes/imagenes')
+  const lista = readdirSync(base, { withFileTypes: true }).filter((d) => d.isDirectory() && existsSync(path.join(base, d.name, 'ficha.json')))
+    .map((d) => ({ id: d.name, ficha: JSON.parse(readFileSync(path.join(base, d.name, 'ficha.json'), 'utf8')), original: 'original.jpg' }))
+  const { publicables, excluidas } = armarManifiesto(lista, { marcas: new Set(MARCAS.map((m) => m.id)) })
+  const publicadas = new Set(publicables.map((p) => p.id))
+
+  it('todas las que nombran una marca son publicables: ninguna marca apunta a una imagen sin derechos claros', () => {
+    for (const { id, ficha } of lista) {
+      if ((ficha.marcas ?? []).length) expect(publicadas.has(id), `${id}: ${elegibilidad(ficha).motivos.join('; ')}`).toBe(true)
+    }
+    expect(publicables.length).toBeGreaterThanOrEqual(20)
+  })
+
+  it('las referencias internas y lo que tiene derechos reservados no se publican nunca', () => {
+    for (const id of ['0000-usuario-aerea-pueblo-colonial', '1955-pinterest-plaza-miranda-av-baralt', '1955-usuario-plaza-miranda-restaurada']) {
+      expect(publicadas.has(id), id).toBe(false)
+      expect(excluidas.find((x) => x.id === id).motivos.join(' ')).toMatch(/no publicable/)
+    }
+    // ni nada tomado de redes, blogs o sitios sin licencia: solo lo que tiene página de fuente y licencia
+    for (const { id } of publicables) expect(id).not.toMatch(/-(facebook|pinterest|runrun|monedas|usuario|blog|banesco|eltroudi|camaradecaracas|ciudadccs)-/)
+  })
+
+  it('cada publicable dice de dónde sale, quién la hizo, de cuándo es y con qué licencia, y se baja de Wikimedia', () => {
+    for (const { id, ficha } of publicables) {
+      expect(ficha.url_fuente, id).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/)
+      expect(descargable(ficha.url_descarga), id).toBe(true)
+      expect(ficha.verificacion_dp, id).toMatch(/Wikimedia Commons \(\d{4}-\d{2}-\d{2}\)/)
+      const fila = entradaDeFoto(id, ficha, { ancho: ficha.ancho, alto: ficha.alto })
+      for (const campo of ['titulo', 'autor', 'fecha', 'licencia', 'fuente']) expect(fila[campo], `${id}.${campo}`).toBeTruthy()
+      expect(fila.licencia, id).toMatch(/^(Dominio público|CC0)$/)
+      expect(fila.epocas.every((e) => Number.isInteger(e) && e >= 1 && e <= 5), id).toBe(true)
+    }
   })
 })

@@ -1,13 +1,15 @@
 /* La ficha de un lugar (panel al costado; hoja desde abajo en pantallas angostas) y el visor de fotos
    (src/ficha-panel.js). Los colores son los de index.html: --papel, --tinta, --sobre. */
-#ficha{position:fixed;z-index:8;right:calc(26px + env(safe-area-inset-right,0px));top:calc(138px + env(safe-area-inset-top,0px));
-  width:min(372px,100vw - 52px);max-height:calc(100dvh - 234px);box-sizing:border-box;display:flex;flex-direction:column;
+#ficha{--arriba:138px;position:fixed;z-index:8;right:calc(26px + env(safe-area-inset-right,0px));top:calc(var(--arriba) + env(safe-area-inset-top,0px));
+  width:min(372px,100vw - 52px);max-height:calc(100dvh - var(--arriba) - 96px);box-sizing:border-box;display:flex;flex-direction:column;
   color:var(--tinta);background:var(--papel);border:1px solid var(--tinta);outline:1px solid #2a221b99;outline-offset:2px;box-shadow:0 8px 34px #0008;
   opacity:0;visibility:hidden;transform:translateX(14px);transition:opacity .35s,transform .35s,visibility 0s .35s}
-/* con la pantalla ancha la línea de tiempo (640 px al centro) no llega al panel: sube hasta arriba */
-@media (min-width:1480px){#ficha{top:calc(26px + env(safe-area-inset-top,0px));max-height:calc(100dvh - 122px)}}
-body.hoy #ficha{max-height:calc(100dvh - 334px)}
-@media (min-width:1480px){body.hoy #ficha{max-height:calc(100dvh - 222px)}}
+/* el panel va debajo de la línea de tiempo (--arriba): con la pantalla ancha no llega hasta él y sube hasta
+   arriba; hasta 1120 px el buscador ocupa la primera fila y la línea de tiempo baja (src/buscador/buscador.css) */
+@media (min-width:1480px){#ficha{--arriba:26px}}
+@media (max-width:1120px){#ficha{--arriba:192px}}
+/* con «lo de hoy» prendido, la leyenda queda a la vista debajo del panel */
+body.hoy #ficha{max-height:calc(100dvh - var(--arriba) - 196px)}
 /* al abrir, visible desde el primer instante: el foco entra enseguida (un elemento oculto no lo recibe) */
 #ficha.ver{opacity:1;visibility:visible;transform:none;transition:opacity .35s,transform .35s}
 #ficha .cabeza{flex:none;padding:13px 46px 10px 18px;border-bottom:1px solid #2a221b44}
@@ -106,10 +108,11 @@ body.ficha .marca.abierta.con-nota .tag{padding:2px 8px 3px}
   #ficha .cuerpo{touch-action:pan-y}
   #ficha .fotos.mas{touch-action:pan-x pan-y}
 }
+/* teléfono acostado: no hay alto para el buscador, los años y la ficha; con la ficha abierta, solo ella */
 @media (max-height:500px) and (min-width:641px){
   #ficha{top:calc(10px + env(safe-area-inset-top,0px));width:min(340px,44vw);max-height:calc(100dvh - 92px)}
   body.hoy #ficha{max-height:calc(100dvh - 92px)}
-  body.ficha #epocas .pie{display:none}
+  body.ficha #epocas,body.ficha #buscar{display:none}
   #ficha .fotos.una img{max-height:150px}
 }
 @media (prefers-reduced-motion:reduce){#ficha,#visor,#ficha .texto p.epoca{transition:none}#ficha{transform:none}}

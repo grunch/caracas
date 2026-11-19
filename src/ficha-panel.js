@@ -212,7 +212,10 @@ export function crearFichas({ raiz = document.body, marcas, fichas = {}, epocaEn
       e.stopPropagation()
       return
     }
-    if (e.key === 'Escape' && estado.marca) cerrar()
+    // Escape cierra lo de más arriba y nada más (el buscador tiene el suyo); en un campo de texto no es para la ficha
+    if (e.key !== 'Escape' || !estado.marca || e.target.closest?.('input, textarea, select, [contenteditable]')) return
+    cerrar()
+    e.stopPropagation()
   }, { capture: true })
 
   return {
