@@ -64,7 +64,7 @@ def frentes(poli, lados, cerca=3.0):
 @pytest.mark.parametrize('grados', [0.0, 10.0, -27.0])
 def test_una_manzana_maciza_se_parte_en_lotes_rectos(grados):
     clases, esquinas = manzana_girada(100, grados)
-    polis = poligonos(vectorizar(clases, METRO, plaza=(180, 180)))
+    polis = poligonos(vectorizar(clases, METRO, plaza=(180, 180), cuadra_modelo=False))
     lados = lados_de(esquinas)
     assert 400 / 16 <= len(polis) <= 400 / 8
     assert all(p.is_valid for p in polis)
@@ -83,7 +83,7 @@ def test_una_manzana_maciza_se_parte_en_lotes_rectos(grados):
 
 def test_ningun_lote_llega_en_punta_al_centro_de_la_manzana():
     clases, _ = manzana_girada(100, 0)
-    polis = poligonos(vectorizar(clases, METRO, plaza=(180, 180)))
+    polis = poligonos(vectorizar(clases, METRO, plaza=(180, 180), cuadra_modelo=False))
     centro = box(178, 178, 182, 182)
     assert sum(p.intersects(centro) for p in polis) <= 4
 
@@ -92,7 +92,7 @@ def test_una_manzana_con_patio_tiene_casas_rectas_en_la_corona():
     c = np.full((260, 260), CLASE['calle'], np.uint8)
     c[30:230, 30:230] = CLASE['edificado']
     c[70:190, 70:190] = CLASE['patio']
-    polis = poligonos(vectorizar(c, METRO, plaza=(130, 130)))
+    polis = poligonos(vectorizar(c, METRO, plaza=(130, 130), cuadra_modelo=False))
     lados = lados_de(np.array([[30, 30], [230, 30], [230, 230], [30, 230]], float))
     de_un_frente = [p for p in polis if len(frentes(p, lados)) == 1]
     assert len(de_un_frente) >= 16
@@ -105,7 +105,7 @@ def test_un_lado_largo_apenas_torcido_no_deja_tiras_finas_contra_la_calle():
     c = np.full((260, 400), CLASE['calle'], np.uint8)
     esquinas = np.array([[40, 60], [360, 82], [360, 200], [40, 200]])
     cv2.fillPoly(c, [esquinas.astype(np.int32)], CLASE['edificado'])
-    polis = poligonos(vectorizar(c, METRO, plaza=(0, 0)))
+    polis = poligonos(vectorizar(c, METRO, plaza=(0, 0), cuadra_modelo=False))
     assert sum(p.area for p in polis) == pytest.approx(int((c == CLASE['edificado']).sum()), rel=0.03)
     for p in polis:
         sin_pelos = p.buffer(-3).buffer(3)
@@ -119,7 +119,7 @@ def test_un_callejon_no_hace_de_cabecera():
     c = np.full((260, 400), CLASE['calle'], np.uint8)
     c[40:220, 40:360] = CLASE['edificado']   # 160 × 90 m
     c[127:133, 40:100] = CLASE['calle']
-    polis = poligonos(vectorizar(c, METRO, plaza=(0, 0)))
+    polis = poligonos(vectorizar(c, METRO, plaza=(0, 0), cuadra_modelo=False))
     for p in polis:
         assert p.buffer(-4).buffer(4).area >= 0.8 * p.area, 'un techo de menos de 4 m de ancho'
     assert min(angulo_minimo(p) for p in polis) >= 25
@@ -147,7 +147,7 @@ def manzana_en_ele():
 
 def test_una_manzana_en_ele_tambien_da_lotes_rectos():
     c = manzana_en_ele()
-    polis = poligonos(vectorizar(c, METRO, plaza=(150, 150)))
+    polis = poligonos(vectorizar(c, METRO, plaza=(150, 150), cuadra_modelo=False))
     edificado_px = int((c == CLASE['edificado']).sum())
     assert all(p.is_valid for p in polis)
     assert sum(p.area for p in polis) == pytest.approx(edificado_px, rel=0.03)
@@ -160,7 +160,7 @@ def test_una_manzana_en_ele_tambien_da_lotes_rectos():
 def test_una_casa_suelta_es_un_solo_techo():
     c = np.full((80, 80), CLASE['calle'], np.uint8)
     c[30:46, 30:50] = CLASE['edificado']  # 8 × 10 m
-    res = vectorizar(c, METRO, plaza=(0, 0))
+    res = vectorizar(c, METRO, plaza=(0, 0), cuadra_modelo=False)
     assert len(res['techos']) == 1
     assert poligonos(res)[0].area == pytest.approx(16 * 20, rel=0.05)
 
@@ -168,7 +168,7 @@ def test_una_casa_suelta_es_un_solo_techo():
 def test_una_hilera_de_casas_se_corta_solo_a_lo_ancho():
     c = np.full((80, 260), CLASE['calle'], np.uint8)
     c[30:50, 30:230] = CLASE['edificado']  # 10 m de fondo × 100 m de frente
-    polis = poligonos(vectorizar(c, METRO, plaza=(0, 0)))
+    polis = poligonos(vectorizar(c, METRO, plaza=(0, 0), cuadra_modelo=False))
     assert 7 <= len(polis) <= 11
     assert all(p.bounds[3] - p.bounds[1] == pytest.approx(20, abs=2) for p in polis)
     assert min(relleno(p) for p in polis) >= 0.9
@@ -186,7 +186,7 @@ def test_una_manzana_curva_y_angosta_cae_al_metodo_de_las_semillas():
     manzana = c == CLASE['edificado']
     lotes = lotes_de_manzana(manzana, METRO, semilla=7)
     assert np.array_equal(lotes, lotes_por_semillas(manzana, 12.0 / METRO))
-    polis = poligonos(vectorizar(c, METRO, plaza=(0, 0)))
+    polis = poligonos(vectorizar(c, METRO, plaza=(0, 0), cuadra_modelo=False))
     assert all(p.is_valid for p in polis)
     assert sum(p.area for p in polis) == pytest.approx(int(manzana.sum()), rel=0.05)
     assert len(polis) >= 20

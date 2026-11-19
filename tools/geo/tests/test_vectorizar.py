@@ -236,3 +236,64 @@ def test_las_casas_de_una_cuadra_modelo_comparten_su_cuadra():
 def test_fuera_de_la_cuadra_modelo_las_casas_no_tienen_cuadra():
     res = vectorizar(manzana_maciza(), METRO, plaza=(140, 140), cuadra_modelo=False)
     assert set(res['cuadras']) == {-1} and set(res['cede']) == {-1}
+
+
+# --- los lotes por lados (tools/geo/lados.py): casas alineadas, sin encimarse en las esquinas ---
+
+def manzana_girada(angulo=23.0, ancho_m=96, alto_m=82, dientes=True):
+    """Una manzana maciza girada, con el borde dentado (cada tanto un píxel de más o de menos)."""
+    import cv2
+    lado = 360
+    c = np.full((lado, lado), CLASE['calle'], np.uint8)
+    caja = cv2.boxPoints(((lado / 2, lado / 2), (ancho_m / METRO, alto_m / METRO), angulo))
+    m = np.zeros((lado, lado), np.uint8)
+    cv2.fillPoly(m, [np.round(caja).astype(np.int32)], 1)
+    if dientes:
+        rng = np.random.default_rng(4)
+        borde = (cv2.dilate(m, np.ones((3, 3), np.uint8)) - cv2.erode(m, np.ones((3, 3), np.uint8))) > 0
+        ys, xs = np.nonzero(borde)
+        elegidos = rng.random(len(xs)) < 0.25
+        m[ys[elegidos], xs[elegidos]] = rng.integers(0, 2, elegidos.sum())
+    c[m > 0] = CLASE['edificado']
+    return c
+
+
+@pytest.mark.parametrize('angulo', [23.0, -38.0])
+def test_en_la_cuadra_modelo_las_casas_no_se_enciman_y_miran_derecho_a_su_calle(angulo):
+    res = vectorizar(manzana_girada(angulo), METRO, plaza=(180, 180))
+    polis = poligonos(res)
+    for i in range(len(polis)):
+        for j in range(i + 1, len(polis)):
+            # el medio píxel de cada borde (poligono_de) deja una franja fina en los bordes diagonales: nada más
+            pisado = polis[i].intersection(polis[j])
+            if pisado.area > 1:
+                assert 2 * pisado.area / pisado.length < 1.5, (i, j)   # el ancho de la franja, en píxeles
+    a = math.radians(angulo)
+    for m in res['marcos']:
+        paralelo = max(abs(m[3] * math.cos(a) + m[4] * math.sin(a)), abs(-m[3] * math.sin(a) + m[4] * math.cos(a)))
+        assert paralelo > 0.999   # eu a lo largo de un lado de la manzana
+    # cuatro líneas de fachada, una por calle: todas las casas de una calle con el frente en la misma recta
+    lineas = {}
+    for m in res['marcos']:
+        ev = (round(-m[4], 2), round(m[3], 2))
+        lineas.setdefault(ev, []).append(m[1] * -m[4] + m[2] * m[3])
+    assert len(lineas) == 4
+    assert all(max(v) - min(v) < 0.5 for v in lineas.values())
+
+
+def test_cuadras_pegadas_en_el_plano_se_reparten_cada_una_por_sus_lados():
+    # tres cuadras de 50 × 100 m que el plano une por patios de 4 m de ancho: una sola "manzana" de 1936
+    c = np.full((260, 420), CLASE['calle'], np.uint8)
+    for x0 in (30, 146, 262):
+        c[30:230, x0:x0 + 100] = CLASE['edificado']
+    c[60:68, 130:146] = CLASE['patio']
+    c[180:188, 246:262] = CLASE['patio']
+    res = vectorizar(c, METRO, plaza=(210, 130))
+    assert res['marcos'] and len(res['marcos']) == len(res['techos'])
+    lineas = {}
+    for m in res['marcos']:
+        ev = (round(-m[4], 2), round(m[3], 2))
+        lineas.setdefault(ev, set()).add(round(m[1] * -m[4] + m[2] * m[3]))
+    # tres cuadras: tres líneas de fachada mirando al este y tres al oeste (una por cuadra), todas rectas
+    assert len(lineas) == 4
+    assert len(lineas[(1.0, 0.0)]) == 3 and len(lineas[(-1.0, 0.0)]) == 3

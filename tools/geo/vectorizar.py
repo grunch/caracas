@@ -31,7 +31,8 @@ from skimage import measure
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from alas import CRUJIA_M, PATIO, SOLAR, alas_de_casa, frentes_de_manzana  # noqa: E402
-from cuadra import casa_modelo, crujia_de_cuadra, es_de_solo_casas  # noqa: E402
+from cuadra import alas_modelo, casa_modelo, crujia_de_cuadra, es_de_solo_casas  # noqa: E402
+from lados import cuadras_pegadas, lotes_por_lados  # noqa: E402
 from lotes import (  # noqa: E402
     casas_de_esquina, direccion_de_manzana, esquinas_de_manzana, fundir_chicos, lotes_de_manzana, sin_pelos,
 )
@@ -134,19 +135,60 @@ def _casas_de_manzana(clases, manzana, lotes, metro, modelo):
     return fundir_chicos(casas, AREA_FUSION_M2 / metro ** 2)
 
 
-def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, cuadra_modelo=True):
+def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, crujia):
+    """Las casas de una cuadra modelo repartida por sus lados (tools/geo/lados.py): cada lote con su marco
+    sobre la línea de fachada de su calle. → False si la manzana no se deja repartir así."""
+    repartida = lotes_por_lados(manzana, metro, semilla_de(int(origen[0]) + 5, int(origen[1]) + 11))
+    if repartida is None:
+        return False
+    etiquetas, lotes = repartida
+    x, y = origen
+    zonas = ndimage.find_objects(etiquetas)
+    for k, lote in lotes.items():
+        zona = zonas[k - 1]
+        mascara = etiquetas[zona] == k
+        if zona is None or mascara.sum() < area_min_px:
+            continue
+        figura = poligono_de(mascara, (x + zona[1].start, y + zona[0].start), tolerancia_px)
+        if figura is None:
+            continue
+        semilla = semilla_de(figura.centroid.x, figura.centroid.y)
+        agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla,
+                      esquina=lote['esquina'], cuadra=salida['n_cuadras'] - 1, cede=publico_que_pisa(salida['publicos'], figura))
+        alas = alas_modelo(lote['ancho'], lote['fondo'], semilla, 0, crujia)
+        marco = {'origen': lote['origen'], 'eu': lote['eu'], 'ancho': lote['ancho'], 'fondo': lote['fondo'], 'calles': 0,
+                 'crujia': crujia}
+        agregar_alas(salida, len(salida['techos']) - 1, marco, [[t, *(round(m / metro, 2) for m in med)] for t, *med in alas],
+                     origen, metro)
+    return True
+
+
+def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, cuadra_modelo=True,
+                      contar=True, partir=True):
     """Las casas de una manzana. Las de solo casas (tools/geo/cuadra.py) van con la cuadra modelo: un anillo
-    de casas que dan a la calle y el centro abierto; las demás, con lo edificado del plano en cada lote."""
+    de casas que dan a la calle y el centro abierto; las demás, con lo edificado del plano en cada lote. Una
+    manzana que son varias cuadras pegadas en el plano (tools/geo/lados.py) se arma cuadra por cuadra; cada
+    una va sin `contar` (no es otra manzana) y sin `partir`."""
     x, y = origen
     if (manzana & (clases == CLASE['edificado'])).sum() < area_min_px:
         return
-    salida['manzanas'] += 1
+    salida['manzanas'] += int(contar)   # una de las cuadras pegadas de una manzana no es otra manzana
+    salida['n_cuadras'] += 1
     direccion = direccion_de_manzana(manzana, metro)
     modelo = cuadra_modelo and direccion[1] is not None and es_de_solo_casas(clases, manzana, metro, CLASE['edificado'], CLASE['publico'])
+    azar = semilla_de(int(x) + 17, int(y) + 29) / 0xFFFF
+    if modelo and casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, crujia_de_cuadra(azar)):
+        return
+    piezas = cuadras_pegadas(manzana, metro) if modelo and partir else None
+    if piezas:   # varias cuadras pegadas en el plano: cada una por su cuenta, con su número de cuadra
+        for pieza, (px, py) in piezas:
+            h, w = pieza.shape
+            techos_de_manzana(clases[py:py + h, px:px + w], pieza, (x + px, y + py), salida, area_min_px, tolerancia_px,
+                              distancia_m, metro, cuadra_modelo, contar=False, partir=False)
+        return
     lotes = lotes_de_manzana(manzana, metro, semilla_de(int(x), int(y)), direccion)
     # de toda la manzana: las líneas de fachada y el fondo de la crujía (la cumbrera corre seguida por la cuadra)
     frentes = frentes_de_manzana(manzana, direccion[0][0], metro)
-    azar = semilla_de(int(x) + 17, int(y) + 29) / 0xFFFF
     crujia = crujia_de_cuadra(azar) if modelo else CRUJIA_M[0] + (CRUJIA_M[1] - CRUJIA_M[0]) * azar
     casas = _casas_de_manzana(clases, manzana, lotes, metro, modelo)
     # una casa suelta o un par de casas no son una manzana con esquinas a la calle
@@ -175,7 +217,7 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
             con_alas = alas_de_casa(casas[ventana] == casa, manzana[ventana], direccion[1], metro, semilla,
                                     distancia_m(figura), frentes_aqui, crujia)
         agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla,
-                      esquina=casa in de_esquina, cuadra=salida['manzanas'] - 1 if modelo else -1,
+                      esquina=casa in de_esquina, cuadra=salida['n_cuadras'] - 1 if modelo else -1,
                       cede=publico_que_pisa(salida['publicos'], figura) if modelo else -1)
         if con_alas:
             agregar_alas(salida, len(salida['techos']) - 1, *con_alas, (x + c0, y + f0), metro)
@@ -187,7 +229,7 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True):
     area_min_px = AREA_MINIMA_M2 / metro ** 2
     tolerancia_px = TOLERANCIA_M / metro
     salida = {'vertices': [], 'techos': [], 'esquinas': [], 'cuadras': [], 'cede': [], 'manzanas': 0, 'marcos': [], 'alas': [],
-              'publicos': []}
+              'publicos': [], 'n_cuadras': 0}
 
     def distancia_m(f):
         return math.hypot(f.centroid.x - plaza[0], f.centroid.y - plaza[1]) * metro
@@ -199,7 +241,7 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True):
         x, y, w, h = stats[k, :4]
         techos_de_manzana(clases[y:y + h, x:x + w], comp[y:y + h, x:x + w] == k, (x, y),
                           salida, area_min_px, tolerancia_px, distancia_m, metro, cuadra_modelo)
-    del salida['publicos']
+    del salida['publicos'], salida['n_cuadras']
     return salida
 
 

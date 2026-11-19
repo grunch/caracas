@@ -193,4 +193,24 @@ describe('arbolesDePatio', () => {
   test('sin marcos (datos viejos) no hay árboles de patio', () => {
     expect(arbolesDePatio({ techos: new Uint32Array(4) }, 0.5)).toEqual([])
   })
+
+  test('en un lote de esquina, cortado en la diagonal, la copa entera cae dentro de la huella de su casa', () => {
+    // la huella es el triángulo (0, 0) (24, 0) (0, 80) del marco: el patio y el solar de sus alas se salen de él
+    const c = ciudad(400)
+    const vertices = []
+    for (let k = 0; k < 400; k++) vertices.push(100 + 24 * k, 100, 124 + 24 * k, 100, 100 + 24 * k, 180)
+    c.vertices = Float32Array.from(vertices)
+    c.techos = Uint32Array.from(Array.from({ length: 400 }, (_, k) => [k * 3, 3, (COLONIAL << 8) | 1, 100 + k]).flat())
+    const arboles = arbolesDePatio(c, 0.5)
+    expect(arboles.length).toBeGreaterThan(20)
+    for (const a of arboles) {
+      const k = Math.floor((a.x - 100) / 24)
+      const u = a.x - (100 + 24 * k), v = a.y - 100
+      // dentro del triángulo con margen r: la recta de la diagonal es u/24 + v/80 = 1
+      const aLaDiagonal = (1 - u / 24 - v / 80) / Math.hypot(1 / 24, 1 / 80)
+      expect(u).toBeGreaterThanOrEqual(a.r - 1e-6)
+      expect(v).toBeGreaterThanOrEqual(a.r - 1e-6)
+      expect(aLaDiagonal).toBeGreaterThanOrEqual(a.r - 1e-6)
+    }
+  })
 })

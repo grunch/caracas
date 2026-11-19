@@ -184,7 +184,23 @@ const RADIO_SOLAR_M = [2.2, 3.8]
  * y mueren cuando la casa deja de ser de patio (pasa a ecléctica, moderna…: ahí el visor la techa entera)
  * o cuando muere. Determinista: el azar sale del número de techo y del ala. → [{x, y, r (px), nace, muere}]
  */
-export function arbolesDePatio({ marcos, alas, techos, vida, historia }, metro) {
+const INTENTOS_DE_COPA = 6 // lugares que se prueban para un árbol de patio antes de dejarlo sin árbol
+
+/** ¿El círculo (x, y, r) cae entero dentro del polígono [x, y, x, y, …]? (centro adentro y lejos de cada lado) */
+export function copaDentro(poligono, x, y, r) {
+  let dentro = false
+  const n = poligono.length / 2
+  for (let i = 0, j = n - 1; i < n; j = i++) {
+    const [xi, yi, xj, yj] = [poligono[2 * i], poligono[2 * i + 1], poligono[2 * j], poligono[2 * j + 1]]
+    if ((yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) dentro = !dentro
+    const [dx, dy] = [xi - xj, yi - yj]
+    const t = Math.max(0, Math.min(1, ((x - xj) * dx + (y - yj) * dy) / (dx * dx + dy * dy || 1)))
+    if (Math.hypot(x - (xj + t * dx), y - (yj + t * dy)) < r) return false
+  }
+  return dentro
+}
+
+export function arbolesDePatio({ marcos, alas, techos, vertices, vida, historia }, metro) {
   if (!marcos || !alas) return []
   const salida = []
   for (let m = 0; m < marcos.length; m += CAMPOS_MARCO) {
@@ -206,10 +222,18 @@ export function arbolesDePatio({ marcos, alas, techos, vida, historia }, metro) 
       if (lado < PATIO_CON_ARBOL_M || azar(techo * 31 + k, 41) >= (solar ? ARBOL_EN_SOLAR : ARBOL_EN_PATIO)) continue
       const [r0, r1] = solar ? RADIO_SOLAR_M : RADIO_PATIO_M
       const r = Math.min(r0 + (r1 - r0) * azar(techo * 31 + k, 42), lado * 0.45)
-      // en cualquier parte del patio (o del solar) en que la copa quepa entera
+      // en cualquier parte del patio (o del solar) en que la copa quepa entera, y dentro de la huella de la casa:
+      // un lote de esquina se corta en la diagonal (tools/geo/lados.py) y su patio o su solar se sale de ella
       const rp = r / metro
-      const [u, v] = [u0 + rp + (u1 - u0 - 2 * rp) * azar(techo * 31 + k, 43), v0 + rp + (v1 - v0 - 2 * rp) * azar(techo * 31 + k, 44)]
-      salida.push({ x: ox + u * eux - v * euy, y: oy + u * euy + v * eux, r: r / metro, nace, muere })
+      const huella = vertices ? vertices.subarray(techos[techo * 4] * 2, (techos[techo * 4] + techos[techo * 4 + 1]) * 2) : null
+      for (let intento = 0; intento < (huella ? INTENTOS_DE_COPA : 1); intento++) {
+        const sal = 43 + 2 * intento
+        const [u, v] = [u0 + rp + (u1 - u0 - 2 * rp) * azar(techo * 31 + k, sal), v0 + rp + (v1 - v0 - 2 * rp) * azar(techo * 31 + k, sal + 1)]
+        const [x, y] = [ox + u * eux - v * euy, oy + u * euy + v * eux]
+        if (huella && !copaDentro(huella, x, y, rp)) continue
+        salida.push({ x, y, r: rp, nace, muere })
+        break
+      }
     }
   }
   return salida
