@@ -1,9 +1,17 @@
 import { test, expect } from '@playwright/test'
 
 // La bienvenida y el «Acerca» no necesitan la ciudad ni el plano: sin ellos (como en la demo de CI) la página
-// carga en un instante y el render por software no se pasa de tiempo. Un solo test con dos cargas de página
-// (la primera visita y la vuelta), para no alargar el CI.
-test.use({ viewport: { width: 1100, height: 720 } })
+// carga en un instante. Un solo test con dos cargas de página (la primera visita y la vuelta), para no alargar
+// el CI; y con el render por software cada cuadro cuesta, así que va sin sombras, contorno ni grano, en una
+// ventana chica, y se corta la ola de época del arranque (sin línea de tiempo dura decenas de cuadros).
+test.use({ viewport: { width: 900, height: 640 } })
+
+const LIVIANO = '/?sombras=0&contorno=0&grano=0' // sin ?sinintro ni ?capture: es la primera visita de verdad
+/** La página arrancó (con o sin la bienvenida puesta) y ya no tiene nada que dibujar. */
+async function quieta(page) {
+  await page.waitForFunction(() => window.lab?.ready === true)
+  await page.evaluate(() => { window.lab.ciudad.U.uOlaEpoca.value = 9000 })
+}
 
 const PESADOS = /\/(datos\/(ciudad\.pak|arboles\.bin|relieve\.bin)|plano\/[^?]*\.(webp|png))(\?.*)?$/
 const CREDITOS = {
@@ -26,12 +34,12 @@ test('la bienvenida sale una vez y se cierra con el teclado; «?» abre el Acerc
   await page.route('**/datos/creditos.json', (ruta) => (hayCreditos ? ruta.fulfill({ json: CREDITOS }) : ruta.fulfill({ status: 404 })))
 
   // --- primera visita: la bienvenida, sin frenar la carga ---
-  await page.goto('/')
+  await page.goto(LIVIANO)
   const intro = page.getByRole('dialog', { name: 'Caracas, de 1772 a 1936' })
   await expect(intro).toBeVisible()
   await expect(intro.getByRole('button', { name: 'Ver crecer la ciudad' })).toBeFocused()
   await expect(intro).toContainText('son una reconstrucción')
-  await page.waitForFunction(() => window.lab?.ready === true) // la página arranca igual con la bienvenida puesta
+  await quieta(page) // la página arranca igual con la bienvenida puesta
   // es modal: las teclas no llegan a los atajos de atrás
   const nombres = page.locator('#nombres') // «M» muestra u oculta los nombres: el atajo más liviano de probar
   await page.keyboard.press('Tab')
@@ -72,7 +80,7 @@ test('la bienvenida sale una vez y se cierra con el teclado; «?» abre el Acerc
   // --- la vuelta: ya no hay bienvenida; sin la lista de fuentes (la demo de CI) el panel lo dice ---
   hayCreditos = false
   await page.reload()
-  await page.waitForFunction(() => window.lab?.ready === true)
+  await quieta(page)
   await expect(page.locator('#intro')).toBeHidden()
   await page.locator('#ayuda').click()
   await expect(panel).toBeVisible()

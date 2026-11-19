@@ -116,6 +116,12 @@ export function crearAcerca({
   raiz.append(intro, acerca)
   boton?.addEventListener('click', () => (estado.abierta ? cerrar() : abrir()))
 
+  /** Con un diálogo abierto, lo de atrás queda inerte: ni el foco ni el lector de pantalla salen de él. */
+  function aislar() {
+    const modal = estado.intro || estado.abierta
+    for (const e of raiz.children ?? []) if (e !== intro && e !== acerca) e.inert = modal
+  }
+
   let secciones = []
   function dibujar() {
     const modelo = seccionesDeAcerca({ ...(estado.datos ?? {}), desde, acciones })
@@ -167,6 +173,7 @@ export function crearAcerca({
     if (estado.intro) cerrarIntro()
     if (!estado.abierta) estado.volverA = document.activeElement
     estado.abierta = true
+    aislar()
     estado.pedido ??= Promise.all([pedirEpocas().catch(() => null), pedirCreditos().catch(() => null)]).then(([epocas, creditos]) => {
       const lectura = seccionActual()
       estado.datos = { epocas, creditos }
@@ -187,6 +194,7 @@ export function crearAcerca({
   function cerrar() {
     if (!estado.abierta) return
     estado.abierta = false
+    aislar() // antes de devolver el foco: un elemento inerte no lo recibe
     acerca.classList.remove('ver')
     document.body.classList.remove('acerca')
     boton?.setAttribute('aria-expanded', 'false')
@@ -198,6 +206,7 @@ export function crearAcerca({
   function abrirIntro() {
     if (estado.abierta) cerrar()
     estado.intro = true
+    aislar()
     intro.classList.add('ver')
     document.body.classList.add('intro')
     crecer.focus({ preventScroll: true })
@@ -206,6 +215,7 @@ export function crearAcerca({
   function cerrarIntro() {
     if (!estado.intro) return
     estado.intro = false
+    aislar()
     intro.classList.remove('ver')
     document.body.classList.remove('intro')
     if (intro.contains(document.activeElement)) document.activeElement.blur?.()

@@ -43,6 +43,7 @@ function crearDom() {
       },
       focus() { doc.activeElement = e },
       blur() { if (doc.activeElement === e) doc.activeElement = doc.body },
+      get children() { return e.hijos.filter((h) => typeof h !== 'string') },
       todos() { return e.hijos.filter((h) => typeof h !== 'string').flatMap((h) => [h, ...h.todos()]) },
       // solo el selector de enfocables del panel
       querySelectorAll() {
@@ -366,6 +367,17 @@ describe('la bienvenida y el panel «Acerca»', () => {
       await pedido
       expect(acerca.seccion).toBe('creditos')
       expect(doc.activeElement.id).toBe('acerca-creditos')
+    })
+
+    test('con un diálogo abierto lo de atrás queda inerte, y deja de estarlo al cerrar (también al pasar de uno a otro)', async () => {
+      const acerca = armar({ mostrarIntro: true })
+      expect(boton.inert).toBe(true)
+      expect([intro().inert, panel().inert]).toEqual([undefined, undefined])
+      botonDe(intro(), TEXTO_INTRO.mas).emitir('click') // de la bienvenida al panel
+      expect(boton.inert).toBe(true)
+      acerca.cerrar()
+      expect(boton.inert).toBe(false)
+      expect(doc.activeElement).toBe(boton)
     })
 
     test('abrir el panel cierra la bienvenida, y abrir la bienvenida cierra el panel: nunca los dos', async () => {

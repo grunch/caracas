@@ -70,7 +70,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T41 | Hitos modelados II: Miraflores, Universidad, El Calvario, Caño Amarillo, Mercado Principal, Santa Teresa, Candelaria, Altagracia… | T40 | 8 edificios más | ✅ #32 (Santa Teresa, Altagracia, La Pastora) · #33 (Casa Amarilla, Universidad, Miraflores) · ⏳ faltan El Calvario, Caño Amarillo, Mercado Principal, Candelaria, Hotel Majestic |
 | T42 | Marcas (etiquetas 3D por época, niveles, declutter, velo al pasar el mouse) | T25 | las marcas cambian con el año | ✅ #39 |
 | T43 | Fichas con fotos de época (Commons, autor, fecha, licencia) y visor de fotos | T42 | cada marca abre su ficha con fotos acreditadas | ✅ #43 |
-| T44 | Intro y "Acerca": qué estás viendo, la Caracas de cada época, fuentes y créditos (incluida la inspiración de @mormonnegro) | T25 | intro con todas las fuentes y licencias | 🔄 #PR |
+| T44 | Intro y "Acerca": qué estás viendo, la Caracas de cada época, fuentes y créditos (incluida la inspiración de @mormonnegro) | T25 | intro con todas las fuentes y licencias | 🔄 #44 |
 
 ## Fase 5 · Lo de hoy y el buscador
 
