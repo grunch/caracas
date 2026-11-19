@@ -59,12 +59,12 @@ const PASOS = [
   },
   {
     id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`],
-    salidas: [`${D}/ciudad-1936.json`],
-    codigo: GEO('vectorizar', 'lotes'),
+    salidas: [`${D}/ciudad-1936.json`, `${D}/patios-de-casas.png`],
+    codigo: GEO('vectorizar', 'lotes', 'alas'),
     cmd: async () => {
       const { plaza, metro } = await leerJson(`${D}/mosaico.json`)
       return [PY, 'tools/geo/vectorizar.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/ciudad-1936.json`,
-        '--escala', String(metro), '--plaza', plaza.join(',')]
+        '--escala', String(metro), '--plaza', plaza.join(','), '--patios', `${D}/patios-de-casas.png`]
     },
   },
   // --- la línea de tiempo: los planos viejos calzados sobre 1936, la ciudad de 1578 y las épocas ---
@@ -127,15 +127,16 @@ const PASOS = [
       'public/datos/ciudad.pak', `${D}/segmentacion/mosaico/clases-costura.png`],
     opcionales: ['public/plano/crece.png', 'public/datos/crece.json'],
     salidas: ['public/datos/arboles.bin'],
-    codigo: ['tools/arboles.mjs', 'tools/arboles-lib.mjs', 'tools/silvestres-lib.mjs', 'src/pak.js', 'src/epocas.js'],
+    codigo: ['tools/arboles.mjs', 'tools/arboles-lib.mjs', 'tools/silvestres-lib.mjs', 'src/pak.js', 'src/epocas.js', 'src/alas.js', 'src/techos.js'],
     cmd: () => ['node', 'tools/arboles.mjs', `${D}/segmentacion/mosaico/arboles.json`, `${D}/mosaico.json`,
       `${D}/segmentacion/mosaico/jardines.json`, `${D}/segmentacion/mosaico/clases-costura.png`],
   },
   {
-    id: 'suelo', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`],
+    // con los patios que el vectorizador abrió por regla en las casas de patio: ahí el suelo es de patio
+    id: 'suelo', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/patios-de-casas.png`],
     salidas: ['public/plano/suelo.webp', 'public/plano/suelo-2k.webp'],
     codigo: ['tools/suelo.mjs', 'tools/suelo-lib.mjs'],
-    cmd: () => ['node', 'tools/suelo.mjs', `${D}/segmentacion/mosaico/clases-costura.png`],
+    cmd: () => ['node', 'tools/suelo.mjs', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/patios-de-casas.png`],
   },
   {
     // lo que en el plano es letra, cifra o símbolo y no dibujo: en modo color no se marca

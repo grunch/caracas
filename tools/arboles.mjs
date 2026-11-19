@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Uso: node tools/arboles.mjs <arboles.json> <mosaico.json> [jardines.json] [clases.png] → public/datos/arboles.bin (specs/02)
+// Uso (desde la raíz del checkout con los datos): node tools/arboles.mjs <arboles.json> <mosaico.json> [jardines.json] [clases.png] → public/datos/arboles.bin (specs/02)
 // Los árboles del plano de 1936 (los símbolos que detectó la segmentación, más los de los canteros de
 // plazas y patios de tools/geo/jardines.py), con la época en que aparecen: lee
 // public/plano/crece.png + public/datos/crece.json (desde cuándo está edificado cada lugar) y
@@ -7,6 +7,7 @@
 // Y el monte del valle antes de la ciudad (tools/silvestres-lib.mjs): árboles silvestres donde crece.png
 // (B) dice que hay monte, que mueren cuando su lugar se urbaniza (G) o, con la segmentación de 1936
 // (clases.png), cuando el plano de 1936 dibuja ahí un sembradío o un camino. Sin crece.png no hay monte.
+// Y los árboles de los patios y solares de las casas de patio (marcos y alas de ciudad.pak), por regla.
 import { readFile, writeFile } from 'node:fs/promises'
 import { gunzipSync } from 'node:zlib'
 import path from 'node:path'
@@ -14,10 +15,11 @@ import sharp from 'sharp'
 import { decodificarPak } from '../src/pak.js'
 import {
   codificarArboles, naceArbol, esDePlaza, naceEnPlaza, JARDINES_DESDE, casasQueMueren, techosQueQuedan, bajoUnTecho, desdeEnCrece, desdeDelEntorno,
+  arbolesDePatio,
 } from './arboles-lib.mjs'
 import { arbolesSilvestres, monteEnCrece, muereSilvestre, cercaDeOtro } from './silvestres-lib.mjs'
 
-const RAIZ = path.resolve(import.meta.dirname, '..')
+const RAIZ = process.cwd() // se corre desde la raíz del checkout con los datos (como tools/empacar-ciudad.mjs)
 const ETAPAS = 6
 const ENTORNO_JARDIN = 3 // celdas de crece.png (8 m) alrededor de un árbol de jardín
 const CELDA_TECHOS_PX = 100 // grilla para buscar techos bajo un árbol
@@ -50,7 +52,7 @@ const crece = await siHay(Promise.all([
 const ciudad = await siHay(leer('public/datos/ciudad.pak').then((b) => {
   const crudo = gunzipSync(b)
   return decodificarPak(crudo.buffer.slice(crudo.byteOffset, crudo.byteOffset + crudo.byteLength),
-    { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array })
+    { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array })
 }), 'ciudad.pak')
 
 const grilla = crece && {
@@ -88,10 +90,15 @@ const monte = grilla && grilla.canales >= 3 ? arbolesSilvestres({
   ocupado: cercaDeOtro(conNace, LEJOS_DE_OTRO_M / metro),
 }) : []
 
-const todos = [...conNace, ...monte]
+// los de los patios y solares de las casas de patio (por regla: el plano no los dibuja); van dentro de la
+// huella de su casa, así que no pasan por el descarte de "bajo un techo"
+const dePatio = ciudad ? arbolesDePatio(ciudad, metro) : []
+
+const todos = [...conNace, ...dePatio, ...monte]
 const salida = path.resolve(RAIZ, 'public/datos/arboles.bin')
 await writeFile(salida, codificarArboles(todos, metro))
 const porEpoca = (lista, campo) => Array.from({ length: ETAPAS }, (_, e) => lista.filter((a) => a[campo] === e).length).join(' · ')
 console.log(`${conNace.length} árboles del plano (${arboles.length - libres.length} descartados bajo un techo; nacen por época: ${porEpoca(conNace, 'nace')}; ${casas.length} casas que mueren)`)
+console.log(`${dePatio.length} árboles de patio y de solar (nacen por época: ${porEpoca(dePatio, 'nace')})`)
 console.log(`${monte.length} árboles silvestres (mueren por época, el primero = nunca: ${porEpoca(monte, 'muere')})`)
 console.log(`${todos.length} en total → ${salida}`)

@@ -149,9 +149,12 @@ function parchearRelieveVertex(s) {
       void main() {`)
     .replace('#include <beginnormal_vertex>', `#include <beginnormal_vertex>
       if (aInfo.w < 0.5) objectNormal = normalSuelo(position.xz);`)
-    .replace('#include <project_vertex>', `vBase = aInfo.w < 0.5 ? sueloEn(position.xz) : sueloEn(aAncla);
+    .replace('#include <project_vertex>', `
+      // el piso de un patio o de un solar se apoya en el terreno de cada punto: en la cuesta no lo tapa
+      bool esPiso = aInfo.w > 0.5 && aTecho.w > ${CUBIERTA.PATIO}.0 - 0.5 && aTecho.w < ${CUBIERTA.SOLAR}.0 + 0.5;
+      vBase = aInfo.w < 0.5 || esPiso ? sueloEn(position.xz) : sueloEn(aAncla);
       vTerreno = aInfo.w < 0.5 ? terrenoEn(position.xz) : vec2(0.0);
-      transformed.y += aInfo.w < 0.5 ? sueloEn(position.xz)
+      transformed.y += aInfo.w < 0.5 || esPiso ? sueloEn(position.xz)
         : apoyoCasa(aAncla, transformed.xz, position.y < 0.01);
       #include <project_vertex>`)
 }

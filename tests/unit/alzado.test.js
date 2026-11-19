@@ -1,6 +1,7 @@
 import { describe, test, expect } from 'vitest'
 import { alzarCasa, coordsFaldon, largoFaldon, normalFaldon, PISO_PATIO_M } from '../../src/alzado.js'
 import { planDeTecho, CUBIERTA, alturaDe, PRETIL_M } from '../../src/techos.js'
+import { planDeAlas, ALA } from '../../src/alas.js'
 
 const COLONIAL = 0, REPUBLICANO = 1, MODERNO = 4
 
@@ -16,12 +17,21 @@ function recolector() {
 }
 const rect = (L, D) => [[0, 0], [L, 0], [L, D], [0, D]]
 const alzar = (L, D, extra = {}, libres = {}) => {
-  const plan = planDeTecho({ ancho: L, fondo: D, estilo: COLONIAL, pisos: 1, semilla: 11, nace: 1, libres, lleno: 1, ...extra })
+  const medidas = { ancho: L, fondo: D, estilo: COLONIAL, pisos: 1, semilla: 11, nace: 1, ...extra }
+  const plan = extra.alas ? planDeAlas(medidas) : planDeTecho({ ...medidas, libres, lleno: 1 })
   const salida = recolector()
   alzarCasa({ anillo: rect(L, D), plan, libres }, salida)
   return { plan, ...salida }
 }
 const esPared = (v) => v.cubierta === CUBIERTA.PARED
+const ala = (tipo, u0, v0, u1, v1) => ({ tipo, u0, v0, u1, v1 })
+// 12 × 26: la crujía, un patio entre dos alas laterales y un ala cruzada al fondo
+const ALAS_12X26 = [
+  ala(ALA.FRENTE, 0, 0, 12, 7), ala(ALA.LATERAL_IZQ, 0, 7, 4, 20), ala(ALA.PATIO, 4, 7, 8, 20), ala(ALA.LATERAL_DER, 8, 7, 12, 20),
+  ala(ALA.CRUZADA, 0, 20, 12, 26),
+]
+// 9 × 16: un ala sola; el patio toca la otra medianera y el fondo
+const ALAS_9X16 = [ala(ALA.FRENTE, 0, 0, 9, 7), ala(ALA.LATERAL_IZQ, 0, 7, 4, 16), ala(ALA.PATIO, 4, 7, 9, 16)]
 
 describe('faldones: coordenadas, largo y normal', () => {
   const plan = planDeTecho({ ancho: 10, fondo: 8, estilo: COLONIAL, pisos: 1, semilla: 11, nace: 1, lleno: 1 })
@@ -52,7 +62,7 @@ describe('faldones: coordenadas, largo y normal', () => {
 })
 
 describe('alzarCasa: lote profundo con patio', () => {
-  const { plan, vertices, triangulos } = alzar(12, 26)
+  const { plan, vertices, triangulos } = alzar(12, 26, { alas: ALAS_12X26 })
   const patio = plan.faldones.find((f) => f.hueco)
   const [pu, pv] = [patio.region.map((p) => p[0]), patio.region.map((p) => p[1])]
   const enElPatio = (v) => v.u >= Math.min(...pu) - 1e-6 && v.u <= Math.max(...pu) + 1e-6 && v.v >= Math.min(...pv) - 1e-6 && v.v <= Math.max(...pv) + 1e-6
@@ -172,7 +182,7 @@ describe('alzarCasa: azotea y tapia', () => {
 
   test('el patio que llega a la medianera se cierra con una tapia, lisa', () => {
     // 9 m de frente: un ala sola; el patio toca la otra medianera
-    const { plan, vertices } = alzar(9, 16)
+    const { plan, vertices } = alzar(9, 16, { alas: ALAS_9X16 })
     const patio = plan.faldones.find((f) => f.hueco)
     expect(patio).toBeTruthy()
     const lado = patio.region.some((p) => p[0] === 0) ? 0 : 9

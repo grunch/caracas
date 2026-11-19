@@ -13,6 +13,21 @@ const CANALES = {
 }
 const NADA = [0, 0, 0, 0]
 
+const EDIFICADO = 3
+const PATIO = 2
+
+/**
+ * Las clases con los patios que se abrieron por regla en las casas de patio (tools/geo/vectorizar.py
+ * --patios: 255 = patio o solar): ahí lo edificado pasa a ser patio, así el suelo que asoma en una cuesta
+ * no se pinta de tejado. Lo que el plano no pinta edificado no cambia. → una copia de `datos`.
+ */
+export function conPatios(datos, patios) {
+  if (patios.length !== datos.length) throw new Error(`suelo: la máscara de patios mide ${patios.length} y las clases ${datos.length}`)
+  const salida = Uint8Array.from(datos)
+  for (let i = 0; i < salida.length; i++) if (patios[i] > 127 && salida[i] === EDIFICADO) salida[i] = PATIO
+  return salida
+}
+
 export const rgbaDeClase = (clase) => [...(CANALES[clase] ?? NADA)]
 
 export function tablaSuelo() {

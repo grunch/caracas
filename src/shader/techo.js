@@ -4,8 +4,8 @@ import { CUBIERTA } from '../techos.js'
  * Los techos, por dentro del faldón: aTecho (src/ciudad.js) trae s (metros a lo largo del alero), t
  * (metros bajando por la pendiente desde la cumbrera), el largo del faldón y qué lo cubre.
  *
- * - Teja criolla: hileras de canal y cobija que bajan por la pendiente, cada teja con su tono; el
- *   conjunto, de naranja terroso claro a marrón, gastado de forma despareja (litografía de 1839), con
+ * - Teja criolla: hileras de canal y cobija que bajan por la pendiente, cada teja con su tono; cada casa,
+ *   el suyo, de marrón grisáceo a naranja de teja nueva, gastado de forma despareja (litografía de 1839), con
  *   chorreaduras de moho, parches de teja nueva, el caballete de la cumbrera y la sombra del alero.
  * - Azotea de cemento con sus manchas; zinc acanalado con óxido; el alero por debajo, de caña y madera.
  * - En tinta, como el grabado de 1812: papel rayado a pluma en el sentido de la pendiente, con la
@@ -15,16 +15,20 @@ import { CUBIERTA } from '../techos.js'
  * GLSL_FACHADA, que trae azar(), las herramientas de dibujo y la chapa acanalada.
  */
 export const GLSL_TECHO = /* glsl */ `
-  const float CUB_TEJA = ${CUBIERTA.TEJA}.0, CUB_AZOTEA = ${CUBIERTA.AZOTEA}.0, CUB_ZINC = ${CUBIERTA.ZINC}.0, CUB_ALERO = ${CUBIERTA.ALERO}.0, CUB_PATIO = ${CUBIERTA.PATIO}.0,
+  const float CUB_TEJA = ${CUBIERTA.TEJA}.0, CUB_AZOTEA = ${CUBIERTA.AZOTEA}.0, CUB_ZINC = ${CUBIERTA.ZINC}.0, CUB_ALERO = ${CUBIERTA.ALERO}.0, CUB_PATIO = ${CUBIERTA.PATIO}.0, CUB_SOLAR = ${CUBIERTA.SOLAR}.0,
     CUB_VOLADA = ${CUBIERTA.VOLADA}.0; // lo que se le suma a la cubierta en la cara de arriba de un alero
   const float TEJA_ANCHO = 0.24, TEJA_LARGO = 0.38; // de eje a eje de las cobijas; lo que asoma cada teja
 
-  /** El tono del tejado de la casa: de naranja terroso claro a marrón, nunca rojo vivo. */
+  /**
+   * El tono del tejado de la casa, uno por casa (vista aérea del pueblo colonial, fuentes/imagenes): casi
+   * todos gastados, de marrón grisáceo a terroso claro; una de cada ocho, de teja nueva, naranja vivo.
+   */
   vec3 teja(float semilla) {
-    vec3 clara = vec3(0.74, 0.44, 0.27), media = vec3(0.62, 0.35, 0.22), vieja = vec3(0.44, 0.29, 0.21);
+    vec3 gris = vec3(0.47, 0.35, 0.29), marron = vec3(0.59, 0.37, 0.25), clara = vec3(0.73, 0.47, 0.30), nueva = vec3(0.86, 0.45, 0.23);
     float k = azar(semilla * 1.7);
-    vec3 c = k < 0.5 ? mix(clara, media, k * 2.0) : mix(media, vieja, k * 2.0 - 1.0);
-    return c * (0.92 + 0.16 * azar(semilla * 3.1));
+    vec3 c = k < 0.5 ? mix(gris, marron, k * 2.0) : mix(marron, clara, k * 2.0 - 1.0);
+    c = mix(c, nueva, step(0.875, azar(semilla * 5.3)));
+    return c * (0.9 + 0.18 * azar(semilla * 3.1));
   }
   /** Azotea de cemento o de baldosa clara. */
   vec3 azotea(float semilla) { return vec3(0.66, 0.63, 0.57) * (0.92 + 0.12 * azar(semilla * 2.3)); }
@@ -81,7 +85,7 @@ export const GLSL_TECHO = /* glsl */ `
     // el alero: la última hilada, doble y en sombra
     c *= 1.0 - 0.32 * banda(largo - t, -0.05, max(0.14, 1.1 * w2.y), w2.y) * linea;
     // el faldón que no mira al sol, más oscuro: así se leen los volúmenes, como en la litografía de 1839
-    c *= 1.06 - 0.32 * sombra;
+    c *= 1.05 - 0.24 * sombra;
 
     // en tinta: rayas en el sentido de la pendiente (más cargadas a la sombra), la cumbrera y el alero a pluma
     float salteada = 0.55 + 0.45 * step(0.35, azar(floor(t / 0.9 + corrida) + hilera));
@@ -98,13 +102,17 @@ export const GLSL_TECHO = /* glsl */ `
     k = max(k, 0.25 * rayadoPantalla(0.12));
   }
 
-  /** El piso del patio: tierra apisonada o laja, con matas en los rincones. */
-  void pisoDePatio(inout vec3 c, inout float k, float semilla, float s, float t, vec2 w2) {
+  /**
+   * El piso del patio: tierra apisonada o laja, más oscura que la calle (entre paredes, casi siempre a
+   * la sombra), con alguna mata en los rincones. El solar del fondo (solar = 1): tierra con pasto ralo.
+   */
+  void pisoDePatio(inout vec3 c, inout float k, float semilla, float s, float t, float solar, vec2 w2) {
     float w = max(w2.x, w2.y), sem = fract(semilla * 0.0137) * 61.0;
     float cerca = detalle(2.0, w);
-    c = mix(vec3(0.74, 0.68, 0.54), vec3(0.66, 0.60, 0.47), manchas(vec2(s, t) * 0.5 + sem) * cerca + 0.4 * (1.0 - cerca));
-    float matas = smoothstep(0.62, 0.72, manchas(vec2(s, t) * 0.33 + sem * 1.7));
-    c = mix(c, vec3(0.42, 0.50, 0.28), 0.8 * matas * cerca + 0.15 * (1.0 - cerca));
+    vec3 clara = mix(vec3(0.43, 0.39, 0.31), vec3(0.60, 0.54, 0.41), solar), oscura = mix(vec3(0.35, 0.32, 0.26), vec3(0.52, 0.47, 0.35), solar);
+    c = mix(clara, oscura, manchas(vec2(s, t) * 0.5 + sem) * cerca + 0.5 * (1.0 - cerca));
+    float matas = smoothstep(mix(0.68, 0.58, solar), mix(0.78, 0.72, solar), manchas(vec2(s, t) * 0.33 + sem * 1.7));
+    c = mix(c, vec3(0.38, 0.43, 0.26), (0.7 * cerca + mix(0.05, 0.15, solar) * (1.0 - cerca)) * mix(matas, 1.0, 1.0 - cerca));
     k = max(k, 0.5 * matas * rayadoPantalla(0.35) * cerca);
   }
 
@@ -119,7 +127,7 @@ export const GLSL_TECHO = /* glsl */ `
     if (cubierta > CUB_VOLADA - 0.5) cubierta -= CUB_VOLADA;
     if (es(cubierta, CUB_AZOTEA)) return vec4(azotea(semilla), 0.0);
     if (es(cubierta, CUB_ZINC)) return vec4(zinc(semilla), 0.0);
-    if (es(cubierta, CUB_PATIO)) return vec4(0.70, 0.64, 0.50, 0.0);
+    if (es(cubierta, CUB_PATIO) || es(cubierta, CUB_SOLAR)) return vec4(0.42, 0.38, 0.30, 0.0);
     return vec4(teja(semilla) * 0.84, 0.0);
   }
 
@@ -141,7 +149,8 @@ export const GLSL_TECHO = /* glsl */ `
       k = max(0.6 * k, max(trazo(t - 0.03, 0.03, w2.y), trazo(largo - t - 0.03, 0.03, w2.y)));
     }
     else if (es(cubierta, CUB_ALERO)) bajoAlero(c, k, s, t, w2);
-    else if (es(cubierta, CUB_PATIO)) pisoDePatio(c, k, semilla, s, t, w2);
+    else if (es(cubierta, CUB_PATIO)) pisoDePatio(c, k, semilla, s, t, 0.0, w2);
+    else if (es(cubierta, CUB_SOLAR)) pisoDePatio(c, k, semilla, s, t, 1.0, w2);
     else tejado(c, k, semilla, s, t, largo, sombra, w2);
     return vec4(c, clamp(k, 0.0, 1.0));
   }`

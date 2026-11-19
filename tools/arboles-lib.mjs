@@ -1,5 +1,7 @@
 // Lógica pura de tools/arboles.mjs: los árboles del plano de 1936 → public/datos/arboles.bin (specs/02).
 import { desdeCuando } from '../src/epocas.js'
+import { ALA, CAMPOS_ALA, CAMPOS_MARCO, esDePatio } from '../src/alas.js'
+import { azar } from '../src/techos.js'
 
 export const BYTES_POR_ARBOL = 8 // 4 × Uint16 LE: x, y (px del mosaico), radio (dm), vida
 const DM_POR_M = 10
@@ -167,3 +169,48 @@ export function esDePlaza(claseEn, x, y, { pasoPx, maxPx }) {
  * árboles: un árbol de plaza o de calle no aparece antes de 1889. Los de los patios, sí.
  */
 export const naceEnPlaza = (nace, dePlaza) => (dePlaza ? Math.max(nace, JARDINES_DESDE) : nace)
+
+const EPOCAS = 6
+const ARBOL_EN_PATIO = 0.15 // de los patios en que cabe, cuántos tienen su árbol
+const ARBOL_EN_SOLAR = 0.4
+const PATIO_CON_ARBOL_M = 4 // lado mínimo del patio para que le quepa un árbol
+const RADIO_PATIO_M = [1.6, 2.6]
+const RADIO_SOLAR_M = [2.2, 3.8]
+
+/**
+ * Los árboles de los patios y los solares de las casas de patio (marcos y alas de ciudad.pak, tools/geo/alas.py):
+ * el plano de 1936 no los dibuja (pinta la manzana maciza), así que van por regla, como en la vista aérea
+ * del pueblo colonial: un árbol en algunos patios y en buena parte de los solares. Nacen con su casa
+ * y mueren cuando la casa deja de ser de patio (pasa a ecléctica, moderna…: ahí el visor la techa entera)
+ * o cuando muere. Determinista: el azar sale del número de techo y del ala. → [{x, y, r (px), nace, muere}]
+ */
+export function arbolesDePatio({ marcos, alas, techos, vida, historia }, metro) {
+  if (!marcos || !alas) return []
+  const salida = []
+  for (let m = 0; m < marcos.length; m += CAMPOS_MARCO) {
+    const [techo, ox, oy, eux, euy, , , , , primera, cuantas] = marcos.subarray(m, m + CAMPOS_MARCO)
+    if (!cuantas) continue
+    const semilla = techos[techo * 4 + 3]
+    const [nace, muereCasa] = vida ? [vida[techo] % 8, Math.floor(vida[techo] / 8)] : [0, 0]
+    const estiloEn = (e) => (historia ? historia[techo * EPOCAS + e] % 16 : (techos[techo * 4 + 2] >> 8) & 0xff)
+    if (!esDePatio(estiloEn(nace), semilla, nace)) continue
+    let muere = muereCasa
+    for (let e = nace + 1; e < (muereCasa || EPOCAS); e++) {
+      if (!esDePatio(estiloEn(e), semilla, e)) { muere = e; break }
+    }
+    for (let k = 0; k < cuantas; k++) {
+      const [tipo, u0, v0, u1, v1] = alas.subarray((primera + k) * CAMPOS_ALA, (primera + k + 1) * CAMPOS_ALA)
+      if (tipo !== ALA.PATIO && tipo !== ALA.SOLAR) continue
+      const solar = tipo === ALA.SOLAR
+      const lado = Math.min(u1 - u0, v1 - v0) * metro
+      if (lado < PATIO_CON_ARBOL_M || azar(techo * 31 + k, 41) >= (solar ? ARBOL_EN_SOLAR : ARBOL_EN_PATIO)) continue
+      const [r0, r1] = solar ? RADIO_SOLAR_M : RADIO_PATIO_M
+      const r = Math.min(r0 + (r1 - r0) * azar(techo * 31 + k, 42), lado * 0.45)
+      // en cualquier parte del patio (o del solar) en que la copa quepa entera
+      const rp = r / metro
+      const [u, v] = [u0 + rp + (u1 - u0 - 2 * rp) * azar(techo * 31 + k, 43), v0 + rp + (v1 - v0 - 2 * rp) * azar(techo * 31 + k, 44)]
+      salida.push({ x: ox + u * eux - v * euy, y: oy + u * euy + v * eux, r: r / metro, nace, muere })
+    }
+  }
+  return salida
+}

@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 import pytest
 from shapely.geometry import Point, Polygon, box
@@ -82,3 +84,68 @@ def test_una_casa_suelta_no_hace_esquina():
     c[40:100, 40:90] = CLASE['edificado']  # 30 × 25 m: dos o tres lotes, no una manzana
     res = vectorizar(c, METRO, plaza=(0, 0))
     assert res['techos'] and not any(res['esquinas'])
+
+
+# --- las casas de patio: marcos y alas (tools/geo/alas.py) ---
+
+def manzana_maciza(lado_m=110):
+    """Una manzana toda edificada, como las del centro en el plano de 1936, con calle alrededor."""
+    borde = 30
+    lado = int(lado_m / METRO)
+    c = np.full((lado + 2 * borde, lado + 2 * borde), CLASE['calle'], np.uint8)
+    c[borde:borde + lado, borde:borde + lado] = CLASE['edificado']
+    return c
+
+
+def test_una_manzana_maciza_da_casas_de_patio_con_su_marco_y_sus_alas():
+    from tools.geo.alas import FRENTE, PATIO
+    res = vectorizar(manzana_maciza(), METRO, plaza=(140, 140))
+    con_alas = [m for m in res['marcos'] if m[10] > 0]
+    assert len(con_alas) >= 0.5 * len(res['techos'])
+    polis = poligonos(res)
+    for techo, ox, oy, eux, euy, ancho, fondo, calles, crujia, primera, cuantas in res['marcos']:
+        assert 0 <= techo < len(res['techos'])
+        assert math.hypot(eux, euy) == pytest.approx(1, abs=1e-4)
+        assert ancho > 0 and fondo > 0 and 7 / METRO <= crujia <= 8.5 / METRO
+        alas = res['alas'][primera:primera + cuantas]
+        assert len(alas) == cuantas
+        if not alas:
+            continue
+        assert alas[0][0] == FRENTE and any(a[0] == PATIO for a in alas)
+        # el frente está en la calle: el punto medio de la línea de fachada toca el borde de la casa
+        medio = Point(ox + eux * ancho / 2, oy + euy * ancho / 2)
+        assert polis[techo].exterior.distance(medio) < 3
+        # y las alas caen sobre la casa
+        for _, u0, v0, u1, v1 in alas:
+            centro = Point(ox + eux * (u0 + u1) / 2 - euy * (v0 + v1) / 2, oy + euy * (u0 + u1) / 2 + eux * (v0 + v1) / 2)
+            assert polis[techo].buffer(2).contains(centro)
+    assert len({m[0] for m in res['marcos']}) == len(res['marcos'])   # un marco por casa, como mucho
+    assert len({m[8] for m in res['marcos']}) == 1   # la crujía es de la manzana: la misma en todas sus casas
+
+
+def test_los_frentes_de_una_cuadra_quedan_en_una_sola_linea():
+    res = vectorizar(manzana_maciza(), METRO, plaza=(140, 140))
+    # las casas que miran al norte (eu = +x): todas con el origen en la misma fila de píxeles, el borde de la manzana
+    al_norte = [m for m in res['marcos'] if m[3] > 0.99]
+    assert len(al_norte) >= 4
+    assert max(m[2] for m in al_norte) - min(m[2] for m in al_norte) < 0.05
+    assert al_norte[0][2] == pytest.approx(30, abs=0.6)
+
+
+def test_la_mascara_de_patios_marca_patios_y_solares_dentro_de_lo_edificado():
+    from tools.geo.vectorizar import mascara_de_patios
+    c = manzana_maciza()
+    res = vectorizar(c, METRO, plaza=(140, 140))
+    mascara = mascara_de_patios(res, c.shape)
+    assert mascara.dtype == np.uint8 and set(np.unique(mascara)) == {0, 255}
+    patios = mascara > 0
+    assert 0.08 < patios.sum() / (c == CLASE['edificado']).sum() < 0.5
+    assert (patios & (c != CLASE['edificado'])).sum() < 0.01 * patios.sum()
+
+
+def test_una_casa_suelta_y_chica_tiene_marco_pero_no_alas():
+    c = np.full((120, 120), CLASE['calle'], np.uint8)
+    c[40:60, 40:64] = CLASE['edificado']   # 12 × 10 m
+    res = vectorizar(c, METRO, plaza=(0, 0))
+    assert len(res['techos']) == 1 and len(res['marcos']) == 1
+    assert res['marcos'][0][10] == 0 and res['alas'] == []
