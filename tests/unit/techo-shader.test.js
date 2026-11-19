@@ -149,7 +149,7 @@ describe('techos: qué dibuja cada cubierta', () => {
 
   test('en tinta la casa es papel con trazos: ya no se pega el plano sobre el techo', () => {
     const { fragmentShader } = compilar()
-    expect(fragmentShader).toContain('vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), papel, acostada);')
+    expect(fragmentShader).toContain('vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), hojaTinta, acostada);')
     expect(fragmentShader).not.toMatch(/papel, vTecho\)/)
   })
 

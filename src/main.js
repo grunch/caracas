@@ -214,6 +214,7 @@ Promise.all([fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.re
     lineaDeTiempo = crearLineaDeTiempo({
       contenedor: document.getElementById('epocas'), epocas, alElegir: (i) => secuencia.elegir(i), desde: PRIMERA_EPOCA,
     })
+    pedirMascaras() // el agua y los rótulos, para la hoja en tinta de antes de 1936
     cargarTextura('plano/crece.png', false).then((t) => {
       // etapas codificadas: un mipmap las promediaría y el borde de la ciudad cambiaría de época a lo lejos
       t.generateMipmaps = false
@@ -230,26 +231,28 @@ function levantar(arriba = olaObjetivo === 0) {
   pedirCuadro(3)
 }
 
-// --- tinta ⇄ color: la máscara de suelo y la de rótulos del plano se bajan la primera vez que se prende el color ---
+// --- tinta ⇄ color: la máscara de suelo y la de rótulos del plano las usan el color y, antes de 1936, la
+// hoja en tinta (src/shader/papel.js): se bajan cuando arranca la línea de tiempo o se prende el color ---
 const DURACION_COLOR_S = 1.2
 let colorObjetivo = 0
 let sueloPedido = null
 let rotulosPlanoPedidos = null
+function pedirMascaras() {
+  sueloPedido ??= cargarTextura(liviano ? 'plano/suelo-2k.webp' : 'plano/suelo.webp', false)
+    .then((t) => ponerTextura(ciudad.U.uSuelo, t))
+    .catch((e) => { sueloPedido = null; console.warn(`suelo: ${e.message}`) })
+  // sin la máscara de rótulos todo anda igual: el plano se marca entero, con sus nombres
+  rotulosPlanoPedidos ??= cargarTextura(liviano ? 'plano/rotulos-2k.webp' : 'plano/rotulos.webp', false)
+    .then((t) => ponerTextura(ciudad.U.uRotulos, t))
+    .catch((e) => { rotulosPlanoPedidos = null; console.warn(`rótulos del plano: ${e.message}`) })
+}
 function alternarColor(prender = colorObjetivo === 0) {
   colorObjetivo = prender ? 1 : 0
   const boton = document.getElementById('color')
   boton.setAttribute('aria-pressed', String(prender))
   boton.classList.toggle('on', prender)
   boton.textContent = prender ? 'Tinta' : 'Color'
-  if (prender) {
-    sueloPedido ??= cargarTextura(liviano ? 'plano/suelo-2k.webp' : 'plano/suelo.webp', false)
-      .then((t) => ponerTextura(ciudad.U.uSuelo, t))
-      .catch((e) => { sueloPedido = null; console.warn(`suelo: ${e.message}`) })
-    // sin la máscara de rótulos el color anda igual: el plano se marca entero, con sus nombres
-    rotulosPlanoPedidos ??= cargarTextura(liviano ? 'plano/rotulos-2k.webp' : 'plano/rotulos.webp', false)
-      .then((t) => ponerTextura(ciudad.U.uRotulos, t))
-      .catch((e) => { rotulosPlanoPedidos = null; console.warn(`rótulos del plano: ${e.message}`) })
-  }
+  if (prender) pedirMascaras()
   pedirCuadro(3)
 }
 

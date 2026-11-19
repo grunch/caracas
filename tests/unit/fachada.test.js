@@ -141,7 +141,7 @@ describe('fachadas: el detalle de cada estilo', () => {
 describe('fachadas: tinta y LOD', () => {
   test('en tinta, la fachada aporta su tinta (vanos rayados, molduras y hierros a pluma)', () => {
     const { fragmentShader } = compilar()
-    expect(fragmentShader).toMatch(/enTinta = mix\(mix\(diffuseColor\.rgb, TINTA, casa\.a\), papel, acostada\)/)
+    expect(fragmentShader).toMatch(/enTinta = mix\(mix\(diffuseColor\.rgb, TINTA, casa\.a\), hojaTinta, acostada\)/)
     expect(fragmentShader).toMatch(/if \(vTecho < 0\.5\) casa = fachadaEn\(/)
     expect(cuerpo(GLSL_FACHADA, 'rayadoPantalla')).toContain('gl_FragCoord') // el rayado de los tonos, en píxeles: sin moiré
     cuerpo(GLSL_FACHADA, 'trazo')
@@ -149,7 +149,7 @@ describe('fachadas: tinta y LOD', () => {
 
   test('en color, la pared es la fachada', () => {
     const { fragmentShader } = compilar()
-    expect(fragmentShader).toContain('vec3 enColor = mix(casa.rgb, sueloColor(uv, papel), esSuelo);')
+    expect(fragmentShader).toContain('vec3 enColor = mix(casa.rgb, sueloColor(uv, papel, enSuelo, ribera, rotulo, epoca, ciudad), esSuelo);')
   })
 
   test('de lejos, los detalles se apagan hacia el tono medio de la pared (sin moiré)', () => {

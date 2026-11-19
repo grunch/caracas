@@ -15,6 +15,7 @@ import { GLSL_AZAR, GLSL_PRETIL } from './shader/comun.js'
 import { GLSL_EPOCAS, GLSL_CRECE } from './shader/epocas.js'
 import { GLSL_PLANO, uniformsPlanoEpocas } from './shader/plano.js'
 import { GLSL_SUELO } from './shader/suelo.js'
+import { GLSL_PAPEL } from './shader/papel.js'
 import { GLSL_FACHADA } from './shader/fachada.js'
 import { GLSL_TECHO } from './shader/techo.js'
 import { CUBIERTA } from './techos.js'
@@ -34,7 +35,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   flat varying float vPretil; // cuánto sube el pretil sobre esta pared en la época que rige
   flat varying float vAlzada; // cuánto se levantó la casa (0 acostada en la hoja … 1 en pie)
   varying vec3 vFaldon; // del techo: s, t y el largo del faldón (src/shader/techo.js)
-  varying vec2 vTerreno;
+  varying vec2 vTerreno; varying vec2 vPendiente;
   varying vec3 vNormalMundo;
   ${GLSL_AZAR}
   ${GLSL_PRETIL}
@@ -45,6 +46,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   ${GLSL_FACHADA}
   ${GLSL_TECHO}
   ${GLSL_SUELO}
+  ${GLSL_PAPEL}
   ${GLSL_HOY}`
 
 const FRAGMENTO_COLOR = /* glsl */ `
@@ -70,13 +72,27 @@ const FRAGMENTO_COLOR = /* glsl */ `
     else casa = techoLlano(vCubierta, vInfo.y);
   }
 
-  // tinta: el suelo es el plano; la casa, papel con sus vanos, molduras y tejados a pluma. Acostada en la
-  // hoja (antes de la ola) la casa todavía es el plano: el grabado aparece a medida que se levanta
+  // el lugar en la época que rige ahí: lo que es ciudad y lo que todavía es valle. Las lecturas con mipmap
+  // y las derivadas van acá, fuera de toda rama
+  float epoca = epocaAqui(length(vMundo.xz));
+  float urbano = urbanoEn(uvPlano, epoca);
+  float ciudad = ciudadDe(urbano);
+  vec4 enSuelo = texture2D(uSuelo, uv);
+  float ribera = texture(uSuelo, uv, 3.5).r;
+  float rotulo = rotuloEn(uv);
+  float pxMundo = max(fwidth(vMundo.x), fwidth(vMundo.z));
+  float wRibera = fwidth(ribera);
+
+  // tinta: el suelo es la hoja de la época (src/shader/papel.js): el plano donde ya hay ciudad y papel en
+  // blanco, con el valle a pluma, donde todavía no; la casa, papel con sus vanos, molduras y tejados a
+  // pluma. Acostada en la hoja (antes de la ola) la casa todavía es la hoja: el grabado aparece al levantarse
   float acostada = max(esSuelo, 1.0 - smoothstep(0.0, 0.3, vAlzada));
-  vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), papel, acostada);
+  vec3 hojaTinta = papel;
+  if (acostada > 0.0 && uColor < 1.0) hojaTinta = papelDeEpoca(uvPlano, papel, epoca, urbano, enSuelo, ribera, wRibera, rotulo, pxMundo);
+  vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), hojaTinta, acostada);
 
   // color: suelo pintado; techo y fachada según la casa
-  vec3 enColor = mix(casa.rgb, sueloColor(uv, papel), esSuelo);
+  vec3 enColor = mix(casa.rgb, sueloColor(uv, papel, enSuelo, ribera, rotulo, epoca, ciudad), esSuelo);
 
   diffuseColor.rgb = mix(enTinta, enColor, uColor);
 
@@ -216,5 +232,6 @@ const VERTICE_APOYO = /* glsl */ `
       bool esPiso = aInfo.w > 0.5 && aTecho.w > ${CUBIERTA.PATIO}.0 - 0.5 && aTecho.w < ${CUBIERTA.SOLAR}.0 + 0.5;
       vBase = aInfo.w < 0.5 || esPiso ? sueloEn(position.xz) : sueloEn(aAncla);
       vTerreno = aInfo.w < 0.5 ? terrenoEn(position.xz) : vec2(0.0);
+      vPendiente = aInfo.w < 0.5 ? pendienteEn(position.xz) : vec2(0.0);
       transformed.y += aInfo.w < 0.5 || esPiso ? sueloEn(position.xz)
         : apoyoCasa(aAncla, transformed.xz, position.y < 0.01);`
