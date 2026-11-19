@@ -1,14 +1,17 @@
 /**
  * Cámara propia (sin OrbitControls): un estado objetivo y uno actual que lo persigue
  * con amortiguación exponencial. Arrastrar mueve, rueda acerca (hacia el cursor),
- * botón derecho gira e inclina. El objetivo va apoyado en el suelo (`suelo(x, z)`, el relieve tal
+ * botón derecho gira e inclina. Con dos dedos (src/gestos.js): pellizcar acerca, gira y corre, y lo que estaba
+ * entre los dedos sigue entre ellos; deslizarlos juntos hacia arriba o abajo inclina. El objetivo va apoyado en el suelo (`suelo(x, z)`, el relieve tal
  * como se dibuja) y la cámara nunca baja de él: acercarse al Ávila no lo atraviesa.
  */
 import { Vector3, Raycaster, Plane, Vector2 } from 'three'
+import { gestoDeDosDedos, modoDeGesto } from './gestos.js'
 
 const LIMITES = { distMin: 40, distMax: 9000, pitchMin: 0.18, pitchMax: 1.5 }
 const SUAVIDAD = 8
 const ALTURA_MINIMA_M = 12 // sobre el suelo que queda debajo de la cámara
+const INCLINAR_POR_PX = 0.004 // como el botón derecho
 
 export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0 }) {
   // arranca mirando la hoja entera, un poco inclinada, como un plano sobre la mesa
@@ -17,6 +20,8 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   const plano = new Plane(new Vector3(0, 1, 0), 0)
   const rayo = new Raycaster()
   let arrastre = null
+  const dedos = new Map() // pointerId → { x, y } de los punteros apoyados
+  let dos = null // el gesto con dos dedos en curso: { ids, inicio, previo, modo, altura, ancla }
 
   // el plano horizontal a la altura del objetivo (fija durante un arrastre, para que no resbale)
   const alSuelo = (cx, cy, altura = now.y) => {
@@ -33,11 +38,31 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   }
 
   lienzo.addEventListener('contextmenu', (e) => e.preventDefault())
+  const empezarArrastre = (boton, x, y) => { arrastre = { boton, x, y, altura: now.y, ancla: alSuelo(x, y, now.y) } }
+  const par = () => [...dedos.values()].slice(0, 2).map((d) => ({ ...d }))
+  const idsDelPar = () => [...dedos.keys()].slice(0, 2)
+  /** El gesto con dos dedos arranca (o vuelve a arrancar) desde donde están ahora los dos primeros. */
+  const empezarDos = () => {
+    const inicio = par()
+    const medio = { x: (inicio[0].x + inicio[1].x) / 2, y: (inicio[0].y + inicio[1].y) / 2 }
+    dos = { ids: idsDelPar(), inicio, previo: inicio, modo: null, altura: now.y, ancla: alSuelo(medio.x, medio.y, now.y) }
+  }
   lienzo.addEventListener('pointerdown', (e) => {
     lienzo.setPointerCapture(e.pointerId)
-    arrastre = { boton: e.button, x: e.clientX, y: e.clientY, altura: now.y, ancla: alSuelo(e.clientX, e.clientY, now.y) }
+    dedos.set(e.pointerId, { x: e.clientX, y: e.clientY })
+    if (dedos.size === 2) {
+      arrastre = null
+      empezarDos()
+    } else if (dedos.size === 1) {
+      empezarArrastre(e.button, e.clientX, e.clientY)
+    }
   })
   lienzo.addEventListener('pointermove', (e) => {
+    if (dedos.has(e.pointerId)) dedos.set(e.pointerId, { x: e.clientX, y: e.clientY })
+    if (dos && dedos.size >= 2) {
+      moverConDos()
+      return
+    }
     if (!arrastre) return
     if (arrastre.boton === 2) {
       goal.yaw -= (e.clientX - arrastre.x) * 0.005
@@ -56,7 +81,46 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
     acotar()
     pedirCuadro(3)
   })
-  const soltar = () => { arrastre = null }
+  /** Dos dedos: el modo se decide una vez; hasta entonces no se aplica nada, y al decidir, todo desde el inicio. */
+  function moverConDos() {
+    const ahora = par()
+    dos.modo ??= modoDeGesto(dos.inicio, ahora)
+    if (!dos.modo) return
+    const g = gestoDeDosDedos(dos.previo, ahora)
+    dos.previo = ahora
+    if (dos.modo === 'inclinar') {
+      goal.pitch += g.inclinar * INCLINAR_POR_PX
+    } else {
+      goal.dist /= g.escala
+      goal.yaw += g.giro
+    }
+    acotar()
+    Object.assign(now, { dist: goal.dist, yaw: goal.yaw, pitch: goal.pitch })
+    aplicar()
+    // lo que estaba entre los dedos vuelve a quedar entre ellos (así acerca hacia ahí y gira alrededor de ahí)
+    const p = dos.modo === 'pellizcar' && dos.ancla ? alSuelo(g.medio.x, g.medio.y, dos.altura) : null
+    if (p) {
+      goal.x += dos.ancla.x - p.x
+      goal.z += dos.ancla.z - p.z
+      acotar()
+      Object.assign(now, { x: goal.x, z: goal.z })
+      aplicar()
+    }
+    pedirCuadro(3)
+  }
+  const soltar = (e) => {
+    dedos.delete(e.pointerId)
+    if (dedos.size >= 2) {
+      // si se levantó uno de los dos del gesto, el par es otro: se arranca de nuevo, sin tomar el cambio por gesto
+      if (dos && dos.ids.includes(e.pointerId)) empezarDos()
+      return
+    }
+    dos = null
+    // si queda un dedo, sigue arrastrando desde donde está (sin salto)
+    const [queda] = dedos.values()
+    if (queda) empezarArrastre(0, queda.x, queda.y)
+    else arrastre = null
+  }
   lienzo.addEventListener('pointerup', soltar)
   lienzo.addEventListener('pointercancel', soltar)
   lienzo.addEventListener('wheel', (e) => {

@@ -67,11 +67,8 @@ test('los hitos son una sola malla con los atributos de su material y los unifor
   expect(errores).toEqual([])
 })
 
-test('al cambiar de época cambia lo que se ve en la Plaza Bolívar: vacía, mercado, jardín con estatua', async ({ page }) => {
-  // Falla conocida (T41b): con el relieve real (la muestra de datos del CI) el terreno sube hacia el norte de la
-  // plaza y tapa la mitad del piso de tierra del mercado, que queda plano a la altura de sus anclas. Cuando se
-  // arregle, Playwright avisa que este test ya pasa y hay que sacar esta marca.
-  test.fail(await hayRelieve(page), 'T41b: el piso de los hitos no sigue el relieve donde sube')
+/** Las cinco épocas de la plaza, dibujadas desde arriba: vacía, mercado, mercado de 1843, jardín, damero. */
+async function verLaPlaza(page) {
   await listo(page)
   const [vacia, mercado, mercado43, jardin, damero] = [
     await colorDeLaPlaza(page, 0), await colorDeLaPlaza(page, 1), await colorDeLaPlaza(page, 2),
@@ -84,6 +81,23 @@ test('al cambiar de época cambia lo que se ve en la Plaza Bolívar: vacía, mer
   expect(distancia(jardin, damero)).toBeLessThan(25)
   // la estatua de bronce sobre piedra oscura: el centro es más oscuro que la tierra del mercado
   expect(jardin[0] + jardin[1] + jardin[2]).toBeLessThan(mercado[0] + mercado[1] + mercado[2])
+}
+
+test('al cambiar de época cambia lo que se ve en la Plaza Bolívar: vacía, mercado, jardín con estatua', async ({ page }) => {
+  // sin las épocas de la hoja ni el relieve: con crece.json, antes de 1936 el piso es papel o plano según la
+  // época, y con el relieve la cámara (a 60 m de la cota 0) queda bajo el terreno levantado; lo que se mide
+  // aquí es el hito (el mismo test con o sin datos pesados)
+  await page.route(/\/(datos\/(crece\.json|relieve\.bin)|plano\/crece\.png)$/, (ruta) => ruta.abort())
+  await verLaPlaza(page)
+})
+
+test('con el relieve real, el piso del mercado de la plaza se ve entero (falla conocida T41b)', async ({ page }) => {
+  // Solo con el relieve (la muestra de datos del CI; la demo no lo trae). Falla conocida (T41b): el terreno sube
+  // hacia el norte de la plaza y tapa la mitad del piso de tierra del mercado, que queda plano a la altura de sus
+  // anclas. Cuando se arregle, Playwright avisa que este test ya pasa y hay que sacar esta marca.
+  test.skip(!(await hayRelieve(page)), 'sin relieve no hay nada que medir')
+  test.fail(true, 'T41b: el piso de los hitos no sigue el relieve donde sube')
+  await verLaPlaza(page)
 })
 
 test('la Catedral aparece en 1772 y Santa Capilla recién en 1889', async ({ page }) => {

@@ -29,7 +29,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 |---|---|---|---|---|
 | T10 | **CI en GitHub Actions**: vitest, pytest (solo sintéticos), build y Playwright con datos de prueba | — | cada PR muestra checks verdes o rojos | ✅ #5 |
 | T11 | **Pipeline reproducible**: `npm run datos` corre todo el pipeline de 1936 (y luego el de las épocas) con caché por paso y verifica conteos esperados | T08 | desde los `original.tif`, un comando regenera `public/` idéntico (hash) | ✅ #6 |
-| T12 | **Fixture de datos chica** para E2E y CI: un recorte de 1 km² alrededor de la plaza (plano, `.pak`, suelo) generado por el pipeline | T11 | los E2E corren en CI sin los datos pesados | 🔄 #60: la muestra (`tools/muestra.mjs`) viaja como `muestra.tar.gz` en el release `datos-*` y el CI la baja con `npm run datos:bajar -- --muestra` |
+| T12 | **Muestra de datos chica** para E2E y CI: un recorte de 1 km² alrededor de la plaza (plano, `.pak`, suelo) generado por el pipeline | T11 | los E2E corren en CI sin los datos pesados | 🔄 #60: la muestra (`tools/muestra.mjs`) viaja como `muestra.tar.gz` en el release `datos-*` y el CI la baja con `npm run datos:bajar -- --muestra` |
 
 ## Fase 2 · Terminar lo que está en curso
 
@@ -100,7 +100,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 
 | ID | Tarea | Depende de | Listo cuando | Estado |
 |---|---|---|---|---|
-| T70 | Responsive y modo liviano: paneles en el teléfono, gestos, rendimiento en gama media | T25 | 30 fps o más en un teléfono de gama media | ⏳ |
+| T70 | Responsive y modo liviano: paneles en el teléfono, gestos, rendimiento en gama media | T25 | 30 fps o más en un teléfono de gama media | 🔄 #58 |
 | T71 | `edificios.html`: la ciudad edificio por edificio (scrollytelling) | T43 | recorre todos los hitos | ⏳ |
 | T72 | Accesibilidad (WCAG 2.2 AA en la interfaz) y SEO básico | T44 | auditoría sin errores graves | ⏳ |
 | T73 | **Publicación** en GitHub Pages (grunch.github.io/caracas): build en cada push a `main`, con los datos bajados del release `datos-*` (`npm run datos:bajar`) | la decisión de derechos (tomada por el responsable) | el sitio está en línea | ✅ #50 (caracas.city) |
