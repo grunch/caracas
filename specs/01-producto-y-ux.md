@@ -28,7 +28,7 @@ Capas DOM sobre el `<canvas>` a pantalla completa:
 |---|---|---|
 | `#titulo` | abajo a la izquierda | Botón "?" de 44px. Al tocarlo se expande con título, subtítulo, línea de atajos y el link "¿Qué estoy viendo?", que reabre la intro |
 | `#epocas` | arriba al centro | Botonera de años (1867, 1888, 1895, 1905, 1910, 1921, 1940) + botón ▶ "andar" que los recorre solo; abajo, la fuente del plano de ese año |
-| `#buscar` | arriba a la izquierda | "Buscá una dirección de hoy: Corrientes 1234" |
+| `#buscar` | arriba a la izquierda | "Buscá una dirección de hoy: Corrientes 1234". *Caracas:* "Busca: de La Torre a Veroes" (esquinas, cuadras y direcciones de hoy; gramática en `05`); en pantallas de menos de 1120 px va arriba a lo ancho y los años, debajo |
 | `#firma` | arriba a la derecha | Avatar + "Hecho por @autor" → X/Twitter |
 | `#botones` | abajo a la derecha | Más rápido · Caminar · Volar · Manejar · Color · **Ver lo de hoy** (rojo) · **Levantar la ciudad** · Volver al mapa |
 | `#leyenda` | sobre los botones | Solo con "lo de hoy": líneas rojas = calles actuales, rayado = tierra ganada al río, © OSM |
