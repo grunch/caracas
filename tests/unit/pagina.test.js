@@ -70,5 +70,6 @@ describe('robots.txt y sitemap.xml', () => {
     expect(sitemap).toMatch(/^<\?xml version="1.0" encoding="UTF-8"\?>/)
     expect(sitemap).toContain('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
     expect(sitemap).toContain(`<loc>${SITIO}</loc>`)
+    expect(sitemap).toContain(`<loc>${SITIO}edificios.html</loc>`)
   })
 })

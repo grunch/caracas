@@ -23,6 +23,7 @@ import { crearAcabado } from './acabado.js'
 import { normalizarMarcas, distanciaDeVuelo } from './marcas.js'
 import { crearCapaMarcas } from './marcas-capa.js'
 import { MARCAS } from './marcas-datos.js'
+import { ordenDeVitrina } from './vitrina.js'
 import './marcas.css'
 import { crearVisorDePlano } from './visor-plano-panel.js'
 import './visor-plano.css'
@@ -459,9 +460,10 @@ let alturaMostrada = null
 
 // --- las marcas (M): los nombres de los lugares, por época, en una capa de DOM sobre la vista (src/marcas.js) ---
 const sinAnimar = matchMedia('(prefers-reduced-motion: reduce)')
+const marcasDelMapa = normalizarMarcas(MARCAS, { hitos: HITOS, coords })
 const marcas = crearCapaMarcas({
   contenedor: document.getElementById('marcas'),
-  marcas: normalizarMarcas(MARCAS, { hitos: HITOS, coords }),
+  marcas: marcasDelMapa,
   tamaño: () => ({ ancho: innerWidth, alto: innerHeight }),
   altura: sueloEn,
   alSobre: () => pedirCuadro(2),
@@ -484,6 +486,31 @@ document.getElementById('nombres').addEventListener('click', () => alternarMarca
 // --- las fichas: al abrir una marca, el panel con sus nombres, su texto por época y sus fotos (src/ficha-panel.js) ---
 const fichas = engancharFichas({ capa: marcas, U: ciudad.U })
 if (params.has('sinmarcas')) alternarMarcas(false)
+
+// --- la vitrina (T71): embebido en edificios.html, el visor obedece las órdenes del mismo origen (src/vitrina.js) ---
+const VITRINA = Object.freeze({ dist: 320, pitch: 0.75, giro: 0.12 }) // m, rad, rad/s alrededor del edificio
+let girarVitrina = false
+if (params.has('vitrina')) {
+  document.body.classList.add('vitrina')
+  const porId = new Map(marcasDelMapa.map((m) => [m.id, m]))
+  renderer.domElement.addEventListener('pointerdown', () => { girarVitrina = false }) // quien toca la vista, la maneja
+  addEventListener('message', (e) => {
+    const orden = ordenDeVitrina(e, location.origin)
+    if (!orden) return
+    if (orden.tipo === 'ir' && porId.has(orden.id)) {
+      const m = porId.get(orden.id)
+      const destino = { x: m.x, z: m.z, dist: VITRINA.dist, pitch: VITRINA.pitch }
+      if (sinAnimar.matches) cam.jump(destino); else cam.volar(destino)
+      girarVitrina = !sinAnimar.matches
+    } else if (orden.tipo === 'epoca') {
+      lineaDeTiempo?.elegir(orden.indice)
+    } else if (orden.tipo === 'levantar') {
+      levantar(true)
+    } else if (orden.tipo === 'girar') {
+      girarVitrina = orden.si && !sinAnimar.matches
+    }
+  })
+}
 
 // --- la luz y el acabado: sombras arrojadas, contorno a tinta, bruma y grano de papel (src/acabado.js) ---
 const acabado = crearAcabado({
@@ -514,7 +541,10 @@ renderer.setAnimationLoop((t) => {
     if (enCoche.update(dt)) pedirCuadro(2)
     const rotulo = `${enCoche.vehiculo.nombre} · ${enCoche.kmh} km/h`
     if (rotulo !== alturaMostrada) avisoModo.querySelector('.titulo').textContent = (alturaMostrada = rotulo)
-  } else if (cam.update(dt)) pedirCuadro(2)
+  } else {
+    if (girarVitrina) { cam.goal.yaw += VITRINA.giro * dt; pedirCuadro(2) }
+    if (cam.update(dt)) pedirCuadro(2)
+  }
   const { uOla, uColor } = ciudad.U
   if (uOla.value !== olaObjetivo) {
     uOla.value = acercar(uOla.value, olaObjetivo, (olaMax / DURACION_OLA_S) * dt)
@@ -559,8 +589,10 @@ if (params.has('hoy')) alternarHoy(true)
 document.body.classList.add('listo')
 listo = true
 if (crecerPedido) verCrecer()
+// la página que embebe la vitrina espera este aviso para mandar sus órdenes
+if (params.has('vitrina') && window.parent !== window) window.parent.postMessage({ vitrina: 'lista' }, location.origin)
 window.lab = {
-  renderer, scene, camera, cam, aPie, enAvion, enCoche, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
+  renderer, scene, camera, cam, aPie, enAvion, enCoche, marcasDelMapa, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
   get relieve() { return relieve },
   get teselas() { return teselas },
   get arboles() { return arboles },

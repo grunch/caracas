@@ -346,3 +346,8 @@ Botones Caminar / Volar / Manejar (+ "Más rápido"). Se entra desde la vista ac
 ## Vitrina (`vitrina.js`)
 
 El visor puede embeberse en un `<iframe>` y controlarse por `postMessage({vitrina: …})`: ir a un hito, elegir época, levantar, soltar. Lo usa `edificios.html` para el scrollytelling.
+
+*Caracas (T71, `src/vitrina.js`):*
+- **Activación**: con `?vitrina` el visor oculta su interfaz y avisa al padre `{ vitrina: 'lista' }`.
+- **Órdenes**: acepta solo mensajes del mismo origen, con un id válido: `{ ir: 'id' }`, `{ epoca: n }`, `{ levantar: true }` y `{ girar: bool }`.
+- **Movimiento reducido**: con `prefers-reduced-motion`, salta al edificio sin volar ni girar.

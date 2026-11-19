@@ -68,6 +68,8 @@
     #modo.callado .ayuda,#modo .ayuda.dedos{display:none}
     @media (hover:none) and (pointer:coarse){#modo .ayuda.raton{display:none}#modo:not(.callado) .ayuda.dedos{display:block}}
     /* a pie: la caja de búsqueda y los nombres son del mapa; el modo tiene su cartel en esa esquina */
+    /* la vitrina (edificios.html): solo la ciudad y sus nombres */
+    body.vitrina #buscar,body.vitrina #botones,body.vitrina #epocas,body.vitrina #leyenda,body.vitrina #firma,body.vitrina #modo{display:none}
     body.modo #buscar,body.modo #marcas,body.modo #alzar,body.modo-caminar #volar,body.modo-caminar #manejar,body.modo-volar #caminar,body.modo-volar #manejar,body.modo-manejar #caminar,body.modo-manejar #volar{display:none}
     @media (max-width:640px){#epocas button{min-height:44px;padding:6px 6px;font-size:14px;letter-spacing:0}
       /* el texto de cada año, en dos líneas a lo más: el resto de la pantalla es de la ciudad */
