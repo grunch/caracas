@@ -322,6 +322,14 @@ Botones Caminar / Volar / Manejar (+ "Más rápido"). Se entra desde la vista ac
   - **Cartel** «A pie»: va en el lugar del buscador y su ayuda se calla a los 12 s.
   - **Límites**: los hitos (iglesias, Miraflores…) todavía no chocan, y no hay «Más rápido» ni la calle más cercana en el cartel.
 - **Volar**: avión low‑poly visible (con sombra); flechas/WASD giran, suben y bajan; Shift acelera; **Q/E cambian el año y la ciudad cambia abajo**.
+  *Caracas (T61, `src/volar.js` + `src/volar-modo.js`):*
+  - **Avioneta**: de papel con timón y hélice en tinta, de 12 m de envergadura, con sombra.
+  - **Vuelo**: 60 m/s de crucero y 160 con Mayús. Despega a 300 m sobre donde mira la vista (sobre la plaza, si está a más de 3 km), nunca baja de 40 m sobre el suelo ni sube de 2500, y no sale de la hoja. Se inclina al girar.
+  - **Cámara**: 70 m detrás y 22 m arriba.
+  - **Q y E**: cambian el año con la línea de tiempo, y la ciudad cambia abajo con su ola.
+  - **Táctil**: un dedo es un joystick (gira, y sube o baja).
+  - **Cartel**: «En avión · N m sobre el suelo», de a 10 m.
+  - **Mientras dura**: la cámara del mapa queda en pausa; Esc aterriza en la vista de antes.
 - **Manejar**: coche **de la época** con física simple sobre las calles; tercera persona o cabina (V), bocina (B), sonido (M), otro coche (N); Q/E cambian el año y, con él, el coche. Flota de ejemplo: volanta y coche de plaza (1867, con relincho), voiturette (corneta), doble faetón (1909: "como casi todos los 2.287 automóviles de fines de 1909"), Ford T (klaxon) y Ford V8 (de 1932 en adelante). Cada coche tiene geometría procedural, una ficha corta y sonido **sintetizado con WebAudio** (osciladores sawtooth/square + filtros lowpass/bandpass), sin archivos de audio.
 - Minimapa en canvas con `suelo/crece/despeje` en baja resolución.
 - **Táctil**: joystick virtual en la mitad izquierda (radio de 52 px) + un segundo dedo para mirar; textos de ayuda propios de cada modo, que se ocultan a los 12 s.

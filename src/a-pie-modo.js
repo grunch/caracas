@@ -4,16 +4,13 @@
  * y conserva su vista: al salir se vuelve a ella. `casas()`: las partes de ciudad.pak (o null si no llegaron);
  * `epoca()`: la época que rige (src/epocas.js; 99 sin línea de tiempo).
  */
-import { choca, entradaDeTeclas, joystick, pasoAPie, puntoDeEntrada, rejillaDeCasas } from './a-pie.js'
+import { choca, entradaDeTeclas, joystick, pasoAPie, puntoDeEntrada, rejillaDeCasas, teclaAjena } from './a-pie.js'
 
 const OJOS_M = 1.6
 const NEAR_M = 0.1
 const FOV = 60
 const MIRAR_POR_PX = 0.004
 const MIRADA_MAX = 1.2
-const AJENO = 'input, textarea, select, [contenteditable], dialog, [role="dialog"]'
-// los controles que Espacio activa por sí solo (los mismos que respeta accionDeTecla en src/controles.js)
-const PULSABLE = 'button, a, [role="button"]'
 const TECLAS = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ShiftLeft', 'ShiftRight', 'Space'])
 
 export function crearModoAPie({ camera, lienzo, ventana = globalThis, cam, coords, suelo, casas, epoca, pedirCuadro, alCambiar = () => {} }) {
@@ -52,10 +49,9 @@ export function crearModoAPie({ camera, lienzo, ventana = globalThis, cam, coord
   // --- teclado: en captura, antes que los atajos del mapa (las flechas no mueven el mapa, Espacio no lo acuesta);
   // lo que pasa en un campo de texto o en un diálogo (el visor del plano: flechas para moverlo, Esc para cerrarlo) es suyo ---
   ventana.addEventListener('keydown', (e) => {
-    if (!activo || e.target?.closest?.(AJENO)) return
+    if (!activo || teclaAjena(e)) return
     if (e.code === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); salir(); return }
     if (!TECLAS.has(e.code) || e.ctrlKey || e.metaKey || e.altKey) return
-    if (e.code === 'Space' && e.target?.closest?.(PULSABLE)) return // Espacio sobre un botón con foco lo activa
     e.preventDefault()
     e.stopImmediatePropagation()
     teclas.add(e.code)

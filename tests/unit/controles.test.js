@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
-import { ACCIONES, CON_RATON, CON_DEDOS, CON_TECLADO, A_PIE, EN_PANTALLA, accionDeTecla, controlesVisibles, movimientoDeTecla } from '../../src/controles.js'
+import { ACCIONES, CON_RATON, CON_DEDOS, CON_TECLADO, A_PIE, EN_AVION, EN_PANTALLA, accionDeTecla, controlesVisibles, movimientoDeTecla } from '../../src/controles.js'
 
 const en = (selectores) => ({ closest: (s) => (selectores.some((x) => s.split(',').map((y) => y.trim()).includes(x)) ? {} : null) })
 const tecla = (props, target = en([])) => ({ repeat: false, ctrlKey: false, metaKey: false, altKey: false, target, ...props })
@@ -82,13 +82,14 @@ describe('controlesVisibles', () => {
     // Act
     const grupos = controlesVisibles()
     // Assert
-    expect(grupos.map((g) => g.titulo)).toEqual(['Con el ratón', 'Con los dedos', 'Con el teclado', 'A pie', 'En la pantalla', 'Botones y teclas'])
+    expect(grupos.map((g) => g.titulo)).toEqual(['Con el ratón', 'Con los dedos', 'Con el teclado', 'A pie', 'En avión', 'En la pantalla', 'Botones y teclas'])
     expect(grupos[0].filas).toBe(CON_RATON)
     expect(grupos[1]).toMatchObject({ tactil: true, filas: CON_DEDOS })
     expect(grupos[2].filas).toBe(CON_TECLADO)
     expect(grupos[3].filas).toBe(A_PIE)
-    expect(grupos[4].filas).toBe(EN_PANTALLA)
-    expect(grupos[5].filas.map((f) => f.tecla)).toEqual(ACCIONES.map((a) => a.tecla))
+    expect(grupos[4].filas).toBe(EN_AVION)
+    expect(grupos[5].filas).toBe(EN_PANTALLA)
+    expect(grupos[6].filas.map((f) => f.tecla)).toEqual(ACCIONES.map((a) => a.tecla))
     for (const f of grupos.flatMap((g) => g.filas)) expect(f.como && f.que).toBeTruthy()
   })
 
@@ -166,5 +167,12 @@ describe('A_PIE', () => {
   it('cuenta cómo se entra, cómo se camina con teclas, ratón y dedos, y cómo se sale', () => {
     const texto = A_PIE.map((f) => `${f.como} ${f.que}`).join(' ')
     for (const parte of ['Caminar', 'WASD', 'Mayús', 'Arrastrar', 'izquierda', 'Esc']) expect(texto).toContain(parte)
+  })
+})
+
+describe('EN_AVION', () => {
+  it('cuenta cómo se despega, se gira, se sube, se cambia el año y se aterriza', () => {
+    const texto = EN_AVION.map((f) => `${f.como} ${f.que}`).join(' ')
+    for (const parte of ['Volar', 'giran', 'suben', 'Mayús', 'Q y E', 'Esc']) expect(texto).toContain(parte)
   })
 })

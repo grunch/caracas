@@ -51,6 +51,16 @@ export const A_PIE = Object.freeze([
   { como: 'Esc o «Volver al mapa»', que: 'vuelve a la vista de antes' },
 ].map(Object.freeze))
 
+/** En avión (src/volar-modo.js): sobre el valle, con la ciudad de cada año abajo. */
+export const EN_AVION = Object.freeze([
+  { como: '«Volar»', que: 'despega sobre donde mira la vista, a 300 m del suelo' },
+  { como: 'A y D, o ← y →', que: 'giran' },
+  { como: 'W y S, o ↑ y ↓', que: 'suben y bajan; con Mayús, acelera' },
+  { como: 'Q y E', que: 'cambian el año: la ciudad cambia abajo' },
+  { como: 'Con un dedo', que: 'gira y sube o baja, como un joystick' },
+  { como: 'Esc o «Volver al mapa»', que: 'aterriza en la vista de antes' },
+].map(Object.freeze))
+
 /** Lo que está en pantalla y no tiene tecla: la línea de tiempo, los nombres y las fichas. */
 export const EN_PANTALLA = Object.freeze([
   { como: 'Los años, arriba', que: 'llevan la ciudad a ese año: la época llega como una ola desde la Plaza Bolívar' },
@@ -110,6 +120,7 @@ export function controlesVisibles(ids = ACCIONES.map((a) => a.id)) {
     { titulo: 'Con los dedos', tactil: true, filas: CON_DEDOS },
     { titulo: 'Con el teclado', filas: CON_TECLADO },
     { titulo: 'A pie', filas: A_PIE },
+    { titulo: 'En avión', filas: EN_AVION },
     { titulo: 'En la pantalla', filas: EN_PANTALLA },
     { titulo: 'Botones y teclas', filas: acciones.map((a) => ({ como: a.boton, tecla: a.tecla, que: a.que })) },
   ]
