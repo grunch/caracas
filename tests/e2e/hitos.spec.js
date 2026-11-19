@@ -127,3 +127,14 @@ test('con la ciudad real, las casas genéricas no pisan la Plaza Bolívar', asyn
   })
   expect(pisan).toBe(0)
 })
+
+test('Miraflores aparece en 1911 y conserva el modelo en 1936', async ({ page }) => {
+  await listo(page)
+  // Mansarda frontal, al sur del centro (7958, 6360), siguiendo el eje del damero.
+  const cubierta = { x: -508, z: -222, lado: 12 }
+  const antes = await colorDeLaPlaza(page, 3, cubierta)
+  const desde1911 = await colorDeLaPlaza(page, 4, cubierta)
+  const en1936 = await colorDeLaPlaza(page, 5, cubierta)
+  expect(distancia(antes, desde1911)).toBeGreaterThan(12)
+  expect(distancia(desde1911, en1936)).toBeLessThan(6)
+})

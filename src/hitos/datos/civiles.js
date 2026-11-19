@@ -15,7 +15,7 @@ const CAPITOLIO = { ancho: 92, fondo: 108, crujia: 15, pisos: 2, altoPiso: 6 }
 const universidad = { x: 8645, y: 7192, eje } // el medio del frente norte, sobre la calle
 const UNIVERSIDAD = { largo: 96, frente: 12, fondo: 44 }
 const miraflores = { x: 7958, y: 6360, eje }
-const MIRAFLORES = { ancho: 56, fondo: 72, crujia: 13, pisos: 2, altoPiso: 5 }
+const MIRAFLORES = { ancho: 64, fondo: 56 } // incluye explanada, escaleras y marquesinas
 
 export const civiles = Object.freeze([
   Object.freeze({
@@ -68,12 +68,14 @@ export const civiles = Object.freeze([
   Object.freeze({
     id: 'miraflores', nombre: 'Palacio de Miraflores', ...miraflores, nace: 4, muere: 0,
     planta: [rectanguloPx(miraflores, MIRAFLORES.ancho, MIRAFLORES.fondo)], suprime: [rectanguloPx(miraflores, MIRAFLORES.ancho, MIRAFLORES.fondo)],
-    fuente: `${PLANO} (recuadro "Palacio Miraflores"); panorámica de ~1903 desde El Calvario (fuentes/imagenes)`,
+    fuente: `${PLANO} (recuadro "Palacio Miraflores"); panorámica de ~1903 desde El Calvario (fuentes/imagenes); estudio aprobado en miraflores, referencias y límites en specs/08-miraflores.md`,
     verificar: [
-      'Palacio con mansardas sobre un basamento, en la panorámica de ~1903 (identificación a ojo).',
+      'Modelo procedural aprobado: cuatro accesos, patio con arcadas y fuente, mansarda central y pabellones; medidas aproximadas.',
+      'Se conserva el centro y eje del hito anterior; posición fina y orientación contra levantamiento pendientes de verificar.',
+      'Pendientes buhardillas, terrazas interiores, cuerpos posteriores asimétricos y ornamentación; no representa interiores transitables.',
       'La planta del plano es más irregular que el rectángulo modelado; el basamento con muro de contención lo da solo el relieve.',
       'Va desde la época de 1911; si ya estaba en pie en 1889, a verificar.',
     ],
-    partes: [{ tipo: 'palacio', ...MIRAFLORES, cubierta: 'mansarda', pabellones: true }],
+    partes: [{ tipo: 'miraflores' }],
   }),
 ])
