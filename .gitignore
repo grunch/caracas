@@ -28,3 +28,6 @@ public/datos/manifiesto.json
 .cache/
 fuentes/imagenes/**/original.*
 fuentes/imagenes/**/vista.jpg
+# generados por tools/fotos.mjs (las fotos de las fichas: solo las de dominio público o licencia libre)
+public/fotos/
+public/datos/fotos.json
