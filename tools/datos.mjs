@@ -4,10 +4,10 @@
 // verifica los conteos contra tools/datos-esperados.json y escribe public/datos/manifiesto.json (sha256).
 import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { createReadStream } from 'node:fs'
+import { createReadStream, existsSync } from 'node:fs'
 import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas, resolverOriginales, fichasDeEpocas } from './datos-lib.mjs'
+import { pendientes, verificarConteos, publicosDelManifiesto, salidasDeTeselas, firmasCambiadas, resolverOriginales, fichasDeEpocas } from './datos-lib.mjs'
 import { salidasPlanosEpocas } from './planos-epocas-lib.mjs'
 import { salidasDeFotos, fotosSinOrigen } from './fotos-lib.mjs'
 import { leerCalzados } from './planos-epocas.mjs'
@@ -309,7 +309,7 @@ async function verificar(pasos) {
   const medidos = { techos: ciudad.techos.length, manzanas: ciudad.manzanas, arboles: arboles.length }
   const { _nota, ...esperados } = await leerJson('tools/datos-esperados.json')
   const errores = verificarConteos(medidos, esperados)
-  const publicos = pasos.flatMap((p) => p.salidas).filter((s) => s.startsWith('public/'))
+  const publicos = publicosDelManifiesto(pasos, (r) => existsSync(path.join(RAIZ, r)))
   const archivos = {}
   for (const s of publicos) archivos[s] = await sha256(s)
   await writeFile(path.join(RAIZ, 'public/datos/manifiesto.json'), JSON.stringify({ conteos: medidos, archivos }, null, 2) + '\n')

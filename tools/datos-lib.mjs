@@ -76,3 +76,13 @@ export function resolverOriginales(pasos, archivos, { exigir = true } = {}) {
 
 /** Las fichas de los planos de la línea de tiempo (tools/geo/epocas/epocas.json): epocas.py copia sus créditos. */
 export const fichasDeEpocas = (config) => (config.epocas ?? []).map((e) => `fuentes/mapas/${e.plano}/ficha.json`)
+
+/**
+ * Lo que va al manifiesto (y al paquete que publica el sitio): las salidas de los pasos que caen en public/ y
+ * las entradas opcionales en public/ que existen (relieve.bin, que se genera fuera de este pipeline).
+ */
+export function publicosDelManifiesto(pasos, existe) {
+  const salidas = pasos.flatMap((p) => p.salidas)
+  const opcionales = pasos.flatMap((p) => p.opcionales ?? []).filter(existe)
+  return [...new Set([...salidas, ...opcionales])].filter((s) => s.startsWith('public/'))
+}
