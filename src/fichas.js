@@ -30,11 +30,13 @@ function periodo(desde, hasta, años, abierto) {
 /** Los nombres que tuvo el lugar, con los años de la línea de tiempo en que rigió cada uno. */
 export function nombresPorEpoca(marca, epoca, años = AÑOS_DE_EPOCA) {
   const fin = ultimaDe(marca)
-  return marca.nombres.map((n, i) => {
-    const desde = Math.max(n.desde, marca.nace)
-    const hasta = i + 1 < marca.nombres.length ? marca.nombres[i + 1].desde - 1 : fin
+  const tramos = marca.nombres.map((n, i) => ({
+    nombre: n.nombre, desde: Math.max(n.desde, marca.nace),
+    hasta: Math.min(fin, i + 1 < marca.nombres.length ? marca.nombres[i + 1].desde - 1 : fin),
+  })).filter((t) => t.desde <= t.hasta) // un nombre que dejó de regir antes de que la marca naciera no cuenta
+  return tramos.map(({ nombre, desde, hasta }) => {
     const abierto = hasta === ULTIMA_EPOCA && marca.muere === 0
-    return { nombre: n.nombre, periodo: periodo(desde, hasta, años, abierto), rige: vivaEn(marca, epoca) && epoca >= desde && epoca <= hasta }
+    return { nombre, periodo: periodo(desde, hasta, años, abierto), rige: vivaEn(marca, epoca) && epoca >= desde && epoca <= hasta }
   })
 }
 
@@ -90,7 +92,7 @@ export function fotosPorMarca(fotos) {
 const texto = (t) => typeof t === 'string' && t.trim() !== ''
 const medida = (n) => Number.isInteger(n) && n > 0
 const fotoCompleta = (f) => Boolean(f) && typeof f.id === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(f.id) &&
-  [f.titulo, f.autor, f.fecha, f.licencia].every(texto) && /^https:\/\/\S+$/.test(f.fuente ?? '') &&
+  [f.titulo, f.autor, f.fecha, f.licencia].every(texto) && /^https:\/\/\S+$/.test(f.fuente ?? '') && URL.canParse(f.fuente) &&
   Array.isArray(f.marcas) && Array.isArray(f.epocas) && [f.w, f.h, f.mw, f.mh].every(medida)
 
 /**

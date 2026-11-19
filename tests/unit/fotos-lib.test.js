@@ -66,6 +66,13 @@ describe('elegibilidad', () => {
     expect(elegibilidad(libre({ url_fuente: 'imagen de Facebook (enlace temporal)' })).motivos.join(' ')).toMatch(/fuente/)
   })
 
+  it('sin título ni pie no hay qué mostrar; y la fuente va por https', () => {
+    expect(elegibilidad(libre({ titulo: undefined })).motivos.join(' ')).toMatch(/sin título/)
+    expect(elegibilidad(libre({ titulo: undefined, pie: 'La plaza.' })).elegible).toBe(true)
+    expect(elegibilidad(libre({ url_fuente: 'http://commons.wikimedia.org/wiki/File:Algo.jpg' })).elegible).toBe(false)
+    expect(elegibilidad(libre({ url_fuente: 'https://:' })).elegible).toBe(false)
+  })
+
   it('junta todos los motivos', () => {
     const r = elegibilidad({ titulo: 'x', autor: null, licencia: null, dominio_publico: 'dudoso', url_fuente: null })
     expect(r.motivos.length).toBe(4)

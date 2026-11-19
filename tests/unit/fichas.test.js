@@ -39,6 +39,11 @@ describe('nombresPorEpoca', () => {
     expect(nombresPorEpoca(marca('hipodromo'), 4)[0]).toEqual({ nombre: 'Hipódromo del Paraíso', periodo: '1911', rige: true })
   })
 
+  it('un nombre que dejó de regir antes de que la marca naciera no figura', () => {
+    const m = { ...marca('plaza-bolivar'), nace: 3, nombres: [{ desde: 1, nombre: 'Viejo', nota: '' }, { desde: 2, nombre: 'Medio', nota: '' }, { desde: 4, nombre: 'Nuevo', nota: '' }] }
+    expect(nombresPorEpoca(m, 3)).toEqual([{ nombre: 'Medio', periodo: '1889', rige: true }, { nombre: 'Nuevo', periodo: 'desde 1911', rige: false }])
+  })
+
   it('en una época en que el lugar no existe, ningún nombre rige', () => {
     expect(nombresPorEpoca(marca('concejo'), 5).some((n) => n.rige)).toBe(false)
     expect(nombresPorEpoca(marca('justicia'), 1).some((n) => n.rige)).toBe(false)
@@ -146,7 +151,7 @@ describe('fotos', () => {
 
   it('validarFotos descarta las filas sin crédito completo: sin autor, fecha, licencia o fuente no se muestra', () => {
     const { autor, ...sinAutor } = FOTOS[0]
-    const mal = [sinAutor, { ...FOTOS[1], fuente: 'javascript:alert(1)' }, { ...FOTOS[2], licencia: '' }, { ...FOTOS[0], id: '../x' }, { ...FOTOS[0], w: 0 }, null]
+    const mal = [sinAutor, { ...FOTOS[1], fuente: 'javascript:alert(1)' }, { ...FOTOS[2], licencia: '' }, { ...FOTOS[2], fuente: 'https://:' }, { ...FOTOS[0], id: '../x' }, { ...FOTOS[0], w: 0 }, null]
     expect(validarFotos([...mal, FOTOS[1]])).toEqual([FOTOS[1]])
     expect(validarFotos(undefined)).toEqual([])
   })

@@ -15,7 +15,7 @@ export const LADO_MINIATURA = 640
 const LICENCIA_LIBRE = /^(CC0|CC BY(-SA)? \d)/i
 const DERECHOS_RESERVADOS = /derechos reservados|rights reserved/i
 const DOMINIO_PUBLICO = /^(public domain|dominio p[uú]blico)/i
-const esUrl = (u) => typeof u === 'string' && /^https?:\/\/\S+$/.test(u)
+const esUrl = (u) => typeof u === 'string' && /^https:\/\/\S+$/.test(u) && URL.canParse(u)
 const esTexto = (t) => typeof t === 'string' && t.trim() !== ''
 
 /** La fecha de la imagen tal como la escribe la ficha (texto), o null. El año representado no es la fecha. */
@@ -38,6 +38,7 @@ export function elegibilidad(ficha) {
   if (!esUrl(ficha.url_fuente)) motivos.push('sin página de la fuente (url_fuente)')
   if (!esTexto(ficha.autor) || /^a verificar/i.test(ficha.autor.trim())) motivos.push('sin autor establecido')
   if (!fechaDe(ficha)) motivos.push('sin fecha')
+  if (!esTexto(ficha.pie) && !esTexto(ficha.titulo)) motivos.push('sin título')
   return { elegible: motivos.length === 0, motivos }
 }
 

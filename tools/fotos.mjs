@@ -24,6 +24,7 @@ const correr = promisify(execFile)
 const AGENTE = 'caracas-historica/0.1 (sitio estatico; descarga de originales de Wikimedia Commons)'
 const MAX_DESCARGA = 120 * 1024 * 1024
 const PAUSA_MS = 20_000
+const FORMATOS = ['jpeg', 'png', 'gif', 'tiff', 'webp']
 const ESPERA_429_MS = 130_000
 const INTENTOS_429 = 6
 const CALIDAD = { grande: 82, miniatura: 76 }
@@ -50,7 +51,7 @@ async function descargar(id, ficha) {
   // con curl (sin shell): solo https, sin redirecciones y con tope de tamaño; falla con el código del servidor
   const temporal = path.join(IMAGENES, id, 'descarga.parcial')
   const curl = () => correr('curl', ['--silent', '--show-error', '--fail', '--proto', '=https', '--max-redirs', '0',
-    '--max-filesize', String(MAX_DESCARGA), '--user-agent', AGENTE, '--output', temporal, ficha.url_descarga])
+    '--globoff', '--max-time', '300', '--max-filesize', String(MAX_DESCARGA), '--user-agent', AGENTE, '--output', temporal, '--', ficha.url_descarga])
   try {
     for (let intento = 1; ; intento++) {
       try { await curl(); break } catch (e) {
@@ -62,6 +63,7 @@ async function descargar(id, ficha) {
     }
     const bytes = await readFile(temporal)
     const { format } = await sharp(bytes).metadata() // si no es una imagen, falla acá y no se guarda
+    if (!FORMATOS.includes(format)) throw new Error(`formato no admitido (${format})`)
     const nombre = `original.${format === 'jpeg' ? 'jpg' : format}`
     await writeFile(path.join(IMAGENES, id, nombre), bytes)
     console.log(`  ↓ ${id}/${nombre} (${(bytes.length / 1e6).toFixed(1)} MB)`)
