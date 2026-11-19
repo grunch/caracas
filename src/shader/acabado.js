@@ -33,7 +33,7 @@ export const VERTICE_ACABADO = /* glsl */ `
  */
 export const CONTORNO = Object.freeze({
   desde: 0.35, hasta: 1.1, ecoDesde: 3.5, ecoHasta: 7.0,
-  lejos: Object.freeze({ desde: 300, hasta: 3000, claro: 0.65 }),
+  lejos: Object.freeze({ desde: 300, hasta: 4000, claro: 0.65 }),
   lejosEnColor: Object.freeze({ desde: 600, hasta: 5000, claro: 0.75 }),
   lejosUmbral: 3,
   techoDesde: 2.5, techoHasta: 6.0, techoTinta: 0.6,

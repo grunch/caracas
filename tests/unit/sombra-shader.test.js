@@ -254,7 +254,7 @@ describe('el acabado: contorno, bruma y grano', () => {
     expect(FRAGMENTO_ACABADO).toMatch(/return max\(silueta, entrante\) \* \(1\.0 - mix\(0\.\d+, 0\.\d+, uColor\) \* lejos\) \* mix\(1\.0, 0\.\d+, techo\);/)
     // en tinta, antes que en T35 (600 m a 5 km): el fondo de una vista oblicua no es una mancha de líneas
     expect(CONTORNO.lejos.desde).toBeLessThanOrEqual(400)
-    expect(CONTORNO.lejos.hasta).toBeLessThanOrEqual(3000)
+    expect(CONTORNO.lejos.hasta).toBeLessThan(CONTORNO.lejosEnColor.hasta)
     // en color queda como en T35
     expect(CONTORNO.lejosEnColor).toEqual({ desde: 600, hasta: 5000, claro: 0.75 })
   })
@@ -348,10 +348,10 @@ describe('cuánta línea lleva un píxel (fuerzaDeContorno, el espejo del shader
   test('lejos la línea se aclara y pide más salto: al final queda un tercio de la silueta y las aristas se van', () => {
     expect(fuerzaDeContorno({ adelante: 20, atras: 0, z: CONTORNO.lejos.hasta })).toBeCloseTo(1 - CONTORNO.lejos.claro, 9)
     expect(fuerzaDeContorno({ adelante: 1.2, atras: 0, z: CONTORNO.lejos.hasta })).toBe(0)
-    const a = [150, 600, 1200, 3000].map((z) => fuerzaDeContorno({ adelante: 20, atras: 0, z }))
+    const a = [150, 600, 1200, 4000].map((z) => fuerzaDeContorno({ adelante: 20, atras: 0, z }))
     for (let i = 1; i < a.length; i++) expect(a[i]).toBeLessThan(a[i - 1] + 1e-12)
     expect(a[0]).toBe(1)
-    expect(a[2]).toBeLessThan(0.9)
+    expect(a[2]).toBeLessThan(0.95)
   })
 
   test('en color no cambia nada respecto de T35: ni el tejado de una casa se trata aparte ni se afloja antes', () => {
