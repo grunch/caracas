@@ -9,6 +9,7 @@ import { cargarArboles } from './arboles.js'
 import { HITOS, crearHitos, suprimirTechos, zonasDeSupresion } from './hitos.js'
 import { acercar } from './animar.js'
 import { texturasHoy, HOY_CERCA } from './hoy.js'
+import { crearBuscador } from './buscador/interfaz.js'
 import { crearTeselasFinas } from './teselas.js'
 import { crearLineaDeTiempo, crearSecuencia, escalaCrece, PRIMERA_EPOCA } from './epocas.js'
 import { crearPlanosDeEpoca, planoDeEpoca } from './planos.js'
@@ -55,7 +56,10 @@ const camera = new PerspectiveCamera(35, innerWidth / innerHeight, 5, 60000)
 // --- render bajo demanda: solo se dibuja mientras haya cuadros pedidos ---
 let pendientes = 3
 const pedirCuadro = (n = 2) => { pendientes = Math.max(pendientes, n) }
-for (const ev of ['pointerdown', 'pointerup', 'keydown', 'wheel', 'focus']) addEventListener(ev, () => pedirCuadro(3), { capture: true, passive: true })
+// (lo que pasa dentro de la caja del buscador no cambia la vista: escribir no redibuja la ciudad)
+for (const ev of ['pointerdown', 'pointerup', 'keydown', 'wheel', 'focus']) {
+  addEventListener(ev, (e) => { if (!e.target?.closest?.('#buscar')) pedirCuadro(3) }, { capture: true, passive: true })
+}
 addEventListener('resize', () => {
   renderer.setSize(innerWidth, innerHeight)
   camera.aspect = innerWidth / innerHeight
@@ -352,6 +356,12 @@ const acabado = crearAcabado({
   vista: () => cam.now,
 })
 
+// --- el buscador: esquinas, cuadras y direcciones de hoy; su alfiler sigue al terreno (src/buscador/) ---
+const buscador = crearBuscador({
+  formulario: document.getElementById('buscar'), plano: meta.plano, coords, camera, cam, suelo: sueloEn, pedirCuadro,
+  hitos: HITOS, epoca: () => lineaDeTiempo?.actual ?? null, animar: !params.has('capture'),
+})
+
 const reloj = new Timer()
 renderer.setAnimationLoop((t) => {
   reloj.update(t)
@@ -378,6 +388,7 @@ renderer.setAnimationLoop((t) => {
   }
   if (pendientes <= 0) return
   pendientes--
+  buscador.dibujar() // el alfiler del buscador sigue a su punto del terreno
   if (teselas) {
     const { px, py } = coords.aPixel(cam.now.x, cam.now.z)
     teselas.update(px, py, cam.now.dist < DIST_TESELAS_M)
@@ -405,6 +416,7 @@ window.lab = {
   get lineaDeTiempo() { return lineaDeTiempo },
   get planos() { return planos },
 }
+window.lab.buscador = buscador
 
 /** Papel con una cuadrícula de 100 m, hasta que exista plano/primero.webp. */
 function cuadriculaProvisoria() {
