@@ -250,7 +250,23 @@ def _cuadra_de_antes(cuadras, cajas, grupo, metro):
     junta[gy0 - y0:gy1 - y0, gx0 - x0:gx1 - x0] |= grupo['calles']
     disco = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * r + 1, 2 * r + 1))
     cerrada = cv2.morphologyEx(junta.astype(np.uint8), cv2.MORPH_CLOSE, disco) > 0
-    return ndimage.binary_fill_holes(cerrada & ~((ventana > 0) & ~suyas)), (x0, y0)
+    # rellenar primero y excluir después: una cuadra ajena encerrada por el grupo no se rellena
+    return ndimage.binary_fill_holes(cerrada) & ~((ventana > 0) & ~suyas), (x0, y0)
+
+
+def _clases_de_antes(clases, cuadra):
+    """Las clases de la ventana de una cuadra de antes con lo abierto dentro de ella (las calles nuevas y sus
+    puntas) edificado, como estaba en 1772. No toca el original."""
+    abierto = np.asarray(cuadra, bool) & ~np.isin(clases, DE_LA_MANZANA)
+    return np.where(abierto, CLASE['edificado'], clases).astype(clases.dtype)
+
+
+def _va_por_lados(clases, cuadra, metro):
+    """¿La cuadra de antes sale como cuadra modelo repartida por lados (techos_de_manzana)? Si no, sus casas
+    saldrían solo sobre lo edificado de 1936 y lo abierto quedaría vacío: el grupo no se usa."""
+    return (direccion_de_manzana(cuadra, metro)[1] is not None
+            and es_de_solo_casas(clases, cuadra, metro, CLASE['edificado'], CLASE['publico'])
+            and lotes_por_lados(cuadra, metro, 0) is not None)
 
 
 def _contornos_de(grupo):
@@ -267,7 +283,8 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, calles_nuevas=None):
     lo abierto en 1936 que el plano de 1772 tiene edificado. Las cuadras que une van dos veces: como en 1936
     ("antes" 0) y enteras, como eran antes de abrirse la calle ("antes" 1); cada techo dice de qué grupo es
     ("junta", -1: de ninguno) y "juntas" trae, por grupo, sus calles nuevas (tools/geo/epocas.py decide cuándo
-    se abre cada una). Solo se usan los grupos cuya cuadra de antes se deja repartir por lados.
+    se abre cada una). La cuadra de antes lleva edificado lo que hoy es calle nueva (_clases_de_antes), y solo se
+    usan los grupos cuya cuadra de antes sale como cuadra modelo repartida por lados (_va_por_lados).
     """
     clases = np.asarray(clases)
     area_min_px = AREA_MINIMA_M2 / metro ** 2
@@ -294,19 +311,23 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, calles_nuevas=None):
             cajas[etiqueta] = (x + dx, y + dy, pw, ph)
             lista.append((etiqueta, parte, i == 0))
     grupos = grupos_de_manzanas(cuadras, calles_nuevas) if calles_nuevas is not None and cuadra_modelo else []
-    antes = [(grupo, *_cuadra_de_antes(cuadras, cajas, grupo, metro)) for grupo in grupos]
-    antes = [(g, cuadra, origen) for g, cuadra, origen in antes if lotes_por_lados(cuadra, metro, 0) is not None]
-    de_grupo = {m: j for j, (grupo, _, _) in enumerate(antes) for m in grupo['manzanas']}
+    antes = []
+    for grupo in grupos:
+        cuadra, (x, y) = _cuadra_de_antes(cuadras, cajas, grupo, metro)
+        h, w = cuadra.shape
+        de_antes = _clases_de_antes(clases[y:y + h, x:x + w], cuadra)
+        if _va_por_lados(de_antes, cuadra, metro):
+            antes.append((grupo, cuadra, (x, y), de_antes))
+    de_grupo = {m: j for j, (grupo, *_) in enumerate(antes) for m in grupo['manzanas']}
     for etiqueta, parte, contar in lista:
         x, y, w, h = cajas[etiqueta]
         salida['_junta'] = de_grupo.get(etiqueta, -1)
         techos_de_manzana(clases[y:y + h, x:x + w], parte, (x, y), salida, area_min_px, tolerancia_px, distancia_m, metro,
                           cuadra_modelo, contar=contar)
     salida['_antes'] = 1
-    for j, (grupo, cuadra, (x, y)) in enumerate(antes):
+    for j, (grupo, cuadra, (x, y), de_antes) in enumerate(antes):
         salida['_junta'] = j
-        h, w = cuadra.shape
-        techos_de_manzana(clases[y:y + h, x:x + w], cuadra, (x, y), salida, area_min_px, tolerancia_px, distancia_m, metro,
+        techos_de_manzana(de_antes, cuadra, (x, y), salida, area_min_px, tolerancia_px, distancia_m, metro,
                           cuadra_modelo, contar=False)
         salida['juntas'].append(_contornos_de(grupo))
     for privada in ('publicos', 'n_cuadras', '_junta', '_antes'):

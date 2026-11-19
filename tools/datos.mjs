@@ -60,6 +60,16 @@ const PASOS = [
     cmd: () => [PY, 'tools/geo/costura.py', '--mosaico', `${D}/mosaico.tif`, '--meta', `${D}/mosaico.json`,
       '--clases', `${D}/segmentacion/mosaico/clases.png`],
   },
+  // --- los planos viejos calzados sobre 1936: solo leen la costura, y calles-nuevas lee el de 1772 ---
+  ...CALCES.map(([año, carpeta]) => ({
+    id: `calce-${año}`,
+    entradas: [`original:${carpeta}`, `fuentes/mapas/${carpeta}/ficha.json`, `tools/geo/gcp/calce-${carpeta}.json`,
+      'tools/geo/gcp/plaza-1936.json',
+      `${D}/mosaico.json`, `${D}/segmentacion/mosaico/clases-costura.png`],
+    salidas: [`fuentes/derivados/${año}/calzado.tif`, `fuentes/derivados/${año}/calzado.json`],
+    codigo: GEO('calce', 'calce_correlacion', 'tps'),
+    cmd: () => [PY, 'tools/geo/calce.py', carpeta],
+  })),
   {
     // lo abierto en 1936 (calles, pasajes, plazas) que el plano de 1772 tiene edificado: ahí la cuadra de 1772 va entera
     id: 'calles-nuevas',
@@ -84,16 +94,7 @@ const PASOS = [
         '--calles-nuevas', `${D}/calles-nuevas.png`]
     },
   },
-  // --- la línea de tiempo: los planos viejos calzados sobre 1936, la ciudad de 1578 y las épocas ---
-  ...CALCES.map(([año, carpeta]) => ({
-    id: `calce-${año}`,
-    entradas: [`original:${carpeta}`, `fuentes/mapas/${carpeta}/ficha.json`, `tools/geo/gcp/calce-${carpeta}.json`,
-      'tools/geo/gcp/plaza-1936.json',
-      `${D}/mosaico.json`, `${D}/segmentacion/mosaico/clases-costura.png`],
-    salidas: [`fuentes/derivados/${año}/calzado.tif`, `fuentes/derivados/${año}/calzado.json`],
-    codigo: GEO('calce', 'calce_correlacion', 'tps'),
-    cmd: () => [PY, 'tools/geo/calce.py', carpeta],
-  })),
+  // --- la línea de tiempo: la ciudad de 1578 y las épocas (los calces van antes, después de la costura) ---
   {
     // plaza-1936.json da las semillas de las esquinas y la ruta de las clases (clases-costura.png)
     id: 'epocas-1578',

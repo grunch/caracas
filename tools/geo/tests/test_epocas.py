@@ -411,3 +411,19 @@ def test_sin_techos_tambien_corre_junta_y_antes():
     ciudad["junta"], ciudad["antes"] = [0, -1, 0], [1, 0, 0]
     nueva, _ = ep.sin_techos(ciudad, [[1, 0], [1, 0], [1, 0]], {0})
     assert nueva["junta"] == [-1, 0] and nueva["antes"] == [0, 0]
+
+
+def test_una_casa_de_despues_que_cede_a_un_edificio_publico_muere_cuando_el_nace():
+    # Arrange: techo 0 un edificio público (nace en 1889); 1 y 2 casas de después de una calle nueva que le
+    # ceden el lugar: la 1 de una calle que se abre en 1843, la 2 de una que se abre en 1911
+    ciudad = ciudad_de([cuadrado(0, 0, 10)] * 3)
+    ciudad["techos"][0][3] = ep.ESTILO_PUBLICO
+    ciudad["cede"], ciudad["junta"], ciudad["antes"] = [-1, 0, 0], [-1, 0, 1], [0, 0, 0]
+    ciudad["cuadras"] = [-1, 0, 1]
+
+    # Act
+    vida, quitar = ep.vida_de_1936(np.array([1, 1, 1]), ciudad, apertura=[2, 4])
+
+    # Assert
+    assert vida[1] == [2, ep.PUBLICOS_DESDE]   # nace con su calle y vive hasta que llega el edificio
+    assert quitar == {2}                       # su calle se abre cuando el edificio ya está: no llega a vivir

@@ -349,3 +349,42 @@ def test_una_calle_nueva_entre_cuadras_pegadas_une_solo_las_dos_cuadras_que_sepa
 def test_sin_calles_nuevas_ningun_techo_tiene_junta():
     res = vectorizar(manzana_maciza(), METRO, plaza=(140, 140))
     assert set(res['junta']) == {-1} and set(res['antes']) == {0} and res['juntas'] == []
+
+
+def test_la_cuadra_de_antes_no_ocupa_una_cuadra_ajena_que_queda_encerrada():
+    from tools.geo.vectorizar import _cuadra_de_antes
+    # Arrange: la cuadra 1 es un anillo que encierra a la cuadra 2, que no es del grupo
+    cuadras = np.zeros((120, 120), np.int32)
+    cuadras[10:110, 10:110] = 1
+    cuadras[40:80, 40:80] = 2
+    calles = np.zeros((10, 10), bool)
+    grupo = {'manzanas': {1}, 'caja': (0, 10, 0, 10), 'calles': calles}
+    cajas = {1: (10, 10, 100, 100), 2: (40, 40, 40, 40)}
+
+    # Act
+    cuadra, (x0, y0) = _cuadra_de_antes(cuadras, cajas, grupo, METRO)
+
+    # Assert
+    ajena = cuadras[y0:y0 + cuadra.shape[0], x0:x0 + cuadra.shape[1]] == 2
+    assert not (cuadra & ajena).any()
+    assert cuadra[cuadras[y0:y0 + cuadra.shape[0], x0:x0 + cuadra.shape[1]] == 1].all()
+
+
+def test_una_plaza_nueva_ancha_tambien_era_casas_en_la_cuadra_de_antes():
+    # Arrange: dos manzanas de 25 × 80 m separadas por una plaza de 50 m que en 1772 era cuadra: lo edificado
+    # de 1936 es la mitad de la cuadra de antes, menos que lo que pide la cuadra modelo si la plaza no cuenta
+    c = np.full((240, 300), CLASE['calle'], np.uint8)
+    c[40:200, 50:100] = CLASE['edificado']
+    c[40:200, 200:250] = CLASE['edificado']
+    nuevas = np.zeros(c.shape, bool)
+    nuevas[40:200, 100:200] = True
+
+    # Act
+    res = vectorizar(c, METRO, plaza=(150, 120), calles_nuevas=nuevas)
+
+    # Assert: la cuadra de antes es una cuadra modelo entera; sus casas dan también a las calles de la plaza
+    assert len(res['juntas']) == 1
+    polis = poligonos(res)
+    antes = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and a]
+    plaza = box(100, 40, 200, 200)
+    assert sum(p.intersection(plaza).area for p in antes) > 0.3 * plaza.area

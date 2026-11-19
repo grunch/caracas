@@ -247,14 +247,16 @@ def apertura_de_juntas(juntas, edificado, escala):
 def _vida_de_casa(k, nace, cede, junta, antes, apertura):
     """[nace, muere] de un techo, o None si no llega a vivir."""
     muere = int(nace[cede]) if cede >= 0 else 0
+    desde = int(nace[k])
     if junta >= 0:
         abre = int(apertura[junta])
-        if not antes:
-            return [max(int(nace[k]), abre), 0]
-        muere = min(muere, abre) if muere else abre
-    if muere and muere <= nace[k]:
+        if antes:
+            muere = min(muere, abre) if muere else abre
+        else:
+            desde = max(desde, abre)
+    if muere and muere <= desde:
         return None
-    return [int(nace[k]), muere]
+    return [desde, muere]
 
 
 def vida_de_1936(nace36, ciudad, apertura=()):
