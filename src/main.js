@@ -34,6 +34,7 @@ import { accionDeTecla, movimientoDeTecla } from './controles.js'
 import { esLiviano, proporcionDePixeles } from './calidad.js'
 import { crearModoAPie } from './a-pie-modo.js'
 import { crearModoVolar } from './volar-modo.js'
+import { crearModoManejar } from './manejar-modo.js'
 
 const params = new URLSearchParams(location.search)
 const COLOR_FONDO = 0x1d1a17
@@ -394,6 +395,7 @@ const cam = crearCamara(camera, renderer.domElement, { pedirCuadro, hoja, suelo:
 const avisoModo = document.getElementById('modo')
 const TEXTO_MODO = Object.freeze({
   caminar: { boton: 'Caminar', titulo: 'A pie', raton: 'WASD o flechas para caminar, Mayús para correr, arrastra para mirar. Esc vuelve al mapa.', dedos: 'El dedo de la izquierda camina; el de la derecha mira.' },
+  manejar: { boton: 'Manejar', titulo: 'En coche', raton: 'W y S aceleran y frenan, A y D giran, V cambia la vista, B la bocina, M el sonido, N otro vehículo, Q y E el año. Esc se baja.', dedos: 'Un dedo acelera y gira, como un joystick.' },
   volar: { boton: 'Volar', titulo: 'En avión', raton: 'A y D giran, W y S suben y bajan, Mayús acelera, Q y E cambian el año. Esc aterriza.', dedos: 'Un dedo gira y sube o baja.' },
 })
 let callarAyuda = null
@@ -422,15 +424,34 @@ const enAvion = crearModoVolar({
   camera, lienzo: renderer.domElement, cam, escena: scene, suelo: sueloEn, hoja, pedirCuadro,
   cambiarEpoca: (d) => lineaDeTiempo?.elegir(lineaDeTiempo.actual + d), alCambiar: (dentro) => cambioDeModo('volar', dentro),
 })
+const enCoche = crearModoManejar({
+  camera, lienzo: renderer.domElement, cam, escena: scene, coords, suelo: sueloEn, pedirCuadro,
+  casas: () => datosCiudad, epoca: () => ciudad.U.uEpocaA.value,
+  cambiarEpoca: (d) => lineaDeTiempo?.elegir(lineaDeTiempo.actual + d),
+  alCambiar: (dentro, v) => {
+    if (!document.body.classList.contains('modo-manejar') || !dentro) cambioDeModo('manejar', dentro)
+    if (dentro) avisoModo.querySelector('.titulo').textContent = v.nombre
+  },
+})
+/** Al entrar a un modo, los otros dos se cierran. */
+const salirDeLosModos = () => { aPie.salir(); enAvion.salir(); enCoche.salir() }
+document.getElementById('manejar').addEventListener('click', (e) => {
+  if (enCoche.activo) { enCoche.salir(); return }
+  salirDeLosModos()
+  levantar(true)
+  if (!enCoche.entrar()) e.currentTarget.title = 'Las casas todavía no llegaron: prueba en un momento'
+})
 document.getElementById('caminar').addEventListener('click', (e) => {
   if (aPie.activo) { aPie.salir(); return }
   enAvion.salir()
+  enCoche.salir()
   levantar(true)
   if (!aPie.entrar()) e.currentTarget.title = 'Las casas todavía no llegaron: prueba en un momento'
 })
 document.getElementById('volar').addEventListener('click', () => {
   if (enAvion.activo) { enAvion.salir(); return }
   aPie.salir()
+  enCoche.salir()
   levantar(true)
   enAvion.entrar()
 })
@@ -489,6 +510,10 @@ renderer.setAnimationLoop((t) => {
     // la altura en el cartel, de a 10 m (no cada cuadro: es una región que se anuncia)
     const altura = Math.round(enAvion.altura / 10) * 10
     if (altura !== alturaMostrada) avisoModo.querySelector('.titulo').textContent = `En avión · ${(alturaMostrada = altura)} m sobre el suelo`
+  } else if (enCoche.activo) {
+    if (enCoche.update(dt)) pedirCuadro(2)
+    const rotulo = `${enCoche.vehiculo.nombre} · ${enCoche.kmh} km/h`
+    if (rotulo !== alturaMostrada) avisoModo.querySelector('.titulo').textContent = (alturaMostrada = rotulo)
   } else if (cam.update(dt)) pedirCuadro(2)
   const { uOla, uColor } = ciudad.U
   if (uOla.value !== olaObjetivo) {
@@ -514,7 +539,7 @@ renderer.setAnimationLoop((t) => {
   buscador.dibujar() // el alfiler del buscador sigue a su punto del terreno
   if (teselas) {
     // a pie, las teselas finas son las de donde está el caminante
-    const foco = aPie.activo ? { ...aPie.estado, dist: 0 } : enAvion.activo ? { ...enAvion.estado, dist: enAvion.altura } : cam.now
+    const foco = aPie.activo ? { ...aPie.estado, dist: 0 } : enCoche.activo ? { ...enCoche.estado, dist: 0 } : enAvion.activo ? { ...enAvion.estado, dist: enAvion.altura } : cam.now
     const { px, py } = coords.aPixel(foco.x, foco.z)
     teselas.update(px, py, foco.dist < DIST_TESELAS_M)
   }
@@ -535,7 +560,7 @@ document.body.classList.add('listo')
 listo = true
 if (crecerPedido) verCrecer()
 window.lab = {
-  renderer, scene, camera, cam, aPie, enAvion, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
+  renderer, scene, camera, cam, aPie, enAvion, enCoche, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
   get relieve() { return relieve },
   get teselas() { return teselas },
   get arboles() { return arboles },

@@ -1,0 +1,83 @@
+/**
+ * Manejar (T62): la flota de cada época y la cuenta del manejo, sin DOM, three.js ni WebAudio (el modo está en
+ * src/manejar-modo.js). Mundo en metros con la plaza en el origen; rumbo 0 apunta hacia −z y crece a la derecha.
+ *
+ * La flota sale de specs/06 (burro y carreta, coche de caballos, Ford T, Ford V8; «verificar la flota real con
+ * fotos») y de las imágenes de fuentes/imagenes (coches de caballos en las fotos del XIX). Los nombres son
+ * genéricos a propósito: no se afirma qué modelo exacto circulaba. El tranvía no está: va por sus rieles.
+ */
+
+export const VEHICULOS = Object.freeze([
+  { id: 'carreta', nombre: 'Carreta de bueyes', desde: 1, maxima: 2, aceleracion: 0.6, traccion: 'animal', largo: 4, ancho: 1.8 },
+  { id: 'coche-de-caballos', nombre: 'Coche de caballos', desde: 2, maxima: 5, aceleracion: 1.5, traccion: 'animal', largo: 5, ancho: 1.8 },
+  { id: 'ford-t', nombre: 'Ford T', desde: 4, maxima: 12, aceleracion: 2, traccion: 'motor', largo: 3.4, ancho: 1.7 },
+  { id: 'ford-v8', nombre: 'Ford V8', desde: 5, maxima: 20, aceleracion: 3, traccion: 'motor', largo: 4.3, ancho: 1.8 },
+].map(Object.freeze))
+
+const ROCE = 1.2 // m/s² que pierde sin acelerar
+const FRENO = 4 // m/s² al frenar con S
+const ATRAS = 0.4 // de la máxima, marcha atrás
+const GIRO = 0.12 // rad por metro recorrido, a fondo
+const IZQUIERDA = new Set(['KeyA', 'ArrowLeft'])
+const DERECHA = new Set(['KeyD', 'ArrowRight'])
+const ACELERA = new Set(['KeyW', 'ArrowUp'])
+const FRENA = new Set(['KeyS', 'ArrowDown'])
+
+/** Los que ya existían en la época `e` (99, sin línea de tiempo: todos). */
+const enEpoca = (e) => VEHICULOS.filter((v) => v.desde <= e)
+
+/** El vehículo de la época: el más nuevo que ya existía (o el primero, si ninguno). */
+export const vehiculoDeEpoca = (e) => enEpoca(e).at(-1) ?? VEHICULOS[0]
+
+/** «Otro coche» (N): el siguiente de los que ya existían en la época, y vuelta al primero. */
+export function otroVehiculo(id, e) {
+  const posibles = enEpoca(e)
+  if (!posibles.length) return VEHICULOS[0]
+  return posibles[(posibles.findIndex((v) => v.id === id) + 1) % posibles.length]
+}
+
+const acotar = (v, a, b) => Math.min(b, Math.max(a, v))
+
+/**
+ * Un cuadro: `entrada` { acelera (−1…1: S frena y luego retrocede), girar (−1…1) } durante `dt` s con el
+ * vehículo `v`. Gira en proporción a lo que avanza (quieto no gira). Si el paso choca, se detiene.
+ */
+export function pasoEnCoche(coche, { acelera = 0, girar = 0 }, dt, v, { choca }) {
+  let velocidad = coche.velocidad
+  if (acelera > 0) velocidad += v.aceleracion * acelera * dt
+  else if (acelera < 0) velocidad -= (velocidad > 0 ? FRENO : v.aceleracion) * -acelera * dt
+  else velocidad -= Math.sign(velocidad) * Math.min(Math.abs(velocidad), ROCE * dt)
+  velocidad = acotar(velocidad, -v.maxima * ATRAS, v.maxima)
+  const avance = velocidad * dt
+  const rumbo = coche.rumbo + girar * GIRO * avance
+  const x = coche.x + Math.sin(rumbo) * avance
+  const z = coche.z - Math.cos(rumbo) * avance
+  if (avance !== 0 && choca(x, z)) return { ...coche, velocidad: 0 }
+  return { ...coche, x, z, rumbo, velocidad }
+}
+
+/** Las teclas → { acelera, girar }: W/↑ acelera, S/↓ frena o retrocede, A/D o ←/→ giran. */
+export function entradaDeManejo(apretadas) {
+  const hay = (grupo) => [...grupo].some((c) => apretadas.has(c))
+  return { acelera: (hay(ACELERA) ? 1 : 0) - (hay(FRENA) ? 1 : 0), girar: (hay(DERECHA) ? 1 : 0) - (hay(IZQUIERDA) ? 1 : 0) }
+}
+
+/** La cámara: 'afuera' (detrás y arriba) o 'cabina' (a la altura del conductor, mirando adelante). */
+export function camaraDeCoche({ x, z, rumbo }, vista, suelo) {
+  const [sen, cos] = [Math.sin(rumbo), Math.cos(rumbo)]
+  const y = suelo(x, z)
+  if (vista === 'cabina') {
+    return { ojo: { x, y: y + 1.7, z }, mira: { x: x + sen * 10, y: y + 1.5, z: z - cos * 10 } }
+  }
+  return { ojo: { x: x - sen * 12, y: y + 5, z: z + cos * 12 }, mira: { x, y: y + 1.2, z } }
+}
+
+/**
+ * Lo que suena a cierta velocidad (m/s): un motor, su frecuencia (ralentí → más agudo); los de tiro, cuántos
+ * cascos por segundo (ninguno quieto). La síntesis está en src/manejar-modo.js (WebAudio, sin archivos).
+ */
+export function sonidoDe(v, velocidad) {
+  const r = Math.abs(velocidad) / v.maxima
+  if (v.traccion === 'motor') return { frecuencia: 38 + 90 * r, ganancia: 0.05 + 0.07 * r }
+  return { cascosPorSegundo: r === 0 ? 0 : 1.5 + 4.5 * r, ganancia: 0.12 }
+}

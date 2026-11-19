@@ -61,6 +61,16 @@ export const EN_AVION = Object.freeze([
   { como: 'Esc o «Volver al mapa»', que: 'aterriza en la vista de antes' },
 ].map(Object.freeze))
 
+/** En coche (src/manejar-modo.js): el vehículo de cada época, con su sonido sintetizado. */
+export const EN_COCHE = Object.freeze([
+  { como: '«Manejar»', que: 'sube al vehículo de la época: carreta de bueyes, coche de caballos, Ford T o Ford V8' },
+  { como: 'W y S, o ↑ y ↓', que: 'acelera, y frena o va marcha atrás; A y D, o ← y →, giran' },
+  { como: 'V', que: 'cambia la vista: de afuera o desde el pescante' },
+  { como: 'B · M · N', que: 'la bocina (o el relincho) · el sonido · otro vehículo de la época' },
+  { como: 'Q y E', que: 'cambian el año, y con él el vehículo' },
+  { como: 'Esc o «Volver al mapa»', que: 'se baja y vuelve a la vista de antes' },
+].map(Object.freeze))
+
 /** Lo que está en pantalla y no tiene tecla: la línea de tiempo, los nombres y las fichas. */
 export const EN_PANTALLA = Object.freeze([
   { como: 'Los años, arriba', que: 'llevan la ciudad a ese año: la época llega como una ola desde la Plaza Bolívar' },
@@ -121,6 +131,7 @@ export function controlesVisibles(ids = ACCIONES.map((a) => a.id)) {
     { titulo: 'Con el teclado', filas: CON_TECLADO },
     { titulo: 'A pie', filas: A_PIE },
     { titulo: 'En avión', filas: EN_AVION },
+    { titulo: 'En coche', filas: EN_COCHE },
     { titulo: 'En la pantalla', filas: EN_PANTALLA },
     { titulo: 'Botones y teclas', filas: acciones.map((a) => ({ como: a.boton, tecla: a.tecla, que: a.que })) },
   ]
