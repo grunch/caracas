@@ -1,0 +1,340 @@
+{
+ "mapas": [
+  {
+   "id": "1772-pares-agi-exato-mapa",
+   "año": 1772,
+   "titulo": "\"Exato mapa de la ciudad de Caracas\"",
+   "hojas": 1,
+   "autor": "Juan Vicente Bolívar y Ponte (atribución en Commons)",
+   "institucion": "Archivo General de Indias (Sevilla), vía PARES",
+   "url": "https://pares.cultura.gob.es/ParesBusquedas20/catalogo/description/26112",
+   "licencia": "Imagen de PARES (Portal de Archivos Españoles), descarga libre desde el visor; marca de agua '© Archivos Estatales, https://pares.cultura.gob.es'. Obra original de dominio público por antigüedad.",
+   "porVerificar": false,
+   "base": false,
+   "epocas": [
+    1772
+   ]
+  },
+  {
+   "id": "1843-nypl-jesurun-facsimil-muller-stapler",
+   "año": 1843,
+   "titulo": "Plano topográfico de la Ciudad de Carácas (Jesurún 1843), facsímil litográfico",
+   "hojas": 1,
+   "autor": "Ángel Jacob Jesurún (original de 1843)",
+   "institucion": "New York Public Library (copia en Wikimedia Commons)",
+   "url": "https://commons.wikimedia.org/wiki/File:Plano_topografico_de_la_ciudad_de_Caracas_(NYPL_b13925947-5382478).tiff",
+   "licencia": "Dominio público (Wikimedia Commons)",
+   "porVerificar": false,
+   "base": false,
+   "epocas": [
+    1843
+   ]
+  },
+  {
+   "id": "1889-bnf-mestre",
+   "año": 1889,
+   "titulo": "Plano topografico de la ciudad de Caracas, levantado en 1889 vajo la direccion del general don Vicente S. Mestre",
+   "hojas": 1,
+   "autor": "Vicente S. Mestre (1858-1919)",
+   "institucion": "Bibliothèque nationale de France (copia en Wikimedia Commons)",
+   "url": "https://commons.wikimedia.org/wiki/File:Plano_topografico_de_la_ciudad_de_Caracas,_levantado_en_1889_vajo_la_direccion_-_del_general_don_Vicente_S._Mestre_-_btv1b53027837n.jpg",
+   "licencia": "Dominio público (Wikimedia Commons)",
+   "porVerificar": false,
+   "base": false,
+   "epocas": [
+    1889
+   ]
+  },
+  {
+   "id": "1911-princeton-plano-de-caracas-razetti",
+   "año": 1911,
+   "titulo": "Plano de Caracas, 1911",
+   "hojas": 1,
+   "autor": "Ricardo Razetti",
+   "institucion": "Princeton University Library, Historic Maps Collection",
+   "url": "https://maps.princeton.edu/catalog/princeton-05741v14j",
+   "licencia": "No Known Copyright (http://rightsstatements.org/vocab/NKC/1.0/). Princeton University Library reasonably believes that the Item is not restricted by copyright or related rights, but a conclusive determination could not be made.",
+   "porVerificar": false,
+   "base": false,
+   "epocas": [
+    1911
+   ]
+  },
+  {
+   "id": "1936-archiveorg-caracas-dcn-hoja1",
+   "año": 1936,
+   "titulo": "Caracas. No. 7. Distrito Federal, Departamento Libertador (Ministerio de Obras Públicas, Dirección de Cartografía Nacional)",
+   "hojas": 2,
+   "autor": "Ministerio de Obras Públicas, Dirección de Cartografía Nacional (Venezuela). Restitución fotogramétrica; dibujo D. Viera, J. Nunés, S. Marichal; jefe del Servicio de Topógrafos Luis Felipe Vegas",
+   "institucion": "University of Alberta Libraries, William C. Wonders Map Collection, vía Internet Archive",
+   "url": "https://archive.org/details/WCWdb_18053",
+   "licencia": "Sin licencia declarada en la fuente; derechos por verificar.",
+   "porVerificar": true,
+   "base": true,
+   "epocas": [
+    1936
+   ]
+  }
+ ],
+ "datos": [
+  {
+   "id": "copernicus-dem-glo30",
+   "titulo": "Copernicus DEM GLO-30, hoja Copernicus_DSM_COG_10_N10_00_W067_00_DEM",
+   "tipo": "modelo de elevación (DSM, 30 m)",
+   "autor": "DLR e.V. y Airbus Defence and Space GmbH, bajo el programa Copernicus",
+   "institucion": "Unión Europea y Agencia Espacial Europea (ESA)",
+   "url": "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N10_00_W067_00_DEM/Copernicus_DSM_COG_10_N10_00_W067_00_DEM.tif",
+   "licencia": "© DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved",
+   "porVerificar": false,
+   "atribucion": null
+  },
+  {
+   "id": "osm-hoy",
+   "titulo": "Calles, vías férreas y agua de la Caracas actual (capa «lo de hoy»)",
+   "tipo": "vectorial (calles, rieles, ríos y quebradas, lagunas)",
+   "autor": "Colaboradores de OpenStreetMap",
+   "institucion": "OpenStreetMap Foundation",
+   "url": "https://www.openstreetmap.org/copyright",
+   "licencia": "Open Database License (ODbL) 1.0",
+   "porVerificar": false,
+   "atribucion": "© colaboradores de OpenStreetMap"
+  },
+  {
+   "id": "osm-puntos-control-1936",
+   "titulo": "Posiciones actuales de 13 lugares de Caracas (puntos de control del calce 1936 ⇄ WGS84)",
+   "tipo": "puntos de control",
+   "autor": "Colaboradores de OpenStreetMap",
+   "institucion": "OpenStreetMap Foundation",
+   "url": "https://www.openstreetmap.org/copyright",
+   "licencia": "Open Database License (ODbL) 1.0",
+   "porVerificar": false,
+   "atribucion": "© colaboradores de OpenStreetMap"
+  }
+ ],
+ "fotos": [
+  {
+   "id": "1839-commons-vista-de-caracas-thomas",
+   "titulo": "La ciudad en 1839, con el Ávila al fondo: casas bajas de teja y, sobre ellas, la torre de la Catedral.",
+   "autor": "Joseph Thomas (1800–1875)",
+   "fecha": "1839",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Joseph_Thomas_1839_000.jpg",
+   "institucion": "Galería de Arte Nacional, Caracas (vía Wikimedia Commons; reproducida de la Gran Enciclopedia de Venezuela, 1998)"
+  },
+  {
+   "id": "1843-commons-ruinas-de-la-trinidad-bellermann",
+   "titulo": "Las ruinas de la iglesia de la Santísima Trinidad, dibujadas por Ferdinand Bellermann.",
+   "autor": "Ferdinand Bellermann (1814–1889)",
+   "fecha": "hacia 1842–1845",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Ruinas_de_la_iglesia_de_la_Sant%C3%ADsima_Trinidad_en_Caracas_-_Ferdinand_Bellermann.JPG",
+   "institucion": "Galería de Arte Nacional, Caracas (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1844-commons-puente-de-la-trinidad-bellermann",
+   "titulo": "El puente de la Trinidad sobre la quebrada, en el borde norte de la ciudad; al fondo, el valle hacia Chacao.",
+   "autor": "Ferdinand Bellermann (1814–1889)",
+   "fecha": "1844–1845",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Paisaje_de_Caracas_con_viaducto_y_puente_de_la_Trinidad_(1844-45)_Ferdinand_Bellerman.JPG",
+   "institucion": "Museos Estatales de Berlín, Galería Nacional (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1845-commons-iglesia-de-san-francisco",
+   "titulo": "La iglesia de San Francisco y parte del convento, hacia 1845.",
+   "autor": "Autor desconocido",
+   "fecha": "hacia 1845",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Iglesia_de_San_Francisco_c1845.jpg",
+   "institucion": "Wikimedia Commons (crédito: un foro de noticierodigital.com)"
+  },
+  {
+   "id": "1853-commons-plaza-mayor-pissarro",
+   "titulo": "El mercado en la Plaza Mayor, con la torre y la fachada de la Catedral al fondo.",
+   "autor": "Camille Pissarro (1830–1903)",
+   "fecha": "1852–1854",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Plaza_Mayor,_Caracas_-_Camille_Pissarro.jpg",
+   "institucion": "Wikimedia Commons (reproducida de la Enciclopedia Salvat de Venezuela, 1986)"
+  },
+  {
+   "id": "1867-commons-catedral",
+   "titulo": "La Plaza Mayor y la Catedral en 1867: la plaza todavía es de tierra, sin jardín ni estatua.",
+   "autor": "Autor desconocido",
+   "fecha": "1867",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Catedral_de_Caracas_1867.jpg",
+   "institucion": "Wikimedia Commons (crédito: un foro de noticierodigital.com)"
+  },
+  {
+   "id": "1870-commons-casa-de-gobierno-bolet",
+   "titulo": "La Casa de Gobierno, del lado oeste de la plaza, en 1870: gente que corre, la bandera y la plaza en obra.",
+   "autor": "Ramón Bolet Peraza (1836–1876)",
+   "fecha": "1870",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Ramon_Bolet_Peraza_0000.jpg",
+   "institucion": "Galería de Arte Nacional, Caracas (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1870-commons-plaza-mayor-y-catedral-lessmann",
+   "titulo": "La Plaza Mayor y la Catedral hacia 1870: ya sin el mercado y todavía sin la estatua, con los árboles recién plantados.",
+   "autor": "Federico Carlos Lessmann",
+   "fecha": "hacia 1870",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Lessman,_Federico_Carlos_-_Plaza_Major_mit_Kathedrale_(Zeno_Fotografie).jpg",
+   "institucion": "Zeno.org, n.º 20001882589 (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1872-commons-fiesta-en-la-plaza-bolivar-spence",
+   "titulo": "Fuegos artificiales en la plaza en febrero de 1872: a la derecha, la torre de la Catedral; a la izquierda, la Casa de Gobierno.",
+   "autor": "James Mudie Spence (1836–1878)",
+   "fecha": "1878",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Spence,_Land_of_Bolivar,_grabado_p.314.jpg",
+   "institucion": "«The Land of Bolivar», vol. I, Londres, 1878 (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1876-commons-puente-de-hierro",
+   "titulo": "El Puente de Hierro, recién construido, con su hilera de chaguaramos.",
+   "autor": "Fotógrafo desconocido",
+   "fecha": "1876",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Puente_de_Hierro,_Caracas._Luciano_Urdaneta_and_Henry_Cook,_1874-1875_(Memoria_MOP_1876).png",
+   "institucion": "Memoria del Ministerio de Obras Públicas, 1876 (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1885-commons-teatro-guzman-blanco",
+   "titulo": "El Teatro Guzmán Blanco, después Teatro Municipal, en la década de 1880.",
+   "autor": "Autor desconocido",
+   "fecha": "década de 1880",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Teatro_municipal3.gif",
+   "institucion": "Wikimedia Commons (tomada de una página de la UNESCO)"
+  },
+  {
+   "id": "1895-commons-universidad-palacio-de-las-academias",
+   "titulo": "La fachada neogótica de la Universidad, con su torre de aguja, a fines del siglo XIX.",
+   "autor": "Autor desconocido",
+   "fecha": "fines del siglo XIX",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Palacio_de_las_Academias,_Archivo_audiovisual_Biblioteca_Nacional.jpg",
+   "institucion": "Archivo Audiovisual de la Biblioteca Nacional de Venezuela (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1900-commons-palacio-de-miraflores-detroit",
+   "titulo": "El Palacio de Miraflores hacia 1900, sobre su terraza: el palacio de mansardas que se ve desde El Calvario.",
+   "autor": "Detroit Publishing Co. (editor)",
+   "fecha": "hacia 1900",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Miraflores_Palace_circa_1900.tif",
+   "institucion": "Library of Congress, Prints and Photographs Division (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1903-commons-arco-de-la-federacion",
+   "titulo": "El arco de la Federación, en el paseo de El Calvario.",
+   "autor": "Detroit Publishing Co. (editor); atribuida a Juan José Benzo en Wikimedia Commons",
+   "fecha": "hacia 1900–1906",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Monument_to_the_Venezuelian_(sic)_Federation,_Caracas,_Venezuela.tif",
+   "institucion": "Library of Congress, Prints and Photographs Division, det.4a05488 (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1903-commons-caracas-desde-el-calvario",
+   "titulo": "La ciudad desde El Calvario, con una estatua del paseo de espaldas y el Ávila entre nubes.",
+   "autor": "Detroit Publishing Co. (editor); atribuida a Juan José Benzo en Wikimedia Commons",
+   "fecha": "hacia 1900–1906",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Caracas_from_Calvary,_Venezuela.tif",
+   "institucion": "Library of Congress, Prints and Photographs Division, det.4a05485 (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1903-commons-panoramica-de-caracas",
+   "titulo": "Caracas desde El Calvario, hacia el noreste: los tejados, un palacio de mansardas a la izquierda y, en primer plano, el monumento del paseo.",
+   "autor": "Detroit Publishing Co. (editor); atribuida a Juan José Benzo en Wikimedia Commons",
+   "fecha": "hacia 1900–1906",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Panoramic_view_of_Caracas,_Venezuela_circa_1900-1906_cut.jpg",
+   "institucion": "Library of Congress, Prints and Photographs Division (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1904-commons-casa-amarilla-postal",
+   "titulo": "La Casa Amarilla en una postal de hacia 1904, con los árboles de la plaza enfrente.",
+   "autor": "Autor desconocido",
+   "fecha": "hacia 1904",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Casa_Amarilla_1904_000.jpg",
+   "institucion": "Wikimedia Commons (postal; reproducida de akpool.co.uk)"
+  },
+  {
+   "id": "1910-commons-plaza-bolivar",
+   "titulo": "La Plaza Bolívar en 1910: la estatua ecuestre, los faroles y los árboles ya crecidos.",
+   "autor": "Autor desconocido",
+   "fecha": "1910",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Plaza_Bol%C3%ADvar_de_Caracas,_1910_Autor_desconocido_Archivo_Fotograf%C3%ADa_Urbana.jpg",
+   "institucion": "Archivo Fundación Fotografía Urbana (vía Wikimedia Commons; crédito: prodavinci.com)"
+  },
+  {
+   "id": "1911-commons-palacio-de-miraflores-baralt",
+   "titulo": "El Palacio de Miraflores hacia 1911, con su reja y sus faroles.",
+   "autor": "Servio Tulio Baralt",
+   "fecha": "hacia 1911",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Palacio_de_Miraflores_-_1911.jpg",
+   "institucion": "Archivo Audiovisual de la Biblioteca Nacional de Venezuela (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1912-commons-iglesia-de-santa-teresa",
+   "titulo": "La iglesia de Santa Teresa en una postal de 1912, que la rotula «Iglesia de Santa Ana».",
+   "autor": "A. Guerra Toro",
+   "fecha": "1912",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Iglesia_de_Santa_Teresa_1912_000.jpg",
+   "institucion": "Wikimedia Commons (colección de quien la subió)"
+  },
+  {
+   "id": "1917-commons-estatua-de-bolivar-bain",
+   "titulo": "La estatua de Bolívar en su plaza, adornada con faroles de papel; detrás, la torre de la Catedral.",
+   "autor": "Bain News Service (editor)",
+   "fecha": "entre 1915 y 1920",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Caracas_--_Statue_of_Bolivar_LOC_14539793463.jpg",
+   "institucion": "Library of Congress, George Grantham Bain Collection, ggbain.22589 (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1917-commons-interior-del-palacio-federal-bain",
+   "titulo": "Un salón del Palacio Federal: planta ovalada, retratos en los muros y una batalla pintada en la cúpula.",
+   "autor": "Bain News Service (editor)",
+   "fecha": "entre 1915 y 1920",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Caracas,_Interior_Fed._Bldg._LOC_14496586156.jpg",
+   "institucion": "Library of Congress, George Grantham Bain Collection, ggbain.22592 (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1930-commons-patio-de-la-casa-natal",
+   "titulo": "El patio de la casa natal de Bolívar, en una revista de 1930.",
+   "autor": "Fotógrafo sin identificar; publicada en la revista Plus Ultra (Buenos Aires)",
+   "fecha": "1930",
+   "licencia": "Dominio público",
+   "url": "https://commons.wikimedia.org/wiki/File:Patio_de_la_Casa_Natal_de_Bol%C3%ADvar,_1930.png",
+   "institucion": "Biblioteca Nacional Mariano Moreno, Argentina (vía Wikimedia Commons)"
+  },
+  {
+   "id": "1948-commons-hotel-majestic",
+   "titulo": "El Hotel Majestic visto desde el pórtico del Teatro Municipal, en 1948.",
+   "autor": "Willem van de Poll",
+   "fecha": "1948",
+   "licencia": "CC0",
+   "url": "https://commons.wikimedia.org/wiki/File:Stadsgezicht_met_Hotel_Majestica_in_Caracas_in_Venezuela,_Bestanddeelnr_252-8437.jpg",
+   "institucion": "Nationaal Archief (Países Bajos), n.º 252-8437, vía Wikimedia Commons"
+  }
+ ],
+ "programas": [
+  {
+   "nombre": "three",
+   "version": "0.187.0",
+   "licencia": "MIT",
+   "url": "https://threejs.org/"
+  }
+ ]
+}

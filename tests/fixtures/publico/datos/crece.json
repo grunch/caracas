@@ -1,0 +1,71 @@
+{
+ "celda_m": 8.0,
+ "epocas": [
+  {
+   "año": 1578,
+   "plano": "1578-commons-pimentel",
+   "titulo": "El primer dibujo de Caracas (plano de Juan de Pimentel, 1578)",
+   "autor": "Juan de Pimentel",
+   "fuente": "Wikimedia Commons (fuente citada: guiaccs.com; original en la Relación geográfica de Caracas, 1578) · https://commons.wikimedia.org/wiki/File:El_primer_dibujo_de_Caracas,_Juan_de_Pimentel,_1578.jpg",
+   "licencia": "Public domain (Wikimedia Commons)",
+   "corto": "esquema de Pimentel (1578)",
+   "obras": "Pimentel dibuja 25 manzanas alrededor de la plaza, con la iglesia, las casas del cabildo, San Francisco y calles de 32 pies.",
+   "casas": 65
+  },
+  {
+   "año": 1772,
+   "plano": "1772-pares-agi-exato-mapa",
+   "titulo": "\"Exato mapa de la ciudad de Caracas\"",
+   "autor": "Juan Vicente Bolívar y Ponte (atribución en Commons)",
+   "fuente": "Archivo General de Indias (Sevilla), vía PARES · https://pares.cultura.gob.es/ParesBusquedas20/catalogo/description/26112",
+   "licencia": "Imagen de PARES (Portal de Archivos Españoles), descarga libre desde el visor; marca de agua '© Archivos Estatales, https://pares.cultura.gob.es'. Obra original de dominio público por antigüedad.",
+   "corto": "Exato mapa (1772)",
+   "obras": "El plano marca en rojo lo edificado y en amarillo los solares y huertos; el damero ya llena el valle entre las quebradas y el Guaire.",
+   "casas": 1849
+  },
+  {
+   "año": 1843,
+   "plano": "1843-nypl-jesurun-facsimil-muller-stapler",
+   "titulo": "Plano topográfico de la Ciudad de Carácas (Jesurún 1843), facsímil litográfico",
+   "autor": "Ángel Jacob Jesurún (original de 1843)",
+   "fuente": "New York Public Library (copia en Wikimedia Commons) · https://commons.wikimedia.org/wiki/File:Plano_topografico_de_la_ciudad_de_Caracas_(NYPL_b13925947-5382478).tiff",
+   "licencia": "Public domain (Wikimedia Commons)",
+   "corto": "plano de Jesurún (1843)",
+   "obras": "Jesurún rotula el Campo de Marte al sureste del casco.",
+   "casas": 3548
+  },
+  {
+   "año": 1889,
+   "plano": "1889-bnf-mestre",
+   "titulo": "Plano topografico de la ciudad de Caracas, levantado en 1889 vajo la direccion del general don Vicente S. Mestre",
+   "autor": "Vicente S. Mestre (1858-1919)",
+   "fuente": "Bibliothèque nationale de France (copia en Wikimedia Commons) · https://commons.wikimedia.org/wiki/File:Plano_topografico_de_la_ciudad_de_Caracas,_levantado_en_1889_vajo_la_direccion_-_del_general_don_Vicente_S._Mestre_-_btv1b53027837n.jpg",
+   "licencia": "Public domain (Wikimedia Commons)",
+   "corto": "plano de Mestre (1889)",
+   "obras": "Ya llegan el Ferrocarril La Guaira–Caracas y el Ferrocarril Central hacia Petare; el plano rotula el Capitolio y el Hipódromo.",
+   "casas": 7130
+  },
+  {
+   "año": 1911,
+   "plano": "1911-princeton-plano-de-caracas-razetti",
+   "titulo": "Plano de Caracas, 1911",
+   "autor": "Ricardo Razetti",
+   "fuente": "Princeton University Library, Historic Maps Collection · https://maps.princeton.edu/catalog/princeton-05741v14j",
+   "licencia": "No Known Copyright (http://rightsstatements.org/vocab/NKC/1.0/). Princeton University Library reasonably believes that the Item is not restricted by copyright or related rights, but a conclusive determination could not be made.",
+   "corto": "plano de Razetti (1911)",
+   "obras": "Razetti dibuja los tranvías eléctricos y el Hipódromo de El Paraíso.",
+   "casas": 10980
+  },
+  {
+   "año": 1936,
+   "plano": "1936-archiveorg-caracas-dcn-hoja1",
+   "titulo": "Caracas. No. 7. Distrito Federal, Departamento Libertador (Ministerio de Obras Públicas, Dirección de Cartografía Nacional) — hoja 1 de 2",
+   "autor": "Ministerio de Obras Públicas, Dirección de Cartografía Nacional (Venezuela). Restitución fotogramétrica; dibujo D. Viera, J. Nunés, S. Marichal; jefe del Servicio de Topógrafos Luis Felipe Vegas",
+   "fuente": "University of Alberta Libraries, William C. Wonders Map Collection, vía Internet Archive · https://archive.org/details/WCWdb_18053",
+   "licencia": "sin licencia declarada (derechos por verificar)",
+   "corto": "plano del DCN (1936)",
+   "obras": "La Cartografía Nacional restituye la ciudad de fotos aéreas tomadas en marzo de 1936 y dibuja lo edificado casa por casa.",
+   "casas": 33487
+  }
+ ]
+}
