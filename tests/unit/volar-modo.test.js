@@ -69,6 +69,40 @@ describe('crearModoVolar', () => {
     expect(e).toMatchObject({ prevenido: true, cortado: true })
   })
 
+  test('dentro de un diálogo modal (el visor del plano) las flechas, Q/E y Esc son del diálogo, no del vuelo', () => {
+    // Arrange
+    const { modo, años, cambios, tecla } = armar()
+    modo.entrar()
+    const enDialogo = { closest: (sel) => (sel.includes('dialog') ? {} : null) }
+
+    // Act
+    const flecha = tecla('keydown', 'ArrowLeft', { target: enDialogo })
+    const año = tecla('keydown', 'KeyE', { target: enDialogo })
+    const esc = tecla('keydown', 'Escape', { target: enDialogo })
+
+    // Assert
+    for (const e of [flecha, año, esc]) expect(e).toMatchObject({ prevenido: false, cortado: false })
+    expect(años).toEqual([])
+    expect(modo.activo).toBe(true)
+    expect(cambios).toEqual([true])
+  })
+
+  test('Espacio sobre un botón con foco es del botón (lo activa); fuera de un control, el vuelo lo calla', () => {
+    // Arrange
+    const { modo, tecla } = armar()
+    modo.entrar()
+    const enBoton = { closest: (sel) => (sel.split(',').map((s) => s.trim()).includes('button') ? {} : null) }
+    const enLienzo = { closest: () => null }
+
+    // Act
+    const sobreBoton = tecla('keydown', 'Space', { target: enBoton })
+    const sobreLienzo = tecla('keydown', 'Space', { target: enLienzo })
+
+    // Assert
+    expect(sobreBoton).toMatchObject({ prevenido: false, cortado: false })
+    expect(sobreLienzo).toMatchObject({ prevenido: true, cortado: true })
+  })
+
   test('Esc vuelve al mapa: esconde el avión y devuelve la entrada a la cámara', () => {
     const { modo, pausas, cambios, tecla, camera } = armar()
     modo.entrar()

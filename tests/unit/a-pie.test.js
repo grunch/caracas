@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import {
-  rejillaDeCasas, choca, pasoAPie, entradaDeTeclas, joystick, puntoDeEntrada, RADIO_M, VELOCIDAD,
+  rejillaDeCasas, choca, pasoAPie, entradaDeTeclas, joystick, puntoDeEntrada, teclaAjena, RADIO_M, VELOCIDAD,
 } from '../../src/a-pie.js'
 
 // px = m: un plano de 1 m por píxel con la plaza en (0, 0)
@@ -99,5 +99,29 @@ describe('puntoDeEntrada', () => {
     const p = puntoDeEntrada({ x: 5, z: 5, dist: 400 }, (x, z) => choca(r, x, z))
     expect(choca(r, p.x, p.z)).toBe(false)
     expect(Math.hypot(p.x - 5, p.z - 5)).toBeLessThan(12)
+  })
+})
+
+describe('teclaAjena', () => {
+  const en = (selectores) => ({ closest: (s) => (selectores.some((x) => s.split(',').map((y) => y.trim()).includes(x)) ? {} : null) })
+
+  test('lo que nace en un campo de texto o en un diálogo es suyo, sea la tecla que sea', () => {
+    // Arrange
+    const teclas = ['ArrowLeft', 'KeyW', 'KeyE', 'Escape', 'Space']
+    // Act
+    const ajenas = teclas.flatMap((code) => [en(['input']), en(['dialog']), en(['[role="dialog"]'])].map((target) => teclaAjena({ code, target })))
+    // Assert
+    expect(ajenas.every(Boolean)).toBe(true)
+  })
+
+  test('Espacio sobre un botón o un enlace es del control; las demás teclas sobre un botón son del modo', () => {
+    // Arrange
+    const boton = en(['button'])
+    // Act y Assert
+    expect(teclaAjena({ code: 'Space', target: boton })).toBe(true)
+    expect(teclaAjena({ code: 'Space', target: en(['a']) })).toBe(true)
+    expect(teclaAjena({ code: 'KeyW', target: boton })).toBe(false)
+    expect(teclaAjena({ code: 'Space', target: en([]) })).toBe(false)
+    expect(teclaAjena({ code: 'Space', target: null })).toBe(false)
   })
 })
