@@ -155,3 +155,31 @@ def test_un_diente_chico_en_un_lado_no_lo_parte_en_dos():
     etiquetas, lotes = lotes_por_lados(con_diente, METRO, semilla=3)
     assert len({(round(l['eu'][0], 2), round(l['eu'][1], 2)) for l in lotes.values()}) == 4
 
+
+
+def test_una_calle_pintada_de_jardin_parte_la_manzana_por_donde_va_la_calle_de_hoy():
+    from tools.geo.lados import cortar_por_calles
+    # dos cuadras de 50 × 100 m unidas por 10 m de jardín (la calle, en el plano, pintada de verde)
+    m = np.zeros((260, 300), bool)
+    m[30:230, 30:250] = True
+    libre = np.zeros(m.shape, bool)
+    libre[30:230, 130:150] = True                 # el jardín: lo que no es casa ni edificio público
+    calles = np.zeros(m.shape, bool)
+    calles[:, 138:142] = True                     # la calle de OSM, por el medio
+    piezas = cortar_por_calles(m, calles, libre, METRO)
+    assert len(piezas) == 2
+    juntas = np.zeros(m.shape, int)
+    for k, (pieza, (x, y)) in enumerate(piezas, start=1):
+        h, w = pieza.shape
+        juntas[y:y + h, x:x + w][pieza] = k
+    assert not (juntas[30:230, 138:142] > 0).any()                    # por donde va la calle, nada
+    assert set(np.unique(juntas[30:230, 30:130])) == {1} or set(np.unique(juntas[30:230, 30:130])) == {2}
+
+
+def test_la_calle_de_hoy_no_corta_casas():
+    from tools.geo.lados import cortar_por_calles
+    m = np.zeros((260, 300), bool)
+    m[30:230, 30:250] = True
+    calles = np.zeros(m.shape, bool)
+    calles[:, 138:142] = True                     # una avenida de después de 1936, que pasa sobre casas
+    assert cortar_por_calles(m, calles, np.zeros(m.shape, bool), METRO) is None
