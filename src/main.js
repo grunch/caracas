@@ -23,6 +23,8 @@ import { normalizarMarcas, distanciaDeVuelo } from './marcas.js'
 import { crearCapaMarcas } from './marcas-capa.js'
 import { MARCAS } from './marcas-datos.js'
 import './marcas.css'
+import { crearVisorDePlano } from './visor-plano-panel.js'
+import './visor-plano.css'
 
 const params = new URLSearchParams(location.search)
 const COLOR_FONDO = 0x1d1a17
@@ -177,6 +179,7 @@ const OLA_EPOCA_MAX_M = 9000 // más que la distancia de la plaza a la esquina m
 // de 1936 debajo y el plano viejo aparece cuando llegue
 const ESPERA_PLANO_MS = 2500
 let lineaDeTiempo = null
+let visorPlano = null // el plano de la época, aparte (P; src/visor-plano-panel.js)
 let secuencia = null
 let planos = null
 // el plano calzado de cada época (plano/epocas.json, tools/planos-epocas.mjs); sin él, siempre 1936
@@ -212,8 +215,15 @@ Promise.all([fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.re
       })
     }, PRIMERA_EPOCA)
     lineaDeTiempo = crearLineaDeTiempo({
-      contenedor: document.getElementById('epocas'), epocas, alElegir: (i) => secuencia.elegir(i), desde: PRIMERA_EPOCA,
+      contenedor: document.getElementById('epocas'), epocas, desde: PRIMERA_EPOCA,
+      alElegir: (i) => { secuencia.elegir(i); visorPlano?.elegir(epocas[i]) },
     })
+    visorPlano = crearVisorDePlano({
+      contenedor: document.getElementById('epocas'), liviano, añoBase: epocas.at(-1).año,
+      base: ['plano/chico.webp', liviano ? 'plano/medio-4k.webp' : 'plano/medio.webp'],
+      indice: () => fetch('plano/epocas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))).then((j) => j.planos),
+    })
+    visorPlano.elegir(epocas[lineaDeTiempo.actual])
     pedirMascaras() // el agua y los rótulos, para la hoja en tinta de antes de 1936
     cargarTextura('plano/crece.png', false).then((t) => {
       // etapas codificadas: un mipmap las promediaría y el borde de la ciudad cambiaría de época a lo lejos
@@ -312,6 +322,7 @@ addEventListener('keydown', (e) => {
   if (e.code === 'KeyC' && !e.metaKey && !e.ctrlKey) alternarColor()
   if (e.code === 'KeyH' && !e.metaKey && !e.ctrlKey) alternarHoy()
   if (e.code === 'KeyM' && !e.metaKey && !e.ctrlKey) alternarMarcas()
+  if (e.code === 'KeyP' && !e.metaKey && !e.ctrlKey) visorPlano?.abrir()
 })
 
 // la altura del suelo tal como se dibuja: la cámara mira siempre al terreno
@@ -407,6 +418,7 @@ window.lab = {
   get calles() { return rotulos },
   get lineaDeTiempo() { return lineaDeTiempo },
   get planos() { return planos },
+  get visorPlano() { return visorPlano },
 }
 
 /** Papel con una cuadrícula de 100 m, hasta que exista plano/primero.webp. */

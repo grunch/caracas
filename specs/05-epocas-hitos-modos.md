@@ -9,6 +9,18 @@
 - Botón ▶: "Ver cambiar la ciudad, de 1867 a {último}" recorre los años solo.
 - Las marcas, las fichas y el coche de los modos dependen de la etapa (`desde`/`hasta`).
 
+*Caracas (implementado, T25b): **el plano de cada época, aparte**.* El plano viejo no se pega sobre la hoja 3D (eso quedó detrás de
+`?planos`): se mira en un visor propio. En el panel de la línea de tiempo, **«Ver el plano de {año}»** (o la tecla **P**) abre un
+`<dialog>` modal (`src/visor-plano-panel.js`; la lógica pura, con tests, en `src/visor-plano.js`) con el plano de la época elegida en 2D:
+- La imagen es la del plano calzado (`plano/<año>/chico.webp` y después el nivel mejor de `plano/epocas.json`; en equipos livianos,
+  hasta 4096 px); en 1936, la hoja base. Un año sin plano no muestra el de otro. El pie lo dice: el plano viejo está estirado para
+  coincidir con la hoja, y el original está en la fuente.
+- Se arrastra, se acerca con la rueda, con dos dedos, con doble click o con + y − (hasta 8×), se mueve con las flechas y vuelve entero con 0.
+- **Crédito**: título, autor, año, fuente (con enlace si la ficha trae la dirección) y licencia, de `datos/crece.json`, que los copia de
+  `fuentes/mapas/<plano>/ficha.json`. Lo que falta se dice («autor sin identificar»), no se inventa.
+- Escape, × o un click en el telón lo cierran y el foco vuelve al botón. Mientras está abierto, las teclas de la ciudad (C, H, M, Espacio) no actúan.
+- `window.lab.visorPlano` expone `abrir()`, `cerrar()`, `abierto` y `estado`.
+
 ## Marcas (`marcas.js`)
 
 Formato compacto, una fila por marca:
