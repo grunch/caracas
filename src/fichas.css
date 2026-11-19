@@ -1,0 +1,115 @@
+/* La ficha de un lugar (panel al costado; hoja desde abajo en pantallas angostas) y el visor de fotos
+   (src/ficha-panel.js). Los colores son los de index.html: --papel, --tinta, --sobre. */
+#ficha{position:fixed;z-index:8;right:calc(26px + env(safe-area-inset-right,0px));top:calc(138px + env(safe-area-inset-top,0px));
+  width:min(372px,100vw - 52px);max-height:calc(100dvh - 234px);box-sizing:border-box;display:flex;flex-direction:column;
+  color:var(--tinta);background:var(--papel);border:1px solid var(--tinta);outline:1px solid #2a221b99;outline-offset:2px;box-shadow:0 8px 34px #0008;
+  opacity:0;visibility:hidden;transform:translateX(14px);transition:opacity .35s,transform .35s,visibility 0s .35s}
+/* con la pantalla ancha la línea de tiempo (640 px al centro) no llega al panel: sube hasta arriba */
+@media (min-width:1480px){#ficha{top:calc(26px + env(safe-area-inset-top,0px));max-height:calc(100dvh - 122px)}}
+body.hoy #ficha{max-height:calc(100dvh - 334px)}
+@media (min-width:1480px){body.hoy #ficha{max-height:calc(100dvh - 222px)}}
+/* al abrir, visible desde el primer instante: el foco entra enseguida (un elemento oculto no lo recibe) */
+#ficha.ver{opacity:1;visibility:visible;transform:none;transition:opacity .35s,transform .35s}
+#ficha .cabeza{flex:none;padding:13px 46px 10px 18px;border-bottom:1px solid #2a221b44}
+#ficha h2{margin:0;font-size:21px;font-weight:500;letter-spacing:.07em;font-variant:small-caps;line-height:1.15;outline:0}
+#ficha .era{margin:3px 0 0;font-size:13.5px;font-style:italic;opacity:.82;line-height:1.35}
+#ficha.ausente h2{opacity:.62}
+#ficha .x{position:absolute;right:7px;top:7px;width:34px;height:34px;padding:0;cursor:pointer;font:inherit;font-size:24px;line-height:30px;
+  color:inherit;background:0 0;border:0;border-radius:0;opacity:.65}
+#ficha .x:hover,#ficha .x:focus-visible{opacity:1;background:#2a221b14}
+#ficha :focus-visible,#visor :focus-visible{outline:2px solid currentColor;outline-offset:2px}
+/* el título recibe el foco al abrir (para el lector de pantalla y el orden de tabulación): sin marco */
+#ficha h2:focus-visible{outline:0}
+#ficha .cuerpo{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:12px 18px 16px;-webkit-user-select:text;user-select:text}
+#ficha .cuerpo:focus-visible{outline-offset:-3px}
+#ficha .nombres{list-style:none;margin:0 0 10px;padding:0 0 9px;border-bottom:1px solid #2a221b33;font-size:13px;line-height:1.5}
+#ficha .nombres li{display:flex;gap:10px;opacity:.6}
+#ficha .nombres li.rige{opacity:1}
+#ficha .nombres time{flex:0 0 92px;font-variant-numeric:lining-nums;font-style:italic}
+#ficha .nombres li.rige span::after{content:" ←";opacity:.6}
+#ficha .texto p{margin:0 0 8px;font-size:14.5px;line-height:1.5}
+#ficha .texto p.epoca{opacity:.58;transition:opacity .4s}
+#ficha .texto p.epoca.rige{opacity:1}
+#ficha .texto p.epoca b{font-weight:500;font-variant-numeric:lining-nums;letter-spacing:.05em;margin-right:.45em}
+#ficha .texto p.epoca b::after{content:" ·";opacity:.6}
+#ficha .texto p.hoyes,#ficha .texto p.dudas{margin-top:10px;padding-top:8px;border-top:1px solid #2a221b33;font-size:13.5px}
+#ficha .texto p.dudas{font-style:italic;opacity:.82}
+#ficha .texto p.hoyes b,#ficha .texto p.dudas b{font-weight:500;font-style:normal;letter-spacing:.08em;font-variant:small-caps}
+#ficha .texto:empty{display:none}
+#ficha .fotos{margin:0 0 12px;display:flex;flex-direction:column;gap:12px}
+#ficha .fotos.mas{margin:12px 0 0;padding-top:12px;border-top:1px solid #2a221b33}
+#ficha .fotos.una img{max-height:290px;object-fit:cover;object-position:50% 42%}
+#ficha .fotos:empty{display:none}
+#ficha figure{margin:0}
+#ficha figure.rota{display:none}
+#ficha figure button{display:block;width:100%;padding:0;cursor:zoom-in;background:var(--tinta);border:1px solid var(--tinta);border-radius:0;line-height:0}
+#ficha figure img{display:block;width:100%;height:auto;filter:sepia(.12);transition:opacity .2s}
+#ficha figure button:hover img{opacity:.9}
+#ficha figcaption{margin-top:5px;font-size:12px;line-height:1.4;opacity:.9}
+#ficha figcaption b{font-weight:500}
+#ficha figcaption i{opacity:.9}
+#ficha figcaption .lic{display:block;opacity:.78}
+#ficha figcaption .de-epoca{font-variant:small-caps;letter-spacing:.06em}
+#ficha figcaption .de-epoca::before{content:"● ";font-size:8px;vertical-align:1.5px}
+#ficha a{color:inherit;text-underline-offset:2px}
+#ficha .aviso,#ficha .sinfoto{margin:0 0 9px;font-size:12px;font-style:italic;opacity:.7}
+#ficha .sinfoto{margin:10px 0 0}
+#ficha .fuente{margin:12px 0 0;padding-top:8px;border-top:1px solid #2a221b33;font-size:12px;line-height:1.4;opacity:.72}
+#ficha .fuente b{font-weight:500;letter-spacing:.08em;font-variant:small-caps}
+/* con la ficha abierta, el cartel de la marca no repite la nota */
+body.ficha .marca.abierta .tag i{display:none}
+body.ficha .marca.abierta.con-nota .tag{padding:2px 8px 3px}
+
+#visor{position:fixed;inset:0;z-index:30;display:grid;grid-template-rows:minmax(0,1fr) auto;place-items:center;gap:10px;padding:18px 66px 14px;box-sizing:border-box;
+  background:#14110ff2;opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+#visor.ver{opacity:1;visibility:visible;transition:opacity .25s}
+#visor img{max-width:100%;max-height:100%;width:auto;height:auto;min-height:0;object-fit:contain;border:1px solid #f1e6cd55;box-shadow:0 10px 50px #000;background:var(--tinta);touch-action:pan-y}
+#visor .pie{max-width:820px;margin:0;text-align:center;color:var(--claro);font-size:14px;line-height:1.45;-webkit-user-select:text;user-select:text}
+#visor .pie b{font-weight:500}
+#visor .pie i{opacity:.88}
+#visor .pie .lic{display:block;font-size:13px;opacity:.85}
+#visor .pie a{color:#e9b9a6;text-underline-offset:2px;white-space:nowrap}
+#visor .cuenta{font-variant-numeric:lining-nums;opacity:.7;margin-right:.6em}
+#visor button{position:absolute;cursor:pointer;font:inherit;color:var(--claro);background:#2a221bcc;border:1px solid #efe4cd66;border-radius:0;width:44px;height:44px;padding:0;font-size:24px;line-height:40px}
+#visor button:hover{background:#453a30}
+#visor .x{right:14px;top:14px}
+#visor .ant{left:14px;top:50%;margin-top:-22px}
+#visor .sig{right:14px;top:50%;margin-top:-22px}
+#visor.una .ant,#visor.una .sig,#visor.una .cuenta{display:none}
+
+@media (max-width:640px){
+  /* hoja desde abajo: ocupa el lugar de los botones, que vuelven al cerrarla */
+  #ficha{inset:auto calc(10px + env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) calc(10px + env(safe-area-inset-left,0px));
+    width:auto;max-height:50dvh;transform:translateY(16px)}
+  body.hoy #ficha{max-height:50dvh}
+  body.ficha #botones,body.ficha #leyenda,body.ficha #epocas .pie{display:none}
+  #ficha .cabeza{padding:9px 48px 8px 13px}
+  #ficha h2{font-size:18px}
+  #ficha .era{font-size:12.5px}
+  #ficha .cuerpo{padding:10px 13px 12px}
+  #ficha .fotos.una img{max-height:150px}
+  #ficha .fotos.mas{flex-direction:row;overflow-x:auto;gap:9px;scroll-snap-type:x;margin:10px -13px 0;padding:10px 13px 0}
+  #ficha .fotos.mas figure{flex:0 0 auto;width:62%;scroll-snap-align:center}
+  #ficha .fotos.mas figure:only-child{width:100%}
+  #ficha .fotos.mas img{height:112px;object-fit:cover}
+  #ficha figcaption{font-size:11.5px}
+  #ficha .texto p{font-size:13.5px}
+  #visor{padding:62px 8px 12px}
+  #visor .pie{font-size:12.5px}
+  /* las flechas, arriba junto a la ×: a los lados taparían la foto */
+  #visor .ant,#visor .sig{top:14px;margin-top:0}
+  #visor .ant{left:14px}
+  #visor .sig{left:68px;right:auto}
+}
+@media (pointer:coarse){
+  #ficha .x{width:44px;height:44px;right:2px;top:2px;font-size:26px;line-height:42px}
+  #ficha .cuerpo{touch-action:pan-y}
+  #ficha .fotos.mas{touch-action:pan-x pan-y}
+}
+@media (max-height:500px) and (min-width:641px){
+  #ficha{top:calc(10px + env(safe-area-inset-top,0px));width:min(340px,44vw);max-height:calc(100dvh - 92px)}
+  body.hoy #ficha{max-height:calc(100dvh - 92px)}
+  body.ficha #epocas .pie{display:none}
+  #ficha .fotos.una img{max-height:150px}
+}
+@media (prefers-reduced-motion:reduce){#ficha,#visor,#ficha .texto p.epoca{transition:none}#ficha{transform:none}}

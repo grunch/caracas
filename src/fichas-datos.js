@@ -1,0 +1,252 @@
+/**
+ * Los textos de las fichas: lo que el proyecto puede decir de cada lugar marcado, por época (formato en
+ * src/fichas.js y specs/05). La clave es el id de la marca (src/marcas-datos.js).
+ *
+ *   id: { textos: [[desde, 'párrafo'], …],   // desde = índice de época (1 = 1772 … 5 = 1936), en orden
+ *         hoy: 'qué es hoy', dudas: 'lo que falta verificar' }
+ *
+ * De dónde sale cada frase: de lo que dibujan y rotulan los planos del catálogo (la leyenda numerada del de
+ * 1889, los rótulos de los de 1911 y 1936), de las imágenes de fuentes/imagenes (sus fichas y el README) y de
+ * las notas de las marcas y de los hitos. Lo que es conocimiento general de la historia de la ciudad, sin
+ * cotejar todavía con una fuente del catálogo, no va en el texto como un hecho más: va en `dudas`, que la
+ * ficha muestra como «Por verificar». `hoy` nombra lo que hay en el lugar en la ciudad actual.
+ * Un lugar sin entrada muestra la nota de su marca y la fuente de su nombre.
+ */
+const SIN_LEYENDA = 'los nombres de 1772 y 1843 no se cotejaron con la leyenda de esos planos'
+
+export const FICHAS = Object.freeze({
+  // --- el valle ---
+  avila: {
+    textos: [[1, 'La sierra que cierra el valle por el norte. En las vistas del siglo XIX y en las fotos de comienzos del XX es el fondo de la ciudad: se levanta detrás de los tejados, de un extremo al otro.']],
+    dudas: 'El plano de 1936 no rotula la sierra en esta hoja; el nombre es el de uso general.',
+  },
+  guaire: {
+    textos: [
+      [1, 'El río del valle corre al sur, lejos de la ciudad colonial: en los planos de 1772 y de 1843, entre las últimas casas y el río todavía hay campo.'],
+      [3, 'El plano de 1889 lo escribe «Río Guayre» y ya dibuja un puente de hierro para cruzarlo.'],
+      [4, 'La ciudad pasa a la otra orilla: el plano de 1911 rotula El Paraíso, al suroeste, y el de 1936 suma el Puente Sucre.'],
+    ],
+  },
+  calvario: {
+    textos: [
+      [1, 'El cerro al oeste de la ciudad. Desde aquí se dibujaron las vistas de 1839: la ciudad baja, la torre de la Catedral y el Ávila al fondo.'],
+      [3, 'El plano de 1889 dibuja el paseo en la cima y cuenta su capilla entre los templos (XII, «el Calvario»). Desde aquí se tomaron las fotos panorámicas de comienzos del siglo XX.'],
+      [5, 'El plano de 1936 lo rotula «Paseo Independencia» y marca la «Capilla del Calvario».'],
+    ],
+    dudas: 'En 1889 el paseo llevaba el nombre de Guzmán Blanco (dato general, sin cotejar); cuándo pasó a llamarse Independencia, tampoco se cotejó.',
+  },
+  catuche: {
+    textos: [[1, 'Una de las quebradas que bajan del Ávila y cruzan la ciudad. El plano de 1889 la rotula «Río Catuche»; el de 1936 la dibuja junto a la esquina de Puente Trinidad.']],
+  },
+  caroata: {
+    textos: [[1, 'La quebrada del oeste del casco. El plano de 1889 la rotula «Río Caroata»; el de 1936 la dibuja bajo los puentes Nuevo, Junín y Arauca.']],
+  },
+  anauco: {
+    textos: [[1, 'Baja del Ávila por el este de la ciudad. Los planos de 1889 y de 1936 lo rotulan «Río Anauco».']],
+  },
+
+  // --- la plaza y sus alrededores ---
+  'plaza-bolivar': {
+    textos: [
+      [1, 'La plaza mayor era el mercado de la ciudad: una explanada de tierra rodeada de galerías de arcos, con hileras de puestos bajo toldos. Así la muestran un grabado fechado en 1852 y la pintura que Camille Pissarro hizo de ella por esos años.'],
+      [3, 'Sin el mercado, la plaza se hizo jardín: canteros, faroles, una reja alrededor y, en el centro, la estatua ecuestre de Bolívar, que las fotos fechan en 1874. El plano de 1889 ya la llama Plaza Bolívar.'],
+      [4, 'Las fotos de comienzos del siglo XX la muestran con el piso de mosaico en damero y los árboles ya crecidos.'],
+    ],
+    hoy: 'la Plaza Bolívar, con la misma estatua.',
+    dudas: 'El nombre «Plaza Bolívar» es anterior a la estatua (dato general: un decreto de 1842); aquí cambia junto con el jardín, en 1889. El mercado se quitó hacia 1865, según las fechas de las fotos.',
+  },
+  catedral: {
+    textos: [
+      [1, 'En la esquina de La Torre, con la fachada hacia la plaza y la torre a su izquierda, al norte. La torre es lo más alto de la ciudad colonial: en las vistas sobresale dos o tres veces sobre los tejados.'],
+      [3, 'El plano de 1889 la cuenta primera entre los templos (I). Las imágenes de 1867 a 1910 muestran la fachada barroca de dos cuerpos y la torre de tres, con reloj y cupulín.'],
+    ],
+    dudas: 'No tenemos imagen de la Catedral anterior a la década de 1860: en 1772 y 1843 aparece con el aspecto de esas fotos.',
+  },
+  'casa-amarilla': {
+    textos: [
+      [3, 'Frente al lado oeste de la plaza. El plano de 1889 la numera 5, «Casa amarilla»; las imágenes de la época muestran un palacio de esquina de dos pisos, con balcones y un remate central.'],
+      [5, 'El plano de 1936 la rotula «Min. del Exterior».'],
+    ],
+  },
+  capitolio: {
+    textos: [
+      [1, 'Aquí estuvo el convento de las Concepciones, en la manzana al suroeste de la plaza.'],
+      [3, 'El plano de 1889 numera dos edificios en la manzana: 1, «Capitolio», y 2, «Palacio Federal». El de 1936 dibuja cuatro alas alrededor de un jardín, con un óvalo en el ala norte.'],
+    ],
+    hoy: 'el Palacio Federal Legislativo.',
+    dudas: `Que aquí estuvo el convento de las Concepciones es un dato general: ${SIN_LEYENDA}.`,
+  },
+  universidad: {
+    textos: [
+      [1, 'El convento de San Francisco, junto a su iglesia.'],
+      [3, 'El plano de 1889 pone aquí la Universidad (3), frente al Capitolio; el de 1936, la «Universidad Central». Las fotos muestran una fachada neogótica, con ventanas ojivales y pináculos.'],
+    ],
+    hoy: 'el Palacio de las Academias.',
+    dudas: `Que antes fue el convento de San Francisco es un dato general: ${SIN_LEYENDA}.`,
+  },
+  'san-francisco': {
+    textos: [
+      [1, 'La iglesia del convento franciscano. El primer esquema de la ciudad, de 1578, ya nombra San Francisco.'],
+      [3, 'Templo VII en el plano de 1889; «Iglesia San Francisco» en el de 1936.'],
+    ],
+  },
+  'santa-capilla': {
+    textos: [
+      [1, 'En esta esquina, que el plano de 1889 todavía llama «San Mauricio», estuvo la iglesia de ese nombre.'],
+      [3, 'La Santa Capilla es el templo VIII del plano de 1889: una iglesia neogótica, con aguja.'],
+    ],
+    dudas: 'Que la iglesia de San Mauricio ocupara este mismo solar en 1772 y 1843 es un dato general, sin cotejar.',
+  },
+  altagracia: {
+    textos: [[1, 'La iglesia del noroeste del casco. Templo II en el plano de 1889; «Iglesia de Altagracia» en el de 1936.']],
+    dudas: 'Desde cuándo está en pie, sin verificar: aquí aparece desde 1772.',
+  },
+  seminario: {
+    textos: [[1, 'Del lado sur de la plaza, el seminario de Santa Rosa, donde empezó la universidad.']],
+    dudas: 'Dato general, ubicado por la cuadra y no por un rótulo. El plano de 1889 ya pone aquí el Concejo Municipal.',
+  },
+  concejo: {
+    textos: [[3, 'Del lado sur de la plaza, el plano de 1889 numera 7 el «Consejo municipal».']],
+  },
+  justicia: {
+    textos: [[5, 'El plano de 1936 rotula «Palacio de Justicia» el edificio del lado sur de la plaza, donde el de 1889 ponía el Concejo Municipal.']],
+  },
+  carmelitas: {
+    textos: [
+      [1, 'El convento de las Carmelitas, que dio nombre a la esquina.'],
+      [3, 'En la esquina de Carmelitas el plano de 1889 pone el Ministerio de Hacienda (18), y el de 1936 lo mantiene.'],
+    ],
+    dudas: `El convento es un dato general: ${SIN_LEYENDA}.`,
+  },
+  correos: {
+    textos: [[5, 'El plano de 1936 rotula aquí la «Ofic. Principal de Correos», en la esquina de Carmelitas. En 1889 el correo estaba al norte de la plaza (número 10 del plano de ese año).']],
+  },
+  'teatro-caracas': {
+    textos: [[3, 'El plano de 1889 lo numera 35, en la esquina de Veroes. El de 1936 ya no lo rotula.']],
+  },
+
+  // --- San Jacinto y el sur ---
+  'san-jacinto': {
+    textos: [
+      [1, 'El convento de San Jacinto, con su plaza al frente.'],
+      [3, 'Cuando la plaza mayor se hizo jardín, el mercado vino aquí: el plano de 1889 numera 23 el «Mercado público».'],
+      [5, 'El plano de 1936 lo rotula «Mercado Principal».'],
+    ],
+    dudas: `El convento es un dato general: ${SIN_LEYENDA}.`,
+  },
+  'plaza-venezolano': {
+    textos: [
+      [1, 'La plaza frente al convento de San Jacinto.'],
+      [3, 'El plano de 1889 la llama plaza «del Venezolano» (B); el de 1936, «Plaza El Venezolano».'],
+    ],
+    dudas: `El nombre anterior es un dato general: ${SIN_LEYENDA}.`,
+  },
+  'casa-natal': {
+    textos: [[2, 'La casa donde nació Simón Bolívar, a una cuadra de la plaza mayor. El plano de 1889 la numera 24, «Casa donde nació Bolívar»; el de 1936 la rotula «Casa Natal».']],
+    dudas: 'La casa es anterior (Bolívar nació en 1783): aquí se marca desde 1843.',
+  },
+  'teatro-municipal': {
+    textos: [
+      [1, 'Aquí estaban la plaza y la iglesia de San Pablo.'],
+      [3, 'El Teatro Municipal se levantó donde estuvo San Pablo: el plano de 1889 lo numera 25.'],
+    ],
+    dudas: 'La demolición de San Pablo (hacia 1876) y el primer nombre del teatro (Guzmán Blanco) son datos generales, sin cotejar con el catálogo.',
+  },
+  'santa-teresa': {
+    textos: [[3, 'Templo III del plano de 1889; «Iglesia Santa Teresa» en el de 1936.']],
+    dudas: 'Antes hubo en el lugar un oratorio (dato general: San Felipe Neri), que no se marca.',
+  },
+  'teatro-nacional': {
+    textos: [[4, 'El plano de 1936 lo rotula «Teatro Nacional».']],
+    dudas: 'Inaugurado en 1905 (dato general): por eso aparece desde 1911.',
+  },
+  rotunda: {
+    textos: [[3, 'La cárcel de la ciudad: el plano de 1889 la numera 30, «Cárcel». En el de 1936 la esquina se sigue llamando «La Cárcel», pero el solar ya está vacío.']],
+    dudas: 'El nombre «La Rotunda» y su demolición en 1936 son datos generales; el plano de 1889 solo dice «Cárcel».',
+  },
+  'santa-rosalia': {
+    textos: [[3, 'Templo IV del plano de 1889; «Iglesia Santa Rosalía» en el de 1936.']],
+    dudas: 'La iglesia es anterior; sin cotejar con el plano de 1843, aparece desde 1889.',
+  },
+  'san-juan': {
+    textos: [[3, 'La iglesia de los capuchinos: templo V del plano de 1889. El de 1936 rotula «Iglesia San Juan» y, al frente, la «Plaza de Capuchinos».']],
+    dudas: 'La iglesia es anterior; sin cotejar con el plano de 1843, aparece desde 1889.',
+  },
+  'nuevo-circo': {
+    textos: [[5, 'La plaza de toros: «Nuevo Circo» en el plano de 1936.']],
+  },
+  'parque-carabobo': {
+    textos: [
+      [3, 'El plano de 1889 la llama plaza «de Carabobo» (E).'],
+      [5, 'En el de 1936 ya es el «Parque Carabobo».'],
+    ],
+  },
+  'puente-hierro': {
+    textos: [[3, 'El puente sobre el Guaire, al sur de la ciudad. El plano de 1889 ya lo rotula «Puente de hierro».']],
+  },
+
+  // --- el norte ---
+  'las-mercedes': {
+    textos: [[3, 'El plano de 1889 dibuja un templo en el lugar; el de 1936 lo rotula «Iglesia Las Mercedes».']],
+    dudas: 'El convento de la Merced es colonial (dato general); sin cotejar con los planos de 1772 y 1843, aparece desde 1889.',
+  },
+  'la-pastora': {
+    textos: [
+      [1, 'La iglesia del barrio del norte, con dos torres hacia su plaza: así la dibuja el plano de 1936.'],
+      [3, 'Templo XI del plano de 1889.'],
+    ],
+    dudas: 'Desde cuándo está en pie, sin verificar: aquí aparece desde 1772.',
+  },
+  panteon: {
+    textos: [
+      [2, 'La iglesia de la Santísima Trinidad, al norte de la ciudad.'],
+      [3, 'La iglesia de la Trinidad, convertida en Panteón Nacional: el plano de 1889 lo numera 22.'],
+      [5, 'El plano de 1936 dibuja tres torres: la fachada se había rehecho poco antes.'],
+    ],
+    hoy: 'el Panteón Nacional.',
+    dudas: 'La reforma de la fachada (hacia 1930) es un dato general, sin cotejar.',
+  },
+  'san-carlos': {
+    textos: [[3, 'El plano de 1889 numera 21 el «Cuartel San Carlos»; el de 1936 dibuja el edificio, de patio, sin rótulo.']],
+    dudas: 'El cuartel es de fines del siglo XVIII (dato general); sin cotejar con el plano de 1843, aparece desde 1889.',
+  },
+  'hospital-vargas': {
+    textos: [[3, 'El plano de 1889 ya lo dibuja y lo numera 43, cuando todavía estaba en obra.']],
+    dudas: 'El año de inauguración (1891) es un dato general.',
+  },
+
+  // --- el oeste ---
+  miraflores: {
+    textos: [[4, 'Un palacio de mansardas sobre un basamento, al noroeste del centro. El plano de 1936 lo rotula «Palacio Miraflores».']],
+    hoy: 'el Palacio de Miraflores.',
+    dudas: 'Si ya estaba en pie en 1889, por verificar: aquí aparece desde 1911.',
+  },
+  'cano-amarillo': {
+    textos: [[3, 'La estación del ferrocarril de La Guaira, al noroeste de El Calvario. El plano de 1889 dibuja la vía y la rotula «Ferrocarril La Guaira a Caracas»; el de 1936, «Estación del F.C. de La Guaira».']],
+  },
+  'el-silencio': {
+    textos: [[5, 'El plano de 1936 llama «El Silencio» a la esquina: es el barrio de antes de la reurbanización.']],
+    dudas: 'La reurbanización de El Silencio es posterior a 1936 (dato general).',
+  },
+  'palo-grande': {
+    textos: [[4, 'La estación del Gran Ferrocarril de Venezuela, al oeste: el plano de 1911 la rotula «Estación Palo Grande» y «G.F.V.».']],
+  },
+  'el-paraiso': {
+    textos: [[4, 'La ciudad cruza el Guaire: el plano de 1911 ya rotula «El Paraíso», al suroeste, con su hipódromo.']],
+  },
+  hipodromo: {
+    textos: [
+      [4, '«Hipódromo del Paraíso» en el plano de 1911.'],
+      [5, '«Hipódromo Nacional» en el de 1936.'],
+    ],
+  },
+
+  // --- el este ---
+  candelaria: {
+    textos: [[3, 'La iglesia y su plaza, al este del casco: templo VI y plaza D del plano de 1889.']],
+    dudas: 'La iglesia es colonial (dato general); sin cotejar con los planos de 1772 y 1843, aparece desde 1889.',
+  },
+  'fc-central': {
+    textos: [[3, 'El plano de 1889 rotula aquí «Estación» y «Ferrocarril Central», al este de la ciudad.']],
+  },
+})

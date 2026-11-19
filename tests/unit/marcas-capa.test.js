@@ -141,6 +141,17 @@ describe('la capa de marcas', () => {
     expect(capa.abrir('no-existe')).toBe(false)
   })
 
+  test('cerrar() cierra el cartel abierto sin avisar (lo usa la ficha al cerrarse)', () => {
+    dibujar(5)
+    botonDe('plaza').emitir('click')
+    capa.cerrar()
+    expect(capa.abierta).toBe(null)
+    expect(raizDe('plaza').classList.contains('abierta')).toBe(false)
+    expect(avisos.abiertas).toEqual(['plaza'])
+    capa.cerrar() // sin nada abierto no hace nada
+    expect(capa.abierta).toBe(null)
+  })
+
   test('la caja de una marca abierta es la de su cartel abierto (con la nota), y es la que se reserva', () => {
     // Arrange: en 1772 la plaza tiene nota
     const [cerrada] = dibujar(1)
