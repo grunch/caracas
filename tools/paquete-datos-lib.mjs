@@ -28,14 +28,17 @@ export function archivosDelPaquete(manifiesto) {
   return [...new Set([...rutas, MANIFIESTO])].sort()
 }
 
-/** { etiqueta, url } del release de datos más nuevo (la API los lista del más nuevo al más viejo), o null. */
+/** { etiqueta, url } del release de datos publicado más recientemente, o null. No se fía del orden de la API. */
 export function elegirRelease(releases) {
+  let elegido = null
   for (const r of releases) {
-    if (r.draft || !r.tag_name?.startsWith(PREFIJO)) continue
+    if (r.draft || !r.tag_name?.startsWith(PREFIJO) || !r.published_at) continue
     const activo = r.assets?.find((a) => a.name === ACTIVO)
-    if (activo) return { etiqueta: r.tag_name, url: activo.browser_download_url }
+    if (activo && (!elegido || r.published_at > elegido.publicado)) {
+      elegido = { etiqueta: r.tag_name, url: activo.browser_download_url, publicado: r.published_at }
+    }
   }
-  return null
+  return elegido && { etiqueta: elegido.etiqueta, url: elegido.url }
 }
 
 /** Problemas del listado de `tar -tvzf` (GNU): solo valen archivos regulares y carpetas dentro de public/. */

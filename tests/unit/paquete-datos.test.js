@@ -45,14 +45,14 @@ describe('archivosDelPaquete', () => {
 describe('elegirRelease', () => {
   const activo = (url) => ({ name: ACTIVO, browser_download_url: url })
 
-  test('el release de datos más nuevo que trae el paquete', () => {
-    // Arrange: la API devuelve los releases del más nuevo al más viejo
+  test('el release de datos publicado más recientemente que trae el paquete, en el orden que venga', () => {
+    // Arrange: la API no los ordena por fecha (datos-…-e61e42e salió antes que datos-…-d68ce45, uno más nuevo)
     const releases = [
-      { tag_name: 'v1.0', draft: false, assets: [activo('v')] },
-      { tag_name: 'datos-2026-11-20', draft: true, assets: [activo('borrador')] },
-      { tag_name: 'datos-2026-11-19', draft: false, assets: [{ name: 'otra.zip' }] },
-      { tag_name: 'datos-2026-11-18', draft: false, assets: [activo('bueno')] },
-      { tag_name: 'datos-2026-11-01', draft: false, assets: [activo('viejo')] },
+      { tag_name: 'datos-2026-11-01', published_at: '2026-11-01T10:00:00Z', draft: false, assets: [activo('viejo')] },
+      { tag_name: 'v1.0', published_at: '2026-12-01T10:00:00Z', draft: false, assets: [activo('v')] },
+      { tag_name: 'datos-2026-11-20', published_at: null, draft: true, assets: [activo('borrador')] },
+      { tag_name: 'datos-2026-11-19', published_at: '2026-11-19T10:00:00Z', draft: false, assets: [{ name: 'otra.zip' }] },
+      { tag_name: 'datos-2026-11-18', published_at: '2026-11-18T10:00:00Z', draft: false, assets: [activo('bueno')] },
     ]
 
     // Act
