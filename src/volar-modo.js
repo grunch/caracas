@@ -3,7 +3,7 @@
  * cuenta está en src/volar.js. Mientras dura, la cámara del mapa (src/camara.js) queda en pausa y conserva su
  * vista. Q y E cambian el año (`cambiarEpoca(±1)`) y la ciudad cambia abajo, con la ola de cada época.
  */
-import { BoxGeometry, Group, Mesh, MeshLambertMaterial } from 'three'
+import { BoxGeometry, Group, Mesh, MeshLambertMaterial, ShaderMaterial } from 'three'
 import { camaraDetras, despegue, entradaDeVuelo, pasoEnAvion } from './volar.js'
 import { joystick, teclaAjena } from './a-pie.js'
 
@@ -15,10 +15,16 @@ const AÑO = Object.freeze({ KeyQ: -1, KeyE: 1 })
 export function crearAvion() {
   const papel = new MeshLambertMaterial({ color: 0xe9dcc0 })
   const tinta = new MeshLambertMaterial({ color: 0x5a4a3a })
+  // desde el sol, en el mapa de sombras propio (src/acabado.js): solo la profundidad de cada pieza
+  const profundidad = new ShaderMaterial({
+    vertexShader: 'void main() { gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: 'void main() { gl_FragColor = vec4(1.0); }',
+  })
   const pieza = (ancho, alto, largo, x, y, z, material = papel) => {
     const m = new Mesh(new BoxGeometry(ancho, alto, largo), material)
     m.position.set(x, y, z)
     m.castShadow = true
+    m.customDepthMaterial = profundidad
     return m
   }
   const avion = new Group()
