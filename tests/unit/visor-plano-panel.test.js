@@ -253,8 +253,44 @@ describe('el panel del visor del plano de la época', () => {
     visor.abrir()
     await cuadros()
     expect(parte('aviso').textContent).toBe('No se pudo abrir el plano de 1936. Ciérralo y prueba de nuevo.')
-    expect(aviso).toHaveBeenCalledTimes(2)
+    expect(aviso).toHaveBeenCalledTimes(4) // el índice que no llegó (las dos veces: se vuelve a pedir) y las dos aperturas fallidas
     aviso.mockRestore()
+  })
+
+  test('un índice que falló no queda guardado: al abrir de nuevo se vuelve a pedir', async () => {
+    const aviso = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const indice = vi.fn().mockRejectedValueOnce(new Error('sin red')).mockResolvedValue(INDICE)
+    const visor = crearVisor({ indice })
+    visor.elegir(EPOCA)
+    visor.abrir()
+    await cuadros()
+    expect(parte('aviso').textContent).toContain('No se pudo abrir el plano de 1772')
+    visor.cerrar()
+    visor.abrir()
+    await cuadros()
+    expect(indice).toHaveBeenCalledTimes(2)
+    expect(img().src).toBe('plano/1772/medio.webp')
+    expect(parte('aviso').textContent).toBe('')
+    // y el que llegó sí se guarda
+    visor.cerrar()
+    visor.abrir()
+    await cuadros()
+    expect(indice).toHaveBeenCalledTimes(2)
+    aviso.mockRestore()
+  })
+
+  test('si la época cambia mientras el plano se abre (el ▶ sigue andando), la imagen es la del crédito que se ve', async () => {
+    let llego
+    const indice = [...INDICE, { año: 1843, niveles: [{ url: 'plano/1843/chico.webp', lado: 2048 }] }]
+    const visor = crearVisor({ indice: () => new Promise((ok) => { llego = () => ok(indice) }) })
+    visor.elegir(EPOCA)
+    visor.abrir()
+    visor.elegir({ año: 1843, titulo: 'Plano de Jesurún' })
+    llego()
+    await cuadros()
+    expect(dialogo().buscar((h) => h.etiqueta === 'h2').textContent).toBe('Exato mapa')
+    expect(imagenes).toEqual(['plano/1772/chico.webp', 'plano/1772/medio.webp'])
+    expect(visor.boton.textContent).toBe('Ver el plano de 1843') // el botón ya nombra la que sigue
   })
 
   test('si falla solo la imagen mejor, queda la chica a la vista', async () => {

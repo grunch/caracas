@@ -126,7 +126,7 @@ export function crearVisorDePlano({ contenedor, indice, base, añoBase, liviano 
     addEventListener('resize', () => { if (dialogo.open) poner(estado) })
   }
 
-  function rotular() {
+  function rotular(epoca) {
     const c = creditoDe(epoca)
     partes.titulo.textContent = c.titulo
     partes.autor.textContent = `${c.autor} · ${c.año}`
@@ -142,7 +142,8 @@ export function crearVisorDePlano({ contenedor, indice, base, añoBase, liviano 
     i.src = url
   })
 
-  async function mostrar() {
+  /** La imagen de la época con que se abrió (la elegida puede cambiar mientras tanto: el ▶ sigue andando). */
+  async function mostrar(epoca) {
     const mio = ++pedido
     const vigente = () => mio === pedido && dialogo.open
     const { img, aviso, nota } = partes
@@ -150,9 +151,10 @@ export function crearVisorDePlano({ contenedor, indice, base, añoBase, liviano 
     nota.textContent = ''
     aviso.textContent = `Abriendo el plano de ${epoca.año}…`
     try {
-      planos ??= await indice().catch(() => []) // sin índice solo se puede ver la hoja base
+      // sin índice solo se puede ver la hoja base; si falló no se guarda: la próxima apertura lo vuelve a pedir
+      const lista = planos ?? await indice().then((p) => (planos = p)).catch((e) => { console.warn(`visor del plano: sin índice (${e.message})`); return [] })
       if (!vigente()) return
-      const que = imagenesDelPlano(epoca.año, planos, { base, añoBase, liviano })
+      const que = imagenesDelPlano(epoca.año, lista, { base, añoBase, liviano })
       if (!que) throw new Error(`no hay plano de ${epoca.año}`)
       nota.textContent = que.calzado
         ? `Aquí está calzado sobre la hoja de ${añoBase} (estirado para coincidir con ella); el original, sin tocar, está en la fuente.`
@@ -179,11 +181,12 @@ export function crearVisorDePlano({ contenedor, indice, base, añoBase, liviano 
   function abrir() {
     if (!epoca || dialogo?.open) return
     if (!dialogo) armar()
-    rotular()
+    const abierta = epoca // el crédito y la imagen, de la misma época
+    rotular(abierta)
     dialogo.showModal()
     boton.setAttribute('aria-expanded', 'true')
     partes.lienzo.focus()
-    mostrar()
+    mostrar(abierta)
   }
   function cerrar() { if (dialogo?.open) dialogo.close() }
 
