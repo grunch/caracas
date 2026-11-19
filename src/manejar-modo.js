@@ -1,10 +1,10 @@
 /**
  * El modo manejar (T62): el vehículo de la época por las calles, sin atravesar las casas (las mismas huellas que a
  * pie, src/a-pie.js). La cuenta está en src/manejar.js. Teclas: W/S o ↑/↓ acelera y frena, A/D o ←/→ gira, V
- * cambia la vista (afuera o cabina), B toca la bocina, M prende o apaga el sonido, N cambia de vehículo, Q y E
+ * cambia la vista (afuera o cabina), B toca la bocina, O prende o apaga el sonido (la M es de los nombres del mapa), N cambia de vehículo, Q y E
  * cambian el año (y con él el vehículo), Esc vuelve al mapa. El sonido se sintetiza con WebAudio: sin archivos.
  */
-import { BoxGeometry, CylinderGeometry, Group, Mesh, MeshLambertMaterial } from 'three'
+import { BoxGeometry, CylinderGeometry, Group, Mesh, MeshLambertMaterial, ShaderMaterial } from 'three'
 import { choca, joystick, puntoDeEntrada, rejillaDeCasas, teclaAjena } from './a-pie.js'
 import { camaraDeCoche, entradaDeManejo, otroVehiculo, pasoEnCoche, sonidoDe, vehiculoDeEpoca } from './manejar.js'
 
@@ -19,6 +19,11 @@ const MATERIALES = {
   papel: new MeshLambertMaterial({ color: 0xe9dcc0 }),
   animal: new MeshLambertMaterial({ color: 0x7a5a3e }),
 }
+// desde el sol, en el mapa de sombras propio (src/acabado.js): solo la profundidad de cada pieza (como la avioneta)
+const PROFUNDIDAD = new ShaderMaterial({
+  vertexShader: 'void main() { gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+  fragmentShader: 'void main() { gl_FragColor = vec4(1.0); }',
+})
 
 /** Un vehículo procedural de la flota: caja, ruedas y, si es de tiro, el animal adelante. Mira hacia −z. */
 export function crearVehiculo(v) {
@@ -27,6 +32,7 @@ export function crearVehiculo(v) {
     const p = new Mesh(new BoxGeometry(a, al, l), m)
     p.position.set(x, y, z)
     p.castShadow = true
+    p.customDepthMaterial = PROFUNDIDAD
     g.add(p)
   }
   const rueda = (x, z, r) => {
@@ -34,6 +40,7 @@ export function crearVehiculo(v) {
     p.rotation.z = Math.PI / 2
     p.position.set(x, r, z)
     p.castShadow = true
+    p.customDepthMaterial = PROFUNDIDAD
     g.add(p)
   }
   const { largo, ancho } = v
@@ -176,7 +183,7 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
     if (e.code in AÑO) { propia(); if (!e.repeat) cambiarEpoca(AÑO[e.code]); return }
     if (e.code === 'KeyV') { propia(); if (!e.repeat) vista = vista === 'afuera' ? 'cabina' : 'afuera'; pedirCuadro(3); return }
     if (e.code === 'KeyB') { propia(); if (!e.repeat) sonido.bocina(vehiculo); return }
-    if (e.code === 'KeyM') { propia(); if (!e.repeat) sonido.alternar(); return }
+    if (e.code === 'KeyO') { propia(); if (!e.repeat) sonido.alternar(); return }
     if (e.code === 'KeyN') { propia(); if (!e.repeat) ponerVehiculo(otroVehiculo(vehiculo.id, epoca())); return }
     if (!TECLAS.has(e.code)) return
     propia()

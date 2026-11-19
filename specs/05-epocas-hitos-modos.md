@@ -336,7 +336,7 @@ Botones Caminar / Volar / Manejar (+ "Más rápido"). Se entra desde la vista ac
   - **Geometría**: procedural, con sombra; los de tiro llevan su animal.
   - **Física**: acelera y frena, va marcha atrás más despacio, gira en proporción a lo que avanza y se detiene contra las casas (las mismas huellas que a pie).
   - **Vistas**: de afuera, 12 m detrás, o desde el pescante (V).
-  - **Sonido** (WebAudio, sin archivos): motor sawtooth con lowpass que sube con la velocidad; cascos de ruido filtrado al ritmo del paso; bocina de cuatro tonos del Ford T (square), de dos del V8 (sawtooth) o un relincho. M prende o apaga el sonido.
+  - **Sonido** (WebAudio, sin archivos): motor sawtooth con lowpass que sube con la velocidad; cascos de ruido filtrado al ritmo del paso; bocina de cuatro tonos del Ford T (square), de dos del V8 (sawtooth) o un relincho. O prende o apaga el sonido (la M sigue siendo la de los nombres del mapa).
   - **Otras teclas**: N cambia a otro vehículo de la época; Q y E cambian el año y, con él, el vehículo.
   - **Cartel**: «Ford T · 25 km/h».
 - Minimapa en canvas con `suelo/crece/despeje` en baja resolución.

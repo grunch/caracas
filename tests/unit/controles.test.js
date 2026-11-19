@@ -181,6 +181,6 @@ describe('EN_AVION', () => {
 describe('EN_COCHE', () => {
   it('cuenta cómo se sube, se maneja, la vista, la bocina, el sonido, otro coche, el año y cómo se baja', () => {
     const texto = EN_COCHE.map((f) => `${f.como} ${f.que}`).join(' ')
-    for (const parte of ['Manejar', 'acelera', 'V', 'B', 'M', 'N', 'Q y E', 'Esc']) expect(texto).toContain(parte)
+    for (const parte of ['Manejar', 'acelera', 'V', 'B · O · N', 'Q y E', 'Esc']) expect(texto).toContain(parte)
   })
 })

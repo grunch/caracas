@@ -2,6 +2,8 @@ import { describe, test, expect } from 'vitest'
 import { PerspectiveCamera, Scene } from 'three'
 import { crearModoManejar, crearVehiculo, crearSonido } from '../../src/manejar-modo.js'
 import { VEHICULOS } from '../../src/manejar.js'
+import { repartoDeSombra } from '../../src/acabado.js'
+import { ACCIONES } from '../../src/controles.js'
 
 /** Un AudioContext de mentira: anota qué se crea y qué se toca. */
 function contextoFalso() {
@@ -31,19 +33,20 @@ function armar(epocaInicial = 4) {
   const pausas = []
   const camera = new PerspectiveCamera(35, 1, 5, 60000)
   const escena = new Scene()
+  const sonido = crearSonido(() => ctx)
   const modo = crearModoManejar({
     camera, escena, ventana: { addEventListener: (t, f) => { oyentes[t] = f } }, lienzo: { addEventListener: (t, f) => { oyentes[`lienzo:${t}`] = f } },
     cam: { now: { x: 5, z: 25, dist: 300, yaw: 0 }, pausar: (v) => pausas.push(v) },
     coords: { aMundo: (px, py) => ({ x: px, z: py }) }, suelo: () => 0, casas: () => datos, epoca: () => epoca,
     pedirCuadro: () => {}, cambiarEpoca: (d) => años.push(d), alCambiar: (dentro, v) => cambios.push([dentro, v?.id ?? null]),
-    sonido: crearSonido(() => ctx),
+    sonido,
   })
   const tecla = (tipo, code, target = null) => {
     const e = { code, target, repeat: false, prevenido: false, cortado: false, preventDefault() { this.prevenido = true }, stopImmediatePropagation() { this.cortado = true } }
     oyentes[tipo](e)
     return e
   }
-  return { modo, camera, escena, ctx, cambios, años, pausas, tecla, ponerEpoca: (e) => { epoca = e } }
+  return { modo, camera, escena, ctx, sonido, cambios, años, pausas, tecla, ponerEpoca: (e) => { epoca = e } }
 }
 
 describe('crearVehiculo', () => {
@@ -52,6 +55,14 @@ describe('crearVehiculo', () => {
       const g = crearVehiculo(v)
       expect(g.children.length, v.id).toBeGreaterThanOrEqual(4)
       expect(g.children.every((p) => p.castShadow)).toBe(true)
+    }
+  })
+
+  test('tira sombra en el mapa de sombras propio (src/acabado.js): cada pieza con su customDepthMaterial', () => {
+    for (const v of VEHICULOS) {
+      const g = crearVehiculo(v)
+      expect(g.children.every((p) => p.customDepthMaterial), v.id).toBe(true)
+      expect(repartoDeSombra([g]).tiran.length, v.id).toBe(g.children.length)
     }
   })
 })
@@ -77,8 +88,8 @@ describe('crearModoManejar', () => {
     expect(modo.estado.velocidad).toBe(0)
   })
 
-  test('V cambia a la cabina (el vehículo no se ve); N cambia de vehículo; B toca la bocina; M apaga el sonido', () => {
-    const { modo, tecla, ctx, cambios } = armar(4)
+  test('V cambia a la cabina (el vehículo no se ve); N cambia de vehículo; B toca la bocina; O apaga el sonido', () => {
+    const { modo, tecla, ctx, cambios, sonido } = armar(4)
     modo.entrar()
     tecla('keydown', 'KeyV')
     expect(modo.vista).toBe('cabina')
@@ -87,8 +98,16 @@ describe('crearModoManejar', () => {
     expect(cambios.at(-1)).toEqual([true, 'carreta'])
     tecla('keydown', 'KeyB')
     expect(ctx.anotado.some((a) => a.startsWith('start:osc'))).toBe(true)
-    const e = tecla('keydown', 'KeyM')
-    expect(e.cortado).toBe(true) // la M no llega a «Nombres» del mapa
+    expect(tecla('keydown', 'KeyO').cortado).toBe(true)
+    expect(sonido.prendido).toBe(false)
+  })
+
+  test('los atajos del mapa con letra (C, H, M, P) no son del modo: siguen andando (src/controles.js)', () => {
+    const { modo, tecla } = armar(4)
+    modo.entrar()
+    for (const a of ACCIONES.filter((x) => x.codigo?.startsWith('Key'))) {
+      expect(tecla('keydown', a.codigo), a.codigo).toMatchObject({ prevenido: false, cortado: false })
+    }
   })
 
   test('Q y E cambian el año; al cambiar la época, cambia al vehículo de ese año', () => {

@@ -66,7 +66,7 @@ export const EN_COCHE = Object.freeze([
   { como: '«Manejar»', que: 'sube al vehículo de la época: carreta de bueyes, coche de caballos, Ford T o Ford V8' },
   { como: 'W y S, o ↑ y ↓', que: 'acelera, y frena o va marcha atrás; A y D, o ← y →, giran' },
   { como: 'V', que: 'cambia la vista: de afuera o desde el pescante' },
-  { como: 'B · M · N', que: 'la bocina (o el relincho) · el sonido · otro vehículo de la época' },
+  { como: 'B · O · N', que: 'la bocina (o el relincho) · el sonido · otro vehículo de la época' },
   { como: 'Q y E', que: 'cambian el año, y con él el vehículo' },
   { como: 'Esc o «Volver al mapa»', que: 'se baja y vuelve a la vista de antes' },
 ].map(Object.freeze))
