@@ -33,7 +33,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from alas import CRUJIA_M, PATIO, SOLAR, alas_de_casa, frentes_de_manzana  # noqa: E402
 from cuadra import alas_modelo, casa_modelo, crujia_de_cuadra, es_de_solo_casas  # noqa: E402
 from calles_nuevas import grupos_de_manzanas  # noqa: E402
-from lados import cuadras_pegadas, lotes_por_lados  # noqa: E402
+from lados import cortar_por_calles, cuadras_pegadas, lotes_por_lados  # noqa: E402
 from lotes import (  # noqa: E402
     casas_de_esquina, direccion_de_manzana, esquinas_de_manzana, fundir_chicos, lotes_de_manzana, sin_pelos,
 )
@@ -219,16 +219,36 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
 CIERRE_DE_JUNTA_M = 6.0   # la cuadra de antes de una calle nueva se cierra con esto (las puntas de la calle)
 
 
-def _cuadras_de(manzana, metro, cuadra_modelo):
-    """Las cuadras de una manzana de 1936: [(máscara, (x, y))]. Una sola, salvo si la manzana no se deja
-    repartir por lados y son varias cuadras pegadas en el plano (tools/geo/lados.py): entonces cada una va
-    por su cuenta y decide sola si va con la cuadra modelo (una manzana con un convento puede no serlo
-    entera y tener cuadras de casas)."""
-    if cuadra_modelo and lotes_por_lados(manzana, metro, 0) is None:
-        piezas = cuadras_pegadas(manzana, metro)
-        if piezas:
-            return piezas
-    return [(manzana, (0, 0))]
+ANCHO_DE_CORTE_M = 4.0    # lo que se lleva de la manzana la calle de hoy que la corta (más angosta que la calle)
+
+
+def mascara_de_calles(elementos, forma, metro):
+    """Las calles de hoy (OpenStreetMap, tools/geo/hoy_osm.py: capa "calle") como líneas de ANCHO_DE_CORTE_M en
+    una máscara de la forma del mosaico."""
+    mascara = np.zeros(forma, np.uint8)
+    grosor = max(1, int(round(ANCHO_DE_CORTE_M / metro)))
+    for el in elementos:
+        if el['capa'] != 'calle' or el['area']:
+            continue
+        for linea in el['lineas']:
+            cv2.polylines(mascara, [np.round(np.asarray(linea) * 16).astype(np.int32)], False, 1, grosor, cv2.LINE_8, shift=4)
+    return mascara > 0
+
+
+def _cuadras_de(manzana, metro, cuadra_modelo, calles_hoy=None, libre=None):
+    """Las cuadras de una manzana de 1936: [(máscara, (x, y))]. Se corta por las calles de hoy donde el plano
+    pintó la calle de jardín o de patio (`calles_hoy`, `libre`: lo que no es casa ni edificio público; aunque
+    la manzana unida sea un rectángulo que se deja repartir) y, lo que no se deja repartir por lados, se
+    separa en las cuadras pegadas por un puente fino (tools/geo/lados.py). Cada cuadra decide sola si va con la cuadra modelo (una manzana con un convento
+    puede no serlo entera y tener cuadras de casas)."""
+    if not cuadra_modelo:
+        return [(manzana, (0, 0))]
+    cortadas = cortar_por_calles(manzana, calles_hoy, libre, metro) if calles_hoy is not None else None
+    salida = []
+    for pieza, (x, y) in cortadas or [(manzana, (0, 0))]:
+        pegadas = cuadras_pegadas(pieza, metro) if lotes_por_lados(pieza, metro, 0) is None else None
+        salida += [(p, (x + px, y + py)) for p, (px, py) in pegadas] if pegadas else [(pieza, (x, y))]
+    return salida
 
 
 def _cuadra_de_antes(cuadras, cajas, grupo, metro):
@@ -274,7 +294,7 @@ def _contornos_de(grupo):
     return [[round(float(v), 1) for x, y in c[:, 0, :] for v in (x + x0 + 0.5, y + y0 + 0.5)] for c in contornos if len(c) >= 3]
 
 
-def vectorizar(clases, metro, plaza, cuadra_modelo=True, calles_nuevas=None):
+def vectorizar(clases, metro, plaza, cuadra_modelo=True, calles_nuevas=None, calles_hoy=None):
     """La ciudad de la imagen de clases. Sin `cuadra_modelo`, todas las manzanas con lo edificado del plano.
 
     Cada manzana se arma cuadra por cuadra (_cuadras_de). `calles_nuevas` (máscara, tools/geo/calles_nuevas.py):
@@ -302,7 +322,8 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, calles_nuevas=None):
         x, y, w, h = stats[k, :4]
         manzana = cuadras[y:y + h, x:x + w] == k
         salida['manzanas'] += int((manzana & (clases[y:y + h, x:x + w] == CLASE['edificado'])).sum() >= area_min_px)
-        partes = _cuadras_de(manzana, metro, cuadra_modelo)
+        libre = ~np.isin(clases[y:y + h, x:x + w], (CLASE['edificado'], CLASE['publico']))
+        partes = _cuadras_de(manzana, metro, cuadra_modelo, None if calles_hoy is None else calles_hoy[y:y + h, x:x + w], libre)
         for parte, (dx, dy) in partes:
             etiqueta = k if len(partes) == 1 else n + len(cajas)
             ph, pw = parte.shape
@@ -353,6 +374,7 @@ def main():
     ap.add_argument('--escala', type=float, required=True, help='metros por píxel')
     ap.add_argument('--plaza', required=True, help='px,py de la Plaza Bolívar')
     ap.add_argument('--patios', help='PNG donde dejar la máscara de los patios abiertos por regla')
+    ap.add_argument('--osm', help='calles de hoy de OpenStreetMap (tools/geo/hoy_osm.py): cortan las manzanas que el plano une por un jardín')
     ap.add_argument('--calles-nuevas', help='PNG de lo abierto en 1936 que el plano de 1772 no tiene (tools/geo/calles_nuevas.py)')
     a = ap.parse_args()
     clases = cv2.imread(a.clases, cv2.IMREAD_UNCHANGED)
@@ -365,7 +387,13 @@ def main():
         if leida is None or leida.shape != clases.shape:
             raise SystemExit(f'{a.calles_nuevas}: se esperaba una máscara de la forma de las clases')
         nuevas = leida > 0
-    res = vectorizar(clases, a.escala, plaza, calles_nuevas=nuevas)
+    calles_hoy = None
+    if a.osm:
+        import geo1936
+        import hoy_osm
+        calles_hoy = mascara_de_calles(hoy_osm.elementos(json.loads(Path(a.osm).read_text(encoding='utf-8')), geo1936.cargar()),
+                                       clases.shape, a.escala)
+    res = vectorizar(clases, a.escala, plaza, calles_nuevas=nuevas, calles_hoy=calles_hoy)
     with open(a.salida, 'w') as f:
         json.dump(res, f)
     if a.patios and not cv2.imwrite(a.patios, mascara_de_patios(res, clases.shape)):
