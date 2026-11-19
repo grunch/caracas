@@ -62,6 +62,17 @@ describe('pasoEnCoche', () => {
     expect(e.velocidad).toBe(0)
     expect(e.z).toBe(0)
   })
+
+  test('un paso largo (1 s con render por software) no atraviesa una casa aunque el destino esté libre', () => {
+    // Arrange: el Ford V8 a 20 m/s; una casa entre z = −5 y z = −10, el destino (z = −20) libre
+    const v8 = VEHICULOS.find((v) => v.id === 'ford-v8')
+    const casa = { choca: (x, z) => z < -5 && z > -10 }
+    // Act
+    const e = pasoEnCoche({ ...quieto, velocidad: 20 }, { acelera: 1, girar: 0 }, 1, v8, casa)
+    // Assert: se detiene antes de la casa
+    expect(e.velocidad).toBe(0)
+    expect(e.z).toBeGreaterThanOrEqual(-5)
+  })
 })
 
 describe('entradaDeManejo', () => {

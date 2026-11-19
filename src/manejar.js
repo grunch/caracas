@@ -18,6 +18,7 @@ const ROCE = 1.2 // m/s² que pierde sin acelerar
 const FRENO = 4 // m/s² al frenar con S
 const ATRAS = 0.4 // de la máxima, marcha atrás
 const GIRO = 0.12 // rad por metro recorrido, a fondo
+const TRAMO_M = 0.5 // de a cuánto se mira el camino: menos que la casa más angosta (src/animar.js deja pasos de 1 s)
 const IZQUIERDA = new Set(['KeyA', 'ArrowLeft'])
 const DERECHA = new Set(['KeyD', 'ArrowRight'])
 const ACELERA = new Set(['KeyW', 'ArrowUp'])
@@ -40,7 +41,8 @@ const acotar = (v, a, b) => Math.min(b, Math.max(a, v))
 
 /**
  * Un cuadro: `entrada` { acelera (−1…1: S frena y luego retrocede), girar (−1…1) } durante `dt` s con el
- * vehículo `v`. Gira en proporción a lo que avanza (quieto no gira). Si el paso choca, se detiene.
+ * vehículo `v`. Gira en proporción a lo que avanza (quieto no gira). El camino se mira de a TRAMO_M, no solo el
+ * destino: si choca en el camino, se detiene en el último tramo libre (un paso largo no atraviesa una casa).
  */
 export function pasoEnCoche(coche, { acelera = 0, girar = 0 }, dt, v, { choca }) {
   let velocidad = coche.velocidad
@@ -50,10 +52,15 @@ export function pasoEnCoche(coche, { acelera = 0, girar = 0 }, dt, v, { choca })
   velocidad = acotar(velocidad, -v.maxima * ATRAS, v.maxima)
   const avance = velocidad * dt
   const rumbo = coche.rumbo + girar * GIRO * avance
-  const x = coche.x + Math.sin(rumbo) * avance
-  const z = coche.z - Math.cos(rumbo) * avance
-  if (avance !== 0 && choca(x, z)) return { ...coche, velocidad: 0 }
-  return { ...coche, x, z, rumbo, velocidad }
+  const tramos = Math.ceil(Math.abs(avance) / TRAMO_M)
+  let libre = { x: coche.x, z: coche.z }
+  for (let k = 1; k <= tramos; k++) {
+    const d = (avance * k) / tramos
+    const punto = { x: coche.x + Math.sin(rumbo) * d, z: coche.z - Math.cos(rumbo) * d }
+    if (choca(punto.x, punto.z)) return { ...coche, ...libre, rumbo: k > 1 ? rumbo : coche.rumbo, velocidad: 0 }
+    libre = punto
+  }
+  return { ...coche, ...libre, rumbo, velocidad }
 }
 
 /** Las teclas → { acelera, girar }: W/↑ acelera, S/↓ frena o retrocede, A/D o ←/→ giran. */
