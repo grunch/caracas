@@ -22,7 +22,7 @@ export const CAMPOS_ALA = 5
 const COLONIAL = 0, ORILLAS = 7
 const MARGEN_M = 40 // cuánto se estiran hacia afuera las alas del borde del lote
 const TAPIA_M = 2.6
-const TAPIA_SOLAR_M = 1.2 // entre los solares del fondo, una cerca baja: el centro de la cuadra se ve abierto
+const TAPIA_SOLAR_M = 0 // entre los solares del fondo no hay cerca: el centro de la cuadra es un solo suelo abierto
 const ALTO_MINIMO_ALA_M = 2.3 // bajo el alero de un ala hay un corredor
 const BAJA_EL_INTERIOR_M = 0.5 // las alas de adentro arrancan más abajo que la crujía de la calle
 const SUBIDA_CRUJIA_M = 2.8
