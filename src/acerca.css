@@ -12,6 +12,8 @@
 #intro h2,#acerca h2{margin:0;font-size:32px;font-weight:500;letter-spacing:.02em;line-height:1.12;font-variant-numeric:lining-nums;outline:0;text-wrap:balance}
 #intro .bajada,#acerca .bajada{margin:7px 0 0;font-size:16.5px;font-style:italic;line-height:1.4;opacity:.86;text-wrap:pretty}
 #intro :focus-visible,#acerca :focus-visible{outline:2px solid currentColor;outline-offset:2px}
+/* los títulos reciben el foco al abrir o al ir a una sección (para el lector de pantalla): sin marco */
+#acerca h2:focus-visible,#acerca h3:focus-visible{outline:0}
 #intro a,#acerca a{color:#8a2a1a;text-underline-offset:2px}
 
 /* --- la bienvenida --- */
