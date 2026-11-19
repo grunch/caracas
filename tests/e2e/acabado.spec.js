@@ -124,3 +124,30 @@ test('con ?sombras=0&contorno=0&grano=0 no hay ni mapa ni pasada: el render de s
   expect(await dibujarYRevisar(page)).toMatchObject({ error: 0, rotos: 0 })
   expect(errores).toEqual([])
 })
+
+test('cada techo deja el id de su casa en el alfa del cuadro (de ahí el contorno sabe qué es un mismo tejado); el piso, cero', async ({ page }) => {
+  const errores = await abrir(page)
+  const alfa = await page.evaluate(() => {
+    const { renderer, acabado, cam, ciudad } = window.lab
+    window.lab.levantar(true)
+    ciudad.U.uOla.value = 1e5 // la ciudad en pie de una vez, sin esperar la ola
+    cam.jump({ x: 0, z: 0, dist: 900, yaw: 0.3, pitch: 0.9 })
+    acabado.dibujar()
+    const { width, height } = acabado.destino
+    const px = new Uint8Array(width * height * 4)
+    renderer.readRenderTargetPixels(acabado.destino, 0, 0, width, height, px)
+    const cuenta = { piso: 0, techo: 0, otro: 0, ids: new Set() }
+    for (let i = 3; i < px.length; i += 4) {
+      if (px[i] === 0) cuenta.piso++
+      else if (px[i] === 255) cuenta.otro++
+      else { cuenta.techo++; cuenta.ids.add(px[i]) }
+    }
+    return { piso: cuenta.piso, techo: cuenta.techo, ids: cuenta.ids.size, maximo: Math.max(...cuenta.ids), total: width * height }
+  })
+  expect(alfa.piso).toBeGreaterThan(0.02 * alfa.total) // las calles, los patios, las paredes
+  expect(alfa.techo).toBeGreaterThan(0.02 * alfa.total) // los tejados
+  expect(alfa.ids).toBeGreaterThan(10) // un id por casa (1…253)
+  expect(alfa.maximo).toBeLessThanOrEqual(253)
+  expect(await dibujarYRevisar(page)).toMatchObject({ error: 0, rotos: 0 })
+  expect(errores).toEqual([])
+})

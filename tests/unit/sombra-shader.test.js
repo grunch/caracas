@@ -4,8 +4,8 @@ import { crearMaterialCiudad, crearMaterialSombraCiudad } from '../../src/materi
 import { crearArboles } from '../../src/arboles.js'
 import { crearHitos } from '../../src/hitos.js'
 import { crearCoords } from '../../src/coords.js'
-import { GLSL_SOMBRA, uniformsDeLuz, UNIFORMS_DE_LUZ } from '../../src/shader/sombra.js'
-import { VERTICE_ACABADO, FRAGMENTO_ACABADO, CONTORNO } from '../../src/shader/acabado.js'
+import { GLSL_SOMBRA, RAYADO, uniformsDeLuz, UNIFORMS_DE_LUZ } from '../../src/shader/sombra.js'
+import { VERTICE_ACABADO, FRAGMENTO_ACABADO, CONTORNO, idDeTecho, GLSL_ID_DE_TECHO, fuerzaDeContorno } from '../../src/shader/acabado.js'
 import { vectorSol } from '../../src/luz.js'
 
 const PLANO = { ancho: 18600, alto: 14800, metro: 0.5, plaza: [8968.2, 6839] }
@@ -74,8 +74,29 @@ describe('la sombra arrojada en el shader', () => {
 
   test('en tinta la sombra es un rayado en la pantalla, a la escala de los píxeles de CSS, y de lejos su tono medio', () => {
     const cuerpo = GLSL_SOMBRA.slice(GLSL_SOMBRA.indexOf('float rayadoSombra'))
-    expect(cuerpo).toMatch(/gl_FragCoord\.x - gl_FragCoord\.y\) \/ \(6\.0 \* px\)/)
-    expect(cuerpo).toMatch(/return mix\(linea, carga, smoothstep\([\d.]+, [\d.]+, metrosPorPixel\)\);/)
+    expect(cuerpo).toContain(`float paso = mix(${RAYADO.paso.toFixed(1)}, ${RAYADO.pasoEnPiso.toFixed(1)}, piso) * px;`)
+    expect(cuerpo).toContain('(gl_FragCoord.x - gl_FragCoord.y) / paso')
+    expect(cuerpo).toMatch(/return mix\(linea, carga, smoothstep\([\d.]+, [\d.]+, metrosPorPixel\)\) \* mix\(/)
+  })
+
+  test('en el piso la sombra es la del grabado: rayas gruesas y casi negras, con un filo de papel entre una y otra', () => {
+    // más tinta que papel, y bastante más que en las paredes y los techos
+    expect(RAYADO.cargaEnPiso).toBeGreaterThanOrEqual(0.75)
+    expect(RAYADO.cargaEnPiso).toBeGreaterThan(RAYADO.carga + 0.1)
+    expect(RAYADO.tintaEnPiso).toBeGreaterThanOrEqual(0.95)
+    expect(RAYADO.tintaEnPiso).toBeGreaterThan(RAYADO.tinta)
+    // la raya se ve como raya: de una a otra hay paso / √2 píxeles, y el papel que queda mide más de un píxel y medio
+    const entreRayas = RAYADO.pasoEnPiso / Math.SQRT2
+    expect(entreRayas).toBeGreaterThanOrEqual(8)
+    expect(entreRayas * (1 - RAYADO.cargaEnPiso)).toBeGreaterThan(1.5)
+    // y el plano de abajo se sigue leyendo por ese filo: no es una mancha negra
+    expect(RAYADO.cargaEnPiso).toBeLessThanOrEqual(0.85)
+  })
+
+  test('el filo de la raya es de un píxel: nítida, no un degradé', () => {
+    const cuerpo = GLSL_SOMBRA.slice(GLSL_SOMBRA.indexOf('float rayadoSombra'))
+    expect(cuerpo).toContain('float filo = 1.4 / paso;')
+    expect(cuerpo).toContain('smoothstep(carga - filo, carga + filo, a)')
   })
 })
 
@@ -93,7 +114,26 @@ describe('la ciudad recibe la sombra', () => {
   test('la sombra propia (la cara de espaldas al sol) se raya más liviana que la arrojada', () => {
     const { fragmentShader } = compilar()
     expect(fragmentShader).toContain('float propia = step(dot(nMundo, uSol), 0.0);')
-    expect(fragmentShader).toMatch(/rayadoSombra\(\(1\.0 - sol\) \* mix\(1\.0, 0\.\d+, propia\), vMundo\)/)
+    expect(fragmentShader).toMatch(/rayadoSombra\(\(1\.0 - sol\) \* mix\(1\.0, 0\.\d+, propia\), vMundo, max\(piso, 0\.\d+ \* vTecho\)\)/)
+  })
+
+  test('el piso es la calle, el patio y el solar: ahí la sombra va gruesa; en los techos, a medio camino', () => {
+    const { fragmentShader } = compilar()
+    expect(fragmentShader).toContain('float piso = max(step(vInfo.w, 0.5), step(5.0 - 0.5, cubierta) * step(cubierta, 6.0 + 0.5));')
+    expect(fragmentShader).toContain('float cubierta = mod(vCubierta, 8.0);')
+  })
+
+  test('el color no cambia: la raya solo entra en la rama de tinta', () => {
+    const { fragmentShader } = compilar()
+    expect(fragmentShader).toContain('vec3 conRaya = mix(papelParejo, TINTA_SOMBRA, raya);')
+    expect(fragmentShader).toContain('vec3 conSol = (reflectedLight.indirectDiffuse + reflectedLight.directDiffuse * sol) * luzDeColor(sol);')
+    expect(fragmentShader).not.toMatch(/conSol[^;]*raya/)
+  })
+
+  test('cada techo deja el id de su casa en el alfa, después de escribir el color; el piso y las paredes, cero', () => {
+    const { fragmentShader } = compilar()
+    const alfa = fragmentShader.indexOf(`gl_FragColor.a = vTecho * (1.0 - piso) * ${GLSL_ID_DE_TECHO('vInfo.y')};`)
+    expect(alfa).toBeGreaterThan(fragmentShader.indexOf('#include <opaque_fragment>'))
   })
 
   test('la normal del mundo llega del vértice: la del terreno en el suelo, la de la cara en las casas', () => {
@@ -210,8 +250,21 @@ describe('el acabado: contorno, bruma y grano', () => {
   })
 
   test('lejos se afloja: el umbral sube y la línea se aclara', () => {
-    expect(FRAGMENTO_ACABADO).toMatch(/float lejos = smoothstep\([\d.]+, [\d.]+, z\);/)
-    expect(FRAGMENTO_ACABADO).toMatch(/return max\(silueta, entrante\) \* \(1\.0 - 0\.\d+ \* lejos\);/)
+    expect(FRAGMENTO_ACABADO).toMatch(/float lejos = smoothstep\(mix\([\d.]+, [\d.]+, uColor\), mix\([\d.]+, [\d.]+, uColor\), z\);/)
+    expect(FRAGMENTO_ACABADO).toMatch(/return max\(silueta, entrante\) \* \(1\.0 - mix\(0\.\d+, 0\.\d+, uColor\) \* lejos\) \* mix\(1\.0, 0\.\d+, techo\);/)
+    // en tinta, antes que en T35 (600 m a 5 km): el fondo de una vista oblicua no es una mancha de líneas
+    expect(CONTORNO.lejos.desde).toBeLessThanOrEqual(400)
+    expect(CONTORNO.lejos.hasta).toBeLessThan(CONTORNO.lejosEnColor.hasta)
+    // en color queda como en T35
+    expect(CONTORNO.lejosEnColor).toEqual({ desde: 600, hasta: 5000, claro: 0.75 })
+  })
+
+  test('dentro del tejado de una casa el umbral es otro: el id va en el alfa del píxel y de sus cuatro vecinos', () => {
+    expect(FRAGMENTO_ACABADO).toContain('float techo = mismoTecho(id, t) * (1.0 - uColor);')
+    expect(FRAGMENTO_ACABADO).toContain(`mix(${CONTORNO.desde.toFixed(2)}, ${CONTORNO.techoDesde.toFixed(2)}, techo) * sube`)
+    expect(FRAGMENTO_ACABADO).toContain('contorno(d, z, escena.a)')
+    // el alfa 0 (piso, pared) y el 1 (hitos, árboles, la mesa) no son techos
+    expect(FRAGMENTO_ACABADO).toContain('step(0.002, id) * step(id, 0.998)')
   })
 
   test('fuerte en tinta y tenue en color', () => {
@@ -223,9 +276,11 @@ describe('el acabado: contorno, bruma y grano', () => {
     expect(FRAGMENTO_ACABADO).toMatch(/mix\(c, BRUMA, uColor \* hayAlgo \* /)
   })
 
-  test('no desenfoca: el color se lee una sola vez, en su píxel', () => {
-    expect(FRAGMENTO_ACABADO.match(/texture2D\(tColor/g)).toHaveLength(1)
-    expect(FRAGMENTO_ACABADO).toContain('texture2D(tColor, vUv)')
+  test('no desenfoca: el color sale de su píxel; de los vecinos solo se lee el alfa (el id del techo)', () => {
+    expect(FRAGMENTO_ACABADO.match(/texture2D\(tColor, vUv\)/g)).toHaveLength(1)
+    expect(FRAGMENTO_ACABADO.match(/texture2D\(tColor, vUv [+-] [^)]*\)\)\.a/g)).toHaveLength(4)
+    expect(FRAGMENTO_ACABADO.match(/texture2D\(tColor/g)).toHaveLength(5)
+    expect(FRAGMENTO_ACABADO).toContain('gl_FragColor = vec4(c, 1.0);')
   })
 
   test('el grano va al final, fijo en la pantalla, y cada cosa se puede apagar', () => {
@@ -237,5 +292,75 @@ describe('el acabado: contorno, bruma y grano', () => {
   test('el vértice es un triángulo que cubre la pantalla, sin cámara', () => {
     expect(VERTICE_ACABADO).toContain('gl_Position = vec4(position.xy, 0.0, 1.0);')
     expect(repetidas(FRAGMENTO_ACABADO)).toEqual([])
+  })
+})
+
+describe('el id del techo en el alfa', () => {
+  test('cabe exacto en 8 bits y nunca es 0 (piso o pared) ni 255 (lo que no es la ciudad)', () => {
+    for (const semilla of [0, 1, 252, 253, 254, 1000, 65535]) {
+      const byte = idDeTecho(semilla) * 255
+      expect(byte).toBeCloseTo(Math.round(byte), 9)
+      expect(Math.round(byte)).toBeGreaterThanOrEqual(1)
+      expect(Math.round(byte)).toBeLessThanOrEqual(253)
+    }
+  })
+
+  test('dos casas con semillas distintas casi nunca comparten id: las seguidas, nunca', () => {
+    for (let s = 0; s < 600; s++) expect(idDeTecho(s)).not.toBe(idDeTecho(s + 1))
+    const distintos = new Set(Array.from({ length: 65536 }, (_, s) => idDeTecho(s)))
+    expect(distintos.size).toBe(253)
+  })
+
+  test('el shader lo calcula igual', () => {
+    expect(GLSL_ID_DE_TECHO('vInfo.y')).toBe('((1.0 + mod(vInfo.y, 253.0)) / 255.0)')
+  })
+})
+
+describe('cuánta línea lleva un píxel (fuerzaDeContorno, el espejo del shader)', () => {
+  const cerca = 100
+
+  test('la silueta de una casa va entera; sobre un plano no hay línea', () => {
+    expect(fuerzaDeContorno({ adelante: 20, atras: 0, z: cerca })).toBe(1)
+    expect(fuerzaDeContorno({ adelante: 0, atras: 0, z: cerca })).toBe(0)
+  })
+
+  test('una cumbrera o una lima (un salto de 1 a 2) se marca entre dos casas, no dentro del tejado de una', () => {
+    for (const adelante of [1.2, 1.6, 2]) {
+      expect(fuerzaDeContorno({ adelante, atras: 0, z: cerca })).toBe(1)
+      expect(fuerzaDeContorno({ adelante, atras: 0, z: cerca, mismoTecho: true })).toBe(0)
+    }
+    // la limahoya (entrante) entre dos alas, tampoco
+    expect(fuerzaDeContorno({ adelante: 0, atras: 1.5, z: cerca })).toBeGreaterThan(0.9)
+    expect(fuerzaDeContorno({ adelante: 0, atras: 1.5, z: cerca, mismoTecho: true })).toBe(0)
+  })
+
+  test('un escalón de verdad dentro del mismo tejado sí se marca, con menos tinta que una silueta', () => {
+    const escalon = fuerzaDeContorno({ adelante: 12, atras: 0, z: cerca, mismoTecho: true })
+    expect(escalon).toBeCloseTo(CONTORNO.techoTinta, 9)
+    expect(escalon).toBeGreaterThan(0.4)
+    expect(escalon).toBeLessThan(fuerzaDeContorno({ adelante: 12, atras: 0, z: cerca }))
+  })
+
+  test('el eco de una silueta (un salto grande hacia atrás) no se dibuja', () => {
+    expect(fuerzaDeContorno({ adelante: 0, atras: 20, z: cerca })).toBe(0)
+  })
+
+  test('lejos la línea se aclara y pide más salto: al final queda un tercio de la silueta y las aristas se van', () => {
+    expect(fuerzaDeContorno({ adelante: 20, atras: 0, z: CONTORNO.lejos.hasta })).toBeCloseTo(1 - CONTORNO.lejos.claro, 9)
+    expect(fuerzaDeContorno({ adelante: 1.2, atras: 0, z: CONTORNO.lejos.hasta })).toBe(0)
+    const a = [150, 600, 1200, 4000].map((z) => fuerzaDeContorno({ adelante: 20, atras: 0, z }))
+    for (let i = 1; i < a.length; i++) expect(a[i]).toBeLessThan(a[i - 1] + 1e-12)
+    expect(a[0]).toBe(1)
+    expect(a[2]).toBeLessThan(0.95)
+  })
+
+  test('en color no cambia nada respecto de T35: ni el tejado de una casa se trata aparte ni se afloja antes', () => {
+    const cumbrera = { adelante: 1.6, atras: 0, z: cerca }
+    expect(fuerzaDeContorno({ ...cumbrera, mismoTecho: true, color: true })).toBe(fuerzaDeContorno({ ...cumbrera, color: true }))
+    expect(fuerzaDeContorno({ ...cumbrera, mismoTecho: true, color: true })).toBe(1)
+    // a 600 m, en tinta la línea ya se aclaró; en color todavía está entera
+    expect(fuerzaDeContorno({ adelante: 20, atras: 0, z: 600, color: true })).toBe(1)
+    expect(fuerzaDeContorno({ adelante: 20, atras: 0, z: 600 })).toBeLessThan(1)
+    expect(fuerzaDeContorno({ adelante: 20, atras: 0, z: 5000, color: true })).toBeCloseTo(0.25, 9)
   })
 })

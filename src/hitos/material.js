@@ -152,8 +152,10 @@ const FRAGMENTO = /* glsl */ `
     float raya = max(step(1.0 - 0.75 * oscuro, diag), 0.55 * sombra * step(0.72, otra));
     vec3 papel = uPapel * luz * 0.3183;
     // la sombra arrojada, rayada como en la ciudad (la propia ya tiene su raya fina)
-    float arrojada = rayadoSombra((1.0 - sol) * step(0.0, dot(N, uSol)), vMundo);
-    vec3 enTinta = mix(papel, TINTA_SOMBRA, clamp(max(max(raya, arrojada) * 0.85, trazo * 0.85), 0.0, 1.0));
+    // (gruesa y casi negra en los pisos: la plaza, los jardines, la tierra)
+    float piso = float(es(${glsl(MAT.JARDIN)}) || es(${glsl(MAT.TIERRA)}));
+    float arrojada = rayadoSombra((1.0 - sol) * step(0.0, dot(N, uSol)), vMundo, piso);
+    vec3 enTinta = mix(papel, TINTA_SOMBRA, clamp(max(max(raya * 0.85, arrojada), trazo * 0.85), 0.0, 1.0));
     if (esLuz) enTinta = papel;
 
     gl_FragColor = vec4(mix(enTinta, enColor, uColor), 1.0);
