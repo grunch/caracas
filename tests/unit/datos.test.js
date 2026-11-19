@@ -177,3 +177,25 @@ describe('publicosDelManifiesto', () => {
     expect(publicos).toEqual(['public/datos/crece.json', 'public/datos/ciudad.pak', 'public/datos/relieve.bin'])
   })
 })
+
+describe('pendientes: el orden de los pasos', () => {
+  test('falla si un paso lee lo que produce un paso declarado después (correría con datos viejos o sin ellos)', () => {
+    // Arrange: «calles» lee el calce, que se declara después
+    const desordenados = [
+      { id: 'costura', entradas: ['mosaico.tif'], salidas: ['clases.png'] },
+      { id: 'calles', entradas: ['clases.png', 'calzado.tif'], salidas: ['calles.png'] },
+      { id: 'calce', entradas: ['clases.png'], salidas: ['calzado.tif'] },
+    ]
+
+    // Act / Assert
+    expect(() => pendientes(desordenados, { 'mosaico.tif': 1 })).toThrow(/calles.*calzado\.tif.*calce/)
+  })
+
+  test('las entradas opcionales cuentan igual', () => {
+    const desordenados = [
+      { id: 'a', entradas: [], opcionales: ['b.bin'], salidas: ['a.json'] },
+      { id: 'b', entradas: [], salidas: ['b.bin'] },
+    ]
+    expect(() => pendientes(desordenados, {})).toThrow(/a.*b\.bin.*b/)
+  })
+})

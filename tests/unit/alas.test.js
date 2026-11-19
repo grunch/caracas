@@ -115,11 +115,11 @@ describe('planDeAlas: el tejado de una casa de patio', () => {
     expect(faldonEn(p, 2, 10).hueco).toBeFalsy()
   })
 
-  test('la tapia del solar es más baja que la del patio: los fondos casi no se ven desde arriba', () => {
+  test('el patio tiene su tapia; el solar, ninguna', () => {
     const huecos = p.faldones.filter((f) => f.hueco)
     const solar = huecos.find((f) => f.piso === CUBIERTA.SOLAR)
     const patio = huecos.find((f) => f.piso === CUBIERTA.PATIO)
-    expect(solar.borde).toBeLessThan(1.5)
+    expect(solar.borde).toBe(0)
     expect(patio.borde).toBeGreaterThan(2)
   })
 
@@ -256,11 +256,11 @@ describe('alzarCasa con un plan de alas', () => {
     for (const v of vertices.filter((q) => q.cubierta === CUBIERTA.TEJA)) expect(v.techo[2]).toBeLessThan(8)
   })
 
-  test('los patios tienen paredes con vanos; el solar que toca la medianera, una cerca baja', () => {
+  test('los patios tienen paredes con vanos; el solar no lleva cerca: el fondo de la cuadra es un solo suelo abierto', () => {
     const delPatio = vertices.filter((v) => v.cubierta === CUBIERTA.PARED && v.u > 4 - 1e-6 && v.u < 8 + 1e-6 && v.v > 18 - 1e-6 && v.v < 24 + 1e-6)
     expect(delPatio.filter((v) => v.pared[1] > 0).length).toBeGreaterThanOrEqual(16) // cuatro paredes
     const tapia = vertices.filter((v) => v.cubierta === CUBIERTA.PARED && Math.abs(v.v - 40) < 1e-6 && Math.abs(v.n[2]) > 0.9)
-    expect(Math.max(...tapia.map((v) => v.y))).toBeCloseTo(1.2, 9) // la cerca baja del solar (TAPIA_SOLAR_M)
+    expect(tapia).toEqual([]) // sin cerca entre solares: ni línea levantada ni su sombra
   })
 })
 

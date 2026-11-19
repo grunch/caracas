@@ -11,6 +11,7 @@ export function pendientes(pasos, tiempos, { forzar = false, desde = null, codig
   const desdeIdx = desde === null ? Infinity : pasos.findIndex((p) => p.id === desde)
   if (desdeIdx === -1) throw new Error(`datos: no existe el paso "${desde}"`)
   const producidas = new Set(pasos.flatMap((p) => p.salidas))
+  exigirOrden(pasos)
   for (const p of pasos) {
     for (const e of p.entradas) {
       if (!producidas.has(e) && !(e in tiempos)) throw new Error(`datos: falta la entrada de origen ${e} (paso ${p.id})`)
@@ -30,6 +31,17 @@ export function pendientes(pasos, tiempos, { forzar = false, desde = null, codig
     }
   })
   return correr
+}
+
+/** Falla si un paso lee (entrada u opcional) lo que produce un paso declarado después: se corren en orden. */
+function exigirOrden(pasos) {
+  const productor = new Map(pasos.flatMap((p, i) => p.salidas.map((s) => [s, i])))
+  pasos.forEach((p, i) => {
+    for (const e of [...p.entradas, ...(p.opcionales ?? [])]) {
+      const j = productor.get(e)
+      if (j > i) throw new Error(`datos: el paso ${p.id} lee ${e}, que produce ${pasos[j].id}, declarado después`)
+    }
+  })
 }
 
 /** Errores (texto) de los conteos fuera de su tolerancia relativa. */

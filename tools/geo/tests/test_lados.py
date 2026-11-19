@@ -145,3 +145,13 @@ def test_un_hueco_de_la_manzana_no_es_de_ningun_lote():
     # y sin el hueco el reparto es el de siempre
     sin, _ = lotes_por_lados(m, METRO, semilla=3)
     assert np.array_equal(np.where(con_hueco, sin, 0), etiquetas)
+
+
+def test_un_diente_chico_en_un_lado_no_lo_parte_en_dos():
+    m = rectangulo()
+    x0, x1, y0, y1 = lineas_de_borde(m)
+    con_diente = m.copy()
+    con_diente[(y0 + y1) // 2 - 4:(y0 + y1) // 2 + 4, x0 - 8:x0] = True   # 4 × 4 m pegados al lado oeste
+    etiquetas, lotes = lotes_por_lados(con_diente, METRO, semilla=3)
+    assert len({(round(l['eu'][0], 2), round(l['eu'][1], 2)) for l in lotes.values()}) == 4
+

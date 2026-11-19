@@ -376,3 +376,54 @@ def test_sin_techos_quita_los_techos_y_corre_los_marcos():
     i, n = nueva["techos"][1][:2]
     assert v[i:i + n].min(axis=0).tolist() == [40, 0]
     assert len(ciudad["techos"]) == 3   # el original queda como estaba
+
+
+# --- las calles nuevas: la cuadra de antes vive hasta que se abre la calle; las de después, desde entonces ---
+
+def test_una_calle_nueva_se_abre_en_la_primera_epoca_que_no_la_tiene_edificada():
+    juntas = [[[10, 10, 20, 10, 20, 30, 10, 30]], [[40, 0, 44, 0, 44, 8, 40, 8]]]
+    edificado = []
+    for cubre in ([True, True], [True, True], [False, True], [False, True]):   # 1772, 1843, 1889, 1919
+        m = np.zeros((40, 50), bool)
+        if cubre[0]:
+            m[5:35, 5:25] = True
+        if cubre[1]:
+            m[0:10, 38:48] = True
+        edificado.append(m)
+    assert ep.apertura_de_juntas(juntas, edificado, escala=1.0) == [3, ep.ULTIMA]
+
+
+def test_la_cuadra_de_antes_vive_hasta_que_se_abre_la_calle_y_las_de_despues_nacen_entonces():
+    # techos: 0 y 1 la cuadra de antes; 2 y 3 las dos de después; 4 una cuadra de antes que nace tarde
+    ciudad = ciudad_de([cuadrado(0, 0, 10)] * 5)
+    ciudad["cuadras"] = [0, 0, 1, 2, 3]
+    ciudad["junta"] = [0, 0, 0, 0, 1]
+    ciudad["antes"] = [1, 1, 0, 0, 1]
+    nace = np.array([1, 2, 1, 1, 4])
+    vida, quitar = ep.vida_de_1936(nace, ciudad, apertura=[3, 2])
+    assert vida[0] == [1, 3] and vida[1] == [1, 3]   # la cuadra entera, cerrada, hasta 1889
+    assert vida[2] == [3, 0] and vida[3] == [3, 0]   # las partidas, desde 1889
+    assert quitar == {4}                             # su calle ya estaba abierta cuando nace
+
+
+def test_sin_techos_tambien_corre_junta_y_antes():
+    ciudad = ciudad_de([cuadrado(0, 0, 10)] * 3)
+    ciudad["junta"], ciudad["antes"] = [0, -1, 0], [1, 0, 0]
+    nueva, _ = ep.sin_techos(ciudad, [[1, 0], [1, 0], [1, 0]], {0})
+    assert nueva["junta"] == [-1, 0] and nueva["antes"] == [0, 0]
+
+
+def test_una_casa_de_despues_que_cede_a_un_edificio_publico_muere_cuando_el_nace():
+    # Arrange: techo 0 un edificio público (nace en 1889); 1 y 2 casas de después de una calle nueva que le
+    # ceden el lugar: la 1 de una calle que se abre en 1843, la 2 de una que se abre en 1911
+    ciudad = ciudad_de([cuadrado(0, 0, 10)] * 3)
+    ciudad["techos"][0][3] = ep.ESTILO_PUBLICO
+    ciudad["cede"], ciudad["junta"], ciudad["antes"] = [-1, 0, 0], [-1, 0, 1], [0, 0, 0]
+    ciudad["cuadras"] = [-1, 0, 1]
+
+    # Act
+    vida, quitar = ep.vida_de_1936(np.array([1, 1, 1]), ciudad, apertura=[2, 4])
+
+    # Assert
+    assert vida[1] == [2, ep.PUBLICOS_DESDE]   # nace con su calle y vive hasta que llega el edificio
+    assert quitar == {2}                       # su calle se abre cuando el edificio ya está: no llega a vivir

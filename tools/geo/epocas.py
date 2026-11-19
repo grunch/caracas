@@ -229,23 +229,55 @@ def cerrar_cuadras(nace, cuadras):
     return salida
 
 
-def vida_de_1936(nace36, ciudad):
+def apertura_de_juntas(juntas, edificado, escala):
+    """La época en que se abre cada grupo de calles nuevas (tools/geo/vectorizar.py, "juntas"): la primera
+    cuyo plano (`edificado`: máscaras de las épocas 1..4, en la grilla reducida) ya no tiene edificada la
+    mayor parte de sus calles; si todas la tienen, 1936."""
+    forma = edificado[0].shape if edificado else (0, 0)
+    abre = []
+    for poligonos in juntas:
+        mascara = np.zeros(forma, bool)
+        for p in poligonos:
+            mascara[_huella(np.asarray(p, float).reshape(-1, 2), forma, escala)] = True
+        tapadas = [m[mascara].mean() if mascara.any() else 1.0 for m in edificado]
+        abre.append(next((1 + e for e, f in enumerate(tapadas) if f < 0.5), ULTIMA))
+    return abre
+
+
+def _vida_de_casa(k, nace, cede, junta, antes, apertura):
+    """[nace, muere] de un techo, o None si no llega a vivir."""
+    muere = int(nace[cede]) if cede >= 0 else 0
+    desde = int(nace[k])
+    if junta >= 0:
+        abre = int(apertura[junta])
+        if antes:
+            muere = min(muere, abre) if muere else abre
+        else:
+            desde = max(desde, abre)
+    if muere and muere <= desde:
+        return None
+    return [desde, muere]
+
+
+def vida_de_1936(nace36, ciudad, apertura=()):
     """([[nace, muere], …], techos a quitar) de la ciudad de 1936. Las cuadras modelo nacen enteras
     (cerrar_cuadras); los edificios públicos, no antes de PUBLICOS_DESDE; una casa que pisa uno ("cede")
-    vive hasta que él nace, y si su cuadra nace cuando el edificio ya está, sobra: se quita."""
+    vive hasta que él nace. Con calles nuevas ("junta"; `apertura`: la época en que se abre cada grupo,
+    apertura_de_juntas), la cuadra de antes ("antes" 1) vive hasta que se abre su calle y las de después
+    nacen recién entonces. Una casa que no llega a vivir sobra: se quita."""
     n = len(ciudad["techos"])
     nace = cerrar_cuadras(nace36, ciudad.get("cuadras", [-1] * n))
     publico = np.array([t[3] == ESTILO_PUBLICO for t in ciudad["techos"]], bool)
     nace = np.where(publico, np.maximum(nace, PUBLICOS_DESDE), nace)
     vida, quitar = [], set()
-    for k, cede in enumerate(ciudad.get("cede", [-1] * n)):
-        if cede < 0:
-            vida.append([int(nace[k]), 0])
-        elif nace[cede] > nace[k]:
-            vida.append([int(nace[k]), int(nace[cede])])
-        else:
+    datos = zip(ciudad.get("cede", [-1] * n), ciudad.get("junta", [-1] * n), ciudad.get("antes", [0] * n))
+    for k, (cede, junta, antes) in enumerate(datos):
+        una = _vida_de_casa(k, nace, cede, junta, antes, apertura)
+        if una is None:
             vida.append([int(nace[k]), 0])
             quitar.add(k)
+        else:
+            vida.append(una)
     return vida, quitar
 
 
@@ -269,7 +301,7 @@ def sin_techos(ciudad, vida, quitar):
         techos.append([len(vertices) // 2, cuantos, *resto])
         vertices.extend(v[2 * i:2 * (i + cuantos)])
     salida = {**ciudad, "vertices": vertices, "techos": techos}
-    for clave in ("esquinas", "cuadras", "cede"):
+    for clave in ("esquinas", "cuadras", "cede", "junta", "antes"):
         if clave in ciudad:
             salida[clave] = [ciudad[clave][k] for k in quedan]
     if "cede" in ciudad:
@@ -437,7 +469,8 @@ def main():
     construido = [construido_de_epoca(raiz, e, forma, escala, metro) for e in epocas[1:ULTIMA]]
     huellas36 = huellas(ciudad36, forma, escala)
     nace36 = nace(fracciones(huellas36, construido), primera=1, umbral=config["umbral"])
-    vida36, quitar = vida_de_1936(nace36, ciudad36)
+    apertura = apertura_de_juntas(ciudad36.get("juntas", []), construido, escala)
+    vida36, quitar = vida_de_1936(nace36, ciudad36, apertura)
     vida78 = vida_de_1578(ciudad78, *relevos(huellas36, vida36, quitar), construido, escala)
     ciudad = unir(*sin_techos(ciudad36, vida36, quitar), ciudad78, vida78)
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))
