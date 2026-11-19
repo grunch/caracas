@@ -45,10 +45,14 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      # Los datos reales no están en el repo (ver .gitignore): los E2E corren sobre la ciudad de
-      # demostración hasta que exista la fixture chica del pipeline (T12 en specs/07).
-      - name: Ciudad de demostración para los E2E
-        run: node tools/demo-ciudad.mjs
+      # Los datos reales no están en el repo (ver .gitignore): los E2E corren sobre la muestra (T12),
+      # 1 km² alrededor de la plaza del release datos-* más nuevo, verificada contra su sha256.
+      - name: Muestra de datos para los E2E
+        run: npm run datos:bajar -- --muestra
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # el release de datos es del repo principal: en un fork, GITHUB_REPOSITORY no tiene ningún datos-*
+          DATOS_REPO: grunch/caracas
       - name: Navegador para Playwright
         run: npx playwright install --with-deps chromium
       - name: E2E

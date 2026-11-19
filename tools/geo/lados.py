@@ -216,6 +216,11 @@ def cuadras_pegadas(manzana, metro):
     grandes = [k for k in range(1, n) if stats[k, cv2.CC_STAT_AREA] * metro ** 2 >= CUADRA_MINIMA_M2]
     if len(grandes) < 2:
         return None
+    return _piezas(etiquetas, grandes, manzana)
+
+
+def _piezas(etiquetas, grandes, manzana):
+    """Cada píxel de la manzana va con la pieza grande más cercana: [(máscara, (x, y))]."""
     semillas = np.where(np.isin(etiquetas, grandes), etiquetas, 0)
     _, cual = cv2.distanceTransformWithLabels((semillas == 0).astype(np.uint8), cv2.DIST_L2, 5, labelType=cv2.DIST_LABEL_PIXEL)
     ys, xs = np.nonzero(semillas)
@@ -228,3 +233,20 @@ def cuadras_pegadas(manzana, metro):
         y0, y1, x0, x1 = filas.min(), filas.max() + 1, columnas.min(), columnas.max() + 1
         piezas.append((asignada[y0:y1, x0:x1] == k, (int(x0), int(y0))))
     return piezas
+
+
+def cortar_por_calles(manzana, calles, libre, metro):
+    """La manzana cortada por las calles de hoy (`calles`, OpenStreetMap) solo donde el plano no tiene casas
+    ni edificios públicos (`libre`: una calle que el plano de 1936 pintó de jardín o de patio). → [(máscara,
+    (x, y))] de las cuadras que quedan (de CUADRA_MINIMA_M2 o más; lo demás va con la más cercana, salvo
+    la calle misma), o None si no la parte. Una avenida abierta después de 1936 pasa sobre casas: no corta."""
+    manzana = np.asarray(manzana, bool)
+    corte = manzana & np.asarray(calles, bool) & np.asarray(libre, bool)
+    if not corte.any():
+        return None
+    resto = manzana & ~corte
+    n, etiquetas, stats, _ = cv2.connectedComponentsWithStats(resto.astype(np.uint8), connectivity=4)
+    grandes = [k for k in range(1, n) if stats[k, cv2.CC_STAT_AREA] * metro ** 2 >= CUADRA_MINIMA_M2]
+    if len(grandes) < 2:
+        return None
+    return _piezas(etiquetas, grandes, resto)

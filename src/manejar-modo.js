@@ -5,7 +5,7 @@
  * cambian el año (y con él el vehículo), Esc vuelve al mapa. El sonido se sintetiza con WebAudio: sin archivos.
  */
 import { BoxGeometry, CylinderGeometry, Group, Mesh, MeshLambertMaterial } from 'three'
-import { choca, joystick, puntoDeEntrada, rejillaDeCasas } from './a-pie.js'
+import { choca, joystick, puntoDeEntrada, rejillaDeCasas, teclaAjena } from './a-pie.js'
 import { camaraDeCoche, entradaDeManejo, otroVehiculo, pasoEnCoche, sonidoDe, vehiculoDeEpoca } from './manejar.js'
 
 const RADIO_M = 1.1
@@ -169,7 +169,8 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
   }
 
   ventana.addEventListener('keydown', (e) => {
-    if (!activo || e.target?.closest?.('input, textarea, select, [contenteditable], dialog, [role="dialog"]') || e.ctrlKey || e.metaKey || e.altKey) return
+    // los campos, los diálogos y Espacio sobre un botón con foco son de ellos (el mismo criterio que a pie y en avión)
+    if (!activo || teclaAjena(e) || e.ctrlKey || e.metaKey || e.altKey) return
     const propia = () => { e.preventDefault(); e.stopImmediatePropagation() }
     if (e.code === 'Escape') { propia(); salir(); return }
     if (e.code in AÑO) { propia(); if (!e.repeat) cambiarEpoca(AÑO[e.code]); return }

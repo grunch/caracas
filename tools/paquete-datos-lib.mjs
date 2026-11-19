@@ -2,6 +2,7 @@
 // GitHub usar y cómo revisar lo que se baja, que es un dato no confiable hasta que coincide con el manifiesto.
 
 export const ACTIVO = 'datos.tar.gz'
+export const ACTIVO_MUESTRA = 'muestra.tar.gz' // el recorte de 1 km² para los E2E del CI (tools/muestra-lib.mjs)
 export const MANIFIESTO = 'public/datos/manifiesto.json'
 export const PREFIJO = 'datos-'
 const CARPETAS = ['public/datos', 'public/plano', 'public/fotos']
@@ -28,14 +29,17 @@ export function archivosDelPaquete(manifiesto) {
   return [...new Set([...rutas, MANIFIESTO])].sort()
 }
 
-/** { etiqueta, url } del release de datos publicado más recientemente, o null. No se fía del orden de la API. */
-export function elegirRelease(releases) {
+/**
+ * { etiqueta, url } del release de datos publicado más recientemente que trae `activo` (el paquete entero o la
+ * muestra), o null. No se fía del orden de la API.
+ */
+export function elegirRelease(releases, activo = ACTIVO) {
   let elegido = null
   for (const r of releases) {
     if (r.draft || !r.tag_name?.startsWith(PREFIJO) || !r.published_at) continue
-    const activo = r.assets?.find((a) => a.name === ACTIVO)
-    if (activo && (!elegido || r.published_at > elegido.publicado)) {
-      elegido = { etiqueta: r.tag_name, url: activo.browser_download_url, publicado: r.published_at }
+    const encontrado = r.assets?.find((a) => a.name === activo)
+    if (encontrado && (!elegido || r.published_at > elegido.publicado)) {
+      elegido = { etiqueta: r.tag_name, url: encontrado.browser_download_url, publicado: r.published_at }
     }
   }
   return elegido && { etiqueta: elegido.etiqueta, url: elegido.url }
@@ -62,4 +66,15 @@ export function sumasQueNoCoinciden(manifiesto, medidas) {
 /** La etiqueta del release: la fecha UTC y el commit del código que generó los datos. */
 export function etiquetaDeDatos(fecha, commit) {
   return `${PREFIJO}${fecha.toISOString().slice(0, 10)}-${commit.slice(0, 7)}`
+}
+
+/**
+ * Lanza si el manifiesto es el de la muestra (tools/muestra.mjs: trae su `caja`): después de
+ * `npm run datos:bajar -- --muestra`, public/ tiene 1 km² que coincide con su manifiesto, y publicarlo
+ * daría un release con la muestra anunciada como los datos completos.
+ */
+export function exigirCompleto(manifiesto) {
+  if (manifiesto?.caja) {
+    throw new Error('public/ tiene la muestra (1 km² para los E2E), no los datos completos: bájalos con npm run datos:bajar o regéneralos con npm run datos')
+  }
 }

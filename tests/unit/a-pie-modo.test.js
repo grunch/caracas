@@ -103,6 +103,22 @@ describe('crearModoAPie', () => {
     expect(modo.estado.z).toBeLessThan(20)
   })
 
+  test('Espacio sobre un botón con foco es del botón (lo activa); fuera de un control, el paseo lo calla', () => {
+    // Arrange
+    const { modo, tecla } = armar()
+    modo.entrar()
+    const enBoton = { closest: (sel) => (sel.split(',').map((s) => s.trim()).includes('button') ? {} : null) }
+    const enLienzo = { closest: () => null }
+
+    // Act
+    const sobreBoton = tecla('keydown', 'Space', enBoton)
+    const sobreLienzo = tecla('keydown', 'Space', enLienzo)
+
+    // Assert
+    expect(sobreBoton).toMatchObject({ prevenido: false, cortado: false })
+    expect(sobreLienzo).toMatchObject({ prevenido: true, cortado: true })
+  })
+
   test('dentro de un diálogo modal (el visor del plano) las teclas y Esc son del diálogo, no del paseo', () => {
     // Arrange
     const { modo, tecla } = armar()

@@ -5,7 +5,7 @@
  * en el render bajo demanda: el cuadro se hace solo cuando alguien lo pide.
  *
  * - Las sombras: una cámara ortográfica en la dirección del sol, ajustada en cada cuadro a lo que la vista
- *   corta en el suelo (src/luz.js). Tiran sombra las mallas con `castShadow` y `customDepthMaterial` (el
+ *   corta en el suelo (src/luz.js). Tiran sombra las mallas (sueltas o en un grupo) con `castShadow` y `customDepthMaterial` (el
  *   mismo vértice que su material: la ola, las épocas, el relieve); el suelo solo la recibe. Los materiales
  *   la leen con los uniforms de `U` (src/shader/sombra.js). Si nada cambió desde el cuadro anterior (la
  *   caja, la ola, las épocas, el color, el relieve), el mapa no se rehace; con la ciudad acostada en la hoja no hay sombras.
@@ -24,6 +24,28 @@ const A_UV = new Matrix4().set(0.5, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0, 0.5, 0.5, 0
 const ALTURAS = Object.freeze({ yMin: -600, yMax: 3600 })
 // lo que mueve una sombra además de la cámara: si nada de esto cambió, el mapa del cuadro anterior sirve
 const MUEVEN_LA_SOMBRA = Object.freeze(['uOla', 'uOlaEpoca', 'uEpocaDe', 'uEpocaA', 'uColor', 'uExageracion'])
+
+const tiraSombra = (o) => o.isMesh && o.castShadow && Boolean(o.customDepthMaterial)
+
+/**
+ * Quién tira sombra entre los hijos visibles de la escena: una malla con `castShadow` y `customDepthMaterial`,
+ * o las piezas así de un grupo (la avioneta, src/volar-modo.js). `ocultos`: lo que se esconde en la pasada.
+ * `pose`: la posición y el giro de lo que tira (si cambia, el mapa de sombras se rehace).
+ */
+export function repartoDeSombra(objetos) {
+  const tiran = []
+  const ocultos = []
+  const poses = []
+  for (const o of objetos) {
+    if (!o.visible) continue
+    const piezas = tiraSombra(o) ? [o] : o.isGroup ? o.children.filter((h) => h.visible && tiraSombra(h)) : []
+    if (!piezas.length) { ocultos.push(o); continue }
+    tiran.push(...piezas)
+    if (o.isGroup) ocultos.push(...o.children.filter((h) => h.visible && !piezas.includes(h)))
+    poses.push([...o.position.toArray(), ...o.quaternion.toArray()].join(','))
+  }
+  return { tiran, ocultos, pose: poses.join(';') }
+}
 
 /**
  * `ajustes`: { sombras: lado del mapa (0 = sin sombras), contorno, grano } (ajustesDeAcabado, src/luz.js).
@@ -98,14 +120,12 @@ export function crearAcabado({ renderer, scene, camera, U, ajustes, limite, vist
 
   /** El mapa de sombras: la escena desde el sol, solo lo que tira sombra y con su material de profundidad. */
   function dibujarSombras(firma) {
-    const tiran = []
-    const ocultos = []
-    for (const o of scene.children) {
-      if (o.isMesh && o.castShadow && o.customDepthMaterial && o.visible) tiran.push([o, o.material])
-      else if (o.visible) ocultos.push(o)
-    }
-    // (el relieve llega después de arrancar y cambia de textura: con él cambian todas las alturas)
-    const estado = `${firma}|${tiran.length}|${U.tRelieve?.value?.uuid}|${MUEVEN_LA_SOMBRA.map((k) => U[k]?.value).join(',')}`
+    const reparto = repartoDeSombra(scene.children)
+    const tiran = reparto.tiran.map((o) => [o, o.material])
+    const { ocultos } = reparto
+    // (el relieve llega después de arrancar y cambia de textura: con él cambian todas las alturas;
+    // la pose de lo que se mueve, como la avioneta, también rehace el mapa)
+    const estado = `${firma}|${tiran.length}|${reparto.pose}|${U.tRelieve?.value?.uuid}|${MUEVEN_LA_SOMBRA.map((k) => U[k]?.value).join(',')}`
     if (estado === sombras.estado) return
     sombras.estado = estado
     for (const [o] of tiran) o.material = o.customDepthMaterial
