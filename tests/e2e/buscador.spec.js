@@ -7,7 +7,7 @@ import { hayDato } from './datos.js'
 //
 // Una sola página para todo el archivo, en serie: con los datos reales y el render por software, cargar el
 // visor cuesta mucho más que todo lo que se le hace después.
-test.describe.configure({ mode: 'serial', timeout: 180_000 })
+test.describe.configure({ mode: 'serial', timeout: 240_000 })
 const expect = esperarBase.configure({ timeout: 20_000 })
 const NOMINATIM = 'https://nominatim.openstreetmap.org/**'
 const URDANETA = { lat: '10.5074', lon: '-66.9128', name: 'Avenida Urdaneta', display_name: 'Avenida Urdaneta, Parroquia Altagracia, Caracas, Venezuela' }

@@ -187,6 +187,7 @@ export function crearBuscador({ formulario, plano, coords, camera, cam, suelo, p
     aviso.hidden = true
     pintar()
     volar(actual.mundo, respuesta.vista)
+    dibujar() // ya en su sitio, sin esperar al próximo cuadro
     return { ...actual.respuesta, tipo: resultado.tipo }
   }
 
