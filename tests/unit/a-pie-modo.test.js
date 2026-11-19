@@ -5,7 +5,7 @@ import { crearModoAPie } from '../../src/a-pie-modo.js'
 const cuadrado = (x, y, lado) => [x, y, x + lado, y, x + lado, y + lado, x, y + lado]
 const datos = { vertices: Float32Array.from(cuadrado(0, 0, 10)), techos: Uint32Array.from([0, 4, 0, 0]), vida: Uint32Array.from([1]) }
 
-function armar({ conCasas = true, dist = 300, x = 5, z = 20 } = {}) {
+function armar({ conCasas = true, dist = 300, x = 5, z = 20, casas = datos, epoca = () => 1 } = {}) {
   const oyentes = {}
   const de = () => ({ addEventListener: (t, f) => { oyentes[t] = f }, setPointerCapture() {}, getBoundingClientRect: () => ({ width: 800, height: 600 }) })
   const ventana = de()
@@ -17,11 +17,11 @@ function armar({ conCasas = true, dist = 300, x = 5, z = 20 } = {}) {
     camera, lienzo, ventana,
     cam: { now: { x, z, dist, yaw: 0 }, pausar: (v) => pausas.push(v) },
     coords: { aMundo: (px, py) => ({ x: px, z: py }) },
-    suelo: () => 100, casas: () => (conCasas ? datos : null), epoca: () => 1, pedirCuadro: () => {},
+    suelo: () => 100, casas: () => (conCasas ? casas : null), epoca, pedirCuadro: () => {},
     alCambiar: (v) => cambios.push(v),
   })
-  const tecla = (tipo, code) => {
-    const e = { code, target: null, prevenido: false, cortado: false, preventDefault() { this.prevenido = true }, stopImmediatePropagation() { this.cortado = true } }
+  const tecla = (tipo, code, target = null) => {
+    const e = { code, target, prevenido: false, cortado: false, preventDefault() { this.prevenido = true }, stopImmediatePropagation() { this.cortado = true } }
     oyentes[tipo](e)
     return e
   }
@@ -101,5 +101,44 @@ describe('crearModoAPie', () => {
     oyentes['lienzo:pointermove']({ pointerId: 7, clientX: 100, clientY: 340 })
     modo.update(1)
     expect(modo.estado.z).toBeLessThan(20)
+  })
+
+  test('dentro de un diálogo modal (el visor del plano) las teclas y Esc son del diálogo, no del paseo', () => {
+    // Arrange
+    const { modo, tecla } = armar()
+    modo.entrar()
+    const enDialogo = { closest: (sel) => (sel.includes('dialog') ? {} : null) }
+
+    // Act
+    const flecha = tecla('keydown', 'ArrowUp', enDialogo)
+    const esc = tecla('keydown', 'Escape', enDialogo)
+    modo.update(1)
+
+    // Assert
+    expect(flecha).toMatchObject({ prevenido: false, cortado: false })
+    expect(esc).toMatchObject({ prevenido: false, cortado: false })
+    expect(modo.activo).toBe(true)
+    expect(modo.estado).toMatchObject({ x: 5, z: 20 })
+  })
+
+  test('si al cambiar de época aparece una casa donde estaba, sale a la calle más cercana', () => {
+    // Arrange: una segunda casa (z de 15 a 25) que nace en la época 3, justo donde se entra (5, 20)
+    const dosCasas = {
+      vertices: Float32Array.from([...cuadrado(0, 0, 10), ...cuadrado(0, 15, 10)]),
+      techos: Uint32Array.from([0, 4, 0, 0, 4, 4, 0, 0]),
+      vida: Uint32Array.from([1, 3]),
+    }
+    let epoca = 1
+    const { modo } = armar({ casas: dosCasas, epoca: () => epoca })
+    modo.entrar()
+    expect(modo.estado).toMatchObject({ x: 5, z: 20 })
+
+    // Act
+    epoca = 3
+    modo.update(0.02)
+
+    // Assert: ya no está dentro de la casa nueva
+    const { x, z } = modo.estado
+    expect(x > 0 && x < 10 && z > 15 && z < 25).toBe(false)
   })
 })

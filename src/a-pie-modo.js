@@ -11,6 +11,7 @@ const NEAR_M = 0.1
 const FOV = 60
 const MIRAR_POR_PX = 0.004
 const MIRADA_MAX = 1.2
+const AJENO = 'input, textarea, select, [contenteditable], dialog, [role="dialog"]'
 const TECLAS = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ShiftLeft', 'ShiftRight', 'Space'])
 
 export function crearModoAPie({ camera, lienzo, ventana = globalThis, cam, coords, suelo, casas, epoca, pedirCuadro, alCambiar = () => {} }) {
@@ -27,6 +28,13 @@ export function crearModoAPie({ camera, lienzo, ventana = globalThis, cam, coord
     epocaDeRejilla = epoca()
     rejilla = rejillaDeCasas(casas(), epocaDeRejilla, coords.aMundo)
   }
+  /** Cambió la época con el paseo en curso: si ahora hay una casa donde estaba, sale a la calle más cercana. */
+  function rearmarRejilla() {
+    armarRejilla()
+    if (!chocaEn(estado.x, estado.z)) return
+    const p = puntoDeEntrada({ x: estado.x, z: estado.z, dist: 0 }, chocaEn)
+    estado = { ...estado, x: p.x, z: p.z }
+  }
   function aplicar() {
     const y = suelo(estado.x, estado.z) + OJOS_M
     const c = Math.cos(estado.mirada)
@@ -39,9 +47,10 @@ export function crearModoAPie({ camera, lienzo, ventana = globalThis, cam, coord
     pedirCuadro(3)
   }
 
-  // --- teclado: en captura, antes que los atajos del mapa (las flechas no mueven el mapa, Espacio no lo acuesta) ---
+  // --- teclado: en captura, antes que los atajos del mapa (las flechas no mueven el mapa, Espacio no lo acuesta);
+  // lo que pasa en un campo de texto o en un diálogo (el visor del plano: flechas para moverlo, Esc para cerrarlo) es suyo ---
   ventana.addEventListener('keydown', (e) => {
-    if (!activo || e.target?.closest?.('input, textarea, select, [contenteditable]')) return
+    if (!activo || e.target?.closest?.(AJENO)) return
     if (e.code === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); salir(); return }
     if (!TECLAS.has(e.code) || e.ctrlKey || e.metaKey || e.altKey) return
     e.preventDefault()
@@ -109,7 +118,7 @@ export function crearModoAPie({ camera, lienzo, ventana = globalThis, cam, coord
   /** Avanza un cuadro; true si hay que seguir dibujando. */
   function update(dt) {
     if (!activo) return false
-    if (epoca() !== epocaDeRejilla) armarRejilla() // cambió la época: otras casas en pie
+    if (epoca() !== epocaDeRejilla) rearmarRejilla() // cambió la época: otras casas en pie
     const deTeclas = entradaDeTeclas(teclas)
     const palanca = [...punteros.values()].find((p) => p.tipo === 'joystick')
     const entrada = palanca ? { ...joystick(palanca.inicio, palanca.ultimo), corre: deTeclas.corre } : deTeclas
