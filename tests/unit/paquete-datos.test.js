@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest'
 import {
-  rutaSegura, archivosDelPaquete, elegirRelease, revisarListado, sumasQueNoCoinciden, etiquetaDeDatos,
-  ACTIVO, MANIFIESTO,
+  rutaSegura, archivosDelPaquete, elegirRelease, revisarListado, sumasQueNoCoinciden, etiquetaDeDatos, exigirCompleto,
+  ACTIVO, ACTIVO_MUESTRA, MANIFIESTO,
 } from '../../tools/paquete-datos-lib.mjs'
 
 const manifiesto = {
@@ -60,6 +60,15 @@ describe('elegirRelease', () => {
 
     // Assert
     expect(elegido).toEqual({ etiqueta: 'datos-2026-11-18', url: 'bueno' })
+  })
+
+  test('con otro activo (la muestra) elige el release más reciente que lo trae', () => {
+    const releases = [
+      { tag_name: 'datos-a', published_at: '2026-11-20T10:00:00Z', draft: false, assets: [activo('nuevo')] },
+      { tag_name: 'datos-b', published_at: '2026-11-19T10:00:00Z', draft: false, assets: [activo('viejo'), { name: ACTIVO_MUESTRA, browser_download_url: 'muestra' }] },
+    ]
+    expect(elegirRelease(releases, ACTIVO_MUESTRA)).toEqual({ etiqueta: 'datos-b', url: 'muestra' })
+    expect(ACTIVO_MUESTRA).toBe('muestra.tar.gz')
   })
 
   test('null si no hay ninguno', () => {
@@ -122,4 +131,14 @@ describe('etiquetaDeDatos', () => {
 test('el paquete y el manifiesto tienen nombre fijo', () => {
   expect(ACTIVO).toBe('datos.tar.gz')
   expect(MANIFIESTO).toBe('public/datos/manifiesto.json')
+})
+
+describe('exigirCompleto', () => {
+  test('un manifiesto de la muestra (trae su caja) no se publica como el paquete completo', () => {
+    expect(() => exigirCompleto({ conteos: {}, caja: { x0: 0, y0: 0, x1: 10, y1: 10 }, archivos: {} })).toThrow(/muestra/)
+  })
+
+  test('el manifiesto de los datos completos pasa', () => {
+    expect(() => exigirCompleto({ conteos: { techos: 1 }, archivos: { 'public/datos/ciudad.pak': 'abc' } })).not.toThrow()
+  })
 })
