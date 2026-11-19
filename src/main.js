@@ -24,6 +24,8 @@ import { normalizarMarcas, distanciaDeVuelo } from './marcas.js'
 import { crearCapaMarcas } from './marcas-capa.js'
 import { MARCAS } from './marcas-datos.js'
 import './marcas.css'
+import { crearVisorDePlano } from './visor-plano-panel.js'
+import './visor-plano.css'
 import { engancharFichas } from './ficha-panel.js'
 import { crearAcerca } from './acerca-panel.js'
 import { leerCreditos } from './acerca.js'
@@ -45,6 +47,7 @@ const HACER = {
   color: () => alternarColor(),
   hoy: () => alternarHoy(),
   nombres: () => alternarMarcas(),
+  plano: () => visorPlano?.abrir(),
   buscar: () => buscador.enfocar(),
   acerca: () => acerca.abrir(),
 }
@@ -218,6 +221,7 @@ const OLA_EPOCA_MAX_M = 9000 // más que la distancia de la plaza a la esquina m
 // de 1936 debajo y el plano viejo aparece cuando llegue
 const ESPERA_PLANO_MS = 2500
 let lineaDeTiempo = null
+let visorPlano = null // el plano de la época, aparte (P; src/visor-plano-panel.js)
 let secuencia = null
 let planos = null
 // el plano calzado de cada época (plano/epocas.json, tools/planos-epocas.mjs); sin él, siempre 1936
@@ -253,8 +257,16 @@ Promise.all([crecePedido, indicePlanos])
       })
     }, PRIMERA_EPOCA)
     lineaDeTiempo = crearLineaDeTiempo({
-      contenedor: document.getElementById('epocas'), epocas, alElegir: (i) => secuencia.elegir(i), desde: PRIMERA_EPOCA,
+      contenedor: document.getElementById('epocas'), epocas, desde: PRIMERA_EPOCA,
+      alElegir: (i) => { secuencia.elegir(i); visorPlano?.elegir(epocas[i]) },
     })
+    visorPlano = crearVisorDePlano({
+      contenedor: document.getElementById('epocas'), liviano, añoBase: epocas.at(-1).año,
+      base: ['plano/chico.webp', liviano ? 'plano/medio-4k.webp' : 'plano/medio.webp'],
+      indice: () => fetch('plano/epocas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))).then((j) => j.planos),
+    })
+    visorPlano.elegir(epocas[lineaDeTiempo.actual])
+    pedirMascaras() // el agua y los rótulos, para la hoja en tinta de antes de 1936
     if (andarAlLlegar) lineaDeTiempo.andar()
     cargarTextura('plano/crece.png', false).then((t) => {
       // etapas codificadas: un mipmap las promediaría y el borde de la ciudad cambiaría de época a lo lejos
@@ -272,26 +284,28 @@ function levantar(arriba = olaObjetivo === 0) {
   pedirCuadro(3)
 }
 
-// --- tinta ⇄ color: la máscara de suelo y la de rótulos del plano se bajan la primera vez que se prende el color ---
+// --- tinta ⇄ color: la máscara de suelo y la de rótulos del plano las usan el color y, antes de 1936, la
+// hoja en tinta (src/shader/papel.js): se bajan cuando arranca la línea de tiempo o se prende el color ---
 const DURACION_COLOR_S = 1.2
 let colorObjetivo = 0
 let sueloPedido = null
 let rotulosPlanoPedidos = null
+function pedirMascaras() {
+  sueloPedido ??= cargarTextura(liviano ? 'plano/suelo-2k.webp' : 'plano/suelo.webp', false)
+    .then((t) => ponerTextura(ciudad.U.uSuelo, t))
+    .catch((e) => { sueloPedido = null; console.warn(`suelo: ${e.message}`) })
+  // sin la máscara de rótulos todo anda igual: el plano se marca entero, con sus nombres
+  rotulosPlanoPedidos ??= cargarTextura(liviano ? 'plano/rotulos-2k.webp' : 'plano/rotulos.webp', false)
+    .then((t) => ponerTextura(ciudad.U.uRotulos, t))
+    .catch((e) => { rotulosPlanoPedidos = null; console.warn(`rótulos del plano: ${e.message}`) })
+}
 function alternarColor(prender = colorObjetivo === 0) {
   colorObjetivo = prender ? 1 : 0
   const boton = document.getElementById('color')
   boton.setAttribute('aria-pressed', String(prender))
   boton.classList.toggle('on', prender)
   boton.textContent = prender ? 'Tinta' : 'Color'
-  if (prender) {
-    sueloPedido ??= cargarTextura(liviano ? 'plano/suelo-2k.webp' : 'plano/suelo.webp', false)
-      .then((t) => ponerTextura(ciudad.U.uSuelo, t))
-      .catch((e) => { sueloPedido = null; console.warn(`suelo: ${e.message}`) })
-    // sin la máscara de rótulos el color anda igual: el plano se marca entero, con sus nombres
-    rotulosPlanoPedidos ??= cargarTextura(liviano ? 'plano/rotulos-2k.webp' : 'plano/rotulos.webp', false)
-      .then((t) => ponerTextura(ciudad.U.uRotulos, t))
-      .catch((e) => { rotulosPlanoPedidos = null; console.warn(`rótulos del plano: ${e.message}`) })
-  }
+  if (prender) pedirMascaras()
   pedirCuadro(3)
 }
 
@@ -458,6 +472,7 @@ window.lab = {
   get calles() { return rotulos },
   get lineaDeTiempo() { return lineaDeTiempo },
   get planos() { return planos },
+  get visorPlano() { return visorPlano },
 }
 window.lab.buscador = buscador
 window.lab.acerca = acerca

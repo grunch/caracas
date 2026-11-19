@@ -114,7 +114,8 @@ describe('color sin rótulos', () => {
   test('en color, donde la máscara marca un rótulo, la tinta del plano no oscurece el suelo', () => {
     const { fragmentShader } = compilar()
     expect(fragmentShader).toContain('uniform sampler2D uSuelo, uRotulos;')
-    expect(fragmentShader).toContain('float rotulo = min(1.0, 2.0 * texture2D(uRotulos, uv).r) * (1.0 - planoViejo);')
+    expect(fragmentShader).toContain('float rotuloEn(vec2 uv) { return min(1.0, 2.0 * texture2D(uRotulos, uv).r) * (1.0 - planoViejo); }')
+    expect(fragmentShader).toContain('float rotulo = rotuloEn(uv);')
     expect(fragmentShader).toContain('* (1.0 - 0.4 * tintaDe(papel) * dibujo * (1.0 - rotulo));')
   })
 
@@ -125,14 +126,17 @@ describe('color sin rótulos', () => {
     expect(fragmentShader).toContain('planoViejo = mix(tapaDe, tapaA, frente);')
     expect(fragmentShader).toContain('tapa = p.a * adentro;')
     // y el suelo se pinta después de leer el plano
-    expect(fragmentShader.indexOf('vec3 papel = planoEn(uvPlano);')).toBeLessThan(fragmentShader.indexOf('sueloColor(uv, papel)'))
+    expect(fragmentShader.indexOf('vec3 papel = planoEn(uvPlano);')).toBeLessThan(fragmentShader.indexOf('sueloColor(uv, papel, '))
   })
 
-  test('la tinta no cambia: el suelo sigue siendo el plano entero', () => {
+  test('en tinta, en 1936 (y sin línea de tiempo), el suelo sigue siendo el plano entero, con sus rótulos', () => {
     const { fragmentShader } = compilar()
     // (la casa es papel con los trazos de su fachada y de su tejado: src/shader/fachada.js y techo.js)
-    expect(fragmentShader).toContain('vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), papel, acostada);')
-    expect(fragmentShader.match(/uRotulos/g)).toHaveLength(2) // la declaración y sueloColor: nada más la usa
+    expect(fragmentShader).toContain('vec3 hojaTinta = papel;')
+    expect(fragmentShader).toContain('vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), hojaTinta, acostada);')
+    // antes de 1936 la hoja es la de la época (src/shader/papel.js); en 1936 devuelve el plano tal cual
+    expect(fragmentShader).toContain('float talCual = max(smoothstep(4.5, 5.0, epoca), planoViejo);')
+    expect(fragmentShader).toContain('if (talCual >= 1.0) return papel;')
   })
 
   test('arranca sin rótulos (1×1 en cero): hasta que llega la máscara, el plano se marca entero', () => {
