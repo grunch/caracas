@@ -5,7 +5,7 @@
  */
 import { BoxGeometry, Group, Mesh, MeshLambertMaterial } from 'three'
 import { camaraDetras, despegue, entradaDeVuelo, pasoEnAvion } from './volar.js'
-import { joystick } from './a-pie.js'
+import { joystick, teclaAjena } from './a-pie.js'
 
 const FOV = 50
 const TECLAS = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ShiftLeft', 'ShiftRight', 'Space'])
@@ -52,7 +52,8 @@ export function crearModoVolar({ camera, lienzo, ventana = globalThis, cam, esce
   }
 
   ventana.addEventListener('keydown', (e) => {
-    if (!activo || e.target?.closest?.('input, textarea, select, [contenteditable]') || e.ctrlKey || e.metaKey || e.altKey) return
+    // el mismo criterio que a pie (src/a-pie.js): un campo, un diálogo (el visor del plano) o Espacio sobre un botón no son del vuelo
+    if (!activo || teclaAjena(e) || e.ctrlKey || e.metaKey || e.altKey) return
     if (e.code === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); salir(); return }
     if (e.code in AÑO) {
       e.preventDefault()

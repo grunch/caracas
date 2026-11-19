@@ -11,6 +11,9 @@ const CELDA_M = 20
 const LEJOS_M = 1500 // con la cámara más lejos que esto, se entra en la plaza
 const BUSCAR_HASTA_M = 40
 const RADIO_JOYSTICK_PX = 52
+const AJENO = 'input, textarea, select, [contenteditable], dialog, [role="dialog"]'
+// los controles que Espacio activa por sí solo (los mismos que respeta accionDeTecla en src/controles.js)
+const PULSABLE = 'button, a, [role="button"]'
 const ADELANTE = new Set(['KeyW', 'ArrowUp'])
 const ATRAS = new Set(['KeyS', 'ArrowDown'])
 const IZQUIERDA = new Set(['KeyA', 'ArrowLeft'])
@@ -97,6 +100,16 @@ export function pasoAPie(estado, { adelante = 0, lado = 0, corre = false }, dt, 
 }
 
 /** Las teclas apretadas (KeyboardEvent.code) → { adelante, lado, corre }: WASD o flechas, Mayús corre. */
+/**
+ * El criterio de teclado de los modos (a pie y en avión): la tecla no es del modo si nace en un campo de texto o
+ * en un diálogo (el visor del plano: flechas para moverlo, Esc para cerrarlo), ni si es Espacio sobre un botón
+ * con foco (lo activa).
+ */
+export function teclaAjena(e) {
+  if (e.target?.closest?.(AJENO)) return true
+  return e.code === 'Space' && Boolean(e.target?.closest?.(PULSABLE))
+}
+
 export function entradaDeTeclas(apretadas) {
   const hay = (grupo) => [...grupo].some((c) => apretadas.has(c))
   return {
