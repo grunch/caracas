@@ -70,15 +70,8 @@ test('en tinta, antes de 1936, donde todavía no hay ciudad la hoja es papel en 
   expect(errores).toEqual([])
 })
 
-test('donde ya es ciudad, la hoja de la época sigue siendo el plano', async ({ page }) => {
-  await abrir(page, { urbano: true })
-  const en1936 = await tintaEn(page, 5)
-  const en1772 = await tintaEn(page, 1)
-  expect(en1936.oscuros).toBeGreaterThan(150)
-  expect(Math.abs(en1772.oscuros - en1936.oscuros)).toBeLessThan(en1936.oscuros * 0.15)
-})
-
-test('«Ver el plano de 1772» abre el plano de la época aparte, con su crédito; se acerca, y Escape lo cierra', async ({ page }) => {
+// una sola página para todo lo que pide la ciudad urbanizada desde siempre: en CI cada carga cuesta medio minuto
+test('«Ver el plano de {año}» (o P) abre el plano de la época aparte, con su crédito; y donde ya es ciudad la hoja sigue siendo el plano', async ({ page }) => {
   await abrir(page, { urbano: true })
   const boton = page.locator('#ver-plano')
   await expect(boton).toHaveText('Ver el plano de 1772')
@@ -109,18 +102,21 @@ test('«Ver el plano de 1772» abre el plano de la época aparte, con su crédit
   await page.keyboard.press('Escape')
   await expect(visor).toBeHidden()
   await expect(boton).toBeFocused()
-})
 
-test('la tecla P abre el plano de la época elegida; el de 1936 es la hoja base', async ({ page }) => {
-  await abrir(page, { urbano: true })
-  await page.evaluate(() => window.lab.lineaDeTiempo.elegir(5))
-  await expect(page.locator('#ver-plano')).toHaveText('Ver el plano de 1936')
+  // donde ya es ciudad, la hoja de 1772 sigue siendo el plano (aquí no hay rótulos que quitar)
+  const en1936 = await tintaEn(page, 5)
+  expect(en1936.oscuros).toBeGreaterThan(150)
+
+  // la tecla P abre el de la época elegida; el de 1936 es la hoja base
+  await expect(boton).toHaveText('Ver el plano de 1936')
   await page.locator('#view canvas').first().click({ position: { x: 20, y: 300 } })
   await page.keyboard.press('p')
-  const visor = page.locator('#visor-plano')
   await expect(visor).toBeVisible()
   await expect(visor.locator('h2')).toHaveText('Plano de prueba de 1936')
   await expect(visor.locator('.nota')).toHaveText('Es la hoja sobre la que está levantada la ciudad.')
   await visor.locator('.cerrar').click()
   await expect(visor).toBeHidden()
+
+  const en1772 = await tintaEn(page, 1)
+  expect(Math.abs(en1772.oscuros - en1936.oscuros)).toBeLessThan(en1936.oscuros * 0.15)
 })
