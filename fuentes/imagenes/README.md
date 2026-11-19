@@ -493,12 +493,86 @@ así que los patios se abren por regla (y los que el plano sí dibuja se conserv
   de cada ocho); piso de patio más oscuro que la calle.
 - `tools/arboles-lib.mjs`: un árbol en algunos patios (15 %) y en buena parte de los solares (40 %).
 
+## De Wikimedia Commons, para las fichas (T43, noviembre de 2026)
+
+Veinte imágenes sumadas para que las fichas de los lugares principales tengan fotos acreditadas. Todas con
+autor, fecha y licencia tal como los da su página de Commons (campo `verificacion_dp` de cada ficha, con las
+plantillas), miradas una por una para comprobar que son Caracas, que muestran el lugar y que la fecha es
+coherente. Lo que aportan como referencia para reconstruir:
+
+- **1839 · Vista de Caracas, Joseph Thomas** (`1839-commons-vista-de-caracas-thomas`, 3060 px) → 1843. La
+  misma litografía de las dos copias ya catalogadas, en una reproducción mucho mejor y más ancha; Commons da
+  aquí al autor como Joseph Thomas (1800–1875). Es la que se publica (marcas: Ávila, El Calvario).
+- **~1842–1845 · Ruinas de la Trinidad, Bellermann** (`1843-commons-ruinas-de-la-trinidad-bellermann`) → 1843.
+  **La iglesia de la Trinidad está en ruinas**: la fachada en pie (dos cuerpos, frontón de volutas con escudo),
+  las naves sin techo, arcos al aire. En la época de 1843 el hito del Panteón no debería ser una iglesia
+  entera: hoy no se modela en esa época (nace en 1889), y así queda bien.
+- **1844–1845 · Puente de la Trinidad, Bellermann** (`1844-commons-puente-de-la-trinidad-bellermann`) → 1843.
+  Puente de arcos de mampostería sobre la quebrada honda (Catuche), casas bajas, campo abierto hacia el este
+  (Chacao) y el Ávila pelado. Las quebradas son barrancos profundos, no arroyos a nivel.
+- **~1845 · San Francisco** (`1845-commons-iglesia-de-san-francisco`, 640 px) → 1843. La **portada barroca**
+  de la iglesia (tres calles, nichos, frontón con pináculos), una **espadaña** a su derecha y el frente bajo
+  del convento con portón. Procedencia débil (un foro). Para el hito: campanario de espadaña, no torre.
+- **1852–1854 · Plaza Mayor, Pissarro** (`1853-commons-plaza-mayor-pissarro`, 900 px) → 1843. **El mercado**:
+  toldos de lona, vendedoras en el suelo, un jinete; al fondo la torre de la Catedral con el **cupulín rojo**
+  y la fachada de piedra rosada. Coincide con el grabado de 1852.
+- **~1870 · Plaza Mayor y Catedral, Lessmann** (`1870-commons-plaza-mayor-y-catedral-lessmann`, 2024 px) →
+  1843 y 1889. La primera **foto nítida de la Catedral**: torre de tres cuerpos con reloj y figura en el
+  remate, fachada a su derecha, casa de dos pisos con balcones al sur. **La plaza está en obra**: muro de
+  contención, piedra suelta, arbolitos con cerco de cañas, un farol. Ya no hay mercado y todavía no hay estatua.
+- **1870 · Casa de Gobierno, Bolet Peraza** (`1870-commons-casa-de-gobierno-bolet`) → 1843 y 1889. La **Casa
+  Amarilla antes de su fachada neoclásica**: caserón de esquina de dos pisos, **tejado de teja**, balcones,
+  bandera; otro frente de arcos a la derecha. La plaza, en obra, con **terrazas y escalinatas** (el desnivel
+  que el hito de la plaza resuelve a medias) y los mismos arbolitos de la foto de Lessmann.
+- **1872 · Fiesta en la plaza, grabado de Spence** (`1872-commons-fiesta-en-la-plaza-bolivar-spence`) → 1843
+  y 1889. La plaza con **canteros cercados** y todavía sin estatua, la Casa de Gobierno a la izquierda y la
+  torre de la Catedral a la derecha.
+- **1876 · Puente de Hierro** (`1876-commons-puente-de-hierro`) → 1889. Puente de **celosía de hierro** de
+  varios tramos, baranda y faroles, con una **hilera de chaguaramos**; sembradíos al lado. Referencia para
+  modelarlo (T41).
+- **Década de 1880 · Teatro Guzmán Blanco** (`1885-commons-teatro-guzman-blanco`, 500 px) → 1889. El **Teatro
+  Municipal**: sala de **planta curva** con pórtico semicircular de columnas de doble altura, óculos y una
+  linterna sobre la cubierta. Referencia para el hito pendiente (T40).
+- **Fines del XIX · Universidad** (`1895-commons-universidad-palacio-de-las-academias`, 1405 px) → 1889 y
+  1911. La **fachada neogótica** entera: dos pisos de ventanas ojivales, contrafuertes con pináculo,
+  crestería, gabletes y **torre con reloj y aguja**; jardín con canteros delante. Confirma el hito.
+- **~1900–1906 · Desde El Calvario y el arco de la Federación** (`1903-commons-caracas-desde-el-calvario`,
+  `1903-commons-arco-de-la-federacion`, 3840 px) → 1889 y 1911. De la misma serie que la panorámica: los
+  tejados de un piso hasta el Ávila, una estatua con pedestal y reja en el paseo, y el **arco de triunfo de
+  piedra** con grupo escultórico («FEDERACION»). Referencia para el monumento de El Calvario (T41).
+- **~1900 y ~1911 · Miraflores** (`1900-commons-palacio-de-miraflores-detroit`,
+  `1911-commons-palacio-de-miraflores-baralt`) → 1889–1911. El detalle de la panorámica que Commons titula
+  «Miraflores Palace» y la lámina del Álbum del Centenario con su pie impreso: **un piso alto con
+  balaustrada, ventanas de arco entre pilastras y pabellones de mansarda, sobre una terraza con muro de
+  contención; reja de hierro y faroles a la calle**. La identificación a ojo de la panorámica queda
+  confirmada, y el palacio ya estaba en pie hacia 1900.
+- **~1904 · Casa Amarilla, postal** (`1904-commons-casa-amarilla-postal`, 580 px) → 1889 y 1911. La fachada
+  neoclásica de dos pisos **pintada de amarillo**, con balcones de hierro y remate central.
+- **1912 · Santa Teresa, postal** (`1912-commons-iglesia-de-santa-teresa`) → 1911. **Fachada de columnas
+  pareadas con frontón y estatua**, dos **cúpulas verdes** detrás. La postal dice «Iglesia de Santa Ana»:
+  Commons aclara que es Santa Teresa (el hito tiene dos fachadas).
+- **1915–1920 · La estatua de Bolívar y un salón del Palacio Federal, Bain** (`1917-commons-estatua-de-bolivar-bain`,
+  `1917-commons-interior-del-palacio-federal-bain`) → 1911 y 1936. La plaza con el **piso de mosaico en
+  damero**, el pedestal de piedra oscura con gradas y el farol de varios brazos; y el salón de **planta
+  ovalada con cúpula pintada** que el plano de 1936 dibuja como un óvalo en el ala norte.
+- **1930 · Patio de la Casa Natal** (`1930-commons-patio-de-la-casa-natal`) → 1936. Un **patio de casa
+  colonial** completo: corredores con pilares de madera y zapatas, tejas, ventanas con reja y una pila al
+  centro. Referencia para los patios (T34).
+
+**Vistas y descartadas** (no se guardaron): la postal del Capitolio fechada en 1917 en Commons (los
+autobuses y carros son de fines de los años 20 o de los 30); la «Vista frontal del Capitolio» de «fines del
+siglo XIX» (carros de los años 30 o 40); «Iglesia de la Santísima Trinidad, 1874» (una postal coloreada del
+Panteón con el jardín crecido, de comienzos del siglo XX); la «Vista de Caracas desde el Valle» de Goering
+(un paisaje, sin la ciudad); y otras sin autor ni fecha en Commons. **El Capitolio sigue sin una foto
+exterior confiable.**
+
 ## Después de 1936 (guardadas para épocas futuras)
 
 El sitio termina hoy en 1936. Estas imágenes se guardan con `epocas: []` y `epocas_futuras` para cuando
 se agregue una época de los años 40–50 (haría falta también el plano de 1950 ya descargado).
 
-- **Hotel Majestic, 1948** (`1948-commons-hotel-majestic`, Nationaal Archief, 2640 px): el hotel de
+- **Hotel Majestic, 1948** (`1948-commons-hotel-majestic`, Nationaal Archief, 2640 px; **CC0 verificado**
+  en Commons, foto de Willem van de Poll: se publica en la ficha del Teatro Municipal): el hotel de
   **cinco pisos con torre de cúpula en la esquina**, toldos en cada ventana y comercio abajo, visto
   desde el **pórtico de columnas del Teatro Municipal**; plazoleta con estatua, carros y autobuses de
   los 40, un edificio racionalista bajo al lado. **El Majestic es de 1930**: sirve desde ya como hito de
