@@ -4,7 +4,7 @@ import {
 } from 'three'
 import { cargarPak } from './pak.js'
 import { geometriaCiudad } from './ciudad.js'
-import { crearMaterialCiudad } from './material.js'
+import { crearMaterialCiudad, crearMaterialSombraCiudad } from './material.js'
 import { cargarArboles } from './arboles.js'
 import { HITOS, crearHitos, suprimirTechos, zonasDeSupresion } from './hitos.js'
 import { acercar } from './animar.js'
@@ -17,6 +17,8 @@ import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
 import { cargarCalles, crearRotulos } from './calles.js'
 import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo } from './relieve.js'
+import { vectorSol, ajustesDeAcabado, esRenderPorSoftware } from './luz.js'
+import { crearAcabado } from './acabado.js'
 
 const params = new URLSearchParams(location.search)
 const COLOR_FONDO = 0x1d1a17
@@ -60,7 +62,7 @@ addEventListener('resize', () => {
 // --- luz y material compartido por el suelo y la ciudad ---
 scene.add(new HemisphereLight(0xfff4e0, 0x6b5a48, 1.6))
 const sol = new DirectionalLight(0xfff1d6, 2.2)
-sol.position.set(-1200, 2000, 900)
+sol.position.fromArray(vectorSol()).multiplyScalar(2500) // la dirección del sol es una sola (src/luz.js)
 scene.add(sol)
 // el relieve: sus uniforms van en el material; sin relieve.bin la hoja queda lisa
 const relieveU = uniformsRelieve(hoja)
@@ -141,12 +143,16 @@ cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vid
   // donde hay un hito modelado a mano, la casa genérica de ese lugar no nace (src/hitos/suprimir.js)
   const g = geometriaCiudad({ ...datos, vida: suprimirTechos(datos, zonasDeSupresion(HITOS)) }, coords)
   olaMax = Math.max(olaMax, g.boundingSphere.center.length() + g.boundingSphere.radius + 400)
-  scene.add(new Mesh(g, ciudad.material))
+  const casas = new Mesh(g, ciudad.material)
+  // las casas tiran sombra: desde el sol se dibujan con el mismo vértice (src/acabado.js)
+  casas.customDepthMaterial = crearMaterialSombraCiudad(ciudad.U)
+  casas.castShadow = true
+  scene.add(casas)
   document.getElementById('alzar').hidden = false
   pedirCuadro(3)
 }).catch((e) => console.warn(`ciudad: ${e.message}`)).then(() => {
   // los árboles, después de la ciudad: una malla instanciada que comparte sus uniforms (src/arboles.js)
-  return cargarArboles('datos/arboles.bin', { coords, U: ciudad.U, sol: sol.position }).then((m) => {
+  return cargarArboles('datos/arboles.bin', { coords, U: ciudad.U }).then((m) => {
     arboles = m
     scene.add(m)
     pedirCuadro(3)
@@ -156,7 +162,7 @@ cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vid
 // --- los hitos: edificios y lugares modelados a mano, en una sola malla con los uniforms de la ciudad ---
 let hitos = null
 try {
-  hitos = crearHitos({ coords, U: ciudad.U, sol: sol.position })
+  hitos = crearHitos({ coords, U: ciudad.U })
   scene.add(hitos)
 } catch (e) { console.warn(`hitos: ${e.message}`) }
 
@@ -305,6 +311,16 @@ const sueloEn = (x, z) => alturaSuelo(relieve, x, z,
   { ola: ciudad.U.uOla.value, anchoOla: ciudad.U.uAnchoOla.value, exageracion: relieveU.uExageracion.value })
 const cam = crearCamara(camera, renderer.domElement, { pedirCuadro, hoja, suelo: sueloEn })
 
+// --- la luz y el acabado: sombras arrojadas, contorno a tinta, bruma y grano de papel (src/acabado.js) ---
+const gl = renderer.getContext()
+const gpu = gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info')?.UNMASKED_RENDERER_WEBGL ?? gl.RENDERER)
+const acabado = crearAcabado({
+  renderer, scene, camera, U: ciudad.U,
+  ajustes: ajustesDeAcabado({ params, liviano, software: esRenderPorSoftware(gpu), maxTextura }),
+  limite: { x0: hoja.x0, z0: hoja.z0, x1: hoja.x0 + hoja.ancho, z1: hoja.z0 + hoja.alto },
+  vista: () => cam.now,
+})
+
 const reloj = new Timer()
 renderer.setAnimationLoop((t) => {
   reloj.update(t)
@@ -336,13 +352,13 @@ renderer.setAnimationLoop((t) => {
     teselas.update(px, py, cam.now.dist < DIST_TESELAS_M)
   }
   rotulos?.dibujar({ camera, dist: cam.now.dist, x: cam.now.x, z: cam.now.z, opacidad: ciudad.U.uHoy.value })
-  renderer.render(scene, camera)
+  acabado.dibujar()
 })
 
 if (params.has('hoy')) alternarHoy(true)
 document.body.classList.add('listo')
 window.lab = {
-  renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, relieveU, sueloEn, ready: true,
+  renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, relieveU, sueloEn, acabado, ready: true,
   get relieve() { return relieve },
   get teselas() { return teselas },
   get arboles() { return arboles },

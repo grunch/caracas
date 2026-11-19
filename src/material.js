@@ -7,7 +7,7 @@
  *   techos de teja criolla y paredes de cal en sus tonos de siempre.
  * aInfo = (distancia a la plaza, semilla, estilo, pisos); pisos = 0 marca el suelo.
  */
-import { MeshLambertMaterial, Vector2, Vector4, DataTexture } from 'three'
+import { MeshLambertMaterial, ShaderMaterial, DoubleSide, Vector2, Vector4, DataTexture } from 'three'
 import { RANURAS } from './teselas.js'
 import { GLSL_RELIEVE, uniformsRelieve } from './relieve.js'
 import { SIN_LINEA_DE_TIEMPO } from './epocas.js'
@@ -20,6 +20,7 @@ import { GLSL_TECHO } from './shader/techo.js'
 import { CUBIERTA } from './techos.js'
 import { GLSL_HOY } from './shader/hoy.js'
 import { VERTICE_COMUN, VERTICE_OLA } from './shader/vertice.js'
+import { GLSL_SOMBRA, uniformsDeLuz } from './shader/sombra.js'
 
 // el fragment: los módulos de src/shader/ en orden de dependencia (suelo usa plano, épocas y crece)
 const FRAGMENTO_COMUN = /* glsl */ `
@@ -33,8 +34,10 @@ const FRAGMENTO_COMUN = /* glsl */ `
   flat varying float vAlzada; // cuánto se levantó la casa (0 acostada en la hoja … 1 en pie)
   varying vec3 vFaldon; // del techo: s, t y el largo del faldón (src/shader/techo.js)
   varying vec2 vTerreno;
+  varying vec3 vNormalMundo;
   ${GLSL_AZAR}
   ${GLSL_PRETIL}
+  ${GLSL_SOMBRA}
   ${GLSL_EPOCAS}
   ${GLSL_CRECE}
   ${GLSL_PLANO}
@@ -79,6 +82,24 @@ const FRAGMENTO_COLOR = /* glsl */ `
   // lo de hoy (H): la ciudad actual en rojo, sobre el suelo en los dos modos; los techos, en su color
   diffuseColor.rgb = mix(diffuseColor.rgb, hoyEn(uvPlano, diffuseColor.rgb), esSuelo);`
 
+/**
+ * La sombra arrojada (src/shader/sombra.js), sobre la luz ya calculada. En color, a la sombra no llega
+ * el sol directo y la luz que queda es más fría. En tinta el papel no se oscurece: la sombra se raya a
+ * pluma (más liviana en las caras que solo le dan la espalda al sol: es su sombra propia).
+ */
+const FRAGMENTO_LUZ = /* glsl */ `
+  const vec3 LUZ_PAREJA = vec3(1.05, 1.0, 0.9); // la luz del suelo al sol, para todas las caras
+  vec3 nMundo = normalize(vNormalMundo);
+  float sol = solEn(vMundo, nMundo);
+  vec3 conSol = (reflectedLight.indirectDiffuse + reflectedLight.directDiffuse * sol) * luzDeColor(sol);
+  float propia = step(dot(nMundo, uSol), 0.0);
+  float raya = rayadoSombra((1.0 - sol) * mix(1.0, 0.42, propia), vMundo);
+  // el papel del grabado casi no cambia con la cara: el volumen lo dan el rayado y el contorno
+  vec3 papelParejo = mix(outgoingLight, diffuseColor.rgb * LUZ_PAREJA, 0.65);
+  vec3 conRaya = mix(papelParejo, TINTA_SOMBRA, 0.9 * raya);
+  outgoingLight = mix(conRaya, conSol, uColor);
+  #include <opaque_fragment>`
+
 /** 1×1 blanco: en "desde cuándo", edificado desde la primera época (no recorta nada). */
 const TODO_EDIFICADO = Object.assign(new DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1), { needsUpdate: true })
 /** 1×1 en cero: sin rótulos, hasta que llegue su máscara (el plano se marca entero). */
@@ -118,6 +139,7 @@ export function crearMaterialCiudad({
     uHoyCercaOn: { value: 0 },
     uHoyLejosRes: { value: new Vector2(1, 1) },
     uHoyCercaRes: { value: new Vector2(1, 1) },
+    ...uniformsDeLuz(), // el sol y el mapa de sombras (src/shader/sombra.js, src/acabado.js)
   }
   const material = new MeshLambertMaterial({ color: 0xf1e6cd })
   material.onBeforeCompile = (s) => {
@@ -131,8 +153,33 @@ export function crearMaterialCiudad({
     s.fragmentShader = s.fragmentShader
       .replace('#include <common>', `#include <common>${FRAGMENTO_COMUN}`)
       .replace('#include <color_fragment>', `#include <color_fragment>${FRAGMENTO_COLOR}`)
+      .replace('#include <opaque_fragment>', FRAGMENTO_LUZ)
   }
   return { material, U }
+}
+
+/**
+ * La ciudad vista desde el sol, para el mapa de sombras: el mismo vértice (la ola, las épocas, el pretil,
+ * el relieve) y nada de color. Lo que todavía no se levantó, lo que no existe en la época que rige y el
+ * alero que la fachada de pretil no lleva se van de la vista: no tiran sombra. El suelo tampoco.
+ */
+export function crearMaterialSombraCiudad(U) {
+  return new ShaderMaterial({
+    uniforms: U,
+    vertexShader: `${VERTICE_COMUN}
+      attribute vec2 aAncla;
+      ${GLSL_RELIEVE}
+      void main() {
+        vec3 transformed = position;
+        ${VERTICE_OLA}
+        ${VERTICE_APOYO}
+        float volado = max(1.0 - step(0.5, abs(vCubierta - ${CUBIERTA.ALERO}.0)), step(${CUBIERTA.VOLADA}.0 - 0.5, vCubierta));
+        bool tira = aInfo.w > 0.5 && vAlzada * vExiste > 0.02 && !(volado > 0.5 && conPretil(vInfo.z) > 0.5);
+        gl_Position = tira ? projectionMatrix * viewMatrix * vec4(transformed, 1.0) : vec4(2.0, 2.0, 2.0, 1.0);
+      }`,
+    fragmentShader: 'void main() { gl_FragColor = vec4(1.0); }',
+    side: DoubleSide,
+  })
 }
 
 /**
@@ -145,16 +192,21 @@ export function crearMaterialCiudad({
 function parchearRelieveVertex(s) {
   s.vertexShader = s.vertexShader
     .replace('void main() {', `attribute vec2 aAncla;
+      varying vec3 vNormalMundo;
       ${GLSL_RELIEVE}
       void main() {`)
     .replace('#include <beginnormal_vertex>', `#include <beginnormal_vertex>
-      if (aInfo.w < 0.5) objectNormal = normalSuelo(position.xz);`)
-    .replace('#include <project_vertex>', `
+      if (aInfo.w < 0.5) objectNormal = normalSuelo(position.xz);
+      vNormalMundo = objectNormal; // las geometrías están en coordenadas del mundo`)
+    .replace('#include <project_vertex>', `${VERTICE_APOYO}
+      #include <project_vertex>`)
+}
+
+/** Antes de proyectar: el suelo se hincha con el relieve y la casa se apoya en él (ver parchearRelieveVertex). */
+const VERTICE_APOYO = /* glsl */ `
       // el piso de un patio o de un solar se apoya en el terreno de cada punto: en la cuesta no lo tapa
       bool esPiso = aInfo.w > 0.5 && aTecho.w > ${CUBIERTA.PATIO}.0 - 0.5 && aTecho.w < ${CUBIERTA.SOLAR}.0 + 0.5;
       vBase = aInfo.w < 0.5 || esPiso ? sueloEn(position.xz) : sueloEn(aAncla);
       vTerreno = aInfo.w < 0.5 ? terrenoEn(position.xz) : vec2(0.0);
       transformed.y += aInfo.w < 0.5 || esPiso ? sueloEn(position.xz)
-        : apoyoCasa(aAncla, transformed.xz, position.y < 0.01);
-      #include <project_vertex>`)
-}
+        : apoyoCasa(aAncla, transformed.xz, position.y < 0.01);`

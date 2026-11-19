@@ -9,15 +9,15 @@
  */
 import {
   InstancedMesh, ShaderMaterial, IcosahedronGeometry, CylinderGeometry, BufferAttribute,
-  InstancedBufferAttribute, Matrix4, Vector3,
+  InstancedBufferAttribute, Matrix4,
 } from 'three'
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
 import { GLSL_RELIEVE } from './relieve.js'
 import { GLSL_EPOCAS } from './shader/epocas.js'
+import { GLSL_SOMBRA, UNIFORMS_DE_LUZ, uniformsDeLuz } from './shader/sombra.js'
 
 const BYTES_POR_ARBOL = 8 // 4 × Uint16 LE: x, y (px del mosaico), radio (dm), vida (nace + 8·muere + 64·silvestre)
 const DM_POR_M = 10
-const SOL = new Vector3(-1200, 2000, 900).normalize() // la misma dirección que la luz de main.js
 
 /**
  * arboles.bin → { n, x, y (px), radio (m), nace, muere (épocas; muere = 0: no muere), silvestre (0/1) }.
@@ -111,8 +111,9 @@ const VERTICE = /* glsl */ `
   }`
 
 const FRAGMENTO = /* glsl */ `
-  uniform float uColor; uniform vec3 uSol;
+  uniform float uColor;
   varying vec3 vNormal, vMundo; varying float vParte, vSemilla, vSilvestre;
+  ${GLSL_SOMBRA}
   float azar3(vec3 p) { return fract(sin(dot(p, vec3(12.9898, 78.233, 37.719))) * 43758.5453); }
   void main() {
     vec3 N = normalize(vNormal);
@@ -120,6 +121,8 @@ const FRAGMENTO = /* glsl */ `
     // tres tonos: la luz del sol cuantizada, con manchas de follaje para que el corte no sea limpio
     float manchas = azar3(floor(vMundo * 0.7) + vSemilla) - 0.5;
     float luz = dot(N, uSol) * 0.5 + 0.5 + manchas * 0.22;
+    // la sombra que le tiran las casas y los otros árboles (leída mirando al sol: la propia ya está en luz)
+    luz *= mix(0.62, 1.0, solEn(vMundo, normalize(N + 1.5 * uSol)));
     float tono = vParte > 0.5 ? 0.0 : step(0.5, luz) + step(0.78, luz); // 0 sombra · 1 media tinta · 2 luz
     // el borde "como a mano": contorno donde la copa se da vuelta, con el grosor movido
     float vuelta = 1.0 - abs(dot(N, V));
@@ -147,7 +150,7 @@ const FRAGMENTO = /* glsl */ `
   }`
 
 /** La malla de los árboles; `U` son los uniforms de la ciudad (crearMaterialCiudad), compartidos. */
-export function crearArboles({ datos, coords, U, sol = SOL }) {
+export function crearArboles({ datos, coords, U }) {
   const { posiciones, radios, nace, muere, semillas, silvestre } = instanciasArboles(datos, coords)
   const geometria = geometriaArbol()
   const arbol = new Float32Array(datos.n * 4)
@@ -156,12 +159,15 @@ export function crearArboles({ datos, coords, U, sol = SOL }) {
 
   const comunes = ['uColor', 'uOla', 'uAnchoOla', 'uEpocaDe', 'uEpocaA', 'uOlaEpoca',
     'tRelieve', 'uRelieveHoja', 'uRelieveCelda', 'uExageracion']
-  const material = new ShaderMaterial({
-    uniforms: { ...Object.fromEntries(comunes.map((k) => [k, U[k]])), uSol: { value: sol.clone().normalize() } },
-    vertexShader: VERTICE,
-    fragmentShader: FRAGMENTO,
-  })
+  // el sol y el mapa de sombras son los de la ciudad; sin ellos (un U a medias), los de respaldo: el sol de
+  // siempre y el mapa apagado (el sampler de sombra necesita su entrada aunque no se lea)
+  const luz = Object.fromEntries(UNIFORMS_DE_LUZ.filter((k) => U[k]).map((k) => [k, U[k]]))
+  const uniforms = { ...uniformsDeLuz(), ...Object.fromEntries(comunes.map((k) => [k, U[k]])), ...luz }
+  const material = new ShaderMaterial({ uniforms, vertexShader: VERTICE, fragmentShader: FRAGMENTO })
   const malla = new InstancedMesh(geometria, material, datos.n)
+  // vistos desde el sol (src/acabado.js): el mismo vértice, sin color
+  malla.customDepthMaterial = new ShaderMaterial({ uniforms, vertexShader: VERTICE, fragmentShader: 'void main() { gl_FragColor = vec4(1.0); }' })
+  malla.castShadow = true
   const m = new Matrix4()
   for (let i = 0; i < datos.n; i++) {
     const r = radios[i]
