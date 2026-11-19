@@ -63,6 +63,10 @@ test('los hitos son una sola malla con los atributos de su material y los unifor
 })
 
 test('al cambiar de época cambia lo que se ve en la Plaza Bolívar: vacía, mercado, jardín con estatua', async ({ page }) => {
+  // sin las épocas de la hoja ni el relieve: con crece.json, antes de 1936 el piso es papel o plano según la
+  // época, y con el relieve la cámara (a 60 m de la cota 0) queda bajo el terreno levantado; lo que se mide
+  // aquí es el hito (el mismo test con o sin datos pesados)
+  await page.route(/\/(datos\/(crece\.json|relieve\.bin)|plano\/crece\.png)$/, (ruta) => ruta.abort())
   await listo(page)
   const [vacia, mercado, mercado43, jardin, damero] = [
     await colorDeLaPlaza(page, 0), await colorDeLaPlaza(page, 1), await colorDeLaPlaza(page, 2),

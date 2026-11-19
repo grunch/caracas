@@ -388,3 +388,58 @@ def test_una_plaza_nueva_ancha_tambien_era_casas_en_la_cuadra_de_antes():
     antes = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and a]
     plaza = box(100, 40, 200, 200)
     assert sum(p.intersection(plaza).area for p in antes) > 0.3 * plaza.area
+
+
+def test_una_manzana_de_varias_cuadras_con_un_convento_se_separa_y_la_cuadra_de_casas_va_con_el_modelo():
+    # tres cuadras pegadas por patios; dos son casi todas un convento: la manzana entera no es "de solo
+    # casas", pero la tercera sí, y va con la cuadra modelo
+    c = np.full((260, 420), CLASE['calle'], np.uint8)
+    for x0 in (30, 146, 262):
+        c[30:230, x0:x0 + 100] = CLASE['edificado']
+    c[30:230, 30:246] = CLASE['publico']
+    c[60:68, 130:146] = CLASE['patio']
+    c[180:188, 246:262] = CLASE['patio']
+    res = vectorizar(c, METRO, plaza=(210, 130))
+    assert res['manzanas'] == 1
+    de_la_tercera = [q for q, t in zip(res['cuadras'], res['techos']) if t[3] != 9]
+    assert de_la_tercera and all(q >= 0 for q in de_la_tercera)   # con la cuadra modelo
+
+
+def test_dos_cuadras_unidas_por_una_calle_pintada_de_jardin_se_cortan_por_la_calle_de_hoy():
+    # dos cuadras de 50 × 100 m que el plano de 1936 une con 10 m de jardín; OSM tiene la calle por el medio
+    c = np.full((260, 300), CLASE['calle'], np.uint8)
+    c[30:230, 30:250] = CLASE['edificado']
+    c[30:230, 130:150] = CLASE['verde']
+    calles_hoy = np.zeros(c.shape, bool)
+    calles_hoy[:, 137:143] = True
+    res = vectorizar(c, METRO, plaza=(140, 130), calles_hoy=calles_hoy)
+    assert res['manzanas'] == 1
+    lineas = {}
+    for m in res['marcos']:
+        ev = (round(-m[4], 2), round(m[3], 2))
+        lineas.setdefault(ev, set()).add(round(m[1] * -m[4] + m[2] * m[3]))
+    assert len(lineas[(1.0, 0.0)]) == 2 and len(lineas[(-1.0, 0.0)]) == 2   # dos cuadras, cada una con su fachada
+    polis = poligonos(res)
+    assert sum(p.intersection(box(137, 40, 143, 220)).area for p in polis) < 20   # nada sobre la calle
+
+
+def test_lo_que_corta_la_calle_de_hoy_no_queda_con_el_numero_de_la_manzana_entera():
+    # la misma manzana cortada por la calle de hoy, y una calle nueva que la cruza por arriba: el jardín que
+    # se lleva el corte no puede seguir con el número de la manzana entera (no tiene caja y rompía los grupos)
+    c = np.full((260, 300), CLASE['calle'], np.uint8)
+    c[30:230, 30:250] = CLASE['edificado']
+    c[30:230, 130:150] = CLASE['verde']
+    calles_hoy = np.zeros(c.shape, bool)
+    calles_hoy[:, 137:143] = True
+    calles_nuevas = np.zeros(c.shape, bool)
+    calles_nuevas[14:30, 30:250] = True
+    res = vectorizar(c, METRO, plaza=(140, 130), calles_nuevas=calles_nuevas, calles_hoy=calles_hoy)
+    assert res['manzanas'] == 1
+
+
+def test_calles_de_osm_se_dibujan_en_la_mascara_del_mosaico():
+    from tools.geo.vectorizar import mascara_de_calles
+    elems = [{'capa': 'calle', 'area': False, 'lineas': [np.array([[10.0, 50.0], [190.0, 50.0]])]},
+             {'capa': 'agua', 'area': False, 'lineas': [np.array([[10.0, 150.0], [190.0, 150.0]])]}]
+    m = mascara_de_calles(elems, (200, 200), METRO)
+    assert m[50, 100] and m[48, 100] and not m[150, 100]
