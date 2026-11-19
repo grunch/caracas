@@ -13,6 +13,12 @@ import {
 const DM_POR_M = 10
 const MARGEN_PIE_M = 0.5 // el pie de las paredes baja un poco más que el suelo, para no dejar rendijas
 
+const SUBDIVISION_HOJA = Object.freeze([384, 306]) // la hoja se hincha con el relieve (≈ 24 m por cuadro)
+const SUBDIVISION_HOJA_SOFTWARE = Object.freeze([96, 77]) // dibujando la CPU, el suelo era el 90 % de cada cuadro
+
+/** En cuántos cuadros se subdivide la hoja del plano: más grueso si el WebGL lo dibuja la CPU (src/luz.js). */
+export const subdivisionDeLaHoja = (software) => [...(software ? SUBDIVISION_HOJA_SOFTWARE : SUBDIVISION_HOJA)]
+
 export function decodificarRelieve(buffer) {
   if (buffer.byteLength < 4) throw new Error('relieve: buffer truncado (sin cabecera)')
   const v = new DataView(buffer)

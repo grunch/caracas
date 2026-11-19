@@ -7,7 +7,7 @@ import { geometriaCiudad } from './ciudad.js'
 import { crearMaterialCiudad, crearMaterialSombraCiudad } from './material.js'
 import { cargarArboles } from './arboles.js'
 import { HITOS, crearHitos, suprimirTechos, zonasDeSupresion } from './hitos.js'
-import { acercar } from './animar.js'
+import { acercar, pasoDeCuadro } from './animar.js'
 import { texturasHoy, HOY_CERCA } from './hoy.js'
 import { crearBuscador } from './buscador/interfaz.js'
 import { crearTeselasFinas } from './teselas.js'
@@ -17,7 +17,7 @@ import { SIN_PLANO } from './shader/plano.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
 import { cargarCalles, crearRotulos } from './calles.js'
-import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo, hinchado } from './relieve.js'
+import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo, hinchado, subdivisionDeLaHoja } from './relieve.js'
 import { vectorSol, ajustesDeAcabado, esRenderPorSoftware } from './luz.js'
 import { crearAcabado } from './acabado.js'
 import { normalizarMarcas, distanciaDeVuelo } from './marcas.js'
@@ -35,7 +35,6 @@ import { accionDeTecla } from './controles.js'
 const params = new URLSearchParams(location.search)
 const COLOR_FONDO = 0x1d1a17
 const EXAGERACION = 1.3 // el valle se lee mejor con el relieve un poco exagerado
-const SUBDIVISION_HOJA = [384, 306] // la hoja se hincha con el relieve (≈ 24 m por cuadro)
 
 // --- la bienvenida y el «Acerca» (src/acerca-panel.js): antes que nada, para que la bienvenida se vea mientras
 // carga el plano y sus teclas valgan antes que las de los demás paneles. No esperan a nada ni frenan la carga ---
@@ -83,6 +82,9 @@ renderer.setPixelRatio(params.has('capture') ? 1 : Math.min(devicePixelRatio, 2)
 renderer.setSize(innerWidth, innerHeight)
 document.getElementById('view').appendChild(renderer.domElement)
 renderer.domElement.addEventListener('webglcontextrestored', () => location.reload())
+const gl = renderer.getContext()
+const gpu = gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info')?.UNMASKED_RENDERER_WEBGL ?? gl.RENDERER)
+const porSoftware = esRenderPorSoftware(gpu) // SwiftShader en CI y en los E2E: cuadros de segundos
 
 const maxTextura = renderer.capabilities.maxTextureSize
 const liviano = params.has('liviano') || (!params.has('pesado') &&
@@ -120,7 +122,7 @@ const ciudad = crearMaterialCiudad({ plano: meta.plano, metro: meta.plano.metro,
 
 // --- la hoja del plano: el suelo, con el mismo material (pisos = 0 en aInfo), subdividida para
 // apoyarse en el relieve ---
-const suelo = new PlaneGeometry(hoja.ancho, hoja.alto, ...SUBDIVISION_HOJA).rotateX(-Math.PI / 2)
+const suelo = new PlaneGeometry(hoja.ancho, hoja.alto, ...subdivisionDeLaHoja(porSoftware)).rotateX(-Math.PI / 2)
 suelo.translate(hoja.x0 + hoja.ancho / 2, 0, hoja.z0 + hoja.alto / 2)
 suelo.setAttribute('aInfo', new BufferAttribute(new Float32Array(suelo.attributes.position.count * 4), 4))
 suelo.setAttribute('aAncla', new BufferAttribute(new Float32Array(suelo.attributes.position.count * 2), 2))
@@ -401,11 +403,9 @@ const fichas = engancharFichas({ capa: marcas, U: ciudad.U })
 if (params.has('sinmarcas')) alternarMarcas(false)
 
 // --- la luz y el acabado: sombras arrojadas, contorno a tinta, bruma y grano de papel (src/acabado.js) ---
-const gl = renderer.getContext()
-const gpu = gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info')?.UNMASKED_RENDERER_WEBGL ?? gl.RENDERER)
 const acabado = crearAcabado({
   renderer, scene, camera, U: ciudad.U,
-  ajustes: ajustesDeAcabado({ params, liviano, software: esRenderPorSoftware(gpu), maxTextura }),
+  ajustes: ajustesDeAcabado({ params, liviano, software: porSoftware, maxTextura }),
   limite: { x0: hoja.x0, z0: hoja.z0, x1: hoja.x0 + hoja.ancho, z1: hoja.z0 + hoja.alto },
   vista: () => cam.now,
 })
@@ -419,7 +419,7 @@ const buscador = crearBuscador({
 const reloj = new Timer()
 renderer.setAnimationLoop((t) => {
   reloj.update(t)
-  const dt = Math.min(reloj.getDelta(), 0.1)
+  const dt = pasoDeCuadro(reloj.getDelta(), porSoftware)
   if (cam.update(dt)) pedirCuadro(2)
   const { uOla, uColor } = ciudad.U
   if (uOla.value !== olaObjetivo) {
