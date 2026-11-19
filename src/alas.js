@@ -22,6 +22,7 @@ export const CAMPOS_ALA = 5
 const COLONIAL = 0, ORILLAS = 7
 const MARGEN_M = 40 // cuánto se estiran hacia afuera las alas del borde del lote
 const TAPIA_M = 2.6
+const TAPIA_SOLAR_M = 1.2 // entre los solares del fondo, una cerca baja: el centro de la cuadra se ve abierto
 const ALTO_MINIMO_ALA_M = 2.3 // bajo el alero de un ala hay un corredor
 const BAJA_EL_INTERIOR_M = 0.5 // las alas de adentro arrancan más abajo que la crujía de la calle
 const SUBIDA_CRUJIA_M = 2.8
@@ -61,7 +62,9 @@ export const esDePatio = (estilo, semilla, epoca) => ESTILOS_DE_PATIO.includes(e
 const caja = ({ u0, u1, v0, v1 }) => [[u0, v0], [u1, v0], [u1, v1], [u0, v1]]
 // `base` es la región sin estirar: de ahí sale el largo del faldón (src/alzado.js)
 const faldon = (region, base, cubierta, cumbre, origen, caida, tan, extra = {}) => ({ region, base, cubierta, cumbre, origen, caida, tan, borde: 0, ...extra })
-const hueco = (a, e, piso) => faldon(caja(e), caja(a), CUBIERTA.PARED, 0, [a.u0, a.v0], [0, 0], 0, { borde: TAPIA_M, hueco: true, piso })
+const hueco = (a, e, piso) => faldon(caja(e), caja(a), CUBIERTA.PARED, 0, [a.u0, a.v0], [0, 0], 0, {
+  borde: piso === CUBIERTA.SOLAR ? TAPIA_SOLAR_M : TAPIA_M, hueco: true, piso,
+})
 
 /** Dos aguas con la cumbrera a lo largo de u (paralela a la calle), en el medio del ala. */
 function dosAguas(a, e, alero, tan, cubierta) {

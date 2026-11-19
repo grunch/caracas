@@ -42,6 +42,9 @@ AQUI = Path(__file__).resolve().parent
 NUNCA = 255                 # etapa de lo que nunca está edificado
 CUANTAS = 6                 # épocas de la línea de tiempo
 ULTIMA = CUANTAS - 1        # 1936
+PUBLICOS_DESDE = 3          # los edificios públicos del plano de 1936 (grandes, de varios pisos) no existen antes de 1889
+MITAD_DE_LA_CUADRA = 0.5    # una cuadra modelo nace entera cuando ya está al menos esta parte de sus casas
+ESTILO_PUBLICO = 9          # tools/geo/vectorizar.py
 CASAS_1936 = (EDIFICADO, EDIFICIO_PUBLICO, PATIO)   # lo que urbaniza en 1936 (los árboles sueltos no)
 AGUA_MINIMA = 0.15          # parte de una celda de crece.png con agua para que cuente como agua
 CONSTRUIDOS_1578 = ("casa", "iglesia", "cabildo", "convento")
@@ -212,6 +215,62 @@ def vida_de_1578(ciudad78, huellas36, nace36, construido, escala):
     return vida
 
 
+def cerrar_cuadras(nace, cuadras):
+    """El nacimiento de cada casa con las cuadras cerradas: todas las casas de una cuadra modelo (`cuadras`,
+    -1: ninguna) nacen juntas, en la primera época en que ya estaba MITAD_DE_LA_CUADRA de ellas. Así no
+    quedan lotes vacíos que abran los patios de las otras casas a la calle. → un array nuevo."""
+    nace = np.asarray(nace)
+    cuadras = np.asarray(cuadras)
+    salida = nace.copy()
+    for q in np.unique(cuadras[cuadras >= 0]):
+        suyas = cuadras == q
+        orden = np.sort(nace[suyas])
+        salida[suyas] = orden[int(np.ceil(MITAD_DE_LA_CUADRA * len(orden))) - 1]
+    return salida
+
+
+def vida_de_1936(nace36, ciudad):
+    """([[nace, muere], …], techos a quitar) de la ciudad de 1936. Las cuadras modelo nacen enteras
+    (cerrar_cuadras); los edificios públicos, no antes de PUBLICOS_DESDE; una casa que pisa uno ("cede")
+    vive hasta que él nace, y si su cuadra nace cuando el edificio ya está, sobra: se quita."""
+    n = len(ciudad["techos"])
+    nace = cerrar_cuadras(nace36, ciudad.get("cuadras", [-1] * n))
+    publico = np.array([t[3] == ESTILO_PUBLICO for t in ciudad["techos"]], bool)
+    nace = np.where(publico, np.maximum(nace, PUBLICOS_DESDE), nace)
+    vida, quitar = [], set()
+    for k, cede in enumerate(ciudad.get("cede", [-1] * n)):
+        if cede < 0:
+            vida.append([int(nace[k]), 0])
+        elif nace[cede] > nace[k]:
+            vida.append([int(nace[k]), int(nace[cede])])
+        else:
+            vida.append([int(nace[k]), 0])
+            quitar.add(k)
+    return vida, quitar
+
+
+def sin_techos(ciudad, vida, quitar):
+    """(ciudad, vida) sin los techos de `quitar`: los vértices, los marcos y las listas por techo se corren.
+    No toca los originales."""
+    quedan = [k for k in range(len(ciudad["techos"])) if k not in quitar]
+    nuevo = {k: j for j, k in enumerate(quedan)}
+    v = ciudad["vertices"]
+    vertices, techos = [], []
+    for k in quedan:
+        i, cuantos, *resto = ciudad["techos"][k]
+        techos.append([len(vertices) // 2, cuantos, *resto])
+        vertices.extend(v[2 * i:2 * (i + cuantos)])
+    salida = {**ciudad, "vertices": vertices, "techos": techos}
+    for clave in ("esquinas", "cuadras", "cede"):
+        if clave in ciudad:
+            salida[clave] = [ciudad[clave][k] for k in quedan]
+    if "cede" in ciudad:
+        salida["cede"] = [nuevo.get(c, -1) if c >= 0 else -1 for c in salida["cede"]]
+    if "marcos" in ciudad:
+        salida["marcos"] = [[nuevo[m[0]], *m[1:]] for m in ciudad["marcos"] if m[0] in nuevo]
+    return salida, [list(vida[k]) for k in quedan]
+
+
 def casas_por_epoca(vida, cuantas=CUANTAS):
     return [sum(1 for n, m in vida if n <= e and (m == 0 or m > e)) for e in range(cuantas)]
 
@@ -370,8 +429,10 @@ def main():
     construido = [construido_de_epoca(raiz, e, forma, escala, metro) for e in epocas[1:ULTIMA]]
     huellas36 = huellas(ciudad36, forma, escala)
     nace36 = nace(fracciones(huellas36, construido), primera=1, umbral=config["umbral"])
-    vida78 = vida_de_1578(ciudad78, huellas36, nace36, construido, escala)
-    ciudad = unir(ciudad36, [[int(n), 0] for n in nace36], ciudad78, vida78)
+    vida78 = vida_de_1578(ciudad78, huellas36, cerrar_cuadras(nace36, ciudad36.get("cuadras", [-1] * len(nace36))),
+                          construido, escala)
+    vida36, quitar = vida_de_1936(nace36, ciudad36)
+    ciudad = unir(*sin_techos(ciudad36, vida36, quitar), ciudad78, vida78)
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))
 
     casas = casas_por_epoca(ciudad["vida"])

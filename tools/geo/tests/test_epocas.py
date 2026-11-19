@@ -299,3 +299,59 @@ def test_unir_lleva_las_esquinas_de_las_dos_ciudades():
     b = ciudad_de([cuadrado(5, 5, 1), cuadrado(9, 9, 1)])
     assert ep.unir(a, [[1, 0]], b, [[0, 1], [1, 3]])["esquinas"] == [1, 0, 0]
     assert ep.unir(b, [[0, 1], [1, 3]], a, [[1, 0]])["esquinas"] == [0, 0, 1]
+
+
+# --- las cuadras cerradas y los edificios públicos de 1936 (tools/geo/vectorizar.py: cuadras, cede) ---
+
+def test_una_cuadra_nace_entera_cuando_esta_la_mitad_de_sus_casas():
+    nace = np.array([1, 1, 3, 4, 2, 5, 5, 2])
+    cuadras = [0, 0, 0, 0, 1, 1, 1, -1]
+    assert ep.cerrar_cuadras(nace, cuadras).tolist() == [1, 1, 1, 1, 5, 5, 5, 2]
+
+
+def test_cerrar_cuadras_no_toca_el_original():
+    nace = np.array([1, 4])
+    ep.cerrar_cuadras(nace, [0, 0])
+    assert nace.tolist() == [1, 4]
+
+
+def test_los_edificios_publicos_nacen_recien_en_1889_y_las_casas_que_los_pisan_les_ceden_el_lugar():
+    # Arrange: techo 0 un edificio público (estilo 9); 1 y 2 casas de la misma cuadra sobre él; 3 una casa
+    # de una cuadra que nace cuando ya está el edificio
+    ciudad = ciudad_de([cuadrado(0, 0, 10)] * 5)
+    ciudad["techos"][0][3] = 9
+    ciudad["cuadras"] = [-1, 0, 0, 1, -1]
+    ciudad["cede"] = [-1, 0, -1, 0, -1]
+    nace = np.array([1, 1, 2, 4, 2])
+
+    # Act
+    vida, quitar = ep.vida_de_1936(nace, ciudad)
+
+    # Assert
+    assert vida[0] == [ep.PUBLICOS_DESDE, 0]
+    assert vida[1] == [1, ep.PUBLICOS_DESDE]      # la casa vive hasta que llega el edificio
+    assert vida[2] == [1, 0]                      # su cuadra nace entera
+    assert vida[4] == [2, 0]
+    assert quitar == {3}                          # el edificio ya estaba cuando nace su cuadra
+
+
+def test_sin_cuadras_ni_cede_la_vida_es_la_de_siempre():
+    ciudad = ciudad_de([cuadrado(0, 0, 10)] * 2)
+    vida, quitar = ep.vida_de_1936(np.array([1, 3]), ciudad)
+    assert vida == [[1, 0], [3, 0]] and quitar == set()
+
+
+def test_sin_techos_quita_los_techos_y_corre_los_marcos():
+    ciudad = ciudad_de([cuadrado(0, 0, 10), cuadrado(20, 0, 10), cuadrado(40, 0, 10)])
+    ciudad["esquinas"] = [0, 1, 0]
+    ciudad["cuadras"], ciudad["cede"] = [0, 0, 0], [-1, -1, -1]
+    ciudad["marcos"] = [[0, 0, 0, 1, 0, 10, 10, 0, 8, 0, 1], [2, 40, 0, 1, 0, 10, 10, 0, 8, 1, 1]]
+    ciudad["alas"] = [[2, 0, 0, 10, 10], [2, 0, 0, 10, 10]]
+    nueva, vida = ep.sin_techos(ciudad, [[1, 0], [2, 0], [3, 0]], {1})
+    assert len(nueva["techos"]) == 2 and vida == [[1, 0], [3, 0]]
+    assert nueva["esquinas"] == [0, 0]
+    assert [m[0] for m in nueva["marcos"]] == [0, 1]
+    v = np.asarray(nueva["vertices"]).reshape(-1, 2)
+    i, n = nueva["techos"][1][:2]
+    assert v[i:i + n].min(axis=0).tolist() == [40, 0]
+    assert len(ciudad["techos"]) == 3   # el original queda como estaba

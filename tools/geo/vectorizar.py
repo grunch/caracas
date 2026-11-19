@@ -31,6 +31,7 @@ from skimage import measure
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from alas import CRUJIA_M, PATIO, SOLAR, alas_de_casa, frentes_de_manzana  # noqa: E402
+from cuadra import casa_modelo, crujia_de_cuadra, es_de_solo_casas  # noqa: E402
 from lotes import (  # noqa: E402
     casas_de_esquina, direccion_de_manzana, esquinas_de_manzana, fundir_chicos, lotes_de_manzana, sin_pelos,
 )
@@ -77,10 +78,14 @@ def poligono_de(mascara, desplazamiento, tolerancia_px):
     return figura if figura.is_valid and not figura.is_empty else None
 
 
-def agregar_techo(salida, figura, pisos, estilo, semilla, esquina=False):
+def agregar_techo(salida, figura, pisos, estilo, semilla, esquina=False, cuadra=-1, cede=-1):
+    """Un techo más. `cuadra`: la manzana de la cuadra modelo a la que pertenece (-1: ninguna); `cede`: el
+    edificio público (número de techo) que la casa pisa y al que le deja el lugar cuando nace (-1: ninguno)."""
     puntos = list(figura.exterior.coords)[:-1]
     salida['techos'].append([len(salida['vertices']) // 2, len(puntos), pisos, estilo, semilla])
     salida['esquinas'].append(int(esquina))
+    salida['cuadras'].append(int(cuadra))
+    salida['cede'].append(int(cede))
     for x, y in puntos:
         salida['vertices'].extend((round(x, 2), round(y, 2)))
 
@@ -94,7 +99,21 @@ def techos_publicos(clases, salida, area_min_px, tolerancia_px, metro):
         figura = poligono_de(comp[y:y + h, x:x + w] == k, (x, y), tolerancia_px)
         if figura is not None:
             pisos = 3 if figura.area * metro ** 2 > 2000 else 2
+            salida['publicos'].append((figura, len(salida['techos'])))
             agregar_techo(salida, figura, pisos, ESTILO_PUBLICO, semilla_de(figura.centroid.x, figura.centroid.y))
+
+
+CEDE_DESDE = 0.25   # una casa que pisa un edificio público en más que esto de su huella le cede el lugar
+
+
+def publico_que_pisa(publicos, figura):
+    """El techo del edificio público que la casa pisa en más de CEDE_DESDE de su huella, o -1."""
+    for poligono, techo in publicos:
+        if poligono.bounds[0] <= figura.bounds[2] and figura.bounds[0] <= poligono.bounds[2] \
+                and poligono.bounds[1] <= figura.bounds[3] and figura.bounds[1] <= poligono.bounds[3] \
+                and poligono.intersection(figura).area > CEDE_DESDE * figura.area:
+            return techo
+    return -1
 
 
 def agregar_alas(salida, techo, marco, alas, origen, metro):
@@ -106,20 +125,30 @@ def agregar_alas(salida, techo, marco, alas, origen, metro):
     salida['alas'].extend(alas)
 
 
-def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro):
-    x, y = origen
+def _casas_de_manzana(clases, manzana, lotes, metro, modelo):
+    """Las casas de la manzana (etiquetas): lo edificado de cada lote o, en la cuadra modelo, el lote entero
+    (también sobre los edificios públicos: antes de que existan, ahí había casas)."""
     edificado = manzana & (clases == CLASE['edificado'])
-    if edificado.sum() < area_min_px:
+    casas = measure.label(np.where(manzana if modelo else edificado, lotes, 0), background=0, connectivity=2)
+    casas = measure.label(sin_pelos(casas, ANCHO_MINIMO_M / 2 / metro), background=0, connectivity=2)
+    return fundir_chicos(casas, AREA_FUSION_M2 / metro ** 2)
+
+
+def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, cuadra_modelo=True):
+    """Las casas de una manzana. Las de solo casas (tools/geo/cuadra.py) van con la cuadra modelo: un anillo
+    de casas que dan a la calle y el centro abierto; las demás, con lo edificado del plano en cada lote."""
+    x, y = origen
+    if (manzana & (clases == CLASE['edificado'])).sum() < area_min_px:
         return
     salida['manzanas'] += 1
     direccion = direccion_de_manzana(manzana, metro)
+    modelo = cuadra_modelo and direccion[1] is not None and es_de_solo_casas(clases, manzana, metro, CLASE['edificado'], CLASE['publico'])
     lotes = lotes_de_manzana(manzana, metro, semilla_de(int(x), int(y)), direccion)
     # de toda la manzana: las líneas de fachada y el fondo de la crujía (la cumbrera corre seguida por la cuadra)
     frentes = frentes_de_manzana(manzana, direccion[0][0], metro)
-    crujia = CRUJIA_M[0] + (CRUJIA_M[1] - CRUJIA_M[0]) * (semilla_de(int(x) + 17, int(y) + 29) / 0xFFFF)
-    casas = measure.label(np.where(edificado, lotes, 0), background=0, connectivity=2)
-    casas = measure.label(sin_pelos(casas, ANCHO_MINIMO_M / 2 / metro), background=0, connectivity=2)
-    casas = fundir_chicos(casas, AREA_FUSION_M2 / metro ** 2)
+    azar = semilla_de(int(x) + 17, int(y) + 29) / 0xFFFF
+    crujia = crujia_de_cuadra(azar) if modelo else CRUJIA_M[0] + (CRUJIA_M[1] - CRUJIA_M[0]) * azar
+    casas = _casas_de_manzana(clases, manzana, lotes, metro, modelo)
     # una casa suelta o un par de casas no son una manzana con esquinas a la calle
     hay_esquinas = len(np.unique(casas)) - 1 >= CASAS_PARA_ESQUINA
     de_esquina = casas_de_esquina(casas, esquinas_de_manzana(manzana, metro), RADIO_ESQUINA_M / metro) if hay_esquinas else set()
@@ -133,23 +162,32 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
         if figura is None:
             continue
         semilla = semilla_de(figura.centroid.x, figura.centroid.y)
-        agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla,
-                      esquina=casa in de_esquina)
         # la casa en su ventana, con 10 m de manzana alrededor para ver qué lados dan a la calle
         margen = int(math.ceil(10 / metro))
         f0, c0 = max(0, zona[0].start - margen), max(0, zona[1].start - margen)
         ventana = (slice(f0, zona[0].stop + margen), slice(c0, zona[1].stop + margen))
-        con_alas = alas_de_casa(casas[ventana] == casa, manzana[ventana], direccion[1], metro, semilla, distancia_m(figura),
-                                [(fx - c0, fy - f0, dx, dy) for fx, fy, dx, dy in frentes], crujia)
+        frentes_aqui = [(fx - c0, fy - f0, dx, dy) for fx, fy, dx, dy in frentes]
+        if modelo:
+            con_alas = casa_modelo(casas[ventana] == casa, manzana[ventana], direccion[1], metro, semilla, frentes_aqui, crujia)
+            if con_alas is None:   # un lote que no da a la calle: en la cuadra modelo es solar
+                continue
+        else:
+            con_alas = alas_de_casa(casas[ventana] == casa, manzana[ventana], direccion[1], metro, semilla,
+                                    distancia_m(figura), frentes_aqui, crujia)
+        agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla,
+                      esquina=casa in de_esquina, cuadra=salida['manzanas'] - 1 if modelo else -1,
+                      cede=publico_que_pisa(salida['publicos'], figura) if modelo else -1)
         if con_alas:
             agregar_alas(salida, len(salida['techos']) - 1, *con_alas, (x + c0, y + f0), metro)
 
 
-def vectorizar(clases, metro, plaza):
+def vectorizar(clases, metro, plaza, cuadra_modelo=True):
+    """La ciudad de la imagen de clases. Sin `cuadra_modelo`, todas las manzanas con lo edificado del plano."""
     clases = np.asarray(clases)
     area_min_px = AREA_MINIMA_M2 / metro ** 2
     tolerancia_px = TOLERANCIA_M / metro
-    salida = {'vertices': [], 'techos': [], 'esquinas': [], 'manzanas': 0, 'marcos': [], 'alas': []}
+    salida = {'vertices': [], 'techos': [], 'esquinas': [], 'cuadras': [], 'cede': [], 'manzanas': 0, 'marcos': [], 'alas': [],
+              'publicos': []}
 
     def distancia_m(f):
         return math.hypot(f.centroid.x - plaza[0], f.centroid.y - plaza[1]) * metro
@@ -160,7 +198,8 @@ def vectorizar(clases, metro, plaza):
     for k in range(1, n):
         x, y, w, h = stats[k, :4]
         techos_de_manzana(clases[y:y + h, x:x + w], comp[y:y + h, x:x + w] == k, (x, y),
-                          salida, area_min_px, tolerancia_px, distancia_m, metro)
+                          salida, area_min_px, tolerancia_px, distancia_m, metro, cuadra_modelo)
+    del salida['publicos']
     return salida
 
 

@@ -9,11 +9,14 @@ from tools.geo.vectorizar import CLASE, vectorizar
 METRO = 0.5  # m/px
 
 
-def manzana_con_patio():
-    """Una manzana de 100×100 m: corona edificada de 20 m de fondo, patio al medio, calles alrededor."""
+def manzana_con_patio(con_iglesia=False):
+    """Una manzana de 100×100 m: corona edificada de 20 m de fondo, patio al medio, calles alrededor.
+    `con_iglesia`: un edificio público en una esquina (así no va con la cuadra modelo)."""
     c = np.full((260, 260), CLASE['calle'], np.uint8)
     c[30:230, 30:230] = CLASE['edificado']
     c[70:190, 70:190] = CLASE['patio']
+    if con_iglesia:
+        c[30:70, 30:70] = CLASE['publico']
     return c
 
 
@@ -28,8 +31,15 @@ def test_divide_la_corona_en_lotes_de_frente_razonable():
     assert perimetro_m / 16 <= len(res['techos']) <= perimetro_m / 8
 
 
-def test_las_huellas_no_invaden_el_patio_ni_la_calle():
+def test_las_huellas_no_invaden_la_calle():
     polis = poligonos(vectorizar(manzana_con_patio(), METRO, plaza=(130, 130)))
+    afuera = box(0, 0, 260, 260).difference(box(28, 28, 232, 232))
+    assert all(p.is_valid and p.area > 0 for p in polis)
+    assert sum(p.intersection(afuera).area for p in polis) < 1
+
+
+def test_fuera_de_la_cuadra_modelo_las_huellas_no_invaden_el_patio_ni_la_calle():
+    polis = poligonos(vectorizar(manzana_con_patio(), METRO, plaza=(130, 130), cuadra_modelo=False))
     patio = box(72, 72, 188, 188)
     afuera = box(0, 0, 260, 260).difference(box(28, 28, 232, 232))
     assert all(p.is_valid and p.area > 0 for p in polis)
@@ -37,8 +47,8 @@ def test_las_huellas_no_invaden_el_patio_ni_la_calle():
     assert sum(p.intersection(afuera).area for p in polis) < 1
 
 
-def test_las_huellas_cubren_casi_todo_lo_edificado():
-    polis = poligonos(vectorizar(manzana_con_patio(), METRO, plaza=(130, 130)))
+def test_fuera_de_la_cuadra_modelo_las_huellas_cubren_casi_todo_lo_edificado():
+    polis = poligonos(vectorizar(manzana_con_patio(), METRO, plaza=(130, 130), cuadra_modelo=False))
     edificado_px = 200 * 200 - 120 * 120
     assert sum(p.area for p in polis) == pytest.approx(edificado_px, rel=0.05)
 
@@ -97,9 +107,16 @@ def manzana_maciza(lado_m=110):
     return c
 
 
-def test_una_manzana_maciza_da_casas_de_patio_con_su_marco_y_sus_alas():
+def manzana_con_iglesia():
+    """La manzana maciza con un edificio público sobre la calle norte."""
+    c = manzana_maciza()
+    c[30:90, 110:170] = CLASE['publico']
+    return c
+
+
+def test_sin_la_cuadra_modelo_una_manzana_maciza_da_casas_de_patio_con_su_marco_y_sus_alas():
     from tools.geo.alas import FRENTE, PATIO
-    res = vectorizar(manzana_maciza(), METRO, plaza=(140, 140))
+    res = vectorizar(manzana_maciza(), METRO, plaza=(140, 140), cuadra_modelo=False)
     con_alas = [m for m in res['marcos'] if m[10] > 0]
     assert len(con_alas) >= 0.5 * len(res['techos'])
     polis = poligonos(res)
@@ -112,6 +129,7 @@ def test_una_manzana_maciza_da_casas_de_patio_con_su_marco_y_sus_alas():
         if not alas:
             continue
         assert alas[0][0] == FRENTE and any(a[0] == PATIO for a in alas)
+        assert m_es_casa(res, techo)
         # el frente está en la calle: el punto medio de la línea de fachada toca el borde de la casa
         medio = Point(ox + eux * ancho / 2, oy + euy * ancho / 2)
         assert polis[techo].exterior.distance(medio) < 3
@@ -121,6 +139,43 @@ def test_una_manzana_maciza_da_casas_de_patio_con_su_marco_y_sus_alas():
             assert polis[techo].buffer(2).contains(centro)
     assert len({m[0] for m in res['marcos']}) == len(res['marcos'])   # un marco por casa, como mucho
     assert len({m[8] for m in res['marcos']}) == 1   # la crujía es de la manzana: la misma en todas sus casas
+
+
+def m_es_casa(res, techo):
+    from tools.geo.vectorizar import ESTILO_COLONIAL
+    return res['techos'][techo][3] == ESTILO_COLONIAL
+
+
+# --- la cuadra modelo (tools/geo/cuadra.py): las manzanas de solo casas ---
+
+def test_una_manzana_de_solo_casas_es_un_anillo_de_casas_con_el_centro_abierto():
+    from tools.geo.alas import FRENTE, SOLAR
+    from tools.geo.cuadra import CRUJIA_M
+    c = manzana_maciza()
+    res = vectorizar(c, METRO, plaza=(140, 140))
+    assert len(res['marcos']) == len(res['techos'])   # toda casa da a la calle: ninguna mira al centro
+    con_solar = 0
+    for _, ox, oy, eux, euy, ancho, fondo, calles, crujia, primera, cuantas in res['marcos']:
+        alas = res['alas'][primera:primera + cuantas]
+        assert alas and alas[0][0] == FRENTE
+        assert CRUJIA_M[0] / METRO <= crujia <= CRUJIA_M[1] / METRO
+        con_solar += any(a[0] == SOLAR for a in alas)
+    assert con_solar >= 0.6 * len(res['marcos'])
+    assert len({m[8] for m in res['marcos']}) == 1
+    # el centro de la manzana (un cuadrado de 30 m) queda en los solares
+    from tools.geo.vectorizar import mascara_de_patios
+    patios = mascara_de_patios(res, c.shape)[110:170, 110:170] > 0
+    assert patios.mean() > 0.9
+
+
+def test_las_casas_de_la_cuadra_modelo_cambian_de_forma():
+    from tools.geo.alas import CRUZADA, LATERAL_DER, LATERAL_IZQ
+    res = vectorizar(manzana_maciza(), METRO, plaza=(140, 140))
+    formas = set()
+    for *_, primera, cuantas in res['marcos']:
+        tipos = {a[0] for a in res['alas'][primera:primera + cuantas]}
+        formas.add((bool(tipos & {LATERAL_IZQ, LATERAL_DER}), CRUZADA in tipos))
+    assert len(formas) >= 2
 
 
 def test_los_frentes_de_una_cuadra_quedan_en_una_sola_linea():
@@ -139,7 +194,7 @@ def test_la_mascara_de_patios_marca_patios_y_solares_dentro_de_lo_edificado():
     mascara = mascara_de_patios(res, c.shape)
     assert mascara.dtype == np.uint8 and set(np.unique(mascara)) == {0, 255}
     patios = mascara > 0
-    assert 0.08 < patios.sum() / (c == CLASE['edificado']).sum() < 0.5
+    assert 0.08 < patios.sum() / (c == CLASE['edificado']).sum() < 0.75   # en la cuadra modelo, el centro es solar
     assert (patios & (c != CLASE['edificado'])).sum() < 0.01 * patios.sum()
 
 
@@ -149,3 +204,35 @@ def test_una_casa_suelta_y_chica_tiene_marco_pero_no_alas():
     res = vectorizar(c, METRO, plaza=(0, 0))
     assert len(res['techos']) == 1 and len(res['marcos']) == 1
     assert res['marcos'][0][10] == 0 and res['alas'] == []
+
+
+def test_en_una_manzana_con_iglesia_las_casas_la_cubren_y_le_ceden_el_lugar():
+    """Antes de que exista el edificio público su lugar es de casas (la cuadra queda cerrada); las casas que
+    lo pisan anotan en "cede" cuál es, para morir cuando nazca (tools/geo/epocas.py)."""
+    from tools.geo.vectorizar import ESTILO_PUBLICO
+    res = vectorizar(manzana_con_iglesia(), METRO, plaza=(140, 140))
+    polis = poligonos(res)
+    iglesia = [k for k, t in enumerate(res['techos']) if t[3] == ESTILO_PUBLICO]
+    assert len(iglesia) == 1
+    assert len(res['cede']) == len(res['techos']) == len(res['cuadras'])
+    for k, p in enumerate(polis):
+        if k == iglesia[0]:
+            assert res['cede'][k] == -1 and res['cuadras'][k] == -1
+            continue
+        pisa = p.intersection(polis[iglesia[0]]).area > 0.25 * p.area
+        assert res['cede'][k] == (iglesia[0] if pisa else -1)
+    assert any(c == iglesia[0] for c in res['cede'])
+
+
+def test_las_casas_de_una_cuadra_modelo_comparten_su_cuadra():
+    c = np.full((560, 300), CLASE['calle'], np.uint8)
+    c[30:250, 30:270] = CLASE['edificado']
+    c[310:530, 30:270] = CLASE['edificado']
+    res = vectorizar(c, METRO, plaza=(150, 280))
+    cuadras = {q for q in res['cuadras']}
+    assert len(cuadras) == 2 and -1 not in cuadras
+
+
+def test_fuera_de_la_cuadra_modelo_las_casas_no_tienen_cuadra():
+    res = vectorizar(manzana_maciza(), METRO, plaza=(140, 140), cuadra_modelo=False)
+    assert set(res['cuadras']) == {-1} and set(res['cede']) == {-1}
