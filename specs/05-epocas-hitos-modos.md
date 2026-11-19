@@ -174,6 +174,67 @@ terminal, o la URL de uno que ya esté andando como primer argumento),
 - Catálogo de fotos: `{id: {w, h, titulo, autor, fecha, licencia, fuente}}` → `fotos/{id}.webp` y `fotos/m/{id}.webp`. Todas de Wikimedia Commons, en dominio público, con link al archivo.
 - Al abrir una ficha, la cámara vuela, el edificio se vela y se abre el panel. Esc, × o un click afuera la cierran; las flechas recorren las fotos.
 
+*Caracas (implementado, T43):* cuatro módulos y un paso del pipeline. `src/fichas.js` es la lógica pura (con
+tests); `src/ficha-panel.js`, el panel y el visor de fotos (DOM); `src/fichas-datos.js`, los textos;
+`src/fichas.css`, los estilos; `tools/fotos.mjs` (+ `tools/fotos-lib.mjs`) arma las fotos.
+
+- **Una ficha por marca**, todas: la clave es el id de la marca. Se abre con el evento `abrirmarca` (el click o
+  Enter en un cartel) y se cierra con Escape, la × o tocando de nuevo el cartel abierto; al cerrarse cierra
+  también el cartel y devuelve el foco a la marca.
+- **Qué muestra** (`contenidoDeFicha`): el nombre que rige en la época elegida; «Hacia 1889» (o «Todavía no
+  figura en 1772: aparece en 1936» / «Ya no figura en 1936: estuvo hasta 1911»); la lista de los nombres que
+  tuvo, con los años de la línea de tiempo en que rigió cada uno (`1772–1843 Plaza Mayor · desde 1889 Plaza
+  Bolívar`); los párrafos, cada uno con el año desde el que vale: primero y a plena tinta el que rige, después
+  los demás, en orden y atenuados; «Hoy» y «Por verificar»; las fotos; y la fuente del nombre (el campo
+  `fuente` de la marca).
+- **Textos** (`src/fichas-datos.js`):
+  ```js
+  'plaza-bolivar': { textos: [[1, 'La plaza mayor era el mercado…'], [3, 'Sin el mercado, la plaza se hizo jardín…']],
+                     hoy: 'la Plaza Bolívar, con la misma estatua.', dudas: 'El nombre es anterior a la estatua…' }
+  ```
+  `textos` va en orden por época de inicio (1 = 1772 … 5 = 1936) y dentro de la vida de la marca
+  (`validarFichas`, que un test corre sobre los datos). Cada frase sale de los planos del catálogo (la leyenda
+  de 1889, los rótulos de 1911 y 1936), de las imágenes de `fuentes/imagenes` o de las notas de marcas e hitos.
+  **Lo que es conocimiento general sin cotejar no va en el texto: va en `dudas`**, que la ficha muestra como
+  «Por verificar». Un lugar sin entrada muestra las notas de su marca.
+- **Con la ola**: la época de la ficha es la que rige en el lugar (`epocaAqui`, redondeada: `epocaDeFicha`), así
+  que la ficha cambia en el mismo cuadro en que cambia el cartel de su marca.
+- **Fotos**: solo las de `datos/fotos.json` (abajo). Las «de esta época» (las que traen la época elegida en
+  `epocas`) van primero y marcadas; si ninguna lo es, la ficha lo avisa («No hay imagen de esta época: las que
+  siguen son de otros años»). Sin fotos: «Sin imagen de época confiable de este lugar.» Cada foto lleva título,
+  autor, fecha, licencia y enlace a la fuente, en el panel y en el visor; `validarFotos` descarta en el visor
+  cualquier fila del manifiesto a la que le falte uno de esos datos. Miniaturas con `loading="lazy"`, `width` y
+  `height`.
+- **Visor de fotos**: diálogo modal a pantalla completa con la imagen grande, «2 de 5», el pie completo
+  (título, autor y fecha, licencia, institución, «Ver en Wikimedia Commons ↗»), ‹ ›, flechas del teclado,
+  deslizar con el dedo, Escape o un toque afuera; el foco queda atrapado adentro y al cerrar vuelve a la miniatura.
+- **Accesibilidad**: el panel es un `role="dialog"` **no modal** (`aria-labelledby` = el título, que recibe el
+  foco al abrir; el encabezado es `aria-live`), al costado en escritorio (debajo de la línea de tiempo; arriba
+  del todo desde 1480 px de ancho) y **hoja desde abajo** hasta 640 px (ahí oculta los botones y el pie de la
+  línea de tiempo mientras está abierta). Con `prefers-reduced-motion` no hay transiciones.
+- `window.lab.fichas` expone `abierta`, `epoca`, `contenido`, `fotos`, `visor`, `abrir(id)`, `cerrar()`,
+  `verFoto(i)`, `pasarFoto(±1)` y `cerrarFoto()`.
+- Capturas de control: `ANGLE=gl node tests/e2e/capturas-fichas.mjs [url] [carpeta]`.
+
+**Las fotos y sus derechos** (`tools/fotos.mjs`, `node tools/fotos.mjs [--descargar] [--solo-informe]`): lee
+`fuentes/imagenes/*/ficha.json` y publica **solo** las imágenes cuya ficha:
+1. establece el dominio público (`dominio_publico: true`) o una licencia libre (`licencia` empieza con `CC0`,
+   `CC BY` o `CC BY-SA`), y no dice «derechos reservados» ni `publicar: false`;
+2. trae la página de la fuente (`url_fuente`), el autor (`autor`; vale «Autor desconocido» cuando así lo
+   declara la fuente, no vale «A verificar…») y la fecha (`fecha`, `año` o `año_aproximado`);
+3. nombra al menos una marca en `marcas` (ids de `src/marcas-datos.js`; uno inexistente es un error) y tiene
+   su `original.*`.
+
+Lo dudoso, lo que tiene derechos reservados y las referencias internas no salen nunca de `fuentes/imagenes/`:
+el paso borra `public/fotos/` y lo rehace, así que una imagen que deja de ser publicable deja de estar servida.
+Nada se completa ni se supone: si la ficha no lo dice, la foto no entra, y el informe del paso dice por qué.
+Con `--descargar` baja de `upload.wikimedia.org` los originales publicables que falten (`url_descarga`); los
+originales son datos no confiables y solo se decodifican como imagen (sharp). La relación foto → marca va en
+la ficha de la imagen (`marcas`), junto a sus créditos, y no en el código del sitio: quien verifica los
+derechos de una imagen decide ahí mismo dónde se muestra. Campos nuevos, opcionales, de `ficha.json`:
+`marcas`, `pie` (el título en español que se muestra; si falta, `titulo`), `fecha` (la fecha como texto, cuando
+no es un año), `verificacion_dp` (por qué es de dominio público, con las plantillas de Commons) y `publicar`.
+
 ## "Ver lo de hoy" (H)
 
 - Estampa en **rojo** sobre el plano las calles, vías y costa actuales (OSM). De lejos, solo avenidas, vías y costa; de cerca, todas las calles con borde afilado; muy de cerca, solo el contorno de la calle, a dos trazos. La **tierra ganada al río** va rayada (patrón estable en pantalla; cada nivel dobla el anterior).

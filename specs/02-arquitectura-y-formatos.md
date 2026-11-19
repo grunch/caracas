@@ -217,7 +217,7 @@ El visor carga `crece.png` **sin mipmaps** (son etapas codificadas: promediadas,
 | `crece.webp` / `-2k` | por punto, "desde qué etapa": R urbanizado/ganado al río, G fondos, B edificado |
 | `despeje.webp` / `-2k` | R demolido (avenida/plaza abierta), G verde nuevo, B calzada de avenidas nuevas |
 | `hoy-lejos.webp` (2048), `hoy-cerca.webp` (8192) | calles, vías y costa de OSM rasterizadas y alineadas al plano |
-| `fotos/{id}.webp`, `fotos/m/{id}.webp` | fotos de las fichas (grande y miniatura), máx. ~720 px |
+| `fotos/{id}.webp`, `fotos/m/{id}.webp` | fotos de las fichas (grande y miniatura), máx. ~720 px. *Caracas (`tools/fotos.mjs`):* en `public/fotos/`, lado mayor de 1600 px y de 640 px, sin agrandar; el `id` es la carpeta de `fuentes/imagenes/` |
 | `autor.webp` | avatar |
 
 *Caracas (implementado, `tools/geo/hoy.py`):* `hoy-lejos.webp` (2048×1630) y `hoy-cerca.webp` (8192×6518) cubren
@@ -229,6 +229,18 @@ calles 6–8 m, rieles 4–5 m, ríos 15 m, quebradas 4 m), nunca menos de 1 px 
 troncales, primarias, secundarias y terciarias (con sus enlaces), rieles, ríos, canales y lagunas; de cerca
 además las calles residenciales, sin clasificar, de convivencia y peatonales y las quebradas. No entran los
 túneles ni lo entubado, ni el metro bajo tierra (`tunnel`, `location=underground`, `layer < 0` en rieles).
+
+*Caracas, las fotos de las fichas (`datos/fotos.json`, `tools/fotos.mjs`; reglas de derechos en `05`):*
+```json
+{ "fotos": [ { "id": "1910-commons-plaza-bolivar", "titulo": "La Plaza Bolívar en 1910.", "autor": "Autor desconocido",
+    "fecha": "1910", "año": 1910, "licencia": "Dominio público", "fuente": "https://commons.wikimedia.org/wiki/File:…",
+    "institucion": "Archivo Fundación Fotografía Urbana (vía Wikimedia Commons)", "epocas": [4], "marcas": ["plaza-bolivar"],
+    "w": 668, "h": 461, "mw": 640, "mh": 442 } ] }
+```
+Una fila por foto publicable, en orden de año. `epocas`: índices de época en que la foto es «de esta época»;
+`marcas`: ids de las marcas en cuyas fichas sale; `w × h` y `mw × mh`: medidas de `fotos/{id}.webp` y de
+`fotos/m/{id}.webp`. Sin este archivo (la demo de CI) las fichas son solo texto. `public/fotos/` y
+`public/datos/fotos.json` no van a git.
 
 Codificación "desde cuándo" en un canal: con `E` etapas, la etapa `e` (contando desde 1) vale aprox. `(E+1−e)/E` (1 = primera, 1/E = última, 0 = nunca). Así, un solo `step` en el shader decide si algo existe en el año que se mira.
 

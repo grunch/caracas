@@ -26,6 +26,7 @@ import { MARCAS } from './marcas-datos.js'
 import './marcas.css'
 import { crearVisorDePlano } from './visor-plano-panel.js'
 import './visor-plano.css'
+import { engancharFichas } from './ficha-panel.js'
 
 const params = new URLSearchParams(location.search)
 const COLOR_FONDO = 0x1d1a17
@@ -343,7 +344,7 @@ const marcas = crearCapaMarcas({
   altura: sueloEn,
   alSobre: () => pedirCuadro(2),
   alAbrir(marca) {
-    // la cámara vuela al lugar (nunca se aleja); T43 abrirá aquí la ficha, con marcas.alAbrirMarca o el evento
+    // la cámara vuela al lugar (nunca se aleja); la ficha se abre con el evento (src/ficha-panel.js)
     const destino = { x: marca.x, z: marca.z, dist: distanciaDeVuelo(marca.nivel, { ahora: cam.now.dist, destino: cam.goal.dist }) }
     if (sinAnimar.matches) cam.jump(destino); else cam.volar(destino)
     marcas.alAbrirMarca?.(marca)
@@ -358,6 +359,8 @@ function alternarMarcas(prender = !marcas.prendida) {
   pedirCuadro(3)
 }
 document.getElementById('nombres').addEventListener('click', () => alternarMarcas())
+// --- las fichas: al abrir una marca, el panel con sus nombres, su texto por época y sus fotos (src/ficha-panel.js) ---
+const fichas = engancharFichas({ capa: marcas, U: ciudad.U })
 if (params.has('sinmarcas')) alternarMarcas(false)
 
 // --- la luz y el acabado: sombras arrojadas, contorno a tinta, bruma y grano de papel (src/acabado.js) ---
@@ -414,6 +417,7 @@ renderer.setAnimationLoop((t) => {
     epoca: { de: uEpocaDe.value, a: uEpocaA.value, ola: uOlaEpoca.value, ancho: uAnchoOla.value },
     sube: (d) => hinchado(d, uOla.value, uAnchoOla.value),
   })
+  fichas.actualizar() // con la ficha abierta, sigue a la época que llega con la ola
   rotulos?.dibujar({ camera, dist: cam.now.dist, x: cam.now.x, z: cam.now.z, opacidad: ciudad.U.uHoy.value, ocupados })
   acabado.dibujar()
 })
@@ -421,7 +425,7 @@ renderer.setAnimationLoop((t) => {
 if (params.has('hoy')) alternarHoy(true)
 document.body.classList.add('listo')
 window.lab = {
-  renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, relieveU, sueloEn, acabado, ready: true,
+  renderer, scene, camera, cam, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
   get relieve() { return relieve },
   get teselas() { return teselas },
   get arboles() { return arboles },

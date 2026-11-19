@@ -9,6 +9,7 @@ import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { pendientes, verificarConteos, salidasDeTeselas, firmasCambiadas, resolverOriginales, fichasDeEpocas } from './datos-lib.mjs'
 import { salidasPlanosEpocas } from './planos-epocas-lib.mjs'
+import { salidasDeFotos, fotosSinOrigen } from './fotos-lib.mjs'
 import { leerCalzados } from './planos-epocas.mjs'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
@@ -181,6 +182,13 @@ const PASOS = [
     codigo: GEO('hoy', 'hoy_osm', 'geo1936'),
     cmd: () => [PY, 'tools/geo/hoy.py', '--osm', OSM_HOY],
   },
+  {
+    // las fotos de las fichas: solo las que su ficha permite publicar (tools/fotos-lib.mjs); las entradas (las
+    // fichas y los originales que haya) y las salidas (un par de .webp por foto) se suman en pasosCompletos
+    id: 'fotos', entradas: [], salidas: ['public/datos/fotos.json'],
+    codigo: ['tools/fotos.mjs', 'tools/fotos-lib.mjs', 'src/marcas-datos.js'],
+    cmd: () => ['node', 'tools/fotos.mjs'],
+  },
 ]
 
 function argumentos(argv) {
@@ -197,6 +205,18 @@ async function archivosDeCalces() {
   return archivos
 }
 
+/** Las fichas y los originales de fuentes/imagenes/ (entradas del paso `fotos`). */
+async function archivosDeImagenes() {
+  const base = 'fuentes/imagenes'
+  const carpetas = (await readdir(path.join(RAIZ, base), { withFileTypes: true }).catch(() => [])).filter((d) => d.isDirectory())
+  const rutas = []
+  for (const { name } of carpetas) {
+    const archivos = await readdir(path.join(RAIZ, base, name))
+    rutas.push(...archivos.filter((n) => n === 'ficha.json' || /^original\.[a-z0-9]+$/i.test(n)).map((n) => `${base}/${name}/${n}`))
+  }
+  return rutas.sort()
+}
+
 /** `regenerar`: si se va a planificar una regeneración (solo ahí se exigen los escaneos originales). */
 async function pasosCompletos({ regenerar = true } = {}) {
   const teselas = salidasDeTeselas(await leerJsonSiHay('public/plano/laminas.json'))
@@ -204,7 +224,13 @@ async function pasosCompletos({ regenerar = true } = {}) {
   const fichas = fichasDeEpocas((await leerJsonSiHay('tools/geo/epocas/epocas.json')) ?? {})
   // las texturas de cada plano de época dependen del recorte de su calce (calzado.json, si ya está)
   const planosEpocas = salidasPlanosEpocas(await leerCalzados(path.join(RAIZ, 'fuentes', 'derivados')))
+  const imagenes = await archivosDeImagenes()
+  const manifiestoFotos = await leerJsonSiHay('public/datos/fotos.json')
+  const fotos = salidasDeFotos(manifiestoFotos)
+  // una foto publicada cuya ficha u original se borró: el paso se rehace aunque las fechas digan que está al día
+  const rehacerFotos = fotosSinOrigen(manifiestoFotos, imagenes).length > 0
   const pasos = PASOS.map((p) => {
+    if (p.id === 'fotos') return { ...p, entradas: imagenes, salidas: [...p.salidas, ...fotos], rehacer: rehacerFotos }
     if (p.id === 'plano') return { ...p, salidas: [...p.salidas, ...teselas] }
     if (p.id === 'epocas') return { ...p, entradas: [...new Set([...p.entradas, ...fichas])] }
     if (p.id === 'planos-epocas') return { ...p, salidas: planosEpocas }
@@ -275,7 +301,7 @@ if (opciones.marcar) {
   console.log('firmas del código guardadas: los pasos quedan al día')
 } else if (!opciones.verificar) {
   const guardadas = (await leerJsonSiHay(FIRMAS)) ?? {}
-  const codigoCambiado = new Set([...firmasCambiadas(firmas, guardadas), ...(DESCARGAR ? ['hoy-osm'] : [])])
+  const codigoCambiado = new Set([...firmasCambiadas(firmas, guardadas), ...(DESCARGAR ? ['hoy-osm'] : []), ...pasos.filter((p) => p.rehacer).map((p) => p.id)])
   const ids = pendientes(pasos, await tiempos(pasos), { ...opciones, codigoCambiado })
   console.log(ids.length ? `pasos a correr: ${ids.join(' → ')}` : 'todo al día')
   for (const id of ids) {
