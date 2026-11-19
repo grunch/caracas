@@ -96,6 +96,16 @@ Breakpoints cuidados a mano: ≤350, ≤370, ≤640 (teléfono), 641–860, 641�
 
 `role="button"`, `aria-expanded`, `aria-pressed` en los toggles, `aria-label` en los botones de ícono, `aria-live="polite"` en buscador y ficha, foco visible con outline, teclado completo y `prefers-reduced-motion`.
 
+*Caracas (T72):*
+- **Teclado** (`movimientoDeTecla` en `src/controles.js`): las flechas mueven la vista, Mayús y las flechas la giran e inclinan, y + y − acercan y alejan. Vale con la tecla sostenida, no dentro de un campo, una ficha o un diálogo, y la ayuda lo cuenta en «Con el teclado».
+- **Zoom**: el viewport ya no bloquea el zoom (WCAG 1.4.4). El lienzo tiene `touch-action:none`, así que los dedos sobre la vista siguen moviendo la ciudad.
+- **Página**: un `h1` y una descripción para lectores de pantalla (`#sobre`, `.solo-lector`). El lienzo es `role="img"` con su nombre, la carga se anuncia (`role="status"`) y un `<noscript>` explica qué falta.
+- **Auditoría**: `tests/e2e/accesibilidad.spec.js` corre axe-core con WCAG 2.2 A y AA en la bienvenida, la vista, el Acerca y el buscador.
+
+## SEO
+
+*Caracas (T72):* `canonical` y `og:url` a https://caracas.city/, datos estructurados JSON-LD (`WebSite` sobre la `City` Caracas, con autor, licencia y repositorio), `public/robots.txt` y `public/sitemap.xml`.
+
 ## Criterios de aceptación (para el nuevo sitio)
 
 - [ ] Primer cuadro útil (plano visible) en menos de 2 s en 4G; ciudad levantada en menos de 6 s.

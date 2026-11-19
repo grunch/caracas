@@ -35,6 +35,13 @@ export const CON_DEDOS = Object.freeze([
   { como: 'Tocar un nombre', que: 'lleva al lugar y abre su ficha' },
 ].map(Object.freeze))
 
+/** Con el teclado, la vista (src/camara.js, movimientoDeTecla): también con la tecla sostenida. */
+export const CON_TECLADO = Object.freeze([
+  { como: 'Flechas', que: 'mueven el plano' },
+  { como: 'Mayús y flechas', que: 'giran (izquierda y derecha) e inclinan (arriba y abajo) la vista' },
+  { como: '+ y −', que: 'acercan y alejan' },
+].map(Object.freeze))
+
 /** Lo que está en pantalla y no tiene tecla: la línea de tiempo, los nombres y las fichas. */
 export const EN_PANTALLA = Object.freeze([
   { como: 'Los años, arriba', que: 'llevan la ciudad a ese año: la época llega como una ola desde la Plaza Bolívar' },
@@ -43,6 +50,11 @@ export const EN_PANTALLA = Object.freeze([
 ].map(Object.freeze))
 
 const EN_CAMPO = 'input, textarea, select, [contenteditable]'
+// dentro de estos, las flechas desplazan el texto o recorren sus controles: no mueven la vista
+const EN_PANEL = '#ficha, dialog, [role="dialog"], #marcas'
+const FLECHAS = Object.freeze({ ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] })
+const ACERCAR = Object.freeze({ '+': 1, '=': 1, '-': -1 })
+const ACERCAR_NUMERICO = Object.freeze({ NumpadAdd: 1, NumpadSubtract: -1 })
 const EN_BOTON = 'button, a, [role="button"]'
 
 /**
@@ -61,6 +73,24 @@ export function accionDeTecla(e, ids = null) {
 }
 
 /**
+ * Lo que una tecla le hace a la vista, o null: { tipo: 'mover', dx, dy } con las flechas (dy −1: hacia arriba de
+ * la pantalla), { tipo: 'girar', giro, inclinar } con Mayús y las flechas, { tipo: 'acercar', veces } (±1) con
+ * + y −. Vale con la tecla sostenida y con el foco en un botón; no mientras se escribe, con Ctrl, Alt o Meta,
+ * ni dentro de una ficha o un diálogo.
+ */
+export function movimientoDeTecla(e) {
+  if (e.ctrlKey || e.metaKey || e.altKey) return null
+  if (e.target?.closest?.(EN_CAMPO) || e.target?.closest?.(EN_PANEL)) return null
+  const flecha = FLECHAS[e.code]
+  if (flecha) {
+    const [x, y] = flecha
+    return e.shiftKey ? { tipo: 'girar', giro: x, inclinar: y } : { tipo: 'mover', dx: x, dy: y }
+  }
+  const veces = ACERCAR_NUMERICO[e.code] ?? ACERCAR[e.key]
+  return veces ? { tipo: 'acercar', veces } : null
+}
+
+/**
  * La ayuda de controles, por grupos: `[{ titulo, tactil?, filas: [{ como, que }] }]`. `ids`: las acciones
  * disponibles en esta copia del sitio (sin línea de tiempo no hay «plano de la época», por ejemplo).
  */
@@ -69,6 +99,7 @@ export function controlesVisibles(ids = ACCIONES.map((a) => a.id)) {
   return [
     { titulo: 'Con el ratón', filas: CON_RATON },
     { titulo: 'Con los dedos', tactil: true, filas: CON_DEDOS },
+    { titulo: 'Con el teclado', filas: CON_TECLADO },
     { titulo: 'En la pantalla', filas: EN_PANTALLA },
     { titulo: 'Botones y teclas', filas: acciones.map((a) => ({ como: a.boton, tecla: a.tecla, que: a.que })) },
   ]

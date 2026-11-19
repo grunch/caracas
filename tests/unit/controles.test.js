@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
-import { ACCIONES, CON_RATON, CON_DEDOS, EN_PANTALLA, accionDeTecla, controlesVisibles } from '../../src/controles.js'
+import { ACCIONES, CON_RATON, CON_DEDOS, CON_TECLADO, EN_PANTALLA, accionDeTecla, controlesVisibles, movimientoDeTecla } from '../../src/controles.js'
 
 const en = (selectores) => ({ closest: (s) => (selectores.some((x) => s.split(',').map((y) => y.trim()).includes(x)) ? {} : null) })
 const tecla = (props, target = en([])) => ({ repeat: false, ctrlKey: false, metaKey: false, altKey: false, target, ...props })
@@ -82,11 +82,12 @@ describe('controlesVisibles', () => {
     // Act
     const grupos = controlesVisibles()
     // Assert
-    expect(grupos.map((g) => g.titulo)).toEqual(['Con el ratón', 'Con los dedos', 'En la pantalla', 'Botones y teclas'])
+    expect(grupos.map((g) => g.titulo)).toEqual(['Con el ratón', 'Con los dedos', 'Con el teclado', 'En la pantalla', 'Botones y teclas'])
     expect(grupos[0].filas).toBe(CON_RATON)
     expect(grupos[1]).toMatchObject({ tactil: true, filas: CON_DEDOS })
-    expect(grupos[2].filas).toBe(EN_PANTALLA)
-    expect(grupos[3].filas.map((f) => f.tecla)).toEqual(ACCIONES.map((a) => a.tecla))
+    expect(grupos[2].filas).toBe(CON_TECLADO)
+    expect(grupos[3].filas).toBe(EN_PANTALLA)
+    expect(grupos[4].filas.map((f) => f.tecla)).toEqual(ACCIONES.map((a) => a.tecla))
     for (const f of grupos.flatMap((g) => g.filas)) expect(f.como && f.que).toBeTruthy()
   })
 
@@ -112,5 +113,50 @@ describe('la tabla y el visor', () => {
     const buscador = readFileSync(path.resolve(import.meta.dirname, '../../src/buscador/interfaz.js'), 'utf8')
     expect(principal).not.toMatch(/e\.code === 'Key/)
     expect(buscador).not.toMatch(/e\.key === '\/'/)
+  })
+})
+
+describe('movimientoDeTecla: la vista con el teclado (WCAG 2.1.1)', () => {
+  it('las flechas mueven la vista: arriba avanza, a la derecha corre a la derecha', () => {
+    expect(movimientoDeTecla(tecla({ code: 'ArrowUp', key: 'ArrowUp' }))).toEqual({ tipo: 'mover', dx: 0, dy: -1 })
+    expect(movimientoDeTecla(tecla({ code: 'ArrowRight', key: 'ArrowRight' }))).toEqual({ tipo: 'mover', dx: 1, dy: 0 })
+  })
+
+  it('con Mayús, las flechas giran (izquierda y derecha) e inclinan (arriba y abajo)', () => {
+    expect(movimientoDeTecla(tecla({ code: 'ArrowLeft', key: 'ArrowLeft', shiftKey: true }))).toEqual({ tipo: 'girar', giro: -1, inclinar: 0 })
+    expect(movimientoDeTecla(tecla({ code: 'ArrowDown', key: 'ArrowDown', shiftKey: true }))).toEqual({ tipo: 'girar', giro: 0, inclinar: 1 })
+  })
+
+  it('+ y − acercan y alejan, también desde el teclado numérico', () => {
+    expect(movimientoDeTecla(tecla({ code: 'Equal', key: '+', shiftKey: true }))).toEqual({ tipo: 'acercar', veces: 1 })
+    expect(movimientoDeTecla(tecla({ code: 'Equal', key: '=' }))).toEqual({ tipo: 'acercar', veces: 1 })
+    expect(movimientoDeTecla(tecla({ code: 'NumpadAdd', key: '+' }))).toEqual({ tipo: 'acercar', veces: 1 })
+    expect(movimientoDeTecla(tecla({ code: 'Minus', key: '-' }))).toEqual({ tipo: 'acercar', veces: -1 })
+    expect(movimientoDeTecla(tecla({ code: 'NumpadSubtract', key: '-' }))).toEqual({ tipo: 'acercar', veces: -1 })
+  })
+
+  it('vale con la tecla sostenida y con el foco en un botón (no los usan)', () => {
+    expect(movimientoDeTecla(tecla({ code: 'ArrowUp', key: 'ArrowUp', repeat: true }))?.tipo).toBe('mover')
+    expect(movimientoDeTecla(tecla({ code: 'ArrowUp', key: 'ArrowUp' }, en(['button'])))?.tipo).toBe('mover')
+  })
+
+  it('no mueve mientras se escribe, con Ctrl, Alt o Meta, ni dentro de una ficha o un diálogo (ahí las flechas desplazan el texto)', () => {
+    expect(movimientoDeTecla(tecla({ code: 'ArrowUp', key: 'ArrowUp' }, en(['input'])))).toBeNull()
+    expect(movimientoDeTecla(tecla({ code: 'ArrowUp', key: 'ArrowUp', ctrlKey: true }))).toBeNull()
+    expect(movimientoDeTecla(tecla({ code: 'Minus', key: '-', altKey: true }))).toBeNull()
+    for (const panel of ['#ficha', '[role="dialog"]', 'dialog', '#marcas']) {
+      expect(movimientoDeTecla(tecla({ code: 'ArrowUp', key: 'ArrowUp' }, en([panel]))), panel).toBeNull()
+    }
+  })
+
+  it('las demás teclas no mueven nada, y ninguna choca con un atajo', () => {
+    expect(movimientoDeTecla(tecla({ code: 'KeyC', key: 'c' }))).toBeNull()
+    for (const a of ACCIONES) expect(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Equal', 'Minus', 'NumpadAdd', 'NumpadSubtract']).not.toContain(a.codigo)
+    expect(ACCIONES.map((a) => a.letra)).not.toContain('-')
+    expect(ACCIONES.map((a) => a.letra)).not.toContain('+')
+  })
+
+  it('la ayuda «Con el teclado» lo cuenta', () => {
+    expect(CON_TECLADO.map((f) => f.como)).toEqual(['Flechas', 'Mayús y flechas', '+ y −'])
   })
 })
