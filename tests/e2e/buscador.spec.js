@@ -81,12 +81,12 @@ test('"De La Torre a Veroes" ubica la cuadra en el plano: cartel en prosa, alfil
 test('la respuesta habla de la época elegida y cambia con ella', async () => {
   test.skip(!(await hayDato(page, 'datos/crece.json', 'json')) || !(await hayDato(page, 'plano/crece.png', 'image')), 'sin las épocas (datos pesados, fuera de git)')
   await page.waitForFunction(() => window.lab.lineaDeTiempo)
-  await page.locator('#epocas button', { hasText: '1772' }).click()
+  await page.locator('#epocas button', { hasText: /^1772$/ }).click()
   await buscar('De La Torre a Veroes')
   await expect(cartel().locator('.texto')).toHaveText('La cuadra al norte de la Catedral. Va hacia el norte, unos 135 m. En 1772 ya estaba edificada.')
   await page.locator('#epocas button', { hasText: '1936' }).click()
   await expect(cartel().locator('.texto')).toContainText('En 1936 ya estaba edificada. Es ciudad desde el plano de 1772.')
-  await page.locator('#epocas button', { hasText: '1772' }).click()
+  await page.locator('#epocas button', { hasText: /^1772$/ }).click()
 })
 
 test('las sugerencias se manejan con el teclado y Escape quita el alfiler', async () => {

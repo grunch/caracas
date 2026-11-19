@@ -31,3 +31,5 @@ fuentes/imagenes/**/vista.jpg
 # generados por tools/fotos.mjs (las fotos de las fichas: solo las de dominio público o licencia libre)
 public/fotos/
 public/datos/fotos.json
+# generado por tools/creditos.mjs (las fuentes y licencias del «Acerca»)
+public/datos/creditos.json
