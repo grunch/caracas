@@ -32,7 +32,7 @@ def test_reparte_una_manzana_rectangular_en_lotes_con_el_frente_sobre_sus_lados(
     assert len(lotes) >= 4 * 5
     for k, lote in lotes.items():
         assert (etiquetas == k).any()
-        assert FRENTE_M[0] - 2 <= lote['ancho'] <= FRENTE_M[1] + 2
+        assert FRENTE_M[0] - 1e-9 <= lote['ancho'] <= FRENTE_M[1] + 1e-9
         eu = np.asarray(lote['eu'])
         assert min(abs(eu[0]), abs(eu[1])) < 1e-6   # paralelo a un lado del rectángulo
         ox, oy = lote['origen']
@@ -116,3 +116,32 @@ def test_las_cuadras_pegadas_por_un_puente_fino_se_separan_y_lo_demas_va_con_la_
 def test_una_cuadra_sola_no_se_parte():
     from tools.geo.lados import cuadras_pegadas
     assert cuadras_pegadas(rectangulo(), METRO) is None
+
+
+@pytest.mark.parametrize('largo', [9.5, 13.0, 19.0, 23.0, 31.0, 47.5, 100.0])
+def test_los_frentes_quedan_entre_9_y_14_m_cuando_el_lado_lo_admite(largo):
+    from tools.geo.lados import _cortes
+    for semilla in range(30):
+        cortes = _cortes(largo, np.random.default_rng(semilla))
+        anchos = np.diff(np.concatenate([[0.0], cortes]))
+        assert cortes[-1] == pytest.approx(largo)
+        assert anchos.min() >= FRENTE_M[0] - 1e-9 and anchos.max() <= FRENTE_M[1] + 1e-9
+
+
+@pytest.mark.parametrize('largo,esperado', [(17.0, 1), (8.5, 1)])
+def test_un_lado_que_no_admite_frentes_de_9_a_14_m_va_con_la_cantidad_mas_cercana(largo, esperado):
+    from tools.geo.lados import _cortes
+    assert len(_cortes(largo, np.random.default_rng(1))) == esperado
+
+
+def test_un_hueco_de_la_manzana_no_es_de_ningun_lote():
+    m = rectangulo()
+    ys, xs = np.nonzero(m)
+    cy, cx = int(ys.mean()), int(xs.mean())
+    con_hueco = m.copy()
+    con_hueco[cy - 20:cy + 20, cx - 20:cx + 20] = False     # 20 × 20 m adentro: una plaza o un pasaje
+    etiquetas, _ = lotes_por_lados(con_hueco, METRO, semilla=3)
+    assert not (etiquetas[cy - 20:cy + 20, cx - 20:cx + 20] > 0).any()
+    # y sin el hueco el reparto es el de siempre
+    sin, _ = lotes_por_lados(m, METRO, semilla=3)
+    assert np.array_equal(np.where(con_hueco, sin, 0), etiquetas)

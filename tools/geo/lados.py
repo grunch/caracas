@@ -104,10 +104,23 @@ def _distancia_a_segmento(px, py, a, b):
 
 
 def _cortes(largo_m, rng):
-    """Dónde terminan los frentes de un lado de `largo_m` metros (acumulado, el último = largo_m)."""
-    n = max(1, int(round(largo_m / (sum(FRENTE_M) / 2))))
-    anchos = (largo_m / n) * (1 + rng.uniform(-VARIACION, VARIACION, n))
-    return np.cumsum(anchos * largo_m / anchos.sum())
+    """Dónde terminan los frentes de un lado de `largo_m` metros (acumulado, el último = largo_m).
+
+    Los frentes quedan entre FRENTE_M[0] y FRENTE_M[1] siempre que el lado lo admita. Un lado que no (entre
+    14 y 18 m, o más corto que 9) va con la cantidad de lotes más cercana: un solo lado corto (una ochava)
+    no saca a la cuadra entera del reparto por lados."""
+    medio = sum(FRENTE_M) / 2
+    pocos, muchos = math.ceil(largo_m / FRENTE_M[1]), math.floor(largo_m / FRENTE_M[0])
+    n = round(largo_m / medio)
+    n = max(1, min(max(n, pocos), muchos) if pocos <= muchos else n)
+    base = largo_m / n
+    # la variación no saca a ningún frente del intervalo (la mitad del margen: al centrarla se puede correr otro tanto)
+    margen = min(VARIACION, FRENTE_M[1] / base - 1, 1 - FRENTE_M[0] / base) if pocos <= muchos else VARIACION
+    desvio = rng.uniform(-max(margen, 0.0) / 2, max(margen, 0.0) / 2, n) * base
+    anchos = base + desvio - desvio.mean()
+    cortes = np.cumsum(anchos)
+    cortes[-1] = largo_m
+    return cortes
 
 
 def _repartir_lado(lado, px, py, metro, rng):
@@ -154,7 +167,7 @@ def lotes_por_lados(manzana, metro, semilla):
     lados = _lados(poligono, adentro, metro)
     if len(lados) < 3:
         return None
-    ys, xs = np.nonzero(adentro)
+    ys, xs = np.nonzero(adentro & manzana)   # un hueco de la manzana (una plaza, un pasaje) no es de ningún lote
     px, py = xs + 0.5, ys + 0.5
     de_lado = np.argmin(np.stack([_distancia_a_segmento(px, py, a, b) for a, b, _, _ in lados]), axis=0)
     rng = np.random.default_rng(int(semilla))
