@@ -84,3 +84,5 @@ El [sondeo de accesos](accesos-primer-lote.md) evalúa los 40 frentes iniciales 
 [Lectura de los 67 registros restantes](lectura-restantes-original.md): completa la lectura individual de los 292 registros censados, conservando terrenos libres, cuerpos aislados y descartes. La correspondencia y los accesos siguen pendientes.
 
 [Medición de cruces de cubierta en 3D](cruces-cubiertas-3d.md): 271 pares candidatos con superficies que se cortan, diferenciados de solapes de proyección; dos vistas oblicuas inspeccionadas y cuatro pares rastreados al origen.
+
+[Continuidad de calles](continuidad-calles.md): medición de 32 ejes curados, 64 recorridos del controlador y contraste separado de los 470 tramos candidatos; C0031 se desliza junto a dos huellas.
