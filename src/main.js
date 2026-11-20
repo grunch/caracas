@@ -31,6 +31,7 @@ import { engancharFichas } from './ficha-panel.js'
 import { crearAcerca } from './acerca-panel.js'
 import { leerCreditos } from './acerca.js'
 import { debeMostrarIntro, recordarIntro } from './intro.js'
+import { debeArrancar, esperaDeArranque, velocidadDeOla, vistaDeHoja, VISTA_CENTRO, DURACION_VUELO_S } from './arranque.js'
 import { accionDeTecla, movimientoDeTecla } from './controles.js'
 import { esLiviano, proporcionDePixeles } from './calidad.js'
 import { crearModoAPie } from './a-pie-modo.js'
@@ -59,10 +60,13 @@ let listo = false // el módulo terminó de arrancar: ya se puede levantar la ci
 let crecerPedido = false // «Ver crecer la ciudad» se tocó antes de tiempo: se cumple al estar listo
 let andarAlLlegar = false // …o antes de que llegara la línea de tiempo: echa a andar cuando llegue
 const almacen = () => localStorage
+const conIntro = debeMostrarIntro(params, almacen)
+let introCerrada = () => {}
+const cierreDeIntro = new Promise((r) => { introCerrada = r })
 const acerca = crearAcerca({
   boton: document.getElementById('ayuda'), desde: PRIMERA_EPOCA, acciones: Object.keys(HACER),
-  mostrarIntro: debeMostrarIntro(params, almacen),
-  alCerrarIntro: () => recordarIntro(almacen),
+  mostrarIntro: conIntro,
+  alCerrarIntro: () => { recordarIntro(almacen); introCerrada() },
   alVerCrecer: () => { if (listo) verCrecer(); else crecerPedido = true },
   pedirEpocas: () => crecePedido.then((j) => j.epocas),
   pedirCreditos: () => leerCreditos((url) => fetch(url)),
@@ -190,14 +194,13 @@ fetch('plano/laminas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Er
   pedirCuadro(3) // si la cámara ya está cerca y el render quedó quieto, que empiece a pedir teselas
 }).catch((e) => console.warn(`teselas: ${e.message}`))
 
-// --- la ciudad y la ola ---
-const DURACION_OLA_S = 5
+// --- la ciudad y la ola (sale de la plaza y se apura hacia las orillas: src/arranque.js) ---
 let olaObjetivo = 0
 // la ola llega hasta la esquina más lejana de la hoja (el terreno se hincha en toda ella)
 let olaMax = Math.hypot(Math.max(-hoja.x0, hoja.x0 + hoja.ancho), Math.max(-hoja.z0, hoja.z0 + hoja.alto)) + ciudad.U.uAnchoOla.value
 let arboles = null
 let datosCiudad = null // las partes de ciudad.pak, con la vida que dejan los hitos: el modo a pie choca con ellas
-cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array }).then((datos) => {
+const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array }).then((datos) => {
   // donde hay un hito modelado a mano, la casa genérica de ese lugar no nace (src/hitos/suprimir.js)
   datosCiudad = { ...datos, vida: suprimirTechos(datos, zonasDeSupresion(HITOS)) }
   const g = geometriaCiudad(datosCiudad, coords)
@@ -209,7 +212,8 @@ cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vid
   scene.add(casas)
   document.getElementById('alzar').hidden = false
   pedirCuadro(3)
-}).catch((e) => console.warn(`ciudad: ${e.message}`)).then(() => {
+}).catch((e) => console.warn(`ciudad: ${e.message}`))
+casasPedidas.then(() => {
   // los árboles, después de la ciudad: una malla instanciada que comparte sus uniforms (src/arboles.js)
   return cargarArboles('datos/arboles.bin', { coords, U: ciudad.U }).then((m) => {
     arboles = m
@@ -291,7 +295,9 @@ Promise.all([crecePedido, indicePlanos])
     }).catch((e) => console.warn(`crece: ${e.message}`))
   }).catch((e) => console.warn(`épocas: ${e.message}`)) // sin crece.json (p. ej. la demo de CI): la ciudad entera, sin línea de tiempo
 
+let olaElegida = false // alguien levantó o acostó la ciudad: la entrada (arrancar) no la vuelve a levantar
 function levantar(arriba = olaObjetivo === 0) {
+  olaElegida = true
   olaObjetivo = arriba ? olaMax : 0
   document.getElementById('alzar').textContent = arriba ? 'Acostar la ciudad' : 'Levantar la ciudad'
   pedirCuadro(3)
@@ -543,7 +549,7 @@ renderer.setAnimationLoop((t) => {
   }
   const { uOla, uColor } = ciudad.U
   if (uOla.value !== olaObjetivo) {
-    uOla.value = acercar(uOla.value, olaObjetivo, (olaMax / DURACION_OLA_S) * dt)
+    uOla.value = acercar(uOla.value, olaObjetivo, velocidadDeOla(uOla.value, olaObjetivo > uOla.value) * dt)
     pedirCuadro(2)
   }
   const { uOlaEpoca } = ciudad.U
@@ -585,6 +591,7 @@ if (params.has('hoy')) alternarHoy(true)
 document.body.classList.add('listo')
 listo = true
 if (crecerPedido) verCrecer()
+if (debeArrancar(params)) arrancar()
 // la página que embebe la vitrina espera este aviso para mandar sus órdenes
 if (params.has('vitrina') && window.parent !== window) window.parent.postMessage({ vitrina: 'lista' }, location.origin)
 window.lab = {
@@ -600,6 +607,32 @@ window.lab = {
 }
 window.lab.buscador = buscador
 window.lab.acerca = acerca
+
+/**
+ * La entrada (src/arranque.js): la hoja entera desde arriba se pone en color; cuando se cierra la bienvenida
+ * (o al rato, si no la hay) y ya llegaron las casas, la ciudad se levanta y la cámara baja volando al centro.
+ * Si mientras tanto la levantaron, tomaron la cámara o entraron a un modo de recorrido, se respeta lo que hicieron.
+ */
+function arrancar() {
+  alternarColor(true)
+  if (sinAnimar.matches) {
+    // directo al final: el color y la ciudad en pie de una vez, sin transición
+    levantar(true)
+    ciudad.U.uColor.value = 1
+    ciudad.U.uOla.value = olaObjetivo
+    cam.jump(VISTA_CENTRO)
+    return
+  }
+  cam.jump(vistaDeHoja(hoja))
+  const desde = { ...cam.goal }
+  Promise.all([conIntro ? cierreDeIntro : null, casasPedidas]).then(() => setTimeout(() => {
+    // tomada: la tocó aunque no la haya movido (un dedo apoyado, quieto); movida: un vuelo a una marca, la vitrina…
+    const movida = ['x', 'z', 'dist', 'yaw', 'pitch'].some((c) => Math.abs(cam.goal[c] - desde[c]) > 1e-6)
+    if (!olaElegida) levantar(true)
+    const enModo = Object.values(MODOS).some((m) => m.activo)
+    if (!cam.tomada && !movida && !enModo) cam.volarA(VISTA_CENTRO, DURACION_VUELO_S)
+  }, esperaDeArranque(conIntro)))
+}
 
 /** Papel con una cuadrícula de 100 m, hasta que exista plano/primero.webp. */
 function cuadriculaProvisoria() {

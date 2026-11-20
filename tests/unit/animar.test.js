@@ -24,4 +24,9 @@ describe('pasoDeCuadro', () => {
     expect(pasoDeCuadro(5, true)).toBe(1)
     expect(pasoDeCuadro(0.4, true)).toBe(0.4)
   })
+
+  test('el primer cuadro puede llegar con la hora de antes (dt < 0): no retrocede nada', () => {
+    expect(pasoDeCuadro(-0.19, false)).toBe(0)
+    expect(pasoDeCuadro(-0.19, true)).toBe(0)
+  })
 })

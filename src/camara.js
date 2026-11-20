@@ -7,9 +7,11 @@
  */
 import { Vector3, Raycaster, Plane, Vector2 } from 'three'
 import { gestoDeDosDedos, modoDeGesto } from './gestos.js'
+import { curvaSuave, vistaEnTrayecto } from './trayecto.js'
 
 const LIMITES = { distMin: 40, distMax: 9000, pitchMin: 0.18, pitchMax: 1.5 }
 const SUAVIDAD = 8
+const SUAVIDAD_VUELO = 30 // en un vuelo con guion (volarA) la vista sigue de cerca al trayecto
 const ALTURA_MINIMA_M = 12 // sobre el suelo que queda debajo de la cámara
 const INCLINAR_POR_PX = 0.004 // como el botón derecho
 // un toque de tecla (src/controles.js, movimientoDeTecla): llega amortiguado, como la rueda
@@ -25,6 +27,10 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   const dedos = new Map() // pointerId → { x, y } de los punteros apoyados
   let pausada = false // un modo de recorrido (src/a-pie-modo.js) tiene la vista: no se atiende la entrada
   let dos = null // el gesto con dos dedos en curso: { ids, inicio, previo, modo, altura, ancla }
+  let vuelo = null // el vuelo con guion en curso (volarA): { desde, hasta, t, segundos }
+  let tomada = false // la persona ya tocó la cámara (ratón, dedos, rueda o teclas), aunque no la haya movido
+  /** La persona toma la cámara: corta el vuelo con guion y queda anotado. */
+  const tomar = () => { vuelo = null; tomada = true }
 
   // el plano horizontal a la altura del objetivo (fija durante un arrastre, para que no resbale)
   const alSuelo = (cx, cy, altura = now.y) => {
@@ -52,6 +58,7 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   }
   lienzo.addEventListener('pointerdown', (e) => {
     if (pausada) return
+    tomar()
     lienzo.setPointerCapture(e.pointerId)
     dedos.set(e.pointerId, { x: e.clientX, y: e.clientY })
     if (dedos.size === 2) {
@@ -130,6 +137,7 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   lienzo.addEventListener('pointercancel', soltar)
   lienzo.addEventListener('wheel', (e) => {
     if (pausada) return
+    tomar()
     e.preventDefault()
     const p = alSuelo(e.clientX, e.clientY)
     const delta = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 100 : 1)
@@ -155,9 +163,16 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
 
   /** Avanza la amortiguación; devuelve true si todavía se está moviendo. */
   function update(dt) {
-    const k = 1 - Math.exp(-SUAVIDAD * dt)
+    const enVuelo = Boolean(vuelo)
+    if (vuelo) {
+      vuelo.t = Math.min(1, vuelo.t + dt / vuelo.segundos)
+      Object.assign(goal, vuelo.t >= 1 ? vuelo.hasta : vistaEnTrayecto(vuelo.desde, vuelo.hasta, curvaSuave(vuelo.t)))
+      acotar()
+      if (vuelo.t >= 1) vuelo = null
+    }
+    const k = 1 - Math.exp(-(enVuelo ? SUAVIDAD_VUELO : SUAVIDAD) * dt)
     goal.y = suelo(goal.x, goal.z)
-    let moviendo = false
+    let moviendo = enVuelo
     for (const c of Object.keys(goal)) {
       const d = goal[c] - now[c]
       if (Math.abs(d) > 1e-4 * (c === 'dist' ? now.dist : 1)) moviendo = true
@@ -171,9 +186,11 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   goal.y = suelo(goal.x, goal.z)
   Object.assign(now, goal)
   aplicar()
-  /** Salta la cámara (sin animación) y pide cuadros: con el render quieto, si no, la vista no cambia. */
+  /** Salta la cámara (sin animación, dentro de los límites) y pide cuadros: con el render quieto, si no, la vista no cambia. */
   function jump(v) {
+    vuelo = null
     Object.assign(goal, v)
+    acotar()
     goal.y = suelo(goal.x, goal.z)
     Object.assign(now, goal)
     aplicar()
@@ -182,13 +199,25 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
 
   /** Vuela (con la misma amortiguación que el arrastre) hasta lo que se le pase: { x, z, dist, yaw, pitch }. */
   function volar(v) {
+    vuelo = null
     Object.assign(goal, v)
     acotar()
     pedirCuadro(3)
   }
 
+  /**
+   * Vuela con guion hasta `v` ({ x, z, dist, yaw, pitch }, lo que falte queda como está) en `segundos`: arranca
+   * y llega suave (src/trayecto.js). Lo corta cualquier cosa que haga la persona con la cámara.
+   */
+  function volarA(v, segundos) {
+    const desde = { x: goal.x, z: goal.z, dist: goal.dist, yaw: goal.yaw, pitch: goal.pitch }
+    vuelo = { desde, hasta: { ...desde, ...v }, t: 0, segundos }
+    pedirCuadro(3)
+  }
+
   /** Con el teclado: corre el destino `dx` (derecha) y `dy` (abajo) pasos, en las direcciones de la pantalla. */
   function mover(dx, dy) {
+    tomar()
     const paso = goal.dist * PASO.mover
     const adelante = { x: -Math.sin(goal.yaw), z: -Math.cos(goal.yaw) }
     const derecha = { x: Math.cos(goal.yaw), z: -Math.sin(goal.yaw) }
@@ -199,12 +228,14 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   }
   /** Acerca (`veces` > 0) o aleja (< 0), un paso por vez. */
   function acercar(veces) {
+    tomar()
     goal.dist /= PASO.acercar ** veces
     acotar()
     pedirCuadro(3)
   }
   /** Gira (`giro` > 0: como los dedos en el sentido del reloj) e inclina (`inclinar` > 0: más desde arriba). */
   function girar(giro, inclinar) {
+    tomar()
     goal.yaw += giro * PASO.girar
     goal.pitch += inclinar * PASO.inclinar
     acotar()
@@ -214,10 +245,15 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   /** Deja de atender (o vuelve a atender) el ratón, los dedos y la rueda; suelta lo que estuviera apretado. */
   function pausar(si) {
     pausada = si
+    vuelo = null
     arrastre = null
     dos = null
     dedos.clear()
   }
 
-  return { goal, now, update, jump, volar, mover, acercar, girar, pausar }
+  return {
+    goal, now, update, jump, volar, volarA, mover, acercar, girar, pausar,
+    get volando() { return Boolean(vuelo) },
+    get tomada() { return tomada },
+  }
 }
