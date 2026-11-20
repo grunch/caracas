@@ -1,0 +1,6363 @@
+{
+  "casas": 1811,
+  "triangulos": 22387,
+  "sin_proyeccion_medible": 0,
+  "pares_triangulos_con_area_comun": 14185,
+  "umbral_area_m2": 0.0001,
+  "tolerancia_altura_m": 0.001,
+  "limite": "Cruce geométrico entre superficies de casas distintas, con pisos y relieve reproducidos en CPU. No incluye hitos, intersecciones dentro de una misma casa, ni lectura del GPU. Un solape coplanar no se cuenta como corte estricto.",
+  "pares_con_corte": [
+    {
+      "techos": [
+        19714,
+        19715
+      ],
+      "pares_triangulos_con_corte": 9,
+      "area_proyectada_de_intersecciones_m2": 5.324085336337834,
+      "primer_corte": {
+        "triangulos": [
+          953380,
+          953591
+        ],
+        "punto": [
+          -140.04707529589746,
+          -9.810085406972519,
+          568.2533761886738
+        ],
+        "separacion_min_max_m": [
+          -0.04325557162885829,
+          0.09539842891341266
+        ]
+      }
+    },
+    {
+      "techos": [
+        14824,
+        14825
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 4.186991954165396,
+      "primer_corte": {
+        "triangulos": [
+          701695,
+          701772
+        ],
+        "punto": [
+          214.77337904137303,
+          6.529756569680561,
+          93.8693144659402
+        ],
+        "separacion_min_max_m": [
+          -0.23230319667439492,
+          0.03593663110403433
+        ]
+      }
+    },
+    {
+      "techos": [
+        19447,
+        19448
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 4.07137912269812,
+      "primer_corte": {
+        "triangulos": [
+          939988,
+          940047
+        ],
+        "punto": [
+          -344.6219055675429,
+          -11.310132118299236,
+          524.1846114950526
+        ],
+        "separacion_min_max_m": [
+          -0.09408739278084965,
+          0.12224331623411899
+        ]
+      }
+    },
+    {
+      "techos": [
+        20325,
+        20326
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 3.7527003463664164,
+      "primer_corte": {
+        "triangulos": [
+          981815,
+          981880
+        ],
+        "punto": [
+          -427.3709851798866,
+          -12.829512104659074,
+          552.6809456615375
+        ],
+        "separacion_min_max_m": [
+          -0.08065857281097166,
+          0.1573640108478891
+        ]
+      }
+    },
+    {
+      "techos": [
+        21049,
+        21050
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 2.7474742694259424,
+      "primer_corte": {
+        "triangulos": [
+          1018345,
+          1018371
+        ],
+        "punto": [
+          -17.763816257926532,
+          -17.900283222521523,
+          775.0458491005477
+        ],
+        "separacion_min_max_m": [
+          -0.1285796945878772,
+          0.019024749655216056
+        ]
+      }
+    },
+    {
+      "techos": [
+        10761,
+        10768
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 2.6349988809625033,
+      "primer_corte": {
+        "triangulos": [
+          508200,
+          508527
+        ],
+        "punto": [
+          209.62147254636236,
+          17.038238868711744,
+          -360.04851499714437
+        ],
+        "separacion_min_max_m": [
+          -0.01958614617169019,
+          0.27742017054981716
+        ]
+      }
+    },
+    {
+      "techos": [
+        33284,
+        33285
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 2.621035095908652,
+      "primer_corte": {
+        "triangulos": [
+          1568885,
+          1568938
+        ],
+        "punto": [
+          -16.03281600063058,
+          11.837716108366639,
+          -143.00005008698201
+        ],
+        "separacion_min_max_m": [
+          -1.1177829483912518,
+          1.1320925971104572
+        ]
+      }
+    },
+    {
+      "techos": [
+        19955,
+        19956
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 2.512676846664225,
+      "primer_corte": {
+        "triangulos": [
+          965494,
+          965557
+        ],
+        "punto": [
+          207.50757064592045,
+          -16.03749723815676,
+          610.5480481673839
+        ],
+        "separacion_min_max_m": [
+          -0.13017172882605266,
+          0.15647211117197912
+        ]
+      }
+    },
+    {
+      "techos": [
+        13986,
+        13987
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 2.4544838883085367,
+      "primer_corte": {
+        "triangulos": [
+          660702,
+          660749
+        ],
+        "punto": [
+          469.31763114152477,
+          -3.015619031166068,
+          -57.64662763284987
+        ],
+        "separacion_min_max_m": [
+          -0.23857740684099582,
+          0.16918817863938074
+        ]
+      }
+    },
+    {
+      "techos": [
+        13081,
+        13082
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 2.386849169907647,
+      "primer_corte": {
+        "triangulos": [
+          617807,
+          617851
+        ],
+        "punto": [
+          -95.68792811235119,
+          12.819958537232196,
+          -200.70103127582337
+        ],
+        "separacion_min_max_m": [
+          -0.10416281765362179,
+          0.18819766381178127
+        ]
+      }
+    },
+    {
+      "techos": [
+        33654,
+        33655
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 2.2968224192401,
+      "primer_corte": {
+        "triangulos": [
+          1585135,
+          1585191
+        ],
+        "punto": [
+          285.5405767626167,
+          10.63817634895058,
+          -160.867728095412
+        ],
+        "separacion_min_max_m": [
+          -0.6785315532572844,
+          0.873576415159433
+        ]
+      }
+    },
+    {
+      "techos": [
+        20281,
+        20282
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 2.295940195300554,
+      "primer_corte": {
+        "triangulos": [
+          979451,
+          979506
+        ],
+        "punto": [
+          -365.3219866056842,
+          -15.832438824203507,
+          685.1585261406626
+        ],
+        "separacion_min_max_m": [
+          -0.06678172201009147,
+          1.2939586291242904
+        ]
+      }
+    },
+    {
+      "techos": [
+        13092,
+        13093
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 2.203893849119443,
+      "primer_corte": {
+        "triangulos": [
+          618439,
+          618504
+        ],
+        "punto": [
+          -150.61159821821565,
+          10.41993531027606,
+          -145.19454409659122
+        ],
+        "separacion_min_max_m": [
+          -0.06576363351518033,
+          0.025794066270730553
+        ]
+      }
+    },
+    {
+      "techos": [
+        20308,
+        20309
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 2.190825196077411,
+      "primer_corte": {
+        "triangulos": [
+          980832,
+          980892
+        ],
+        "punto": [
+          -373.2913340012622,
+          -13.41928911209186,
+          543.3231719653319
+        ],
+        "separacion_min_max_m": [
+          -0.9290355399915597,
+          0.34012422561653466
+        ]
+      }
+    },
+    {
+      "techos": [
+        33300,
+        33301
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 2.1780501193526196,
+      "primer_corte": {
+        "triangulos": [
+          1569756,
+          1569825
+        ],
+        "punto": [
+          81.08128508352146,
+          20.17937961061328,
+          -181.21284393616702
+        ],
+        "separacion_min_max_m": [
+          -0.19914796827054104,
+          0.1679759199969979
+        ]
+      }
+    },
+    {
+      "techos": [
+        16433,
+        16434
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 2.1708044967876425,
+      "primer_corte": {
+        "triangulos": [
+          785587,
+          785698
+        ],
+        "punto": [
+          -34.08444522899907,
+          -0.40552127598321874,
+          193.57823892052318
+        ],
+        "separacion_min_max_m": [
+          -0.022282701921062298,
+          0.0748674862150569
+        ]
+      }
+    },
+    {
+      "techos": [
+        15817,
+        15818
+      ],
+      "pares_triangulos_con_corte": 7,
+      "area_proyectada_de_intersecciones_m2": 2.101838375116966,
+      "primer_corte": {
+        "triangulos": [
+          752467,
+          752559
+        ],
+        "punto": [
+          339.36005325920326,
+          -0.5912459123574223,
+          258.469488526082
+        ],
+        "separacion_min_max_m": [
+          -1.4984964631668163,
+          1.1353376399980561
+        ]
+      }
+    },
+    {
+      "techos": [
+        10754,
+        10765
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 2.05950098204606,
+      "primer_corte": {
+        "triangulos": [
+          507798,
+          508380
+        ],
+        "punto": [
+          193.06914847311475,
+          16.011811521618625,
+          -300.48261151976965
+        ],
+        "separacion_min_max_m": [
+          -0.258596978808157,
+          0.19013077242220788
+        ]
+      }
+    },
+    {
+      "techos": [
+        10246,
+        10247
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 2.050053031058219,
+      "primer_corte": {
+        "triangulos": [
+          484674,
+          484730
+        ],
+        "punto": [
+          13.902788627952653,
+          21.86450252532985,
+          -412.0914338142596
+        ],
+        "separacion_min_max_m": [
+          -0.7017297151545385,
+          0.5398396289752725
+        ]
+      }
+    },
+    {
+      "techos": [
+        18776,
+        18777
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 2.0390193140348503,
+      "primer_corte": {
+        "triangulos": [
+          905578,
+          905683
+        ],
+        "punto": [
+          -245.18884977437602,
+          -9.862903316486864,
+          433.2371093657737
+        ],
+        "separacion_min_max_m": [
+          -0.4925515745508733,
+          0.6313134277697827
+        ]
+      }
+    },
+    {
+      "techos": [
+        20285,
+        20286
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 1.99571581327813,
+      "primer_corte": {
+        "triangulos": [
+          979822,
+          979868
+        ],
+        "punto": [
+          -411.1698437803165,
+          -13.823692232438589,
+          686.0445972899261
+        ],
+        "separacion_min_max_m": [
+          -0.007582815137311627,
+          0.13199578876291795
+        ]
+      }
+    },
+    {
+      "techos": [
+        15859,
+        15860
+      ],
+      "pares_triangulos_con_corte": 5,
+      "area_proyectada_de_intersecciones_m2": 1.971724803773465,
+      "primer_corte": {
+        "triangulos": [
+          754731,
+          754831
+        ],
+        "punto": [
+          -235.9871715138595,
+          -0.829200075810931,
+          187.89947965141425
+        ],
+        "separacion_min_max_m": [
+          -2.3994038528468877,
+          0.045229329470913626
+        ]
+      }
+    },
+    {
+      "techos": [
+        32936,
+        32937
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 1.953783168722819,
+      "primer_corte": {
+        "triangulos": [
+          1552482,
+          1552527
+        ],
+        "punto": [
+          -305.5311566377888,
+          8.495869468175727,
+          -86.61391078568214
+        ],
+        "separacion_min_max_m": [
+          -0.022662631922642618,
+          0.294844495398646
+        ]
+      }
+    },
+    {
+      "techos": [
+        15359,
+        15360
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 1.8972775675659705,
+      "primer_corte": {
+        "triangulos": [
+          729210,
+          729319
+        ],
+        "punto": [
+          111.68451107809271,
+          0.5685841692157396,
+          210.25375135229172
+        ],
+        "separacion_min_max_m": [
+          -0.10117856942997605,
+          0.2766957532703529
+        ]
+      }
+    },
+    {
+      "techos": [
+        20305,
+        20306
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 1.8084218355828718,
+      "primer_corte": {
+        "triangulos": [
+          980707,
+          980757
+        ],
+        "punto": [
+          -403.87141060343214,
+          -10.799754010290485,
+          526.489974540441
+        ],
+        "separacion_min_max_m": [
+          -0.3115954782862218,
+          0.00693598756166125
+        ]
+      }
+    },
+    {
+      "techos": [
+        33113,
+        33114
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 1.8043377690750633,
+      "primer_corte": {
+        "triangulos": [
+          1560758,
+          1560808
+        ],
+        "punto": [
+          67.55106531881539,
+          -11.269801259040847,
+          458.63649462736436
+        ],
+        "separacion_min_max_m": [
+          -0.5682199778318591,
+          0.5976825245916189
+        ]
+      }
+    },
+    {
+      "techos": [
+        15363,
+        15364
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 1.776774099941905,
+      "primer_corte": {
+        "triangulos": [
+          729498,
+          729555
+        ],
+        "punto": [
+          71.01917374432237,
+          -0.16396569767213975,
+          184.20949976652471
+        ],
+        "separacion_min_max_m": [
+          -0.2659493587291877,
+          1.068767909202407
+        ]
+      }
+    },
+    {
+      "techos": [
+        13083,
+        13084
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 1.7575080771917326,
+      "primer_corte": {
+        "triangulos": [
+          617900,
+          617970
+        ],
+        "punto": [
+          -72.62379100035461,
+          11.179642214576376,
+          -195.83780815666628
+        ],
+        "separacion_min_max_m": [
+          -0.09562849808416374,
+          0.10430269104357848
+        ]
+      }
+    },
+    {
+      "techos": [
+        33598,
+        33599
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 1.7222264787751955,
+      "primer_corte": {
+        "triangulos": [
+          1582768,
+          1582819
+        ],
+        "punto": [
+          173.38187366397062,
+          -0.7750514318579178,
+          182.07321595726376
+        ],
+        "separacion_min_max_m": [
+          -0.10755281609804257,
+          1.3437686828642015
+        ]
+      }
+    },
+    {
+      "techos": [
+        32940,
+        32971
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 1.690105369204829,
+      "primer_corte": {
+        "triangulos": [
+          1552701,
+          1554285
+        ],
+        "punto": [
+          -186.23666800008357,
+          9.213355066365544,
+          -109.49941362456998
+        ],
+        "separacion_min_max_m": [
+          -0.2866969508081638,
+          0.38422391339571504
+        ]
+      }
+    },
+    {
+      "techos": [
+        32971,
+        32972
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 1.6423954744619274,
+      "primer_corte": {
+        "triangulos": [
+          1554274,
+          1554335
+        ],
+        "punto": [
+          -173.2612004684071,
+          8.997606917731616,
+          -102.05597877513839
+        ],
+        "separacion_min_max_m": [
+          -0.027056727822734494,
+          0.0579697199804774
+        ]
+      }
+    },
+    {
+      "techos": [
+        13070,
+        13071
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 1.6312233262813227,
+      "primer_corte": {
+        "triangulos": [
+          617226,
+          617285
+        ],
+        "punto": [
+          -36.2461471500389,
+          8.907157867997185,
+          -144.32303639804536
+        ],
+        "separacion_min_max_m": [
+          -0.032981860090529835,
+          0.011403354051289227
+        ]
+      }
+    },
+    {
+      "techos": [
+        32948,
+        32996
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 1.6104003102681168,
+      "primer_corte": {
+        "triangulos": [
+          1553152,
+          1555439
+        ],
+        "punto": [
+          -280.90272021106205,
+          9.298691133856774,
+          -128.8787192367361
+        ],
+        "separacion_min_max_m": [
+          -0.884059746349422,
+          0.13614294233553892
+        ]
+      }
+    },
+    {
+      "techos": [
+        18620,
+        18621
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 1.5887233141362842,
+      "primer_corte": {
+        "triangulos": [
+          898292,
+          898348
+        ],
+        "punto": [
+          359.28300645576957,
+          -22.432651987760522,
+          440.7139600960708
+        ],
+        "separacion_min_max_m": [
+          -1.055581268508604,
+          0.301069726259243
+        ]
+      }
+    },
+    {
+      "techos": [
+        20574,
+        20575
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 1.579189964498847,
+      "primer_corte": {
+        "triangulos": [
+          994552,
+          994615
+        ],
+        "punto": [
+          -189.79389281435456,
+          -12.904400025594093,
+          661.2972646937156
+        ],
+        "separacion_min_max_m": [
+          -0.07133139889906825,
+          0.05656131976076262
+        ]
+      }
+    },
+    {
+      "techos": [
+        18608,
+        18609
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 1.5650795066105998,
+      "primer_corte": {
+        "triangulos": [
+          897702,
+          897757
+        ],
+        "punto": [
+          285.9036932118075,
+          -18.90070073682284,
+          510.5505745023297
+        ],
+        "separacion_min_max_m": [
+          -0.4606314737289381,
+          0.6639152957820329
+        ]
+      }
+    },
+    {
+      "techos": [
+        11823,
+        11824
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 1.546870214385462,
+      "primer_corte": {
+        "triangulos": [
+          557778,
+          557845
+        ],
+        "punto": [
+          -103.44773493022048,
+          16.16680053871545,
+          -226.5059697133736
+        ],
+        "separacion_min_max_m": [
+          -0.006734144751364468,
+          0.0020503085130716414
+        ]
+      }
+    },
+    {
+      "techos": [
+        32912,
+        32919
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 1.4498714676795497,
+      "primer_corte": {
+        "triangulos": [
+          1551349,
+          1551686
+        ],
+        "punto": [
+          -196.98045711562958,
+          13.778798746487706,
+          0.6807187101657168
+        ],
+        "separacion_min_max_m": [
+          -2.830928037177145,
+          1.8232957814224449
+        ]
+      }
+    },
+    {
+      "techos": [
+        20563,
+        20564
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 1.414943365295443,
+      "primer_corte": {
+        "triangulos": [
+          993814,
+          993857
+        ],
+        "punto": [
+          -292.8553214066828,
+          -16.387897464667276,
+          716.1391393822654
+        ],
+        "separacion_min_max_m": [
+          -0.10533853528387027,
+          0.10306680549236802
+        ]
+      }
+    },
+    {
+      "techos": [
+        33589,
+        33590
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 1.3386146741976022,
+      "primer_corte": {
+        "triangulos": [
+          1582296,
+          1582340
+        ],
+        "punto": [
+          233.76728673817587,
+          3.650951181022144,
+          111.50599532712494
+        ],
+        "separacion_min_max_m": [
+          -1.5348346171960117,
+          2.9496602372120364
+        ]
+      }
+    },
+    {
+      "techos": [
+        33128,
+        33129
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 1.285724093032463,
+      "primer_corte": {
+        "triangulos": [
+          1561643,
+          1561685
+        ],
+        "punto": [
+          99.41743253860626,
+          -9.923433014107516,
+          451.73125599084403
+        ],
+        "separacion_min_max_m": [
+          -0.08956062570667633,
+          0.27679576048414134
+        ]
+      }
+    },
+    {
+      "techos": [
+        33600,
+        33601
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 1.2778724893524696,
+      "primer_corte": {
+        "triangulos": [
+          1582864,
+          1582890
+        ],
+        "punto": [
+          172.60476259376432,
+          0.3903757035734401,
+          159.43588296214384
+        ],
+        "separacion_min_max_m": [
+          -0.40690430998802185,
+          2.1075214445590973
+        ]
+      }
+    },
+    {
+      "techos": [
+        15816,
+        15817
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 1.239348564427335,
+      "primer_corte": {
+        "triangulos": [
+          752333,
+          752466
+        ],
+        "punto": [
+          349.9465846294596,
+          -0.8519684923551978,
+          261.21801542904456
+        ],
+        "separacion_min_max_m": [
+          -1.6797342538679914,
+          0.9891416394287091
+        ]
+      }
+    },
+    {
+      "techos": [
+        16445,
+        16446
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 1.2339319335509624,
+      "primer_corte": {
+        "triangulos": [
+          786553,
+          786696
+        ],
+        "punto": [
+          -68.37890468865116,
+          -1.8606168347468923,
+          218.2541687309404
+        ],
+        "separacion_min_max_m": [
+          -1.210838908488526,
+          0.23944503131339445
+        ]
+      }
+    },
+    {
+      "techos": [
+        21076,
+        21077
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 1.2289048849540096,
+      "primer_corte": {
+        "triangulos": [
+          1019669,
+          1019710
+        ],
+        "punto": [
+          21.293003946520525,
+          -12.701032982363245,
+          616.8927505780267
+        ],
+        "separacion_min_max_m": [
+          -0.3423753539649894,
+          0.04933870052392564
+        ]
+      }
+    },
+    {
+      "techos": [
+        20573,
+        20574
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 1.2222416465297048,
+      "primer_corte": {
+        "triangulos": [
+          994513,
+          994565
+        ],
+        "punto": [
+          -201.53728097612947,
+          -14.37452775308077,
+          647.2358266448477
+        ],
+        "separacion_min_max_m": [
+          -1.139758956855303,
+          0.14646025366835147
+        ]
+      }
+    },
+    {
+      "techos": [
+        33051,
+        33052
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 1.1971190511710312,
+      "primer_corte": {
+        "triangulos": [
+          1557630,
+          1557652
+        ],
+        "punto": [
+          -6.710737897413623,
+          0.32010087397800646,
+          184.70461453969418
+        ],
+        "separacion_min_max_m": [
+          -0.17059336144678028,
+          0.11139835562891598
+        ]
+      }
+    },
+    {
+      "techos": [
+        15361,
+        15362
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 1.1797022198291547,
+      "primer_corte": {
+        "triangulos": [
+          729391,
+          729437
+        ],
+        "punto": [
+          89.7143566473323,
+          1.0399954068466997,
+          205.42832802049236
+        ],
+        "separacion_min_max_m": [
+          -0.5161364893732099,
+          0.7013589203842514
+        ]
+      }
+    },
+    {
+      "techos": [
+        33280,
+        33281
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 1.142654889751686,
+      "primer_corte": {
+        "triangulos": [
+          1568692,
+          1568738
+        ],
+        "punto": [
+          -12.248199523812897,
+          8.703002910912055,
+          -93.70595579821918
+        ],
+        "separacion_min_max_m": [
+          -1.1604195269089956,
+          0.07007647094042824
+        ]
+      }
+    },
+    {
+      "techos": [
+        33695,
+        33696
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 1.0972635877083818,
+      "primer_corte": {
+        "triangulos": [
+          1586705,
+          1586756
+        ],
+        "punto": [
+          388.4019944515362,
+          -8.24773582160799,
+          305.36932649869794
+        ],
+        "separacion_min_max_m": [
+          -0.4045885067718018,
+          0.8176709164209797
+        ]
+      }
+    },
+    {
+      "techos": [
+        10255,
+        10274
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 1.076470593940996,
+      "primer_corte": {
+        "triangulos": [
+          485242,
+          486368
+        ],
+        "punto": [
+          -73.88558115420396,
+          28.559493377296235,
+          -458.1398264276371
+        ],
+        "separacion_min_max_m": [
+          -0.19101136374729322,
+          0.027712778839941166
+        ]
+      }
+    },
+    {
+      "techos": [
+        20306,
+        20307
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 1.049226358040797,
+      "primer_corte": {
+        "triangulos": [
+          980756,
+          980781
+        ],
+        "punto": [
+          -392.2126309720621,
+          -11.656110438280336,
+          527.1619956625933
+        ],
+        "separacion_min_max_m": [
+          -0.13307619919352476,
+          0.19462984397460303
+        ]
+      }
+    },
+    {
+      "techos": [
+        33333,
+        33334
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 1.0151105343358116,
+      "primer_corte": {
+        "triangulos": [
+          1571376,
+          1571423
+        ],
+        "punto": [
+          233.2327472649291,
+          13.314546798467944,
+          -280.09406680211896
+        ],
+        "separacion_min_max_m": [
+          -0.9045962229366182,
+          0.7551164603572715
+        ]
+      }
+    },
+    {
+      "techos": [
+        32984,
+        32985
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 1.0032683902957464,
+      "primer_corte": {
+        "triangulos": [
+          1554924,
+          1554987
+        ],
+        "punto": [
+          -242.27659406379624,
+          13.620992381082374,
+          -271.38323747872965
+        ],
+        "separacion_min_max_m": [
+          -1.5486674807843883,
+          0.7882729729535072
+        ]
+      }
+    },
+    {
+      "techos": [
+        19949,
+        19950
+      ],
+      "pares_triangulos_con_corte": 5,
+      "area_proyectada_de_intersecciones_m2": 0.9893352108109196,
+      "primer_corte": {
+        "triangulos": [
+          965028,
+          965102
+        ],
+        "punto": [
+          209.03317583532717,
+          -15.82234115668075,
+          541.3474575009785
+        ],
+        "separacion_min_max_m": [
+          -0.1164282836550683,
+          0.36246207000067443
+        ]
+      }
+    },
+    {
+      "techos": [
+        33079,
+        33084
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.9738821845662105,
+      "primer_corte": {
+        "triangulos": [
+          1558807,
+          1559022
+        ],
+        "punto": [
+          -61.3774038718284,
+          0.26127011646221376,
+          97.56517134512019
+        ],
+        "separacion_min_max_m": [
+          -0.8897277675653541,
+          1.093979750989611
+        ]
+      }
+    },
+    {
+      "techos": [
+        33585,
+        33595
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.9140657983512992,
+      "primer_corte": {
+        "triangulos": [
+          1582071,
+          1582624
+        ],
+        "punto": [
+          157.35988335703607,
+          1.3281969357673518,
+          219.5082560291375
+        ],
+        "separacion_min_max_m": [
+          -0.09617975410617419,
+          0.08156917688276621
+        ]
+      }
+    },
+    {
+      "techos": [
+        14848,
+        14849
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.9091834444612591,
+      "primer_corte": {
+        "triangulos": [
+          703052,
+          703080
+        ],
+        "punto": [
+          187.0162762560707,
+          7.945047563285954,
+          76.72801963218431
+        ],
+        "separacion_min_max_m": [
+          -1.2289117284520614,
+          0.11249806727079203
+        ]
+      }
+    },
+    {
+      "techos": [
+        11835,
+        11836
+      ],
+      "pares_triangulos_con_corte": 5,
+      "area_proyectada_de_intersecciones_m2": 0.9082838452656335,
+      "primer_corte": {
+        "triangulos": [
+          558455,
+          558506
+        ],
+        "punto": [
+          -23.54118013049368,
+          14.583901451357839,
+          -223.92757823863872
+        ],
+        "separacion_min_max_m": [
+          -0.990669479480843,
+          0.31588337453970894
+        ]
+      }
+    },
+    {
+      "techos": [
+        33442,
+        33443
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.8877290653649488,
+      "primer_corte": {
+        "triangulos": [
+          1576044,
+          1576087
+        ],
+        "punto": [
+          57.74129824324037,
+          6.850512355030894,
+          12.051899791714106
+        ],
+        "separacion_min_max_m": [
+          -0.04217908952635252,
+          0.05269539069907747
+        ]
+      }
+    },
+    {
+      "techos": [
+        14919,
+        14920
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.8773507787718069,
+      "primer_corte": {
+        "triangulos": [
+          707012,
+          707065
+        ],
+        "punto": [
+          -317.42799320393743,
+          4.271154294679775,
+          62.233833165278476
+        ],
+        "separacion_min_max_m": [
+          -0.6595154315499201,
+          0.7390348036602461
+        ]
+      }
+    },
+    {
+      "techos": [
+        13088,
+        13089
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.8608280165060493,
+      "primer_corte": {
+        "triangulos": [
+          618171,
+          618198
+        ],
+        "punto": [
+          -157.03315776988384,
+          9.859996948935063,
+          -99.25204437732756
+        ],
+        "separacion_min_max_m": [
+          -0.7024780155380199,
+          1.6661590049337178
+        ]
+      }
+    },
+    {
+      "techos": [
+        21062,
+        21063
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.836554525694568,
+      "primer_corte": {
+        "triangulos": [
+          1018973,
+          1018997
+        ],
+        "punto": [
+          42.553544774615126,
+          -16.39198882838444,
+          706.5213237523384
+        ],
+        "separacion_min_max_m": [
+          -0.18367943751098892,
+          1.6540214366134194
+        ]
+      }
+    },
+    {
+      "techos": [
+        33098,
+        33099
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.8352465204717117,
+      "primer_corte": {
+        "triangulos": [
+          1559696,
+          1559748
+        ],
+        "punto": [
+          89.50506095933748,
+          -10.59318087100983,
+          374.30701190784396
+        ],
+        "separacion_min_max_m": [
+          -1.1115534161009464,
+          0.3884465838990536
+        ]
+      }
+    },
+    {
+      "techos": [
+        33271,
+        33272
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 0.8207131958284883,
+      "primer_corte": {
+        "triangulos": [
+          1568318,
+          1568372
+        ],
+        "punto": [
+          21.36391224750878,
+          12.753662710190241,
+          -169.36753797585143
+        ],
+        "separacion_min_max_m": [
+          -0.39430873238789843,
+          0.8884320820593103
+        ]
+      }
+    },
+    {
+      "techos": [
+        20556,
+        20557
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.789786298905351,
+      "primer_corte": {
+        "triangulos": [
+          993436,
+          993464
+        ],
+        "punto": [
+          -213.43797099124538,
+          -16.875718969757997,
+          731.8513598599324
+        ],
+        "separacion_min_max_m": [
+          -1.4236429311259826,
+          0.017464640836351464
+        ]
+      }
+    },
+    {
+      "techos": [
+        33342,
+        33343
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.7806753867045799,
+      "primer_corte": {
+        "triangulos": [
+          1571775,
+          1571831
+        ],
+        "punto": [
+          25.844942881900543,
+          22.67405367041461,
+          -283.10212362039687
+        ],
+        "separacion_min_max_m": [
+          -0.8135992425111596,
+          1.2823559919873944
+        ]
+      }
+    },
+    {
+      "techos": [
+        33003,
+        33004
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.7746908586185541,
+      "primer_corte": {
+        "triangulos": [
+          1555780,
+          1555845
+        ],
+        "punto": [
+          -264.90884095230246,
+          11.48043518377628,
+          -214.9316376559963
+        ],
+        "separacion_min_max_m": [
+          -0.36464689393108074,
+          1.5856861228958223
+        ]
+      }
+    },
+    {
+      "techos": [
+        10240,
+        10241
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.7636221657419141,
+      "primer_corte": {
+        "triangulos": [
+          484410,
+          484464
+        ],
+        "punto": [
+          -72.94984633368065,
+          20.66262543159894,
+          -360.76408772344485
+        ],
+        "separacion_min_max_m": [
+          -0.4657040359511484,
+          0.8646719736505872
+        ]
+      }
+    },
+    {
+      "techos": [
+        32943,
+        32944
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.7517522851185934,
+      "primer_corte": {
+        "triangulos": [
+          1552859,
+          1552915
+        ],
+        "punto": [
+          -229.41330740770022,
+          9.324840062811631,
+          -118.96902803380674
+        ],
+        "separacion_min_max_m": [
+          -0.7754139852726354,
+          1.969616644234904
+        ]
+      }
+    },
+    {
+      "techos": [
+        33596,
+        33597
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.7509616800597394,
+      "primer_corte": {
+        "triangulos": [
+          1582660,
+          1582718
+        ],
+        "punto": [
+          169.09018304149387,
+          -0.897265237327133,
+          204.1749599579837
+        ],
+        "separacion_min_max_m": [
+          -0.12729726122659457,
+          1.3759105671212453
+        ]
+      }
+    },
+    {
+      "techos": [
+        14838,
+        14839
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.7286776932445265,
+      "primer_corte": {
+        "triangulos": [
+          702532,
+          702601
+        ],
+        "punto": [
+          218.8805258658165,
+          13.169783798707453,
+          -3.7864555273256024
+        ],
+        "separacion_min_max_m": [
+          -0.9486327068340117,
+          1.0603168618893264
+        ]
+      }
+    },
+    {
+      "techos": [
+        20296,
+        20297
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 0.720412735432871,
+      "primer_corte": {
+        "triangulos": [
+          980306,
+          980364
+        ],
+        "punto": [
+          -335.52732603266537,
+          -13.560561733046555,
+          621.2612918347625
+        ],
+        "separacion_min_max_m": [
+          -0.6792352367615138,
+          0.3758071641714764
+        ]
+      }
+    },
+    {
+      "techos": [
+        11832,
+        11833
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.7095257746450385,
+      "primer_corte": {
+        "triangulos": [
+          558235,
+          558351
+        ],
+        "punto": [
+          -20.851820472788305,
+          18.5046109160402,
+          -257.64002183086103
+        ],
+        "separacion_min_max_m": [
+          -0.7003672055664794,
+          1.363044059060556
+        ]
+      }
+    },
+    {
+      "techos": [
+        19710,
+        19711
+      ],
+      "pares_triangulos_con_corte": 6,
+      "area_proyectada_de_intersecciones_m2": 0.702848039274961,
+      "primer_corte": {
+        "triangulos": [
+          953093,
+          953145
+        ],
+        "punto": [
+          -91.4804503237505,
+          -10.86140317774182,
+          562.1716565219509
+        ],
+        "separacion_min_max_m": [
+          -0.9539329434055617,
+          0.6192627372705033
+        ]
+      }
+    },
+    {
+      "techos": [
+        13057,
+        13058
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.7024730747279727,
+      "primer_corte": {
+        "triangulos": [
+          616269,
+          616385
+        ],
+        "punto": [
+          -59.95892028242212,
+          7.726040491847634,
+          -81.32786674797109
+        ],
+        "separacion_min_max_m": [
+          -1.3976969871681382,
+          0.149565234389339
+        ]
+      }
+    },
+    {
+      "techos": [
+        33196,
+        33197
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.6977576598302655,
+      "primer_corte": {
+        "triangulos": [
+          1565024,
+          1565084
+        ],
+        "punto": [
+          -71.34621735131932,
+          -11.537856078384692,
+          432.64750457038696
+        ],
+        "separacion_min_max_m": [
+          -0.5867282248212575,
+          0.14385881787177368
+        ]
+      }
+    },
+    {
+      "techos": [
+        15394,
+        15395
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.696205645924016,
+      "primer_corte": {
+        "triangulos": [
+          731782,
+          731939
+        ],
+        "punto": [
+          45.85792379920481,
+          0.5540041542049394,
+          135.85516333406474
+        ],
+        "separacion_min_max_m": [
+          -0.20685469999908435,
+          1.0822073231637575
+        ]
+      }
+    },
+    {
+      "techos": [
+        32909,
+        32910
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.6956202031542967,
+      "primer_corte": {
+        "triangulos": [
+          1551217,
+          1551268
+        ],
+        "punto": [
+          -291.62025559404526,
+          6.5707528222819835,
+          -32.01780368828183
+        ],
+        "separacion_min_max_m": [
+          -1.0946951613458715,
+          0.2968544259038879
+        ]
+      }
+    },
+    {
+      "techos": [
+        32982,
+        33004
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.6933096001104002,
+      "primer_corte": {
+        "triangulos": [
+          1554719,
+          1555852
+        ],
+        "punto": [
+          -256.7517681717677,
+          10.438538888556224,
+          -221.0978049204945
+        ],
+        "separacion_min_max_m": [
+          -0.16217599151988438,
+          0.04500812899350137
+        ]
+      }
+    },
+    {
+      "techos": [
+        33595,
+        33596
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.681164712436085,
+      "primer_corte": {
+        "triangulos": [
+          1582626,
+          1582650
+        ],
+        "punto": [
+          159.6184475680274,
+          0.8776832613015415,
+          213.95701389560867
+        ],
+        "separacion_min_max_m": [
+          -0.05632136327472104,
+          0.14430256598182467
+        ]
+      }
+    },
+    {
+      "techos": [
+        20568,
+        20569
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.6797493495772491,
+      "primer_corte": {
+        "triangulos": [
+          994133,
+          994231
+        ],
+        "punto": [
+          -190.74705459850537,
+          -13.783208469675714,
+          593.7307550881815
+        ],
+        "separacion_min_max_m": [
+          -0.9340747074421643,
+          0.34967148379615764
+        ]
+      }
+    },
+    {
+      "techos": [
+        33661,
+        33662
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.6673139701278406,
+      "primer_corte": {
+        "triangulos": [
+          1585451,
+          1585494
+        ],
+        "punto": [
+          344.4415153150764,
+          9.290912247486176,
+          -157.57347406128676
+        ],
+        "separacion_min_max_m": [
+          -0.019623444271492207,
+          0.016760447730804096
+        ]
+      }
+    },
+    {
+      "techos": [
+        18610,
+        18611
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.663040103150716,
+      "primer_corte": {
+        "triangulos": [
+          897804,
+          897829
+        ],
+        "punto": [
+          260.180662579065,
+          -15.788440388650372,
+          519.0284633648738
+        ],
+        "separacion_min_max_m": [
+          -0.2514966411633779,
+          0.07063787778458774
+        ]
+      }
+    },
+    {
+      "techos": [
+        11844,
+        11845
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.6585462998957979,
+      "primer_corte": {
+        "triangulos": [
+          559030,
+          559054
+        ],
+        "punto": [
+          -127.53577211677704,
+          18.295351345161833,
+          -233.66883675343107
+        ],
+        "separacion_min_max_m": [
+          -0.07252516773924711,
+          0.11423147151849378
+        ]
+      }
+    },
+    {
+      "techos": [
+        10236,
+        10237
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.6501425729379808,
+      "primer_corte": {
+        "triangulos": [
+          484162,
+          484285
+        ],
+        "punto": [
+          -30.467138306608295,
+          22.27180131987282,
+          -341.03352175736825
+        ],
+        "separacion_min_max_m": [
+          -0.08563587256131555,
+          0.18171451845026354
+        ]
+      }
+    },
+    {
+      "techos": [
+        21064,
+        21065
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.6491658733491328,
+      "primer_corte": {
+        "triangulos": [
+          1019053,
+          1019118
+        ],
+        "punto": [
+          38.660232526496166,
+          -16.88426070513522,
+          730.021403091768
+        ],
+        "separacion_min_max_m": [
+          -1.0997683413865502,
+          0.7145682137369249
+        ]
+      }
+    },
+    {
+      "techos": [
+        33671,
+        33672
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.6245094311632968,
+      "primer_corte": {
+        "triangulos": [
+          1585823,
+          1585878
+        ],
+        "punto": [
+          354.272000774118,
+          6.7663500703981185,
+          -250.00470656511237
+        ],
+        "separacion_min_max_m": [
+          -0.8042725363308136,
+          1.345557073044688
+        ]
+      }
+    },
+    {
+      "techos": [
+        33584,
+        33585
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.6072111838570994,
+      "primer_corte": {
+        "triangulos": [
+          1582007,
+          1582073
+        ],
+        "punto": [
+          164.07251503559021,
+          1.2360839562712727,
+          219.4567437225775
+        ],
+        "separacion_min_max_m": [
+          -0.8594839161376058,
+          1.1857787217405473
+        ]
+      }
+    },
+    {
+      "techos": [
+        11822,
+        11823
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.6056640835071118,
+      "primer_corte": {
+        "triangulos": [
+          557732,
+          557774
+        ],
+        "punto": [
+          -93.68581658024455,
+          17.420677404933855,
+          -217.33255785243173
+        ],
+        "separacion_min_max_m": [
+          -0.24929740983641935,
+          0.23230837815944483
+        ]
+      }
+    },
+    {
+      "techos": [
+        19974,
+        19975
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.6047546512977022,
+      "primer_corte": {
+        "triangulos": [
+          966527,
+          966584
+        ],
+        "punto": [
+          105.98540554952578,
+          -14.35693435245173,
+          565.853019556476
+        ],
+        "separacion_min_max_m": [
+          -0.8591584457892907,
+          1.082110483807611
+        ]
+      }
+    },
+    {
+      "techos": [
+        20280,
+        20281
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.5887242999798188,
+      "primer_corte": {
+        "triangulos": [
+          979398,
+          979439
+        ],
+        "punto": [
+          -357.76206592175583,
+          -14.790786600878675,
+          699.5911041635256
+        ],
+        "separacion_min_max_m": [
+          -0.05323999013545233,
+          0.22871586638116526
+        ]
+      }
+    },
+    {
+      "techos": [
+        15822,
+        15845
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.5886059864593729,
+      "primer_corte": {
+        "triangulos": [
+          752763,
+          753976
+        ],
+        "punto": [
+          287.96388555784955,
+          -1.298739658835018,
+          248.9004242086574
+        ],
+        "separacion_min_max_m": [
+          -0.31446854128959956,
+          1.3112820249727548
+        ]
+      }
+    },
+    {
+      "techos": [
+        33115,
+        33116
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.5791871233508756,
+      "primer_corte": {
+        "triangulos": [
+          1560863,
+          1560954
+        ],
+        "punto": [
+          44.075527385470004,
+          -11.277183669619271,
+          456.72872918964856
+        ],
+        "separacion_min_max_m": [
+          -0.2751672562899614,
+          0.9783448877988121
+        ]
+      }
+    },
+    {
+      "techos": [
+        33071,
+        33072
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.5713926643097484,
+      "primer_corte": {
+        "triangulos": [
+          1558444,
+          1558504
+        ],
+        "punto": [
+          -40.76338591973498,
+          2.7522181827003465,
+          65.78548858038859
+        ],
+        "separacion_min_max_m": [
+          -0.12652571985771033,
+          2.3478517534284435
+        ]
+      }
+    },
+    {
+      "techos": [
+        14832,
+        14833
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.5632340044520026,
+      "primer_corte": {
+        "triangulos": [
+          702162,
+          702234
+        ],
+        "punto": [
+          300.5858229461546,
+          10.524390470658972,
+          65.66559846461757
+        ],
+        "separacion_min_max_m": [
+          -0.1970646019779565,
+          1.7461264760013933
+        ]
+      }
+    },
+    {
+      "techos": [
+        15877,
+        15878
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.5612558133420344,
+      "primer_corte": {
+        "triangulos": [
+          755716,
+          755765
+        ],
+        "punto": [
+          -352.75452635941247,
+          -1.5008707312309468,
+          157.36634212524206
+        ],
+        "separacion_min_max_m": [
+          -0.24204851482616974,
+          0.0019491299443394894
+        ]
+      }
+    },
+    {
+      "techos": [
+        33586,
+        33587
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.5190237382267573,
+      "primer_corte": {
+        "triangulos": [
+          1582126,
+          1582197
+        ],
+        "punto": [
+          196.4496336151571,
+          5.922752958871079,
+          117.69731077355296
+        ],
+        "separacion_min_max_m": [
+          -1.3304305684817876,
+          3.143224606320615
+        ]
+      }
+    },
+    {
+      "techos": [
+        13056,
+        13077
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.5156440943901218,
+      "primer_corte": {
+        "triangulos": [
+          616217,
+          617693
+        ],
+        "punto": [
+          -45.08292488968112,
+          9.917047953983825,
+          -70.66365181964993
+        ],
+        "separacion_min_max_m": [
+          -0.7663624160697324,
+          0.9134513660683226
+        ]
+      }
+    },
+    {
+      "techos": [
+        10266,
+        10267
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.5140150951839002,
+      "primer_corte": {
+        "triangulos": [
+          485861,
+          485885
+        ],
+        "punto": [
+          -104.40971547253905,
+          22.909671780910102,
+          -375.9836565564122
+        ],
+        "separacion_min_max_m": [
+          -0.04970340390093675,
+          0.16527787089375146
+        ]
+      }
+    },
+    {
+      "techos": [
+        13989,
+        13990
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.5112396441074106,
+      "primer_corte": {
+        "triangulos": [
+          660927,
+          660985
+        ],
+        "punto": [
+          455.38221308344214,
+          -3.572732339499723,
+          -23.82435402033657
+        ],
+        "separacion_min_max_m": [
+          -0.07751464903418537,
+          0.023968590394844114
+        ]
+      }
+    },
+    {
+      "techos": [
+        33287,
+        33288
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.50994314986443,
+      "primer_corte": {
+        "triangulos": [
+          1569112,
+          1569155
+        ],
+        "punto": [
+          -3.134940621079771,
+          12.612416194255896,
+          -175.63315568096144
+        ],
+        "separacion_min_max_m": [
+          -2.673653225960358,
+          1.4188280451024866
+        ]
+      }
+    },
+    {
+      "techos": [
+        33411,
+        33430
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.5061431411405072,
+      "primer_corte": {
+        "triangulos": [
+          1574833,
+          1575613
+        ],
+        "punto": [
+          165.81185032892438,
+          6.746480081992441,
+          74.89957082050323
+        ],
+        "separacion_min_max_m": [
+          -0.03672276843273892,
+          0.07015218899645959
+        ]
+      }
+    },
+    {
+      "techos": [
+        14837,
+        14856
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.5018287098141446,
+      "primer_corte": {
+        "triangulos": [
+          702504,
+          703504
+        ],
+        "punto": [
+          202.2882964882585,
+          12.93982251750474,
+          -6.212821635988588
+        ],
+        "separacion_min_max_m": [
+          -0.841641327029734,
+          0.5835706299459957
+        ]
+      }
+    },
+    {
+      "techos": [
+        19954,
+        19955
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.4983763235045437,
+      "primer_corte": {
+        "triangulos": [
+          965439,
+          965504
+        ],
+        "punto": [
+          197.42394831657876,
+          -17.498173507203433,
+          597.2570525892907
+        ],
+        "separacion_min_max_m": [
+          -0.009968274403279409,
+          0.09429317262161163
+        ]
+      }
+    },
+    {
+      "techos": [
+        33429,
+        33430
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.4972404248402995,
+      "primer_corte": {
+        "triangulos": [
+          1575563,
+          1575611
+        ],
+        "punto": [
+          170.13288381358316,
+          8.2886940372953,
+          73.30475688533878
+        ],
+        "separacion_min_max_m": [
+          -0.44954755070580177,
+          0.8266034100808781
+        ]
+      }
+    },
+    {
+      "techos": [
+        14885,
+        14886
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.4900350245871363,
+      "primer_corte": {
+        "triangulos": [
+          704621,
+          704681
+        ],
+        "punto": [
+          -262.53304591316964,
+          2.1538775959531478,
+          122.8011766239999
+        ],
+        "separacion_min_max_m": [
+          -0.47383761587349227,
+          0.16949289987871907
+        ]
+      }
+    },
+    {
+      "techos": [
+        17372,
+        17373
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.4819123402196574,
+      "primer_corte": {
+        "triangulos": [
+          836858,
+          836948
+        ],
+        "punto": [
+          -145.7542225872225,
+          -8.200080984346357,
+          415.5231958139887
+        ],
+        "separacion_min_max_m": [
+          -0.05011797937938667,
+          0.02827413012287039
+        ]
+      }
+    },
+    {
+      "techos": [
+        33304,
+        33305
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.46255636343836926,
+      "primer_corte": {
+        "triangulos": [
+          1569976,
+          1570022
+        ],
+        "punto": [
+          38.60045806587192,
+          17.23919070243835,
+          -203.84207188460664
+        ],
+        "separacion_min_max_m": [
+          -0.3561728099760302,
+          0.7629414160640948
+        ]
+      }
+    },
+    {
+      "techos": [
+        20577,
+        20578
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.46252257610071457,
+      "primer_corte": {
+        "triangulos": [
+          994820,
+          994881
+        ],
+        "punto": [
+          -200.18372611114472,
+          -14.236311258778265,
+          694.4683061237325
+        ],
+        "separacion_min_max_m": [
+          -0.1344084175065916,
+          1.9471806202858062
+        ]
+      }
+    },
+    {
+      "techos": [
+        19951,
+        19952
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.45845961520309175,
+      "primer_corte": {
+        "triangulos": [
+          965166,
+          965204
+        ],
+        "punto": [
+          217.14510735970953,
+          -15.583556122506081,
+          564.902023977374
+        ],
+        "separacion_min_max_m": [
+          -0.12310833948593469,
+          0.07183039923146417
+        ]
+      }
+    },
+    {
+      "techos": [
+        21047,
+        21048
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.45678988633111983,
+      "primer_corte": {
+        "triangulos": [
+          1018133,
+          1018244
+        ],
+        "punto": [
+          5.6612476494138555,
+          -19.22430812918043,
+          765.9187493634149
+        ],
+        "separacion_min_max_m": [
+          -1.6325009765862433,
+          1.1890605854259775
+        ]
+      }
+    },
+    {
+      "techos": [
+        13059,
+        13060
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.4467550867224175,
+      "primer_corte": {
+        "triangulos": [
+          616573,
+          616637
+        ],
+        "punto": [
+          -81.91808392701083,
+          8.638124965221348,
+          -88.5068495836958
+        ],
+        "separacion_min_max_m": [
+          -1.151139481336017,
+          0.08758838393356427
+        ]
+      }
+    },
+    {
+      "techos": [
+        32999,
+        33000
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.4448592364515127,
+      "primer_corte": {
+        "triangulos": [
+          1555573,
+          1555636
+        ],
+        "punto": [
+          -274.430270313379,
+          8.746918104201676,
+          -169.83098769133616
+        ],
+        "separacion_min_max_m": [
+          -0.26067841622364085,
+          0.3379194114685333
+        ]
+      }
+    },
+    {
+      "techos": [
+        13991,
+        13992
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.43515376233194447,
+      "primer_corte": {
+        "triangulos": [
+          661062,
+          661130
+        ],
+        "punto": [
+          443.19170540309824,
+          -2.07928226351072,
+          -2.383687047539208
+        ],
+        "separacion_min_max_m": [
+          -1.3044394850298886,
+          0.10972363423093157
+        ]
+      }
+    },
+    {
+      "techos": [
+        20565,
+        20566
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.42672556864044203,
+      "primer_corte": {
+        "triangulos": [
+          993917,
+          993981
+        ],
+        "punto": [
+          -315.57168920449135,
+          -15.585906025837119,
+          707.4474472260852
+        ],
+        "separacion_min_max_m": [
+          -0.9517720462582702,
+          1.0666068659686516
+        ]
+      }
+    },
+    {
+      "techos": [
+        13073,
+        13074
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.4242171407654918,
+      "primer_corte": {
+        "triangulos": [
+          617411,
+          617437
+        ],
+        "punto": [
+          -31.15557115104914,
+          8.370347226832472,
+          -109.20040429799987
+        ],
+        "separacion_min_max_m": [
+          -0.027938225107957848,
+          0.01615022478463901
+        ]
+      }
+    },
+    {
+      "techos": [
+        19463,
+        19464
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.4232282950429944,
+      "primer_corte": {
+        "triangulos": [
+          941188,
+          941247
+        ],
+        "punto": [
+          -312.9635358389357,
+          -10.027130617435148,
+          477.18264610799963
+        ],
+        "separacion_min_max_m": [
+          -0.28393095954304925,
+          0.045709306164063435
+        ]
+      }
+    },
+    {
+      "techos": [
+        19971,
+        19972
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.41600280957477653,
+      "primer_corte": {
+        "triangulos": [
+          966302,
+          966408
+        ],
+        "punto": [
+          89.83093000428408,
+          -13.416049120974009,
+          597.7663004988777
+        ],
+        "separacion_min_max_m": [
+          -0.025769521760701686,
+          0.06673475264284434
+        ]
+      }
+    },
+    {
+      "techos": [
+        33307,
+        33308
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.41417319517945284,
+      "primer_corte": {
+        "triangulos": [
+          1570132,
+          1570180
+        ],
+        "punto": [
+          4.297553744846837,
+          16.296906546649737,
+          -200.15669738731242
+        ],
+        "separacion_min_max_m": [
+          -0.4081486099253482,
+          1.1607835707376353
+        ]
+      }
+    },
+    {
+      "techos": [
+        32952,
+        32953
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.40948343531935255,
+      "primer_corte": {
+        "triangulos": [
+          1553320,
+          1553375
+        ],
+        "punto": [
+          -143.23214511633503,
+          19.85248863850373,
+          -320.4284750758078
+        ],
+        "separacion_min_max_m": [
+          -0.37319191616774106,
+          1.0012891816110994
+        ]
+      }
+    },
+    {
+      "techos": [
+        15358,
+        15359
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.4007406428248729,
+      "primer_corte": {
+        "triangulos": [
+          729184,
+          729209
+        ],
+        "punto": [
+          123.23228766645812,
+          2.046971536581026,
+          210.1248401897437
+        ],
+        "separacion_min_max_m": [
+          -0.04830530876861161,
+          0.2100611724031527
+        ]
+      }
+    },
+    {
+      "techos": [
+        33305,
+        33306
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.3839556336256492,
+      "primer_corte": {
+        "triangulos": [
+          1570023,
+          1570081
+        ],
+        "punto": [
+          27.932534116009794,
+          17.12780579220619,
+          -205.83574376569334
+        ],
+        "separacion_min_max_m": [
+          -0.8066906312128879,
+          1.651128851157182
+        ]
+      }
+    },
+    {
+      "techos": [
+        32967,
+        32968
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.38323987178327856,
+      "primer_corte": {
+        "triangulos": [
+          1554094,
+          1554149
+        ],
+        "punto": [
+          -166.04284924974658,
+          12.362855104146064,
+          -147.74459610138865
+        ],
+        "separacion_min_max_m": [
+          -0.06078156389150946,
+          0.008788528618660418
+        ]
+      }
+    },
+    {
+      "techos": [
+        15372,
+        15373
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.3778616710171001,
+      "primer_corte": {
+        "triangulos": [
+          730233,
+          730298
+        ],
+        "punto": [
+          154.10544771198772,
+          3.9076806218300817,
+          148.0406077879251
+        ],
+        "separacion_min_max_m": [
+          -1.1580104828554454,
+          0.9979742516544832
+        ]
+      }
+    },
+    {
+      "techos": [
+        18633,
+        18634
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.3758918506847757,
+      "primer_corte": {
+        "triangulos": [
+          899202,
+          899236
+        ],
+        "punto": [
+          334.7545947884054,
+          -16.140891432685578,
+          409.3775130887012
+        ],
+        "separacion_min_max_m": [
+          -0.009340025696786824,
+          0.2129601946210009
+        ]
+      }
+    },
+    {
+      "techos": [
+        20315,
+        20316
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.3720981401493595,
+      "primer_corte": {
+        "triangulos": [
+          981296,
+          981322
+        ],
+        "punto": [
+          -449.2315162624442,
+          -12.353232601984303,
+          664.4074164867951
+        ],
+        "separacion_min_max_m": [
+          -0.07107065221078557,
+          0.15227031778358224
+        ]
+      }
+    },
+    {
+      "techos": [
+        33420,
+        33421
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.3660725129384185,
+      "primer_corte": {
+        "triangulos": [
+          1575192,
+          1575254
+        ],
+        "punto": [
+          58.80137140493134,
+          6.071304985238768,
+          55.18917112735276
+        ],
+        "separacion_min_max_m": [
+          -0.9971086765787547,
+          0.7977099502248777
+        ]
+      }
+    },
+    {
+      "techos": [
+        13076,
+        13077
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.3629454956831279,
+      "primer_corte": {
+        "triangulos": [
+          617582,
+          617694
+        ],
+        "punto": [
+          -43.39568600210715,
+          9.560206760515179,
+          -75.94886364809005
+        ],
+        "separacion_min_max_m": [
+          -1.5535138193093871,
+          1.2106696188802104
+        ]
+      }
+    },
+    {
+      "techos": [
+        32942,
+        32943
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.3576945960729384,
+      "primer_corte": {
+        "triangulos": [
+          1552800,
+          1552858
+        ],
+        "punto": [
+          -217.7390305062379,
+          9.773691117620867,
+          -115.80641723160765
+        ],
+        "separacion_min_max_m": [
+          -1.1597364264455479,
+          0.47060797678756217
+        ]
+      }
+    },
+    {
+      "techos": [
+        33597,
+        33598
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.34677569167890654,
+      "primer_corte": {
+        "triangulos": [
+          1582713,
+          1582757
+        ],
+        "punto": [
+          159.00721203278067,
+          0.26373752127220484,
+          190.22560395074305
+        ],
+        "separacion_min_max_m": [
+          -0.07726673133842787,
+          0.23241089942339244
+        ]
+      }
+    },
+    {
+      "techos": [
+        12926,
+        12927
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.34606714474374645,
+      "primer_corte": {
+        "triangulos": [
+          610095,
+          610144
+        ],
+        "punto": [
+          373.79457604833567,
+          4.714392123903195,
+          -185.87158300097306
+        ],
+        "separacion_min_max_m": [
+          -0.2813983801343589,
+          0.046401618826948265
+        ]
+      }
+    },
+    {
+      "techos": [
+        12918,
+        12919
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.3410925650628487,
+      "primer_corte": {
+        "triangulos": [
+          609667,
+          609716
+        ],
+        "punto": [
+          390.7357051884422,
+          3.4025373681038076,
+          -127.5699079408852
+        ],
+        "separacion_min_max_m": [
+          -0.13434308473770074,
+          0.20139418603135084
+        ]
+      }
+    },
+    {
+      "techos": [
+        33286,
+        33287
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.331815361499661,
+      "primer_corte": {
+        "triangulos": [
+          1569053,
+          1569118
+        ],
+        "punto": [
+          -3.4696990444014015,
+          13.110970592513166,
+          -163.79546874541282
+        ],
+        "separacion_min_max_m": [
+          -0.5218382324236757,
+          0.5925857411354016
+        ]
+      }
+    },
+    {
+      "techos": [
+        33434,
+        33435
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.32731670612957675,
+      "primer_corte": {
+        "triangulos": [
+          1575787,
+          1575831
+        ],
+        "punto": [
+          144.74624664948075,
+          8.555743634733993,
+          -19.497881752861407
+        ],
+        "separacion_min_max_m": [
+          -0.2008179839158828,
+          0.05766644632390783
+        ]
+      }
+    },
+    {
+      "techos": [
+        33711,
+        33712
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.3268639671586869,
+      "primer_corte": {
+        "triangulos": [
+          1587357,
+          1587405
+        ],
+        "punto": [
+          370.2490951159097,
+          -6.84479260434594,
+          295.64303529987075
+        ],
+        "separacion_min_max_m": [
+          -0.5512432611843394,
+          0.8356452969674137
+        ]
+      }
+    },
+    {
+      "techos": [
+        20597,
+        20598
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.32637711471882025,
+      "primer_corte": {
+        "triangulos": [
+          996173,
+          996231
+        ],
+        "punto": [
+          -299.64244306608936,
+          -13.643742863795467,
+          656.5925027663012
+        ],
+        "separacion_min_max_m": [
+          -0.4166001267785191,
+          0.9649193331385675
+        ]
+      }
+    },
+    {
+      "techos": [
+        32987,
+        32988
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.31869285462415176,
+      "primer_corte": {
+        "triangulos": [
+          1555086,
+          1555145
+        ],
+        "punto": [
+          -234.84833953272317,
+          17.34349970995771,
+          -305.4822243332192
+        ],
+        "separacion_min_max_m": [
+          -0.13303322410149576,
+          0.6790267274409985
+        ]
+      }
+    },
+    {
+      "techos": [
+        33080,
+        33084
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.3168649409902312,
+      "primer_corte": {
+        "triangulos": [
+          1558836,
+          1559005
+        ],
+        "punto": [
+          -53.78744157494582,
+          0.7959386020753456,
+          94.45183017611507
+        ],
+        "separacion_min_max_m": [
+          -0.09752200276802725,
+          0.04119835168534536
+        ]
+      }
+    },
+    {
+      "techos": [
+        20311,
+        20312
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.29899322449745946,
+      "primer_corte": {
+        "triangulos": [
+          981140,
+          981183
+        ],
+        "punto": [
+          -337.46125599305947,
+          -11.601671272927717,
+          542.1106297024481
+        ],
+        "separacion_min_max_m": [
+          -0.7300411142202847,
+          1.2714408386643754
+        ]
+      }
+    },
+    {
+      "techos": [
+        15842,
+        15843
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.29816121946674334,
+      "primer_corte": {
+        "triangulos": [
+          753776,
+          753825
+        ],
+        "punto": [
+          408.3098392077219,
+          1.1164783314950313,
+          148.10796187660426
+        ],
+        "separacion_min_max_m": [
+          -1.3321731066294333,
+          1.4639271509554845
+        ]
+      }
+    },
+    {
+      "techos": [
+        14904,
+        14905
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.29304690684311413,
+      "primer_corte": {
+        "triangulos": [
+          705983,
+          706028
+        ],
+        "punto": [
+          -309.05932306140045,
+          7.495133038439743,
+          -2.703516594691035
+        ],
+        "separacion_min_max_m": [
+          -0.2163433073031058,
+          0.4558263380702101
+        ]
+      }
+    },
+    {
+      "techos": [
+        15369,
+        15370
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.28294806715656134,
+      "primer_corte": {
+        "triangulos": [
+          729995,
+          730056
+        ],
+        "punto": [
+          148.67744550523136,
+          3.6524956067092837,
+          111.77166275367506
+        ],
+        "separacion_min_max_m": [
+          -0.9382167033697613,
+          0.31556768557090464
+        ]
+      }
+    },
+    {
+      "techos": [
+        33057,
+        33086
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.28040225288962994,
+      "primer_corte": {
+        "triangulos": [
+          1557920,
+          1559101
+        ],
+        "punto": [
+          -68.8152633464346,
+          -2.1025988191352436,
+          161.67630715286515
+        ],
+        "separacion_min_max_m": [
+          -1.4737282599250818,
+          0.22941280596227287
+        ]
+      }
+    },
+    {
+      "techos": [
+        33311,
+        33312
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.2774692619136203,
+      "primer_corte": {
+        "triangulos": [
+          1570296,
+          1570341
+        ],
+        "punto": [
+          205.67734076509842,
+          15.64155174141763,
+          -199.9274211238516
+        ],
+        "separacion_min_max_m": [
+          -0.1059638020055047,
+          0.3801704740320133
+        ]
+      }
+    },
+    {
+      "techos": [
+        14921,
+        14922
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.27347028515502686,
+      "primer_corte": {
+        "triangulos": [
+          707113,
+          707159
+        ],
+        "punto": [
+          -312.3074610072756,
+          4.3092020866250085,
+          38.533058313856465
+        ],
+        "separacion_min_max_m": [
+          -0.6964309270429112,
+          0.4267435764291463
+        ]
+      }
+    },
+    {
+      "techos": [
+        11848,
+        11849
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.2699597640665986,
+      "primer_corte": {
+        "triangulos": [
+          559190,
+          559256
+        ],
+        "punto": [
+          -119.15123666176935,
+          20.88666887175833,
+          -278.16701280565417
+        ],
+        "separacion_min_max_m": [
+          -0.6584871473895078,
+          1.567071401837154
+        ]
+      }
+    },
+    {
+      "techos": [
+        20567,
+        20568
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.26255979809813806,
+      "primer_corte": {
+        "triangulos": [
+          994078,
+          994129
+        ],
+        "punto": [
+          -177.79245005020704,
+          -11.476769807974605,
+          584.5230979011264
+        ],
+        "separacion_min_max_m": [
+          -0.7903847677702345,
+          0.24099113127790872
+        ]
+      }
+    },
+    {
+      "techos": [
+        16432,
+        16433
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.2520024021955518,
+      "primer_corte": {
+        "triangulos": [
+          785490,
+          785591
+        ],
+        "punto": [
+          -44.50247612663259,
+          -0.14849616808348287,
+          193.22249046817828
+        ],
+        "separacion_min_max_m": [
+          -0.3050659863022247,
+          2.126518905048357
+        ]
+      }
+    },
+    {
+      "techos": [
+        19444,
+        19459
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.2513932831617885,
+      "primer_corte": {
+        "triangulos": [
+          939793,
+          940687
+        ],
+        "punto": [
+          -304.88600115341967,
+          -12.1525855777017,
+          529.9660103808883
+        ],
+        "separacion_min_max_m": [
+          -0.5029791787200963,
+          0.392688488937182
+        ]
+      }
+    },
+    {
+      "techos": [
+        16184,
+        16185
+      ],
+      "pares_triangulos_con_corte": 5,
+      "area_proyectada_de_intersecciones_m2": 0.25108645819979597,
+      "primer_corte": {
+        "triangulos": [
+          770912,
+          770967
+        ],
+        "punto": [
+          483.40558889172326,
+          -4.168331532477573,
+          178.28821332172186
+        ],
+        "separacion_min_max_m": [
+          -0.08248290421099469,
+          0.14825674517596
+        ]
+      }
+    },
+    {
+      "techos": [
+        21081,
+        21082
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.24714894672332471,
+      "primer_corte": {
+        "triangulos": [
+          1019893,
+          1019921
+        ],
+        "punto": [
+          -76.30506093561495,
+          -17.92459764225263,
+          755.2323628917623
+        ],
+        "separacion_min_max_m": [
+          -1.2060578525921741,
+          0.5580287216232378
+        ]
+      }
+    },
+    {
+      "techos": [
+        15828,
+        15829
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.2442303194176469,
+      "primer_corte": {
+        "triangulos": [
+          753091,
+          753235
+        ],
+        "punto": [
+          412.88428358259637,
+          0.8359596089329386,
+          212.4999237060547
+        ],
+        "separacion_min_max_m": [
+          -1.4394938510810107,
+          0.5151123222394176
+        ]
+      }
+    },
+    {
+      "techos": [
+        15398,
+        15399
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.23658477719923776,
+      "primer_corte": {
+        "triangulos": [
+          732135,
+          732198
+        ],
+        "punto": [
+          57.59471481595862,
+          2.459217636334799,
+          91.67657208875491
+        ],
+        "separacion_min_max_m": [
+          -1.006966931251256,
+          0.8235078534842728
+        ]
+      }
+    },
+    {
+      "techos": [
+        18625,
+        18626
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.22779618539159796,
+      "primer_corte": {
+        "triangulos": [
+          898524,
+          898583
+        ],
+        "punto": [
+          351.42032845647634,
+          -21.79689884424215,
+          495.9936049437037
+        ],
+        "separacion_min_max_m": [
+          -0.9030947822611779,
+          1.0876053582492204
+        ]
+      }
+    },
+    {
+      "techos": [
+        14831,
+        14832
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.21723343197383982,
+      "primer_corte": {
+        "triangulos": [
+          702140,
+          702163
+        ],
+        "punto": [
+          301.6799150642674,
+          11.231496606483887,
+          53.30292890826983
+        ],
+        "separacion_min_max_m": [
+          -0.4067967842448752,
+          1.6561266340895031
+        ]
+      }
+    },
+    {
+      "techos": [
+        18782,
+        18783
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.2089094382696356,
+      "primer_corte": {
+        "triangulos": [
+          906274,
+          906527
+        ],
+        "punto": [
+          -176.21556873965906,
+          -10.311740054608237,
+          450.3833263056612
+        ],
+        "separacion_min_max_m": [
+          -0.1385133172049109,
+          0.7747669692503223
+        ]
+      }
+    },
+    {
+      "techos": [
+        33070,
+        33071
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.20712057025697117,
+      "primer_corte": {
+        "triangulos": [
+          1558409,
+          1558434
+        ],
+        "punto": [
+          -49.29560208427668,
+          5.246983465824968,
+          51.52515373881448
+        ],
+        "separacion_min_max_m": [
+          -0.5010260343233597,
+          0.2750371996728873
+        ]
+      }
+    },
+    {
+      "techos": [
+        17108,
+        17109
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.20129853311562515,
+      "primer_corte": {
+        "triangulos": [
+          822857,
+          822883
+        ],
+        "punto": [
+          -384.1150587456712,
+          -10.414654019955918,
+          364.0847862332507
+        ],
+        "separacion_min_max_m": [
+          -0.07665494687741159,
+          0.12049516826121476
+        ]
+      }
+    },
+    {
+      "techos": [
+        20304,
+        20305
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.19685189518280694,
+      "primer_corte": {
+        "triangulos": [
+          980679,
+          980710
+        ],
+        "punto": [
+          -414.59614727815944,
+          -11.021830448910634,
+          524.8145828475376
+        ],
+        "separacion_min_max_m": [
+          -0.513594557698525,
+          0.040979939486078365
+        ]
+      }
+    },
+    {
+      "techos": [
+        16425,
+        16426
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.19329831073757825,
+      "primer_corte": {
+        "triangulos": [
+          784767,
+          784986
+        ],
+        "punto": [
+          -19.902601502939234,
+          -3.2614421786367416,
+          273.294102425591
+        ],
+        "separacion_min_max_m": [
+          -0.27272978033833795,
+          0.1556561790407045
+        ]
+      }
+    },
+    {
+      "techos": [
+        10766,
+        10773
+      ],
+      "pares_triangulos_con_corte": 8,
+      "area_proyectada_de_intersecciones_m2": 0.19209537575457397,
+      "primer_corte": {
+        "triangulos": [
+          508466,
+          508745
+        ],
+        "punto": [
+          236.2619383772632,
+          12.183780545643032,
+          -350.9600430750521
+        ],
+        "separacion_min_max_m": [
+          -0.2635268886270836,
+          0.09275665376915754
+        ]
+      }
+    },
+    {
+      "techos": [
+        15385,
+        15386
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.1708581620970827,
+      "primer_corte": {
+        "triangulos": [
+          731154,
+          731223
+        ],
+        "punto": [
+          121.92520272649925,
+          5.522458468573689,
+          99.64359437884553
+        ],
+        "separacion_min_max_m": [
+          -0.635246798499665,
+          0.2706555182408579
+        ]
+      }
+    },
+    {
+      "techos": [
+        32939,
+        32940
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.1665622763448772,
+      "primer_corte": {
+        "triangulos": [
+          1552664,
+          1552692
+        ],
+        "punto": [
+          -185.1804435956122,
+          10.48081980460282,
+          -98.22637961210016
+        ],
+        "separacion_min_max_m": [
+          -0.6371958926909329,
+          1.011553703484104
+        ]
+      }
+    },
+    {
+      "techos": [
+        13975,
+        13976
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.16159514596405727,
+      "primer_corte": {
+        "triangulos": [
+          660028,
+          660092
+        ],
+        "punto": [
+          424.59479460255125,
+          0.49251933954199956,
+          1.3403537434311001
+        ],
+        "separacion_min_max_m": [
+          -0.018348418951276813,
+          0.5934195937816185
+        ]
+      }
+    },
+    {
+      "techos": [
+        19468,
+        19469
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.15785660151557868,
+      "primer_corte": {
+        "triangulos": [
+          941443,
+          941584
+        ],
+        "punto": [
+          -413.7534660620037,
+          -11.567922185402836,
+          478.74968126512334
+        ],
+        "separacion_min_max_m": [
+          -0.11695156814680452,
+          0.038678191971701636
+        ]
+      }
+    },
+    {
+      "techos": [
+        14891,
+        14892
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.155544308919682,
+      "primer_corte": {
+        "triangulos": [
+          705010,
+          705096
+        ],
+        "punto": [
+          -331.5333017774665,
+          -1.0968905997059828,
+          110.75233314018993
+        ],
+        "separacion_min_max_m": [
+          -0.12892608510826165,
+          0.8435811176338746
+        ]
+      }
+    },
+    {
+      "techos": [
+        33111,
+        33112
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.15535773572542558,
+      "primer_corte": {
+        "triangulos": [
+          1560668,
+          1560689
+        ],
+        "punto": [
+          86.07556764829118,
+          -11.961336612700336,
+          472.7494061360417
+        ],
+        "separacion_min_max_m": [
+          -0.07966451613941672,
+          0.25323392482576423
+        ]
+      }
+    },
+    {
+      "techos": [
+        20579,
+        20580
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.15484155556788404,
+      "primer_corte": {
+        "triangulos": [
+          994944,
+          995003
+        ],
+        "punto": [
+          -205.01701282173283,
+          -15.858476513865494,
+          716.3050552438394
+        ],
+        "separacion_min_max_m": [
+          -0.027336821426146685,
+          0.028568745211330793
+        ]
+      }
+    },
+    {
+      "techos": [
+        33055,
+        33056
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.153603421094633,
+      "primer_corte": {
+        "triangulos": [
+          1557819,
+          1557866
+        ],
+        "punto": [
+          -47.90328959714781,
+          -1.2386407942921096,
+          160.644441400965
+        ],
+        "separacion_min_max_m": [
+          -0.2766224637784518,
+          0.31635688834690256
+        ]
+      }
+    },
+    {
+      "techos": [
+        33719,
+        33720
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.1517371881061903,
+      "primer_corte": {
+        "triangulos": [
+          1587675,
+          1587737
+        ],
+        "punto": [
+          287.6799257365121,
+          -6.369541264561718,
+          319.6799705800625
+        ],
+        "separacion_min_max_m": [
+          -0.45221527909603765,
+          0.2395731893606694
+        ]
+      }
+    },
+    {
+      "techos": [
+        17374,
+        17375
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.14965119214739558,
+      "primer_corte": {
+        "triangulos": [
+          837011,
+          837307
+        ],
+        "punto": [
+          -127.31253852146826,
+          -0.9672337618679414,
+          332.5506027312412
+        ],
+        "separacion_min_max_m": [
+          -0.9357694070874203,
+          1.1670293708005062
+        ]
+      }
+    },
+    {
+      "techos": [
+        10751,
+        10752
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.14953903379335054,
+      "primer_corte": {
+        "triangulos": [
+          507600,
+          507661
+        ],
+        "punto": [
+          155.46080062622113,
+          21.928416990137016,
+          -405.92470707678655
+        ],
+        "separacion_min_max_m": [
+          -1.4140799725681603,
+          1.0604077622354424
+        ]
+      }
+    },
+    {
+      "techos": [
+        18603,
+        18604
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.1483251128032117,
+      "primer_corte": {
+        "triangulos": [
+          897410,
+          897506
+        ],
+        "punto": [
+          265.04575805421877,
+          -15.415759594597688,
+          428.3035115973611
+        ],
+        "separacion_min_max_m": [
+          -0.25051640339910364,
+          0.40002950482983124
+        ]
+      }
+    },
+    {
+      "techos": [
+        14923,
+        14924
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.14498032968827046,
+      "primer_corte": {
+        "triangulos": [
+          707206,
+          707253
+        ],
+        "punto": [
+          -319.0863675161807,
+          7.585907370189176,
+          14.093220161712983
+        ],
+        "separacion_min_max_m": [
+          -0.24295033630782825,
+          0.013978052928106166
+        ]
+      }
+    },
+    {
+      "techos": [
+        33301,
+        33302
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.14283195896957387,
+      "primer_corte": {
+        "triangulos": [
+          1569836,
+          1569896
+        ],
+        "punto": [
+          72.07755857430246,
+          19.765044678554318,
+          -197.75800697924532
+        ],
+        "separacion_min_max_m": [
+          -0.4118950846990117,
+          0.0816644892208842
+        ]
+      }
+    },
+    {
+      "techos": [
+        33583,
+        33584
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.13864064542580912,
+      "primer_corte": {
+        "triangulos": [
+          1581981,
+          1582013
+        ],
+        "punto": [
+          175.59769693009235,
+          1.6025878872345487,
+          220.35700680456145
+        ],
+        "separacion_min_max_m": [
+          -0.48948327077627596,
+          0.00688824073515093
+        ]
+      }
+    },
+    {
+      "techos": [
+        19466,
+        19467
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.13806317304613008,
+      "primer_corte": {
+        "triangulos": [
+          941387,
+          941414
+        ],
+        "punto": [
+          -414.7830572466853,
+          -10.696767373077734,
+          500.7496901776154
+        ],
+        "separacion_min_max_m": [
+          -0.1927788818605336,
+          0.5845218826620453
+        ]
+      }
+    },
+    {
+      "techos": [
+        19711,
+        19712
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.13659133328543938,
+      "primer_corte": {
+        "triangulos": [
+          953131,
+          953223
+        ],
+        "punto": [
+          -105.78052240432154,
+          -9.966150942629326,
+          571.7119565328857
+        ],
+        "separacion_min_max_m": [
+          -1.798261485621424,
+          1.255104413666345
+        ]
+      }
+    },
+    {
+      "techos": [
+        33259,
+        33277
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.13399316954620852,
+      "primer_corte": {
+        "triangulos": [
+          1567856,
+          1568600
+        ],
+        "punto": [
+          80.07125907816882,
+          18.108495912175496,
+          -164.50756914286285
+        ],
+        "separacion_min_max_m": [
+          -0.045192942348350584,
+          0.21224877855107138
+        ]
+      }
+    },
+    {
+      "techos": [
+        33653,
+        33654
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.13091451808830198,
+      "primer_corte": {
+        "triangulos": [
+          1585077,
+          1585136
+        ],
+        "punto": [
+          297.2840122255917,
+          11.13362949384134,
+          -160.9880017758886
+        ],
+        "separacion_min_max_m": [
+          -0.6153647071198236,
+          0.2986080486600997
+        ]
+      }
+    },
+    {
+      "techos": [
+        33085,
+        33086
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.12815097469687242,
+      "primer_corte": {
+        "triangulos": [
+          1559068,
+          1559091
+        ],
+        "punto": [
+          -77.1976506708747,
+          0.360783792577859,
+          162.09270502420145
+        ],
+        "separacion_min_max_m": [
+          -0.08566171092724062,
+          0.5411174586427805
+        ]
+      }
+    },
+    {
+      "techos": [
+        33415,
+        33416
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.11563860544061089,
+      "primer_corte": {
+        "triangulos": [
+          1575000,
+          1575050
+        ],
+        "punto": [
+          119.91892025149477,
+          5.299433640986685,
+          57.27100245338119
+        ],
+        "separacion_min_max_m": [
+          -0.15019964274863895,
+          1.0964007467319554
+        ]
+      }
+    },
+    {
+      "techos": [
+        21094,
+        21095
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.11460053137484306,
+      "primer_corte": {
+        "triangulos": [
+          1020708,
+          1020765
+        ],
+        "punto": [
+          -52.598274864953794,
+          -9.65037882311061,
+          611.4526233739026
+        ],
+        "separacion_min_max_m": [
+          -0.5697099530256864,
+          0.20600569184302486
+        ]
+      }
+    },
+    {
+      "techos": [
+        32939,
+        32972
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.1132381816157384,
+      "primer_corte": {
+        "triangulos": [
+          1552663,
+          1554337
+        ],
+        "punto": [
+          -178.63473952228924,
+          10.857929720129292,
+          -97.74012919720388
+        ],
+        "separacion_min_max_m": [
+          -0.352319825555071,
+          0.04293401994306123
+        ]
+      }
+    },
+    {
+      "techos": [
+        32910,
+        32911
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.1117844201864481,
+      "primer_corte": {
+        "triangulos": [
+          1551258,
+          1551322
+        ],
+        "punto": [
+          -305.89229779654505,
+          8.859879095047308,
+          -20.87140903269218
+        ],
+        "separacion_min_max_m": [
+          -0.4597341096361518,
+          0.7640443187329211
+        ]
+      }
+    },
+    {
+      "techos": [
+        19444,
+        19445
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.11116444581599269,
+      "primer_corte": {
+        "triangulos": [
+          939794,
+          939884
+        ],
+        "punto": [
+          -309.4408718513586,
+          -14.34415604011781,
+          524.8438925119219
+        ],
+        "separacion_min_max_m": [
+          -0.15625285753554863,
+          0.017232105082712224
+        ]
+      }
+    },
+    {
+      "techos": [
+        32914,
+        32915
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.10431187160388512,
+      "primer_corte": {
+        "triangulos": [
+          1551463,
+          1551487
+        ],
+        "punto": [
+          -187.78514563489122,
+          8.624446930588547,
+          -52.31159397210663
+        ],
+        "separacion_min_max_m": [
+          -0.0330805630869635,
+          0.002083113438585471
+        ]
+      }
+    },
+    {
+      "techos": [
+        17116,
+        17117
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.10148846677596102,
+      "primer_corte": {
+        "triangulos": [
+          823238,
+          823324
+        ],
+        "punto": [
+          -362.4067976963523,
+          -6.42919322013833,
+          286.6075027752779
+        ],
+        "separacion_min_max_m": [
+          -0.9409431409835349,
+          0.5179129648209084
+        ]
+      }
+    },
+    {
+      "techos": [
+        19968,
+        19969
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.10097546165621596,
+      "primer_corte": {
+        "triangulos": [
+          966176,
+          966225
+        ],
+        "punto": [
+          214.92626349926581,
+          -13.0636813092093,
+          523.9185896243898
+        ],
+        "separacion_min_max_m": [
+          -0.967841437057416,
+          0.3296662432450148
+        ]
+      }
+    },
+    {
+      "techos": [
+        19960,
+        19979
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.1002221333224101,
+      "primer_corte": {
+        "triangulos": [
+          965732,
+          966764
+        ],
+        "punto": [
+          113.92643575446284,
+          -14.004197246016162,
+          511.9746907534814
+        ],
+        "separacion_min_max_m": [
+          -0.8791840296724729,
+          0.800434274873794
+        ]
+      }
+    },
+    {
+      "techos": [
+        33412,
+        33429
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.09767032036194939,
+      "primer_corte": {
+        "triangulos": [
+          1574864,
+          1575567
+        ],
+        "punto": [
+          162.2624066838916,
+          5.223762248094442,
+          69.79884093321989
+        ],
+        "separacion_min_max_m": [
+          -0.22198597784332463,
+          1.8623335872813378
+        ]
+      }
+    },
+    {
+      "techos": [
+        20599,
+        20600
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0968943759573984,
+      "primer_corte": {
+        "triangulos": [
+          996291,
+          996351
+        ],
+        "punto": [
+          -295.61000227846716,
+          -13.532184714558227,
+          633.3253316743247
+        ],
+        "separacion_min_max_m": [
+          -1.880573658916603,
+          0.6218115086702198
+        ]
+      }
+    },
+    {
+      "techos": [
+        19959,
+        19960
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.09610580960137796,
+      "primer_corte": {
+        "triangulos": [
+          965700,
+          965730
+        ],
+        "punto": [
+          112.6591486942398,
+          -10.156834621371758,
+          502.39149949592365
+        ],
+        "separacion_min_max_m": [
+          -0.7223808933991336,
+          0.40263696293243356
+        ]
+      }
+    },
+    {
+      "techos": [
+        19940,
+        19941
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.09055695358218213,
+      "primer_corte": {
+        "triangulos": [
+          964662,
+          964710
+        ],
+        "punto": [
+          159.3341700983667,
+          -14.5265155206273,
+          630.3278886494753
+        ],
+        "separacion_min_max_m": [
+          -1.5716771253480601,
+          0.5720869823536532
+        ]
+      }
+    },
+    {
+      "techos": [
+        33205,
+        33206
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.08469620970418391,
+      "primer_corte": {
+        "triangulos": [
+          1565555,
+          1565690
+        ],
+        "punto": [
+          -31.994524117646886,
+          -10.255084495966484,
+          387.33745632942544
+        ],
+        "separacion_min_max_m": [
+          -0.5778940261446053,
+          0.36746760213015506
+        ]
+      }
+    },
+    {
+      "techos": [
+        15357,
+        15358
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.08182703992142475,
+      "primer_corte": {
+        "triangulos": [
+          729139,
+          729185
+        ],
+        "punto": [
+          134.79207692919354,
+          2.2502970577548638,
+          211.88025218162113
+        ],
+        "separacion_min_max_m": [
+          -0.1988860433451407,
+          0.9359276752839776
+        ]
+      }
+    },
+    {
+      "techos": [
+        15840,
+        15841
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.07791679437316974,
+      "primer_corte": {
+        "triangulos": [
+          753687,
+          753718
+        ],
+        "punto": [
+          385.73733007885863,
+          2.6650045368287465,
+          144.05038972546473
+        ],
+        "separacion_min_max_m": [
+          -0.361454307322731,
+          1.7157210783088743
+        ]
+      }
+    },
+    {
+      "techos": [
+        14882,
+        14883
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.07311051712714103,
+      "primer_corte": {
+        "triangulos": [
+          704457,
+          704536
+        ],
+        "punto": [
+          -232.92715373543538,
+          1.306363245690605,
+          142.44972700402576
+        ],
+        "separacion_min_max_m": [
+          -0.029229317304841018,
+          0.019358964651841504
+        ]
+      }
+    },
+    {
+      "techos": [
+        33255,
+        33256
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.071429189870229,
+      "primer_corte": {
+        "triangulos": [
+          1567658,
+          1567721
+        ],
+        "punto": [
+          4.101346995535184,
+          7.3045330302062075,
+          -69.96695092400397
+        ],
+        "separacion_min_max_m": [
+          -0.30827648691806786,
+          0.2612393448796553
+        ]
+      }
+    },
+    {
+      "techos": [
+        11825,
+        11826
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.07119632793283404,
+      "primer_corte": {
+        "triangulos": [
+          557907,
+          557961
+        ],
+        "punto": [
+          -125.46675237200203,
+          18.216703937426104,
+          -226.38992324015462
+        ],
+        "separacion_min_max_m": [
+          -0.4040016244571518,
+          0.26208875392177333
+        ]
+      }
+    },
+    {
+      "techos": [
+        16447,
+        16448
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.06791355761142262,
+      "primer_corte": {
+        "triangulos": [
+          786775,
+          786862
+        ],
+        "punto": [
+          -73.04205392473942,
+          0.6687040097982742,
+          194.48955041849052
+        ],
+        "separacion_min_max_m": [
+          -0.9072339547787784,
+          0.6261609401203678
+        ]
+      }
+    },
+    {
+      "techos": [
+        33181,
+        33202
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.06525916149982092,
+      "primer_corte": {
+        "triangulos": [
+          1563926,
+          1565334
+        ],
+        "punto": [
+          -28.62750119951695,
+          -11.58407499726107,
+          343.45034170713393
+        ],
+        "separacion_min_max_m": [
+          -0.18461615527903064,
+          0.08551828025966302
+        ]
+      }
+    },
+    {
+      "techos": [
+        21078,
+        21079
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.06471396948064506,
+      "primer_corte": {
+        "triangulos": [
+          1019765,
+          1019809
+        ],
+        "punto": [
+          42.88267367086874,
+          -11.991479449178087,
+          625.5636848112713
+        ],
+        "separacion_min_max_m": [
+          -0.3320548012781046,
+          1.5925915990909516
+        ]
+      }
+    },
+    {
+      "techos": [
+        15841,
+        15842
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.0641051211936209,
+      "primer_corte": {
+        "triangulos": [
+          753723,
+          753779
+        ],
+        "punto": [
+          395.8538154095231,
+          0.2475293203578417,
+          150.82298262746335
+        ],
+        "separacion_min_max_m": [
+          -0.20452952426546744,
+          0.26675270774239834
+        ]
+      }
+    },
+    {
+      "techos": [
+        17376,
+        17377
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.05786384560981795,
+      "primer_corte": {
+        "triangulos": [
+          837381,
+          837598
+        ],
+        "punto": [
+          -144.63752405459311,
+          -2.471146176587922,
+          352.774729180072
+        ],
+        "separacion_min_max_m": [
+          -0.029471937805176207,
+          0.04706670559101056
+        ]
+      }
+    },
+    {
+      "techos": [
+        16441,
+        16442
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.05316062701367669,
+      "primer_corte": {
+        "triangulos": [
+          786224,
+          786328
+        ],
+        "punto": [
+          -77.89018104176927,
+          -2.538272165006891,
+          261.39228056042543
+        ],
+        "separacion_min_max_m": [
+          -1.382881171802456,
+          0.4216965288251622
+        ]
+      }
+    },
+    {
+      "techos": [
+        33281,
+        33282
+      ],
+      "pares_triangulos_con_corte": 5,
+      "area_proyectada_de_intersecciones_m2": 0.05244691007034037,
+      "primer_corte": {
+        "triangulos": [
+          1568739,
+          1568795
+        ],
+        "punto": [
+          -8.407912694602865,
+          9.45050464791014,
+          -105.46600240442635
+        ],
+        "separacion_min_max_m": [
+          -1.0662782506474926,
+          0.8407989104084876
+        ]
+      }
+    },
+    {
+      "techos": [
+        21071,
+        21094
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0524174541392788,
+      "primer_corte": {
+        "triangulos": [
+          1019380,
+          1020715
+        ],
+        "punto": [
+          -45.353405415297956,
+          -11.972207209042228,
+          614.7111773528688
+        ],
+        "separacion_min_max_m": [
+          -0.9292254018128716,
+          0.27308387932229294
+        ]
+      }
+    },
+    {
+      "techos": [
+        16420,
+        16421
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.047417961862701044,
+      "primer_corte": {
+        "triangulos": [
+          784262,
+          784331
+        ],
+        "punto": [
+          3.558710544577298,
+          -0.6398051218478606,
+          219.93124146816078
+        ],
+        "separacion_min_max_m": [
+          -0.009818375076628527,
+          0.10808334542183395
+        ]
+      }
+    },
+    {
+      "techos": [
+        15851,
+        15852
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.04740623288393797,
+      "primer_corte": {
+        "triangulos": [
+          754238,
+          754300
+        ],
+        "punto": [
+          315.4787077072866,
+          1.551659315051353,
+          173.1212232123585
+        ],
+        "separacion_min_max_m": [
+          -0.957874355706565,
+          1.0548755505451481
+        ]
+      }
+    },
+    {
+      "techos": [
+        15388,
+        15389
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.04668469283032095,
+      "primer_corte": {
+        "triangulos": [
+          731313,
+          731358
+        ],
+        "punto": [
+          158.41367065890347,
+          6.497159032255787,
+          92.43797885754401
+        ],
+        "separacion_min_max_m": [
+          -0.14177110335399723,
+          0.00935785182002924
+        ]
+      }
+    },
+    {
+      "techos": [
+        19458,
+        19459
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.045399001146618566,
+      "primer_corte": {
+        "triangulos": [
+          940596,
+          940688
+        ],
+        "punto": [
+          -304.0802800029436,
+          -11.984042519379244,
+          523.3966175539199
+        ],
+        "separacion_min_max_m": [
+          -0.3776364914336341,
+          0.6758119696575591
+        ]
+      }
+    },
+    {
+      "techos": [
+        18636,
+        18637
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.04518041563524025,
+      "primer_corte": {
+        "triangulos": [
+          899343,
+          899386
+        ],
+        "punto": [
+          367.99141953632244,
+          -19.70971945983983,
+          419.9520572615783
+        ],
+        "separacion_min_max_m": [
+          -0.11227185906693649,
+          0.2572635898925455
+        ]
+      }
+    },
+    {
+      "techos": [
+        15861,
+        15862
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.044431885199965326,
+      "primer_corte": {
+        "triangulos": [
+          754952,
+          754974
+        ],
+        "punto": [
+          -335.66942342235126,
+          0.5975262853917656,
+          131.66006523068293
+        ],
+        "separacion_min_max_m": [
+          -0.9661124989071652,
+          0.42433506679881816
+        ]
+      }
+    },
+    {
+      "techos": [
+        10791,
+        10792
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.04364436139855826,
+      "primer_corte": {
+        "triangulos": [
+          509483,
+          509539
+        ],
+        "punto": [
+          219.71142552214485,
+          16.571147812514425,
+          -397.76818916889306
+        ],
+        "separacion_min_max_m": [
+          -0.6035086120660935,
+          1.0691480819885442
+        ]
+      }
+    },
+    {
+      "techos": [
+        20593,
+        20594
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.04324437843823004,
+      "primer_corte": {
+        "triangulos": [
+          995978,
+          996001
+        ],
+        "punto": [
+          -323.8351916777498,
+          -14.968878251639609,
+          699.3870141542808
+        ],
+        "separacion_min_max_m": [
+          -0.08342764679391745,
+          0.008669464732693477
+        ]
+      }
+    },
+    {
+      "techos": [
+        14900,
+        14901
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.043236073924701746,
+      "primer_corte": {
+        "triangulos": [
+          705645,
+          705775
+        ],
+        "punto": [
+          -214.75532781753668,
+          4.767617312672925,
+          109.47349793895776
+        ],
+        "separacion_min_max_m": [
+          -0.04140174243162775,
+          0.28862406647026617
+        ]
+      }
+    },
+    {
+      "techos": [
+        14854,
+        14855
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.04176844319795137,
+      "primer_corte": {
+        "triangulos": [
+          703393,
+          703446
+        ],
+        "punto": [
+          194.06900594334115,
+          10.892293622789197,
+          9.377953470466839
+        ],
+        "separacion_min_max_m": [
+          -0.008650902750467981,
+          0.019181942063906998
+        ]
+      }
+    },
+    {
+      "techos": [
+        12920,
+        12923
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.03998008210928839,
+      "primer_corte": {
+        "triangulos": [
+          609781,
+          609952
+        ],
+        "punto": [
+          372.8546819217422,
+          3.350770754652828,
+          -141.8703768836243
+        ],
+        "separacion_min_max_m": [
+          -0.22185131415278647,
+          1.4276610707995303
+        ]
+      }
+    },
+    {
+      "techos": [
+        33651,
+        33652
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.03929281207211164,
+      "primer_corte": {
+        "triangulos": [
+          1585023,
+          1585044
+        ],
+        "punto": [
+          317.1475524672671,
+          10.270613817848684,
+          -140.88820897810066
+        ],
+        "separacion_min_max_m": [
+          -0.044459216182858086,
+          0.06521973191294705
+        ]
+      }
+    },
+    {
+      "techos": [
+        33676,
+        33677
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.037319856363174655,
+      "primer_corte": {
+        "triangulos": [
+          1586028,
+          1586069
+        ],
+        "punto": [
+          248.4449209174588,
+          10.660141381277725,
+          -198.8899163933549
+        ],
+        "separacion_min_max_m": [
+          -0.6170030407590872,
+          0.6835974739661665
+        ]
+      }
+    },
+    {
+      "techos": [
+        15848,
+        15849
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.036802281259777914,
+      "primer_corte": {
+        "triangulos": [
+          754116,
+          754140
+        ],
+        "punto": [
+          298.74250310382484,
+          0.5720197998338108,
+          207.26453568714408
+        ],
+        "separacion_min_max_m": [
+          -0.08355380143395053,
+          0.09331581358555496
+        ]
+      }
+    },
+    {
+      "techos": [
+        32920,
+        32921
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.033727707550171945,
+      "primer_corte": {
+        "triangulos": [
+          1551726,
+          1551775
+        ],
+        "punto": [
+          -290.62215071760096,
+          6.948267218263094,
+          -108.65485843075106
+        ],
+        "separacion_min_max_m": [
+          -0.03322848106833698,
+          0.001844184110527447
+        ]
+      }
+    },
+    {
+      "techos": [
+        18770,
+        18771
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.033211931382201396,
+      "primer_corte": {
+        "triangulos": [
+          905214,
+          905259
+        ],
+        "punto": [
+          -246.89538467423827,
+          -16.23183910541136,
+          531.5943560261425
+        ],
+        "separacion_min_max_m": [
+          -0.7505389342578042,
+          0.35766466224743
+        ]
+      }
+    },
+    {
+      "techos": [
+        16446,
+        16447
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.031113481170884534,
+      "primer_corte": {
+        "triangulos": [
+          786695,
+          786778
+        ],
+        "punto": [
+          -65.78767121845584,
+          -1.8160282820111098,
+          207.6075799238174
+        ],
+        "separacion_min_max_m": [
+          -0.2917404542703963,
+          0.6653574775706375
+        ]
+      }
+    },
+    {
+      "techos": [
+        19946,
+        19947
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.03102748708715846,
+      "primer_corte": {
+        "triangulos": [
+          964916,
+          964976
+        ],
+        "punto": [
+          91.29278470098178,
+          -12.662113272955992,
+          616.5342503918932
+        ],
+        "separacion_min_max_m": [
+          -0.5843176089712188,
+          0.5580547936306175
+        ]
+      }
+    },
+    {
+      "techos": [
+        33077,
+        33078
+      ],
+      "pares_triangulos_con_corte": 3,
+      "area_proyectada_de_intersecciones_m2": 0.0262723606542134,
+      "primer_corte": {
+        "triangulos": [
+          1558725,
+          1558782
+        ],
+        "punto": [
+          26.06530402375844,
+          2.765412612929941,
+          71.47243422125833
+        ],
+        "separacion_min_max_m": [
+          -0.7929300662594443,
+          0.2525249717925746
+        ]
+      }
+    },
+    {
+      "techos": [
+        20290,
+        20291
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.021125436146020006,
+      "primer_corte": {
+        "triangulos": [
+          979987,
+          980020
+        ],
+        "punto": [
+          -311.3763968922498,
+          -11.90850116842779,
+          554.3873786909745
+        ],
+        "separacion_min_max_m": [
+          -0.9248924846523607,
+          0.4255816026483785
+        ]
+      }
+    },
+    {
+      "techos": [
+        13995,
+        13996
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.020320055394952574,
+      "primer_corte": {
+        "triangulos": [
+          661265,
+          661319
+        ],
+        "punto": [
+          376.97813180320725,
+          2.7975945661716253,
+          -111.40847517185915
+        ],
+        "separacion_min_max_m": [
+          -0.01695394622303148,
+          0.02926173707806079
+        ]
+      }
+    },
+    {
+      "techos": [
+        14920,
+        14921
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.019228851666655,
+      "primer_corte": {
+        "triangulos": [
+          707060,
+          707106
+        ],
+        "punto": [
+          -327.47780663010525,
+          6.226434197788876,
+          48.00660914102858
+        ],
+        "separacion_min_max_m": [
+          -0.038396314762668915,
+          0.025701609475937026
+        ]
+      }
+    },
+    {
+      "techos": [
+        15397,
+        15398
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.018657313604096976,
+      "primer_corte": {
+        "triangulos": [
+          732058,
+          732138
+        ],
+        "punto": [
+          56.68743507307806,
+          2.6727082795399895,
+          103.27079335965074
+        ],
+        "separacion_min_max_m": [
+          -0.4120285659359837,
+          0.1380416501136068
+        ]
+      }
+    },
+    {
+      "techos": [
+        14895,
+        14896
+      ],
+      "pares_triangulos_con_corte": 4,
+      "area_proyectada_de_intersecciones_m2": 0.01465957463795357,
+      "primer_corte": {
+        "triangulos": [
+          705259,
+          705368
+        ],
+        "punto": [
+          -203.08041780802756,
+          7.0117038804121705,
+          51.00445787120643
+        ],
+        "separacion_min_max_m": [
+          -0.004199588616302208,
+          0.04038983025287379
+        ]
+      }
+    },
+    {
+      "techos": [
+        10263,
+        10264
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.01217949097298314,
+      "primer_corte": {
+        "triangulos": [
+          485710,
+          485769
+        ],
+        "punto": [
+          25.115700332012572,
+          26.06849953776495,
+          -450.5408536821127
+        ],
+        "separacion_min_max_m": [
+          -1.002153382853976,
+          0.1300216484048633
+        ]
+      }
+    },
+    {
+      "techos": [
+        18771,
+        18772
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.009673964788006906,
+      "primer_corte": {
+        "triangulos": [
+          905260,
+          905311
+        ],
+        "punto": [
+          -258.40547384715614,
+          -16.307642400690725,
+          529.2164248144143
+        ],
+        "separacion_min_max_m": [
+          -0.28473047541996266,
+          0.22042450557705706
+        ]
+      }
+    },
+    {
+      "techos": [
+        13992,
+        13993
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0065657726875896286,
+      "primer_corte": {
+        "triangulos": [
+          661129,
+          661185
+        ],
+        "punto": [
+          452.67276553412444,
+          0.6999619718832264,
+          11.933923318409432
+        ],
+        "separacion_min_max_m": [
+          -0.6583148653305102,
+          0.49786257964495917
+        ]
+      }
+    },
+    {
+      "techos": [
+        10423,
+        10430
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0033295114520314356,
+      "primer_corte": {
+        "triangulos": [
+          492638,
+          492949
+        ],
+        "punto": [
+          52.758228872710355,
+          25.067216486000433,
+          -450.4672136095466
+        ],
+        "separacion_min_max_m": [
+          -0.1820547747580381,
+          0.10019256796686804
+        ]
+      }
+    },
+    {
+      "techos": [
+        33497,
+        33522
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0031000286902301945,
+      "primer_corte": {
+        "triangulos": [
+          1578160,
+          1579140
+        ],
+        "punto": [
+          120.3502596994599,
+          -10.63068820386573,
+          475.55789581833386
+        ],
+        "separacion_min_max_m": [
+          -1.1704401614855868,
+          0.056111594440281465
+        ]
+      }
+    },
+    {
+      "techos": [
+        33218,
+        33239
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.002994369992316016,
+      "primer_corte": {
+        "triangulos": [
+          1566175,
+          1567013
+        ],
+        "punto": [
+          -48.779854798541926,
+          -8.807319968247782,
+          587.3995876492467
+        ],
+        "separacion_min_max_m": [
+          -1.397149517133613,
+          0.5726587810069645
+        ]
+      }
+    },
+    {
+      "techos": [
+        32913,
+        32914
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0029045058883683667,
+      "primer_corte": {
+        "triangulos": [
+          1551375,
+          1551464
+        ],
+        "punto": [
+          -185.9188221016585,
+          8.756610386227322,
+          -62.90630689468552
+        ],
+        "separacion_min_max_m": [
+          -0.014101129957595049,
+          0.5319477362061207
+        ]
+      }
+    },
+    {
+      "techos": [
+        33499,
+        33520
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.002193335086715771,
+      "primer_corte": {
+        "triangulos": [
+          1578231,
+          1579093
+        ],
+        "punto": [
+          245.94866259596688,
+          -10.704024942148976,
+          393.0063129511639
+        ],
+        "separacion_min_max_m": [
+          -1.680022910496989,
+          0.12668197370028267
+        ]
+      }
+    },
+    {
+      "techos": [
+        33544,
+        33563
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0017742789073815733,
+      "primer_corte": {
+        "triangulos": [
+          1580063,
+          1580959
+        ],
+        "punto": [
+          256.22356926033467,
+          -3.5766941564695003,
+          270.1130021971484
+        ],
+        "separacion_min_max_m": [
+          -0.8718038585882084,
+          0.09457479848178352
+        ]
+      }
+    },
+    {
+      "techos": [
+        33216,
+        33241
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0016219721701735852,
+      "primer_corte": {
+        "triangulos": [
+          1566107,
+          1567067
+        ],
+        "punto": [
+          75.843825130664,
+          -11.567116804055814,
+          506.02299395545685
+        ],
+        "separacion_min_max_m": [
+          -0.38029221195984064,
+          0.3527548143169099
+        ]
+      }
+    },
+    {
+      "techos": [
+        10405,
+        10421
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0013365533589998044,
+      "primer_corte": {
+        "triangulos": [
+          491804,
+          492579
+        ],
+        "punto": [
+          99.808255352485,
+          22.20766950612486,
+          -327.73804889243917
+        ],
+        "separacion_min_max_m": [
+          -0.20147500801812157,
+          1.7705968610974878
+        ]
+      }
+    },
+    {
+      "techos": [
+        33770,
+        33771
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.0011263417605233972,
+      "primer_corte": {
+        "triangulos": [
+          1589751,
+          1589774
+        ],
+        "punto": [
+          490.6875481049647,
+          0.7284856625865075,
+          44.06109673289884
+        ],
+        "separacion_min_max_m": [
+          -0.11626642434395795,
+          0.054569523243931606
+        ]
+      }
+    },
+    {
+      "techos": [
+        33746,
+        33779
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0008972421898985061,
+      "primer_corte": {
+        "triangulos": [
+          1588817,
+          1590106
+        ],
+        "punto": [
+          320.91212623744934,
+          4.660626940132337,
+          108.04219932802303
+        ],
+        "separacion_min_max_m": [
+          -0.02913310262343316,
+          0.04163277403705479
+        ]
+      }
+    },
+    {
+      "techos": [
+        33297,
+        33298
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0008460476362927513,
+      "primer_corte": {
+        "triangulos": [
+          1569632,
+          1569673
+        ],
+        "punto": [
+          116.59583865677816,
+          17.93915138078092,
+          -179.8332248999237
+        ],
+        "separacion_min_max_m": [
+          -0.01563655995528279,
+          0.08547253830006696
+        ]
+      }
+    },
+    {
+      "techos": [
+        33618,
+        33619
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.0006292728607628639,
+      "primer_corte": {
+        "triangulos": [
+          1583599,
+          1583643
+        ],
+        "punto": [
+          340.0716470161873,
+          8.46558643478474,
+          -85.25184532177622
+        ],
+        "separacion_min_max_m": [
+          -0.14262578581167773,
+          0.12133978330216166
+        ]
+      }
+    },
+    {
+      "techos": [
+        33619,
+        33620
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.0006265843867729881,
+      "primer_corte": {
+        "triangulos": [
+          1583642,
+          1583680
+        ],
+        "punto": [
+          338.7171434837586,
+          8.128250754103846,
+          -74.59256278814654
+        ],
+        "separacion_min_max_m": [
+          -0.08687596086829785,
+          0.17765753078758806
+        ]
+      }
+    },
+    {
+      "techos": [
+        33464,
+        33465
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.0006036260651867131,
+      "primer_corte": {
+        "triangulos": [
+          1576921,
+          1576984
+        ],
+        "punto": [
+          192.8561668730949,
+          11.430861895796596,
+          -35.07926430964607
+        ],
+        "separacion_min_max_m": [
+          -0.09047336386674054,
+          0.2053695516705698
+        ]
+      }
+    },
+    {
+      "techos": [
+        33018,
+        33019
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.0005550598500678738,
+      "primer_corte": {
+        "triangulos": [
+          1556309,
+          1556364
+        ],
+        "punto": [
+          -99.37635288127329,
+          28.948474405972334,
+          -457.6557509004538
+        ],
+        "separacion_min_max_m": [
+          -0.1355101213237777,
+          0.14947916072593515
+        ]
+      }
+    },
+    {
+      "techos": [
+        33459,
+        33460
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.00054749135517973,
+      "primer_corte": {
+        "triangulos": [
+          1576700,
+          1576752
+        ],
+        "punto": [
+          189.7560188505606,
+          10.332926729140993,
+          -92.91572106641969
+        ],
+        "separacion_min_max_m": [
+          -0.42777865864070463,
+          1.0496166374561113
+        ]
+      }
+    },
+    {
+      "techos": [
+        33458,
+        33459
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.000535921712445687,
+      "primer_corte": {
+        "triangulos": [
+          1576656,
+          1576699
+        ],
+        "punto": [
+          190.74175983893832,
+          11.06202283449776,
+          -104.74017804011012
+        ],
+        "separacion_min_max_m": [
+          -0.3205627990478206,
+          1.1568878447809183
+        ]
+      }
+    },
+    {
+      "techos": [
+        10424,
+        10425
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.00041982110743359546,
+      "primer_corte": {
+        "triangulos": [
+          492700,
+          492743
+        ],
+        "punto": [
+          71.675647263108,
+          23.58791576676279,
+          -434.7952844457205
+        ],
+        "separacion_min_max_m": [
+          -0.8552019875070869,
+          0.3822129381407535
+        ]
+      }
+    },
+    {
+      "techos": [
+        33765,
+        33766
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.00041793867969416865,
+      "primer_corte": {
+        "triangulos": [
+          1589535,
+          1589585
+        ],
+        "punto": [
+          430.0051238104473,
+          0.66986883085562,
+          44.26387637973709
+        ],
+        "separacion_min_max_m": [
+          -0.478247675191227,
+          0.5173463972470529
+        ]
+      }
+    },
+    {
+      "techos": [
+        10430,
+        10441
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.00039195979842717127,
+      "primer_corte": {
+        "triangulos": [
+          492948,
+          493563
+        ],
+        "punto": [
+          49.41927231787011,
+          26.818316609185132,
+          -445.18913576403446
+        ],
+        "separacion_min_max_m": [
+          -0.4484822308142782,
+          0.2649059950467745
+        ]
+      }
+    },
+    {
+      "techos": [
+        33774,
+        33775
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0003566394246410365,
+      "primer_corte": {
+        "triangulos": [
+          1589884,
+          1589939
+        ],
+        "punto": [
+          533.5732663185548,
+          -3.1444349856230858,
+          67.0695600040633
+        ],
+        "separacion_min_max_m": [
+          -0.3625326518169345,
+          2.505045432508581
+        ]
+      }
+    },
+    {
+      "techos": [
+        33647,
+        33648
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0003429133708257627,
+      "primer_corte": {
+        "triangulos": [
+          1584893,
+          1584914
+        ],
+        "punto": [
+          225.4690389718077,
+          14.608375177255013,
+          -131.3736317849794
+        ],
+        "separacion_min_max_m": [
+          -0.2027735337438603,
+          0.047802296096643104
+        ]
+      }
+    },
+    {
+      "techos": [
+        33489,
+        33508
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.000333747189874686,
+      "primer_corte": {
+        "triangulos": [
+          1577813,
+          1578528
+        ],
+        "punto": [
+          217.60324253302477,
+          -14.352928937514264,
+          496.44306733487275
+        ],
+        "separacion_min_max_m": [
+          -0.46460322893204875,
+          0.8864128245000416
+        ]
+      }
+    },
+    {
+      "techos": [
+        14012,
+        14013
+      ],
+      "pares_triangulos_con_corte": 2,
+      "area_proyectada_de_intersecciones_m2": 0.0003115268856400677,
+      "primer_corte": {
+        "triangulos": [
+          662366,
+          662422
+        ],
+        "punto": [
+          364.0732592687215,
+          4.389317713359446,
+          -88.70741710404064
+        ],
+        "separacion_min_max_m": [
+          -0.2920897678329766,
+          1.2079102321670234
+        ]
+      }
+    },
+    {
+      "techos": [
+        33777,
+        33778
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0003071525811894622,
+      "primer_corte": {
+        "triangulos": [
+          1590038,
+          1590088
+        ],
+        "punto": [
+          569.4235872535961,
+          -7.792431075849294,
+          65.36452155478156
+        ],
+        "separacion_min_max_m": [
+          -0.3146445894720955,
+          0.8182325142850004
+        ]
+      }
+    },
+    {
+      "techos": [
+        33758,
+        33786
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.00020531327927990486,
+      "primer_corte": {
+        "triangulos": [
+          1589229,
+          1590423
+        ],
+        "punto": [
+          343.1892553807657,
+          8.153664993137602,
+          30.308624706858595
+        ],
+        "separacion_min_max_m": [
+          -0.71837715279446,
+          0.1412074276081512
+        ]
+      }
+    },
+    {
+      "techos": [
+        17465,
+        17466
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0002038599768518501,
+      "primer_corte": {
+        "triangulos": [
+          842064,
+          842083
+        ],
+        "punto": [
+          496.1459008512265,
+          -27.5571062278147,
+          426.6773614362873
+        ],
+        "separacion_min_max_m": [
+          -1.1388380056054075,
+          0.29158686641648046
+        ]
+      }
+    },
+    {
+      "techos": [
+        10425,
+        10426
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0001948187726936135,
+      "primer_corte": {
+        "triangulos": [
+          492744,
+          492799
+        ],
+        "punto": [
+          83.21376815260098,
+          23.956018528483696,
+          -429.48015716446713
+        ],
+        "separacion_min_max_m": [
+          -1.057343020334315,
+          0.9594829630538584
+        ]
+      }
+    },
+    {
+      "techos": [
+        10426,
+        10427
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.00018665672489471071,
+      "primer_corte": {
+        "triangulos": [
+          492800,
+          492854
+        ],
+        "punto": [
+          94.38644709035358,
+          24.227886646710147,
+          -425.3253349249021
+        ],
+        "separacion_min_max_m": [
+          -1.4336347211170732,
+          0.477052963046674
+        ]
+      }
+    },
+    {
+      "techos": [
+        33020,
+        33021
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0001830650506714493,
+      "primer_corte": {
+        "triangulos": [
+          1556432,
+          1556490
+        ],
+        "punto": [
+          -118.30146589977213,
+          26.9438499405195,
+          -438.2261469340011
+        ],
+        "separacion_min_max_m": [
+          -1.6525932290777803,
+          1.142828749191409
+        ]
+      }
+    },
+    {
+      "techos": [
+        8535,
+        8561
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.00014175948314740922,
+      "primer_corte": {
+        "triangulos": [
+          404988,
+          406189
+        ],
+        "punto": [
+          -209.47051028096095,
+          29.730918916522796,
+          -517.9678470101936
+        ],
+        "separacion_min_max_m": [
+          -0.0022452909989425507,
+          0.2766840612762138
+        ]
+      }
+    },
+    {
+      "techos": [
+        33555,
+        33574
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.00012888438299200316,
+      "primer_corte": {
+        "triangulos": [
+          1580482,
+          1581398
+        ],
+        "punto": [
+          162.11464674164688,
+          0.11129354850454831,
+          248.34835965809305
+        ],
+        "separacion_min_max_m": [
+          -0.3832248247326788,
+          0.3377392234129104
+        ]
+      }
+    },
+    {
+      "techos": [
+        33766,
+        33767
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.0001087114476069496,
+      "primer_corte": {
+        "triangulos": [
+          1589590,
+          1589645
+        ],
+        "punto": [
+          441.6448941424689,
+          1.5186155896194187,
+          49.130305218402256
+        ],
+        "separacion_min_max_m": [
+          -0.03143818442553936,
+          0.8888065497638102
+        ]
+      }
+    },
+    {
+      "techos": [
+        33622,
+        33623
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.00010620885958794833,
+      "primer_corte": {
+        "triangulos": [
+          1583832,
+          1583887
+        ],
+        "punto": [
+          316.6444420355791,
+          8.951773573982166,
+          -43.77469722152686
+        ],
+        "separacion_min_max_m": [
+          -1.2759494723104012,
+          0.1694110133596496
+        ]
+      }
+    },
+    {
+      "techos": [
+        33455,
+        33456
+      ],
+      "pares_triangulos_con_corte": 1,
+      "area_proyectada_de_intersecciones_m2": 0.00010056442623925248,
+      "primer_corte": {
+        "triangulos": [
+          1576569,
+          1576587
+        ],
+        "punto": [
+          208.5976775516828,
+          14.465043132328134,
+          -135.12741723121007
+        ],
+        "separacion_min_max_m": [
+          -0.4942897170554943,
+          0.6388394960931976
+        ]
+      }
+    }
+  ],
+  "pares_coplanares": [
+    {
+      "techos": [
+        18787,
+        18788
+      ],
+      "area_proyectada_m2": 0.00018407530090554185
+    },
+    {
+      "techos": [
+        32914,
+        32915
+      ],
+      "area_proyectada_m2": 0.0003957892282450879
+    }
+  ],
+  "baseline": "B1772-001",
+  "pak_sha256": "c27f09ea3ef25d3ea20b980067c913c5d80b78ddf184c43768bb448c985b24e4",
+  "codigo_geometrico": "a94b9b961cc5b4a9867388f37bbe0e679b3479ff",
+  "resumen": {
+    "pares_con_corte": 271,
+    "pares_area_mayor_001": 234
+  },
+  "rastreo_primeros_cuatro": [
+    {
+      "techos": [
+        19714,
+        19715
+      ],
+      "techos_1936": [
+        19867,
+        19868
+      ],
+      "cuadra_1936": 4430
+    },
+    {
+      "techos": [
+        14824,
+        14825
+      ],
+      "techos_1936": [
+        14945,
+        14946
+      ],
+      "cuadra_1936": 3382
+    },
+    {
+      "techos": [
+        19447,
+        19448
+      ],
+      "techos_1936": [
+        19600,
+        19601
+      ],
+      "cuadra_1936": 4374
+    },
+    {
+      "techos": [
+        20325,
+        20326
+      ],
+      "techos_1936": [
+        20492,
+        20493
+      ],
+      "cuadra_1936": 4527
+    }
+  ],
+  "evidencia_visor": [
+    {
+      "archivo_local": ".cache/cruces-3d-visor/19714-19715-cenital.png",
+      "sha256": "4e63fb26ff7135e6edd0a72e71a5c8b54bee077a47cf2fb1ee9e11a589d51c7a",
+      "camara": {
+        "x": -140.047075,
+        "z": 568.253376,
+        "dist": 90,
+        "yaw": 0,
+        "pitch_solicitado": 1.56
+      },
+      "inspeccionada": false
+    },
+    {
+      "archivo_local": ".cache/cruces-3d-visor/19714-19715-oblicua.png",
+      "sha256": "b8a157982618015f909ebc9f780c287d6ea4df70789ff022273c0e99cac80c20",
+      "camara": {
+        "x": -140.047075,
+        "z": 568.253376,
+        "dist": 75,
+        "yaw": 0.5,
+        "pitch_solicitado": 0.8
+      },
+      "inspeccionada": true
+    },
+    {
+      "archivo_local": ".cache/cruces-3d-visor/14824-14825-cenital.png",
+      "sha256": "88a776565e4187d3065f6a01ce4b241989100b861bf75ef21fddb0e936967e8c",
+      "camara": {
+        "x": 214.773379,
+        "z": 93.869314,
+        "dist": 90,
+        "yaw": 0,
+        "pitch_solicitado": 1.56
+      },
+      "inspeccionada": false
+    },
+    {
+      "archivo_local": ".cache/cruces-3d-visor/14824-14825-oblicua.png",
+      "sha256": "719cc6924019e1e5948bdcfd10b2241dc8e1d95cd3ea1dc7d08f81c9c9de5ae0",
+      "camara": {
+        "x": 214.773379,
+        "z": 93.869314,
+        "dist": 75,
+        "yaw": 0.5,
+        "pitch_solicitado": 0.8
+      },
+      "inspeccionada": true
+    }
+  ]
+}

@@ -82,3 +82,5 @@ El [sondeo de accesos](accesos-primer-lote.md) evalúa los 40 frentes iniciales 
 [Contrato de referencia histórica](contrato-referencia.md): 23 cruces compartidos y diez unidades pendientes, con validación de identidad/topología y selección explícita. Todavía no habilita generación.
 
 [Lectura de los 67 registros restantes](lectura-restantes-original.md): completa la lectura individual de los 292 registros censados, conservando terrenos libres, cuerpos aislados y descartes. La correspondencia y los accesos siguen pendientes.
+
+[Medición de cruces de cubierta en 3D](cruces-cubiertas-3d.md): 271 pares candidatos con superficies que se cortan, diferenciados de solapes de proyección; dos vistas oblicuas inspeccionadas y cuatro pares rastreados al origen.
