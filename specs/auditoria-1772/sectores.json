@@ -456,7 +456,19 @@
         "pitch": 1.5
       },
       "captura": "S1772-43.png",
-      "sha256_captura": "c74ba6c3c52e7ed2ab5760e88b28ebea6ea5ca5d90b1368df9d5e6aed4babe85"
+      "sha256_captura": "c74ba6c3c52e7ed2ab5760e88b28ebea6ea5ca5d90b1368df9d5e6aed4babe85",
+      "clasificacion_original": {
+        "unidades": 18,
+        "ocupacion": {
+          "continua": 3,
+          "parcial": 8,
+          "terreno_libre": 6,
+          "conjunto_especial": 1
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "periferia-candelaria-pastora.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-44",

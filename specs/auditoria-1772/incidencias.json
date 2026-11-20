@@ -164,7 +164,7 @@
       "prioridad": "P1",
       "baseline": "B1772-001",
       "observacion": "conteos.techos=35089 en manifiesto; parte techos del pak tiene 541648 bytes / 16 bytes por registro = 33853. Hash coincide local/publicado. Diferencia 1236 registros, no un conteo de casas faltantes en 1772.",
-      "causa": "Pendiente revisar cómo se actualizan conteos y manifiesto.",
+      "causa": "Confirmada: tools/datos.mjs:verificar cuenta techos de fuentes/derivados/1936/ciudad-1936.json (35089), antes del filtrado/unión de epocas.py; el paquete consume ciudad-estilos.json (33853). Los hashes pueden ser correctos y el conteo describir una etapa diferente.",
       "fases_candidatas": [
         1,
         8
@@ -210,17 +210,19 @@
     {
       "id": "I1772-009",
       "categoria": "hito_epoca",
-      "estado": "candidato",
+      "estado": "identidad_confirmada_omision_visible_geometria_pendiente",
       "prioridad": "P1",
       "sectores": [
         "S1772-43"
       ],
-      "observacion": "El original incluye conjunto religioso en el área de Candelaria. Su etiqueta en marcas-datos.js nace en índice 3 y no aparece en 1772; falta confirmar correspondencia y geometría histórica del conjunto.",
+      "observacion": "Candelaria identificada por posición relativa a plaza/río/alcabala del original y nº 4 de la leyenda de 1775. Captura dedicada en época 1 no muestra conjunto ni casas próximas; la marca nace en 3. Falta delimitar la forma construida de 1772, sin copiar el edificio de 1936.",
       "causa": "Fecha de la etiqueta basada en fuentes posteriores; no extender la forma actual del edificio a 1772 sin referencia.",
       "fases_candidatas": [
         4
       ],
-      "pr_correccion": null
+      "pr_correccion": null,
+      "evidencia": "periferia-candelaria-pastora.md",
+      "id_fuente": "U1772-0214"
     },
     {
       "id": "I1772-010",

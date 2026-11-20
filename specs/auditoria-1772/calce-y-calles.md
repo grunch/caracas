@@ -50,3 +50,5 @@ Los recortes de inspección quedan fuera de git en `.cache/censo-1772/.cache/cru
 4. Fases 5–7: corregir casas, cubiertas y cierres sobre los límites ya aceptados.
 
 La fase 1 permanece abierta: hay 32 tramos documentados, no un censo completo de calles; 40 frentes enlazados, no 40 accesos verificados.
+
+La [comprobación periférica de Candelaria y La Pastora](periferia-candelaria-pastora.md) añade identificación cruzada con la leyenda de 1775 y 18 clasificaciones de ocupación original. Las separaciones entre símbolos y modelos no se confunden con residuos de puntos homólogos.
