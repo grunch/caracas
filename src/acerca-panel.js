@@ -76,11 +76,11 @@ function bloque(b) {
  * `alCerrarIntro()`: la bienvenida se cerró (para recordarlo); `alVerCrecer()`: pidieron ver crecer la ciudad.
  * `pedirEpocas()` y `pedirCreditos()`: promesas con las épocas de crece.json y los créditos validados (o null);
  * se piden la primera vez que se abre el panel. `desde`: la primera época que se muestra; `acciones`: los
- * controles disponibles. Crea `#intro` y `#acerca` al final de `raiz`.
+ * controles disponibles; `commit`: la versión que corre (`bloqueDeVersion`). Crea `#intro` y `#acerca` al final de `raiz`.
  */
 export function crearAcerca({
   raiz = document.body, boton = null, mostrarIntro = false, alCerrarIntro = () => {}, alVerCrecer = () => {},
-  pedirEpocas = async () => null, pedirCreditos = async () => null, desde = 0, acciones,
+  pedirEpocas = async () => null, pedirCreditos = async () => null, desde = 0, acciones, commit = null,
 }) {
   const estado = { intro: false, abierta: false, volverA: null, volverDeIntro: null, datos: null, pedido: null }
 
@@ -125,7 +125,7 @@ export function crearAcerca({
 
   let secciones = []
   function dibujar() {
-    const modelo = seccionesDeAcerca({ ...(estado.datos ?? {}), desde, acciones })
+    const modelo = seccionesDeAcerca({ ...(estado.datos ?? {}), desde, acciones, commit })
     secciones = modelo.map((s) => {
       const cabeza = crear('h3', { id: `acerca-${s.id}`, tabIndex: -1, textContent: s.titulo })
       const cargando = !estado.datos && (s.id === 'epocas' || s.id === 'fuentes')

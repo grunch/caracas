@@ -150,11 +150,26 @@ export function bloquesDeFuentes(creditos) {
   return bloques
 }
 
+const HEX_DE_COMMIT = /^[0-9a-f]{7,40}$/
+
+/**
+ * La versión que está corriendo: el commit con que se construyó (vite.config.js lo inyecta como
+ * `__COMMIT__`), enlazado al repositorio. `sucio`: la copia tenía cambios sin commit al construirse.
+ */
+export function bloqueDeVersion(commit) {
+  const hash = commit?.hash
+  if (typeof hash !== 'string' || !HEX_DE_COMMIT.test(hash)) {
+    return { tipo: 'p', clase: 'version', partes: ['Versión: sin datos del commit.'] }
+  }
+  const enlace = { texto: hash.slice(0, 7), url: `${REPOSITORIO}/commit/${hash}` }
+  return { tipo: 'p', clase: 'version', partes: ['Versión: ', enlace, commit.sucio ? ', con cambios sin commit.' : '.'] }
+}
+
 /**
  * Las secciones del panel. `epocas`: las de crece.json (o null); `desde`: la primera que se muestra;
- * `creditos`: lo de `validarCreditos` (o null); `acciones`: los ids de src/controles.js disponibles.
+ * `creditos`: lo de `validarCreditos` (o null); `acciones`: los ids de src/controles.js disponibles; `commit`: lo de `bloqueDeVersion`.
  */
-export function seccionesDeAcerca({ epocas = null, desde = 0, creditos = null, acciones } = {}) {
+export function seccionesDeAcerca({ epocas = null, desde = 0, creditos = null, acciones, commit = null } = {}) {
   const visibles = epocasVisibles(epocas, desde)
   const anteriores = visibles.slice(0, -1).map((e) => e.año)
   const lasEpocas = visibles.length
@@ -179,6 +194,7 @@ export function seccionesDeAcerca({ epocas = null, desde = 0, creditos = null, a
         { tipo: 'p', partes: ['Este sitio está inspirado en ', { texto: 'baires.mormon.garden', url: INSPIRACION }, ', de @mormonnegro, que levantó así el Buenos Aires de 1867: de ahí vienen la idea y la manera de contarla. El código y los datos de Caracas se hicieron aparte.'] },
         { tipo: 'p', partes: ['Hecho con Claude, de Anthropic.'] },
         { tipo: 'p', partes: ['El código, las fichas de las fuentes y el método están en ', { texto: 'github.com/grunch/caracas', url: REPOSITORIO }, '.'] },
+        bloqueDeVersion(commit),
       ],
     },
   ]
