@@ -66,3 +66,5 @@ El [contraste de cruces y calles](calce-y-calles.md) añade 23 cruces únicos, 3
 El [trazado de la red original](trazado-red.md) amplía la lectura a 84 líneas y 455 tramos candidatos, conserva las excepciones y propone correspondencias con los 32 tramos previos. No cierra la fase 1 ni modifica el generador.
 
 El [diagnóstico geométrico](diagnostico-huellas.md) mide las 1.811 huellas visibles y rastrea I001/I003 antes del visor. Introduce I011 (solapes de huellas) sin confundirla con una certificación de cubiertas o accesos.
+
+El [enlace de frentes candidatos](frentes-candidatos.md) amplía la red a 85 líneas y 470 tramos y enlaza 147 caras con 590 bordes; quedan 145 registros sin asignación única.
