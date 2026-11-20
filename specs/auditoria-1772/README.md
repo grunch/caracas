@@ -2,7 +2,7 @@
 
 Fecha: 20-11-2026. T33j.1a.
 
-Continuación: [barrido de los 16 sectores y censo extenso](censo-extenso.md). Los conteos de este README describen la primera entrega; las incidencias y sectores se amplían en la continuación. **Auditoría en curso, sin correcciones de geometría.**
+Continuación: [barrido de los 16 sectores y censo extenso](censo-extenso.md). Entrega 1D: [cierre de la fase 1](cierre-fase1.md), con dos criterios trasladados a T33j.2a. Los conteos de este README describen la primera entrega; las incidencias y sectores se amplían en la continuación. **Auditoría en curso, sin correcciones de geometría.**
 
 Se fijó una copia independiente del código y de los datos, se verificaron sus hashes y se inspeccionaron diez manzanas en vista alta, más dos vistas oblicuas. No se ha terminado el censo del original ni el diagnóstico de causas. Ninguna manzana se declara completamente verificada.
 
@@ -90,3 +90,7 @@ El [sondeo de accesos](accesos-primer-lote.md) evalúa los 40 frentes iniciales 
 [Conteos del paquete y del origen](conteos-publicados.md): corrige I006 en la generación del manifiesto; conserva controles de 1936 y no modifica geometría. Publicación pendiente.
 
 - [Revisión de bordes especiales](bordes-especiales-original.md): doce bordes de siete unidades; dos contornos observados y seis símbolos religiosos.
+
+## Cierre de la fase 1
+
+[Entrega 1D](cierre-fase1.md): 292 unidades clasificadas y leídas, 16 sectores recorridos, 12 incidencias con subtarea; la correspondencia aprobada y los controles de calce fuera del núcleo pasan a T33j.2a con nombre. No certifica fidelidad ni cierra incidencias.
