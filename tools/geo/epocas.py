@@ -50,6 +50,7 @@ AGUA_MINIMA = 0.15          # parte de una celda de crece.png con agua para que 
 CONSTRUIDOS_1578 = ("casa", "iglesia", "cabildo", "convento")
 SIN_LICENCIA = "sin licencia declarada (derechos por verificar)"
 PISADA_MINIMA = 0.3         # fracción de una casa de 1578 cubierta por una de 1936 para pasarle la posta
+PISADA_ENTRE_TODAS = 0.15   # … o cubierta entre todas las de 1936 que ya nacieron (los lotes de la cuadra modelo son angostos)
 
 
 def desde_cuando(etapas, cuantas=CUANTAS):
@@ -184,25 +185,48 @@ def _cajas(huellas_):
     return cajas
 
 
-def pisadas(huella78, huellas36, cajas36, ancho):
-    """Índices de las casas de 1936 que por sí solas cubren ≥ PISADA_MINIMA de la huella dada."""
+def _cubiertas(huella78, huellas36, cajas36, ancho):
+    """(índices de las casas de 1936 que tocan la huella, [los píxeles de la huella que cubre cada una])."""
     f, c = huella78
     if not f.size:
-        return np.array([], int)
+        return np.array([], int), []
     cerca = np.flatnonzero((cajas36[:, 0] <= f.max()) & (cajas36[:, 1] >= f.min())
                            & (cajas36[:, 2] <= c.max()) & (cajas36[:, 3] >= c.min()))
     propia = f.astype(np.int64) * ancho + c
-    cubre = np.array([np.isin(huellas36[j][0].astype(np.int64) * ancho + huellas36[j][1], propia).sum()
-                      for j in cerca], int)
-    return cerca[cubre >= PISADA_MINIMA * f.size]
+    cubiertos = []
+    for j in cerca:
+        suya = huellas36[j][0].astype(np.int64) * ancho + huellas36[j][1]
+        cubiertos.append(suya[np.isin(suya, propia)])
+    return cerca, cubiertos
+
+
+def pisadas(huella78, huellas36, cajas36, ancho):
+    """Índices de las casas de 1936 que por sí solas cubren ≥ PISADA_MINIMA de la huella dada."""
+    cerca, cubiertos = _cubiertas(huella78, huellas36, cajas36, ancho)
+    return cerca[np.array([len(c) for c in cubiertos], int) >= PISADA_MINIMA * huella78[0].size] if len(cerca) else cerca
+
+
+def tapada_desde(huella78, huellas36, cajas36, nace36, ancho):
+    """La primera época en que las casas de 1936 ya nacidas cubren, entre todas, ≥ PISADA_ENTRE_TODAS de la
+    huella (cada píxel cuenta una vez: las dos versiones de una cuadra se enciman), o None."""
+    cerca, cubiertos = _cubiertas(huella78, huellas36, cajas36, ancho)
+    if not len(cerca):
+        return None
+    nacen = np.asarray(nace36)[cerca]
+    for epoca in sorted(set(int(n) for n in nacen)):
+        juntos = [c for c, n in zip(cubiertos, nacen) if n <= epoca and len(c)]
+        if juntos and np.unique(np.concatenate(juntos)).size >= PISADA_ENTRE_TODAS * huella78[0].size:
+            return epoca
+    return None
 
 
 def vida_de_1578(ciudad78, huellas36, nace36, construido, escala):
     """[[0, muere], …] de las casas de 1578.
 
-    construido: máscaras de las épocas 1..4. Si casas de 1936 la pisan (cada una por sí sola
-    ≥ PISADA_MINIMA de su huella), muere cuando nace la primera de ellas; si no, en la primera
-    época en que su lugar no está edificado (< la mitad) o, si sigue edificado hasta 1911, en 1936.
+    construido: máscaras de las épocas 1..4. Muere cuando nace la primera casa de 1936 que la pisa (por sí
+    sola ≥ PISADA_MINIMA de su huella) o cuando las ya nacidas la tapan entre todas (≥ PISADA_ENTRE_TODAS), lo
+    que pase primero; si no, en la primera época en que su lugar no está edificado (< la mitad) o, si sigue
+    edificado hasta 1911, en 1936.
     """
     forma = construido[0].shape
     huellas78 = huellas(ciudad78, forma, escala)
@@ -211,7 +235,11 @@ def vida_de_1578(ciudad78, huellas36, nace36, construido, escala):
     vida = []
     for k, h in enumerate(huellas78):
         pisan = pisadas(h, huellas36, cajas36, forma[1])
-        vida.append([0, max(1, int(np.min(nace36[pisan]))) if pisan.size else int(sin_pisar[k])])
+        cuando = [int(np.min(nace36[pisan]))] if pisan.size else []
+        tapada = tapada_desde(h, huellas36, cajas36, nace36, forma[1])
+        if tapada is not None:
+            cuando.append(tapada)
+        vida.append([0, max(1, min(cuando)) if cuando else int(sin_pisar[k])])
     return vida
 
 

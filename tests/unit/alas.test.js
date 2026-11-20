@@ -395,3 +395,39 @@ describe('empacar y leer las casas de patio', () => {
     expect(() => partesDeCiudad({ ...json, marcos: [json.marcos[0], json.marcos[0]] })).toThrow(/repetido/)
   })
 })
+
+describe('un ala estirada fuera de su lote', () => {
+  test('la media agua no sube más allá de su borde alto (un lote cortado en diagonal deja ver lo estirado)', () => {
+    const plan = planDeAlas({
+      ancho: 12, fondo: 30, estilo: 0, pisos: 1, semilla: 5,
+      alas: [ala(ALA.FRENTE, 0, 0, 12, 8), ala(ALA.LATERAL_IZQ, 0, 8, 4, 20), ala(ALA.PATIO, 4, 8, 12, 20), ala(ALA.SOLAR, 0, 20, 12, 30)],
+    })
+    const lateral = plan.faldones.find((f) => !f.hueco && f.caida[0] === 1)
+    const enElBorde = alturaDe(lateral, 0, 14)
+    expect(alturaDe(lateral, -30, 14)).toBeCloseTo(enElBorde, 9) // estirada 30 m hacia afuera, a la misma altura
+    expect(alturaDe(lateral, 3, 14)).toBeLessThan(enElBorde) // y hacia el patio sigue bajando
+  })
+})
+
+describe('un ala que llega casi al borde del lote', () => {
+  test('se estira igual aunque le falten milímetros (el dato redondea ancho y alas por separado)', () => {
+    const plan = planDeAlas({
+      ancho: 12.105, fondo: 63.555, estilo: 0, pisos: 1, semilla: 5,
+      alas: [ala(ALA.FRENTE, 0, 0, 12.1, 8), ala(ALA.SOLAR, 0, 8, 12.1, 63.55)],
+    })
+    expect(faldonEn(plan, 12.4, 40)?.piso).toBe(CUBIERTA.SOLAR) // la franja de la huella que sobresale es solar
+    expect(faldonEn(plan, 5, 63.9)?.piso).toBe(CUBIERTA.SOLAR)
+  })
+})
+
+describe('un ala estirada por delante de su fachada', () => {
+  test('el faldón no baja de su alero: lo estirado más allá sigue plano a esa altura (no se mete bajo tierra)', () => {
+    const plan = planDeAlas({
+      ancho: 12, fondo: 30, estilo: 0, pisos: 1, semilla: 5,
+      alas: [ala(ALA.FRENTE, 0, 0, 12, 8), ala(ALA.PATIO, 0, 8, 12, 30)],
+    })
+    const delFrente = plan.faldones.find((f) => !f.hueco && f.caida[1] === -1)
+    expect(alturaDe(delFrente, 6, 0)).toBeCloseTo(plan.alto, 9) // en la fachada, el alero
+    expect(alturaDe(delFrente, 6, -20)).toBeCloseTo(plan.alto, 9) // 20 m por delante, a la misma altura
+  })
+})

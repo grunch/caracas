@@ -253,9 +253,15 @@ export function planDeTecho({
   }
 }
 
-/** Altura del faldón (sobre la base de la casa) en el punto (u, v) del lote. */
+/** Cuánto ha bajado el faldón (en planta, m) desde su cumbre hasta el punto (u, v): negativo, del otro lado. */
+export const bajadaEn = (f, u, v) => (u - f.origen[0]) * f.caida[0] + (v - f.origen[1]) * f.caida[1]
+
+/**
+ * Altura del faldón (sobre la base de la casa) en el punto (u, v) del lote. Un ala estirada fuera del lote
+ * (src/alas.js) sigue plana más allá de su cumbre y de su alero (`f.bajada`): ni sube más ni se mete bajo tierra.
+ */
 export function alturaDe(f, u, v) {
-  return f.cumbre - f.tan * ((u - f.origen[0]) * f.caida[0] + (v - f.origen[1]) * f.caida[1])
+  return f.cumbre - f.tan * Math.min(f.bajada ?? Infinity, Math.max(0, bajadaEn(f, u, v)))
 }
 
 const TOLERANCIA_M = 1e-7

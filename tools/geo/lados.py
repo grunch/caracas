@@ -18,6 +18,13 @@ import numpy as np
 
 FRENTE_M = (9.0, 14.0)        # frente de una casa
 TOLERANCIA_M = 1.5            # simplificación del borde de la manzana
+# … y las que se prueban, de fina a gruesa, hasta que el polígono se parece a la manzana: el borde del plano
+# es dentado, y con la fina sola la mayoría de las cuadras del casco daba demasiados lados
+TOLERANCIAS_M = (1.5, 3.0, 5.0, 8.0)
+LADOS_CON_TOLERANCIA_GRUESA = 6   # con una tolerancia gruesa, un polígono de más lados es una curva (una rotonda), no una cuadra
+RETIRO_MINIMO_M = 2.0         # un lote cuyo frente empieza más adentro que esto (una muesca: plaza, pasaje) se retira hasta ahí
+CRUJIA_M = 8.0                # la franja del frente en que se mide si el lote tiene casa (tools/geo/cuadra.py)
+RETIRO_LLENO = 0.5            # el frente empieza en la primera fila del lote edificada en esta parte de su ancho
 LADO_MINIMO_M = 8.0           # un lado más corto que esto no da a la calle: lo cubren los vecinos
 MAXIMO_DE_LADOS = 8
 PARECIDO_MINIMO = 0.9         # intersección sobre unión entre la manzana y su polígono
@@ -28,17 +35,23 @@ CUADRA_MINIMA_M2 = 1200.0     # un pedazo más chico que esto no es una cuadra (
 
 
 def _recta(borde, a, b, tolerancia_px):
-    """La recta ajustada a los píxeles del borde que le tocan al lado a→b: (punto, dirección unitaria)."""
+    """La recta ajustada a los píxeles del borde que le tocan al lado a→b: (punto, dirección unitaria).
+
+    Dos pasadas: los píxeles cerca del lado simplificado y, con esa recta, los que quedan cerca de ella (un
+    lado simplificado que arranca de una ochava viene torcido, y con él su primera selección)."""
     largo = float(np.hypot(*(b - a)))
     d = (b - a) / largo
-    t = (borde - a) @ d
-    lejos = np.abs((borde - a) @ np.array([-d[1], d[0]]))
-    suyos = borde[(t > 0.1 * largo) & (t < 0.9 * largo) & (lejos < 2 * tolerancia_px)]
-    if len(suyos) < 8:
-        return a, d
-    dx, dy, x, y = (float(c) for c in cv2.fitLine(suyos.astype(np.float32), cv2.DIST_L2, 0, 0.01, 0.01).ravel())
-    direccion = np.array([dx, dy]) * (1.0 if dx * d[0] + dy * d[1] >= 0 else -1.0)
-    return np.array([x, y]), direccion
+    punto = a
+    for cerca in (2.0, 1.5):
+        t = (borde - a) @ (b - a) / largo
+        lejos = np.abs((borde - punto) @ np.array([-d[1], d[0]]))
+        suyos = borde[(t > 0.1 * largo) & (t < 0.9 * largo) & (lejos < cerca * tolerancia_px)]
+        if len(suyos) < 8:
+            break
+        dx, dy, x, y = (float(c) for c in cv2.fitLine(suyos.astype(np.float32), cv2.DIST_HUBER, 0, 0.01, 0.01).ravel())
+        d = np.array([dx, dy]) * (1.0 if dx * (b[0] - a[0]) + dy * (b[1] - a[1]) >= 0 else -1.0)
+        punto = np.array([x, y])
+    return punto, d
 
 
 def _cruce(p1, d1, p2, d2):
@@ -51,21 +64,23 @@ def _cruce(p1, d1, p2, d2):
 
 
 def _fundir_en_linea(rectas, tolerancia_px):
-    """Dos lados seguidos casi paralelos y casi en la misma línea (un diente chico los separaba) son uno solo."""
-    salida = list(rectas)
+    """Dos lados seguidos casi paralelos y casi en la misma línea (un diente chico los separaba) son uno solo:
+    queda la recta del más largo, que es la mejor ajustada. `rectas`: [(punto, dirección, largo)] → [(punto, dirección)]."""
+    salida = [list(r) for r in rectas]
     k = 0
     while len(salida) > 1 and k < len(salida):
-        (p1, d1), (p2, d2) = salida[k - 1], salida[k]
+        (p1, d1, l1), (p2, d2, l2) = salida[k - 1], salida[k]
         paralelos = abs(d1[0] * d2[1] - d1[1] * d2[0]) < math.sin(ANGULO_MINIMO)
         en_linea = abs((p2[0] - p1[0]) * -d1[1] + (p2[1] - p1[1]) * d1[0]) < 2 * tolerancia_px
         if paralelos and en_linea:
+            salida[k - 1] = [p1, d1, l1 + l2] if l1 >= l2 else [p2, d2, l1 + l2]
             salida.pop(k)
         else:
             k += 1
-    return salida
+    return [(p, d) for p, d, _ in salida]
 
 
-def _poligono(manzana, metro):
+def _poligono(manzana, metro, tolerancia_m=TOLERANCIA_M, maximo=MAXIMO_DE_LADOS):
     """Los vértices (n, 2) del borde simplificado, en píxeles (coordenadas continuas), o None.
 
     Cada lado largo es la recta ajustada a los píxeles de su borde (así los dientes del plano no lo
@@ -74,13 +89,13 @@ def _poligono(manzana, metro):
     if not contornos:
         return None
     contorno = max(contornos, key=cv2.contourArea)
-    tolerancia = TOLERANCIA_M / metro
+    tolerancia = tolerancia_m / metro
     simple = cv2.approxPolyDP(contorno, tolerancia, True)[:, 0, :].astype(float) + 0.5
     borde = contorno[:, 0, :].astype(float) + 0.5
-    rectas = [_recta(borde, a, b, tolerancia) for a, b in zip(simple, np.roll(simple, -1, axis=0))
+    rectas = [(*_recta(borde, a, b, tolerancia), float(np.hypot(*(b - a)))) for a, b in zip(simple, np.roll(simple, -1, axis=0))
               if np.hypot(*(b - a)) * metro >= LADO_MINIMO_M]
     rectas = _fundir_en_linea(rectas, tolerancia)
-    if not 3 <= len(rectas) <= MAXIMO_DE_LADOS:
+    if not 3 <= len(rectas) <= maximo:
         return None
     vertices = [_cruce(*rectas[k - 1], *rectas[k]) for k in range(len(rectas))]
     if any(v is None for v in vertices):
@@ -88,6 +103,20 @@ def _poligono(manzana, metro):
     vertices = np.array(vertices)
     # las rectas pasan por los centros de los píxeles del borde: medio píxel hacia afuera, al borde de la manzana
     return vertices + 0.5 * np.sign(vertices - vertices.mean(axis=0))
+
+
+def poligono_de_manzana(manzana, metro):
+    """El polígono de lados rectos de una manzana, sacado de su borde: el de la tolerancia más fina que se
+    le parece (intersección sobre unión ≥ PARECIDO_MINIMO), o None."""
+    for tolerancia in TOLERANCIAS_M:
+        poligono = _poligono(manzana, metro, tolerancia, MAXIMO_DE_LADOS if tolerancia <= TOLERANCIA_M else LADOS_CON_TOLERANCIA_GRUESA)
+        if poligono is None:
+            continue
+        adentro = _relleno(poligono, manzana.shape)
+        union = np.count_nonzero(adentro | manzana)
+        if union and np.count_nonzero(adentro & manzana) / union >= PARECIDO_MINIMO:
+            return poligono
+    return None
 
 
 def _relleno(poligono, forma):
@@ -139,6 +168,22 @@ def _cortes(largo_m, rng):
     return cortes
 
 
+def _retiro_del_frente(v, ancho_px, metro):
+    """Cuánto se retira, en píxeles, el frente de un lote de la línea de su lado: hasta la primera fila
+    edificada en RETIRO_LLENO de su ancho. Cero si es menos que RETIRO_MINIMO_M (un diente del borde)."""
+    filas = np.bincount(np.clip(v, 0, None).astype(int))
+    llenas = np.flatnonzero(filas >= RETIRO_LLENO * ancho_px)
+    if not llenas.size or llenas[0] * metro < RETIRO_MINIMO_M:
+        return 0.0
+    return float(llenas[0])
+
+
+def _frente_edificado(u, v, retiro, ancho_px, metro):
+    """Qué parte de la franja del frente del lote (su ancho × CRUJIA_M, desde el retiro) está edificada."""
+    crujia = CRUJIA_M / metro
+    return float(np.count_nonzero((v >= retiro) & (v < retiro + crujia))) / max(ancho_px * crujia, 1.0)
+
+
 def _repartir_lado(lado, px, py, metro, rng):
     """Los lotes de los píxeles (px, py) de un lado: (cuál de ellos, [marco de cada lote])."""
     a, b, eu, ev = lado
@@ -154,32 +199,39 @@ def _repartir_lado(lado, px, py, metro, rng):
     marcos = []
     for j in range(len(cortes)):
         del_lote = cual == j
+        if not del_lote.any():
+            marcos.append(None)
+            continue
         inicio = u0 + desde[j] / metro
-        marcos.append(None if not del_lote.any() else {
-            'origen': (float(a[0] + eu[0] * inicio), float(a[1] + eu[1] * inicio)),
+        ancho = float(cortes[j] - desde[j])
+        retiro = _retiro_del_frente(v[del_lote], ancho / metro, metro)
+        marcos.append({
+            'origen': (float(a[0] + eu[0] * inicio + ev[0] * retiro), float(a[1] + eu[1] * inicio + ev[1] * retiro)),
             'eu': (float(eu[0]), float(eu[1])),
-            'ancho': float(cortes[j] - desde[j]),
-            'fondo': float(max(v[del_lote].max() + 0.5, 1.0) * metro),
+            'ancho': ancho,
+            'fondo': float(max(v[del_lote].max() + 0.5 - retiro, 1.0) * metro),
             'esquina': j == en_a,
+            'frente': _frente_edificado(u[del_lote], v[del_lote], retiro, ancho / metro, metro),
         })
     return cual, marcos
 
 
-def lotes_por_lados(manzana, metro, semilla):
+def lotes_por_lados(manzana, metro, semilla, poligono=None):
     """(etiquetas, lotes) de la manzana repartida por sus lados, o None si no se deja.
 
-    `etiquetas`: (alto, ancho) int32, 0 fuera de la manzana. `lotes`: {etiqueta: {origen: (x, y) en píxeles
-    sobre la línea del lado, eu: dirección del frente, ancho y fondo en metros, esquina: si el lote toca
-    una esquina de la manzana; de las dos que se unen en cada esquina, la del lado que arranca ahí}}.
+    `poligono` (n, 2): los lados de la cuadra, si se conocen de afuera (la cara de la red de calles,
+    tools/geo/caras.py); si no, salen del borde de la manzana (poligono_de_manzana). `etiquetas`: (alto,
+    ancho) int32, 0 fuera de la manzana. `lotes`: {etiqueta: {origen: (x, y) en píxeles sobre la línea del
+    lado (o más adentro, si el lote se retira hasta el fondo de una muesca), eu: dirección del frente, ancho y
+    fondo en metros, esquina: si el lote toca una esquina de la manzana; de las dos que se unen en cada
+    esquina, la del lado que arranca ahí, frente: qué parte de la franja de su crujía está edificada}}.
     """
     manzana = np.asarray(manzana, bool)
-    poligono = _poligono(manzana, metro)
+    if poligono is None:
+        poligono = poligono_de_manzana(manzana, metro)
     if poligono is None:
         return None
-    adentro = _relleno(poligono, manzana.shape)
-    union = np.count_nonzero(adentro | manzana)
-    if not union or np.count_nonzero(adentro & manzana) / union < PARECIDO_MINIMO:
-        return None
+    adentro = _relleno(np.asarray(poligono, float), manzana.shape)
     lados = _lados(poligono, adentro, metro)
     if len(lados) < 3:
         return None
