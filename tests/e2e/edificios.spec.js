@@ -48,3 +48,25 @@ test('al bajar por la lista en una ventana apaisada, el edificio activo va cambi
     await expect(page.locator(`#edificios li[data-id="${s.id}"]`)).toHaveClass(/activo/)
   }
 })
+
+// el visor puede avisar «lista» antes de que llegue datos/crece.json: la época pedida no se pierde
+test('la época pedida antes de que cargue la línea de tiempo se aplica cuando llega', async ({ page }) => {
+  test.setTimeout(150000)
+  const AÑOS = [1578, 1772, 1843, 1889, 1911, 1936]
+  const epocas = AÑOS.map((año) => ({ año, plano: `${año}-prueba`, titulo: `Plano de prueba de ${año}`, corto: `plano de ${año}`, casas: 1 }))
+  let soltar
+  const suelta = new Promise((ok) => { soltar = ok })
+  await page.route('**/datos/crece.json', async (ruta) => { await suelta; await ruta.fulfill({ json: { celda_m: 8, epocas } }) })
+  await page.route(/\/plano\/(crece\.png|epocas\.json)$/, (ruta) => ruta.abort())
+  await page.goto('/edificios.html')
+  const secciones = await page.evaluate(() => window.lab.secciones)
+  await page.waitForFunction(() => window.lab.visorListo === true, null, { timeout: 120000 })
+  // un edificio de una época que no es la del arranque (1772)
+  const otro = secciones.find((s) => s.epoca !== 1)
+  await page.evaluate((id) => document.querySelector(`#edificios li[data-id="${id}"]`).scrollIntoView({ block: 'center' }), otro.id)
+  await expect(page.locator(`#edificios li[data-id="${otro.id}"]`)).toHaveClass(/activo/)
+  const marco = page.frames().find((f) => f.url().includes('vitrina'))
+  expect(await marco.evaluate(() => window.lab.lineaDeTiempo)).toBeNull()
+  soltar()
+  await expect.poll(() => marco.evaluate(() => window.lab.lineaDeTiempo?.actual ?? null), { timeout: 20000 }).toBe(otro.epoca)
+})

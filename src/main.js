@@ -232,6 +232,7 @@ const OLA_EPOCA_MAX_M = 9000 // más que la distancia de la plaza a la esquina m
 // de 1936 debajo y el plano viejo aparece cuando llegue
 const ESPERA_PLANO_MS = 2500
 let lineaDeTiempo = null
+let epocaPedida = null // la época que pidió la vitrina antes de que llegara la línea de tiempo (crece.json)
 let visorPlano = null // el plano de la época, aparte (P; src/visor-plano-panel.js)
 let secuencia = null
 let planos = null
@@ -278,6 +279,7 @@ Promise.all([crecePedido, indicePlanos])
     })
     visorPlano.elegir(epocas[lineaDeTiempo.actual])
     pedirMascaras() // el agua y los rótulos, para la hoja en tinta de antes de 1936
+    if (epocaPedida !== null) lineaDeTiempo.elegir(epocaPedida)
     if (andarAlLlegar) lineaDeTiempo.andar()
     cargarTextura('plano/crece.png', false).then((t) => {
       // etapas codificadas: un mipmap las promediaría y el borde de la ciudad cambiaría de época a lo lejos
@@ -503,7 +505,7 @@ if (params.has('vitrina')) {
       if (sinAnimar.matches) cam.jump(destino); else cam.volar(destino)
       girarVitrina = !sinAnimar.matches
     } else if (orden.tipo === 'epoca') {
-      lineaDeTiempo?.elegir(orden.indice)
+      if (lineaDeTiempo) lineaDeTiempo.elegir(orden.indice); else epocaPedida = orden.indice
     } else if (orden.tipo === 'levantar') {
       levantar(true)
     } else if (orden.tipo === 'girar') {
