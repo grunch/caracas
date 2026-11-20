@@ -1,0 +1,175 @@
+{
+  "alcance": "primer lote; no inventario exhaustivo",
+  "incidencias": [
+    {
+      "id": "I1772-001",
+      "manzana": "M1772-0001",
+      "frente": "F1772-0001-3",
+      "original_bbox": [
+        1036,
+        793,
+        1104,
+        859
+      ],
+      "captura": "norte-plaza.png",
+      "captura_bbox": [
+        455,
+        475,
+        590,
+        580
+      ],
+      "categoria": "abertura",
+      "estado": "confirmado_visual",
+      "prioridad": "P1",
+      "observacion": "Discontinuidad del frente oeste en su mitad norte; comunica visualmente calle e interior. El original y la referencia curada muestran frente continuo.",
+      "causa": "Supresión, recorte o reparto del frente: causa todavía sin aislar.",
+      "fases_candidatas": [
+        4,
+        5,
+        7
+      ],
+      "baseline": "B1772-001",
+      "pr_correccion": null,
+      "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
+      "verificacion_acceso": "pendiente recorrido a pie"
+    },
+    {
+      "id": "I1772-002",
+      "manzana": "M1772-0005",
+      "frente": "F1772-0005-3",
+      "original_bbox": [
+        767,
+        859,
+        835,
+        926
+      ],
+      "captura": "camejo-cruz-verde.png",
+      "captura_bbox": [
+        320,
+        825,
+        460,
+        980
+      ],
+      "categoria": "abertura_esquina",
+      "estado": "confirmado_visual",
+      "prioridad": "P1",
+      "observacion": "Esquina suroeste abierta: el frente oeste termina antes de enlazar con el sur, en una manzana roja de contorno regular.",
+      "causa": "Posible descarte de lote de esquina; falta trazar el registro hasta el generador.",
+      "fases_candidatas": [
+        4,
+        5,
+        7
+      ],
+      "baseline": "B1772-001",
+      "pr_correccion": null,
+      "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
+      "verificacion_acceso": "pendiente recorrido a pie"
+    },
+    {
+      "id": "I1772-003",
+      "manzana": "M1772-0010",
+      "frente": "F1772-0010-3",
+      "original_bbox": [
+        903,
+        793,
+        970,
+        859
+      ],
+      "captura": "seminario.png",
+      "captura_bbox": [
+        410,
+        555,
+        600,
+        845
+      ],
+      "categoria": "alineacion_cubierta",
+      "estado": "confirmado_visual",
+      "prioridad": "P1",
+      "observacion": "Frente oeste con cambios de alineación y alas diagonales cerca del tramo medio, frente a un lado recto de la manzana de referencia.",
+      "causa": "Determinar si nace en el reparto de lotes o en la generación/recorte de alas.",
+      "fases_candidatas": [
+        5,
+        6
+      ],
+      "baseline": "B1772-001",
+      "pr_correccion": null,
+      "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
+      "verificacion_acceso": "pendiente recorrido a pie"
+    },
+    {
+      "id": "I1772-004",
+      "manzana": "M1772-0003",
+      "frente": "F1772-0003-0",
+      "original_bbox": [
+        970,
+        859,
+        1036,
+        926
+      ],
+      "captura": "catedral.png",
+      "captura_bbox": [
+        735,
+        445,
+        850,
+        660
+      ],
+      "categoria": "hito_cierre",
+      "estado": "incierto",
+      "prioridad": "P1",
+      "observacion": "Separación visible entre extremo oriental de Catedral y casas del frente norte. La imagen sola no permite decidir si el cerramiento del conjunto está ausente.",
+      "causa": "Contrastar planta histórica del conjunto y distinguir solar, edificio y paso público antes de cerrar.",
+      "fases_candidatas": [
+        4,
+        7
+      ],
+      "baseline": "B1772-001",
+      "pr_correccion": null,
+      "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
+      "verificacion_acceso": "pendiente recorrido a pie"
+    },
+    {
+      "id": "I1772-005",
+      "manzana": "M1772-0006",
+      "frente": null,
+      "original_bbox": [
+        702,
+        859,
+        767,
+        926
+      ],
+      "captura": "cruz-verde-velasquez.png",
+      "captura_bbox": [
+        420,
+        280,
+        540,
+        425
+      ],
+      "categoria": "cubierta_esquina",
+      "estado": "candidato",
+      "prioridad": "P1",
+      "observacion": "Encuentro de faldones y ala diagonal en esquina noroeste; requiere inspección oblicua y validez de caras.",
+      "causa": "Un inglete triangular por sí solo no demuestra techo degenerado. Medir sin sustituir el contorno.",
+      "fases_candidatas": [
+        6
+      ],
+      "baseline": "B1772-001",
+      "pr_correccion": null,
+      "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
+      "verificacion_acceso": "pendiente recorrido a pie"
+    },
+    {
+      "id": "I1772-006",
+      "categoria": "metadatos_datos",
+      "estado": "confirmado",
+      "prioridad": "P1",
+      "baseline": "B1772-001",
+      "observacion": "conteos.techos=35089 en manifiesto; parte techos del pak tiene 541648 bytes / 16 bytes por registro = 33853. Hash coincide local/publicado. Diferencia 1236 registros, no un conteo de casas faltantes en 1772.",
+      "causa": "Pendiente revisar cómo se actualizan conteos y manifiesto.",
+      "fases_candidatas": [
+        1,
+        8
+      ],
+      "pr_correccion": null
+    }
+  ]
+}
