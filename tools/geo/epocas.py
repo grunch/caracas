@@ -257,18 +257,19 @@ def cerrar_cuadras(nace, cuadras):
     return salida
 
 
-def apertura_de_juntas(juntas, edificado, escala):
+def apertura_de_juntas(juntas, edificado, escala, minimos=None):
     """La época en que se abre cada grupo de calles nuevas (tools/geo/vectorizar.py, "juntas"): la primera
     cuyo plano (`edificado`: máscaras de las épocas 1..4, en la grilla reducida) ya no tiene edificada la
     mayor parte de sus calles; si todas la tienen, 1936."""
     forma = edificado[0].shape if edificado else (0, 0)
     abre = []
-    for poligonos in juntas:
+    for indice, poligonos in enumerate(juntas):
         mascara = np.zeros(forma, bool)
         for p in poligonos:
             mascara[_huella(np.asarray(p, float).reshape(-1, 2), forma, escala)] = True
         tapadas = [m[mascara].mean() if mascara.any() else 1.0 for m in edificado]
-        abre.append(next((1 + e for e, f in enumerate(tapadas) if f < 0.5), ULTIMA))
+        minimo = minimos[indice] if minimos is not None else 1
+        abre.append(next((1 + e for e, f in enumerate(tapadas) if 1 + e >= minimo and f < 0.5), ULTIMA))
     return abre
 
 
@@ -297,6 +298,12 @@ def vida_de_1936(nace36, ciudad, apertura=()):
     nace = cerrar_cuadras(nace36, ciudad.get("cuadras", [-1] * n))
     publico = np.array([t[3] == ESTILO_PUBLICO for t in ciudad["techos"]], bool)
     nace = np.where(publico, np.maximum(nace, PUBLICOS_DESDE), nace)
+    # La lectura directa del plano prevalece sobre el calce automático: estas
+    # casas forman una cuadra documentada como cerrada en 1772.
+    minimos = ciudad.get("juntas_minimo", [])
+    for k, (junta, antes) in enumerate(zip(ciudad.get("junta", [-1] * n), ciudad.get("antes", [0] * n))):
+        if antes and 0 <= junta < len(minimos) and minimos[junta] >= 2 and not publico[k]:
+            nace[k] = 1
     vida, quitar = [], set()
     datos = zip(ciudad.get("cede", [-1] * n), ciudad.get("junta", [-1] * n), ciudad.get("antes", [0] * n))
     for k, (cede, junta, antes) in enumerate(datos):
@@ -497,7 +504,7 @@ def main():
     construido = [construido_de_epoca(raiz, e, forma, escala, metro) for e in epocas[1:ULTIMA]]
     huellas36 = huellas(ciudad36, forma, escala)
     nace36 = nace(fracciones(huellas36, construido), primera=1, umbral=config["umbral"])
-    apertura = apertura_de_juntas(ciudad36.get("juntas", []), construido, escala)
+    apertura = apertura_de_juntas(ciudad36.get("juntas", []), construido, escala, ciudad36.get("juntas_minimo"))
     vida36, quitar = vida_de_1936(nace36, ciudad36, apertura)
     vida78 = vida_de_1578(ciudad78, *relevos(huellas36, vida36, quitar), construido, escala)
     ciudad = unir(*sin_techos(ciudad36, vida36, quitar), ciudad78, vida78)

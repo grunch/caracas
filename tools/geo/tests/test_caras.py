@@ -120,3 +120,26 @@ def test_una_cara_de_muchos_lados_no_se_ajusta():
     yy, xx = np.mgrid[0:440, 0:440]
     m[(xx - 220) ** 2 + (yy - 220) ** 2 < 100 ** 2] = True
     assert ajustar_cara(cara, m, (0, 0), METRO) is None
+
+
+def test_las_cuadras_enfrentadas_dejan_calzada_aunque_el_raster_la_haya_pintado_edificada():
+    izquierda = Polygon([(20,20),(220,20),(220,220),(20,220)])
+    derecha = Polygon([(220,20),(420,20),(420,220),(220,220)])
+    m = np.ones((440,440),bool)  # la costura borró incluso el blanco de la calle
+    a = Polygon(ajustar_cara(izquierda,m,(0,0),METRO))
+    b = Polygon(ajustar_cara(derecha,m,(0,0),METRO))
+    assert a.distance(b) * METRO >= 6 - 1e-6
+
+
+def test_el_reparto_no_modelo_tambien_respeta_la_linea_de_fachada():
+    from tools.geo.vectorizar import techos_de_manzana, CLASE
+    m = np.ones((220,220), bool)
+    clases = np.full(m.shape, CLASE['edificado'], np.uint8)
+    salida = {k: [] for k in ('vertices','techos','esquinas','cuadras','cede','junta','antes','marcos','alas','publicos')}
+    salida['n_cuadras'] = 0
+    p = np.array([[8,8],[212,8],[212,212],[8,212]])
+    techos_de_manzana(clases,m,(0,0),salida,4,1,lambda f:0,METRO,cuadra_modelo=False,poligono=p)
+    vertices = np.asarray(salida['vertices']).reshape(-1,2)
+    assert len(salida['techos']) > 0
+    for inicio,n,*_ in salida['techos']:
+        assert Polygon(vertices[inicio:inicio+n]).difference(Polygon(p)).area < 1e-6

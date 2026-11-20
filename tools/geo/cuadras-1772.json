@@ -1,0 +1,303 @@
+{
+  "fuente": "fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg",
+  "nota": "Cuadras totalmente rojas, sin plazoletas ni huertos interiores, verificadas en el original (poniente arriba). Correspondencias del damero por su posición respecto de Plaza Mayor; mosaico contiene los cruces de las calles, no parcelas individuales. Las plazas recortadas de San Jacinto y San Pablo se excluyen. No se usa la correlación automática para decidir qué cuadra es cuál.",
+  "cuadras_cerradas": [
+    {
+      "id": "norte-plaza",
+      "original": [
+        1036,
+        793,
+        1104,
+        859
+      ],
+      "mosaico": [
+        [
+          8945.6,
+          6448.8
+        ],
+        [
+          9152.8,
+          6489.5
+        ],
+        [
+          9093,
+          6752.7
+        ],
+        [
+          8894.5,
+          6719.9
+        ]
+      ]
+    },
+    {
+      "id": "norte-catedral",
+      "original": [
+        1036,
+        859,
+        1104,
+        926
+      ],
+      "mosaico": [
+        [
+          9152.8,
+          6489.5
+        ],
+        [
+          9406.4,
+          6544.5
+        ],
+        [
+          9356.9,
+          6799.5
+        ],
+        [
+          9093,
+          6752.7
+        ]
+      ]
+    },
+    {
+      "id": "catedral",
+      "original": [
+        970,
+        859,
+        1036,
+        926
+      ],
+      "mosaico": [
+        [
+          9093,
+          6752.7
+        ],
+        [
+          9356.9,
+          6799.5
+        ],
+        [
+          9318.9,
+          7017.5
+        ],
+        [
+          9054,
+          6958.4
+        ]
+      ]
+    },
+    {
+      "id": "oeste-san-jacinto",
+      "original": [
+        903,
+        859,
+        970,
+        926
+      ],
+      "mosaico": [
+        [
+          9054,
+          6958.4
+        ],
+        [
+          9318.9,
+          7017.5
+        ],
+        [
+          9263.3,
+          7290.5
+        ],
+        [
+          9002.3,
+          7231.5
+        ]
+      ]
+    },
+    {
+      "id": "sociedad-camejo",
+      "original": [
+        835,
+        859,
+        903,
+        926
+      ],
+      "mosaico": [
+        [
+          9002.3,
+          7231.5
+        ],
+        [
+          9263.3,
+          7290.5
+        ],
+        [
+          9209.1,
+          7556.8
+        ],
+        [
+          8946.4,
+          7501.5
+        ]
+      ]
+    },
+    {
+      "id": "camejo-cruz-verde",
+      "original": [
+        767,
+        859,
+        835,
+        926
+      ],
+      "mosaico": [
+        [
+          8946.4,
+          7501.5
+        ],
+        [
+          9209.1,
+          7556.8
+        ],
+        [
+          9167,
+          7820.6
+        ],
+        [
+          8910.3,
+          7759.0
+        ]
+      ]
+    },
+    {
+      "id": "cruz-verde-velasquez",
+      "original": [
+        702,
+        859,
+        767,
+        926
+      ],
+      "mosaico": [
+        [
+          8910.3,
+          7759
+        ],
+        [
+          9167,
+          7820.6
+        ],
+        [
+          9117.3,
+          8082.1
+        ],
+        [
+          8852.2,
+          8025.7
+        ]
+      ]
+    },
+    {
+      "id": "sur-convento",
+      "original": [
+        835,
+        926,
+        903,
+        992
+      ],
+      "mosaico": [
+        [
+          9263.3,
+          7290.5
+        ],
+        [
+          9524.5,
+          7350.3
+        ],
+        [
+          9476.7,
+          7613.7
+        ],
+        [
+          9209.1,
+          7556.8
+        ]
+      ]
+    },
+    {
+      "id": "doctor-diaz-zamuro",
+      "original": [
+        767,
+        926,
+        835,
+        992
+      ],
+      "mosaico": [
+        [
+          9209.1,
+          7556.8
+        ],
+        [
+          9476.7,
+          7613.7
+        ],
+        [
+          9432.7,
+          7877.4
+        ],
+        [
+          9167,
+          7820.6
+        ]
+      ]
+    },
+    {
+      "id": "noreste-catedral",
+      "original": [
+        1036,
+        926,
+        1104,
+        992
+      ],
+      "mosaico": [
+        [
+          9406.4,
+          6544.5
+        ],
+        [
+          9671.5,
+          6599.2
+        ],
+        [
+          9625.1,
+          6850.8
+        ],
+        [
+          9356.9,
+          6799.5
+        ]
+      ]
+    },
+    {
+      "id": "seminario",
+      "original": [
+        903,
+        793,
+        970,
+        859
+      ],
+      "mosaico": [
+        [
+          8838.1,
+          6917.7
+        ],
+        [
+          9054,
+          6958.4
+        ],
+        [
+          9002.3,
+          7231.5
+        ],
+        [
+          8785.3,
+          7178.6
+        ]
+      ]
+    }
+  ]
+}

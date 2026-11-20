@@ -36,6 +36,7 @@ TRAMO_MINIMO_NUEVO_M = 25.0
 TOLERANCIA_CARA_M = 4.0       # simplificación de una cara (la calle de hoy tiene chaflanes y curvas suaves)
 MAXIMO_DE_LADOS_CARA = 10
 RETIRO_MAXIMO_M = 20.0        # hasta dónde se busca la fachada desde el eje de la calle
+RETIRO_MINIMO_M = 3.0         # reserva geométrica de calzada cuando la máscara invade un eje reconocido
 RETIRO_POR_OMISION_M = 5.0    # medio ancho de una calle del casco, si el lado no tiene fachada que medir
 RAYOS_MINIMOS = 0.25          # parte de los rayos de un lado que tiene que dar con la cuadra
 CUANTIL_DE_FACHADA = 0.25     # la fachada es la línea de las casas que más salen, no el promedio de los dientes
@@ -138,7 +139,8 @@ def ajustar_cara(cara, mascara, origen, metro):
             continue
         d = (b - a) / largo
         hacia = np.array([-d[1], d[0]]) * giro   # la normal hacia adentro de la cara
-        retiro = _retiro(a, b, hacia, np.asarray(mascara, bool), origen, metro)
+        retiro = max(RETIRO_MINIMO_M / metro,
+                     _retiro(a, b, hacia, np.asarray(mascara, bool), origen, metro))
         rectas.append((a + hacia * retiro - np.asarray(origen, float), d, largo))
     rectas = _fundir_en_linea(rectas, TOLERANCIA_CARA_M / metro)
     if not 3 <= len(rectas) <= MAXIMO_DE_LADOS_CARA:
