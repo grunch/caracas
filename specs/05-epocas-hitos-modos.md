@@ -331,6 +331,14 @@ Botones Caminar / Volar / Manejar (+ "Más rápido"). Se entra desde la vista ac
   - **Cartel**: «En avión · N m sobre el suelo», de a 10 m.
   - **Mientras dura**: la cámara del mapa queda en pausa; Esc aterriza en la vista de antes.
 - **Manejar**: coche **de la época** con física simple sobre las calles; tercera persona o cabina (V), bocina (B), sonido (M), otro coche (N); Q/E cambian el año y, con él, el coche. Flota de ejemplo: volanta y coche de plaza (1867, con relincho), voiturette (corneta), doble faetón (1909: "como casi todos los 2.287 automóviles de fines de 1909"), Ford T (klaxon) y Ford V8 (de 1932 en adelante). Cada coche tiene geometría procedural, una ficha corta y sonido **sintetizado con WebAudio** (osciladores sawtooth/square + filtros lowpass/bandpass), sin archivos de audio.
+  *Caracas (T62, `src/manejar.js` + `src/manejar-modo.js`):*
+  - **Flota**, según `specs/06` y las fotos de `fuentes/imagenes/`: carreta de bueyes (1772), coche de caballos (desde 1843), Ford T (1911) y Ford V8 (1936). Los nombres son genéricos, sin afirmar el modelo exacto que circulaba. El tranvía no está: va por sus rieles, y no los tenemos.
+  - **Geometría**: procedural, con sombra; los de tiro llevan su animal.
+  - **Física**: acelera y frena, va marcha atrás más despacio, gira en proporción a lo que avanza y se detiene contra las casas (las mismas huellas que a pie).
+  - **Vistas**: de afuera, 12 m detrás, o desde el pescante (V).
+  - **Sonido** (WebAudio, sin archivos): motor sawtooth con lowpass que sube con la velocidad; cascos de ruido filtrado al ritmo del paso; bocina de cuatro tonos del Ford T (square), de dos del V8 (sawtooth) o un relincho. O prende o apaga el sonido (la M sigue siendo la de los nombres del mapa).
+  - **Otras teclas**: N cambia a otro vehículo de la época; Q y E cambian el año y, con él, el vehículo.
+  - **Cartel**: «Ford T · 25 km/h».
 - Minimapa en canvas con `suelo/crece/despeje` en baja resolución.
 - **Táctil**: joystick virtual en la mitad izquierda (radio de 52 px) + un segundo dedo para mirar; textos de ayuda propios de cada modo, que se ocultan a los 12 s.
 - Tranvías y trenes animados por las vías según la época (*se ve en `trenes`*).

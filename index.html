@@ -68,7 +68,7 @@
     #modo.callado .ayuda,#modo .ayuda.dedos{display:none}
     @media (hover:none) and (pointer:coarse){#modo .ayuda.raton{display:none}#modo:not(.callado) .ayuda.dedos{display:block}}
     /* a pie: la caja de búsqueda y los nombres son del mapa; el modo tiene su cartel en esa esquina */
-    body.modo #buscar,body.modo #marcas,body.modo #alzar,body.modo-caminar #volar,body.modo-volar #caminar{display:none}
+    body.modo #buscar,body.modo #marcas,body.modo #alzar,body.modo-caminar #volar,body.modo-caminar #manejar,body.modo-volar #caminar,body.modo-volar #manejar,body.modo-manejar #caminar,body.modo-manejar #volar{display:none}
     @media (max-width:640px){#epocas button{min-height:44px;padding:6px 6px;font-size:14px;letter-spacing:0}
       /* el texto de cada año, en dos líneas a lo más: el resto de la pantalla es de la ciudad */
       #epocas .pie{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;font-size:12px;margin:4px 4px 2px}}
@@ -88,7 +88,7 @@
   <noscript><p>Este sitio necesita JavaScript y WebGL para levantar la ciudad en 3D.</p></noscript>
   <div id="marcas" role="group" aria-label="Lugares de la ciudad"></div>
   <div id="epocas" class="panel" hidden></div>
-  <div id="botones"><button id="ayuda" class="panel" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Acerca: qué estás viendo, cómo moverte y de dónde salen los datos" title="Qué estás viendo, cómo moverte y fuentes (?)">?</button><button id="nombres" class="panel on" type="button" aria-pressed="true" title="Mostrar u ocultar los nombres de los lugares (M)">Nombres</button><button id="color" class="panel" type="button" aria-pressed="false" title="Ver en color (C)">Color</button><button id="hoy" class="panel" type="button" aria-pressed="false" title="Ver la ciudad de hoy (H)">Ver lo de hoy</button><button id="alzar" class="panel" type="button" hidden>Levantar la ciudad</button><button id="caminar" class="panel" type="button" aria-pressed="false" title="Baja a la calle y camina por la ciudad de la época elegida">Caminar</button><button id="volar" class="panel" type="button" aria-pressed="false" title="Sobrevuela el valle; Q y E cambian el año">Volar</button></div>
+  <div id="botones"><button id="ayuda" class="panel" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Acerca: qué estás viendo, cómo moverte y de dónde salen los datos" title="Qué estás viendo, cómo moverte y fuentes (?)">?</button><button id="nombres" class="panel on" type="button" aria-pressed="true" title="Mostrar u ocultar los nombres de los lugares (M)">Nombres</button><button id="color" class="panel" type="button" aria-pressed="false" title="Ver en color (C)">Color</button><button id="hoy" class="panel" type="button" aria-pressed="false" title="Ver la ciudad de hoy (H)">Ver lo de hoy</button><button id="alzar" class="panel" type="button" hidden>Levantar la ciudad</button><button id="caminar" class="panel" type="button" aria-pressed="false" title="Baja a la calle y camina por la ciudad de la época elegida">Caminar</button><button id="volar" class="panel" type="button" aria-pressed="false" title="Sobrevuela el valle; Q y E cambian el año">Volar</button><button id="manejar" class="panel" type="button" aria-pressed="false" title="Maneja el vehículo de la época elegida">Manejar</button></div>
   <div id="modo" class="panel" role="status" hidden>
     <p class="titulo">A pie</p>
     <p class="ayuda raton"></p>
