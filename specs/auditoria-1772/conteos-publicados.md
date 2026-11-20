@@ -43,5 +43,6 @@ resto de T33j.8a.
 Tres regresiones verifican separación de etapas, independencia del objeto de
 origen, conteos cero y rechazo de registros parciales. Fallaron antes de añadir
 la implementación. Vitest completo: 72 archivos, 1.293 casos aprobados. Python
-completo: 556 aprobados. La suite E2E se repite sobre una muestra generada desde
-el manifiesto corregido, con puerto exclusivo 5228.
+completo: 556 aprobados. Playwright completo: 71 aprobados y uno omitido
+(21,5 minutos, salida 0), sobre una muestra generada desde el manifiesto
+corregido y con puerto exclusivo 5228.
