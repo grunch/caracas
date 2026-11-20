@@ -375,3 +375,12 @@ en el plano; el reparto irregular también se recorta al contorno de la cuadra.
 La reserva de calles separa componentes que antes estaban pegados en la máscara:
 el conteo de referencia pasa de 7851 a 8023 manzanas, sin ampliar su tolerancia.
 El conteo se calcula después de retirar las calzadas reconocidas.
+
+### Frentes y medianeras exactos (T33h)
+
+`huellas.py` reparte las cuadras convexas mediante bisectrices de sus lados y cortes
+por los frentes de cada casa. Las medianeras salen de las mismas rectas, sin volver
+a rasterizar y dilatar cada lote. Solo sustituye la máscara cuando sus diferencias
+están a menos de 2 m del borde exterior; conserva el reparto anterior cuando hay
+plazas, pasajes, huecos interiores o contornos cóncavos. Es una corrección geométrica,
+no una identificación de las parcelas históricas individuales.

@@ -93,7 +93,7 @@ const PASOS = [
   {
     id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/tramos.json`, `${D}/edificado-1772.png`, 'tools/geo/cuadras-1772.json'],
     salidas: [`${D}/ciudad-1936.json`, `${D}/patios-de-casas.png`],
-    codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'caras', 'cuadras_historicas'),
+    codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'caras', 'huellas', 'cuadras_historicas'),
     cmd: async () => {
       const { plaza, metro } = await leerJson(`${D}/mosaico.json`)
       return [PY, 'tools/geo/vectorizar.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/ciudad-1936.json`,
