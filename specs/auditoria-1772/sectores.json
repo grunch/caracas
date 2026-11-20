@@ -22,9 +22,21 @@
         595,
         550
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Sin casas visibles en la mayor parte de la vista. El original tiene manzanas parcialmente ocupadas y edificios aislados cerca del camino de La Vega; localizar cada omisión.",
+      "unidades_localizadas_provisionales": 14,
+      "camara_aproximada": {
+        "x": -890.7036254978425,
+        "z": 803.8100541262511,
+        "dist": 1730,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-11.png",
+      "sha256_captura": "7b7fd50ece7219c784473c8c0d5019401b7d152b96e70f5d7c508684b7c5f669"
     },
     {
       "id": "S1772-12",
@@ -40,9 +52,21 @@
         995,
         550
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "El Calvario aparece como relieve y etiqueta; la edificación roja del pie occidental y las dos piezas del cerro no se reproducen en esta vista.",
+      "unidades_localizadas_provisionales": 8,
+      "camara_aproximada": {
+        "x": -765.8935326567121,
+        "z": 201.4792121459568,
+        "dist": 1757,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-12.png",
+      "sha256_captura": "2981aff0168d8d5a986f6391c7cc0f3432adc2a0917a306ac073fd39fa71acbf"
     },
     {
       "id": "S1772-13",
@@ -58,9 +82,21 @@
         1395,
         550
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Terrenos al norte del Calvario sin casas; el original distingue solares y piezas edificadas. No sustituir su ocupación parcial por coronas completas.",
+      "unidades_localizadas_provisionales": 12,
+      "camara_aproximada": {
+        "x": -652.6397694029606,
+        "z": -434.64084023391433,
+        "dist": 1904,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-13.png",
+      "sha256_captura": "e40ade7e5380439cb6907992bb048586cb0758d9819fbc30c89f1dade812b593"
     },
     {
       "id": "S1772-14",
@@ -76,9 +112,21 @@
         1770,
         550
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "La Pastora aparece aislada. Caminos y edificaciones del acceso de La Guayra requieren correspondencia individual; el original no muestra solamente campo.",
+      "unidades_localizadas_provisionales": 6,
+      "camara_aproximada": {
+        "x": -538.0996723249073,
+        "z": -1061.2515858711085,
+        "dist": 1691,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-14.png",
+      "sha256_captura": "460c04e510fffdc33e9c21ef350977bc8bf62268d208416d32d5ccc514893779"
     },
     {
       "id": "S1772-21",
@@ -94,9 +142,21 @@
         595,
         900
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Borde del damero sur incompleto y sin desarrollo de parte de las ocupaciones parciales. Terrenos realmente vacíos en el original deben conservarse.",
+      "unidades_localizadas_provisionales": 19,
+      "camara_aproximada": {
+        "x": -381.31743931626534,
+        "z": 923.4516042487649,
+        "dist": 1841,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-21.png",
+      "sha256_captura": "0dc3bfe0032c4432756fc33d9f9ee70b606f421424cd6d4adcd8b04c5fa2a4b8"
     },
     {
       "id": "S1772-22",
@@ -112,9 +172,21 @@
         995,
         900
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Núcleo con calles y coronas presentes, pero frentes interrumpidos, manzanas deformadas y grandes vacíos en conjuntos religiosos. Pie del Calvario sin la continuidad roja del original.",
+      "unidades_localizadas_provisionales": 30,
+      "camara_aproximada": {
+        "x": -248.532140101197,
+        "z": 313.6152817039465,
+        "dist": 1823,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-22.png",
+      "sha256_captura": "84c4fff9463996a8ed2a9ab02009a7f0bedcdade14692aa6aabb59d29fffd880"
     },
     {
       "id": "S1772-23",
@@ -130,9 +202,21 @@
         1395,
         900
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Altagracia y norte del núcleo visibles; discontinuidades de frentes y ocupación truncada hacia la quebrada. Falta distinguir bordes históricos de omisiones.",
+      "unidades_localizadas_provisionales": 35,
+      "camara_aproximada": {
+        "x": -134.53184857695214,
+        "z": -318.99325943464055,
+        "dist": 1982,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-23.png",
+      "sha256_captura": "414ae4a5f7a5445d5ea0c23d1c89c23c0f7864c25cd63187eecfbd57a3585226"
     },
     {
       "id": "S1772-24",
@@ -148,9 +232,21 @@
         1770,
         900
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Ocupación junto a la quebrada y camino de La Guayra escasa en el sistema. No confundir curvas de agua actuales con la red de calles del original.",
+      "unidades_localizadas_provisionales": 16,
+      "camara_aproximada": {
+        "x": -18.876719154903185,
+        "z": -942.2074059425568,
+        "dist": 1781,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-24.png",
+      "sha256_captura": "bf20e530b0e12edfbe1d7679206a1009f11768216060597ad04cbc438a232a38"
     },
     {
       "id": "S1772-31",
@@ -166,9 +262,21 @@
         595,
         1250
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Sur del damero con vacíos junto al río. El original incluye ocupación parcial, no un anillo uniforme de casas. Pendiente discriminación por unidad.",
+      "unidades_localizadas_provisionales": 17,
+      "camara_aproximada": {
+        "x": 154.53353659570894,
+        "z": 1055.127908302612,
+        "dist": 1787,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-31.png",
+      "sha256_captura": "460d516e56b2942f116414d518fa18770a614b8d93eea4822928981df634652a"
     },
     {
       "id": "S1772-32",
@@ -184,9 +292,21 @@
         995,
         1250
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Calles centrales reconocibles, pero filas interrumpidas, esquinas deformadas y perímetro urbano cortado. En los vacíos se ve tinta de la hoja de 1936.",
+      "unidades_localizadas_provisionales": 32,
+      "camara_aproximada": {
+        "x": 283.02886920814854,
+        "z": 445.8637869192007,
+        "dist": 1888,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-32.png",
+      "sha256_captura": "282967b1ae752b88e34f275ccab4d046bad832d9e5130b19b09bdbba0b6c9f0b"
     },
     {
       "id": "S1772-33",
@@ -202,9 +322,21 @@
         1395,
         1250
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Transición al este con casas que se interrumpen y zonas dibujadas sin volumen. El original sigue con manzanas edificadas y parcialmente edificadas.",
+      "unidades_localizadas_provisionales": 38,
+      "camara_aproximada": {
+        "x": 403.45182122402275,
+        "z": -185.31576542140238,
+        "dist": 1976,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-33.png",
+      "sha256_captura": "cb1010dd1abd6ec64ee82dccbe9a0fba057d2f704682d8907622a2f2dea0d3a1"
     },
     {
       "id": "S1772-34",
@@ -220,9 +352,21 @@
         1770,
         1250
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Periferia noreste casi sin casas. El original tiene cuadrícula, parcelas parcialmente ocupadas y edificios aislados; las prolongaciones abiertas son excepciones reales.",
+      "unidades_localizadas_provisionales": 17,
+      "camara_aproximada": {
+        "x": 529.3170110695091,
+        "z": -798.5935008381557,
+        "dist": 1798,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-34.png",
+      "sha256_captura": "2f1488f54dbbbfb646028794f5cd54d2fe9bb46a2a677cc18ea8091529202b30"
     },
     {
       "id": "S1772-41",
@@ -238,9 +382,21 @@
         595,
         1555
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Sector mayormente rural y fluvial en el original y en el sistema. No fabricar manzanas para llenar esta zona; corresponde revisar cauces y caminos.",
+      "unidades_localizadas_provisionales": 0,
+      "camara_aproximada": {
+        "x": 654.6778415442741,
+        "z": 1170.1437654509928,
+        "dist": 1705,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-41.png",
+      "sha256_captura": "6edc6e2bd0f7535c5d97691301832101b8263fed9af8432f691bcfb9b87ec146"
     },
     {
       "id": "S1772-42",
@@ -256,9 +412,21 @@
         995,
         1555
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Sector de acceso a Candelaria con zonas rojas del original sin casas visibles. Distinguir calle histórica, ribera y ocupación parcial.",
+      "unidades_localizadas_provisionales": 8,
+      "camara_aproximada": {
+        "x": 785.4267172161499,
+        "z": 568.0733970800238,
+        "dist": 1796,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-42.png",
+      "sha256_captura": "dff64b319e9c5867ba938dee7e25a675cfaa98c2d21d8e4912d0067d14561f4d"
     },
     {
       "id": "S1772-43",
@@ -274,9 +442,21 @@
         1395,
         1555
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Candelaria y su entorno no aparecen reconstruidos con la ocupación del original. Campo/tinta de 1936 en buena parte de la vista. Revisar también nacimiento del hito/etiqueta.",
+      "unidades_localizadas_provisionales": 18,
+      "camara_aproximada": {
+        "x": 912.4708996035943,
+        "z": -59.791382992771105,
+        "dist": 1853,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-43.png",
+      "sha256_captura": "c74ba6c3c52e7ed2ab5760e88b28ebea6ea5ca5d90b1368df9d5e6aed4babe85"
     },
     {
       "id": "S1772-44",
@@ -292,9 +472,21 @@
         1770,
         1555
       ],
-      "estado": "pendiente_censo_completo",
+      "estado": "barrido_general_realizado_censo_detallado_pendiente",
       "total_manzanas": null,
-      "total_calles": null
+      "total_calles": null,
+      "barrido_general": "realizado_2026-11-20",
+      "observacion_general": "Sector principalmente cauce, campo y cartela del original. La cartela no es superficie urbana; no inferir casas por el fondo de 1936.",
+      "unidades_localizadas_provisionales": 1,
+      "camara_aproximada": {
+        "x": 1037.303679961653,
+        "z": -662.7283625868645,
+        "dist": 1718,
+        "yaw": 1.5707963268,
+        "pitch": 1.5
+      },
+      "captura": "S1772-44.png",
+      "sha256_captura": "74e17ea68bf8c058a0d0e7c7b4256c120d694ad758cf44b0de5987491aa47844"
     }
   ]
 }

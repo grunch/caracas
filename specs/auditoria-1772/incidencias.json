@@ -170,6 +170,57 @@
         8
       ],
       "pr_correccion": null
+    },
+    {
+      "id": "I1772-007",
+      "categoria": "ocupacion_periferica",
+      "estado": "confirmado_general_pendiente_por_unidad",
+      "prioridad": "P1",
+      "sectores": [
+        "S1772-11",
+        "S1772-12",
+        "S1772-13",
+        "S1772-14",
+        "S1772-24",
+        "S1772-42",
+        "S1772-43"
+      ],
+      "observacion": "El barrido muestra falta de edificación periférica frente a zonas rojas del original. El análisis de centroides produce candidatos, no un conteo final de casas omitidas.",
+      "causa": "Hipótesis: herencia de huellas de 1936 y requisito de continuidad futura en epocas.nace; falta comprobar cada etapa y cada correspondencia.",
+      "fases_candidatas": [
+        2,
+        3,
+        4
+      ],
+      "pr_correccion": null
+    },
+    {
+      "id": "I1772-008",
+      "categoria": "fondo_de_otra_epoca",
+      "estado": "confirmado",
+      "prioridad": "P1",
+      "observacion": "En 1772 se conserva por defecto el plano de 1936: los planos de época están detrás de ?planos. Las capturas muestran tinta y edificios planos de 1936 dentro/fuera de la ciudad 3D.",
+      "causa": "src/main.js, indicePlanos: desactivación intencional por omisión documentada como T25b.",
+      "fases_candidatas": [
+        8
+      ],
+      "criterio": "La revisión de geometría se basa en original.jpg; la entrega debe separar u ocultar la tinta anacrónica sin reintroducir el parche visual que motivó T25b.",
+      "pr_correccion": null
+    },
+    {
+      "id": "I1772-009",
+      "categoria": "hito_epoca",
+      "estado": "candidato",
+      "prioridad": "P1",
+      "sectores": [
+        "S1772-43"
+      ],
+      "observacion": "El original incluye conjunto religioso en el área de Candelaria. Su etiqueta en marcas-datos.js nace en índice 3 y no aparece en 1772; falta confirmar correspondencia y geometría histórica del conjunto.",
+      "causa": "Fecha de la etiqueta basada en fuentes posteriores; no extender la forma actual del edificio a 1772 sin referencia.",
+      "fases_candidatas": [
+        4
+      ],
+      "pr_correccion": null
     }
   ]
 }
