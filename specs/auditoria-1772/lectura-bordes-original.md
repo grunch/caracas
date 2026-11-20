@@ -5,14 +5,15 @@ conservando los IDs de `frentes-caras-candidatas.json`. Es una clasificación vi
 del rojo en el borde de cada unidad, no una geometría aprobada para generar casas.
 La fase 1 sigue abierta: quedan las unidades sin cara única, además de las
 comprobaciones métricas y de acceso pendientes. En las caras candidatas hay 574
-lecturas de rojo (253 continuas, 141 parciales y 180 sin rojo), seis bordes cuyo
-contorno debe retrazarse, seis con símbolos por resolver y cuatro de la plaza.
+lecturas de rojo (253 continuas, 141 parciales y 180 sin rojo), cuatro bordes de plaza y doce bordes especiales revisados en
+[bordes-especiales-original.md](bordes-especiales-original.md): cinco candidatos
+descartados, un recodo y seis símbolos de conjuntos religiosos.
 
 Se inspeccionaron los 16 paneles del original, con cada borde candidato desplazado
 3 píxeles hacia su unidad para que no ocultara el borde vecino. Las lecturas del
 JSON son explícitas por frente; no se asigna una lectura a las unidades omitidas.
 Se revisaron además recortes individuales de los 16 casos restantes. Los símbolos
-religiosos que afectan la lectura se marcan pendientes; la plaza se clasifica
+religiosos se revisaron posteriormente en el informe de bordes especiales; la plaza se clasifica
 por separado y los contornos discrepantes no reciben una ocupación inventada. El norte está a la derecha
 del escaneo: los índices de borde no son orientaciones cardinales.
 
