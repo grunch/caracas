@@ -143,3 +143,14 @@ def test_el_reparto_no_modelo_tambien_respeta_la_linea_de_fachada():
     assert len(salida['techos']) > 0
     for inicio,n,*_ in salida['techos']:
         assert Polygon(vertices[inicio:inicio+n]).difference(Polygon(p)).area < 1e-6
+
+
+def test_una_calle_reconocida_se_reserva_aunque_solo_tenga_casas_de_un_lado():
+    from tools.geo.vectorizar import vectorizar, CLASE
+    clases = np.full((260,260), CLASE['calle'], np.uint8)
+    clases[30:230,30:133] = CLASE['edificado']
+    red = {'tramos':[{'linea':[[130,20],[130,240]],'en1936':True,'nueva':False}]}
+    ciudad = vectorizar(clases,METRO,(130,130),red=red)
+    vertices = np.asarray(ciudad['vertices']).reshape(-1,2)
+    assert ciudad['techos']
+    assert vertices[:,0].max() <= 130 - 3/METRO
