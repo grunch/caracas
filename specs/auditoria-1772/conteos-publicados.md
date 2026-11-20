@@ -4,6 +4,8 @@ T33j.1n. La discrepancia se debía a `tools/datos.mjs`: `verificar` leía
 `ciudad-1936.json` para llenar `conteos` del manifiesto, aunque el paquete se arma
 después del procesamiento de épocas. El conteo de árboles también procedía de la
 segmentación inicial y no del binario que consume el visor.
+`tools/arboles.mjs` añade árboles de jardines, patios y monte, además de descartar
+algunos bajo techos: por eso el conteo final tampoco coincide con esa entrada.
 
 Se conservan las comprobaciones de `tools/datos-esperados.json` sobre el origen,
 con sus tolerancias actuales. El manifiesto separa ahora:
