@@ -120,9 +120,28 @@ def test_puerta_de_salida_no_declara_cumplido_lo_que_sigue_pendiente():
     puerta = puerta_de_salida(filas, sectores(), residuos, enlazadas)
     assert puerta['area_recorrida'] == {'cumplido': True, 'sectores': 2}
     assert puerta['unidades_clasificadas_y_leidas'] == {'cumplido': True, 'unidades': 3}
-    assert puerta['correspondencia_aprobada_por_unidad'] == {'cumplido': False, 'aprobadas': 0, 'provisionales': 3,
-                                                             'trasladado_a': 'T33j.2a'}
+    assert puerta['correspondencia_clasificada_por_unidad'] == {'cumplido': False, 'clasificadas': 0, 'provisionales': 3,
+                                                                'trasladado_a': 'T33j.2a'}
     assert puerta['controles_de_calce_por_sector'] == {'cumplido': False, 'sectores_sin_control_independiente': ['S2'],
-                                                       'trasladado_a': 'T33j.2a'}
+                                                       'sectores_sin_unidades': [], 'trasladado_a': 'T33j.2a'}
     assert puerta['hallazgos_confirmados_con_subtarea'] == {'cumplido': True, 'sin_subtarea': []}
     assert puerta['fase_1_cerrable'] is False
+
+
+def test_puerta_de_salida_se_cumple_con_controles_de_damero_y_correspondencias_verificadas():
+    filas = cobertura_unidades(unidades(), lecturas(), contraste())
+    tres = sectores() + [{'id': 'S3', 'bbox_original': [0, 100, 100, 200]}]
+    residuos = residuos_por_sector([], [], tres)
+    enlazadas = enlazar_subtareas([{'id': 'I1772-001', 'estado': 'confirmado_visual'}])
+    damero = {'por_sector': [{'sector': 'S1', 'controles': 4, 'mediana_m': 12.0}, {'sector': 'S2', 'controles': 0, 'mediana_m': None}],
+              'controles_por_hito': [{'sector': 'S2'}]}
+    correspondencias = {'resumen': {'clases': {'uno_a_uno': 1, 'ausente': 1, 'vacio_coincide': 1}},
+                        'unidades': [{'unidad': u, 'clase': 'x'} for u in ('U0001', 'U0002', 'U0003')],
+                        'verificacion_visual': [{'juicio': 'coincide'}, {'juicio': 'compatible'}]}
+    puerta = puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias)
+    assert puerta['controles_de_calce_por_sector'] == {'cumplido': True, 'sectores_sin_control_independiente': [], 'sectores_sin_unidades': ['S3']}
+    assert puerta['correspondencia_clasificada_por_unidad'] == {'cumplido': True, 'clasificadas': 3, 'muestra_visual': 2, 'contradicciones': 0,
+                                                                'clases': {'uno_a_uno': 1, 'ausente': 1, 'vacio_coincide': 1}}
+    assert puerta['fase_1_cerrable'] is True
+    correspondencias['verificacion_visual'].append({'juicio': 'contradice'})
+    assert puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias)['fase_1_cerrable'] is False

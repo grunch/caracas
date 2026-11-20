@@ -273,7 +273,7 @@
     {
       "id": "I1772-010",
       "categoria": "calce_incompatible_con_referencia_curada",
-      "estado": "confirmado_desacuerdo_causa_geometrica_pendiente",
+      "estado": "confirmado_desplazamiento_por_cuadras_fuera_del_nucleo",
       "prioridad": "P0",
       "baseline": "B1772-001",
       "manzanas": [
@@ -300,7 +300,31 @@
       "subtareas": [
         "T33j.2a",
         "T33j.3b"
-      ]
+      ],
+      "medicion_damero": {
+        "documento": "controles-damero.md",
+        "controles": 167,
+        "mediana_desvio_m_por_sector": {
+          "S1772-11": 366.94,
+          "S1772-12": 309.46,
+          "S1772-13": 164.25,
+          "S1772-14": null,
+          "S1772-21": 285.19,
+          "S1772-22": 96.17,
+          "S1772-23": 40.42,
+          "S1772-24": 137.61,
+          "S1772-31": 259.9,
+          "S1772-32": 95.33,
+          "S1772-33": 78.92,
+          "S1772-34": 178.88,
+          "S1772-41": null,
+          "S1772-42": 250.27,
+          "S1772-43": 236.43,
+          "S1772-44": 256.38
+        },
+        "hito_candelaria_desvio_tps_m": 302.89,
+        "causa_probable": "correlación enganchada a calles vecinas en un damero periódico; no es imprecisión métrica"
+      }
     },
     {
       "id": "I1772-011",

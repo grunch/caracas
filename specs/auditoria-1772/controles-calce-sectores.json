@@ -1,0 +1,4985 @@
+{
+ "fecha": "2026-11-20",
+ "alcance": "Controles independientes del TPS por identidad de damero; miden discrepancia, no exactitud geográfica.",
+ "fuentes": {
+  "trazado": "b60398ecd825521108fac4a008e4410cf0169ddf4f516dd3cb03583edc867817",
+  "esquinas_1936": "a73b47c7aeec0420aed8bc4bd66e8304846ad358dc35ccb48e25f90f0fc61444",
+  "gcp": "080b6c16c2adfd88bd4c1cd01a8471c86823ca29d9b78f2aca5fb4388a4e95df"
+ },
+ "parametros": {
+  "angulo_damero_1936_grados": 9.45,
+  "origen_1936": "Las Monjas",
+  "metro": 0.5,
+  "esquinas_indexadas": 244,
+  "esquinas_totales": 329,
+  "cruces_1772": 201
+ },
+ "por_sector": [
+  {
+   "sector": "S1772-11",
+   "controles": 2,
+   "rms_m": 367.2,
+   "mediana_m": 366.94,
+   "max_m": 380.532
+  },
+  {
+   "sector": "S1772-12",
+   "controles": 2,
+   "rms_m": 309.81,
+   "mediana_m": 309.46,
+   "max_m": 324.09
+  },
+  {
+   "sector": "S1772-13",
+   "controles": 8,
+   "rms_m": 170.84,
+   "mediana_m": 164.25,
+   "max_m": 204.435
+  },
+  {
+   "sector": "S1772-14",
+   "controles": 0,
+   "rms_m": null,
+   "mediana_m": null,
+   "max_m": null
+  },
+  {
+   "sector": "S1772-21",
+   "controles": 9,
+   "rms_m": 289.98,
+   "mediana_m": 285.19,
+   "max_m": 329.463
+  },
+  {
+   "sector": "S1772-22",
+   "controles": 25,
+   "rms_m": 140.68,
+   "mediana_m": 96.17,
+   "max_m": 290.739
+  },
+  {
+   "sector": "S1772-23",
+   "controles": 33,
+   "rms_m": 65.74,
+   "mediana_m": 40.42,
+   "max_m": 156.326
+  },
+  {
+   "sector": "S1772-24",
+   "controles": 5,
+   "rms_m": 142.07,
+   "mediana_m": 137.61,
+   "max_m": 166.669
+  },
+  {
+   "sector": "S1772-31",
+   "controles": 7,
+   "rms_m": 260.06,
+   "mediana_m": 259.9,
+   "max_m": 273.157
+  },
+  {
+   "sector": "S1772-32",
+   "controles": 24,
+   "rms_m": 122.52,
+   "mediana_m": 95.33,
+   "max_m": 222.44
+  },
+  {
+   "sector": "S1772-33",
+   "controles": 23,
+   "rms_m": 105.51,
+   "mediana_m": 78.92,
+   "max_m": 193.827
+  },
+  {
+   "sector": "S1772-34",
+   "controles": 11,
+   "rms_m": 183.7,
+   "mediana_m": 178.88,
+   "max_m": 223.247
+  },
+  {
+   "sector": "S1772-41",
+   "controles": 0,
+   "rms_m": null,
+   "mediana_m": null,
+   "max_m": null
+  },
+  {
+   "sector": "S1772-42",
+   "controles": 6,
+   "rms_m": 254.74,
+   "mediana_m": 250.27,
+   "max_m": 308.576
+  },
+  {
+   "sector": "S1772-43",
+   "controles": 11,
+   "rms_m": 245.32,
+   "mediana_m": 236.43,
+   "max_m": 300.001
+  },
+  {
+   "sector": "S1772-44",
+   "controles": 1,
+   "rms_m": 256.38,
+   "mediana_m": 256.38,
+   "max_m": 256.376
+  }
+ ],
+ "comparacion_nucleo": [
+  {
+   "nodo_curado": "N1772-0001",
+   "desvio_curado_m": 11.046,
+   "nodo_damero": "X1772-0062",
+   "desvio_damero_m": 11.683,
+   "distancia_esquina_vs_curado_m": 5.46
+  },
+  {
+   "nodo_curado": "N1772-0002",
+   "desvio_curado_m": 5.309,
+   "nodo_damero": "X1772-0079",
+   "desvio_damero_m": 13.207,
+   "distancia_esquina_vs_curado_m": 9.85
+  },
+  {
+   "nodo_curado": "N1772-0003",
+   "desvio_curado_m": 13.313,
+   "nodo_damero": "X1772-0078",
+   "desvio_damero_m": 15.396,
+   "distancia_esquina_vs_curado_m": 2.58
+  },
+  {
+   "nodo_curado": "N1772-0004",
+   "desvio_curado_m": 18.378,
+   "nodo_damero": "X1772-0061",
+   "desvio_damero_m": 14.857,
+   "distancia_esquina_vs_curado_m": 7.26
+  },
+  {
+   "nodo_curado": "N1772-0005",
+   "desvio_curado_m": 3.603,
+   "nodo_damero": "X1772-0096",
+   "desvio_damero_m": 3.628,
+   "distancia_esquina_vs_curado_m": 5.48
+  },
+  {
+   "nodo_curado": "N1772-0006",
+   "desvio_curado_m": 9.737,
+   "nodo_damero": "X1772-0095",
+   "desvio_damero_m": 14.611,
+   "distancia_esquina_vs_curado_m": 5.49
+  },
+  {
+   "nodo_curado": "N1772-0007",
+   "desvio_curado_m": 0.901,
+   "nodo_damero": "X1772-0094",
+   "desvio_damero_m": 10.172,
+   "distancia_esquina_vs_curado_m": 9.52
+  },
+  {
+   "nodo_curado": "N1772-0008",
+   "desvio_curado_m": 4.767,
+   "nodo_damero": "X1772-0077",
+   "desvio_damero_m": 11.27,
+   "distancia_esquina_vs_curado_m": 6.63
+  },
+  {
+   "nodo_curado": "N1772-0009",
+   "desvio_curado_m": 6.659,
+   "nodo_damero": "X1772-0076",
+   "desvio_damero_m": 9.987,
+   "distancia_esquina_vs_curado_m": 6.92
+  },
+  {
+   "nodo_curado": "N1772-0010",
+   "desvio_curado_m": 10.63,
+   "nodo_damero": null,
+   "desvio_damero_m": null,
+   "distancia_esquina_vs_curado_m": null
+  },
+  {
+   "nodo_curado": "N1772-0011",
+   "desvio_curado_m": 20.789,
+   "nodo_damero": "X1772-0092",
+   "desvio_damero_m": 15.966,
+   "distancia_esquina_vs_curado_m": 6.97
+  },
+  {
+   "nodo_curado": "N1772-0012",
+   "desvio_curado_m": 20.699,
+   "nodo_damero": "X1772-0075",
+   "desvio_damero_m": 16.625,
+   "distancia_esquina_vs_curado_m": 7.51
+  },
+  {
+   "nodo_curado": "N1772-0013",
+   "desvio_curado_m": 50.225,
+   "nodo_damero": "X1772-0091",
+   "desvio_damero_m": 50.715,
+   "distancia_esquina_vs_curado_m": 5.96
+  },
+  {
+   "nodo_curado": "N1772-0014",
+   "desvio_curado_m": 48.875,
+   "nodo_damero": "X1772-0074",
+   "desvio_damero_m": 49.738,
+   "distancia_esquina_vs_curado_m": 6.64
+  },
+  {
+   "nodo_curado": "N1772-0015",
+   "desvio_curado_m": 93.23,
+   "nodo_damero": "X1772-0090",
+   "desvio_damero_m": 95.539,
+   "distancia_esquina_vs_curado_m": 5.08
+  },
+  {
+   "nodo_curado": "N1772-0016",
+   "desvio_curado_m": 96.162,
+   "nodo_damero": "X1772-0073",
+   "desvio_damero_m": 96.17,
+   "distancia_esquina_vs_curado_m": 3.21
+  },
+  {
+   "nodo_curado": "N1772-0017",
+   "desvio_curado_m": 13.636,
+   "nodo_damero": "X1772-0109",
+   "desvio_damero_m": 7.289,
+   "distancia_esquina_vs_curado_m": 7.57
+  },
+  {
+   "nodo_curado": "N1772-0018",
+   "desvio_curado_m": 21.171,
+   "nodo_damero": "X1772-0108",
+   "desvio_damero_m": 14.23,
+   "distancia_esquina_vs_curado_m": 6.96
+  },
+  {
+   "nodo_curado": "N1772-0019",
+   "desvio_curado_m": 49.605,
+   "nodo_damero": "X1772-0107",
+   "desvio_damero_m": 51.125,
+   "distancia_esquina_vs_curado_m": 3.89
+  },
+  {
+   "nodo_curado": "N1772-0020",
+   "desvio_curado_m": 21.177,
+   "nodo_damero": "X1772-0112",
+   "desvio_damero_m": 18.546,
+   "distancia_esquina_vs_curado_m": 6.86
+  },
+  {
+   "nodo_curado": "N1772-0021",
+   "desvio_curado_m": 12.86,
+   "nodo_damero": "X1772-0111",
+   "desvio_damero_m": 6.504,
+   "distancia_esquina_vs_curado_m": 8.35
+  },
+  {
+   "nodo_curado": "N1772-0022",
+   "desvio_curado_m": 9.599,
+   "nodo_damero": "X1772-0060",
+   "desvio_damero_m": 13.955,
+   "distancia_esquina_vs_curado_m": 4.36
+  },
+  {
+   "nodo_curado": "N1772-0023",
+   "desvio_curado_m": 8.418,
+   "nodo_damero": "X1772-0059",
+   "desvio_damero_m": 14.617,
+   "distancia_esquina_vs_curado_m": 6.57
+  }
+ ],
+ "nodos": [
+  {
+   "id": "X1772-0002",
+   "sector": "S1772-11",
+   "original": [
+    504.0,
+    395.0
+   ],
+   "indice": [
+    -7,
+    -6
+   ],
+   "esquina_1936": 268,
+   "mosaico_identidad": [
+    6802.4,
+    8581.1
+   ],
+   "mosaico_calce": [
+    7363.32,
+    8066.71
+   ],
+   "desvio_m": 380.532,
+   "delta_m": [
+    280.458,
+    -257.193
+   ],
+   "esquina_1936_nombre": "El Aguacate"
+  },
+  {
+   "id": "X1772-0005",
+   "sector": "S1772-13",
+   "original": [
+    1104.0,
+    395.0
+   ],
+   "indice": [
+    2,
+    -6
+   ],
+   "esquina_1936": 112,
+   "mosaico_identidad": [
+    7408.3,
+    6186.9
+   ],
+   "mosaico_calce": [
+    7721.11,
+    6207.22
+   ],
+   "desvio_m": 156.734,
+   "delta_m": [
+    156.404,
+    10.158
+   ],
+   "esquina_1936_nombre": "Pagüita"
+  },
+  {
+   "id": "X1772-0006",
+   "sector": "S1772-13",
+   "original": [
+    1170.0,
+    395.0
+   ],
+   "indice": [
+    3,
+    -6
+   ],
+   "esquina_1936": 94,
+   "mosaico_identidad": [
+    7397.5,
+    5893.0
+   ],
+   "mosaico_calce": [
+    7742.99,
+    5977.14
+   ],
+   "desvio_m": 177.796,
+   "delta_m": [
+    172.747,
+    42.071
+   ],
+   "esquina_1936_nombre": "Buena Vista"
+  },
+  {
+   "id": "X1772-0007",
+   "sector": "S1772-13",
+   "original": [
+    1236.0,
+    395.0
+   ],
+   "indice": [
+    4,
+    -6
+   ],
+   "esquina_1936": 78,
+   "mosaico_identidad": [
+    7388.0,
+    5613.0
+   ],
+   "mosaico_calce": [
+    7772.4,
+    5752.34
+   ],
+   "desvio_m": 204.435,
+   "delta_m": [
+    192.198,
+    69.668
+   ],
+   "esquina_1936_nombre": "El Porvenir"
+  },
+  {
+   "id": "X1772-0008",
+   "sector": "S1772-13",
+   "original": [
+    1304.0,
+    395.0
+   ],
+   "indice": [
+    5,
+    -6
+   ],
+   "esquina_1936": 63,
+   "mosaico_identidad": [
+    7461.0,
+    5315.0
+   ],
+   "mosaico_calce": [
+    7808.96,
+    5527.39
+   ],
+   "desvio_m": 203.832,
+   "delta_m": [
+    173.982,
+    106.197
+   ],
+   "esquina_1936_nombre": "La Concordia"
+  },
+  {
+   "id": "X1772-0010",
+   "sector": "S1772-11",
+   "original": [
+    504.0,
+    461.0
+   ],
+   "indice": [
+    -7,
+    -5
+   ],
+   "esquina_1936": 271,
+   "mosaico_identidad": [
+    7063.5,
+    8606.0
+   ],
+   "mosaico_calce": [
+    7555.55,
+    8098.73
+   ],
+   "desvio_m": 353.357,
+   "delta_m": [
+    246.027,
+    -253.637
+   ],
+   "esquina_1936_nombre": "Pepe Alemán"
+  },
+  {
+   "id": "X1772-0011",
+   "sector": "S1772-12",
+   "original": [
+    570.0,
+    461.0
+   ],
+   "indice": [
+    -6,
+    -5
+   ],
+   "esquina_1936": 249,
+   "mosaico_identidad": [
+    7104.1,
+    8330.1
+   ],
+   "mosaico_calce": [
+    7589.95,
+    7901.05
+   ],
+   "desvio_m": 324.09,
+   "delta_m": [
+    242.926,
+    -214.525
+   ],
+   "esquina_1936_nombre": "La Garita"
+  },
+  {
+   "id": "X1772-0012",
+   "sector": "S1772-12",
+   "original": [
+    637.0,
+    461.0
+   ],
+   "indice": [
+    -5,
+    -5
+   ],
+   "esquina_1936": 232,
+   "mosaico_identidad": [
+    7158.0,
+    8061.0
+   ],
+   "mosaico_calce": [
+    7627.65,
+    7704.44
+   ],
+   "desvio_m": 294.833,
+   "delta_m": [
+    234.825,
+    -178.28
+   ],
+   "esquina_1936_nombre": "Jesús"
+  },
+  {
+   "id": "X1772-0014",
+   "sector": "S1772-13",
+   "original": [
+    1104.0,
+    461.0
+   ],
+   "indice": [
+    2,
+    -5
+   ],
+   "esquina_1936": 113,
+   "mosaico_identidad": [
+    7636.0,
+    6217.8
+   ],
+   "mosaico_calce": [
+    7922.55,
+    6247.95
+   ],
+   "desvio_m": 144.068,
+   "delta_m": [
+    143.277,
+    15.077
+   ],
+   "esquina_1936_nombre": "Santa Bárbara"
+  },
+  {
+   "id": "X1772-0015",
+   "sector": "S1772-13",
+   "original": [
+    1170.0,
+    461.0
+   ],
+   "indice": [
+    3,
+    -5
+   ],
+   "esquina_1936": 97,
+   "mosaico_identidad": [
+    7658.5,
+    5943.5
+   ],
+   "mosaico_calce": [
+    7939.99,
+    6009.74
+   ],
+   "desvio_m": 144.587,
+   "delta_m": [
+    140.743,
+    33.119
+   ],
+   "esquina_1936_nombre": "Poleo"
+  },
+  {
+   "id": "X1772-0016",
+   "sector": "S1772-13",
+   "original": [
+    1236.0,
+    461.0
+   ],
+   "indice": [
+    4,
+    -5
+   ],
+   "esquina_1936": 82,
+   "mosaico_identidad": [
+    7686.9,
+    5669.4
+   ],
+   "mosaico_calce": [
+    7967.42,
+    5781.34
+   ],
+   "desvio_m": 151.015,
+   "delta_m": [
+    140.259,
+    55.972
+   ],
+   "esquina_1936_nombre": "La Ceiba"
+  },
+  {
+   "id": "X1772-0017",
+   "sector": "S1772-13",
+   "original": [
+    1304.0,
+    461.0
+   ],
+   "indice": [
+    5,
+    -5
+   ],
+   "esquina_1936": 65,
+   "mosaico_identidad": [
+    7717.8,
+    5367.1
+   ],
+   "mosaico_calce": [
+    8004.23,
+    5556.8
+   ],
+   "desvio_m": 171.776,
+   "delta_m": [
+    143.215,
+    94.85
+   ],
+   "esquina_1936_nombre": "Las Delicias"
+  },
+  {
+   "id": "X1772-0019",
+   "sector": "S1772-21",
+   "original": [
+    504.0,
+    528.0
+   ],
+   "indice": [
+    -7,
+    -4
+   ],
+   "esquina_1936": 275,
+   "mosaico_identidad": [
+    7347.1,
+    8653.5
+   ],
+   "mosaico_calce": [
+    7754.67,
+    8135.75
+   ],
+   "desvio_m": 329.463,
+   "delta_m": [
+    203.786,
+    -258.877
+   ],
+   "esquina_1936_nombre": "La Cochera"
+  },
+  {
+   "id": "X1772-0020",
+   "sector": "S1772-22",
+   "original": [
+    570.0,
+    528.0
+   ],
+   "indice": [
+    -6,
+    -4
+   ],
+   "esquina_1936": 250,
+   "mosaico_identidad": [
+    7376.4,
+    8352.4
+   ],
+   "mosaico_calce": [
+    7784.16,
+    7937.86
+   ],
+   "desvio_m": 290.739,
+   "delta_m": [
+    203.881,
+    -207.272
+   ],
+   "esquina_1936_nombre": "Pescador"
+  },
+  {
+   "id": "X1772-0021",
+   "sector": "S1772-23",
+   "original": [
+    1036.0,
+    528.0
+   ],
+   "indice": [
+    1,
+    -4
+   ],
+   "esquina_1936": 128,
+   "mosaico_identidad": [
+    7793.0,
+    6471.0
+   ],
+   "mosaico_calce": [
+    8098.94,
+    6535.44
+   ],
+   "desvio_m": 156.326,
+   "delta_m": [
+    152.969,
+    32.221
+   ],
+   "esquina_1936_nombre": "Moreno"
+  },
+  {
+   "id": "X1772-0022",
+   "sector": "S1772-23",
+   "original": [
+    1104.0,
+    528.0
+   ],
+   "indice": [
+    2,
+    -4
+   ],
+   "esquina_1936": 115,
+   "mosaico_identidad": [
+    7902.3,
+    6230.0
+   ],
+   "mosaico_calce": [
+    8126.51,
+    6290.39
+   ],
+   "desvio_m": 116.1,
+   "delta_m": [
+    112.105,
+    30.193
+   ],
+   "esquina_1936_nombre": "Miraflores"
+  },
+  {
+   "id": "X1772-0023",
+   "sector": "S1772-23",
+   "original": [
+    1170.0,
+    528.0
+   ],
+   "indice": [
+    3,
+    -4
+   ],
+   "esquina_1936": 100,
+   "mosaico_identidad": [
+    7931.5,
+    5990.5
+   ],
+   "mosaico_calce": [
+    8142.47,
+    6044.96
+   ],
+   "desvio_m": 108.945,
+   "delta_m": [
+    105.487,
+    27.23
+   ],
+   "esquina_1936_nombre": "El Paraíso"
+  },
+  {
+   "id": "X1772-0024",
+   "sector": "S1772-23",
+   "original": [
+    1236.0,
+    528.0
+   ],
+   "indice": [
+    4,
+    -4
+   ],
+   "esquina_1936": 85,
+   "mosaico_identidad": [
+    7966.0,
+    5725.8
+   ],
+   "mosaico_calce": [
+    8168.65,
+    5813.07
+   ],
+   "desvio_m": 110.322,
+   "delta_m": [
+    101.327,
+    43.633
+   ],
+   "esquina_1936_nombre": "Doctor González"
+  },
+  {
+   "id": "X1772-0025",
+   "sector": "S1772-23",
+   "original": [
+    1304.0,
+    528.0
+   ],
+   "indice": [
+    5,
+    -4
+   ],
+   "esquina_1936": 324,
+   "mosaico_identidad": [
+    8010.0,
+    5420.0
+   ],
+   "mosaico_calce": [
+    8205.47,
+    5589.17
+   ],
+   "desvio_m": 129.255,
+   "delta_m": [
+    97.736,
+    84.584
+   ],
+   "esquina_1936_nombre": "La Aurora"
+  },
+  {
+   "id": "X1772-0026",
+   "sector": "S1772-23",
+   "original": [
+    970.0,
+    594.0
+   ],
+   "indice": [
+    0,
+    -3
+   ],
+   "esquina_1936": 147,
+   "mosaico_identidad": [
+    8057.8,
+    6755.1
+   ],
+   "mosaico_calce": [
+    8237.44,
+    6804.16
+   ],
+   "desvio_m": 93.109,
+   "delta_m": [
+    89.82,
+    24.53
+   ],
+   "esquina_1936_nombre": "Solís"
+  },
+  {
+   "id": "X1772-0027",
+   "sector": "S1772-23",
+   "original": [
+    1036.0,
+    594.0
+   ],
+   "indice": [
+    1,
+    -3
+   ],
+   "esquina_1936": 134,
+   "mosaico_identidad": [
+    8100.9,
+    6569.8
+   ],
+   "mosaico_calce": [
+    8276.44,
+    6578.2
+   ],
+   "desvio_m": 87.868,
+   "delta_m": [
+    87.768,
+    4.201
+   ],
+   "esquina_1936_nombre": "Camino Nuevo"
+  },
+  {
+   "id": "X1772-0028",
+   "sector": "S1772-23",
+   "original": [
+    1104.0,
+    594.0
+   ],
+   "indice": [
+    2,
+    -3
+   ],
+   "esquina_1936": 121,
+   "mosaico_identidad": [
+    8149.3,
+    6312.9
+   ],
+   "mosaico_calce": [
+    8312.56,
+    6328.46
+   ],
+   "desvio_m": 81.998,
+   "delta_m": [
+    81.628,
+    7.779
+   ],
+   "esquina_1936_nombre": "Bolero"
+  },
+  {
+   "id": "X1772-0029",
+   "sector": "S1772-23",
+   "original": [
+    1170.0,
+    594.0
+   ],
+   "indice": [
+    3,
+    -3
+   ],
+   "esquina_1936": 103,
+   "mosaico_identidad": [
+    8198.7,
+    6034.5
+   ],
+   "mosaico_calce": [
+    8339.21,
+    6079.71
+   ],
+   "desvio_m": 73.803,
+   "delta_m": [
+    70.256,
+    22.606
+   ],
+   "esquina_1936_nombre": "Pineda"
+  },
+  {
+   "id": "X1772-0030",
+   "sector": "S1772-23",
+   "original": [
+    1236.0,
+    594.0
+   ],
+   "indice": [
+    4,
+    -3
+   ],
+   "esquina_1936": 89,
+   "mosaico_identidad": [
+    8239.5,
+    5771.6
+   ],
+   "mosaico_calce": [
+    8369.19,
+    5846.69
+   ],
+   "desvio_m": 74.929,
+   "delta_m": [
+    64.844,
+    37.544
+   ],
+   "esquina_1936_nombre": "El Toro"
+  },
+  {
+   "id": "X1772-0032",
+   "sector": "S1772-24",
+   "original": [
+    1439.0,
+    660.0
+   ],
+   "indice": [
+    7,
+    -2
+   ],
+   "esquina_1936": 42,
+   "mosaico_identidad": [
+    8619.8,
+    5037.8
+   ],
+   "mosaico_calce": [
+    8700.0,
+    5257.57
+   ],
+   "desvio_m": 116.971,
+   "delta_m": [
+    40.098,
+    109.883
+   ],
+   "esquina_1936_nombre": "9 de Febrero"
+  },
+  {
+   "id": "X1772-0033",
+   "sector": "S1772-24",
+   "original": [
+    1505.0,
+    660.0
+   ],
+   "indice": [
+    8,
+    -2
+   ],
+   "esquina_1936": 25,
+   "mosaico_identidad": [
+    8664.0,
+    4736.9
+   ],
+   "mosaico_calce": [
+    8749.68,
+    5059.04
+   ],
+   "desvio_m": 166.669,
+   "delta_m": [
+    42.841,
+    161.069
+   ],
+   "esquina_1936_nombre": "Dos Pilitas"
+  },
+  {
+   "id": "X1772-0035",
+   "sector": "S1772-21",
+   "original": [
+    437.0,
+    726.0
+   ],
+   "indice": [
+    -8,
+    -1
+   ],
+   "esquina_1936": 312,
+   "mosaico_identidad": [
+    8131.6,
+    9094.9
+   ],
+   "mosaico_calce": [
+    8323.97,
+    8520.39
+   ],
+   "desvio_m": 302.931,
+   "delta_m": [
+    96.187,
+    -287.255
+   ],
+   "esquina_1936_nombre": "Dolores"
+  },
+  {
+   "id": "X1772-0036",
+   "sector": "S1772-21",
+   "original": [
+    504.0,
+    726.0
+   ],
+   "indice": [
+    -7,
+    -1
+   ],
+   "esquina_1936": 290,
+   "mosaico_identidad": [
+    8187.9,
+    8824.1
+   ],
+   "mosaico_calce": [
+    8365.57,
+    8292.3
+   ],
+   "desvio_m": 280.345,
+   "delta_m": [
+    88.833,
+    -265.899
+   ],
+   "esquina_1936_nombre": "El Mamey"
+  },
+  {
+   "id": "X1772-0037",
+   "sector": "S1772-22",
+   "original": [
+    570.0,
+    726.0
+   ],
+   "indice": [
+    -6,
+    -1
+   ],
+   "esquina_1936": 266,
+   "mosaico_identidad": [
+    8245.2,
+    8537.0
+   ],
+   "mosaico_calce": [
+    8383.04,
+    8093.78
+   ],
+   "desvio_m": 232.082,
+   "delta_m": [
+    68.922,
+    -221.612
+   ],
+   "esquina_1936_nombre": "Pilita"
+  },
+  {
+   "id": "X1772-0038",
+   "sector": "S1772-22",
+   "original": [
+    637.0,
+    726.0
+   ],
+   "indice": [
+    -5,
+    -1
+   ],
+   "esquina_1936": 243,
+   "mosaico_identidad": [
+    8295.5,
+    8258.0
+   ],
+   "mosaico_calce": [
+    8399.81,
+    7910.68
+   ],
+   "desvio_m": 181.324,
+   "delta_m": [
+    52.156,
+    -173.661
+   ],
+   "esquina_1936_nombre": "La Glorieta"
+  },
+  {
+   "id": "X1772-0039",
+   "sector": "S1772-22",
+   "original": [
+    702.0,
+    726.0
+   ],
+   "indice": [
+    -4,
+    -1
+   ],
+   "esquina_1936": 218,
+   "mosaico_identidad": [
+    8366.0,
+    7922.8
+   ],
+   "mosaico_calce": [
+    8429.76,
+    7736.95
+   ],
+   "desvio_m": 98.243,
+   "delta_m": [
+    31.881,
+    -92.926
+   ],
+   "esquina_1936_nombre": "El Reducto"
+  },
+  {
+   "id": "X1772-0040",
+   "sector": "S1772-22",
+   "original": [
+    768.0,
+    726.0
+   ],
+   "indice": [
+    -3,
+    -1
+   ],
+   "esquina_1936": 200,
+   "mosaico_identidad": [
+    8405.9,
+    7644.1
+   ],
+   "mosaico_calce": [
+    8463.19,
+    7562.45
+   ],
+   "desvio_m": 49.871,
+   "delta_m": [
+    28.644,
+    -40.825
+   ],
+   "esquina_1936_nombre": "San Pablo"
+  },
+  {
+   "id": "X1772-0041",
+   "sector": "S1772-22",
+   "original": [
+    835.0,
+    726.0
+   ],
+   "indice": [
+    -2,
+    -1
+   ],
+   "esquina_1936": 184,
+   "mosaico_identidad": [
+    8472.8,
+    7391.1
+   ],
+   "mosaico_calce": [
+    8497.97,
+    7372.18
+   ],
+   "desvio_m": 15.744,
+   "delta_m": [
+    12.584,
+    -9.461
+   ],
+   "esquina_1936_nombre": "Mercaderes"
+  },
+  {
+   "id": "X1772-0042",
+   "sector": "S1772-22",
+   "original": [
+    903.0,
+    726.0
+   ],
+   "indice": [
+    -1,
+    -1
+   ],
+   "esquina_1936": 169,
+   "mosaico_identidad": [
+    8518.0,
+    7127.0
+   ],
+   "mosaico_calce": [
+    8545.02,
+    7140.05
+   ],
+   "desvio_m": 15.004,
+   "delta_m": [
+    13.512,
+    6.523
+   ],
+   "esquina_1936_nombre": "La Bolsa"
+  },
+  {
+   "id": "X1772-0043",
+   "sector": "S1772-23",
+   "original": [
+    970.0,
+    726.0
+   ],
+   "indice": [
+    0,
+    -1
+   ],
+   "esquina_1936": 154,
+   "mosaico_identidad": [
+    8581.6,
+    6865.4
+   ],
+   "mosaico_calce": [
+    8597.12,
+    6890.98
+   ],
+   "desvio_m": 14.958,
+   "delta_m": [
+    7.758,
+    12.789
+   ],
+   "esquina_1936_nombre": "Padre Sierra"
+  },
+  {
+   "id": "X1772-0044",
+   "sector": "S1772-23",
+   "original": [
+    1036.0,
+    726.0
+   ],
+   "indice": [
+    1,
+    -1
+   ],
+   "esquina_1936": 141,
+   "mosaico_identidad": [
+    8626.0,
+    6668.5
+   ],
+   "mosaico_calce": [
+    8645.35,
+    6653.54
+   ],
+   "desvio_m": 12.229,
+   "delta_m": [
+    9.674,
+    -7.48
+   ],
+   "esquina_1936_nombre": "El Conde"
+  },
+  {
+   "id": "X1772-0045",
+   "sector": "S1772-23",
+   "original": [
+    1104.0,
+    726.0
+   ],
+   "indice": [
+    2,
+    -1
+   ],
+   "esquina_1936": 124,
+   "mosaico_identidad": [
+    8681.8,
+    6407.9
+   ],
+   "mosaico_calce": [
+    8696.51,
+    6402.75
+   ],
+   "desvio_m": 7.795,
+   "delta_m": [
+    7.357,
+    -2.575
+   ],
+   "esquina_1936_nombre": "Las Carmelitas"
+  },
+  {
+   "id": "X1772-0046",
+   "sector": "S1772-23",
+   "original": [
+    1170.0,
+    726.0
+   ],
+   "indice": [
+    3,
+    -1
+   ],
+   "esquina_1936": 108,
+   "mosaico_identidad": [
+    8731.8,
+    6140.0
+   ],
+   "mosaico_calce": [
+    8742.54,
+    6158.49
+   ],
+   "desvio_m": 10.691,
+   "delta_m": [
+    5.369,
+    9.245
+   ],
+   "esquina_1936_nombre": "Altagracia"
+  },
+  {
+   "id": "X1772-0047",
+   "sector": "S1772-23",
+   "original": [
+    1236.0,
+    726.0
+   ],
+   "indice": [
+    4,
+    -1
+   ],
+   "esquina_1936": 93,
+   "mosaico_identidad": [
+    8779.8,
+    5877.9
+   ],
+   "mosaico_calce": [
+    8784.77,
+    5930.86
+   ],
+   "desvio_m": 26.595,
+   "delta_m": [
+    2.484,
+    26.479
+   ],
+   "esquina_1936_nombre": "Salas"
+  },
+  {
+   "id": "X1772-0048",
+   "sector": "S1772-23",
+   "original": [
+    1304.0,
+    726.0
+   ],
+   "indice": [
+    5,
+    -1
+   ],
+   "esquina_1936": 76,
+   "mosaico_identidad": [
+    8838.1,
+    5583.3
+   ],
+   "mosaico_calce": [
+    8824.72,
+    5716.73
+   ],
+   "desvio_m": 67.05,
+   "delta_m": [
+    -6.689,
+    66.716
+   ],
+   "esquina_1936_nombre": "Caja de Agua"
+  },
+  {
+   "id": "X1772-0052",
+   "sector": "S1772-21",
+   "original": [
+    437.0,
+    793.0
+   ],
+   "indice": [
+    -8,
+    0
+   ],
+   "esquina_1936": 313,
+   "mosaico_identidad": [
+    8394.5,
+    9146.0
+   ],
+   "mosaico_calce": [
+    8529.74,
+    8581.78
+   ],
+   "desvio_m": 290.101,
+   "delta_m": [
+    67.622,
+    -282.11
+   ],
+   "esquina_1936_nombre": "Bárcenas"
+  },
+  {
+   "id": "X1772-0053",
+   "sector": "S1772-21",
+   "original": [
+    504.0,
+    793.0
+   ],
+   "indice": [
+    -7,
+    0
+   ],
+   "esquina_1936": 295,
+   "mosaico_identidad": [
+    8448.1,
+    8876.6
+   ],
+   "mosaico_calce": [
+    8575.75,
+    8346.03
+   ],
+   "desvio_m": 272.853,
+   "delta_m": [
+    63.827,
+    -265.283
+   ],
+   "esquina_1936_nombre": "Monzón"
+  },
+  {
+   "id": "X1772-0054",
+   "sector": "S1772-22",
+   "original": [
+    570.0,
+    793.0
+   ],
+   "indice": [
+    -6,
+    0
+   ],
+   "esquina_1936": 272,
+   "mosaico_identidad": [
+    8512.0,
+    8596.0
+   ],
+   "mosaico_calce": [
+    8605.67,
+    8146.66
+   ],
+   "desvio_m": 229.501,
+   "delta_m": [
+    46.837,
+    -224.671
+   ],
+   "esquina_1936_nombre": "La Cárcel"
+  },
+  {
+   "id": "X1772-0055",
+   "sector": "S1772-22",
+   "original": [
+    637.0,
+    793.0
+   ],
+   "indice": [
+    -5,
+    0
+   ],
+   "esquina_1936": 248,
+   "mosaico_identidad": [
+    8560.6,
+    8328.4
+   ],
+   "mosaico_calce": [
+    8632.3,
+    7964.56
+   ],
+   "desvio_m": 185.42,
+   "delta_m": [
+    35.851,
+    -181.921
+   ],
+   "esquina_1936_nombre": "El Hospital"
+  },
+  {
+   "id": "X1772-0056",
+   "sector": "S1772-22",
+   "original": [
+    702.0,
+    793.0
+   ],
+   "indice": [
+    -4,
+    0
+   ],
+   "esquina_1936": 222,
+   "mosaico_identidad": [
+    8636.1,
+    7985.3
+   ],
+   "mosaico_calce": [
+    8663.5,
+    7788.63
+   ],
+   "desvio_m": 99.283,
+   "delta_m": [
+    13.701,
+    -98.333
+   ],
+   "esquina_1936_nombre": "Miracielos"
+  },
+  {
+   "id": "X1772-0057",
+   "sector": "S1772-22",
+   "original": [
+    768.0,
+    793.0
+   ],
+   "indice": [
+    -3,
+    0
+   ],
+   "esquina_1936": 202,
+   "mosaico_identidad": [
+    8691.7,
+    7711.0
+   ],
+   "mosaico_calce": [
+    8695.82,
+    7614.1
+   ],
+   "desvio_m": 48.495,
+   "delta_m": [
+    2.06,
+    -48.451
+   ],
+   "esquina_1936_nombre": "La Palma"
+  },
+  {
+   "id": "X1772-0058",
+   "sector": "S1772-22",
+   "original": [
+    835.0,
+    793.0
+   ],
+   "indice": [
+    -2,
+    0
+   ],
+   "esquina_1936": 185,
+   "mosaico_identidad": [
+    8732.4,
+    7393.6
+   ],
+   "mosaico_calce": [
+    8727.87,
+    7422.04
+   ],
+   "desvio_m": 14.397,
+   "delta_m": [
+    -2.265,
+    14.218
+   ],
+   "esquina_1936_nombre": "Pajaritos"
+  },
+  {
+   "id": "X1772-0059",
+   "sector": "S1772-22",
+   "original": [
+    903.0,
+    793.0
+   ],
+   "indice": [
+    -1,
+    0
+   ],
+   "esquina_1936": 171,
+   "mosaico_identidad": [
+    8798.0,
+    7182.0
+   ],
+   "mosaico_calce": [
+    8768.77,
+    7181.78
+   ],
+   "desvio_m": 14.617,
+   "delta_m": [
+    -14.617,
+    -0.111
+   ],
+   "esquina_1936_nombre": "San Francisco"
+  },
+  {
+   "id": "X1772-0060",
+   "sector": "S1772-23",
+   "original": [
+    970.0,
+    793.0
+   ],
+   "indice": [
+    0,
+    0
+   ],
+   "esquina_1936": 156,
+   "mosaico_identidad": [
+    8846.0,
+    6914.0
+   ],
+   "mosaico_calce": [
+    8821.22,
+    6926.84
+   ],
+   "desvio_m": 13.955,
+   "delta_m": [
+    -12.39,
+    6.422
+   ],
+   "esquina_1936_nombre": "Las Monjas"
+  },
+  {
+   "id": "X1772-0061",
+   "sector": "S1772-23",
+   "original": [
+    1036.0,
+    793.0
+   ],
+   "indice": [
+    1,
+    0
+   ],
+   "esquina_1936": 144,
+   "mosaico_identidad": [
+    8880.0,
+    6719.0
+   ],
+   "mosaico_calce": [
+    8872.93,
+    6690.14
+   ],
+   "desvio_m": 14.857,
+   "delta_m": [
+    -3.536,
+    -14.43
+   ],
+   "esquina_1936_nombre": "Principal"
+  },
+  {
+   "id": "X1772-0062",
+   "sector": "S1772-23",
+   "original": [
+    1104.0,
+    793.0
+   ],
+   "indice": [
+    2,
+    0
+   ],
+   "esquina_1936": 126,
+   "mosaico_identidad": [
+    8939.7,
+    6458.0
+   ],
+   "mosaico_calce": [
+    8925.64,
+    6439.34
+   ],
+   "desvio_m": 11.683,
+   "delta_m": [
+    -7.032,
+    -9.33
+   ],
+   "esquina_1936_nombre": "Santa Capilla"
+  },
+  {
+   "id": "X1772-0063",
+   "sector": "S1772-23",
+   "original": [
+    1170.0,
+    793.0
+   ],
+   "indice": [
+    3,
+    0
+   ],
+   "esquina_1936": 110,
+   "mosaico_identidad": [
+    8994.5,
+    6190.0
+   ],
+   "mosaico_calce": [
+    8972.39,
+    6199.68
+   ],
+   "desvio_m": 12.069,
+   "delta_m": [
+    -11.055,
+    4.842
+   ],
+   "esquina_1936_nombre": "Mijares"
+  },
+  {
+   "id": "X1772-0064",
+   "sector": "S1772-23",
+   "original": [
+    1236.0,
+    793.0
+   ],
+   "indice": [
+    4,
+    0
+   ],
+   "esquina_1936": 96,
+   "mosaico_identidad": [
+    9071.2,
+    5886.0
+   ],
+   "mosaico_calce": [
+    9010.9,
+    5981.61
+   ],
+   "desvio_m": 56.517,
+   "delta_m": [
+    -30.148,
+    47.804
+   ],
+   "esquina_1936_nombre": "Las Mercedes"
+  },
+  {
+   "id": "X1772-0065",
+   "sector": "S1772-23",
+   "original": [
+    1304.0,
+    793.0
+   ],
+   "indice": [
+    5,
+    0
+   ],
+   "esquina_1936": 80,
+   "mosaico_identidad": [
+    9072.3,
+    5649.0
+   ],
+   "mosaico_calce": [
+    9046.94,
+    5773.94
+   ],
+   "desvio_m": 63.744,
+   "delta_m": [
+    -12.681,
+    62.47
+   ],
+   "esquina_1936_nombre": "Luneta de la Merced"
+  },
+  {
+   "id": "X1772-0069",
+   "sector": "S1772-21",
+   "original": [
+    437.0,
+    859.0
+   ],
+   "indice": [
+    -8,
+    1
+   ],
+   "esquina_1936": 314,
+   "mosaico_identidad": [
+    8635.1,
+    9188.3
+   ],
+   "mosaico_calce": [
+    8743.22,
+    8634.78
+   ],
+   "desvio_m": 281.989,
+   "delta_m": [
+    54.062,
+    -276.758
+   ],
+   "esquina_1936_nombre": "Las Piedras"
+  },
+  {
+   "id": "X1772-0070",
+   "sector": "S1772-21",
+   "original": [
+    504.0,
+    859.0
+   ],
+   "indice": [
+    -7,
+    1
+   ],
+   "esquina_1936": 297,
+   "mosaico_identidad": [
+    8681.0,
+    8921.5
+   ],
+   "mosaico_calce": [
+    8794.62,
+    8400.61
+   ],
+   "desvio_m": 266.568,
+   "delta_m": [
+    56.809,
+    -260.444
+   ],
+   "esquina_1936_nombre": "La Palmita"
+  },
+  {
+   "id": "X1772-0071",
+   "sector": "S1772-22",
+   "original": [
+    570.0,
+    859.0
+   ],
+   "indice": [
+    -6,
+    1
+   ],
+   "esquina_1936": 276,
+   "mosaico_identidad": [
+    8733.0,
+    8647.5
+   ],
+   "mosaico_calce": [
+    8832.78,
+    8200.03
+   ],
+   "desvio_m": 229.232,
+   "delta_m": [
+    49.891,
+    -223.737
+   ],
+   "esquina_1936_nombre": "Castán"
+  },
+  {
+   "id": "X1772-0072",
+   "sector": "S1772-22",
+   "original": [
+    637.0,
+    859.0
+   ],
+   "indice": [
+    -5,
+    1
+   ],
+   "esquina_1936": 251,
+   "mosaico_identidad": [
+    8781.0,
+    8379.5
+   ],
+   "mosaico_calce": [
+    8866.27,
+    8016.37
+   ],
+   "desvio_m": 186.503,
+   "delta_m": [
+    42.634,
+    -181.565
+   ],
+   "esquina_1936_nombre": "El Hoyo"
+  },
+  {
+   "id": "X1772-0073",
+   "sector": "S1772-22",
+   "original": [
+    702.0,
+    859.0
+   ],
+   "indice": [
+    -4,
+    1
+   ],
+   "esquina_1936": 227,
+   "mosaico_identidad": [
+    8846.0,
+    8024.0
+   ],
+   "mosaico_calce": [
+    8900.41,
+    7839.52
+   ],
+   "desvio_m": 96.17,
+   "delta_m": [
+    27.205,
+    -92.242
+   ],
+   "esquina_1936_nombre": "Los Cipreses"
+  },
+  {
+   "id": "X1772-0074",
+   "sector": "S1772-22",
+   "original": [
+    768.0,
+    859.0
+   ],
+   "indice": [
+    -3,
+    1
+   ],
+   "esquina_1936": 205,
+   "mosaico_identidad": [
+    8898.0,
+    7754.0
+   ],
+   "mosaico_calce": [
+    8934.61,
+    7661.51
+   ],
+   "desvio_m": 49.738,
+   "delta_m": [
+    18.306,
+    -46.247
+   ],
+   "esquina_1936_nombre": "Santa Teresa"
+  },
+  {
+   "id": "X1772-0075",
+   "sector": "S1772-22",
+   "original": [
+    835.0,
+    859.0
+   ],
+   "indice": [
+    -2,
+    1
+   ],
+   "esquina_1936": 191,
+   "mosaico_identidad": [
+    8942.5,
+    7487.0
+   ],
+   "mosaico_calce": [
+    8968.84,
+    7466.71
+   ],
+   "desvio_m": 16.625,
+   "delta_m": [
+    13.172,
+    -10.143
+   ],
+   "esquina_1936_nombre": "Camejo"
+  },
+  {
+   "id": "X1772-0076",
+   "sector": "S1772-22",
+   "original": [
+    903.0,
+    859.0
+   ],
+   "indice": [
+    -1,
+    1
+   ],
+   "esquina_1936": 174,
+   "mosaico_identidad": [
+    8990.8,
+    7223.8
+   ],
+   "mosaico_calce": [
+    9010.59,
+    7221.08
+   ],
+   "desvio_m": 9.987,
+   "delta_m": [
+    9.894,
+    -1.362
+   ],
+   "esquina_1936_nombre": "Sociedad"
+  },
+  {
+   "id": "X1772-0077",
+   "sector": "S1772-23",
+   "original": [
+    970.0,
+    859.0
+   ],
+   "indice": [
+    0,
+    1
+   ],
+   "esquina_1936": 158,
+   "mosaico_identidad": [
+    9043.0,
+    6951.0
+   ],
+   "mosaico_calce": [
+    9059.97,
+    6965.83
+   ],
+   "desvio_m": 11.27,
+   "delta_m": [
+    8.487,
+    7.415
+   ],
+   "esquina_1936_nombre": "Las Gradillas"
+  },
+  {
+   "id": "X1772-0078",
+   "sector": "S1772-23",
+   "original": [
+    1036.0,
+    859.0
+   ],
+   "indice": [
+    1,
+    1
+   ],
+   "esquina_1936": 146,
+   "mosaico_identidad": [
+    9088.0,
+    6754.0
+   ],
+   "mosaico_calce": [
+    9108.65,
+    6731.16
+   ],
+   "desvio_m": 15.396,
+   "delta_m": [
+    10.325,
+    -11.421
+   ],
+   "esquina_1936_nombre": "La Torre"
+  },
+  {
+   "id": "X1772-0079",
+   "sector": "S1772-23",
+   "original": [
+    1104.0,
+    859.0
+   ],
+   "indice": [
+    2,
+    1
+   ],
+   "esquina_1936": 130,
+   "mosaico_identidad": [
+    9133.1,
+    6490.0
+   ],
+   "mosaico_calce": [
+    9157.55,
+    6480.0
+   ],
+   "desvio_m": 13.207,
+   "delta_m": [
+    12.225,
+    -4.998
+   ],
+   "esquina_1936_nombre": "Veroes"
+  },
+  {
+   "id": "X1772-0080",
+   "sector": "S1772-23",
+   "original": [
+    1170.0,
+    859.0
+   ],
+   "indice": [
+    3,
+    1
+   ],
+   "esquina_1936": 114,
+   "mosaico_identidad": [
+    9189.5,
+    6229.0
+   ],
+   "mosaico_calce": [
+    9200.25,
+    6246.8
+   ],
+   "desvio_m": 10.397,
+   "delta_m": [
+    5.376,
+    8.899
+   ],
+   "esquina_1936_nombre": "Jesuitas"
+  },
+  {
+   "id": "X1772-0081",
+   "sector": "S1772-23",
+   "original": [
+    1236.0,
+    859.0
+   ],
+   "indice": [
+    4,
+    1
+   ],
+   "esquina_1936": 98,
+   "mosaico_identidad": [
+    9244.3,
+    5976.0
+   ],
+   "mosaico_calce": [
+    9234.95,
+    6039.09
+   ],
+   "desvio_m": 31.892,
+   "delta_m": [
+    -4.675,
+    31.547
+   ],
+   "esquina_1936_nombre": null
+  },
+  {
+   "id": "X1772-0082",
+   "sector": "S1772-24",
+   "original": [
+    1370.0,
+    859.0
+   ],
+   "indice": [
+    6,
+    1
+   ],
+   "esquina_1936": 68,
+   "mosaico_identidad": [
+    9356.6,
+    5374.4
+   ],
+   "mosaico_calce": [
+    9302.39,
+    5644.24
+   ],
+   "desvio_m": 137.614,
+   "delta_m": [
+    -27.106,
+    134.918
+   ],
+   "esquina_1936_nombre": "Panteón"
+  },
+  {
+   "id": "X1772-0083",
+   "sector": "S1772-24",
+   "original": [
+    1439.0,
+    859.0
+   ],
+   "indice": [
+    7,
+    1
+   ],
+   "esquina_1936": 55,
+   "mosaico_identidad": [
+    9385.9,
+    5178.4
+   ],
+   "mosaico_calce": [
+    9341.73,
+    5439.3
+   ],
+   "desvio_m": 132.306,
+   "delta_m": [
+    -22.083,
+    130.45
+   ],
+   "esquina_1936_nombre": "El Misterio"
+  },
+  {
+   "id": "X1772-0084",
+   "sector": "S1772-24",
+   "original": [
+    1505.0,
+    859.0
+   ],
+   "indice": [
+    8,
+    1
+   ],
+   "esquina_1936": 44,
+   "mosaico_identidad": [
+    9468.7,
+    4944.7
+   ],
+   "mosaico_calce": [
+    9382.79,
+    5235.69
+   ],
+   "desvio_m": 151.704,
+   "delta_m": [
+    -42.957,
+    145.495
+   ],
+   "esquina_1936_nombre": "Macuro"
+  },
+  {
+   "id": "X1772-0086",
+   "sector": "S1772-31",
+   "original": [
+    437.0,
+    926.0
+   ],
+   "indice": [
+    -8,
+    2
+   ],
+   "esquina_1936": 316,
+   "mosaico_identidad": [
+    8903.0,
+    9224.5
+   ],
+   "mosaico_calce": [
+    8960.95,
+    8686.85
+   ],
+   "desvio_m": 270.384,
+   "delta_m": [
+    28.977,
+    -268.827
+   ],
+   "esquina_1936_nombre": "El Venado"
+  },
+  {
+   "id": "X1772-0087",
+   "sector": "S1772-31",
+   "original": [
+    504.0,
+    926.0
+   ],
+   "indice": [
+    -7,
+    2
+   ],
+   "esquina_1936": 302,
+   "mosaico_identidad": [
+    8949.0,
+    8971.0
+   ],
+   "mosaico_calce": [
+    9019.57,
+    8464.12
+   ],
+   "desvio_m": 255.885,
+   "delta_m": [
+    35.287,
+    -253.44
+   ],
+   "esquina_1936_nombre": "Tablitas"
+  },
+  {
+   "id": "X1772-0088",
+   "sector": "S1772-32",
+   "original": [
+    570.0,
+    926.0
+   ],
+   "indice": [
+    -6,
+    2
+   ],
+   "esquina_1936": 279,
+   "mosaico_identidad": [
+    8996.5,
+    8701.0
+   ],
+   "mosaico_calce": [
+    9064.21,
+    8261.3
+   ],
+   "desvio_m": 222.44,
+   "delta_m": [
+    33.855,
+    -219.849
+   ],
+   "esquina_1936_nombre": "Candilito"
+  },
+  {
+   "id": "X1772-0089",
+   "sector": "S1772-32",
+   "original": [
+    637.0,
+    926.0
+   ],
+   "indice": [
+    -5,
+    2
+   ],
+   "esquina_1936": 256,
+   "mosaico_identidad": [
+    9043.0,
+    8429.0
+   ],
+   "mosaico_calce": [
+    9105.54,
+    8073.52
+   ],
+   "desvio_m": 180.472,
+   "delta_m": [
+    31.272,
+    -177.742
+   ],
+   "esquina_1936_nombre": "Santa Rosalía"
+  },
+  {
+   "id": "X1772-0090",
+   "sector": "S1772-32",
+   "original": [
+    702.0,
+    926.0
+   ],
+   "indice": [
+    -4,
+    2
+   ],
+   "esquina_1936": 233,
+   "mosaico_identidad": [
+    9107.6,
+    8085.1
+   ],
+   "mosaico_calce": [
+    9144.82,
+    7897.68
+   ],
+   "desvio_m": 95.539,
+   "delta_m": [
+    18.609,
+    -93.709
+   ],
+   "esquina_1936_nombre": "Velásquez"
+  },
+  {
+   "id": "X1772-0091",
+   "sector": "S1772-32",
+   "original": [
+    768.0,
+    926.0
+   ],
+   "indice": [
+    -3,
+    2
+   ],
+   "esquina_1936": 211,
+   "mosaico_identidad": [
+    9156.0,
+    7816.0
+   ],
+   "mosaico_calce": [
+    9185.91,
+    7719.08
+   ],
+   "desvio_m": 50.715,
+   "delta_m": [
+    14.956,
+    -48.46
+   ],
+   "esquina_1936_nombre": "Cruz Verde"
+  },
+  {
+   "id": "X1772-0092",
+   "sector": "S1772-32",
+   "original": [
+    835.0,
+    926.0
+   ],
+   "indice": [
+    -2,
+    2
+   ],
+   "esquina_1936": 328,
+   "mosaico_identidad": [
+    9206.5,
+    7543.1
+   ],
+   "mosaico_calce": [
+    9228.66,
+    7520.11
+   ],
+   "desvio_m": 15.966,
+   "delta_m": [
+    11.082,
+    -11.494
+   ],
+   "esquina_1936_nombre": "Colón"
+  },
+  {
+   "id": "X1772-0094",
+   "sector": "S1772-33",
+   "original": [
+    970.0,
+    926.0
+   ],
+   "indice": [
+    0,
+    2
+   ],
+   "esquina_1936": 163,
+   "mosaico_identidad": [
+    9301.0,
+    7011.0
+   ],
+   "mosaico_calce": [
+    9320.52,
+    7016.72
+   ],
+   "desvio_m": 10.172,
+   "delta_m": [
+    9.762,
+    2.859
+   ],
+   "esquina_1936_nombre": "San Jacinto"
+  },
+  {
+   "id": "X1772-0095",
+   "sector": "S1772-33",
+   "original": [
+    1036.0,
+    926.0
+   ],
+   "indice": [
+    1,
+    2
+   ],
+   "esquina_1936": 150,
+   "mosaico_identidad": [
+    9347.7,
+    6805.5
+   ],
+   "mosaico_calce": [
+    9364.43,
+    6781.54
+   ],
+   "desvio_m": 14.611,
+   "delta_m": [
+    8.365,
+    -11.979
+   ],
+   "esquina_1936_nombre": "Las Madrices"
+  },
+  {
+   "id": "X1772-0096",
+   "sector": "S1772-33",
+   "original": [
+    1104.0,
+    926.0
+   ],
+   "indice": [
+    2,
+    2
+   ],
+   "esquina_1936": 132,
+   "mosaico_identidad": [
+    9397.1,
+    6538.7
+   ],
+   "mosaico_calce": [
+    9404.27,
+    6537.61
+   ],
+   "desvio_m": 3.628,
+   "delta_m": [
+    3.587,
+    -0.543
+   ],
+   "esquina_1936_nombre": "Las Ibarras"
+  },
+  {
+   "id": "X1772-0097",
+   "sector": "S1772-33",
+   "original": [
+    1170.0,
+    926.0
+   ],
+   "indice": [
+    3,
+    2
+   ],
+   "esquina_1936": 117,
+   "mosaico_identidad": [
+    9451.5,
+    6271.6
+   ],
+   "mosaico_calce": [
+    9433.59,
+    6314.46
+   ],
+   "desvio_m": 23.226,
+   "delta_m": [
+    -8.956,
+    21.43
+   ],
+   "esquina_1936_nombre": "Maturín"
+  },
+  {
+   "id": "X1772-0100",
+   "sector": "S1772-34",
+   "original": [
+    1439.0,
+    926.0
+   ],
+   "indice": [
+    7,
+    2
+   ],
+   "esquina_1936": 59,
+   "mosaico_identidad": [
+    9595.8,
+    5169.8
+   ],
+   "mosaico_calce": [
+    9559.65,
+    5506.8
+   ],
+   "desvio_m": 169.469,
+   "delta_m": [
+    -18.075,
+    168.502
+   ],
+   "esquina_1936_nombre": "La Eternidad"
+  },
+  {
+   "id": "X1772-0102",
+   "sector": "S1772-31",
+   "original": [
+    437.0,
+    992.0
+   ],
+   "indice": [
+    -8,
+    3
+   ],
+   "esquina_1936": 318,
+   "mosaico_identidad": [
+    9117.1,
+    9251.9
+   ],
+   "mosaico_calce": [
+    9164.51,
+    8734.26
+   ],
+   "desvio_m": 259.904,
+   "delta_m": [
+    23.705,
+    -258.821
+   ],
+   "esquina_1936_nombre": "Guayabal"
+  },
+  {
+   "id": "X1772-0103",
+   "sector": "S1772-31",
+   "original": [
+    504.0,
+    992.0
+   ],
+   "indice": [
+    -7,
+    3
+   ],
+   "esquina_1936": 307,
+   "mosaico_identidad": [
+    9168.5,
+    9011.9
+   ],
+   "mosaico_calce": [
+    9225.6,
+    8520.96
+   ],
+   "desvio_m": 247.124,
+   "delta_m": [
+    28.552,
+    -245.469
+   ],
+   "esquina_1936_nombre": null
+  },
+  {
+   "id": "X1772-0104",
+   "sector": "S1772-32",
+   "original": [
+    570.0,
+    992.0
+   ],
+   "indice": [
+    -6,
+    3
+   ],
+   "esquina_1936": 281,
+   "mosaico_identidad": [
+    9333.7,
+    8673.6
+   ],
+   "mosaico_calce": [
+    9276.7,
+    8319.77
+   ],
+   "desvio_m": 179.194,
+   "delta_m": [
+    -28.5,
+    -176.913
+   ],
+   "esquina_1936_nombre": null
+  },
+  {
+   "id": "X1772-0105",
+   "sector": "S1772-32",
+   "original": [
+    637.0,
+    992.0
+   ],
+   "indice": [
+    -5,
+    3
+   ],
+   "esquina_1936": 259,
+   "mosaico_identidad": [
+    9304.2,
+    8471.9
+   ],
+   "mosaico_calce": [
+    9324.33,
+    8129.04
+   ],
+   "desvio_m": 171.727,
+   "delta_m": [
+    10.066,
+    -171.432
+   ],
+   "esquina_1936_nombre": "Pinto"
+  },
+  {
+   "id": "X1772-0106",
+   "sector": "S1772-32",
+   "original": [
+    702.0,
+    992.0
+   ],
+   "indice": [
+    -4,
+    3
+   ],
+   "esquina_1936": 235,
+   "mosaico_identidad": [
+    9382.0,
+    8136.2
+   ],
+   "mosaico_calce": [
+    9370.36,
+    7954.32
+   ],
+   "desvio_m": 91.128,
+   "delta_m": [
+    -5.819,
+    -90.942
+   ],
+   "esquina_1936_nombre": "La Miseria"
+  },
+  {
+   "id": "X1772-0107",
+   "sector": "S1772-32",
+   "original": [
+    768.0,
+    992.0
+   ],
+   "indice": [
+    -3,
+    3
+   ],
+   "esquina_1936": 215,
+   "mosaico_identidad": [
+    9425.0,
+    7878.5
+   ],
+   "mosaico_calce": [
+    9419.37,
+    7776.41
+   ],
+   "desvio_m": 51.125,
+   "delta_m": [
+    -2.814,
+    -51.047
+   ],
+   "esquina_1936_nombre": "El Zamuro"
+  },
+  {
+   "id": "X1772-0108",
+   "sector": "S1772-32",
+   "original": [
+    835.0,
+    992.0
+   ],
+   "indice": [
+    -2,
+    3
+   ],
+   "esquina_1936": 196,
+   "mosaico_identidad": [
+    9474.9,
+    7599.9
+   ],
+   "mosaico_calce": [
+    9468.81,
+    7572.1
+   ],
+   "desvio_m": 14.23,
+   "delta_m": [
+    -3.046,
+    -13.9
+   ],
+   "esquina_1936_nombre": "Doctor Díaz"
+  },
+  {
+   "id": "X1772-0109",
+   "sector": "S1772-32",
+   "original": [
+    903.0,
+    992.0
+   ],
+   "indice": [
+    -1,
+    3
+   ],
+   "esquina_1936": 182,
+   "mosaico_identidad": [
+    9515.0,
+    7338.5
+   ],
+   "mosaico_calce": [
+    9517.05,
+    7324.07
+   ],
+   "desvio_m": 7.289,
+   "delta_m": [
+    1.025,
+    -7.217
+   ],
+   "esquina_1936_nombre": "El Chorro"
+  },
+  {
+   "id": "X1772-0110",
+   "sector": "S1772-33",
+   "original": [
+    970.0,
+    992.0
+   ],
+   "indice": [
+    0,
+    3
+   ],
+   "esquina_1936": 166,
+   "mosaico_identidad": [
+    9559.0,
+    7070.0
+   ],
+   "mosaico_calce": [
+    9562.94,
+    7069.98
+   ],
+   "desvio_m": 1.971,
+   "delta_m": [
+    1.971,
+    -0.009
+   ],
+   "esquina_1936_nombre": "Doctor Paúl"
+  },
+  {
+   "id": "X1772-0111",
+   "sector": "S1772-33",
+   "original": [
+    1036.0,
+    992.0
+   ],
+   "indice": [
+    1,
+    3
+   ],
+   "esquina_1936": 153,
+   "mosaico_identidad": [
+    9608.4,
+    6850.6
+   ],
+   "mosaico_calce": [
+    9602.15,
+    6839.19
+   ],
+   "desvio_m": 6.504,
+   "delta_m": [
+    -3.126,
+    -5.703
+   ],
+   "esquina_1936_nombre": "La Marrón"
+  },
+  {
+   "id": "X1772-0112",
+   "sector": "S1772-33",
+   "original": [
+    1104.0,
+    992.0
+   ],
+   "indice": [
+    2,
+    3
+   ],
+   "esquina_1936": 135,
+   "mosaico_identidad": [
+    9661.5,
+    6589.8
+   ],
+   "mosaico_calce": [
+    9630.65,
+    6610.4
+   ],
+   "desvio_m": 18.546,
+   "delta_m": [
+    -15.424,
+    10.299
+   ],
+   "esquina_1936_nombre": "La Pelota"
+  },
+  {
+   "id": "X1772-0113",
+   "sector": "S1772-33",
+   "original": [
+    1170.0,
+    992.0
+   ],
+   "indice": [
+    3,
+    3
+   ],
+   "esquina_1936": 122,
+   "mosaico_identidad": [
+    9711.0,
+    6335.5
+   ],
+   "mosaico_calce": [
+    9649.39,
+    6395.41
+   ],
+   "desvio_m": 42.971,
+   "delta_m": [
+    -30.807,
+    29.957
+   ],
+   "esquina_1936_nombre": "Abanico"
+  },
+  {
+   "id": "X1772-0114",
+   "sector": "S1772-33",
+   "original": [
+    1236.0,
+    992.0
+   ],
+   "indice": [
+    4,
+    3
+   ],
+   "esquina_1936": 105,
+   "mosaico_identidad": [
+    9796.1,
+    6073.1
+   ],
+   "mosaico_calce": [
+    9669.19,
+    6190.71
+   ],
+   "desvio_m": 86.514,
+   "delta_m": [
+    -63.455,
+    58.806
+   ],
+   "esquina_1936_nombre": "Canónigos"
+  },
+  {
+   "id": "X1772-0115",
+   "sector": "S1772-33",
+   "original": [
+    1304.0,
+    992.0
+   ],
+   "indice": [
+    5,
+    3
+   ],
+   "esquina_1936": 325,
+   "mosaico_identidad": [
+    9828.9,
+    5819.8
+   ],
+   "mosaico_calce": [
+    9697.23,
+    5984.02
+   ],
+   "desvio_m": 105.242,
+   "delta_m": [
+    -65.833,
+    82.109
+   ],
+   "esquina_1936_nombre": "La Esperanza"
+  },
+  {
+   "id": "X1772-0116",
+   "sector": "S1772-34",
+   "original": [
+    1370.0,
+    992.0
+   ],
+   "indice": [
+    6,
+    3
+   ],
+   "esquina_1936": 74,
+   "mosaico_identidad": [
+    9972.0,
+    5495.2
+   ],
+   "mosaico_calce": [
+    9731.34,
+    5782.64
+   ],
+   "desvio_m": 187.441,
+   "delta_m": [
+    -120.329,
+    143.719
+   ],
+   "esquina_1936_nombre": "La Caridad"
+  },
+  {
+   "id": "X1772-0117",
+   "sector": "S1772-34",
+   "original": [
+    1439.0,
+    992.0
+   ],
+   "indice": [
+    7,
+    3
+   ],
+   "esquina_1936": 62,
+   "mosaico_identidad": [
+    9946.0,
+    5295.0
+   ],
+   "mosaico_calce": [
+    9770.57,
+    5571.89
+   ],
+   "desvio_m": 163.892,
+   "delta_m": [
+    -87.717,
+    138.443
+   ],
+   "esquina_1936_nombre": "La Quebrada"
+  },
+  {
+   "id": "X1772-0118",
+   "sector": "S1772-34",
+   "original": [
+    1505.0,
+    992.0
+   ],
+   "indice": [
+    8,
+    3
+   ],
+   "esquina_1936": 48,
+   "mosaico_identidad": [
+    9988.8,
+    5035.8
+   ],
+   "mosaico_calce": [
+    9808.47,
+    5371.73
+   ],
+   "desvio_m": 190.637,
+   "delta_m": [
+    -90.165,
+    167.967
+   ],
+   "esquina_1936_nombre": "Rosario"
+  },
+  {
+   "id": "X1772-0119",
+   "sector": "S1772-31",
+   "original": [
+    437.0,
+    1058.0
+   ],
+   "indice": [
+    -8,
+    4
+   ],
+   "esquina_1936": 320,
+   "mosaico_identidad": [
+    9509.4,
+    9301.6
+   ],
+   "mosaico_calce": [
+    9358.97,
+    8776.41
+   ],
+   "desvio_m": 273.157,
+   "delta_m": [
+    -75.215,
+    -262.597
+   ],
+   "esquina_1936_nombre": "Regeneración"
+  },
+  {
+   "id": "X1772-0120",
+   "sector": "S1772-31",
+   "original": [
+    504.0,
+    1058.0
+   ],
+   "indice": [
+    -7,
+    4
+   ],
+   "esquina_1936": 309,
+   "mosaico_identidad": [
+    9485.4,
+    9070.8
+   ],
+   "mosaico_calce": [
+    9420.21,
+    8569.28
+   ],
+   "desvio_m": 252.87,
+   "delta_m": [
+    -32.595,
+    -250.76
+   ],
+   "esquina_1936_nombre": "Las Peláez"
+  },
+  {
+   "id": "X1772-0121",
+   "sector": "S1772-32",
+   "original": [
+    570.0,
+    1058.0
+   ],
+   "indice": [
+    -6,
+    4
+   ],
+   "esquina_1936": 286,
+   "mosaico_identidad": [
+    9522.9,
+    8809.9
+   ],
+   "mosaico_calce": [
+    9476.22,
+    8372.55
+   ],
+   "desvio_m": 219.918,
+   "delta_m": [
+    -23.342,
+    -218.676
+   ],
+   "esquina_1936_nombre": "El Muerto"
+  },
+  {
+   "id": "X1772-0122",
+   "sector": "S1772-32",
+   "original": [
+    637.0,
+    1058.0
+   ],
+   "indice": [
+    -5,
+    4
+   ],
+   "esquina_1936": 262,
+   "mosaico_identidad": [
+    9552.5,
+    8522.0
+   ],
+   "mosaico_calce": [
+    9527.62,
+    8181.11
+   ],
+   "desvio_m": 170.897,
+   "delta_m": [
+    -12.439,
+    -170.444
+   ],
+   "esquina_1936_nombre": "El Viento"
+  },
+  {
+   "id": "X1772-0123",
+   "sector": "S1772-32",
+   "original": [
+    702.0,
+    1058.0
+   ],
+   "indice": [
+    -4,
+    4
+   ],
+   "esquina_1936": 238,
+   "mosaico_identidad": [
+    9597.5,
+    8193.7
+   ],
+   "mosaico_calce": [
+    9576.01,
+    8004.66
+   ],
+   "desvio_m": 95.13,
+   "delta_m": [
+    -10.746,
+    -94.521
+   ],
+   "esquina_1936_nombre": "Curamichate"
+  },
+  {
+   "id": "X1772-0124",
+   "sector": "S1772-32",
+   "original": [
+    768.0,
+    1058.0
+   ],
+   "indice": [
+    -3,
+    4
+   ],
+   "esquina_1936": 219,
+   "mosaico_identidad": [
+    9641.5,
+    7933.8
+   ],
+   "mosaico_calce": [
+    9621.64,
+    7821.77
+   ],
+   "desvio_m": 56.89,
+   "delta_m": [
+    -9.928,
+    -56.017
+   ],
+   "esquina_1936_nombre": "El Pájaro"
+  },
+  {
+   "id": "X1772-0125",
+   "sector": "S1772-32",
+   "original": [
+    835.0,
+    1058.0
+   ],
+   "indice": [
+    -2,
+    4
+   ],
+   "esquina_1936": 199,
+   "mosaico_identidad": [
+    9734.5,
+    7656.6
+   ],
+   "mosaico_calce": [
+    9666.0,
+    7612.07
+   ],
+   "desvio_m": 40.851,
+   "delta_m": [
+    -34.249,
+    -22.267
+   ],
+   "esquina_1936_nombre": "Peinero"
+  },
+  {
+   "id": "X1772-0126",
+   "sector": "S1772-32",
+   "original": [
+    903.0,
+    1058.0
+   ],
+   "indice": [
+    -1,
+    4
+   ],
+   "esquina_1936": 187,
+   "mosaico_identidad": [
+    9786.0,
+    7396.0
+   ],
+   "mosaico_calce": [
+    9716.62,
+    7367.36
+   ],
+   "desvio_m": 37.53,
+   "delta_m": [
+    -34.69,
+    -14.322
+   ],
+   "esquina_1936_nombre": "El Coliseo"
+  },
+  {
+   "id": "X1772-0127",
+   "sector": "S1772-33",
+   "original": [
+    970.0,
+    1058.0
+   ],
+   "indice": [
+    0,
+    4
+   ],
+   "esquina_1936": 168,
+   "mosaico_identidad": [
+    9838.7,
+    7134.2
+   ],
+   "mosaico_calce": [
+    9764.68,
+    7122.76
+   ],
+   "desvio_m": 37.452,
+   "delta_m": [
+    -37.012,
+    -5.721
+   ],
+   "esquina_1936_nombre": "Salvador de León"
+  },
+  {
+   "id": "X1772-0128",
+   "sector": "S1772-33",
+   "original": [
+    1036.0,
+    1058.0
+   ],
+   "indice": [
+    1,
+    4
+   ],
+   "esquina_1936": 157,
+   "mosaico_identidad": [
+    9881.0,
+    6901.0
+   ],
+   "mosaico_calce": [
+    9799.87,
+    6901.97
+   ],
+   "desvio_m": 40.568,
+   "delta_m": [
+    -40.565,
+    0.483
+   ],
+   "esquina_1936_nombre": "El Cují"
+  },
+  {
+   "id": "X1772-0129",
+   "sector": "S1772-33",
+   "original": [
+    1104.0,
+    1058.0
+   ],
+   "indice": [
+    2,
+    4
+   ],
+   "esquina_1936": 140,
+   "mosaico_identidad": [
+    9973.0,
+    6646.0
+   ],
+   "mosaico_calce": [
+    9824.33,
+    6687.39
+   ],
+   "desvio_m": 77.162,
+   "delta_m": [
+    -74.336,
+    20.693
+   ],
+   "esquina_1936_nombre": "Punceres"
+  },
+  {
+   "id": "X1772-0132",
+   "sector": "S1772-33",
+   "original": [
+    1304.0,
+    1058.0
+   ],
+   "indice": [
+    5,
+    4
+   ],
+   "esquina_1936": 92,
+   "mosaico_identidad": [
+    10082.7,
+    5861.0
+   ],
+   "mosaico_calce": [
+    9899.72,
+    6052.52
+   ],
+   "desvio_m": 132.442,
+   "delta_m": [
+    -91.491,
+    95.761
+   ],
+   "esquina_1936_nombre": "El Aguacatico"
+  },
+  {
+   "id": "X1772-0133",
+   "sector": "S1772-34",
+   "original": [
+    1370.0,
+    1058.0
+   ],
+   "indice": [
+    6,
+    4
+   ],
+   "esquina_1936": 77,
+   "mosaico_identidad": [
+    10124.0,
+    5595.0
+   ],
+   "mosaico_calce": [
+    9940.29,
+    5842.48
+   ],
+   "desvio_m": 154.107,
+   "delta_m": [
+    -91.855,
+    123.74
+   ],
+   "esquina_1936_nombre": "San Narciso"
+  },
+  {
+   "id": "X1772-0134",
+   "sector": "S1772-34",
+   "original": [
+    1439.0,
+    1058.0
+   ],
+   "indice": [
+    7,
+    4
+   ],
+   "esquina_1936": 64,
+   "mosaico_identidad": [
+    10168.5,
+    5341.2
+   ],
+   "mosaico_calce": [
+    9980.93,
+    5631.32
+   ],
+   "desvio_m": 172.735,
+   "delta_m": [
+    -93.784,
+    145.058
+   ],
+   "esquina_1936_nombre": "Santa Inés"
+  },
+  {
+   "id": "X1772-0135",
+   "sector": "S1772-34",
+   "original": [
+    1505.0,
+    1058.0
+   ],
+   "indice": [
+    8,
+    4
+   ],
+   "esquina_1936": 51,
+   "mosaico_identidad": [
+    10217.3,
+    5084.2
+   ],
+   "mosaico_calce": [
+    10017.98,
+    5433.71
+   ],
+   "desvio_m": 201.177,
+   "delta_m": [
+    -99.661,
+    174.757
+   ],
+   "esquina_1936_nombre": "Santa Rosa"
+  },
+  {
+   "id": "X1772-0137",
+   "sector": "S1772-31",
+   "original": [
+    504.0,
+    1125.0
+   ],
+   "indice": [
+    -7,
+    5
+   ],
+   "esquina_1936": 311,
+   "mosaico_identidad": [
+    9745.4,
+    9120.4
+   ],
+   "mosaico_calce": [
+    9616.11,
+    8616.54
+   ],
+   "desvio_m": 260.092,
+   "delta_m": [
+    -64.645,
+    -251.93
+   ],
+   "esquina_1936_nombre": "Alcabala Vieja"
+  },
+  {
+   "id": "X1772-0140",
+   "sector": "S1772-32",
+   "original": [
+    702.0,
+    1125.0
+   ],
+   "indice": [
+    -4,
+    5
+   ],
+   "esquina_1936": 244,
+   "mosaico_identidad": [
+    9884.9,
+    8262.8
+   ],
+   "mosaico_calce": [
+    9775.3,
+    8053.05
+   ],
+   "desvio_m": 118.329,
+   "delta_m": [
+    -54.798,
+    -104.876
+   ],
+   "esquina_1936_nombre": "El Rosario"
+  },
+  {
+   "id": "X1772-0141",
+   "sector": "S1772-32",
+   "original": [
+    768.0,
+    1125.0
+   ],
+   "indice": [
+    -3,
+    5
+   ],
+   "esquina_1936": 225,
+   "mosaico_identidad": [
+    9942.7,
+    8009.7
+   ],
+   "mosaico_calce": [
+    9810.91,
+    7863.02
+   ],
+   "desvio_m": 98.595,
+   "delta_m": [
+    -65.897,
+    -73.339
+   ],
+   "esquina_1936_nombre": "El Tejar"
+  },
+  {
+   "id": "X1772-0142",
+   "sector": "S1772-32",
+   "original": [
+    835.0,
+    1125.0
+   ],
+   "indice": [
+    -2,
+    5
+   ],
+   "esquina_1936": 203,
+   "mosaico_identidad": [
+    9996.2,
+    7717.6
+   ],
+   "mosaico_calce": [
+    9846.33,
+    7649.18
+   ],
+   "desvio_m": 82.375,
+   "delta_m": [
+    -74.936,
+    -34.209
+   ],
+   "esquina_1936_nombre": "La Hoyada"
+  },
+  {
+   "id": "X1772-0143",
+   "sector": "S1772-32",
+   "original": [
+    903.0,
+    1125.0
+   ],
+   "indice": [
+    -1,
+    5
+   ],
+   "esquina_1936": 189,
+   "mosaico_identidad": [
+    10038.0,
+    7459.0
+   ],
+   "mosaico_calce": [
+    9892.83,
+    7407.66
+   ],
+   "desvio_m": 76.988,
+   "delta_m": [
+    -72.583,
+    -25.669
+   ],
+   "esquina_1936_nombre": "Corazón de Jesús"
+  },
+  {
+   "id": "X1772-0144",
+   "sector": "S1772-33",
+   "original": [
+    970.0,
+    1125.0
+   ],
+   "indice": [
+    0,
+    5
+   ],
+   "esquina_1936": 172,
+   "mosaico_identidad": [
+    10097.9,
+    7198.6
+   ],
+   "mosaico_calce": [
+    9941.96,
+    7174.19
+   ],
+   "desvio_m": 78.92,
+   "delta_m": [
+    -77.97,
+    -12.206
+   ],
+   "esquina_1936_nombre": "Socarrás"
+  },
+  {
+   "id": "X1772-0145",
+   "sector": "S1772-33",
+   "original": [
+    1036.0,
+    1125.0
+   ],
+   "indice": [
+    1,
+    5
+   ],
+   "esquina_1936": 160,
+   "mosaico_identidad": [
+    10170.7,
+    6944.5
+   ],
+   "mosaico_calce": [
+    9975.33,
+    6968.72
+   ],
+   "desvio_m": 98.433,
+   "delta_m": [
+    -97.685,
+    12.11
+   ],
+   "esquina_1936_nombre": "Ña Romualda"
+  },
+  {
+   "id": "X1772-0146",
+   "sector": "S1772-33",
+   "original": [
+    1170.0,
+    1125.0
+   ],
+   "indice": [
+    3,
+    5
+   ],
+   "esquina_1936": 125,
+   "mosaico_identidad": [
+    10249.5,
+    6418.2
+   ],
+   "mosaico_calce": [
+    10027.94,
+    6561.85
+   ],
+   "desvio_m": 132.027,
+   "delta_m": [
+    -110.78,
+    71.825
+   ],
+   "esquina_1936_nombre": "Socorro"
+  },
+  {
+   "id": "X1772-0147",
+   "sector": "S1772-33",
+   "original": [
+    1236.0,
+    1125.0
+   ],
+   "indice": [
+    4,
+    5
+   ],
+   "esquina_1936": 109,
+   "mosaico_identidad": [
+    10298.1,
+    6164.7
+   ],
+   "mosaico_calce": [
+    10061.2,
+    6343.5
+   ],
+   "desvio_m": 148.403,
+   "delta_m": [
+    -118.452,
+    89.401
+   ],
+   "esquina_1936_nombre": "San Ramón"
+  },
+  {
+   "id": "X1772-0148",
+   "sector": "S1772-33",
+   "original": [
+    1304.0,
+    1125.0
+   ],
+   "indice": [
+    5,
+    5
+   ],
+   "esquina_1936": 95,
+   "mosaico_identidad": [
+    10345.8,
+    5930.0
+   ],
+   "mosaico_calce": [
+    10105.06,
+    6110.45
+   ],
+   "desvio_m": 150.43,
+   "delta_m": [
+    -120.369,
+    90.224
+   ],
+   "esquina_1936_nombre": "Crucecita"
+  },
+  {
+   "id": "X1772-0149",
+   "sector": "S1772-34",
+   "original": [
+    1370.0,
+    1125.0
+   ],
+   "indice": [
+    6,
+    5
+   ],
+   "esquina_1936": 81,
+   "mosaico_identidad": [
+    10405.7,
+    5649.9
+   ],
+   "mosaico_calce": [
+    10152.45,
+    5893.48
+   ],
+   "desvio_m": 175.688,
+   "delta_m": [
+    -126.623,
+    121.79
+   ],
+   "esquina_1936_nombre": "San Miguel"
+  },
+  {
+   "id": "X1772-0150",
+   "sector": "S1772-34",
+   "original": [
+    1439.0,
+    1125.0
+   ],
+   "indice": [
+    7,
+    5
+   ],
+   "esquina_1936": 66,
+   "mosaico_identidad": [
+    10456.0,
+    5400.5
+   ],
+   "mosaico_calce": [
+    10193.78,
+    5684.78
+   ],
+   "desvio_m": 193.374,
+   "delta_m": [
+    -131.112,
+    142.138
+   ],
+   "esquina_1936_nombre": "San Enrique"
+  },
+  {
+   "id": "X1772-0151",
+   "sector": "S1772-34",
+   "original": [
+    1505.0,
+    1125.0
+   ],
+   "indice": [
+    8,
+    5
+   ],
+   "esquina_1936": 53,
+   "mosaico_identidad": [
+    10511.6,
+    5144.6
+   ],
+   "mosaico_calce": [
+    10230.05,
+    5491.14
+   ],
+   "desvio_m": 223.247,
+   "delta_m": [
+    -140.773,
+    173.269
+   ],
+   "esquina_1936_nombre": "San José"
+  },
+  {
+   "id": "X1772-0152",
+   "sector": "S1772-33",
+   "original": [
+    1036.0,
+    1191.0
+   ],
+   "indice": [
+    1,
+    6
+   ],
+   "esquina_1936": 161,
+   "mosaico_identidad": [
+    10432.0,
+    7005.0
+   ],
+   "mosaico_calce": [
+    10142.43,
+    7031.03
+   ],
+   "desvio_m": 145.37,
+   "delta_m": [
+    -144.786,
+    13.015
+   ],
+   "esquina_1936_nombre": "Manduca"
+  },
+  {
+   "id": "X1772-0153",
+   "sector": "S1772-33",
+   "original": [
+    1170.0,
+    1191.0
+   ],
+   "indice": [
+    3,
+    6
+   ],
+   "esquina_1936": 127,
+   "mosaico_identidad": [
+    10551.0,
+    6470.0
+   ],
+   "mosaico_calce": [
+    10209.04,
+    6632.02
+   ],
+   "desvio_m": 189.201,
+   "delta_m": [
+    -170.98,
+    81.011
+   ],
+   "esquina_1936_nombre": "Calero"
+  },
+  {
+   "id": "X1772-0154",
+   "sector": "S1772-33",
+   "original": [
+    1236.0,
+    1191.0
+   ],
+   "indice": [
+    4,
+    6
+   ],
+   "esquina_1936": 111,
+   "mosaico_identidad": [
+    10594.1,
+    6217.7
+   ],
+   "mosaico_calce": [
+    10253.88,
+    6403.5
+   ],
+   "desvio_m": 193.827,
+   "delta_m": [
+    -170.112,
+    92.902
+   ],
+   "esquina_1936_nombre": "Chimborazo"
+  },
+  {
+   "id": "X1772-0155",
+   "sector": "S1772-33",
+   "original": [
+    1304.0,
+    1191.0
+   ],
+   "indice": [
+    5,
+    6
+   ],
+   "esquina_1936": 99,
+   "mosaico_identidad": [
+    10640.0,
+    5984.0
+   ],
+   "mosaico_calce": [
+    10306.5,
+    6157.34
+   ],
+   "desvio_m": 187.932,
+   "delta_m": [
+    -166.752,
+    86.672
+   ],
+   "esquina_1936_nombre": "El Porvenir"
+  },
+  {
+   "id": "X1772-0156",
+   "sector": "S1772-34",
+   "original": [
+    1370.0,
+    1191.0
+   ],
+   "indice": [
+    6,
+    6
+   ],
+   "esquina_1936": 83,
+   "mosaico_identidad": [
+    10619.9,
+    5693.6
+   ],
+   "mosaico_calce": [
+    10357.98,
+    5937.32
+   ],
+   "desvio_m": 178.884,
+   "delta_m": [
+    -130.959,
+    121.858
+   ],
+   "esquina_1936_nombre": "Palo Negro"
+  },
+  {
+   "id": "X1772-0159",
+   "sector": "S1772-42",
+   "original": [
+    903.0,
+    1257.0
+   ],
+   "indice": [
+    -1,
+    7
+   ],
+   "esquina_1936": 195,
+   "mosaico_identidad": [
+    10623.8,
+    7579.3
+   ],
+   "mosaico_calce": [
+    10236.97,
+    7500.8
+   ],
+   "desvio_m": 197.357,
+   "delta_m": [
+    -193.415,
+    -39.25
+   ],
+   "esquina_1936_nombre": "Monroy"
+  },
+  {
+   "id": "X1772-0160",
+   "sector": "S1772-43",
+   "original": [
+    970.0,
+    1257.0
+   ],
+   "indice": [
+    0,
+    7
+   ],
+   "esquina_1936": 180,
+   "mosaico_identidad": [
+    10683.7,
+    7317.5
+   ],
+   "mosaico_calce": [
+    10281.54,
+    7284.27
+   ],
+   "desvio_m": 201.763,
+   "delta_m": [
+    -201.078,
+    -16.616
+   ],
+   "esquina_1936_nombre": "Tracabordo"
+  },
+  {
+   "id": "X1772-0161",
+   "sector": "S1772-43",
+   "original": [
+    1036.0,
+    1257.0
+   ],
+   "indice": [
+    1,
+    7
+   ],
+   "esquina_1936": 165,
+   "mosaico_identidad": [
+    10735.1,
+    7060.2
+   ],
+   "mosaico_calce": [
+    10321.37,
+    7084.75
+   ],
+   "desvio_m": 207.228,
+   "delta_m": [
+    -206.864,
+    12.277
+   ],
+   "esquina_1936_nombre": "Ferrenquín"
+  },
+  {
+   "id": "X1772-0162",
+   "sector": "S1772-43",
+   "original": [
+    1170.0,
+    1257.0
+   ],
+   "indice": [
+    3,
+    7
+   ],
+   "esquina_1936": 129,
+   "mosaico_identidad": [
+    10837.2,
+    6515.9
+   ],
+   "mosaico_calce": [
+    10402.59,
+    6679.49
+   ],
+   "desvio_m": 232.191,
+   "delta_m": [
+    -217.306,
+    81.797
+   ],
+   "esquina_1936_nombre": "Desamparados"
+  },
+  {
+   "id": "X1772-0163",
+   "sector": "S1772-43",
+   "original": [
+    1236.0,
+    1257.0
+   ],
+   "indice": [
+    4,
+    7
+   ],
+   "esquina_1936": 116,
+   "mosaico_identidad": [
+    10886.5,
+    6258.9
+   ],
+   "mosaico_calce": [
+    10453.47,
+    6448.85
+   ],
+   "desvio_m": 236.43,
+   "delta_m": [
+    -216.516,
+    94.974
+   ],
+   "esquina_1936_nombre": "Teñidero"
+  },
+  {
+   "id": "X1772-0164",
+   "sector": "S1772-43",
+   "original": [
+    1304.0,
+    1257.0
+   ],
+   "indice": [
+    5,
+    7
+   ],
+   "esquina_1936": 102,
+   "mosaico_identidad": [
+    10930.0,
+    6032.0
+   ],
+   "mosaico_calce": [
+    10509.9,
+    6202.19
+   ],
+   "desvio_m": 226.632,
+   "delta_m": [
+    -210.05,
+    85.095
+   ],
+   "esquina_1936_nombre": "Santo Tomás"
+  },
+  {
+   "id": "X1772-0165",
+   "sector": "S1772-44",
+   "original": [
+    1370.0,
+    1257.0
+   ],
+   "indice": [
+    6,
+    7
+   ],
+   "esquina_1936": 87,
+   "mosaico_identidad": [
+    11030.6,
+    5768.6
+   ],
+   "mosaico_calce": [
+    10564.9,
+    5983.18
+   ],
+   "desvio_m": 256.376,
+   "delta_m": [
+    -232.848,
+    107.288
+   ],
+   "esquina_1936_nombre": "Palo Blanco"
+  },
+  {
+   "id": "X1772-0167",
+   "sector": "S1772-42",
+   "original": [
+    768.0,
+    1323.0
+   ],
+   "indice": [
+    -3,
+    8
+   ],
+   "esquina_1936": 226,
+   "mosaico_identidad": [
+    10819.6,
+    8065.4
+   ],
+   "mosaico_calce": [
+    10372.98,
+    7973.09
+   ],
+   "desvio_m": 228.031,
+   "delta_m": [
+    -223.311,
+    -46.156
+   ],
+   "esquina_1936_nombre": "Monagas"
+  },
+  {
+   "id": "X1772-0168",
+   "sector": "S1772-42",
+   "original": [
+    835.0,
+    1323.0
+   ],
+   "indice": [
+    -2,
+    8
+   ],
+   "esquina_1936": 216,
+   "mosaico_identidad": [
+    10940.0,
+    7906.0
+   ],
+   "mosaico_calce": [
+    10399.15,
+    7768.7
+   ],
+   "desvio_m": 279.001,
+   "delta_m": [
+    -270.424,
+    -68.649
+   ],
+   "esquina_1936_nombre": "Ño Pastor"
+  },
+  {
+   "id": "X1772-0169",
+   "sector": "S1772-42",
+   "original": [
+    903.0,
+    1323.0
+   ],
+   "indice": [
+    -1,
+    8
+   ],
+   "esquina_1936": 198,
+   "mosaico_identidad": [
+    10970.4,
+    7641.6
+   ],
+   "mosaico_calce": [
+    10433.67,
+    7546.82
+   ],
+   "desvio_m": 272.516,
+   "delta_m": [
+    -268.364,
+    -47.39
+   ],
+   "esquina_1936_nombre": "Misericordia"
+  },
+  {
+   "id": "X1772-0170",
+   "sector": "S1772-43",
+   "original": [
+    970.0,
+    1323.0
+   ],
+   "indice": [
+    0,
+    8
+   ],
+   "esquina_1936": 183,
+   "mosaico_identidad": [
+    10994.1,
+    7386.4
+   ],
+   "mosaico_calce": [
+    10475.19,
+    7332.53
+   ],
+   "desvio_m": 260.851,
+   "delta_m": [
+    -259.456,
+    -26.937
+   ],
+   "esquina_1936_nombre": "Miguelacho"
+  },
+  {
+   "id": "X1772-0172",
+   "sector": "S1772-43",
+   "original": [
+    1170.0,
+    1323.0
+   ],
+   "indice": [
+    3,
+    8
+   ],
+   "esquina_1936": 133,
+   "mosaico_identidad": [
+    11089.1,
+    6553.6
+   ],
+   "mosaico_calce": [
+    10605.74,
+    6719.91
+   ],
+   "desvio_m": 255.585,
+   "delta_m": [
+    -241.68,
+    83.154
+   ],
+   "esquina_1936_nombre": "Avilanes"
+  },
+  {
+   "id": "X1772-0173",
+   "sector": "S1772-43",
+   "original": [
+    1236.0,
+    1323.0
+   ],
+   "indice": [
+    4,
+    8
+   ],
+   "esquina_1936": 118,
+   "mosaico_identidad": [
+    11120.0,
+    6282.7
+   ],
+   "mosaico_calce": [
+    10657.29,
+    6490.96
+   ],
+   "desvio_m": 253.708,
+   "delta_m": [
+    -231.354,
+    104.131
+   ],
+   "esquina_1936_nombre": "Mirador"
+  },
+  {
+   "id": "X1772-0174",
+   "sector": "S1772-43",
+   "original": [
+    1304.0,
+    1323.0
+   ],
+   "indice": [
+    5,
+    8
+   ],
+   "esquina_1936": 104,
+   "mosaico_identidad": [
+    11134.0,
+    6063.0
+   ],
+   "mosaico_calce": [
+    10713.43,
+    6252.59
+   ],
+   "desvio_m": 230.665,
+   "delta_m": [
+    -210.286,
+    94.795
+   ],
+   "esquina_1936_nombre": "Esmeralda"
+  },
+  {
+   "id": "X1772-0175",
+   "sector": "S1772-42",
+   "original": [
+    768.0,
+    1389.0
+   ],
+   "indice": [
+    -3,
+    9
+   ],
+   "esquina_1936": 241,
+   "mosaico_identidad": [
+    10966.4,
+    8226.4
+   ],
+   "mosaico_calce": [
+    10569.71,
+    8009.56
+   ],
+   "desvio_m": 226.045,
+   "delta_m": [
+    -198.347,
+    -108.419
+   ],
+   "esquina_1936_nombre": "Niquitao"
+  },
+  {
+   "id": "X1772-0177",
+   "sector": "S1772-42",
+   "original": [
+    903.0,
+    1389.0
+   ],
+   "indice": [
+    -1,
+    9
+   ],
+   "esquina_1936": 201,
+   "mosaico_identidad": [
+    11244.0,
+    7701.8
+   ],
+   "mosaico_calce": [
+    10637.85,
+    7585.77
+   ],
+   "desvio_m": 308.576,
+   "delta_m": [
+    -303.074,
+    -58.013
+   ],
+   "esquina_1936_nombre": "Pele el Ojo"
+  },
+  {
+   "id": "X1772-0178",
+   "sector": "S1772-43",
+   "original": [
+    970.0,
+    1389.0
+   ],
+   "indice": [
+    0,
+    9
+   ],
+   "esquina_1936": 186,
+   "mosaico_identidad": [
+    11276.0,
+    7429.0
+   ],
+   "mosaico_calce": [
+    10678.58,
+    7373.38
+   ],
+   "desvio_m": 300.001,
+   "delta_m": [
+    -298.709,
+    -27.808
+   ],
+   "esquina_1936_nombre": "El Peligro"
+  },
+  {
+   "id": "X1772-0181",
+   "sector": "S1772-43",
+   "original": [
+    1236.0,
+    1389.0
+   ],
+   "indice": [
+    4,
+    9
+   ],
+   "esquina_1936": 119,
+   "mosaico_identidad": [
+    11362.6,
+    6313.6
+   ],
+   "mosaico_calce": [
+    10857.41,
+    6536.76
+   ],
+   "desvio_m": 276.143,
+   "delta_m": [
+    -252.596,
+    111.58
+   ],
+   "esquina_1936_nombre": "San Felipe"
+  },
+  {
+   "id": "X1772-0182",
+   "sector": "S1772-21",
+   "original": [
+    437.0,
+    660.0
+   ],
+   "indice": [
+    -8,
+    -2
+   ],
+   "esquina_1936": 308,
+   "mosaico_identidad": [
+    7949.4,
+    8998.6
+   ],
+   "mosaico_calce": [
+    8124.33,
+    8455.7
+   ],
+   "desvio_m": 285.194,
+   "delta_m": [
+    87.463,
+    -271.451
+   ],
+   "esquina_1936_nombre": "Quinta Crespo"
+  },
+  {
+   "id": "X1772-0183",
+   "sector": "S1772-21",
+   "original": [
+    504.0,
+    660.0
+   ],
+   "indice": [
+    -7,
+    -2
+   ],
+   "esquina_1936": 285,
+   "mosaico_identidad": [
+    7928.0,
+    8779.5
+   ],
+   "mosaico_calce": [
+    8159.78,
+    8235.61
+   ],
+   "desvio_m": 295.609,
+   "delta_m": [
+    115.891,
+    -271.945
+   ],
+   "esquina_1936_nombre": "El Carmen"
+  },
+  {
+   "id": "X1772-0184",
+   "sector": "S1772-22",
+   "original": [
+    570.0,
+    660.0
+   ],
+   "indice": [
+    -6,
+    -2
+   ],
+   "esquina_1936": 260,
+   "mosaico_identidad": [
+    7993.9,
+    8483.1
+   ],
+   "mosaico_calce": [
+    8175.26,
+    8038.58
+   ],
+   "desvio_m": 240.048,
+   "delta_m": [
+    90.679,
+    -222.262
+   ],
+   "esquina_1936_nombre": "Bucare"
+  },
+  {
+   "id": "X1772-0185",
+   "sector": "S1772-22",
+   "original": [
+    637.0,
+    660.0
+   ],
+   "indice": [
+    -5,
+    -2
+   ],
+   "esquina_1936": 240,
+   "mosaico_identidad": [
+    8047.4,
+    8195.1
+   ],
+   "mosaico_calce": [
+    8192.48,
+    7852.65
+   ],
+   "desvio_m": 185.956,
+   "delta_m": [
+    72.54,
+    -171.224
+   ],
+   "esquina_1936_nombre": "Maderero"
+  },
+  {
+   "id": "X1772-0186",
+   "sector": "S1772-22",
+   "original": [
+    702.0,
+    660.0
+   ],
+   "indice": [
+    -4,
+    -2
+   ],
+   "esquina_1936": 214,
+   "mosaico_identidad": [
+    8116.0,
+    7859.0
+   ],
+   "mosaico_calce": [
+    8222.08,
+    7677.54
+   ],
+   "desvio_m": 105.095,
+   "delta_m": [
+    53.042,
+    -90.728
+   ],
+   "esquina_1936_nombre": "Miranda"
+  },
+  {
+   "id": "X1772-0187",
+   "sector": "S1772-22",
+   "original": [
+    768.0,
+    660.0
+   ],
+   "indice": [
+    -3,
+    -2
+   ],
+   "esquina_1936": 194,
+   "mosaico_identidad": [
+    8162.0,
+    7587.0
+   ],
+   "mosaico_calce": [
+    8258.91,
+    7500.11
+   ],
+   "desvio_m": 65.079,
+   "delta_m": [
+    48.455,
+    -43.444
+   ],
+   "esquina_1936_nombre": "Puente San Pablo"
+  },
+  {
+   "id": "X1772-0188",
+   "sector": "S1772-32",
+   "original": [
+    768.0,
+    1191.0
+   ],
+   "indice": [
+    -3,
+    6
+   ],
+   "esquina_1936": 230,
+   "mosaico_identidad": [
+    10339.0,
+    7967.2
+   ],
+   "mosaico_calce": [
+    9992.95,
+    7902.45
+   ],
+   "desvio_m": 176.027,
+   "delta_m": [
+    -173.024,
+    -32.377
+   ],
+   "esquina_1936_nombre": "San Martín"
+  },
+  {
+   "id": "X1772-0189",
+   "sector": "S1772-22",
+   "original": [
+    835.0,
+    660.0
+   ],
+   "indice": [
+    -2,
+    -2
+   ],
+   "esquina_1936": 181,
+   "mosaico_identidad": [
+    8214.3,
+    7330.5
+   ],
+   "mosaico_calce": [
+    8302.47,
+    7308.36
+   ],
+   "desvio_m": 45.452,
+   "delta_m": [
+    44.083,
+    -11.07
+   ],
+   "esquina_1936_nombre": "La Gorda"
+  },
+  {
+   "id": "X1772-0190",
+   "sector": "S1772-32",
+   "original": [
+    835.0,
+    1191.0
+   ],
+   "indice": [
+    -2,
+    6
+   ],
+   "esquina_1936": 207,
+   "mosaico_identidad": [
+    10262.0,
+    7783.9
+   ],
+   "mosaico_calce": [
+    10019.41,
+    7689.12
+   ],
+   "desvio_m": 130.222,
+   "delta_m": [
+    -121.293,
+    -47.39
+   ],
+   "esquina_1936_nombre": "San Lázaro"
+  },
+  {
+   "id": "X1772-0191",
+   "sector": "S1772-22",
+   "original": [
+    903.0,
+    660.0
+   ],
+   "indice": [
+    -1,
+    -2
+   ],
+   "esquina_1936": 167,
+   "mosaico_identidad": [
+    8261.9,
+    7077.1
+   ],
+   "mosaico_calce": [
+    8356.58,
+    7086.57
+   ],
+   "desvio_m": 47.574,
+   "delta_m": [
+    47.338,
+    4.733
+   ],
+   "esquina_1936_nombre": "La Pedrera"
+  },
+  {
+   "id": "X1772-0192",
+   "sector": "S1772-32",
+   "original": [
+    903.0,
+    1191.0
+   ],
+   "indice": [
+    -1,
+    6
+   ],
+   "esquina_1936": 192,
+   "mosaico_identidad": [
+    10306.1,
+    7513.7
+   ],
+   "mosaico_calce": [
+    10059.11,
+    7452.53
+   ],
+   "desvio_m": 127.226,
+   "delta_m": [
+    -123.495,
+    -30.586
+   ],
+   "esquina_1936_nombre": "Perico"
+  },
+  {
+   "id": "X1772-0193",
+   "sector": "S1772-23",
+   "original": [
+    970.0,
+    660.0
+   ],
+   "indice": [
+    0,
+    -2
+   ],
+   "esquina_1936": 151,
+   "mosaico_identidad": [
+    8317.0,
+    6810.5
+   ],
+   "mosaico_calce": [
+    8407.57,
+    6850.97
+   ],
+   "desvio_m": 49.599,
+   "delta_m": [
+    45.283,
+    20.237
+   ],
+   "esquina_1936_nombre": "Muñoz"
+  },
+  {
+   "id": "X1772-0194",
+   "sector": "S1772-23",
+   "original": [
+    1036.0,
+    660.0
+   ],
+   "indice": [
+    1,
+    -2
+   ],
+   "esquina_1936": 138,
+   "mosaico_identidad": [
+    8358.2,
+    6618.0
+   ],
+   "mosaico_calce": [
+    8451.17,
+    6616.9
+   ],
+   "desvio_m": 46.49,
+   "delta_m": [
+    46.487,
+    -0.549
+   ],
+   "esquina_1936_nombre": "Piñango"
+  },
+  {
+   "id": "X1772-0195",
+   "sector": "S1772-23",
+   "original": [
+    1104.0,
+    660.0
+   ],
+   "indice": [
+    2,
+    -2
+   ],
+   "esquina_1936": 123,
+   "mosaico_identidad": [
+    8415.9,
+    6359.2
+   ],
+   "mosaico_calce": [
+    8496.54,
+    6365.02
+   ],
+   "desvio_m": 40.425,
+   "delta_m": [
+    40.32,
+    2.91
+   ],
+   "esquina_1936_nombre": "Llaguno"
+  },
+  {
+   "id": "X1772-0196",
+   "sector": "S1772-23",
+   "original": [
+    1170.0,
+    660.0
+   ],
+   "indice": [
+    3,
+    -2
+   ],
+   "esquina_1936": 106,
+   "mosaico_identidad": [
+    8473.0,
+    6087.8
+   ],
+   "mosaico_calce": [
+    8535.77,
+    6116.41
+   ],
+   "desvio_m": 34.49,
+   "delta_m": [
+    31.384,
+    14.303
+   ],
+   "esquina_1936_nombre": "Cuartel Viejo"
+  },
+  {
+   "id": "X1772-0197",
+   "sector": "S1772-23",
+   "original": [
+    1236.0,
+    660.0
+   ],
+   "indice": [
+    4,
+    -2
+   ],
+   "esquina_1936": 91,
+   "mosaico_identidad": [
+    8525.0,
+    5824.8
+   ],
+   "mosaico_calce": [
+    8572.92,
+    5885.15
+   ],
+   "desvio_m": 38.531,
+   "delta_m": [
+    23.96,
+    30.176
+   ],
+   "esquina_1936_nombre": "Balconcito"
+  },
+  {
+   "id": "X1772-0198",
+   "sector": "S1772-23",
+   "original": [
+    1304.0,
+    660.0
+   ],
+   "indice": [
+    5,
+    -2
+   ],
+   "esquina_1936": 73,
+   "mosaico_identidad": [
+    8560.4,
+    5528.4
+   ],
+   "mosaico_calce": [
+    8612.66,
+    5667.19
+   ],
+   "desvio_m": 74.152,
+   "delta_m": [
+    26.129,
+    69.396
+   ],
+   "esquina_1936_nombre": "El Truco"
+  }
+ ],
+ "controles_por_hito": [
+  {
+   "id": "H1772-plaza-mayor",
+   "unidad": null,
+   "sector": "S1772-23",
+   "centro_original": [
+    1000.5,
+    824.5
+   ],
+   "mosaico_1936": [
+    8968.2,
+    6839.0
+   ],
+   "nombre_1936": "Plaza Bolívar",
+   "fuente": "public/datos/ciudad.json (plaza) y semillas manuales del calce",
+   "desvio_tps_m": 6.31,
+   "desvio_control_m": 6.18
+  },
+  {
+   "id": "H1772-candelaria",
+   "unidad": "U1772-0214",
+   "sector": "S1772-43",
+   "centro_original": [
+    1066.5,
+    1352.5
+   ],
+   "mosaico_1936": [
+    11230.0,
+    7000.0
+   ],
+   "nombre_1936": "Plaza de Candelaria",
+   "fuente": "src/marcas-datos.js (candelaria, plano DCN 1936); unidad «Plaza de Candelaria y tres cuerpos rojos» del censo",
+   "desvio_tps_m": 302.89,
+   "desvio_control_m": 34.22
+  },
+  {
+   "id": "H1772-la-pastora",
+   "unidad": "U1772-0267",
+   "sector": "S1772-14",
+   "centro_original": [
+    1473.0,
+    473.5
+   ],
+   "mosaico_1936": [
+    8113.0,
+    4866.0
+   ],
+   "nombre_1936": "Iglesia La Pastora",
+   "fuente": "src/hitos/datos/iglesias.js (la-pastora, plano DCN 1936); unidad «Templo de La Pastora» del censo",
+   "desvio_tps_m": 85.59,
+   "desvio_control_m": 137.01
+  }
+ ],
+ "evidencias": [
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-11-X1772-0002.png",
+   "sha256": "65263d58d6fe52a750ad7e1526e68cf678338b501658bbcec6df78e583923042",
+   "nodo": "X1772-0002"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-12-X1772-0011.png",
+   "sha256": "2d416076b777e1976651248e5bfe0c9df62660ca569c393c604875a5813dbf83",
+   "nodo": "X1772-0011"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-13-X1772-0007.png",
+   "sha256": "a6ff36d0a5f7dd44d2fbf86043e6d540f83c848a8aa0a01c9995b6eece568321",
+   "nodo": "X1772-0007"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-13-X1772-0017.png",
+   "sha256": "c91396ff2889030dc85ce48d634ef04b5ef9bc018b149504e63ac28f2213a7c5",
+   "nodo": "X1772-0017"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-21-X1772-0019.png",
+   "sha256": "54152e60eb6845ce32387c3204b9ff5704b314ea27db102b534be615dbaf60e5",
+   "nodo": "X1772-0019"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-21-X1772-0182.png",
+   "sha256": "a06a95e428fd52cb725c303b7e9fa8049a453d542c927538b16ca9b88bbcffb0",
+   "nodo": "X1772-0182"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-22-X1772-0020.png",
+   "sha256": "184ede976a036f1b503a3c73c0a08f06833e423f7d16a5a1222a39312cefeb35",
+   "nodo": "X1772-0020"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-22-X1772-0073.png",
+   "sha256": "8d9cba912fcd4a6cf7401b79fd316e1de029078d1ba56056af328ccaf14b0cb3",
+   "nodo": "X1772-0073"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-23-X1772-0021.png",
+   "sha256": "97e2e70c7fee429cecef1334809bf59b6b7a53683ac7b694e2977dfc35fe9bea",
+   "nodo": "X1772-0021"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-23-X1772-0195.png",
+   "sha256": "b50af2b134424c0cacbef6c598cf34283bb45edd92e69649605b9f5a1c8c8f95",
+   "nodo": "X1772-0195"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-24-X1772-0033.png",
+   "sha256": "1136bf968b073e402378a24c7a5e59fa0ecf36b58ceeb34b858d034239a110b5",
+   "nodo": "X1772-0033"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-24-X1772-0082.png",
+   "sha256": "f42068170b59bdb2702372a74c6912f58864c9fd4cccc9821743b0bf0e8d076e",
+   "nodo": "X1772-0082"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-31-X1772-0119.png",
+   "sha256": "62d41cdb339b1986ad46f554d8dfa791da1d310f21c16b1777b1a245621324d9",
+   "nodo": "X1772-0119"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-31-X1772-0102.png",
+   "sha256": "c16995eac99f5f6968d410678eed2cc39ddc37688473076cbdb87f197d17ba25",
+   "nodo": "X1772-0102"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-32-X1772-0088.png",
+   "sha256": "120ffbf8596bcf9e71c0330cdc7c7d30f906f5a76f434746e0929068c5adf8b4",
+   "nodo": "X1772-0088"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-32-X1772-0090.png",
+   "sha256": "85d13d66a305209017c80551bf3dc80c278298dd260fd76e080f8e803cfdeac2",
+   "nodo": "X1772-0090"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-33-X1772-0154.png",
+   "sha256": "2b18bf09901376dac0717003265b76f30fb5241fae0ced89a7897a433706e0d0",
+   "nodo": "X1772-0154"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-33-X1772-0144.png",
+   "sha256": "d8939964ed7010a598053d697f74fbf98ab56d8a154c4460e240e47785ea7d09",
+   "nodo": "X1772-0144"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-34-X1772-0151.png",
+   "sha256": "952559103e7508e8d2171c82ec4f258f6729e4ad59ff040b09adfceacd033149",
+   "nodo": "X1772-0151"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-34-X1772-0156.png",
+   "sha256": "5f7f9863fa2ecfc8263fe5542e22020d73281cfe714a545eb4c24205e29bf693",
+   "nodo": "X1772-0156"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-42-X1772-0177.png",
+   "sha256": "9929e423bd80b5a250cb5de0d26810ed4fb08a5d71b92962c62f460a2eada2d2",
+   "nodo": "X1772-0177"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-42-X1772-0169.png",
+   "sha256": "84c1e5d65044bffe11250e4500107a5384d4bb62530ba692475c35debe24c7d7",
+   "nodo": "X1772-0169"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-43-X1772-0178.png",
+   "sha256": "d9e1f6f65957335bf9943f4c05830bd148249d407500bc9e80028e345c65587c",
+   "nodo": "X1772-0178"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-43-X1772-0163.png",
+   "sha256": "39817be5b5fb2e7e92d4114362dd7a08cfde7112a76b1fe2e850e4940e61024b",
+   "nodo": "X1772-0163"
+  },
+  {
+   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-44-X1772-0165.png",
+   "sha256": "b0e5c095b24f0a479fe41f845c7ce8a22bc039b35c98aa1dd996ebddd124125e",
+   "nodo": "X1772-0165"
+  }
+ ]
+}

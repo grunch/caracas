@@ -9,35 +9,30 @@
    "cumplido": true,
    "unidades": 292
   },
-  "correspondencia_aprobada_por_unidad": {
-   "cumplido": false,
-   "aprobadas": 0,
-   "provisionales": 292,
-   "trasladado_a": "T33j.2a"
+  "correspondencia_clasificada_por_unidad": {
+   "cumplido": true,
+   "clasificadas": 292,
+   "clases": {
+    "ausente": 168,
+    "desplazada_o_parcial": 6,
+    "uno_a_uno": 42,
+    "vacio_coincide": 76
+   },
+   "muestra_visual": 6,
+   "contradicciones": 0
   },
   "controles_de_calce_por_sector": {
-   "cumplido": false,
-   "sectores_sin_control_independiente": [
-    "S1772-11",
-    "S1772-12",
-    "S1772-13",
-    "S1772-14",
-    "S1772-21",
-    "S1772-24",
-    "S1772-31",
-    "S1772-34",
-    "S1772-41",
-    "S1772-42",
-    "S1772-43",
-    "S1772-44"
-   ],
-   "trasladado_a": "T33j.2a"
+   "cumplido": true,
+   "sectores_sin_control_independiente": [],
+   "sectores_sin_unidades": [
+    "S1772-41"
+   ]
   },
   "hallazgos_confirmados_con_subtarea": {
    "cumplido": true,
    "sin_subtarea": []
   },
-  "fase_1_cerrable": false
+  "fase_1_cerrable": true
  },
  "totales": {
   "unidades": 292,
@@ -64,7 +59,7 @@
   "incidencias": {
    "candidato": 1,
    "confirmado": 1,
-   "confirmado_desacuerdo_causa_geometrica_pendiente": 1,
+   "confirmado_desplazamiento_por_cuadras_fuera_del_nucleo": 1,
    "confirmado_en_calculo_CPU_pendiente_inspeccion_completa": 1,
    "confirmado_en_datos_pendiente_clasificacion_visual": 1,
    "confirmado_general_pendiente_por_unidad": 1,
@@ -313,7 +308,9 @@
    "loo_rms_m": 5.623,
    "loo_max_m": 7.99,
    "controles_independientes": 0,
-   "desvio_independiente_max_m": null
+   "desvio_independiente_max_m": null,
+   "controles_damero": 2,
+   "desvio_damero_mediana_m": 366.94
   },
   {
    "sector": "S1772-12",
@@ -322,7 +319,9 @@
    "loo_rms_m": 18.468,
    "loo_max_m": 21.45,
    "controles_independientes": 0,
-   "desvio_independiente_max_m": null
+   "desvio_independiente_max_m": null,
+   "controles_damero": 2,
+   "desvio_damero_mediana_m": 309.46
   },
   {
    "sector": "S1772-13",
@@ -331,7 +330,9 @@
    "loo_rms_m": 14.244,
    "loo_max_m": 20.51,
    "controles_independientes": 0,
-   "desvio_independiente_max_m": null
+   "desvio_independiente_max_m": null,
+   "controles_damero": 8,
+   "desvio_damero_mediana_m": 164.25
   },
   {
    "sector": "S1772-14",
@@ -340,7 +341,9 @@
    "loo_rms_m": null,
    "loo_max_m": null,
    "controles_independientes": 0,
-   "desvio_independiente_max_m": null
+   "desvio_independiente_max_m": null,
+   "controles_damero": 0,
+   "desvio_damero_mediana_m": null
   },
   {
    "sector": "S1772-21",
@@ -349,7 +352,9 @@
    "loo_rms_m": 14.44,
    "loo_max_m": 24.06,
    "controles_independientes": 0,
-   "desvio_independiente_max_m": null
+   "desvio_independiente_max_m": null,
+   "controles_damero": 9,
+   "desvio_damero_mediana_m": 285.19
   },
   {
    "sector": "S1772-22",
@@ -358,7 +363,9 @@
    "loo_rms_m": 13.165,
    "loo_max_m": 23.92,
    "controles_independientes": 5,
-   "desvio_independiente_max_m": 96.162
+   "desvio_independiente_max_m": 96.162,
+   "controles_damero": 25,
+   "desvio_damero_mediana_m": 96.17
   },
   {
    "sector": "S1772-23",
@@ -367,7 +374,9 @@
    "loo_rms_m": 11.947,
    "loo_max_m": 18.71,
    "controles_independientes": 6,
-   "desvio_independiente_max_m": 18.378
+   "desvio_independiente_max_m": 18.378,
+   "controles_damero": 33,
+   "desvio_damero_mediana_m": 40.42
   },
   {
    "sector": "S1772-24",
@@ -376,7 +385,9 @@
    "loo_rms_m": 15.233,
    "loo_max_m": 20.18,
    "controles_independientes": 0,
-   "desvio_independiente_max_m": null
+   "desvio_independiente_max_m": null,
+   "controles_damero": 5,
+   "desvio_damero_mediana_m": 137.61
   },
   {
    "sector": "S1772-31",
@@ -385,7 +396,9 @@
    "loo_rms_m": 14.215,
    "loo_max_m": 23.0,
    "controles_independientes": 0,
-   "desvio_independiente_max_m": null
+   "desvio_independiente_max_m": null,
+   "controles_damero": 7,
+   "desvio_damero_mediana_m": 259.9
   },
   {
    "sector": "S1772-32",
@@ -394,7 +407,9 @@
    "loo_rms_m": 12.359,
    "loo_max_m": 24.78,
    "controles_independientes": 7,
-   "desvio_independiente_max_m": 93.23
+   "desvio_independiente_max_m": 93.23,
+   "controles_damero": 24,
+   "desvio_damero_mediana_m": 95.33
   },
   {
    "sector": "S1772-33",
@@ -403,7 +418,9 @@
    "loo_rms_m": 11.446,
    "loo_max_m": 21.93,
    "controles_independientes": 5,
-   "desvio_independiente_max_m": 21.177
+   "desvio_independiente_max_m": 21.177,
+   "controles_damero": 23,
+   "desvio_damero_mediana_m": 78.92
   },
   {
    "sector": "S1772-34",
@@ -412,7 +429,9 @@
    "loo_rms_m": 11.731,
    "loo_max_m": 20.36,
    "controles_independientes": 0,
-   "desvio_independiente_max_m": null
+   "desvio_independiente_max_m": null,
+   "controles_damero": 11,
+   "desvio_damero_mediana_m": 178.88
   },
   {
    "sector": "S1772-41",
@@ -421,7 +440,9 @@
    "loo_rms_m": 11.785,
    "loo_max_m": 12.14,
    "controles_independientes": 0,
-   "desvio_independiente_max_m": null
+   "desvio_independiente_max_m": null,
+   "controles_damero": 0,
+   "desvio_damero_mediana_m": null
   },
   {
    "sector": "S1772-42",
@@ -430,7 +451,9 @@
    "loo_rms_m": 14.926,
    "loo_max_m": 24.22,
    "controles_independientes": 0,
-   "desvio_independiente_max_m": null
+   "desvio_independiente_max_m": null,
+   "controles_damero": 6,
+   "desvio_damero_mediana_m": 250.27
   },
   {
    "sector": "S1772-43",
@@ -439,7 +462,9 @@
    "loo_rms_m": 13.801,
    "loo_max_m": 19.45,
    "controles_independientes": 0,
-   "desvio_independiente_max_m": null
+   "desvio_independiente_max_m": null,
+   "controles_damero": 11,
+   "desvio_damero_mediana_m": 236.43
   },
   {
    "sector": "S1772-44",
@@ -448,7 +473,9 @@
    "loo_rms_m": 9.156,
    "loo_max_m": 12.57,
    "controles_independientes": 0,
-   "desvio_independiente_max_m": null
+   "desvio_independiente_max_m": null,
+   "controles_damero": 1,
+   "desvio_damero_mediana_m": 256.38
   }
  ],
  "incidencias": [
@@ -532,7 +559,7 @@
   },
   {
    "id": "I1772-010",
-   "estado": "confirmado_desacuerdo_causa_geometrica_pendiente",
+   "estado": "confirmado_desplazamiento_por_cuadras_fuera_del_nucleo",
    "prioridad": "P0",
    "subtareas": [
     "T33j.2a",
@@ -934,6 +961,391 @@
    "sha256": "74e17ea68bf8c058a0d0e7c7b4256c120d694ad758cf44b0de5987491aa47844",
    "documentos": [
     "sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-11-X1772-0002.png",
+   "sha256": "65263d58d6fe52a750ad7e1526e68cf678338b501658bbcec6df78e583923042",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-12-X1772-0011.png",
+   "sha256": "2d416076b777e1976651248e5bfe0c9df62660ca569c393c604875a5813dbf83",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-13-X1772-0007.png",
+   "sha256": "a6ff36d0a5f7dd44d2fbf86043e6d540f83c848a8aa0a01c9995b6eece568321",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-13-X1772-0017.png",
+   "sha256": "c91396ff2889030dc85ce48d634ef04b5ef9bc018b149504e63ac28f2213a7c5",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-21-X1772-0019.png",
+   "sha256": "54152e60eb6845ce32387c3204b9ff5704b314ea27db102b534be615dbaf60e5",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-21-X1772-0182.png",
+   "sha256": "a06a95e428fd52cb725c303b7e9fa8049a453d542c927538b16ca9b88bbcffb0",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-22-X1772-0020.png",
+   "sha256": "184ede976a036f1b503a3c73c0a08f06833e423f7d16a5a1222a39312cefeb35",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-22-X1772-0073.png",
+   "sha256": "8d9cba912fcd4a6cf7401b79fd316e1de029078d1ba56056af328ccaf14b0cb3",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-23-X1772-0021.png",
+   "sha256": "97e2e70c7fee429cecef1334809bf59b6b7a53683ac7b694e2977dfc35fe9bea",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-23-X1772-0195.png",
+   "sha256": "b50af2b134424c0cacbef6c598cf34283bb45edd92e69649605b9f5a1c8c8f95",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-24-X1772-0033.png",
+   "sha256": "1136bf968b073e402378a24c7a5e59fa0ecf36b58ceeb34b858d034239a110b5",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-24-X1772-0082.png",
+   "sha256": "f42068170b59bdb2702372a74c6912f58864c9fd4cccc9821743b0bf0e8d076e",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-31-X1772-0119.png",
+   "sha256": "62d41cdb339b1986ad46f554d8dfa791da1d310f21c16b1777b1a245621324d9",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-31-X1772-0102.png",
+   "sha256": "c16995eac99f5f6968d410678eed2cc39ddc37688473076cbdb87f197d17ba25",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-32-X1772-0088.png",
+   "sha256": "120ffbf8596bcf9e71c0330cdc7c7d30f906f5a76f434746e0929068c5adf8b4",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-32-X1772-0090.png",
+   "sha256": "85d13d66a305209017c80551bf3dc80c278298dd260fd76e080f8e803cfdeac2",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-33-X1772-0154.png",
+   "sha256": "2b18bf09901376dac0717003265b76f30fb5241fae0ced89a7897a433706e0d0",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-33-X1772-0144.png",
+   "sha256": "d8939964ed7010a598053d697f74fbf98ab56d8a154c4460e240e47785ea7d09",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-34-X1772-0151.png",
+   "sha256": "952559103e7508e8d2171c82ec4f258f6729e4ad59ff040b09adfceacd033149",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-34-X1772-0156.png",
+   "sha256": "5f7f9863fa2ecfc8263fe5542e22020d73281cfe714a545eb4c24205e29bf693",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-42-X1772-0177.png",
+   "sha256": "9929e423bd80b5a250cb5de0d26810ed4fb08a5d71b92962c62f460a2eada2d2",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-42-X1772-0169.png",
+   "sha256": "84c1e5d65044bffe11250e4500107a5384d4bb62530ba692475c35debe24c7d7",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-43-X1772-0178.png",
+   "sha256": "d9e1f6f65957335bf9943f4c05830bd148249d407500bc9e80028e345c65587c",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-43-X1772-0163.png",
+   "sha256": "39817be5b5fb2e7e92d4114362dd7a08cfde7112a76b1fe2e850e4940e61024b",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-44-X1772-0165.png",
+   "sha256": "b0e5c095b24f0a479fe41f845c7ce8a22bc039b35c98aa1dd996ebddd124125e",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "S1772-23-X1772-0021.png",
+   "sha256": "97e2e70c7fee429cecef1334809bf59b6b7a53683ac7b694e2977dfc35fe9bea",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "S1772-43-X1772-0163.png",
+   "sha256": "39817be5b5fb2e7e92d4114362dd7a08cfde7112a76b1fe2e850e4940e61024b",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "S1772-11-X1772-0002.png",
+   "sha256": "65263d58d6fe52a750ad7e1526e68cf678338b501658bbcec6df78e583923042",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "uno_a_uno-U1772-0064.png",
+   "sha256": "5811c92c844e035a47fb01104e6dd0907d34879ab25771434ebd92ee7c2cb6a7",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "ausente-U1772-0184.png",
+   "sha256": "61ec1f7fa1bb38162dd2606e850b2b7044943d60a37e1e5e18d0360e54537604",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "desplazada_o_parcial-U1772-0055.png",
+   "sha256": "fa920b722fd521e8443fd40062859c6bcb0595ee00549afc46e21f3753f4305b",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/ausente-U1772-0001.png",
+   "sha256": "ce4cbde9397d90f5b82fa23a7e4d49a3be9e9038dedbfa09173315807dba3366",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/ausente-U1772-0035.png",
+   "sha256": "10ff4bf7b2653a7c9425d8121f553249f2b7a941b249bc53e951e7633479dd93",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/ausente-U1772-0090.png",
+   "sha256": "86ef6312ee8521cec04f0e465cd555d764f8951e6ce2bbbeb78fd31bb89e7a1a",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/ausente-U1772-0149.png",
+   "sha256": "90d7b3b9bbd4faffe268d34ee22a8b2a8b86fc3b81b192236e58dd6a8af4bf14",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/ausente-U1772-0184.png",
+   "sha256": "61ec1f7fa1bb38162dd2606e850b2b7044943d60a37e1e5e18d0360e54537604",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/ausente-U1772-0254.png",
+   "sha256": "a029a6fd590e41fa5b142d21a6e6578489b8622b803a8370fa7d3214b0acef9f",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/vacio_coincide-U1772-0006.png",
+   "sha256": "2a35007ce5790f2723d52ed625b185dc38ab649f42c6fed9d17e7c14bcaa8dba",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/vacio_coincide-U1772-0086.png",
+   "sha256": "0fd5372629762d9fe5949129734063ef3d90e9ec9c83cd5ed76702173a93c896",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/vacio_coincide-U1772-0161.png",
+   "sha256": "1d06d8a5abb68b30bd7bf3de49818a8a5d49f060b7e7224ffcb73abaf38f92f6",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/vacio_coincide-U1772-0219.png",
+   "sha256": "c063513217ff30427e622ae2503ac4a5a4a299b76a261b56910d124b1777038a",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/vacio_coincide-U1772-0233.png",
+   "sha256": "95ef593c5589de8a97afb57b0946833dee05d9ab7dae327b273f6d37701c76f9",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/vacio_coincide-U1772-0245.png",
+   "sha256": "29efe8c244eadbbb79a0aab68bde0b758b39b6bf84b6e23b8dc33ba8c3c9b3d3",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/uno_a_uno-U1772-0050.png",
+   "sha256": "2626bd9d98f4f8292a9091e84f78830b9edbbbbac869c993403156d6187fc900",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/uno_a_uno-U1772-0064.png",
+   "sha256": "5811c92c844e035a47fb01104e6dd0907d34879ab25771434ebd92ee7c2cb6a7",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/uno_a_uno-U1772-0079.png",
+   "sha256": "6b4cab146c0e31c0416d9ce82b8e00045b872818e1e900720c1bd5ae01ee9654",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/uno_a_uno-U1772-0094.png",
+   "sha256": "140681d55bdd8191cf1b7f719cf844a380c8bceef6c5eccba0b6e3827c1c372b",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/uno_a_uno-U1772-0109.png",
+   "sha256": "642a95e4f849aff3ad86e7a9f78034cfc2b1dbadb78a2099ee7947ab52aa521a",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/uno_a_uno-U1772-0138.png",
+   "sha256": "1ecdc3ebc749d0af53fe31b9786e8af31e9da1d7b90f26447542c97f996007d7",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/desplazada_o_parcial-U1772-0055.png",
+   "sha256": "fa920b722fd521e8443fd40062859c6bcb0595ee00549afc46e21f3753f4305b",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/desplazada_o_parcial-U1772-0082.png",
+   "sha256": "8f83fa5ecec3e79aab676315dba812eeb597df5032b2b68e240e6bf65923818e",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/desplazada_o_parcial-U1772-0096.png",
+   "sha256": "f53a3bea5fa48315d0b27e21ef8269160b12a83791d09193af371b93c178aad7",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/desplazada_o_parcial-U1772-0123.png",
+   "sha256": "511f68b6b3b4f83a1b0e49b18dbceacf94a6fb1723d366708432c3e83fccb3dd",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/desplazada_o_parcial-U1772-0140.png",
+   "sha256": "a2d5fcd2458607d5939c164efe534366bf03b102c49fb5a84cff17d1cba2c502",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/desplazada_o_parcial-U1772-0199.png",
+   "sha256": "746a47646f750ab2e5801f73ea7ff9a61bdd0abe47b3ce81acd450d9e0010330",
+   "documentos": [
+    "correspondencias-unidades.json"
    ]
   }
  ],
