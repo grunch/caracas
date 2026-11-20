@@ -217,3 +217,16 @@ for r in rows:print(r['frente'],len(r['candidatos']),r['dispersion_origenes_m'])
 4. En fase 7, comprobar cierres y accesos con la geometría visible y las colisiones. La proyección de cubiertas no demuestra que una persona pueda atravesar el hueco.
 
 Siguen pendientes el enlace de todos los frentes del original y la inspección de accesos. No se modifica la puerta de salida del plan para dar por completa una auditoría parcial.
+
+## Validación de la entrega
+
+- `npx vitest run`: 71 archivos, 1.290 tests aprobados.
+- Python del proyecto, `-m pytest tools/geo/tests -q`: 539 tests aprobados.
+- Los 118 archivos de B1772-001 mantienen sus hashes tras las mediciones y las capturas.
+- `git diff --check` sin errores. Cambio productivo: 91 líneas nuevas de instrumentación, sin cambiar geometría ni el visor.
+
+Para E2E se genera la muestra de 1 km² con `armarMuestra` de `tools/muestra.mjs`, en `.cache/e2e-muestra`, conservando `public/` completo intacto. La muestra tiene 3.148 techos y 1.198 árboles. Vite usa ese `publicDir`, puerto exclusivo 5227, y Playwright usa un trabajador y `reuseExistingServer: false`. Los archivos de configuración temporales importan los del proyecto; no se cambian tests ni expectativas. Esta ejecución tiene el alcance de la muestra de CI, no de toda Caracas.
+
+Los intentos previos con todos los datos no completaron la suite: hubo tiempos agotados y un fallo de lectura alfa bajo render por software. Un primer intento con muestra terminó antes del resumen; el siguiente reutilizó su servidor y perdió la conexión al cerrarse aquel. Se reinició con servidor exclusivo. Estos intentos no se cuentan como ejecuciones verdes ni como nuevos defectos causados por el auditor, que no modifica la aplicación.
+
+Resultado final: `npx playwright test --config .cache/playwright-muestra.config.mjs` terminó con código 0: **71 passed, 1 skipped (12,2 min)**. El total aprobado incluye la falla esperada T41b que ya declara la suite; no se corrigió ni ocultó esa limitación aquí.
