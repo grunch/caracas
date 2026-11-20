@@ -384,3 +384,10 @@ a rasterizar y dilatar cada lote. Solo sustituye la máscara cuando sus diferenc
 están a menos de 2 m del borde exterior; conserva el reparto anterior cuando hay
 plazas, pasajes, huecos interiores o contornos cóncavos. Es una corrección geométrica,
 no una identificación de las parcelas históricas individuales.
+
+### Frentes junto a monumentos (T33i)
+
+En el visor, `src/hitos/suprimir.js` comprueba las alas techadas de una casa de
+patio antes de apagarla por un monumento. Un solar que toca la Catedral no borra
+el frente de la calle opuesta. Si una época posterior ocupa ese solar con una
+cubierta de lote entero, la supresión vuelve a aplicarse desde esa época.

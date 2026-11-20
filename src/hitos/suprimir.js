@@ -3,6 +3,9 @@
  * se decide cuáles: las que pisan la zona de supresión de un hito (polígonos en píxeles del plano). No se
  * borran: se les cambia la vida (src/epocas.js) para que no nazcan mientras el hito esté en pie.
  */
+import { ALA, CAMPOS_MARCO, CAMPOS_ALA, esDePatio } from '../alas.js'
+import { recortarConvexo, areaConSigno } from '../poligono.js'
+
 const ETAPAS_POR_VIDA = 8 // vida = nace + 8 · muere (ver src/ciudad.js)
 // Un intervalo vacío: nace y muere en la época 7, que no existe (hay 6: 0–5). No alcanza con "nace en 7":
 // sin línea de tiempo el visor pone la época en 99 (SIN_LINEA_DE_TIEMPO) y esa casa aparecería.
@@ -48,21 +51,65 @@ export function zonasDeSupresion(hitos) {
  * zona se le quitan las épocas en que el hito está en pie (ver vidaSinHito).
  * Sin `vida` (la ciudad de demostración), todos los techos vivían siempre.
  */
-export function suprimirTechos({ vertices, techos, vida = null }, zonas) {
+export function suprimirTechos({ vertices, techos, vida = null, marcos = null, alas = null, historia = null }, zonas) {
   const n = techos.length / 4
   const salida = vida ? Uint32Array.from(vida) : new Uint32Array(n)
   if (!zonas.length) return salida
+  const porTecho = new Map()
+  if (marcos && alas) {
+    for (let k = 0; k < marcos.length; k += CAMPOS_MARCO) {
+      if (marcos[k + 10] > 0) porTecho.set(marcos[k], marcos.subarray(k, k + CAMPOS_MARCO))
+    }
+  }
   const cajas = zonas.map(({ poligono }) => cajaDe(poligono))
   for (let t = 0; t < n; t++) {
     const [inicio, cuantos] = [techos[t * 4], techos[t * 4 + 1]]
     const anillo = Array.from({ length: cuantos }, (_, k) => [vertices[(inicio + k) * 2], vertices[(inicio + k) * 2 + 1]])
     const caja = cajaDe(anillo)
+    let construidas = null
     zonas.forEach(({ poligono, desde, hasta }, z) => {
       if (!cajasSePisan(caja, cajas[z]) || !seSolapan(anillo, poligono)) return
+      const marco = porTecho.get(t)
+      if (marco) {
+        construidas ??= huellasConstruidas(anillo, marco, alas)
+        if (!construidas.some((huella) => seSolapan(huella, poligono))) {
+          // El solar puede quedar bajo el hito sin borrar la fachada. Si una etapa
+          // posterior ocupa el lote entero, vuelve a regir la supresión normal.
+          for (let e = desde; e < (hasta || 6); e++) {
+            const estilo = historia ? historia[t * 6 + Math.min(e, 5)] % 16 : (techos[t * 4 + 2] >> 8) & 255
+            if (!esDePatio(estilo, techos[t * 4 + 3], e)) {
+              salida[t] = vidaSinHito(salida[t], e, !hasta && e === 5 ? 0 : e + 1)
+            }
+          }
+          return
+        }
+      }
       salida[t] = vidaSinHito(salida[t], desde, hasta)
     })
   }
   return salida
+}
+
+/** Solo las alas techadas, recortadas con la huella como en el alzado del visor. */
+function huellasConstruidas(anillo, marco, alas) {
+  const [, ox, oy, eux, euy, ancho, fondo, , , primera, cuantas] = marco
+  const local = anillo.map(([x,y]) => [(x - ox) * eux + (y - oy) * euy, -(x - ox) * euy + (y - oy) * eux])
+  const us = local.map((p) => p[0]), vs = local.map((p) => p[1])
+  const [uMin, uMax, vMin, vMax] = [Math.min(...us), Math.max(...us), Math.min(...vs), Math.max(...vs)]
+  const construidas = []
+  for (let k = primera * CAMPOS_ALA; k < (primera + cuantas) * CAMPOS_ALA; k += CAMPOS_ALA) {
+    let [tipo, u0, v0, u1, v1] = alas.subarray(k, k + CAMPOS_ALA)
+    if (tipo === ALA.SOLAR || tipo === ALA.PATIO) continue
+    // El alzado estira las alas del borde hasta la huella real del lote.
+    if (u0 <= .04) u0 = Math.min(u0, uMin)
+    if (v0 <= .04) v0 = Math.min(v0, vMin)
+    if (u1 >= ancho - .04) u1 = Math.max(u1, uMax)
+    if (v1 >= fondo - .04) v1 = Math.max(v1, vMax)
+    const recorte = recortarConvexo(local, [[u0,v0],[u1,v0],[u1,v1],[u0,v1]])
+    if (recorte.length < 3 || Math.abs(areaConSigno(recorte)) < 1e-8) continue
+    construidas.push(recorte.map(([u,v]) => [ox + u * eux - v * euy, oy + u * euy + v * eux]))
+  }
+  return construidas
 }
 
 /**
