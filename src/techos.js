@@ -255,7 +255,8 @@ export function planDeTecho({
 
 /** Altura del faldón (sobre la base de la casa) en el punto (u, v) del lote. */
 export function alturaDe(f, u, v) {
-  return f.cumbre - f.tan * ((u - f.origen[0]) * f.caida[0] + (v - f.origen[1]) * f.caida[1])
+  // nunca más alto que su cumbre: un ala estirada fuera del lote (src/alas.js) sigue plana del lado alto
+  return f.cumbre - f.tan * Math.max(0, (u - f.origen[0]) * f.caida[0] + (v - f.origen[1]) * f.caida[1])
 }
 
 const TOLERANCIA_M = 1e-7

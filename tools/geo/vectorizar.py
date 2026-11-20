@@ -282,7 +282,9 @@ def _sin_astillas(mascara, metro, area_minima_m2=0.0):
 
 def _poligonos_de_cara(red, lista, cajas, metro):
     """{etiqueta: polígono (n, 2) en la ventana de la cuadra}: los lados de cada cuadra según su cara de la red
-    de 1936, ajustados a sus fachadas. Solo si la cara tiene una sola cuadra y el polígono la cubre."""
+    de 1936, ajustados a las fachadas. Los pedazos de manzana de una misma cara (un pasaje del plano que la
+    red de hoy no tiene los separa) comparten el polígono, ajustado a todos juntos. Solo para la cuadra que su
+    polígono cubre."""
     de_cara = {}
     for etiqueta, parte in lista:
         if parte.sum() * metro ** 2 < CUADRA_MINIMA_M2:
@@ -294,12 +296,22 @@ def _poligonos_de_cara(red, lista, cajas, metro):
             de_cara.setdefault(cara, []).append((etiqueta, parte))
     salida = {}
     for cara, suyas in de_cara.items():
-        if len(suyas) != 1:
+        x0 = min(cajas[e][0] for e, _ in suyas)
+        y0 = min(cajas[e][1] for e, _ in suyas)
+        x1 = max(cajas[e][0] + cajas[e][2] for e, _ in suyas)
+        y1 = max(cajas[e][1] + cajas[e][3] for e, _ in suyas)
+        juntas = np.zeros((y1 - y0, x1 - x0), bool)
+        for etiqueta, parte in suyas:
+            x, y, w, h = cajas[etiqueta]
+            juntas[y - y0:y - y0 + h, x - x0:x - x0 + w] |= parte
+        poligono = ajustar_cara(red.caras36[cara], juntas, (x0, y0), metro)
+        if poligono is None:
             continue
-        etiqueta, parte = suyas[0]
-        poligono = ajustar_cara(red.caras36[cara], parte, cajas[etiqueta][:2], metro)
-        if poligono is not None and (_relleno(poligono, parte.shape) & parte).sum() >= COBERTURA_DE_CARA * parte.sum():
-            salida[etiqueta] = poligono
+        for etiqueta, parte in suyas:
+            x, y = cajas[etiqueta][:2]
+            propio = poligono - (x - x0, y - y0)
+            if (_relleno(propio, parte.shape) & parte).sum() >= COBERTURA_DE_CARA * parte.sum():
+                salida[etiqueta] = propio
     return salida
 
 

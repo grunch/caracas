@@ -480,3 +480,18 @@ def test_una_casa_que_apenas_pisa_un_edificio_publico_no_se_le_encima():
     for p, t, cede in zip(polis, res['techos'], res['cede']):
         if t[3] != ESTILO_PUBLICO and cede == -1:
             assert p.intersection(iglesia).area < 0.02 * p.area   # la que no le cede el lugar no la pisa
+
+
+def test_dos_pedazos_de_manzana_en_una_misma_cara_comparten_sus_lados():
+    # una cara de 100 × 100 m partida en dos por un pasaje de 1936 que la cruza (y que no está en la red de hoy):
+    # cada mitad tiene muescas y no se deja repartir sola, pero las dos siguen los lados de la cara
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    c[120:136, 30:230] = CLASE['calle']            # el pasaje, de este a oeste
+    c[30:80, 100:160] = CLASE['calle']             # una plazoleta al norte
+    c[190:230, 60:120] = CLASE['calle']            # y otra al sur
+    res = vectorizar(c, METRO, plaza=(130, 130), red=red_de(marco_de_calles(20, 20, 240, 240), c))
+    assert res['techos'] and len(res['marcos']) == len(res['techos'])
+    assert all(min(abs(m[3]), abs(m[4])) < 1e-6 for m in res['marcos'])
+    al_oeste = [m for m in res['marcos'] if m[4] < -0.99]     # eu = (0, −1): las que dan a la calle del oeste
+    assert len(al_oeste) >= 4 and all(abs(m[1] - 30) < 1.5 for m in al_oeste)   # las de las dos mitades, en una línea
