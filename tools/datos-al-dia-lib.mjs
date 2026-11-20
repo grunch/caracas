@@ -6,9 +6,13 @@ const FUERA_DE_GIT = ['fuentes/derivados/', 'public/', 'original:', '.cache/']
 // lo que el pipeline lee al arrancar (tools/datos.mjs, pasosCompletos) y no figura fijo en los pasos
 const LEIDOS_AL_ARRANCAR = [/^fuentes\/(imagenes|datos|mapas)\/[^/]+\/ficha\.json$/, /^tools\/geo\/epocas\/.+\.json$/]
 
-/** Las rutas versionadas que generan los datos: el código y las entradas de cada paso (tools/datos-pasos.mjs). */
+// la definición del pipeline: los comandos y parámetros de cada paso, y quien los arma y los corre
+const DEFINEN_EL_PIPELINE = ['tools/datos-pasos.mjs', 'tools/datos.mjs']
+
+/** Las rutas versionadas que generan los datos: la definición del pipeline y el código y las entradas de cada paso
+ * (tools/datos-pasos.mjs). */
 export function rutasQueGeneranDatos(pasos) {
-  const rutas = pasos.flatMap((p) => [...(p.codigo ?? []), ...(p.entradas ?? [])])
+  const rutas = [...DEFINEN_EL_PIPELINE, ...pasos.flatMap((p) => [...(p.codigo ?? []), ...(p.entradas ?? [])])]
   return [...new Set(rutas)].filter((r) => !FUERA_DE_GIT.some((x) => r.startsWith(x))).sort()
 }
 

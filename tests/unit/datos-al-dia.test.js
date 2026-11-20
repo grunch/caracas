@@ -10,7 +10,8 @@ const PASOS_DE_PRUEBA = [
 
 describe('rutasQueGeneranDatos', () => {
   test('junta el código y las entradas que están en git, sin repetir y en orden', () => {
-    expect(rutasQueGeneranDatos(PASOS_DE_PRUEBA)).toEqual(['package.json', 'src/ciudad.js', 'tools/geo/cuadras-1772.json', 'tools/geo/vectorizar.py'])
+    expect(rutasQueGeneranDatos(PASOS_DE_PRUEBA)).toEqual(['package.json', 'src/ciudad.js', 'tools/datos-pasos.mjs', 'tools/datos.mjs',
+      'tools/geo/cuadras-1772.json', 'tools/geo/vectorizar.py'])
   })
 
   test('deja fuera lo generado y los escaneos originales, que no están en git', () => {
@@ -24,6 +25,13 @@ describe('rutasQueGeneranDatos', () => {
       expect(rutas).toContain(r)
     }
     expect(rutas).not.toContain('src/acerca.js')
+  })
+
+  test('incluye la definición del pipeline: cambiar un comando o un parámetro de un paso cambia los datos', () => {
+    const rutas = rutasQueGeneranDatos([])
+    expect(rutas).toContain('tools/datos-pasos.mjs')
+    expect(rutas).toContain('tools/datos.mjs')
+    expect(cambiosQueTocanDatos(['tools/datos-pasos.mjs'], rutasQueGeneranDatos(PASOS))).toEqual(['tools/datos-pasos.mjs'])
   })
 })
 
