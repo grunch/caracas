@@ -214,3 +214,32 @@ test('sin ?planos, la hoja muestra siempre el plano de 1936 (no se pega el plano
   await page.waitForTimeout(1500)
   expect(pedidos.filter((u) => u.includes('plano/epocas.json'))).toEqual([])
 })
+
+// a 800 px, con la ciudad levantada, #alzar dice «Acostar la ciudad» y la barra tiene ocho botones: por encima
+// de 640 px no partía en filas y su borde derecho fijo dejaba los de la izquierda fuera de la ventana (o los
+// apretaba hasta partirles el texto); con lo de hoy prendido, la leyenda queda encima de la barra
+for (const ancho of [700, 800]) {
+  test(`a ${ancho} px con la ciudad levantada, todos los botones de abajo quedan dentro de la ventana`, async ({ page }) => {
+    await page.setViewportSize({ width: ancho, height: 600 })
+    await page.goto('/?sinintro')
+    await page.waitForFunction(() => window.lab?.ready === true)
+    await page.locator('#alzar').click()
+    await expect(page.locator('#alzar')).toHaveText('Acostar la ciudad')
+    await page.locator('#hoy').click()
+    await expect(page.locator('#leyenda')).toBeVisible()
+    const cajas = await page.locator('#botones .panel:visible').evaluateAll((bs) => bs.map((b) => {
+      const r = b.getBoundingClientRect()
+      return { id: b.id, izq: r.left, der: r.right, arriba: r.top, abajo: r.bottom, alto: r.height }
+    }))
+    expect(cajas.length).toBeGreaterThanOrEqual(8)
+    for (const c of cajas) {
+      expect(c.izq, c.id).toBeGreaterThanOrEqual(0)
+      expect(c.der, c.id).toBeLessThanOrEqual(ancho)
+      expect(c.arriba, c.id).toBeGreaterThanOrEqual(0)
+      expect(c.abajo, c.id).toBeLessThanOrEqual(600)
+      expect(c.alto, `${c.id}: el texto en una sola línea`).toBeLessThan(50)
+    }
+    const leyenda = await page.locator('#leyenda').evaluate((l) => l.getBoundingClientRect().bottom)
+    expect(leyenda).toBeLessThanOrEqual(Math.min(...cajas.map((c) => c.arriba)))
+  })
+}
