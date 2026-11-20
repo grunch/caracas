@@ -445,3 +445,28 @@ def test_una_plaza_que_ya_estaba_en_1772_no_se_rellena():
     ed72[30:110, 100:160] = False           # la plaza ya era plaza
     res = vectorizar(c, METRO, plaza=(130, 130), red=red_de(marco_de_calles(20, 20, 240, 240), c, ed72))
     assert res['juntas'] == [] and set(res['antes']) == {0}
+
+
+def test_la_cuadra_de_antes_no_pisa_una_cuadra_vecina_que_no_reemplaza():
+    import cv2
+    from tools.geo.caras import Red
+    from tools.geo.vectorizar import _cuadras_de_antes
+    # Arrange: la cuadra del pasaje; una miga de 5 × 5 m adentro lleva el número de la cuadra de enfrente (2),
+    # que casi toda queda fuera de esta cara
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    c[30:150, 120:136] = CLASE['calle']
+    ed72 = np.zeros(c.shape, bool)
+    ed72[30:230, 30:230] = True
+    cuadras = (c == CLASE['edificado']).astype(np.int32)
+    cuadras[30:40, 200:210] = 2
+    areas = {1: int((cuadras == 1).sum()), 2: 20000}
+    red = Red(red_de(marco_de_calles(20, 20, 240, 240), c, ed72)['tramos'])
+
+    # Act
+    antes = _cuadras_de_antes(red, ed72, c, cuadras, areas, METRO)
+
+    # Assert
+    assert len(antes) == 1 and antes[0]['miembros'] == {1}
+    x0, y0 = antes[0]['origen']
+    assert not antes[0]['cuadra'][30 - y0:40 - y0, 200 - x0:210 - x0].any()

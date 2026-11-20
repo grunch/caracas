@@ -327,15 +327,20 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro):
         abierto = _sin_astillas(cuadra & calle, metro)
         if abierto.sum() * metro ** 2 < ABIERTO_MINIMO_M2:
             continue
+        # las cuadras de 1936 que reemplaza: las que caen casi enteras adentro; lo de las demás (una miga con el
+        # número de la cuadra de enfrente) no es de esta
+        suyas = cuadras[y0:y1, x0:x1]
+        cuenta = np.bincount(suyas[cuadra])
+        miembros = {int(e) for e in np.flatnonzero(cuenta) if e > 0 and cuenta[e] >= 0.5 * areas.get(int(e), np.inf)}
+        if not miembros:
+            continue
+        cuadra = cuadra & ((suyas == 0) | np.isin(suyas, list(miembros)))
         de_antes = _clases_de_antes(cl, cuadra)
         if not es_de_solo_casas(de_antes, cuadra, metro, CLASE['edificado'], CLASE['publico']) \
                 or lotes_por_lados(cuadra, metro, 0, poligono) is None:
             continue
-        cuenta = np.bincount(cuadras[y0:y1, x0:x1][cuadra])
-        miembros = {int(e) for e in np.flatnonzero(cuenta) if e > 0 and cuenta[e] >= 0.5 * areas.get(int(e), np.inf)}
-        if miembros:
-            salida.append({'miembros': miembros, 'cuadra': cuadra, 'origen': (x0, y0), 'clases': de_antes,
-                           'poligono': poligono, 'abierto': abierto})
+        salida.append({'miembros': miembros, 'cuadra': cuadra, 'origen': (x0, y0), 'clases': de_antes,
+                       'poligono': poligono, 'abierto': abierto & cuadra})
     return salida
 
 

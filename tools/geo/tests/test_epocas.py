@@ -427,3 +427,29 @@ def test_una_casa_de_despues_que_cede_a_un_edificio_publico_muere_cuando_el_nace
     # Assert
     assert vida[1] == [2, ep.PUBLICOS_DESDE]   # nace con su calle y vive hasta que llega el edificio
     assert quitar == {2}                       # su calle se abre cuando el edificio ya está: no llega a vivir
+
+
+def test_varias_casas_angostas_que_entre_todas_tapan_una_de_1578_le_pasan_la_posta():
+    # Arrange: una casa de 1578 de 20×20 y cuatro lotes de 1936 de 3×20 (15 % cada uno): ninguno solo llega
+    # a PISADA_MINIMA, pero juntos la tapan en un 60 %; tres nacen en 1772 y el cuarto en 1889
+    c78 = ciudad_de([cuadrado(10, 10, 20)])
+    lote = lambda x: [[x, 10], [x + 3, 10], [x + 3, 30], [x, 30]]
+    c36 = ciudad_de([lote(10), lote(14), lote(18), lote(22)])
+    huellas36 = ep.huellas(c36, forma=(50, 50), escala=1.0)
+    construido = [np.ones((50, 50), bool) for _ in range(4)]
+
+    # Act
+    vida = ep.vida_de_1578(c78, huellas36, nace36=np.array([1, 1, 3, 1]), construido=construido, escala=1.0)
+
+    # Assert: muere en 1772, cuando las tres primeras ya la tapan en un 45 %
+    assert vida == [[0, 1]]
+
+
+def test_dos_versiones_de_una_misma_casa_no_cuentan_doble_para_tapar_una_de_1578():
+    # la cuadra de antes y la de después se enciman: el mismo 10 % dos veces no es un 20 %
+    c78 = ciudad_de([cuadrado(10, 10, 20)])
+    c36 = ciudad_de([[[10, 10], [12, 10], [12, 30], [10, 30]]] * 2)
+    huellas36 = ep.huellas(c36, forma=(50, 50), escala=1.0)
+    construido = [np.ones((50, 50), bool) for _ in range(4)]
+    vida = ep.vida_de_1578(c78, huellas36, nace36=np.array([1, 1]), construido=construido, escala=1.0)
+    assert vida == [[0, ep.ULTIMA]]
