@@ -36,7 +36,18 @@
         "pitch": 1.5
       },
       "captura": "S1772-11.png",
-      "sha256_captura": "7b7fd50ece7219c784473c8c0d5019401b7d152b96e70f5d7c508684b7c5f669"
+      "sha256_captura": "7b7fd50ece7219c784473c8c0d5019401b7d152b96e70f5d7c508684b7c5f669",
+      "clasificacion_original": {
+        "unidades": 14,
+        "ocupacion": {
+          "aislada": 2,
+          "parcial": 5,
+          "terreno_libre": 7
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-12",
@@ -66,7 +77,20 @@
         "pitch": 1.5
       },
       "captura": "S1772-12.png",
-      "sha256_captura": "2981aff0168d8d5a986f6391c7cc0f3432adc2a0917a306ac073fd39fa71acbf"
+      "sha256_captura": "2981aff0168d8d5a986f6391c7cc0f3432adc2a0917a306ac073fd39fa71acbf",
+      "clasificacion_original": {
+        "unidades": 9,
+        "ocupacion": {
+          "parcial": 2,
+          "continua": 2,
+          "aislada": 4,
+          "parte_de_otra_unidad": 1
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      },
+      "unidades_localizadas_actuales": 9
     },
     {
       "id": "S1772-13",
@@ -96,7 +120,18 @@
         "pitch": 1.5
       },
       "captura": "S1772-13.png",
-      "sha256_captura": "e40ade7e5380439cb6907992bb048586cb0758d9819fbc30c89f1dade812b593"
+      "sha256_captura": "e40ade7e5380439cb6907992bb048586cb0758d9819fbc30c89f1dade812b593",
+      "clasificacion_original": {
+        "unidades": 12,
+        "ocupacion": {
+          "parcial": 4,
+          "terreno_libre": 6,
+          "aislada": 2
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-14",
@@ -126,7 +161,18 @@
         "pitch": 1.5
       },
       "captura": "S1772-14.png",
-      "sha256_captura": "460c04e510fffdc33e9c21ef350977bc8bf62268d208416d32d5ccc514893779"
+      "sha256_captura": "460c04e510fffdc33e9c21ef350977bc8bf62268d208416d32d5ccc514893779",
+      "clasificacion_original": {
+        "unidades": 6,
+        "ocupacion": {
+          "parcial": 1,
+          "aislada": 4,
+          "conjunto_especial": 1
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-21",
