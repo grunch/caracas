@@ -506,7 +506,7 @@ coherente. Lo que aportan como referencia para reconstruir:
 - **~1842–1845 · Ruinas de la Trinidad, Bellermann** (`1843-commons-ruinas-de-la-trinidad-bellermann`) → 1843.
   **La iglesia de la Trinidad está en ruinas**: la fachada en pie (dos cuerpos, frontón de volutas con escudo),
   las naves sin techo, arcos al aire. En la época de 1843 el hito del Panteón no debería ser una iglesia
-  entera: hoy no se modela en esa época (nace en 1889), y así queda bien.
+  entera: se representan la fachada colonial y las arcadas sin cubierta desde 1843 (T40a).
 - **1844–1845 · Puente de la Trinidad, Bellermann** (`1844-commons-puente-de-la-trinidad-bellermann`) → 1843.
   Puente de arcos de mampostería sobre la quebrada honda (Catuche), casas bajas, campo abierto hacia el este
   (Chacao) y el Ávila pelado. Las quebradas son barrancos profundos, no arroyos a nivel.
@@ -582,3 +582,24 @@ se agregue una época de los años 40–50 (haría falta también el plano de 19
 - **Plaza Miranda y av. Baralt, fines de los 50** (`1955-pinterest-plaza-miranda-av-baralt` y su versión
   restaurada `1955-usuario-plaza-miranda-restaurada`): avenida ancha asfaltada, edificios modernos con
   parasoles, plaza de losas, mucho tráfico. **Derechos reservados de El Nacional: no publicar.**
+
+
+## Panteón por etapas (T40a)
+
+El modelo `src/hitos/panteon-modelo.js` se elaboró en el estudio independiente de Miraflores y se integra
+al lienzo común mediante `src/hitos/panteon.js`. Se cotejaron las imágenes de
+[Fundación Arquitectura y Ciudad](https://fundaayc.com/tag/panteon-nacional/), incluida la fotografía de
+la reforma terminada y el alzado de concurso de Chataing, con
+[la fotografía de Lessmann catalogada circa 1885–1900](https://elarchivo.org/producto/panteon-nacional/).
+
+- 1843: Bellermann, fachada colonial con volutas, ruinas y arcadas sin techo.
+- 1889: dos torres con agujas caladas, tres portales ojivales y rosetón circular central.
+- 1911: ventana ojival central, crestería y pináculos de Chataing; no confundir el alzado del concurso
+  con evidencia única de la obra terminada (también se cotejó la foto).
+- 1936: reforma de Mujica Millán terminada en 1930, con torre central dominante, dos laterales menores,
+  portales laterales adintelados y remates cupulados. Sin Foro Libertador ni Mausoleo modernos.
+
+Estas nuevas fotografías solo se usan de referencia: **licencias de reproducción sin verificar**,
+no se agregan imágenes ni texturas al sitio. La ficha de Bellermann ya existente conserva su propia
+licencia. Dimensiones, planta, laterales, daños y ornamentos pequeños son interpretativos. Más detalles
+en `specs/08-panteon-por-epocas.md`.

@@ -212,11 +212,12 @@ export const FICHAS = Object.freeze({
   panteon: {
     textos: [
       [2, 'La iglesia de la Santísima Trinidad, al norte de la ciudad. Ferdinand Bellermann la dibujó en ruinas hacia 1842–1845.'],
-      [3, 'La iglesia de la Trinidad, convertida en Panteón Nacional: el plano de 1889 lo numera 22.'],
-      [5, 'El plano de 1936 dibuja tres torres: la fachada se había rehecho poco antes.'],
+      [3, 'Inaugurado como Panteón Nacional en 1875. En 1889 tiene dos torres con agujas y un rosetón central, como en la fotografía de Lessmann de fines del siglo XIX.'],
+      [4, 'La reforma de Alejandro Chataing, terminada en 1911, cambia la ornamentación y sustituye el rosetón central por una ventana ojival.'],
+      [5, 'La reforma de Manuel Mujica Millán, terminada en 1930, incorpora una torre central alta y dos torres laterales menores con cúpulas. Es la fachada representada en 1936.'],
     ],
     hoy: 'el Panteón Nacional.',
-    dudas: 'La reforma de la fachada (hacia 1930) es un dato general, sin cotejar.',
+    dudas: 'Fachadas cotejadas con Bellermann, Lessmann y las imágenes de Fundación Arquitectura y Ciudad. Planta, dimensiones, laterales y daños son aproximaciones; no se representan las obras de 1772.',
   },
   'san-carlos': {
     textos: [[3, 'El plano de 1889 numera 21 el «Cuartel San Carlos»; el de 1936 dibuja el edificio, de patio, sin rótulo.']],

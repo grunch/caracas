@@ -201,7 +201,7 @@ describe('la Catedral y las iglesias', () => {
 
   test.each([
     ['san-francisco', 'San Francisco', 1, 80], ['altagracia', 'Altagracia', 1, 80], ['santa-capilla', 'Santa Capilla', 3, 40],
-    ['santa-teresa', 'Santa Teresa', 3, 90], ['la-pastora', 'La Pastora', 1, 40], ['panteon', 'Panteón', 3, 60],
+    ['santa-teresa', 'Santa Teresa', 3, 90], ['la-pastora', 'La Pastora', 1, 40], ['panteon', 'Panteón', 2, 60],
   ])('%s: cerca de su esquina del plano y desde su época', (id, nombreEsquina, nace, metros) => {
     const h = hito(id)
     const [ex, ey] = esquina(nombreEsquina)
