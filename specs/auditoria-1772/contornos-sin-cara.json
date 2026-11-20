@@ -1,0 +1,1021 @@
+{
+  "completo_geometricamente": false,
+  "fuente_sha256": "4696d038a55b8088302a496b6eb4678b11173d98d3a15c589530cf78ee7bb62b",
+  "alcance": "Lectura visual de las 78 unidades continuas, parciales o especiales sin cara única, incluida U0003 ambigua. No son 78 manzanas omitidas del sistema. Las cajas localizan recortes y no aprueban geometría ni acceso. Las orientaciones arriba/abajo/izquierda/derecha se refieren al escaneo.",
+  "unidades": [
+    {
+      "unidad": "U1772-0003",
+      "sector": "S1772-11",
+      "bbox_localizacion": [
+        505,
+        329,
+        566,
+        389
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Banda roja superior y derecha; borde derecho quebrado y solar interior libre. La cara ambigua que también contiene U0256 no es una manzana aprobada.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0004",
+      "sector": "S1772-12",
+      "bbox_localizacion": [
+        567,
+        300,
+        659,
+        443
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpos separados a lo largo del camino de El Calvario; la caja abarca terreno libre. No cerrar una manzana rectangular a partir de ella.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0014",
+      "sector": "S1772-12",
+      "bbox_localizacion": [
+        712,
+        496,
+        766,
+        553
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpo quebrado con entrante superior, entre camino diagonal y terreno del Calvario.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0018",
+      "sector": "S1772-14",
+      "bbox_localizacion": [
+        1377,
+        475,
+        1441,
+        523
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpo en L inferior y derecho, pequeño cuerpo izquierdo y esquina inferior derecha oblicua.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0019",
+      "sector": "S1772-21",
+      "bbox_localizacion": [
+        374,
+        530,
+        448,
+        588
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Franja superior y derecha; la calle derecha hace un recodo. Interior libre y borde inferior de ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0020",
+      "sector": "S1772-21",
+      "bbox_localizacion": [
+        439,
+        530,
+        501,
+        590
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Franja superior e izquierda que sigue el recodo de la calle; interior y borde inferior junto a ribera libres.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0021",
+      "sector": "S1772-21",
+      "bbox_localizacion": [
+        506,
+        530,
+        567,
+        587
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Franja superior y derecha; fondo libre hasta el borde inferior de ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0022",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        571,
+        519,
+        645,
+        589
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo; borde derecho quebrado y borde inferior curvo junto a la ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0023",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        632,
+        504,
+        708,
+        617
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo con entrante superior derecho, calle quebrada a la izquierda y límite inferior curvo de ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0024",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        712,
+        534,
+        764,
+        630
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo; extremo inferior redondeado por el meandro y borde superior diagonal. El puente no autoriza unir las manzanas de ambas orillas.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0025",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        770,
+        529,
+        816,
+        584
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo con lado inferior diagonal; calle diagonal lo separa de U0277.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0026",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        917,
+        548,
+        967,
+        589
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpo rojo con entrante superior derecho; distinguir terreno exterior al cuerpo de su huella.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0028",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1038,
+        595,
+        1099,
+        626
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo en franja entre calle superior y ribera inferior.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0029",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1106,
+        594,
+        1168,
+        625
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo en franja de ribera; pequeño escalón en el borde superior.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0031",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1174,
+        594,
+        1235,
+        622
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Solo cuerpo sobre el borde superior; resto de la unidad libre hasta la ribera inferior.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0033",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1240,
+        529,
+        1302,
+        589
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Banda roja izquierda e inferior con escalones hacia el solar; curva de ribera a la derecha.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0034",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1308,
+        535,
+        1371,
+        590
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Unidad limitada por ribera arriba; solo cuerpo rojo sobre el borde inferior.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0035",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1408,
+        523,
+        1504,
+        588
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Cuña roja entre calles oblicuas; franja clara junto a la ribera necesita distinguir calzada, retiro y solar. No aprobar el borde por caja.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0036",
+      "sector": "S1772-21",
+      "bbox_localizacion": [
+        375,
+        606,
+        436,
+        722
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Unidad alargada, franja derecha parcialmente ocupada y gran terreno libre; no insertar una calle horizontal intermedia.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0038",
+      "sector": "S1772-21",
+      "bbox_localizacion": [
+        506,
+        601,
+        567,
+        657
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Tres cuerpos separados sobre el borde inferior; borde superior de ribera libre.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0039",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        573,
+        599,
+        632,
+        657
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpo escalonado inferior derecho; borde superior de ribera e izquierdo libres.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0040",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        638,
+        602,
+        699,
+        657
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Banda roja inferior bajo un terreno triangular libre; límite superior oblicuo junto a ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0041",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        720,
+        599,
+        765,
+        657
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo, límite curvo de meandro a la izquierda y calle con puente a la derecha.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0042",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        769,
+        599,
+        833,
+        657
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo; límite superior ondulado de ribera, tres lados aproximadamente rectos.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0043",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        838,
+        606,
+        900,
+        658
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo; límite superior oblicuo y quebrado junto a ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0044",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1241,
+        594,
+        1302,
+        658
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo con escalones en el borde superior izquierdo junto a la curva del río.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0045",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1307,
+        595,
+        1371,
+        658
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Contorno aproximadamente rectangular con cuerpos separados sobre bordes superior y derecho; no completar los otros dos bordes.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0046",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1376,
+        596,
+        1432,
+        657
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Cuerpo rojo con límite derecho oblicuo; franja clara entre este y la ribera por resolver, no usar la caja como solar edificado.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0058",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1308,
+        663,
+        1349,
+        724
+      ],
+      "ocupacion_previa": "conjunto_especial",
+      "lectura_bordes": "Cuerpo rojo quebrado alrededor de espacio abierto con dos cuerpos aislados; pertenece al conjunto junto a U0059, sin cerrar el espacio blanco.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0059",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1335,
+        663,
+        1397,
+        724
+      ],
+      "ocupacion_previa": "conjunto_especial",
+      "lectura_bordes": "Banda curva de ribera que comparte espacio abierto con U0058; cuerpos aislados no deben unirse a la banda.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0070",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1303,
+        727,
+        1368,
+        791
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo; entrante curvo de ribera a la derecha.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0084",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1305,
+        796,
+        1368,
+        856
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpo en L superior e izquierdo; terreno libre hasta el límite diagonal de ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0097",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1171,
+        861,
+        1234,
+        921
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Cuatro bordes rectos y rojo continuo; la falta de cara en el esbozo no es una excepción histórica de manzana abierta.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0098",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1239,
+        861,
+        1300,
+        895
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo con límite inferior curvo de ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0099",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1258,
+        888,
+        1301,
+        921
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Unidad triangular junto a ribera con dos cuerpos sobre el borde inferior; conservar terreno libre entre ellos.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0111",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1171,
+        928,
+        1221,
+        977
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Cuña roja continua junto a la ribera; no convertirla en rectángulo.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0112",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1239,
+        927,
+        1300,
+        986
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpo superior y derecho; chaflán superior izquierdo junto a ribera e interior libre.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0125",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1103,
+        993,
+        1159,
+        1055
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo; lado derecho oblicuo y curvo de ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0126",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1172,
+        993,
+        1233,
+        1054
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo; chaflán superior izquierdo junto a ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0141",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1036,
+        1060,
+        1098,
+        1120
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Cuatro bordes rectos y rojo continuo; resolver la incompletitud del esbozo sin inventar una manzana abierta.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0148",
+      "sector": "S1772-31",
+      "bbox_localizacion": [
+        437,
+        1121,
+        499,
+        1182
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Contorno casi rectangular; dos cuerpos superiores y dos interiores retirados. Una caja de proximidad no prueba ocupación lateral.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0149",
+      "sector": "S1772-31",
+      "bbox_localizacion": [
+        505,
+        1121,
+        564,
+        1183
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Banda superior, cuerpo inferior izquierdo y cuerpo interior aislado; grandes espacios libres.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0151",
+      "sector": "S1772-32",
+      "bbox_localizacion": [
+        636,
+        1122,
+        761,
+        1168
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Unidad alargada con banda roja inferior continua y dos cuerpos superiores. El paso superior termina antes de atravesar la banda; no partirla en dos.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0154",
+      "sector": "S1772-32",
+      "bbox_localizacion": [
+        903,
+        1124,
+        963,
+        1187
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpo rojo superior e izquierdo con franja libre inferior derecha.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0155",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1036,
+        1153,
+        1062,
+        1187
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo con borde superior oblicuo de ribera; calle vertical separa U0156.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0156",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1066,
+        1141,
+        1097,
+        1186
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo con borde superior curvo de ribera; conservar separación de U0155.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0163",
+      "sector": "S1772-32",
+      "bbox_localizacion": [
+        786,
+        1191,
+        830,
+        1251
+      ],
+      "ocupacion_previa": "conjunto_especial",
+      "lectura_bordes": "Cuerpo religioso inferior y espacio blanco superior con línea discontinua; no interpretar símbolo ni plaza como vivienda faltante.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0164",
+      "sector": "S1772-32",
+      "bbox_localizacion": [
+        836,
+        1191,
+        897,
+        1250
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo con límite inferior derecho curvo de ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0165",
+      "sector": "S1772-32",
+      "bbox_localizacion": [
+        902,
+        1189,
+        963,
+        1221
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Franja roja continua entre calle superior y ribera inferior.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0166",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        969,
+        1192,
+        1031,
+        1251
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpo rojo derecho y cuerpo inferior izquierdo separados por terreno libre; límite superior izquierdo curvo de ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0172",
+      "sector": "S1772-42",
+      "bbox_localizacion": [
+        835,
+        1258,
+        897,
+        1316
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo en L alrededor del meandro; la unidad libre del otro lado del agua no pertenece a este cuerpo.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0173",
+      "sector": "S1772-42",
+      "bbox_localizacion": [
+        903,
+        1257,
+        963,
+        1317
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Cuatro bordes aproximadamente rectos y rojo continuo; la cara ausente del esbozo requiere enlace, no eliminación de la unidad.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0184",
+      "sector": "S1772-43",
+      "bbox_localizacion": [
+        1237,
+        1324,
+        1298,
+        1382
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Solo cuerpo superior izquierdo; resto libre, con límite inferior derecho en ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0185",
+      "sector": "S1772-42",
+      "bbox_localizacion": [
+        836,
+        1387,
+        898,
+        1516
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Franja roja larga superior y derecha; cuerpo inferior aislado, terreno libre y límite exterior abierto. No imponer una cuadra corta.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0186",
+      "sector": "S1772-42",
+      "bbox_localizacion": [
+        903,
+        1387,
+        962,
+        1508
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Franja roja larga superior e izquierda; terreno libre hacia la ribera y límite inferior abierto.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0187",
+      "sector": "S1772-43",
+      "bbox_localizacion": [
+        1036,
+        1389,
+        1065,
+        1457
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Franja estrecha con rojo arriba y terreno libre abajo; calle vertical a la derecha separa U0188.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0188",
+      "sector": "S1772-43",
+      "bbox_localizacion": [
+        1069,
+        1389,
+        1096,
+        1463
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Franja estrecha con rojo arriba y terreno libre abajo; conservar calle izquierda y ribera inferior.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0194",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        972,
+        530,
+        1032,
+        589
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpo en L izquierdo e inferior y cuerpos pequeños derechos; límite superior abierto hacia el entorno de ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0195",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        973,
+        596,
+        1030,
+        629
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpo en L superior e izquierdo; terreno libre hasta ribera inferior.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0196",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1376,
+        528,
+        1427,
+        589
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo con recodo en la calle oblicua derecha; no unir a U0035.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0212",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        969,
+        1125,
+        1030,
+        1164
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Rojo continuo; límite inferior derecho curvo de ribera y extremo inferior en punta.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0215",
+      "sector": "S1772-42",
+      "bbox_localizacion": [
+        769,
+        1386,
+        829,
+        1446
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpo interior en L separado de los cuatro bordes. No generar una corona perimetral.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0216",
+      "sector": "S1772-43",
+      "bbox_localizacion": [
+        968,
+        1388,
+        1029,
+        1461
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Cuerpo superior y derecho; terreno libre hasta la ribera inferior, sin cierre recto dibujado.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0227",
+      "sector": "S1772-31",
+      "bbox_localizacion": [
+        375,
+        925,
+        436,
+        985
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Dos cuerpos interiores aislados, terreno libre y pequeño chaflán inferior izquierdo junto a ribera.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0232",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1240,
+        796,
+        1300,
+        856
+      ],
+      "ocupacion_previa": "conjunto_especial",
+      "lectura_bordes": "Conjunto con símbolo religioso y límite superior escalonado asociado al recodo de calle de U0069; no forzar un frente horizontal.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0250",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        970,
+        632,
+        1031,
+        657
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Franja roja continua con ribera curva arriba; puente al extremo izquierdo.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0251",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1037,
+        635,
+        1101,
+        657
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Franja roja continua con ribera curva arriba; puente al extremo derecho.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0252",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1106,
+        636,
+        1168,
+        657
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Franja roja continua bajo la ribera; tres lados aproximadamente rectos.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0253",
+      "sector": "S1772-23",
+      "bbox_localizacion": [
+        1174,
+        636,
+        1235,
+        657
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Franja roja continua bajo ribera ondulada; no enderezar el borde del agua como fachada ordinaria.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0254",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        905,
+        632,
+        966,
+        657
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Franja roja continua entre ribera superior y calle inferior.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0255",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        917,
+        594,
+        967,
+        624
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Cuerpo rojo sobre ribera inferior; verificar límite izquierdo abierto hacia el entorno del cauce.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0267",
+      "sector": "S1772-14",
+      "bbox_localizacion": [
+        1448,
+        460,
+        1498,
+        487
+      ],
+      "ocupacion_previa": "conjunto_especial",
+      "lectura_bordes": "Edificio religioso aislado con pequeño saliente superior y símbolo; no equivale a una manzana cerrada de viviendas.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0277",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        769,
+        563,
+        800,
+        586
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Cuña roja entre calle diagonal y ribera, separada de U0025.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0285",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1036,
+        1125,
+        1062,
+        1139
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Franja roja corta con borde inferior oblicuo de ribera; conservar paso vertical hacia U0286.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0286",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1065,
+        1125,
+        1088,
+        1135
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Pequeña cuña roja de ribera separada de U0285; no fusionar por proximidad.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0288",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1204,
+        952,
+        1234,
+        987
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Cuña roja triangular al otro lado de la ribera de U0111; no unir por cercanía.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0290",
+      "sector": "S1772-42",
+      "bbox_localizacion": [
+        785,
+        1296,
+        824,
+        1317
+      ],
+      "ocupacion_previa": "parcial",
+      "lectura_bordes": "Pequeña unidad de ribera con un cuerpo central sobre el borde inferior y laterales libres.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    },
+    {
+      "unidad": "U1772-0291",
+      "sector": "S1772-42",
+      "bbox_localizacion": [
+        904,
+        1232,
+        964,
+        1252
+      ],
+      "ocupacion_previa": "continua",
+      "lectura_bordes": "Franja roja estrecha bajo ribera; conservar límites curvos y calle inferior.",
+      "decision": "requiere_referencia_geometrica_en_fase_2; no_generar_desde_bbox"
+    }
+  ]
+}
