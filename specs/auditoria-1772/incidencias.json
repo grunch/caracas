@@ -196,7 +196,12 @@
         3,
         4
       ],
-      "pr_correccion": null
+      "pr_correccion": null,
+      "diagnostico_adicional": {
+        "evidencia": "contraste-unidades.md y ausencias-rastreadas.json",
+        "causa_parcial": "epocas.nace exige persistencia en todos los planos posteriores. En U0182, 16 huellas candidatas tienen máscara de 1772 >=0.987526 pero fracción 1843 cero, por lo que ninguna nace en 1772 según esa regla. Faltan cierre de cuadra y correspondencia histórica final.",
+        "alcance": "No cambiar años de edificios modernos por proximidad ni rellenar cajas; preservar ocupación parcial, plazas e hitos."
+      }
     },
     {
       "id": "I1772-008",
