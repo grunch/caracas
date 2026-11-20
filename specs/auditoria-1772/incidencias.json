@@ -167,16 +167,17 @@
     {
       "id": "I1772-006",
       "categoria": "metadatos_datos",
-      "estado": "confirmado",
+      "estado": "corregido_en_codigo_pendiente_revision_y_publicacion",
       "prioridad": "P1",
       "baseline": "B1772-001",
       "observacion": "conteos.techos=35089 en manifiesto; parte techos del pak tiene 541648 bytes / 16 bytes por registro = 33853. Hash coincide local/publicado. Diferencia 1236 registros, no un conteo de casas faltantes en 1772.",
-      "causa": "Confirmada: tools/datos.mjs:verificar cuenta techos de fuentes/derivados/1936/ciudad-1936.json (35089), antes del filtrado/unión de epocas.py; el paquete consume ciudad-estilos.json (33853). Los hashes pueden ser correctos y el conteo describir una etapa diferente.",
+      "causa": "tools/datos.mjs rellenaba los conteos del manifiesto con ciudad-1936.json y árboles de segmentación, antes de las etapas que producen los binarios publicados.",
       "fases_candidatas": [
         1,
         8
       ],
-      "pr_correccion": null
+      "pr_correccion": null,
+      "evidencia_correccion": "conteos-publicados.md"
     },
     {
       "id": "I1772-007",

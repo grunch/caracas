@@ -54,6 +54,20 @@ export function verificarConteos(medidos, esperados) {
   })
 }
 
+/** Cuenta los registros publicados; conserva aparte las métricas del derivado de origen. */
+export function conteosDelManifiesto(origen, techos, arboles) {
+  if (!(techos instanceof Uint32Array) || techos.length % 4 !== 0) {
+    throw new Error('conteos: registros de techos incompletos')
+  }
+  if (!(arboles instanceof Uint8Array) || arboles.byteLength % 8 !== 0) {
+    throw new Error('conteos: registros de árboles incompletos')
+  }
+  return {
+    conteos: { techos: techos.length / 4, arboles: arboles.byteLength / 8 },
+    conteos_origen: { ...origen },
+  }
+}
+
 /**
  * Pasos cuyo código cambió: `actuales` y `guardadas` son { id: sha256 del código del paso }. Se compara
  * por contenido y no por fecha (un git checkout le cambia la fecha a todos los scripts).
