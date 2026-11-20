@@ -1,0 +1,1874 @@
+{
+  "fuente": "fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg",
+  "nota": "Trazado aproximado para censar tramos, no geometría del generador. Las rectas requieren contraste ampliado; no conectar automáticamente extremos separados por ríos. Quedan pendientes caminos, bordes curvos y puentes. El solape de una caja no equivale a cruzar un edificio.",
+  "completo": false,
+  "lineas": [
+    {
+      "clave": "H327-0",
+      "puntos": [
+        [
+          350,
+          327
+        ],
+        [
+          548,
+          327
+        ],
+        [
+          566,
+          319
+        ]
+      ],
+      "tipo": "circulacion_espacio_abierto",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0001",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H395-0",
+      "puntos": [
+        [
+          331,
+          395
+        ],
+        [
+          564,
+          395
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0002",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H395-1",
+      "puntos": [
+        [
+          1040,
+          395
+        ],
+        [
+          1355,
+          395
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0003",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H461-0",
+      "puntos": [
+        [
+          331,
+          461
+        ],
+        [
+          644,
+          461
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0004",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H461-1",
+      "puntos": [
+        [
+          1036,
+          461
+        ],
+        [
+          1355,
+          461
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0005",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H528-0",
+      "puntos": [
+        [
+          329,
+          528
+        ],
+        [
+          566,
+          528
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0006",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H528-1",
+      "puntos": [
+        [
+          1034,
+          528
+        ],
+        [
+          1335,
+          528
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0007",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H594-0",
+      "puntos": [
+        [
+          916,
+          594
+        ],
+        [
+          1236,
+          594
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0008",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H660-0",
+      "puntos": [
+        [
+          308,
+          660
+        ],
+        [
+          370,
+          660
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "Se corta en la manzana alargada U1772-0036: no hay calle entre x=370 y x=437.",
+      "id": "L1772-0009",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H660-2",
+      "puntos": [
+        [
+          1440,
+          660
+        ],
+        [
+          1556,
+          660
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0010",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H726-0",
+      "puntos": [
+        [
+          304,
+          726
+        ],
+        [
+          1345,
+          726
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0011",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H726-1",
+      "puntos": [
+        [
+          1440,
+          726
+        ],
+        [
+          1556,
+          726
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0012",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H793-0",
+      "puntos": [
+        [
+          307,
+          793
+        ],
+        [
+          1365,
+          793
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0013",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H793-1",
+      "puntos": [
+        [
+          1440,
+          793
+        ],
+        [
+          1556,
+          793
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0014",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H859-0",
+      "puntos": [
+        [
+          311,
+          859
+        ],
+        [
+          1298,
+          859
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0015",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H859-1",
+      "puntos": [
+        [
+          1370,
+          859
+        ],
+        [
+          1556,
+          859
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0016",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H926-0",
+      "puntos": [
+        [
+          369,
+          926
+        ],
+        [
+          1230,
+          926
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0017",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H926-1",
+      "puntos": [
+        [
+          1304,
+          926
+        ],
+        [
+          1556,
+          926
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0018",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H992-0",
+      "puntos": [
+        [
+          398,
+          992
+        ],
+        [
+          1170,
+          992
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0019",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H992-1",
+      "puntos": [
+        [
+          1236,
+          992
+        ],
+        [
+          1556,
+          992
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0020",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H1058-0",
+      "puntos": [
+        [
+          405,
+          1058
+        ],
+        [
+          1138,
+          1058
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0021",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H1058-1",
+      "puntos": [
+        [
+          1170,
+          1058
+        ],
+        [
+          1556,
+          1058
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0022",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H1125-0",
+      "puntos": [
+        [
+          432,
+          1125
+        ],
+        [
+          1090,
+          1125
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0023",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H1125-1",
+      "puntos": [
+        [
+          1120,
+          1125
+        ],
+        [
+          1556,
+          1125
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0024",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H1191-0",
+      "puntos": [
+        [
+          437,
+          1191
+        ],
+        [
+          637,
+          1191
+        ]
+      ],
+      "tipo": "circulacion_borde_abierto",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "La prolongación recta cruzaba la colina dibujada bajo U1772-0151; no hay calle pasante acreditada allí.",
+      "id": "L1772-0025",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H1191-1",
+      "puntos": [
+        [
+          1036,
+          1191
+        ],
+        [
+          1556,
+          1191
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0026",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H1257-0",
+      "puntos": [
+        [
+          769,
+          1257
+        ],
+        [
+          816,
+          1257
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0027",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H1257-1",
+      "puntos": [
+        [
+          904,
+          1257
+        ],
+        [
+          1447,
+          1257
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0028",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H1323-0",
+      "puntos": [
+        [
+          769,
+          1323
+        ],
+        [
+          1337,
+          1323
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "Extremo reducido antes de la ribera; no presupone puente ni conexión a la otra orilla.",
+      "id": "L1772-0029",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H1389-0",
+      "puntos": [
+        [
+          770,
+          1389
+        ],
+        [
+          1258,
+          1389
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "Extremo reducido antes de la ribera; no presupone puente ni conexión a la otra orilla.",
+      "id": "L1772-0030",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V370-0",
+      "puntos": [
+        [
+          370,
+          329
+        ],
+        [
+          370,
+          593
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0031",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V370-1",
+      "puntos": [
+        [
+          370,
+          612
+        ],
+        [
+          370,
+          972
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0032",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V437-0",
+      "puntos": [
+        [
+          437,
+          329
+        ],
+        [
+          437,
+          528
+        ],
+        [
+          451,
+          561
+        ],
+        [
+          435,
+          591
+        ]
+      ],
+      "tipo": "calle_quebrada",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "La calle se quiebra entre U1772-0019 y 0020, antes de llegar a la ribera.",
+      "id": "L1772-0033",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V437-1",
+      "puntos": [
+        [
+          437,
+          607
+        ],
+        [
+          437,
+          1191
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "No prolongar sobre el río al lado del solar U1772-0229.",
+      "id": "L1772-0034",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V504-0",
+      "puntos": [
+        [
+          504,
+          329
+        ],
+        [
+          504,
+          594
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0035",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V504-1",
+      "puntos": [
+        [
+          504,
+          604
+        ],
+        [
+          504,
+          1184
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0036",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V570-0",
+      "puntos": [
+        [
+          570,
+          461
+        ],
+        [
+          570,
+          589
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0037",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V570-1",
+      "puntos": [
+        [
+          570,
+          604
+        ],
+        [
+          570,
+          1184
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0038",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V637-0",
+      "puntos": [
+        [
+          637,
+          528
+        ],
+        [
+          644,
+          546
+        ],
+        [
+          632,
+          584
+        ]
+      ],
+      "tipo": "calle_quebrada",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "El frente al pie del Calvario es oblicuo; se descarta la recta que atravesaba rojo.",
+      "id": "L1772-0039",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V637-1",
+      "puntos": [
+        [
+          637,
+          600
+        ],
+        [
+          637,
+          1184
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0040",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V702-0",
+      "puntos": [
+        [
+          710,
+          519
+        ],
+        [
+          710,
+          628
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "Límite entre las unidades irregulares U1772-0023 y 0024, separado del eje de la retícula más al naciente.",
+      "id": "L1772-0041",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V702-1",
+      "puntos": [
+        [
+          702,
+          660
+        ],
+        [
+          702,
+          1125
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0042",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V768-0",
+      "puntos": [
+        [
+          768,
+          530
+        ],
+        [
+          768,
+          1190
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "Incluye un paso dibujado sobre el agua en torno a [768,600]; se registra aparte para no confundirlo con una calle sobre terreno seco.",
+      "id": "L1772-0043",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V768-1",
+      "puntos": [
+        [
+          768,
+          1323
+        ],
+        [
+          768,
+          1447
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0044",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V835-0",
+      "puntos": [
+        [
+          835,
+          599
+        ],
+        [
+          835,
+          1253
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0045",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V835-1",
+      "puntos": [
+        [
+          835,
+          1323
+        ],
+        [
+          835,
+          1485
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0046",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V903-1",
+      "puntos": [
+        [
+          903,
+          637
+        ],
+        [
+          903,
+          1254
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0047",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V903-2",
+      "puntos": [
+        [
+          903,
+          1323
+        ],
+        [
+          903,
+          1492
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0048",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V970-0",
+      "puntos": [
+        [
+          970,
+          549
+        ],
+        [
+          970,
+          626
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0049",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V970-1",
+      "puntos": [
+        [
+          970,
+          639
+        ],
+        [
+          970,
+          1182
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0050",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V970-2",
+      "puntos": [
+        [
+          970,
+          1257
+        ],
+        [
+          970,
+          1454
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0051",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1036-0",
+      "puntos": [
+        [
+          1036,
+          398
+        ],
+        [
+          1036,
+          627
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0052",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1036-1",
+      "puntos": [
+        [
+          1036,
+          639
+        ],
+        [
+          1036,
+          1120
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0053",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1036-2",
+      "puntos": [
+        [
+          1036,
+          1191
+        ],
+        [
+          1036,
+          1457
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0054",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1104-0",
+      "puntos": [
+        [
+          1104,
+          398
+        ],
+        [
+          1104,
+          627
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0055",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1104-1",
+      "puntos": [
+        [
+          1104,
+          640
+        ],
+        [
+          1104,
+          1120
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0056",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1104-2",
+      "puntos": [
+        [
+          1120,
+          1125
+        ],
+        [
+          1104,
+          1145
+        ],
+        [
+          1104,
+          1464
+        ]
+      ],
+      "tipo": "calle_quebrada",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "No prolongar la retícula atravesando el meandro; el extremo sigue la orilla.",
+      "id": "L1772-0057",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1170-0",
+      "puntos": [
+        [
+          1170,
+          398
+        ],
+        [
+          1170,
+          624
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0058",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1170-1",
+      "puntos": [
+        [
+          1170,
+          638
+        ],
+        [
+          1170,
+          992
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0059",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1170-2",
+      "puntos": [
+        [
+          1170,
+          1034
+        ],
+        [
+          1170,
+          1438
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "Extremo reducido antes de la ribera; no presupone puente ni conexión a la otra orilla.",
+      "id": "L1772-0060",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1236-0",
+      "puntos": [
+        [
+          1236,
+          399
+        ],
+        [
+          1236,
+          607
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0061",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1236-1",
+      "puntos": [
+        [
+          1236,
+          623
+        ],
+        [
+          1236,
+          919
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0062",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1236-2",
+      "puntos": [
+        [
+          1236,
+          932
+        ],
+        [
+          1236,
+          1402
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "Extremo reducido antes de la ribera; no presupone puente ni conexión a la otra orilla.",
+      "id": "L1772-0063",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1304-0",
+      "puntos": [
+        [
+          1304,
+          399
+        ],
+        [
+          1304,
+          558
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0064",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1304-1",
+      "puntos": [
+        [
+          1304,
+          595
+        ],
+        [
+          1304,
+          852
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0065",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1304-2",
+      "puntos": [
+        [
+          1304,
+          874
+        ],
+        [
+          1304,
+          1362
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "Extremo reducido antes de la ribera; no presupone puente ni conexión a la otra orilla.",
+      "id": "L1772-0066",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1370-0",
+      "puntos": [
+        [
+          1370,
+          594
+        ],
+        [
+          1370,
+          660
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "La prolongación a y=760 atravesaba las masas rojas junto a la ribera. No existe una recta continua por U1772-0059/0070.",
+      "id": "L1772-0067",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1370-1",
+      "puntos": [
+        [
+          1370,
+          858
+        ],
+        [
+          1370,
+          1300
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "Extremo reducido antes de la ribera; no presupone puente ni conexión a la otra orilla.",
+      "id": "L1772-0068",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1439-0",
+      "puntos": [
+        [
+          1439,
+          594
+        ],
+        [
+          1439,
+          1270
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "Extremo reducido antes de la ribera; no presupone puente ni conexión a la otra orilla.",
+      "id": "L1772-0069",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "V1505-0",
+      "puntos": [
+        [
+          1505,
+          550
+        ],
+        [
+          1505,
+          1250
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "observacion_revision": "Extremo reducido antes de la ribera; no presupone puente ni conexión a la otra orilla.",
+      "id": "L1772-0070",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "candelaria-franjas",
+      "puntos": [
+        [
+          1067,
+          1389
+        ],
+        [
+          1067,
+          1460
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0071",
+      "margen_lectura_propuesto_px": 3
+    },
+    {
+      "clave": "solar-acceso-ciego",
+      "puntos": [
+        [
+          702,
+          1125
+        ],
+        [
+          702,
+          1145
+        ]
+      ],
+      "tipo": "acceso_sin_salida",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0072",
+      "margen_lectura_propuesto_px": 4
+    },
+    {
+      "clave": "calvario-eje",
+      "puntos": [
+        [
+          566,
+          319
+        ],
+        [
+          564,
+          326
+        ],
+        [
+          580,
+          367
+        ],
+        [
+          623,
+          438
+        ],
+        [
+          644,
+          461
+        ],
+        [
+          707,
+          510
+        ],
+        [
+          710,
+          522
+        ],
+        [
+          768,
+          562
+        ],
+        [
+          812,
+          589
+        ]
+      ],
+      "tipo": "calle_quebrada",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "nota": "Recorrido aproximado del espacio blanco junto a las franjas rojas; la parte ancha no define una calle de ancho constante.",
+      "id": "L1772-0073",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "calvario-arriba",
+      "puntos": [
+        [
+          566,
+          319
+        ],
+        [
+          618,
+          296
+        ]
+      ],
+      "tipo": "calle_quebrada",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "nota": "Recorrido aproximado del espacio blanco junto a las franjas rojas; la parte ancha no define una calle de ancho constante.",
+      "id": "L1772-0074",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "calvario-triangulo",
+      "puntos": [
+        [
+          570,
+          528
+        ],
+        [
+          637,
+          517
+        ],
+        [
+          688,
+          508
+        ],
+        [
+          707,
+          510
+        ]
+      ],
+      "tipo": "calle_quebrada",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "nota": "Recorrido aproximado del espacio blanco junto a las franjas rojas; la parte ancha no define una calle de ancho constante.",
+      "id": "L1772-0075",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "camino-catia",
+      "puntos": [
+        [
+          1194,
+          177
+        ],
+        [
+          1189,
+          193
+        ],
+        [
+          1190,
+          214
+        ],
+        [
+          1182,
+          240
+        ],
+        [
+          1165,
+          256
+        ],
+        [
+          1158,
+          273
+        ],
+        [
+          1162,
+          293
+        ]
+      ],
+      "tipo": "camino",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "nota": "Recorrido aproximado sobre el trazo visible del original; no representa un ancho vial ni permite prolongar el camino más allá de la hoja.",
+      "id": "L1772-0076",
+      "margen_lectura_propuesto_px": 6
+    },
+    {
+      "clave": "camino-guayra",
+      "puntos": [
+        [
+          1513,
+          527
+        ],
+        [
+          1530,
+          520
+        ],
+        [
+          1543,
+          492
+        ],
+        [
+          1560,
+          470
+        ],
+        [
+          1573,
+          448
+        ],
+        [
+          1602,
+          423
+        ],
+        [
+          1637,
+          404
+        ],
+        [
+          1682,
+          385
+        ],
+        [
+          1720,
+          372
+        ],
+        [
+          1770,
+          369
+        ]
+      ],
+      "tipo": "camino",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "nota": "Recorrido aproximado sobre el trazo visible del original; no representa un ancho vial ni permite prolongar el camino más allá de la hoja.",
+      "id": "L1772-0077",
+      "margen_lectura_propuesto_px": 6
+    },
+    {
+      "clave": "pastora-conexion",
+      "puntos": [
+        [
+          1370,
+          528
+        ],
+        [
+          1428,
+          528
+        ],
+        [
+          1468,
+          515
+        ],
+        [
+          1504,
+          523
+        ],
+        [
+          1513,
+          527
+        ]
+      ],
+      "tipo": "calle_quebrada",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "nota": "Recorrido aproximado sobre el trazo visible del original; no representa un ancho vial ni permite prolongar el camino más allá de la hoja.",
+      "id": "L1772-0078",
+      "margen_lectura_propuesto_px": 6
+    },
+    {
+      "clave": "pastora-plaza",
+      "puntos": [
+        [
+          1428,
+          528
+        ],
+        [
+          1436,
+          515
+        ],
+        [
+          1443,
+          489
+        ],
+        [
+          1443,
+          461
+        ]
+      ],
+      "tipo": "circulacion_espacio_abierto",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "nota": "Recorrido aproximado sobre el trazo visible del original; no representa un ancho vial ni permite prolongar el camino más allá de la hoja.",
+      "id": "L1772-0079",
+      "margen_lectura_propuesto_px": 6
+    },
+    {
+      "clave": "H660-despues-alargada",
+      "puntos": [
+        [
+          437,
+          660
+        ],
+        [
+          1370,
+          660
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "nota": "No prolongar por la manzana alargada U1772-0036.",
+      "id": "L1772-0080",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H594-norte",
+      "puntos": [
+        [
+          1439,
+          594
+        ],
+        [
+          1560,
+          594
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "id": "L1772-0081",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "H1191-centro",
+      "puntos": [
+        [
+          768,
+          1191
+        ],
+        [
+          962,
+          1191
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "nota": "Separada de H1191-0 por terreno abierto y colina; no inventar continuidad.",
+      "id": "L1772-0082",
+      "margen_lectura_propuesto_px": 5
+    },
+    {
+      "clave": "camino-vega",
+      "puntos": [
+        [
+          458,
+          177
+        ],
+        [
+          456,
+          197
+        ],
+        [
+          458,
+          217
+        ],
+        [
+          464,
+          233
+        ],
+        [
+          459,
+          258
+        ],
+        [
+          450,
+          278
+        ],
+        [
+          447,
+          284
+        ]
+      ],
+      "tipo": "camino",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "nota": "Doble trazo hasta la orilla; no se deduce un puente donde la hoja no lo define.",
+      "id": "L1772-0083",
+      "margen_lectura_propuesto_px": 6
+    },
+    {
+      "clave": "camino-valle",
+      "puntos": [
+        [
+          170,
+          1143
+        ],
+        [
+          220,
+          1141
+        ],
+        [
+          250,
+          1140
+        ],
+        [
+          278,
+          1144
+        ],
+        [
+          310,
+          1152
+        ],
+        [
+          342,
+          1152
+        ],
+        [
+          363,
+          1150
+        ],
+        [
+          386,
+          1154
+        ],
+        [
+          419,
+          1155
+        ]
+      ],
+      "tipo": "camino",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "nota": "Doble trazo hacia la ribera; conexión con la trama urbana pendiente de resolver, no prolongación automática sobre el agua.",
+      "id": "L1772-0084",
+      "margen_lectura_propuesto_px": 6
+    }
+  ],
+  "pasos_agua_observados": [
+    {
+      "id": "P1772-001",
+      "original_aproximado": [
+        768,
+        600
+      ],
+      "nota": "Rectángulo rojo interrumpe la franja de agua; confirmar geometría del puente al trazar su contorno."
+    },
+    {
+      "id": "P1772-002",
+      "original_aproximado": [
+        970,
+        630
+      ],
+      "nota": "Paso rectangular dibujado entre las dos orillas; no conectar otros cruces por analogía."
+    },
+    {
+      "id": "P1772-003",
+      "original_aproximado": [
+        1104,
+        630
+      ],
+      "nota": "Paso rectangular dibujado entre las dos orillas; ubicación aproximada, no precisión métrica."
+    }
+  ],
+  "revision": {
+    "sectores_con_overlay_inspeccionado": [
+      "S1772-11",
+      "S1772-12",
+      "S1772-13",
+      "S1772-14",
+      "S1772-21",
+      "S1772-22",
+      "S1772-23",
+      "S1772-24",
+      "S1772-31",
+      "S1772-32",
+      "S1772-33",
+      "S1772-34",
+      "S1772-41",
+      "S1772-42",
+      "S1772-43",
+      "S1772-44"
+    ],
+    "estado": "parcial",
+    "advertencia": "Sobreposición recorrida en los 16 sectores. Describe ejes aproximados, no bordillos ni anchos. Los márgenes propuestos no son residuos medidos. No convertir este esbozo en red del generador.",
+    "pendiente": [
+      "cerrar contornos de riberas y distinguir pasos públicos de espacios libres",
+      "confirmar puentes y extremos antes de unir componentes",
+      "validar correspondencias con los 32 tramos del primer lote",
+      "enlazar todos los frentes y registrar accesos del sistema"
+    ],
+    "excepciones": [
+      {
+        "unidad": "U1772-0036",
+        "criterio": "Sin calle horizontal intermedia: H660 queda interrumpida entre x=370 y x=437."
+      },
+      {
+        "unidad": "U1772-0151",
+        "criterio": "Entrada corta desde y=1125; no atravesar el frente rojo hasta y=1191."
+      },
+      {
+        "unidades": [
+          "U1772-0185",
+          "U1772-0186"
+        ],
+        "criterio": "Manzanas alargadas; no insertar una fila intermedia."
+      },
+      {
+        "unidades": [
+          "U1772-0187",
+          "U1772-0188"
+        ],
+        "criterio": "Conservar la calle intermedia aproximada x=1067."
+      },
+      {
+        "unidad": "U1772-0214",
+        "criterio": "Plaza de Candelaria con cuerpos aislados; no prolongar frentes sobre su espacio público."
+      }
+    ]
+  },
+  "trazos_descartados_como_calles": [
+    {
+      "clave": "ribera-calvario-poniente",
+      "puntos": [
+        [
+          310,
+          592
+        ],
+        [
+          332,
+          599
+        ],
+        [
+          350,
+          604
+        ],
+        [
+          370,
+          600
+        ],
+        [
+          400,
+          598
+        ],
+        [
+          437,
+          596
+        ],
+        [
+          504,
+          595
+        ],
+        [
+          570,
+          592
+        ],
+        [
+          610,
+          587
+        ],
+        [
+          635,
+          591
+        ],
+        [
+          660,
+          604
+        ],
+        [
+          683,
+          619
+        ],
+        [
+          704,
+          637
+        ],
+        [
+          721,
+          632
+        ],
+        [
+          738,
+          612
+        ],
+        [
+          753,
+          595
+        ],
+        [
+          768,
+          590
+        ]
+      ],
+      "tipo": "paso_ribera_candidato",
+      "estado": "descartado_como_eje_de_calle",
+      "incertidumbre_px": 6,
+      "nota": "La superposición ampliada cruza agua y terreno rojo. No demuestra un paso público continuo. Se conserva para auditar el descarte, fuera de la red."
+    },
+    {
+      "clave": "ribera-calvario-naciente",
+      "puntos": [
+        [
+          310,
+          617
+        ],
+        [
+          340,
+          628
+        ],
+        [
+          370,
+          619
+        ],
+        [
+          404,
+          610
+        ],
+        [
+          437,
+          605
+        ],
+        [
+          504,
+          601
+        ],
+        [
+          570,
+          602
+        ],
+        [
+          610,
+          600
+        ],
+        [
+          637,
+          606
+        ],
+        [
+          662,
+          622
+        ],
+        [
+          685,
+          643
+        ],
+        [
+          709,
+          658
+        ],
+        [
+          729,
+          648
+        ],
+        [
+          746,
+          626
+        ],
+        [
+          760,
+          614
+        ],
+        [
+          768,
+          610
+        ]
+      ],
+      "tipo": "paso_ribera_candidato",
+      "estado": "descartado_como_eje_de_calle",
+      "incertidumbre_px": 6,
+      "nota": "La superposición ampliada cruza agua y terreno rojo. No demuestra un paso público continuo. Se conserva para auditar el descarte, fuera de la red."
+    }
+  ],
+  "fuente_sha256": "4696d038a55b8088302a496b6eb4678b11173d98d3a15c589530cf78ee7bb62b"
+}

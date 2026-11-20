@@ -62,3 +62,5 @@ Registrar expresamente las excepciones que el original muestra: plazas con entra
 Comprobaciones de esta entrega: integridad de JSON, IDs únicos, referencias internas, cajas dentro del original, existencia y hash de las capturas, todos los hashes locales declarados, conteo de registros del `.pak` y diff documental limpio. No se cambiaron aplicación ni generador; las suites de aplicación no sustituyen estos controles y no se repitieron para este inventario documental.
 
 El [contraste de cruces y calles](calce-y-calles.md) añade 23 cruces únicos, 32 tramos y el diagnóstico I1772-010: discrepancia del TPS respecto de las referencias curadas. No cierra el censo ni la validación del calce.
+
+El [trazado de la red original](trazado-red.md) amplía la lectura a 84 líneas y 455 tramos candidatos, conserva las excepciones y propone correspondencias con los 32 tramos previos. No cierra la fase 1 ni modifica el generador.
