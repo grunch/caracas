@@ -5,7 +5,7 @@
 //   npm run datos:bajar      baja el paquete más nuevo y lo pone en public/ (un clon nuevo, el build de Pages)
 //   npm run datos:bajar -- --muestra   baja la muestra: 1 km² alrededor de la plaza (los E2E del CI, T12)
 //   npm run datos:publicar   empaqueta lo de public/datos/manifiesto.json y la muestra (tools/muestra.mjs), y
-//                            los sube como release nuevo (gh)
+//                            los sube como release nuevo y despliega Pages desde main (gh)
 //   node tools/paquete-datos.mjs muestra <etiqueta>   agrega (o reemplaza) la muestra en un release que ya
 //                            existe, armada con los datos de public/ (que tienen que ser los de ese release)
 //
@@ -21,6 +21,7 @@ import { Readable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
 import {
   ACTIVO, ACTIVO_MUESTRA, MANIFIESTO, archivosDelPaquete, elegirRelease, etiquetaDeDatos, revisarListado, sumasQueNoCoinciden, exigirCompleto,
+  argsDeDespliegue,
 } from './paquete-datos-lib.mjs'
 import { armarMuestra } from './muestra.mjs'
 
@@ -144,8 +145,21 @@ async function publicar() {
     `${ACTIVO_MUESTRA}: 1 km² alrededor de la plaza para los E2E del CI (${JSON.stringify(mm.conteos)}); npm run datos:bajar -- --muestra.`
   await correr('gh', ['release', 'create', etiqueta, paquete, deMuestra, '--repo', REPO, '--target', commit,
     '--title', `Datos ${etiqueta.slice(6)}`, '--notes', notas, '--latest=false'])
-  await rm(CACHE, { recursive: true, force: true })
   console.log(`→ release ${etiqueta} en ${REPO}`)
+  // con el release ya publicado, que el caché no impida pedir el despliegue
+  await rm(CACHE, { recursive: true, force: true }).catch((e) => console.warn(`aviso: no se pudo borrar ${CACHE} (${e.message})`))
+  await desplegar()
+}
+
+/** Pages baja el release más nuevo al construir: se lo despliega de nuevo para que tome el que se acaba de subir. */
+async function desplegar() {
+  const args = argsDeDespliegue(REPO)
+  try {
+    await correr('gh', args)
+  } catch (e) {
+    throw new Error(`el release quedó publicado, pero no se pudo desplegar Pages (${e.message}); córrelo a mano: gh ${args.join(' ')}`)
+  }
+  console.log('→ despliegue de Pages pedido sobre main (gh run list --workflow pages.yml)')
 }
 
 const ORDENES = { bajar, publicar, muestra }
