@@ -15,6 +15,12 @@ describe('crearCamara', () => {
     expect(cam.now).toMatchObject({ x: 100, z: 50, dist: 600 })
   })
 
+  test('jump() queda dentro de los límites: un salto muy lejos no deja la vista donde la rueda no llega', () => {
+    const cam = crearCamara(new PerspectiveCamera(), lienzo, { pedirCuadro: () => {}, hoja })
+    cam.jump({ x: 0, z: 0, dist: 50000, pitch: 2 })
+    expect(cam.now).toMatchObject({ dist: 9000, pitch: 1.5 })
+  })
+
   test('volar() cambia el destino sin saltar: la cámara llega animada, dentro de la hoja y de los límites', () => {
     // Arrange
     const pedidos = []
@@ -32,6 +38,40 @@ describe('crearCamara', () => {
     expect(cam.now.x).toBeGreaterThan(0)
     for (let i = 0; i < 200; i++) cam.update(0.1)
     expect(cam.now.x).toBeCloseTo(1000, 1)
+  })
+
+  test('volarA() recorre el trayecto en el tiempo dado, con arranque suave, y llega al destino', () => {
+    // Arrange
+    const cam = crearCamara(new PerspectiveCamera(), lienzo, { pedirCuadro: () => {}, hoja })
+    cam.jump({ x: 0, z: 0, dist: 2000, yaw: 0, pitch: 1.5 })
+    // Act
+    cam.volarA({ x: 500, z: -300, dist: 400, yaw: -0.4, pitch: 0.5 }, 2)
+    cam.update(0.2)
+    const alPrincipio = cam.goal.x
+    // Assert: al principio apenas se movió; a la mitad, la mitad; al final, ahí
+    expect(alPrincipio).toBeGreaterThan(0)
+    expect(alPrincipio).toBeLessThan(50)
+    expect(cam.volando).toBe(true)
+    for (let i = 0; i < 4; i++) cam.update(0.2)
+    expect(cam.goal.x).toBeCloseTo(250)
+    for (let i = 0; i < 6; i++) cam.update(0.2)
+    expect(cam.volando).toBe(false)
+    expect(cam.goal).toMatchObject({ x: 500, z: -300, dist: 400, yaw: -0.4, pitch: 0.5 })
+    for (let i = 0; i < 60; i++) cam.update(0.1)
+    expect(cam.now.x).toBeCloseTo(500, 0)
+  })
+
+  test('volarA() se corta en cuanto la persona toma la cámara: teclas, rueda, saltos u otro vuelo', () => {
+    const cam = crearCamara(new PerspectiveCamera(), lienzo, { pedirCuadro: () => {}, hoja })
+    for (const tomar of [() => cam.mover(1, 0), () => cam.acercar(1), () => cam.girar(1, 0), () => cam.jump({ x: 0 }), () => cam.volar({ x: 0 })]) {
+      cam.volarA({ x: 800, z: 0, dist: 400 }, 2)
+      cam.update(0.5)
+      tomar()
+      const quieto = cam.goal.x
+      cam.update(0.5)
+      expect(cam.volando).toBe(false)
+      expect(cam.goal.x).toBe(quieto)
+    }
   })
 })
 
