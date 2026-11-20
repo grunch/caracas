@@ -34,7 +34,7 @@ from alas import CRUJIA_M, PATIO, SOLAR, alas_de_casa, frentes_de_manzana  # noq
 from cuadra import alas_modelo, casa_modelo, crujia_de_cuadra, es_de_solo_casas  # noqa: E402
 from cuadras_historicas import es_completa  # noqa: E402
 from huellas import huellas_de_manzana  # noqa: E402
-from caras import Red, ajustar_cara, mascara_de_lineas  # noqa: E402
+from caras import RETIRO_MINIMO_M, Red, ajustar_cara, mascara_de_lineas  # noqa: E402
 from lados import CUADRA_MINIMA_M2, _relleno, cortar_por_calles, cuadras_pegadas, lotes_por_lados  # noqa: E402
 from lotes import (  # noqa: E402
     casas_de_esquina, direccion_de_manzana, esquinas_de_manzana, fundir_chicos, lotes_de_manzana, sin_pelos,
@@ -423,9 +423,14 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
     if con_red is not None:
         grosor = ANCHO_DE_CORTE_M / metro
         calles_hoy = mascara_de_lineas(con_red.lineas(), clases.shape, grosor)
-        de_1936 = mascara_de_lineas(con_red.lineas(solo_de_1936=True), clases.shape, grosor)
+        # Un píxel extra por lado compensa el buffer de poligono_de al vectorizar.
+        de_1936 = mascara_de_lineas(con_red.lineas(solo_de_1936=True), clases.shape, 2 * RETIRO_MINIMO_M / metro + 2)
     techos_publicos(clases, salida, area_min_px, tolerancia_px, metro)
     manzanas = np.isin(clases, DE_LA_MANZANA).astype(np.uint8)
+    if de_1936 is not None:
+        # Una calle reconocida queda libre aunque no parta la máscara en dos
+        # componentes grandes (p. ej., casas de un solo lado junto a un solar).
+        manzanas[de_1936] = 0
     n, cuadras, stats, _ = cv2.connectedComponentsWithStats(manzanas, connectivity=4)
     # cada manzana, en sus cuadras: las pegadas reciben su propio número en `cuadras` (la primera cuenta como la manzana)
     lista, cajas = [], {}
