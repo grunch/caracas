@@ -237,4 +237,21 @@ describe('alzarCasa: un ala estirada fuera de su lote', () => {
       expect(alturas.some((h) => Math.abs(h - y) < 1e-6), `(${u.toFixed(2)}, ${v.toFixed(2)}) a ${y.toFixed(3)} m`).toBe(true)
     }
   })
+
+  test('las paredes también se parten en la cumbre: llegan al tejado, sin abertura debajo', () => {
+    // Arrange: el lado de (4, 30) a (−2, 9) cruza la cumbre de la media agua lateral (u = 0) en v = 16
+    const plan = planDeAlas({
+      ancho: 12, fondo: 30, estilo: COLONIAL, pisos: 1, semilla: 5,
+      alas: [ala(ALA.FRENTE, 0, 0, 12, 8), ala(ALA.LATERAL_IZQ, 0, 8, 4, 20), ala(ALA.PATIO, 4, 8, 12, 20), ala(ALA.SOLAR, 0, 20, 12, 30)],
+    })
+    const lateral = plan.faldones.find((f) => !f.hueco && f.caida[0] === 1)
+    const salida = recolector()
+
+    // Act
+    alzarCasa({ anillo: [[0, 0], [12, 0], [12, 30], [4, 30], [-2, 9]], plan, libres: {} }, salida)
+
+    // Assert
+    const enLaCumbre = salida.vertices.filter((v) => esPared(v) && Math.abs(v.u) < 1e-6 && Math.abs(v.v - 16) < 1e-6)
+    expect(Math.max(...enLaCumbre.map((v) => v.y))).toBeCloseTo(alturaDe(lateral, 0, 16), 6)
+  })
 })

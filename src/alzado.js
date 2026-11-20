@@ -139,9 +139,27 @@ function alero(salida, f, p0, p1, n, vuelo) {
   }
 }
 
-/** Dónde parten un segmento los bordes de los faldones: [0, …, 1]. */
+/**
+ * Dónde cruza el segmento a→b la línea de la cumbre de un faldón, dentro de él (0 < t < 1): ahí `alturaDe` se
+ * quiebra (lo estirado sigue plano), así que una pared o un escalón también se parten ahí para llegar al tejado.
+ */
+function cumbres(a, b, faldones) {
+  const ts = []
+  for (const f of faldones) {
+    if (f.hueco || !(f.tan > 0)) continue
+    const lejos = (p) => (p[0] - f.origen[0]) * f.caida[0] + (p[1] - f.origen[1]) * f.caida[1]
+    const [da, db] = [lejos(a), lejos(b)]
+    if (da < 0 === db < 0) continue
+    const t = da / (da - db)
+    const p = mezcla(a, b, t)
+    if (t > 1e-6 && t < 1 - 1e-6 && estaDentro(f.region, p[0], p[1])) ts.push(t)
+  }
+  return ts
+}
+
+/** Dónde parten un segmento los bordes de los faldones (y sus cumbres): [0, …, 1]. */
 function partes(a, b, plan) {
-  const ts = [0, 1]
+  const ts = [0, 1, ...cumbres(a, b, plan.faldones)]
   for (const f of plan.faldones) ts.push(...cruces(a, b, f.region))
   ts.sort((x, y) => x - y)
   return ts.filter((t, k) => k === 0 || t - ts[k - 1] > 1e-6)
@@ -198,7 +216,7 @@ function escalones({ anillo, plan }, salida) {
       const largo = Math.hypot(q[0] - p[0], q[1] - p[1])
       if (largo < 1e-6) return
       const n = [((q[1] - p[1]) / largo) * giro, (-(q[0] - p[0]) / largo) * giro] // hacia afuera del faldón
-      const ts = [0, 1, ...cruces(p, q, anillo)]
+      const ts = [0, 1, ...cruces(p, q, anillo), ...cumbres(p, q, plan.faldones)]
       for (const g of plan.faldones) if (g !== f) ts.push(...cruces(p, q, g.region))
       ts.sort((x, y) => x - y)
       for (let i = 0; i + 1 < ts.length; i++) {
