@@ -1,16 +1,19 @@
-# Lectura visual de bordes del original: primer lote
+# Lectura visual de bordes del original: caras candidatas
 
-La lectura de `lectura-bordes-original.json` registra 524 frentes de 131 unidades,
+La lectura de `lectura-bordes-original.json` registra 590 frentes de 147 unidades,
 conservando los IDs de `frentes-caras-candidatas.json`. Es una clasificación visual
 del rojo en el borde de cada unidad, no una geometría aprobada para generar casas.
-La fase 1 sigue abierta: quedan 66 bordes de las caras candidatas y las unidades
-sin cara única, además de las comprobaciones métricas y de acceso pendientes.
+La fase 1 sigue abierta: quedan las unidades sin cara única, además de las
+comprobaciones métricas y de acceso pendientes. En las caras candidatas hay 574
+lecturas de rojo (253 continuas, 141 parciales y 180 sin rojo), seis bordes cuyo
+contorno debe retrazarse, seis con símbolos por resolver y cuatro de la plaza.
 
 Se inspeccionaron los 16 paneles del original, con cada borde candidato desplazado
 3 píxeles hacia su unidad para que no ocultara el borde vecino. Las lecturas del
 JSON son explícitas por frente; no se asigna una lectura a las unidades omitidas.
-Se excluyen de este lote los símbolos religiosos y los casos cuya relación entre
-plaza, edificio y calle necesita un recorte específico. El norte está a la derecha
+Se revisaron además recortes individuales de los 16 casos restantes. Los símbolos
+religiosos que afectan la lectura se marcan pendientes; la plaza se clasifica
+por separado y los contornos discrepantes no reciben una ocupación inventada. El norte está a la derecha
 del escaneo: los índices de borde no son orientaciones cardinales.
 
 ## Qué cambia respecto de un sondeo de color
@@ -32,6 +35,8 @@ Otros controles concretos:
 - U0182 tiene los cuatro bordes rojos; su ausencia temporal está rastreada en
   `ausencias-rastreadas.json`.
 - U0183 conserva la franja libre inferior, aunque buena parte de la unidad sea roja.
+- U0013 necesita retrazar el contorno; U0069 conserva un recodo de calle que el eje recto candidato omite.
+- U0157 mantiene su chaflán de ribera y U0213 su cuerpo triangular interior; son excepciones dibujadas.
 - U0113 y U0158 mantienen la abertura de sus cuerpos en C/L, respectivamente.
 
 **Sin rojo en el borde no significa que se pueda entrar caminando.** El plano no
@@ -41,6 +46,6 @@ requieren las referencias de época y las fases correspondientes.
 
 ## Comprobaciones
 
-Los 524 IDs existen en las caras candidatas, sin duplicados, y pertenecen a la
-unidad indicada. Cada unidad de este lote tiene cuatro bordes. La fuente conserva
+Los 590 IDs existen en las caras candidatas, sin duplicados, y pertenecen a la
+unidad indicada. Hay 145 unidades de cuatro bordes y dos de cinco bordes. La fuente conserva
 el SHA-256 declarado. Los datos del sistema y el generador no cambian en este lote.

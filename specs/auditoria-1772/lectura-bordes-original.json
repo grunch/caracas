@@ -212,6 +212,33 @@
       ]
     },
     {
+      "unidad": "U1772-0013",
+      "sector": "S1772-12",
+      "observacion": "El polígono candidato incluye un recodo de la calle que no sigue el límite rojo. Retrasar toda clasificación métrica hasta retrazar el contorno.",
+      "frentes": [
+        {
+          "id": "F1772-U0013-0",
+          "lectura": "contorno_candidato_requiere_revision"
+        },
+        {
+          "id": "F1772-U0013-1",
+          "lectura": "contorno_candidato_requiere_revision"
+        },
+        {
+          "id": "F1772-U0013-2",
+          "lectura": "contorno_candidato_requiere_revision"
+        },
+        {
+          "id": "F1772-U0013-3",
+          "lectura": "contorno_candidato_requiere_revision"
+        },
+        {
+          "id": "F1772-U0013-4",
+          "lectura": "contorno_candidato_requiere_revision"
+        }
+      ]
+    },
+    {
       "unidad": "U1772-0015",
       "sector": "S1772-13",
       "observacion": "Terreno libre en los cuatro bordes.",
@@ -415,6 +442,75 @@
         {
           "id": "F1772-U0049-3",
           "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0050",
+      "sector": "S1772-22",
+      "observacion": "Entrante blanco superior derecho; no completar esa esquina.",
+      "frentes": [
+        {
+          "id": "F1772-U0050-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0050-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0050-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0050-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0051",
+      "sector": "S1772-22",
+      "observacion": "Entrante inferior derecho y símbolo religioso junto al borde inferior; el blanco del símbolo no prueba un acceso.",
+      "frentes": [
+        {
+          "id": "F1772-U0051-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0051-1",
+          "lectura": "simbolo_en_borde_pendiente"
+        },
+        {
+          "id": "F1772-U0051-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0051-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0052",
+      "sector": "S1772-22",
+      "observacion": "Entrante blanco inferior izquierdo.",
+      "frentes": [
+        {
+          "id": "F1772-U0052-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0052-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0052-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0052-3",
+          "lectura": "rojo_continuo_en_borde"
         }
       ]
     },
@@ -672,6 +768,29 @@
       ]
     },
     {
+      "unidad": "U1772-0067",
+      "sector": "S1772-23",
+      "observacion": "Entrante superior derecho; símbolos en izquierda y arriba no prueban huecos ni patios.",
+      "frentes": [
+        {
+          "id": "F1772-U0067-0",
+          "lectura": "simbolo_en_borde_pendiente"
+        },
+        {
+          "id": "F1772-U0067-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0067-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0067-3",
+          "lectura": "simbolo_en_borde_pendiente"
+        }
+      ]
+    },
+    {
       "unidad": "U1772-0068",
       "sector": "S1772-23",
       "observacion": "Rojo continuo hasta los cuatro límites; sin convertirlo en parcelas individuales.",
@@ -690,6 +809,29 @@
         },
         {
           "id": "F1772-U0068-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0069",
+      "sector": "S1772-23",
+      "observacion": "La calle del borde inferior forma un recodo; el eje recto candidato no representa ese límite.",
+      "frentes": [
+        {
+          "id": "F1772-U0069-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0069-1",
+          "lectura": "contorno_candidato_requiere_revision"
+        },
+        {
+          "id": "F1772-U0069-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0069-3",
           "lectura": "rojo_continuo_en_borde"
         }
       ]
@@ -833,6 +975,29 @@
       ]
     },
     {
+      "unidad": "U1772-0077",
+      "sector": "S1772-22",
+      "observacion": "Entrante inferior derecho y símbolo próximo al borde inferior; conservar el cuerpo especial.",
+      "frentes": [
+        {
+          "id": "F1772-U0077-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0077-1",
+          "lectura": "simbolo_en_borde_pendiente"
+        },
+        {
+          "id": "F1772-U0077-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0077-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
       "unidad": "U1772-0078",
       "sector": "S1772-22",
       "observacion": "Rojo continuo hasta los cuatro límites; sin convertirlo en parcelas individuales.",
@@ -898,6 +1063,29 @@
         {
           "id": "F1772-0010-3",
           "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0081",
+      "sector": "S1772-23",
+      "observacion": "Símbolo religioso junto al borde superior; no convertir su fondo blanco en un vacío de construcción.",
+      "frentes": [
+        {
+          "id": "F1772-0001-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-0001-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-0001-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-0001-3",
+          "lectura": "simbolo_en_borde_pendiente"
         }
       ]
     },
@@ -1132,6 +1320,29 @@
       ]
     },
     {
+      "unidad": "U1772-0094",
+      "sector": "S1772-33",
+      "observacion": "Símbolo religioso junto al borde superior; requiere tratamiento del edificio, no relleno de una corona ordinaria.",
+      "frentes": [
+        {
+          "id": "F1772-0003-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-0003-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-0003-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-0003-3",
+          "lectura": "simbolo_en_borde_pendiente"
+        }
+      ]
+    },
+    {
       "unidad": "U1772-0095",
       "sector": "S1772-33",
       "observacion": "Rojo continuo hasta los cuatro límites; sin convertirlo en parcelas individuales.",
@@ -1224,6 +1435,29 @@
       ]
     },
     {
+      "unidad": "U1772-0103",
+      "sector": "S1772-32",
+      "observacion": "Cuerpo especial retirado de la izquierda, unido a una banda derecha; no rellenar el espacio blanco.",
+      "frentes": [
+        {
+          "id": "F1772-U0103-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0103-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0103-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0103-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
       "unidad": "U1772-0104",
       "sector": "S1772-32",
       "observacion": "Entrante blanco inferior izquierdo; no completar con casas.",
@@ -1312,6 +1546,29 @@
         {
           "id": "F1772-0007-3",
           "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0108",
+      "sector": "S1772-32",
+      "observacion": "Entrante superior derecho y símbolo en el cuerpo rojo; conservar el límite escalonado.",
+      "frentes": [
+        {
+          "id": "F1772-U0108-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0108-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0108-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0108-3",
+          "lectura": "rojo_parcial_en_borde"
         }
       ]
     },
@@ -2098,6 +2355,33 @@
       ]
     },
     {
+      "unidad": "U1772-0157",
+      "sector": "S1772-33",
+      "observacion": "Rojo continuo sobre cinco lados, incluido el chaflán de ribera. No convertirlo en rectángulo.",
+      "frentes": [
+        {
+          "id": "F1772-U0157-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0157-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0157-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0157-3",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0157-4",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
       "unidad": "U1772-0158",
       "sector": "S1772-33",
       "observacion": "Cuerpo superior e izquierdo; vacío inferior derecho.",
@@ -2880,6 +3164,29 @@
       ]
     },
     {
+      "unidad": "U1772-0208",
+      "sector": "S1772-34",
+      "observacion": "Cuerpo superior izquierdo con símbolo interior; el resto del solar es terreno libre.",
+      "frentes": [
+        {
+          "id": "F1772-U0208-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0208-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0208-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0208-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
       "unidad": "U1772-0209",
       "sector": "S1772-34",
       "observacion": "Terreno libre en los cuatro bordes.",
@@ -2949,6 +3256,52 @@
       ]
     },
     {
+      "unidad": "U1772-0213",
+      "sector": "S1772-43",
+      "observacion": "Cuerpo triangular interior y dos cuerpos sobre los bordes inferior y derecho; conservar el triángulo como excepción dibujada.",
+      "frentes": [
+        {
+          "id": "F1772-U0213-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0213-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0213-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0213-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0214",
+      "sector": "S1772-43",
+      "observacion": "Conjunto de plaza y cuerpos aislados de Candelaria; la clasificación parcial no autoriza unirlos.",
+      "frentes": [
+        {
+          "id": "F1772-U0214-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0214-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0214-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0214-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
       "unidad": "U1772-0230",
       "sector": "S1772-13",
       "observacion": "Terreno libre en los cuatro bordes.",
@@ -2968,6 +3321,29 @@
         {
           "id": "F1772-U0230-3",
           "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0233",
+      "sector": "S1772-23",
+      "observacion": "Plaza con elementos perimetrales discontinuos. No interpretar como manzana de viviendas ni cerrar sus accesos públicos.",
+      "frentes": [
+        {
+          "id": "F1772-U0233-0",
+          "lectura": "plaza_con_elementos_perimetrales"
+        },
+        {
+          "id": "F1772-U0233-1",
+          "lectura": "plaza_con_elementos_perimetrales"
+        },
+        {
+          "id": "F1772-U0233-2",
+          "lectura": "plaza_con_elementos_perimetrales"
+        },
+        {
+          "id": "F1772-U0233-3",
+          "lectura": "plaza_con_elementos_perimetrales"
         }
       ]
     },
