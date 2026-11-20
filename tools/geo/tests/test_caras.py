@@ -155,3 +155,17 @@ def test_una_calle_reconocida_se_reserva_aunque_solo_tenga_casas_de_un_lado():
     vertices = np.asarray(ciudad['vertices']).reshape(-1,2)
     assert ciudad['techos']
     assert vertices[:,0].max() <= 130 - 3/METRO
+
+
+def test_descarta_el_contorno_cuyos_retiros_se_cruzan():
+    # Cara real de la red, trasladada: la simplificación y el retiro cruzaban
+    # dos lados cerca de su extremo sur, aunque la cara original era válida.
+    puntos = np.array([(6245.5,8684.9),(6254.3,8732),(6264.1,8804),(6282.8,8918.1),
+        (6290.8,8959.6),(6297,8966.7),(6305.3,8969.1),(6326.1,8969.7),
+        (6398.7,8966.1),(6480.9,8962.8),(6492.1,8960),(6500.1,8955.3),
+        (6506.7,8948.5),(6510.8,8937.9),(6510.9,8790.3),(6517.6,8752),
+        (6527.8,8711.5),(6538,8682.8),(6550.1,8655),(6559,8625.6),
+        (6561,8587.4),(6557.5,8543.2),(6520.5,8488.3),(6288.6,8652.7)]) - (6240,8480)
+    cara = Polygon(puntos)
+    assert cara.is_valid
+    assert ajustar_cara(cara,np.ones((500,340),bool),(0,0),METRO) is None
