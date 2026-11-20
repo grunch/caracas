@@ -21,6 +21,7 @@ Se toma **un plano topográfico antiguo escaneado en altísima resolución** (do
 | [07-plan-de-implementacion.md](07-plan-de-implementacion.md) | **Plan vivo**: tareas (un PR cada una), dependencias, criterios y estado |
 
 Plan de corrección de la reconstrucción: [auditoría integral de 1772](08-auditoria-y-correccion-1772.md).
+| [08-panteon-por-epocas.md](08-panteon-por-epocas.md) | Trinidad y Panteón: variantes históricas, adaptación al mapa, fuentes y límites (T40a) |
 
 ## Resumen técnico
 
