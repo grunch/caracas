@@ -220,6 +220,13 @@ test('en pantalla angosta la caja no se sale ni pisa los años', async () => {
   const caja = await page.locator('#buscar').boundingBox()
   expect(caja.x).toBeGreaterThanOrEqual(0)
   expect(caja.x + caja.width).toBeLessThanOrEqual(640)
+  // sin crece.json (la demo de CI) no hay línea de tiempo; con él, llega después de lab.ready: se la espera
+  if (!(await hayDato(page, 'datos/crece.json', 'json'))) return
   const años = page.locator('#epocas')
-  if (await años.isVisible()) expect((await años.boundingBox()).y).toBeGreaterThanOrEqual(caja.y + caja.height)
+  await expect(años).toBeVisible()
+  // de pie, los años van debajo de la caja; con poco alto (640 × 480 es «teléfono acostado», T70), al lado:
+  // en los dos casos, sin encimarse
+  const a = await años.boundingBox()
+  const seEnciman = a.x < caja.x + caja.width && caja.x < a.x + a.width && a.y < caja.y + caja.height && caja.y < a.y + a.height
+  expect(seEnciman).toBe(false)
 })
