@@ -1,0 +1,1802 @@
+{
+  "completo": false,
+  "fuente_sha256": "4696d038a55b8088302a496b6eb4678b11173d98d3a15c589530cf78ee7bb62b",
+  "fecha": "2026-11-20",
+  "alcance": "Lectura visual del rojo en los cuatro bordes del escaneo. No certifica posiciones métricas, puertas, tapias, parcelas individuales ni correspondencia con el sistema. Sin rojo no significa acceso peatonal permitido. No usar directamente en el generador.",
+  "unidades": [
+    {
+      "unidad": "U1772-0008",
+      "sector": "S1772-13",
+      "observacion": "Cuerpos separados arriba y banda inferior; el cuerpo inferior llega a la derecha.",
+      "frentes": [
+        {
+          "id": "F1772-U0008-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0008-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0008-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0008-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0009",
+      "sector": "S1772-13",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0009-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0009-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0009-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0009-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0015",
+      "sector": "S1772-13",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0015-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0015-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0015-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0015-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0017",
+      "sector": "S1772-13",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0017-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0017-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0017-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0017-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0027",
+      "sector": "S1772-23",
+      "observacion": "Solo un cuerpo junto al borde izquierdo; no cerrar el perímetro.",
+      "frentes": [
+        {
+          "id": "F1772-U0027-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0027-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0027-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0027-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0030",
+      "sector": "S1772-23",
+      "observacion": "Cuerpos discontinuos en izquierda, abajo y derecha; arriba libre.",
+      "frentes": [
+        {
+          "id": "F1772-U0030-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0030-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0030-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0030-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0032",
+      "sector": "S1772-23",
+      "observacion": "Cuerpo pequeño arriba a la izquierda y cuerpo en L abajo a la derecha.",
+      "frentes": [
+        {
+          "id": "F1772-U0032-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0032-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0032-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0032-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0047",
+      "sector": "S1772-21",
+      "observacion": "El cuerpo inferior está retirado del borde izquierdo; el sondeo de proximidad no demuestra fachada allí.",
+      "frentes": [
+        {
+          "id": "F1772-U0047-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0047-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0047-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0047-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0048",
+      "sector": "S1772-21",
+      "observacion": "Dos cuerpos en L separados; conservar discontinuidades.",
+      "frentes": [
+        {
+          "id": "F1772-U0048-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0048-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0048-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0048-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0055",
+      "sector": "S1772-23",
+      "observacion": "Entrante blanco en la esquina inferior derecha; afecta ambos bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0055-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0055-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0055-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0055-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0056",
+      "sector": "S1772-23",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0056-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0056-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0056-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0056-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0057",
+      "sector": "S1772-23",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0057-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0057-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0057-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0057-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0061",
+      "sector": "S1772-24",
+      "observacion": "Terreno libre; las líneas negras delimitan calles y no prueban casas.",
+      "frentes": [
+        {
+          "id": "F1772-U0061-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0061-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0061-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0061-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0062",
+      "sector": "S1772-21",
+      "observacion": "Vacío en esquina superior izquierda.",
+      "frentes": [
+        {
+          "id": "F1772-U0062-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0062-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0062-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0062-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0071",
+      "sector": "S1772-24",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0071-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0071-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0071-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0071-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0072",
+      "sector": "S1772-21",
+      "observacion": "Banda derecha continua; cuerpos parciales en izquierda y abajo; arriba solo alcanza la esquina derecha.",
+      "frentes": [
+        {
+          "id": "F1772-U0072-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0072-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0072-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0072-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0073",
+      "sector": "S1772-21",
+      "observacion": "Banda roja superior; el cuerpo pequeño inferior deja discontinuidades en el borde inferior.",
+      "frentes": [
+        {
+          "id": "F1772-U0073-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0073-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0073-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0073-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0074",
+      "sector": "S1772-21",
+      "observacion": "Franja libre en todo el borde izquierdo.",
+      "frentes": [
+        {
+          "id": "F1772-U0074-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0074-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0074-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0074-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0086",
+      "sector": "S1772-24",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0086-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0086-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0086-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0086-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0087",
+      "sector": "S1772-31",
+      "observacion": "Cuerpo interior separado de los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0087-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0087-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0087-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0087-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0088",
+      "sector": "S1772-31",
+      "observacion": "Cuerpo interior separado de los cuatro bordes; el rojo cercano al borde superior no es fachada sobre la calle.",
+      "frentes": [
+        {
+          "id": "F1772-U0088-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0088-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0088-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0088-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0089",
+      "sector": "S1772-31",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0089-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0089-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0089-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0089-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0101",
+      "sector": "S1772-31",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0101-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0101-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0101-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0101-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0104",
+      "sector": "S1772-32",
+      "observacion": "Entrante blanco inferior izquierdo; no completar con casas.",
+      "frentes": [
+        {
+          "id": "F1772-U0104-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0104-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0104-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0104-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0105",
+      "sector": "S1772-32",
+      "observacion": "Vacío inferior con cuerpo aislado; derecha solo ocupada arriba.",
+      "frentes": [
+        {
+          "id": "F1772-U0105-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0105-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0105-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0105-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0106",
+      "sector": "S1772-32",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-0008-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-0008-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-0008-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-0008-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0107",
+      "sector": "S1772-32",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-0007-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-0007-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-0007-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-0007-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0113",
+      "sector": "S1772-33",
+      "observacion": "Cuerpo en C abierto hacia la derecha.",
+      "frentes": [
+        {
+          "id": "F1772-U0113-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0113-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0113-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0113-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0115",
+      "sector": "S1772-34",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0115-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0115-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0115-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0115-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0116",
+      "sector": "S1772-31",
+      "observacion": "Cuerpo rojo en L abajo a la derecha; separado de los bordes superior e izquierdo.",
+      "frentes": [
+        {
+          "id": "F1772-U0116-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0116-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0116-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0116-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0117",
+      "sector": "S1772-31",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0117-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0117-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0117-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0117-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0118",
+      "sector": "S1772-32",
+      "observacion": "Vacío inferior derecho.",
+      "frentes": [
+        {
+          "id": "F1772-U0118-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0118-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0118-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0118-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0120",
+      "sector": "S1772-32",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0120-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0120-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0120-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0120-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0121",
+      "sector": "S1772-32",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0121-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0121-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0121-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0121-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0122",
+      "sector": "S1772-32",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0122-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0122-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0122-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0122-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0123",
+      "sector": "S1772-33",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0123-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0123-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0123-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0123-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0124",
+      "sector": "S1772-33",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0124-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0124-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0124-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0124-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0127",
+      "sector": "S1772-33",
+      "observacion": "Dos cuerpos separados sobre el borde derecho.",
+      "frentes": [
+        {
+          "id": "F1772-U0127-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0127-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0127-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0127-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0128",
+      "sector": "S1772-33",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0128-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0128-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0128-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0128-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0129",
+      "sector": "S1772-34",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0129-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0129-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0129-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0129-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0130",
+      "sector": "S1772-34",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0130-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0130-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0130-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0130-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0132",
+      "sector": "S1772-31",
+      "observacion": "Cuerpo superior derecho que no llega al borde inferior.",
+      "frentes": [
+        {
+          "id": "F1772-U0132-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0132-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0132-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0132-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0133",
+      "sector": "S1772-31",
+      "observacion": "Cuerpo inferior derecho; bordes superior e izquierdo libres.",
+      "frentes": [
+        {
+          "id": "F1772-U0133-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0133-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0133-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0133-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0137",
+      "sector": "S1772-32",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0137-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0137-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0137-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0137-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0138",
+      "sector": "S1772-32",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0138-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0138-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0138-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0138-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0139",
+      "sector": "S1772-32",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0139-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0139-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0139-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0139-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0140",
+      "sector": "S1772-33",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0140-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0140-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0140-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0140-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0143",
+      "sector": "S1772-33",
+      "observacion": "Vacío superior izquierdo; cuerpo en L.",
+      "frentes": [
+        {
+          "id": "F1772-U0143-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0143-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0143-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0143-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0144",
+      "sector": "S1772-33",
+      "observacion": "Solo cuerpo superior derecho.",
+      "frentes": [
+        {
+          "id": "F1772-U0144-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0144-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0144-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0144-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0147",
+      "sector": "S1772-34",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0147-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0147-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0147-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0147-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0152",
+      "sector": "S1772-32",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0152-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0152-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0152-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0152-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0153",
+      "sector": "S1772-32",
+      "observacion": "Franja libre superior izquierda; rojo continuo abajo y derecha.",
+      "frentes": [
+        {
+          "id": "F1772-U0153-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0153-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0153-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0153-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0158",
+      "sector": "S1772-33",
+      "observacion": "Cuerpo superior e izquierdo; vacío inferior derecho.",
+      "frentes": [
+        {
+          "id": "F1772-U0158-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0158-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0158-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0158-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0159",
+      "sector": "S1772-33",
+      "observacion": "Solo cuerpo superior izquierdo.",
+      "frentes": [
+        {
+          "id": "F1772-U0159-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0159-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0159-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0159-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0161",
+      "sector": "S1772-34",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0161-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0161-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0161-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0161-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0162",
+      "sector": "S1772-34",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0162-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0162-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0162-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0162-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0174",
+      "sector": "S1772-43",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0174-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0174-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0174-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0174-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0175",
+      "sector": "S1772-43",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0175-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0175-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0175-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0175-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0176",
+      "sector": "S1772-43",
+      "observacion": "Cuerpos en izquierda y derecha separados de los bordes superior e inferior.",
+      "frentes": [
+        {
+          "id": "F1772-U0176-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0176-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0176-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0176-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0178",
+      "sector": "S1772-43",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0178-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0178-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0178-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0178-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0179",
+      "sector": "S1772-42",
+      "observacion": "Cuerpo superior derecho y cuerpo inferior izquierdo separados.",
+      "frentes": [
+        {
+          "id": "F1772-U0179-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0179-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0179-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0179-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0180",
+      "sector": "S1772-42",
+      "observacion": "Cuerpos separados en las esquinas; conservar huecos entre ellos.",
+      "frentes": [
+        {
+          "id": "F1772-U0180-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0180-1",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0180-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0180-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0181",
+      "sector": "S1772-43",
+      "observacion": "Vacío superior izquierdo.",
+      "frentes": [
+        {
+          "id": "F1772-U0181-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0181-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0181-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0181-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0182",
+      "sector": "S1772-43",
+      "observacion": "Rojo continuo hasta los cuatro límites; contrasta con la ausencia temporal ya rastreada.",
+      "frentes": [
+        {
+          "id": "F1772-U0182-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0182-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0182-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0182-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0183",
+      "sector": "S1772-43",
+      "observacion": "Franja de terreno libre a lo largo de todo el borde inferior; no cerrar como corona completa.",
+      "frentes": [
+        {
+          "id": "F1772-U0183-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0183-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0183-2",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0183-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0197",
+      "sector": "S1772-24",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0197-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0197-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0197-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0197-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0198",
+      "sector": "S1772-23",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0198-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0198-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0198-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0198-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0199",
+      "sector": "S1772-23",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0199-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0199-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0199-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0199-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0200",
+      "sector": "S1772-21",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0200-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0200-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0200-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0200-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0201",
+      "sector": "S1772-21",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0201-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0201-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0201-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0201-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0204",
+      "sector": "S1772-23",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0204-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0204-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0204-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0204-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0205",
+      "sector": "S1772-23",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0205-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0205-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0205-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0205-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0209",
+      "sector": "S1772-34",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0209-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0209-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0209-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0209-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0210",
+      "sector": "S1772-33",
+      "observacion": "Vacío superior izquierdo.",
+      "frentes": [
+        {
+          "id": "F1772-U0210-0",
+          "lectura": "rojo_parcial_en_borde"
+        },
+        {
+          "id": "F1772-U0210-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0210-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0210-3",
+          "lectura": "rojo_parcial_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0211",
+      "sector": "S1772-32",
+      "observacion": "Rojo continuo hasta los cuatro límites.",
+      "frentes": [
+        {
+          "id": "F1772-U0211-0",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0211-1",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0211-2",
+          "lectura": "rojo_continuo_en_borde"
+        },
+        {
+          "id": "F1772-U0211-3",
+          "lectura": "rojo_continuo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0230",
+      "sector": "S1772-13",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0230-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0230-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0230-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0230-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0242",
+      "sector": "S1772-33",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0242-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0242-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0242-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0242-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    },
+    {
+      "unidad": "U1772-0249",
+      "sector": "S1772-42",
+      "observacion": "Terreno libre en los cuatro bordes.",
+      "frentes": [
+        {
+          "id": "F1772-U0249-0",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0249-1",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0249-2",
+          "lectura": "sin_rojo_en_borde"
+        },
+        {
+          "id": "F1772-U0249-3",
+          "lectura": "sin_rojo_en_borde"
+        }
+      ]
+    }
+  ]
+}

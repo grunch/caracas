@@ -72,3 +72,7 @@ El [enlace de frentes candidatos](frentes-candidatos.md) amplía la red a 85 lí
 El [contraste de las 292 unidades](contraste-unidades.md) registra candidatos y ausencias bajo el TPS y rastrea la regla temporal en seis unidades; la correspondencia geométrica y la revisión de accesos siguen pendientes.
 
 El [sondeo de accesos](accesos-primer-lote.md) evalúa los 40 frentes iniciales y reproduce dos recorridos en el navegador; confirma penetración en Camejo–Cruz Verde y Seminario sin certificar todos los patios.
+
+## Lectura de ocupación por borde
+
+[Primer lote de lectura visual](lectura-bordes-original.md): 312 bordes de 78 unidades, con IDs conservados y cuatro falsos positivos de proximidad descartados. No cierra la fase 1 ni autoriza generar casas sobre las caras candidatas.
