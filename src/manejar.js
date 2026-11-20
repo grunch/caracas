@@ -39,6 +39,14 @@ export function otroVehiculo(id, e) {
 
 const acotar = (v, a, b) => Math.min(b, Math.max(a, v))
 
+/** S: frena hasta 0 y, en lo que resta del paso, retrocede con la aceleración del vehículo. */
+function frenarOAtras(velocidad, fuerza, dt, v) {
+  if (velocidad <= 0) return velocidad - v.aceleracion * fuerza * dt
+  const hastaParar = velocidad / (FRENO * fuerza)
+  if (hastaParar >= dt) return velocidad - FRENO * fuerza * dt
+  return -v.aceleracion * fuerza * (dt - hastaParar)
+}
+
 /**
  * Un cuadro: `entrada` { acelera (−1…1: S frena y luego retrocede), girar (−1…1) } durante `dt` s con el
  * vehículo `v`. Gira en proporción a lo que avanza (quieto no gira). El camino se mira de a TRAMO_M, no solo el
@@ -47,7 +55,7 @@ const acotar = (v, a, b) => Math.min(b, Math.max(a, v))
 export function pasoEnCoche(coche, { acelera = 0, girar = 0 }, dt, v, { choca }) {
   let velocidad = coche.velocidad
   if (acelera > 0) velocidad += v.aceleracion * acelera * dt
-  else if (acelera < 0) velocidad -= (velocidad > 0 ? FRENO : v.aceleracion) * -acelera * dt
+  else if (acelera < 0) velocidad = frenarOAtras(velocidad, -acelera, dt, v)
   else velocidad -= Math.sign(velocidad) * Math.min(Math.abs(velocidad), ROCE * dt)
   velocidad = acotar(velocidad, -v.maxima * ATRAS, v.maxima)
   const avance = velocidad * dt

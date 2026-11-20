@@ -51,6 +51,20 @@ describe('pasoEnCoche', () => {
     expect(-e.velocidad).toBeLessThan(ford.maxima / 2)
   })
 
+  test('S frena hasta 0 y retrocede solo en lo que resta del paso, no con el freno de todo el intervalo', () => {
+    // Arrange: el Ford T a 0,1 m/s; frena a 4 m/s² → se detiene en 0,025 s
+    const casiQuieto = { ...quieto, velocidad: 0.1 }
+    // Act
+    const e = pasoEnCoche(casiQuieto, { acelera: -1, girar: 0 }, 1, ford, libre)
+    // Assert: 0,975 s de marcha atrás a 2 m/s²
+    expect(e.velocidad).toBeCloseTo(-1.95)
+  })
+
+  test('S sin llegar a 0 solo frena; detenido, retrocede con su aceleración', () => {
+    expect(pasoEnCoche({ ...quieto, velocidad: 5 }, { acelera: -1, girar: 0 }, 0.5, ford, libre).velocidad).toBeCloseTo(3)
+    expect(pasoEnCoche(quieto, { acelera: -1, girar: 0 }, 0.5, ford, libre).velocidad).toBeCloseTo(-1)
+  })
+
   test('gira solo si se mueve, y marcha atrás gira al revés', () => {
     expect(pasoEnCoche(quieto, { acelera: 0, girar: 1 }, 1, ford, libre).rumbo).toBe(0)
     expect(pasoEnCoche({ ...quieto, velocidad: 5 }, { acelera: 0, girar: 1 }, 0.1, ford, libre).rumbo).toBeGreaterThan(0)
