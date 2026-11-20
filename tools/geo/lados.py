@@ -23,6 +23,7 @@ TOLERANCIA_M = 1.5            # simplificación del borde de la manzana
 TOLERANCIAS_M = (1.5, 3.0, 5.0, 8.0)
 LADOS_CON_TOLERANCIA_GRUESA = 6   # con una tolerancia gruesa, un polígono de más lados es una curva (una rotonda), no una cuadra
 RETIRO_MINIMO_M = 2.0         # un lote cuyo frente empieza más adentro que esto (una muesca: plaza, pasaje) se retira hasta ahí
+CRUJIA_M = 8.0                # la franja del frente en que se mide si el lote tiene casa (tools/geo/cuadra.py)
 RETIRO_LLENO = 0.5            # el frente empieza en la primera fila del lote edificada en esta parte de su ancho
 LADO_MINIMO_M = 8.0           # un lado más corto que esto no da a la calle: lo cubren los vecinos
 MAXIMO_DE_LADOS = 8
@@ -177,6 +178,12 @@ def _retiro_del_frente(v, ancho_px, metro):
     return float(llenas[0])
 
 
+def _frente_edificado(u, v, retiro, ancho_px, metro):
+    """Qué parte de la franja del frente del lote (su ancho × CRUJIA_M, desde el retiro) está edificada."""
+    crujia = CRUJIA_M / metro
+    return float(np.count_nonzero((v >= retiro) & (v < retiro + crujia))) / max(ancho_px * crujia, 1.0)
+
+
 def _repartir_lado(lado, px, py, metro, rng):
     """Los lotes de los píxeles (px, py) de un lado: (cuál de ellos, [marco de cada lote])."""
     a, b, eu, ev = lado
@@ -204,6 +211,7 @@ def _repartir_lado(lado, px, py, metro, rng):
             'ancho': ancho,
             'fondo': float(max(v[del_lote].max() + 0.5 - retiro, 1.0) * metro),
             'esquina': j == en_a,
+            'frente': _frente_edificado(u[del_lote], v[del_lote], retiro, ancho / metro, metro),
         })
     return cual, marcos
 
@@ -216,7 +224,7 @@ def lotes_por_lados(manzana, metro, semilla, poligono=None):
     ancho) int32, 0 fuera de la manzana. `lotes`: {etiqueta: {origen: (x, y) en píxeles sobre la línea del
     lado (o más adentro, si el lote se retira hasta el fondo de una muesca), eu: dirección del frente, ancho y
     fondo en metros, esquina: si el lote toca una esquina de la manzana; de las dos que se unen en cada
-    esquina, la del lado que arranca ahí}}.
+    esquina, la del lado que arranca ahí, frente: qué parte de la franja de su crujía está edificada}}.
     """
     manzana = np.asarray(manzana, bool)
     if poligono is None:

@@ -495,3 +495,14 @@ def test_dos_pedazos_de_manzana_en_una_misma_cara_comparten_sus_lados():
     assert all(min(abs(m[3]), abs(m[4])) < 1e-6 for m in res['marcos'])
     al_oeste = [m for m in res['marcos'] if m[4] < -0.99]     # eu = (0, −1): las que dan a la calle del oeste
     assert len(al_oeste) >= 4 and all(abs(m[1] - 30) < 1.5 for m in al_oeste)   # las de las dos mitades, en una línea
+
+
+def test_con_la_red_ninguna_casa_queda_sin_su_crujia():
+    from tools.geo.alas import FRENTE
+    c = cuadra_fea()
+    res = vectorizar(c, METRO, plaza=(130, 130), red=red_de(marco_de_calles(20, 20, 240, 240), c))
+    polis = poligonos(res)
+    for t, ox, oy, eux, euy, _, _, _, _, primera, cuantas in res['marcos']:
+        _, u0, v0, u1, v1 = next(a for a in res['alas'][primera:primera + cuantas] if a[0] == FRENTE)
+        frente = Polygon([(ox + u * eux - v * euy, oy + u * euy + v * eux) for u, v in ((u0, v0), (u1, v0), (u1, v1), (u0, v1))])
+        assert polis[t].buffer(0).intersection(frente).area >= 0.35 * frente.area

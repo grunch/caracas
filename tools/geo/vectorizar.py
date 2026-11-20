@@ -107,6 +107,7 @@ def techos_publicos(clases, salida, area_min_px, tolerancia_px, metro):
             agregar_techo(salida, figura, pisos, ESTILO_PUBLICO, semilla_de(figura.centroid.x, figura.centroid.y))
 
 
+FRENTE_MINIMO = 0.4  # un lote con menos que esto de la franja de su crujía edificada no es una casa: es solar
 CEDE_DESDE = 0.25   # una casa que pisa un edificio público en más que esto de su huella le cede el lugar
 
 
@@ -156,7 +157,7 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
             pisado = mascara & publico[zona]
             if pisado.any() and pisado.sum() < CEDE_DESDE * mascara.sum():
                 mascara = mascara & ~pisado
-        if zona is None or mascara.sum() < area_min_px:
+        if zona is None or mascara.sum() < area_min_px or lote['frente'] < FRENTE_MINIMO:
             continue
         figura = poligono_de(mascara, (x + zona[1].start, y + zona[0].start), tolerancia_px)
         if figura is None:

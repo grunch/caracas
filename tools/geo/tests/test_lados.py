@@ -231,3 +231,16 @@ def test_un_lote_sin_muesca_no_se_retira():
     for l in lotes.values():
         ox, oy = l['origen']
         assert min(abs(ox - x0), abs(ox - x1), abs(oy - y0), abs(oy - y1)) < 1.5
+
+
+def test_cada_lote_dice_cuanto_de_su_frente_esta_edificado():
+    _, lotes = lotes_por_lados(rectangulo(), METRO, semilla=3)
+    assert all(l['frente'] > 0.5 for l in lotes.values())   # hasta los de esquina, que la diagonal recorta
+
+
+def test_una_astilla_sin_frente_lo_dice():
+    from tools.geo.lados import _frente_edificado
+    # un lote de 24 px de ancho del que solo hay una tira de 3 px contra un costado
+    u = np.repeat(np.arange(3) + 0.5, 40).astype(float)
+    v = np.tile(np.arange(40) + 0.5, 3).astype(float)
+    assert _frente_edificado(u, v, 0.0, 24.0, METRO) < 0.2
