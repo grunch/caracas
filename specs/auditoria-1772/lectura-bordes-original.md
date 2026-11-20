@@ -1,9 +1,9 @@
 # Lectura visual de bordes del original: primer lote
 
-La lectura de `lectura-bordes-original.json` registra 312 frentes de 78 unidades,
+La lectura de `lectura-bordes-original.json` registra 524 frentes de 131 unidades,
 conservando los IDs de `frentes-caras-candidatas.json`. Es una clasificación visual
 del rojo en el borde de cada unidad, no una geometría aprobada para generar casas.
-La fase 1 sigue abierta: quedan 278 bordes de las caras candidatas y las unidades
+La fase 1 sigue abierta: quedan 66 bordes de las caras candidatas y las unidades
 sin cara única, además de las comprobaciones métricas y de acceso pendientes.
 
 Se inspeccionaron los 16 paneles del original, con cada borde candidato desplazado
@@ -20,8 +20,9 @@ interior de cada cara; una muestra contaba con al menos 25 % de rojo en esa tira
 Clasificó la proporción de muestras como continua desde 85 %, vacía hasta 10 % y
 parcial entre ambos umbrales. Estos umbrales solo sirven para localizar candidatos.
 
-La lectura visual rechaza cuatro propuestas de ocupación parcial: borde izquierdo
-de U0047 y superiores de U0088, U0116 y U0176. El rojo pertenece a cuerpos retirados
+La lectura visual rechaza diez propuestas de ocupación parcial: bordes izquierdo
+e inferior de U0005; izquierdo de U0047; superior de U0088; inferior de U0102;
+izquierdo de U0114; superiores de U0116, U0145 y U0176; e inferior de U0190. El rojo pertenece a cuerpos retirados
 del borde. Usar directamente el sondeo adelantaría edificios hacia la calle.
 
 Otros controles concretos:
@@ -40,6 +41,6 @@ requieren las referencias de época y las fases correspondientes.
 
 ## Comprobaciones
 
-Los 312 IDs existen en las caras candidatas, sin duplicados, y pertenecen a la
+Los 524 IDs existen en las caras candidatas, sin duplicados, y pertenecen a la
 unidad indicada. Cada unidad de este lote tiene cuatro bordes. La fuente conserva
 el SHA-256 declarado. Los datos del sistema y el generador no cambian en este lote.

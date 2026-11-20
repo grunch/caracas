@@ -75,4 +75,4 @@ El [sondeo de accesos](accesos-primer-lote.md) evalúa los 40 frentes iniciales 
 
 ## Lectura de ocupación por borde
 
-[Primer lote de lectura visual](lectura-bordes-original.md): 312 bordes de 78 unidades, con IDs conservados y cuatro falsos positivos de proximidad descartados. No cierra la fase 1 ni autoriza generar casas sobre las caras candidatas.
+[Primer lote de lectura visual](lectura-bordes-original.md): 524 bordes de 131 unidades, con IDs conservados y diez falsos positivos de proximidad descartados. No cierra la fase 1 ni autoriza generar casas sobre las caras candidatas.
