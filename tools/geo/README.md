@@ -360,7 +360,7 @@ existían en una época: hace falta modelar su vida por separado.
 Regenerar con `npm run datos`. Los binarios quedan locales;
 publicarlos requiere la decisión del responsable del proyecto.
 
-`cuadras-1772.json` documenta once cuadras cerradas del centro: rectángulos en el
+`cuadras-1772.json` documenta diez cuadras cerradas del centro: rectángulos en el
 original y sus cuatro cruces correspondientes en el mosaico, leídos por posición
 en el damero respecto de Plaza Mayor. Se excluyen las plazoletas de San Jacinto y
 San Pablo. Solo se aplica cuando hay una cara individual de la red que coincide;

@@ -39,7 +39,7 @@ def test_las_correspondencias_curadas_no_se_enciman_ni_ocupan_la_plaza_mayor():
     from tools.geo.cuadras_historicas import cargar
     from shapely.geometry import Point
     cuadras = cargar()
-    assert len(cuadras) == 11
+    assert len(cuadras) == 10
     for i, cuadra in enumerate(cuadras):
         assert cuadra.is_valid and cuadra.area > 10000
         assert not cuadra.contains(Point(8968.2, 6839))
@@ -54,3 +54,11 @@ def test_la_cuadra_verificada_ya_existe_en_1772_aunque_el_calce_diga_otra_cosa()
     assert vidas[0] == [1,2]
     assert 0 not in quitar
     assert vidas[1][0] >= 2
+
+
+def test_no_se_fuerza_el_cierre_de_la_cuadra_de_la_plaza_de_san_jacinto():
+    from tools.geo.cuadras_historicas import cargar
+    from shapely.geometry import Point
+    # Ubicación documentada en marcas-datos.js: el nombre no implica cuadra cerrada.
+    plaza = Point(9265,7040)
+    assert not any(c.covers(plaza) for c in cargar())
