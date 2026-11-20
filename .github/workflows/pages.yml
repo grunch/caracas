@@ -32,6 +32,12 @@ jobs:
         run: npm run datos:bajar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # avisa (sin cortar el deploy) si producción va a salir con datos de un pipeline anterior
+      - name: ¿Los datos siguen al día con el código?
+        run: npm run datos:al-dia
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npx vite build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

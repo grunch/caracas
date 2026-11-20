@@ -26,6 +26,13 @@ jobs:
       - run: npm ci
       - name: Tests unitarios
         run: npx vitest run
+      # solo avisa: un PR del pipeline se fusiona antes de que se puedan publicar sus datos
+      - name: ¿Los datos publicados siguen al día?
+        if: github.event_name == 'pull_request'
+        run: npm run datos:al-dia
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build
         run: npx vite build
 

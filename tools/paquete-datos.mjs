@@ -6,6 +6,8 @@
 //   npm run datos:bajar -- --muestra   baja la muestra: 1 km² alrededor de la plaza (los E2E del CI, T12)
 //   npm run datos:publicar   empaqueta lo de public/datos/manifiesto.json y la muestra (tools/muestra.mjs), y
 //                            los sube como release nuevo y despliega Pages desde main (gh)
+//   npm run datos:al-dia     avisa si desde el release más nuevo cambió algo que genera los datos (git diff
+//                            contra su etiqueta, tools/datos-al-dia-lib.mjs); en el CI, como anotación
 //   node tools/paquete-datos.mjs muestra <etiqueta>   agrega (o reemplaza) la muestra en un release que ya
 //                            existe, armada con los datos de public/ (que tienen que ser los de ese release)
 //
@@ -15,7 +17,7 @@
 import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { createReadStream, createWriteStream } from 'node:fs'
-import { copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { appendFile, copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { Readable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
@@ -24,6 +26,8 @@ import {
   argsDeDespliegue,
 } from './paquete-datos-lib.mjs'
 import { armarMuestra } from './muestra.mjs'
+import { PASOS } from './datos-pasos.mjs'
+import { rutasQueGeneranDatos, cambiosQueTocanDatos, avisoDeDatos } from './datos-al-dia-lib.mjs'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
 const CACHE = path.join(RAIZ, '.cache/paquete-datos')
@@ -162,10 +166,32 @@ async function desplegar() {
   console.log('→ despliegue de Pages pedido sobre main (gh run list --workflow pages.yml)')
 }
 
-const ORDENES = { bajar, publicar, muestra }
+/**
+ * Compara el código de ahora con el del release más nuevo: solo avisa, nunca falla (un PR del pipeline se
+ * fusiona antes de que se puedan publicar sus datos). En GitHub Actions deja una anotación y el resumen.
+ */
+async function alDia() {
+  const elegido = elegirRelease(await api('releases?per_page=50'))
+  if (!elegido) return console.log(`${REPO} no tiene ningún release de datos todavía`)
+  const ref = `refs/tags/${elegido.etiqueta}`
+  // el checkout del CI es superficial: basta con el árbol de la etiqueta para comparar
+  await correr('git', ['fetch', '--quiet', '--depth=1', '--no-tags', 'origin', `+${ref}:${ref}`])
+  const cambiados = (await correr('git', ['diff', '--name-only', ref, 'HEAD'])).split('\n').filter(Boolean)
+  const aviso = avisoDeDatos({ etiqueta: elegido.etiqueta, cambios: cambiosQueTocanDatos(cambiados, rutasQueGeneranDatos(PASOS)) })
+  if (!aviso) return console.log(`los datos de ${elegido.etiqueta} siguen al día con el código`)
+  console.log(`${aviso.titulo}. ${aviso.texto}\n${aviso.archivos.map((a) => `  ${a}`).join('\n')}`)
+  if (!process.env.GITHUB_ACTIONS) return
+  console.log(`::warning title=${aviso.titulo}::${aviso.texto}`)
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    const resumen = `### ⚠️ ${aviso.titulo}\n\n${aviso.texto}\n\n${aviso.archivos.map((a) => `- \`${a}\``).join('\n')}\n`
+    await appendFile(process.env.GITHUB_STEP_SUMMARY, resumen)
+  }
+}
+
+const ORDENES = { bajar, publicar, muestra, 'al-dia': alDia }
 const orden = ORDENES[process.argv[2]]
 if (!orden) {
-  console.error('uso: node tools/paquete-datos.mjs bajar [--muestra] | publicar | muestra <etiqueta>')
+  console.error('uso: node tools/paquete-datos.mjs bajar [--muestra] | publicar | muestra <etiqueta> | al-dia')
   process.exit(2)
 }
 orden().catch((e) => {
