@@ -138,9 +138,11 @@ def _casas_de_manzana(clases, manzana, lotes, metro, modelo):
     return fundir_chicos(casas, AREA_FUSION_M2 / metro ** 2)
 
 
-def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, crujia, poligono=None):
+def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, crujia, poligono=None, publico=None):
     """Las casas de una cuadra modelo repartida por sus lados (tools/geo/lados.py): cada lote con su marco
-    sobre la línea de fachada de su calle. → False si la manzana no se deja repartir así."""
+    sobre la línea de fachada de su calle. → False si la manzana no se deja repartir así. `publico`: la máscara
+    de los edificios públicos; el lote que pisa uno en menos de CEDE_DESDE pierde ese pedazo (el que lo pisa en
+    más le cede el lugar entero cuando nace: publico_que_pisa)."""
     repartida = lotes_por_lados(manzana, metro, semilla_de(int(origen[0]) + 5, int(origen[1]) + 11), poligono)
     if repartida is None:
         return False
@@ -150,6 +152,10 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
     for k, lote in lotes.items():
         zona = zonas[k - 1]
         mascara = etiquetas[zona] == k
+        if publico is not None:
+            pisado = mascara & publico[zona]
+            if pisado.any() and pisado.sum() < CEDE_DESDE * mascara.sum():
+                mascara = mascara & ~pisado
         if zona is None or mascara.sum() < area_min_px:
             continue
         figura = poligono_de(mascara, (x + zona[1].start, y + zona[0].start), tolerancia_px)
@@ -182,7 +188,7 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
               and es_de_solo_casas(clases, manzana, metro, CLASE['edificado'], CLASE['publico']))
     azar = semilla_de(int(x) + 17, int(y) + 29) / 0xFFFF
     if modelo and casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, crujia_de_cuadra(azar),
-                                  poligono):
+                                  poligono, None if salida.get('_antes') else clases == CLASE['publico']):
         return
     lotes = lotes_de_manzana(manzana, metro, semilla_de(int(x), int(y)), direccion)
     # de toda la manzana: las líneas de fachada y el fondo de la crujía (la cumbrera corre seguida por la cuadra)

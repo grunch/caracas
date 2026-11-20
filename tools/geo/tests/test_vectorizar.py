@@ -470,3 +470,13 @@ def test_la_cuadra_de_antes_no_pisa_una_cuadra_vecina_que_no_reemplaza():
     assert len(antes) == 1 and antes[0]['miembros'] == {1}
     x0, y0 = antes[0]['origen']
     assert not antes[0]['cuadra'][30 - y0:40 - y0, 200 - x0:210 - x0].any()
+
+
+def test_una_casa_que_apenas_pisa_un_edificio_publico_no_se_le_encima():
+    from tools.geo.vectorizar import ESTILO_PUBLICO
+    res = vectorizar(manzana_con_iglesia(), METRO, plaza=(140, 140))
+    polis = poligonos(res)
+    iglesia = next(p for p, t in zip(polis, res['techos']) if t[3] == ESTILO_PUBLICO)
+    for p, t, cede in zip(polis, res['techos'], res['cede']):
+        if t[3] != ESTILO_PUBLICO and cede == -1:
+            assert p.intersection(iglesia).area < 0.02 * p.area   # la que no le cede el lugar no la pisa
