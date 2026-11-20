@@ -29,7 +29,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 |---|---|---|---|---|
 | T10 | **CI en GitHub Actions**: vitest, pytest (solo sintéticos), build y Playwright con datos de prueba | — | cada PR muestra checks verdes o rojos | ✅ #5 |
 | T11 | **Pipeline reproducible**: `npm run datos` corre todo el pipeline de 1936 (y luego el de las épocas) con caché por paso y verifica conteos esperados | T08 | desde los `original.tif`, un comando regenera `public/` idéntico (hash) | ✅ #6 |
-| T12 | **Muestra de datos chica** para E2E y CI: un recorte de 1 km² alrededor de la plaza (plano, `.pak`, suelo) generado por el pipeline | T11 | los E2E corren en CI sin los datos pesados | 🔄 #60: la muestra (`tools/muestra.mjs`) viaja como `muestra.tar.gz` en el release `datos-*` y el CI la baja con `npm run datos:bajar -- --muestra` |
+| T12 | **Muestra de datos chica** para E2E y CI: un recorte de 1 km² alrededor de la plaza (plano, `.pak`, suelo) generado por el pipeline | T11 | los E2E corren en CI sin los datos pesados | ✅ #60: la muestra (`tools/muestra.mjs`) viaja como `muestra.tar.gz` en el release `datos-*` y el CI la baja con `npm run datos:bajar -- --muestra` |
 
 ## Fase 2 · Terminar lo que está en curso
 
@@ -92,17 +92,19 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 
 | ID | Tarea | Depende de | Listo cuando | Estado |
 |---|---|---|---|---|
-| T60 | A pie: primera persona, colisiones con las casas, sobre el relieve | T21 | se camina por el centro sin atravesar paredes | 🔄 #61 |
-| T61 | En avión: vuelo sobre el valle, Q/E cambian de época | T25 | se sobrevuela el Ávila | 🔄 #62 |
-| T62 | Manejar: vehículos de cada época (carreta, coche de caballos, tranvía, Ford T) con sonido por WebAudio | T60 | se maneja el vehículo del año elegido | 🔄 #63 (sin tranvía: va por rieles) |
+| T60 | A pie: primera persona, colisiones con las casas, sobre el relieve | T21 | se camina por el centro sin atravesar paredes | ✅ #61 |
+| T61 | En avión: vuelo sobre el valle, Q/E cambian de época | T25 | se sobrevuela el Ávila | ✅ #62 |
+| T62 | Manejar: vehículos de cada época (carreta, coche de caballos, tranvía, Ford T) con sonido por WebAudio | T60 | se maneja el vehículo del año elegido | ✅ #63 (sin tranvía: va por rieles) |
+| T62b | El **tranvía** de manejar: va por rieles (el trazado de las líneas, de las fuentes) en vez de andar libre por las calles | T62 | el tranvía sigue su línea en su época | ⏳ |
+| T60b | A pie, el **camino entero**: como en manejar (#63), revisar los choques a lo largo del paso y no solo en el destino (con cuadros lentos, corriendo se puede atravesar una casa delgada) | T60 | test del paso largo que no atraviesa una casa | ⏳ |
 
 ## Fase 7 · Cierre
 
 | ID | Tarea | Depende de | Listo cuando | Estado |
 |---|---|---|---|---|
-| T70 | Responsive y modo liviano: paneles en el teléfono, gestos, rendimiento en gama media | T25 | 30 fps o más en un teléfono de gama media | 🔄 #58 |
-| T71 | `edificios.html`: la ciudad edificio por edificio (scrollytelling) | T43 | recorre todos los hitos | 🔄 #64 |
-| T72 | Accesibilidad (WCAG 2.2 AA en la interfaz) y SEO básico | T44 | auditoría sin errores graves | 🔄 #59 |
+| T70 | Responsive y modo liviano: paneles en el teléfono, gestos, rendimiento en gama media | T25 | 30 fps o más en un teléfono de gama media | ✅ #58 |
+| T71 | `edificios.html`: la ciudad edificio por edificio (scrollytelling) | T43 | recorre todos los hitos | ✅ #64 |
+| T72 | Accesibilidad (WCAG 2.2 AA en la interfaz) y SEO básico | T44 | auditoría sin errores graves | ✅ #59 |
 | T73 | **Publicación** en GitHub Pages (grunch.github.io/caracas): build en cada push a `main`, con los datos bajados del release `datos-*` (`npm run datos:bajar`) | la decisión de derechos (tomada por el responsable) | el sitio está en línea | ✅ #50 (caracas.city) |
 | T80 | **Épocas posteriores a 1936** (años 40–50): calzar el plano de 1950, extender el área si hace falta y usar las referencias con `epocas_futuras` de `fuentes/imagenes/` | T25 | una época más en la línea de tiempo | ⏳ (idea; no priorizada) |
 
