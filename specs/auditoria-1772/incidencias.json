@@ -221,6 +221,34 @@
         4
       ],
       "pr_correccion": null
+    },
+    {
+      "id": "I1772-010",
+      "categoria": "calce_incompatible_con_referencia_curada",
+      "estado": "confirmado_desacuerdo_causa_geometrica_pendiente",
+      "prioridad": "P0",
+      "baseline": "B1772-001",
+      "manzanas": [
+        "M1772-0001",
+        "M1772-0002",
+        "M1772-0003",
+        "M1772-0004",
+        "M1772-0005",
+        "M1772-0006",
+        "M1772-0007",
+        "M1772-0008",
+        "M1772-0009",
+        "M1772-0010"
+      ],
+      "observacion": "En 23 cruces únicos del núcleo, el TPS y la referencia de #69 difieren hasta 96.162 m; 5 exceden 25 m. El mayor desplazamiento está al sur. La diferencia supera el ancho de varias calles; no usar las dos referencias como si fueran equivalentes.",
+      "causa": "Dos referencias sin reconciliar: cuadras-1772.json sitúa los cruces por continuidad del damero; el TPS se ajusta con cuatro anclas manuales en Plaza Mayor y 238 enlaces automáticos. Falta aislar su contribución a cada vacío/alineación.",
+      "evidencia": "controles-calce-centro.json y calce-y-calles.md",
+      "fases_candidatas": [
+        2,
+        3,
+        4
+      ],
+      "pr_correccion": null
     }
   ]
 }
