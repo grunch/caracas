@@ -241,27 +241,32 @@
     {
       "unidad": "U1772-0013",
       "sector": "S1772-12",
-      "observacion": "El polígono candidato incluye un recodo de la calle que no sigue el límite rojo. Retrasar toda clasificación métrica hasta retrazar el contorno.",
+      "observacion": "Pentágono irregular: lado superior corto, diagonal larga, testero corto inclinado, lado inferior oblicuo y lado izquierdo. La cara candidata extiende su vértice oriental hasta el cruce vecino y no es el contorno del rojo.",
       "frentes": [
         {
           "id": "F1772-U0013-0",
-          "lectura": "contorno_candidato_requiere_revision"
+          "lectura": "contorno_candidato_descartado",
+          "evidencia": "bordes-especiales-original.json"
         },
         {
           "id": "F1772-U0013-1",
-          "lectura": "contorno_candidato_requiere_revision"
+          "lectura": "contorno_candidato_descartado",
+          "evidencia": "bordes-especiales-original.json"
         },
         {
           "id": "F1772-U0013-2",
-          "lectura": "contorno_candidato_requiere_revision"
+          "lectura": "contorno_candidato_descartado",
+          "evidencia": "bordes-especiales-original.json"
         },
         {
           "id": "F1772-U0013-3",
-          "lectura": "contorno_candidato_requiere_revision"
+          "lectura": "contorno_candidato_descartado",
+          "evidencia": "bordes-especiales-original.json"
         },
         {
           "id": "F1772-U0013-4",
-          "lectura": "contorno_candidato_requiere_revision"
+          "lectura": "contorno_candidato_descartado",
+          "evidencia": "bordes-especiales-original.json"
         }
       ],
       "paneles_consultados": [
@@ -531,7 +536,7 @@
     {
       "unidad": "U1772-0051",
       "sector": "S1772-22",
-      "observacion": "Entrante inferior derecho y símbolo religioso junto al borde inferior; el blanco del símbolo no prueba un acceso.",
+      "observacion": "El símbolo ocupa un recuadro blanco en la esquina del entrante inferior derecho. El perímetro exterior dibujado es cerrado; no dibuja una puerta ni permite concluir que haya un paso.",
       "frentes": [
         {
           "id": "F1772-U0051-0",
@@ -539,7 +544,8 @@
         },
         {
           "id": "F1772-U0051-1",
-          "lectura": "simbolo_en_borde_pendiente"
+          "lectura": "simbolo_religioso_en_contorno_cerrado",
+          "evidencia": "bordes-especiales-original.json"
         },
         {
           "id": "F1772-U0051-2",
@@ -869,11 +875,12 @@
     {
       "unidad": "U1772-0067",
       "sector": "S1772-23",
-      "observacion": "Entrante superior derecho; símbolos en izquierda y arriba no prueban huecos ni patios.",
+      "observacion": "Dos recuadros con símbolos interrumpen el rojo en los lados izquierdo y superior. El entrante superior derecho sí forma parte del espacio blanco exterior y debe conservarse.",
       "frentes": [
         {
           "id": "F1772-U0067-0",
-          "lectura": "simbolo_en_borde_pendiente"
+          "lectura": "simbolo_religioso_en_contorno_cerrado",
+          "evidencia": "bordes-especiales-original.json"
         },
         {
           "id": "F1772-U0067-1",
@@ -885,7 +892,8 @@
         },
         {
           "id": "F1772-U0067-3",
-          "lectura": "simbolo_en_borde_pendiente"
+          "lectura": "simbolo_religioso_en_contorno_cerrado",
+          "evidencia": "bordes-especiales-original.json"
         }
       ],
       "paneles_consultados": [
@@ -921,7 +929,7 @@
     {
       "unidad": "U1772-0069",
       "sector": "S1772-23",
-      "observacion": "La calle del borde inferior forma un recodo; el eje recto candidato no representa ese límite.",
+      "observacion": "El borde inferior tiene tres tramos: horizontal, diagonal y horizontal. El recodo separa esta unidad de U1772-0232; reemplazarlo por una recta invade el espacio de calle.",
       "frentes": [
         {
           "id": "F1772-U0069-0",
@@ -929,7 +937,8 @@
         },
         {
           "id": "F1772-U0069-1",
-          "lectura": "contorno_candidato_requiere_revision"
+          "lectura": "recodo_observado_no_representado_por_borde_recto",
+          "evidencia": "bordes-especiales-original.json"
         },
         {
           "id": "F1772-U0069-2",
@@ -1103,7 +1112,7 @@
     {
       "unidad": "U1772-0077",
       "sector": "S1772-22",
-      "observacion": "Entrante inferior derecho y símbolo próximo al borde inferior; conservar el cuerpo especial.",
+      "observacion": "Símbolo en recuadro en la esquina del entrante inferior derecho, contenido dentro del contorno negro. Conservar el entrante exterior; el blanco del símbolo no es un patio identificado.",
       "frentes": [
         {
           "id": "F1772-U0077-0",
@@ -1111,7 +1120,8 @@
         },
         {
           "id": "F1772-U0077-1",
-          "lectura": "simbolo_en_borde_pendiente"
+          "lectura": "simbolo_religioso_en_contorno_cerrado",
+          "evidencia": "bordes-especiales-original.json"
         },
         {
           "id": "F1772-U0077-2",
@@ -1207,7 +1217,7 @@
     {
       "unidad": "U1772-0081",
       "sector": "S1772-23",
-      "observacion": "Símbolo religioso junto al borde superior; no convertir su fondo blanco en un vacío de construcción.",
+      "observacion": "Recuadro con símbolo religioso dentro del contorno superior, continuo por fuera del símbolo. No hay una abertura trazada desde la calle al interior en ese punto.",
       "frentes": [
         {
           "id": "F1772-0001-2",
@@ -1223,7 +1233,8 @@
         },
         {
           "id": "F1772-0001-3",
-          "lectura": "simbolo_en_borde_pendiente"
+          "lectura": "simbolo_religioso_en_contorno_cerrado",
+          "evidencia": "bordes-especiales-original.json"
         }
       ],
       "paneles_consultados": [
@@ -1497,7 +1508,7 @@
     {
       "unidad": "U1772-0094",
       "sector": "S1772-33",
-      "observacion": "Símbolo religioso junto al borde superior; requiere tratamiento del edificio, no relleno de una corona ordinaria.",
+      "observacion": "Recuadro con símbolo religioso junto al lado superior, dentro de un contorno cerrado. No sustituir el conjunto religioso por una corona ordinaria de casas.",
       "frentes": [
         {
           "id": "F1772-0003-2",
@@ -1513,7 +1524,8 @@
         },
         {
           "id": "F1772-0003-3",
-          "lectura": "simbolo_en_borde_pendiente"
+          "lectura": "simbolo_religioso_en_contorno_cerrado",
+          "evidencia": "bordes-especiales-original.json"
         }
       ],
       "paneles_consultados": [

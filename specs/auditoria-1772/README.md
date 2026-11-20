@@ -88,3 +88,5 @@ El [sondeo de accesos](accesos-primer-lote.md) evalúa los 40 frentes iniciales 
 [Continuidad de calles](continuidad-calles.md): medición de 32 ejes curados, 64 recorridos del controlador y contraste separado de los 470 tramos candidatos; C0031 se desliza junto a dos huellas.
 
 [Conteos del paquete y del origen](conteos-publicados.md): corrige I006 en la generación del manifiesto; conserva controles de 1936 y no modifica geometría. Publicación pendiente.
+
+- [Revisión de bordes especiales](bordes-especiales-original.md): doce bordes de siete unidades; dos contornos observados y seis símbolos religiosos.

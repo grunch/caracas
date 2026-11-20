@@ -1,0 +1,225 @@
+{
+  "fuente": "fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg",
+  "fuente_sha256": "4696d038a55b8088302a496b6eb4678b11173d98d3a15c589530cf78ee7bb62b",
+  "fecha": "2026-11-20",
+  "alcance": "Revisión de doce bordes de siete unidades. Los dos polígonos siguen el contorno cartográfico exterior del rojo, no ejes de calle, lotes ni cubiertas. No aplicarlos al generador sin correspondencia y reconstrucción verificadas. No se modifican las caras candidatas previas ni sus IDs.",
+  "unidades": [
+    {
+      "unidad": "U1772-0013",
+      "caja_recorte_original": [
+        612,
+        436,
+        732,
+        542
+      ],
+      "sha256_recorte_ampliado": "ebc36e3d0986b66b1e18d7892045c01c2a2c6c7c18a41007ac8356ec11745e16",
+      "observacion": "Pentágono irregular: lado superior corto, diagonal larga, testero corto inclinado, lado inferior oblicuo y lado izquierdo. La cara candidata extiende su vértice oriental hasta el cruce vecino y no es el contorno del rojo.",
+      "frentes_revisados": [
+        {
+          "frente": "F1772-U0013-0",
+          "lectura_anterior": "contorno_candidato_requiere_revision",
+          "lectura_actual": "contorno_candidato_descartado"
+        },
+        {
+          "frente": "F1772-U0013-1",
+          "lectura_anterior": "contorno_candidato_requiere_revision",
+          "lectura_actual": "contorno_candidato_descartado"
+        },
+        {
+          "frente": "F1772-U0013-2",
+          "lectura_anterior": "contorno_candidato_requiere_revision",
+          "lectura_actual": "contorno_candidato_descartado"
+        },
+        {
+          "frente": "F1772-U0013-3",
+          "lectura_anterior": "contorno_candidato_requiere_revision",
+          "lectura_actual": "contorno_candidato_descartado"
+        },
+        {
+          "frente": "F1772-U0013-4",
+          "lectura_anterior": "contorno_candidato_requiere_revision",
+          "lectura_actual": "contorno_candidato_descartado"
+        }
+      ],
+      "accesos": "no_determinables_por_el_simbolo_o_el_color",
+      "geometria_generable": false,
+      "contorno_cartografico_observado_original": [
+        [
+          638,
+          464
+        ],
+        [
+          647,
+          464
+        ],
+        [
+          680,
+          494
+        ],
+        [
+          678,
+          503
+        ],
+        [
+          638,
+          513
+        ]
+      ],
+      "precision": "Lectura manual al píxel del escaneo; trazo negro de grosor variable, no precisión métrica certificada.",
+      "sha256_superposicion": "b1758192f2b0e0d218d80e968a617253609e039c49afbc21b911461076e72537"
+    },
+    {
+      "unidad": "U1772-0051",
+      "caja_recorte_original": [
+        677,
+        635,
+        793,
+        751
+      ],
+      "sha256_recorte_ampliado": "d752391a4c5b4e8099d6ac07f860b50fbd692cc41a0c8722fe84d49c84fa9870",
+      "observacion": "El símbolo ocupa un recuadro blanco en la esquina del entrante inferior derecho. El perímetro exterior dibujado es cerrado; no dibuja una puerta ni permite concluir que haya un paso.",
+      "frentes_revisados": [
+        {
+          "frente": "F1772-U0051-1",
+          "lectura_anterior": "simbolo_en_borde_pendiente",
+          "lectura_actual": "simbolo_religioso_en_contorno_cerrado"
+        }
+      ],
+      "accesos": "no_determinables_por_el_simbolo_o_el_color",
+      "geometria_generable": false
+    },
+    {
+      "unidad": "U1772-0067",
+      "caja_recorte_original": [
+        1079,
+        701,
+        1195,
+        818
+      ],
+      "sha256_recorte_ampliado": "489115623f0930fc0850880f78a373eadf04046198c5650b9b0469de120f0809",
+      "observacion": "Dos recuadros con símbolos interrumpen el rojo en los lados izquierdo y superior. El entrante superior derecho sí forma parte del espacio blanco exterior y debe conservarse.",
+      "frentes_revisados": [
+        {
+          "frente": "F1772-U0067-0",
+          "lectura_anterior": "simbolo_en_borde_pendiente",
+          "lectura_actual": "simbolo_religioso_en_contorno_cerrado"
+        },
+        {
+          "frente": "F1772-U0067-3",
+          "lectura_anterior": "simbolo_en_borde_pendiente",
+          "lectura_actual": "simbolo_religioso_en_contorno_cerrado"
+        }
+      ],
+      "accesos": "no_determinables_por_el_simbolo_o_el_color",
+      "geometria_generable": false
+    },
+    {
+      "unidad": "U1772-0069",
+      "caja_recorte_original": [
+        1211,
+        701,
+        1329,
+        818
+      ],
+      "sha256_recorte_ampliado": "3d09c53476e4c660d2e339af761aaab7b6196d102f7ad0a57b4310bd5fb99ad4",
+      "observacion": "El borde inferior tiene tres tramos: horizontal, diagonal y horizontal. El recodo separa esta unidad de U1772-0232; reemplazarlo por una recta invade el espacio de calle.",
+      "frentes_revisados": [
+        {
+          "frente": "F1772-U0069-1",
+          "lectura_anterior": "contorno_candidato_requiere_revision",
+          "lectura_actual": "recodo_observado_no_representado_por_borde_recto"
+        }
+      ],
+      "accesos": "no_determinables_por_el_simbolo_o_el_color",
+      "geometria_generable": false,
+      "contorno_cartografico_observado_original": [
+        [
+          1241,
+          729
+        ],
+        [
+          1299,
+          729
+        ],
+        [
+          1299,
+          790
+        ],
+        [
+          1286,
+          790
+        ],
+        [
+          1271,
+          772
+        ],
+        [
+          1241,
+          772
+        ]
+      ],
+      "precision": "Lectura manual al píxel del escaneo; trazo negro de grosor variable, no precisión métrica certificada.",
+      "sha256_superposicion": "cff0a2bbdc3bb7948ef79402c1ab61aeb9232b1ee51370c3403384164c6bfceb"
+    },
+    {
+      "unidad": "U1772-0077",
+      "caja_recorte_original": [
+        677,
+        768,
+        793,
+        884
+      ],
+      "sha256_recorte_ampliado": "6f01f55ba9fe857ae4a94a0bdadabdf8432a7f325fa0b9797c92cb4c95b401de",
+      "observacion": "Símbolo en recuadro en la esquina del entrante inferior derecho, contenido dentro del contorno negro. Conservar el entrante exterior; el blanco del símbolo no es un patio identificado.",
+      "frentes_revisados": [
+        {
+          "frente": "F1772-U0077-1",
+          "lectura_anterior": "simbolo_en_borde_pendiente",
+          "lectura_actual": "simbolo_religioso_en_contorno_cerrado"
+        }
+      ],
+      "accesos": "no_determinables_por_el_simbolo_o_el_color",
+      "geometria_generable": false
+    },
+    {
+      "unidad": "U1772-0081",
+      "caja_recorte_original": [
+        1011,
+        768,
+        1129,
+        884
+      ],
+      "sha256_recorte_ampliado": "88b37afac50369d6110a0625a3c5953f8355a74d5d2b1ad682ca7ef959d61dc5",
+      "observacion": "Recuadro con símbolo religioso dentro del contorno superior, continuo por fuera del símbolo. No hay una abertura trazada desde la calle al interior en ese punto.",
+      "frentes_revisados": [
+        {
+          "frente": "F1772-0001-3",
+          "lectura_anterior": "simbolo_en_borde_pendiente",
+          "lectura_actual": "simbolo_religioso_en_contorno_cerrado"
+        }
+      ],
+      "accesos": "no_determinables_por_el_simbolo_o_el_color",
+      "geometria_generable": false
+    },
+    {
+      "unidad": "U1772-0094",
+      "caja_recorte_original": [
+        945,
+        834,
+        1061,
+        951
+      ],
+      "sha256_recorte_ampliado": "928d10630b036140ccedd582ce6e931269adfeb7df8e6cb281311ea2bef4d52b",
+      "observacion": "Recuadro con símbolo religioso junto al lado superior, dentro de un contorno cerrado. No sustituir el conjunto religioso por una corona ordinaria de casas.",
+      "frentes_revisados": [
+        {
+          "frente": "F1772-0003-3",
+          "lectura_anterior": "simbolo_en_borde_pendiente",
+          "lectura_actual": "simbolo_religioso_en_contorno_cerrado"
+        }
+      ],
+      "accesos": "no_determinables_por_el_simbolo_o_el_color",
+      "geometria_generable": false
+    }
+  ]
+}
