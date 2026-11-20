@@ -23,6 +23,7 @@ import { crearAcabado } from './acabado.js'
 import { normalizarMarcas, distanciaDeVuelo } from './marcas.js'
 import { crearCapaMarcas } from './marcas-capa.js'
 import { MARCAS } from './marcas-datos.js'
+import { ordenDeVitrina } from './vitrina.js'
 import './marcas.css'
 import { crearVisorDePlano } from './visor-plano-panel.js'
 import './visor-plano.css'
@@ -231,6 +232,7 @@ const OLA_EPOCA_MAX_M = 9000 // más que la distancia de la plaza a la esquina m
 // de 1936 debajo y el plano viejo aparece cuando llegue
 const ESPERA_PLANO_MS = 2500
 let lineaDeTiempo = null
+let epocaPedida = null // la época que pidió la vitrina antes de que llegara la línea de tiempo (crece.json)
 let visorPlano = null // el plano de la época, aparte (P; src/visor-plano-panel.js)
 let secuencia = null
 let planos = null
@@ -277,6 +279,7 @@ Promise.all([crecePedido, indicePlanos])
     })
     visorPlano.elegir(epocas[lineaDeTiempo.actual])
     pedirMascaras() // el agua y los rótulos, para la hoja en tinta de antes de 1936
+    if (epocaPedida !== null) lineaDeTiempo.elegir(epocaPedida)
     if (andarAlLlegar) lineaDeTiempo.andar()
     cargarTextura('plano/crece.png', false).then((t) => {
       // etapas codificadas: un mipmap las promediaría y el borde de la ciudad cambiaría de época a lo lejos
@@ -373,6 +376,7 @@ addEventListener('keydown', (e) => {
   const movimiento = movimientoDeTecla(e)
   if (movimiento) {
     e.preventDefault()
+    girarVitrina = false // quien mueve la vista con el teclado la maneja (en la vitrina deja de girar)
     if (movimiento.tipo === 'mover') cam.mover(movimiento.dx, movimiento.dy)
     else if (movimiento.tipo === 'girar') cam.girar(movimiento.giro, movimiento.inclinar)
     else cam.acercar(movimiento.veces)
@@ -447,9 +451,10 @@ let alturaMostrada = null
 
 // --- las marcas (M): los nombres de los lugares, por época, en una capa de DOM sobre la vista (src/marcas.js) ---
 const sinAnimar = matchMedia('(prefers-reduced-motion: reduce)')
+const marcasDelMapa = normalizarMarcas(MARCAS, { hitos: HITOS, coords })
 const marcas = crearCapaMarcas({
   contenedor: document.getElementById('marcas'),
-  marcas: normalizarMarcas(MARCAS, { hitos: HITOS, coords }),
+  marcas: marcasDelMapa,
   tamaño: () => ({ ancho: innerWidth, alto: innerHeight }),
   altura: sueloEn,
   alSobre: () => pedirCuadro(2),
@@ -472,6 +477,36 @@ document.getElementById('nombres').addEventListener('click', () => alternarMarca
 // --- las fichas: al abrir una marca, el panel con sus nombres, su texto por época y sus fotos (src/ficha-panel.js) ---
 const fichas = engancharFichas({ capa: marcas, U: ciudad.U })
 if (params.has('sinmarcas')) alternarMarcas(false)
+
+// --- la vitrina (T71): embebido en edificios.html, el visor obedece las órdenes del mismo origen (src/vitrina.js) ---
+const VITRINA = Object.freeze({ dist: 320, pitch: 0.75, giro: 0.12 }) // m, rad, rad/s alrededor del edificio
+let girarVitrina = false
+if (params.has('vitrina')) {
+  document.body.classList.add('vitrina')
+  const porId = new Map(marcasDelMapa.map((m) => [m.id, m]))
+  renderer.domElement.addEventListener('pointerdown', () => { girarVitrina = false }) // quien toca la vista, la maneja
+  addEventListener('message', (e) => {
+    const orden = ordenDeVitrina(e, location.origin)
+    if (!orden) return
+    // la página que embebe pudo empezar a escuchar después del aviso «lista» (postMessage no guarda mensajes):
+    // pregunta y se le contesta. El oyente se instala en el mismo tramo sin esperas que termina en el aviso: cuando
+    // atiende una pregunta, el visor ya está listo
+    if (orden.tipo === 'pregunta') {
+      if (e.source === window.parent && window.parent !== window) window.parent.postMessage({ vitrina: 'lista' }, location.origin)
+    } else if (orden.tipo === 'ir' && porId.has(orden.id)) {
+      const m = porId.get(orden.id)
+      const destino = { x: m.x, z: m.z, dist: VITRINA.dist, pitch: VITRINA.pitch }
+      if (sinAnimar.matches) cam.jump(destino); else cam.volar(destino)
+      girarVitrina = !sinAnimar.matches
+    } else if (orden.tipo === 'epoca') {
+      if (lineaDeTiempo) lineaDeTiempo.elegir(orden.indice); else epocaPedida = orden.indice
+    } else if (orden.tipo === 'levantar') {
+      levantar(true)
+    } else if (orden.tipo === 'girar') {
+      girarVitrina = orden.si && !sinAnimar.matches
+    }
+  })
+}
 
 // --- la luz y el acabado: sombras arrojadas, contorno a tinta, bruma y grano de papel (src/acabado.js) ---
 const acabado = crearAcabado({
@@ -502,7 +537,10 @@ renderer.setAnimationLoop((t) => {
     if (enCoche.update(dt)) pedirCuadro(2)
     const rotulo = `${enCoche.vehiculo.nombre} · ${enCoche.kmh} km/h`
     if (rotulo !== alturaMostrada) avisoModo.querySelector('.titulo').textContent = (alturaMostrada = rotulo)
-  } else if (cam.update(dt)) pedirCuadro(2)
+  } else {
+    if (girarVitrina) { cam.goal.yaw += VITRINA.giro * dt; pedirCuadro(2) }
+    if (cam.update(dt)) pedirCuadro(2)
+  }
   const { uOla, uColor } = ciudad.U
   if (uOla.value !== olaObjetivo) {
     uOla.value = acercar(uOla.value, olaObjetivo, (olaMax / DURACION_OLA_S) * dt)
@@ -547,8 +585,10 @@ if (params.has('hoy')) alternarHoy(true)
 document.body.classList.add('listo')
 listo = true
 if (crecerPedido) verCrecer()
+// la página que embebe la vitrina espera este aviso para mandar sus órdenes
+if (params.has('vitrina') && window.parent !== window) window.parent.postMessage({ vitrina: 'lista' }, location.origin)
 window.lab = {
-  renderer, scene, camera, cam, aPie, enAvion, enCoche, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
+  renderer, scene, camera, cam, aPie, enAvion, enCoche, marcasDelMapa, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
   get relieve() { return relieve },
   get teselas() { return teselas },
   get arboles() { return arboles },

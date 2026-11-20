@@ -64,6 +64,11 @@ Panel lateral con título, "era" (rango de años en que existió), foto principa
 ### 6. Página "edificio por edificio" (`edificios.html`)
 Scrollytelling: a la izquierda, una lista larga de edificios por año; a la derecha, la ciudad 3D en miniatura, que **vuela hasta cada edificio y le da la vuelta** mientras se scrollea. CTA "Abrir el visor entero". Reutiliza los mismos módulos (`marcas`, `fichas`).
 
+*Caracas (T71, `edificios.html` + `src/edificios.js`):*
+- **Lista**: un artículo por edificio modelado (las marcas con hito), en el orden en que aparecen, con el año, su nombre (y el anterior, si cambió) y el primer párrafo de su ficha.
+- **Visor**: el de siempre, embebido como vitrina (`?vitrina`). Al leer un edificio, que cruza la franja del medio de la ventana, el visor pasa a su año, levanta la ciudad, vuela hasta él a 320 m y le da la vuelta despacio. Tocar la vista detiene el giro.
+- **Teléfono**: el visor va arriba, fijo, en el 42 % de la altura.
+
 ## Controles
 
 **Escritorio**: arrastrar = mover · rueda = acercar · botón derecho = girar/inclinar · click en un nombre = ir · `Espacio` = plano ⇄ ciudad (acostar/levantar) · `H` = lo de hoy · `C` = color ⇄ tinta. *Caracas:* `M` = mostrar/ocultar los nombres de los lugares; `/` = ir al buscador; `?` o `F1` = el Acerca. Todos los atajos salen de una sola tabla (`src/controles.js`), que también arma la ayuda.

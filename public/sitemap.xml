@@ -4,4 +4,8 @@
     <loc>https://caracas.city/</loc>
     <changefreq>weekly</changefreq>
   </url>
+  <url>
+    <loc>https://caracas.city/edificios.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>

@@ -28,7 +28,7 @@
     #loading{position:fixed;inset:0;display:grid;place-items:center;font-size:19px;font-style:italic;letter-spacing:.08em;transition:opacity .8s}
     body.listo #loading{opacity:0;pointer-events:none}
     .panel{position:fixed;color:var(--tinta);background:var(--papel);border:1px solid var(--tinta);outline:1px solid #2a221b99;outline-offset:2px;box-shadow:0 5px 24px #0007}
-    #botones{position:fixed;right:calc(26px + env(safe-area-inset-right,0px));bottom:calc(26px + env(safe-area-inset-bottom,0px));display:flex;gap:12px;z-index:5}
+    #botones{position:fixed;right:calc(26px + env(safe-area-inset-right,0px));bottom:calc(26px + env(safe-area-inset-bottom,0px));display:flex;gap:12px;z-index:5;flex-wrap:wrap;justify-content:flex-end;max-width:calc(100vw - 52px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px))}
     #botones .panel{position:static;font:inherit;font-size:16px;letter-spacing:.02em;padding:10px 18px;min-height:44px;cursor:pointer}
     #botones .panel:hover{background:var(--sobre)}
     #botones .panel:active{transform:translateY(1px)}
@@ -68,13 +68,19 @@
     #modo.callado .ayuda,#modo .ayuda.dedos{display:none}
     @media (hover:none) and (pointer:coarse){#modo .ayuda.raton{display:none}#modo:not(.callado) .ayuda.dedos{display:block}}
     /* a pie: la caja de búsqueda y los nombres son del mapa; el modo tiene su cartel en esa esquina */
+    /* la vitrina (edificios.html): solo la ciudad y sus nombres */
+    body.vitrina #buscar,body.vitrina #botones,body.vitrina #epocas,body.vitrina #leyenda,body.vitrina #firma,body.vitrina #modo{display:none}
     body.modo #buscar,body.modo #marcas,body.modo #alzar,body.modo-caminar #volar,body.modo-caminar #manejar,body.modo-volar #caminar,body.modo-volar #manejar,body.modo-manejar #caminar,body.modo-manejar #volar{display:none}
     @media (max-width:640px){#epocas button{min-height:44px;padding:6px 6px;font-size:14px;letter-spacing:0}
       /* el texto de cada año, en dos líneas a lo más: el resto de la pantalla es de la ciudad */
       #epocas .pie{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;font-size:12px;margin:4px 4px 2px}}
+    /* entre 641 y ~960 px la barra entera (con «Acostar la ciudad») no cabe en una fila: parte en dos y la leyenda sube */
+    @media (min-width:641px) and (max-width:960px){#leyenda{bottom:calc(150px + env(safe-area-inset-bottom,0px))}}
     /* teléfono acostado: los botones más bajos y apretados, pegados al borde */
     @media (max-height:500px) and (max-width:1120px){#botones{bottom:calc(10px + env(safe-area-inset-bottom,0px));right:calc(14px + env(safe-area-inset-right,0px));gap:6px}
       #botones .panel{padding:8px 12px;font-size:14.5px}#leyenda{bottom:calc(66px + env(safe-area-inset-bottom,0px))}}
+    /* acostado y angosto, la barra también parte en dos */
+    @media (max-height:500px) and (min-width:641px) and (max-width:740px){#leyenda{bottom:calc(116px + env(safe-area-inset-bottom,0px))}}
     @media (max-width:640px){#botones{left:calc(14px + env(safe-area-inset-left,0px));right:calc(14px + env(safe-area-inset-right,0px));flex-wrap:wrap;justify-content:flex-end;gap:8px}#botones .panel{padding:10px 12px;font-size:15px}#leyenda{bottom:calc(140px + env(safe-area-inset-bottom,0px))}}
   </style>
 </head>
