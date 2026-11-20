@@ -25,6 +25,9 @@
           "id": "F1772-U0002-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-11"
       ]
     },
     {
@@ -48,6 +51,9 @@
           "id": "F1772-U0005-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-11"
       ]
     },
     {
@@ -71,6 +77,9 @@
           "id": "F1772-U0006-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-11"
       ]
     },
     {
@@ -94,6 +103,9 @@
           "id": "F1772-U0007-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-11"
       ]
     },
     {
@@ -117,6 +129,9 @@
           "id": "F1772-U0008-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-13"
       ]
     },
     {
@@ -140,6 +155,9 @@
           "id": "F1772-U0009-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-13"
       ]
     },
     {
@@ -163,6 +181,9 @@
           "id": "F1772-U0010-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-11"
       ]
     },
     {
@@ -186,6 +207,9 @@
           "id": "F1772-U0011-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-11"
       ]
     },
     {
@@ -209,6 +233,9 @@
           "id": "F1772-U0012-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-12"
       ]
     },
     {
@@ -236,6 +263,9 @@
           "id": "F1772-U0013-4",
           "lectura": "contorno_candidato_requiere_revision"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-12"
       ]
     },
     {
@@ -259,6 +289,9 @@
           "id": "F1772-U0015-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-13"
       ]
     },
     {
@@ -282,6 +315,9 @@
           "id": "F1772-U0016-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-13"
       ]
     },
     {
@@ -305,6 +341,9 @@
           "id": "F1772-U0017-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-13"
       ]
     },
     {
@@ -328,6 +367,9 @@
           "id": "F1772-U0027-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -351,6 +393,9 @@
           "id": "F1772-U0030-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -374,6 +419,9 @@
           "id": "F1772-U0032-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -397,6 +445,9 @@
           "id": "F1772-U0047-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-21"
       ]
     },
     {
@@ -420,6 +471,9 @@
           "id": "F1772-U0048-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-21"
       ]
     },
     {
@@ -443,6 +497,9 @@
           "id": "F1772-U0049-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -466,6 +523,9 @@
           "id": "F1772-U0050-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -489,6 +549,9 @@
           "id": "F1772-U0051-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -512,6 +575,9 @@
           "id": "F1772-U0052-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -535,6 +601,9 @@
           "id": "F1772-U0053-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -558,6 +627,9 @@
           "id": "F1772-U0054-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -581,6 +653,9 @@
           "id": "F1772-U0055-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -604,6 +679,9 @@
           "id": "F1772-U0056-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -627,6 +705,9 @@
           "id": "F1772-U0057-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -650,6 +731,9 @@
           "id": "F1772-U0061-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-24"
       ]
     },
     {
@@ -673,6 +757,9 @@
           "id": "F1772-U0062-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-21"
       ]
     },
     {
@@ -696,6 +783,9 @@
           "id": "F1772-U0063-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -719,6 +809,9 @@
           "id": "F1772-U0064-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -742,6 +835,9 @@
           "id": "F1772-U0065-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -765,6 +861,9 @@
           "id": "F1772-U0066-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -788,6 +887,9 @@
           "id": "F1772-U0067-3",
           "lectura": "simbolo_en_borde_pendiente"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -811,6 +913,9 @@
           "id": "F1772-U0068-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -834,6 +939,9 @@
           "id": "F1772-U0069-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -857,6 +965,9 @@
           "id": "F1772-U0071-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-24"
       ]
     },
     {
@@ -880,6 +991,9 @@
           "id": "F1772-U0072-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-21"
       ]
     },
     {
@@ -903,6 +1017,9 @@
           "id": "F1772-U0073-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-21"
       ]
     },
     {
@@ -926,6 +1043,9 @@
           "id": "F1772-U0074-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-21"
       ]
     },
     {
@@ -949,6 +1069,9 @@
           "id": "F1772-U0075-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -972,6 +1095,9 @@
           "id": "F1772-U0076-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -995,6 +1121,9 @@
           "id": "F1772-U0077-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -1018,6 +1147,9 @@
           "id": "F1772-U0078-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -1041,6 +1173,9 @@
           "id": "F1772-U0079-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -1064,6 +1199,9 @@
           "id": "F1772-0010-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -1087,6 +1225,9 @@
           "id": "F1772-0001-3",
           "lectura": "simbolo_en_borde_pendiente"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -1110,6 +1251,9 @@
           "id": "F1772-U0082-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -1133,6 +1277,9 @@
           "id": "F1772-U0083-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -1156,6 +1303,9 @@
           "id": "F1772-U0086-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-24"
       ]
     },
     {
@@ -1179,6 +1329,9 @@
           "id": "F1772-U0087-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-31"
       ]
     },
     {
@@ -1202,6 +1355,9 @@
           "id": "F1772-U0088-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-31"
       ]
     },
     {
@@ -1225,11 +1381,14 @@
           "id": "F1772-U0089-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-31"
       ]
     },
     {
       "unidad": "U1772-0090",
-      "sector": "S1772-22",
+      "sector": "S1772-32",
       "observacion": "Rojo continuo hasta los cuatro límites; sin convertirlo en parcelas individuales.",
       "frentes": [
         {
@@ -1248,11 +1407,15 @@
           "id": "F1772-U0090-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32",
+        "S1772-22"
       ]
     },
     {
       "unidad": "U1772-0091",
-      "sector": "S1772-22",
+      "sector": "S1772-32",
       "observacion": "Rojo continuo hasta los cuatro límites; sin convertirlo en parcelas individuales.",
       "frentes": [
         {
@@ -1271,11 +1434,15 @@
           "id": "F1772-0005-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32",
+        "S1772-22"
       ]
     },
     {
       "unidad": "U1772-0092",
-      "sector": "S1772-22",
+      "sector": "S1772-32",
       "observacion": "Rojo continuo hasta los cuatro límites; sin convertirlo en parcelas individuales.",
       "frentes": [
         {
@@ -1294,11 +1461,15 @@
           "id": "F1772-0004-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32",
+        "S1772-22"
       ]
     },
     {
       "unidad": "U1772-0093",
-      "sector": "S1772-22",
+      "sector": "S1772-32",
       "observacion": "Rojo continuo hasta los cuatro límites; sin convertirlo en parcelas individuales.",
       "frentes": [
         {
@@ -1317,6 +1488,10 @@
           "id": "F1772-U0093-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32",
+        "S1772-22"
       ]
     },
     {
@@ -1340,6 +1515,9 @@
           "id": "F1772-0003-3",
           "lectura": "simbolo_en_borde_pendiente"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -1363,6 +1541,9 @@
           "id": "F1772-0002-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -1386,6 +1567,9 @@
           "id": "F1772-U0096-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -1409,6 +1593,9 @@
           "id": "F1772-U0101-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-31"
       ]
     },
     {
@@ -1432,6 +1619,9 @@
           "id": "F1772-U0102-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-31"
       ]
     },
     {
@@ -1455,6 +1645,9 @@
           "id": "F1772-U0103-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -1478,6 +1671,9 @@
           "id": "F1772-U0104-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -1501,6 +1697,9 @@
           "id": "F1772-U0105-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -1524,6 +1723,9 @@
           "id": "F1772-0008-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -1547,6 +1749,9 @@
           "id": "F1772-0007-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -1570,6 +1775,9 @@
           "id": "F1772-U0108-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -1593,6 +1801,9 @@
           "id": "F1772-0009-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -1616,6 +1827,9 @@
           "id": "F1772-U0110-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -1639,6 +1853,9 @@
           "id": "F1772-U0113-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -1662,6 +1879,9 @@
           "id": "F1772-U0114-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-34"
       ]
     },
     {
@@ -1685,6 +1905,9 @@
           "id": "F1772-U0115-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-34"
       ]
     },
     {
@@ -1708,6 +1931,9 @@
           "id": "F1772-U0116-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-31"
       ]
     },
     {
@@ -1731,6 +1957,9 @@
           "id": "F1772-U0117-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-31"
       ]
     },
     {
@@ -1754,6 +1983,9 @@
           "id": "F1772-U0118-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -1777,6 +2009,9 @@
           "id": "F1772-U0119-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -1800,6 +2035,9 @@
           "id": "F1772-U0120-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -1823,6 +2061,9 @@
           "id": "F1772-U0121-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -1846,6 +2087,9 @@
           "id": "F1772-U0122-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -1869,6 +2113,9 @@
           "id": "F1772-U0123-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -1892,6 +2139,9 @@
           "id": "F1772-U0124-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -1915,6 +2165,9 @@
           "id": "F1772-U0127-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -1938,6 +2191,9 @@
           "id": "F1772-U0128-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -1961,6 +2217,9 @@
           "id": "F1772-U0129-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-34"
       ]
     },
     {
@@ -1984,6 +2243,9 @@
           "id": "F1772-U0130-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-34"
       ]
     },
     {
@@ -2007,6 +2269,9 @@
           "id": "F1772-U0132-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-31"
       ]
     },
     {
@@ -2030,6 +2295,9 @@
           "id": "F1772-U0133-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-31"
       ]
     },
     {
@@ -2053,6 +2321,9 @@
           "id": "F1772-U0134-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -2076,6 +2347,9 @@
           "id": "F1772-U0135-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -2099,6 +2373,9 @@
           "id": "F1772-U0136-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -2122,6 +2399,9 @@
           "id": "F1772-U0137-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -2145,6 +2425,9 @@
           "id": "F1772-U0138-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -2168,6 +2451,9 @@
           "id": "F1772-U0139-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -2191,6 +2477,9 @@
           "id": "F1772-U0140-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -2214,6 +2503,9 @@
           "id": "F1772-U0143-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -2237,6 +2529,9 @@
           "id": "F1772-U0144-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -2260,6 +2555,9 @@
           "id": "F1772-U0145-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -2283,6 +2581,9 @@
           "id": "F1772-U0146-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-34"
       ]
     },
     {
@@ -2306,6 +2607,9 @@
           "id": "F1772-U0147-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-34"
       ]
     },
     {
@@ -2329,6 +2633,9 @@
           "id": "F1772-U0152-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -2352,6 +2659,9 @@
           "id": "F1772-U0153-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
@@ -2379,6 +2689,9 @@
           "id": "F1772-U0157-4",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -2402,6 +2715,9 @@
           "id": "F1772-U0158-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -2425,6 +2741,9 @@
           "id": "F1772-U0159-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -2448,6 +2767,9 @@
           "id": "F1772-U0160-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -2471,6 +2793,9 @@
           "id": "F1772-U0161-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-34"
       ]
     },
     {
@@ -2494,6 +2819,9 @@
           "id": "F1772-U0162-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-34"
       ]
     },
     {
@@ -2517,6 +2845,9 @@
           "id": "F1772-U0167-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -2540,6 +2871,9 @@
           "id": "F1772-U0168-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -2563,11 +2897,14 @@
           "id": "F1772-U0169-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
       "unidad": "U1772-0170",
-      "sector": "S1772-44",
+      "sector": "S1772-34",
       "observacion": "Terreno libre en los cuatro bordes.",
       "frentes": [
         {
@@ -2586,6 +2923,10 @@
           "id": "F1772-U0170-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-34",
+        "S1772-44"
       ]
     },
     {
@@ -2609,6 +2950,9 @@
           "id": "F1772-U0174-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-43"
       ]
     },
     {
@@ -2632,6 +2976,9 @@
           "id": "F1772-U0175-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-43"
       ]
     },
     {
@@ -2655,6 +3002,9 @@
           "id": "F1772-U0176-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-43"
       ]
     },
     {
@@ -2678,6 +3028,9 @@
           "id": "F1772-U0177-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-43"
       ]
     },
     {
@@ -2701,6 +3054,9 @@
           "id": "F1772-U0178-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-43"
       ]
     },
     {
@@ -2724,6 +3080,9 @@
           "id": "F1772-U0179-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-42"
       ]
     },
     {
@@ -2747,6 +3106,9 @@
           "id": "F1772-U0180-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-42"
       ]
     },
     {
@@ -2770,6 +3132,9 @@
           "id": "F1772-U0181-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-43"
       ]
     },
     {
@@ -2793,6 +3158,9 @@
           "id": "F1772-U0182-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-43"
       ]
     },
     {
@@ -2816,6 +3184,9 @@
           "id": "F1772-U0183-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-43"
       ]
     },
     {
@@ -2839,6 +3210,9 @@
           "id": "F1772-U0189-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-11"
       ]
     },
     {
@@ -2862,6 +3236,9 @@
           "id": "F1772-U0190-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-13"
       ]
     },
     {
@@ -2885,6 +3262,9 @@
           "id": "F1772-U0191-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-11"
       ]
     },
     {
@@ -2908,6 +3288,9 @@
           "id": "F1772-U0192-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-13"
       ]
     },
     {
@@ -2931,6 +3314,9 @@
           "id": "F1772-U0197-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-24"
       ]
     },
     {
@@ -2954,6 +3340,9 @@
           "id": "F1772-U0198-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -2977,6 +3366,9 @@
           "id": "F1772-U0199-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -3000,6 +3392,9 @@
           "id": "F1772-U0200-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-21"
       ]
     },
     {
@@ -3023,6 +3418,9 @@
           "id": "F1772-U0201-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-21"
       ]
     },
     {
@@ -3046,6 +3444,9 @@
           "id": "F1772-U0202-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -3069,6 +3470,9 @@
           "id": "F1772-U0203-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-22"
       ]
     },
     {
@@ -3092,6 +3496,9 @@
           "id": "F1772-U0204-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -3115,11 +3522,14 @@
           "id": "F1772-U0205-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
       "unidad": "U1772-0206",
-      "sector": "S1772-22",
+      "sector": "S1772-32",
       "observacion": "Rojo continuo hasta los cuatro límites; sin convertirlo en parcelas individuales.",
       "frentes": [
         {
@@ -3138,11 +3548,15 @@
           "id": "F1772-U0206-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32",
+        "S1772-22"
       ]
     },
     {
       "unidad": "U1772-0207",
-      "sector": "S1772-22",
+      "sector": "S1772-32",
       "observacion": "Rojo continuo hasta los cuatro límites; sin convertirlo en parcelas individuales.",
       "frentes": [
         {
@@ -3161,6 +3575,10 @@
           "id": "F1772-0006-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32",
+        "S1772-22"
       ]
     },
     {
@@ -3184,6 +3602,9 @@
           "id": "F1772-U0208-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-34"
       ]
     },
     {
@@ -3207,6 +3628,9 @@
           "id": "F1772-U0209-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-34"
       ]
     },
     {
@@ -3230,6 +3654,9 @@
           "id": "F1772-U0210-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -3253,11 +3680,14 @@
           "id": "F1772-U0211-3",
           "lectura": "rojo_continuo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-32"
       ]
     },
     {
       "unidad": "U1772-0213",
-      "sector": "S1772-43",
+      "sector": "S1772-33",
       "observacion": "Cuerpo triangular interior y dos cuerpos sobre los bordes inferior y derecho; conservar el triángulo como excepción dibujada.",
       "frentes": [
         {
@@ -3276,6 +3706,10 @@
           "id": "F1772-U0213-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33",
+        "S1772-43"
       ]
     },
     {
@@ -3299,6 +3733,9 @@
           "id": "F1772-U0214-3",
           "lectura": "rojo_parcial_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-43"
       ]
     },
     {
@@ -3322,6 +3759,9 @@
           "id": "F1772-U0230-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-13"
       ]
     },
     {
@@ -3345,6 +3785,9 @@
           "id": "F1772-U0233-3",
           "lectura": "plaza_con_elementos_perimetrales"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-23"
       ]
     },
     {
@@ -3368,6 +3811,9 @@
           "id": "F1772-U0242-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-33"
       ]
     },
     {
@@ -3391,6 +3837,9 @@
           "id": "F1772-U0249-3",
           "lectura": "sin_rojo_en_borde"
         }
+      ],
+      "paneles_consultados": [
+        "S1772-42"
       ]
     }
   ]

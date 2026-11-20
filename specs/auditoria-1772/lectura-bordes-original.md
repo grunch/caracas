@@ -46,6 +46,9 @@ requieren las referencias de época y las fases correspondientes.
 
 ## Comprobaciones
 
+El campo `sector` conserva el sector dueño del censo; `paneles_consultados`
+registra los paneles superpuestos usados para inspeccionar, sin reasignar entidades.
+
 Los 590 IDs existen en las caras candidatas, sin duplicados, y pertenecen a la
 unidad indicada. Hay 145 unidades de cuatro bordes y dos de cinco bordes. La fuente conserva
 el SHA-256 declarado. Los datos del sistema y el generador no cambian en este lote.
