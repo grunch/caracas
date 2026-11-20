@@ -373,3 +373,12 @@ La línea de fachada queda al menos a 3 m del eje reconocido de la calle: una
 reserva de modelado para que un error de la máscara no una dos cuadras. No es una
 medición histórica del ancho de cada vía. Se conservan los retiros mayores medidos
 en el plano; el reparto irregular también se recorta al contorno de la cuadra.
+
+### Frentes y medianeras exactos (T33h)
+
+`huellas.py` reparte las cuadras convexas mediante bisectrices de sus lados y cortes
+por los frentes de cada casa. Las medianeras salen de las mismas rectas, sin volver
+a rasterizar y dilatar cada lote. Solo sustituye la máscara cuando sus diferencias
+están a menos de 2 m del borde exterior; conserva el reparto anterior cuando hay
+plazas, pasajes, huecos interiores o contornos cóncavos. Es una corrección geométrica,
+no una identificación de las parcelas históricas individuales.

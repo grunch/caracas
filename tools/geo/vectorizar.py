@@ -33,6 +33,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from alas import CRUJIA_M, PATIO, SOLAR, alas_de_casa, frentes_de_manzana  # noqa: E402
 from cuadra import alas_modelo, casa_modelo, crujia_de_cuadra, es_de_solo_casas  # noqa: E402
 from cuadras_historicas import es_completa  # noqa: E402
+from huellas import huellas_de_manzana  # noqa: E402
 from caras import Red, ajustar_cara, mascara_de_lineas  # noqa: E402
 from lados import CUADRA_MINIMA_M2, _relleno, cortar_por_calles, cuadras_pegadas, lotes_por_lados  # noqa: E402
 from lotes import (  # noqa: E402
@@ -151,22 +152,32 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
     sobre la línea de fachada de su calle. → False si la manzana no se deja repartir así. `publico`: la máscara
     de los edificios públicos; el lote que pisa uno en menos de CEDE_DESDE pierde ese pedazo (el que lo pisa en
     más le cede el lugar entero cuando nace: publico_que_pisa)."""
-    repartida = lotes_por_lados(manzana, metro, semilla_de(int(origen[0]) + 5, int(origen[1]) + 11), poligono)
-    if repartida is None:
-        return False
-    etiquetas, lotes = repartida
+    semilla_cuadra = semilla_de(int(origen[0]) + 5, int(origen[1]) + 11)
+    exactas = huellas_de_manzana(manzana, poligono, metro, semilla_cuadra) if publico is None or not publico.any() else None
     x, y = origen
-    zonas = ndimage.find_objects(etiquetas)
-    for k, lote in lotes.items():
-        zona = zonas[k - 1]
-        mascara = etiquetas[zona] == k
-        if publico is not None:
-            pisado = mascara & publico[zona]
-            if pisado.any() and pisado.sum() < CEDE_DESDE * mascara.sum():
-                mascara = mascara & ~pisado
-        if zona is None or mascara.sum() < area_min_px or lote['frente'] < FRENTE_MINIMO:
-            continue
-        figura = poligono_de(mascara, (x + zona[1].start, y + zona[0].start), tolerancia_px)
+    figuras = []
+    if exactas is not None:
+        from shapely.affinity import translate
+        figuras = [(lote, translate(lote['figura'], xoff=x, yoff=y)) for lote in exactas]
+    else:
+        repartida = lotes_por_lados(manzana, metro, semilla_cuadra, poligono)
+        if repartida is None:
+            return False
+        etiquetas, lotes = repartida
+        zonas = ndimage.find_objects(etiquetas)
+        for k, lote in lotes.items():
+            zona = zonas[k - 1]
+            if zona is None:
+                continue
+            mascara = etiquetas[zona] == k
+            if publico is not None:
+                pisado = mascara & publico[zona]
+                if pisado.any() and pisado.sum() < CEDE_DESDE * mascara.sum():
+                    mascara = mascara & ~pisado
+            if mascara.sum() < area_min_px or lote['frente'] < FRENTE_MINIMO:
+                continue
+            figuras.append((lote, poligono_de(mascara, (x + zona[1].start, y + zona[0].start), tolerancia_px)))
+    for lote, figura in figuras:
         if figura is None:
             continue
         semilla = semilla_de(figura.centroid.x, figura.centroid.y)
