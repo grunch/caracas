@@ -61,6 +61,27 @@ describe('crearCamara', () => {
     expect(cam.now.x).toBeCloseTo(500, 0)
   })
 
+  test('tomada: arranca en false y queda en true en cuanto la persona toca la cámara (aunque no la mueva)', () => {
+    // Arrange
+    const oyentes = {}
+    const conOyentes = { ...lienzo, addEventListener: (t, f) => { oyentes[t] = f } }
+    const tomas = [
+      (cam) => oyentes.pointerdown({ pointerId: 1, clientX: 50, clientY: 50, button: 0 }),
+      (cam) => oyentes.wheel({ clientX: 50, clientY: 50, deltaY: 10, deltaMode: 0, preventDefault() {} }),
+      (cam) => cam.mover(1, 0), (cam) => cam.acercar(1), (cam) => cam.girar(1, 0),
+    ]
+    for (const tomar of tomas) {
+      const cam = crearCamara(new PerspectiveCamera(), conOyentes, { pedirCuadro: () => {}, hoja })
+      cam.jump({ x: 0 })
+      cam.volarA({ x: 100 }, 1)
+      expect(cam.tomada).toBe(false)
+      // Act
+      tomar(cam)
+      // Assert
+      expect(cam.tomada).toBe(true)
+    }
+  })
+
   test('volarA() se corta en cuanto la persona toma la cámara: teclas, rueda, saltos u otro vuelo', () => {
     const cam = crearCamara(new PerspectiveCamera(), lienzo, { pedirCuadro: () => {}, hoja })
     for (const tomar of [() => cam.mover(1, 0), () => cam.acercar(1), () => cam.girar(1, 0), () => cam.jump({ x: 0 }), () => cam.volar({ x: 0 })]) {

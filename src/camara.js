@@ -28,6 +28,9 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   let pausada = false // un modo de recorrido (src/a-pie-modo.js) tiene la vista: no se atiende la entrada
   let dos = null // el gesto con dos dedos en curso: { ids, inicio, previo, modo, altura, ancla }
   let vuelo = null // el vuelo con guion en curso (volarA): { desde, hasta, t, segundos }
+  let tomada = false // la persona ya tocó la cámara (ratón, dedos, rueda o teclas), aunque no la haya movido
+  /** La persona toma la cámara: corta el vuelo con guion y queda anotado. */
+  const tomar = () => { vuelo = null; tomada = true }
 
   // el plano horizontal a la altura del objetivo (fija durante un arrastre, para que no resbale)
   const alSuelo = (cx, cy, altura = now.y) => {
@@ -55,7 +58,7 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   }
   lienzo.addEventListener('pointerdown', (e) => {
     if (pausada) return
-    vuelo = null
+    tomar()
     lienzo.setPointerCapture(e.pointerId)
     dedos.set(e.pointerId, { x: e.clientX, y: e.clientY })
     if (dedos.size === 2) {
@@ -134,7 +137,7 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   lienzo.addEventListener('pointercancel', soltar)
   lienzo.addEventListener('wheel', (e) => {
     if (pausada) return
-    vuelo = null
+    tomar()
     e.preventDefault()
     const p = alSuelo(e.clientX, e.clientY)
     const delta = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 100 : 1)
@@ -214,7 +217,7 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
 
   /** Con el teclado: corre el destino `dx` (derecha) y `dy` (abajo) pasos, en las direcciones de la pantalla. */
   function mover(dx, dy) {
-    vuelo = null
+    tomar()
     const paso = goal.dist * PASO.mover
     const adelante = { x: -Math.sin(goal.yaw), z: -Math.cos(goal.yaw) }
     const derecha = { x: Math.cos(goal.yaw), z: -Math.sin(goal.yaw) }
@@ -225,14 +228,14 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   }
   /** Acerca (`veces` > 0) o aleja (< 0), un paso por vez. */
   function acercar(veces) {
-    vuelo = null
+    tomar()
     goal.dist /= PASO.acercar ** veces
     acotar()
     pedirCuadro(3)
   }
   /** Gira (`giro` > 0: como los dedos en el sentido del reloj) e inclina (`inclinar` > 0: más desde arriba). */
   function girar(giro, inclinar) {
-    vuelo = null
+    tomar()
     goal.yaw += giro * PASO.girar
     goal.pitch += inclinar * PASO.inclinar
     acotar()
@@ -251,5 +254,6 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
   return {
     goal, now, update, jump, volar, volarA, mover, acercar, girar, pausar,
     get volando() { return Boolean(vuelo) },
+    get tomada() { return tomada },
   }
 }

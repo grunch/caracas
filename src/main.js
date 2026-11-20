@@ -626,10 +626,11 @@ function arrancar() {
   cam.jump(vistaDeHoja(hoja))
   const desde = { ...cam.goal }
   Promise.all([conIntro ? cierreDeIntro : null, casasPedidas]).then(() => setTimeout(() => {
-    const tocada = ['x', 'z', 'dist', 'yaw', 'pitch'].some((c) => Math.abs(cam.goal[c] - desde[c]) > 1e-6)
+    // tomada: la tocó aunque no la haya movido (un dedo apoyado, quieto); movida: un vuelo a una marca, la vitrina…
+    const movida = ['x', 'z', 'dist', 'yaw', 'pitch'].some((c) => Math.abs(cam.goal[c] - desde[c]) > 1e-6)
     if (!olaElegida) levantar(true)
     const enModo = Object.values(MODOS).some((m) => m.activo)
-    if (!tocada && !enModo) cam.volarA(VISTA_CENTRO, DURACION_VUELO_S)
+    if (!cam.tomada && !movida && !enModo) cam.volarA(VISTA_CENTRO, DURACION_VUELO_S)
   }, esperaDeArranque(conIntro)))
 }
 
