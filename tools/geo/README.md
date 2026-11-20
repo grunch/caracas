@@ -51,12 +51,10 @@ $PY tools/geo/segmentar.py $D/mosaico.tif $D/segmentacion/mosaico --escala 0.5
 $PY tools/geo/costura.py --mosaico $D/mosaico.tif --meta $D/mosaico.json \
     --clases $D/segmentacion/mosaico/clases.png
 
-# 5. vectorizar: manzanas → lotes rectos (lotes.py) → techos, marcos y alas (--plaza = "plaza" de mosaico.json, en píxeles)
-$PY tools/geo/vectorizar.py $D/segmentacion/mosaico/clases-costura.png $D/ciudad-1936.json \
-    --escala 0.5 --plaza 8968.2,6839 --patios $D/patios-de-casas.png
-
-# 6. empacar: techos → public/datos/ciudad.pak
-node tools/empacar-ciudad.mjs $D/ciudad-1936.json
+# 5–6. generar la red histórica, vectorizar, aplicar épocas y estilos y empacar.
+# El orquestador resuelve las dependencias y pasa --tramos y --edificado-1772:
+# ejecutar vectorizar sin esos argumentos omite las correcciones históricas.
+npm run datos
 
 # 6b. árboles: a los símbolos detectados (arboles.json) se suman los de los canteros de plazas y patios,
 #     que el plano dibuja como manchas verdes sin símbolo (jardines.json); después cada uno recibe la
