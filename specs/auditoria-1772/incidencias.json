@@ -22,7 +22,7 @@
       "estado": "confirmado_visual",
       "prioridad": "P1",
       "observacion": "Discontinuidad del frente oeste en su mitad norte; comunica visualmente calle e interior. El original y la referencia curada muestran frente continuo.",
-      "causa": "Supresión, recorte o reparto del frente: causa todavía sin aislar.",
+      "causa": "Localizada antes del visor: huellas 33285–33287 del paquete, idénticas a 34071–34073 de ciudad-1936.json, cuadra 8090, junta 22, antes=1. La abertura y el contorno irregular están en las huellas reconstruidas. Falta reproducir la máscara y aislar la operación que los introduce; no se atribuye todavía a un descarte de época.",
       "fases_candidatas": [
         4,
         5,
@@ -31,7 +31,9 @@
       "baseline": "B1772-001",
       "pr_correccion": null,
       "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
-      "verificacion_acceso": "pendiente recorrido a pie"
+      "verificacion_acceso": "pendiente recorrido a pie",
+      "diagnostico_geometrico": "diagnostico-huellas.json",
+      "reproduccion_aislada": "Con cara curada y etiqueta única, _cuadras_de_antes excluye 1556 píxeles cerro interiores y huellas_de_manzana rechaza el reparto vectorial. No reproduce exactamente todos los componentes de la ejecución original; ver diagnostico-huellas.md."
     },
     {
       "id": "I1772-002",
@@ -86,7 +88,7 @@
       "estado": "confirmado_visual",
       "prioridad": "P1",
       "observacion": "Frente oeste con cambios de alineación y alas diagonales cerca del tramo medio, frente a un lado recto de la manzana de referencia.",
-      "causa": "Determinar si nace en el reparto de lotes o en la generación/recorte de alas.",
+      "causa": "Localizada antes del visor: huellas 33079, 33080 y 33084 corresponden a 33865, 33866 y 33870 de ciudad-1936.json, cuadra 8085, junta 17, antes=1. El quiebre y el cuerpo diagonal ya existen en la huella. Falta reproducir la rama de reconstrucción y separar máscara, reparto y recorte.",
       "fases_candidatas": [
         5,
         6
@@ -94,7 +96,9 @@
       "baseline": "B1772-001",
       "pr_correccion": null,
       "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
-      "verificacion_acceso": "pendiente recorrido a pie"
+      "verificacion_acceso": "pendiente recorrido a pie",
+      "diagnostico_geometrico": "diagnostico-huellas.json",
+      "reproduccion_aislada": "La cara tomada de tramos.json produce contorno ajustado de ocho vértices con entrante occidental; rechaza reparto vectorial aun sin píxeles interiores faltantes. La cara curada de cuatro lados lo admite. Se mantienen etiquetas simplificadas; no se afirma reproducción integral del pipeline."
     },
     {
       "id": "I1772-004",
@@ -249,6 +253,21 @@
         2,
         3,
         4
+      ],
+      "pr_correccion": null
+    },
+    {
+      "id": "I1772-011",
+      "categoria": "solapes_huellas",
+      "estado": "confirmado_en_datos_pendiente_clasificacion_visual",
+      "prioridad": "P1",
+      "baseline": "B1772-001",
+      "observacion": "2350 pares visibles en época 1 tienen área de intersección mayor de 0,01 m². Todos pertenecen a la misma cuadra dentro de cada par en la etapa 1936; máximo 9,763017 m². El visor produce 1020 pares con área proyectada de cubierta común, que aún deben distinguirse de aleros legítimos.",
+      "causa": "Los pares mayores conservan huellas idénticas en la etapa de vectorización anterior a épocas y estilos. Hipótesis a reproducir: buffer independiente y simplificación de lotes raster; no se ha demostrado para los 2350 pares.",
+      "evidencia": "diagnostico-huellas.json",
+      "fases_candidatas": [
+        5,
+        6
       ],
       "pr_correccion": null
     }

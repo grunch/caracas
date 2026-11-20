@@ -64,3 +64,5 @@ Comprobaciones de esta entrega: integridad de JSON, IDs únicos, referencias int
 El [contraste de cruces y calles](calce-y-calles.md) añade 23 cruces únicos, 32 tramos y el diagnóstico I1772-010: discrepancia del TPS respecto de las referencias curadas. No cierra el censo ni la validación del calce.
 
 El [trazado de la red original](trazado-red.md) amplía la lectura a 84 líneas y 455 tramos candidatos, conserva las excepciones y propone correspondencias con los 32 tramos previos. No cierra la fase 1 ni modifica el generador.
+
+El [diagnóstico geométrico](diagnostico-huellas.md) mide las 1.811 huellas visibles y rastrea I001/I003 antes del visor. Introduce I011 (solapes de huellas) sin confundirla con una certificación de cubiertas o accesos.
