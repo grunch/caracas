@@ -214,3 +214,27 @@ describe('alzarCasa: huellas que no llenan su rectángulo', () => {
     expect(salida.triangulos.length).toBeGreaterThan(10)
   })
 })
+
+describe('alzarCasa: un ala estirada fuera de su lote', () => {
+  test('el tejado se parte en la cumbre: lo estirado sigue plano y lo de adentro, con su pendiente', () => {
+    // Arrange: la huella sale hasta 2 m por la medianera izquierda (en sesgo, sin vértices sobre la cumbre), más allá
+    // del borde alto de la media agua lateral
+    const plan = planDeAlas({
+      ancho: 12, fondo: 30, estilo: COLONIAL, pisos: 1, semilla: 5,
+      alas: [ala(ALA.FRENTE, 0, 0, 12, 8), ala(ALA.LATERAL_IZQ, 0, 8, 4, 20), ala(ALA.PATIO, 4, 8, 12, 20), ala(ALA.SOLAR, 0, 20, 12, 30)],
+    })
+    const salida = recolector()
+
+    // Act
+    alzarCasa({ anillo: [[0, 0], [12, 0], [12, 30], [0, 30], [-2, 22], [-2, 6]], plan, libres: {} }, salida)
+
+    // Assert: en cada triángulo de tejado, el centro (que el GPU interpola) está a la altura de su faldón
+    const tejados = salida.triangulos.map((t) => [t.a, t.b, t.c].map((k) => salida.vertices[k])).filter((vs) => vs.every((v) => v.cubierta === CUBIERTA.TEJA))
+    expect(tejados.length).toBeGreaterThan(4)
+    for (const vs of tejados) {
+      const [u, v, y] = ['u', 'v', 'y'].map((c) => (vs[0][c] + vs[1][c] + vs[2][c]) / 3)
+      const alturas = plan.faldones.filter((f) => !f.hueco).map((f) => alturaDe(f, u, v))
+      expect(alturas.some((h) => Math.abs(h - y) < 1e-6), `(${u.toFixed(2)}, ${v.toFixed(2)}) a ${y.toFixed(3)} m`).toBe(true)
+    }
+  })
+})

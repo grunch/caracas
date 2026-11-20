@@ -12,11 +12,12 @@
  */
 import { ShapeUtils, Vector2 } from 'three'
 import { CUBIERTA, alturaDe, faldonEn } from './techos.js'
-import { areaConSigno, recortarConvexo, cruces, estaDentro } from './poligono.js'
+import { areaConSigno, recortar, recortarConvexo, cruces, estaDentro } from './poligono.js'
 
 const SIN_TECHO = [0, 0, 0, CUBIERTA.PARED]
 const ALTO_MINIMO_CON_VANOS_M = 2
 const ESCALON_MINIMO_M = 0.03
+const TOLERANCIA_CUMBRE_M = 1e-6 // un vértice así de poco más allá de la cumbre no parte el faldón
 export const PISO_PATIO_M = 0.4
 const SUBIDA_DE_HASTIAL_M = 0.3
 const HACIA_AFUERA = 0.7 // coseno desde el cual un lado "mira" hacia un costado del lote
@@ -65,19 +66,39 @@ const vueloDe = ({ plan, libres }, f) => (plan.alero > 0 && f.tan > 0 && !f.huec
 /** Largo del faldón con su alero: hasta ahí llega la última hilada. */
 const largoConAlero = (casa, f) => largoFaldon(f) + vueloDe(casa, f) * Math.hypot(1, f.tan)
 
+/**
+ * Un faldón no pasa de su cumbre (src/techos.js: `alturaDe`): si la huella cruza la línea de la cumbre (un ala
+ * estirada fuera del lote, src/alas.js), se parte ahí en lo que cae y lo que sigue plano, cada pedazo con su
+ * propia normal. Si no, los triángulos interpolarían una sola pendiente por encima de las dos y el tejado quedaría
+ * por debajo de sus paredes.
+ */
+function pedazosDeFaldon(f, poligono) {
+  const plano = [0, 1, 0]
+  if (f.hueco || f.tan === 0) return [{ poligono, n: normalFaldon(f) }]
+  const [a, b] = f.caida
+  const c = -(a * f.origen[0] + b * f.origen[1])
+  if (poligono.every(([u, v]) => a * u + b * v + c >= -TOLERANCIA_CUMBRE_M)) return [{ poligono, n: normalFaldon(f) }]
+  return [
+    { poligono: sinRepetidos(recortar(poligono, a, b, c)), n: normalFaldon(f) },
+    { poligono: sinRepetidos(recortar(poligono, -a, -b, -c)), n: plano },
+  ].filter((p) => p.poligono.length >= 3)
+}
+
 /** Los tejados (y el piso de los patios): cada faldón recortado con la huella y subido a su plano. */
 function tejados(casa, salida) {
   const { anillo, plan } = casa
   for (const f of plan.faldones) {
-    const poligono = sinRepetidos(recortarConvexo(anillo, f.region))
-    if (poligono.length < 3) continue
-    const [n, largo] = [normalFaldon(f), largoConAlero(casa, f)]
+    const recortado = sinRepetidos(recortarConvexo(anillo, f.region))
+    if (recortado.length < 3) continue
+    const largo = largoConAlero(casa, f)
     const pared = [0, 0, plan.altoPiso]
     // el patio no lleva tejado sino piso, un poco sobre el terreno para que la cuesta no lo tape
     const [alto, cubierta] = f.hueco ? [() => PISO_PATIO_M, f.piso ?? CUBIERTA.PATIO] : [(u, v) => alturaDe(f, u, v), f.cubierta]
-    const indices = poligono.map(([u, v]) => salida.vertice(u, v, alto(u, v), n, pared, [...coordsFaldon(f, u, v), largo, cubierta]))
-    for (const [a, b, c] of ShapeUtils.triangulateShape(poligono.map(([u, v]) => new Vector2(u, v)), [])) {
-      salida.triangulo(indices[a], indices[b], indices[c], n)
+    for (const { poligono, n } of pedazosDeFaldon(f, recortado)) {
+      const indices = poligono.map(([u, v]) => salida.vertice(u, v, alto(u, v), n, pared, [...coordsFaldon(f, u, v), largo, cubierta]))
+      for (const [a, b, c] of ShapeUtils.triangulateShape(poligono.map(([u, v]) => new Vector2(u, v)), [])) {
+        salida.triangulo(indices[a], indices[b], indices[c], n)
+      }
     }
   }
 }
