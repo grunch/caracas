@@ -6,7 +6,7 @@ import { MARCAS } from './marcas-datos.js'
 import { FICHAS } from './fichas-datos.js'
 import { HITOS } from './hitos.js'
 import { normalizarMarcas } from './marcas.js'
-import { seccionesDeEdificios } from './vitrina.js'
+import { seccionesDeEdificios, margenDelMedio } from './vitrina.js'
 
 const lista = document.getElementById('edificios')
 const vitrina = document.getElementById('vitrina')
@@ -45,9 +45,19 @@ addEventListener('message', (e) => {
 
 // el edificio que se lee: el que cruza la franja del medio de la ventana
 const porId = new Map(secciones.map((s) => [s.id, s]))
-const observador = new IntersectionObserver((entradas) => {
-  const visible = entradas.find((e) => e.isIntersecting)
-  if (visible) mostrar(porId.get(visible.target.dataset.id))
-}, { rootMargin: '-45% 0px -45% 0px' })
-for (const li of lista.children) observador.observe(li)
+let observador = null
+let altoObservado = 0
+// el margen va en píxeles del alto (src/vitrina.js); al cambiar el alto de la ventana, otro observador
+function observar() {
+  if (innerHeight === altoObservado) return
+  altoObservado = innerHeight
+  observador?.disconnect()
+  observador = new IntersectionObserver((entradas) => {
+    const visible = entradas.find((e) => e.isIntersecting)
+    if (visible) mostrar(porId.get(visible.target.dataset.id))
+  }, { rootMargin: margenDelMedio(innerHeight) })
+  for (const li of lista.children) observador.observe(li)
+}
+observar()
+addEventListener('resize', observar)
 window.lab = { secciones, get visorListo() { return visorListo } }

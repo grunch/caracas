@@ -39,3 +39,15 @@ export function seccionesDeEdificios(marcas, fichas) {
       return { id: m.id, año: AÑOS_DE_EPOCA[m.nace], epoca: m.nace, nombre: ultimo, antes: primero === ultimo ? null : primero, texto }
     })
 }
+
+const FRANJA_DEL_MEDIO = 0.1 // la parte de la ventana, en el medio, donde se «lee» un edificio
+
+/**
+ * El rootMargin del IntersectionObserver de edificios.html para quedarse con la franja del medio de la ventana,
+ * en píxeles de `alto`: la especificación resuelve los porcentajes de rootMargin contra el ANCHO de la raíz,
+ * también los de arriba y abajo, así que '-45%' no sirve en una ventana apaisada. Sin alto, sin margen.
+ */
+export function margenDelMedio(alto) {
+  const m = Math.floor((alto * (1 - FRANJA_DEL_MEDIO)) / 2)
+  return m > 0 ? `-${m}px 0px -${m}px 0px` : '0px 0px 0px 0px'
+}

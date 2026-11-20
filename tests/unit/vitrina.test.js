@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { ordenDeVitrina, seccionesDeEdificios } from '../../src/vitrina.js'
+import { ordenDeVitrina, seccionesDeEdificios, margenDelMedio } from '../../src/vitrina.js'
 
 const ORIGEN = 'https://caracas.city'
 const evento = (data, origin = ORIGEN) => ({ origin, data })
@@ -45,5 +45,20 @@ describe('seccionesDeEdificios', () => {
     expect(catedral).toMatchObject({ año: 1772, epoca: 1, nombre: 'Catedral', antes: null, texto: 'La iglesia mayor de la ciudad.' })
     expect(plaza).toMatchObject({ nombre: 'Plaza Bolívar', antes: 'Plaza Mayor' })
     expect(capilla).toMatchObject({ año: 1889, epoca: 3, texto: 'La capilla neogótica.' })
+  })
+})
+
+describe('margenDelMedio', () => {
+  // los porcentajes de rootMargin se resuelven contra el ANCHO de la raíz (W3C), así que van en píxeles del alto
+  test('deja la franja del 10 % del medio del alto de la ventana, en píxeles', () => {
+    expect(margenDelMedio(640)).toBe('-288px 0px -288px 0px')
+    expect(margenDelMedio(1000)).toBe('-450px 0px -450px 0px')
+  })
+
+  test('redondea y nunca deja la franja vacía (ventanas chicas o alto inválido)', () => {
+    expect(margenDelMedio(641)).toBe('-288px 0px -288px 0px')
+    expect(margenDelMedio(1)).toBe('0px 0px 0px 0px')
+    expect(margenDelMedio(0)).toBe('0px 0px 0px 0px')
+    expect(margenDelMedio(Number.NaN)).toBe('0px 0px 0px 0px')
   })
 })

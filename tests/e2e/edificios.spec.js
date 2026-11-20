@@ -35,3 +35,16 @@ test('la lista tiene los edificios modelados; al leer uno, la vitrina va a su a�
   }, tercero.id), { timeout: 20000 }).toBeLessThan(5)
   expect(errores).toEqual([])
 })
+
+// los márgenes del observador en % se resuelven contra el ANCHO (W3C): en una ventana apaisada la franja del
+// medio quedaba vacía y, al bajar, el edificio activo no cambiaba
+test('al bajar por la lista en una ventana apaisada, el edificio activo va cambiando', async ({ page }) => {
+  await page.route(/\?vitrina/, (ruta) => ruta.fulfill({ body: '<!doctype html><title>vitrina</title>', contentType: 'text/html' }))
+  await page.goto('/edificios.html')
+  const secciones = await page.evaluate(() => window.lab.secciones)
+  for (const s of secciones.slice(1, 5)) {
+    // el edificio, en el medio de la ventana (como al leerlo)
+    await page.evaluate((id) => document.querySelector(`#edificios li[data-id="${id}"]`).scrollIntoView({ block: 'center' }), s.id)
+    await expect(page.locator(`#edificios li[data-id="${s.id}"]`)).toHaveClass(/activo/)
+  }
+})
