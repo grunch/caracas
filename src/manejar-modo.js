@@ -6,9 +6,8 @@
  */
 import { BoxGeometry, CylinderGeometry, Group, Mesh, MeshLambertMaterial, ShaderMaterial } from 'three'
 import { choca, joystick, puntoDeEntrada, rejillaDeCasas, teclaAjena } from './a-pie.js'
-import { camaraDeCoche, entradaDeManejo, otroVehiculo, pasoEnCoche, sonidoDe, vehiculoDeEpoca } from './manejar.js'
+import { camaraDeCoche, chocaVehiculo, entradaDeManejo, otroVehiculo, pasoEnCoche, sonidoDe, vehiculoDeEpoca } from './manejar.js'
 
-const RADIO_M = 1.1
 const FOV = 55
 const TECLAS = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'])
 const AÑO = Object.freeze({ KeyQ: -1, KeyE: 1 })
@@ -151,7 +150,13 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
   let antes = null
   const teclas = new Set()
   const punteros = new Map()
-  const chocaEn = (x, z) => choca(rejilla, x, z, RADIO_M)
+  let chocaHuella = null
+  /** La huella del vehículo (sus medidas y su rumbo; sin rumbo, el del estado) contra las casas de la época. */
+  const chocaEn = (x, z, rumbo = estado?.rumbo ?? 0) => chocaHuella(x, z, rumbo)
+  /** Si la huella pisa una casa (otra época, otro vehículo), lo corre a la calle libre más cercana. */
+  function reubicar() {
+    if (estado && chocaEn(estado.x, estado.z)) estado = { ...estado, ...puntoDeEntrada({ ...estado, dist: 0 }, chocaEn), velocidad: 0 }
+  }
 
   /** Saca el vehículo de la escena y suelta sus geometrías (los materiales son de toda la flota: quedan). */
   function sacarVehiculo() {
@@ -163,6 +168,8 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
   function ponerVehiculo(v) {
     sacarVehiculo()
     vehiculo = v
+    chocaHuella = chocaVehiculo(v, (x, z, radio) => choca(rejilla, x, z, radio))
+    reubicar()
     malla = crearVehiculo(v)
     escena.add(malla)
     alCambiar(true, v)
@@ -170,7 +177,7 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
   function armarRejilla() {
     epocaDeRejilla = epoca()
     rejilla = rejillaDeCasas(casas(), epocaDeRejilla, coords.aMundo)
-    if (estado && chocaEn(estado.x, estado.z)) estado = { ...estado, ...puntoDeEntrada({ ...estado, dist: 0 }, chocaEn), velocidad: 0 }
+    reubicar()
   }
   function aplicar() {
     malla.position.set(estado.x, suelo(estado.x, estado.z), estado.z)
@@ -215,9 +222,12 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
   function entrar() {
     if (activo) return true
     if (!casas()) return false
+    estado = null
     armarRejilla()
-    const p = puntoDeEntrada(cam.now, chocaEn)
-    estado = { x: p.x, z: p.z, rumbo: -cam.now.yaw, velocidad: 0 }
+    const rumbo = -cam.now.yaw
+    ponerVehiculo(vehiculoDeEpoca(epoca()))
+    const p = puntoDeEntrada(cam.now, (x, z) => chocaEn(x, z, rumbo))
+    estado = { x: p.x, z: p.z, rumbo, velocidad: 0 }
     antes = { near: camera.near, fov: camera.fov }
     camera.near = 0.2
     camera.fov = FOV
@@ -225,7 +235,6 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
     cam.pausar(true)
     sonido.arrancar()
     activo = true
-    ponerVehiculo(vehiculoDeEpoca(epoca()))
     aplicar()
     pedirCuadro(3)
     return true

@@ -24,7 +24,7 @@ function contextoFalso() {
 const cuadrado = (x, y, lado) => [x, y, x + lado, y, x + lado, y + lado, x, y + lado]
 const datos = { vertices: Float32Array.from(cuadrado(0, 0, 10)), techos: Uint32Array.from([0, 4, 0, 0]), vida: Uint32Array.from([1]) }
 
-function armar(epocaInicial = 4) {
+function armar(epocaInicial = 4, ahora = { x: 5, z: 25, dist: 300, yaw: 0 }) {
   const oyentes = {}
   let epoca = epocaInicial
   const ctx = contextoFalso()
@@ -36,7 +36,7 @@ function armar(epocaInicial = 4) {
   const sonido = crearSonido(() => ctx)
   const modo = crearModoManejar({
     camera, escena, ventana: { addEventListener: (t, f) => { oyentes[t] = f } }, lienzo: { addEventListener: (t, f) => { oyentes[`lienzo:${t}`] = f } },
-    cam: { now: { x: 5, z: 25, dist: 300, yaw: 0 }, pausar: (v) => pausas.push(v) },
+    cam: { now: ahora, pausar: (v) => pausas.push(v) },
     coords: { aMundo: (px, py) => ({ x: px, z: py }) }, suelo: () => 0, casas: () => datos, epoca: () => epoca,
     pedirCuadro: () => {}, cambiarEpoca: (d) => años.push(d), alCambiar: (dentro, v) => cambios.push([dentro, v?.id ?? null]),
     sonido,
@@ -179,5 +179,33 @@ describe('crearModoManejar y los controles con foco', () => {
     modo.entrar()
     const boton = { closest: (s) => (s.includes('button') ? {} : null) }
     expect(tecla('keydown', 'Space', boton)).toMatchObject({ prevenido: false, cortado: false })
+  })
+})
+
+describe('la huella del vehículo al subir y al cambiar de época', () => {
+  // la casa de prueba ocupa x, z entre 0 y 10; la cola del vehículo (rumbo 0: mira a −z) queda hacia +z
+  const colaAdentro = ({ x, z }, v) => x > 0 && x < 10 && z + v.largo / 2 > 0
+
+  test('al subir, el Ford V8 de punta a la casa no queda con la cola adentro', () => {
+    // Arrange: 1936; el mapa mira a 1,5 m de la casa
+    const { modo } = armar(5, { x: 5, z: -1.5, dist: 300, yaw: 0 })
+    // Act
+    modo.entrar()
+    // Assert
+    expect(modo.vehiculo.id).toBe('ford-v8')
+    expect(colaAdentro(modo.estado, modo.vehiculo)).toBe(false)
+  })
+
+  test('al cambiar de época a un vehículo más largo que no cabe donde estaba, lo corre a la calle libre', () => {
+    // Arrange: el Ford T (3,4 m) cabe a 2 m de la casa
+    const { modo, ponerEpoca } = armar(4, { x: 5, z: -2, dist: 300, yaw: 0 })
+    modo.entrar()
+    expect(modo.estado.z).toBe(-2)
+    // Act: el año del Ford V8 (4,3 m)
+    ponerEpoca(5)
+    modo.update(0)
+    // Assert
+    expect(modo.vehiculo.id).toBe('ford-v8')
+    expect(colaAdentro(modo.estado, modo.vehiculo)).toBe(false)
   })
 })

@@ -1,7 +1,8 @@
 import { describe, test, expect } from 'vitest'
 import {
-  VEHICULOS, vehiculoDeEpoca, otroVehiculo, pasoEnCoche, entradaDeManejo, camaraDeCoche, sonidoDe,
+  VEHICULOS, vehiculoDeEpoca, otroVehiculo, pasoEnCoche, entradaDeManejo, camaraDeCoche, sonidoDe, chocaVehiculo,
 } from '../../src/manejar.js'
+import { choca, rejillaDeCasas } from '../../src/a-pie.js'
 
 describe('la flota', () => {
   test('cada vehículo tiene nombre, desde qué época, velocidad máxima, tracción y sonido', () => {
@@ -86,6 +87,38 @@ describe('pasoEnCoche', () => {
     // Assert: se detiene antes de la casa
     expect(e.velocidad).toBe(0)
     expect(e.z).toBeGreaterThanOrEqual(-5)
+  })
+})
+
+describe('chocaVehiculo: la huella del vehículo con sus medidas y su rumbo', () => {
+  // una casa de 10 × 10 m entre x, z = 0 y 10; la calle, del lado de z < 0
+  const casa = { vertices: Float32Array.from([0, 0, 10, 0, 10, 10, 0, 10]), techos: Uint32Array.from([0, 4, 0, 0]) }
+  const rejilla = rejillaDeCasas(casa, 99, (x, y) => ({ x, z: y }))
+  const v8 = VEHICULOS.find((v) => v.id === 'ford-v8')
+  const chocaV8 = chocaVehiculo(v8, (x, z, radio) => choca(rejilla, x, z, radio))
+
+  test('el Ford V8 (4,3 m) con el centro a 1,5 m de la casa y de punta hacia ella choca: la cola entraría', () => {
+    expect(chocaV8(5, -1.5, 0)).toBe(true)
+    expect(chocaV8(5, -1.5, Math.PI)).toBe(true)
+  })
+
+  test('de costado a la misma distancia no choca: sigue pasando por una calle tan ancha como antes', () => {
+    expect(chocaV8(5, -1.5, Math.PI / 2)).toBe(false)
+  })
+
+  test('lejos de la casa no choca; el centro adentro, sí', () => {
+    expect(chocaV8(5, -3, 0)).toBe(false)
+    expect(chocaV8(5, 5, 0)).toBe(true)
+  })
+
+  test('pasoEnCoche mira la huella con el rumbo del paso: no se mete de cola en la casa', () => {
+    // Arrange: el V8 de punta a la calle (rumbo 0: −z), con la cola a 0,35 m de la casa, marcha atrás
+    const e0 = { x: 5, z: -2.5, rumbo: 0, velocidad: -3 }
+    // Act
+    const e = pasoEnCoche(e0, { acelera: -1, girar: 0 }, 1, v8, { choca: chocaV8 })
+    // Assert: se detiene sin que la cola (z + 2,15) pase del borde de la casa
+    expect(e.velocidad).toBe(0)
+    expect(e.z + v8.largo / 2).toBeLessThanOrEqual(0)
   })
 })
 
