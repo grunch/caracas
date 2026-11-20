@@ -127,6 +127,8 @@ test('con ?sombras=0&contorno=0&grano=0 no hay ni mapa ni pasada: el render de s
 
 test('cada techo deja el id de su casa en el alfa del cuadro (de ahí el contorno sabe qué es un mismo tejado); el piso, cero', async ({ page }) => {
   const errores = await abrir(page)
+  // lab.ready anuncia el visor; el botón aparece después de añadir las casas del pak.
+  await expect(page.locator('#alzar')).toBeVisible()
   const alfa = await page.evaluate(() => {
     const { renderer, acabado, cam, ciudad } = window.lab
     window.lab.levantar(true)
