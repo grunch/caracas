@@ -28,7 +28,7 @@ const BAJA_EL_INTERIOR_M = 0.5 // las alas de adentro arrancan más abajo que la
 const SUBIDA_CRUJIA_M = 2.8
 const SUBIDA_ALA_M = 1.5
 const TAN_ALA = 0.38
-const EPS = 1e-3
+const EPS = 0.02 // un ala a menos de esto del borde del lote lo toca (el dato redondea el marco y las alas por separado)
 
 /**
  * Los marcos del pak, por número de techo: { origen [x, z], eu, ev (en el mundo), ancho, fondo, crujia (m),

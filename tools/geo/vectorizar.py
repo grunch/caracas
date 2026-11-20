@@ -121,13 +121,19 @@ def publico_que_pisa(publicos, figura):
     return -1
 
 
+BORDE_PX = 0.05   # un ala que termina a menos de esto del borde de su marco termina en el borde
+
+
 def agregar_alas(salida, techo, marco, alas, origen, metro):
-    """El marco y las alas de la casa `techo`, llevados de la manzana a los píxeles del plano."""
+    """El marco y las alas de la casa `techo`, llevados de la manzana a los píxeles del plano. El ancho y el
+    fondo del marco y las alas se redondean por separado: las alas que llegan al borde se llevan justo a él
+    (el visor estira las que lo tocan, src/alas.js; a una que se queda a milímetros le deja una franja sin techo)."""
     ox, oy = marco['origen'][0] + origen[0], marco['origen'][1] + origen[1]
+    ancho, fondo = round(marco['ancho'] / metro, 2), round(marco['fondo'] / metro, 2)
     salida['marcos'].append([techo, round(ox, 2), round(oy, 2), round(marco['eu'][0], 5), round(marco['eu'][1], 5),
-                             round(marco['ancho'] / metro, 2), round(marco['fondo'] / metro, 2), marco['calles'],
-                             round(marco['crujia'] / metro, 2), len(salida['alas']), len(alas)])
-    salida['alas'].extend(alas)
+                             ancho, fondo, marco['calles'], round(marco['crujia'] / metro, 2), len(salida['alas']), len(alas)])
+    salida['alas'].extend([tipo, u0, v0, ancho if abs(u1 - ancho) < BORDE_PX else u1, fondo if abs(v1 - fondo) < BORDE_PX else v1]
+                          for tipo, u0, v0, u1, v1 in alas)
 
 
 def _casas_de_manzana(clases, manzana, lotes, metro, modelo):

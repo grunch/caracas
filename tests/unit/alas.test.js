@@ -408,3 +408,14 @@ describe('un ala estirada fuera de su lote', () => {
     expect(alturaDe(lateral, 3, 14)).toBeLessThan(enElBorde) // y hacia el patio sigue bajando
   })
 })
+
+describe('un ala que llega casi al borde del lote', () => {
+  test('se estira igual aunque le falten milímetros (el dato redondea ancho y alas por separado)', () => {
+    const plan = planDeAlas({
+      ancho: 12.105, fondo: 63.555, estilo: 0, pisos: 1, semilla: 5,
+      alas: [ala(ALA.FRENTE, 0, 0, 12.1, 8), ala(ALA.SOLAR, 0, 8, 12.1, 63.55)],
+    })
+    expect(faldonEn(plan, 12.4, 40)?.piso).toBe(CUBIERTA.SOLAR) // la franja de la huella que sobresale es solar
+    expect(faldonEn(plan, 5, 63.9)?.piso).toBe(CUBIERTA.SOLAR)
+  })
+})

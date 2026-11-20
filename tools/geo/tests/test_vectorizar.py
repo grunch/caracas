@@ -506,3 +506,15 @@ def test_con_la_red_ninguna_casa_queda_sin_su_crujia():
         _, u0, v0, u1, v1 = next(a for a in res['alas'][primera:primera + cuantas] if a[0] == FRENTE)
         frente = Polygon([(ox + u * eux - v * euy, oy + u * euy + v * eux) for u, v in ((u0, v0), (u1, v0), (u1, v1), (u0, v1))])
         assert polis[t].buffer(0).intersection(frente).area >= 0.35 * frente.area
+
+
+@pytest.mark.parametrize('angulo', [23.0, -38.0])
+def test_las_alas_de_cada_casa_llegan_justo_a_los_bordes_de_su_marco(angulo):
+    # el visor estira las alas que tocan el borde del lote: si el ancho y las alas se redondean por separado,
+    # queda una franja sin techo ni piso y ahí levanta una pared a todo lo largo
+    res = vectorizar(manzana_girada(angulo), METRO, plaza=(180, 180))
+    for _, _, _, _, _, ancho, fondo, _, _, primera, cuantas in res['marcos']:
+        alas = res['alas'][primera:primera + cuantas]
+        if alas:
+            assert max(a[3] for a in alas) == pytest.approx(ancho, abs=1e-6)
+            assert max(a[4] for a in alas) == pytest.approx(fondo, abs=1e-6)
