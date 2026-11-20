@@ -80,3 +80,5 @@ El [sondeo de accesos](accesos-primer-lote.md) evalúa los 40 frentes iniciales 
 [Unidades edificadas sin cara única](contornos-sin-cara.md): 78 recortes inspeccionados, con decisiones para preservar riberas, pasos, manzanas alargadas y cuerpos aislados.
 
 [Contrato de referencia histórica](contrato-referencia.md): 23 cruces compartidos y diez unidades pendientes, con validación de identidad/topología y selección explícita. Todavía no habilita generación.
+
+[Lectura de los 67 registros restantes](lectura-restantes-original.md): completa la lectura individual de los 292 registros censados, conservando terrenos libres, cuerpos aislados y descartes. La correspondencia y los accesos siguen pendientes.

@@ -1,0 +1,878 @@
+{
+  "fuente_sha256": "4696d038a55b8088302a496b6eb4678b11173d98d3a15c589530cf78ee7bb62b",
+  "fecha": "2026-11-20",
+  "alcance": "Lectura individual complementaria de 67 registros. No aprueba geometría, calce ni acceso; las cajas solo localizan. Orientaciones referidas al escaneo, con Poniente arriba.",
+  "unidades": [
+    {
+      "unidad": "U1772-0001",
+      "sector": "S1772-11",
+      "bbox_localizacion": [
+        520,
+        288,
+        613,
+        316
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Franja roja quebrada de ribera, separada de otra franja por un paso claro; no completar una corona.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0037",
+      "sector": "S1772-21",
+      "bbox_localizacion": [
+        440,
+        602,
+        499,
+        656
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno sin rojo con cuatro límites, superior ondulado de ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0060",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1398,
+        663,
+        1438,
+        722
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno sin rojo; borde izquierdo curvo de ribera y tres lados aproximadamente rectos.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0085",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1374,
+        796,
+        1436,
+        855
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre al lado exterior del meandro; el cuerpo rojo del otro lado corresponde a U0278, no a este solar.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0100",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1305,
+        861,
+        1368,
+        921
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno sin rojo; límite superior izquierdo curvo de ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0131",
+      "sector": "S1772-31",
+      "bbox_localizacion": [
+        402,
+        1054,
+        435,
+        1114
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Franja de terreno sin rojo entre ribera izquierda y calle derecha.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0142",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1131,
+        1061,
+        1167,
+        1119
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno sin rojo, estrecho arriba y ancho abajo junto a ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0150",
+      "sector": "S1772-32",
+      "bbox_localizacion": [
+        572,
+        1122,
+        630,
+        1183
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Cuatro bordes rectos sin rojo; símbolos de vegetación interiores.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0171",
+      "sector": "S1772-34",
+      "bbox_localizacion": [
+        1438,
+        1193,
+        1500,
+        1251
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Cuatro bordes rectos sin rojo; ribera exterior inferior.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0193",
+      "sector": "S1772-13",
+      "bbox_localizacion": [
+        1309,
+        463,
+        1359,
+        523
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno sin rojo con borde derecho curvo de ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0217",
+      "sector": "S1772-11",
+      "bbox_localizacion": [
+        327,
+        329,
+        367,
+        390
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre entre calle derecha y ribera izquierda; extremos de líneas no cierran el borde del agua.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0218",
+      "sector": "S1772-11",
+      "bbox_localizacion": [
+        330,
+        395,
+        367,
+        460
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre entre calle derecha y ribera izquierda.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0219",
+      "sector": "S1772-11",
+      "bbox_localizacion": [
+        329,
+        465,
+        367,
+        525
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre entre calle derecha y ribera izquierda.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0220",
+      "sector": "S1772-21",
+      "bbox_localizacion": [
+        327,
+        530,
+        368,
+        589
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre entre calle derecha y ribera izquierda; extremo inferior oblicuo.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0221",
+      "sector": "S1772-21",
+      "bbox_localizacion": [
+        299,
+        604,
+        369,
+        656
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre bajo ribera ondulada; límite izquierdo abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0222",
+      "sector": "S1772-21",
+      "bbox_localizacion": [
+        289,
+        662,
+        369,
+        723
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno sin rojo con líneas superior, derecha e inferior; borde izquierdo abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0223",
+      "sector": "S1772-21",
+      "bbox_localizacion": [
+        274,
+        728,
+        369,
+        789
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno sin rojo con líneas superior, derecha e inferior; borde izquierdo abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0224",
+      "sector": "S1772-21",
+      "bbox_localizacion": [
+        269,
+        794,
+        369,
+        855
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno sin rojo con líneas superior, derecha e inferior; borde izquierdo abierto hacia ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0225",
+      "sector": "S1772-31",
+      "bbox_localizacion": [
+        281,
+        859,
+        369,
+        920
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno sin rojo con límite izquierdo inferior curvo de ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0226",
+      "sector": "S1772-31",
+      "bbox_localizacion": [
+        333,
+        925,
+        369,
+        985
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Cuña libre entre calle superior/derecha y ribera diagonal.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0228",
+      "sector": "S1772-31",
+      "bbox_localizacion": [
+        384,
+        991,
+        436,
+        1050
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno sin rojo con borde izquierdo curvo de ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0229",
+      "sector": "S1772-31",
+      "bbox_localizacion": [
+        435,
+        1188,
+        499,
+        1248
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con rótulo superpuesto; la letra no es un edificio.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0231",
+      "sector": "S1772-13",
+      "bbox_localizacion": [
+        1309,
+        396,
+        1371,
+        457
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con tres líneas y borde derecho abierto hacia ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0234",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1373,
+        729,
+        1437,
+        790
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno sin rojo cuyo borde izquierdo sigue un meandro.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0235",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1444,
+        544,
+        1506,
+        590
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Cuña libre a la derecha inferior de la ribera diagonal; el rojo opuesto pertenece a otra unidad.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0236",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1509,
+        545,
+        1568,
+        590
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre debajo de ribera, con límite derecho abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0237",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1509,
+        596,
+        1570,
+        657
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con tres lados trazados; límite derecho abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0238",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1510,
+        663,
+        1570,
+        723
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con tres lados trazados; límite derecho abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0239",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1509,
+        729,
+        1570,
+        790
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con tres lados trazados; límite derecho abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0240",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1507,
+        796,
+        1570,
+        856
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con tres lados trazados; límite derecho abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0241",
+      "sector": "S1772-34",
+      "bbox_localizacion": [
+        1507,
+        862,
+        1570,
+        921
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con tres lados trazados; límite derecho abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0243",
+      "sector": "S1772-43",
+      "bbox_localizacion": [
+        1305,
+        1257,
+        1365,
+        1318
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre; esquina inferior derecha recortada por ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0244",
+      "sector": "S1772-44",
+      "bbox_localizacion": [
+        1372,
+        1257,
+        1432,
+        1288
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre en cuña entre calle superior/izquierda y ribera inferior.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0245",
+      "sector": "S1772-43",
+      "bbox_localizacion": [
+        1305,
+        1324,
+        1346,
+        1378
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Cuña libre a la izquierda de la ribera; no cerrar sobre el agua.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0246",
+      "sector": "S1772-43",
+      "bbox_localizacion": [
+        1103,
+        1389,
+        1165,
+        1454
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con límite inferior curvo de ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0247",
+      "sector": "S1772-43",
+      "bbox_localizacion": [
+        1170,
+        1389,
+        1232,
+        1440
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con límite inferior y derecho de ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0248",
+      "sector": "S1772-43",
+      "bbox_localizacion": [
+        1238,
+        1389,
+        1264,
+        1412
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Pequeña cuña sin rojo entre líneas superior/izquierda y ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0256",
+      "sector": "S1772-12",
+      "bbox_localizacion": [
+        589,
+        436,
+        624,
+        458
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo pentagonal aislado, separado de las franjas vecinas por espacio claro.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0257",
+      "sector": "S1772-12",
+      "bbox_localizacion": [
+        623,
+        419,
+        657,
+        439
+      ],
+      "ocupacion_previa": "parte_de_otra_unidad",
+      "lectura": "Extremo rojo de la unidad ya censada; conservar referencia de parte, sin duplicar un edificio.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0258",
+      "sector": "S1772-11",
+      "bbox_localizacion": [
+        387,
+        222,
+        407,
+        240
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo rectangular aislado entre rótulos; conservar espacio libre alrededor.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0259",
+      "sector": "S1772-12",
+      "bbox_localizacion": [
+        821,
+        279,
+        836,
+        297
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo rectangular aislado, separado del cuerpo derecho.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0260",
+      "sector": "S1772-12",
+      "bbox_localizacion": [
+        839,
+        274,
+        858,
+        297
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo rectangular aislado entre rótulos.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0261",
+      "sector": "S1772-13",
+      "bbox_localizacion": [
+        1173,
+        267,
+        1189,
+        287
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo casi cuadrado aislado entre símbolos de vegetación.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0262",
+      "sector": "S1772-14",
+      "bbox_localizacion": [
+        1732,
+        345,
+        1753,
+        366
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo rectangular aislado junto a trazo inferior; no extender hasta él.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0263",
+      "sector": "S1772-14",
+      "bbox_localizacion": [
+        1732,
+        374,
+        1749,
+        391
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo casi cuadrado aislado debajo de trazos de camino.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0264",
+      "sector": "S1772-13",
+      "bbox_localizacion": [
+        1025,
+        340,
+        1049,
+        360
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Franja roja estrecha diagonal aislada; no convertir en cuadra rectangular.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0265",
+      "sector": "S1772-14",
+      "bbox_localizacion": [
+        1407,
+        435,
+        1440,
+        456
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo rectangular horizontal aislado.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0266",
+      "sector": "S1772-14",
+      "bbox_localizacion": [
+        1475,
+        420,
+        1489,
+        440
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo pequeño rectangular junto a ribera; mantener separación del agua.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0268",
+      "sector": "S1772-34",
+      "bbox_localizacion": [
+        1583,
+        930,
+        1602,
+        946
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo casi cuadrado aislado entre símbolos de vegetación.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0269",
+      "sector": "S1772-34",
+      "bbox_localizacion": [
+        1575,
+        968,
+        1589,
+        980
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo pequeño aislado entre símbolos de vegetación.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0270",
+      "sector": "S1772-34",
+      "bbox_localizacion": [
+        1622,
+        959,
+        1642,
+        977
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo vertical aislado entre símbolos de vegetación.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0271",
+      "sector": "S1772-34",
+      "bbox_localizacion": [
+        1628,
+        1121,
+        1643,
+        1142
+      ],
+      "ocupacion_previa": "descartada_no_edificacion",
+      "lectura": "Solo símbolos de vegetación, sin cuerpo rojo; se confirma el descarte como edificación.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0272",
+      "sector": "S1772-12",
+      "bbox_localizacion": [
+        637,
+        433,
+        717,
+        506
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Franja roja diagonal larga con dos retornos hacia El Calvario; separada de U0013 y U0014 por calles. Aislada describe el cuerpo censado, no una casa única ni una corona completa.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0273",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        874,
+        576,
+        886,
+        587
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo pequeño junto a ribera, separado de los otros cuerpos.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0274",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        862,
+        585,
+        872,
+        596
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo pequeño junto a ribera, separado de los otros cuerpos.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0275",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        875,
+        591,
+        886,
+        602
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo pequeño junto a ribera, separado de los otros cuerpos.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0276",
+      "sector": "S1772-22",
+      "bbox_localizacion": [
+        888,
+        599,
+        901,
+        612
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo pequeño junto a ribera, separado de los otros cuerpos.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0278",
+      "sector": "S1772-24",
+      "bbox_localizacion": [
+        1380,
+        799,
+        1401,
+        820
+      ],
+      "ocupacion_previa": "aislada",
+      "lectura": "Cuerpo rojo oblicuo aislado dentro del meandro; no llenar el espacio claro que lo rodea.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0279",
+      "sector": "S1772-31",
+      "bbox_localizacion": [
+        419,
+        1119,
+        433,
+        1149
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Cuña libre estrecha junto a ribera; el límite inferior no forma frente edificado.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0280",
+      "sector": "S1772-34",
+      "bbox_localizacion": [
+        1507,
+        927,
+        1564,
+        989
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con tres lados trazados y borde derecho abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0281",
+      "sector": "S1772-34",
+      "bbox_localizacion": [
+        1507,
+        994,
+        1564,
+        1055
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con tres lados trazados y borde derecho abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0282",
+      "sector": "S1772-34",
+      "bbox_localizacion": [
+        1507,
+        1060,
+        1564,
+        1122
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con tres lados trazados y borde derecho abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0283",
+      "sector": "S1772-34",
+      "bbox_localizacion": [
+        1507,
+        1127,
+        1564,
+        1189
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con tres lados trazados y borde derecho abierto.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0284",
+      "sector": "S1772-34",
+      "bbox_localizacion": [
+        1507,
+        1194,
+        1564,
+        1254
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre con tres lados trazados y borde derecho abierto, ribera inferior exterior.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0287",
+      "sector": "S1772-33",
+      "bbox_localizacion": [
+        1103,
+        1059,
+        1139,
+        1116
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Cuña libre de ribera; dos lados rectos y tercero curvo.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0289",
+      "sector": "S1772-42",
+      "bbox_localizacion": [
+        835,
+        1258,
+        859,
+        1280
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Terreno libre pequeño con borde inferior derecho redondeado; símbolos de vegetación interiores.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    },
+    {
+      "unidad": "U1772-0292",
+      "sector": "S1772-44",
+      "bbox_localizacion": [
+        1440,
+        1256,
+        1466,
+        1271
+      ],
+      "ocupacion_previa": "terreno_libre",
+      "lectura": "Pequeña cuña sin rojo a la izquierda superior de la ribera.",
+      "decision": "conservar_clasificacion; resolver_geometria_y_correspondencia_en_fase_2"
+    }
+  ]
+}
