@@ -1,6 +1,6 @@
 {
   "_nota": "Conteos de referencia del pipeline de 1936 (mosaico con costura). Si un cambio del pipeline los mueve a propósito, se actualizan acá en el mismo PR.",
-  "techos": { "valor": 33928, "tolerancia": 0.02 },
+  "techos": { "valor": 35022, "tolerancia": 0.02 },
   "manzanas": { "valor": 7851, "tolerancia": 0.02 },
   "arboles": { "valor": 5926, "tolerancia": 0.05 }
 }

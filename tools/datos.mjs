@@ -101,7 +101,6 @@ const PASOS = [
         '--tramos', `${D}/tramos.json`, '--edificado-1772', `${D}/edificado-1772.png`]
     },
   },
-  },
   // --- la línea de tiempo: la ciudad de 1578 y las épocas (los calces van antes, después de la costura) ---
   {
     // plaza-1936.json da las semillas de las esquinas y la ruta de las clases (clases-costura.png)
