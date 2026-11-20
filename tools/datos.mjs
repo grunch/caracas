@@ -77,28 +77,30 @@ const PASOS = [
     cmd: () => [PY, 'tools/geo/hoy.py', '--solo-descargar', '--osm', OSM_HOY, ...(DESCARGAR ? ['--descargar'] : [])],
   },
   {
-    // lo abierto en 1936 (calles, pasajes, plazas) que el plano de 1772 tiene edificado: ahí la cuadra de 1772 va entera
+    // la red de calles de hoy en tramos, cada uno con lo que dicen los planos (¿estaba en 1936?, ¿es nuevo desde
+    // 1772?), y lo edificado de 1772 ya corregido: con eso vectorizar arma las cuadras de cada época
     id: 'calles-nuevas',
-    entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, 'fuentes/derivados/1772/calzado.tif',
-      'fuentes/derivados/1772/calzado.json', 'tools/geo/epocas/epocas.json'],
-    salidas: [`${D}/calles-nuevas.png`],
-    codigo: GEO('calles_nuevas', 'calce_correlacion', 'epocas'),
+    entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, OSM_HOY, 'tools/geo/gcp/1936-wgs84.json',
+      'fuentes/derivados/1772/calzado.tif', 'fuentes/derivados/1772/calzado.json', 'tools/geo/epocas/epocas.json'],
+    salidas: [`${D}/tramos.json`, `${D}/edificado-1772.png`],
+    codigo: GEO('calles_nuevas', 'caras', 'lados', 'calce_correlacion', 'epocas', 'hoy_osm', 'geo1936'),
     cmd: async () => {
       const { metro } = await leerJson(`${D}/mosaico.json`)
-      return [PY, 'tools/geo/calles_nuevas.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/calles-nuevas.png`,
-        '--escala', String(metro)]
+      return [PY, 'tools/geo/calles_nuevas.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/tramos.json`,
+        '--osm', OSM_HOY, '--edificado', `${D}/edificado-1772.png`, '--escala', String(metro)]
     },
   },
   {
-    id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/calles-nuevas.png`, OSM_HOY, 'tools/geo/gcp/1936-wgs84.json'],
+    id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/tramos.json`, `${D}/edificado-1772.png`],
     salidas: [`${D}/ciudad-1936.json`, `${D}/patios-de-casas.png`],
-    codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'calles_nuevas', 'hoy_osm', 'geo1936'),
+    codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'caras'),
     cmd: async () => {
       const { plaza, metro } = await leerJson(`${D}/mosaico.json`)
       return [PY, 'tools/geo/vectorizar.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/ciudad-1936.json`,
         '--escala', String(metro), '--plaza', plaza.join(','), '--patios', `${D}/patios-de-casas.png`,
-        '--calles-nuevas', `${D}/calles-nuevas.png`, '--osm', OSM_HOY]
+        '--tramos', `${D}/tramos.json`, '--edificado-1772', `${D}/edificado-1772.png`]
     },
+  },
   },
   // --- la línea de tiempo: la ciudad de 1578 y las épocas (los calces van antes, después de la costura) ---
   {

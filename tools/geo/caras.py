@@ -18,8 +18,9 @@ from pathlib import Path
 
 import cv2
 import numpy as np
-from shapely.geometry import LineString
+from shapely.geometry import LineString, Point
 from shapely.ops import linemerge, polygonize, unary_union
+from shapely.strtree import STRtree
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -144,3 +145,36 @@ def ajustar_cara(cara, mascara, origen, metro):
     if any(v is None for v in vertices):
         return None
     return np.array(vertices)
+
+
+def mascara_de_lineas(lineas, forma, grosor_px):
+    """Las líneas dibujadas con ese grosor en una máscara (bool) de la forma dada."""
+    mascara = np.zeros(forma, np.uint8)
+    for linea in lineas:
+        cv2.polylines(mascara, [np.round(np.asarray(linea, float) * 16).astype(np.int32)], False, 1, max(1, int(round(grosor_px))), cv2.LINE_8, shift=4)
+    return mascara > 0
+
+
+class Red:
+    """La red de calles clasificada (clasificar): sus tramos y las caras de cada época.
+
+    `caras36`: las cuadras de 1936 (las caras de los tramos que estaban en ese plano); `caras72`: las de 1772
+    (sin los tramos abiertos después). `cara36_en(x, y)`: el índice de la cuadra de 1936 que contiene el punto.
+    """
+
+    def __init__(self, tramos):
+        self.tramos = list(tramos)
+        de_1936 = [t['linea'] for t in self.tramos if t['en1936']]
+        self.caras36 = caras_de(de_1936)
+        self.caras72 = caras_de([t['linea'] for t in self.tramos if t['en1936'] and not t['nueva']])
+        self._arbol = STRtree(self.caras36) if self.caras36 else None
+
+    def lineas(self, solo_de_1936=False):
+        return [t['linea'] for t in self.tramos if t['en1936'] or not solo_de_1936]
+
+    def cara36_en(self, x, y):
+        if self._arbol is None:
+            return None
+        punto = Point(float(x), float(y))
+        encontradas = [int(k) for k in self._arbol.query(punto) if self.caras36[int(k)].contains(punto)]
+        return encontradas[0] if encontradas else None

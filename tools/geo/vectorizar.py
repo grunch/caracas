@@ -32,8 +32,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from alas import CRUJIA_M, PATIO, SOLAR, alas_de_casa, frentes_de_manzana  # noqa: E402
 from cuadra import alas_modelo, casa_modelo, crujia_de_cuadra, es_de_solo_casas  # noqa: E402
-from calles_nuevas import grupos_de_manzanas  # noqa: E402
-from lados import cortar_por_calles, cuadras_pegadas, lotes_por_lados  # noqa: E402
+from caras import Red, ajustar_cara, mascara_de_lineas  # noqa: E402
+from lados import CUADRA_MINIMA_M2, _relleno, cortar_por_calles, cuadras_pegadas, lotes_por_lados  # noqa: E402
 from lotes import (  # noqa: E402
     casas_de_esquina, direccion_de_manzana, esquinas_de_manzana, fundir_chicos, lotes_de_manzana, sin_pelos,
 )
@@ -138,10 +138,10 @@ def _casas_de_manzana(clases, manzana, lotes, metro, modelo):
     return fundir_chicos(casas, AREA_FUSION_M2 / metro ** 2)
 
 
-def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, crujia):
+def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, crujia, poligono=None):
     """Las casas de una cuadra modelo repartida por sus lados (tools/geo/lados.py): cada lote con su marco
     sobre la línea de fachada de su calle. → False si la manzana no se deja repartir así."""
-    repartida = lotes_por_lados(manzana, metro, semilla_de(int(origen[0]) + 5, int(origen[1]) + 11))
+    repartida = lotes_por_lados(manzana, metro, semilla_de(int(origen[0]) + 5, int(origen[1]) + 11), poligono)
     if repartida is None:
         return False
     etiquetas, lotes = repartida
@@ -166,18 +166,23 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
     return True
 
 
-def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, cuadra_modelo=True):
+def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, cuadra_modelo=True,
+                      poligono=None):
     """Las casas de una manzana. Las de solo casas (tools/geo/cuadra.py) van con la cuadra modelo: un anillo
     de casas que dan a la calle y el centro abierto; las demás, con lo edificado del plano en cada lote. Recibe una cuadra
-    (vectorizar separa las manzanas en cuadras); las manzanas de 1936 las cuenta vectorizar."""
+    (vectorizar separa las manzanas en cuadras); las manzanas de 1936 las cuenta vectorizar. `poligono`: los lados
+    de la cuadra según la red de calles (tools/geo/caras.py), si se conocen: con ellos se reparte aunque su
+    borde en el plano sea dentado o tenga muescas."""
     x, y = origen
     if (manzana & (clases == CLASE['edificado'])).sum() < area_min_px:
         return
     salida['n_cuadras'] += 1
     direccion = direccion_de_manzana(manzana, metro)
-    modelo = cuadra_modelo and direccion[1] is not None and es_de_solo_casas(clases, manzana, metro, CLASE['edificado'], CLASE['publico'])
+    modelo = (cuadra_modelo and (poligono is not None or direccion[1] is not None)
+              and es_de_solo_casas(clases, manzana, metro, CLASE['edificado'], CLASE['publico']))
     azar = semilla_de(int(x) + 17, int(y) + 29) / 0xFFFF
-    if modelo and casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, crujia_de_cuadra(azar)):
+    if modelo and casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, crujia_de_cuadra(azar),
+                                  poligono):
         return
     lotes = lotes_de_manzana(manzana, metro, semilla_de(int(x), int(y)), direccion)
     # de toda la manzana: las líneas de fachada y el fondo de la crujía (la cumbrera corre seguida por la cuadra)
@@ -216,23 +221,7 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
             agregar_alas(salida, len(salida['techos']) - 1, *con_alas, (x + c0, y + f0), metro)
 
 
-CIERRE_DE_JUNTA_M = 6.0   # la cuadra de antes de una calle nueva se cierra con esto (las puntas de la calle)
-
-
 ANCHO_DE_CORTE_M = 4.0    # lo que se lleva de la manzana la calle de hoy que la corta (más angosta que la calle)
-
-
-def mascara_de_calles(elementos, forma, metro):
-    """Las calles de hoy (OpenStreetMap, tools/geo/hoy_osm.py: capa "calle") como líneas de ANCHO_DE_CORTE_M en
-    una máscara de la forma del mosaico."""
-    mascara = np.zeros(forma, np.uint8)
-    grosor = max(1, int(round(ANCHO_DE_CORTE_M / metro)))
-    for el in elementos:
-        if el['capa'] != 'calle' or el['area']:
-            continue
-        for linea in el['lineas']:
-            cv2.polylines(mascara, [np.round(np.asarray(linea) * 16).astype(np.int32)], False, 1, grosor, cv2.LINE_8, shift=4)
-    return mascara > 0
 
 
 def _cuadras_de(manzana, metro, cuadra_modelo, calles_hoy=None, libre=None):
@@ -251,27 +240,6 @@ def _cuadras_de(manzana, metro, cuadra_modelo, calles_hoy=None, libre=None):
     return salida
 
 
-def _cuadra_de_antes(cuadras, cajas, grupo, metro):
-    """(máscara, (x, y)) de la cuadra de antes de las calles nuevas de un grupo: sus cuadras, sus calles
-    nuevas y las puntas que esas calles dejan contra las de alrededor, sin pisar otras cuadras."""
-    y0, y1, x0, x1 = grupo['caja']
-    for m in grupo['manzanas']:
-        mx, my, mw, mh = cajas[m]
-        y0, y1, x0, x1 = min(y0, my), max(y1, my + mh), min(x0, mx), max(x1, mx + mw)
-    r = int(math.ceil(CIERRE_DE_JUNTA_M / metro))
-    y0, x0 = max(0, y0 - r), max(0, x0 - r)
-    y1, x1 = min(cuadras.shape[0], y1 + r), min(cuadras.shape[1], x1 + r)
-    ventana = cuadras[y0:y1, x0:x1]
-    suyas = np.isin(ventana, list(grupo['manzanas']))
-    junta = suyas.copy()
-    gy0, gy1, gx0, gx1 = grupo['caja']
-    junta[gy0 - y0:gy1 - y0, gx0 - x0:gx1 - x0] |= grupo['calles']
-    disco = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * r + 1, 2 * r + 1))
-    cerrada = cv2.morphologyEx(junta.astype(np.uint8), cv2.MORPH_CLOSE, disco) > 0
-    # rellenar primero y excluir después: una cuadra ajena encerrada por el grupo no se rellena
-    return ndimage.binary_fill_holes(cerrada) & ~((ventana > 0) & ~suyas), (x0, y0)
-
-
 def _clases_de_antes(clases, cuadra):
     """Las clases de la ventana de una cuadra de antes con lo abierto dentro de ella (las calles nuevas y sus
     puntas) edificado, como estaba en 1772. No toca el original."""
@@ -279,30 +247,116 @@ def _clases_de_antes(clases, cuadra):
     return np.where(abierto, CLASE['edificado'], clases).astype(clases.dtype)
 
 
-def _va_por_lados(clases, cuadra, metro):
-    """¿La cuadra de antes sale como cuadra modelo repartida por lados (techos_de_manzana)? Si no, sus casas
-    saldrían solo sobre lo edificado de 1936 y lo abierto quedaría vacío: el grupo no se usa."""
-    return (direccion_de_manzana(cuadra, metro)[1] is not None
-            and es_de_solo_casas(clases, cuadra, metro, CLASE['edificado'], CLASE['publico'])
-            and lotes_por_lados(cuadra, metro, 0) is not None)
+COBERTURA_DE_CARA = 0.9    # la cuadra tiene que caer casi toda dentro del polígono ajustado de su cara
+ABIERTO_MINIMO_M2 = 150.0  # lo abierto después de 1772 dentro de una cuadra, para que valga armar la de antes
+PLAZA_VIEJA_M2 = 200.0     # lo abierto que 1772 tampoco edifica, desde este tamaño, ya era plaza: no se rellena
+ASTILLA_M = 2.0            # lo abierto más angosto que el doble de esto es un diente del borde, no una calle
+CARA_MAXIMA_M2 = 80000.0   # una cara más grande no es una cuadra (un cerro, un parque)
 
 
-def _contornos_de(grupo):
-    """Las calles nuevas de un grupo como polígonos [[x, y, x, y, …], …] en píxeles del plano."""
-    y0, _, x0, _ = grupo['caja']
-    contornos, _ = cv2.findContours(grupo['calles'].astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+def _punto_interior(mascara):
+    """El punto (x, y) más adentro de la máscara, en sus píxeles."""
+    lejos = cv2.distanceTransform(np.asarray(mascara).astype(np.uint8), cv2.DIST_L2, 3)
+    j, i = np.unravel_index(int(np.argmax(lejos)), lejos.shape)
+    return i + 0.5, j + 0.5
+
+
+def _sin_astillas(mascara, metro, area_minima_m2=0.0):
+    """La máscara sin lo más angosto que 2·ASTILLA_M y sin los pedazos de menos de `area_minima_m2`."""
+    r = max(1, int(round(ASTILLA_M / metro)))
+    disco = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * r + 1, 2 * r + 1))
+    gruesa = cv2.morphologyEx(np.asarray(mascara).astype(np.uint8), cv2.MORPH_OPEN, disco)
+    if not area_minima_m2:
+        return gruesa > 0
+    n, etiquetas, stats, _ = cv2.connectedComponentsWithStats(gruesa, connectivity=4)
+    grandes = stats[:, cv2.CC_STAT_AREA] * metro ** 2 >= area_minima_m2
+    grandes[0] = False
+    return grandes[etiquetas]
+
+
+def _poligonos_de_cara(red, lista, cajas, metro):
+    """{etiqueta: polígono (n, 2) en la ventana de la cuadra}: los lados de cada cuadra según su cara de la red
+    de 1936, ajustados a sus fachadas. Solo si la cara tiene una sola cuadra y el polígono la cubre."""
+    de_cara = {}
+    for etiqueta, parte in lista:
+        if parte.sum() * metro ** 2 < CUADRA_MINIMA_M2:
+            continue
+        x, y = cajas[etiqueta][:2]
+        i, j = _punto_interior(parte)
+        cara = red.cara36_en(x + i, y + j)
+        if cara is not None:
+            de_cara.setdefault(cara, []).append((etiqueta, parte))
+    salida = {}
+    for cara, suyas in de_cara.items():
+        if len(suyas) != 1:
+            continue
+        etiqueta, parte = suyas[0]
+        poligono = ajustar_cara(red.caras36[cara], parte, cajas[etiqueta][:2], metro)
+        if poligono is not None and (_relleno(poligono, parte.shape) & parte).sum() >= COBERTURA_DE_CARA * parte.sum():
+            salida[etiqueta] = poligono
+    return salida
+
+
+def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro):
+    """Las cuadras de 1772 que el plano de 1936 muestra abiertas (una calle nueva que las parte, un pasaje o
+    una plaza que les entra): por cada cara de la red sin los tramos nuevos, su polígono ajustado a las
+    fachadas con lo abierto adentro vuelto a edificar, salvo lo que 1772 tampoco edifica (una plaza vieja).
+    → [{miembros: las cuadras de 1936 que reemplaza, cuadra: máscara, origen: (x, y), clases: las de antes,
+    poligono, abierto: máscara de lo que se abrió}]. Solo las que salen como cuadra modelo repartida por lados."""
+    alto, ancho = clases.shape
+    salida = []
+    for cara in red.caras72:
+        if not CUADRA_MINIMA_M2 <= cara.area * metro ** 2 <= CARA_MAXIMA_M2:
+            continue
+        bx0, by0, bx1, by1 = cara.bounds
+        x0, y0, x1, y1 = max(0, int(bx0)), max(0, int(by0)), min(ancho, int(bx1) + 2), min(alto, int(by1) + 2)
+        if x1 - x0 < 4 or y1 - y0 < 4 or not edificado72[y0:y1, x0:x1].any():
+            continue
+        cl = clases[y0:y1, x0:x1]
+        dentro = np.zeros(cl.shape, np.uint8)
+        cv2.fillPoly(dentro, [np.round((np.asarray(cara.exterior.coords) - (x0, y0)) * 16).astype(np.int32)], 1, shift=4)
+        dentro = dentro > 0
+        de_manzana = np.isin(cl, DE_LA_MANZANA)
+        poligono = ajustar_cara(cara, dentro & de_manzana, (x0, y0), metro)
+        if poligono is None:
+            continue
+        en_poligono = _relleno(poligono, cl.shape) & dentro
+        calle = cl == CLASE['calle']
+        plaza_vieja = _sin_astillas(en_poligono & calle & ~edificado72[y0:y1, x0:x1], metro, PLAZA_VIEJA_M2)
+        cuadra = en_poligono & (de_manzana | calle) & ~plaza_vieja
+        abierto = _sin_astillas(cuadra & calle, metro)
+        if abierto.sum() * metro ** 2 < ABIERTO_MINIMO_M2:
+            continue
+        de_antes = _clases_de_antes(cl, cuadra)
+        if not es_de_solo_casas(de_antes, cuadra, metro, CLASE['edificado'], CLASE['publico']) \
+                or lotes_por_lados(cuadra, metro, 0, poligono) is None:
+            continue
+        cuenta = np.bincount(cuadras[y0:y1, x0:x1][cuadra])
+        miembros = {int(e) for e in np.flatnonzero(cuenta) if e > 0 and cuenta[e] >= 0.5 * areas.get(int(e), np.inf)}
+        if miembros:
+            salida.append({'miembros': miembros, 'cuadra': cuadra, 'origen': (x0, y0), 'clases': de_antes,
+                           'poligono': poligono, 'abierto': abierto})
+    return salida
+
+
+def _contornos_de(abierto, origen):
+    """Lo abierto de una cuadra de antes como polígonos [[x, y, x, y, …], …] en píxeles del plano."""
+    x0, y0 = origen
+    contornos, _ = cv2.findContours(abierto.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     return [[round(float(v), 1) for x, y in c[:, 0, :] for v in (x + x0 + 0.5, y + y0 + 0.5)] for c in contornos if len(c) >= 3]
 
 
-def vectorizar(clases, metro, plaza, cuadra_modelo=True, calles_nuevas=None, calles_hoy=None):
+def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=None):
     """La ciudad de la imagen de clases. Sin `cuadra_modelo`, todas las manzanas con lo edificado del plano.
 
-    Cada manzana se arma cuadra por cuadra (_cuadras_de). `calles_nuevas` (máscara, tools/geo/calles_nuevas.py):
-    lo abierto en 1936 que el plano de 1772 tiene edificado. Las cuadras que une van dos veces: como en 1936
-    ("antes" 0) y enteras, como eran antes de abrirse la calle ("antes" 1); cada techo dice de qué grupo es
-    ("junta", -1: de ninguno) y "juntas" trae, por grupo, sus calles nuevas (tools/geo/epocas.py decide cuándo
-    se abre cada una). La cuadra de antes lleva edificado lo que hoy es calle nueva (_clases_de_antes), y solo se
-    usan los grupos cuya cuadra de antes sale como cuadra modelo repartida por lados (_va_por_lados).
+    Cada manzana se arma cuadra por cuadra (_cuadras_de). `red`: {tramos: la red de calles clasificada
+    (tools/geo/caras.py), edificado72: lo edificado del plano de 1772 ya corregido, o None}. Con ella:
+    - las manzanas se cortan por los tramos que estaban en 1936 (y por los demás, solo donde el plano no tiene
+      casas: `calles_hoy` es esa misma máscara, si se da suelta);
+    - cada cuadra se reparte por los lados de su cara de la red, ajustados a sus fachadas;
+    - las cuadras de 1772 que 1936 muestra abiertas (_cuadras_de_antes) van dos veces: como en 1936 ("antes" 0)
+      y enteras, como eran ("antes" 1). Cada techo dice de qué grupo es ("junta", -1: de ninguno) y "juntas"
+      trae, por grupo, lo que se abrió (tools/geo/epocas.py decide cuándo).
     """
     clases = np.asarray(clases)
     area_min_px = AREA_MINIMA_M2 / metro ** 2
@@ -313,6 +367,12 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, calles_nuevas=None, cal
     def distancia_m(f):
         return math.hypot(f.centroid.x - plaza[0], f.centroid.y - plaza[1]) * metro
 
+    con_red = Red(red['tramos']) if red is not None and cuadra_modelo else None
+    de_1936 = None
+    if con_red is not None:
+        grosor = ANCHO_DE_CORTE_M / metro
+        calles_hoy = mascara_de_lineas(con_red.lineas(), clases.shape, grosor)
+        de_1936 = mascara_de_lineas(con_red.lineas(solo_de_1936=True), clases.shape, grosor)
     techos_publicos(clases, salida, area_min_px, tolerancia_px, metro)
     manzanas = np.isin(clases, DE_LA_MANZANA).astype(np.uint8)
     n, cuadras, stats, _ = cv2.connectedComponentsWithStats(manzanas, connectivity=4)
@@ -322,7 +382,10 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, calles_nuevas=None, cal
         x, y, w, h = stats[k, :4]
         manzana = cuadras[y:y + h, x:x + w] == k
         salida['manzanas'] += int((manzana & (clases[y:y + h, x:x + w] == CLASE['edificado'])).sum() >= area_min_px)
+        # una calle de hoy corta donde el plano no tiene casas ni edificios públicos; una que ya estaba en 1936, siempre
         libre = ~np.isin(clases[y:y + h, x:x + w], (CLASE['edificado'], CLASE['publico']))
+        if de_1936 is not None:
+            libre = libre | de_1936[y:y + h, x:x + w]
         partes = _cuadras_de(manzana, metro, cuadra_modelo, None if calles_hoy is None else calles_hoy[y:y + h, x:x + w], libre)
         # lo que el corte por la calle de hoy deja fuera de las partes no conserva el número de la manzana entera
         cuadras[y:y + h, x:x + w][manzana] = 0
@@ -332,26 +395,23 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, calles_nuevas=None, cal
             cuadras[y + dy:y + dy + ph, x + dx:x + dx + pw][parte] = etiqueta
             cajas[etiqueta] = (x + dx, y + dy, pw, ph)
             lista.append((etiqueta, parte))
-    grupos = grupos_de_manzanas(cuadras, calles_nuevas) if calles_nuevas is not None and cuadra_modelo else []
+    poligonos = _poligonos_de_cara(con_red, lista, cajas, metro) if con_red is not None else {}
     antes = []
-    for grupo in grupos:
-        cuadra, (x, y) = _cuadra_de_antes(cuadras, cajas, grupo, metro)
-        h, w = cuadra.shape
-        de_antes = _clases_de_antes(clases[y:y + h, x:x + w], cuadra)
-        if _va_por_lados(de_antes, cuadra, metro):
-            antes.append((grupo, cuadra, (x, y), de_antes))
-    de_grupo = {m: j for j, (grupo, *_) in enumerate(antes) for m in grupo['manzanas']}
+    if con_red is not None and red.get('edificado72') is not None:
+        areas = {etiqueta: int(parte.sum()) for etiqueta, parte in lista}
+        antes = _cuadras_de_antes(con_red, np.asarray(red['edificado72'], bool), clases, cuadras, areas, metro)
+    de_grupo = {m: j for j, grupo in enumerate(antes) for m in grupo['miembros']}
     for etiqueta, parte in lista:
         x, y, w, h = cajas[etiqueta]
         salida['_junta'] = de_grupo.get(etiqueta, -1)
         techos_de_manzana(clases[y:y + h, x:x + w], parte, (x, y), salida, area_min_px, tolerancia_px, distancia_m, metro,
-                          cuadra_modelo)
+                          cuadra_modelo, poligonos.get(etiqueta))
     salida['_antes'] = 1
-    for j, (grupo, cuadra, (x, y), de_antes) in enumerate(antes):
+    for j, grupo in enumerate(antes):
         salida['_junta'] = j
-        techos_de_manzana(de_antes, cuadra, (x, y), salida, area_min_px, tolerancia_px, distancia_m, metro,
-                          cuadra_modelo)
-        salida['juntas'].append(_contornos_de(grupo))
+        techos_de_manzana(grupo['clases'], grupo['cuadra'], grupo['origen'], salida, area_min_px, tolerancia_px, distancia_m,
+                          metro, cuadra_modelo, grupo['poligono'])
+        salida['juntas'].append(_contornos_de(grupo['abierto'], grupo['origen']))
     for privada in ('publicos', 'n_cuadras', '_junta', '_antes'):
         salida.pop(privada, None)
     return salida
@@ -375,26 +435,22 @@ def main():
     ap.add_argument('--escala', type=float, required=True, help='metros por píxel')
     ap.add_argument('--plaza', required=True, help='px,py de la Plaza Bolívar')
     ap.add_argument('--patios', help='PNG donde dejar la máscara de los patios abiertos por regla')
-    ap.add_argument('--osm', help='calles de hoy de OpenStreetMap (tools/geo/hoy_osm.py): cortan las manzanas que el plano une por un jardín')
-    ap.add_argument('--calles-nuevas', help='PNG de lo abierto en 1936 que el plano de 1772 no tiene (tools/geo/calles_nuevas.py)')
+    ap.add_argument('--tramos', help='JSON de la red de calles clasificada (tools/geo/calles_nuevas.py): las cuadras salen de sus caras')
+    ap.add_argument('--edificado-1772', help='PNG de lo edificado de 1772 ya corregido (tools/geo/calles_nuevas.py): con él se arman las cuadras de antes')
     a = ap.parse_args()
     clases = cv2.imread(a.clases, cv2.IMREAD_UNCHANGED)
     if clases is None or clases.ndim != 2:
         raise SystemExit(f'{a.clases}: se esperaba una imagen de clases de un canal')
     plaza = tuple(float(v) for v in a.plaza.split(','))
-    nuevas = None
-    if a.calles_nuevas:
-        leida = cv2.imread(a.calles_nuevas, cv2.IMREAD_UNCHANGED)
-        if leida is None or leida.shape != clases.shape:
-            raise SystemExit(f'{a.calles_nuevas}: se esperaba una máscara de la forma de las clases')
-        nuevas = leida > 0
-    calles_hoy = None
-    if a.osm:
-        import geo1936
-        import hoy_osm
-        calles_hoy = mascara_de_calles(hoy_osm.elementos(json.loads(Path(a.osm).read_text(encoding='utf-8')), geo1936.cargar()),
-                                       clases.shape, a.escala)
-    res = vectorizar(clases, a.escala, plaza, calles_nuevas=nuevas, calles_hoy=calles_hoy)
+    red = None
+    if a.tramos:
+        red = {'tramos': json.loads(Path(a.tramos).read_text())['tramos'], 'edificado72': None}
+        if a.edificado_1772:
+            leida = cv2.imread(a.edificado_1772, cv2.IMREAD_UNCHANGED)
+            if leida is None or leida.shape != clases.shape:
+                raise SystemExit(f'{a.edificado_1772}: se esperaba una máscara de la forma de las clases')
+            red['edificado72'] = leida > 0
+    res = vectorizar(clases, a.escala, plaza, red=red)
     with open(a.salida, 'w') as f:
         json.dump(res, f)
     if a.patios and not cv2.imwrite(a.patios, mascara_de_patios(res, clases.shape)):

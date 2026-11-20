@@ -299,95 +299,9 @@ def test_cuadras_pegadas_en_el_plano_se_reparten_cada_una_por_sus_lados():
     assert len(lineas[(1.0, 0.0)]) == 3 and len(lineas[(-1.0, 0.0)]) == 3
 
 
-# --- las calles nuevas (tools/geo/calles_nuevas.py): la cuadra de antes, entera, y las de después ---
-
-def dos_manzanas_y_una_calle_nueva():
-    """Dos manzanas de 1936 (48 × 100 m) separadas por una calle de 8 m que en 1772 no existía."""
-    c = np.full((260, 260), CLASE['calle'], np.uint8)
-    c[30:230, 30:126] = CLASE['edificado']
-    c[30:230, 142:238] = CLASE['edificado']
-    nuevas = np.zeros(c.shape, bool)
-    nuevas[30:230, 126:142] = True
-    return c, nuevas
-
-
-def test_una_calle_nueva_da_la_cuadra_de_antes_entera_y_las_de_despues_partidas():
-    c, nuevas = dos_manzanas_y_una_calle_nueva()
-    res = vectorizar(c, METRO, plaza=(130, 130), calles_nuevas=nuevas)
-    assert len(res['junta']) == len(res['antes']) == len(res['techos'])
-    assert len(res['juntas']) == 1 and res['juntas'][0]
-    polis = poligonos(res)
-    calle = box(127, 60, 141, 200)
-    antes = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and a]
-    despues = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and not a]
-    assert antes and despues
-    assert sum(p.intersection(calle).area for p in antes) > 0.9 * calle.area      # antes, la calle era casas
-    assert sum(p.intersection(calle).area for p in despues) < 1                    # después, es calle
-    assert len({q for q, a in zip(res['cuadras'], res['antes']) if a}) == 1        # una sola cuadra antes
-    assert len({q for q, a in zip(res['cuadras'], res['antes']) if not a}) == 2    # dos después
-    assert res['manzanas'] == 2   # la cuadra de antes no se cuenta como otra manzana de 1936
-
-
-def test_una_calle_nueva_entre_cuadras_pegadas_une_solo_las_dos_cuadras_que_separa():
-    # tres cuadras que el plano une por un patio (una sola "manzana" de 1936) y una cuarta, del otro lado
-    # de una calle nueva: la cuadra de antes es la cuarta con su vecina, no toda la manzana
-    c = np.full((260, 540), CLASE['calle'], np.uint8)
-    for x0 in (30, 146, 262):
-        c[30:230, x0:x0 + 100] = CLASE['edificado']
-    c[60:68, 130:146] = CLASE['patio']
-    c[180:188, 246:262] = CLASE['patio']
-    c[30:230, 378:478] = CLASE['edificado']
-    nuevas = np.zeros(c.shape, bool)
-    nuevas[30:230, 362:378] = True
-    res = vectorizar(c, METRO, plaza=(270, 130), calles_nuevas=nuevas)
-    assert len(res['juntas']) == 1
-    polis = poligonos(res)
-    antes = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and a]
-    assert antes and min(p.bounds[0] for p in antes) > 250   # solo la tercera y la cuarta cuadra
-
-
 def test_sin_calles_nuevas_ningun_techo_tiene_junta():
     res = vectorizar(manzana_maciza(), METRO, plaza=(140, 140))
     assert set(res['junta']) == {-1} and set(res['antes']) == {0} and res['juntas'] == []
-
-
-def test_la_cuadra_de_antes_no_ocupa_una_cuadra_ajena_que_queda_encerrada():
-    from tools.geo.vectorizar import _cuadra_de_antes
-    # Arrange: la cuadra 1 es un anillo que encierra a la cuadra 2, que no es del grupo
-    cuadras = np.zeros((120, 120), np.int32)
-    cuadras[10:110, 10:110] = 1
-    cuadras[40:80, 40:80] = 2
-    calles = np.zeros((10, 10), bool)
-    grupo = {'manzanas': {1}, 'caja': (0, 10, 0, 10), 'calles': calles}
-    cajas = {1: (10, 10, 100, 100), 2: (40, 40, 40, 40)}
-
-    # Act
-    cuadra, (x0, y0) = _cuadra_de_antes(cuadras, cajas, grupo, METRO)
-
-    # Assert
-    ajena = cuadras[y0:y0 + cuadra.shape[0], x0:x0 + cuadra.shape[1]] == 2
-    assert not (cuadra & ajena).any()
-    assert cuadra[cuadras[y0:y0 + cuadra.shape[0], x0:x0 + cuadra.shape[1]] == 1].all()
-
-
-def test_una_plaza_nueva_ancha_tambien_era_casas_en_la_cuadra_de_antes():
-    # Arrange: dos manzanas de 25 × 80 m separadas por una plaza de 50 m que en 1772 era cuadra: lo edificado
-    # de 1936 es la mitad de la cuadra de antes, menos que lo que pide la cuadra modelo si la plaza no cuenta
-    c = np.full((240, 300), CLASE['calle'], np.uint8)
-    c[40:200, 50:100] = CLASE['edificado']
-    c[40:200, 200:250] = CLASE['edificado']
-    nuevas = np.zeros(c.shape, bool)
-    nuevas[40:200, 100:200] = True
-
-    # Act
-    res = vectorizar(c, METRO, plaza=(150, 120), calles_nuevas=nuevas)
-
-    # Assert: la cuadra de antes es una cuadra modelo entera; sus casas dan también a las calles de la plaza
-    assert len(res['juntas']) == 1
-    polis = poligonos(res)
-    antes = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and a]
-    plaza = box(100, 40, 200, 200)
-    assert sum(p.intersection(plaza).area for p in antes) > 0.3 * plaza.area
 
 
 def test_una_manzana_de_varias_cuadras_con_un_convento_se_separa_y_la_cuadra_de_casas_va_con_el_modelo():
@@ -423,23 +337,111 @@ def test_dos_cuadras_unidas_por_una_calle_pintada_de_jardin_se_cortan_por_la_cal
     assert sum(p.intersection(box(137, 40, 143, 220)).area for p in polis) < 20   # nada sobre la calle
 
 
-def test_lo_que_corta_la_calle_de_hoy_no_queda_con_el_numero_de_la_manzana_entera():
-    # la misma manzana cortada por la calle de hoy, y una calle nueva que la cruza por arriba: el jardín que
-    # se lleva el corte no puede seguir con el número de la manzana entera (no tiene caja y rompía los grupos)
-    c = np.full((260, 300), CLASE['calle'], np.uint8)
-    c[30:230, 30:250] = CLASE['edificado']
-    c[30:230, 130:150] = CLASE['verde']
-    calles_hoy = np.zeros(c.shape, bool)
-    calles_hoy[:, 137:143] = True
-    calles_nuevas = np.zeros(c.shape, bool)
-    calles_nuevas[14:30, 30:250] = True
-    res = vectorizar(c, METRO, plaza=(140, 130), calles_nuevas=calles_nuevas, calles_hoy=calles_hoy)
-    assert res['manzanas'] == 1
+# --- la red de calles (tools/geo/caras.py): las cuadras por las caras de la red ---
+
+def red_de(lineas, clases, edificado72=None):
+    """La red clasificada de unas calles contra un plano de 1936 (y, si se da, lo edificado de 1772)."""
+    import cv2
+    from tools.geo.caras import clasificar, tramos_de
+    lejos = None if edificado72 is None else cv2.distanceTransform(edificado72.astype(np.uint8), cv2.DIST_L2, 5) * METRO
+    return {'tramos': clasificar(tramos_de(lineas), clases == CLASE['calle'], METRO, edificado72=edificado72, lejos72_m=lejos),
+            'edificado72': edificado72}
 
 
-def test_calles_de_osm_se_dibujan_en_la_mascara_del_mosaico():
-    from tools.geo.vectorizar import mascara_de_calles
-    elems = [{'capa': 'calle', 'area': False, 'lineas': [np.array([[10.0, 50.0], [190.0, 50.0]])]},
-             {'capa': 'agua', 'area': False, 'lineas': [np.array([[10.0, 150.0], [190.0, 150.0]])]}]
-    m = mascara_de_calles(elems, (200, 200), METRO)
-    assert m[50, 100] and m[48, 100] and not m[150, 100]
+def marco_de_calles(x0, y0, x1, y1):
+    return [np.array(p, float) for p in ([[x0, y0], [x1, y0]], [[x1, y0], [x1, y1]], [[x1, y1], [x0, y1]], [[x0, y1], [x0, y0]])]
+
+
+def cuadra_fea():
+    """Una cuadra de 100 × 100 m con el borde muy dentado y una plaza de 30 × 40 m abierta al norte; las
+    calles (de 10 m) van por x, y = 20 y 240."""
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    rng = np.random.default_rng(7)
+    for k in range(34, 222, 18):         # dientes de hasta 4 m en los cuatro bordes
+        d = int(rng.integers(2, 9))
+        if not 100 <= k <= 165:
+            c[30:30 + d, k:k + 5] = CLASE['calle']
+        c[230 - d:230, k:k + 5] = CLASE['calle']
+        c[k:k + 5, 30:30 + d] = CLASE['calle']
+        c[k:k + 5, 230 - d:230] = CLASE['calle']
+    c[30:110, 100:160] = CLASE['calle']  # la plaza
+    return c
+
+
+def test_sin_la_red_una_cuadra_dentada_y_con_muesca_no_se_reparte_por_lados():
+    from tools.geo.lados import lotes_por_lados
+    assert lotes_por_lados(cuadra_fea() == CLASE['edificado'], METRO, 1) is None
+
+
+def test_con_la_red_una_cuadra_dentada_y_con_muesca_se_reparte_por_los_lados_de_su_cara():
+    c = cuadra_fea()
+    res = vectorizar(c, METRO, plaza=(130, 130), red=red_de(marco_de_calles(20, 20, 240, 240), c))
+    assert res['techos'] and len(res['marcos']) == len(res['techos'])
+    for m in res['marcos']:
+        assert min(abs(m[3]), abs(m[4])) < 1e-6          # el frente, paralelo a su calle
+    al_norte = [m for m in res['marcos'] if m[3] > 0.99]
+    en_la_calle = [m for m in al_norte if abs(m[2] - 30) < 1.5]
+    en_la_plaza = [m for m in al_norte if abs(m[2] - 110) < 1.5]
+    assert en_la_calle and en_la_plaza and len(en_la_calle) + len(en_la_plaza) == len(al_norte)
+    for otros, k, donde in ((-0.99, 2, 230), ):
+        al_sur = [m for m in res['marcos'] if m[3] < otros]
+        assert al_sur and all(abs(m[k] - donde) < 1.5 for m in al_sur)   # una sola línea de fachada, pese a los dientes
+
+
+def test_un_tramo_que_no_estaba_en_1936_no_corta_las_casas():
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    lineas = marco_de_calles(20, 20, 240, 240) + [np.array([[130, 20], [130, 240]], float)]   # una avenida de después
+    res = vectorizar(c, METRO, plaza=(130, 130), red=red_de(lineas, c))
+    assert len({q for q in res['cuadras'] if q >= 0}) == 1
+    assert sum(p.intersection(box(128, 60, 132, 200)).area for p in poligonos(res)) > 500
+
+
+def test_con_la_red_una_calle_nueva_da_la_cuadra_de_antes_entera():
+    # dos cuadras de 1936 (48 × 100 m) separadas por una calle de 8 m que en 1772 era cuadra
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:122] = CLASE['edificado']
+    c[30:230, 138:230] = CLASE['edificado']
+    ed72 = np.zeros(c.shape, bool)
+    ed72[30:230, 30:230] = True
+    lineas = marco_de_calles(20, 20, 240, 240) + [np.array([[130, 20], [130, 240]], float)]
+    res = vectorizar(c, METRO, plaza=(130, 130), red=red_de(lineas, c, ed72))
+    assert len(res['juntas']) == 1 and res['juntas'][0]
+    polis = poligonos(res)
+    calle = box(123, 60, 137, 200)
+    antes = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and a]
+    despues = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and not a]
+    assert antes and despues and all(j == 0 for j in res['junta'] if j >= 0)
+    assert sum(p.intersection(calle).area for p in antes) > 0.9 * calle.area
+    assert sum(p.intersection(calle).area for p in despues) < 1
+    assert len({q for q, a in zip(res['cuadras'], res['antes']) if a}) == 1
+    assert len({q for q, a in zip(res['cuadras'], res['antes']) if not a}) == 2
+    # la cuadra de antes da solo a las cuatro calles de afuera: nadie mira a la calle nueva
+    de_antes = [m for m in res['marcos'] if res['antes'][m[0]]]
+    assert all(min(abs(m[1] - 30), abs(m[1] - 230), abs(m[2] - 30), abs(m[2] - 230)) < 1.5 for m in de_antes)
+
+
+def test_con_la_red_un_pasaje_abierto_despues_se_rellena_en_la_cuadra_de_antes():
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    c[30:150, 120:136] = CLASE['calle']     # un pasaje de 8 m que entra 60 m desde el norte; en 1772 no estaba
+    ed72 = np.zeros(c.shape, bool)
+    ed72[30:230, 30:230] = True
+    res = vectorizar(c, METRO, plaza=(130, 130), red=red_de(marco_de_calles(20, 20, 240, 240), c, ed72))
+    assert len(res['juntas']) == 1
+    polis = poligonos(res)
+    pasaje = box(121, 40, 135, 140)
+    antes = [p for p, a in zip(polis, res['antes']) if a]
+    despues = [p for p, j, a in zip(polis, res['junta'], res['antes']) if j == 0 and not a]
+    assert sum(p.intersection(pasaje).area for p in antes) > 0.9 * pasaje.area
+    assert despues and sum(p.intersection(pasaje).area for p in despues) < 1
+
+
+def test_una_plaza_que_ya_estaba_en_1772_no_se_rellena():
+    c = cuadra_fea()
+    ed72 = np.zeros(c.shape, bool)
+    ed72[30:230, 30:230] = True
+    ed72[30:110, 100:160] = False           # la plaza ya era plaza
+    res = vectorizar(c, METRO, plaza=(130, 130), red=red_de(marco_de_calles(20, 20, 240, 240), c, ed72))
+    assert res['juntas'] == [] and set(res['antes']) == {0}
