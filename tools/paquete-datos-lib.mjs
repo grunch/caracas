@@ -78,3 +78,10 @@ export function exigirCompleto(manifiesto) {
     throw new Error('public/ tiene la muestra (1 km² para los E2E), no los datos completos: bájalos con npm run datos:bajar o regéneralos con npm run datos')
   }
 }
+
+/**
+ * Lo que se le pasa a `gh` para desplegar Pages después de publicar un release de datos. Va sobre main
+ * porque el entorno github-pages solo acepta main: un workflow que arranca por el release corre sobre la
+ * etiqueta y se rechaza.
+ */
+export const argsDeDespliegue = (repo) => ['workflow', 'run', 'pages.yml', '--ref', 'main', '--repo', repo]

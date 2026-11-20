@@ -1,7 +1,9 @@
 import { describe, test, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
 import {
   rutaSegura, archivosDelPaquete, elegirRelease, revisarListado, sumasQueNoCoinciden, etiquetaDeDatos, exigirCompleto,
   ACTIVO, ACTIVO_MUESTRA, MANIFIESTO,
+  argsDeDespliegue,
 } from '../../tools/paquete-datos-lib.mjs'
 
 const manifiesto = {
@@ -140,5 +142,18 @@ describe('exigirCompleto', () => {
 
   test('el manifiesto de los datos completos pasa', () => {
     expect(() => exigirCompleto({ conteos: { techos: 1 }, archivos: { 'public/datos/ciudad.pak': 'abc' } })).not.toThrow()
+  })
+})
+
+describe('despliegue al publicar', () => {
+  test('pide el workflow de Pages sobre main, que es lo único que el entorno github-pages deja desplegar', () => {
+    expect(argsDeDespliegue('grunch/caracas')).toEqual(['workflow', 'run', 'pages.yml', '--ref', 'main', '--repo', 'grunch/caracas'])
+  })
+
+  test('pages.yml no arranca con un release: correría sobre la etiqueta y el entorno lo rechaza', () => {
+    const flujo = readFileSync(new URL('../../.github/workflows/pages.yml', import.meta.url), 'utf8')
+    const disparadores = flujo.slice(flujo.indexOf('\non:'), flujo.indexOf('\npermissions:'))
+    expect(disparadores).not.toMatch(/release/)
+    expect(disparadores).toMatch(/workflow_dispatch/)
   })
 })
