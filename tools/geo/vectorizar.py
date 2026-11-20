@@ -169,6 +169,10 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
         figura = poligono_de(mascara, (x + zona[1].start, y + zona[0].start), tolerancia_px)
         if figura is None:
             continue
+        if poligono is not None:
+            figura = figura.intersection(Polygon(np.asarray(poligono) + (x, y)))
+            if figura.is_empty or figura.geom_type != 'Polygon' or figura.area < area_min_px:
+                continue
         semilla = semilla_de(figura.centroid.x, figura.centroid.y)
         agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla,
                       esquina=lote['esquina'], cuadra=salida['n_cuadras'] - 1, cede=publico_que_pisa(salida['publicos'], figura))
@@ -342,7 +346,10 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas
             continue
         bx0, by0, bx1, by1 = cara.bounds
         x0, y0, x1, y1 = max(0, int(bx0)), max(0, int(by0)), min(ancho, int(bx1) + 2), min(alto, int(by1) + 2)
-        if x1 - x0 < 4 or y1 - y0 < 4 or not edificado72[y0:y1, x0:x1].any():
+        documentada = next((p for p in completas if es_completa(cara, [p])), None)
+        if x1 - x0 < 4 or y1 - y0 < 4:
+            continue
+        if documentada is None and not edificado72[y0:y1, x0:x1].any():
             continue
         cl = clases[y0:y1, x0:x1]
         dentro = np.zeros(cl.shape, np.uint8)
@@ -354,13 +361,13 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas
             continue
         en_poligono = _relleno(poligono, cl.shape) & dentro
         calle = cl == CLASE['calle']
-        documentada = es_completa(cara, completas)
         plaza_vieja = _sin_astillas(en_poligono & calle & ~edificado72[y0:y1, x0:x1], metro, PLAZA_VIEJA_M2)
-        if documentada:
-            plaza_vieja = np.zeros(cl.shape, bool)
+        if documentada is not None:
+            evidencia = _relleno(np.asarray(documentada.exterior.coords) - (x0, y0), cl.shape)
+            plaza_vieja &= ~evidencia
         cuadra = en_poligono & (de_manzana | calle) & ~plaza_vieja
         abierto = _sin_astillas(cuadra & calle, metro)
-        if not documentada and abierto.sum() * metro ** 2 < ABIERTO_MINIMO_M2:
+        if documentada is None and abierto.sum() * metro ** 2 < ABIERTO_MINIMO_M2:
             continue
         # las cuadras de 1936 que reemplaza: las que caen casi enteras adentro; lo de las demás (una miga con el
         # número de la cuadra de enfrente) no es de esta
@@ -375,7 +382,7 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas
                 or lotes_por_lados(cuadra, metro, 0, poligono) is None:
             continue
         salida.append({'miembros': miembros, 'cuadra': cuadra, 'origen': (x0, y0), 'clases': de_antes,
-                       'poligono': poligono, 'abierto': abierto & cuadra, 'minimo': 2 if documentada else 1})
+                       'poligono': poligono, 'abierto': abierto & cuadra, 'minimo': 2 if documentada is not None else 1})
     return salida
 
 
