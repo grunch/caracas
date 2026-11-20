@@ -127,3 +127,27 @@ describe('zonasDeSupresion', () => {
     expect(zonas[2].poligono).toEqual(cuadrado(20, 20, 5))
   })
 })
+
+describe('los solares junto a un hito no borran fachadas', () => {
+  const casaConSolar = () => ({
+    vertices: new Float32Array([0,0,10,0,10,40,0,40]),
+    techos: new Uint32Array([0,4,1,3]), vida: new Uint32Array([1]),
+    marcos: new Float32Array([0,0,0,1,0,10,40,0,8,0,2]),
+    alas: new Float32Array([2,0,0,10,8, 1,0,8,10,40]),
+    historia: new Uint8Array([16,16,16,16,16,16]),
+  })
+  test('conserva la casa si solo su solar toca el monumento', () => {
+    const vida = suprimirTechos(casaConSolar(), [{ poligono: cuadrado(2,30,5), desde:1, hasta:0 }])
+    expect([...vida]).toEqual([1])
+  })
+  test('sigue suprimiendo una crujía que invade el monumento', () => {
+    const vida = suprimirTechos(casaConSolar(), [{ poligono: cuadrado(2,2,5), desde:1, hasta:0 }])
+    expect([...vida]).toEqual([NUNCA])
+  })
+  test('si después se construye sobre el solar, suprime desde esa época', () => {
+    const ciudad = casaConSolar()
+    ciudad.historia[4] = ciudad.historia[5] = 4 + 16 * 3
+    const vida = suprimirTechos(ciudad, [{ poligono: cuadrado(2,30,5), desde:1, hasta:0 }])
+    expect([...vida]).toEqual([1 + 8 * 4])
+  })
+})
