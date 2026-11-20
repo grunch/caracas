@@ -46,3 +46,13 @@ la implementación. Vitest completo: 72 archivos, 1.293 casos aprobados. Python
 completo: 556 aprobados. Playwright completo: 71 aprobados y uno omitido
 (21,5 minutos, salida 0), sobre una muestra generada desde el manifiesto
 corregido y con puerto exclusivo 5228.
+
+
+Tras integrar el Panteón (#87), se repitió la validación con el mismo código
+de producción que `main` en `311fcc7`: Vitest 73 archivos/1296 casos y Python
+556 casos aprobados. La prueba de identificadores de cubierta mostró una
+carrera: `lab.ready` anuncia el visor antes de que llegue `ciudad.pak`. Ahora
+espera que aparezca `#alzar`, que se muestra después de incorporar las casas
+a la escena. Se conserva la exigencia de píxeles de techo y de IDs distintos.
+La suite completa posterior aprobó 72 casos de navegador y omitió uno
+(12,8 minutos, salida 0). No cambió la geometría ni se publicó un release.
