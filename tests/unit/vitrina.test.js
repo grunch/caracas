@@ -12,6 +12,13 @@ describe('ordenDeVitrina', () => {
     expect(ordenDeVitrina(evento({ vitrina: { girar: false } }), ORIGEN)).toEqual({ tipo: 'girar', si: false })
   })
 
+  test('la pregunta «¿lista?» de la página que la embebe (la que escucha tarde), solo del mismo origen', () => {
+    expect(ordenDeVitrina(evento({ vitrina: '¿lista?' }), ORIGEN)).toEqual({ tipo: 'pregunta' })
+    expect(ordenDeVitrina(evento({ vitrina: '¿lista?' }, 'https://otro.example'), ORIGEN)).toBeNull()
+    expect(ordenDeVitrina(evento({ vitrina: 'lista' }), ORIGEN)).toBeNull()
+    expect(ordenDeVitrina(evento({ vitrina: '¿otra?' }), ORIGEN)).toBeNull()
+  })
+
   test('descarta lo que viene de otro origen, lo que no es de la vitrina y lo malformado', () => {
     expect(ordenDeVitrina(evento({ vitrina: { ir: 'catedral' } }, 'https://otro.example'), ORIGEN)).toBeNull()
     expect(ordenDeVitrina(evento({ otra: 1 }), ORIGEN)).toBeNull()

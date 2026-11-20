@@ -70,3 +70,20 @@ test('la época pedida antes de que cargue la línea de tiempo se aplica cuando 
   soltar()
   await expect.poll(() => marco.evaluate(() => window.lab.lineaDeTiempo?.actual ?? null), { timeout: 20000 }).toBe(otro.epoca)
 })
+
+// postMessage no guarda mensajes: si el «lista» del visor llega antes de que edificios.js escuche, la página
+// pregunta al instalar su oyente y el visor contesta
+test('si el visor avisa «lista» antes de que la página escuche, la página igual se entera', async ({ page }) => {
+  test.setTimeout(150000)
+  let soltar
+  const suelta = new Promise((ok) => { soltar = ok })
+  await page.route('**/src/edificios.js*', async (ruta) => { await suelta; await ruta.continue() })
+  await page.goto('/edificios.html', { waitUntil: 'commit' })
+  // el visor arranca y avisa mientras el módulo de la página sigue retenido
+  await expect.poll(async () => {
+    const marco = page.frames().find((f) => f.url().includes('vitrina'))
+    return marco ? marco.evaluate(() => window.lab?.ready === true).catch(() => false) : false
+  }, { timeout: 120000 }).toBe(true)
+  soltar()
+  await page.waitForFunction(() => window.lab?.visorListo === true, null, { timeout: 20000 })
+})

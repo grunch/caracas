@@ -488,7 +488,12 @@ if (params.has('vitrina')) {
   addEventListener('message', (e) => {
     const orden = ordenDeVitrina(e, location.origin)
     if (!orden) return
-    if (orden.tipo === 'ir' && porId.has(orden.id)) {
+    // la página que embebe pudo empezar a escuchar después del aviso «lista» (postMessage no guarda mensajes):
+    // pregunta y se le contesta. El oyente se instala en el mismo tramo sin esperas que termina en el aviso: cuando
+    // atiende una pregunta, el visor ya está listo
+    if (orden.tipo === 'pregunta') {
+      if (e.source === window.parent && window.parent !== window) window.parent.postMessage({ vitrina: 'lista' }, location.origin)
+    } else if (orden.tipo === 'ir' && porId.has(orden.id)) {
       const m = porId.get(orden.id)
       const destino = { x: m.x, z: m.z, dist: VITRINA.dist, pitch: VITRINA.pitch }
       if (sinAnimar.matches) cam.jump(destino); else cam.volar(destino)

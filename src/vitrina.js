@@ -10,11 +10,13 @@ const MAX_EPOCA = AÑOS_DE_EPOCA.length - 1
 
 /**
  * La orden de un MessageEvent, o null. Solo del mismo origen (`origen`, location.origin) y solo las conocidas:
- * { vitrina: { ir: 'id' } } · { vitrina: { epoca: n } } · { vitrina: { levantar: true } } · { vitrina: { girar: bool } }.
+ * { vitrina: { ir: 'id' } } · { vitrina: { epoca: n } } · { vitrina: { levantar: true } } · { vitrina: { girar: bool } },
+ * y la pregunta { vitrina: '¿lista?' } de la página que empezó a escuchar después del aviso «lista».
  */
 export function ordenDeVitrina(evento, origen) {
   if (evento?.origin !== origen) return null
   const v = evento.data?.vitrina
+  if (v === '¿lista?') return { tipo: 'pregunta' }
   if (!v || typeof v !== 'object') return null
   if ('ir' in v) return typeof v.ir === 'string' && ID.test(v.ir) ? { tipo: 'ir', id: v.ir } : null
   if ('epoca' in v) return Number.isInteger(v.epoca) && v.epoca >= 0 && v.epoca <= MAX_EPOCA ? { tipo: 'epoca', indice: v.epoca } : null

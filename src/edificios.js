@@ -36,12 +36,15 @@ function mostrar(s) {
   mandar({ ir: s.id })
 }
 
-// el visor avisa cuando está listo; recién ahí recibe órdenes
+// el visor avisa cuando está listo; recién ahí recibe órdenes. Si avisó antes de que este módulo escuchara
+// (el iframe carga en paralelo), se le pregunta: contesta «lista» si ya lo está; si no, avisará al terminar
 addEventListener('message', (e) => {
   if (e.origin !== location.origin || e.source !== vitrina.contentWindow || e.data?.vitrina !== 'lista') return
+  if (visorListo) return
   visorListo = true
   mostrar(pendiente ?? secciones[0])
 })
+mandar('¿lista?')
 
 // el edificio que se lee: el que cruza la franja del medio de la ventana
 const porId = new Map(secciones.map((s) => [s.id, s]))
