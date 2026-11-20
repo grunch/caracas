@@ -11,13 +11,13 @@
  * en las paredes, techo = [lo que sube este vértice con el pretil, lo que sube su pared, 0, 0].
  */
 import { ShapeUtils, Vector2 } from 'three'
-import { CUBIERTA, alturaDe, faldonEn } from './techos.js'
+import { CUBIERTA, alturaDe, bajadaEn, faldonEn } from './techos.js'
 import { areaConSigno, recortar, recortarConvexo, cruces, estaDentro } from './poligono.js'
 
 const SIN_TECHO = [0, 0, 0, CUBIERTA.PARED]
 const ALTO_MINIMO_CON_VANOS_M = 2
 const ESCALON_MINIMO_M = 0.03
-const TOLERANCIA_CUMBRE_M = 1e-6 // un vértice así de poco más allá de la cumbre no parte el faldón
+const TOLERANCIA_CUMBRE_M = 1e-6 // un vértice así de poco más allá de un quiebre no parte el faldón
 export const PISO_PATIO_M = 0.4
 const SUBIDA_DE_HASTIAL_M = 0.3
 const HACIA_AFUERA = 0.7 // coseno desde el cual un lado "mira" hacia un costado del lote
@@ -67,21 +67,32 @@ const vueloDe = ({ plan, libres }, f) => (plan.alero > 0 && f.tan > 0 && !f.huec
 const largoConAlero = (casa, f) => largoFaldon(f) + vueloDe(casa, f) * Math.hypot(1, f.tan)
 
 /**
- * Un faldón no pasa de su cumbre (src/techos.js: `alturaDe`): si la huella cruza la línea de la cumbre (un ala
- * estirada fuera del lote, src/alas.js), se parte ahí en lo que cae y lo que sigue plano, cada pedazo con su
- * propia normal. Si no, los triángulos interpolarían una sola pendiente por encima de las dos y el tejado quedaría
- * por debajo de sus paredes.
+ * Las líneas donde `alturaDe` se quiebra en un faldón estirado (src/techos.js): la de su cumbre (bajada 0) y, si
+ * la tiene, la de su alero (`f.bajada`). Más allá de cada una sigue plano. → [bajada, …]
+ */
+const quiebres = (f) => (f.hueco || !(f.tan > 0) ? [] : [0, ...(Number.isFinite(f.bajada) ? [f.bajada] : [])])
+
+/**
+ * El faldón recortado, partido en sus quiebres en lo que sigue plano y lo que cae, cada pedazo con su normal.
+ * Si no, los triángulos interpolarían una sola pendiente por encima del quiebre y el tejado se despegaría de
+ * sus paredes.
  */
 function pedazosDeFaldon(f, poligono) {
   const plano = [0, 1, 0]
-  if (f.hueco || f.tan === 0) return [{ poligono, n: normalFaldon(f) }]
+  const enPlano = (p) => sinRepetidos(p)
   const [a, b] = f.caida
-  const c = -(a * f.origen[0] + b * f.origen[1])
-  if (poligono.every(([u, v]) => a * u + b * v + c >= -TOLERANCIA_CUMBRE_M)) return [{ poligono, n: normalFaldon(f) }]
-  return [
-    { poligono: sinRepetidos(recortar(poligono, a, b, c)), n: normalFaldon(f) },
-    { poligono: sinRepetidos(recortar(poligono, -a, -b, -c)), n: plano },
-  ].filter((p) => p.poligono.length >= 3)
+  let pedazos = [{ poligono, n: normalFaldon(f) }]
+  for (const d of quiebres(f)) {
+    const c = -(a * f.origen[0] + b * f.origen[1]) - d // a·u + b·v + c = bajada − d
+    const cruza = (p) => p.some(([u, v]) => a * u + b * v + c > TOLERANCIA_CUMBRE_M) && p.some(([u, v]) => a * u + b * v + c < -TOLERANCIA_CUMBRE_M)
+    pedazos = pedazos.flatMap((pedazo) => {
+      if (!cruza(pedazo.poligono)) return [pedazo]
+      // el lado que queda plano: antes de la cumbre (d = 0) o pasado el alero
+      const [alto, bajo] = [enPlano(recortar(pedazo.poligono, -a, -b, -c)), enPlano(recortar(pedazo.poligono, a, b, c))]
+      return d === 0 ? [{ poligono: bajo, n: pedazo.n }, { poligono: alto, n: plano }] : [{ poligono: alto, n: pedazo.n }, { poligono: bajo, n: plano }]
+    })
+  }
+  return pedazos.filter((p) => p.poligono.length >= 3)
 }
 
 /** Los tejados (y el piso de los patios): cada faldón recortado con la huella y subido a su plano. */
@@ -132,27 +143,31 @@ function alero(salida, f, p0, p1, n, vuelo) {
   const largo = largoFaldon(f) + vuelo * Math.hypot(1, f.tan)
   const afuera = (p) => [p[0] + n[0] * vuelo, p[1] + n[1] * vuelo]
   const puntos = [p0, p1, afuera(p1), afuera(p0)]
+  // arranca a la altura del tejado en la pared y sigue cayendo con su pendiente (aunque el faldón, estirado, siga plano)
+  const cae = f.tan * vuelo * (n[0] * f.caida[0] + n[1] * f.caida[1])
+  const alturas = [alturaDe(f, ...p0), alturaDe(f, ...p1)]
+  const altos = [alturas[0], alturas[1], alturas[1] - cae, alturas[0] - cae]
   for (const [cara, cubierta] of [[normal, f.cubierta + CUBIERTA.VOLADA], [ABAJO, CUBIERTA.ALERO]]) {
-    const v = puntos.map(([u, w]) => salida.vertice(u, w, alturaDe(f, u, w), cara, [0, 0, 0], [...coordsFaldon(f, u, w), largo, cubierta]))
+    const v = puntos.map(([u, w], k) => salida.vertice(u, w, altos[k], cara, [0, 0, 0], [...coordsFaldon(f, u, w), largo, cubierta]))
     salida.triangulo(v[0], v[1], v[2], cara)
     salida.triangulo(v[0], v[2], v[3], cara)
   }
 }
 
 /**
- * Dónde cruza el segmento a→b la línea de la cumbre de un faldón, dentro de él (0 < t < 1): ahí `alturaDe` se
- * quiebra (lo estirado sigue plano), así que una pared o un escalón también se parten ahí para llegar al tejado.
+ * Dónde cruza el segmento a→b un quiebre de un faldón (su cumbre o su alero), dentro de él (0 < t < 1): ahí
+ * `alturaDe` se quiebra (lo estirado sigue plano), así que una pared o un escalón también se parten ahí.
  */
 function cumbres(a, b, faldones) {
   const ts = []
   for (const f of faldones) {
-    if (f.hueco || !(f.tan > 0)) continue
-    const lejos = (p) => (p[0] - f.origen[0]) * f.caida[0] + (p[1] - f.origen[1]) * f.caida[1]
-    const [da, db] = [lejos(a), lejos(b)]
-    if (da < 0 === db < 0) continue
-    const t = da / (da - db)
-    const p = mezcla(a, b, t)
-    if (t > 1e-6 && t < 1 - 1e-6 && estaDentro(f.region, p[0], p[1])) ts.push(t)
+    for (const d of quiebres(f)) {
+      const [da, db] = [bajadaEn(f, ...a) - d, bajadaEn(f, ...b) - d]
+      if (da < 0 === db < 0) continue
+      const t = da / (da - db)
+      const p = mezcla(a, b, t)
+      if (t > 1e-6 && t < 1 - 1e-6 && estaDentro(f.region, p[0], p[1])) ts.push(t)
+    }
   }
   return ts
 }

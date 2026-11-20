@@ -60,8 +60,12 @@ export function leerMarcos({ marcos = null, alas = null }, coords) {
 export const esDePatio = (estilo, semilla, epoca) => ESTILOS_DE_PATIO.includes(estilo) && cubiertaDe(estilo, semilla, epoca) === CUBIERTA.TEJA
 
 const caja = ({ u0, u1, v0, v1 }) => [[u0, v0], [u1, v0], [u1, v1], [u0, v1]]
-// `base` es la región sin estirar: de ahí sale el largo del faldón (src/alzado.js)
-const faldon = (region, base, cubierta, cumbre, origen, caida, tan, extra = {}) => ({ region, base, cubierta, cumbre, origen, caida, tan, borde: 0, ...extra })
+// `base` es la región sin estirar: de ahí sale el largo del faldón (src/alzado.js) y hasta dónde baja (`bajada`,
+// en planta: más allá del alero, lo estirado sigue plano; src/techos.js)
+const faldon = (region, base, cubierta, cumbre, origen, caida, tan, extra = {}) => ({
+  region, base, cubierta, cumbre, origen, caida, tan, borde: 0,
+  bajada: Math.max(...base.map(([u, v]) => (u - origen[0]) * caida[0] + (v - origen[1]) * caida[1])), ...extra,
+})
 const hueco = (a, e, piso) => faldon(caja(e), caja(a), CUBIERTA.PARED, 0, [a.u0, a.v0], [0, 0], 0, {
   borde: piso === CUBIERTA.SOLAR ? TAPIA_SOLAR_M : TAPIA_M, hueco: true, piso,
 })

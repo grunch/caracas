@@ -419,3 +419,15 @@ describe('un ala que llega casi al borde del lote', () => {
     expect(faldonEn(plan, 5, 63.9)?.piso).toBe(CUBIERTA.SOLAR)
   })
 })
+
+describe('un ala estirada por delante de su fachada', () => {
+  test('el faldón no baja de su alero: lo estirado más allá sigue plano a esa altura (no se mete bajo tierra)', () => {
+    const plan = planDeAlas({
+      ancho: 12, fondo: 30, estilo: 0, pisos: 1, semilla: 5,
+      alas: [ala(ALA.FRENTE, 0, 0, 12, 8), ala(ALA.PATIO, 0, 8, 12, 30)],
+    })
+    const delFrente = plan.faldones.find((f) => !f.hueco && f.caida[1] === -1)
+    expect(alturaDe(delFrente, 6, 0)).toBeCloseTo(plan.alto, 9) // en la fachada, el alero
+    expect(alturaDe(delFrente, 6, -20)).toBeCloseTo(plan.alto, 9) // 20 m por delante, a la misma altura
+  })
+})

@@ -254,4 +254,26 @@ describe('alzarCasa: un ala estirada fuera de su lote', () => {
     const enLaCumbre = salida.vertices.filter((v) => esPared(v) && Math.abs(v.u) < 1e-6 && Math.abs(v.v - 16) < 1e-6)
     expect(Math.max(...enLaCumbre.map((v) => v.y))).toBeCloseTo(alturaDe(lateral, 0, 16), 6)
   })
+
+  test('la huella que sale por delante de la fachada: el tejado sigue plano a la altura del alero, sin hundirse', () => {
+    // Arrange: un lote de esquina en triángulo; su huella sale 10 m por delante del marco
+    const plan = planDeAlas({
+      ancho: 12, fondo: 30, estilo: COLONIAL, pisos: 1, semilla: 5,
+      alas: [ala(ALA.FRENTE, 0, 0, 12, 8), ala(ALA.PATIO, 0, 8, 12, 30)],
+    })
+    const salida = recolector()
+
+    // Act
+    alzarCasa({ anillo: [[0, -10], [12, 0], [12, 30], [0, 30]], plan, libres: {} }, salida)
+
+    // Assert: nada del tejado (ni de las paredes) queda bajo el alero, y cada triángulo de tejado está en su faldón
+    const tejas = salida.vertices.filter((v) => v.cubierta === CUBIERTA.TEJA)
+    expect(Math.min(...tejas.map((v) => v.y))).toBeGreaterThan(plan.alto - 1e-6)
+    expect(Math.min(...salida.vertices.filter((v) => esPared(v) && v.y > 0 && v.v < 7.9).map((v) => v.y))).toBeGreaterThan(plan.alto - 1e-6) // (la crujía; atrás, la tapia del patio)
+    const tejados = salida.triangulos.map((t) => [t.a, t.b, t.c].map((k) => salida.vertices[k])).filter((vs) => vs.every((v) => v.cubierta === CUBIERTA.TEJA))
+    for (const vs of tejados) {
+      const [u, v, y] = ['u', 'v', 'y'].map((c) => (vs[0][c] + vs[1][c] + vs[2][c]) / 3)
+      expect(plan.faldones.filter((f) => !f.hueco).some((f) => Math.abs(alturaDe(f, u, v) - y) < 1e-6), `(${u.toFixed(2)}, ${v.toFixed(2)})`).toBe(true)
+    }
+  })
 })
