@@ -94,3 +94,21 @@ def test_cli_no_sobrescribe_la_entrada(tmp_path, monkeypatch):
     with pytest.raises(SystemExit):
         main()
     assert entrada.read_bytes() == original
+
+
+def test_cli_escribe_utf8_con_codificacion_local_distinta(tmp_path, monkeypatch):
+    import json
+    import sys
+    from pathlib import Path
+    from auditar_huellas import main
+    entrada, salida = tmp_path / 'entrada.json', tmp_path / 'informe.json'
+    entrada.write_bytes(json.dumps(ciudad([])).encode('utf-8'))
+    escribir = Path.write_text
+
+    def escribir_cp1252(self, data, encoding=None, errors=None, newline=None):
+        return escribir(self, data, encoding=encoding or 'cp1252', errors=errors, newline=newline)
+
+    monkeypatch.setattr(Path, 'write_text', escribir_cp1252)
+    monkeypatch.setattr(sys, 'argv', ['auditar_huellas', str(entrada), str(salida), '--epoca', '1', '--metro', '1'])
+    main()
+    assert 'histórica' in json.loads(salida.read_bytes())['alcance']

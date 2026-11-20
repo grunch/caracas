@@ -82,7 +82,7 @@ def main():
     informe['entrada_sha256'] = hashlib.sha256(datos).hexdigest()
     informe['alcance'] = 'Huellas de entrada; no certifica cubiertas, accesos ni correspondencia histórica.'
     args.salida.parent.mkdir(parents=True, exist_ok=True)
-    args.salida.write_text(json.dumps(informe, ensure_ascii=False, indent=2) + '\n')
+    args.salida.write_text(json.dumps(informe, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f"{informe['visibles']} visibles; {len(informe['invalidas'])} inválidas; "
           f"{len(informe['solapes'])} pares con solape sobre el umbral")
 

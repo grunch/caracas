@@ -221,12 +221,73 @@ Siguen pendientes el enlace de todos los frentes del original y la inspección d
 ## Validación de la entrega
 
 - `npx vitest run`: 71 archivos, 1.290 tests aprobados.
-- Python del proyecto, `-m pytest tools/geo/tests -q`: 539 tests aprobados.
+- Python del proyecto, `-m pytest tools/geo/tests -q`: 540 tests aprobados tras añadir la regresión de codificación local.
 - Los 118 archivos de B1772-001 mantienen sus hashes tras las mediciones y las capturas.
 - `git diff --check` sin errores. Cambio productivo: 91 líneas nuevas de instrumentación, sin cambiar geometría ni el visor.
+
+La [receta reproducible](#recrear-la-configuración-e2e-de-muestra) crea las configuraciones antes de ejecutar Playwright.
 
 Para E2E se genera la muestra de 1 km² con `armarMuestra` de `tools/muestra.mjs`, en `.cache/e2e-muestra`, conservando `public/` completo intacto. La muestra tiene 3.148 techos y 1.198 árboles. Vite usa ese `publicDir`, puerto exclusivo 5227, y Playwright usa un trabajador y `reuseExistingServer: false`. Los archivos de configuración temporales importan los del proyecto; no se cambian tests ni expectativas. Esta ejecución tiene el alcance de la muestra de CI, no de toda Caracas.
 
 Los intentos previos con todos los datos no completaron la suite: hubo tiempos agotados y un fallo de lectura alfa bajo render por software. Un primer intento con muestra terminó antes del resumen; el siguiente reutilizó su servidor y perdió la conexión al cerrarse aquel. Se reinició con servidor exclusivo. Estos intentos no se cuentan como ejecuciones verdes ni como nuevos defectos causados por el auditor, que no modifica la aplicación.
 
-Resultado final: `npx playwright test --config .cache/playwright-muestra.config.mjs` terminó con código 0: **71 passed, 1 skipped (12,2 min)**. El total aprobado incluye la falla esperada T41b que ya declara la suite; no se corrigió ni ocultó esa limitación aquí.
+Resultado final tras las correcciones de revisión: `npx playwright test --config .cache/playwright-muestra.config.mjs` terminó con código 0: **71 passed, 1 skipped (17,5 min)**. El total aprobado incluye la falla esperada T41b que ya declara la suite; no se corrigió ni ocultó esa limitación aquí.
+
+
+### Recrear la configuración E2E de muestra
+
+Desde la raíz del checkout, con dependencias instaladas y los datos de B1772-001
+verificados en `public/`, crear primero la muestra y los dos archivos temporales:
+
+```sh
+mkdir -p .cache
+node --input-type=module <<'JS'
+import { armarMuestra } from './tools/muestra.mjs'
+await armarMuestra(process.cwd(), process.cwd() + '/.cache/e2e-muestra')
+JS
+cat > .cache/vite-muestra.config.mjs <<'JS'
+import base from '../vite.config.js'
+export default {
+  ...base,
+  publicDir: new URL('./e2e-muestra/public', import.meta.url).pathname,
+}
+JS
+cat > .cache/playwright-muestra.config.mjs <<'JS'
+import base from '../playwright.config.js'
+export default {
+  ...base,
+  testDir: '../tests/e2e',
+  outputDir: './test-results-muestra',
+  workers: 1,
+  webServer: {
+    ...base.webServer,
+    reuseExistingServer: false,
+    cwd: new URL('../', import.meta.url).pathname,
+    command: 'npx vite --config .cache/vite-muestra.config.mjs --port 5227 --strictPort',
+    port: 5227,
+  },
+  use: { ...base.use, baseURL: 'http://localhost:5227' },
+}
+JS
+npx playwright test --config .cache/playwright-muestra.config.mjs
+```
+
+El puerto 5227 debe estar libre. `--strictPort` y `reuseExistingServer: false`
+impiden validar accidentalmente contra otra instancia. La muestra y las
+configuraciones permanecen en `.cache/`; no reemplazan `public/` ni se suben a git.
+
+
+### Contraste de la versión publicada
+
+El 20 de noviembre de 2026 a las 19:57 UTC se descargaron por HTTP el bundle, el
+manifiesto y el `.pak` de `https://caracas.city/`. El bundle declara el commit
+`a94b9b961cc5b4a9867388f37bbe0e679b3479ff`, sin cambios sin commit. Los hashes del
+manifiesto y del `.pak` coinciden con B1772-001; el registro exacto está en
+`publicado-verificado.json`. Esto fija la pareja observada en ese momento, pero no
+verifica todos los archivos publicados ni sustituye una inspección visual del sitio.
+
+Para repetir la comprobación, descargar `index.html`, leer su `script src`,
+descargar ese bundle y localizar el objeto `commit` que se pasa a la ayuda.
+Calcular SHA-256 de sus bytes y de `datos/manifiesto.json` y `datos/ciudad.pak`;
+comparar con el registro, conservando la fecha. No ejecutar el JavaScript descargado
+como parte de la verificación.

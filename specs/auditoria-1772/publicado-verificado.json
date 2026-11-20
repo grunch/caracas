@@ -1,0 +1,12 @@
+{
+  "observado_utc": "2026-11-20T19:57:47.519765+00:00",
+  "sitio": "https://caracas.city/",
+  "codigo_en_bundle": "a94b9b961cc5b4a9867388f37bbe0e679b3479ff",
+  "sucio": false,
+  "bundle": "assets/main-D15Qgn4u.js",
+  "bundle_sha256": "3d199d4703cb83bd4d99c158ca326aec47e69fa2324499c99e90d0050737ae12",
+  "manifiesto_sha256": "0b7921b5ca0651e11137bab3312c80721597a16a9b93d4336c6bbb1212205a2e",
+  "pak_sha256": "c27f09ea3ef25d3ea20b980067c913c5d80b78ddf184c43768bb448c985b24e4",
+  "pak_bytes": 2622644,
+  "alcance": "Lectura HTTP del bundle, manifiesto y bytes del pak. No certifica todos los archivos ni una inspección visual del sitio."
+}
