@@ -398,11 +398,11 @@ const cam = crearCamara(camera, renderer.domElement, { pedirCuadro, hoja, suelo:
 const avisoModo = document.getElementById('modo')
 const TEXTO_MODO = Object.freeze({
   caminar: { boton: 'Caminar', titulo: 'A pie', raton: 'WASD o flechas para caminar, Mayús para correr, arrastra para mirar. Esc vuelve al mapa.', dedos: 'El dedo de la izquierda camina; el de la derecha mira.' },
-  manejar: { boton: 'Manejar', titulo: 'En coche', raton: 'W y S aceleran y frenan, A y D giran, V cambia la vista, B la bocina, M el sonido, N otro vehículo, Q y E el año. Esc se baja.', dedos: 'Un dedo acelera y gira, como un joystick.' },
+  manejar: { boton: 'Manejar', titulo: 'En coche', raton: 'W y S aceleran y frenan, A y D giran, V cambia la vista, B la bocina, O el sonido, N otro vehículo, Q y E el año. Esc se baja.', dedos: 'Un dedo acelera y gira, como un joystick.' },
   volar: { boton: 'Volar', titulo: 'En avión', raton: 'A y D giran, W y S suben y bajan, Mayús acelera, Q y E cambian el año. Esc aterriza.', dedos: 'Un dedo gira y sube o baja.' },
 })
 let callarAyuda = null
-/** Lo común a los dos modos al entrar o salir: clases del body, botones y el cartel (su ayuda se calla a los 12 s). */
+/** Lo común a los modos al entrar o salir: clases del body, botones y el cartel (su ayuda se calla a los 12 s). */
 function cambioDeModo(nombre, dentro) {
   document.body.classList.toggle('modo', dentro)
   document.body.classList.toggle(`modo-${nombre}`, dentro)
@@ -436,28 +436,16 @@ const enCoche = crearModoManejar({
     if (dentro) avisoModo.querySelector('.titulo').textContent = v.nombre
   },
 })
-/** Al entrar a un modo, los otros dos se cierran. */
-const salirDeLosModos = () => { aPie.salir(); enAvion.salir(); enCoche.salir() }
-document.getElementById('manejar').addEventListener('click', (e) => {
-  if (enCoche.activo) { enCoche.salir(); return }
-  salirDeLosModos()
-  levantar(true)
-  if (!enCoche.entrar()) e.currentTarget.title = 'Las casas todavía no llegaron: prueba en un momento'
-})
-document.getElementById('caminar').addEventListener('click', (e) => {
-  if (aPie.activo) { aPie.salir(); return }
-  enAvion.salir()
-  enCoche.salir()
-  levantar(true)
-  if (!aPie.entrar()) e.currentTarget.title = 'Las casas todavía no llegaron: prueba en un momento'
-})
-document.getElementById('volar').addEventListener('click', () => {
-  if (enAvion.activo) { enAvion.salir(); return }
-  aPie.salir()
-  enCoche.salir()
-  levantar(true)
-  enAvion.entrar()
-})
+/** Cada modo entra con su botón (y otro toque lo saca); al entrar a uno, los demás se cierran. */
+const MODOS = Object.freeze({ caminar: aPie, volar: enAvion, manejar: enCoche })
+for (const [nombre, modo] of Object.entries(MODOS)) {
+  document.getElementById(nombre).addEventListener('click', (e) => {
+    if (modo.activo) { modo.salir(); return }
+    for (const otro of Object.values(MODOS)) otro.salir()
+    levantar(true)
+    if (!modo.entrar()) e.currentTarget.title = 'Las casas todavía no llegaron: prueba en un momento'
+  })
+}
 let alturaMostrada = null
 
 // --- las marcas (M): los nombres de los lugares, por época, en una capa de DOM sobre la vista (src/marcas.js) ---

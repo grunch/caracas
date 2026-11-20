@@ -101,7 +101,7 @@ export function pasoAPie(estado, { adelante = 0, lado = 0, corre = false }, dt, 
 
 /** Las teclas apretadas (KeyboardEvent.code) → { adelante, lado, corre }: WASD o flechas, Mayús corre. */
 /**
- * El criterio de teclado de los modos (a pie y en avión): la tecla no es del modo si nace en un campo de texto o
+ * El criterio de teclado de los modos (a pie, en avión y en coche): la tecla no es del modo si nace en un campo de texto o
  * en un diálogo (el visor del plano: flechas para moverlo, Esc para cerrarlo), ni si es Espacio sobre un botón
  * con foco (lo activa).
  */

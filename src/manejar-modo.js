@@ -1,14 +1,13 @@
 /**
  * El modo manejar (T62): el vehículo de la época por las calles, sin atravesar las casas (las mismas huellas que a
  * pie, src/a-pie.js). La cuenta está en src/manejar.js. Teclas: W/S o ↑/↓ acelera y frena, A/D o ←/→ gira, V
- * cambia la vista (afuera o cabina), B toca la bocina, M prende o apaga el sonido, N cambia de vehículo, Q y E
+ * cambia la vista (afuera o cabina), B toca la bocina, O prende o apaga el sonido (la M es de los nombres del mapa), N cambia de vehículo, Q y E
  * cambian el año (y con él el vehículo), Esc vuelve al mapa. El sonido se sintetiza con WebAudio: sin archivos.
  */
-import { BoxGeometry, CylinderGeometry, Group, Mesh, MeshLambertMaterial } from 'three'
+import { BoxGeometry, CylinderGeometry, Group, Mesh, MeshLambertMaterial, ShaderMaterial } from 'three'
 import { choca, joystick, puntoDeEntrada, rejillaDeCasas, teclaAjena } from './a-pie.js'
-import { camaraDeCoche, entradaDeManejo, otroVehiculo, pasoEnCoche, sonidoDe, vehiculoDeEpoca } from './manejar.js'
+import { camaraDeCoche, chocaVehiculo, entradaDeManejo, otroVehiculo, pasoEnCoche, sonidoDe, vehiculoDeEpoca } from './manejar.js'
 
-const RADIO_M = 1.1
 const FOV = 55
 const TECLAS = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'])
 const AÑO = Object.freeze({ KeyQ: -1, KeyE: 1 })
@@ -19,6 +18,11 @@ const MATERIALES = {
   papel: new MeshLambertMaterial({ color: 0xe9dcc0 }),
   animal: new MeshLambertMaterial({ color: 0x7a5a3e }),
 }
+// desde el sol, en el mapa de sombras propio (src/acabado.js): solo la profundidad de cada pieza (como la avioneta)
+const PROFUNDIDAD = new ShaderMaterial({
+  vertexShader: 'void main() { gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+  fragmentShader: 'void main() { gl_FragColor = vec4(1.0); }',
+})
 
 /** Un vehículo procedural de la flota: caja, ruedas y, si es de tiro, el animal adelante. Mira hacia −z. */
 export function crearVehiculo(v) {
@@ -27,6 +31,7 @@ export function crearVehiculo(v) {
     const p = new Mesh(new BoxGeometry(a, al, l), m)
     p.position.set(x, y, z)
     p.castShadow = true
+    p.customDepthMaterial = PROFUNDIDAD
     g.add(p)
   }
   const rueda = (x, z, r) => {
@@ -34,6 +39,7 @@ export function crearVehiculo(v) {
     p.rotation.z = Math.PI / 2
     p.position.set(x, r, z)
     p.castShadow = true
+    p.customDepthMaterial = PROFUNDIDAD
     g.add(p)
   }
   const { largo, ancho } = v
@@ -144,11 +150,26 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
   let antes = null
   const teclas = new Set()
   const punteros = new Map()
-  const chocaEn = (x, z) => choca(rejilla, x, z, RADIO_M)
+  let chocaHuella = null
+  /** La huella del vehículo (sus medidas y su rumbo; sin rumbo, el del estado) contra las casas de la época. */
+  const chocaEn = (x, z, rumbo = estado?.rumbo ?? 0) => chocaHuella(x, z, rumbo)
+  /** Si la huella pisa una casa (otra época, otro vehículo), lo corre a la calle libre más cercana. */
+  function reubicar() {
+    if (estado && chocaEn(estado.x, estado.z)) estado = { ...estado, ...puntoDeEntrada({ ...estado, dist: 0 }, chocaEn), velocidad: 0 }
+  }
 
+  /** Saca el vehículo de la escena y suelta sus geometrías (los materiales son de toda la flota: quedan). */
+  function sacarVehiculo() {
+    if (!malla) return
+    escena.remove(malla)
+    malla.traverse((o) => o.geometry?.dispose())
+    malla = null
+  }
   function ponerVehiculo(v) {
-    if (malla) escena.remove(malla)
+    sacarVehiculo()
     vehiculo = v
+    chocaHuella = chocaVehiculo(v, (x, z, radio) => choca(rejilla, x, z, radio))
+    reubicar()
     malla = crearVehiculo(v)
     escena.add(malla)
     alCambiar(true, v)
@@ -156,7 +177,7 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
   function armarRejilla() {
     epocaDeRejilla = epoca()
     rejilla = rejillaDeCasas(casas(), epocaDeRejilla, coords.aMundo)
-    if (estado && chocaEn(estado.x, estado.z)) estado = { ...estado, ...puntoDeEntrada({ ...estado, dist: 0 }, chocaEn), velocidad: 0 }
+    reubicar()
   }
   function aplicar() {
     malla.position.set(estado.x, suelo(estado.x, estado.z), estado.z)
@@ -176,7 +197,7 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
     if (e.code in AÑO) { propia(); if (!e.repeat) cambiarEpoca(AÑO[e.code]); return }
     if (e.code === 'KeyV') { propia(); if (!e.repeat) vista = vista === 'afuera' ? 'cabina' : 'afuera'; pedirCuadro(3); return }
     if (e.code === 'KeyB') { propia(); if (!e.repeat) sonido.bocina(vehiculo); return }
-    if (e.code === 'KeyM') { propia(); if (!e.repeat) sonido.alternar(); return }
+    if (e.code === 'KeyO') { propia(); if (!e.repeat) sonido.alternar(); return }
     if (e.code === 'KeyN') { propia(); if (!e.repeat) ponerVehiculo(otroVehiculo(vehiculo.id, epoca())); return }
     if (!TECLAS.has(e.code)) return
     propia()
@@ -201,9 +222,12 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
   function entrar() {
     if (activo) return true
     if (!casas()) return false
+    estado = null
     armarRejilla()
-    const p = puntoDeEntrada(cam.now, chocaEn)
-    estado = { x: p.x, z: p.z, rumbo: -cam.now.yaw, velocidad: 0 }
+    const rumbo = -cam.now.yaw
+    ponerVehiculo(vehiculoDeEpoca(epoca()))
+    const p = puntoDeEntrada(cam.now, (x, z) => chocaEn(x, z, rumbo))
+    estado = { x: p.x, z: p.z, rumbo, velocidad: 0 }
     antes = { near: camera.near, fov: camera.fov }
     camera.near = 0.2
     camera.fov = FOV
@@ -211,7 +235,6 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
     cam.pausar(true)
     sonido.arrancar()
     activo = true
-    ponerVehiculo(vehiculoDeEpoca(epoca()))
     aplicar()
     pedirCuadro(3)
     return true
@@ -222,8 +245,7 @@ export function crearModoManejar({ camera, lienzo, ventana = globalThis, cam, es
     activo = false
     teclas.clear()
     punteros.clear()
-    escena.remove(malla)
-    malla = null
+    sacarVehiculo()
     sonido.parar()
     camera.near = antes.near
     camera.fov = antes.fov

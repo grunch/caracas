@@ -18,6 +18,8 @@ const ROCE = 1.2 // m/s² que pierde sin acelerar
 const FRENO = 4 // m/s² al frenar con S
 const ATRAS = 0.4 // de la máxima, marcha atrás
 const GIRO = 0.12 // rad por metro recorrido, a fondo
+const HOLGURA_M = 0.2 // de cada costado: con el V8 (1,8 m) deja el mismo radio de 1,1 m que antes
+const TRAMO_M = 0.5 // de a cuánto se mira el camino: menos que la casa más angosta (src/animar.js deja pasos de 1 s)
 const IZQUIERDA = new Set(['KeyA', 'ArrowLeft'])
 const DERECHA = new Set(['KeyD', 'ArrowRight'])
 const ACELERA = new Set(['KeyW', 'ArrowUp'])
@@ -39,21 +41,53 @@ export function otroVehiculo(id, e) {
 const acotar = (v, a, b) => Math.min(b, Math.max(a, v))
 
 /**
+ * La huella del vehículo `v` → `(x, z, rumbo) => choca`: círculos de medio ancho (más HOLGURA_M) sobre su eje, de
+ * la cola al frente, separados a lo sumo un radio (con el V8: cola, centro y frente). Cubren el largo entero (una
+ * cápsula: las esquinas quedan redondeadas) y de costado ocupa lo mismo que un círculo, así que pasa por las
+ * mismas calles. `chocaCirculo(x, z, radio)` es la consulta a las casas (src/a-pie.js).
+ */
+export function chocaVehiculo(v, chocaCirculo) {
+  const radio = v.ancho / 2 + HOLGURA_M
+  const mitad = Math.max(0, v.largo / 2 - radio)
+  const tramos = Math.ceil((2 * mitad) / radio)
+  const ejes = tramos ? Array.from({ length: tramos + 1 }, (_, k) => -mitad + (2 * mitad * k) / tramos) : [0]
+  return (x, z, rumbo) => {
+    const [sen, cos] = [Math.sin(rumbo), Math.cos(rumbo)]
+    return ejes.some((d) => chocaCirculo(x + sen * d, z - cos * d, radio))
+  }
+}
+
+/** S: frena hasta 0 y, en lo que resta del paso, retrocede con la aceleración del vehículo. */
+function frenarOAtras(velocidad, fuerza, dt, v) {
+  if (velocidad <= 0) return velocidad - v.aceleracion * fuerza * dt
+  const hastaParar = velocidad / (FRENO * fuerza)
+  if (hastaParar >= dt) return velocidad - FRENO * fuerza * dt
+  return -v.aceleracion * fuerza * (dt - hastaParar)
+}
+
+/**
  * Un cuadro: `entrada` { acelera (−1…1: S frena y luego retrocede), girar (−1…1) } durante `dt` s con el
- * vehículo `v`. Gira en proporción a lo que avanza (quieto no gira). Si el paso choca, se detiene.
+ * vehículo `v`. Gira en proporción a lo que avanza (quieto no gira). El camino se mira de a TRAMO_M, no solo el
+ * destino: si choca en el camino, se detiene en el último tramo libre (un paso largo no atraviesa una casa).
+ * `choca(x, z, rumbo)`: la huella del vehículo en ese punto (chocaVehiculo).
  */
 export function pasoEnCoche(coche, { acelera = 0, girar = 0 }, dt, v, { choca }) {
   let velocidad = coche.velocidad
   if (acelera > 0) velocidad += v.aceleracion * acelera * dt
-  else if (acelera < 0) velocidad -= (velocidad > 0 ? FRENO : v.aceleracion) * -acelera * dt
+  else if (acelera < 0) velocidad = frenarOAtras(velocidad, -acelera, dt, v)
   else velocidad -= Math.sign(velocidad) * Math.min(Math.abs(velocidad), ROCE * dt)
   velocidad = acotar(velocidad, -v.maxima * ATRAS, v.maxima)
   const avance = velocidad * dt
   const rumbo = coche.rumbo + girar * GIRO * avance
-  const x = coche.x + Math.sin(rumbo) * avance
-  const z = coche.z - Math.cos(rumbo) * avance
-  if (avance !== 0 && choca(x, z)) return { ...coche, velocidad: 0 }
-  return { ...coche, x, z, rumbo, velocidad }
+  const tramos = Math.ceil(Math.abs(avance) / TRAMO_M)
+  let libre = { x: coche.x, z: coche.z }
+  for (let k = 1; k <= tramos; k++) {
+    const d = (avance * k) / tramos
+    const punto = { x: coche.x + Math.sin(rumbo) * d, z: coche.z - Math.cos(rumbo) * d }
+    if (choca(punto.x, punto.z, rumbo)) return { ...coche, ...libre, rumbo: k > 1 ? rumbo : coche.rumbo, velocidad: 0 }
+    libre = punto
+  }
+  return { ...coche, ...libre, rumbo, velocidad }
 }
 
 /** Las teclas → { acelera, girar }: W/↑ acelera, S/↓ frena o retrocede, A/D o ←/→ giran. */
