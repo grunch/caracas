@@ -70,3 +70,5 @@ El [diagnóstico geométrico](diagnostico-huellas.md) mide las 1.811 huellas vis
 El [enlace de frentes candidatos](frentes-candidatos.md) amplía la red a 85 líneas y 470 tramos y enlaza 147 caras con 590 bordes; quedan 145 registros sin asignación única.
 
 El [contraste de las 292 unidades](contraste-unidades.md) registra candidatos y ausencias bajo el TPS y rastrea la regla temporal en seis unidades; la correspondencia geométrica y la revisión de accesos siguen pendientes.
+
+El [sondeo de accesos](accesos-primer-lote.md) evalúa los 40 frentes iniciales y reproduce dos recorridos en el navegador; confirma penetración en Camejo–Cruz Verde y Seminario sin certificar todos los patios.

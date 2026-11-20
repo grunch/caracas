@@ -1,0 +1,861 @@
+{
+  "baseline": "B1772-001",
+  "pak_sha256": "c27f09ea3ef25d3ea20b980067c913c5d80b78ddf184c43768bb448c985b24e4",
+  "metodo": "Sondeos cada 2 m sobre los 40 lados curados, desde 4 m afuera hacia 30 m adentro, 136 pasos de 0.1 s con pasoAPie y rejillaDeCasas reales. El controlador puede deslizar lateralmente; no prueba que el destino sea patio. Referencia curada, no TPS. Los hitos y descartes del shader no intervienen en la rejilla actual.",
+  "frentes": [
+    {
+      "frente": "F1772-0001-0",
+      "manzana": "M1772-0001",
+      "sondeos": 51,
+      "inicio_libre": 1,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0001-1",
+      "manzana": "M1772-0001",
+      "sondeos": 66,
+      "inicio_libre": 1,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0001-2",
+      "manzana": "M1772-0001",
+      "sondeos": 49,
+      "inicio_libre": 49,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0001-3",
+      "manzana": "M1772-0001",
+      "sondeos": 67,
+      "inicio_libre": 41,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0002-0",
+      "manzana": "M1772-0002",
+      "sondeos": 63,
+      "inicio_libre": 3,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0002-1",
+      "manzana": "M1772-0002",
+      "sondeos": 63,
+      "inicio_libre": 1,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0002-2",
+      "manzana": "M1772-0002",
+      "sondeos": 66,
+      "inicio_libre": 66,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0002-3",
+      "manzana": "M1772-0002",
+      "sondeos": 66,
+      "inicio_libre": 9,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0003-0",
+      "manzana": "M1772-0003",
+      "sondeos": 66,
+      "inicio_libre": 2,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0003-1",
+      "manzana": "M1772-0003",
+      "sondeos": 54,
+      "inicio_libre": 26,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0003-2",
+      "manzana": "M1772-0003",
+      "sondeos": 66,
+      "inicio_libre": 14,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0003-3",
+      "manzana": "M1772-0003",
+      "sondeos": 51,
+      "inicio_libre": 51,
+      "candidatos_entrada_profunda": [
+        {
+          "desde_inicio_frente_m": 58,
+          "inicio": {
+            "x": 49.774136080244645,
+            "z": 1.970057568448111
+          },
+          "final": {
+            "x": 83.17903666252509,
+            "z": 8.303509793576564
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 30.0
+        },
+        {
+          "desde_inicio_frente_m": 60,
+          "inicio": {
+            "x": 50.146692093487495,
+            "z": 0.005063416549282329
+          },
+          "final": {
+            "x": 83.55159267576794,
+            "z": 6.3385156416777315
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 30.0
+        },
+        {
+          "desde_inicio_frente_m": 62,
+          "inicio": {
+            "x": 50.519248106730345,
+            "z": -1.959930735349546
+          },
+          "final": {
+            "x": 83.92414868901079,
+            "z": 4.373521489778906
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 30.0
+        },
+        {
+          "desde_inicio_frente_m": 64,
+          "inicio": {
+            "x": 50.891804119973195,
+            "z": -3.9249248872483746
+          },
+          "final": {
+            "x": 84.29670470225363,
+            "z": 2.4085273378800767
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 30.0
+        },
+        {
+          "desde_inicio_frente_m": 66,
+          "inicio": {
+            "x": 51.264360133216044,
+            "z": -5.889919039147204
+          },
+          "final": {
+            "x": 84.66926071549649,
+            "z": 0.4435331859812464
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 30.0
+        },
+        {
+          "desde_inicio_frente_m": 68,
+          "inicio": {
+            "x": 51.6369161464589,
+            "z": -7.854913191046025
+          },
+          "final": {
+            "x": 85.04181672873935,
+            "z": -1.5214609659175782
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 30.0
+        },
+        {
+          "desde_inicio_frente_m": 70,
+          "inicio": {
+            "x": 52.009472159701744,
+            "z": -9.81990734294486
+          },
+          "final": {
+            "x": 85.41437274198219,
+            "z": -3.486455117816379
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 30.0
+        },
+        {
+          "desde_inicio_frente_m": 72,
+          "inicio": {
+            "x": 52.3820281729446,
+            "z": -11.784901494843682
+          },
+          "final": {
+            "x": 85.78692875522505,
+            "z": -5.451449269715163
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 30.0
+        },
+        {
+          "desde_inicio_frente_m": 74,
+          "inicio": {
+            "x": 52.75458418618745,
+            "z": -13.749895646742518
+          },
+          "final": {
+            "x": 86.15948476846789,
+            "z": -7.416443421613962
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 30.0
+        },
+        {
+          "desde_inicio_frente_m": 76,
+          "inicio": {
+            "x": 53.1271401994303,
+            "z": -15.71488979864134
+          },
+          "final": {
+            "x": 86.53204078171075,
+            "z": -9.381437573512772
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 29.036
+        },
+        {
+          "desde_inicio_frente_m": 78,
+          "inicio": {
+            "x": 53.49969621267315,
+            "z": -17.679883950540173
+          },
+          "final": {
+            "x": 86.90459679495359,
+            "z": -11.34643172541167
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 27.036
+        },
+        {
+          "desde_inicio_frente_m": 80,
+          "inicio": {
+            "x": 53.872252225916,
+            "z": -19.644878102438994
+          },
+          "final": {
+            "x": 87.27715280819645,
+            "z": -13.311425877310565
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 25.036
+        },
+        {
+          "desde_inicio_frente_m": 82,
+          "inicio": {
+            "x": 54.24480823915885,
+            "z": -21.60987225433783
+          },
+          "final": {
+            "x": 87.64970882143929,
+            "z": -15.276420029209476
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 23.036
+        },
+        {
+          "desde_inicio_frente_m": 84,
+          "inicio": {
+            "x": 54.6173642524017,
+            "z": -23.57486640623665
+          },
+          "final": {
+            "x": 88.02226483468215,
+            "z": -17.241414181108325
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 21.037
+        },
+        {
+          "desde_inicio_frente_m": 86,
+          "inicio": {
+            "x": 54.98992026564456,
+            "z": -25.539860558135473
+          },
+          "final": {
+            "x": 88.394820847925,
+            "z": -19.206408333007147
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 19.037
+        },
+        {
+          "desde_inicio_frente_m": 88,
+          "inicio": {
+            "x": 55.3624762788874,
+            "z": -27.50485471003431
+          },
+          "final": {
+            "x": 88.76737686116785,
+            "z": -21.171402484905983
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 17.037
+        },
+        {
+          "desde_inicio_frente_m": 90,
+          "inicio": {
+            "x": 55.735032292130256,
+            "z": -29.469848861933144
+          },
+          "final": {
+            "x": 89.1399328744107,
+            "z": -23.136396636804818
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 15.037
+        },
+        {
+          "desde_inicio_frente_m": 92,
+          "inicio": {
+            "x": 56.1075883053731,
+            "z": -31.434843013831966
+          },
+          "final": {
+            "x": 89.51248888765355,
+            "z": -25.10139078870364
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 13.037
+        },
+        {
+          "desde_inicio_frente_m": 94,
+          "inicio": {
+            "x": 56.480144318615956,
+            "z": -33.39983716573079
+          },
+          "final": {
+            "x": 89.8850449008964,
+            "z": -27.06638494060246
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 34,
+          "desvio_lateral_m": 0,
+          "profundidad_final_en_referencia_m": 11.037
+        }
+      ]
+    },
+    {
+      "frente": "F1772-0004-0",
+      "manzana": "M1772-0004",
+      "sondeos": 65,
+      "inicio_libre": 65,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0004-1",
+      "manzana": "M1772-0004",
+      "sondeos": 66,
+      "inicio_libre": 1,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0004-2",
+      "manzana": "M1772-0004",
+      "sondeos": 66,
+      "inicio_libre": 3,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0004-3",
+      "manzana": "M1772-0004",
+      "sondeos": 67,
+      "inicio_libre": 67,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0005-0",
+      "manzana": "M1772-0005",
+      "sondeos": 66,
+      "inicio_libre": 2,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0005-1",
+      "manzana": "M1772-0005",
+      "sondeos": 65,
+      "inicio_libre": 1,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0005-2",
+      "manzana": "M1772-0005",
+      "sondeos": 64,
+      "inicio_libre": 1,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0005-3",
+      "manzana": "M1772-0005",
+      "sondeos": 64,
+      "inicio_libre": 61,
+      "candidatos_entrada_profunda": [
+        {
+          "desde_inicio_frente_m": 10,
+          "inicio": {
+            "x": -31.522896902713487,
+            "z": 449.5415009906769
+          },
+          "final": {
+            "x": -9.73595975193945,
+            "z": 454.2619399419327
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 22.231,
+          "desvio_lateral_m": 1.65,
+          "profundidad_final_en_referencia_m": 10.063
+        },
+        {
+          "desde_inicio_frente_m": 12,
+          "inicio": {
+            "x": -31.24522402322789,
+            "z": 447.5608703406066
+          },
+          "final": {
+            "x": -10.94375986000663,
+            "z": 452.2813092918624
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 20.76,
+          "desvio_lateral_m": 1.856,
+          "profundidad_final_en_referencia_m": 11.707
+        },
+        {
+          "desde_inicio_frente_m": 14,
+          "inicio": {
+            "x": -30.967551143742295,
+            "z": 445.5802396905362
+          },
+          "final": {
+            "x": -11.903981136815013,
+            "z": 448.35696848539254
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 19.264,
+          "desvio_lateral_m": 0.103,
+          "profundidad_final_en_referencia_m": 15.264
+        },
+        {
+          "desde_inicio_frente_m": 16,
+          "inicio": {
+            "x": -30.6898782642567,
+            "z": 443.59960904046585
+          },
+          "final": {
+            "x": -8.160204619706274,
+            "z": 446.58459249493643
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 22.726,
+          "desvio_lateral_m": -0.172,
+          "profundidad_final_en_referencia_m": 17.896
+        },
+        {
+          "desde_inicio_frente_m": 18,
+          "inicio": {
+            "x": -30.412205384771102,
+            "z": 441.61897839039545
+          },
+          "final": {
+            "x": -7.634952908961882,
+            "z": 446.0964535721013
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 23.178,
+          "desvio_lateral_m": 1.272,
+          "profundidad_final_en_referencia_m": 18.493
+        },
+        {
+          "desde_inicio_frente_m": 20,
+          "inicio": {
+            "x": -30.134532505285506,
+            "z": 439.63834774032506
+          },
+          "final": {
+            "x": -8.34759535451147,
+            "z": 444.35878669158086
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 22.231,
+          "desvio_lateral_m": 1.65,
+          "profundidad_final_en_referencia_m": 18.231
+        }
+      ]
+    },
+    {
+      "frente": "F1772-0006-0",
+      "manzana": "M1772-0006",
+      "sondeos": 64,
+      "inicio_libre": 64,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0006-1",
+      "manzana": "M1772-0006",
+      "sondeos": 65,
+      "inicio_libre": 4,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0006-2",
+      "manzana": "M1772-0006",
+      "sondeos": 66,
+      "inicio_libre": 66,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0006-3",
+      "manzana": "M1772-0006",
+      "sondeos": 67,
+      "inicio_libre": 67,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0007-0",
+      "manzana": "M1772-0007",
+      "sondeos": 65,
+      "inicio_libre": 33,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0007-1",
+      "manzana": "M1772-0007",
+      "sondeos": 65,
+      "inicio_libre": 7,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0007-2",
+      "manzana": "M1772-0007",
+      "sondeos": 67,
+      "inicio_libre": 2,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0007-3",
+      "manzana": "M1772-0007",
+      "sondeos": 66,
+      "inicio_libre": 1,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0008-0",
+      "manzana": "M1772-0008",
+      "sondeos": 67,
+      "inicio_libre": 1,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0008-1",
+      "manzana": "M1772-0008",
+      "sondeos": 65,
+      "inicio_libre": 3,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0008-2",
+      "manzana": "M1772-0008",
+      "sondeos": 66,
+      "inicio_libre": 3,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0008-3",
+      "manzana": "M1772-0008",
+      "sondeos": 65,
+      "inicio_libre": 65,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0009-0",
+      "manzana": "M1772-0009",
+      "sondeos": 66,
+      "inicio_libre": 66,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0009-1",
+      "manzana": "M1772-0009",
+      "sondeos": 62,
+      "inicio_libre": 2,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0009-2",
+      "manzana": "M1772-0009",
+      "sondeos": 67,
+      "inicio_libre": 67,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0009-3",
+      "manzana": "M1772-0009",
+      "sondeos": 63,
+      "inicio_libre": 1,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0010-0",
+      "manzana": "M1772-0010",
+      "sondeos": 53,
+      "inicio_libre": 53,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0010-1",
+      "manzana": "M1772-0010",
+      "sondeos": 68,
+      "inicio_libre": 3,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0010-2",
+      "manzana": "M1772-0010",
+      "sondeos": 54,
+      "inicio_libre": 54,
+      "candidatos_entrada_profunda": []
+    },
+    {
+      "frente": "F1772-0010-3",
+      "manzana": "M1772-0010",
+      "sondeos": 65,
+      "inicio_libre": 60,
+      "candidatos_entrada_profunda": [
+        {
+          "desde_inicio_frente_m": 54,
+          "inicio": {
+            "x": -84.65933939949022,
+            "z": 116.07954832088014
+          },
+          "final": {
+            "x": -66.52693068768878,
+            "z": 120.04665254423686
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 18.559,
+          "desvio_lateral_m": 0.292,
+          "profundidad_final_en_referencia_m": 14.559
+        },
+        {
+          "desde_inicio_frente_m": 58,
+          "inicio": {
+            "x": -83.86591855481893,
+            "z": 112.15902751832836
+          },
+          "final": {
+            "x": -65.97854239317697,
+            "z": 115.97736533330921
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 18.289,
+          "desvio_lateral_m": 0.194,
+          "profundidad_final_en_referencia_m": 14.289
+        },
+        {
+          "desde_inicio_frente_m": 60,
+          "inicio": {
+            "x": -83.4692081324833,
+            "z": 110.19876711705248
+          },
+          "final": {
+            "x": -65.58183197084134,
+            "z": 114.81052577670468
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 18.447,
+          "desvio_lateral_m": 0.972,
+          "profundidad_final_en_referencia_m": 14.447
+        },
+        {
+          "desde_inicio_frente_m": 62,
+          "inicio": {
+            "x": -83.07249771014766,
+            "z": 108.23850671577661
+          },
+          "final": {
+            "x": -65.18512154850569,
+            "z": 112.15602213634138
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 18.309,
+          "desvio_lateral_m": 0.292,
+          "profundidad_final_en_referencia_m": 14.309
+        },
+        {
+          "desde_inicio_frente_m": 64,
+          "inicio": {
+            "x": -82.67578728781201,
+            "z": 106.27824631450072
+          },
+          "final": {
+            "x": -64.78841112617005,
+            "z": 109.99740652389765
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 18.27,
+          "desvio_lateral_m": 0.097,
+          "profundidad_final_en_referencia_m": 14.27
+        },
+        {
+          "desde_inicio_frente_m": 66,
+          "inicio": {
+            "x": -82.27907686547637,
+            "z": 104.31798591322483
+          },
+          "final": {
+            "x": -64.63673325399388,
+            "z": 108.4834453477494
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 18.118,
+          "desvio_lateral_m": 0.583,
+          "profundidad_final_en_referencia_m": 14.118
+        },
+        {
+          "desde_inicio_frente_m": 68,
+          "inicio": {
+            "x": -81.88236644314074,
+            "z": 102.35772551194896
+          },
+          "final": {
+            "x": -64.24002283165825,
+            "z": 106.72154015764136
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 18.157,
+          "desvio_lateral_m": 0.778,
+          "profundidad_final_en_referencia_m": 14.157
+        }
+      ]
+    }
+  ],
+  "recorridos_navegador": {
+    "browser": "159.0.8154.6",
+    "epoca": 1,
+    "registros": [
+      {
+        "frente": "F1772-0005-3",
+        "antes": {
+          "x": -30.412205384771102,
+          "z": 441.61897839039545,
+          "rumbo": 1.710082705289529,
+          "mirada": 0
+        },
+        "despues": {
+          "x": -7.634952908961882,
+          "z": 446.0964535721013,
+          "rumbo": 1.710082705289529,
+          "mirada": 0
+        },
+        "rumbo": 1.710082705289529,
+        "candidato": {
+          "desde_inicio_frente_m": 18,
+          "inicio": {
+            "x": -30.412205384771102,
+            "z": 441.61897839039545
+          },
+          "final": {
+            "x": -7.634952908961882,
+            "z": 446.0964535721013
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 23.178,
+          "desvio_lateral_m": 1.272,
+          "profundidad_final_en_referencia_m": 18.493
+        }
+      },
+      {
+        "frente": "F1772-0010-3",
+        "antes": {
+          "x": -84.65933939949022,
+          "z": 116.07954832088014,
+          "rumbo": 1.7704758287428632,
+          "mirada": 0
+        },
+        "despues": {
+          "x": -66.52693068768878,
+          "z": 120.04665254423686,
+          "rumbo": 1.7704758287428632,
+          "mirada": 0
+        },
+        "rumbo": 1.7704758287428632,
+        "candidato": {
+          "desde_inicio_frente_m": 54,
+          "inicio": {
+            "x": -84.65933939949022,
+            "z": 116.07954832088014
+          },
+          "final": {
+            "x": -66.52693068768878,
+            "z": 120.04665254423686
+          },
+          "inicio_bloqueado": false,
+          "avance_normal_m": 18.559,
+          "desvio_lateral_m": 0.292,
+          "profundidad_final_en_referencia_m": 14.559
+        }
+      }
+    ]
+  },
+  "capturas": [
+    {
+      "archivo": "F1772-0005-3-antes.png",
+      "sha256": "5ef3520708c81f4b39ba1865f8f59f89bbedd95c999783883fa1f2ce0e845149"
+    },
+    {
+      "archivo": "F1772-0005-3-despues.png",
+      "sha256": "baa409e10d597e1d0c4a8ba0febbbb871a6ca567f9b005f3e229797dd8f96583"
+    },
+    {
+      "archivo": "F1772-0010-3-antes.png",
+      "sha256": "fa93e075d29bceb3fb272a08b4fdcb076fadc254cad7f38cb5d31d5dd755fdd8"
+    },
+    {
+      "archivo": "F1772-0010-3-despues.png",
+      "sha256": "cd090159940b2b571b1f700d52bee2a150ea2d319f26855a11970e340b55b73f"
+    }
+  ],
+  "observaciones": {
+    "F1772-0005-3": "Desde calle se avanza hacia el retranqueo y termina frente a pared. Entrada profunda en el contorno de referencia; no demuestra recorrido de todo un patio.",
+    "F1772-0010-3": "Antes, una fachada ocupa el rumbo; después el caminante observa el interior abierto. El controlador permite una entrada casi recta (desvío lateral 0.292 m), lo que requiere reconciliar pared visible y colisión.",
+    "F1772-0003-3": "Candidato automático junto a Catedral, no recorrido visualmente en esta entrega; el hito no interviene en rejillaDeCasas."
+  }
+}
