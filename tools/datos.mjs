@@ -4,10 +4,12 @@
 // verifica los conteos contra tools/datos-esperados.json y escribe public/datos/manifiesto.json (sha256).
 import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
+import { gunzipSync } from 'node:zlib'
 import { createReadStream, existsSync } from 'node:fs'
 import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { pendientes, verificarConteos, publicosDelManifiesto, salidasDeTeselas, firmasCambiadas, resolverOriginales, fichasDeEpocas } from './datos-lib.mjs'
+import { pendientes, verificarConteos, conteosDelManifiesto, publicosDelManifiesto, salidasDeTeselas, firmasCambiadas, resolverOriginales, fichasDeEpocas } from './datos-lib.mjs'
+import { decodificarPak } from '../src/pak.js'
 import { salidasPlanosEpocas } from './planos-epocas-lib.mjs'
 import { salidasDeFotos, fotosSinOrigen } from './fotos-lib.mjs'
 import { leerCalzados } from './planos-epocas.mjs'
@@ -325,11 +327,14 @@ async function verificar(pasos) {
   const medidos = { techos: ciudad.techos.length, manzanas: ciudad.manzanas, arboles: arboles.length }
   const { _nota, ...esperados } = await leerJson('tools/datos-esperados.json')
   const errores = verificarConteos(medidos, esperados)
+  const crudo = gunzipSync(await readFile(path.join(RAIZ, 'public/datos/ciudad.pak')))
+  const partes = decodificarPak(crudo.buffer.slice(crudo.byteOffset, crudo.byteOffset + crudo.byteLength), { techos: Uint32Array }, () => {})
+  const publicados = conteosDelManifiesto(medidos, partes.techos, await readFile(path.join(RAIZ, 'public/datos/arboles.bin')))
   const publicos = publicosDelManifiesto(pasos, (r) => existsSync(path.join(RAIZ, r)))
   const archivos = {}
   for (const s of publicos) archivos[s] = await sha256(s)
-  await writeFile(path.join(RAIZ, 'public/datos/manifiesto.json'), JSON.stringify({ conteos: medidos, archivos }, null, 2) + '\n')
-  console.log(`conteos: ${JSON.stringify(medidos)} · manifiesto: public/datos/manifiesto.json`)
+  await writeFile(path.join(RAIZ, 'public/datos/manifiesto.json'), JSON.stringify({ ...publicados, archivos }, null, 2) + '\n')
+  console.log(`conteos publicados: ${JSON.stringify(publicados.conteos)} · origen: ${JSON.stringify(medidos)} · manifiesto: public/datos/manifiesto.json`)
   return errores
 }
 

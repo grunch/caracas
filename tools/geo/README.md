@@ -24,7 +24,10 @@ una salida, si alguna entrada es más nueva, si la produce un paso que corre o s
 están al día, `--marcar` las guarda sin correr nada. Las teselas de `public/plano/f/` y
 `public/datos/ciudad.json` son salidas del paso `plano`. Al final compara los conteos
 con `tools/datos-esperados.json` (sale con error si se van de la tolerancia) y escribe
-`public/datos/manifiesto.json` con el sha256 de cada archivo publicado. La plaza se lee de `mosaico.json`.
+`public/datos/manifiesto.json` con el sha256 de cada archivo publicado. `conteos` mide
+los registros reales de `ciudad.pak` y `arboles.bin`; `conteos_origen` conserva los
+conteos del derivado de 1936 que se comparan con las tolerancias. Las manzanas solo
+se cuentan en el origen: el paquete no serializa sus identidades. La plaza se lee de `mosaico.json`.
 
 ## Pasos
 
