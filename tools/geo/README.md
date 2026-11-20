@@ -373,3 +373,7 @@ La línea de fachada queda al menos a 3 m del eje reconocido de la calle: una
 reserva de modelado para que un error de la máscara no una dos cuadras. No es una
 medición histórica del ancho de cada vía. Se conservan los retiros mayores medidos
 en el plano; el reparto irregular también se recorta al contorno de la cuadra.
+
+La reserva de calles separa componentes que antes estaban pegados en la máscara:
+el conteo de referencia pasa de 7851 a 8023 manzanas, sin ampliar su tolerancia.
+El conteo se calcula después de retirar las calzadas reconocidas.
