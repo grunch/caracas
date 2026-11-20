@@ -20,6 +20,8 @@ Se toma **un plano topográfico antiguo escaneado en altísima resolución** (do
 | [06-adaptacion-caracas.md](06-adaptacion-caracas.md) | Qué cambia para Caracas, fuentes a buscar, plan por fases, riesgos |
 | [07-plan-de-implementacion.md](07-plan-de-implementacion.md) | **Plan vivo**: tareas (un PR cada una), dependencias, criterios y estado |
 
+Plan de corrección de la reconstrucción: [auditoría integral de 1772](08-auditoria-y-correccion-1772.md).
+
 ## Resumen técnico
 
 - **Frontend**: Vite (build multipágina: `index.html` + `edificios.html`) y **three.js** puro, sin React, sin post‑procesado y sin controles de librería. JS vanilla en ES modules, todo en español (identificadores, comentarios, UI).
