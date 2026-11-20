@@ -376,6 +376,7 @@ addEventListener('keydown', (e) => {
   const movimiento = movimientoDeTecla(e)
   if (movimiento) {
     e.preventDefault()
+    girarVitrina = false // quien mueve la vista con el teclado la maneja (en la vitrina deja de girar)
     if (movimiento.tipo === 'mover') cam.mover(movimiento.dx, movimiento.dy)
     else if (movimiento.tipo === 'girar') cam.girar(movimiento.giro, movimiento.inclinar)
     else cam.acercar(movimiento.veces)

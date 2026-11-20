@@ -243,3 +243,20 @@ for (const ancho of [700, 800]) {
     expect(leyenda).toBeLessThanOrEqual(Math.min(...cajas.map((c) => c.arriba)))
   })
 }
+
+// la vitrina gira sola alrededor del edificio hasta la primera interacción; el teclado también la detiene
+test('en la vitrina, mover la vista con el teclado detiene el giro', async ({ page }) => {
+  await page.goto('/?vitrina&sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  const id = await page.evaluate(() => window.lab.marcasDelMapa[0].id)
+  await page.evaluate((id) => window.postMessage({ vitrina: { ir: id } }, location.origin), id)
+  const yaw = () => page.evaluate(() => window.lab.cam.goal.yaw)
+  // gira solo
+  const antes = await yaw()
+  await expect.poll(yaw, { timeout: 10000 }).not.toBe(antes)
+  await page.keyboard.press('ArrowLeft')
+  await page.waitForTimeout(200)
+  const quieto = await yaw()
+  await page.waitForTimeout(800)
+  expect(await yaw()).toBe(quieto)
+})
