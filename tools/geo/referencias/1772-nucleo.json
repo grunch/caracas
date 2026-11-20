@@ -1,0 +1,426 @@
+{
+  "fuente": "fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg",
+  "fuente_sha256": "4696d038a55b8088302a496b6eb4678b11173d98d3a15c589530cf78ee7bb62b",
+  "alcance": "Contrato del núcleo para la futura referencia única. Las diez unidades quedan pendientes: este archivo no cambia los GCP, máscaras ni geometría generada. Los cruces compartidos tienen un único registro.",
+  "nodos": [
+    {
+      "id": "N1772-0001",
+      "original": [
+        1104,
+        793
+      ],
+      "mosaico": [
+        8945.6,
+        6448.8
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0002",
+      "original": [
+        1104,
+        859
+      ],
+      "mosaico": [
+        9152.8,
+        6489.5
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0003",
+      "original": [
+        1036,
+        859
+      ],
+      "mosaico": [
+        9093,
+        6752.7
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0004",
+      "original": [
+        1036,
+        793
+      ],
+      "mosaico": [
+        8894.5,
+        6719.9
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0005",
+      "original": [
+        1104,
+        926
+      ],
+      "mosaico": [
+        9406.4,
+        6544.5
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0006",
+      "original": [
+        1036,
+        926
+      ],
+      "mosaico": [
+        9356.9,
+        6799.5
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0007",
+      "original": [
+        970,
+        926
+      ],
+      "mosaico": [
+        9318.9,
+        7017.5
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0008",
+      "original": [
+        970,
+        859
+      ],
+      "mosaico": [
+        9054,
+        6958.4
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0009",
+      "original": [
+        903,
+        859
+      ],
+      "mosaico": [
+        9002.3,
+        7231.5
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0010",
+      "original": [
+        903,
+        926
+      ],
+      "mosaico": [
+        9263.3,
+        7290.5
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0011",
+      "original": [
+        835,
+        926
+      ],
+      "mosaico": [
+        9209.1,
+        7556.8
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0012",
+      "original": [
+        835,
+        859
+      ],
+      "mosaico": [
+        8946.4,
+        7501.5
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0013",
+      "original": [
+        767,
+        926
+      ],
+      "mosaico": [
+        9167,
+        7820.6
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0014",
+      "original": [
+        767,
+        859
+      ],
+      "mosaico": [
+        8910.3,
+        7759.0
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0015",
+      "original": [
+        702,
+        926
+      ],
+      "mosaico": [
+        9117.3,
+        8082.1
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0016",
+      "original": [
+        702,
+        859
+      ],
+      "mosaico": [
+        8852.2,
+        8025.7
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0017",
+      "original": [
+        903,
+        992
+      ],
+      "mosaico": [
+        9524.5,
+        7350.3
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0018",
+      "original": [
+        835,
+        992
+      ],
+      "mosaico": [
+        9476.7,
+        7613.7
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0019",
+      "original": [
+        767,
+        992
+      ],
+      "mosaico": [
+        9432.7,
+        7877.4
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0020",
+      "original": [
+        1104,
+        992
+      ],
+      "mosaico": [
+        9671.5,
+        6599.2
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0021",
+      "original": [
+        1036,
+        992
+      ],
+      "mosaico": [
+        9625.1,
+        6850.8
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0022",
+      "original": [
+        970,
+        793
+      ],
+      "mosaico": [
+        8838.1,
+        6917.7
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    },
+    {
+      "id": "N1772-0023",
+      "original": [
+        903,
+        793
+      ],
+      "mosaico": [
+        8785.3,
+        7178.6
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20"
+    }
+  ],
+  "unidades": [
+    {
+      "id": "U1772-0081",
+      "manzana": "M1772-0001",
+      "nodos": [
+        "N1772-0001",
+        "N1772-0002",
+        "N1772-0003",
+        "N1772-0004"
+      ],
+      "estado": "pendiente",
+      "ocupacion": "conjunto_especial",
+      "procedencia": "tools/geo/cuadras-1772.json (#69); contraste visual topológico 2026-11-20, ver calce-y-calles.md; precisión métrica no certificada",
+      "motivo_pendiente": "Reconciliar referencia curada y TPS antes de habilitar generación; el control topológico no certifica precisión métrica."
+    },
+    {
+      "id": "U1772-0095",
+      "manzana": "M1772-0002",
+      "nodos": [
+        "N1772-0002",
+        "N1772-0005",
+        "N1772-0006",
+        "N1772-0003"
+      ],
+      "estado": "pendiente",
+      "ocupacion": "continua",
+      "procedencia": "tools/geo/cuadras-1772.json (#69); contraste visual topológico 2026-11-20, ver calce-y-calles.md; precisión métrica no certificada",
+      "motivo_pendiente": "Reconciliar referencia curada y TPS antes de habilitar generación; el control topológico no certifica precisión métrica."
+    },
+    {
+      "id": "U1772-0094",
+      "manzana": "M1772-0003",
+      "nodos": [
+        "N1772-0003",
+        "N1772-0006",
+        "N1772-0007",
+        "N1772-0008"
+      ],
+      "estado": "pendiente",
+      "ocupacion": "conjunto_especial",
+      "procedencia": "tools/geo/cuadras-1772.json (#69); contraste visual topológico 2026-11-20, ver calce-y-calles.md; precisión métrica no certificada",
+      "motivo_pendiente": "Reconciliar referencia curada y TPS antes de habilitar generación; el control topológico no certifica precisión métrica."
+    },
+    {
+      "id": "U1772-0092",
+      "manzana": "M1772-0004",
+      "nodos": [
+        "N1772-0009",
+        "N1772-0010",
+        "N1772-0011",
+        "N1772-0012"
+      ],
+      "estado": "pendiente",
+      "ocupacion": "continua",
+      "procedencia": "tools/geo/cuadras-1772.json (#69); contraste visual topológico 2026-11-20, ver calce-y-calles.md; precisión métrica no certificada",
+      "motivo_pendiente": "Reconciliar referencia curada y TPS antes de habilitar generación; el control topológico no certifica precisión métrica."
+    },
+    {
+      "id": "U1772-0091",
+      "manzana": "M1772-0005",
+      "nodos": [
+        "N1772-0012",
+        "N1772-0011",
+        "N1772-0013",
+        "N1772-0014"
+      ],
+      "estado": "pendiente",
+      "ocupacion": "continua",
+      "procedencia": "tools/geo/cuadras-1772.json (#69); contraste visual topológico 2026-11-20, ver calce-y-calles.md; precisión métrica no certificada",
+      "motivo_pendiente": "Reconciliar referencia curada y TPS antes de habilitar generación; el control topológico no certifica precisión métrica."
+    },
+    {
+      "id": "U1772-0207",
+      "manzana": "M1772-0006",
+      "nodos": [
+        "N1772-0014",
+        "N1772-0013",
+        "N1772-0015",
+        "N1772-0016"
+      ],
+      "estado": "pendiente",
+      "ocupacion": "continua",
+      "procedencia": "tools/geo/cuadras-1772.json (#69); contraste visual topológico 2026-11-20, ver calce-y-calles.md; precisión métrica no certificada",
+      "motivo_pendiente": "Reconciliar referencia curada y TPS antes de habilitar generación; el control topológico no certifica precisión métrica."
+    },
+    {
+      "id": "U1772-0107",
+      "manzana": "M1772-0007",
+      "nodos": [
+        "N1772-0010",
+        "N1772-0017",
+        "N1772-0018",
+        "N1772-0011"
+      ],
+      "estado": "pendiente",
+      "ocupacion": "continua",
+      "procedencia": "tools/geo/cuadras-1772.json (#69); contraste visual topológico 2026-11-20, ver calce-y-calles.md; precisión métrica no certificada",
+      "motivo_pendiente": "Reconciliar referencia curada y TPS antes de habilitar generación; el control topológico no certifica precisión métrica."
+    },
+    {
+      "id": "U1772-0106",
+      "manzana": "M1772-0008",
+      "nodos": [
+        "N1772-0011",
+        "N1772-0018",
+        "N1772-0019",
+        "N1772-0013"
+      ],
+      "estado": "pendiente",
+      "ocupacion": "continua",
+      "procedencia": "tools/geo/cuadras-1772.json (#69); contraste visual topológico 2026-11-20, ver calce-y-calles.md; precisión métrica no certificada",
+      "motivo_pendiente": "Reconciliar referencia curada y TPS antes de habilitar generación; el control topológico no certifica precisión métrica."
+    },
+    {
+      "id": "U1772-0109",
+      "manzana": "M1772-0009",
+      "nodos": [
+        "N1772-0005",
+        "N1772-0020",
+        "N1772-0021",
+        "N1772-0006"
+      ],
+      "estado": "pendiente",
+      "ocupacion": "continua",
+      "procedencia": "tools/geo/cuadras-1772.json (#69); contraste visual topológico 2026-11-20, ver calce-y-calles.md; precisión métrica no certificada",
+      "motivo_pendiente": "Reconciliar referencia curada y TPS antes de habilitar generación; el control topológico no certifica precisión métrica."
+    },
+    {
+      "id": "U1772-0080",
+      "manzana": "M1772-0010",
+      "nodos": [
+        "N1772-0022",
+        "N1772-0008",
+        "N1772-0009",
+        "N1772-0023"
+      ],
+      "estado": "pendiente",
+      "ocupacion": "continua",
+      "procedencia": "tools/geo/cuadras-1772.json (#69); contraste visual topológico 2026-11-20, ver calce-y-calles.md; precisión métrica no certificada",
+      "motivo_pendiente": "Reconciliar referencia curada y TPS antes de habilitar generación; el control topológico no certifica precisión métrica."
+    }
+  ],
+  "tipo_limite": "ejes_de_calle; no_son_huellas_edificables"
+}

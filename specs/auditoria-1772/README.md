@@ -78,3 +78,5 @@ El [sondeo de accesos](accesos-primer-lote.md) evalúa los 40 frentes iniciales 
 [Lectura visual de caras candidatas](lectura-bordes-original.md): 590 bordes de 147 unidades, con IDs conservados y diez falsos positivos de proximidad descartados. No cierra la fase 1 ni autoriza generar casas sobre las caras candidatas.
 
 [Unidades edificadas sin cara única](contornos-sin-cara.md): 78 recortes inspeccionados, con decisiones para preservar riberas, pasos, manzanas alargadas y cuerpos aislados.
+
+[Contrato de referencia histórica](contrato-referencia.md): 23 cruces compartidos y diez unidades pendientes, con validación de identidad/topología y selección explícita. Todavía no habilita generación.
