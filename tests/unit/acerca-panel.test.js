@@ -291,6 +291,12 @@ describe('la bienvenida y el panel «Acerca»', () => {
       expect(panel().porEtiqueta('kbd').map((k) => k.textContent)).toEqual(['C', '? o F1'])
     })
 
+    test('al final de los créditos dice qué commit está corriendo', async () => {
+      const acerca = armar({ commit: { hash: '01cb4ca2f3e4d5c6b7a8901234567890abcdef12', sucio: false } })
+      await acerca.abrir()
+      expect(panel().porClase('version').map((p) => p.textContent)).toEqual(['Versión: 01cb4ca.'])
+    })
+
     test('sin línea de tiempo ni créditos (la demo de CI), o si el pedido falla, lo dice y sigue andando', async () => {
       const acerca = armar({ pedirEpocas: async () => { throw new Error('404') }, pedirCreditos: async () => null })
       await acerca.abrir()

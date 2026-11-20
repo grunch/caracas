@@ -4,7 +4,7 @@ import path from 'node:path'
 import {
   AUTOR,
   REPOSITORIO, INSPIRACION, enlaceSeguro, sitioDe, enumerar, conMiles, validarCreditos, leerCreditos, epocasVisibles, queEstasViendo,
-  bloqueDeEpoca, bloquesDeFuentes, seccionesDeAcerca,
+  bloqueDeEpoca, bloquesDeFuentes, seccionesDeAcerca, bloqueDeVersion,
 } from '../../src/acerca.js'
 import { ACCIONES } from '../../src/controles.js'
 import { pieDeEpoca, PRIMERA_EPOCA } from '../../src/epocas.js'
@@ -348,5 +348,30 @@ describe('con los datos del repo', () => {
     expect(planos.at(-1).licencia).toBe(SIN_LICENCIA)
     expect(planos.at(-1).uso).toMatch(/^Es el plano base, en 2 hojas/)
     for (const f of planos) expect(f.url, f.cabeza).toMatch(/^https:\/\//)
+  })
+})
+
+describe('bloqueDeVersion', () => {
+  const HASH = '01cb4ca2f3e4d5c6b7a8901234567890abcdef12'
+
+  it('muestra el commit corto, enlazado a ese commit en el repositorio', () => {
+    expect(bloqueDeVersion({ hash: HASH, sucio: false })).toEqual({
+      tipo: 'p', clase: 'version', partes: ['Versión: ', { texto: '01cb4ca', url: `${REPOSITORIO}/commit/${HASH}` }, '.'],
+    })
+  })
+
+  it('avisa cuando la copia tiene cambios sin commit', () => {
+    expect(textoDe(bloqueDeVersion({ hash: HASH, sucio: true }))).toContain('con cambios sin commit')
+  })
+
+  it('sin un commit válido dice que no se sabe, sin enlace', () => {
+    for (const commit of [null, undefined, {}, { hash: 'no-es-hex' }, { hash: 'abc' }]) {
+      expect(bloqueDeVersion(commit)).toEqual({ tipo: 'p', clase: 'version', partes: ['Versión: sin datos del commit.'] })
+    }
+  })
+
+  it('va al final de los créditos', () => {
+    const creditos = seccionesDeAcerca({ commit: { hash: HASH, sucio: false } }).find((s) => s.id === 'creditos')
+    expect(creditos.bloques.at(-1)).toEqual(bloqueDeVersion({ hash: HASH, sucio: false }))
   })
 })

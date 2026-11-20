@@ -70,6 +70,7 @@ const acerca = crearAcerca({
   alVerCrecer: () => { if (listo) verCrecer(); else crecerPedido = true },
   pedirEpocas: () => crecePedido.then((j) => j.epocas),
   pedirCreditos: () => leerCreditos((url) => fetch(url)),
+  commit: typeof __COMMIT__ === 'undefined' ? null : __COMMIT__, // lo pone vite.config.js al construir
 })
 /** Levanta la ciudad y echa a andar la línea de tiempo (si esta copia la trae). */
 function verCrecer() {
