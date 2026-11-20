@@ -18,7 +18,7 @@ from pathlib import Path
 
 import cv2
 import numpy as np
-from shapely.geometry import LineString, Point
+from shapely.geometry import LineString, Point, Polygon
 from shapely.ops import linemerge, polygonize, unary_union
 from shapely.strtree import STRtree
 
@@ -147,6 +147,9 @@ def ajustar_cara(cara, mascara, origen, metro):
         return None
     vertices = [_cruce(*rectas[k - 1], *rectas[k]) for k in range(len(rectas))]
     if any(v is None for v in vertices):
+        return None
+    figura = Polygon(vertices)
+    if not figura.is_valid or figura.area <= 0:
         return None
     return np.array(vertices)
 
