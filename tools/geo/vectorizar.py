@@ -32,7 +32,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from alas import CRUJIA_M, PATIO, SOLAR, alas_de_casa, frentes_de_manzana  # noqa: E402
 from cuadra import alas_modelo, casa_modelo, crujia_de_cuadra, es_de_solo_casas  # noqa: E402
-from caras import Red, ajustar_cara, mascara_de_lineas  # noqa: E402
+from cuadras_historicas import es_completa  # noqa: E402
+from caras import RETIRO_MINIMO_M, Red, ajustar_cara, mascara_de_lineas  # noqa: E402
 from lados import CUADRA_MINIMA_M2, _relleno, cortar_por_calles, cuadras_pegadas, lotes_por_lados  # noqa: E402
 from lotes import (  # noqa: E402
     casas_de_esquina, direccion_de_manzana, esquinas_de_manzana, fundir_chicos, lotes_de_manzana, sin_pelos,
@@ -168,6 +169,10 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
         figura = poligono_de(mascara, (x + zona[1].start, y + zona[0].start), tolerancia_px)
         if figura is None:
             continue
+        if poligono is not None:
+            figura = figura.intersection(Polygon(np.asarray(poligono) + (x, y)))
+            if figura.is_empty or figura.geom_type != 'Polygon' or figura.area < area_min_px:
+                continue
         semilla = semilla_de(figura.centroid.x, figura.centroid.y)
         agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla,
                       esquina=lote['esquina'], cuadra=salida['n_cuadras'] - 1, cede=publico_que_pisa(salida['publicos'], figura))
@@ -187,6 +192,8 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
     de la cuadra según la red de calles (tools/geo/caras.py), si se conocen: con ellos se reparte aunque su
     borde en el plano sea dentado o tenga muescas."""
     x, y = origen
+    if poligono is not None:
+        manzana = manzana & _relleno(poligono, manzana.shape)
     if (manzana & (clases == CLASE['edificado'])).sum() < area_min_px:
         return
     salida['n_cuadras'] += 1
@@ -214,6 +221,10 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
         figura = poligono_de(mascara, (x + zona[1].start, y + zona[0].start), tolerancia_px)
         if figura is None:
             continue
+        if poligono is not None:
+            figura = figura.intersection(Polygon(np.asarray(poligono) + (x, y)))
+            if figura.is_empty or figura.geom_type != 'Polygon' or figura.area < area_min_px:
+                continue
         semilla = semilla_de(figura.centroid.x, figura.centroid.y)
         # la casa en su ventana, con 10 m de manzana alrededor para ver qué lados dan a la calle
         margen = int(math.ceil(10 / metro))
@@ -322,7 +333,7 @@ def _poligonos_de_cara(red, lista, cajas, metro):
     return salida
 
 
-def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro):
+def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas=()):
     """Las cuadras de 1772 que el plano de 1936 muestra abiertas (una calle nueva que las parte, un pasaje o
     una plaza que les entra): por cada cara de la red sin los tramos nuevos, su polígono ajustado a las
     fachadas con lo abierto adentro vuelto a edificar, salvo lo que 1772 tampoco edifica (una plaza vieja).
@@ -335,7 +346,10 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro):
             continue
         bx0, by0, bx1, by1 = cara.bounds
         x0, y0, x1, y1 = max(0, int(bx0)), max(0, int(by0)), min(ancho, int(bx1) + 2), min(alto, int(by1) + 2)
-        if x1 - x0 < 4 or y1 - y0 < 4 or not edificado72[y0:y1, x0:x1].any():
+        documentada = next((p for p in completas if es_completa(cara, [p])), None)
+        if x1 - x0 < 4 or y1 - y0 < 4:
+            continue
+        if documentada is None and not edificado72[y0:y1, x0:x1].any():
             continue
         cl = clases[y0:y1, x0:x1]
         dentro = np.zeros(cl.shape, np.uint8)
@@ -348,9 +362,12 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro):
         en_poligono = _relleno(poligono, cl.shape) & dentro
         calle = cl == CLASE['calle']
         plaza_vieja = _sin_astillas(en_poligono & calle & ~edificado72[y0:y1, x0:x1], metro, PLAZA_VIEJA_M2)
+        if documentada is not None:
+            evidencia = _relleno(np.asarray(documentada.exterior.coords) - (x0, y0), cl.shape)
+            plaza_vieja &= ~evidencia
         cuadra = en_poligono & (de_manzana | calle) & ~plaza_vieja
         abierto = _sin_astillas(cuadra & calle, metro)
-        if abierto.sum() * metro ** 2 < ABIERTO_MINIMO_M2:
+        if documentada is None and abierto.sum() * metro ** 2 < ABIERTO_MINIMO_M2:
             continue
         # las cuadras de 1936 que reemplaza: las que caen casi enteras adentro; lo de las demás (una miga con el
         # número de la cuadra de enfrente) no es de esta
@@ -365,7 +382,7 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro):
                 or lotes_por_lados(cuadra, metro, 0, poligono) is None:
             continue
         salida.append({'miembros': miembros, 'cuadra': cuadra, 'origen': (x0, y0), 'clases': de_antes,
-                       'poligono': poligono, 'abierto': abierto & cuadra})
+                       'poligono': poligono, 'abierto': abierto & cuadra, 'minimo': 2 if documentada is not None else 1})
     return salida
 
 
@@ -391,7 +408,7 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
     clases = np.asarray(clases)
     area_min_px = AREA_MINIMA_M2 / metro ** 2
     tolerancia_px = TOLERANCIA_M / metro
-    salida = {'vertices': [], 'techos': [], 'esquinas': [], 'cuadras': [], 'cede': [], 'junta': [], 'antes': [], 'juntas': [],
+    salida = {'vertices': [], 'techos': [], 'esquinas': [], 'cuadras': [], 'cede': [], 'junta': [], 'antes': [], 'juntas': [], 'juntas_minimo': [],
               'manzanas': 0, 'marcos': [], 'alas': [], 'publicos': [], 'n_cuadras': 0}
 
     def distancia_m(f):
@@ -402,9 +419,14 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
     if con_red is not None:
         grosor = ANCHO_DE_CORTE_M / metro
         calles_hoy = mascara_de_lineas(con_red.lineas(), clases.shape, grosor)
-        de_1936 = mascara_de_lineas(con_red.lineas(solo_de_1936=True), clases.shape, grosor)
+        # Un píxel extra por lado compensa el buffer de poligono_de al vectorizar.
+        de_1936 = mascara_de_lineas(con_red.lineas(solo_de_1936=True), clases.shape, 2 * RETIRO_MINIMO_M / metro + 2)
     techos_publicos(clases, salida, area_min_px, tolerancia_px, metro)
     manzanas = np.isin(clases, DE_LA_MANZANA).astype(np.uint8)
+    if de_1936 is not None:
+        # Una calle reconocida queda libre aunque no parta la máscara en dos
+        # componentes grandes (p. ej., casas de un solo lado junto a un solar).
+        manzanas[de_1936] = 0
     n, cuadras, stats, _ = cv2.connectedComponentsWithStats(manzanas, connectivity=4)
     # cada manzana, en sus cuadras: las pegadas reciben su propio número en `cuadras` (la primera cuenta como la manzana)
     lista, cajas = [], {}
@@ -429,7 +451,7 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
     antes = []
     if con_red is not None and red.get('edificado72') is not None:
         areas = {etiqueta: int(parte.sum()) for etiqueta, parte in lista}
-        antes = _cuadras_de_antes(con_red, np.asarray(red['edificado72'], bool), clases, cuadras, areas, metro)
+        antes = _cuadras_de_antes(con_red, np.asarray(red['edificado72'], bool), clases, cuadras, areas, metro, red.get('completas72', ()))
     de_grupo = {m: j for j, grupo in enumerate(antes) for m in grupo['miembros']}
     for etiqueta, parte in lista:
         x, y, w, h = cajas[etiqueta]
@@ -442,6 +464,7 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
         techos_de_manzana(grupo['clases'], grupo['cuadra'], grupo['origen'], salida, area_min_px, tolerancia_px, distancia_m,
                           metro, cuadra_modelo, grupo['poligono'])
         salida['juntas'].append(_contornos_de(grupo['abierto'], grupo['origen']))
+        salida['juntas_minimo'].append(grupo['minimo'])
     for privada in ('publicos', 'n_cuadras', '_junta', '_antes'):
         salida.pop(privada, None)
     return salida
@@ -480,6 +503,9 @@ def main():
             if leida is None or leida.shape != clases.shape:
                 raise SystemExit(f'{a.edificado_1772}: se esperaba una máscara de la forma de las clases')
             red['edificado72'] = leida > 0
+    if red is not None:
+        from cuadras_historicas import cargar
+        red['completas72'] = cargar()
     res = vectorizar(clases, a.escala, plaza, red=red)
     with open(a.salida, 'w') as f:
         json.dump(res, f)

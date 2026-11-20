@@ -51,12 +51,10 @@ $PY tools/geo/segmentar.py $D/mosaico.tif $D/segmentacion/mosaico --escala 0.5
 $PY tools/geo/costura.py --mosaico $D/mosaico.tif --meta $D/mosaico.json \
     --clases $D/segmentacion/mosaico/clases.png
 
-# 5. vectorizar: manzanas → lotes rectos (lotes.py) → techos, marcos y alas (--plaza = "plaza" de mosaico.json, en píxeles)
-$PY tools/geo/vectorizar.py $D/segmentacion/mosaico/clases-costura.png $D/ciudad-1936.json \
-    --escala 0.5 --plaza 8968.2,6839 --patios $D/patios-de-casas.png
-
-# 6. empacar: techos → public/datos/ciudad.pak
-node tools/empacar-ciudad.mjs $D/ciudad-1936.json
+# 5–6. generar la red histórica, vectorizar, aplicar épocas y estilos y empacar.
+# El orquestador resuelve las dependencias y pasa --tramos y --edificado-1772:
+# ejecutar vectorizar sin esos argumentos omite las correcciones históricas.
+npm run datos
 
 # 6b. árboles: a los símbolos detectados (arboles.json) se suman los de los canteros de plazas y patios,
 #     que el plano dibuja como manchas verdes sin símbolo (jardines.json); después cada uno recibe la
@@ -347,3 +345,33 @@ Con los datos actuales (casas en pie por época; entre paréntesis, por pisos):
 
 Para mirar el resultado contra las referencias: `GPU=1 node tests/e2e/capturas-estilos.mjs <url> <carpeta>`
 (desde El Calvario, sobre el centro y a nivel de calle en La Pastora, en 1843, 1889, 1911 y 1936).
+
+### Calles y cuadras verificadas (T33g)
+
+`calles-historicas.json` documenta calles comprobadas en los planos de **1772 y 1936**
+que faltan en OSM o que la clasificación automática descarta. Cada tramo conserva
+sus coordenadas en el original, anclajes en el mosaico y una explicación. El paso
+`calles-nuevas` los conecta a nudos de la red a menos de 5 m; si el anclaje deja de
+coincidir, falla para que se revise. No se usa este archivo para calles que solo
+existían en una época: hace falta modelar su vida por separado.
+
+Regenerar con `npm run datos`. Los binarios quedan locales;
+publicarlos requiere la decisión del responsable del proyecto.
+
+`cuadras-1772.json` documenta diez cuadras cerradas del centro: rectángulos en el
+original y sus cuatro cruces correspondientes en el mosaico, leídos por posición
+en el damero respecto de Plaza Mayor. Se excluyen las plazoletas de San Jacinto y
+San Pablo. Solo se aplica cuando hay una cara individual de la red que coincide;
+una cara que agrupa varias cuadras se rechaza. La cuadra cerrada reemplaza a la de
+1936 en 1772 y se conserva hasta la primera época posterior cuyo plano muestra
+la apertura. La evidencia directa fija que no puede desaparecer ya en 1772 por
+un error del raster calzado (`juntas_minimo`). Los lotes siguen siendo sintéticos.
+
+La línea de fachada queda al menos a 3 m del eje reconocido de la calle: una
+reserva de modelado para que un error de la máscara no una dos cuadras. No es una
+medición histórica del ancho de cada vía. Se conservan los retiros mayores medidos
+en el plano; el reparto irregular también se recorta al contorno de la cuadra.
+
+La reserva de calles separa componentes que antes estaban pegados en la máscara:
+el conteo de referencia pasa de 7851 a 8023 manzanas, sin ampliar su tolerancia.
+El conteo se calcula después de retirar las calzadas reconocidas.

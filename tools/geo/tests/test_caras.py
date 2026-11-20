@@ -120,3 +120,52 @@ def test_una_cara_de_muchos_lados_no_se_ajusta():
     yy, xx = np.mgrid[0:440, 0:440]
     m[(xx - 220) ** 2 + (yy - 220) ** 2 < 100 ** 2] = True
     assert ajustar_cara(cara, m, (0, 0), METRO) is None
+
+
+def test_las_cuadras_enfrentadas_dejan_calzada_aunque_el_raster_la_haya_pintado_edificada():
+    izquierda = Polygon([(20,20),(220,20),(220,220),(20,220)])
+    derecha = Polygon([(220,20),(420,20),(420,220),(220,220)])
+    m = np.ones((440,440),bool)  # la costura borró incluso el blanco de la calle
+    a = Polygon(ajustar_cara(izquierda,m,(0,0),METRO))
+    b = Polygon(ajustar_cara(derecha,m,(0,0),METRO))
+    assert a.distance(b) * METRO >= 6 - 1e-6
+
+
+@pytest.mark.parametrize("modelo", [False, True])
+def test_el_reparto_respeta_la_linea_de_fachada(modelo):
+    from tools.geo.vectorizar import techos_de_manzana, CLASE
+    m = np.ones((220,220), bool)
+    clases = np.full(m.shape, CLASE['edificado'], np.uint8)
+    salida = {k: [] for k in ('vertices','techos','esquinas','cuadras','cede','junta','antes','marcos','alas','publicos')}
+    salida['n_cuadras'] = 0
+    p = np.array([[8,8],[212,8],[212,212],[8,212]])
+    techos_de_manzana(clases,m,(0,0),salida,4,1,lambda f:0,METRO,cuadra_modelo=modelo,poligono=p)
+    vertices = np.asarray(salida['vertices']).reshape(-1,2)
+    assert len(salida['techos']) > 0
+    for inicio,n,*_ in salida['techos']:
+        assert Polygon(vertices[inicio:inicio+n]).difference(Polygon(p)).area < 1e-6
+
+
+def test_una_calle_reconocida_se_reserva_aunque_solo_tenga_casas_de_un_lado():
+    from tools.geo.vectorizar import vectorizar, CLASE
+    clases = np.full((260,260), CLASE['calle'], np.uint8)
+    clases[30:230,30:133] = CLASE['edificado']
+    red = {'tramos':[{'linea':[[130,20],[130,240]],'en1936':True,'nueva':False}]}
+    ciudad = vectorizar(clases,METRO,(130,130),red=red)
+    vertices = np.asarray(ciudad['vertices']).reshape(-1,2)
+    assert ciudad['techos']
+    assert vertices[:,0].max() <= 130 - 3/METRO
+
+
+def test_descarta_el_contorno_cuyos_retiros_se_cruzan():
+    # Cara real de la red, trasladada: la simplificación y el retiro cruzaban
+    # dos lados cerca de su extremo sur, aunque la cara original era válida.
+    puntos = np.array([(6245.5,8684.9),(6254.3,8732),(6264.1,8804),(6282.8,8918.1),
+        (6290.8,8959.6),(6297,8966.7),(6305.3,8969.1),(6326.1,8969.7),
+        (6398.7,8966.1),(6480.9,8962.8),(6492.1,8960),(6500.1,8955.3),
+        (6506.7,8948.5),(6510.8,8937.9),(6510.9,8790.3),(6517.6,8752),
+        (6527.8,8711.5),(6538,8682.8),(6550.1,8655),(6559,8625.6),
+        (6561,8587.4),(6557.5,8543.2),(6520.5,8488.3),(6288.6,8652.7)]) - (6240,8480)
+    cara = Polygon(puntos)
+    assert cara.is_valid
+    assert ajustar_cara(cara,np.ones((500,340),bool),(0,0),METRO) is None

@@ -1,0 +1,271 @@
+{
+  "fuente": "fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg",
+  "contraste": "fuentes/mapas/1936-archiveorg-caracas-dcn-hoja1/original.tif",
+  "nota": "Calles verificadas en ambos planos que OSM omite o la máscara de 1936 confunde con edificado. Las coordenadas originales identifican la evidencia; los anclajes del mosaico se ajustan a los nudos de la red (máximo 5 m). No se deduce ausencia histórica de una ausencia en OSM.",
+  "tramos": [
+    {
+      "id": "san-jacinto-traposos",
+      "original": [
+        [
+          968,
+          925
+        ],
+        [
+          902,
+          925
+        ]
+      ],
+      "anclajes": [
+        [
+          9318.9,
+          7017.5
+        ],
+        [
+          9263.3,
+          7290.5
+        ]
+      ],
+      "nota": "Calle que separa la cuadra de la plaza de San Jacinto de la del convento; en 1936, San Jacinto–Traposos, al oeste del Mercado Principal."
+    },
+    {
+      "id": "doctor-paul-el-chorro",
+      "original": [
+        [
+          968,
+          990
+        ],
+        [
+          902,
+          990
+        ]
+      ],
+      "anclajes": [
+        [
+          9579.2,
+          7075.3
+        ],
+        [
+          9524.5,
+          7350.3
+        ]
+      ],
+      "nota": "Lado este del convento; en 1936, Doctor Paul–El Chorro."
+    },
+    {
+      "id": "norte-doctor-paul",
+      "original": [
+        [
+          1034,
+          990
+        ],
+        [
+          968,
+          990
+        ]
+      ],
+      "anclajes": [
+        [
+          9625.1,
+          6850.8
+        ],
+        [
+          9579.2,
+          7075.3
+        ]
+      ],
+      "nota": "Continuación de la misma calle al norte de Doctor Paul."
+    },
+    {
+      "id": "sociedad-camejo",
+      "original": [
+        [
+          902,
+          859
+        ],
+        [
+          835,
+          859
+        ]
+      ],
+      "anclajes": [
+        [
+          9002.3,
+          7231.5
+        ],
+        [
+          8946.4,
+          7501.5
+        ]
+      ],
+      "nota": "Continuación al sur de Sociedad hasta Camejo; visible en ambos planos, omitida en la red actual."
+    },
+    {
+      "id": "camejo-santa-teresa",
+      "original": [
+        [
+          835,
+          859
+        ],
+        [
+          767,
+          859
+        ]
+      ],
+      "anclajes": [
+        [
+          8946.4,
+          7501.5
+        ],
+        [
+          8910.3,
+          7759.0
+        ]
+      ],
+      "nota": "Camejo–Santa Teresa, calle Sur 2 en 1936."
+    },
+    {
+      "id": "santa-teresa-cipreses",
+      "original": [
+        [
+          767,
+          859
+        ],
+        [
+          702,
+          859
+        ]
+      ],
+      "anclajes": [
+        [
+          8910.3,
+          7759.0
+        ],
+        [
+          8852.2,
+          8025.7
+        ]
+      ],
+      "nota": "Santa Teresa–Los Cipreses, calle Sur 2 en 1936."
+    },
+    {
+      "id": "fila-camejo",
+      "original": [
+        [
+          835,
+          793
+        ],
+        [
+          835,
+          926
+        ]
+      ],
+      "anclajes": [
+        [
+          8790.7,
+          7467.7
+        ],
+        [
+          9209.1,
+          7556.8
+        ]
+      ],
+      "nota": "Calle este–oeste de la esquina de Camejo, dañada por la costura del escaneo de 1936."
+    },
+    {
+      "id": "camejo-doctor-diaz",
+      "original": [
+        [
+          835,
+          926
+        ],
+        [
+          835,
+          992
+        ]
+      ],
+      "anclajes": [
+        [
+          9209.1,
+          7556.8
+        ],
+        [
+          9476.7,
+          7613.7
+        ]
+      ],
+      "nota": "Continuación de la calle de Camejo al este, hasta Doctor Díaz."
+    },
+    {
+      "id": "fila-santa-teresa",
+      "original": [
+        [
+          767,
+          793
+        ],
+        [
+          767,
+          926
+        ]
+      ],
+      "anclajes": [
+        [
+          8791.6,
+          7730.4
+        ],
+        [
+          9167.0,
+          7820.6
+        ]
+      ],
+      "nota": "Santa Teresa–Cruz Verde; el plano de 1772 ya muestra esta calle, no es una apertura posterior."
+    },
+    {
+      "id": "camejo-cruz-verde-sur4",
+      "original": [
+        [
+          835,
+          926
+        ],
+        [
+          767,
+          926
+        ]
+      ],
+      "anclajes": [
+        [
+          9209.1,
+          7556.8
+        ],
+        [
+          9167,
+          7820.6
+        ]
+      ],
+      "nota": "Calle Sur 4 al norte de Cruz Verde; el plano de 1936 dibuja el tranvía sobre ella y OSM no aporta este tramo."
+    },
+    {
+      "id": "doctor-diaz-zamuro",
+      "original": [
+        [
+          835,
+          992
+        ],
+        [
+          767,
+          992
+        ]
+      ],
+      "anclajes": [
+        [
+          9476.7,
+          7613.7
+        ],
+        [
+          9432.7,
+          7877.4
+        ]
+      ],
+      "nota": "Calle norte–sur entre Doctor Díaz y El Zamuro, visible en ambos planos; el trazado actual de OSM se desvía hacia las avenidas modernas."
+    }
+  ]
+}

@@ -80,10 +80,10 @@ const PASOS = [
     // la red de calles de hoy en tramos, cada uno con lo que dicen los planos (¿estaba en 1936?, ¿es nuevo desde
     // 1772?), y lo edificado de 1772 ya corregido: con eso vectorizar arma las cuadras de cada época
     id: 'calles-nuevas',
-    entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, OSM_HOY, 'tools/geo/gcp/1936-wgs84.json',
+    entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, OSM_HOY, 'tools/geo/gcp/1936-wgs84.json', 'tools/geo/calles-historicas.json',
       'fuentes/derivados/1772/calzado.tif', 'fuentes/derivados/1772/calzado.json', 'tools/geo/epocas/epocas.json'],
     salidas: [`${D}/tramos.json`, `${D}/edificado-1772.png`],
-    codigo: GEO('calles_nuevas', 'caras', 'lados', 'calce_correlacion', 'epocas', 'hoy_osm', 'geo1936'),
+    codigo: GEO('calles_nuevas', 'calles_historicas', 'caras', 'lados', 'calce_correlacion', 'epocas', 'hoy_osm', 'geo1936'),
     cmd: async () => {
       const { metro } = await leerJson(`${D}/mosaico.json`)
       return [PY, 'tools/geo/calles_nuevas.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/tramos.json`,
@@ -91,9 +91,9 @@ const PASOS = [
     },
   },
   {
-    id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/tramos.json`, `${D}/edificado-1772.png`],
+    id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/tramos.json`, `${D}/edificado-1772.png`, 'tools/geo/cuadras-1772.json'],
     salidas: [`${D}/ciudad-1936.json`, `${D}/patios-de-casas.png`],
-    codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'caras'),
+    codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'caras', 'cuadras_historicas'),
     cmd: async () => {
       const { plaza, metro } = await leerJson(`${D}/mosaico.json`)
       return [PY, 'tools/geo/vectorizar.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/ciudad-1936.json`,

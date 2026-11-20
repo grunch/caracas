@@ -113,6 +113,9 @@ def main():
     edificado, calles = llevar(edificado, cx, cy), llevar(calles, cx, cy)
     lejos = cv2.distanceTransform((~calles).astype(np.uint8), cv2.DIST_L2, 5) * metro
     clasificados = clasificar(tramos, calles36, metro, edificado72=edificado, lejos72_m=lejos, escala=escala)
+    from calles_historicas import completar
+    verificadas = json.loads((Path(__file__).with_name('calles-historicas.json')).read_text())
+    clasificados = completar(clasificados, verificadas['tramos'], a.escala)
     Path(a.salida).write_text(json.dumps({'tramos': clasificados}))
     grande = cv2.resize(edificado.astype(np.uint8), (forma[1] * escala, forma[0] * escala), interpolation=cv2.INTER_NEAREST)
     if not cv2.imwrite(a.edificado, grande[:clases.shape[0], :clases.shape[1]] * 255):
