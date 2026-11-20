@@ -183,3 +183,51 @@ def test_la_calle_de_hoy_no_corta_casas():
     calles = np.zeros(m.shape, bool)
     calles[:, 138:142] = True                     # una avenida de después de 1936, que pasa sobre casas
     assert cortar_por_calles(m, calles, np.zeros(m.shape, bool), METRO) is None
+
+
+# --- el polígono de afuera (la cara de la red, tools/geo/caras.py), la tolerancia y el retiro ---
+
+def cuadrado_dentado(dientes_m=3.0):
+    """Una cuadra de 100 × 100 m con el borde dentado: cada 8 m, un diente de `dientes_m` hacia adentro."""
+    m = np.zeros((280, 280), bool)
+    m[40:240, 40:240] = True
+    d = int(dientes_m / METRO)
+    for k in range(48, 232, 32):
+        m[40:40 + d, k:k + 10] = False
+        m[240 - d:240, k:k + 10] = False
+        m[k:k + 10, 40:40 + d] = False
+        m[k:k + 10, 240 - d:240] = False
+    return m
+
+
+def test_un_borde_muy_dentado_se_reparte_con_una_tolerancia_mayor():
+    resultado = lotes_por_lados(cuadrado_dentado(6.0), METRO, semilla=2)
+    assert resultado is not None
+    _, lotes = resultado
+    assert len({(round(l['eu'][0], 2), round(l['eu'][1], 2)) for l in lotes.values()}) == 4
+
+
+def test_con_el_poligono_de_la_cara_los_lotes_siguen_sus_lados_aunque_la_cuadra_tenga_una_muesca():
+    m = np.zeros((280, 280), bool)
+    m[40:240, 40:240] = True
+    m[40:120, 110:170] = False     # una plaza de 30 × 40 m abierta al norte
+    cara = np.array([[40, 40], [240, 40], [240, 240], [40, 240]], float)
+    etiquetas, lotes = lotes_por_lados(m, METRO, semilla=2, poligono=cara)
+    assert ((etiquetas > 0) == m).mean() > 0.995
+    al_norte = [l for l in lotes.values() if l['eu'][0] < -0.99 or l['eu'][0] > 0.99]
+    al_norte = [l for l in al_norte if l['origen'][1] < 140]
+    retirados = [l for l in al_norte if l['origen'][1] > 100]
+    en_linea = [l for l in al_norte if abs(l['origen'][1] - 40) < 1]
+    assert retirados and en_linea       # los del fondo de la plaza dan a ella; los demás, a la calle
+    for l in retirados:
+        assert l['origen'][1] == pytest.approx(120, abs=1.5) and l['fondo'] <= 60 + 1
+        assert 110 - 14 / METRO <= l['origen'][0] <= 170 + 14 / METRO
+
+
+def test_un_lote_sin_muesca_no_se_retira():
+    _, lotes = lotes_por_lados(rectangulo(), METRO, semilla=3)
+    m = rectangulo()
+    x0, x1, y0, y1 = lineas_de_borde(m)
+    for l in lotes.values():
+        ox, oy = l['origen']
+        assert min(abs(ox - x0), abs(ox - x1), abs(oy - y0), abs(oy - y1)) < 1.5
