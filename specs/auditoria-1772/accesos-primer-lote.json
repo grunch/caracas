@@ -855,7 +855,31 @@
   ],
   "observaciones": {
     "F1772-0005-3": "Desde calle se avanza hacia el retranqueo y termina frente a pared. Entrada profunda en el contorno de referencia; no demuestra recorrido de todo un patio.",
-    "F1772-0010-3": "Antes, una fachada ocupa el rumbo; después el caminante observa el interior abierto. El controlador permite una entrada casi recta (desvío lateral 0.292 m), lo que requiere reconciliar pared visible y colisión.",
+    "F1772-0010-3": "Antes, una fachada ocupa el rumbo; después el caminante observa el interior abierto. El controlador permite una entrada casi recta (desvío lateral 0.292 m), lo que requiere reconciliar pared visible y colisión. El rayo a y=1.6 cruza una pared del techo 33084 unos 0.034 m antes del destino, pero choca devuelve false allí. El destino está apenas detrás de esa pared; no demuestra tránsito libre por todo el patio.",
     "F1772-0003-3": "Candidato automático junto a Catedral, no recorrido visualmente en esta entrega; el hito no interviene en rejillaDeCasas."
+  },
+  "paredes_sondeadas": {
+    "limite": "Intersección geométrica a y=1.6 sin desplazamiento del relieve ni descartes del shader; complemento del recorrido visual, no colisión 3D final.",
+    "recorridos": [
+      {
+        "frente": "F1772-0005-3",
+        "intersecciones": []
+      },
+      {
+        "frente": "F1772-0010-3",
+        "intersecciones": [
+          {
+            "techo": 33084,
+            "punto": [
+              -66.56049497067188,
+              1.6,
+              120.03930917298969
+            ],
+            "distancia": 18.526949982780977,
+            "choca_huella": false
+          }
+        ]
+      }
+    ]
   }
 }
