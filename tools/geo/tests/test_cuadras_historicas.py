@@ -1,18 +1,20 @@
 import numpy as np
+import pytest
 from shapely.geometry import Polygon
 from tools.geo.vectorizar import _cuadras_de_antes, CLASE
 from tools.geo.tests.test_vectorizar import red_de, marco_de_calles
 from tools.geo.caras import Red
 
 
-def test_cuadra_cerrada_documentada_no_hereda_el_pasaje_de_1936():
+@pytest.mark.parametrize("raster_vacio", [False, True])
+def test_cuadra_cerrada_documentada_no_hereda_el_pasaje_de_1936(raster_vacio):
     c = np.full((260,260), CLASE['calle'], np.uint8)
     c[30:230,30:230] = CLASE['edificado']
     c[30:100,110:150] = CLASE['calle']
     cuadras = np.where(c == CLASE['edificado'], 1, 0)
     red = Red(red_de(marco_de_calles(20,20,240,240),c)['tramos'])
     # El raster calzado no reconoce la ocupación en el pasaje, pero el original sí.
-    edificado = c == CLASE['edificado']
+    edificado = np.zeros(c.shape, bool) if raster_vacio else c == CLASE['edificado']
     prueba = [Polygon([(20,20),(240,20),(240,240),(20,240)])]
     grupos = _cuadras_de_antes(red, edificado, c, cuadras, {1:int((cuadras==1).sum())}, .5, completas=prueba)
     assert len(grupos) == 1
@@ -62,3 +64,19 @@ def test_no_se_fuerza_el_cierre_de_la_cuadra_de_la_plaza_de_san_jacinto():
     # Ubicación documentada en marcas-datos.js: el nombre no implica cuadra cerrada.
     plaza = Point(9265,7040)
     assert not any(c.covers(plaza) for c in cargar())
+
+
+def test_la_evidencia_no_rellena_la_plaza_fuera_del_poligono_documentado():
+    c = np.full((260,260), CLASE['calle'], np.uint8)
+    c[30:230,30:230] = CLASE['edificado']
+    c[30:100,110:150] = CLASE['calle']
+    c[100:170,195:230] = CLASE['calle']
+    cuadras = np.where(c == CLASE['edificado'], 1, 0)
+    red = Red(red_de(marco_de_calles(20,20,240,240),c)['tramos'])
+    fuente = Polygon([(20,20),(190,20),(190,240),(20,240)])
+    grupos = _cuadras_de_antes(red,c == CLASE['edificado'],c,cuadras,
+        {1:int((cuadras==1).sum())},.5,completas=[fuente])
+    assert len(grupos) == 1
+    g = grupos[0]; x,y = g['origen']
+    assert g['cuadra'][50-y,125-x]  # el pasaje dentro de la evidencia sí se cierra
+    assert not g['cuadra'][130-y,210-x]  # la plaza exterior se conserva
