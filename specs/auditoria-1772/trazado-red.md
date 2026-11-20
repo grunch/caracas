@@ -33,7 +33,7 @@ Usar el original de 1925 × 1734 cuyo SHA-256 figura en el JSON. Las coordenadas
 from PIL import Image,ImageDraw,ImageFont
 import json
 from pathlib import Path
-p=Path('specs/auditoria-1772');sectors=json.load(open(p/'sectores.json'))['sectores'];lines=json.load(open(p/'trazado-calles-original.json'))['lineas'];im=Image.open('fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg');out=Path('.cache/calles-paneles');out.mkdir(exist_ok=True)
+p=Path('specs/auditoria-1772');sectors=json.load(open(p/'sectores.json'))['sectores'];lines=json.load(open(p/'trazado-calles-original.json'))['lineas'];im=Image.open('fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg');out=Path('.cache/calles-paneles');out.mkdir(parents=True,exist_ok=True)
 for s in sectors:
  x,y,x1,y1=s['bbox_lectura'];v=im.crop((x,y,x1,y1)).resize(((x1-x)*3,(y1-y)*3));d=ImageDraw.Draw(v)
  for l in lines:
