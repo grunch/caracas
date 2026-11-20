@@ -145,8 +145,9 @@ async function publicar() {
     `${ACTIVO_MUESTRA}: 1 km² alrededor de la plaza para los E2E del CI (${JSON.stringify(mm.conteos)}); npm run datos:bajar -- --muestra.`
   await correr('gh', ['release', 'create', etiqueta, paquete, deMuestra, '--repo', REPO, '--target', commit,
     '--title', `Datos ${etiqueta.slice(6)}`, '--notes', notas, '--latest=false'])
-  await rm(CACHE, { recursive: true, force: true })
   console.log(`→ release ${etiqueta} en ${REPO}`)
+  // con el release ya publicado, que el caché no impida pedir el despliegue
+  await rm(CACHE, { recursive: true, force: true }).catch((e) => console.warn(`aviso: no se pudo borrar ${CACHE} (${e.message})`))
   await desplegar()
 }
 
