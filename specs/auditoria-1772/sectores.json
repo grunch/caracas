@@ -1,0 +1,300 @@
+{
+  "orientacion": "Poniente arriba; Norte derecha",
+  "marco": [
+    170,
+    175,
+    1770,
+    1555
+  ],
+  "criterio": "IDs por fila y columna del original; sector dueño por centro de entidad, bbox_lectura con solape. Revisar también caminos/aislados y cartela, no solo manzanas rojas.",
+  "sectores": [
+    {
+      "id": "S1772-11",
+      "bbox_original": [
+        170,
+        175,
+        570,
+        525
+      ],
+      "bbox_lectura": [
+        170,
+        175,
+        595,
+        550
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-12",
+      "bbox_original": [
+        570,
+        175,
+        970,
+        525
+      ],
+      "bbox_lectura": [
+        545,
+        175,
+        995,
+        550
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-13",
+      "bbox_original": [
+        970,
+        175,
+        1370,
+        525
+      ],
+      "bbox_lectura": [
+        945,
+        175,
+        1395,
+        550
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-14",
+      "bbox_original": [
+        1370,
+        175,
+        1770,
+        525
+      ],
+      "bbox_lectura": [
+        1345,
+        175,
+        1770,
+        550
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-21",
+      "bbox_original": [
+        170,
+        525,
+        570,
+        875
+      ],
+      "bbox_lectura": [
+        170,
+        500,
+        595,
+        900
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-22",
+      "bbox_original": [
+        570,
+        525,
+        970,
+        875
+      ],
+      "bbox_lectura": [
+        545,
+        500,
+        995,
+        900
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-23",
+      "bbox_original": [
+        970,
+        525,
+        1370,
+        875
+      ],
+      "bbox_lectura": [
+        945,
+        500,
+        1395,
+        900
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-24",
+      "bbox_original": [
+        1370,
+        525,
+        1770,
+        875
+      ],
+      "bbox_lectura": [
+        1345,
+        500,
+        1770,
+        900
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-31",
+      "bbox_original": [
+        170,
+        875,
+        570,
+        1225
+      ],
+      "bbox_lectura": [
+        170,
+        850,
+        595,
+        1250
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-32",
+      "bbox_original": [
+        570,
+        875,
+        970,
+        1225
+      ],
+      "bbox_lectura": [
+        545,
+        850,
+        995,
+        1250
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-33",
+      "bbox_original": [
+        970,
+        875,
+        1370,
+        1225
+      ],
+      "bbox_lectura": [
+        945,
+        850,
+        1395,
+        1250
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-34",
+      "bbox_original": [
+        1370,
+        875,
+        1770,
+        1225
+      ],
+      "bbox_lectura": [
+        1345,
+        850,
+        1770,
+        1250
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-41",
+      "bbox_original": [
+        170,
+        1225,
+        570,
+        1555
+      ],
+      "bbox_lectura": [
+        170,
+        1200,
+        595,
+        1555
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-42",
+      "bbox_original": [
+        570,
+        1225,
+        970,
+        1555
+      ],
+      "bbox_lectura": [
+        545,
+        1200,
+        995,
+        1555
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-43",
+      "bbox_original": [
+        970,
+        1225,
+        1370,
+        1555
+      ],
+      "bbox_lectura": [
+        945,
+        1200,
+        1395,
+        1555
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    },
+    {
+      "id": "S1772-44",
+      "bbox_original": [
+        1370,
+        1225,
+        1770,
+        1555
+      ],
+      "bbox_lectura": [
+        1345,
+        1200,
+        1770,
+        1555
+      ],
+      "estado": "pendiente_censo_completo",
+      "total_manzanas": null,
+      "total_calles": null
+    }
+  ]
+}

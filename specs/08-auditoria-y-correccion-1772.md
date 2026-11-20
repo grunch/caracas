@@ -1,6 +1,6 @@
 # Auditoría y corrección integral de Caracas en 1772
 
-Estado: plan propuesto el 20 de noviembre de 2026. Comparación preliminar realizada; **la auditoría exhaustiva de la fase 1 sigue pendiente**. Este documento no certifica la fidelidad del mapa ni habilita a cerrar incidencias por tener tests verdes.
+Estado: plan integrado en #74 el 20 de noviembre de 2026. **Fase 1 en curso**: [base fijada y primer lote de observaciones](auditoria-1772/README.md); la auditoría exhaustiva sigue pendiente. Este documento no certifica la fidelidad del mapa ni habilita a cerrar incidencias por tener tests verdes.
 
 ## Objetivo y autoridad de las fuentes
 

@@ -1,0 +1,757 @@
+{
+  "baseline": "B1772-001",
+  "exhaustivo": false,
+  "total_original": null,
+  "manzanas": [
+    {
+      "id": "M1772-0001",
+      "alias_anterior": "norte-plaza",
+      "original_bbox": [
+        1036,
+        793,
+        1104,
+        859
+      ],
+      "mosaico": [
+        [
+          8945.6,
+          6448.8
+        ],
+        [
+          9152.8,
+          6489.5
+        ],
+        [
+          9093,
+          6752.7
+        ],
+        [
+          8894.5,
+          6719.9
+        ]
+      ],
+      "procedencia_correspondencia": "tools/geo/cuadras-1772.json (antecedente #69; pendiente contraste independiente)",
+      "ocupacion_original": "continua; hito en catedral",
+      "estado": "inspeccion_cenital_parcial",
+      "camara": {
+        "x": 26.637499999999818,
+        "z": -118.13749999999982,
+        "dist": 420,
+        "yaw": 0,
+        "pitch_solicitado": 1.56
+      },
+      "pitch_aplicado": 1.5,
+      "captura": "norte-plaza.png",
+      "frentes": [
+        {
+          "id": "F1772-0001-0",
+          "lado_mosaico": [
+            0,
+            1
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0001-1",
+          "lado_mosaico": [
+            1,
+            2
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0001-2",
+          "lado_mosaico": [
+            2,
+            3
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0001-3",
+          "lado_mosaico": [
+            3,
+            0
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        }
+      ],
+      "calles": "pendiente_censo_independiente"
+    },
+    {
+      "id": "M1772-0002",
+      "alias_anterior": "norte-catedral",
+      "original_bbox": [
+        1036,
+        859,
+        1104,
+        926
+      ],
+      "mosaico": [
+        [
+          9152.8,
+          6489.5
+        ],
+        [
+          9406.4,
+          6544.5
+        ],
+        [
+          9356.9,
+          6799.5
+        ],
+        [
+          9093,
+          6752.7
+        ]
+      ],
+      "procedencia_correspondencia": "tools/geo/cuadras-1772.json (antecedente #69; pendiente contraste independiente)",
+      "ocupacion_original": "continua; hito en catedral",
+      "estado": "inspeccion_cenital_parcial",
+      "camara": {
+        "x": 142.03749999999945,
+        "z": -96.22499999999991,
+        "dist": 420,
+        "yaw": 0,
+        "pitch_solicitado": 1.56
+      },
+      "pitch_aplicado": 1.5,
+      "captura": "norte-catedral.png",
+      "frentes": [
+        {
+          "id": "F1772-0002-0",
+          "lado_mosaico": [
+            0,
+            1
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0002-1",
+          "lado_mosaico": [
+            1,
+            2
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0002-2",
+          "lado_mosaico": [
+            2,
+            3
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0002-3",
+          "lado_mosaico": [
+            3,
+            0
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        }
+      ],
+      "calles": "pendiente_censo_independiente"
+    },
+    {
+      "id": "M1772-0003",
+      "alias_anterior": "catedral",
+      "original_bbox": [
+        970,
+        859,
+        1036,
+        926
+      ],
+      "mosaico": [
+        [
+          9093,
+          6752.7
+        ],
+        [
+          9356.9,
+          6799.5
+        ],
+        [
+          9318.9,
+          7017.5
+        ],
+        [
+          9054,
+          6958.4
+        ]
+      ],
+      "procedencia_correspondencia": "tools/geo/cuadras-1772.json (antecedente #69; pendiente contraste independiente)",
+      "ocupacion_original": "continua; hito en catedral",
+      "estado": "inspeccion_cenital_parcial",
+      "camara": {
+        "x": 118.75,
+        "z": 21.512499999999818,
+        "dist": 420,
+        "yaw": 0,
+        "pitch_solicitado": 1.56
+      },
+      "pitch_aplicado": 1.5,
+      "captura": "catedral.png",
+      "frentes": [
+        {
+          "id": "F1772-0003-0",
+          "lado_mosaico": [
+            0,
+            1
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0003-1",
+          "lado_mosaico": [
+            1,
+            2
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0003-2",
+          "lado_mosaico": [
+            2,
+            3
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0003-3",
+          "lado_mosaico": [
+            3,
+            0
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        }
+      ],
+      "calles": "pendiente_censo_independiente"
+    },
+    {
+      "id": "M1772-0004",
+      "alias_anterior": "sociedad-camejo",
+      "original_bbox": [
+        835,
+        859,
+        903,
+        926
+      ],
+      "mosaico": [
+        [
+          9002.3,
+          7231.5
+        ],
+        [
+          9263.3,
+          7290.5
+        ],
+        [
+          9209.1,
+          7556.8
+        ],
+        [
+          8946.4,
+          7501.5
+        ]
+      ],
+      "procedencia_correspondencia": "tools/geo/cuadras-1772.json (antecedente #69; pendiente contraste independiente)",
+      "ocupacion_original": "continua; hito en catedral",
+      "estado": "inspeccion_cenital_parcial",
+      "camara": {
+        "x": 68.53749999999945,
+        "z": 278.0374999999999,
+        "dist": 420,
+        "yaw": 0,
+        "pitch_solicitado": 1.56
+      },
+      "pitch_aplicado": 1.5,
+      "captura": "sociedad-camejo.png",
+      "frentes": [
+        {
+          "id": "F1772-0004-0",
+          "lado_mosaico": [
+            0,
+            1
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0004-1",
+          "lado_mosaico": [
+            1,
+            2
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0004-2",
+          "lado_mosaico": [
+            2,
+            3
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0004-3",
+          "lado_mosaico": [
+            3,
+            0
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        }
+      ],
+      "calles": "pendiente_censo_independiente"
+    },
+    {
+      "id": "M1772-0005",
+      "alias_anterior": "camejo-cruz-verde",
+      "original_bbox": [
+        767,
+        859,
+        835,
+        926
+      ],
+      "mosaico": [
+        [
+          8946.4,
+          7501.5
+        ],
+        [
+          9209.1,
+          7556.8
+        ],
+        [
+          9167,
+          7820.6
+        ],
+        [
+          8910.3,
+          7759.0
+        ]
+      ],
+      "procedencia_correspondencia": "tools/geo/cuadras-1772.json (antecedente #69; pendiente contraste independiente)",
+      "ocupacion_original": "continua; hito en catedral",
+      "estado": "inspeccion_cenital_parcial",
+      "camara": {
+        "x": 45.0,
+        "z": 410.2375000000002,
+        "dist": 420,
+        "yaw": 0,
+        "pitch_solicitado": 1.56
+      },
+      "pitch_aplicado": 1.5,
+      "captura": "camejo-cruz-verde.png",
+      "frentes": [
+        {
+          "id": "F1772-0005-0",
+          "lado_mosaico": [
+            0,
+            1
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0005-1",
+          "lado_mosaico": [
+            1,
+            2
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0005-2",
+          "lado_mosaico": [
+            2,
+            3
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0005-3",
+          "lado_mosaico": [
+            3,
+            0
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        }
+      ],
+      "calles": "pendiente_censo_independiente"
+    },
+    {
+      "id": "M1772-0006",
+      "alias_anterior": "cruz-verde-velasquez",
+      "original_bbox": [
+        702,
+        859,
+        767,
+        926
+      ],
+      "mosaico": [
+        [
+          8910.3,
+          7759
+        ],
+        [
+          9167,
+          7820.6
+        ],
+        [
+          9117.3,
+          8082.1
+        ],
+        [
+          8852.2,
+          8025.7
+        ]
+      ],
+      "procedencia_correspondencia": "tools/geo/cuadras-1772.json (antecedente #69; pendiente contraste independiente)",
+      "ocupacion_original": "continua; hito en catedral",
+      "estado": "inspeccion_cenital_parcial",
+      "camara": {
+        "x": 21.75,
+        "z": 541.4250000000002,
+        "dist": 420,
+        "yaw": 0,
+        "pitch_solicitado": 1.56
+      },
+      "pitch_aplicado": 1.5,
+      "captura": "cruz-verde-velasquez.png",
+      "frentes": [
+        {
+          "id": "F1772-0006-0",
+          "lado_mosaico": [
+            0,
+            1
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0006-1",
+          "lado_mosaico": [
+            1,
+            2
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0006-2",
+          "lado_mosaico": [
+            2,
+            3
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0006-3",
+          "lado_mosaico": [
+            3,
+            0
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        }
+      ],
+      "calles": "pendiente_censo_independiente"
+    },
+    {
+      "id": "M1772-0007",
+      "alias_anterior": "sur-convento",
+      "original_bbox": [
+        835,
+        926,
+        903,
+        992
+      ],
+      "mosaico": [
+        [
+          9263.3,
+          7290.5
+        ],
+        [
+          9524.5,
+          7350.3
+        ],
+        [
+          9476.7,
+          7613.7
+        ],
+        [
+          9209.1,
+          7556.8
+        ]
+      ],
+      "procedencia_correspondencia": "tools/geo/cuadras-1772.json (antecedente #69; pendiente contraste independiente)",
+      "ocupacion_original": "continua; hito en catedral",
+      "estado": "inspeccion_cenital_parcial",
+      "camara": {
+        "x": 200.09999999999945,
+        "z": 306.9124999999999,
+        "dist": 420,
+        "yaw": 0,
+        "pitch_solicitado": 1.56
+      },
+      "pitch_aplicado": 1.5,
+      "captura": "sur-convento.png",
+      "frentes": [
+        {
+          "id": "F1772-0007-0",
+          "lado_mosaico": [
+            0,
+            1
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0007-1",
+          "lado_mosaico": [
+            1,
+            2
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0007-2",
+          "lado_mosaico": [
+            2,
+            3
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0007-3",
+          "lado_mosaico": [
+            3,
+            0
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        }
+      ],
+      "calles": "pendiente_censo_independiente"
+    },
+    {
+      "id": "M1772-0008",
+      "alias_anterior": "doctor-diaz-zamuro",
+      "original_bbox": [
+        767,
+        926,
+        835,
+        992
+      ],
+      "mosaico": [
+        [
+          9209.1,
+          7556.8
+        ],
+        [
+          9476.7,
+          7613.7
+        ],
+        [
+          9432.7,
+          7877.4
+        ],
+        [
+          9167,
+          7820.6
+        ]
+      ],
+      "procedencia_correspondencia": "tools/geo/cuadras-1772.json (antecedente #69; pendiente contraste independiente)",
+      "ocupacion_original": "continua; hito en catedral",
+      "estado": "inspeccion_cenital_parcial",
+      "camara": {
+        "x": 176.58749999999964,
+        "z": 439.0625,
+        "dist": 420,
+        "yaw": 0,
+        "pitch_solicitado": 1.56
+      },
+      "pitch_aplicado": 1.5,
+      "captura": "doctor-diaz-zamuro.png",
+      "frentes": [
+        {
+          "id": "F1772-0008-0",
+          "lado_mosaico": [
+            0,
+            1
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0008-1",
+          "lado_mosaico": [
+            1,
+            2
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0008-2",
+          "lado_mosaico": [
+            2,
+            3
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0008-3",
+          "lado_mosaico": [
+            3,
+            0
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        }
+      ],
+      "calles": "pendiente_censo_independiente"
+    },
+    {
+      "id": "M1772-0009",
+      "alias_anterior": "noreste-catedral",
+      "original_bbox": [
+        1036,
+        926,
+        1104,
+        992
+      ],
+      "mosaico": [
+        [
+          9406.4,
+          6544.5
+        ],
+        [
+          9671.5,
+          6599.2
+        ],
+        [
+          9625.1,
+          6850.8
+        ],
+        [
+          9356.9,
+          6799.5
+        ]
+      ],
+      "procedencia_correspondencia": "tools/geo/cuadras-1772.json (antecedente #69; pendiente contraste independiente)",
+      "ocupacion_original": "continua; hito en catedral",
+      "estado": "inspeccion_cenital_parcial",
+      "camara": {
+        "x": 273.3874999999998,
+        "z": -70.25,
+        "dist": 420,
+        "yaw": 0,
+        "pitch_solicitado": 1.56
+      },
+      "pitch_aplicado": 1.5,
+      "captura": "noreste-catedral.png",
+      "frentes": [
+        {
+          "id": "F1772-0009-0",
+          "lado_mosaico": [
+            0,
+            1
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0009-1",
+          "lado_mosaico": [
+            1,
+            2
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0009-2",
+          "lado_mosaico": [
+            2,
+            3
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0009-3",
+          "lado_mosaico": [
+            3,
+            0
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        }
+      ],
+      "calles": "pendiente_censo_independiente"
+    },
+    {
+      "id": "M1772-0010",
+      "alias_anterior": "seminario",
+      "original_bbox": [
+        903,
+        793,
+        970,
+        859
+      ],
+      "mosaico": [
+        [
+          8838.1,
+          6917.7
+        ],
+        [
+          9054,
+          6958.4
+        ],
+        [
+          9002.3,
+          7231.5
+        ],
+        [
+          8785.3,
+          7178.6
+        ]
+      ],
+      "procedencia_correspondencia": "tools/geo/cuadras-1772.json (antecedente #69; pendiente contraste independiente)",
+      "ocupacion_original": "continua; hito en catedral",
+      "estado": "inspeccion_cenital_parcial",
+      "camara": {
+        "x": -24.137500000000728,
+        "z": 116.27500000000009,
+        "dist": 420,
+        "yaw": 0,
+        "pitch_solicitado": 1.56
+      },
+      "pitch_aplicado": 1.5,
+      "captura": "seminario.png",
+      "frentes": [
+        {
+          "id": "F1772-0010-0",
+          "lado_mosaico": [
+            0,
+            1
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0010-1",
+          "lado_mosaico": [
+            1,
+            2
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0010-2",
+          "lado_mosaico": [
+            2,
+            3
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        },
+        {
+          "id": "F1772-0010-3",
+          "lado_mosaico": [
+            3,
+            0
+          ],
+          "estado": "pendiente_medicion_y_acceso"
+        }
+      ],
+      "calles": "pendiente_censo_independiente"
+    }
+  ]
+}
