@@ -1,6 +1,8 @@
 # Auditoría 1772 · entrega 1A y primer lote de observaciones
 
-Fecha: 20-11-2026. T33j.1a. **Auditoría en curso, sin correcciones de geometría.**
+Fecha: 20-11-2026. T33j.1a.
+
+Continuación: [barrido de los 16 sectores y censo extenso](censo-extenso.md). Los conteos de este README describen la primera entrega; las incidencias y sectores se amplían en la continuación. **Auditoría en curso, sin correcciones de geometría.**
 
 Se fijó una copia independiente del código y de los datos, se verificaron sus hashes y se inspeccionaron diez manzanas en vista alta, más dos vistas oblicuas. No se ha terminado el censo del original ni el diagnóstico de causas. Ninguna manzana se declara completamente verificada.
 

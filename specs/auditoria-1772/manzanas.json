@@ -76,7 +76,8 @@
           "estado": "pendiente_medicion_y_acceso"
         }
       ],
-      "calles": "pendiente_censo_independiente"
+      "calles": "pendiente_censo_independiente",
+      "id_fuente": "U1772-0081"
     },
     {
       "id": "M1772-0002",
@@ -151,7 +152,8 @@
           "estado": "pendiente_medicion_y_acceso"
         }
       ],
-      "calles": "pendiente_censo_independiente"
+      "calles": "pendiente_censo_independiente",
+      "id_fuente": "U1772-0095"
     },
     {
       "id": "M1772-0003",
@@ -226,7 +228,8 @@
           "estado": "pendiente_medicion_y_acceso"
         }
       ],
-      "calles": "pendiente_censo_independiente"
+      "calles": "pendiente_censo_independiente",
+      "id_fuente": "U1772-0094"
     },
     {
       "id": "M1772-0004",
@@ -301,7 +304,8 @@
           "estado": "pendiente_medicion_y_acceso"
         }
       ],
-      "calles": "pendiente_censo_independiente"
+      "calles": "pendiente_censo_independiente",
+      "id_fuente": "U1772-0092"
     },
     {
       "id": "M1772-0005",
@@ -376,7 +380,8 @@
           "estado": "pendiente_medicion_y_acceso"
         }
       ],
-      "calles": "pendiente_censo_independiente"
+      "calles": "pendiente_censo_independiente",
+      "id_fuente": "U1772-0091"
     },
     {
       "id": "M1772-0006",
@@ -451,7 +456,8 @@
           "estado": "pendiente_medicion_y_acceso"
         }
       ],
-      "calles": "pendiente_censo_independiente"
+      "calles": "pendiente_censo_independiente",
+      "id_fuente": "U1772-0207"
     },
     {
       "id": "M1772-0007",
@@ -526,7 +532,8 @@
           "estado": "pendiente_medicion_y_acceso"
         }
       ],
-      "calles": "pendiente_censo_independiente"
+      "calles": "pendiente_censo_independiente",
+      "id_fuente": "U1772-0107"
     },
     {
       "id": "M1772-0008",
@@ -601,7 +608,8 @@
           "estado": "pendiente_medicion_y_acceso"
         }
       ],
-      "calles": "pendiente_censo_independiente"
+      "calles": "pendiente_censo_independiente",
+      "id_fuente": "U1772-0106"
     },
     {
       "id": "M1772-0009",
@@ -676,7 +684,8 @@
           "estado": "pendiente_medicion_y_acceso"
         }
       ],
-      "calles": "pendiente_censo_independiente"
+      "calles": "pendiente_censo_independiente",
+      "id_fuente": "U1772-0109"
     },
     {
       "id": "M1772-0010",
@@ -751,7 +760,8 @@
           "estado": "pendiente_medicion_y_acceso"
         }
       ],
-      "calles": "pendiente_censo_independiente"
+      "calles": "pendiente_censo_independiente",
+      "id_fuente": "U1772-0080"
     }
   ]
 }
