@@ -56,13 +56,4 @@ export const iglesias = Object.freeze([
     largo: 40, ancho: 25, alto: 10, fachada: 'clasica', torres: { n: 2, ...campanario(5.5, 10, { tipo: 'cupula', alto: 3.2 }) },
     verificar: ['Dos torres con cúpula hacia la plaza, al sur: del plano (dos círculos) y de la foto de 1892.', 'Desde qué época, a verificar: va desde 1772.'],
   }),
-  iglesiaEn({
-    id: 'panteon', nombre: 'Panteón Nacional', rotulo: 'Panteón Nacional', x: 9395, y: 5305, eje: NORTE_ALTO, nace: 3,
-    largo: 55, ancho: 23, alto: 13, altoTecho: 7, fachada: 'neogotica',
-    torres: { n: 2, lado: 5.5, cuerpos: [{ alto: 14, vanos: 'ventana' }, { alto: 5.5, vanos: 'arco' }], remate: { tipo: 'aguja', alto: 9 } },
-    verificar: [
-      'Iglesia de dos torres en la panorámica de ~1903 (identificación a ojo).',
-      'Antes fue la iglesia de la Trinidad, y hacia 1930 se rehízo la fachada (el plano de 1936 dibuja tres torres): acá va con dos torres en las tres épocas, desde 1889.',
-    ],
-  }),
 ])

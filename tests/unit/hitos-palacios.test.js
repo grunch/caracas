@@ -139,7 +139,8 @@ describe('los edificios civiles', () => {
 
   test('todo junto sigue siendo una malla liviana', () => {
     const d = construirHitos(HITOS, coords)
-    expect(d.indices.length / 3).toBeLessThan(120_000)
+    // T40a agrega cuatro variantes del Panteón (~51 mil triángulos), en el mismo draw call.
+    expect(d.indices.length / 3).toBeLessThan(180_000)
     expect(d.rangos.length).toBe(HITOS.length)
   })
 })
