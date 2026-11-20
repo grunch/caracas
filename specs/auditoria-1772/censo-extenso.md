@@ -35,4 +35,4 @@ Cruce con el paquete: descomprimir el `.pak`, deshacer byte-shuffle de `vertices
 
 Validar el contorno y la identidad de las unidades usando **la red de calles del original**, empezando por las centrales enlazadas al primer lote y extendiendo hacia las cuatro periferias. Eliminar duplicados de parcela/manzana sin reutilizar sus IDs; conservar decisiones y reemplazos. Censar calles y frentes, verificar controles de calce independientes y convertir cada omisión observada en una incidencia localizada con causa rastreada. Solo después se cierra la fase 1 y se aplican correcciones.
 
-Actualización posterior a esta primera entrega: la [revisión detallada por sectores](revision-original-por-sectores.md) amplía a 272 localizaciones, corrige una caja y marca una parte duplicada; los conteos anteriores describen la entrega inicial de #76.
+Actualización posterior a esta primera entrega: la [revisión detallada por sectores](revision-original-por-sectores.md) amplía a 292 registros clasificados, corrige cajas y conserva un descarte y una relación de parte; los conteos anteriores describen la entrega inicial de #76.

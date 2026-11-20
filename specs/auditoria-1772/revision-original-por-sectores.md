@@ -4,17 +4,30 @@ T33j.1c, en curso. La revisión de ocupación original es una etapa del censo; n
 
 ## Estado del registro
 
-El primer barrido de #76 localizó 271 candidatos. La lectura detallada añade U1772-0272: **272 localizaciones vigentes**, una de ellas marcada como parte de otra. No se presenta este número como total de manzanas históricas.
+El primer barrido de #76 localizó 271 candidatos. La lectura detallada de los 16 paneles del original añade 21 localizaciones: **292 registros históricos**, uno descartado por no ser edificación y otro relacionado como parte de una unidad existente. Son 290 registros restantes de unidades candidatas, no un total definitivo de manzanas históricas.
 
-Hay **59 unidades con clasificación original** en S1772-11, 12, 13, 14 y 43. Las otras 213 siguen pendientes de esta clasificación detallada. `revision_original` en `unidades-original.json` conserva categoría, observación, fecha, evidencia y pendientes por unidad. Los 10 controles centrales de `manzanas.json` tienen su revisión topológica separada; no se suman como si fueran 10 nuevas unidades.
+Los 292 registros tienen clasificación de lo observado en el original. Todavía faltan polígonos, calles fuera del primer lote, correspondencias métricas reconciliadas y revisión de frentes/accesos: **esta clasificación no cierra la fase 1**. `revision_original` conserva categoría, observación, fecha, evidencia y pendientes por unidad. Los 10 controles centrales de `manzanas.json` son unidades ya enlazadas: no se suman de nuevo.
 
-| Sector | Localizaciones clasificadas | Alcance |
-|---|---:|---|
-| S1772-11 | 14 | Ribera, solares y ocupación dispersa al sur del Calvario; alcabala de La Vega |
-| S1772-12 | 9 | Calvario y frente diagonal; incluye nueva U1772-0272 |
-| S1772-13 | 12 | Damero parcial/libre, casa Blanco y alcabala de Catia |
-| S1772-14 | 6 | La Pastora, edificios aislados y alcabala del camino de La Guayra |
-| S1772-43 | 18 | [Plaza y periferia de Candelaria](periferia-candelaria-pastora.md) |
+| Sector | Localizaciones clasificadas |
+|---|---:|
+| S1772-11 | 14 |
+| S1772-12 | 9 |
+| S1772-13 | 12 |
+| S1772-14 | 6 |
+| S1772-21 | 19 |
+| S1772-22 | 35 |
+| S1772-23 | 35 |
+| S1772-24 | 17 |
+| S1772-31 | 18 |
+| S1772-32 | 32 |
+| S1772-33 | 42 |
+| S1772-34 | 22 |
+| S1772-41 | 0 |
+| S1772-42 | 11 |
+| S1772-43 | 18 |
+| S1772-44 | 2 |
+
+Distribución: 20 aislada, 20 conjunto_especial, 89 continua, 1 descartada_no_edificacion, 87 parcial, 1 parte_de_otra_unidad, 1 plaza, 73 terreno_libre.
 
 Las categorías `continua`, `parcial`, `terreno_libre`, `aislada`, `conjunto_especial` y `parte_de_otra_unidad` describen lo observado, no reglas automáticas de construcción. Una franja roja puede tener una caja grande con terreno libre; una iglesia no ocupa toda la plaza que comparte.
 
@@ -25,7 +38,15 @@ Las categorías `continua`, `parcial`, `terreno_libre`, `aislada`, `conjunto_esp
 - **U1772-0272:** franja larga diagonal al pie del Calvario, caja `[637,433,717,506]`, omitida por el filtro automático. La calle la separa de la unidad triangular U1772-0013. La caja sirve para localizarla y no representa su huella edificada.
 - **U1772-0187 y 0188:** se mantienen separadas: el original dibuja una calle entre estas dos franjas estrechas. No forzar una manzana cuadrada.
 
-Estas correcciones explican por qué no se importan las cajas al generador. En el cruce actualizado hay 272 localizaciones y 185 sin centro de techo visible; siguen siendo alertas dependientes de un calce discutido, no 185 omisiones confirmadas.
+- **U1772-0269:** segunda caja manual sobre vegetación; corregida al cuerpo rojo visible del extremo norte, conservando la caja anterior.
+- **U1772-0271:** descartada: la caja señala vegetación y no existe un cuerpo rojo que justifique ese candidato. No participa como omisión pendiente.
+- **U1772-0273…0276 y 0278:** cuerpos aislados omitidos por el filtro de tamaño o por caer dentro de cajas que atraviesan un río.
+- **U1772-0277, 0279, 0285…0292:** unidades pequeñas de ribera, rojas, parciales o libres. Se mantienen separadas cuando hay calle o río; sus cajas son localizadores aproximados.
+- **U1772-0280…0284:** cinco extremos libres y abiertos del damero norte, que el detector de contornos cerrados no podía localizar como bloques completos.
+- **U1772-0036, 0151, 0185 y 0186:** unidades alargadas; no inventar una calle pasante para convertirlas en cuadrados. En U1772-0151 el acceso blanco termina contra un frente rojo continuo.
+- **U1772-0058/0059:** límites aún inciertos entre masas rojas y espacio blanco con cuerpos aislados; se deben decidir al trazar la conexión pública, no mediante las cajas.
+
+Estas correcciones explican por qué no se importan las cajas al generador. En el cruce actualizado hay 292 registros y 204 cajas sin centro de techo visible, incluido el falso candidato descartado. Son alertas dependientes de un calce discutido; no representan 204 omisiones confirmadas.
 
 ## Cómo repetir la lectura
 
