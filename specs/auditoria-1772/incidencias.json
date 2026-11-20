@@ -277,6 +277,22 @@
         6
       ],
       "pr_correccion": null
+    },
+    {
+      "id": "I1772-012",
+      "categoria": "corte_3d_entre_cubiertas",
+      "estado": "confirmado_en_calculo_CPU_pendiente_inspeccion_completa",
+      "prioridad": "P1",
+      "observacion": "271 pares con corte estricto de superficies bajo pisos y relieve de 1772; 234 superan 0,01 m² de proyección común de triángulos implicados. No equivale a 271 defectos históricos certificados.",
+      "causa": "Pendiente separar solapes de huellas, aleros y encuentros entre casas. Los cuatro primeros pares están rastreados al derivado de origen.",
+      "fases_candidatas": [
+        5,
+        6
+      ],
+      "baseline": "B1772-001",
+      "diagnostico_geometrico": "cruces-cubiertas-3d.json",
+      "pr_correccion": null,
+      "criterio_aceptacion": "Repetir cálculo tras resolver huellas, revisar casos visualmente y conservar calles, patios y ocupación aprobados."
     }
   ]
 }
