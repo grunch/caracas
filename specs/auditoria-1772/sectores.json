@@ -36,7 +36,19 @@
         "pitch": 1.5
       },
       "captura": "S1772-11.png",
-      "sha256_captura": "7b7fd50ece7219c784473c8c0d5019401b7d152b96e70f5d7c508684b7c5f669"
+      "sha256_captura": "7b7fd50ece7219c784473c8c0d5019401b7d152b96e70f5d7c508684b7c5f669",
+      "clasificacion_original": {
+        "unidades": 14,
+        "ocupacion": {
+          "aislada": 2,
+          "parcial": 5,
+          "terreno_libre": 7
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      },
+      "unidades_localizadas_actuales": 14
     },
     {
       "id": "S1772-12",
@@ -66,7 +78,20 @@
         "pitch": 1.5
       },
       "captura": "S1772-12.png",
-      "sha256_captura": "2981aff0168d8d5a986f6391c7cc0f3432adc2a0917a306ac073fd39fa71acbf"
+      "sha256_captura": "2981aff0168d8d5a986f6391c7cc0f3432adc2a0917a306ac073fd39fa71acbf",
+      "clasificacion_original": {
+        "unidades": 9,
+        "ocupacion": {
+          "parcial": 2,
+          "continua": 2,
+          "aislada": 4,
+          "parte_de_otra_unidad": 1
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      },
+      "unidades_localizadas_actuales": 9
     },
     {
       "id": "S1772-13",
@@ -96,7 +121,19 @@
         "pitch": 1.5
       },
       "captura": "S1772-13.png",
-      "sha256_captura": "e40ade7e5380439cb6907992bb048586cb0758d9819fbc30c89f1dade812b593"
+      "sha256_captura": "e40ade7e5380439cb6907992bb048586cb0758d9819fbc30c89f1dade812b593",
+      "clasificacion_original": {
+        "unidades": 12,
+        "ocupacion": {
+          "parcial": 4,
+          "terreno_libre": 6,
+          "aislada": 2
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      },
+      "unidades_localizadas_actuales": 12
     },
     {
       "id": "S1772-14",
@@ -126,7 +163,19 @@
         "pitch": 1.5
       },
       "captura": "S1772-14.png",
-      "sha256_captura": "460c04e510fffdc33e9c21ef350977bc8bf62268d208416d32d5ccc514893779"
+      "sha256_captura": "460c04e510fffdc33e9c21ef350977bc8bf62268d208416d32d5ccc514893779",
+      "clasificacion_original": {
+        "unidades": 6,
+        "ocupacion": {
+          "parcial": 1,
+          "aislada": 4,
+          "conjunto_especial": 1
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      },
+      "unidades_localizadas_actuales": 6
     },
     {
       "id": "S1772-21",
@@ -156,7 +205,19 @@
         "pitch": 1.5
       },
       "captura": "S1772-21.png",
-      "sha256_captura": "0dc3bfe0032c4432756fc33d9f9ee70b606f421424cd6d4adcd8b04c5fa2a4b8"
+      "sha256_captura": "0dc3bfe0032c4432756fc33d9f9ee70b606f421424cd6d4adcd8b04c5fa2a4b8",
+      "unidades_localizadas_actuales": 19,
+      "clasificacion_original": {
+        "unidades": 19,
+        "ocupacion": {
+          "parcial": 11,
+          "terreno_libre": 7,
+          "continua": 1
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-22",
@@ -186,7 +247,21 @@
         "pitch": 1.5
       },
       "captura": "S1772-22.png",
-      "sha256_captura": "84c4fff9463996a8ed2a9ab02009a7f0bedcdade14692aa6aabb59d29fffd880"
+      "sha256_captura": "84c4fff9463996a8ed2a9ab02009a7f0bedcdade14692aa6aabb59d29fffd880",
+      "unidades_localizadas_actuales": 35,
+      "clasificacion_original": {
+        "unidades": 35,
+        "ocupacion": {
+          "continua": 21,
+          "parcial": 5,
+          "conjunto_especial": 4,
+          "terreno_libre": 1,
+          "aislada": 4
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-23",
@@ -216,7 +291,20 @@
         "pitch": 1.5
       },
       "captura": "S1772-23.png",
-      "sha256_captura": "414ae4a5f7a5445d5ea0c23d1c89c23c0f7864c25cd63187eecfbd57a3585226"
+      "sha256_captura": "414ae4a5f7a5445d5ea0c23d1c89c23c0f7864c25cd63187eecfbd57a3585226",
+      "unidades_localizadas_actuales": 35,
+      "clasificacion_original": {
+        "unidades": 35,
+        "ocupacion": {
+          "parcial": 10,
+          "continua": 17,
+          "conjunto_especial": 7,
+          "plaza": 1
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-24",
@@ -246,7 +334,19 @@
         "pitch": 1.5
       },
       "captura": "S1772-24.png",
-      "sha256_captura": "bf20e530b0e12edfbe1d7679206a1009f11768216060597ad04cbc438a232a38"
+      "sha256_captura": "bf20e530b0e12edfbe1d7679206a1009f11768216060597ad04cbc438a232a38",
+      "unidades_localizadas_actuales": 17,
+      "clasificacion_original": {
+        "unidades": 17,
+        "ocupacion": {
+          "continua": 3,
+          "terreno_libre": 13,
+          "aislada": 1
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-31",
@@ -276,7 +376,19 @@
         "pitch": 1.5
       },
       "captura": "S1772-31.png",
-      "sha256_captura": "460d516e56b2942f116414d518fa18770a614b8d93eea4822928981df634652a"
+      "sha256_captura": "460d516e56b2942f116414d518fa18770a614b8d93eea4822928981df634652a",
+      "unidades_localizadas_actuales": 18,
+      "clasificacion_original": {
+        "unidades": 18,
+        "ocupacion": {
+          "parcial": 9,
+          "continua": 2,
+          "terreno_libre": 7
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-32",
@@ -306,7 +418,20 @@
         "pitch": 1.5
       },
       "captura": "S1772-32.png",
-      "sha256_captura": "282967b1ae752b88e34f275ccab4d046bad832d9e5130b19b09bdbba0b6c9f0b"
+      "sha256_captura": "282967b1ae752b88e34f275ccab4d046bad832d9e5130b19b09bdbba0b6c9f0b",
+      "unidades_localizadas_actuales": 32,
+      "clasificacion_original": {
+        "unidades": 32,
+        "ocupacion": {
+          "continua": 17,
+          "conjunto_especial": 4,
+          "parcial": 9,
+          "terreno_libre": 2
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-33",
@@ -336,7 +461,20 @@
         "pitch": 1.5
       },
       "captura": "S1772-33.png",
-      "sha256_captura": "cb1010dd1abd6ec64ee82dccbe9a0fba057d2f704682d8907622a2f2dea0d3a1"
+      "sha256_captura": "cb1010dd1abd6ec64ee82dccbe9a0fba057d2f704682d8907622a2f2dea0d3a1",
+      "unidades_localizadas_actuales": 42,
+      "clasificacion_original": {
+        "unidades": 42,
+        "ocupacion": {
+          "conjunto_especial": 2,
+          "continua": 20,
+          "parcial": 15,
+          "terreno_libre": 5
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-34",
@@ -366,7 +504,21 @@
         "pitch": 1.5
       },
       "captura": "S1772-34.png",
-      "sha256_captura": "2f1488f54dbbbfb646028794f5cd54d2fe9bb46a2a677cc18ea8091529202b30"
+      "sha256_captura": "2f1488f54dbbbfb646028794f5cd54d2fe9bb46a2a677cc18ea8091529202b30",
+      "unidades_localizadas_actuales": 22,
+      "clasificacion_original": {
+        "unidades": 22,
+        "ocupacion": {
+          "parcial": 2,
+          "terreno_libre": 15,
+          "conjunto_especial": 1,
+          "aislada": 3,
+          "descartada_no_edificacion": 1
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-41",
@@ -396,7 +548,15 @@
         "pitch": 1.5
       },
       "captura": "S1772-41.png",
-      "sha256_captura": "6edc6e2bd0f7535c5d97691301832101b8263fed9af8432f691bcfb9b87ec146"
+      "sha256_captura": "6edc6e2bd0f7535c5d97691301832101b8263fed9af8432f691bcfb9b87ec146",
+      "unidades_localizadas_actuales": 0,
+      "clasificacion_original": {
+        "unidades": 0,
+        "ocupacion": {},
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-42",
@@ -426,7 +586,19 @@
         "pitch": 1.5
       },
       "captura": "S1772-42.png",
-      "sha256_captura": "dff64b319e9c5867ba938dee7e25a675cfaa98c2d21d8e4912d0067d14561f4d"
+      "sha256_captura": "dff64b319e9c5867ba938dee7e25a675cfaa98c2d21d8e4912d0067d14561f4d",
+      "unidades_localizadas_actuales": 11,
+      "clasificacion_original": {
+        "unidades": 11,
+        "ocupacion": {
+          "continua": 3,
+          "parcial": 6,
+          "terreno_libre": 2
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     },
     {
       "id": "S1772-43",
@@ -456,7 +628,20 @@
         "pitch": 1.5
       },
       "captura": "S1772-43.png",
-      "sha256_captura": "c74ba6c3c52e7ed2ab5760e88b28ebea6ea5ca5d90b1368df9d5e6aed4babe85"
+      "sha256_captura": "c74ba6c3c52e7ed2ab5760e88b28ebea6ea5ca5d90b1368df9d5e6aed4babe85",
+      "clasificacion_original": {
+        "unidades": 18,
+        "ocupacion": {
+          "continua": 3,
+          "parcial": 8,
+          "terreno_libre": 6,
+          "conjunto_especial": 1
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      },
+      "unidades_localizadas_actuales": 18
     },
     {
       "id": "S1772-44",
@@ -486,7 +671,17 @@
         "pitch": 1.5
       },
       "captura": "S1772-44.png",
-      "sha256_captura": "74e17ea68bf8c058a0d0e7c7b4256c120d694ad758cf44b0de5987491aa47844"
+      "sha256_captura": "74e17ea68bf8c058a0d0e7c7b4256c120d694ad758cf44b0de5987491aa47844",
+      "unidades_localizadas_actuales": 2,
+      "clasificacion_original": {
+        "unidades": 2,
+        "ocupacion": {
+          "terreno_libre": 2
+        },
+        "fecha": "2026-11-20",
+        "evidencia": "revision-original-por-sectores.md",
+        "pendiente": "límites y calles, correspondencias métricas, frentes y accesos del sistema"
+      }
     }
   ]
 }

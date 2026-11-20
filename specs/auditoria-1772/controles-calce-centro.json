@@ -1,0 +1,521 @@
+{
+  "baseline": "B1772-001",
+  "fuente_original_sha256": "4696d038a55b8088302a496b6eb4678b11173d98d3a15c589530cf78ee7bb62b",
+  "config_sha256": "080b6c16c2adfd88bd4c1cd01a8471c86823ca29d9b78f2aca5fb4388a4e95df",
+  "nota": "Discrepancia entre dos referencias existentes, no exactitud geográfica del plano esquemático. Nodos compartidos contados una vez. No se modifican GCP ni máscara. El contraste visual confirma orden de cruces en el núcleo; no valida periferias.",
+  "estadisticas": {
+    "n": 23,
+    "rms_m": 35.224,
+    "max_m": 96.162,
+    "mediana_m": 13.313,
+    "mayor_25m": 5
+  },
+  "nodos": [
+    {
+      "id": "N1772-0001",
+      "original": [
+        1104,
+        793
+      ],
+      "mosaico_referencia": [
+        8945.6,
+        6448.8
+      ],
+      "mosaico_calce": [
+        8925.637,
+        6439.339
+      ],
+      "desvio_m": 11.046,
+      "delta_m": [
+        -9.982,
+        -4.73
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0002",
+      "original": [
+        1104,
+        859
+      ],
+      "mosaico_referencia": [
+        9152.8,
+        6489.5
+      ],
+      "mosaico_calce": [
+        9157.55,
+        6480.003
+      ],
+      "desvio_m": 5.309,
+      "delta_m": [
+        2.375,
+        -4.748
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0003",
+      "original": [
+        1036,
+        859
+      ],
+      "mosaico_referencia": [
+        9093,
+        6752.7
+      ],
+      "mosaico_calce": [
+        9108.649,
+        6731.158
+      ],
+      "desvio_m": 13.313,
+      "delta_m": [
+        7.825,
+        -10.771
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0004",
+      "original": [
+        1036,
+        793
+      ],
+      "mosaico_referencia": [
+        8894.5,
+        6719.9
+      ],
+      "mosaico_calce": [
+        8872.928,
+        6690.141
+      ],
+      "desvio_m": 18.378,
+      "delta_m": [
+        -10.786,
+        -14.88
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0005",
+      "original": [
+        1104,
+        926
+      ],
+      "mosaico_referencia": [
+        9406.4,
+        6544.5
+      ],
+      "mosaico_calce": [
+        9404.273,
+        6537.615
+      ],
+      "desvio_m": 3.603,
+      "delta_m": [
+        -1.063,
+        -3.443
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0006",
+      "original": [
+        1036,
+        926
+      ],
+      "mosaico_referencia": [
+        9356.9,
+        6799.5
+      ],
+      "mosaico_calce": [
+        9364.431,
+        6781.541
+      ],
+      "desvio_m": 9.737,
+      "delta_m": [
+        3.765,
+        -8.979
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0007",
+      "original": [
+        970,
+        926
+      ],
+      "mosaico_referencia": [
+        9318.9,
+        7017.5
+      ],
+      "mosaico_calce": [
+        9320.524,
+        7016.719
+      ],
+      "desvio_m": 0.901,
+      "delta_m": [
+        0.812,
+        -0.391
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0008",
+      "original": [
+        970,
+        859
+      ],
+      "mosaico_referencia": [
+        9054,
+        6958.4
+      ],
+      "mosaico_calce": [
+        9059.974,
+        6965.831
+      ],
+      "desvio_m": 4.767,
+      "delta_m": [
+        2.987,
+        3.715
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0009",
+      "original": [
+        903,
+        859
+      ],
+      "mosaico_referencia": [
+        9002.3,
+        7231.5
+      ],
+      "mosaico_calce": [
+        9010.589,
+        7221.076
+      ],
+      "desvio_m": 6.659,
+      "delta_m": [
+        4.144,
+        -5.212
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0010",
+      "original": [
+        903,
+        926
+      ],
+      "mosaico_referencia": [
+        9263.3,
+        7290.5
+      ],
+      "mosaico_calce": [
+        9274.4,
+        7272.368
+      ],
+      "desvio_m": 10.63,
+      "delta_m": [
+        5.55,
+        -9.066
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0011",
+      "original": [
+        835,
+        926
+      ],
+      "mosaico_referencia": [
+        9209.1,
+        7556.8
+      ],
+      "mosaico_calce": [
+        9228.664,
+        7520.113
+      ],
+      "desvio_m": 20.789,
+      "delta_m": [
+        9.782,
+        -18.344
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0012",
+      "original": [
+        835,
+        859
+      ],
+      "mosaico_referencia": [
+        8946.4,
+        7501.5
+      ],
+      "mosaico_calce": [
+        8968.844,
+        7466.714
+      ],
+      "desvio_m": 20.699,
+      "delta_m": [
+        11.222,
+        -17.393
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0013",
+      "original": [
+        767,
+        926
+      ],
+      "mosaico_referencia": [
+        9167,
+        7820.6
+      ],
+      "mosaico_calce": [
+        9185.278,
+        7721.827
+      ],
+      "desvio_m": 50.225,
+      "delta_m": [
+        9.139,
+        -49.386
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0014",
+      "original": [
+        767,
+        859
+      ],
+      "mosaico_referencia": [
+        8910.3,
+        7759.0
+      ],
+      "mosaico_calce": [
+        8934.106,
+        7664.192
+      ],
+      "desvio_m": 48.875,
+      "delta_m": [
+        11.903,
+        -47.404
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0015",
+      "original": [
+        702,
+        926
+      ],
+      "mosaico_referencia": [
+        9117.3,
+        8082.1
+      ],
+      "mosaico_calce": [
+        9144.818,
+        7897.681
+      ],
+      "desvio_m": 93.23,
+      "delta_m": [
+        13.759,
+        -92.209
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0016",
+      "original": [
+        702,
+        859
+      ],
+      "mosaico_referencia": [
+        8852.2,
+        8025.7
+      ],
+      "mosaico_calce": [
+        8900.41,
+        7839.517
+      ],
+      "desvio_m": 96.162,
+      "delta_m": [
+        24.105,
+        -93.092
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0017",
+      "original": [
+        903,
+        992
+      ],
+      "mosaico_referencia": [
+        9524.5,
+        7350.3
+      ],
+      "mosaico_calce": [
+        9517.051,
+        7324.065
+      ],
+      "desvio_m": 13.636,
+      "delta_m": [
+        -3.725,
+        -13.117
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0018",
+      "original": [
+        835,
+        992
+      ],
+      "mosaico_referencia": [
+        9476.7,
+        7613.7
+      ],
+      "mosaico_calce": [
+        9468.808,
+        7572.1
+      ],
+      "desvio_m": 21.171,
+      "delta_m": [
+        -3.946,
+        -20.8
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0019",
+      "original": [
+        767,
+        992
+      ],
+      "mosaico_referencia": [
+        9432.7,
+        7877.4
+      ],
+      "mosaico_calce": [
+        9418.609,
+        7779.197
+      ],
+      "desvio_m": 49.605,
+      "delta_m": [
+        -7.045,
+        -49.102
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0020",
+      "original": [
+        1104,
+        992
+      ],
+      "mosaico_referencia": [
+        9671.5,
+        6599.2
+      ],
+      "mosaico_calce": [
+        9630.653,
+        6610.399
+      ],
+      "desvio_m": 21.177,
+      "delta_m": [
+        -20.424,
+        5.599
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0021",
+      "original": [
+        1036,
+        992
+      ],
+      "mosaico_referencia": [
+        9625.1,
+        6850.8
+      ],
+      "mosaico_calce": [
+        9602.148,
+        6839.194
+      ],
+      "desvio_m": 12.86,
+      "delta_m": [
+        -11.476,
+        -5.803
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0022",
+      "original": [
+        970,
+        793
+      ],
+      "mosaico_referencia": [
+        8838.1,
+        6917.7
+      ],
+      "mosaico_calce": [
+        8821.22,
+        6926.843
+      ],
+      "desvio_m": 9.599,
+      "delta_m": [
+        -8.44,
+        4.572
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    },
+    {
+      "id": "N1772-0023",
+      "original": [
+        903,
+        793
+      ],
+      "mosaico_referencia": [
+        8785.3,
+        7178.6
+      ],
+      "mosaico_calce": [
+        8768.766,
+        7181.778
+      ],
+      "desvio_m": 8.418,
+      "delta_m": [
+        -8.267,
+        1.589
+      ],
+      "procedencia": "esquinas de tools/geo/cuadras-1772.json; contraste visual de continuidad del damero el 2026-11-20",
+      "estado": "correspondencia_topologica_revisada_precision_metrica_no_certificada"
+    }
+  ]
+}

@@ -60,3 +60,5 @@ Censar sobre el original, sector por sector, todas las unidades que faltan. Empe
 Registrar expresamente las excepciones que el original muestra: plazas con entrantes, bordes de quebrada, manzanas parcialmente ocupadas y edificios aislados. Los sectores no pasan a completos por tener una captura general. A continuación localizar cada defecto en los registros del `.pak` y su etapa de generación, con evidencia de origen; solo entonces abrir las subtareas correctivas de fases 2–7.
 
 Comprobaciones de esta entrega: integridad de JSON, IDs únicos, referencias internas, cajas dentro del original, existencia y hash de las capturas, todos los hashes locales declarados, conteo de registros del `.pak` y diff documental limpio. No se cambiaron aplicación ni generador; las suites de aplicación no sustituyen estos controles y no se repitieron para este inventario documental.
+
+El [contraste de cruces y calles](calce-y-calles.md) añade 23 cruces únicos, 32 tramos y el diagnóstico I1772-010: discrepancia del TPS respecto de las referencias curadas. No cierra el censo ni la validación del calce.

@@ -1,0 +1,784 @@
+{
+  "baseline": "B1772-001",
+  "exhaustivo": false,
+  "total_original": null,
+  "nota": "Primer lote: lados de las diez manzanas de #69, deduplicados por extremos originales; IDs estables, no derivados del orden del generador. Se conserva el censo pendiente del resto de calles y del segundo frente cuando no figura aquí.",
+  "calles": [
+    {
+      "id": "C1772-0001",
+      "nodos": [
+        "N1772-0001",
+        "N1772-0002"
+      ],
+      "original": [
+        [
+          1104,
+          793
+        ],
+        [
+          1104,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0001-0"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0002",
+      "nodos": [
+        "N1772-0002",
+        "N1772-0003"
+      ],
+      "original": [
+        [
+          1104,
+          859
+        ],
+        [
+          1036,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0001-1",
+        "F1772-0002-3"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0003",
+      "nodos": [
+        "N1772-0003",
+        "N1772-0004"
+      ],
+      "original": [
+        [
+          1036,
+          859
+        ],
+        [
+          1036,
+          793
+        ]
+      ],
+      "frentes": [
+        "F1772-0001-2"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0004",
+      "nodos": [
+        "N1772-0004",
+        "N1772-0001"
+      ],
+      "original": [
+        [
+          1036,
+          793
+        ],
+        [
+          1104,
+          793
+        ]
+      ],
+      "frentes": [
+        "F1772-0001-3"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0005",
+      "nodos": [
+        "N1772-0002",
+        "N1772-0005"
+      ],
+      "original": [
+        [
+          1104,
+          859
+        ],
+        [
+          1104,
+          926
+        ]
+      ],
+      "frentes": [
+        "F1772-0002-0"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0006",
+      "nodos": [
+        "N1772-0005",
+        "N1772-0006"
+      ],
+      "original": [
+        [
+          1104,
+          926
+        ],
+        [
+          1036,
+          926
+        ]
+      ],
+      "frentes": [
+        "F1772-0002-1",
+        "F1772-0009-3"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0007",
+      "nodos": [
+        "N1772-0006",
+        "N1772-0003"
+      ],
+      "original": [
+        [
+          1036,
+          926
+        ],
+        [
+          1036,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0002-2",
+        "F1772-0003-0"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0008",
+      "nodos": [
+        "N1772-0006",
+        "N1772-0007"
+      ],
+      "original": [
+        [
+          1036,
+          926
+        ],
+        [
+          970,
+          926
+        ]
+      ],
+      "frentes": [
+        "F1772-0003-1"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0009",
+      "nodos": [
+        "N1772-0007",
+        "N1772-0008"
+      ],
+      "original": [
+        [
+          970,
+          926
+        ],
+        [
+          970,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0003-2"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0010",
+      "nodos": [
+        "N1772-0008",
+        "N1772-0003"
+      ],
+      "original": [
+        [
+          970,
+          859
+        ],
+        [
+          1036,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0003-3"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0011",
+      "nodos": [
+        "N1772-0009",
+        "N1772-0010"
+      ],
+      "original": [
+        [
+          903,
+          859
+        ],
+        [
+          903,
+          926
+        ]
+      ],
+      "frentes": [
+        "F1772-0004-0"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0012",
+      "nodos": [
+        "N1772-0010",
+        "N1772-0011"
+      ],
+      "original": [
+        [
+          903,
+          926
+        ],
+        [
+          835,
+          926
+        ]
+      ],
+      "frentes": [
+        "F1772-0004-1",
+        "F1772-0007-3"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0013",
+      "nodos": [
+        "N1772-0011",
+        "N1772-0012"
+      ],
+      "original": [
+        [
+          835,
+          926
+        ],
+        [
+          835,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0004-2",
+        "F1772-0005-0"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0014",
+      "nodos": [
+        "N1772-0012",
+        "N1772-0009"
+      ],
+      "original": [
+        [
+          835,
+          859
+        ],
+        [
+          903,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0004-3"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0015",
+      "nodos": [
+        "N1772-0011",
+        "N1772-0013"
+      ],
+      "original": [
+        [
+          835,
+          926
+        ],
+        [
+          767,
+          926
+        ]
+      ],
+      "frentes": [
+        "F1772-0005-1",
+        "F1772-0008-3"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0016",
+      "nodos": [
+        "N1772-0013",
+        "N1772-0014"
+      ],
+      "original": [
+        [
+          767,
+          926
+        ],
+        [
+          767,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0005-2",
+        "F1772-0006-0"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0017",
+      "nodos": [
+        "N1772-0014",
+        "N1772-0012"
+      ],
+      "original": [
+        [
+          767,
+          859
+        ],
+        [
+          835,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0005-3"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0018",
+      "nodos": [
+        "N1772-0013",
+        "N1772-0015"
+      ],
+      "original": [
+        [
+          767,
+          926
+        ],
+        [
+          702,
+          926
+        ]
+      ],
+      "frentes": [
+        "F1772-0006-1"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0019",
+      "nodos": [
+        "N1772-0015",
+        "N1772-0016"
+      ],
+      "original": [
+        [
+          702,
+          926
+        ],
+        [
+          702,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0006-2"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0020",
+      "nodos": [
+        "N1772-0016",
+        "N1772-0014"
+      ],
+      "original": [
+        [
+          702,
+          859
+        ],
+        [
+          767,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0006-3"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0021",
+      "nodos": [
+        "N1772-0010",
+        "N1772-0017"
+      ],
+      "original": [
+        [
+          903,
+          926
+        ],
+        [
+          903,
+          992
+        ]
+      ],
+      "frentes": [
+        "F1772-0007-0"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0022",
+      "nodos": [
+        "N1772-0017",
+        "N1772-0018"
+      ],
+      "original": [
+        [
+          903,
+          992
+        ],
+        [
+          835,
+          992
+        ]
+      ],
+      "frentes": [
+        "F1772-0007-1"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0023",
+      "nodos": [
+        "N1772-0018",
+        "N1772-0011"
+      ],
+      "original": [
+        [
+          835,
+          992
+        ],
+        [
+          835,
+          926
+        ]
+      ],
+      "frentes": [
+        "F1772-0007-2",
+        "F1772-0008-0"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0024",
+      "nodos": [
+        "N1772-0018",
+        "N1772-0019"
+      ],
+      "original": [
+        [
+          835,
+          992
+        ],
+        [
+          767,
+          992
+        ]
+      ],
+      "frentes": [
+        "F1772-0008-1"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0025",
+      "nodos": [
+        "N1772-0019",
+        "N1772-0013"
+      ],
+      "original": [
+        [
+          767,
+          992
+        ],
+        [
+          767,
+          926
+        ]
+      ],
+      "frentes": [
+        "F1772-0008-2"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0026",
+      "nodos": [
+        "N1772-0005",
+        "N1772-0020"
+      ],
+      "original": [
+        [
+          1104,
+          926
+        ],
+        [
+          1104,
+          992
+        ]
+      ],
+      "frentes": [
+        "F1772-0009-0"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0027",
+      "nodos": [
+        "N1772-0020",
+        "N1772-0021"
+      ],
+      "original": [
+        [
+          1104,
+          992
+        ],
+        [
+          1036,
+          992
+        ]
+      ],
+      "frentes": [
+        "F1772-0009-1"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0028",
+      "nodos": [
+        "N1772-0021",
+        "N1772-0006"
+      ],
+      "original": [
+        [
+          1036,
+          992
+        ],
+        [
+          1036,
+          926
+        ]
+      ],
+      "frentes": [
+        "F1772-0009-2"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0029",
+      "nodos": [
+        "N1772-0022",
+        "N1772-0008"
+      ],
+      "original": [
+        [
+          970,
+          793
+        ],
+        [
+          970,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0010-0"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0030",
+      "nodos": [
+        "N1772-0008",
+        "N1772-0009"
+      ],
+      "original": [
+        [
+          970,
+          859
+        ],
+        [
+          903,
+          859
+        ]
+      ],
+      "frentes": [
+        "F1772-0010-1"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0031",
+      "nodos": [
+        "N1772-0009",
+        "N1772-0023"
+      ],
+      "original": [
+        [
+          903,
+          859
+        ],
+        [
+          903,
+          793
+        ]
+      ],
+      "frentes": [
+        "F1772-0010-2"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    },
+    {
+      "id": "C1772-0032",
+      "nodos": [
+        "N1772-0023",
+        "N1772-0022"
+      ],
+      "original": [
+        [
+          903,
+          793
+        ],
+        [
+          970,
+          793
+        ]
+      ],
+      "frentes": [
+        "F1772-0010-3"
+      ],
+      "estado_original": "calle_observada_entre_cruces",
+      "estado_sistema": "pendiente_medicion_continuidad_y_acceso",
+      "ancho_historico_m": null,
+      "nota": "Eje aproximado del original; sin certificación de ancho ni de los frentes que aún no están censados."
+    }
+  ]
+}
