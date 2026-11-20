@@ -126,9 +126,20 @@ test('con ?sombras=0&contorno=0&grano=0 no hay ni mapa ni pasada: el render de s
 })
 
 test('cada techo deja el id de su casa en el alfa del cuadro (de ahí el contorno sabe qué es un mismo tejado); el piso, cero', async ({ page }) => {
+  let liberarCasas
+  const casasRetenidas = new Promise((ok) => { liberarCasas = ok })
+  await page.route('**/datos/ciudad.pak', async (ruta) => {
+    await casasRetenidas
+    await ruta.continue()
+  })
   const errores = await abrir(page)
-  // lab.ready anuncia el visor; el botón aparece después de añadir las casas del pak.
+  // El relieve también muestra el botón: reproducir que llega antes que las casas.
   await expect(page.locator('#alzar')).toBeVisible()
+  const hayCasas = () => window.lab.scene.children.some((m) =>
+    m.isMesh && m.material === window.lab.ciudad.material && m.geometry.hasAttribute('aTecho'))
+  expect(await page.evaluate(hayCasas)).toBe(false)
+  liberarCasas()
+  await page.waitForFunction(hayCasas)
   const alfa = await page.evaluate(() => {
     const { renderer, acabado, cam, ciudad } = window.lab
     window.lab.levantar(true)

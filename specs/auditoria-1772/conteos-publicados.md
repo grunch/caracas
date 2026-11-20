@@ -51,8 +51,15 @@ corregido y con puerto exclusivo 5228.
 Tras integrar el Panteón (#87), se repitió la validación con el mismo código
 de producción que `main` en `311fcc7`: Vitest 73 archivos/1296 casos y Python
 556 casos aprobados. La prueba de identificadores de cubierta mostró una
-carrera: `lab.ready` anuncia el visor antes de que llegue `ciudad.pak`. Ahora
-espera que aparezca `#alzar`, que se muestra después de incorporar las casas
-a la escena. Se conserva la exigencia de píxeles de techo y de IDs distintos.
-La suite completa posterior aprobó 72 casos de navegador y omitió uno
-(12,8 minutos, salida 0). No cambió la geometría ni se publicó un release.
+carrera: `lab.ready` anuncia el visor antes de que llegue `ciudad.pak`. La primera
+corrección esperaba `#alzar`, pero la revisión detectó que también lo muestra
+el relieve. Ahora la prueba retiene la descarga del pak hasta que aparece
+el botón, comprueba que aún no hay casas, libera la descarga y espera una
+malla de la escena con el material de la ciudad y atributo `aTecho` (ausente
+en el suelo). Se conserva la exigencia de píxeles de techo y de IDs distintos.
+La suite completa anterior al refuerzo de esta espera aprobó 72 casos de
+navegador y omitió uno (12,8 minutos, salida 0). La regresión con descarga
+retenida aprobó después del refuerzo (12,5 segundos, salida 0). No cambió
+la geometría ni se publicó un release.
+El archivo completo de acabado aprobó sus cuatro casos después del refuerzo
+(43,9 segundos, salida 0).
