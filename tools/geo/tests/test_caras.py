@@ -38,6 +38,18 @@ def test_la_fraccion_de_un_tramo_sobre_una_mascara():
     assert fraccion_sobre(np.array([[-500, 50], [-10, 50]], float), m, paso_px=4) is None   # fuera de la hoja
 
 
+def test_una_calle_sola_es_un_tramo():
+    # (la unión de una sola calle es una LineString suelta, que linemerge no acepta)
+    tramos = tramos_de([np.array([[20, 100], [420, 100]])])
+
+    assert len(tramos) == 1
+    assert np.allclose(tramos[0][[0, -1]], [[20, 100], [420, 100]])
+
+
+def test_sin_calles_no_hay_tramos():
+    assert tramos_de([]) == []
+
+
 def test_clasificar_dice_que_tramos_estaban_en_1936_y_cuales_son_nuevos_desde_1772():
     # dos cuadras de 1936 separadas por una calle (x = 220) que en 1772 no existía
     tramos = tramos_de(damero(2))

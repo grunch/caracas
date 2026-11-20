@@ -47,7 +47,9 @@ def tramos_de(lineas):
     geometrias = [LineString(np.asarray(linea, float)) for linea in lineas if len(linea) >= 2]
     if not geometrias:
         return []
-    unidos = linemerge(unary_union(geometrias))
+    anudadas = unary_union(geometrias)
+    # (una calle sola queda como una LineString suelta, que linemerge no acepta: ya es su único tramo)
+    unidos = linemerge(anudadas) if hasattr(anudadas, 'geoms') else anudadas
     partes = unidos.geoms if hasattr(unidos, 'geoms') else [unidos]
     return [np.asarray(p.coords, float) for p in partes if p.length > 0]
 
