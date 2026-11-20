@@ -65,7 +65,8 @@
       "baseline": "B1772-001",
       "pr_correccion": null,
       "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
-      "verificacion_acceso": "pendiente recorrido a pie"
+      "verificacion_acceso": "pendiente recorrido a pie",
+      "comprobacion_acceso": "Recorrido del controlador y capturas antes/después en accesos-primer-lote.json y accesos-primer-lote.md; penetración en contorno de referencia confirmada, alcance del patio no certificado."
     },
     {
       "id": "I1772-003",
@@ -98,7 +99,8 @@
       "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
       "verificacion_acceso": "pendiente recorrido a pie",
       "diagnostico_geometrico": "diagnostico-huellas.json",
-      "reproduccion_aislada": "La cara tomada de tramos.json produce contorno ajustado de ocho vértices con entrante occidental; rechaza reparto vectorial aun sin píxeles interiores faltantes. La cara curada de cuatro lados lo admite. Se mantienen etiquetas simplificadas; no se afirma reproducción integral del pipeline."
+      "reproduccion_aislada": "La cara tomada de tramos.json produce contorno ajustado de ocho vértices con entrante occidental; rechaza reparto vectorial aun sin píxeles interiores faltantes. La cara curada de cuatro lados lo admite. Se mantienen etiquetas simplificadas; no se afirma reproducción integral del pipeline.",
+      "comprobacion_acceso": "Recorrido del controlador y capturas antes/después en accesos-primer-lote.json y accesos-primer-lote.md; penetración en contorno de referencia confirmada, alcance del patio no certificado."
     },
     {
       "id": "I1772-004",
@@ -196,7 +198,12 @@
         3,
         4
       ],
-      "pr_correccion": null
+      "pr_correccion": null,
+      "diagnostico_adicional": {
+        "evidencia": "contraste-unidades.md y ausencias-rastreadas.json",
+        "causa_parcial": "epocas.nace exige persistencia en todos los planos posteriores. En U0182, 16 huellas candidatas tienen máscara de 1772 >=0.987526 pero fracción 1843 cero, por lo que ninguna nace en 1772 según esa regla. Faltan cierre de cuadra y correspondencia histórica final.",
+        "alcance": "No cambiar años de edificios modernos por proximidad ni rellenar cajas; preservar ocupación parcial, plazas e hitos."
+      }
     },
     {
       "id": "I1772-008",

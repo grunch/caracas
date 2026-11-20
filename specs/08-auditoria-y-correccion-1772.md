@@ -100,3 +100,22 @@ La numeración siguiente es el orden previsto; el inventario determina la cantid
 ## Criterio final de aceptación
 
 La ciudad completa de 1772 debe corresponder al original en topología, ocupación y excepciones documentadas. Las reconstrucciones de casas deben tener frentes alineados, cubiertas válidas, patios cerrados cuando corresponda y accesos practicables. No debe quedar ningún defecto confirmado del inventario sin resolver ni sector sin inspeccionar. Las limitaciones de la fuente se publican como tales: no se sustituyen por una falsa precisión histórica.
+
+## Subtareas correctivas identificadas por la auditoría
+
+Estas subtareas concretan las causas ya localizadas; **no cierran la fase 1 ni autorizan a omitir sus pendientes**. Cada una se publica por separado cuando tenga entradas y criterios comprobados. Las referencias de fase 2 deben distinguir entidades aprobadas y pendientes; un candidato por proximidad no puede entrar automáticamente al generador.
+
+| Subtarea | Incidencias / alcance | Archivos o capa previstos | Prueba y aceptación | Dependencia |
+|---|---|---|---|---|
+| T33j.2a | I010: reconciliar referencias del núcleo | `tools/geo/gcp/`, `cuadras-1772.json`, registro histórico | Cruces compartidos únicos; orden de calles igual al original; discrepancias explícitas; no usar umbral del TPS como tolerancia de fachada | Cierre de 1 |
+| T33j.2b | Red, contornos y ocupación periférica | Referencia histórica con IDs U/C/F y procedencia; validadores en `tools/geo/` | Ninguna entidad pendiente se incorpora por caja o cercanía; preservar U0036/U0151, plazas y riberas; validar lados compartidos y cruces | 2a |
+| T33j.3a | I001/I003: cara histórica contaminada por 1936 | `vectorizar._cuadras_de_antes`, `caras.py`, `cuadras_historicas.py` | Fixture de Norte de Plaza con clase cerro interior y Seminario con entrante moderno: la cara aprobada de 1772 determina su contorno; plazas y otras épocas conservadas | 2a |
+| T33j.3b | I007/I010: calles y límites fuera del núcleo | Construcción de caras históricas a partir de 2b, independiente de la red OSM posterior | Calles separan todas las unidades correspondientes; sin cruces por quebradas ni división de manzanas alargadas; comparar los 16 sectores | 2b, 3a |
+| T33j.4a | I007: persistencia temporal elimina ocupación temprana | `epocas.py`, reconstrucción propia de 1772 y serialización de vidas | Caso de fracciones `[1,0,1,1]`: conservar ocupación 1772 y ausencia intermedia sin adelantar el edificio moderno; cotejar U0182 y cuadra 3324 completa | 3 |
+| T33j.4b | I004/I009: conjuntos religiosos y reservas | `src/hitos/`, datos de marcas, reservas de ocupación | Candelaria distingue cuerpos aislados y plaza; Catedral/San Jacinto no borran vecindarios por el solar completo; sin edificios duplicados | 4a |
+| T33j.5a | I001/I002/I003/I011: reparto y contacto entre casas | `huellas.py`, reparto raster/vectorial de `vectorizar.py` | Frentes sobre su recta; lotes sin intersección positiva; resolver rutas cóncavas/huecos sin simplificación independiente que superponga medianeras | 4 |
+| T33j.6a | I005/I011: forma y encuentros de cubiertas | `src/ciudad.js` y módulos de cubiertas | Comprobar superficies 3D y alturas; distinguir aleros de techos cruzados; no modificar calle, lote ni ocupación para ocultar defectos | 5 |
+| T33j.7a | I001/I002/I003: cierre visible y paso peatonal | Cerramientos de crujías y `src/a-pie.js` / `a-pie-modo.js` | Repetir recorridos de calle a interior; lo visible coincide con colisión, preservar puertas/pasajes; no bloquear un patio completo con una huella invisible | 6 |
+| T33j.8a | I006/I008 y entrega integral | Manifiesto, pareja código/datos, fondo de época y verificación visual | Conteos coinciden con `.pak`; fondo no induce calles/edificios falsos; 16 sectores comparados, suites completas, revisiones atendidas y publicación comprobada | 7 |
+
+La medición de huellas (T33j.1e), el enlace de frentes (1f) y el contraste temporal (1g) aportan fixtures y localizaciones para estas tareas. No permiten reducir el alcance final a diez manzanas o a seis unidades: esas son pruebas de causas, mientras que la aceptación sigue siendo la ciudad completa.

@@ -32,20 +32,21 @@
           395
         ],
         [
-          564,
+          570,
           395
         ]
       ],
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0002",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar con el cruce visible al extremo norte de V570; no prolongar automáticamente por el espacio abierto del Calvario."
     },
     {
       "clave": "H395-1",
       "puntos": [
         [
-          1040,
+          1036,
           395
         ],
         [
@@ -56,7 +57,8 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0003",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua."
     },
     {
       "clave": "H461-0",
@@ -100,14 +102,15 @@
           528
         ],
         [
-          566,
+          570,
           528
         ]
       ],
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0006",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua."
     },
     {
       "clave": "H528-1",
@@ -165,7 +168,7 @@
       "clave": "H660-2",
       "puntos": [
         [
-          1440,
+          1439,
           660
         ],
         [
@@ -176,7 +179,8 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0010",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Extremo ajustado un píxel para coincidir con V1439 en un cruce visible; no hay río entre ambos."
     },
     {
       "clave": "H726-0",
@@ -199,7 +203,7 @@
       "clave": "H726-1",
       "puntos": [
         [
-          1440,
+          1439,
           726
         ],
         [
@@ -210,7 +214,8 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0012",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Extremo ajustado un píxel para coincidir con V1439 en un cruce visible; no hay río entre ambos."
     },
     {
       "clave": "H793-0",
@@ -233,7 +238,7 @@
       "clave": "H793-1",
       "puntos": [
         [
-          1440,
+          1439,
           793
         ],
         [
@@ -244,7 +249,8 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0014",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Extremo ajustado un píxel para coincidir con V1439 en un cruce visible; no hay río entre ambos."
     },
     {
       "clave": "H859-0",
@@ -472,7 +478,7 @@
       "clave": "H1257-1",
       "puntos": [
         [
-          904,
+          903,
           1257
         ],
         [
@@ -483,13 +489,14 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0028",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua."
     },
     {
       "clave": "H1323-0",
       "puntos": [
         [
-          769,
+          768,
           1323
         ],
         [
@@ -499,7 +506,7 @@
       ],
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
-      "observacion_revision": "Extremo reducido antes de la ribera; no presupone puente ni conexión a la otra orilla.",
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua.",
       "id": "L1772-0029",
       "margen_lectura_propuesto_px": 5
     },
@@ -507,7 +514,7 @@
       "clave": "H1389-0",
       "puntos": [
         [
-          770,
+          768,
           1389
         ],
         [
@@ -517,7 +524,7 @@
       ],
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
-      "observacion_revision": "Extremo reducido antes de la ribera; no presupone puente ni conexión a la otra orilla.",
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua.",
       "id": "L1772-0030",
       "margen_lectura_propuesto_px": 5
     },
@@ -526,7 +533,7 @@
       "puntos": [
         [
           370,
-          329
+          327
         ],
         [
           370,
@@ -536,7 +543,8 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0031",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua."
     },
     {
       "clave": "V370-1",
@@ -560,7 +568,7 @@
       "puntos": [
         [
           437,
-          329
+          327
         ],
         [
           437,
@@ -577,7 +585,7 @@
       ],
       "tipo": "calle_quebrada",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
-      "observacion_revision": "La calle se quiebra entre U1772-0019 y 0020, antes de llegar a la ribera.",
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua.",
       "id": "L1772-0033",
       "margen_lectura_propuesto_px": 5
     },
@@ -604,7 +612,7 @@
       "puntos": [
         [
           504,
-          329
+          327
         ],
         [
           504,
@@ -614,7 +622,8 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0035",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua."
     },
     {
       "clave": "V504-1",
@@ -638,7 +647,7 @@
       "puntos": [
         [
           570,
-          461
+          395
         ],
         [
           570,
@@ -648,7 +657,8 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0037",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Tramo blanco al costado oriental de U1772-0007, visible entre y=395 y y=461; completar tramo omitido."
     },
     {
       "clave": "V570-1",
@@ -672,6 +682,10 @@
       "puntos": [
         [
           637,
+          517
+        ],
+        [
+          637,
           528
         ],
         [
@@ -685,7 +699,7 @@
       ],
       "tipo": "calle_quebrada",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
-      "observacion_revision": "El frente al pie del Calvario es oblicuo; se descarta la recta que atravesaba rojo.",
+      "observacion_revision": "Conectar con el cruce oblicuo observado en y=517; conservar la curva hacia el sur del plano.",
       "id": "L1772-0039",
       "margen_lectura_propuesto_px": 5
     },
@@ -711,7 +725,7 @@
       "puntos": [
         [
           710,
-          519
+          522
         ],
         [
           710,
@@ -720,7 +734,7 @@
       ],
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
-      "observacion_revision": "Límite entre las unidades irregulares U1772-0023 y 0024, separado del eje de la retícula más al naciente.",
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua.",
       "id": "L1772-0041",
       "margen_lectura_propuesto_px": 5
     },
@@ -750,12 +764,12 @@
         ],
         [
           768,
-          1190
+          1191
         ]
       ],
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
-      "observacion_revision": "Incluye un paso dibujado sobre el agua en torno a [768,600]; se registra aparte para no confundirlo con una calle sobre terreno seco.",
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua.",
       "id": "L1772-0043",
       "margen_lectura_propuesto_px": 5
     },
@@ -819,13 +833,14 @@
         ],
         [
           903,
-          1254
+          1257
         ]
       ],
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0047",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua."
     },
     {
       "clave": "V903-2",
@@ -900,7 +915,7 @@
       "puntos": [
         [
           1036,
-          398
+          395
         ],
         [
           1036,
@@ -910,7 +925,8 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0052",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua."
     },
     {
       "clave": "V1036-1",
@@ -921,13 +937,14 @@
         ],
         [
           1036,
-          1120
+          1125
         ]
       ],
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0053",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua."
     },
     {
       "clave": "V1036-2",
@@ -951,7 +968,7 @@
       "puntos": [
         [
           1104,
-          398
+          395
         ],
         [
           1104,
@@ -961,7 +978,8 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0055",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua."
     },
     {
       "clave": "V1104-1",
@@ -1007,7 +1025,7 @@
       "puntos": [
         [
           1170,
-          398
+          395
         ],
         [
           1170,
@@ -1017,7 +1035,8 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0058",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua."
     },
     {
       "clave": "V1170-1",
@@ -1059,7 +1078,7 @@
       "puntos": [
         [
           1236,
-          399
+          395
         ],
         [
           1236,
@@ -1069,7 +1088,8 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0061",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua."
     },
     {
       "clave": "V1236-1",
@@ -1111,7 +1131,7 @@
       "puntos": [
         [
           1304,
-          399
+          395
         ],
         [
           1304,
@@ -1121,7 +1141,8 @@
       "tipo": "calle_recta",
       "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
       "id": "L1772-0064",
-      "margen_lectura_propuesto_px": 5
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Conectar extremos del esbozo en cruce visible del original; ajuste manual, sin unir a través de agua."
     },
     {
       "clave": "V1304-1",
@@ -1634,6 +1655,24 @@
       "nota": "Doble trazo hacia la ribera; conexión con la trama urbana pendiente de resolver, no prolongación automática sobre el agua.",
       "id": "L1772-0084",
       "margen_lectura_propuesto_px": 6
+    },
+    {
+      "id": "L1772-0085",
+      "clave": "V637-calvario-arriba",
+      "puntos": [
+        [
+          637,
+          461
+        ],
+        [
+          637,
+          517
+        ]
+      ],
+      "tipo": "calle_recta",
+      "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+      "margen_lectura_propuesto_px": 5,
+      "observacion_revision": "Calle blanca entre U1772-0012 y U1772-0013; omitida en el esbozo anterior."
     }
   ],
   "pasos_agua_observados": [

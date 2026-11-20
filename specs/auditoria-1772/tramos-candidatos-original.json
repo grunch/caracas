@@ -1,7 +1,356 @@
 {
   "fuente": "trazado-calles-original.json",
-  "fuente_sha256": "229c4d9228d9174dd8941f3a1cb1a58d84b82e08c5b05715ed0cbf4ce546e78b",
+  "fuente_sha256": "b60398ecd825521108fac4a008e4410cf0169ddf4f516dd3cb03583edc867817",
   "completo": false,
+  "tramos_retirados": [
+    {
+      "id": "R1772-0001",
+      "linea": "L1772-0001",
+      "original": [
+        [
+          350.0,
+          327.0
+        ],
+        [
+          548.0,
+          327.0
+        ],
+        [
+          566.0,
+          319.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0005",
+      "linea": "L1772-0002",
+      "original": [
+        [
+          504.0,
+          395.0
+        ],
+        [
+          564.0,
+          395.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0006",
+      "linea": "L1772-0003",
+      "original": [
+        [
+          1040.0,
+          395.0
+        ],
+        [
+          1355.0,
+          395.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0011",
+      "linea": "L1772-0004",
+      "original": [
+        [
+          570.0,
+          461.0
+        ],
+        [
+          644.0,
+          461.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0020",
+      "linea": "L1772-0006",
+      "original": [
+        [
+          504.0,
+          528.0
+        ],
+        [
+          566.0,
+          528.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0151",
+      "linea": "L1772-0023",
+      "original": [
+        [
+          970.0,
+          1125.0
+        ],
+        [
+          1090.0,
+          1125.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0187",
+      "linea": "L1772-0030",
+      "original": [
+        [
+          770.0,
+          1389.0
+        ],
+        [
+          835.0,
+          1389.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0196",
+      "linea": "L1772-0031",
+      "original": [
+        [
+          370.0,
+          329.0
+        ],
+        [
+          370.0,
+          395.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0206",
+      "linea": "L1772-0033",
+      "original": [
+        [
+          437.0,
+          329.0
+        ],
+        [
+          437.0,
+          395.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0219",
+      "linea": "L1772-0035",
+      "original": [
+        [
+          504.0,
+          329.0
+        ],
+        [
+          504.0,
+          395.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0243",
+      "linea": "L1772-0039",
+      "original": [
+        [
+          637.0,
+          528.0
+        ],
+        [
+          644.0,
+          546.0
+        ],
+        [
+          632.0,
+          584.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0253",
+      "linea": "L1772-0041",
+      "original": [
+        [
+          710.0,
+          519.0
+        ],
+        [
+          710.0,
+          522.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0272",
+      "linea": "L1772-0044",
+      "original": [
+        [
+          768.0,
+          1323.0
+        ],
+        [
+          768.0,
+          1447.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0294",
+      "linea": "L1772-0047",
+      "original": [
+        [
+          903.0,
+          1191.0
+        ],
+        [
+          903.0,
+          1254.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0311",
+      "linea": "L1772-0052",
+      "original": [
+        [
+          1036.0,
+          398.0
+        ],
+        [
+          1036.0,
+          461.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0322",
+      "linea": "L1772-0053",
+      "original": [
+        [
+          1036.0,
+          1058.0
+        ],
+        [
+          1036.0,
+          1120.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0327",
+      "linea": "L1772-0055",
+      "original": [
+        [
+          1104.0,
+          398.0
+        ],
+        [
+          1104.0,
+          461.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0344",
+      "linea": "L1772-0058",
+      "original": [
+        [
+          1170.0,
+          398.0
+        ],
+        [
+          1170.0,
+          461.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0361",
+      "linea": "L1772-0061",
+      "original": [
+        [
+          1236.0,
+          399.0
+        ],
+        [
+          1236.0,
+          461.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0378",
+      "linea": "L1772-0064",
+      "original": [
+        [
+          1304.0,
+          399.0
+        ],
+        [
+          1304.0,
+          461.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0402",
+      "linea": "L1772-0069",
+      "original": [
+        [
+          1439.0,
+          594.0
+        ],
+        [
+          1439.0,
+          859.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    },
+    {
+      "id": "R1772-0429",
+      "linea": "L1772-0075",
+      "original": [
+        [
+          570.0,
+          528.0
+        ],
+        [
+          637.0,
+          517.0
+        ],
+        [
+          688.0,
+          508.0
+        ],
+        [
+          707.0,
+          510.0
+        ]
+      ],
+      "motivo": "Tramo sustituido o subdividido al corregir extremos y completar cruces observados; no reutilizar ID."
+    }
+  ],
+  "base_ids_commit": "a94b9b9",
   "metodo": "Partición en intersecciones geométricas exactas mediante Shapely 2.2.0; sin ajustar extremos próximos ni conectar agua. R son candidatos de auditoría: no reemplazan IDs C ni N. Umbral de 10 px solo propone correspondencias, no aprueba calce.",
   "solapes_lineales": [],
   "correspondencias_primer_lote": [
@@ -200,11 +549,53 @@
   ],
   "tramos": [
     {
-      "id": "R1772-0001",
+      "id": "R1772-0456",
       "linea": "L1772-0001",
       "original": [
         [
           350.0,
+          327.0
+        ],
+        [
+          370.0,
+          327.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0457",
+      "linea": "L1772-0001",
+      "original": [
+        [
+          370.0,
+          327.0
+        ],
+        [
+          437.0,
+          327.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0458",
+      "linea": "L1772-0001",
+      "original": [
+        [
+          437.0,
+          327.0
+        ],
+        [
+          504.0,
+          327.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0459",
+      "linea": "L1772-0001",
+      "original": [
+        [
+          504.0,
           327.0
         ],
         [
@@ -260,7 +651,7 @@
       ]
     },
     {
-      "id": "R1772-0005",
+      "id": "R1772-0460",
       "linea": "L1772-0002",
       "original": [
         [
@@ -268,17 +659,73 @@
           395.0
         ],
         [
-          564.0,
+          570.0,
           395.0
         ]
       ]
     },
     {
-      "id": "R1772-0006",
+      "id": "R1772-0461",
       "linea": "L1772-0003",
       "original": [
         [
-          1040.0,
+          1036.0,
+          395.0
+        ],
+        [
+          1104.0,
+          395.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0462",
+      "linea": "L1772-0003",
+      "original": [
+        [
+          1104.0,
+          395.0
+        ],
+        [
+          1170.0,
+          395.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0463",
+      "linea": "L1772-0003",
+      "original": [
+        [
+          1170.0,
+          395.0
+        ],
+        [
+          1236.0,
+          395.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0464",
+      "linea": "L1772-0003",
+      "original": [
+        [
+          1236.0,
+          395.0
+        ],
+        [
+          1304.0,
+          395.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0465",
+      "linea": "L1772-0003",
+      "original": [
+        [
+          1304.0,
           395.0
         ],
         [
@@ -344,11 +791,25 @@
       ]
     },
     {
-      "id": "R1772-0011",
+      "id": "R1772-0466",
       "linea": "L1772-0004",
       "original": [
         [
           570.0,
+          461.0
+        ],
+        [
+          637.0,
+          461.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0467",
+      "linea": "L1772-0004",
+      "original": [
+        [
+          637.0,
           461.0
         ],
         [
@@ -470,7 +931,7 @@
       ]
     },
     {
-      "id": "R1772-0020",
+      "id": "R1772-0468",
       "linea": "L1772-0006",
       "original": [
         [
@@ -478,7 +939,7 @@
           528.0
         ],
         [
-          566.0,
+          570.0,
           528.0
         ]
       ]
@@ -656,7 +1117,7 @@
       "linea": "L1772-0010",
       "original": [
         [
-          1440.0,
+          1439.0,
           660.0
         ],
         [
@@ -908,7 +1369,7 @@
       "linea": "L1772-0012",
       "original": [
         [
-          1440.0,
+          1439.0,
           726.0
         ],
         [
@@ -1160,7 +1621,7 @@
       "linea": "L1772-0014",
       "original": [
         [
-          1440.0,
+          1439.0,
           793.0
         ],
         [
@@ -2304,11 +2765,25 @@
       ]
     },
     {
-      "id": "R1772-0151",
+      "id": "R1772-0469",
       "linea": "L1772-0023",
       "original": [
         [
           970.0,
+          1125.0
+        ],
+        [
+          1036.0,
+          1125.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0470",
+      "linea": "L1772-0023",
+      "original": [
+        [
+          1036.0,
           1125.0
         ],
         [
@@ -2560,7 +3035,7 @@
       "linea": "L1772-0028",
       "original": [
         [
-          904.0,
+          903.0,
           1257.0
         ],
         [
@@ -2686,7 +3161,7 @@
       "linea": "L1772-0029",
       "original": [
         [
-          769.0,
+          768.0,
           1323.0
         ],
         [
@@ -2808,11 +3283,11 @@
       ]
     },
     {
-      "id": "R1772-0187",
+      "id": "R1772-0471",
       "linea": "L1772-0030",
       "original": [
         [
-          770.0,
+          768.0,
           1389.0
         ],
         [
@@ -2934,12 +3409,12 @@
       ]
     },
     {
-      "id": "R1772-0196",
+      "id": "R1772-0472",
       "linea": "L1772-0031",
       "original": [
         [
           370.0,
-          329.0
+          327.0
         ],
         [
           370.0,
@@ -3074,12 +3549,12 @@
       ]
     },
     {
-      "id": "R1772-0206",
+      "id": "R1772-0473",
       "linea": "L1772-0033",
       "original": [
         [
           437.0,
-          329.0
+          327.0
         ],
         [
           437.0,
@@ -3260,12 +3735,12 @@
       ]
     },
     {
-      "id": "R1772-0219",
+      "id": "R1772-0474",
       "linea": "L1772-0035",
       "original": [
         [
           504.0,
-          329.0
+          327.0
         ],
         [
           504.0,
@@ -3442,6 +3917,20 @@
       ]
     },
     {
+      "id": "R1772-0475",
+      "linea": "L1772-0037",
+      "original": [
+        [
+          570.0,
+          395.0
+        ],
+        [
+          570.0,
+          461.0
+        ]
+      ]
+    },
+    {
       "id": "R1772-0232",
       "linea": "L1772-0037",
       "original": [
@@ -3596,9 +4085,13 @@
       ]
     },
     {
-      "id": "R1772-0243",
+      "id": "R1772-0476",
       "linea": "L1772-0039",
       "original": [
+        [
+          637.0,
+          517.0
+        ],
         [
           637.0,
           528.0
@@ -3736,20 +4229,6 @@
         [
           637.0,
           1184.0
-        ]
-      ]
-    },
-    {
-      "id": "R1772-0253",
-      "linea": "L1772-0041",
-      "original": [
-        [
-          710.0,
-          519.0
-        ],
-        [
-          710.0,
-          522.0
         ]
       ]
     },
@@ -4001,17 +4480,31 @@
         ],
         [
           768.0,
-          1190.0
+          1191.0
         ]
       ]
     },
     {
-      "id": "R1772-0272",
+      "id": "R1772-0477",
       "linea": "L1772-0044",
       "original": [
         [
           768.0,
           1323.0
+        ],
+        [
+          768.0,
+          1389.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0478",
+      "linea": "L1772-0044",
+      "original": [
+        [
+          768.0,
+          1389.0
         ],
         [
           768.0,
@@ -4314,7 +4807,7 @@
       ]
     },
     {
-      "id": "R1772-0294",
+      "id": "R1772-0479",
       "linea": "L1772-0047",
       "original": [
         [
@@ -4323,7 +4816,7 @@
         ],
         [
           903.0,
-          1254.0
+          1257.0
         ]
       ]
     },
@@ -4552,12 +5045,12 @@
       ]
     },
     {
-      "id": "R1772-0311",
+      "id": "R1772-0480",
       "linea": "L1772-0052",
       "original": [
         [
           1036.0,
-          398.0
+          395.0
         ],
         [
           1036.0,
@@ -4706,7 +5199,7 @@
       ]
     },
     {
-      "id": "R1772-0322",
+      "id": "R1772-0481",
       "linea": "L1772-0053",
       "original": [
         [
@@ -4715,7 +5208,7 @@
         ],
         [
           1036.0,
-          1120.0
+          1125.0
         ]
       ]
     },
@@ -4776,12 +5269,12 @@
       ]
     },
     {
-      "id": "R1772-0327",
+      "id": "R1772-0482",
       "linea": "L1772-0055",
       "original": [
         [
           1104.0,
-          398.0
+          395.0
         ],
         [
           1104.0,
@@ -5018,12 +5511,12 @@
       ]
     },
     {
-      "id": "R1772-0344",
+      "id": "R1772-0483",
       "linea": "L1772-0058",
       "original": [
         [
           1170.0,
-          398.0
+          395.0
         ],
         [
           1170.0,
@@ -5256,12 +5749,12 @@
       ]
     },
     {
-      "id": "R1772-0361",
+      "id": "R1772-0484",
       "linea": "L1772-0061",
       "original": [
         [
           1236.0,
-          399.0
+          395.0
         ],
         [
           1236.0,
@@ -5494,12 +5987,12 @@
       ]
     },
     {
-      "id": "R1772-0378",
+      "id": "R1772-0485",
       "linea": "L1772-0064",
       "original": [
         [
           1304.0,
-          399.0
+          395.0
         ],
         [
           1304.0,
@@ -5830,12 +6323,54 @@
       ]
     },
     {
-      "id": "R1772-0402",
+      "id": "R1772-0486",
       "linea": "L1772-0069",
       "original": [
         [
           1439.0,
           594.0
+        ],
+        [
+          1439.0,
+          660.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0487",
+      "linea": "L1772-0069",
+      "original": [
+        [
+          1439.0,
+          660.0
+        ],
+        [
+          1439.0,
+          726.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0488",
+      "linea": "L1772-0069",
+      "original": [
+        [
+          1439.0,
+          726.0
+        ],
+        [
+          1439.0,
+          793.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0489",
+      "linea": "L1772-0069",
+      "original": [
+        [
+          1439.0,
+          793.0
         ],
         [
           1439.0,
@@ -6220,13 +6755,23 @@
       ]
     },
     {
-      "id": "R1772-0429",
+      "id": "R1772-0490",
       "linea": "L1772-0075",
       "original": [
         [
           570.0,
           528.0
         ],
+        [
+          637.0,
+          517.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0491",
+      "linea": "L1772-0075",
+      "original": [
         [
           637.0,
           517.0
@@ -6718,6 +7263,20 @@
         [
           419.0,
           1155.0
+        ]
+      ]
+    },
+    {
+      "id": "R1772-0492",
+      "linea": "L1772-0085",
+      "original": [
+        [
+          637.0,
+          461.0
+        ],
+        [
+          637.0,
+          517.0
         ]
       ]
     }

@@ -1,0 +1,2652 @@
+{
+  "metodo": "Máscaras regeneradas desde calzados locales, no presumidas iguales a las usadas para B1772-001. Índices enlazados por semilla y vértices completos. Nacimiento por persistencia antes de cerrar cuadras/juntas, no vida final.",
+  "hashes": [
+    {
+      "año": 1772,
+      "calzado_sha256": "b09d93520b9235107c315765ff2bc00a9bda2feea09506fdf6890571bbc2ed09",
+      "mascara_sha256": "76af5f58c9b67f75811d7cde6c34b595da4909fdc419e772664c46d900bc022c"
+    },
+    {
+      "año": 1843,
+      "calzado_sha256": "d9123434b4a18e34affab3cd8d73953cc7ac38e277d249db4d3eb316971b61df",
+      "mascara_sha256": "cd6b93e3254a185e8e9cf27bff8fbdbae4eded3eb114b5af172ec2019895e374"
+    },
+    {
+      "año": 1889,
+      "calzado_sha256": "a5f8001ddfc2fe10f07299e817688843afa0e8fc0bff6c42089a44b208e58e96",
+      "mascara_sha256": "df9791e2b1406572e6c431fe17511109d3bad0f04815d4c8cd92ab3465355a39"
+    },
+    {
+      "año": 1911,
+      "calzado_sha256": "5f6873c9638b45474ece3a66943a0fc1732edd8d4ea29b1542b350475a6d20d7",
+      "mascara_sha256": "3d4f82a317f3b3efb7cd3e0406aeab276b6f2d8050ee179097ce2813a86d5cbc"
+    }
+  ],
+  "casos": [
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 19396,
+      "techo_1936": 19549,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        0.894144,
+        0.43018,
+        0.783784,
+        0.849099
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": 2,
+      "cuadra": 4367
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 19407,
+      "techo_1936": 19560,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        0.996914,
+        1.0,
+        0.790123,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 2,
+      "cuadra": 4367
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 19408,
+      "techo_1936": 19561,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.820707,
+        0.982323
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 2,
+      "cuadra": 4367
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 19409,
+      "techo_1936": 19562,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.94702,
+        0.871965,
+        0.854305
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 2,
+      "cuadra": 4367
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 19410,
+      "techo_1936": 19563,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.904523,
+        0.884422,
+        0.927973
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 2,
+      "cuadra": 4367
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 19411,
+      "techo_1936": 19564,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.991394,
+        0.889845,
+        0.972461
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 2,
+      "cuadra": 4367
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 19412,
+      "techo_1936": 19565,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.655098,
+        0.952278
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 2,
+      "cuadra": 4367
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 19413,
+      "techo_1936": 19566,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.369444,
+        0.986111
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 0,
+      "junta": 2,
+      "cuadra": 4367
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 19414,
+      "techo_1936": 19567,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.984733,
+        0.103053,
+        0.851145
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 0,
+      "junta": 2,
+      "cuadra": 4367
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 32663,
+      "techo_1936": 33004,
+      "vida_actual": [
+        3,
+        5
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.918261,
+        0.831304,
+        0.721739
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 1,
+      "junta": 2,
+      "cuadra": 8070
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 32664,
+      "techo_1936": 33005,
+      "vida_actual": [
+        3,
+        5
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.777322,
+        0.829235,
+        0.769126
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 1,
+      "junta": 2,
+      "cuadra": 8070
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 32665,
+      "techo_1936": 33006,
+      "vida_actual": [
+        3,
+        5
+      ],
+      "fracciones_edificado": [
+        0.900118,
+        0.473561,
+        0.855464,
+        0.813161
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 1,
+      "junta": 2,
+      "cuadra": 8070
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 32672,
+      "techo_1936": 33013,
+      "vida_actual": [
+        3,
+        5
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.78022,
+        0.913658
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 1,
+      "junta": 2,
+      "cuadra": 8070
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 32673,
+      "techo_1936": 33014,
+      "vida_actual": [
+        3,
+        5
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.50297,
+        0.950495
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 1,
+      "junta": 2,
+      "cuadra": 8070
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 32674,
+      "techo_1936": 33015,
+      "vida_actual": [
+        3,
+        5
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.997573,
+        0.191748,
+        0.975728
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 1,
+      "junta": 2,
+      "cuadra": 8070
+    },
+    {
+      "unidad": "U1772-0012",
+      "techo_final": 32675,
+      "techo_1936": 33016,
+      "vida_actual": [
+        3,
+        5
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.29097,
+        0.668896
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 1,
+      "junta": 2,
+      "cuadra": 8070
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 93,
+      "techo_1936": 93,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.02439,
+        0.0
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": -1
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 95,
+      "techo_1936": 95,
+      "vida_actual": [
+        4,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": -1
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5850,
+      "techo_1936": 5876,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        0.878628,
+        0.854881,
+        0.620053
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5851,
+      "techo_1936": 5877,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.026596,
+        1.0,
+        0.885638,
+        0.808511
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5852,
+      "techo_1936": 5878,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.406176,
+        1.0,
+        0.907363,
+        0.992874
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5853,
+      "techo_1936": 5879,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.782805,
+        1.0,
+        0.809955,
+        0.99095
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5854,
+      "techo_1936": 5880,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.829885,
+        0.963218
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5855,
+      "techo_1936": 5881,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.997947,
+        0.924025
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5856,
+      "techo_1936": 5882,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.968254,
+        0.751984
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5857,
+      "techo_1936": 5883,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.957286,
+        1.0,
+        0.643216,
+        0.479899
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5858,
+      "techo_1936": 5884,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.505859,
+        1.0,
+        0.771484,
+        0.804688
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5870,
+      "techo_1936": 5896,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.975655,
+        1.0,
+        0.799625,
+        0.730337
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5871,
+      "techo_1936": 5897,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.964072,
+        1.0,
+        1.0,
+        0.976048
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5872,
+      "techo_1936": 5898,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.759082,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5873,
+      "techo_1936": 5899,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.450098,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5874,
+      "techo_1936": 5900,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.120902,
+        1.0,
+        1.0,
+        0.991803
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5875,
+      "techo_1936": 5901,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        0.988584,
+        1.0,
+        0.981735
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5876,
+      "techo_1936": 5902,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        0.799479,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5877,
+      "techo_1936": 5903,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        0.559524,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 5878,
+      "techo_1936": 5904,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        0.281879,
+        1.0,
+        0.979866
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": 7,
+      "cuadra": 1559
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 6221,
+      "techo_1936": 6247,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        1.0,
+        1.0,
+        0.7
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": -1
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 6349,
+      "techo_1936": 6376,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        1.0,
+        0.345238,
+        0.0
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1679
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 6350,
+      "techo_1936": 6377,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        1.0,
+        0.034014,
+        0.0
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1679
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 6351,
+      "techo_1936": 6378,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1679
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 6352,
+      "techo_1936": 6379,
+      "vida_actual": [
+        5,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1679
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 7094,
+      "techo_1936": 7124,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.79927,
+        1.0,
+        0.284672,
+        0.251825
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1839
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 7097,
+      "techo_1936": 7127,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.964401,
+        0.915858,
+        0.385113,
+        0.469256
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1839
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 7238,
+      "techo_1936": 7268,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.078853,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1869
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 7239,
+      "techo_1936": 7269,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.955801,
+        0.872928,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1869
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 7240,
+      "techo_1936": 7270,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.430769,
+        1.0,
+        0.769231,
+        0.876923
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1869
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 7265,
+      "techo_1936": 7295,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.271429,
+        1.0,
+        0.271429,
+        0.842857
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1869
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 7266,
+      "techo_1936": 7296,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.676923,
+        1.0,
+        0.692308,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1869
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 7267,
+      "techo_1936": 7297,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.987654,
+        0.962963,
+        0.811728,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1869
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 7268,
+      "techo_1936": 7298,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.867679,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1869
+    },
+    {
+      "unidad": "U1772-0035",
+      "techo_final": 7269,
+      "techo_1936": 7299,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.892283,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 1869
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 18809,
+      "techo_1936": 18955,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.936508,
+        1.0,
+        0.587302,
+        0.31746
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4289
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 18810,
+      "techo_1936": 18956,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.607143,
+        0.857143,
+        0.77551
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4289
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 18811,
+      "techo_1936": 18957,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.715655,
+        0.894569,
+        0.884984
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4289
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 18812,
+      "techo_1936": 18958,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.79661,
+        1.0,
+        0.920097,
+        0.90799
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4289
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 18813,
+      "techo_1936": 18959,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.142355,
+        1.0,
+        0.940246,
+        0.933216
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4289
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 18814,
+      "techo_1936": 18960,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.135211,
+        1.0,
+        0.947887,
+        0.940845
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4289
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 18815,
+      "techo_1936": 18961,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.070151,
+        1.0,
+        0.944979,
+        0.936726
+      ],
+      "nacimiento_por_persistencia": 2,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4289
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 18830,
+      "techo_1936": 18976,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.817629,
+        0.729483,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4289
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 18831,
+      "techo_1936": 18977,
+      "vida_actual": [
+        2,
+        0
+      ],
+      "fracciones_edificado": [
+        0.723757,
+        0.077348,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4289
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20626,
+      "techo_1936": 20794,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.688312,
+        0.0,
+        1.0,
+        0.961039
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20627,
+      "techo_1936": 20795,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20628,
+      "techo_1936": 20796,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20629,
+      "techo_1936": 20797,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.655098,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20630,
+      "techo_1936": 20798,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.166667,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20631,
+      "techo_1936": 20799,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.275449,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20632,
+      "techo_1936": 20800,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.223704,
+        0.0,
+        1.0,
+        0.988148
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20638,
+      "techo_1936": 20806,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.747126,
+        0.08046,
+        0.310345,
+        0.793103
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20639,
+      "techo_1936": 20807,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.942857,
+        0.187755,
+        0.979592,
+        0.934694
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20640,
+      "techo_1936": 20808,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.961538,
+        0.384615,
+        1.0,
+        0.956731
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20641,
+      "techo_1936": 20809,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.899065,
+        0.024299,
+        1.0,
+        0.973832
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20642,
+      "techo_1936": 20810,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.934853,
+        0.0,
+        1.0,
+        0.980456
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20643,
+      "techo_1936": 20811,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.888519,
+        0.0,
+        1.0,
+        0.995008
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20644,
+      "techo_1936": 20812,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.891403,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20645,
+      "techo_1936": 20813,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.829545,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20646,
+      "techo_1936": 20814,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.690722,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20654,
+      "techo_1936": 20822,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.731884,
+        0.207246,
+        0.96087,
+        0.986957
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20655,
+      "techo_1936": 20823,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.998601,
+        0.820979,
+        0.977622,
+        0.998601
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20656,
+      "techo_1936": 20824,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.982332,
+        0.90106,
+        0.973498,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20657,
+      "techo_1936": 20825,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.713303,
+        0.963303,
+        0.965596,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20658,
+      "techo_1936": 20826,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.965079,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20659,
+      "techo_1936": 20827,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.824468,
+        0.840426,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0151",
+      "techo_final": 20660,
+      "techo_1936": 20828,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.95082,
+        0.868852,
+        0.196721,
+        0.901639
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4596
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17688,
+      "techo_1936": 17825,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.928571,
+        0.0,
+        0.0,
+        0.085714
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17689,
+      "techo_1936": 17826,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.206731,
+        0.778846
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17690,
+      "techo_1936": 17827,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.643533,
+        0.880126,
+        0.974763
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17691,
+      "techo_1936": 17828,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.907258,
+        0.955645
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17692,
+      "techo_1936": 17829,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.933898,
+        0.927119,
+        0.984746
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17693,
+      "techo_1936": 17830,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.880303,
+        0.925758,
+        0.989394
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17694,
+      "techo_1936": 17831,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.994485,
+        0.902574,
+        0.933824
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17695,
+      "techo_1936": 17832,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.871859,
+        0.987437
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17696,
+      "techo_1936": 17833,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.804714,
+        0.976431
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17697,
+      "techo_1936": 17834,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.657754,
+        0.609626
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17698,
+      "techo_1936": 17835,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.178571,
+        0.0
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17703,
+      "techo_1936": 17840,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.944068,
+        0.0,
+        1.0,
+        0.962712
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17704,
+      "techo_1936": 17841,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.966077,
+        0.0,
+        1.0,
+        0.969027
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17705,
+      "techo_1936": 17842,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.958266,
+        0.0,
+        0.99679,
+        0.972713
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17706,
+      "techo_1936": 17843,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.95499,
+        0.191781,
+        0.902153,
+        0.964775
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17707,
+      "techo_1936": 17844,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.929155,
+        0.06267,
+        1.0,
+        0.93733
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17708,
+      "techo_1936": 17845,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.882096,
+        0.0,
+        0.816594,
+        0.882096
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17720,
+      "techo_1936": 17857,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        0.633333,
+        0.0
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17721,
+      "techo_1936": 17858,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        1.0,
+        1.0,
+        0.919192
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17722,
+      "techo_1936": 17859,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.981538,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17723,
+      "techo_1936": 17860,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.982869,
+        0.79015,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 1,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17724,
+      "techo_1936": 17861,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.645591,
+        0.241265,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17725,
+      "techo_1936": 17862,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.299606,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0164",
+      "techo_final": 17726,
+      "techo_1936": 17863,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.036011,
+        0.0,
+        0.987535,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 4048
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14567,
+      "techo_1936": 14687,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.0,
+        0.338235
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14568,
+      "techo_1936": 14688,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.589744,
+        0.933333
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14569,
+      "techo_1936": 14689,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14570,
+      "techo_1936": 14690,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.864532,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14571,
+      "techo_1936": 14691,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.96796,
+        0.991568
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14572,
+      "techo_1936": 14692,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.916786,
+        0.984218
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14573,
+      "techo_1936": 14693,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.807971,
+        0.978261
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14574,
+      "techo_1936": 14694,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.987526,
+        0.0,
+        0.781705,
+        0.966736
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14582,
+      "techo_1936": 14702,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.974026,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14583,
+      "techo_1936": 14703,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.967697,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14584,
+      "techo_1936": 14704,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.962798,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14585,
+      "techo_1936": 14705,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.954248,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14586,
+      "techo_1936": 14706,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.928721,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14587,
+      "techo_1936": 14707,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.904225,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14588,
+      "techo_1936": 14708,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.428571,
+        0.985714
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0182",
+      "techo_final": 14589,
+      "techo_1936": 14709,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        1.0,
+        0.0,
+        0.0,
+        0.405797
+      ],
+      "nacimiento_por_persistencia": 5,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 14554,
+      "techo_1936": 14674,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        0.0,
+        0.0,
+        0.551724
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 14555,
+      "techo_1936": 14675,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.245614,
+        0.0,
+        0.385965,
+        0.964912
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 14556,
+      "techo_1936": 14676,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.247387,
+        0.0,
+        1.0,
+        0.986063
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 14557,
+      "techo_1936": 14677,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.286385,
+        0.0,
+        1.0,
+        0.99061
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 14558,
+      "techo_1936": 14678,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.700772,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 14559,
+      "techo_1936": 14679,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.989378,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 14561,
+      "techo_1936": 14681,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.984076,
+        0.0,
+        1.0,
+        0.998408
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 14562,
+      "techo_1936": 14682,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.926995,
+        0.0,
+        1.0,
+        0.994907
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 14575,
+      "techo_1936": 14695,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.103746,
+        0.0,
+        0.708934,
+        0.948127
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 14576,
+      "techo_1936": 14696,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        0.0,
+        0.305263,
+        0.894737
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 14577,
+      "techo_1936": 14697,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.0,
+        0.0,
+        0.0,
+        0.591549
+      ],
+      "nacimiento_por_persistencia": 4,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3324
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 15530,
+      "techo_1936": 15664,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.057453,
+        0.420807,
+        0.936335,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3530
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 15531,
+      "techo_1936": 15665,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.220443,
+        0.364532,
+        0.945813,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3530
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 15532,
+      "techo_1936": 15666,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.352632,
+        0.281053,
+        0.953684,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3530
+    },
+    {
+      "unidad": "U1772-0214",
+      "techo_final": 15533,
+      "techo_1936": 15667,
+      "vida_actual": [
+        3,
+        0
+      ],
+      "fracciones_edificado": [
+        0.593835,
+        0.224841,
+        0.953762,
+        1.0
+      ],
+      "nacimiento_por_persistencia": 3,
+      "antes": 0,
+      "junta": -1,
+      "cuadra": 3530
+    }
+  ],
+  "ciudad_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+  "config_epocas_sha256": "2b59e23ad897313ee7643cc17a01f6180a66f629de9b75debfe661d267176176",
+  "ciudad_1936_sha256": "fa419bf5c66c9cd4fa74523ac3b82af112a510a5d11a6d59a6ad369e8a0a3a77"
+}

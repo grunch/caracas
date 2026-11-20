@@ -1,5 +1,7 @@
 # Trazado del original y división entre cruces
 
+> Esta reproducción corresponde a #78 (84 líneas, 455 tramos). La [ampliación de frentes](frentes-candidatos.md) conserva IDs y sustituye el procedimiento para la red actual.
+
 Continuación de T33j.1c, sobre `main` c2a43ca, después de integrar #76 y #77. **Fase 1 aún abierta**. Este lote registra la lectura de calles en el original; no modifica la ciudad generada.
 
 ## Entrega
