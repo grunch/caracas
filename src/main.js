@@ -295,7 +295,9 @@ Promise.all([crecePedido, indicePlanos])
     }).catch((e) => console.warn(`crece: ${e.message}`))
   }).catch((e) => console.warn(`épocas: ${e.message}`)) // sin crece.json (p. ej. la demo de CI): la ciudad entera, sin línea de tiempo
 
+let olaElegida = false // alguien levantó o acostó la ciudad: la entrada (arrancar) no la vuelve a levantar
 function levantar(arriba = olaObjetivo === 0) {
+  olaElegida = true
   olaObjetivo = arriba ? olaMax : 0
   document.getElementById('alzar').textContent = arriba ? 'Acostar la ciudad' : 'Levantar la ciudad'
   pedirCuadro(3)
@@ -614,7 +616,10 @@ window.lab.acerca = acerca
 function arrancar() {
   alternarColor(true)
   if (sinAnimar.matches) {
+    // directo al final: el color y la ciudad en pie de una vez, sin transición
     levantar(true)
+    ciudad.U.uColor.value = 1
+    ciudad.U.uOla.value = olaObjetivo
     cam.jump(VISTA_CENTRO)
     return
   }
@@ -622,7 +627,7 @@ function arrancar() {
   const desde = { ...cam.goal }
   Promise.all([conIntro ? cierreDeIntro : null, casasPedidas]).then(() => setTimeout(() => {
     const tocada = ['x', 'z', 'dist', 'yaw', 'pitch'].some((c) => Math.abs(cam.goal[c] - desde[c]) > 1e-6)
-    if (olaObjetivo === 0) levantar(true)
+    if (!olaElegida) levantar(true)
     const enModo = Object.values(MODOS).some((m) => m.activo)
     if (!tocada && !enModo) cam.volarA(VISTA_CENTRO, DURACION_VUELO_S)
   }, esperaDeArranque(conIntro)))

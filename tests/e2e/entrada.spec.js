@@ -47,3 +47,48 @@ test('?quieto empieza quieto: en tinta, acostada y sin vuelo', async ({ page }) 
   const estado = await page.evaluate(() => ({ ola: window.lab.ciudad.U.uOla.value, color: window.lab.ciudad.U.uColor.value, volando: window.lab.cam.volando }))
   expect(estado).toEqual({ ola: 0, color: 0, volando: false })
 })
+
+test('con «reducir movimiento» llega directo al final: en color, levantada y en el centro, sin animar', async ({ browser }) => {
+  // Arrange: en cada cuadro se anotan el color y la ola, para ver que nunca pasan por valores intermedios
+  const contexto = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 900, height: 560 } })
+  const page = await contexto.newPage()
+  await page.addInitScript(() => {
+    localStorage.setItem('caracas:intro-vista', '1')
+    window.vistos = []
+    const anotar = () => {
+      const U = window.lab?.ciudad?.U
+      if (U) window.vistos.push({ color: U.uColor.value, ola: U.uOla.value })
+      requestAnimationFrame(anotar)
+    }
+    requestAnimationFrame(anotar)
+  })
+
+  // Act
+  await page.goto(`/?${LIGERO}`)
+  await page.waitForFunction(() => window.lab?.ready === true)
+  await page.waitForTimeout(3000)
+
+  // Assert
+  const { vistos, volando, pitch, olaFinal } = await page.evaluate(() => ({
+    vistos: window.vistos, volando: window.lab.cam.volando, pitch: window.lab.cam.goal.pitch, olaFinal: window.lab.ciudad.U.uOla.value,
+  }))
+  expect(vistos.length).toBeGreaterThan(0)
+  expect(vistos.filter((v) => v.color > 0 && v.color < 1)).toEqual([])
+  expect(vistos.filter((v) => v.ola > 0 && v.ola < olaFinal)).toEqual([])
+  expect(olaFinal).toBeGreaterThan(0)
+  expect(volando).toBe(false)
+  expect(pitch).toBeLessThan(0.8)
+  await contexto.close()
+})
+
+test('si la persona levanta y vuelve a acostar la ciudad durante la bienvenida, la entrada no se la levanta', async ({ page }) => {
+  await page.goto(`/?intro&${LIGERO}`)
+  await page.waitForFunction(() => window.lab?.ready === true && window.lab.acerca.intro)
+  // (los botones quedan detrás de la bienvenida: se usa la misma función que el botón)
+  await page.evaluate(() => { window.lab.levantar(true); window.lab.levantar(false) })
+
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(4000)
+  await expect(page.locator('#alzar')).toHaveText('Levantar la ciudad')
+  expect(await page.evaluate(() => window.lab.ciudad.U.uOla.value)).toBe(0)
+})
