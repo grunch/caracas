@@ -133,7 +133,7 @@ def _escalar(calce):
     return proyectar
 
 
-def informe(controles, config, anclas, omitidos, calce, metro):
+def informe(controles, config, anclas, omitidos, calce, metro, hitos_en_semillas=()):
     n_semillas = len(config['semillas'])
     loo = calce.errores_loo_m()
     px = np.array([[a['px'], a['py']] for a in anclas])
@@ -147,6 +147,7 @@ def informe(controles, config, anclas, omitidos, calce, metro):
                    'ancla del TPS ajustado sin ella; no certifica exactitud geográfica.',
         'suavizado': config.get('suavizado', 0.0), 'semillas': n_semillas, 'anclas': len(anclas),
         'nodos_omitidos_por_semilla': omitidos,
+        'hitos_cubiertos_por_semillas': list(hitos_en_semillas),
         'residuos_loo_m': calce.residuos_m(),
         'por_sector': resumen_por_sector(anclas, loo_anclas, residuo),
         'celdas_plegadas': celdas_plegadas(_escalar(calce), config['marco']),
@@ -173,7 +174,9 @@ def main():
     metro = controles['parametros']['metro']
     gcps = manuales_de(config, json.loads((GCP_DIR / 'plaza-1936.json').read_text()))
     calce = Calce.ajustar(gcps, metro, config.get('suavizado', 0.0))
-    datos = informe(controles, config, anclas, omitidos, calce, metro)
+    # los hitos sin unidad (la Plaza Mayor) no son anclas propias: los cubren las semillas de la plaza
+    en_semillas = [h['id'] for h in controles['controles_por_hito'] if not h.get('unidad')]
+    datos = informe(controles, config, anclas, omitidos, calce, metro, en_semillas)
     a.gcp.write_text(json_legible(config), encoding='utf-8')
     a.informe.write_text(json.dumps(datos, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     print(f"{len(anclas)} anclas ({len(omitidos)} nodos omitidos por semilla); LOO {datos['residuos_loo_m']}; "

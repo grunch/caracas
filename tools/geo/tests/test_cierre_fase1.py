@@ -4,6 +4,7 @@ from copy import deepcopy
 import pytest
 
 from cierre_fase1 import (
+    controles_fuera_del_calce,
     SUBTAREAS, cobertura_unidades, enlazar_subtareas, indice_evidencias, leer_verificacion, puerta_de_salida,
     residuos_por_sector, resumen_por_sector,
 )
@@ -292,3 +293,47 @@ def test_correspondencia_exige_que_el_recorte_sea_de_la_unidad_juzgada():
     sin_unidad = correspondencias_verificadas()
     sin_unidad['evidencias'] = [{k: v for k, v in e.items() if k != 'unidad'} for e in sin_unidad['evidencias']]
     assert _criterio(sin_unidad)['muestra_visual'] == 0
+
+
+def damero_con_nodos():
+    return {**damero_vigente(),
+            'nodos': [{'id': 'X1', 'sector': 'S1', 'desvio_m': 10.0}, {'id': 'X2', 'sector': 'S1', 'desvio_m': 30.0},
+                      {'id': 'X3', 'sector': 'S1', 'desvio_m': 50.0}, {'id': 'X4', 'sector': 'S2', 'desvio_m': 7.0}],
+            'por_sector': [{'sector': 'S1', 'controles': 3, 'mediana_m': 30.0}, {'sector': 'S2', 'controles': 1, 'mediana_m': 7.0}],
+            'controles_por_hito': [{'id': 'H-plaza', 'sector': 'S1'}, {'id': 'H-pastora', 'sector': 'S2'}]}
+
+
+def test_un_cruce_de_damero_que_es_ancla_del_calce_vigente_deja_de_contar_como_control():
+    # Arrange
+    damero = damero_con_nodos()
+    original = deepcopy(damero)
+
+    # Act
+    filtrado = controles_fuera_del_calce(damero, anclas={'X1', 'X4', 'H-pastora'})
+
+    # Assert
+    assert filtrado['por_sector'] == [{'sector': 'S1', 'controles': 2, 'mediana_m': 40.0, 'anclas': 1},
+                                      {'sector': 'S2', 'controles': 0, 'mediana_m': None, 'anclas': 1}]
+    assert filtrado['controles_por_hito'] == [{'id': 'H-plaza', 'sector': 'S1'}]
+    assert filtrado['evidencias'] == damero['evidencias']
+    assert damero == original
+
+
+def test_con_todos_los_cruces_como_anclas_el_criterio_de_controles_por_sector_queda_pendiente():
+    # Arrange
+    filas = cobertura_unidades(unidades(), lecturas(), contraste())
+    residuos = residuos_por_sector([], [], sectores())
+    todas = {'X1', 'X2', 'X3', 'X4', 'H-plaza', 'H-pastora'}
+
+    # Act
+    puerta = puerta_de_salida(filas, sectores(), residuos, [], controles_fuera_del_calce(damero_con_nodos(), todas))
+
+    # Assert
+    assert puerta['controles_de_calce_por_sector'] == {'cumplido': False, 'sectores_sin_control_independiente': ['S1', 'S2'],
+                                                       'sectores_sin_unidades': [], 'trasladado_a': 'T33j.2a'}
+
+
+def test_sin_anclas_los_controles_de_damero_se_conservan():
+    filtrado = controles_fuera_del_calce(damero_con_nodos(), anclas=set())
+    assert [(s['sector'], s['controles'], s['mediana_m'], s['anclas']) for s in filtrado['por_sector']] == [('S1', 3, 30.0, 0), ('S2', 1, 7.0, 0)]
+    assert len(filtrado['controles_por_hito']) == 2

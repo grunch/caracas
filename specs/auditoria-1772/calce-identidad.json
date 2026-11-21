@@ -9,6 +9,9 @@
   "X1772-0077",
   "X1772-0078"
  ],
+ "hitos_cubiertos_por_semillas": [
+  "H1772-plaza-mayor"
+ ],
  "residuos_loo_m": {
   "metodo": "dejando uno fuera (TPS sin ese GCP), en metros sobre 1936",
   "n": 170,

@@ -51,7 +51,7 @@ S1772-41 es rural y no tiene anclas.
 ## Qué falta en T33j.2a
 
 1. **Revisar los nodos de LOO alto.** Recortes en `.cache/damero-1772/controles/` y criterio por sector, que hoy no se cumple en S1772-24, S1772-31 ni en los dos sectores con una sola ancla.
-2. **Regenerar `controles_damero.py` sobre el calce nuevo.** Los 168 cruces dejan de ser controles independientes: ahora son las anclas. El criterio de controles por sector de [cierre-fase1.md](cierre-fase1.md) pasa a medirse con el LOO, y el cierre tiene que dejar de leer el desvío del TPS anterior.
+2. **Regenerar `controles_damero.py` sobre el calce nuevo.** Los 168 cruces dejan de ser controles independientes: ahora son las anclas. El cierre ([cierre-fase1.md](cierre-fase1.md)) ya no cuenta como controles independientes a los cruces ni a los hitos que son anclas, ni a los que coinciden con las semillas: el criterio de controles por sector queda pendiente. Falta medirlo con el LOO por sector y regenerar los 23 nodos curados de `controles-calce-centro.json`, cuyo desvío guardado es del calce anterior.
 3. **Reclasificar las 292 correspondencias sobre el calce nuevo.**
    - Las 42 uno a uno se conservan solo con evidencia de identidad por pareja.
    - U1772-0055 se reclasifica.
