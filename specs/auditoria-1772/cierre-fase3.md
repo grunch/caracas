@@ -48,7 +48,7 @@ El generador ahora lee la referencia histórica. Lo hace solo por `cuadras_histo
 | Plazas sin casas | sí | sí | sí |
 | Sin calles dentro de unidades | 3 medianas libres | 0 | sí |
 
-`fase_3_cerrable: true` sobre la ciudad regenerada (SHA-256 en el JSON), con 4207 casas de 1772; en la línea base eran 2708. Las casas nuevas son las de las unidades aprobadas que el original dibuja edificadas y el generador no construía (las `ausente` de la fase 2). Los techos del pipeline suben de 35.022 a 37.699 (`tools/datos-esperados.json`).
+`fase_3_cerrable: true` sobre la ciudad regenerada (SHA-256 en el JSON), con 4217 casas de 1772; en la línea base eran 2708. Las casas nuevas son las de las unidades aprobadas que el original dibuja edificadas y el generador no construía (las `ausente` de la fase 2). Los techos del pipeline suben de 35.022 a 37.699 (`tools/datos-esperados.json`).
 
 Revisé a ojo, sobre el mosaico, el núcleo y San Jacinto:
 - Las cuadras de la referencia se reparten en lotes alineados con sus calles y las calles quedan libres. La Plaza Bolívar está vacía.
