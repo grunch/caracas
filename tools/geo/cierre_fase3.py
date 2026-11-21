@@ -141,7 +141,7 @@ def historicas_en_referencia(verificadas, red, tol=TOLERANCIA_ORIGINAL_PX):
             if a in c['nodos'] and b in c['nodos']:
                 i, j = c['nodos'].index(a), c['nodos'].index(b)
                 return c['nodos'][i:j + 1] if i <= j else c['nodos'][j:i + 1][::-1]
-        return [a, b]
+        return None   # en calles distintas: no hay eje de la referencia que los una
 
     resultado = []
     for v in verificadas:

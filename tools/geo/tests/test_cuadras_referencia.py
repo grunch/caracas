@@ -144,3 +144,38 @@ def test_quitar_techos_conserva_la_marca_de_calzada():
               'calzada72': [1, 0]}
     salida, _ = sin_techos(ciudad, [[1, 0], [1, 0]], {0})
     assert salida['calzada72'] == [0]
+
+
+def test_si_la_unidad_duena_de_una_manzana_no_pasa_la_validacion_la_manzana_es_de_otra_aceptada():
+    # Arrange: la manzana 1 cae sobre O (oeste) y E (este); O cubre más pero es casi toda edificio público
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    c[30:230, 30:150] = CLASE['publico']
+    cuadras = np.where(np.isin(c, (CLASE['edificado'], CLASE['publico'])), 1, 0)
+    oeste = Polygon([(20, 20), (160, 20), (160, 240), (20, 240)])
+    este = Polygon([(160, 20), (240, 20), (240, 240), (160, 240)])
+    ref = [{'id': 'O', 'poligono': oeste, 'rellenar': True}, {'id': 'E', 'poligono': este, 'rellenar': True}]
+
+    # Act
+    grupos = _cuadras_de_referencia(ref, c, cuadras, {1: int((cuadras == 1).sum())}, METRO)
+
+    # Assert
+    assert [g['referencia'] for g in grupos] == ['E']
+    assert grupos[0]['miembros'] == {1}
+
+
+def test_una_cara_de_osm_que_pisa_poco_la_referencia_igual_le_deja_esa_parte():
+    # Arrange: una cara de 220 × 220 px y una unidad de la referencia en su esquina (menos del 30 % de la cara)
+    c, cuadras = plano_con_pasaje()
+    red = Red(red_de(marco_de_calles(20, 20, 240, 240), c)['tramos'])
+    esquina = Polygon([(20, 20), (100, 20), (100, 100), (20, 100)])
+
+    # Act
+    grupos = _cuadras_de_antes(red, c == CLASE['edificado'], c, cuadras, {1: int((cuadras == 1).sum())}, METRO,
+                               completas=[ANILLO], ocupado=[esquina])
+
+    # Assert
+    assert len(grupos) == 1
+    g = grupos[0]; x, y = g['origen']
+    assert not g['cuadra'][60 - y, 60 - x]       # la esquina la reconstruye la referencia
+    assert g['cuadra'][200 - y, 200 - x]          # el resto sigue siendo de la cara de OSM

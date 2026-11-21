@@ -344,13 +344,22 @@ def _poligonos_de_cara(red, lista, cajas, metro):
     return salida
 
 
+def _mascara_de(poligonos, origen, forma):
+    """Máscara (forma de la ventana con esquina en `origen`) de lo que cubren los polígonos (px del mosaico)."""
+    mascara = np.zeros(forma, np.uint8)
+    for p in poligonos:
+        cv2.fillPoly(mascara, [np.round((np.asarray(p.exterior.coords) - origen) * 16).astype(np.int32)], 1, shift=4)
+    return mascara > 0
+
+
 def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas=(), ocupado=()):
     """Las cuadras de 1772 que el plano de 1936 muestra abiertas (una calle nueva que las parte, un pasaje o
     una plaza que les entra): por cada cara de la red sin los tramos nuevos, su polígono ajustado a las
     fachadas con lo abierto adentro vuelto a edificar, salvo lo que 1772 tampoco edifica (una plaza vieja).
     → [{miembros: las cuadras de 1936 que reemplaza, cuadra: máscara, origen: (x, y), clases: las de antes,
     poligono, abierto: máscara de lo que se abrió}]. Solo las que salen como cuadra modelo repartida por lados.
-    `ocupado`: los anillos de la referencia histórica; una cara que cae sobre ellos la arma la referencia."""
+    `ocupado`: los anillos de la referencia histórica; una cara que cae sobre ellos la arma la referencia, y de una que
+    los pisa poco se recorta lo que cae dentro de ellos (la referencia ya lo reconstruye)."""
     alto, ancho = clases.shape
     salida = []
     for cara in red.caras72:
@@ -379,7 +388,7 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas
         if documentada is not None:
             evidencia = _relleno(np.asarray(documentada.exterior.coords) - (x0, y0), cl.shape)
             plaza_vieja &= ~evidencia
-        cuadra = en_poligono & (de_manzana | calle) & ~plaza_vieja
+        cuadra = en_poligono & (de_manzana | calle) & ~plaza_vieja & ~_mascara_de(ocupado, (x0, y0), cl.shape)
         abierto = _sin_astillas(cuadra & calle, metro)
         if documentada is None and abierto.sum() * metro ** 2 < ABIERTO_MINIMO_M2:
             continue
@@ -444,8 +453,31 @@ def _cuadras_de_referencia(referencia, clases, cuadras, areas, metro):
         armada = _de_referencia(r, clases, metro)
         if armada is not None:
             candidatas.append((r, *armada))
+    # qué manzanas de 1936 son de la referencia lo deciden todas las candidatas; el dueño, solo una aceptada (si la que
+    # más la cubre no pasa la validación, la manzana pasa a otra: sus casas de 1936 nunca conviven con la reconstrucción)
+    de_toda, _ = _duenos(candidatas, range(len(candidatas)), cuadras, areas)
+    aceptadas = list(range(len(candidatas)))
+    while True:
+        _, mejor = _duenos(candidatas, aceptadas, cuadras, {e: 0 for e in de_toda})
+        de_referencia = set(mejor)
+        salida, rechazadas = [], []
+        for k in aceptadas:
+            grupo = _grupo_de_referencia(candidatas[k], clases, cuadras, de_referencia, metro)
+            if grupo is None:
+                rechazadas.append(k)
+            else:
+                salida.append({**grupo, 'miembros': {e for e in de_referencia if mejor[e] == k}})
+        if not rechazadas:
+            return salida
+        # una rechazada no es dueña de nada: se reparte de nuevo entre las que quedan
+        aceptadas = [k for k in aceptadas if k not in rechazadas]
+
+
+def _duenos(candidatas, aceptadas, cuadras, areas):
+    """(manzanas de 1936 que la referencia cubre en un 50 % o más, {manzana: la candidata que más la cubre})."""
     cubierto, mejor = {}, {}
-    for k, (r, (x0, y0), cuadra, _abierto, _p) in enumerate(candidatas):
+    for k in aceptadas:
+        _r, (x0, y0), cuadra, _abierto, _p = candidatas[k]
         alto, ancho = cuadra.shape
         cuenta = np.bincount(cuadras[y0:y0 + alto, x0:x0 + ancho][cuadra])
         for e in np.flatnonzero(cuenta):
@@ -454,20 +486,22 @@ def _cuadras_de_referencia(referencia, clases, cuadras, areas, metro):
                 if cuenta[e] > mejor.get(int(e), (None, 0))[1]:
                     mejor[int(e)] = (k, int(cuenta[e]))
     de_referencia = {e for e, n in cubierto.items() if n >= 0.5 * areas.get(e, np.inf)}
-    salida = []
-    for k, (r, (x0, y0), cuadra, abierto, poligono) in enumerate(candidatas):
-        alto, ancho = cuadra.shape
-        suyas = cuadras[y0:y0 + alto, x0:x0 + ancho]
-        cuadra = cuadra & ((suyas == 0) | np.isin(suyas, list(de_referencia)))
-        cl = clases[y0:y0 + alto, x0:x0 + ancho]
-        de_antes = _clases_de_antes(cl, cuadra) if r['rellenar'] else np.where(cuadra, cl, CLASE['calle']).astype(cl.dtype)
-        if not cuadra.any() or not es_de_solo_casas(de_antes, cuadra, metro, CLASE['edificado'], CLASE['publico']) \
-                or lotes_por_lados(cuadra, metro, 0, poligono) is None:
-            continue
-        salida.append({'miembros': {e for e in de_referencia if mejor[e][0] == k}, 'cuadra': cuadra, 'origen': (x0, y0),
-                       'clases': de_antes, 'poligono': poligono, 'abierto': abierto & cuadra, 'minimo': 2, 'hasta': 2,
-                       'referencia': r['id']})
-    return salida
+    return de_referencia, {e: mejor[e][0] for e in de_referencia}
+
+
+def _grupo_de_referencia(candidata, clases, cuadras, de_referencia, metro):
+    """El grupo de una candidata (sin miembros) si sale como cuadra de solo casas repartida por lados, o None."""
+    r, (x0, y0), cuadra, abierto, poligono = candidata
+    alto, ancho = cuadra.shape
+    suyas = cuadras[y0:y0 + alto, x0:x0 + ancho]
+    cuadra = cuadra & ((suyas == 0) | np.isin(suyas, list(de_referencia)))
+    cl = clases[y0:y0 + alto, x0:x0 + ancho]
+    de_antes = _clases_de_antes(cl, cuadra) if r['rellenar'] else np.where(cuadra, cl, CLASE['calle']).astype(cl.dtype)
+    if not cuadra.any() or not es_de_solo_casas(de_antes, cuadra, metro, CLASE['edificado'], CLASE['publico']) \
+            or lotes_por_lados(cuadra, metro, 0, poligono) is None:
+        return None
+    return {'cuadra': cuadra, 'origen': (x0, y0), 'clases': de_antes, 'poligono': poligono, 'abierto': abierto & cuadra,
+            'minimo': 2, 'hasta': 2, 'referencia': r['id']}
 
 
 NUCLEO_DE_CALZADA_M = 4.0   # ancho inferido de lo que ninguna calle de 1772 deja de tener (como cierre_fase3)

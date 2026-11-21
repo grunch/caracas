@@ -126,3 +126,11 @@ def test_una_calle_historica_de_dos_cuadras_sigue_los_cruces_intermedios_de_la_r
                     {'id': 'L2', 'tipo': 'calle_recta', 'nodos': ['M', 'Z']}]}
     medida = historicas_en_referencia([{'id': 'h', 'original': [[0, 0], [0, 20]], 'anclajes': [[0, 0], [0, 200]]}], r)[0]
     assert medida == {'id': 'h', 'anclajes': [[0, 0], [8, 100], [0, 200]], 'fuente': 'referencia'}
+
+
+def test_una_calle_historica_cuyos_extremos_estan_en_calles_distintas_conserva_sus_anclajes():
+    from cierre_fase3 import historicas_en_referencia
+    r = {'nodos': [{'id': 'A', 'original': [0, 0], 'mosaico': [0, 0]}, {'id': 'C', 'original': [10, 10], 'mosaico': [100, 100]}],
+         'calles': [{'id': 'L1', 'tipo': 'calle_recta', 'nodos': ['A']}, {'id': 'L2', 'tipo': 'calle_recta', 'nodos': ['C']}]}
+    v = [{'id': 'h', 'original': [[0, 0], [10, 10]], 'anclajes': [[0, 0], [0, 100], [100, 100]]}]
+    assert historicas_en_referencia(v, r)[0] == {'id': 'h', 'anclajes': [[0, 0], [0, 100], [100, 100]], 'fuente': 'anclajes'}
