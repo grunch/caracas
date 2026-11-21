@@ -10,7 +10,8 @@ import re
 from shapely.geometry import Polygon
 from shapely.strtree import STRtree
 
-OCUPACIONES = {'continua', 'parcial', 'aislada', 'terreno_libre', 'plaza', 'conjunto_especial'}
+OCUPACIONES = {'continua', 'parcial', 'aislada', 'terreno_libre', 'plaza', 'conjunto_especial',
+               'parte_de_otra_unidad', 'descartada_no_edificacion'}   # las dos últimas, del censo de la fase 1
 
 
 def _indexar(registros, clase):
