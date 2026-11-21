@@ -167,10 +167,11 @@ def fuera_del_ajuste(puntos, ajuste_px, tol=TOLERANCIA_AJUSTE_PX):
 
 
 def loo_vigente(identidad, config):
-    """El `por_sector` de calce-identidad.json solo si su huella es la del calce elegido: un LOO de otro calce no
-    controla nada, y sin huella queda pendiente, como el desvío de los nodos curados."""
+    """El `por_sector` de calce-identidad.json solo si su huella es la de los GCP efectivos del calce elegido: un LOO
+    de otro ajuste no controla nada, y sin huella queda pendiente, como el desvío de los nodos curados."""
     from anclas_identidad import huella_calce
-    if not identidad.get('huella_calce') or identidad['huella_calce'] != huella_calce(config):
+    if not identidad.get('huella_calce') or identidad['huella_calce'] != huella_calce(config.get('gcps', []),
+                                                                                    config.get('suavizado', 0.0)):
         return None
     return identidad.get('por_sector')
 

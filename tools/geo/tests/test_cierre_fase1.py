@@ -414,11 +414,13 @@ def test_un_sector_con_una_sola_ancla_no_tiene_loo_que_lo_controle():
 def test_el_loo_del_informe_de_identidad_vale_solo_si_su_huella_es_la_del_calce_elegido():
     # Arrange
     from anclas_identidad import huella_calce
-    config = {'semillas': [], 'anclas': [{'px': 1, 'py': 2, 'x36': 3, 'y36': 4, 'id': 'X1'}], 'suavizado': 0.005}
+    gcps = [{'px': 1, 'py': 2, 'x36': 3, 'y36': 4}]
+    config = {'gcps': gcps, 'suavizado': 0.005}
     filas = [{'sector': 'S1', 'anclas': 3, 'bajo_umbral': True}]
 
     # Act / Assert
-    assert loo_vigente({'huella_calce': huella_calce(config), 'por_sector': filas}, config) == filas
-    assert loo_vigente({'huella_calce': huella_calce({**config, 'suavizado': 0.05}), 'por_sector': filas}, config) is None
+    assert loo_vigente({'huella_calce': huella_calce(gcps, 0.005), 'por_sector': filas}, config) == filas
+    viejos = {**config, 'gcps': gcps + [{'px': 9, 'py': 9, 'x36': 9, 'y36': 9}]}   # GCP sin regenerar
+    assert loo_vigente({'huella_calce': huella_calce(gcps, 0.005), 'por_sector': filas}, viejos) is None
     assert loo_vigente({'por_sector': filas}, config) is None   # informe sin huella: queda pendiente
     assert loo_vigente({}, config) is None

@@ -123,12 +123,13 @@ def celdas_plegadas(proyectar, marco, paso=PASO_PLIEGUES_PX):
     return int(np.count_nonzero(plegada))
 
 
-def huella_calce(config):
-    """SHA-256 de las entradas del calce (semillas, anclas, suavizado): lo que decide el ajuste. No cambia con los
-    GCP ni los residuos que calce.py deriva de ellas. El informe la registra y el cierre solo acepta su LOO si la
-    huella del calce elegido es la misma."""
-    entradas = {k: config.get(k) for k in ('semillas', 'anclas', 'suavizado')}
-    return hashlib.sha256(json.dumps(entradas, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()
+def huella_calce(gcps, suavizado):
+    """SHA-256 de los puntos efectivos de un ajuste (px, py, x36, y36, sin orden ni campos derivados) y su suavizado.
+    El informe registra la de los GCP con que ajustó; el cierre la compara con la de los `gcps` del archivo de calce.
+    Si los GCP no se regeneraron, si cambiaron las semillas de plaza-1936.json o si hay enlaces por correlación, las
+    huellas no coinciden y su LOO no cuenta."""
+    puntos = sorted([round(float(g[k]), 3) for k in ('px', 'py', 'x36', 'y36')] for g in gcps)
+    return hashlib.sha256(json.dumps([puntos, float(suavizado or 0.0)]).encode('utf-8')).hexdigest()
 
 
 def distancia_a_nudo_px(mascara, punto):
@@ -239,7 +240,7 @@ def _escalar(calce):
     return proyectar
 
 
-def informe(controles, config, anclas, omitidos, calce, metro, hitos_en_semillas=(), excluidos=()):
+def informe(controles, config, anclas, omitidos, calce, metro, hitos_en_semillas=(), excluidos=(), gcps=()):
     n_semillas = len(config['semillas'])
     loo = calce.errores_loo_m()
     px = np.array([[a['px'], a['py']] for a in anclas])
@@ -251,7 +252,7 @@ def informe(controles, config, anclas, omitidos, calce, metro, hitos_en_semillas
     return {
         'alcance': 'Calce de 1772 por identidad (T33j.2a). El error dejando uno fuera mide cuánto se aparta cada '
                    'ancla del TPS ajustado sin ella; no certifica exactitud geográfica.',
-        'huella_calce': huella_calce(config),
+        'huella_calce': huella_calce(gcps, config.get('suavizado', 0.0)),
         'suavizado': config.get('suavizado', 0.0), 'semillas': n_semillas, 'anclas': len(anclas),
         'nodos_omitidos_por_semilla': omitidos,
         'hitos_cubiertos_por_semillas': list(hitos_en_semillas),
@@ -324,7 +325,7 @@ def main():
     calce = Calce.ajustar(gcps, metro, config.get('suavizado', 0.0))
     # los hitos sin unidad (la Plaza Mayor) no son anclas propias: los cubren las semillas de la plaza
     en_semillas = [h['id'] for h in controles['controles_por_hito'] if not h.get('unidad')]
-    datos = informe(controles, config, anclas, omitidos, calce, metro, en_semillas, excluidos)
+    datos = informe(controles, config, anclas, omitidos, calce, metro, en_semillas, excluidos, gcps)
     datos['anclas_por_topologia'] = [{k: n[k] for k in ('id', 'sector', 'indice', 'original', 'mosaico_identidad')} for n in nuevos]
     a.gcp.write_text(json_legible(config), encoding='utf-8')
     a.informe.write_text(json.dumps(datos, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
