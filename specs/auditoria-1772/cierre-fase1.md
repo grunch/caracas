@@ -101,4 +101,4 @@ Estados `incierto` y `candidato` no son defectos confirmados y no exigen subtare
 
 ## Comprobaciones
 
-`tools/geo/tests/test_cierre_fase1.py` (17), `test_damero.py` (9) y `test_controles_damero.py` (10); la suite de `tools/geo` completa y `git diff --check` limpios. Sin cambios en `src/` ni en el generador.
+`tools/geo/tests/test_cierre_fase1.py` (26), `test_damero.py` (9) y `test_controles_damero.py` (10); la suite de `tools/geo` completa y `git diff --check` limpios. Sin cambios en `src/` ni en el generador.
