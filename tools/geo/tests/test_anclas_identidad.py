@@ -121,6 +121,16 @@ def test_una_celda_plegada_solo_en_su_esquina_inferior_derecha_cuenta():
     assert ai.celdas_plegadas(proyectar, (0, 0, 10, 10), paso=10) == 1
 
 
+def test_una_celda_plegada_en_la_esquina_superior_derecha_cuenta_aunque_la_otra_diagonal_conserve_el_giro():
+    # sup_izq, sup_der, inf_izq, inf_der → (0,0), (2,5), (0,10), (10,10): giro +20 y +50 en una diagonal, −30 en sup_der
+    esquinas = {(0.0, 0.0): (0, 0), (10.0, 0.0): (2, 5), (0.0, 10.0): (0, 10), (10.0, 10.0): (10, 10)}
+
+    def proyectar(x, y):
+        destino = np.array([esquinas[(float(a), float(b))] for a, b in zip(x, y)], float)
+        return destino[:, 0], destino[:, 1]
+    assert ai.celdas_plegadas(proyectar, (0, 0, 10, 10), paso=10) == 1
+
+
 # --- resumen -----------------------------------------------------------------------------
 
 def test_resumen_por_sector_da_mediana_y_maximo_del_error_dejando_uno_fuera():

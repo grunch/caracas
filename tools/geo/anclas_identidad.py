@@ -97,7 +97,9 @@ def validar_nodos(nodos):
 
 def celdas_plegadas(proyectar, marco, paso=PASO_PLIEGUES_PX):
     """Celdas de una grilla sobre el marco del original [x0, y0, x1, y1] donde la proyección pierde
-    el giro (jacobiano ≤ 0) en alguno de sus dos triángulos: ahí el calce dobla el plano sobre sí mismo."""
+    el giro (jacobiano ≤ 0) en alguna de sus cuatro esquinas: ahí el calce dobla el plano sobre sí mismo.
+    Los triángulos de las cuatro esquinas cubren las dos diagonales; en una celda bilineal, si los cuatro
+    conservan el giro, el jacobiano es positivo en toda la celda."""
     x0, y0, x1, y1 = marco
     xx, yy = np.meshgrid(np.arange(x0, x1 + paso, paso, dtype=float), np.arange(y0, y1 + paso, paso, dtype=float))
     p = np.stack([np.asarray(v, float).reshape(xx.shape) for v in proyectar(xx.ravel(), yy.ravel())], axis=-1)
@@ -105,8 +107,9 @@ def celdas_plegadas(proyectar, marco, paso=PASO_PLIEGUES_PX):
 
     def giro(a, b, c):
         return (b[..., 0] - a[..., 0]) * (c[..., 1] - a[..., 1]) - (b[..., 1] - a[..., 1]) * (c[..., 0] - a[..., 0])
-    # los dos triángulos de la celda, con el mismo sentido que tienen en una proyección afín directa
-    plegada = (giro(sup_izq, sup_der, inf_izq) <= 0) | (giro(inf_der, inf_izq, sup_der) <= 0)
+    # el triángulo de cada esquina con sus dos vecinas, con el mismo sentido que en una proyección afín directa
+    plegada = ((giro(sup_izq, sup_der, inf_izq) <= 0) | (giro(sup_der, inf_der, sup_izq) <= 0) |
+               (giro(inf_der, inf_izq, sup_der) <= 0) | (giro(inf_izq, sup_izq, inf_der) <= 0))
     return int(np.count_nonzero(plegada))
 
 
