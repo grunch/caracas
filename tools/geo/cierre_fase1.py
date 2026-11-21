@@ -166,15 +166,20 @@ def fuera_del_ajuste(puntos, ajuste_px, tol=TOLERANCIA_AJUSTE_PX):
             if all(math.hypot(p['original'][0] - x, p['original'][1] - y) >= tol for x, y in ajuste_px)]
 
 
-def _sectores_sin_control(sectores, filas, residuos, damero):
+MINIMO_ANCLAS_LOO = 2  # con una sola ancla, su LOO es una extrapolación y no controla nada
+
+
+def _sectores_sin_control(sectores, filas, residuos, damero, loo=None):
     """Sectores con unidades y sin ningún control independiente: ni nodo curado medido sobre el calce vigente,
-    ni cruce de damero, ni hito. S41 (sin unidades) no aplica."""
+    ni cruce de damero, ni hito, ni LOO de al menos dos anclas (decisión del responsable del 21-11-2026: cada ancla
+    medida con un calce que no la usa es un control). S41 (sin unidades) no aplica."""
     con_unidades = {f['sector'] for f in filas}
     cubiertos = {r['sector'] for r in residuos
                  if r['controles_independientes'] > 0 and r.get('desvio_independiente_vigente') is not False}
     if damero:
         cubiertos |= {s['sector'] for s in damero.get('por_sector', []) if s['controles'] > 0}
         cubiertos |= {h['sector'] for h in damero.get('controles_por_hito', [])}
+    cubiertos |= {r['sector'] for r in (loo or []) if r.get('anclas', 0) >= MINIMO_ANCLAS_LOO}
     return sorted(s['id'] for s in sectores if s['id'] in con_unidades and s['id'] not in cubiertos)
 
 
@@ -290,8 +295,8 @@ def puerta_de_salida(filas, sectores, residuos, incidencias, damero=None, corres
     recorridos de calle; `loo`: el `por_sector` de calce-identidad.json (error dejando uno fuera de las anclas).
     Sin ellos, sus criterios quedan pendientes.
     """
-    sin_control = _sectores_sin_control(sectores, filas, residuos, damero)
-    bajo_umbral = {r['sector'] for r in (loo or []) if r.get('bajo_umbral')}
+    sin_control = _sectores_sin_control(sectores, filas, residuos, damero, loo)
+    bajo_umbral = {r['sector'] for r in (loo or []) if r.get('bajo_umbral') and r.get('anclas', 0) >= MINIMO_ANCLAS_LOO}
     sin_loo = sorted({f['sector'] for f in filas} - bajo_umbral)
     sin_subtarea = [i['id'] for i in incidencias if i['sin_subtarea'] and i['estado'] not in ESTADOS_SIN_DEFECTO]
     criterios = {

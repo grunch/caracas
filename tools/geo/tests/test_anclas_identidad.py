@@ -208,3 +208,62 @@ def test_una_esquina_sin_cota_sin_ningun_nudo_cerca_tambien_se_excluye():
     nodos = reticula(2)[:1]
     _, excluidos = ai.excluir_rotulos(nodos, {0: {'nombre': 'A', 'cota_m': None}}, {'X00': None}, umbral_m=4)
     assert excluidos == [{'id': 'X00', 'esquina_1936': 0, 'nombre': 'A', 'distancia_nudo_m': None}]
+
+
+# --- cruces sin esquina con nombre: pareja por topología del damero de 1936 ---------------------
+
+def conocidos_de(nodos):
+    return {tuple(n['indice']): np.array(n['mosaico_identidad'], float) for n in nodos}
+
+
+def test_el_cruce_por_topologia_es_el_corte_de_su_fila_y_su_columna_en_1936():
+    # Arrange: retícula de 4 × 4 en 1936 sin el cruce (2, 2)
+    nodos = [n for n in reticula(4) if n['indice'] != [2, 2]]
+
+    # Act
+    punto = ai.cruce_por_topologia(conocidos_de(nodos), (2, 2))
+
+    # Assert: (5000 + 2·40, 6000 + 2·40)
+    assert np.allclose(punto, [5080, 6080], atol=1e-6)
+
+
+def test_el_cruce_por_topologia_sigue_una_retícula_girada():
+    # Arrange: la retícula de 1936 girada 30°
+    giro = np.radians(30)
+    r = np.array([[np.cos(giro), -np.sin(giro)], [np.sin(giro), np.cos(giro)]])
+    nodos = [{**n, 'mosaico_identidad': list(r @ np.array(n['mosaico_identidad']))} for n in reticula(4) if n['indice'] != [1, 3]]
+
+    # Act
+    punto = ai.cruce_por_topologia(conocidos_de(nodos), (1, 3))
+
+    # Assert
+    assert np.allclose(punto, r @ np.array([5040.0, 6120.0]), atol=1e-6)
+
+
+def test_sin_ningun_cruce_conocido_en_su_fila_no_hay_pareja_por_topologia():
+    nodos = [n for n in reticula(4) if n['indice'][1] != 2]
+    assert ai.cruce_por_topologia(conocidos_de(nodos), (2, 2)) is None
+
+
+def test_los_cruces_aceptados_por_topologia_se_vuelven_nodos_con_su_pareja_en_1936():
+    # Arrange
+    conocidos = conocidos_de([n for n in reticula(4) if n['indice'] != [2, 2]])
+    cruces = [{'id': 'X22', 'indice': [2, 2], 'original': [120.0, 220.0], 'sector': 'S1'},
+              {'id': 'X99', 'indice': [9, 9], 'original': [0.0, 0.0], 'sector': 'S1'}]
+
+    # Act
+    nodos = ai.nodos_por_topologia(['X22'], cruces, conocidos)
+
+    # Assert
+    assert len(nodos) == 1
+    n = nodos[0]
+    assert (n['id'], n['indice'], n['sector'], n['original']) == ('X22', [2, 2], 'S1', [120.0, 220.0])
+    assert np.allclose(n['mosaico_identidad'], [5080, 6080])
+    assert n['esquina_1936'] == 'topología [2, 2]' and n['esquina_1936_nombre'] is None
+
+
+def test_un_cruce_aceptado_sin_fila_o_columna_conocida_es_un_error():
+    import pytest
+    conocidos = conocidos_de([n for n in reticula(4) if n['indice'][1] != 2])
+    with pytest.raises(ValueError, match='X22'):
+        ai.nodos_por_topologia(['X22'], [{'id': 'X22', 'indice': [2, 2], 'original': [0, 0], 'sector': 'S1'}], conocidos)

@@ -39,6 +39,11 @@ VENTANA_NUDO_PX = 60
 def _ancla_de_nodo(n):
     i, j = n['indice']
     nombre = f" ({n['esquina_1936_nombre']})" if n.get('esquina_1936_nombre') else ''
+    if str(n['esquina_1936']).startswith('topología'):
+        return {'px': float(n['original'][0]), 'py': float(n['original'][1]),
+                'x36': float(n['mosaico_identidad'][0]), 'y36': float(n['mosaico_identidad'][1]), 'id': n['id'],
+                'sector': n['sector'], 'nota': f"identidad de damero [{i}, {j}] desde Las Monjas: corte de su fila y su "
+                                               f"columna en 1936, revisado a ojo (anclas-topologia.json)"}
     return {'px': float(n['original'][0]), 'py': float(n['original'][1]),
             'x36': float(n['mosaico_identidad'][0]), 'y36': float(n['mosaico_identidad'][1]),
             'id': n['id'], 'sector': n['sector'],
@@ -148,6 +153,60 @@ def excluir_rotulos(nodos, esquinas, distancia_m, umbral_m=UMBRAL_NUDO_M):
     return conservados, excluidos
 
 
+RADIO_TOPOLOGIA = 3  # cruces vecinos (en calles) que sirven para trazar la fila, la columna y el paso local
+
+
+def _paso_local(conocidos, i, j, eje, radio=RADIO_TOPOLOGIA):
+    """Dirección local de las filas (eje 0, i → i+1) o columnas (eje 1, j → j+1) de 1936 cerca de (i, j)."""
+    pasos = [conocidos[(a + 1, b) if eje == 0 else (a, b + 1)] - p for (a, b), p in conocidos.items()
+             if abs(a - i) <= radio and abs(b - j) <= radio and ((a + 1, b) if eje == 0 else (a, b + 1)) in conocidos]
+    if len(pasos) < 2:
+        return None
+    d = np.median(pasos, axis=0)
+    return d / np.linalg.norm(d)
+
+
+def _recta(conocidos, i, j, eje, radio=RADIO_TOPOLOGIA):
+    """La fila j (eje 0) o la columna i (eje 1) de 1936: su cruce conocido más cercano y la dirección local."""
+    en_linea = [(abs(a - i), p) for (a, b), p in conocidos.items() if eje == 0 and b == j and 0 < abs(a - i) <= radio]
+    en_linea += [(abs(b - j), p) for (a, b), p in conocidos.items() if eje == 1 and a == i and 0 < abs(b - j) <= radio]
+    d = _paso_local(conocidos, i, j, eje, radio)
+    if not en_linea or d is None:
+        return None
+    return min(en_linea, key=lambda t: t[0])[1], d
+
+
+def cruce_por_topologia(conocidos, indice):
+    """Pareja en 1936 de un cruce de 1772 sin esquina con nombre, solo con la topología del damero de 1936: el corte
+    de su fila (los cruces conocidos con el mismo j) con su columna (los del mismo i). `conocidos`: {(i, j): punto
+    en px del mosaico} de cruces ya identificados. No usa el calce. None si falta la fila o la columna."""
+    i, j = indice
+    conocidos = {k: np.asarray(v, float) for k, v in conocidos.items()}
+    fila, columna = _recta(conocidos, i, j, 0), _recta(conocidos, i, j, 1)
+    if fila is None or columna is None:
+        return None
+    (p, u), (q, v) = fila, columna
+    t = np.linalg.solve(np.array([u, -v]).T, q - p)
+    return p + t[0] * u
+
+
+def nodos_por_topologia(aceptados, cruces, conocidos):
+    """Nodos de identidad de los cruces de 1772 `aceptados` (sus id, revisados a ojo en anclas-topologia.json), con
+    la pareja de cruce_por_topologia. `cruces`: los de damero.cruces_1772. Un aceptado sin pareja es un error."""
+    por_id = {c['id']: c for c in cruces}
+    nodos = []
+    for ident in aceptados:
+        c = por_id[ident]
+        punto = cruce_por_topologia(conocidos, tuple(c['indice']))
+        if punto is None:
+            raise ValueError(f'{ident}: sin fila o columna conocida en 1936')
+        i, j = c['indice']
+        nodos.append({'id': ident, 'sector': c['sector'], 'original': [float(v) for v in c['original']],
+                      'indice': [i, j], 'esquina_1936': f'topología [{i}, {j}]', 'esquina_1936_nombre': None,
+                      'mosaico_identidad': [round(float(v), 2) for v in punto]})
+    return nodos
+
+
 def resumen_por_sector(anclas, loo_m, residuo_m, umbral_m=UMBRAL_SECTOR_M):
     """Por sector: anclas, mediana y máximo del error dejando uno fuera y mediana del residuo."""
     grupos = defaultdict(lambda: ([], []))
@@ -196,6 +255,13 @@ def informe(controles, config, anclas, omitidos, calce, metro, hitos_en_semillas
     }
 
 
+def _cruces_1772():
+    from controles_damero import AUD
+    from damero import cruces_1772
+    trazado = json.loads((AUD / 'trazado-calles-original.json').read_text(encoding='utf-8'))
+    return cruces_1772(trazado['lineas'], json.loads((AUD / 'sectores.json').read_text(encoding='utf-8'))['sectores'])
+
+
 def _distancias_a_nudo(nodos, esquinas, ruta_clases, clases_calle, metro, ventana=VENTANA_NUDO_PX):
     """Distancia en metros al nudo de calles más cercano, solo para los nodos cuya esquina no tiene cota."""
     import cv2
@@ -220,6 +286,7 @@ def main():
     ap.add_argument('--gcp', type=Path, required=True)
     ap.add_argument('--informe', type=Path, required=True)
     ap.add_argument('--esquinas', type=Path, default=RAIZ / 'tools/geo/esquinas/1936-esquinas.json')
+    ap.add_argument('--topologia', type=Path, default=RAIZ / 'specs/auditoria-1772/anclas-topologia.json')
     ap.add_argument('--datos', type=Path, default=RAIZ, help='checkout con fuentes/derivados (la segmentación de 1936)')
     a = ap.parse_args()
     controles = json.loads(a.controles.read_text(encoding='utf-8'))
@@ -233,6 +300,13 @@ def main():
     nodos, excluidos = excluir_rotulos(controles['nodos'], esquinas,
                                        _distancias_a_nudo(controles['nodos'], esquinas, a.datos / config_1936['clases'],
                                                           config_1936['clases_calle'], controles['parametros']['metro']))
+    topologia = json.loads(a.topologia.read_text(encoding='utf-8')) if a.topologia.exists() else {'aceptados': []}
+    nuevos = nodos_por_topologia([x['id'] for x in topologia['aceptados']], _cruces_1772(),
+                                 {tuple(n['indice']): np.array(n['mosaico_identidad'], float) for n in nodos})
+    errores = validar_nodos(nodos + nuevos)
+    if errores:
+        raise SystemExit('parejas por topología inválidas:\n  ' + '\n  '.join(errores))
+    nodos = nodos + nuevos
     anclas, omitidos = anclas_de_identidad(nodos, hitos, [(s['px'], s['py']) for s in config['semillas']])
     config = {**config, 'etapas': [], 'anclas': [{k: a[k] for k in ('px', 'py', 'x36', 'y36', 'id', 'nota')} for a in anclas]}
     metro = controles['parametros']['metro']
@@ -241,6 +315,7 @@ def main():
     # los hitos sin unidad (la Plaza Mayor) no son anclas propias: los cubren las semillas de la plaza
     en_semillas = [h['id'] for h in controles['controles_por_hito'] if not h.get('unidad')]
     datos = informe(controles, config, anclas, omitidos, calce, metro, en_semillas, excluidos)
+    datos['anclas_por_topologia'] = [{k: n[k] for k in ('id', 'sector', 'indice', 'original', 'mosaico_identidad')} for n in nuevos]
     a.gcp.write_text(json_legible(config), encoding='utf-8')
     a.informe.write_text(json.dumps(datos, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     print(f"{len(anclas)} anclas ({len(omitidos)} nodos omitidos por semilla, {len(excluidos)} por rótulo); LOO {datos['residuos_loo_m']}; "
