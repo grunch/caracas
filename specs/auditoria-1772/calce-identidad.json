@@ -1,0 +1,1306 @@
+{
+ "alcance": "Calce de 1772 por identidad (T33j.2a). El error dejando uno fuera mide cuánto se aparta cada ancla del TPS ajustado sin ella; no certifica exactitud geográfica.",
+ "suavizado": 0.005,
+ "semillas": 4,
+ "anclas": 166,
+ "nodos_omitidos_por_semilla": [
+  "X1772-0060",
+  "X1772-0061",
+  "X1772-0077",
+  "X1772-0078"
+ ],
+ "residuos_loo_m": {
+  "metodo": "dejando uno fuera (TPS sin ese GCP), en metros sobre 1936",
+  "n": 170,
+  "rms": 21.84,
+  "p90": 30.02,
+  "max": 141.84
+ },
+ "por_sector": [
+  {
+   "sector": "S1772-11",
+   "anclas": 2,
+   "mediana_loo_m": 5.21,
+   "max_loo_m": 7.86,
+   "mediana_residuo_m": 1.17,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1772-12",
+   "anclas": 2,
+   "mediana_loo_m": 7.87,
+   "max_loo_m": 13.38,
+   "mediana_residuo_m": 1.98,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1772-13",
+   "anclas": 8,
+   "mediana_loo_m": 11.8,
+   "max_loo_m": 31.35,
+   "mediana_residuo_m": 5.28,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1772-14",
+   "anclas": 1,
+   "mediana_loo_m": 141.84,
+   "max_loo_m": 141.84,
+   "mediana_residuo_m": 12.25,
+   "bajo_umbral": false
+  },
+  {
+   "sector": "S1772-21",
+   "anclas": 9,
+   "mediana_loo_m": 4.04,
+   "max_loo_m": 48.89,
+   "mediana_residuo_m": 1.97,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1772-22",
+   "anclas": 25,
+   "mediana_loo_m": 11.18,
+   "max_loo_m": 23.83,
+   "mediana_residuo_m": 5.35,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1772-23",
+   "anclas": 29,
+   "mediana_loo_m": 8.86,
+   "max_loo_m": 34.19,
+   "mediana_residuo_m": 4.31,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1772-24",
+   "anclas": 5,
+   "mediana_loo_m": 26.99,
+   "max_loo_m": 53.0,
+   "mediana_residuo_m": 8.2,
+   "bajo_umbral": false
+  },
+  {
+   "sector": "S1772-31",
+   "anclas": 7,
+   "mediana_loo_m": 16.79,
+   "max_loo_m": 54.31,
+   "mediana_residuo_m": 5.32,
+   "bajo_umbral": false
+  },
+  {
+   "sector": "S1772-32",
+   "anclas": 25,
+   "mediana_loo_m": 10.61,
+   "max_loo_m": 69.16,
+   "mediana_residuo_m": 5.24,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1772-33",
+   "anclas": 23,
+   "mediana_loo_m": 6.96,
+   "max_loo_m": 25.09,
+   "mediana_residuo_m": 3.21,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1772-34",
+   "anclas": 11,
+   "mediana_loo_m": 14.91,
+   "max_loo_m": 57.77,
+   "mediana_residuo_m": 6.42,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1772-42",
+   "anclas": 6,
+   "mediana_loo_m": 9.0,
+   "max_loo_m": 49.13,
+   "mediana_residuo_m": 4.22,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1772-43",
+   "anclas": 12,
+   "mediana_loo_m": 10.2,
+   "max_loo_m": 34.09,
+   "mediana_residuo_m": 4.07,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1772-44",
+   "anclas": 1,
+   "mediana_loo_m": 56.92,
+   "max_loo_m": 56.92,
+   "mediana_residuo_m": 18.98,
+   "bajo_umbral": false
+  }
+ ],
+ "celdas_plegadas": 0,
+ "anclas_detalle": [
+  {
+   "id": "X1772-0002",
+   "sector": "S1772-11",
+   "loo_m": 7.86,
+   "residuo_m": 1.29,
+   "desvio_tps_anterior_m": 380.532
+  },
+  {
+   "id": "X1772-0005",
+   "sector": "S1772-13",
+   "loo_m": 31.35,
+   "residuo_m": 8.87,
+   "desvio_tps_anterior_m": 156.734
+  },
+  {
+   "id": "X1772-0006",
+   "sector": "S1772-13",
+   "loo_m": 5.34,
+   "residuo_m": 2.24,
+   "desvio_tps_anterior_m": 177.796
+  },
+  {
+   "id": "X1772-0007",
+   "sector": "S1772-13",
+   "loo_m": 16.95,
+   "residuo_m": 7.04,
+   "desvio_tps_anterior_m": 204.435
+  },
+  {
+   "id": "X1772-0008",
+   "sector": "S1772-13",
+   "loo_m": 21.17,
+   "residuo_m": 6.16,
+   "desvio_tps_anterior_m": 203.832
+  },
+  {
+   "id": "X1772-0010",
+   "sector": "S1772-11",
+   "loo_m": 2.55,
+   "residuo_m": 1.05,
+   "desvio_tps_anterior_m": 353.357
+  },
+  {
+   "id": "X1772-0011",
+   "sector": "S1772-12",
+   "loo_m": 2.35,
+   "residuo_m": 1.01,
+   "desvio_tps_anterior_m": 324.09
+  },
+  {
+   "id": "X1772-0012",
+   "sector": "S1772-12",
+   "loo_m": 13.38,
+   "residuo_m": 2.94,
+   "desvio_tps_anterior_m": 294.833
+  },
+  {
+   "id": "X1772-0014",
+   "sector": "S1772-13",
+   "loo_m": 8.84,
+   "residuo_m": 3.92,
+   "desvio_tps_anterior_m": 144.068
+  },
+  {
+   "id": "X1772-0015",
+   "sector": "S1772-13",
+   "loo_m": 1.93,
+   "residuo_m": 0.93,
+   "desvio_tps_anterior_m": 144.587
+  },
+  {
+   "id": "X1772-0016",
+   "sector": "S1772-13",
+   "loo_m": 9.6,
+   "residuo_m": 4.62,
+   "desvio_tps_anterior_m": 151.015
+  },
+  {
+   "id": "X1772-0017",
+   "sector": "S1772-13",
+   "loo_m": 14.0,
+   "residuo_m": 5.94,
+   "desvio_tps_anterior_m": 171.776
+  },
+  {
+   "id": "X1772-0019",
+   "sector": "S1772-21",
+   "loo_m": 9.3,
+   "residuo_m": 3.3,
+   "desvio_tps_anterior_m": 329.463
+  },
+  {
+   "id": "X1772-0020",
+   "sector": "S1772-22",
+   "loo_m": 16.63,
+   "residuo_m": 6.29,
+   "desvio_tps_anterior_m": 290.739
+  },
+  {
+   "id": "X1772-0021",
+   "sector": "S1772-23",
+   "loo_m": 34.19,
+   "residuo_m": 12.63,
+   "desvio_tps_anterior_m": 156.326
+  },
+  {
+   "id": "X1772-0022",
+   "sector": "S1772-23",
+   "loo_m": 15.1,
+   "residuo_m": 7.33,
+   "desvio_tps_anterior_m": 116.1
+  },
+  {
+   "id": "X1772-0023",
+   "sector": "S1772-23",
+   "loo_m": 1.35,
+   "residuo_m": 0.66,
+   "desvio_tps_anterior_m": 108.945
+  },
+  {
+   "id": "X1772-0024",
+   "sector": "S1772-23",
+   "loo_m": 7.58,
+   "residuo_m": 3.68,
+   "desvio_tps_anterior_m": 110.322
+  },
+  {
+   "id": "X1772-0025",
+   "sector": "S1772-23",
+   "loo_m": 12.14,
+   "residuo_m": 4.47,
+   "desvio_tps_anterior_m": 129.255
+  },
+  {
+   "id": "X1772-0026",
+   "sector": "S1772-23",
+   "loo_m": 16.71,
+   "residuo_m": 6.27,
+   "desvio_tps_anterior_m": 93.109
+  },
+  {
+   "id": "X1772-0027",
+   "sector": "S1772-23",
+   "loo_m": 17.02,
+   "residuo_m": 8.29,
+   "desvio_tps_anterior_m": 87.868
+  },
+  {
+   "id": "X1772-0028",
+   "sector": "S1772-23",
+   "loo_m": 7.55,
+   "residuo_m": 3.7,
+   "desvio_tps_anterior_m": 81.998
+  },
+  {
+   "id": "X1772-0029",
+   "sector": "S1772-23",
+   "loo_m": 4.49,
+   "residuo_m": 2.21,
+   "desvio_tps_anterior_m": 73.803
+  },
+  {
+   "id": "X1772-0030",
+   "sector": "S1772-23",
+   "loo_m": 3.45,
+   "residuo_m": 1.6,
+   "desvio_tps_anterior_m": 74.929
+  },
+  {
+   "id": "X1772-0032",
+   "sector": "S1772-24",
+   "loo_m": 22.49,
+   "residuo_m": 6.47,
+   "desvio_tps_anterior_m": 116.971
+  },
+  {
+   "id": "X1772-0033",
+   "sector": "S1772-24",
+   "loo_m": 53.0,
+   "residuo_m": 10.93,
+   "desvio_tps_anterior_m": 166.669
+  },
+  {
+   "id": "X1772-0035",
+   "sector": "S1772-21",
+   "loo_m": 19.7,
+   "residuo_m": 8.21,
+   "desvio_tps_anterior_m": 302.931
+  },
+  {
+   "id": "X1772-0036",
+   "sector": "S1772-21",
+   "loo_m": 3.47,
+   "residuo_m": 1.68,
+   "desvio_tps_anterior_m": 280.345
+  },
+  {
+   "id": "X1772-0037",
+   "sector": "S1772-22",
+   "loo_m": 7.0,
+   "residuo_m": 3.43,
+   "desvio_tps_anterior_m": 232.082
+  },
+  {
+   "id": "X1772-0038",
+   "sector": "S1772-22",
+   "loo_m": 12.06,
+   "residuo_m": 5.92,
+   "desvio_tps_anterior_m": 181.324
+  },
+  {
+   "id": "X1772-0039",
+   "sector": "S1772-22",
+   "loo_m": 8.13,
+   "residuo_m": 4.0,
+   "desvio_tps_anterior_m": 98.243
+  },
+  {
+   "id": "X1772-0040",
+   "sector": "S1772-22",
+   "loo_m": 11.79,
+   "residuo_m": 5.76,
+   "desvio_tps_anterior_m": 49.871
+  },
+  {
+   "id": "X1772-0041",
+   "sector": "S1772-22",
+   "loo_m": 9.29,
+   "residuo_m": 4.52,
+   "desvio_tps_anterior_m": 15.744
+  },
+  {
+   "id": "X1772-0042",
+   "sector": "S1772-22",
+   "loo_m": 9.08,
+   "residuo_m": 4.43,
+   "desvio_tps_anterior_m": 15.004
+  },
+  {
+   "id": "X1772-0043",
+   "sector": "S1772-23",
+   "loo_m": 7.16,
+   "residuo_m": 3.53,
+   "desvio_tps_anterior_m": 14.958
+  },
+  {
+   "id": "X1772-0044",
+   "sector": "S1772-23",
+   "loo_m": 9.57,
+   "residuo_m": 4.7,
+   "desvio_tps_anterior_m": 12.229
+  },
+  {
+   "id": "X1772-0045",
+   "sector": "S1772-23",
+   "loo_m": 1.28,
+   "residuo_m": 0.63,
+   "desvio_tps_anterior_m": 7.795
+  },
+  {
+   "id": "X1772-0046",
+   "sector": "S1772-23",
+   "loo_m": 4.29,
+   "residuo_m": 2.11,
+   "desvio_tps_anterior_m": 10.691
+  },
+  {
+   "id": "X1772-0047",
+   "sector": "S1772-23",
+   "loo_m": 11.66,
+   "residuo_m": 5.69,
+   "desvio_tps_anterior_m": 26.595
+  },
+  {
+   "id": "X1772-0048",
+   "sector": "S1772-23",
+   "loo_m": 10.51,
+   "residuo_m": 4.54,
+   "desvio_tps_anterior_m": 67.05
+  },
+  {
+   "id": "X1772-0052",
+   "sector": "S1772-21",
+   "loo_m": 2.46,
+   "residuo_m": 1.03,
+   "desvio_tps_anterior_m": 290.101
+  },
+  {
+   "id": "X1772-0053",
+   "sector": "S1772-21",
+   "loo_m": 3.87,
+   "residuo_m": 1.88,
+   "desvio_tps_anterior_m": 272.853
+  },
+  {
+   "id": "X1772-0054",
+   "sector": "S1772-22",
+   "loo_m": 10.91,
+   "residuo_m": 5.35,
+   "desvio_tps_anterior_m": 229.501
+  },
+  {
+   "id": "X1772-0055",
+   "sector": "S1772-22",
+   "loo_m": 14.1,
+   "residuo_m": 6.94,
+   "desvio_tps_anterior_m": 185.42
+  },
+  {
+   "id": "X1772-0056",
+   "sector": "S1772-22",
+   "loo_m": 13.17,
+   "residuo_m": 6.51,
+   "desvio_tps_anterior_m": 99.283
+  },
+  {
+   "id": "X1772-0057",
+   "sector": "S1772-22",
+   "loo_m": 15.85,
+   "residuo_m": 7.78,
+   "desvio_tps_anterior_m": 48.495
+  },
+  {
+   "id": "X1772-0058",
+   "sector": "S1772-22",
+   "loo_m": 23.83,
+   "residuo_m": 11.63,
+   "desvio_tps_anterior_m": 14.397
+  },
+  {
+   "id": "X1772-0059",
+   "sector": "S1772-22",
+   "loo_m": 16.87,
+   "residuo_m": 8.29,
+   "desvio_tps_anterior_m": 14.617
+  },
+  {
+   "id": "X1772-0062",
+   "sector": "S1772-23",
+   "loo_m": 8.86,
+   "residuo_m": 4.31,
+   "desvio_tps_anterior_m": 11.683
+  },
+  {
+   "id": "X1772-0063",
+   "sector": "S1772-23",
+   "loo_m": 7.22,
+   "residuo_m": 3.55,
+   "desvio_tps_anterior_m": 12.069
+  },
+  {
+   "id": "X1772-0064",
+   "sector": "S1772-23",
+   "loo_m": 29.97,
+   "residuo_m": 14.57,
+   "desvio_tps_anterior_m": 56.517
+  },
+  {
+   "id": "X1772-0065",
+   "sector": "S1772-23",
+   "loo_m": 16.74,
+   "residuo_m": 6.88,
+   "desvio_tps_anterior_m": 63.744
+  },
+  {
+   "id": "X1772-0069",
+   "sector": "S1772-21",
+   "loo_m": 3.38,
+   "residuo_m": 1.41,
+   "desvio_tps_anterior_m": 281.989
+  },
+  {
+   "id": "X1772-0070",
+   "sector": "S1772-21",
+   "loo_m": 4.04,
+   "residuo_m": 1.97,
+   "desvio_tps_anterior_m": 266.568
+  },
+  {
+   "id": "X1772-0071",
+   "sector": "S1772-22",
+   "loo_m": 7.14,
+   "residuo_m": 3.51,
+   "desvio_tps_anterior_m": 229.232
+  },
+  {
+   "id": "X1772-0072",
+   "sector": "S1772-22",
+   "loo_m": 14.8,
+   "residuo_m": 7.29,
+   "desvio_tps_anterior_m": 186.503
+  },
+  {
+   "id": "X1772-0073",
+   "sector": "S1772-22",
+   "loo_m": 16.95,
+   "residuo_m": 8.37,
+   "desvio_tps_anterior_m": 96.17
+  },
+  {
+   "id": "X1772-0074",
+   "sector": "S1772-22",
+   "loo_m": 6.44,
+   "residuo_m": 3.16,
+   "desvio_tps_anterior_m": 49.738
+  },
+  {
+   "id": "X1772-0075",
+   "sector": "S1772-22",
+   "loo_m": 9.39,
+   "residuo_m": 4.56,
+   "desvio_tps_anterior_m": 16.625
+  },
+  {
+   "id": "X1772-0076",
+   "sector": "S1772-22",
+   "loo_m": 13.46,
+   "residuo_m": 6.23,
+   "desvio_tps_anterior_m": 9.987
+  },
+  {
+   "id": "X1772-0079",
+   "sector": "S1772-23",
+   "loo_m": 10.87,
+   "residuo_m": 5.28,
+   "desvio_tps_anterior_m": 13.207
+  },
+  {
+   "id": "X1772-0080",
+   "sector": "S1772-23",
+   "loo_m": 8.98,
+   "residuo_m": 4.4,
+   "desvio_tps_anterior_m": 10.397
+  },
+  {
+   "id": "X1772-0081",
+   "sector": "S1772-23",
+   "loo_m": 21.61,
+   "residuo_m": 8.77,
+   "desvio_tps_anterior_m": 31.892
+  },
+  {
+   "id": "X1772-0082",
+   "sector": "S1772-24",
+   "loo_m": 26.99,
+   "residuo_m": 9.53,
+   "desvio_tps_anterior_m": 137.614
+  },
+  {
+   "id": "X1772-0083",
+   "sector": "S1772-24",
+   "loo_m": 19.58,
+   "residuo_m": 8.2,
+   "desvio_tps_anterior_m": 132.306
+  },
+  {
+   "id": "X1772-0084",
+   "sector": "S1772-24",
+   "loo_m": 30.41,
+   "residuo_m": 7.39,
+   "desvio_tps_anterior_m": 151.704
+  },
+  {
+   "id": "X1772-0086",
+   "sector": "S1772-31",
+   "loo_m": 12.23,
+   "residuo_m": 5.11,
+   "desvio_tps_anterior_m": 270.384
+  },
+  {
+   "id": "X1772-0087",
+   "sector": "S1772-31",
+   "loo_m": 9.07,
+   "residuo_m": 4.41,
+   "desvio_tps_anterior_m": 255.885
+  },
+  {
+   "id": "X1772-0088",
+   "sector": "S1772-32",
+   "loo_m": 7.98,
+   "residuo_m": 3.92,
+   "desvio_tps_anterior_m": 222.44
+  },
+  {
+   "id": "X1772-0089",
+   "sector": "S1772-32",
+   "loo_m": 16.4,
+   "residuo_m": 8.08,
+   "desvio_tps_anterior_m": 180.472
+  },
+  {
+   "id": "X1772-0090",
+   "sector": "S1772-32",
+   "loo_m": 10.61,
+   "residuo_m": 5.24,
+   "desvio_tps_anterior_m": 95.539
+  },
+  {
+   "id": "X1772-0091",
+   "sector": "S1772-32",
+   "loo_m": 3.9,
+   "residuo_m": 1.92,
+   "desvio_tps_anterior_m": 50.715
+  },
+  {
+   "id": "X1772-0092",
+   "sector": "S1772-32",
+   "loo_m": 1.31,
+   "residuo_m": 0.6,
+   "desvio_tps_anterior_m": 15.966
+  },
+  {
+   "id": "X1772-0094",
+   "sector": "S1772-33",
+   "loo_m": 6.96,
+   "residuo_m": 3.21,
+   "desvio_tps_anterior_m": 10.172
+  },
+  {
+   "id": "X1772-0095",
+   "sector": "S1772-33",
+   "loo_m": 10.04,
+   "residuo_m": 4.89,
+   "desvio_tps_anterior_m": 14.611
+  },
+  {
+   "id": "X1772-0096",
+   "sector": "S1772-33",
+   "loo_m": 2.73,
+   "residuo_m": 1.34,
+   "desvio_tps_anterior_m": 3.628
+  },
+  {
+   "id": "X1772-0097",
+   "sector": "S1772-33",
+   "loo_m": 6.6,
+   "residuo_m": 3.05,
+   "desvio_tps_anterior_m": 23.226
+  },
+  {
+   "id": "X1772-0100",
+   "sector": "S1772-34",
+   "loo_m": 52.6,
+   "residuo_m": 22.5,
+   "desvio_tps_anterior_m": 169.469
+  },
+  {
+   "id": "X1772-0102",
+   "sector": "S1772-31",
+   "loo_m": 36.28,
+   "residuo_m": 15.21,
+   "desvio_tps_anterior_m": 259.904
+  },
+  {
+   "id": "X1772-0103",
+   "sector": "S1772-31",
+   "loo_m": 29.38,
+   "residuo_m": 14.25,
+   "desvio_tps_anterior_m": 247.124
+  },
+  {
+   "id": "X1772-0104",
+   "sector": "S1772-32",
+   "loo_m": 61.6,
+   "residuo_m": 30.29,
+   "desvio_tps_anterior_m": 179.194
+  },
+  {
+   "id": "X1772-0105",
+   "sector": "S1772-32",
+   "loo_m": 19.4,
+   "residuo_m": 9.58,
+   "desvio_tps_anterior_m": 171.727
+  },
+  {
+   "id": "X1772-0106",
+   "sector": "S1772-32",
+   "loo_m": 19.92,
+   "residuo_m": 9.86,
+   "desvio_tps_anterior_m": 91.128
+  },
+  {
+   "id": "X1772-0107",
+   "sector": "S1772-32",
+   "loo_m": 9.22,
+   "residuo_m": 4.54,
+   "desvio_tps_anterior_m": 51.125
+  },
+  {
+   "id": "X1772-0108",
+   "sector": "S1772-32",
+   "loo_m": 4.57,
+   "residuo_m": 2.23,
+   "desvio_tps_anterior_m": 14.23
+  },
+  {
+   "id": "X1772-0109",
+   "sector": "S1772-32",
+   "loo_m": 4.98,
+   "residuo_m": 2.29,
+   "desvio_tps_anterior_m": 7.289
+  },
+  {
+   "id": "X1772-0110",
+   "sector": "S1772-33",
+   "loo_m": 6.97,
+   "residuo_m": 3.41,
+   "desvio_tps_anterior_m": 1.971
+  },
+  {
+   "id": "X1772-0111",
+   "sector": "S1772-33",
+   "loo_m": 4.3,
+   "residuo_m": 2.11,
+   "desvio_tps_anterior_m": 6.504
+  },
+  {
+   "id": "X1772-0112",
+   "sector": "S1772-33",
+   "loo_m": 4.5,
+   "residuo_m": 2.2,
+   "desvio_tps_anterior_m": 18.546
+  },
+  {
+   "id": "X1772-0113",
+   "sector": "S1772-33",
+   "loo_m": 7.59,
+   "residuo_m": 3.44,
+   "desvio_tps_anterior_m": 42.971
+  },
+  {
+   "id": "X1772-0114",
+   "sector": "S1772-33",
+   "loo_m": 15.48,
+   "residuo_m": 6.43,
+   "desvio_tps_anterior_m": 86.514
+  },
+  {
+   "id": "X1772-0115",
+   "sector": "S1772-33",
+   "loo_m": 25.09,
+   "residuo_m": 10.93,
+   "desvio_tps_anterior_m": 105.242
+  },
+  {
+   "id": "X1772-0116",
+   "sector": "S1772-34",
+   "loo_m": 57.77,
+   "residuo_m": 25.89,
+   "desvio_tps_anterior_m": 187.441
+  },
+  {
+   "id": "X1772-0117",
+   "sector": "S1772-34",
+   "loo_m": 23.33,
+   "residuo_m": 11.2,
+   "desvio_tps_anterior_m": 163.892
+  },
+  {
+   "id": "X1772-0118",
+   "sector": "S1772-34",
+   "loo_m": 14.91,
+   "residuo_m": 5.25,
+   "desvio_tps_anterior_m": 190.637
+  },
+  {
+   "id": "X1772-0119",
+   "sector": "S1772-31",
+   "loo_m": 54.31,
+   "residuo_m": 16.89,
+   "desvio_tps_anterior_m": 273.157
+  },
+  {
+   "id": "X1772-0120",
+   "sector": "S1772-31",
+   "loo_m": 7.2,
+   "residuo_m": 3.45,
+   "desvio_tps_anterior_m": 252.87
+  },
+  {
+   "id": "X1772-0121",
+   "sector": "S1772-32",
+   "loo_m": 13.91,
+   "residuo_m": 6.72,
+   "desvio_tps_anterior_m": 219.918
+  },
+  {
+   "id": "X1772-0122",
+   "sector": "S1772-32",
+   "loo_m": 14.0,
+   "residuo_m": 6.48,
+   "desvio_tps_anterior_m": 170.897
+  },
+  {
+   "id": "X1772-0123",
+   "sector": "S1772-32",
+   "loo_m": 14.86,
+   "residuo_m": 7.29,
+   "desvio_tps_anterior_m": 95.13
+  },
+  {
+   "id": "X1772-0124",
+   "sector": "S1772-32",
+   "loo_m": 15.45,
+   "residuo_m": 7.57,
+   "desvio_tps_anterior_m": 56.89
+  },
+  {
+   "id": "X1772-0125",
+   "sector": "S1772-32",
+   "loo_m": 8.33,
+   "residuo_m": 4.06,
+   "desvio_tps_anterior_m": 40.851
+  },
+  {
+   "id": "X1772-0126",
+   "sector": "S1772-32",
+   "loo_m": 4.22,
+   "residuo_m": 2.06,
+   "desvio_tps_anterior_m": 37.53
+  },
+  {
+   "id": "X1772-0127",
+   "sector": "S1772-33",
+   "loo_m": 6.08,
+   "residuo_m": 2.98,
+   "desvio_tps_anterior_m": 37.452
+  },
+  {
+   "id": "X1772-0128",
+   "sector": "S1772-33",
+   "loo_m": 7.35,
+   "residuo_m": 3.58,
+   "desvio_tps_anterior_m": 40.568
+  },
+  {
+   "id": "X1772-0129",
+   "sector": "S1772-33",
+   "loo_m": 21.78,
+   "residuo_m": 9.27,
+   "desvio_tps_anterior_m": 77.162
+  },
+  {
+   "id": "X1772-0132",
+   "sector": "S1772-33",
+   "loo_m": 4.19,
+   "residuo_m": 1.93,
+   "desvio_tps_anterior_m": 132.442
+  },
+  {
+   "id": "X1772-0133",
+   "sector": "S1772-34",
+   "loo_m": 15.59,
+   "residuo_m": 7.59,
+   "desvio_tps_anterior_m": 154.107
+  },
+  {
+   "id": "X1772-0134",
+   "sector": "S1772-34",
+   "loo_m": 12.35,
+   "residuo_m": 5.92,
+   "desvio_tps_anterior_m": 172.735
+  },
+  {
+   "id": "X1772-0135",
+   "sector": "S1772-34",
+   "loo_m": 14.03,
+   "residuo_m": 5.86,
+   "desvio_tps_anterior_m": 201.177
+  },
+  {
+   "id": "X1772-0137",
+   "sector": "S1772-31",
+   "loo_m": 16.79,
+   "residuo_m": 5.32,
+   "desvio_tps_anterior_m": 260.092
+  },
+  {
+   "id": "X1772-0138",
+   "sector": "S1772-32",
+   "loo_m": 21.24,
+   "residuo_m": 7.61,
+   "desvio_tps_anterior_m": 203.904
+  },
+  {
+   "id": "X1772-0140",
+   "sector": "S1772-32",
+   "loo_m": 9.14,
+   "residuo_m": 3.57,
+   "desvio_tps_anterior_m": 118.329
+  },
+  {
+   "id": "X1772-0141",
+   "sector": "S1772-32",
+   "loo_m": 22.55,
+   "residuo_m": 11.0,
+   "desvio_tps_anterior_m": 98.595
+  },
+  {
+   "id": "X1772-0142",
+   "sector": "S1772-32",
+   "loo_m": 3.27,
+   "residuo_m": 1.59,
+   "desvio_tps_anterior_m": 82.375
+  },
+  {
+   "id": "X1772-0143",
+   "sector": "S1772-32",
+   "loo_m": 2.05,
+   "residuo_m": 0.99,
+   "desvio_tps_anterior_m": 76.988
+  },
+  {
+   "id": "X1772-0144",
+   "sector": "S1772-33",
+   "loo_m": 1.32,
+   "residuo_m": 0.61,
+   "desvio_tps_anterior_m": 78.92
+  },
+  {
+   "id": "X1772-0145",
+   "sector": "S1772-33",
+   "loo_m": 6.25,
+   "residuo_m": 2.82,
+   "desvio_tps_anterior_m": 98.433
+  },
+  {
+   "id": "X1772-0146",
+   "sector": "S1772-33",
+   "loo_m": 12.48,
+   "residuo_m": 5.15,
+   "desvio_tps_anterior_m": 132.027
+  },
+  {
+   "id": "X1772-0147",
+   "sector": "S1772-33",
+   "loo_m": 7.79,
+   "residuo_m": 3.52,
+   "desvio_tps_anterior_m": 148.403
+  },
+  {
+   "id": "X1772-0148",
+   "sector": "S1772-33",
+   "loo_m": 8.99,
+   "residuo_m": 4.37,
+   "desvio_tps_anterior_m": 150.43
+  },
+  {
+   "id": "X1772-0149",
+   "sector": "S1772-34",
+   "loo_m": 13.25,
+   "residuo_m": 6.42,
+   "desvio_tps_anterior_m": 175.688
+  },
+  {
+   "id": "X1772-0150",
+   "sector": "S1772-34",
+   "loo_m": 8.64,
+   "residuo_m": 3.79,
+   "desvio_tps_anterior_m": 193.374
+  },
+  {
+   "id": "X1772-0151",
+   "sector": "S1772-34",
+   "loo_m": 5.91,
+   "residuo_m": 1.63,
+   "desvio_tps_anterior_m": 223.247
+  },
+  {
+   "id": "X1772-0152",
+   "sector": "S1772-33",
+   "loo_m": 6.59,
+   "residuo_m": 2.76,
+   "desvio_tps_anterior_m": 145.37
+  },
+  {
+   "id": "X1772-0153",
+   "sector": "S1772-33",
+   "loo_m": 2.3,
+   "residuo_m": 1.02,
+   "desvio_tps_anterior_m": 189.201
+  },
+  {
+   "id": "X1772-0154",
+   "sector": "S1772-33",
+   "loo_m": 3.01,
+   "residuo_m": 1.48,
+   "desvio_tps_anterior_m": 193.827
+  },
+  {
+   "id": "X1772-0155",
+   "sector": "S1772-33",
+   "loo_m": 10.38,
+   "residuo_m": 5.07,
+   "desvio_tps_anterior_m": 187.932
+  },
+  {
+   "id": "X1772-0156",
+   "sector": "S1772-34",
+   "loo_m": 47.03,
+   "residuo_m": 21.1,
+   "desvio_tps_anterior_m": 178.884
+  },
+  {
+   "id": "X1772-0159",
+   "sector": "S1772-42",
+   "loo_m": 8.48,
+   "residuo_m": 3.89,
+   "desvio_tps_anterior_m": 197.357
+  },
+  {
+   "id": "X1772-0160",
+   "sector": "S1772-43",
+   "loo_m": 3.8,
+   "residuo_m": 1.75,
+   "desvio_tps_anterior_m": 201.763
+  },
+  {
+   "id": "X1772-0161",
+   "sector": "S1772-43",
+   "loo_m": 4.51,
+   "residuo_m": 1.84,
+   "desvio_tps_anterior_m": 207.228
+  },
+  {
+   "id": "X1772-0162",
+   "sector": "S1772-43",
+   "loo_m": 3.28,
+   "residuo_m": 1.46,
+   "desvio_tps_anterior_m": 232.191
+  },
+  {
+   "id": "X1772-0163",
+   "sector": "S1772-43",
+   "loo_m": 10.44,
+   "residuo_m": 5.09,
+   "desvio_tps_anterior_m": 236.43
+  },
+  {
+   "id": "X1772-0164",
+   "sector": "S1772-43",
+   "loo_m": 10.04,
+   "residuo_m": 4.86,
+   "desvio_tps_anterior_m": 226.632
+  },
+  {
+   "id": "X1772-0165",
+   "sector": "S1772-44",
+   "loo_m": 56.92,
+   "residuo_m": 18.98,
+   "desvio_tps_anterior_m": 256.376
+  },
+  {
+   "id": "X1772-0167",
+   "sector": "S1772-42",
+   "loo_m": 49.13,
+   "residuo_m": 12.32,
+   "desvio_tps_anterior_m": 228.031
+  },
+  {
+   "id": "X1772-0168",
+   "sector": "S1772-42",
+   "loo_m": 29.64,
+   "residuo_m": 13.0,
+   "desvio_tps_anterior_m": 279.001
+  },
+  {
+   "id": "X1772-0169",
+   "sector": "S1772-42",
+   "loo_m": 9.52,
+   "residuo_m": 4.55,
+   "desvio_tps_anterior_m": 272.516
+  },
+  {
+   "id": "X1772-0170",
+   "sector": "S1772-43",
+   "loo_m": 4.88,
+   "residuo_m": 2.23,
+   "desvio_tps_anterior_m": 260.851
+  },
+  {
+   "id": "X1772-0172",
+   "sector": "S1772-43",
+   "loo_m": 10.37,
+   "residuo_m": 4.14,
+   "desvio_tps_anterior_m": 255.585
+  },
+  {
+   "id": "X1772-0173",
+   "sector": "S1772-43",
+   "loo_m": 8.35,
+   "residuo_m": 4.01,
+   "desvio_tps_anterior_m": 253.708
+  },
+  {
+   "id": "X1772-0174",
+   "sector": "S1772-43",
+   "loo_m": 32.23,
+   "residuo_m": 11.6,
+   "desvio_tps_anterior_m": 230.665
+  },
+  {
+   "id": "X1772-0176",
+   "sector": "S1772-42",
+   "loo_m": 4.13,
+   "residuo_m": 1.27,
+   "desvio_tps_anterior_m": 304.753
+  },
+  {
+   "id": "X1772-0177",
+   "sector": "S1772-42",
+   "loo_m": 4.44,
+   "residuo_m": 1.84,
+   "desvio_tps_anterior_m": 308.576
+  },
+  {
+   "id": "X1772-0178",
+   "sector": "S1772-43",
+   "loo_m": 11.31,
+   "residuo_m": 3.87,
+   "desvio_tps_anterior_m": 300.001
+  },
+  {
+   "id": "X1772-0181",
+   "sector": "S1772-43",
+   "loo_m": 19.71,
+   "residuo_m": 4.3,
+   "desvio_tps_anterior_m": 276.143
+  },
+  {
+   "id": "X1772-0182",
+   "sector": "S1772-21",
+   "loo_m": 48.89,
+   "residuo_m": 15.04,
+   "desvio_tps_anterior_m": 285.194
+  },
+  {
+   "id": "X1772-0183",
+   "sector": "S1772-21",
+   "loo_m": 18.09,
+   "residuo_m": 7.93,
+   "desvio_tps_anterior_m": 295.609
+  },
+  {
+   "id": "X1772-0184",
+   "sector": "S1772-22",
+   "loo_m": 9.41,
+   "residuo_m": 4.16,
+   "desvio_tps_anterior_m": 240.048
+  },
+  {
+   "id": "X1772-0185",
+   "sector": "S1772-22",
+   "loo_m": 11.18,
+   "residuo_m": 4.88,
+   "desvio_tps_anterior_m": 185.956
+  },
+  {
+   "id": "X1772-0186",
+   "sector": "S1772-22",
+   "loo_m": 15.99,
+   "residuo_m": 6.91,
+   "desvio_tps_anterior_m": 105.095
+  },
+  {
+   "id": "X1772-0187",
+   "sector": "S1772-22",
+   "loo_m": 3.18,
+   "residuo_m": 1.35,
+   "desvio_tps_anterior_m": 65.079
+  },
+  {
+   "id": "X1772-0188",
+   "sector": "S1772-32",
+   "loo_m": 69.16,
+   "residuo_m": 26.19,
+   "desvio_tps_anterior_m": 176.027
+  },
+  {
+   "id": "X1772-0189",
+   "sector": "S1772-22",
+   "loo_m": 2.43,
+   "residuo_m": 1.02,
+   "desvio_tps_anterior_m": 45.452
+  },
+  {
+   "id": "X1772-0190",
+   "sector": "S1772-32",
+   "loo_m": 29.17,
+   "residuo_m": 13.11,
+   "desvio_tps_anterior_m": 130.222
+  },
+  {
+   "id": "X1772-0191",
+   "sector": "S1772-22",
+   "loo_m": 6.89,
+   "residuo_m": 3.05,
+   "desvio_tps_anterior_m": 47.574
+  },
+  {
+   "id": "X1772-0192",
+   "sector": "S1772-32",
+   "loo_m": 8.06,
+   "residuo_m": 3.7,
+   "desvio_tps_anterior_m": 127.226
+  },
+  {
+   "id": "X1772-0193",
+   "sector": "S1772-23",
+   "loo_m": 10.32,
+   "residuo_m": 5.05,
+   "desvio_tps_anterior_m": 49.599
+  },
+  {
+   "id": "X1772-0194",
+   "sector": "S1772-23",
+   "loo_m": 8.02,
+   "residuo_m": 3.93,
+   "desvio_tps_anterior_m": 46.49
+  },
+  {
+   "id": "X1772-0195",
+   "sector": "S1772-23",
+   "loo_m": 1.61,
+   "residuo_m": 0.79,
+   "desvio_tps_anterior_m": 40.425
+  },
+  {
+   "id": "X1772-0196",
+   "sector": "S1772-23",
+   "loo_m": 4.03,
+   "residuo_m": 1.99,
+   "desvio_tps_anterior_m": 34.49
+  },
+  {
+   "id": "X1772-0197",
+   "sector": "S1772-23",
+   "loo_m": 5.63,
+   "residuo_m": 2.74,
+   "desvio_tps_anterior_m": 38.531
+  },
+  {
+   "id": "X1772-0198",
+   "sector": "S1772-23",
+   "loo_m": 8.76,
+   "residuo_m": 3.38,
+   "desvio_tps_anterior_m": 74.152
+  },
+  {
+   "id": "H1772-candelaria",
+   "sector": "S1772-43",
+   "loo_m": 34.09,
+   "residuo_m": 9.74,
+   "desvio_tps_anterior_m": 302.89
+  },
+  {
+   "id": "H1772-la-pastora",
+   "sector": "S1772-14",
+   "loo_m": 141.84,
+   "residuo_m": 12.25,
+   "desvio_tps_anterior_m": 85.59
+  }
+ ]
+}

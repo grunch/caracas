@@ -94,3 +94,5 @@ El [sondeo de accesos](accesos-primer-lote.md) evalúa los 40 frentes iniciales 
 ## Cierre de la fase 1
 
 [Entrega 1D](cierre-fase1.md): 292 unidades clasificadas y leídas, 16 sectores recorridos, 13 incidencias con subtarea. [Controles por identidad de damero](controles-damero.md): 168 cruces y 3 hitos muestran que el TPS se desplaza por cuadras enteras fuera del núcleo (Candelaria a 303 m); 292 correspondencias clasificadas bajo un calce de control (42 uno a uno provisionales, 168 ausentes). Fase 1 abierta: U1772-0055 contradice su clase. Los recorridos de calle de Catedral y Seminario ya están hechos (I1772-003 e I1772-013 → T33j.7a); no certifica fidelidad ni cierra incidencias.
+
+[Calce por identidad](calce-identidad.md) (T33j.2a, primera parte): el calce de 1772 deja la correlación y se ajusta con 164 cruces de damero, 4 semillas y 2 hitos validados (cruces únicos, orden de calles, sin pliegues). Candelaria queda a 34 m sin su ancla (antes 303 m); S1772-24 y S1772-31 siguen sobre 15 m de mediana dejando uno fuera. Falta revisar esos nodos, reclasificar las correspondencias y regenerar los datos.
