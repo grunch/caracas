@@ -178,6 +178,7 @@ def _leer(ruta):
 
 def main():
     from damero import cruces_1772
+    from referencia_red import json_por_entidad
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('carpeta', type=Path, help='specs/auditoria-1772')
     ap.add_argument('--referencias', type=Path, default=Path(__file__).parent / 'referencias')
@@ -188,10 +189,10 @@ def main():
     censo = {u['id_fuente'] for u in _leer(c / 'unidades-original.json')['unidades']}
     excepciones = excepciones_1772(trazado, unidades, _leer(c / 'limites-calce.json'))
     validar_excepciones(excepciones, {u['id'] for u in unidades})
-    (r / '1772-excepciones.json').write_text(json.dumps(
+    (r / '1772-excepciones.json').write_text(json_por_entidad(
         {'alcance': 'Excepciones de la referencia histórica de 1772 (specs/08 fase 2, T33j.2b): lo que las fases '
                     'siguientes tienen que respetar y no corregir. Generado por tools/geo/cierre_fase2.py.',
-         'excepciones': excepciones}, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+         'excepciones': excepciones}), encoding='utf-8')
     cruces = {x['id'] for x in cruces_1772(trazado['lineas'], _leer(c / 'sectores.json')['sectores'])}
     puerta = puerta_fase2(red, unidades, censo, {l['id'] for l in trazado['lineas']}, cruces, excepciones,
                           _leer(c / 'procedencia-generador.json'))
