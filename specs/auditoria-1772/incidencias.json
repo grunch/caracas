@@ -33,7 +33,12 @@
       "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
       "verificacion_acceso": "pendiente recorrido a pie",
       "diagnostico_geometrico": "diagnostico-huellas.json",
-      "reproduccion_aislada": "Con cara curada y etiqueta única, _cuadras_de_antes excluye 1556 píxeles cerro interiores y huellas_de_manzana rechaza el reparto vectorial. No reproduce exactamente todos los componentes de la ejecución original; ver diagnostico-huellas.md."
+      "reproduccion_aislada": "Con cara curada y etiqueta única, _cuadras_de_antes excluye 1556 píxeles cerro interiores y huellas_de_manzana rechaza el reparto vectorial. No reproduce exactamente todos los componentes de la ejecución original; ver diagnostico-huellas.md.",
+      "subtareas": [
+        "T33j.3a",
+        "T33j.5a",
+        "T33j.7a"
+      ]
     },
     {
       "id": "I1772-002",
@@ -66,7 +71,11 @@
       "pr_correccion": null,
       "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
       "verificacion_acceso": "pendiente recorrido a pie",
-      "comprobacion_acceso": "Recorrido del controlador y capturas antes/después en accesos-primer-lote.json y accesos-primer-lote.md; penetración en contorno de referencia confirmada, alcance del patio no certificado."
+      "comprobacion_acceso": "Recorrido del controlador y capturas antes/después en accesos-primer-lote.json y accesos-primer-lote.md; penetración en contorno de referencia confirmada, alcance del patio no certificado.",
+      "subtareas": [
+        "T33j.5a",
+        "T33j.7a"
+      ]
     },
     {
       "id": "I1772-003",
@@ -101,7 +110,12 @@
       "diagnostico_geometrico": "diagnostico-huellas.json",
       "reproduccion_aislada": "La cara tomada de tramos.json produce contorno ajustado de ocho vértices con entrante occidental; rechaza reparto vectorial aun sin píxeles interiores faltantes. La cara curada de cuatro lados lo admite. Se mantienen etiquetas simplificadas; no se afirma reproducción integral del pipeline.",
       "comprobacion_acceso": "Recorrido del controlador y capturas antes/después en accesos-primer-lote.json y accesos-primer-lote.md; penetración en contorno de referencia confirmada, alcance del patio no certificado.",
-      "continuidad_calle": "continuidad-calles-nucleo.json: C0031, 64 recorridos del núcleo. Dos huellas a ~0,1 m del eje causan deslizamiento con radio 0,4 m; no hay bloqueo completo."
+      "continuidad_calle": "continuidad-calles-nucleo.json: C0031, 64 recorridos del núcleo. Dos huellas a ~0,1 m del eje causan deslizamiento con radio 0,4 m; no hay bloqueo completo.",
+      "subtareas": [
+        "T33j.3a",
+        "T33j.5a",
+        "T33j.7a"
+      ]
     },
     {
       "id": "I1772-004",
@@ -132,7 +146,10 @@
       "baseline": "B1772-001",
       "pr_correccion": null,
       "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
-      "verificacion_acceso": "pendiente recorrido a pie"
+      "verificacion_acceso": "pendiente recorrido a pie",
+      "subtareas": [
+        "T33j.4b"
+      ]
     },
     {
       "id": "I1772-005",
@@ -162,7 +179,10 @@
       "baseline": "B1772-001",
       "pr_correccion": null,
       "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
-      "verificacion_acceso": "pendiente recorrido a pie"
+      "verificacion_acceso": "pendiente recorrido a pie",
+      "subtareas": [
+        "T33j.6a"
+      ]
     },
     {
       "id": "I1772-006",
@@ -177,7 +197,10 @@
         8
       ],
       "pr_correccion": 88,
-      "evidencia_correccion": "conteos-publicados.md"
+      "evidencia_correccion": "conteos-publicados.md",
+      "subtareas": [
+        "T33j.8a"
+      ]
     },
     {
       "id": "I1772-007",
@@ -205,7 +228,11 @@
         "evidencia": "contraste-unidades.md y ausencias-rastreadas.json",
         "causa_parcial": "epocas.nace exige persistencia en todos los planos posteriores. En U0182, 16 huellas candidatas tienen máscara de 1772 >=0.987526 pero fracción 1843 cero, por lo que ninguna nace en 1772 según esa regla. Faltan cierre de cuadra y correspondencia histórica final.",
         "alcance": "No cambiar años de edificios modernos por proximidad ni rellenar cajas; preservar ocupación parcial, plazas e hitos."
-      }
+      },
+      "subtareas": [
+        "T33j.3b",
+        "T33j.4a"
+      ]
     },
     {
       "id": "I1772-008",
@@ -218,7 +245,10 @@
         8
       ],
       "criterio": "La revisión de geometría se basa en original.jpg; la entrega debe separar u ocultar la tinta anacrónica sin reintroducir el parche visual que motivó T25b.",
-      "pr_correccion": null
+      "pr_correccion": null,
+      "subtareas": [
+        "T33j.8a"
+      ]
     },
     {
       "id": "I1772-009",
@@ -235,12 +265,15 @@
       ],
       "pr_correccion": null,
       "evidencia": "periferia-candelaria-pastora.md",
-      "id_fuente": "U1772-0214"
+      "id_fuente": "U1772-0214",
+      "subtareas": [
+        "T33j.4b"
+      ]
     },
     {
       "id": "I1772-010",
       "categoria": "calce_incompatible_con_referencia_curada",
-      "estado": "confirmado_desacuerdo_causa_geometrica_pendiente",
+      "estado": "confirmado_desplazamiento_por_cuadras_fuera_del_nucleo",
       "prioridad": "P0",
       "baseline": "B1772-001",
       "manzanas": [
@@ -263,7 +296,35 @@
         3,
         4
       ],
-      "pr_correccion": null
+      "pr_correccion": null,
+      "subtareas": [
+        "T33j.2a",
+        "T33j.3b"
+      ],
+      "medicion_damero": {
+        "documento": "controles-damero.md",
+        "controles": 168,
+        "mediana_desvio_m_por_sector": {
+          "S1772-11": 366.94,
+          "S1772-12": 309.46,
+          "S1772-13": 164.25,
+          "S1772-14": null,
+          "S1772-21": 285.19,
+          "S1772-22": 96.17,
+          "S1772-23": 40.42,
+          "S1772-24": 137.61,
+          "S1772-31": 259.9,
+          "S1772-32": 95.54,
+          "S1772-33": 78.92,
+          "S1772-34": 178.88,
+          "S1772-41": null,
+          "S1772-42": 275.76,
+          "S1772-43": 236.43,
+          "S1772-44": 256.38
+        },
+        "hito_candelaria_desvio_tps_m": 302.89,
+        "causa_probable": "correlación enganchada a calles vecinas en un damero periódico; no es imprecisión métrica"
+      }
     },
     {
       "id": "I1772-011",
@@ -278,7 +339,11 @@
         5,
         6
       ],
-      "pr_correccion": null
+      "pr_correccion": null,
+      "subtareas": [
+        "T33j.5a",
+        "T33j.6a"
+      ]
     },
     {
       "id": "I1772-012",
@@ -294,7 +359,10 @@
       "baseline": "B1772-001",
       "diagnostico_geometrico": "cruces-cubiertas-3d.json",
       "pr_correccion": null,
-      "criterio_aceptacion": "Repetir cálculo tras resolver huellas, revisar casos visualmente y conservar calles, patios y ocupación aprobados."
+      "criterio_aceptacion": "Repetir cálculo tras resolver huellas, revisar casos visualmente y conservar calles, patios y ocupación aprobados.",
+      "subtareas": [
+        "T33j.6a"
+      ]
     }
   ]
 }

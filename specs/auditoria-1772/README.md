@@ -2,7 +2,7 @@
 
 Fecha: 20-11-2026. T33j.1a.
 
-Continuación: [barrido de los 16 sectores y censo extenso](censo-extenso.md). Los conteos de este README describen la primera entrega; las incidencias y sectores se amplían en la continuación. **Auditoría en curso, sin correcciones de geometría.**
+Continuación: [barrido de los 16 sectores y censo extenso](censo-extenso.md). Entrega 1D: [cierre de la fase 1](cierre-fase1.md), con los [controles de damero y correspondencias](controles-damero.md); la fase sigue abierta (4/6 criterios). Los conteos de este README describen la primera entrega; las incidencias y sectores se amplían en la continuación. **Auditoría en curso, sin correcciones de geometría.**
 
 Se fijó una copia independiente del código y de los datos, se verificaron sus hashes y se inspeccionaron diez manzanas en vista alta, más dos vistas oblicuas. No se ha terminado el censo del original ni el diagnóstico de causas. Ninguna manzana se declara completamente verificada.
 
@@ -90,3 +90,7 @@ El [sondeo de accesos](accesos-primer-lote.md) evalúa los 40 frentes iniciales 
 [Conteos del paquete y del origen](conteos-publicados.md): corrige I006 en la generación del manifiesto; conserva controles de 1936 y no modifica geometría. Publicación pendiente.
 
 - [Revisión de bordes especiales](bordes-especiales-original.md): doce bordes de siete unidades; dos contornos observados y seis símbolos religiosos.
+
+## Cierre de la fase 1
+
+[Entrega 1D](cierre-fase1.md): 292 unidades clasificadas y leídas, 16 sectores recorridos, 12 incidencias con subtarea. [Controles por identidad de damero](controles-damero.md): 168 cruces y 3 hitos muestran que el TPS se desplaza por cuadras enteras fuera del núcleo (Candelaria a 303 m); 292 correspondencias clasificadas bajo un calce de control (42 uno a uno provisionales, 168 ausentes). Fase 1 abierta: U1772-0055 contradice su clase y faltan dos recorridos de calle (Catedral, Seminario); no certifica fidelidad ni cierra incidencias.
