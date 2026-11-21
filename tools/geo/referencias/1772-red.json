@@ -1,0 +1,7920 @@
+{
+ "fuente": "fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg",
+ "fuente_sha256": "4696d038a55b8088302a496b6eb4678b11173d98d3a15c589530cf78ee7bb62b",
+ "trazado": "specs/auditoria-1772/trazado-calles-original.json",
+ "trazado_sha256": "b60398ecd825521108fac4a008e4410cf0169ddf4f516dd3cb03583edc867817",
+ "huella_calce": "45aeae8a4c1d3c619d5b4b3bbd45e85641db88e44113410e79339848c9e3748f",
+ "alcance": "Red de la referencia histórica de 1772 (specs/08 fase 2, T33j.2b): cada intersección del trazado es un nodo con un solo ID y cada calle, la secuencia de sus nodos. Ejes aproximados del original, sin anchos; la pareja en 1936 sale solo de la identidad del calce vigente. No habilita la generación.",
+ "nodos": [
+  {
+   "id": "X1772-0001",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0002",
+    "L1772-0031"
+   ],
+   "original": [
+    370.0,
+    395.0
+   ],
+   "indice": [
+    -9,
+    -6
+   ],
+   "sector": "S1772-11",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0002",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0002",
+    "L1772-0035"
+   ],
+   "original": [
+    504.0,
+    395.0
+   ],
+   "indice": [
+    -7,
+    -6
+   ],
+   "sector": "S1772-11",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    6802.4,
+    8581.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-7, -6] desde Las Monjas: esquina 1936 268 (El Aguacate)"
+  },
+  {
+   "id": "X1772-0003",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0002",
+    "L1772-0037"
+   ],
+   "original": [
+    570.0,
+    395.0
+   ],
+   "indice": [
+    -6,
+    -6
+   ],
+   "sector": "S1772-12",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    6842.85,
+    8306.21
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-6, -6] desde Las Monjas: corte de su fila y su columna en 1936, revisado a ojo (anclas-topologia.json)"
+  },
+  {
+   "id": "X1772-0004",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0003",
+    "L1772-0052"
+   ],
+   "original": [
+    1036.0,
+    395.0
+   ],
+   "indice": [
+    1,
+    -6
+   ],
+   "sector": "S1772-13",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "pareja por topología rechazada a ojo: el corte cae dentro de una cuadra, sin calle",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0005",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0003",
+    "L1772-0055"
+   ],
+   "original": [
+    1104.0,
+    395.0
+   ],
+   "indice": [
+    2,
+    -6
+   ],
+   "sector": "S1772-13",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7408.3,
+    6186.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [2, -6] desde Las Monjas: esquina 1936 112 (Pagüita)"
+  },
+  {
+   "id": "X1772-0006",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0003",
+    "L1772-0058"
+   ],
+   "original": [
+    1170.0,
+    395.0
+   ],
+   "indice": [
+    3,
+    -6
+   ],
+   "sector": "S1772-13",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7397.5,
+    5893.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, -6] desde Las Monjas: esquina 1936 94 (Buena Vista)"
+  },
+  {
+   "id": "X1772-0007",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0003",
+    "L1772-0061"
+   ],
+   "original": [
+    1236.0,
+    395.0
+   ],
+   "indice": [
+    4,
+    -6
+   ],
+   "sector": "S1772-13",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7388.0,
+    5613.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, -6] desde Las Monjas: esquina 1936 78 (El Porvenir)"
+  },
+  {
+   "id": "X1772-0008",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0003",
+    "L1772-0064"
+   ],
+   "original": [
+    1304.0,
+    395.0
+   ],
+   "indice": [
+    5,
+    -6
+   ],
+   "sector": "S1772-13",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7461.0,
+    5315.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [5, -6] desde Las Monjas: esquina 1936 63 (La Concordia)"
+  },
+  {
+   "id": "X1772-0009",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0004",
+    "L1772-0031"
+   ],
+   "original": [
+    370.0,
+    461.0
+   ],
+   "indice": [
+    -9,
+    -5
+   ],
+   "sector": "S1772-11",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0010",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0004",
+    "L1772-0035"
+   ],
+   "original": [
+    504.0,
+    461.0
+   ],
+   "indice": [
+    -7,
+    -5
+   ],
+   "sector": "S1772-11",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7063.5,
+    8606.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-7, -5] desde Las Monjas: esquina 1936 271 (Pepe Alemán)"
+  },
+  {
+   "id": "X1772-0011",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0004",
+    "L1772-0037"
+   ],
+   "original": [
+    570.0,
+    461.0
+   ],
+   "indice": [
+    -6,
+    -5
+   ],
+   "sector": "S1772-12",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7104.1,
+    8330.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-6, -5] desde Las Monjas: esquina 1936 249 (La Garita)"
+  },
+  {
+   "id": "X1772-0012",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0004",
+    "L1772-0085"
+   ],
+   "original": [
+    637.0,
+    461.0
+   ],
+   "indice": [
+    -5,
+    -5
+   ],
+   "sector": "S1772-12",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7158.0,
+    8061.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-5, -5] desde Las Monjas: esquina 1936 232 (Jesús)"
+  },
+  {
+   "id": "X1772-0013",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0005",
+    "L1772-0052"
+   ],
+   "original": [
+    1036.0,
+    461.0
+   ],
+   "indice": [
+    1,
+    -5
+   ],
+   "sector": "S1772-13",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "pareja por topología rechazada a ojo: el corte cae dentro de una cuadra, sin calle",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0014",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0005",
+    "L1772-0055"
+   ],
+   "original": [
+    1104.0,
+    461.0
+   ],
+   "indice": [
+    2,
+    -5
+   ],
+   "sector": "S1772-13",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7636.0,
+    6217.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [2, -5] desde Las Monjas: esquina 1936 113 (Santa Bárbara)"
+  },
+  {
+   "id": "X1772-0015",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0005",
+    "L1772-0058"
+   ],
+   "original": [
+    1170.0,
+    461.0
+   ],
+   "indice": [
+    3,
+    -5
+   ],
+   "sector": "S1772-13",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7658.5,
+    5943.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, -5] desde Las Monjas: esquina 1936 97 (Poleo)"
+  },
+  {
+   "id": "X1772-0016",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0005",
+    "L1772-0061"
+   ],
+   "original": [
+    1236.0,
+    461.0
+   ],
+   "indice": [
+    4,
+    -5
+   ],
+   "sector": "S1772-13",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7686.9,
+    5669.4
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, -5] desde Las Monjas: esquina 1936 82 (La Ceiba)"
+  },
+  {
+   "id": "X1772-0017",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0005",
+    "L1772-0064"
+   ],
+   "original": [
+    1304.0,
+    461.0
+   ],
+   "indice": [
+    5,
+    -5
+   ],
+   "sector": "S1772-13",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7717.8,
+    5367.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [5, -5] desde Las Monjas: esquina 1936 65 (Las Delicias)"
+  },
+  {
+   "id": "X1772-0018",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0006",
+    "L1772-0031"
+   ],
+   "original": [
+    370.0,
+    528.0
+   ],
+   "indice": [
+    -9,
+    -4
+   ],
+   "sector": "S1772-21",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0019",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0006",
+    "L1772-0035"
+   ],
+   "original": [
+    504.0,
+    528.0
+   ],
+   "indice": [
+    -7,
+    -4
+   ],
+   "sector": "S1772-21",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7347.1,
+    8653.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-7, -4] desde Las Monjas: esquina 1936 275 (La Cochera)"
+  },
+  {
+   "id": "X1772-0020",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0006",
+    "L1772-0037",
+    "L1772-0075"
+   ],
+   "original": [
+    570.0,
+    528.0
+   ],
+   "indice": [
+    -6,
+    -4
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7376.4,
+    8352.4
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-6, -4] desde Las Monjas: esquina 1936 250 (Pescador)"
+  },
+  {
+   "id": "X1772-0021",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0007",
+    "L1772-0052"
+   ],
+   "original": [
+    1036.0,
+    528.0
+   ],
+   "indice": [
+    1,
+    -4
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7793.0,
+    6471.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [1, -4] desde Las Monjas: esquina 1936 128 (Moreno)"
+  },
+  {
+   "id": "X1772-0022",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0007",
+    "L1772-0055"
+   ],
+   "original": [
+    1104.0,
+    528.0
+   ],
+   "indice": [
+    2,
+    -4
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7902.3,
+    6230.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [2, -4] desde Las Monjas: esquina 1936 115 (Miraflores)"
+  },
+  {
+   "id": "X1772-0023",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0007",
+    "L1772-0058"
+   ],
+   "original": [
+    1170.0,
+    528.0
+   ],
+   "indice": [
+    3,
+    -4
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7931.5,
+    5990.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, -4] desde Las Monjas: esquina 1936 100 (El Paraíso)"
+  },
+  {
+   "id": "X1772-0024",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0007",
+    "L1772-0061"
+   ],
+   "original": [
+    1236.0,
+    528.0
+   ],
+   "indice": [
+    4,
+    -4
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7966.0,
+    5725.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, -4] desde Las Monjas: esquina 1936 85 (Doctor González)"
+  },
+  {
+   "id": "X1772-0025",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0007",
+    "L1772-0064"
+   ],
+   "original": [
+    1304.0,
+    528.0
+   ],
+   "indice": [
+    5,
+    -4
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8010.0,
+    5420.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [5, -4] desde Las Monjas: esquina 1936 324 (La Aurora)"
+  },
+  {
+   "id": "X1772-0026",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0008",
+    "L1772-0049"
+   ],
+   "original": [
+    970.0,
+    594.0
+   ],
+   "indice": [
+    0,
+    -3
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8057.8,
+    6755.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [0, -3] desde Las Monjas: esquina 1936 147 (Solís)"
+  },
+  {
+   "id": "X1772-0027",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0008",
+    "L1772-0052"
+   ],
+   "original": [
+    1036.0,
+    594.0
+   ],
+   "indice": [
+    1,
+    -3
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8100.9,
+    6569.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [1, -3] desde Las Monjas: esquina 1936 134 (Camino Nuevo)"
+  },
+  {
+   "id": "X1772-0028",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0008",
+    "L1772-0055"
+   ],
+   "original": [
+    1104.0,
+    594.0
+   ],
+   "indice": [
+    2,
+    -3
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8149.3,
+    6312.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [2, -3] desde Las Monjas: esquina 1936 121 (Bolero)"
+  },
+  {
+   "id": "X1772-0029",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0008",
+    "L1772-0058"
+   ],
+   "original": [
+    1170.0,
+    594.0
+   ],
+   "indice": [
+    3,
+    -3
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8198.7,
+    6034.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, -3] desde Las Monjas: esquina 1936 103 (Pineda)"
+  },
+  {
+   "id": "X1772-0030",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0008",
+    "L1772-0061"
+   ],
+   "original": [
+    1236.0,
+    594.0
+   ],
+   "indice": [
+    4,
+    -3
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8239.5,
+    5771.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, -3] desde Las Monjas: esquina 1936 89 (El Toro)"
+  },
+  {
+   "id": "X1772-0031",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0009",
+    "L1772-0032"
+   ],
+   "original": [
+    370.0,
+    660.0
+   ],
+   "indice": [
+    -9,
+    -2
+   ],
+   "sector": "S1772-21",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0032",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0010",
+    "L1772-0069"
+   ],
+   "original": [
+    1439.0,
+    660.0
+   ],
+   "indice": [
+    7,
+    -2
+   ],
+   "sector": "S1772-24",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "la esquina de 1936 asignada es un rótulo, no un cruce (calce-identidad.json, excluidos_por_rotulo)",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0033",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0010",
+    "L1772-0070"
+   ],
+   "original": [
+    1505.0,
+    660.0
+   ],
+   "indice": [
+    8,
+    -2
+   ],
+   "sector": "S1772-24",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8664.0,
+    4736.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [8, -2] desde Las Monjas: esquina 1936 25 (Dos Pilitas)"
+  },
+  {
+   "id": "X1772-0034",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0032"
+   ],
+   "original": [
+    370.0,
+    726.0
+   ],
+   "indice": [
+    -9,
+    -1
+   ],
+   "sector": "S1772-21",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0035",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0034"
+   ],
+   "original": [
+    437.0,
+    726.0
+   ],
+   "indice": [
+    -8,
+    -1
+   ],
+   "sector": "S1772-21",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8131.6,
+    9094.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-8, -1] desde Las Monjas: esquina 1936 312 (Dolores)"
+  },
+  {
+   "id": "X1772-0036",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0036"
+   ],
+   "original": [
+    504.0,
+    726.0
+   ],
+   "indice": [
+    -7,
+    -1
+   ],
+   "sector": "S1772-21",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8187.9,
+    8824.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-7, -1] desde Las Monjas: esquina 1936 290 (El Mamey)"
+  },
+  {
+   "id": "X1772-0037",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0038"
+   ],
+   "original": [
+    570.0,
+    726.0
+   ],
+   "indice": [
+    -6,
+    -1
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8245.2,
+    8537.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-6, -1] desde Las Monjas: esquina 1936 266 (Pilita)"
+  },
+  {
+   "id": "X1772-0038",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0040"
+   ],
+   "original": [
+    637.0,
+    726.0
+   ],
+   "indice": [
+    -5,
+    -1
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8295.5,
+    8258.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-5, -1] desde Las Monjas: esquina 1936 243 (La Glorieta)"
+  },
+  {
+   "id": "X1772-0039",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0042"
+   ],
+   "original": [
+    702.0,
+    726.0
+   ],
+   "indice": [
+    -4,
+    -1
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8366.0,
+    7922.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-4, -1] desde Las Monjas: esquina 1936 218 (El Reducto)"
+  },
+  {
+   "id": "X1772-0040",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0043"
+   ],
+   "original": [
+    768.0,
+    726.0
+   ],
+   "indice": [
+    -3,
+    -1
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8405.9,
+    7644.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-3, -1] desde Las Monjas: esquina 1936 200 (San Pablo)"
+  },
+  {
+   "id": "X1772-0041",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0045"
+   ],
+   "original": [
+    835.0,
+    726.0
+   ],
+   "indice": [
+    -2,
+    -1
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8472.8,
+    7391.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-2, -1] desde Las Monjas: esquina 1936 184 (Mercaderes)"
+  },
+  {
+   "id": "X1772-0042",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0047"
+   ],
+   "original": [
+    903.0,
+    726.0
+   ],
+   "indice": [
+    -1,
+    -1
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8518.0,
+    7127.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-1, -1] desde Las Monjas: esquina 1936 169 (La Bolsa)"
+  },
+  {
+   "id": "X1772-0043",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0050"
+   ],
+   "original": [
+    970.0,
+    726.0
+   ],
+   "indice": [
+    0,
+    -1
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8581.6,
+    6865.4
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [0, -1] desde Las Monjas: esquina 1936 154 (Padre Sierra)"
+  },
+  {
+   "id": "X1772-0044",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0053"
+   ],
+   "original": [
+    1036.0,
+    726.0
+   ],
+   "indice": [
+    1,
+    -1
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8626.0,
+    6668.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [1, -1] desde Las Monjas: esquina 1936 141 (El Conde)"
+  },
+  {
+   "id": "X1772-0045",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0056"
+   ],
+   "original": [
+    1104.0,
+    726.0
+   ],
+   "indice": [
+    2,
+    -1
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8681.8,
+    6407.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [2, -1] desde Las Monjas: esquina 1936 124 (Las Carmelitas)"
+  },
+  {
+   "id": "X1772-0046",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0059"
+   ],
+   "original": [
+    1170.0,
+    726.0
+   ],
+   "indice": [
+    3,
+    -1
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8731.8,
+    6140.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, -1] desde Las Monjas: esquina 1936 108 (Altagracia)"
+  },
+  {
+   "id": "X1772-0047",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0062"
+   ],
+   "original": [
+    1236.0,
+    726.0
+   ],
+   "indice": [
+    4,
+    -1
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8779.8,
+    5877.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, -1] desde Las Monjas: esquina 1936 93 (Salas)"
+  },
+  {
+   "id": "X1772-0048",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0011",
+    "L1772-0065"
+   ],
+   "original": [
+    1304.0,
+    726.0
+   ],
+   "indice": [
+    5,
+    -1
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8838.1,
+    5583.3
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [5, -1] desde Las Monjas: esquina 1936 76 (Caja de Agua)"
+  },
+  {
+   "id": "X1772-0049",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0012",
+    "L1772-0069"
+   ],
+   "original": [
+    1439.0,
+    726.0
+   ],
+   "indice": [
+    7,
+    -1
+   ],
+   "sector": "S1772-24",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8898.15,
+    5083.53
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [7, -1] desde Las Monjas: corte de su fila y su columna en 1936, revisado a ojo (anclas-topologia.json)"
+  },
+  {
+   "id": "X1772-0050",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0012",
+    "L1772-0070"
+   ],
+   "original": [
+    1505.0,
+    726.0
+   ],
+   "indice": [
+    8,
+    -1
+   ],
+   "sector": "S1772-24",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0051",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0032"
+   ],
+   "original": [
+    370.0,
+    793.0
+   ],
+   "indice": [
+    -9,
+    0
+   ],
+   "sector": "S1772-21",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0052",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0034"
+   ],
+   "original": [
+    437.0,
+    793.0
+   ],
+   "indice": [
+    -8,
+    0
+   ],
+   "sector": "S1772-21",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8394.5,
+    9146.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-8, 0] desde Las Monjas: esquina 1936 313 (Bárcenas)"
+  },
+  {
+   "id": "X1772-0053",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0036"
+   ],
+   "original": [
+    504.0,
+    793.0
+   ],
+   "indice": [
+    -7,
+    0
+   ],
+   "sector": "S1772-21",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8448.1,
+    8876.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-7, 0] desde Las Monjas: esquina 1936 295 (Monzón)"
+  },
+  {
+   "id": "X1772-0054",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0038"
+   ],
+   "original": [
+    570.0,
+    793.0
+   ],
+   "indice": [
+    -6,
+    0
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8512.0,
+    8596.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-6, 0] desde Las Monjas: esquina 1936 272 (La Cárcel)"
+  },
+  {
+   "id": "X1772-0055",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0040"
+   ],
+   "original": [
+    637.0,
+    793.0
+   ],
+   "indice": [
+    -5,
+    0
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8560.6,
+    8328.4
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-5, 0] desde Las Monjas: esquina 1936 248 (El Hospital)"
+  },
+  {
+   "id": "X1772-0056",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0042"
+   ],
+   "original": [
+    702.0,
+    793.0
+   ],
+   "indice": [
+    -4,
+    0
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8636.1,
+    7985.3
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-4, 0] desde Las Monjas: esquina 1936 222 (Miracielos)"
+  },
+  {
+   "id": "X1772-0057",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0043"
+   ],
+   "original": [
+    768.0,
+    793.0
+   ],
+   "indice": [
+    -3,
+    0
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8691.7,
+    7711.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-3, 0] desde Las Monjas: esquina 1936 202 (La Palma)"
+  },
+  {
+   "id": "X1772-0058",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0045"
+   ],
+   "original": [
+    835.0,
+    793.0
+   ],
+   "indice": [
+    -2,
+    0
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8732.4,
+    7393.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-2, 0] desde Las Monjas: esquina 1936 185 (Pajaritos)"
+  },
+  {
+   "id": "X1772-0059",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0047"
+   ],
+   "original": [
+    903.0,
+    793.0
+   ],
+   "indice": [
+    -1,
+    0
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8798.0,
+    7182.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-1, 0] desde Las Monjas: esquina 1936 171 (San Francisco)"
+  },
+  {
+   "id": "X1772-0060",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0050"
+   ],
+   "original": [
+    970.0,
+    793.0
+   ],
+   "indice": [
+    0,
+    0
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8846.0,
+    6914.0
+   ],
+   "motivo": null,
+   "procedencia": "cruce sobre una semilla manual del calce (Plaza Mayor); pareja de controles-calce-sectores.json"
+  },
+  {
+   "id": "X1772-0061",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0053"
+   ],
+   "original": [
+    1036.0,
+    793.0
+   ],
+   "indice": [
+    1,
+    0
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8880.0,
+    6719.0
+   ],
+   "motivo": null,
+   "procedencia": "cruce sobre una semilla manual del calce (Plaza Mayor); pareja de controles-calce-sectores.json"
+  },
+  {
+   "id": "X1772-0062",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0056"
+   ],
+   "original": [
+    1104.0,
+    793.0
+   ],
+   "indice": [
+    2,
+    0
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8939.7,
+    6458.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [2, 0] desde Las Monjas: esquina 1936 126 (Santa Capilla)"
+  },
+  {
+   "id": "X1772-0063",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0059"
+   ],
+   "original": [
+    1170.0,
+    793.0
+   ],
+   "indice": [
+    3,
+    0
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8994.5,
+    6190.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, 0] desde Las Monjas: esquina 1936 110 (Mijares)"
+  },
+  {
+   "id": "X1772-0064",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0062"
+   ],
+   "original": [
+    1236.0,
+    793.0
+   ],
+   "indice": [
+    4,
+    0
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9071.2,
+    5886.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, 0] desde Las Monjas: esquina 1936 96 (Las Mercedes)"
+  },
+  {
+   "id": "X1772-0065",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0013",
+    "L1772-0065"
+   ],
+   "original": [
+    1304.0,
+    793.0
+   ],
+   "indice": [
+    5,
+    0
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9072.3,
+    5649.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [5, 0] desde Las Monjas: esquina 1936 80 (Luneta de la Merced)"
+  },
+  {
+   "id": "X1772-0066",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0014",
+    "L1772-0069"
+   ],
+   "original": [
+    1439.0,
+    793.0
+   ],
+   "indice": [
+    7,
+    0
+   ],
+   "sector": "S1772-24",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "pareja por topología rechazada a ojo: el corte cae en el jardín de la Quinta Guzmán: la calle no existe en 1936",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0067",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0014",
+    "L1772-0070"
+   ],
+   "original": [
+    1505.0,
+    793.0
+   ],
+   "indice": [
+    8,
+    0
+   ],
+   "sector": "S1772-24",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "pareja por topología rechazada a ojo: dudoso: junto a la costura del mosaico",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0068",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0032"
+   ],
+   "original": [
+    370.0,
+    859.0
+   ],
+   "indice": [
+    -9,
+    1
+   ],
+   "sector": "S1772-21",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0069",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0034"
+   ],
+   "original": [
+    437.0,
+    859.0
+   ],
+   "indice": [
+    -8,
+    1
+   ],
+   "sector": "S1772-21",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8635.1,
+    9188.3
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-8, 1] desde Las Monjas: esquina 1936 314 (Las Piedras)"
+  },
+  {
+   "id": "X1772-0070",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0036"
+   ],
+   "original": [
+    504.0,
+    859.0
+   ],
+   "indice": [
+    -7,
+    1
+   ],
+   "sector": "S1772-21",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8681.0,
+    8921.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-7, 1] desde Las Monjas: esquina 1936 297 (La Palmita)"
+  },
+  {
+   "id": "X1772-0071",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0038"
+   ],
+   "original": [
+    570.0,
+    859.0
+   ],
+   "indice": [
+    -6,
+    1
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8733.0,
+    8647.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-6, 1] desde Las Monjas: esquina 1936 276 (Castán)"
+  },
+  {
+   "id": "X1772-0072",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0040"
+   ],
+   "original": [
+    637.0,
+    859.0
+   ],
+   "indice": [
+    -5,
+    1
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8781.0,
+    8379.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-5, 1] desde Las Monjas: esquina 1936 251 (El Hoyo)"
+  },
+  {
+   "id": "X1772-0073",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0042"
+   ],
+   "original": [
+    702.0,
+    859.0
+   ],
+   "indice": [
+    -4,
+    1
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8846.0,
+    8024.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-4, 1] desde Las Monjas: esquina 1936 227 (Los Cipreses)"
+  },
+  {
+   "id": "X1772-0074",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0043"
+   ],
+   "original": [
+    768.0,
+    859.0
+   ],
+   "indice": [
+    -3,
+    1
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8898.0,
+    7754.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-3, 1] desde Las Monjas: esquina 1936 205 (Santa Teresa)"
+  },
+  {
+   "id": "X1772-0075",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0045"
+   ],
+   "original": [
+    835.0,
+    859.0
+   ],
+   "indice": [
+    -2,
+    1
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8942.5,
+    7487.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-2, 1] desde Las Monjas: esquina 1936 191 (Camejo)"
+  },
+  {
+   "id": "X1772-0076",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0047"
+   ],
+   "original": [
+    903.0,
+    859.0
+   ],
+   "indice": [
+    -1,
+    1
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8990.8,
+    7223.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-1, 1] desde Las Monjas: esquina 1936 174 (Sociedad)"
+  },
+  {
+   "id": "X1772-0077",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0050"
+   ],
+   "original": [
+    970.0,
+    859.0
+   ],
+   "indice": [
+    0,
+    1
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9043.0,
+    6951.0
+   ],
+   "motivo": null,
+   "procedencia": "cruce sobre una semilla manual del calce (Plaza Mayor); pareja de controles-calce-sectores.json"
+  },
+  {
+   "id": "X1772-0078",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0053"
+   ],
+   "original": [
+    1036.0,
+    859.0
+   ],
+   "indice": [
+    1,
+    1
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9088.0,
+    6754.0
+   ],
+   "motivo": null,
+   "procedencia": "cruce sobre una semilla manual del calce (Plaza Mayor); pareja de controles-calce-sectores.json"
+  },
+  {
+   "id": "X1772-0079",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0056"
+   ],
+   "original": [
+    1104.0,
+    859.0
+   ],
+   "indice": [
+    2,
+    1
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9133.1,
+    6490.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [2, 1] desde Las Monjas: esquina 1936 130 (Veroes)"
+  },
+  {
+   "id": "X1772-0080",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0059"
+   ],
+   "original": [
+    1170.0,
+    859.0
+   ],
+   "indice": [
+    3,
+    1
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9189.5,
+    6229.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, 1] desde Las Monjas: esquina 1936 114 (Jesuitas)"
+  },
+  {
+   "id": "X1772-0081",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0015",
+    "L1772-0062"
+   ],
+   "original": [
+    1236.0,
+    859.0
+   ],
+   "indice": [
+    4,
+    1
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9244.3,
+    5976.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, 1] desde Las Monjas: esquina 1936 98"
+  },
+  {
+   "id": "X1772-0082",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0016",
+    "L1772-0068"
+   ],
+   "original": [
+    1370.0,
+    859.0
+   ],
+   "indice": [
+    6,
+    1
+   ],
+   "sector": "S1772-24",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9356.6,
+    5374.4
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [6, 1] desde Las Monjas: esquina 1936 68 (Panteón)"
+  },
+  {
+   "id": "X1772-0083",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0016",
+    "L1772-0069"
+   ],
+   "original": [
+    1439.0,
+    859.0
+   ],
+   "indice": [
+    7,
+    1
+   ],
+   "sector": "S1772-24",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9385.9,
+    5178.4
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [7, 1] desde Las Monjas: esquina 1936 55 (El Misterio)"
+  },
+  {
+   "id": "X1772-0084",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0016",
+    "L1772-0070"
+   ],
+   "original": [
+    1505.0,
+    859.0
+   ],
+   "indice": [
+    8,
+    1
+   ],
+   "sector": "S1772-24",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "la esquina de 1936 asignada es un rótulo, no un cruce (calce-identidad.json, excluidos_por_rotulo)",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0085",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0032"
+   ],
+   "original": [
+    370.0,
+    926.0
+   ],
+   "indice": [
+    -9,
+    2
+   ],
+   "sector": "S1772-31",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0086",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0034"
+   ],
+   "original": [
+    437.0,
+    926.0
+   ],
+   "indice": [
+    -8,
+    2
+   ],
+   "sector": "S1772-31",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8903.0,
+    9224.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-8, 2] desde Las Monjas: esquina 1936 316 (El Venado)"
+  },
+  {
+   "id": "X1772-0087",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0036"
+   ],
+   "original": [
+    504.0,
+    926.0
+   ],
+   "indice": [
+    -7,
+    2
+   ],
+   "sector": "S1772-31",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8949.0,
+    8971.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-7, 2] desde Las Monjas: esquina 1936 302 (Tablitas)"
+  },
+  {
+   "id": "X1772-0088",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0038"
+   ],
+   "original": [
+    570.0,
+    926.0
+   ],
+   "indice": [
+    -6,
+    2
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8996.5,
+    8701.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-6, 2] desde Las Monjas: esquina 1936 279 (Candilito)"
+  },
+  {
+   "id": "X1772-0089",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0040"
+   ],
+   "original": [
+    637.0,
+    926.0
+   ],
+   "indice": [
+    -5,
+    2
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9043.0,
+    8429.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-5, 2] desde Las Monjas: esquina 1936 256 (Santa Rosalía)"
+  },
+  {
+   "id": "X1772-0090",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0042"
+   ],
+   "original": [
+    702.0,
+    926.0
+   ],
+   "indice": [
+    -4,
+    2
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9107.6,
+    8085.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-4, 2] desde Las Monjas: esquina 1936 233 (Velásquez)"
+  },
+  {
+   "id": "X1772-0091",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0043"
+   ],
+   "original": [
+    768.0,
+    926.0
+   ],
+   "indice": [
+    -3,
+    2
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9156.0,
+    7816.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-3, 2] desde Las Monjas: esquina 1936 211 (Cruz Verde)"
+  },
+  {
+   "id": "X1772-0092",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0045"
+   ],
+   "original": [
+    835.0,
+    926.0
+   ],
+   "indice": [
+    -2,
+    2
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9206.5,
+    7543.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-2, 2] desde Las Monjas: esquina 1936 328 (Colón)"
+  },
+  {
+   "id": "X1772-0093",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0047"
+   ],
+   "original": [
+    903.0,
+    926.0
+   ],
+   "indice": [
+    -1,
+    2
+   ],
+   "sector": "S1772-32",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "pareja por topología rechazada a ojo: el corte cae en la costura del mosaico",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0094",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0050"
+   ],
+   "original": [
+    970.0,
+    926.0
+   ],
+   "indice": [
+    0,
+    2
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9301.0,
+    7011.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [0, 2] desde Las Monjas: esquina 1936 163 (San Jacinto)"
+  },
+  {
+   "id": "X1772-0095",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0053"
+   ],
+   "original": [
+    1036.0,
+    926.0
+   ],
+   "indice": [
+    1,
+    2
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9347.7,
+    6805.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [1, 2] desde Las Monjas: esquina 1936 150 (Las Madrices)"
+  },
+  {
+   "id": "X1772-0096",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0056"
+   ],
+   "original": [
+    1104.0,
+    926.0
+   ],
+   "indice": [
+    2,
+    2
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9397.1,
+    6538.7
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [2, 2] desde Las Monjas: esquina 1936 132 (Las Ibarras)"
+  },
+  {
+   "id": "X1772-0097",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0017",
+    "L1772-0059"
+   ],
+   "original": [
+    1170.0,
+    926.0
+   ],
+   "indice": [
+    3,
+    2
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9451.5,
+    6271.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, 2] desde Las Monjas: esquina 1936 117 (Maturín)"
+  },
+  {
+   "id": "X1772-0098",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0018",
+    "L1772-0066"
+   ],
+   "original": [
+    1304.0,
+    926.0
+   ],
+   "indice": [
+    5,
+    2
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9549.96,
+    5765.54
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [5, 2] desde Las Monjas: corte de su fila y su columna en 1936, revisado a ojo (anclas-topologia.json)"
+  },
+  {
+   "id": "X1772-0099",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0018",
+    "L1772-0068"
+   ],
+   "original": [
+    1370.0,
+    926.0
+   ],
+   "indice": [
+    6,
+    2
+   ],
+   "sector": "S1772-34",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "pareja por topología rechazada a ojo: dudoso: sobre la calle pero entre dos filas",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0100",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0018",
+    "L1772-0069"
+   ],
+   "original": [
+    1439.0,
+    926.0
+   ],
+   "indice": [
+    7,
+    2
+   ],
+   "sector": "S1772-34",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "la esquina de 1936 asignada es un rótulo, no un cruce (calce-identidad.json, excluidos_por_rotulo)",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0101",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0018",
+    "L1772-0070"
+   ],
+   "original": [
+    1505.0,
+    926.0
+   ],
+   "indice": [
+    8,
+    2
+   ],
+   "sector": "S1772-34",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0102",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0019",
+    "L1772-0034"
+   ],
+   "original": [
+    437.0,
+    992.0
+   ],
+   "indice": [
+    -8,
+    3
+   ],
+   "sector": "S1772-31",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9117.1,
+    9251.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-8, 3] desde Las Monjas: esquina 1936 318 (Guayabal)"
+  },
+  {
+   "id": "X1772-0103",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0019",
+    "L1772-0036"
+   ],
+   "original": [
+    504.0,
+    992.0
+   ],
+   "indice": [
+    -7,
+    3
+   ],
+   "sector": "S1772-31",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9168.5,
+    9011.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-7, 3] desde Las Monjas: esquina 1936 307"
+  },
+  {
+   "id": "X1772-0104",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0019",
+    "L1772-0038"
+   ],
+   "original": [
+    570.0,
+    992.0
+   ],
+   "indice": [
+    -6,
+    3
+   ],
+   "sector": "S1772-32",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "la esquina de 1936 asignada es un rótulo, no un cruce (calce-identidad.json, excluidos_por_rotulo)",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0105",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0019",
+    "L1772-0040"
+   ],
+   "original": [
+    637.0,
+    992.0
+   ],
+   "indice": [
+    -5,
+    3
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9304.2,
+    8471.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-5, 3] desde Las Monjas: esquina 1936 259 (Pinto)"
+  },
+  {
+   "id": "X1772-0106",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0019",
+    "L1772-0042"
+   ],
+   "original": [
+    702.0,
+    992.0
+   ],
+   "indice": [
+    -4,
+    3
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9382.0,
+    8136.2
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-4, 3] desde Las Monjas: esquina 1936 235 (La Miseria)"
+  },
+  {
+   "id": "X1772-0107",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0019",
+    "L1772-0043"
+   ],
+   "original": [
+    768.0,
+    992.0
+   ],
+   "indice": [
+    -3,
+    3
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9425.0,
+    7878.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-3, 3] desde Las Monjas: esquina 1936 215 (El Zamuro)"
+  },
+  {
+   "id": "X1772-0108",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0019",
+    "L1772-0045"
+   ],
+   "original": [
+    835.0,
+    992.0
+   ],
+   "indice": [
+    -2,
+    3
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9474.9,
+    7599.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-2, 3] desde Las Monjas: esquina 1936 196 (Doctor Díaz)"
+  },
+  {
+   "id": "X1772-0109",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0019",
+    "L1772-0047"
+   ],
+   "original": [
+    903.0,
+    992.0
+   ],
+   "indice": [
+    -1,
+    3
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9515.0,
+    7338.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-1, 3] desde Las Monjas: esquina 1936 182 (El Chorro)"
+  },
+  {
+   "id": "X1772-0110",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0019",
+    "L1772-0050"
+   ],
+   "original": [
+    970.0,
+    992.0
+   ],
+   "indice": [
+    0,
+    3
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9559.0,
+    7070.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [0, 3] desde Las Monjas: esquina 1936 166 (Doctor Paúl)"
+  },
+  {
+   "id": "X1772-0111",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0019",
+    "L1772-0053"
+   ],
+   "original": [
+    1036.0,
+    992.0
+   ],
+   "indice": [
+    1,
+    3
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9608.4,
+    6850.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [1, 3] desde Las Monjas: esquina 1936 153 (La Marrón)"
+  },
+  {
+   "id": "X1772-0112",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0019",
+    "L1772-0056"
+   ],
+   "original": [
+    1104.0,
+    992.0
+   ],
+   "indice": [
+    2,
+    3
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9661.5,
+    6589.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [2, 3] desde Las Monjas: esquina 1936 135 (La Pelota)"
+  },
+  {
+   "id": "X1772-0113",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0019",
+    "L1772-0059"
+   ],
+   "original": [
+    1170.0,
+    992.0
+   ],
+   "indice": [
+    3,
+    3
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9711.0,
+    6335.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, 3] desde Las Monjas: esquina 1936 122 (Abanico)"
+  },
+  {
+   "id": "X1772-0114",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0020",
+    "L1772-0063"
+   ],
+   "original": [
+    1236.0,
+    992.0
+   ],
+   "indice": [
+    4,
+    3
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9796.1,
+    6073.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, 3] desde Las Monjas: esquina 1936 105 (Canónigos)"
+  },
+  {
+   "id": "X1772-0115",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0020",
+    "L1772-0066"
+   ],
+   "original": [
+    1304.0,
+    992.0
+   ],
+   "indice": [
+    5,
+    3
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9828.9,
+    5819.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [5, 3] desde Las Monjas: esquina 1936 325 (La Esperanza)"
+  },
+  {
+   "id": "X1772-0116",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0020",
+    "L1772-0068"
+   ],
+   "original": [
+    1370.0,
+    992.0
+   ],
+   "indice": [
+    6,
+    3
+   ],
+   "sector": "S1772-34",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "la esquina de 1936 asignada es un rótulo, no un cruce (calce-identidad.json, excluidos_por_rotulo)",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0117",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0020",
+    "L1772-0069"
+   ],
+   "original": [
+    1439.0,
+    992.0
+   ],
+   "indice": [
+    7,
+    3
+   ],
+   "sector": "S1772-34",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9946.0,
+    5295.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [7, 3] desde Las Monjas: esquina 1936 62 (La Quebrada)"
+  },
+  {
+   "id": "X1772-0118",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0020",
+    "L1772-0070"
+   ],
+   "original": [
+    1505.0,
+    992.0
+   ],
+   "indice": [
+    8,
+    3
+   ],
+   "sector": "S1772-34",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9988.8,
+    5035.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [8, 3] desde Las Monjas: esquina 1936 48 (Rosario)"
+  },
+  {
+   "id": "X1772-0119",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0021",
+    "L1772-0034"
+   ],
+   "original": [
+    437.0,
+    1058.0
+   ],
+   "indice": [
+    -8,
+    4
+   ],
+   "sector": "S1772-31",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "la esquina de 1936 asignada es un rótulo, no un cruce (calce-identidad.json, excluidos_por_rotulo)",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0120",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0021",
+    "L1772-0036"
+   ],
+   "original": [
+    504.0,
+    1058.0
+   ],
+   "indice": [
+    -7,
+    4
+   ],
+   "sector": "S1772-31",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9485.4,
+    9070.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-7, 4] desde Las Monjas: esquina 1936 309 (Las Peláez)"
+  },
+  {
+   "id": "X1772-0121",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0021",
+    "L1772-0038"
+   ],
+   "original": [
+    570.0,
+    1058.0
+   ],
+   "indice": [
+    -6,
+    4
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9522.9,
+    8809.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-6, 4] desde Las Monjas: esquina 1936 286 (El Muerto)"
+  },
+  {
+   "id": "X1772-0122",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0021",
+    "L1772-0040"
+   ],
+   "original": [
+    637.0,
+    1058.0
+   ],
+   "indice": [
+    -5,
+    4
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9552.5,
+    8522.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-5, 4] desde Las Monjas: esquina 1936 262 (El Viento)"
+  },
+  {
+   "id": "X1772-0123",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0021",
+    "L1772-0042"
+   ],
+   "original": [
+    702.0,
+    1058.0
+   ],
+   "indice": [
+    -4,
+    4
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9597.5,
+    8193.7
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-4, 4] desde Las Monjas: esquina 1936 238 (Curamichate)"
+  },
+  {
+   "id": "X1772-0124",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0021",
+    "L1772-0043"
+   ],
+   "original": [
+    768.0,
+    1058.0
+   ],
+   "indice": [
+    -3,
+    4
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9641.5,
+    7933.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-3, 4] desde Las Monjas: esquina 1936 219 (El Pájaro)"
+  },
+  {
+   "id": "X1772-0125",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0021",
+    "L1772-0045"
+   ],
+   "original": [
+    835.0,
+    1058.0
+   ],
+   "indice": [
+    -2,
+    4
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9734.5,
+    7656.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-2, 4] desde Las Monjas: esquina 1936 199 (Peinero)"
+  },
+  {
+   "id": "X1772-0126",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0021",
+    "L1772-0047"
+   ],
+   "original": [
+    903.0,
+    1058.0
+   ],
+   "indice": [
+    -1,
+    4
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9786.0,
+    7396.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-1, 4] desde Las Monjas: esquina 1936 187 (El Coliseo)"
+  },
+  {
+   "id": "X1772-0127",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0021",
+    "L1772-0050"
+   ],
+   "original": [
+    970.0,
+    1058.0
+   ],
+   "indice": [
+    0,
+    4
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9838.7,
+    7134.2
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [0, 4] desde Las Monjas: esquina 1936 168 (Salvador de León)"
+  },
+  {
+   "id": "X1772-0128",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0021",
+    "L1772-0053"
+   ],
+   "original": [
+    1036.0,
+    1058.0
+   ],
+   "indice": [
+    1,
+    4
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9881.0,
+    6901.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [1, 4] desde Las Monjas: esquina 1936 157 (El Cují)"
+  },
+  {
+   "id": "X1772-0129",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0021",
+    "L1772-0056"
+   ],
+   "original": [
+    1104.0,
+    1058.0
+   ],
+   "indice": [
+    2,
+    4
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9973.0,
+    6646.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [2, 4] desde Las Monjas: esquina 1936 140 (Punceres)"
+  },
+  {
+   "id": "X1772-0130",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0022",
+    "L1772-0060"
+   ],
+   "original": [
+    1170.0,
+    1058.0
+   ],
+   "indice": [
+    3,
+    4
+   ],
+   "sector": "S1772-33",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "pareja por topología rechazada a ojo: dudoso: sin calle que cruce la fila (escalinatas)",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0131",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0022",
+    "L1772-0063"
+   ],
+   "original": [
+    1236.0,
+    1058.0
+   ],
+   "indice": [
+    4,
+    4
+   ],
+   "sector": "S1772-33",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "pareja por topología rechazada a ojo: el corte cae junto a la quebrada, sin calle que cruce",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0132",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0022",
+    "L1772-0066"
+   ],
+   "original": [
+    1304.0,
+    1058.0
+   ],
+   "indice": [
+    5,
+    4
+   ],
+   "sector": "S1772-33",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "la esquina de 1936 asignada es un rótulo, no un cruce (calce-identidad.json, excluidos_por_rotulo)",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0133",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0022",
+    "L1772-0068"
+   ],
+   "original": [
+    1370.0,
+    1058.0
+   ],
+   "indice": [
+    6,
+    4
+   ],
+   "sector": "S1772-34",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10124.0,
+    5595.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [6, 4] desde Las Monjas: esquina 1936 77 (San Narciso)"
+  },
+  {
+   "id": "X1772-0134",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0022",
+    "L1772-0069"
+   ],
+   "original": [
+    1439.0,
+    1058.0
+   ],
+   "indice": [
+    7,
+    4
+   ],
+   "sector": "S1772-34",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10168.5,
+    5341.2
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [7, 4] desde Las Monjas: esquina 1936 64 (Santa Inés)"
+  },
+  {
+   "id": "X1772-0135",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0022",
+    "L1772-0070"
+   ],
+   "original": [
+    1505.0,
+    1058.0
+   ],
+   "indice": [
+    8,
+    4
+   ],
+   "sector": "S1772-34",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10217.3,
+    5084.2
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [8, 4] desde Las Monjas: esquina 1936 51 (Santa Rosa)"
+  },
+  {
+   "id": "X1772-0136",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0023",
+    "L1772-0034"
+   ],
+   "original": [
+    437.0,
+    1125.0
+   ],
+   "indice": [
+    -8,
+    5
+   ],
+   "sector": "S1772-31",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9706.84,
+    9353.79
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-8, 5] desde Las Monjas: corte de su fila y su columna en 1936, revisado a ojo (anclas-topologia.json)"
+  },
+  {
+   "id": "X1772-0137",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0023",
+    "L1772-0036"
+   ],
+   "original": [
+    504.0,
+    1125.0
+   ],
+   "indice": [
+    -7,
+    5
+   ],
+   "sector": "S1772-31",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9745.4,
+    9120.4
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-7, 5] desde Las Monjas: esquina 1936 311 (Alcabala Vieja)"
+  },
+  {
+   "id": "X1772-0138",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0023",
+    "L1772-0038"
+   ],
+   "original": [
+    570.0,
+    1125.0
+   ],
+   "indice": [
+    -6,
+    5
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9754.0,
+    8823.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-6, 5] desde Las Monjas: esquina 1936 292 (Los Isleños)"
+  },
+  {
+   "id": "X1772-0139",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0023",
+    "L1772-0040"
+   ],
+   "original": [
+    637.0,
+    1125.0
+   ],
+   "indice": [
+    -5,
+    5
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9796.93,
+    8574.53
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-5, 5] desde Las Monjas: corte de su fila y su columna en 1936, revisado a ojo (anclas-topologia.json)"
+  },
+  {
+   "id": "X1772-0140",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0023",
+    "L1772-0042",
+    "L1772-0072"
+   ],
+   "original": [
+    702.0,
+    1125.0
+   ],
+   "indice": [
+    -4,
+    5
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9884.9,
+    8262.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-4, 5] desde Las Monjas: esquina 1936 244 (El Rosario)"
+  },
+  {
+   "id": "X1772-0141",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0023",
+    "L1772-0043"
+   ],
+   "original": [
+    768.0,
+    1125.0
+   ],
+   "indice": [
+    -3,
+    5
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9942.7,
+    8009.7
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-3, 5] desde Las Monjas: esquina 1936 225 (El Tejar)"
+  },
+  {
+   "id": "X1772-0142",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0023",
+    "L1772-0045"
+   ],
+   "original": [
+    835.0,
+    1125.0
+   ],
+   "indice": [
+    -2,
+    5
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    9996.2,
+    7717.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-2, 5] desde Las Monjas: esquina 1936 203 (La Hoyada)"
+  },
+  {
+   "id": "X1772-0143",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0023",
+    "L1772-0047"
+   ],
+   "original": [
+    903.0,
+    1125.0
+   ],
+   "indice": [
+    -1,
+    5
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10038.0,
+    7459.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-1, 5] desde Las Monjas: esquina 1936 189 (Corazón de Jesús)"
+  },
+  {
+   "id": "X1772-0144",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0023",
+    "L1772-0050"
+   ],
+   "original": [
+    970.0,
+    1125.0
+   ],
+   "indice": [
+    0,
+    5
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10097.9,
+    7198.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [0, 5] desde Las Monjas: esquina 1936 172 (Socarrás)"
+  },
+  {
+   "id": "X1772-0145",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0023",
+    "L1772-0053"
+   ],
+   "original": [
+    1036.0,
+    1125.0
+   ],
+   "indice": [
+    1,
+    5
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10170.7,
+    6944.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [1, 5] desde Las Monjas: esquina 1936 160 (Ña Romualda)"
+  },
+  {
+   "id": "X1772-0146",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0024",
+    "L1772-0060"
+   ],
+   "original": [
+    1170.0,
+    1125.0
+   ],
+   "indice": [
+    3,
+    5
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10249.5,
+    6418.2
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, 5] desde Las Monjas: esquina 1936 125 (Socorro)"
+  },
+  {
+   "id": "X1772-0147",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0024",
+    "L1772-0063"
+   ],
+   "original": [
+    1236.0,
+    1125.0
+   ],
+   "indice": [
+    4,
+    5
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10298.1,
+    6164.7
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, 5] desde Las Monjas: esquina 1936 109 (San Ramón)"
+  },
+  {
+   "id": "X1772-0148",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0024",
+    "L1772-0066"
+   ],
+   "original": [
+    1304.0,
+    1125.0
+   ],
+   "indice": [
+    5,
+    5
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10345.8,
+    5930.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [5, 5] desde Las Monjas: esquina 1936 95 (Crucecita)"
+  },
+  {
+   "id": "X1772-0149",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0024",
+    "L1772-0068"
+   ],
+   "original": [
+    1370.0,
+    1125.0
+   ],
+   "indice": [
+    6,
+    5
+   ],
+   "sector": "S1772-34",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10405.7,
+    5649.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [6, 5] desde Las Monjas: esquina 1936 81 (San Miguel)"
+  },
+  {
+   "id": "X1772-0150",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0024",
+    "L1772-0069"
+   ],
+   "original": [
+    1439.0,
+    1125.0
+   ],
+   "indice": [
+    7,
+    5
+   ],
+   "sector": "S1772-34",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10456.0,
+    5400.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [7, 5] desde Las Monjas: esquina 1936 66 (San Enrique)"
+  },
+  {
+   "id": "X1772-0151",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0024",
+    "L1772-0070"
+   ],
+   "original": [
+    1505.0,
+    1125.0
+   ],
+   "indice": [
+    8,
+    5
+   ],
+   "sector": "S1772-34",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10511.6,
+    5144.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [8, 5] desde Las Monjas: esquina 1936 53 (San José)"
+  },
+  {
+   "id": "X1772-0152",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0026",
+    "L1772-0054"
+   ],
+   "original": [
+    1036.0,
+    1191.0
+   ],
+   "indice": [
+    1,
+    6
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10432.0,
+    7005.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [1, 6] desde Las Monjas: esquina 1936 161 (Manduca)"
+  },
+  {
+   "id": "X1772-0153",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0026",
+    "L1772-0060"
+   ],
+   "original": [
+    1170.0,
+    1191.0
+   ],
+   "indice": [
+    3,
+    6
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10551.0,
+    6470.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, 6] desde Las Monjas: esquina 1936 127 (Calero)"
+  },
+  {
+   "id": "X1772-0154",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0026",
+    "L1772-0063"
+   ],
+   "original": [
+    1236.0,
+    1191.0
+   ],
+   "indice": [
+    4,
+    6
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10594.1,
+    6217.7
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, 6] desde Las Monjas: esquina 1936 111 (Chimborazo)"
+  },
+  {
+   "id": "X1772-0155",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0026",
+    "L1772-0066"
+   ],
+   "original": [
+    1304.0,
+    1191.0
+   ],
+   "indice": [
+    5,
+    6
+   ],
+   "sector": "S1772-33",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10640.0,
+    5984.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [5, 6] desde Las Monjas: esquina 1936 99 (El Porvenir)"
+  },
+  {
+   "id": "X1772-0156",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0026",
+    "L1772-0068"
+   ],
+   "original": [
+    1370.0,
+    1191.0
+   ],
+   "indice": [
+    6,
+    6
+   ],
+   "sector": "S1772-34",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10619.9,
+    5693.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [6, 6] desde Las Monjas: esquina 1936 83 (Palo Negro)"
+  },
+  {
+   "id": "X1772-0157",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0026",
+    "L1772-0069"
+   ],
+   "original": [
+    1439.0,
+    1191.0
+   ],
+   "indice": [
+    7,
+    6
+   ],
+   "sector": "S1772-34",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10666.46,
+    5436.14
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [7, 6] desde Las Monjas: corte de su fila y su columna en 1936, revisado a ojo (anclas-topologia.json)"
+  },
+  {
+   "id": "X1772-0158",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0026",
+    "L1772-0070"
+   ],
+   "original": [
+    1505.0,
+    1191.0
+   ],
+   "indice": [
+    8,
+    6
+   ],
+   "sector": "S1772-34",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "pareja por topología rechazada a ojo: dudoso: no se distingue la calle que cruza",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0159",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0028",
+    "L1772-0047"
+   ],
+   "original": [
+    903.0,
+    1257.0
+   ],
+   "indice": [
+    -1,
+    7
+   ],
+   "sector": "S1772-42",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10623.8,
+    7579.3
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-1, 7] desde Las Monjas: esquina 1936 195 (Monroy)"
+  },
+  {
+   "id": "X1772-0160",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0028",
+    "L1772-0051"
+   ],
+   "original": [
+    970.0,
+    1257.0
+   ],
+   "indice": [
+    0,
+    7
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10683.7,
+    7317.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [0, 7] desde Las Monjas: esquina 1936 180 (Tracabordo)"
+  },
+  {
+   "id": "X1772-0161",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0028",
+    "L1772-0054"
+   ],
+   "original": [
+    1036.0,
+    1257.0
+   ],
+   "indice": [
+    1,
+    7
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10735.1,
+    7060.2
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [1, 7] desde Las Monjas: esquina 1936 165 (Ferrenquín)"
+  },
+  {
+   "id": "X1772-0162",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0028",
+    "L1772-0060"
+   ],
+   "original": [
+    1170.0,
+    1257.0
+   ],
+   "indice": [
+    3,
+    7
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10837.2,
+    6515.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, 7] desde Las Monjas: esquina 1936 129 (Desamparados)"
+  },
+  {
+   "id": "X1772-0163",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0028",
+    "L1772-0063"
+   ],
+   "original": [
+    1236.0,
+    1257.0
+   ],
+   "indice": [
+    4,
+    7
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10886.5,
+    6258.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, 7] desde Las Monjas: esquina 1936 116 (Teñidero)"
+  },
+  {
+   "id": "X1772-0164",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0028",
+    "L1772-0066"
+   ],
+   "original": [
+    1304.0,
+    1257.0
+   ],
+   "indice": [
+    5,
+    7
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10930.0,
+    6032.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [5, 7] desde Las Monjas: esquina 1936 102 (Santo Tomás)"
+  },
+  {
+   "id": "X1772-0165",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0028",
+    "L1772-0068"
+   ],
+   "original": [
+    1370.0,
+    1257.0
+   ],
+   "indice": [
+    6,
+    7
+   ],
+   "sector": "S1772-44",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    11030.6,
+    5768.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [6, 7] desde Las Monjas: esquina 1936 87 (Palo Blanco)"
+  },
+  {
+   "id": "X1772-0166",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0028",
+    "L1772-0069"
+   ],
+   "original": [
+    1439.0,
+    1257.0
+   ],
+   "indice": [
+    7,
+    7
+   ],
+   "sector": "S1772-44",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "pareja por topología rechazada a ojo: el corte cae en la quebrada",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0167",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0029",
+    "L1772-0044"
+   ],
+   "original": [
+    768.0,
+    1323.0
+   ],
+   "indice": [
+    -3,
+    8
+   ],
+   "sector": "S1772-42",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "la esquina de 1936 asignada es un rótulo, no un cruce (calce-identidad.json, excluidos_por_rotulo)",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0168",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0029",
+    "L1772-0046"
+   ],
+   "original": [
+    835.0,
+    1323.0
+   ],
+   "indice": [
+    -2,
+    8
+   ],
+   "sector": "S1772-42",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10940.0,
+    7906.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-2, 8] desde Las Monjas: esquina 1936 216 (Ño Pastor)"
+  },
+  {
+   "id": "X1772-0169",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0029",
+    "L1772-0048"
+   ],
+   "original": [
+    903.0,
+    1323.0
+   ],
+   "indice": [
+    -1,
+    8
+   ],
+   "sector": "S1772-42",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10970.4,
+    7641.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-1, 8] desde Las Monjas: esquina 1936 198 (Misericordia)"
+  },
+  {
+   "id": "X1772-0170",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0029",
+    "L1772-0051"
+   ],
+   "original": [
+    970.0,
+    1323.0
+   ],
+   "indice": [
+    0,
+    8
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10994.1,
+    7386.4
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [0, 8] desde Las Monjas: esquina 1936 183 (Miguelacho)"
+  },
+  {
+   "id": "X1772-0171",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0029",
+    "L1772-0054"
+   ],
+   "original": [
+    1036.0,
+    1323.0
+   ],
+   "indice": [
+    1,
+    8
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    11041.3,
+    7117.77
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [1, 8] desde Las Monjas: corte de su fila y su columna en 1936, revisado a ojo (anclas-topologia.json)"
+  },
+  {
+   "id": "X1772-0172",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0029",
+    "L1772-0060"
+   ],
+   "original": [
+    1170.0,
+    1323.0
+   ],
+   "indice": [
+    3,
+    8
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    11089.1,
+    6553.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, 8] desde Las Monjas: esquina 1936 133 (Avilanes)"
+  },
+  {
+   "id": "X1772-0173",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0029",
+    "L1772-0063"
+   ],
+   "original": [
+    1236.0,
+    1323.0
+   ],
+   "indice": [
+    4,
+    8
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    11120.0,
+    6282.7
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, 8] desde Las Monjas: esquina 1936 118 (Mirador)"
+  },
+  {
+   "id": "X1772-0174",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0029",
+    "L1772-0066"
+   ],
+   "original": [
+    1304.0,
+    1323.0
+   ],
+   "indice": [
+    5,
+    8
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    11134.0,
+    6063.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [5, 8] desde Las Monjas: esquina 1936 104 (Esmeralda)"
+  },
+  {
+   "id": "X1772-0175",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0030",
+    "L1772-0044"
+   ],
+   "original": [
+    768.0,
+    1389.0
+   ],
+   "indice": [
+    -3,
+    9
+   ],
+   "sector": "S1772-42",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0176",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0030",
+    "L1772-0046"
+   ],
+   "original": [
+    835.0,
+    1389.0
+   ],
+   "indice": [
+    -2,
+    9
+   ],
+   "sector": "S1772-42",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    11195.0,
+    7942.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-2, 9] desde Las Monjas: esquina 1936 220 (Simón Rodríguez)"
+  },
+  {
+   "id": "X1772-0177",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0030",
+    "L1772-0048"
+   ],
+   "original": [
+    903.0,
+    1389.0
+   ],
+   "indice": [
+    -1,
+    9
+   ],
+   "sector": "S1772-42",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    11244.0,
+    7701.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-1, 9] desde Las Monjas: esquina 1936 201 (Pele el Ojo)"
+  },
+  {
+   "id": "X1772-0178",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0030",
+    "L1772-0051"
+   ],
+   "original": [
+    970.0,
+    1389.0
+   ],
+   "indice": [
+    0,
+    9
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    11276.0,
+    7429.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [0, 9] desde Las Monjas: esquina 1936 186 (El Peligro)"
+  },
+  {
+   "id": "X1772-0179",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0030",
+    "L1772-0054"
+   ],
+   "original": [
+    1036.0,
+    1389.0
+   ],
+   "indice": [
+    1,
+    9
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    11322.92,
+    7151.77
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [1, 9] desde Las Monjas: corte de su fila y su columna en 1936, revisado a ojo (anclas-topologia.json)"
+  },
+  {
+   "id": "X1772-0180",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0030",
+    "L1772-0060"
+   ],
+   "original": [
+    1170.0,
+    1389.0
+   ],
+   "indice": [
+    3,
+    9
+   ],
+   "sector": "S1772-43",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "pareja por topología rechazada a ojo: dudoso: la columna pasa entre edificios",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0181",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0030",
+    "L1772-0063"
+   ],
+   "original": [
+    1236.0,
+    1389.0
+   ],
+   "indice": [
+    4,
+    9
+   ],
+   "sector": "S1772-43",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    11362.6,
+    6313.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, 9] desde Las Monjas: esquina 1936 119 (San Felipe)"
+  },
+  {
+   "id": "X1772-0182",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0034",
+    "L1772-0080"
+   ],
+   "original": [
+    437.0,
+    660.0
+   ],
+   "indice": [
+    -8,
+    -2
+   ],
+   "sector": "S1772-21",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7949.4,
+    8998.6
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-8, -2] desde Las Monjas: esquina 1936 308 (Quinta Crespo)"
+  },
+  {
+   "id": "X1772-0183",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0036",
+    "L1772-0080"
+   ],
+   "original": [
+    504.0,
+    660.0
+   ],
+   "indice": [
+    -7,
+    -2
+   ],
+   "sector": "S1772-21",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7928.0,
+    8779.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-7, -2] desde Las Monjas: esquina 1936 285 (El Carmen)"
+  },
+  {
+   "id": "X1772-0184",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0038",
+    "L1772-0080"
+   ],
+   "original": [
+    570.0,
+    660.0
+   ],
+   "indice": [
+    -6,
+    -2
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    7993.9,
+    8483.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-6, -2] desde Las Monjas: esquina 1936 260 (Bucare)"
+  },
+  {
+   "id": "X1772-0185",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0040",
+    "L1772-0080"
+   ],
+   "original": [
+    637.0,
+    660.0
+   ],
+   "indice": [
+    -5,
+    -2
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8047.4,
+    8195.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-5, -2] desde Las Monjas: esquina 1936 240 (Maderero)"
+  },
+  {
+   "id": "X1772-0186",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0042",
+    "L1772-0080"
+   ],
+   "original": [
+    702.0,
+    660.0
+   ],
+   "indice": [
+    -4,
+    -2
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8116.0,
+    7859.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-4, -2] desde Las Monjas: esquina 1936 214 (Miranda)"
+  },
+  {
+   "id": "X1772-0187",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0043",
+    "L1772-0080"
+   ],
+   "original": [
+    768.0,
+    660.0
+   ],
+   "indice": [
+    -3,
+    -2
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8162.0,
+    7587.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-3, -2] desde Las Monjas: esquina 1936 194 (Puente San Pablo)"
+  },
+  {
+   "id": "X1772-0188",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0043",
+    "L1772-0082"
+   ],
+   "original": [
+    768.0,
+    1191.0
+   ],
+   "indice": [
+    -3,
+    6
+   ],
+   "sector": "S1772-32",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "la esquina de 1936 asignada es un rótulo, no un cruce (calce-identidad.json, excluidos_por_rotulo)",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0189",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0045",
+    "L1772-0080"
+   ],
+   "original": [
+    835.0,
+    660.0
+   ],
+   "indice": [
+    -2,
+    -2
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8214.3,
+    7330.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-2, -2] desde Las Monjas: esquina 1936 181 (La Gorda)"
+  },
+  {
+   "id": "X1772-0190",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0045",
+    "L1772-0082"
+   ],
+   "original": [
+    835.0,
+    1191.0
+   ],
+   "indice": [
+    -2,
+    6
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10262.0,
+    7783.9
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-2, 6] desde Las Monjas: esquina 1936 207 (San Lázaro)"
+  },
+  {
+   "id": "X1772-0191",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0047",
+    "L1772-0080"
+   ],
+   "original": [
+    903.0,
+    660.0
+   ],
+   "indice": [
+    -1,
+    -2
+   ],
+   "sector": "S1772-22",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8261.9,
+    7077.1
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-1, -2] desde Las Monjas: esquina 1936 167 (La Pedrera)"
+  },
+  {
+   "id": "X1772-0192",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0047",
+    "L1772-0082"
+   ],
+   "original": [
+    903.0,
+    1191.0
+   ],
+   "indice": [
+    -1,
+    6
+   ],
+   "sector": "S1772-32",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    10306.1,
+    7513.7
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [-1, 6] desde Las Monjas: esquina 1936 192 (Perico)"
+  },
+  {
+   "id": "X1772-0193",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0050",
+    "L1772-0080"
+   ],
+   "original": [
+    970.0,
+    660.0
+   ],
+   "indice": [
+    0,
+    -2
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8317.0,
+    6810.5
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [0, -2] desde Las Monjas: esquina 1936 151 (Muñoz)"
+  },
+  {
+   "id": "X1772-0194",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0053",
+    "L1772-0080"
+   ],
+   "original": [
+    1036.0,
+    660.0
+   ],
+   "indice": [
+    1,
+    -2
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8358.2,
+    6618.0
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [1, -2] desde Las Monjas: esquina 1936 138 (Piñango)"
+  },
+  {
+   "id": "X1772-0195",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0056",
+    "L1772-0080"
+   ],
+   "original": [
+    1104.0,
+    660.0
+   ],
+   "indice": [
+    2,
+    -2
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8415.9,
+    6359.2
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [2, -2] desde Las Monjas: esquina 1936 123 (Llaguno)"
+  },
+  {
+   "id": "X1772-0196",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0059",
+    "L1772-0080"
+   ],
+   "original": [
+    1170.0,
+    660.0
+   ],
+   "indice": [
+    3,
+    -2
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8473.0,
+    6087.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [3, -2] desde Las Monjas: esquina 1936 106 (Cuartel Viejo)"
+  },
+  {
+   "id": "X1772-0197",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0062",
+    "L1772-0080"
+   ],
+   "original": [
+    1236.0,
+    660.0
+   ],
+   "indice": [
+    4,
+    -2
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8525.0,
+    5824.8
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [4, -2] desde Las Monjas: esquina 1936 91 (Balconcito)"
+  },
+  {
+   "id": "X1772-0198",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0065",
+    "L1772-0080"
+   ],
+   "original": [
+    1304.0,
+    660.0
+   ],
+   "indice": [
+    5,
+    -2
+   ],
+   "sector": "S1772-23",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8560.4,
+    5528.4
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [5, -2] desde Las Monjas: esquina 1936 73 (El Truco)"
+  },
+  {
+   "id": "X1772-0199",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0067",
+    "L1772-0080"
+   ],
+   "original": [
+    1370.0,
+    660.0
+   ],
+   "indice": [
+    6,
+    -2
+   ],
+   "sector": "S1772-24",
+   "estado": "identidad_verificada",
+   "mosaico": [
+    8606.63,
+    5228.49
+   ],
+   "motivo": null,
+   "procedencia": "ancla del calce por identidad: identidad de damero [6, -2] desde Las Monjas: corte de su fila y su columna en 1936, revisado a ojo (anclas-topologia.json)"
+  },
+  {
+   "id": "X1772-0200",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0069",
+    "L1772-0081"
+   ],
+   "original": [
+    1439.0,
+    594.0
+   ],
+   "indice": [
+    7,
+    -3
+   ],
+   "sector": "S1772-24",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "X1772-0201",
+   "tipo": "cruce",
+   "lineas": [
+    "L1772-0070",
+    "L1772-0081"
+   ],
+   "original": [
+    1505.0,
+    594.0
+   ],
+   "indice": [
+    8,
+    -3
+   ],
+   "sector": "S1772-24",
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "sin esquina con nombre en 1936 ni pareja por topología",
+   "procedencia": "cruce de dos calles rectas del trazado sobre la retícula del damero (damero.cruces_1772)"
+  },
+  {
+   "id": "E1772-0001",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0001",
+    "L1772-0073",
+    "L1772-0074"
+   ],
+   "original": [
+    566.0,
+    319.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-11"
+  },
+  {
+   "id": "E1772-0002",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0001",
+    "L1772-0031"
+   ],
+   "original": [
+    370.0,
+    327.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-11"
+  },
+  {
+   "id": "E1772-0003",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0001",
+    "L1772-0033"
+   ],
+   "original": [
+    437.0,
+    327.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-11"
+  },
+  {
+   "id": "E1772-0004",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0001",
+    "L1772-0035"
+   ],
+   "original": [
+    504.0,
+    327.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-11"
+  },
+  {
+   "id": "E1772-0005",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0002",
+    "L1772-0033"
+   ],
+   "original": [
+    437.0,
+    395.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-11"
+  },
+  {
+   "id": "E1772-0006",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0004",
+    "L1772-0033"
+   ],
+   "original": [
+    437.0,
+    461.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-11"
+  },
+  {
+   "id": "E1772-0007",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0004",
+    "L1772-0073"
+   ],
+   "original": [
+    644.0,
+    461.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-12"
+  },
+  {
+   "id": "E1772-0008",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0073",
+    "L1772-0075"
+   ],
+   "original": [
+    707.0,
+    510.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-12"
+  },
+  {
+   "id": "E1772-0009",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0039",
+    "L1772-0075",
+    "L1772-0085"
+   ],
+   "original": [
+    637.0,
+    517.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-12"
+  },
+  {
+   "id": "E1772-0010",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0041",
+    "L1772-0073"
+   ],
+   "original": [
+    710.0,
+    522.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-12"
+  },
+  {
+   "id": "E1772-0011",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0077",
+    "L1772-0078"
+   ],
+   "original": [
+    1513.0,
+    527.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-24"
+  },
+  {
+   "id": "E1772-0012",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0006",
+    "L1772-0033"
+   ],
+   "original": [
+    437.0,
+    528.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-21"
+  },
+  {
+   "id": "E1772-0013",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0078",
+    "L1772-0079"
+   ],
+   "original": [
+    1428.0,
+    528.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-24"
+  },
+  {
+   "id": "E1772-0014",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0043",
+    "L1772-0073"
+   ],
+   "original": [
+    768.0,
+    562.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-22"
+  },
+  {
+   "id": "E1772-0015",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0024",
+    "L1772-0057"
+   ],
+   "original": [
+    1120.0,
+    1125.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-33"
+  },
+  {
+   "id": "E1772-0016",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0025",
+    "L1772-0034"
+   ],
+   "original": [
+    437.0,
+    1191.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-31"
+  },
+  {
+   "id": "E1772-0017",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0026",
+    "L1772-0057"
+   ],
+   "original": [
+    1104.0,
+    1191.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-33"
+  },
+  {
+   "id": "E1772-0018",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0028",
+    "L1772-0057"
+   ],
+   "original": [
+    1104.0,
+    1257.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "E1772-0019",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0029",
+    "L1772-0057"
+   ],
+   "original": [
+    1104.0,
+    1323.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "E1772-0020",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0030",
+    "L1772-0071"
+   ],
+   "original": [
+    1067.0,
+    1389.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "E1772-0021",
+   "tipo": "encuentro",
+   "lineas": [
+    "L1772-0030",
+    "L1772-0057"
+   ],
+   "original": [
+    1104.0,
+    1389.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "encuentro fuera del damero: sin pareja por identidad en 1936",
+   "procedencia": "encuentro del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "T1772-0001",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0083"
+   ],
+   "original": [
+    458.0,
+    177.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-11"
+  },
+  {
+   "id": "T1772-0002",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0076"
+   ],
+   "original": [
+    1194.0,
+    177.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-13"
+  },
+  {
+   "id": "T1772-0003",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0083"
+   ],
+   "original": [
+    447.0,
+    284.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-11"
+  },
+  {
+   "id": "T1772-0004",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0076"
+   ],
+   "original": [
+    1162.0,
+    293.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-13"
+  },
+  {
+   "id": "T1772-0005",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0074"
+   ],
+   "original": [
+    618.0,
+    296.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-12"
+  },
+  {
+   "id": "T1772-0006",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0001"
+   ],
+   "original": [
+    350.0,
+    327.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-11"
+  },
+  {
+   "id": "T1772-0007",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0077"
+   ],
+   "original": [
+    1770.0,
+    369.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": null
+  },
+  {
+   "id": "T1772-0008",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0002"
+   ],
+   "original": [
+    331.0,
+    395.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-11"
+  },
+  {
+   "id": "T1772-0009",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0003"
+   ],
+   "original": [
+    1355.0,
+    395.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-13"
+  },
+  {
+   "id": "T1772-0010",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0004"
+   ],
+   "original": [
+    331.0,
+    461.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-11"
+  },
+  {
+   "id": "T1772-0011",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0005"
+   ],
+   "original": [
+    1355.0,
+    461.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-13"
+  },
+  {
+   "id": "T1772-0012",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0079"
+   ],
+   "original": [
+    1443.0,
+    461.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-14"
+  },
+  {
+   "id": "T1772-0013",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0006"
+   ],
+   "original": [
+    329.0,
+    528.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-21"
+  },
+  {
+   "id": "T1772-0014",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0007"
+   ],
+   "original": [
+    1335.0,
+    528.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0015",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0078"
+   ],
+   "original": [
+    1370.0,
+    528.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-24"
+  },
+  {
+   "id": "T1772-0016",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0043"
+   ],
+   "original": [
+    768.0,
+    530.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-22"
+  },
+  {
+   "id": "T1772-0017",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0049"
+   ],
+   "original": [
+    970.0,
+    549.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0018",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0070"
+   ],
+   "original": [
+    1505.0,
+    550.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-24"
+  },
+  {
+   "id": "T1772-0019",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0064"
+   ],
+   "original": [
+    1304.0,
+    558.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0020",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0039"
+   ],
+   "original": [
+    632.0,
+    584.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-22"
+  },
+  {
+   "id": "T1772-0021",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0037"
+   ],
+   "original": [
+    570.0,
+    589.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-22"
+  },
+  {
+   "id": "T1772-0022",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0073"
+   ],
+   "original": [
+    812.0,
+    589.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-22"
+  },
+  {
+   "id": "T1772-0023",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0033"
+   ],
+   "original": [
+    435.0,
+    591.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-21"
+  },
+  {
+   "id": "T1772-0024",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0031"
+   ],
+   "original": [
+    370.0,
+    593.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-21"
+  },
+  {
+   "id": "T1772-0025",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0035"
+   ],
+   "original": [
+    504.0,
+    594.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-21"
+  },
+  {
+   "id": "T1772-0026",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0008"
+   ],
+   "original": [
+    916.0,
+    594.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-22"
+  },
+  {
+   "id": "T1772-0027",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0067"
+   ],
+   "original": [
+    1370.0,
+    594.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-24"
+  },
+  {
+   "id": "T1772-0028",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0081"
+   ],
+   "original": [
+    1560.0,
+    594.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-24"
+  },
+  {
+   "id": "T1772-0029",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0065"
+   ],
+   "original": [
+    1304.0,
+    595.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0030",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0045"
+   ],
+   "original": [
+    835.0,
+    599.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-22"
+  },
+  {
+   "id": "T1772-0031",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0040"
+   ],
+   "original": [
+    637.0,
+    600.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-22"
+  },
+  {
+   "id": "T1772-0032",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0036"
+   ],
+   "original": [
+    504.0,
+    604.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-21"
+  },
+  {
+   "id": "T1772-0033",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0038"
+   ],
+   "original": [
+    570.0,
+    604.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-22"
+  },
+  {
+   "id": "T1772-0034",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0034"
+   ],
+   "original": [
+    437.0,
+    607.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-21"
+  },
+  {
+   "id": "T1772-0035",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0061"
+   ],
+   "original": [
+    1236.0,
+    607.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0036",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0032"
+   ],
+   "original": [
+    370.0,
+    612.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-21"
+  },
+  {
+   "id": "T1772-0037",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0062"
+   ],
+   "original": [
+    1236.0,
+    623.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0038",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0058"
+   ],
+   "original": [
+    1170.0,
+    624.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0039",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0049"
+   ],
+   "original": [
+    970.0,
+    626.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0040",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0052"
+   ],
+   "original": [
+    1036.0,
+    627.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0041",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0055"
+   ],
+   "original": [
+    1104.0,
+    627.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0042",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0041"
+   ],
+   "original": [
+    710.0,
+    628.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-22"
+  },
+  {
+   "id": "T1772-0043",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0047"
+   ],
+   "original": [
+    903.0,
+    637.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-22"
+  },
+  {
+   "id": "T1772-0044",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0059"
+   ],
+   "original": [
+    1170.0,
+    638.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0045",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0050"
+   ],
+   "original": [
+    970.0,
+    639.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0046",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0053"
+   ],
+   "original": [
+    1036.0,
+    639.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0047",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0056"
+   ],
+   "original": [
+    1104.0,
+    640.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0048",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0009"
+   ],
+   "original": [
+    308.0,
+    660.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-21"
+  },
+  {
+   "id": "T1772-0049",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0010"
+   ],
+   "original": [
+    1556.0,
+    660.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-24"
+  },
+  {
+   "id": "T1772-0050",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0011"
+   ],
+   "original": [
+    304.0,
+    726.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-21"
+  },
+  {
+   "id": "T1772-0051",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0011"
+   ],
+   "original": [
+    1345.0,
+    726.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0052",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0012"
+   ],
+   "original": [
+    1556.0,
+    726.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-24"
+  },
+  {
+   "id": "T1772-0053",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0013"
+   ],
+   "original": [
+    307.0,
+    793.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-21"
+  },
+  {
+   "id": "T1772-0054",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0013"
+   ],
+   "original": [
+    1365.0,
+    793.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0055",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0014"
+   ],
+   "original": [
+    1556.0,
+    793.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-24"
+  },
+  {
+   "id": "T1772-0056",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0065"
+   ],
+   "original": [
+    1304.0,
+    852.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0057",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0015"
+   ],
+   "original": [
+    311.0,
+    859.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-21"
+  },
+  {
+   "id": "T1772-0058",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0015"
+   ],
+   "original": [
+    1298.0,
+    859.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0059",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0016"
+   ],
+   "original": [
+    1556.0,
+    859.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-24"
+  },
+  {
+   "id": "T1772-0060",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0066"
+   ],
+   "original": [
+    1304.0,
+    874.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-23"
+  },
+  {
+   "id": "T1772-0061",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0062"
+   ],
+   "original": [
+    1236.0,
+    919.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-33"
+  },
+  {
+   "id": "T1772-0062",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0017"
+   ],
+   "original": [
+    1230.0,
+    926.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-33"
+  },
+  {
+   "id": "T1772-0063",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0018"
+   ],
+   "original": [
+    1556.0,
+    926.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-34"
+  },
+  {
+   "id": "T1772-0064",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0063"
+   ],
+   "original": [
+    1236.0,
+    932.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-33"
+  },
+  {
+   "id": "T1772-0065",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0032"
+   ],
+   "original": [
+    370.0,
+    972.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-31"
+  },
+  {
+   "id": "T1772-0066",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0019"
+   ],
+   "original": [
+    398.0,
+    992.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-31"
+  },
+  {
+   "id": "T1772-0067",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0020"
+   ],
+   "original": [
+    1556.0,
+    992.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-34"
+  },
+  {
+   "id": "T1772-0068",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0060"
+   ],
+   "original": [
+    1170.0,
+    1034.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-33"
+  },
+  {
+   "id": "T1772-0069",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0021"
+   ],
+   "original": [
+    405.0,
+    1058.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-31"
+  },
+  {
+   "id": "T1772-0070",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0021"
+   ],
+   "original": [
+    1138.0,
+    1058.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-33"
+  },
+  {
+   "id": "T1772-0071",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0022"
+   ],
+   "original": [
+    1556.0,
+    1058.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-34"
+  },
+  {
+   "id": "T1772-0072",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0056"
+   ],
+   "original": [
+    1104.0,
+    1120.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-33"
+  },
+  {
+   "id": "T1772-0073",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0023"
+   ],
+   "original": [
+    432.0,
+    1125.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-31"
+  },
+  {
+   "id": "T1772-0074",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0023"
+   ],
+   "original": [
+    1090.0,
+    1125.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-33"
+  },
+  {
+   "id": "T1772-0075",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0024"
+   ],
+   "original": [
+    1556.0,
+    1125.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-34"
+  },
+  {
+   "id": "T1772-0076",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0084"
+   ],
+   "original": [
+    170.0,
+    1143.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-31"
+  },
+  {
+   "id": "T1772-0077",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0072"
+   ],
+   "original": [
+    702.0,
+    1145.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-32"
+  },
+  {
+   "id": "T1772-0078",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0084"
+   ],
+   "original": [
+    419.0,
+    1155.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-31"
+  },
+  {
+   "id": "T1772-0079",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0050"
+   ],
+   "original": [
+    970.0,
+    1182.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-33"
+  },
+  {
+   "id": "T1772-0080",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0036"
+   ],
+   "original": [
+    504.0,
+    1184.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-31"
+  },
+  {
+   "id": "T1772-0081",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0038"
+   ],
+   "original": [
+    570.0,
+    1184.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-32"
+  },
+  {
+   "id": "T1772-0082",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0040"
+   ],
+   "original": [
+    637.0,
+    1184.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-32"
+  },
+  {
+   "id": "T1772-0083",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0025"
+   ],
+   "original": [
+    637.0,
+    1191.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-32"
+  },
+  {
+   "id": "T1772-0084",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0082"
+   ],
+   "original": [
+    962.0,
+    1191.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-32"
+  },
+  {
+   "id": "T1772-0085",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0026"
+   ],
+   "original": [
+    1556.0,
+    1191.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-34"
+  },
+  {
+   "id": "T1772-0086",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0070"
+   ],
+   "original": [
+    1505.0,
+    1250.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-44"
+  },
+  {
+   "id": "T1772-0087",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0045"
+   ],
+   "original": [
+    835.0,
+    1253.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-42"
+  },
+  {
+   "id": "T1772-0088",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0027"
+   ],
+   "original": [
+    769.0,
+    1257.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-42"
+  },
+  {
+   "id": "T1772-0089",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0027"
+   ],
+   "original": [
+    816.0,
+    1257.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-42"
+  },
+  {
+   "id": "T1772-0090",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0028"
+   ],
+   "original": [
+    1447.0,
+    1257.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-44"
+  },
+  {
+   "id": "T1772-0091",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0069"
+   ],
+   "original": [
+    1439.0,
+    1270.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-44"
+  },
+  {
+   "id": "T1772-0092",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0068"
+   ],
+   "original": [
+    1370.0,
+    1300.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-44"
+  },
+  {
+   "id": "T1772-0093",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0029"
+   ],
+   "original": [
+    1337.0,
+    1323.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "T1772-0094",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0066"
+   ],
+   "original": [
+    1304.0,
+    1362.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "T1772-0095",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0030"
+   ],
+   "original": [
+    1258.0,
+    1389.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "T1772-0096",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0063"
+   ],
+   "original": [
+    1236.0,
+    1402.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "T1772-0097",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0060"
+   ],
+   "original": [
+    1170.0,
+    1438.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "T1772-0098",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0044"
+   ],
+   "original": [
+    768.0,
+    1447.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-42"
+  },
+  {
+   "id": "T1772-0099",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0051"
+   ],
+   "original": [
+    970.0,
+    1454.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "T1772-0100",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0054"
+   ],
+   "original": [
+    1036.0,
+    1457.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "T1772-0101",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0071"
+   ],
+   "original": [
+    1067.0,
+    1460.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "T1772-0102",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0057"
+   ],
+   "original": [
+    1104.0,
+    1464.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-43"
+  },
+  {
+   "id": "T1772-0103",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0046"
+   ],
+   "original": [
+    835.0,
+    1485.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-42"
+  },
+  {
+   "id": "T1772-0104",
+   "tipo": "terminal",
+   "lineas": [
+    "L1772-0048"
+   ],
+   "original": [
+    903.0,
+    1492.0
+   ],
+   "estado": "sin_pareja_segura",
+   "mosaico": null,
+   "motivo": "extremo del trazado sin cruce: sin pareja en 1936",
+   "procedencia": "terminal del trazado del original (1772)",
+   "sector": "S1772-42"
+  }
+ ],
+ "calles": [
+  {
+   "id": "L1772-0001",
+   "tipo": "circulacion_espacio_abierto",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0006",
+    "E1772-0002",
+    "E1772-0003",
+    "E1772-0004",
+    "E1772-0001"
+   ]
+  },
+  {
+   "id": "L1772-0002",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0008",
+    "X1772-0001",
+    "E1772-0005",
+    "X1772-0002",
+    "X1772-0003"
+   ]
+  },
+  {
+   "id": "L1772-0003",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0004",
+    "X1772-0005",
+    "X1772-0006",
+    "X1772-0007",
+    "X1772-0008",
+    "T1772-0009"
+   ]
+  },
+  {
+   "id": "L1772-0004",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0010",
+    "X1772-0009",
+    "E1772-0006",
+    "X1772-0010",
+    "X1772-0011",
+    "X1772-0012",
+    "E1772-0007"
+   ]
+  },
+  {
+   "id": "L1772-0005",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0013",
+    "X1772-0014",
+    "X1772-0015",
+    "X1772-0016",
+    "X1772-0017",
+    "T1772-0011"
+   ]
+  },
+  {
+   "id": "L1772-0006",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0013",
+    "X1772-0018",
+    "E1772-0012",
+    "X1772-0019",
+    "X1772-0020"
+   ]
+  },
+  {
+   "id": "L1772-0007",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0021",
+    "X1772-0022",
+    "X1772-0023",
+    "X1772-0024",
+    "X1772-0025",
+    "T1772-0014"
+   ]
+  },
+  {
+   "id": "L1772-0008",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0026",
+    "X1772-0026",
+    "X1772-0027",
+    "X1772-0028",
+    "X1772-0029",
+    "X1772-0030"
+   ]
+  },
+  {
+   "id": "L1772-0009",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0048",
+    "X1772-0031"
+   ]
+  },
+  {
+   "id": "L1772-0010",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0032",
+    "X1772-0033",
+    "T1772-0049"
+   ]
+  },
+  {
+   "id": "L1772-0011",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0050",
+    "X1772-0034",
+    "X1772-0035",
+    "X1772-0036",
+    "X1772-0037",
+    "X1772-0038",
+    "X1772-0039",
+    "X1772-0040",
+    "X1772-0041",
+    "X1772-0042",
+    "X1772-0043",
+    "X1772-0044",
+    "X1772-0045",
+    "X1772-0046",
+    "X1772-0047",
+    "X1772-0048",
+    "T1772-0051"
+   ]
+  },
+  {
+   "id": "L1772-0012",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0049",
+    "X1772-0050",
+    "T1772-0052"
+   ]
+  },
+  {
+   "id": "L1772-0013",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0053",
+    "X1772-0051",
+    "X1772-0052",
+    "X1772-0053",
+    "X1772-0054",
+    "X1772-0055",
+    "X1772-0056",
+    "X1772-0057",
+    "X1772-0058",
+    "X1772-0059",
+    "X1772-0060",
+    "X1772-0061",
+    "X1772-0062",
+    "X1772-0063",
+    "X1772-0064",
+    "X1772-0065",
+    "T1772-0054"
+   ]
+  },
+  {
+   "id": "L1772-0014",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0066",
+    "X1772-0067",
+    "T1772-0055"
+   ]
+  },
+  {
+   "id": "L1772-0015",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0057",
+    "X1772-0068",
+    "X1772-0069",
+    "X1772-0070",
+    "X1772-0071",
+    "X1772-0072",
+    "X1772-0073",
+    "X1772-0074",
+    "X1772-0075",
+    "X1772-0076",
+    "X1772-0077",
+    "X1772-0078",
+    "X1772-0079",
+    "X1772-0080",
+    "X1772-0081",
+    "T1772-0058"
+   ]
+  },
+  {
+   "id": "L1772-0016",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0082",
+    "X1772-0083",
+    "X1772-0084",
+    "T1772-0059"
+   ]
+  },
+  {
+   "id": "L1772-0017",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0085",
+    "X1772-0086",
+    "X1772-0087",
+    "X1772-0088",
+    "X1772-0089",
+    "X1772-0090",
+    "X1772-0091",
+    "X1772-0092",
+    "X1772-0093",
+    "X1772-0094",
+    "X1772-0095",
+    "X1772-0096",
+    "X1772-0097",
+    "T1772-0062"
+   ]
+  },
+  {
+   "id": "L1772-0018",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0098",
+    "X1772-0099",
+    "X1772-0100",
+    "X1772-0101",
+    "T1772-0063"
+   ]
+  },
+  {
+   "id": "L1772-0019",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0066",
+    "X1772-0102",
+    "X1772-0103",
+    "X1772-0104",
+    "X1772-0105",
+    "X1772-0106",
+    "X1772-0107",
+    "X1772-0108",
+    "X1772-0109",
+    "X1772-0110",
+    "X1772-0111",
+    "X1772-0112",
+    "X1772-0113"
+   ]
+  },
+  {
+   "id": "L1772-0020",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0114",
+    "X1772-0115",
+    "X1772-0116",
+    "X1772-0117",
+    "X1772-0118",
+    "T1772-0067"
+   ]
+  },
+  {
+   "id": "L1772-0021",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0069",
+    "X1772-0119",
+    "X1772-0120",
+    "X1772-0121",
+    "X1772-0122",
+    "X1772-0123",
+    "X1772-0124",
+    "X1772-0125",
+    "X1772-0126",
+    "X1772-0127",
+    "X1772-0128",
+    "X1772-0129",
+    "T1772-0070"
+   ]
+  },
+  {
+   "id": "L1772-0022",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0130",
+    "X1772-0131",
+    "X1772-0132",
+    "X1772-0133",
+    "X1772-0134",
+    "X1772-0135",
+    "T1772-0071"
+   ]
+  },
+  {
+   "id": "L1772-0023",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0073",
+    "X1772-0136",
+    "X1772-0137",
+    "X1772-0138",
+    "X1772-0139",
+    "X1772-0140",
+    "X1772-0141",
+    "X1772-0142",
+    "X1772-0143",
+    "X1772-0144",
+    "X1772-0145",
+    "T1772-0074"
+   ]
+  },
+  {
+   "id": "L1772-0024",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0015",
+    "X1772-0146",
+    "X1772-0147",
+    "X1772-0148",
+    "X1772-0149",
+    "X1772-0150",
+    "X1772-0151",
+    "T1772-0075"
+   ]
+  },
+  {
+   "id": "L1772-0025",
+   "tipo": "circulacion_borde_abierto",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0016",
+    "T1772-0083"
+   ]
+  },
+  {
+   "id": "L1772-0026",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0152",
+    "E1772-0017",
+    "X1772-0153",
+    "X1772-0154",
+    "X1772-0155",
+    "X1772-0156",
+    "X1772-0157",
+    "X1772-0158",
+    "T1772-0085"
+   ]
+  },
+  {
+   "id": "L1772-0027",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0088",
+    "T1772-0089"
+   ]
+  },
+  {
+   "id": "L1772-0028",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0159",
+    "X1772-0160",
+    "X1772-0161",
+    "E1772-0018",
+    "X1772-0162",
+    "X1772-0163",
+    "X1772-0164",
+    "X1772-0165",
+    "X1772-0166",
+    "T1772-0090"
+   ]
+  },
+  {
+   "id": "L1772-0029",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0167",
+    "X1772-0168",
+    "X1772-0169",
+    "X1772-0170",
+    "X1772-0171",
+    "E1772-0019",
+    "X1772-0172",
+    "X1772-0173",
+    "X1772-0174",
+    "T1772-0093"
+   ]
+  },
+  {
+   "id": "L1772-0030",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0175",
+    "X1772-0176",
+    "X1772-0177",
+    "X1772-0178",
+    "X1772-0179",
+    "E1772-0020",
+    "E1772-0021",
+    "X1772-0180",
+    "X1772-0181",
+    "T1772-0095"
+   ]
+  },
+  {
+   "id": "L1772-0031",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0002",
+    "X1772-0001",
+    "X1772-0009",
+    "X1772-0018",
+    "T1772-0024"
+   ]
+  },
+  {
+   "id": "L1772-0032",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0036",
+    "X1772-0031",
+    "X1772-0034",
+    "X1772-0051",
+    "X1772-0068",
+    "X1772-0085",
+    "T1772-0065"
+   ]
+  },
+  {
+   "id": "L1772-0033",
+   "tipo": "calle_quebrada",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0003",
+    "E1772-0005",
+    "E1772-0006",
+    "E1772-0012",
+    "T1772-0023"
+   ]
+  },
+  {
+   "id": "L1772-0034",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0034",
+    "X1772-0182",
+    "X1772-0035",
+    "X1772-0052",
+    "X1772-0069",
+    "X1772-0086",
+    "X1772-0102",
+    "X1772-0119",
+    "X1772-0136",
+    "E1772-0016"
+   ]
+  },
+  {
+   "id": "L1772-0035",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0004",
+    "X1772-0002",
+    "X1772-0010",
+    "X1772-0019",
+    "T1772-0025"
+   ]
+  },
+  {
+   "id": "L1772-0036",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0032",
+    "X1772-0183",
+    "X1772-0036",
+    "X1772-0053",
+    "X1772-0070",
+    "X1772-0087",
+    "X1772-0103",
+    "X1772-0120",
+    "X1772-0137",
+    "T1772-0080"
+   ]
+  },
+  {
+   "id": "L1772-0037",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0003",
+    "X1772-0011",
+    "X1772-0020",
+    "T1772-0021"
+   ]
+  },
+  {
+   "id": "L1772-0038",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0033",
+    "X1772-0184",
+    "X1772-0037",
+    "X1772-0054",
+    "X1772-0071",
+    "X1772-0088",
+    "X1772-0104",
+    "X1772-0121",
+    "X1772-0138",
+    "T1772-0081"
+   ]
+  },
+  {
+   "id": "L1772-0039",
+   "tipo": "calle_quebrada",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0009",
+    "T1772-0020"
+   ]
+  },
+  {
+   "id": "L1772-0040",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0031",
+    "X1772-0185",
+    "X1772-0038",
+    "X1772-0055",
+    "X1772-0072",
+    "X1772-0089",
+    "X1772-0105",
+    "X1772-0122",
+    "X1772-0139",
+    "T1772-0082"
+   ]
+  },
+  {
+   "id": "L1772-0041",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0010",
+    "T1772-0042"
+   ]
+  },
+  {
+   "id": "L1772-0042",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0186",
+    "X1772-0039",
+    "X1772-0056",
+    "X1772-0073",
+    "X1772-0090",
+    "X1772-0106",
+    "X1772-0123",
+    "X1772-0140"
+   ]
+  },
+  {
+   "id": "L1772-0043",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0016",
+    "E1772-0014",
+    "X1772-0187",
+    "X1772-0040",
+    "X1772-0057",
+    "X1772-0074",
+    "X1772-0091",
+    "X1772-0107",
+    "X1772-0124",
+    "X1772-0141",
+    "X1772-0188"
+   ]
+  },
+  {
+   "id": "L1772-0044",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0167",
+    "X1772-0175",
+    "T1772-0098"
+   ]
+  },
+  {
+   "id": "L1772-0045",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0030",
+    "X1772-0189",
+    "X1772-0041",
+    "X1772-0058",
+    "X1772-0075",
+    "X1772-0092",
+    "X1772-0108",
+    "X1772-0125",
+    "X1772-0142",
+    "X1772-0190",
+    "T1772-0087"
+   ]
+  },
+  {
+   "id": "L1772-0046",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0168",
+    "X1772-0176",
+    "T1772-0103"
+   ]
+  },
+  {
+   "id": "L1772-0047",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0043",
+    "X1772-0191",
+    "X1772-0042",
+    "X1772-0059",
+    "X1772-0076",
+    "X1772-0093",
+    "X1772-0109",
+    "X1772-0126",
+    "X1772-0143",
+    "X1772-0192",
+    "X1772-0159"
+   ]
+  },
+  {
+   "id": "L1772-0048",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0169",
+    "X1772-0177",
+    "T1772-0104"
+   ]
+  },
+  {
+   "id": "L1772-0049",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0017",
+    "X1772-0026",
+    "T1772-0039"
+   ]
+  },
+  {
+   "id": "L1772-0050",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0045",
+    "X1772-0193",
+    "X1772-0043",
+    "X1772-0060",
+    "X1772-0077",
+    "X1772-0094",
+    "X1772-0110",
+    "X1772-0127",
+    "X1772-0144",
+    "T1772-0079"
+   ]
+  },
+  {
+   "id": "L1772-0051",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0160",
+    "X1772-0170",
+    "X1772-0178",
+    "T1772-0099"
+   ]
+  },
+  {
+   "id": "L1772-0052",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0004",
+    "X1772-0013",
+    "X1772-0021",
+    "X1772-0027",
+    "T1772-0040"
+   ]
+  },
+  {
+   "id": "L1772-0053",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0046",
+    "X1772-0194",
+    "X1772-0044",
+    "X1772-0061",
+    "X1772-0078",
+    "X1772-0095",
+    "X1772-0111",
+    "X1772-0128",
+    "X1772-0145"
+   ]
+  },
+  {
+   "id": "L1772-0054",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0152",
+    "X1772-0161",
+    "X1772-0171",
+    "X1772-0179",
+    "T1772-0100"
+   ]
+  },
+  {
+   "id": "L1772-0055",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0005",
+    "X1772-0014",
+    "X1772-0022",
+    "X1772-0028",
+    "T1772-0041"
+   ]
+  },
+  {
+   "id": "L1772-0056",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0047",
+    "X1772-0195",
+    "X1772-0045",
+    "X1772-0062",
+    "X1772-0079",
+    "X1772-0096",
+    "X1772-0112",
+    "X1772-0129",
+    "T1772-0072"
+   ]
+  },
+  {
+   "id": "L1772-0057",
+   "tipo": "calle_quebrada",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0015",
+    "E1772-0017",
+    "E1772-0018",
+    "E1772-0019",
+    "E1772-0021",
+    "T1772-0102"
+   ]
+  },
+  {
+   "id": "L1772-0058",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0006",
+    "X1772-0015",
+    "X1772-0023",
+    "X1772-0029",
+    "T1772-0038"
+   ]
+  },
+  {
+   "id": "L1772-0059",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0044",
+    "X1772-0196",
+    "X1772-0046",
+    "X1772-0063",
+    "X1772-0080",
+    "X1772-0097",
+    "X1772-0113"
+   ]
+  },
+  {
+   "id": "L1772-0060",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0068",
+    "X1772-0130",
+    "X1772-0146",
+    "X1772-0153",
+    "X1772-0162",
+    "X1772-0172",
+    "X1772-0180",
+    "T1772-0097"
+   ]
+  },
+  {
+   "id": "L1772-0061",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0007",
+    "X1772-0016",
+    "X1772-0024",
+    "X1772-0030",
+    "T1772-0035"
+   ]
+  },
+  {
+   "id": "L1772-0062",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0037",
+    "X1772-0197",
+    "X1772-0047",
+    "X1772-0064",
+    "X1772-0081",
+    "T1772-0061"
+   ]
+  },
+  {
+   "id": "L1772-0063",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0064",
+    "X1772-0114",
+    "X1772-0131",
+    "X1772-0147",
+    "X1772-0154",
+    "X1772-0163",
+    "X1772-0173",
+    "X1772-0181",
+    "T1772-0096"
+   ]
+  },
+  {
+   "id": "L1772-0064",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0008",
+    "X1772-0017",
+    "X1772-0025",
+    "T1772-0019"
+   ]
+  },
+  {
+   "id": "L1772-0065",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0029",
+    "X1772-0198",
+    "X1772-0048",
+    "X1772-0065",
+    "T1772-0056"
+   ]
+  },
+  {
+   "id": "L1772-0066",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0060",
+    "X1772-0098",
+    "X1772-0115",
+    "X1772-0132",
+    "X1772-0148",
+    "X1772-0155",
+    "X1772-0164",
+    "X1772-0174",
+    "T1772-0094"
+   ]
+  },
+  {
+   "id": "L1772-0067",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0027",
+    "X1772-0199"
+   ]
+  },
+  {
+   "id": "L1772-0068",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0082",
+    "X1772-0099",
+    "X1772-0116",
+    "X1772-0133",
+    "X1772-0149",
+    "X1772-0156",
+    "X1772-0165",
+    "T1772-0092"
+   ]
+  },
+  {
+   "id": "L1772-0069",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0200",
+    "X1772-0032",
+    "X1772-0049",
+    "X1772-0066",
+    "X1772-0083",
+    "X1772-0100",
+    "X1772-0117",
+    "X1772-0134",
+    "X1772-0150",
+    "X1772-0157",
+    "X1772-0166",
+    "T1772-0091"
+   ]
+  },
+  {
+   "id": "L1772-0070",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0018",
+    "X1772-0201",
+    "X1772-0033",
+    "X1772-0050",
+    "X1772-0067",
+    "X1772-0084",
+    "X1772-0101",
+    "X1772-0118",
+    "X1772-0135",
+    "X1772-0151",
+    "X1772-0158",
+    "T1772-0086"
+   ]
+  },
+  {
+   "id": "L1772-0071",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0020",
+    "T1772-0101"
+   ]
+  },
+  {
+   "id": "L1772-0072",
+   "tipo": "acceso_sin_salida",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0140",
+    "T1772-0077"
+   ]
+  },
+  {
+   "id": "L1772-0073",
+   "tipo": "calle_quebrada",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0001",
+    "E1772-0007",
+    "E1772-0008",
+    "E1772-0010",
+    "E1772-0014",
+    "T1772-0022"
+   ]
+  },
+  {
+   "id": "L1772-0074",
+   "tipo": "calle_quebrada",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0001",
+    "T1772-0005"
+   ]
+  },
+  {
+   "id": "L1772-0075",
+   "tipo": "calle_quebrada",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0020",
+    "E1772-0009",
+    "E1772-0008"
+   ]
+  },
+  {
+   "id": "L1772-0076",
+   "tipo": "camino",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0002",
+    "T1772-0004"
+   ]
+  },
+  {
+   "id": "L1772-0077",
+   "tipo": "camino",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0011",
+    "T1772-0007"
+   ]
+  },
+  {
+   "id": "L1772-0078",
+   "tipo": "calle_quebrada",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0015",
+    "E1772-0013",
+    "E1772-0011"
+   ]
+  },
+  {
+   "id": "L1772-0079",
+   "tipo": "circulacion_espacio_abierto",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "E1772-0013",
+    "T1772-0012"
+   ]
+  },
+  {
+   "id": "L1772-0080",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0182",
+    "X1772-0183",
+    "X1772-0184",
+    "X1772-0185",
+    "X1772-0186",
+    "X1772-0187",
+    "X1772-0189",
+    "X1772-0191",
+    "X1772-0193",
+    "X1772-0194",
+    "X1772-0195",
+    "X1772-0196",
+    "X1772-0197",
+    "X1772-0198",
+    "X1772-0199"
+   ]
+  },
+  {
+   "id": "L1772-0081",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0200",
+    "X1772-0201",
+    "T1772-0028"
+   ]
+  },
+  {
+   "id": "L1772-0082",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0188",
+    "X1772-0190",
+    "X1772-0192",
+    "T1772-0084"
+   ]
+  },
+  {
+   "id": "L1772-0083",
+   "tipo": "camino",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0001",
+    "T1772-0003"
+   ]
+  },
+  {
+   "id": "L1772-0084",
+   "tipo": "camino",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "T1772-0076",
+    "T1772-0078"
+   ]
+  },
+  {
+   "id": "L1772-0085",
+   "tipo": "calle_recta",
+   "estado": "eje_aproximado_inspeccionado_no_aprobado_para_generacion",
+   "nodos": [
+    "X1772-0012",
+    "E1772-0009"
+   ]
+  }
+ ],
+ "resumen": {
+  "nodos": 326,
+  "calles": 85,
+  "tramos": 467,
+  "identidad_verificada": 168,
+  "por_tipo": {
+   "cruce": 201,
+   "encuentro": 21,
+   "terminal": 104
+  }
+ }
+}
