@@ -52,24 +52,24 @@ Los controles por sector, cuando se cumplan, serán como lo pide 1B/1D (controla
 
 Los GCP del ajuste miden la consistencia interna del TPS (residuo dejando uno fuera, LOO). Un control cuenta como independiente solo si no cae a menos de 6 px de un punto del ajuste (GCP, semilla o ancla) y si su desvío se midió sobre el calce vigente. De los 23 nodos curados de [controles-calce-centro.json](controles-calce-centro.json), 22 caen sobre un punto del ajuste; el que queda guarda un desvío del calce anterior (su `config_sha256` no es el del archivo vigente). Los cruces de damero son ahora anclas del calce por identidad ([calce-identidad.md](calce-identidad.md)): su error es el LOO.
 
-| Sector | GCP del ajuste | LOO rms m | Nodos curados fuera del ajuste | Cruces de damero que no son control (anclas, semillas o rótulos) | Cruces-control independientes |
-|---|---|---|---|---|---|
-| S1772-11 | 2 | 5.927 | 0 | 2 | 0 |
-| S1772-12 | 2 | 9.669 | 0 | 2 | 0 |
-| S1772-13 | 8 | 16.327 | 0 | 8 | 0 |
-| S1772-14 | 1 | 141.55 | 0 | 0 | 0 |
-| S1772-21 | 9 | 19.183 | 0 | 9 | 0 |
-| S1772-22 | 27 | 12.584 | 0 | 25 | 0 |
-| S1772-23 | 31 | 12.603 | 0 | 33 | 0 |
-| S1772-24 | 3 | 51.859 | 0 | 5 | 0 |
-| S1772-31 | 6 | 16.621 | 0 | 7 | 0 |
-| S1772-32 | 23 | 10.808 | 1 (calce anterior) | 25 | 0 |
-| S1772-33 | 22 | 9.097 | 0 | 23 | 0 |
-| S1772-34 | 9 | 18.885 | 0 | 11 | 0 |
-| S1772-41 | 0 | — | 0 | 0 | 0 |
-| S1772-42 | 5 | 13.929 | 0 | 6 | 0 |
-| S1772-43 | 12 | 16.232 | 0 | 11 | 0 |
-| S1772-44 | 1 | 56.89 | 0 | 1 | 0 |
+| Sector | GCP del ajuste | LOO rms m | Nodos curados fuera del ajuste | Cruces de damero anclas o sobre semilla | Descartados (esquina 1936 = rótulo) | Cruces-control independientes |
+|---|---|---|---|---|---|---|
+| S1772-11 | 2 | 5.927 | 0 | 2 | 0 | 0 |
+| S1772-12 | 2 | 9.669 | 0 | 2 | 0 | 0 |
+| S1772-13 | 8 | 16.327 | 0 | 8 | 0 | 0 |
+| S1772-14 | 1 | 141.55 | 0 | 0 | 0 | 0 |
+| S1772-21 | 9 | 19.183 | 0 | 9 | 0 | 0 |
+| S1772-22 | 27 | 12.584 | 0 | 25 | 0 | 0 |
+| S1772-23 | 31 | 12.603 | 0 | 33 | 0 | 0 |
+| S1772-24 | 3 | 51.859 | 0 | 3 | 2 | 0 |
+| S1772-31 | 6 | 16.621 | 0 | 6 | 1 | 0 |
+| S1772-32 | 23 | 10.808 | 1 (calce anterior) | 23 | 2 | 0 |
+| S1772-33 | 22 | 9.097 | 0 | 22 | 1 | 0 |
+| S1772-34 | 9 | 18.885 | 0 | 9 | 2 | 0 |
+| S1772-41 | 0 | — | 0 | 0 | 0 | 0 |
+| S1772-42 | 5 | 13.929 | 0 | 5 | 1 | 0 |
+| S1772-43 | 12 | 16.232 | 0 | 11 | 0 | 0 |
+| S1772-44 | 1 | 56.89 | 0 | 1 | 0 | 0 |
 
 ## Incidencias y subtareas
 

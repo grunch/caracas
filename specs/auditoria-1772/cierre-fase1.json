@@ -332,7 +332,7 @@
    }
   }
  ],
- "calce_por_sector_nota": "gcp_ajuste y loo_* miden el calce vigente. controles_damero y desvio_damero_mediana_m cuentan solo los cruces de damero que no son anclas del calce (anclas_damero los que sí: su error está en el LOO). controles_independientes y desvio_independiente_max_m cuentan los nodos curados que no caen sobre un punto del ajuste (a menos de 6 px); desvio_independiente_vigente dice si su desvío guardado se midió sobre este archivo de calce, y solo entonces cuentan en la puerta.",
+ "calce_por_sector_nota": "gcp_ajuste y loo_* miden el calce vigente. controles_damero y desvio_damero_mediana_m cuentan solo los cruces de damero que no son anclas del calce (anclas_damero los que sí, o caen sobre una semilla: su error está en el LOO; descartados_damero los de esquina de 1936 que es un rótulo, ni ancla ni control). controles_independientes y desvio_independiente_max_m cuentan los nodos curados que no caen sobre un punto del ajuste (a menos de 6 px); desvio_independiente_vigente dice si su desvío guardado se midió sobre este archivo de calce, y solo entonces cuentan en la puerta.",
  "calce_por_sector": [
   {
    "sector": "S1772-11",
@@ -345,7 +345,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 2
+   "anclas_damero": 2,
+   "descartados_damero": 0
   },
   {
    "sector": "S1772-12",
@@ -358,7 +359,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 2
+   "anclas_damero": 2,
+   "descartados_damero": 0
   },
   {
    "sector": "S1772-13",
@@ -371,7 +373,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 8
+   "anclas_damero": 8,
+   "descartados_damero": 0
   },
   {
    "sector": "S1772-14",
@@ -384,7 +387,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 0
+   "anclas_damero": 0,
+   "descartados_damero": 0
   },
   {
    "sector": "S1772-21",
@@ -397,7 +401,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 9
+   "anclas_damero": 9,
+   "descartados_damero": 0
   },
   {
    "sector": "S1772-22",
@@ -410,7 +415,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 25
+   "anclas_damero": 25,
+   "descartados_damero": 0
   },
   {
    "sector": "S1772-23",
@@ -423,7 +429,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 33
+   "anclas_damero": 33,
+   "descartados_damero": 0
   },
   {
    "sector": "S1772-24",
@@ -436,7 +443,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 5
+   "anclas_damero": 3,
+   "descartados_damero": 2
   },
   {
    "sector": "S1772-31",
@@ -449,7 +457,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 7
+   "anclas_damero": 6,
+   "descartados_damero": 1
   },
   {
    "sector": "S1772-32",
@@ -462,7 +471,8 @@
    "desvio_independiente_vigente": false,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 25
+   "anclas_damero": 23,
+   "descartados_damero": 2
   },
   {
    "sector": "S1772-33",
@@ -475,7 +485,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 23
+   "anclas_damero": 22,
+   "descartados_damero": 1
   },
   {
    "sector": "S1772-34",
@@ -488,7 +499,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 11
+   "anclas_damero": 9,
+   "descartados_damero": 2
   },
   {
    "sector": "S1772-41",
@@ -501,7 +513,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 0
+   "anclas_damero": 0,
+   "descartados_damero": 0
   },
   {
    "sector": "S1772-42",
@@ -514,7 +527,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 6
+   "anclas_damero": 5,
+   "descartados_damero": 1
   },
   {
    "sector": "S1772-43",
@@ -527,7 +541,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 11
+   "anclas_damero": 11,
+   "descartados_damero": 0
   },
   {
    "sector": "S1772-44",
@@ -540,7 +555,8 @@
    "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
-   "anclas_damero": 1
+   "anclas_damero": 1,
+   "descartados_damero": 0
   }
  ],
  "incidencias": [

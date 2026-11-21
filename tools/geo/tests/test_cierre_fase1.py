@@ -315,8 +315,8 @@ def test_un_cruce_de_damero_que_es_ancla_del_calce_vigente_deja_de_contar_como_c
     filtrado = controles_fuera_del_calce(damero, anclas={'X1', 'X4', 'H-pastora'})
 
     # Assert
-    assert filtrado['por_sector'] == [{'sector': 'S1', 'controles': 2, 'mediana_m': 40.0, 'anclas': 1},
-                                      {'sector': 'S2', 'controles': 0, 'mediana_m': None, 'anclas': 1}]
+    assert filtrado['por_sector'] == [{'sector': 'S1', 'controles': 2, 'mediana_m': 40.0, 'anclas': 1, 'descartados': 0},
+                                      {'sector': 'S2', 'controles': 0, 'mediana_m': None, 'anclas': 1, 'descartados': 0}]
     assert filtrado['controles_por_hito'] == [{'id': 'H-plaza', 'sector': 'S1'}]
     assert filtrado['evidencias'] == damero['evidencias']
     assert damero == original
@@ -377,3 +377,15 @@ def test_un_sector_con_loo_sobre_el_umbral_deja_el_criterio_pendiente_aunque_ten
     assert criterio['sectores_sin_control_independiente'] == []
     assert criterio['sectores_sin_loo_bajo_umbral'] == ['S2']
     assert criterio['cumplido'] is False
+
+
+def test_un_cruce_descartado_por_rotulo_no_es_control_ni_cuenta_como_ancla():
+    # Arrange
+    damero = damero_con_nodos()
+
+    # Act
+    filtrado = controles_fuera_del_calce(damero, anclas={'X1'}, descartados={'X2'})
+
+    # Assert
+    assert filtrado['por_sector'][0] == {'sector': 'S1', 'controles': 1, 'mediana_m': 50.0, 'anclas': 1, 'descartados': 1}
+    assert filtrado['por_sector'][1] == {'sector': 'S2', 'controles': 1, 'mediana_m': 7.0, 'anclas': 0, 'descartados': 0}

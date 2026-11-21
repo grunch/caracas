@@ -178,22 +178,25 @@ def _sectores_sin_control(sectores, filas, residuos, damero):
     return sorted(s['id'] for s in sectores if s['id'] in con_unidades and s['id'] not in cubiertos)
 
 
-def controles_fuera_del_calce(damero, anclas, ajuste_px=()):
+def controles_fuera_del_calce(damero, anclas, ajuste_px=(), descartados=()):
     """controles-calce-sectores.json sin los cruces ni los hitos que son anclas del calce vigente (`anclas`: sus id).
 
     `ajuste_px`: los puntos del ajuste en px del original; un cruce que cae sobre uno (una semilla) tampoco cuenta,
     aunque no figure entre las anclas. Un ancla es un punto del ajuste, no un control independiente: su desvío lo mide el LOO del calce
-    (calce-identidad.json), no este control. Por sector cuenta los controles que quedan, su mediana y las anclas.
+    (calce-identidad.json), no este control. `descartados`: cruces que no son ni ancla ni control (su esquina de 1936 es
+    un rótulo, no un cruce). Por sector cuenta los controles que quedan, su mediana, las anclas y los descartados.
     """
     filas = []
     for s in damero.get('por_sector', []):
-        nodos = [n for n in damero['nodos'] if n['sector'] == s['sector']]
+        todos = [n for n in damero['nodos'] if n['sector'] == s['sector']]
+        nodos = [n for n in todos if n['id'] not in descartados]
         libres = [n['desvio_m'] for n in fuera_del_ajuste([n for n in nodos if n['id'] not in anclas], ajuste_px)]
         filas.append({'sector': s['sector'], 'controles': len(libres),
                       'mediana_m': round(statistics.median(libres), 2) if libres else None,
-                      'anclas': len(nodos) - len(libres)})
+                      'anclas': len(nodos) - len(libres), 'descartados': len(todos) - len(nodos)})
     return {**damero, 'por_sector': filas,
-            'controles_por_hito': [h for h in damero.get('controles_por_hito', []) if h.get('id') not in anclas]}
+            'controles_por_hito': [h for h in damero.get('controles_por_hito', [])
+                                   if h.get('id') not in anclas and h.get('id') not in descartados]}
 
 
 JUICIOS = {'coincide', 'compatible', 'contradice'}  # los de `metodo` en verificacion-damero.json
@@ -313,7 +316,7 @@ def _leer(ruta):
 def _damero_del_sector(control, sector):
     fila = next((d for d in (control or {}).get('por_sector', []) if d['sector'] == sector), {})
     return {'controles_damero': fila.get('controles', 0), 'desvio_damero_mediana_m': fila.get('mediana_m'),
-            'anclas_damero': fila.get('anclas', 0)}
+            'anclas_damero': fila.get('anclas', 0), 'descartados_damero': fila.get('descartados', 0)}
 
 
 def main():
@@ -345,13 +348,13 @@ def main():
     # el hito de la Plaza Mayor cae entre las semillas, no sobre una: el informe de identidad lo nombra
     anclas |= set(identidad.get('nodos_omitidos_por_semilla', [])) | set(identidad.get('hitos_cubiertos_por_semillas', []))
     # una esquina de 1936 que es un rótulo y no un cruce no sirve de ancla ni de control
-    anclas |= {x['id'] for x in identidad.get('excluidos_por_rotulo', [])}
+    descartados = {x['id'] for x in identidad.get('excluidos_por_rotulo', [])}
     incidencias = enlazar_subtareas(_leer(c / 'incidencias.json')['incidencias'])
     damero = _leer(c / 'controles-calce-sectores.json') if (c / 'controles-calce-sectores.json').exists() else None
     correspondencias = _leer(c / 'correspondencias-unidades.json') if (c / 'correspondencias-unidades.json').exists() else None
     if correspondencias and (c / 'verificacion-damero.json').exists():
         correspondencias = {**correspondencias, 'verificacion_visual': leer_verificacion(_leer(c / 'verificacion-damero.json'))}
-    control = controles_fuera_del_calce(damero, anclas, ajuste_px) if damero else None
+    control = controles_fuera_del_calce(damero, anclas, ajuste_px, descartados) if damero else None
     if damero:
         documentos['controles-calce-sectores.json'] = damero
         documentos['correspondencias-unidades.json'] = correspondencias
@@ -365,8 +368,9 @@ def main():
                      'incidencias': dict(sorted(Counter(i['estado'] for i in incidencias).items()))}),
         ('por_sector', resumen_por_sector(filas, sectores)),
         ('calce_por_sector_nota', 'gcp_ajuste y loo_* miden el calce vigente. controles_damero y desvio_damero_mediana_m '
-                                  'cuentan solo los cruces de damero que no son anclas del calce (anclas_damero los que sí: '
-                                  'su error está en el LOO). controles_independientes y desvio_independiente_max_m cuentan los nodos '
+                                  'cuentan solo los cruces de damero que no son anclas del calce (anclas_damero los que sí, o caen sobre '
+                                  'una semilla: su error está en el LOO; descartados_damero los de esquina de 1936 que es un rótulo, '
+                                  'ni ancla ni control). controles_independientes y desvio_independiente_max_m cuentan los nodos '
                                   'curados que no caen sobre un punto del ajuste (a menos de 6 px); desvio_independiente_vigente '
                                   'dice si su desvío guardado se midió sobre este archivo de calce, y solo entonces cuentan en la puerta.'),
         ('calce_por_sector', [{**r, **_damero_del_sector(control, r['sector'])} for r in residuos]),
