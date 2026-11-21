@@ -14,6 +14,13 @@ Un control geométrico adicional del recorrido de Seminario intersecta una pared
 
 Las capturas están fuera de git, en `.cache/censo-1772/.cache/accesos/` del checkout principal. La simulación no garantiza continuidad del movimiento con cualquier velocidad: reproduce el paso de 0,25 m usado aquí. El resultado no cierra la fase 7 ni verifica los otros 38 frentes en el navegador.
 
+## Recorridos de calle del 21-11-2026 (1C)
+
+Se recorrieron los dos candidatos que quedaban. Datos: `datos-2026-11-21-ce374b8` (commit `ce374b8`), con el mismo `ciudad.pak` que B1772-001 (`c27f09ea…`). El pak no cubre los hitos, que salen de `src/`: entre `af0c664` (B1772-001) y `ce374b8`, `src/` solo cambia el Panteón (nace en 1843) y textos de fichas y marcas, y los hitos vivos en la época 1 son idénticos en los dos commits. El par recorrido es `ce374b8` + ese pak; su geometría de 1772 coincide con la de la baseline. Chromium 159.0.8154.6, 1200 × 900, época 1772 con la ciudad levantada. Se entró a pie en el inicio de cada sondeo, mirando hacia su final, y se sostuvo W 24 s. Además se tiró un rayo a 1,6 m contra la escena. Los scripts y las capturas, con su SHA-256, están en `.cache/recorridos-calle-1772/`, fuera de git. Registro: `recorridos_calle` en [accesos-primer-lote.json](accesos-primer-lote.json).
+
+- **Seminario, F1772-0010-3** (inicios a 54, 60 y 66 m): avance de 17,8–18,2 m con 1,0–2,4 m de desvío lateral. En el paso a paso del inicio a 60 m, a 2,5 m del inicio hay una fachada con ventana enrejada y sin puerta a un metro. Dos segundos después el caminante está 15 m más allá, sobre suelo de solar, frente a una pared interior. **Se atraviesa una pared visible**: confirma I1772-003. El rayo no mide las casas (su malla no se puede intersecar en la CPU), así que la prueba son las capturas.
+- **Catedral, F1772-0003-3** (inicios a 58, 66, 76, 86 y 94 m): en cuatro, el rayo choca con la malla visible `hitos` a 1,4–2,2 m y el caminante avanza 30–32,5 m sin desvío. **Se atraviesa la Catedral.** El quinto va por la calle. La rejilla de colisión se arma con las huellas del paquete y no con las mallas de hitos: nueva incidencia **I1772-013** → T33j.7a.
+
 ## Reproducción
 
 Guardar como `.cache/sondear-accesos.mjs` y ejecutar con Node desde un checkout con el paquete fijado por hash. El resultado detallado queda en `.cache/accesos-sondeos.json`.

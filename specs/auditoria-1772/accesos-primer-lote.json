@@ -891,16 +891,191 @@
     },
     {
       "frente": "F1772-0010-3",
-      "estado": "pendiente",
-      "registro": "recorridos_navegador",
+      "estado": "recorrido",
+      "datos": {
+        "release": "datos-2026-11-21-ce374b8",
+        "commit": "ce374b8",
+        "ciudad_pak_sha256": "c27f09ea3ef25d3ea20b980067c913c5d80b78ddf184c43768bb448c985b24e4",
+        "nota": "Código ce374b8, no el af0c664 de B1772-001. El ciudad.pak es el mismo (pak_sha256 de este registro), pero los hitos salen de src/, que el pak no cubre. Entre af0c664 y ce374b8, src/ solo cambia el Panteón (nace en 1843, época 2) y textos de fichas y marcas; los hitos vivos en la época 1 son idénticos en los dos commits (HITOS filtrados por nace/muere). La geometría de 1772 recorrida coincide con la de la baseline; el par código/datos recorrido es ce374b8 + c27f09ea."
+      },
+      "navegador": "159.0.8154.6",
+      "epoca": 1,
+      "metodo": "Entrada a pie en el inicio del sondeo, rumbo hacia su final, W sostenida 24 s (recorrer.mjs); rayo a 1,6 m contra la escena (rayos.mjs). Capturas en .cache/recorridos-calle-1772/, fuera de git.",
+      "tramos": [
+        {
+          "desde_inicio_frente_m": 54,
+          "avance_normal_m": 17.77,
+          "desvio_lateral_m": 1.044,
+          "primera_superficie_visible_m": null,
+          "objeto_visible": null,
+          "capturas": [
+            {
+              "archivo": "F1772-0010-3-54-antes.png",
+              "sha256": "7834b2c54679b2dca814d1970a058c79e4b8e7f57aac7560e703efc6ed1bc3bc"
+            },
+            {
+              "archivo": "F1772-0010-3-54-despues.png",
+              "sha256": "8c173131459c7882bfba3eb04b08ef4e9883a58cae670aa0420ffe05fa3345c3"
+            }
+          ]
+        },
+        {
+          "desde_inicio_frente_m": 60,
+          "avance_normal_m": 18.165,
+          "desvio_lateral_m": 2.418,
+          "primera_superficie_visible_m": null,
+          "objeto_visible": null,
+          "capturas": [
+            {
+              "archivo": "F1772-0010-3-60-antes.png",
+              "sha256": "ce525a7ac0371f1215f7d8e0760b5f71b883d9e224d1f8e077fb1743b5fadd97"
+            },
+            {
+              "archivo": "F1772-0010-3-60-despues.png",
+              "sha256": "f12811059daff674c14fb8006c6c995eb977e3a2976b30a239ba53e67fbf9672"
+            }
+          ]
+        },
+        {
+          "desde_inicio_frente_m": 66,
+          "avance_normal_m": 18.07,
+          "desvio_lateral_m": 2.236,
+          "primera_superficie_visible_m": null,
+          "objeto_visible": null,
+          "capturas": [
+            {
+              "archivo": "F1772-0010-3-66-antes.png",
+              "sha256": "d0e3136dacf96bfa5855cd6f691ae8a53e7fa0042ba05b65044093350247846c"
+            },
+            {
+              "archivo": "F1772-0010-3-66-despues.png",
+              "sha256": "80f96ba6ebfebc8d229b6499adbef8de4a26b2143dad16792c9dddebc083ff8d"
+            }
+          ]
+        }
+      ],
+      "paso_a_paso": {
+        "desde_inicio_frente_m": 60,
+        "capturas": [
+          {
+            "archivo": "F1772-0010-3-60-t00.png",
+            "sha256": "830d0ccf525c82e3106134ecb68f0ccd75be6adeb4612d9639b60b4d61540853"
+          },
+          {
+            "archivo": "F1772-0010-3-60-t01.png",
+            "sha256": "5c8f1d9d1ac3d85fae4c001082d18e71ed52dfd98f9ade9590e2348732dde6b1"
+          }
+        ],
+        "avance_m": [
+          2.5,
+          17.81
+        ]
+      },
+      "conclusion": "Se atraviesa una pared visible. A 2,5 m del inicio, una fachada con ventana enrejada y sin puerta queda a un metro; dos segundos después el caminante está 15 m más allá, sobre el suelo de solar del interior de la manzana, frente a una pared. Pasa en los tres inicios (avance 17,8–18,2 m, desvío lateral 1,0–2,4 m). El rayo no mide las casas (la malla no es intersecable en la CPU), así que la prueba son las capturas. Defecto confirmado: I1772-003 → T33j.7a.",
       "nota": "Seminario: recorrido en el navegador sin conclusión. Pared renderizada y colisión discordan (el rayo cruza la pared del techo 33084 y choca devuelve false); falta comprobarlo a nivel de calle. Contorno en I1772-003."
     },
     {
       "frente": "F1772-0003-3",
-      "estado": "pendiente",
-      "registro": null,
-      "nota": "Catedral: candidato del sondeo sin recorrido visual."
+      "estado": "recorrido",
+      "datos": {
+        "release": "datos-2026-11-21-ce374b8",
+        "commit": "ce374b8",
+        "ciudad_pak_sha256": "c27f09ea3ef25d3ea20b980067c913c5d80b78ddf184c43768bb448c985b24e4",
+        "nota": "Código ce374b8, no el af0c664 de B1772-001. El ciudad.pak es el mismo (pak_sha256 de este registro), pero los hitos salen de src/, que el pak no cubre. Entre af0c664 y ce374b8, src/ solo cambia el Panteón (nace en 1843, época 2) y textos de fichas y marcas; los hitos vivos en la época 1 son idénticos en los dos commits (HITOS filtrados por nace/muere). La geometría de 1772 recorrida coincide con la de la baseline; el par código/datos recorrido es ce374b8 + c27f09ea."
+      },
+      "navegador": "159.0.8154.6",
+      "epoca": 1,
+      "metodo": "Entrada a pie en el inicio del sondeo, rumbo hacia su final, W sostenida 24 s (recorrer.mjs); rayo a 1,6 m contra la escena (rayos.mjs). Capturas en .cache/recorridos-calle-1772/, fuera de git.",
+      "tramos": [
+        {
+          "desde_inicio_frente_m": 58,
+          "avance_normal_m": 30.041,
+          "desvio_lateral_m": 0,
+          "primera_superficie_visible_m": 2.235,
+          "objeto_visible": "hitos",
+          "capturas": [
+            {
+              "archivo": "F1772-0003-3-58-antes.png",
+              "sha256": "3f0723ca7777517da005f0309ce22d2cb054da02ce576837a8a4d357065eaeb3"
+            },
+            {
+              "archivo": "F1772-0003-3-58-despues.png",
+              "sha256": "194050ba06aad458a6ee2bb9442de8f76ddc37c10d473aff18905529c08e781e"
+            }
+          ]
+        },
+        {
+          "desde_inicio_frente_m": 66,
+          "avance_normal_m": 32.541,
+          "desvio_lateral_m": 0,
+          "primera_superficie_visible_m": 2.07,
+          "objeto_visible": "hitos",
+          "capturas": [
+            {
+              "archivo": "F1772-0003-3-66-antes.png",
+              "sha256": "a28e87cd127123ebfbfc0c33fbd1b4ef66a490a8f272e4aa9260110cf1c89bc2"
+            },
+            {
+              "archivo": "F1772-0003-3-66-despues.png",
+              "sha256": "adcb1ef6df6a91ebfc85cef70b0e688d6f1a19b5acdd1034fdd6f8dd6c591539"
+            }
+          ]
+        },
+        {
+          "desde_inicio_frente_m": 76,
+          "avance_normal_m": 32.542,
+          "desvio_lateral_m": 0,
+          "primera_superficie_visible_m": 1.803,
+          "objeto_visible": "hitos",
+          "capturas": [
+            {
+              "archivo": "F1772-0003-3-76-antes.png",
+              "sha256": "38acd08b76f68375700e83bdcd56017ff43e45d892db5ce98df937a4a1f65b3a"
+            },
+            {
+              "archivo": "F1772-0003-3-76-despues.png",
+              "sha256": "843b1f782d8258ae204bac6e0159b6755f2d106f631facc095bbdaf8ef489245"
+            }
+          ]
+        },
+        {
+          "desde_inicio_frente_m": 86,
+          "avance_normal_m": 30.041,
+          "desvio_lateral_m": 0,
+          "primera_superficie_visible_m": 1.356,
+          "objeto_visible": "hitos",
+          "capturas": [
+            {
+              "archivo": "F1772-0003-3-86-antes.png",
+              "sha256": "88c72949040a771a154d5edff8f68341d628822705d51ec69ada2e0ea84375c2"
+            },
+            {
+              "archivo": "F1772-0003-3-86-despues.png",
+              "sha256": "5cb630108d43678ec2af88f1a498065aba029b707d31917bdb7af9d419e20694"
+            }
+          ]
+        },
+        {
+          "desde_inicio_frente_m": 94,
+          "avance_normal_m": 30.041,
+          "desvio_lateral_m": 0,
+          "primera_superficie_visible_m": 42.909,
+          "objeto_visible": "Mesh",
+          "capturas": [
+            {
+              "archivo": "F1772-0003-3-94-antes.png",
+              "sha256": "5447dbf6dd2915058e67dd16aa04fc4529f492ae938ff597ba154609eae3cac4"
+            },
+            {
+              "archivo": "F1772-0003-3-94-despues.png",
+              "sha256": "6ee1365994c9a10c9ee00f73a5b88e86d2b38cf41b774d4c2c3cb8fb38cde48a"
+            }
+          ]
+        }
+      ],
+      "conclusion": "Se atraviesa la Catedral. En 4 de 5 inicios el rayo choca con la malla visible «hitos» a 1,4–2,2 m y el caminante avanza 30–32,5 m sin desvío, hasta el interior del conjunto o la calle siguiente. El quinto (94 m) va por la calle y no atraviesa nada. La rejilla de colisión usa las huellas del paquete y no las mallas de hitos. Defecto confirmado: I1772-013 → T33j.7a.",
+      "nota": "Catedral: candidato del sondeo, recorrido el 21-11-2026."
     }
   ],
-  "estados_recorrido": "recorrido = recorrido a nivel de calle con conclusión registrada; pendiente = sin recorrido o sin conclusión. Lo lee la puerta 1D de tools/geo/cierre_fase1.py."
+  "estados_recorrido": "recorrido = recorrido a nivel de calle con conclusión registrada (el defecto que muestre va a su incidencia); pendiente = sin recorrido o sin conclusión. Lo lee la puerta 1D de tools/geo/cierre_fase1.py."
 }

@@ -106,7 +106,7 @@
       "baseline": "B1772-001",
       "pr_correccion": null,
       "prueba_regresion": "pendiente diagnóstico; reproducir diferencia antes de corregir",
-      "verificacion_acceso": "pendiente recorrido a pie",
+      "verificacion_acceso": "recorrido a pie el 21-11-2026 sobre datos-2026-11-21-ce374b8 (código ce374b8 con el mismo ciudad.pak que B1772-001; src/ entre af0c664 y ce374b8 solo cambia el Panteón, desde 1843, y los hitos de la época 1 son idénticos): se atraviesa la fachada hacia el solar interior; ver recorridos_calle en accesos-primer-lote.json",
       "diagnostico_geometrico": "diagnostico-huellas.json",
       "reproduccion_aislada": "La cara tomada de tramos.json produce contorno ajustado de ocho vértices con entrante occidental; rechaza reparto vectorial aun sin píxeles interiores faltantes. La cara curada de cuatro lados lo admite. Se mantienen etiquetas simplificadas; no se afirma reproducción integral del pipeline.",
       "comprobacion_acceso": "Recorrido del controlador y capturas antes/después en accesos-primer-lote.json y accesos-primer-lote.md; penetración en contorno de referencia confirmada, alcance del patio no certificado.",
@@ -362,6 +362,34 @@
       "criterio_aceptacion": "Repetir cálculo tras resolver huellas, revisar casos visualmente y conservar calles, patios y ocupación aprobados.",
       "subtareas": [
         "T33j.6a"
+      ]
+    },
+    {
+      "id": "I1772-013",
+      "manzana": "M1772-0003",
+      "frente": "F1772-0003-3",
+      "original_bbox": [
+        970,
+        859,
+        1036,
+        926
+      ],
+      "captura": "F1772-0003-3-66-antes.png",
+      "captura_bbox": null,
+      "categoria": "acceso_indebido",
+      "estado": "confirmado_visual",
+      "prioridad": "P1",
+      "observacion": "En el modo a pie se atraviesa la fachada de la Catedral: el rayo a 1,6 m choca con la malla visible «hitos» a 1,4–2,2 m y el caminante sigue 30–32,5 m sin desvío.",
+      "causa": "La rejilla de colisión del modo a pie (rejillaDeCasas) se arma con las huellas del paquete; las mallas de hitos no entran en ella.",
+      "fases_candidatas": [
+        7
+      ],
+      "baseline": "B1772-001",
+      "pr_correccion": null,
+      "prueba_regresion": "pendiente: un recorrido contra un hito debe detenerse en su cara visible",
+      "verificacion_acceso": "recorrido a pie el 21-11-2026 sobre datos-2026-11-21-ce374b8 (código ce374b8 con el mismo ciudad.pak que B1772-001; src/ entre af0c664 y ce374b8 solo cambia el Panteón, desde 1843, y los hitos de la época 1 son idénticos); recorridos_calle en accesos-primer-lote.json",
+      "subtareas": [
+        "T33j.7a"
       ]
     }
   ]
