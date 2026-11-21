@@ -35,6 +35,15 @@
    "cumplido": true,
    "sin_subtarea": []
   },
+  "accesos_recorridos_a_pie": {
+   "cumplido": false,
+   "frentes_con_candidatos": 3,
+   "recorridos": 1,
+   "pendientes": [
+    "F1772-0003-3",
+    "F1772-0010-3"
+   ]
+  },
   "fase_1_cerrable": false
  },
  "totales": {

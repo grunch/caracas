@@ -167,13 +167,23 @@ def _sectores_sin_control(sectores, filas, residuos, damero):
 JUICIOS = {'coincide', 'compatible', 'contradice'}  # los de `metodo` en verificacion-damero.json
 
 
-def _juicio_vigente(r, clases, entrada_sha256):
-    """Un juicio de correspondencia cuenta solo si es de la unidad, la clase y la ciudad de la clasificación actual."""
-    return (r.get('grupo') == 'correspondencias' and r.get('objeto') in clases and r.get('clase') == clases[r['objeto']]
-            and r.get('entrada_sha256') == entrada_sha256)
+def _recortes_vigentes(*documentos):
+    """{nombre del PNG: sha256} de las evidencias regeneradas; el PNG resume calce, trazado, censo y ciudad."""
+    return {Path(e['archivo_local']).name: e.get('sha256')
+            for d in documentos if d for e in d.get('evidencias', []) if e.get('archivo_local')}
 
 
-def _criterio_correspondencia(filas, correspondencias):
+def _juicio_vigente(r, clases, entrada_sha256, recortes):
+    """Un juicio cuenta solo si su recorte es el regenerado (mismo SHA-256) y, en correspondencias, si además es
+    de la unidad, la clase y la ciudad de la clasificación actual."""
+    if not r.get('sha256') or recortes.get(r.get('archivo')) != r['sha256']:
+        return False
+    if r.get('grupo') != 'correspondencias':
+        return True
+    return r.get('objeto') in clases and r.get('clase') == clases[r['objeto']] and r.get('entrada_sha256') == entrada_sha256
+
+
+def _criterio_correspondencia(filas, correspondencias, damero=None):
     if not correspondencias:
         return {'cumplido': False, 'clasificadas': 0, 'provisionales': len(filas), 'trasladado_a': 'T33j.2a'}
     clases = {u['unidad']: u['clase'] for u in correspondencias['unidades'] if u.get('clase')}
@@ -181,13 +191,36 @@ def _criterio_correspondencia(filas, correspondencias):
     fuera = sorted({r.get('juicio') for r in muestra} - JUICIOS, key=str)
     if fuera:
         raise ValueError(f'juicios fuera del método: {fuera}')
-    juicios = [r for r in muestra if r.get('grupo') == 'correspondencias']
-    vigentes = [r for r in juicios if _juicio_vigente(r, clases, correspondencias.get('entrada_sha256'))]
-    contradicciones = [r for r in vigentes + [r for r in muestra if r.get('grupo') != 'correspondencias'] if r['juicio'] == 'contradice']
-    cumplido = set(clases) >= {f['unidad'] for f in filas} and bool(vigentes) and not contradicciones
+    recortes = _recortes_vigentes(correspondencias, damero)
+    vigentes = [r for r in muestra if _juicio_vigente(r, clases, correspondencias.get('entrada_sha256'), recortes)]
+    de_correspondencia = [r for r in vigentes if r.get('grupo') == 'correspondencias']
+    contradicciones = [r for r in vigentes if r['juicio'] == 'contradice']
+    desfasados = len(muestra) - len(vigentes)  # hay que volver a juzgarlos: ni aprueban ni se descartan en silencio
+    cumplido = (set(clases) >= {f['unidad'] for f in filas} and bool(de_correspondencia)
+                and not contradicciones and not desfasados)
     return {'cumplido': cumplido, 'clasificadas': len(clases), 'clases': correspondencias['resumen']['clases'],
-            'muestra_visual': len(vigentes), 'muestra_desfasada': len(juicios) - len(vigentes),
+            'muestra_visual': len(de_correspondencia), 'muestra_desfasada': desfasados,
             'contradicciones': len(contradicciones), **({} if cumplido else {'trasladado_a': 'T33j.2a'})}
+
+
+ESTADOS_RECORRIDO = {'recorrido', 'pendiente'}
+
+
+def _criterio_accesos(accesos):
+    """Specs/08 1C: cada frente con candidato de acceso se recorre a nivel de calle con conclusión registrada.
+
+    El sondeo solo propone; `recorridos_calle` dice, por frente, si el recorrido concluyó (`recorrido`) o no.
+    """
+    if not accesos:
+        return {'cumplido': False, 'sin_registro_de_accesos': True}
+    estados = {r['frente']: r.get('estado') for r in accesos.get('recorridos_calle', [])}
+    fuera = sorted(set(estados.values()) - ESTADOS_RECORRIDO, key=str)
+    if fuera:
+        raise ValueError(f'estados de recorrido fuera del registro: {fuera}')
+    con_candidatos = [f['frente'] for f in accesos['frentes'] if f.get('candidatos_entrada_profunda')]
+    pendientes = [f for f in con_candidatos if estados.get(f) != 'recorrido']
+    return {'cumplido': not pendientes, 'frentes_con_candidatos': len(con_candidatos),
+            'recorridos': len(con_candidatos) - len(pendientes), 'pendientes': pendientes}
 
 
 def leer_verificacion(verificacion):
@@ -212,11 +245,12 @@ def _criterio_area(filas, sectores):
     return {'cumplido': bool(sectores) and not pendientes, 'sectores': len(sectores), 'sectores_pendientes': pendientes}
 
 
-def puerta_de_salida(filas, sectores, residuos, incidencias, damero=None, correspondencias=None):
+def puerta_de_salida(filas, sectores, residuos, incidencias, damero=None, correspondencias=None, accesos=None):
     """Criterios de 1D con su cumplimiento. `fase_1_cerrable` exige todos; los pendientes quedan a la vista.
 
     `damero`: controles-calce-sectores.json (por_sector, controles_por_hito); `correspondencias`:
-    correspondencias-unidades.json con su verificación visual. Sin ellos, los dos criterios quedan pendientes.
+    correspondencias-unidades.json con su verificación visual; `accesos`: accesos-primer-lote.json con sus
+    recorridos de calle. Sin ellos, sus criterios quedan pendientes.
     """
     sin_control = _sectores_sin_control(sectores, filas, residuos, damero)
     sin_subtarea = [i['id'] for i in incidencias if i['sin_subtarea'] and i['estado'] not in ESTADOS_SIN_DEFECTO]
@@ -224,11 +258,12 @@ def puerta_de_salida(filas, sectores, residuos, incidencias, damero=None, corres
         'area_recorrida': _criterio_area(filas, sectores),
         'unidades_clasificadas_y_leidas': {'cumplido': all(f['lectura'] and f['ocupacion'] for f in filas),
                                            'unidades': len(filas)},
-        'correspondencia_clasificada_por_unidad': _criterio_correspondencia(filas, correspondencias),
+        'correspondencia_clasificada_por_unidad': _criterio_correspondencia(filas, correspondencias, damero),
         'controles_de_calce_por_sector': {'cumplido': not sin_control, 'sectores_sin_control_independiente': sin_control,
                                           'sectores_sin_unidades': sorted({s['id'] for s in sectores} - {f['sector'] for f in filas}),
                                           **({} if not sin_control else {'trasladado_a': 'T33j.2a'})},
         'hallazgos_confirmados_con_subtarea': {'cumplido': not sin_subtarea, 'sin_subtarea': sin_subtarea},
+        'accesos_recorridos_a_pie': _criterio_accesos(accesos),
     }
     return {**criterios, 'fase_1_cerrable': all(c['cumplido'] for c in criterios.values())}
 
@@ -265,7 +300,8 @@ def main():
         documentos['correspondencias-unidades.json'] = correspondencias
     informe = OrderedDict([
         ('alcance', 'Conteos derivados de los JSON del inventario; no certifica fidelidad histórica ni cierra incidencias.'),
-        ('puerta_de_salida', puerta_de_salida(filas, sectores, residuos, incidencias, damero, correspondencias)),
+        ('puerta_de_salida', puerta_de_salida(filas, sectores, residuos, incidencias, damero, correspondencias,
+                                              documentos.get('accesos-primer-lote.json'))),
         ('totales', {'unidades': len(filas), 'ocupacion': dict(sorted(Counter(f['ocupacion'] for f in filas).items())),
                      'lectura': dict(sorted(Counter(f['lectura'] for f in filas).items())),
                      'correspondencia': dict(sorted(Counter(f['correspondencia'] for f in filas).items())),

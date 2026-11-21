@@ -18,15 +18,30 @@ def sectores():
 
 
 SHA_CIUDAD = 'a' * 64
+SHA_X1, SHA_U1 = 'c' * 64, 'd' * 64
+
+
+def damero_vigente():
+    return {'por_sector': [], 'controles_por_hito': [], 'evidencias': [{'archivo_local': 'controles/S1-X1.png', 'sha256': SHA_X1}]}
+
+
+def accesos(estados):
+    """F1 y F3 con candidato de entrada profunda, F2 sin candidatos; `estados`: {frente: estado del recorrido de calle}."""
+    return {'frentes': [{'frente': 'F1', 'candidatos_entrada_profunda': [{'avance_normal_m': 20}]},
+                        {'frente': 'F2', 'candidatos_entrada_profunda': []},
+                        {'frente': 'F3', 'candidatos_entrada_profunda': [{'avance_normal_m': 30}]}],
+            'recorridos_calle': [{'frente': f, 'estado': e, 'nota': 'test'} for f, e in estados.items()]}
 
 
 def correspondencias_verificadas():
     return {'entrada_sha256': SHA_CIUDAD, 'resumen': {'clases': {'uno_a_uno': 1, 'ausente': 1, 'vacio_coincide': 1}},
             'unidades': [{'unidad': 'U0001', 'clase': 'uno_a_uno'}, {'unidad': 'U0002', 'clase': 'vacio_coincide'},
                          {'unidad': 'U0003', 'clase': 'ausente'}],
+            'evidencias': [{'archivo_local': 'correspondencias/uno_a_uno-U0001.png', 'sha256': SHA_U1}],
             'verificacion_visual': [
-                {'grupo': 'controles', 'objeto': 'X1', 'juicio': 'compatible'},
-                {'grupo': 'correspondencias', 'objeto': 'U0001', 'clase': 'uno_a_uno', 'entrada_sha256': SHA_CIUDAD, 'juicio': 'coincide'},
+                {'grupo': 'controles', 'archivo': 'S1-X1.png', 'sha256': SHA_X1, 'objeto': 'X1', 'juicio': 'compatible'},
+                {'grupo': 'correspondencias', 'archivo': 'uno_a_uno-U0001.png', 'sha256': SHA_U1, 'objeto': 'U0001',
+                 'clase': 'uno_a_uno', 'entrada_sha256': SHA_CIUDAD, 'juicio': 'coincide'},
             ]}
 
 
@@ -142,6 +157,7 @@ def test_puerta_de_salida_no_declara_cumplido_lo_que_sigue_pendiente():
     assert puerta['controles_de_calce_por_sector'] == {'cumplido': False, 'sectores_sin_control_independiente': ['S2'],
                                                        'sectores_sin_unidades': [], 'trasladado_a': 'T33j.2a'}
     assert puerta['hallazgos_confirmados_con_subtarea'] == {'cumplido': True, 'sin_subtarea': []}
+    assert puerta['accesos_recorridos_a_pie'] == {'cumplido': False, 'sin_registro_de_accesos': True}
     assert puerta['fase_1_cerrable'] is False
 
 
@@ -150,24 +166,25 @@ def test_puerta_de_salida_se_cumple_con_controles_de_damero_y_correspondencias_v
     tres = sectores() + [sector('S3', [0, 100, 100, 200], 0)]
     residuos = residuos_por_sector([], [], tres)
     enlazadas = enlazar_subtareas([{'id': 'I1772-001', 'estado': 'confirmado_visual'}])
-    damero = {'por_sector': [{'sector': 'S1', 'controles': 4, 'mediana_m': 12.0}, {'sector': 'S2', 'controles': 0, 'mediana_m': None}],
+    damero = {**damero_vigente(), 'por_sector': [{'sector': 'S1', 'controles': 4, 'mediana_m': 12.0}, {'sector': 'S2', 'controles': 0, 'mediana_m': None}],
               'controles_por_hito': [{'sector': 'S2'}]}
     correspondencias = correspondencias_verificadas()
-    puerta = puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias)
+    recorridos = accesos({'F1': 'recorrido', 'F3': 'recorrido'})
+    puerta = puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias, recorridos)
     assert puerta['area_recorrida'] == {'cumplido': True, 'sectores': 3, 'sectores_pendientes': []}
     assert puerta['controles_de_calce_por_sector'] == {'cumplido': True, 'sectores_sin_control_independiente': [], 'sectores_sin_unidades': ['S3']}
     assert puerta['correspondencia_clasificada_por_unidad'] == {
         'cumplido': True, 'clasificadas': 3, 'muestra_visual': 1, 'muestra_desfasada': 0, 'contradicciones': 0,
         'clases': {'uno_a_uno': 1, 'ausente': 1, 'vacio_coincide': 1}}
+    assert puerta['accesos_recorridos_a_pie'] == {'cumplido': True, 'frentes_con_candidatos': 2, 'recorridos': 2, 'pendientes': []}
     assert puerta['fase_1_cerrable'] is True
-    correspondencias['verificacion_visual'].append({'grupo': 'controles', 'objeto': 'X2', 'juicio': 'contradice'})
-    assert puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias)['fase_1_cerrable'] is False
+    correspondencias['verificacion_visual'][0] = {**correspondencias['verificacion_visual'][0], 'juicio': 'contradice'}
+    assert puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias, recorridos)['fase_1_cerrable'] is False
 
 
 def _criterio(correspondencias):
     filas = cobertura_unidades(unidades(), lecturas(), contraste())
-    puerta = puerta_de_salida(filas, sectores(), residuos_por_sector([], [], sectores()), [], {'por_sector': [], 'controles_por_hito': []},
-                              correspondencias)
+    puerta = puerta_de_salida(filas, sectores(), residuos_por_sector([], [], sectores()), [], damero_vigente(), correspondencias)
     return puerta['correspondencia_clasificada_por_unidad']
 
 
@@ -216,3 +233,42 @@ def test_resumen_de_la_verificacion_sale_de_las_filas():
     assert leer_verificacion(bien) == filas
     with pytest.raises(ValueError, match='resumen'):
         leer_verificacion({'recortes': filas, 'resumen': {'revisados': 3, 'coincide': 2, 'compatible': 1, 'contradice': 0}})
+
+
+@pytest.mark.parametrize('indice, cambio', [
+    (1, {'sha256': 'e' * 64}),     # el recorte de la unidad se regeneró con otra geometría
+    (0, {'sha256': 'e' * 64}),     # el recorte del control cambió: tampoco vale su juicio viejo
+    (1, {'archivo': 'otro.png'}),  # el recorte juzgado ya no está entre las evidencias
+])
+def test_juicios_de_un_recorte_que_cambio_quedan_desfasados_y_la_correspondencia_no_se_cumple(indice, cambio):
+    c = correspondencias_verificadas()
+    c['verificacion_visual'][indice] = {**c['verificacion_visual'][indice], **cambio}
+    criterio = _criterio(c)
+    assert criterio['cumplido'] is False and criterio['muestra_desfasada'] == 1
+
+
+def test_contradiccion_de_un_recorte_obsoleto_no_cuenta_pero_exige_rejuzgar():
+    c = correspondencias_verificadas()
+    c['verificacion_visual'][0] = {**c['verificacion_visual'][0], 'juicio': 'contradice', 'sha256': 'e' * 64}
+    criterio = _criterio(c)
+    assert criterio['contradicciones'] == 0 and criterio['muestra_desfasada'] == 1 and criterio['cumplido'] is False
+
+
+@pytest.mark.parametrize('estados, pendientes', [
+    ({'F1': 'recorrido'}, ['F3']),                          # F3 sin recorrido de calle
+    ({'F1': 'recorrido', 'F3': 'pendiente'}, ['F3']),       # recorrido sin conclusión (p. ej. pared y colisión discordantes)
+    ({'F1': 'pendiente', 'F3': 'pendiente'}, ['F1', 'F3']),
+])
+def test_accesos_quedan_pendientes_hasta_recorrer_cada_candidato_a_nivel_de_calle(estados, pendientes):
+    filas = cobertura_unidades(unidades(), lecturas(), contraste())
+    puerta = puerta_de_salida(filas, sectores(), residuos_por_sector([], [], sectores()), [], damero_vigente(),
+                              correspondencias_verificadas(), accesos(estados))
+    assert puerta['accesos_recorridos_a_pie'] == {'cumplido': False, 'frentes_con_candidatos': 2,
+                                                  'recorridos': 2 - len(pendientes), 'pendientes': pendientes}
+    assert puerta['fase_1_cerrable'] is False
+
+
+def test_accesos_rechaza_estados_fuera_del_registro():
+    filas = cobertura_unidades(unidades(), lecturas(), contraste())
+    with pytest.raises(ValueError, match='casi'):
+        puerta_de_salida(filas, sectores(), [], [], None, None, accesos({'F1': 'casi'}))

@@ -881,5 +881,26 @@
         ]
       }
     ]
-  }
+  },
+  "recorridos_calle": [
+    {
+      "frente": "F1772-0005-3",
+      "estado": "recorrido",
+      "registro": "recorridos_navegador",
+      "nota": "Camejo–Cruz Verde: se avanza al retranqueo y se termina frente a una pared. Concluye que el hueco permite penetración sin dar a un patio; el cierre queda en I1772-001/002 → T33j.7a."
+    },
+    {
+      "frente": "F1772-0010-3",
+      "estado": "pendiente",
+      "registro": "recorridos_navegador",
+      "nota": "Seminario: recorrido en el navegador sin conclusión. Pared renderizada y colisión discordan (el rayo cruza la pared del techo 33084 y choca devuelve false); falta comprobarlo a nivel de calle. Contorno en I1772-003."
+    },
+    {
+      "frente": "F1772-0003-3",
+      "estado": "pendiente",
+      "registro": null,
+      "nota": "Catedral: candidato del sondeo sin recorrido visual."
+    }
+  ],
+  "estados_recorrido": "recorrido = recorrido a nivel de calle con conclusión registrada; pendiente = sin recorrido o sin conclusión. Lo lee la puerta 1D de tools/geo/cierre_fase1.py."
 }

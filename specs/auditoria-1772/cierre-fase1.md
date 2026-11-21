@@ -9,13 +9,14 @@ Fecha: 20-11-2026. T33j.1q. Generado por `tools/geo/cierre_fase1.py` a partir de
 | 100 % del área recorrida | 16 sectores con barrido general registrado y todas sus unidades declaradas censadas y leídas; S1772-41 es rural y fluvial en el original y queda con 0 unidades a propósito | sí |
 | Cada unidad clasificada y leída | 292 registros, cada uno con ocupación del original y exactamente una lectura individual (bordes 147, sin cara única 78, restantes 67) | sí |
 | Hallazgos confirmados con subtarea | 12 de 12 incidencias enlazadas a subtareas de fases 2–8 (campo `subtareas` en `incidencias.json`) | sí |
-| Correspondencia original ⇄ sistema por unidad | 292 clasificadas bajo el [calce de control](controles-damero.md): ausente 168, desplazada_o_parcial 6, uno_a_uno 42 (provisionales), vacio_coincide 76; 3 juicios de correspondencia vigentes, y U1772-0055 contradice su clase (un uno a uno clasificado como desplazada_o_parcial) | **no** → T33j.2a |
+| Correspondencia original ⇄ sistema por unidad | 292 clasificadas bajo el [calce de control](controles-damero.md): ausente 168, desplazada_o_parcial 6, uno_a_uno 42 (provisionales), vacio_coincide 76; 3 juicios de correspondencia vigentes (atados a la unidad, la clase, el `entrada_sha256` y el SHA-256 del recorte regenerado; un juicio de recorte cambiado queda desfasado y obliga a rejuzgar), y U1772-0055 contradice su clase (un uno a uno clasificado como desplazada_o_parcial) | **no** → T33j.2a |
 | Controles de calce independientes por sector | 168 cruces por identidad de damero en 14 sectores más 3 hitos (Plaza Mayor, Candelaria, La Pastora); el TPS se desplaza por cuadras fuera del núcleo | sí, con límites |
+| Candidatos de acceso recorridos a nivel de calle (1C) | 3 frentes con candidato de entrada profunda; `recorridos_calle` de [accesos-primer-lote.json](accesos-primer-lote.json) registra 1 recorrido con conclusión (Camejo–Cruz Verde F1772-0005-3) y 2 pendientes: Catedral F1772-0003-3 (sin recorrido) y Seminario F1772-0010-3 (recorrido sin conclusión: pared y colisión discordan) | **no** |
 
-**Decisión:** la fase 1 sigue **abierta**: `fase_1_cerrable: false` en el JSON (4 de 5 criterios). Faltan:
+**Decisión:** la fase 1 sigue **abierta**: `fase_1_cerrable: false` en el JSON (4 de 6 criterios). Faltan:
 
 1. **Correspondencia por unidad.** El recorte de U1772-0055 contradice su clase; las 42 uno a uno son provisionales hasta confirmar cada pareja por identidad. Se resuelve con T33j.2a y una nueva muestra visual atada a la clasificación vigente.
-2. **Recorrido a nivel de calle de los candidatos de acceso (1C).** Catedral F1772-0003-3 sigue «pendiente de recorrido visual», y el choque de Seminario F1772-0010-3 no está resuelto ([accesos-primer-lote.md](accesos-primer-lote.md)): el sondeo encontró los candidatos, pero los detectores no reemplazan el recorrido.
+2. **Recorrido a nivel de calle de los candidatos de acceso (1C).** Catedral F1772-0003-3 sigue «pendiente de recorrido visual», y el choque de Seminario F1772-0010-3 no está resuelto ([accesos-primer-lote.md](accesos-primer-lote.md)): el sondeo encontró los candidatos, pero los detectores no reemplazan el recorrido. La puerta lo calcula (`accesos_recorridos_a_pie`): un frente cuenta solo con `estado: recorrido` en `recorridos_calle`.
 
 Los controles por sector se cumplen como lo pide 1B/1D (controlar cada sector), no como aprobación de geometría: localizan los defectos y miden el calce; corregirlos es la fase 2. Nada autoriza a generar casas desde cajas.
 
