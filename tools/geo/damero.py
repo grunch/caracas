@@ -214,7 +214,8 @@ def clasificar_correspondencias(unidades, cuadras, umbral=0.5, minimo=0.2):
         if u['ocupacion'] in OCUPACIONES_VACIAS:
             clase = 'adicional_sobre_vacio' if any(f['fraccion_unidad'] >= minimo for f in filas) else 'vacio_coincide'
         elif len(dentro) == 1:
-            clase = 'fusionada' if len(reclamos[dentro[0]['cuadra']]) > 1 else 'uno_a_uno'
+            c = dentro[0]['cuadra']
+            clase = 'fusionada' if len(reclamos[c]) > 1 or c in repartidas else 'uno_a_uno'
         elif len(dentro) > 1:
             clase = 'dividida'
         elif any(f['cuadra'] in repartidas and f['fraccion_unidad'] >= CONTENIDA for f in filas):

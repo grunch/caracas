@@ -209,3 +209,16 @@ def test_dos_unidades_enteras_dentro_de_una_cuadra_que_se_reparten_son_fusionada
 
     # Assert
     assert {f['unidad']: f['clase'] for f in filas} == {'U1': 'fusionada', 'U2': 'fusionada', 'U3': 'desplazada_o_parcial'}
+
+
+def test_en_una_cuadra_repartida_las_dos_unidades_son_fusionadas_aunque_una_pase_el_umbral():
+    # Arrange: U1 cubre el 60 % de C1 y U2 el 35 %, las dos enteras dentro de ella
+    unidades = [{'id': 'U1', 'ocupacion': 'continua', 'poligono': box(0, 0, 12, 10)},
+                {'id': 'U2', 'ocupacion': 'continua', 'poligono': box(13, 0, 20, 10)}]
+    cuadras = [{'id': 'C1', 'poligono': box(0, 0, 20, 10)}]
+
+    # Act
+    filas, _ = clasificar_correspondencias(unidades, cuadras)
+
+    # Assert
+    assert {f['unidad']: f['clase'] for f in filas} == {'U1': 'fusionada', 'U2': 'fusionada'}
