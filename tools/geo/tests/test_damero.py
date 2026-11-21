@@ -57,6 +57,15 @@ def test_reticula_1936_indexa_por_recorrido_y_excluye_ambiguedades():
     assert len(ret) == 25
 
 
+def test_reticula_1936_no_propaga_indices_desde_una_esquina_ambigua():
+    # O da a A el índice (1, 0); C, al sur de A, le devuelve otro: A queda ambigua. B, al este de A, heredaba
+    # de ella (2, 0) aunque ninguna ruta sin ambigüedad lo sostiene; ahora queda sin índice
+    puntos = [(0.0, 0.0), (150.0, 50.0), (250.0, 50.0), (200.0, 200.0)]   # O, A, B, C
+    ret = reticula_1936(puntos, 0, angulo_grados=0.0, rango_px=(90, 160))
+    assert 2 not in ret.values()
+    assert ret == {(0, 0): 0, (1, 0): 1}
+
+
 def test_controles_comparan_identidad_con_calce_en_metros_sin_mutar():
     puntos = esquinas_1936(); origen = puntos.index(girar(0, 0))
     ret = reticula_1936(puntos, origen, angulo_grados=10.0)
@@ -104,6 +113,16 @@ def test_clasificar_correspondencias_cubre_las_cinco_clases_y_los_vacios():
                       'U6': 'adicional_sobre_vacio', 'U7': 'vacio_coincide', 'U8': 'desplazada_o_parcial'}
     assert next(f for f in filas if f['unidad'] == 'U1')['cuadras'] == [{'cuadra': 1, 'fraccion_cuadra': 1.0, 'fraccion_unidad': 0.64}]
     assert sobrantes == [7]
+
+
+def test_clasificar_compara_el_umbral_antes_de_redondear():
+    # 49,6 % de la cuadra dentro de la unidad redondea a 0,50 pero no llega al umbral; el 50 % justo sí
+    casi = [{'id': 'U1', 'ocupacion': 'continua', 'poligono': box(0, 0, 10, 10)}]
+    filas, _ = clasificar_correspondencias(casi, [{'id': 1, 'poligono': box(0, 0, 10, 100 / 4.96)}])
+    assert filas[0]['clase'] == 'desplazada_o_parcial'
+    assert filas[0]['cuadras'][0]['fraccion_cuadra'] == 0.5          # el informe sigue redondeado
+    justo, _ = clasificar_correspondencias(casi, [{'id': 1, 'poligono': box(0, 0, 10, 20)}])
+    assert justo[0]['clase'] == 'uno_a_uno'
 
 
 def test_clasificar_rechaza_ocupacion_desconocida():

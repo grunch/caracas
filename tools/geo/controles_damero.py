@@ -38,12 +38,14 @@ HITOS = [
 ]
 
 
+def leer_con_sha(ruta):
+    """(JSON, SHA-256) de los mismos bytes: el hash registrado es el de lo que produjo el informe."""
+    datos = Path(ruta).read_bytes()
+    return json.loads(datos.decode('utf-8')), hashlib.sha256(datos).hexdigest()
+
+
 def _leer(ruta):
-    return json.loads(Path(ruta).read_text(encoding='utf-8'))
-
-
-def _sha(ruta):
-    return hashlib.sha256(Path(ruta).read_bytes()).hexdigest()
+    return leer_con_sha(ruta)[0]
 
 
 def angulo_damero(puntos, rango_px=(150, 260)):
@@ -132,7 +134,22 @@ def poligonos_unidades(unidades, proyectar, dentro_de):
 
 
 def _ruta_relativa(ruta):
+    ruta = Path(ruta).resolve()
     return str(ruta.relative_to(RAIZ)) if ruta.is_relative_to(RAIZ) else str(ruta)
+
+
+def ruta_evidencia(ruta, base):
+    """Ruta de un recorte relativa a la carpeta de recortes: la misma en cualquier clon que los regenere."""
+    return Path(ruta).relative_to(base).as_posix()
+
+
+def _guardar_recorte(img, ruta, salida, evidencias, **campos):
+    """Guarda el recorte y registra su evidencia; uno fuera de la imagen queda registrado como no disponible."""
+    if img is None:
+        evidencias.append({**campos, 'no_disponible': 'el recorte cae fuera del original o del mosaico'})
+        return
+    import damero_recortes as dr
+    evidencias.append({'archivo_local': ruta_evidencia(ruta, salida), 'sha256': dr.guardar(img, ruta), **campos})
 
 
 def _recortes(args, nodos, filas, unidades, cuadras):
@@ -150,8 +167,7 @@ def _recortes(args, nodos, filas, unidades, cuadras):
             img = dr.lado_a_lado(original, mosaico, n['original'], 70, n['mosaico_identidad'], 220,
                                  [(*n['mosaico_identidad'], 'lime'), (*n['mosaico_calce'], 'red')],
                                  titulo=f"{n['id']} {sector} índice {n['indice']} · verde: esquina 1936 por identidad · rojo: TPS · desvío {n['desvio_m']} m")
-            ruta = salida / 'controles' / f"{sector}-{n['id']}.png"
-            evidencias.append({'archivo_local': _ruta_relativa(ruta), 'sha256': dr.guardar(img, ruta), 'nodo': n['id']})
+            _guardar_recorte(img, salida / 'controles' / f"{sector}-{n['id']}.png", salida, evidencias, nodo=n['id'])
     por_clase = {}
     for f in filas:
         por_clase.setdefault(f['clase'], []).append(f)
@@ -169,8 +185,8 @@ def _recortes(args, nodos, filas, unidades, cuadras):
                     poligonos.append((list(parte.exterior.coords), 'orange'))
             img = dr.lado_a_lado(original, mosaico, u['centro_original'], 60, (cx, cy), 200, [], poligonos,
                                  titulo=f"{f['unidad']} {u['sector']} {u['ocupacion']} → {clase} · azul: unidad por calce de control · naranja: cuadras del sistema en 1772")
-            ruta = salida / 'correspondencias' / f"{clase}-{f['unidad']}.png"
-            evidencias.append({'archivo_local': _ruta_relativa(ruta), 'sha256': dr.guardar(img, ruta), 'unidad': f['unidad'], 'clase': clase})
+            _guardar_recorte(img, salida / 'correspondencias' / f"{clase}-{f['unidad']}.png", salida, evidencias,
+                             unidad=f['unidad'], clase=clase)
     return evidencias
 
 
@@ -185,11 +201,11 @@ def main():
     ap.add_argument('--muestra', type=int, default=2)
     args = ap.parse_args()
 
-    trazado = _leer(AUD / 'trazado-calles-original.json')
+    trazado, sha_trazado = leer_con_sha(AUD / 'trazado-calles-original.json')
     sectores = _leer(AUD / 'sectores.json')['sectores']
-    esquinas = _leer(args.esquinas)
+    esquinas, sha_esquinas = leer_con_sha(args.esquinas)
     puntos = [e['px'] for e in esquinas]
-    gcp = _leer(args.gcp)
+    gcp, sha_gcp = leer_con_sha(args.gcp)
     calce = Calce.ajustar(gcp['gcps'], METRO, gcp.get('suavizado', 0.0))
     angulo = angulo_damero(puntos)
     origen = next(i for i, e in enumerate(esquinas) if e['nombre'] == ORIGEN_1936)
@@ -202,14 +218,14 @@ def main():
     hoy = dt.date.today().isoformat()
     informe = {
         'fecha': hoy, 'alcance': 'Controles independientes del TPS por identidad de damero; miden discrepancia, no exactitud geográfica.',
-        'fuentes': {'trazado': _sha(AUD / 'trazado-calles-original.json'), 'esquinas_1936': _sha(args.esquinas), 'gcp': _sha(args.gcp)},
+        'fuentes': {'trazado': sha_trazado, 'esquinas_1936': sha_esquinas, 'gcp': sha_gcp},
         'parametros': {'angulo_damero_1936_grados': round(angulo, 2), 'origen_1936': ORIGEN_1936, 'metro': METRO,
                        'esquinas_indexadas': len(reticula), 'esquinas_totales': len(puntos), 'cruces_1772': len(cruces)},
         'por_sector': resumen_por_sector(nodos, sectores),
         'comparacion_nucleo': comparar_con_nucleo(nodos, nucleo),
         'nodos': nodos,
     }
-    ciudad = _leer(args.ciudad)
+    ciudad, sha_ciudad = leer_con_sha(args.ciudad)
     control = Calce.ajustar([{'px': n['original'][0], 'py': n['original'][1], 'x36': n['mosaico_identidad'][0], 'y36': n['mosaico_identidad'][1]} for n in nodos], METRO, 0.05)
     casco = MultiPoint([tuple(n['original']) for n in nodos]).convex_hull
     unidades_json = _leer(AUD / 'unidades-original.json')['unidades']
@@ -224,7 +240,7 @@ def main():
     huellas = {c['id']: c['huellas'] for c in cuadras}
     correspondencias = {
         'fecha': hoy, 'alcance': 'Clasificación geométrica bajo el calce de control; la aprobación exige la muestra visual registrada en verificacion_visual.',
-        'entrada_sha256': _sha(args.ciudad), 'epoca': 1,
+        'entrada_sha256': sha_ciudad, 'epoca': 1,
         'calce_de_control': {'nodos': len(nodos), 'residuos_loo_m': control.residuos_m()},
         'resumen': {'clases': dict(sorted(Counter(f['clase'] for f in filas).items())), 'extrapoladas': sum(1 for u in unidades if u['extrapolada']),
                     'cuadras_sistema_1772': len(cuadras), 'cuadras_sobrantes': len(sobrantes)},
@@ -234,6 +250,12 @@ def main():
     }
     if args.recortes:
         evidencias = _recortes(args, nodos, filas, unidades, cuadras)
+        recortes = {'directorio': _ruta_relativa(args.recortes), 'en_git': False,
+                    'regenerar': '.venv/bin/python tools/geo/controles_damero.py --ciudad fuentes/derivados/epocas/ciudad-estilos.json '
+                                 '--original fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg --mosaico fuentes/derivados/1936/mosaico.tif '
+                                 f'--recortes {_ruta_relativa(args.recortes)} --muestra {args.muestra}',
+                    'nota': 'archivo_local es relativo a directorio; los PNG quedan fuera de git y se comprueban por su sha256'}
+        informe['recortes'] = correspondencias['recortes'] = recortes
         informe['evidencias'] = [e for e in evidencias if 'nodo' in e]
         correspondencias['evidencias'] = [e for e in evidencias if 'unidad' in e]
     (AUD / 'controles-calce-sectores.json').write_text(json.dumps(informe, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')

@@ -12,9 +12,15 @@ ESCALA_ORIGINAL = 3  # el original es esquemático (≈1,7 m/px): se amplía par
 
 
 def caja(centro, radio, forma):
-    """[x0, y0, x1, y1] de lado 2·radio alrededor de `centro`, recortada a `forma` = (alto, ancho)."""
+    """[x0, y0, x1, y1] de lado 2·radio alrededor de `centro`, recortada a `forma` = (alto, ancho).
+
+    None si no queda nada dentro de la imagen: un índice negativo haría que NumPy recortara desde el otro borde.
+    """
     cx, cy = centro
-    return [max(0, int(cx - radio)), max(0, int(cy - radio)), min(forma[1], int(cx + radio)), min(forma[0], int(cy + radio))]
+    alto, ancho = forma[:2]
+    x0, x1 = (min(max(0, int(v)), ancho) for v in (cx - radio, cx + radio))
+    y0, y1 = (min(max(0, int(v)), alto) for v in (cy - radio, cy + radio))
+    return [x0, y0, x1, y1] if x1 > x0 and y1 > y0 else None
 
 
 def _recorte(imagen, c):
@@ -32,12 +38,15 @@ def lado_a_lado(original, mosaico, centro_original, radio_original, centro_mosai
     """Izquierda: el original ampliado con el punto en rojo; derecha: el mosaico con las marcas y polígonos dados.
 
     `marcas_mosaico`: [(x, y, color)] en px del mosaico; `poligonos_mosaico`: [([(x, y)...], color)].
+    None si alguno de los dos recortes cae fuera de su imagen: no hay nada que mostrar.
     """
     co = caja(centro_original, radio_original, original.shape)
+    cm = caja(centro_mosaico, radio_mosaico, mosaico.shape)
+    if co is None or cm is None:
+        return None
     izq = _recorte(original, co).resize(((co[2] - co[0]) * ESCALA_ORIGINAL, (co[3] - co[1]) * ESCALA_ORIGINAL), Image.NEAREST)
     d = ImageDraw.Draw(izq)
     _marca(d, (centro_original[0] - co[0]) * ESCALA_ORIGINAL, (centro_original[1] - co[1]) * ESCALA_ORIGINAL, 'red', 9)
-    cm = caja(centro_mosaico, radio_mosaico, mosaico.shape)
     der = _recorte(mosaico, cm)
     d = ImageDraw.Draw(der)
     for puntos, color in poligonos_mosaico:

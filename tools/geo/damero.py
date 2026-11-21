@@ -10,7 +10,7 @@ cruce es (kx, ky) = (calles al norte, calles al este) de la esquina de Las Monja
 plaza. En el mosaico, (iu, in) = (calles al este, calles al norte) de la misma esquina. Ningún
 resultado de este módulo aprueba geometría: clasifica y mide.
 """
-from collections import defaultdict
+from collections import defaultdict, deque
 import math
 
 from shapely.geometry import LineString
@@ -56,22 +56,15 @@ def cruces_1772(lineas, sectores, origen=ORIGEN_1772_PX, paso=PASO_1772_PX):
     return cruces
 
 
-def reticula_1936(puntos, origen, angulo_grados, rango_px=(140, 320), tolerancia_grados=20):
-    """Índices (iu este, in norte) de las esquinas de 1936, recorriendo la retícula desde `origen`.
-
-    Desde cada esquina indexada se busca la más cercana dentro de `rango_px` en cada una de las cuatro
-    direcciones del damero (girado `angulo_grados`). Una esquina con dos propuestas distintas, o un
-    índice con dos esquinas, se excluye: ahí la retícula es irregular y la identidad se decide a ojo.
-    """
-    a = math.radians(angulo_grados)
-    direcciones = {(1, 0): (math.cos(a), math.sin(a)), (-1, 0): (-math.cos(a), -math.sin(a)),
-                   (0, 1): (math.sin(a), -math.cos(a)), (0, -1): (-math.sin(a), math.cos(a))}
-    cos_tol = math.cos(math.radians(tolerancia_grados))
+def _recorrer(puntos, origen, direcciones, rango_px, cos_tol, bloqueadas):
+    """Propuestas de índice de cada esquina alcanzada desde `origen`; las `bloqueadas` reciben pero no propagan."""
     propuestas = defaultdict(set)
     propuestas[origen].add((0, 0))
-    cola, vistos = [origen], {origen}
+    cola, vistos = deque([origen]), {origen}
     while cola:
-        actual = cola.pop(0)
+        actual = cola.popleft()
+        if actual in bloqueadas:
+            continue
         iu, inorte = next(iter(propuestas[actual]))
         ax, ay = puntos[actual]
         for (du, dn), (vx, vy) in direcciones.items():
@@ -89,6 +82,29 @@ def reticula_1936(puntos, origen, angulo_grados, rango_px=(140, 320), tolerancia
             if mejor not in vistos:
                 vistos.add(mejor)
                 cola.append(mejor)
+    return propuestas
+
+
+def reticula_1936(puntos, origen, angulo_grados, rango_px=(140, 320), tolerancia_grados=20):
+    """Índices (iu este, in norte) de las esquinas de 1936, recorriendo la retícula desde `origen`.
+
+    Desde cada esquina indexada se busca la más cercana dentro de `rango_px` en cada una de las cuatro
+    direcciones del damero (girado `angulo_grados`). Una esquina con dos propuestas distintas, o un
+    índice con dos esquinas, se excluye: ahí la retícula es irregular y la identidad se decide a ojo.
+    Una esquina ambigua tampoco propaga: el recorrido se repite sin expandir desde ella hasta que no
+    aparecen ambigüedades nuevas, así todo índice sale de una ruta sin ambigüedad.
+    """
+    a = math.radians(angulo_grados)
+    direcciones = {(1, 0): (math.cos(a), math.sin(a)), (-1, 0): (-math.cos(a), -math.sin(a)),
+                   (0, 1): (math.sin(a), -math.cos(a)), (0, -1): (-math.sin(a), math.cos(a))}
+    cos_tol = math.cos(math.radians(tolerancia_grados))
+    bloqueadas = frozenset()
+    while True:
+        propuestas = _recorrer(puntos, origen, direcciones, rango_px, cos_tol, bloqueadas)
+        ambiguas = {j for j, indices in propuestas.items() if len(indices) > 1}
+        if ambiguas <= bloqueadas:
+            break
+        bloqueadas = bloqueadas | ambiguas
     por_indice = defaultdict(list)
     for j, indices in propuestas.items():
         if len(indices) == 1:
@@ -125,15 +141,15 @@ def clasificar_correspondencias(unidades, cuadras, umbral=0.5, minimo=0.2):
     for u in unidades:
         if u['ocupacion'] not in OCUPACIONES_EDIFICADAS | OCUPACIONES_VACIAS:
             raise ValueError(f"{u['id']}: ocupación desconocida {u['ocupacion']!r}")
-    solapes = {}
+    solapes = {}  # fracciones sin redondear: los umbrales se comparan con estas; el informe lleva las redondeadas
     for u in unidades:
         filas = []
         for c in cuadras:
             inter = u['poligono'].intersection(c['poligono']).area
             if inter <= 0:
                 continue
-            filas.append({'cuadra': c['id'], 'fraccion_cuadra': round(inter / c['poligono'].area, 2),
-                          'fraccion_unidad': round(inter / u['poligono'].area, 2)})
+            filas.append({'cuadra': c['id'], 'fraccion_cuadra': inter / c['poligono'].area,
+                          'fraccion_unidad': inter / u['poligono'].area})
         solapes[u['id']] = sorted(filas, key=lambda f: -f['fraccion_cuadra'])
     reclamos = defaultdict(list)
     for u in unidades:
@@ -155,6 +171,8 @@ def clasificar_correspondencias(unidades, cuadras, umbral=0.5, minimo=0.2):
             clase = 'desplazada_o_parcial'
         else:
             clase = 'ausente'
-        resultado.append({'unidad': u['id'], 'ocupacion': u['ocupacion'], 'clase': clase, 'cuadras': filas})
+        redondeadas = [{**f, 'fraccion_cuadra': round(f['fraccion_cuadra'], 2), 'fraccion_unidad': round(f['fraccion_unidad'], 2)}
+                       for f in filas]
+        resultado.append({'unidad': u['id'], 'ocupacion': u['ocupacion'], 'clase': clase, 'cuadras': redondeadas})
     sobrantes = [c['id'] for c in cuadras if c['id'] not in atribuidas]
     return resultado, sobrantes

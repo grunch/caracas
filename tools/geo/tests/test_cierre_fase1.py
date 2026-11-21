@@ -4,13 +4,30 @@ from copy import deepcopy
 import pytest
 
 from cierre_fase1 import (
-    SUBTAREAS, cobertura_unidades, enlazar_subtareas, indice_evidencias, puerta_de_salida,
+    SUBTAREAS, cobertura_unidades, enlazar_subtareas, indice_evidencias, leer_verificacion, puerta_de_salida,
     residuos_por_sector, resumen_por_sector,
 )
 
 
+def sector(ident, bbox, unidades, barrido='realizado_2026-11-20'):
+    return {'id': ident, 'bbox_original': bbox, 'barrido_general': barrido, 'clasificacion_original': {'unidades': unidades}}
+
+
 def sectores():
-    return [{'id': 'S1', 'bbox_original': [0, 0, 100, 100]}, {'id': 'S2', 'bbox_original': [100, 0, 200, 100]}]
+    return [sector('S1', [0, 0, 100, 100], 2), sector('S2', [100, 0, 200, 100], 1)]
+
+
+SHA_CIUDAD = 'a' * 64
+
+
+def correspondencias_verificadas():
+    return {'entrada_sha256': SHA_CIUDAD, 'resumen': {'clases': {'uno_a_uno': 1, 'ausente': 1, 'vacio_coincide': 1}},
+            'unidades': [{'unidad': 'U0001', 'clase': 'uno_a_uno'}, {'unidad': 'U0002', 'clase': 'vacio_coincide'},
+                         {'unidad': 'U0003', 'clase': 'ausente'}],
+            'verificacion_visual': [
+                {'grupo': 'controles', 'objeto': 'X1', 'juicio': 'compatible'},
+                {'grupo': 'correspondencias', 'objeto': 'U0001', 'clase': 'uno_a_uno', 'entrada_sha256': SHA_CIUDAD, 'juicio': 'coincide'},
+            ]}
 
 
 def unidades():
@@ -118,7 +135,7 @@ def test_puerta_de_salida_no_declara_cumplido_lo_que_sigue_pendiente():
     residuos = residuos_por_sector([], [{'id': 'N1', 'original': [30, 30], 'desvio_m': 9.0}], sectores())
     enlazadas = enlazar_subtareas([{'id': 'I1772-001', 'estado': 'confirmado_visual'}])
     puerta = puerta_de_salida(filas, sectores(), residuos, enlazadas)
-    assert puerta['area_recorrida'] == {'cumplido': True, 'sectores': 2}
+    assert puerta['area_recorrida'] == {'cumplido': True, 'sectores': 2, 'sectores_pendientes': []}
     assert puerta['unidades_clasificadas_y_leidas'] == {'cumplido': True, 'unidades': 3}
     assert puerta['correspondencia_clasificada_por_unidad'] == {'cumplido': False, 'clasificadas': 0, 'provisionales': 3,
                                                                 'trasladado_a': 'T33j.2a'}
@@ -130,18 +147,72 @@ def test_puerta_de_salida_no_declara_cumplido_lo_que_sigue_pendiente():
 
 def test_puerta_de_salida_se_cumple_con_controles_de_damero_y_correspondencias_verificadas():
     filas = cobertura_unidades(unidades(), lecturas(), contraste())
-    tres = sectores() + [{'id': 'S3', 'bbox_original': [0, 100, 100, 200]}]
+    tres = sectores() + [sector('S3', [0, 100, 100, 200], 0)]
     residuos = residuos_por_sector([], [], tres)
     enlazadas = enlazar_subtareas([{'id': 'I1772-001', 'estado': 'confirmado_visual'}])
     damero = {'por_sector': [{'sector': 'S1', 'controles': 4, 'mediana_m': 12.0}, {'sector': 'S2', 'controles': 0, 'mediana_m': None}],
               'controles_por_hito': [{'sector': 'S2'}]}
-    correspondencias = {'resumen': {'clases': {'uno_a_uno': 1, 'ausente': 1, 'vacio_coincide': 1}},
-                        'unidades': [{'unidad': u, 'clase': 'x'} for u in ('U0001', 'U0002', 'U0003')],
-                        'verificacion_visual': [{'juicio': 'coincide'}, {'juicio': 'compatible'}]}
+    correspondencias = correspondencias_verificadas()
     puerta = puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias)
+    assert puerta['area_recorrida'] == {'cumplido': True, 'sectores': 3, 'sectores_pendientes': []}
     assert puerta['controles_de_calce_por_sector'] == {'cumplido': True, 'sectores_sin_control_independiente': [], 'sectores_sin_unidades': ['S3']}
-    assert puerta['correspondencia_clasificada_por_unidad'] == {'cumplido': True, 'clasificadas': 3, 'muestra_visual': 2, 'contradicciones': 0,
-                                                                'clases': {'uno_a_uno': 1, 'ausente': 1, 'vacio_coincide': 1}}
+    assert puerta['correspondencia_clasificada_por_unidad'] == {
+        'cumplido': True, 'clasificadas': 3, 'muestra_visual': 1, 'muestra_desfasada': 0, 'contradicciones': 0,
+        'clases': {'uno_a_uno': 1, 'ausente': 1, 'vacio_coincide': 1}}
     assert puerta['fase_1_cerrable'] is True
-    correspondencias['verificacion_visual'].append({'juicio': 'contradice'})
+    correspondencias['verificacion_visual'].append({'grupo': 'controles', 'objeto': 'X2', 'juicio': 'contradice'})
     assert puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias)['fase_1_cerrable'] is False
+
+
+def _criterio(correspondencias):
+    filas = cobertura_unidades(unidades(), lecturas(), contraste())
+    puerta = puerta_de_salida(filas, sectores(), residuos_por_sector([], [], sectores()), [], {'por_sector': [], 'controles_por_hito': []},
+                              correspondencias)
+    return puerta['correspondencia_clasificada_por_unidad']
+
+
+def test_correspondencia_exige_juicios_de_correspondencia_no_solo_de_controles():
+    c = correspondencias_verificadas()
+    c['verificacion_visual'] = [r for r in c['verificacion_visual'] if r['grupo'] == 'controles']
+    criterio = _criterio(c)
+    assert criterio['cumplido'] is False and criterio['muestra_visual'] == 0
+
+
+@pytest.mark.parametrize('cambio', [
+    {'clase': 'ausente'},                 # la unidad se reclasificó después del juicio
+    {'entrada_sha256': 'b' * 64},         # el juicio es de otra ciudad
+    {'objeto': 'U9999'},                  # la unidad ya no está
+])
+def test_correspondencia_no_cuenta_juicios_de_otra_clasificacion(cambio):
+    c = correspondencias_verificadas()
+    c['verificacion_visual'][1] = {**c['verificacion_visual'][1], **cambio}
+    criterio = _criterio(c)
+    assert criterio['cumplido'] is False
+    assert criterio['muestra_visual'] == 0 and criterio['muestra_desfasada'] == 1
+
+
+def test_correspondencia_rechaza_juicios_fuera_del_metodo():
+    c = correspondencias_verificadas()
+    c['verificacion_visual'][1]['juicio'] = 'coincide_con_clase_conservadora'
+    with pytest.raises(ValueError, match='coincide_con_clase_conservadora'):
+        _criterio(c)
+
+
+@pytest.mark.parametrize('ajuste, pendiente', [
+    (lambda s: s[0].update(barrido_general=None), 'S1'),                       # sin barrido registrado
+    (lambda s: s[1]['clasificacion_original'].update(unidades=4), 'S2'),       # faltan unidades por leer
+])
+def test_area_recorrida_sale_de_la_cobertura_de_cada_sector(ajuste, pendiente):
+    filas = cobertura_unidades(unidades(), lecturas(), contraste())
+    s = sectores()
+    ajuste(s)
+    puerta = puerta_de_salida(filas, s, residuos_por_sector([], [], s), [])
+    assert puerta['area_recorrida'] == {'cumplido': False, 'sectores': 2, 'sectores_pendientes': [pendiente]}
+
+
+def test_resumen_de_la_verificacion_sale_de_las_filas():
+    filas = [{'juicio': 'coincide'}, {'juicio': 'compatible'}, {'juicio': 'contradice'}]
+    bien = {'recortes': filas, 'resumen': {'revisados': 3, 'coincide': 1, 'compatible': 1, 'contradice': 1}}
+    assert leer_verificacion(bien) == filas
+    with pytest.raises(ValueError, match='resumen'):
+        leer_verificacion({'recortes': filas, 'resumen': {'revisados': 3, 'coincide': 2, 'compatible': 1, 'contradice': 0}})

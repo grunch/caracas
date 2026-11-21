@@ -164,16 +164,52 @@ def _sectores_sin_control(sectores, filas, residuos, damero):
     return sorted(s['id'] for s in sectores if s['id'] in con_unidades and s['id'] not in cubiertos)
 
 
+JUICIOS = {'coincide', 'compatible', 'contradice'}  # los de `metodo` en verificacion-damero.json
+
+
+def _juicio_vigente(r, clases, entrada_sha256):
+    """Un juicio de correspondencia cuenta solo si es de la unidad, la clase y la ciudad de la clasificación actual."""
+    return (r.get('grupo') == 'correspondencias' and r.get('objeto') in clases and r.get('clase') == clases[r['objeto']]
+            and r.get('entrada_sha256') == entrada_sha256)
+
+
 def _criterio_correspondencia(filas, correspondencias):
     if not correspondencias:
         return {'cumplido': False, 'clasificadas': 0, 'provisionales': len(filas), 'trasladado_a': 'T33j.2a'}
-    clasificadas = {u['unidad'] for u in correspondencias['unidades'] if u.get('clase')}
+    clases = {u['unidad']: u['clase'] for u in correspondencias['unidades'] if u.get('clase')}
     muestra = correspondencias.get('verificacion_visual', [])
-    contradicciones = [r for r in muestra if r.get('juicio') == 'contradice']
-    cumplido = clasificadas >= {f['unidad'] for f in filas} and bool(muestra) and not contradicciones
-    return {'cumplido': cumplido, 'clasificadas': len(clasificadas), 'clases': correspondencias['resumen']['clases'],
-            'muestra_visual': len(muestra), 'contradicciones': len(contradicciones),
-            **({} if cumplido else {'trasladado_a': 'T33j.2a'})}
+    fuera = sorted({r.get('juicio') for r in muestra} - JUICIOS, key=str)
+    if fuera:
+        raise ValueError(f'juicios fuera del método: {fuera}')
+    juicios = [r for r in muestra if r.get('grupo') == 'correspondencias']
+    vigentes = [r for r in juicios if _juicio_vigente(r, clases, correspondencias.get('entrada_sha256'))]
+    contradicciones = [r for r in vigentes + [r for r in muestra if r.get('grupo') != 'correspondencias'] if r['juicio'] == 'contradice']
+    cumplido = set(clases) >= {f['unidad'] for f in filas} and bool(vigentes) and not contradicciones
+    return {'cumplido': cumplido, 'clasificadas': len(clases), 'clases': correspondencias['resumen']['clases'],
+            'muestra_visual': len(vigentes), 'muestra_desfasada': len(juicios) - len(vigentes),
+            'contradicciones': len(contradicciones), **({} if cumplido else {'trasladado_a': 'T33j.2a'})}
+
+
+def leer_verificacion(verificacion):
+    """Los recortes juzgados, comprobando que el resumen escrito a mano sea el conteo de sus juicios."""
+    recortes = verificacion['recortes']
+    cuenta = Counter(r.get('juicio') for r in recortes)
+    esperado = {'revisados': len(recortes), **{j: cuenta.get(j, 0) for j in sorted(JUICIOS)}}
+    if verificacion.get('resumen') != esperado:
+        raise ValueError(f"resumen de la verificación distinto de sus filas: {verificacion.get('resumen')} ≠ {esperado}")
+    return recortes
+
+
+def _criterio_area(filas, sectores):
+    """Cada sector con barrido general registrado y todas sus unidades declaradas censadas y leídas."""
+    pendientes = []
+    for s in sectores:
+        propias = [f for f in filas if f['sector'] == s['id']]
+        declaradas = (s.get('clasificacion_original') or {}).get('unidades')
+        barrido = str(s.get('barrido_general') or '').startswith('realizado')
+        if not barrido or declaradas != len(propias) or not all(f['lectura'] for f in propias):
+            pendientes.append(s['id'])
+    return {'cumplido': bool(sectores) and not pendientes, 'sectores': len(sectores), 'sectores_pendientes': pendientes}
 
 
 def puerta_de_salida(filas, sectores, residuos, incidencias, damero=None, correspondencias=None):
@@ -185,7 +221,7 @@ def puerta_de_salida(filas, sectores, residuos, incidencias, damero=None, corres
     sin_control = _sectores_sin_control(sectores, filas, residuos, damero)
     sin_subtarea = [i['id'] for i in incidencias if i['sin_subtarea'] and i['estado'] not in ESTADOS_SIN_DEFECTO]
     criterios = {
-        'area_recorrida': {'cumplido': len(sectores) > 0, 'sectores': len(sectores)},
+        'area_recorrida': _criterio_area(filas, sectores),
         'unidades_clasificadas_y_leidas': {'cumplido': all(f['lectura'] and f['ocupacion'] for f in filas),
                                            'unidades': len(filas)},
         'correspondencia_clasificada_por_unidad': _criterio_correspondencia(filas, correspondencias),
@@ -223,7 +259,7 @@ def main():
     damero = _leer(c / 'controles-calce-sectores.json') if (c / 'controles-calce-sectores.json').exists() else None
     correspondencias = _leer(c / 'correspondencias-unidades.json') if (c / 'correspondencias-unidades.json').exists() else None
     if correspondencias and (c / 'verificacion-damero.json').exists():
-        correspondencias = {**correspondencias, 'verificacion_visual': _leer(c / 'verificacion-damero.json')['recortes']}
+        correspondencias = {**correspondencias, 'verificacion_visual': leer_verificacion(_leer(c / 'verificacion-damero.json'))}
     if damero:
         documentos['controles-calce-sectores.json'] = damero
         documentos['correspondencias-unidades.json'] = correspondencias

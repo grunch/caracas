@@ -1,11 +1,12 @@
 """Auxiliares de la CLI de controles de damero: medidas puras sobre datos sintéticos."""
+import hashlib
 import math
 
 from shapely.geometry import MultiPoint, box
 
 from controles_damero import (
-    HITOS, angulo_damero, comparar_con_nucleo, controles_por_hito, cuadras_visibles, poligonos_unidades,
-    resumen_por_sector,
+    HITOS, angulo_damero, comparar_con_nucleo, controles_por_hito, cuadras_visibles, leer_con_sha, poligonos_unidades,
+    resumen_por_sector, ruta_evidencia,
 )
 from damero_recortes import caja
 
@@ -71,3 +72,22 @@ def test_controles_por_hito_miden_los_dos_calces_contra_el_hito_de_1936():
 def test_caja_recorta_al_borde_de_la_imagen():
     assert caja((10, 10), 20, (100, 200)) == [0, 0, 30, 30]
     assert caja((190, 95), 20, (100, 200)) == [170, 75, 200, 100]
+
+
+def test_caja_fuera_de_la_imagen_no_existe():
+    assert caja((-25, 50), 20, (100, 200)) is None       # sin esto NumPy leería [0:-5]: 195 columnas ajenas
+    assert caja((50, 130), 20, (100, 200)) is None
+    assert caja((-15, 50), 20, (100, 200)) == [0, 30, 5, 70]   # a medias sobre el borde, se conserva
+
+
+def test_leer_con_sha_hashea_los_mismos_bytes_que_parsea(tmp_path):
+    ruta = tmp_path / 'entrada.json'
+    ruta.write_bytes('{"a": "ñ"}'.encode('utf-8'))
+    datos, sha = leer_con_sha(ruta)
+    assert datos == {'a': 'ñ'}
+    assert sha == hashlib.sha256(ruta.read_bytes()).hexdigest()
+
+
+def test_ruta_de_evidencia_es_relativa_a_la_carpeta_de_recortes(tmp_path):
+    base = tmp_path / 'damero-1772'
+    assert ruta_evidencia(base / 'controles' / 'S1772-11-X1772-0002.png', base) == 'controles/S1772-11-X1772-0002.png'
