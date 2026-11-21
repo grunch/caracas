@@ -1,0 +1,103 @@
+{
+ "alcance": "Puerta de salida de la fase 2 de 1772 (specs/08). Cuenta lo registrado en la referencia; no certifica fidelidad ni habilita la generación.",
+ "puerta_de_salida": {
+  "entidades_con_referencia": {
+   "cumplido": true,
+   "unidades": 292,
+   "calles": 85,
+   "nodos": 326,
+   "faltan": {
+    "unidades": [],
+    "lineas": [],
+    "cruces": []
+   }
+  },
+  "correspondencia_por_unidad": {
+   "cumplido": true,
+   "clases": {
+    "ausente": 168,
+    "fusionada": 6,
+    "incierta": 6,
+    "uno_a_uno": 36,
+    "vacio_coincide": 76
+   }
+  },
+  "validadores_detectan_fallos": {
+   "cumplido": true,
+   "referencia_valida": true,
+   "detecta": {
+    "nodo_duplicado": true,
+    "tramo_duplicado": true,
+    "cruce_imposible": true,
+    "unidad_duplicada": true,
+    "anillo_invalido": true,
+    "solape": true
+   }
+  },
+  "incertidumbres_explicitas": {
+   "cumplido": true,
+   "pendientes_con_motivo": 195,
+   "nodos_sin_pareja_con_motivo": 158
+  },
+  "excepciones_registradas": {
+   "cumplido": true,
+   "por_tipo": {
+    "limite_del_calce": 3,
+    "paso_de_agua": 3,
+    "plaza": 1,
+    "trazado": 5,
+    "trazo_descartado": 2
+   }
+  },
+  "historico_separado_de_heuristicas": {
+   "cumplido": true,
+   "historicas": [
+    "calce-1772: original:1772-pares-agi-exato-mapa",
+    "calce-1772: fuentes/mapas/1772-pares-agi-exato-mapa/ficha.json",
+    "calce-1772: tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json",
+    "calce-1772: tools/geo/gcp/plaza-1936.json",
+    "calce-1772: fuentes/derivados/1936/mosaico.json",
+    "calce-1772: fuentes/derivados/1936/segmentacion/mosaico/clases-costura.png",
+    "calles-nuevas: fuentes/derivados/1936/mosaico.json",
+    "calles-nuevas: tools/geo/gcp/1936-wgs84.json",
+    "calles-nuevas: tools/geo/calles-historicas.json",
+    "calles-nuevas: fuentes/derivados/1772/calzado.tif",
+    "calles-nuevas: fuentes/derivados/1772/calzado.json",
+    "vectorizar: fuentes/derivados/1936/mosaico.json",
+    "vectorizar: tools/geo/cuadras-1772.json",
+    "epocas: fuentes/derivados/1578/ciudad-1578.json",
+    "epocas: fuentes/derivados/1911/calzado.tif",
+    "epocas: fuentes/derivados/1889/calzado.tif",
+    "epocas: fuentes/derivados/1843/calzado.tif",
+    "epocas: fuentes/derivados/1772/calzado.tif"
+   ],
+   "heuristicas": [
+    "calles-nuevas: fuentes/derivados/1936/segmentacion/mosaico/clases-costura.png",
+    "calles-nuevas: fuentes/derivados/hoy/osm.json",
+    "calles-nuevas: tools/geo/epocas/epocas.json",
+    "vectorizar: fuentes/derivados/1936/segmentacion/mosaico/clases-costura.png",
+    "vectorizar: fuentes/derivados/1936/tramos.json",
+    "vectorizar: fuentes/derivados/1936/edificado-1772.png",
+    "epocas: tools/geo/epocas/epocas.json",
+    "epocas: fuentes/derivados/1936/ciudad-1936.json"
+   ]
+  },
+  "ninguna_pendiente_en_el_generador": {
+   "cumplido": true,
+   "generador_lee_la_referencia": [],
+   "aprobadas_disponibles_para_la_fase_3": 97
+  },
+  "fase_2_cerrable": true
+ },
+ "pendientes_del_trazado": [
+  "cerrar contornos de riberas y distinguir pasos públicos de espacios libres",
+  "confirmar puentes y extremos antes de unir componentes",
+  "validar correspondencias con los 32 tramos del primer lote",
+  "enlazar todos los frentes y registrar accesos del sistema"
+ ],
+ "referencias": {
+  "red": "tools/geo/referencias/1772-red.json",
+  "unidades": "tools/geo/referencias/1772-unidades.json",
+  "excepciones": "tools/geo/referencias/1772-excepciones.json"
+ }
+}
