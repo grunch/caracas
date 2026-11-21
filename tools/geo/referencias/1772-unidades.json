@@ -1,0 +1,6486 @@
+{
+ "fuente": "fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg",
+ "fuente_sha256": "4696d038a55b8088302a496b6eb4678b11173d98d3a15c589530cf78ee7bb62b",
+ "red": "tools/geo/referencias/1772-red.json",
+ "red_sha256": "bf3c04834b9d9f82ac4df208af41aabae2ab4c9a657c41c636a7c13148d8123b",
+ "huella_calce": "45aeae8a4c1d3c619d5b4b3bbd45e85641db88e44113410e79339848c9e3748f",
+ "alcance": "Unidades de la referencia histórica de 1772 (specs/08 fase 2, T33j.2b). Aprobar exige las ocho condiciones de `criterio`; una pendiente queda sin geometría inventada y con sus motivos. Los anillos son ejes de calle, no fachadas: aprobar no habilita la generación (fase 3).",
+ "criterio": {
+  "sin_celda_del_damero": "ninguna celda del damero contiene el 85 % de la unidad (periferia, forma irregular o varias celdas): su contorno se cierra en la fase 3 (T33j.3b)",
+  "celda_compartida": "otra unidad cae en la misma celda: el anillo de la celda no es de ninguna de las dos",
+  "lado_sin_calle": "un lado de la celda no es un tramo de calle de la red",
+  "esquina_sin_pareja_en_1936": "una esquina de la celda no tiene pareja por identidad en 1936",
+  "correspondencia_incierta": "su correspondencia con 1936 es incierta (correspondencias-identidad.md)",
+  "sector_limite_del_calce": "su sector es un límite documentado del calce (limites-calce.json)",
+  "ocupacion_sin_unidad_propia": "el censo la lee como parte de otra unidad o la descarta como edificación",
+  "excepcion_registrada": "tiene una excepción registrada en el trazado que la fase 3 debe respetar"
+ },
+ "resumen": {
+  "unidades": 292,
+  "aprobadas": 97,
+  "pendientes": 195,
+  "con_geometria": 97,
+  "motivos": {
+   "celda_compartida": 8,
+   "correspondencia_incierta": 6,
+   "esquina_sin_pareja_en_1936": 37,
+   "excepcion_registrada": 7,
+   "lado_sin_calle": 11,
+   "ocupacion_sin_unidad_propia": 2,
+   "sector_limite_del_calce": 25,
+   "sin_celda_del_damero": 149
+  }
+ },
+ "unidades": [
+  {
+   "id": "U1772-0001",
+   "sector": "S1772-11",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0002",
+   "sector": "S1772-11",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0002",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0003",
+   "sector": "S1772-11",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0004",
+   "sector": "S1772-12",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0005",
+   "sector": "S1772-11",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0005",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0006",
+   "sector": "S1772-11",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0006",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0007",
+   "sector": "S1772-11",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -7,
+    -6
+   ],
+   "nodos": [
+    "X1772-0002",
+    "X1772-0003",
+    "X1772-0011",
+    "X1772-0010"
+   ],
+   "contorno_candidato": "G1772-U0007",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-7, -6] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0008",
+   "sector": "S1772-13",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    2,
+    -6
+   ],
+   "nodos": [
+    "X1772-0005",
+    "X1772-0006",
+    "X1772-0015",
+    "X1772-0014"
+   ],
+   "contorno_candidato": "G1772-U0008",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [2, -6] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0009",
+   "sector": "S1772-13",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    4,
+    -6
+   ],
+   "nodos": [
+    "X1772-0007",
+    "X1772-0008",
+    "X1772-0017",
+    "X1772-0016"
+   ],
+   "contorno_candidato": "G1772-U0009",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [4, -6] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0010",
+   "sector": "S1772-11",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0010",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0011",
+   "sector": "S1772-11",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -7,
+    -5
+   ],
+   "nodos": [
+    "X1772-0010",
+    "X1772-0011",
+    "X1772-0020",
+    "X1772-0019"
+   ],
+   "contorno_candidato": "G1772-U0011",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-7, -5] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0012",
+   "sector": "S1772-12",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0012",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0013",
+   "sector": "S1772-12",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0013",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0014",
+   "sector": "S1772-12",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0015",
+   "sector": "S1772-13",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    1,
+    -5
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0015",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [1, -5] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0016",
+   "sector": "S1772-13",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    3,
+    -5
+   ],
+   "nodos": [
+    "X1772-0015",
+    "X1772-0016",
+    "X1772-0024",
+    "X1772-0023"
+   ],
+   "contorno_candidato": "G1772-U0016",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [3, -5] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0017",
+   "sector": "S1772-13",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    4,
+    -5
+   ],
+   "nodos": [
+    "X1772-0016",
+    "X1772-0017",
+    "X1772-0025",
+    "X1772-0024"
+   ],
+   "contorno_candidato": "G1772-U0017",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [4, -5] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0018",
+   "sector": "S1772-14",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0019",
+   "sector": "S1772-21",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0020",
+   "sector": "S1772-21",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0021",
+   "sector": "S1772-21",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0022",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0023",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0024",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0025",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0026",
+   "sector": "S1772-22",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0027",
+   "sector": "S1772-23",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    1,
+    -4
+   ],
+   "nodos": [
+    "X1772-0021",
+    "X1772-0022",
+    "X1772-0028",
+    "X1772-0027"
+   ],
+   "contorno_candidato": "G1772-U0027",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [1, -4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0028",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    1,
+    -3
+   ],
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "celda_compartida",
+    "lado_sin_calle"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1); celda [1, -3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0029",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    2,
+    -3
+   ],
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "celda_compartida",
+    "lado_sin_calle"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1); celda [2, -3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0030",
+   "sector": "S1772-23",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    2,
+    -4
+   ],
+   "nodos": [
+    "X1772-0022",
+    "X1772-0023",
+    "X1772-0029",
+    "X1772-0028"
+   ],
+   "contorno_candidato": "G1772-U0030",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [2, -4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0031",
+   "sector": "S1772-23",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    3,
+    -3
+   ],
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "celda_compartida",
+    "lado_sin_calle"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1); celda [3, -3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0032",
+   "sector": "S1772-23",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    3,
+    -4
+   ],
+   "nodos": [
+    "X1772-0023",
+    "X1772-0024",
+    "X1772-0030",
+    "X1772-0029"
+   ],
+   "contorno_candidato": "G1772-U0032",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [3, -4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0033",
+   "sector": "S1772-23",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0034",
+   "sector": "S1772-23",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0035",
+   "sector": "S1772-24",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0036",
+   "sector": "S1772-21",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [
+    "Sin calle horizontal intermedia: H660 queda interrumpida entre x=370 y x=437."
+   ],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "excepcion_registrada"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0037",
+   "sector": "S1772-21",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0038",
+   "sector": "S1772-21",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0039",
+   "sector": "S1772-22",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0040",
+   "sector": "S1772-22",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0041",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0042",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0043",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0044",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0045",
+   "sector": "S1772-23",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0046",
+   "sector": "S1772-24",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0047",
+   "sector": "S1772-21",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -8,
+    -2
+   ],
+   "nodos": [
+    "X1772-0182",
+    "X1772-0183",
+    "X1772-0036",
+    "X1772-0035"
+   ],
+   "contorno_candidato": "G1772-U0047",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-8, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0048",
+   "sector": "S1772-21",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -7,
+    -2
+   ],
+   "nodos": [
+    "X1772-0183",
+    "X1772-0184",
+    "X1772-0037",
+    "X1772-0036"
+   ],
+   "contorno_candidato": "G1772-U0048",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-7, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0049",
+   "sector": "S1772-22",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -6,
+    -2
+   ],
+   "nodos": [
+    "X1772-0184",
+    "X1772-0185",
+    "X1772-0038",
+    "X1772-0037"
+   ],
+   "contorno_candidato": "G1772-U0049",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-6, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0050",
+   "sector": "S1772-22",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     4527
+    ]
+   },
+   "celda": [
+    -5,
+    -2
+   ],
+   "nodos": [
+    "X1772-0185",
+    "X1772-0186",
+    "X1772-0039",
+    "X1772-0038"
+   ],
+   "contorno_candidato": "G1772-U0050",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-5, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0051",
+   "sector": "S1772-22",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     4374
+    ]
+   },
+   "celda": [
+    -4,
+    -2
+   ],
+   "nodos": [
+    "X1772-0186",
+    "X1772-0187",
+    "X1772-0040",
+    "X1772-0039"
+   ],
+   "contorno_candidato": "G1772-U0051",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-4, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0052",
+   "sector": "S1772-22",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     3827
+    ]
+   },
+   "celda": [
+    -3,
+    -2
+   ],
+   "nodos": [
+    "X1772-0187",
+    "X1772-0189",
+    "X1772-0041",
+    "X1772-0040"
+   ],
+   "contorno_candidato": "G1772-U0052",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-3, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0053",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     3600
+    ]
+   },
+   "celda": [
+    -2,
+    -2
+   ],
+   "nodos": [
+    "X1772-0189",
+    "X1772-0191",
+    "X1772-0042",
+    "X1772-0041"
+   ],
+   "contorno_candidato": "G1772-U0053",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-2, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0054",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     3389
+    ]
+   },
+   "celda": [
+    -1,
+    -2
+   ],
+   "nodos": [
+    "X1772-0191",
+    "X1772-0193",
+    "X1772-0043",
+    "X1772-0042"
+   ],
+   "contorno_candidato": "G1772-U0054",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-1, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0055",
+   "sector": "S1772-23",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "fusionada",
+    "cuadras_1936": [
+     8079
+    ]
+   },
+   "celda": [
+    2,
+    -2
+   ],
+   "nodos": [
+    "X1772-0195",
+    "X1772-0196",
+    "X1772-0046",
+    "X1772-0045"
+   ],
+   "contorno_candidato": "G1772-U0055",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [2, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0056",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8081
+    ]
+   },
+   "celda": [
+    3,
+    -2
+   ],
+   "nodos": [
+    "X1772-0196",
+    "X1772-0197",
+    "X1772-0047",
+    "X1772-0046"
+   ],
+   "contorno_candidato": "G1772-U0056",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [3, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0057",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     2072
+    ]
+   },
+   "celda": [
+    4,
+    -2
+   ],
+   "nodos": [
+    "X1772-0197",
+    "X1772-0198",
+    "X1772-0048",
+    "X1772-0047"
+   ],
+   "contorno_candidato": "G1772-U0057",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [4, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0058",
+   "sector": "S1772-23",
+   "ocupacion": "conjunto_especial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0059",
+   "sector": "S1772-23",
+   "ocupacion": "conjunto_especial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0060",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0061",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    7,
+    -2
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0061",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [7, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0062",
+   "sector": "S1772-21",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -8,
+    -1
+   ],
+   "nodos": [
+    "X1772-0035",
+    "X1772-0036",
+    "X1772-0053",
+    "X1772-0052"
+   ],
+   "contorno_candidato": "G1772-U0062",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-8, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0063",
+   "sector": "S1772-22",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -6,
+    -1
+   ],
+   "nodos": [
+    "X1772-0037",
+    "X1772-0038",
+    "X1772-0055",
+    "X1772-0054"
+   ],
+   "contorno_candidato": "G1772-U0063",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-6, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0064",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     4591
+    ]
+   },
+   "celda": [
+    -5,
+    -1
+   ],
+   "nodos": [
+    "X1772-0038",
+    "X1772-0039",
+    "X1772-0056",
+    "X1772-0055"
+   ],
+   "contorno_candidato": "G1772-U0064",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-5, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0065",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     4288,
+     4591
+    ]
+   },
+   "celda": [
+    -4,
+    -1
+   ],
+   "nodos": [
+    "X1772-0039",
+    "X1772-0040",
+    "X1772-0057",
+    "X1772-0056"
+   ],
+   "contorno_candidato": "G1772-U0065",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-4, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0066",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     3947,
+     3827
+    ]
+   },
+   "celda": [
+    -3,
+    -1
+   ],
+   "nodos": [
+    "X1772-0040",
+    "X1772-0041",
+    "X1772-0058",
+    "X1772-0057"
+   ],
+   "contorno_candidato": "G1772-U0066",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-3, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0067",
+   "sector": "S1772-23",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     2806
+    ]
+   },
+   "celda": [
+    2,
+    -1
+   ],
+   "nodos": [
+    "X1772-0045",
+    "X1772-0046",
+    "X1772-0063",
+    "X1772-0062"
+   ],
+   "contorno_candidato": "G1772-U0067",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [2, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0068",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     2426
+    ]
+   },
+   "celda": [
+    3,
+    -1
+   ],
+   "nodos": [
+    "X1772-0046",
+    "X1772-0047",
+    "X1772-0064",
+    "X1772-0063"
+   ],
+   "contorno_candidato": "G1772-U0068",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [3, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0069",
+   "sector": "S1772-23",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    4,
+    -1
+   ],
+   "nodos": [
+    "X1772-0047",
+    "X1772-0048",
+    "X1772-0065",
+    "X1772-0064"
+   ],
+   "contorno_candidato": "G1772-U0069",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [4, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0070",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0071",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    7,
+    -1
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0071",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [7, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0072",
+   "sector": "S1772-21",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -9,
+    0
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0072",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-9, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0073",
+   "sector": "S1772-21",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -8,
+    0
+   ],
+   "nodos": [
+    "X1772-0052",
+    "X1772-0053",
+    "X1772-0070",
+    "X1772-0069"
+   ],
+   "contorno_candidato": "G1772-U0073",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-8, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0074",
+   "sector": "S1772-21",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -7,
+    0
+   ],
+   "nodos": [
+    "X1772-0053",
+    "X1772-0054",
+    "X1772-0071",
+    "X1772-0070"
+   ],
+   "contorno_candidato": "G1772-U0074",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-7, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0075",
+   "sector": "S1772-22",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -6,
+    0
+   ],
+   "nodos": [
+    "X1772-0054",
+    "X1772-0055",
+    "X1772-0072",
+    "X1772-0071"
+   ],
+   "contorno_candidato": "G1772-U0075",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-6, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0076",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -5,
+    0
+   ],
+   "nodos": [
+    "X1772-0055",
+    "X1772-0056",
+    "X1772-0073",
+    "X1772-0072"
+   ],
+   "contorno_candidato": "G1772-U0076",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-5, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0077",
+   "sector": "S1772-22",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     4430
+    ]
+   },
+   "celda": [
+    -4,
+    0
+   ],
+   "nodos": [
+    "X1772-0056",
+    "X1772-0057",
+    "X1772-0074",
+    "X1772-0073"
+   ],
+   "contorno_candidato": "G1772-U0077",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-4, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0078",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8088,
+     3947
+    ]
+   },
+   "celda": [
+    -3,
+    0
+   ],
+   "nodos": [
+    "X1772-0057",
+    "X1772-0058",
+    "X1772-0075",
+    "X1772-0074"
+   ],
+   "contorno_candidato": "G1772-U0078",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-3, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0079",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     3689
+    ]
+   },
+   "celda": [
+    -2,
+    0
+   ],
+   "nodos": [
+    "X1772-0058",
+    "X1772-0059",
+    "X1772-0076",
+    "X1772-0075"
+   ],
+   "contorno_candidato": "G1772-U0079",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-2, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0080",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8085
+    ]
+   },
+   "celda": [
+    -1,
+    0
+   ],
+   "nodos": [
+    "X1772-0059",
+    "X1772-0060",
+    "X1772-0077",
+    "X1772-0076"
+   ],
+   "contorno_candidato": "G1772-U0080",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-1, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0081",
+   "sector": "S1772-23",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8090,
+     3071
+    ]
+   },
+   "celda": [
+    1,
+    0
+   ],
+   "nodos": [
+    "X1772-0061",
+    "X1772-0062",
+    "X1772-0079",
+    "X1772-0078"
+   ],
+   "contorno_candidato": "G1772-U0081",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [1, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0082",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "fusionada",
+    "cuadras_1936": [
+     8091
+    ]
+   },
+   "celda": [
+    2,
+    0
+   ],
+   "nodos": [
+    "X1772-0062",
+    "X1772-0063",
+    "X1772-0080",
+    "X1772-0079"
+   ],
+   "contorno_candidato": "G1772-U0082",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [2, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0083",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     2488
+    ]
+   },
+   "celda": [
+    3,
+    0
+   ],
+   "nodos": [
+    "X1772-0063",
+    "X1772-0064",
+    "X1772-0081",
+    "X1772-0080"
+   ],
+   "contorno_candidato": "G1772-U0083",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [3, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0084",
+   "sector": "S1772-23",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0085",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0086",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    7,
+    0
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0086",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [7, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0087",
+   "sector": "S1772-31",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -9,
+    1
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0087",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-9, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0088",
+   "sector": "S1772-31",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -8,
+    1
+   ],
+   "nodos": [
+    "X1772-0069",
+    "X1772-0070",
+    "X1772-0087",
+    "X1772-0086"
+   ],
+   "contorno_candidato": "G1772-U0088",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-8, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0089",
+   "sector": "S1772-31",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -7,
+    1
+   ],
+   "nodos": [
+    "X1772-0070",
+    "X1772-0071",
+    "X1772-0088",
+    "X1772-0087"
+   ],
+   "contorno_candidato": "G1772-U0089",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-7, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0090",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -6,
+    1
+   ],
+   "nodos": [
+    "X1772-0071",
+    "X1772-0072",
+    "X1772-0089",
+    "X1772-0088"
+   ],
+   "contorno_candidato": "G1772-U0090",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-6, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0091",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8086
+    ]
+   },
+   "celda": [
+    -3,
+    1
+   ],
+   "nodos": [
+    "X1772-0074",
+    "X1772-0075",
+    "X1772-0092",
+    "X1772-0091"
+   ],
+   "contorno_candidato": "G1772-U0091",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-3, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0092",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "incierta",
+    "cuadras_1936": [
+     8087
+    ]
+   },
+   "celda": [
+    -2,
+    1
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0092",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936",
+    "correspondencia_incierta"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-2, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0093",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "incierta",
+    "cuadras_1936": [
+     3487
+    ]
+   },
+   "celda": [
+    -1,
+    1
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0093",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936",
+    "correspondencia_incierta"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-1, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0094",
+   "sector": "S1772-33",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8093
+    ]
+   },
+   "celda": [
+    0,
+    1
+   ],
+   "nodos": [
+    "X1772-0077",
+    "X1772-0078",
+    "X1772-0095",
+    "X1772-0094"
+   ],
+   "contorno_candidato": "G1772-U0094",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [0, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0095",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8094
+    ]
+   },
+   "celda": [
+    1,
+    1
+   ],
+   "nodos": [
+    "X1772-0078",
+    "X1772-0079",
+    "X1772-0096",
+    "X1772-0095"
+   ],
+   "contorno_candidato": "G1772-U0095",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [1, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0096",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "fusionada",
+    "cuadras_1936": [
+     8091,
+     8094
+    ]
+   },
+   "celda": [
+    2,
+    1
+   ],
+   "nodos": [
+    "X1772-0079",
+    "X1772-0080",
+    "X1772-0097",
+    "X1772-0096"
+   ],
+   "contorno_candidato": "G1772-U0096",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [2, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0097",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "incierta",
+    "cuadras_1936": [
+     2568,
+     8091
+    ]
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "correspondencia_incierta"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0098",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0099",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0100",
+   "sector": "S1772-33",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0101",
+   "sector": "S1772-31",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -8,
+    2
+   ],
+   "nodos": [
+    "X1772-0086",
+    "X1772-0087",
+    "X1772-0103",
+    "X1772-0102"
+   ],
+   "contorno_candidato": "G1772-U0101",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-8, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0102",
+   "sector": "S1772-31",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -7,
+    2
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0102",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-7, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0103",
+   "sector": "S1772-32",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -6,
+    2
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0103",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-6, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0104",
+   "sector": "S1772-32",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -5,
+    2
+   ],
+   "nodos": [
+    "X1772-0089",
+    "X1772-0090",
+    "X1772-0106",
+    "X1772-0105"
+   ],
+   "contorno_candidato": "G1772-U0104",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-5, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0105",
+   "sector": "S1772-32",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     4475
+    ]
+   },
+   "celda": [
+    -4,
+    2
+   ],
+   "nodos": [
+    "X1772-0090",
+    "X1772-0091",
+    "X1772-0107",
+    "X1772-0106"
+   ],
+   "contorno_candidato": "G1772-U0105",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-4, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0106",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8095
+    ]
+   },
+   "celda": [
+    -3,
+    2
+   ],
+   "nodos": [
+    "X1772-0091",
+    "X1772-0092",
+    "X1772-0108",
+    "X1772-0107"
+   ],
+   "contorno_candidato": "G1772-U0106",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-3, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0107",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "incierta",
+    "cuadras_1936": [
+     8096,
+     8087
+    ]
+   },
+   "celda": [
+    -2,
+    2
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0107",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936",
+    "correspondencia_incierta"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-2, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0108",
+   "sector": "S1772-32",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "incierta",
+    "cuadras_1936": [
+     8097,
+     3487
+    ]
+   },
+   "celda": [
+    -1,
+    2
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0108",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936",
+    "correspondencia_incierta"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-1, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0109",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8099,
+     8094
+    ]
+   },
+   "celda": [
+    1,
+    2
+   ],
+   "nodos": [
+    "X1772-0095",
+    "X1772-0096",
+    "X1772-0112",
+    "X1772-0111"
+   ],
+   "contorno_candidato": "G1772-U0109",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [1, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0110",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8101
+    ]
+   },
+   "celda": [
+    2,
+    2
+   ],
+   "nodos": [
+    "X1772-0096",
+    "X1772-0097",
+    "X1772-0113",
+    "X1772-0112"
+   ],
+   "contorno_candidato": "G1772-U0110",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [2, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0111",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": [
+     8101,
+     8091
+    ]
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0112",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0113",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    5,
+    2
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0113",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [5, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0114",
+   "sector": "S1772-34",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    6,
+    2
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0114",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [6, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0115",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    7,
+    2
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0115",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [7, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0116",
+   "sector": "S1772-31",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -8,
+    3
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0116",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-8, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0117",
+   "sector": "S1772-31",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -7,
+    3
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0117",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-7, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0118",
+   "sector": "S1772-32",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -5,
+    3
+   ],
+   "nodos": [
+    "X1772-0105",
+    "X1772-0106",
+    "X1772-0123",
+    "X1772-0122"
+   ],
+   "contorno_candidato": "G1772-U0118",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-5, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0119",
+   "sector": "S1772-32",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": [
+     4475
+    ]
+   },
+   "celda": [
+    -4,
+    3
+   ],
+   "nodos": [
+    "X1772-0106",
+    "X1772-0107",
+    "X1772-0124",
+    "X1772-0123"
+   ],
+   "contorno_candidato": "G1772-U0119",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-4, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0120",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     4233,
+     8095
+    ]
+   },
+   "celda": [
+    -3,
+    3
+   ],
+   "nodos": [
+    "X1772-0107",
+    "X1772-0108",
+    "X1772-0125",
+    "X1772-0124"
+   ],
+   "contorno_candidato": "G1772-U0120",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-3, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0121",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8102,
+     8096
+    ]
+   },
+   "celda": [
+    -2,
+    3
+   ],
+   "nodos": [
+    "X1772-0108",
+    "X1772-0109",
+    "X1772-0126",
+    "X1772-0125"
+   ],
+   "contorno_candidato": "G1772-U0121",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-2, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0122",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     3598
+    ]
+   },
+   "celda": [
+    -1,
+    3
+   ],
+   "nodos": [
+    "X1772-0109",
+    "X1772-0110",
+    "X1772-0127",
+    "X1772-0126"
+   ],
+   "contorno_candidato": "G1772-U0122",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-1, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0123",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "fusionada",
+    "cuadras_1936": [
+     8103,
+     3598
+    ]
+   },
+   "celda": [
+    0,
+    3
+   ],
+   "nodos": [
+    "X1772-0110",
+    "X1772-0111",
+    "X1772-0128",
+    "X1772-0127"
+   ],
+   "contorno_candidato": "G1772-U0123",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [0, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0124",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     3212,
+     8099
+    ]
+   },
+   "celda": [
+    1,
+    3
+   ],
+   "nodos": [
+    "X1772-0111",
+    "X1772-0112",
+    "X1772-0129",
+    "X1772-0128"
+   ],
+   "contorno_candidato": "G1772-U0124",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [1, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0125",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "incierta",
+    "cuadras_1936": [
+     3035
+    ]
+   },
+   "celda": [
+    2,
+    3
+   ],
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "lado_sin_calle",
+    "esquina_sin_pareja_en_1936",
+    "correspondencia_incierta"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1); celda [2, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0126",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    3,
+    3
+   ],
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "lado_sin_calle",
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1); celda [3, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0127",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    4,
+    3
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0127",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [4, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0128",
+   "sector": "S1772-33",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    5,
+    3
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0128",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [5, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0129",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    6,
+    3
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0129",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [6, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0130",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    7,
+    3
+   ],
+   "nodos": [
+    "X1772-0117",
+    "X1772-0118",
+    "X1772-0135",
+    "X1772-0134"
+   ],
+   "contorno_candidato": "G1772-U0130",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [7, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0131",
+   "sector": "S1772-31",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0132",
+   "sector": "S1772-31",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -8,
+    4
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0132",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-8, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0133",
+   "sector": "S1772-31",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -7,
+    4
+   ],
+   "nodos": [
+    "X1772-0120",
+    "X1772-0121",
+    "X1772-0138",
+    "X1772-0137"
+   ],
+   "contorno_candidato": "G1772-U0133",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-7, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0134",
+   "sector": "S1772-32",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -6,
+    4
+   ],
+   "nodos": [
+    "X1772-0121",
+    "X1772-0122",
+    "X1772-0139",
+    "X1772-0138"
+   ],
+   "contorno_candidato": "G1772-U0134",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-6, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0135",
+   "sector": "S1772-32",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -5,
+    4
+   ],
+   "nodos": [
+    "X1772-0122",
+    "X1772-0123",
+    "X1772-0140",
+    "X1772-0139"
+   ],
+   "contorno_candidato": "G1772-U0135",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-5, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0136",
+   "sector": "S1772-32",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -4,
+    4
+   ],
+   "nodos": [
+    "X1772-0123",
+    "X1772-0124",
+    "X1772-0141",
+    "X1772-0140"
+   ],
+   "contorno_candidato": "G1772-U0136",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-4, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0137",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -3,
+    4
+   ],
+   "nodos": [
+    "X1772-0124",
+    "X1772-0125",
+    "X1772-0142",
+    "X1772-0141"
+   ],
+   "contorno_candidato": "G1772-U0137",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-3, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0138",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     3974,
+     8102
+    ]
+   },
+   "celda": [
+    -2,
+    4
+   ],
+   "nodos": [
+    "X1772-0125",
+    "X1772-0126",
+    "X1772-0143",
+    "X1772-0142"
+   ],
+   "contorno_candidato": "G1772-U0138",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-2, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0139",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     3652
+    ]
+   },
+   "celda": [
+    -1,
+    4
+   ],
+   "nodos": [
+    "X1772-0126",
+    "X1772-0127",
+    "X1772-0144",
+    "X1772-0143"
+   ],
+   "contorno_candidato": "G1772-U0139",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-1, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0140",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "fusionada",
+    "cuadras_1936": [
+     8103,
+     3652
+    ]
+   },
+   "celda": [
+    0,
+    4
+   ],
+   "nodos": [
+    "X1772-0127",
+    "X1772-0128",
+    "X1772-0145",
+    "X1772-0144"
+   ],
+   "contorno_candidato": "G1772-U0140",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [0, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0141",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0142",
+   "sector": "S1772-33",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0143",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    3,
+    4
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0143",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [3, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0144",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    4,
+    4
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0144",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [4, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0145",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    5,
+    4
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0145",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [5, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0146",
+   "sector": "S1772-34",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    6,
+    4
+   ],
+   "nodos": [
+    "X1772-0133",
+    "X1772-0134",
+    "X1772-0150",
+    "X1772-0149"
+   ],
+   "contorno_candidato": "G1772-U0146",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [6, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0147",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    7,
+    4
+   ],
+   "nodos": [
+    "X1772-0134",
+    "X1772-0135",
+    "X1772-0151",
+    "X1772-0150"
+   ],
+   "contorno_candidato": "G1772-U0147",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [7, 4] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0148",
+   "sector": "S1772-31",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0149",
+   "sector": "S1772-31",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0150",
+   "sector": "S1772-32",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0151",
+   "sector": "S1772-32",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [
+    "Entrada corta desde y=1125; no atravesar el frente rojo hasta y=1191."
+   ],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "excepcion_registrada"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0152",
+   "sector": "S1772-32",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -3,
+    5
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0152",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-3, 5] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0153",
+   "sector": "S1772-32",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -2,
+    5
+   ],
+   "nodos": [
+    "X1772-0142",
+    "X1772-0143",
+    "X1772-0192",
+    "X1772-0190"
+   ],
+   "contorno_candidato": "G1772-U0153",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-2, 5] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0154",
+   "sector": "S1772-32",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0155",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0156",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0157",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0157",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0158",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    3,
+    5
+   ],
+   "nodos": [
+    "X1772-0146",
+    "X1772-0147",
+    "X1772-0154",
+    "X1772-0153"
+   ],
+   "contorno_candidato": "G1772-U0158",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [3, 5] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0159",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    4,
+    5
+   ],
+   "nodos": [
+    "X1772-0147",
+    "X1772-0148",
+    "X1772-0155",
+    "X1772-0154"
+   ],
+   "contorno_candidato": "G1772-U0159",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [4, 5] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0160",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    5,
+    5
+   ],
+   "nodos": [
+    "X1772-0148",
+    "X1772-0149",
+    "X1772-0156",
+    "X1772-0155"
+   ],
+   "contorno_candidato": "G1772-U0160",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [5, 5] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0161",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    6,
+    5
+   ],
+   "nodos": [
+    "X1772-0149",
+    "X1772-0150",
+    "X1772-0157",
+    "X1772-0156"
+   ],
+   "contorno_candidato": "G1772-U0161",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [6, 5] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0162",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    7,
+    5
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0162",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [7, 5] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0163",
+   "sector": "S1772-32",
+   "ocupacion": "conjunto_especial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0164",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0165",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0166",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0167",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0167",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0168",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0168",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0169",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    3,
+    6
+   ],
+   "nodos": [
+    "X1772-0153",
+    "X1772-0154",
+    "X1772-0163",
+    "X1772-0162"
+   ],
+   "contorno_candidato": "G1772-U0169",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [3, 6] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0170",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    6,
+    6
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0170",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [6, 6] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0171",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0172",
+   "sector": "S1772-42",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0173",
+   "sector": "S1772-42",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -1,
+    7
+   ],
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "lado_sin_calle"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1); celda [-1, 7] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0174",
+   "sector": "S1772-43",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    0,
+    7
+   ],
+   "nodos": [
+    "X1772-0160",
+    "X1772-0161",
+    "X1772-0171",
+    "X1772-0170"
+   ],
+   "contorno_candidato": "G1772-U0174",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [0, 7] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0175",
+   "sector": "S1772-43",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0175",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0176",
+   "sector": "S1772-43",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0176",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0177",
+   "sector": "S1772-43",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    3,
+    7
+   ],
+   "nodos": [
+    "X1772-0162",
+    "X1772-0163",
+    "X1772-0173",
+    "X1772-0172"
+   ],
+   "contorno_candidato": "G1772-U0177",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [3, 7] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0178",
+   "sector": "S1772-43",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    4,
+    7
+   ],
+   "nodos": [
+    "X1772-0163",
+    "X1772-0164",
+    "X1772-0174",
+    "X1772-0173"
+   ],
+   "contorno_candidato": "G1772-U0178",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [4, 7] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0179",
+   "sector": "S1772-42",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -2,
+    8
+   ],
+   "nodos": [
+    "X1772-0168",
+    "X1772-0169",
+    "X1772-0177",
+    "X1772-0176"
+   ],
+   "contorno_candidato": "G1772-U0179",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-2, 8] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0180",
+   "sector": "S1772-42",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -1,
+    8
+   ],
+   "nodos": [
+    "X1772-0169",
+    "X1772-0170",
+    "X1772-0178",
+    "X1772-0177"
+   ],
+   "contorno_candidato": "G1772-U0180",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-1, 8] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0181",
+   "sector": "S1772-43",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    0,
+    8
+   ],
+   "nodos": [
+    "X1772-0170",
+    "X1772-0171",
+    "X1772-0179",
+    "X1772-0178"
+   ],
+   "contorno_candidato": "G1772-U0181",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [0, 8] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0182",
+   "sector": "S1772-43",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0182",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0183",
+   "sector": "S1772-43",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    3,
+    8
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0183",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [3, 8] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0184",
+   "sector": "S1772-43",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0185",
+   "sector": "S1772-42",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [
+    "Manzanas alargadas; no insertar una fila intermedia."
+   ],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "excepcion_registrada"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0186",
+   "sector": "S1772-42",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [
+    "Manzanas alargadas; no insertar una fila intermedia."
+   ],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "excepcion_registrada"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0187",
+   "sector": "S1772-43",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [
+    "Conservar la calle intermedia aproximada x=1067."
+   ],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "excepcion_registrada"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0188",
+   "sector": "S1772-43",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [
+    "Conservar la calle intermedia aproximada x=1067."
+   ],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "excepcion_registrada"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0189",
+   "sector": "S1772-11",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0189",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0190",
+   "sector": "S1772-13",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    3,
+    -6
+   ],
+   "nodos": [
+    "X1772-0006",
+    "X1772-0007",
+    "X1772-0016",
+    "X1772-0015"
+   ],
+   "contorno_candidato": "G1772-U0190",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [3, -6] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0191",
+   "sector": "S1772-11",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0191",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0192",
+   "sector": "S1772-13",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    2,
+    -5
+   ],
+   "nodos": [
+    "X1772-0014",
+    "X1772-0015",
+    "X1772-0023",
+    "X1772-0022"
+   ],
+   "contorno_candidato": "G1772-U0192",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [2, -5] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0193",
+   "sector": "S1772-13",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0194",
+   "sector": "S1772-23",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0195",
+   "sector": "S1772-23",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    0,
+    -3
+   ],
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "celda_compartida",
+    "lado_sin_calle"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1); celda [0, -3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0196",
+   "sector": "S1772-24",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0197",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    7,
+    -3
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0197",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [7, -3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0198",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8078
+    ]
+   },
+   "celda": [
+    0,
+    -2
+   ],
+   "nodos": [
+    "X1772-0193",
+    "X1772-0194",
+    "X1772-0044",
+    "X1772-0043"
+   ],
+   "contorno_candidato": "G1772-U0198",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [0, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0199",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "fusionada",
+    "cuadras_1936": [
+     8079
+    ]
+   },
+   "celda": [
+    1,
+    -2
+   ],
+   "nodos": [
+    "X1772-0194",
+    "X1772-0195",
+    "X1772-0045",
+    "X1772-0044"
+   ],
+   "contorno_candidato": "G1772-U0199",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [1, -2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0200",
+   "sector": "S1772-21",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -9,
+    -1
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0200",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-9, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0201",
+   "sector": "S1772-21",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -7,
+    -1
+   ],
+   "nodos": [
+    "X1772-0036",
+    "X1772-0037",
+    "X1772-0054",
+    "X1772-0053"
+   ],
+   "contorno_candidato": "G1772-U0201",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-7, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0202",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -2,
+    -1
+   ],
+   "nodos": [
+    "X1772-0041",
+    "X1772-0042",
+    "X1772-0059",
+    "X1772-0058"
+   ],
+   "contorno_candidato": "G1772-U0202",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-2, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0203",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -1,
+    -1
+   ],
+   "nodos": [
+    "X1772-0042",
+    "X1772-0043",
+    "X1772-0060",
+    "X1772-0059"
+   ],
+   "contorno_candidato": "G1772-U0203",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-1, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0204",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    0,
+    -1
+   ],
+   "nodos": [
+    "X1772-0043",
+    "X1772-0044",
+    "X1772-0061",
+    "X1772-0060"
+   ],
+   "contorno_candidato": "G1772-U0204",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [0, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0205",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     3071
+    ]
+   },
+   "celda": [
+    1,
+    -1
+   ],
+   "nodos": [
+    "X1772-0044",
+    "X1772-0045",
+    "X1772-0062",
+    "X1772-0061"
+   ],
+   "contorno_candidato": "G1772-U0205",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [1, -1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0206",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     4685
+    ]
+   },
+   "celda": [
+    -5,
+    1
+   ],
+   "nodos": [
+    "X1772-0072",
+    "X1772-0073",
+    "X1772-0090",
+    "X1772-0089"
+   ],
+   "contorno_candidato": "G1772-U0206",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-5, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0207",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     8089,
+     4685
+    ]
+   },
+   "celda": [
+    -4,
+    1
+   ],
+   "nodos": [
+    "X1772-0073",
+    "X1772-0074",
+    "X1772-0091",
+    "X1772-0090"
+   ],
+   "contorno_candidato": "G1772-U0207",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-4, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0208",
+   "sector": "S1772-34",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    6,
+    1
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0208",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [6, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0209",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    7,
+    1
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0209",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [7, 1] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0210",
+   "sector": "S1772-33",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "uno_a_uno",
+    "cuadras_1936": [
+     3382,
+     8093
+    ]
+   },
+   "celda": [
+    0,
+    2
+   ],
+   "nodos": [
+    "X1772-0094",
+    "X1772-0095",
+    "X1772-0111",
+    "X1772-0110"
+   ],
+   "contorno_candidato": "G1772-U0210",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [0, 2] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0211",
+   "sector": "S1772-32",
+   "ocupacion": "continua",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -6,
+    3
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0211",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-6, 3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0212",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0213",
+   "sector": "S1772-33",
+   "ocupacion": "parcial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    5,
+    6
+   ],
+   "nodos": [
+    "X1772-0155",
+    "X1772-0156",
+    "X1772-0165",
+    "X1772-0164"
+   ],
+   "contorno_candidato": "G1772-U0213",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [5, 6] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0214",
+   "sector": "S1772-43",
+   "ocupacion": "conjunto_especial",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": "G1772-U0214",
+   "excepciones": [
+    "Plaza de Candelaria con cuerpos aislados; no prolongar frentes sobre su espacio público."
+   ],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "excepcion_registrada"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0215",
+   "sector": "S1772-42",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0216",
+   "sector": "S1772-43",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0217",
+   "sector": "S1772-11",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0218",
+   "sector": "S1772-11",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0219",
+   "sector": "S1772-11",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0220",
+   "sector": "S1772-21",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0221",
+   "sector": "S1772-21",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0222",
+   "sector": "S1772-21",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0223",
+   "sector": "S1772-21",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0224",
+   "sector": "S1772-21",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0225",
+   "sector": "S1772-31",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0226",
+   "sector": "S1772-31",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0227",
+   "sector": "S1772-31",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0228",
+   "sector": "S1772-31",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0229",
+   "sector": "S1772-31",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0230",
+   "sector": "S1772-13",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    1,
+    -6
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0230",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [1, -6] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0231",
+   "sector": "S1772-13",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0232",
+   "sector": "S1772-23",
+   "ocupacion": "conjunto_especial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0233",
+   "sector": "S1772-23",
+   "ocupacion": "plaza",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    0,
+    0
+   ],
+   "nodos": [
+    "X1772-0060",
+    "X1772-0061",
+    "X1772-0078",
+    "X1772-0077"
+   ],
+   "contorno_candidato": "G1772-U0233",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [0, 0] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0234",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0235",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0236",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0237",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0238",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0239",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0240",
+   "sector": "S1772-24",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0241",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0242",
+   "sector": "S1772-33",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    4,
+    6
+   ],
+   "nodos": [
+    "X1772-0154",
+    "X1772-0155",
+    "X1772-0164",
+    "X1772-0163"
+   ],
+   "contorno_candidato": "G1772-U0242",
+   "excepciones": [],
+   "estado": "aprobada",
+   "motivos": [],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [4, 6] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0243",
+   "sector": "S1772-43",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0244",
+   "sector": "S1772-44",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0245",
+   "sector": "S1772-43",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0246",
+   "sector": "S1772-43",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0247",
+   "sector": "S1772-43",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0248",
+   "sector": "S1772-43",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0249",
+   "sector": "S1772-42",
+   "ocupacion": "terreno_libre",
+   "lectura": "bordes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": [
+    -3,
+    8
+   ],
+   "nodos": null,
+   "contorno_candidato": "G1772-U0249",
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "esquina_sin_pareja_en_1936"
+   ],
+   "procedencia": "censo del original (lectura bordes, revisión de la fase 1); celda [-3, 8] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0250",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    0,
+    -3
+   ],
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "celda_compartida",
+    "lado_sin_calle"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1); celda [0, -3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0251",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    1,
+    -3
+   ],
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "celda_compartida",
+    "lado_sin_calle"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1); celda [1, -3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0252",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    2,
+    -3
+   ],
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "celda_compartida",
+    "lado_sin_calle"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1); celda [2, -3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0253",
+   "sector": "S1772-23",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": [
+    3,
+    -3
+   ],
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "celda_compartida",
+    "lado_sin_calle"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1); celda [3, -3] del damero sobre la red de la referencia"
+  },
+  {
+   "id": "U1772-0254",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0255",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0256",
+   "sector": "S1772-12",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0257",
+   "sector": "S1772-12",
+   "ocupacion": "parte_de_otra_unidad",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "ocupacion_sin_unidad_propia"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0258",
+   "sector": "S1772-11",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0259",
+   "sector": "S1772-12",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0260",
+   "sector": "S1772-12",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0261",
+   "sector": "S1772-13",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0262",
+   "sector": "S1772-14",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0263",
+   "sector": "S1772-14",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0264",
+   "sector": "S1772-13",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0265",
+   "sector": "S1772-14",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0266",
+   "sector": "S1772-14",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0267",
+   "sector": "S1772-14",
+   "ocupacion": "conjunto_especial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0268",
+   "sector": "S1772-34",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0269",
+   "sector": "S1772-34",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0270",
+   "sector": "S1772-34",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0271",
+   "sector": "S1772-34",
+   "ocupacion": "descartada_no_edificacion",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "ocupacion_sin_unidad_propia"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0272",
+   "sector": "S1772-12",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0273",
+   "sector": "S1772-22",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0274",
+   "sector": "S1772-22",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0275",
+   "sector": "S1772-22",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0276",
+   "sector": "S1772-22",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0277",
+   "sector": "S1772-22",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0278",
+   "sector": "S1772-24",
+   "ocupacion": "aislada",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0279",
+   "sector": "S1772-31",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0280",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0281",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0282",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0283",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0284",
+   "sector": "S1772-34",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0285",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0286",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0287",
+   "sector": "S1772-33",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0288",
+   "sector": "S1772-33",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0289",
+   "sector": "S1772-42",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0290",
+   "sector": "S1772-42",
+   "ocupacion": "parcial",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0291",
+   "sector": "S1772-42",
+   "ocupacion": "continua",
+   "lectura": "sin_cara",
+   "correspondencia": {
+    "clase": "ausente",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero"
+   ],
+   "procedencia": "censo del original (lectura sin_cara, revisión de la fase 1)"
+  },
+  {
+   "id": "U1772-0292",
+   "sector": "S1772-44",
+   "ocupacion": "terreno_libre",
+   "lectura": "restantes",
+   "correspondencia": {
+    "clase": "vacio_coincide",
+    "cuadras_1936": []
+   },
+   "celda": null,
+   "nodos": null,
+   "contorno_candidato": null,
+   "excepciones": [],
+   "estado": "pendiente",
+   "motivos": [
+    "sin_celda_del_damero",
+    "sector_limite_del_calce"
+   ],
+   "procedencia": "censo del original (lectura restantes, revisión de la fase 1)"
+  }
+ ]
+}
