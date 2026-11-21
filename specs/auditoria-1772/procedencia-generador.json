@@ -1,0 +1,225 @@
+{
+ "alcance": "Procedencia de cada entrada de los pasos del generador que arman la época de 1772 (tools/datos-pasos.mjs), y de las entradas de la referencia histórica (tools/geo/referencias/1772-*.json). Separa los datos históricos de las heurísticas heredadas de 1936 y OSM (specs/08, fase 2). La referencia solo lee entradas históricas; el generador todavía no la lee (fase 3).",
+ "fecha": "2026-11-21",
+ "clases": {
+  "fuente_historica": true,
+  "historica_por_identidad": true,
+  "historica_curada": true,
+  "historica_reproyectada": true,
+  "base_1936": true,
+  "metadatos": true,
+  "heuristica_1936": false,
+  "heuristica_osm": false,
+  "heuristica_color": false,
+  "parametros_heuristicos": false,
+  "derivado_mixto": false,
+  "otras_epocas": true
+ },
+ "pasos": {
+  "calce-1772": [
+   {
+    "entrada": "original:1772-pares-agi-exato-mapa",
+    "clase": "fuente_historica",
+    "nota": "Escaneo original del plano de 1772 (bytes intactos)."
+   },
+   {
+    "entrada": "fuentes/mapas/1772-pares-agi-exato-mapa/ficha.json",
+    "clase": "metadatos",
+    "nota": "Ficha de la fuente: licencia y procedencia."
+   },
+   {
+    "entrada": "tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json",
+    "clase": "historica_por_identidad",
+    "nota": "Calce por identidad (T33j.2a): anclas de cruces y hitos identificados uno a uno, sin correlación."
+   },
+   {
+    "entrada": "tools/geo/gcp/plaza-1936.json",
+    "clase": "base_1936",
+    "nota": "Semillas manuales de la Plaza Mayor en 1936."
+   },
+   {
+    "entrada": "fuentes/derivados/1936/mosaico.json",
+    "clase": "base_1936",
+    "nota": "Marco del mosaico de 1936 (píxel ⇄ cuadrícula): sistema de coordenadas, no contenido."
+   },
+   {
+    "entrada": "fuentes/derivados/1936/segmentacion/mosaico/clases-costura.png",
+    "clase": "base_1936",
+    "nota": "Con `etapas: []` (calce por identidad) la máscara de calles de 1936 no entra en ninguna correlación: el paso la carga y solo toma de ella el tamaño del lienzo. No aporta geometría a 1772."
+   }
+  ],
+  "calles-nuevas": [
+   {
+    "entrada": "fuentes/derivados/1936/segmentacion/mosaico/clases-costura.png",
+    "clase": "heuristica_1936",
+    "nota": "Segmentación por color del plano de 1936 (manzanas, calles, edificado): geometría de 1936, no de 1772."
+   },
+   {
+    "entrada": "fuentes/derivados/1936/mosaico.json",
+    "clase": "base_1936",
+    "nota": "Marco del mosaico de 1936 (píxel ⇄ cuadrícula): sistema de coordenadas, no contenido."
+   },
+   {
+    "entrada": "fuentes/derivados/hoy/osm.json",
+    "clase": "heuristica_osm",
+    "nota": "Red de calles de hoy (OpenStreetMap): sus tramos se clasifican contra 1936 y 1772, pero la red es la de hoy."
+   },
+   {
+    "entrada": "tools/geo/gcp/1936-wgs84.json",
+    "clase": "base_1936",
+    "nota": "Georreferencia de 1936 (cuadrícula ⇄ WGS84) para llevar OSM al mosaico."
+   },
+   {
+    "entrada": "tools/geo/calles-historicas.json",
+    "clase": "historica_curada",
+    "nota": "Calles verificadas en ambos planos que OSM omite (San Jacinto–Traposos y otras)."
+   },
+   {
+    "entrada": "fuentes/derivados/1772/calzado.tif",
+    "clase": "historica_reproyectada",
+    "nota": "El original de 1772 llevado a 1936 por el calce por identidad; error por sector en calce-identidad.md."
+   },
+   {
+    "entrada": "fuentes/derivados/1772/calzado.json",
+    "clase": "historica_reproyectada",
+    "nota": "Metadatos del calzado de 1772."
+   },
+   {
+    "entrada": "tools/geo/epocas/epocas.json",
+    "clase": "parametros_heuristicos",
+    "nota": "Umbrales de color, cierres y holguras de la línea de tiempo: parámetros, no lectura del original."
+   }
+  ],
+  "vectorizar": [
+   {
+    "entrada": "fuentes/derivados/1936/segmentacion/mosaico/clases-costura.png",
+    "clase": "heuristica_1936",
+    "nota": "Segmentación por color del plano de 1936 (manzanas, calles, edificado): geometría de 1936, no de 1772."
+   },
+   {
+    "entrada": "fuentes/derivados/1936/mosaico.json",
+    "clase": "base_1936",
+    "nota": "Marco del mosaico de 1936 (píxel ⇄ cuadrícula): sistema de coordenadas, no contenido."
+   },
+   {
+    "entrada": "fuentes/derivados/1936/tramos.json",
+    "clase": "derivado_mixto",
+    "nota": "Tramos de OSM clasificados contra 1936 y 1772 (calles-nuevas): red de hoy filtrada, no la red del original."
+   },
+   {
+    "entrada": "fuentes/derivados/1936/edificado-1772.png",
+    "clase": "heuristica_color",
+    "nota": "Lo edificado de 1772 por el color del plano calzado, con corrimiento local por correlación (calles_nuevas.llevar)."
+   },
+   {
+    "entrada": "tools/geo/cuadras-1772.json",
+    "clase": "historica_curada",
+    "nota": "Diez cuadras totalmente rojas verificadas en el original (#69), con las esquinas del damero."
+   }
+  ],
+  "epocas": [
+   {
+    "entrada": "tools/geo/epocas/epocas.json",
+    "clase": "parametros_heuristicos",
+    "nota": "Umbrales, cierres y holguras de cada época."
+   },
+   {
+    "entrada": "fuentes/derivados/1936/ciudad-1936.json",
+    "clase": "heuristica_1936",
+    "nota": "Casas y manzanas vectorizadas de 1936: la persistencia hacia atrás parte de ellas."
+   },
+   {
+    "entrada": "fuentes/derivados/1578/ciudad-1578.json",
+    "clase": "otras_epocas",
+    "nota": "Esquema de Pimentel (1578)."
+   },
+   {
+    "entrada": "fuentes/derivados/1911/calzado.tif",
+    "clase": "otras_epocas",
+    "nota": "Plano de 1911 calzado."
+   },
+   {
+    "entrada": "fuentes/derivados/1889/calzado.tif",
+    "clase": "otras_epocas",
+    "nota": "Plano de 1889 calzado."
+   },
+   {
+    "entrada": "fuentes/derivados/1843/calzado.tif",
+    "clase": "otras_epocas",
+    "nota": "Plano de 1843 calzado."
+   },
+   {
+    "entrada": "fuentes/derivados/1772/calzado.tif",
+    "clase": "historica_reproyectada",
+    "nota": "El original de 1772 llevado a 1936 por el calce por identidad."
+   }
+  ]
+ },
+ "referencia": [
+  {
+   "entrada": "specs/auditoria-1772/trazado-calles-original.json",
+   "clase": "historica_curada",
+   "nota": "Ejes trazados sobre el original, revisados en los 16 sectores."
+  },
+  {
+   "entrada": "specs/auditoria-1772/sectores.json",
+   "clase": "historica_curada",
+   "nota": "Sectores del original."
+  },
+  {
+   "entrada": "specs/auditoria-1772/unidades-original.json",
+   "clase": "historica_curada",
+   "nota": "Censo de unidades con su ocupación leída en el original."
+  },
+  {
+   "entrada": "specs/auditoria-1772/lectura-bordes-original.json",
+   "clase": "historica_curada",
+   "nota": "Lectura individual de bordes."
+  },
+  {
+   "entrada": "specs/auditoria-1772/contornos-sin-cara.json",
+   "clase": "historica_curada",
+   "nota": "Lectura de unidades sin cara única."
+  },
+  {
+   "entrada": "specs/auditoria-1772/lectura-restantes-original.json",
+   "clase": "historica_curada",
+   "nota": "Lectura de las unidades restantes."
+  },
+  {
+   "entrada": "specs/auditoria-1772/frentes-caras-candidatas.json",
+   "clase": "historica_curada",
+   "nota": "Caras del esbozo del original; solo deciden la celda, no se aprueban como contorno."
+  },
+  {
+   "entrada": "specs/auditoria-1772/limites-calce.json",
+   "clase": "historica_curada",
+   "nota": "Decisión del responsable sobre los sectores límite del calce."
+  },
+  {
+   "entrada": "specs/auditoria-1772/calce-identidad.json",
+   "clase": "historica_curada",
+   "nota": "Informe del calce por identidad: semillas y rótulos excluidos."
+  },
+  {
+   "entrada": "specs/auditoria-1772/controles-calce-sectores.json",
+   "clase": "historica_curada",
+   "nota": "Parejas por identidad de los cruces del damero."
+  },
+  {
+   "entrada": "specs/auditoria-1772/anclas-topologia.json",
+   "clase": "historica_curada",
+   "nota": "Cruces por topología revisados a ojo."
+  },
+  {
+   "entrada": "specs/auditoria-1772/correspondencias-unidades.json",
+   "clase": "historica_por_identidad",
+   "nota": "Clase de correspondencia con 1936 por identidad de pareja; describe el sistema, no altera la geometría de la referencia."
+  },
+  {
+   "entrada": "tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json",
+   "clase": "historica_por_identidad",
+   "nota": "Anclas por identidad: pareja en 1936 de los cruces."
+  }
+ ]
+}
