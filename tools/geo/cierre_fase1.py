@@ -166,6 +166,15 @@ def fuera_del_ajuste(puntos, ajuste_px, tol=TOLERANCIA_AJUSTE_PX):
             if all(math.hypot(p['original'][0] - x, p['original'][1] - y) >= tol for x, y in ajuste_px)]
 
 
+def loo_vigente(identidad, config):
+    """El `por_sector` de calce-identidad.json solo si su huella es la del calce elegido: un LOO de otro calce no
+    controla nada, y sin huella queda pendiente, como el desvío de los nodos curados."""
+    from anclas_identidad import huella_calce
+    if not identidad.get('huella_calce') or identidad['huella_calce'] != huella_calce(config):
+        return None
+    return identidad.get('por_sector')
+
+
 MINIMO_ANCLAS_LOO = 2  # con una sola ancla, su LOO es una extrapolación y no controla nada
 
 
@@ -366,12 +375,13 @@ def main():
     informe = OrderedDict([
         ('alcance', 'Conteos derivados de los JSON del inventario; no certifica fidelidad histórica ni cierra incidencias.'),
         ('puerta_de_salida', puerta_de_salida(filas, sectores, residuos, incidencias, control, correspondencias,
-                                              documentos.get('accesos-primer-lote.json'), identidad.get('por_sector'))),
+                                              documentos.get('accesos-primer-lote.json'), loo_vigente(identidad, config))),
         ('totales', {'unidades': len(filas), 'ocupacion': dict(sorted(Counter(f['ocupacion'] for f in filas).items())),
                      'lectura': dict(sorted(Counter(f['lectura'] for f in filas).items())),
                      'correspondencia': dict(sorted(Counter(f['correspondencia'] for f in filas).items())),
                      'incidencias': dict(sorted(Counter(i['estado'] for i in incidencias).items()))}),
         ('por_sector', resumen_por_sector(filas, sectores)),
+        ('loo_del_calce_vigente', loo_vigente(identidad, config) is not None),
         ('calce_por_sector_nota', 'gcp_ajuste y loo_* miden el calce vigente. controles_damero y desvio_damero_mediana_m '
                                   'cuentan solo los cruces de damero que no son anclas del calce (anclas_damero los que sí, o caen sobre '
                                   'una semilla: su error está en el LOO; descartados_damero los de esquina de 1936 que es un rótulo, '
