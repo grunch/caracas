@@ -4,7 +4,7 @@ from copy import deepcopy
 import pytest
 
 from cierre_fase1 import (
-    controles_fuera_del_calce, fuera_del_ajuste,
+    controles_fuera_del_calce, fuera_del_ajuste, loo_vigente,
     SUBTAREAS, cobertura_unidades, enlazar_subtareas, indice_evidencias, leer_verificacion, puerta_de_salida,
     residuos_por_sector, resumen_por_sector,
 )
@@ -172,7 +172,7 @@ def test_puerta_de_salida_se_cumple_con_controles_de_damero_y_correspondencias_v
               'controles_por_hito': [{'sector': 'S2'}]}
     correspondencias = correspondencias_verificadas()
     recorridos = accesos({'F1': 'recorrido', 'F3': 'recorrido'})
-    loo = [{'sector': 'S1', 'bajo_umbral': True}, {'sector': 'S2', 'bajo_umbral': True}]
+    loo = [{'sector': 'S1', 'anclas': 3, 'bajo_umbral': True}, {'sector': 'S2', 'anclas': 2, 'bajo_umbral': True}]
     puerta = puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias, recorridos, loo)
     assert puerta['area_recorrida'] == {'cumplido': True, 'sectores': 3, 'sectores_pendientes': []}
     assert puerta['controles_de_calce_por_sector'] == {'cumplido': True, 'sectores_sin_control_independiente': [],
@@ -372,7 +372,7 @@ def test_un_sector_con_loo_sobre_el_umbral_deja_el_criterio_pendiente_aunque_ten
     filas = cobertura_unidades(unidades(), lecturas(), contraste())
     residuos = residuos_por_sector([], [{'id': 'N1', 'original': [30, 30], 'desvio_m': 9.0},
                                         {'id': 'N2', 'original': [130, 30], 'desvio_m': 9.0}], sectores())
-    loo = [{'sector': 'S1', 'bajo_umbral': True}, {'sector': 'S2', 'bajo_umbral': False}]
+    loo = [{'sector': 'S1', 'anclas': 3, 'bajo_umbral': True}, {'sector': 'S2', 'anclas': 3, 'bajo_umbral': False}]
     criterio = puerta_de_salida(filas, sectores(), residuos, [], None, None, None, loo)['controles_de_calce_por_sector']
     assert criterio['sectores_sin_control_independiente'] == []
     assert criterio['sectores_sin_loo_bajo_umbral'] == ['S2']
@@ -389,3 +389,38 @@ def test_un_cruce_descartado_por_rotulo_no_es_control_ni_cuenta_como_ancla():
     # Assert
     assert filtrado['por_sector'][0] == {'sector': 'S1', 'controles': 1, 'mediana_m': 50.0, 'anclas': 1, 'descartados': 1}
     assert filtrado['por_sector'][1] == {'sector': 'S2', 'controles': 1, 'mediana_m': 7.0, 'anclas': 0, 'descartados': 0}
+
+
+def test_el_loo_de_un_sector_con_dos_anclas_o_mas_cuenta_como_control_independiente():
+    # decisión del responsable (21-11-2026): cada ancla medida con un calce que no la usa es un control
+    filas = cobertura_unidades(unidades(), lecturas(), contraste())
+    loo = [{'sector': 'S1', 'anclas': 2, 'bajo_umbral': True}, {'sector': 'S2', 'anclas': 5, 'bajo_umbral': True}]
+    criterio = puerta_de_salida(filas, sectores(), residuos_por_sector([], [], sectores()), [], None, None, None, loo)[
+        'controles_de_calce_por_sector']
+    assert criterio == {'cumplido': True, 'sectores_sin_control_independiente': [], 'sectores_sin_loo_bajo_umbral': [],
+                        'sectores_sin_unidades': []}
+
+
+def test_un_sector_con_una_sola_ancla_no_tiene_loo_que_lo_controle():
+    filas = cobertura_unidades(unidades(), lecturas(), contraste())
+    loo = [{'sector': 'S1', 'anclas': 2, 'bajo_umbral': True}, {'sector': 'S2', 'anclas': 1, 'bajo_umbral': True}]
+    criterio = puerta_de_salida(filas, sectores(), residuos_por_sector([], [], sectores()), [], None, None, None, loo)[
+        'controles_de_calce_por_sector']
+    assert criterio['sectores_sin_control_independiente'] == ['S2']
+    assert criterio['sectores_sin_loo_bajo_umbral'] == ['S2']
+    assert criterio['cumplido'] is False
+
+
+def test_el_loo_del_informe_de_identidad_vale_solo_si_su_huella_es_la_del_calce_elegido():
+    # Arrange
+    from anclas_identidad import huella_calce
+    gcps = [{'px': 1, 'py': 2, 'x36': 3, 'y36': 4}]
+    config = {'gcps': gcps, 'suavizado': 0.005}
+    filas = [{'sector': 'S1', 'anclas': 3, 'bajo_umbral': True}]
+
+    # Act / Assert
+    assert loo_vigente({'huella_calce': huella_calce(gcps, 0.005), 'por_sector': filas}, config) == filas
+    viejos = {**config, 'gcps': gcps + [{'px': 9, 'py': 9, 'x36': 9, 'y36': 9}]}   # GCP sin regenerar
+    assert loo_vigente({'huella_calce': huella_calce(gcps, 0.005), 'por_sector': filas}, viejos) is None
+    assert loo_vigente({'por_sector': filas}, config) is None   # informe sin huella: queda pendiente
+    assert loo_vigente({}, config) is None

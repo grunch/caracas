@@ -1,0 +1,90 @@
+{
+ "fecha": "2026-11-21",
+ "alcance": "Cruces de 1772 sin esquina con nombre en 1936: la pareja sale del corte de su fila y su columna en el damero de 1936 (anclas_identidad.cruce_por_topologia), sin el calce. Solo entran los que se ven en un cruce de calles del mosaico.",
+ "metodo": "recortes de 600 px del mosaico de 1936 con la fila, la columna y los cruces vecinos conocidos; revisión a ojo el 21-11-2026",
+ "sin_fila_o_columna": "13 cruces de los bordes (S1772-11, -21, -24, -31, -34, -42) no tienen cruces conocidos en su fila o su columna",
+ "aceptados": [
+  {
+   "id": "X1772-0003",
+   "verificacion": "cruce de la Plaza de Capuchinos con la calle Catorce, junto a la cota 890.704"
+  },
+  {
+   "id": "X1772-0049",
+   "verificacion": "cruce junto a la cota 962.320"
+  },
+  {
+   "id": "X1772-0098",
+   "verificacion": "cruce de La Fé, en la cota 932.239"
+  },
+  {
+   "id": "X1772-0136",
+   "verificacion": "cruce de la calle Sur junto al Puente Sucre"
+  },
+  {
+   "id": "X1772-0139",
+   "verificacion": "cruce en la cota 881.673"
+  },
+  {
+   "id": "X1772-0157",
+   "verificacion": "cruce de la calle de la iglesia de San José"
+  },
+  {
+   "id": "X1772-0171",
+   "verificacion": "cruce de La Cruz, en la cota 890.773, esquina de la Plaza de Candelaria"
+  },
+  {
+   "id": "X1772-0179",
+   "verificacion": "cruce de Alcabala, en la cota 891.396"
+  },
+  {
+   "id": "X1772-0199",
+   "verificacion": "cruce entre las cotas 959.669 y 957.924; la calle ancha punteada confunde al esqueleto"
+  }
+ ],
+ "rechazados": [
+  {
+   "id": "X1772-0004",
+   "motivo": "el corte cae dentro de una cuadra, sin calle"
+  },
+  {
+   "id": "X1772-0013",
+   "motivo": "el corte cae dentro de una cuadra, sin calle"
+  },
+  {
+   "id": "X1772-0066",
+   "motivo": "el corte cae en el jardín de la Quinta Guzmán: la calle no existe en 1936"
+  },
+  {
+   "id": "X1772-0067",
+   "motivo": "dudoso: junto a la costura del mosaico"
+  },
+  {
+   "id": "X1772-0093",
+   "motivo": "el corte cae en la costura del mosaico"
+  },
+  {
+   "id": "X1772-0099",
+   "motivo": "dudoso: sobre la calle pero entre dos filas"
+  },
+  {
+   "id": "X1772-0130",
+   "motivo": "dudoso: sin calle que cruce la fila (escalinatas)"
+  },
+  {
+   "id": "X1772-0131",
+   "motivo": "el corte cae junto a la quebrada, sin calle que cruce"
+  },
+  {
+   "id": "X1772-0158",
+   "motivo": "dudoso: no se distingue la calle que cruza"
+  },
+  {
+   "id": "X1772-0166",
+   "motivo": "el corte cae en la quebrada"
+  },
+  {
+   "id": "X1772-0180",
+   "motivo": "dudoso: la columna pasa entre edificios"
+  }
+ ]
+}

@@ -166,15 +166,30 @@ def fuera_del_ajuste(puntos, ajuste_px, tol=TOLERANCIA_AJUSTE_PX):
             if all(math.hypot(p['original'][0] - x, p['original'][1] - y) >= tol for x, y in ajuste_px)]
 
 
-def _sectores_sin_control(sectores, filas, residuos, damero):
+def loo_vigente(identidad, config):
+    """El `por_sector` de calce-identidad.json solo si su huella es la de los GCP efectivos del calce elegido: un LOO
+    de otro ajuste no controla nada, y sin huella queda pendiente, como el desvío de los nodos curados."""
+    from anclas_identidad import huella_calce
+    if not identidad.get('huella_calce') or identidad['huella_calce'] != huella_calce(config.get('gcps', []),
+                                                                                    config.get('suavizado', 0.0)):
+        return None
+    return identidad.get('por_sector')
+
+
+MINIMO_ANCLAS_LOO = 2  # con una sola ancla, su LOO es una extrapolación y no controla nada
+
+
+def _sectores_sin_control(sectores, filas, residuos, damero, loo=None):
     """Sectores con unidades y sin ningún control independiente: ni nodo curado medido sobre el calce vigente,
-    ni cruce de damero, ni hito. S41 (sin unidades) no aplica."""
+    ni cruce de damero, ni hito, ni LOO de al menos dos anclas (decisión del responsable del 21-11-2026: cada ancla
+    medida con un calce que no la usa es un control). S41 (sin unidades) no aplica."""
     con_unidades = {f['sector'] for f in filas}
     cubiertos = {r['sector'] for r in residuos
                  if r['controles_independientes'] > 0 and r.get('desvio_independiente_vigente') is not False}
     if damero:
         cubiertos |= {s['sector'] for s in damero.get('por_sector', []) if s['controles'] > 0}
         cubiertos |= {h['sector'] for h in damero.get('controles_por_hito', [])}
+    cubiertos |= {r['sector'] for r in (loo or []) if r.get('anclas', 0) >= MINIMO_ANCLAS_LOO}
     return sorted(s['id'] for s in sectores if s['id'] in con_unidades and s['id'] not in cubiertos)
 
 
@@ -290,8 +305,8 @@ def puerta_de_salida(filas, sectores, residuos, incidencias, damero=None, corres
     recorridos de calle; `loo`: el `por_sector` de calce-identidad.json (error dejando uno fuera de las anclas).
     Sin ellos, sus criterios quedan pendientes.
     """
-    sin_control = _sectores_sin_control(sectores, filas, residuos, damero)
-    bajo_umbral = {r['sector'] for r in (loo or []) if r.get('bajo_umbral')}
+    sin_control = _sectores_sin_control(sectores, filas, residuos, damero, loo)
+    bajo_umbral = {r['sector'] for r in (loo or []) if r.get('bajo_umbral') and r.get('anclas', 0) >= MINIMO_ANCLAS_LOO}
     sin_loo = sorted({f['sector'] for f in filas} - bajo_umbral)
     sin_subtarea = [i['id'] for i in incidencias if i['sin_subtarea'] and i['estado'] not in ESTADOS_SIN_DEFECTO]
     criterios = {
@@ -361,12 +376,13 @@ def main():
     informe = OrderedDict([
         ('alcance', 'Conteos derivados de los JSON del inventario; no certifica fidelidad histórica ni cierra incidencias.'),
         ('puerta_de_salida', puerta_de_salida(filas, sectores, residuos, incidencias, control, correspondencias,
-                                              documentos.get('accesos-primer-lote.json'), identidad.get('por_sector'))),
+                                              documentos.get('accesos-primer-lote.json'), loo_vigente(identidad, config))),
         ('totales', {'unidades': len(filas), 'ocupacion': dict(sorted(Counter(f['ocupacion'] for f in filas).items())),
                      'lectura': dict(sorted(Counter(f['lectura'] for f in filas).items())),
                      'correspondencia': dict(sorted(Counter(f['correspondencia'] for f in filas).items())),
                      'incidencias': dict(sorted(Counter(i['estado'] for i in incidencias).items()))}),
         ('por_sector', resumen_por_sector(filas, sectores)),
+        ('loo_del_calce_vigente', loo_vigente(identidad, config) is not None),
         ('calce_por_sector_nota', 'gcp_ajuste y loo_* miden el calce vigente. controles_damero y desvio_damero_mediana_m '
                                   'cuentan solo los cruces de damero que no son anclas del calce (anclas_damero los que sí, o caen sobre '
                                   'una semilla: su error está en el LOO; descartados_damero los de esquina de 1936 que es un rótulo, '
