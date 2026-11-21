@@ -391,6 +391,25 @@
       "subtareas": [
         "T33j.7a"
       ]
+    },
+    {
+      "id": "I1772-014",
+      "sector": "S1772-24",
+      "categoria": "calce_incompatible_con_referencia_curada",
+      "estado": "confirmado",
+      "prioridad": "P2",
+      "baseline": "B1772-001",
+      "observacion": "En el borde este (S1772-24) las 5 anclas por identidad del calce de 1772 se apartan entre 21 y 62 m dejando cada una fuera del ajuste (mediana 30,8 m, sobre la tolerancia de 15 m): X1772-0033 61,9 m, X1772-0082 38,0 m, X1772-0049 30,8 m, X1772-0199 24,0 m, X1772-0083 21,2 m.",
+      "causa": "Deformación de media cuadra del dibujo de 1772 en el borde este, no un error de conteo de calles; los demás cruces del sector no tienen pareja segura en 1936.",
+      "evidencia": "calce-identidad.json (anclas_detalle, por_sector) y calce-identidad.md; aceptado como límite documentado en limites-calce.json",
+      "fases_candidatas": [
+        2
+      ],
+      "pr_correccion": null,
+      "prueba_regresion": "pendiente: la ocupación periférica de S1772-24 no se ubica por cercanía al calce sin revisar el desvío del sector",
+      "subtareas": [
+        "T33j.2b"
+      ]
     }
   ]
 }

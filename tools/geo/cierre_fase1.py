@@ -18,7 +18,7 @@ import statistics
 # Subtareas correctivas de specs/08 (tabla «Subtareas correctivas identificadas por la auditoría»).
 SUBTAREAS = OrderedDict([
     ('T33j.2a', ['I1772-010']),
-    ('T33j.2b', []),
+    ('T33j.2b', ['I1772-014']),
     ('T33j.3a', ['I1772-001', 'I1772-003']),
     ('T33j.3b', ['I1772-007', 'I1772-010']),
     ('T33j.4a', ['I1772-007']),
@@ -176,6 +176,26 @@ def loo_vigente(identidad, config):
     return identidad.get('por_sector')
 
 
+def limites_vigentes(limites, config):
+    """Sectores aceptados como límite documentado del calce (limites-calce.json), solo si el registro es del calce
+    elegido (misma `huella_calce`). Decisión del responsable del 21-11-2026: un sector sin puntos con pareja segura en
+    1936 no se cierra ampliando la tolerancia, sino dejando su error, su causa y la decisión a la vista. Si el calce
+    cambia, el límite deja de valer y hay que volver a revisarlo."""
+    if not limites:
+        return frozenset()
+    decision = limites.get('decision') or {}
+    if not decision.get('fecha') or not decision.get('responsable'):
+        raise ValueError('limites-calce.json: la decisión necesita fecha y responsable')
+    for s in limites.get('sectores', []):
+        if not s.get('sector') or not s.get('motivo'):
+            raise ValueError(f'limites-calce.json: cada límite necesita sector y motivo ({s})')
+    from anclas_identidad import huella_calce
+    if not limites.get('huella_calce') or limites['huella_calce'] != huella_calce(config.get('gcps', []),
+                                                                                config.get('suavizado', 0.0)):
+        return frozenset()
+    return frozenset(s['sector'] for s in limites['sectores'])
+
+
 MINIMO_ANCLAS_LOO = 2  # con una sola ancla, su LOO es una extrapolación y no controla nada
 
 
@@ -297,27 +317,32 @@ def _criterio_area(filas, sectores):
     return {'cumplido': bool(sectores) and not pendientes, 'sectores': len(sectores), 'sectores_pendientes': pendientes}
 
 
-def puerta_de_salida(filas, sectores, residuos, incidencias, damero=None, correspondencias=None, accesos=None, loo=None):
+def puerta_de_salida(filas, sectores, residuos, incidencias, damero=None, correspondencias=None, accesos=None, loo=None,
+                     limites=frozenset()):
     """Criterios de 1D con su cumplimiento. `fase_1_cerrable` exige todos; los pendientes quedan a la vista.
 
     `damero`: controles-calce-sectores.json (por_sector, controles_por_hito); `correspondencias`:
     correspondencias-unidades.json con su verificación visual; `accesos`: accesos-primer-lote.json con sus
-    recorridos de calle; `loo`: el `por_sector` de calce-identidad.json (error dejando uno fuera de las anclas).
-    Sin ellos, sus criterios quedan pendientes.
+    recorridos de calle; `loo`: el `por_sector` de calce-identidad.json (error dejando uno fuera de las anclas);
+    `limites`: los sectores aceptados como límite documentado del calce (`limites_vigentes`), que siguen listados como
+    sin control o sin LOO bajo umbral. Sin ellos, sus criterios quedan pendientes.
     """
     sin_control = _sectores_sin_control(sectores, filas, residuos, damero, loo)
     bajo_umbral = {r['sector'] for r in (loo or []) if r.get('bajo_umbral') and r.get('anclas', 0) >= MINIMO_ANCLAS_LOO}
     sin_loo = sorted({f['sector'] for f in filas} - bajo_umbral)
+    faltan = set(sin_control) | set(sin_loo)
+    pendientes = faltan - set(limites)
     sin_subtarea = [i['id'] for i in incidencias if i['sin_subtarea'] and i['estado'] not in ESTADOS_SIN_DEFECTO]
     criterios = {
         'area_recorrida': _criterio_area(filas, sectores),
         'unidades_clasificadas_y_leidas': {'cumplido': all(f['lectura'] and f['ocupacion'] for f in filas),
                                            'unidades': len(filas)},
         'correspondencia_clasificada_por_unidad': _criterio_correspondencia(filas, correspondencias, damero),
-        'controles_de_calce_por_sector': {'cumplido': not sin_control and not sin_loo,
+        'controles_de_calce_por_sector': {'cumplido': not pendientes,
                                           'sectores_sin_control_independiente': sin_control, 'sectores_sin_loo_bajo_umbral': sin_loo,
                                           'sectores_sin_unidades': sorted({s['id'] for s in sectores} - {f['sector'] for f in filas}),
-                                          **({} if not (sin_control or sin_loo) else {'trasladado_a': 'T33j.2a'})},
+                                          'sectores_limite_documentado': sorted(faltan & set(limites)),
+                                          **({} if not pendientes else {'trasladado_a': 'T33j.2a'})},
         'hallazgos_confirmados_con_subtarea': {'cumplido': not sin_subtarea, 'sin_subtarea': sin_subtarea},
         'accesos_recorridos_a_pie': _criterio_accesos(accesos),
     }
@@ -370,19 +395,25 @@ def main():
     if correspondencias and (c / 'verificacion-damero.json').exists():
         correspondencias = {**correspondencias, 'verificacion_visual': leer_verificacion(_leer(c / 'verificacion-damero.json'))}
     control = controles_fuera_del_calce(damero, anclas, ajuste_px, descartados) if damero else None
+    limites = _leer(c / 'limites-calce.json') if (c / 'limites-calce.json').exists() else None
+    aceptados = limites_vigentes(limites, config)
+    if limites:
+        documentos['limites-calce.json'] = limites
     if damero:
         documentos['controles-calce-sectores.json'] = damero
         documentos['correspondencias-unidades.json'] = correspondencias
     informe = OrderedDict([
         ('alcance', 'Conteos derivados de los JSON del inventario; no certifica fidelidad histórica ni cierra incidencias.'),
         ('puerta_de_salida', puerta_de_salida(filas, sectores, residuos, incidencias, control, correspondencias,
-                                              documentos.get('accesos-primer-lote.json'), loo_vigente(identidad, config))),
+                                              documentos.get('accesos-primer-lote.json'), loo_vigente(identidad, config),
+                                              aceptados)),
         ('totales', {'unidades': len(filas), 'ocupacion': dict(sorted(Counter(f['ocupacion'] for f in filas).items())),
                      'lectura': dict(sorted(Counter(f['lectura'] for f in filas).items())),
                      'correspondencia': dict(sorted(Counter(f['correspondencia'] for f in filas).items())),
                      'incidencias': dict(sorted(Counter(i['estado'] for i in incidencias).items()))}),
         ('por_sector', resumen_por_sector(filas, sectores)),
         ('loo_del_calce_vigente', loo_vigente(identidad, config) is not None),
+        ('limites_del_calce_vigente', None if limites is None else bool(aceptados)),
         ('calce_por_sector_nota', 'gcp_ajuste y loo_* miden el calce vigente. controles_damero y desvio_damero_mediana_m '
                                   'cuentan solo los cruces de damero que no son anclas del calce (anclas_damero los que sí, o caen sobre '
                                   'una semilla: su error está en el LOO; descartados_damero los de esquina de 1936 que es un rótulo, '

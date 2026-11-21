@@ -4,7 +4,7 @@ from copy import deepcopy
 import pytest
 
 from cierre_fase1 import (
-    controles_fuera_del_calce, fuera_del_ajuste, loo_vigente,
+    controles_fuera_del_calce, fuera_del_ajuste, limites_vigentes, loo_vigente,
     SUBTAREAS, cobertura_unidades, enlazar_subtareas, indice_evidencias, leer_verificacion, puerta_de_salida,
     residuos_por_sector, resumen_por_sector,
 )
@@ -157,7 +157,8 @@ def test_puerta_de_salida_no_declara_cumplido_lo_que_sigue_pendiente():
                                                                 'trasladado_a': 'T33j.2a'}
     assert puerta['controles_de_calce_por_sector'] == {'cumplido': False, 'sectores_sin_control_independiente': ['S2'],
                                                        'sectores_sin_loo_bajo_umbral': ['S1', 'S2'],
-                                                       'sectores_sin_unidades': [], 'trasladado_a': 'T33j.2a'}
+                                                       'sectores_sin_unidades': [], 'sectores_limite_documentado': [],
+                                                       'trasladado_a': 'T33j.2a'}
     assert puerta['hallazgos_confirmados_con_subtarea'] == {'cumplido': True, 'sin_subtarea': []}
     assert puerta['accesos_recorridos_a_pie'] == {'cumplido': False, 'sin_registro_de_accesos': True}
     assert puerta['fase_1_cerrable'] is False
@@ -176,7 +177,8 @@ def test_puerta_de_salida_se_cumple_con_controles_de_damero_y_correspondencias_v
     puerta = puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias, recorridos, loo)
     assert puerta['area_recorrida'] == {'cumplido': True, 'sectores': 3, 'sectores_pendientes': []}
     assert puerta['controles_de_calce_por_sector'] == {'cumplido': True, 'sectores_sin_control_independiente': [],
-                                                       'sectores_sin_loo_bajo_umbral': [], 'sectores_sin_unidades': ['S3']}
+                                                       'sectores_sin_loo_bajo_umbral': [], 'sectores_sin_unidades': ['S3'],
+                                                       'sectores_limite_documentado': []}
     assert puerta['correspondencia_clasificada_por_unidad'] == {
         'cumplido': True, 'clasificadas': 3, 'muestra_visual': 1, 'muestra_desfasada': 0, 'contradicciones': 0,
         'clases': {'uno_a_uno': 1, 'ausente': 1, 'vacio_coincide': 1}}
@@ -398,7 +400,7 @@ def test_el_loo_de_un_sector_con_dos_anclas_o_mas_cuenta_como_control_independie
     criterio = puerta_de_salida(filas, sectores(), residuos_por_sector([], [], sectores()), [], None, None, None, loo)[
         'controles_de_calce_por_sector']
     assert criterio == {'cumplido': True, 'sectores_sin_control_independiente': [], 'sectores_sin_loo_bajo_umbral': [],
-                        'sectores_sin_unidades': []}
+                        'sectores_sin_unidades': [], 'sectores_limite_documentado': []}
 
 
 def test_un_sector_con_una_sola_ancla_no_tiene_loo_que_lo_controle():
@@ -424,3 +426,65 @@ def test_el_loo_del_informe_de_identidad_vale_solo_si_su_huella_es_la_del_calce_
     assert loo_vigente({'huella_calce': huella_calce(gcps, 0.005), 'por_sector': filas}, viejos) is None
     assert loo_vigente({'por_sector': filas}, config) is None   # informe sin huella: queda pendiente
     assert loo_vigente({}, config) is None
+
+
+def limites(huella, *sectores_):
+    return {'huella_calce': huella, 'decision': {'fecha': '2026-11-21', 'responsable': 'dueño del proyecto'},
+            'sectores': [{'sector': s, 'motivo': 'sin más puntos con pareja segura'} for s in sectores_]}
+
+
+def config_de_prueba():
+    return {'gcps': [{'px': 1, 'py': 2, 'x36': 3, 'y36': 4}], 'suavizado': 0.005}
+
+
+def test_un_limite_documentado_del_calce_vigente_cierra_el_criterio_sin_ocultar_el_sector():
+    # Arrange: decisión del responsable (21-11-2026): sin puntos con pareja segura, el sector queda como límite
+    from anclas_identidad import huella_calce
+    config = config_de_prueba()
+    filas = cobertura_unidades(unidades(), lecturas(), contraste())
+    loo = [{'sector': 'S1', 'anclas': 3, 'bajo_umbral': True}, {'sector': 'S2', 'anclas': 1, 'bajo_umbral': False}]
+
+    # Act
+    aceptados = limites_vigentes(limites(huella_calce(config['gcps'], 0.005), 'S2'), config)
+    criterio = puerta_de_salida(filas, sectores(), residuos_por_sector([], [], sectores()), [], None, None, None, loo,
+                                aceptados)['controles_de_calce_por_sector']
+
+    # Assert: la tolerancia no cambia; el sector sigue listado como sin control y sin LOO bajo umbral
+    assert aceptados == frozenset({'S2'})
+    assert criterio['cumplido'] is True
+    assert criterio['sectores_sin_control_independiente'] == ['S2']
+    assert criterio['sectores_sin_loo_bajo_umbral'] == ['S2']
+    assert criterio['sectores_limite_documentado'] == ['S2']
+    assert 'trasladado_a' not in criterio
+
+
+def test_un_limite_no_cubre_otros_sectores_pendientes():
+    filas = cobertura_unidades(unidades(), lecturas(), contraste())
+    loo = [{'sector': 'S1', 'anclas': 3, 'bajo_umbral': False}, {'sector': 'S2', 'anclas': 1, 'bajo_umbral': False}]
+    criterio = puerta_de_salida(filas, sectores(), residuos_por_sector([], [], sectores()), [], None, None, None, loo,
+                                frozenset({'S2'}))['controles_de_calce_por_sector']
+    assert criterio['cumplido'] is False
+    assert criterio['sectores_limite_documentado'] == ['S2']
+    assert criterio['trasladado_a'] == 'T33j.2a'
+
+
+def test_un_limite_de_otro_calce_o_sin_huella_no_vale():
+    from anclas_identidad import huella_calce
+    config = config_de_prueba()
+    otro = huella_calce(config['gcps'] + [{'px': 9, 'py': 9, 'x36': 9, 'y36': 9}], 0.005)
+    assert limites_vigentes(limites(otro, 'S2'), config) == frozenset()
+    assert limites_vigentes({**limites('x', 'S2'), 'huella_calce': None}, config) == frozenset()
+    assert limites_vigentes(None, config) == frozenset()
+
+
+@pytest.mark.parametrize('roto', [
+    {'sectores': [{'sector': 'S2', 'motivo': ''}]},
+    {'sectores': [{'motivo': 'sin pareja'}]},
+    {'decision': {'responsable': 'dueño del proyecto'}},
+    {'decision': {'fecha': '2026-11-21'}},
+])
+def test_un_limite_sin_sector_motivo_fecha_o_responsable_se_rechaza(roto):
+    from anclas_identidad import huella_calce
+    config = config_de_prueba()
+    with pytest.raises(ValueError):
+        limites_vigentes({**limites(huella_calce(config['gcps'], 0.005), 'S2'), **roto}, config)
