@@ -180,7 +180,8 @@ def _juicio_vigente(r, clases, entrada_sha256, recortes):
         return False
     if r.get('grupo') != 'correspondencias':
         return True
-    return r.get('objeto') in clases and r.get('clase') == clases[r['objeto']] and r.get('entrada_sha256') == entrada_sha256
+    return (r.get('objeto') in clases and r.get('clase') == clases[r['objeto']]
+            and bool(entrada_sha256) and r.get('entrada_sha256') == entrada_sha256)
 
 
 def _criterio_correspondencia(filas, correspondencias, damero=None):

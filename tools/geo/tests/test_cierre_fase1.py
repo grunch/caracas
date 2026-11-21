@@ -272,3 +272,12 @@ def test_accesos_rechaza_estados_fuera_del_registro():
     filas = cobertura_unidades(unidades(), lecturas(), contraste())
     with pytest.raises(ValueError, match='casi'):
         puerta_de_salida(filas, sectores(), [], [], None, None, accesos({'F1': 'casi'}))
+
+
+def test_correspondencia_no_acepta_juicios_sin_hash_de_entrada():
+    # sin entrada_sha256 en la clasificación ni en el juicio, None == None no debe hacerlo vigente
+    c = correspondencias_verificadas()
+    del c['entrada_sha256']
+    del c['verificacion_visual'][1]['entrada_sha256']
+    criterio = _criterio(c)
+    assert criterio['cumplido'] is False and criterio['muestra_visual'] == 0
