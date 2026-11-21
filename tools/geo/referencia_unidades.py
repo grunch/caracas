@@ -113,7 +113,15 @@ def unidades_de_referencia(unidades, red, lecturas, caras, correspondencias, lim
     return registros
 
 
-def _validar_registro(u, por_id, tramos):
+def _mismo_anillo(a, b):
+    """Los mismos nodos en el mismo ciclo, con cualquier punto de partida y en cualquier sentido."""
+    if len(a) != len(b) or set(a) != set(b):
+        return False
+    rotaciones = lambda x: [x[k:] + x[:k] for k in range(len(x))]
+    return list(a) in rotaciones(list(b)) or list(a) in rotaciones(list(reversed(b)))
+
+
+def _validar_registro(u, por_id, tramos, celdas):
     if u.get('estado') not in ('aprobada', 'pendiente'):
         raise ValueError(f"{u['id']}: estado inválido")
     if not isinstance(u.get('correspondencia'), dict) or not u['correspondencia'].get('clase'):
@@ -126,12 +134,20 @@ def _validar_registro(u, por_id, tramos):
             raise ValueError(f"{u['id']}: aprobada con motivos pendientes {u['motivos']}")
         if not u.get('nodos'):
             raise ValueError(f"{u['id']}: aprobada sin geometría")
+        # las condiciones que el registro deja comprobar, aunque falten los motivos
+        if u['correspondencia']['clase'] == 'incierta':
+            raise ValueError(f"{u['id']}: aprobada con correspondencia incierta")
+        if u.get('ocupacion') in SIN_UNIDAD_PROPIA:
+            raise ValueError(f"{u['id']}: aprobada con ocupación sin unidad propia")
     if u.get('nodos'):
         anillo = u['nodos']
-        if any(frozenset(p) not in tramos for p in zip(anillo, anillo[1:] + anillo[:1])):
+        if any(frozenset(p) not in tramos for p in zip(anillo, anillo[1:] + anillo[:1], strict=True)):
             raise ValueError(f"{u['id']}: un lado de su anillo no es un tramo de calle de la red")
         if any(por_id.get(x, {}).get('estado') != 'identidad_verificada' for x in anillo):
             raise ValueError(f"{u['id']}: una esquina de su anillo no tiene pareja por identidad en 1936")
+        celda = celdas.get(tuple(u.get('celda') or ()))
+        if celda is None or not _mismo_anillo(anillo, celda['nodos']):
+            raise ValueError(f"{u['id']}: su anillo no es el de la celda registrada {u.get('celda')}")
 
 
 def validar_unidades(referencia, red, censo):
@@ -146,8 +162,9 @@ def validar_unidades(referencia, red, censo):
                          f'sobran {sorted(set(ids) - set(censo))[:5]}')
     por_id = {n['id']: n for n in red['nodos']}
     tramos = {frozenset(p) for c in red['calles'] for p in zip(c['nodos'], c['nodos'][1:])}
+    celdas = celdas_de_red(red)
     for u in unidades:
-        _validar_registro(u, por_id, tramos)
+        _validar_registro(u, por_id, tramos, celdas)
     usados = {x for u in unidades for x in (u['nodos'] or [])}
     validar_referencia({'fuente': red['fuente'], 'fuente_sha256': red['fuente_sha256'],
                         'nodos': [{'id': x, 'original': por_id[x]['original'], 'mosaico': por_id[x]['mosaico']}

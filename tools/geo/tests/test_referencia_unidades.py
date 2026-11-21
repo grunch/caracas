@@ -159,6 +159,30 @@ def test_una_pendiente_sin_motivo_o_con_motivo_desconocido_se_rechaza():
 
 def test_dos_unidades_con_la_misma_geometria_se_solapan():
     r = red(); unidades = construir(r)
-    por_id(unidades)['U2']['nodos'] = list(por_id(unidades)['U1']['nodos'])
+    por_id(unidades)['U2'].update(nodos=list(por_id(unidades)['U1']['nodos']), celda=list(por_id(unidades)['U1']['celda']))
     with pytest.raises(ValueError, match='solape'):
+        validar_unidades({'unidades': unidades}, r, {'U1', 'U2', 'U3'})
+
+
+@pytest.mark.parametrize('cambio', [
+    {'correspondencia': {'clase': 'incierta', 'cuadras_1936': [7]}},
+    {'ocupacion': 'parte_de_otra_unidad'},
+])
+def test_una_aprobada_con_correspondencia_incierta_u_ocupacion_sin_unidad_propia_se_rechaza_aunque_no_tenga_motivos(cambio):
+    r = red(); unidades = construir(r)
+    por_id(unidades)['U1'].update(cambio)
+    with pytest.raises(ValueError, match='aprobada'):
+        validar_unidades({'unidades': unidades}, r, {'U1', 'U2', 'U3'})
+
+
+def test_el_anillo_tiene_que_ser_el_de_la_celda_registrada_en_cualquier_rotacion_o_sentido():
+    r = red(); unidades = construir(r)
+    u1 = por_id(unidades)['U1']
+    u1['nodos'] = ['X11', 'X01', 'X00', 'X10']   # rotación
+    validar_unidades({'unidades': unidades}, r, {'U1', 'U2', 'U3'})
+    u1['nodos'] = ['X00', 'X01', 'X11', 'X10']   # sentido contrario
+    validar_unidades({'unidades': unidades}, r, {'U1', 'U2', 'U3'})
+    por_id(unidades)['U2'].update(nodos=None, estado='pendiente', motivos=['celda_compartida'])
+    u1['nodos'] = ['X00', 'X10', 'X20', 'X21', 'X11', 'X01']   # cubre las dos celdas
+    with pytest.raises(ValueError, match='celda'):
         validar_unidades({'unidades': unidades}, r, {'U1', 'U2', 'U3'})

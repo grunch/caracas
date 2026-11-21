@@ -75,7 +75,7 @@ La fase 3 tiene que respetarlas: no insertar calles intermedias, no atravesar fr
 ## Qué valida `validar_unidades`
 
 - Toda unidad del censo aparece una sola vez.
-- Una aprobada no tiene motivos y sí geometría. Cada lado de su anillo es un tramo de calle de la red y cada esquina tiene pareja por identidad en 1936.
+- Una aprobada no tiene motivos y sí geometría. Cada lado de su anillo es un tramo de calle de la red, cada esquina tiene pareja por identidad en 1936, y el anillo es el de su celda registrada (con cualquier punto de partida y en cualquier sentido). Tampoco puede tener correspondencia incierta ni una ocupación sin unidad propia, aunque le falten los motivos.
 - Una pendiente tiene motivos, y todos son del criterio.
 - La geometría pasa por el contrato de [contrato-referencia.md](contrato-referencia.md) (`referencia_historica.validar_referencia`): anillos simples, sin solapes entre unidades y con la misma orientación en el original y en 1936.
 
