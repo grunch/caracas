@@ -4,7 +4,7 @@ from copy import deepcopy
 import pytest
 
 from cierre_fase1 import (
-    controles_fuera_del_calce,
+    controles_fuera_del_calce, fuera_del_ajuste,
     SUBTAREAS, cobertura_unidades, enlazar_subtareas, indice_evidencias, leer_verificacion, puerta_de_salida,
     residuos_por_sector, resumen_por_sector,
 )
@@ -156,6 +156,7 @@ def test_puerta_de_salida_no_declara_cumplido_lo_que_sigue_pendiente():
     assert puerta['correspondencia_clasificada_por_unidad'] == {'cumplido': False, 'clasificadas': 0, 'provisionales': 3,
                                                                 'trasladado_a': 'T33j.2a'}
     assert puerta['controles_de_calce_por_sector'] == {'cumplido': False, 'sectores_sin_control_independiente': ['S2'],
+                                                       'sectores_sin_loo_bajo_umbral': ['S1', 'S2'],
                                                        'sectores_sin_unidades': [], 'trasladado_a': 'T33j.2a'}
     assert puerta['hallazgos_confirmados_con_subtarea'] == {'cumplido': True, 'sin_subtarea': []}
     assert puerta['accesos_recorridos_a_pie'] == {'cumplido': False, 'sin_registro_de_accesos': True}
@@ -171,16 +172,18 @@ def test_puerta_de_salida_se_cumple_con_controles_de_damero_y_correspondencias_v
               'controles_por_hito': [{'sector': 'S2'}]}
     correspondencias = correspondencias_verificadas()
     recorridos = accesos({'F1': 'recorrido', 'F3': 'recorrido'})
-    puerta = puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias, recorridos)
+    loo = [{'sector': 'S1', 'bajo_umbral': True}, {'sector': 'S2', 'bajo_umbral': True}]
+    puerta = puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias, recorridos, loo)
     assert puerta['area_recorrida'] == {'cumplido': True, 'sectores': 3, 'sectores_pendientes': []}
-    assert puerta['controles_de_calce_por_sector'] == {'cumplido': True, 'sectores_sin_control_independiente': [], 'sectores_sin_unidades': ['S3']}
+    assert puerta['controles_de_calce_por_sector'] == {'cumplido': True, 'sectores_sin_control_independiente': [],
+                                                       'sectores_sin_loo_bajo_umbral': [], 'sectores_sin_unidades': ['S3']}
     assert puerta['correspondencia_clasificada_por_unidad'] == {
         'cumplido': True, 'clasificadas': 3, 'muestra_visual': 1, 'muestra_desfasada': 0, 'contradicciones': 0,
         'clases': {'uno_a_uno': 1, 'ausente': 1, 'vacio_coincide': 1}}
     assert puerta['accesos_recorridos_a_pie'] == {'cumplido': True, 'frentes_con_candidatos': 2, 'recorridos': 2, 'pendientes': []}
     assert puerta['fase_1_cerrable'] is True
     correspondencias['verificacion_visual'][0] = {**correspondencias['verificacion_visual'][0], 'juicio': 'contradice'}
-    assert puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias, recorridos)['fase_1_cerrable'] is False
+    assert puerta_de_salida(filas, tres, residuos, enlazadas, damero, correspondencias, recorridos, loo)['fase_1_cerrable'] is False
 
 
 def _criterio(correspondencias):
@@ -329,11 +332,48 @@ def test_con_todos_los_cruces_como_anclas_el_criterio_de_controles_por_sector_qu
     puerta = puerta_de_salida(filas, sectores(), residuos, [], controles_fuera_del_calce(damero_con_nodos(), todas))
 
     # Assert
-    assert puerta['controles_de_calce_por_sector'] == {'cumplido': False, 'sectores_sin_control_independiente': ['S1', 'S2'],
-                                                       'sectores_sin_unidades': [], 'trasladado_a': 'T33j.2a'}
+    assert puerta['controles_de_calce_por_sector']['sectores_sin_control_independiente'] == ['S1', 'S2']
+    assert puerta['controles_de_calce_por_sector']['cumplido'] is False
 
 
 def test_sin_anclas_los_controles_de_damero_se_conservan():
     filtrado = controles_fuera_del_calce(damero_con_nodos(), anclas=set())
     assert [(s['sector'], s['controles'], s['mediana_m'], s['anclas']) for s in filtrado['por_sector']] == [('S1', 3, 30.0, 0), ('S2', 1, 7.0, 0)]
     assert len(filtrado['controles_por_hito']) == 2
+
+
+def test_un_control_a_menos_de_6_px_de_un_punto_del_ajuste_no_es_independiente():
+    # Arrange: N1 cae sobre un GCP (a 3 px), N2 lejos de todos
+    nodos = [{'id': 'N1', 'original': [103, 100]}, {'id': 'N2', 'original': [200, 300]}]
+
+    # Act
+    libres = fuera_del_ajuste(nodos, [(100, 100), (500, 500)])
+
+    # Assert
+    assert [n['id'] for n in libres] == ['N2']
+
+
+def test_los_cruces_de_damero_sobre_una_semilla_se_quitan_por_coordenadas_sin_el_informe_de_identidad():
+    damero = {**damero_con_nodos(), 'nodos': [{**n, 'original': [10.0 * i, 0.0]} for i, n in enumerate(damero_con_nodos()['nodos'])]}
+    filtrado = controles_fuera_del_calce(damero, anclas=set(), ajuste_px=[(20.0, 2.0)])  # X3 está a 2 px de una semilla
+    assert [(s['sector'], s['controles'], s['anclas']) for s in filtrado['por_sector']] == [('S1', 2, 1), ('S2', 1, 0)]
+
+
+def test_un_nodo_curado_con_desvio_de_otro_calce_no_cuenta_como_control():
+    filas = cobertura_unidades(unidades(), lecturas(), contraste())
+    residuos = [{**r, 'desvio_independiente_vigente': False if r['controles_independientes'] else None}
+                for r in residuos_por_sector([], [{'id': 'N1', 'original': [30, 30], 'desvio_m': 9.0}], sectores())]
+    loo = [{'sector': 'S1', 'bajo_umbral': True}, {'sector': 'S2', 'bajo_umbral': True}]
+    puerta = puerta_de_salida(filas, sectores(), residuos, [], None, None, None, loo)
+    assert puerta['controles_de_calce_por_sector']['sectores_sin_control_independiente'] == ['S1', 'S2']
+
+
+def test_un_sector_con_loo_sobre_el_umbral_deja_el_criterio_pendiente_aunque_tenga_controles():
+    filas = cobertura_unidades(unidades(), lecturas(), contraste())
+    residuos = residuos_por_sector([], [{'id': 'N1', 'original': [30, 30], 'desvio_m': 9.0},
+                                        {'id': 'N2', 'original': [130, 30], 'desvio_m': 9.0}], sectores())
+    loo = [{'sector': 'S1', 'bajo_umbral': True}, {'sector': 'S2', 'bajo_umbral': False}]
+    criterio = puerta_de_salida(filas, sectores(), residuos, [], None, None, None, loo)['controles_de_calce_por_sector']
+    assert criterio['sectores_sin_control_independiente'] == []
+    assert criterio['sectores_sin_loo_bajo_umbral'] == ['S2']
+    assert criterio['cumplido'] is False

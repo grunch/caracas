@@ -32,11 +32,21 @@
     "S1772-13",
     "S1772-14",
     "S1772-21",
+    "S1772-22",
+    "S1772-23",
     "S1772-24",
     "S1772-31",
+    "S1772-32",
+    "S1772-33",
     "S1772-34",
     "S1772-42",
     "S1772-43",
+    "S1772-44"
+   ],
+   "sectores_sin_loo_bajo_umbral": [
+    "S1772-14",
+    "S1772-24",
+    "S1772-31",
     "S1772-44"
    ],
    "sectores_sin_unidades": [
@@ -322,7 +332,7 @@
    }
   }
  ],
- "calce_por_sector_nota": "gcp_ajuste y loo_* miden el calce vigente. controles_damero y desvio_damero_mediana_m cuentan solo los cruces de damero que no son anclas del calce (anclas_damero los que sí: su error está en el LOO). desvio_independiente_max_m es el desvío guardado de los nodos curados; desvio_independiente_vigente dice si se midió sobre este archivo de calce.",
+ "calce_por_sector_nota": "gcp_ajuste y loo_* miden el calce vigente. controles_damero y desvio_damero_mediana_m cuentan solo los cruces de damero que no son anclas del calce (anclas_damero los que sí: su error está en el LOO). controles_independientes y desvio_independiente_max_m cuentan los nodos curados que no caen sobre un punto del ajuste (a menos de 6 px); desvio_independiente_vigente dice si su desvío guardado se midió sobre este archivo de calce, y solo entonces cuentan en la puerta.",
  "calce_por_sector": [
   {
    "sector": "S1772-11",
@@ -395,9 +405,9 @@
    "gcp_manuales": 27,
    "loo_rms_m": 12.572,
    "loo_max_m": 23.83,
-   "controles_independientes": 5,
-   "desvio_independiente_max_m": 96.162,
-   "desvio_independiente_vigente": false,
+   "controles_independientes": 0,
+   "desvio_independiente_max_m": null,
+   "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
    "anclas_damero": 25
@@ -408,9 +418,9 @@
    "gcp_manuales": 31,
    "loo_rms_m": 12.743,
    "loo_max_m": 34.19,
-   "controles_independientes": 6,
-   "desvio_independiente_max_m": 18.378,
-   "desvio_independiente_vigente": false,
+   "controles_independientes": 0,
+   "desvio_independiente_max_m": null,
+   "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
    "anclas_damero": 33
@@ -447,8 +457,8 @@
    "gcp_manuales": 25,
    "loo_rms_m": 22.675,
    "loo_max_m": 69.16,
-   "controles_independientes": 7,
-   "desvio_independiente_max_m": 93.23,
+   "controles_independientes": 1,
+   "desvio_independiente_max_m": 10.63,
    "desvio_independiente_vigente": false,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
@@ -460,9 +470,9 @@
    "gcp_manuales": 23,
    "loo_rms_m": 10.002,
    "loo_max_m": 25.09,
-   "controles_independientes": 5,
-   "desvio_independiente_max_m": 21.177,
-   "desvio_independiente_vigente": false,
+   "controles_independientes": 0,
+   "desvio_independiente_max_m": null,
+   "desvio_independiente_vigente": null,
    "controles_damero": 0,
    "desvio_damero_mediana_m": null,
    "anclas_damero": 23
