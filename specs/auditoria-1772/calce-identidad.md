@@ -80,8 +80,8 @@ S1772-41 es rural y no tiene anclas. LOO de todo el calce: rms 18,9 m, p90 22,1 
 
 ## Qué falta en T33j.2a
 
-1. **Decisión pendiente en S1772-14, -24 y -44.** No cumplen el criterio con los puntos que hay y la tolerancia no se amplía (specs/08 1A). Quedan visibles en la puerta; el responsable decide cómo tratarlos.
-2. **Controles por sector.** Por decisión del responsable (21-11-2026), el LOO de un sector con al menos 2 anclas cuenta como control independiente: cada ancla se mide con un calce que no la usa. La puerta exige además la mediana bajo 15 m. Hoy cumplen 12 de los 15 sectores con unidades.
+1. **Hecho: S1772-14, -24 y -44 como límite documentado.** No cumplen el criterio con los puntos que hay y la tolerancia no se amplía (specs/08 1A). Por decisión del responsable (21-11-2026) quedan como límite documentado del calce en [limites-calce.json](limites-calce.json), atado a esta `huella_calce`; siguen visibles en la puerta y el defecto de S1772-24 es I1772-014 → T33j.2b.
+2. **Controles por sector.** Por decisión del responsable (21-11-2026), el LOO de un sector con al menos 2 anclas cuenta como control independiente: cada ancla se mide con un calce que no la usa. La puerta exige además la mediana bajo 15 m. Cumplen 12 de los 15 sectores con unidades; los otros 3 son límite documentado.
 3. **Hecho:** reclasificación de las 292 correspondencias sobre el calce nuevo, en [correspondencias-identidad.md](correspondencias-identidad.md).
 4. **Regenerar los datos** (`npm run datos`) y publicarlos con la decisión del responsable. El calce alimenta `calzado.tif`, las calles nuevas, el edificado de 1772 y `vectorizar`; hasta entonces `datos:al-dia` avisa que los datos publicados quedaron viejos.
 

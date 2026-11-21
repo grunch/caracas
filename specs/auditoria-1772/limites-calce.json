@@ -1,0 +1,34 @@
+{
+ "alcance": "Sectores aceptados como límite documentado del calce de 1772 por identidad (specs/08 1A). La tolerancia de 15 m no cambia: estos sectores siguen listados en la puerta como sin control o sin LOO bajo umbral, con su error y su causa. El registro vale solo para el calce de esta huella; si el calce cambia, hay que volver a revisarlos.",
+ "decision": {
+  "fecha": "2026-11-21",
+  "responsable": "dueño del proyecto",
+  "texto": "Aceptar S1772-14, S1772-24 y S1772-44 como límite documentado; el defecto de S1772-24 pasa a la fase 2 como incidencia (I1772-014)."
+ },
+ "huella_calce": "45aeae8a4c1d3c619d5b4b3bbd45e85641db88e44113410e79339848c9e3748f",
+ "calce": "tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json",
+ "sectores": [
+  {
+   "sector": "S1772-14",
+   "anclas": 1,
+   "mediana_loo_m": 145.23,
+   "motivo": "Una sola ancla (iglesia de La Pastora, a 12,7 m de su pareja en 1936). Sin cruces rectos en 1772; la alcabala del camino de La Guaira y los cauces no tienen pareja segura en 1936. Con una sola ancla el LOO es una extrapolación fuera del casco y no mide nada.",
+   "revision": "recortes del original revisados a mano (calce-identidad.md)"
+  },
+  {
+   "sector": "S1772-24",
+   "anclas": 5,
+   "mediana_loo_m": 30.76,
+   "motivo": "Cinco anclas que se apartan entre 21 y 62 m (media cuadra, no una calle entera): deformación del dibujo de 1772 en el borde este, no error de conteo. Sus otros cruces no tienen pareja segura en 1936 (la calle no existe o cae en la costura del mosaico).",
+   "revision": "cruces de LOO alto revisados con recortes; X1772-0033 es un caso de orilla genuino",
+   "incidencia": "I1772-014"
+  },
+  {
+   "sector": "S1772-44",
+   "anclas": 1,
+   "mediana_loo_m": 61.57,
+   "motivo": "Una sola ancla (X1772-0165). El resto del sector es cauce, campo y la cartela del título del mapa; tiene 2 unidades, las dos terreno libre. Ningún otro punto tiene pareja segura en 1936.",
+   "revision": "recortes del original revisados a mano (calce-identidad.md)"
+  }
+ ]
+}

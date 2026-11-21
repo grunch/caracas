@@ -8,18 +8,21 @@ Fecha: 20-11-2026. T33j.1q. Generado por `tools/geo/cierre_fase1.py` a partir de
 |---|---|---|
 | 100 % del área recorrida | 16 sectores con barrido general registrado y todas sus unidades declaradas censadas y leídas; S1772-41 es rural y fluvial en el original y queda con 0 unidades a propósito | sí |
 | Cada unidad clasificada y leída | 292 registros, cada uno con ocupación del original y exactamente una lectura individual (bordes 147, sin cara única 78, restantes 67) | sí |
-| Hallazgos confirmados con subtarea | 13 de 13 incidencias enlazadas a subtareas de fases 2–8 (campo `subtareas` en `incidencias.json`) | sí |
+| Hallazgos confirmados con subtarea | 14 de 14 incidencias enlazadas a subtareas de fases 2–8 (campo `subtareas` en `incidencias.json`) | sí |
 | Correspondencia original ⇄ sistema por unidad | 292 clasificadas sobre el calce vigente por identidad ([correspondencias-identidad.md](correspondencias-identidad.md)): ausente 168, fusionada 6, incierta 6, uno_a_uno 36 (con identidad por pareja: misma celda del damero), vacio_coincide 76. U1772-0055 reclasificada como fusionada (la cuadra 8079 se reparte con U1772-0199). Muestra visual nueva de 30 recortes, atada a la clasificación vigente: 18 coinciden, 12 compatibles, 0 contradicen. Las 6 inciertas quedan visibles con decisión pendiente | sí |
-| Controles de calce independientes por sector | Por decisión del responsable (21-11-2026), el LOO de cada sector con al menos 2 anclas cuenta como control independiente (cada ancla medida con un calce que no la usa); la mediana tiene que quedar bajo 15 m ([calce-identidad.md](calce-identidad.md)). Ningún cruce de damero ni nodo curado cuenta como control aparte: son anclas, caen sobre ellas o su esquina de 1936 es un rótulo. Cumplen 12 de 15 sectores con unidades. S1772-14 y S1772-44 tienen una sola ancla; S1772-24 queda en 30,8 m de mediana (deformación del dibujo de 1772 en el borde este). Los tres se revisaron sin encontrar más puntos con pareja segura | **no** → decisión pendiente |
+| Controles de calce independientes por sector | Por decisión del responsable (21-11-2026), el LOO de cada sector con al menos 2 anclas cuenta como control independiente (cada ancla medida con un calce que no la usa); la mediana tiene que quedar bajo 15 m ([calce-identidad.md](calce-identidad.md)). Ningún cruce de damero ni nodo curado cuenta como control aparte: son anclas, caen sobre ellas o su esquina de 1936 es un rótulo. Cumplen 12 de 15 sectores con unidades. S1772-14 y S1772-44 tienen una sola ancla; S1772-24 queda en 30,8 m de mediana (deformación del dibujo de 1772 en el borde este). Los tres se revisaron sin encontrar más puntos con pareja segura y, por decisión del responsable (21-11-2026), quedan como **límite documentado** del calce ([limites-calce.json](limites-calce.json), atado a la `huella_calce` vigente): la tolerancia no cambia y siguen listados en el JSON como sin control o sin LOO bajo umbral (`sectores_limite_documentado`). El defecto de S1772-24 es I1772-014 → T33j.2b | sí, con 3 límites documentados |
 | Candidatos de acceso recorridos a nivel de calle (1C) | 3 frentes con candidato de entrada profunda; `recorridos_calle` de [accesos-primer-lote.json](accesos-primer-lote.json) registra los 3 con conclusión: Camejo–Cruz Verde F1772-0005-3; Seminario F1772-0010-3 y Catedral F1772-0003-3, recorridos a pie el 21-11-2026 sobre `datos-2026-11-21-ce374b8`: código `ce374b8` con el mismo `ciudad.pak` que B1772-001 (`af0c664`); entre los dos commits `src/` solo cambia el Panteón (desde 1843) y los hitos de la época 1 son idénticos. En los dos se atraviesa una pared visible (I1772-003 e I1772-013 → T33j.7a) | sí |
 
-**Decisión:** la fase 1 sigue **abierta**: `fase_1_cerrable: false` en el JSON (5 de 6 criterios). Falta:
+**Decisión:** la fase 1 queda **cerrable**: `fase_1_cerrable: true` en el JSON (6 de 6 criterios), con tres sectores como límite documentado del calce:
 
-1. **Controles de calce por sector.** Cumplen 12 de 15 sectores. S1772-14 y S1772-44 (una sola ancla) y S1772-24 (mediana 30,8 m) no tienen más puntos con pareja segura en 1936; la tolerancia no se amplía, así que quedan con decisión pendiente del responsable.
+- **S1772-14** (La Pastora) y **S1772-44**: una sola ancla cada uno y ningún otro punto con pareja segura en 1936. Su error no se mide; tienen 6 y 2 unidades.
+- **S1772-24**: 5 anclas con mediana LOO de 30,8 m, sobre la tolerancia de 15 m, por una deformación de media cuadra del dibujo de 1772 en el borde este. Pasa a la fase 2 como I1772-014 (T33j.2b): la ocupación periférica de ese sector no se ubica por cercanía al calce sin tener en cuenta ese desvío.
+
+La tolerancia no se amplió (specs/08 1A, con la enmienda del 21-11-2026 que define el límite documentado). Si el calce cambia, el registro deja de valer y la puerta vuelve a dejar el criterio pendiente.
 
 El recorrido de calle de los candidatos de acceso (1C) quedó hecho: recorridos a pie el 21-11-2026 sobre `datos-2026-11-21-ce374b8`: código `ce374b8` con el mismo `ciudad.pak` que B1772-001 (`af0c664`); entre los dos commits `src/` solo cambia el Panteón (desde 1843) y los hitos de la época 1 son idénticos ([accesos-primer-lote.md](accesos-primer-lote.md)). Seminario confirma I1772-003 (se atraviesa la fachada hacia el solar interior). Catedral abre I1772-013: las mallas de hitos no colisionan y se atraviesa su fachada. La puerta lo calcula (`accesos_recorridos_a_pie`): un frente cuenta solo con `estado: recorrido` en `recorridos_calle`.
 
-Los controles por sector, cuando se cumplan, serán como lo pide 1B/1D (controlar cada sector), no una aprobación de geometría: localizan los defectos y miden el calce; corregirlos es la fase 2. Nada autoriza a generar casas desde cajas.
+Los controles por sector son como lo pide 1B/1D (controlar cada sector), no una aprobación de geometría: localizan los defectos y miden el calce; corregirlos es la fase 2. Nada autoriza a generar casas desde cajas.
 
 ## Totales censados
 
@@ -88,6 +91,7 @@ Hay dos clases de control independiente. **El LOO de las anclas:** por decisión
 | I1772-011 | P1 | confirmado en datos pendiente clasificacion visual | T33j.5a, T33j.6a |
 | I1772-012 | P1 | confirmado en calculo CPU pendiente inspeccion completa | T33j.6a |
 | I1772-013 | P1 | confirmado visual | T33j.7a |
+| I1772-014 | P2 | confirmado | T33j.2b |
 
 Estados `incierto` y `candidato` no son defectos confirmados y no exigen subtarea; se conservan visibles. I1772-010 sube de «desacuerdo con la referencia curada» a desplazamiento por cuadras enteras fuera del núcleo, medido en [controles-damero.md](controles-damero.md).
 
