@@ -27,9 +27,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from calce import GCP_DIR, Calce, json_legible, manuales_de  # noqa: E402
 
+RAIZ = Path(__file__).resolve().parents[2]
+
 TOLERANCIA_SEMILLA_PX = 6   # un nodo a menos de esto de una semilla manual es el mismo cruce
 UMBRAL_SECTOR_M = 15        # specs/08, T33j.2a: desvío mediano por sector bajo 15 m
 PASO_PLIEGUES_PX = 10
+UMBRAL_NUDO_M = 4           # una esquina sin cota a más de esto de un nudo de calle es un rótulo, no un cruce
+VENTANA_NUDO_PX = 60
 
 
 def _ancla_de_nodo(n):
@@ -113,6 +117,37 @@ def celdas_plegadas(proyectar, marco, paso=PASO_PLIEGUES_PX):
     return int(np.count_nonzero(plegada))
 
 
+def distancia_a_nudo_px(mascara, punto):
+    """Distancia en px de `punto` (x, y en la máscara) al nudo de calles más cercano: un píxel del esqueleto de
+    la máscara con tres o más vecinos, donde se juntan calles. None si en la máscara no hay ningún nudo."""
+    import cv2
+    from skimage.morphology import skeletonize
+    cerrada = cv2.morphologyEx((np.asarray(mascara) > 0).astype(np.uint8), cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
+    esqueleto = skeletonize(cerrada > 0)
+    vecinos = cv2.filter2D(esqueleto.astype(np.uint8), -1, np.ones((3, 3), np.uint8)) - esqueleto.astype(np.uint8)
+    ys, xs = np.nonzero(esqueleto & (vecinos >= 3))
+    if not len(xs):
+        return None
+    return float(np.min(np.hypot(xs - punto[0], ys - punto[1])))
+
+
+def excluir_rotulos(nodos, esquinas, distancia_m, umbral_m=UMBRAL_NUDO_M):
+    """Separa los nodos cuya esquina de 1936 no tiene cota y no cae sobre un nudo de calle (`distancia_m`: por id,
+    None si no hay nudo cerca): ese punto marca el rótulo con el nombre de la esquina, no el cruce, y no sirve de
+    ancla. Una esquina con cota se leyó en la cota impresa del cruce y se conserva.
+    Devuelve (conservados, excluidos con la esquina, su nombre y la distancia al nudo)."""
+    conservados, excluidos = [], []
+    for n in nodos:
+        esquina = esquinas[n['esquina_1936']]
+        d = distancia_m.get(n['id'])
+        if esquina.get('cota_m') is None and (d is None or d > umbral_m):
+            excluidos.append({'id': n['id'], 'esquina_1936': n['esquina_1936'], 'nombre': esquina.get('nombre'),
+                              'distancia_nudo_m': d})
+        else:
+            conservados.append(n)
+    return conservados, excluidos
+
+
 def resumen_por_sector(anclas, loo_m, residuo_m, umbral_m=UMBRAL_SECTOR_M):
     """Por sector: anclas, mediana y máximo del error dejando uno fuera y mediana del residuo."""
     grupos = defaultdict(lambda: ([], []))
@@ -136,7 +171,7 @@ def _escalar(calce):
     return proyectar
 
 
-def informe(controles, config, anclas, omitidos, calce, metro, hitos_en_semillas=()):
+def informe(controles, config, anclas, omitidos, calce, metro, hitos_en_semillas=(), excluidos=()):
     n_semillas = len(config['semillas'])
     loo = calce.errores_loo_m()
     px = np.array([[a['px'], a['py']] for a in anclas])
@@ -151,6 +186,7 @@ def informe(controles, config, anclas, omitidos, calce, metro, hitos_en_semillas
         'suavizado': config.get('suavizado', 0.0), 'semillas': n_semillas, 'anclas': len(anclas),
         'nodos_omitidos_por_semilla': omitidos,
         'hitos_cubiertos_por_semillas': list(hitos_en_semillas),
+        'excluidos_por_rotulo': list(excluidos),
         'residuos_loo_m': calce.residuos_m(),
         'por_sector': resumen_por_sector(anclas, loo_anclas, residuo),
         'celdas_plegadas': celdas_plegadas(_escalar(calce), config['marco']),
@@ -160,11 +196,31 @@ def informe(controles, config, anclas, omitidos, calce, metro, hitos_en_semillas
     }
 
 
+def _distancias_a_nudo(nodos, esquinas, ruta_clases, clases_calle, metro, ventana=VENTANA_NUDO_PX):
+    """Distancia en metros al nudo de calles más cercano, solo para los nodos cuya esquina no tiene cota."""
+    import cv2
+    clases = cv2.imread(str(ruta_clases), cv2.IMREAD_UNCHANGED)
+    if clases is None:
+        raise SystemExit(f'{ruta_clases}: no se pudo leer la segmentación de 1936 (¿--datos?)')
+    distancias = {}
+    for n in nodos:
+        if esquinas[n['esquina_1936']].get('cota_m') is not None:
+            continue
+        x, y = (int(round(v)) for v in n['mosaico_identidad'])
+        x0, y0 = max(0, x - ventana), max(0, y - ventana)
+        recorte = np.isin(clases[y0:y + ventana, x0:x + ventana], clases_calle)
+        d = distancia_a_nudo_px(recorte, (n['mosaico_identidad'][0] - x0, n['mosaico_identidad'][1] - y0))
+        distancias[n['id']] = None if d is None else round(d * metro, 2)
+    return distancias
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument('--controles', type=Path, required=True)
     ap.add_argument('--gcp', type=Path, required=True)
     ap.add_argument('--informe', type=Path, required=True)
+    ap.add_argument('--esquinas', type=Path, default=RAIZ / 'tools/geo/esquinas/1936-esquinas.json')
+    ap.add_argument('--datos', type=Path, default=RAIZ, help='checkout con fuentes/derivados (la segmentación de 1936)')
     a = ap.parse_args()
     controles = json.loads(a.controles.read_text(encoding='utf-8'))
     errores = validar_nodos(controles['nodos'])
@@ -172,17 +228,22 @@ def main():
         raise SystemExit('parejas por identidad inválidas:\n  ' + '\n  '.join(errores))
     config = json.loads(a.gcp.read_text(encoding='utf-8'))
     hitos = [h for h in controles['controles_por_hito'] if h.get('unidad')]
-    anclas, omitidos = anclas_de_identidad(controles['nodos'], hitos, [(s['px'], s['py']) for s in config['semillas']])
+    esquinas = dict(enumerate(json.loads(a.esquinas.read_text(encoding='utf-8'))))
+    config_1936 = json.loads((GCP_DIR / 'plaza-1936.json').read_text())
+    nodos, excluidos = excluir_rotulos(controles['nodos'], esquinas,
+                                       _distancias_a_nudo(controles['nodos'], esquinas, a.datos / config_1936['clases'],
+                                                          config_1936['clases_calle'], controles['parametros']['metro']))
+    anclas, omitidos = anclas_de_identidad(nodos, hitos, [(s['px'], s['py']) for s in config['semillas']])
     config = {**config, 'etapas': [], 'anclas': [{k: a[k] for k in ('px', 'py', 'x36', 'y36', 'id', 'nota')} for a in anclas]}
     metro = controles['parametros']['metro']
     gcps = manuales_de(config, json.loads((GCP_DIR / 'plaza-1936.json').read_text()))
     calce = Calce.ajustar(gcps, metro, config.get('suavizado', 0.0))
     # los hitos sin unidad (la Plaza Mayor) no son anclas propias: los cubren las semillas de la plaza
     en_semillas = [h['id'] for h in controles['controles_por_hito'] if not h.get('unidad')]
-    datos = informe(controles, config, anclas, omitidos, calce, metro, en_semillas)
+    datos = informe(controles, config, anclas, omitidos, calce, metro, en_semillas, excluidos)
     a.gcp.write_text(json_legible(config), encoding='utf-8')
     a.informe.write_text(json.dumps(datos, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
-    print(f"{len(anclas)} anclas ({len(omitidos)} nodos omitidos por semilla); LOO {datos['residuos_loo_m']}; "
+    print(f"{len(anclas)} anclas ({len(omitidos)} nodos omitidos por semilla, {len(excluidos)} por rótulo); LOO {datos['residuos_loo_m']}; "
           f"plegadas {datos['celdas_plegadas']}")
     for s in datos['por_sector']:
         print(f"  {s['sector']}: {s['anclas']} anclas, mediana LOO {s['mediana_loo_m']} m, máx {s['max_loo_m']} m")
