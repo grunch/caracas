@@ -121,7 +121,8 @@ def detecta_fallos(red, unidades, censo):
         'anillo_invalido': (lambda u: validar_unidades({'unidades': u}, red, censo),
                             unidades_con(aprobadas[0], nodos=[a, c, b, d])),
         'solape': (lambda u: validar_unidades({'unidades': u}, red, censo),
-                   unidades_con(aprobadas[1], nodos=list(unidades[aprobadas[0]]['nodos']))),
+                   unidades_con(aprobadas[1], nodos=list(unidades[aprobadas[0]]['nodos']),
+                                celda=unidades[aprobadas[0]]['celda'])),
     }
     return {nombre: _rechaza(validar, entrada) for nombre, (validar, entrada) in pruebas.items()}
 

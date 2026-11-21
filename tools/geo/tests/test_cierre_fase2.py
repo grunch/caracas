@@ -100,3 +100,16 @@ def test_la_puerta_se_cumple_con_la_referencia_completa_y_queda_pendiente_si_fal
     assert puerta['excepciones_registradas']['por_tipo']['trazado'] == 1
     assert puerta_fase2(r, unidades, **{**args, 'censo': {'U1', 'U2', 'U3', 'U4'}})['fase_2_cerrable'] is False
     assert puerta_fase2(r, unidades, **{**args, 'lineas': {'L00', 'L77'}})['entidades_con_referencia']['cumplido'] is False
+
+
+def test_la_prueba_de_solape_falla_por_el_solape_y_no_por_otra_regla():
+    # la unidad copiada lleva el anillo y la celda de la otra: lo único que queda mal es que se superponen
+    from cierre_fase2 import _rechaza
+    from referencia_unidades import validar_unidades
+    r, unidades = referencia()
+    copia = deepcopy(unidades)
+    aprobadas = [u for u in copia if u['nodos']]
+    aprobadas[1].update(nodos=list(aprobadas[0]['nodos']), celda=aprobadas[0]['celda'])
+    with pytest.raises(ValueError, match='solape'):
+        validar_unidades({'unidades': copia}, r, {'U1', 'U2', 'U3'})
+    assert _rechaza(validar_unidades, {'unidades': copia}, r, {'U1', 'U2', 'U3'})
