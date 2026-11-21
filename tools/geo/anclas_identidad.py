@@ -247,8 +247,6 @@ def informe(controles, config, anclas, omitidos, calce, metro, hitos_en_semillas
     x36, y36 = calce.a_1936(px[:, 0], px[:, 1])
     residuo = np.hypot(x36 - [a['x36'] for a in anclas], y36 - [a['y36'] for a in anclas]) * metro
     loo_anclas = loo[n_semillas:]
-    desvio_tps = {n['id']: n['desvio_m'] for n in controles['nodos']}
-    desvio_tps.update({h['id']: h['desvio_tps_m'] for h in controles['controles_por_hito']})
     return {
         'alcance': 'Calce de 1772 por identidad (T33j.2a). El error dejando uno fuera mide cuánto se aparta cada '
                    'ancla del TPS ajustado sin ella; no certifica exactitud geográfica.',
@@ -261,7 +259,7 @@ def informe(controles, config, anclas, omitidos, calce, metro, hitos_en_semillas
         'por_sector': resumen_por_sector(anclas, loo_anclas, residuo),
         'celdas_plegadas': celdas_plegadas(_escalar(calce), config['marco']),
         'anclas_detalle': [{'id': a['id'], 'sector': a['sector'], 'loo_m': round(float(e), 2),
-                            'residuo_m': round(float(r), 2), 'desvio_tps_anterior_m': desvio_tps.get(a['id'])}
+                            'residuo_m': round(float(r), 2)}
                            for a, e, r in zip(anclas, loo_anclas, residuo)],
     }
 

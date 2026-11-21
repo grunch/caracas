@@ -1,7 +1,10 @@
 """Identidad de cruces por posición en el damero: controles independientes del TPS y correspondencias."""
 import math
 
+import numpy as np
 import pytest
+
+import damero
 from shapely.geometry import box
 
 from damero import (
@@ -128,3 +131,94 @@ def test_clasificar_compara_el_umbral_antes_de_redondear():
 def test_clasificar_rechaza_ocupacion_desconocida():
     with pytest.raises(ValueError, match='ocupación'):
         clasificar_correspondencias([{'id': 'U', 'ocupacion': 'rara', 'poligono': box(0, 0, 1, 1)}], [])
+
+
+# --- identidad por pareja: la misma celda del damero en el original y en 1936 -------------------
+
+def _esquinas(n=3, paso=10.0, giro=0.0):
+    c, s = np.cos(giro), np.sin(giro)
+    return {(i, j): np.array([c * i * paso - s * j * paso, s * i * paso + c * j * paso]) for i in range(n) for j in range(n)}
+
+
+def test_la_celda_que_contiene_un_punto_es_la_de_su_esquina_de_menor_indice():
+    # Arrange
+    esquinas = _esquinas()
+
+    # Act / Assert: el punto (15, 5) está entre las calles 1 y 2 (i) y 0 y 1 (j)
+    assert damero.celda_que_contiene((15.0, 5.0), esquinas) == (1, 0)
+    assert damero.celda_que_contiene((5.0, 15.0), esquinas) == (0, 1)
+
+
+def test_la_celda_sigue_un_damero_girado():
+    esquinas = _esquinas(giro=np.radians(40))
+    c, s = np.cos(np.radians(40)), np.sin(np.radians(40))
+    punto = (c * 15 - s * 5, s * 15 + c * 5)
+    assert damero.celda_que_contiene(punto, esquinas) == (1, 0)
+
+
+def test_fuera_de_toda_celda_completa_no_hay_celda():
+    esquinas = {k: v for k, v in _esquinas().items() if k != (2, 1)}
+    assert damero.celda_que_contiene((15.0, 5.0), esquinas) is None   # le falta una esquina
+    assert damero.celda_que_contiene((50.0, 50.0), _esquinas()) is None
+
+
+def test_una_uno_a_uno_se_conserva_solo_si_unidad_y_cuadra_caen_en_la_misma_celda():
+    # Arrange: original a paso 10; 1936 a paso 40 desplazado. U1 y su cuadra C1 en la celda (0, 0);
+    # U2 en (1, 0) pero su cuadra C2 cae en (0, 1) de 1936; U3 no es uno a uno
+    original = _esquinas(paso=10.0)
+    mosaico = {k: v * 4 + 1000 for k, v in original.items()}
+    unidades = [{'id': 'U1', 'centro_original': (5, 5)}, {'id': 'U2', 'centro_original': (15, 5)},
+                {'id': 'U3', 'centro_original': (5, 15)}]
+    cuadras = [{'id': 'C1', 'poligono': box(1010, 1010, 1030, 1030)}, {'id': 'C2', 'poligono': box(1010, 1050, 1030, 1070)}]
+    filas = [{'unidad': 'U1', 'clase': 'uno_a_uno', 'cuadras': [{'cuadra': 'C1', 'fraccion_cuadra': 0.9}]},
+             {'unidad': 'U2', 'clase': 'uno_a_uno', 'cuadras': [{'cuadra': 'C2', 'fraccion_cuadra': 0.8}]},
+             {'unidad': 'U3', 'clase': 'ausente', 'cuadras': []}]
+
+    # Act
+    salida = damero.confirmar_uno_a_uno(filas, unidades, cuadras, original, mosaico)
+
+    # Assert
+    assert salida[0] == {**filas[0], 'identidad_pareja': {'celda_original': [0, 0], 'celda_1936': [0, 0]}}
+    assert salida[1]['clase'] == 'incierta'
+    assert salida[1]['identidad_pareja'] == {'celda_original': [1, 0], 'celda_1936': [0, 1]}
+    assert 'otra celda' in salida[1]['motivo']
+    assert salida[2] == filas[2]
+    assert filas[1]['clase'] == 'uno_a_uno'  # no muta la entrada
+
+
+def test_una_uno_a_uno_sin_celda_completa_en_1936_queda_incierta():
+    original = _esquinas(paso=10.0)
+    mosaico = {k: v * 4 + 1000 for k, v in original.items() if k != (1, 1)}
+    filas = [{'unidad': 'U1', 'clase': 'uno_a_uno', 'cuadras': [{'cuadra': 'C1', 'fraccion_cuadra': 0.9}]}]
+    salida = damero.confirmar_uno_a_uno(filas, [{'id': 'U1', 'centro_original': (5, 5)}],
+                                        [{'id': 'C1', 'poligono': box(1010, 1010, 1030, 1030)}], original, mosaico)
+    assert salida[0]['clase'] == 'incierta'
+    assert salida[0]['identidad_pareja'] == {'celda_original': [0, 0], 'celda_1936': None}
+
+
+def test_dos_unidades_enteras_dentro_de_una_cuadra_que_se_reparten_son_fusionadas():
+    # Arrange: la cuadra C1 (20 × 10) contiene enteras a U1 y U2, cada una con menos de la mitad de la cuadra;
+    # U3 está entera en C2 pero sola, con menos de la mitad de C2
+    unidades = [{'id': 'U1', 'ocupacion': 'continua', 'poligono': box(0, 0, 9.5, 10)},
+                {'id': 'U2', 'ocupacion': 'conjunto_especial', 'poligono': box(10.5, 0, 20, 10)},
+                {'id': 'U3', 'ocupacion': 'continua', 'poligono': box(100, 0, 109, 10)}]
+    cuadras = [{'id': 'C1', 'poligono': box(0, 0, 20, 10)}, {'id': 'C2', 'poligono': box(100, 0, 120, 10)}]
+
+    # Act
+    filas, _ = clasificar_correspondencias(unidades, cuadras)
+
+    # Assert
+    assert {f['unidad']: f['clase'] for f in filas} == {'U1': 'fusionada', 'U2': 'fusionada', 'U3': 'desplazada_o_parcial'}
+
+
+def test_en_una_cuadra_repartida_las_dos_unidades_son_fusionadas_aunque_una_pase_el_umbral():
+    # Arrange: U1 cubre el 60 % de C1 y U2 el 35 %, las dos enteras dentro de ella
+    unidades = [{'id': 'U1', 'ocupacion': 'continua', 'poligono': box(0, 0, 12, 10)},
+                {'id': 'U2', 'ocupacion': 'continua', 'poligono': box(13, 0, 20, 10)}]
+    cuadras = [{'id': 'C1', 'poligono': box(0, 0, 20, 10)}]
+
+    # Act
+    filas, _ = clasificar_correspondencias(unidades, cuadras)
+
+    # Assert
+    assert {f['unidad']: f['clase'] for f in filas} == {'U1': 'fusionada', 'U2': 'fusionada'}

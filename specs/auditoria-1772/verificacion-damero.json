@@ -1,68 +1,314 @@
 {
- "fecha": "2026-11-20",
- "metodo": "Lectura de los recortes lado a lado generados por tools/geo/controles_damero.py (original ampliado ×3 con el cruce o la unidad en rojo; mosaico de 1936 con la esquina por identidad en verde, el TPS en rojo, la unidad por calce de control en azul y las cuadras del sistema en naranja). Juicios: coincide = identidad o clase confirmada por el entorno; compatible = sin contradicción pero no demostrada por el recorte; contradice = el recorte desmiente la identidad o la clase. Cada juicio de correspondencia lleva la clase que juzgó y el entrada_sha256 de la clasificación: si la unidad se reclasifica o cambia la ciudad, deja de contar (tools/geo/cierre_fase1.py).",
- "prueba_de_identidad_por_hitos": "Plaza de Candelaria: el TPS deja la plaza de 1772 a 302,9 m de la de 1936; el calce de control, a 34,0 m. La Pastora: TPS 85,6 m, control 137,6 m (norte con pocos cruces indexados). Plaza Mayor: 6,3 y 6,2 m.",
+ "fecha": "2026-11-21",
+ "metodo": "Lectura de los recortes lado a lado generados por tools/geo/controles_damero.py sobre el calce vigente por identidad (original ampliado ×3 con la unidad en rojo; mosaico de 1936 con la unidad por calce en azul y las cuadras del sistema en naranja). Juicios: coincide = clase confirmada por el entorno; compatible = sin contradicción pero no demostrada por el recorte; contradice = el recorte desmiente la clase. Cada juicio lleva la clase que juzgó y el entrada_sha256 de la clasificación: si la unidad se reclasifica o cambia la ciudad, deja de contar (tools/geo/cierre_fase1.py).",
+ "prueba_de_identidad_por_hitos": "Con el calce por identidad (calce-identidad.json): Candelaria a 34 m dejando su ancla fuera; La Pastora es la única ancla de su sector y su LOO no mide nada; la Plaza Mayor la fijan las semillas.",
  "recortes": [
   {
-   "grupo": "controles",
-   "archivo": "S1772-23-X1772-0021.png",
-   "sha256": "97e2e70c7fee429cecef1334809bf59b6b7a53683ac7b694e2977dfc35fe9bea",
-   "objeto": "X1772-0021",
-   "juicio": "compatible",
-   "nota": "Cruce [1,-4] junto a la quebrada en el original; en 1936 el callejón y Moreno junto a Miraflores y Caño Amarillo, borde noroeste de la ciudad. Sin contradicción; identidad no demostrada por un solo recorte. TPS a 156 m, fuera del recorte."
-  },
-  {
-   "grupo": "controles",
-   "archivo": "S1772-43-X1772-0163.png",
-   "sha256": "39817be5b5fb2e7e92d4114362dd7a08cfde7112a76b1fe2e850e4940e61024b",
-   "objeto": "X1772-0163",
-   "juicio": "compatible",
-   "nota": "Cruce [4,7] con manzanas parcialmente edificadas; en 1936 Teñidero–Desamparados junto a Chimborazo, retícula regular. Sin contradicción. TPS a 236 m, fuera del recorte."
-  },
-  {
-   "grupo": "controles",
-   "archivo": "S1772-11-X1772-0002.png",
-   "sha256": "65263d58d6fe52a750ad7e1526e68cf678338b501658bbcec6df78e583923042",
-   "objeto": "X1772-0002",
-   "juicio": "compatible",
-   "nota": "Cruce [-7,-6] en el borde suroeste, solares casi vacíos con una esquina edificada; en 1936 El Aguacate con San Francisquito y la calle Sur 14, también borde urbano. Sin contradicción. TPS a 381 m, fuera del recorte."
+   "grupo": "correspondencias",
+   "archivo": "ausente-U1772-0001.png",
+   "sha256": "fe3ac1c5e7a3a23a3162c8a73dd81a16fac89e63b3507c63283babd394bf15fe",
+   "objeto": "U1772-0001",
+   "clase": "ausente",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "No hay ninguna cuadra del sistema en la unidad por calce: la ausencia se confirma."
   },
   {
    "grupo": "correspondencias",
-   "archivo": "uno_a_uno-U1772-0064.png",
-   "sha256": "5811c92c844e035a47fb01104e6dd0907d34879ab25771434ebd92ee7c2cb6a7",
-   "objeto": "U1772-0064",
-   "clase": "uno_a_uno",
+   "archivo": "ausente-U1772-0035.png",
+   "sha256": "3c7434ea91707fe1f0e13ea5a470b2585333b9af1e7967e61e97004f406a3eb2",
+   "objeto": "U1772-0035",
+   "clase": "ausente",
    "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
    "juicio": "coincide",
-   "nota": "La unidad proyectada con el calce de control cae sobre la cuadra del sistema (La Glorieta–El Hospital) con desfase menor que el ancho de calle."
+   "nota": "No hay ninguna cuadra del sistema en la unidad por calce: la ausencia se confirma."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "ausente-U1772-0090.png",
+   "sha256": "a948cb409a9bbc3fbb66f556e32ac29cfbee8f598029c7a6ebacfd78af1a63dd",
+   "objeto": "U1772-0090",
+   "clase": "ausente",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "Manzana continua del original sin ninguna cuadra del sistema: el sitio de 1772 no la tiene."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "ausente-U1772-0149.png",
+   "sha256": "98bbfb10a8c3cf3d74fc62e293781672e189624caa33a924e65e82e2092ada6d",
+   "objeto": "U1772-0149",
+   "clase": "ausente",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "No hay ninguna cuadra del sistema en la unidad por calce: la ausencia se confirma."
   },
   {
    "grupo": "correspondencias",
    "archivo": "ausente-U1772-0184.png",
-   "sha256": "369531036ac58afd7ba817bc68ed312db7af591aae5dcae95fdbe968a8590799",
+   "sha256": "cb412bc01e00f484478423682f43d2edd24c8e6c6bb1124359550aac087eb901",
    "objeto": "U1772-0184",
    "clase": "ausente",
    "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
    "juicio": "coincide",
-   "nota": "El original tiene dos cuerpos rojos en la manzana; bajo el calce de control (Mirador–San Felipe–Esmeralda) el sistema no tiene ninguna cuadra en 1772. Releído tras regenerar el calce de control sin propagar índices desde esquinas ambiguas: mismo entorno, sin cuadras del sistema."
+   "nota": "No hay ninguna cuadra del sistema en la unidad por calce: la ausencia se confirma."
   },
   {
    "grupo": "correspondencias",
-   "archivo": "desplazada_o_parcial-U1772-0055.png",
-   "sha256": "fa920b722fd521e8443fd40062859c6bcb0595ee00549afc46e21f3753f4305b",
-   "objeto": "U1772-0055",
-   "clase": "desplazada_o_parcial",
+   "archivo": "ausente-U1772-0254.png",
+   "sha256": "9a73e3d22ce7b27447548245440bcf5b83ba333081ce4165b837a8218e56a223",
+   "objeto": "U1772-0254",
+   "clase": "ausente",
    "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
-   "juicio": "contradice",
-   "nota": "La identidad se confirma: la unidad cae sobre la cuadra del sistema (Laguno–Correos). La clase no: la unión construida del sistema rebasa la calle, la fracción de cuadra queda bajo el umbral y sale desplazada_o_parcial cuando la correspondencia es uno a uno. La clase subestima, no inventa; se corrige en T33j.2a."
+   "juicio": "coincide",
+   "nota": "No hay ninguna cuadra del sistema en la unidad por calce: la ausencia se confirma."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "fusionada-U1772-0055.png",
+   "sha256": "408c703c4eb61dfc14d4737bb6b363010b0c68632b759ad0264217726fdebbbd",
+   "objeto": "U1772-0055",
+   "clase": "fusionada",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "La unidad calza con su manzana (Laguno) y la cuadra del sistema baja por la calle hacia la de Correos: el sistema une las dos manzanas (fusionada con U1772-0199). Resuelve la contradicción de la muestra anterior: no era uno a uno sino una cuadra repartida entre dos unidades."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "fusionada-U1772-0082.png",
+   "sha256": "0217d649ab424c41273386da9549fa49604e07d165f7e19165584cbe1a30b7c9",
+   "objeto": "U1772-0082",
+   "clase": "fusionada",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "compatible",
+   "nota": "La unidad calza con la manzana de Santa Capilla; la cuadra 8091 se reparte con U1772-0096, pero el recorte no muestra la otra mitad."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "fusionada-U1772-0096.png",
+   "sha256": "051ed56cab95d2c9a5f0e133bc04901cf76788cfade3c287d1f8c97f065f2ddb",
+   "objeto": "U1772-0096",
+   "clase": "fusionada",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "compatible",
+   "nota": "La unidad calza con su manzana; la cuadra se sale del borde hacia la vecina, junto a la costura del mosaico."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "fusionada-U1772-0123.png",
+   "sha256": "45f71b8a6044fca7a679c8f4ced8b1575ae37b06bfce6628a75100ac9394d6ba",
+   "objeto": "U1772-0123",
+   "clase": "fusionada",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "compatible",
+   "nota": "La unidad calza con su manzana (Doctor Paúl); la cuadra 8103 se reparte con U1772-0140; el recorte no muestra la otra mitad."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "fusionada-U1772-0140.png",
+   "sha256": "d834dc31dbf370d8721ccaa20ae1c03b89943a88b8a6dd995fae5aff907147b9",
+   "objeto": "U1772-0140",
+   "clase": "fusionada",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "compatible",
+   "nota": "La unidad calza con su manzana (Salvador de León); cuadra 8103 compartida con U1772-0123."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "fusionada-U1772-0199.png",
+   "sha256": "bec3f97544c892873f381a836d22b00548d7e01e97afbd202a9dae9e82de24b8",
+   "objeto": "U1772-0199",
+   "clase": "fusionada",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "Manzana de Correos; la cuadra del sistema sube por la calle hacia la de Laguno (fusionada con U1772-0055)."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "incierta-U1772-0092.png",
+   "sha256": "1a0df50f43e81b700aeaa05019c1bd97335c3b8ca07aeeab38e28da01b8a7e8a",
+   "objeto": "U1772-0092",
+   "clase": "incierta",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "compatible",
+   "nota": "A ojo la cuadra del sistema calza con la manzana, pero falta la celda completa del damero en 1936 (casi siempre por la costura del mosaico): sin identidad por pareja demostrada sigue incierta."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "incierta-U1772-0093.png",
+   "sha256": "af95201dac91b54f384db32c189ba6b2016d79cfabc6f4a00c4475b17685d124",
+   "objeto": "U1772-0093",
+   "clase": "incierta",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "compatible",
+   "nota": "A ojo la cuadra del sistema calza con la manzana, pero falta la celda completa del damero en 1936 (casi siempre por la costura del mosaico): sin identidad por pareja demostrada sigue incierta."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "incierta-U1772-0097.png",
+   "sha256": "58e0759ab6db0e95a2210bcfd1c91490797467cfa36facc29731946f666a736b",
+   "objeto": "U1772-0097",
+   "clase": "incierta",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "compatible",
+   "nota": "A ojo la cuadra del sistema calza con la manzana, pero falta la celda completa del damero en 1936 (casi siempre por la costura del mosaico): sin identidad por pareja demostrada sigue incierta."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "incierta-U1772-0107.png",
+   "sha256": "9d8c6784f3b77bcbd5f1482d49dcd91cd6c530bd20b7c5df94e4cef03d59b756",
+   "objeto": "U1772-0107",
+   "clase": "incierta",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "compatible",
+   "nota": "A ojo la cuadra del sistema calza con la manzana, pero falta la celda completa del damero en 1936 (casi siempre por la costura del mosaico): sin identidad por pareja demostrada sigue incierta."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "incierta-U1772-0108.png",
+   "sha256": "42de7521644f77141629c32b6802def297bfcb01c726e6162147335003da6ddd",
+   "objeto": "U1772-0108",
+   "clase": "incierta",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "compatible",
+   "nota": "A ojo la cuadra del sistema calza con la manzana, pero falta la celda completa del damero en 1936 (casi siempre por la costura del mosaico): sin identidad por pareja demostrada sigue incierta."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "incierta-U1772-0125.png",
+   "sha256": "aa1d7a91d70049d0001d3f2f56e69465c96bf96c10d534dd5f385202da91b2b4",
+   "objeto": "U1772-0125",
+   "clase": "incierta",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "compatible",
+   "nota": "A ojo la cuadra del sistema calza con la manzana, pero falta la celda completa del damero en 1936 (casi siempre por la costura del mosaico): sin identidad por pareja demostrada sigue incierta."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "uno_a_uno-U1772-0050.png",
+   "sha256": "02d2f83ea4ba5ef0fe5167cb91d94cd494f87374df06e9f68acd4ad4e9123427",
+   "objeto": "U1772-0050",
+   "clase": "uno_a_uno",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "La cuadra del sistema calza con la manzana de Maderero."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "uno_a_uno-U1772-0057.png",
+   "sha256": "c924de555b71ee593d19850490268f0c1892130c54688a893c9a7743689c970d",
+   "objeto": "U1772-0057",
+   "clase": "uno_a_uno",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "La cuadra del sistema calza con la manzana de Balconcito."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "uno_a_uno-U1772-0077.png",
+   "sha256": "7899179ee73f57cce25ad8dd008caf3821d61bfa3f0ad0a99adf695b1e1a4769",
+   "objeto": "U1772-0077",
+   "clase": "uno_a_uno",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "compatible",
+   "nota": "Conjunto de Santa Teresa: la cuadra del sistema cubre solo parte de la manzana (Plaza Henry Clay y Teatro Nacional en 1936); misma celda, sin contradicción."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "uno_a_uno-U1772-0091.png",
+   "sha256": "0ac9b161dd40332284020231c9dcb2cce4337b5d50ca9da995ce37a77c4047a4",
+   "objeto": "U1772-0091",
+   "clase": "uno_a_uno",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "La cuadra del sistema calza con la manzana de Santa Teresa a Cruz Verde."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "uno_a_uno-U1772-0110.png",
+   "sha256": "9db64bea2a5ff11c812e58c8268ed53bcc9b0617d05f45f30caee8d8ac41d0d0",
+   "objeto": "U1772-0110",
+   "clase": "uno_a_uno",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "compatible",
+   "nota": "La cuadra del sistema sigue la manzana con un contorno irregular en el lado este."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "uno_a_uno-U1772-0139.png",
+   "sha256": "2aebee57e91518fd7fefc85c0ceb52f265c11d7c1139034a68dadd3520ecb98f",
+   "objeto": "U1772-0139",
+   "clase": "uno_a_uno",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "La cuadra del sistema calza con la manzana, sobre una grieta del mosaico."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "vacio_coincide-U1772-0006.png",
+   "sha256": "07e3e3d646e497e0f2012f75cd481fc0ea487e425311a868bb6999c5a8adf98c",
+   "objeto": "U1772-0006",
+   "clase": "vacio_coincide",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "Terreno libre en el original y sin casas del sistema encima."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "vacio_coincide-U1772-0086.png",
+   "sha256": "784fbd8a7eff75b0a9e2d35ca91a591baec07c385e51ac60ca21e0755b0a935c",
+   "objeto": "U1772-0086",
+   "clase": "vacio_coincide",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "Terreno libre en el original y sin casas del sistema encima."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "vacio_coincide-U1772-0161.png",
+   "sha256": "8be68e680266c32b4e5db7f5f5fe26acaecf5857fe5c85b2a62cf5a8c5b2eefc",
+   "objeto": "U1772-0161",
+   "clase": "vacio_coincide",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "Terreno libre en el original y sin casas del sistema encima."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "vacio_coincide-U1772-0219.png",
+   "sha256": "6878833b36f269e60639fb08bed022b8b3939a921d6ca944e7f72c0bcf652980",
+   "objeto": "U1772-0219",
+   "clase": "vacio_coincide",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "Terreno libre en el original y sin casas del sistema encima."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "vacio_coincide-U1772-0233.png",
+   "sha256": "89ac1b471aa0e4fd4083815a3bc707bb2cfd90377bdf99c34db1c4af7beca3d5",
+   "objeto": "U1772-0233",
+   "clase": "vacio_coincide",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "La Plaza Mayor cae sobre la Plaza Bolívar, sin casas del sistema."
+  },
+  {
+   "grupo": "correspondencias",
+   "archivo": "vacio_coincide-U1772-0245.png",
+   "sha256": "c42f22ec549a9bcfc928a54461a56319b6dc695b0b766ec3e11cddef26e40de0",
+   "objeto": "U1772-0245",
+   "clase": "vacio_coincide",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "coincide",
+   "nota": "Terreno libre en el original y sin casas del sistema encima."
   }
  ],
  "resumen": {
-  "revisados": 6,
-  "coincide": 2,
-  "compatible": 3,
-  "contradice": 1
+  "revisados": 30,
+  "coincide": 18,
+  "compatible": 12,
+  "contradice": 0
  },
- "limite": "Seis recortes de 49 generados: una muestra, no una verificación completa; los 168 cruces y las 292 clases siguen siendo medidas automáticas con identidad por conteo de calles."
+ "limite": "Los 30 recortes de correspondencias generados (6 por clase), todos juzgados: una muestra por clase, no una verificación de las 292 unidades. Las uno a uno se confirman además por identidad de celda del damero (identidad_pareja), automática. Los recortes de controles de cruce no se juzgan: el control por sector es el LOO del calce (decisión del 21-11-2026)."
 }
