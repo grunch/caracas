@@ -102,3 +102,35 @@ def test_la_puerta_no_muta_sus_entradas():
     antes = deepcopy((r, u, c))
     puerta_fase3(ciudad=c, red=r, unidades=u, verificadas=[], metro=METRO)
     assert (r, u, c) == antes
+
+
+def test_una_calle_historica_se_mide_sobre_los_cruces_de_la_referencia_si_sus_extremos_estan_identificados():
+    from cierre_fase3 import historicas_en_referencia
+    r = red()
+    for n, o in zip(r['nodos'], ([0, 0], [10, 0], [10, 10], [0, 10], [20, 0])):
+        n['original'] = o
+    verificadas = [{'id': 'h1', 'original': [[10, 0], [10, 10]], 'anclajes': [[108, 0], [108, 100]]},
+                   {'id': 'h2', 'original': [[20, 0], [10, 0]], 'anclajes': [[200, 0], [100, 0]]}]
+    medidas = {m['id']: m for m in historicas_en_referencia(verificadas, r)}
+    assert medidas['h1']['anclajes'] == [[100, 0], [100, 100]] and medidas['h1']['fuente'] == 'referencia'
+    assert medidas['h2']['anclajes'] == [[200, 0], [100, 0]] and medidas['h2']['fuente'] == 'anclajes'
+
+
+def test_una_calle_historica_de_dos_cuadras_sigue_los_cruces_intermedios_de_la_referencia():
+    from cierre_fase3 import historicas_en_referencia
+    r = {'nodos': [{'id': 'A', 'original': [0, 0], 'mosaico': [0, 0]},
+                   {'id': 'M', 'original': [0, 10], 'mosaico': [8, 100]},      # en 1936 la calle quiebra aquí
+                   {'id': 'B', 'original': [0, 20], 'mosaico': [0, 200]},
+                   {'id': 'Z', 'original': [5, 10], 'mosaico': None}],
+         'calles': [{'id': 'L1', 'tipo': 'calle_recta', 'nodos': ['A', 'M', 'B']},
+                    {'id': 'L2', 'tipo': 'calle_recta', 'nodos': ['M', 'Z']}]}
+    medida = historicas_en_referencia([{'id': 'h', 'original': [[0, 0], [0, 20]], 'anclajes': [[0, 0], [0, 200]]}], r)[0]
+    assert medida == {'id': 'h', 'anclajes': [[0, 0], [8, 100], [0, 200]], 'fuente': 'referencia'}
+
+
+def test_una_calle_historica_cuyos_extremos_estan_en_calles_distintas_conserva_sus_anclajes():
+    from cierre_fase3 import historicas_en_referencia
+    r = {'nodos': [{'id': 'A', 'original': [0, 0], 'mosaico': [0, 0]}, {'id': 'C', 'original': [10, 10], 'mosaico': [100, 100]}],
+         'calles': [{'id': 'L1', 'tipo': 'calle_recta', 'nodos': ['A']}, {'id': 'L2', 'tipo': 'calle_recta', 'nodos': ['C']}]}
+    v = [{'id': 'h', 'original': [[0, 0], [10, 10]], 'anclajes': [[0, 0], [0, 100], [100, 100]]}]
+    assert historicas_en_referencia(v, r)[0] == {'id': 'h', 'anclajes': [[0, 0], [0, 100], [100, 100]], 'fuente': 'anclajes'}

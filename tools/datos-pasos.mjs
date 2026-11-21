@@ -81,7 +81,8 @@ export const PASOS = [
     },
   },
   {
-    id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/tramos.json`, `${D}/edificado-1772.png`, 'tools/geo/cuadras-1772.json'],
+    id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/tramos.json`, `${D}/edificado-1772.png`, 'tools/geo/cuadras-1772.json',
+      'tools/geo/referencias/1772-red.json', 'tools/geo/referencias/1772-unidades.json'],
     salidas: [`${D}/ciudad-1936.json`, `${D}/patios-de-casas.png`],
     codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'caras', 'huellas', 'cuadras_historicas'),
     cmd: async () => {

@@ -113,3 +113,17 @@ def test_la_prueba_de_solape_falla_por_el_solape_y_no_por_otra_regla():
     with pytest.raises(ValueError, match='solape'):
         validar_unidades({'unidades': copia}, r, {'U1', 'U2', 'U3'})
     assert _rechaza(validar_unidades, {'unidades': copia}, r, {'U1', 'U2', 'U3'})
+
+
+def test_el_generador_puede_leer_la_referencia_solo_por_el_filtro_de_aprobadas():
+    r, unidades = referencia()
+    excepciones = excepciones_1772(trazado(), unidades, limites())
+    args = dict(censo={'U1', 'U2', 'U3'}, lineas={'L00'}, cruces={'X00'}, excepciones=excepciones)
+    p = procedencias()
+    p['clases']['referencia_aprobada'] = True
+    p['pasos']['vectorizar'].append({'entrada': 'tools/geo/referencias/1772-unidades.json',
+                                     'clase': 'referencia_aprobada', 'nota': 'solo aprobadas'})
+    assert puerta_fase2(r, unidades, procedencias=p, **args)['ninguna_pendiente_en_el_generador']['cumplido'] is True
+    p['pasos']['vectorizar'][-1]['clase'] = 'historica_curada'
+    criterio = puerta_fase2(r, unidades, procedencias=p, **args)['ninguna_pendiente_en_el_generador']
+    assert criterio['cumplido'] is False and criterio['lee_la_referencia_sin_filtro'] == ['tools/geo/referencias/1772-unidades.json']

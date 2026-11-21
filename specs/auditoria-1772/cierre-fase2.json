@@ -65,6 +65,8 @@
     "calles-nuevas: fuentes/derivados/1772/calzado.json",
     "vectorizar: fuentes/derivados/1936/mosaico.json",
     "vectorizar: tools/geo/cuadras-1772.json",
+    "vectorizar: tools/geo/referencias/1772-red.json",
+    "vectorizar: tools/geo/referencias/1772-unidades.json",
     "epocas: fuentes/derivados/1578/ciudad-1578.json",
     "epocas: fuentes/derivados/1911/calzado.tif",
     "epocas: fuentes/derivados/1889/calzado.tif",
@@ -84,7 +86,7 @@
   },
   "ninguna_pendiente_en_el_generador": {
    "cumplido": true,
-   "generador_lee_la_referencia": [],
+   "lee_la_referencia_sin_filtro": [],
    "aprobadas_disponibles_para_la_fase_3": 97
   },
   "fase_2_cerrable": true

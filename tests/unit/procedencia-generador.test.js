@@ -23,8 +23,9 @@ describe('procedencia de las entradas del generador de 1772', () => {
     }
   })
 
-  test('el generador todavía no lee la referencia histórica (ninguna pendiente entra por esa vía)', () => {
-    const lee = PASOS.flatMap((p) => p.entradas).filter((e) => e.includes('tools/geo/referencias/'))
-    expect(lee).toEqual([])
+  test('el generador lee la referencia histórica solo por el filtro de aprobadas (ninguna pendiente entra)', () => {
+    const lee = Object.values(registro.pasos).flat().filter((e) => e.entrada.includes('tools/geo/referencias/'))
+    expect(lee.length).toBeGreaterThan(0)
+    expect(lee.every((e) => e.clase === 'referencia_aprobada')).toBe(true)
   })
 })

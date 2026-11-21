@@ -257,10 +257,11 @@ def cerrar_cuadras(nace, cuadras):
     return salida
 
 
-def apertura_de_juntas(juntas, edificado, escala, minimos=None):
+def apertura_de_juntas(juntas, edificado, escala, minimos=None, hastas=None):
     """La época en que se abre cada grupo de calles nuevas (tools/geo/vectorizar.py, "juntas"): la primera
     cuyo plano (`edificado`: máscaras de las épocas 1..4, en la grilla reducida) ya no tiene edificada la
-    mayor parte de sus calles; si todas la tienen, 1936."""
+    mayor parte de sus calles; si todas la tienen, 1936. `hastas`: la época en que el grupo cede a más tardar
+    (0 = sin tope); las cuadras de la referencia de 1772 ceden en 1843, porque la referencia solo describe 1772."""
     forma = edificado[0].shape if edificado else (0, 0)
     abre = []
     for indice, poligonos in enumerate(juntas):
@@ -269,7 +270,9 @@ def apertura_de_juntas(juntas, edificado, escala, minimos=None):
             mascara[_huella(np.asarray(p, float).reshape(-1, 2), forma, escala)] = True
         tapadas = [m[mascara].mean() if mascara.any() else 1.0 for m in edificado]
         minimo = minimos[indice] if minimos is not None else 1
-        abre.append(next((1 + e for e, f in enumerate(tapadas) if 1 + e >= minimo and f < 0.5), ULTIMA))
+        cuando = next((1 + e for e, f in enumerate(tapadas) if 1 + e >= minimo and f < 0.5), ULTIMA)
+        tope = hastas[indice] if hastas is not None and indice < len(hastas) else 0
+        abre.append(min(cuando, tope) if tope else cuando)
     return abre
 
 
@@ -293,7 +296,8 @@ def vida_de_1936(nace36, ciudad, apertura=()):
     (cerrar_cuadras); los edificios públicos, no antes de PUBLICOS_DESDE; una casa que pisa uno ("cede")
     vive hasta que él nace. Con calles nuevas ("junta"; `apertura`: la época en que se abre cada grupo,
     apertura_de_juntas), la cuadra de antes ("antes" 1) vive hasta que se abre su calle y las de después
-    nacen recién entonces. Una casa que no llega a vivir sobra: se quita."""
+    nacen recién entonces. Una casa que pisa una calle de 1772 de la referencia ("calzada72") no vive en 1772.
+    Una casa que no llega a vivir sobra: se quita."""
     n = len(ciudad["techos"])
     nace = cerrar_cuadras(nace36, ciudad.get("cuadras", [-1] * n))
     publico = np.array([t[3] == ESTILO_PUBLICO for t in ciudad["techos"]], bool)
@@ -306,8 +310,12 @@ def vida_de_1936(nace36, ciudad, apertura=()):
             nace[k] = 1
     vida, quitar = [], set()
     datos = zip(ciudad.get("cede", [-1] * n), ciudad.get("junta", [-1] * n), ciudad.get("antes", [0] * n))
+    calzada = ciudad.get("calzada72", [0] * n)
     for k, (cede, junta, antes) in enumerate(datos):
         una = _vida_de_casa(k, nace, cede, junta, antes, apertura)
+        if una is not None and k < len(calzada) and calzada[k] and una[0] <= 1 and (una[1] == 0 or una[1] > 1):
+            # pisa una calle de 1772 de la referencia: en 1772 no está (la calle manda sobre la casa heurística)
+            una = None if antes or (una[1] and una[1] <= 2) else [2, una[1]]
         if una is None:
             vida.append([int(nace[k]), 0])
             quitar.add(k)
@@ -336,7 +344,7 @@ def sin_techos(ciudad, vida, quitar):
         techos.append([len(vertices) // 2, cuantos, *resto])
         vertices.extend(v[2 * i:2 * (i + cuantos)])
     salida = {**ciudad, "vertices": vertices, "techos": techos}
-    for clave in ("esquinas", "cuadras", "cede", "junta", "antes"):
+    for clave in ("esquinas", "cuadras", "cede", "junta", "antes", "calzada72"):
         if clave in ciudad:
             salida[clave] = [ciudad[clave][k] for k in quedan]
     if "cede" in ciudad:
@@ -504,7 +512,8 @@ def main():
     construido = [construido_de_epoca(raiz, e, forma, escala, metro) for e in epocas[1:ULTIMA]]
     huellas36 = huellas(ciudad36, forma, escala)
     nace36 = nace(fracciones(huellas36, construido), primera=1, umbral=config["umbral"])
-    apertura = apertura_de_juntas(ciudad36.get("juntas", []), construido, escala, ciudad36.get("juntas_minimo"))
+    apertura = apertura_de_juntas(ciudad36.get("juntas", []), construido, escala, ciudad36.get("juntas_minimo"),
+                                  ciudad36.get("juntas_hasta"))
     vida36, quitar = vida_de_1936(nace36, ciudad36, apertura)
     vida78 = vida_de_1578(ciudad78, *relevos(huellas36, vida36, quitar), construido, escala)
     ciudad = unir(*sin_techos(ciudad36, vida36, quitar), ciudad78, vida78)

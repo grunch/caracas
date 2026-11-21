@@ -154,8 +154,9 @@ def puerta_fase2(red, unidades, censo, lineas, cruces, excepciones, procedencias
     except ValueError:
         excepciones_ok = False
     separadas = validar_procedencias(procedencias)
+    # el generador puede leer la referencia, pero solo por el filtro de aprobadas (clase referencia_aprobada)
     lee_referencia = [e['entrada'] for entradas in procedencias['pasos'].values() for e in entradas
-                      if 'referencias/' in e['entrada']]
+                      if 'referencias/' in e['entrada'] and e['clase'] != 'referencia_aprobada']
     criterios = OrderedDict([
         ('entidades_con_referencia', _criterio_entidades(red, unidades, censo, lineas, cruces)),
         ('correspondencia_por_unidad', {'cumplido': all(u.get('correspondencia', {}).get('clase') for u in unidades),
@@ -167,7 +168,7 @@ def puerta_fase2(red, unidades, censo, lineas, cruces, excepciones, procedencias
         ('excepciones_registradas', {'cumplido': excepciones_ok and bool(excepciones),
                                      'por_tipo': dict(sorted(Counter(e['tipo'] for e in excepciones).items()))}),
         ('historico_separado_de_heuristicas', {'cumplido': True, **separadas}),
-        ('ninguna_pendiente_en_el_generador', {'cumplido': not lee_referencia, 'generador_lee_la_referencia': lee_referencia,
+        ('ninguna_pendiente_en_el_generador', {'cumplido': not lee_referencia, 'lee_la_referencia_sin_filtro': lee_referencia,
                                                'aprobadas_disponibles_para_la_fase_3': len(unidades) - len(pendientes)}),
     ])
     return {**criterios, 'fase_2_cerrable': all(c['cumplido'] for c in criterios.values())}

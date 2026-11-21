@@ -1,5 +1,5 @@
 {
- "alcance": "Procedencia de cada entrada de los pasos del generador que arman la época de 1772 (tools/datos-pasos.mjs), y de las entradas de la referencia histórica (tools/geo/referencias/1772-*.json). Separa los datos históricos de las heurísticas heredadas de 1936 y OSM (specs/08, fase 2). La referencia solo lee entradas históricas; el generador todavía no la lee (fase 3).",
+ "alcance": "Procedencia de cada entrada de los pasos del generador que arman la época de 1772 (tools/datos-pasos.mjs), y de las entradas de la referencia histórica (tools/geo/referencias/1772-*.json). Separa los datos históricos de las heurísticas heredadas de 1936 y OSM (specs/08, fase 2). La referencia solo lee entradas históricas; desde la fase 3 (T33j.3a) el generador la lee solo a través de cuadras_historicas.cargar_referencia, que deja fuera las unidades pendientes.",
  "fecha": "2026-11-21",
  "clases": {
   "fuente_historica": true,
@@ -13,7 +13,8 @@
   "heuristica_color": false,
   "parametros_heuristicos": false,
   "derivado_mixto": false,
-  "otras_epocas": true
+  "otras_epocas": true,
+  "referencia_aprobada": true
  },
  "pasos": {
   "calce-1772": [
@@ -115,6 +116,16 @@
     "entrada": "tools/geo/cuadras-1772.json",
     "clase": "historica_curada",
     "nota": "Diez cuadras totalmente rojas verificadas en el original (#69), con las esquinas del damero."
+   },
+   {
+    "entrada": "tools/geo/referencias/1772-red.json",
+    "clase": "referencia_aprobada",
+    "nota": "Red de la referencia histórica (fase 2): solo sus nodos identificados dan el anillo en 1936 de las unidades aprobadas."
+   },
+   {
+    "entrada": "tools/geo/referencias/1772-unidades.json",
+    "clase": "referencia_aprobada",
+    "nota": "Unidades de la referencia histórica: vectorizar solo toma las aprobadas edificadas (cuadras_historicas.cargar_referencia); una pendiente nunca entra."
    }
   ],
   "epocas": [

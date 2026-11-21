@@ -119,14 +119,51 @@ def calles_abiertas_dentro(unidades, por_id, casas, metro=METRO, retiro_m=ANCHO_
     return resultado
 
 
+TOLERANCIA_ORIGINAL_PX = 6   # un extremo de calle histórica a menos de esto de un nodo de la red, en px del original
+
+
+def historicas_en_referencia(verificadas, red, tol=TOLERANCIA_ORIGINAL_PX):
+    """Cada calle histórica verificada con el eje que se mide en 1936. Su evidencia son sus coordenadas en el original
+    de 1772: si sus dos extremos caen sobre nodos de la red y todos los cruces de la calle entre ellos tienen pareja
+    por identidad, el eje pasa por esos cruces (`fuente: referencia`); si no, por sus anclajes, que se ajustaron a la
+    red de OSM (`fuente: anclajes`)."""
+    nodos = [n for n in red['nodos'] if n.get('original')]
+    por_id = {n['id']: n for n in red['nodos']}
+
+    def cerca(punto):
+        n = min(nodos, key=lambda n: (n['original'][0] - punto[0]) ** 2 + (n['original'][1] - punto[1]) ** 2, default=None)
+        lejos = n is None or (n['original'][0] - punto[0]) ** 2 + (n['original'][1] - punto[1]) ** 2 > tol ** 2
+        return None if lejos else n['id']
+
+    def camino(a, b):
+        """Los nodos de una calle de la referencia de `a` a `b`, con los intermedios; None si ninguna los une."""
+        for c in red.get('calles', []):
+            if a in c['nodos'] and b in c['nodos']:
+                i, j = c['nodos'].index(a), c['nodos'].index(b)
+                return c['nodos'][i:j + 1] if i <= j else c['nodos'][j:i + 1][::-1]
+        return None   # en calles distintas: no hay eje de la referencia que los una
+
+    resultado = []
+    for v in verificadas:
+        original = v.get('original') or []
+        a, b = (cerca(original[0]), cerca(original[-1])) if len(original) >= 2 else (None, None)
+        tramo = camino(a, b) if a and b and a != b else None
+        if tramo and all(por_id[x]['mosaico'] for x in tramo):
+            resultado.append({'id': v['id'], 'anclajes': [list(por_id[x]['mosaico']) for x in tramo], 'fuente': 'referencia'})
+        else:
+            resultado.append({'id': v['id'], 'anclajes': v['anclajes'], 'fuente': 'anclajes'})
+    return resultado
+
+
 def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_INFERIDO_M):
     """Criterios de la fase 3 con su cumplimiento sobre las casas de 1772; `fase_3_cerrable` exige todos."""
     casas = casas_de_epoca(ciudad)
     por_id = {n['id']: n for n in red['nodos']}
     cs = corredores(red, ancho_m, metro)
     ocupadas = calles_ocupadas(cs, casas, metro)
+    medidas = historicas_en_referencia(verificadas, red)
     historicas = [{'tramo': v['id'], 'poligono': LineString(v['anclajes']).buffer(ancho_m / 2 / metro, cap_style='flat')}
-                  for v in verificadas]
+                  for v in medidas]
     historicas_ocupadas = [o['tramo'] for o in calles_ocupadas(historicas, casas, metro)]
     plazas = plazas_ocupadas(unidades, por_id, casas, metro, ancho_m / 2)
     dentro = calles_abiertas_dentro(unidades, por_id, casas, metro, ancho_m / 2)
@@ -134,6 +171,7 @@ def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_
         ('calles_libres', {'cumplido': not ocupadas, 'tramos_medidos': len(cs), 'ancho_inferido_m': ancho_m,
                            'tramos_ocupados': len(ocupadas), 'ocupadas': ocupadas}),
         ('calles_historicas_libres', {'cumplido': not historicas_ocupadas, 'medidas': len(historicas),
+                                      'sobre_la_referencia': sum(v['fuente'] == 'referencia' for v in medidas),
                                       'ocupadas': historicas_ocupadas}),
         ('plazas_sin_casas', {'cumplido': not plazas, 'ocupadas': plazas}),
         ('sin_calles_dentro_de_unidades', {'cumplido': not dentro, 'unidades': dentro}),

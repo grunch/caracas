@@ -344,16 +344,28 @@ def _poligonos_de_cara(red, lista, cajas, metro):
     return salida
 
 
-def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas=()):
+def _mascara_de(poligonos, origen, forma):
+    """Máscara (forma de la ventana con esquina en `origen`) de lo que cubren los polígonos (px del mosaico)."""
+    mascara = np.zeros(forma, np.uint8)
+    for p in poligonos:
+        cv2.fillPoly(mascara, [np.round((np.asarray(p.exterior.coords) - origen) * 16).astype(np.int32)], 1, shift=4)
+    return mascara > 0
+
+
+def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas=(), ocupado=()):
     """Las cuadras de 1772 que el plano de 1936 muestra abiertas (una calle nueva que las parte, un pasaje o
     una plaza que les entra): por cada cara de la red sin los tramos nuevos, su polígono ajustado a las
     fachadas con lo abierto adentro vuelto a edificar, salvo lo que 1772 tampoco edifica (una plaza vieja).
     → [{miembros: las cuadras de 1936 que reemplaza, cuadra: máscara, origen: (x, y), clases: las de antes,
-    poligono, abierto: máscara de lo que se abrió}]. Solo las que salen como cuadra modelo repartida por lados."""
+    poligono, abierto: máscara de lo que se abrió}]. Solo las que salen como cuadra modelo repartida por lados.
+    `ocupado`: los anillos de la referencia histórica; una cara que cae sobre ellos la arma la referencia, y de una que
+    los pisa poco se recorta lo que cae dentro de ellos (la referencia ya lo reconstruye)."""
     alto, ancho = clases.shape
     salida = []
     for cara in red.caras72:
         if not CUADRA_MINIMA_M2 <= cara.area * metro ** 2 <= CARA_MAXIMA_M2:
+            continue
+        if sum(cara.intersection(p).area for p in ocupado) >= SOBRE_REFERENCIA * cara.area:
             continue
         bx0, by0, bx1, by1 = cara.bounds
         x0, y0, x1, y1 = max(0, int(bx0)), max(0, int(by0)), min(ancho, int(bx1) + 2), min(alto, int(by1) + 2)
@@ -376,7 +388,7 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas
         if documentada is not None:
             evidencia = _relleno(np.asarray(documentada.exterior.coords) - (x0, y0), cl.shape)
             plaza_vieja &= ~evidencia
-        cuadra = en_poligono & (de_manzana | calle) & ~plaza_vieja
+        cuadra = en_poligono & (de_manzana | calle) & ~plaza_vieja & ~_mascara_de(ocupado, (x0, y0), cl.shape)
         abierto = _sin_astillas(cuadra & calle, metro)
         if documentada is None and abierto.sum() * metro ** 2 < ABIERTO_MINIMO_M2:
             continue
@@ -395,6 +407,120 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas
         salida.append({'miembros': miembros, 'cuadra': cuadra, 'origen': (x0, y0), 'clases': de_antes,
                        'poligono': poligono, 'abierto': abierto & cuadra, 'minimo': 2 if documentada is not None else 1})
     return salida
+
+
+SOBRE_REFERENCIA = 0.3     # fracción de una cara de OSM sobre la referencia desde la que la cuadra la arma la referencia
+RETIRO_REFERENCIA_M = 3.0  # si las fachadas de 1936 no dan el contorno, el anillo de ejes se encoge esto (ancho inferido)
+
+
+def _ventana(poligono, forma):
+    alto, ancho = forma
+    bx0, by0, bx1, by1 = poligono.bounds
+    return max(0, int(bx0)), max(0, int(by0)), min(ancho, int(bx1) + 2), min(alto, int(by1) + 2)
+
+
+def _de_referencia(r, clases, metro):
+    """(origen, cuadra sin asignar, abierto, polígono) de una cuadra de la referencia, o None si no cabe."""
+    x0, y0, x1, y1 = _ventana(r['poligono'], clases.shape)
+    if x1 - x0 < 4 or y1 - y0 < 4:
+        return None
+    cl = clases[y0:y1, x0:x1]
+    dentro = np.zeros(cl.shape, np.uint8)
+    cv2.fillPoly(dentro, [np.round((np.asarray(r['poligono'].exterior.coords) - (x0, y0)) * 16).astype(np.int32)], 1, shift=4)
+    dentro = dentro > 0
+    de_manzana = np.isin(cl, DE_LA_MANZANA)
+    poligono = ajustar_cara(r['poligono'], dentro & de_manzana, (x0, y0), metro)
+    if poligono is None:
+        encogido = r['poligono'].buffer(-RETIRO_REFERENCIA_M / metro, join_style='mitre')
+        if encogido.is_empty or encogido.geom_type != 'Polygon':
+            return None
+        poligono = np.asarray(encogido.exterior.coords)[:-1] - (x0, y0)
+    en_poligono = _relleno(poligono, cl.shape) & dentro
+    calle = cl == CLASE['calle']
+    cuadra = en_poligono & (de_manzana | calle) if r['rellenar'] else en_poligono & de_manzana
+    return (x0, y0), cuadra, _sin_astillas(cuadra & calle, metro) & cuadra, poligono
+
+
+def _cuadras_de_referencia(referencia, clases, cuadras, areas, metro):
+    """Las cuadras de 1772 de la referencia histórica aprobada (cuadras_historicas.cargar_referencia): el anillo de
+    ejes de la unidad, ajustado a las fachadas (o encogido si no las hay), determina el contorno; nada de la cara de
+    OSM ni de la máscara de color. Cada manzana de 1936 que cae sobre la referencia es de la unidad que más la cubre
+    (sus casas de 1936 no viven en 1772); las demás unidades igual edifican su parte. → grupos como los de
+    _cuadras_de_antes, con `minimo` 2 (documentadas en 1772), `hasta` 2 (ceden a 1936 desde 1843: la referencia
+    describe 1772) y `referencia` (el ID de la unidad)."""
+    candidatas = []
+    for r in referencia:
+        armada = _de_referencia(r, clases, metro)
+        if armada is not None:
+            candidatas.append((r, *armada))
+    # qué manzanas de 1936 son de la referencia lo deciden todas las candidatas; el dueño, solo una aceptada (si la que
+    # más la cubre no pasa la validación, la manzana pasa a otra: sus casas de 1936 nunca conviven con la reconstrucción)
+    de_toda, _ = _duenos(candidatas, range(len(candidatas)), cuadras, areas)
+    aceptadas = list(range(len(candidatas)))
+    while True:
+        _, mejor = _duenos(candidatas, aceptadas, cuadras, {e: 0 for e in de_toda})
+        de_referencia = set(mejor)
+        salida, rechazadas = [], []
+        for k in aceptadas:
+            grupo = _grupo_de_referencia(candidatas[k], clases, cuadras, de_referencia, metro)
+            if grupo is None:
+                rechazadas.append(k)
+            else:
+                salida.append({**grupo, 'miembros': {e for e in de_referencia if mejor[e] == k}})
+        if not rechazadas:
+            return salida
+        # una rechazada no es dueña de nada: se reparte de nuevo entre las que quedan
+        aceptadas = [k for k in aceptadas if k not in rechazadas]
+
+
+def _duenos(candidatas, aceptadas, cuadras, areas):
+    """(manzanas de 1936 que la referencia cubre en un 50 % o más, {manzana: la candidata que más la cubre})."""
+    cubierto, mejor = {}, {}
+    for k in aceptadas:
+        _r, (x0, y0), cuadra, _abierto, _p = candidatas[k]
+        alto, ancho = cuadra.shape
+        cuenta = np.bincount(cuadras[y0:y0 + alto, x0:x0 + ancho][cuadra])
+        for e in np.flatnonzero(cuenta):
+            if e > 0:
+                cubierto[int(e)] = cubierto.get(int(e), 0) + int(cuenta[e])
+                if cuenta[e] > mejor.get(int(e), (None, 0))[1]:
+                    mejor[int(e)] = (k, int(cuenta[e]))
+    de_referencia = {e for e, n in cubierto.items() if n >= 0.5 * areas.get(e, np.inf)}
+    return de_referencia, {e: mejor[e][0] for e in de_referencia}
+
+
+def _grupo_de_referencia(candidata, clases, cuadras, de_referencia, metro):
+    """El grupo de una candidata (sin miembros) si sale como cuadra de solo casas repartida por lados, o None."""
+    r, (x0, y0), cuadra, abierto, poligono = candidata
+    alto, ancho = cuadra.shape
+    suyas = cuadras[y0:y0 + alto, x0:x0 + ancho]
+    cuadra = cuadra & ((suyas == 0) | np.isin(suyas, list(de_referencia)))
+    cl = clases[y0:y0 + alto, x0:x0 + ancho]
+    de_antes = _clases_de_antes(cl, cuadra) if r['rellenar'] else np.where(cuadra, cl, CLASE['calle']).astype(cl.dtype)
+    if not cuadra.any() or not es_de_solo_casas(de_antes, cuadra, metro, CLASE['edificado'], CLASE['publico']) \
+            or lotes_por_lados(cuadra, metro, 0, poligono) is None:
+        return None
+    return {'cuadra': cuadra, 'origen': (x0, y0), 'clases': de_antes, 'poligono': poligono, 'abierto': abierto & cuadra,
+            'minimo': 2, 'hasta': 2, 'referencia': r['id']}
+
+
+NUCLEO_DE_CALZADA_M = 4.0   # ancho inferido de lo que ninguna calle de 1772 deja de tener (como cierre_fase3)
+
+
+def marcar_calzada(salida, ejes, metro, area_minima_m2=1.0):
+    """[0/1 por techo]: 1 si su huella pisa (desde `area_minima_m2`) el núcleo de calzada de alguna calle de 1772 de la
+    referencia (`ejes`, cuadras_historicas.ejes_de_calzada). tools/geo/epocas.py no la deja vivir en 1772."""
+    from shapely.geometry import Polygon as _Poligono
+    from shapely.strtree import STRtree
+    nucleos = [e.buffer(NUCLEO_DE_CALZADA_M / 2 / metro, cap_style='flat') for e in ejes]
+    arbol = STRtree(nucleos) if nucleos else None
+    v, marcas = salida['vertices'], []
+    for inicio, n, *_ in salida['techos']:
+        casa = _Poligono([(v[2 * i], v[2 * i + 1]) for i in range(inicio, inicio + n)])
+        pisa = arbol is not None and casa.is_valid and any(
+            casa.intersection(nucleos[j]).area * metro ** 2 >= area_minima_m2 for j in arbol.query(casa, predicate='intersects'))
+        marcas.append(int(pisa))
+    return marcas
 
 
 def _contornos_de(abierto, origen):
@@ -420,6 +546,7 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
     area_min_px = AREA_MINIMA_M2 / metro ** 2
     tolerancia_px = TOLERANCIA_M / metro
     salida = {'vertices': [], 'techos': [], 'esquinas': [], 'cuadras': [], 'cede': [], 'junta': [], 'antes': [], 'juntas': [], 'juntas_minimo': [],
+              'juntas_hasta': [],
               'manzanas': 0, 'marcos': [], 'alas': [], 'publicos': [], 'n_cuadras': 0}
 
     def distancia_m(f):
@@ -462,7 +589,12 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
     antes = []
     if con_red is not None and red.get('edificado72') is not None:
         areas = {etiqueta: int(parte.sum()) for etiqueta, parte in lista}
-        antes = _cuadras_de_antes(con_red, np.asarray(red['edificado72'], bool), clases, cuadras, areas, metro, red.get('completas72', ()))
+        referencia = red.get('referencia72', ())
+        antes = _cuadras_de_referencia(referencia, clases, cuadras, areas, metro)
+        tomadas = {m for g in antes for m in g['miembros']}
+        for g in _cuadras_de_antes(con_red, np.asarray(red['edificado72'], bool), clases, cuadras, areas, metro,
+                                   red.get('completas72', ()), [r['poligono'] for r in referencia]):
+            antes.append({**g, 'miembros': g['miembros'] - tomadas})
     de_grupo = {m: j for j, grupo in enumerate(antes) for m in grupo['miembros']}
     for etiqueta, parte in lista:
         x, y, w, h = cajas[etiqueta]
@@ -476,6 +608,9 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
                           metro, cuadra_modelo, grupo['poligono'])
         salida['juntas'].append(_contornos_de(grupo['abierto'], grupo['origen']))
         salida['juntas_minimo'].append(grupo['minimo'])
+        salida['juntas_hasta'].append(grupo.get('hasta', 0))
+    if red is not None and red.get('calzada72'):
+        salida['calzada72'] = marcar_calzada(salida, red['calzada72'], metro)
     for privada in ('publicos', 'n_cuadras', '_junta', '_antes'):
         salida.pop(privada, None)
     return salida
@@ -515,8 +650,9 @@ def main():
                 raise SystemExit(f'{a.edificado_1772}: se esperaba una máscara de la forma de las clases')
             red['edificado72'] = leida > 0
     if red is not None:
-        from cuadras_historicas import cargar
+        from cuadras_historicas import cargar, cargar_referencia_de_archivos
         red['completas72'] = cargar()
+        red['referencia72'], red['calzada72'] = cargar_referencia_de_archivos()
     res = vectorizar(clases, a.escala, plaza, red=red)
     with open(a.salida, 'w') as f:
         json.dump(res, f)
