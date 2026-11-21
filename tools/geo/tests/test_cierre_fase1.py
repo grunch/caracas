@@ -37,7 +37,7 @@ def correspondencias_verificadas():
     return {'entrada_sha256': SHA_CIUDAD, 'resumen': {'clases': {'uno_a_uno': 1, 'ausente': 1, 'vacio_coincide': 1}},
             'unidades': [{'unidad': 'U0001', 'clase': 'uno_a_uno'}, {'unidad': 'U0002', 'clase': 'vacio_coincide'},
                          {'unidad': 'U0003', 'clase': 'ausente'}],
-            'evidencias': [{'archivo_local': 'correspondencias/uno_a_uno-U0001.png', 'sha256': SHA_U1}],
+            'evidencias': [{'archivo_local': 'correspondencias/uno_a_uno-U0001.png', 'sha256': SHA_U1, 'unidad': 'U0001'}],
             'verificacion_visual': [
                 {'grupo': 'controles', 'archivo': 'S1-X1.png', 'sha256': SHA_X1, 'objeto': 'X1', 'juicio': 'compatible'},
                 {'grupo': 'correspondencias', 'archivo': 'uno_a_uno-U0001.png', 'sha256': SHA_U1, 'objeto': 'U0001',
@@ -281,3 +281,14 @@ def test_correspondencia_no_acepta_juicios_sin_hash_de_entrada():
     del c['verificacion_visual'][1]['entrada_sha256']
     criterio = _criterio(c)
     assert criterio['cumplido'] is False and criterio['muestra_visual'] == 0
+
+
+def test_correspondencia_exige_que_el_recorte_sea_de_la_unidad_juzgada():
+    # mismo archivo y SHA, pero el juicio apunta a otra unidad: el recorte no es de ella
+    c = correspondencias_verificadas()
+    c['unidades'].append({'unidad': 'U0004', 'clase': 'uno_a_uno'})
+    c['verificacion_visual'][1] = {**c['verificacion_visual'][1], 'objeto': 'U0004'}
+    assert _criterio(c)['muestra_visual'] == 0
+    sin_unidad = correspondencias_verificadas()
+    sin_unidad['evidencias'] = [{k: v for k, v in e.items() if k != 'unidad'} for e in sin_unidad['evidencias']]
+    assert _criterio(sin_unidad)['muestra_visual'] == 0

@@ -168,19 +168,20 @@ JUICIOS = {'coincide', 'compatible', 'contradice'}  # los de `metodo` en verific
 
 
 def _recortes_vigentes(*documentos):
-    """{nombre del PNG: sha256} de las evidencias regeneradas; el PNG resume calce, trazado, censo y ciudad."""
-    return {Path(e['archivo_local']).name: e.get('sha256')
+    """{nombre del PNG: (sha256, unidad)} de las evidencias regeneradas; el PNG resume calce, trazado, censo y ciudad."""
+    return {Path(e['archivo_local']).name: (e.get('sha256'), e.get('unidad'))
             for d in documentos if d for e in d.get('evidencias', []) if e.get('archivo_local')}
 
 
 def _juicio_vigente(r, clases, entrada_sha256, recortes):
     """Un juicio cuenta solo si su recorte es el regenerado (mismo SHA-256) y, en correspondencias, si además es
     de la unidad, la clase y la ciudad de la clasificación actual."""
-    if not r.get('sha256') or recortes.get(r.get('archivo')) != r['sha256']:
+    sha, unidad = recortes.get(r.get('archivo'), (None, None))
+    if not r.get('sha256') or sha != r['sha256']:
         return False
     if r.get('grupo') != 'correspondencias':
         return True
-    return (r.get('objeto') in clases and r.get('clase') == clases[r['objeto']]
+    return (r.get('objeto') in clases and r.get('clase') == clases[r['objeto']] and unidad == r['objeto']
             and bool(entrada_sha256) and r.get('entrada_sha256') == entrada_sha256)
 
 

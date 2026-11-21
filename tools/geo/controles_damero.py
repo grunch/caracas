@@ -12,7 +12,9 @@ from collections import Counter
 import datetime as dt
 import hashlib
 import json
+import os
 from pathlib import Path
+import shlex
 import sys
 
 import numpy as np
@@ -26,6 +28,8 @@ from damero import clasificar_correspondencias, controles, cruces_1772, reticula
 RAIZ = Path(__file__).resolve().parents[2]
 AUD = RAIZ / 'specs/auditoria-1772'
 METRO = 0.5
+GCP_PREDETERMINADO = RAIZ / 'tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json'
+ESQUINAS_PREDETERMINADAS = RAIZ / 'tools/geo/esquinas/1936-esquinas.json'
 ORIGEN_1936 = 'Las Monjas'   # esquina suroeste de la plaza, la misma que ORIGEN_1772_PX
 # Hitos reconocibles en los dos planos, para sectores sin cruces del damero y como prueba de identidad a gran distancia.
 HITOS = [
@@ -134,8 +138,22 @@ def poligonos_unidades(unidades, proyectar, dentro_de):
 
 
 def _ruta_relativa(ruta):
-    ruta = Path(ruta).resolve()
+    ruta = Path(os.path.abspath(ruta))
     return str(ruta.relative_to(RAIZ)) if ruta.is_relative_to(RAIZ) else str(ruta)
+
+
+def comando_regenerar(args):
+    """La invocación que reproduce los recortes con los argumentos efectivos de esta corrida, escapada para shell.
+
+    --gcp y --esquinas solo aparecen si no son los predeterminados.
+    """
+    partes = ['.venv/bin/python', 'tools/geo/controles_damero.py', '--ciudad', _ruta_relativa(args.ciudad)]
+    for opcion, valor, predeterminado in (('--gcp', args.gcp, GCP_PREDETERMINADO), ('--esquinas', args.esquinas, ESQUINAS_PREDETERMINADAS)):
+        if Path(os.path.abspath(valor)) != predeterminado:
+            partes += [opcion, _ruta_relativa(valor)]
+    partes += ['--original', _ruta_relativa(args.original), '--mosaico', _ruta_relativa(args.mosaico),
+               '--recortes', _ruta_relativa(args.recortes), '--muestra', str(args.muestra)]
+    return shlex.join(partes)
 
 
 def ruta_evidencia(ruta, base):
@@ -193,8 +211,8 @@ def _recortes(args, nodos, filas, unidades, cuadras):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--ciudad', type=Path, required=True, help='ciudad-estilos.json con techos, vertices, vida y cuadras')
-    ap.add_argument('--gcp', type=Path, default=RAIZ / 'tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json')
-    ap.add_argument('--esquinas', type=Path, default=RAIZ / 'tools/geo/esquinas/1936-esquinas.json')
+    ap.add_argument('--gcp', type=Path, default=GCP_PREDETERMINADO)
+    ap.add_argument('--esquinas', type=Path, default=ESQUINAS_PREDETERMINADAS)
     ap.add_argument('--original', type=Path, default=None)
     ap.add_argument('--mosaico', type=Path, default=None)
     ap.add_argument('--recortes', type=Path, default=None)
@@ -251,9 +269,7 @@ def main():
     if args.recortes:
         evidencias = _recortes(args, nodos, filas, unidades, cuadras)
         recortes = {'directorio': _ruta_relativa(args.recortes), 'en_git': False,
-                    'regenerar': '.venv/bin/python tools/geo/controles_damero.py --ciudad fuentes/derivados/epocas/ciudad-estilos.json '
-                                 '--original fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg --mosaico fuentes/derivados/1936/mosaico.tif '
-                                 f'--recortes {_ruta_relativa(args.recortes)} --muestra {args.muestra}',
+                    'regenerar': comando_regenerar(args),
                     'nota': 'archivo_local es relativo a directorio; los PNG quedan fuera de git y se comprueban por su sha256'}
         informe['recortes'] = correspondencias['recortes'] = recortes
         informe['evidencias'] = [e for e in evidencias if 'nodo' in e]

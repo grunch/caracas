@@ -1,11 +1,13 @@
 """Auxiliares de la CLI de controles de damero: medidas puras sobre datos sintéticos."""
 import hashlib
 import math
+from pathlib import Path
+import shlex
 
 from shapely.geometry import MultiPoint, box
 
 from controles_damero import (
-    HITOS, angulo_damero, comparar_con_nucleo, controles_por_hito, cuadras_visibles, leer_con_sha, poligonos_unidades,
+    ESQUINAS_PREDETERMINADAS, GCP_PREDETERMINADO, HITOS, RAIZ, angulo_damero, comando_regenerar, comparar_con_nucleo, controles_por_hito, cuadras_visibles, leer_con_sha, poligonos_unidades,
     resumen_por_sector, ruta_evidencia,
 )
 from damero_recortes import caja
@@ -91,3 +93,26 @@ def test_leer_con_sha_hashea_los_mismos_bytes_que_parsea(tmp_path):
 def test_ruta_de_evidencia_es_relativa_a_la_carpeta_de_recortes(tmp_path):
     base = tmp_path / 'damero-1772'
     assert ruta_evidencia(base / 'controles' / 'S1772-11-X1772-0002.png', base) == 'controles/S1772-11-X1772-0002.png'
+
+
+def _args(**cambios):
+    from argparse import Namespace
+    base = dict(ciudad='fuentes/derivados/epocas/ciudad-estilos.json', gcp=GCP_PREDETERMINADO,
+                esquinas=ESQUINAS_PREDETERMINADAS, original='fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg',
+                mosaico='fuentes/derivados/1936/mosaico.tif', recortes='.cache/damero-1772', muestra=2)
+    rutas = {**base, **cambios}
+    return Namespace(**{k: RAIZ / v if isinstance(v, str) else v for k, v in rutas.items()})
+
+
+def test_comando_regenerar_con_los_valores_predeterminados_no_cambia():
+    assert comando_regenerar(_args()) == (
+        '.venv/bin/python tools/geo/controles_damero.py --ciudad fuentes/derivados/epocas/ciudad-estilos.json '
+        '--original fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg --mosaico fuentes/derivados/1936/mosaico.tif '
+        '--recortes .cache/damero-1772 --muestra 2')
+
+
+def test_comando_regenerar_usa_los_argumentos_efectivos_y_los_escapa():
+    cmd = comando_regenerar(_args(ciudad='otra ciudad.json', gcp=RAIZ / 'tools/geo/gcp/otro.json', esquinas='esq.json', muestra=3))
+    assert shlex.split(cmd)[2:] == ['--ciudad', 'otra ciudad.json', '--gcp', 'tools/geo/gcp/otro.json', '--esquinas', 'esq.json',
+                                    '--original', 'fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg',
+                                    '--mosaico', 'fuentes/derivados/1936/mosaico.tif', '--recortes', '.cache/damero-1772', '--muestra', '3']
