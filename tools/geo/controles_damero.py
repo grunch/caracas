@@ -23,7 +23,7 @@ from shapely.ops import unary_union
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from calce import Calce  # noqa: E402
-from damero import clasificar_correspondencias, controles, cruces_1772, reticula_1936  # noqa: E402
+from damero import clasificar_correspondencias, confirmar_uno_a_uno, controles, cruces_1772, reticula_1936  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parents[2]
 AUD = RAIZ / 'specs/auditoria-1772'
@@ -244,13 +244,20 @@ def main():
         'nodos': nodos,
     }
     ciudad, sha_ciudad = leer_con_sha(args.ciudad)
-    control = Calce.ajustar([{'px': n['original'][0], 'py': n['original'][1], 'x36': n['mosaico_identidad'][0], 'y36': n['mosaico_identidad'][1]} for n in nodos], METRO, 0.05)
-    casco = MultiPoint([tuple(n['original']) for n in nodos]).convex_hull
+    # el calce vigente ya es por identidad (anclas_identidad.py): el de control es el mismo, sin las esquinas de
+    # 1936 que son rótulos y con los cruces por topología
+    control = calce
+    identidad = _leer(AUD / 'calce-identidad.json')
+    rotulos = {x['id'] for x in identidad.get('excluidos_por_rotulo', [])}
+    esquinas_1936 = {tuple(n['indice']): n['mosaico_identidad'] for n in nodos if n['id'] not in rotulos}
+    esquinas_1936.update({tuple(n['indice']): n['mosaico_identidad'] for n in identidad.get('anclas_por_topologia', [])})
+    casco = MultiPoint([(g['px'], g['py']) for g in gcp['gcps']]).convex_hull
     unidades_json = _leer(AUD / 'unidades-original.json')['unidades']
     unidades = poligonos_unidades(unidades_json, _escalar(control), casco)
     informe['controles_por_hito'] = controles_por_hito(HITOS, {u['id_fuente']: u for u in unidades_json}, _escalar(calce), _escalar(control), METRO)
     cuadras = cuadras_visibles(ciudad)
     filas, sobrantes = clasificar_correspondencias(unidades, cuadras)
+    filas = confirmar_uno_a_uno(filas, unidades, cuadras, {tuple(c['indice']): c['original'] for c in cruces}, esquinas_1936)
     for f, u in zip(filas, unidades):
         f['sector'] = u['sector']
         f['extrapolada'] = u['extrapolada']
@@ -259,7 +266,8 @@ def main():
     correspondencias = {
         'fecha': hoy, 'alcance': 'Clasificación geométrica bajo el calce de control; la aprobación exige la muestra visual registrada en verificacion_visual.',
         'entrada_sha256': sha_ciudad, 'epoca': 1,
-        'calce_de_control': {'nodos': len(nodos), 'residuos_loo_m': control.residuos_m()},
+        'calce_de_control': {'calce': 'vigente, por identidad (tools/geo/gcp, anclas_identidad.py)', 'gcps': len(gcp['gcps']),
+                             'residuos_loo_m': control.residuos_m()},
         'resumen': {'clases': dict(sorted(Counter(f['clase'] for f in filas).items())), 'extrapoladas': sum(1 for u in unidades if u['extrapolada']),
                     'cuadras_sistema_1772': len(cuadras), 'cuadras_sobrantes': len(sobrantes)},
         'por_sector': [{'sector': s['id'], **dict(sorted(Counter(f['clase'] for f in filas if f['sector'] == s['id']).items()))} for s in sectores],

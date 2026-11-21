@@ -11,18 +11,18 @@
    "unidades": 292
   },
   "correspondencia_clasificada_por_unidad": {
-   "cumplido": false,
+   "cumplido": true,
    "clasificadas": 292,
    "clases": {
     "ausente": 168,
-    "desplazada_o_parcial": 6,
-    "uno_a_uno": 42,
+    "fusionada": 6,
+    "incierta": 6,
+    "uno_a_uno": 36,
     "vacio_coincide": 76
    },
-   "muestra_visual": 3,
+   "muestra_visual": 30,
    "muestra_desfasada": 0,
-   "contradicciones": 1,
-   "trasladado_a": "T33j.2a"
+   "contradicciones": 0
   },
   "controles_de_calce_por_sector": {
    "cumplido": false,
@@ -1166,385 +1166,595 @@
   },
   {
    "archivo": "controles/S1772-11-X1772-0002.png",
-   "sha256": "65263d58d6fe52a750ad7e1526e68cf678338b501658bbcec6df78e583923042",
+   "sha256": "3c83bc9b980f9891563c4b07e64ffc7744c33648c3badd25435e4917bfde609b",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-12-X1772-0011.png",
-   "sha256": "2d416076b777e1976651248e5bfe0c9df62660ca569c393c604875a5813dbf83",
+   "archivo": "controles/S1772-12-X1772-0012.png",
+   "sha256": "1592d7cbf7881f5a2ac24c0d8b40d129acf80adc1a88ba9a114f6fa68ff41daf",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-13-X1772-0007.png",
-   "sha256": "a6ff36d0a5f7dd44d2fbf86043e6d540f83c848a8aa0a01c9995b6eece568321",
+   "archivo": "controles/S1772-13-X1772-0005.png",
+   "sha256": "4f960dd339cf34b90c5269e7207c80b0cb7fd3f8a21f54531f44aa86a82ee4e6",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
    "archivo": "controles/S1772-13-X1772-0017.png",
-   "sha256": "c91396ff2889030dc85ce48d634ef04b5ef9bc018b149504e63ac28f2213a7c5",
-   "documentos": [
-    "controles-calce-sectores.json"
-   ]
-  },
-  {
-   "archivo": "controles/S1772-21-X1772-0019.png",
-   "sha256": "54152e60eb6845ce32387c3204b9ff5704b314ea27db102b534be615dbaf60e5",
+   "sha256": "a8a01430edd7e32eb4f85aa563b312e845491687356469b9adc9385fae78721c",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
    "archivo": "controles/S1772-21-X1772-0182.png",
-   "sha256": "a06a95e428fd52cb725c303b7e9fa8049a453d542c927538b16ca9b88bbcffb0",
+   "sha256": "812efc27e4b9ba29a0ec99c09f3899d7c55a76fc6315b01096c3883f5eaa4418",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-22-X1772-0020.png",
-   "sha256": "184ede976a036f1b503a3c73c0a08f06833e423f7d16a5a1222a39312cefeb35",
+   "archivo": "controles/S1772-21-X1772-0070.png",
+   "sha256": "a3902ba785327381a43d67b7b26017516581a9cf1a747e985bda07b79a8200c0",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-22-X1772-0073.png",
-   "sha256": "8d9cba912fcd4a6cf7401b79fd316e1de029078d1ba56056af328ccaf14b0cb3",
+   "archivo": "controles/S1772-22-X1772-0058.png",
+   "sha256": "3b683ff576871cd48d6062cebf9a20272f6f0429f779d64fdb01cd32b876fe9f",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-23-X1772-0021.png",
-   "sha256": "97e2e70c7fee429cecef1334809bf59b6b7a53683ac7b694e2977dfc35fe9bea",
+   "archivo": "controles/S1772-22-X1772-0054.png",
+   "sha256": "3dee47ae71fe4c85db4233ef8d335652255edf68b8658c82bed7b10eb42e663a",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-23-X1772-0195.png",
-   "sha256": "b50af2b134424c0cacbef6c598cf34283bb45edd92e69649605b9f5a1c8c8f95",
+   "archivo": "controles/S1772-23-X1772-0064.png",
+   "sha256": "47b65ddcfda65b91c11b0899dd06041d61d24af330c97f2f4ad78e082956f143",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-24-X1772-0033.png",
-   "sha256": "1136bf968b073e402378a24c7a5e59fa0ecf36b58ceeb34b858d034239a110b5",
+   "archivo": "controles/S1772-23-X1772-0194.png",
+   "sha256": "79be3ee203d194f7e76f7a395a07b70b066109b1192757aa8a0e93f8f2dc84e5",
+   "documentos": [
+    "controles-calce-sectores.json"
+   ]
+  },
+  {
+   "archivo": "controles/S1772-24-X1772-0032.png",
+   "sha256": "4d81cbdb694a38e21c1b7c7016937938864dce5fb675c564163847eb87ad10a2",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
    "archivo": "controles/S1772-24-X1772-0082.png",
-   "sha256": "f42068170b59bdb2702372a74c6912f58864c9fd4cccc9821743b0bf0e8d076e",
+   "sha256": "006e3271877261e4b1a29a1e98605b1055229f82f9889dd4b66dfbcb1526d6e2",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
    "archivo": "controles/S1772-31-X1772-0119.png",
-   "sha256": "62d41cdb339b1986ad46f554d8dfa791da1d310f21c16b1777b1a245621324d9",
+   "sha256": "8ee65dfce0f625642543cca979094515eaa04b77a20b5110c32d2f7a5325cbfe",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-31-X1772-0102.png",
-   "sha256": "c16995eac99f5f6968d410678eed2cc39ddc37688473076cbdb87f197d17ba25",
+   "archivo": "controles/S1772-31-X1772-0120.png",
+   "sha256": "62ab0d988733129ca79deffc1816d508b73bc0ae92da354e3a89a8e19ec17921",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-32-X1772-0088.png",
-   "sha256": "120ffbf8596bcf9e71c0330cdc7c7d30f906f5a76f434746e0929068c5adf8b4",
+   "archivo": "controles/S1772-32-X1772-0188.png",
+   "sha256": "fb007e5a8a7dc999971437e720879003673c1b74b264f91ad2b6e89cac215ed9",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-32-X1772-0090.png",
-   "sha256": "85d13d66a305209017c80551bf3dc80c278298dd260fd76e080f8e803cfdeac2",
+   "archivo": "controles/S1772-32-X1772-0192.png",
+   "sha256": "0700ee04e0f5583d383be87d5f77c6b720e491c1e425eb5ede5a72f1d4345b1b",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-33-X1772-0154.png",
-   "sha256": "2b18bf09901376dac0717003265b76f30fb5241fae0ced89a7897a433706e0d0",
+   "archivo": "controles/S1772-33-X1772-0129.png",
+   "sha256": "d09d918f991848dca99dffca70f15072c48fa7623e7e144b9e09cb781a50bb1e",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-33-X1772-0144.png",
-   "sha256": "d8939964ed7010a598053d697f74fbf98ab56d8a154c4460e240e47785ea7d09",
+   "archivo": "controles/S1772-33-X1772-0094.png",
+   "sha256": "51aa765705a691891a71b56b9a630862c8e23fb19a6b1caac1a2ed6240fc0402",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-34-X1772-0151.png",
-   "sha256": "952559103e7508e8d2171c82ec4f258f6729e4ad59ff040b09adfceacd033149",
+   "archivo": "controles/S1772-34-X1772-0116.png",
+   "sha256": "dd3eb6101ca34dc6e5255d7eadea67a8f1197e828d27a968b527f2b751289acb",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-34-X1772-0156.png",
-   "sha256": "5f7f9863fa2ecfc8263fe5542e22020d73281cfe714a545eb4c24205e29bf693",
+   "archivo": "controles/S1772-34-X1772-0117.png",
+   "sha256": "bff5dfab7b9b6fb3512e0ed810520ca9ae0b8b7d7cbd39601ca75d21359fb684",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-42-X1772-0177.png",
-   "sha256": "9929e423bd80b5a250cb5de0d26810ed4fb08a5d71b92962c62f460a2eada2d2",
+   "archivo": "controles/S1772-42-X1772-0167.png",
+   "sha256": "9a420094ef4d4f2c2535f9b1040b2f57cbe6875e2af5e4cfa4dccc69575812b9",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-42-X1772-0168.png",
-   "sha256": "b5926102804b0cefaa3a2d32e71c384a3730e757fa73d293c312de4327867745",
+   "archivo": "controles/S1772-42-X1772-0169.png",
+   "sha256": "85a12d231c080746cb38d9f9b12d370f20300ed84a5e79cb2e9ee96a8a2e677f",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-43-X1772-0178.png",
-   "sha256": "d9e1f6f65957335bf9943f4c05830bd148249d407500bc9e80028e345c65587c",
+   "archivo": "controles/S1772-43-X1772-0174.png",
+   "sha256": "3c053835db89e8651371ea3b33e69aa267d6ba55b4cc81f41bc13645af71c5a2",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "controles/S1772-43-X1772-0163.png",
-   "sha256": "39817be5b5fb2e7e92d4114362dd7a08cfde7112a76b1fe2e850e4940e61024b",
+   "archivo": "controles/S1772-43-X1772-0181.png",
+   "sha256": "091affc5fbb7d2f10f5b5d59398281fc0947ec04ef23651c687e2797a3a3ad83",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
    "archivo": "controles/S1772-44-X1772-0165.png",
-   "sha256": "b0e5c095b24f0a479fe41f845c7ce8a22bc039b35c98aa1dd996ebddd124125e",
+   "sha256": "5d84e09f187d77e07d56cd5114e936b108c65a51dee97f10c9ccaa9b9be39568",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "S1772-23-X1772-0021.png",
-   "sha256": "97e2e70c7fee429cecef1334809bf59b6b7a53683ac7b694e2977dfc35fe9bea",
+   "archivo": "ausente-U1772-0001.png",
+   "sha256": "fe3ac1c5e7a3a23a3162c8a73dd81a16fac89e63b3507c63283babd394bf15fe",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "S1772-43-X1772-0163.png",
-   "sha256": "39817be5b5fb2e7e92d4114362dd7a08cfde7112a76b1fe2e850e4940e61024b",
+   "archivo": "ausente-U1772-0035.png",
+   "sha256": "3c7434ea91707fe1f0e13ea5a470b2585333b9af1e7967e61e97004f406a3eb2",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "S1772-11-X1772-0002.png",
-   "sha256": "65263d58d6fe52a750ad7e1526e68cf678338b501658bbcec6df78e583923042",
+   "archivo": "ausente-U1772-0090.png",
+   "sha256": "a948cb409a9bbc3fbb66f556e32ac29cfbee8f598029c7a6ebacfd78af1a63dd",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "uno_a_uno-U1772-0064.png",
-   "sha256": "5811c92c844e035a47fb01104e6dd0907d34879ab25771434ebd92ee7c2cb6a7",
+   "archivo": "ausente-U1772-0149.png",
+   "sha256": "98bbfb10a8c3cf3d74fc62e293781672e189624caa33a924e65e82e2092ada6d",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "ausente-U1772-0184.png",
-   "sha256": "369531036ac58afd7ba817bc68ed312db7af591aae5dcae95fdbe968a8590799",
+   "sha256": "cb412bc01e00f484478423682f43d2edd24c8e6c6bb1124359550aac087eb901",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "desplazada_o_parcial-U1772-0055.png",
-   "sha256": "fa920b722fd521e8443fd40062859c6bcb0595ee00549afc46e21f3753f4305b",
+   "archivo": "ausente-U1772-0254.png",
+   "sha256": "9a73e3d22ce7b27447548245440bcf5b83ba333081ce4165b837a8218e56a223",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "fusionada-U1772-0055.png",
+   "sha256": "408c703c4eb61dfc14d4737bb6b363010b0c68632b759ad0264217726fdebbbd",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "fusionada-U1772-0082.png",
+   "sha256": "0217d649ab424c41273386da9549fa49604e07d165f7e19165584cbe1a30b7c9",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "fusionada-U1772-0096.png",
+   "sha256": "051ed56cab95d2c9a5f0e133bc04901cf76788cfade3c287d1f8c97f065f2ddb",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "fusionada-U1772-0123.png",
+   "sha256": "45f71b8a6044fca7a679c8f4ced8b1575ae37b06bfce6628a75100ac9394d6ba",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "fusionada-U1772-0140.png",
+   "sha256": "d834dc31dbf370d8721ccaa20ae1c03b89943a88b8a6dd995fae5aff907147b9",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "fusionada-U1772-0199.png",
+   "sha256": "bec3f97544c892873f381a836d22b00548d7e01e97afbd202a9dae9e82de24b8",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "incierta-U1772-0092.png",
+   "sha256": "1a0df50f43e81b700aeaa05019c1bd97335c3b8ca07aeeab38e28da01b8a7e8a",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "incierta-U1772-0093.png",
+   "sha256": "af95201dac91b54f384db32c189ba6b2016d79cfabc6f4a00c4475b17685d124",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "incierta-U1772-0097.png",
+   "sha256": "58e0759ab6db0e95a2210bcfd1c91490797467cfa36facc29731946f666a736b",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "incierta-U1772-0107.png",
+   "sha256": "9d8c6784f3b77bcbd5f1482d49dcd91cd6c530bd20b7c5df94e4cef03d59b756",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "incierta-U1772-0108.png",
+   "sha256": "42de7521644f77141629c32b6802def297bfcb01c726e6162147335003da6ddd",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "incierta-U1772-0125.png",
+   "sha256": "aa1d7a91d70049d0001d3f2f56e69465c96bf96c10d534dd5f385202da91b2b4",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "uno_a_uno-U1772-0050.png",
+   "sha256": "02d2f83ea4ba5ef0fe5167cb91d94cd494f87374df06e9f68acd4ad4e9123427",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "uno_a_uno-U1772-0057.png",
+   "sha256": "c924de555b71ee593d19850490268f0c1892130c54688a893c9a7743689c970d",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "uno_a_uno-U1772-0077.png",
+   "sha256": "7899179ee73f57cce25ad8dd008caf3821d61bfa3f0ad0a99adf695b1e1a4769",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "uno_a_uno-U1772-0091.png",
+   "sha256": "0ac9b161dd40332284020231c9dcb2cce4337b5d50ca9da995ce37a77c4047a4",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "uno_a_uno-U1772-0110.png",
+   "sha256": "9db64bea2a5ff11c812e58c8268ed53bcc9b0617d05f45f30caee8d8ac41d0d0",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "uno_a_uno-U1772-0139.png",
+   "sha256": "2aebee57e91518fd7fefc85c0ceb52f265c11d7c1139034a68dadd3520ecb98f",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "vacio_coincide-U1772-0006.png",
+   "sha256": "07e3e3d646e497e0f2012f75cd481fc0ea487e425311a868bb6999c5a8adf98c",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "vacio_coincide-U1772-0086.png",
+   "sha256": "784fbd8a7eff75b0a9e2d35ca91a591baec07c385e51ac60ca21e0755b0a935c",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "vacio_coincide-U1772-0161.png",
+   "sha256": "8be68e680266c32b4e5db7f5f5fe26acaecf5857fe5c85b2a62cf5a8c5b2eefc",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "vacio_coincide-U1772-0219.png",
+   "sha256": "6878833b36f269e60639fb08bed022b8b3939a921d6ca944e7f72c0bcf652980",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "vacio_coincide-U1772-0233.png",
+   "sha256": "89ac1b471aa0e4fd4083815a3bc707bb2cfd90377bdf99c34db1c4af7beca3d5",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "vacio_coincide-U1772-0245.png",
+   "sha256": "c42f22ec549a9bcfc928a54461a56319b6dc695b0b766ec3e11cddef26e40de0",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/ausente-U1772-0001.png",
-   "sha256": "aec81470f9acc8a5408c965921d349933869e5ea6cdcb6dd9a336c051775b31d",
+   "sha256": "fe3ac1c5e7a3a23a3162c8a73dd81a16fac89e63b3507c63283babd394bf15fe",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/ausente-U1772-0035.png",
-   "sha256": "7c34ffea243f9d3273541b024b384de4f04f20c1d231f228363132a5d56a37e0",
+   "sha256": "3c7434ea91707fe1f0e13ea5a470b2585333b9af1e7967e61e97004f406a3eb2",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/ausente-U1772-0090.png",
-   "sha256": "43eb17e3a087b69ae1c02147fb5c887578321044cf164911108e3181101af33f",
+   "sha256": "a948cb409a9bbc3fbb66f556e32ac29cfbee8f598029c7a6ebacfd78af1a63dd",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/ausente-U1772-0149.png",
-   "sha256": "bc5d7eca227012801a09a9b14ea073b64c0616dec89f36213d98d23af323f9ba",
+   "sha256": "98bbfb10a8c3cf3d74fc62e293781672e189624caa33a924e65e82e2092ada6d",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/ausente-U1772-0184.png",
-   "sha256": "369531036ac58afd7ba817bc68ed312db7af591aae5dcae95fdbe968a8590799",
+   "sha256": "cb412bc01e00f484478423682f43d2edd24c8e6c6bb1124359550aac087eb901",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/ausente-U1772-0254.png",
-   "sha256": "a029a6fd590e41fa5b142d21a6e6578489b8622b803a8370fa7d3214b0acef9f",
+   "sha256": "9a73e3d22ce7b27447548245440bcf5b83ba333081ce4165b837a8218e56a223",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/vacio_coincide-U1772-0006.png",
-   "sha256": "1f1eac999deb3e0f8d7abb2d1b194538516eb1acd36620d49b4674b729be23e5",
+   "sha256": "07e3e3d646e497e0f2012f75cd481fc0ea487e425311a868bb6999c5a8adf98c",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/vacio_coincide-U1772-0086.png",
-   "sha256": "5fbc7564cc1d6572d32670affb894e639fa34e100fccccd9f2fc44e32d91b815",
+   "sha256": "784fbd8a7eff75b0a9e2d35ca91a591baec07c385e51ac60ca21e0755b0a935c",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/vacio_coincide-U1772-0161.png",
-   "sha256": "829f73b517d3af54e1d3cc2159cf3827e7702f2314f20893f744d7246dd2011c",
+   "sha256": "8be68e680266c32b4e5db7f5f5fe26acaecf5857fe5c85b2a62cf5a8c5b2eefc",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/vacio_coincide-U1772-0219.png",
-   "sha256": "9f4fa6e3ad5ee76f0be75a8b4e03542d48f634c4675adb417b0aef2e7f757d76",
+   "sha256": "6878833b36f269e60639fb08bed022b8b3939a921d6ca944e7f72c0bcf652980",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/vacio_coincide-U1772-0233.png",
-   "sha256": "95ef593c5589de8a97afb57b0946833dee05d9ab7dae327b273f6d37701c76f9",
+   "sha256": "89ac1b471aa0e4fd4083815a3bc707bb2cfd90377bdf99c34db1c4af7beca3d5",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/vacio_coincide-U1772-0245.png",
-   "sha256": "46f3caac5bc7e7975561502a49dd148a40be2fcd9b7497343ade2e9d681fddac",
+   "sha256": "c42f22ec549a9bcfc928a54461a56319b6dc695b0b766ec3e11cddef26e40de0",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
    "archivo": "correspondencias/uno_a_uno-U1772-0050.png",
-   "sha256": "a00d1e23134722d688979fbef1720da681166dcae316513995b7ebe4f5d479b3",
+   "sha256": "02d2f83ea4ba5ef0fe5167cb91d94cd494f87374df06e9f68acd4ad4e9123427",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "correspondencias/uno_a_uno-U1772-0064.png",
-   "sha256": "5811c92c844e035a47fb01104e6dd0907d34879ab25771434ebd92ee7c2cb6a7",
+   "archivo": "correspondencias/uno_a_uno-U1772-0057.png",
+   "sha256": "c924de555b71ee593d19850490268f0c1892130c54688a893c9a7743689c970d",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "correspondencias/uno_a_uno-U1772-0079.png",
-   "sha256": "6b4cab146c0e31c0416d9ce82b8e00045b872818e1e900720c1bd5ae01ee9654",
+   "archivo": "correspondencias/uno_a_uno-U1772-0077.png",
+   "sha256": "7899179ee73f57cce25ad8dd008caf3821d61bfa3f0ad0a99adf695b1e1a4769",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "correspondencias/uno_a_uno-U1772-0094.png",
-   "sha256": "ada4afef2aad8b77fb42df72b351fb5a8e42a0a0e37688730e9b7302f51be785",
+   "archivo": "correspondencias/uno_a_uno-U1772-0091.png",
+   "sha256": "0ac9b161dd40332284020231c9dcb2cce4337b5d50ca9da995ce37a77c4047a4",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "correspondencias/uno_a_uno-U1772-0109.png",
-   "sha256": "642a95e4f849aff3ad86e7a9f78034cfc2b1dbadb78a2099ee7947ab52aa521a",
+   "archivo": "correspondencias/uno_a_uno-U1772-0110.png",
+   "sha256": "9db64bea2a5ff11c812e58c8268ed53bcc9b0617d05f45f30caee8d8ac41d0d0",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "correspondencias/uno_a_uno-U1772-0138.png",
-   "sha256": "67235f42a4b9e0c3b997eac704d2c31ab3633dc678532971795d5fa6e2a30c74",
+   "archivo": "correspondencias/uno_a_uno-U1772-0139.png",
+   "sha256": "2aebee57e91518fd7fefc85c0ceb52f265c11d7c1139034a68dadd3520ecb98f",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "correspondencias/desplazada_o_parcial-U1772-0055.png",
-   "sha256": "fa920b722fd521e8443fd40062859c6bcb0595ee00549afc46e21f3753f4305b",
+   "archivo": "correspondencias/fusionada-U1772-0055.png",
+   "sha256": "408c703c4eb61dfc14d4737bb6b363010b0c68632b759ad0264217726fdebbbd",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "correspondencias/desplazada_o_parcial-U1772-0082.png",
-   "sha256": "8f83fa5ecec3e79aab676315dba812eeb597df5032b2b68e240e6bf65923818e",
+   "archivo": "correspondencias/fusionada-U1772-0082.png",
+   "sha256": "0217d649ab424c41273386da9549fa49604e07d165f7e19165584cbe1a30b7c9",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "correspondencias/desplazada_o_parcial-U1772-0096.png",
-   "sha256": "f53a3bea5fa48315d0b27e21ef8269160b12a83791d09193af371b93c178aad7",
+   "archivo": "correspondencias/fusionada-U1772-0096.png",
+   "sha256": "051ed56cab95d2c9a5f0e133bc04901cf76788cfade3c287d1f8c97f065f2ddb",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "correspondencias/desplazada_o_parcial-U1772-0123.png",
-   "sha256": "e3f449d01c324923ff1239529eae3ec97cd3bb7897f8ff4a85cefdd6ede2782b",
+   "archivo": "correspondencias/fusionada-U1772-0123.png",
+   "sha256": "45f71b8a6044fca7a679c8f4ced8b1575ae37b06bfce6628a75100ac9394d6ba",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "correspondencias/desplazada_o_parcial-U1772-0140.png",
-   "sha256": "b1fb309a6f4247f050cc6124e44781790e4b5fb5f84b56476eedd7652c041788",
+   "archivo": "correspondencias/fusionada-U1772-0140.png",
+   "sha256": "d834dc31dbf370d8721ccaa20ae1c03b89943a88b8a6dd995fae5aff907147b9",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "correspondencias/desplazada_o_parcial-U1772-0199.png",
-   "sha256": "746a47646f750ab2e5801f73ea7ff9a61bdd0abe47b3ce81acd450d9e0010330",
+   "archivo": "correspondencias/fusionada-U1772-0199.png",
+   "sha256": "bec3f97544c892873f381a836d22b00548d7e01e97afbd202a9dae9e82de24b8",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "correspondencias/incierta-U1772-0092.png",
+   "sha256": "1a0df50f43e81b700aeaa05019c1bd97335c3b8ca07aeeab38e28da01b8a7e8a",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "correspondencias/incierta-U1772-0093.png",
+   "sha256": "af95201dac91b54f384db32c189ba6b2016d79cfabc6f4a00c4475b17685d124",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "correspondencias/incierta-U1772-0097.png",
+   "sha256": "58e0759ab6db0e95a2210bcfd1c91490797467cfa36facc29731946f666a736b",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "correspondencias/incierta-U1772-0107.png",
+   "sha256": "9d8c6784f3b77bcbd5f1482d49dcd91cd6c530bd20b7c5df94e4cef03d59b756",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "correspondencias/incierta-U1772-0108.png",
+   "sha256": "42de7521644f77141629c32b6802def297bfcb01c726e6162147335003da6ddd",
+   "documentos": [
+    "correspondencias-unidades.json"
+   ]
+  },
+  {
+   "archivo": "correspondencias/incierta-U1772-0125.png",
+   "sha256": "aa1d7a91d70049d0001d3f2f56e69465c96bf96c10d534dd5f385202da91b2b4",
    "documentos": [
     "correspondencias-unidades.json"
    ]

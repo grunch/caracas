@@ -1,5 +1,7 @@
 # Controles de calce por identidad de damero y correspondencias por unidad
 
+> **Histórico (entrega 1D, 20-11-2026).** Las clases, la muestra visual y las tablas de este documento son las de la entrega 1D, bajo un calce de control propio. La clasificación vigente, sobre el calce por identidad, está en [correspondencias-identidad.md](correspondencias-identidad.md); los JSON (`controles-calce-sectores.json`, `correspondencias-unidades.json`, `verificacion-damero.json`) ya son los regenerados.
+
 Fecha: 20-11-2026. Atiende los dos criterios de 1D que el [cierre de la fase 1](cierre-fase1.md) tenía pendientes: los controles por sector se cumplen; la correspondencia por unidad queda pendiente porque un recorte contradice su clase. Generado por `tools/geo/controles_damero.py` (lógica pura en `tools/geo/damero.py`): [controles-calce-sectores.json](controles-calce-sectores.json), [correspondencias-unidades.json](correspondencias-unidades.json) y [verificacion-damero.json](verificacion-damero.json). **Mide y clasifica; no corrige el calce ni el generador, y no aprueba geometría para construir.**
 
 ## Método

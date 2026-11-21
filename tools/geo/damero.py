@@ -130,12 +130,54 @@ def controles(cruces, reticula, puntos, proyectar, metro):
     return nodos
 
 
+def celda_que_contiene(punto, esquinas):
+    """La celda (i, j) del damero que contiene `punto`: el cuadrilátero de las esquinas (i, j), (i+1, j), (i+1, j+1)
+    y (i, j+1). `esquinas`: {(i, j): (x, y)}. None si el punto no está en ninguna celda con sus cuatro esquinas."""
+    from shapely.geometry import Point, Polygon
+    p = Point(float(punto[0]), float(punto[1]))
+    for (i, j) in esquinas:
+        vecinas = [(i, j), (i + 1, j), (i + 1, j + 1), (i, j + 1)]
+        if all(k in esquinas for k in vecinas):
+            if Polygon([tuple(map(float, esquinas[k])) for k in vecinas]).buffer(1e-9).contains(p):
+                return (i, j)
+    return None
+
+
+def confirmar_uno_a_uno(filas, unidades, cuadras, esquinas_original, esquinas_1936):
+    """Identidad por pareja de las uno a uno (specs/08, T33j.2a): la unidad del original y su cuadra del sistema tienen
+    que caer en la misma celda del damero, la del mismo par de calles contado desde Las Monjas. La celda del original
+    sale de los cruces del trazado; la de 1936, de las esquinas por identidad. Sin esa evidencia la fila pasa a
+    `incierta` con su motivo. Las demás clases no cambian. Devuelve filas nuevas."""
+    centro_unidad = {u['id']: u['centro_original'] for u in unidades}
+    centro_cuadra = {c['id']: c['poligono'].centroid.coords[0] for c in cuadras}
+    salida = []
+    for f in filas:
+        if f['clase'] != 'uno_a_uno':
+            salida.append(f)
+            continue
+        en_original = celda_que_contiene(centro_unidad[f['unidad']], esquinas_original)
+        en_1936 = celda_que_contiene(centro_cuadra[f['cuadras'][0]['cuadra']], esquinas_1936)
+        evidencia = {'celda_original': list(en_original) if en_original else None,
+                     'celda_1936': list(en_1936) if en_1936 else None}
+        if en_original is not None and en_original == en_1936:
+            salida.append({**f, 'identidad_pareja': evidencia})
+            continue
+        motivo = ('la cuadra del sistema está en otra celda del damero que la unidad' if en_original and en_1936
+                  else 'sin celda completa del damero para comprobar la pareja')
+        salida.append({**f, 'clase': 'incierta', 'identidad_pareja': evidencia, 'motivo': motivo})
+    return salida
+
+
+CONTENIDA = 0.85  # fracción de la unidad dentro de una cuadra para tenerla por entera dentro de ella
+
+
 def clasificar_correspondencias(unidades, cuadras, umbral=0.5, minimo=0.2):
     """Clase de cada unidad del original frente a las cuadras del sistema (polígonos en el mismo marco).
 
     Una cuadra «cae dentro» de una unidad si al menos `umbral` de su área está en ella. Edificadas:
     una dentro → uno_a_uno; varias → dividida; una compartida con otra unidad → fusionada; ninguna
-    pero algo de solape (≥ `minimo`) → desplazada_o_parcial; nada → ausente. Vacías: casas encima
+    pero algo de solape (≥ `minimo`) → desplazada_o_parcial; nada → ausente. Dos o más unidades enteras (≥ CONTENIDA)
+    dentro de una cuadra que entre todas cubren ≥ `umbral` de ella → fusionada, aunque ninguna llegue sola al umbral. Vacías: casas encima
     → adicional_sobre_vacio; si no, vacio_coincide. Devuelve (filas, cuadras sin ninguna unidad).
     """
     for u in unidades:
@@ -156,6 +198,14 @@ def clasificar_correspondencias(unidades, cuadras, umbral=0.5, minimo=0.2):
         for f in solapes[u['id']]:
             if f['fraccion_cuadra'] >= umbral:
                 reclamos[f['cuadra']].append(u['id'])
+    contenidas = defaultdict(list)
+    for u in unidades:
+        if u['ocupacion'] in OCUPACIONES_VACIAS:
+            continue
+        for f in solapes[u['id']]:
+            if f['fraccion_unidad'] >= CONTENIDA:
+                contenidas[f['cuadra']].append(f['fraccion_cuadra'])
+    repartidas = {c for c, fr in contenidas.items() if len(fr) > 1 and sum(fr) >= umbral}
     atribuidas = {f['cuadra'] for filas in solapes.values() for f in filas if f['fraccion_cuadra'] >= minimo}
     resultado = []
     for u in unidades:
@@ -167,6 +217,8 @@ def clasificar_correspondencias(unidades, cuadras, umbral=0.5, minimo=0.2):
             clase = 'fusionada' if len(reclamos[dentro[0]['cuadra']]) > 1 else 'uno_a_uno'
         elif len(dentro) > 1:
             clase = 'dividida'
+        elif any(f['cuadra'] in repartidas and f['fraccion_unidad'] >= CONTENIDA for f in filas):
+            clase = 'fusionada'
         elif any(f['fraccion_unidad'] >= minimo or f['fraccion_cuadra'] >= minimo for f in filas):
             clase = 'desplazada_o_parcial'
         else:
