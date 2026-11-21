@@ -159,3 +159,52 @@ def test_un_borde_espejado_que_solo_forma_triangulo_con_los_otros_dos_vecinos_es
 
 def test_reticula_coherente_sigue_sin_errores_con_los_cuatro_triangulos_por_nodo():
     assert ai.validar_nodos(reticula(4, paso_o=7.0, paso_m=31.0)) == []
+
+
+# --- esquinas de 1936 que son rótulos, no cruces -----------------------------------------------
+
+def calles_en_cruz(n=81, ancho=7):
+    """Máscara de calles: una calle horizontal y una vertical que se cruzan en el centro (40, 40)."""
+    m = np.zeros((n, n), np.uint8)
+    c = n // 2
+    m[c - ancho // 2:c + ancho // 2 + 1, :] = 1
+    m[:, c - ancho // 2:c + ancho // 2 + 1] = 1
+    return m
+
+
+def test_la_distancia_al_nudo_es_cero_en_el_cruce_y_crece_a_lo_largo_de_la_calle():
+    # Arrange
+    m = calles_en_cruz()
+
+    # Act
+    en_cruce = ai.distancia_a_nudo_px(m, (40, 40))
+    sobre_la_calle = ai.distancia_a_nudo_px(m, (40, 70))
+
+    # Assert
+    assert en_cruce <= 2
+    assert 27 <= sobre_la_calle <= 32
+
+
+def test_sin_calles_alrededor_no_hay_nudo():
+    assert ai.distancia_a_nudo_px(np.zeros((40, 40), np.uint8), (20, 20)) is None
+
+
+def test_una_esquina_sin_cota_lejos_de_todo_nudo_se_excluye_y_una_con_cota_se_conserva():
+    # Arrange: X00 con cota lejos de un nudo, X01 sin cota en un cruce, X10 sin cota lejos (un rótulo)
+    nodos = reticula(2)
+    esquinas = {0: {'nombre': 'A', 'cota_m': 900.1}, 1: {'nombre': 'B', 'cota_m': None},
+                2: {'nombre': 'C', 'cota_m': None}, 3: {'nombre': 'D', 'cota_m': 901.0}}
+    distancia_m = {'X00': 20.0, 'X01': 1.0, 'X10': 15.0, 'X11': None}
+
+    # Act
+    conservados, excluidos = ai.excluir_rotulos(nodos, esquinas, distancia_m, umbral_m=4)
+
+    # Assert
+    assert [n['id'] for n in conservados] == ['X00', 'X01', 'X11']
+    assert excluidos == [{'id': 'X10', 'esquina_1936': 2, 'nombre': 'C', 'distancia_nudo_m': 15.0}]
+
+
+def test_una_esquina_sin_cota_sin_ningun_nudo_cerca_tambien_se_excluye():
+    nodos = reticula(2)[:1]
+    _, excluidos = ai.excluir_rotulos(nodos, {0: {'nombre': 'A', 'cota_m': None}}, {'X00': None}, umbral_m=4)
+    assert excluidos == [{'id': 'X00', 'esquina_1936': 0, 'nombre': 'A', 'distancia_nudo_m': None}]

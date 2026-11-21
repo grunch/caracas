@@ -344,6 +344,8 @@ def main():
     identidad = _leer(c / 'calce-identidad.json') if (c / 'calce-identidad.json').exists() else {}
     # el hito de la Plaza Mayor cae entre las semillas, no sobre una: el informe de identidad lo nombra
     anclas |= set(identidad.get('nodos_omitidos_por_semilla', [])) | set(identidad.get('hitos_cubiertos_por_semillas', []))
+    # una esquina de 1936 que es un rótulo y no un cruce no sirve de ancla ni de control
+    anclas |= {x['id'] for x in identidad.get('excluidos_por_rotulo', [])}
     incidencias = enlazar_subtareas(_leer(c / 'incidencias.json')['incidencias'])
     damero = _leer(c / 'controles-calce-sectores.json') if (c / 'controles-calce-sectores.json').exists() else None
     correspondencias = _leer(c / 'correspondencias-unidades.json') if (c / 'correspondencias-unidades.json').exists() else None
