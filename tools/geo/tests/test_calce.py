@@ -297,6 +297,31 @@ def test_json_legible_escribe_un_gcp_por_linea_y_se_vuelve_a_leer():
     assert json.loads(ca.json_legible({"año": 1})) == {"año": 1}
 
 
+def test_json_legible_escribe_las_anclas_una_por_linea_como_los_gcp():
+    import json
+    config = {"año": 1772, "anclas": [{"px": 1.0, "id": "X1"}, {"px": 2.0, "id": "X2"}, {"px": 3.0, "id": "X3"}],
+              "gcps": [{"px": 1.0, "py": 2.0}]}
+    texto = ca.json_legible(config)
+    assert json.loads(texto) == config
+    assert '  {"px": 2.0, "id": "X2"},' in texto.splitlines()
+    assert list(json.loads(texto)) == ["año", "anclas", "gcps"]
+
+
+def test_calzar_sin_etapas_ajusta_solo_las_anclas_con_el_suavizado_de_la_config():
+    # Arrange: anclas con ruido; sin etapas no hay correlación, pero el suavizado se respeta
+    rng = np.random.default_rng(3)
+    gcps = [{**g, "px": g["px"] + rng.normal(0, 2), "manual": True} for g in _gcps_afines()]
+    contexto = {"metro": 0.5, "suavizado": 1.0, "umbral_residuo_m": 25}
+
+    # Act
+    calce, usados, quitados = ca.calzar(None, None, gcps, contexto, etapas=())
+
+    # Assert
+    assert usados == gcps and quitados == []
+    assert calce.suavizado == 1.0
+    assert calce.residuos_m()["n"] == len(gcps)
+
+
 def test_leer_plano_aplica_la_paleta_de_un_tiff_indexado(tmp_path):
     import tifffile
     indices = np.array([[0, 1], [1, 0]], np.uint8)

@@ -10,15 +10,16 @@ Fecha: 20-11-2026. T33j.1q. Generado por `tools/geo/cierre_fase1.py` a partir de
 | Cada unidad clasificada y leída | 292 registros, cada uno con ocupación del original y exactamente una lectura individual (bordes 147, sin cara única 78, restantes 67) | sí |
 | Hallazgos confirmados con subtarea | 13 de 13 incidencias enlazadas a subtareas de fases 2–8 (campo `subtareas` en `incidencias.json`) | sí |
 | Correspondencia original ⇄ sistema por unidad | 292 clasificadas bajo el [calce de control](controles-damero.md): ausente 168, desplazada_o_parcial 6, uno_a_uno 42 (provisionales), vacio_coincide 76; 3 juicios de correspondencia vigentes (atados a la unidad, la clase, el `entrada_sha256` y el SHA-256 del recorte regenerado; un juicio de recorte cambiado queda desfasado y obliga a rejuzgar), y U1772-0055 contradice su clase (un uno a uno clasificado como desplazada_o_parcial) | **no** → T33j.2a |
-| Controles de calce independientes por sector | 168 cruces por identidad de damero en 14 sectores más 3 hitos (Plaza Mayor, Candelaria, La Pastora); el TPS se desplaza por cuadras fuera del núcleo | sí, con límites |
+| Controles de calce independientes por sector | Con el calce por identidad ([calce-identidad.md](calce-identidad.md)), los 168 cruces de damero y los hitos de Candelaria, La Pastora y la Plaza Mayor son puntos del ajuste o caen sobre ellos: la puerta ya no los cuenta. De los 23 nodos curados, 22 caen a menos de 6 px de un punto del ajuste; el que queda (N1772-0010, S1772-32) guarda un desvío medido sobre el calce anterior. 15 sectores con unidades sin control independiente vigente; además la puerta exige el error dejando uno fuera (LOO) por sector bajo 15 m, que no cumplen S1772-14, S1772-24, S1772-31, S1772-44 | **no** → T33j.2a |
 | Candidatos de acceso recorridos a nivel de calle (1C) | 3 frentes con candidato de entrada profunda; `recorridos_calle` de [accesos-primer-lote.json](accesos-primer-lote.json) registra los 3 con conclusión: Camejo–Cruz Verde F1772-0005-3; Seminario F1772-0010-3 y Catedral F1772-0003-3, recorridos a pie el 21-11-2026 sobre `datos-2026-11-21-ce374b8`: código `ce374b8` con el mismo `ciudad.pak` que B1772-001 (`af0c664`); entre los dos commits `src/` solo cambia el Panteón (desde 1843) y los hitos de la época 1 son idénticos. En los dos se atraviesa una pared visible (I1772-003 e I1772-013 → T33j.7a) | sí |
 
-**Decisión:** la fase 1 sigue **abierta**: `fase_1_cerrable: false` en el JSON (5 de 6 criterios). Falta:
+**Decisión:** la fase 1 sigue **abierta**: `fase_1_cerrable: false` en el JSON (4 de 6 criterios). Falta:
 
 1. **Correspondencia por unidad.** El recorte de U1772-0055 contradice su clase; las 42 uno a uno son provisionales hasta confirmar cada pareja por identidad. Se resuelve con T33j.2a y una nueva muestra visual atada a la clasificación vigente.
+2. **Controles de calce por sector.** Los cruces de damero y casi todos los nodos curados son puntos del ajuste o caen sobre ellos. El criterio pide controles independientes medidos sobre el calce vigente y el LOO por sector bajo 15 m: hoy no lo bajan S1772-24 y S1772-31, y S1772-14 y S1772-44 tienen una sola ancla (T33j.2a).
 El recorrido de calle de los candidatos de acceso (1C) quedó hecho: recorridos a pie el 21-11-2026 sobre `datos-2026-11-21-ce374b8`: código `ce374b8` con el mismo `ciudad.pak` que B1772-001 (`af0c664`); entre los dos commits `src/` solo cambia el Panteón (desde 1843) y los hitos de la época 1 son idénticos ([accesos-primer-lote.md](accesos-primer-lote.md)). Seminario confirma I1772-003 (se atraviesa la fachada hacia el solar interior). Catedral abre I1772-013: las mallas de hitos no colisionan y se atraviesa su fachada. La puerta lo calcula (`accesos_recorridos_a_pie`): un frente cuenta solo con `estado: recorrido` en `recorridos_calle`.
 
-Los controles por sector se cumplen como lo pide 1B/1D (controlar cada sector), no como aprobación de geometría: localizan los defectos y miden el calce; corregirlos es la fase 2. Nada autoriza a generar casas desde cajas.
+Los controles por sector, cuando se cumplan, serán como lo pide 1B/1D (controlar cada sector), no una aprobación de geometría: localizan los defectos y miden el calce; corregirlos es la fase 2. Nada autoriza a generar casas desde cajas.
 
 ## Totales censados
 
@@ -49,26 +50,26 @@ Los controles por sector se cumplen como lo pide 1B/1D (controlar cada sector), 
 
 ## Calce por sector
 
-Los GCP del ajuste miden la consistencia interna del TPS (residuo dejando uno fuera). Los nodos curados son los 23 de [controles-calce-centro.json](controles-calce-centro.json); los cruces-control, los de [controles-damero.md](controles-damero.md), independientes del TPS. S1772-14 no tiene cruces rectos y se controla por el hito de La Pastora.
+Los GCP del ajuste miden la consistencia interna del TPS (residuo dejando uno fuera, LOO). Un control cuenta como independiente solo si no cae a menos de 6 px de un punto del ajuste (GCP, semilla o ancla) y si su desvío se midió sobre el calce vigente. De los 23 nodos curados de [controles-calce-centro.json](controles-calce-centro.json), 22 caen sobre un punto del ajuste; el que queda guarda un desvío del calce anterior (su `config_sha256` no es el del archivo vigente). Los cruces de damero son ahora anclas del calce por identidad ([calce-identidad.md](calce-identidad.md)): su error es el LOO.
 
-| Sector | GCP del ajuste | LOO rms m | Nodos curados | Cruces-control | Mediana desvío TPS m |
+| Sector | GCP del ajuste | LOO rms m | Nodos curados fuera del ajuste | Cruces de damero que son anclas | Cruces-control independientes |
 |---|---|---|---|---|---|
-| S1772-11 | 3 | 5.623 | 0 | 2 | 366.94 |
-| S1772-12 | 3 | 18.468 | 0 | 2 | 309.46 |
-| S1772-13 | 9 | 14.244 | 0 | 8 | 164.25 |
-| S1772-14 | 0 | — | 0 | 0 | — |
-| S1772-21 | 20 | 14.44 | 0 | 9 | 285.19 |
-| S1772-22 | 39 | 13.165 | 5 | 25 | 96.17 |
-| S1772-23 | 38 | 11.947 | 6 | 33 | 40.42 |
-| S1772-24 | 7 | 15.233 | 0 | 5 | 137.61 |
-| S1772-31 | 9 | 14.215 | 0 | 7 | 259.9 |
-| S1772-32 | 38 | 12.359 | 7 | 25 | 95.54 |
-| S1772-33 | 36 | 11.446 | 5 | 23 | 78.92 |
-| S1772-34 | 8 | 11.731 | 0 | 11 | 178.88 |
-| S1772-41 | 2 | 11.785 | 0 | 0 | — |
-| S1772-42 | 12 | 14.926 | 0 | 6 | 275.76 |
-| S1772-43 | 15 | 13.801 | 0 | 11 | 236.43 |
-| S1772-44 | 3 | 9.156 | 0 | 1 | 256.38 |
+| S1772-11 | 2 | 5.843 | 0 | 2 | 0 |
+| S1772-12 | 2 | 9.606 | 0 | 2 | 0 |
+| S1772-13 | 8 | 16.267 | 0 | 8 | 0 |
+| S1772-14 | 1 | 141.84 | 0 | 0 | 0 |
+| S1772-21 | 9 | 19.011 | 0 | 9 | 0 |
+| S1772-22 | 27 | 12.572 | 0 | 25 | 0 |
+| S1772-23 | 31 | 12.743 | 0 | 33 | 0 |
+| S1772-24 | 5 | 32.715 | 0 | 5 | 0 |
+| S1772-31 | 7 | 28.522 | 0 | 7 | 0 |
+| S1772-32 | 25 | 22.675 | 1 (calce anterior) | 25 | 0 |
+| S1772-33 | 23 | 10.002 | 0 | 23 | 0 |
+| S1772-34 | 11 | 30.091 | 0 | 11 | 0 |
+| S1772-41 | 0 | — | 0 | 0 | 0 |
+| S1772-42 | 6 | 24.123 | 0 | 6 | 0 |
+| S1772-43 | 12 | 16.263 | 0 | 11 | 0 |
+| S1772-44 | 1 | 56.92 | 0 | 1 | 0 |
 
 ## Incidencias y subtareas
 

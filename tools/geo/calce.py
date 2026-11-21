@@ -233,7 +233,8 @@ def calzar(base, viejo, manuales, contexto, etapas=ETAPAS_POR_OMISION):
     """
     metro, suavizado = contexto["metro"], contexto.get("suavizado", 0.0)
     gcps, quitados = list(manuales), []
-    calce = Calce.ajustar(gcps, metro)
+    # sin etapas (calce por anclas, sin correlación) el ajuste final es este: lleva el suavizado
+    calce = Calce.ajustar(gcps, metro, 0.0 if etapas else suavizado)
     for etapa in etapas:
         automaticos = _enlaces_de_etapa(base, viejo, calce, etapa, contexto)
         gcps, quitados = depurar(list(manuales) + automaticos, metro, contexto["umbral_residuo_m"], suavizado)
@@ -324,14 +325,17 @@ def main():
                      config_1936["mosaico"])
 
 
+LISTAS_POR_LINEA = ("anclas", "gcps")
+
+
 def json_legible(config):
-    """JSON con un GCP por línea (diffs chicos y legibles)."""
-    resto = {k: v for k, v in config.items() if k != "gcps"}
-    texto = json.dumps(resto, ensure_ascii=False, indent=1)
-    if "gcps" not in config:
-        return texto + "\n"
-    filas = ",\n".join("  " + json.dumps(g, ensure_ascii=False) for g in config["gcps"])
-    return texto[:-2] + ',\n "gcps": [\n' + filas + "\n ]\n}\n"
+    """JSON con un GCP y un ancla por línea (diffs chicos y legibles)."""
+    marcas = {k: f"@@{k}@@" for k in LISTAS_POR_LINEA if config.get(k)}
+    texto = json.dumps({k: marcas.get(k, v) for k, v in config.items()}, ensure_ascii=False, indent=1)
+    for k, marca in marcas.items():
+        filas = ",\n".join("  " + json.dumps(g, ensure_ascii=False) for g in config[k])
+        texto = texto.replace(json.dumps(marca), "[\n" + filas + "\n ]")
+    return texto + "\n"
 
 
 def escribir_salidas(raiz, carpeta, config, calce, rgb, mascara, forma_1936, metro, ruta_mosaico):

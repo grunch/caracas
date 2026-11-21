@@ -134,13 +134,20 @@ describe('queEstasViendo', () => {
 
     it('los residuos del calce de cada plano son los que dice «El error»', () => {
       expect(texto).toMatch(/1889 y 1911 coinciden con el de 1936 con pocos metros/)
-      expect(texto).toMatch(/1772 y 1843, más viejos y menos precisos, se apartan entre 10 y 15 m/)
+      expect(texto).toMatch(/el de 1843, más viejo y menos preciso, se aparta entre 10 y 15 m/)
       for (const año of [1889, 1911]) expect(calce[año].rms, String(año)).toBeLessThan(10)
-      for (const año of [1772, 1843]) {
-        expect(calce[año].rms, String(año)).toBeGreaterThan(10)
-        expect(calce[año].rms, String(año)).toBeLessThan(15)
-      }
-      expect(Math.max(...Object.values(calce).map((r) => r.max))).toBeLessThan(26) // «hasta unos 25 m»
+      expect(calce[1843].rms).toBeGreaterThan(10)
+      expect(calce[1843].rms).toBeLessThan(15)
+      for (const año of [1843, 1889, 1911]) expect(calce[año].max, String(año)).toBeLessThan(26) // «hasta unos 25 m»
+    })
+
+    it('el calce de 1772 por identidad: unos 20 m de media y más de 50 m en algunos cruces de las orillas', () => {
+      expect(texto).toMatch(/El de 1772 se calza solo con cruces y edificios identificados uno a uno y se aparta unos 20 m/)
+      expect(texto).toMatch(/más de 50 m en algunos cruces de las orillas/)
+      expect(calce[1772].rms).toBeGreaterThan(15)
+      expect(calce[1772].rms).toBeLessThan(25) // «unos 20 m»
+      expect(calce[1772].p90).toBeLessThan(50) // «algunos», no la mayoría
+      expect(calce[1772].max).toBeGreaterThan(50)
     })
 
     it('el error crece hacia las orillas en los planos de 1889 y 1911', () => {

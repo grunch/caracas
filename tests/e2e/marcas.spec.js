@@ -80,7 +80,11 @@ test('la M y el botón «Nombres» muestran y ocultan las marcas', async ({ page
 
   await boton.click()
   await expect(boton).toHaveAttribute('aria-pressed', 'true')
-  await expect(page.locator('#marcas .marca.ver .tag').first()).toBeVisible()
+  // como en el resto del archivo: esperar el cuadro que vuelve a dibujar las marcas antes de mirarlas. Con el
+  // render por software del CI un cuadro tarda segundos, y el cartel recién prendido sigue en su transición de
+  // visibilidad (ya con la clase `ver`, todavía oculto)
+  expect((await ver(page, 5)).length).toBeGreaterThan(0)
+  await expect(page.locator('#marcas .marca.ver .tag').first()).toBeVisible({ timeout: 15_000 })
 })
 
 test('pasar el mouse por una marca vela las demás; al tocarla la cámara vuela al lugar y avisa', async ({ page }) => {

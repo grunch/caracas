@@ -2,7 +2,7 @@
 
 Fecha: 20-11-2026. T33j.1a.
 
-Continuación: [barrido de los 16 sectores y censo extenso](censo-extenso.md). Entrega 1D: [cierre de la fase 1](cierre-fase1.md), con los [controles de damero y correspondencias](controles-damero.md); la fase sigue abierta (5/6 criterios; falta la correspondencia de U1772-0055). Los conteos de este README describen la primera entrega; las incidencias y sectores se amplían en la continuación. **Auditoría en curso, sin correcciones de geometría.**
+Continuación: [barrido de los 16 sectores y censo extenso](censo-extenso.md). Entrega 1D: [cierre de la fase 1](cierre-fase1.md), con los [controles de damero y correspondencias](controles-damero.md); la fase sigue abierta (4/6 criterios: faltan la correspondencia por unidad y, desde el calce por identidad, los controles por sector, que pasan al LOO). Los conteos de este README describen la primera entrega; las incidencias y sectores se amplían en la continuación. **Auditoría en curso, sin correcciones de geometría.**
 
 Se fijó una copia independiente del código y de los datos, se verificaron sus hashes y se inspeccionaron diez manzanas en vista alta, más dos vistas oblicuas. No se ha terminado el censo del original ni el diagnóstico de causas. Ninguna manzana se declara completamente verificada.
 
@@ -47,9 +47,9 @@ Para comprobar I1772-006: descomprimir `ciudad.pak` con gzip, leer el primer uin
 
 ## Calce: límite encontrado antes de medir fachadas
 
-`tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json` declara residuos por dejar un punto fuera: RMS 12,92 m, p90 19,16 m, máximo 24,78 m. Son métricas declaradas del ajuste, no una medición independiente realizada en esta entrega ni un límite de error garantizado en toda la periferia.
+En la baseline, `tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json` declaraba residuos por dejar un punto fuera: RMS 12,92 m, p90 19,16 m, máximo 24,78 m. Ese era el calce anterior, por correlación; el vigente, por identidad, declara RMS 21,8 m y p90 30,0 m ([calce-identidad.md](calce-identidad.md)). Son métricas declaradas del ajuste, no una medición independiente realizada en esta entrega ni un límite de error garantizado en toda la periferia.
 
-Las cuatro semillas manuales corresponden a esquinas de Plaza Mayor; numerosos puntos restantes proceden de correlación automática. No se puede usar el umbral de 25 m como tolerancia de alineación de una fachada. La continuidad histórica debe comprobarse por correspondencia topológica; la rectitud del modelo tiene su propia tolerancia numérica.
+En ese calce anterior, las cuatro semillas manuales correspondían a esquinas de Plaza Mayor y numerosos puntos restantes procedían de correlación automática. No se puede usar el umbral de 25 m como tolerancia de alineación de una fachada. La continuidad histórica debe comprobarse por correspondencia topológica; la rectitud del modelo tiene su propia tolerancia numérica.
 
 Pendiente de 1A: revisar controles independientes distribuidos en periferias y medir residuos por sector. **La base está fijada, pero la validación del calce no está terminada.**
 
@@ -94,3 +94,5 @@ El [sondeo de accesos](accesos-primer-lote.md) evalúa los 40 frentes iniciales 
 ## Cierre de la fase 1
 
 [Entrega 1D](cierre-fase1.md): 292 unidades clasificadas y leídas, 16 sectores recorridos, 13 incidencias con subtarea. [Controles por identidad de damero](controles-damero.md): 168 cruces y 3 hitos muestran que el TPS se desplaza por cuadras enteras fuera del núcleo (Candelaria a 303 m); 292 correspondencias clasificadas bajo un calce de control (42 uno a uno provisionales, 168 ausentes). Fase 1 abierta: U1772-0055 contradice su clase. Los recorridos de calle de Catedral y Seminario ya están hechos (I1772-003 e I1772-013 → T33j.7a); no certifica fidelidad ni cierra incidencias.
+
+[Calce por identidad](calce-identidad.md) (T33j.2a, primera parte): el calce de 1772 deja la correlación y se ajusta con 164 cruces de damero, 4 semillas y 2 hitos validados (cruces únicos, orden de calles, sin pliegues). Candelaria queda a 34 m sin su ancla (antes 303 m); S1772-24 y S1772-31 siguen sobre 15 m de mediana dejando uno fuera. Falta revisar esos nodos, reclasificar las correspondencias y regenerar los datos.

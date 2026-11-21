@@ -61,7 +61,9 @@ jobs:
           # el release de datos es del repo principal: en un fork, GITHUB_REPOSITORY no tiene ningún datos-*
           DATOS_REPO: grunch/caracas
       - name: Navegador para Playwright
-        run: npx playwright install --with-deps chromium
+        # --with-deps instala fuentes con apt; si el mirror del runner falla («Unable to locate package»), un
+        # segundo intento con el índice recargado suele bastar
+        run: npx playwright install --with-deps chromium || (sleep 30 && sudo apt-get update && npx playwright install --with-deps chromium)
       - name: E2E
         run: npx playwright test --shard=${{ matrix.tanda }}/3 --reporter=line,html
       - name: Reporte de Playwright
