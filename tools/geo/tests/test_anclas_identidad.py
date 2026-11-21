@@ -271,16 +271,16 @@ def test_un_cruce_aceptado_sin_fila_o_columna_conocida_es_un_error():
 
 # --- huella del calce: el LOO del informe vale solo para el calce del que salió ------------------
 
-def test_la_huella_del_calce_cambia_con_las_anclas_o_el_suavizado_y_no_con_los_gcp_derivados():
+def test_la_huella_del_calce_es_la_de_los_puntos_efectivos_del_ajuste_y_su_suavizado():
     # Arrange
-    config = {'semillas': [{'px': 1, 'py': 2}], 'anclas': [{'px': 3, 'py': 4, 'x36': 5, 'y36': 6, 'id': 'X1'}],
-              'suavizado': 0.005, 'gcps': [{'px': 1}], 'residuos_m': {'rms': 1}}
+    gcps = [{'px': 1.0, 'py': 2.0, 'x36': 3.0, 'y36': 4.0, 'manual': True}, {'px': 5.0, 'py': 6.0, 'x36': 7.0, 'y36': 8.0}]
 
     # Act
-    base = ai.huella_calce(config)
+    base = ai.huella_calce(gcps, 0.005)
 
-    # Assert
-    assert base == ai.huella_calce({**config, 'gcps': [], 'residuos_m': {}})
-    assert base != ai.huella_calce({**config, 'suavizado': 0.05})
-    assert base != ai.huella_calce({**config, 'anclas': [{**config['anclas'][0], 'x36': 5.5}]})
+    # Assert: no cambian el orden ni los campos derivados (loo_m, notas)
+    assert base == ai.huella_calce([{**gcps[1], 'loo_m': 9.1}, {**gcps[0], 'nota': 'x'}], 0.005)
+    assert base != ai.huella_calce(gcps, 0.05)
+    assert base != ai.huella_calce([gcps[0], {**gcps[1], 'x36': 7.5}], 0.005)   # una semilla o ancla movida
+    assert base != ai.huella_calce(gcps[:1], 0.005)                              # un punto de menos o de más
     assert len(base) == 64
