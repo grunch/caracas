@@ -114,6 +114,13 @@ def test_cuenta_las_celdas_donde_la_proyeccion_se_pliega():
     assert plegadas > 0
 
 
+def test_una_celda_plegada_solo_en_su_esquina_inferior_derecha_cuenta():
+    # el triángulo de arriba a la izquierda conserva el giro; el de abajo a la derecha lo invierte
+    def proyectar(x, y):
+        return x * (1 - 0.2 * y), y
+    assert ai.celdas_plegadas(proyectar, (0, 0, 10, 10), paso=10) == 1
+
+
 # --- resumen -----------------------------------------------------------------------------
 
 def test_resumen_por_sector_da_mediana_y_maximo_del_error_dejando_uno_fuera():
@@ -126,3 +133,19 @@ def test_resumen_por_sector_da_mediana_y_maximo_del_error_dejando_uno_fuera():
         {'sector': 'S2', 'anclas': 1, 'mediana_loo_m': 7.5, 'max_loo_m': 7.5, 'mediana_residuo_m': 0.4,
          'bajo_umbral': True},
     ]
+
+
+def test_un_borde_espejado_que_solo_forma_triangulo_con_los_otros_dos_vecinos_es_un_error():
+    # Arrange: (0,0), (1,0), (1,1) no forman ninguno de los triángulos (i+1,j)(i,j+1) ni (i-1,j)(i,j-1)
+    nodos = [nodo('A', (0, 0), (0, 0), (0, 0), 0), nodo('B', (1, 0), (10, 0), (10, 0), 1),
+             nodo('C', (1, 1), (10, 10), (10, -10), 2)]
+
+    # Act
+    errores = ai.validar_nodos(nodos)
+
+    # Assert
+    assert any('orden' in e and 'A' in e and 'B' in e and 'C' in e for e in errores)
+
+
+def test_reticula_coherente_sigue_sin_errores_con_los_cuatro_triangulos_por_nodo():
+    assert ai.validar_nodos(reticula(4, paso_o=7.0, paso_m=31.0)) == []

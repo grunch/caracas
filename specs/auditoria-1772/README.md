@@ -47,9 +47,9 @@ Para comprobar I1772-006: descomprimir `ciudad.pak` con gzip, leer el primer uin
 
 ## Calce: límite encontrado antes de medir fachadas
 
-`tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json` declara residuos por dejar un punto fuera: RMS 12,92 m, p90 19,16 m, máximo 24,78 m. Son métricas declaradas del ajuste, no una medición independiente realizada en esta entrega ni un límite de error garantizado en toda la periferia.
+En la baseline, `tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json` declaraba residuos por dejar un punto fuera: RMS 12,92 m, p90 19,16 m, máximo 24,78 m. Ese era el calce anterior, por correlación; el vigente, por identidad, declara RMS 21,8 m y p90 30,0 m ([calce-identidad.md](calce-identidad.md)). Son métricas declaradas del ajuste, no una medición independiente realizada en esta entrega ni un límite de error garantizado en toda la periferia.
 
-Las cuatro semillas manuales corresponden a esquinas de Plaza Mayor; numerosos puntos restantes proceden de correlación automática. No se puede usar el umbral de 25 m como tolerancia de alineación de una fachada. La continuidad histórica debe comprobarse por correspondencia topológica; la rectitud del modelo tiene su propia tolerancia numérica.
+En ese calce anterior, las cuatro semillas manuales correspondían a esquinas de Plaza Mayor y numerosos puntos restantes procedían de correlación automática. No se puede usar el umbral de 25 m como tolerancia de alineación de una fachada. La continuidad histórica debe comprobarse por correspondencia topológica; la rectitud del modelo tiene su propia tolerancia numérica.
 
 Pendiente de 1A: revisar controles independientes distribuidos en periferias y medir residuos por sector. **La base está fijada, pero la validación del calce no está terminada.**
 

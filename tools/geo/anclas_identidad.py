@@ -82,7 +82,9 @@ def validar_nodos(nodos):
     errores += _repetidos(nodos, lambda n: repr(list(n['indice'])), 'índice')
     por_indice = {tuple(n['indice']): n for n in nodos}
     for (i, j), n in sorted(por_indice.items()):
-        for otros in (((i + 1, j), (i, j + 1)), ((i - 1, j), (i, j - 1))):
+        # los cuatro pares de vecinos perpendiculares: en el borde puede faltar cualquiera
+        for otros in (((i + 1, j), (i, j + 1)), ((i, j + 1), (i - 1, j)),
+                      ((i - 1, j), (i, j - 1)), ((i, j - 1), (i + 1, j))):
             if not all(k in por_indice for k in otros):
                 continue
             tri = [n] + [por_indice[k] for k in otros]
@@ -95,13 +97,17 @@ def validar_nodos(nodos):
 
 def celdas_plegadas(proyectar, marco, paso=PASO_PLIEGUES_PX):
     """Celdas de una grilla sobre el marco del original [x0, y0, x1, y1] donde la proyección pierde
-    el giro (jacobiano ≤ 0): ahí el calce dobla el plano sobre sí mismo."""
+    el giro (jacobiano ≤ 0) en alguno de sus dos triángulos: ahí el calce dobla el plano sobre sí mismo."""
     x0, y0, x1, y1 = marco
     xx, yy = np.meshgrid(np.arange(x0, x1 + paso, paso, dtype=float), np.arange(y0, y1 + paso, paso, dtype=float))
-    px, py = (np.asarray(v, float).reshape(xx.shape) for v in proyectar(xx.ravel(), yy.ravel()))
-    det = (px[:-1, 1:] - px[:-1, :-1]) * (py[1:, :-1] - py[:-1, :-1]) - \
-          (py[:-1, 1:] - py[:-1, :-1]) * (px[1:, :-1] - px[:-1, :-1])
-    return int(np.count_nonzero(det <= 0))
+    p = np.stack([np.asarray(v, float).reshape(xx.shape) for v in proyectar(xx.ravel(), yy.ravel())], axis=-1)
+    sup_izq, sup_der, inf_izq, inf_der = p[:-1, :-1], p[:-1, 1:], p[1:, :-1], p[1:, 1:]
+
+    def giro(a, b, c):
+        return (b[..., 0] - a[..., 0]) * (c[..., 1] - a[..., 1]) - (b[..., 1] - a[..., 1]) * (c[..., 0] - a[..., 0])
+    # los dos triángulos de la celda, con el mismo sentido que tienen en una proyección afín directa
+    plegada = (giro(sup_izq, sup_der, inf_izq) <= 0) | (giro(inf_der, inf_izq, sup_der) <= 0)
+    return int(np.count_nonzero(plegada))
 
 
 def resumen_por_sector(anclas, loo_m, residuo_m, umbral_m=UMBRAL_SECTOR_M):

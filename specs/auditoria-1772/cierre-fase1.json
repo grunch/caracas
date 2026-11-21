@@ -309,6 +309,7 @@
    }
   }
  ],
+ "calce_por_sector_nota": "gcp_ajuste y loo_* miden el calce vigente; controles_damero y desvio_damero_tps_anterior_mediana_m vienen de controles-calce-sectores.json, medido sobre el TPS por correlación anterior, hasta regenerarlo sobre el calce por identidad (T33j.2a).",
  "calce_por_sector": [
   {
    "sector": "S1772-11",
@@ -319,7 +320,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 2,
-   "desvio_damero_mediana_m": 366.94
+   "desvio_damero_tps_anterior_mediana_m": 366.94
   },
   {
    "sector": "S1772-12",
@@ -330,7 +331,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 2,
-   "desvio_damero_mediana_m": 309.46
+   "desvio_damero_tps_anterior_mediana_m": 309.46
   },
   {
    "sector": "S1772-13",
@@ -341,7 +342,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 8,
-   "desvio_damero_mediana_m": 164.25
+   "desvio_damero_tps_anterior_mediana_m": 164.25
   },
   {
    "sector": "S1772-14",
@@ -352,7 +353,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 0,
-   "desvio_damero_mediana_m": null
+   "desvio_damero_tps_anterior_mediana_m": null
   },
   {
    "sector": "S1772-21",
@@ -363,7 +364,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 9,
-   "desvio_damero_mediana_m": 285.19
+   "desvio_damero_tps_anterior_mediana_m": 285.19
   },
   {
    "sector": "S1772-22",
@@ -374,7 +375,7 @@
    "controles_independientes": 5,
    "desvio_independiente_max_m": 96.162,
    "controles_damero": 25,
-   "desvio_damero_mediana_m": 96.17
+   "desvio_damero_tps_anterior_mediana_m": 96.17
   },
   {
    "sector": "S1772-23",
@@ -385,7 +386,7 @@
    "controles_independientes": 6,
    "desvio_independiente_max_m": 18.378,
    "controles_damero": 33,
-   "desvio_damero_mediana_m": 40.42
+   "desvio_damero_tps_anterior_mediana_m": 40.42
   },
   {
    "sector": "S1772-24",
@@ -396,7 +397,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 5,
-   "desvio_damero_mediana_m": 137.61
+   "desvio_damero_tps_anterior_mediana_m": 137.61
   },
   {
    "sector": "S1772-31",
@@ -407,7 +408,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 7,
-   "desvio_damero_mediana_m": 259.9
+   "desvio_damero_tps_anterior_mediana_m": 259.9
   },
   {
    "sector": "S1772-32",
@@ -418,7 +419,7 @@
    "controles_independientes": 7,
    "desvio_independiente_max_m": 93.23,
    "controles_damero": 25,
-   "desvio_damero_mediana_m": 95.54
+   "desvio_damero_tps_anterior_mediana_m": 95.54
   },
   {
    "sector": "S1772-33",
@@ -429,7 +430,7 @@
    "controles_independientes": 5,
    "desvio_independiente_max_m": 21.177,
    "controles_damero": 23,
-   "desvio_damero_mediana_m": 78.92
+   "desvio_damero_tps_anterior_mediana_m": 78.92
   },
   {
    "sector": "S1772-34",
@@ -440,7 +441,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 11,
-   "desvio_damero_mediana_m": 178.88
+   "desvio_damero_tps_anterior_mediana_m": 178.88
   },
   {
    "sector": "S1772-41",
@@ -451,7 +452,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 0,
-   "desvio_damero_mediana_m": null
+   "desvio_damero_tps_anterior_mediana_m": null
   },
   {
    "sector": "S1772-42",
@@ -462,7 +463,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 6,
-   "desvio_damero_mediana_m": 275.76
+   "desvio_damero_tps_anterior_mediana_m": 275.76
   },
   {
    "sector": "S1772-43",
@@ -473,7 +474,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 11,
-   "desvio_damero_mediana_m": 236.43
+   "desvio_damero_tps_anterior_mediana_m": 236.43
   },
   {
    "sector": "S1772-44",
@@ -484,7 +485,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 1,
-   "desvio_damero_mediana_m": 256.38
+   "desvio_damero_tps_anterior_mediana_m": 256.38
   }
  ],
  "incidencias": [

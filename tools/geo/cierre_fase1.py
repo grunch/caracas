@@ -309,8 +309,11 @@ def main():
                      'correspondencia': dict(sorted(Counter(f['correspondencia'] for f in filas).items())),
                      'incidencias': dict(sorted(Counter(i['estado'] for i in incidencias).items()))}),
         ('por_sector', resumen_por_sector(filas, sectores)),
+        ('calce_por_sector_nota', 'gcp_ajuste y loo_* miden el calce vigente; controles_damero y '
+                                  'desvio_damero_tps_anterior_mediana_m vienen de controles-calce-sectores.json, medido sobre '
+                                  'el TPS por correlación anterior, hasta regenerarlo sobre el calce por identidad (T33j.2a).'),
         ('calce_por_sector', [{**r, 'controles_damero': next((d['controles'] for d in (damero or {}).get('por_sector', []) if d['sector'] == r['sector']), 0),
-                               'desvio_damero_mediana_m': next((d['mediana_m'] for d in (damero or {}).get('por_sector', []) if d['sector'] == r['sector']), None)}
+                               'desvio_damero_tps_anterior_mediana_m': next((d['mediana_m'] for d in (damero or {}).get('por_sector', []) if d['sector'] == r['sector']), None)}
                               for r in residuos]),
         ('incidencias', [{'id': i['id'], 'estado': i['estado'], 'prioridad': i.get('prioridad'),
                           'subtareas': i['subtareas']} for i in incidencias]),
