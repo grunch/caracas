@@ -134,3 +134,15 @@ def test_una_calle_historica_cuyos_extremos_estan_en_calles_distintas_conserva_s
          'calles': [{'id': 'L1', 'tipo': 'calle_recta', 'nodos': ['A']}, {'id': 'L2', 'tipo': 'calle_recta', 'nodos': ['C']}]}
     v = [{'id': 'h', 'original': [[0, 0], [10, 10]], 'anclajes': [[0, 0], [0, 100], [100, 100]]}]
     assert historicas_en_referencia(v, r)[0] == {'id': 'h', 'anclajes': [[0, 0], [0, 100], [100, 100]], 'fuente': 'anclajes'}
+
+
+def test_la_red_conectada_cuenta_por_sector_los_tramos_bloqueados_y_los_que_no_se_miden():
+    calles = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 50], [200, 50]], 'banda_m': 10, 'medible': True},
+              {'tramo': 'L2:B-C', 'sector': 'S2', 'puntos': [[0, 150], [200, 150]], 'banda_m': 10, 'medible': True},
+              {'tramo': 'L3:C-D', 'sector': 'S9', 'puntos': [[0, 250], [200, 250]], 'banda_m': 10, 'medible': False}]
+    c = ciudad((90, 120, 110, 180))   # una casa que cierra L2 de lado a lado
+    p = puerta_fase3(ciudad=c, red=red(), unidades=unidades(), verificadas=[], metro=METRO, calles=calles)
+    conexa = p['red_conectada']
+    assert conexa['cumplido'] is False and conexa['bloqueados'] == ['L2:B-C']
+    assert conexa['por_sector'] == {'S1': {'medidos': 1, 'bloqueados': 0}, 'S2': {'medidos': 1, 'bloqueados': 1}}
+    assert conexa['sin_medir_por_limite_del_calce'] == {'S9': 1}

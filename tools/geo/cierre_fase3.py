@@ -1,6 +1,7 @@
 """Puerta de salida de la fase 3 de 1772 (specs/08: calles y límites de manzana), medida sobre la salida del generador.
 
-Listo cuando: red conectada como el original; ningún frente ocupa una calle; San Jacinto y todos los casos
+Listo cuando: red conectada como el original (cada tramo de la red, llevado a 1936 con la tolerancia del calce en su
+sector, con paso libre en 1772; tools/geo/calles_1772.py); ningún frente ocupa una calle; San Jacinto y todos los casos
 inventariados tienen separación correcta; no se crean calles en plazas o patios. Aquí se mide, contra la referencia
 histórica de la fase 2 (`tools/geo/referencias/1772-*.json`), sobre las casas que viven en 1772 en
 `fuentes/derivados/epocas/ciudad-epocas.json`:
@@ -155,7 +156,29 @@ def historicas_en_referencia(verificadas, red, tol=TOLERANCIA_ORIGINAL_PX):
     return resultado
 
 
-def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_INFERIDO_M):
+def red_conectada(calles, casas, metro=METRO):
+    """Los tramos de la red llevados a 1936 (tools/geo/calles_1772.py) con paso libre de casas de 1772 de un extremo al
+    otro dentro de su banda de tolerancia, por sector; los de los sectores límite del calce no se miden."""
+    from calles_1772 import bloqueado
+    figuras = [p for _, p in casas]
+    arbol = STRtree(figuras) if figuras else None
+    por_sector, sin_medir, bloqueados = {}, {}, []
+    for eje in calles:
+        if not eje['medible']:
+            sin_medir[eje['sector']] = sin_medir.get(eje['sector'], 0) + 1
+            continue
+        fila = por_sector.setdefault(eje['sector'], {'medidos': 0, 'bloqueados': 0})
+        fila['medidos'] += 1
+        cerca = [] if arbol is None else [figuras[j] for j in arbol.query(LineString(eje['puntos']).buffer(eje['banda_m'] / metro))]
+        if bloqueado(eje, cerca, metro):
+            fila['bloqueados'] += 1
+            bloqueados.append(eje['tramo'])
+    return {'cumplido': not bloqueados, 'medidos': sum(f['medidos'] for f in por_sector.values()),
+            'bloqueados': bloqueados, 'por_sector': dict(sorted(por_sector.items())),
+            'sin_medir_por_limite_del_calce': dict(sorted(sin_medir.items()))}
+
+
+def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_INFERIDO_M, calles=()):
     """Criterios de la fase 3 con su cumplimiento sobre las casas de 1772; `fase_3_cerrable` exige todos."""
     casas = casas_de_epoca(ciudad)
     por_id = {n['id']: n for n in red['nodos']}
@@ -168,6 +191,7 @@ def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_
     plazas = plazas_ocupadas(unidades, por_id, casas, metro, ancho_m / 2)
     dentro = calles_abiertas_dentro(unidades, por_id, casas, metro, ancho_m / 2)
     criterios = OrderedDict([
+        ('red_conectada', red_conectada(calles, casas, metro)),
         ('calles_libres', {'cumplido': not ocupadas, 'tramos_medidos': len(cs), 'ancho_inferido_m': ancho_m,
                            'tramos_ocupados': len(ocupadas), 'ocupadas': ocupadas}),
         ('calles_historicas_libres', {'cumplido': not historicas_ocupadas, 'medidas': len(historicas),
@@ -194,7 +218,8 @@ def main():
     red = _leer(args.referencias / '1772-red.json')
     unidades = _leer(args.referencias / '1772-unidades.json')['unidades']
     verificadas = _leer(Path(__file__).parent / 'calles-historicas.json')['tramos']
-    puerta = puerta_fase3(_leer(args.ciudad), red, unidades, verificadas)
+    calles = _leer(args.referencias / '1772-calles-1936.json')['tramos']
+    puerta = puerta_fase3(_leer(args.ciudad), red, unidades, verificadas, calles=calles)
     informe = OrderedDict([
         ('alcance', 'Puerta de salida de la fase 3 de 1772 (specs/08), medida sobre la salida del generador contra la '
                     'referencia histórica. Cuenta lo medido; no certifica fidelidad.'),

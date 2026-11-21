@@ -105,11 +105,11 @@ export const PASOS = [
   {
     id: 'epocas',
     entradas: ['tools/geo/epocas/epocas.json', `${D}/ciudad-1936.json`, 'fuentes/derivados/1578/ciudad-1578.json',
-      ...CALCES.map(([año]) => `fuentes/derivados/${año}/calzado.tif`)],
+      ...CALCES.map(([año]) => `fuentes/derivados/${año}/calzado.tif`), 'tools/geo/referencias/1772-calles-1936.json'],
     salidas: [`${E}/ciudad-epocas.json`, `${E}/crece.json`, 'public/datos/crece.json', 'public/plano/crece.png'],
     // relieve.bin (tools/geo/relieve.py, fuera de este pipeline) da las cuestas y la altura del monte
     opcionales: ['public/datos/relieve.bin'],
-    codigo: GEO('epocas', 'valle', 'calce_correlacion', 'vectorizar', 'segmentar_clases'),
+    codigo: GEO('epocas', 'valle', 'calce_correlacion', 'vectorizar', 'segmentar_clases', 'calles_1772'),
     cmd: () => [PY, 'tools/geo/epocas.py'],
   },
   {

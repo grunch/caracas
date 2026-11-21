@@ -324,6 +324,42 @@ def vida_de_1936(nace36, ciudad, apertura=()):
     return vida, quitar
 
 
+def abrir_calles_de_1772(ciudad, vida, quitar, calles, metro, area_minima_m2=1.0):
+    """(vida, quitar, sin abrir): las calles de la referencia de 1772 (tools/geo/calles_1772.py) que las casas vivas
+    en 1772 bloquean de un extremo al otro se abren quitándole 1772 a las casas que pisan su núcleo de calzada: una de
+    1936 nace desde 1843 y una «de antes» se quita. Solo se tocan las calles bloqueadas y solo lo que pisa su eje;
+    lo que siga bloqueado se informa. No muta las entradas."""
+    from shapely.geometry import LineString, Polygon
+    from calles_1772 import NUCLEO_DE_CALZADA_M, bloqueado
+    vida, quitar = [list(v) for v in vida], set(quitar)
+    v, antes = ciudad["vertices"], ciudad.get("antes", [])
+    figuras = [Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]) for t in ciudad["techos"]]
+
+    def vivas():
+        return [k for k, (nace_, muere) in enumerate(vida)
+                if k not in quitar and nace_ <= 1 and (muere == 0 or muere > 1) and figuras[k].is_valid]
+
+    sin_abrir = []
+    for eje in calles:
+        if not eje.get("medible", True):
+            continue
+        ahora = vivas()
+        if not bloqueado(eje, [figuras[k] for k in ahora], metro):
+            continue
+        nucleo = LineString(eje["puntos"]).buffer(NUCLEO_DE_CALZADA_M / 2 / metro, cap_style="flat")
+        for k in ahora:
+            if figuras[k].intersection(nucleo).area * metro ** 2 < area_minima_m2:
+                continue
+            muere = vida[k][1]
+            if (k < len(antes) and antes[k]) or (muere and muere <= 2):
+                quitar.add(k)
+            else:
+                vida[k] = [max(2, vida[k][0]), muere]
+        if bloqueado(eje, [figuras[k] for k in vivas()], metro):
+            sin_abrir.append(eje["tramo"])
+    return vida, quitar, sin_abrir
+
+
 def relevos(huellas36, vida36, quitar):
     """(huellas, nace) de las casas de 1936 que quedan, con su nacimiento final (vida_de_1936): las que
     pueden pasarle la posta a una de 1578. Un techo quitado no reemplaza nada, y un edificio público no
@@ -515,6 +551,11 @@ def main():
     apertura = apertura_de_juntas(ciudad36.get("juntas", []), construido, escala, ciudad36.get("juntas_minimo"),
                                   ciudad36.get("juntas_hasta"))
     vida36, quitar = vida_de_1936(nace36, ciudad36, apertura)
+    calles72 = raiz / "tools/geo/referencias/1772-calles-1936.json"
+    if calles72.exists():
+        vida36, quitar, sin_abrir = abrir_calles_de_1772(ciudad36, vida36, quitar,
+                                                          json.loads(calles72.read_text())["tramos"], metro)
+        print(f"calles de 1772 que siguen bloqueadas: {len(sin_abrir)} {sin_abrir[:10]}")
     vida78 = vida_de_1578(ciudad78, *relevos(huellas36, vida36, quitar), construido, escala)
     ciudad = unir(*sin_techos(ciudad36, vida36, quitar), ciudad78, vida78)
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))

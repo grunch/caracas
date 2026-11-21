@@ -71,7 +71,8 @@
     "epocas: fuentes/derivados/1911/calzado.tif",
     "epocas: fuentes/derivados/1889/calzado.tif",
     "epocas: fuentes/derivados/1843/calzado.tif",
-    "epocas: fuentes/derivados/1772/calzado.tif"
+    "epocas: fuentes/derivados/1772/calzado.tif",
+    "epocas: tools/geo/referencias/1772-calles-1936.json"
    ],
    "heuristicas": [
     "calles-nuevas: fuentes/derivados/1936/segmentacion/mosaico/clases-costura.png",

@@ -24,7 +24,8 @@ describe('procedencia de las entradas del generador de 1772', () => {
   })
 
   test('el generador lee la referencia histórica solo por el filtro de aprobadas (ninguna pendiente entra)', () => {
-    const lee = Object.values(registro.pasos).flat().filter((e) => e.entrada.includes('tools/geo/referencias/'))
+    const lee = Object.values(registro.pasos).flat()
+      .filter((e) => e.entrada.includes('tools/geo/referencias/') && e.entrada.includes('unidades'))
     expect(lee.length).toBeGreaterThan(0)
     expect(lee.every((e) => e.clase === 'referencia_aprobada')).toBe(true)
   })

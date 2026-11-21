@@ -58,6 +58,58 @@ Lo que todavía no mide esta puerta:
 - **Unidades pendientes.** Las 195 pendientes de la referencia, sobre todo en la periferia, se siguen armando con caras de OSM y la máscara de color, y los tramos de la red sin pareja en 1936 no se miden. Es T33j.3b.
 - **Hitos.** Los lotes sobre hitos como la Catedral ya estaban en las cuadras curadas de #69. Los dobles edificios son I004/I009 (fase 4).
 
+## Después de T33j.3b: red conectada como el original, en los 16 sectores
+
+La puerta de T33j.3a solo mide los tramos con sus dos cruces identificados. Para llegar a la periferia hacía falta otra medida.
+
+1. **Ejes en 1936 de toda la red** (`tools/geo/calles_1772.py` → [`1772-calles-1936.json`](../../tools/geo/referencias/1772-calles-1936.json)).
+   - Cada tramo va a 1936 con la pareja de sus cruces identificados y, en lo demás, con el calce por identidad, siguiendo la polilínea del trazado (las quebradas conservan su quiebre).
+   - Cada tramo lleva una banda de tolerancia: la mediana LOO del calce en su sector, entre 6 y 30 m.
+   - Los tramos de los sectores límite del calce no se miden: 24 en S1772-24, 4 en S1772-44. Ahí el calce no ubica la calle (I1772-014).
+2. **Red conectada.** Un tramo está bloqueado si las casas de 1772 cierran todo paso de un extremo al otro dentro de su banda.
+3. **`epocas.abrir_calles_de_1772`.** Donde un tramo queda bloqueado, las casas que pisan su núcleo de calzada no viven en 1772: una de 1936 nace desde 1843 y una «de antes» se quita. Solo se tocan las calles bloqueadas, y de ellas solo lo que pisa el eje.
+
+Antes de abrirlas había 6 tramos bloqueados de 439:
+- uno con casas que cruzaban una calle sobre la costura del mosaico, en S1772-32;
+- abanicos de caras de OSM sobre tramos cortos, en S1772-23;
+- calles quebradas en S1772-11, -12 y -22.
+
+**Después: 0 bloqueados de 439.** Esas casas dejan de vivir en 1772: la ciudad de 1772 baja de 4207 a 4166 casas. Revisé a ojo los dos primeros casos: la calle queda libre y las casas de los lados no se tocaron.
+
+| Sector | Tramos medidos | Bloqueados |
+|---|---|---|
+| S1772-11 | 24 | 0 |
+| S1772-12 | 11 | 0 |
+| S1772-13 | 21 | 0 |
+| S1772-21 | 37 | 0 |
+| S1772-22 | 58 | 0 |
+| S1772-23 | 73 | 0 |
+| S1772-24 | 4 | 0 |
+| S1772-31 | 23 | 0 |
+| S1772-32 | 53 | 0 |
+| S1772-33 | 55 | 0 |
+| S1772-34 | 30 | 0 |
+| S1772-42 | 14 | 0 |
+| S1772-43 | 36 | 0 |
+
+## Estado de la puerta
+
+| Criterio | Cumplido |
+|---|---|
+| Red conectada (todos los tramos medibles, en los 16 sectores) | sí |
+| Calles libres (núcleo de calzada de los tramos identificados) | sí |
+| Calles históricas libres (San Jacinto–Traposos y otras) | sí |
+| Plazas sin casas | sí |
+| Sin calles dentro de unidades continuas aprobadas | sí |
+
+`fase_3_cerrable: true`, sobre la ciudad regenerada con el código de esta rama (SHA-256 en el JSON; datos sin publicar).
+
+**Lo que queda fuera y por qué.**
+- **Sectores límite.** Los 28 tramos de S1772-24 y S1772-44 no se miden, por la decisión de la fase 1.
+- **Unidades pendientes.** En las 195 pendientes, la puerta mide que las calles pasen (red conectada), pero no el contorno ni la ocupación de cada una. Siguen saliendo de caras de OSM y de la máscara de color, y donde un abanico pisaba una calle quedan pedazos de casas a los lados.
+- **Excepciones sin medir.** No se mide que no se inserten filas intermedias en U0185/U0186, porque son pendientes y no tienen geometría aprobada. La calle intermedia de U0187/U0188 sí entra en la red conectada.
+- **Fase 4.** La ocupación periférica (I1772-007) y los hitos (I004/I009) son de la fase 4.
+
 ## Reproducir
 
 ```
