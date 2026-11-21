@@ -1,7 +1,7 @@
 {
  "fecha": "2026-11-20",
- "metodo": "Lectura de los recortes lado a lado generados por tools/geo/controles_damero.py (original ampliado ×3 con el cruce o la unidad en rojo; mosaico de 1936 con la esquina por identidad en verde, el TPS en rojo, la unidad por calce de control en azul y las cuadras del sistema en naranja). Juicios: coincide = identidad o clase confirmada por el entorno; compatible = sin contradicción pero no demostrada por el recorte; contradice = el recorte desmiente la identidad o la clase.",
- "prueba_de_identidad_por_hitos": "Plaza de Candelaria: el TPS deja la plaza de 1772 a 302,9 m de la de 1936; el calce de control, a 34,2 m. La Pastora: TPS 85,6 m, control 137,0 m (norte con pocos cruces indexados). Plaza Mayor: 6,3 y 6,2 m.",
+ "metodo": "Lectura de los recortes lado a lado generados por tools/geo/controles_damero.py (original ampliado ×3 con el cruce o la unidad en rojo; mosaico de 1936 con la esquina por identidad en verde, el TPS en rojo, la unidad por calce de control en azul y las cuadras del sistema en naranja). Juicios: coincide = identidad o clase confirmada por el entorno; compatible = sin contradicción pero no demostrada por el recorte; contradice = el recorte desmiente la identidad o la clase. Cada juicio de correspondencia lleva la clase que juzgó y el entrada_sha256 de la clasificación: si la unidad se reclasifica o cambia la ciudad, deja de contar (tools/geo/cierre_fase1.py).",
+ "prueba_de_identidad_por_hitos": "Plaza de Candelaria: el TPS deja la plaza de 1772 a 302,9 m de la de 1936; el calce de control, a 34,0 m. La Pastora: TPS 85,6 m, control 137,6 m (norte con pocos cruces indexados). Plaza Mayor: 6,3 y 6,2 m.",
  "recortes": [
   {
    "grupo": "controles",
@@ -32,31 +32,37 @@
    "archivo": "uno_a_uno-U1772-0064.png",
    "sha256": "5811c92c844e035a47fb01104e6dd0907d34879ab25771434ebd92ee7c2cb6a7",
    "objeto": "U1772-0064",
+   "clase": "uno_a_uno",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
    "juicio": "coincide",
    "nota": "La unidad proyectada con el calce de control cae sobre la cuadra del sistema (La Glorieta–El Hospital) con desfase menor que el ancho de calle."
   },
   {
    "grupo": "correspondencias",
    "archivo": "ausente-U1772-0184.png",
-   "sha256": "61ec1f7fa1bb38162dd2606e850b2b7044943d60a37e1e5e18d0360e54537604",
+   "sha256": "369531036ac58afd7ba817bc68ed312db7af591aae5dcae95fdbe968a8590799",
    "objeto": "U1772-0184",
+   "clase": "ausente",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
    "juicio": "coincide",
-   "nota": "El original tiene dos cuerpos rojos en la manzana; bajo el calce de control (Mirador–San Felipe–Esmeralda) el sistema no tiene ninguna cuadra en 1772."
+   "nota": "El original tiene dos cuerpos rojos en la manzana; bajo el calce de control (Mirador–San Felipe–Esmeralda) el sistema no tiene ninguna cuadra en 1772. Releído tras regenerar el calce de control sin propagar índices desde esquinas ambiguas: mismo entorno, sin cuadras del sistema."
   },
   {
    "grupo": "correspondencias",
    "archivo": "desplazada_o_parcial-U1772-0055.png",
    "sha256": "fa920b722fd521e8443fd40062859c6bcb0595ee00549afc46e21f3753f4305b",
    "objeto": "U1772-0055",
-   "juicio": "coincide_con_clase_conservadora",
-   "nota": "La unidad coincide con la cuadra del sistema (Laguno–Correos), pero la unión construida del sistema rebasa la calle y la fracción de cuadra queda bajo el umbral: la clase subestima, no inventa."
+   "clase": "desplazada_o_parcial",
+   "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+   "juicio": "contradice",
+   "nota": "La identidad se confirma: la unidad cae sobre la cuadra del sistema (Laguno–Correos). La clase no: la unión construida del sistema rebasa la calle, la fracción de cuadra queda bajo el umbral y sale desplazada_o_parcial cuando la correspondencia es uno a uno. La clase subestima, no inventa; se corrige en T33j.2a."
   }
  ],
  "resumen": {
   "revisados": 6,
-  "coincide": 3,
+  "coincide": 2,
   "compatible": 3,
-  "contradice": 0
+  "contradice": 1
  },
- "limite": "Seis recortes de 49 generados: una muestra, no una verificación completa; los 167 cruces y las 292 clases siguen siendo medidas automáticas con identidad por conteo de calles."
+ "limite": "Seis recortes de 49 generados: una muestra, no una verificación completa; los 168 cruces y las 292 clases siguen siendo medidas automáticas con identidad por conteo de calles."
 }

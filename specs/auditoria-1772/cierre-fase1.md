@@ -6,13 +6,18 @@ Fecha: 20-11-2026. T33j.1q. Generado por `tools/geo/cierre_fase1.py` a partir de
 
 | Criterio | Resultado | Cumplido |
 |---|---|---|
-| 100 % del área recorrida | 16 sectores con barrido general y lectura individual de sus unidades; S1772-41 es rural y fluvial en el original y queda con 0 unidades a propósito | sí |
+| 100 % del área recorrida | 16 sectores con barrido general registrado y todas sus unidades declaradas censadas y leídas; S1772-41 es rural y fluvial en el original y queda con 0 unidades a propósito | sí |
 | Cada unidad clasificada y leída | 292 registros, cada uno con ocupación del original y exactamente una lectura individual (bordes 147, sin cara única 78, restantes 67) | sí |
 | Hallazgos confirmados con subtarea | 12 de 12 incidencias enlazadas a subtareas de fases 2–8 (campo `subtareas` en `incidencias.json`) | sí |
-| Correspondencia original ⇄ sistema por unidad | 292 clasificadas bajo el [calce de control](controles-damero.md): ausente 168, desplazada_o_parcial 6, uno_a_uno 42, vacio_coincide 76; muestra visual de 6 recortes sin contradicciones | sí, con límites |
-| Controles de calce independientes por sector | 167 cruces por identidad de damero en 14 sectores más 3 hitos (Plaza Mayor, Candelaria, La Pastora); el TPS se desplaza por cuadras fuera del núcleo | sí, con límites |
+| Correspondencia original ⇄ sistema por unidad | 292 clasificadas bajo el [calce de control](controles-damero.md): ausente 168, desplazada_o_parcial 6, uno_a_uno 42 (provisionales), vacio_coincide 76; 3 juicios de correspondencia vigentes, y U1772-0055 contradice su clase (un uno a uno clasificado como desplazada_o_parcial) | **no** → T33j.2a |
+| Controles de calce independientes por sector | 168 cruces por identidad de damero en 14 sectores más 3 hitos (Plaza Mayor, Candelaria, La Pastora); el TPS se desplaza por cuadras fuera del núcleo | sí, con límites |
 
-**Decisión:** la fase 1 queda **cerrada**: `fase_1_cerrable: true` en el JSON. Los dos últimos criterios se cumplen como lo pide 1B/1D (clasificar cada unidad y controlar cada sector), no como aprobación de geometría: las clases y los controles localizan los defectos y miden el calce; corregirlos es la fase 2. Nada autoriza a generar casas desde cajas.
+**Decisión:** la fase 1 sigue **abierta**: `fase_1_cerrable: false` en el JSON (4 de 5 criterios). Faltan:
+
+1. **Correspondencia por unidad.** El recorte de U1772-0055 contradice su clase; las 42 uno a uno son provisionales hasta confirmar cada pareja por identidad. Se resuelve con T33j.2a y una nueva muestra visual atada a la clasificación vigente.
+2. **Recorrido a nivel de calle de los candidatos de acceso (1C).** Catedral F1772-0003-3 sigue «pendiente de recorrido visual», y el choque de Seminario F1772-0010-3 no está resuelto ([accesos-primer-lote.md](accesos-primer-lote.md)): el sondeo encontró los candidatos, pero los detectores no reemplazan el recorrido.
+
+Los controles por sector se cumplen como lo pide 1B/1D (controlar cada sector), no como aprobación de geometría: localizan los defectos y miden el calce; corregirlos es la fase 2. Nada autoriza a generar casas desde cajas.
 
 ## Totales censados
 
@@ -56,11 +61,11 @@ Los GCP del ajuste miden la consistencia interna del TPS (residuo dejando uno fu
 | S1772-23 | 38 | 11.947 | 6 | 33 | 40.42 |
 | S1772-24 | 7 | 15.233 | 0 | 5 | 137.61 |
 | S1772-31 | 9 | 14.215 | 0 | 7 | 259.9 |
-| S1772-32 | 38 | 12.359 | 7 | 24 | 95.33 |
+| S1772-32 | 38 | 12.359 | 7 | 25 | 95.54 |
 | S1772-33 | 36 | 11.446 | 5 | 23 | 78.92 |
 | S1772-34 | 8 | 11.731 | 0 | 11 | 178.88 |
 | S1772-41 | 2 | 11.785 | 0 | 0 | — |
-| S1772-42 | 12 | 14.926 | 0 | 6 | 250.27 |
+| S1772-42 | 12 | 14.926 | 0 | 6 | 275.76 |
 | S1772-43 | 15 | 13.801 | 0 | 11 | 236.43 |
 | S1772-44 | 3 | 9.156 | 0 | 1 | 256.38 |
 
@@ -95,4 +100,4 @@ Estados `incierto` y `candidato` no son defectos confirmados y no exigen subtare
 
 ## Comprobaciones
 
-`tools/geo/tests/test_cierre_fase1.py` (9), `test_damero.py` (7) y `test_controles_damero.py` (7); la suite de `tools/geo` completa y `git diff --check` limpios. Sin cambios en `src/` ni en el generador.
+`tools/geo/tests/test_cierre_fase1.py` (17), `test_damero.py` (9) y `test_controles_damero.py` (10); la suite de `tools/geo` completa y `git diff --check` limpios. Sin cambios en `src/` ni en el generador.

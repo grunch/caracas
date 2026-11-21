@@ -1,14 +1,14 @@
 # Controles de calce por identidad de damero y correspondencias por unidad
 
-Fecha: 20-11-2026. Cierra los dos criterios de 1D que el [cierre de la fase 1](cierre-fase1.md) tenía pendientes. Generado por `tools/geo/controles_damero.py` (lógica pura en `tools/geo/damero.py`): [controles-calce-sectores.json](controles-calce-sectores.json), [correspondencias-unidades.json](correspondencias-unidades.json) y [verificacion-damero.json](verificacion-damero.json). **Mide y clasifica; no corrige el calce ni el generador, y no aprueba geometría para construir.**
+Fecha: 20-11-2026. Atiende los dos criterios de 1D que el [cierre de la fase 1](cierre-fase1.md) tenía pendientes: los controles por sector se cumplen; la correspondencia por unidad queda pendiente porque un recorte contradice su clase. Generado por `tools/geo/controles_damero.py` (lógica pura en `tools/geo/damero.py`): [controles-calce-sectores.json](controles-calce-sectores.json), [correspondencias-unidades.json](correspondencias-unidades.json) y [verificacion-damero.json](verificacion-damero.json). **Mide y clasifica; no corrige el calce ni el generador, y no aprueba geometría para construir.**
 
 ## Método
 
 El TPS de `tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json` enlaza los dos planos por correlación de calles. Un damero es periódico: la correlación puede engancharse a la calle vecina con residuo interno pequeño. Por eso el control no usa cercanía sino **identidad**: cuántas calles separan cada cruce de la esquina de Las Monjas (suroeste de la Plaza Mayor) en cada plano, como hizo #77 a mano en el núcleo.
 
 - 1772: los 70 ejes rectos de [trazado-calles-original.json](trazado-calles-original.json) forman una retícula exacta de 66,3 px (una cuadra con su calle) alineada con los ejes del escaneo; 201 de sus 230 intersecciones caen sobre ella y reciben índice (kx al norte, ky al este). Las 29 restantes son calles quebradas o fuera de paso y quedan fuera.
-- 1936: las 329 esquinas de `tools/geo/esquinas/1936-esquinas.json` forman un damero girado 9.45° con paso irregular (105–115 m). Se indexan recorriendo la retícula desde Las Monjas; una esquina con dos propuestas de índice o un índice con dos esquinas se excluye: 244 de 329 quedan indexadas.
-- Control: para cada cruce de 1772 con esquina homónima en 1936, el desvío es la distancia entre esa esquina y la proyección TPS del cruce. **167 controles en 14 sectores.** S1772-14 (La Pastora) y S1772-41 (rural) no tienen cruces rectos; S14 recibe un control por hito.
+- 1936: las 329 esquinas de `tools/geo/esquinas/1936-esquinas.json` forman un damero girado 9.45° con paso irregular (105–115 m). Se indexan recorriendo la retícula desde Las Monjas; una esquina con dos propuestas de índice o un índice con dos esquinas se excluye, y una esquina ambigua tampoco propaga su índice (el recorrido se repite sin ella hasta que no aparecen ambigüedades nuevas): 240 de 329 quedan indexadas.
+- Control: para cada cruce de 1772 con esquina homónima en 1936, el desvío es la distancia entre esa esquina y la proyección TPS del cruce. **168 controles en 14 sectores.** S1772-14 (La Pastora) y S1772-41 (rural) no tienen cruces rectos; S14 recibe un control por hito.
 
 Validación del método: 22 de los 23 nodos curados de #77 se reproducen con la misma esquina de 1936 (distancia entre la esquina por identidad y la curada: 2.58–9.85 m, la media calle entre eje y esquina); los desvíos coinciden con los de #77 dentro de esa tolerancia.
 
@@ -25,11 +25,11 @@ Validación del método: 22 de los 23 nodos curados de #77 se reproducen con la 
 | S1772-23 | 33 | 40.42 | 156.326 | 6 |
 | S1772-24 | 5 | 137.61 | 166.669 | 0 |
 | S1772-31 | 7 | 259.9 | 273.157 | 0 |
-| S1772-32 | 24 | 95.33 | 222.44 | 7 |
+| S1772-32 | 25 | 95.54 | 222.44 | 7 |
 | S1772-33 | 23 | 78.92 | 193.827 | 5 |
 | S1772-34 | 11 | 178.88 | 223.247 | 0 |
 | S1772-41 | 0 | — | — | 0 |
-| S1772-42 | 6 | 250.27 | 308.576 | 0 |
+| S1772-42 | 6 | 275.76 | 308.576 | 0 |
 | S1772-43 | 11 | 236.43 | 300.001 | 0 |
 | S1772-44 | 1 | 256.38 | 256.376 | 0 |
 
@@ -37,11 +37,11 @@ El desvío crece con la distancia a la plaza en saltos de ~110 m, el paso del da
 
 | Hito | Sector | Desvío TPS (m) | Desvío calce de control (m) |
 |---|---|---|---|
-| Plaza Bolívar | S1772-23 | 6.31 | 6.18 |
-| Plaza de Candelaria | S1772-43 | 302.89 | 34.22 |
-| Iglesia La Pastora | S1772-14 | 85.59 | 137.01 |
+| Plaza Bolívar | S1772-23 | 6.31 | 6.17 |
+| Plaza de Candelaria | S1772-43 | 302.89 | 34.04 |
+| Iglesia La Pastora | S1772-14 | 85.59 | 137.64 |
 
-La Plaza de Candelaria de 1772 (U1772-0214) cae bajo el TPS a 302.89 m de la Plaza de Candelaria de 1936: casi tres cuadras. Con el calce de control (un TPS ajustado solo con los 167 cruces por identidad, residuo LOO rms 19.68 m, p90 28.69 m, máx 87.53 m) queda a 34.22 m. La Pastora, en el norte con pocos cruces indexados, queda a 85.59 m bajo el TPS y a 137.01 m bajo el calce de control: allí ninguno de los dos está validado.
+La Plaza de Candelaria de 1772 (U1772-0214) cae bajo el TPS a 302.89 m de la Plaza de Candelaria de 1936: casi tres cuadras. Con el calce de control (un TPS ajustado solo con los 168 cruces por identidad, residuo LOO rms 18.22 m, p90 27.73 m, máx 68.1 m) queda a 34.04 m. La Pastora, en el norte con pocos cruces indexados, queda a 85.59 m bajo el TPS y a 137.64 m bajo el calce de control: allí ninguno de los dos está validado.
 
 **Consecuencia para I1772-010:** la discrepancia no es un detalle de 25 m del núcleo; la máscara `edificado-1772.png` y las cámaras de la auditoría usan un calce desplazado por cuadras en toda la periferia. Es la causa más probable de buena parte de las 124 unidades edificadas sin candidato (I007/I009) y la primera tarea de T33j.2a: rehacer el calce con anclas por identidad (estos cruces más hitos), no con más correlación. Este documento no cambia el GCP: eso es la fase 2.
 
@@ -68,11 +68,11 @@ Cada unidad censada (caja en el original) se proyecta con el calce de control y 
 | S1772-43 | 12 | 0 | 0 | 6 |
 | S1772-44 | 0 | 0 | 0 | 2 |
 
-- **42 uno a uno**, todas en el núcleo (S22/23/32/33): la unidad del original y una cuadra del sistema coinciden.
+- **42 uno a uno**, todas en el núcleo (S22/23/32/33): la unidad del original y una cuadra del sistema coinciden por solape geométrico bajo el calce de control. Son **provisionales**: solo U1772-0064 tiene juicio visual, y cada pareja se confirma por identidad antes de conservarla (T33j.2a).
 - **168 ausentes**: unidades edificadas en el original sin ninguna cuadra del sistema en 1772. El sistema levanta 45 cuadras en 1772; el original tiene 216 unidades edificadas.
-- **6 desplazadas o parciales**: hay cuadra, pero su unión construida rebasa la caja (la clase es conservadora; ver U1772-0055 abajo).
+- **6 desplazadas o parciales**: hay cuadra, pero su unión construida rebasa la caja (la clase puede subestimar: el recorte de U1772-0055 la contradice, ver abajo).
 - **76 vacíos que coinciden** y **0 adicionales**: el sistema no construye donde el original tiene terreno libre o plaza, y ninguna de sus 45 cuadras queda sin unidad.
-- 72 unidades están fuera del casco de los controles (periferia y norte): su proyección es extrapolada y su clase, más incierta. Ninguna se aprueba para generar: la clase localiza el problema, no la corrección.
+- 73 unidades están fuera del casco de los controles (periferia y norte): su proyección es extrapolada y su clase, más incierta. Ninguna se aprueba para generar: la clase localiza el problema, no la corrección.
 
 ## Verificación visual
 
@@ -85,9 +85,11 @@ Lectura de los recortes lado a lado generados por tools/geo/controles_damero.py 
 | S1772-11-X1772-0002.png | X1772-0002 | compatible |
 | uno_a_uno-U1772-0064.png | U1772-0064 | coincide |
 | ausente-U1772-0184.png | U1772-0184 | coincide |
-| desplazada_o_parcial-U1772-0055.png | U1772-0055 | coincide_con_clase_conservadora |
+| desplazada_o_parcial-U1772-0055.png | U1772-0055 | contradice |
 
-Seis recortes de 49 generados: una muestra, no una verificación completa; los 167 cruces y las 292 clases siguen siendo medidas automáticas con identidad por conteo de calles. Los 49 recortes (25 de controles, 24 de correspondencias) viven fuera de git con su SHA-256 en los JSON.
+U1772-0055 contradice su clase: la unidad cae sobre la cuadra Laguno–Correos, pero la unión construida del sistema rebasa la calle y la fracción queda bajo el umbral; es un uno a uno clasificado como desplazada_o_parcial. Por eso el criterio de correspondencia queda pendiente (T33j.2a). Cada juicio de correspondencia lleva la clase juzgada y el `entrada_sha256` de la clasificación; `cierre_fase1.py` descarta los que ya no coinciden con la clasificación vigente.
+
+Seis recortes de 49 generados: una muestra, no una verificación completa; los 168 cruces y las 292 clases siguen siendo medidas automáticas con identidad por conteo de calles. Los 49 recortes (25 de controles, 24 de correspondencias) viven fuera de git con su SHA-256 en los JSON; `archivo_local` es relativo a la carpeta `recortes.directorio` (`.cache/damero-1772`), y `recortes.regenerar` da el comando que los vuelve a producir.
 
 ## Límites
 

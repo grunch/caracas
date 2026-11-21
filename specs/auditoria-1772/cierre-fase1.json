@@ -3,14 +3,15 @@
  "puerta_de_salida": {
   "area_recorrida": {
    "cumplido": true,
-   "sectores": 16
+   "sectores": 16,
+   "sectores_pendientes": []
   },
   "unidades_clasificadas_y_leidas": {
    "cumplido": true,
    "unidades": 292
   },
   "correspondencia_clasificada_por_unidad": {
-   "cumplido": true,
+   "cumplido": false,
    "clasificadas": 292,
    "clases": {
     "ausente": 168,
@@ -18,8 +19,10 @@
     "uno_a_uno": 42,
     "vacio_coincide": 76
    },
-   "muestra_visual": 6,
-   "contradicciones": 0
+   "muestra_visual": 3,
+   "muestra_desfasada": 0,
+   "contradicciones": 1,
+   "trasladado_a": "T33j.2a"
   },
   "controles_de_calce_por_sector": {
    "cumplido": true,
@@ -32,7 +35,7 @@
    "cumplido": true,
    "sin_subtarea": []
   },
-  "fase_1_cerrable": true
+  "fase_1_cerrable": false
  },
  "totales": {
   "unidades": 292,
@@ -408,8 +411,8 @@
    "loo_max_m": 24.78,
    "controles_independientes": 7,
    "desvio_independiente_max_m": 93.23,
-   "controles_damero": 24,
-   "desvio_damero_mediana_m": 95.33
+   "controles_damero": 25,
+   "desvio_damero_mediana_m": 95.54
   },
   {
    "sector": "S1772-33",
@@ -453,7 +456,7 @@
    "controles_independientes": 0,
    "desvio_independiente_max_m": null,
    "controles_damero": 6,
-   "desvio_damero_mediana_m": 250.27
+   "desvio_damero_mediana_m": 275.76
   },
   {
    "sector": "S1772-43",
@@ -964,175 +967,175 @@
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-11-X1772-0002.png",
+   "archivo": "controles/S1772-11-X1772-0002.png",
    "sha256": "65263d58d6fe52a750ad7e1526e68cf678338b501658bbcec6df78e583923042",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-12-X1772-0011.png",
+   "archivo": "controles/S1772-12-X1772-0011.png",
    "sha256": "2d416076b777e1976651248e5bfe0c9df62660ca569c393c604875a5813dbf83",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-13-X1772-0007.png",
+   "archivo": "controles/S1772-13-X1772-0007.png",
    "sha256": "a6ff36d0a5f7dd44d2fbf86043e6d540f83c848a8aa0a01c9995b6eece568321",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-13-X1772-0017.png",
+   "archivo": "controles/S1772-13-X1772-0017.png",
    "sha256": "c91396ff2889030dc85ce48d634ef04b5ef9bc018b149504e63ac28f2213a7c5",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-21-X1772-0019.png",
+   "archivo": "controles/S1772-21-X1772-0019.png",
    "sha256": "54152e60eb6845ce32387c3204b9ff5704b314ea27db102b534be615dbaf60e5",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-21-X1772-0182.png",
+   "archivo": "controles/S1772-21-X1772-0182.png",
    "sha256": "a06a95e428fd52cb725c303b7e9fa8049a453d542c927538b16ca9b88bbcffb0",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-22-X1772-0020.png",
+   "archivo": "controles/S1772-22-X1772-0020.png",
    "sha256": "184ede976a036f1b503a3c73c0a08f06833e423f7d16a5a1222a39312cefeb35",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-22-X1772-0073.png",
+   "archivo": "controles/S1772-22-X1772-0073.png",
    "sha256": "8d9cba912fcd4a6cf7401b79fd316e1de029078d1ba56056af328ccaf14b0cb3",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-23-X1772-0021.png",
+   "archivo": "controles/S1772-23-X1772-0021.png",
    "sha256": "97e2e70c7fee429cecef1334809bf59b6b7a53683ac7b694e2977dfc35fe9bea",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-23-X1772-0195.png",
+   "archivo": "controles/S1772-23-X1772-0195.png",
    "sha256": "b50af2b134424c0cacbef6c598cf34283bb45edd92e69649605b9f5a1c8c8f95",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-24-X1772-0033.png",
+   "archivo": "controles/S1772-24-X1772-0033.png",
    "sha256": "1136bf968b073e402378a24c7a5e59fa0ecf36b58ceeb34b858d034239a110b5",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-24-X1772-0082.png",
+   "archivo": "controles/S1772-24-X1772-0082.png",
    "sha256": "f42068170b59bdb2702372a74c6912f58864c9fd4cccc9821743b0bf0e8d076e",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-31-X1772-0119.png",
+   "archivo": "controles/S1772-31-X1772-0119.png",
    "sha256": "62d41cdb339b1986ad46f554d8dfa791da1d310f21c16b1777b1a245621324d9",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-31-X1772-0102.png",
+   "archivo": "controles/S1772-31-X1772-0102.png",
    "sha256": "c16995eac99f5f6968d410678eed2cc39ddc37688473076cbdb87f197d17ba25",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-32-X1772-0088.png",
+   "archivo": "controles/S1772-32-X1772-0088.png",
    "sha256": "120ffbf8596bcf9e71c0330cdc7c7d30f906f5a76f434746e0929068c5adf8b4",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-32-X1772-0090.png",
+   "archivo": "controles/S1772-32-X1772-0090.png",
    "sha256": "85d13d66a305209017c80551bf3dc80c278298dd260fd76e080f8e803cfdeac2",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-33-X1772-0154.png",
+   "archivo": "controles/S1772-33-X1772-0154.png",
    "sha256": "2b18bf09901376dac0717003265b76f30fb5241fae0ced89a7897a433706e0d0",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-33-X1772-0144.png",
+   "archivo": "controles/S1772-33-X1772-0144.png",
    "sha256": "d8939964ed7010a598053d697f74fbf98ab56d8a154c4460e240e47785ea7d09",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-34-X1772-0151.png",
+   "archivo": "controles/S1772-34-X1772-0151.png",
    "sha256": "952559103e7508e8d2171c82ec4f258f6729e4ad59ff040b09adfceacd033149",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-34-X1772-0156.png",
+   "archivo": "controles/S1772-34-X1772-0156.png",
    "sha256": "5f7f9863fa2ecfc8263fe5542e22020d73281cfe714a545eb4c24205e29bf693",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-42-X1772-0177.png",
+   "archivo": "controles/S1772-42-X1772-0177.png",
    "sha256": "9929e423bd80b5a250cb5de0d26810ed4fb08a5d71b92962c62f460a2eada2d2",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-42-X1772-0169.png",
-   "sha256": "84c1e5d65044bffe11250e4500107a5384d4bb62530ba692475c35debe24c7d7",
+   "archivo": "controles/S1772-42-X1772-0168.png",
+   "sha256": "b5926102804b0cefaa3a2d32e71c384a3730e757fa73d293c312de4327867745",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-43-X1772-0178.png",
+   "archivo": "controles/S1772-43-X1772-0178.png",
    "sha256": "d9e1f6f65957335bf9943f4c05830bd148249d407500bc9e80028e345c65587c",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-43-X1772-0163.png",
+   "archivo": "controles/S1772-43-X1772-0163.png",
    "sha256": "39817be5b5fb2e7e92d4114362dd7a08cfde7112a76b1fe2e850e4940e61024b",
    "documentos": [
     "controles-calce-sectores.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-44-X1772-0165.png",
+   "archivo": "controles/S1772-44-X1772-0165.png",
    "sha256": "b0e5c095b24f0a479fe41f845c7ce8a22bc039b35c98aa1dd996ebddd124125e",
    "documentos": [
     "controles-calce-sectores.json"
@@ -1168,7 +1171,7 @@
   },
   {
    "archivo": "ausente-U1772-0184.png",
-   "sha256": "61ec1f7fa1bb38162dd2606e850b2b7044943d60a37e1e5e18d0360e54537604",
+   "sha256": "369531036ac58afd7ba817bc68ed312db7af591aae5dcae95fdbe968a8590799",
    "documentos": [
     "correspondencias-unidades.json"
    ]
@@ -1181,168 +1184,168 @@
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/ausente-U1772-0001.png",
-   "sha256": "ce4cbde9397d90f5b82fa23a7e4d49a3be9e9038dedbfa09173315807dba3366",
+   "archivo": "correspondencias/ausente-U1772-0001.png",
+   "sha256": "aec81470f9acc8a5408c965921d349933869e5ea6cdcb6dd9a336c051775b31d",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/ausente-U1772-0035.png",
-   "sha256": "10ff4bf7b2653a7c9425d8121f553249f2b7a941b249bc53e951e7633479dd93",
+   "archivo": "correspondencias/ausente-U1772-0035.png",
+   "sha256": "7c34ffea243f9d3273541b024b384de4f04f20c1d231f228363132a5d56a37e0",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/ausente-U1772-0090.png",
-   "sha256": "86ef6312ee8521cec04f0e465cd555d764f8951e6ce2bbbeb78fd31bb89e7a1a",
+   "archivo": "correspondencias/ausente-U1772-0090.png",
+   "sha256": "43eb17e3a087b69ae1c02147fb5c887578321044cf164911108e3181101af33f",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/ausente-U1772-0149.png",
-   "sha256": "90d7b3b9bbd4faffe268d34ee22a8b2a8b86fc3b81b192236e58dd6a8af4bf14",
+   "archivo": "correspondencias/ausente-U1772-0149.png",
+   "sha256": "bc5d7eca227012801a09a9b14ea073b64c0616dec89f36213d98d23af323f9ba",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/ausente-U1772-0184.png",
-   "sha256": "61ec1f7fa1bb38162dd2606e850b2b7044943d60a37e1e5e18d0360e54537604",
+   "archivo": "correspondencias/ausente-U1772-0184.png",
+   "sha256": "369531036ac58afd7ba817bc68ed312db7af591aae5dcae95fdbe968a8590799",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/ausente-U1772-0254.png",
+   "archivo": "correspondencias/ausente-U1772-0254.png",
    "sha256": "a029a6fd590e41fa5b142d21a6e6578489b8622b803a8370fa7d3214b0acef9f",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/vacio_coincide-U1772-0006.png",
-   "sha256": "2a35007ce5790f2723d52ed625b185dc38ab649f42c6fed9d17e7c14bcaa8dba",
+   "archivo": "correspondencias/vacio_coincide-U1772-0006.png",
+   "sha256": "1f1eac999deb3e0f8d7abb2d1b194538516eb1acd36620d49b4674b729be23e5",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/vacio_coincide-U1772-0086.png",
-   "sha256": "0fd5372629762d9fe5949129734063ef3d90e9ec9c83cd5ed76702173a93c896",
+   "archivo": "correspondencias/vacio_coincide-U1772-0086.png",
+   "sha256": "5fbc7564cc1d6572d32670affb894e639fa34e100fccccd9f2fc44e32d91b815",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/vacio_coincide-U1772-0161.png",
-   "sha256": "1d06d8a5abb68b30bd7bf3de49818a8a5d49f060b7e7224ffcb73abaf38f92f6",
+   "archivo": "correspondencias/vacio_coincide-U1772-0161.png",
+   "sha256": "829f73b517d3af54e1d3cc2159cf3827e7702f2314f20893f744d7246dd2011c",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/vacio_coincide-U1772-0219.png",
-   "sha256": "c063513217ff30427e622ae2503ac4a5a4a299b76a261b56910d124b1777038a",
+   "archivo": "correspondencias/vacio_coincide-U1772-0219.png",
+   "sha256": "9f4fa6e3ad5ee76f0be75a8b4e03542d48f634c4675adb417b0aef2e7f757d76",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/vacio_coincide-U1772-0233.png",
+   "archivo": "correspondencias/vacio_coincide-U1772-0233.png",
    "sha256": "95ef593c5589de8a97afb57b0946833dee05d9ab7dae327b273f6d37701c76f9",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/vacio_coincide-U1772-0245.png",
-   "sha256": "29efe8c244eadbbb79a0aab68bde0b758b39b6bf84b6e23b8dc33ba8c3c9b3d3",
+   "archivo": "correspondencias/vacio_coincide-U1772-0245.png",
+   "sha256": "46f3caac5bc7e7975561502a49dd148a40be2fcd9b7497343ade2e9d681fddac",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/uno_a_uno-U1772-0050.png",
-   "sha256": "2626bd9d98f4f8292a9091e84f78830b9edbbbbac869c993403156d6187fc900",
+   "archivo": "correspondencias/uno_a_uno-U1772-0050.png",
+   "sha256": "a00d1e23134722d688979fbef1720da681166dcae316513995b7ebe4f5d479b3",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/uno_a_uno-U1772-0064.png",
+   "archivo": "correspondencias/uno_a_uno-U1772-0064.png",
    "sha256": "5811c92c844e035a47fb01104e6dd0907d34879ab25771434ebd92ee7c2cb6a7",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/uno_a_uno-U1772-0079.png",
+   "archivo": "correspondencias/uno_a_uno-U1772-0079.png",
    "sha256": "6b4cab146c0e31c0416d9ce82b8e00045b872818e1e900720c1bd5ae01ee9654",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/uno_a_uno-U1772-0094.png",
-   "sha256": "140681d55bdd8191cf1b7f719cf844a380c8bceef6c5eccba0b6e3827c1c372b",
+   "archivo": "correspondencias/uno_a_uno-U1772-0094.png",
+   "sha256": "ada4afef2aad8b77fb42df72b351fb5a8e42a0a0e37688730e9b7302f51be785",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/uno_a_uno-U1772-0109.png",
+   "archivo": "correspondencias/uno_a_uno-U1772-0109.png",
    "sha256": "642a95e4f849aff3ad86e7a9f78034cfc2b1dbadb78a2099ee7947ab52aa521a",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/uno_a_uno-U1772-0138.png",
-   "sha256": "1ecdc3ebc749d0af53fe31b9786e8af31e9da1d7b90f26447542c97f996007d7",
+   "archivo": "correspondencias/uno_a_uno-U1772-0138.png",
+   "sha256": "67235f42a4b9e0c3b997eac704d2c31ab3633dc678532971795d5fa6e2a30c74",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/desplazada_o_parcial-U1772-0055.png",
+   "archivo": "correspondencias/desplazada_o_parcial-U1772-0055.png",
    "sha256": "fa920b722fd521e8443fd40062859c6bcb0595ee00549afc46e21f3753f4305b",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/desplazada_o_parcial-U1772-0082.png",
+   "archivo": "correspondencias/desplazada_o_parcial-U1772-0082.png",
    "sha256": "8f83fa5ecec3e79aab676315dba812eeb597df5032b2b68e240e6bf65923818e",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/desplazada_o_parcial-U1772-0096.png",
+   "archivo": "correspondencias/desplazada_o_parcial-U1772-0096.png",
    "sha256": "f53a3bea5fa48315d0b27e21ef8269160b12a83791d09193af371b93c178aad7",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/desplazada_o_parcial-U1772-0123.png",
-   "sha256": "511f68b6b3b4f83a1b0e49b18dbceacf94a6fb1723d366708432c3e83fccb3dd",
+   "archivo": "correspondencias/desplazada_o_parcial-U1772-0123.png",
+   "sha256": "e3f449d01c324923ff1239529eae3ec97cd3bb7897f8ff4a85cefdd6ede2782b",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/desplazada_o_parcial-U1772-0140.png",
-   "sha256": "a2d5fcd2458607d5939c164efe534366bf03b102c49fb5a84cff17d1cba2c502",
+   "archivo": "correspondencias/desplazada_o_parcial-U1772-0140.png",
+   "sha256": "b1fb309a6f4247f050cc6124e44781790e4b5fb5f84b56476eedd7652c041788",
    "documentos": [
     "correspondencias-unidades.json"
    ]
   },
   {
-   "archivo": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/correspondencias/desplazada_o_parcial-U1772-0199.png",
+   "archivo": "correspondencias/desplazada_o_parcial-U1772-0199.png",
    "sha256": "746a47646f750ab2e5801f73ea7ff9a61bdd0abe47b3ce81acd450d9e0010330",
    "documentos": [
     "correspondencias-unidades.json"

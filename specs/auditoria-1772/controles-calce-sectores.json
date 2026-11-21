@@ -10,7 +10,7 @@
   "angulo_damero_1936_grados": 9.45,
   "origen_1936": "Las Monjas",
   "metro": 0.5,
-  "esquinas_indexadas": 244,
+  "esquinas_indexadas": 240,
   "esquinas_totales": 329,
   "cruces_1772": 201
  },
@@ -80,9 +80,9 @@
   },
   {
    "sector": "S1772-32",
-   "controles": 24,
-   "rms_m": 122.52,
-   "mediana_m": 95.33,
+   "controles": 25,
+   "rms_m": 126.78,
+   "mediana_m": 95.54,
    "max_m": 222.44
   },
   {
@@ -109,8 +109,8 @@
   {
    "sector": "S1772-42",
    "controles": 6,
-   "rms_m": 254.74,
-   "mediana_m": 250.27,
+   "rms_m": 268.06,
+   "mediana_m": 275.76,
    "max_m": 308.576
   },
   {
@@ -3398,6 +3398,33 @@
    "esquina_1936_nombre": "Alcabala Vieja"
   },
   {
+   "id": "X1772-0138",
+   "sector": "S1772-32",
+   "original": [
+    570.0,
+    1125.0
+   ],
+   "indice": [
+    -6,
+    5
+   ],
+   "esquina_1936": 292,
+   "mosaico_identidad": [
+    9754.0,
+    8823.8
+   ],
+   "mosaico_calce": [
+    9674.58,
+    8423.8
+   ],
+   "desvio_m": 203.904,
+   "delta_m": [
+    -39.712,
+    -200.0
+   ],
+   "esquina_1936_nombre": "Los Isleños"
+  },
+  {
    "id": "X1772-0140",
    "sector": "S1772-32",
    "original": [
@@ -4235,31 +4262,31 @@
    "esquina_1936_nombre": "Esmeralda"
   },
   {
-   "id": "X1772-0175",
+   "id": "X1772-0176",
    "sector": "S1772-42",
    "original": [
-    768.0,
+    835.0,
     1389.0
    ],
    "indice": [
-    -3,
+    -2,
     9
    ],
-   "esquina_1936": 241,
+   "esquina_1936": 220,
    "mosaico_identidad": [
-    10966.4,
-    8226.4
+    11195.0,
+    7942.0
    ],
    "mosaico_calce": [
-    10569.71,
-    8009.56
+    10600.89,
+    7805.86
    ],
-   "desvio_m": 226.045,
+   "desvio_m": 304.753,
    "delta_m": [
-    -198.347,
-    -108.419
+    -297.054,
+    -68.07
    ],
-   "esquina_1936_nombre": "Niquitao"
+   "esquina_1936_nombre": "Simón Rodríguez"
   },
   {
    "id": "X1772-0177",
@@ -4818,7 +4845,7 @@
    "nombre_1936": "Plaza Bolívar",
    "fuente": "public/datos/ciudad.json (plaza) y semillas manuales del calce",
    "desvio_tps_m": 6.31,
-   "desvio_control_m": 6.18
+   "desvio_control_m": 6.17
   },
   {
    "id": "H1772-candelaria",
@@ -4835,7 +4862,7 @@
    "nombre_1936": "Plaza de Candelaria",
    "fuente": "src/marcas-datos.js (candelaria, plano DCN 1936); unidad «Plaza de Candelaria y tres cuerpos rojos» del censo",
    "desvio_tps_m": 302.89,
-   "desvio_control_m": 34.22
+   "desvio_control_m": 34.04
   },
   {
    "id": "H1772-la-pastora",
@@ -4852,132 +4879,138 @@
    "nombre_1936": "Iglesia La Pastora",
    "fuente": "src/hitos/datos/iglesias.js (la-pastora, plano DCN 1936); unidad «Templo de La Pastora» del censo",
    "desvio_tps_m": 85.59,
-   "desvio_control_m": 137.01
+   "desvio_control_m": 137.64
   }
  ],
+ "recortes": {
+  "directorio": ".cache/damero-1772",
+  "en_git": false,
+  "regenerar": ".venv/bin/python tools/geo/controles_damero.py --ciudad fuentes/derivados/epocas/ciudad-estilos.json --original fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg --mosaico fuentes/derivados/1936/mosaico.tif --recortes .cache/damero-1772 --muestra 2",
+  "nota": "archivo_local es relativo a directorio; los PNG quedan fuera de git y se comprueban por su sha256"
+ },
  "evidencias": [
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-11-X1772-0002.png",
+   "archivo_local": "controles/S1772-11-X1772-0002.png",
    "sha256": "65263d58d6fe52a750ad7e1526e68cf678338b501658bbcec6df78e583923042",
    "nodo": "X1772-0002"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-12-X1772-0011.png",
+   "archivo_local": "controles/S1772-12-X1772-0011.png",
    "sha256": "2d416076b777e1976651248e5bfe0c9df62660ca569c393c604875a5813dbf83",
    "nodo": "X1772-0011"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-13-X1772-0007.png",
+   "archivo_local": "controles/S1772-13-X1772-0007.png",
    "sha256": "a6ff36d0a5f7dd44d2fbf86043e6d540f83c848a8aa0a01c9995b6eece568321",
    "nodo": "X1772-0007"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-13-X1772-0017.png",
+   "archivo_local": "controles/S1772-13-X1772-0017.png",
    "sha256": "c91396ff2889030dc85ce48d634ef04b5ef9bc018b149504e63ac28f2213a7c5",
    "nodo": "X1772-0017"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-21-X1772-0019.png",
+   "archivo_local": "controles/S1772-21-X1772-0019.png",
    "sha256": "54152e60eb6845ce32387c3204b9ff5704b314ea27db102b534be615dbaf60e5",
    "nodo": "X1772-0019"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-21-X1772-0182.png",
+   "archivo_local": "controles/S1772-21-X1772-0182.png",
    "sha256": "a06a95e428fd52cb725c303b7e9fa8049a453d542c927538b16ca9b88bbcffb0",
    "nodo": "X1772-0182"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-22-X1772-0020.png",
+   "archivo_local": "controles/S1772-22-X1772-0020.png",
    "sha256": "184ede976a036f1b503a3c73c0a08f06833e423f7d16a5a1222a39312cefeb35",
    "nodo": "X1772-0020"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-22-X1772-0073.png",
+   "archivo_local": "controles/S1772-22-X1772-0073.png",
    "sha256": "8d9cba912fcd4a6cf7401b79fd316e1de029078d1ba56056af328ccaf14b0cb3",
    "nodo": "X1772-0073"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-23-X1772-0021.png",
+   "archivo_local": "controles/S1772-23-X1772-0021.png",
    "sha256": "97e2e70c7fee429cecef1334809bf59b6b7a53683ac7b694e2977dfc35fe9bea",
    "nodo": "X1772-0021"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-23-X1772-0195.png",
+   "archivo_local": "controles/S1772-23-X1772-0195.png",
    "sha256": "b50af2b134424c0cacbef6c598cf34283bb45edd92e69649605b9f5a1c8c8f95",
    "nodo": "X1772-0195"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-24-X1772-0033.png",
+   "archivo_local": "controles/S1772-24-X1772-0033.png",
    "sha256": "1136bf968b073e402378a24c7a5e59fa0ecf36b58ceeb34b858d034239a110b5",
    "nodo": "X1772-0033"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-24-X1772-0082.png",
+   "archivo_local": "controles/S1772-24-X1772-0082.png",
    "sha256": "f42068170b59bdb2702372a74c6912f58864c9fd4cccc9821743b0bf0e8d076e",
    "nodo": "X1772-0082"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-31-X1772-0119.png",
+   "archivo_local": "controles/S1772-31-X1772-0119.png",
    "sha256": "62d41cdb339b1986ad46f554d8dfa791da1d310f21c16b1777b1a245621324d9",
    "nodo": "X1772-0119"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-31-X1772-0102.png",
+   "archivo_local": "controles/S1772-31-X1772-0102.png",
    "sha256": "c16995eac99f5f6968d410678eed2cc39ddc37688473076cbdb87f197d17ba25",
    "nodo": "X1772-0102"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-32-X1772-0088.png",
+   "archivo_local": "controles/S1772-32-X1772-0088.png",
    "sha256": "120ffbf8596bcf9e71c0330cdc7c7d30f906f5a76f434746e0929068c5adf8b4",
    "nodo": "X1772-0088"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-32-X1772-0090.png",
+   "archivo_local": "controles/S1772-32-X1772-0090.png",
    "sha256": "85d13d66a305209017c80551bf3dc80c278298dd260fd76e080f8e803cfdeac2",
    "nodo": "X1772-0090"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-33-X1772-0154.png",
+   "archivo_local": "controles/S1772-33-X1772-0154.png",
    "sha256": "2b18bf09901376dac0717003265b76f30fb5241fae0ced89a7897a433706e0d0",
    "nodo": "X1772-0154"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-33-X1772-0144.png",
+   "archivo_local": "controles/S1772-33-X1772-0144.png",
    "sha256": "d8939964ed7010a598053d697f74fbf98ab56d8a154c4460e240e47785ea7d09",
    "nodo": "X1772-0144"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-34-X1772-0151.png",
+   "archivo_local": "controles/S1772-34-X1772-0151.png",
    "sha256": "952559103e7508e8d2171c82ec4f258f6729e4ad59ff040b09adfceacd033149",
    "nodo": "X1772-0151"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-34-X1772-0156.png",
+   "archivo_local": "controles/S1772-34-X1772-0156.png",
    "sha256": "5f7f9863fa2ecfc8263fe5542e22020d73281cfe714a545eb4c24205e29bf693",
    "nodo": "X1772-0156"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-42-X1772-0177.png",
+   "archivo_local": "controles/S1772-42-X1772-0177.png",
    "sha256": "9929e423bd80b5a250cb5de0d26810ed4fb08a5d71b92962c62f460a2eada2d2",
    "nodo": "X1772-0177"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-42-X1772-0169.png",
-   "sha256": "84c1e5d65044bffe11250e4500107a5384d4bb62530ba692475c35debe24c7d7",
-   "nodo": "X1772-0169"
+   "archivo_local": "controles/S1772-42-X1772-0168.png",
+   "sha256": "b5926102804b0cefaa3a2d32e71c384a3730e757fa73d293c312de4327867745",
+   "nodo": "X1772-0168"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-43-X1772-0178.png",
+   "archivo_local": "controles/S1772-43-X1772-0178.png",
    "sha256": "d9e1f6f65957335bf9943f4c05830bd148249d407500bc9e80028e345c65587c",
    "nodo": "X1772-0178"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-43-X1772-0163.png",
+   "archivo_local": "controles/S1772-43-X1772-0163.png",
    "sha256": "39817be5b5fb2e7e92d4114362dd7a08cfde7112a76b1fe2e850e4940e61024b",
    "nodo": "X1772-0163"
   },
   {
-   "archivo_local": "/tmp/claude-1000/-disco-dev-ciudad/4e6c68c1-030b-486b-852b-ca9e265a93de/scratchpad/recortes/controles/S1772-44-X1772-0165.png",
+   "archivo_local": "controles/S1772-44-X1772-0165.png",
    "sha256": "b0e5c095b24f0a479fe41f845c7ce8a22bc039b35c98aa1dd996ebddd124125e",
    "nodo": "X1772-0165"
   }
