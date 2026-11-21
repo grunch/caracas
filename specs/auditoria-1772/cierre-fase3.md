@@ -74,7 +74,7 @@ Antes de abrirlas había 6 tramos bloqueados de 439:
 - abanicos de caras de OSM sobre tramos cortos, en S1772-23;
 - calles quebradas en S1772-11, -12 y -22.
 
-**Después: 0 bloqueados de 439.** Esas casas dejan de vivir en 1772: la ciudad de 1772 baja de 4207 a 4166 casas. Revisé a ojo los dos primeros casos: la calle queda libre y las casas de los lados no se tocaron.
+**Después: 0 bloqueados de 439.** Esas casas dejan de vivir en 1772: la ciudad de 1772 baja de 4217 a 4176 casas. Revisé a ojo los dos primeros casos: la calle queda libre y las casas de los lados no se tocaron.
 
 | Sector | Tramos medidos | Bloqueados |
 |---|---|---|
