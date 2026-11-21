@@ -26,6 +26,38 @@ Fecha: 21-11-2026. T33j.3a/3b. Generado por `tools/geo/cierre_fase3.py` sobre la
 
 **Causa de las calles ocupadas.** Revisé recortes del mosaico, fuera de git, en Padre Sierra–La Bolsa y en San Jacinto. Las cuadras de 1772 salen de las caras de la red de OSM ajustadas a las fachadas de 1936 (`vectorizar._cuadras_de_antes`), y la máscara del edificado por color decide si se construyen. Donde esa cara no coincide con la manzana del original, el reparto deja un abanico de casas triangulares que llega hasta el eje de la calle. Es la cara histórica contaminada de I1772-001 e I1772-003 (T33j.3a).
 
+## Después de T33j.3a: las cuadras de 1772 desde la referencia aprobada
+
+El generador ahora lee la referencia histórica. Lo hace solo por `cuadras_historicas.cargar_referencia`, que deja fuera las pendientes.
+
+1. **Cuadras de la referencia** (`vectorizar._cuadras_de_referencia`). Cada unidad aprobada edificada arma su cuadra de 1772 con su anillo de ejes de calle como cara.
+   - `ajustar_cara` aparta los lados hasta las fachadas, a 3 m como mínimo; si no hay fachadas, el anillo se encoge 3 m.
+   - Una cuadra continua vuelve a edificar lo abierto de 1936, como los pasajes modernos. Las demás conservan lo abierto.
+   - Cada manzana de 1936 sobre la referencia pasa a la unidad que más la cubre, y sus casas de 1936 no viven en 1772.
+   - El grupo cede a 1936 en 1843 (`juntas_hasta`), porque la referencia solo describe 1772.
+   - Una cara de OSM con el 30 % o más sobre la referencia ya no arma otra cuadra.
+2. **La calle manda sobre la casa heurística.**
+   - `vectorizar.marcar_calzada` marca (`calzada72`) las casas que pisan el núcleo de calzada de una calle de la referencia.
+   - `epocas` no las deja vivir en 1772: una casa de 1936 nace desde 1843, y una «de antes» se quita.
+3. **Calles históricas medidas sobre la referencia.** El eje de una calle de `calles-historicas.json` pasa por los cruces de la referencia que hay entre sus extremos en el original, si todos tienen pareja. Antes se trazaba por sus anclajes, que se habían ajustado a la red de OSM y se apartan hasta unos 7 m. Así se miden 10 de las 11.
+
+| Criterio | Línea base | Después | Cumplido |
+|---|---|---|---|
+| Calles libres | 61 de 259 tramos ocupados | 0 de 259 | sí |
+| Calles históricas libres | ninguna ocupada (medidas por anclajes) | ninguna ocupada (10 sobre la referencia) | sí |
+| Plazas sin casas | sí | sí | sí |
+| Sin calles dentro de unidades | 3 medianas libres | 0 | sí |
+
+`fase_3_cerrable: true` sobre la ciudad regenerada (SHA-256 en el JSON), con 4207 casas de 1772; en la línea base eran 2708. Las casas nuevas son las de las unidades aprobadas que el original dibuja edificadas y el generador no construía (las `ausente` de la fase 2). Los techos del pipeline suben de 35.022 a 37.699 (`tools/datos-esperados.json`).
+
+Revisé a ojo, sobre el mosaico, el núcleo y San Jacinto:
+- Las cuadras de la referencia se reparten en lotes alineados con sus calles y las calles quedan libres. La Plaza Bolívar está vacía.
+- San Jacinto–Traposos sigue abierta.
+
+Lo que todavía no mide esta puerta:
+- **Unidades pendientes.** Las 195 pendientes de la referencia, sobre todo en la periferia, se siguen armando con caras de OSM y la máscara de color, y los tramos de la red sin pareja en 1936 no se miden. Es T33j.3b.
+- **Hitos.** Los lotes sobre hitos como la Catedral ya estaban en las cuadras curadas de #69. Los dobles edificios son I004/I009 (fase 4).
+
 ## Reproducir
 
 ```
