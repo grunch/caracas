@@ -91,6 +91,7 @@ Hay dos clases de control independiente. **El LOO de las anclas:** por decisión
 | I1772-011 | P1 | confirmado en datos pendiente clasificacion visual | T33j.5a, T33j.6a |
 | I1772-012 | P1 | confirmado en calculo CPU pendiente inspeccion completa | T33j.6a |
 | I1772-013 | P1 | confirmado visual | T33j.7a |
+| I1772-014 | P2 | confirmado | T33j.2b |
 
 Estados `incierto` y `candidato` no son defectos confirmados y no exigen subtarea; se conservan visibles. I1772-010 sube de «desacuerdo con la referencia curada» a desplazamiento por cuadras enteras fuera del núcleo, medido en [controles-damero.md](controles-damero.md).
 
