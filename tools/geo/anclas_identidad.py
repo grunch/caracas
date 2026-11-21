@@ -16,6 +16,7 @@ Uso:
 Después, `calce.py 1772-pares-agi-exato-mapa` regenera los GCP, los residuos y calzado.tif.
 """
 import argparse
+import hashlib
 import json
 import sys
 from collections import defaultdict
@@ -120,6 +121,14 @@ def celdas_plegadas(proyectar, marco, paso=PASO_PLIEGUES_PX):
     plegada = ((giro(sup_izq, sup_der, inf_izq) <= 0) | (giro(sup_der, inf_der, sup_izq) <= 0) |
                (giro(inf_der, inf_izq, sup_der) <= 0) | (giro(inf_izq, sup_izq, inf_der) <= 0))
     return int(np.count_nonzero(plegada))
+
+
+def huella_calce(config):
+    """SHA-256 de las entradas del calce (semillas, anclas, suavizado): lo que decide el ajuste. No cambia con los
+    GCP ni los residuos que calce.py deriva de ellas. El informe la registra y el cierre solo acepta su LOO si la
+    huella del calce elegido es la misma."""
+    entradas = {k: config.get(k) for k in ('semillas', 'anclas', 'suavizado')}
+    return hashlib.sha256(json.dumps(entradas, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()
 
 
 def distancia_a_nudo_px(mascara, punto):
@@ -240,6 +249,7 @@ def informe(controles, config, anclas, omitidos, calce, metro, hitos_en_semillas
     return {
         'alcance': 'Calce de 1772 por identidad (T33j.2a). El error dejando uno fuera mide cuánto se aparta cada '
                    'ancla del TPS ajustado sin ella; no certifica exactitud geográfica.',
+        'huella_calce': huella_calce(config),
         'suavizado': config.get('suavizado', 0.0), 'semillas': n_semillas, 'anclas': len(anclas),
         'nodos_omitidos_por_semilla': omitidos,
         'hitos_cubiertos_por_semillas': list(hitos_en_semillas),

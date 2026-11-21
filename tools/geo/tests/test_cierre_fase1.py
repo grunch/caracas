@@ -4,7 +4,7 @@ from copy import deepcopy
 import pytest
 
 from cierre_fase1 import (
-    controles_fuera_del_calce, fuera_del_ajuste,
+    controles_fuera_del_calce, fuera_del_ajuste, loo_vigente,
     SUBTAREAS, cobertura_unidades, enlazar_subtareas, indice_evidencias, leer_verificacion, puerta_de_salida,
     residuos_por_sector, resumen_por_sector,
 )
@@ -409,3 +409,16 @@ def test_un_sector_con_una_sola_ancla_no_tiene_loo_que_lo_controle():
     assert criterio['sectores_sin_control_independiente'] == ['S2']
     assert criterio['sectores_sin_loo_bajo_umbral'] == ['S2']
     assert criterio['cumplido'] is False
+
+
+def test_el_loo_del_informe_de_identidad_vale_solo_si_su_huella_es_la_del_calce_elegido():
+    # Arrange
+    from anclas_identidad import huella_calce
+    config = {'semillas': [], 'anclas': [{'px': 1, 'py': 2, 'x36': 3, 'y36': 4, 'id': 'X1'}], 'suavizado': 0.005}
+    filas = [{'sector': 'S1', 'anclas': 3, 'bajo_umbral': True}]
+
+    # Act / Assert
+    assert loo_vigente({'huella_calce': huella_calce(config), 'por_sector': filas}, config) == filas
+    assert loo_vigente({'huella_calce': huella_calce({**config, 'suavizado': 0.05}), 'por_sector': filas}, config) is None
+    assert loo_vigente({'por_sector': filas}, config) is None   # informe sin huella: queda pendiente
+    assert loo_vigente({}, config) is None

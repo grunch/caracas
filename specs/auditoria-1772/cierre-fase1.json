@@ -318,6 +318,7 @@
    }
   }
  ],
+ "loo_del_calce_vigente": true,
  "calce_por_sector_nota": "gcp_ajuste y loo_* miden el calce vigente. controles_damero y desvio_damero_mediana_m cuentan solo los cruces de damero que no son anclas del calce (anclas_damero los que sí, o caen sobre una semilla: su error está en el LOO; descartados_damero los de esquina de 1936 que es un rótulo, ni ancla ni control). controles_independientes y desvio_independiente_max_m cuentan los nodos curados que no caen sobre un punto del ajuste (a menos de 6 px); desvio_independiente_vigente dice si su desvío guardado se midió sobre este archivo de calce, y solo entonces cuentan en la puerta.",
  "calce_por_sector": [
   {
