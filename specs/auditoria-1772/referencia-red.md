@@ -19,12 +19,12 @@ Fecha: 21-11-2026. T33j.2b, primera parte (specs/08, fase 2: referencia históri
 | La esquina de 1936 asignada es un rótulo, no un cruce | 9 |
 | Pareja por topología rechazada a ojo ([anclas-topologia.json](anclas-topologia.json)) | 11 |
 
-La huella del calce (`huella_calce`) y el SHA-256 del trazado quedan en el JSON: si cambian, hay que regenerar la red.
+El JSON va con una entidad por línea, para que el diff se revise por ID. La huella del calce (`huella_calce`) y el SHA-256 del trazado quedan en el JSON: si cambian, hay que regenerar la red.
 
 ## Qué valida `validar_red`
 
 - **Duplicados:** IDs y coordenadas únicos (dos IDs para el mismo cruce se rechazan); un mismo tramo no puede aparecer en dos calles.
-- **Cruces imposibles:** dos tramos que se cortan sin nodo compartido, en el original y, entre nodos identificados, en 1936.
+- **Cruces imposibles:** dos tramos que se cortan sin nodo compartido. En el original, cada tramo lleva los vértices del trazado de su calle (`puntos`), así que una calle quebrada se valida por donde va y no por la cuerda entre sus nodos. En 1936, solo entre tramos de calles rectas con los dos nodos identificados.
 - **Orden de calles igual al original:** a lo largo de cada calle recta con 3 o más cruces identificados, y en el giro de cada esquina entre dos calles distintas (un pliegue del calce lo invierte).
 - **Procedencia y estado:** cada nodo declara su procedencia; uno identificado necesita su pareja en 1936, y uno sin pareja necesita su motivo y no lleva mosaico. Ninguna calle usa un nodo inexistente y ningún nodo queda suelto.
 

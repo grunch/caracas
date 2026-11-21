@@ -95,7 +95,8 @@ def calles_de_red(lineas, nodos):
         geo = LineString(l['puntos'])
         propios = [n for n in nodos if l['id'] in n['lineas']]
         propios.sort(key=lambda n: geo.project(Point(n['original'])))
-        calles.append({'id': l['id'], 'tipo': l['tipo'], 'estado': l['estado'], 'nodos': [n['id'] for n in propios]})
+        calles.append({'id': l['id'], 'tipo': l['tipo'], 'estado': l['estado'], 'nodos': [n['id'] for n in propios],
+                       'puntos': [list(p) for p in l['puntos']]})
     return calles
 
 
@@ -141,8 +142,26 @@ def _tramos(calles, por_id):
     return tramos
 
 
-def _sin_cruces(tramos, por_id, campo):
-    geos = [LineString([por_id[a][campo], por_id[b][campo]]) for _, a, b in tramos]
+def _geometria_original(calles, por_id):
+    """{(calle, a, b): vértices del tramo}: los nodos y, entre ellos, los vértices del trazado de la calle, para que
+    una calle quebrada se valide por donde va y no por la cuerda entre sus nodos."""
+    geometria = {}
+    for c in calles:
+        linea = LineString(c['puntos']) if len(c.get('puntos') or []) > 1 else None
+        for a, b in zip(c['nodos'], c['nodos'][1:]):
+            pa, pb = por_id[a]['original'], por_id[b]['original']
+            medio = []
+            if linea is not None:
+                da, db = linea.project(Point(pa)), linea.project(Point(pb))
+                bajo, alto = min(da, db), max(da, db)
+                medio = sorted((p for p in c['puntos'] if bajo < linea.project(Point(p)) < alto),
+                               key=lambda p: linea.project(Point(p)), reverse=da > db)
+            geometria[(c['id'], a, b)] = [pa, *medio, pb]
+    return geometria
+
+
+def _sin_cruces(tramos, por_id, campo, geometria=None):
+    geos = [LineString(geometria[t] if geometria else [por_id[t[1]][campo], por_id[t[2]][campo]]) for t in tramos]
     arbol = STRtree(geos)
     for i, g in enumerate(geos):
         for j in arbol.query(g, predicate='intersects'):
@@ -207,12 +226,25 @@ def validar_red(red):
     sueltos = sorted(set(por_id) - usados)
     if sueltos:
         raise ValueError(f'nodos que no usa ninguna calle: {sueltos}')
-    _sin_cruces(tramos, por_id, 'original')
-    _sin_cruces([t for t in tramos if por_id[t[1]]['mosaico'] and por_id[t[2]]['mosaico']], por_id, 'mosaico')
+    _sin_cruces(tramos, por_id, 'original', _geometria_original(calles, por_id))
+    # en 1936 solo se conocen los nodos identificados: se comparan los tramos rectos entre dos de ellos
+    rectas = {c['id'] for c in calles if c['tipo'] == 'calle_recta'}
+    _sin_cruces([t for t in tramos if t[0] in rectas and por_id[t[1]]['mosaico'] and por_id[t[2]]['mosaico']],
+                por_id, 'mosaico')
     _orden(calles, por_id)
     return {'nodos': len(nodos), 'calles': len(calles), 'tramos': len(tramos),
             'identidad_verificada': sum(n['estado'] == 'identidad_verificada' for n in nodos),
             'por_tipo': {t: sum(n['tipo'] == t for n in nodos) for t in ('cruce', 'encuentro', 'terminal')}}
+
+
+def json_por_entidad(datos):
+    """JSON de un objeto con una entidad por línea en cada lista de registros: el diff se lee por ID (specs/08,
+    «revisar el diff de entidades por ID») y el archivo no infla las líneas cambiadas de un PR."""
+    def valor(v):
+        if isinstance(v, list) and v and all(isinstance(e, dict) for e in v):
+            return '[\n  ' + ',\n  '.join(json.dumps(e, ensure_ascii=False) for e in v) + '\n ]'
+        return json.dumps(v, ensure_ascii=False)
+    return '{\n' + ',\n'.join(f' {json.dumps(k, ensure_ascii=False)}: {valor(v)}' for k, v in datos.items()) + '\n}\n'
 
 
 def _leer(ruta):
@@ -257,7 +289,7 @@ def main():
            'nodos': nodos, 'calles': calles_de_red(trazado['lineas'], nodos)}
     resumen = validar_red(red)
     red = {**red, 'resumen': resumen}
-    args.salida.write_text(json.dumps(red, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+    args.salida.write_text(json_por_entidad(red), encoding='utf-8')
     print(json.dumps(resumen, ensure_ascii=False))
 
 

@@ -180,3 +180,30 @@ def test_la_identidad_sale_de_las_anclas_las_semillas_los_rotulos_y_la_topologia
     assert ident['por_semilla'] == {'X3': [1000.0, 2500.0]} and ident['rotulos'] == {'X4'}
     assert 'dentro de una cuadra' in ident['sin_pareja']['X7']
     assert [a['id'] for a in ident['anclas']] == ['X1', 'X2']
+
+
+def test_una_calle_quebrada_que_rodea_a_otra_no_es_un_cruce_imposible():
+    # Arrange: L6 sube por x=50, rodea por arriba el extremo de L4 (y=60) y baja por x=70; corta L2 en x=50 y x=70.
+    # La cuerda entre esos dos encuentros pasaría por X4, pero el trazado real va por encima.
+    con_quiebre = lineas() + [{'id': 'L6', 'tipo': 'calle_quebrada', 'estado': 'eje',
+                               'puntos': [[50, 20], [50, 65], [70, 65], [70, 20]]}]
+    nodos = nodos_de_red(con_quiebre, cruces(), identidad())
+    r = {'nodos': nodos, 'calles': calles_de_red(con_quiebre, nodos)}
+
+    # Act
+    resumen = validar_red(r)
+
+    # Assert
+    assert resumen['por_tipo']['encuentro'] == 3
+    l6 = next(c for c in r['calles'] if c['id'] == 'L6')
+    assert l6['puntos'] == [[50, 20], [50, 65], [70, 65], [70, 20]]
+
+
+def test_json_por_entidad_deja_una_entidad_por_linea_y_se_lee_igual():
+    from referencia_red import json_por_entidad
+    datos = {'alcance': 'x', 'resumen': {'nodos': 2}, 'nodos': [{'id': 'X1', 'original': [1, 2]}, {'id': 'X2'}]}
+    texto = json_por_entidad(datos)
+    assert json.loads(texto) == datos
+    lineas_ = texto.splitlines()
+    assert sum('"id": "X1"' in l for l in lineas_) == 1 and any(l.strip().startswith('{"id": "X2"') for l in lineas_)
+    assert len(lineas_) < 10
