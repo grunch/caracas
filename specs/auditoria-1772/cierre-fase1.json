@@ -36,13 +36,10 @@
    "sin_subtarea": []
   },
   "accesos_recorridos_a_pie": {
-   "cumplido": false,
+   "cumplido": true,
    "frentes_con_candidatos": 3,
-   "recorridos": 1,
-   "pendientes": [
-    "F1772-0003-3",
-    "F1772-0010-3"
-   ]
+   "recorridos": 3,
+   "pendientes": []
   },
   "fase_1_cerrable": false
  },
@@ -75,7 +72,7 @@
    "confirmado_en_calculo_CPU_pendiente_inspeccion_completa": 1,
    "confirmado_en_datos_pendiente_clasificacion_visual": 1,
    "confirmado_general_pendiente_por_unidad": 1,
-   "confirmado_visual": 3,
+   "confirmado_visual": 4,
    "corregido_en_codigo_pendiente_revision_y_publicacion": 1,
    "identidad_confirmada_omision_visible_geometria_pendiente": 1,
    "incierto": 1
@@ -594,6 +591,14 @@
    "subtareas": [
     "T33j.6a"
    ]
+  },
+  {
+   "id": "I1772-013",
+   "estado": "confirmado_visual",
+   "prioridad": "P1",
+   "subtareas": [
+    "T33j.7a"
+   ]
   }
  ],
  "evidencias": [
@@ -712,6 +717,132 @@
   {
    "archivo": "F1772-0010-3-despues.png",
    "sha256": "cd090159940b2b571b1f700d52bee2a150ea2d319f26855a11970e340b55b73f",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0010-3-54-antes.png",
+   "sha256": "7834b2c54679b2dca814d1970a058c79e4b8e7f57aac7560e703efc6ed1bc3bc",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0010-3-54-despues.png",
+   "sha256": "8c173131459c7882bfba3eb04b08ef4e9883a58cae670aa0420ffe05fa3345c3",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0010-3-60-antes.png",
+   "sha256": "ce525a7ac0371f1215f7d8e0760b5f71b883d9e224d1f8e077fb1743b5fadd97",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0010-3-60-despues.png",
+   "sha256": "f12811059daff674c14fb8006c6c995eb977e3a2976b30a239ba53e67fbf9672",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0010-3-66-antes.png",
+   "sha256": "d0e3136dacf96bfa5855cd6f691ae8a53e7fa0042ba05b65044093350247846c",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0010-3-66-despues.png",
+   "sha256": "80f96ba6ebfebc8d229b6499adbef8de4a26b2143dad16792c9dddebc083ff8d",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0010-3-60-t00.png",
+   "sha256": "830d0ccf525c82e3106134ecb68f0ccd75be6adeb4612d9639b60b4d61540853",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0010-3-60-t01.png",
+   "sha256": "5c8f1d9d1ac3d85fae4c001082d18e71ed52dfd98f9ade9590e2348732dde6b1",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0003-3-58-antes.png",
+   "sha256": "3f0723ca7777517da005f0309ce22d2cb054da02ce576837a8a4d357065eaeb3",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0003-3-58-despues.png",
+   "sha256": "194050ba06aad458a6ee2bb9442de8f76ddc37c10d473aff18905529c08e781e",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0003-3-66-antes.png",
+   "sha256": "a28e87cd127123ebfbfc0c33fbd1b4ef66a490a8f272e4aa9260110cf1c89bc2",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0003-3-66-despues.png",
+   "sha256": "adcb1ef6df6a91ebfc85cef70b0e688d6f1a19b5acdd1034fdd6f8dd6c591539",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0003-3-76-antes.png",
+   "sha256": "38acd08b76f68375700e83bdcd56017ff43e45d892db5ce98df937a4a1f65b3a",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0003-3-76-despues.png",
+   "sha256": "843b1f782d8258ae204bac6e0159b6755f2d106f631facc095bbdaf8ef489245",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0003-3-86-antes.png",
+   "sha256": "88c72949040a771a154d5edff8f68341d628822705d51ec69ada2e0ea84375c2",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0003-3-86-despues.png",
+   "sha256": "5cb630108d43678ec2af88f1a498065aba029b707d31917bdb7af9d419e20694",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0003-3-94-antes.png",
+   "sha256": "5447dbf6dd2915058e67dd16aa04fc4529f492ae938ff597ba154609eae3cac4",
+   "documentos": [
+    "accesos-primer-lote.json"
+   ]
+  },
+  {
+   "archivo": "F1772-0003-3-94-despues.png",
+   "sha256": "6ee1365994c9a10c9ee00f73a5b88e86d2b38cf41b774d4c2c3cb8fb38cde48a",
    "documentos": [
     "accesos-primer-lote.json"
    ]
