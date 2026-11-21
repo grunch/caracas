@@ -79,7 +79,7 @@ La fase 3 tiene que respetarlas: no insertar calles intermedias, no atravesar fr
 - Una pendiente tiene motivos, y todos son del criterio.
 - La geometría pasa por el contrato de [contrato-referencia.md](contrato-referencia.md) (`referencia_historica.validar_referencia`): anillos simples, sin solapes entre unidades y con la misma orientación en el original y en 1936.
 
-La referencia real pasa todas estas comprobaciones. El JSON guarda el SHA-256 de la red y la huella del calce: si cambian, hay que regenerarla.
+La referencia real pasa todas estas comprobaciones. El JSON va con una entidad por línea (el diff se revisa por ID) y guarda el SHA-256 de la red y la huella del calce: si cambian, hay que regenerarla.
 
 ## Reproducir
 

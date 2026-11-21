@@ -178,6 +178,7 @@ def excepciones_del_trazado(trazado):
 
 def main():
     from cierre_fase1 import _lectura_de
+    from referencia_red import json_por_entidad
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('carpeta', type=Path, help='specs/auditoria-1772')
     ap.add_argument('--red', type=Path, default=Path(__file__).parent / 'referencias' / '1772-red.json')
@@ -202,7 +203,7 @@ def main():
                          'condiciones de `criterio`; una pendiente queda sin geometría inventada y con sus motivos. Los '
                          'anillos son ejes de calle, no fachadas: aprobar no habilita la generación (fase 3).',
               'criterio': MOTIVOS, 'resumen': resumen, 'unidades': unidades}
-    args.salida.write_text(json.dumps(salida, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+    args.salida.write_text(json_por_entidad(salida), encoding='utf-8')
     print(json.dumps(resumen, ensure_ascii=False))
 
 
