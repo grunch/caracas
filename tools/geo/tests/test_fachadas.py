@@ -168,3 +168,17 @@ def test_las_migas_sueltas_de_las_franjas_no_le_quitan_el_poligono_al_grupo():
     miga = box(100, 10, 101, 11)
     nuevo = _poligono_nuevo(g, miga, None, np.zeros((140, 260), bool), (0, 0, 260, 140), 10)
     assert nuevo is not None and len(nuevo) == 4
+
+
+def test_dos_grupos_vecinos_retirados_no_se_reparten_el_mismo_relleno():
+    # las franjas de las estaciones vecinas a la medianera se enciman: lo que ya sumó un grupo no lo suma el otro
+    m = con_retiro(retiro_px=0)
+    izq, der = m.copy(), m.copy()
+    izq[:, 101:] = False
+    der[:, :101] = False
+    izq[20:26, 60:101] = False      # los dos retirados 3 m a cada lado de la medianera en x = 101
+    der[20:26, 101:150] = False
+    nuevos = alinear_fachadas([grupo(izq), grupo(der)], [eje((0, 0), (260, 0))], plano(), METRO, edificado=EDIFICADO)
+    a, b = global_de(nuevos[0], (140, 260)), global_de(nuevos[1], (140, 260))
+    assert not (a & b).any()
+    assert (a | b)[20:26, 70:140].all()

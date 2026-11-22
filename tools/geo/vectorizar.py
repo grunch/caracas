@@ -114,18 +114,27 @@ def huellas_de_casas(piezas, tolerancia_px, recorte=None):
     from shapely.strtree import STRtree
     figuras = [poligono_de(m, o, tolerancia_px) for m, o in piezas]
     if recorte is not None:
-        figuras = [None if f is None else _mayor(f.intersection(recorte, grid_size=GRILLA_PX)) for f in figuras]
+        figuras = [None if f is None else _mayor_sin_huecos(f.intersection(recorte, grid_size=GRILLA_PX)) for f in figuras]
     puestas, salida = [], []
     for f in figuras:
         if f is not None and puestas:
             arbol = STRtree(puestas)
             pisadas = [puestas[j] for j in arbol.query(f, predicate='intersects') if f.intersection(puestas[j]).area > 0]
             if pisadas:
-                f = _mayor(f.difference(unary_union(pisadas), grid_size=GRILLA_PX))
+                f = _mayor_sin_huecos(f.difference(unary_union(pisadas), grid_size=GRILLA_PX))
         salida.append(f)
         if f is not None:
             puestas.append(f)
     return salida
+
+
+def _mayor_sin_huecos(figura):
+    """Como _mayor, pero None si a la parte mayor le queda un hueco: el techo es solo su contorno exterior y taparía lo
+    que el hueco deja afuera (lo que la cuadra cedió a otra mancha, o una casa ya puesta)."""
+    partes = [g for g in getattr(figura, 'geoms', [figura]) if g.geom_type == 'Polygon' and not g.is_empty]
+    if partes and any(Polygon(h).area > GRILLA_PX for h in max(partes, key=lambda g: g.area).interiors):
+        return None
+    return _mayor(figura)
 
 
 def _mayor(figura):

@@ -264,7 +264,8 @@ def alinear_fachadas(grupos, tramos, clases, metro, vedado=(), edificado=1, call
         de, a = _caja(g), _ventana(g, suma, clases.shape)
         x0, y0, x1, y1 = a
         forma = (y1 - y0, x1 - x0)
-        otros = _de_otros(grupos, j, a)
+        # lo de los demás como va quedando: lo que ya sumó un grupo vecino no lo suma este (sus franjas se enciman)
+        otros = _de_otros(salida, j, a)
         cuadra = _en_ventana(g['cuadra'], de, a, np.zeros(forma, bool))
         nuevo = np.zeros(forma, bool) if suma is None else _relleno(suma, (x0, y0), forma) & ~cuadra & ~otros
         quitado = np.zeros(forma, bool) if resta is None else _relleno(resta, (x0, y0), forma)

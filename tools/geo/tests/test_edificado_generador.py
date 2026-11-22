@@ -276,3 +276,17 @@ def test_una_mancha_que_cede_y_se_reparte_por_su_mascara_tampoco_pisa_a_la_anter
     for i, (ji, a) in enumerate(casas):
         for jj, b in casas[i + 1:]:
             assert ji == jj or a.intersection(b).area * METRO ** 2 <= 0.01
+
+
+def test_una_mancha_que_cede_una_caja_adentro_no_la_vuelve_a_techar():
+    # la primera mancha cae entera dentro de la segunda: el polígono de la segunda queda con un hueco (_ceder_poligono →
+    # None) y el reparto por su máscara no debe devolverle la caja al quedarse con el contorno exterior de una huella
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    edificado = [{'id': 'U2', 'poligonos': [box(52, 70, 64, 82)], 'por_anillo': False},
+                 {'id': 'U9', 'poligonos': [box(40, 40, 220, 140)], 'por_anillo': False}]
+    grupos = _cuadras_de_edificado(edificado, c, np.zeros_like(c, dtype=int), {}, METRO)
+    assert grupos[-1]['poligono'] is None
+    casas = _casas_de_grupos(grupos, c)
+    caja = box(53, 71, 63, 81)
+    assert not any(casa.intersection(caja).area * METRO ** 2 > 0.01 for j, casa in casas if j == len(grupos) - 1)
