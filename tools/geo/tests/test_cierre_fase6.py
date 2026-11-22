@@ -115,3 +115,13 @@ def test_una_casa_fuera_de_la_recta_de_un_frente_no_se_mide_en_ese_frente():
     frentes = {2: [((1.0, 0.0), (0.0, 0.0), 'L1:A-B', 1, 0)]}
     assert [d['techo'] for d in cumbreras_desviadas(girada, frentes, METRO)] == [2]
     assert cumbreras_desviadas(girada, frentes, METRO, fuera_de_recta={(2, 'L1:A-B', 1, 0)}) == []
+
+
+def test_dos_techos_que_solo_se_tocan_en_la_medianera_con_ruido_de_float32_no_se_cruzan():
+    # 4 m de medianera; la vecina la pisa 0,1 mm (Float32 a 300 m del origen) con alturas que se cruzan sobre ella
+    a = tri(1, (0, 0, 8.5), (0, 8, 10.5), (-10, 4, 9.0))
+    b = tri(2, (-0.0002, 0, 10.0), (-0.0002, 8, 8.4), (10, 4, 9.0))
+    assert techos_cruzados([a, b], METRO) == []
+    # 5 mm de solape ya no es un contacto: es un cruce
+    c = tri(2, (-0.01, 0, 10.0), (-0.01, 8, 8.4), (10, 4, 9.0))
+    assert [p['techos'] for p in techos_cruzados([a, c], METRO)] == [[1, 2]]

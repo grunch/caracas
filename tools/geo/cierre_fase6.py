@@ -34,6 +34,7 @@ from fachadas import ALCANCE_M, ESTACIONES_MINIMAS, GIRO_MAXIMO_GRADOS, de_su_ma
 AREA_MINIMA_M2 = 1e-4          # un triángulo con menos área es degenerado (1 cm²; el umbral de T33j.1l)
 ALTURA_MINIMA_M = 1e-3         # o con menos altura sobre su lado mayor: una aguja
 CRUCE_AREA_M2 = 1e-4           # proyección común mínima de dos triángulos para medir su cruce (T33j.1l)
+CONTACTO_M = 1e-3             # una superficie común más angosta que esto es un contacto, no un cruce (la altura mínima)
 CRUCE_ALTO_M = 1e-3            # se cortan si uno pasa más que esto por encima y por debajo del otro (T33j.1l)
 CUMBRE_MISMO_ALTO_M = 0.01     # los dos extremos de una arista de cumbrera, a la misma altura
 CUMBRE_MINIMA_M = 0.5          # una arista de cumbrera más corta no da dirección
@@ -70,8 +71,8 @@ def _plano(t, metro):
 
 def techos_cruzados(triangulos, metro=METRO):
     """Los pares de casas con superficies que se atraviesan (T33j.1l): dos triángulos de casas distintas con proyección
-    común y un plano que pasa por encima y por debajo del otro dentro de ella. Los contactos de borde y los solapes
-    coplanares no son cruces."""
+    común y un plano que pasa por encima y por debajo del otro dentro de ella. Los contactos de borde (una superficie
+    común de menos de CONTACTO_M de ancho) y los solapes coplanares no son cruces."""
     planos = [(t['techo'], _plano(t, metro)) for t in triangulos]
     planos = [(techo, p) for techo, p in planos if p is not None]
     if not planos:
@@ -84,7 +85,9 @@ def techos_cruzados(triangulos, metro=METRO):
             if j <= i or ti == tj:
                 continue
             comun = pi.intersection(pj)
-            if comun.area <= CRUCE_AREA_M2:
+            # un contacto de borde no es un cruce (T33j.1l); con la precisión del visor (Float32 a cientos de metros del
+            # origen) la medianera compartida aparece como una tira de décimas de milímetro: menos de CONTACTO_M de ancho
+            if comun.area <= CRUCE_AREA_M2 or comun.buffer(-CONTACTO_M / 2).is_empty:
                 continue
             puntos = np.array([c for g in getattr(comun, 'geoms', [comun]) if g.geom_type == 'Polygon'
                                for c in g.exterior.coords])
@@ -255,7 +258,7 @@ def puerta_fase6(cubiertas, ciudad, calles, red, hitos, fases, sha256, metro=MET
     ])
     return {**criterios,
             'umbrales_inferidos': {'area_minima_m2': AREA_MINIMA_M2, 'altura_minima_m': ALTURA_MINIMA_M,
-                                   'cruce_area_m2': CRUCE_AREA_M2, 'cruce_alto_m': CRUCE_ALTO_M,
+                                   'cruce_area_m2': CRUCE_AREA_M2, 'cruce_alto_m': CRUCE_ALTO_M, 'contacto_m': CONTACTO_M,
                                    'giro_maximo_grados': GIRO_MAXIMO_GRADOS, 'alero_en_calle_m2': ALERO_EN_CALLE_M2},
             'casas_1772': len(casas), 'casas_con_techo': len({t['techo'] for t in triangulos}),
             'fase_6_cerrable': all(c['cumplido'] for c in criterios.values())}
