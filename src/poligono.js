@@ -4,6 +4,7 @@
  */
 
 const EPS = 1e-9
+const EPS_CONTACTO = 1e-7 // un vértice a menos de esto de una cuerda la toca (metros)
 
 /** Área del anillo con el signo de su sentido de giro. */
 export function areaConSigno(anillo) {
@@ -186,23 +187,33 @@ export function simplificarAdentro(anillo, tolerancia) {
   const o = horario ? [...anillo].reverse() : anillo
   const n = o.length
   const giro = (p, q, r) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
-  // la cuerda p→r corta de verdad algún lado del original que no sea de la cadena que reemplaza
+  // distancia de s al segmento p→r (la proyección acotada a sus extremos: una saliente que vuelve más allá de la
+  // punta de la cuerda queda lejos aunque esté cerca de su recta)
+  const alSegmento = (s, p, r) => {
+    const [dx, dz] = [r[0] - p[0], r[1] - p[1]]
+    const t = Math.max(0, Math.min(1, ((s[0] - p[0]) * dx + (s[1] - p[1]) * dz) / (dx * dx + dz * dz)))
+    return Math.hypot(s[0] - p[0] - t * dx, s[1] - p[1] - t * dz)
+  }
+  // la cuerda p→r toca o corta la otra cadena del original fuera de sus propios extremos: un vértice de esa cadena
+  // sobre la cuerda (el contorno se tocaría y saldría por la muesca) o un lado que la cruza
   const corta = (ip, ir) => {
+    const [p, r] = [o[ip], o[ir]]
+    for (let s = (ir + 1) % n; s !== ip; s = (s + 1) % n) if (alSegmento(o[s], p, r) < EPS_CONTACTO) return true
     for (let e = ir; e !== ip; e = (e + 1) % n) {
       const [a, b] = [o[e], o[(e + 1) % n]]
-      const [d1, d2] = [giro(o[ip], o[ir], a), giro(o[ip], o[ir], b)]
-      const [d3, d4] = [giro(a, b, o[ip]), giro(a, b, o[ir])]
+      const [d1, d2] = [giro(p, r, a), giro(p, r, b)]
+      const [d3, d4] = [giro(a, b, p), giro(a, b, r)]
       if (((d1 > EPS && d2 < -EPS) || (d1 < -EPS && d2 > EPS)) && ((d3 > EPS && d4 < -EPS) || (d3 < -EPS && d4 > EPS))) return true
     }
     return false
   }
-  // se puede ir de p a r si toda la cadena original de en medio queda afuera de la cuerda y a no más de la tolerancia
+  // se puede ir de p a r si toda la cadena original de en medio queda afuera de la cuerda y a menos de la tolerancia
+  // del segmento
   const sePuede = (ip, ir) => {
-    const largo = Math.hypot(o[ir][0] - o[ip][0], o[ir][1] - o[ip][1])
-    if (largo === 0) return false
+    const [p, r] = [o[ip], o[ir]]
+    if (Math.hypot(r[0] - p[0], r[1] - p[1]) === 0) return false
     for (let s = (ip + 1) % n; s !== ir; s = (s + 1) % n) {
-      const g = giro(o[ip], o[s], o[ir])
-      if (g < 0 || g / largo >= tolerancia) return false
+      if (giro(p, o[s], r) < 0 || alSegmento(o[s], p, r) >= tolerancia) return false
     }
     return !corta(ip, ir)
   }

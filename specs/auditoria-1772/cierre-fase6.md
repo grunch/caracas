@@ -52,19 +52,19 @@ De los 816 pares de techos que se cortan, la mayoría eran teja contra teja con 
 
 La causa estaba en el visor. Para quitar los dientes del trazado a píxeles, `src/ciudad.js` simplificaba cada huella a 0,6 m con `simplificar`, que ajusta la recta de cada lado por separado. En la medianera, el techo de una casa se corría hasta la tolerancia sobre la de al lado. Sin simplificar, los cruces bajaban a 543, pero los dientes volvían como triángulos degenerados (905).
 
-`simplificarAdentro` (`src/poligono.js`) solo quita vértices de cadenas que sobresalen: toda la cadena original que reemplaza la cuerda nueva tiene que quedar afuera de ella y a menos de la tolerancia, y la cuerda no corta otro lado. Así el polígono se achica y nunca se agranda, y el error no se acumula: ningún vértice original queda a más de 0,6 m del contorno nuevo. Los dientes que entran quedan. No cambia lotes, calles ni ocupación, y vale para todas las épocas.
+`simplificarAdentro` (`src/poligono.js`) solo quita vértices de cadenas que sobresalen: toda la cadena original que reemplaza la cuerda nueva tiene que quedar afuera de ella y a menos de la tolerancia del segmento, y la cuerda no toca ni corta la otra cadena. Así el polígono se achica y nunca se agranda, y el error no se acumula: ningún vértice original queda a más de 0,6 m del contorno nuevo. Los dientes que entran quedan. No cambia lotes, calles ni ocupación, y vale para todas las épocas.
 
 | Criterio | Con #139 (antes) | Después (1bf6c40, datos sin cambios) |
 |---|---|---|
-| Triángulos sin degenerar | 268 | 253 |
-| Techos sin cruces | 816 pares | **156** |
+| Triángulos sin degenerar | 268 | 262 |
+| Techos sin cruces | 816 pares | **160** |
 | Cumbreras con el frente | 169 desviadas | 167 |
 | Aleros fuera de la calle | 137 casas | 137 |
 | Mismo trazado que la fase 5 | cumple | cumple |
 
 ## Lo que sigue
 
-- Los 156 cruces que quedan: aleros que montan sobre la vecina y cambios de altura entre casas contiguas.
+- Los 160 cruces que quedan: aleros que montan sobre la vecina y cambios de altura entre casas contiguas.
 - Las cumbreras de fondo: casas cuyo marco elige el frente por el lado equivocado (`elegirFrente`).
 - Los triángulos degenerados y los aleros sobre la calzada.
 - La regla de specs/08 vale: un PR de techos no cambia calles, lotes ni ocupación para que un techo deje de fallar.

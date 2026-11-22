@@ -114,12 +114,53 @@ describe('crearIndice', () => {
 })
 
 describe('simplificarAdentro', () => {
-  const dentro = (anillo, original) => anillo.every(([x, z]) => estaDentro(original, x, z) ||
-    original.some((p, k) => {   // o sobre el borde
-      const q = original[(k + 1) % original.length]
-      const largo = Math.hypot(q[0] - p[0], q[1] - p[1])
-      return Math.abs((q[0] - p[0]) * (z - p[1]) - (q[1] - p[1]) * (x - p[0])) / largo < 1e-9
-    }))
+  // revisión de #141: el contorno nuevo, lado por lado, adentro del original o sobre su borde, y sin cortarse a sí mismo
+  const sobreElBorde = (original, x, z) => original.some((p, k) => {
+    const q = original[(k + 1) % original.length]
+    const [dx, dz] = [q[0] - p[0], q[1] - p[1]]
+    const t = Math.max(0, Math.min(1, ((x - p[0]) * dx + (z - p[1]) * dz) / (dx * dx + dz * dz)))
+    return Math.hypot(x - p[0] - t * dx, z - p[1] - t * dz) < 1e-9
+  })
+  const seCortan = (a, b, c, d) => {
+    const g = (p, q, r) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
+    return g(a, b, c) * g(a, b, d) < 0 && g(c, d, a) * g(c, d, b) < 0
+  }
+  const dentro = (anillo, original) => {
+    for (let k = 0; k < anillo.length; k++) {
+      const [p, q] = [anillo[k], anillo[(k + 1) % anillo.length]]
+      for (let t = 0; t <= 1; t += 1 / 64) {
+        const [x, z] = [p[0] + t * (q[0] - p[0]), p[1] + t * (q[1] - p[1])]
+        if (!estaDentro(original, x, z) && !sobreElBorde(original, x, z)) return false
+      }
+      for (let j = k + 2; j < anillo.length; j++) {
+        if (k === 0 && j === anillo.length - 1) continue
+        if (seCortan(p, q, anillo[j], anillo[(j + 1) % anillo.length])) return false
+      }
+    }
+    const vistos = new Set(anillo.map(([x, z]) => `${x},${z}`))
+    return vistos.size === anillo.length       // sin tocarse a sí mismo en un vértice repetido
+  }
+
+  test('una saliente larga que vuelve más allá de la cuerda no se corta: se mide contra el segmento', () => {
+    const saliente = [[0, 0], [20, -0.1], [1, 0], [1, 10], [0, 10]]
+    const s = simplificarAdentro(saliente, 0.6)
+    expect(s.some(([x]) => x === 20)).toBe(true)
+    const grande = [[0, 0], [20, -0.1], [1, 0], [1, 10], [-10, 10], [-10, -10], [0, -10]]
+    expect(simplificarAdentro(grande, 0.6).some(([x]) => x === 20)).toBe(true)
+  })
+
+  test('una cuerda que toca la otra cadena en un vértice no se acepta: el contorno no se toca ni sale', () => {
+    const muesca = [[0, 0], [5, -0.5], [10, 0], [8, 1], [7, 0], [5, -0.2], [3, 0], [2, 1]]
+    const s = simplificarAdentro(muesca, 0.6)
+    expect(dentro(s, muesca)).toBe(true)
+    expect(s).toContainEqual([5, -0.5])
+  })
+
+  test('una cuerda que cruzaría un lado del original no se acepta', () => {
+    // la cuerda de [0,0] a [10,0] pasaría por la punta [5,-0.3] que entra desde abajo
+    const cruzada = [[0, 0], [2, -0.4], [4, -0.4], [5, 0.3], [6, -0.4], [8, -0.4], [10, 0], [10, 10], [0, 10]]
+    expect(dentro(simplificarAdentro(cruzada, 0.6), cruzada)).toBe(true)
+  })
 
   test('quita los dientes que sobresalen y nunca deja el anillo afuera del original', () => {
     // un rectángulo trazado a píxeles con dientes hacia afuera y hacia adentro de 0,2 m
