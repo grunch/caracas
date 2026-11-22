@@ -1,9 +1,9 @@
 {
  "alcance": "Puerta de salida de la fase 5 de 1772 (specs/08), medida sobre la salida del generador. Cuenta lo medido; no certifica fidelidad.",
  "ciudad": {
-  "archivo": "fuentes//tmp/claude-1000/-disco-dev-caracas/6bacefc9-0a48-4072-bf89-7b79bee59607/scratchpad/ciudad-6b.json",
-  "sha256": "6a0b76675c556d239709a6db844899d52bfd13b38ba79ce36b54385f69a9ce83",
-  "datos": "b2ca10e (sin publicar)"
+  "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
+  "sha256": "8ea6f2ec28e7417161150ceb8b1f46e946b63367c07f8f3936d0ffceeca3f72c",
+  "datos": "1bf6c40 (sin publicar)"
  },
  "puerta_de_salida": {
   "frentes_alineados": {
@@ -13,7 +13,7 @@
    "casas_en_limite": 53,
    "casas_fuera_de_limite": 0,
    "frentes_medidos": 569,
-   "casas_medidas": 4512,
+   "casas_medidas": 4504,
    "desalineados": [
     {
      "tramo": "L1772-0004:X1772-0010-X1772-0011",
@@ -100,7 +100,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37492,
+       "techo": 37484,
        "desvio_m": 3.47
       }
      ],
@@ -126,7 +126,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37523,
+       "techo": 37515,
        "desvio_m": 14.15
       }
      ],
@@ -139,7 +139,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38053,
+       "techo": 38045,
        "desvio_m": 11.27
       }
      ],
@@ -178,7 +178,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38264,
+       "techo": 38256,
        "desvio_m": 8.27
       }
      ],
@@ -191,7 +191,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36529,
+       "techo": 36521,
        "desvio_m": 14.08
       }
      ],
@@ -217,7 +217,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37364,
+       "techo": 37356,
        "desvio_m": 13.72
       }
      ],
@@ -243,11 +243,11 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37697,
+       "techo": 37689,
        "desvio_m": 14.49
       },
       {
-       "techo": 37698,
+       "techo": 37690,
        "desvio_m": 8.59
       }
      ],
@@ -260,7 +260,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36335,
+       "techo": 36327,
        "desvio_m": 10.89
       }
      ],
@@ -286,7 +286,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36102,
+       "techo": 36094,
        "desvio_m": 11.07
       }
      ],
@@ -364,7 +364,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37202,
+       "techo": 37194,
        "desvio_m": 15.35
       }
      ],
@@ -377,7 +377,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38410,
+       "techo": 38402,
        "desvio_m": 19.1
       }
      ],
@@ -416,7 +416,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36982,
+       "techo": 36974,
        "desvio_m": 2.13
       }
      ],
@@ -429,7 +429,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38494,
+       "techo": 38486,
        "desvio_m": 14.41
       }
      ],
@@ -442,7 +442,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38339,
+       "techo": 38331,
        "desvio_m": 13.99
       }
      ],
@@ -455,7 +455,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37440,
+       "techo": 37432,
        "desvio_m": 7.17
       }
      ],
@@ -481,7 +481,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38625,
+       "techo": 38617,
        "desvio_m": 10.12
       }
      ],
@@ -494,7 +494,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37590,
+       "techo": 37582,
        "desvio_m": 8.49
       }
      ],
@@ -507,11 +507,11 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38429,
+       "techo": 38421,
        "desvio_m": 8.82
       },
       {
-       "techo": 38433,
+       "techo": 38425,
        "desvio_m": 10.29
       }
      ],
@@ -524,7 +524,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38337,
+       "techo": 38329,
        "desvio_m": 9.18
       }
      ],
@@ -537,11 +537,11 @@
      "segmento": 1,
      "casas": [
       {
-       "techo": 35985,
+       "techo": 35977,
        "desvio_m": 8.48
       },
       {
-       "techo": 35993,
+       "techo": 35985,
        "desvio_m": 16.1
       }
      ],
@@ -554,7 +554,7 @@
      "segmento": 2,
      "casas": [
       {
-       "techo": 35976,
+       "techo": 35968,
        "desvio_m": 8.26
       }
      ],
@@ -567,7 +567,7 @@
      "segmento": 3,
      "casas": [
       {
-       "techo": 36010,
+       "techo": 36002,
        "desvio_m": 12.27
       }
      ],
@@ -580,7 +580,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36085,
+       "techo": 36077,
        "desvio_m": 9.01
       }
      ],
@@ -593,7 +593,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36101,
+       "techo": 36093,
        "desvio_m": 15.51
       }
      ],
@@ -606,7 +606,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36070,
+       "techo": 36062,
        "desvio_m": 10.23
       }
      ],
@@ -649,11 +649,11 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36084,
+       "techo": 36076,
        "desvio_m": 11.41
       },
       {
-       "techo": 36086,
+       "techo": 36078,
        "desvio_m": 13.47
       }
      ],
@@ -689,7 +689,7 @@
    "cierre_m": 1.0,
    "acceso_minimo_m": 2.0
   },
-  "casas_1772": 6319,
+  "casas_1772": 6311,
   "fase_5_cerrable": true
  }
 }

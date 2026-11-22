@@ -34,6 +34,18 @@ Ciudad de `main` e390f0c (#137), con 6319 casas visibles de 1772; 6317 tienen te
 
 La línea base de T33j.1l (271 pares con corte en 1811 casas) era de B1772-001. Esta ciudad tiene 6317 casas con techo: la reconstrucción de las fases 4 y 5.
 
+## Con la Casa Amarilla (#139)
+
+#139 sumó la Casa Amarilla como hito en pie desde 1772, y el hito esconde casas de la reconstrucción. Con los datos regenerados sobre `main` 1bf6c40 quedan 6311 casas de 1772 a la vista. Las fases 3, 4 y 5 siguen cerrables, y las 53 desalineadas siguen todas en límite.
+
+| Criterio | Línea base (e390f0c) | Con #139 (1bf6c40) |
+|---|---|---|
+| Triángulos sin degenerar | 268 degenerados | 268 |
+| Techos sin cruces | 813 pares | 816 |
+| Cumbreras con el frente | 169 desviadas | 169 |
+| Aleros fuera de la calle | 138 casas | 137 |
+| Mismo trazado que la fase 5 | cumple | cumple |
+
 ## Lo que sigue
 
 - Separar las causas de los 813 cruces: huellas que se pisan en planta tras simplificar (`TOLERANCIA_HUELLA_M`), aleros que montan sobre la vecina y cambios de altura entre casas contiguas.
