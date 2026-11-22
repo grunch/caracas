@@ -92,6 +92,10 @@ Antes de abrirlas había 6 tramos bloqueados de 439:
 | S1772-42 | 14 | 0 |
 | S1772-43 | 36 | 0 |
 
+## Límite documentado
+
+La red conectada se prueba en los 438 tramos medibles. **Los 29 tramos de S1772-24 y S1772-44 no se miden y su conexión no está probada.** Quedan como límite documentado de la fase 3, por la misma causa que en specs/08 1A: el calce no ubica la calle en esos sectores, que la decisión del responsable del 21-11-2026 aceptó como límite del calce. La puerta en 5/5 no prueba que esos tramos estén conectados. Si el calce mejora en esos sectores, hay que medirlos.
+
 ## Estado de la puerta
 
 | Criterio | Cumplido |

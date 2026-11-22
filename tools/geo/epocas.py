@@ -324,11 +324,12 @@ def vida_de_1936(nace36, ciudad, apertura=()):
     return vida, quitar
 
 
-def abrir_calles_de_1772(ciudad, vida, quitar, calles, metro, area_minima_m2=1.0):
+def abrir_calles_de_1772(ciudad, vida, quitar, calles, metro, area_minima_m2=1.0, desde=0):
     """(vida, quitar, sin abrir): las calles de la referencia de 1772 (tools/geo/calles_1772.py) que las casas vivas
     en 1772 bloquean de un extremo al otro se abren quitándole 1772 a las casas que pisan su núcleo de calzada: una de
     1936 nace desde 1843, una «de antes» se quita y una de 1578 (índice más allá de "antes") vive solo hasta 1772. Solo se tocan las calles bloqueadas y solo lo que pisa su eje;
-    lo que siga bloqueado se informa. No muta las entradas."""
+    lo que siga bloqueado se informa. `desde`: solo se tocan los techos desde ese índice (la pasada sobre la ciudad
+    final toca solo las casas de 1578: atrasar ahí una de 1936 dejaría sin relevo a su antecesora). No muta las entradas."""
     from shapely.geometry import LineString, Polygon
     from calles_1772 import NUCLEO_DE_CALZADA_M, bloqueado
     vida, quitar = [list(v) for v in vida], set(quitar)
@@ -348,7 +349,7 @@ def abrir_calles_de_1772(ciudad, vida, quitar, calles, metro, area_minima_m2=1.0
             continue
         nucleo = LineString(eje["puntos"]).buffer(NUCLEO_DE_CALZADA_M / 2 / metro, cap_style="flat")
         for k in ahora:
-            if figuras[k].intersection(nucleo).area * metro ** 2 < area_minima_m2:
+            if k < desde or figuras[k].intersection(nucleo).area * metro ** 2 < area_minima_m2:
                 continue
             nace_, muere = vida[k]
             if k >= len(antes):
@@ -567,7 +568,8 @@ def main():
     if calles72.exists():
         # la ciudad final suma las casas de 1578: ninguna puede volver a cerrar una calle de 1772
         vida_f, quitar_f, sin_abrir = abrir_calles_de_1772(ciudad, ciudad["vida"], set(),
-                                                            json.loads(calles72.read_text())["tramos"], metro)
+                                                            json.loads(calles72.read_text())["tramos"], metro,
+                                                            desde=len(ciudad["techos"]) - len(ciudad78["techos"]))
         ciudad, vida_f = sin_techos(ciudad, vida_f, quitar_f)
         ciudad["vida"] = vida_f
         print(f"calles de 1772 bloqueadas en la ciudad final: {len(sin_abrir)} {sin_abrir[:10]}")

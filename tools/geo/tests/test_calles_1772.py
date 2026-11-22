@@ -127,3 +127,15 @@ def test_un_cruce_semientero_cae_en_el_mismo_pixel_aunque_los_tramos_tengan_orig
     casa = [box(99, -50, 100, 50)]
     assert bloqueado({'puntos': [[0, 0], [100.5, 0]], 'banda_m': 3}, casa, METRO) is True
     assert bloqueado({'puntos': [[100.5, 0], [200.5, 0]], 'banda_m': 3.5}, casa, METRO) is True
+
+
+def test_la_pasada_final_solo_toca_las_casas_de_1578_y_no_atrasa_los_relevos_de_1936():
+    from epocas import abrir_calles_de_1772
+    # la casa 0 es de 1936 y la 1 de 1578; las dos pisan el núcleo de la calle
+    ciudad = {'vertices': [90, 0, 110, 0, 110, 100, 90, 100, 150, 0, 170, 0, 170, 100, 150, 100],
+              'techos': [[0, 4, 1, 0, 0], [4, 4, 1, 0, 0]], 'antes': [0]}
+    calles = [{'tramo': 'L1', 'puntos': [[0, 50], [200, 50]], 'banda_m': 10, 'medible': True}]
+    vida, quitar, sin_abrir = abrir_calles_de_1772(ciudad, [[1, 0], [0, 3]], set(), calles, METRO, desde=1)
+    assert vida[0] == [1, 0]          # la de 1936 conserva su nacimiento: su antecesora de 1578 le pasa la posta a tiempo
+    assert vida[1] == [0, 1]          # la de 1578 deja libre la calle en 1772
+    assert sin_abrir == ['L1']        # la de 1936 la sigue cerrando: se informa, no se toca su vida
