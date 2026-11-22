@@ -224,8 +224,8 @@ Se probó además exigir que el punto de fachada cayera sobre el contorno exteri
 | Criterio | Datos publicados | Solo la medida nueva | Medida y generador (6f4bf90) |
 |---|---|---|---|
 | Frentes alineados | 115 casas desalineadas | 84 | **83** (en 64 frentes) |
-| Frentes medidos | 567 | 568 | 568 |
-| Casas medidas | ≈ 4600 | 4509 | 4508 |
+| Frentes medidos | 568 | 568 | 568 |
+| Casas medidas | 4598 | 4509 | 4508 |
 | Lotes sin solapes | 0 pares | 0 | 0 (cumple) |
 | Casas con acceso | 4 sin acceso | 4 | 4 |
 | Calle aprobada | fase 3 en 5/5 | 5/5 | 5/5 |
