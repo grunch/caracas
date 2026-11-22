@@ -119,3 +119,11 @@ def test_quitar_una_casa_de_1936_con_casas_de_1578_detras_conserva_las_listas_de
               'antes': [0, 1]}
     salida, vida = sin_techos(ciudad, [[1, 0], [1, 2], [0, 1]], {0})
     assert salida['antes'] == [1] and len(salida['techos']) == 2 and vida == [[1, 2], [0, 1]]
+
+
+def test_un_cruce_semientero_cae_en_el_mismo_pixel_aunque_los_tramos_tengan_origenes_distintos():
+    # la segunda revisión: x=100.5 redondeado tras restar orígenes de distinta paridad (-8 y 91) daba 100 en un tramo y
+    # 101 en el otro; la casa cubre el píxel 100 y no el 101, así que tiene que cerrar el cruce para los dos
+    casa = [box(99, -50, 100, 50)]
+    assert bloqueado({'puntos': [[0, 0], [100.5, 0]], 'banda_m': 3}, casa, METRO) is True
+    assert bloqueado({'puntos': [[100.5, 0], [200.5, 0]], 'banda_m': 3.5}, casa, METRO) is True

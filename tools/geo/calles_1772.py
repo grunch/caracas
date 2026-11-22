@@ -53,16 +53,21 @@ def bloqueado(eje, casas, metro):
     x0, y0, x1, y1 = (int(np.floor(v)) for v in banda.bounds)
     x0, y0 = x0 - 2, y0 - 2
     libre = np.zeros((y1 - y0 + 4, x1 - x0 + 4), np.uint8)
-    cv2.fillPoly(libre, [np.round(np.asarray(banda.exterior.coords) - (x0, y0)).astype(np.int32)], 1)
+    # todo se redondea en coordenadas del mosaico y recién después se traslada al raster local: así un cruce semientero
+    # cae en el mismo píxel global sea cual sea el origen de la banda de cada tramo
+    def local(coords):
+        return (np.round(np.asarray(coords, float)) - (x0, y0)).astype(np.int32)
+
+    cv2.fillPoly(libre, [local(banda.exterior.coords)], 1)
     for casa in casas:
         if casa.intersects(banda):
-            cv2.fillPoly(libre, [np.round(np.asarray(casa.exterior.coords) - (x0, y0)).astype(np.int32)], 0)
+            cv2.fillPoly(libre, [local(casa.exterior.coords)], 0)
     _, etiquetas = cv2.connectedComponents(libre, connectivity=4)
 
     def en(punto):
         # el componente libre justo en el cruce, sin ventana: así dos tramos que se encuentran en un cruce comparten el
         # mismo paso, y una casa sobre el cruce los bloquea a todos
-        i, j = int(round(punto[0] - x0)), int(round(punto[1] - y0))
+        i, j = local([punto])[0]
         return int(etiquetas[j, i]) if 0 <= j < etiquetas.shape[0] and 0 <= i < etiquetas.shape[1] else 0
 
     a, b = en(eje['puntos'][0]), en(eje['puntos'][-1])
