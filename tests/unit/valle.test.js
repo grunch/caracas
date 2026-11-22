@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest'
 import { crearMaterialCiudad } from '../../src/material.js'
 import { desdeCuando, umbralDesde } from '../../src/epocas.js'
-import { GLSL_VALLE, BORDE_CIUDAD_M } from '../../src/shader/valle.js'
+import { GLSL_VALLE, BORDE_CIUDAD_M, PALETA_VALLE } from '../../src/shader/valle.js'
 import { GLSL_SUELO, TINTA_DEL_CAMPO_1936, JARDINES_DESDE } from '../../src/shader/suelo.js'
 import { GLSL_RELIEVE } from '../../src/relieve.js'
 
@@ -99,5 +99,39 @@ describe('el valle antes de la ciudad, en el shader del suelo', () => {
 
   test('no agrega muestreadores: sigue dentro de los 16 de WebGL2', () => {
     expect(GLSL_VALLE).not.toMatch(/uniform\s+sampler2D/)
+  })
+})
+
+/** Matiz (grados) y saturación (0–1, HSV) de un color sRGB 0–255. */
+function matizYSaturacion([r, g, b]) {
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min
+  if (d === 0) return { matiz: 0, saturacion: 0 }
+  const matiz = max === r ? 60 * (((g - b) / d) % 6) : max === g ? 60 * ((b - r) / d + 2) : 60 * ((r - g) / d + 4)
+  return { matiz: (matiz + 360) % 360, saturacion: d / max }
+}
+
+describe('la paleta del campo: el verde del Ávila y del valle (fotos de Commons, fuentes/imagenes/20*-commons-*avila*)', () => {
+  const VERDES = ['SABANA', 'SABANA_VERDE', 'LOMA', 'AVILA', 'AVILA_ALTO', 'MONTE', 'RIBERA']
+
+  test('el llano, las lomas, el Ávila y el monte son verdes: ni pajizo, ni ocre, ni malva', () => {
+    for (const nombre of VERDES) {
+      const { matiz, saturacion } = matizYSaturacion(PALETA_VALLE[nombre])
+      expect(matiz, nombre).toBeGreaterThanOrEqual(65) // las fotos de lluvias: 70–85°; el pajizo de 1839 andaba en 45°
+      expect(matiz, nombre).toBeLessThanOrEqual(110)
+      expect(saturacion, nombre).toBeGreaterThanOrEqual(0.3)
+    }
+  })
+
+  test('arriba el cerro es más oscuro que abajo (la selva nublada sobre el pajonal), y el monte, lo más oscuro', () => {
+    const luz = ([r, g, b]) => 0.2126 * r + 0.7152 * g + 0.0722 * b
+    expect(luz(PALETA_VALLE.AVILA_ALTO)).toBeLessThan(luz(PALETA_VALLE.AVILA))
+    expect(luz(PALETA_VALLE.AVILA)).toBeLessThan(luz(PALETA_VALLE.SABANA))
+    for (const nombre of VERDES) expect(luz(PALETA_VALLE.MONTE)).toBeLessThanOrEqual(luz(PALETA_VALLE[nombre]))
+  })
+
+  test('el shader usa la paleta, pasada a lineal', () => {
+    const [r, g, b] = PALETA_VALLE.AVILA.map((v) => ((v / 255) ** 2.2).toFixed(3))
+    expect(GLSL_VALLE).toContain(`AVILA = vec3(${r}, ${g}, ${b})`)
+    expect(Object.isFrozen(PALETA_VALLE)).toBe(true)
   })
 })

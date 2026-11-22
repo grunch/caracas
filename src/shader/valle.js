@@ -1,9 +1,13 @@
 /**
  * El valle antes de la ciudad (solo en color): donde la época que rige todavía no urbanizó, el suelo
- * es campo y el dibujo del plano no se ve. Los tonos salen de la vista de Caracas de John Thomas
- * (1839, fuentes/imagenes/1839-commons-vista-de-caracas): sabana seca, pajiza y ocre en el llano;
- * verde solo en las lomas cercanas (oliva), a lo largo del agua y en los árboles; el Ávila ocre pálido
- * que arriba se vuelve malva; y un borde neto entre las casas y el campo, sin arrabal.
+ * es campo y el dibujo del plano no se ve, con un borde neto entre las casas y el campo, sin arrabal.
+ * La composición sale de la vista de John Thomas (1839, fuentes/imagenes/1839-commons-vista-de-caracas):
+ * llano abierto, lomas, monte en las quebradas y a lo largo del agua. Los TONOS, no: la litografía es
+ * pajiza y ocre, y el valle y el Ávila son verdes. Salen de fotos del Ávila en Commons, medidas
+ * (matiz y saturación de lo que es vegetación; fuentes/imagenes/20*-commons-*avila*, notas en su README):
+ * en sequía (enero) un verde oliva de matiz ~60°; en lluvias (septiembre), verde de ~75°, saturación ~0,4.
+ * Se usa el de lluvias, la «eterna primavera», con el doble de saturación: la luz y la bruma del acabado le
+ * quitan la mitad, y en pantalla queda como en las fotos (~0,3).
  * Necesita GLSL_CRECE (uCrece, uCreceEscala, uEtapas), uSuelo (el agua) y los varyings vMundo y
  * vTerreno (altura sobre la plaza y pendiente, del vértice).
  * crece.png: G = desde qué época está urbanizado cada punto, B = el monte (tools/geo/valle.py).
@@ -13,11 +17,25 @@ const lineal = (r, g, b) => `vec3(${[r, g, b].map((v) => ((v / 255) ** 2.2).toFi
 
 export const BORDE_CIUDAD_M = 10 // medio ancho de la franja en que la ciudad se funde con el campo
 
+/** Los tonos del campo, en sRGB 0–255 (de dónde salen: arriba). */
+export const PALETA_VALLE = Object.freeze({
+  SABANA: [138, 160, 78], // el llano: herbazal verde claro
+  SABANA_VERDE: [116, 146, 62], // sus manchas más verdes
+  LOMA: [92, 124, 48], // las lomas
+  AVILA: [100, 128, 52], // las faldas del Ávila: pajonal y matorral (la luz de las laderas en las fotos)
+  AVILA_ALTO: [50, 80, 40], // arriba, la selva nublada: más oscura y más fría
+  MONTE: [40, 66, 24], // las copas del monte (la sombra del bosque en las fotos)
+  RIBERA: [66, 98, 38], // el bosque de galería de las quebradas
+  AGUA_CLARA: [120, 142, 136],
+  PLAYA: [212, 200, 162],
+})
+const tono = (nombre) => lineal(...PALETA_VALLE[nombre])
+
 export const GLSL_VALLE = /* glsl */ `
-  const vec3 SABANA = ${lineal(212, 200, 158)}, SABANA_VERDE = ${lineal(194, 190, 144)}, LOMA = ${lineal(146, 150, 104)};
-  const vec3 AVILA = ${lineal(206, 190, 152)}, AVILA_ALTO = ${lineal(178, 168, 162)};
-  const vec3 MONTE = ${lineal(98, 118, 72)}, RIBERA = ${lineal(124, 138, 88)};
-  const vec3 AGUA_CLARA = ${lineal(120, 142, 136)}, PLAYA = ${lineal(212, 200, 162)};
+  const vec3 SABANA = ${tono('SABANA')}, SABANA_VERDE = ${tono('SABANA_VERDE')}, LOMA = ${tono('LOMA')};
+  const vec3 AVILA = ${tono('AVILA')}, AVILA_ALTO = ${tono('AVILA_ALTO')};
+  const vec3 MONTE = ${tono('MONTE')}, RIBERA = ${tono('RIBERA')};
+  const vec3 AGUA_CLARA = ${tono('AGUA_CLARA')}, PLAYA = ${tono('PLAYA')};
 
   float azar2(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
   /** Ruido de valor en 0–1, suave. */
@@ -66,10 +84,10 @@ export const GLSL_VALLE = /* glsl */ `
     vec2 m = vMundo.xz;
     float altura = vTerreno.x, cuesta = vTerreno.y;
     float manchas = 0.6 * ruidoValle(m / 420.0) + 0.4 * ruidoValle(m / 110.0);
-    // el llano: sabana seca, pajiza; las lomas, de un verde oliva
+    // el llano: herbazal verde claro, con manchas; las lomas, más verdes
     vec3 c = mix(SABANA, SABANA_VERDE, smoothstep(0.3, 0.7, manchas));
     c = mix(c, LOMA, 0.7 * smoothstep(0.07, 0.3, cuesta + 0.1 * (manchas - 0.5)));
-    // el Ávila: ocre pálido, malva arriba; sus pliegues los marcan la luz y el monte de las quebradas
+    // el Ávila: pajonal y matorral abajo, selva nublada arriba; sus pliegues los marcan la luz y el monte
     float cerro = smoothstep(170.0, 420.0, altura + 90.0 * (ruidoValle(m / 260.0) - 0.5));
     c = mix(c, mix(AVILA, AVILA_ALTO, smoothstep(420.0, 900.0, altura)), 0.9 * cerro);
     // el monte: manchones de copas donde crece.png dice, y el bosque de galería de las quebradas

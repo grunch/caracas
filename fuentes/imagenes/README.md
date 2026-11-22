@@ -127,8 +127,9 @@ noreste. Hay dos reproducciones de la misma litografía: la de Commons (recortad
 claros y más fieles; da autor y año) y la de la Cámara de Caracas (más ancha, color saturado; llegó
 como ilustración de la época del obispo Diez Madroñero, 1757–1769, pero es esta misma de 1839). Es la
 **referencia de color y del conjunto**. Para los tonos, guiarse por la de Commons: **teja anaranjada
-clara y terrosa, no roja; el Ávila ocre y malva pálido, con bruma; el campo, sabana seca amarillenta**
-más que verde.
+clara y terrosa, no roja**. El Ávila ocre y malva pálido y el campo de sabana seca amarillenta de la
+litografía **no se siguen**: el valle y el Ávila son verdes. Los tonos del campo salen de las fotos del
+Ávila (sección «El verde del Ávila», abajo).
 
 Una tercera copia, `1830-ciudadccs-caracas` (640 px, la hoja entera con márgenes), llegó fechada en
 1830: parece la misma litografía, a verificar. No agrega detalle; deja abierta la duda de la fecha
@@ -618,3 +619,24 @@ La cubierta de 1936 es mixta: no se anticipa la sustitución completa de 1957. E
 la platabanda es hipotético. Las banderas usan siete estrellas dispuestas según cada fecha.
 Referencias, licencias no verificadas y límites en `specs/08-casa-amarilla-por-epocas.md`.
 No se publican las nuevas imágenes; las mallas son originales y procedurales.
+
+## El verde del Ávila: fotos actuales (`2024-commons-avila-desde-el-bosque`, `2014-commons-cerro-el-avila-laderas`, `2012-commons-avila-laderas-la-florida`) → todas las épocas, solo el color del campo
+
+Tres fotos de Commons con licencia libre, que sirven para **medir el verde** del cerro y del valle sin ciudad
+(`src/shader/valle.js`, `PALETA_VALLE`). No son de época: la vegetación del Ávila cambió poco en la
+forma, y lo que se toma es el tono. Se midió con PIL el matiz y la saturación (HSV) de los píxeles de
+vegetación de cada foto, en sombra, en medio tono y en luz:
+
+| foto | mes | matiz | saturación | sombra · medio · luz (sRGB) |
+|---|---|---|---|---|
+| desde El Bosque, frontal con sol de tarde | enero (sequía) | ~60° | 0,18 | 122,124,102 · — · 172,170,140 (con bruma) |
+| laderas de cerca | enero (sequía) | ~60° | 0,33 | 28,30,20 · 67,67,49 · 131,126,81 |
+| laderas desde La Florida | septiembre (lluvias) | ~75° | 0,41 | 18,25,6 · 59,66,40 · 108,114,78 |
+
+- **Verde, no pajizo.** Aun en sequía, el cerro es verde oliva; en lluvias se corre a un verde franco.
+  El sitio usa el de **lluvias**, la «eterna primavera», con el doble de saturación porque la luz y la bruma
+  del acabado aclaran todo hacia el crema del papel.
+- **Abajo, pajonal y matorral, más claros; arriba y en las quebradas, selva**, mucho más oscura.
+- **De lejos el cerro se ve azul verdoso** (la frontal de 2024 tomada desde la ciudad, matiz ~200° en los
+  píxeles): eso es la bruma del aire, que pone el acabado, no el color del suelo.
+
