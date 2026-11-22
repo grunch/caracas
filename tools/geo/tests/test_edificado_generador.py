@@ -167,3 +167,95 @@ def test_una_continua_de_la_referencia_sobre_un_edificio_publico_de_1936_igual_a
     assert len(grupos) == 1
     g = grupos[0]
     assert not (g['clases'][g['cuadra']] == CLASE['publico']).any()
+
+
+def test_una_mancha_roja_con_las_esquinas_achaflanadas_arma_su_cuadra_con_esquinas_vivas():
+    # T33j.5c: el dibujo y el calce redondean las esquinas de lo rojo; un chaflán de pocos metros es un lado más del
+    # reparto y sus casas quedan en cuña, mirando en diagonal
+    from tools.geo.vectorizar import _sin_chaflanes
+    chaflanada = Polygon([(48, 40), (192, 40), (200, 48), (200, 192), (192, 200), (48, 200), (40, 192), (40, 48)])
+    viva = _sin_chaflanes(chaflanada, 0.5)
+    assert len(viva.exterior.coords) - 1 == 4
+    assert viva.equals_exact(box(40, 40, 200, 200), 1e-6) or abs(viva.area - 160 * 160) < 1e-6
+    # una L de verdad no pierde su entrante, y un lado corto entre lados cortos tampoco se toca
+    ele = Polygon([(40, 40), (200, 40), (200, 200), (120, 200), (120, 120), (40, 120)])
+    assert _sin_chaflanes(ele, 0.5).equals(ele)
+
+
+def test_las_casas_de_una_mancha_achaflanada_no_quedan_en_cuna():
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    chaflanada = Polygon([(48, 40), (192, 40), (200, 48), (200, 192), (192, 200), (48, 200), (40, 192), (40, 48)])
+    g = _cuadras_de_edificado([{'id': 'U2', 'poligonos': [chaflanada], 'por_anillo': False}], c,
+                              np.zeros_like(c, dtype=int), {}, METRO)[0]
+    assert len(g['poligono']) == 4
+    x, y = g['origen']
+    assert g['cuadra'][41 - y, 41 - x] and g['cuadra'][198 - y, 198 - x]   # las esquinas, de la cuadra
+
+
+def test_dos_manchas_rojas_que_el_calce_encima_no_se_pisan():
+    # dos unidades cuyas manchas, llevadas a 1936 por el calce, caen en parte una sobre otra: la segunda cede lo común
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    edificado = [{'id': 'U2', 'poligonos': [box(40, 40, 140, 140)], 'por_anillo': False},
+                 {'id': 'U3', 'poligonos': [box(110, 40, 220, 140)], 'por_anillo': False}]
+    grupos = _cuadras_de_edificado(edificado, c, np.zeros_like(c, dtype=int), {}, METRO)
+    total = np.zeros(c.shape, int)
+    for g in grupos:
+        x, y = g['origen']
+        alto, ancho = g['cuadra'].shape
+        total[y:y + alto, x:x + ancho] += g['cuadra']
+    assert total.max() == 1 and total[60, 125] == 1
+
+
+def test_una_casa_de_1936_que_apenas_pisa_una_de_la_reconstruccion_no_vive_en_1772():
+    from tools.geo.vectorizar import marcar_tapadas
+    # 0,5 m² en común: antes se toleraba hasta 1 m²; la puerta de la fase 5 cuenta desde 0,01 m²
+    salida = {'vertices': [0, 0, 20, 0, 20, 20, 0, 20, 19.9, 0, 40, 0, 40, 20, 19.9, 20], 'techos': [[0, 4, 1, 0, 0], [4, 4, 1, 0, 0]],
+              'antes': [1, 0], 'junta': [0, -1], 'juntas_hasta': [2]}
+    assert marcar_tapadas(salida, METRO) == [0, 1]
+
+
+def test_una_casa_de_1578_que_pisa_una_de_1772_muere_en_1772():
+    from tools.geo.epocas import ceder_a_1772
+    # la 0 vive en 1772 (reconstrucción); la 1 es de 1578, vive hasta 1843 y pisa a la 0; la 2, de 1578, no pisa nada
+    ciudad = {'vertices': [0, 0, 20, 0, 20, 20, 0, 20, 18, 0, 40, 0, 40, 20, 18, 20, 100, 100, 120, 100, 120, 120, 100, 120],
+              'techos': [[0, 4, 1, 0, 0], [4, 4, 1, 0, 0], [8, 4, 1, 0, 0]]}
+    vida = [[1, 2], [0, 2], [0, 2]]
+    assert ceder_a_1772(ciudad, vida, desde=1, metro=METRO) == [[1, 2], [0, 1], [0, 2]]
+    assert vida == [[1, 2], [0, 2], [0, 2]]   # no muta la entrada
+
+
+def test_un_entrante_no_pierde_su_esquina_interior():
+    # la esquina interior de un entrante (40,10)-(42,12) m: su esquina viva quitaría área de la cuadra; solo se cambia
+    # un chaflán exterior, cuya esquina viva suma
+    from tools.geo.vectorizar import _sin_chaflanes
+    m = [(0, 0), (40, 0), (40, 10), (42, 12), (50, 12), (50, 0), (100, 0), (100, 100), (0, 100)]
+    entrante = Polygon([(x / METRO, y / METRO) for x, y in m])
+    assert _sin_chaflanes(entrante, METRO).equals(entrante)
+
+
+def _casas_de_grupos(grupos, c):
+    from tools.geo.vectorizar import techos_de_manzana
+    salida = {'vertices': [], 'techos': [], 'esquinas': [], 'cuadras': [], 'cede': [], 'junta': [], 'antes': [],
+              'marcos': [], 'alas': [], 'publicos': [], 'n_cuadras': 0, '_antes': 1}
+    for j, g in enumerate(grupos):
+        salida['_junta'] = j
+        techos_de_manzana(g['clases'], g['cuadra'], g['origen'], salida, 4, 1, lambda f: 0.0, METRO, True, g['poligono'])
+    v = salida['vertices']
+    return [(salida['junta'][k], Polygon([(v[2 * (a + i)], v[2 * (a + i) + 1]) for i in range(n)]))
+            for k, (a, n, *_resto) in enumerate(salida['techos'])]
+
+
+def test_las_casas_de_dos_manchas_que_el_calce_encima_no_se_pisan():
+    # la segunda mancha cede lo común en su máscara y también en su polígono: el reparto exacto por lados tolera 2 m
+    # de diferencia en el borde y, con el polígono entero, devolvería la franja común (1,5 m) a sus casas
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    edificado = [{'id': 'U2', 'poligonos': [box(40, 40, 140, 140)], 'por_anillo': False},
+                 {'id': 'U3', 'poligonos': [box(137, 40, 220, 140)], 'por_anillo': False}]
+    casas = _casas_de_grupos(_cuadras_de_edificado(edificado, c, np.zeros_like(c, dtype=int), {}, METRO), c)
+    assert {j for j, _ in casas} == {0, 1}
+    for i, (ji, a) in enumerate(casas):
+        for jj, b in casas[i + 1:]:
+            assert ji == jj or a.intersection(b).area * METRO ** 2 <= 0.01

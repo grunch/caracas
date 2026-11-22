@@ -371,6 +371,38 @@ def abrir_calles_de_1772(ciudad, vida, quitar, calles, metro, area_minima_m2=1.0
     return vida, quitar, sin_abrir
 
 
+SOLAPE_1772_M2 = 0.01   # como la puerta de la fase 5: una casa de 1578 que pisa esto de una de 1772 le cede el lugar
+
+
+def ceder_a_1772(ciudad, vida, desde, metro, epoca=1, area_minima_m2=SOLAPE_1772_M2):
+    """La vida con las casas de 1578 (índice desde `desde`) que siguen en pie en 1772 y pisan una casa de 1772 muertas en
+    1772: en 1772 manda el plano de 1772 (T33j.5c). → una lista nueva; no muta las entradas."""
+    from shapely.geometry import Polygon
+    from shapely.strtree import STRtree
+    v = ciudad["vertices"]
+
+    def figura(k):
+        i, n = ciudad["techos"][k][:2]
+        return Polygon([(v[2 * j], v[2 * j + 1]) for j in range(i, i + n)])
+
+    def vive(k):
+        nace, muere = vida[k]
+        return nace <= epoca and (muere == 0 or muere > epoca)
+
+    de_1772 = [figura(k) for k in range(min(desde, len(vida))) if vive(k)]
+    de_1772 = [f for f in de_1772 if f.is_valid]
+    arbol = STRtree(de_1772) if de_1772 else None
+    salida = [list(x) for x in vida]
+    for k in range(desde, len(vida)):
+        if not vive(k) or arbol is None:
+            continue
+        f = figura(k)
+        if f.is_valid and any(f.intersection(de_1772[j]).area * metro ** 2 > area_minima_m2
+                              for j in arbol.query(f, predicate="intersects")):
+            salida[k] = [salida[k][0], epoca]
+    return salida
+
+
 def relevos(huellas36, vida36, quitar):
     """(huellas, nace) de las casas de 1936 que quedan, con su nacimiento final (vida_de_1936): las que
     pueden pasarle la posta a una de 1578. Un techo quitado no reemplaza nada, y un edificio público no
@@ -576,11 +608,12 @@ def main():
         verificadas = json.loads((raiz / "tools/geo/calles-historicas.json").read_text())["tramos"]
         conocidas = [{"tramo": f"calzada-{k}", "puntos": [list(p) for p in e.coords], "banda_m": 0, "medible": True,
                       "siempre": True} for k, e in enumerate(ejes_de_calzada(red72, verificadas))]
+        desde = len(ciudad["techos"]) - len(ciudad78["techos"])   # las de 1578 van al final; quitar_f solo toca esas
         vida_f, quitar_f, sin_abrir = abrir_calles_de_1772(ciudad, ciudad["vida"], set(),
                                                             json.loads(calles72.read_text())["tramos"] + conocidas, metro,
-                                                            desde=len(ciudad["techos"]) - len(ciudad78["techos"]))
+                                                            desde=desde)
         ciudad, vida_f = sin_techos(ciudad, vida_f, quitar_f)
-        ciudad["vida"] = vida_f
+        ciudad["vida"] = ceder_a_1772(ciudad, vida_f, desde, metro)
         print(f"calles de 1772 bloqueadas en la ciudad final: {len(sin_abrir)} {sin_abrir[:10]}")
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))
 

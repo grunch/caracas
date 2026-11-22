@@ -392,6 +392,9 @@ def _mascara_de(poligonos, origen, forma):
     return mascara > 0
 
 
+MARGEN_OCUPADO_PX = 1.0     # una cuadra de OSM no llega a menos de esto de lo que ocupa la reconstrucción
+
+
 def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas=(), ocupado=()):
     """Las cuadras de 1772 que el plano de 1936 muestra abiertas (una calle nueva que las parte, un pasaje o
     una plaza que les entra): por cada cara de la red sin los tramos nuevos, su polígono ajustado a las
@@ -402,10 +405,12 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas
     los pisa poco se recorta lo que cae dentro de ellos (la referencia ya lo reconstruye)."""
     alto, ancho = clases.shape
     salida = []
+    # lo ocupado se encima (una unidad y su mancha reconstruida): la parte de una cara sobre ello se cuenta una vez
+    sobre = unary_union(list(ocupado)) if ocupado else Polygon()
     for cara in red.caras72:
         if not CUADRA_MINIMA_M2 <= cara.area * metro ** 2 <= CARA_MAXIMA_M2:
             continue
-        if sum(cara.intersection(p).area for p in ocupado) >= SOBRE_REFERENCIA * cara.area:
+        if cara.intersection(sobre).area >= SOBRE_REFERENCIA * cara.area:
             continue
         bx0, by0, bx1, by1 = cara.bounds
         x0, y0, x1, y1 = max(0, int(bx0)), max(0, int(by0)), min(ancho, int(bx1) + 2), min(alto, int(by1) + 2)
@@ -428,7 +433,9 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas
         if documentada is not None:
             evidencia = _relleno(np.asarray(documentada.exterior.coords) - (x0, y0), cl.shape)
             plaza_vieja &= ~evidencia
-        cuadra = en_poligono & (de_manzana | calle) & ~plaza_vieja & ~_mascara_de(ocupado, (x0, y0), cl.shape)
+        # un píxel de margen hacia lo ocupado: las casas salen de la máscara con medio píxel de buffer (poligono_de)
+        cuadra = en_poligono & (de_manzana | calle) & ~plaza_vieja & ~_mascara_de([o.buffer(MARGEN_OCUPADO_PX, join_style='mitre')
+                                                                                for o in ocupado], (x0, y0), cl.shape)
         abierto = _sin_astillas(cuadra & calle, metro)
         if documentada is None and abierto.sum() * metro ** 2 < ABIERTO_MINIMO_M2:
             continue
@@ -514,6 +521,7 @@ def _cuadras_de_referencia(referencia, clases, cuadras, areas, metro, edificado=
         # la planta de un hito en pie en 1772 es su reserva de ocupación: ninguna casa de 1772 la cruza (T33j.4b)
         candidatas = [(r, o, cuadra & ~_mascara_de(reservas, o, cuadra.shape), abierto & ~_mascara_de(reservas, o, cuadra.shape), p)
                       for r, o, cuadra, abierto, p in candidatas]
+    candidatas = _sin_pisarse(candidatas)
     # qué manzanas de 1936 son de la referencia lo deciden todas las candidatas; el dueño, solo una aceptada (si la que
     # más la cubre no pasa la validación, la manzana pasa a otra: sus casas de 1936 nunca conviven con la reconstrucción)
     de_toda, _ = _duenos(candidatas, range(len(candidatas)), cuadras, areas)
@@ -538,27 +546,113 @@ def _cuadras_de_referencia(referencia, clases, cuadras, areas, metro, edificado=
         aceptadas = [k for k in aceptadas if k not in rechazadas]
 
 
+def _sin_pisarse(candidatas):
+    """Las candidatas con casas (rol 'casas': manchas rojas) sin lo que ya ocupan las anteriores: dos manchas que el
+    calce lleva una sobre otra, o una esquina viva sobre la vecina, no arman dos casas en el mismo lugar (T33j.5c). La
+    que cede lo pierde en su máscara y en su polígono: el reparto exacto por lados tolera 2 m de diferencia con la
+    máscara y, con el polígono entero, le devolvería la franja común (_ceder_poligono)."""
+    puestas, salida = [], []
+    for r, (x0, y0), cuadra, abierto, p in candidatas:
+        if r.get('rol') == 'casas':
+            alto, ancho = cuadra.shape
+            antes = cuadra
+            cuadra = cuadra.copy()
+            for (px, py), otra, _figura in puestas:
+                oa, ob = otra.shape
+                fx0, fy0, fx1, fy1 = max(x0, px), max(y0, py), min(x0 + ancho, px + ob), min(y0 + alto, py + oa)
+                if fx0 < fx1 and fy0 < fy1:
+                    cuadra[fy0 - y0:fy1 - y0, fx0 - x0:fx1 - x0] &= ~otra[fy0 - py:fy1 - py, fx0 - px:fx1 - px]
+            if p is not None and (cuadra != antes).any():
+                p = _ceder_poligono(p, (x0, y0), [f for _o, _m, f in puestas])
+                if p is not None:
+                    cuadra = cuadra & _relleno(p, cuadra.shape)
+            figura = Polygon(np.asarray(p) + (x0, y0)) if p is not None else poligono_de(cuadra, (x0, y0), 0.5)
+            puestas.append(((x0, y0), cuadra, figura))
+            abierto = abierto & cuadra
+        salida.append((r, (x0, y0), cuadra, abierto, p))
+    return salida
+
+
+def _ceder_poligono(p, origen, ocupadas):
+    """El polígono de una mancha sin lo que ocupan las anteriores (en coordenadas de su ventana), o None si lo que
+    queda ya no es un polígono de pocos lados: entonces la mancha se reparte por su máscara."""
+    ocupado = unary_union([f for f in ocupadas if f is not None and not f.is_empty])
+    resto = Polygon(np.asarray(p) + origen).difference(ocupado, grid_size=GRILLA_PX)
+    if resto.geom_type != 'Polygon' or resto.is_empty or resto.interiors:
+        return None
+    resto = resto.simplify(GRILLA_PX)
+    if len(resto.exterior.coords) - 1 > LADOS_MAXIMOS:
+        return None
+    return np.asarray(resto.exterior.coords)[:-1] - origen
+
+
 HOLGURA_EDIFICADO_M = 1.0   # lo rojo llevado a 1936 se ensancha esto: el borde del dibujo no deja sin casas su frente
 LADOS_MAXIMOS = 10          # como ajustar_cara: un polígono de más lados no se reparte por lados
 EDIFICADO_MINIMO_M2 = 20.0  # una mancha roja más chica es una mota del dibujo, no un edificio
 
 
+CHAFLAN_MAXIMO_M = 6.0      # un lado más corto que esto entre dos largos es un chaflán del dibujo o del calce
+ALCANCE_CHAFLAN_M = 4.0     # … si la esquina viva (donde se cruzan sus vecinos) queda a menos de esto
+
+
+def _sin_chaflanes(poligono, metro):
+    """El polígono con cada chaflán cambiado por la esquina viva donde se cruzan sus dos lados vecinos (T33j.5c). El
+    dibujo de 1772 y el calce redondean las esquinas de lo rojo: un lado de pocos metros en diagonal es un lado más del
+    reparto, y sus casas quedan en cuña mirando a la esquina. Una L o un entrante de verdad (lados largos) no se tocan."""
+    corto, alcance = CHAFLAN_MAXIMO_M / metro, ALCANCE_CHAFLAN_M / metro
+    p = [np.asarray(q, float) for q in list(poligono.exterior.coords)[:-1]]
+    cambio = True
+    while cambio and len(p) > 4:
+        cambio = False
+        n = len(p)
+        for i in range(n):
+            a, b, c, d = p[i - 1], p[i], p[(i + 1) % n], p[(i + 2) % n]
+            lado = np.hypot(*(c - b))
+            if lado >= corto or np.hypot(*(b - a)) <= lado or np.hypot(*(d - c)) <= lado:
+                continue
+            u, w = b - a, d - c
+            det = u[0] * w[1] - u[1] * w[0]
+            if abs(det) < 1e-9:
+                continue
+            s = ((c - a)[0] * w[1] - (c - a)[1] * w[0]) / det
+            viva = a + s * u
+            if np.hypot(*(viva - (b + c) / 2)) > alcance:
+                continue
+            nuevo = [q for k, q in enumerate(p) if k not in (i, (i + 1) % n)]
+            nuevo.insert(i if (i + 1) % n else 0, viva)
+            candidato = Polygon(nuevo)
+            # la esquina viva de un chaflán exterior suma área; la de la esquina interior de un entrante, la quitaría
+            if candidato.is_valid and candidato.area > Polygon(p).area:
+                p, cambio = nuevo, True
+                break
+    salida = Polygon(p)
+    return salida if salida.is_valid else poligono
+
+
 def _de_edificado(figura, clases, metro):
-    """(origen, cuadra, abierto, polígono) de una mancha roja del original llevada a 1936, o None si no cabe."""
-    x0, y0, x1, y1 = _ventana(figura, clases.shape)
-    if x1 - x0 < 4 or y1 - y0 < 4 or figura.area * metro ** 2 < EDIFICADO_MINIMO_M2:
+    """(origen, cuadra, abierto, polígono) de una mancha roja del original llevada a 1936, o None si no cabe. Sus
+    chaflanes se cambian por esquinas vivas (_sin_chaflanes) y la cuadra las incluye, sin entrar a la calle."""
+    if figura.area * metro ** 2 < EDIFICADO_MINIMO_M2:
+        return None
+    x0, y0, x1, y1 = _ventana(figura.buffer(ALCANCE_CHAFLAN_M / metro), clases.shape)
+    if x1 - x0 < 4 or y1 - y0 < 4:
         return None
     simple = figura
     for tolerancia_m in (0.5, 1, 2, 3, 4):
         simple = figura.simplify(tolerancia_m / metro)
         if len(simple.exterior.coords) - 1 <= LADOS_MAXIMOS:
             break
+    if simple.geom_type == 'Polygon':
+        simple = _sin_chaflanes(simple, metro)
     lados = simple.geom_type == 'Polygon' and len(simple.exterior.coords) - 1 <= LADOS_MAXIMOS
     cl = clases[y0:y1, x0:x1]
+    calle = cl == CLASE['calle']
     # lo rojo revisado es edificado de 1772 sea lo que sea en 1936 (un parque, una plaza o un edificio público posteriores)
     cuadra = _mascara_de([figura], (x0, y0), cl.shape)
+    if lados:
+        cuadra |= _mascara_de([simple], (x0, y0), cl.shape) & ~calle   # las esquinas vivas, nunca en la calle
     # sin un polígono de pocos lados, la mancha se reparte por su máscara (techos_de_manzana sin polígono)
-    return (x0, y0), cuadra, _sin_astillas(cuadra & (cl == CLASE['calle']), metro) & cuadra, \
+    return (x0, y0), cuadra, _sin_astillas(cuadra & calle, metro) & cuadra, \
         (np.asarray(simple.exterior.coords)[:-1] - (x0, y0) if lados else None)
 
 
@@ -646,7 +740,10 @@ def plantas_de_1772(hitos):
             for p in h['planta']]
 
 
-def marcar_tapadas(salida, metro, area_minima_m2=1.0, plantas=()):
+TAPADA_MINIMA_M2 = 0.01     # como la puerta de la fase 5: una casa de 1936 que pisa esto de una de 1772 no vive en 1772
+
+
+def marcar_tapadas(salida, metro, area_minima_m2=TAPADA_MINIMA_M2, plantas=()):
     """[0/1 por techo]: 1 si es una casa de 1936 («antes» 0) que queda debajo de una casa de la reconstrucción de 1772 de
     la referencia (grupo con `hasta`), o que pisa más del 10 % de su huella sobre la planta de un hito en pie en 1772
     (`plantas`, su reserva de ocupación): no puede vivir en 1772. tools/geo/epocas.py la saca de 1772."""
@@ -740,7 +837,9 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
                                                      for e in red.get('calzada72', ())]
         antes = _cuadras_de_referencia(referencia, clases, cuadras, areas, metro, revisado, reservas)
         tomadas = {m for g in antes for m in g['miembros']}
-        ocupado = [r['poligono'] for r in referencia] + [p for e in revisado for p in e['poligonos']] + list(reservas)
+        # lo que ya ocupa la reconstrucción, con las esquinas vivas de las manchas (_sin_chaflanes): OSM no lo repite
+        vivas = [Polygon(np.asarray(g['poligono']) + g['origen']) for g in antes if g.get('poligono') is not None]
+        ocupado = [r['poligono'] for r in referencia] + [p for e in revisado for p in e['poligonos']] + vivas + list(reservas)
         for g in _cuadras_de_antes(con_red, np.asarray(red['edificado72'], bool), clases, cuadras, areas, metro,
                                    red.get('completas72', ()), ocupado):
             antes.append({**g, 'miembros': g['miembros'] - tomadas})

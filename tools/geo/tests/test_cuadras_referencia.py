@@ -188,3 +188,14 @@ def test_los_ejes_de_calzada_suman_las_calles_historicas_verificadas():
            'calles': [{'id': 'L1', 'tipo': 'calle_recta', 'nodos': ['A', 'B']}]}
     verificadas = [{'id': 'san-jacinto', 'original': [[50, 50], [60, 50]], 'anclajes': [[500, 500], [600, 500]]}]
     assert [list(e.coords) for e in ejes_de_calzada(red, verificadas)] == [[(500.0, 500.0), (600.0, 500.0)]]
+
+
+def test_lo_ocupado_que_se_encima_cuenta_una_sola_vez():
+    # la unidad cubre un 20 % de la cara y su mancha reconstruida cae dentro de ella: sumadas darían más del 30 %
+    c, cuadras = plano_con_pasaje()
+    red = Red(red_de(marco_de_calles(20, 20, 240, 240), c)['tramos'])
+    unidad = Polygon([(20, 20), (240, 20), (240, 64), (20, 64)])
+    mancha = Polygon([(20, 20), (240, 20), (240, 55), (20, 55)])
+    grupos = _cuadras_de_antes(red, c == CLASE['edificado'], c, cuadras, {1: int((cuadras == 1).sum())}, METRO,
+                               completas=[ANILLO], ocupado=[unidad, mancha])
+    assert len(grupos) == 1
