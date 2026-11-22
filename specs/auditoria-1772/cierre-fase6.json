@@ -8,8 +8,8 @@
  "puerta_de_salida": {
   "triangulos_sin_degenerar": {
    "cumplido": false,
-   "triangulos": 75137,
-   "degenerados": 268,
+   "triangulos": 80236,
+   "degenerados": 282,
    "casas": [
     13841,
     13852,
@@ -23,11 +23,8 @@
     14669,
     14670,
     32666,
-    32668,
-    32752,
+    32725,
     32762,
-    32974,
-    33058,
     33065,
     33067,
     33072,
@@ -39,8 +36,7 @@
     33096,
     33097,
     33103,
-    33199,
-    33214,
+    33179,
     33251,
     33255,
     33261,
@@ -54,8 +50,14 @@
     33407,
     33409,
     33419,
+    33495,
+    33501,
+    33591,
+    33607,
+    33610,
     33669,
-    33700,
+    33683,
+    33692,
     33703,
     33708,
     33713,
@@ -68,15 +70,19 @@
     33740,
     33742,
     33745,
+    33792,
+    33793,
     33927,
     33942,
     33949,
     33952,
     33973,
-    33994,
+    33976,
+    33981,
     33997,
     33998,
     34010,
+    34018,
     34058,
     34065,
     34076,
@@ -93,15 +99,19 @@
     34238,
     34245,
     34246,
+    34289,
+    34293,
     34368,
     34373,
     34374,
     34379,
     34383,
     34388,
-    34464,
-    34496,
+    34430,
+    34442,
+    34443,
     34539,
+    34638,
     34642,
     34653,
     34660,
@@ -119,8 +129,8 @@
     34718,
     34719,
     34729,
+    34789,
     34795,
-    34799,
     34852,
     34885,
     34886,
@@ -134,8 +144,9 @@
     34996,
     34998,
     35002,
-    35086,
-    35135,
+    35037,
+    35104,
+    35136,
     35218,
     35223,
     35224,
@@ -148,7 +159,10 @@
     35249,
     35253,
     35286,
-    35654,
+    35404,
+    35636,
+    35699,
+    35718,
     35726,
     35729,
     35733,
@@ -157,142 +171,131 @@
     35760,
     35761,
     35773,
-    35806,
-    35830,
-    35863,
-    35968,
-    36065,
-    36222,
-    36227,
+    36102,
+    36211,
+    36277,
     36592,
+    36632,
     36795,
+    37034,
+    37069,
+    37078,
     37084,
-    37183,
-    37422,
-    37527,
-    37823,
-    38353,
+    37105,
+    37144,
+    37145,
+    37497,
+    38022,
+    38049,
+    38073,
+    38339,
     38377,
+    38586,
+    38616,
     38697,
-    38750,
-    38867
+    38755,
+    38868
    ]
   },
   "techos_sin_cruces": {
    "cumplido": false,
-   "pares": 816,
+   "pares": 145,
    "mayores": [
-    {
-     "techos": [
-      36385,
-      36388
-     ],
-     "pares_de_triangulos": 12,
-     "area_proyectada_m2": 11.4818
-    },
-    {
-     "techos": [
-      32777,
-      32782
-     ],
-     "pares_de_triangulos": 8,
-     "area_proyectada_m2": 11.0266
-    },
     {
      "techos": [
       38568,
       38570
      ],
      "pares_de_triangulos": 6,
-     "area_proyectada_m2": 8.7452
+     "area_proyectada_m2": 7.9281
     },
     {
      "techos": [
-      37537,
-      37548
+      38561,
+      38563
      ],
-     "pares_de_triangulos": 18,
-     "area_proyectada_m2": 7.9932
-    },
-    {
-     "techos": [
-      38867,
-      38868
-     ],
-     "pares_de_triangulos": 10,
-     "area_proyectada_m2": 7.831
-    },
-    {
-     "techos": [
-      36891,
-      36904
-     ],
-     "pares_de_triangulos": 10,
-     "area_proyectada_m2": 7.4098
-    },
-    {
-     "techos": [
-      35358,
-      35363
-     ],
-     "pares_de_triangulos": 9,
-     "area_proyectada_m2": 7.0513
-    },
-    {
-     "techos": [
-      36168,
-      36173
-     ],
-     "pares_de_triangulos": 5,
-     "area_proyectada_m2": 6.8583
-    },
-    {
-     "techos": [
-      32878,
-      32900
-     ],
-     "pares_de_triangulos": 18,
-     "area_proyectada_m2": 6.8417
-    },
-    {
-     "techos": [
-      37995,
-      37999
-     ],
-     "pares_de_triangulos": 8,
-     "area_proyectada_m2": 6.7562
+     "pares_de_triangulos": 24,
+     "area_proyectada_m2": 5.8613
     },
     {
      "techos": [
       36810,
       36813
      ],
-     "pares_de_triangulos": 12,
-     "area_proyectada_m2": 6.4072
+     "pares_de_triangulos": 9,
+     "area_proyectada_m2": 5.8501
     },
     {
      "techos": [
-      34534,
-      34535
+      37995,
+      37999
      ],
      "pares_de_triangulos": 11,
-     "area_proyectada_m2": 6.0337
+     "area_proyectada_m2": 5.5285
     },
     {
      "techos": [
-      33885,
-      33890
+      35358,
+      35363
+     ],
+     "pares_de_triangulos": 11,
+     "area_proyectada_m2": 5.0533
+    },
+    {
+     "techos": [
+      38706,
+      38707
      ],
      "pares_de_triangulos": 8,
-     "area_proyectada_m2": 5.7005
+     "area_proyectada_m2": 4.7538
     },
     {
      "techos": [
-      37579,
-      37581
+      37537,
+      37548
+     ],
+     "pares_de_triangulos": 16,
+     "area_proyectada_m2": 4.5972
+    },
+    {
+     "techos": [
+      32777,
+      32782
      ],
      "pares_de_triangulos": 10,
-     "area_proyectada_m2": 5.5885
+     "area_proyectada_m2": 4.2885
+    },
+    {
+     "techos": [
+      35391,
+      35398
+     ],
+     "pares_de_triangulos": 6,
+     "area_proyectada_m2": 4.1605
+    },
+    {
+     "techos": [
+      37232,
+      37242
+     ],
+     "pares_de_triangulos": 6,
+     "area_proyectada_m2": 3.9471
+    },
+    {
+     "techos": [
+      38523,
+      38526
+     ],
+     "pares_de_triangulos": 9,
+     "area_proyectada_m2": 3.7263
+    },
+    {
+     "techos": [
+      36163,
+      36168
+     ],
+     "pares_de_triangulos": 5,
+     "area_proyectada_m2": 3.6284
     },
     {
      "techos": [
@@ -300,55 +303,71 @@
       36092
      ],
      "pares_de_triangulos": 16,
-     "area_proyectada_m2": 5.4474
+     "area_proyectada_m2": 3.5933
     },
     {
      "techos": [
-      33288,
-      33295
+      36450,
+      36455
+     ],
+     "pares_de_triangulos": 4,
+     "area_proyectada_m2": 3.5528
+    },
+    {
+     "techos": [
+      36172,
+      36175
+     ],
+     "pares_de_triangulos": 7,
+     "area_proyectada_m2": 3.2994
+    },
+    {
+     "techos": [
+      36168,
+      36173
+     ],
+     "pares_de_triangulos": 7,
+     "area_proyectada_m2": 3.2971
+    },
+    {
+     "techos": [
+      36102,
+      36103
      ],
      "pares_de_triangulos": 10,
-     "area_proyectada_m2": 5.4131
+     "area_proyectada_m2": 3.1017
     },
     {
      "techos": [
-      33850,
-      33851
+      34534,
+      34535
      ],
      "pares_de_triangulos": 8,
-     "area_proyectada_m2": 5.2966
+     "area_proyectada_m2": 2.4424
     },
     {
      "techos": [
-      38706,
-      38707
+      37810,
+      37815
      ],
-     "pares_de_triangulos": 18,
-     "area_proyectada_m2": 5.0978
+     "pares_de_triangulos": 4,
+     "area_proyectada_m2": 2.4337
     },
     {
      "techos": [
-      38523,
-      38526
+      36844,
+      36854
      ],
-     "pares_de_triangulos": 10,
-     "area_proyectada_m2": 5.0494
-    },
-    {
-     "techos": [
-      38561,
-      38563
-     ],
-     "pares_de_triangulos": 12,
-     "area_proyectada_m2": 4.8983
+     "pares_de_triangulos": 8,
+     "area_proyectada_m2": 2.1335
     }
    ]
   },
   "cumbreras_con_el_frente": {
    "cumplido": false,
    "giro_maximo_grados": 20.0,
-   "casas_medidas": 4503,
-   "desviadas": 169,
+   "casas_medidas": 4500,
+   "desviadas": 167,
    "casas": [
     {
      "techo": 32679,
@@ -421,10 +440,6 @@
     {
      "techo": 33043,
      "giro_grados": 85.2
-    },
-    {
-     "techo": 33060,
-     "giro_grados": 89.9
     },
     {
      "techo": 33293,
@@ -673,10 +688,6 @@
     {
      "techo": 36110,
      "giro_grados": 69.4
-    },
-    {
-     "techo": 36114,
-     "giro_grados": 46.2
     },
     {
      "techo": 36115,
@@ -1045,16 +1056,12 @@
      "area_m2": 0.081
     },
     {
-     "techo": 33047,
-     "area_m2": 0.096
-    },
-    {
      "techo": 33051,
      "area_m2": 0.481
     },
     {
      "techo": 33054,
-     "area_m2": 1.183
+     "area_m2": 0.897
     },
     {
      "techo": 33141,
@@ -1062,11 +1069,11 @@
     },
     {
      "techo": 33142,
-     "area_m2": 1.758
+     "area_m2": 1.752
     },
     {
      "techo": 33144,
-     "area_m2": 0.823
+     "area_m2": 0.805
     },
     {
      "techo": 33229,
@@ -1074,7 +1081,7 @@
     },
     {
      "techo": 33231,
-     "area_m2": 1.899
+     "area_m2": 1.848
     },
     {
      "techo": 33232,
@@ -1082,7 +1089,7 @@
     },
     {
      "techo": 33233,
-     "area_m2": 0.441
+     "area_m2": 0.429
     },
     {
      "techo": 33275,
@@ -1102,11 +1109,11 @@
     },
     {
      "techo": 33829,
-     "area_m2": 1.932
+     "area_m2": 1.81
     },
     {
      "techo": 33830,
-     "area_m2": 1.626
+     "area_m2": 1.625
     },
     {
      "techo": 33831,
@@ -1134,11 +1141,11 @@
     },
     {
      "techo": 33905,
-     "area_m2": 0.418
+     "area_m2": 0.404
     },
     {
      "techo": 33906,
-     "area_m2": 0.797
+     "area_m2": 0.685
     },
     {
      "techo": 33907,
@@ -1150,19 +1157,19 @@
     },
     {
      "techo": 34047,
-     "area_m2": 0.904
+     "area_m2": 0.835
     },
     {
      "techo": 34049,
-     "area_m2": 0.094
+     "area_m2": 0.08
     },
     {
      "techo": 34205,
-     "area_m2": 1.124
+     "area_m2": 1.121
     },
     {
      "techo": 34207,
-     "area_m2": 0.453
+     "area_m2": 0.451
     },
     {
      "techo": 34226,
@@ -1182,7 +1189,7 @@
     },
     {
      "techo": 34320,
-     "area_m2": 0.612
+     "area_m2": 0.595
     },
     {
      "techo": 34328,
@@ -1190,7 +1197,7 @@
     },
     {
      "techo": 34329,
-     "area_m2": 0.209
+     "area_m2": 0.195
     },
     {
      "techo": 34391,
@@ -1234,11 +1241,11 @@
     },
     {
      "techo": 34503,
-     "area_m2": 0.215
+     "area_m2": 0.202
     },
     {
      "techo": 34506,
-     "area_m2": 1.614
+     "area_m2": 1.61
     },
     {
      "techo": 34507,
@@ -1246,11 +1253,15 @@
     },
     {
      "techo": 34510,
-     "area_m2": 2.278
+     "area_m2": 2.208
+    },
+    {
+     "techo": 34533,
+     "area_m2": 0.158
     },
     {
      "techo": 34539,
-     "area_m2": 0.136
+     "area_m2": 0.1
     },
     {
      "techo": 34586,
@@ -1262,7 +1273,7 @@
     },
     {
      "techo": 34588,
-     "area_m2": 1.205
+     "area_m2": 1.181
     },
     {
      "techo": 34589,
@@ -1282,15 +1293,15 @@
     },
     {
      "techo": 34634,
-     "area_m2": 1.522
+     "area_m2": 1.519
     },
     {
      "techo": 34799,
-     "area_m2": 5.067
+     "area_m2": 4.282
     },
     {
      "techo": 34819,
-     "area_m2": 11.475
+     "area_m2": 11.25
     },
     {
      "techo": 34820,
@@ -1314,7 +1325,7 @@
     },
     {
      "techo": 35031,
-     "area_m2": 1.556
+     "area_m2": 1.505
     },
     {
      "techo": 35032,
@@ -1326,7 +1337,7 @@
     },
     {
      "techo": 35034,
-     "area_m2": 1.103
+     "area_m2": 1.088
     },
     {
      "techo": 35035,
@@ -1334,11 +1345,11 @@
     },
     {
      "techo": 35038,
-     "area_m2": 0.936
+     "area_m2": 0.971
     },
     {
      "techo": 35039,
-     "area_m2": 0.685
+     "area_m2": 0.609
     },
     {
      "techo": 35256,
@@ -1350,11 +1361,11 @@
     },
     {
      "techo": 35353,
-     "area_m2": 0.417
+     "area_m2": 4.338
     },
     {
      "techo": 35355,
-     "area_m2": 0.722
+     "area_m2": 0.7
     },
     {
      "techo": 35382,
@@ -1370,23 +1381,23 @@
     },
     {
      "techo": 35565,
-     "area_m2": 0.084
+     "area_m2": 0.071
     },
     {
      "techo": 35571,
-     "area_m2": 0.673
+     "area_m2": 0.657
     },
     {
      "techo": 35674,
-     "area_m2": 0.133
+     "area_m2": 0.14
     },
     {
      "techo": 35675,
-     "area_m2": 0.02
+     "area_m2": 0.023
     },
     {
      "techo": 35676,
-     "area_m2": 2.658
+     "area_m2": 2.653
     },
     {
      "techo": 35677,
@@ -1394,7 +1405,7 @@
     },
     {
      "techo": 35709,
-     "area_m2": 0.566
+     "area_m2": 0.557
     },
     {
      "techo": 35711,
@@ -1426,7 +1437,7 @@
     },
     {
      "techo": 35810,
-     "area_m2": 0.273
+     "area_m2": 0.283
     },
     {
      "techo": 35812,
@@ -1434,11 +1445,11 @@
     },
     {
      "techo": 36519,
-     "area_m2": 7.335
+     "area_m2": 5.188
     },
     {
      "techo": 36830,
-     "area_m2": 0.584
+     "area_m2": 0.567
     },
     {
      "techo": 37032,
@@ -1450,7 +1461,7 @@
     },
     {
      "techo": 37347,
-     "area_m2": 2.074
+     "area_m2": 2.093
     },
     {
      "techo": 37388,
@@ -1498,7 +1509,7 @@
     },
     {
      "techo": 37621,
-     "area_m2": 0.039
+     "area_m2": 0.017
     },
     {
      "techo": 37701,
@@ -1510,11 +1521,11 @@
     },
     {
      "techo": 37703,
-     "area_m2": 0.9
+     "area_m2": 0.863
     },
     {
      "techo": 37704,
-     "area_m2": 1.976
+     "area_m2": 1.971
     },
     {
      "techo": 37705,
@@ -1526,7 +1537,7 @@
     },
     {
      "techo": 37707,
-     "area_m2": 1.583
+     "area_m2": 1.489
     },
     {
      "techo": 37709,
@@ -1534,11 +1545,11 @@
     },
     {
      "techo": 37892,
-     "area_m2": 0.786
+     "area_m2": 0.776
     },
     {
      "techo": 37893,
-     "area_m2": 1.639
+     "area_m2": 1.562
     },
     {
      "techo": 38094,
@@ -1550,11 +1561,11 @@
     },
     {
      "techo": 38098,
-     "area_m2": 0.741
+     "area_m2": 0.725
     },
     {
      "techo": 38214,
-     "area_m2": 0.575
+     "area_m2": 0.555
     },
     {
      "techo": 38215,
@@ -1566,15 +1577,15 @@
     },
     {
      "techo": 38217,
-     "area_m2": 0.232
+     "area_m2": 0.242
     },
     {
      "techo": 38218,
-     "area_m2": 0.473
+     "area_m2": 0.472
     },
     {
      "techo": 38588,
-     "area_m2": 11.674
+     "area_m2": 11.138
     },
     {
      "techo": 38610,
