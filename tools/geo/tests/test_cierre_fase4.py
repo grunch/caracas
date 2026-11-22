@@ -89,3 +89,12 @@ def test_la_puerta_no_muta_sus_entradas():
     antes = deepcopy((r, u, c))
     puerta_fase4(ciudad=c, red=r, unidades=u, cajas=cajas(), hitos=[], metro=METRO)
     assert (r, u, c) == antes
+
+
+def test_una_unidad_de_un_sector_limite_del_calce_no_se_mide_y_queda_listada():
+    u = unidades()
+    u[2] = {**u[2], 'sector': 'S9'}
+    p = puerta_fase4(ciudad=ciudad((0, 0, 100, 100)), red=red(), unidades=u, cajas=cajas(), hitos=[], metro=METRO,
+                     limites={'S9'})
+    assert p['edificadas_con_casas']['cumplido'] is True
+    assert p['sin_medir_por_limite_del_calce'] == ['U3']

@@ -34,10 +34,6 @@
      "medida": "aproximada"
     },
     {
-     "unidad": "U1772-0018",
-     "medida": "aproximada"
-    },
-    {
      "unidad": "U1772-0019",
      "medida": "aproximada"
     },
@@ -362,27 +358,7 @@
      "medida": "aproximada"
     },
     {
-     "unidad": "U1772-0262",
-     "medida": "aproximada"
-    },
-    {
-     "unidad": "U1772-0263",
-     "medida": "aproximada"
-    },
-    {
      "unidad": "U1772-0264",
-     "medida": "aproximada"
-    },
-    {
-     "unidad": "U1772-0265",
-     "medida": "aproximada"
-    },
-    {
-     "unidad": "U1772-0266",
-     "medida": "aproximada"
-    },
-    {
-     "unidad": "U1772-0267",
      "medida": "aproximada"
     },
     {
@@ -411,10 +387,6 @@
     },
     {
      "unidad": "U1772-0277",
-     "medida": "aproximada"
-    },
-    {
-     "unidad": "U1772-0278",
      "medida": "aproximada"
     },
     {
@@ -585,12 +557,6 @@
     "cobertura": 0.0
    },
    {
-    "unidad": "U1772-0018",
-    "ocupacion": "parcial",
-    "medida": "aproximada",
-    "cobertura": 0.039
-   },
-   {
     "unidad": "U1772-0019",
     "ocupacion": "parcial",
     "medida": "aproximada",
@@ -687,12 +653,6 @@
     "cobertura": 0.0
    },
    {
-    "unidad": "U1772-0035",
-    "ocupacion": "continua",
-    "medida": "aproximada",
-    "cobertura": 0.339
-   },
-   {
     "unidad": "U1772-0036",
     "ocupacion": "parcial",
     "medida": "aproximada",
@@ -751,12 +711,6 @@
     "ocupacion": "parcial",
     "medida": "aproximada",
     "cobertura": 0.0088
-   },
-   {
-    "unidad": "U1772-0046",
-    "ocupacion": "continua",
-    "medida": "aproximada",
-    "cobertura": 0.4424
    },
    {
     "unidad": "U1772-0047",
@@ -837,18 +791,6 @@
     "cobertura": 0.0
    },
    {
-    "unidad": "U1772-0060",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0061",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
     "unidad": "U1772-0062",
     "ocupacion": "parcial",
     "medida": "anillo",
@@ -899,12 +841,6 @@
    {
     "unidad": "U1772-0070",
     "ocupacion": "continua",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0071",
-    "ocupacion": "terreno_libre",
     "medida": "aproximada",
     "cobertura": 0.0
    },
@@ -983,18 +919,6 @@
    {
     "unidad": "U1772-0084",
     "ocupacion": "parcial",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0085",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0086",
-    "ocupacion": "terreno_libre",
     "medida": "aproximada",
     "cobertura": 0.0
    },
@@ -1653,18 +1577,6 @@
     "cobertura": 0.8785
    },
    {
-    "unidad": "U1772-0196",
-    "ocupacion": "continua",
-    "medida": "aproximada",
-    "cobertura": 0.9489
-   },
-   {
-    "unidad": "U1772-0197",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
     "unidad": "U1772-0198",
     "ocupacion": "continua",
     "medida": "anillo",
@@ -1881,48 +1793,6 @@
     "cobertura": 0.0
    },
    {
-    "unidad": "U1772-0234",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0235",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0094
-   },
-   {
-    "unidad": "U1772-0236",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0237",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0238",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0239",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0240",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
     "unidad": "U1772-0241",
     "ocupacion": "terreno_libre",
     "medida": "aproximada",
@@ -1936,12 +1806,6 @@
    },
    {
     "unidad": "U1772-0243",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0244",
     "ocupacion": "terreno_libre",
     "medida": "aproximada",
     "cobertura": 0.0
@@ -2049,38 +1913,8 @@
     "cobertura": 0.0
    },
    {
-    "unidad": "U1772-0262",
-    "ocupacion": "aislada",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0263",
-    "ocupacion": "aislada",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
     "unidad": "U1772-0264",
     "ocupacion": "aislada",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0265",
-    "ocupacion": "aislada",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0266",
-    "ocupacion": "aislada",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0267",
-    "ocupacion": "conjunto_especial",
     "medida": "aproximada",
     "cobertura": 0.0
    },
@@ -2141,12 +1975,6 @@
    {
     "unidad": "U1772-0277",
     "ocupacion": "continua",
-    "medida": "aproximada",
-    "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0278",
-    "ocupacion": "aislada",
     "medida": "aproximada",
     "cobertura": 0.0
    },
@@ -2227,14 +2055,35 @@
     "ocupacion": "continua",
     "medida": "aproximada",
     "cobertura": 0.0
-   },
-   {
-    "unidad": "U1772-0292",
-    "ocupacion": "terreno_libre",
-    "medida": "aproximada",
-    "cobertura": 0.0
    }
   ],
-  "fase_4_cerrable": false
+  "fase_4_cerrable": false,
+  "sin_medir_por_limite_del_calce": [
+   "U1772-0018",
+   "U1772-0035",
+   "U1772-0046",
+   "U1772-0060",
+   "U1772-0061",
+   "U1772-0071",
+   "U1772-0085",
+   "U1772-0086",
+   "U1772-0196",
+   "U1772-0197",
+   "U1772-0234",
+   "U1772-0235",
+   "U1772-0236",
+   "U1772-0237",
+   "U1772-0238",
+   "U1772-0239",
+   "U1772-0240",
+   "U1772-0244",
+   "U1772-0262",
+   "U1772-0263",
+   "U1772-0265",
+   "U1772-0266",
+   "U1772-0267",
+   "U1772-0278",
+   "U1772-0292"
+  ]
  }
 }

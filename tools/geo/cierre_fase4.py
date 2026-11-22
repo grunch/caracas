@@ -7,6 +7,8 @@ conservadas; hitos sin dobles edificios ni vacíos artificiales. Se mide, sobre 
   casas de 1772 en su interior;
 - libres sin casas: terreno libre, plaza y lo descartado como edificación, sin casas;
 - parciales sin rellenar: una parcial aprobada no queda cubierta casi entera (las huertas y solares se conservan);
+- las unidades de los sectores límite del calce (limites-calce.json) no se miden y quedan listadas, como en las
+  fases 1 y 3: ahí no se sabe ubicarlas en 1936;
 - hitos sin dobles: ninguna casa visible (fuera de la supresión del hito, src/hitos/suprimir.js) pisa la planta de un
   hito en pie en 1772.
 
@@ -70,14 +72,19 @@ def dobles_de_hitos(hitos, casas, epoca=EPOCA_1772):
     return resultado
 
 
-def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO):
+def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=frozenset()):
     """Criterios de la fase 4 con su cumplimiento sobre las casas de 1772; `fase_4_cerrable` exige todos."""
     casas = casas_de_epoca(ciudad)
     figuras = [c for _, c in casas]
     arbol = STRtree(figuras) if figuras else None
     por_id = {n['id']: n for n in red['nodos']}
     sin_casas, con_casas, rellenas, sin_ubicar, medidas = [], [], [], [], []
+    sin_medir = []
     for u in unidades:
+        if u.get('sector') in limites:
+            # sector límite del calce (limites-calce.json): ahí no se sabe ubicar la unidad en 1936 (fases 1 y 3)
+            sin_medir.append(u['id'])
+            continue
         figura, medida = figura_de_unidad(u, por_id, cajas, metro=metro)
         if figura is None:
             sin_ubicar.append(u['id'])
@@ -99,7 +106,8 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO):
         ('hitos_sin_dobles', {'cumplido': not dobles, 'dobles': dobles}),
     ])
     return {**criterios, 'umbrales_inferidos': {'cobertura_minima': COBERTURA_MINIMA, 'retiro_m': RETIRO_M},
-            'sin_ubicar': sin_ubicar, 'casas_1772': len(casas), 'medidas': medidas,
+            'sin_ubicar': sin_ubicar, 'sin_medir_por_limite_del_calce': sin_medir, 'casas_1772': len(casas),
+            'medidas': medidas,
             'fase_4_cerrable': all(c['cumplido'] for c in criterios.values())}
 
 
@@ -135,7 +143,9 @@ def main():
     censo = {u['id_fuente']: u for u in _leer(args.carpeta / 'unidades-original.json')['unidades']}
     hitos = json.loads(subprocess.run(['node', str(raiz / 'tools' / 'hitos-planta.mjs')], check=True, capture_output=True,
                                       text=True, cwd=raiz).stdout)
-    puerta = puerta_fase4(_leer(args.ciudad), red, unidades, cajas_por_calce(unidades, censo, calce.a_1936), hitos)
+    limites = {s['sector'] for s in _leer(args.carpeta / 'limites-calce.json')['sectores']}
+    puerta = puerta_fase4(_leer(args.ciudad), red, unidades, cajas_por_calce(unidades, censo, calce.a_1936), hitos,
+                          limites=limites)
     informe = OrderedDict([
         ('alcance', 'Puerta de salida de la fase 4 de 1772 (specs/08), medida sobre la salida del generador. Las '
                     'unidades pendientes se miden por su caja llevada por el calce (aproximada). Cuenta lo medido; no '

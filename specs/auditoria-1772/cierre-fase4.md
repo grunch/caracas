@@ -15,13 +15,13 @@ Fecha: 22-11-2026. T33j.4a/4b. Generado por `tools/geo/cierre_fase4.py` sobre la
 - **Aprobada:** su anillo de la referencia, encogido 3.0 m para no contar la calle.
 - **Pendiente:** su caja del original llevada a 1936 por el calce por identidad. Esta medida es **aproximada**: la caja abarca más que la unidad y el calce tiene el error de su sector. Basta para decir si tiene casas o no, pero no para medir su contorno.
 
-Los umbrales son inferidos y van declarados en el JSON. Los hitos salen de `src/hitos/datos` a través de `tools/hitos-planta.mjs`.
+Los umbrales son inferidos y van declarados en el JSON. Las 25 unidades de los sectores límite del calce (S1772-14, -24 y -44) no se miden y quedan listadas (`sin_medir_por_limite_del_calce`), como en las fases 1 y 3: ahí no se sabe ubicarlas en 1936. Los hitos salen de `src/hitos/datos` a través de `tools/hitos-planta.mjs`.
 
 ## Línea base (después de la fase 3)
 
 | Criterio | Resultado | Cumplido |
 |---|---|---|
-| Edificadas con casas | 107 sin casas (53 parcial, 29 continua, 18 aislada, 7 conjunto_especial); 104 son pendientes (medida aproximada) y 3 aprobadas | **no** |
+| Edificadas con casas | 100 sin casas (52 parcial, 29 continua, 13 aislada, 6 conjunto_especial); 97 son pendientes (medida aproximada) y 3 aprobadas | **no** |
 | Libres sin casas | ninguna libre con casas | sí |
 | Parciales sin rellenar | 22 parciales aprobadas cubiertas más del 85 % | **no** |
 | Hitos sin dobles | Catedral, San Francisco, Altagracia, La Pastora y Plaza Bolívar sin casas visibles sobre su planta | sí |
