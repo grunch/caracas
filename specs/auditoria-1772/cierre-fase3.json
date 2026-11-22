@@ -1,9 +1,9 @@
 {
  "alcance": "Puerta de salida de la fase 3 de 1772 (specs/08), medida sobre la salida del generador contra la referencia histórica. Cuenta lo medido; no certifica fidelidad.",
  "ciudad": {
-  "archivo": "fuentes//tmp/claude-1000/-disco-dev-caracas/6bacefc9-0a48-4072-bf89-7b79bee59607/scratchpad/ciudad-5s.json",
-  "sha256": "f3720cd0f1a73c6dea30ea72e42467421a915ccc841cd9fe33499839776564b7",
-  "datos": "6d40d64 (sin publicar)"
+  "archivo": "fuentes//tmp/claude-1000/-disco-dev-caracas/6bacefc9-0a48-4072-bf89-7b79bee59607/scratchpad/ciudad-5v.json",
+  "sha256": "fb8e92d19adef7abf5a12ba83c5daefd1886ddc7433c1e04351b9ab2338b4f50",
+  "datos": "eee48d6 (sin publicar)"
  },
  "puerta_de_salida": {
   "red_conectada": {

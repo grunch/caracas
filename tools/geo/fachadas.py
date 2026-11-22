@@ -19,6 +19,7 @@ ALCANCE_M = 20.0             # un rayo busca la fachada hasta esto del eje (medi
 ESTACIONES_MINIMAS = 5       # un lado con menos puntos de fachada no es un frente que se pueda medir
 TOPE_M = 8.0                 # lo más que se corre una fachada (inferido: el error del calce en los sectores medibles)
 MUESTRA_PX = 0.25            # paso con que un rayo recorre las máscaras
+GRILLA_PX = 1e-3            # la grilla de las coordenadas (milésimas de píxel, vectorizar.agregar_techo)
 OBLICUIDAD_MINIMA = 0.3      # coseno entre el rayo y la normal de la recta: más oblicua, el rayo no la corta bien
 GIRO_MAXIMO_GRADOS = 20.0    # cuánto puede girar una fachada respecto del eje de su tramo (la puerta no pide paralelas)
 PASO_GIRO_GRADOS = 0.25      # en 30 m de frente, un cuarto de grado corre la punta 13 cm: menos que la tolerancia
@@ -319,4 +320,98 @@ def alinear_fachadas(grupos, tramos, clases, metro, vedado=(), edificado=1, call
         abierto = (_en_ventana(g['abierto'], de, a, np.zeros(forma, bool)) | (nuevo & (de_1936 == calle))) & cuadra
         salida[j] = {**g, 'origen': (x0, y0), 'cuadra': cuadra, 'clases': cl, 'abierto': abierto,
                      'poligono': _poligono_nuevo(g, suma, resta, otros, a, lados_maximos)}
+    return salida
+
+
+def _primera_casa(p, n, alcance, arbol, figuras, son_obstaculo):
+    """(índice, punto) de la primera figura que corta el rayo desde p, o None si no hay o es un obstáculo (un hito)."""
+    from shapely.geometry import LineString, Point
+    rayo, origen = LineString([p, p + n * alcance]), Point(p)
+    mejor = None
+    for j in arbol.query(rayo, predicate='intersects'):
+        corte = rayo.intersection(figuras[j])
+        if corte.is_empty:
+            continue
+        d = origen.distance(corte)
+        if mejor is None or d < mejor[0]:
+            mejor = (d, j, corte)
+    if mejor is None or son_obstaculo[mejor[1]]:
+        return None
+    _d, j, corte = mejor
+    puntos = [np.asarray(c) for g in getattr(corte, 'geoms', [corte]) for c in g.coords]
+    return j, min(puntos, key=lambda q: float(np.hypot(*(q - p))))
+
+
+def alinear_casas(casas, tramos, metro, movibles, obstaculos=(), vedado=(), tope_m=TOPE_M,
+                  tolerancia_m=TOLERANCIA_FACHADA_M):
+    """{techo: huella nueva} de las casas `movibles` con la fachada sobre la recta de su frente, medida como la puerta de
+    la fase 5 sobre las casas mismas (`casas`: [(techo, Polygon)], las que están en pie en la época). Es el último paso
+    de alinear_fachadas: el reparto de cada cuadra deja casas que no llenan su lote hasta la fachada (cuñas de
+    esquina, lotes de solar). Lo que suma no pisa a otra casa ni lo vedado; la huella sigue sin huecos."""
+    from shapely.strtree import STRtree
+    tol, tope, alcance = tolerancia_m / metro, tope_m / metro, ALCANCE_M / metro
+    figuras = [c for _, c in casas] + list(obstaculos)
+    son_obstaculo = [False] * len(casas) + [True] * len(obstaculos)
+    if not figuras:
+        return {}
+    arbol = STRtree(figuras)
+    sumar, restar = {}, {}
+    for eje in tramos:
+        if not eje.get('medible'):
+            continue
+        for a, b in zip(eje['puntos'], eje['puntos'][1:]):
+            d, puntos = estaciones(a, b, metro)
+            if d is None:
+                continue
+            for lado in (1, -1):
+                n = np.array([-d[1], d[0]]) * lado
+                golpes = []
+                for p in puntos:
+                    g = _primera_casa(p, n, alcance, arbol, figuras, son_obstaculo)
+                    if g is not None:
+                        golpes.append((g[0], g[1], p))
+                if len(golpes) < ESTACIONES_MINIMAS or len({j for j, _, _ in golpes}) < 2:
+                    continue
+                recta = _recta_del_frente(golpes, n, tol)
+                if recta is None:
+                    continue
+                # solo las casas que salen de la tolerancia: las que ya están sobre la recta quedan como están
+                centro, normal, _c = recta
+                fuera = {j for j, h, _p in golpes if tol < abs(float((h - centro) @ normal)) <= tope}
+                for j, suma, figura in _franjas_de_un_lado(golpes, n, recta, d * (PASO_M / metro) / 2, tope):
+                    if j in fuera and casas[j][0] in movibles:
+                        (sumar if suma else restar).setdefault(j, []).append(figura)
+    # ningún relleno pisa lo vedado ni la planta de un hito (una angosta puede caer entre dos rayos)
+    prohibido = unary_union(list(vedado) + list(obstaculos)) if len(vedado) or len(obstaculos) else None
+    salida = {}
+    for j in sorted(set(sumar) | set(restar)):
+        techo, huella = casas[j]
+        nueva = huella
+        if j in sumar:
+            suma = unary_union(sumar[j])
+            if prohibido is not None:
+                suma = suma.difference(prohibido)
+            nueva = nueva.union(suma)
+        if j in restar:
+            nueva = nueva.difference(unary_union(restar[j]))
+        zona = nueva.buffer(1)
+        vecinas = [salida.get(casas[k][0], figuras[k]) for k in arbol.query(zona, predicate='intersects')
+                   if k != j and not son_obstaculo[k]]
+        # y las huellas ya cambiadas que la tocan aunque su original no (el árbol indexa los originales)
+        vecinas += [f for t, f in salida.items() if t != techo and f.intersects(zona)]
+        if vecinas:
+            nueva = nueva.difference(unary_union(vecinas))
+        partes = [q for q in getattr(nueva, 'geoms', [nueva]) if q.geom_type == 'Polygon' and not q.is_empty]
+        if not partes:
+            continue
+        mayor = max(partes, key=lambda q: q.area)
+        if mayor.interiors or not mayor.is_valid or mayor.area < 0.5 * huella.area:
+            continue   # una huella con huecos no se puede techar; una que pierde media casa no se toca
+        # en la grilla de la ciudad (milésimas de píxel): redondear después rompía la validez de alguna huella
+        import shapely
+        mayor = shapely.set_precision(mayor.simplify(GRILLA_PX), GRILLA_PX)
+        if mayor.geom_type != 'Polygon' or mayor.is_empty or not mayor.is_valid or mayor.interiors:
+            continue
+        if not mayor.equals_exact(huella, 1e-6):
+            salida[techo] = mayor
     return salida

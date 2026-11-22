@@ -114,7 +114,9 @@ export const PASOS = [
     salidas: [`${E}/ciudad-epocas.json`, `${E}/crece.json`, 'public/datos/crece.json', 'public/plano/crece.png'],
     // relieve.bin (tools/geo/relieve.py, fuera de este pipeline) da las cuestas y la altura del monte
     opcionales: ['public/datos/relieve.bin'],
-    codigo: GEO('epocas', 'valle', 'calce_correlacion', 'vectorizar', 'segmentar_clases', 'calles_1772', 'cuadras_historicas', 'cierre_fase3'),
+    codigo: [...GEO('epocas', 'valle', 'calce_correlacion', 'vectorizar', 'segmentar_clases', 'calles_1772', 'cuadras_historicas', 'cierre_fase3',
+      'cierre_fase4', 'cierre_fase5', 'fachadas'),
+      'tools/hitos-planta.mjs', ...['catedral', 'iglesias', 'civiles', 'panteon', 'plaza-bolivar', 'marco'].map((n) => `src/hitos/datos/${n}.js`)],
     cmd: () => [PY, 'tools/geo/epocas.py'],
   },
   {

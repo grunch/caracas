@@ -290,3 +290,17 @@ def test_una_mancha_que_cede_una_caja_adentro_no_la_vuelve_a_techar():
     casas = _casas_de_grupos(grupos, c)
     caja = box(53, 71, 63, 81)
     assert not any(casa.intersection(caja).area * METRO ** 2 > 0.01 for j, casa in casas if j == len(grupos) - 1)
+
+
+def test_con_huellas_cambia_solo_las_casas_dadas_y_no_muta_la_ciudad():
+    from tools.geo.epocas import con_huellas
+    ciudad = {'vertices': [0, 0, 10, 0, 10, 10, 0, 10, 20, 0, 30, 0, 30, 10],
+              'techos': [[0, 4, 1, 0, 0], [4, 3, 2, 0, 0]], 'vida': [[1, 2], [0, 0]]}
+    nueva = con_huellas(ciudad, {0: box(0, -2, 10, 10)})
+    assert nueva['techos'][1] == [nueva['techos'][1][0], 3, 2, 0, 0]
+    v = nueva['vertices']
+    a, n = nueva['techos'][0][:2]
+    assert Polygon([(v[2 * (a + i)], v[2 * (a + i) + 1]) for i in range(n)]).equals(box(0, -2, 10, 10))
+    a, n = nueva['techos'][1][:2]
+    assert [v[2 * (a + i)] for i in range(n)] == [20, 30, 30]
+    assert ciudad['vertices'][:2] == [0, 0] and len(ciudad['vertices']) == 14

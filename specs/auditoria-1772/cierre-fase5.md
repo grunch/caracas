@@ -181,11 +181,32 @@ De las 171 que quedan, por frente:
 | Eje llevado a 1936 metido en las casas | 6 | 15 |
 | Solo casas de 1936 | 2 | 2 |
 
+## Después de T33j.5f: las casas a la vista sobre la recta de su frente
+
+El reparto de cada cuadra deja casas que no llenan su lote hasta la fachada: cuñas de esquina, lotes de solar, quiebres del polígono. La alineación de las cuadras no las alcanza.
+
+El último paso del generador (`epocas.alinear_1772` → `fachadas.alinear_casas`) mide cada frente sobre la ciudad final, como la puerta. Toma las casas en pie y a la vista en 1772, con las plantas de los hitos cortando el rayo, y lleva a la recta las casas de la reconstrucción que salen de la tolerancia, hasta 8 m:
+
+- Lo que suman no pisa a otra casa, ni los corredores de calle de la fase 3: las calles de 1772 y las verificadas, con su núcleo de 4 m.
+- Una huella que queda con un hueco, o que pierde más de media casa, no se toca.
+- Las huellas salen en la grilla de la ciudad (milésimas de píxel) y válidas.
+- El visor techa igual: las alas que tocan el borde del lote se estiran hacia afuera y se recortan por la huella (`src/alas.js`).
+
+| Criterio | Después de T33j.5e | Después de T33j.5f |
+|---|---|---|
+| Frentes alineados | 171 casas desalineadas | **115** (en 85 frentes; 143 casas ajustadas: no se vuelven a medir una por una, la puerta mide el resultado) |
+| Lotes sin solapes | 0 pares | 0 (cumple) |
+| Casas con acceso | 4 sin acceso | 4 |
+| Calle aprobada | fase 3 en 5/5 | 5/5 |
+
+- La fase 4 sigue en 6/6.
+- La ciudad de 1772 tiene 6325 casas visibles.
+
 ## Lo que sigue
 
-- **Retiros de más de 8 m y ejes metidos en las casas.** Son límites del calce. Correr más la reconstrucción, o el eje, es moverla sin evidencia. Se revisan a ojo y van a decisión del responsable, como los sectores límite de la fase 1.
-- **Cuñas de esquina y huecos de solar** del reparto por lados.
-- **Frentes mixtos.**
+- **Plaza Mayor.** El recuadro de la Plaza Bolívar (hito) está corrido unos 4 m al este de su manzana de 1936. Sur 0 queda angosta y Sur 2 ancha. Va en su propio PR.
+- **Manzanas retiradas más de 8 m y ejes metidos en las casas.** Van a revisión a ojo y a decisión del responsable, con capturas.
+- **Esquinas donde el tramo es más largo que la cuadra.**
 - **Las 4 casas sin acceso.**
 
 ## Reproducir
