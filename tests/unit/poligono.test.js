@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import {
-  areaConSigno, simplificar, rectanguloMinimo, recortar, recortarConvexo, estaDentro, crearIndice, cruces,
+  areaConSigno, simplificar, simplificarAdentro, rectanguloMinimo, recortar, recortarConvexo, estaDentro, crearIndice, cruces,
 } from '../../src/poligono.js'
 
 const cuadrado = [[0, 0], [10, 0], [10, 10], [0, 10]]
@@ -110,5 +110,47 @@ describe('crearIndice', () => {
   test('puede no contar una casa (la propia)', () => {
     expect(indice.ocupado(5, 5, 0)).toBe(false)
     expect(indice.ocupado(25, 5, 0)).toBe(true)
+  })
+})
+
+describe('simplificarAdentro', () => {
+  const dentro = (anillo, original) => anillo.every(([x, z]) => estaDentro(original, x, z) ||
+    original.some((p, k) => {   // o sobre el borde
+      const q = original[(k + 1) % original.length]
+      const largo = Math.hypot(q[0] - p[0], q[1] - p[1])
+      return Math.abs((q[0] - p[0]) * (z - p[1]) - (q[1] - p[1]) * (x - p[0])) / largo < 1e-9
+    }))
+
+  test('quita los dientes que sobresalen y nunca deja el anillo afuera del original', () => {
+    // un rectángulo trazado a píxeles con dientes hacia afuera y hacia adentro de 0,2 m
+    const dentado = [[0, 0], [3, 0.2], [6, -0.1], [10, 0], [10.1, 5], [10, 10], [5, 10.2], [0, 10], [-0.2, 4]]
+    const s = simplificarAdentro(dentado, 0.5)
+    expect(s.length).toBeLessThan(dentado.length)
+    expect(dentro(s, dentado)).toBe(true)
+    expect(Math.abs(areaConSigno(s))).toBeLessThanOrEqual(Math.abs(areaConSigno(dentado)))
+    expect(Math.abs(areaConSigno(s))).toBeGreaterThan(95)
+  })
+
+  test('dos vecinas que comparten la medianera dentada no se pisan después de simplificar', () => {
+    const medianera = [[10, 0], [10.2, 3], [9.8, 6], [10.1, 8], [10, 10]]
+    const izq = [[0, 0], ...medianera, [0, 10]]
+    const der = [[20, 0], [20, 10], ...[...medianera].reverse()]
+    const [a, b] = [simplificarAdentro(izq, 0.5), simplificarAdentro(der, 0.5)]
+    expect(dentro(a, izq) && dentro(b, der)).toBe(true)
+  })
+
+  test('conserva las esquinas de verdad y el sentido de giro', () => {
+    const ele = [[0, 0], [10, 0], [10, 4], [4, 4], [4, 10], [0, 10]]
+    expect(simplificarAdentro(ele, 0.5)).toEqual(ele)
+    const horario = [...ele].reverse()
+    expect(Math.sign(areaConSigno(simplificarAdentro(horario, 0.5)))).toBe(-1)
+  })
+
+  test('nunca devuelve menos de tres vértices, y no cambia el anillo de entrada', () => {
+    const triangulo = [[0, 0], [5, 0], [2, 4]]
+    expect(simplificarAdentro(triangulo, 0.5)).toEqual(triangulo)
+    const copia = cuadrado.map((p) => [...p])
+    simplificarAdentro(cuadrado, 0.5)
+    expect(cuadrado).toEqual(copia)
   })
 })

@@ -295,12 +295,16 @@ describe('extruirTechos: la fachada de cada pared (aPared)', () => {
 })
 
 describe('extruirTechos: huellas dentadas e irregulares', () => {
-  test('los dientes del trazado a píxeles se quitan: la misma casa dentada da los mismos triángulos', () => {
-    const limpia = extruirTechos(ciudadDe([{ puntos: rect(0, 0, 10, 8) }]), coords)
+  test('los dientes que sobresalen se quitan y el techo nunca sale de la huella (T33j.6b)', () => {
     const dentada = [[0, 0], [3, 0.2], [6, -0.2], [10, 0], [10.2, 4], [10, 8], [5, 8.2], [0, 8], [-0.2, 3]]
-    expect(extruirTechos(ciudadDe([{ puntos: dentada }]), coords).indices.length).toBe(limpia.indices.length)
+    const g = extruirTechos(ciudadDe([{ puntos: dentada }]), coords)
     // sin tolerancia, cada diente es una pared más
-    expect(extruirTechos(ciudadDe([{ puntos: dentada }]), coords, { tolerancia: 0 }).indices.length).toBeGreaterThan(limpia.indices.length)
+    expect(extruirTechos(ciudadDe([{ puntos: dentada }]), coords, { tolerancia: 0 }).indices.length).toBeGreaterThan(g.indices.length)
+    // los que entran quedan: quitarlos agrandaría el techo sobre la vecina
+    const tejas = vertices(g).filter((v) => v.cubierta === CUBIERTA.TEJA)
+    expect(tejas.length).toBeGreaterThan(0)
+    for (const v of tejas) expect(v.z).toBeGreaterThanOrEqual(-0.2 - 1e-6)
+    expect(Math.min(...tejas.map((v) => v.x))).toBeGreaterThanOrEqual(-0.2 - 1e-6)
   })
 
   test('un polígono irregular (una U) cae en crujías bajas: sin patio, tejado solo sobre la huella', () => {

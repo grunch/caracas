@@ -173,3 +173,30 @@ export function crearIndice(anillos, celda = 16) {
     },
   }
 }
+
+/**
+ * Como simplificar, pero sin salir nunca del anillo (fase 6 de 1772, T33j.6b): solo se quitan los vértices convexos
+ * (los que sobresalen) a menos de la tolerancia de la recta entre sus vecinos y sin otro vértice dentro del triángulo
+ * que se corta. Quitar uno así achica el polígono, nunca lo agranda: el techo de una casa no sale de su huella ni
+ * pisa a la vecina en la medianera (simplificar, con la recta de cada lado por separado, la corría hasta la
+ * tolerancia hacia uno u otro lado). Conserva el sentido de giro; si queda menos de la mitad del área, el original.
+ */
+export function simplificarAdentro(anillo, tolerancia) {
+  let a = areaConSigno(anillo) < 0 ? [...anillo].reverse() : [...anillo]
+  const giro = (p, q, r) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
+  const dentro = (p, a0, b0, c0) => giro(a0, b0, p) >= 0 && giro(b0, c0, p) >= 0 && giro(c0, a0, p) >= 0
+  let cambio = true
+  while (cambio && a.length > 3) {
+    cambio = false
+    for (let k = 0; k < a.length && a.length > 3; k++) {
+      const p = a[(k + a.length - 1) % a.length], q = a[k], r = a[(k + 1) % a.length]
+      const g = giro(p, q, r)
+      const largo = Math.hypot(r[0] - p[0], r[1] - p[1])
+      if (g < 0 || largo === 0 || g / largo >= tolerancia) continue
+      if (a.some((s, j) => j !== k && s !== p && s !== r && dentro(s, p, q, r))) continue
+      a.splice(k, 1); k--; cambio = true
+    }
+  }
+  if (Math.abs(areaConSigno(a)) < 0.5 * Math.abs(areaConSigno(anillo))) return anillo
+  return areaConSigno(anillo) < 0 ? a.reverse() : a
+}
