@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { Box3 } from 'three'
+import { Box3, Matrix3, Vector3 } from 'three'
 import { HITOS, construirHitos, validarHitos, zonasDeSupresion, suprimirTechos } from '../../src/hitos.js'
 import { crearCoords } from '../../src/coords.js'
 import { MARCAS } from '../../src/marcas-datos.js'
@@ -112,4 +112,22 @@ test('la ficha nombra el convento hasta 1843 y el Capitolio después, con sus fu
   expect(textos[3]).toContain('Urdaneta')
   expect(textos[4]).toContain('Malaussena')
   expect(FICHAS[hito.id].hoy).toContain('1958')
+})
+
+test('las vertientes de teja del convento tienen la normal hacia arriba', () => {
+  for (const anio of [1772, 1843]) {
+    const edificio = crearCapitolio({ anio }).edificio
+    edificio.updateMatrixWorld(true)
+    let vertientes = 0, invertidas = 0
+    edificio.traverse(o => {
+      if (!o.isMesh || !/^Techo a (dos|media) agua/.test(o.parent?.name) || o.geometry.type !== 'BufferGeometry') return
+      const giro = new Matrix3().getNormalMatrix(o.matrixWorld), n = o.geometry.attributes.normal
+      for (let i = 0; i < n.count; i += 3) {
+        const y = new Vector3().fromBufferAttribute(n, i).applyMatrix3(giro).y
+        if (y > .01) vertientes++; else if (y < -.01) invertidas++
+      }
+    })
+    expect(vertientes).toBeGreaterThan(0); expect(invertidas).toBe(0)
+    liberar(edificio)
+  }
 })

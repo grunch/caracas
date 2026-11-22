@@ -193,20 +193,20 @@ export function crearCapitolio({ anio = 1772, nivelDetalle = 'ciudad' } = {}) {
       const hw = largo / 2 + al;
       const hd = ancho / 2 + al;
       const f1 = [
-        [-hw, y, -hd], [hw, y, -hd], [hw, y + alto, 0],
-        [-hw, y, -hd], [hw, y + alto, 0], [-hw, y + alto, 0],
+        [-hw, y, -hd], [hw, y + alto, 0], [hw, y, -hd],
+        [-hw, y, -hd], [-hw, y + alto, 0], [hw, y + alto, 0],
       ];
       const f2 = [
-        [hw, y, hd], [-hw, y, hd], [-hw, y + alto, 0],
-        [hw, y, hd], [-hw, y + alto, 0], [hw, y + alto, 0],
+        [hw, y, hd], [-hw, y + alto, 0], [-hw, y, hd],
+        [hw, y, hd], [hw, y + alto, 0], [-hw, y + alto, 0],
       ];
       perfil(f1, 'teja', gr);
       perfil(f2, 'teja', gr);
       // Tímpanos cerrados
       for (const s of [-1, 1]) {
         const tri = s > 0
-          ? [[largo / 2, y, -ancho / 2], [largo / 2, y, ancho / 2], [largo / 2, y + alto, 0]]
-          : [[-largo / 2, y, ancho / 2], [-largo / 2, y, -ancho / 2], [-largo / 2, y + alto, 0]];
+          ? [[largo / 2, y, ancho / 2], [largo / 2, y, -ancho / 2], [largo / 2, y + alto, 0]]
+          : [[-largo / 2, y, -ancho / 2], [-largo / 2, y, ancho / 2], [-largo / 2, y + alto, 0]];
         perfil(tri, 'muro', gr);
       }
       // Cumbrera
@@ -226,8 +226,8 @@ export function crearCapitolio({ anio = 1772, nivelDetalle = 'ciudad' } = {}) {
       const hw = largo / 2 + 0.35;
       const hd = ancho / 2 + 0.35;
       const pts = [
-        [-hw, yBajo + alto, -hd], [hw, yBajo + alto, -hd], [hw, yBajo, hd],
-        [-hw, yBajo + alto, -hd], [hw, yBajo, hd], [-hw, yBajo, hd],
+        [-hw, yBajo + alto, -hd], [hw, yBajo, hd], [hw, yBajo + alto, -hd],
+        [-hw, yBajo + alto, -hd], [-hw, yBajo, hd], [hw, yBajo, hd],
       ];
       perfil(pts, 'teja', gr);
       const paso = ciudad ? 2.5 : 1.15;
@@ -487,7 +487,7 @@ export function crearCapitolio({ anio = 1772, nivelDetalle = 'ciudad' } = {}) {
     }
     // Estanque / alberca de riego central de la huerta
     caja(0, 0.45, 34.5, 7.2, 0.9, 5.2, 'piedra');
-    caja(0, 0.82, 34.5, 6.2, 0.16, 4.2, 'agua');
+    caja(0, 0.84, 34.5, 6.2, 0.16, 4.2, 'agua');
 
     // Arbolado frutal y cipreses de la huerta de clausura
     const arbolesHuerta = [
@@ -520,7 +520,7 @@ export function crearCapitolio({ anio = 1772, nivelDetalle = 'ciudad' } = {}) {
     // Tapia Este sur (cerrando la huerta hacia San Francisco)
     tapia(44.9, 34.8, 0.85, 37.0);
     // Tapia Oeste sur (cerrando la huerta hacia La Bolsa)
-    tapia(-44.9, 34.8, 0.85, 37.0);
+    tapia(-44.9, 34.15, 0.85, 38.3);
     // Contrafuertes en las tapias
     for (let x = -40; x <= 40; x += 10) {
       caja(x, 2.1, 53.75, 0.7, 4.2, 0.55, 'muro');
@@ -675,11 +675,17 @@ export function crearCapitolio({ anio = 1772, nivelDetalle = 'ciudad' } = {}) {
     const franjas = ['rojo', 'azul', 'amarillo'];
     const segs = ciudad ? 3 : 6;
     const dx = wB / segs;
+    // Cada segmento une la onda de sus dos bordes para que la tela quede continua
+    const ondaEn = (i) => Math.sin((i / segs) * Math.PI * 1.9) * 0.18;
     for (let s = 0; s < segs; s++) {
       const u = (s + 0.5) * dx;
-      const onda = Math.sin((s / segs) * Math.PI * 1.9) * 0.18;
+      const o0 = ondaEn(s);
+      const o1 = ondaEn(s + 1);
+      const largo = Math.hypot(dx, o1 - o0) + 0.03;
+      const giro = Math.atan2(-(o1 - o0), dx);
       for (let f = 0; f < 3; f++) {
-        caja(x + u, yBase + (f + 0.5) * (hB / 3), z + onda, dx + 0.03, hB / 3, 0.055, franjas[f], g);
+        const tramo = caja(x + u, yBase + (f + 0.5) * (hB / 3), z + (o0 + o1) / 2, largo, hB / 3, 0.055, franjas[f], g);
+        tramo.rotation.y = giro;
       }
     }
     // Estrellas blancas sobre la franja azul central según época
@@ -798,10 +804,10 @@ export function crearCapitolio({ anio = 1772, nivelDetalle = 'ciudad' } = {}) {
       salonEliptico
     );
     esc.scale.set(rxPortN * sc, 1, rzPortN * sc);
-    esc.rotation.y = Math.PI;
   }
 
   // Columnas corintias del pórtico curvo norte + 2 cariátides (La Ley y La Justicia) en el centro
+  const yIntradosN = hEntabN - 1.55;
   const angsColN = [-0.42, -0.31, -0.2, -0.1, 0.1, 0.2, 0.31, 0.42];
   for (const frac of angsColN) {
     const a = -Math.PI / 2 + frac * Math.PI;
@@ -809,8 +815,10 @@ export function crearCapitolio({ anio = 1772, nivelDetalle = 'ciudad' } = {}) {
     const cz = Math.sin(a) * (rzPortN - 0.65);
     if (Math.abs(frac) < 0.13) {
       cariatide(cx, 1.2, cz, Math.PI, salonEliptico);
+      // Dado sobre el canasto hasta el intradós de la losa (8.86 → 9.55)
+      caja(cx, (8.86 + yIntradosN) / 2, cz, 1.28, yIntradosN - 8.86, 1.28, 'cal', salonEliptico);
     } else {
-      columnaCorintia(cx, 1.2, cz, hOrdenN - 1.2, 0.44, salonEliptico);
+      columnaCorintia(cx, 1.2, cz, yIntradosN - 1.2, 0.44, salonEliptico);
     }
   }
   // Puertas y ventanas arqueadas en el muro norte del Salón Elíptico
@@ -882,7 +890,7 @@ export function crearCapitolio({ anio = 1772, nivelDetalle = 'ciudad' } = {}) {
     const yPel = 2.5 - t * 2.42;
     const zPel = rzPortS - 0.4 + t * 6.4;
     const wPel = 21.0 + t * 3.0;
-    caja(0, yPel / 2, zPel, wPel, yPel, 0.72, 'piedra', salonEliptico);
+    caja(0, yPel / 2, zPel, wPel, yPel, Math.max(0.72, 6.4 / (nPel - 1) + 0.04), 'piedra', salonEliptico);
   }
   // Barandas inclinadas flanqueando la gran escalinata
   for (const sgn of [-1, 1]) {

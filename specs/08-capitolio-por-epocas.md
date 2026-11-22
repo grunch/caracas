@@ -48,8 +48,9 @@ leyendas de los planos de 1772 y 1843 siguen sin transcribir.
 
 El cuerpo neoclásico es idéntico en 1889, 1911 y 1936; solo cambian la cúpula y la altura de las palmas. Se dibuja
 **una sola vez** (`componente: 'cuerpo'`, vida [3, ∞)). La cúpula tiene vidas [3, 4) y [4, ∞), y las palmas
-[3, 4), [4, 5) y [5, ∞). 1772 y 1843 son modelos completos. Un test comprueba que en cada época se ven
-exactamente los triángulos del modelo completo de ese año (sin piezas omitidas ni duplicadas).
+[3, 4), [4, 5) y [5, ∞). 1772 y 1843 son modelos completos. Un test comprueba que en cada época se ve
+el mismo número de triángulos que el modelo completo de ese año (la visibilidad se decide por el primer vértice de
+cada triángulo).
 
 | Opción | Triángulos del Capitolio |
 |---|---:|

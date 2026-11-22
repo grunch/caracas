@@ -78,7 +78,7 @@ export const FICHAS = Object.freeze({
   },
   capitolio: {
     textos: [
-      [1, 'Toda esta manzana pertenecía al convento de las Concepciones (fundado en 1636–1637), que dio nombre a la esquina de Las Monjas. Reunía la iglesia al norte, orientada hacia el este, un claustro principal de dos plantas, dependencias al oeste y una amplia huerta amurallada al sur.'],
+      [1, 'Toda esta manzana pertenecía al convento de las Concepciones (fundado en 1636–1637), que dio nombre a la esquina de Las Monjas. La reconstrucción sitúa la iglesia al norte, orientada hacia el este, un claustro principal de dos plantas, dependencias al oeste y una amplia huerta amurallada al sur.'],
       [2, 'El terremoto de 1812 dañó la iglesia, los claustros y las tapias del convento, aunque la comunidad permaneció aquí hasta 1874. Mientras tanto, el Congreso sesionaba en el vecino convento de San Francisco, cruzando la calle hacia el sur.'],
       [3, 'Tras expropiar la huerta sur en 1872 y clausurar el convento en 1874, se levantó el conjunto neoclásico de Luciano Urdaneta: el Palacio Legislativo al sur (1873) y el Palacio Federal al norte, con el Salón Elíptico y las cariátides (1876–1877), en torno al patio con la fuente de hierro de 1875. El plano de 1889 numera 1, «Capitolio», y 2, «Palacio Federal»; el salón aún conservaba su bóveda elíptica achatada original.'],
       [4, 'Entre 1890 y 1891 se montó la sobrecúpula metálica belga de hierro y zinc con linterna calada, proyectada por Antonio Malaussena para proteger de filtraciones la Batalla de Carabobo, pintada por Martín Tovar y Tovar en 1888. Una foto de entre 1915 y 1920 muestra el salón ovalado por dentro.'],
