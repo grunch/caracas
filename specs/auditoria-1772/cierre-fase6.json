@@ -348,7 +348,7 @@
    "cumplido": false,
    "giro_maximo_grados": 20.0,
    "casas_medidas": 4511,
-   "desviadas": 157,
+   "desviadas": 169,
    "casas": [
     {
      "techo": 32679,
@@ -357,6 +357,10 @@
     {
      "techo": 32730,
      "giro_grados": 87.4
+    },
+    {
+     "techo": 32742,
+     "giro_grados": 88.2
     },
     {
      "techo": 32743,
@@ -396,7 +400,7 @@
     },
     {
      "techo": 32827,
-     "giro_grados": 26.4
+     "giro_grados": 63.6
     },
     {
      "techo": 32845,
@@ -485,6 +489,10 @@
     {
      "techo": 34804,
      "giro_grados": 81.6
+    },
+    {
+     "techo": 34819,
+     "giro_grados": 88.1
     },
     {
      "techo": 34820,
@@ -604,7 +612,7 @@
     },
     {
      "techo": 35956,
-     "giro_grados": 41.2
+     "giro_grados": 48.7
     },
     {
      "techo": 35959,
@@ -613,6 +621,10 @@
     {
      "techo": 35962,
      "giro_grados": 88.4
+    },
+    {
+     "techo": 35976,
+     "giro_grados": 84.4
     },
     {
      "techo": 36010,
@@ -655,6 +667,10 @@
      "giro_grados": 46.9
     },
     {
+     "techo": 36102,
+     "giro_grados": 42.9
+    },
+    {
      "techo": 36118,
      "giro_grados": 69.4
     },
@@ -677,6 +693,10 @@
     {
      "techo": 36140,
      "giro_grados": 43.8
+    },
+    {
+     "techo": 36151,
+     "giro_grados": 84.6
     },
     {
      "techo": 36172,
@@ -755,6 +775,10 @@
      "giro_grados": 88.0
     },
     {
+     "techo": 36479,
+     "giro_grados": 82.6
+    },
+    {
      "techo": 36529,
      "giro_grados": 84.2
     },
@@ -779,8 +803,20 @@
      "giro_grados": 74.7
     },
     {
+     "techo": 36712,
+     "giro_grados": 86.4
+    },
+    {
+     "techo": 36740,
+     "giro_grados": 87.1
+    },
+    {
      "techo": 36764,
      "giro_grados": 80.3
+    },
+    {
+     "techo": 36819,
+     "giro_grados": 87.3
     },
     {
      "techo": 36864,
@@ -801,6 +837,10 @@
     {
      "techo": 37077,
      "giro_grados": 87.8
+    },
+    {
+     "techo": 37094,
+     "giro_grados": 89.2
     },
     {
      "techo": 37214,
@@ -899,6 +939,10 @@
      "giro_grados": 85.6
     },
     {
+     "techo": 38330,
+     "giro_grados": 87.7
+    },
+    {
      "techo": 38337,
      "giro_grados": 62.2
     },
@@ -913,6 +957,10 @@
     {
      "techo": 38367,
      "giro_grados": 85.2
+    },
+    {
+     "techo": 38380,
+     "giro_grados": 89.2
     },
     {
      "techo": 38384,

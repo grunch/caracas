@@ -26,7 +26,7 @@ Ciudad de `main` e390f0c (#137), con 6319 casas visibles de 1772; 6317 tienen te
 |---|---|---|
 | Triángulos sin degenerar | **268 degenerados** de 75.215, en 165 casas | **no** |
 | Techos sin cruces | **813 pares** de casas que se cortan (el mayor, 11,5 m² de proyección común) | **no** |
-| Cumbreras con el frente | 4511 casas medidas; **157 desviadas** (105 giradas entre 80° y 90°: la cumbrera va de fondo, no con la calle) | **no** |
+| Cumbreras con el frente | 4511 casas medidas; **169 desviadas** (116 giradas 80° o más: la cumbrera va de fondo, no con la calle) | **no** |
 | Aleros fuera de la calle | **138 casas** con techo sobre la calzada (49 con más de 1 m²) | **no** |
 | Mismo trazado que la fase 5 | las fases 3, 4 y 5 cierran sobre la misma ciudad | sí |
 
