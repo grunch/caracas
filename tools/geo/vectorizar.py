@@ -405,10 +405,12 @@ def _cuadras_de_antes(red, edificado72, clases, cuadras, areas, metro, completas
     los pisa poco se recorta lo que cae dentro de ellos (la referencia ya lo reconstruye)."""
     alto, ancho = clases.shape
     salida = []
+    # lo ocupado se encima (una unidad y su mancha reconstruida): la parte de una cara sobre ello se cuenta una vez
+    sobre = unary_union(list(ocupado)) if ocupado else Polygon()
     for cara in red.caras72:
         if not CUADRA_MINIMA_M2 <= cara.area * metro ** 2 <= CARA_MAXIMA_M2:
             continue
-        if sum(cara.intersection(p).area for p in ocupado) >= SOBRE_REFERENCIA * cara.area:
+        if cara.intersection(sobre).area >= SOBRE_REFERENCIA * cara.area:
             continue
         bx0, by0, bx1, by1 = cara.bounds
         x0, y0, x1, y1 = max(0, int(bx0)), max(0, int(by0)), min(ancho, int(bx1) + 2), min(alto, int(by1) + 2)
@@ -546,21 +548,42 @@ def _cuadras_de_referencia(referencia, clases, cuadras, areas, metro, edificado=
 
 def _sin_pisarse(candidatas):
     """Las candidatas con casas (rol 'casas': manchas rojas) sin lo que ya ocupan las anteriores: dos manchas que el
-    calce lleva una sobre otra, o una esquina viva sobre la vecina, no arman dos casas en el mismo lugar (T33j.5c)."""
+    calce lleva una sobre otra, o una esquina viva sobre la vecina, no arman dos casas en el mismo lugar (T33j.5c). La
+    que cede lo pierde en su máscara y en su polígono: el reparto exacto por lados tolera 2 m de diferencia con la
+    máscara y, con el polígono entero, le devolvería la franja común (_ceder_poligono)."""
     puestas, salida = [], []
     for r, (x0, y0), cuadra, abierto, p in candidatas:
         if r.get('rol') == 'casas':
             alto, ancho = cuadra.shape
+            antes = cuadra
             cuadra = cuadra.copy()
-            for (px, py), otra in puestas:
+            for (px, py), otra, _figura in puestas:
                 oa, ob = otra.shape
                 fx0, fy0, fx1, fy1 = max(x0, px), max(y0, py), min(x0 + ancho, px + ob), min(y0 + alto, py + oa)
                 if fx0 < fx1 and fy0 < fy1:
                     cuadra[fy0 - y0:fy1 - y0, fx0 - x0:fx1 - x0] &= ~otra[fy0 - py:fy1 - py, fx0 - px:fx1 - px]
-            puestas.append(((x0, y0), cuadra))
+            if p is not None and (cuadra != antes).any():
+                p = _ceder_poligono(p, (x0, y0), [f for _o, _m, f in puestas])
+                if p is not None:
+                    cuadra = cuadra & _relleno(p, cuadra.shape)
+            figura = Polygon(np.asarray(p) + (x0, y0)) if p is not None else poligono_de(cuadra, (x0, y0), 0.5)
+            puestas.append(((x0, y0), cuadra, figura))
             abierto = abierto & cuadra
         salida.append((r, (x0, y0), cuadra, abierto, p))
     return salida
+
+
+def _ceder_poligono(p, origen, ocupadas):
+    """El polígono de una mancha sin lo que ocupan las anteriores (en coordenadas de su ventana), o None si lo que
+    queda ya no es un polígono de pocos lados: entonces la mancha se reparte por su máscara."""
+    ocupado = unary_union([f for f in ocupadas if f is not None and not f.is_empty])
+    resto = Polygon(np.asarray(p) + origen).difference(ocupado, grid_size=GRILLA_PX)
+    if resto.geom_type != 'Polygon' or resto.is_empty or resto.interiors:
+        return None
+    resto = resto.simplify(GRILLA_PX)
+    if len(resto.exterior.coords) - 1 > LADOS_MAXIMOS:
+        return None
+    return np.asarray(resto.exterior.coords)[:-1] - origen
 
 
 HOLGURA_EDIFICADO_M = 1.0   # lo rojo llevado a 1936 se ensancha esto: el borde del dibujo no deja sin casas su frente
@@ -598,7 +621,8 @@ def _sin_chaflanes(poligono, metro):
             nuevo = [q for k, q in enumerate(p) if k not in (i, (i + 1) % n)]
             nuevo.insert(i if (i + 1) % n else 0, viva)
             candidato = Polygon(nuevo)
-            if candidato.is_valid and candidato.area >= poligono.area * 0.99:
+            # la esquina viva de un chaflán exterior suma área; la de la esquina interior de un entrante, la quitaría
+            if candidato.is_valid and candidato.area > Polygon(p).area:
                 p, cambio = nuevo, True
                 break
     salida = Polygon(p)

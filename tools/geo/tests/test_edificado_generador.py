@@ -224,3 +224,38 @@ def test_una_casa_de_1578_que_pisa_una_de_1772_muere_en_1772():
     vida = [[1, 2], [0, 2], [0, 2]]
     assert ceder_a_1772(ciudad, vida, desde=1, metro=METRO) == [[1, 2], [0, 1], [0, 2]]
     assert vida == [[1, 2], [0, 2], [0, 2]]   # no muta la entrada
+
+
+def test_un_entrante_no_pierde_su_esquina_interior():
+    # la esquina interior de un entrante (40,10)-(42,12) m: su esquina viva quitaría área de la cuadra; solo se cambia
+    # un chaflán exterior, cuya esquina viva suma
+    from tools.geo.vectorizar import _sin_chaflanes
+    m = [(0, 0), (40, 0), (40, 10), (42, 12), (50, 12), (50, 0), (100, 0), (100, 100), (0, 100)]
+    entrante = Polygon([(x / METRO, y / METRO) for x, y in m])
+    assert _sin_chaflanes(entrante, METRO).equals(entrante)
+
+
+def _casas_de_grupos(grupos, c):
+    from tools.geo.vectorizar import techos_de_manzana
+    salida = {'vertices': [], 'techos': [], 'esquinas': [], 'cuadras': [], 'cede': [], 'junta': [], 'antes': [],
+              'marcos': [], 'alas': [], 'publicos': [], 'n_cuadras': 0, '_antes': 1}
+    for j, g in enumerate(grupos):
+        salida['_junta'] = j
+        techos_de_manzana(g['clases'], g['cuadra'], g['origen'], salida, 4, 1, lambda f: 0.0, METRO, True, g['poligono'])
+    v = salida['vertices']
+    return [(salida['junta'][k], Polygon([(v[2 * (a + i)], v[2 * (a + i) + 1]) for i in range(n)]))
+            for k, (a, n, *_resto) in enumerate(salida['techos'])]
+
+
+def test_las_casas_de_dos_manchas_que_el_calce_encima_no_se_pisan():
+    # la segunda mancha cede lo común en su máscara y también en su polígono: el reparto exacto por lados tolera 2 m
+    # de diferencia en el borde y, con el polígono entero, devolvería la franja común (1,5 m) a sus casas
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    edificado = [{'id': 'U2', 'poligonos': [box(40, 40, 140, 140)], 'por_anillo': False},
+                 {'id': 'U3', 'poligonos': [box(137, 40, 220, 140)], 'por_anillo': False}]
+    casas = _casas_de_grupos(_cuadras_de_edificado(edificado, c, np.zeros_like(c, dtype=int), {}, METRO), c)
+    assert {j for j, _ in casas} == {0, 1}
+    for i, (ji, a) in enumerate(casas):
+        for jj, b in casas[i + 1:]:
+            assert ji == jj or a.intersection(b).area * METRO ** 2 <= 0.01

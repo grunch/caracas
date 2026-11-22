@@ -84,11 +84,11 @@ Se probó y descartó estirar las manchas hasta la calle: las desalineadas subí
 
 Cambios:
 
-1. **Esquinas vivas** (`_sin_chaflanes`). Un lado de menos de 6 m entre dos lados más largos se cambia por la esquina donde se cruzan sus vecinos, si queda a menos de 4 m. La cuadra de la mancha incluye esa esquina, sin entrar a la calle. Una L o un entrante de verdad no se tocan.
-2. **Manchas que no se pisan** (`_sin_pisarse`). Dos manchas que el calce lleva una sobre otra, o una esquina viva sobre la vecina, no arman dos casas en el mismo lugar: la segunda cede lo común.
+1. **Esquinas vivas** (`_sin_chaflanes`). Un lado de menos de 6 m entre dos lados más largos se cambia por la esquina donde se cruzan sus vecinos, si queda a menos de 4 m y si esa esquina suma área: así solo cambia un chaflán de una esquina exterior. La esquina interior de un entrante no se toca, porque su esquina viva le quitaría área a la cuadra. Es una heurística sobre el polígono simplificado. La cuadra de la mancha incluye la esquina nueva, sin entrar a la calle.
+2. **Manchas que no se pisan** (`_sin_pisarse`). Dos manchas que el calce lleva una sobre otra, o una esquina viva sobre la vecina, no arman dos casas en el mismo lugar: la segunda cede lo común en su máscara y en su polígono. El reparto exacto por lados tolera 2 m de diferencia con la máscara, y con el polígono entero le devolvería la franja común.
 3. **Cuadras de OSM con margen.** No llegan a menos de un píxel de lo que ocupa la reconstrucción, con sus esquinas vivas. Sus casas salen de la máscara con medio píxel de buffer.
 4. **Casas de 1936 tapadas desde 0,01 m².** Una casa de 1936 que pisa una de la reconstrucción no vive en 1772. Antes se toleraba hasta 1 m².
-5. **Casas de 1578 que ceden en 1772** (`epocas.ceder_a_1772`). Una casa de 1578 que sigue en pie en 1772 y pisa una casa de 1772 muere en 1772: en 1772 manda su plano.
+5. **Casas de 1578 que ceden en 1772** (`epocas.ceder_a_1772`). Una casa de 1578 que sigue en pie en 1772 y tiene **más de 0,01 m²** en común con una casa de 1772, entre huellas válidas, muere en 1772: en 1772 manda su plano. Con 0,01 m² justos no cede. La casa de 1936 tapada cuenta desde 0,01 m² inclusive (`marcar_tapadas`).
 
 | Criterio | Después de T33j.5b | Después de T33j.5c |
 |---|---|---|
