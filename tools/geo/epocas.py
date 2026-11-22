@@ -434,7 +434,7 @@ def alinear_1772(ciudad, tramos, hitos, red72, verificadas, metro):
     vedado = [c["poligono"] for c in corredores(red72, metro=metro)] + \
         [LineString(t["anclajes"]).buffer(ANCHO_INFERIDO_M / 2 / metro, cap_style="flat") for t in verificadas]
     nuevas = alinear_casas(casas, tramos, metro, movibles, obstaculos=plantas_en_pie(hitos), vedado=vedado)
-    print(f"casas de 1772 alineadas sobre su frente: {len(nuevas)}")
+    print(f"casas de 1772 ajustadas a la recta de su frente: {len(nuevas)}")
     return con_huellas(ciudad, nuevas)
 
 

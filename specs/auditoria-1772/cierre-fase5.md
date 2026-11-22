@@ -194,7 +194,7 @@ El último paso del generador (`epocas.alinear_1772` → `fachadas.alinear_casas
 
 | Criterio | Después de T33j.5e | Después de T33j.5f |
 |---|---|---|
-| Frentes alineados | 171 casas desalineadas | **115** (en 85 frentes; 143 casas alineadas) |
+| Frentes alineados | 171 casas desalineadas | **115** (en 85 frentes; 143 casas ajustadas: no se vuelven a medir una por una, la puerta mide el resultado) |
 | Lotes sin solapes | 0 pares | 0 (cumple) |
 | Casas con acceso | 4 sin acceso | 4 |
 | Calle aprobada | fase 3 en 5/5 | 5/5 |

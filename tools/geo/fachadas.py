@@ -381,7 +381,8 @@ def alinear_casas(casas, tramos, metro, movibles, obstaculos=(), vedado=(), tope
                 for j, suma, figura in _franjas_de_un_lado(golpes, n, recta, d * (PASO_M / metro) / 2, tope):
                     if j in fuera and casas[j][0] in movibles:
                         (sumar if suma else restar).setdefault(j, []).append(figura)
-    prohibido = unary_union(list(vedado)) if len(vedado) else None
+    # ningún relleno pisa lo vedado ni la planta de un hito (una angosta puede caer entre dos rayos)
+    prohibido = unary_union(list(vedado) + list(obstaculos)) if len(vedado) or len(obstaculos) else None
     salida = {}
     for j in sorted(set(sumar) | set(restar)):
         techo, huella = casas[j]
@@ -393,8 +394,11 @@ def alinear_casas(casas, tramos, metro, movibles, obstaculos=(), vedado=(), tope
             nueva = nueva.union(suma)
         if j in restar:
             nueva = nueva.difference(unary_union(restar[j]))
-        vecinas = [salida.get(casas[k][0], figuras[k]) for k in arbol.query(nueva.buffer(1), predicate='intersects')
+        zona = nueva.buffer(1)
+        vecinas = [salida.get(casas[k][0], figuras[k]) for k in arbol.query(zona, predicate='intersects')
                    if k != j and not son_obstaculo[k]]
+        # y las huellas ya cambiadas que la tocan aunque su original no (el árbol indexa los originales)
+        vecinas += [f for t, f in salida.items() if t != techo and f.intersects(zona)]
         if vecinas:
             nueva = nueva.difference(unary_union(vecinas))
         partes = [q for q in getattr(nueva, 'geoms', [nueva]) if q.geom_type == 'Polygon' and not q.is_empty]

@@ -242,3 +242,23 @@ def test_alinear_casas_entrega_huellas_validas_en_la_grilla_de_las_coordenadas()
     assert nuevas
     for f in nuevas.values():
         assert f.is_valid and all(abs(c * 1000 - round(c * 1000)) < 1e-6 for xy in f.exterior.coords for c in xy)
+
+
+def test_alinear_casas_no_rellena_la_planta_de_un_hito_que_los_rayos_no_tocan():
+    # el caso de la revisión de #131: la planta cae entre dos rayos (x = 52 y 54) y el relleno hasta y = 20 la cubría
+    from fachadas import alinear_casas
+    planta = box(52.25, 20.25, 53.75, 23.75)
+    casas = hilera_de_casas(saltos={2: 4})
+    nuevas = alinear_casas(casas, [eje((0, 0), (180, 0))], METRO, movibles=set(range(8)), obstaculos=[planta])
+    assert 2 not in nuevas or nuevas[2].intersection(planta).area < 1e-6
+
+
+def test_alinear_casas_no_deja_huellas_que_se_pisen():
+    # muchas casas movibles con retiros distintos, una al lado de la otra: ninguna huella final pisa a otra
+    from fachadas import alinear_casas
+    casas = hilera_de_casas(saltos={k: (k * 7) % 9 - 4 for k in range(8)})
+    nuevas = alinear_casas(casas, [eje((0, 0), (180, 0))], METRO, movibles=set(range(8)))
+    todas = dict(casas) | nuevas
+    for a in todas:
+        for b in todas:
+            assert a >= b or todas[a].intersection(todas[b]).area < 1e-4
