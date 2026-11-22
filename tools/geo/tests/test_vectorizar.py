@@ -518,3 +518,55 @@ def test_las_alas_de_cada_casa_llegan_justo_a_los_bordes_de_su_marco(angulo):
         if alas:
             assert max(a[3] for a in alas) == pytest.approx(ancho, abs=1e-6)
             assert max(a[4] for a in alas) == pytest.approx(fondo, abs=1e-6)
+
+
+def _solapes_m2(polis):
+    from shapely.strtree import STRtree
+    arbol = STRtree(polis)
+    return [polis[i].intersection(polis[j]).area * METRO ** 2
+            for i in range(len(polis)) for j in arbol.query(polis[i], predicate='intersects') if j > i
+            and polis[i].intersection(polis[j]).area * METRO ** 2 > 0.01]
+
+
+@pytest.mark.parametrize('angulo', [23.0, -38.0])
+@pytest.mark.parametrize('cuadra_modelo', [True, False])
+def test_las_casas_de_una_manzana_comparten_sus_medianeras_sin_pisarse(angulo, cuadra_modelo):
+    # I1772-011: el reparto raster vectorizaba cada lote por separado (medio píxel de buffer y su propia
+    # simplificación) y dos vecinas se pisaban en los bordes diagonales
+    polis = poligonos(vectorizar(manzana_girada(angulo), METRO, plaza=(180, 180), cuadra_modelo=cuadra_modelo))
+    assert all(p.is_valid for p in polis)
+    assert _solapes_m2(polis) == []
+
+
+def test_las_casas_recortadas_por_la_cara_de_su_cuadra_tampoco_se_pisan():
+    # el recorte por la cara (la línea de fachada de la red) se hace a toda la manzana junta, antes de simplificar:
+    # recortada casa por casa, cada medianera terminaba en un punto un poco distinto en cada vecina
+    from shapely import affinity
+    from tools.geo.vectorizar import huellas_de_casas
+    yy, xx = np.mgrid[:200, :200]
+    etiquetas = (((xx + 0.37 * yy) // 23) + 1).astype(int)   # medianeras oblicuas cada 23 px
+    cara = affinity.rotate(box(12, 9, 188, 191), 7.3, origin='centroid')
+    piezas = [(etiquetas == k, (0, 0)) for k in np.unique(etiquetas)]
+    polis = [p for p in huellas_de_casas(piezas, 0.7, recorte=cara) if p is not None]
+    redondeadas = [Polygon([(round(x, 3), round(y, 3)) for x, y in p.exterior.coords]) for p in polis]   # como agregar_techo
+    assert all(p.is_valid and cara.buffer(1e-3).contains(p) for p in polis)   # dentro de la cara, a la grilla
+    assert _solapes_m2(redondeadas) == []
+
+
+@pytest.mark.parametrize('angulo', [23.0, -38.0, 61.0])
+def test_el_reparto_vectorial_de_una_cuadra_girada_no_deja_astillas_al_redondear(angulo):
+    # un lote que termina sobre la medianera larga de su vecino (unión en T): redondeado a 0,01 px, su vértice se
+    # salía de la recta del vecino y dejaba una astilla
+    import cv2
+    lado, ancho_m, alto_m = 360, 96, 82
+    caja = cv2.boxPoints(((lado / 2, lado / 2), (ancho_m / METRO, alto_m / METRO), angulo))
+    calle = cv2.boxPoints(((lado / 2, lado / 2), (ancho_m / METRO + 20, alto_m / METRO + 20), angulo))
+    c = np.full((lado, lado), CLASE['calle'], np.uint8)
+    m = np.zeros((lado, lado), np.uint8)
+    cv2.fillPoly(m, [np.round(caja).astype(np.int32)], 1)
+    c[m > 0] = CLASE['edificado']
+    lineas = [np.array([calle[k], calle[(k + 1) % 4]], float) for k in range(4)]
+    res = vectorizar(c, METRO, plaza=(180, 180), red=red_de(lineas, c))
+    polis = poligonos(res)
+    assert len(polis) > 10
+    assert _solapes_m2(polis) == []

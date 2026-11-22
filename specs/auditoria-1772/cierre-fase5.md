@@ -46,11 +46,40 @@ Se revisó una muestra de frentes marcados sobre la planta, con las casas desali
 - La mayoría son **cuñas de esquina**: casas triangulares con la fachada en diagonal, como las alas diagonales de I1772-003.
 - El resto son casas corridas delante o detrás de la línea de su frente. Un rayo que entra por una abertura del frente llega a una casa del fondo, y esa casa también queda marcada; esas aberturas (I1772-001, -002) se cierran en la fase 7.
 
+## Después de T33j.5b: medianeras sin solapes (I1772-011)
+
+Hubo dos causas, las dos dentro de una misma cuadra:
+
+1. **Reparto raster.** `poligono_de` vectoriza cada lote por separado, con medio píxel de buffer y su propia simplificación. En los bordes oblicuos, dos vecinas se pisaban en una franja fina. Ahora `huellas_de_casas` vectoriza las casas de la cuadra juntas: recorta todas por la cara de la cuadra y a cada casa le resta lo que ya ocupan las anteriores. Así su medianera queda exactamente sobre el borde de la vecina. Las restas y recortes redondean a la grilla de las coordenadas (`grid_size`).
+2. **Uniones en T del reparto vectorial.** Un lote que termina sobre la medianera larga de su vecino tiene ahí un vértice que el vecino no tiene. Al redondear las coordenadas a centésimas de píxel, ese vértice se salía de la recta y dejaba una astilla de hasta 0,07 m². Las coordenadas pasan a milésimas, que es lo que el float32 del `.pak` guarda a 10.000 px. La astilla de una medianera de 50 m queda bajo 0,01 m².
+
+Se probaron y descartaron dos caminos:
+- La simplificación de cobertura (`shapely.coverage_simplify`) sobre los bordes de píxel exactos: deja escalones de píxel en las fachadas oblicuas, que cambian la cara de las cuñas de esquina.
+- Insertar los vértices de las uniones en T: agrega vértices colineales a los techos que el visor arma desde el polígono, que es materia de la fase 6.
+
+| Criterio | Línea base | Después de T33j.5b |
+|---|---|---|
+| Lotes sin solapes | 7195 pares, 1 huella inválida | **22 pares**, ninguna inválida |
+| Dentro de una misma junta o cuadra | 7170 pares | **0** |
+| Frentes alineados | 522 casas desalineadas | 528 |
+| Casas con acceso | 10 sin acceso | 10 |
+| Calle aprobada | fase 3 en 5/5 | 5/5 |
+
+- La fase 4 sigue en 6/6.
+- La ciudad de 1772 tiene 6283 casas visibles.
+- Los techos del pipeline quedan en 39.414, dentro de la tolerancia de 39.395.
+
+Los 22 pares que quedan son **entre grupos distintos**:
+- 4 de dos juntas de lo edificado que se pisan (450 m²);
+- 10 de casas de 1578 que siguen en pie en 1772 (92 m²);
+- 8 de una casa de la reconstrucción con una de 1936 (4 m²).
+
+No los produce el reparto: van en la subtarea siguiente.
+
 ## Lo que sigue
 
-- **T33j.5b, reparto vectorial sin solapes (I011):** medianeras compartidas en el reparto raster.
 - **T33j.5c, frentes:** una línea de fachada por frente recto y las esquinas sin cuñas.
-- **Las 10 casas sin acceso, las juntas superpuestas y las casas de 1578.**
+- **Las 10 casas sin acceso y los solapes entre grupos:** las juntas superpuestas, las casas de 1578 que siguen en pie en 1772 y las de 1936 que pisan la reconstrucción.
 
 En cada paso la puerta de la fase 3 tiene que seguir en 5/5 y la de la fase 4 en 6/6.
 
