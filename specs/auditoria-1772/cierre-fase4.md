@@ -23,15 +23,15 @@ Los umbrales son inferidos y van declarados en el JSON. Las 25 unidades de los s
 |---|---|---|
 | Edificadas con casas | 100 sin casas (52 parcial, 29 continua, 13 aislada, 6 conjunto_especial); 97 son pendientes (medida aproximada) y 3 aprobadas | **no** |
 | Libres sin casas | ninguna libre con casas | sí |
-| Parciales sin rellenar | 22 parciales aprobadas cubiertas más del 85 % | **no** |
+| Parciales sin rellenar | ninguna parcial aprobada cubierta más del 85 % una vez descontados los patios y solares de las casas | sí |
 | Hitos sin dobles | Catedral, San Francisco, Altagracia, La Pastora y Plaza Bolívar sin casas visibles sobre su planta | sí |
 
-`fase_4_cerrable: false`, con 4151 casas de 1772.
+`fase_4_cerrable: false`, con 4146 casas visibles de 1772 (la supresión de los hitos ya aplicada).
 
 ## Causas
 
 - **Periferia sin casas (I1772-007).** Las unidades pendientes no entran al generador por la referencia: la regla de la fase 2 prohíbe incorporarlas por caja o cercanía. Lo que el generador arma ahí sale de caras de OSM y de la máscara de color, que en la periferia casi no reconocen edificado. Para edificarlas sin romper la regla, primero tienen que tener una geometría aprobable. Eso es el siguiente PR, T33j.4a: su cara del trazado del original llevada por el calce, con el error del sector declarado.
-- **Parciales rellenas.** Una cuadra parcial de la referencia conserva lo abierto de 1936, pero en 1936 esas cuadras ya estaban casi enteras edificadas. Las huertas y solares que el original de 1772 dibuja vacíos quedan tapados.
+- **Parciales rellenas.** Medidas sin descontar los patios, 22 parciales aprobadas quedaban cubiertas más del 85 %. Descontando patios y solares de las casas, ninguna pasa el umbral. Que huertas y solares del original se conserven a ojo se revisa con los conjuntos (T33j.4b).
 
 ## Reproducir
 
