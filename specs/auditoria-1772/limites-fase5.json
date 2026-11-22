@@ -1,0 +1,818 @@
+{
+ "alcance": "Frentes aceptados como límite documentado de la fase 5 de 1772 (specs/08, frentes alineados). La tolerancia de 0,5 m no cambia: estos frentes siguen listados en la puerta, con su clase. Un frente cuenta como límite solo si no tiene más casas fuera de la recta que las registradas; si tiene más, algo cambió y vuelve a contar entero. Los techos son los de la ciudad medida al decidir.",
+ "decisiones": [
+  {
+   "fecha": "2026-11-22",
+   "responsable": "dueño del proyecto",
+   "texto": "Las casas vistas por una abertura del frente y las manzanas retiradas enteras quedan como límite de la fase 5 hasta que la fase 7 cierre esas aberturas; se vuelven a medir al cerrarla."
+  },
+  {
+   "fecha": "2026-11-22",
+   "responsable": "dueño del proyecto",
+   "texto": "Los frentes con el eje de 1936 metido en las casas y las casas de 1936 en pie en 1772 también son límite; las puntas de esquina de la reconstrucción se siguen corrigiendo en el generador."
+  },
+  {
+   "fecha": "2026-11-22",
+   "responsable": "dueño del proyecto",
+   "texto": "Las 3 casas de esquina con frente a dos calles que oscilan entre las dos rectas quedan como límite, y la fase 5 se cierra con los límites documentados."
+  }
+ ],
+ "ciudad": {
+  "datos": "b2ca10e (sin publicar)"
+ },
+ "frentes": [
+  {
+   "tramo": "L1772-0004:X1772-0010-X1772-0011",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-11",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 32730,
+     "desvio_m": 9.5,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0011:X1772-0040-X1772-0041",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-22",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 33043,
+     "desvio_m": 15.52,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0013:X1772-0061-X1772-0062",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-23",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 33889,
+     "desvio_m": 12.7,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0013:X1772-0063-X1772-0064",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-23",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 33559,
+     "desvio_m": 15.92,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0015:X1772-0074-X1772-0075",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-22",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 34142,
+     "desvio_m": 16.21,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0019:X1772-0106-X1772-0107",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-32",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 34538,
+     "desvio_m": 9.03,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0021:X1772-0119-X1772-0120",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-31",
+   "clase": "esquina_dos_frentes",
+   "casas_maximas": 1,
+   "motivo": "Casa de esquina con frente a dos calles cuyas rectas medidas no se cortan en la casa (el calce o una cuadra que no es rectángulo): llevarla a una recta la saca de la otra, y oscila.",
+   "casas_al_decidir": [
+    {
+     "techo": 37492,
+     "desvio_m": 3.47,
+     "clase": "esquina_dos_frentes"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0021:X1772-0123-X1772-0124",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-32",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 34840,
+     "desvio_m": 12.04,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0021:X1772-0128-X1772-0129",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-33",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 37523,
+     "desvio_m": 14.15,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0028:X1772-0159-X1772-0160",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-42",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 38053,
+     "desvio_m": 11.27,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0029:X1772-0168-X1772-0169",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-42",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 35316,
+     "desvio_m": 15.24,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0029:X1772-0170-X1772-0171",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-43",
+   "clase": "esquina_dos_frentes",
+   "casas_maximas": 1,
+   "motivo": "Casa de esquina con frente a dos calles cuyas rectas medidas no se cortan en la casa (el calce o una cuadra que no es rectángulo): llevarla a una recta la saca de la otra, y oscila.",
+   "casas_al_decidir": [
+    {
+     "techo": 35416,
+     "desvio_m": 6.02,
+     "clase": "esquina_dos_frentes"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0030:X1772-0176-X1772-0177",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-42",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 38264,
+     "desvio_m": 8.27,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0034:T1772-0034-X1772-0182",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-21",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 36529,
+     "desvio_m": 14.08,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0034:X1772-0035-X1772-0052",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-21",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 33293,
+     "desvio_m": 11.24,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0036:X1772-0103-X1772-0120",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-31",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 37364,
+     "desvio_m": 13.72,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0038:X1772-0088-X1772-0104",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-32",
+   "clase": "casa_de_1936",
+   "casas_maximas": 1,
+   "motivo": "Casa del plano de 1936 en pie en 1772: es un edificio real y el generador no la mueve.",
+   "casas_al_decidir": [
+    {
+     "techo": 23244,
+     "desvio_m": 5.18,
+     "clase": "casa_de_1936"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0040:X1772-0139-T1772-0082",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-32",
+   "clase": "abertura",
+   "casas_maximas": 2,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 37697,
+     "desvio_m": 14.49,
+     "clase": "abertura"
+    },
+    {
+     "techo": 37698,
+     "desvio_m": 8.59,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0041:E1772-0010-T1772-0042",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-12",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 36335,
+     "desvio_m": 10.89,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0042:X1772-0056-X1772-0073",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-22",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 33751,
+     "desvio_m": 10.74,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0043:T1772-0016-E1772-0014",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-22",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 36102,
+     "desvio_m": 11.07,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0043:X1772-0074-X1772-0091",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-22",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 34132,
+     "desvio_m": 16.21,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0045:X1772-0189-X1772-0041",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-22",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 33060,
+     "desvio_m": 10.0,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0045:X1772-0041-X1772-0058",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-22",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 35586,
+     "desvio_m": 15.19,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0045:X1772-0142-X1772-0190",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-32",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 35067,
+     "desvio_m": 13.11,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0047:X1772-0042-X1772-0059",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-22",
+   "clase": "manzana_retirada",
+   "casas_maximas": 1,
+   "motivo": "Punta de manzana irregular de la periferia, retirada entera más de 8 m de la recta del frente.",
+   "casas_al_decidir": [
+    {
+     "techo": 35642,
+     "desvio_m": 15.94,
+     "clase": "manzana_retirada"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0047:X1772-0093-X1772-0109",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-32",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 37202,
+     "desvio_m": 15.35,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0049:T1772-0017-X1772-0026",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-23",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 38410,
+     "desvio_m": 19.1,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0049:X1772-0026-T1772-0039",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-23",
+   "clase": "casa_de_1936",
+   "casas_maximas": 1,
+   "motivo": "Casa del plano de 1936 en pie en 1772: es un edificio real y el generador no la mueve.",
+   "casas_al_decidir": [
+    {
+     "techo": 13867,
+     "desvio_m": 6.36,
+     "clase": "casa_de_1936"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0050:T1772-0045-X1772-0193",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-23",
+   "clase": "casa_de_1936",
+   "casas_maximas": 1,
+   "motivo": "Casa del plano de 1936 en pie en 1772: es un edificio real y el generador no la mueve.",
+   "casas_al_decidir": [
+    {
+     "techo": 14666,
+     "desvio_m": 15.47,
+     "clase": "casa_de_1936"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0050:X1772-0077-X1772-0094",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-23",
+   "clase": "esquina_dos_frentes",
+   "casas_maximas": 1,
+   "motivo": "Casa de esquina con frente a dos calles cuyas rectas medidas no se cortan en la casa (el calce o una cuadra que no es rectángulo): llevarla a una recta la saca de la otra, y oscila.",
+   "casas_al_decidir": [
+    {
+     "techo": 36982,
+     "desvio_m": 2.13,
+     "clase": "esquina_dos_frentes"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0050:X1772-0144-T1772-0079",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-33",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 38494,
+     "desvio_m": 14.41,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0054:X1772-0179-T1772-0100",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-43",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 38339,
+     "desvio_m": 13.99,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0060:T1772-0068-X1772-0130",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-33",
+   "clase": "eje_en_las_casas",
+   "casas_maximas": 1,
+   "motivo": "El eje de la calle llevado a 1936 corre metido en las casas (calle angosta o calce corrido): la recta del frente no se puede medir bien. Límite del calce.",
+   "casas_al_decidir": [
+    {
+     "techo": 37440,
+     "desvio_m": 7.17,
+     "clase": "eje_en_las_casas"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0062:X1772-0047-X1772-0064",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-23",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 33625,
+     "desvio_m": 8.72,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0062:X1772-0064-X1772-0081",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-23",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 38625,
+     "desvio_m": 10.12,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0066:X1772-0132-X1772-0148",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-33",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 37590,
+     "desvio_m": 8.49,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0068:X1772-0082-X1772-0099",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-24",
+   "clase": "eje_en_las_casas",
+   "casas_maximas": 2,
+   "motivo": "El eje de la calle llevado a 1936 corre metido en las casas (calle angosta o calce corrido): la recta del frente no se puede medir bien. Límite del calce.",
+   "casas_al_decidir": [
+    {
+     "techo": 38429,
+     "desvio_m": 8.82,
+     "clase": "eje_en_las_casas"
+    },
+    {
+     "techo": 38433,
+     "desvio_m": 10.29,
+     "clase": "eje_en_las_casas"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0071:E1772-0020-T1772-0101",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-43",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 38337,
+     "desvio_m": 9.18,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0073:E1772-0001-E1772-0007",
+   "lado": -1,
+   "segmento": 1,
+   "sector": "S1772-11",
+   "clase": "abertura",
+   "casas_maximas": 2,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 35985,
+     "desvio_m": 8.48,
+     "clase": "abertura"
+    },
+    {
+     "techo": 35993,
+     "desvio_m": 16.1,
+     "clase": "manzana_retirada"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0073:E1772-0001-E1772-0007",
+   "lado": -1,
+   "segmento": 2,
+   "sector": "S1772-11",
+   "clase": "manzana_retirada",
+   "casas_maximas": 1,
+   "motivo": "Punta de manzana irregular de la periferia, retirada entera más de 8 m de la recta del frente.",
+   "casas_al_decidir": [
+    {
+     "techo": 35976,
+     "desvio_m": 8.26,
+     "clase": "manzana_retirada"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0073:E1772-0001-E1772-0007",
+   "lado": -1,
+   "segmento": 3,
+   "sector": "S1772-11",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 36010,
+     "desvio_m": 12.27,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0073:E1772-0007-E1772-0008",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-12",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 36085,
+     "desvio_m": 9.01,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0073:E1772-0010-E1772-0014",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-12",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 36101,
+     "desvio_m": 15.51,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0075:E1772-0009-E1772-0008",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-12",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 36070,
+     "desvio_m": 10.23,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0080:X1772-0182-X1772-0183",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-21",
+   "clase": "abertura",
+   "casas_maximas": 1,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 32827,
+     "desvio_m": 14.13,
+     "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0080:X1772-0187-X1772-0189",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-22",
+   "clase": "abertura",
+   "casas_maximas": 2,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 33055,
+     "desvio_m": 11.14,
+     "clase": "abertura"
+    },
+    {
+     "techo": 33056,
+     "desvio_m": 13.89,
+     "clase": "manzana_retirada"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0085:X1772-0012-E1772-0009",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-12",
+   "clase": "abertura",
+   "casas_maximas": 2,
+   "motivo": "El rayo ve la casa por una abertura de más de 2 m del frente (solar o hueco), con las casas vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7.",
+   "casas_al_decidir": [
+    {
+     "techo": 36084,
+     "desvio_m": 11.41,
+     "clase": "abertura"
+    },
+    {
+     "techo": 36086,
+     "desvio_m": 13.47,
+     "clase": "abertura"
+    }
+   ]
+  }
+ ]
+}

@@ -1,9 +1,9 @@
 {
  "alcance": "Puerta de salida de la fase 4 de 1772 (specs/08), medida sobre la salida del generador. Las unidades pendientes se miden por su caja llevada por el calce (aproximada). Cuenta lo medido; no certifica fidelidad.",
  "ciudad": {
-  "archivo": "fuentes//tmp/claude-1000/-disco-dev-caracas/6bacefc9-0a48-4072-bf89-7b79bee59607/scratchpad/ciudad-5z.json",
-  "sha256": "10077253a9af40e7623b88cf2de814e55ace57b029d4c3ad5533542aedf6d0fb",
-  "datos": "498ce52 (sin publicar)"
+  "archivo": "fuentes//tmp/claude-1000/-disco-dev-caracas/6bacefc9-0a48-4072-bf89-7b79bee59607/scratchpad/ciudad-6b.json",
+  "sha256": "6a0b76675c556d239709a6db844899d52bfd13b38ba79ce36b54385f69a9ce83",
+  "datos": "b2ca10e (sin publicar)"
  },
  "puerta_de_salida": {
   "edificadas_con_casas": {
@@ -64,7 +64,7 @@
    "U1772-0278",
    "U1772-0292"
   ],
-  "casas_1772": 6321,
+  "casas_1772": 6319,
   "medidas": [
    {
     "unidad": "U1772-0001",
@@ -91,7 +91,7 @@
     "unidad": "U1772-0004",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.1021,
+    "cobertura": 0.1022,
     "cobertura_del_rojo": 0.8977
    },
    {
@@ -136,7 +136,7 @@
     "unidad": "U1772-0011",
     "ocupacion": "parcial",
     "medida": "anillo",
-    "cobertura": 0.1685,
+    "cobertura": 0.1691,
     "cobertura_del_rojo": 0.9981
    },
    {
@@ -157,7 +157,7 @@
     "unidad": "U1772-0014",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.2095,
+    "cobertura": 0.2102,
     "cobertura_del_rojo": 0.9777
    },
    {
@@ -183,22 +183,22 @@
     "unidad": "U1772-0019",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.1848,
+    "cobertura": 0.185,
     "cobertura_del_rojo": 0.9575
    },
    {
     "unidad": "U1772-0020",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.2534,
+    "cobertura": 0.254,
     "cobertura_del_rojo": 0.9571
    },
    {
     "unidad": "U1772-0021",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.148,
-    "cobertura_del_rojo": 0.9635
+    "cobertura": 0.1478,
+    "cobertura_del_rojo": 0.963
    },
    {
     "unidad": "U1772-0022",
@@ -212,13 +212,13 @@
     "ocupacion": "continua",
     "medida": "aproximada",
     "cobertura": 0.1297,
-    "cobertura_del_rojo": 0.7039
+    "cobertura_del_rojo": 0.7038
    },
    {
     "unidad": "U1772-0024",
     "ocupacion": "continua",
     "medida": "aproximada",
-    "cobertura": 0.2074,
+    "cobertura": 0.2081,
     "cobertura_del_rojo": 0.8332
    },
    {
@@ -378,14 +378,14 @@
     "unidad": "U1772-0049",
     "ocupacion": "parcial",
     "medida": "anillo",
-    "cobertura": 0.1066,
-    "cobertura_del_rojo": 0.9917
+    "cobertura": 0.1087,
+    "cobertura_del_rojo": 0.9971
    },
    {
     "unidad": "U1772-0050",
     "ocupacion": "conjunto_especial",
     "medida": "anillo",
-    "cobertura": 0.2457
+    "cobertura": 0.2472
    },
    {
     "unidad": "U1772-0051",
@@ -397,7 +397,7 @@
     "unidad": "U1772-0052",
     "ocupacion": "conjunto_especial",
     "medida": "anillo",
-    "cobertura": 0.14
+    "cobertura": 0.1405
    },
    {
     "unidad": "U1772-0053",
@@ -433,7 +433,7 @@
     "unidad": "U1772-0058",
     "ocupacion": "conjunto_especial",
     "medida": "aproximada",
-    "cobertura": 0.1423,
+    "cobertura": 0.1433,
     "cobertura_del_rojo": 0.9938
    },
    {
@@ -454,7 +454,7 @@
     "unidad": "U1772-0063",
     "ocupacion": "parcial",
     "medida": "anillo",
-    "cobertura": 0.1062,
+    "cobertura": 0.1064,
     "cobertura_del_rojo": 0.9978
    },
    {
@@ -467,13 +467,13 @@
     "unidad": "U1772-0065",
     "ocupacion": "continua",
     "medida": "anillo",
-    "cobertura": 0.2251
+    "cobertura": 0.2258
    },
    {
     "unidad": "U1772-0066",
     "ocupacion": "continua",
     "medida": "anillo",
-    "cobertura": 0.2335
+    "cobertura": 0.2364
    },
    {
     "unidad": "U1772-0067",
@@ -491,14 +491,14 @@
     "unidad": "U1772-0069",
     "ocupacion": "conjunto_especial",
     "medida": "anillo",
-    "cobertura": 0.2537
+    "cobertura": 0.2541
    },
    {
     "unidad": "U1772-0070",
     "ocupacion": "continua",
     "medida": "aproximada",
-    "cobertura": 0.277,
-    "cobertura_del_rojo": 0.8458
+    "cobertura": 0.2782,
+    "cobertura_del_rojo": 0.8477
    },
    {
     "unidad": "U1772-0072",
@@ -612,7 +612,7 @@
     "unidad": "U1772-0091",
     "ocupacion": "continua",
     "medida": "anillo",
-    "cobertura": 0.2918
+    "cobertura": 0.2931
    },
    {
     "unidad": "U1772-0092",
@@ -625,8 +625,8 @@
     "unidad": "U1772-0093",
     "ocupacion": "continua",
     "medida": "aproximada",
-    "cobertura": 0.1438,
-    "cobertura_del_rojo": 0.9935
+    "cobertura": 0.1434,
+    "cobertura_del_rojo": 0.9932
    },
    {
     "unidad": "U1772-0094",
@@ -664,8 +664,8 @@
     "unidad": "U1772-0099",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.1187,
-    "cobertura_del_rojo": 0.9947
+    "cobertura": 0.1191,
+    "cobertura_del_rojo": 0.9946
    },
    {
     "unidad": "U1772-0100",
@@ -828,7 +828,7 @@
     "unidad": "U1772-0124",
     "ocupacion": "continua",
     "medida": "anillo",
-    "cobertura": 0.3162
+    "cobertura": 0.3192
    },
    {
     "unidad": "U1772-0125",
@@ -880,7 +880,7 @@
     "ocupacion": "parcial",
     "medida": "aproximada",
     "cobertura": 0.0787,
-    "cobertura_del_rojo": 0.655
+    "cobertura_del_rojo": 0.6549
    },
    {
     "unidad": "U1772-0133",
@@ -1046,8 +1046,8 @@
     "unidad": "U1772-0157",
     "ocupacion": "continua",
     "medida": "aproximada",
-    "cobertura": 0.1517,
-    "cobertura_del_rojo": 0.9542
+    "cobertura": 0.1514,
+    "cobertura_del_rojo": 0.9541
    },
    {
     "unidad": "U1772-0158",
@@ -1067,7 +1067,7 @@
     "unidad": "U1772-0160",
     "ocupacion": "parcial",
     "medida": "anillo",
-    "cobertura": 0.0165,
+    "cobertura": 0.0179,
     "cobertura_del_rojo": 0.992
    },
    {
@@ -1093,7 +1093,7 @@
     "unidad": "U1772-0164",
     "ocupacion": "continua",
     "medida": "aproximada",
-    "cobertura": 0.1915,
+    "cobertura": 0.1916,
     "cobertura_del_rojo": 0.9935
    },
    {
@@ -1208,14 +1208,14 @@
     "unidad": "U1772-0181",
     "ocupacion": "parcial",
     "medida": "anillo",
-    "cobertura": 0.1297,
+    "cobertura": 0.1296,
     "cobertura_del_rojo": 0.9759
    },
    {
     "unidad": "U1772-0182",
     "ocupacion": "continua",
     "medida": "aproximada",
-    "cobertura": 0.2456,
+    "cobertura": 0.2455,
     "cobertura_del_rojo": 0.9267
    },
    {
@@ -1236,21 +1236,21 @@
     "unidad": "U1772-0185",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.1281,
-    "cobertura_del_rojo": 0.9746
+    "cobertura": 0.129,
+    "cobertura_del_rojo": 0.9747
    },
    {
     "unidad": "U1772-0186",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.1038,
+    "cobertura": 0.1039,
     "cobertura_del_rojo": 0.8934
    },
    {
     "unidad": "U1772-0187",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.3169,
+    "cobertura": 0.3186,
     "cobertura_del_rojo": 0.9825
    },
    {
@@ -1271,7 +1271,7 @@
     "unidad": "U1772-0190",
     "ocupacion": "parcial",
     "medida": "anillo",
-    "cobertura": 0.041,
+    "cobertura": 0.0417,
     "cobertura_del_rojo": 0.9983
    },
    {
@@ -1370,8 +1370,8 @@
     "unidad": "U1772-0208",
     "ocupacion": "conjunto_especial",
     "medida": "aproximada",
-    "cobertura": 0.1984,
-    "cobertura_del_rojo": 0.9578
+    "cobertura": 0.2039,
+    "cobertura_del_rojo": 0.9747
    },
    {
     "unidad": "U1772-0209",
@@ -1396,8 +1396,8 @@
     "unidad": "U1772-0212",
     "ocupacion": "continua",
     "medida": "aproximada",
-    "cobertura": 0.3041,
-    "cobertura_del_rojo": 0.9493
+    "cobertura": 0.3058,
+    "cobertura_del_rojo": 0.9494
    },
    {
     "unidad": "U1772-0213",
@@ -1411,7 +1411,7 @@
     "ocupacion": "conjunto_especial",
     "medida": "aproximada",
     "cobertura": 0.1215,
-    "cobertura_del_rojo": 0.9792
+    "cobertura_del_rojo": 0.9796
    },
    {
     "unidad": "U1772-0215",
@@ -1424,7 +1424,7 @@
     "unidad": "U1772-0216",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.1664,
+    "cobertura": 0.1668,
     "cobertura_del_rojo": 0.8748
    },
    {
@@ -1522,7 +1522,7 @@
     "unidad": "U1772-0232",
     "ocupacion": "conjunto_especial",
     "medida": "aproximada",
-    "cobertura": 0.2671,
+    "cobertura": 0.2733,
     "cobertura_del_rojo": 0.986
    },
    {

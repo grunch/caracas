@@ -302,3 +302,52 @@ def test_alinear_casas_no_rellena_un_hueco_con_otra_casa_adentro_lejos_del_borde
     casas = [(k, patio if k == 2 else c) for k, c in casas] + [(8, adentro)]
     nuevas = alinear_casas(casas, [eje((0, 0), (180, 0))], METRO, movibles=set(range(8)))
     assert 2 not in nuevas or nuevas[2].intersection(adentro).area < 1e-6
+
+
+def test_alinear_casas_rellena_la_cuna_de_una_casa_que_ya_esta_sobre_la_recta_aunque_pase_el_tope():
+    # la casa 2 llega a la recta en x 50..58 y desde ahí su frente se va en diagonal hasta 10 m atrás (más que el tope)
+    from fachadas import alinear_casas
+    cuna = Polygon([(50, 20), (58, 20), (70, 40), (70, 60), (50, 60)])
+    casas = [(k, cuna if k == 2 else c) for k, c in hilera_de_casas(fondo=40)]
+    nuevas = alinear_casas(casas, [eje((0, 0), (180, 0))], METRO, movibles=set(range(8)))
+    assert 2 in nuevas
+    assert nuevas[2].contains(box(51, 20.5, 68.5, 37))     # la cuña llena hasta la recta, hasta la última estación
+    todas = dict(casas) | nuevas
+    assert all(todas[a].intersection(todas[b]).area < 1e-6 for a in todas for b in todas if a < b)
+
+
+def test_alinear_casas_no_rellena_mas_alla_del_tope_una_casa_que_no_toca_la_recta():
+    # retirada 10 m entera: no es una cuña, es una manzana retirada, y queda como está
+    from fachadas import alinear_casas
+    casas = hilera_de_casas(saltos={2: 20})
+    nuevas = alinear_casas(casas, [eje((0, 0), (180, 0))], METRO, movibles=set(range(8)))
+    assert 2 not in nuevas
+
+
+def test_delante_de_la_recta_encuentra_la_casa_parada_en_la_calle_frente_a_la_reconstruccion():
+    from fachadas import delante_de_la_recta
+    casas = hilera_de_casas() + [(8, box(40, 8, 120, 14))]      # una tira a 3 m de la calle, delante de las casas
+    assert delante_de_la_recta(casas, [eje((0, 0), (180, 0))], METRO, de_1772=set(range(8))) == {8}
+
+
+def test_delante_de_la_recta_no_marca_una_casa_sobre_la_recta_ni_detras():
+    from fachadas import delante_de_la_recta
+    casas = hilera_de_casas(n=6) + [(8, box(130, 20, 150, 60)), (9, box(150, 30, 170, 60))]   # al lado y retirada
+    assert delante_de_la_recta(casas, [eje((0, 0), (180, 0))], METRO, de_1772=set(range(6))) == set()
+
+
+def test_a_la_grilla_rellena_el_hueco_libre_que_deja_el_redondeo():
+    # una entrada de 0,4 milésimas se cierra al llevar la huella a la grilla y deja la cámara de adentro como hueco
+    from fachadas import a_la_grilla
+    entrada = Polygon([(0, 0), (10, 0), (10, 10), (5.0002, 10), (5.0002, 5), (6, 5), (6, 2), (4, 2), (4, 5),
+                       (4.9998, 5), (4.9998, 10), (0, 10)])
+    g = a_la_grilla(entrada, ocupado=None)
+    assert g.geom_type == 'Polygon' and g.is_valid and not g.interiors
+    assert a_la_grilla(entrada, ocupado=box(4.5, 3, 5.5, 4)).interiors     # con algo adentro, el hueco queda
+
+
+def test_delante_de_la_recta_no_marca_una_casa_mas_alla_de_la_manzana_del_frente():
+    # revisión de #137: el tramo sigue más allá de la reconstrucción; una casa suelta allá no tiene nada detrás
+    from fachadas import delante_de_la_recta
+    casas = hilera_de_casas() + [(8, box(200, 8, 220, 14))]
+    assert delante_de_la_recta(casas, [eje((0, 0), (260, 0))], METRO, de_1772=set(range(8))) == set()

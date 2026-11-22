@@ -74,7 +74,7 @@ def frentes_desalineados(calles, casas, metro=METRO, obstaculos=(), tolerancia_m
     for eje in calles:
         if not eje['medible'] or arbol is None:
             continue
-        for a, b in zip(eje['puntos'], eje['puntos'][1:]):
+        for segmento, (a, b) in enumerate(zip(eje['puntos'], eje['puntos'][1:])):
             d, estaciones = _estaciones(a, b, metro)
             for lado in (1, -1):
                 if d is None:
@@ -97,7 +97,8 @@ def frentes_desalineados(calles, casas, metro=METRO, obstaculos=(), tolerancia_m
                 fuera = [{'techo': t, 'desvio_m': round(float(np.median(rs)) * metro, 2)}
                          for t, rs in sorted(por_casa.items()) if float(np.median(rs)) > tol_px]
                 if fuera:
-                    desalineados.append({'tramo': eje['tramo'], 'sector': eje['sector'], 'lado': lado, 'casas': fuera})
+                    desalineados.append({'tramo': eje['tramo'], 'sector': eje['sector'], 'lado': lado,
+                                         'segmento': segmento, 'casas': fuera})
     return {'frentes_medidos': medidos, 'casas_medidas': len(medidas), 'desalineados': desalineados}
 
 
@@ -143,16 +144,39 @@ def plantas_en_pie(hitos, epoca=EPOCA_1772):
     return [Polygon(p) for h in hitos if _en_pie(h, epoca) for p in h['planta']]
 
 
-def puerta_fase5(ciudad, calles, hitos, fase3, metro=METRO):
-    """Criterios de la fase 5 con su cumplimiento sobre las casas visibles de 1772; `fase_5_cerrable` exige todos."""
+def con_limites(desalineados, limites):
+    """Los frentes desalineados con la clase del límite documentado que los cubre (limites-fase5.json, decisión del
+    responsable): un frente registrado (tramo, lado y segmento) cuenta como límite si no tiene más casas fuera de la recta que
+    las registradas; si tiene más, algo cambió y vuelve a contar entero. Un tramo quebrado tiene un frente por segmento
+    y lado. → (frentes nuevos, casas en límite, fuera)."""
+    registro = {(x['tramo'], x['lado'], x.get('segmento', 0)): x for x in limites}
+    salida, en_limite, fuera = [], set(), set()
+    for f in desalineados:
+        x = registro.get((f['tramo'], f['lado'], f.get('segmento', 0)))
+        techos = {c['techo'] for c in f['casas']}
+        if x is not None and len(f['casas']) <= x['casas_maximas']:
+            salida.append({**f, 'limite': x['clase']})
+            en_limite |= techos
+        else:
+            salida.append(dict(f))
+            fuera |= techos
+    return salida, en_limite, fuera
+
+
+def puerta_fase5(ciudad, calles, hitos, fase3, metro=METRO, limites=()):
+    """Criterios de la fase 5 con su cumplimiento sobre las casas visibles de 1772; `fase_5_cerrable` exige todos.
+    Los frentes de `limites` (limites-fase5.json) no impiden cerrar, pero quedan listados con su clase."""
     casas = visibles(casas_de_epoca(ciudad), hitos)
     frentes = frentes_desalineados(calles, casas, metro, plantas_en_pie(hitos))
+    desalineados, en_limite, fuera = con_limites(frentes['desalineados'], limites)
+    frentes = {**frentes, 'desalineados': desalineados}
     lotes = solapes(casas, metro)
     acceso = casas_sin_acceso(casas, metro)
     criterios = OrderedDict([
-        ('frentes_alineados', {'cumplido': not frentes['desalineados'], 'tolerancia_m': TOLERANCIA_FACHADA_M,
+        ('frentes_alineados', {'cumplido': not fuera, 'tolerancia_m': TOLERANCIA_FACHADA_M,
                                # casas distintas: una casa puede salir de la recta en más de un frente
-                               'casas_desalineadas': len({c['techo'] for f in frentes['desalineados'] for c in f['casas']}),
+                               'casas_desalineadas': len(en_limite | fuera),
+                               'casas_en_limite': len(en_limite - fuera), 'casas_fuera_de_limite': len(fuera),
                                **frentes}),
         ('lotes_sin_solapes', {'cumplido': not lotes['pares'] and not lotes['invalidas'], 'umbral_m2': SOLAPE_MINIMO_M2,
                                **lotes}),
@@ -188,7 +212,9 @@ def main():
                                       text=True, cwd=raiz).stdout)
     ciudad = _leer(args.ciudad)
     fase3 = puerta_fase3(ciudad, red, unidades, verificadas, calles=calles)
-    puerta = puerta_fase5(ciudad, calles, hitos, fase3)
+    registro = args.carpeta / 'limites-fase5.json'
+    limites = _leer(registro)['frentes'] if registro.exists() else []
+    puerta = puerta_fase5(ciudad, calles, hitos, fase3, limites=limites)
     informe = OrderedDict([
         ('alcance', 'Puerta de salida de la fase 5 de 1772 (specs/08), medida sobre la salida del generador. Cuenta lo '
                     'medido; no certifica fidelidad.'),
