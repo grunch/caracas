@@ -1,0 +1,4539 @@
+{
+ "alcance": "Puerta de salida de la fase 5 de 1772 (specs/08), medida sobre la salida del generador. Cuenta lo medido; no certifica fidelidad.",
+ "ciudad": {
+  "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
+  "sha256": "d0a18ce02c81e9acbbdc24d865bdbae6c3267e7f6b209dbbb38d63eb1156bf18",
+  "datos": "sin publicar: código de main 32e6a88 (#125)"
+ },
+ "puerta_de_salida": {
+  "frentes_alineados": {
+   "cumplido": false,
+   "tolerancia_m": 0.5,
+   "casas_desalineadas": 522,
+   "frentes_medidos": 569,
+   "casas_medidas": 4600,
+   "desalineados": [
+    {
+     "tramo": "L1772-0001:E1772-0004-E1772-0001",
+     "sector": "S1772-11",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35903,
+       "desvio_m": 4.38
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0002:X1772-0001-E1772-0005",
+     "sector": "S1772-11",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35981,
+       "desvio_m": 15.62
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0003:X1772-0006-X1772-0007",
+     "sector": "S1772-13",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35390,
+       "desvio_m": 14.32
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0004:X1772-0010-X1772-0011",
+     "sector": "S1772-11",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32702,
+       "desvio_m": 0.98
+      },
+      {
+       "techo": 32704,
+       "desvio_m": 4.2
+      },
+      {
+       "techo": 32733,
+       "desvio_m": 9.56
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0005:X1772-0015-X1772-0016",
+     "sector": "S1772-13",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32752,
+       "desvio_m": 12.63
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0006:X1772-0018-E1772-0012",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36122,
+       "desvio_m": 7.55
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0006:E1772-0012-X1772-0019",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36124,
+       "desvio_m": 2.15
+      },
+      {
+       "techo": 36125,
+       "desvio_m": 1.77
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0006:X1772-0019-X1772-0020",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36159,
+       "desvio_m": 3.26
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0006:X1772-0019-X1772-0020",
+     "sector": "S1772-21",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 32742,
+       "desvio_m": 0.8
+      },
+      {
+       "techo": 32743,
+       "desvio_m": 1.94
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0008:T1772-0026-X1772-0026",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 14678,
+       "desvio_m": 8.03
+      },
+      {
+       "techo": 38654,
+       "desvio_m": 11.45
+      },
+      {
+       "techo": 38667,
+       "desvio_m": 6.28
+      },
+      {
+       "techo": 38668,
+       "desvio_m": 10.48
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0008:X1772-0027-X1772-0028",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36369,
+       "desvio_m": 15.83
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0008:X1772-0028-X1772-0029",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36396,
+       "desvio_m": 1.65
+      },
+      {
+       "techo": 36397,
+       "desvio_m": 0.97
+      },
+      {
+       "techo": 36400,
+       "desvio_m": 1.25
+      },
+      {
+       "techo": 36401,
+       "desvio_m": 1.83
+      },
+      {
+       "techo": 36404,
+       "desvio_m": 0.52
+      },
+      {
+       "techo": 36405,
+       "desvio_m": 1.1
+      },
+      {
+       "techo": 36406,
+       "desvio_m": 1.72
+      },
+      {
+       "techo": 36411,
+       "desvio_m": 5.35
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0008:X1772-0028-X1772-0029",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 32789,
+       "desvio_m": 2.12
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0011:X1772-0035-X1772-0036",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33291,
+       "desvio_m": 6.82
+      },
+      {
+       "techo": 33316,
+       "desvio_m": 2.99
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0011:X1772-0035-X1772-0036",
+     "sector": "S1772-21",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 32848,
+       "desvio_m": 8.28
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0011:X1772-0036-X1772-0037",
+     "sector": "S1772-21",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 32886,
+       "desvio_m": 5.79
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0011:X1772-0037-X1772-0038",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33341,
+       "desvio_m": 8.43
+      },
+      {
+       "techo": 33361,
+       "desvio_m": 0.89
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0011:X1772-0037-X1772-0038",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 32915,
+       "desvio_m": 2.98
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0011:X1772-0039-X1772-0040",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33431,
+       "desvio_m": 3.39
+      },
+      {
+       "techo": 33432,
+       "desvio_m": 11.63
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0011:X1772-0039-X1772-0040",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33011,
+       "desvio_m": 11.81
+      },
+      {
+       "techo": 33012,
+       "desvio_m": 8.26
+      },
+      {
+       "techo": 33013,
+       "desvio_m": 8.7
+      },
+      {
+       "techo": 33014,
+       "desvio_m": 11.89
+      },
+      {
+       "techo": 33015,
+       "desvio_m": 9.88
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0011:X1772-0045-X1772-0046",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33515,
+       "desvio_m": 3.1
+      },
+      {
+       "techo": 33516,
+       "desvio_m": 11.14
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0011:X1772-0045-X1772-0046",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33178,
+       "desvio_m": 0.59
+      },
+      {
+       "techo": 33184,
+       "desvio_m": 2.68
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0011:X1772-0047-X1772-0048",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33589,
+       "desvio_m": 0.74
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0011:X1772-0048-T1772-0051",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 7181,
+       "desvio_m": 5.12
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0011:X1772-0048-T1772-0051",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 7181,
+       "desvio_m": 8.3
+      },
+      {
+       "techo": 36736,
+       "desvio_m": 3.74
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0051-X1772-0052",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36840,
+       "desvio_m": 7.25
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0052-X1772-0053",
+     "sector": "S1772-21",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33315,
+       "desvio_m": 8.42
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0053-X1772-0054",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33686,
+       "desvio_m": 2.83
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0054-X1772-0055",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33360,
+       "desvio_m": 2.15
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0056-X1772-0057",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33741,
+       "desvio_m": 0.76
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0057-X1772-0058",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33771,
+       "desvio_m": 9.6
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0057-X1772-0058",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33485,
+       "desvio_m": 10.35
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0058-X1772-0059",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 16473,
+       "desvio_m": 3.1
+      },
+      {
+       "techo": 33833,
+       "desvio_m": 8.65
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0061-X1772-0062",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33872,
+       "desvio_m": 1.6
+      },
+      {
+       "techo": 33878,
+       "desvio_m": 2.13
+      },
+      {
+       "techo": 33900,
+       "desvio_m": 5.08
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0063-X1772-0064",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33951,
+       "desvio_m": 10.06
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0063-X1772-0064",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33565,
+       "desvio_m": 15.92
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0064-X1772-0065",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38543,
+       "desvio_m": 9.34
+      },
+      {
+       "techo": 38567,
+       "desvio_m": 9.32
+      },
+      {
+       "techo": 38572,
+       "desvio_m": 1.23
+      },
+      {
+       "techo": 38573,
+       "desvio_m": 2.44
+      },
+      {
+       "techo": 38574,
+       "desvio_m": 3.77
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0013:X1772-0065-T1772-0054",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36874,
+       "desvio_m": 5.61
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0015:X1772-0068-X1772-0069",
+     "sector": "S1772-21",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36846,
+       "desvio_m": 3.29
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0015:X1772-0073-X1772-0074",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33751,
+       "desvio_m": 2.65
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0015:X1772-0076-X1772-0077",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 15422,
+       "desvio_m": 4.97
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0015:X1772-0078-X1772-0079",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33882,
+       "desvio_m": 11.38
+      },
+      {
+       "techo": 33883,
+       "desvio_m": 2.72
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0015:X1772-0081-T1772-0058",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37033,
+       "desvio_m": 2.56
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0015:X1772-0081-T1772-0058",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38544,
+       "desvio_m": 1.47
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0017:X1772-0088-X1772-0089",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37073,
+       "desvio_m": 4.78
+      },
+      {
+       "techo": 37079,
+       "desvio_m": 5.03
+      },
+      {
+       "techo": 37082,
+       "desvio_m": 5.22
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0017:X1772-0092-X1772-0093",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37105,
+       "desvio_m": 0.71
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0017:X1772-0092-X1772-0093",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 16679,
+       "desvio_m": 10.52
+      },
+      {
+       "techo": 36946,
+       "desvio_m": 1.9
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0017:X1772-0093-X1772-0094",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 15390,
+       "desvio_m": 12.71
+      },
+      {
+       "techo": 15400,
+       "desvio_m": 11.03
+      },
+      {
+       "techo": 15411,
+       "desvio_m": 12.78
+      },
+      {
+       "techo": 37179,
+       "desvio_m": 1.07
+      },
+      {
+       "techo": 38892,
+       "desvio_m": 11.02
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0017:X1772-0093-X1772-0094",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 15390,
+       "desvio_m": 13.84
+      },
+      {
+       "techo": 15400,
+       "desvio_m": 12.14
+      },
+      {
+       "techo": 15411,
+       "desvio_m": 13.9
+      },
+      {
+       "techo": 38892,
+       "desvio_m": 12.12
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0017:X1772-0094-X1772-0095",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35792,
+       "desvio_m": 2.48
+      },
+      {
+       "techo": 35793,
+       "desvio_m": 3.34
+      },
+      {
+       "techo": 35794,
+       "desvio_m": 0.54
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0017:X1772-0097-T1772-0062",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37002,
+       "desvio_m": 11.77
+      },
+      {
+       "techo": 37003,
+       "desvio_m": 12.04
+      },
+      {
+       "techo": 37004,
+       "desvio_m": 12.33
+      },
+      {
+       "techo": 37005,
+       "desvio_m": 12.52
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0018:X1772-0099-X1772-0100",
+     "sector": "S1772-34",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37286,
+       "desvio_m": 2.12
+      },
+      {
+       "techo": 37287,
+       "desvio_m": 9.08
+      },
+      {
+       "techo": 37295,
+       "desvio_m": 9.1
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0019:X1772-0103-X1772-0104",
+     "sector": "S1772-31",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37346,
+       "desvio_m": 2.62
+      },
+      {
+       "techo": 37347,
+       "desvio_m": 17.04
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0019:X1772-0103-X1772-0104",
+     "sector": "S1772-31",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37071,
+       "desvio_m": 1.85
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0019:X1772-0106-X1772-0107",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 34518,
+       "desvio_m": 13.35
+      },
+      {
+       "techo": 34523,
+       "desvio_m": 11.47
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0019:X1772-0106-X1772-0107",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 34302,
+       "desvio_m": 4.68
+      },
+      {
+       "techo": 34303,
+       "desvio_m": 3.87
+      },
+      {
+       "techo": 34304,
+       "desvio_m": 2.96
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0019:X1772-0108-X1772-0109",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 16928,
+       "desvio_m": 7.49
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0019:X1772-0109-X1772-0110",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37171,
+       "desvio_m": 1.17
+      },
+      {
+       "techo": 38894,
+       "desvio_m": 6.16
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0019:X1772-0110-X1772-0111",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35815,
+       "desvio_m": 0.78
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0020:X1772-0114-X1772-0115",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37238,
+       "desvio_m": 3.59
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0020:X1772-0115-X1772-0116",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37279,
+       "desvio_m": 0.74
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0021:X1772-0119-X1772-0120",
+     "sector": "S1772-31",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37472,
+       "desvio_m": 11.08
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0021:X1772-0121-X1772-0122",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 23191,
+       "desvio_m": 10.41
+      },
+      {
+       "techo": 23224,
+       "desvio_m": 20.99
+      },
+      {
+       "techo": 38413,
+       "desvio_m": 2.92
+      },
+      {
+       "techo": 38422,
+       "desvio_m": 3.37
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0021:X1772-0122-X1772-0123",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 34787,
+       "desvio_m": 4.16
+      },
+      {
+       "techo": 34789,
+       "desvio_m": 11.51
+      },
+      {
+       "techo": 34791,
+       "desvio_m": 11.62
+      },
+      {
+       "techo": 34792,
+       "desvio_m": 11.71
+      },
+      {
+       "techo": 34795,
+       "desvio_m": 2.41
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0021:X1772-0123-X1772-0124",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 34819,
+       "desvio_m": 12.02
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0021:X1772-0123-X1772-0124",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 34533,
+       "desvio_m": 6.55
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0021:X1772-0128-X1772-0129",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37482,
+       "desvio_m": 0.87
+      },
+      {
+       "techo": 37500,
+       "desvio_m": 6.83
+      },
+      {
+       "techo": 37501,
+       "desvio_m": 14.02
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0021:X1772-0128-X1772-0129",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 34735,
+       "desvio_m": 7.94
+      },
+      {
+       "techo": 34736,
+       "desvio_m": 7.19
+      },
+      {
+       "techo": 34737,
+       "desvio_m": 5.34
+      },
+      {
+       "techo": 34738,
+       "desvio_m": 3.26
+      },
+      {
+       "techo": 34739,
+       "desvio_m": 1.56
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0022:X1772-0130-X1772-0131",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37519,
+       "desvio_m": 11.94
+      },
+      {
+       "techo": 37520,
+       "desvio_m": 3.61
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0023:X1772-0137-X1772-0138",
+     "sector": "S1772-31",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 34761,
+       "desvio_m": 0.65
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0023:X1772-0139-X1772-0140",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37609,
+       "desvio_m": 15.27
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0023:X1772-0139-X1772-0140",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 34804,
+       "desvio_m": 0.94
+      },
+      {
+       "techo": 37610,
+       "desvio_m": 17.44
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0023:X1772-0140-X1772-0141",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37614,
+       "desvio_m": 2.15
+      },
+      {
+       "techo": 37621,
+       "desvio_m": 4.2
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0023:X1772-0142-X1772-0143",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35040,
+       "desvio_m": 12.85
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0023:X1772-0143-X1772-0144",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37713,
+       "desvio_m": 1.12
+      },
+      {
+       "techo": 37714,
+       "desvio_m": 1.96
+      },
+      {
+       "techo": 37715,
+       "desvio_m": 2.85
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0023:X1772-0144-X1772-0145",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38450,
+       "desvio_m": 14.38
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0023:X1772-0144-X1772-0145",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35006,
+       "desvio_m": 10.47
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0024:X1772-0146-X1772-0147",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35087,
+       "desvio_m": 0.64
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0026:X1772-0152-E1772-0017",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37941,
+       "desvio_m": 4.66
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0026:X1772-0152-E1772-0017",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37745,
+       "desvio_m": 0.6
+      },
+      {
+       "techo": 37746,
+       "desvio_m": 1.03
+      },
+      {
+       "techo": 37747,
+       "desvio_m": 1.42
+      },
+      {
+       "techo": 37754,
+       "desvio_m": 1.4
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0026:X1772-0153-X1772-0154",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35182,
+       "desvio_m": 3.71
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0026:X1772-0153-X1772-0154",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35092,
+       "desvio_m": 4.42
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0028:X1772-0159-X1772-0160",
+     "sector": "S1772-42",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38052,
+       "desvio_m": 1.66
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0028:X1772-0160-X1772-0161",
+     "sector": "S1772-43",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37916,
+       "desvio_m": 0.79
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0028:X1772-0161-E1772-0018",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 14810,
+       "desvio_m": 3.05
+      },
+      {
+       "techo": 38085,
+       "desvio_m": 2.24
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0028:X1772-0161-E1772-0018",
+     "sector": "S1772-43",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37936,
+       "desvio_m": 0.95
+      },
+      {
+       "techo": 37937,
+       "desvio_m": 1.61
+      },
+      {
+       "techo": 37954,
+       "desvio_m": 1.22
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0028:E1772-0018-X1772-0162",
+     "sector": "S1772-43",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37974,
+       "desvio_m": 1.74
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0028:X1772-0162-X1772-0163",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35247,
+       "desvio_m": 0.52
+      },
+      {
+       "techo": 35257,
+       "desvio_m": 14.9
+      },
+      {
+       "techo": 35258,
+       "desvio_m": 5.14
+      },
+      {
+       "techo": 35264,
+       "desvio_m": 3.51
+      },
+      {
+       "techo": 35265,
+       "desvio_m": 15.38
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0029:X1772-0168-X1772-0169",
+     "sector": "S1772-42",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35289,
+       "desvio_m": 4.88
+      },
+      {
+       "techo": 35301,
+       "desvio_m": 0.91
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0029:X1772-0169-X1772-0170",
+     "sector": "S1772-42",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35318,
+       "desvio_m": 0.72
+      },
+      {
+       "techo": 35323,
+       "desvio_m": 5.33
+      },
+      {
+       "techo": 35333,
+       "desvio_m": 0.92
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0029:X1772-0170-X1772-0171",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35371,
+       "desvio_m": 12.65
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0029:X1772-0171-E1772-0019",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38464,
+       "desvio_m": 10.58
+      },
+      {
+       "techo": 38471,
+       "desvio_m": 9.41
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0029:X1772-0171-E1772-0019",
+     "sector": "S1772-43",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 14967,
+       "desvio_m": 13.94
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0029:E1772-0019-X1772-0172",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38134,
+       "desvio_m": 1.57
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0029:X1772-0172-X1772-0173",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 12585,
+       "desvio_m": 9.05
+      },
+      {
+       "techo": 38156,
+       "desvio_m": 5.66
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0029:X1772-0172-X1772-0173",
+     "sector": "S1772-43",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35271,
+       "desvio_m": 6.82
+      },
+      {
+       "techo": 35277,
+       "desvio_m": 4.26
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0030:X1772-0176-X1772-0177",
+     "sector": "S1772-42",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38207,
+       "desvio_m": 3.2
+      },
+      {
+       "techo": 38228,
+       "desvio_m": 7.78
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0030:X1772-0178-X1772-0179",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38511,
+       "desvio_m": 12.49
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0030:X1772-0178-X1772-0179",
+     "sector": "S1772-43",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35359,
+       "desvio_m": 3.08
+      },
+      {
+       "techo": 35362,
+       "desvio_m": 0.58
+      },
+      {
+       "techo": 35363,
+       "desvio_m": 1.09
+      },
+      {
+       "techo": 35364,
+       "desvio_m": 0.98
+      },
+      {
+       "techo": 35365,
+       "desvio_m": 0.61
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0030:E1772-0020-E1772-0021",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38321,
+       "desvio_m": 1.9
+      },
+      {
+       "techo": 38329,
+       "desvio_m": 5.24
+      },
+      {
+       "techo": 38342,
+       "desvio_m": 3.16
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0030:E1772-0021-X1772-0180",
+     "sector": "S1772-43",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38142,
+       "desvio_m": 0.82
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0032:X1772-0051-X1772-0068",
+     "sector": "S1772-21",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36871,
+       "desvio_m": 3.16
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0033:E1772-0012-T1772-0023",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36099,
+       "desvio_m": 10.73
+      },
+      {
+       "techo": 36100,
+       "desvio_m": 10.49
+      },
+      {
+       "techo": 36102,
+       "desvio_m": 9.46
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0033:E1772-0012-T1772-0023",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36095,
+       "desvio_m": 4.93
+      },
+      {
+       "techo": 36097,
+       "desvio_m": 1.77
+      },
+      {
+       "techo": 36101,
+       "desvio_m": 0.65
+      },
+      {
+       "techo": 36106,
+       "desvio_m": 0.57
+      },
+      {
+       "techo": 36111,
+       "desvio_m": 4.1
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0033:E1772-0012-T1772-0023",
+     "sector": "S1772-21",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36097,
+       "desvio_m": 9.01
+      },
+      {
+       "techo": 36147,
+       "desvio_m": 5.49
+      },
+      {
+       "techo": 36157,
+       "desvio_m": 0.87
+      },
+      {
+       "techo": 36158,
+       "desvio_m": 3.5
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0034:T1772-0034-X1772-0182",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36487,
+       "desvio_m": 3.19
+      },
+      {
+       "techo": 36488,
+       "desvio_m": 1.6
+      },
+      {
+       "techo": 36490,
+       "desvio_m": 1.48
+      },
+      {
+       "techo": 36491,
+       "desvio_m": 2.42
+      },
+      {
+       "techo": 36504,
+       "desvio_m": 7.59
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0034:X1772-0182-X1772-0035",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36499,
+       "desvio_m": 0.72
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0034:X1772-0052-X1772-0069",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36849,
+       "desvio_m": 13.53
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0034:X1772-0136-E1772-0016",
+     "sector": "S1772-31",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37590,
+       "desvio_m": 0.65
+      },
+      {
+       "techo": 37592,
+       "desvio_m": 3.99
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0035:X1772-0010-X1772-0019",
+     "sector": "S1772-11",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 32702,
+       "desvio_m": 1.27
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0035:X1772-0019-T1772-0025",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36123,
+       "desvio_m": 3.81
+      },
+      {
+       "techo": 36126,
+       "desvio_m": 7.34
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0035:X1772-0019-T1772-0025",
+     "sector": "S1772-21",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36159,
+       "desvio_m": 2.09
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0036:X1772-0183-X1772-0036",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32834,
+       "desvio_m": 1.08
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0036:X1772-0183-X1772-0036",
+     "sector": "S1772-21",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 32862,
+       "desvio_m": 6.59
+      },
+      {
+       "techo": 32870,
+       "desvio_m": 0.8
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0036:X1772-0036-X1772-0053",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33316,
+       "desvio_m": 1.17
+      },
+      {
+       "techo": 33319,
+       "desvio_m": 2.48
+      },
+      {
+       "techo": 33320,
+       "desvio_m": 2.66
+      },
+      {
+       "techo": 33323,
+       "desvio_m": 1.67
+      },
+      {
+       "techo": 33324,
+       "desvio_m": 3.24
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0036:X1772-0053-X1772-0070",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33642,
+       "desvio_m": 3.66
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0036:X1772-0103-X1772-0120",
+     "sector": "S1772-31",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37324,
+       "desvio_m": 4.66
+      },
+      {
+       "techo": 37481,
+       "desvio_m": 3.68
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0036:X1772-0103-X1772-0120",
+     "sector": "S1772-31",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37325,
+       "desvio_m": 0.77
+      },
+      {
+       "techo": 37330,
+       "desvio_m": 0.55
+      },
+      {
+       "techo": 37333,
+       "desvio_m": 0.84
+      },
+      {
+       "techo": 37334,
+       "desvio_m": 1.34
+      },
+      {
+       "techo": 37335,
+       "desvio_m": 1.81
+      },
+      {
+       "techo": 37344,
+       "desvio_m": 12.8
+      },
+      {
+       "techo": 37356,
+       "desvio_m": 0.6
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0036:X1772-0120-X1772-0137",
+     "sector": "S1772-31",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37469,
+       "desvio_m": 2.5
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0036:X1772-0137-T1772-0080",
+     "sector": "S1772-31",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37605,
+       "desvio_m": 6.67
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0037:X1772-0011-X1772-0020",
+     "sector": "S1772-12",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32712,
+       "desvio_m": 9.93
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0037:X1772-0020-T1772-0021",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36175,
+       "desvio_m": 5.24
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0037:X1772-0020-T1772-0021",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36196,
+       "desvio_m": 5.91
+      },
+      {
+       "techo": 36218,
+       "desvio_m": 2.16
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0038:X1772-0184-X1772-0037",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32905,
+       "desvio_m": 4.04
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0038:X1772-0037-X1772-0054",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33342,
+       "desvio_m": 1.84
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0038:X1772-0088-X1772-0104",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 23246,
+       "desvio_m": 5.17
+      },
+      {
+       "techo": 37104,
+       "desvio_m": 11.24
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0038:X1772-0104-X1772-0121",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38403,
+       "desvio_m": 2.18
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0038:X1772-0121-X1772-0138",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 34767,
+       "desvio_m": 1.92
+      },
+      {
+       "techo": 34771,
+       "desvio_m": 2.45
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0038:X1772-0121-X1772-0138",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 34781,
+       "desvio_m": 12.91
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0039:E1772-0009-T1772-0020",
+     "sector": "S1772-12",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36258,
+       "desvio_m": 6.69
+      },
+      {
+       "techo": 36262,
+       "desvio_m": 3.11
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0039:E1772-0009-T1772-0020",
+     "sector": "S1772-12",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36229,
+       "desvio_m": 1.05
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0039:E1772-0009-T1772-0020",
+     "sector": "S1772-12",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36265,
+       "desvio_m": 2.78
+      },
+      {
+       "techo": 36271,
+       "desvio_m": 11.29
+      },
+      {
+       "techo": 36272,
+       "desvio_m": 4.24
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0040:T1772-0031-X1772-0185",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36531,
+       "desvio_m": 3.55
+      },
+      {
+       "techo": 36542,
+       "desvio_m": 4.38
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0040:X1772-0185-X1772-0038",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32933,
+       "desvio_m": 1.86
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0040:X1772-0038-X1772-0055",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33337,
+       "desvio_m": 0.81
+      },
+      {
+       "techo": 33360,
+       "desvio_m": 3.88
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0040:X1772-0139-T1772-0082",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37642,
+       "desvio_m": 14.04
+      },
+      {
+       "techo": 37643,
+       "desvio_m": 5.19
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0041:E1772-0010-T1772-0042",
+     "sector": "S1772-12",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36244,
+       "desvio_m": 12.55
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0041:E1772-0010-T1772-0042",
+     "sector": "S1772-12",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36300,
+       "desvio_m": 1.25
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0042:X1772-0186-X1772-0039",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33020,
+       "desvio_m": 8.17
+      },
+      {
+       "techo": 33021,
+       "desvio_m": 4.73
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0042:X1772-0056-X1772-0073",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33750,
+       "desvio_m": 14.09
+      },
+      {
+       "techo": 33751,
+       "desvio_m": 10.39
+      },
+      {
+       "techo": 33752,
+       "desvio_m": 5.95
+      },
+      {
+       "techo": 33753,
+       "desvio_m": 6.55
+      },
+      {
+       "techo": 33754,
+       "desvio_m": 0.77
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0042:X1772-0090-X1772-0106",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 34299,
+       "desvio_m": 0.52
+      },
+      {
+       "techo": 34300,
+       "desvio_m": 0.94
+      },
+      {
+       "techo": 34304,
+       "desvio_m": 1.82
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0042:X1772-0106-X1772-0123",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 34524,
+       "desvio_m": 1.83
+      },
+      {
+       "techo": 34526,
+       "desvio_m": 2.37
+      },
+      {
+       "techo": 34527,
+       "desvio_m": 4.23
+      },
+      {
+       "techo": 34535,
+       "desvio_m": 1.56
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0042:X1772-0123-X1772-0140",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 34829,
+       "desvio_m": 1.89
+      },
+      {
+       "techo": 34833,
+       "desvio_m": 0.81
+      },
+      {
+       "techo": 34840,
+       "desvio_m": 0.79
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0043:T1772-0016-E1772-0014",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36077,
+       "desvio_m": 4.47
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0043:E1772-0014-X1772-0187",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36273,
+       "desvio_m": 0.54
+      },
+      {
+       "techo": 36276,
+       "desvio_m": 8.09
+      },
+      {
+       "techo": 36594,
+       "desvio_m": 0.8
+      },
+      {
+       "techo": 36595,
+       "desvio_m": 0.57
+      },
+      {
+       "techo": 36602,
+       "desvio_m": 0.51
+      },
+      {
+       "techo": 36603,
+       "desvio_m": 3.26
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0043:E1772-0014-X1772-0187",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36611,
+       "desvio_m": 0.62
+      },
+      {
+       "techo": 36612,
+       "desvio_m": 0.76
+      },
+      {
+       "techo": 36613,
+       "desvio_m": 2.5
+      },
+      {
+       "techo": 36614,
+       "desvio_m": 9.64
+      },
+      {
+       "techo": 36615,
+       "desvio_m": 2.45
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0043:X1772-0187-X1772-0040",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33009,
+       "desvio_m": 13.13
+      },
+      {
+       "techo": 33012,
+       "desvio_m": 12.13
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0043:X1772-0040-X1772-0057",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33431,
+       "desvio_m": 10.88
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0043:X1772-0057-X1772-0074",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33759,
+       "desvio_m": 7.6
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0043:X1772-0074-X1772-0091",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 34081,
+       "desvio_m": 15.65
+      },
+      {
+       "techo": 34122,
+       "desvio_m": 7.2
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0045:X1772-0189-X1772-0041",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33047,
+       "desvio_m": 9.97
+      },
+      {
+       "techo": 33051,
+       "desvio_m": 3.72
+      },
+      {
+       "techo": 33052,
+       "desvio_m": 6.99
+      },
+      {
+       "techo": 33053,
+       "desvio_m": 10.27
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0045:X1772-0041-X1772-0058",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33482,
+       "desvio_m": 6.51
+      },
+      {
+       "techo": 33483,
+       "desvio_m": 8.14
+      },
+      {
+       "techo": 33484,
+       "desvio_m": 5.66
+      },
+      {
+       "techo": 33485,
+       "desvio_m": 4.28
+      },
+      {
+       "techo": 33486,
+       "desvio_m": 10.53
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0045:X1772-0041-X1772-0058",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35557,
+       "desvio_m": 13.22
+      },
+      {
+       "techo": 35558,
+       "desvio_m": 3.21
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0045:X1772-0058-X1772-0075",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33770,
+       "desvio_m": 9.56
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0045:X1772-0058-X1772-0075",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33798,
+       "desvio_m": 15.03
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0045:X1772-0075-X1772-0092",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 16659,
+       "desvio_m": 0.91
+      },
+      {
+       "techo": 36945,
+       "desvio_m": 5.32
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0045:X1772-0092-X1772-0108",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37105,
+       "desvio_m": 1.09
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0045:X1772-0142-X1772-0190",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35042,
+       "desvio_m": 9.88
+      },
+      {
+       "techo": 35044,
+       "desvio_m": 3.27
+      },
+      {
+       "techo": 35057,
+       "desvio_m": 2.47
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0045:X1772-0190-T1772-0087",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37793,
+       "desvio_m": 3.82
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0047:X1772-0042-X1772-0059",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35570,
+       "desvio_m": 15.93
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0047:X1772-0076-X1772-0093",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36936,
+       "desvio_m": 2.09
+      },
+      {
+       "techo": 36947,
+       "desvio_m": 3.23
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0047:X1772-0076-X1772-0093",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38892,
+       "desvio_m": 7.34
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0047:X1772-0093-X1772-0109",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 16928,
+       "desvio_m": 2.5
+      },
+      {
+       "techo": 37115,
+       "desvio_m": 4.07
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0047:X1772-0093-X1772-0109",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37146,
+       "desvio_m": 10.5
+      },
+      {
+       "techo": 37149,
+       "desvio_m": 2.66
+      },
+      {
+       "techo": 37150,
+       "desvio_m": 2.09
+      },
+      {
+       "techo": 37151,
+       "desvio_m": 1.51
+      },
+      {
+       "techo": 37152,
+       "desvio_m": 0.94
+      },
+      {
+       "techo": 37155,
+       "desvio_m": 0.74
+      },
+      {
+       "techo": 37156,
+       "desvio_m": 0.65
+      },
+      {
+       "techo": 37157,
+       "desvio_m": 2.17
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0047:X1772-0143-X1772-0192",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37676,
+       "desvio_m": 1.38
+      },
+      {
+       "techo": 37677,
+       "desvio_m": 0.97
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0047:X1772-0192-X1772-0159",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37834,
+       "desvio_m": 2.03
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0047:X1772-0192-X1772-0159",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37855,
+       "desvio_m": 0.56
+      },
+      {
+       "techo": 38758,
+       "desvio_m": 3.66
+      },
+      {
+       "techo": 38759,
+       "desvio_m": 11.41
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0048:X1772-0177-T1772-0104",
+     "sector": "S1772-42",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38228,
+       "desvio_m": 0.69
+      },
+      {
+       "techo": 38232,
+       "desvio_m": 0.78
+      },
+      {
+       "techo": 38233,
+       "desvio_m": 1.01
+      },
+      {
+       "techo": 38234,
+       "desvio_m": 1.67
+      },
+      {
+       "techo": 38235,
+       "desvio_m": 1.86
+      },
+      {
+       "techo": 38236,
+       "desvio_m": 2.27
+      },
+      {
+       "techo": 38237,
+       "desvio_m": 2.65
+      },
+      {
+       "techo": 38238,
+       "desvio_m": 3.07
+      },
+      {
+       "techo": 38239,
+       "desvio_m": 3.48
+      },
+      {
+       "techo": 38296,
+       "desvio_m": 13.51
+      },
+      {
+       "techo": 38297,
+       "desvio_m": 13.52
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0048:X1772-0177-T1772-0104",
+     "sector": "S1772-42",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38280,
+       "desvio_m": 4.03
+      },
+      {
+       "techo": 38281,
+       "desvio_m": 3.36
+      },
+      {
+       "techo": 38284,
+       "desvio_m": 3.02
+      },
+      {
+       "techo": 38285,
+       "desvio_m": 2.78
+      },
+      {
+       "techo": 38286,
+       "desvio_m": 2.21
+      },
+      {
+       "techo": 38287,
+       "desvio_m": 0.84
+      },
+      {
+       "techo": 38289,
+       "desvio_m": 1.74
+      },
+      {
+       "techo": 38290,
+       "desvio_m": 1.41
+      },
+      {
+       "techo": 38294,
+       "desvio_m": 0.85
+      },
+      {
+       "techo": 38295,
+       "desvio_m": 1.19
+      },
+      {
+       "techo": 38296,
+       "desvio_m": 2.1
+      },
+      {
+       "techo": 38297,
+       "desvio_m": 1.34
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0049:T1772-0017-X1772-0026",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38366,
+       "desvio_m": 1.85
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0049:X1772-0026-T1772-0039",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 14678,
+       "desvio_m": 8.27
+      },
+      {
+       "techo": 38657,
+       "desvio_m": 3.14
+      },
+      {
+       "techo": 38668,
+       "desvio_m": 0.96
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0049:X1772-0026-T1772-0039",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 13869,
+       "desvio_m": 6.37
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0050:T1772-0045-X1772-0193",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 14668,
+       "desvio_m": 15.48
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0050:X1772-0077-X1772-0094",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 15422,
+       "desvio_m": 11.15
+      },
+      {
+       "techo": 36973,
+       "desvio_m": 12.4
+      },
+      {
+       "techo": 36974,
+       "desvio_m": 12.26
+      },
+      {
+       "techo": 36975,
+       "desvio_m": 12.15
+      },
+      {
+       "techo": 36976,
+       "desvio_m": 12.18
+      },
+      {
+       "techo": 36977,
+       "desvio_m": 12.02
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0050:X1772-0094-X1772-0110",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35826,
+       "desvio_m": 1.71
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0050:X1772-0144-T1772-0079",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38438,
+       "desvio_m": 14.09
+      },
+      {
+       "techo": 38439,
+       "desvio_m": 5.42
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0051:X1772-0170-X1772-0178",
+     "sector": "S1772-43",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35352,
+       "desvio_m": 13.23
+      },
+      {
+       "techo": 35359,
+       "desvio_m": 16.72
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0053:T1772-0046-X1772-0194",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38576,
+       "desvio_m": 4.35
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0053:X1772-0061-X1772-0078",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33872,
+       "desvio_m": 11.18
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0053:X1772-0128-X1772-0145",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35007,
+       "desvio_m": 9.75
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0053:X1772-0128-X1772-0145",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37482,
+       "desvio_m": 1.08
+      },
+      {
+       "techo": 37497,
+       "desvio_m": 15.65
+      },
+      {
+       "techo": 37498,
+       "desvio_m": 6.34
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0054:X1772-0152-X1772-0161",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37882,
+       "desvio_m": 3.01
+      },
+      {
+       "techo": 37894,
+       "desvio_m": 1.98
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0054:X1772-0152-X1772-0161",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37937,
+       "desvio_m": 7.28
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0054:X1772-0161-X1772-0171",
+     "sector": "S1772-43",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38063,
+       "desvio_m": 0.82
+      },
+      {
+       "techo": 38064,
+       "desvio_m": 0.52
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0054:X1772-0171-X1772-0179",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35361,
+       "desvio_m": 3.53
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0054:X1772-0179-T1772-0100",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38514,
+       "desvio_m": 4.42
+      },
+      {
+       "techo": 38516,
+       "desvio_m": 4.44
+      },
+      {
+       "techo": 38518,
+       "desvio_m": 0.73
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0054:X1772-0179-T1772-0100",
+     "sector": "S1772-43",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38304,
+       "desvio_m": 10.11
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0055:X1772-0022-X1772-0028",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 32796,
+       "desvio_m": 1.82
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0055:X1772-0028-T1772-0041",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36385,
+       "desvio_m": 3.11
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0056:X1772-0045-X1772-0062",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33510,
+       "desvio_m": 6.41
+      },
+      {
+       "techo": 33539,
+       "desvio_m": 3.35
+      },
+      {
+       "techo": 33540,
+       "desvio_m": 3.74
+      },
+      {
+       "techo": 33541,
+       "desvio_m": 3.85
+      },
+      {
+       "techo": 33542,
+       "desvio_m": 4.17
+      },
+      {
+       "techo": 33543,
+       "desvio_m": 3.81
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0056:X1772-0062-X1772-0079",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33881,
+       "desvio_m": 1.73
+      },
+      {
+       "techo": 33882,
+       "desvio_m": 2.01
+      },
+      {
+       "techo": 33883,
+       "desvio_m": 11.97
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0057:E1772-0015-E1772-0017",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37743,
+       "desvio_m": 1.44
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0057:E1772-0015-E1772-0017",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37770,
+       "desvio_m": 17.46
+      },
+      {
+       "techo": 37771,
+       "desvio_m": 1.85
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0057:E1772-0017-E1772-0018",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37952,
+       "desvio_m": 0.55
+      },
+      {
+       "techo": 37953,
+       "desvio_m": 0.56
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0057:E1772-0018-E1772-0019",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 14789,
+       "desvio_m": 11.87
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0057:E1772-0019-E1772-0021",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 14974,
+       "desvio_m": 8.9
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0058:X1772-0006-X1772-0015",
+     "sector": "S1772-13",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32673,
+       "desvio_m": 11.37
+      },
+      {
+       "techo": 32680,
+       "desvio_m": 4.37
+      },
+      {
+       "techo": 32681,
+       "desvio_m": 12.49
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0058:X1772-0023-X1772-0029",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32766,
+       "desvio_m": 1.18
+      },
+      {
+       "techo": 32774,
+       "desvio_m": 1.8
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0058:X1772-0029-T1772-0038",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36424,
+       "desvio_m": 0.74
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0059:T1772-0044-X1772-0196",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 11137,
+       "desvio_m": 8.02
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0059:X1772-0196-X1772-0046",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33170,
+       "desvio_m": 0.79
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0059:X1772-0080-X1772-0097",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37010,
+       "desvio_m": 10.83
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0059:X1772-0097-X1772-0113",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37182,
+       "desvio_m": 0.52
+      },
+      {
+       "techo": 37183,
+       "desvio_m": 0.7
+      },
+      {
+       "techo": 37190,
+       "desvio_m": 2.64
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0060:X1772-0130-X1772-0146",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37531,
+       "desvio_m": 1.63
+      },
+      {
+       "techo": 37535,
+       "desvio_m": 2.92
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0060:X1772-0146-X1772-0153",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35089,
+       "desvio_m": 9.83
+      },
+      {
+       "techo": 35090,
+       "desvio_m": 2.34
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0060:X1772-0153-X1772-0162",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37966,
+       "desvio_m": 1.99
+      },
+      {
+       "techo": 37975,
+       "desvio_m": 4.44
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0060:X1772-0153-X1772-0162",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35174,
+       "desvio_m": 2.63
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0060:X1772-0162-X1772-0172",
+     "sector": "S1772-43",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35245,
+       "desvio_m": 12.29
+      },
+      {
+       "techo": 35246,
+       "desvio_m": 1.14
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0060:X1772-0172-X1772-0180",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38152,
+       "desvio_m": 2.12
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0060:X1772-0172-X1772-0180",
+     "sector": "S1772-43",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38153,
+       "desvio_m": 0.53
+      },
+      {
+       "techo": 38157,
+       "desvio_m": 4.56
+      },
+      {
+       "techo": 38158,
+       "desvio_m": 0.98
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0061:X1772-0024-X1772-0030",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32817,
+       "desvio_m": 14.17
+      },
+      {
+       "techo": 32828,
+       "desvio_m": 0.64
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0061:X1772-0024-X1772-0030",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36441,
+       "desvio_m": 1.58
+      },
+      {
+       "techo": 36446,
+       "desvio_m": 0.91
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0062:T1772-0037-X1772-0197",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38640,
+       "desvio_m": 1.8
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0062:T1772-0037-X1772-0197",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 8388,
+       "desvio_m": 11.13
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0062:X1772-0047-X1772-0064",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 33588,
+       "desvio_m": 5.99
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0062:X1772-0064-X1772-0081",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33950,
+       "desvio_m": 9.85
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0062:X1772-0064-X1772-0081",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38542,
+       "desvio_m": 4.9
+      },
+      {
+       "techo": 38543,
+       "desvio_m": 12.39
+      },
+      {
+       "techo": 38559,
+       "desvio_m": 2.38
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0062:X1772-0081-T1772-0061",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37011,
+       "desvio_m": 4.71
+      },
+      {
+       "techo": 37012,
+       "desvio_m": 4.96
+      },
+      {
+       "techo": 37013,
+       "desvio_m": 5.19
+      },
+      {
+       "techo": 37014,
+       "desvio_m": 1.23
+      },
+      {
+       "techo": 37015,
+       "desvio_m": 3.54
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0062:X1772-0081-T1772-0061",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37036,
+       "desvio_m": 1.25
+      },
+      {
+       "techo": 37047,
+       "desvio_m": 6.06
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0063:T1772-0064-X1772-0114",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38738,
+       "desvio_m": 5.56
+      },
+      {
+       "techo": 38740,
+       "desvio_m": 1.75
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0063:X1772-0131-X1772-0147",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37556,
+       "desvio_m": 9.49
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0063:X1772-0147-X1772-0154",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35120,
+       "desvio_m": 0.54
+      },
+      {
+       "techo": 35125,
+       "desvio_m": 2.0
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0063:X1772-0163-X1772-0173",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35272,
+       "desvio_m": 2.81
+      },
+      {
+       "techo": 35277,
+       "desvio_m": 0.81
+      },
+      {
+       "techo": 35278,
+       "desvio_m": 1.05
+      },
+      {
+       "techo": 35282,
+       "desvio_m": 3.25
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0063:X1772-0173-X1772-0181",
+     "sector": "S1772-43",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38171,
+       "desvio_m": 12.31
+      },
+      {
+       "techo": 38175,
+       "desvio_m": 11.49
+      },
+      {
+       "techo": 38176,
+       "desvio_m": 11.39
+      },
+      {
+       "techo": 38177,
+       "desvio_m": 11.25
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0065:X1772-0198-X1772-0048",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36745,
+       "desvio_m": 2.96
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0065:X1772-0048-X1772-0065",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36793,
+       "desvio_m": 1.0
+      },
+      {
+       "techo": 36794,
+       "desvio_m": 2.1
+      },
+      {
+       "techo": 36795,
+       "desvio_m": 2.54
+      },
+      {
+       "techo": 36796,
+       "desvio_m": 1.53
+      },
+      {
+       "techo": 36797,
+       "desvio_m": 0.51
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0065:X1772-0065-T1772-0056",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38560,
+       "desvio_m": 0.99
+      },
+      {
+       "techo": 38561,
+       "desvio_m": 0.74
+      },
+      {
+       "techo": 38567,
+       "desvio_m": 0.88
+      },
+      {
+       "techo": 38574,
+       "desvio_m": 5.2
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0065:X1772-0065-T1772-0056",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36875,
+       "desvio_m": 2.6
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0066:T1772-0060-X1772-0098",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37058,
+       "desvio_m": 2.55
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0066:X1772-0098-X1772-0115",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37232,
+       "desvio_m": 1.56
+      },
+      {
+       "techo": 37233,
+       "desvio_m": 1.42
+      },
+      {
+       "techo": 37234,
+       "desvio_m": 1.05
+      },
+      {
+       "techo": 37235,
+       "desvio_m": 0.6
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0066:X1772-0098-X1772-0115",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 37279,
+       "desvio_m": 1.15
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0066:X1772-0132-X1772-0148",
+     "sector": "S1772-33",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37566,
+       "desvio_m": 5.27
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0066:X1772-0148-X1772-0155",
+     "sector": "S1772-33",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35142,
+       "desvio_m": 0.74
+      },
+      {
+       "techo": 35146,
+       "desvio_m": 5.29
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0068:X1772-0082-X1772-0099",
+     "sector": "S1772-24",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 38391,
+       "desvio_m": 1.12
+      },
+      {
+       "techo": 38392,
+       "desvio_m": 11.16
+      },
+      {
+       "techo": 38393,
+       "desvio_m": 1.14
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0068:X1772-0149-X1772-0156",
+     "sector": "S1772-34",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35153,
+       "desvio_m": 3.09
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0068:X1772-0156-X1772-0165",
+     "sector": "S1772-34",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 35842,
+       "desvio_m": 0.76
+      },
+      {
+       "techo": 35852,
+       "desvio_m": 1.02
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0072:X1772-0140-T1772-0077",
+     "sector": "S1772-32",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 37609,
+       "desvio_m": 19.82
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0073:E1772-0001-E1772-0007",
+     "sector": "S1772-11",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35956,
+       "desvio_m": 14.23
+      },
+      {
+       "techo": 35960,
+       "desvio_m": 12.49
+      },
+      {
+       "techo": 35962,
+       "desvio_m": 7.25
+      },
+      {
+       "techo": 35963,
+       "desvio_m": 10.89
+      },
+      {
+       "techo": 35965,
+       "desvio_m": 9.02
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0073:E1772-0001-E1772-0007",
+     "sector": "S1772-11",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35966,
+       "desvio_m": 4.44
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0073:E1772-0001-E1772-0007",
+     "sector": "S1772-11",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38689,
+       "desvio_m": 0.62
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0073:E1772-0001-E1772-0007",
+     "sector": "S1772-11",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35971,
+       "desvio_m": 1.56
+      },
+      {
+       "techo": 35975,
+       "desvio_m": 3.06
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0073:E1772-0007-E1772-0008",
+     "sector": "S1772-12",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36035,
+       "desvio_m": 1.63
+      },
+      {
+       "techo": 36052,
+       "desvio_m": 3.9
+      },
+      {
+       "techo": 36053,
+       "desvio_m": 9.63
+      },
+      {
+       "techo": 36246,
+       "desvio_m": 0.54
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0073:E1772-0010-E1772-0014",
+     "sector": "S1772-12",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36294,
+       "desvio_m": 3.08
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0073:E1772-0010-E1772-0014",
+     "sector": "S1772-12",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36067,
+       "desvio_m": 3.66
+      },
+      {
+       "techo": 36068,
+       "desvio_m": 3.24
+      },
+      {
+       "techo": 36069,
+       "desvio_m": 2.79
+      },
+      {
+       "techo": 36070,
+       "desvio_m": 2.35
+      },
+      {
+       "techo": 36071,
+       "desvio_m": 1.91
+      },
+      {
+       "techo": 36072,
+       "desvio_m": 1.46
+      },
+      {
+       "techo": 36073,
+       "desvio_m": 1.02
+      },
+      {
+       "techo": 36074,
+       "desvio_m": 0.58
+      },
+      {
+       "techo": 36077,
+       "desvio_m": 10.56
+      },
+      {
+       "techo": 36078,
+       "desvio_m": 2.7
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0073:E1772-0014-T1772-0022",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 38725,
+       "desvio_m": 1.88
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0073:E1772-0014-T1772-0022",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36321,
+       "desvio_m": 3.3
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0074:E1772-0001-T1772-0005",
+     "sector": "S1772-11",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 21779,
+       "desvio_m": 6.0
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0074:E1772-0001-T1772-0005",
+     "sector": "S1772-11",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 21779,
+       "desvio_m": 6.33
+      },
+      {
+       "techo": 35899,
+       "desvio_m": 3.27
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0075:X1772-0020-E1772-0009",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36023,
+       "desvio_m": 2.63
+      },
+      {
+       "techo": 36024,
+       "desvio_m": 1.55
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0075:E1772-0009-E1772-0008",
+     "sector": "S1772-12",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36044,
+       "desvio_m": 0.57
+      },
+      {
+       "techo": 36053,
+       "desvio_m": 1.74
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0182-X1772-0183",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32831,
+       "desvio_m": 13.37
+      },
+      {
+       "techo": 32832,
+       "desvio_m": 4.12
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0183-X1772-0184",
+     "sector": "S1772-21",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32869,
+       "desvio_m": 2.64
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0183-X1772-0184",
+     "sector": "S1772-21",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36516,
+       "desvio_m": 0.83
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0184-X1772-0185",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32914,
+       "desvio_m": 4.24
+      },
+      {
+       "techo": 32933,
+       "desvio_m": 1.33
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0184-X1772-0185",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36530,
+       "desvio_m": 1.89
+      },
+      {
+       "techo": 36532,
+       "desvio_m": 0.9
+      },
+      {
+       "techo": 36533,
+       "desvio_m": 1.7
+      },
+      {
+       "techo": 36534,
+       "desvio_m": 2.51
+      },
+      {
+       "techo": 36539,
+       "desvio_m": 2.18
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0185-X1772-0186",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36560,
+       "desvio_m": 1.08
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0186-X1772-0187",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 32994,
+       "desvio_m": 0.6
+      },
+      {
+       "techo": 32995,
+       "desvio_m": 1.53
+      },
+      {
+       "techo": 32996,
+       "desvio_m": 2.21
+      },
+      {
+       "techo": 32997,
+       "desvio_m": 5.88
+      },
+      {
+       "techo": 32998,
+       "desvio_m": 2.16
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0187-X1772-0189",
+     "sector": "S1772-22",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 33036,
+       "desvio_m": 0.59
+      },
+      {
+       "techo": 33037,
+       "desvio_m": 0.9
+      },
+      {
+       "techo": 33038,
+       "desvio_m": 0.53
+      },
+      {
+       "techo": 33066,
+       "desvio_m": 3.44
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0187-X1772-0189",
+     "sector": "S1772-22",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36614,
+       "desvio_m": 0.89
+      },
+      {
+       "techo": 36615,
+       "desvio_m": 2.14
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0194-X1772-0195",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 12706,
+       "desvio_m": 1.53
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0195-X1772-0196",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 11115,
+       "desvio_m": 3.07
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0197-X1772-0198",
+     "sector": "S1772-23",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36692,
+       "desvio_m": 1.62
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0080:X1772-0198-X1772-0199",
+     "sector": "S1772-23",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36730,
+       "desvio_m": 2.4
+      },
+      {
+       "techo": 36755,
+       "desvio_m": 1.01
+      },
+      {
+       "techo": 36767,
+       "desvio_m": 3.8
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0082:X1772-0190-X1772-0192",
+     "sector": "S1772-32",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 35068,
+       "desvio_m": 1.2
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0085:X1772-0012-E1772-0009",
+     "sector": "S1772-12",
+     "lado": 1,
+     "casas": [
+      {
+       "techo": 36023,
+       "desvio_m": 7.94
+      }
+     ]
+    },
+    {
+     "tramo": "L1772-0085:X1772-0012-E1772-0009",
+     "sector": "S1772-12",
+     "lado": -1,
+     "casas": [
+      {
+       "techo": 36044,
+       "desvio_m": 4.33
+      }
+     ]
+    }
+   ]
+  },
+  "lotes_sin_solapes": {
+   "cumplido": false,
+   "umbral_m2": 0.01,
+   "pares": 7195,
+   "mayor_m2": 160.938,
+   "mayores": [
+    {
+     "techos": [
+      36752,
+      36788
+     ],
+     "area_m2": 160.938
+    },
+    {
+     "techos": [
+      36754,
+      36790
+     ],
+     "area_m2": 154.576
+    },
+    {
+     "techos": [
+      36753,
+      36789
+     ],
+     "area_m2": 134.953
+    },
+    {
+     "techos": [
+      15411,
+      38890
+     ],
+     "area_m2": 39.969
+    },
+    {
+     "techos": [
+      15400,
+      38892
+     ],
+     "area_m2": 16.252
+    },
+    {
+     "techos": [
+      36957,
+      38892
+     ],
+     "area_m2": 10.905
+    },
+    {
+     "techos": [
+      36241,
+      36242
+     ],
+     "area_m2": 9.74
+    },
+    {
+     "techos": [
+      37389,
+      37390
+     ],
+     "area_m2": 9.554
+    },
+    {
+     "techos": [
+      37831,
+      37838
+     ],
+     "area_m2": 8.922
+    },
+    {
+     "techos": [
+      36672,
+      36673
+     ],
+     "area_m2": 8.845
+    },
+    {
+     "techos": [
+      36956,
+      38892
+     ],
+     "area_m2": 8.793
+    },
+    {
+     "techos": [
+      38818,
+      38819
+     ],
+     "area_m2": 8.656
+    },
+    {
+     "techos": [
+      36634,
+      36640
+     ],
+     "area_m2": 8.472
+    },
+    {
+     "techos": [
+      37403,
+      37404
+     ],
+     "area_m2": 8.304
+    },
+    {
+     "techos": [
+      36639,
+      36640
+     ],
+     "area_m2": 8.147
+    },
+    {
+     "techos": [
+      36671,
+      36672
+     ],
+     "area_m2": 7.441
+    },
+    {
+     "techos": [
+      34717,
+      34718
+     ],
+     "area_m2": 7.42
+    },
+    {
+     "techos": [
+      37837,
+      37838
+     ],
+     "area_m2": 7.26
+    },
+    {
+     "techos": [
+      37776,
+      37777
+     ],
+     "area_m2": 7.122
+    },
+    {
+     "techos": [
+      36955,
+      38892
+     ],
+     "area_m2": 6.845
+    },
+    {
+     "techos": [
+      33953,
+      33954
+     ],
+     "area_m2": 6.7
+    },
+    {
+     "techos": [
+      37388,
+      37392
+     ],
+     "area_m2": 6.68
+    },
+    {
+     "techos": [
+      38811,
+      38812
+     ],
+     "area_m2": 6.556
+    },
+    {
+     "techos": [
+      38441,
+      38442
+     ],
+     "area_m2": 6.507
+    },
+    {
+     "techos": [
+      37434,
+      37435
+     ],
+     "area_m2": 6.474
+    },
+    {
+     "techos": [
+      33765,
+      33766
+     ],
+     "area_m2": 6.446
+    },
+    {
+     "techos": [
+      37835,
+      37836
+     ],
+     "area_m2": 6.445
+    },
+    {
+     "techos": [
+      33036,
+      33037
+     ],
+     "area_m2": 6.367
+    },
+    {
+     "techos": [
+      34740,
+      34741
+     ],
+     "area_m2": 6.281
+    },
+    {
+     "techos": [
+      33801,
+      33802
+     ],
+     "area_m2": 6.231
+    },
+    {
+     "techos": [
+      33782,
+      33783
+     ],
+     "area_m2": 6.193
+    },
+    {
+     "techos": [
+      34107,
+      34108
+     ],
+     "area_m2": 6.184
+    },
+    {
+     "techos": [
+      34158,
+      34159
+     ],
+     "area_m2": 6.178
+    },
+    {
+     "techos": [
+      33896,
+      33897
+     ],
+     "area_m2": 6.144
+    },
+    {
+     "techos": [
+      33828,
+      33829
+     ],
+     "area_m2": 6.112
+    },
+    {
+     "techos": [
+      37388,
+      37389
+     ],
+     "area_m2": 6.09
+    },
+    {
+     "techos": [
+      37983,
+      37987
+     ],
+     "area_m2": 6.09
+    },
+    {
+     "techos": [
+      37168,
+      37173
+     ],
+     "area_m2": 6.058
+    },
+    {
+     "techos": [
+      34271,
+      34272
+     ],
+     "area_m2": 6.046
+    },
+    {
+     "techos": [
+      37024,
+      37025
+     ],
+     "area_m2": 6.042
+    },
+    {
+     "techos": [
+      36531,
+      36539
+     ],
+     "area_m2": 5.99
+    },
+    {
+     "techos": [
+      35247,
+      35254
+     ],
+     "area_m2": 5.978
+    },
+    {
+     "techos": [
+      33292,
+      33293
+     ],
+     "area_m2": 5.974
+    },
+    {
+     "techos": [
+      38437,
+      38438
+     ],
+     "area_m2": 5.935
+    },
+    {
+     "techos": [
+      33784,
+      33785
+     ],
+     "area_m2": 5.932
+    },
+    {
+     "techos": [
+      36777,
+      36787
+     ],
+     "area_m2": 5.809
+    },
+    {
+     "techos": [
+      32997,
+      32998
+     ],
+     "area_m2": 5.797
+    },
+    {
+     "techos": [
+      38416,
+      38430
+     ],
+     "area_m2": 5.795
+    },
+    {
+     "techos": [
+      33192,
+      33193
+     ],
+     "area_m2": 5.793
+    },
+    {
+     "techos": [
+      33469,
+      33470
+     ],
+     "area_m2": 5.769
+    }
+   ],
+   "invalidas": [
+    37610
+   ]
+  },
+  "casas_con_acceso": {
+   "cumplido": false,
+   "cierre_m": 1.0,
+   "acceso_minimo_m": 2.0,
+   "casas_sin_acceso": 10,
+   "sin_acceso": [
+    33804,
+    34522,
+    34713,
+    35836,
+    36954,
+    36955,
+    36956,
+    36957,
+    37115,
+    38793
+   ]
+  },
+  "calle_aprobada": {
+   "cumplido": true,
+   "puerta": "cierre_fase3"
+  },
+  "umbrales_inferidos": {
+   "tolerancia_fachada_m": 0.5,
+   "paso_m": 1.0,
+   "esquina_m": 8.0,
+   "alcance_m": 20.0,
+   "solape_minimo_m2": 0.01,
+   "cierre_m": 1.0,
+   "acceso_minimo_m": 2.0
+  },
+  "casas_1772": 6289,
+  "fase_5_cerrable": false
+ }
+}
