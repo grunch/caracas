@@ -5,7 +5,10 @@
  */
 import { EJE_DAMERO, rectanguloPx } from './marco.js'
 
-const marco = { x: 8976, y: 6844, eje: EJE_DAMERO } // el centro del recuadro de la plaza en el plano
+// el centro de la manzana de la plaza: el de las cuatro esquinas que la rodean en el plano (Principal, La Torre, Las Monjas
+// y Las Gradillas, tools/geo/esquinas/1936-esquinas.json). En (8976, 6844) quedaba unos 6 m al este: Sur 0 angosta y Sur 2
+// ancha frente a las manzanas de 1772, que se arman desde esos mismos cruces
+const marco = { x: 8964.25, y: 6834.5, eje: EJE_DAMERO }
 const ANCHO = 86 // m, de oeste a este
 const FONDO = 82 // m, de norte a sur
 const [W, D] = [ANCHO / 2, FONDO / 2]
