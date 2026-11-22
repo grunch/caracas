@@ -570,3 +570,23 @@ def test_el_reparto_vectorial_de_una_cuadra_girada_no_deja_astillas_al_redondear
     polis = poligonos(res)
     assert len(polis) > 10
     assert _solapes_m2(polis) == []
+
+
+def test_una_cuadra_de_osm_deja_un_pixel_hacia_lo_que_ya_ocupa_la_reconstruccion():
+    # las casas de una cuadra de OSM salen de su máscara con medio píxel de buffer (poligono_de): sin margen, asomaban
+    # sobre la casa vecina de la reconstrucción de 1772 en los bordes oblicuos
+    from tools.geo.caras import Red
+    from tools.geo.vectorizar import _cuadras_de_antes
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    c[30:150, 150:166] = CLASE['calle']   # un pasaje abierto después: la cuadra de 1772 se rearma
+    ed72 = np.zeros(c.shape, bool)
+    ed72[30:230, 30:230] = True
+    cuadras = (c == CLASE['edificado']).astype(np.int32)
+    red = Red(red_de(marco_de_calles(20, 20, 240, 240), c, ed72)['tramos'])
+    ocupado = [Polygon([(30, 30), (90, 30), (70, 230), (30, 230)])]   # con un borde oblicuo
+    antes = _cuadras_de_antes(red, ed72, c, cuadras, {1: int((cuadras == 1).sum())}, METRO, ocupado=ocupado)
+    x0, y0 = antes[0]['origen']
+    filas, columnas = np.nonzero(antes[0]['cuadra'])
+    centros = [Point(cx + x0 + 0.5, fy + y0 + 0.5) for fy, cx in zip(filas, columnas)]
+    assert min(ocupado[0].exterior.distance(p) for p in centros) >= 1.5   # el centro del píxel, a un píxel más del borde
