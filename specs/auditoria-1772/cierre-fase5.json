@@ -2,8 +2,8 @@
  "alcance": "Puerta de salida de la fase 5 de 1772 (specs/08), medida sobre la salida del generador. Cuenta lo medido; no certifica fidelidad.",
  "ciudad": {
   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
-  "sha256": "201ae5ccf406307b9e2934a7c0f6553b1fec26ecca61dacdf30904727aff44a7",
-  "datos": "8183740 (sin publicar)"
+  "sha256": "74ed2de47523e368794af7f633c3bda1e809b9c93261eca86c8eca9aa972e178",
+  "datos": "9b1f5a0 (sin publicar)"
  },
  "puerta_de_salida": {
   "frentes_alineados": {
