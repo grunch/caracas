@@ -31,7 +31,7 @@ from skimage import measure
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from alas import CRUJIA_M, PATIO, SOLAR, alas_de_casa, frentes_de_manzana  # noqa: E402
+from alas import CRUJIA_M, PATIO, SOLAR, alas_de_casa, frentes_de_manzana, orientar_a_una_calle  # noqa: E402
 from cuadra import alas_modelo, casa_modelo, crujia_de_cuadra, es_de_solo_casas  # noqa: E402
 from cuadras_historicas import es_completa  # noqa: E402
 from huellas import huellas_de_manzana  # noqa: E402
@@ -263,9 +263,11 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
         semilla = semilla_de(figura.centroid.x, figura.centroid.y)
         agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla,
                       esquina=lote['esquina'], cuadra=salida['n_cuadras'] - 1, cede=publico_que_pisa(salida['publicos'], figura))
-        alas = alas_modelo(lote['ancho'], lote['fondo'], semilla, 0, crujia)
-        marco = {'origen': lote['origen'], 'eu': lote['eu'], 'ancho': lote['ancho'], 'fondo': lote['fondo'], 'calles': 0,
-                 'crujia': crujia}
+        # el frente sobre una calle de 1772 (T33j.6g): el lote de la esquina puede quedar en un lado que no lo es
+        o, eu, ancho, fondo = orientar_a_una_calle(lote['origen'], lote['eu'], lote['ancho'], lote['fondo'],
+                                                   _en_la_ventana(salida.get('_calles72', ()), origen), metro)
+        alas = alas_modelo(ancho, fondo, semilla, 0, crujia)
+        marco = {'origen': o, 'eu': eu, 'ancho': ancho, 'fondo': fondo, 'calles': 0, 'crujia': crujia}
         agregar_alas(salida, len(salida['techos']) - 1, marco, [[t, *(round(m / metro, 2) for m in med)] for t, *med in alas],
                      origen, metro)
     return True

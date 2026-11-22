@@ -312,3 +312,16 @@ def test_el_frente_es_el_lado_libre_que_da_a_una_calle_de_1772_aunque_no_sea_el_
     # una calle de 1772 que no corre con el lado (girada 45°) no lo hace frente
     girada = [{'tramo': 'L1:A-B', 'medible': True, 'puntos': [list(a_px(-30, -20)), list(a_px(30, 40))]}]
     assert marco_de_casa(casa, manzana, angulo, METRO, calles72=girada)['ancho'] == pytest.approx(12, abs=1.5)
+
+
+def test_orientar_a_una_calle_gira_el_marco_si_el_frente_no_da_a_una_calle_de_1772_y_otro_lado_si():
+    # T33j.6g: un lote de 10 × 14 m con el frente en y = 0 (px) y la calle de 1772 por su costado derecho (x = 26 px)
+    from tools.geo.alas import orientar_a_una_calle
+    calle = [{'tramo': 'L1:A-B', 'medible': True, 'puntos': [[26, -50], [26, 80]]}]
+    origen, eu, ancho, fondo = orientar_a_una_calle((0, 0), (1, 0), 10, 14, calle, METRO)
+    assert eu == pytest.approx((0, 1)) and (ancho, fondo) == pytest.approx((14, 10))
+    assert origen == pytest.approx((20, 0))          # el frente nuevo es el costado derecho, entrando hacia -x
+    # si el frente ya da a una calle de 1772, o ningún lado da, el marco queda como estaba
+    frente = [{'tramo': 'L1:A-B', 'medible': True, 'puntos': [[-50, -6], [80, -6]]}]
+    assert orientar_a_una_calle((0, 0), (1, 0), 10, 14, frente, METRO) == ((0, 0), (1, 0), 10, 14)
+    assert orientar_a_una_calle((0, 0), (1, 0), 10, 14, [], METRO) == ((0, 0), (1, 0), 10, 14)

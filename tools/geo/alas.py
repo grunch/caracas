@@ -333,6 +333,33 @@ def _da_a_una_calle(p, q, normal, calles72, metro):
     return False
 
 
+def orientar_a_una_calle(origen, eu, ancho_m, fondo_m, calles72, metro):
+    """(origen, eu, ancho, fondo) del marco de un lote (origen en px, ancho y fondo en m) con el frente sobre una
+    calle de 1772 (T33j.6g): si su frente no da a una (_da_a_una_calle) y otro de sus lados sí, el frente pasa a ese
+    lado (ev entra desde él; eu = ev girado −90°, como en marco_de_casa). Si el frente ya da a una calle de 1772, o
+    ningún lado da, el marco queda como estaba. La huella no cambia: solo el marco con que se techa."""
+    if not calles72:
+        return origen, eu, ancho_m, fondo_m
+    o, u = np.asarray(origen, float), np.asarray(eu, float)
+    v = np.array([-u[1], u[0]])
+    a, f = ancho_m / metro, fondo_m / metro
+    esquinas = [o, o + u * a, o + u * a + v * f, o + v * f]
+    # los lados en orden: frente (v = 0), derecha, fondo, izquierda, con su normal hacia afuera
+    lados = [(esquinas[0], esquinas[1], -v), (esquinas[1], esquinas[2], u), (esquinas[2], esquinas[3], v),
+             (esquinas[3], esquinas[0], -u)]
+    if _da_a_una_calle(*lados[0], calles72, metro):
+        return origen, eu, ancho_m, fondo_m
+    for p, q, afuera in lados[1:]:
+        if _da_a_una_calle(p, q, afuera, calles72, metro):
+            ev2 = -afuera
+            eu2 = np.array([ev2[1], -ev2[0]])
+            en_u, en_v = [float(e @ eu2) for e in esquinas], [float(e @ ev2) for e in esquinas]
+            nuevo = min(en_u) * eu2 + min(en_v) * ev2
+            return ((float(nuevo[0]), float(nuevo[1])), (float(eu2[0]), float(eu2[1])),
+                    (max(en_u) - min(en_u)) * metro, (max(en_v) - min(en_v)) * metro)
+    return origen, eu, ancho_m, fondo_m
+
+
 def marco_de_casa(casa, manzana, angulo, metro, frentes=(), calles72=()):
     """El marco del lote de una casa: su rectángulo en la dirección de la manzana, con el frente en la calle.
 
