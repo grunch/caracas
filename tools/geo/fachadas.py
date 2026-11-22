@@ -527,7 +527,8 @@ def delante_de_la_recta(casas, tramos, metro, de_1772, tolerancia_m=TOLERANCIA_F
                 if recta is None:
                     continue
                 centro, normal, _c = recta
-                for p in puntos:
+                # solo las estaciones del frente medido: más allá de su manzana la recta no dice nada
+                for _j, _h, p in golpes:
                     g = _primera_casa(p, n, alcance, arbol_todas, todas, sin_obstaculos_t)
                     if g is not None and casas[g[0]][0] not in de_1772 and float((g[1] - centro) @ normal) < -tol:
                         salida.add(casas[g[0]][0])

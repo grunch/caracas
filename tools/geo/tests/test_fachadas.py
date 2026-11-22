@@ -344,3 +344,10 @@ def test_a_la_grilla_rellena_el_hueco_libre_que_deja_el_redondeo():
     g = a_la_grilla(entrada, ocupado=None)
     assert g.geom_type == 'Polygon' and g.is_valid and not g.interiors
     assert a_la_grilla(entrada, ocupado=box(4.5, 3, 5.5, 4)).interiors     # con algo adentro, el hueco queda
+
+
+def test_delante_de_la_recta_no_marca_una_casa_mas_alla_de_la_manzana_del_frente():
+    # revisión de #137: el tramo sigue más allá de la reconstrucción; una casa suelta allá no tiene nada detrás
+    from fachadas import delante_de_la_recta
+    casas = hilera_de_casas() + [(8, box(200, 8, 220, 14))]
+    assert delante_de_la_recta(casas, [eje((0, 0), (260, 0))], METRO, de_1772=set(range(8))) == set()
