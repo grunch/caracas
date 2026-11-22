@@ -143,3 +143,29 @@ def test_dentro_de_su_manzana_una_casa_corrida_sigue_desalineada():
     casas = [(k, box(*c)) for k, c in enumerate(hilera(12, salto={3: 4}))] + [(9, box(150, 32, 190, 70))]
     r = frentes_desalineados([eje((0, 0), (200, 0))], casas, metro=METRO)
     assert [c['techo'] for f in r['desalineados'] for c in f['casas']] == [3]
+
+
+def test_un_frente_registrado_como_limite_no_impide_cerrar_y_queda_listado():
+    c = ciudad(*hilera(12, salto={2: 20}))                     # la casa 2 retirada 10 m: queda fuera de la recta
+    limites = [{'tramo': 'L1:A-B', 'lado': 1, 'clase': 'manzana_retirada', 'casas_maximas': 1}]
+    p = puerta_fase5(c, [eje((0, 0), (140, 0))], hitos=[], fase3={'fase_3_cerrable': True}, metro=METRO,
+                     limites=limites)
+    f = p['frentes_alineados']
+    assert f['cumplido'] is True and p['fase_5_cerrable'] is True
+    assert f['casas_desalineadas'] == 1 and f['casas_en_limite'] == 1 and f['casas_fuera_de_limite'] == 0
+    assert f['desalineados'][0]['limite'] == 'manzana_retirada'
+
+
+def test_un_frente_limite_con_mas_casas_desalineadas_que_las_registradas_no_cumple():
+    c = ciudad(*hilera(12, salto={2: 20, 4: 20}))
+    limites = [{'tramo': 'L1:A-B', 'lado': 1, 'clase': 'manzana_retirada', 'casas_maximas': 1}]
+    p = puerta_fase5(c, [eje((0, 0), (140, 0))], hitos=[], fase3={'fase_3_cerrable': True}, metro=METRO,
+                     limites=limites)
+    f = p['frentes_alineados']
+    assert f['cumplido'] is False and f['casas_fuera_de_limite'] == 2 and 'limite' not in f['desalineados'][0]
+
+
+def test_sin_limites_la_puerta_no_cambia():
+    c = ciudad(*hilera(12, salto={2: 20}))
+    p = puerta_fase5(c, [eje((0, 0), (140, 0))], hitos=[], fase3={'fase_3_cerrable': True}, metro=METRO)
+    assert p['frentes_alineados']['cumplido'] is False and p['frentes_alineados']['casas_fuera_de_limite'] == 1
