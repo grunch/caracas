@@ -1,9 +1,9 @@
 {
  "alcance": "Puerta de salida de la fase 5 de 1772 (specs/08), medida sobre la salida del generador. Cuenta lo medido; no certifica fidelidad.",
  "ciudad": {
-  "archivo": "fuentes//tmp/claude-1000/-disco-dev-caracas/6bacefc9-0a48-4072-bf89-7b79bee59607/scratchpad/ciudad-5u.json",
-  "sha256": "a625d00f19fe7d1f08178706a91ab8b6e4815bdd318d1dab28dfcd7737aa3340",
-  "datos": "29bd041 (sin publicar)"
+  "archivo": "fuentes//tmp/claude-1000/-disco-dev-caracas/6bacefc9-0a48-4072-bf89-7b79bee59607/scratchpad/ciudad-5v.json",
+  "sha256": "fb8e92d19adef7abf5a12ba83c5daefd1886ddc7433c1e04351b9ab2338b4f50",
+  "datos": "eee48d6 (sin publicar)"
  },
  "puerta_de_salida": {
   "frentes_alineados": {

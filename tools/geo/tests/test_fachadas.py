@@ -262,3 +262,14 @@ def test_alinear_casas_no_deja_huellas_que_se_pisen():
     for a in todas:
         for b in todas:
             assert a >= b or todas[a].intersection(todas[b]).area < 1e-4
+
+
+def test_alinear_casas_mueve_la_fachada_alrededor_de_la_planta_de_un_hito_sin_pisarla():
+    # la planta muerde el borde del relleno (no lo agujerea): la casa se mueve igual hasta la recta y le deja la planta
+    from shapely.geometry import Point
+    from fachadas import alinear_casas
+    planta = box(49, 18, 53.5, 23.5)
+    casas = hilera_de_casas(saltos={2: 4})
+    nuevas = alinear_casas(casas, [eje((0, 0), (180, 0))], METRO, movibles=set(range(8)), obstaculos=[planta])
+    assert 2 in nuevas and nuevas[2].contains(Point(64, 21))
+    assert nuevas[2].intersection(planta).area < 1e-6
