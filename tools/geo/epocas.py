@@ -438,6 +438,28 @@ def alinear_1772(ciudad, tramos, hitos, red72, verificadas, metro):
     return con_huellas(ciudad, nuevas)
 
 
+def dar_acceso_1772(ciudad, hitos, metro):
+    """La ciudad final sin casas de la reconstrucción encerradas en 1772 (accesos.lotes_encerrados, T33j.5h): cada lote
+    sin borde hacia la calle se une a su vecina de la misma junta y vida, que pierde su marco (el visor la techa por su
+    huella: sus alas eran de la casa sin el lote), y su techo se quita. → una ciudad nueva; no muta la entrada."""
+    from accesos import lotes_encerrados
+    from cierre_fase3 import casas_de_epoca
+    from cierre_fase4 import visibles
+    casas = visibles(casas_de_epoca(ciudad), hitos)
+    n = len(ciudad.get("antes", []))
+    movibles = {k for k, _ in casas if k < n and ciudad["antes"][k] and ciudad["junta"][k] >= 0}
+    # la huella unida tiene que seguir a la vista: dos casas que pisan poco la zona de un hito pueden pisarla juntas
+    nuevas, quitar = lotes_encerrados(casas, metro, movibles, ciudad["junta"], ciudad["vida"],
+                                      admite=lambda huella: bool(visibles([(0, huella)], hitos)))
+    print(f"lotes de 1772 sin acceso unidos a su vecina: {len(quitar)}")
+    if not quitar:
+        return ciudad
+    con_lotes = con_huellas(ciudad, nuevas)
+    con_lotes["marcos"] = [m for m in ciudad.get("marcos", []) if m[0] not in nuevas]
+    salida, vida = sin_techos(con_lotes, ciudad["vida"], quitar)
+    return {**salida, "vida": vida}
+
+
 def relevos(huellas36, vida36, quitar):
     """(huellas, nace) de las casas de 1936 que quedan, con su nacimiento final (vida_de_1936): las que
     pueden pasarle la posta a una de 1578. Un techo quitado no reemplaza nada, y un edificio público no
@@ -653,6 +675,7 @@ def main():
         hitos = json.loads(subprocess.run(["node", str(raiz / "tools" / "hitos-planta.mjs")], check=True, capture_output=True,
                                           text=True, cwd=raiz).stdout)
         ciudad = alinear_1772(ciudad, json.loads(calles72.read_text())["tramos"], hitos, red72, verificadas, metro)
+        ciudad = dar_acceso_1772(ciudad, hitos, metro)
         print(f"calles de 1772 bloqueadas en la ciudad final: {len(sin_abrir)} {sin_abrir[:10]}")
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))
 

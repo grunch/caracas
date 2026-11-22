@@ -304,3 +304,45 @@ def test_con_huellas_cambia_solo_las_casas_dadas_y_no_muta_la_ciudad():
     a, n = nueva['techos'][1][:2]
     assert [v[2 * (a + i)] for i in range(n)] == [20, 30, 30]
     assert ciudad['vertices'][:2] == [0, 0] and len(ciudad['vertices']) == 14
+
+
+def test_dar_acceso_1772_une_el_lote_encerrado_a_su_vecina_y_le_quita_el_marco():
+    from tools.geo.epocas import dar_acceso_1772
+    figuras = [box(0, 0, 40, 20), box(40, 0, 60, 20), box(10, 20, 50, 40), box(0, 20, 10, 40), box(50, 20, 60, 40),
+               box(0, 40, 60, 60)]
+    vertices, techos = [], []
+    for f in figuras:
+        puntos = list(f.exterior.coords)[:-1]
+        techos.append([len(vertices) // 2, len(puntos), 1, 0, 0])
+        vertices.extend(c for p in puntos for c in p)
+    ciudad = {'vertices': vertices, 'techos': techos, 'vida': [[1, 2]] * 6, 'antes': [1] * 6,
+              'junta': [7, 9, 7, 9, 9, 9], 'cede': [-1] * 6, 'esquinas': [0] * 6,
+              'marcos': [[0, 0, 0, 1, 0, 20, 20, 0, 3, 0, 1], [2, 0, 0, 1, 0, 20, 20, 0, 3, 1, 1],
+                         [5, 0, 0, 1, 0, 20, 20, 0, 3, 2, 1]],
+              'alas': [[0, 0, 0, 1, 1]] * 3}
+    nueva = dar_acceso_1772(ciudad, [], METRO)
+    assert len(nueva['techos']) == 5 and len(nueva['vida']) == 5 and len(nueva['junta']) == 5
+    v = nueva['vertices']
+    a, n = nueva['techos'][0][:2]
+    assert abs(Polygon([(v[2 * (a + i)], v[2 * (a + i) + 1]) for i in range(n)]).area - 1600) < 1e-6
+    # la casa que absorbe el lote pierde su marco (el visor la techa por su huella); la del lote se va con el suyo
+    assert [m[0] for m in nueva['marcos']] == [4]
+    assert len(ciudad['techos']) == 6 and len(ciudad['marcos']) == 3
+
+
+def test_dar_acceso_1772_no_une_si_la_huella_unida_quedaria_escondida_por_un_hito():
+    from tools.geo.epocas import dar_acceso_1772
+    figuras = [box(0, 0, 40, 20), box(40, 0, 60, 20), box(10, 20, 50, 40), box(0, 20, 10, 40), box(50, 20, 60, 40),
+               box(0, 40, 60, 60)]
+    vertices, techos = [], []
+    for f in figuras:
+        puntos = list(f.exterior.coords)[:-1]
+        techos.append([len(vertices) // 2, len(puntos), 1, 0, 0])
+        vertices.extend(c for p in puntos for c in p)
+    ciudad = {'vertices': vertices, 'techos': techos, 'vida': [[1, 2]] * 6, 'antes': [1] * 6,
+              'junta': [7, 9, 7, 9, 9, 9], 'cede': [-1] * 6, 'esquinas': [0] * 6, 'marcos': [], 'alas': []}
+    # una franja de 2 px que viene de la calle: pisa 40 px² de la casa 0 y 20 del lote 2, menos del 25 % de sus
+    # 180 px² cada una, y 60 de las dos juntas, que el visor ya escondería
+    hito = {'nace': 0, 'muere': 0, 'suprime': [[(20, -60), (22, -60), (22, 30), (20, 30)]], 'planta': []}
+    nueva = dar_acceso_1772(ciudad, [hito], METRO)
+    assert len(nueva['techos']) == 6
