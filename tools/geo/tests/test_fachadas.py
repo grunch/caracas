@@ -273,3 +273,32 @@ def test_alinear_casas_mueve_la_fachada_alrededor_de_la_planta_de_un_hito_sin_pi
     nuevas = alinear_casas(casas, [eje((0, 0), (180, 0))], METRO, movibles=set(range(8)), obstaculos=[planta])
     assert 2 in nuevas and nuevas[2].contains(Point(64, 21))
     assert nuevas[2].intersection(planta).area < 1e-6
+
+
+def test_un_hueco_que_no_toca_nada_se_rellena():
+    from fachadas import sin_huecos_libres
+    from shapely.geometry import Polygon as P
+    con_hueco = P([(0, 0), (20, 0), (20, 20), (0, 20)], [[(5, 5), (6, 5), (6, 15), (5, 15)]])
+    lleno = sin_huecos_libres(con_hueco, ocupado=None)
+    assert not lleno.interiors and abs(lleno.area - 400) < 1e-9
+
+
+def test_un_hueco_con_otra_casa_o_lo_vedado_adentro_queda():
+    from fachadas import sin_huecos_libres
+    from shapely.geometry import Polygon as P
+    con_hueco = P([(0, 0), (20, 0), (20, 20), (0, 20)], [[(5, 5), (15, 5), (15, 15), (5, 15)]])
+    queda = sin_huecos_libres(con_hueco, ocupado=box(8, 8, 12, 12))
+    assert len(queda.interiors) == 1 and abs(queda.area - 300) < 1e-9
+    # lo que solo roza el borde del hueco no lo ocupa
+    assert not sin_huecos_libres(con_hueco, ocupado=box(15, 5, 18, 8)).interiors
+
+
+def test_alinear_casas_no_rellena_un_hueco_con_otra_casa_adentro_lejos_del_borde():
+    # revisión de #135: la casa del patio está a más de 1 px del borde del hueco y no entraba en lo ocupado
+    from fachadas import alinear_casas
+    casas = hilera_de_casas()
+    patio = Polygon(box(50, 24, 70, 60).exterior.coords, [box(54, 30, 66, 54).exterior.coords])
+    adentro = box(57, 36, 63, 48)
+    casas = [(k, patio if k == 2 else c) for k, c in casas] + [(8, adentro)]
+    nuevas = alinear_casas(casas, [eje((0, 0), (180, 0))], METRO, movibles=set(range(8)))
+    assert 2 not in nuevas or nuevas[2].intersection(adentro).area < 1e-6

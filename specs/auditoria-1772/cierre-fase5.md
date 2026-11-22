@@ -260,10 +260,35 @@ Un lote así es el fondo de su vecina. El generador (`accesos.lotes_encerrados`,
 
 Las fases 3 y 4 siguen cerrables. Solo falta el criterio de los frentes alineados.
 
+## Después de T33j.5i: el relleno sin rendijas
+
+De las 16 desalineadas de la reconstrucción a no más de 8 m, 10 eran cuñas de esquina y huecos de solar que `alinear_casas` sí rellenaba hasta la recta. Pero los rayos van cada metro, y entre la franja de relleno y la casa quedaba una rendija. Una huella con un hueco no se puede techar, así que el relleno se descartaba entero.
+
+Ahora se rellenan los huecos que no tienen otra casa ni nada vedado adentro (`fachadas.sin_huecos_libres`). La tolerancia no cambia.
+
+| Criterio | Antes (3197a0a) | Después (498ce52) |
+|---|---|---|
+| Frentes alineados | 83 casas desalineadas | **74** (en 59 frentes) |
+| Frentes medidos / casas medidas | 568 / 4508 | 568 / 4508 |
+| Lotes sin solapes | 0 pares | 0 (cumple) |
+| Casas con acceso | 0 sin acceso | 0 (cumple) |
+| Calle aprobada | fase 3 en 5/5 | 5/5 (cumple) |
+
+Las fases 3 y 4 siguen cerrables.
+
+De las 74 que quedan:
+
+- 46 vistas por una abertura de más de 2 m dentro de su manzana.
+- 5 de manzanas retiradas enteras, que son puntas irregulares de la periferia.
+- 9 de la reconstrucción a no más de 8 m. Son rayos que entran por una rendija entre dos casas, o casas cuyo relleno pisaría a la vecina o la calzada.
+- 6 que tienen que ver con casas de 1578.
+- 4 en frentes con el eje metido en las casas, y 4 casas sueltas de 1936 o de frentes mixtos.
+
+**Límite hasta la fase 7**, por decisión del responsable del 22-11-2026: las 46 vistas por una abertura y las 5 de manzanas retiradas enteras quedan como límite documentado de la fase 5. Cerrar esas aberturas con fachada, medianera o tapia según la referencia es trabajo de la fase 7, y se vuelven a medir al cerrarla. No se amplía la tolerancia.
+
 ## Lo que sigue
 
-- **Aberturas del frente.** La fase 7 cierra las aberturas indebidas. Decidir si se adelanta para estos frentes o si quedan como límite de la fase 5 hasta la 7.
-- **Cuñas de esquina y huecos de solar**, y las casas de 1578 delante de la reconstrucción.
+- Las 9 de la reconstrucción a no más de 8 m y las 6 de casas de 1578.
 
 ## Reproducir
 
