@@ -100,7 +100,7 @@ def techos_cruzados(triangulos, metro=METRO):
 
 
 def _cumbreras(triangulos, metro):
-    """{techo: [(punto medio, dirección unitaria)]} de las aristas de cumbrera de teja: los dos extremos en la
+    """{techo: [((extremo, extremo), dirección unitaria)]} de las aristas de cumbrera de teja: los dos extremos en la
     cumbrera, a la misma altura y de al menos CUMBRE_MINIMA_M."""
     salida = {}
     for t in triangulos:
@@ -113,8 +113,14 @@ def _cumbreras(triangulos, metro):
             d = p[j, :2] - p[i, :2]
             largo = float(np.hypot(*d))
             if largo >= CUMBRE_MINIMA_M:
-                salida.setdefault(t['techo'], []).append(((p[i, :2] + p[j, :2]) / 2, d / largo))
+                salida.setdefault(t['techo'], []).append(((p[i, :2], p[j, :2]), d / largo))
     return salida
+
+
+def _distancia_al_eje(extremos, origen, normal):
+    """Distancia del segmento de cumbrera a la recta del eje: 0 si la cruza, si no la del extremo más cercano."""
+    a, b = (float((e - origen) @ normal) for e in extremos)
+    return 0.0 if a * b <= 0 else min(abs(a), abs(b))
 
 
 def cumbreras_desviadas(triangulos, frentes, metro=METRO, giro_maximo=GIRO_MAXIMO_GRADOS):
@@ -130,7 +136,7 @@ def cumbreras_desviadas(triangulos, frentes, metro=METRO, giro_maximo=GIRO_MAXIM
             d = np.asarray(d, float) / np.hypot(*d)
             o = np.asarray(origen, float) * metro
             normal = np.array([-d[1], d[0]])
-            _medio, direccion = min(aristas, key=lambda x: abs(float((x[0] - o) @ normal)))
+            _extremos, direccion = min(aristas, key=lambda x: _distancia_al_eje(x[0], o, normal))
             giros.append(float(np.degrees(np.arccos(min(1.0, abs(float(direccion @ d)))))))
         if min(giros) > giro_maximo:
             salida.append({'techo': techo, 'giro_grados': round(min(giros), 1)})
@@ -153,6 +159,16 @@ def aleros_en_la_calle(triangulos, calzada, metro=METRO, umbral_m2=ALERO_EN_CALL
         if area > umbral_m2:
             salida.append({'techo': techo, 'area_m2': round(area, 3)})
     return salida
+
+
+def cubiertas_de_estos_datos(cubiertas, pak_sha256, techos):
+    """None si las cubiertas salieron de este ciudad.pak (su sha256) y tienen tantos techos como la ciudad medida; si
+    no, el motivo: unas cubiertas de otros datos medirían techos viejos bajo el sha de la ciudad nueva."""
+    if cubiertas.get('pak_sha256') != pak_sha256:
+        return 'las cubiertas no salieron de este ciudad.pak (pak_sha256 distinto o ausente)'
+    if cubiertas.get('techos') != techos:
+        return f"las cubiertas son de {cubiertas.get('techos')} techos y la ciudad tiene {techos}"
+    return None
 
 
 def mismo_trazado(fases, sha256):
@@ -232,19 +248,26 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('carpeta', type=Path, help='specs/auditoria-1772')
     ap.add_argument('ciudad', type=Path, help='fuentes/derivados/epocas/ciudad-epocas.json (salida del generador)')
-    ap.add_argument('--cubiertas', type=Path, default=raiz / 'fuentes/derivados/epocas/cubiertas-1772.json',
-                    help='salida de tools/cubiertas.mjs sobre los mismos datos (se genera si no está)')
+    ap.add_argument('--cubiertas', type=Path, default=None,
+                    help='salida de tools/cubiertas.mjs sobre los mismos datos (por omisión se saca de nuevo)')
     ap.add_argument('--datos', default=None, help='release datos-* o commit del que sale la ciudad medida')
     args = ap.parse_args()
-    if not args.cubiertas.exists():
+    if args.cubiertas is None:
+        # se sacan en cada medición: unas guardadas pueden ser de otros datos o de otro código de techos
+        args.cubiertas = raiz / 'fuentes/derivados/epocas/cubiertas-1772.json'
         subprocess.run(['node', str(raiz / 'tools' / 'cubiertas.mjs'), str(args.cubiertas)], check=True, cwd=raiz)
     referencias = Path(__file__).parent / 'referencias'
     red, calles = _leer(referencias / '1772-red.json'), _leer(referencias / '1772-calles-1936.json')['tramos']
     hitos = json.loads(subprocess.run(['node', str(raiz / 'tools' / 'hitos-planta.mjs')], check=True, capture_output=True,
                                       text=True, cwd=raiz).stdout)
     sha256 = hashlib.sha256(args.ciudad.read_bytes()).hexdigest()
+    cubiertas, ciudad = _leer(args.cubiertas), _leer(args.ciudad)
+    motivo = cubiertas_de_estos_datos(cubiertas, hashlib.sha256((raiz / 'public/datos/ciudad.pak').read_bytes()).hexdigest(),
+                                      len(ciudad['techos']))
+    if motivo:
+        raise SystemExit(f'cierre_fase6: {motivo}; hay que sacarlas de nuevo (node tools/cubiertas.mjs)')
     fases = {k: _leer(args.carpeta / f'cierre-fase{k}.json') for k in (3, 4, 5)}
-    puerta = puerta_fase6(_leer(args.cubiertas), _leer(args.ciudad), calles, red, hitos, fases, sha256)
+    puerta = puerta_fase6(cubiertas, ciudad, calles, red, hitos, fases, sha256)
     informe = OrderedDict([
         ('alcance', 'Puerta de salida de la fase 6 de 1772 (specs/08), medida sobre los techos del visor reproducidos en '
                     'CPU (tools/cubiertas.mjs). Cuenta lo medido; no certifica fidelidad.'),

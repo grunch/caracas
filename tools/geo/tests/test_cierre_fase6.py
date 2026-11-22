@@ -63,3 +63,24 @@ def test_el_trazado_es_el_de_la_fase_5_si_las_tres_puertas_cierran_sobre_la_mism
     assert mismo_trazado(fases, 'otra')['cumplido'] is False
     fases[4]['puerta_de_salida']['fase_4_cerrable'] = False
     assert mismo_trazado(fases, 'abc')['cumplido'] is False
+
+
+def test_se_elige_la_cumbrera_mas_cercana_al_eje_por_su_segmento_no_por_su_punto_medio():
+    # revisión de #138: la perpendicular va de y = 2 a 42 px (cerca del eje), la paralela está en y = 16; sus puntos
+    # medios quedan al revés (22 y 16)
+    c = (True, True, False)
+    perpendicular = tri(1, (0, 2, 7), (0, 42, 7), (4, 2, 5), cumbre=c)
+    paralela = tri(1, (2, 16, 7), (10, 16, 7), (2, 20, 5), cumbre=c)
+    frentes = {1: [((1.0, 0.0), (0.0, 0.0))]}
+    desviadas = cumbreras_desviadas([perpendicular, paralela], frentes, METRO)
+    assert [d['techo'] for d in desviadas] == [1]
+    assert cumbreras_desviadas([paralela], frentes, METRO) == []
+
+
+def test_las_cubiertas_tienen_que_ser_de_los_datos_que_se_miden():
+    from cierre_fase6 import cubiertas_de_estos_datos
+    cubiertas = {'pak_sha256': 'abc', 'techos': 3, 'triangulos': []}
+    assert cubiertas_de_estos_datos(cubiertas, 'abc', 3) is None
+    assert 'pak' in cubiertas_de_estos_datos(cubiertas, 'otro', 3)
+    assert 'techos' in cubiertas_de_estos_datos(cubiertas, 'abc', 4)
+    assert cubiertas_de_estos_datos({'triangulos': []}, 'abc', 3) is not None     # sin procedencia no se acepta
