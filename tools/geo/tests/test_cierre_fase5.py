@@ -129,3 +129,17 @@ def test_las_medianeras_laterales_no_cuentan_como_acceso():
     # la casa del medio tiene 1,5 m de frente: no le alcanza aunque la banda roce sus medianeras
     casas = [(0, box(0, 0, 20, 20)), (1, box(20, 0, 23, 20)), (2, box(23, 0, 43, 20)), (3, box(0, 20, 43, 40))]
     assert casas_sin_acceso(casas, metro=METRO)['sin_acceso'] == [1]
+
+
+def test_una_casa_de_otra_manzana_al_final_del_tramo_no_es_fachada_de_este_frente():
+    # la hilera arma el frente; pasada la bocacalle (x > 140), la casa de la esquina de la otra manzana queda 10 m más
+    # adentro: el rayo la toca, pero no es de la manzana de este frente
+    casas = [(k, box(*c)) for k, c in enumerate(hilera(12))] + [(9, box(150, 32, 190, 70))]
+    r = frentes_desalineados([eje((0, 0), (200, 0))], casas, metro=METRO)
+    assert r['desalineados'] == []
+
+
+def test_dentro_de_su_manzana_una_casa_corrida_sigue_desalineada():
+    casas = [(k, box(*c)) for k, c in enumerate(hilera(12, salto={3: 4}))] + [(9, box(150, 32, 190, 70))]
+    r = frentes_desalineados([eje((0, 0), (200, 0))], casas, metro=METRO)
+    assert [c['techo'] for f in r['desalineados'] for c in f['casas']] == [3]

@@ -355,6 +355,7 @@ def alinear_casas(casas, tramos, metro, movibles, obstaculos=(), vedado=(), tope
     if not figuras:
         return {}
     arbol = STRtree(figuras)
+    manzana = manzanas_de([c for _, c in casas], metro) + [-1] * len(obstaculos)
     sumar, restar = {}, {}
     for eje in tramos:
         if not eje.get('medible'):
@@ -370,6 +371,7 @@ def alinear_casas(casas, tramos, metro, movibles, obstaculos=(), vedado=(), tope
                     g = _primera_casa(p, n, alcance, arbol, figuras, son_obstaculo)
                     if g is not None:
                         golpes.append((g[0], g[1], p))
+                golpes = de_su_manzana(golpes, manzana)
                 if len(golpes) < ESTACIONES_MINIMAS or len({j for j, _, _ in golpes}) < 2:
                     continue
                 recta = _recta_del_frente(golpes, n, tol)
@@ -415,3 +417,33 @@ def alinear_casas(casas, tramos, metro, movibles, obstaculos=(), vedado=(), tope
         if not mayor.equals_exact(huella, 1e-6):
             salida[techo] = mayor
     return salida
+
+
+CIERRE_MANZANA_M = 1.0       # dos casas a menos de 2·esto son de la misma manzana edificada (como la puerta de acceso)
+
+
+def manzanas_de(figuras, metro, cierre_m=CIERRE_MANZANA_M):
+    """[índice de manzana edificada por figura]: las casas se juntan cerrando los huecos de menos de 2·cierre_m."""
+    from shapely.strtree import STRtree
+    validas = [f if f.is_valid else f.buffer(0) for f in figuras]
+    if not validas:
+        return []
+    g = cierre_m / metro
+    juntas = unary_union(validas).buffer(g, join_style='mitre').buffer(-g, join_style='mitre')
+    partes = [m for m in getattr(juntas, 'geoms', [juntas]) if not m.is_empty]
+    arbol = STRtree(partes)
+    salida = []
+    for f in validas:
+        cerca = list(arbol.query(f.representative_point(), predicate='intersects')) or list(arbol.query(f, predicate='intersects'))
+        salida.append(int(cerca[0]) if cerca else -1)
+    return salida
+
+
+def de_su_manzana(golpes, manzana):
+    """Los golpes de la manzana edificada que arma el frente (la de la mayoría de sus golpes): una casa de otra
+    manzana (la de la esquina de enfrente, pasada la bocacalle, o una aislada) no es fachada de este frente."""
+    if not golpes:
+        return golpes
+    from collections import Counter
+    dominante = Counter(manzana[j] for j, *_ in golpes).most_common(1)[0][0]
+    return [x for x in golpes if manzana[x[0]] == dominante]
