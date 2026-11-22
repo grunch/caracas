@@ -241,11 +241,29 @@ De las 83 que quedan:
 - 4 están en frentes con el eje metido en las casas.
 - El resto son casas sueltas de 1936 o de frentes mixtos.
 
+## Después de T33j.5h: ningún lote encerrado
+
+Las 4 casas sin acceso (36116, 36460, 38726 y 38854) eran lotes de la reconstrucción al fondo de su manzana:
+
+- una franja entre las casas del frente, con menos de 2 m de borde hacia afuera;
+- tres con la casa de otro grupo a menos de 2 m delante de su fachada (0,05 a 1,17 m), que la puerta junta con su manzana.
+
+Un lote así es el fondo de su vecina. El generador (`accesos.lotes_encerrados`, desde `epocas.dar_acceso_1772`) lo une a la vecina de su misma junta y con la misma vida, que da a la calle y le comparte más medianera. Unirlas no cambia otras épocas. La medida es la de la puerta. La casa que absorbe el lote pierde su marco y el visor la techa por su huella.
+
+| Criterio | Antes (6f4bf90) | Después (3197a0a) |
+|---|---|---|
+| Frentes alineados | 83 casas desalineadas | 83 |
+| Lotes sin solapes | 0 pares | 0 (cumple) |
+| Casas con acceso | 4 sin acceso | **0 (cumple)** |
+| Calle aprobada | fase 3 en 5/5 | 5/5 (cumple) |
+| Casas de 1772 a la vista | 6325 | 6321 |
+
+Las fases 3 y 4 siguen cerrables. Solo falta el criterio de los frentes alineados.
+
 ## Lo que sigue
 
 - **Aberturas del frente.** La fase 7 cierra las aberturas indebidas. Decidir si se adelanta para estos frentes o si quedan como límite de la fase 5 hasta la 7.
 - **Cuñas de esquina y huecos de solar**, y las casas de 1578 delante de la reconstrucción.
-- **Las 4 casas sin acceso.**
 
 ## Reproducir
 
