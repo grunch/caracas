@@ -291,3 +291,14 @@ def test_un_hueco_con_otra_casa_o_lo_vedado_adentro_queda():
     assert len(queda.interiors) == 1 and abs(queda.area - 300) < 1e-9
     # lo que solo roza el borde del hueco no lo ocupa
     assert not sin_huecos_libres(con_hueco, ocupado=box(15, 5, 18, 8)).interiors
+
+
+def test_alinear_casas_no_rellena_un_hueco_con_otra_casa_adentro_lejos_del_borde():
+    # revisión de #135: la casa del patio está a más de 1 px del borde del hueco y no entraba en lo ocupado
+    from fachadas import alinear_casas
+    casas = hilera_de_casas()
+    patio = Polygon(box(50, 24, 70, 60).exterior.coords, [box(54, 30, 66, 54).exterior.coords])
+    adentro = box(57, 36, 63, 48)
+    casas = [(k, patio if k == 2 else c) for k, c in casas] + [(8, adentro)]
+    nuevas = alinear_casas(casas, [eje((0, 0), (180, 0))], METRO, movibles=set(range(8)))
+    assert 2 not in nuevas or nuevas[2].intersection(adentro).area < 1e-6

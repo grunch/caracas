@@ -408,7 +408,9 @@ def alinear_casas(casas, tramos, metro, movibles, obstaculos=(), vedado=(), tope
             nueva = nueva.union(suma)
         if j in restar:
             nueva = nueva.difference(unary_union(restar[j]))
-        zona = nueva.buffer(1)
+        # sobre la huella con sus huecos llenos: una casa dentro de un hueco, lejos de su borde, también es vecina
+        zona = unary_union([Polygon(q.exterior) for q in getattr(nueva, 'geoms', [nueva])
+                            if q.geom_type == 'Polygon' and not q.is_empty]).buffer(1)
         vecinas = [salida.get(casas[k][0], figuras[k]) for k in arbol.query(zona, predicate='intersects')
                    if k != j and not son_obstaculo[k]]
         # y las huellas ya cambiadas que la tocan aunque su original no (el árbol indexa los originales)
