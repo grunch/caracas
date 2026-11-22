@@ -271,6 +271,12 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
     return True
 
 
+def _en_la_ventana(calles72, origen):
+    """Los tramos de 1772 (en px del mosaico) llevados a la ventana que empieza en `origen`."""
+    ox, oy = origen
+    return [{**e, 'puntos': [[px - ox, py - oy] for px, py in e['puntos']]} for e in calles72]
+
+
 def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_px, distancia_m, metro, cuadra_modelo=True,
                       poligono=None):
     """Las casas de una manzana. Las de solo casas (tools/geo/cuadra.py) van con la cuadra modelo: un anillo
@@ -314,13 +320,15 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
         f0, c0 = max(0, zona[0].start - margen), max(0, zona[1].start - margen)
         ventana = (slice(f0, zona[0].stop + margen), slice(c0, zona[1].stop + margen))
         frentes_aqui = [(fx - c0, fy - f0, dx, dy) for fx, fy, dx, dy in frentes]
+        calles_aqui = _en_la_ventana(salida.get('_calles72', ()), (x + c0, y + f0))
         if modelo:
-            con_alas = casa_modelo(casas[ventana] == casa, manzana[ventana], direccion[1], metro, semilla, frentes_aqui, crujia)
+            con_alas = casa_modelo(casas[ventana] == casa, manzana[ventana], direccion[1], metro, semilla, frentes_aqui, crujia,
+                                   calles_aqui)
             if con_alas is None:   # un lote que no da a la calle: en la cuadra modelo es solar
                 continue
         else:
             con_alas = alas_de_casa(casas[ventana] == casa, manzana[ventana], direccion[1], metro, semilla,
-                                    distancia_m(figura), frentes_aqui, crujia)
+                                    distancia_m(figura), frentes_aqui, crujia, calles_aqui)
         agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla,
                       esquina=casa in de_esquina, cuadra=salida['n_cuadras'] - 1 if modelo else -1,
                       cede=publico_que_pisa(salida['publicos'], figura) if modelo else -1)
@@ -890,6 +898,8 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
         techos_de_manzana(clases[y:y + h, x:x + w], parte, (x, y), salida, area_min_px, tolerancia_px, distancia_m, metro,
                           cuadra_modelo, poligonos.get(etiqueta))
     salida['_antes'] = 1
+    # las casas de la reconstrucción ponen el frente en un lado que da a una calle de 1772 (alas.marco_de_casa)
+    salida['_calles72'] = (red or {}).get('frentes72', ())
     for j, grupo in enumerate(antes):
         salida['_junta'] = j
         if grupo['cuadra'].any():   # el dueño de una parcial no arma casas: solo reemplaza sus manzanas de 1936
@@ -902,7 +912,7 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
         salida['calzada72'] = marcar_calzada(salida, red['calzada72'], metro)
     if red is not None and red.get('referencia72') is not None:
         salida['tapada72'] = marcar_tapadas(salida, metro, plantas=red.get('reservas72', ()), delante=delante)
-    for privada in ('publicos', 'n_cuadras', '_junta', '_antes'):
+    for privada in ('publicos', 'n_cuadras', '_junta', '_antes', '_calles72'):
         salida.pop(privada, None)
     return salida
 

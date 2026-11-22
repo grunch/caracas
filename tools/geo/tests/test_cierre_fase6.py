@@ -45,7 +45,7 @@ def test_la_cumbrera_tiene_que_ir_con_la_calle_de_su_frente():
     # la calle corre a lo largo de x en y = 0; dos casas al norte: una con la cumbrera a lo largo de x, otra a lo largo de y
     con = dos_aguas(1, 10, 30, 10, 40)
     girada = [{**t, 'puntos': [[p[1], p[0], p[2]] for p in t['puntos']]} for t in dos_aguas(2, 10, 40, 40, 60)]
-    frentes = {1: [((1.0, 0.0), (0.0, 0.0))], 2: [((1.0, 0.0), (0.0, 0.0))]}
+    frentes = {1: [((1.0, 0.0), (0.0, 0.0), 'L1:A-B', 1, 0)], 2: [((1.0, 0.0), (0.0, 0.0), 'L1:A-B', 1, 0)]}
     desviadas = cumbreras_desviadas(con + girada, frentes, METRO)
     assert [d['techo'] for d in desviadas] == [2] and abs(desviadas[0]['giro_grados'] - 90) < 1
 
@@ -71,7 +71,7 @@ def test_se_elige_la_cumbrera_mas_cercana_al_eje_por_su_segmento_no_por_su_punto
     c = (True, True, False)
     perpendicular = tri(1, (0, 2, 7), (0, 42, 7), (4, 2, 5), cumbre=c)
     paralela = tri(1, (2, 16, 7), (10, 16, 7), (2, 20, 5), cumbre=c)
-    frentes = {1: [((1.0, 0.0), (0.0, 0.0))]}
+    frentes = {1: [((1.0, 0.0), (0.0, 0.0), 'L1:A-B', 1, 0)]}
     desviadas = cumbreras_desviadas([perpendicular, paralela], frentes, METRO)
     assert [d['techo'] for d in desviadas] == [1]
     assert cumbreras_desviadas([paralela], frentes, METRO) == []
@@ -98,3 +98,20 @@ def test_la_huella_de_la_ciudad_es_la_de_sus_vertices_y_techos_en_float32_como_e
                               + np.array([0, 3], '<u4').tobytes()).hexdigest()
     assert huellas_sha256(ciudad) == esperado
     assert huellas_sha256({**ciudad, 'vertices': [0, 0, 10, 0, 10.2, 10]}) != esperado
+
+
+def test_en_una_union_en_t_la_cumbrera_del_frente_gana_el_empate():
+    # el ala lateral nace en la cumbrera del frente: las dos quedan a la misma distancia del eje
+    c = (True, True, False)
+    frente = tri(1, (0, 16, 7), (40, 16, 7), (0, 20, 5), cumbre=c)
+    ala = tri(1, (20, 16, 7), (20, 50, 7), (24, 16, 5), cumbre=c)
+    frentes = {1: [((1.0, 0.0), (0.0, 0.0), 'L1:A-B', 1, 0)]}
+    assert cumbreras_desviadas([ala, frente], frentes, METRO) == []
+
+
+def test_una_casa_fuera_de_la_recta_de_un_frente_no_se_mide_en_ese_frente():
+    # la fase 5 la ve por una abertura de ese frente: no es su fachada
+    girada = [{**t, 'puntos': [[p[1], p[0], p[2]] for p in t['puntos']]} for t in dos_aguas(2, 10, 40, 40, 60)]
+    frentes = {2: [((1.0, 0.0), (0.0, 0.0), 'L1:A-B', 1, 0)]}
+    assert [d['techo'] for d in cumbreras_desviadas(girada, frentes, METRO)] == [2]
+    assert cumbreras_desviadas(girada, frentes, METRO, fuera_de_recta={(2, 'L1:A-B', 1, 0)}) == []

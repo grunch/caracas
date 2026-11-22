@@ -37,6 +37,7 @@ CRUCE_AREA_M2 = 1e-4           # proyección común mínima de dos triángulos p
 CRUCE_ALTO_M = 1e-3            # se cortan si uno pasa más que esto por encima y por debajo del otro (T33j.1l)
 CUMBRE_MISMO_ALTO_M = 0.01     # los dos extremos de una arista de cumbrera, a la misma altura
 CUMBRE_MINIMA_M = 0.5          # una arista de cumbrera más corta no da dirección
+EMPATE_CUMBRERA_M = 0.5      # dos cumbreras a menos de esto del eje empatan: gana la más paralela (la tolerancia de fachada)
 ALERO_EN_CALLE_M2 = 0.01       # lo que un techo puede pisar del núcleo de la calzada (el umbral de solapes de la fase 5)
 
 
@@ -123,21 +124,27 @@ def _distancia_al_eje(extremos, origen, normal):
     return 0.0 if a * b <= 0 else min(abs(a), abs(b))
 
 
-def cumbreras_desviadas(triangulos, frentes, metro=METRO, giro_maximo=GIRO_MAXIMO_GRADOS):
-    """Las casas cuya cumbrera de frente no corre con su calle: por cada frente de la casa ({techo: [(dirección del
-    eje, punto del eje)]}, en px), la cumbrera más cercana a ese eje; la casa está bien si en alguno de sus frentes esa
-    cumbrera se aparta menos de `giro_maximo` grados. Las casas sin cumbrera de teja (azotea, zinc) no se miden."""
+def cumbreras_desviadas(triangulos, frentes, metro=METRO, giro_maximo=GIRO_MAXIMO_GRADOS, fuera_de_recta=frozenset()):
+    """Las casas cuya cumbrera de frente no corre con su calle. `frentes`: {techo: [(dirección del eje, punto del eje,
+    tramo, lado, segmento)]}, en px. Por cada frente, la cumbrera más cercana a ese eje; si hay varias a menos de
+    EMPATE_CUMBRERA_M de ella (un ala que nace en la cumbrera del frente, en T), la más paralela. La casa está bien si
+    en alguno de sus frentes esa cumbrera se aparta menos de `giro_maximo` grados. No se mide una casa en un frente
+    donde la fase 5 la ve fuera de la recta (`fuera_de_recta`: {(techo, tramo, lado, segmento)}): no es su fachada. Las
+    casas sin cumbrera de teja (azotea, zinc) no se miden."""
     salida = []
     for techo, aristas in sorted(_cumbreras(triangulos, metro).items()):
-        if techo not in frentes:
+        suyos = [f for f in frentes.get(techo, []) if (techo, *f[2:]) not in fuera_de_recta]
+        if not suyos:
             continue
         giros = []
-        for d, origen in frentes[techo]:
+        for d, origen, *_frente in suyos:
             d = np.asarray(d, float) / np.hypot(*d)
             o = np.asarray(origen, float) * metro
             normal = np.array([-d[1], d[0]])
-            _extremos, direccion = min(aristas, key=lambda x: _distancia_al_eje(x[0], o, normal))
-            giros.append(float(np.degrees(np.arccos(min(1.0, abs(float(direccion @ d)))))))
+            distancias = [_distancia_al_eje(x[0], o, normal) for x in aristas]
+            cerca = min(distancias)
+            giros.append(min(float(np.degrees(np.arccos(min(1.0, abs(float(x[1] @ d))))))
+                             for x, dist in zip(aristas, distancias) if dist <= cerca + EMPATE_CUMBRERA_M))
         if min(giros) > giro_maximo:
             salida.append({'techo': techo, 'giro_grados': round(min(giros), 1)})
     return salida
@@ -191,7 +198,7 @@ def mismo_trazado(fases, sha256):
 
 
 def frentes_de_casas(calles, casas, metro=METRO, obstaculos=()):
-    """{techo: [(dirección del eje, punto del eje)]} de los frentes medibles en que la casa es fachada, como en la puerta
+    """{techo: [(dirección del eje, punto del eje, tramo, lado, segmento)]} de los frentes medibles en que la casa es fachada, como en la puerta
     de la fase 5 (frentes_desalineados): los rayos de cada lado, la manzana que arma el frente."""
     figuras = [c for _, c in casas] + list(obstaculos)
     son_obstaculo = [False] * len(casas) + [True] * len(obstaculos)
@@ -204,7 +211,7 @@ def frentes_de_casas(calles, casas, metro=METRO, obstaculos=()):
     for eje in calles:
         if not eje['medible']:
             continue
-        for a, b in zip(eje['puntos'], eje['puntos'][1:]):
+        for segmento, (a, b) in enumerate(zip(eje['puntos'], eje['puntos'][1:])):
             d, estaciones = _estaciones(a, b, metro)
             if d is None:
                 continue
@@ -217,7 +224,7 @@ def frentes_de_casas(calles, casas, metro=METRO, obstaculos=()):
                 if len(golpes) < ESTACIONES_MINIMAS or len(techos) < 2:
                     continue
                 for techo in techos:
-                    salida.setdefault(techo, []).append((tuple(d), tuple(a)))
+                    salida.setdefault(techo, []).append((tuple(d), tuple(a), eje['tramo'], lado, segmento))
     return salida
 
 
@@ -229,7 +236,10 @@ def puerta_fase6(cubiertas, ciudad, calles, red, hitos, fases, sha256, metro=MET
     degenerados = triangulos_degenerados(triangulos, metro)
     cruces = techos_cruzados(triangulos, metro)
     frentes = frentes_de_casas(calles, casas, metro, plantas_en_pie(hitos))
-    desviadas = cumbreras_desviadas(triangulos, frentes, metro)
+    # las casas que la fase 5 ve fuera de la recta de un frente (vistas por una abertura): no son su fachada
+    fuera = {(c['techo'], f['tramo'], f['lado'], f.get('segmento', 0))
+             for f in fases[5]['puerta_de_salida']['frentes_alineados']['desalineados'] for c in f['casas']}
+    desviadas = cumbreras_desviadas(triangulos, frentes, metro, fuera_de_recta=fuera)
     con_cumbrera = set(_cumbreras(triangulos, metro)) & set(frentes)
     aleros = aleros_en_la_calle(triangulos, [c['poligono'] for c in corredores(red, metro=metro)], metro)
     criterios = OrderedDict([

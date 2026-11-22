@@ -139,10 +139,10 @@ def crujia_de_cuadra(azar):
     return CRUJIA_M[0] + (CRUJIA_M[1] - CRUJIA_M[0]) * azar
 
 
-def casa_modelo(casa, manzana, angulo, metro, semilla, frentes, crujia):
+def casa_modelo(casa, manzana, angulo, metro, semilla, frentes, crujia, calles72=()):
     """(marco, alas) de una casa de la cuadra modelo, como alas.alas_de_casa (alas en píxeles del marco),
-    o None si el lote no da a ninguna calle: ese lote es solar."""
-    marco = marco_de_casa(casa, manzana, angulo, metro, frentes)
+    o None si el lote no da a ninguna calle: ese lote es solar. `calles72`: como en alas.marco_de_casa."""
+    marco = marco_de_casa(casa, manzana, angulo, metro, frentes, calles72)
     if marco is None:
         return None
     sin_grilla = {**{k: v for k, v in marco.items() if k != 'grilla'}, 'crujia': float(crujia)}

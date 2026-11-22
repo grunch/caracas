@@ -297,3 +297,18 @@ def test_con_la_crujia_de_la_manzana_todas_las_casas_tienen_el_mismo_fondo_de_cr
     for semilla in range(10):
         alas = repartir(12, 50, semilla=semilla, patios_max=3, crujia=6.8)
         assert de_tipo(alas, FRENTE)[0][4] == 6.8
+
+
+def test_el_frente_es_el_lado_libre_que_da_a_una_calle_de_1772_aunque_no_sea_el_corto():
+    # T33j.6c: un lote de esquina de 12 × 24 m; la única calle de 1772 pasa por el costado largo (u = 0), a 5 m
+    manzana, a_px, angulo = manzana_de_lotes(0)
+    casa = lote(manzana, a_px, 0, 0, 12, 24)
+    calle = [{'tramo': 'L1:A-B', 'medible': True, 'puntos': [list(a_px(-5, -20)), list(a_px(-5, 60))]}]
+    marco = marco_de_casa(casa, manzana, angulo, METRO, calles72=calle)
+    assert marco['ancho'] == pytest.approx(24, abs=1.5) and marco['fondo'] == pytest.approx(12, abs=1.5)
+    assert np.array(marco['ev']) == pytest.approx([1, 0], abs=1e-6)          # entra desde la calle de 1772
+    # sin calles de 1772 (u otra época), la regla de siempre: el lado libre más corto
+    assert marco_de_casa(casa, manzana, angulo, METRO)['ancho'] == pytest.approx(12, abs=1.5)
+    # una calle de 1772 que no corre con el lado (girada 45°) no lo hace frente
+    girada = [{'tramo': 'L1:A-B', 'medible': True, 'puntos': [list(a_px(-30, -20)), list(a_px(30, 40))]}]
+    assert marco_de_casa(casa, manzana, angulo, METRO, calles72=girada)['ancho'] == pytest.approx(12, abs=1.5)
