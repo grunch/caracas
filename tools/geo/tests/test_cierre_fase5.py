@@ -103,3 +103,29 @@ def test_la_puerta_mide_solo_las_casas_visibles_de_1772():
     p = puerta_fase5(ciudad(*casas, vidas=vidas), [eje((0, 0), (140, 0))], hitos=[], fase3={'fase_3_cerrable': True},
                      metro=METRO)
     assert p['lotes_sin_solapes']['pares'] == 0 and p['casas_1772'] == 6
+
+
+def test_con_dos_casas_corridas_la_recta_es_la_de_la_mayoria():
+    casas = [(k, box(*c)) for k, c in enumerate(hilera(12, salto={2: 4, 3: 4}))]
+    r = frentes_desalineados([eje((0, 0), (140, 0))], casas, metro=METRO)
+    assert sorted(c['techo'] for f in r['desalineados'] for c in f['casas']) == [2, 3]
+
+
+def test_una_casa_cuenta_una_vez_aunque_quede_desalineada_en_dos_frentes():
+    # la casa 1 es una cuña: sale de la recta del frente norte y del sur de la misma calle
+    casas = [(0, box(10, 12, 50, 42)), (1, box(50, 16, 70, 42)), (2, box(70, 12, 130, 42)),
+             (3, box(10, -42, 50, -12)), (4, box(50, -42, 70, -16)), (5, box(70, -42, 130, -12))]
+    p = puerta_fase5(ciudad(*[c.bounds for _, c in casas]), [eje((0, 0), (140, 0))], hitos=[],
+                     fase3={'fase_3_cerrable': True}, metro=METRO)
+    f = p['frentes_alineados']
+    assert f['casas_desalineadas'] == 2 and sum(len(x['casas']) for x in f['desalineados']) == 2
+    unica = puerta_fase5(ciudad((10, 12, 50, 42), (50, 16, 70, 42), (70, 12, 130, 42)),
+                         [eje((0, 0), (140, 0)), eje((0, 1), (140, 1), tramo='L2:A-B')], hitos=[],
+                         fase3={'fase_3_cerrable': True}, metro=METRO)['frentes_alineados']
+    assert unica['casas_desalineadas'] == 1 and sum(len(x['casas']) for x in unica['desalineados']) == 2
+
+
+def test_las_medianeras_laterales_no_cuentan_como_acceso():
+    # la casa del medio tiene 1,5 m de frente: no le alcanza aunque la banda roce sus medianeras
+    casas = [(0, box(0, 0, 20, 20)), (1, box(20, 0, 23, 20)), (2, box(23, 0, 43, 20)), (3, box(0, 20, 43, 40))]
+    assert casas_sin_acceso(casas, metro=METRO)['sin_acceso'] == [1]

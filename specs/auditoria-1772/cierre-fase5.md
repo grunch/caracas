@@ -6,9 +6,9 @@ Fecha: 22-11-2026. T33j.5a (I1772-001, -002, -003 y -011). Generado por `tools/g
 
 | Criterio de specs/08 | Medida |
 |---|---|
-| Todas las casas del frente comparten su recta dentro de una tolerancia numérica declarada | **Frentes alineados:** cada tramo recto medible de la red llevada a 1936 (`1772-calles-1936.json`) se mide de cada lado. Se lanza un rayo perpendicular cada 1 m, desde 8 m de cada esquina, hasta la primera casa a no más de 20 m del eje. La planta de un hito corta el rayo. Por los puntos de fachada se ajusta una recta robusta (mínimos cuadrados totales, repetidos sin los puntos lejanos). Una casa está desalineada si su desvío mediano a esa recta pasa **0,5 m**, un píxel del mosaico. La recta no tiene que ser paralela al eje, porque la fachada de 1936 puede ir oblicua a él. |
+| Todas las casas del frente comparten su recta dentro de una tolerancia numérica declarada | **Frentes alineados:** cada tramo recto medible de la red llevada a 1936 (`1772-calles-1936.json`) se mide de cada lado. Se lanza un rayo perpendicular cada 1 m, desde 8 m de cada esquina, hasta la primera casa a no más de 20 m del eje. La planta de un hito corta el rayo. Por los puntos de fachada se ajusta la recta de la mayoría: en la dirección del eje o en la del ajuste de todos los puntos, se elige la posición que deja más puntos a menos de la tolerancia y se afina por mínimos cuadrados totales. Una casa está desalineada si su desvío mediano a esa recta pasa **0,5 m**, un píxel del mosaico. La recta no tiene que ser paralela al eje, porque la fachada de 1936 puede ir oblicua a él. |
 | Lotes sin solapes | **Lotes sin solapes:** ningún par de casas con área común mayor que 0,01 m² y ninguna huella inválida. Es el umbral de detección de T33j.1e; una medianera compartida tiene área común cero. |
-| Ninguna casa enfrenta una medianera sin acceso | **Casas con acceso:** las casas se juntan en manzanas edificadas, cerrando los huecos de menos de 2 m. Cada casa tiene que tener al menos 2 m de borde, el ancho de una puerta, sobre el contorno exterior de su manzana. No tiene acceso una casa que solo da a un patio o a una huerta interior, ni una manzana que cae dentro del hueco de otra. |
+| Ninguna casa enfrenta una medianera sin acceso | **Casas con acceso:** las casas se juntan en manzanas edificadas, cerrando los huecos de menos de 2 m. Cada casa tiene que tener al menos 2 m de borde, el ancho de una puerta, sobre el contorno exterior de su manzana. Se mide solo el borde que coincide con ese contorno, con una tolerancia numérica de 2,5 cm, así las medianeras laterales no suman. No tiene acceso una casa que solo da a un patio o a una huerta interior, ni una manzana que cae dentro del hueco de otra. |
 | No se altera la calle aprobada | **Calle aprobada:** la puerta de la fase 3 sigue cerrable sobre la misma ciudad. |
 
 Los umbrales son inferidos y van declarados en el JSON. Se fijaron antes de medir y no se cambian para que algo pase (1A). Los 29 tramos de los sectores límite del calce no se miden, como en la fase 3.
@@ -19,9 +19,9 @@ Ciudad de `main` 32e6a88 (#125), con 6289 casas visibles de 1772.
 
 | Criterio | Resultado | Cumplido |
 |---|---|---|
-| Frentes alineados | 569 frentes medidos con 4600 casas; **654 casas desalineadas** en 264 frentes (mediana 2,19 m; 143 hasta 1 m, 241 entre 1 y 3 m, 270 a más de 3 m) | **no** |
+| Frentes alineados | 569 frentes medidos con 4600 casas; **522 casas desalineadas** (566 observaciones casa–frente en 266 frentes; mediana 3,24 m; 94 hasta 1 m, 169 entre 1 y 3 m, 303 a más de 3 m) | **no** |
 | Lotes sin solapes | **7195 pares** con área común (el mayor de 160,9 m²) y 1 huella inválida | **no** |
-| Casas con acceso | **7 casas** sin acceso, todas de la reconstrucción de 1772 | **no** |
+| Casas con acceso | **10 casas** sin acceso, todas de la reconstrucción de 1772 | **no** |
 | Calle aprobada | la fase 3 sigue en 5/5 | sí |
 
 `fase_5_cerrable: false`.
@@ -50,7 +50,7 @@ Se revisó una muestra de frentes marcados sobre la planta, con las casas desali
 
 - **T33j.5b, reparto vectorial sin solapes (I011):** medianeras compartidas en el reparto raster.
 - **T33j.5c, frentes:** una línea de fachada por frente recto y las esquinas sin cuñas.
-- **Las 7 casas sin acceso, las juntas superpuestas y las casas de 1578.**
+- **Las 10 casas sin acceso, las juntas superpuestas y las casas de 1578.**
 
 En cada paso la puerta de la fase 3 tiene que seguir en 5/5 y la de la fase 4 en 6/6.
 

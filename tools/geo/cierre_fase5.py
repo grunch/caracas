@@ -43,6 +43,7 @@ ESTACIONES_MINIMAS = 5       # un lado con menos puntos de fachada no es un fren
 SOLAPE_MINIMO_M2 = 0.01      # umbral de detección de T33j.1e (diagnostico-huellas.md)
 CIERRE_M = 1.0               # dos casas a menos de 2·CIERRE_M son de la misma manzana edificada
 ACCESO_MINIMO_M = 2.0        # el ancho de una puerta: menos borde hacia afuera no da acceso
+TOLERANCIA_BORDE_PX = 0.05    # borde de una casa sobre el contorno exterior de su manzana (numérica)
 MAYORES = 50                 # cuántos pares de solape se listan
 
 
@@ -63,18 +64,27 @@ def _primero(rayo, origen, arbol, figuras, son_obstaculo):
     return j, min(puntos, key=origen.distance)
 
 
-def _recta_robusta(puntos, tol_px):
-    """(punto, normal) de la recta que siguen la mayoría de los puntos: total least squares repetido sin los lejanos."""
-    dentro = np.ones(len(puntos), bool)
-    for _ in range(6):
-        centro = puntos[dentro].mean(axis=0)
-        _u, _s, vt = np.linalg.svd(puntos[dentro] - centro)
-        normal = vt[1]
-        residuo = np.abs((puntos - centro) @ normal)
-        nuevo = residuo <= max(tol_px, 2.5 * float(np.median(residuo)))
-        if nuevo.sum() < 2 or (nuevo == dentro).all():
+def _recta_robusta(puntos, tol_px, normales=()):
+    """(punto, normal) de la recta que siguen la mayoría de los puntos. Para cada dirección candidata (las `normales`,
+    como la del eje, y la del ajuste de todos los puntos) busca la posición que deja más puntos a menos de la tolerancia
+    (la de la mayoría, aunque haya varias casas corridas) y la afina por mínimos cuadrados totales con esos puntos."""
+    centro = puntos.mean(axis=0)
+    candidatas = [np.asarray(n, float) / np.hypot(*n) for n in normales] + [np.linalg.svd(puntos - centro)[2][1]]
+    mejor = None
+    for normal in candidatas:
+        proy = np.sort(puntos @ normal)
+        cuantos = np.searchsorted(proy, proy + 2 * tol_px, side='right') - np.arange(len(proy))
+        k = int(np.argmax(cuantos))
+        if mejor is None or cuantos[k] > mejor[0]:
+            mejor = (int(cuantos[k]), normal, proy[k] + tol_px)
+    _n, normal, desplazamiento = mejor
+    dentro = np.abs(puntos @ normal - desplazamiento) <= tol_px
+    for _ in range(4):
+        if dentro.sum() < 2:
             break
-        dentro = nuevo
+        centro = puntos[dentro].mean(axis=0)
+        normal = np.linalg.svd(puntos[dentro] - centro)[2][1]
+        dentro = np.abs((puntos - centro) @ normal) <= tol_px
     return centro, normal
 
 
@@ -113,7 +123,7 @@ def frentes_desalineados(calles, casas, metro=METRO, obstaculos=(), tolerancia_m
                 medidos += 1
                 medidas |= techos
                 puntos = np.array([[p.x, p.y] for _, p in golpes])
-                centro, normal = _recta_robusta(puntos, tol_px)
+                centro, normal = _recta_robusta(puntos, tol_px, [n])
                 residuo = np.abs((puntos - centro) @ normal)
                 por_casa = {}
                 for (j, _), r in zip(golpes, residuo):
@@ -157,7 +167,8 @@ def casas_sin_acceso(casas, metro=METRO, cierre_m=CIERRE_M, acceso_minimo_m=ACCE
     afuera = [m for i, m in enumerate(manzanas)
               if not any(j != i and cascos[j].area > cascos[i].area and cascos[j].contains(m.representative_point())
                          for j in range(len(manzanas)))]
-    exterior = unary_union([LineString(m.exterior.coords) for m in afuera]).buffer(1.0)
+    # solo el borde que coincide con el contorno exterior: la tolerancia es numérica, no suma medianeras laterales
+    exterior = unary_union([LineString(m.exterior.coords) for m in afuera]).buffer(TOLERANCIA_BORDE_PX)
     sin = [k for k, c in validas if c.boundary.intersection(exterior).length * metro < acceso_minimo_m]
     return {'sin_acceso': sorted(sin)}
 
@@ -174,7 +185,9 @@ def puerta_fase5(ciudad, calles, hitos, fase3, metro=METRO):
     acceso = casas_sin_acceso(casas, metro)
     criterios = OrderedDict([
         ('frentes_alineados', {'cumplido': not frentes['desalineados'], 'tolerancia_m': TOLERANCIA_FACHADA_M,
-                               'casas_desalineadas': sum(len(f['casas']) for f in frentes['desalineados']), **frentes}),
+                               # casas distintas: una casa puede salir de la recta en más de un frente
+                               'casas_desalineadas': len({c['techo'] for f in frentes['desalineados'] for c in f['casas']}),
+                               **frentes}),
         ('lotes_sin_solapes', {'cumplido': not lotes['pares'] and not lotes['invalidas'], 'umbral_m2': SOLAPE_MINIMO_M2,
                                **lotes}),
         ('casas_con_acceso', {'cumplido': not acceso['sin_acceso'], 'cierre_m': CIERRE_M,
