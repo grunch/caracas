@@ -58,6 +58,33 @@ La ciudad de 1772 pasa de 4146 a 6067 casas visibles. Los techos del pipeline su
 
 El umbral no se baja para que pasen.
 
+## Después de T33j.4b: conjuntos religiosos y reservas de los hitos
+
+Antes, la supresión de los hitos en el visor (`src/hitos/suprimir.js`) escondía la casa entera en cuanto tocaba la zona de un hito. Eso dejaba **vacíos artificiales**: la Catedral escondía 2 casas casi enteras fuera de su planta (1116 m²), San Francisco 3 (870 m²) y Altagracia 1 (537 m²). Es el hueco entre la Catedral y las casas del frente norte que registra I1772-004. Cambios:
+
+1. **Reserva de ocupación** (`vectorizar.plantas_de_1772`). La planta de cada hito en pie en 1772 (Catedral, San Francisco, Altagracia, La Pastora y la Plaza Bolívar) se resta de todas las cuadras de 1772: las de la referencia, las de lo edificado y las de las caras de OSM. Las casas se reparten alrededor de la planta, no a través de ella. Una casa de 1936 que pisa más del 10 % de su huella sobre la planta no vive en 1772 (`tapada72`).
+2. **Supresión en el visor** (`pisaLaZona`). Una casa se suprime solo si lo común con la zona del hito es al menos el 25 % del más chico de los dos. La que apenas roza un hito grande sigue en pie, y la que contiene un monumento chico se suprime igual. Esto vale para todas las épocas.
+3. **La puerta** usa la misma regla.
+   - **Doble:** una casa visible que pisa más del 10 % de su huella sobre la planta.
+   - **Vacío artificial:** una casa suprimida con más de la mitad fuera de la planta.
+
+| Criterio | Antes de T33j.4b | Después |
+|---|---|---|
+| Hitos sin dobles | sí (con la supresión vieja) | sí |
+| Hitos sin vacíos artificiales | 6 casas escondidas fuera de la planta | **0** |
+| Edificadas con casas | 5 sin casas | 5 sin casas |
+
+Revisé a ojo la Catedral y San Francisco sobre el mosaico: la planta queda libre y las casas llegan hasta su borde. **Candelaria** distingue sus tres cuerpos aislados de la plaza, porque son lo edificado revisado de U1772-0214: los cuerpos tienen 0,99 de cobertura y la plaza casi no tiene casas (234 de 3982 m²). Su hito sigue sin modelar en 1772 (I1772-009); delimitar su forma construida necesita una referencia histórica que no tenemos.
+
+## Estado de la fase 4
+
+`fase_4_cerrable: false`. Cumplen libres sin casas, parciales sin rellenar, hitos sin dobles e hitos sin vacíos. Falta «edificadas con casas» por 5 unidades:
+- las 3 dudosas de la revisión (U1772-0042, -0232 y -0264);
+- U1772-0118, al 0,46 de lo rojo;
+- U1772-0149, con lo rojo sobre una calle de 1772 por el error del calce.
+
+No se baja el umbral ni se aprueban las dudosas sin revisarlas. Para cerrar la fase hay que trazarlas a mano, o que el responsable las acepte como límite documentado.
+
 ## Reproducir
 
 ```

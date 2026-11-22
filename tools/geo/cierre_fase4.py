@@ -9,8 +9,9 @@ conservadas; hitos sin dobles edificios ni vacíos artificiales. Se mide, sobre 
 - parciales sin rellenar: una parcial aprobada no queda cubierta casi entera (las huertas y solares se conservan);
 - las unidades de los sectores límite del calce (limites-calce.json) no se miden y quedan listadas, como en las
   fases 1 y 3: ahí no se sabe ubicarlas en 1936;
-- hitos sin dobles: ninguna casa visible (fuera de la supresión del hito, src/hitos/suprimir.js) pisa la planta de un
-  hito en pie en 1772.
+- hitos sin dobles: ninguna casa visible (que el visor no suprime, src/hitos/suprimir.js) pisa más del 10 % de su
+  huella sobre la planta de un hito en pie en 1772;
+- hitos sin vacíos artificiales: ninguna casa suprimida por un hito cae más de la mitad fuera de su planta.
 
 La figura de una unidad aprobada es su anillo de la referencia; la de una pendiente, su caja del original llevada a
 1936 por el calce por identidad: una medida **aproximada** (el error del calce en su sector). Los umbrales son
@@ -78,24 +79,56 @@ def cobertura(figura, casas, abiertos=None):
 
 
 def visibles(casas, hitos, epoca=EPOCA_1772):
-    """Las casas que el visor deja a la vista en `epoca`: sin las que pisan la zona de supresión de un hito en pie
-    (src/hitos/suprimir.js). No modela la excepción de las casas cuyo solar es lo único que toca el hito: es más
+    """Las casas que el visor deja a la vista en `epoca`: sin las que suprime un hito en pie (se_suprime, la regla de
+    src/hitos/suprimir.js). No modela la excepción de las casas cuyo solar es lo único que toca el hito: es más
     estricta que el visor, así que no esconde faltantes."""
     zonas = [Polygon(z) for h in hitos if h['nace'] <= epoca and (h['muere'] == 0 or h['muere'] > epoca)
              for z in h.get('suprime', [])]
-    return [(k, c) for k, c in casas if not any(c.intersects(z) for z in zonas)]
+    return [(k, c) for k, c in casas if not se_suprime(c, [list(z.exterior.coords)[:-1] for z in zonas])]
+
+
+PISA_MINIMO = 0.25          # como src/hitos/suprimir.js: lo común, al menos esto del más chico de casa y zona
+DOBLE_MINIMO = 0.10         # una casa visible que pisa la planta del hito en más que esto de su huella es un doble
+VACIO_MINIMO = 0.5          # una casa suprimida con más que esto fuera de la planta deja un vacío artificial
+
+
+def se_suprime(casa, zonas):
+    """¿El visor esconde la casa mientras el hito está en pie? La regla de src/hitos/suprimir.js (pisaLaZona)."""
+    for z in zonas:
+        zona = Polygon(z)
+        comun = casa.intersection(zona).area
+        if comun > 0 and comun >= PISA_MINIMO * min(casa.area, zona.area):
+            return True
+    return False
+
+
+def _en_pie(h, epoca):
+    return h['nace'] <= epoca and (h['muere'] == 0 or h['muere'] > epoca)
 
 
 def dobles_de_hitos(hitos, casas, epoca=EPOCA_1772):
-    """Hitos en pie en `epoca` con casas visibles sobre su planta: una casa que pisa la supresión del hito no se ve."""
+    """Hitos en pie en `epoca` con casas visibles (que el visor no suprime) sobre buena parte de su planta."""
     resultado = []
     for h in hitos:
-        if not (h['nace'] <= epoca and (h['muere'] == 0 or h['muere'] > epoca)):
+        if not _en_pie(h, epoca):
             continue
         planta = unary_union([Polygon(p) for p in h['planta']])
-        suprime = unary_union([Polygon(p) for p in h.get('suprime', [])])
-        quienes = sorted(k for k, c in casas if c.intersects(planta) and not c.intersects(suprime)
-                         and c.intersection(planta).area > 0)
+        quienes = sorted(k for k, c in casas if c.intersects(planta) and not se_suprime(c, h.get('suprime', []))
+                         and c.intersection(planta).area > DOBLE_MINIMO * c.area)
+        if quienes:
+            resultado.append({'hito': h['id'], 'casas': quienes})
+    return resultado
+
+
+def vacios_de_hitos(hitos, casas, epoca=EPOCA_1772):
+    """Hitos en pie en `epoca` que esconden casas que caen casi enteras fuera de su planta: un vacío artificial."""
+    resultado = []
+    for h in hitos:
+        if not _en_pie(h, epoca):
+            continue
+        planta = unary_union([Polygon(p) for p in h['planta']])
+        quienes = sorted(k for k, c in casas if se_suprime(c, h.get('suprime', []))
+                         and c.difference(planta).area > VACIO_MINIMO * c.area)
         if quienes:
             resultado.append({'hito': h['id'], 'casas': quienes})
     return resultado
@@ -103,7 +136,8 @@ def dobles_de_hitos(hitos, casas, epoca=EPOCA_1772):
 
 def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=frozenset(), edificado=None):
     """Criterios de la fase 4 con su cumplimiento sobre las casas de 1772; `fase_4_cerrable` exige todos."""
-    casas = visibles(casas_de_epoca(ciudad), hitos)
+    todas = casas_de_epoca(ciudad)
+    casas = visibles(todas, hitos)
     abiertos = abiertos_de_casas(ciudad)
     figuras = [c for _, c in casas]
     arbol = STRtree(figuras) if figuras else None
@@ -135,12 +169,13 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
             con_casas.append({'unidad': u['id'], 'medida': medida})
         if u['ocupacion'] == 'parcial' and medida == 'anillo' and cubierta > COBERTURA_PARCIAL_MAXIMA:
             rellenas.append(u['id'])
-    dobles = dobles_de_hitos(hitos, casas)
+    dobles, vacios = dobles_de_hitos(hitos, casas), vacios_de_hitos(hitos, todas)
     criterios = OrderedDict([
         ('edificadas_con_casas', {'cumplido': not sin_casas, 'sin_casas': sin_casas}),
         ('libres_sin_casas', {'cumplido': not con_casas, 'con_casas': con_casas}),
         ('parciales_sin_rellenar', {'cumplido': not rellenas, 'umbral': COBERTURA_PARCIAL_MAXIMA, 'rellenas': rellenas}),
         ('hitos_sin_dobles', {'cumplido': not dobles, 'dobles': dobles}),
+        ('hitos_sin_vacios_artificiales', {'cumplido': not vacios, 'vacios': vacios}),
         ('unidades_medidas', {'cumplido': not sin_ubicar, 'sin_ubicar': sin_ubicar}),
     ])
     return {**criterios, 'umbrales_inferidos': {'cobertura_minima': COBERTURA_MINIMA, 'retiro_m': RETIRO_M,

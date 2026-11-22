@@ -151,3 +151,18 @@ describe('los solares junto a un hito no borran fachadas', () => {
     expect([...vida]).toEqual([1 + 8 * 4])
   })
 })
+
+describe('suprimirTechos: solo lo que el hito pisa de verdad (sin vacíos artificiales)', () => {
+  const zonas = [{ poligono: cuadrado(100, 100, 40), desde: 1, hasta: 0 }]
+  test('una casa que apenas roza la zona del hito sigue en pie', () => {
+    const roza = cuadrado(90, 100, 20)          // un cuarto adentro de la zona: no
+    const casi = [[60, 100], [104, 100], [104, 120], [60, 120]]   // menos del 10 % adentro
+    const vida = suprimirTechos(ciudadDe([casi, roza], [1, 1]), zonas)
+    expect(vida[0]).toBe(1)
+  })
+  test('una casa con buena parte bajo el hito se suprime mientras él está en pie', () => {
+    const mitad = cuadrado(120, 100, 20)        // entera adentro
+    const vida = suprimirTechos(ciudadDe([mitad], [1]), zonas)
+    expect(vida[0]).not.toBe(1)
+  })
+})

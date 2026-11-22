@@ -145,3 +145,15 @@ def test_con_lo_edificado_revisado_se_mide_si_las_casas_cubren_lo_rojo_y_no_el_i
                             hitos=[], metro=METRO, edificado=rojo)
     assert con_casa['edificadas_con_casas']['cumplido'] is True
     assert sin_casa['edificadas_con_casas']['sin_casas'] == [{'unidad': 'U3', 'medida': 'edificado'}]
+
+
+def test_la_supresion_sigue_la_regla_del_visor_y_una_casa_suprimida_casi_toda_fuera_del_hito_es_un_vacio():
+    from cierre_fase4 import se_suprime, vacios_de_hitos
+    zona = [[100, 100], [140, 100], [140, 140], [100, 140]]
+    assert se_suprime(box(120, 100, 140, 120), [zona]) is True          # entera adentro
+    assert se_suprime(box(60, 100, 104, 120), [zona]) is False          # apenas roza
+    assert se_suprime(box(0, 0, 200, 200), [[[10, 10], [12, 10], [12, 12], [10, 12]]]) is True   # contiene un monumento chico
+    hito = {'id': 'h', 'nace': 1, 'muere': 0, 'planta': [zona], 'suprime': [[[100, 100], [160, 100], [160, 140], [100, 140]]]}
+    # la casa 0 cae casi toda en la supresión pero fuera de la planta: el hito deja un vacío
+    casas = [(0, box(138, 100, 160, 140)), (1, box(110, 110, 130, 130))]
+    assert vacios_de_hitos([hito], casas) == [{'hito': 'h', 'casas': [0]}]
