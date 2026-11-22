@@ -694,7 +694,10 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
     if con_red is not None and red.get('edificado72') is not None:
         areas = {etiqueta: int(parte.sum()) for etiqueta, parte in lista}
         referencia, revisado = red.get('referencia72', ()), red.get('edificado_revisado', ())
-        reservas = red.get('reservas72', ())
+        # reservas de 1772: las plantas de los hitos en pie y los núcleos de calzada de las calles conocidas (las casas se
+        # reparten al borde de la calle, no a través de ella)
+        reservas = list(red.get('reservas72', ())) + [e.buffer(NUCLEO_DE_CALZADA_M / 2 / metro + 1, cap_style='flat')
+                                                     for e in red.get('calzada72', ())]
         antes = _cuadras_de_referencia(referencia, clases, cuadras, areas, metro, revisado, reservas)
         tomadas = {m for g in antes for m in g['miembros']}
         ocupado = [r['poligono'] for r in referencia] + [p for e in revisado for p in e['poligonos']] + list(reservas)

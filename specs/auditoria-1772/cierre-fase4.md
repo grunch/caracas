@@ -76,14 +76,37 @@ Antes, la supresión de los hitos en el visor (`src/hitos/suprimir.js`) escondí
 
 Revisé a ojo la Catedral y San Francisco sobre el mosaico: la planta queda libre y las casas llegan hasta su borde. **Candelaria** distingue sus tres cuerpos aislados de la plaza, porque son lo edificado revisado de U1772-0214: los cuerpos tienen 0,99 de cobertura y la plaza casi no tiene casas (234 de 3982 m²). Su hito sigue sin modelar en 1772 (I1772-009); delimitar su forma construida necesita una referencia histórica que no tenemos.
 
+## Las dudosas y las reservas de calzada (T33j.4c)
+
+Quedaban 5 edificadas sin casas. No se bajó el umbral. Se hicieron dos cambios:
+
+1. **Dudosas corregidas a mano.** Revisé de nuevo a ojo las 8 dudosas sobre su recorte y corregí 4 ([edificado-revisado.md](edificado-revisado.md)). U1772-0042, U1772-0232 y U1772-0277 se recortan a la caja de la unidad, lo que separa el puente y lo que sigue fuera de ella. U1772-0264 se retraza con un umbral de color más bajo para tomar el edificio diagonal entero. El juicio `corregido` guarda el polígono corregido en la revisión, atado al sha256 del recorte y del trazado original. Las otras 4 (U1772-0195, -0250, -0254 y -0272) siguen dudosas y no entran con lo edificado.
+2. **Reservas de calzada.** Los núcleos de calzada de las calles conocidas de 1772 se restan de las cuadras de lo edificado, igual que las plantas de los hitos. Así las casas de una mancha se reparten al borde de la calle y no a través de ella. Antes la regla de calzada borraba después la casa entera, y por eso U1772-0118 y U1772-0149 quedaban sin casas.
+
+| Criterio | Antes de T33j.4c | Después |
+|---|---|---|
+| Edificadas con casas | 5 sin casas | **0** |
+| Libres sin casas | sí | sí |
+| Parciales sin rellenar | 0 rellenas | 0 |
+| Hitos sin dobles | sí | sí |
+| Hitos sin vacíos artificiales | 0 | 0 |
+| Unidades medidas | sí | sí |
+
+- La ciudad de 1772 tiene 6289 casas visibles.
+- Los techos del pipeline quedan en 39.411, dentro de la tolerancia de 39.395.
+- La puerta de la fase 3 sigue en 5/5 sobre esta ciudad.
+- Con lo edificado revisado, la cobertura de lo rojo queda registrada en cada medida (`cobertura_del_rojo`). La más baja de las 150 es 0,69 (U1772-0023). U1772-0118 sube a 0,96 y U1772-0149 a 0,85.
+- Las 4 dudosas que siguen se miden por su caja aproximada (cobertura del interior entre 0,08 y 0,34). Sus casas no salen de un contorno revisado, sino de las caras de OSM y la máscara de 1936.
+
 ## Estado de la fase 4
 
-`fase_4_cerrable: false`. Cumplen libres sin casas, parciales sin rellenar, hitos sin dobles e hitos sin vacíos. Falta «edificadas con casas» por 5 unidades:
-- las 3 dudosas de la revisión (U1772-0042, -0232 y -0264);
-- U1772-0118, al 0,46 de lo rojo;
-- U1772-0149, con lo rojo sobre una calle de 1772 por el error del calce.
+`fase_4_cerrable: true`, 6/6. Cumplen todos los criterios sobre las unidades medidas. Hay dos límites documentados:
+- Las 25 unidades de los sectores límite del calce (S1772-14, -24 y -44) no se miden. Es la misma decisión del responsable de las fases 1 y 3.
+- Las 4 dudosas que siguen no tienen contorno revisado: cumplen por la medida aproximada, no por lo rojo del original.
 
-No se baja el umbral ni se aprueban las dudosas sin revisarlas. Para cerrar la fase hay que trazarlas a mano, o que el responsable las acepte como límite documentado.
+La regla de supresión del visor (`pisaLaZona`) vale para todas las épocas. Se revisó a ojo en 1772; en 1843–1936 todavía no.
+
+Esta puerta cuenta lo medido; no certifica la fidelidad del mapa.
 
 ## Reproducir
 

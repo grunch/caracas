@@ -60,13 +60,14 @@ def edificado_de_unidad(rgb, bbox, margen=MARGEN_PX):
     return poligonos
 
 
-JUICIOS = {'fiel', 'fiel_solo_la_mayor', 'dudoso'}
+JUICIOS = {'fiel', 'fiel_solo_la_mayor', 'corregido', 'dudoso'}
 
 
 def edificado_aprobado(original, revisado):
     """{unidad: polígonos} de lo revisado a ojo como fiel (edificado-revisado.json), solo si el recorte y el trazado
     son los que se revisaron (mismos sha256). `fiel_solo_la_mayor`: solo la mancha más grande es de la unidad (las
-    demás son vecinas que la caja alcanza). Lo dudoso no entra."""
+    demás son vecinas que la caja alcanza); `corregido`: entran los polígonos corregidos a mano que trae la revisión.
+    Lo dudoso no entra."""
     from shapely.geometry import Polygon as _P
     por_unidad = {r['unidad']: r for r in original['unidades']}
     aprobado = {}
@@ -77,7 +78,15 @@ def edificado_aprobado(original, revisado):
         if r is None or v['juicio'] == 'dudoso' or v['recorte_sha256'] != r['recorte']['sha256'] \
                 or v['poligonos_sha256'] != r['poligonos_sha256'] or not r['poligonos']:
             continue
-        poligonos = r['poligonos'] if v['juicio'] == 'fiel' else [max(r['poligonos'], key=lambda p: _P(p).area)]
+        if v['juicio'] == 'corregido':
+            # corregido a mano sobre el trazado revisado (recortado a la caja, retrazado): entra lo corregido
+            poligonos = [p for p in v.get('poligonos', []) if len(p) >= 3]
+            if not poligonos:
+                continue
+        elif v['juicio'] == 'fiel':
+            poligonos = r['poligonos']
+        else:
+            poligonos = [max(r['poligonos'], key=lambda p: _P(p).area)]
         aprobado[v['unidad']] = poligonos
     return aprobado
 

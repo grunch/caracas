@@ -29,21 +29,22 @@ En el original, una manzana tiene un borde negro y lo edificado va pintado de ro
 |---|---|
 | fiel: el trazado sigue lo dibujado en rojo | 143 |
 | fiel, solo la mancha mayor: las demás son vecinas que la caja alcanza | 3 |
-| dudoso: queda pendiente | 8 |
+| corregido: corregido a mano sobre el trazado y revisado de nuevo (T33j.4c) | 4 |
+| dudoso: queda pendiente | 4 |
 
 - **U1772-0024** (fiel_solo_la_mayor): la caja alcanza una manzana al otro lado de la quebrada.
 - **U1772-0025** (fiel_solo_la_mayor): la caja alcanza el triángulo del otro lado de la diagonal y el puente.
-- **U1772-0042** (dudoso): el puente oscuro de la esquina queda pegado al contorno.
+- **U1772-0042** (corregido): el puente oscuro de la esquina queda pegado al contorno. Se recorta a la caja de la unidad.
 - **U1772-0044** (fiel_solo_la_mayor): la mancha chica está al otro lado de la quebrada.
 - **U1772-0195** (dudoso): el contorno roza el puente de la esquina.
-- **U1772-0232** (dudoso): el rojo sigue hacia el norte fuera de la caja sin borde que lo separe.
+- **U1772-0232** (corregido): el rojo sigue hacia el norte fuera de la caja sin borde que lo separe. Se recorta a la caja de la unidad.
 - **U1772-0250** (dudoso): se pega el puente y entra un pedazo del otro lado de la calle.
 - **U1772-0254** (dudoso): se pegan el puente y un pedazo del otro lado de la calle.
-- **U1772-0264** (dudoso): edificio diagonal muy fino: solo se traza una parte.
+- **U1772-0264** (corregido): edificio diagonal muy fino: solo se trazaba una parte. Se retraza con saturación y brillo mínimos de 40.
 - **U1772-0272** (dudoso): dos manchas igual de dentro de la caja, una del otro lado de la diagonal: no se decide cuál es la suya.
-- **U1772-0277** (dudoso): el triángulo y el puente quedan en una sola mancha.
+- **U1772-0277** (corregido): el triángulo y el puente quedan en una sola mancha. Se recorta a la caja de la unidad.
 
-La revisión queda atada al sha256 del recorte y de los polígonos: si el trazado cambia, deja de valer (`edificado_original.edificado_aprobado`).
+La revisión queda atada al sha256 del recorte y de los polígonos: si el trazado cambia, deja de valer (`edificado_original.edificado_aprobado`). Una corregida guarda su polígono corregido en la revisión, con el mismo atado al trazado original.
 
 ## Qué sigue
 
