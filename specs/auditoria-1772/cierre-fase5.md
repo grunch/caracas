@@ -286,9 +286,42 @@ De las 74 que quedan:
 
 **Límite hasta la fase 7**, por decisión del responsable del 22-11-2026: las 46 vistas por una abertura y las 5 de manzanas retiradas enteras quedan como límite documentado de la fase 5. Cerrar esas aberturas con fachada, medianera o tapia según la referencia es trabajo de la fase 7, y se vuelven a medir al cerrarla. No se amplía la tolerancia.
 
-## Lo que sigue
+## Después de T33j.5j: cuñas, casas de 1578 en la calle y límites documentados
 
-- Las 9 de la reconstrucción a no más de 8 m y las 6 de casas de 1578.
+Cuatro cambios en el generador, sin tocar la tolerancia:
+
+- **Cuñas de esquina** (`fachadas._cunas`): una casa que ya está sobre la recta en alguna estación del frente y en otras se retira más que el tope de 8 m no es una manzana retirada (esa no toca la recta). Es la misma casa con el frente en diagonal, y se rellena hasta la recta, hasta donde llega el rayo. Solo suma.
+- **Casas de 1578 paradas en la calle** (`fachadas.delante_de_la_recta`, `epocas.ceder_frentes_a_1772`): la recta de cada frente se mide solo con la reconstrucción. Una casa de 1578 en pie en 1772 que queda entre el eje y esa recta está en la calle de 1772 y muere en 1772, como en `ceder_a_1772`. Son 2 casas.
+- **Segunda pasada** de `alinear_casas`: una saliente que se ajusta corre la recta de sus vecinas.
+- **Sin huecos del redondeo** (`fachadas.a_la_grilla`): llevar la huella a la grilla de milésimas puede cerrar una entrada angosta y dejar un hueco nuevo. El que queda libre se rellena, en lugar de descartar el relleno entero.
+
+La puerta lee además los **límites documentados** de [limites-fase5.json](limites-fase5.json). Un frente registrado, por tramo, lado y segmento, no impide cerrar si no tiene más casas fuera de la recta que las registradas; si tiene más, algo cambió y vuelve a contar entero. Las casas en límite siguen listadas en la puerta con su clase.
+
+| Criterio | Antes (498ce52) | Después (b2ca10e) |
+|---|---|---|
+| Frentes alineados | 74 casas desalineadas | **53**, todas en límite documentado (cumple) |
+| Frentes medidos / casas medidas | 568 / 4508 | 569 / 4512 |
+| Lotes sin solapes | 0 pares | 0 (cumple) |
+| Casas con acceso | 0 sin acceso | 0 (cumple) |
+| Calle aprobada | fase 3 en 5/5 | 5/5 (cumple) |
+
+Las fases 3 y 4 siguen cerrables.
+
+### Los límites (decisiones del responsable del 22-11-2026)
+
+48 frentes con 53 casas, revisados con capturas:
+
+| Clase | Frentes | Por qué no se corrige en la fase 5 |
+|---|---|---|
+| Vista por una abertura | 38 | El rayo ve la casa por una abertura de más de 2 m del frente, con las vecinas sobre la recta. Cerrar la abertura con fachada, medianera o tapia según la referencia es de la fase 7; se vuelven a medir al cerrarla. |
+| Manzana retirada | 2 | Puntas de manzana irregulares de la periferia, retiradas enteras más de 8 m. |
+| Eje en las casas | 2 | El eje llevado a 1936 corre metido en las casas: la calle angosta L1772-0048, L1772-0060 y L1772-0068. Límite del calce. |
+| Casa de 1936 | 3 | Edificios reales del plano de 1936 en pie en 1772; el generador no los mueve. |
+| Esquina con dos frentes | 3 | Casas de esquina cuyas dos rectas medidas no se cortan en la casa: llevarlas a una recta las saca de la otra, y oscilan entre pasadas. |
+
+## Fase 5 cerrable
+
+`fase_5_cerrable: true`, 4/4 criterios, con los límites documentados de [limites-fase5.json](limites-fase5.json). La tolerancia de 0,5 m no cambió en ningún momento. Los frentes en límite se vuelven a medir al cerrar la fase 7.
 
 ## Reproducir
 
@@ -296,3 +329,5 @@ De las 74 que quedan:
 npm run datos -- --desde vectorizar
 .venv/bin/python tools/geo/cierre_fase5.py specs/auditoria-1772 fuentes/derivados/epocas/ciudad-epocas.json --datos <release o commit>
 ```
+
+La puerta lee `limites-fase5.json` de la misma carpeta, si existe.
