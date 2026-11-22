@@ -161,7 +161,8 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
             # con lo edificado revisado del original: las casas tienen que cubrir lo que el original pinta rojo
             manchas = unary_union(rojo)
             cerca_rojo = [] if arbol is None else [figuras[j] for j in arbol.query(manchas, predicate='intersects')]
-            if cobertura(manchas, cerca_rojo) < COBERTURA_DEL_ROJO:
+            medidas[-1] = {**medidas[-1], 'cobertura_del_rojo': cobertura(manchas, cerca_rojo)}
+            if medidas[-1]['cobertura_del_rojo'] < COBERTURA_DEL_ROJO:
                 sin_casas.append({'unidad': u['id'], 'medida': 'edificado'})
         elif u['ocupacion'] in EDIFICADAS and cubierta < COBERTURA_MINIMA:
             sin_casas.append({'unidad': u['id'], 'medida': medida})

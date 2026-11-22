@@ -157,3 +157,12 @@ def test_la_supresion_sigue_la_regla_del_visor_y_una_casa_suprimida_casi_toda_fu
     # la casa 0 cae casi toda en la supresión pero fuera de la planta: el hito deja un vacío
     casas = [(0, box(138, 100, 160, 140)), (1, box(110, 110, 130, 130))]
     assert vacios_de_hitos([hito], casas) == [{'hito': 'h', 'casas': [0]}]
+
+
+def test_la_medida_de_una_unidad_con_lo_edificado_revisado_registra_la_cobertura_de_lo_rojo():
+    rojo = {'U3': [box(310, 10, 320, 20)]}
+    p = puerta_fase4(ciudad=ciudad((0, 0, 100, 100), (310, 10, 315, 20)), red=red(), unidades=unidades(), cajas=cajas(),
+                     hitos=[], metro=METRO, edificado=rojo)
+    u3 = next(m for m in p['medidas'] if m['unidad'] == 'U3')
+    assert u3['cobertura_del_rojo'] == 0.5
+    assert 'cobertura_del_rojo' not in next(m for m in p['medidas'] if m['unidad'] == 'U1')

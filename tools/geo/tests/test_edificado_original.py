@@ -70,3 +70,17 @@ def test_un_juicio_desconocido_se_rechaza():
     with pytest.raises(ValueError):
         edificado_aprobado(original, {'revisiones': [{'unidad': 'U1', 'juicio': 'me_parece', 'recorte_sha256': 'r' * 64,
                                                       'poligonos_sha256': r['poligonos_sha256']}]})
+
+
+def test_un_trazado_corregido_a_mano_entra_con_sus_poligonos_corregidos():
+    from edificado_original import edificado_aprobado
+    poligonos = [[[0, 0], [10, 0], [10, 10]]]
+    original = {'unidades': [registro(poligonos)]}
+    r = original['unidades'][0]
+    corregidos = [[[0, 0], [5, 0], [5, 5]]]
+    revision = {'revisiones': [{'unidad': 'U1', 'juicio': 'corregido', 'recorte_sha256': r['recorte']['sha256'],
+                                'poligonos_sha256': r['poligonos_sha256'], 'poligonos': corregidos,
+                                'correccion': 'recortado a la caja de la unidad'}]}
+    assert edificado_aprobado(original, revision) == {'U1': corregidos}
+    sin_poligonos = {'revisiones': [{**revision['revisiones'][0], 'poligonos': []}]}
+    assert edificado_aprobado(original, sin_poligonos) == {}
