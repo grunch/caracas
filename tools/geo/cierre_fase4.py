@@ -101,8 +101,7 @@ def dobles_de_hitos(hitos, casas, epoca=EPOCA_1772):
 
 def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=frozenset()):
     """Criterios de la fase 4 con su cumplimiento sobre las casas de 1772; `fase_4_cerrable` exige todos."""
-    todas = casas_de_epoca(ciudad)
-    casas = visibles(todas, hitos)
+    casas = visibles(casas_de_epoca(ciudad), hitos)
     abiertos = abiertos_de_casas(ciudad)
     figuras = [c for _, c in casas]
     arbol = STRtree(figuras) if figuras else None
@@ -127,7 +126,7 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
             con_casas.append({'unidad': u['id'], 'medida': medida})
         if u['ocupacion'] == 'parcial' and medida == 'anillo' and cubierta > COBERTURA_PARCIAL_MAXIMA:
             rellenas.append(u['id'])
-    dobles = dobles_de_hitos(hitos, todas)
+    dobles = dobles_de_hitos(hitos, casas)
     criterios = OrderedDict([
         ('edificadas_con_casas', {'cumplido': not sin_casas, 'sin_casas': sin_casas}),
         ('libres_sin_casas', {'cumplido': not con_casas, 'con_casas': con_casas}),
