@@ -334,3 +334,13 @@ def test_delante_de_la_recta_no_marca_una_casa_sobre_la_recta_ni_detras():
     from fachadas import delante_de_la_recta
     casas = hilera_de_casas(n=6) + [(8, box(130, 20, 150, 60)), (9, box(150, 30, 170, 60))]   # al lado y retirada
     assert delante_de_la_recta(casas, [eje((0, 0), (180, 0))], METRO, de_1772=set(range(6))) == set()
+
+
+def test_a_la_grilla_rellena_el_hueco_libre_que_deja_el_redondeo():
+    # una entrada de 0,4 milésimas se cierra al llevar la huella a la grilla y deja la cámara de adentro como hueco
+    from fachadas import a_la_grilla
+    entrada = Polygon([(0, 0), (10, 0), (10, 10), (5.0002, 10), (5.0002, 5), (6, 5), (6, 2), (4, 2), (4, 5),
+                       (4.9998, 5), (4.9998, 10), (0, 10)])
+    g = a_la_grilla(entrada, ocupado=None)
+    assert g.geom_type == 'Polygon' and g.is_valid and not g.interiors
+    assert a_la_grilla(entrada, ocupado=box(4.5, 3, 5.5, 4)).interiors     # con algo adentro, el hueco queda

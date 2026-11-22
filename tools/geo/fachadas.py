@@ -354,6 +354,17 @@ def sin_huecos_libres(poligono, ocupado):
     return _Poligono(poligono.exterior, quedan)
 
 
+def a_la_grilla(poligono, ocupado):
+    """El polígono en la grilla de la ciudad (milésimas de píxel). Redondear puede cerrar una entrada angosta y dejar
+    un hueco nuevo: el que queda libre (`ocupado`: geometría, None o una función que la da) se rellena, como los de
+    las franjas."""
+    import shapely
+    g = shapely.set_precision(poligono.simplify(GRILLA_PX), GRILLA_PX)
+    if g.geom_type == 'Polygon' and g.interiors:
+        g = shapely.set_precision(sin_huecos_libres(g, ocupado() if callable(ocupado) else ocupado), GRILLA_PX)
+    return g
+
+
 def _cunas(golpes, n, recta, d_ancho, tol, tope, alcance):
     """[(grupo, franja)] de las cuñas de un lado: el grupo que ya está sobre la recta en alguna estación y en otras se
     retira más que el tope. No es una manzana retirada (esa no toca la recta): es la misma casa con el frente en
@@ -437,14 +448,16 @@ def alinear_casas(casas, tramos, metro, movibles, obstaculos=(), vedado=(), tope
         if not partes:
             continue
         mayor = max(partes, key=lambda q: q.area)
+
+        def ocupado(vecinas=vecinas):   # solo si hay huecos: lo vedado de toda la ciudad pesa
+            g = unary_union(vecinas + ([prohibido] if prohibido is not None else []))
+            return None if g.is_empty else g
         if mayor.interiors:
-            ocupado = unary_union(vecinas + ([prohibido] if prohibido is not None else []))
-            mayor = sin_huecos_libres(mayor, ocupado if not ocupado.is_empty else None)
+            mayor = sin_huecos_libres(mayor, ocupado())
         if mayor.interiors or not mayor.is_valid or mayor.area < 0.5 * huella.area:
             continue   # una huella con huecos no se puede techar; una que pierde media casa no se toca
         # en la grilla de la ciudad (milésimas de píxel): redondear después rompía la validez de alguna huella
-        import shapely
-        mayor = shapely.set_precision(mayor.simplify(GRILLA_PX), GRILLA_PX)
+        mayor = a_la_grilla(mayor, ocupado)
         if mayor.geom_type != 'Polygon' or mayor.is_empty or not mayor.is_valid or mayor.interiors:
             continue
         if not mayor.equals_exact(huella, 1e-6):

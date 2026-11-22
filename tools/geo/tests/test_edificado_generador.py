@@ -362,3 +362,22 @@ def test_ceder_frentes_a_1772_mata_en_1772_la_casa_de_1578_parada_delante_del_fr
     vida = ceder_frentes_a_1772(ciudad, tramos, [], METRO, desde=8)
     assert vida[8] == [0, 1] and vida[:8] == ciudad['vida'][:8]
     assert ciudad['vida'][8] == [0, 3]
+
+
+def test_alinear_1772_da_una_segunda_pasada_sobre_las_huellas_de_la_primera(monkeypatch):
+    # una saliente que se ajusta corre la recta de sus vecinas: la segunda pasada mide con las huellas ya ajustadas
+    import fachadas
+    from tools.geo.epocas import alinear_1772
+    vistas = []
+
+    def falsa(casas, *a, **k):
+        vistas.append(dict(casas)[0].bounds)
+        return {0: box(0, -2, 10, 10)} if len(vistas) == 1 else {}
+    monkeypatch.setattr(fachadas, 'alinear_casas', falsa)
+    ciudad = {'vertices': [0, 0, 10, 0, 10, 10, 0, 10], 'techos': [[0, 4, 1, 0, 0]], 'vida': [[1, 2]], 'antes': [1],
+              'junta': [3]}
+    red = {'nodos': [], 'calles': []}
+    nueva = alinear_1772(ciudad, [], [], red, [], METRO)
+    assert vistas == [(0, 0, 10, 10), (0, -2, 10, 10)]
+    v = nueva['vertices']
+    assert min(v[1::2]) == -2

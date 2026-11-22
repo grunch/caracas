@@ -434,6 +434,9 @@ def con_huellas(ciudad, nuevas):
     return {**ciudad, "vertices": vertices, "techos": techos}
 
 
+PASADAS_ALINEAR = 2   # la segunda corrige las que la primera dejó fuera al correr la recta (T33j.5j)
+
+
 def alinear_1772(ciudad, tramos, hitos, red72, verificadas, metro):
     """La ciudad final con las fachadas de las casas de la reconstrucción que están a la vista en 1772 sobre la recta de
     su frente (fachadas.alinear_casas, T33j.5f): el último paso de la alineación, sobre las casas mismas. Ningún relleno
@@ -442,13 +445,20 @@ def alinear_1772(ciudad, tramos, hitos, red72, verificadas, metro):
     from cierre_fase3 import ANCHO_INFERIDO_M, casas_de_epoca, corredores
     from cierre_fase4 import visibles
     from cierre_fase5 import plantas_en_pie
-    from fachadas import alinear_casas
+    import fachadas
     casas = visibles(casas_de_epoca(ciudad), hitos)
     n = len(ciudad.get("antes", []))
     movibles = {k for k, _ in casas if k < n and ciudad["antes"][k] and ciudad["junta"][k] >= 0}
     vedado = [c["poligono"] for c in corredores(red72, metro=metro)] + \
         [LineString(t["anclajes"]).buffer(ANCHO_INFERIDO_M / 2 / metro, cap_style="flat") for t in verificadas]
-    nuevas = alinear_casas(casas, tramos, metro, movibles, obstaculos=plantas_en_pie(hitos), vedado=vedado)
+    nuevas = {}
+    # una saliente que se ajusta corre la recta de sus vecinas: la segunda pasada mide sobre las huellas ya ajustadas
+    for _ in range(PASADAS_ALINEAR):
+        otras = fachadas.alinear_casas([(k, nuevas.get(k, g)) for k, g in casas], tramos, metro, movibles,
+                                       obstaculos=plantas_en_pie(hitos), vedado=vedado)
+        if not otras:
+            break
+        nuevas.update(otras)
     print(f"casas de 1772 ajustadas a la recta de su frente: {len(nuevas)}")
     return con_huellas(ciudad, nuevas)
 
