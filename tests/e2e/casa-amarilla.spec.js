@@ -36,7 +36,7 @@ test('Casa Amarilla: cinco fechas, fachada hacia la plaza, tinta y relieve compa
     }finally{for(const k of claves)U[k].value=previos[k];g.dispose()}
   })
   expect(resultado.relieveCompartido).toBe(true)
-  resultado.diferencias.forEach((n,i)=>expect(n).toBeGreaterThan(i===3?0:100)) // 1889→1911 cambia solo la disposición de las estrellas.
   for(const c of resultado.capturas)await testInfo.attach(`casa-amarilla-epoca-${c.epoca}-${c.color?'color':'tinta'}`,{body:Buffer.from(c.png.split(',')[1],'base64'),contentType:'image/png'})
+  resultado.diferencias.forEach((n,i)=>expect(n,`transición ${i}: ${resultado.diferencias}`).toBeGreaterThan(i===3?0:100)) // 1889→1911 cambia solo la disposición de las estrellas.
   expect(errores).toEqual([])
 })
