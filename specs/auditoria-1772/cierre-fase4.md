@@ -1,0 +1,41 @@
+# Cierre de la fase 4 · ocupación de 1772 y conjuntos especiales
+
+Fecha: 22-11-2026. T33j.4a/4b. Generado por `tools/geo/cierre_fase4.py` sobre la salida del generador: [cierre-fase4.json](cierre-fase4.json). Las casas medidas son las que viven en 1772 en `ciudad-epocas.json`, comparadas con la ocupación que el censo de la fase 1 lee en el original. **Cuenta lo medido; no certifica fidelidad.**
+
+## Qué mide la puerta (specs/08, fase 4)
+
+| Criterio de specs/08 | Medida |
+|---|---|
+| Cada frente edificado concuerda con su clasificación | **Edificadas con casas:** toda unidad leída como continua, parcial, aislada o conjunto especial tiene casas de 1772 en su interior, con una cobertura de al menos 0.05 |
+| …y cada vacío | **Libres sin casas:** terreno libre, plaza y lo descartado como edificación, sin casas |
+| Plazas, huertas y excepciones conservadas | **Parciales sin rellenar:** una parcial aprobada no queda cubierta más del 85 %. Las plazas entran en «libres sin casas» |
+| Hitos sin dobles edificios | **Hitos sin dobles:** ninguna casa visible pisa la planta de un hito en pie en 1772. Una casa que cae en la zona de supresión del hito no se ve (`src/hitos/suprimir.js`) |
+
+**Cómo se ubica cada unidad.**
+- **Aprobada:** su anillo de la referencia, encogido 3.0 m para no contar la calle.
+- **Pendiente:** su caja del original llevada a 1936 por el calce por identidad. Esta medida es **aproximada**: la caja abarca más que la unidad y el calce tiene el error de su sector. Basta para decir si tiene casas o no, pero no para medir su contorno.
+
+Los umbrales son inferidos y van declarados en el JSON. Las 25 unidades de los sectores límite del calce (S1772-14, -24 y -44) no se miden y quedan listadas (`sin_medir_por_limite_del_calce`), como en las fases 1 y 3: ahí no se sabe ubicarlas en 1936. Los hitos salen de `src/hitos/datos` a través de `tools/hitos-planta.mjs`.
+
+## Línea base (después de la fase 3)
+
+| Criterio | Resultado | Cumplido |
+|---|---|---|
+| Edificadas con casas | 100 sin casas (52 parcial, 29 continua, 13 aislada, 6 conjunto_especial); 97 son pendientes (medida aproximada) y 3 aprobadas | **no** |
+| Libres sin casas | ninguna libre con casas | sí |
+| Parciales sin rellenar | ninguna parcial aprobada cubierta más del 85 % una vez descontados los patios y solares de las casas | sí |
+| Hitos sin dobles | Catedral, San Francisco, Altagracia, La Pastora y Plaza Bolívar sin casas visibles sobre su planta | sí |
+
+`fase_4_cerrable: false`, con 4146 casas visibles de 1772 (la supresión de los hitos ya aplicada).
+
+## Causas
+
+- **Periferia sin casas (I1772-007).** Las unidades pendientes no entran al generador por la referencia: la regla de la fase 2 prohíbe incorporarlas por caja o cercanía. Lo que el generador arma ahí sale de caras de OSM y de la máscara de color, que en la periferia casi no reconocen edificado. Para edificarlas sin romper la regla, primero tienen que tener una geometría aprobable. Eso es el siguiente PR, T33j.4a: su cara del trazado del original llevada por el calce, con el error del sector declarado.
+- **Parciales rellenas.** Medidas sin descontar los patios, 22 parciales aprobadas quedaban cubiertas más del 85 %. Descontando patios y solares de las casas, ninguna pasa el umbral. Que huertas y solares del original se conserven a ojo se revisa con los conjuntos (T33j.4b).
+
+## Reproducir
+
+```
+npm run datos -- --desde vectorizar
+.venv/bin/python tools/geo/cierre_fase4.py specs/auditoria-1772 fuentes/derivados/epocas/ciudad-epocas.json --datos <release o commit>
+```
