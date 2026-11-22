@@ -1,6 +1,6 @@
 {
-  "_nota": "Conteos de referencia del pipeline de 1936 (mosaico con costura). Si un cambio del pipeline los mueve a propósito, se actualizan acá en el mismo PR. 21-11-2026 (T33j.3a): techos de 35022 a 37699, porque las cuadras de 1772 de la referencia histórica suman su versión de antes.",
-  "techos": { "valor": 37699, "tolerancia": 0.02 },
+  "_nota": "Conteos de referencia del pipeline de 1936 (mosaico con costura). Si un cambio del pipeline los mueve a propósito, se actualizan acá en el mismo PR. 21-11-2026 (T33j.3a): techos de 35022 a 37699, porque las cuadras de 1772 de la referencia histórica suman su versión de antes. 22-11-2026 (T33j.4a): de 37699 a 39395, por lo edificado revisado de la periferia y de las parciales.",
+  "techos": { "valor": 39395, "tolerancia": 0.02 },
   "manzanas": { "valor": 8023, "tolerancia": 0.02 },
   "arboles": { "valor": 5926, "tolerancia": 0.05 }
 }

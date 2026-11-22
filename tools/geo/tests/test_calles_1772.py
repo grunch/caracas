@@ -139,3 +139,13 @@ def test_la_pasada_final_solo_toca_las_casas_de_1578_y_no_atrasa_los_relevos_de_
     assert vida[0] == [1, 0]          # la de 1936 conserva su nacimiento: su antecesora de 1578 le pasa la posta a tiempo
     assert vida[1] == [0, 1]          # la de 1578 deja libre la calle en 1772
     assert sin_abrir == ['L1']        # la de 1936 la sigue cerrando: se informa, no se toca su vida
+
+
+def test_una_casa_de_1578_sobre_el_nucleo_de_una_calle_conocida_sale_de_1772_aunque_no_la_bloquee():
+    from epocas import abrir_calles_de_1772
+    # la casa 1 (de 1578) pisa el núcleo de la calle pero no la cierra de lado a lado
+    ciudad = {'vertices': [20, 0, 40, 0, 40, 40, 20, 40, 90, 44, 110, 44, 110, 52, 90, 52],
+              'techos': [[0, 4, 1, 0, 0], [4, 4, 1, 0, 0]], 'antes': [0]}
+    calles = [{'tramo': 'san-jacinto', 'puntos': [[0, 50], [200, 50]], 'banda_m': 10, 'medible': True, 'siempre': True}]
+    vida, quitar, sin_abrir = abrir_calles_de_1772(ciudad, [[1, 0], [0, 3]], set(), calles, METRO, desde=1)
+    assert vida[1] == [0, 1] and vida[0] == [1, 0] and sin_abrir == []

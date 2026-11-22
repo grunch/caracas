@@ -14,7 +14,8 @@
   "parametros_heuristicos": false,
   "derivado_mixto": false,
   "otras_epocas": true,
-  "referencia_aprobada": true
+  "referencia_aprobada": true,
+  "edificado_revisado": true
  },
  "pasos": {
   "calce-1772": [
@@ -126,6 +127,31 @@
     "entrada": "tools/geo/referencias/1772-unidades.json",
     "clase": "referencia_aprobada",
     "nota": "Unidades de la referencia histórica: vectorizar solo toma las aprobadas edificadas (cuadras_historicas.cargar_referencia); una pendiente nunca entra."
+   },
+   {
+    "entrada": "specs/auditoria-1772/edificado-original.json",
+    "clase": "edificado_revisado",
+    "nota": "Lo edificado (manchas rojas) trazado en el original de 1772; vectorizar solo usa lo que edificado-revisado.json da por fiel con los mismos sha256."
+   },
+   {
+    "entrada": "specs/auditoria-1772/edificado-revisado.json",
+    "clase": "edificado_revisado",
+    "nota": "Revisión a ojo de cada trazado (decisión del responsable del 22-11-2026): 143 fieles, 3 con solo la mancha mayor, 8 dudosos que no entran."
+   },
+   {
+    "entrada": "specs/auditoria-1772/limites-calce.json",
+    "clase": "historica_por_identidad",
+    "nota": "Sectores límite del calce: lo edificado de sus unidades no se lleva a 1936."
+   },
+   {
+    "entrada": "tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json",
+    "clase": "historica_por_identidad",
+    "nota": "El calce por identidad lleva a 1936 lo edificado de las unidades pendientes (sin anillo), con el error de su sector."
+   },
+   {
+    "entrada": "tools/geo/calles-historicas.json",
+    "clase": "historica_curada",
+    "nota": "Calles verificadas en los dos planos (San Jacinto–Traposos y otras): sus núcleos de calzada entran en calzada72, así que ninguna casa de 1772 las pisa."
    }
   ],
   "epocas": [
@@ -168,6 +194,16 @@
     "entrada": "tools/geo/referencias/1772-calles-1936.json",
     "clase": "historica_reproyectada",
     "nota": "Ejes en 1936 de las calles de la red de la referencia (trazado del original), por la identidad de sus cruces o por el calce por identidad, con la tolerancia del calce en su sector. epocas abre en 1772 los tramos que las casas bloquean; los sectores límite no se tocan."
+   },
+   {
+    "entrada": "tools/geo/referencias/1772-red.json",
+    "clase": "referencia_aprobada",
+    "nota": "Red de la referencia: sus tramos rectos con los dos cruces identificados dan los núcleos de calzada que ninguna casa de 1578 pisa en 1772."
+   },
+   {
+    "entrada": "tools/geo/calles-historicas.json",
+    "clase": "historica_curada",
+    "nota": "Calles verificadas en los dos planos (San Jacinto–Traposos y otras): ninguna casa de 1578 pisa su núcleo de calzada en 1772."
    }
   ]
  },

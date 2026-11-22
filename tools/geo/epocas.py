@@ -296,7 +296,8 @@ def vida_de_1936(nace36, ciudad, apertura=()):
     (cerrar_cuadras); los edificios públicos, no antes de PUBLICOS_DESDE; una casa que pisa uno ("cede")
     vive hasta que él nace. Con calles nuevas ("junta"; `apertura`: la época en que se abre cada grupo,
     apertura_de_juntas), la cuadra de antes ("antes" 1) vive hasta que se abre su calle y las de después
-    nacen recién entonces. Una casa que pisa una calle de 1772 de la referencia ("calzada72") no vive en 1772.
+    nacen recién entonces. Una casa que pisa una calle de 1772 de la referencia ("calzada72") o que queda debajo de una
+    casa de su reconstrucción ("tapada72") no vive en 1772.
     Una casa que no llega a vivir sobra: se quita."""
     n = len(ciudad["techos"])
     nace = cerrar_cuadras(nace36, ciudad.get("cuadras", [-1] * n))
@@ -310,10 +311,11 @@ def vida_de_1936(nace36, ciudad, apertura=()):
             nace[k] = 1
     vida, quitar = [], set()
     datos = zip(ciudad.get("cede", [-1] * n), ciudad.get("junta", [-1] * n), ciudad.get("antes", [0] * n))
-    calzada = ciudad.get("calzada72", [0] * n)
+    calzada, tapada = ciudad.get("calzada72", [0] * n), ciudad.get("tapada72", [0] * n)
     for k, (cede, junta, antes) in enumerate(datos):
         una = _vida_de_casa(k, nace, cede, junta, antes, apertura)
-        if una is not None and k < len(calzada) and calzada[k] and una[0] <= 1 and (una[1] == 0 or una[1] > 1):
+        afuera = (k < len(calzada) and calzada[k]) or (k < len(tapada) and tapada[k])
+        if una is not None and afuera and una[0] <= 1 and (una[1] == 0 or una[1] > 1):
             # pisa una calle de 1772 de la referencia: en 1772 no está (la calle manda sobre la casa heurística)
             una = None if antes or (una[1] and una[1] <= 2) else [2, una[1]]
         if una is None:
@@ -345,7 +347,9 @@ def abrir_calles_de_1772(ciudad, vida, quitar, calles, metro, area_minima_m2=1.0
         if not eje.get("medible", True):
             continue
         ahora = vivas()
-        if not bloqueado(eje, [figuras[k] for k in ahora], metro):
+        # `siempre`: una calle conocida (núcleo de calzada de la referencia o calle histórica verificada) se despeja
+        # aunque no quede cerrada de lado a lado
+        if not eje.get("siempre") and not bloqueado(eje, [figuras[k] for k in ahora], metro):
             continue
         nucleo = LineString(eje["puntos"]).buffer(NUCLEO_DE_CALZADA_M / 2 / metro, cap_style="flat")
         for k in ahora:
@@ -362,7 +366,7 @@ def abrir_calles_de_1772(ciudad, vida, quitar, calles, metro, area_minima_m2=1.0
                 quitar.add(k)
             else:
                 vida[k] = [max(2, nace_), muere]
-        if bloqueado(eje, [figuras[k] for k in vivas()], metro):
+        if not eje.get("siempre") and bloqueado(eje, [figuras[k] for k in vivas()], metro):
             sin_abrir.append(eje["tramo"])
     return vida, quitar, sin_abrir
 
@@ -387,7 +391,7 @@ def sin_techos(ciudad, vida, quitar):
         techos.append([len(vertices) // 2, cuantos, *resto])
         vertices.extend(v[2 * i:2 * (i + cuantos)])
     salida = {**ciudad, "vertices": vertices, "techos": techos}
-    for clave in ("esquinas", "cuadras", "cede", "junta", "antes", "calzada72"):
+    for clave in ("esquinas", "cuadras", "cede", "junta", "antes", "calzada72", "tapada72"):
         if clave in ciudad:
             salida[clave] = [ciudad[clave][k] for k in quedan if k < len(ciudad[clave])]   # las de 1578 no las traen
     if "cede" in ciudad:
@@ -567,8 +571,13 @@ def main():
     ciudad = unir(*sin_techos(ciudad36, vida36, quitar), ciudad78, vida78)
     if calles72.exists():
         # la ciudad final suma las casas de 1578: ninguna puede volver a cerrar una calle de 1772
+        from cuadras_historicas import ejes_de_calzada
+        red72 = json.loads((raiz / "tools/geo/referencias/1772-red.json").read_text())
+        verificadas = json.loads((raiz / "tools/geo/calles-historicas.json").read_text())["tramos"]
+        conocidas = [{"tramo": f"calzada-{k}", "puntos": [list(p) for p in e.coords], "banda_m": 0, "medible": True,
+                      "siempre": True} for k, e in enumerate(ejes_de_calzada(red72, verificadas))]
         vida_f, quitar_f, sin_abrir = abrir_calles_de_1772(ciudad, ciudad["vida"], set(),
-                                                            json.loads(calles72.read_text())["tramos"], metro,
+                                                            json.loads(calles72.read_text())["tramos"] + conocidas, metro,
                                                             desde=len(ciudad["techos"]) - len(ciudad78["techos"]))
         ciudad, vida_f = sin_techos(ciudad, vida_f, quitar_f)
         ciudad["vida"] = vida_f

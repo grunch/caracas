@@ -33,6 +33,31 @@ Los umbrales son inferidos y van declarados en el JSON. Las 25 unidades de los s
 - **Periferia sin casas (I1772-007).** Las unidades pendientes no entran al generador por la referencia: la regla de la fase 2 prohíbe incorporarlas por caja o cercanía. Lo que el generador arma ahí sale de caras de OSM y de la máscara de color, que en la periferia casi no reconocen edificado. Para edificarlas sin romper la regla, primero tienen que tener una geometría aprobable. Eso es el siguiente PR, T33j.4a: su cara del trazado del original llevada por el calce, con el error del sector declarado.
 - **Parciales rellenas.** Medidas sin descontar los patios, 22 parciales aprobadas quedaban cubiertas más del 85 %. Descontando patios y solares de las casas, ninguna pasa el umbral. Que huertas y solares del original se conserven a ojo se revisa con los conjuntos (T33j.4b).
 
+## Después de T33j.4a: lo edificado revisado del original en el generador
+
+Lo edificado revisado a ojo ([edificado-revisado.md](edificado-revisado.md)) entra al generador a través de la referencia (`cuadras_historicas.cargar_edificado`):
+
+- **Pendientes edificadas de la periferia.** Lo rojo se lleva a 1936 por el calce por identidad, y cada mancha arma su cuadra de 1772 entera edificada, aunque en 1936 haya ahí un parque, una plaza o un edificio público. Una mancha no reclama manzanas de 1936. Las casas de 1936 que quedan debajo de una casa de la reconstrucción se marcan (`tapada72`) y no viven en 1772.
+- **Parciales aprobadas.** Lo rojo se lleva a 1936 por la transformación de las cuatro esquinas de su anillo. El anillo decide qué manzanas de 1936 reemplaza, y las casas salen solo de las manchas rojas: las huertas del original quedan sin casas. Si ninguna mancha arma casas, el anillo no reemplaza nada.
+- **Continuas aprobadas.** Lo público de 1936 dentro de ellas se edifica en 1772: es posterior, y sus techos nacen desde 1889.
+- **Calles conocidas.** Los núcleos de calzada de las calles históricas verificadas (San Jacinto–Traposos y otras) entran en `calzada72`. En la ciudad final, ninguna casa de 1578 pisa el núcleo de una calle conocida en 1772.
+
+| Criterio | Línea base | Después |
+|---|---|---|
+| Edificadas con casas | 100 sin casas | 5 sin casas |
+| Parciales sin rellenar | 0 rellenas (22 sin descontar patios) | 0 |
+| Libres sin casas | sí | sí |
+| Hitos sin dobles | sí | sí |
+
+La ciudad de 1772 pasa de 4146 a 6067 casas visibles. Los techos del pipeline suben a 39.395. Con lo edificado revisado, «edificada con casas» mide si las casas cubren al menos el 50 % de lo que el original pinta rojo; antes medía el interior entero. Así una parcial con un solo edificio chico no cuenta como vacía. La puerta de la fase 3 sigue en 5/5 sobre esta ciudad.
+
+**Lo que queda sin casas (5).**
+- **U1772-0042, U1772-0232 y U1772-0264:** dudosas en la revisión, siguen pendientes.
+- **U1772-0118:** las casas cubren 0,46 de su L roja; lo que falta está en el borde, junto a la costura del mosaico.
+- **U1772-0149:** su franja roja cae, por el error del calce, sobre una calle de 1772, y la regla de calzada saca esas casas.
+
+El umbral no se baja para que pasen.
+
 ## Reproducir
 
 ```
