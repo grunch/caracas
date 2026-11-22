@@ -193,3 +193,15 @@ def test_la_recta_de_la_mayoria_se_encuentra_aunque_vaya_girada_y_haya_casas_del
     puntos = np.array([[26 + 2 * k, y] for k, y in enumerate(fachada + fondo)])
     centro, normal = recta_de_la_mayoria(puntos, 1.0, [(0, 1)])
     assert (np.abs((puntos - centro) @ normal) <= 1.0).sum() >= 90
+
+
+def test_la_banda_que_quita_alcanza_la_saliente_aunque_la_recta_vaya_oblicua_al_rayo():
+    # el caso de la revisión de #130: rayo n = (0, 1), recta de normal (−0,8; 0,6) por (100, 30), tope 16 px; la fachada
+    # tocada en (100, 5) está a 15 px de la recta, dentro del tope, y la banda tiene que llegar hasta ella
+    from shapely.geometry import Point
+    from fachadas import _franjas_de_un_lado
+    n, normal = np.array([0.0, 1.0]), np.array([-0.8, 0.6])
+    recta = (np.array([100.0, 30.0]), normal, float(n @ normal))
+    golpes = [(0, np.array([100.0 + k, 5.0]), np.array([100.0 + k, 0.0])) for k in (0, 2, 4)]
+    quita = [f for j, suma, f in _franjas_de_un_lado(golpes, n, recta, np.array([2.0, 0.0]), 16) if not suma]
+    assert any(f.buffer(1e-6).contains(Point(100, 5)) for f in quita)

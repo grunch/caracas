@@ -146,7 +146,10 @@ def _franjas_de_un_lado(golpes, n, recta, d_ancho, tope):
         adentro = [h + n for h, _p in seguidos]
         adentro = [adentro[0] - d_ancho] + adentro + [adentro[-1] + d_ancho]
         franjas.append((j, True, Polygon([q0, q1] + adentro[::-1]).buffer(0)))
-        franjas.append((j, False, Polygon([q0, q1, q1 - n * (tope + 1), q0 - n * (tope + 1)])))
+        # el tope se mide en perpendicular a la recta y la banda corre por el rayo: con la recta oblicua al rayo, la
+        # banda va 1/coseno más lejos para llegar a la saliente más lejana que se admite
+        hondo = n * (tope + 1) / recta[2]
+        franjas.append((j, False, Polygon([q0, q1, q1 - hondo, q0 - hondo])))
     return franjas
 
 
