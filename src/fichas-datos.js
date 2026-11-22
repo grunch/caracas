@@ -67,10 +67,14 @@ export const FICHAS = Object.freeze({
   },
   'casa-amarilla': {
     textos: [
-      [3, 'Frente al lado oeste de la plaza. En 1870 era la Casa de Gobierno: un caserón de esquina de dos pisos, con balcones y tejado de teja, como lo pintó Ramón Bolet Peraza. El plano de 1889 la numera 5, «Casa amarilla».'],
-      [4, 'Una postal de hacia 1904 la muestra ya con la fachada de cornisa, balcones de hierro y remate central, frente a los árboles de la plaza.'],
-      [5, 'El plano de 1936 la rotula «Min. del Exterior».'],
+      [1, 'En el lado oeste de la Plaza Mayor, la sede del Ayuntamiento, terminada en 1750, era contigua a la cárcel. El cuarto de manzana describe el solar original, no una medida comprobada del edificio actual. Aquí ocurrió la escena del Cabildo del 19 de abril de 1810. Se representan dos inmuebles con patios y un solar posterior; sus formas son hipótesis.'],
+      [2, 'Los inmuebles dañados en el terremoto de 1812 fueron reunidos y abiertos como Casa de Gobierno en 1842. El modelo de 1843 conserva tejados y una fachada sobria; la pintura de Bolet de 1870 sirve como referencia retrospectiva, no como testimonio directo de ese año.'],
+      [3, 'La reforma de Juan Hurtado Manrique de 1874 dio al conjunto su fachada neoclásica y el pabellón sur. El amarillo y la residencia presidencial se asocian con 1877. El modelo incluye una puerta en ese extremo, tres vanos arqueados sobre un balcón común y el asta con bandera. El plano de 1889 la numera 5, «Casa amarilla».'],
+      [4, 'La postal de hacia 1904 muestra cornisa, balcones de hierro y remate central. Se conserva esa envolvente en 1911. La asignación de todo el inmueble a Relaciones Exteriores ocurrió en 1912; no se anticipa en esta fecha.'],
+      [5, 'El plano de 1936 la rotula «Min. del Exterior». Se representa una cubierta mixta por la reforma parcial de hacia 1930; la ubicación de la platabanda es hipotética. No se añade la ampliación de 1938 ni se anticipa la sustitución completa de los tejados de 1957.'],
     ],
+    hoy: 'la Casa Amarilla Antonio José de Sucre, sede histórica de la Cancillería.',
+    dudas: 'Modelo interpretativo aprobado visualmente, no un levantamiento: medidas, linderos, alzados coloniales, patios y casamata son hipótesis. La pintura de 1870 orienta 1843; las fotos modernas afinan los ornamentos sin demostrar su fecha. Relieves y escudos simplificados. La localización de las cubiertas reformadas en 1930 queda por verificar.',
   },
   capitolio: {
     textos: [

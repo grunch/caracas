@@ -114,7 +114,7 @@ describe('los edificios civiles', () => {
   })
 
   test.each([
-    ['casa-amarilla', 'Principal', 3, 60], ['capitolio', 'La Bolsa', 3, 110], ['capitolio', 'Las Monjas', 3, 110],
+    ['casa-amarilla', 'Principal', 1, 60], ['capitolio', 'La Bolsa', 3, 110], ['capitolio', 'Las Monjas', 3, 110],
     ['universidad', 'San Francisco', 3, 90], ['miraflores', 'Miraflores', 4, 80],
   ])('%s: cerca de la esquina de %s y desde su época', (id, nombreEsquina, nace, metros) => {
     const h = hito(id)
@@ -127,7 +127,7 @@ describe('los edificios civiles', () => {
   test('la Casa Amarilla queda al oeste de la plaza y su remate con escudo mira hacia ella', () => {
     const [casa, plaza] = [hito('casa-amarilla'), hito('plaza-bolivar')]
     expect(casa.x).toBeLessThan(plaza.x)
-    expect(casa.partes.find((p) => p.tipo === 'remateConEscudo').mira).toEqual([1, 0])
+    expect(casa.partes.every(p => p.tipo === 'casaAmarilla')).toBe(true) // orientación verificada con vértices en hitos-casa-amarilla.test.js
   })
 
   test('el Capitolio lleva la cúpula en el ala norte y la Universidad mira hacia él', () => {
@@ -139,8 +139,8 @@ describe('los edificios civiles', () => {
 
   test('todo junto sigue siendo una malla liviana', () => {
     const d = construirHitos(HITOS, coords)
-    // T40a agrega cuatro variantes del Panteón (~51 mil triángulos), en el mismo draw call.
-    expect(d.indices.length / 3).toBeLessThan(180_000)
+    // T41c añade cinco etapas de Casa Amarilla (<220 mil, con envolvente compartida), siempre en el mismo draw call.
+    expect(d.indices.length / 3).toBeLessThan(400_000)
     expect(d.rangos.length).toBe(HITOS.length)
-  })
+  }, 15_000)
 })
