@@ -182,3 +182,26 @@ def test_dos_grupos_vecinos_retirados_no_se_reparten_el_mismo_relleno():
     a, b = global_de(nuevos[0], (140, 260)), global_de(nuevos[1], (140, 260))
     assert not (a & b).any()
     assert (a | b)[20:26, 70:140].all()
+
+
+def test_la_recta_de_la_mayoria_se_encuentra_aunque_vaya_girada_y_haya_casas_del_fondo():
+    # L1772-0085 lado −1 (ciudad de 2b31cda): profundidad de la fachada en cada estación (px, cada 2 px). 90 puntos
+    # siguen una fachada girada 4° respecto del eje; al final, otra fachada 10 m más adentro. El ajuste de todos los
+    # puntos se tuerce y la dirección del eje no sigue la fachada: la puerta tomaba una recta con 20 puntos
+    fachada = [13.6 - 0.1495 * k for k in range(90)]
+    fondo = [9.3, 24.3, 23.9, 23.4, 23.0, 22.5, 22.0, 21.6, 21.1, 21.1]
+    puntos = np.array([[26 + 2 * k, y] for k, y in enumerate(fachada + fondo)])
+    centro, normal = recta_de_la_mayoria(puntos, 1.0, [(0, 1)])
+    assert (np.abs((puntos - centro) @ normal) <= 1.0).sum() >= 90
+
+
+def test_la_banda_que_quita_alcanza_la_saliente_aunque_la_recta_vaya_oblicua_al_rayo():
+    # el caso de la revisión de #130: rayo n = (0, 1), recta de normal (−0,8; 0,6) por (100, 30), tope 16 px; la fachada
+    # tocada en (100, 5) está a 15 px de la recta, dentro del tope, y la banda tiene que llegar hasta ella
+    from shapely.geometry import Point
+    from fachadas import _franjas_de_un_lado
+    n, normal = np.array([0.0, 1.0]), np.array([-0.8, 0.6])
+    recta = (np.array([100.0, 30.0]), normal, float(n @ normal))
+    golpes = [(0, np.array([100.0 + k, 5.0]), np.array([100.0 + k, 0.0])) for k in (0, 2, 4)]
+    quita = [f for j, suma, f in _franjas_de_un_lado(golpes, n, recta, np.array([2.0, 0.0]), 16) if not suma]
+    assert any(f.buffer(1e-6).contains(Point(100, 5)) for f in quita)
