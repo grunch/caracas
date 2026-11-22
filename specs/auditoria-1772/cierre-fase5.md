@@ -101,10 +101,52 @@ Cambios:
 - La ciudad de 1772 tiene 6320 casas visibles.
 - Los techos del pipeline quedan en 39.305, dentro de la tolerancia de 39.395.
 
+## Después de T33j.5d: una línea de fachada por frente
+
+Lo rojo y las cuadras de 1772 llegan a 1936 por el calce, con el error de su sector. Su borde no cae sobre una recta: las fachadas de un frente quedan en escalera, en rampa o corridas unas de otras. Casi todas las desalineadas eran casas de la reconstrucción (449 de 472).
+
+El generador mide cada frente como la puerta, antes de repartir las casas (`tools/geo/fachadas.py`, llamado desde `vectorizar`):
+
+- **Los mismos rayos.** Rayos cada 1 m sobre los tramos rectos medibles de `1772-calles-1936.json`, lejos de las esquinas. Cada rayo busca la primera cuadra de la reconstrucción y por esos puntos se ajusta la recta de la mayoría. Las estaciones y la recta son las mismas funciones que usa la puerta.
+- **Fachada sobre la recta.** Lo que queda detrás de la recta, hasta **8 m** (el tope, inferido del error del calce en los sectores medibles), se rellena hasta ella. Lo que sale hacia la calle se corta. Entra toda la fachada, también la que ya estaba dentro de la tolerancia: si no, sus escalones de un píxel quedaban entre las franjas corregidas.
+- **Dónde no se rellena.** Nunca en lo vedado (los núcleos de calzada de las calles de 1772 y las plantas de los hitos) ni en lo que ya es de otro grupo. Un retiro de más de 8 m no se toca: no es el calce corrido.
+- **El polígono del grupo.** Se corrige junto con la máscara, así el reparto por lados sigue la fachada nueva. Las migas sueltas y las rendijas de las franjas se descartan. Si con 1 m de simplificación el polígono no vuelve a sus pocos lados, el grupo se reparte por su máscara.
+- **Casas de 1936 en la calle de 1772.** Lo que queda entre el eje y la fachada alineada es calle de 1772 (`calles_delante`). Una casa de 1936 que pisa ahí 0,01 m² o más no vive en 1772 (`marcar_tapadas`). Antes, esas hileras dejaban la fachada a menos de 2 m de ellas y le quitaban el acceso.
+
+Va también el caso que CodeRabbit dejó abierto en #128. Una mancha que cede y se queda sin polígono se reparte por su máscara, sin el reparto exacto: ese reparto le infería un polígono con 2 m de tolerancia y le devolvía lo cedido. Sus huellas se recortan por el contorno exacto de la máscara.
+
+| Criterio | Después de T33j.5c | Después de T33j.5d |
+|---|---|---|
+| Frentes alineados | 472 casas desalineadas | **222** (en 149 frentes; mediana del desvío 5,8 m) |
+| Lotes sin solapes | 0 pares | 0 (cumple) |
+| Casas con acceso | 3 sin acceso | **4** |
+| Calle aprobada | fase 3 en 5/5 | 5/5 |
+
+- La fase 4 sigue en 6/6.
+- La ciudad de 1772 tiene 6319 casas visibles.
+- Los techos del pipeline quedan en 39.608, dentro de la tolerancia de 39.395.
+
+De las 222 que quedan:
+
+| Origen | Hasta 1 m | 1–3 m | 3–8 m | Más de 8 m |
+|---|---|---|---|---|
+| Reconstrucción de 1772 | 44 | 19 | 61 | 87 |
+| 1936 | 1 | — | 3 | 5 |
+| 1578 | — | — | 1 | 1 |
+
+A ojo se ven cuatro causas:
+
+1. **Retiros de más de 8 m.** Son manchas rojas que el calce deja muy adentro, más allá del tope. Correrlas más es mover la reconstrucción sin evidencia.
+2. **Ejes metidos en las casas.** En 14 frentes el eje llevado a 1936 corre pegado a una fachada, o por dentro de ella: los rayos del otro lado arrancan tocando casas del frente opuesto.
+3. **Frentes mixtos.** La recta del generador sale solo de la reconstrucción; la de la puerta también cuenta las casas de 1936 que siguen en pie en 1772.
+4. **Casas que no llenan su cuadra.** Un lote de la cuadra modelo que no da a la calle queda de solar, y el rayo entra por ese hueco hasta una casa del fondo.
+
+Las 4 sin acceso son cuñas de esquina o lotes de fondo junto a casas de 1936, en la esquina que el frente no mide.
+
 ## Lo que sigue
 
-- **Frentes (T33j.5d):** las 472 casas desalineadas, sobre todo de las manchas rojas y de los anillos de las continuas.
-- **Las 3 casas sin acceso.**
+- **Frentes (T33j.5e):** las 222 casas desalineadas, empezando por los frentes mixtos y los huecos de solar. Los retiros de más de 8 m y los ejes metidos en las casas se revisan a ojo antes de decidir.
+- **Las 4 casas sin acceso.**
 
 En cada paso la puerta de la fase 3 tiene que seguir en 5/5 y la de la fase 4 en 6/6.
 

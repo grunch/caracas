@@ -85,9 +85,9 @@ export const PASOS = [
       'tools/geo/referencias/1772-red.json', 'tools/geo/referencias/1772-unidades.json',
       'specs/auditoria-1772/edificado-original.json', 'specs/auditoria-1772/edificado-revisado.json',
       'specs/auditoria-1772/limites-calce.json', 'tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json',
-      'tools/geo/calles-historicas.json'],
+      'tools/geo/calles-historicas.json', 'tools/geo/referencias/1772-calles-1936.json'],
     salidas: [`${D}/ciudad-1936.json`, `${D}/patios-de-casas.png`],
-    codigo: [...GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'caras', 'huellas', 'cuadras_historicas', 'edificado_original', 'calce', 'tps', 'cierre_fase3'),
+    codigo: [...GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'caras', 'huellas', 'cuadras_historicas', 'edificado_original', 'calce', 'tps', 'cierre_fase3', 'fachadas'),
       'tools/hitos-planta.mjs', ...['catedral', 'iglesias', 'civiles', 'panteon', 'plaza-bolivar', 'marco'].map((n) => `src/hitos/datos/${n}.js`)],
     cmd: async () => {
       const { plaza, metro } = await leerJson(`${D}/mosaico.json`)

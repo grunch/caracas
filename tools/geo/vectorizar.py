@@ -35,6 +35,7 @@ from alas import CRUJIA_M, PATIO, SOLAR, alas_de_casa, frentes_de_manzana  # noq
 from cuadra import alas_modelo, casa_modelo, crujia_de_cuadra, es_de_solo_casas  # noqa: E402
 from cuadras_historicas import es_completa  # noqa: E402
 from huellas import huellas_de_manzana  # noqa: E402
+from fachadas import alinear_fachadas, calles_delante  # noqa: E402
 from caras import RETIRO_MINIMO_M, Red, ajustar_cara, mascara_de_lineas  # noqa: E402
 from lados import CUADRA_MINIMA_M2, _relleno, cortar_por_calles, cuadras_pegadas, lotes_por_lados  # noqa: E402
 from lotes import (  # noqa: E402
@@ -84,6 +85,25 @@ def poligono_de(mascara, desplazamiento, tolerancia_px):
 
 
 GRILLA_PX = 1e-3   # las restas y recortes redondean a la grilla de las coordenadas (milésimas, agregar_techo)
+
+
+def _contorno_exacto(mascara, origen):
+    """El polígono de los píxeles de la máscara, sin buffer ni simplificación (por tramos de cada fila)."""
+    from shapely.geometry import box
+    cajas = []
+    for f in np.flatnonzero(mascara.any(axis=1)):
+        fila = np.r_[False, mascara[f], False].astype(np.int8)
+        cambios = np.flatnonzero(np.diff(fila))
+        cajas += [box(origen[0] + a, origen[1] + f, origen[0] + b, origen[1] + f + 1) for a, b in zip(cambios[::2], cambios[1::2])]
+    return unary_union(cajas)
+
+
+def _recorte_de(manzana, poligono, origen, salida):
+    """Por dónde se recortan las huellas de una cuadra: su polígono; o, en la reconstrucción sin polígono, el contorno
+    exacto de su máscara (la simplificación de una huella no corta en diagonal lo que la mancha cedió a otra)."""
+    if poligono is not None:
+        return Polygon(np.asarray(poligono) + origen)
+    return _contorno_exacto(manzana, origen) if salida.get('_antes') else None
 
 
 def huellas_de_casas(piezas, tolerancia_px, recorte=None):
@@ -190,7 +210,10 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
     de los edificios públicos; el lote que pisa uno en menos de CEDE_DESDE pierde ese pedazo (el que lo pisa en
     más le cede el lugar entero cuando nace: publico_que_pisa)."""
     semilla_cuadra = semilla_de(int(origen[0]) + 5, int(origen[1]) + 11)
-    exactas = huellas_de_manzana(manzana, poligono, metro, semilla_cuadra) if publico is None or not publico.any() else None
+    # una cuadra de la reconstrucción sin polígono es su máscara: el reparto exacto le inferiría uno con 2 m de
+    # tolerancia y le devolvería lo que cedió a otra mancha (_sin_pisarse)
+    exacto = (publico is None or not publico.any()) and not (poligono is None and salida.get('_antes'))
+    exactas = huellas_de_manzana(manzana, poligono, metro, semilla_cuadra) if exacto else None
     x, y = origen
     figuras = []
     if exactas is not None:
@@ -215,7 +238,7 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
             if mascara.sum() < area_min_px or lote['frente'] < FRENTE_MINIMO:
                 continue
             piezas.append((lote, mascara, (x + zona[1].start, y + zona[0].start)))
-        recorte = None if poligono is None else Polygon(np.asarray(poligono) + (x, y))
+        recorte = _recorte_de(manzana, poligono, (x, y), salida)
         huellas = huellas_de_casas([(m, o) for _, m, o in piezas], tolerancia_px, recorte)
         figuras = [(lote, figura) for (lote, _, _), figura in zip(piezas, huellas)]
     finales = []
@@ -269,7 +292,7 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
     de_esquina = casas_de_esquina(casas, esquinas_de_manzana(manzana, metro), RADIO_ESQUINA_M / metro) if hay_esquinas else set()
     piezas = [(casa, zona) for casa, zona in enumerate(ndimage.find_objects(casas), start=1)
               if zona is not None and (casas[zona] == casa).sum() >= area_min_px]
-    recorte = None if poligono is None else Polygon(np.asarray(poligono) + (x, y))
+    recorte = _recorte_de(manzana, poligono, (x, y), salida)
     huellas = huellas_de_casas([(casas[zona] == casa, (x + zona[1].start, y + zona[0].start)) for casa, zona in piezas],
                                tolerancia_px, recorte)
     for (casa, zona), figura in zip(piezas, huellas):
@@ -743,10 +766,12 @@ def plantas_de_1772(hitos):
 TAPADA_MINIMA_M2 = 0.01     # como la puerta de la fase 5: una casa de 1936 que pisa esto de una de 1772 no vive en 1772
 
 
-def marcar_tapadas(salida, metro, area_minima_m2=TAPADA_MINIMA_M2, plantas=()):
+def marcar_tapadas(salida, metro, area_minima_m2=TAPADA_MINIMA_M2, plantas=(), delante=()):
     """[0/1 por techo]: 1 si es una casa de 1936 («antes» 0) que queda debajo de una casa de la reconstrucción de 1772 de
-    la referencia (grupo con `hasta`), o que pisa más del 10 % de su huella sobre la planta de un hito en pie en 1772
-    (`plantas`, su reserva de ocupación): no puede vivir en 1772. tools/geo/epocas.py la saca de 1772."""
+    la referencia (grupo con `hasta`), que pisa más del 10 % de su huella sobre la planta de un hito en pie en 1772
+    (`plantas`, su reserva de ocupación) o que se para en la calle de 1772 delante de la fachada de la reconstrucción
+    (`delante`: fachadas.calles_delante, desde TAPADA_MINIMA_M2): no puede vivir en 1772. tools/geo/epocas.py la saca
+    de 1772."""
     from shapely.geometry import Polygon as _Poligono
     from shapely.strtree import STRtree
     v, hasta = salida['vertices'], salida.get('juntas_hasta', [])
@@ -760,7 +785,8 @@ def marcar_tapadas(salida, metro, area_minima_m2=TAPADA_MINIMA_M2, plantas=()):
         tapada = de_1936 and arbol is not None and any(
             f.intersection(de_1772[j]).area * metro ** 2 >= area_minima_m2 for j in arbol.query(f, predicate='intersects'))
         en_hito = de_1936 and any(f.intersection(p).area > DOBLE_MINIMO * f.area for p in plantas)
-        marcas.append(int(tapada or en_hito))
+        en_calle = de_1936 and any(f.intersection(d).area * metro ** 2 >= area_minima_m2 for d in delante)
+        marcas.append(int(tapada or en_hito or en_calle))
     return marcas
 
 
@@ -827,7 +853,7 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
             cajas[etiqueta] = (x + dx, y + dy, pw, ph)
             lista.append((etiqueta, parte))
     poligonos = _poligonos_de_cara(con_red, lista, cajas, metro) if con_red is not None else {}
-    antes = []
+    antes, delante = [], []
     if con_red is not None and red.get('edificado72') is not None:
         areas = {etiqueta: int(parte.sum()) for etiqueta, parte in lista}
         referencia, revisado = red.get('referencia72', ()), red.get('edificado_revisado', ())
@@ -843,6 +869,11 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
         for g in _cuadras_de_antes(con_red, np.asarray(red['edificado72'], bool), clases, cuadras, areas, metro,
                                    red.get('completas72', ()), ocupado):
             antes.append({**g, 'miembros': g['miembros'] - tomadas})
+        if red.get('frentes72'):
+            # una línea de fachada por frente recto: lo rojo y las cuadras de 1772 llegan a 1936 por el calce, corridas
+            antes = alinear_fachadas(antes, red['frentes72'], clases, metro, vedado=reservas, edificado=CLASE['edificado'],
+                                     calle=CLASE['calle'], lados_maximos=LADOS_MAXIMOS)
+            delante = [calles_delante(antes, red['frentes72'], metro)]
     de_grupo = {m: j for j, grupo in enumerate(antes) for m in grupo['miembros']}
     for etiqueta, parte in lista:
         x, y, w, h = cajas[etiqueta]
@@ -861,7 +892,7 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
     if red is not None and red.get('calzada72'):
         salida['calzada72'] = marcar_calzada(salida, red['calzada72'], metro)
     if red is not None and red.get('referencia72') is not None:
-        salida['tapada72'] = marcar_tapadas(salida, metro, plantas=red.get('reservas72', ()))
+        salida['tapada72'] = marcar_tapadas(salida, metro, plantas=red.get('reservas72', ()), delante=delante)
     for privada in ('publicos', 'n_cuadras', '_junta', '_antes'):
         salida.pop(privada, None)
     return salida
@@ -910,6 +941,8 @@ def main():
         red['reservas72'] = plantas_de_1772(hitos)
         red['referencia72'], red['calzada72'], red['edificado_revisado'] = cargar_referencia_de_archivos(
             Path(__file__).resolve().parents[2] / 'specs' / 'auditoria-1772')
+        # los frentes de la red de 1772 llevada a 1936: sobre ellos se alinean las fachadas de la reconstrucción
+        red['frentes72'] = json.loads((Path(__file__).parent / 'referencias' / '1772-calles-1936.json').read_text())['tramos']
     res = vectorizar(clases, a.escala, plaza, red=red)
     with open(a.salida, 'w') as f:
         json.dump(res, f)
