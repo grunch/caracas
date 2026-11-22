@@ -14,7 +14,9 @@ const listo = async (page) => {
  * Dibuja la plaza desde arriba en una época (fijando los uniforms: no depende de crece.json ni de la ola) y
  * devuelve el color medio de un recuadro de `lado` píxeles en el centro de la vista, que mira a (x, z).
  */
-function colorDeLaPlaza(page, epoca, { x = 4, z = 2.5, lado = 40 } = {}) {
+// el centro de la plaza en el mundo (m desde el pedestal de la estatua, el origen): su recuadro va centrado entre las
+// cuatro esquinas que la rodean, en (8964,25; 6834,5) px del plano, con el origen en (8968,2; 6839,0) px
+function colorDeLaPlaza(page, epoca, { x = -2, z = -2.25, lado = 40 } = {}) {
   return page.evaluate(({ epoca, x, z, lado }) => {
     const { ciudad: { U }, cam, camera, renderer, scene } = window.lab
     U.uOla.value = 1e5
