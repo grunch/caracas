@@ -98,3 +98,28 @@ def test_una_unidad_de_un_sector_limite_del_calce_no_se_mide_y_queda_listada():
                      limites={'S9'})
     assert p['edificadas_con_casas']['cumplido'] is True
     assert p['sin_medir_por_limite_del_calce'] == ['U3']
+
+
+def test_los_patios_y_solares_de_una_casa_no_cuentan_como_cubiertos():
+    from cierre_fase4 import abiertos_de_casas
+    # una casa de 100 × 100 px con un patio de 40 × 40 en el medio (marco con origen (0, 0) y ejes x, y)
+    c = ciudad((0, 0, 100, 100))
+    c['marcos'] = [[0, 0.0, 0.0, 1.0, 0.0, 100.0, 100.0, 0, 0, 0, 1]]
+    c['alas'] = [[0, 30.0, 30.0, 70.0, 70.0]]   # tipo 0 = PATIO
+    abiertos = abiertos_de_casas(c)
+    assert abiertos.area == 1600
+
+
+def test_la_puerta_no_se_cierra_con_una_unidad_sin_ubicar():
+    u = unidades() + [{'id': 'U9', 'estado': 'pendiente', 'ocupacion': 'continua', 'nodos': None}]
+    p = puerta_fase4(ciudad=ciudad((0, 0, 100, 100), (300, 0, 340, 100)), red=red(), unidades=u, cajas=cajas(),
+                     hitos=[], metro=METRO)
+    assert p['sin_ubicar'] == ['U9'] and p['fase_4_cerrable'] is False
+
+
+def test_una_casa_suprimida_por_un_hito_no_cuenta_como_casa_de_la_unidad():
+    hito = {'id': 'h', 'nace': 1, 'muere': 0, 'planta': [[[0, 0], [100, 0], [100, 100], [0, 100]]],
+            'suprime': [[[0, 0], [100, 0], [100, 100], [0, 100]]]}
+    p = puerta_fase4(ciudad=ciudad((0, 0, 100, 100), (300, 0, 340, 100)), red=red(), unidades=unidades(), cajas=cajas(),
+                     hitos=[hito], metro=METRO)
+    assert {'unidad': 'U1', 'medida': 'anillo'} in p['edificadas_con_casas']['sin_casas']

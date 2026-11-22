@@ -50,11 +50,38 @@ def figura_de_unidad(unidad, por_id, cajas, retiro_m=RETIRO_M, metro=METRO):
     return (interior, medida) if not interior.is_empty else (None, None)
 
 
-def cobertura(figura, casas):
-    """Fracción de la figura bajo casas (sin contar dos veces lo que se solapa)."""
+PATIO, SOLAR = 0, 1          # como tools/geo/alas.py: las alas abiertas de una casa de patio
+
+
+def abiertos_de_casas(ciudad):
+    """La unión de los patios y solares de las casas de patio (marcos y alas de la salida del generador), en px del
+    mosaico: dentro del contorno de una casa, pero abiertos (el visor los recorta del techo)."""
+    rectangulos = []
+    for _, ox, oy, eux, euy, _ancho, _fondo, _a, _b, primera, cuantas in ciudad.get('marcos', []):
+        for tipo, u0, v0, u1, v1 in ciudad.get('alas', [])[primera:primera + cuantas]:
+            if tipo in (PATIO, SOLAR):
+                rectangulos.append(Polygon([(ox + u * eux - v * euy, oy + u * euy + v * eux)
+                                            for u, v in ((u0, v0), (u1, v0), (u1, v1), (u0, v1))]))
+    return unary_union(rectangulos) if rectangulos else Polygon()
+
+
+def cobertura(figura, casas, abiertos=None):
+    """Fracción de la figura bajo casas (sin contar dos veces lo que se solapa ni sus patios y solares abiertos)."""
     if figura.area == 0:
         return 0.0
-    return round(unary_union([c.intersection(figura) for c in casas if c.intersects(figura)]).area / figura.area, 4)
+    cubierto = unary_union([c.intersection(figura) for c in casas if c.intersects(figura)])
+    if abiertos is not None and not abiertos.is_empty:
+        cubierto = cubierto.difference(abiertos)
+    return round(cubierto.area / figura.area, 4)
+
+
+def visibles(casas, hitos, epoca=EPOCA_1772):
+    """Las casas que el visor deja a la vista en `epoca`: sin las que pisan la zona de supresión de un hito en pie
+    (src/hitos/suprimir.js). No modela la excepción de las casas cuyo solar es lo único que toca el hito: es más
+    estricta que el visor, así que no esconde faltantes."""
+    zonas = [Polygon(z) for h in hitos if h['nace'] <= epoca and (h['muere'] == 0 or h['muere'] > epoca)
+             for z in h.get('suprime', [])]
+    return [(k, c) for k, c in casas if not any(c.intersects(z) for z in zonas)]
 
 
 def dobles_de_hitos(hitos, casas, epoca=EPOCA_1772):
@@ -74,7 +101,9 @@ def dobles_de_hitos(hitos, casas, epoca=EPOCA_1772):
 
 def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=frozenset()):
     """Criterios de la fase 4 con su cumplimiento sobre las casas de 1772; `fase_4_cerrable` exige todos."""
-    casas = casas_de_epoca(ciudad)
+    todas = casas_de_epoca(ciudad)
+    casas = visibles(todas, hitos)
+    abiertos = abiertos_de_casas(ciudad)
     figuras = [c for _, c in casas]
     arbol = STRtree(figuras) if figuras else None
     por_id = {n['id']: n for n in red['nodos']}
@@ -90,7 +119,7 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
             sin_ubicar.append(u['id'])
             continue
         cerca = [] if arbol is None else [figuras[j] for j in arbol.query(figura, predicate='intersects')]
-        cubierta = cobertura(figura, cerca)
+        cubierta = cobertura(figura, cerca, abiertos)
         medidas.append({'unidad': u['id'], 'ocupacion': u['ocupacion'], 'medida': medida, 'cobertura': cubierta})
         if u['ocupacion'] in EDIFICADAS and cubierta < COBERTURA_MINIMA:
             sin_casas.append({'unidad': u['id'], 'medida': medida})
@@ -98,12 +127,13 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
             con_casas.append({'unidad': u['id'], 'medida': medida})
         if u['ocupacion'] == 'parcial' and medida == 'anillo' and cubierta > COBERTURA_PARCIAL_MAXIMA:
             rellenas.append(u['id'])
-    dobles = dobles_de_hitos(hitos, casas)
+    dobles = dobles_de_hitos(hitos, todas)
     criterios = OrderedDict([
         ('edificadas_con_casas', {'cumplido': not sin_casas, 'sin_casas': sin_casas}),
         ('libres_sin_casas', {'cumplido': not con_casas, 'con_casas': con_casas}),
         ('parciales_sin_rellenar', {'cumplido': not rellenas, 'umbral': COBERTURA_PARCIAL_MAXIMA, 'rellenas': rellenas}),
         ('hitos_sin_dobles', {'cumplido': not dobles, 'dobles': dobles}),
+        ('unidades_medidas', {'cumplido': not sin_ubicar, 'sin_ubicar': sin_ubicar}),
     ])
     return {**criterios, 'umbrales_inferidos': {'cobertura_minima': COBERTURA_MINIMA, 'retiro_m': RETIRO_M},
             'sin_ubicar': sin_ubicar, 'sin_medir_por_limite_del_calce': sin_medir, 'casas_1772': len(casas),
@@ -143,7 +173,12 @@ def main():
     censo = {u['id_fuente']: u for u in _leer(args.carpeta / 'unidades-original.json')['unidades']}
     hitos = json.loads(subprocess.run(['node', str(raiz / 'tools' / 'hitos-planta.mjs')], check=True, capture_output=True,
                                       text=True, cwd=raiz).stdout)
-    limites = {s['sector'] for s in _leer(args.carpeta / 'limites-calce.json')['sectores']}
+    from anclas_identidad import huella_calce
+    registro = _leer(args.carpeta / 'limites-calce.json')
+    if registro.get('huella_calce') != huella_calce(config['gcps'], config.get('suavizado', 0.0)):
+        raise SystemExit('limites-calce.json es de otro calce (huella_calce distinta): hay que revisar de nuevo los '
+                         'sectores límite antes de excluirlos')
+    limites = {s['sector'] for s in registro['sectores']}
     puerta = puerta_fase4(_leer(args.ciudad), red, unidades, cajas_por_calce(unidades, censo, calce.a_1936), hitos,
                           limites=limites)
     informe = OrderedDict([
