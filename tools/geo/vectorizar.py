@@ -441,7 +441,7 @@ def _de_referencia(r, clases, metro):
     return (x0, y0), cuadra, _sin_astillas(cuadra & calle, metro) & cuadra, poligono
 
 
-def _cuadras_de_referencia(referencia, clases, cuadras, areas, metro, edificado=()):
+def _cuadras_de_referencia(referencia, clases, cuadras, areas, metro, edificado=(), reservas=()):
     """Las cuadras de 1772 de la referencia histórica aprobada (cuadras_historicas.cargar_referencia): el anillo de
     ejes de la unidad, ajustado a las fachadas (o encogido si no las hay), determina el contorno; nada de la cara de
     OSM ni de la máscara de color. Cada manzana de 1936 que cae sobre la referencia es de la unidad que más la cubre
@@ -470,6 +470,10 @@ def _cuadras_de_referencia(referencia, clases, cuadras, areas, metro, edificado=
             pieza = _de_edificado(figura, clases, metro)
             if pieza is not None:
                 candidatas.append(({'id': e['id'], 'rellenar': True, 'rol': 'casas'}, *pieza))
+    if reservas:
+        # la planta de un hito en pie en 1772 es su reserva de ocupación: ninguna casa de 1772 la cruza (T33j.4b)
+        candidatas = [(r, o, cuadra & ~_mascara_de(reservas, o, cuadra.shape), abierto & ~_mascara_de(reservas, o, cuadra.shape), p)
+                      for r, o, cuadra, abierto, p in candidatas]
     # qué manzanas de 1936 son de la referencia lo deciden todas las candidatas; el dueño, solo una aceptada (si la que
     # más la cubre no pasa la validación, la manzana pasa a otra: sus casas de 1936 nunca conviven con la reconstrucción)
     de_toda, _ = _duenos(candidatas, range(len(candidatas)), cuadras, areas)
@@ -590,9 +594,22 @@ def marcar_calzada(salida, ejes, metro, area_minima_m2=1.0):
     return marcas
 
 
-def marcar_tapadas(salida, metro, area_minima_m2=1.0):
+EPOCA_1772 = 1
+DOBLE_MINIMO = 0.10         # como cierre_fase4: una casa que pisa más que esto de su huella sobre la planta de un hito
+
+
+def plantas_de_1772(hitos):
+    """Las plantas (polígonos en px del mosaico) de los hitos modelados en pie en 1772 (tools/hitos-planta.mjs): su
+    reserva de ocupación. Ninguna casa de 1772 las cruza (T33j.4b)."""
+    from shapely.geometry import Polygon as _Poligono
+    return [_Poligono(p) for h in hitos if h['nace'] <= EPOCA_1772 and (h['muere'] == 0 or h['muere'] > EPOCA_1772)
+            for p in h['planta']]
+
+
+def marcar_tapadas(salida, metro, area_minima_m2=1.0, plantas=()):
     """[0/1 por techo]: 1 si es una casa de 1936 («antes» 0) que queda debajo de una casa de la reconstrucción de 1772 de
-    la referencia (grupo con `hasta`): no puede vivir en 1772 junto con ella. tools/geo/epocas.py la saca de 1772."""
+    la referencia (grupo con `hasta`), o que pisa más del 10 % de su huella sobre la planta de un hito en pie en 1772
+    (`plantas`, su reserva de ocupación): no puede vivir en 1772. tools/geo/epocas.py la saca de 1772."""
     from shapely.geometry import Polygon as _Poligono
     from shapely.strtree import STRtree
     v, hasta = salida['vertices'], salida.get('juntas_hasta', [])
@@ -602,9 +619,11 @@ def marcar_tapadas(salida, metro, area_minima_m2=1.0):
     arbol = STRtree(de_1772) if de_1772 else None
     marcas = []
     for k, f in enumerate(figuras):
-        tapada = arbol is not None and k < len(salida['antes']) and not salida['antes'][k] and f.is_valid and any(
+        de_1936 = k < len(salida['antes']) and not salida['antes'][k] and f.is_valid
+        tapada = de_1936 and arbol is not None and any(
             f.intersection(de_1772[j]).area * metro ** 2 >= area_minima_m2 for j in arbol.query(f, predicate='intersects'))
-        marcas.append(int(tapada))
+        en_hito = de_1936 and any(f.intersection(p).area > DOBLE_MINIMO * f.area for p in plantas)
+        marcas.append(int(tapada or en_hito))
     return marcas
 
 
@@ -675,9 +694,10 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
     if con_red is not None and red.get('edificado72') is not None:
         areas = {etiqueta: int(parte.sum()) for etiqueta, parte in lista}
         referencia, revisado = red.get('referencia72', ()), red.get('edificado_revisado', ())
-        antes = _cuadras_de_referencia(referencia, clases, cuadras, areas, metro, revisado)
+        reservas = red.get('reservas72', ())
+        antes = _cuadras_de_referencia(referencia, clases, cuadras, areas, metro, revisado, reservas)
         tomadas = {m for g in antes for m in g['miembros']}
-        ocupado = [r['poligono'] for r in referencia] + [p for e in revisado for p in e['poligonos']]
+        ocupado = [r['poligono'] for r in referencia] + [p for e in revisado for p in e['poligonos']] + list(reservas)
         for g in _cuadras_de_antes(con_red, np.asarray(red['edificado72'], bool), clases, cuadras, areas, metro,
                                    red.get('completas72', ()), ocupado):
             antes.append({**g, 'miembros': g['miembros'] - tomadas})
@@ -699,7 +719,7 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
     if red is not None and red.get('calzada72'):
         salida['calzada72'] = marcar_calzada(salida, red['calzada72'], metro)
     if red is not None and red.get('referencia72') is not None:
-        salida['tapada72'] = marcar_tapadas(salida, metro)
+        salida['tapada72'] = marcar_tapadas(salida, metro, plantas=red.get('reservas72', ()))
     for privada in ('publicos', 'n_cuadras', '_junta', '_antes'):
         salida.pop(privada, None)
     return salida
@@ -741,6 +761,11 @@ def main():
     if red is not None:
         from cuadras_historicas import cargar, cargar_referencia_de_archivos
         red['completas72'] = cargar()
+        import subprocess
+        raiz = Path(__file__).resolve().parents[2]
+        hitos = json.loads(subprocess.run(['node', str(raiz / 'tools' / 'hitos-planta.mjs')], check=True, capture_output=True,
+                                          text=True, cwd=raiz).stdout)
+        red['reservas72'] = plantas_de_1772(hitos)
         red['referencia72'], red['calzada72'], red['edificado_revisado'] = cargar_referencia_de_archivos(
             Path(__file__).resolve().parents[2] / 'specs' / 'auditoria-1772')
     res = vectorizar(clases, a.escala, plaza, red=red)

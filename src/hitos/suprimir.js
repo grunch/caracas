@@ -41,6 +41,22 @@ export function seSolapan(p, q) {
   return false
 }
 
+// Fracción de la huella de una casa que tiene que caer en la zona de un hito para suprimirla: la que apenas la roza
+// sigue en pie (si no, el hito deja un vacío artificial alrededor; fase 4 de specs/08, I1772-004).
+export const PISA_MINIMO = 0.25
+
+/**
+ * ¿Se pisan de verdad la huella (anillo) y la zona (polígono convexo, como las de rectanguloPx)? Lo común tiene que
+ * ser al menos PISA_MINIMO del más chico de los dos: una casa que apenas roza un hito grande sigue en pie, y una que
+ * contiene un monumento chico se suprime aunque él sea una fracción de su lote.
+ */
+export function pisaLaZona(anillo, zona) {
+  const area = Math.min(Math.abs(areaConSigno(anillo)), Math.abs(areaConSigno(zona)))
+  if (area === 0) return seSolapan(anillo, zona)
+  const dentro = recortarConvexo(anillo, zona)
+  return dentro.length >= 3 && Math.abs(areaConSigno(dentro)) >= PISA_MINIMO * area
+}
+
 /** Las zonas de supresión de una lista de hitos: [{ poligono, desde, hasta }] (hasta = 0: para siempre). */
 export function zonasDeSupresion(hitos) {
   return hitos.flatMap((h) => (h.suprime ?? []).map((poligono) => ({ poligono, desde: h.nace ?? 0, hasta: h.muere ?? 0 })))
@@ -48,7 +64,8 @@ export function zonasDeSupresion(hitos) {
 
 /**
  * La vida de cada techo con los hitos puestos: un array nuevo (no toca el original). Al techo que pisa una
- * zona se le quitan las épocas en que el hito está en pie (ver vidaSinHito).
+ * zona (al menos PISA_MINIMO de su huella: pisaLaZona) se le quitan las épocas en que el hito está en pie
+ * (ver vidaSinHito).
  * Sin `vida` (la ciudad de demostración), todos los techos vivían siempre.
  */
 export function suprimirTechos({ vertices, techos, vida = null, marcos = null, alas = null, historia = null }, zonas) {
@@ -68,7 +85,7 @@ export function suprimirTechos({ vertices, techos, vida = null, marcos = null, a
     const caja = cajaDe(anillo)
     let construidas = null
     zonas.forEach(({ poligono, desde, hasta }, z) => {
-      if (!cajasSePisan(caja, cajas[z]) || !seSolapan(anillo, poligono)) return
+      if (!cajasSePisan(caja, cajas[z]) || !pisaLaZona(anillo, poligono)) return
       const marco = porTecho.get(t)
       if (marco) {
         construidas ??= huellasConstruidas(anillo, marco, alas)
