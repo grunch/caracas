@@ -82,9 +82,12 @@ export const PASOS = [
   },
   {
     id: 'vectorizar', entradas: [`${D}/segmentacion/mosaico/clases-costura.png`, `${D}/mosaico.json`, `${D}/tramos.json`, `${D}/edificado-1772.png`, 'tools/geo/cuadras-1772.json',
-      'tools/geo/referencias/1772-red.json', 'tools/geo/referencias/1772-unidades.json'],
+      'tools/geo/referencias/1772-red.json', 'tools/geo/referencias/1772-unidades.json',
+      'specs/auditoria-1772/edificado-original.json', 'specs/auditoria-1772/edificado-revisado.json',
+      'specs/auditoria-1772/limites-calce.json', 'tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json',
+      'tools/geo/calles-historicas.json'],
     salidas: [`${D}/ciudad-1936.json`, `${D}/patios-de-casas.png`],
-    codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'caras', 'huellas', 'cuadras_historicas'),
+    codigo: GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'caras', 'huellas', 'cuadras_historicas', 'edificado_original', 'calce', 'tps', 'cierre_fase3'),
     cmd: async () => {
       const { plaza, metro } = await leerJson(`${D}/mosaico.json`)
       return [PY, 'tools/geo/vectorizar.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/ciudad-1936.json`,
@@ -105,11 +108,12 @@ export const PASOS = [
   {
     id: 'epocas',
     entradas: ['tools/geo/epocas/epocas.json', `${D}/ciudad-1936.json`, 'fuentes/derivados/1578/ciudad-1578.json',
-      ...CALCES.map(([año]) => `fuentes/derivados/${año}/calzado.tif`), 'tools/geo/referencias/1772-calles-1936.json'],
+      ...CALCES.map(([año]) => `fuentes/derivados/${año}/calzado.tif`), 'tools/geo/referencias/1772-calles-1936.json',
+      'tools/geo/referencias/1772-red.json', 'tools/geo/calles-historicas.json'],
     salidas: [`${E}/ciudad-epocas.json`, `${E}/crece.json`, 'public/datos/crece.json', 'public/plano/crece.png'],
     // relieve.bin (tools/geo/relieve.py, fuera de este pipeline) da las cuestas y la altura del monte
     opcionales: ['public/datos/relieve.bin'],
-    codigo: GEO('epocas', 'valle', 'calce_correlacion', 'vectorizar', 'segmentar_clases', 'calles_1772'),
+    codigo: GEO('epocas', 'valle', 'calce_correlacion', 'vectorizar', 'segmentar_clases', 'calles_1772', 'cuadras_historicas', 'cierre_fase3'),
     cmd: () => [PY, 'tools/geo/epocas.py'],
   },
   {

@@ -154,7 +154,8 @@ def test_si_la_unidad_duena_de_una_manzana_no_pasa_la_validacion_la_manzana_es_d
     cuadras = np.where(np.isin(c, (CLASE['edificado'], CLASE['publico'])), 1, 0)
     oeste = Polygon([(20, 20), (160, 20), (160, 240), (20, 240)])
     este = Polygon([(160, 20), (240, 20), (240, 240), (160, 240)])
-    ref = [{'id': 'O', 'poligono': oeste, 'rellenar': True}, {'id': 'E', 'poligono': este, 'rellenar': True}]
+    # O es parcial (no repinta lo público de 1936), así que no pasa como cuadra de solo casas
+    ref = [{'id': 'O', 'poligono': oeste, 'rellenar': False}, {'id': 'E', 'poligono': este, 'rellenar': True}]
 
     # Act
     grupos = _cuadras_de_referencia(ref, c, cuadras, {1: int((cuadras == 1).sum())}, METRO)
@@ -179,3 +180,11 @@ def test_una_cara_de_osm_que_pisa_poco_la_referencia_igual_le_deja_esa_parte():
     g = grupos[0]; x, y = g['origen']
     assert not g['cuadra'][60 - y, 60 - x]       # la esquina la reconstruye la referencia
     assert g['cuadra'][200 - y, 200 - x]          # el resto sigue siendo de la cara de OSM
+
+
+def test_los_ejes_de_calzada_suman_las_calles_historicas_verificadas():
+    from tools.geo.cuadras_historicas import ejes_de_calzada
+    red = {'nodos': [{'id': 'A', 'original': [0, 0], 'mosaico': [0, 0]}, {'id': 'B', 'original': [10, 0], 'mosaico': None}],
+           'calles': [{'id': 'L1', 'tipo': 'calle_recta', 'nodos': ['A', 'B']}]}
+    verificadas = [{'id': 'san-jacinto', 'original': [[50, 50], [60, 50]], 'anclajes': [[500, 500], [600, 500]]}]
+    assert [list(e.coords) for e in ejes_de_calzada(red, verificadas)] == [[(500.0, 500.0), (600.0, 500.0)]]

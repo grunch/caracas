@@ -133,3 +133,15 @@ def test_una_casa_suprimida_por_otro_hito_no_es_un_doble_edificio():
          'suprime': [[[70, 0], [100, 0], [100, 100], [70, 100]]]}
     p = puerta_fase4(ciudad=ciudad((45, 40, 65, 60)), red=red(), unidades=unidades(), cajas=cajas(), hitos=[a, b], metro=METRO)
     assert p['hitos_sin_dobles'] == {'cumplido': True, 'dobles': []}
+
+
+def test_con_lo_edificado_revisado_se_mide_si_las_casas_cubren_lo_rojo_y_no_el_interior_entero():
+    # U3 es una parcial grande con un solo edificio chico en el original (menos del 5 % de su caja)
+    u = unidades()
+    rojo = {'U3': [box(310, 10, 320, 20)]}
+    con_casa = puerta_fase4(ciudad=ciudad((0, 0, 100, 100), (310, 10, 320, 20)), red=red(), unidades=u, cajas=cajas(),
+                            hitos=[], metro=METRO, edificado=rojo)
+    sin_casa = puerta_fase4(ciudad=ciudad((0, 0, 100, 100), (350, 50, 352, 52)), red=red(), unidades=u, cajas=cajas(),
+                            hitos=[], metro=METRO, edificado=rojo)
+    assert con_casa['edificadas_con_casas']['cumplido'] is True
+    assert sin_casa['edificadas_con_casas']['sin_casas'] == [{'unidad': 'U3', 'medida': 'edificado'}]

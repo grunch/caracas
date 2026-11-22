@@ -36,6 +36,8 @@ LIBRES = {'terreno_libre', 'plaza', 'descartada_no_edificacion'}
 RETIRO_M = 3.0              # la figura se encoge esto: la calle y el error del dibujo no cuentan como interior
 COBERTURA_MINIMA = 0.05     # por debajo, la unidad no tiene casas (inferido)
 COBERTURA_PARCIAL_MAXIMA = 0.85  # una parcial cubierta más que esto está rellena (inferido)
+COBERTURA_DEL_ROJO = 0.5    # con lo edificado revisado, las casas cubren al menos esto de lo rojo (inferido: el calce y el
+                            # reparto en lotes no calcan el dibujo)
 
 
 def figura_de_unidad(unidad, por_id, cajas, retiro_m=RETIRO_M, metro=METRO):
@@ -99,7 +101,7 @@ def dobles_de_hitos(hitos, casas, epoca=EPOCA_1772):
     return resultado
 
 
-def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=frozenset()):
+def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=frozenset(), edificado=None):
     """Criterios de la fase 4 con su cumplimiento sobre las casas de 1772; `fase_4_cerrable` exige todos."""
     casas = visibles(casas_de_epoca(ciudad), hitos)
     abiertos = abiertos_de_casas(ciudad)
@@ -120,7 +122,14 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
         cerca = [] if arbol is None else [figuras[j] for j in arbol.query(figura, predicate='intersects')]
         cubierta = cobertura(figura, cerca, abiertos)
         medidas.append({'unidad': u['id'], 'ocupacion': u['ocupacion'], 'medida': medida, 'cobertura': cubierta})
-        if u['ocupacion'] in EDIFICADAS and cubierta < COBERTURA_MINIMA:
+        rojo = (edificado or {}).get(u['id'])
+        if u['ocupacion'] in EDIFICADAS and rojo:
+            # con lo edificado revisado del original: las casas tienen que cubrir lo que el original pinta rojo
+            manchas = unary_union(rojo)
+            cerca_rojo = [] if arbol is None else [figuras[j] for j in arbol.query(manchas, predicate='intersects')]
+            if cobertura(manchas, cerca_rojo) < COBERTURA_DEL_ROJO:
+                sin_casas.append({'unidad': u['id'], 'medida': 'edificado'})
+        elif u['ocupacion'] in EDIFICADAS and cubierta < COBERTURA_MINIMA:
             sin_casas.append({'unidad': u['id'], 'medida': medida})
         if u['ocupacion'] in LIBRES and cubierta >= COBERTURA_MINIMA:
             con_casas.append({'unidad': u['id'], 'medida': medida})
@@ -134,7 +143,8 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
         ('hitos_sin_dobles', {'cumplido': not dobles, 'dobles': dobles}),
         ('unidades_medidas', {'cumplido': not sin_ubicar, 'sin_ubicar': sin_ubicar}),
     ])
-    return {**criterios, 'umbrales_inferidos': {'cobertura_minima': COBERTURA_MINIMA, 'retiro_m': RETIRO_M},
+    return {**criterios, 'umbrales_inferidos': {'cobertura_minima': COBERTURA_MINIMA, 'retiro_m': RETIRO_M,
+                                                'cobertura_del_rojo': COBERTURA_DEL_ROJO},
             'sin_ubicar': sin_ubicar, 'sin_medir_por_limite_del_calce': sin_medir, 'casas_1772': len(casas),
             'medidas': medidas,
             'fase_4_cerrable': all(c['cumplido'] for c in criterios.values())}
@@ -178,8 +188,10 @@ def main():
         raise SystemExit('limites-calce.json es de otro calce (huella_calce distinta): hay que revisar de nuevo los '
                          'sectores límite antes de excluirlos')
     limites = {s['sector'] for s in registro['sectores']}
+    from cuadras_historicas import cargar_edificado_de_archivos
+    edificado = {e['id']: e['poligonos'] for e in cargar_edificado_de_archivos(args.carpeta, red, unidades)}
     puerta = puerta_fase4(_leer(args.ciudad), red, unidades, cajas_por_calce(unidades, censo, calce.a_1936), hitos,
-                          limites=limites)
+                          limites=limites, edificado=edificado)
     informe = OrderedDict([
         ('alcance', 'Puerta de salida de la fase 4 de 1772 (specs/08), medida sobre la salida del generador. Las '
                     'unidades pendientes se miden por su caja llevada por el calce (aproximada). Cuenta lo medido; no '

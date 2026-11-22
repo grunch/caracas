@@ -441,18 +441,35 @@ def _de_referencia(r, clases, metro):
     return (x0, y0), cuadra, _sin_astillas(cuadra & calle, metro) & cuadra, poligono
 
 
-def _cuadras_de_referencia(referencia, clases, cuadras, areas, metro):
+def _cuadras_de_referencia(referencia, clases, cuadras, areas, metro, edificado=()):
     """Las cuadras de 1772 de la referencia histórica aprobada (cuadras_historicas.cargar_referencia): el anillo de
     ejes de la unidad, ajustado a las fachadas (o encogido si no las hay), determina el contorno; nada de la cara de
     OSM ni de la máscara de color. Cada manzana de 1936 que cae sobre la referencia es de la unidad que más la cubre
     (sus casas de 1936 no viven en 1772); las demás unidades igual edifican su parte. → grupos como los de
     _cuadras_de_antes, con `minimo` 2 (documentadas en 1772), `hasta` 2 (ceden a 1936 desde 1843: la referencia
-    describe 1772) y `referencia` (el ID de la unidad)."""
+    describe 1772) y `referencia` (el ID de la unidad). `edificado`: lo edificado revisado del original de las unidades
+    pendientes (cuadras_historicas.cargar_edificado): cada mancha es una cuadra de 1772 entera edificada; se resuelve
+    junto con las de anillo, así una manzana de 1936 nunca queda con dos grupos."""
     candidatas = []
     for r in referencia:
+        # una parcial con lo edificado revisado se arma por sus manchas rojas, como las pendientes: las huertas
+        # del original quedan sin casas
         armada = _de_referencia(r, clases, metro)
-        if armada is not None:
+        if r.get('edificado'):
+            # su anillo decide qué manzanas de 1936 reemplaza (sus casas de 1936 no viven en 1772), sin casas propias
+            if armada is not None:
+                candidatas.append(({'id': r['id'], 'rellenar': False, 'rol': 'dueno'}, *armada))
+            for figura in r['edificado']:
+                pieza = _de_edificado(figura.buffer(HOLGURA_EDIFICADO_M / metro), clases, metro)
+                if pieza is not None:
+                    candidatas.append(({'id': r['id'], 'rellenar': True, 'rol': 'casas'}, *pieza))
+        elif armada is not None:
             candidatas.append((r, *armada))
+    for e in edificado:
+        for figura in e['poligonos']:
+            pieza = _de_edificado(figura, clases, metro)
+            if pieza is not None:
+                candidatas.append(({'id': e['id'], 'rellenar': True, 'rol': 'casas'}, *pieza))
     # qué manzanas de 1936 son de la referencia lo deciden todas las candidatas; el dueño, solo una aceptada (si la que
     # más la cubre no pasa la validación, la manzana pasa a otra: sus casas de 1936 nunca conviven con la reconstrucción)
     de_toda, _ = _duenos(candidatas, range(len(candidatas)), cuadras, areas)
@@ -467,10 +484,43 @@ def _cuadras_de_referencia(referencia, clases, cuadras, areas, metro):
                 rechazadas.append(k)
             else:
                 salida.append({**grupo, 'miembros': {e for e in de_referencia if mejor[e] == k}})
+        # un dueño sin ninguna mancha con casas no reemplaza nada: su manzana de 1936 sigue en pie
+        con_casas = {g['referencia'] for g in salida if g['cuadra'].any()}
+        rechazadas += [k for k in aceptadas if candidatas[k][0].get('rol') == 'dueno'
+                       and candidatas[k][0]['id'] not in con_casas and k not in rechazadas]
         if not rechazadas:
             return salida
         # una rechazada no es dueña de nada: se reparte de nuevo entre las que quedan
         aceptadas = [k for k in aceptadas if k not in rechazadas]
+
+
+HOLGURA_EDIFICADO_M = 1.0   # lo rojo llevado a 1936 se ensancha esto: el borde del dibujo no deja sin casas su frente
+LADOS_MAXIMOS = 10          # como ajustar_cara: un polígono de más lados no se reparte por lados
+EDIFICADO_MINIMO_M2 = 20.0  # una mancha roja más chica es una mota del dibujo, no un edificio
+
+
+def _de_edificado(figura, clases, metro):
+    """(origen, cuadra, abierto, polígono) de una mancha roja del original llevada a 1936, o None si no cabe."""
+    x0, y0, x1, y1 = _ventana(figura, clases.shape)
+    if x1 - x0 < 4 or y1 - y0 < 4 or figura.area * metro ** 2 < EDIFICADO_MINIMO_M2:
+        return None
+    simple = figura
+    for tolerancia_m in (0.5, 1, 2, 3, 4):
+        simple = figura.simplify(tolerancia_m / metro)
+        if len(simple.exterior.coords) - 1 <= LADOS_MAXIMOS:
+            break
+    lados = simple.geom_type == 'Polygon' and len(simple.exterior.coords) - 1 <= LADOS_MAXIMOS
+    cl = clases[y0:y1, x0:x1]
+    # lo rojo revisado es edificado de 1772 sea lo que sea en 1936 (un parque, una plaza o un edificio público posteriores)
+    cuadra = _mascara_de([figura], (x0, y0), cl.shape)
+    # sin un polígono de pocos lados, la mancha se reparte por su máscara (techos_de_manzana sin polígono)
+    return (x0, y0), cuadra, _sin_astillas(cuadra & (cl == CLASE['calle']), metro) & cuadra, \
+        (np.asarray(simple.exterior.coords)[:-1] - (x0, y0) if lados else None)
+
+
+def _cuadras_de_edificado(edificado, clases, cuadras, areas, metro):
+    """Las cuadras de 1772 de lo edificado revisado de las pendientes, solas (ver _cuadras_de_referencia)."""
+    return _cuadras_de_referencia([], clases, cuadras, areas, metro, edificado)
 
 
 def _duenos(candidatas, aceptadas, cuadras, areas):
@@ -478,6 +528,8 @@ def _duenos(candidatas, aceptadas, cuadras, areas):
     cubierto, mejor = {}, {}
     for k in aceptadas:
         _r, (x0, y0), cuadra, _abierto, _p = candidatas[k]
+        if _r.get('rol') == 'casas':
+            continue   # una mancha roja edifica, pero no decide qué manzanas de 1936 reemplaza
         alto, ancho = cuadra.shape
         cuenta = np.bincount(cuadras[y0:y0 + alto, x0:x0 + ancho][cuadra])
         for e in np.flatnonzero(cuenta):
@@ -493,15 +545,30 @@ def _grupo_de_referencia(candidata, clases, cuadras, de_referencia, metro):
     """El grupo de una candidata (sin miembros) si sale como cuadra de solo casas repartida por lados, o None."""
     r, (x0, y0), cuadra, abierto, poligono = candidata
     alto, ancho = cuadra.shape
-    suyas = cuadras[y0:y0 + alto, x0:x0 + ancho]
-    cuadra = cuadra & ((suyas == 0) | np.isin(suyas, list(de_referencia)))
     cl = clases[y0:y0 + alto, x0:x0 + ancho]
-    de_antes = _clases_de_antes(cl, cuadra) if r['rellenar'] else np.where(cuadra, cl, CLASE['calle']).astype(cl.dtype)
-    if not cuadra.any() or not es_de_solo_casas(de_antes, cuadra, metro, CLASE['edificado'], CLASE['publico']) \
-            or lotes_por_lados(cuadra, metro, 0, poligono) is None:
+    base = {'origen': (x0, y0), 'poligono': poligono, 'minimo': 2, 'hasta': 2, 'referencia': r['id']}
+    if r.get('rol') == 'dueno':
+        nada = np.zeros_like(cuadra)
+        return {**base, 'cuadra': nada, 'clases': cl, 'abierto': nada}
+    if r.get('rol') != 'casas':
+        suyas = cuadras[y0:y0 + alto, x0:x0 + ancho]
+        cuadra = cuadra & ((suyas == 0) | np.isin(suyas, list(de_referencia)))
+    if r.get('rol') == 'casas':
+        de_antes = np.where(cuadra, CLASE['edificado'], cl).astype(cl.dtype)   # una mancha roja, entera edificada
+    elif r['rellenar']:
+        # una cuadra continua de 1772: lo abierto y lo público de 1936 (posterior; sus techos nacen desde 1889) se edifican
+        de_antes = np.where(cuadra & (cl == CLASE['publico']), CLASE['edificado'], _clases_de_antes(cl, cuadra)).astype(cl.dtype)
+    else:
+        de_antes = np.where(cuadra, cl, CLASE['calle']).astype(cl.dtype)
+    # una mancha roja es un edificio, no una cuadra modelo: no pide el tamaño ni el lleno de es_de_solo_casas
+    if not cuadra.any() or (r.get('rol') != 'casas'
+                            and not es_de_solo_casas(de_antes, cuadra, metro, CLASE['edificado'], CLASE['publico'])):
         return None
-    return {'cuadra': cuadra, 'origen': (x0, y0), 'clases': de_antes, 'poligono': poligono, 'abierto': abierto & cuadra,
-            'minimo': 2, 'hasta': 2, 'referencia': r['id']}
+    if poligono is None or lotes_por_lados(cuadra, metro, 0, poligono) is None:
+        if r.get('rol') != 'casas':
+            return None
+        poligono = None   # una mancha roja que no se reparte por lados se reparte por su máscara
+    return {**base, 'cuadra': cuadra, 'clases': de_antes, 'abierto': abierto & cuadra}
 
 
 NUCLEO_DE_CALZADA_M = 4.0   # ancho inferido de lo que ninguna calle de 1772 deja de tener (como cierre_fase3)
@@ -520,6 +587,24 @@ def marcar_calzada(salida, ejes, metro, area_minima_m2=1.0):
         pisa = arbol is not None and casa.is_valid and any(
             casa.intersection(nucleos[j]).area * metro ** 2 >= area_minima_m2 for j in arbol.query(casa, predicate='intersects'))
         marcas.append(int(pisa))
+    return marcas
+
+
+def marcar_tapadas(salida, metro, area_minima_m2=1.0):
+    """[0/1 por techo]: 1 si es una casa de 1936 («antes» 0) que queda debajo de una casa de la reconstrucción de 1772 de
+    la referencia (grupo con `hasta`): no puede vivir en 1772 junto con ella. tools/geo/epocas.py la saca de 1772."""
+    from shapely.geometry import Polygon as _Poligono
+    from shapely.strtree import STRtree
+    v, hasta = salida['vertices'], salida.get('juntas_hasta', [])
+    figuras = [_Poligono([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]) for t in salida['techos']]
+    de_1772 = [figuras[k] for k, (a, j) in enumerate(zip(salida['antes'], salida['junta']))
+               if a and 0 <= j < len(hasta) and hasta[j] and figuras[k].is_valid]
+    arbol = STRtree(de_1772) if de_1772 else None
+    marcas = []
+    for k, f in enumerate(figuras):
+        tapada = arbol is not None and k < len(salida['antes']) and not salida['antes'][k] and f.is_valid and any(
+            f.intersection(de_1772[j]).area * metro ** 2 >= area_minima_m2 for j in arbol.query(f, predicate='intersects'))
+        marcas.append(int(tapada))
     return marcas
 
 
@@ -589,11 +674,12 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
     antes = []
     if con_red is not None and red.get('edificado72') is not None:
         areas = {etiqueta: int(parte.sum()) for etiqueta, parte in lista}
-        referencia = red.get('referencia72', ())
-        antes = _cuadras_de_referencia(referencia, clases, cuadras, areas, metro)
+        referencia, revisado = red.get('referencia72', ()), red.get('edificado_revisado', ())
+        antes = _cuadras_de_referencia(referencia, clases, cuadras, areas, metro, revisado)
         tomadas = {m for g in antes for m in g['miembros']}
+        ocupado = [r['poligono'] for r in referencia] + [p for e in revisado for p in e['poligonos']]
         for g in _cuadras_de_antes(con_red, np.asarray(red['edificado72'], bool), clases, cuadras, areas, metro,
-                                   red.get('completas72', ()), [r['poligono'] for r in referencia]):
+                                   red.get('completas72', ()), ocupado):
             antes.append({**g, 'miembros': g['miembros'] - tomadas})
     de_grupo = {m: j for j, grupo in enumerate(antes) for m in grupo['miembros']}
     for etiqueta, parte in lista:
@@ -604,13 +690,16 @@ def vectorizar(clases, metro, plaza, cuadra_modelo=True, red=None, calles_hoy=No
     salida['_antes'] = 1
     for j, grupo in enumerate(antes):
         salida['_junta'] = j
-        techos_de_manzana(grupo['clases'], grupo['cuadra'], grupo['origen'], salida, area_min_px, tolerancia_px, distancia_m,
-                          metro, cuadra_modelo, grupo['poligono'])
+        if grupo['cuadra'].any():   # el dueño de una parcial no arma casas: solo reemplaza sus manzanas de 1936
+            techos_de_manzana(grupo['clases'], grupo['cuadra'], grupo['origen'], salida, area_min_px, tolerancia_px,
+                              distancia_m, metro, cuadra_modelo, grupo['poligono'])
         salida['juntas'].append(_contornos_de(grupo['abierto'], grupo['origen']))
         salida['juntas_minimo'].append(grupo['minimo'])
         salida['juntas_hasta'].append(grupo.get('hasta', 0))
     if red is not None and red.get('calzada72'):
         salida['calzada72'] = marcar_calzada(salida, red['calzada72'], metro)
+    if red is not None and red.get('referencia72') is not None:
+        salida['tapada72'] = marcar_tapadas(salida, metro)
     for privada in ('publicos', 'n_cuadras', '_junta', '_antes'):
         salida.pop(privada, None)
     return salida
@@ -652,7 +741,8 @@ def main():
     if red is not None:
         from cuadras_historicas import cargar, cargar_referencia_de_archivos
         red['completas72'] = cargar()
-        red['referencia72'], red['calzada72'] = cargar_referencia_de_archivos()
+        red['referencia72'], red['calzada72'], red['edificado_revisado'] = cargar_referencia_de_archivos(
+            Path(__file__).resolve().parents[2] / 'specs' / 'auditoria-1772')
     res = vectorizar(clases, a.escala, plaza, red=red)
     with open(a.salida, 'w') as f:
         json.dump(res, f)
