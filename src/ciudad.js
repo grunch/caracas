@@ -23,7 +23,7 @@
  * las casas de patio (src/alas.js).
  */
 import { BufferGeometry, BufferAttribute } from 'three'
-import { simplificar, rectanguloMinimo, areaConSigno, crearIndice } from './poligono.js'
+import { simplificarAdentro, rectanguloMinimo, areaConSigno, crearIndice } from './poligono.js'
 import { planDeTecho, elegirFrente, etapasDe, LADO_LIBRE } from './techos.js'
 import { alzarCasa } from './alzado.js'
 import { leerMarcos, planDeAlas, esDePatio } from './alas.js'
@@ -66,7 +66,7 @@ function leerCasas({ vertices, techos, vida = null, historia = null, marcos = nu
     const marco = conMarco.get(t / 4) ?? null
     const bytes = historia?.subarray((t / 4) * EPOCAS_HISTORIA, (t / 4 + 1) * EPOCAS_HISTORIA)
     casas.push({
-      ...casa, centro, huella: cuantos >= 3 ? simplificar(anillo, tolerancia) : null, marco,
+      ...casa, centro, huella: cuantos >= 3 ? simplificarAdentro(anillo, tolerancia) : null, marco,
       etapas: etapasDe(casa, bytes, { conAlas: Boolean(marco?.alas.length) }),
       // sin historia (datos viejos, la ciudad de demostración), todas las épocas valen lo de `techos`
       historia: empacarHistoria(bytes ?? Array(EPOCAS_HISTORIA).fill((casa.estilo & 15) + 16 * Math.min(casa.pisos, 15))),

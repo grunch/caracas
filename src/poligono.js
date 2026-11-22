@@ -4,6 +4,7 @@
  */
 
 const EPS = 1e-9
+const EPS_CONTACTO = 1e-7 // un vértice a menos de esto de una cuerda la toca (metros)
 
 /** Área del anillo con el signo de su sentido de giro. */
 export function areaConSigno(anillo) {
@@ -172,4 +173,60 @@ export function crearIndice(anillos, celda = 16) {
       return false
     },
   }
+}
+
+/**
+ * Como simplificar, pero sin salir nunca del anillo (fase 6 de 1772, T33j.6b): solo se quitan los vértices convexos
+ * (los que sobresalen) a menos de la tolerancia de la recta entre sus vecinos y sin otro vértice dentro del triángulo
+ * que se corta. Quitar uno así achica el polígono, nunca lo agranda: el techo de una casa no sale de su huella ni
+ * pisa a la vecina en la medianera (simplificar, con la recta de cada lado por separado, la corría hasta la
+ * tolerancia hacia uno u otro lado). Conserva el sentido de giro; si queda menos de la mitad del área, el original.
+ */
+export function simplificarAdentro(anillo, tolerancia) {
+  const horario = areaConSigno(anillo) < 0
+  const o = horario ? [...anillo].reverse() : anillo
+  const n = o.length
+  const giro = (p, q, r) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
+  // distancia de s al segmento p→r (la proyección acotada a sus extremos: una saliente que vuelve más allá de la
+  // punta de la cuerda queda lejos aunque esté cerca de su recta)
+  const alSegmento = (s, p, r) => {
+    const [dx, dz] = [r[0] - p[0], r[1] - p[1]]
+    const t = Math.max(0, Math.min(1, ((s[0] - p[0]) * dx + (s[1] - p[1]) * dz) / (dx * dx + dz * dz)))
+    return Math.hypot(s[0] - p[0] - t * dx, s[1] - p[1] - t * dz)
+  }
+  // la cuerda p→r toca o corta la otra cadena del original fuera de sus propios extremos: un vértice de esa cadena
+  // sobre la cuerda (el contorno se tocaría y saldría por la muesca) o un lado que la cruza
+  const corta = (ip, ir) => {
+    const [p, r] = [o[ip], o[ir]]
+    for (let s = (ir + 1) % n; s !== ip; s = (s + 1) % n) if (alSegmento(o[s], p, r) < EPS_CONTACTO) return true
+    for (let e = ir; e !== ip; e = (e + 1) % n) {
+      const [a, b] = [o[e], o[(e + 1) % n]]
+      const [d1, d2] = [giro(p, r, a), giro(p, r, b)]
+      const [d3, d4] = [giro(a, b, p), giro(a, b, r)]
+      if (((d1 > EPS && d2 < -EPS) || (d1 < -EPS && d2 > EPS)) && ((d3 > EPS && d4 < -EPS) || (d3 < -EPS && d4 > EPS))) return true
+    }
+    return false
+  }
+  // se puede ir de p a r si toda la cadena original de en medio queda afuera de la cuerda y a menos de la tolerancia
+  // del segmento
+  const sePuede = (ip, ir) => {
+    const [p, r] = [o[ip], o[ir]]
+    if (Math.hypot(r[0] - p[0], r[1] - p[1]) === 0) return false
+    for (let s = (ip + 1) % n; s !== ir; s = (s + 1) % n) {
+      if (giro(p, o[s], r) < 0 || alSegmento(o[s], p, r) >= tolerancia) return false
+    }
+    return !corta(ip, ir)
+  }
+  const quedan = Array.from({ length: n }, (_, k) => k)
+  let cambio = true
+  while (cambio && quedan.length > 3) {
+    cambio = false
+    for (let k = 0; k < quedan.length && quedan.length > 3; k++) {
+      const [ip, ir] = [quedan[(k + quedan.length - 1) % quedan.length], quedan[(k + 1) % quedan.length]]
+      if (sePuede(ip, ir)) { quedan.splice(k, 1); k--; cambio = true }
+    }
+  }
+  const simple = quedan.map((k) => o[k])
+  if (Math.abs(areaConSigno(simple)) < 0.5 * Math.abs(areaConSigno(anillo))) return anillo
+  return horario ? simple.reverse() : simple
 }
