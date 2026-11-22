@@ -36,9 +36,10 @@ def _vecinas(t, lote, arbol, orden, huellas, apta):
     return sorted(((_medianera(lote, huellas[k]), k) for k in vecinas if k != t and apta(k)), reverse=True)
 
 
-def lotes_encerrados(casas, metro, movibles, junta, vida):
+def lotes_encerrados(casas, metro, movibles, junta, vida, admite=None):
     """({techo: huella unida}, techos que se quitan): cada casa movible sin acceso, unida a la vecina movible de su
-    misma junta y vida que da a la calle y le comparte más medianera. `junta` y `vida`, por techo. No muta nada."""
+    misma junta y vida que da a la calle y le comparte más medianera. `junta` y `vida`, por techo; `admite(huella)`,
+    si se da, descarta las uniones que no puede haber (la que el visor escondería bajo un hito). No muta nada."""
     huellas = dict(casas)
     quitar, nuevas = set(), {}
     for _ in range(VUELTAS):
@@ -53,10 +54,12 @@ def lotes_encerrados(casas, metro, movibles, junta, vida):
                         and tuple(vida[k]) == tuple(vida[t]))
             for largo, k in _vecinas(t, huellas[t], arbol, orden, huellas, apta):
                 unida = _union(huellas[k], huellas[t]) if largo > 0 else None
-                if unida is not None:
+                if unida is not None and (admite is None or admite(unida)):
                     huellas[k] = nuevas[k] = unida
                     quitar.add(t)
                     cambio = True
+                    # la vecina creció: el árbol indexa las huellas de ahora, para el próximo lote de esta vuelta
+                    arbol = STRtree([huellas[j] for j in orden])
                     break
         if not cambio:
             break

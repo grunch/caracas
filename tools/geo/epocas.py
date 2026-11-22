@@ -448,7 +448,9 @@ def dar_acceso_1772(ciudad, hitos, metro):
     casas = visibles(casas_de_epoca(ciudad), hitos)
     n = len(ciudad.get("antes", []))
     movibles = {k for k, _ in casas if k < n and ciudad["antes"][k] and ciudad["junta"][k] >= 0}
-    nuevas, quitar = lotes_encerrados(casas, metro, movibles, ciudad["junta"], ciudad["vida"])
+    # la huella unida tiene que seguir a la vista: dos casas que pisan poco la zona de un hito pueden pisarla juntas
+    nuevas, quitar = lotes_encerrados(casas, metro, movibles, ciudad["junta"], ciudad["vida"],
+                                      admite=lambda huella: bool(visibles([(0, huella)], hitos)))
     print(f"lotes de 1772 sin acceso unidos a su vecina: {len(quitar)}")
     if not quitar:
         return ciudad

@@ -77,3 +77,28 @@ def test_no_muta_las_casas_de_entrada():
     lotes_encerrados(casas, METRO, movibles={1, 2, 3, 4, 5, 6}, junta=todas(casas),
                      vida={k: (1, 2) for k, _ in casas})
     assert [(k, g.wkt) for k, g in casas] == antes
+
+
+def test_el_segundo_lote_de_una_vuelta_ve_a_la_vecina_que_ya_absorbio_al_primero():
+    """T1 se une a A; T2, que antes no tocaba a A, ahora le comparte 40 px y a B solo 10 px (revisión de #134)."""
+    casas = [
+        (1, box(0, 0, 50, 20)),     # A, al frente
+        (2, box(50, 20, 80, 60)),   # B, da a la calle por el este
+        (3, box(10, 20, 50, 50)),   # T1: 40 px con A, 30 px con B
+        (4, box(10, 50, 50, 60)),   # T2: 40 px con T1, 10 px con B
+        (5, box(0, 20, 10, 70)),    # de otra junta: cierran al oeste y al norte
+        (6, box(10, 60, 80, 70)),
+    ]
+    assert casas_sin_acceso(casas, METRO)['sin_acceso'] == [3, 4]
+    junta = {k: (8 if k in (5, 6) else 7) for k, _ in casas}
+    nuevas, quitar = lotes_encerrados(casas, METRO, movibles={1, 2, 3, 4}, junta=junta,
+                                      vida={k: (1, 2) for k, _ in casas})
+    assert quitar == {3, 4} and set(nuevas) == {1}
+
+
+def test_no_se_une_si_la_huella_unida_no_se_admite():
+    """Una unión que el visor escondería (la huella unida pisa la zona de un hito) no se hace."""
+    casas = manzana_con_un_lote_al_fondo()
+    nuevas, quitar = lotes_encerrados(casas, METRO, movibles={1, 2, 3, 4, 5, 6}, junta=todas(casas),
+                                      vida={k: (1, 2) for k, _ in casas}, admite=lambda huella: huella.area < 1000)
+    assert (nuevas, quitar) == ({}, set())
