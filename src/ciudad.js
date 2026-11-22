@@ -171,11 +171,13 @@ function escritor(b, casa, etapa, { origen: o, eu, ev }) {
  * llevan a ella, y lo mismo con los otros lados que dan a una calle. Así el alero y la cumbrera corren
  * seguidos por la cuadra, sin los dientes del trazado. Si lo que queda no es un polígono, la huella como vino.
  */
-export function alinearHuella(anillo, ancho, fondo, calles = {}) {
-  const cerca = (x, linea) => Math.abs(x - linea) < A_LA_LINEA_M
+export function alinearHuella(anillo, ancho, fondo, calles = {}, { soloAdentro = false } = {}) {
+  // soloAdentro (T33j.6f): solo se llevan a la línea los vértices que la pasan hacia la calle; los que quedan detrás
+  // se quedan (en una calle angosta de 1772, correrlos adelantaba el techo sobre la calzada)
+  const cerca = (x, linea, afuera) => Math.abs(x - linea) < A_LA_LINEA_M && (!soloAdentro || afuera)
   const llevado = anillo.map(([u, v]) => [
-    calles.izq && cerca(u, 0) ? 0 : calles.der && cerca(u, ancho) ? ancho : u,
-    cerca(v, 0) ? 0 : calles.fondo && cerca(v, fondo) ? fondo : v,
+    calles.izq && cerca(u, 0, u < 0) ? 0 : calles.der && cerca(u, ancho, u > ancho) ? ancho : u,
+    cerca(v, 0, v < 0) ? 0 : calles.fondo && cerca(v, fondo, v > fondo) ? fondo : v,
   ])
   // fuera los repetidos (dos vértices llevados a la misma esquina) y, después, los que quedan en medio de un tramo recto
   const unicos = llevado.filter((p, k) => {
@@ -210,7 +212,7 @@ function proyectarEnMarco(casa, conAlas = casa.marco.alas.length > 0) {
     ancho = u1 - u0
     fondo = v1 - v0
   }
-  anillo = alinearHuella(anillo, ancho, fondo, calles)
+  anillo = alinearHuella(anillo, ancho, fondo, calles, { soloAdentro: casa.vuelo !== Infinity })
   return {
     marco: { origen: o, eu, ev, ancho, fondo }, anillo, libres: calles, alas, crujia,
     lleno: Math.min(1, Math.abs(areaConSigno(anillo)) / (ancho * fondo)),

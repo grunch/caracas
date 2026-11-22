@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { extruirTechos, geometriaCiudad, empacarTecho, desempacarTecho, marcoDelLote } from '../../src/ciudad.js'
+import { extruirTechos, geometriaCiudad, empacarTecho, desempacarTecho, marcoDelLote, alinearHuella } from '../../src/ciudad.js'
 import { CUBIERTA, altoDePiso } from '../../src/techos.js'
 import { rectanguloMinimo } from '../../src/poligono.js'
 
@@ -512,5 +512,19 @@ describe('extruirTechos: el alero no pasa su tope (T33j.6f)', () => {
     const lejos = (g) => Math.max(...vertices(g).filter((v) => v.cubierta !== CUBIERTA.PARED).map((v) => -v.z))
     expect(lejos(extruirTechos(sinTope, coords))).toBeGreaterThan(0.45)
     expect(lejos(extruirTechos(datos, coords))).toBeLessThanOrEqual(0.1 + 1e-6)
+  })
+})
+
+describe('alinearHuella: solo hacia adentro (T33j.6f)', () => {
+  test('con soloAdentro, el vértice detrás de la línea de fachada se queda y el que la pasa vuelve a ella', () => {
+    const anillo = [[0, 0.8], [10, -0.3], [10, 12], [0, 12]]
+    expect(alinearHuella(anillo, 10, 12, {})).toEqual([[0, 0], [10, 0], [10, 12], [0, 12]])
+    expect(alinearHuella(anillo, 10, 12, {}, { soloAdentro: true })).toEqual([[0, 0.8], [10, 0], [10, 12], [0, 12]])
+  })
+
+  test('con soloAdentro, tampoco se corren hacia afuera los costados que dan a la calle', () => {
+    const anillo = [[0.5, 0], [10, 0], [10.4, 12], [0.5, 12]]
+    expect(alinearHuella(anillo, 10, 12, { izq: true, der: true }, { soloAdentro: true }))
+      .toEqual([[0.5, 0], [10, 0], [10, 12], [0.5, 12]])
   })
 })
