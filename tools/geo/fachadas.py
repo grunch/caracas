@@ -342,6 +342,18 @@ def _primera_casa(p, n, alcance, arbol, figuras, son_obstaculo):
     return j, min(puntos, key=lambda q: float(np.hypot(*(q - p))))
 
 
+HUECO_OCUPADO_PX2 = 0.01   # un hueco que comparte menos que esto con otra casa o lo vedado no tiene nada adentro
+
+
+def sin_huecos_libres(poligono, ocupado):
+    """El polígono con sus huecos libres rellenos: la rendija que queda entre una franja de relleno y la casa (los
+    rayos van cada metro). Un hueco con otra casa o algo vedado adentro (`ocupado`, o None) queda."""
+    from shapely.geometry import Polygon as _Poligono
+    quedan = [anillo for anillo in poligono.interiors
+              if ocupado is not None and _Poligono(anillo).intersection(ocupado).area > HUECO_OCUPADO_PX2]
+    return _Poligono(poligono.exterior, quedan)
+
+
 def alinear_casas(casas, tramos, metro, movibles, obstaculos=(), vedado=(), tope_m=TOPE_M,
                   tolerancia_m=TOLERANCIA_FACHADA_M):
     """{techo: huella nueva} de las casas `movibles` con la fachada sobre la recta de su frente, medida como la puerta de
@@ -407,6 +419,9 @@ def alinear_casas(casas, tramos, metro, movibles, obstaculos=(), vedado=(), tope
         if not partes:
             continue
         mayor = max(partes, key=lambda q: q.area)
+        if mayor.interiors:
+            ocupado = unary_union(vecinas + ([prohibido] if prohibido is not None else []))
+            mayor = sin_huecos_libres(mayor, ocupado if not ocupado.is_empty else None)
         if mayor.interiors or not mayor.is_valid or mayor.area < 0.5 * huella.area:
             continue   # una huella con huecos no se puede techar; una que pierde media casa no se toca
         # en la grilla de la ciudad (milésimas de píxel): redondear después rompía la validez de alguna huella
