@@ -162,7 +162,7 @@ def aleros_en_la_calle(triangulos, calzada, metro=METRO, umbral_m2=ALERO_EN_CALL
 
 
 PROCEDENCIA = (('pak_sha256', 'el ciudad.pak'), ('relieve_sha256', 'el relieve.bin'),
-               ('huellas_sha256', 'las huellas de la ciudad medida'))
+               ('huellas_sha256', 'las huellas de la ciudad'))
 
 
 def huellas_sha256(ciudad):
