@@ -37,7 +37,7 @@ from cierre_fase4 import _en_pie, visibles
 
 # los rayos, las estaciones y la recta de la mayoría son los mismos con que el generador alinea (tools/geo/fachadas.py)
 from fachadas import (ALCANCE_M, ESQUINA_M, ESTACIONES_MINIMAS, PASO_M, TOLERANCIA_FACHADA_M,  # noqa: E402
-                      estaciones as _estaciones, recta_de_la_mayoria as _recta_robusta)
+                      de_su_manzana, estaciones as _estaciones, manzanas_de, recta_de_la_mayoria as _recta_robusta)
 SOLAPE_MINIMO_M2 = 0.01      # umbral de detección de T33j.1e (diagnostico-huellas.md)
 CIERRE_M = 1.0               # dos casas a menos de 2·CIERRE_M son de la misma manzana edificada
 ACCESO_MINIMO_M = 2.0        # el ancho de una puerta: menos borde hacia afuera no da acceso
@@ -68,6 +68,8 @@ def frentes_desalineados(calles, casas, metro=METRO, obstaculos=(), tolerancia_m
     son_obstaculo = [False] * len(casas) + [True] * len(obstaculos)
     arbol = STRtree(figuras) if figuras else None
     tol_px, alcance = tolerancia_m / metro, ALCANCE_M / metro
+    # una casa es fachada de un frente si es de la manzana edificada que lo arma (fachadas.de_su_manzana)
+    manzana = manzanas_de([c for _, c in casas], metro) + [-1] * len(obstaculos)
     medidos, medidas, desalineados = 0, set(), []
     for eje in calles:
         if not eje['medible'] or arbol is None:
@@ -80,7 +82,7 @@ def frentes_desalineados(calles, casas, metro=METRO, obstaculos=(), tolerancia_m
                 n = np.array([-d[1], d[0]]) * lado
                 golpes = [_primero(LineString([p, p + n * alcance]), Point(p), arbol, figuras, son_obstaculo)
                           for p in estaciones]
-                golpes = [g for g in golpes if g is not None]
+                golpes = de_su_manzana([g for g in golpes if g is not None], manzana)
                 techos = {casas[j][0] for j, _ in golpes}
                 if len(golpes) < ESTACIONES_MINIMAS or len(techos) < 2:
                     continue

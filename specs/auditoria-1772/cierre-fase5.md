@@ -202,11 +202,49 @@ El último paso del generador (`epocas.alinear_1772` → `fachadas.alinear_casas
 - La fase 4 sigue en 6/6.
 - La ciudad de 1772 tiene 6325 casas visibles.
 
+Medido otra vez sobre los datos publicados (`datos-2026-11-22-3e45a28`, con la Plaza Mayor centrada en #132): 115 casas desalineadas en 85 frentes, 0 pares y 4 sin acceso.
+
+## Después de T33j.5g: una casa es fachada del frente si es de su manzana
+
+De las 115 desalineadas, unas 80 eran casas que el rayo toca sin que sean de ese frente:
+
+- casas de la esquina de enfrente, pasada la bocacalle, cuando la cuadra es más corta que el tramo (62 observaciones en las puntas del tramo);
+- casas aisladas de la periferia, sobre tramos casi vacíos;
+- casas del fondo vistas por una abertura del frente.
+
+**Cambio de la medida**, por decisión del responsable del 22-11-2026, sin tocar la tolerancia (0,5 m):
+
+- Una casa cuenta como fachada de un frente si es de la manzana edificada que lo arma. Es la de la mayoría de los golpes de ese lado, con las casas juntadas cerrando los huecos de menos de 2 m, como en la puerta de acceso.
+- Lo de otras manzanas no se mide en ese frente. Se mide en el suyo.
+- Una casa corrida dentro de su manzana sigue desalineada.
+- El generador (`alinear_casas`) usa la misma regla.
+
+Se probó además exigir que el punto de fachada cayera sobre el contorno exterior de la manzana, para descartar las casas del fondo vistas por una abertura. No cambió nada: las aberturas de la ciudad tienen más de 2 m, y el contorno entra por ellas. Se descartó.
+
+| Criterio | Datos publicados | Solo la medida nueva | Medida y generador (6f4bf90) |
+|---|---|---|---|
+| Frentes alineados | 115 casas desalineadas | 84 | **83** (en 64 frentes) |
+| Frentes medidos | 568 | 568 | 568 |
+| Casas medidas | 4598 | 4509 | 4508 |
+| Lotes sin solapes | 0 pares | 0 | 0 (cumple) |
+| Casas con acceso | 4 sin acceso | 4 | 4 |
+| Calle aprobada | fase 3 en 5/5 | 5/5 | 5/5 |
+
+Las fases 3 y 4 siguen cerrables.
+
+De las 83 que quedan:
+
+- 46 son casas que el rayo ve por una abertura de más de 2 m, dentro de su manzana. Son aberturas del frente, que se cierran en la fase 7.
+- 16 son de la reconstrucción a no más de 8 m: cuñas de esquina y huecos de solar.
+- 6 tienen que ver con casas de 1578.
+- 5 son manzanas retiradas enteras.
+- 4 están en frentes con el eje metido en las casas.
+- El resto son casas sueltas de 1936 o de frentes mixtos.
+
 ## Lo que sigue
 
-- **Plaza Mayor.** El recuadro de la Plaza Bolívar (hito) está corrido unos 4 m al este de su manzana de 1936. Sur 0 queda angosta y Sur 2 ancha. Va en su propio PR.
-- **Manzanas retiradas más de 8 m y ejes metidos en las casas.** Van a revisión a ojo y a decisión del responsable, con capturas.
-- **Esquinas donde el tramo es más largo que la cuadra.**
+- **Aberturas del frente.** La fase 7 cierra las aberturas indebidas. Decidir si se adelanta para estos frentes o si quedan como límite de la fase 5 hasta la 7.
+- **Cuñas de esquina y huecos de solar**, y las casas de 1578 delante de la reconstrucción.
 - **Las 4 casas sin acceso.**
 
 ## Reproducir
