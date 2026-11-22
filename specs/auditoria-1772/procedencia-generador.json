@@ -152,6 +152,11 @@
     "entrada": "tools/geo/calles-historicas.json",
     "clase": "historica_curada",
     "nota": "Calles verificadas en los dos planos (San Jacinto–Traposos y otras): sus núcleos de calzada entran en calzada72, así que ninguna casa de 1772 las pisa."
+   },
+   {
+    "entrada": "tools/geo/referencias/1772-calles-1936.json",
+    "clase": "historica_reproyectada",
+    "nota": "Ejes en 1936 de las calles de la red de la referencia, con la tolerancia del calce en su sector: sobre sus tramos medibles se alinean las fachadas de la reconstrucción de 1772 (tools/geo/fachadas.py) y lo que queda delante es calle de 1772; los sectores límite no se tocan."
    }
   ],
   "epocas": [

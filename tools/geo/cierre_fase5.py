@@ -35,11 +35,9 @@ from shapely.strtree import STRtree
 from cierre_fase3 import EPOCA_1772, METRO, casas_de_epoca
 from cierre_fase4 import _en_pie, visibles
 
-TOLERANCIA_FACHADA_M = 0.5   # una casa a más de esto de la recta de su frente está desalineada (un píxel del mosaico)
-PASO_M = 1.0                 # un rayo cada esto a lo largo del frente
-ESQUINA_M = 8.0              # sin rayos a menos de esto de cada extremo del tramo: la esquina tiene dos frentes
-ALCANCE_M = 20.0             # un rayo busca la fachada hasta esto del eje (media calle ancha más un retiro)
-ESTACIONES_MINIMAS = 5       # un lado con menos puntos de fachada no es un frente que se pueda medir
+# los rayos, las estaciones y la recta de la mayoría son los mismos con que el generador alinea (tools/geo/fachadas.py)
+from fachadas import (ALCANCE_M, ESQUINA_M, ESTACIONES_MINIMAS, PASO_M, TOLERANCIA_FACHADA_M,  # noqa: E402
+                      estaciones as _estaciones, recta_de_la_mayoria as _recta_robusta)
 SOLAPE_MINIMO_M2 = 0.01      # umbral de detección de T33j.1e (diagnostico-huellas.md)
 CIERRE_M = 1.0               # dos casas a menos de 2·CIERRE_M son de la misma manzana edificada
 ACCESO_MINIMO_M = 2.0        # el ancho de una puerta: menos borde hacia afuera no da acceso
@@ -62,40 +60,6 @@ def _primero(rayo, origen, arbol, figuras, son_obstaculo):
     _d, j, corte = mejor
     puntos = [Point(c) for g in getattr(corte, 'geoms', [corte]) for c in g.coords]
     return j, min(puntos, key=origen.distance)
-
-
-def _recta_robusta(puntos, tol_px, normales=()):
-    """(punto, normal) de la recta que siguen la mayoría de los puntos. Para cada dirección candidata (las `normales`,
-    como la del eje, y la del ajuste de todos los puntos) busca la posición que deja más puntos a menos de la tolerancia
-    (la de la mayoría, aunque haya varias casas corridas) y la afina por mínimos cuadrados totales con esos puntos."""
-    centro = puntos.mean(axis=0)
-    candidatas = [np.asarray(n, float) / np.hypot(*n) for n in normales] + [np.linalg.svd(puntos - centro)[2][1]]
-    mejor = None
-    for normal in candidatas:
-        proy = np.sort(puntos @ normal)
-        cuantos = np.searchsorted(proy, proy + 2 * tol_px, side='right') - np.arange(len(proy))
-        k = int(np.argmax(cuantos))
-        if mejor is None or cuantos[k] > mejor[0]:
-            mejor = (int(cuantos[k]), normal, proy[k] + tol_px)
-    _n, normal, desplazamiento = mejor
-    dentro = np.abs(puntos @ normal - desplazamiento) <= tol_px
-    for _ in range(4):
-        if dentro.sum() < 2:
-            break
-        centro = puntos[dentro].mean(axis=0)
-        normal = np.linalg.svd(puntos[dentro] - centro)[2][1]
-        dentro = np.abs((puntos - centro) @ normal) <= tol_px
-    return centro, normal
-
-
-def _estaciones(a, b, metro):
-    a, b = np.asarray(a, float), np.asarray(b, float)
-    largo = float(np.hypot(*(b - a)))
-    esquina, paso = ESQUINA_M / metro, PASO_M / metro
-    if largo < 2 * esquina + paso:
-        return None, []
-    d = (b - a) / largo
-    return d, [a + d * s for s in np.arange(esquina, largo - esquina + 1e-9, paso)]
 
 
 def frentes_desalineados(calles, casas, metro=METRO, obstaculos=(), tolerancia_m=TOLERANCIA_FACHADA_M):

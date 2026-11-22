@@ -259,3 +259,34 @@ def test_las_casas_de_dos_manchas_que_el_calce_encima_no_se_pisan():
     for i, (ji, a) in enumerate(casas):
         for jj, b in casas[i + 1:]:
             assert ji == jj or a.intersection(b).area * METRO ** 2 <= 0.01
+
+
+def test_una_mancha_que_cede_y_se_reparte_por_su_mascara_tampoco_pisa_a_la_anterior():
+    # dos manchas anteriores muerden 1,5 m del frente de la última: lo que le queda pasa de LADOS_MAXIMOS
+    # (_ceder_poligono → None) y el reparto exacto, que infiere el polígono de la máscara con su tolerancia de 2 m, no
+    # debe devolverle las mordidas
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    edificado = [{'id': f'U{k}', 'poligonos': [box(x, 23, x + 12, 43)], 'por_anillo': False}
+                 for k, x in enumerate((80, 160))] + [{'id': 'U9', 'poligonos': [box(40, 40, 220, 140)], 'por_anillo': False}]
+    grupos = _cuadras_de_edificado(edificado, c, np.zeros_like(c, dtype=int), {}, METRO)
+    assert grupos[-1]['poligono'] is None
+    casas = _casas_de_grupos(grupos, c)
+    assert len({j for j, _ in casas}) == 3
+    for i, (ji, a) in enumerate(casas):
+        for jj, b in casas[i + 1:]:
+            assert ji == jj or a.intersection(b).area * METRO ** 2 <= 0.01
+
+
+def test_una_mancha_que_cede_una_caja_adentro_no_la_vuelve_a_techar():
+    # la primera mancha cae entera dentro de la segunda: el polígono de la segunda queda con un hueco (_ceder_poligono →
+    # None) y el reparto por su máscara no debe devolverle la caja al quedarse con el contorno exterior de una huella
+    c = np.full((260, 260), CLASE['calle'], np.uint8)
+    c[30:230, 30:230] = CLASE['edificado']
+    edificado = [{'id': 'U2', 'poligonos': [box(52, 70, 64, 82)], 'por_anillo': False},
+                 {'id': 'U9', 'poligonos': [box(40, 40, 220, 140)], 'por_anillo': False}]
+    grupos = _cuadras_de_edificado(edificado, c, np.zeros_like(c, dtype=int), {}, METRO)
+    assert grupos[-1]['poligono'] is None
+    casas = _casas_de_grupos(grupos, c)
+    caja = box(53, 71, 63, 81)
+    assert not any(casa.intersection(caja).area * METRO ** 2 > 0.01 for j, casa in casas if j == len(grupos) - 1)
