@@ -8,7 +8,7 @@ export const CAMPOS_MARCO = 11 // techo, ox, oy, eux, euy, ancho, fondo, calles,
 export const CAMPOS_ALA = 5 // tipo, u0, v0, u1, v1
 const TIPOS_DE_ALA = 9 // tools/geo/alas.py: patio, solar, frente, cruzada, laterales, esquinas, fondo
 
-export function partesDeCiudad({ vertices, techos, vida, historia, marcos, alas }) {
+export function partesDeCiudad({ vertices, techos, vida, historia, marcos, alas, vuelos }) {
   if (vertices.length % 2 !== 0) throw new Error('ciudad: los vértices deben venir de a pares (px, py)')
   const nVertices = vertices.length / 2
   const datosTechos = new Uint32Array(techos.length * 4)
@@ -25,6 +25,7 @@ export function partesDeCiudad({ vertices, techos, vida, historia, marcos, alas 
   if (vida !== undefined) partes.vida = { datos: empacarVida(vida, techos.length), registro: 4 }
   if (historia !== undefined) partes.historia = { datos: empacarHistorias(historia, techos.length), registro: CUANTAS_EPOCAS }
   if (marcos?.length) Object.assign(partes, empacarAlas(marcos, alas ?? [], techos.length))
+  if (vuelos !== undefined) partes.vuelos = { datos: empacarVuelos(vuelos, techos.length), registro: 1 }
   return partes
 }
 
@@ -63,6 +64,17 @@ export function empacarAlas(marcos, alas, cuantosTechos) {
 }
 
 /** [[byte × 6 épocas], …] por techo (tools/geo/estilos.py: estilo + 16·pisos) → Uint8, 6 por techo. */
+/** "vuelos" (tools/geo/epocas.py, vuelos_1772): un byte por techo, los centímetros que puede volar su alero (255 = sin tope). */
+export function empacarVuelos(vuelos, cuantosTechos) {
+  if (!Array.isArray(vuelos) || vuelos.length !== cuantosTechos) {
+    throw new Error(`ciudad: "vuelos" tiene que ser una lista con una entrada por techo (${cuantosTechos})`)
+  }
+  vuelos.forEach((v, k) => {
+    if (!Number.isInteger(v) || v < 0 || v > 255) throw new Error(`ciudad: los vuelos del techo ${k} traen ${v}; se espera 0…255`)
+  })
+  return Uint8Array.from(vuelos)
+}
+
 export function empacarHistorias(historia, cuantosTechos) {
   if (!Array.isArray(historia) || historia.length !== cuantosTechos) {
     throw new Error(`ciudad: "historia" tiene que ser una lista con una entrada por techo (${cuantosTechos})`)

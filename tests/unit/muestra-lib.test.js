@@ -39,6 +39,12 @@ describe('recortarCiudad', () => {
     expect([...r.historia]).toEqual([16, 16, 16, 16, 16, 16, 18, 18, 18, 18, 18, 18])
   })
 
+  test('los vuelos de los techos que quedan (T33j.6f)', () => {
+    const r = recortarCiudad({ ...partes, vuelos: Uint8Array.from([30, 255, 12]) }, [0, 0, 500, 500])
+    expect([...r.vuelos]).toEqual([30, 12])
+    expect(recortarCiudad(partes, [0, 0, 500, 500]).vuelos).toBeUndefined()
+  })
+
   test('los marcos de los techos que quedan, con el techo y sus alas renumerados', () => {
     const r = recortarCiudad(partes, [0, 0, 500, 500])
     // el marco del techo 2 (ahora 1) tenía las alas 2 y 3: ahora son las 0 y 1

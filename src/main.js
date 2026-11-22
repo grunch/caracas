@@ -205,7 +205,7 @@ let olaObjetivo = 0
 let olaMax = Math.hypot(Math.max(-hoja.x0, hoja.x0 + hoja.ancho), Math.max(-hoja.z0, hoja.z0 + hoja.alto)) + ciudad.U.uAnchoOla.value
 let arboles = null
 let datosCiudad = null // las partes de ciudad.pak, con la vida que dejan los hitos: el modo a pie choca con ellas
-const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array }).then((datos) => {
+const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array }).then((datos) => {
   // donde hay un hito modelado a mano, la casa genérica de ese lugar no nace (src/hitos/suprimir.js)
   datosCiudad = { ...datos, vida: suprimirTechos(datos, zonasDeSupresion(HITOS)) }
   const g = geometriaCiudad(datosCiudad, coords)

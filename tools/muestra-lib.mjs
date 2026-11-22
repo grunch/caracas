@@ -61,7 +61,7 @@ function recortarPatios({ marcos, alas }, nuevo) {
 }
 
 /**
- * Las partes del .pak (vertices, techos y, si están, vida, historia, marcos y alas; src/ciudad.js) con los techos
+ * Las partes del .pak (vertices, techos y, si están, vida, historia, vuelos, marcos y alas; src/ciudad.js) con los techos
  * cuyo centro cae en la caja. Partes nuevas: no toca las originales.
  */
 export function recortarCiudad(partes, caja) {
@@ -77,6 +77,7 @@ export function recortarCiudad(partes, caja) {
   const salida = { vertices: Float32Array.from(vertices), techos: Uint32Array.from(techos) }
   if (partes.vida) salida.vida = Uint32Array.from(quedan.map((k) => partes.vida[k]))
   if (partes.historia) salida.historia = Uint8Array.from(registros(partes.historia, CAMPOS_HISTORIA, quedan))
+  if (partes.vuelos) salida.vuelos = Uint8Array.from(quedan.map((k) => partes.vuelos[k]))
   if (partes.marcos && partes.alas) Object.assign(salida, recortarPatios(partes, nuevo))
   return salida
 }

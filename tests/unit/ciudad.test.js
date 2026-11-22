@@ -504,3 +504,13 @@ function sinAgujas(g) {
     }
   }
 }
+
+describe('extruirTechos: el alero no pasa su tope (T33j.6f)', () => {
+  test('una casa con 10 cm de tope no vuela más que eso sobre la calle; sin tope, vuela como siempre', () => {
+    const datos = { ...ciudadDe([{ puntos: rect(0, 0, 10, 12), semilla: 5 }]), vuelos: Uint8Array.from([10]) }
+    const sinTope = { ...datos, vuelos: Uint8Array.from([255]) }
+    const lejos = (g) => Math.max(...vertices(g).filter((v) => v.cubierta !== CUBIERTA.PARED).map((v) => -v.z))
+    expect(lejos(extruirTechos(sinTope, coords))).toBeGreaterThan(0.45)
+    expect(lejos(extruirTechos(datos, coords))).toBeLessThanOrEqual(0.1 + 1e-6)
+  })
+})

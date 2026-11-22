@@ -9,8 +9,8 @@ import { decodificarPak } from '../src/pak.js'
 import { codificarPak } from './pak.mjs'
 import { cajaDeMuestra, nivelesDeMuestra, planDeMuestra, recortarArboles, recortarCiudad, teselasEnCaja } from './muestra-lib.mjs'
 
-const TIPOS = { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array }
-const REGISTROS = { vertices: 8, techos: 16, vida: 4, historia: 6, marcos: 44, alas: 20 }
+const TIPOS = { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array }
+const REGISTROS = { vertices: 8, techos: 16, vida: 4, historia: 6, marcos: 44, alas: 20, vuelos: 1 }
 const MANIFIESTO = 'public/datos/manifiesto.json'
 
 function ciudadRecortada(bytes, caja) {

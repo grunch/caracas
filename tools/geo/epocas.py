@@ -463,6 +463,36 @@ def alinear_1772(ciudad, tramos, hitos, red72, verificadas, metro):
     return con_huellas(ciudad, nuevas)
 
 
+VUELO_MAXIMO_M = 0.8   # el alero más largo del visor (src/techos.js y src/alas.js: 0,5 + 0,3 · azar)
+SIN_TOPE = 255         # en "vuelos", un byte por techo: centímetros que puede volar su alero; esto, sin tope
+
+
+def vuelos_1772(ciudad, hitos, red72, metro):
+    """La ciudad con "vuelos" (T33j.6f, decisión del responsable del 22-11-2026): por techo, los centímetros que puede
+    volar el alero de una casa de 1772 sin entrar en el núcleo de la calzada de las calles de 1772 (la distancia de
+    su huella al núcleo: todo el alero queda a menos de su vuelo de la huella), o SIN_TOPE si su alero más largo no
+    llega. El visor (src/ciudad.js) lo respeta: en las calles angostas el alero es más corto. No toca fachadas ni
+    ocupación. → una ciudad nueva; no muta la entrada."""
+    from shapely.ops import unary_union
+    from shapely.strtree import STRtree
+    from cierre_fase3 import casas_de_epoca, corredores
+    from cierre_fase4 import visibles
+    vuelos = [SIN_TOPE] * len(ciudad["techos"])
+    nucleos = [c["poligono"] for c in corredores(red72, metro=metro)]
+    if nucleos:
+        arbol = STRtree(nucleos)
+        cerca = VUELO_MAXIMO_M / metro
+        for k, huella in visibles(casas_de_epoca(ciudad), hitos):
+            vecinos = [nucleos[j] for j in arbol.query(huella.buffer(cerca))]
+            if not vecinos:
+                continue
+            distancia_m = huella.distance(unary_union(vecinos)) * metro
+            if distancia_m < VUELO_MAXIMO_M:
+                vuelos[k] = int(distancia_m * 100 + 1e-6)   # hacia abajo: el alero no llega al núcleo
+    print(f"casas de 1772 con el alero topado por la calzada: {sum(v < SIN_TOPE for v in vuelos)}")
+    return {**ciudad, "vuelos": vuelos}
+
+
 def dar_acceso_1772(ciudad, hitos, metro):
     """La ciudad final sin casas de la reconstrucción encerradas en 1772 (accesos.lotes_encerrados, T33j.5h): cada lote
     sin borde hacia la calle se une a su vecina de la misma junta y vida, que pierde su marco (el visor la techa por su
@@ -702,6 +732,7 @@ def main():
         ciudad["vida"] = ceder_frentes_a_1772(ciudad, json.loads(calles72.read_text())["tramos"], hitos, metro, desde)
         ciudad = alinear_1772(ciudad, json.loads(calles72.read_text())["tramos"], hitos, red72, verificadas, metro)
         ciudad = dar_acceso_1772(ciudad, hitos, metro)
+        ciudad = vuelos_1772(ciudad, hitos, red72, metro)
         print(f"calles de 1772 bloqueadas en la ciudad final: {len(sin_abrir)} {sin_abrir[:10]}")
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))
 
