@@ -123,3 +123,13 @@ def test_una_casa_suprimida_por_un_hito_no_cuenta_como_casa_de_la_unidad():
     p = puerta_fase4(ciudad=ciudad((0, 0, 100, 100), (300, 0, 340, 100)), red=red(), unidades=unidades(), cajas=cajas(),
                      hitos=[hito], metro=METRO)
     assert {'unidad': 'U1', 'medida': 'anillo'} in p['edificadas_con_casas']['sin_casas']
+
+
+def test_una_casa_suprimida_por_otro_hito_no_es_un_doble_edificio():
+    # la casa pisa la planta de B, que no la suprime; la suprime A, así que el visor no la muestra
+    a = {'id': 'a', 'nace': 1, 'muere': 0, 'planta': [[[0, 0], [40, 0], [40, 100], [0, 100]]],
+         'suprime': [[[0, 0], [60, 0], [60, 100], [0, 100]]]}
+    b = {'id': 'b', 'nace': 1, 'muere': 0, 'planta': [[[50, 0], [100, 0], [100, 100], [50, 100]]],
+         'suprime': [[[70, 0], [100, 0], [100, 100], [70, 100]]]}
+    p = puerta_fase4(ciudad=ciudad((45, 40, 65, 60)), red=red(), unidades=unidades(), cajas=cajas(), hitos=[a, b], metro=METRO)
+    assert p['hitos_sin_dobles'] == {'cumplido': True, 'dobles': []}
