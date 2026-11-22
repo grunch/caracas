@@ -76,7 +76,7 @@ def test_una_franja_vacia_que_cruza_una_unidad_edificada_es_una_calle_abierta_de
 
 def test_la_puerta_se_cumple_sin_calles_ocupadas_ni_plazas_con_casas_ni_calles_dentro():
     # Arrange
-    entradas = dict(red=red(), unidades=unidades(), verificadas=[], metro=METRO)
+    entradas = dict(red=red(), unidades=unidades(), verificadas=[], metro=METRO, calles=[])
     limpia = ciudad((10, 10, 90, 90))
     sucia = ciudad((10, 10, 90, 90), (90, 40, 110, 60))   # una casa sobre la calle x=100
 
@@ -146,3 +146,9 @@ def test_la_red_conectada_cuenta_por_sector_los_tramos_bloqueados_y_los_que_no_s
     assert conexa['cumplido'] is False and conexa['bloqueados'] == ['L2:B-C']
     assert conexa['por_sector'] == {'S1': {'medidos': 1, 'bloqueados': 0}, 'S2': {'medidos': 1, 'bloqueados': 1}}
     assert conexa['sin_medir_por_limite_del_calce'] == {'S9': 1}
+
+
+def test_sin_las_calles_la_red_conectada_queda_incompleta_y_la_puerta_no_se_cierra():
+    p = puerta_fase3(ciudad=ciudad((10, 10, 90, 90)), red=red(), unidades=unidades(), verificadas=[], metro=METRO)
+    assert p['red_conectada'] == {'cumplido': False, 'sin_entrada': True}
+    assert p['fase_3_cerrable'] is False

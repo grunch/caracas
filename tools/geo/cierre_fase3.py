@@ -178,7 +178,7 @@ def red_conectada(calles, casas, metro=METRO):
             'sin_medir_por_limite_del_calce': dict(sorted(sin_medir.items()))}
 
 
-def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_INFERIDO_M, calles=()):
+def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_INFERIDO_M, calles=None):
     """Criterios de la fase 3 con su cumplimiento sobre las casas de 1772; `fase_3_cerrable` exige todos."""
     casas = casas_de_epoca(ciudad)
     por_id = {n['id']: n for n in red['nodos']}
@@ -191,7 +191,8 @@ def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_
     plazas = plazas_ocupadas(unidades, por_id, casas, metro, ancho_m / 2)
     dentro = calles_abiertas_dentro(unidades, por_id, casas, metro, ancho_m / 2)
     criterios = OrderedDict([
-        ('red_conectada', red_conectada(calles, casas, metro)),
+        ('red_conectada', red_conectada(calles, casas, metro) if calles is not None
+                          else {'cumplido': False, 'sin_entrada': True}),
         ('calles_libres', {'cumplido': not ocupadas, 'tramos_medidos': len(cs), 'ancho_inferido_m': ancho_m,
                            'tramos_ocupados': len(ocupadas), 'ocupadas': ocupadas}),
         ('calles_historicas_libres', {'cumplido': not historicas_ocupadas, 'medidas': len(historicas),

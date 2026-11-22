@@ -76,3 +76,46 @@ def test_epocas_no_toca_un_tramo_libre_ni_uno_que_no_se_mide():
     ciudad = {'vertices': [90, 0, 110, 0, 110, 100, 90, 100], 'techos': [[0, 4, 1, 0, 0]], 'antes': [0]}
     no_medible = [{'tramo': 'L9', 'puntos': [[0, 50], [200, 50]], 'banda_m': 10, 'medible': False}]
     assert abrir_calles_de_1772(ciudad, [[0, 0]], set(), no_medible, METRO) == ([[0, 0]], set(), [])
+
+
+def test_un_extremo_sin_sector_no_hace_medible_un_tramo_de_un_sector_limite():
+    r = red()
+    r['nodos'][1]['sector'] = None            # B sin sector
+    r['nodos'][2]['sector'] = 'S9'            # C en un sector límite
+    ejes = {e['tramo']: e for e in ejes_de_red(r, a_1936, {'S1': 8.0}, limites={'S9'})}
+    assert ejes['L2:B-C']['medible'] is False
+    assert ejes['L1:A-B']['medible'] is True   # A sigue en un sector conocido fuera de los límites
+
+
+def test_dos_tramos_seguidos_no_pasan_por_lados_distintos_de_una_casa_en_su_cruce():
+    # el ejemplo de la revisión: una casa angosta justo sobre el cruce B parte las dos bandas en dos
+    casa = [box(98, -100, 102, 100)]
+    assert bloqueado({'puntos': [[0, 0], [100, 0]], 'banda_m': 6}, casa, METRO) is True
+    assert bloqueado({'puntos': [[100, 0], [200, 0]], 'banda_m': 6}, casa, METRO) is True
+
+
+def test_epocas_quita_1772_a_una_casa_de_1578_que_bloquea_una_calle_en_la_ciudad_final():
+    from epocas import abrir_calles_de_1772
+    # la casa 1 es de 1578 (más allá de la lista "antes", que es de 1936) y cruza la calle
+    ciudad = {'vertices': [20, 0, 40, 0, 40, 40, 20, 40, 90, 0, 110, 0, 110, 100, 90, 100],
+              'techos': [[0, 4, 1, 0, 0], [4, 4, 1, 0, 0]], 'antes': [0]}
+    calles = [{'tramo': 'L1', 'puntos': [[0, 50], [200, 50]], 'banda_m': 10, 'medible': True}]
+    vida, quitar, sin_abrir = abrir_calles_de_1772(ciudad, [[1, 0], [0, 3]], set(), calles, METRO)
+    assert vida[1] == [0, 1] and vida[0] == [1, 0] and sin_abrir == []
+
+
+def test_quitar_una_casa_de_1578_no_desalinea_las_listas_de_1936():
+    from epocas import sin_techos
+    # dos casas de 1936 (con "antes") y una de 1578 al final, sin entrada en "antes"
+    ciudad = {'vertices': [0, 0, 1, 0, 1, 1, 2, 2, 3, 2, 3, 3, 5, 5, 6, 5, 6, 6], 'techos': [[0, 3], [3, 3], [6, 3]],
+              'antes': [0, 1]}
+    salida, vida = sin_techos(ciudad, [[1, 0], [1, 2], [0, 1]], {2})
+    assert salida['antes'] == [0, 1] and len(salida['techos']) == 2 and vida == [[1, 0], [1, 2]]
+
+
+def test_quitar_una_casa_de_1936_con_casas_de_1578_detras_conserva_las_listas_de_1936():
+    from epocas import sin_techos
+    ciudad = {'vertices': [0, 0, 1, 0, 1, 1, 2, 2, 3, 2, 3, 3, 5, 5, 6, 5, 6, 6], 'techos': [[0, 3], [3, 3], [6, 3]],
+              'antes': [0, 1]}
+    salida, vida = sin_techos(ciudad, [[1, 0], [1, 2], [0, 1]], {0})
+    assert salida['antes'] == [1] and len(salida['techos']) == 2 and vida == [[1, 2], [0, 1]]

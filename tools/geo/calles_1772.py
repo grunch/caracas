@@ -19,13 +19,13 @@ from shapely.geometry import LineString
 BANDA_MINIMA_M = 6.0      # aunque el calce cierre mejor, el trazado a mano no ubica una calle con menos que esto
 BANDA_MAXIMA_M = 30.0     # más ancha, la banda abarca la cuadra de al lado y deja de medir esta calle
 NUCLEO_DE_CALZADA_M = 4.0  # como cierre_fase3.ANCHO_INFERIDO_M: ancho inferido, el original no da anchos
-RADIO_EXTREMO_PX = 4      # el extremo de un tramo es el paso libre a menos de esto del punto
+
 
 
 def ejes_de_red(red, a_1936, errores, limites):
     """[{tramo, sector, puntos (px del mosaico), identificado (cruces con pareja), banda_m, medible}] de cada tramo.
     `a_1936(xs, ys)`: el calce del original al mosaico; `errores`: {sector: mediana LOO m}; `limites`: sectores
-    límite del calce. Un tramo se mide si alguno de sus extremos cae fuera de un sector límite."""
+    límite del calce. Un tramo se mide si alguno de sus extremos tiene un sector conocido fuera de los límites."""
     from referencia_red import _geometria_original
     por_id = {n['id']: n for n in red['nodos']}
     ejes = []
@@ -41,7 +41,8 @@ def ejes_de_red(red, a_1936, errores, limites):
         banda = min(BANDA_MAXIMA_M, max(BANDA_MINIMA_M, errores.get(sector) or BANDA_MAXIMA_M))
         ejes.append({'tramo': f'{calle}:{a}-{b}', 'sector': sector, 'puntos': en_1936, 'identificado': identificados,
                      'banda_m': banda,
-                     'medible': any(por_id[x].get('sector') not in limites for x in (a, b))})
+                     'medible': any(por_id[x].get('sector') is not None and por_id[x]['sector'] not in limites
+                                    for x in (a, b))})
     return ejes
 
 
@@ -58,13 +59,14 @@ def bloqueado(eje, casas, metro):
             cv2.fillPoly(libre, [np.round(np.asarray(casa.exterior.coords) - (x0, y0)).astype(np.int32)], 0)
     _, etiquetas = cv2.connectedComponents(libre, connectivity=4)
 
-    def alrededor(punto):
+    def en(punto):
+        # el componente libre justo en el cruce, sin ventana: así dos tramos que se encuentran en un cruce comparten el
+        # mismo paso, y una casa sobre el cruce los bloquea a todos
         i, j = int(round(punto[0] - x0)), int(round(punto[1] - y0))
-        r = RADIO_EXTREMO_PX
-        ventana = etiquetas[max(0, j - r):j + r + 1, max(0, i - r):i + r + 1]
-        return set(ventana[ventana > 0].ravel().tolist())
+        return int(etiquetas[j, i]) if 0 <= j < etiquetas.shape[0] and 0 <= i < etiquetas.shape[1] else 0
 
-    return not (alrededor(eje['puntos'][0]) & alrededor(eje['puntos'][-1]))
+    a, b = en(eje['puntos'][0]), en(eje['puntos'][-1])
+    return not (a and a == b)
 
 
 def _leer(ruta):
