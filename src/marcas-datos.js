@@ -43,8 +43,10 @@ export const MARCAS = Object.freeze([
     dudas: 'El nombre «Plaza Bolívar» es anterior a la estatua (CG: decreto de 1842); aquí cambia con el jardín, en la época de 1889.' },
   // el punto va en el medio de la nave (39 m al este de la fachada, que es el marco del hito): más lejos del cartel de la plaza
   { id: 'catedral', hito: 'catedral', x: 9156, y: 6816, nombre: 'Catedral', nivel: 2, alto: 16, fuente: `${P36} («Iglesia Catedral»); ${P89} (templo I)` },
-  { id: 'casa-amarilla', hito: 'casa-amarilla', nombre: 'Casa Amarilla', nivel: 3, alto: 10, nota: 'En 1936, Ministerio del Exterior.',
-    fuente: `${P89} (5 «Casa amarilla»); ${P36} («Min. del Exterior»)` },
+  { id: 'casa-amarilla', hito: 'casa-amarilla', nace: 1, nivel: 3, alto: 14,
+    nombres: [[1, 'Ayuntamiento y Real Cárcel'], [2, 'Casa de Gobierno'], [3, 'Casa Amarilla']],
+    fuente: `${P89} (5 «Casa amarilla»); ${P36} («Min. del Exterior»); cronología: https://es.wikipedia.org/wiki/Casa_Amarilla_de_Caracas; https://bibliofep.fundacionempresaspolar.org/dhv/entradas/c/casa-amarilla/; arquitectura: https://iamvenezuela.org/2016/07/casa-amarilla/`,
+    dudas: 'Reconstrucción interpretativa: dimensiones, patios coloniales y localización de las cubiertas reformadas por verificar.' },
   { id: 'capitolio', hito: 'capitolio', nace: 1, nivel: 2, alto: 14,
     nombres: [[1, 'Convento de las Concepciones'], [3, 'Capitolio', 'Capitolio y Palacio Federal, donde estuvo el convento de las Concepciones.']],
     fuente: `${P89} (1 «Capitolio», 2 «Palacio Federal»); ${P36} («Palacio Federal»); convento: ${CG}`, dudas: SIN_LEYENDA },

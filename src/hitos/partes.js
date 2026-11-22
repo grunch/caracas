@@ -3,6 +3,7 @@
  * está quién la dibuja. Una parte recibe el pintor del hito ya con su vida (nace, muere) y sus medidas en
  * metros, en el marco del hito: a a lo largo del eje, b a su derecha.
  */
+import { casaAmarilla } from './casa-amarilla.js'
 import { panteon } from './panteon.js'
 import { miraflores } from './miraflores.js'
 import { MAT } from './lienzo.js'
@@ -53,6 +54,7 @@ const frente = (p, { a = 0, b = 0, h = 0, mira = [0, 1] }) => p.mirando(a, h, b,
 export const parteDe = (tipo) => (Object.hasOwn(PARTES, tipo) ? PARTES[tipo] : undefined)
 
 export const PARTES = Object.freeze({
+  casaAmarilla(p, medidas) { casaAmarilla(p, medidas) },
   panteon(p, medidas) { panteon(p, medidas) },
   miraflores(p) { miraflores(p) },
   /** Un cuerpo de edificio centrado en (a, b): paredes, tejado y, si se piden, ventanas altas en los dos largos. */

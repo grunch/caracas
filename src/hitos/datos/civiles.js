@@ -3,13 +3,12 @@
  * 1936; alzados: las imágenes de fuentes/imagenes cuando las hay (Casa Amarilla ~1875, fachada neogótica de
  * 1880, panorámica de ~1903). Lo demás va en `verificar`.
  */
+import { casaAmarilla } from './casa-amarilla.js'
 import { EJE_DAMERO, rectanguloPx } from './marco.js'
 
 const PLANO = 'Plano de Caracas de 1936'
 const eje = EJE_DAMERO
 
-const amarilla = { x: 8822, y: 6770, eje }
-const AMARILLA = { ancho: 46, fondo: 54, pisos: 2, altoPiso: 5.2 }
 const capitolio = { x: 8690, y: 7035, eje }
 const CAPITOLIO = { ancho: 92, fondo: 108, crujia: 15, pisos: 2, altoPiso: 6 }
 const universidad = { x: 8645, y: 7192, eje } // el medio del frente norte, sobre la calle
@@ -18,21 +17,7 @@ const miraflores = { x: 7958, y: 6360, eje }
 const MIRAFLORES = { ancho: 64, fondo: 56 } // incluye explanada, escaleras y marquesinas
 
 export const civiles = Object.freeze([
-  Object.freeze({
-    id: 'casa-amarilla', nombre: 'Casa Amarilla', ...amarilla, nace: 3, muere: 0,
-    planta: [rectanguloPx(amarilla, AMARILLA.ancho, AMARILLA.fondo)], suprime: [rectanguloPx(amarilla, AMARILLA.ancho, AMARILLA.fondo)],
-    fuente: `${PLANO} (recuadro "Min. del Exterior", frente al lado oeste de la Plaza Bolívar); grabado de ~1875 (fuentes/imagenes)`,
-    verificar: [
-      'Palacio de esquina de dos pisos, con cornisa, balcones y remate central con escudo y asta: del grabado de ~1875 (fecha a verificar).',
-      'El color amarillo es el del nombre; el grabado no tiene color.',
-      'Va desde la época de 1889 con la fachada neoclásica; el edificio anterior del lugar no se modela.',
-      'La galería de tres arcos del extremo izquierdo del grabado no se modela.',
-    ],
-    partes: [
-      { tipo: 'palacio', ...AMARILLA, crujia: 11, cubierta: 'azotea', color: 0xecd58a, balcones: true },
-      { tipo: 'remateConEscudo', a: AMARILLA.ancho / 2, h: AMARILLA.pisos * AMARILLA.altoPiso + 0.8, mira: [1, 0], color: 0xecd58a },
-    ],
-  }),
+  casaAmarilla,
   Object.freeze({
     id: 'capitolio', nombre: 'Capitolio (Palacio Federal y Legislativo)', ...capitolio, nace: 3, muere: 0,
     planta: [rectanguloPx(capitolio, CAPITOLIO.ancho, CAPITOLIO.fondo)], suprime: [rectanguloPx(capitolio, CAPITOLIO.ancho, CAPITOLIO.fondo)],

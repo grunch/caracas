@@ -38,3 +38,5 @@ Plan de corrección de la reconstrucción: [auditoría integral de 1772](08-audi
 2. Seguí `06` para elegir los planos de tu ciudad: **es el paso que decide todo**.
 3. Implementá en este orden: visor del plano (2D dentro de la escena 3D) → pipeline de manzanas/edificado → ola + extrusión → tinta/color → hitos y marcas → épocas → modos → hoy/buscador.
 4. Créditos: el original es de @mormonnegro; si el nuevo sitio se inspira en él, conviene decirlo en el "Acerca".
+
+- [Casa Amarilla por épocas](08-casa-amarilla-por-epocas.md): T41c, modelo aprobado desde 1772, fuentes, límites y adaptación al mapa.

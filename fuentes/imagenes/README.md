@@ -603,3 +603,18 @@ Estas nuevas fotografías solo se usan de referencia: **licencias de reproducci�
 no se agregan imágenes ni texturas al sitio. La ficha de Bellermann ya existente conserva su propia
 licencia. Dimensiones, planta, laterales, daños y ornamentos pequeños son interpretativos. Más detalles
 en `specs/08-panteon-por-epocas.md`.
+
+
+## Casa Amarilla por épocas (T41c)
+
+El estudio aprobado incorpora Ayuntamiento y cárcel en 1772, conjunto reunido en 1843 y fachada
+neoclásica desde 1889. La pintura de Bolet de 1870 se usa retrospectivamente para 1843, no como
+prueba contemporánea. Las fotografías de detalle aportadas en el estudio independiente muestran
+que el extremo sur tiene **pared continua, una puerta abajo y tres vanos arqueados pequeños sobre
+un único balcón arriba**, no dos galerías abiertas. Se afinaron pilastras, molduras, rosetas, clave,
+carpintería, friso, herrería y balaustres. Las fotos modernas no certifican la fecha de cada adorno.
+
+La cubierta de 1936 es mixta: no se anticipa la sustitución completa de 1957. El sitio preciso de
+la platabanda es hipotético. Las banderas usan siete estrellas dispuestas según cada fecha.
+Referencias, licencias no verificadas y límites en `specs/08-casa-amarilla-por-epocas.md`.
+No se publican las nuevas imágenes; las mallas son originales y procedurales.
