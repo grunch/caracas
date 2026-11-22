@@ -17,7 +17,8 @@ import { areaConSigno, recortar, recortarConvexo, cruces, estaDentro, sinColinea
 const SIN_TECHO = [0, 0, 0, CUBIERTA.PARED]
 const ALTO_MINIMO_CON_VANOS_M = 2
 const ESCALON_MINIMO_M = 0.03
-const TOLERANCIA_CUMBRE_M = 1e-6 // un vértice así de poco más allá de un quiebre no parte el faldón
+const TOLERANCIA_CUMBRE_M = 1e-3 // un vértice así de poco más allá de un quiebre no parte el faldón: lejos del origen, Float32
+// deja vértices a décimas de milímetro de la cumbrera, y partir ahí dejaba una tira plana sin ancho (T33j.6d)
 export const PISO_PATIO_M = 0.4
 const SUBIDA_DE_HASTIAL_M = 0.3
 const HACIA_AFUERA = 0.7 // coseno desde el cual un lado "mira" hacia un costado del lote

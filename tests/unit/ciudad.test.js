@@ -474,6 +474,25 @@ describe('extruirTechos: sin triángulos degenerados (T33j.6d)', () => {
       marcos: Float32Array.from([0, 26.67, 37.0, -0.97129, -0.23791, 22.91, 22.04, 0, 16.66, 0, 1]),
       alas: Float32Array.from([2, 0, 0, 22.91, 22.04]),
     }, coords)
+    sinAgujas(g)
+  })
+
+  test('un vértice que pasa la cumbrera por menos de 1 mm no la parte en una tira plana sin ancho', () => {
+    // la casa 13841 de la ciudad de 1772, de patio, con sus cinco alas, donde está: lejos del origen, la precisión de
+    // Float32 deja el vértice a décimas de milímetro de la cumbrera
+    const plaza = { aMundo: (px, py) => ({ x: (px - 8968.2) * METRO, z: (py - 6839.0) * METRO }) }
+    sinAgujas(extruirTechos({
+      vertices: Float32Array.from([8266.169, 6786.564, 8276.651, 6740.78, 8258.919, 6713.874, 8243.467, 6781.367]),
+      techos: Uint32Array.from([0, 4, 1, 7030]), vida: Uint32Array.from([1]),
+      marcos: Float32Array.from([0, 8266.17, 6786.56, -0.97478, -0.22317, 23.29, 69.24, 0, 16.4, 0, 5]),
+      alas: Float32Array.from([2, 0, 0, 23.29, 16.4, 4, 0, 16.4, 8.62, 23.86, 0, 8.62, 16.4, 23.29, 23.86,
+        3, 0, 23.86, 23.29, 34.16, 1, 0, 34.16, 23.29, 69.24]),
+    }, plaza))
+  })
+})
+
+function sinAgujas(g) {
+  {
     const p = (i) => [g.posiciones[i * 3], g.posiciones[i * 3 + 1], g.posiciones[i * 3 + 2]]
     for (let t = 0; t < g.indices.length; t += 3) {
       if (g.cubiertas[g.indices[t] * 4 + 3] === CUBIERTA.PARED) continue
@@ -483,5 +502,5 @@ describe('extruirTechos: sin triángulos degenerados (T33j.6d)', () => {
       const lado = Math.max(Math.hypot(...u), Math.hypot(...v), Math.hypot(c[0] - b[0], c[1] - b[1], c[2] - b[2]))
       expect(2 * area / lado).toBeGreaterThanOrEqual(1e-3)
     }
-  })
-})
+  }
+}
