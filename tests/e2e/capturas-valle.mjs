@@ -12,6 +12,7 @@ const VISTAS = {
   valle: { x: 0, z: 0, dist: 7000, yaw: 0, pitch: 0.8 },
   centro: { x: 0, z: 0, dist: 1500, yaw: 0, pitch: 0.8 },
   cerca: { x: -150, z: 450, dist: 420, yaw: 0.5, pitch: 0.55 },
+  avila: { x: 0, z: -2500, dist: 5500, yaw: 0, pitch: 0.12 }, // el cerro desde el sur, casi a ras del valle
 }
 const CUADROS_MEDIDOS = 60
 
