@@ -74,7 +74,7 @@ def frentes_desalineados(calles, casas, metro=METRO, obstaculos=(), tolerancia_m
     for eje in calles:
         if not eje['medible'] or arbol is None:
             continue
-        for a, b in zip(eje['puntos'], eje['puntos'][1:]):
+        for segmento, (a, b) in enumerate(zip(eje['puntos'], eje['puntos'][1:])):
             d, estaciones = _estaciones(a, b, metro)
             for lado in (1, -1):
                 if d is None:
@@ -97,7 +97,8 @@ def frentes_desalineados(calles, casas, metro=METRO, obstaculos=(), tolerancia_m
                 fuera = [{'techo': t, 'desvio_m': round(float(np.median(rs)) * metro, 2)}
                          for t, rs in sorted(por_casa.items()) if float(np.median(rs)) > tol_px]
                 if fuera:
-                    desalineados.append({'tramo': eje['tramo'], 'sector': eje['sector'], 'lado': lado, 'casas': fuera})
+                    desalineados.append({'tramo': eje['tramo'], 'sector': eje['sector'], 'lado': lado,
+                                         'segmento': segmento, 'casas': fuera})
     return {'frentes_medidos': medidos, 'casas_medidas': len(medidas), 'desalineados': desalineados}
 
 
@@ -145,12 +146,13 @@ def plantas_en_pie(hitos, epoca=EPOCA_1772):
 
 def con_limites(desalineados, limites):
     """Los frentes desalineados con la clase del límite documentado que los cubre (limites-fase5.json, decisión del
-    responsable): un frente registrado (tramo y lado) cuenta como límite si no tiene más casas fuera de la recta que
-    las registradas; si tiene más, algo cambió y vuelve a contar entero. → (frentes nuevos, casas en límite, fuera)."""
-    registro = {(x['tramo'], x['lado']): x for x in limites}
+    responsable): un frente registrado (tramo, lado y segmento) cuenta como límite si no tiene más casas fuera de la recta que
+    las registradas; si tiene más, algo cambió y vuelve a contar entero. Un tramo quebrado tiene un frente por segmento
+    y lado. → (frentes nuevos, casas en límite, fuera)."""
+    registro = {(x['tramo'], x['lado'], x.get('segmento', 0)): x for x in limites}
     salida, en_limite, fuera = [], set(), set()
     for f in desalineados:
-        x = registro.get((f['tramo'], f['lado']))
+        x = registro.get((f['tramo'], f['lado'], f.get('segmento', 0)))
         techos = {c['techo'] for c in f['casas']}
         if x is not None and len(f['casas']) <= x['casas_maximas']:
             salida.append({**f, 'limite': x['clase']})

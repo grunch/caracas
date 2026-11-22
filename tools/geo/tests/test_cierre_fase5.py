@@ -169,3 +169,17 @@ def test_sin_limites_la_puerta_no_cambia():
     c = ciudad(*hilera(12, salto={2: 20}))
     p = puerta_fase5(c, [eje((0, 0), (140, 0))], hitos=[], fase3={'fase_3_cerrable': True}, metro=METRO)
     assert p['frentes_alineados']['cumplido'] is False and p['frentes_alineados']['casas_fuera_de_limite'] == 1
+
+
+def test_cada_segmento_de_un_tramo_quebrado_es_su_propio_frente_en_los_limites():
+    # el tramo quiebra en x = 140: dos frentes con el mismo tramo y lado, uno con 1 casa fuera y otro con 2
+    casas = [(10 + k * 20, 12 + (20 if k == 2 else 0), 30 + k * 20, 42 + (20 if k == 2 else 0)) for k in range(6)]
+    casas += [(10 + k * 20, 12 + (20 if k in (8, 10) else 0), 30 + k * 20, 42 + (20 if k in (8, 10) else 0))
+              for k in range(7, 13)]
+    tramo = eje((0, 0), (140, 0), (280, 0))
+    limites = [{'tramo': 'L1:A-B', 'lado': 1, 'segmento': 0, 'clase': 'manzana_retirada', 'casas_maximas': 1},
+               {'tramo': 'L1:A-B', 'lado': 1, 'segmento': 1, 'clase': 'manzana_retirada', 'casas_maximas': 2}]
+    p = puerta_fase5(ciudad(*casas), [tramo], hitos=[], fase3={'fase_3_cerrable': True}, metro=METRO, limites=limites)
+    f = p['frentes_alineados']
+    assert [x['segmento'] for x in f['desalineados']] == [0, 1]
+    assert f['casas_fuera_de_limite'] == 0 and f['cumplido'] is True
