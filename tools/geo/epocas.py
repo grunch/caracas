@@ -403,6 +403,41 @@ def ceder_a_1772(ciudad, vida, desde, metro, epoca=1, area_minima_m2=SOLAPE_1772
     return salida
 
 
+def con_huellas(ciudad, nuevas):
+    """La ciudad con las huellas `nuevas` ({techo: Polygon}) en lugar de las de esos techos; los vértices se vuelven a
+    armar en el orden de los techos. → una ciudad nueva; no muta la entrada."""
+    v = ciudad["vertices"]
+    vertices, techos = [], []
+    for k, techo in enumerate(ciudad["techos"]):
+        i, n = techo[:2]
+        if k in nuevas:
+            puntos = [c for x, y in list(nuevas[k].exterior.coords)[:-1] for c in (round(x, 3), round(y, 3))]
+        else:
+            puntos = v[2 * i:2 * (i + n)]
+        techos.append([len(vertices) // 2, len(puntos) // 2, *techo[2:]])
+        vertices.extend(puntos)
+    return {**ciudad, "vertices": vertices, "techos": techos}
+
+
+def alinear_1772(ciudad, tramos, hitos, red72, verificadas, metro):
+    """La ciudad final con las fachadas de las casas de la reconstrucción que están a la vista en 1772 sobre la recta de
+    su frente (fachadas.alinear_casas, T33j.5f): el último paso de la alineación, sobre las casas mismas. Ningún relleno
+    entra a los corredores de calle de la fase 3 (las calles de 1772 y las verificadas) ni cruza la planta de un hito."""
+    from shapely.geometry import LineString
+    from cierre_fase3 import ANCHO_INFERIDO_M, casas_de_epoca, corredores
+    from cierre_fase4 import visibles
+    from cierre_fase5 import plantas_en_pie
+    from fachadas import alinear_casas
+    casas = visibles(casas_de_epoca(ciudad), hitos)
+    n = len(ciudad.get("antes", []))
+    movibles = {k for k, _ in casas if k < n and ciudad["antes"][k] and ciudad["junta"][k] >= 0}
+    vedado = [c["poligono"] for c in corredores(red72, metro=metro)] + \
+        [LineString(t["anclajes"]).buffer(ANCHO_INFERIDO_M / 2 / metro, cap_style="flat") for t in verificadas]
+    nuevas = alinear_casas(casas, tramos, metro, movibles, obstaculos=plantas_en_pie(hitos), vedado=vedado)
+    print(f"casas de 1772 alineadas sobre su frente: {len(nuevas)}")
+    return con_huellas(ciudad, nuevas)
+
+
 def relevos(huellas36, vida36, quitar):
     """(huellas, nace) de las casas de 1936 que quedan, con su nacimiento final (vida_de_1936): las que
     pueden pasarle la posta a una de 1578. Un techo quitado no reemplaza nada, y un edificio público no
@@ -614,6 +649,10 @@ def main():
                                                             desde=desde)
         ciudad, vida_f = sin_techos(ciudad, vida_f, quitar_f)
         ciudad["vida"] = ceder_a_1772(ciudad, vida_f, desde, metro)
+        import subprocess
+        hitos = json.loads(subprocess.run(["node", str(raiz / "tools" / "hitos-planta.mjs")], check=True, capture_output=True,
+                                          text=True, cwd=raiz).stdout)
+        ciudad = alinear_1772(ciudad, json.loads(calles72.read_text())["tramos"], hitos, red72, verificadas, metro)
         print(f"calles de 1772 bloqueadas en la ciudad final: {len(sin_abrir)} {sin_abrir[:10]}")
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))
 
