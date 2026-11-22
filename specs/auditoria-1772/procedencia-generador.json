@@ -163,6 +163,11 @@
     "entrada": "fuentes/derivados/1772/calzado.tif",
     "clase": "historica_reproyectada",
     "nota": "El original de 1772 llevado a 1936 por el calce por identidad."
+   },
+   {
+    "entrada": "tools/geo/referencias/1772-calles-1936.json",
+    "clase": "historica_reproyectada",
+    "nota": "Ejes en 1936 de las calles de la red de la referencia (trazado del original), por la identidad de sus cruces o por el calce por identidad, con la tolerancia del calce en su sector. epocas abre en 1772 los tramos que las casas bloquean; los sectores límite no se tocan."
    }
   ]
  },

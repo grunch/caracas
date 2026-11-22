@@ -154,9 +154,10 @@ def puerta_fase2(red, unidades, censo, lineas, cruces, excepciones, procedencias
     except ValueError:
         excepciones_ok = False
     separadas = validar_procedencias(procedencias)
-    # el generador puede leer la referencia, pero solo por el filtro de aprobadas (clase referencia_aprobada)
+    # el generador puede leer las unidades de la referencia, pero solo por el filtro de aprobadas (referencia_aprobada);
+    # los ejes de calle (1772-calles-1936.json) no llevan unidades
     lee_referencia = [e['entrada'] for entradas in procedencias['pasos'].values() for e in entradas
-                      if 'referencias/' in e['entrada'] and e['clase'] != 'referencia_aprobada']
+                      if 'referencias/' in e['entrada'] and 'unidades' in e['entrada'] and e['clase'] != 'referencia_aprobada']
     criterios = OrderedDict([
         ('entidades_con_referencia', _criterio_entidades(red, unidades, censo, lineas, cruces)),
         ('correspondencia_por_unidad', {'cumplido': all(u.get('correspondencia', {}).get('clase') for u in unidades),

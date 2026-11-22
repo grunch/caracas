@@ -127,3 +127,15 @@ def test_el_generador_puede_leer_la_referencia_solo_por_el_filtro_de_aprobadas()
     p['pasos']['vectorizar'][-1]['clase'] = 'historica_curada'
     criterio = puerta_fase2(r, unidades, procedencias=p, **args)['ninguna_pendiente_en_el_generador']
     assert criterio['cumplido'] is False and criterio['lee_la_referencia_sin_filtro'] == ['tools/geo/referencias/1772-unidades.json']
+
+
+def test_los_ejes_de_calle_de_la_referencia_no_necesitan_el_filtro_de_aprobadas():
+    r, unidades = referencia()
+    excepciones = excepciones_1772(trazado(), unidades, limites())
+    p = procedencias()
+    p['clases']['historica_reproyectada'] = True
+    p['pasos']['vectorizar'].append({'entrada': 'tools/geo/referencias/1772-calles-1936.json',
+                                     'clase': 'historica_reproyectada', 'nota': 'ejes'})
+    criterio = puerta_fase2(r, unidades, censo={'U1', 'U2', 'U3'}, lineas={'L00'}, cruces={'X00'},
+                            excepciones=excepciones, procedencias=p)['ninguna_pendiente_en_el_generador']
+    assert criterio['cumplido'] is True
