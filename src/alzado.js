@@ -12,7 +12,7 @@
  */
 import { ShapeUtils, Vector2 } from 'three'
 import { CUBIERTA, alturaDe, bajadaEn, faldonEn } from './techos.js'
-import { areaConSigno, recortar, recortarConvexo, cruces, estaDentro } from './poligono.js'
+import { areaConSigno, recortar, recortarConvexo, cruces, estaDentro, sinColineales } from './poligono.js'
 
 const SIN_TECHO = [0, 0, 0, CUBIERTA.PARED]
 const ALTO_MINIMO_CON_VANOS_M = 2
@@ -72,6 +72,8 @@ const largoConAlero = (casa, f) => largoFaldon(f) + vueloDe(casa, f) * Math.hypo
  */
 const quiebres = (f) => (f.hueco || !(f.tan > 0) ? [] : [0, ...(Number.isFinite(f.bajada) ? [f.bajada] : [])])
 
+const ALINEADO_M = 1e-3 // un vértice a menos de esto de la recta entre sus vecinos no hace esquina: 1 mm
+
 /**
  * El faldón recortado, partido en sus quiebres en lo que sigue plano y lo que cae, cada pedazo con su normal.
  * Si no, los triángulos interpolarían una sola pendiente por encima del quiebre y el tejado se despegaría de
@@ -105,7 +107,10 @@ function tejados(casa, salida) {
     const pared = [0, 0, plan.altoPiso]
     // el patio no lleva tejado sino piso, un poco sobre el terreno para que la cuesta no lo tape
     const [alto, cubierta] = f.hueco ? [() => PISO_PATIO_M, f.piso ?? CUBIERTA.PATIO] : [(u, v) => alturaDe(f, u, v), f.cubierta]
-    for (const { poligono, n } of pedazosDeFaldon(f, recortado)) {
+    for (const pedazo of pedazosDeFaldon(f, recortado)) {
+      // sin vértices casi alineados: la triangulación los volvía agujas sin altura (T33j.6d)
+      const [poligono, n] = [sinColineales(pedazo.poligono, ALINEADO_M), pedazo.n]
+      if (poligono.length < 3) continue
       const indices = poligono.map(([u, v]) => salida.vertice(u, v, alto(u, v), n, pared, [...coordsFaldon(f, u, v), largo, cubierta]))
       for (const [a, b, c] of ShapeUtils.triangulateShape(poligono.map(([u, v]) => new Vector2(u, v)), [])) {
         salida.triangulo(indices[a], indices[b], indices[c], n)

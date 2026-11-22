@@ -463,3 +463,25 @@ describe('geometriaCiudad', () => {
     for (let k = 0; k < 300; k++) expect(g.attributes.normal.array[k] / 127).toBeCloseTo(crudo.normales[k], 1)
   })
 })
+
+describe('extruirTechos: sin triángulos degenerados (T33j.6d)', () => {
+  test('ningún triángulo de techo es una aguja de menos de 1 mm de alto', () => {
+    // la casa 14654 de la ciudad de 1772 (llevada al origen): un lote triangular con su marco y un ala; el recorte de
+    // los faldones con la huella dejaba vértices casi alineados y la triangulación, agujas
+    const g = extruirTechos({
+      vertices: Float32Array.from([4.414, 31.545, 26.671, 36.997, 9.657, 10.141]),
+      techos: Uint32Array.from([0, 3, 2, 13192]), vida: Uint32Array.from([1]),
+      marcos: Float32Array.from([0, 26.67, 37.0, -0.97129, -0.23791, 22.91, 22.04, 0, 16.66, 0, 1]),
+      alas: Float32Array.from([2, 0, 0, 22.91, 22.04]),
+    }, coords)
+    const p = (i) => [g.posiciones[i * 3], g.posiciones[i * 3 + 1], g.posiciones[i * 3 + 2]]
+    for (let t = 0; t < g.indices.length; t += 3) {
+      if (g.cubiertas[g.indices[t] * 4 + 3] === CUBIERTA.PARED) continue
+      const [a, b, c] = [p(g.indices[t]), p(g.indices[t + 1]), p(g.indices[t + 2])]
+      const [u, v] = [[b[0] - a[0], b[1] - a[1], b[2] - a[2]], [c[0] - a[0], c[1] - a[1], c[2] - a[2]]]
+      const area = Math.hypot(u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]) / 2
+      const lado = Math.max(Math.hypot(...u), Math.hypot(...v), Math.hypot(c[0] - b[0], c[1] - b[1], c[2] - b[2]))
+      expect(2 * area / lado).toBeGreaterThanOrEqual(1e-3)
+    }
+  })
+})

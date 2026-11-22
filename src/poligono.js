@@ -230,3 +230,24 @@ export function simplificarAdentro(anillo, tolerancia) {
   if (Math.abs(areaConSigno(simple)) < 0.5 * Math.abs(areaConSigno(anillo))) return anillo
   return horario ? simple.reverse() : simple
 }
+
+/**
+ * El anillo sin los vértices repetidos ni los que quedan a menos de `tolerancia` de la recta entre sus vecinos (fase 6
+ * de 1772, T33j.6d): el recorte de un faldón con la huella los deja casi alineados y la triangulación los vuelve
+ * agujas sin altura. La forma cambia menos que la tolerancia. Nunca menos de tres vértices.
+ */
+export function sinColineales(anillo, tolerancia) {
+  let a = [...anillo]
+  let cambio = true
+  while (cambio && a.length > 3) {
+    cambio = false
+    for (let k = 0; k < a.length && a.length > 3; k++) {
+      const [p, q, r] = [a[(k + a.length - 1) % a.length], a[k], a[(k + 1) % a.length]]
+      const largo = Math.hypot(r[0] - p[0], r[1] - p[1])
+      const lejos = largo < EPS ? Math.hypot(q[0] - p[0], q[1] - p[1])
+        : Math.abs((r[0] - p[0]) * (q[1] - p[1]) - (r[1] - p[1]) * (q[0] - p[0])) / largo
+      if (lejos < tolerancia) { a.splice(k, 1); k--; cambio = true }
+    }
+  }
+  return a
+}
