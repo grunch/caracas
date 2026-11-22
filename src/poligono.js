@@ -182,21 +182,40 @@ export function crearIndice(anillos, celda = 16) {
  * tolerancia hacia uno u otro lado). Conserva el sentido de giro; si queda menos de la mitad del área, el original.
  */
 export function simplificarAdentro(anillo, tolerancia) {
-  let a = areaConSigno(anillo) < 0 ? [...anillo].reverse() : [...anillo]
+  const horario = areaConSigno(anillo) < 0
+  const o = horario ? [...anillo].reverse() : anillo
+  const n = o.length
   const giro = (p, q, r) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
-  const dentro = (p, a0, b0, c0) => giro(a0, b0, p) >= 0 && giro(b0, c0, p) >= 0 && giro(c0, a0, p) >= 0
+  // la cuerda p→r corta de verdad algún lado del original que no sea de la cadena que reemplaza
+  const corta = (ip, ir) => {
+    for (let e = ir; e !== ip; e = (e + 1) % n) {
+      const [a, b] = [o[e], o[(e + 1) % n]]
+      const [d1, d2] = [giro(o[ip], o[ir], a), giro(o[ip], o[ir], b)]
+      const [d3, d4] = [giro(a, b, o[ip]), giro(a, b, o[ir])]
+      if (((d1 > EPS && d2 < -EPS) || (d1 < -EPS && d2 > EPS)) && ((d3 > EPS && d4 < -EPS) || (d3 < -EPS && d4 > EPS))) return true
+    }
+    return false
+  }
+  // se puede ir de p a r si toda la cadena original de en medio queda afuera de la cuerda y a no más de la tolerancia
+  const sePuede = (ip, ir) => {
+    const largo = Math.hypot(o[ir][0] - o[ip][0], o[ir][1] - o[ip][1])
+    if (largo === 0) return false
+    for (let s = (ip + 1) % n; s !== ir; s = (s + 1) % n) {
+      const g = giro(o[ip], o[s], o[ir])
+      if (g < 0 || g / largo >= tolerancia) return false
+    }
+    return !corta(ip, ir)
+  }
+  const quedan = Array.from({ length: n }, (_, k) => k)
   let cambio = true
-  while (cambio && a.length > 3) {
+  while (cambio && quedan.length > 3) {
     cambio = false
-    for (let k = 0; k < a.length && a.length > 3; k++) {
-      const p = a[(k + a.length - 1) % a.length], q = a[k], r = a[(k + 1) % a.length]
-      const g = giro(p, q, r)
-      const largo = Math.hypot(r[0] - p[0], r[1] - p[1])
-      if (g < 0 || largo === 0 || g / largo >= tolerancia) continue
-      if (a.some((s, j) => j !== k && s !== p && s !== r && dentro(s, p, q, r))) continue
-      a.splice(k, 1); k--; cambio = true
+    for (let k = 0; k < quedan.length && quedan.length > 3; k++) {
+      const [ip, ir] = [quedan[(k + quedan.length - 1) % quedan.length], quedan[(k + 1) % quedan.length]]
+      if (sePuede(ip, ir)) { quedan.splice(k, 1); k--; cambio = true }
     }
   }
-  if (Math.abs(areaConSigno(a)) < 0.5 * Math.abs(areaConSigno(anillo))) return anillo
-  return areaConSigno(anillo) < 0 ? a.reverse() : a
+  const simple = quedan.map((k) => o[k])
+  if (Math.abs(areaConSigno(simple)) < 0.5 * Math.abs(areaConSigno(anillo))) return anillo
+  return horario ? simple.reverse() : simple
 }

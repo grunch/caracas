@@ -139,6 +139,22 @@ describe('simplificarAdentro', () => {
     expect(dentro(a, izq) && dentro(b, der)).toBe(true)
   })
 
+  test('el error no se acumula: ningún vértice original queda a más de la tolerancia del contorno nuevo', () => {
+    // revisión de #141: un círculo de 10 m con 64 puntos se volvía un pentágono, con 2,27 m de desvío
+    const circulo = Array.from({ length: 64 }, (_, k) => [10 * Math.cos((2 * Math.PI * k) / 64), 10 * Math.sin((2 * Math.PI * k) / 64)])
+    const s = simplificarAdentro(circulo, 0.6)
+    // solo hacia adentro, 0,6 m de flecha deja un polígono inscrito de 9 lados: 92,6 % del área (el pentágono, 74 %)
+    expect(Math.abs(areaConSigno(s)) / Math.abs(areaConSigno(circulo))).toBeGreaterThan(0.9)
+    const alBorde = ([x, z]) => Math.min(...s.map((p, k) => {
+      const q = s[(k + 1) % s.length]
+      const [dx, dz] = [q[0] - p[0], q[1] - p[1]]
+      const t = Math.max(0, Math.min(1, ((x - p[0]) * dx + (z - p[1]) * dz) / (dx * dx + dz * dz)))
+      return Math.hypot(x - p[0] - t * dx, z - p[1] - t * dz)
+    }))
+    for (const p of circulo) expect(alBorde(p)).toBeLessThanOrEqual(0.6 + 1e-9)
+    expect(dentro(s, circulo)).toBe(true)
+  })
+
   test('conserva las esquinas de verdad y el sentido de giro', () => {
     const ele = [[0, 0], [10, 0], [10, 4], [4, 4], [4, 10], [0, 10]]
     expect(simplificarAdentro(ele, 0.5)).toEqual(ele)
