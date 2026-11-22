@@ -26,6 +26,7 @@ import cv2
 import numpy as np
 from scipy import ndimage
 from shapely.geometry import Polygon
+from shapely.ops import unary_union
 from skimage import measure
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -82,6 +83,40 @@ def poligono_de(mascara, desplazamiento, tolerancia_px):
     return figura if figura.is_valid and not figura.is_empty else None
 
 
+GRILLA_PX = 1e-3   # las restas y recortes redondean a la grilla de las coordenadas (milésimas, agregar_techo)
+
+
+def huellas_de_casas(piezas, tolerancia_px, recorte=None):
+    """[polígono o None] de cada (máscara, (ox, oy)) de una misma manzana, sin pisarse (I1772-011). Cada lote se
+    vectoriza solo (poligono_de: medio píxel de buffer y su propia simplificación), y en los bordes oblicuos dos vecinas
+    se pisaban en una franja fina: a cada casa se le resta lo que ya ocupan las anteriores de su manzana, así su
+    medianera es el borde de la vecina. `recorte`: la cara de la cuadra (su línea de fachada), antes de restar."""
+    from shapely.strtree import STRtree
+    figuras = [poligono_de(m, o, tolerancia_px) for m, o in piezas]
+    if recorte is not None:
+        figuras = [None if f is None else _mayor(f.intersection(recorte, grid_size=GRILLA_PX)) for f in figuras]
+    puestas, salida = [], []
+    for f in figuras:
+        if f is not None and puestas:
+            arbol = STRtree(puestas)
+            pisadas = [puestas[j] for j in arbol.query(f, predicate='intersects') if f.intersection(puestas[j]).area > 0]
+            if pisadas:
+                f = _mayor(f.difference(unary_union(pisadas), grid_size=GRILLA_PX))
+        salida.append(f)
+        if f is not None:
+            puestas.append(f)
+    return salida
+
+
+def _mayor(figura):
+    """El polígono más grande de una figura (sin las astillas que deja un recorte), o None."""
+    partes = [g for g in getattr(figura, 'geoms', [figura]) if g.geom_type == 'Polygon' and not g.is_empty]
+    if not partes:
+        return None
+    mayor = Polygon(max(partes, key=lambda g: g.area).exterior)
+    return mayor if mayor.is_valid and mayor.area > 0 else None
+
+
 def agregar_techo(salida, figura, pisos, estilo, semilla, esquina=False, cuadra=-1, cede=-1):
     """Un techo más. `cuadra`: la manzana de la cuadra modelo a la que pertenece (-1: ninguna); `cede`: el
     edificio público (número de techo) que la casa pisa y al que le deja el lugar cuando nace (-1: ninguno)."""
@@ -92,8 +127,10 @@ def agregar_techo(salida, figura, pisos, estilo, semilla, esquina=False, cuadra=
     salida['cede'].append(int(cede))
     salida['junta'].append(salida.get('_junta', -1))
     salida['antes'].append(salida.get('_antes', 0))
+    # milésimas de píxel (lo que guarda el float32 del .pak a 10 000 px): con centésimas, el vértice de un lote que
+    # termina sobre la medianera larga de su vecino (unión en T) se salía de su recta y dejaba una astilla (I1772-011)
     for x, y in puntos:
-        salida['vertices'].extend((round(x, 2), round(y, 2)))
+        salida['vertices'].extend((round(x, 3), round(y, 3)))
 
 
 def techos_publicos(clases, salida, area_min_px, tolerancia_px, metro):
@@ -165,6 +202,7 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
             return False
         etiquetas, lotes = repartida
         zonas = ndimage.find_objects(etiquetas)
+        piezas = []
         for k, lote in lotes.items():
             zona = zonas[k - 1]
             if zona is None:
@@ -176,14 +214,20 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
                     mascara = mascara & ~pisado
             if mascara.sum() < area_min_px or lote['frente'] < FRENTE_MINIMO:
                 continue
-            figuras.append((lote, poligono_de(mascara, (x + zona[1].start, y + zona[0].start), tolerancia_px)))
+            piezas.append((lote, mascara, (x + zona[1].start, y + zona[0].start)))
+        recorte = None if poligono is None else Polygon(np.asarray(poligono) + (x, y))
+        huellas = huellas_de_casas([(m, o) for _, m, o in piezas], tolerancia_px, recorte)
+        figuras = [(lote, figura) for (lote, _, _), figura in zip(piezas, huellas)]
+    finales = []
     for lote, figura in figuras:
-        if figura is None:
+        if figura is None or (exactas is None and figura.area < area_min_px):
             continue
-        if poligono is not None:
+        if poligono is not None and exactas is not None:   # las del reparto raster ya salen recortadas
             figura = figura.intersection(Polygon(np.asarray(poligono) + (x, y)))
             if figura.is_empty or figura.geom_type != 'Polygon' or figura.area < area_min_px:
                 continue
+        finales.append((lote, figura))
+    for lote, figura in finales:
         semilla = semilla_de(figura.centroid.x, figura.centroid.y)
         agregar_techo(salida, figura, pisos_de(semilla, distancia_m(figura)), ESTILO_COLONIAL, semilla,
                       esquina=lote['esquina'], cuadra=salida['n_cuadras'] - 1, cede=publico_que_pisa(salida['publicos'], figura))
@@ -223,19 +267,15 @@ def techos_de_manzana(clases, manzana, origen, salida, area_min_px, tolerancia_p
     # una casa suelta o un par de casas no son una manzana con esquinas a la calle
     hay_esquinas = len(np.unique(casas)) - 1 >= CASAS_PARA_ESQUINA
     de_esquina = casas_de_esquina(casas, esquinas_de_manzana(manzana, metro), RADIO_ESQUINA_M / metro) if hay_esquinas else set()
-    for casa, zona in enumerate(ndimage.find_objects(casas), start=1):
-        if zona is None:
+    piezas = [(casa, zona) for casa, zona in enumerate(ndimage.find_objects(casas), start=1)
+              if zona is not None and (casas[zona] == casa).sum() >= area_min_px]
+    recorte = None if poligono is None else Polygon(np.asarray(poligono) + (x, y))
+    huellas = huellas_de_casas([(casas[zona] == casa, (x + zona[1].start, y + zona[0].start)) for casa, zona in piezas],
+                               tolerancia_px, recorte)
+    for (casa, zona), figura in zip(piezas, huellas):
+        # el área mínima ya la pasó la máscara; recortada por la cara, la huella la vuelve a pasar (como antes)
+        if figura is None or (recorte is not None and figura.area < area_min_px):
             continue
-        mascara = casas[zona] == casa
-        if mascara.sum() < area_min_px:
-            continue
-        figura = poligono_de(mascara, (x + zona[1].start, y + zona[0].start), tolerancia_px)
-        if figura is None:
-            continue
-        if poligono is not None:
-            figura = figura.intersection(Polygon(np.asarray(poligono) + (x, y)))
-            if figura.is_empty or figura.geom_type != 'Polygon' or figura.area < area_min_px:
-                continue
         semilla = semilla_de(figura.centroid.x, figura.centroid.y)
         # la casa en su ventana, con 10 m de manzana alrededor para ver qué lados dan a la calle
         margen = int(math.ceil(10 / metro))
