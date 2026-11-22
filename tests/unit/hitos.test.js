@@ -103,7 +103,7 @@ describe('construirHitos', () => {
   })
 
   test('presupuesto: pocos triángulos para un solo draw call', () => {
-    expect(datos.indices.length / 3).toBeLessThan(400_000)
+    expect(datos.indices.length / 3).toBeLessThan(450_000) // T41d: el Capitolio por épocas (ver specs/08-capitolio-por-epocas.md)
   })
 
   test('cada hito ocupa un rango de vértices y queda cerca de su lugar en el plano', () => {
