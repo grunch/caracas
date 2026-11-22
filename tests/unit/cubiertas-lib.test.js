@@ -1,5 +1,6 @@
 import { describe, test, expect } from 'vitest'
-import { cubiertasDeEpoca } from '../../tools/cubiertas-lib.mjs'
+import { cubiertasDeEpoca, huellasSha256 } from '../../tools/cubiertas-lib.mjs'
+import { createHash } from 'node:crypto'
 import { empacarTecho } from '../../src/ciudad.js'
 import { CUBIERTA } from '../../src/techos.js'
 
@@ -62,5 +63,14 @@ describe('cubiertasDeEpoca: los triángulos de techo de una época, por casa', (
     const copia = cuadra.vertices.slice()
     expect(cubiertasDeEpoca(cuadra, coords, { epoca: 1, altura: () => 0 })).toEqual(r)
     expect(cuadra.vertices).toEqual(copia)
+  })
+})
+
+
+describe('huellasSha256: la procedencia que la puerta compara con la ciudad medida', () => {
+  test('el sha256 de los vértices en float32 y de [inicio, cuántos] de cada techo en uint32, como cierre_fase6.py', () => {
+    const datos = { vertices: new Float32Array([0, 0, 10, 0, 10.1, 10]), techos: new Uint32Array([0, 3, 2, 9]) }
+    const bytes = Buffer.concat([Buffer.from(datos.vertices.buffer), Buffer.from(new Uint32Array([0, 3]).buffer)])
+    expect(huellasSha256(datos)).toBe(createHash('sha256').update(bytes).digest('hex'))
   })
 })

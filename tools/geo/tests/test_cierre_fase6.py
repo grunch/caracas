@@ -78,9 +78,23 @@ def test_se_elige_la_cumbrera_mas_cercana_al_eje_por_su_segmento_no_por_su_punto
 
 
 def test_las_cubiertas_tienen_que_ser_de_los_datos_que_se_miden():
+    # revisión de #138: el pak, el relieve y las huellas de la ciudad medida; con todo igual, se reutilizan
     from cierre_fase6 import cubiertas_de_estos_datos
-    cubiertas = {'pak_sha256': 'abc', 'techos': 3, 'triangulos': []}
-    assert cubiertas_de_estos_datos(cubiertas, 'abc', 3) is None
-    assert 'pak' in cubiertas_de_estos_datos(cubiertas, 'otro', 3)
-    assert 'techos' in cubiertas_de_estos_datos(cubiertas, 'abc', 4)
-    assert cubiertas_de_estos_datos({'triangulos': []}, 'abc', 3) is not None     # sin procedencia no se acepta
+    datos = {'pak_sha256': 'p', 'relieve_sha256': 'r', 'huellas_sha256': 'h'}
+    cubiertas = {**datos, 'triangulos': []}
+    assert cubiertas_de_estos_datos(cubiertas, datos) is None
+    assert 'pak' in cubiertas_de_estos_datos(cubiertas, {**datos, 'pak_sha256': 'otro'})
+    assert 'relieve' in cubiertas_de_estos_datos(cubiertas, {**datos, 'relieve_sha256': 'otro'})
+    assert 'huellas' in cubiertas_de_estos_datos(cubiertas, {**datos, 'huellas_sha256': 'otro'})
+    assert cubiertas_de_estos_datos({'triangulos': []}, datos) is not None     # sin procedencia no se acepta
+
+
+def test_la_huella_de_la_ciudad_es_la_de_sus_vertices_y_techos_en_float32_como_en_el_pak():
+    import hashlib
+    import numpy as np
+    from cierre_fase6 import huellas_sha256
+    ciudad = {'vertices': [0, 0, 10, 0, 10.1, 10], 'techos': [[0, 3, 2, 0, 9]]}
+    esperado = hashlib.sha256(np.array([0, 0, 10, 0, 10.1, 10], '<f4').tobytes()
+                              + np.array([0, 3], '<u4').tobytes()).hexdigest()
+    assert huellas_sha256(ciudad) == esperado
+    assert huellas_sha256({**ciudad, 'vertices': [0, 0, 10, 0, 10.2, 10]}) != esperado

@@ -161,13 +161,25 @@ def aleros_en_la_calle(triangulos, calzada, metro=METRO, umbral_m2=ALERO_EN_CALL
     return salida
 
 
-def cubiertas_de_estos_datos(cubiertas, pak_sha256, techos):
-    """None si las cubiertas salieron de este ciudad.pak (su sha256) y tienen tantos techos como la ciudad medida; si
-    no, el motivo: unas cubiertas de otros datos medirían techos viejos bajo el sha de la ciudad nueva."""
-    if cubiertas.get('pak_sha256') != pak_sha256:
-        return 'las cubiertas no salieron de este ciudad.pak (pak_sha256 distinto o ausente)'
-    if cubiertas.get('techos') != techos:
-        return f"las cubiertas son de {cubiertas.get('techos')} techos y la ciudad tiene {techos}"
+PROCEDENCIA = (('pak_sha256', 'el ciudad.pak'), ('relieve_sha256', 'el relieve.bin'),
+               ('huellas_sha256', 'las huellas de la ciudad medida'))
+
+
+def huellas_sha256(ciudad):
+    """sha256 de los vértices (float32) y de [primer vértice, cuántos] de cada techo (uint32), como el ciudad.pak:
+    lo mismo que tools/cubiertas-lib.mjs (huellasSha256) registra en las cubiertas."""
+    vertices = np.array(ciudad['vertices'], '<f4').tobytes()
+    techos = np.array([t[:2] for t in ciudad['techos']], '<u4').tobytes()
+    return hashlib.sha256(vertices + techos).hexdigest()
+
+
+def cubiertas_de_estos_datos(cubiertas, datos):
+    """None si las cubiertas salieron de estos datos ({clave: sha256} de PROCEDENCIA: el pak, el relieve y las huellas
+    de la ciudad medida); si no, el motivo: unas cubiertas de otros datos medirían techos viejos bajo el sha de la
+    ciudad nueva."""
+    for clave, que in PROCEDENCIA:
+        if cubiertas.get(clave) != datos[clave]:
+            return f'las cubiertas no salieron de {que} que se mide ({clave} distinto o ausente)'
     return None
 
 
@@ -262,8 +274,10 @@ def main():
                                       text=True, cwd=raiz).stdout)
     sha256 = hashlib.sha256(args.ciudad.read_bytes()).hexdigest()
     cubiertas, ciudad = _leer(args.cubiertas), _leer(args.ciudad)
-    motivo = cubiertas_de_estos_datos(cubiertas, hashlib.sha256((raiz / 'public/datos/ciudad.pak').read_bytes()).hexdigest(),
-                                      len(ciudad['techos']))
+    sha = lambda ruta: hashlib.sha256(ruta.read_bytes()).hexdigest()  # noqa: E731
+    motivo = cubiertas_de_estos_datos(cubiertas, {'pak_sha256': sha(raiz / 'public/datos/ciudad.pak'),
+                                                  'relieve_sha256': sha(raiz / 'public/datos/relieve.bin'),
+                                                  'huellas_sha256': huellas_sha256(ciudad)})
     if motivo:
         raise SystemExit(f'cierre_fase6: {motivo}; hay que sacarlas de nuevo (node tools/cubiertas.mjs)')
     fases = {k: _leer(args.carpeta / f'cierre-fase{k}.json') for k in (3, 4, 5)}

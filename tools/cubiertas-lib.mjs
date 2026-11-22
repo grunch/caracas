@@ -4,6 +4,7 @@
  * los pisos de esa época (aHistoria) y el terreno del ancla de la casa; sin los aleros que la fachada de pretil
  * esconde. Es el método de T33j.1l (specs/auditoria-1772/cruces-cubiertas-3d.md), hecho módulo. No lee el GPU.
  */
+import { createHash } from 'node:crypto'
 import { extruirTechos, historiaEnEpoca } from '../src/ciudad.js'
 import { CUBIERTA } from '../src/techos.js'
 
@@ -58,4 +59,15 @@ export function cubiertasDeEpoca(datos, coords, { epoca, altura }) {
     triangulos.push({ techo, tipo, cumbre: vs.map((i) => Math.abs(g.cubiertas[i * 4 + 1]) < CUMBRE_M), puntos })
   }
   return { triangulos }
+}
+
+/**
+ * La procedencia de las huellas: sha256 de los vértices (Float32) y de [primer vértice, cuántos] de cada techo (Uint32,
+ * little endian), lo mismo que tools/geo/cierre_fase6.py (huellas_sha256) calcula sobre la ciudad que mide.
+ */
+export function huellasSha256({ vertices, techos }) {
+  const inicios = new Uint32Array(techos.length / 2)
+  for (let t = 0; t < techos.length / 4; t++) [inicios[t * 2], inicios[t * 2 + 1]] = [techos[t * 4], techos[t * 4 + 1]]
+  const vista = (a) => new Uint8Array(a.buffer, a.byteOffset, a.byteLength)
+  return createHash('sha256').update(vista(Float32Array.from(vertices))).update(vista(inicios)).digest('hex')
 }
