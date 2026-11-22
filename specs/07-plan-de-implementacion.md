@@ -124,6 +124,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T62 | Manejar: vehículos de cada época (carreta, coche de caballos, tranvía, Ford T) con sonido por WebAudio | T60 | se maneja el vehículo del año elegido | ✅ #63 (sin tranvía: va por rieles) |
 | T62b | El **tranvía** de manejar: va por rieles (el trazado de las líneas, de las fuentes) en vez de andar libre por las calles | T62 | el tranvía sigue su línea en su época | ⏳ |
 | T60b | A pie, el **camino entero**: como en manejar (#63), revisar los choques a lo largo del paso y no solo en el destino (con cuadros lentos, corriendo se puede atravesar una casa delgada) | T60 | test del paso largo que no atraviesa una casa | ⏳ |
+| T63 | El **cielo** de los recorridos: papel en tinta, celeste caraqueño en color, con algunas nubes y el sol de las sombras, suave (`src/cielo.js`) | T60 | caminando, manejando o volando no se ve el cielo negro | 🔄 #136 |
 
 ## Fase 7 · Cierre
 

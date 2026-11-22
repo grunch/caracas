@@ -37,6 +37,7 @@ import { esLiviano, proporcionDePixeles } from './calidad.js'
 import { crearModoAPie } from './a-pie-modo.js'
 import { crearModoVolar } from './volar-modo.js'
 import { crearModoManejar } from './manejar-modo.js'
+import { crearCielo, cieloDeModo } from './cielo.js'
 
 const params = new URLSearchParams(location.search)
 const COLOR_FONDO = 0x1d1a17
@@ -131,6 +132,9 @@ const relieveU = uniformsRelieve(hoja)
 relieveU.uExageracion.value = Number(params.get('exagerar')) || EXAGERACION
 let relieve = null
 const ciudad = crearMaterialCiudad({ plano: meta.plano, metro: meta.plano.metro, mapa: cuadriculaProvisoria(), relieve: relieveU })
+// el cielo de los recorridos, solo a pie, en coche o en avión: papel en tinta, celeste en color (src/cielo.js)
+const cielo = crearCielo({ U: ciudad.U })
+scene.add(cielo.malla)
 
 // --- la hoja del plano: el suelo, con el mismo material (pisos = 0 en aInfo), subdividida para
 // apoyarse en el relieve ---
@@ -418,6 +422,7 @@ function cambioDeModo(nombre, dentro) {
   boton.textContent = dentro ? 'Volver al mapa' : TEXTO_MODO[nombre].boton
   boton.setAttribute('aria-pressed', String(dentro))
   avisoModo.hidden = !dentro
+  cielo.mostrar(cieloDeModo(document.body.classList))
   avisoModo.classList.remove('callado')
   clearTimeout(callarAyuda)
   if (!dentro) return
@@ -596,7 +601,7 @@ if (debeArrancar(params)) arrancar()
 // la página que embebe la vitrina espera este aviso para mandar sus órdenes
 if (params.has('vitrina') && window.parent !== window) window.parent.postMessage({ vitrina: 'lista' }, location.origin)
 window.lab = {
-  renderer, scene, camera, cam, aPie, enAvion, enCoche, marcasDelMapa, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
+  renderer, scene, camera, cam, cielo, aPie, enAvion, enCoche, marcasDelMapa, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
   get relieve() { return relieve },
   get teselas() { return teselas },
   get arboles() { return arboles },
