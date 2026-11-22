@@ -354,6 +354,18 @@ def sin_huecos_libres(poligono, ocupado):
     return _Poligono(poligono.exterior, quedan)
 
 
+def _cunas(golpes, n, recta, d_ancho, tol, tope, alcance):
+    """[(grupo, franja)] de las cuñas de un lado: el grupo que ya está sobre la recta en alguna estación y en otras se
+    retira más que el tope. No es una manzana retirada (esa no toca la recta): es la misma casa con el frente en
+    diagonal (la punta de una esquina), y se rellena hasta la recta, hasta donde llega el rayo. Solo suma."""
+    centro, normal, _coseno = recta
+    s = [float((h - centro) @ normal) for _j, h, _p in golpes]
+    en_recta = {j for (j, _h, _p), x in zip(golpes, s) if abs(x) <= tol}
+    cunas = {j for (j, _h, _p), x in zip(golpes, s) if j in en_recta and x > tope}
+    propios = [(j, h, p) for (j, h, p), x in zip(golpes, s) if j in cunas and x > tol]
+    return [(j, figura) for j, suma, figura in _franjas_de_un_lado(propios, n, recta, d_ancho, alcance) if suma]
+
+
 def alinear_casas(casas, tramos, metro, movibles, obstaculos=(), vedado=(), tope_m=TOPE_M,
                   tolerancia_m=TOLERANCIA_FACHADA_M):
     """{techo: huella nueva} de las casas `movibles` con la fachada sobre la recta de su frente, medida como la puerta de
@@ -392,9 +404,13 @@ def alinear_casas(casas, tramos, metro, movibles, obstaculos=(), vedado=(), tope
                 # solo las casas que salen de la tolerancia: las que ya están sobre la recta quedan como están
                 centro, normal, _c = recta
                 fuera = {j for j, h, _p in golpes if tol < abs(float((h - centro) @ normal)) <= tope}
-                for j, suma, figura in _franjas_de_un_lado(golpes, n, recta, d * (PASO_M / metro) / 2, tope):
+                ancho = d * (PASO_M / metro) / 2
+                for j, suma, figura in _franjas_de_un_lado(golpes, n, recta, ancho, tope):
                     if j in fuera and casas[j][0] in movibles:
                         (sumar if suma else restar).setdefault(j, []).append(figura)
+                for j, figura in _cunas(golpes, n, recta, ancho, tol, tope, alcance):
+                    if casas[j][0] in movibles:
+                        sumar.setdefault(j, []).append(figura)
     # ningún relleno pisa lo vedado ni la planta de un hito (una angosta puede caer entre dos rayos)
     prohibido = unary_union(list(vedado) + list(obstaculos)) if len(vedado) or len(obstaculos) else None
     salida = {}
@@ -464,3 +480,42 @@ def de_su_manzana(golpes, manzana):
     from collections import Counter
     dominante = Counter(manzana[j] for j, *_ in golpes).most_common(1)[0][0]
     return [x for x in golpes if manzana[x[0]] == dominante]
+
+
+def delante_de_la_recta(casas, tramos, metro, de_1772, tolerancia_m=TOLERANCIA_FACHADA_M):
+    """Techos de las casas que no son de la reconstrucción (`de_1772`) y quedan entre la calle y la recta del frente de
+    la reconstrucción, más allá de la tolerancia: paradas en la calle de 1772. La recta sale solo de la reconstrucción
+    (la casa de delante tapa a las de atrás), medida como la puerta de la fase 5."""
+    from shapely.strtree import STRtree
+    tol, alcance = tolerancia_m / metro, ALCANCE_M / metro
+    propias = [g for t, g in casas if t in de_1772]
+    todas = [g for _, g in casas]
+    if not propias:
+        return set()
+    arbol_propias, arbol_todas = STRtree(propias), STRtree(todas)
+    manzana = manzanas_de(propias, metro)
+    sin_obstaculos_p, sin_obstaculos_t = [False] * len(propias), [False] * len(todas)
+    salida = set()
+    for eje in tramos:
+        if not eje.get('medible'):
+            continue
+        for a, b in zip(eje['puntos'], eje['puntos'][1:]):
+            d, puntos = estaciones(a, b, metro)
+            if d is None:
+                continue
+            for lado in (1, -1):
+                n = np.array([-d[1], d[0]]) * lado
+                golpes = [(g[0], g[1], p) for p in puntos
+                          if (g := _primera_casa(p, n, alcance, arbol_propias, propias, sin_obstaculos_p)) is not None]
+                golpes = de_su_manzana(golpes, manzana)
+                if len(golpes) < ESTACIONES_MINIMAS or len({j for j, _, _ in golpes}) < 2:
+                    continue
+                recta = _recta_del_frente(golpes, n, tol)
+                if recta is None:
+                    continue
+                centro, normal, _c = recta
+                for p in puntos:
+                    g = _primera_casa(p, n, alcance, arbol_todas, todas, sin_obstaculos_t)
+                    if g is not None and casas[g[0]][0] not in de_1772 and float((g[1] - centro) @ normal) < -tol:
+                        salida.add(casas[g[0]][0])
+    return salida

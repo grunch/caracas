@@ -403,6 +403,21 @@ def ceder_a_1772(ciudad, vida, desde, metro, epoca=1, area_minima_m2=SOLAPE_1772
     return salida
 
 
+def ceder_frentes_a_1772(ciudad, tramos, hitos, metro, desde, epoca=1):
+    """La vida con las casas de 1578 (índice desde `desde`) que en 1772 quedan paradas en la calle, entre el eje y la
+    recta del frente de la reconstrucción (fachadas.delante_de_la_recta), muertas en 1772: en 1772 manda el plano de
+    1772, como en ceder_a_1772 (T33j.5j). → una lista nueva; no muta las entradas."""
+    from cierre_fase3 import casas_de_epoca
+    from cierre_fase4 import visibles
+    from fachadas import delante_de_la_recta
+    casas = visibles(casas_de_epoca(ciudad, epoca), hitos, epoca)
+    n = len(ciudad.get("antes", []))
+    de_1772 = {k for k, _ in casas if k < n and ciudad["antes"][k] and ciudad["junta"][k] >= 0}
+    delante = {k for k in delante_de_la_recta(casas, tramos, metro, de_1772) if k >= desde}
+    print(f"casas de 1578 paradas en la calle de 1772: {len(delante)}")
+    return [[v[0], epoca] if k in delante else list(v) for k, v in enumerate(ciudad["vida"])]
+
+
 def con_huellas(ciudad, nuevas):
     """La ciudad con las huellas `nuevas` ({techo: Polygon}) en lugar de las de esos techos; los vértices se vuelven a
     armar en el orden de los techos. → una ciudad nueva; no muta la entrada."""
@@ -674,6 +689,7 @@ def main():
         import subprocess
         hitos = json.loads(subprocess.run(["node", str(raiz / "tools" / "hitos-planta.mjs")], check=True, capture_output=True,
                                           text=True, cwd=raiz).stdout)
+        ciudad["vida"] = ceder_frentes_a_1772(ciudad, json.loads(calles72.read_text())["tramos"], hitos, metro, desde)
         ciudad = alinear_1772(ciudad, json.loads(calles72.read_text())["tramos"], hitos, red72, verificadas, metro)
         ciudad = dar_acceso_1772(ciudad, hitos, metro)
         print(f"calles de 1772 bloqueadas en la ciudad final: {len(sin_abrir)} {sin_abrir[:10]}")

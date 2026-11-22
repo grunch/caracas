@@ -346,3 +346,19 @@ def test_dar_acceso_1772_no_une_si_la_huella_unida_quedaria_escondida_por_un_hit
     hito = {'nace': 0, 'muere': 0, 'suprime': [[(20, -60), (22, -60), (22, 30), (20, 30)]], 'planta': []}
     nueva = dar_acceso_1772(ciudad, [hito], METRO)
     assert len(nueva['techos']) == 6
+
+
+def test_ceder_frentes_a_1772_mata_en_1772_la_casa_de_1578_parada_delante_del_frente():
+    from tools.geo.epocas import ceder_frentes_a_1772
+    figuras = [box(10 + k * 20, 20, 30 + k * 20, 60) for k in range(8)] + [box(40, 8, 120, 14)]
+    vertices, techos = [], []
+    for f in figuras:
+        puntos = list(f.exterior.coords)[:-1]
+        techos.append([len(vertices) // 2, len(puntos), 1, 0, 0])
+        vertices.extend(c for p in puntos for c in p)
+    ciudad = {'vertices': vertices, 'techos': techos, 'vida': [[1, 2]] * 8 + [[0, 3]], 'antes': [1] * 8,
+              'junta': [7] * 8}
+    tramos = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    vida = ceder_frentes_a_1772(ciudad, tramos, [], METRO, desde=8)
+    assert vida[8] == [0, 1] and vida[:8] == ciudad['vida'][:8]
+    assert ciudad['vida'][8] == [0, 3]
