@@ -62,9 +62,32 @@ La causa estaba en el visor. Para quitar los dientes del trazado a píxeles, `sr
 | Aleros fuera de la calle | 137 casas | 137 |
 | Mismo trazado que la fase 5 | cumple | cumple |
 
+## Después de T33j.6c–6e: cumbreras, agujas y contactos
+
+**Cumbreras con su calle (T33j.6c).** De las 167 desviadas, 131 eran casas de la reconstrucción con el marco girado 90° respecto de la calle de su frente. `alas.marco_de_casa` ponía el frente siempre en el lado libre más corto («los lotes son tiras»). En un lote casi cuadrado, o con un lado corto hacia un patio de la manzana, la cumbrera quedaba de fondo. Ahora el frente es un lado libre que da a una calle de 1772: un eje medible de `1772-calles-1936.json` que corre con el lado dentro de 20°, pasa frente a su medio y queda hacia afuera a no más de 20 m, lo mismo que mide la puerta. Entre esos lados se toma el más corto. Si ningún lado da a una calle de 1772, sigue la regla de antes.
+
+Dos ajustes de la medida, sin tocar el giro máximo de 20°:
+
+- En una unión en T, donde el ala lateral nace en la cumbrera del frente, las dos cumbreras quedan a la misma distancia del eje. Entre las que están a menos de 0,5 m de la más cercana gana la más paralela.
+- Una casa que la puerta de la fase 5 ve fuera de la recta de un frente (vista por una abertura, ya en límite) no se mide en ese frente, porque no es su fachada.
+
+**Sin agujas (T33j.6d).** El recorte de cada faldón con la huella dejaba vértices casi alineados, y la triangulación los volvía agujas. Además, lejos del origen, Float32 deja vértices a décimas de milímetro más allá de la cumbrera, y partir el faldón ahí dejaba una tira plana sin ancho. Ahora `sinColineales` quita, antes de triangular, los vértices a menos de 1 mm de la recta entre sus vecinos, y un quiebre se tiene en cuenta solo si el vértice lo pasa por 1 mm o más (`TOLERANCIA_CUMBRE_M`, antes 1e-6 m).
+
+**Contactos de borde (T33j.6e, un cambio de la medida).** T33j.1l ya excluía los contactos de borde, pero con la precisión del visor dos techos que comparten la medianera se pisan décimas de milímetro. Una tira de 4 m por 0,08 mm pasaba el umbral de 1 cm², y como sobre la medianera una casa está más alta en una punta y la otra en la otra, contaba como cruce. Ahora una superficie común de menos de 1 mm de ancho, la altura mínima de la puerta, es un contacto. El umbral de área no cambia.
+
+| Criterio | Después de T33j.6b | Después de T33j.6e (8183740) |
+|---|---|---|
+| Triángulos sin degenerar | 262 | **32** |
+| Techos sin cruces | 160 pares | **92** |
+| Cumbreras con el frente | 167 desviadas (4511 medidas) | **91** (4501 medidas) |
+| Aleros fuera de la calle | 137 casas | 129 |
+| Mismo trazado que la fase 5 | cumple | cumple |
+
+Las fases 3, 4 y 5 siguen cerrables sobre la ciudad regenerada, y las 53 desalineadas siguen todas en límite.
+
 ## Lo que sigue
 
-- Los 160 cruces que quedan: aleros que montan sobre la vecina y cambios de altura entre casas contiguas.
+- Los 92 cruces que quedan: aleros que montan sobre la vecina y teja contra teja.
 - Las cumbreras de fondo: casas cuyo marco elige el frente por el lado equivocado (`elegirFrente`).
 - Los triángulos degenerados y los aleros sobre la calzada.
 - La regla de specs/08 vale: un PR de techos no cambia calles, lotes ni ocupación para que un techo deje de fallar.
