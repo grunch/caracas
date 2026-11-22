@@ -8,7 +8,6 @@ recta hasta TOPE_M se rellena hasta ella; lo que sale hacia la calle, se corta. 
 de las calles de 1772 y las plantas de los hitos) ni lo que ya es de otro grupo. Un retiro mayor que el tope no es el
 calce corrido: queda como está.
 """
-import cv2
 import numpy as np
 from shapely.geometry import Polygon, box
 from shapely.ops import unary_union
@@ -21,6 +20,8 @@ ESTACIONES_MINIMAS = 5       # un lado con menos puntos de fachada no es un fren
 TOPE_M = 8.0                 # lo más que se corre una fachada (inferido: el error del calce en los sectores medibles)
 MUESTRA_PX = 0.25            # paso con que un rayo recorre las máscaras
 OBLICUIDAD_MINIMA = 0.3      # coseno entre el rayo y la normal de la recta: más oblicua, el rayo no la corta bien
+GIRO_MAXIMO_GRADOS = 20.0    # cuánto puede girar una fachada respecto del eje de su tramo (la puerta no pide paralelas)
+PASO_GIRO_GRADOS = 0.25      # en 30 m de frente, un cuarto de grado corre la punta 13 cm: menos que la tolerancia
 SIMPLIFICACION_PX = (0.5, 1, 2)   # tolerancias con que el polígono alineado vuelve a sus pocos lados (hasta 1 m)
 
 
@@ -35,12 +36,24 @@ def estaciones(a, b, metro, esquina_m=ESQUINA_M, paso_m=PASO_M):
     return d, [a + d * s for s in np.arange(esquina, largo - esquina + 1e-9, paso)]
 
 
+def _giradas(normal):
+    """La normal girada de a PASO_GIRO_GRADOS hasta GIRO_MAXIMO_GRADOS a cada lado."""
+    salida = []
+    for grados in np.arange(-GIRO_MAXIMO_GRADOS, GIRO_MAXIMO_GRADOS + 1e-9, PASO_GIRO_GRADOS):
+        a = np.radians(grados)
+        salida.append(np.array([[np.cos(a), -np.sin(a)], [np.sin(a), np.cos(a)]]) @ normal)
+    return salida
+
+
 def recta_de_la_mayoria(puntos, tol_px, normales=()):
-    """(punto, normal) de la recta que siguen la mayoría de los puntos. Para cada dirección candidata (las `normales`,
-    como la del eje, y la del ajuste de todos los puntos) busca la posición que deja más puntos a menos de la tolerancia
-    (la de la mayoría, aunque haya varias casas corridas) y la afina por mínimos cuadrados totales con esos puntos."""
+    """(punto, normal) de la recta que siguen la mayoría de los puntos. Para cada dirección candidata busca la posición
+    que deja más puntos a menos de la tolerancia (la de la mayoría, aunque haya varias casas corridas) y la afina por
+    mínimos cuadrados totales con esos puntos. Las candidatas son las `normales` (como la del eje), cada una girada
+    hasta GIRO_MAXIMO_GRADOS, y la del ajuste de todos los puntos: una fachada apenas girada respecto del eje, con casas
+    del fondo que tuercen ese ajuste, no la seguía ninguna de las dos (L1772-0085: 20 de 100 puntos, con 90 en recta)."""
     centro = puntos.mean(axis=0)
-    candidatas = [np.asarray(n, float) / np.hypot(*n) for n in normales] + [np.linalg.svd(puntos - centro)[2][1]]
+    candidatas = [g for n in normales for g in _giradas(np.asarray(n, float) / np.hypot(*n))] \
+        + [np.linalg.svd(puntos - centro)[2][1]]
     mejor = None
     for normal in candidatas:
         proy = np.sort(puntos @ normal)
@@ -102,21 +115,38 @@ def _sobre_la_recta(p, n, recta):
     return p + n * (float((centro - p) @ normal) / coseno)
 
 
-def _franjas_de_un_lado(golpes, n, recta, d_ancho, tope):
-    """[(grupo, suma: bool, franja)] entre la fachada de cada golpe y la recta de la mayoría de un lado de un tramo."""
+def _tramos_seguidos(golpes, recta, tope, paso_px):
+    """Los golpes en tramos seguidos: estaciones contiguas del mismo grupo, con la fachada a no más de `tope` de la
+    recta. → [(grupo, [(punto de fachada, estación), …])]."""
     centro, normal, _coseno = recta
-    franjas = []
+    tramos, actual = [], None
     for j, h, p in golpes:
-        s = float((h - centro) @ normal)
-        # también las que ya están dentro de la tolerancia: si no, su escalón de hasta un píxel queda entre las franjas
-        # corregidas, la fachada sale dentada y el polígono del grupo pasa de sus pocos lados
-        if s == 0 or abs(s) > tope:
+        if abs(float((h - centro) @ normal)) > tope:
+            actual = None
             continue
-        q = _sobre_la_recta(p, n, recta)
-        if s > 0:
-            franjas.append((j, True, Polygon([q - d_ancho, h - d_ancho, h + d_ancho, q + d_ancho])))
-        else:   # desde un píxel antes de la fachada: el borde del píxel tocado también se va
-            franjas.append((j, False, Polygon([q - d_ancho, h - n - d_ancho, h - n + d_ancho, q + d_ancho])))
+        if actual is not None and actual[0] == j and np.hypot(*(p - actual[1][-1][1])) <= 1.5 * paso_px:
+            actual[1].append((h, p))
+        else:
+            actual = (j, [(h, p)])
+            tramos.append(actual)
+    return tramos
+
+
+def _franjas_de_un_lado(golpes, n, recta, d_ancho, tope):
+    """[(grupo, suma: bool, franja)] de un lado de un tramo. Por cada tramo seguido de un grupo, una sola figura hasta la
+    recta (lo que suma: entre la recta y su fachada) y una sola banda que quita lo que sale hacia la calle: la fachada
+    queda sobre la recta y el polígono del grupo no se llena de vértices (franjas sueltas por estación dejaban
+    escalones y migas). Cada tramo se extiende un paso más allá de su primera y su última estación, hasta el escalón
+    donde termina el retiro. Entra toda la fachada, también la que ya estaba dentro de la tolerancia."""
+    franjas = []
+    for j, seguidos in _tramos_seguidos(golpes, recta, tope, float(np.hypot(*d_ancho))):
+        q0 = _sobre_la_recta(seguidos[0][1], n, recta) - d_ancho
+        q1 = _sobre_la_recta(seguidos[-1][1], n, recta) + d_ancho
+        # el borde de adentro, un píxel detrás de cada fachada tocada: la figura se funde con la cuadra sin rendijas
+        adentro = [h + n for h, _p in seguidos]
+        adentro = [adentro[0] - d_ancho] + adentro + [adentro[-1] + d_ancho]
+        franjas.append((j, True, Polygon([q0, q1] + adentro[::-1]).buffer(0)))
+        franjas.append((j, False, Polygon([q0, q1, q1 - n * (tope + 1), q0 - n * (tope + 1)])))
     return franjas
 
 
@@ -179,13 +209,23 @@ def calles_delante(grupos, tramos, metro, tolerancia_m=TOLERANCIA_FACHADA_M):
 
 
 def _relleno(figura, origen, forma):
-    mascara = np.zeros(forma, np.uint8)
-    for parte in getattr(figura, 'geoms', [figura]):
-        if parte.geom_type == 'Polygon' and not parte.is_empty:
-            cv2.fillPoly(mascara, [np.round((np.asarray(parte.exterior.coords) - origen) * 16).astype(np.int32)], 1, shift=4)
-            for hueco in parte.interiors:
-                cv2.fillPoly(mascara, [np.round((np.asarray(hueco.coords) - origen) * 16).astype(np.int32)], 0, shift=4)
-    return mascara.astype(bool)
+    """Los píxeles de la figura por su centro: el píxel (f, c) cubre [c, c + 1) × [f, f + 1) y es de la figura si su
+    centro cae adentro. Con fillPoly el borde se llevaba la fila que apenas toca, y la banda que quita lo que sale a la
+    calle se comía la fila de la fachada."""
+    import shapely
+    mascara = np.zeros(forma, bool)
+    if figura is None or figura.is_empty:
+        return mascara
+    x0, y0 = origen
+    bx0, by0, bx1, by1 = figura.bounds
+    c0, f0 = max(0, int(np.floor(bx0 - x0))), max(0, int(np.floor(by0 - y0)))
+    c1, f1 = min(forma[1], int(np.ceil(bx1 - x0)) + 1), min(forma[0], int(np.ceil(by1 - y0)) + 1)
+    if c0 >= c1 or f0 >= f1:
+        return mascara
+    cs, fs = np.meshgrid(np.arange(c0, c1) + x0 + 0.5, np.arange(f0, f1) + y0 + 0.5)
+    shapely.prepare(figura)
+    mascara[f0:f1, c0:c1] = shapely.contains_xy(figura, cs, fs)
+    return mascara
 
 
 def _ventana(g, extra, forma):

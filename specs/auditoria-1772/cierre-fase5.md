@@ -143,12 +143,50 @@ A ojo se ven cuatro causas:
 
 Las 4 sin acceso son cuñas de esquina o lotes de fondo junto a casas de 1936, en la esquina que el frente no mide.
 
+Medido otra vez con el código fusionado de #129 (609685f, con los arreglos de la revisión): 231 casas desalineadas en 148 frentes, 0 pares y 4 sin acceso.
+
+## Después de T33j.5e: una figura por tramo de fachada y la recta de la mayoría girada
+
+Dos cambios:
+
+1. **Una figura por tramo seguido de fachada.**
+   - Antes había una franja suelta por estación. Sus escalones y migas llenaban de vértices el polígono del grupo, y en la ciudad real 204 de 236 grupos alineados lo perdían: se repartían por su máscara, con la fachada otra vez dentada.
+   - Ahora, por cada tramo de estaciones seguidas de un mismo grupo, hay una sola figura entre su fachada y la recta, y una sola banda quita lo que sale a la calle.
+   - Los píxeles cuentan por su centro. Con `fillPoly`, el borde se llevaba la fila que apenas toca.
+2. **La recta de la mayoría prueba direcciones giradas** hasta 20° respecto del eje, de a 0,25°.
+   - Con una fachada apenas girada y casas del fondo que tuercen el ajuste de todos los puntos, ninguna de las dos direcciones candidatas la seguía. En L1772-0085, la puerta tomaba una recta con 20 de 100 puntos, mientras 90 estaban en recta. Pasaba en 9 frentes.
+   - **Es un cambio de la medida, no de la tolerancia (0,5 m).** La función es la misma para la puerta y para el generador.
+   - Sobre una misma ciudad (la de 2b31cda), solo este cambio baja las desalineadas de 189 a 178.
+
+Se probó y se descartó contar para la recta lo edificado de las cuadras de 1936 que siguen en pie: su máscara no es la de sus casas, y las desalineadas subían de 231 a 243.
+
+| Criterio | Después de T33j.5d (609685f) | Con la figura por tramo (2b31cda) | Con la recta girada (1869cbc) |
+|---|---|---|---|
+| Frentes alineados | 231 casas desalineadas | 189 | **171** (en 121 frentes) |
+| Lotes sin solapes | 0 pares | 0 | 0 (cumple) |
+| Casas con acceso | 4 sin acceso | 2 | 4 |
+| Calle aprobada | fase 3 en 5/5 | 5/5 | 5/5 |
+
+- La fase 4 sigue en 6/6.
+- La ciudad de 1772 tiene 6325 casas visibles.
+- Los techos del pipeline quedan en 39.556, dentro de la tolerancia de 39.395.
+
+De las 171 que quedan, por frente:
+
+| Causa | Frentes | Casas |
+|---|---|---|
+| Retiro de lo rojo de más de 8 m (más allá del tope) | 53 | 80 |
+| Reconstrucción a no más de 8 m: cuñas de esquina y huecos de solar del reparto | 52 | 61 |
+| Frente mixto: la reconstrucción frente a una cuadra de 1936 en pie | 8 | 14 |
+| Eje llevado a 1936 metido en las casas | 6 | 15 |
+| Solo casas de 1936 | 2 | 2 |
+
 ## Lo que sigue
 
-- **Frentes (T33j.5e):** las 222 casas desalineadas, empezando por los frentes mixtos y los huecos de solar. Los retiros de más de 8 m y los ejes metidos en las casas se revisan a ojo antes de decidir.
+- **Retiros de más de 8 m y ejes metidos en las casas.** Son límites del calce. Correr más la reconstrucción, o el eje, es moverla sin evidencia. Se revisan a ojo y van a decisión del responsable, como los sectores límite de la fase 1.
+- **Cuñas de esquina y huecos de solar** del reparto por lados.
+- **Frentes mixtos.**
 - **Las 4 casas sin acceso.**
-
-En cada paso la puerta de la fase 3 tiene que seguir en 5/5 y la de la fase 4 en 6/6.
 
 ## Reproducir
 
