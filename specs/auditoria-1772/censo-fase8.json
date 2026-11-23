@@ -1,0 +1,210 @@
+{
+ "alcance": "Censo final de 1772 (specs/08, fase 8, T33j.8a): los 16 sectores del original comparados con la reconstrucción, en paneles del 1772 calzado sobre el plano base con las casas de 1772 a la vista, las plantas de los hitos y las calles de la referencia encima (tools/geo/censo_fase8.py; los paneles quedan fuera de git). Revisado a ojo, sector por sector. Cuenta lo visto; no certifica fidelidad.",
+ "fecha": "2026-11-23",
+ "ciudad": {
+  "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
+  "datos": "datos de #154 regenerados sobre main (sin publicar)",
+  "sha256": "e79e6fe191efba938cca3bb2455dd8e0ab24a6b6ea555e3fc52dbe1733cf5a7d"
+ },
+ "sectores": [
+  {
+   "id": "S1772-11",
+   "estado": "coincide",
+   "observacion": "Casas aisladas en los solares, hileras en L y manzanas de huerta sin casas, como en el original.",
+   "hallazgos": []
+  },
+  {
+   "id": "S1772-12",
+   "estado": "con_hallazgos",
+   "observacion": "El resto del sector coincide; la franja del Calvario no tiene casas.",
+   "hallazgos": [
+    "D8-01"
+   ]
+  },
+  {
+   "id": "S1772-13",
+   "estado": "coincide",
+   "observacion": "Las casas aisladas de las huertas y la cerca de la Alcabala, en su lugar.",
+   "hallazgos": []
+  },
+  {
+   "id": "S1772-14",
+   "estado": "sin_panel",
+   "observacion": "Ni lo edificado revisado ni las calles de la referencia lo cubren: sector límite del calce (limites-calce.json).",
+   "hallazgos": []
+  },
+  {
+   "id": "S1772-21",
+   "estado": "coincide",
+   "observacion": "Hileras en L junto a la quebrada y casas aisladas como en el original.",
+   "hallazgos": []
+  },
+  {
+   "id": "S1772-22",
+   "estado": "coincide",
+   "observacion": "El núcleo: manzanas edificadas, plaza y quebrada como en el original.",
+   "hallazgos": []
+  },
+  {
+   "id": "S1772-23",
+   "estado": "con_hallazgos",
+   "observacion": "Las manzanas coinciden; hay casas en dos plazuelas.",
+   "hallazgos": [
+    "D8-02",
+    "D8-03"
+   ]
+  },
+  {
+   "id": "S1772-24",
+   "estado": "limite_del_calce",
+   "observacion": "Las casas quedan corridas cerca de media cuadra respecto del original y dos manzanas chicas del borde oeste no tienen casas: es la deformación del borde este, límite documentado del calce (I1772-014).",
+   "hallazgos": []
+  },
+  {
+   "id": "S1772-31",
+   "estado": "con_hallazgos",
+   "observacion": "Las casas aisladas coinciden; hay casas en la plazuela de la iglesia del norte del sector.",
+   "hallazgos": [
+    "D8-04"
+   ]
+  },
+  {
+   "id": "S1772-32",
+   "estado": "con_hallazgos",
+   "observacion": "Las manzanas y los patios coinciden; hay casas en dos espacios en blanco.",
+   "hallazgos": [
+    "D8-04",
+    "D8-05"
+   ]
+  },
+  {
+   "id": "S1772-33",
+   "estado": "coincide",
+   "observacion": "Coincide; la plazuela de abajo es D8-03. Puede faltar una casa aislada muy chica arriba (duda menor).",
+   "hallazgos": [
+    "D8-03"
+   ]
+  },
+  {
+   "id": "S1772-34",
+   "estado": "con_hallazgos",
+   "observacion": "Las casas aisladas coinciden; hay casas sobre el atrio de una iglesia del original.",
+   "hallazgos": [
+    "D8-06"
+   ]
+  },
+  {
+   "id": "S1772-41",
+   "estado": "sin_panel",
+   "observacion": "Sin unidades localizadas en el censo de la fase 1 (campo y río).",
+   "hallazgos": []
+  },
+  {
+   "id": "S1772-42",
+   "estado": "coincide",
+   "observacion": "Hileras en L, solares y la Alcabala como en el original.",
+   "hallazgos": []
+  },
+  {
+   "id": "S1772-43",
+   "estado": "coincide",
+   "observacion": "Manzanas, patios y la plaza de la iglesia como en el original.",
+   "hallazgos": []
+  },
+  {
+   "id": "S1772-44",
+   "estado": "limite_del_calce",
+   "observacion": "Solo calles; sector límite del calce.",
+   "hallazgos": []
+  }
+ ],
+ "hallazgos": [
+  {
+   "id": "D8-01",
+   "sectores": [
+    "S1772-12"
+   ],
+   "punto": [
+    7141,
+    7832
+   ],
+   "tipo": "edificado_sin_casas",
+   "observacion": "La franja edificada en L del lado oeste de la calle diagonal del Calvario no tiene casas. Ninguna unidad de la referencia la cubre, así que la fase 4 no la mide.",
+   "causa": "unidad del original sin edificado revisado en la referencia (I1772-007)",
+   "subtarea": "T33j.8c"
+  },
+  {
+   "id": "D8-02",
+   "sectores": [
+    "S1772-23"
+   ],
+   "punto": [
+    8765,
+    6173
+   ],
+   "tipo": "casas_en_plazuela",
+   "observacion": "Plazuela de Altagracia: hay una casa en su parte oeste. La planta del hito Altagracia queda dentro de la plazuela; en el original, la cruz está en la manzana del sur. La posición del hito queda por verificar.",
+   "causa": "la plazuela no está en la referencia como plaza; posición del hito no verificada",
+   "subtarea": "T33j.8c"
+  },
+  {
+   "id": "D8-03",
+   "sectores": [
+    "S1772-23",
+    "S1772-32",
+    "S1772-33"
+   ],
+   "punto": [
+    9350,
+    6940
+   ],
+   "tipo": "casas_en_plazuela",
+   "observacion": "Espacio abierto a una cuadra al sureste de la Plaza Mayor, en blanco en el original, con casas en la reconstrucción.",
+   "causa": "la plazuela no está en la referencia como plaza",
+   "subtarea": "T33j.8c"
+  },
+  {
+   "id": "D8-04",
+   "sectores": [
+    "S1772-31",
+    "S1772-32"
+   ],
+   "punto": [
+    9090,
+    8640
+   ],
+   "tipo": "casas_en_plazuela",
+   "observacion": "Plazuela con una iglesia (cruz) en el original. La reconstrucción le pone casas encima y no hay hito en 1772. La identidad de la iglesia no está verificada.",
+   "causa": "la plazuela no está en la referencia como plaza; iglesia del original sin hito",
+   "subtarea": "T33j.8c"
+  },
+  {
+   "id": "D8-05",
+   "sectores": [
+    "S1772-32"
+   ],
+   "punto": [
+    9281,
+    8409
+   ],
+   "tipo": "casas_en_plazuela",
+   "observacion": "Espacio abierto en blanco en el original, con casas en la reconstrucción.",
+   "causa": "el espacio no está en la referencia como plaza ni terreno libre",
+   "subtarea": "T33j.8c"
+  },
+  {
+   "id": "D8-06",
+   "sectores": [
+    "S1772-34"
+   ],
+   "punto": [
+    9444,
+    5361
+   ],
+   "tipo": "casas_en_atrio",
+   "observacion": "Iglesia del original (cruz con atrio en blanco) junto a donde está el hito del Panteón, que nace en 1843. En 1772 hay casas genéricas sobre el atrio. La identidad de la iglesia en 1772 no está verificada.",
+   "causa": "iglesia del original sin hito en 1772; atrio sin registrar",
+   "subtarea": "T33j.8c"
+  }
+ ]
+}
