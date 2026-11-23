@@ -1,0 +1,33 @@
+{
+  "$comentario": "El estándar de calidad de las contribuciones: lo que mira el bot de triaje (specs/09-estandar-de-calidad.md § 5). El workflow lo lee de main: un PR no puede cambiarlo.",
+  "limites": {
+    "max_lineas_codigo": 3000,
+    "max_lineas_primer_pr": 400,
+    "fuera_del_tamano": ["tests/", "tools/geo/tests/", "specs/", "package-lock.json"],
+    "max_prs_abiertos_nuevo": 1,
+    "max_bytes_descripcion": 65536
+  },
+  "etiquetas": {
+    "aceptado": "estado: aceptado",
+    "ok": "calidad:ok",
+    "falta_info": "calidad:falta-info",
+    "exento": "calidad:exento"
+  },
+  "autores": {
+    "mantenedores": ["OWNER", "MEMBER", "COLLABORATOR"],
+    "primera_vez": ["FIRST_TIME_CONTRIBUTOR", "FIRST_TIMER", "NONE"],
+    "bots": ["dependabot[bot]", "github-actions[bot]", "coderabbitai[bot]"]
+  },
+  "rutas": {
+    "visuales": [
+      "src/shader/", "src/hitos/", "src/material.js", "src/techos.js", "src/alzado.js", "src/alas.js",
+      "src/acabado.js", "src/cielo.js", "src/luz.js", "src/arboles.js", "src/edificios.js", "src/ciudad.js",
+      "src/mesa.js", "src/calles.js", "src/hoy.js", "src/arranque.js", ".css", "index.html", "edificios.html",
+      "tools/geo/", "tools/arboles*", "tools/cubiertas*", "tools/suelo*", "tools/silvestres*", "tools/plano*",
+      "tools/rotulos*", "tools/empacar*", "tools/hitos-planta.mjs"
+    ],
+    "$rutas": "«dir/» y «algo*» son prefijos, «.ext» una terminación, lo demás un archivo exacto. Lo de tests/ y tools/geo/tests/ nunca pide capturas.",
+    "historicas": ["fuentes/", "src/marcas-datos.js", "src/fichas-datos.js", "src/hitos/"],
+    "plan": "specs/07-plan-de-implementacion.md"
+  }
+}

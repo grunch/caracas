@@ -48,10 +48,123 @@ python3.12 -m venv .venv
    ```sh
    git diff --stat origin/main...HEAD -- . ':(exclude)tests' ':(exclude)tools/geo/tests' ':(exclude)*.md' ':(exclude)specs' | tail -1
    ```
-6. **El PR**, con título y cuerpo en español: un resumen, cómo funciona, el plan de pruebas como checklist y los
-   límites conocidos. Si corresponde a una tarea del plan, actualiza su fila.
+6. **El PR**, con título y cuerpo en español, llena **cada sección de la
+   [plantilla](.github/pull_request_template.md)** (ver [El estándar de calidad](#el-estándar-de-calidad)). Si
+   corresponde a una tarea del plan, actualiza su fila.
 7. **Revisión**: CodeRabbit y Codex revisan cada PR. Corrige en la misma rama los comentarios que apliquen y
    responde cada hilo, también cuando no aplica (di por qué). No se fusiona sin revisión.
+
+## El estándar de calidad
+
+Antes de que alguien lea el diff, un PR tiene que probar dos cosas: que el problema que resuelve existe, y que el
+cambio no rompe nada más. Y en este proyecto, una tercera: que lo que dice de la historia de Caracas tiene fuente.
+Las reglas son sobre la evidencia que trae el PR, no sobre cómo se escribió.
+
+1. **Se pueden usar herramientas de IA.** Respondes por cada línea y tienes que poder explicar cualquiera cuando
+   te lo pregunten. «Lo escribió la herramienta» no es una respuesta.
+2. Un PR que no sigue la [plantilla](#la-plantilla), no enlaza un [issue aceptado](#issue-antes-del-pr) cuando hace
+   falta, o no cumple la [Prueba a mano](#prueba-a-mano), el [Test en rojo](#test-en-rojo) o las
+   [Fuentes](#fuentes) **se cierra sin revisión técnica**, con el [mensaje de siempre](.github/mensaje-de-cierre.md).
+   Lo puedes reabrir cuando lo cumpla.
+3. Un PR cuya descripción no coincide con su diff, o cuyos pasos de la Prueba a mano no funcionan cuando alguien
+   los sigue, se cierra igual. Lo mismo un dato histórico inventado o con una fuente que no dice lo que el PR dice.
+4. Una cuenta que abre una y otra vez PRs cerrados por esto puede quedar bloqueada.
+
+**Exentos** del issue, la plantilla, la Prueba a mano y el Test en rojo: los PRs que solo cambian archivos Markdown
+(pero un Markdown en `fuentes/` igual lleva sus fuentes), los de bots y los que quien mantiene el repo etiqueta
+`calidad:exento`. Quien mantiene el repo no necesita issue aceptado, pero sus PRs (y los que abren sus agentes de IA)
+también llenan la plantilla. El tamaño (3000 líneas de código; 400 en un primer PR) vale para todos menos los bots.
+
+Un bot ([`tools/triaje/`](tools/triaje/triaje-lib.mjs)) revisa cada PR y le pone `calidad:ok` o
+`calidad:falta-info`, con un comentario que dice qué falta. Por ahora **solo etiqueta**: no cierra nada; eso lo
+decide una persona. El diseño está en [`specs/09-estandar-de-calidad.md`](specs/09-estandar-de-calidad.md).
+
+### Issue antes del PR
+
+Cada PR de alguien de afuera enlaza un issue que quien mantiene el repo etiquetó `estado: aceptado`. El error o la
+idea se discute primero en el issue: ahí, «esto no es un error» o «eso no pasó así» cuesta un comentario y no la
+revisión de un diff entero.
+
+- Se enlaza con una palabra de cierre en la descripción (`Closes #123`, `Fixes #123`). Mencionarlo no basta.
+- Solo quien mantiene el repo pone `estado: aceptado`, cuando está de acuerdo en que el problema es real y entra en
+  el proyecto. Si todavía no hay issue aceptado, comenta en el issue en vez de abrir el PR.
+
+### La plantilla
+
+Llena cada sección de [`.github/pull_request_template.md`](.github/pull_request_template.md). Una sección que
+falta, vacía o con solo su comentario cuenta como no llenada.
+
+- **Qué toca** nombra las épocas (1772, 1874…), los modos (tinta, color, hoy), las vistas o recorridos (mapa, a pie,
+  en avión, manejando, fichas, buscador) y los archivos donde vive ese comportamiento.
+- **Qué más podría romperse** nombra lo que también lee o escribe lo que cambiaste (los uniforms y shaders que
+  comparten casas, hitos y árboles; los datos que genera el pipeline; las otras épocas) y dice por qué no se rompe.
+  Una respuesta genérica o equivocada en cualquiera de las dos es motivo de cierre.
+
+### Prueba a mano
+
+La sección **Prueba a mano** es un procedimiento paso a paso que prueba este PR en el sitio corriendo. **Una persona
+lo hace a mano** y anota lo que vio; quien revisa tiene que poder seguir los mismos pasos y ver lo mismo.
+
+- **Preparación** dice cómo corriste el sitio: `npm run dev` con los datos completos (`npm run datos:bajar`) o con la
+  muestra (`-- --muestra`), el navegador, y los parámetros de la URL si usaste alguno (`?sinintro`, `?capture`).
+- **Pasos** van numerados. Cada uno dice una acción (elegir una época, pasar a color, acercarse a un lugar, caminar
+  hasta una esquina, buscar una dirección) y una línea `Se ve:` con algo observable: lo que aparece en pantalla en
+  esa época y vista, el texto de una ficha o de una marca, un valor de `window.lab`, un error en la consola.
+- **En un fix**, un paso va marcado **(falla en main)** y dice qué hace `main` en su lugar. Si ningún paso falla en
+  `main`, el PR no mostró que el error existe.
+- **Regresión**: al menos un paso prueba algo vecino nombrado en **Qué más podría romperse** (otra época, el otro
+  modo, otro recorrido) y muestra que sigue igual.
+- **Capturas**: si el cambio se ve, una captura de después y, en un fix, también la de antes (`main`), con la misma
+  vista y época. `node tests/e2e/capturas-valle.mjs` saca las mismas vistas en las dos ramas. Si no se ve: «No aplica».
+- **No cubierto** dice qué no prueban los pasos y por qué.
+- Un paso que no se puede observar («el código ahora es más robusto») no es un paso.
+
+Ejemplo, para un fix en que el alero de una casa de 1772 entraba en la calzada:
+
+```markdown
+### Preparación
+
+`npm run dev` con los datos completos, Chrome 131, `?sinintro`.
+
+### Pasos
+
+1. Elige 1772, pasa a color y acércate a la esquina de Gradillas desde la calle.
+   Se ve: el alero de la casa de la esquina termina en la línea de la fachada. **(falla en main)**
+   En main: el alero sobresale medio metro sobre la calzada.
+2. Regresión: el mismo lugar en 1874.
+   Se ve: igual que en main (las casas de 1874 no tienen alero sobre la calle).
+3. Regresión: en 1772, toca «Caminar» y anda por la calle hasta la esquina.
+   Se ve: no chocas con el alero; igual que en main.
+
+### Capturas
+
+![antes, main](…) ![después, esta rama](…)
+
+### No cubierto
+
+Los aleros de los hitos (iglesias, Capitolio): tienen su propio modelo.
+```
+
+Si no pudiste correr el sitio, dilo en el PR en vez de presentar resultados.
+
+### Test en rojo
+
+El test de regresión de un fix tiene que **fallar sin el arreglo y pasar con él**:
+
+- Un PR de fix **empieza con un commit cuyo asunto empieza con `test:`** y que solo agrega el test de regresión
+  (en `tests/` o `tools/geo/tests/`, sin código de producción).
+- El arreglo va en uno o más commits después. El commit `test:` no se aplasta con el arreglo: queda separado hasta
+  el merge.
+- Compruébalo antes de abrir el PR: con solo el commit `test:` sobre `main`, el test nuevo falla; con el PR entero,
+  pasa. Pega en **Tests automáticos** el nombre del test y lo que dice al fallar en `main`.
+
+### Fuentes
+
+Todo dato histórico nuevo o corregido (una fecha, un nombre, la forma de un edificio, un color, una foto) lleva su
+fuente, con enlace, en la sección **Fuentes**, además de en su ficha (`fuentes/*/ficha.json`) o junto al dato
+(`src/marcas-datos.js`, `src/fichas-datos.js`). Lo que no se pudo verificar se dice. Si el PR no toca datos
+históricos, «No aplica» y por qué. Un dato inventado, o una fuente que no dice lo que el PR le atribuye, es motivo
+de cierre.
 
 ## Convenciones
 
