@@ -81,4 +81,6 @@ paquete y verificó sus 118 archivos contra el sha256 del manifiesto. El `.pak` 
 Los conteos del manifiesto coinciden con los registros del paquete. `node tools/datos.mjs --verificar` termina con
 código 0 sobre el mismo `public/`, que es idéntico archivo por archivo al publicado. SHA-256 de `ciudad.pak`:
 `5a2e3ed2b424e843f2fe911ac2768c3cfc2de33b244deaf88402c1ba9f78050f`; de `arboles.bin`:
-`891548c348f25eaad02b81bfff38dc30433cf591891a4ae6112b53423b5ac115`. I006 queda corregido y publicado.
+`891548c348f25eaad02b81bfff38dc30433cf591891a4ae6112b53423b5ac115`. **Sin `--verificar` de por medio.** `--verificar` recalcula `conteos` desde los binarios y reescribe `public/datos/manifiesto.json` (`tools/datos.mjs`). Después de correrlo, el manifiesto local coincide con los binarios por construcción, así que su código 0 no prueba nada sobre el manifiesto publicado. Por eso la comparación se repitió sin él: se bajó el `datos.tar.gz` del release a una carpeta aparte y se leyeron, con el lector del visor (`src/pak.js`) y sin ejecutar nada de lo bajado, el `manifiesto.json`, el `ciudad.pak` y el `arboles.bin` tal como se publicaron. Los `conteos` del manifiesto publicado (38.921 techos, 37.407 árboles) son los registros de esos mismos archivos (38.921 y 37.407). El sha256 que el manifiesto anota para `ciudad.pak` es el del archivo (`5a2e3ed2…050f`), y el del `manifiesto.json` publicado es `38c04310…0523`.
+
+I006 queda corregido y publicado.
