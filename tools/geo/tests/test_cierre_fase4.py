@@ -179,3 +179,14 @@ def test_una_edificada_ocupada_por_la_planta_de_un_hito_en_pie_no_esta_sin_casas
     assert p['edificadas_con_casas']['cumplido'] is True
     plaza = puerta_fase4(ciudad=ciudad(), hitos=[{**hito, 'transitable': True}], **entradas)
     assert plaza['edificadas_con_casas']['sin_casas'] == [{'unidad': 'U1', 'medida': 'anillo'}]
+
+
+def test_el_patio_de_una_casa_suprimida_no_le_resta_a_la_planta_del_hito():
+    # revisión de #162: los patios y solares se descuentan de las casas, no de la planta del hito. Una casa de patio
+    # suprimida bajo la planta no le recorta a la ocupación lo que ya no se ve
+    hito = {'id': 'convento', 'nace': 1, 'muere': 0, 'planta': [[[0, 0], [100, 0], [100, 100], [0, 100]]],
+            'suprime': [[[0, 0], [100, 0], [100, 100], [0, 100]]]}
+    c = {**ciudad((0, 0, 100, 100)), 'marcos': [[0, 0, 0, 1, 0, 100, 100, 0, 0, 0, 1]], 'alas': [[0, 10, 10, 90, 90]]}
+    p = puerta_fase4(ciudad=c, red=red(), unidades=unidades()[:1], cajas={}, hitos=[hito], metro=METRO)
+    (u1,) = [m for m in p['medidas'] if m['unidad'] == 'U1']
+    assert u1['cobertura_con_hitos'] == 1.0
