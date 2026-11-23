@@ -26,10 +26,30 @@ tarea (o subtarea) del plan y actualiza su fila (número de PR, estado).
 2. TDD: test primero, después la implementación. Todo verde antes de subir:
    `npx vitest run`, `npx playwright test`, `.venv/bin/python -m pytest tools/geo/tests -q`.
 3. Commits convencionales (`feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `chore:`…), en español.
-4. `git push -u origin <rama>` y `gh pr create` con título y cuerpo en español: resumen, cómo funciona,
-   plan de pruebas como checklist y límites conocidos.
+4. `git push -u origin <rama>` y `gh pr create` con título y cuerpo en español, con **cada sección de
+   `.github/pull_request_template.md`** llena (ver abajo).
 5. Se espera la revisión de **CodeRabbit** y **Codex**; se corrigen los comentarios que apliquen en la
    misma rama y se responde cada hilo. No se mergea sin revisión.
+
+## Antes de abrir un PR
+
+Si eres un agente de IA preparando un PR, sigue `CONTRIBUTING.md § El estándar de calidad`. En corto:
+
+- Si no mantienes el repo: enlaza un issue con la etiqueta `estado: aceptado` (`Closes #N`). Si no hay
+  issue aceptado, no abras el PR: comenta en el issue.
+- Llena cada sección de `.github/pull_request_template.md`, aunque el PR sea para quien mantiene el repo.
+  La **Prueba a mano** son pasos que alguien hizo de verdad en el sitio corriendo (`npm run dev`), cada uno
+  con su `Se ve:`, uno de regresión y, en un fix, uno marcado `(falla en main)`. Correrlos tú con Playwright
+  o capturas ayuda, pero **no reemplaza la prueba de una persona**: dilo así, y que quien abre el PR los haga
+  a mano antes de pedir revisión. No presentes como hechos pasos que nadie corrió.
+- Si el cambio se ve (fix o mejora), pon captura de antes (`main`) y de después (esta rama), misma vista, época y modo.
+- En un fix, el primer commit es `test:` y solo agrega el test de regresión, que falla en `main`.
+- Cada dato histórico nuevo lleva su fuente con enlace en la sección **Fuentes**. Nunca inventes una fecha,
+  un nombre, una forma o una fuente; lo no verificado se marca como tal.
+- Si no pudiste correr el sitio o los tests, dilo en el PR en vez de presentar resultados.
+
+Un PR que solo cambia Markdown está exento de los puntos de la plantilla, la prueba y el test (salvo las
+fuentes de un Markdown en `fuentes/`).
 
 ## Referencias visuales
 

@@ -22,6 +22,7 @@ Se toma **un plano topográfico antiguo escaneado en altísima resolución** (do
 
 Plan de corrección de la reconstrucción: [auditoría integral de 1772](08-auditoria-y-correccion-1772.md).
 | [08-panteon-por-epocas.md](08-panteon-por-epocas.md) | Trinidad y Panteón: variantes históricas, adaptación al mapa, fuentes y límites (T40a) |
+| [09-estandar-de-calidad.md](09-estandar-de-calidad.md) | El estándar de calidad de las contribuciones: qué prueba un PR y el bot de triaje que lo revisa (T75) |
 
 ## Resumen técnico
 
