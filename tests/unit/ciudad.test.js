@@ -586,3 +586,18 @@ describe('extruirTechos: el alero tramo por tramo (T33j.6h)', () => {
     expect(vuela.some((v) => v.x > 12.01)).toBe(false)
   })
 })
+
+describe('extruirTechos: la vecina cuenta en las épocas en que vive (revisión de #147)', () => {
+  test('una casa que nace en 1772 y nunca muere vuela en 1772 aunque delante nazca una casa en 1843', () => {
+    const datos = {
+      ...ciudadDe([{ puntos: rect(0, 0, 10, 14), semilla: 5, nace: 1, muere: 0 }, { puntos: rect(0, -12, 10, 0), semilla: 6, nace: 2, muere: 0 }]),
+      marcos: Float32Array.from([0, 0, 0, 1, 0, 20, 28, 0, 14, 0, 0]), alas: Float32Array.from([]),
+    }
+    const g = extruirTechos(datos, coords)
+    const delFrente = vertices(g).map((v, k) => ({ ...v, nace: g.vidas[k * 2], muere: g.vidas[k * 2 + 1] }))
+      .filter((v) => v.semilla === 5 && v.cubierta !== CUBIERTA.PARED && v.z < -0.01)
+    // en 1772 (época 1) vuela; desde 1843 (época 2), con la vecina delante, no
+    expect(delFrente.some((v) => v.nace <= 1 && (v.muere === 0 || v.muere > 1))).toBe(true)
+    expect(delFrente.some((v) => v.nace <= 2 && (v.muere === 0 || v.muere > 2))).toBe(false)
+  })
+})

@@ -30,6 +30,7 @@ import { alzarCasa } from './alzado.js'
 import { leerMarcos, planDeAlas, esDePatio } from './alas.js'
 
 export const SIN_TOPE = 255 // en la parte "vuelos" del pak: el alero de esa casa no tiene tope
+const CERCA_M = 2 // una vecina a más de esto de la huella no queda donde iría el alero (el más largo, 0,8 m)
 export const TOLERANCIA_HUELLA_M = 0.6 // los dientes del trazado a píxeles que se le quitan a cada huella
 const A_LA_LINEA_M = 1.5 // los vértices de la huella a menos de esto de la línea de fachada se llevan a ella
 const SONDAS_M = [2, 4] // a qué distancia de cada lado se mira si hay calle o hay vecino (las calles miden 5 m o más)
@@ -271,21 +272,60 @@ export function extruirTechos(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M 
   const indice = crearIndice(casas.map((c) => (c.muere === 0 ? c.huella : null)))
   // todas las casas, para ver qué lados de un marco están libres de casas de su época (T33j.6h)
   const todas = crearIndice(casas.map((c) => c.huella))
-  const conviven = (a, b) => a.nace < (b.muere || Infinity) && b.nace < (a.muere || Infinity)
+  // ¿la casa n vive en algún momento del tramo de épocas [desde, hasta)?
+  const viveEn = (n, desde, hasta) => casas[n].nace < hasta && (casas[n].muere || Infinity) > desde
+  // una vecina que muere antes que la casa no cuenta: la de la fundación se encima con lo que viene después
+  const noMuereAntes = (n, casa) => (casas[n].muere || Infinity) >= (casa.muere || Infinity)
   const b = crearBuferes(Math.max(64, casas.length * VERTICES_POR_CASA))
+  // qué puntos alrededor de la huella (a 0,1 y 0,8 m de cada lado, a lo largo) están ocupados por las casas que
+  // cuenta(n) deja: el entorno donde puede ir un alero, como una cadena para comparar tramos de épocas
+  const entorno = (casa, numero, cuenta) => {
+    const h = casa.huella
+    const giro = areaConSigno(h) > 0 ? 1 : -1
+    let firma = ''
+    for (let k = 0; k < h.length; k++) {
+      const [p, q] = [h[k], h[(k + 1) % h.length]]
+      const largo = Math.hypot(q[0] - p[0], q[1] - p[1]) || 1
+      const n = [((q[1] - p[1]) / largo) * giro, (-(q[0] - p[0]) / largo) * giro]   // hacia afuera
+      for (const t of [0.1, 0.5, 0.9]) {
+        for (const d of [0.1, 0.8]) {
+          firma += todas.ocupado(p[0] + (q[0] - p[0]) * t + n[0] * d, p[1] + (q[1] - p[1]) * t + n[1] * d, numero, cuenta) ? '1' : '0'
+        }
+      }
+    }
+    return firma
+  }
   casas.forEach((casa, numero) => {
-    const convive = (n) => conviven(casa, casas[n])
-    const lote = proyectar(casa, numero, indice, { indice: todas, numero, cuenta: convive })
-    if (!lote) return
+    if (!casa.huella) return
+    // las vecinas que pueden quedar donde iría un alero, y las épocas en que nacen o mueren: cada etapa se parte ahí,
+    // para que la casa vuele donde, en ese tramo de épocas, no hay otra (revisión de #147)
+    const xs = casa.huella.map((p) => p[0]), zs = casa.huella.map((p) => p[1])
+    const vecinas = [...todas.cerca(Math.min(...xs) - CERCA_M, Math.min(...zs) - CERCA_M, Math.max(...xs) + CERCA_M, Math.max(...zs) + CERCA_M)]
+      .filter((n) => n !== numero && noMuereAntes(n, casa))
     for (const etapa of casa.etapas) {
-      const suyo = loteDeEtapa(casa, etapa, lote)
-      if (!suyo) continue
-      const { origen: o, eu, ev } = suyo.marco
-      // otra casa de su época en un punto del marco del lote: ahí no vuela el alero (T33j.6h)
-      const ocupado = (u, v) => todas.ocupado(o[0] + u * eu[0] + v * ev[0], o[1] + u * eu[1] + v * ev[1], numero, convive)
-      alzarCasa({ anillo: suyo.anillo, plan: planDeEtapa(casa, etapa, suyo), libres: suyo.libres, ocupado }, escritor(b, casa, etapa, suyo.marco))
+      const fin = etapa.muere || Infinity
+      const cortes = new Set([etapa.nace])
+      for (const n of vecinas) for (const e of [casas[n].nace, casas[n].muere]) if (e > etapa.nace && e < fin) cortes.add(e)
+      // un corte solo cuenta si cambia lo que hay alrededor de la casa (los puntos donde iría un alero): los tramos
+      // seguidos con el mismo entorno se juntan y no duplican geometría
+      const ordenados = [...cortes].sort((a, b) => a - b)
+      const firmas = ordenados.map((desde, k) => entorno(casa, numero, (n) => viveEn(n, desde, ordenados[k + 1] ?? fin) && noMuereAntes(n, casa)))
+      const bordes = ordenados.filter((_, k) => k === 0 || firmas[k] !== firmas[k - 1])
+      bordes.forEach((desde, k) => {
+        const hasta = bordes[k + 1] ?? fin
+        const cuenta = (n) => viveEn(n, desde, hasta) && noMuereAntes(n, casa)
+        const lote = proyectar(casa, numero, indice, { indice: todas, numero, cuenta })
+        const suyo = lote && loteDeEtapa(casa, etapa, lote)
+        if (!suyo) return
+        const tramo = { ...etapa, nace: desde, muere: hasta === Infinity ? 0 : hasta }
+        const { origen: o, eu, ev } = suyo.marco
+        // otra casa del tramo en un punto del marco del lote: ahí no vuela el alero (T33j.6h)
+        const ocupado = (u, v) => todas.ocupado(o[0] + u * eu[0] + v * ev[0], o[1] + u * eu[1] + v * ev[1], numero, cuenta)
+        alzarCasa({ anillo: suyo.anillo, plan: planDeEtapa(casa, tramo, suyo), libres: suyo.libres, ocupado }, escritor(b, casa, tramo, suyo.marco))
+      })
     }
   })
+
   const salida = {}
   for (const [nombre, tamaño] of Object.entries(CAMPOS)) salida[nombre] = b[nombre].slice(0, b.vertices * tamaño)
   const indices = b.indices.subarray(0, b.triangulos * 3)

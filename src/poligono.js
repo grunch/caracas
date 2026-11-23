@@ -166,6 +166,14 @@ export function crearIndice(anillos, celda = 16) {
     }
   })
   return {
+    /** Los índices de las casas cuyas celdas tocan la caja [x0, z0, x1, z1] (candidatas a estar cerca). */
+    cerca(x0, z0, x1, z1) {
+      const salida = new Set()
+      for (let i = Math.floor(x0 / celda); i <= Math.floor(x1 / celda); i++) {
+        for (let j = Math.floor(z0 / celda); j <= Math.floor(z1 / celda); j++) for (const n of grilla.get(clave(i, j)) ?? []) salida.add(n)
+      }
+      return salida
+    },
     // `cuenta(n)`, si se da: solo las casas para las que da true (las que viven a la vez que la que pregunta)
     ocupado(x, z, salvo = -1, cuenta = null) {
       const lista = grilla.get(clave(Math.floor(x / celda), Math.floor(z / celda)))
