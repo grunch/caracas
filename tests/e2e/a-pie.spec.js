@@ -10,9 +10,14 @@ test('«Caminar» baja a la calle; W camina, las flechas no mueven el mapa y Esc
   await page.waitForFunction(() => window.lab?.ready === true)
   await page.evaluate(() => { window.lab.ciudad.U.uOlaEpoca.value = 9000 })
   const boton = page.locator('#caminar')
-  await expect(boton).toBeVisible()
+  await expect(page.locator('#recorrer')).toBeVisible()   // los modos, bajo «Recorrer»
   // las casas llegan después de ready: el botón entra cuando están
-  await expect.poll(async () => { await boton.click(); return page.evaluate(() => window.lab.aPie.activo) }, { timeout: 60000 }).toBe(true)
+  // los modos están bajo «Recorrer»: se abre si hace falta (el clic se repite hasta que lleguen los datos)
+  await expect.poll(async () => {
+    if (!(await boton.isVisible())) await page.locator('#recorrer').click()
+    await boton.click()
+    return page.evaluate(() => window.lab.aPie.activo)
+  }, { timeout: 60000 }).toBe(true)
 
   await expect(page.locator('body')).toHaveClass(/modo-caminar/)
   await expect(boton).toHaveText('Volver al mapa')

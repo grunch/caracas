@@ -44,7 +44,7 @@ export const CON_TECLADO = Object.freeze([
 
 /** A pie (src/a-pie-modo.js): primera persona por las calles de la época elegida. */
 export const A_PIE = Object.freeze([
-  { como: '«Caminar»', que: 'baja a la calle, donde mira la vista (o a la plaza, si estás lejos)' },
+  { como: '«Recorrer» › «Caminar»', que: 'baja a la calle, donde mira la vista (o a la plaza, si estás lejos)' },
   { como: 'WASD o flechas', que: 'caminan; con Mayús, corren. Las casas no se atraviesan' },
   { como: 'Arrastrar', que: 'mira alrededor' },
   { como: 'Con los dedos', que: 'el de la izquierda camina como un joystick; el de la derecha mira' },
@@ -53,7 +53,7 @@ export const A_PIE = Object.freeze([
 
 /** En avión (src/volar-modo.js): sobre el valle, con la ciudad de cada año abajo. */
 export const EN_AVION = Object.freeze([
-  { como: '«Volar»', que: 'despega sobre donde mira la vista, a 300 m del suelo' },
+  { como: '«Recorrer» › «Volar»', que: 'despega sobre donde mira la vista, a 300 m del suelo' },
   { como: 'A y D, o ← y →', que: 'giran' },
   { como: 'W y S, o ↑ y ↓', que: 'suben y bajan; con Mayús, acelera' },
   { como: 'Q y E', que: 'cambian el año: la ciudad cambia abajo' },
@@ -63,7 +63,7 @@ export const EN_AVION = Object.freeze([
 
 /** En coche (src/manejar-modo.js): el vehículo de cada época, con su sonido sintetizado. */
 export const EN_COCHE = Object.freeze([
-  { como: '«Manejar»', que: 'sube al vehículo de la época: carreta de bueyes, coche de caballos, Ford T o Ford V8' },
+  { como: '«Recorrer» › «Manejar»', que: 'sube al vehículo de la época: carreta de bueyes, coche de caballos, Ford T o Ford V8' },
   { como: 'W y S, o ↑ y ↓', que: 'acelera, y frena o va marcha atrás; A y D, o ← y →, giran' },
   { como: 'V', que: 'cambia la vista: de afuera o desde el pescante' },
   { como: 'B · O · N', que: 'la bocina (o el relincho) · el sonido · otro vehículo de la época' },
