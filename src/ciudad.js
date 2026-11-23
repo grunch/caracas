@@ -274,8 +274,9 @@ export function extruirTechos(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M 
   const todas = crearIndice(casas.map((c) => c.huella))
   // ¿la casa n vive en algún momento del tramo de épocas [desde, hasta)?
   const viveEn = (n, desde, hasta) => casas[n].nace < hasta && (casas[n].muere || Infinity) > desde
-  // una vecina que muere antes que la casa no cuenta: la de la fundación se encima con lo que viene después
-  const noMuereAntes = (n, casa) => (casas[n].muere || Infinity) >= (casa.muere || Infinity)
+  // las casas de la fundación (nacen en la época 0 y mueren) se enciman con lo que viene después: no son vecinas;
+  // las demás cuentan en el tramo en que conviven (revisión de #147)
+  const cuentaComoVecina = (n) => !(casas[n].nace === 0 && casas[n].muere > 0)
   const b = crearBuferes(Math.max(64, casas.length * VERTICES_POR_CASA))
   // qué puntos alrededor de la huella (a 0,1 y 0,8 m de cada lado, a lo largo) están ocupados por las casas que
   // cuenta(n) deja: el entorno donde puede ir un alero, como una cadena para comparar tramos de épocas
@@ -301,7 +302,7 @@ export function extruirTechos(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M 
     // para que la casa vuele donde, en ese tramo de épocas, no hay otra (revisión de #147)
     const xs = casa.huella.map((p) => p[0]), zs = casa.huella.map((p) => p[1])
     const vecinas = [...todas.cerca(Math.min(...xs) - CERCA_M, Math.min(...zs) - CERCA_M, Math.max(...xs) + CERCA_M, Math.max(...zs) + CERCA_M)]
-      .filter((n) => n !== numero && noMuereAntes(n, casa))
+      .filter((n) => n !== numero && cuentaComoVecina(n))
     for (const etapa of casa.etapas) {
       const fin = etapa.muere || Infinity
       const cortes = new Set([etapa.nace])
@@ -309,11 +310,11 @@ export function extruirTechos(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M 
       // un corte solo cuenta si cambia lo que hay alrededor de la casa (los puntos donde iría un alero): los tramos
       // seguidos con el mismo entorno se juntan y no duplican geometría
       const ordenados = [...cortes].sort((a, b) => a - b)
-      const firmas = ordenados.map((desde, k) => entorno(casa, numero, (n) => viveEn(n, desde, ordenados[k + 1] ?? fin) && noMuereAntes(n, casa)))
+      const firmas = ordenados.map((desde, k) => entorno(casa, numero, (n) => viveEn(n, desde, ordenados[k + 1] ?? fin) && cuentaComoVecina(n)))
       const bordes = ordenados.filter((_, k) => k === 0 || firmas[k] !== firmas[k - 1])
       bordes.forEach((desde, k) => {
         const hasta = bordes[k + 1] ?? fin
-        const cuenta = (n) => viveEn(n, desde, hasta) && noMuereAntes(n, casa)
+        const cuenta = (n) => viveEn(n, desde, hasta) && cuentaComoVecina(n)
         const lote = proyectar(casa, numero, indice, { indice: todas, numero, cuenta })
         const suyo = lote && loteDeEtapa(casa, etapa, lote)
         if (!suyo) return

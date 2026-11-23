@@ -601,3 +601,17 @@ describe('extruirTechos: la vecina cuenta en las épocas en que vive (revisión 
     expect(delFrente.some((v) => v.nace <= 2 && (v.muere === 0 || v.muere > 2))).toBe(false)
   })
 })
+
+describe('extruirTechos: una vecina que muere antes también cuenta mientras convive (revisión de #147)', () => {
+  test('la casa de 1772 que muere en 1843 tapa el alero de la de enfrente en 1772, y deja de taparlo después', () => {
+    const datos = {
+      ...ciudadDe([{ puntos: rect(0, 0, 10, 14), semilla: 5, nace: 1, muere: 0 }, { puntos: rect(0, -12, 10, 0), semilla: 6, nace: 1, muere: 2 }]),
+      marcos: Float32Array.from([0, 0, 0, 1, 0, 20, 28, 0, 14, 0, 0]), alas: Float32Array.from([]),
+    }
+    const g = extruirTechos(datos, coords)
+    const delFrente = vertices(g).map((v, k) => ({ ...v, nace: g.vidas[k * 2], muere: g.vidas[k * 2 + 1] }))
+      .filter((v) => v.semilla === 5 && v.cubierta !== CUBIERTA.PARED && v.z < -0.01)
+    expect(delFrente.some((v) => v.nace <= 1 && (v.muere === 0 || v.muere > 1))).toBe(false)
+    expect(delFrente.some((v) => v.nace <= 2 && (v.muere === 0 || v.muere > 2))).toBe(true)
+  })
+})
