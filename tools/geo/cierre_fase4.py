@@ -139,6 +139,7 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
     todas = casas_de_epoca(ciudad)
     casas = visibles(todas, hitos)
     abiertos = abiertos_de_casas(ciudad)
+    plantas = [Polygon(p) for h in hitos if _en_pie(h, EPOCA_1772) and not h.get('transitable') for p in h.get('planta', [])]
     figuras = [c for _, c in casas]
     arbol = STRtree(figuras) if figuras else None
     por_id = {n['id']: n for n in red['nodos']}
@@ -155,7 +156,11 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
             continue
         cerca = [] if arbol is None else [figuras[j] for j in arbol.query(figura, predicate='intersects')]
         cubierta = cobertura(figura, cerca, abiertos)
-        medidas.append({'unidad': u['id'], 'ocupacion': u['ocupacion'], 'medida': medida, 'cobertura': cubierta})
+        # una edificada que ocupa la planta de un hito en pie está edificada aunque el hito suprima sus casas (el
+        # Capitolio en la manzana de las Concepciones, #160)
+        ocupada = cobertura(figura, cerca + [p for p in plantas if p.intersects(figura)], abiertos) if plantas else cubierta
+        medidas.append({'unidad': u['id'], 'ocupacion': u['ocupacion'], 'medida': medida, 'cobertura': cubierta,
+                        **({'cobertura_con_hitos': ocupada} if ocupada != cubierta else {})})
         rojo = (edificado or {}).get(u['id'])
         if u['ocupacion'] in EDIFICADAS and rojo:
             # con lo edificado revisado del original: las casas tienen que cubrir lo que el original pinta rojo
@@ -164,7 +169,7 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
             medidas[-1] = {**medidas[-1], 'cobertura_del_rojo': cobertura(manchas, cerca_rojo)}
             if medidas[-1]['cobertura_del_rojo'] < COBERTURA_DEL_ROJO:
                 sin_casas.append({'unidad': u['id'], 'medida': 'edificado'})
-        elif u['ocupacion'] in EDIFICADAS and cubierta < COBERTURA_MINIMA:
+        elif u['ocupacion'] in EDIFICADAS and ocupada < COBERTURA_MINIMA:
             sin_casas.append({'unidad': u['id'], 'medida': medida})
         if u['ocupacion'] in LIBRES and cubierta >= COBERTURA_MINIMA:
             con_casas.append({'unidad': u['id'], 'medida': medida})

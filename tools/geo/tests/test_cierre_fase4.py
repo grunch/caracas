@@ -118,7 +118,9 @@ def test_la_puerta_no_se_cierra_con_una_unidad_sin_ubicar():
 
 
 def test_una_casa_suprimida_por_un_hito_no_cuenta_como_casa_de_la_unidad():
-    hito = {'id': 'h', 'nace': 1, 'muere': 0, 'planta': [[[0, 0], [100, 0], [100, 100], [0, 100]]],
+    # la planta del hito es una esquina chica (la que ocupa toda la manzana la cuenta como edificada, #160); su zona de
+    # supresión, la manzana entera
+    hito = {'id': 'h', 'nace': 1, 'muere': 0, 'planta': [[[0, 0], [10, 0], [10, 10], [0, 10]]],
             'suprime': [[[0, 0], [100, 0], [100, 100], [0, 100]]]}
     p = puerta_fase4(ciudad=ciudad((0, 0, 100, 100), (300, 0, 340, 100)), red=red(), unidades=unidades(), cajas=cajas(),
                      hitos=[hito], metro=METRO)
