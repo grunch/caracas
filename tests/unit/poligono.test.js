@@ -228,3 +228,10 @@ describe('sinColineales', () => {
     expect(sinColineales([[0, 0], [5, 0], [10, 0]], 1e-3)).toEqual([[0, 0], [5, 0], [10, 0]])
   })
 })
+
+describe('sinColineales contra el segmento (revisión de #145)', () => {
+  test('una punta larga que vuelve más allá de sus vecinos no se quita aunque esté cerca de su recta', () => {
+    const punta = [[0, 0], [10, 0], [1, 0.00005], [1, 10], [0, 10]]
+    expect(sinColineales(punta, 0.001)).toContainEqual([10, 0])
+  })
+})

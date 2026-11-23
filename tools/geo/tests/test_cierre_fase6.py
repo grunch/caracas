@@ -135,3 +135,11 @@ def test_el_techo_sobre_la_propia_huella_no_es_un_alero_aunque_pise_la_calzada()
     assert aleros_en_la_calle(casa, calzada, METRO, huellas=huellas) == []
     vuela = [tri(1, (0, -3, 5), (20, -3, 5), (0, 20, 5))]
     assert [x['techo'] for x in aleros_en_la_calle(vuela, calzada, METRO, huellas=huellas)] == [1]
+
+
+def test_las_casas_medidas_son_las_que_tienen_algun_frente_que_se_mide():
+    from cierre_fase6 import casas_con_cumbrera_medible
+    girada = [{**t, 'puntos': [[p[1], p[0], p[2]] for p in t['puntos']]} for t in dos_aguas(2, 10, 40, 40, 60)]
+    frentes = {2: [((1.0, 0.0), (0.0, 0.0), 'L1:A-B', 1, 0)]}
+    assert casas_con_cumbrera_medible(girada, frentes, METRO) == {2}
+    assert casas_con_cumbrera_medible(girada, frentes, METRO, fuera_de_recta={(2, 'L1:A-B', 1, 0)}) == set()

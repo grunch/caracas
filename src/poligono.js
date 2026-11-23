@@ -243,9 +243,11 @@ export function sinColineales(anillo, tolerancia) {
     cambio = false
     for (let k = 0; k < a.length && a.length > 3; k++) {
       const [p, q, r] = [a[(k + a.length - 1) % a.length], a[k], a[(k + 1) % a.length]]
-      const largo = Math.hypot(r[0] - p[0], r[1] - p[1])
-      const lejos = largo < EPS ? Math.hypot(q[0] - p[0], q[1] - p[1])
-        : Math.abs((r[0] - p[0]) * (q[1] - p[1]) - (r[1] - p[1]) * (q[0] - p[0])) / largo
+      // contra el segmento p→r, no su recta: una punta que vuelve más allá de sus vecinos queda lejos (revisión de #145)
+      const [dx, dz] = [r[0] - p[0], r[1] - p[1]]
+      const largo2 = dx * dx + dz * dz
+      const t = largo2 < EPS ? 0 : Math.max(0, Math.min(1, ((q[0] - p[0]) * dx + (q[1] - p[1]) * dz) / largo2))
+      const lejos = Math.hypot(q[0] - p[0] - t * dx, q[1] - p[1] - t * dz)
       if (lejos < tolerancia) { a.splice(k, 1); k--; cambio = true }
     }
   }
