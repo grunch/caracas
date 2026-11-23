@@ -337,3 +337,13 @@ def test_orientar_a_una_calle_no_gira_el_frente_hacia_un_costado_con_vecina():
     sola = np.zeros((40, 60), bool)
     sola[0:28, 0:20] = True                          # sin vecina, el costado da a la calle
     assert orientar_a_una_calle((0, 0), (1, 0), 10, 14, calle, METRO, manzana=sola)[1] == pytest.approx((0, 1))
+
+
+def test_orientar_a_una_calle_no_gira_hacia_un_costado_que_toca_otra_casa_en_parte():
+    # en la esquina, el lote de la otra calle toca un tercio del costado derecho: el alero del frente nuevo caería sobre él
+    from tools.geo.alas import orientar_a_una_calle
+    calle = [{'tramo': 'L1:A-B', 'medible': True, 'puntos': [[46, -50], [46, 80]]}]
+    manzana = np.zeros((40, 60), bool)
+    manzana[0:28, 0:20] = True
+    manzana[18:28, 20:40] = True                     # la otra casa, pegada al último tercio del costado
+    assert orientar_a_una_calle((0, 0), (1, 0), 10, 14, calle, METRO, manzana=manzana) == ((0, 0), (1, 0), 10, 14)

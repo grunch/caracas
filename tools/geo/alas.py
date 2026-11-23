@@ -335,7 +335,8 @@ def _da_a_una_calle(p, q, normal, calles72, metro):
 
 def _lado_libre(p, q, afuera, manzana, metro):
     """¿Lo que hay justo afuera del lado p→q (px) está fuera de la manzana? Como _libres: tres puntos a lo largo, a 2 y
-    4 m hacia afuera; libre si al menos LADO_LIBRE de ellos caen fuera de la máscara."""
+    4 m hacia afuera; libre si todos caen fuera de la máscara (un costado que toca otra casa en parte llevaría su
+    alero encima de ella)."""
     p, q, afuera = (np.asarray(x, float) for x in (p, q, afuera))
     fuera = total = 0
     for t in (0.2, 0.5, 0.8):
@@ -344,7 +345,7 @@ def _lado_libre(p, q, afuera, manzana, metro):
             i, j = int(math.floor(y)), int(math.floor(x))
             total += 1
             fuera += not (0 <= i < manzana.shape[0] and 0 <= j < manzana.shape[1] and manzana[i, j])
-    return fuera >= LADO_LIBRE * total
+    return fuera == total
 
 
 def orientar_a_una_calle(origen, eu, ancho_m, fondo_m, calles72, metro, manzana=None):
