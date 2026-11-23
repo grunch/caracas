@@ -422,3 +422,19 @@ def test_sin_solapes_residuales_resta_el_solape_a_la_casa_mas_grande():
     assert huella(1).equals(figuras[1])
     assert huella(2).intersection(huella(3)).area < 1e-9 and huella(3).equals(figuras[3])     # la de 1936 queda
     assert len(ciudad['vertices']) == len(vertices)
+
+
+def test_sin_solapes_residuales_no_parte_una_casa_en_dos():
+    # revisión de #150: un solape fino que cruza la casa entera la partiría; ese corte no se hace
+    from tools.geo.epocas import sin_solapes_residuales
+    figuras = [box(0, 0, 30, 10), box(20, -1, 20.001, 11)]
+    vertices, techos = [], []
+    for f in figuras:
+        puntos = list(f.exterior.coords)[:-1]
+        techos.append([len(vertices) // 2, len(puntos), 1, 0, 0])
+        vertices.extend(c for p in puntos for c in p)
+    ciudad = {'vertices': vertices, 'techos': techos, 'vida': [[1, 2]] * 2, 'antes': [1, 1], 'junta': [7, 7]}
+    nueva = sin_solapes_residuales(ciudad, [], METRO)
+    a, n = nueva['techos'][0][:2]
+    v = nueva['vertices']
+    assert abs(Polygon([(v[2 * (a + i)], v[2 * (a + i) + 1]) for i in range(n)]).area - 300) < 1e-6

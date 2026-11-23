@@ -43,6 +43,10 @@ export const MARCAS = Object.freeze([
     dudas: 'El nombre «Plaza Bolívar» es anterior a la estatua (CG: decreto de 1842); aquí cambia con el jardín, en la época de 1889.' },
   // el punto va en el medio de la nave (39 m al este de la fachada, que es el marco del hito): más lejos del cartel de la plaza
   { id: 'catedral', hito: 'catedral', x: 9156, y: 6816, nombre: 'Catedral', nivel: 2, alto: 16, fuente: `${P36} («Iglesia Catedral»); ${P89} (templo I)` },
+  { id: 'palacio-arzobispal', hito: 'palacio-arzobispal', nace: 1, nivel: 3, alto: 13,
+    nombres: [[1, 'Palacio Episcopal'], [2, 'Palacio Arzobispal', 'La residencia del arzobispo, junto a la Catedral (arquidiócesis desde 1803).']],
+    fuente: `${P36} (manzana de la «Iglesia Catedral», esquina de Las Gradillas; sin rótulo propio); historia, vanos y reformas: https://iamvenezuela.org/2016/06/palacio-arzobispal/; arquidiócesis en 1803: https://arquidiocesiscaracas.com/fundacion/`,
+    dudas: `${SIN_LEYENDA} Huella, patios, fachada lateral y alzado colonial: hipótesis del modelo, sin levantamiento.` },
   { id: 'casa-amarilla', hito: 'casa-amarilla', nace: 1, nivel: 3, alto: 14,
     nombres: [[1, 'Ayuntamiento y Real Cárcel'], [2, 'Casa de Gobierno'], [3, 'Casa Amarilla']],
     fuente: `${P89} (5 «Casa amarilla»); ${P36} («Min. del Exterior»); cronología: https://es.wikipedia.org/wiki/Casa_Amarilla_de_Caracas; https://bibliofep.fundacionempresaspolar.org/dhv/entradas/c/casa-amarilla/; arquitectura: https://iamvenezuela.org/2016/07/casa-amarilla/`,

@@ -14,6 +14,7 @@ const APODOS = Object.freeze({
   panteon: { corto: 'el Panteón Nacional', alias: [] },
   'casa-amarilla': { corto: 'la Casa Amarilla', alias: [] },
   capitolio: { corto: 'el Capitolio', alias: ['Capitolio', 'Palacio Federal', 'Palacio Legislativo'] },
+  'palacio-arzobispal': { corto: 'el Palacio Arzobispal', alias: ['Palacio Episcopal', 'Arzobispado'] },
   universidad: { corto: 'la Universidad', alias: ['Universidad', 'Universidad Central'] },
   miraflores: { corto: 'el Palacio de Miraflores', alias: ['Palacio de Miraflores'] },
 })

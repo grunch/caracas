@@ -10,6 +10,10 @@ import { gestoDeDosDedos, modoDeGesto } from './gestos.js'
 import { curvaSuave, vistaEnTrayecto } from './trayecto.js'
 
 const LIMITES = { distMin: 40, distMax: 9000, pitchMin: 0.18, pitchMax: 1.5 }
+/** Cuántas veces el lado mayor de la hoja se puede alejar la cámara: de ahí, la hoja entera es un rectángulo chico sobre la mesa. */
+export const ALEJAR_HOJAS = 4
+/** La distancia máxima de la cámara para esta hoja (nunca menos que la de siempre). */
+export const distanciaMaxima = ({ ancho, alto }) => Math.max(LIMITES.distMax, Math.max(ancho, alto) * ALEJAR_HOJAS)
 const SUAVIDAD = 8
 const SUAVIDAD_VUELO = 30 // en un vuelo con guion (volarA) la vista sigue de cerca al trayecto
 const ALTURA_MINIMA_M = 12 // sobre el suelo que queda debajo de la cámara
@@ -20,6 +24,7 @@ const PASO = Object.freeze({ mover: 0.08, girar: 0.08, inclinar: 0.05, acercar: 
 export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0 }) {
   // arranca mirando la hoja entera, un poco inclinada, como un plano sobre la mesa
   const goal = { x: hoja.x0 + hoja.ancho / 2, z: hoja.z0 + hoja.alto / 2, y: 0, dist: Math.max(hoja.ancho, hoja.alto) * 1.9, yaw: 0, pitch: 1.2 }
+  const distMax = distanciaMaxima(hoja)
   const now = { ...goal }
   const plano = new Plane(new Vector3(0, 1, 0), 0)
   const rayo = new Raycaster()
@@ -40,7 +45,7 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
     return rayo.ray.intersectPlane(plano, new Vector3())
   }
   const acotar = () => {
-    goal.dist = Math.min(LIMITES.distMax, Math.max(LIMITES.distMin, goal.dist))
+    goal.dist = Math.min(distMax, Math.max(LIMITES.distMin, goal.dist))
     goal.pitch = Math.min(LIMITES.pitchMax, Math.max(LIMITES.pitchMin, goal.pitch))
     goal.x = Math.min(hoja.x0 + hoja.ancho, Math.max(hoja.x0, goal.x))
     goal.z = Math.min(hoja.z0 + hoja.alto, Math.max(hoja.z0, goal.z))
@@ -141,7 +146,7 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
     e.preventDefault()
     const p = alSuelo(e.clientX, e.clientY)
     const delta = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 100 : 1)
-    const nueva = Math.min(LIMITES.distMax, Math.max(LIMITES.distMin, goal.dist * Math.exp(delta * 0.0012)))
+    const nueva = Math.min(distMax, Math.max(LIMITES.distMin, goal.dist * Math.exp(delta * 0.0012)))
     const f = nueva / goal.dist
     if (p) {
       goal.x = p.x + (goal.x - p.x) * f

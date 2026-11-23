@@ -4,7 +4,7 @@
 
 "Un plano de hace más de siglo y medio, levantado manzana por manzana, y la ciudad que creció encima."
 
-El usuario abre una página que parece **un plano grabado sobre una mesa oscura**. Tras una intro breve, el plano se despliega y la ciudad **se levanta desde la plaza principal hacia afuera** como una ola. Todo lo que aparece en 3D está donde el plano lo dibuja. Lo que el plano no dice (alturas, fachadas, división de lotes) se completa "con las costumbres de la época" y con fotos.
+El usuario abre una página que parece **un plano grabado sobre una mesa gris** (`src/mesa.js`); alejándose con la rueda se llega a ver la hoja entera como un rectángulo chico apoyado en ella (`distanciaMaxima` en `src/camara.js`: cuatro veces el lado mayor de la hoja). Tras una intro breve, el plano se despliega y la ciudad **se levanta desde la plaza principal hacia afuera** como una ola. Todo lo que aparece en 3D está donde el plano lo dibuja. Lo que el plano no dice (alturas, fachadas, división de lotes) se completa "con las costumbres de la época" y con fotos.
 
 Público: curiosos, gente de la ciudad, docentes. Sin login ni backend; carga en segundos y funciona en celular.
 

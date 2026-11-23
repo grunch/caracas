@@ -158,3 +158,14 @@ def test_los_limites_de_la_fase_6_se_reconocen_por_el_centro_de_la_huella():
     # un cruce que creció más que lo registrado vuelve a contar
     mayor = [{**cruces[0], 'area_proyectada_m2': 0.5}]
     assert con_limites_fase6([], mayor, huellas, limites)[1][0].get('limite') is None
+
+
+def test_la_tolerancia_del_centro_de_los_limites_es_un_metro_con_cualquier_metro():
+    # revisión de #150: con metro = 1, centros a 1,5 px (1,5 m) no son la misma casa
+    from cierre_fase6 import con_limites_fase6
+    huellas = {7: box(0, 0, 10, 10)}
+    limites = {'cumbreras': [{'centro': [6.5, 5.0], 'clase': 'esquina'}]}
+    d, _ = con_limites_fase6([{'techo': 7, 'giro_grados': 85.0}], [], huellas, limites, metro=1.0)
+    assert d[0].get('limite') is None
+    d, _ = con_limites_fase6([{'techo': 7, 'giro_grados': 85.0}], [], huellas, limites, metro=0.5)
+    assert d[0]['limite'] == 'esquina'

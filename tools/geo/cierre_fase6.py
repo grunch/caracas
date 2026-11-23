@@ -242,17 +242,17 @@ def frentes_de_casas(calles, casas, metro=METRO, obstaculos=()):
     return salida
 
 
-CENTRO_PX = 2.0   # el centro de la huella de una casa registrada como límite, a menos de esto (1 m): es la misma casa
+CENTRO_M = 1.0    # el centro de la huella de una casa registrada como límite, a menos de esto: es la misma casa
 
 
-def con_limites_fase6(desviadas, cruces, huellas, limites):
+def con_limites_fase6(desviadas, cruces, huellas, limites, metro=METRO):
     """(desviadas, cruces) con la clase del límite documentado que los cubre (limites-fase6.json, decisión del
     responsable del 23-11-2026). Los índices de techo cambian al regenerar: cada casa se reconoce por el centro de su
-    huella (a menos de CENTRO_PX). Un cruce registrado cuenta como límite solo si no pasa su área máxima."""
+    huella (a menos de CENTRO_M). Un cruce registrado cuenta como límite solo si no pasa su área máxima."""
     centros = {t: np.asarray(g.centroid.coords[0]) for t, g in huellas.items()}
 
     def es(t, centro):
-        return t in centros and float(np.hypot(*(centros[t] - np.asarray(centro, float)))) < CENTRO_PX
+        return t in centros and float(np.hypot(*(centros[t] - np.asarray(centro, float)))) * metro < CENTRO_M
 
     salida_d = []
     for x in desviadas:
@@ -283,7 +283,7 @@ def puerta_fase6(cubiertas, ciudad, calles, red, hitos, fases, sha256, metro=MET
     desviadas = cumbreras_desviadas(triangulos, frentes, metro, fuera_de_recta=fuera)
     con_cumbrera = casas_con_cumbrera_medible(triangulos, frentes, metro, fuera_de_recta=fuera)
     aleros = aleros_en_la_calle(triangulos, [c['poligono'] for c in corredores(red, metro=metro)], metro, huellas=dict(casas))
-    desviadas, cruces = con_limites_fase6(desviadas, cruces, dict(casas), limites or {})
+    desviadas, cruces = con_limites_fase6(desviadas, cruces, dict(casas), limites or {}, metro)
     fuera_d = [x for x in desviadas if 'limite' not in x]
     fuera_c = [x for x in cruces if 'limite' not in x]
     criterios = OrderedDict([
