@@ -41,3 +41,17 @@ def test_un_panel_que_no_se_pudo_escribir_falla_con_su_ruta(tmp_path):
         escribir_panel(ruta, np.zeros((4, 4, 3), np.uint8))
     escribir_panel(tmp_path / 'S1772-11.jpg', np.zeros((4, 4, 3), np.uint8))
     assert (tmp_path / 'S1772-11.jpg').stat().st_size > 0
+
+
+def test_una_casa_casi_entera_fuera_de_lo_rojo_del_original_se_informa():
+    # el informe de la fase 8 (decisión del responsable del 23-11-2026): las casas de 1772 con menos de la fracción
+    # de su huella sobre lo rojo del original (con tolerancia), sin regla en el generador
+    import numpy as np
+    from censo_fase8 import casas_fuera_del_rojo
+    rojo = np.zeros((100, 100), np.uint8)
+    rojo[0:50, 0:50] = 1
+    casas = [(1, box(10, 10, 30, 30)), (2, box(60, 60, 80, 80)), (3, box(40, 10, 70, 30))]
+    fuera = casas_fuera_del_rojo(casas, rojo, tolerancia_px=0, fraccion=0.2)
+    assert [f['techo'] for f in fuera] == [2]
+    assert fuera[0]['sobre_el_rojo'] == 0.0
+    assert [f['techo'] for f in casas_fuera_del_rojo(casas, rojo, tolerancia_px=12, fraccion=0.2)] == []
