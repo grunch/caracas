@@ -72,7 +72,8 @@ Las reglas son sobre la evidencia que trae el PR, no sobre cómo se escribió.
 
 **Exentos** del issue, la plantilla, la Prueba a mano y el Test en rojo: los PRs que solo cambian archivos Markdown
 (pero un Markdown en `fuentes/` igual lleva sus fuentes), los de bots y los que quien mantiene el repo etiqueta
-`calidad:exento`. Quien mantiene el repo no necesita issue aceptado, pero sus PRs (y los que abren sus agentes de IA)
+`calidad:exento`. Esa etiqueta es una decisión explícita de quien mantiene el repo y también salta la revisión de
+fuentes del bot: quien la pone responde por las fuentes de ese PR. Quien mantiene el repo no necesita issue aceptado, pero sus PRs (y los que abren sus agentes de IA)
 también llenan la plantilla. El tamaño (3000 líneas de código; 400 en un primer PR) vale para todos menos los bots.
 
 Un bot ([`tools/triaje/`](tools/triaje/triaje-lib.mjs)) revisa cada PR y le pone `calidad:ok` o

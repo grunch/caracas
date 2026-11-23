@@ -39,8 +39,9 @@ Si eres un agente de IA preparando un PR, sigue `CONTRIBUTING.md § El estándar
   issue aceptado, no abras el PR: comenta en el issue.
 - Llena cada sección de `.github/pull_request_template.md`, aunque el PR sea para quien mantiene el repo.
   La **Prueba a mano** son pasos que alguien hizo de verdad en el sitio corriendo (`npm run dev`), cada uno
-  con su `Se ve:`, uno de regresión y, en un fix, uno marcado `(falla en main)`. Si los pasos los corriste
-  tú con Playwright o capturas, dilo así; no presentes como hechos pasos que nadie corrió.
+  con su `Se ve:`, uno de regresión y, en un fix, uno marcado `(falla en main)`. Correrlos tú con Playwright
+  o capturas ayuda, pero **no reemplaza la prueba de una persona**: dilo así, y que quien abre el PR los haga
+  a mano antes de pedir revisión. No presentes como hechos pasos que nadie corrió.
 - Si el cambio se ve (fix o mejora), pon captura de antes (`main`) y de después (esta rama), misma vista, época y modo.
 - En un fix, el primer commit es `test:` y solo agrega el test de regresión, que falla en `main`.
 - Cada dato histórico nuevo lleva su fuente con enlace en la sección **Fuentes**. Nunca inventes una fecha,

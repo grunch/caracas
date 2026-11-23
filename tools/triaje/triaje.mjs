@@ -90,10 +90,9 @@ export async function aplicarResultado(gh, numero, sha, etiquetasActuales, resul
   const base = `/repos/${gh.repo}`
   const [poner, sacar] = resultado.ok ? [cfg.etiquetas.ok, cfg.etiquetas.falta_info] : [cfg.etiquetas.falta_info, cfg.etiquetas.ok]
   if (!etiquetasActuales.includes(poner)) await gh.pedir('POST', `${base}/issues/${numero}/labels`, { labels: [poner] })
-  if (etiquetasActuales.includes(sacar)) {
-    await gh.pedir('DELETE', `${base}/issues/${numero}/labels/${encodeURIComponent(sacar)}`)
-      .catch((e) => { if (e.estado !== 404) throw e }) // ya no estaba
-  }
+  // siempre, sin mirar el payload: una vuelta anterior pudo poner la contraria después de que se armó (404: no estaba)
+  await gh.pedir('DELETE', `${base}/issues/${numero}/labels/${encodeURIComponent(sacar)}`)
+    .catch((e) => { if (e.estado !== 404) throw e })
 
   const mios = (await gh.paginar(`${base}/issues/${numero}/comments`))
     .filter((c) => c.user.login === LOGIN_DEL_BOT && c.body.startsWith(MARCA))

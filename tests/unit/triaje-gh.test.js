@@ -73,6 +73,17 @@ describe('aplicarResultado', () => {
     // el check informa, nunca bloquea
     expect(metodos).toContainEqual(['POST', '/check-runs', 'neutral'])
   })
+  it('borra siempre la etiqueta contraria, aunque el payload no la traiga (otra vuelta la pudo poner); un 404 no rompe', async () => {
+    const gh = ghFalso()
+    const pedir = gh.pedir.bind(gh)
+    gh.pedir = async (m, r, c) => {
+      const res = await pedir(m, r, c)
+      if (m === 'DELETE' && r.includes('/labels/')) throw Object.assign(new Error('HTTP 404'), { estado: 404 })
+      return res
+    }
+    await aplicarResultado(gh, 9, sha, [], bueno, cfg)
+    expect(gh.llamadas).toContainEqual(['DELETE', '/repos/grunch/caracas/issues/9/labels/calidad%3Afalta-info', undefined])
+  })
   it('edita su comentario en vez de duplicarlo', async () => {
     const gh = ghFalso({}, [{ id: 77, user: { login: 'github-actions[bot]' }, body: `${MARCA}\nviejo` }])
     await aplicarResultado(gh, 9, sha, ['calidad:falta-info'], malo, cfg)
