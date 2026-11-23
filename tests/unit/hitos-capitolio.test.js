@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { expect, test } from 'vitest'
-import { Box3, Matrix3, Vector3 } from 'three'
+import { Box3, Matrix3, PlaneGeometry, Vector3 } from 'three'
 import { HITOS, construirHitos, validarHitos, zonasDeSupresion, suprimirTechos } from '../../src/hitos.js'
 import { crearCoords } from '../../src/coords.js'
 import { MARCAS } from '../../src/marcas-datos.js'
@@ -8,6 +8,7 @@ import { normalizarMarcas } from '../../src/marcas.js'
 import { FICHAS } from '../../src/fichas-datos.js'
 import { contenidoDeFicha } from '../../src/fichas.js'
 import { crearCapitolio } from '../../src/hitos/capitolio-modelo.js'
+import { llevarAEsquinas } from '../../src/hitos/capitolio.js'
 import { etapaCapitolio } from '../../src/hitos/capitolio-datos.js'
 
 const plano = { ancho: 18600, alto: 14800, metro: .5, plaza: [8968.2, 6839] }
@@ -176,5 +177,19 @@ test('las vertientes de teja del convento tienen la normal hacia arriba', () => 
     })
     expect(vertientes).toBeGreaterThan(0); expect(invertidas).toBe(0)
     liberar(edificio)
+  }
+})
+
+test('los normales siguen a sus caras después de llevar el modelo a la manzana', () => {
+  // revisión de #166: el mapeo estira el modelo un 30–40 % de este a oeste; un faldón inclinado cambia de pendiente y
+  // su normal tiene que girar con él
+  const faldon = new PlaneGeometry(10, 10).rotateX(-Math.PI / 2 + 0.6).rotateY(0.4)   // una cara inclinada, girada
+  const esquinas = [[-66, -60], [64, -62], [66, 63], [-68, 61]]                     // ~40 % más ancho, algo torcido
+  const llevada = llevarAEsquinas(faldon, esquinas)
+  const p = (q) => new Vector3().fromBufferAttribute(llevada.getAttribute('position'), q)
+  const cara = new Vector3().crossVectors(p(1).clone().sub(p(0)), p(2).clone().sub(p(0))).normalize()
+  for (let i = 0; i < 4; i++) {
+    const n = new Vector3().fromBufferAttribute(llevada.getAttribute('normal'), i)
+    expect(Math.abs(n.dot(cara))).toBeGreaterThan(Math.cos(0.5 * Math.PI / 180))
   }
 })

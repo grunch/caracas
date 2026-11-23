@@ -22,14 +22,36 @@ export function aEsquinas(esquinas, x, z) {
   return [0, 1].map((k) => peso[0] * no[k] + peso[1] * ne[k] + peso[2] * se[k] + peso[3] * so[k])
 }
 
-function llevar(geometria, esquinas) {
-  const pos = geometria.getAttribute('position')
+/** La derivada del mapeo en (x, z): [[∂a/∂x, ∂a/∂z], [∂b/∂x, ∂b/∂z]] (la altura no cambia). */
+function jacobiano(esquinas, x, z) {
+  const [u, v] = [x / PLATAFORMA[0] + 0.5, z / PLATAFORMA[1] + 0.5]
+  const [no, ne, se, so] = esquinas
+  const du = [0, 1].map((k) => ((1 - v) * (ne[k] - no[k]) + v * (se[k] - so[k])) / PLATAFORMA[0])
+  const dv = [0, 1].map((k) => ((1 - u) * (so[k] - no[k]) + u * (se[k] - ne[k])) / PLATAFORMA[1])
+  return [[du[0], dv[0]], [du[1], dv[1]]]
+}
+
+/** Lleva la geometría a las esquinas: las posiciones por el mapeo y los normales por la inversa transpuesta de su
+ * derivada (revisión de #166: el estiramiento cambia las pendientes de techos y cúpulas). */
+export function llevarAEsquinas(geometria, esquinas) {
+  const pos = geometria.getAttribute('position'), nor = geometria.getAttribute('normal')
   for (let i = 0; i < pos.count; i++) {
-    const [a, b] = aEsquinas(esquinas, pos.getX(i), pos.getZ(i))
+    const [x, z] = [pos.getX(i), pos.getZ(i)]
+    if (nor) {
+      // n' ∝ (J⁻¹)ᵀ n en el plano x–z, con y igual: basta la adjunta transpuesta (el determinante se va al normalizar)
+      const [[j00, j01], [j10, j11]] = jacobiano(esquinas, x, z)
+      const det = j00 * j11 - j01 * j10
+      const [nx, ny, nz] = [nor.getX(i), nor.getY(i), nor.getZ(i)]
+      const [mx, mz] = [(j11 * nx - j10 * nz) / det, (-j01 * nx + j00 * nz) / det]
+      const largo = Math.hypot(mx, ny, mz) || 1
+      nor.setXYZ(i, mx / largo, ny / largo, mz / largo)
+    }
+    const [a, b] = aEsquinas(esquinas, x, z)
     pos.setX(i, a)
     pos.setZ(i, b)
   }
   pos.needsUpdate = true
+  if (nor) nor.needsUpdate = true
   return geometria
 }
 
@@ -60,7 +82,7 @@ export function capitolio(p, { anio, componente = 'todo', esquinas = NOMINALES }
       geometrias.add(objeto.geometry)
       materiales.add(objeto.material)
       if (!entra(objeto)) return
-      p.geo(llevar(objeto.geometry.clone().applyMatrix4(objeto.matrixWorld), esquinas), {
+      p.geo(llevarAEsquinas(objeto.geometry.clone().applyMatrix4(objeto.matrixWorld), esquinas), {
         color: objeto.material.color.toArray(), // Three.js guarda el color en lineal
         mat: MAT.LISO,
       })
