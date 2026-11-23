@@ -132,10 +132,27 @@ Datos regenerados sobre la rama con el Capitolio de #143, otro hito en pie desde
 | Aleros fuera de la calle | 0 | 0 (cumple) |
 | Mismo trazado que la fase 5 | cumple | cumple |
 
+## Después de T33j.6i: lotes oblicuos y esquinas
+
+Por decisión del responsable del 22-11-2026, se siguen corrigiendo las cumbreras y los cruces que quedaban, sin registrarlos como límite.
+
+- **Lote oblicuo:** si ningún lado del lote corre con su calle de 1772 dentro de 20°, pero uno libre da a ella con hasta 60° de giro, el marco va en la dirección de la calle y encierra el lote (`orientar_a_una_calle`, `GIRO_DE_LOTE_OBLICUO`). El techo se recorta con la huella. Vale para los lotes de `casas_por_lados` y para los de la cuadra modelo que arma `marco_de_casa` (`casa_modelo`).
+- **Esquina:** un costado es libre con el 80 % de las sondas afuera (`LIBRE_DE_LADO`). Un contacto solo en la punta, con el lote de la otra calle en la esquina, ya no impide girar el frente, porque el visor no pone alero sobre una casa de su época (T33j.6h).
+- **Revisión de #147** (ya en `main`): las vecinas cuentan solo en el tramo de épocas en que conviven con la casa, y cada etapa se parte donde cambia su entorno. Las casas de la fundación no cuentan.
+
+| Criterio | Después de T33j.6h | Después de T33j.6i |
+|---|---|---|
+| Triángulos sin degenerar | 0 | 0 (cumple) |
+| Techos sin cruces | 18 pares | **17** |
+| Cumbreras con el frente | 48 desviadas | **31** |
+| Aleros fuera de la calle | 0 | 0 (cumple) |
+| Mismo trazado que la fase 5 | cumple | cumple |
+
+Las fases 3, 4 y 5 siguen cerrables con el Capitolio (6303 casas de 1772 a la vista).
+
 ## Lo que sigue
 
-- Los 18 cruces que quedan son casi todos de menos de 0,03 m²: contactos en esquinas de más de 1 mm y huellas que se pisan menos que el umbral de solapes de la fase 5.
-- Las 48 cumbreras: lotes de esquina de la cuadra modelo cuyo costado hacia la calle de 1772 toca en parte otro lote, y calles oblicuas (27° a 43°) respecto de los lados de la cuadra.
+- Los 17 cruces y las 31 cumbreras que quedan, uno por uno.
 - La regla de specs/08 vale: un PR de techos no cambia calles, lotes ni ocupación para que un techo deje de fallar.
 
 ## Reproducir
