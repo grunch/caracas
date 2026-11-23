@@ -70,8 +70,10 @@ test('la cúpula queda en el ala norte, la manzana cabe en su planta y el ancla 
   }
   expect(cupula).toBeGreaterThan(0)
   expect([...vidas].sort()).toEqual(['1:2', '2:3', '3:0', '3:4', '4:0', '4:5', '5:0'])
-  // La escalinata del Palacio Legislativo baja ~3,8 m a la acera sur (b = 57,8): lejos de la Universidad (b ≈ 78).
-  expect(maxA).toBeLessThan(48); expect(maxB).toBeLessThan(58.5); expect(alto).toBeLessThan(36)
+  // El modelo llena la manzana del original (131,4 × 123,4 m): llega a sus bordes este y oeste, y la escalinata del
+  // Palacio Legislativo baja ~4,3 m a la acera sur (b ≈ 66), lejos de la Universidad.
+  expect(maxA).toBeGreaterThan(64); expect(maxA).toBeLessThan(67.5)
+  expect(maxB).toBeGreaterThan(60); expect(maxB).toBeLessThan(66.5); expect(alto).toBeLessThan(36)
   expect(errorAncla).toBeLessThan(.001)
   expect(d.posiciones.every(Number.isFinite)).toBe(true)
   expect(d.normales.every(Number.isFinite)).toBe(true)
@@ -98,6 +100,17 @@ test('las casas genéricas de la manzana se apagan desde 1772 sin mutar sus dato
   const casa = { vertices: new Float32Array(hito.planta[0].flat()), techos: new Uint32Array([0, 4, 1, 0]), vida: new Uint32Array([0]) }
   expect([...suprimirTechos(casa, zonas)]).toEqual([8])
   expect([...casa.vida]).toEqual([0])
+})
+
+test('el convento ocupa la manzana entera del original: las casas de sus costados se apagan desde 1772', () => {
+  // la manzana medida sobre el 1772 calzado (los ejes de la referencia, hasta el borde de la manzana roja): 131,4 × 123,4 m
+  const [p] = hito.planta
+  const lado = (i) => Math.hypot(p[(i + 1) % 4][0] - p[i][0], p[(i + 1) % 4][1] - p[i][1]) * plano.metro
+  expect(lado(0)).toBeCloseTo(131.4, 0); expect(lado(1)).toBeCloseTo(123.4, 0)
+  // una casa de la franja oeste (entre la planta vieja de 92 m y la calle), que antes quedaba en pie
+  const casaOeste = [[8552, 7060], [8572, 7064], [8576, 7044], [8556, 7040]]
+  const casa = { vertices: new Float32Array(casaOeste.flat()), techos: new Uint32Array([0, 4, 1, 0]), vida: new Uint32Array([0]) }
+  expect([...suprimirTechos(casa, zonasDeSupresion([hito]))]).toEqual([8])
 })
 
 test('la ficha nombra el convento hasta 1843 y el Capitolio después, con sus fuentes y dudas', () => {
