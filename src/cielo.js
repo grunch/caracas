@@ -7,7 +7,7 @@
  * un trazo sepia en el borde; en **color**, el celeste. Pasa de uno a otro con la misma transición que la ciudad.
  *
  * Es una cúpula sin profundidad que se dibuja antes que todo y sigue a la cámara (solo gira con ella). En el
- * mapa no se ve: ahí manda la mesa oscura de siempre. Las cuentas están dos veces, en JS (para las pruebas)
+ * mapa no se ve: ahí manda la mesa (src/mesa.js). Las cuentas están dos veces, en JS (para las pruebas)
  * y en GLSL, con los mismos números.
  *
  * Direcciones: vectores unitarios del mundo (x al este, y arriba, z al sur).

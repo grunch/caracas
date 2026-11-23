@@ -26,7 +26,7 @@ export const catedral = Object.freeze({
     'El largo de la nave (78 m): la costura del mosaico de 1936 tapa la cabecera.',
     'Alturas a ojo desde las fotos: muro de la nave ~10 m, fachada ~17 m, torre ~34 m con la figura (unas tres veces el muro).',
     'Va desde la época de 1772 con el aspecto de las imágenes de 1866–1874; no hay imagen del siglo XVIII, y en 1578 había otra iglesia en el lugar (no se modela).',
-    'El muro blanco largo de la foto de 1866 y el grabado de 1867 seguía por el lado este de la plaza hasta Gradillas; acá solo va el cuerpo que dibuja el plano de 1936 al sur de la nave.',
+    'El muro blanco largo de la foto de 1866 y el grabado de 1867 seguía por el lado este de la plaza hasta Gradillas; acá va el cuerpo que dibuja el plano de 1936 al sur de la nave y, en la esquina de Gradillas, el Palacio Arzobispal (hito propio); entre ambos quedan unos 9 m sin modelar.',
     'La figura sobre el cupulín se ve en las fotos de 1866 y ~1880; en qué épocas estuvo, a verificar.',
   ],
   partes: [
