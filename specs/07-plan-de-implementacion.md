@@ -129,7 +129,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T62b | El **tranvía** de manejar: va por rieles (el trazado de las líneas, de las fuentes) en vez de andar libre por las calles | T62 | el tranvía sigue su línea en su época | ⏳ |
 | T60b | A pie, el **camino entero**: como en manejar (#63), revisar los choques a lo largo del paso y no solo en el destino (con cuadros lentos, corriendo se puede atravesar una casa delgada) | T60 | test del paso largo que no atraviesa una casa | ⏳ |
 | T63 | El **cielo** de los recorridos: papel en tinta, celeste caraqueño en color, con algunas nubes y el sol de las sombras, suave (`src/cielo.js`) | T60 | caminando, manejando o volando no se ve el cielo negro | 🔄 #136 |
-| T64 | **Alejarse** hasta ver la hoja entera, chica, sobre la **mesa gris** (no negra): la distancia máxima de la cámara sale del tamaño de la hoja (`distanciaMaxima`, `src/camara.js`) y el color de la mesa, de `src/mesa.js` (escena, página y barra del navegador) | T25 | con la rueda se aleja hasta que la hoja es un rectángulo sobre la mesa; fuera de la hoja no hay negro | 🔄 |
+| T64 | **Alejarse** hasta ver la hoja entera, chica, sobre la **mesa gris** (no negra): la distancia máxima de la cámara sale del tamaño de la hoja (`distanciaMaxima`, `src/camara.js`) y el color de la mesa, de `src/mesa.js` (escena, página y barra del navegador) | T25 | con la rueda se aleja hasta que la hoja es un rectángulo sobre la mesa; fuera de la hoja no hay negro | 🔄 #148 |
 
 ## Fase 7 · Cierre
 
