@@ -4,7 +4,8 @@
   estaciones seguidas, de al menos ANCHO_ABERTURA_M (una puerta), donde el rayo pasa la recta de la fachada por más
   de ANCHO_ABERTURA_M o no toca nada, entre la primera y la última casa de la manzana que arma el frente. Es indebida si
   el original pinta edificado en ese lugar (lo edificado revisado de la fase 4): por ahí se entra a un patio privado
-  por un hueco accidental;
+  por un hueco accidental. Las registradas en limites-fase7.json (con_limites_fase7) siguen listadas con su clase y
+  no impiden cerrar;
 - casas con acceso: el de la puerta de la fase 5 (ninguna casa sin borde hacia la calle);
 - pasajes públicos abiertos: las calles libres de la puerta de la fase 3 (ningún pasaje sellado);
 - terreno libre sin casas: el de la puerta de la fase 4;
@@ -34,6 +35,7 @@ from fachadas import ALCANCE_M, ESTACIONES_MINIMAS, PASO_M, TOLERANCIA_FACHADA_M
 
 ANCHO_ABERTURA_M = 2.0      # una abertura más angosta que una puerta no deja entrar (el acceso mínimo de la fase 5)
 ADENTRO_M = 1.0             # el punto de la abertura, esto detrás de la recta de la fachada
+PUNTO_M = 2.0               # una abertura registrada como límite se reconoce por su punto, a menos de esto
 EPOCA_1772 = 1
 
 
@@ -160,21 +162,38 @@ def hitos_atravesables(hitos, choca, epoca=EPOCA_1772):
     return sorted({i for i, (x, y) in puntos_de_hitos(hitos, epoca) if not choca(x, y)})
 
 
-def puerta_fase7(ciudad, calles, hitos, fases, sha256, edificado, choca, metro=METRO):
+def con_limites_fase7(aberturas, limites, metro=METRO):
+    """Las aberturas con la clase del límite documentado que las cubre (limites-fase7.json, decisión del responsable
+    del 23-11-2026). Una indebida es límite si hay un registro de su tramo y su lado con el punto a menos de PUNTO_M y
+    no pasa su ancho máximo; los umbrales de la puerta no cambian."""
+    def cubre(r, a):
+        return (r['tramo'] == a['tramo'] and r['lado'] == a['lado'] and a['ancho_m'] <= r['ancho_maximo_m']
+                and float(np.hypot(*(np.asarray(a['punto'], float) - np.asarray(r['punto'], float)))) * metro < PUNTO_M)
+    salida = []
+    for a in aberturas:
+        reg = next((r for r in (limites or {}).get('aberturas', []) if cubre(r, a)), None) if a['indebida'] else None
+        salida.append({**a, 'limite': reg['clase']} if reg else dict(a))
+    return salida
+
+
+def puerta_fase7(ciudad, calles, hitos, fases, sha256, edificado, choca, metro=METRO, limites=None):
     """Criterios de la fase 7 sobre las casas de 1772 a la vista; `fase_7_cerrable` exige todos."""
     casas = visibles(casas_de_epoca(ciudad), hitos)
-    aberturas = aberturas_de_frentes(calles, casas, metro, plantas_en_pie(hitos), edificado)
+    aberturas = con_limites_fase7(aberturas_de_frentes(calles, casas, metro, plantas_en_pie(hitos), edificado), limites, metro)
     indebidas = [a for a in aberturas if a['indebida']]
+    fuera = [a for a in indebidas if 'limite' not in a]
     atravesables = hitos_atravesables(hitos, choca)
     criterios = OrderedDict([
-        ('sin_aberturas_indebidas', {'cumplido': not indebidas, 'ancho_minimo_m': ANCHO_ABERTURA_M,
-                                     'aberturas': len(aberturas), 'indebidas': len(indebidas), 'lista': aberturas}),
+        ('sin_aberturas_indebidas', {'cumplido': not fuera, 'ancho_minimo_m': ANCHO_ABERTURA_M,
+                                     'aberturas': len(aberturas), 'indebidas': len(indebidas),
+                                     'indebidas_en_limite': len(indebidas) - len(fuera),
+                                     'indebidas_fuera_de_limite': len(fuera), 'lista': aberturas}),
         *de_fases(fases, sha256).items(),
         ('lo_visible_choca', {'cumplido': not atravesables, 'hitos_atravesables': atravesables}),
     ])
     return {**criterios,
             'umbrales_inferidos': {'ancho_abertura_m': ANCHO_ABERTURA_M, 'adentro_m': ADENTRO_M,
-                                   'tolerancia_fachada_m': TOLERANCIA_FACHADA_M},
+                                   'tolerancia_fachada_m': TOLERANCIA_FACHADA_M, 'punto_de_limite_m': PUNTO_M},
             'casas_1772': len(casas), 'fase_7_cerrable': all(c['cumplido'] for c in criterios.values())}
 
 
@@ -204,7 +223,10 @@ def main():
     salida = subprocess.run(['node', str(raiz / 'tools' / 'choca-a-pie.mjs'), str(EPOCA_1772)], check=True,
                             capture_output=True, text=True, cwd=raiz, input=json.dumps([list(p) for _, p in puntos])).stdout
     chocan = dict(zip([p for _, p in puntos], json.loads(salida)))
-    puerta = puerta_fase7(ciudad, calles, hitos, fases, sha256, edificado, lambda x, y: chocan.get((x, y), False))
+    ruta_limites = args.carpeta / 'limites-fase7.json'
+    limites = _leer(ruta_limites) if ruta_limites.exists() else None
+    puerta = puerta_fase7(ciudad, calles, hitos, fases, sha256, edificado, lambda x, y: chocan.get((x, y), False),
+                          limites=limites)
     informe = OrderedDict([
         ('alcance', 'Puerta de salida de la fase 7 de 1772 (specs/08), medida sobre la salida del generador y la colisión '
                     'del modo a pie del visor. Cuenta lo medido; no certifica fidelidad.'),
