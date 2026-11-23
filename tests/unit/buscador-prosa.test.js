@@ -114,7 +114,8 @@ describe('responder', () => {
   test('una esquina: dónde queda, qué cuadras salen de ella y qué había', () => {
     const r = responde('Esquina de Gradillas', ctx(1))
     expect(r.titulo).toBe('Esquina de Las Gradillas')
-    expect(r.texto).toMatch(/^Queda a media cuadra al sureste de la Plaza Bolívar\. De aquí salen cuadras a /)
+    // desde T41e el Palacio Arzobispal ocupa la esquina: es la referencia más cercana (a menos de 150 m)
+    expect(r.texto).toMatch(/^Queda junto al Palacio Arzobispal\. De aquí salen cuadras a /)
     expect(r.texto).toContain('La Torre')
     expect(r.texto).toMatch(/En 1772 ya estaba edificada\.$/)
   })
@@ -125,13 +126,15 @@ describe('responder', () => {
   })
 
   test('un lugar: dónde queda y si ya existía', () => {
-    expect(responde('Catedral', ctx(1))).toMatchObject({ titulo: 'Catedral de Caracas', texto: 'Queda a media cuadra al este de la Plaza Bolívar. En 1772 ya figura en esta reconstrucción.' })
+    // el hito más cercano a la Catedral es, desde T41e, el Palacio Arzobispal, a su lado sur
+    expect(responde('Catedral', ctx(1))).toMatchObject({ titulo: 'Catedral de Caracas', texto: 'Queda a media cuadra al norte del Palacio Arzobispal. En 1772 ya figura en esta reconstrucción.' })
+    expect(responde('Palacio Episcopal', ctx(1))).toMatchObject({ titulo: 'Palacio Arzobispal', texto: 'Queda a media cuadra al sur de la Catedral. En 1772 ya figura en esta reconstrucción.' })
     expect(responde('Universidad', ctx(1)).texto).toMatch(/En 1772 todavía no figura en esta reconstrucción: aparece desde 1889\.$/)
     expect(responde('Capitolio', ctx(1)).texto).toMatch(/En 1772 ya figura en esta reconstrucción\.$/)
     expect(responde('Plaza Bolívar', ctx(1)).texto).toBe('En 1772 ya figura en esta reconstrucción.')
     // `nace` es desde cuándo está modelado, no cuándo se construyó: la prosa no habla de construir ni de existir
     for (const q of ['Capitolio', 'Casa Amarilla', 'Universidad', 'De Padre Sierra a La Bolsa']) expect(responde(q, ctx(1)).texto).not.toMatch(/exist|levant|(?<!re)constru/)
-    expect(responde('Catedral', SIN_EPOCAS).texto).toBe('Queda a media cuadra al este de la Plaza Bolívar.')
+    expect(responde('Catedral', SIN_EPOCAS).texto).toBe('Queda a media cuadra al norte del Palacio Arzobispal.')
   })
 
   test('una dirección de hoy que cae sobre una cuadra o una esquina del diccionario lo dice', () => {
