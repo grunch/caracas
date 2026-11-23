@@ -102,3 +102,94 @@ def test_no_se_une_si_la_huella_unida_no_se_admite():
     nuevas, quitar = lotes_encerrados(casas, METRO, movibles={1, 2, 3, 4, 5, 6}, junta=todas(casas),
                                       vida={k: (1, 2) for k, _ in casas}, admite=lambda huella: huella.area < 1000)
     assert (nuevas, quitar) == ({}, set())
+
+
+def test_cerrar_aberturas_llena_el_hueco_del_frente_donde_el_original_pinta_edificado():
+    # T33j.7c: una hilera con un hueco de 10 m (x 70..90) donde el original es rojo; se lo lleva la vecina
+    from accesos import cerrar_aberturas
+    from cierre_fase7 import aberturas_de_frentes
+    from shapely.geometry import box as caja
+    casas = [(k, caja(10 + k * 20, 12, 10 + (k + 1) * 20, 42)) for k in range(8) if k != 3]
+    eje = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    rojo = [caja(60, 10, 100, 45)]
+    nuevas = cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 4, 5, 6, 7}, edificado=rojo)
+    assert set(nuevas) & {2, 4}
+    final = [(k, nuevas.get(k, g)) for k, g in casas]
+    assert [a for a in aberturas_de_frentes(eje, final, METRO, edificado=rojo) if a['indebida']] == []
+    for k, g in nuevas.items():
+        assert g.geom_type == 'Polygon' and g.is_valid and not g.interiors
+    # sin rojo en el hueco (un solar del original), no se cierra
+    assert cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 4, 5, 6, 7}, edificado=[caja(200, 200, 210, 210)]) == {}
+
+
+def test_cerrar_aberturas_no_cierra_el_paso_de_una_casa_del_fondo():
+    # el hueco del frente es el único paso de la casa del fondo (un zaguán): cerrarlo la dejaría encerrada
+    from accesos import cerrar_aberturas
+    from shapely.geometry import box as caja
+    casas = [(k, caja(10 + k * 20, 12, 10 + (k + 1) * 20, 42)) for k in range(8) if k != 3]
+    casas += [(9, caja(10, 42, 170, 70))]      # detrás de la hilera, la cierra por el fondo
+    casas += [(11, caja(70, 30, 90, 42))]      # la casa del fondo del hueco: su único borde a la calle es el zaguán
+    eje = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    rojo = [caja(60, 10, 100, 45)]
+    movibles = {0, 1, 2, 4, 5, 6, 7, 9, 11}
+    assert casas_sin_acceso(casas, METRO)['sin_acceso'] == []
+    nuevas = cerrar_aberturas(casas, eje, METRO, movibles=movibles, edificado=rojo)
+    final = [(k, nuevas.get(k, g)) for k, g in casas]
+    assert casas_sin_acceso(final, METRO)['sin_acceso'] == []
+
+
+def test_un_cierre_que_dejaria_una_fachada_fuera_de_la_recta_no_se_hace():
+    # un hueco de dos casas (x 70..110), rojo desde 0,95 m detrás de la línea: la vecina que lo cierra quedaría con la
+    # mayor parte de su frente retirado; ese cierre no se hace (no puede romper la fase 5)
+    from accesos import cerrar_aberturas
+    from cierre_fase5 import frentes_desalineados
+    from shapely.geometry import box as caja
+    casas = [(k, caja(10 + k * 20, 12, 10 + (k + 1) * 20, 42)) for k in range(8) if k not in (3, 4)]
+    eje = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    rojo = [caja(70, 13.9, 110, 45)]     # empieza 0,95 m detrás de la línea: el punto de la abertura (a 1 m) cae adentro
+    nuevas = cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 5, 6, 7}, edificado=rojo)
+    final = [(k, nuevas.get(k, g)) for k, g in casas]
+    assert frentes_desalineados(eje, final, METRO)['desalineados'] == []
+
+
+def test_el_cierre_es_una_crujia_de_frente_y_no_llena_el_fondo_del_hueco():
+    # cerrar con fachada pide una crujía junto a la línea (CIERRE_FONDO_M), no el hueco entero: la casa que lo cierra
+    # crece a lo largo de la calle y no hacia el fondo (si no, el visor gira su cumbrera)
+    from accesos import CIERRE_FONDO_M, cerrar_aberturas
+    from shapely.geometry import box as caja
+    casas = [(k, caja(10 + k * 20, 12, 10 + (k + 1) * 20, 72)) for k in range(8) if k != 3]
+    eje = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    rojo = [caja(60, 10, 100, 75)]
+    nuevas = cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 4, 5, 6, 7}, edificado=rojo)
+    assert nuevas
+    for k, g in nuevas.items():
+        crecida = g.difference(dict(casas)[k])
+        assert crecida.area > 0 and crecida.bounds[3] <= 12 + CIERRE_FONDO_M / METRO + 1e-6
+
+
+def test_una_casa_solo_cierra_aberturas_de_la_calle_de_su_frente():
+    # la casa 2 da su frente a otra calle (su marco corre perpendicular a esta): no crece por su costado; el hueco lo
+    # cierra la 4, cuyo frente es esta calle
+    from accesos import cerrar_aberturas
+    from shapely.geometry import box as caja
+    casas = [(k, caja(10 + k * 20, 12, 10 + (k + 1) * 20, 42)) for k in range(8) if k not in (3, 4)]
+    casas += [(4, caja(90, 12, 110, 20))]      # menos medianera con el hueco que la 2: sin la regla, crecería la 2
+    eje = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    rojo = [caja(70, 10, 90, 45)]
+    frentes = {k: (1.0, 0.0) for k in range(8)} | {2: (0.0, 1.0)}
+    nuevas = cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 4, 5, 6, 7}, edificado=rojo, frentes=frentes)
+    assert set(nuevas) == {4}
+
+
+def test_un_cierre_no_deja_sin_acceso_a_una_casa_del_patio_lejos_del_hueco():
+    # una manzana de 150 m con patio: el hueco del frente (x 140..160) es la boca del patio, y la casa pegada al fondo
+    # del patio (a 120 m del hueco, más que ALREDEDOR_M) solo da a la calle por él. Cerrarlo la encierra
+    from accesos import ALREDEDOR_M, _encierra, _union
+    from shapely.geometry import box as caja
+    frente = {k: caja(k * 20, 0, (k + 1) * 20, 20) for k in range(15) if k != 7}
+    huellas = {**frente, 'izq': caja(0, 20, 20, 300), 'der': caja(280, 20, 300, 300), 'fondo': caja(20, 280, 280, 300),
+               'patio': caja(140, 260, 160, 280)}
+    pieza = caja(140, 0, 160, 20)
+    assert pieza.distance(huellas['patio']) * METRO > ALREDEDOR_M
+    assert casas_sin_acceso(list(huellas.items()), METRO)['sin_acceso'] == []
+    assert _encierra(huellas, 6, _union(huellas[6], pieza), pieza, METRO)
