@@ -496,9 +496,9 @@ def sin_solapes_residuales(ciudad, hitos, metro):
             otra_g = b if cede == k else a
             resto = nuevas.get(cede, huellas[cede]).difference(otra_g)
             partes = [q for q in getattr(resto, "geoms", [resto]) if q.geom_type == "Polygon" and not q.is_empty]
-            if not partes:
-                continue
-            mayor = shapely.set_precision(Polygon(max(partes, key=lambda q: q.area).exterior), 1e-3)
+            if len(partes) != 1:
+                continue   # un solape que cruza la casa entera la partiría: ese corte no se hace (revisión de #150)
+            mayor = shapely.set_precision(Polygon(partes[0].exterior), 1e-3)
             if mayor.geom_type == "Polygon" and mayor.is_valid and not mayor.interiors and mayor.area > 0.5 * huellas[cede].area:
                 nuevas[cede] = mayor
     print(f"casas de 1772 sin su solape residual con la vecina: {len(nuevas)}")
