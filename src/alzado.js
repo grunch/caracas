@@ -17,7 +17,7 @@ import { areaConSigno, recortar, recortarConvexo, cruces, estaDentro, sinColinea
 const SIN_TECHO = [0, 0, 0, CUBIERTA.PARED]
 const ALTO_MINIMO_CON_VANOS_M = 2
 const ESCALON_MINIMO_M = 0.03
-const TOLERANCIA_CUMBRE_M = 1e-3 // un vértice así de poco más allá de un quiebre no parte el faldón: lejos del origen, Float32
+const TOLERANCIA_CUMBRE_M = 2e-3 // un vértice así de poco más allá de un quiebre no parte el faldón: lejos del origen, Float32
 // deja vértices a décimas de milímetro de la cumbrera, y partir ahí dejaba una tira plana sin ancho (T33j.6d)
 export const PISO_PATIO_M = 0.4
 const SUBIDA_DE_HASTIAL_M = 0.3
@@ -73,14 +73,16 @@ const largoConAlero = (casa, f) => largoFaldon(f) + vueloDe(casa, f) * Math.hypo
  */
 const quiebres = (f) => (f.hueco || !(f.tan > 0) ? [] : [0, ...(Number.isFinite(f.bajada) ? [f.bajada] : [])])
 
-const ALINEADO_M = 1e-3 // un vértice a menos de esto de la recta entre sus vecinos no hace esquina: 1 mm
+const ALINEADO_M = 2e-3 // un vértice a menos de esto de la recta entre sus vecinos no hace esquina: 2 mm (con margen
+// sobre el milímetro que mide la puerta de la fase 6, que lee las posiciones en Float32)
+const AREA_MINIMA_M2 = 2e-4 // un triángulo de techo con menos área no se dibuja: 2 cm², con margen sobre el de la puerta
 
-/** ¿El triángulo (puntos en 3D) tiene menos de ALINEADO_M de alto sobre su lado mayor? */
+/** ¿El triángulo (puntos en 3D) tiene menos de ALINEADO_M de alto sobre su lado mayor, o menos de AREA_MINIMA_M2? */
 function esAguja(a, b, c) {
   const [u, v] = [[b[0] - a[0], b[1] - a[1], b[2] - a[2]], [c[0] - a[0], c[1] - a[1], c[2] - a[2]]]
   const doble = Math.hypot(u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0])
   const lado = Math.max(Math.hypot(...u), Math.hypot(...v), Math.hypot(c[0] - b[0], c[1] - b[1], c[2] - b[2]))
-  return lado === 0 || doble / lado < ALINEADO_M
+  return lado === 0 || doble / lado < ALINEADO_M || doble / 2 < AREA_MINIMA_M2
 }
 
 /**
