@@ -85,7 +85,7 @@ Un borrador no se revisa; la primera vuelta es al pasar a listo.
 | `issue` | Una palabra de cierre enlaza un issue de este repo con `estado: aceptado` | «No hay un issue aceptado enlazado» |
 | `plantilla` | Están todas las secciones `##` de la plantilla y ninguna está vacía ni tiene solo su relleno | «Falta la sección `…` o está vacía» |
 | `prueba-a-mano` | **Pasos** tiene 2 o más pasos numerados, cada uno con `Se ve:`, uno de regresión y, en un fix, uno marcado `(falla en main)` | «Prueba a mano: …» |
-| `capturas` | Si el diff toca una ruta visual (`rutas.visuales`: shaders, hitos, techos, `.css`, las páginas…), **Capturas** trae dos imágenes: antes y después | «Capturas: …» |
+| `capturas` | Si el diff toca una ruta visual (`rutas.visuales`: shaders, hitos, techos, `.css`, las páginas, el pipeline…; menos los scripts de auditoría de `rutas.no_visuales`, que solo escriben informes), **Capturas** trae dos imágenes: antes y después | «Capturas: …» |
 | `fuentes` | Si el diff toca una ruta histórica (`fuentes/`, `src/marcas-datos.js`, `src/fichas-datos.js`, `src/hitos/`), **Fuentes** trae un enlace | «Fuentes: el PR toca datos históricos y no enlaza ninguna fuente» |
 | `fix-con-test` | En un fix (sección Tipo o prefijo `fix` del título), el diff agrega un `it(`/`test(` en `tests/` o un `def test_` en `tools/geo/tests/` | «Un fix necesita un test de regresión…» |
 | `plan` | Si **Issue o tarea** nombra una tarea `T…`, el diff toca `specs/07-plan-de-implementacion.md` | «Plan: …» |
@@ -140,7 +140,9 @@ a nadie. Sin `npm ci`: solo la biblioteca estándar de Node, así una dependenci
 - **Un enlace no es una fuente.** La revisión `fuentes` solo ve que hay un enlace, no que diga lo que el PR le
   atribuye. Eso lo revisa una persona.
 - **Las rutas visuales e históricas son una lista a mano** (`config.json`): un archivo nuevo que se ve y no está en
-  la lista no pide capturas hasta que se agregue.
+  la lista no pide capturas hasta que se agregue. Al revés, un script de auditoría nuevo en `tools/geo/` pide capturas hasta que se
+  agrega a `rutas.no_visuales`, y solo va ahí si ningún módulo del pipeline lo importa (`epocas.py` importa varios
+  `cierre_fase*`).
 - **`fix-con-test` pasa con diffs enormes**: GitHub omite el parche de un archivo muy grande y el bot no puede
   descartar que haya un test ahí.
 - **La carga se mueve, no desaparece**: aceptar issues es trabajo nuevo para quien mantiene el repo. Es más barato

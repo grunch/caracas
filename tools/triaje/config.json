@@ -26,7 +26,11 @@
       "tools/geo/", "tools/arboles*", "tools/cubiertas*", "tools/suelo*", "tools/silvestres*", "tools/plano*",
       "tools/rotulos*", "tools/empacar*", "tools/hitos-planta.mjs"
     ],
-    "$rutas": "«dir/» y «algo*» son prefijos, «.ext» una terminación, lo demás un archivo exacto. Lo de tests/ y tools/geo/tests/ nunca pide capturas.",
+    "no_visuales": [
+      "tools/geo/censo_*", "tools/geo/cierre_fase2.py", "tools/geo/cierre_fase6.py", "tools/geo/auditar_huellas.py"
+    ],
+    "$no_visuales": "Scripts de auditoría dentro de una ruta visual: escriben informes y nada del generador los importa. Antes de agregar uno, comprobar que ningún módulo del pipeline lo importa (cierre_fase3, 4, 5 y 7 sí se importan).",
+    "$rutas": "«dir/» y «algo*» son prefijos, «.ext» una terminación, lo demás un archivo exacto. Lo de tests/ y tools/geo/tests/ nunca pide capturas, ni lo de no_visuales.",
     "historicas": ["fuentes/", "src/marcas-datos.js", "src/fichas-datos.js", "src/hitos/"],
     "plan": "specs/07-plan-de-implementacion.md"
   }
