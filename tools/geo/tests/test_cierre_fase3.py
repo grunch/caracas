@@ -162,3 +162,12 @@ def test_una_plazuela_del_censo_final_con_una_casa_dentro_no_deja_cerrar_la_fase
     plazuelas = [{'id': 'P1772-001', 'poligono': caja(-5, -5, 100, 20)}]
     assert plazuelas_ocupadas(casas, plazuelas) == [{'plazuela': 'P1772-001', 'casas': [7]}]
     assert plazuelas_ocupadas(casas, [{'id': 'P2', 'poligono': caja(300, 300, 310, 310)}]) == []
+
+
+def test_la_puerta_de_la_fase_3_lee_las_plazuelas_del_registro_si_no_se_las_pasan(monkeypatch):
+    # revisión de #158: cierre_fase5 llama a puerta_fase3 sin plazuelas; la puerta las lee del registro por su cuenta
+    import plazuelas
+    from shapely.geometry import box as caja
+    monkeypatch.setattr(plazuelas, 'plazuelas_en_1936', lambda: [{'id': 'P1772-009', 'poligono': caja(0, 0, 200, 200)}])
+    p = puerta_fase3(ciudad=ciudad((10, 10, 90, 90)), red=red(), unidades=unidades(), verificadas=[], metro=METRO)
+    assert {'plazuela': 'P1772-009', 'casas': [0]} in p['plazas_sin_casas']['ocupadas']

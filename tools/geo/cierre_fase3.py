@@ -189,7 +189,7 @@ def red_conectada(calles, casas, metro=METRO):
             'sin_medir_por_limite_del_calce': dict(sorted(sin_medir.items()))}
 
 
-def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_INFERIDO_M, calles=None, plazuelas=()):
+def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_INFERIDO_M, calles=None, plazuelas=None):
     """Criterios de la fase 3 con su cumplimiento sobre las casas de 1772; `fase_3_cerrable` exige todos."""
     casas = casas_de_epoca(ciudad)
     por_id = {n['id']: n for n in red['nodos']}
@@ -200,6 +200,10 @@ def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_
                   for v in medidas]
     historicas_ocupadas = [o['tramo'] for o in calles_ocupadas(historicas, casas, metro)]
     plazas = plazas_ocupadas(unidades, por_id, casas, metro, ancho_m / 2)
+    if plazuelas is None:
+        # sin plazuelas pasadas, las del registro: toda puerta que mide la fase 3 (también la de la fase 5) ve las mismas
+        import plazuelas as registro
+        plazuelas = registro.plazuelas_en_1936()
     plazas += plazuelas_ocupadas(casas, plazuelas)   # las plazuelas del censo final (T33j.8c)
     dentro = calles_abiertas_dentro(unidades, por_id, casas, metro, ancho_m / 2)
     criterios = OrderedDict([
@@ -232,8 +236,7 @@ def main():
     unidades = _leer(args.referencias / '1772-unidades.json')['unidades']
     verificadas = _leer(Path(__file__).parent / 'calles-historicas.json')['tramos']
     calles = _leer(args.referencias / '1772-calles-1936.json')['tramos']
-    from plazuelas import plazuelas_en_1936
-    puerta = puerta_fase3(_leer(args.ciudad), red, unidades, verificadas, calles=calles, plazuelas=plazuelas_en_1936())
+    puerta = puerta_fase3(_leer(args.ciudad), red, unidades, verificadas, calles=calles)
     informe = OrderedDict([
         ('alcance', 'Puerta de salida de la fase 3 de 1772 (specs/08), medida sobre la salida del generador contra la '
                     'referencia histórica. Cuenta lo medido; no certifica fidelidad.'),
