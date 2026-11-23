@@ -1,17 +1,26 @@
-import { rectanguloPx } from './marco.js'
+import { METRO } from './marco.js'
 
-// La manzana entera, de calle a calle, medida sobre el 1772 calzado (fuentes/derivados/1772/calzado.tif): la celda
-// de los ejes de la referencia (tools/geo/referencias/1772-red.json), hasta el borde de la manzana roja del original
-// (5,25–7 m hacia adentro de cada eje). Coincide con la línea de las manzanas vecinas del plano de 1936 (la Academia,
-// el Palacio de Justicia): el conjunto, con sus jardines, llega a la calle, como hoy. Gira 1,56° respecto del damero.
-// Antes era la huella del edificio rayado de 1936 (92 × 108 m en 8690, 7035), y en 1772 quedaban casas a los costados.
-export const MANZANA = Object.freeze({ ancho: 131.4, fondo: 123.4 })
-const marco = { x: 8683.3, y: 7022.0, eje: [0.9813, 0.1927] }
-const planta = [rectanguloPx(marco, MANZANA.ancho, MANZANA.fondo)]
-// El modelo está hecho sobre la huella nominal de 92 × 108 m, con una plataforma de 94 × 110 m que es lo más ancho
-// (src/hitos/capitolio-modelo.js): se estira la plataforma hasta la manzana, así nada pasa a la calle (salvo la
-// escalinata del Palacio Legislativo, que baja a la acera sur como en el original).
-const escala = [MANZANA.ancho / 94, MANZANA.fondo / 110]
+// La manzana entera, de calle a calle: la celda de los ejes de la referencia (tools/geo/referencias/1772-red.json:
+// X1772-0043, -0060, -0059 y -0042) metida media banda de cada calle (1772-calles-1936.json: 4,0 m al norte, 5,59 m
+// en las otras tres). No es un rectángulo: el lado norte (123,5 m) es 7,6 m más corto que el sur (131,1 m), y el oeste
+// gira 3,5° respecto del este. Esquinas NO, NE, SE, SO en px del plano. Con el rectángulo de 131,4 × 123,4 m de antes,
+// la esquina noroeste quedaba sobre el eje de la calle oeste.
+const ESQUINAS_PX = [[8590.7, 6875.2], [8833.6, 6919.9], [8789.0, 7168.8], [8531.6, 7118.3]]
+const marco = { x: 8686.2, y: 7020.6, eje: [0.9824, 0.1868] } // el centro de la manzana; el eje, el de sus lados norte y sur
+const planta = [ESQUINAS_PX]
+// Las esquinas en metros en el marco del hito (+a a lo largo del eje, al este; +b a su derecha, al sur): el modelo,
+// hecho sobre una plataforma de 95 × 111 m (src/hitos/capitolio-modelo.js), se lleva a ellas (src/hitos/capitolio.js),
+// así cada fachada sigue su calle y nada pasa a ella (salvo la escalinata del Palacio Legislativo, que baja a la acera
+// sur como en el original).
+const esquinas = ESQUINAS_PX.map(([px, py]) => {
+  const n = Math.hypot(marco.eje[0], marco.eje[1])
+  const [ux, uy, dx, dy] = [marco.eje[0] / n, marco.eje[1] / n, px - marco.x, py - marco.y]
+  return [(dx * ux + dy * uy) * METRO, (-dx * uy + dy * ux) * METRO]
+})
+// la terraza del relieve es un rectángulo en el marco: el que cubre la manzana
+export const MANZANA = Object.freeze({
+  ancho: 2 * Math.max(...esquinas.map(([a]) => Math.abs(a))), fondo: 2 * Math.max(...esquinas.map(([, b]) => Math.abs(b))),
+})
 export const capitolio = Object.freeze({
   id: 'capitolio', nombre: 'Capitolio (Palacio Federal y Legislativo)', ...marco, nace: 1, muere: 0,
   planta, suprime: planta,
@@ -25,18 +34,18 @@ export const capitolio = Object.freeze({
     '1772 y 1843 representan el Convento de las Concepciones (manzana completa, iglesia al norte orientada al este, claustro principal y huerta sur); alzados y daños posteriores a 1812 son interpretativos.',
     '1889 representa el conjunto de Luciano Urdaneta (1873–1877) con la bóveda elíptica achatada original, anterior a la sobrecúpula belga de Antonio Malaussena (montada en 1890–1891).',
     '1911 y 1936 llevan la sobrecúpula metálica de hierro y zinc con linterna calada (cotejada con una foto de hacia 1930). La sobrecúpula dorada de aluminio anodizado es de 1958 y no entra en los mapas hasta 1936.',
-    'La manzana (131,4 × 123,4 m, centro 8683,3, 7022,0, 1,56° sobre el damero) se midió sobre el 1772 calzado y coincide con las manzanas vecinas de 1936; el modelo, hecho sobre 92 × 108 m, se estira a ella (40 % E–O, 12 % N–S), y sus proporciones son interpretativas.',
+    'La manzana es la celda de los ejes de la referencia de 1772 menos media banda de cada calle (lados de 123,5 a 131,1 m, centro 8686,2, 7020,6); el modelo, hecho sobre 92 × 108 m, se lleva a sus cuatro esquinas, y sus proporciones son interpretativas.',
     'Las fotos de referencia del estudio no tienen licencia de reproducción verificada: orientan formas y no se publican.',
   ],
   partes: [
-    { tipo: 'capitolio', anio: 1772, nace: 1, muere: 2, escala },
-    { tipo: 'capitolio', anio: 1843, nace: 2, muere: 3, escala },
+    { tipo: 'capitolio', anio: 1772, nace: 1, muere: 2, esquinas },
+    { tipo: 'capitolio', anio: 1843, nace: 2, muere: 3, esquinas },
     // El cuerpo neoclásico es el mismo desde 1889; solo cambian la cúpula (1890–1891) y la altura de los chaguaramos.
-    { tipo: 'capitolio', anio: 1889, componente: 'cuerpo', nace: 3, muere: 0, escala },
-    { tipo: 'capitolio', anio: 1889, componente: 'cupula', nace: 3, muere: 4, escala },
-    { tipo: 'capitolio', anio: 1911, componente: 'cupula', nace: 4, muere: 0, escala },
-    { tipo: 'capitolio', anio: 1889, componente: 'palmas', nace: 3, muere: 4, escala },
-    { tipo: 'capitolio', anio: 1911, componente: 'palmas', nace: 4, muere: 5, escala },
-    { tipo: 'capitolio', anio: 1936, componente: 'palmas', nace: 5, muere: 0, escala },
+    { tipo: 'capitolio', anio: 1889, componente: 'cuerpo', nace: 3, muere: 0, esquinas },
+    { tipo: 'capitolio', anio: 1889, componente: 'cupula', nace: 3, muere: 4, esquinas },
+    { tipo: 'capitolio', anio: 1911, componente: 'cupula', nace: 4, muere: 0, esquinas },
+    { tipo: 'capitolio', anio: 1889, componente: 'palmas', nace: 3, muere: 4, esquinas },
+    { tipo: 'capitolio', anio: 1911, componente: 'palmas', nace: 4, muere: 5, esquinas },
+    { tipo: 'capitolio', anio: 1936, componente: 'palmas', nace: 5, muere: 0, esquinas },
   ],
 })

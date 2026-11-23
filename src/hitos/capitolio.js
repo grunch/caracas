@@ -1,4 +1,3 @@
-import { Matrix4 } from 'three'
 import { crearCapitolio } from './capitolio-modelo.js'
 import { MAT } from './lienzo.js'
 
@@ -7,13 +6,36 @@ const PALMAS = 'Chaguaramos del patio'
 
 /** Lleva el estudio del Convento de las Concepciones / Capitolio al lienzo común de hitos.
  * Ejes del modelo: +X este, +Y arriba, +Z sur, origen al centro de la manzana nominal de 92 × 108 m: es el mismo
- * marco del hito (+a este, +b sur), así que no hay giro ni desplazamiento. `escala` [a, b] lo estira en planta
- * hasta la manzana del hito (la altura no cambia).
+ * marco del hito (+a este, +b sur), así que no hay giro ni desplazamiento. `esquinas` (NO, NE, SE, SO en metros del
+ * marco) lo llevan en planta a la manzana del hito, que no es un rectángulo: la plataforma nominal de 95 × 111 m va a
+ * ellas por un mapeo bilineal (cada fachada sigue su calle; la altura no cambia).
  * `componente` separa lo que cambia entre 1889, 1911 y 1936 (la cúpula y los chaguaramos) del cuerpo
  * neoclásico, que se dibuja una sola vez. Vida, tinta, relieve y sombras los aporta el lienzo.
  */
-export function capitolio(p, { anio, componente = 'todo', escala = [1, 1] }) {
-  const estirar = new Matrix4().makeScale(escala[0], 1, escala[1])
+const PLATAFORMA = [95, 111] // m: lo más ancho del modelo en todos sus años (src/hitos/capitolio-modelo.js; fuera solo salen la escalinata sur y, en 1772, la gradería del norte)
+
+/** (x, z) del modelo → (a, b) en el marco: la plataforma nominal llevada a las cuatro `esquinas` (NO, NE, SE, SO). */
+export function aEsquinas(esquinas, x, z) {
+  const [u, v] = [x / PLATAFORMA[0] + 0.5, z / PLATAFORMA[1] + 0.5]
+  const [no, ne, se, so] = esquinas
+  const peso = [(1 - u) * (1 - v), u * (1 - v), u * v, (1 - u) * v]
+  return [0, 1].map((k) => peso[0] * no[k] + peso[1] * ne[k] + peso[2] * se[k] + peso[3] * so[k])
+}
+
+function llevar(geometria, esquinas) {
+  const pos = geometria.getAttribute('position')
+  for (let i = 0; i < pos.count; i++) {
+    const [a, b] = aEsquinas(esquinas, pos.getX(i), pos.getZ(i))
+    pos.setX(i, a)
+    pos.setZ(i, b)
+  }
+  pos.needsUpdate = true
+  return geometria
+}
+
+const NOMINALES = [[-47.5, -55.5], [47.5, -55.5], [47.5, 55.5], [-47.5, 55.5]]
+
+export function capitolio(p, { anio, componente = 'todo', esquinas = NOMINALES }) {
   const { edificio } = crearCapitolio({ anio, nivelDetalle: 'ciudad' })
   const cupula = edificio.getObjectByName(CUPULA), palmas = edificio.getObjectByName(PALMAS)
   // Sin estos grupos, el cuerpo se tragaría la cúpula y las palmas y quedarían duplicadas entre épocas.
@@ -38,7 +60,7 @@ export function capitolio(p, { anio, componente = 'todo', escala = [1, 1] }) {
       geometrias.add(objeto.geometry)
       materiales.add(objeto.material)
       if (!entra(objeto)) return
-      p.geo(objeto.geometry.clone().applyMatrix4(objeto.matrixWorld).applyMatrix4(estirar), {
+      p.geo(llevar(objeto.geometry.clone().applyMatrix4(objeto.matrixWorld), esquinas), {
         color: objeto.material.color.toArray(), // Three.js guarda el color en lineal
         mat: MAT.LISO,
       })
