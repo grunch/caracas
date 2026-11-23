@@ -171,3 +171,15 @@ def test_la_puerta_de_la_fase_3_lee_las_plazuelas_del_registro_si_no_se_las_pasa
     monkeypatch.setattr(plazuelas, 'plazuelas_en_1936', lambda: [{'id': 'P1772-009', 'poligono': caja(0, 0, 200, 200)}])
     p = puerta_fase3(ciudad=ciudad((10, 10, 90, 90)), red=red(), unidades=unidades(), verificadas=[], metro=METRO)
     assert {'plazuela': 'P1772-009', 'casas': [0]} in p['plazas_sin_casas']['ocupadas']
+
+
+def test_la_planta_de_un_hito_que_ocupa_la_manzana_no_es_una_calle_abierta_dentro():
+    # #160: el Capitolio ocupa casi toda U1772-0203; entre sus casas y su planta no hay calle. La puerta cuenta la
+    # planta de los hitos en pie como ocupación
+    por_id = {n['id']: n for n in red()['nodos']}
+    partida = casas_de_epoca(ciudad((5, 5, 95, 40), (5, 60, 95, 95)), 1)
+    plantas = [box(5, 35, 95, 65)]
+    assert calles_abiertas_dentro(unidades(), por_id, partida, METRO, retiro_m=2, plantas=plantas) == []
+    p = puerta_fase3(ciudad=ciudad((5, 5, 95, 40), (5, 60, 95, 95)), red=red(), unidades=unidades(), verificadas=[],
+                     metro=METRO, calles=[], plazuelas=[], plantas=plantas)
+    assert p['sin_calles_dentro_de_unidades']['cumplido'] is True

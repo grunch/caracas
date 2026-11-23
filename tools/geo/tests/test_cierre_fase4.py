@@ -166,3 +166,14 @@ def test_la_medida_de_una_unidad_con_lo_edificado_revisado_registra_la_cobertura
     u3 = next(m for m in p['medidas'] if m['unidad'] == 'U3')
     assert u3['cobertura_del_rojo'] == 0.5
     assert 'cobertura_del_rojo' not in next(m for m in p['medidas'] if m['unidad'] == 'U1')
+
+
+def test_una_edificada_ocupada_por_la_planta_de_un_hito_en_pie_no_esta_sin_casas():
+    # #160: la planta del Capitolio cubre U1772-0203 y el hito suprime sus casas: la manzana está edificada (el
+    # convento). Una planta transitable (una plaza) no cuenta
+    hito = {'id': 'convento', 'nace': 1, 'muere': 0, 'planta': [[[0, 0], [100, 0], [100, 100], [0, 100]]]}
+    entradas = dict(red=red(), unidades=unidades()[:1], cajas={}, metro=METRO)
+    p = puerta_fase4(ciudad=ciudad(), hitos=[hito], **entradas)
+    assert p['edificadas_con_casas']['cumplido'] is True
+    plaza = puerta_fase4(ciudad=ciudad(), hitos=[{**hito, 'transitable': True}], **entradas)
+    assert plaza['edificadas_con_casas']['sin_casas'] == [{'unidad': 'U1', 'medida': 'anillo'}]
