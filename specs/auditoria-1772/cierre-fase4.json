@@ -2,8 +2,8 @@
  "alcance": "Puerta de salida de la fase 4 de 1772 (specs/08), medida sobre la salida del generador. Las unidades pendientes se miden por su caja llevada por el calce (aproximada). Cuenta lo medido; no certifica fidelidad.",
  "ciudad": {
   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
-  "sha256": "c0998b3d232c703f041e1afd1a4f3a543e14b2ff769942f16cfd5100d67f3729",
-  "datos": "789e85a (sin publicar)"
+  "sha256": "a863c55b09d7df360360215ea417a57eea3a18e70fb09830f0f9aea534cf1914",
+  "datos": "82cd470 (datos-2026-11-23-82cd470)"
  },
  "puerta_de_salida": {
   "edificadas_con_casas": {
@@ -64,7 +64,7 @@
    "U1772-0278",
    "U1772-0292"
   ],
-  "casas_1772": 6315,
+  "casas_1772": 6279,
   "medidas": [
    {
     "unidad": "U1772-0001",
@@ -479,7 +479,8 @@
     "unidad": "U1772-0067",
     "ocupacion": "conjunto_especial",
     "medida": "anillo",
-    "cobertura": 0.2302
+    "cobertura": 0.2302,
+    "cobertura_con_hitos": 0.2973
    },
    {
     "unidad": "U1772-0068",
@@ -549,7 +550,8 @@
     "unidad": "U1772-0079",
     "ocupacion": "continua",
     "medida": "anillo",
-    "cobertura": 0.2837
+    "cobertura": 0.2837,
+    "cobertura_con_hitos": 0.2861
    },
    {
     "unidad": "U1772-0080",
@@ -632,7 +634,8 @@
     "unidad": "U1772-0094",
     "ocupacion": "conjunto_especial",
     "medida": "anillo",
-    "cobertura": 0.1634
+    "cobertura": 0.1634,
+    "cobertura_con_hitos": 0.4239
    },
    {
     "unidad": "U1772-0095",
@@ -1334,19 +1337,22 @@
     "unidad": "U1772-0202",
     "ocupacion": "continua",
     "medida": "anillo",
-    "cobertura": 0.2872
+    "cobertura": 0.2872,
+    "cobertura_con_hitos": 0.3467
    },
    {
     "unidad": "U1772-0203",
     "ocupacion": "continua",
     "medida": "anillo",
-    "cobertura": 0.1933
+    "cobertura": 0.0,
+    "cobertura_con_hitos": 0.9384
    },
    {
     "unidad": "U1772-0204",
     "ocupacion": "continua",
     "medida": "anillo",
-    "cobertura": 0.2324
+    "cobertura": 0.2324,
+    "cobertura_con_hitos": 0.4121
    },
    {
     "unidad": "U1772-0205",
@@ -1529,7 +1535,8 @@
     "unidad": "U1772-0233",
     "ocupacion": "plaza",
     "medida": "anillo",
-    "cobertura": 0.0
+    "cobertura": 0.0,
+    "cobertura_con_hitos": 0.0072
    },
    {
     "unidad": "U1772-0241",
