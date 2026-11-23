@@ -73,15 +73,38 @@ CIERRE_MINIMO_M2 = 2.0    # menos que esto no es un hueco que cerrar
 VUELTAS_CIERRE = 3        # cerrar un tramo de frente puede dejar a la vista el que sigue
 
 
-ALREDEDOR_M = 40.0        # las casas que puede dejar sin acceso un cierre: las de su manzana, a esto del hueco
+ALREDEDOR_M = 40.0        # las casas que puede dejar fuera de la recta un cierre: las de su frente, a esto del hueco
+
+
+def _manzana_de(huellas, k, unida, pieza, metro):
+    """Las casas cuyo acceso puede cambiar al darle `unida` a la casa k: toda la manzana edificada que toca la pieza
+    (casas a menos de 2·CIERRE_M, como las junta casas_sin_acceso) y las que caen dentro de su casco. El acceso es el
+    contorno exterior de la manzana: cerrar la boca de un patio encierra a una casa del patio, por lejos que esté."""
+    from cierre_fase5 import CIERRE_M
+    actuales = {t: (unida if t == k else g) for t, g in huellas.items()}
+    orden = list(actuales)
+    arbol = STRtree([actuales[t] for t in orden])
+    paso = 2 * CIERRE_M / metro
+    dentro = {orden[j] for j in arbol.query(pieza.buffer(paso), predicate='intersects')}
+    pendientes = list(dentro)
+    while pendientes:
+        g = actuales[pendientes.pop()]
+        for j in arbol.query(g.buffer(paso, join_style='mitre'), predicate='intersects'):
+            if orden[j] not in dentro:
+                dentro.add(orden[j])
+                pendientes.append(orden[j])
+    juntas = unary_union([actuales[t] for t in dentro]).buffer(paso / 2, join_style='mitre')
+    for m in getattr(juntas, 'geoms', [juntas]):
+        dentro |= {orden[j] for j in arbol.query(Polygon(m.exterior), predicate='intersects')}
+    return dentro
 
 
 def _encierra(huellas, k, unida, pieza, metro):
-    """¿Darle `unida` a la casa k deja sin acceso a alguna casa cercana que lo tenía? (el hueco era un zaguán)."""
-    zona = pieza.buffer(ALREDEDOR_M / metro)
-    cerca = [(t, g) for t, g in huellas.items() if g.intersects(zona)]
-    antes = set(casas_sin_acceso(cerca, metro)['sin_acceso'])
-    despues = set(casas_sin_acceso([(t, unida if t == k else g) for t, g in cerca], metro)['sin_acceso'])
+    """¿Darle `unida` a la casa k deja sin acceso a alguna casa de su manzana que lo tenía? (el hueco era un zaguán,
+    o la boca de un patio)."""
+    manzana = _manzana_de(huellas, k, unida, pieza, metro)
+    antes = set(casas_sin_acceso([(t, huellas[t]) for t in manzana], metro)['sin_acceso'])
+    despues = set(casas_sin_acceso([(t, unida if t == k else huellas[t]) for t in manzana], metro)['sin_acceso'])
     return bool(despues - antes)
 
 
@@ -168,6 +191,8 @@ def cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=(), obsta
                     continue
                 huellas[k] = nuevas[k] = unida
                 cambio = True
+                # la casa creció: el árbol indexa las huellas de ahora, para la próxima abertura de esta vuelta
+                arbol = STRtree([huellas[j] for j in orden])
                 break
         if not cambio:
             break

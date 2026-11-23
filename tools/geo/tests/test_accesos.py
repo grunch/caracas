@@ -179,3 +179,17 @@ def test_una_casa_solo_cierra_aberturas_de_la_calle_de_su_frente():
     frentes = {k: (1.0, 0.0) for k in range(8)} | {2: (0.0, 1.0)}
     nuevas = cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 4, 5, 6, 7}, edificado=rojo, frentes=frentes)
     assert set(nuevas) == {4}
+
+
+def test_un_cierre_no_deja_sin_acceso_a_una_casa_del_patio_lejos_del_hueco():
+    # una manzana de 150 m con patio: el hueco del frente (x 140..160) es la boca del patio, y la casa pegada al fondo
+    # del patio (a 120 m del hueco, más que ALREDEDOR_M) solo da a la calle por él. Cerrarlo la encierra
+    from accesos import ALREDEDOR_M, _encierra, _union
+    from shapely.geometry import box as caja
+    frente = {k: caja(k * 20, 0, (k + 1) * 20, 20) for k in range(15) if k != 7}
+    huellas = {**frente, 'izq': caja(0, 20, 20, 300), 'der': caja(280, 20, 300, 300), 'fondo': caja(20, 280, 280, 300),
+               'patio': caja(140, 260, 160, 280)}
+    pieza = caja(140, 0, 160, 20)
+    assert pieza.distance(huellas['patio']) * METRO > ALREDEDOR_M
+    assert casas_sin_acceso(list(huellas.items()), METRO)['sin_acceso'] == []
+    assert _encierra(huellas, 6, _union(huellas[6], pieza), pieza, METRO)
