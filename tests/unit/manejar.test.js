@@ -154,3 +154,16 @@ describe('sonidoDe', () => {
     expect(sonidoDe(coche, coche.maxima).cascosPorSegundo).toBeGreaterThan(sonidoDe(coche, 1).cascosPorSegundo)
   })
 })
+
+describe('la velocidad máxima de los vehículos', () => {
+  test('ninguno va a menos de 30 km/h, y los de tiro llegan a ella en el mismo tiempo que antes (3,3 s)', () => {
+    for (const v of VEHICULOS) expect(v.maxima * 3.6).toBeGreaterThanOrEqual(30 - 1e-9)
+    for (const id of ['carreta', 'coche-de-caballos']) {
+      const v = VEHICULOS.find((x) => x.id === id)
+      expect(v.maxima * 3.6).toBeCloseTo(30)
+      expect(v.maxima / v.aceleracion).toBeCloseTo(10 / 3)
+    }
+    expect(VEHICULOS.find((x) => x.id === 'ford-t').maxima).toBe(12)
+    expect(VEHICULOS.find((x) => x.id === 'ford-v8').maxima).toBe(20)
+  })
+})
