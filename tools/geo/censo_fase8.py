@@ -37,6 +37,14 @@ def extension_de_sectores(edificado, sector_de, tramos):
             for s, bs in sorted(partes.items())}
 
 
+def leer_calzado(ruta):
+    """El calzado.tif de calce.py (RGBA, como lo escribe tifffile) en BGR, el orden con que OpenCV pinta el panel.
+    cv2.imread lo daría en BGRA y un RGBA2BGR cambiaría el rojo de las casas del original por azul."""
+    import tifffile
+    img = tifffile.imread(ruta)
+    return cv2.cvtColor(img, cv2.COLOR_RGBA2BGR if img.shape[2] == 4 else cv2.COLOR_RGB2BGR)
+
+
 def recorte_de(extension, imagen, metro=METRO, margen_m=MARGEN_M):
     """El recorte (px del plano base, enteros) de una extensión con su margen, dentro de lo que cubre la imagen."""
     m = margen_m / metro
@@ -86,8 +94,7 @@ def main():
     casas = [g for _, g in visibles(casas_de_epoca(json.loads(args.ciudad.read_text(encoding='utf-8'))), hitos)]
     plantas = plantas_en_pie(hitos)
     calce = json.loads((raiz / 'fuentes' / 'derivados' / '1772' / 'calzado.json').read_text(encoding='utf-8'))
-    calzado = cv2.imread(str(raiz / 'fuentes' / 'derivados' / '1772' / 'calzado.tif'), cv2.IMREAD_UNCHANGED)
-    calzado = cv2.cvtColor(calzado, cv2.COLOR_RGBA2BGR) if calzado.shape[2] == 4 else calzado
+    calzado = leer_calzado(raiz / 'fuentes' / 'derivados' / '1772' / 'calzado.tif')
     imagen = tuple(calce['recorte'])
     args.salida.mkdir(parents=True, exist_ok=True)
     sector_de = {u['id']: u['sector'] for u in unidades}
