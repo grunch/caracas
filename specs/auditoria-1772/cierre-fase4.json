@@ -2,8 +2,8 @@
  "alcance": "Puerta de salida de la fase 4 de 1772 (specs/08), medida sobre la salida del generador. Las unidades pendientes se miden por su caja llevada por el calce (aproximada). Cuenta lo medido; no certifica fidelidad.",
  "ciudad": {
   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
-  "sha256": "32d189df25026b58bd943b76d60df688103f9c50b6625090c1128159bb898f49",
-  "datos": "dba25dd+4a7cb16 (sin publicar)"
+  "sha256": "898058c529ac4a5714fe8f2517d8ab3230422651538defb9f39e3b3a728e720f",
+  "datos": "2fb8a13 (sin publicar)"
  },
  "puerta_de_salida": {
   "edificadas_con_casas": {
@@ -232,7 +232,7 @@
     "unidad": "U1772-0026",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.1975,
+    "cobertura": 0.1976,
     "cobertura_del_rojo": 0.9872
    },
    {
@@ -274,7 +274,7 @@
     "unidad": "U1772-0032",
     "ocupacion": "parcial",
     "medida": "anillo",
-    "cobertura": 0.0713,
+    "cobertura": 0.0711,
     "cobertura_del_rojo": 0.9957
    },
    {
@@ -336,7 +336,7 @@
     "unidad": "U1772-0042",
     "ocupacion": "continua",
     "medida": "aproximada",
-    "cobertura": 0.2494,
+    "cobertura": 0.2452,
     "cobertura_del_rojo": 0.9914
    },
    {
@@ -378,7 +378,7 @@
     "unidad": "U1772-0049",
     "ocupacion": "parcial",
     "medida": "anillo",
-    "cobertura": 0.1087,
+    "cobertura": 0.1102,
     "cobertura_del_rojo": 0.9971
    },
    {
@@ -397,7 +397,7 @@
     "unidad": "U1772-0052",
     "ocupacion": "conjunto_especial",
     "medida": "anillo",
-    "cobertura": 0.1405
+    "cobertura": 0.1419
    },
    {
     "unidad": "U1772-0053",
@@ -433,7 +433,7 @@
     "unidad": "U1772-0058",
     "ocupacion": "conjunto_especial",
     "medida": "aproximada",
-    "cobertura": 0.1433,
+    "cobertura": 0.1445,
     "cobertura_del_rojo": 0.9938
    },
    {
@@ -454,7 +454,7 @@
     "unidad": "U1772-0063",
     "ocupacion": "parcial",
     "medida": "anillo",
-    "cobertura": 0.1064,
+    "cobertura": 0.1078,
     "cobertura_del_rojo": 0.9978
    },
    {
@@ -879,7 +879,7 @@
     "unidad": "U1772-0132",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.0787,
+    "cobertura": 0.0772,
     "cobertura_del_rojo": 0.6549
    },
    {
@@ -907,7 +907,7 @@
     "unidad": "U1772-0136",
     "ocupacion": "parcial",
     "medida": "anillo",
-    "cobertura": 0.0301,
+    "cobertura": 0.0338,
     "cobertura_del_rojo": 0.9871
    },
    {
@@ -1005,7 +1005,7 @@
     "unidad": "U1772-0151",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.1509,
+    "cobertura": 0.1522,
     "cobertura_del_rojo": 0.9129
    },
    {
@@ -1032,7 +1032,7 @@
     "unidad": "U1772-0155",
     "ocupacion": "continua",
     "medida": "aproximada",
-    "cobertura": 0.399,
+    "cobertura": 0.3994,
     "cobertura_del_rojo": 0.9956
    },
    {
@@ -1181,7 +1181,7 @@
     "unidad": "U1772-0177",
     "ocupacion": "parcial",
     "medida": "anillo",
-    "cobertura": 0.1321,
+    "cobertura": 0.1342,
     "cobertura_del_rojo": 0.9881
    },
    {
@@ -1297,7 +1297,7 @@
     "unidad": "U1772-0194",
     "ocupacion": "parcial",
     "medida": "aproximada",
-    "cobertura": 0.1455,
+    "cobertura": 0.1408,
     "cobertura_del_rojo": 0.9564
    },
    {
@@ -1396,7 +1396,7 @@
     "unidad": "U1772-0212",
     "ocupacion": "continua",
     "medida": "aproximada",
-    "cobertura": 0.3058,
+    "cobertura": 0.2995,
     "cobertura_del_rojo": 0.9494
    },
    {
@@ -1603,7 +1603,7 @@
     "unidad": "U1772-0253",
     "ocupacion": "continua",
     "medida": "aproximada",
-    "cobertura": 0.2028,
+    "cobertura": 0.206,
     "cobertura_del_rojo": 0.9939
    },
    {
@@ -1623,7 +1623,7 @@
     "unidad": "U1772-0256",
     "ocupacion": "aislada",
     "medida": "aproximada",
-    "cobertura": 0.1217,
+    "cobertura": 0.1056,
     "cobertura_del_rojo": 0.9812
    },
    {

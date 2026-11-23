@@ -110,11 +110,32 @@ Las fases 3, 4 y 5 siguen cerrables.
 
 #143 puso el Capitolio en pie desde 1772 (el convento de las Concepciones), y su planta esconde 8 casas de la reconstrucción. Con los datos regenerados sobre la mezcla de `main` 4a7cb16 en T33j.6f (dba25dd) quedan 6303 casas de 1772 a la vista y con techo, 82053 triángulos y 4495 casas con cumbrera medida. Las cuentas de la puerta no cambian: 39 triángulos degenerados, 92 pares de techos que se cortan, 91 cumbreras desviadas y aleros fuera de la calle cumple (325 casas con tope de vuelo). Las fases 3, 4 y 5 siguen cerrables, y las 53 desalineadas siguen todas en límite.
 
+## Después de T33j.6g–6h: lotes hacia su calle, sin agujas y aleros solo sobre la calle
+
+**El lote de la cuadra modelo hacia la calle de 1772 (T33j.6g).** `casas_por_lados` toma el marco de cada lote del lado de la cuadra en que lo reparte, sin pasar por `marco_de_casa`. 85 de las 91 cumbreras desviadas eran de esos lotes. `alas.orientar_a_una_calle` gira el marco hacia otro lado del lote si ese da a una calle de 1772 y el frente no, siempre que el lado nuevo esté libre entero en la máscara de la cuadra (`_lado_libre`, con sondas hasta cerca de las puntas). Un costado pegado a otro lote, aunque sea en parte, es medianera, y un primer intento sin ese chequeo subió los cruces de 92 a 174. La huella no cambia.
+
+**Sin agujas (T33j.6d, segunda parte).** La triangulación puede juntar tres vértices que solo quedan alineados al sacar otras orejas, y `sinColineales` no los ve antes. El visor no emite un triángulo de techo de menos de 2 mm de alto o de menos de 2 cm², ni un alero sobre un tramo de pared sin largo. Los umbrales del visor (2 mm, también en `TOLERANCIA_CUMBRE_M`) tienen margen sobre el milímetro que mide la puerta, que lee las posiciones en Float32. El umbral de la puerta no cambia.
+
+**El techo dentro de su huella y el alero solo sobre la calle (T33j.6h).** El marco y sus lados libres son de `vectorizar`, y la fase 5 movió casas.
+
+- `alinearHuella` solo lleva a la línea de la cuadra los vértices que la pasan hacia la calle, en todas las casas.
+- El índice del visor cuenta, para cada casa, las que viven a la vez que ella. Los lados del marco se miden libres en el visor.
+- Cada tramo de pared lleva alero solo si justo afuera, hasta donde llegaría, no hay otra casa de su época.
+
+Datos regenerados sobre la rama con el Capitolio de #143, otro hito en pie desde 1772: 6303 casas de 1772 a la vista. Las fases 3, 4 y 5 siguen cerrables, y las 53 desalineadas siguen todas en límite.
+
+| Criterio | Después de T33j.6f | Después de T33j.6h (con #143) |
+|---|---|---|
+| Triángulos sin degenerar | 39 | **0 (cumple)** |
+| Techos sin cruces | 92 pares | **18** |
+| Cumbreras con el frente | 91 desviadas | **48** (4468 medidas) |
+| Aleros fuera de la calle | 0 | 0 (cumple) |
+| Mismo trazado que la fase 5 | cumple | cumple |
+
 ## Lo que sigue
 
-- Los 92 cruces que quedan: aleros que montan sobre la vecina y teja contra teja.
-- Las cumbreras de fondo: casas cuyo marco elige el frente por el lado equivocado (`elegirFrente`).
-- Los triángulos degenerados.
+- Los 18 cruces que quedan son casi todos de menos de 0,03 m²: contactos en esquinas de más de 1 mm y huellas que se pisan menos que el umbral de solapes de la fase 5.
+- Las 48 cumbreras: lotes de esquina de la cuadra modelo cuyo costado hacia la calle de 1772 toca en parte otro lote, y calles oblicuas (27° a 43°) respecto de los lados de la cuadra.
 - La regla de specs/08 vale: un PR de techos no cambia calles, lotes ni ocupación para que un techo deje de fallar.
 
 ## Reproducir
