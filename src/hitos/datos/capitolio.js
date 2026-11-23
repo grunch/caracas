@@ -1,11 +1,11 @@
 import { METRO } from './marco.js'
 
 // La manzana entera, de calle a calle: la celda de los ejes de la referencia (tools/geo/referencias/1772-red.json:
-// X1772-0043, -0060, -0059 y -0042) metida media banda de cada calle (1772-calles-1936.json: 4,0 m al norte, 5,59 m
+// X1772-0043, -0060, -0059 y -0042) metida media banda de cada calle (1772-calles-1936.json: 4,02 m al norte, 5,52 m
 // en las otras tres). No es un rectángulo: el lado norte (123,5 m) es 7,6 m más corto que el sur (131,1 m), y el oeste
 // gira 3,5° respecto del este. Esquinas NO, NE, SE, SO en px del plano. Con el rectángulo de 131,4 × 123,4 m de antes,
 // la esquina noroeste quedaba sobre el eje de la calle oeste.
-const ESQUINAS_PX = [[8590.7, 6875.2], [8833.6, 6919.9], [8789.0, 7168.8], [8531.6, 7118.3]]
+const ESQUINAS_PX = [[8590.6, 6875.2], [8833.7, 6919.9], [8789.1, 7169.0], [8531.5, 7118.4]]
 const marco = { x: 8686.2, y: 7020.6, eje: [0.9824, 0.1868] } // el centro de la manzana; el eje, el de sus lados norte y sur
 const planta = [ESQUINAS_PX]
 // Las esquinas en metros en el marco del hito (+a a lo largo del eje, al este; +b a su derecha, al sur): el modelo,

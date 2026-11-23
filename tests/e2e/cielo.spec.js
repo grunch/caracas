@@ -35,6 +35,7 @@ for (const modo of ['caminar', 'manejar', 'volar']) {
     await page.evaluate(() => { window.lab.ciudad.U.uOlaEpoca.value = 9000 })
     expect(await page.evaluate(() => window.lab.cielo.malla.visible)).toBe(false)
 
+    await page.locator('#recorrer').click()   // los modos están bajo «Recorrer» (#167)
     await page.locator(`#${modo}`).click()
     await expect(page.locator('body')).toHaveClass(new RegExp(`modo-${modo}`))
     expect(await page.evaluate(() => window.lab.cielo.malla.visible)).toBe(true)
