@@ -22,33 +22,28 @@ export function aEsquinas(esquinas, x, z) {
   return [0, 1].map((k) => peso[0] * no[k] + peso[1] * ne[k] + peso[2] * se[k] + peso[3] * so[k])
 }
 
-/** La derivada del mapeo en (x, z): [[∂a/∂x, ∂a/∂z], [∂b/∂x, ∂b/∂z]] (la altura no cambia). */
-function jacobiano(esquinas, x, z) {
-  const [u, v] = [x / PLATAFORMA[0] + 0.5, z / PLATAFORMA[1] + 0.5]
-  const [no, ne, se, so] = esquinas
-  const du = [0, 1].map((k) => ((1 - v) * (ne[k] - no[k]) + v * (se[k] - so[k])) / PLATAFORMA[0])
-  const dv = [0, 1].map((k) => ((1 - u) * (so[k] - no[k]) + u * (se[k] - ne[k])) / PLATAFORMA[1])
-  return [[du[0], dv[0]], [du[1], dv[1]]]
-}
-
 /** Lleva la geometría a las esquinas: las posiciones por el mapeo y los normales por la inversa transpuesta de su
- * derivada (revisión de #166: el estiramiento cambia las pendientes de techos y cúpulas). */
+ * derivada (revisión de #166: el estiramiento cambia las pendientes de techos y cúpulas). Sin arreglos por vértice:
+ * el modelo tiene muchos y se lleva una vez por parte. */
 export function llevarAEsquinas(geometria, esquinas) {
   const pos = geometria.getAttribute('position'), nor = geometria.getAttribute('normal')
+  const [[nox, noz], [nex, nez], [sex, sez], [sox, soz]] = esquinas
+  const [W, F] = PLATAFORMA
   for (let i = 0; i < pos.count; i++) {
-    const [x, z] = [pos.getX(i), pos.getZ(i)]
+    const u = pos.getX(i) / W + 0.5, v = pos.getZ(i) / F + 0.5
     if (nor) {
-      // n' ∝ (J⁻¹)ᵀ n en el plano x–z, con y igual: basta la adjunta transpuesta (el determinante se va al normalizar)
-      const [[j00, j01], [j10, j11]] = jacobiano(esquinas, x, z)
+      // J = [[∂a/∂x, ∂a/∂z], [∂b/∂x, ∂b/∂z]]; n' ∝ (J⁻¹)ᵀ n en el plano x–z, con y igual (la escala se va al normalizar)
+      const j00 = ((1 - v) * (nex - nox) + v * (sex - sox)) / W, j10 = ((1 - v) * (nez - noz) + v * (sez - soz)) / W
+      const j01 = ((1 - u) * (sox - nox) + u * (sex - nex)) / F, j11 = ((1 - u) * (soz - noz) + u * (sez - nez)) / F
       const det = j00 * j11 - j01 * j10
-      const [nx, ny, nz] = [nor.getX(i), nor.getY(i), nor.getZ(i)]
-      const [mx, mz] = [(j11 * nx - j10 * nz) / det, (-j01 * nx + j00 * nz) / det]
+      const nx = nor.getX(i), ny = nor.getY(i), nz = nor.getZ(i)
+      const mx = (j11 * nx - j10 * nz) / det, mz = (-j01 * nx + j00 * nz) / det
       const largo = Math.hypot(mx, ny, mz) || 1
       nor.setXYZ(i, mx / largo, ny / largo, mz / largo)
     }
-    const [a, b] = aEsquinas(esquinas, x, z)
-    pos.setX(i, a)
-    pos.setZ(i, b)
+    const w0 = (1 - u) * (1 - v), w1 = u * (1 - v), w2 = u * v, w3 = (1 - u) * v
+    pos.setX(i, w0 * nox + w1 * nex + w2 * sex + w3 * sox)
+    pos.setZ(i, w0 * noz + w1 * nez + w2 * sez + w3 * soz)
   }
   pos.needsUpdate = true
   if (nor) nor.needsUpdate = true
