@@ -8,7 +8,7 @@
  * - Tinta: papel; lo oscuro se raya a pluma, más tupido cuanto más oscuro, y la sombra propia va rayada fina.
  */
 import { ShaderMaterial, DoubleSide, Color } from 'three'
-import { GLSL_RELIEVE } from '../relieve.js'
+import { GLSL_RELIEVE, UNIFORMS_RELIEVE } from '../relieve.js'
 import { GLSL_EPOCAS } from '../shader/epocas.js'
 import { MAT } from './lienzo.js'
 import { GLSL_SOMBRA, UNIFORMS_DE_LUZ, uniformsDeLuz } from '../shader/sombra.js'
@@ -166,7 +166,7 @@ const FRAGMENTO = /* glsl */ `
   }`
 
 const COMUNES = ['uColor', 'uOla', 'uAnchoOla', 'uEpocaDe', 'uEpocaA', 'uOlaEpoca',
-  'tRelieve', 'uRelieveHoja', 'uRelieveCelda', 'uExageracion']
+  ...UNIFORMS_RELIEVE]
 
 /** Las luces de main.js (HemisphereLight 1.6 y DirectionalLight 2.2), ya multiplicadas por su intensidad. */
 export const LUZ_CIUDAD = Object.freeze({ cielo: [0xfff4e0, 1.6], tierra: [0x6b5a48, 1.6], sol: [0xfff1d6, 2.2] })

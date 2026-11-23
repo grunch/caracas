@@ -115,6 +115,9 @@ export function texturaRelieve(relieve) {
   return textura(datos, w, h)
 }
 
+/** Los uniforms que lee GLSL_RELIEVE: los materiales que lo incluyen (hitos, árboles) copian estos de la ciudad. */
+export const UNIFORMS_RELIEVE = Object.freeze(['tRelieve', 'uRelieveHoja', 'uRelieveCelda', 'uExageracion', 'uTerrazaMarco', 'uTerrazaMedida'])
+
 /** Uniforms compartidos por la ciudad y el suelo. Sin datos, el relieve es plano (y las terrazas, inactivas). */
 export function uniformsRelieve(hoja, terrazas = []) {
   if (terrazas.length > MAX_TERRAZAS) throw new Error(`relieve: ${terrazas.length} terrazas; el shader admite ${MAX_TERRAZAS}`)
@@ -192,13 +195,17 @@ export const GLSL_RELIEVE = /* glsl */ `
  */
 export const GLSL_TERRAZAS_TAPADAS = /* glsl */ `
   uniform vec4 uTerrazaMarco[${MAX_TERRAZAS}]; uniform vec4 uTerrazaMedida[${MAX_TERRAZAS}]; uniform vec2 uTerrazaVida[${MAX_TERRAZAS}];
+  uniform float uOla;
+  // solo con el hito en pie y levantado del todo: sube con la ola desde su distancia a la plaza, corrida hasta 60 m
+  // por su azar (src/hitos/material.js); acostada la ciudad, el suelo vuelve y no queda un hueco
   bool bajoUnHito(vec2 xz) {
     for (int i = 0; i < ${MAX_TERRAZAS}; i++) {
       vec4 m = uTerrazaMarco[i], d = uTerrazaMedida[i];
       if (d.w < 0.5) continue;
       vec2 p = xz - m.xy;
       float fuera = max(abs(dot(p, m.zw)) - d.x, abs(dot(p, vec2(-m.w, m.z))) - d.y);
-      if (fuera < -${TAPADO_M.toFixed(1)} && vivoEn(uTerrazaVida[i], epocaAqui(length(xz))) > 0.5) return true;
+      if (fuera < -${TAPADO_M.toFixed(1)} && vivoEn(uTerrazaVida[i], epocaAqui(length(xz))) > 0.5
+          && smoothstep(0.0, 1.0, (uOla - length(m.xy) - 60.0) / uAnchoOla) > 0.99) return true;
     }
     return false;
   }`
