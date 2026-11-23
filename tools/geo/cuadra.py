@@ -17,7 +17,7 @@ import numpy as np
 
 from alas import (
     CALLE_DER, CALLE_FONDO, CALLE_IZQ, CRUZADA, ESQUINA_DER, ESQUINA_IZQ, FRENTE, LATERAL_DER, LATERAL_IZQ, PATIO,
-    SOLAR, marco_de_casa,
+    SOLAR, marco_de_casa, orientar_a_una_calle,
 )
 
 CRUJIA_M = (8.0, 9.5)             # fondo de la crujía sobre la calle
@@ -146,5 +146,10 @@ def casa_modelo(casa, manzana, angulo, metro, semilla, frentes, crujia, calles72
     if marco is None:
         return None
     sin_grilla = {**{k: v for k, v in marco.items() if k != 'grilla'}, 'crujia': float(crujia)}
-    alas = alas_modelo(marco['ancho'], marco['fondo'], semilla, marco['calles'], crujia)
+    # el lote oblicuo, o el de esquina con el frente en la otra calle, hacia su calle de 1772 (T33j.6i)
+    origen, eu, ancho, fondo = orientar_a_una_calle(marco['origen'], marco['eu'], marco['ancho'], marco['fondo'], calles72,
+                                                    metro, manzana=manzana)
+    if eu != marco['eu']:
+        sin_grilla.update(origen=origen, eu=eu, ev=(-eu[1], eu[0]), ancho=ancho, fondo=fondo, calles=0)
+    alas = alas_modelo(sin_grilla['ancho'], sin_grilla['fondo'], semilla, sin_grilla['calles'], crujia)
     return sin_grilla, [[tipo, *(round(x / metro, 2) for x in medidas)] for tipo, *medidas in alas]

@@ -141,3 +141,21 @@ def test_una_esquina_angosta_no_deja_alas_sin_area_ni_encimadas(ancho, calles):
     suma = sum((u1 - u0) * (v1 - v0) for _, u0, v0, u1, v1 in alas)
     assert area(alas) == pytest.approx(ancho * 40, abs=0.05)
     assert suma == pytest.approx(ancho * 40, abs=0.05)
+
+
+def test_casa_modelo_orienta_el_marco_a_su_calle_oblicua():
+    # T33j.6i: un lote de 10 × 14 m en una manzana maciza; la calle de 1772 corre a 40° frente a su frente (y < 0)
+    import math
+    import cv2
+    from tools.geo.cuadra import casa_modelo
+    manzana = np.zeros((200, 200), np.uint8)
+    manzana[60:140, 60:140] = 1
+    casa = np.zeros_like(manzana)
+    casa[60:88, 80:100] = 1
+    d = np.array([math.cos(math.radians(40)), math.sin(math.radians(40))])
+    centro = np.array([90, 54])
+    calle = [{'tramo': 'L1:A-B', 'medible': True, 'puntos': [list(centro - d * 80), list(centro + d * 80)]}]
+    marco, _alas = casa_modelo(casa.astype(bool), manzana.astype(bool), 0.0, 0.5, 7, [], 4.0, calle)
+    assert abs(abs(float(np.dot(marco['eu'], d))) - 1) < 1e-6
+    sin, _ = casa_modelo(casa.astype(bool), manzana.astype(bool), 0.0, 0.5, 7, [], 4.0)
+    assert abs(float(np.dot(sin['eu'], (1, 0)))) == pytest.approx(1)
