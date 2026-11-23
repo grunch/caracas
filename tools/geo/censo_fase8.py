@@ -37,6 +37,13 @@ def extension_de_sectores(edificado, sector_de, tramos):
             for s, bs in sorted(partes.items())}
 
 
+def escribir_panel(ruta, img):
+    """El panel en JPEG; OSError con la ruta si no se pudo escribir (cv2.imwrite solo devuelve False, como en
+    epocas.escribir_imagen). Los paneles ya escritos quedan."""
+    if not cv2.imwrite(str(ruta), img, [cv2.IMWRITE_JPEG_QUALITY, 85]):
+        raise OSError(f'no se pudo escribir el panel {ruta}')
+
+
 def leer_calzado(ruta):
     """El calzado.tif de calce.py (RGBA, como lo escribe tifffile) en BGR, el orden con que OpenCV pinta el panel.
     cv2.imread lo daría en BGRA y un RGBA2BGR cambiaría el rojo de las casas del original por azul."""
@@ -103,8 +110,7 @@ def main():
         if rec[2] - rec[0] < 10 or rec[3] - rec[1] < 10:
             print(f'{sector}: fuera de la imagen calzada')
             continue
-        cv2.imwrite(str(args.salida / f'{sector}.jpg'), panel(calzado, imagen, rec, casas, plantas, tramos),
-                    [cv2.IMWRITE_JPEG_QUALITY, 85])
+        escribir_panel(args.salida / f'{sector}.jpg', panel(calzado, imagen, rec, casas, plantas, tramos))
         print(f'{sector}: {rec}')
 
 

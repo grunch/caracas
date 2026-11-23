@@ -17,8 +17,8 @@ La extensión de cada sector sale de lo edificado revisado de sus unidades (fase
 
 | Estado | Sectores |
 |---|---|
-| Coincide con el original | S1772-11, -13, -21, -22, -33, -42, -43 |
-| Coincide, con hallazgos | S1772-12, -23, -31, -32, -34 |
+| Coincide con el original | S1772-11, -13, -21, -22, -42, -43 |
+| Coincide, con hallazgos | S1772-12, -23, -31, -32, -33, -34 |
 | Límite del calce (ya documentado) | S1772-24 (I1772-014: las casas quedan corridas cerca de media cuadra), S1772-44 |
 | Sin panel | S1772-14 (límite del calce: la referencia no lo cubre), S1772-41 (sin unidades localizadas: campo y río) |
 

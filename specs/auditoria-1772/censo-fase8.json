@@ -71,16 +71,17 @@
   {
    "id": "S1772-32",
    "estado": "con_hallazgos",
-   "observacion": "Las manzanas y los patios coinciden; hay casas en dos espacios en blanco.",
+   "observacion": "Las manzanas y los patios coinciden; hay casas en dos espacios en blanco y, en su borde norte, en la plazuela de D8-03.",
    "hallazgos": [
+    "D8-03",
     "D8-04",
     "D8-05"
    ]
   },
   {
    "id": "S1772-33",
-   "estado": "coincide",
-   "observacion": "Coincide; la plazuela de abajo es D8-03. Puede faltar una casa aislada muy chica arriba (duda menor).",
+   "estado": "con_hallazgos",
+   "observacion": "Las manzanas coinciden; hay casas en la plazuela de abajo (D8-03). Puede faltar una casa aislada muy chica arriba (duda menor).",
    "hallazgos": [
     "D8-03"
    ]
