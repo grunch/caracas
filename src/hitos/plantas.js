@@ -11,4 +11,6 @@ import { plazaBolivar } from './datos/plaza-bolivar.js'
 
 export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar]
   .filter((h) => h.planta)
-  .map(({ id, nace, muere, planta, suprime, transitable }) => ({ id, nace, muere, planta, suprime: suprime ?? [], ...(transitable ? { transitable } : {}) }))
+  .map(({ id, nace, muere, planta, suprime, transitable, patio }) => ({
+    id, nace, muere, planta, suprime: suprime ?? [], ...(transitable ? { transitable } : {}), ...(patio ? { patio } : {}),
+  }))

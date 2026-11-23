@@ -10,8 +10,8 @@ export const VELOCIDAD = Object.freeze({ paso: 2.5, corre: 7 }) // m/s: un paso 
 const CELDA_M = 20
 const LEJOS_M = 1500 // con la cámara más lejos que esto, se entra en la plaza
 const BUSCAR_HASTA_M = 120 // hasta salir de la planta de un hito grande (el Capitolio: 92 × 108 m; revisión de #152)
-const CRUJIA_HITO_M = 8 // en la planta de un hito grande choca la crujía junto al borde, no el patio del medio
-const PATIO_MINIMO_M = 10 // menos que esto de patio: la planta es maciza (una nave)
+const CRUJIA_HITO_M = 8 // en la planta de un hito con `patio` choca la crujía junto al borde, no el patio del medio
+const PATIO_MINIMO_M = 10 // menos que esto de patio: la planta choca entera
 const RADIO_JOYSTICK_PX = 52
 const AJENO = 'input, textarea, select, [contenteditable], dialog, [role="dialog"]'
 // los controles que Espacio activa por sí solo (los mismos que respeta accionDeTecla en src/controles.js)
@@ -28,7 +28,7 @@ const clave = (i, j) => `${i},${j}`
 
 /**
  * Las huellas de las casas en pie en la época (en metros del mundo, `aMundo` de src/coords.js), y las plantas de los
- * hitos en pie (`plantas`: [{ nace, muere, planta: [[[px, py]…]…], transitable }]), repartidas en celdas de CELDA_M
+ * hitos en pie (`plantas`: [{ nace, muere, planta: [[[px, py]…]…], transitable, patio }]), repartidas en celdas de CELDA_M
  * para preguntar rápido. `epoca` 99: sin línea de tiempo (quedan las que no mueren).
  */
 export function rejillaDeCasas({ vertices, techos, vida }, epoca, aMundo, plantas = []) {
@@ -41,13 +41,14 @@ export function rejillaDeCasas({ vertices, techos, vida }, epoca, aMundo, planta
   }
   // las plantas de los hitos en pie (src/hitos/plantas.js): lo visible choca (T33j.7b, I1772-013). La de un hito
   // transitable (una plaza) no: se camina, y chocan sus piezas
-  for (const { nace, muere, planta, transitable, macizo } of plantas) {
+  for (const { nace, muere, planta, transitable, patio } of plantas) {
     if (transitable || nace > epoca || (muere && muere <= epoca)) continue
     for (const p of planta) {
       const anillo = p.map(([px, py]) => aMundo(px, py))
-      // la planta es todo el terreno del hito (el Capitolio, con su claustro): choca la crujía del borde; el patio del
-      // medio no es una pared invisible (revisión de #152). Una planta chica o `macizo`, entera
-      const hueco = macizo ? null : patioDe(anillo)
+      // la planta choca entera (una nave, una iglesia: un cuerpo cerrado). Solo un hito que declara `patio` en sus
+      // datos (el Capitolio con su claustro, Miraflores) choca en la crujía del borde y deja caminar el patio del
+      // medio: el patio no se infiere del tamaño, que inventaría uno dentro de la Catedral (revisión de #152)
+      const hueco = patio ? patioDe(anillo) : null
       if (hueco) anillo.hueco = hueco
       anillos.push(anillo)
     }

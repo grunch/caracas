@@ -141,7 +141,7 @@ def puntos_de_hitos(hitos, epoca=EPOCA_1772, metro=METRO):
 
 def _junto_al_borde(planta, metro, adentro_m=2.0):
     """Un punto de la planta a `adentro_m` de su borde, en el medio de su primer lado: donde están los muros (en la
-    planta de un hito grande choca la crujía del borde, no el patio del medio; src/a-pie.js)."""
+    planta de un hito con `patio` choca solo la crujía del borde; la de los demás, entera; src/a-pie.js)."""
     (x0, y0), (x1, y1) = list(planta.exterior.coords)[:2]
     medio = np.array([(x0 + x1) / 2, (y0 + y1) / 2])
     normal = np.array([-(y1 - y0), x1 - x0]) / max(float(np.hypot(x1 - x0, y1 - y0)), 1e-9)

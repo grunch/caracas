@@ -1,3 +1,4 @@
+import { hitosConPlanta } from '../../src/hitos/plantas.js'
 import { describe, test, expect } from 'vitest'
 import {
   rejillaDeCasas, choca, pasoAPie, entradaDeTeclas, joystick, puntoDeEntrada, teclaAjena, RADIO_M, VELOCIDAD,
@@ -143,7 +144,7 @@ describe('rejillaDeCasas con las plantas de los hitos (T33j.7b, I1772-013)', () 
 })
 
 describe('la colisión de los hitos grandes y la entrada (revisión de #152)', () => {
-  const grande = [{ id: 'capitolio', nace: 1, muere: 0, planta: [[[0, 0], [92, 0], [92, 108], [0, 108]]] }]
+  const grande = [{ id: 'capitolio', nace: 1, muere: 0, patio: true, planta: [[[0, 0], [92, 0], [92, 108], [0, 108]]] }]
   const chica = [{ id: 'capilla', nace: 1, muere: 0, planta: [[[200, 0], [212, 0], [212, 30], [200, 30]]] }]
 
   test('en un hito grande choca la crujía junto al borde, no el patio del medio', () => {
@@ -156,10 +157,21 @@ describe('la colisión de los hitos grandes y la entrada (revisión de #152)', (
     expect(choca(rejillaDeCasas(datos, 1, aMundo, chica), 206, 15)).toBe(true)
   })
 
+  test('una planta grande sin patio declarado (la nave de la Catedral, 78 × 27 m) choca entera: el patio no se infiere del tamaño', () => {
+    const nave = [{ id: 'catedral', nace: 1, muere: 0, planta: [[[300, 0], [378, 0], [378, 27], [300, 27]]] }]
+    expect(choca(rejillaDeCasas(datos, 1, aMundo, nave), 339, 13.5)).toBe(true)
+    expect(choca(rejillaDeCasas(datos, 1, aMundo, grande.map(({ patio, ...h }) => h)), 46, 54)).toBe(true)
+  })
+
+  test('hitosConPlanta conserva el patio de los hitos que lo modelan (Capitolio, Miraflores) y nada más', () => {
+    const conPatio = hitosConPlanta().filter((h) => h.patio).map((h) => h.id).sort()
+    expect(conPatio).toEqual(['capitolio', 'miraflores'])
+  })
+
   test('desde dentro de una planta sólida grande la entrada encuentra la calle aunque esté a más de 40 m', () => {
     const solida = [{ id: 'cuadra', nace: 1, muere: 0, planta: [[[500, 500], [612, 500], [612, 612], [500, 612]]] }]
     const rejilla = rejillaDeCasas({ vertices: new Float32Array(), techos: new Uint32Array(), vida: new Uint32Array() }, 1, aMundo,
-      solida.map((h) => ({ ...h, macizo: true })))
+      solida)
     const p = puntoDeEntrada({ x: 556, z: 556, dist: 0 }, (x, z) => choca(rejilla, x, z))
     expect(choca(rejilla, p.x, p.z)).toBe(false)
   })

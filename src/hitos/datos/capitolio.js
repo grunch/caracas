@@ -7,6 +7,7 @@ const planta = [rectanguloPx(marco, 92, 108)]
 export const capitolio = Object.freeze({
   id: 'capitolio', nombre: 'Capitolio (Palacio Federal y Legislativo)', ...marco, nace: 1, muere: 0,
   planta, suprime: planta,
+  patio: true, // claustro (1772–1843) y patio de la fuente (desde 1873): el modo a pie choca en la crujía y no en el patio
   fuente: 'Plano de Caracas de 1936 (recuadro «Palacio Federal»: cuatro alas alrededor de un jardín, con óvalo en el ala norte); ' +
     'plano de Mestre de 1889 (1 «Capitolio», 2 «Palacio Federal»); Wikipedia https://es.wikipedia.org/wiki/Palacio_Federal_Legislativo; ' +
     'Fundación Empresas Polar · Diccionario de Historia de Venezuela https://bibliofep.fundacionempresaspolar.org/; ' +
