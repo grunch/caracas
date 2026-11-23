@@ -41,7 +41,7 @@ cada uno con una línea «Se ve:». En un fix, un paso marcado «(falla en main)
 
 ### Capturas
 
-<!-- Si el cambio se ve: captura antes (main) y después (esta rama), misma vista y época. Si no se ve: «No aplica». -->
+<!-- Si el cambio se ve (fix o mejora): captura de antes (main) y de después (esta rama), misma vista, época y modo. Si no se ve: «No aplica». -->
 
 ### No cubierto
 

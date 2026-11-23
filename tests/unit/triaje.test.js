@@ -108,28 +108,29 @@ describe('revisiones', () => {
     const pasosFix = '1. Abre 1772 en color.\n   Se ve: el alero no entra en la calle. **(falla en main)**\n2. Regresión: 1874.\n   Se ve: igual.'
     expect(revisarPruebaAMano(secciones(cuerpo({}, { Pasos: pasosFix })), true).paso).toBe(true)
   })
-  it('capturas: si el diff toca algo que se ve, pide imágenes (dos en un fix)', () => {
+  it('capturas: si el diff toca algo que se ve, pide antes y después (dos imágenes), sea fix o no', () => {
     const visual = [archivo('src/shader/valle.js')]
     const s = secciones(cuerpo())
-    expect(revisarCapturas(s, [archivo('src/buscador.js')], false, cfg).paso).toBe(true)
-    expect(revisarCapturas(s, visual, false, cfg).paso).toBe(false)
+    expect(revisarCapturas(s, [archivo('src/buscador.js')], cfg).paso).toBe(true)
+    expect(revisarCapturas(s, visual, cfg).paso).toBe(false)
     const una = secciones(cuerpo({}, { Capturas: '![después](https://github.com/user-attachments/assets/1)' }))
-    expect(revisarCapturas(una, visual, false, cfg).paso).toBe(true)
-    expect(revisarCapturas(una, visual, true, cfg).motivos[0]).toContain('antes')
+    expect(revisarCapturas(una, visual, cfg).motivos).toEqual([
+      'Capturas: el PR cambia lo que se ve; lleva captura de antes (main) y de después (esta rama), misma vista y época (trae 1)',
+    ])
     const dos = secciones(cuerpo({}, { Capturas: '<img src="https://x/a.png"> <img src="https://x/b.png">' }))
-    expect(revisarCapturas(dos, visual, true, cfg).paso).toBe(true)
+    expect(revisarCapturas(dos, visual, cfg).paso).toBe(true)
   })
   it('capturas: las rutas visuales incluyen los .css y las páginas', () => {
     const s = secciones(cuerpo())
-    expect(revisarCapturas(s, [archivo('src/fichas.css')], false, cfg).paso).toBe(false)
-    expect(revisarCapturas(s, [archivo('index.html')], false, cfg).paso).toBe(false)
+    expect(revisarCapturas(s, [archivo('src/fichas.css')], cfg).paso).toBe(false)
+    expect(revisarCapturas(s, [archivo('index.html')], cfg).paso).toBe(false)
   })
   it('capturas: el pipeline que genera la geometría también se ve; sus tests no', () => {
     const s = secciones(cuerpo())
-    expect(revisarCapturas(s, [archivo('tools/geo/alas.py')], false, cfg).paso).toBe(false)
-    expect(revisarCapturas(s, [archivo('tools/suelo-lib.mjs')], false, cfg).paso).toBe(false)
-    expect(revisarCapturas(s, [archivo('tools/geo/tests/test_alas.py')], false, cfg).paso).toBe(true)
-    expect(revisarCapturas(s, [archivo('tools/triaje/triaje.mjs')], false, cfg).paso).toBe(true)
+    expect(revisarCapturas(s, [archivo('tools/geo/alas.py')], cfg).paso).toBe(false)
+    expect(revisarCapturas(s, [archivo('tools/suelo-lib.mjs')], cfg).paso).toBe(false)
+    expect(revisarCapturas(s, [archivo('tools/geo/tests/test_alas.py')], cfg).paso).toBe(true)
+    expect(revisarCapturas(s, [archivo('tools/triaje/triaje.mjs')], cfg).paso).toBe(true)
   })
   it('fuentes: si el diff toca datos históricos, pide al menos un enlace', () => {
     const datos = [archivo('src/marcas-datos.js')]

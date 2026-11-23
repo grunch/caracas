@@ -124,14 +124,12 @@ export function revisarPruebaAMano(s, esFix) {
   return revision('prueba-a-mano', motivos)
 }
 
-export function revisarCapturas(s, archivos, esFix, cfg) {
+/** Si el diff cambia lo que se ve, la comparación: captura de antes (main) y de después, sea fix o mejora. */
+export function revisarCapturas(s, archivos, cfg) {
   if (!archivos.some((a) => !esTest(a.nombre) && enRutas(a.nombre, cfg.rutas.visuales))) return revision('capturas')
   const hay = (subseccion(s, 'Prueba a mano', 'Capturas').replace(COMENTARIO, '').match(IMAGEN) ?? []).length
-  const faltan = esFix ? 2 : 1
-  if (hay >= faltan) return revision('capturas')
-  return revision('capturas', [esFix
-    ? 'Capturas: el PR cambia lo que se ve; un fix lleva captura de antes (main) y de después'
-    : 'Capturas: el PR cambia lo que se ve y no trae ninguna captura'])
+  if (hay >= 2) return revision('capturas')
+  return revision('capturas', [`Capturas: el PR cambia lo que se ve; lleva captura de antes (main) y de después (esta rama), misma vista y época (trae ${hay})`])
 }
 
 export function revisarFuentes(s, archivos, cfg) {
@@ -194,7 +192,7 @@ export function evaluar(pr, hechos, cfg, plantilla) {
     revisarIssue(hechos, cfg),
     revisarPlantilla(s, plantilla),
     revisarPruebaAMano(s, esFix),
-    revisarCapturas(s, hechos.archivos, esFix, cfg),
+    revisarCapturas(s, hechos.archivos, cfg),
     revisarFuentes(s, hechos.archivos, cfg),
     revisarFixConTest(hechos.archivos, esFix),
     revisarPlan(s, hechos.archivos, cfg),

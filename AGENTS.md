@@ -41,7 +41,7 @@ Si eres un agente de IA preparando un PR, sigue `CONTRIBUTING.md § El estándar
   La **Prueba a mano** son pasos que alguien hizo de verdad en el sitio corriendo (`npm run dev`), cada uno
   con su `Se ve:`, uno de regresión y, en un fix, uno marcado `(falla en main)`. Si los pasos los corriste
   tú con Playwright o capturas, dilo así; no presentes como hechos pasos que nadie corrió.
-- Si el cambio se ve, pon capturas de después y, en un fix, también las de antes (`main`), misma vista y época.
+- Si el cambio se ve (fix o mejora), pon captura de antes (`main`) y de después (esta rama), misma vista, época y modo.
 - En un fix, el primer commit es `test:` y solo agrega el test de regresión, que falla en `main`.
 - Cada dato histórico nuevo lleva su fuente con enlace en la sección **Fuentes**. Nunca inventes una fecha,
   un nombre, una forma o una fuente; lo no verificado se marca como tal.

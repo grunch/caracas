@@ -53,8 +53,9 @@ Diferencias con Mostro, por lo que es este proyecto:
 
 - **En español**, como todo el repo (Mostro exige inglés).
 - **Fuentes**: una sección y una revisión que Mostro no tiene. Los datos históricos son la materia del proyecto.
-- **Capturas**: el resultado de casi todo PR es algo que se ve; la Prueba a mano pide la captura de después y, en
-  un fix, la de antes. La captura es lo que una persona compara en dos segundos.
+- **Capturas**: el resultado de casi todo PR es algo que se ve; si el diff lo cambia, la Prueba a mano pide la
+  captura de antes (`main`) y la de después, misma vista, época y modo, sea fix o mejora (un cambio de tono o de
+  forma solo se juzga comparando). Es lo que una persona compara en dos segundos.
 - **Quien mantiene el repo también llena la plantilla.** En Mostro sus PRs se saltan el contenido; aquí la mayoría
   de los PRs los abren agentes de IA para quien mantiene el repo, y son justamente los que la plantilla guía. Solo
   se salta el issue aceptado.
@@ -84,7 +85,7 @@ Un borrador no se revisa; la primera vuelta es al pasar a listo.
 | `issue` | Una palabra de cierre enlaza un issue de este repo con `estado: aceptado` | «No hay un issue aceptado enlazado» |
 | `plantilla` | Están todas las secciones `##` de la plantilla y ninguna está vacía ni tiene solo su relleno | «Falta la sección `…` o está vacía» |
 | `prueba-a-mano` | **Pasos** tiene 2 o más pasos numerados, cada uno con `Se ve:`, uno de regresión y, en un fix, uno marcado `(falla en main)` | «Prueba a mano: …» |
-| `capturas` | Si el diff toca una ruta visual (`rutas.visuales`: shaders, hitos, techos, `.css`, las páginas…), **Capturas** trae una imagen (dos en un fix) | «Capturas: …» |
+| `capturas` | Si el diff toca una ruta visual (`rutas.visuales`: shaders, hitos, techos, `.css`, las páginas…), **Capturas** trae dos imágenes: antes y después | «Capturas: …» |
 | `fuentes` | Si el diff toca una ruta histórica (`fuentes/`, `src/marcas-datos.js`, `src/fichas-datos.js`, `src/hitos/`), **Fuentes** trae un enlace | «Fuentes: el PR toca datos históricos y no enlaza ninguna fuente» |
 | `fix-con-test` | En un fix (sección Tipo o prefijo `fix` del título), el diff agrega un `it(`/`test(` en `tests/` o un `def test_` en `tools/geo/tests/` | «Un fix necesita un test de regresión…» |
 | `plan` | Si **Issue o tarea** nombra una tarea `T…`, el diff toca `specs/07-plan-de-implementacion.md` | «Plan: …» |
@@ -135,7 +136,7 @@ a nadie. Sin `npm ci`: solo la biblioteca estándar de Node, así una dependenci
 - **El tipo lo declara el autor.** Un fix presentado como `feat` se salta `(falla en main)` y `fix-con-test`; quien
   revisa ve el diff, y un tipo equivocado es motivo de cierre (regla 3).
 - **Una descripción se puede inventar.** Unos pasos verosímiles se escriben sin correr nada, y una captura puede ser
-  de otra rama. La defensa es que alguien siga los pasos, y que unos pasos que no funcionan son motivo de cierre.
+  de otra rama. El bot cuenta dos imágenes; que sean el antes y el después de la misma vista lo ve quien revisa. La defensa es que alguien siga los pasos, y que unos pasos que no funcionan son motivo de cierre.
 - **Un enlace no es una fuente.** La revisión `fuentes` solo ve que hay un enlace, no que diga lo que el PR le
   atribuye. Eso lo revisa una persona.
 - **Las rutas visuales e históricas son una lista a mano** (`config.json`): un archivo nuevo que se ve y no está en
