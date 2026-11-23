@@ -67,6 +67,7 @@ def lotes_encerrados(casas, metro, movibles, junta, vida, admite=None):
 
 
 CIERRE_RADIO_M = 12.0     # lo que se busca de edificado sin casas alrededor del punto de una abertura
+CIERRE_FONDO_M = 8.0      # el cierre es una crujía de frente: hasta esto detrás de la línea de fachada
 CIERRE_MINIMO_M2 = 2.0    # menos que esto no es un hueco que cerrar
 VUELTAS_CIERRE = 3        # cerrar un tramo de frente puede dejar a la vista el que sigue
 
@@ -128,12 +129,14 @@ def cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=(), obsta
             if not partes:
                 continue
             pieza = min(partes, key=lambda q: q.distance(punto))
-            # el cierre llega a la línea de fachada y no la pasa: se corta en la recta del frente
+            # el cierre llega a la línea de fachada y no la pasa, y no va más allá de una crujía: se corta en la recta
+            # del frente y a CIERRE_FONDO_M detrás de ella
             (fx, fy), (nx, ny) = a['recta']
             lejos = CIERRE_RADIO_M / metro * 4
+            fondo = CIERRE_FONDO_M / metro   # una crujía de frente, no el fondo del hueco
             adentro = Polygon([(fx - ny * lejos, fy + nx * lejos), (fx + ny * lejos, fy - nx * lejos),
-                               (fx + ny * lejos + nx * lejos, fy - nx * lejos + ny * lejos),
-                               (fx - ny * lejos + nx * lejos, fy + nx * lejos + ny * lejos)])
+                               (fx + ny * lejos + nx * fondo, fy - nx * lejos + ny * fondo),
+                               (fx - ny * lejos + nx * fondo, fy + nx * lejos + ny * fondo)])
             cortada = [q for q in getattr(pieza.intersection(adentro), 'geoms', [pieza.intersection(adentro)])
                        if q.geom_type == 'Polygon' and not q.is_empty]
             if not cortada:

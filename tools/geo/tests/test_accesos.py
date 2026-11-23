@@ -150,3 +150,18 @@ def test_un_cierre_que_dejaria_una_fachada_fuera_de_la_recta_no_se_hace():
     nuevas = cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 5, 6, 7}, edificado=rojo)
     final = [(k, nuevas.get(k, g)) for k, g in casas]
     assert frentes_desalineados(eje, final, METRO)['desalineados'] == []
+
+
+def test_el_cierre_es_una_crujia_de_frente_y_no_llena_el_fondo_del_hueco():
+    # cerrar con fachada pide una crujía junto a la línea (CIERRE_FONDO_M), no el hueco entero: la casa que lo cierra
+    # crece a lo largo de la calle y no hacia el fondo (si no, el visor gira su cumbrera)
+    from accesos import CIERRE_FONDO_M, cerrar_aberturas
+    from shapely.geometry import box as caja
+    casas = [(k, caja(10 + k * 20, 12, 10 + (k + 1) * 20, 72)) for k in range(8) if k != 3]
+    eje = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    rojo = [caja(60, 10, 100, 75)]
+    nuevas = cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 4, 5, 6, 7}, edificado=rojo)
+    assert nuevas
+    for k, g in nuevas.items():
+        crecida = g.difference(dict(casas)[k])
+        assert crecida.area > 0 and crecida.bounds[3] <= 12 + CIERRE_FONDO_M / METRO + 1e-6
