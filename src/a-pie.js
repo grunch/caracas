@@ -9,7 +9,9 @@ export const RADIO_M = 0.4
 export const VELOCIDAD = Object.freeze({ paso: 2.5, corre: 7 }) // m/s: un paso largo y una carrera (el centro es chico)
 const CELDA_M = 20
 const LEJOS_M = 1500 // con la cámara más lejos que esto, se entra en la plaza
-const BUSCAR_HASTA_M = 40
+const BUSCAR_HASTA_M = 120 // hasta salir de la planta de un hito grande (el Capitolio: 92 × 108 m; revisión de #152)
+const CRUJIA_HITO_M = 8 // en la planta de un hito grande choca la crujía junto al borde, no el patio del medio
+const PATIO_MINIMO_M = 10 // menos que esto de patio: la planta es maciza (una nave)
 const RADIO_JOYSTICK_PX = 52
 const AJENO = 'input, textarea, select, [contenteditable], dialog, [role="dialog"]'
 // los controles que Espacio activa por sí solo (los mismos que respeta accionDeTecla en src/controles.js)
@@ -39,9 +41,16 @@ export function rejillaDeCasas({ vertices, techos, vida }, epoca, aMundo, planta
   }
   // las plantas de los hitos en pie (src/hitos/plantas.js): lo visible choca (T33j.7b, I1772-013). La de un hito
   // transitable (una plaza) no: se camina, y chocan sus piezas
-  for (const { nace, muere, planta, transitable } of plantas) {
+  for (const { nace, muere, planta, transitable, macizo } of plantas) {
     if (transitable || nace > epoca || (muere && muere <= epoca)) continue
-    for (const anillo of planta) anillos.push(anillo.map(([px, py]) => aMundo(px, py)))
+    for (const p of planta) {
+      const anillo = p.map(([px, py]) => aMundo(px, py))
+      // la planta es todo el terreno del hito (el Capitolio, con su claustro): choca la crujía del borde; el patio del
+      // medio no es una pared invisible (revisión de #152). Una planta chica o `macizo`, entera
+      const hueco = macizo ? null : patioDe(anillo)
+      if (hueco) anillo.hueco = hueco
+      anillos.push(anillo)
+    }
   }
   for (const anillo of anillos) {
     const xs = anillo.map((p) => p.x)
@@ -56,6 +65,30 @@ export function rejillaDeCasas({ vertices, techos, vida }, epoca, aMundo, planta
     }
   }
   return { celdas }
+}
+
+/** El patio de una planta convexa: cada lado CRUJIA_HITO_M hacia adentro; null si no queda PATIO_MINIMO_M de patio. */
+function patioDe(anillo) {
+  const n = anillo.length
+  let area = 0
+  for (let a = 0; a < n; a++) area += anillo[a].x * anillo[(a + 1) % n].z - anillo[(a + 1) % n].x * anillo[a].z
+  const giro = area > 0 ? 1 : -1
+  const lados = anillo.map((p, a) => {
+    const q = anillo[(a + 1) % n]
+    const largo = Math.hypot(q.x - p.x, q.z - p.z)
+    if (largo < 2 * CRUJIA_HITO_M + PATIO_MINIMO_M) return null
+    const [nx, nz] = [(-(q.z - p.z) / largo) * giro, ((q.x - p.x) / largo) * giro] // hacia adentro
+    return [p.x + nx * CRUJIA_HITO_M, p.z + nz * CRUJIA_HITO_M, q.x - p.x, q.z - p.z]
+  })
+  if (lados.some((l) => !l)) return null
+  const hueco = lados.map((b, k) => {
+    const a = lados[(k + n - 1) % n]
+    const det = a[2] * b[3] - a[3] * b[2]
+    if (Math.abs(det) < 1e-9) return null
+    const t = ((b[0] - a[0]) * b[3] - (b[1] - a[1]) * b[2]) / det
+    return { x: a[0] + t * a[2], z: a[1] + t * a[3] }
+  })
+  return hueco.some((p) => !p) ? null : hueco
 }
 
 function dentroDe(anillo, x, z) {
@@ -86,6 +119,7 @@ export function choca({ celdas }, x, z, radio = RADIO_M) {
     for (const anillo of celdas.get(clave(Math.floor(x / CELDA_M) + di, Math.floor(z / CELDA_M) + dj)) ?? []) {
       if (vistos.has(anillo)) continue
       vistos.add(anillo)
+      if (anillo.hueco && dentroDe(anillo.hueco, x, z) && distanciaAlBorde(anillo.hueco, x, z) >= radio) continue // en el patio
       if (dentroDe(anillo, x, z) || distanciaAlBorde(anillo, x, z) < radio) return true
     }
   }

@@ -75,3 +75,9 @@ def test_un_hito_que_ocupa_parte_del_frente_no_es_una_abertura():
     rojo = [box(60, 10, 100, 45)]
     planta = [box(70, 12, 90, 42)]
     assert aberturas_de_frentes([eje((0, 0), (180, 0))], casas, METRO, obstaculos=planta, edificado=rojo) == []
+def test_el_punto_de_prueba_de_un_hito_esta_junto_al_borde_de_su_planta():
+    # revisión de #152: la planta grande choca en su crujía, no en el patio: el punto se prueba 2 m adentro del borde
+    from cierre_fase7 import puntos_de_hitos
+    hitos = [{'id': 'capitolio', 'nace': 1, 'muere': 0, 'planta': [[[0, 0], [184, 0], [184, 216], [0, 216]]]}]
+    (i, (x, y)), *_ = puntos_de_hitos(hitos)
+    assert min(x, y, 184 - x, 216 - y) <= 4 + 1e-6

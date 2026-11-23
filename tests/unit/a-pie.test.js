@@ -141,3 +141,26 @@ describe('rejillaDeCasas con las plantas de los hitos (T33j.7b, I1772-013)', () 
     expect(choca(rejillaDeCasas(datos, 1, aMundo, plantas), 230, 230)).toBe(false)
   })
 })
+
+describe('la colisión de los hitos grandes y la entrada (revisión de #152)', () => {
+  const grande = [{ id: 'capitolio', nace: 1, muere: 0, planta: [[[0, 0], [92, 0], [92, 108], [0, 108]]] }]
+  const chica = [{ id: 'capilla', nace: 1, muere: 0, planta: [[[200, 0], [212, 0], [212, 30], [200, 30]]] }]
+
+  test('en un hito grande choca la crujía junto al borde, no el patio del medio', () => {
+    const rejilla = rejillaDeCasas(datos, 1, aMundo, grande)
+    expect(choca(rejilla, 3, 50)).toBe(true)
+    expect(choca(rejilla, 46, 54)).toBe(false)
+  })
+
+  test('un hito chico (una nave) choca entero', () => {
+    expect(choca(rejillaDeCasas(datos, 1, aMundo, chica), 206, 15)).toBe(true)
+  })
+
+  test('desde dentro de una planta sólida grande la entrada encuentra la calle aunque esté a más de 40 m', () => {
+    const solida = [{ id: 'cuadra', nace: 1, muere: 0, planta: [[[500, 500], [612, 500], [612, 612], [500, 612]]] }]
+    const rejilla = rejillaDeCasas({ vertices: new Float32Array(), techos: new Uint32Array(), vida: new Uint32Array() }, 1, aMundo,
+      solida.map((h) => ({ ...h, macizo: true })))
+    const p = puntoDeEntrada({ x: 556, z: 556, dist: 0 }, (x, z) => choca(rejilla, x, z))
+    expect(choca(rejilla, p.x, p.z)).toBe(false)
+  })
+})

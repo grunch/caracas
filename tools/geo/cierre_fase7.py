@@ -132,11 +132,24 @@ def de_fases(fases, sha256):
                         ('terreno_libre_sin_casas', de(4, 'libres_sin_casas'))])
 
 
-def puntos_de_hitos(hitos, epoca=EPOCA_1772):
-    """[(id, (x, y))]: un punto dentro de cada planta de los hitos en pie en la época (px). La de un hito transitable
-    (una plaza: se camina, chocan sus piezas) no cuenta."""
-    return [(h['id'], tuple(Polygon(p).representative_point().coords[0]))
+def puntos_de_hitos(hitos, epoca=EPOCA_1772, metro=METRO):
+    """[(id, (x, y))]: un punto de cada planta de los hitos en pie en la época (px), junto a su borde. La de un hito
+    transitable (una plaza: se camina, chocan sus piezas) no cuenta."""
+    return [(h['id'], _junto_al_borde(Polygon(p), metro))
             for h in hitos if _en_pie(h, epoca) and not h.get('transitable') for p in h.get('planta', [])]
+
+
+def _junto_al_borde(planta, metro, adentro_m=2.0):
+    """Un punto de la planta a `adentro_m` de su borde, en el medio de su primer lado: donde están los muros (en la
+    planta de un hito grande choca la crujía del borde, no el patio del medio; src/a-pie.js)."""
+    (x0, y0), (x1, y1) = list(planta.exterior.coords)[:2]
+    medio = np.array([(x0 + x1) / 2, (y0 + y1) / 2])
+    normal = np.array([-(y1 - y0), x1 - x0]) / max(float(np.hypot(x1 - x0, y1 - y0)), 1e-9)
+    paso = adentro_m / metro
+    punto = medio + normal * paso
+    if not planta.contains(Point(punto)):
+        punto = medio - normal * paso
+    return (float(punto[0]), float(punto[1]))
 
 
 def hitos_atravesables(hitos, choca, epoca=EPOCA_1772):
