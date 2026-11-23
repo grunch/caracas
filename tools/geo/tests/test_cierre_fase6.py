@@ -143,3 +143,29 @@ def test_las_casas_medidas_son_las_que_tienen_algun_frente_que_se_mide():
     frentes = {2: [((1.0, 0.0), (0.0, 0.0), 'L1:A-B', 1, 0)]}
     assert casas_con_cumbrera_medible(girada, frentes, METRO) == {2}
     assert casas_con_cumbrera_medible(girada, frentes, METRO, fuera_de_recta={(2, 'L1:A-B', 1, 0)}) == set()
+
+
+def test_los_limites_de_la_fase_6_se_reconocen_por_el_centro_de_la_huella():
+    from cierre_fase6 import con_limites_fase6
+    huellas = {7: box(0, 0, 10, 10), 8: box(10, 0, 20, 10), 9: box(30, 0, 40, 10)}
+    desviadas = [{'techo': 7, 'giro_grados': 85.0}, {'techo': 9, 'giro_grados': 60.0}]
+    cruces = [{'techos': [7, 8], 'pares_de_triangulos': 2, 'area_proyectada_m2': 0.05}]
+    limites = {'cumbreras': [{'centro': [5.4, 5.0], 'clase': 'esquina'}],
+               'cruces': [{'centros': [[5, 5], [15, 5]], 'clase': 'contacto_de_esquina', 'area_maxima_m2': 0.06}]}
+    d, c = con_limites_fase6(desviadas, cruces, huellas, limites)
+    assert [x.get('limite') for x in d] == ['esquina', None]
+    assert c[0]['limite'] == 'contacto_de_esquina'
+    # un cruce que creció más que lo registrado vuelve a contar
+    mayor = [{**cruces[0], 'area_proyectada_m2': 0.5}]
+    assert con_limites_fase6([], mayor, huellas, limites)[1][0].get('limite') is None
+
+
+def test_la_tolerancia_del_centro_de_los_limites_es_un_metro_con_cualquier_metro():
+    # revisión de #150: con metro = 1, centros a 1,5 px (1,5 m) no son la misma casa
+    from cierre_fase6 import con_limites_fase6
+    huellas = {7: box(0, 0, 10, 10)}
+    limites = {'cumbreras': [{'centro': [6.5, 5.0], 'clase': 'esquina'}]}
+    d, _ = con_limites_fase6([{'techo': 7, 'giro_grados': 85.0}], [], huellas, limites, metro=1.0)
+    assert d[0].get('limite') is None
+    d, _ = con_limites_fase6([{'techo': 7, 'giro_grados': 85.0}], [], huellas, limites, metro=0.5)
+    assert d[0]['limite'] == 'esquina'

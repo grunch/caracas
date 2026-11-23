@@ -1,0 +1,508 @@
+{
+ "alcance": "Techos aceptados como límite documentado de la fase 6 de 1772 (specs/08, cubiertas). Los umbrales no cambian: siguen listados en la puerta con su clase. Cada casa se reconoce por el centro de su huella (a menos de 1 m); un cruce cuenta como límite solo si no pasa su área máxima. Los techos son los de la ciudad medida al decidir.",
+ "decision": {
+  "fecha": "2026-11-23",
+  "responsable": "dueño del proyecto",
+  "texto": "Se limpian en el generador los solapes residuales entre casas vecinas; los contactos de esquina que quedan y las cumbreras de lotes de esquina o con la calle muy oblicua quedan como límite documentado, y la fase 6 cierra."
+ },
+ "ciudad": {
+  "datos": "be17c30 (sin publicar)"
+ },
+ "cumbreras": [
+  {
+   "techo_al_decidir": 32746,
+   "centro": [
+    7683.49,
+    5905.72
+   ],
+   "giro_al_decidir": 84.8,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 32905,
+   "centro": [
+    8229.44,
+    8443.43
+   ],
+   "giro_al_decidir": 87.7,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 34332,
+   "centro": [
+    9345.66,
+    8110.25
+   ],
+   "giro_al_decidir": 89.0,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 34537,
+   "centro": [
+    9420.42,
+    8002.03
+   ],
+   "giro_al_decidir": 90.0,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 34804,
+   "centro": [
+    9586.36,
+    8454.15
+   ],
+   "giro_al_decidir": 81.6,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 35903,
+   "centro": [
+    6478.89,
+    8105.16
+   ],
+   "giro_al_decidir": 42.9,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 35995,
+   "centro": [
+    7068.26,
+    8062.3
+   ],
+   "giro_al_decidir": 72.2,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 36069,
+   "centro": [
+    7366.53,
+    7903.7
+   ],
+   "giro_al_decidir": 43.4,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 36102,
+   "centro": [
+    7479.84,
+    7705.62
+   ],
+   "giro_al_decidir": 69.4,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 36166,
+   "centro": [
+    7584.93,
+    8908.5
+   ],
+   "giro_al_decidir": 54.3,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 36289,
+   "centro": [
+    7593.79,
+    8083.92
+   ],
+   "giro_al_decidir": 70.7,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 36292,
+   "centro": [
+    7776.25,
+    7565.69
+   ],
+   "giro_al_decidir": 52.1,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 36533,
+   "centro": [
+    7904.67,
+    8736.94
+   ],
+   "giro_al_decidir": 80.4,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 37742,
+   "centro": [
+    10424.93,
+    6862.7
+   ],
+   "giro_al_decidir": 87.0,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 37770,
+   "centro": [
+    10263.93,
+    6608.58
+   ],
+   "giro_al_decidir": 81.4,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 37958,
+   "centro": [
+    10699.3,
+    7030.42
+   ],
+   "giro_al_decidir": 89.7,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 38324,
+   "centro": [
+    11478.58,
+    7147.33
+   ],
+   "giro_al_decidir": 61.8,
+   "clase": "esquina_u_oblicua",
+   "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  }
+ ],
+ "cruces": [
+  {
+   "techos_al_decidir": [
+    36749,
+    36754
+   ],
+   "centros": [
+    [
+     8718.05,
+     5474.19
+    ],
+    [
+     8686.74,
+     5458.14
+    ]
+   ],
+   "area_maxima_m2": 0.1749,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    35162,
+    35167
+   ],
+   "centros": [
+    [
+     10449.73,
+     5911.25
+    ],
+    [
+     10447.03,
+     5928.14
+    ]
+   ],
+   "area_maxima_m2": 0.1726,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    37085,
+    37095
+   ],
+   "centros": [
+    [
+     9209.98,
+     8513.6
+    ],
+    [
+     9197.74,
+     8537.31
+    ]
+   ],
+   "area_maxima_m2": 0.026,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    34652,
+    34676
+   ],
+   "centros": [
+    [
+     9568.59,
+     7093.84
+    ],
+    [
+     9577.98,
+     7088.32
+    ]
+   ],
+   "area_maxima_m2": 0.0129,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    36381,
+    36382
+   ],
+   "centros": [
+    [
+     7839.99,
+     6903.25
+    ],
+    [
+     7853.51,
+     6886.22
+    ]
+   ],
+   "area_maxima_m2": 0.0101,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    33370,
+    33394
+   ],
+   "centros": [
+    [
+     8315.48,
+     8240.91
+    ],
+    [
+     8320.72,
+     8250.45
+    ]
+   ],
+   "area_maxima_m2": 0.01,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    37319,
+    37320
+   ],
+   "centros": [
+    [
+     9361.66,
+     9092.53
+    ],
+    [
+     9384.52,
+     9094.46
+    ]
+   ],
+   "area_maxima_m2": 0.0097,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    38379,
+    38380
+   ],
+   "centros": [
+    [
+     7911.18,
+     6703.52
+    ],
+    [
+     7932.48,
+     6707.8
+    ]
+   ],
+   "area_maxima_m2": 0.0089,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    36007,
+    36009
+   ],
+   "centros": [
+    [
+     6960.81,
+     9045.53
+    ],
+    [
+     6959.28,
+     9071.31
+    ]
+   ],
+   "area_maxima_m2": 0.0079,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    32918,
+    32919
+   ],
+   "centros": [
+    [
+     8221.66,
+     8370.22
+    ],
+    [
+     8228.71,
+     8395.98
+    ]
+   ],
+   "area_maxima_m2": 0.0066,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    34079,
+    34100
+   ],
+   "centros": [
+    [
+     9024.36,
+     8452.03
+    ],
+    [
+     9018.87,
+     8441.87
+    ]
+   ],
+   "area_maxima_m2": 0.0045,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    32698,
+    32700
+   ],
+   "centros": [
+    [
+     7102.32,
+     8560.73
+    ],
+    [
+     7098.1,
+     8589.02
+    ]
+   ],
+   "area_maxima_m2": 0.0043,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    33314,
+    33315
+   ],
+   "centros": [
+    [
+     8249.18,
+     8893.92
+    ],
+    [
+     8270.26,
+     8904.8
+    ]
+   ],
+   "area_maxima_m2": 0.0034,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    35473,
+    35474
+   ],
+   "centros": [
+    [
+     8434.31,
+     6681.74
+    ],
+    [
+     8455.02,
+     6690.46
+    ]
+   ],
+   "area_maxima_m2": 0.0029,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    38523,
+    38524
+   ],
+   "centros": [
+    [
+     11250.41,
+     7123.36
+    ],
+    [
+     11278.46,
+     7128.02
+    ]
+   ],
+   "area_maxima_m2": 0.0017,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    35665,
+    35666
+   ],
+   "centros": [
+    [
+     8704.8,
+     6835.1
+    ],
+    [
+     8681.61,
+     6836.03
+    ]
+   ],
+   "area_maxima_m2": 0.0016,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  },
+  {
+   "techos_al_decidir": [
+    37122,
+    37123
+   ],
+   "centros": [
+    [
+     9464.16,
+     7386.27
+    ],
+    [
+     9448.67,
+     7406.44
+    ]
+   ],
+   "area_maxima_m2": 0.0007,
+   "clase": "contacto_de_esquina",
+   "motivo": "Contacto de dos techos en una esquina o medianera, más ancho que 1 mm: las huellas no se pisan, pero las alturas de las dos casas se cruzan en la línea que comparten."
+  }
+ ]
+}

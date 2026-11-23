@@ -372,3 +372,15 @@ def test_orientar_a_una_calle_acepta_un_costado_libre_en_su_mayoria():
     manzana[0:28, 0:20] = True
     manzana[25:28, 20:40] = True                     # toca el último décimo del costado
     assert orientar_a_una_calle((0, 0), (1, 0), 10, 14, calle, METRO, manzana=manzana)[1] == pytest.approx((0, 1))
+
+
+def test_orientar_a_una_calle_oblicua_no_vuelve_a_pedir_libre_al_frente():
+    # el frente ya es un lado libre (lo eligió marco_de_casa): aunque la máscara de la cuadra siga delante de él (el lote
+    # no llega al borde de la cuadra), la calle oblicua lo reorienta
+    from tools.geo.alas import orientar_a_una_calle
+    d = np.array([math.cos(math.radians(40)), math.sin(math.radians(40))])
+    centro = np.array([40, 18])                       # el lote empieza en (30, 30): la calle, 12 px delante
+    calle = [{'tramo': 'L1:A-B', 'medible': True, 'puntos': [list(centro - d * 60), list(centro + d * 60)]}]
+    manzana = np.ones((100, 100), bool)               # la cuadra entera, también delante del frente del lote
+    _o, eu, _a, _f = orientar_a_una_calle((30, 30), (1, 0), 10, 14, calle, METRO, manzana=manzana)
+    assert abs(abs(float(np.dot(eu, d))) - 1) < 1e-6

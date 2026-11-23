@@ -242,7 +242,34 @@ def frentes_de_casas(calles, casas, metro=METRO, obstaculos=()):
     return salida
 
 
-def puerta_fase6(cubiertas, ciudad, calles, red, hitos, fases, sha256, metro=METRO):
+CENTRO_M = 1.0    # el centro de la huella de una casa registrada como límite, a menos de esto: es la misma casa
+
+
+def con_limites_fase6(desviadas, cruces, huellas, limites, metro=METRO):
+    """(desviadas, cruces) con la clase del límite documentado que los cubre (limites-fase6.json, decisión del
+    responsable del 23-11-2026). Los índices de techo cambian al regenerar: cada casa se reconoce por el centro de su
+    huella (a menos de CENTRO_M). Un cruce registrado cuenta como límite solo si no pasa su área máxima."""
+    centros = {t: np.asarray(g.centroid.coords[0]) for t, g in huellas.items()}
+
+    def es(t, centro):
+        return t in centros and float(np.hypot(*(centros[t] - np.asarray(centro, float)))) * metro < CENTRO_M
+
+    salida_d = []
+    for x in desviadas:
+        reg = next((r for r in limites.get('cumbreras', []) if es(x['techo'], r['centro'])), None)
+        salida_d.append({**x, 'limite': reg['clase']} if reg else dict(x))
+    salida_c = []
+    for x in cruces:
+        a, b = x['techos']
+        reg = next((r for r in limites.get('cruces', [])
+                    if x['area_proyectada_m2'] <= r['area_maxima_m2']
+                    and ((es(a, r['centros'][0]) and es(b, r['centros'][1])) or (es(a, r['centros'][1]) and es(b, r['centros'][0])))),
+                   None)
+        salida_c.append({**x, 'limite': reg['clase']} if reg else dict(x))
+    return salida_d, salida_c
+
+
+def puerta_fase6(cubiertas, ciudad, calles, red, hitos, fases, sha256, metro=METRO, limites=None):
     """Criterios de la fase 6 sobre los techos de las casas visibles de 1772; `fase_6_cerrable` exige todos."""
     casas = visibles(casas_de_epoca(ciudad), hitos)
     a_la_vista = {k for k, _ in casas}
@@ -256,14 +283,19 @@ def puerta_fase6(cubiertas, ciudad, calles, red, hitos, fases, sha256, metro=MET
     desviadas = cumbreras_desviadas(triangulos, frentes, metro, fuera_de_recta=fuera)
     con_cumbrera = casas_con_cumbrera_medible(triangulos, frentes, metro, fuera_de_recta=fuera)
     aleros = aleros_en_la_calle(triangulos, [c['poligono'] for c in corredores(red, metro=metro)], metro, huellas=dict(casas))
+    desviadas, cruces = con_limites_fase6(desviadas, cruces, dict(casas), limites or {}, metro)
+    fuera_d = [x for x in desviadas if 'limite' not in x]
+    fuera_c = [x for x in cruces if 'limite' not in x]
     criterios = OrderedDict([
         ('triangulos_sin_degenerar', {'cumplido': not degenerados, 'triangulos': len(triangulos),
                                       'degenerados': len(degenerados),
                                       'casas': sorted({d['techo'] for d in degenerados})}),
-        ('techos_sin_cruces', {'cumplido': not cruces, 'pares': len(cruces), 'mayores': cruces[:20]}),
-        ('cumbreras_con_el_frente', {'cumplido': not desviadas, 'giro_maximo_grados': GIRO_MAXIMO_GRADOS,
+        ('techos_sin_cruces', {'cumplido': not fuera_c, 'pares': len(cruces), 'pares_en_limite': len(cruces) - len(fuera_c),
+                               'pares_fuera_de_limite': len(fuera_c), 'mayores': cruces[:40]}),
+        ('cumbreras_con_el_frente', {'cumplido': not fuera_d, 'giro_maximo_grados': GIRO_MAXIMO_GRADOS,
                                      'casas_medidas': len(con_cumbrera), 'desviadas': len(desviadas),
-                                     'casas': desviadas}),
+                                     'desviadas_en_limite': len(desviadas) - len(fuera_d),
+                                     'desviadas_fuera_de_limite': len(fuera_d), 'casas': desviadas}),
         ('aleros_fuera_de_la_calle', {'cumplido': not aleros, 'umbral_m2': ALERO_EN_CALLE_M2, 'casas': aleros}),
         ('mismo_trazado_que_la_fase_5', mismo_trazado(fases, sha256)),
     ])
@@ -305,7 +337,8 @@ def main():
     if motivo:
         raise SystemExit(f'cierre_fase6: {motivo}; hay que sacarlas de nuevo (node tools/cubiertas.mjs)')
     fases = {k: _leer(args.carpeta / f'cierre-fase{k}.json') for k in (3, 4, 5)}
-    puerta = puerta_fase6(cubiertas, ciudad, calles, red, hitos, fases, sha256)
+    registro = args.carpeta / 'limites-fase6.json'
+    puerta = puerta_fase6(cubiertas, ciudad, calles, red, hitos, fases, sha256, limites=_leer(registro) if registro.exists() else None)
     informe = OrderedDict([
         ('alcance', 'Puerta de salida de la fase 6 de 1772 (specs/08), medida sobre los techos del visor reproducidos en '
                     'CPU (tools/cubiertas.mjs). Cuenta lo medido; no certifica fidelidad.'),
