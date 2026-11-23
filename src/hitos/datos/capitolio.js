@@ -17,9 +17,11 @@ const esquinas = ESQUINAS_PX.map(([px, py]) => {
   const [ux, uy, dx, dy] = [marco.eje[0] / n, marco.eje[1] / n, px - marco.x, py - marco.y]
   return [(dx * ux + dy * uy) * METRO, (-dx * uy + dy * ux) * METRO]
 })
-// la terraza del relieve es un rectángulo en el marco: el que cubre la manzana
+// la terraza del relieve es un rectángulo en el marco: el inscrito en la manzana (uno que la cubriera se metería en
+// las calles y se vería su piso). En las puntas del trapecio queda fuera hasta ~6 m, con la pendiente de la manzana
+// (6 m en 130 m), unos 0,3 m bajo el muro
 export const MANZANA = Object.freeze({
-  ancho: 2 * Math.max(...esquinas.map(([a]) => Math.abs(a))), fondo: 2 * Math.max(...esquinas.map(([, b]) => Math.abs(b))),
+  ancho: 2 * Math.min(...esquinas.map(([a]) => Math.abs(a))), fondo: 2 * Math.min(...esquinas.map(([, b]) => Math.abs(b))),
 })
 export const capitolio = Object.freeze({
   id: 'capitolio', nombre: 'Capitolio (Palacio Federal y Legislativo)', ...marco, nace: 1, muere: 0,
