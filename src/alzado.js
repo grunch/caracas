@@ -247,7 +247,7 @@ function tramoDePared({ casa, a, b, largo, n, aLaCalle }, t0, t1, salida) {
  */
 function hayVecinaAfuera(casa, p0, p1, n, vuelo) {
   if (!casa.ocupado) return false
-  for (const t of [0.1, 0.5, 0.9]) {
+  for (const t of [0.02, 0.1, 0.5, 0.9, 0.98]) {
     const [u, v] = mezcla(p0, p1, t)
     for (const d of [0.1, vuelo]) if (casa.ocupado(u + n[0] * d, v + n[1] * d)) return true
   }
