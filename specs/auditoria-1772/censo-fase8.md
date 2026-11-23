@@ -48,6 +48,29 @@ La extensión de cada sector sale de lo edificado revisado de sus unidades (fase
 
 Datos regenerados desde `vectorizar` sobre la rama, con 6315 casas de 1772 a la vista: la franja suma 18. **Las puertas de las fases 3, 4, 5, 6 y 7 dan cerrable** sobre la misma ciudad, con los límites documentados.
 
+## Casas fuera de lo rojo del original (informe)
+
+**Por decisión del responsable del 23-11-2026**, se mide sin poner ninguna regla en el generador: [fuera-del-rojo.json](fuera-del-rojo.json). Se cuentan las casas de 1772 a la vista con menos del 20 % de su huella sobre lo rojo del original (`fuentes/derivados/1936/edificado-1772.png`, ensanchado 2 m). Sobre la ciudad de T33j.8c son **346 de 6315** (5,5 %):
+
+| Sector | Casas | Sector | Casas |
+|---|---:|---|---:|
+| S1772-11 | 20 | S1772-31 | 24 |
+| S1772-12 | 13 | S1772-32 | 68 |
+| S1772-13 | 5 | S1772-33 | 32 |
+| S1772-21 | 11 | S1772-34 | 2 |
+| S1772-22 | 72 | S1772-42 | 19 |
+| S1772-23 | 52 | S1772-43 | 18 |
+| S1772-24 | 10 | | |
+
+Cada casa va al sector cuyo edificado o tramo de calle queda más cerca.
+
+`tools/geo/censo_fase8.py --informe-rojo` arma un panel de cada una de las 12 zonas de 150 m con más casas, fuera de git. Revisé a ojo las 8 primeras:
+- **La mayoría** son casas aisladas chicas, corridas unos metros respecto de su propia mancha roja. Es el error del calce: una casa de 10 m corrida 4 m ya cae casi entera fuera de un rojo ensanchado 2 m. El original sí la dibuja.
+- **Lo demás** son casas al borde de una franja, sobre la orilla de la calle, con el mismo corrimiento.
+- **No vi** casas en lugares donde el original no dibuje nada, salvo unas pocas junto a una calle en la zona 8 ([8100, 4800, 8400, 5100] px). Esas quedan para revisar.
+
+El número no mide casas inventadas: mide sobre todo cuánto corre el calce las casas chicas. Una regla en el generador que las quitara borraría casas que el original dibuja.
+
 ## Reproducir
 
 ```

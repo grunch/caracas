@@ -52,6 +52,47 @@ def leer_calzado(ruta):
     return cv2.cvtColor(img, cv2.COLOR_RGBA2BGR if img.shape[2] == 4 else cv2.COLOR_RGB2BGR)
 
 
+FUERA_DEL_ROJO = 0.2       # menos que esto de la huella sobre lo rojo del original: la casa cae casi entera fuera
+TOLERANCIA_ROJO_M = 2.0    # lo rojo se ensancha esto: el calce y el trazado corren el borde unos metros
+ZONA_PX = 300              # las casas fuera de lo rojo se agrupan en zonas de este lado para los paneles
+ZONAS_EN_PANELES = 12
+
+
+def casas_fuera_del_rojo(casas, rojo, tolerancia_px, fraccion=FUERA_DEL_ROJO):
+    """[{techo, sobre_el_rojo, centro}] de las casas con menos de `fraccion` de su huella sobre lo rojo del original
+    (`rojo`: máscara 0/1 en px del plano base, ensanchada `tolerancia_px`). Es un informe, no una regla del generador
+    (decisión del responsable del 23-11-2026): parte de lo que cae fuera es el error del calce."""
+    if tolerancia_px > 0:
+        lado = 2 * int(round(tolerancia_px)) + 1
+        rojo = cv2.dilate(rojo.astype(np.uint8), np.ones((lado, lado), np.uint8))
+    salida = []
+    for k, g in casas:
+        x0, y0, x1, y1 = (int(np.floor(g.bounds[0])), int(np.floor(g.bounds[1])), int(np.ceil(g.bounds[2])),
+                          int(np.ceil(g.bounds[3])))
+        if x1 <= x0 or y1 <= y0:
+            continue
+        huella = np.zeros((y1 - y0, x1 - x0), np.uint8)
+        cv2.fillPoly(huella, [(np.asarray(g.exterior.coords) - (x0, y0)).round().astype(np.int32)], 1)
+        area = int(huella.sum())
+        trozo = rojo[max(y0, 0):y1, max(x0, 0):x1]
+        sobre = int((huella[max(0, -y0):max(0, -y0) + trozo.shape[0], max(0, -x0):max(0, -x0) + trozo.shape[1]]
+                     & (trozo > 0)).sum()) if trozo.size else 0
+        if area and sobre < fraccion * area:
+            c = g.centroid
+            salida.append({'techo': k, 'sobre_el_rojo': round(sobre / area, 2), 'centro': [round(c.x), round(c.y)]})
+    return salida
+
+
+def sector_de_punto(punto, edificado, sector_de, tramos):
+    """El sector de un punto (px del plano base) por pertenencia: el de lo edificado de sus unidades o de sus tramos de
+    calle que queda más cerca. Las cajas de extension_de_sectores son para recortar paneles y se solapan."""
+    from shapely.geometry import LineString, Point
+    p = Point(punto)
+    candidatos = [(q.distance(p), sector_de[e['id']]) for e in edificado if e['id'] in sector_de for q in e['poligonos']]
+    candidatos += [(LineString(t['puntos']).distance(p), t['sector']) for t in tramos if len(t['puntos']) >= 2]
+    return min(candidatos)[1] if candidatos else 'sin_sector'
+
+
 def recorte_de(extension, imagen, metro=METRO, margen_m=MARGEN_M):
     """El recorte (px del plano base, enteros) de una extensión con su margen, dentro de lo que cubre la imagen."""
     m = margen_m / metro
@@ -90,6 +131,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('ciudad', type=Path)
     ap.add_argument('salida', type=Path)
+    ap.add_argument('--informe-rojo', type=Path, default=None,
+                    help='además, el informe de las casas fuera de lo rojo del original (JSON) y sus paneles')
     args = ap.parse_args()
     ref = Path(__file__).parent / 'referencias'
     red = json.loads((ref / '1772-red.json').read_text(encoding='utf-8'))
@@ -98,7 +141,8 @@ def main():
     edificado = cargar_edificado_de_archivos(raiz / 'specs' / 'auditoria-1772', red, unidades)
     hitos = json.loads(subprocess.run(['node', str(raiz / 'tools' / 'hitos-planta.mjs')], check=True, capture_output=True,
                                       text=True, cwd=raiz).stdout)
-    casas = [g for _, g in visibles(casas_de_epoca(json.loads(args.ciudad.read_text(encoding='utf-8'))), hitos)]
+    a_la_vista = visibles(casas_de_epoca(json.loads(args.ciudad.read_text(encoding='utf-8'))), hitos)
+    casas = [g for _, g in a_la_vista]
     plantas = plantas_en_pie(hitos)
     calce = json.loads((raiz / 'fuentes' / 'derivados' / '1772' / 'calzado.json').read_text(encoding='utf-8'))
     calzado = leer_calzado(raiz / 'fuentes' / 'derivados' / '1772' / 'calzado.tif')
@@ -112,6 +156,39 @@ def main():
             continue
         escribir_panel(args.salida / f'{sector}.jpg', panel(calzado, imagen, rec, casas, plantas, tramos))
         print(f'{sector}: {rec}')
+    if args.informe_rojo:
+        informe_rojo(args, raiz, a_la_vista, edificado, sector_de, tramos, calzado, imagen, plantas)
+
+
+def informe_rojo(args, raiz, a_la_vista, edificado, sector_de, tramos, calzado, imagen, plantas):
+    """El informe de las casas de 1772 casi enteras fuera de lo rojo del original (fuentes/derivados/1936/
+    edificado-1772.png, lo rojo del 1772 calzado), por sector, y un panel de cada zona con más de ellas."""
+    from collections import Counter
+    rojo = cv2.imread(str(raiz / 'fuentes' / 'derivados' / '1936' / 'edificado-1772.png'), cv2.IMREAD_UNCHANGED)
+    rojo = (rojo if rojo.ndim == 2 else rojo[..., 0]) > 0
+    fuera = casas_fuera_del_rojo(a_la_vista, rojo, TOLERANCIA_ROJO_M / METRO)
+    for f in fuera:
+        f['sector'] = sector_de_punto(f['centro'], edificado, sector_de, tramos)
+    zonas = Counter((f['centro'][0] // ZONA_PX, f['centro'][1] // ZONA_PX) for f in fuera).most_common(ZONAS_EN_PANELES)
+    por_id = dict(a_la_vista)
+    for i, ((zx, zy), n) in enumerate(zonas):
+        rec = recorte_de((zx * ZONA_PX, zy * ZONA_PX, (zx + 1) * ZONA_PX, (zy + 1) * ZONA_PX), imagen, margen_m=20)
+        suyas = [por_id[f['techo']] for f in fuera if (f['centro'][0] // ZONA_PX, f['centro'][1] // ZONA_PX) == (zx, zy)]
+        escribir_panel(args.salida / f'fuera-del-rojo-{i + 1:02d}.jpg', panel(calzado, imagen, rec, suyas, plantas, tramos))
+    informe = {
+        'alcance': 'Casas de 1772 a la vista con menos del 20 % de su huella sobre lo rojo del original (ensanchado '
+                   f'{TOLERANCIA_ROJO_M} m), por sector. Es un informe para decidir con evidencia, no una regla del generador '
+                   '(decisión del responsable del 23-11-2026): parte de lo que cae fuera es el error del calce. Los paneles '
+                   '(fuera-del-rojo-NN.jpg) quedan fuera de git.',
+        'umbrales': {'fraccion': FUERA_DEL_ROJO, 'tolerancia_m': TOLERANCIA_ROJO_M, 'zona_px': ZONA_PX},
+        'casas_1772': len(a_la_vista), 'fuera': len(fuera),
+        'por_sector': dict(sorted(Counter(f['sector'] for f in fuera).items())),
+        'zonas_en_paneles': [{'panel': f'fuera-del-rojo-{i + 1:02d}.jpg', 'caja_px': [zx * ZONA_PX, zy * ZONA_PX,
+                              (zx + 1) * ZONA_PX, (zy + 1) * ZONA_PX], 'casas': n} for i, ((zx, zy), n) in enumerate(zonas)],
+        'casas': fuera,
+    }
+    args.informe_rojo.write_text(json.dumps(informe, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+    print(f'casas fuera de lo rojo: {len(fuera)} de {len(a_la_vista)}')
 
 
 if __name__ == '__main__':
