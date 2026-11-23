@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest'
 import { DataUtils, HalfFloatType, RedFormat } from 'three'
 import {
   decodificarRelieve, muestrear, crearRelieve, hinchado, alturaSuelo, texturaRelieve, uniformsRelieve, subdivisionDeLaHoja,
-  terrazasDeHitos, ponerRelieve, GLSL_RELIEVE, TALUD_M, MAX_TERRAZAS,
+  terrazasDeHitos, ponerRelieve, GLSL_RELIEVE, GLSL_TERRAZAS_TAPADAS, TALUD_M, MAX_TERRAZAS,
 } from '../../src/relieve.js'
 
 /** relieve.bin sintético: Uint16 LE [w, h, alturas en dm…] */
@@ -138,8 +138,8 @@ describe('terrazas: un hito grande asentado en la ladera (el convento de las Con
 
   test('las terrazas salen de los hitos que la piden, en metros del mundo y con su eje', () => {
     const coords = { metro: 0.5, aMundo: (px, py) => ({ x: (px - 100) * 0.5, z: (py - 50) * 0.5 }) }
-    const hitos = [{ id: 'a', x: 120, y: 70, eje: [3, 4], terraza: { ancho: 60, fondo: 40 } }, { id: 'b', x: 0, y: 0, eje: [1, 0] }]
-    expect(terrazasDeHitos(hitos, coords)).toEqual([{ x: 10, z: 10, eje: [0.6, 0.8], medioA: 30, medioB: 20 }])
+    const hitos = [{ id: 'a', x: 120, y: 70, eje: [3, 4], nace: 1, terraza: { ancho: 60, fondo: 40 } }, { id: 'b', x: 0, y: 0, eje: [1, 0] }]
+    expect(terrazasDeHitos(hitos, coords)).toEqual([{ x: 10, z: 10, eje: [0.6, 0.8], medioA: 30, medioB: 20, vida: [1, 0] }])
   })
 
   test('el shader aplana igual: hasta MAX_TERRAZAS en uniforms, con la altura del centro al cargar el relieve', () => {
@@ -153,5 +153,12 @@ describe('terrazas: un hito grande asentado en la ladera (el convento de las Con
     expect(GLSL_RELIEVE).toContain('float relieveCrudo(vec2 xz)')
     expect(GLSL_RELIEVE).toMatch(/sueloEn\(vec2 xz\) \{\s*return conTerrazas\(xz, relieveCrudo\(xz\)\)/)
     expect(() => uniformsRelieve(hoja31, Array(MAX_TERRAZAS + 1).fill(terraza))).toThrow(/terrazas/)
+  })
+
+  test('donde el hito está en pie, su plataforma tapa el suelo: el fragmento del suelo se descarta (sin rampas de la malla)', () => {
+    const U = uniformsRelieve(hoja31, [{ ...terraza, vida: [1, 0] }])
+    expect(U.uTerrazaVida.value[0].toArray()).toEqual([1, 0])
+    expect(GLSL_TERRAZAS_TAPADAS).toContain('bool bajoUnHito(vec2 xz)')
+    expect(GLSL_TERRAZAS_TAPADAS).toContain('vivoEn(uTerrazaVida[i], epocaAqui(length(xz)))')
   })
 })
