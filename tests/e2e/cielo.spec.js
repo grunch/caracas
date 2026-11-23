@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 // El cielo de los recorridos (src/cielo.js): al caminar, manejar o volar, papel en tinta y celeste en color; en el
-// mapa, la mesa oscura.
+// mapa, la mesa (src/mesa.js).
 test.use({ viewport: { width: 900, height: 560 } })
 
 /**
