@@ -6,7 +6,7 @@
  */
 
 export const RADIO_M = 0.4
-export const VELOCIDAD = Object.freeze({ paso: 2.5, corre: 7 }) // m/s: un paso largo y una carrera (el centro es chico)
+export const VELOCIDAD = Object.freeze({ paso: 12 / 3.6, corre: 7 }) // m/s: un trote rápido (12 km/h) y una carrera (25 km/h)
 const CELDA_M = 20
 const LEJOS_M = 1500 // con la cámara más lejos que esto, se entra en la plaza
 const BUSCAR_HASTA_M = 120 // hasta salir de la planta de un hito grande (el Capitolio: 92 × 108 m; revisión de #152)
