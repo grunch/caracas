@@ -13,6 +13,7 @@ test('«Volar» despega con el avión a la vista; vuela solo, gira con D y Esc a
   const vista = () => page.evaluate(() => { const { x, z, dist, yaw, pitch } = window.lab.cam.goal; return { x, z, dist, yaw, pitch } })
   const mapa = await vista()
 
+  await page.locator('#recorrer').click()   // los modos están bajo «Recorrer»
   await page.locator('#volar').click()
   await expect(page.locator('body')).toHaveClass(/modo-volar/)
   await expect(page.locator('#volar')).toHaveText('Volver al mapa')

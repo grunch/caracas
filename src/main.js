@@ -40,6 +40,7 @@ import { crearModoAPie } from './a-pie-modo.js'
 import { hitosConPlanta } from './hitos/plantas.js'
 import { crearModoVolar } from './volar-modo.js'
 import { crearModoManejar } from './manejar-modo.js'
+import { crearMenuRecorrer } from './recorrer.js'
 import { crearCielo, cieloDeModo } from './cielo.js'
 
 const params = new URLSearchParams(location.search)
@@ -346,7 +347,10 @@ function alternarColor(prender = colorObjetivo === 0) {
   const boton = document.getElementById('color')
   boton.setAttribute('aria-pressed', String(prender))
   boton.classList.toggle('on', prender)
-  boton.textContent = prender ? 'Tinta' : 'Color'
+  // un botón de ícono (la gota): lo que hace va en su nombre accesible y en su título
+  const accion = prender ? 'Ver en tinta' : 'Ver en color'
+  boton.setAttribute('aria-label', accion)
+  boton.title = `${accion} (C)`
   if (prender) pedirMascaras()
   pedirCuadro(3)
 }
@@ -432,12 +436,14 @@ const TEXTO_MODO = Object.freeze({
   volar: { boton: 'Volar', titulo: 'En avión', raton: 'A y D giran, W y S suben y bajan, Mayús acelera, Q y E cambian el año. Esc aterriza.', dedos: 'Un dedo gira y sube o baja.' },
 })
 let callarAyuda = null
+const menuRecorrer = crearMenuRecorrer({ grupo: document.getElementById('recorrer-grupo'), boton: document.getElementById('recorrer') })
 /** Lo común a los modos al entrar o salir: clases del body, botones y el cartel (su ayuda se calla a los 12 s). */
 function cambioDeModo(nombre, dentro) {
   document.body.classList.toggle('modo', dentro)
   document.body.classList.toggle(`modo-${nombre}`, dentro)
   const boton = document.getElementById(nombre)
-  boton.textContent = dentro ? 'Volver al mapa' : TEXTO_MODO[nombre].boton
+  boton.querySelector('.rotulo').textContent = dentro ? 'Volver al mapa' : TEXTO_MODO[nombre].boton
+  if (dentro) menuRecorrer.cerrar()
   boton.setAttribute('aria-pressed', String(dentro))
   avisoModo.hidden = !dentro
   cielo.mostrar(cieloDeModo(document.body.classList))

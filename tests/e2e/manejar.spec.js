@@ -12,7 +12,12 @@ test('«Manejar» sube al vehículo de la época; anda, V cambia la vista, N cam
   await page.evaluate(() => { window.lab.ciudad.U.uOlaEpoca.value = 9000 })
   const boton = page.locator('#manejar')
   // las casas llegan después de ready: se sube cuando están
-  await expect.poll(async () => { await boton.click(); return page.evaluate(() => window.lab.enCoche.activo) }, { timeout: 60000 }).toBe(true)
+  // los modos están bajo «Recorrer»: se abre si hace falta (el clic se repite hasta que lleguen los datos)
+  await expect.poll(async () => {
+    if (!(await boton.isVisible())) await page.locator('#recorrer').click()
+    await boton.click()
+    return page.evaluate(() => window.lab.enCoche.activo)
+  }, { timeout: 60000 }).toBe(true)
 
   await expect(page.locator('body')).toHaveClass(/modo-manejar/)
   await expect(boton).toHaveText('Volver al mapa')
