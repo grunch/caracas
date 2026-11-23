@@ -334,12 +334,13 @@ def _da_a_una_calle(p, q, normal, calles72, metro):
 
 
 def _lado_libre(p, q, afuera, manzana, metro):
-    """¿Lo que hay justo afuera del lado p→q (px) está fuera de la manzana? Como _libres: tres puntos a lo largo, a 2 y
+    """¿Lo que hay justo afuera del lado p→q (px) está fuera de la manzana? Cinco puntos a lo largo (hasta cerca de
+    las puntas, donde toca el lote de la otra calle en la esquina), a 2 y
     4 m hacia afuera; libre si todos caen fuera de la máscara (un costado que toca otra casa en parte llevaría su
     alero encima de ella)."""
     p, q, afuera = (np.asarray(x, float) for x in (p, q, afuera))
     fuera = total = 0
-    for t in (0.2, 0.5, 0.8):
+    for t in (0.05, 0.2, 0.5, 0.8, 0.95):
         for d in (2.0, 4.0):
             x, y = p + (q - p) * t + afuera * d / metro
             i, j = int(math.floor(y)), int(math.floor(x))
