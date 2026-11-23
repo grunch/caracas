@@ -187,7 +187,8 @@
     {
       "id": "I1772-006",
       "categoria": "metadatos_datos",
-      "estado": "corregido_en_codigo_pendiente_revision_y_publicacion",
+      "estado": "corregido_y_publicado",
+      "publicacion_comprobada": "datos-2026-11-23-82cd470 (conteos-publicados.md)",
       "prioridad": "P1",
       "baseline": "B1772-001",
       "observacion": "conteos.techos=35089 en manifiesto; parte techos del pak tiene 541648 bytes / 16 bytes por registro = 33853. Hash coincide local/publicado. Diferencia 1236 registros, no un conteo de casas faltantes en 1772.",

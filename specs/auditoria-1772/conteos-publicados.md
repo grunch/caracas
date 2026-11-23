@@ -63,3 +63,22 @@ retenida aprobó después del refuerzo (12,5 segundos, salida 0). No cambió
 la geometría ni se publicó un release.
 El archivo completo de acabado aprobó sus cuatro casos después del refuerzo
 (43,9 segundos, salida 0).
+
+## Publicación comprobada (T33j.8a, 23-11-2026)
+
+Release `datos-2026-11-23-82cd470`: los datos de `main` en 82cd470 (las fases 1 a 8 hasta #159, con #158 y #160),
+regenerados desde los escaneos con `npm run datos` y publicados con `npm run datos:publicar`. Pages lo desplegó (el
+sitio baja el release con `published_at` más nuevo). En un worktree limpio de `main`, `npm run datos:bajar` bajó el
+paquete y verificó sus 118 archivos contra el sha256 del manifiesto. El `.pak` publicado, leído con el lector del visor
+(`src/pak.js`, después de `gunzip`), da:
+
+| Etapa | Techos | Árboles | Manzanas |
+|---|---:|---:|---:|
+| Paquete publicado (registros del `.pak` y de `arboles.bin`) | 38.921 | 37.407 | No serializadas |
+| `conteos` del manifiesto publicado | 38.921 | 37.407 | — |
+| Derivado de origen (`conteos_origen`) | 39.549 | 5.926 | 8.023 |
+
+Los conteos del manifiesto coinciden con los registros del paquete. `node tools/datos.mjs --verificar` termina con
+código 0 sobre el mismo `public/`, que es idéntico archivo por archivo al publicado. SHA-256 de `ciudad.pak`:
+`5a2e3ed2b424e843f2fe911ac2768c3cfc2de33b244deaf88402c1ba9f78050f`; de `arboles.bin`:
+`891548c348f25eaad02b81bfff38dc30433cf591891a4ae6112b53423b5ac115`. I006 queda corregido y publicado.
