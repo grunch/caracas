@@ -463,6 +463,48 @@ def alinear_1772(ciudad, tramos, hitos, red72, verificadas, metro):
     return con_huellas(ciudad, nuevas)
 
 
+def sin_solapes_residuales(ciudad, hitos, metro):
+    """La ciudad sin los solapes residuales entre casas de 1772 a la vista (T33j.6j, decisión del responsable del
+    23-11-2026): dos huellas que se pisan, aunque sea menos que el umbral de la fase 5 (0,01 m²), cruzan sus techos.
+    El área común se le resta a la más grande de las dos que se pueda tocar (de la reconstrucción); las de 1936 y de
+    1578 no se tocan. La huella sigue siendo un polígono válido sin huecos. → una ciudad nueva; no muta la entrada."""
+    import shapely
+    from shapely.geometry import Polygon
+    from shapely.strtree import STRtree
+    from cierre_fase3 import casas_de_epoca
+    from cierre_fase4 import visibles
+    casas = visibles(casas_de_epoca(ciudad), hitos)
+    n = len(ciudad.get("antes", []))
+    movibles = {k for k, _ in casas if k < n and ciudad["antes"][k] and ciudad["junta"][k] >= 0}
+    huellas = dict(casas)
+    orden = [k for k, _ in casas]
+    arbol = STRtree([g for _, g in casas])
+    nuevas = {}
+    for i, k in enumerate(orden):
+        for j in arbol.query(huellas[k]):
+            otra = orden[j]
+            if otra <= k:
+                continue
+            a, b = nuevas.get(k, huellas[k]), nuevas.get(otra, huellas[otra])
+            comun = a.intersection(b)
+            if comun.area <= 0:
+                continue
+            candidatas = [t for t in (k, otra) if t in movibles]
+            if not candidatas:
+                continue
+            cede = max(candidatas, key=lambda t: nuevas.get(t, huellas[t]).area)
+            otra_g = b if cede == k else a
+            resto = nuevas.get(cede, huellas[cede]).difference(otra_g)
+            partes = [q for q in getattr(resto, "geoms", [resto]) if q.geom_type == "Polygon" and not q.is_empty]
+            if not partes:
+                continue
+            mayor = shapely.set_precision(Polygon(max(partes, key=lambda q: q.area).exterior), 1e-3)
+            if mayor.geom_type == "Polygon" and mayor.is_valid and not mayor.interiors and mayor.area > 0.5 * huellas[cede].area:
+                nuevas[cede] = mayor
+    print(f"casas de 1772 sin su solape residual con la vecina: {len(nuevas)}")
+    return con_huellas(ciudad, nuevas) if nuevas else ciudad
+
+
 VUELO_MAXIMO_M = 0.8   # el alero más largo del visor (src/techos.js y src/alas.js: 0,5 + 0,3 · azar)
 SIN_TOPE = 255         # en "vuelos", un byte por techo: centímetros que puede volar su alero; esto, sin tope
 
@@ -732,6 +774,7 @@ def main():
         ciudad["vida"] = ceder_frentes_a_1772(ciudad, json.loads(calles72.read_text())["tramos"], hitos, metro, desde)
         ciudad = alinear_1772(ciudad, json.loads(calles72.read_text())["tramos"], hitos, red72, verificadas, metro)
         ciudad = dar_acceso_1772(ciudad, hitos, metro)
+        ciudad = sin_solapes_residuales(ciudad, hitos, metro)
         ciudad = vuelos_1772(ciudad, hitos, red72, metro)
         print(f"calles de 1772 bloqueadas en la ciudad final: {len(sin_abrir)} {sin_abrir[:10]}")
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))

@@ -399,3 +399,26 @@ def test_vuelos_1772_topa_el_alero_de_la_casa_que_queda_cerca_del_nucleo_de_la_c
     nueva = vuelos_1772(ciudad, [], red, METRO)
     assert nueva['vuelos'] == [30, 255]
     assert 'vuelos' not in ciudad
+
+
+def test_sin_solapes_residuales_resta_el_solape_a_la_casa_mas_grande():
+    # T33j.6j: dos casas de 1772 vecinas se pisan 0,2 × 10 px (menos que el umbral de la fase 5): el solape se le
+    # resta a la más grande; una casa de 1936 (antes = 0) no se toca
+    from tools.geo.epocas import sin_solapes_residuales
+    figuras = [box(0, 0, 20.2, 10), box(20, 0, 30, 10), box(40, 0, 50.2, 10), box(50, 0, 70, 10)]
+    vertices, techos = [], []
+    for f in figuras:
+        puntos = list(f.exterior.coords)[:-1]
+        techos.append([len(vertices) // 2, len(puntos), 1, 0, 0])
+        vertices.extend(c for p in puntos for c in p)
+    ciudad = {'vertices': vertices, 'techos': techos, 'vida': [[1, 2]] * 4, 'antes': [1, 1, 1, 0], 'junta': [7, 7, 7, -1]}
+    nueva = sin_solapes_residuales(ciudad, [], METRO)
+    v = nueva['vertices']
+
+    def huella(k):
+        a, n = nueva['techos'][k][:2]
+        return Polygon([(v[2 * (a + i)], v[2 * (a + i) + 1]) for i in range(n)])
+    assert huella(0).intersection(huella(1)).area < 1e-9 and abs(huella(0).area - 200) < 1e-6   # la grande cede
+    assert huella(1).equals(figuras[1])
+    assert huella(2).intersection(huella(3)).area < 1e-9 and huella(3).equals(figuras[3])     # la de 1936 queda
+    assert len(ciudad['vertices']) == len(vertices)
