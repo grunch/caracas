@@ -483,10 +483,10 @@ def cerrar_aberturas_1772(ciudad, tramos, hitos, red72, verificadas, edificado, 
     print(f"casas de 1772 que cierran una abertura del frente: {len(nuevas)}")
     if not nuevas:
         return ciudad
-    # la casa que crece conserva la dirección de su marco (el frente sigue en su calle: el cierre corre a lo largo de la
-    # fachada) pero pierde sus alas, que eran de la casa sin el hueco: el visor la ajusta a su huella en ese marco
-    return {**con_huellas(ciudad, nuevas),
-            "marcos": [[*m[:10], 0] if m[0] in nuevas else m for m in ciudad.get("marcos", [])]}
+    # la casa que crece conserva su marco y sus alas: el cierre es una crujía a lo largo de su fachada (CIERRE_FONDO_M,
+    # de la calle de su frente), y el visor estira las alas del borde sobre la franja nueva. Sin las alas, o sin el
+    # marco, le cambiaba el techo y le giraba la cumbrera (34538, 36248 y 38442 en la fase 6)
+    return con_huellas(ciudad, nuevas)
 
 
 def sin_solapes_residuales(ciudad, hitos, metro):
