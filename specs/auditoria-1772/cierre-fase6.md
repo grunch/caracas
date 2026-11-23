@@ -150,10 +150,23 @@ Por decisión del responsable del 22-11-2026, se siguen corrigiendo las cumbrera
 
 Las fases 3, 4 y 5 siguen cerrables con el Capitolio (6303 casas de 1772 a la vista).
 
-## Lo que sigue
+## Después de T33j.6i (segunda parte) y T33j.6j: cierre
 
-- Los 17 cruces y las 31 cumbreras que quedan, uno por uno.
-- La regla de specs/08 vale: un PR de techos no cambia calles, lotes ni ocupación para que un techo deje de fallar.
+- **El lote oblicuo no le vuelve a pedir libre a su frente (T33j.6i).** El frente ya lo eligió `marco_de_casa` entre los lados libres. La máscara de la cuadra, con sus patios y jardines, puede seguir delante de él si el lote no llega al borde, y el chequeo lo descartaba. Las cumbreras desviadas bajan de 31 a 17.
+- **Sin solapes residuales (T33j.6j),** por decisión del responsable del 23-11-2026. `epocas.sin_solapes_residuales` le resta el área común a la más grande de dos casas de 1772 vecinas que se pisan, aunque sea menos que el umbral de la fase 5. Las de 1936 y 1578 no se tocan. Tocó 3526 casas, todas por superficies microscópicas. Los 17 cruces no cambiaron: no venían de las huellas, sino de contactos en esquinas y medianeras.
+- **Límites documentados** ([limites-fase6.json](limites-fase6.json)), por la misma decisión. Las 17 cumbreras de lotes de esquina o con la calle muy oblicua, y los 17 contactos de techos en esquinas y medianeras, de 0,002 a 0,17 m². La puerta los reconoce por el centro de la huella (a menos de 1 m), y un cruce cuenta como límite solo si no pasa su área registrada. Los umbrales no cambian.
+
+| Criterio | Línea base (T33j.6a) | Cierre |
+|---|---|---|
+| Triángulos sin degenerar | 268 | **0 (cumple)** |
+| Techos sin cruces | 816 pares | 17, todos en límite (cumple) |
+| Cumbreras con el frente | 169 desviadas | 17, todas en límite (cumple) |
+| Aleros fuera de la calle | 138 casas | **0 (cumple)** |
+| Mismo trazado que la fase 5 | cumple | cumple |
+
+## Fase 6 cerrable
+
+`fase_6_cerrable: true`, 5/5 criterios, con los límites documentados de [limites-fase6.json](limites-fase6.json). Los datos se regeneraron con el Capitolio de #143 (6303 casas de 1772 a la vista), y las fases 3, 4 y 5 siguen cerrables. Ningún PR de techos cambió calles ni la ocupación para que un techo dejara de fallar. La limpieza de solapes residuales es un dato de la fase 5, decidido aparte.
 
 ## Reproducir
 
