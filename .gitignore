@@ -16,6 +16,9 @@ public/datos/*.bin
 # generados por tools/geo/epocas.py
 public/datos/crece.json
 public/plano/crece.png
+# generados por tools/calles-epoca.mjs (las calles de una época, de su referencia curada)
+public/plano/calles-*.png
+public/datos/calles-*.json
 # generados por tools/geo/hoy.py (OSM, ODbL)
 public/datos/calles.json
 .env

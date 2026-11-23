@@ -149,7 +149,7 @@ describe('fachadas: tinta y LOD', () => {
 
   test('en color, la pared es la fachada', () => {
     const { fragmentShader } = compilar()
-    expect(fragmentShader).toContain('vec3 enColor = mix(casa.rgb, sueloColor(uv, papel, enSuelo, ribera, rotulo, epoca, ciudad), esSuelo);')
+    expect(fragmentShader).toContain('vec3 enColor = mix(casa.rgb, sueloColor(uv, papel, enSuelo, ribera, rotulo, epoca, ciudad, calle), esSuelo);')
   })
 
   test('de lejos, los detalles se apagan hacia el tono medio de la pared (sin moiré)', () => {

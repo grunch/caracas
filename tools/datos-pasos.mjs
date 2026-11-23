@@ -193,6 +193,14 @@ export const PASOS = [
     cmd: () => ['node', 'tools/planos-epocas.mjs'],
   },
   {
+    // las calles de 1772 para el suelo de esa época (T33j.8b): un campo de distancia a los ejes de la referencia
+    // curada, sin pegar ningún escaneo; el sitio anda igual sin él (suelo liso, sin calles)
+    id: 'calles-1772', entradas: ['tools/geo/referencias/1772-calles-1936.json', `${D}/mosaico.json`],
+    salidas: ['public/plano/calles-1772.png', 'public/datos/calles-1772.json'],
+    codigo: ['tools/calles-epoca.mjs', 'tools/calles-epoca-lib.mjs'],
+    cmd: () => ['node', 'tools/calles-epoca.mjs', '1772', 'tools/geo/referencias/1772-calles-1936.json', `${D}/mosaico.json`],
+  },
+  {
     id: 'hoy', entradas: [OSM_HOY, `${D}/mosaico.json`, 'tools/geo/gcp/1936-wgs84.json'],
     salidas: ['public/plano/hoy-lejos.webp', 'public/plano/hoy-cerca.webp', 'public/datos/calles.json', 'public/datos/calles.bin'],
     codigo: GEO('hoy', 'hoy_osm', 'geo1936'),
