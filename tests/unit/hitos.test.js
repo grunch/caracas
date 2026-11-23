@@ -3,7 +3,7 @@ import { Mesh } from 'three'
 import { HITOS, validarHitos, construirHitos, geometriaHitos, crearHitos, suprimirTechos, zonasDeSupresion } from '../../src/hitos.js'
 import { PARTES, parteDe, tramosSinHuecos, azarDe } from '../../src/hitos/partes.js'
 import { rectanguloPx, METRO, EJE_DAMERO } from '../../src/hitos/datos/marco.js'
-import { crearMaterialHitos } from '../../src/hitos/material.js'
+import { crearMaterialHitos, LEVANTE_M } from '../../src/hitos/material.js'
 import { crearLienzo, MAT } from '../../src/hitos/lienzo.js'
 import { crearCoords } from '../../src/coords.js'
 import { crearMaterialCiudad } from '../../src/material.js'
@@ -266,6 +266,11 @@ describe('la malla', () => {
   test('geometriaHitos: esfera envolvente calculada', () => {
     const g = geometriaHitos(construirHitos([valido], coords))
     expect(g.boundingSphere.radius).toBeGreaterThan(0)
+  })
+
+  test('el hito va apenas sobre su piso: el suelo de una terraza, al ras, no parpadea con sus patios (z-fighting)', () => {
+    expect(LEVANTE_M).toBeGreaterThan(0.05); expect(LEVANTE_M).toBeLessThan(0.3)
+    expect(crearMaterialHitos({ U }).vertexShader).toContain(`float y = piso + ${LEVANTE_M.toFixed(2)} + position.y * sube * vExiste;`)
   })
 
   test('el material: los dos shaders usan lo que comparten y cada material tiene su rama', () => {
