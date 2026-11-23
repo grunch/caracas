@@ -2,6 +2,7 @@ import { describe, test, expect } from 'vitest'
 import { DataUtils, HalfFloatType, RedFormat } from 'three'
 import {
   decodificarRelieve, muestrear, crearRelieve, hinchado, alturaSuelo, texturaRelieve, uniformsRelieve, subdivisionDeLaHoja,
+  terrazasDeHitos, ponerRelieve, GLSL_RELIEVE, TALUD_M, MAX_TERRAZAS,
 } from '../../src/relieve.js'
 
 /** relieve.bin sintético: Uint16 LE [w, h, alturas en dm…] */
@@ -111,5 +112,46 @@ describe('subdivisionDeLaHoja', () => {
 
   test('con render por software, cuatro veces más grueso en cada lado: el suelo era el 90 % del cuadro', () => {
     expect(subdivisionDeLaHoja(true)).toEqual([96, 77])
+  })
+})
+
+describe('terrazas: un hito grande asentado en la ladera (el convento de las Concepciones y el Capitolio)', () => {
+  // una ladera que sube 1 m cada 10 m hacia el oeste: 31 × 1 celdas de 10 m sobre la hoja de 300 m
+  const ladera = { w: 31, h: 1, alturas: Float32Array.from({ length: 31 }, (_, i) => 100 - i) }
+  const hoja31 = { x0: -155, z0: -100, ancho: 310, alto: 200 }
+  // una terraza de 60 × 40 m centrada en (0, 0), girada con el damero
+  const terraza = { x: 0, z: 0, eje: [1, 0], medioA: 30, medioB: 20 }
+  const r = crearRelieve(ladera, hoja31, [terraza])
+  const sin = crearRelieve(ladera, hoja31)
+
+  test('adentro el suelo es plano, a la altura del terreno en su centro', () => {
+    for (const [x, z] of [[-29, 0], [29, 0], [0, -19], [-29, 19], [12, -7]]) expect(r.alturaEn(x, z)).toBeCloseTo(r.alturaEn(0, 0), 6)
+    expect(r.alturaEn(0, 0)).toBeCloseTo(sin.alturaEn(0, 0), 6)
+  })
+
+  test('el talud va afuera, en la calle, y a TALUD_M el terreno es el de siempre', () => {
+    expect(TALUD_M).toBeLessThanOrEqual(5) // la mitad de una calle de 1772: no llega a la casa de enfrente
+    for (const x of [-30 - TALUD_M, -40, 30 + TALUD_M, 45]) expect(r.alturaEn(x, 0)).toBeCloseTo(sin.alturaEn(x, 0), 6)
+    const medio = r.alturaEn(-30 - TALUD_M / 2, 0)
+    expect(medio).toBeGreaterThan(r.alturaEn(0, 0)); expect(medio).toBeLessThan(sin.alturaEn(-30 - TALUD_M / 2, 0))
+  })
+
+  test('las terrazas salen de los hitos que la piden, en metros del mundo y con su eje', () => {
+    const coords = { metro: 0.5, aMundo: (px, py) => ({ x: (px - 100) * 0.5, z: (py - 50) * 0.5 }) }
+    const hitos = [{ id: 'a', x: 120, y: 70, eje: [3, 4], terraza: { ancho: 60, fondo: 40 } }, { id: 'b', x: 0, y: 0, eje: [1, 0] }]
+    expect(terrazasDeHitos(hitos, coords)).toEqual([{ x: 10, z: 10, eje: [0.6, 0.8], medioA: 30, medioB: 20 }])
+  })
+
+  test('el shader aplana igual: hasta MAX_TERRAZAS en uniforms, con la altura del centro al cargar el relieve', () => {
+    const U = uniformsRelieve(hoja31, [terraza])
+    expect(U.uTerrazaMarco.value).toHaveLength(MAX_TERRAZAS)
+    expect(U.uTerrazaMedida.value[0].toArray().slice(0, 2)).toEqual([30, 20])
+    expect(U.uTerrazaMedida.value[1].w).toBe(0) // sin terraza: inactiva
+    ponerRelieve(U, r)
+    expect(U.uTerrazaMedida.value[0].z).toBeCloseTo(r.alturaEn(0, 0), 6)
+    expect(U.uTerrazaMedida.value[0].w).toBe(1)
+    expect(GLSL_RELIEVE).toContain('float relieveCrudo(vec2 xz)')
+    expect(GLSL_RELIEVE).toMatch(/sueloEn\(vec2 xz\) \{\s*return conTerrazas\(xz, relieveCrudo\(xz\)\)/)
+    expect(() => uniformsRelieve(hoja31, Array(MAX_TERRAZAS + 1).fill(terraza))).toThrow(/terrazas/)
   })
 })
