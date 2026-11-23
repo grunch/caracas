@@ -9,6 +9,6 @@ import { plazaBolivar } from '../src/hitos/datos/plaza-bolivar.js'
 
 export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar]
   .filter((h) => h.planta)
-  .map(({ id, nace, muere, planta, suprime }) => ({ id, nace, muere, planta, suprime: suprime ?? [] }))
+  .map(({ id, nace, muere, planta, suprime, transitable }) => ({ id, nace, muere, planta, suprime: suprime ?? [], ...(transitable ? { transitable } : {}) }))
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) console.log(JSON.stringify(hitosConPlanta()))
