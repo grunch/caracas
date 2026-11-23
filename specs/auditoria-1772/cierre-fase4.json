@@ -480,7 +480,7 @@
     "ocupacion": "conjunto_especial",
     "medida": "anillo",
     "cobertura": 0.2302,
-    "cobertura_con_hitos": 0.2973
+    "cobertura_con_hitos": 0.3048
    },
    {
     "unidad": "U1772-0068",
@@ -635,7 +635,7 @@
     "ocupacion": "conjunto_especial",
     "medida": "anillo",
     "cobertura": 0.1634,
-    "cobertura_con_hitos": 0.4239
+    "cobertura_con_hitos": 0.4943
    },
    {
     "unidad": "U1772-0095",
@@ -1352,7 +1352,7 @@
     "ocupacion": "continua",
     "medida": "anillo",
     "cobertura": 0.2324,
-    "cobertura_con_hitos": 0.4121
+    "cobertura_con_hitos": 0.4424
    },
    {
     "unidad": "U1772-0205",
