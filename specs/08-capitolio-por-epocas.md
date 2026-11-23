@@ -45,6 +45,10 @@ leyendas de los planos de 1772 y 1843 siguen sin transcribir.
   escalinata del Palacio Legislativo baja a la acera sur. Las proporciones estiradas son interpretativas.
 - El modelo ya usa los ejes del marco del hito (+X este = +a, +Y arriba, +Z sur = +b, origen al centro de la manzana):
   el adaptador `src/hitos/capitolio.js` **no gira ni desplaza**; solo estira. La cúpula queda al norte (−b).
+- **La terraza (T41f).** La manzana sube hasta 6,4 m de este a oeste (con la exageración del relieve), y el hito,
+  plano, se apoya en la altura de su centro: el suelo le tapaba la mitad oeste. Con `terraza` (`src/relieve.js`), dentro
+  de la manzana el suelo queda plano a la altura del piso, con el talud afuera, en la calle (4 m). Mientras el hito está
+  en pie, el suelo bajo su plataforma no se dibuja, y el hito va 12 cm sobre su piso.
 - La escalinata del Palacio Legislativo baja unos 4,3 m sobre la acera sur (b ≈ 64,8 m, con la escala), lejos de la Universidad.
 - `nace` pasa de 3 a **1**: la supresión apaga las casas genéricas de la manzana desde 1772, sin tocar su vida.
 - Todas las piezas entran en la única malla de hitos con `MAT.LISO` y colores lineales, y heredan relieve,

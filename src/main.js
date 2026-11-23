@@ -18,7 +18,7 @@ import { SIN_PLANO } from './shader/plano.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
 import { cargarCalles, crearRotulos } from './calles.js'
-import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo, hinchado, subdivisionDeLaHoja } from './relieve.js'
+import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo, hinchado, subdivisionDeLaHoja, terrazasDeHitos } from './relieve.js'
 import { COLOR_MESA } from './mesa.js'
 import { vectorSol, ajustesDeAcabado, esRenderPorSoftware } from './luz.js'
 import { crearAcabado } from './acabado.js'
@@ -130,7 +130,9 @@ const sol = new DirectionalLight(0xfff1d6, 2.2)
 sol.position.fromArray(vectorSol()).multiplyScalar(2500) // la dirección del sol es una sola (src/luz.js)
 scene.add(sol)
 // el relieve: sus uniforms van en el material; sin relieve.bin la hoja queda lisa
-const relieveU = uniformsRelieve(hoja)
+// los hitos de una manzana entera en ladera se asientan en una terraza plana (src/relieve.js)
+const terrazas = terrazasDeHitos(HITOS, coords)
+const relieveU = uniformsRelieve(hoja, terrazas)
 relieveU.uExageracion.value = Number(params.get('exagerar')) || EXAGERACION
 let relieve = null
 const ciudad = crearMaterialCiudad({ plano: meta.plano, metro: meta.plano.metro, mapa: cuadriculaProvisoria(), relieve: relieveU })
@@ -152,7 +154,7 @@ cargarRelieve().catch((e) => console.warn(`relieve: ${e.message}`))
 async function cargarRelieve() {
   const r = await fetch('datos/relieve.bin')
   if (!r.ok) throw new Error(`datos/relieve.bin: ${r.status}`)
-  relieve = crearRelieve(decodificarRelieve(await r.arrayBuffer()), hoja)
+  relieve = crearRelieve(decodificarRelieve(await r.arrayBuffer()), hoja, terrazas)
   ponerRelieve(relieveU, relieve)
   document.getElementById('alzar').hidden = false
   pedirCuadro(3)

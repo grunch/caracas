@@ -8,13 +8,16 @@
  * - Tinta: papel; lo oscuro se raya a pluma, más tupido cuanto más oscuro, y la sombra propia va rayada fina.
  */
 import { ShaderMaterial, DoubleSide, Color } from 'three'
-import { GLSL_RELIEVE } from '../relieve.js'
+import { GLSL_RELIEVE, UNIFORMS_RELIEVE } from '../relieve.js'
 import { GLSL_EPOCAS } from '../shader/epocas.js'
 import { MAT } from './lienzo.js'
 import { GLSL_SOMBRA, UNIFORMS_DE_LUZ, uniformsDeLuz } from '../shader/sombra.js'
 
 const glsl = (n) => n.toFixed(1)
 const MARGEN_PIE_M = 0.5
+/** El hito va apenas sobre su piso: con el suelo al ras (una terraza, src/relieve.js), sus patios y huertas no
+ * parpadean con los triángulos del suelo (z-fighting). Las paredes que tocan la calle llevan pie y bajan igual. */
+export const LEVANTE_M = 0.12
 
 const VERTICE = /* glsl */ `
   uniform float uOla, uAnchoOla;
@@ -33,7 +36,7 @@ const VERTICE = /* glsl */ `
     if (sube < 0.01 || vExiste < 0.02) { gl_Position = vec4(2.0, 2.0, 2.0, 1.0); return; }
     // el piso: plano a la altura del ancla donde el terreno baja; donde sube, lo sigue
     float piso = max(sueloEn(aAncla.xy), sueloEn(aAncla.zw));
-    float y = piso + position.y * sube * vExiste;
+    float y = piso + ${LEVANTE_M.toFixed(2)} + position.y * sube * vExiste;
     if (aHito.w > 0.5) y = min(sueloEn(position.xz), piso) - ${glsl(MARGEN_PIE_M)};
     vMundo = vec3(position.x, y, position.z);
     vNormal = normal;
@@ -163,7 +166,7 @@ const FRAGMENTO = /* glsl */ `
   }`
 
 const COMUNES = ['uColor', 'uOla', 'uAnchoOla', 'uEpocaDe', 'uEpocaA', 'uOlaEpoca',
-  'tRelieve', 'uRelieveHoja', 'uRelieveCelda', 'uExageracion']
+  ...UNIFORMS_RELIEVE]
 
 /** Las luces de main.js (HemisphereLight 1.6 y DirectionalLight 2.2), ya multiplicadas por su intensidad. */
 export const LUZ_CIUDAD = Object.freeze({ cielo: [0xfff4e0, 1.6], tierra: [0x6b5a48, 1.6], sol: [0xfff1d6, 2.2] })

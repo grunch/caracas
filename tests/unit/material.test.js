@@ -23,6 +23,14 @@ describe('material de la ciudad', () => {
   })
 })
 
+describe('el suelo bajo un hito de terraza', () => {
+  test('el suelo no se dibuja donde la plataforma de un hito en pie lo tapa (src/relieve.js)', () => {
+    const { fragmentShader } = compilar()
+    expect(fragmentShader).toContain('bool bajoUnHito(vec2 xz)')
+    expect(fragmentShader).toContain('if (vInfo.w < 0.5 && bajoUnHito(vMundo.xz)) discard;')
+  })
+})
+
 import { SIN_LINEA_DE_TIEMPO } from '../../src/epocas.js'
 
 describe('material sin línea de tiempo', () => {

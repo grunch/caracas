@@ -12,7 +12,7 @@ import {
   InstancedBufferAttribute, Matrix4,
 } from 'three'
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
-import { GLSL_RELIEVE } from './relieve.js'
+import { GLSL_RELIEVE, UNIFORMS_RELIEVE } from './relieve.js'
 import { GLSL_EPOCAS } from './shader/epocas.js'
 import { GLSL_SOMBRA, UNIFORMS_DE_LUZ, uniformsDeLuz } from './shader/sombra.js'
 
@@ -158,7 +158,7 @@ export function crearArboles({ datos, coords, U }) {
   geometria.setAttribute('aArbol', new InstancedBufferAttribute(arbol, 4))
 
   const comunes = ['uColor', 'uOla', 'uAnchoOla', 'uEpocaDe', 'uEpocaA', 'uOlaEpoca',
-    'tRelieve', 'uRelieveHoja', 'uRelieveCelda', 'uExageracion']
+    ...UNIFORMS_RELIEVE]
   // el sol y el mapa de sombras son los de la ciudad; sin ellos (un U a medias), los de respaldo: el sol de
   // siempre y el mapa apagado (el sampler de sombra necesita su entrada aunque no se lea)
   const luz = Object.fromEntries(UNIFORMS_DE_LUZ.filter((k) => U[k]).map((k) => [k, U[k]]))

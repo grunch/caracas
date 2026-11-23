@@ -42,6 +42,11 @@ describe('crearArboles', () => {
   const { U } = crearMaterialCiudad({ plano: { ancho: 1000, alto: 1000, plaza: [500, 500] }, metro: 0.5, mapa: null })
   const malla = crearArboles({ datos, coords, U })
 
+  test('se apoyan en el mismo suelo que la ciudad: con sus terrazas (src/relieve.js), también desde el sol', () => {
+    expect(malla.material.uniforms.uTerrazaMedida).toBe(U.uTerrazaMedida)
+    expect(malla.customDepthMaterial.uniforms.uTerrazaMarco).toBe(U.uTerrazaMarco)
+  })
+
   test('una sola malla instanciada con un árbol por instancia', () => {
     expect(malla).toBeInstanceOf(InstancedMesh)
     expect(malla.count).toBe(2)
