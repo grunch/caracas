@@ -280,3 +280,15 @@ def test_cli_detectar_componer_y_qa(plano, tmp_path):
     assert es.main(["qa", "--mosaico", str(tmp_path / "m.tif"), "--esquinas", str(destino),
                     "--centro", "350,300", "--radio", "300", "--salida", str(qa)]) == 0
     assert cv2.imread(str(qa)) is not None
+
+
+def test_pajaritos_esta_en_el_cruce_de_sur_y_este_no_sobre_el_pliegue():
+    """La esquina 185 (Pajaritos) es el cruce de Sur (San Francisco–La Palma) con Este (Mercaderes–Camejo). Estaba 27 m al
+    norte, sobre el pliegue de la hoja de 1936: el ancla X1772-0058 que sale de ella torcía el calce de 1772 (T33j.8d)."""
+    from pathlib import Path
+    datos = json.loads((Path(__file__).resolve().parents[1] / 'esquinas' / '1936-esquinas.json').read_text(encoding='utf-8'))
+    px = {e['nombre']: np.asarray(e['px'], float) for e in datos}
+    a, b, c, d = px['San Francisco'], px['La Palma'], px['Mercaderes'], px['Camejo']
+    t = np.linalg.solve(np.array([b - a, c - d]).T, c - a)[0]
+    cruce = a + t * (b - a)
+    assert np.hypot(*(px['Pajaritos'] - cruce)) * 0.5 < 2.0  # menos de 2 m del cruce de los ejes
