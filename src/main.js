@@ -13,6 +13,7 @@ import { crearBuscador } from './buscador/interfaz.js'
 import { crearTeselasFinas } from './teselas.js'
 import { crearLineaDeTiempo, crearSecuencia, escalaCrece, PRIMERA_EPOCA } from './epocas.js'
 import { crearPlanosDeEpoca, planoDeEpoca } from './planos.js'
+import { cargarCallesDeEpoca } from './calles-epoca.js'
 import { SIN_PLANO } from './shader/plano.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
@@ -180,6 +181,14 @@ async function cargarTextura(url, esColor) {
   return t
 }
 
+/** Un campo de datos (las calles de época): sin espacio de color ni mipmaps, que promediarían distancias. */
+async function cargarCampo(url) {
+  const t = await cargarTextura(url, false)
+  t.generateMipmaps = false
+  t.minFilter = LinearFilter
+  return t
+}
+
 function ponerTextura(uniforme, t) {
   const anterior = uniforme.value
   uniforme.value = t
@@ -288,7 +297,13 @@ Promise.all([crecePedido, indicePlanos])
       indice: () => fetch('plano/epocas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))).then((j) => j.planos),
     })
     visorPlano.elegir(epocas[lineaDeTiempo.actual])
-    pedirMascaras() // el agua y los rótulos, para la hoja en tinta de antes de 1936
+    pedirMascaras() // el agua, para la hoja en tinta de antes de 1936
+    // las calles de 1772 sobre el suelo liso de su época (src/calles-epoca.js); con ?planos se ve el plano de la época
+    if (!params.has('planos')) {
+      cargarCallesDeEpoca(1772, { U, plano: meta.plano, epocas, cargar: cargarCampo })
+        .then(() => pedirCuadro(3))
+        .catch((e) => console.warn(`calles de época: ${e.message}`))
+    }
     if (epocaPedida !== null) lineaDeTiempo.elegir(epocaPedida)
     if (andarAlLlegar) lineaDeTiempo.andar()
     cargarTextura('plano/crece.png', false).then((t) => {

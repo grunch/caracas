@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import { crearMaterialCiudad } from '../../src/material.js'
-import { GLSL_PAPEL, NORMALES, RELLENO_M, CELDA_MATA_M, CELDA_PASTO_M } from '../../src/shader/papel.js'
+import { GLSL_PAPEL, NORMALES, CELDA_MATA_M, CELDA_PASTO_M } from '../../src/shader/papel.js'
 import { GLSL_RELIEVE } from '../../src/relieve.js'
 import { SIN_LINEA_DE_TIEMPO } from '../../src/epocas.js'
 
@@ -30,7 +30,8 @@ describe('el papel antes de la ciudad: la hoja en tinta de cada época', () => {
   const { fragmentShader, vertexShader, U } = compilar()
 
   test('en tinta, el suelo y las casas acostadas llevan la hoja de la época; lo que está en pie no la calcula', () => {
-    expect(fragmentShader).toContain('if (acostada > 0.0 && uColor < 1.0) hojaTinta = papelDeEpoca(uvPlano, papel, epoca, urbano, enSuelo, ribera, wRibera, rotulo, pxMundo);')
+    expect(fragmentShader).toContain('if (acostada > 0.0 && uColor < 1.0) hojaTinta = papelDeEpoca(papel, epoca, urbano, enSuelo, ribera, wRibera, calle, pxMundo);')
+    expect(fragmentShader).toContain('vec2 calle = calleEn(uvPlano, epoca, pxMundo);')
     expect(fragmentShader).toContain('mix(mix(diffuseColor.rgb, TINTA, casa.a), hojaTinta, acostada)')
   })
 
@@ -50,15 +51,19 @@ describe('el papel antes de la ciudad: la hoja en tinta de cada época', () => {
     for (const e of [1, 2, 3, 4]) expect(suave(4.5, 5, e)).toBe(0) // 1772 … 1911: la hoja de la época
   })
 
-  test('dentro de la ciudad, antes de 1936, la hoja va sin rótulos; en el campo, papel en blanco', () => {
+  test('dentro de la ciudad, antes de 1936, papel liso con las calles de la época, sin la hoja de 1936 (I1772-008)', () => {
     const fn = cuerpo('papelDeEpoca')
-    expect(fn).toContain('vec3 ciudad = lineas > 0.0 ? sinRotulos(hoja, papel, rotulo, s.a, px) : papel;') // fuera de la ciudad no se rellena nada
+    expect(fn).toContain('vec3 ciudad = mix(blanco, LAVADO_CALZADA, 0.6 * calle.x);')
+    expect(fn).toContain('ciudad = mix(ciudad, TINTA_PLUMA, 0.75 * calle.y);')
     expect(fn).toContain('if (tinte >= 1.0) return mix(ciudad, papel, talCual);') // y adentro no se graba el valle
     expect(fn).toContain('vec3 c3 = mix(blanco, ciudad, tinte);')
+    // la hoja (papel) solo vuelve en 1936 o donde está el plano de la época (talCual)
+    expect(fn).not.toMatch(/ciudad = [^;]*papel/)
+    expect(GLSL_PAPEL).not.toMatch(/sinRotulos|uRotulos|uMapa/)
     expect(GLSL_PAPEL).toMatch(/const vec3 PAPEL_EN_BLANCO = vec3\(0\.9\d+, 0\.9\d+, 0\.[78]\d+\);/) // claro, apenas tibio
   })
 
-  test('el borde no es la línea de la máscara: tiembla y se va en dos tiempos (primero el tinte, después las líneas)', () => {
+  test('el borde no es la línea de la máscara: tiembla y se va en dos tiempos (primero las calles, después su lavado)', () => {
     const fn = cuerpo('papelDeEpoca')
     expect(fn).toMatch(/if \(urbano > 0\.02 && urbano < 0\.98\) c \+= 0\.3 \* \(0\.6 \* ruidoValle\(m \/ 34\.0\) \+ 0\.4 \* ruidoValle\(m \/ 8\.0\) - 0\.5\);/)
     const [, t0, t1, l0, l1] = fn.match(/tinte = smoothstep\(([\d.]+), ([\d.]+), c\), lineas = smoothstep\(([\d.]+), ([\d.]+), c\)/).map(Number)
@@ -67,20 +72,7 @@ describe('el papel antes de la ciudad: la hoja en tinta de cada época', () => {
     // con el temblor (±0,15), lo que es ciudad entera sigue entera y el campo abierto sigue en blanco
     expect(1 - 0.15).toBeGreaterThanOrEqual(t1)
     expect(0 + 0.15).toBeLessThanOrEqual(l0)
-    expect(fn).toContain('(lineas - tinte) * trazo')
-  })
-
-  test('el rótulo se rellena con el papel de alrededor: lo que no es rótulo, del mismo lado del borde de la manzana', () => {
-    const fn = cuerpo('sinRotulos')
-    expect(fn).toContain('if (rotulo < 0.02) return papel;')
-    expect(fn).toContain('textureLod(uRotulos, uvh, 0.0)')
-    expect(fn).toContain('textureLod(uSuelo, uvh, 1.0).a - manzana')
-    expect(fn).toContain(`k < ${RELLENO_M.length * 4}`)
-    // dentro de una rama no hay derivadas: todas las lecturas van con su nivel explícito
-    expect(fn).not.toMatch(/texture2D\(|texture\(/)
-    expect(fn).toContain('return mix(papel, relleno, rotulo * tinta);')
-    expect(RELLENO_M).toEqual([...RELLENO_M].sort((a, b) => a - b))
-    expect(RELLENO_M.at(-1)).toBeLessThan(25) // cerca: el papel de la otra cuadra no sirve
+    expect(fn).toContain('(lineas - tinte) * 0.75 * calle.y')
   })
 
   test('el valle a pluma: laderas en normales, el agua con su orilla, matas donde crece.png dice monte y pajonal en el llano', () => {
@@ -113,7 +105,7 @@ describe('el papel antes de la ciudad: la hoja en tinta de cada época', () => {
     expect(fn).not.toMatch(/uExageracion|uOla|sueloEn/)
   })
 
-  test('no agrega muestreadores ni uniforms: usa los del color (uSuelo, uRotulos, uCrece) y el plano', () => {
+  test('no agrega muestreadores ni uniforms: la calle llega leída (src/shader/calles.js)', () => {
     expect(GLSL_PAPEL).not.toMatch(/uniform\s/)
   })
 })

@@ -6,26 +6,25 @@
  * Es la versión en tinta del valle del modo color (src/shader/valle.js) y usa sus mismos datos:
  * crece.png (G urbanizado desde · B monte), uSuelo (R agua) y el terreno del vértice.
  *
- * Dentro de la ciudad, antes de 1936, la hoja va sin sus letras, cifras y cotas (uRotulos): «Universidad
- * Central» o «903.780» son de 1936; los nombres de cada época los ponen las marcas (src/marcas.js). Cada
- * rótulo se rellena con el papel de alrededor (lo que no es rótulo, a pocos metros), así que las líneas
- * de manzanas y calles quedan. En 1936 la hoja se ve tal cual es, con todo lo que trae.
+ * Dentro de la ciudad, antes de 1936, no va la hoja de 1936: sus calles y manzanas serían trazas falsas
+ * bajo la ciudad de la época (I1772-008). Va papel liso y, encima, las calles de la época que tienen
+ * referencia curada (calleEn, src/shader/calles.js): la calzada con un lavado tenue y su orilla a pluma.
+ * Los nombres de cada época los ponen las marcas (src/marcas.js). En 1936 la hoja se ve tal cual es, con
+ * todo lo que trae; con ?planos, donde está el plano de la época, también.
  *
  * El borde entre la ciudad y el papel en blanco no es una línea de máscara: tiembla con un ruido de
  * pocos metros y el dibujo se va en dos tiempos, primero el tinte y después las líneas negras, como un
  * plano que el dibujante dejó sin terminar.
  *
- * Necesita GLSL_PLANO (uMapa, uHoja, uPlaza, uMetro, planoViejo), GLSL_CRECE, GLSL_VALLE (ruidoValle,
- * azar2, creceEn), GLSL_SOMBRA (uSol), uSuelo y uRotulos (GLSL_SUELO) y los varyings vMundo, vTerreno y
- * vPendiente. No agrega muestreadores.
+ * Necesita GLSL_PLANO (uHoja, uPlaza, uMetro, planoViejo), GLSL_CRECE, GLSL_VALLE (ruidoValle, azar2,
+ * creceEn), GLSL_SOMBRA (uSol) y los varyings vMundo, vTerreno y vPendiente. No agrega muestreadores: la
+ * calle llega leída (src/shader/calles.js).
  */
 
 const lineal = (r, g, b) => `vec3(${[r, g, b].map((v) => ((v / 255) ** 2.2).toFixed(3)).join(', ')})` // de sRGB 0–255
 
 /** Las normales: de trazo a trazo y de hilera a hilera (metros de altura) cuando un píxel mide `px` m. */
 export const NORMALES = Object.freeze({ paso: 7, banda: 7, px: 0.7 })
-/** A qué distancias se toma el papel que rellena un rótulo (m): lo que no es rótulo, alrededor. */
-export const RELLENO_M = Object.freeze([3, 8, 17])
 /** Lado de la celda en que cabe una mata del monte (m). */
 export const CELDA_MATA_M = 26
 /** Lado de la celda en que cabe una mata de pasto del llano (m). */
@@ -34,6 +33,7 @@ export const CELDA_PASTO_M = 30
 export const GLSL_PAPEL = /* glsl */ `
   const vec3 PAPEL_EN_BLANCO = ${lineal(250, 246, 230)}; // el papel de la hoja de 1936 donde no hay nada dibujado
   const vec3 TINTA_PLUMA = ${lineal(62, 48, 38)};
+  const vec3 LAVADO_CALZADA = ${lineal(226, 214, 188)}; // la calzada de la época: un lavado tenue sobre el papel
 
   /**
    * Un juego de normales en la dirección k (de 0 a 7, de a 22,5°): trazos cuesta abajo cada "paso" metros,
@@ -120,43 +120,12 @@ export const GLSL_PAPEL = /* glsl */ `
   }
 
   /**
-   * La hoja sin su rótulo: donde hay tinta de rótulo va el papel de alrededor: lo que no es rótulo ni
-   * línea, a pocos metros y del mismo lado del borde de la manzana (uSuelo A: la calle es clara y la
-   * manzana lleva tinte). Lo que ya era papel dentro de la máscara no se toca: no se desenfoca nada.
-   * manzana = uSuelo A en el punto.
-   */
-  vec3 sinRotulos(vec2 hoja, vec3 papel, float rotulo, float manzana, float px) {
-    if (rotulo < 0.02) return papel;
-    const vec3 LUMA = vec3(0.299, 0.587, 0.114);
-    float texel = uMetro * uHoja.x / float(textureSize(uMapa, 0).x); // metros por texel del plano general
-    float lod = 0.5 + log2(max(px / texel, 1.0));
-    vec3 suma = vec3(0.0);
-    float peso = 0.0;
-    for (int k = 0; k < ${RELLENO_M.length * 4}; k++) {
-      float a = 1.5708 * float(k) + 0.55 * float(k / 4) + 0.3;
-      float radio = k < 4 ? ${RELLENO_M[0].toFixed(1)} : k < 8 ? ${RELLENO_M[1].toFixed(1)} : ${RELLENO_M[2].toFixed(1)};
-      vec2 h = hoja + radio * vec2(cos(a), sin(a)) / (uHoja * uMetro);
-      vec2 uvh = vec2(h.x, 1.0 - h.y);
-      vec3 c = textureLod(uMapa, uvh, lod).rgb;
-      float w = (1.0 - min(1.0, 2.0 * textureLod(uRotulos, uvh, 0.0).r)) * pow(dot(c, LUMA), 10.0)
-        * (1.0 - 0.95 * abs(textureLod(uSuelo, uvh, 1.0).a - manzana)) / radio;
-      suma += w * c;
-      peso += w;
-    }
-    // un rótulo tan grande que no deja papel cerca: el plano muy desenfocado
-    vec3 relleno = peso > 1e-5 ? suma / peso : textureLod(uMapa, vec2(hoja.x, 1.0 - hoja.y), lod + 4.0).rgb;
-    // cuánta tinta de rótulo hay en el punto: lo que se aparta del papel de alrededor
-    float tinta = smoothstep(0.012, 0.05, distance(papel, relleno));
-    return mix(papel, relleno, rotulo * tinta);
-  }
-
-  /**
    * La hoja en tinta en la época que rige. papel = planoEn(hoja); urbano = urbanoEn(hoja, epoca), 0 campo
-   * … 1 ciudad; s = uSuelo en el punto; ribera = su agua desenfocada (wRibera, su derivada); rotulo =
-   * cuánto del punto es letra del plano; px = metros por píxel. Las lecturas con mipmap y las derivadas
-   * llegan hechas: esto se llama dentro de una rama.
+   * … 1 ciudad; s = uSuelo en el punto; ribera = su agua desenfocada (wRibera, su derivada); calle =
+   * calleEn(hoja, epoca, px) (x calzada, y orilla); px = metros por píxel. Las lecturas con mipmap y las
+   * derivadas llegan hechas: esto se llama dentro de una rama.
    */
-  vec3 papelDeEpoca(vec2 hoja, vec3 papel, float epoca, float urbano, vec4 s, float ribera, float wRibera, float rotulo, float px) {
+  vec3 papelDeEpoca(vec3 papel, float epoca, float urbano, vec4 s, float ribera, float wRibera, vec2 calle, float px) {
     // en 1936 (y sin línea de tiempo) es el plano tal cual; con ?planos, donde está el plano de la época, también
     float talCual = max(smoothstep(4.5, 5.0, epoca), planoViejo);
     if (talCual >= 1.0) return papel;
@@ -165,18 +134,19 @@ export const GLSL_PAPEL = /* glsl */ `
     float c = urbano;
     if (urbano > 0.02 && urbano < 0.98) c += 0.3 * (0.6 * ruidoValle(m / 34.0) + 0.4 * ruidoValle(m / 8.0) - 0.5);
     float tinte = smoothstep(0.42, 0.62, c), lineas = smoothstep(0.22, 0.42, c);
-    // la ciudad: el plano sin sus rótulos (fuera de ella no se rellena nada)
-    vec3 ciudad = lineas > 0.0 ? sinRotulos(hoja, papel, rotulo, s.a, px) : papel;
-    if (tinte >= 1.0) return mix(ciudad, papel, talCual);
-    // el papel en blanco, apenas manchado, con el valle a pluma
+    // el papel, apenas manchado
     vec3 blanco = PAPEL_EN_BLANCO * (0.975 + 0.05 * ruidoValle(m / 240.0));
+    // la ciudad: papel liso con las calles de la época (sin la hoja de 1936, I1772-008)
+    vec3 ciudad = mix(blanco, LAVADO_CALZADA, 0.6 * calle.x);
+    ciudad = mix(ciudad, TINTA_PLUMA, 0.75 * calle.y);
+    if (tinte >= 1.0) return mix(ciudad, papel, talCual);
+    // fuera de ella, el valle a pluma
     float galeria = smoothstep(0.03, 0.3, ribera) * (1.0 - smoothstep(0.3, 0.6, s.r));
     float seco = 1.0 - smoothstep(0.1, 0.4, max(s.r, ribera));
     float pluma = max(max(0.8 * aguasEn(s.r, ribera, wRibera), matasEn(m, galeria, px)), seco * max(0.8 * laderasEn(m, vTerreno.x, vPendiente, px), pajonalEn(m, vTerreno.y, px)));
     blanco = mix(blanco, TINTA_PLUMA, pluma * (1.0 - lineas));
+    // entre el tinte y el blanco, las calles llegan antes que su lavado: el borde se va en dos tiempos
     vec3 c3 = mix(blanco, ciudad, tinte);
-    // entre el tinte y el blanco quedan solo las líneas negras del plano
-    float trazo = 1.0 - smoothstep(0.12, 0.4, dot(ciudad, vec3(0.299, 0.587, 0.114)));
-    c3 = mix(c3, TINTA_PLUMA, (lineas - tinte) * trazo);
+    c3 = mix(c3, TINTA_PLUMA, (lineas - tinte) * 0.75 * calle.y);
     return mix(c3, papel, talCual);
   }`

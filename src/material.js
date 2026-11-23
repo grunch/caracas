@@ -16,6 +16,7 @@ import { GLSL_EPOCAS, GLSL_CRECE } from './shader/epocas.js'
 import { GLSL_PLANO, uniformsPlanoEpocas } from './shader/plano.js'
 import { GLSL_SUELO } from './shader/suelo.js'
 import { GLSL_PAPEL } from './shader/papel.js'
+import { GLSL_CALLES, uniformsCalles } from './shader/calles.js'
 import { GLSL_FACHADA } from './shader/fachada.js'
 import { GLSL_TECHO } from './shader/techo.js'
 import { CUBIERTA } from './techos.js'
@@ -45,6 +46,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   ${GLSL_PLANO}
   ${GLSL_FACHADA}
   ${GLSL_TECHO}
+  ${GLSL_CALLES}
   ${GLSL_SUELO}
   ${GLSL_PAPEL}
   ${GLSL_HOY}`
@@ -81,18 +83,19 @@ const FRAGMENTO_COLOR = /* glsl */ `
   float ribera = texture(uSuelo, uv, 3.5).r;
   float rotulo = rotuloEn(uv);
   float pxMundo = max(fwidth(vMundo.x), fwidth(vMundo.z));
+  vec2 calle = calleEn(uvPlano, epoca, pxMundo); // las calles de la época (src/shader/calles.js)
   float wRibera = fwidth(ribera);
 
-  // tinta: el suelo es la hoja de la época (src/shader/papel.js): el plano donde ya hay ciudad y papel en
-  // blanco, con el valle a pluma, donde todavía no; la casa, papel con sus vanos, molduras y tejados a
+  // tinta: el suelo es la hoja de la época (src/shader/papel.js): papel liso con sus calles donde ya hay
+  // ciudad (en 1936, el plano) y papel en blanco, con el valle a pluma, donde todavía no; la casa, papel con sus vanos, molduras y tejados a
   // pluma. Acostada en la hoja (antes de la ola) la casa todavía es la hoja: el grabado aparece al levantarse
   float acostada = max(esSuelo, 1.0 - smoothstep(0.0, 0.3, vAlzada));
   vec3 hojaTinta = papel;
-  if (acostada > 0.0 && uColor < 1.0) hojaTinta = papelDeEpoca(uvPlano, papel, epoca, urbano, enSuelo, ribera, wRibera, rotulo, pxMundo);
+  if (acostada > 0.0 && uColor < 1.0) hojaTinta = papelDeEpoca(papel, epoca, urbano, enSuelo, ribera, wRibera, calle, pxMundo);
   vec3 enTinta = mix(mix(diffuseColor.rgb, TINTA, casa.a), hojaTinta, acostada);
 
   // color: suelo pintado; techo y fachada según la casa
-  vec3 enColor = mix(casa.rgb, sueloColor(uv, papel, enSuelo, ribera, rotulo, epoca, ciudad), esSuelo);
+  vec3 enColor = mix(casa.rgb, sueloColor(uv, papel, enSuelo, ribera, rotulo, epoca, ciudad, calle), esSuelo);
 
   diffuseColor.rgb = mix(enTinta, enColor, uColor);
 
@@ -142,6 +145,7 @@ export function crearMaterialCiudad({
     uMapa: { value: mapa },
     uSuelo: { value: suelo },
     uRotulos: { value: SIN_ROTULOS }, // rótulos del plano de 1936 (src/shader/suelo.js)
+    ...uniformsCalles(), // las calles de la época (src/shader/calles.js, src/calles-epoca.js)
     uHoja: { value: new Vector2(plano.ancho, plano.alto) },
     uPlaza: { value: new Vector2(plano.plaza[0], plano.plaza[1]) },
     uMetro: { value: metro },
