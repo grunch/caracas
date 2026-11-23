@@ -1,5 +1,5 @@
 // ¿Choca el caminante del modo a pie en estos puntos? La rejilla de colisión del visor (src/a-pie.js) armada como en
-// src/a-pie-modo.js con los datos generados (public/datos/ciudad.pak), para la puerta de la fase 7 de 1772
+// src/a-pie-modo.js (con las plantas de los hitos) con los datos generados (public/datos/ciudad.pak), para la puerta de la fase 7 de 1772
 // (tools/geo/cierre_fase7.py: lo visible choca). Entrada (stdin): [[px, py], …] del plano; salida: [true|false, …].
 // Uso: node tools/choca-a-pie.mjs <época>
 import { readFileSync } from 'node:fs'

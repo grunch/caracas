@@ -1,14 +1,8 @@
-// Las plantas y zonas de supresión de los hitos modelados a mano (src/hitos/datos), con su vida, en JSON: las lee
-// la puerta de la fase 4 de 1772 (tools/geo/cierre_fase4.py) para medir los dobles edificios. Sin efectos.
+// Las plantas y zonas de supresión de los hitos modelados a mano (src/hitos/plantas.js), con su vida, en JSON: las
+// leen las puertas de las fases 4 a 7 de 1772 (tools/geo/cierre_fase*.py). Sin efectos.
 import { pathToFileURL } from 'node:url'
-import { catedral } from '../src/hitos/datos/catedral.js'
-import { iglesias } from '../src/hitos/datos/iglesias.js'
-import { civiles } from '../src/hitos/datos/civiles.js'
-import { panteon } from '../src/hitos/datos/panteon.js'
-import { plazaBolivar } from '../src/hitos/datos/plaza-bolivar.js'
+import { hitosConPlanta } from '../src/hitos/plantas.js'
 
-export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar]
-  .filter((h) => h.planta)
-  .map(({ id, nace, muere, planta, suprime, transitable }) => ({ id, nace, muere, planta, suprime: suprime ?? [], ...(transitable ? { transitable } : {}) }))
+export { hitosConPlanta }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) console.log(JSON.stringify(hitosConPlanta()))

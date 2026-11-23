@@ -25,15 +25,25 @@ const enPie = (v, e) => v % 8 <= e && (Math.floor(v / 8) === 0 || Math.floor(v /
 const clave = (i, j) => `${i},${j}`
 
 /**
- * Las huellas de las casas en pie en la época (en metros del mundo, `aMundo` de src/coords.js), repartidas en
- * celdas de CELDA_M para preguntar rápido. `epoca` 99: sin línea de tiempo (quedan las que no mueren).
+ * Las huellas de las casas en pie en la época (en metros del mundo, `aMundo` de src/coords.js), y las plantas de los
+ * hitos en pie (`plantas`: [{ nace, muere, planta: [[[px, py]…]…], transitable }]), repartidas en celdas de CELDA_M
+ * para preguntar rápido. `epoca` 99: sin línea de tiempo (quedan las que no mueren).
  */
-export function rejillaDeCasas({ vertices, techos, vida }, epoca, aMundo) {
+export function rejillaDeCasas({ vertices, techos, vida }, epoca, aMundo, plantas = []) {
   const celdas = new Map()
+  const anillos = []
   for (let t = 0; t < techos.length / 4; t++) {
     if (vida && !enPie(vida[t], epoca)) continue
     const [inicio, cuantos] = [techos[t * 4], techos[t * 4 + 1]]
-    const anillo = Array.from({ length: cuantos }, (_, k) => aMundo(vertices[2 * (inicio + k)], vertices[2 * (inicio + k) + 1]))
+    anillos.push(Array.from({ length: cuantos }, (_, k) => aMundo(vertices[2 * (inicio + k)], vertices[2 * (inicio + k) + 1])))
+  }
+  // las plantas de los hitos en pie (src/hitos/plantas.js): lo visible choca (T33j.7b, I1772-013). La de un hito
+  // transitable (una plaza) no: se camina, y chocan sus piezas
+  for (const { nace, muere, planta, transitable } of plantas) {
+    if (transitable || nace > epoca || (muere && muere <= epoca)) continue
+    for (const anillo of planta) anillos.push(anillo.map(([px, py]) => aMundo(px, py)))
+  }
+  for (const anillo of anillos) {
     const xs = anillo.map((p) => p.x)
     const zs = anillo.map((p) => p.z)
     const [i0, i1] = [Math.floor(Math.min(...xs) / CELDA_M), Math.floor(Math.max(...xs) / CELDA_M)]

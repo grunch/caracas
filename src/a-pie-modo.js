@@ -13,7 +13,7 @@ const MIRAR_POR_PX = 0.004
 const MIRADA_MAX = 1.2
 const TECLAS = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ShiftLeft', 'ShiftRight', 'Space'])
 
-export function crearModoAPie({ camera, lienzo, ventana = globalThis, cam, coords, suelo, casas, epoca, pedirCuadro, alCambiar = () => {} }) {
+export function crearModoAPie({ camera, lienzo, ventana = globalThis, cam, coords, suelo, casas, hitos = () => [], epoca, pedirCuadro, alCambiar = () => {} }) {
   let activo = false
   let estado = null
   let rejilla = null
@@ -25,7 +25,8 @@ export function crearModoAPie({ camera, lienzo, ventana = globalThis, cam, coord
   const chocaEn = (x, z) => choca(rejilla, x, z)
   function armarRejilla() {
     epocaDeRejilla = epoca()
-    rejilla = rejillaDeCasas(casas(), epocaDeRejilla, coords.aMundo)
+    // con las plantas de los hitos: lo visible choca (T33j.7b, I1772-013)
+    rejilla = rejillaDeCasas(casas(), epocaDeRejilla, coords.aMundo, hitos())
   }
   /** Cambió la época con el paseo en curso: si ahora hay una casa donde estaba, sale a la calle más cercana. */
   function rearmarRejilla() {

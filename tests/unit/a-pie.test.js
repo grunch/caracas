@@ -125,3 +125,19 @@ describe('teclaAjena', () => {
     expect(teclaAjena({ code: 'Space', target: null })).toBe(false)
   })
 })
+
+describe('rejillaDeCasas con las plantas de los hitos (T33j.7b, I1772-013)', () => {
+  const plantas = [
+    { id: 'catedral', nace: 1, muere: 0, planta: [[[100, 100], [120, 100], [120, 130], [100, 130]]] },
+    { id: 'plaza', nace: 1, muere: 0, transitable: true, planta: [[[200, 200], [260, 200], [260, 260], [200, 260]]] },
+  ]
+
+  test('el caminante choca con la planta de un hito en pie, y no antes de que nazca', () => {
+    expect(choca(rejillaDeCasas(datos, 1, aMundo, plantas), 110, 115)).toBe(true)
+    expect(choca(rejillaDeCasas(datos, 0, aMundo, plantas), 110, 115)).toBe(false)
+  })
+
+  test('la planta de un hito transitable (una plaza) se camina', () => {
+    expect(choca(rejillaDeCasas(datos, 1, aMundo, plantas), 230, 230)).toBe(false)
+  })
+})
