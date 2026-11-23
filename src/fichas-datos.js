@@ -65,6 +65,16 @@ export const FICHAS = Object.freeze({
     ],
     dudas: 'No tenemos imagen de la Catedral anterior a la década de 1860: en 1772 y 1843 aparece con el aspecto de esas fotos.',
   },
+  'palacio-arzobispal': {
+    textos: [
+      [1, 'Al sur de la Catedral, frente a la plaza y en la esquina de Las Gradillas, la residencia y el despacho del obispo. El conjunto ya existía en el siglo XVIII; se representa como hipótesis una casa de dos plantas con vanos adintelados, balcones, alero de tejas y dos patios con galerías.'],
+      [2, 'Desde la erección de la arquidiócesis en 1803 (ejecutada en 1804) es el Palacio Arzobispal. Sin un alzado fiable posterior al terremoto de 1812, el modelo conserva la misma hipótesis colonial y no inventa una reforma.'],
+      [3, 'La reforma de la fachada de 1876–1877, en tiempos de Guzmán Blanco, le dio vanos de arco rebajado, balcones de hierro, bandas horizontales, cornisa y un pretil de recuadros, como los muestra una postal de Bernardo Roswaag de hacia 1920. Su aplicación a 1889 es una retroproyección.'],
+      [5, 'La misma envolvente se mantiene en 1911 y 1936, sin cambios documentados entre ambas fechas. El plano de 1936 dibuja la manzana junto a la Catedral sin rotular el palacio.'],
+    ],
+    hoy: 'el Palacio Arzobispal de Caracas, sede de la arquidiócesis; su fachada se restauró en 1979–1980 y hoy muestra alero de tejas sin el pretil de la postal.',
+    dudas: 'Modelo interpretativo, no un levantamiento: la huella de 34 × 36 m, la fachada lateral, los patios y las cubiertas son hipótesis; el alzado colonial se proyecta hacia atrás desde los seis ejes de la fachada actual, y la postal que orienta la reforma está fechada solo de forma aproximada. Colores no verificados.',
+  },
   'casa-amarilla': {
     textos: [
       [1, 'En el lado oeste de la Plaza Mayor, la sede del Ayuntamiento, terminada en 1750, era contigua a la cárcel. El cuarto de manzana describe el solar original, no una medida comprobada del edificio actual. Aquí ocurrió la escena del Cabildo del 19 de abril de 1810. Se representan dos inmuebles con patios y un solar posterior; sus formas son hipótesis.'],

@@ -5,6 +5,7 @@
  */
 import { casaAmarilla } from './casa-amarilla.js'
 import { capitolio } from './capitolio.js'
+import { palacioArzobispal } from './palacio-arzobispal.js'
 import { EJE_DAMERO, rectanguloPx } from './marco.js'
 
 const PLANO = 'Plano de Caracas de 1936'
@@ -18,6 +19,7 @@ const MIRAFLORES = { ancho: 64, fondo: 56 } // incluye explanada, escaleras y ma
 export const civiles = Object.freeze([
   casaAmarilla,
   capitolio,
+  palacioArzobispal,
   Object.freeze({
     id: 'universidad', nombre: 'Universidad Central (fachada neogótica)', ...universidad, nace: 3, muere: 0,
     planta: [rectanguloPx(universidad, UNIVERSIDAD.largo, UNIVERSIDAD.frente + UNIVERSIDAD.fondo, 0, (UNIVERSIDAD.frente + UNIVERSIDAD.fondo) / 2)],
