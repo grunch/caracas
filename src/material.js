@@ -9,7 +9,7 @@
  */
 import { MeshLambertMaterial, ShaderMaterial, DoubleSide, Vector2, Vector4, DataTexture } from 'three'
 import { RANURAS } from './teselas.js'
-import { GLSL_RELIEVE, uniformsRelieve } from './relieve.js'
+import { GLSL_RELIEVE, GLSL_TERRAZAS_TAPADAS, uniformsRelieve } from './relieve.js'
 import { SIN_LINEA_DE_TIEMPO } from './epocas.js'
 import { GLSL_AZAR, GLSL_PRETIL } from './shader/comun.js'
 import { GLSL_EPOCAS, GLSL_CRECE } from './shader/epocas.js'
@@ -42,6 +42,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   ${GLSL_PRETIL}
   ${GLSL_SOMBRA}
   ${GLSL_EPOCAS}
+  ${GLSL_TERRAZAS_TAPADAS}
   ${GLSL_CRECE}
   ${GLSL_PLANO}
   ${GLSL_FACHADA}
@@ -52,6 +53,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   ${GLSL_HOY}`
 
 const FRAGMENTO_COLOR = /* glsl */ `
+  if (vInfo.w < 0.5 && bajoUnHito(vMundo.xz)) discard; // la plataforma de un hito de terraza lo tapa (src/relieve.js)
   if (vInfo.w > 0.5 && vExiste < 0.02) discard; // la casa todavía no existe (o ya no) en esta época
   // el alero vuela sobre la calle solo si la fachada de la época no lleva pretil
   float volado = max(1.0 - step(0.5, abs(vCubierta - ${CUBIERTA.ALERO}.0)), step(${CUBIERTA.VOLADA}.0 - 0.5, vCubierta));
