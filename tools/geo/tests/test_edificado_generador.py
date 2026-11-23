@@ -438,3 +438,25 @@ def test_sin_solapes_residuales_no_parte_una_casa_en_dos():
     a, n = nueva['techos'][0][:2]
     v = nueva['vertices']
     assert abs(Polygon([(v[2 * (a + i)], v[2 * (a + i) + 1]) for i in range(n)]).area - 300) < 1e-6
+
+
+def test_cerrar_aberturas_1772_deja_el_marco_y_las_alas_a_la_casa_que_crece():
+    # T33j.7c: la casa que cierra el hueco crece una crujía a lo largo de su fachada: conserva su marco y sus alas (sin
+    # ellos, el visor le cambiaba el techo y le giraba la cumbrera)
+    import tools.geo.epocas as ep
+    from shapely.geometry import box as caja
+    figuras = [caja(10 + k * 20, 12, 10 + (k + 1) * 20, 42) for k in range(8) if k != 3]
+    vertices, techos = [], []
+    for f in figuras:
+        puntos = list(f.exterior.coords)[:-1]
+        techos.append([len(vertices) // 2, len(puntos), 1, 0, 0])
+        vertices.extend(c for p in puntos for c in p)
+    n = len(figuras)
+    ciudad = {'vertices': vertices, 'techos': techos, 'vida': [[1, 2]] * n, 'antes': [1] * n, 'junta': [7] * n,
+              'marcos': [[k, 0, 0, 1, 0, 20, 30, 0, 14, 0, 2] for k in range(n)], 'alas': []}
+    tramos = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    red = {'nodos': [], 'calles': []}
+    nueva = ep.cerrar_aberturas_1772(ciudad, tramos, [], red, [], [caja(60, 10, 100, 45)], METRO)
+    crecidas = [k for k in range(n) if nueva['techos'][k] != ciudad['techos'][k] or nueva['vertices'] != ciudad['vertices']]
+    assert crecidas
+    assert nueva['marcos'] == ciudad['marcos']

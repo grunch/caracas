@@ -2,8 +2,8 @@
  "alcance": "Puerta de salida de la fase 4 de 1772 (specs/08), medida sobre la salida del generador. Las unidades pendientes se miden por su caja llevada por el calce (aproximada). Cuenta lo medido; no certifica fidelidad.",
  "ciudad": {
   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
-  "sha256": "7cebad6701fb3f7ea193daa231c559f6dcb28c29c469b9f670cf24f925fa46e5",
-  "datos": "be17c30 (sin publicar)"
+  "sha256": "e79e6fe191efba938cca3bb2455dd8e0ab24a6b6ea555e3fc52dbe1733cf5a7d",
+  "datos": "1682c13 (sin publicar)"
  },
  "puerta_de_salida": {
   "edificadas_con_casas": {
@@ -64,7 +64,7 @@
    "U1772-0278",
    "U1772-0292"
   ],
-  "casas_1772": 6303,
+  "casas_1772": 6297,
   "medidas": [
    {
     "unidad": "U1772-0001",
@@ -212,7 +212,7 @@
     "ocupacion": "continua",
     "medida": "aproximada",
     "cobertura": 0.1289,
-    "cobertura_del_rojo": 0.7038
+    "cobertura_del_rojo": 0.7057
    },
    {
     "unidad": "U1772-0024",
@@ -632,7 +632,7 @@
     "unidad": "U1772-0094",
     "ocupacion": "conjunto_especial",
     "medida": "anillo",
-    "cobertura": 0.2166
+    "cobertura": 0.1634
    },
    {
     "unidad": "U1772-0095",
@@ -1389,8 +1389,8 @@
     "unidad": "U1772-0211",
     "ocupacion": "continua",
     "medida": "aproximada",
-    "cobertura": 0.1233,
-    "cobertura_del_rojo": 0.9805
+    "cobertura": 0.1237,
+    "cobertura_del_rojo": 0.9854
    },
    {
     "unidad": "U1772-0212",

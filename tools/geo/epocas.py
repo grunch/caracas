@@ -463,6 +463,32 @@ def alinear_1772(ciudad, tramos, hitos, red72, verificadas, metro):
     return con_huellas(ciudad, nuevas)
 
 
+def cerrar_aberturas_1772(ciudad, tramos, hitos, red72, verificadas, edificado, metro):
+    """La ciudad final con las aberturas indebidas de los frentes de 1772 cerradas (accesos.cerrar_aberturas, T33j.7c):
+    lo edificado del original que no cubre ninguna casa junto a un hueco del frente se le suma a la casa vecina de la
+    reconstrucción, sin entrar en los corredores de calle ni en las plantas de los hitos. → una ciudad nueva."""
+    from shapely.geometry import LineString
+    from accesos import cerrar_aberturas
+    from cierre_fase3 import ANCHO_INFERIDO_M, casas_de_epoca, corredores
+    from cierre_fase4 import visibles
+    from cierre_fase5 import plantas_en_pie
+    casas = visibles(casas_de_epoca(ciudad), hitos)
+    n = len(ciudad.get("antes", []))
+    movibles = {k for k, _ in casas if k < n and ciudad["antes"][k] and ciudad["junta"][k] >= 0}
+    vedado = [c["poligono"] for c in corredores(red72, metro=metro)] + \
+        [LineString(t["anclajes"]).buffer(ANCHO_INFERIDO_M / 2 / metro, cap_style="flat") for t in verificadas]
+    frentes = {m[0]: (m[3], m[4]) for m in ciudad.get("marcos", [])}
+    nuevas = cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=vedado, obstaculos=plantas_en_pie(hitos),
+                              frentes=frentes)
+    print(f"casas de 1772 que cierran una abertura del frente: {len(nuevas)}")
+    if not nuevas:
+        return ciudad
+    # la casa que crece conserva su marco y sus alas: el cierre es una crujía a lo largo de su fachada (CIERRE_FONDO_M,
+    # de la calle de su frente), y el visor estira las alas del borde sobre la franja nueva. Sin las alas, o sin el
+    # marco, le cambiaba el techo y le giraba la cumbrera (34538, 36248 y 38442 en la fase 6)
+    return con_huellas(ciudad, nuevas)
+
+
 def sin_solapes_residuales(ciudad, hitos, metro):
     """La ciudad sin los solapes residuales entre casas de 1772 a la vista (T33j.6j, decisión del responsable del
     23-11-2026): dos huellas que se pisan, aunque sea menos que el umbral de la fase 5 (0,01 m²), cruzan sus techos.
@@ -774,6 +800,12 @@ def main():
         ciudad["vida"] = ceder_frentes_a_1772(ciudad, json.loads(calles72.read_text())["tramos"], hitos, metro, desde)
         ciudad = alinear_1772(ciudad, json.loads(calles72.read_text())["tramos"], hitos, red72, verificadas, metro)
         ciudad = dar_acceso_1772(ciudad, hitos, metro)
+        from cuadras_historicas import cargar_edificado_de_archivos
+        unidades72 = json.loads((raiz / "tools/geo/referencias/1772-unidades.json").read_text())["unidades"]
+        edificado = [p for e in cargar_edificado_de_archivos(raiz / "specs/auditoria-1772", red72, unidades72)
+                     for p in e["poligonos"]]
+        ciudad = cerrar_aberturas_1772(ciudad, json.loads(calles72.read_text())["tramos"], hitos, red72, verificadas,
+                                       edificado, metro)
         ciudad = sin_solapes_residuales(ciudad, hitos, metro)
         ciudad = vuelos_1772(ciudad, hitos, red72, metro)
         print(f"calles de 1772 bloqueadas en la ciudad final: {len(sin_abrir)} {sin_abrir[:10]}")

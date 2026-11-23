@@ -132,6 +132,16 @@ describe('revisiones', () => {
     expect(revisarCapturas(s, [archivo('tools/geo/tests/test_alas.py')], cfg).paso).toBe(true)
     expect(revisarCapturas(s, [archivo('tools/triaje/triaje.mjs')], cfg).paso).toBe(true)
   })
+  it('capturas: los scripts de auditoría de tools/geo (informes, no generan nada que se vea) no piden capturas', () => {
+    const s = secciones(cuerpo())
+    expect(revisarCapturas(s, [archivo('tools/geo/censo_fase8.py')], cfg).paso).toBe(true)
+    expect(revisarCapturas(s, [archivo('tools/geo/cierre_fase6.py')], cfg).paso).toBe(true)
+    expect(revisarCapturas(s, [archivo('tools/geo/auditar_huellas.py')], cfg).paso).toBe(true)
+    // los cierres que importa el generador (epocas.py usa cierre_fase3, 4 y 5) sí
+    expect(revisarCapturas(s, [archivo('tools/geo/cierre_fase5.py')], cfg).paso).toBe(false)
+    // un PR que además toca el generador sigue pidiéndolas
+    expect(revisarCapturas(s, [archivo('tools/geo/censo_fase8.py'), archivo('tools/geo/epocas.py')], cfg).paso).toBe(false)
+  })
   it('fuentes: si el diff toca datos históricos, pide al menos un enlace', () => {
     const datos = [archivo('src/marcas-datos.js')]
     expect(revisarFuentes(secciones(cuerpo()), datos, cfg).paso).toBe(false)

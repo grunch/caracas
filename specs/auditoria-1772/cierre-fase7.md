@@ -40,10 +40,63 @@ La rejilla de colisión del modo a pie (`src/a-pie.js`, `rejillaDeCasas`) se arm
 | Casas con acceso / pasajes / terreno libre | cumplen | cumplen |
 | Lo visible choca | 6 hitos atravesables | **0 (cumple)** |
 
-## Lo que sigue
+## Después de T33j.7c–7d: aberturas cerradas con fachada y límites
 
-- Las 12 aberturas indebidas: cerrarlas con fachada, medianera o tapia según la referencia (I1772-001, -002).
-- Volver a medir los frentes de abertura que la fase 5 dejó como límite.
+**Cierre con fachada (T33j.7c).** El generador (`tools/geo/accesos.py`, `cerrar_aberturas`; lo llama
+`epocas.cerrar_aberturas_1772` antes de quitar los solapes residuales) busca, junto a cada abertura indebida, lo
+edificado del original que ninguna casa cubre. Fuera de los corredores de calle y de las plantas de los hitos, se lo
+suma a una casa vecina de la reconstrucción. Para no deshacer otra fase:
+
+- el cierre es una crujía de frente: llega a la línea de fachada, no la pasa y no va más de 8 m detrás de ella
+  (`CIERRE_FONDO_M`);
+- una casa solo cierra aberturas de la calle a la que da su frente: su marco corre con la recta, dentro del giro de
+  fachada de la fase 5. Crecer por un costado le giraba la cumbrera;
+- no se hace un cierre que deje alguna casa cercana sin acceso (el hueco era su zaguán) ni fuera de la recta de su
+  frente: se mide igual que en las puertas de la fase 5;
+- la casa que crece conserva su marco y sus alas, y el visor estira las alas del borde sobre la franja nueva. Sin
+  ellos le cambiaba el techo.
+
+Las aberturas que la puerta ya leía como hito (la estación pega en una planta) no se cierran. Con las reglas, el
+generador cierra 2 aberturas. Las demás, cerradas, rompían otra fase.
+
+**Límites documentados (T33j.7d)** ([limites-fase7.json](limites-fase7.json)), por decisión del responsable del
+23-11-2026 («Límite y cerrar»). La puerta reconoce cada abertura por su tramo, su lado y su punto (a menos de 2 m) y
+la cuenta como límite solo si no pasa su ancho máximo registrado. Los umbrales no cambian.
+
+| Clase | Aberturas | Por qué no se cierra |
+|---|---|---|
+| `edificado_sin_casas` | 2: L1772-0011 (23 m) y L1772-0019 (39 m) | El original pinta edificado en el hueco y no hay casa que lo ocupe. Cerrarlo pide una casa nueva, que es ocupación de la fase 4. Se revisa en la fase 8 contra el original. |
+| `cierre_rompe_otra_fase` | 8, de 2 a 14 m: L1772-0011, -0033, -0051, -0060, -0065, -0072 y dos en -0073 | Cerrarlo dejaría una casa sin acceso o una fachada fuera de su recta, o ninguna vecina con el frente a esa calle llega al hueco. |
+
+Al decidir se vieron 8 de estas aberturas en capturas. Al limitar el cierre a una crujía de frente, dos huecos que
+antes se cerraban hacia el fondo quedaron abiertos (L1772-0019, 39 m, y L1772-0065, 14 m). Entran por la misma
+decisión, que alcanza a las aberturas que el generador no cierra sin romper otra fase, y van señaladas para la revisión
+de la fase 8.
+
+## Cierre
+
+Datos regenerados sobre `main` con el Palacio Arzobispal de #146, un hito en pie desde 1772 (6297 casas de 1772 a
+la vista). Las fases 3, 4, 5 y 6 siguen cerrables sobre la misma ciudad, y las 53 desalineadas de la fase 5 siguen
+todas en límite.
+
+| Criterio | Línea base | Al cierre |
+|---|---|---|
+| Sin aberturas indebidas | 12 de 64 | 10 de 63, todas en límite (cumple) |
+| Casas con acceso | cumple | cumple |
+| Pasajes públicos abiertos | cumple | cumple |
+| Terreno libre sin casas | cumple | cumple |
+| Lo visible choca | 6 hitos atravesables | 0 (cumple) |
+
+`fase_7_cerrable: true`, 5/5 criterios, con los límites documentados de [limites-fase7.json](limites-fase7.json).
+Las 38 aberturas que la fase 5 dejó como límite se volvieron a medir: sus frentes siguen en límite en la fase 5 (53
+casas desalineadas, todas en límite). La mayoría son aberturas legítimas, donde el original deja un solar, y no se
+cierran. Este documento no certifica la fidelidad del mapa.
+
+## Lo que sigue (fase 8)
+
+- Revisar contra el original los 2 huecos de edificado sin casas y las aberturas en límite.
+- Los recorridos a pie de calle a interior (Seminario F1772-0010-3, Catedral F1772-0003-3), con lo visible y la
+  colisión juntos.
 
 ## Reproducir
 

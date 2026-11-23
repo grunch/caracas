@@ -209,6 +209,31 @@
     "entrada": "tools/geo/calles-historicas.json",
     "clase": "historica_curada",
     "nota": "Calles verificadas en los dos planos (San Jacinto–Traposos y otras): ninguna casa de 1578 pisa su núcleo de calzada en 1772."
+   },
+   {
+    "entrada": "tools/geo/referencias/1772-unidades.json",
+    "clase": "referencia_aprobada",
+    "nota": "Unidades de la referencia: epocas lleva a 1936 lo edificado de las aprobadas edificadas para cerrar las aberturas de los frentes (T33j.7c)."
+   },
+   {
+    "entrada": "specs/auditoria-1772/edificado-original.json",
+    "clase": "edificado_revisado",
+    "nota": "Lo edificado trazado en el original de 1772: epocas cierra con él las aberturas indebidas de los frentes (T33j.7c), solo con lo que edificado-revisado.json da por fiel."
+   },
+   {
+    "entrada": "specs/auditoria-1772/edificado-revisado.json",
+    "clase": "edificado_revisado",
+    "nota": "Revisión a ojo de lo edificado del original (decisión del responsable del 22-11-2026), la misma que usa vectorizar."
+   },
+   {
+    "entrada": "specs/auditoria-1772/limites-calce.json",
+    "clase": "historica_por_identidad",
+    "nota": "Sectores límite del calce: lo edificado de sus unidades no se lleva a 1936."
+   },
+   {
+    "entrada": "tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json",
+    "clase": "historica_por_identidad",
+    "nota": "El calce por identidad lleva a 1936 lo edificado de las unidades sin anillo."
    }
   ]
  },
