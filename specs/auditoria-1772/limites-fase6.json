@@ -178,6 +178,26 @@
    "giro_al_decidir": 61.8,
    "clase": "esquina_u_oblicua",
    "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 36260,
+   "centro": [
+    7585.8,
+    8072.88
+   ],
+   "giro_al_decidir": 70.7,
+   "clase": "forma_del_original",
+   "motivo": "Casa de la franja en L del Calvario (D8-01) o vecina suya: su lote sigue la forma del original y el marco no corre con la calle de su frente. Decisión del responsable del 23-11-2026 (T33j.8c)."
+  },
+  {
+   "techo_al_decidir": 38734,
+   "centro": [
+    7436.19,
+    7765.38
+   ],
+   "giro_al_decidir": 27.3,
+   "clase": "forma_del_original",
+   "motivo": "Casa de la franja en L del Calvario (D8-01) o vecina suya: su lote sigue la forma del original y el marco no corre con la calle de su frente. Decisión del responsable del 23-11-2026 (T33j.8c)."
   }
  ],
  "cruces": [

@@ -2,16 +2,16 @@
  "alcance": "Puerta de salida de la fase 7 de 1772 (specs/08), medida sobre la salida del generador y la colisión del modo a pie del visor. Cuenta lo medido; no certifica fidelidad.",
  "ciudad": {
   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
-  "sha256": "e79e6fe191efba938cca3bb2455dd8e0ab24a6b6ea555e3fc52dbe1733cf5a7d",
-  "datos": "1682c13 (sin publicar)"
+  "sha256": "c0998b3d232c703f041e1afd1a4f3a543e14b2ff769942f16cfd5100d67f3729",
+  "datos": "789e85a (sin publicar)"
  },
  "puerta_de_salida": {
   "sin_aberturas_indebidas": {
    "cumplido": true,
    "ancho_minimo_m": 2.0,
-   "aberturas": 63,
-   "indebidas": 10,
-   "indebidas_en_limite": 10,
+   "aberturas": 66,
+   "indebidas": 11,
+   "indebidas_en_limite": 11,
    "indebidas_fuera_de_limite": 0,
    "lista": [
     {
@@ -222,6 +222,27 @@
       [
        -0.985018,
        -0.172452
+      ]
+     ],
+     "indebida": false
+    },
+    {
+     "tramo": "L1772-0019:X1772-0105-X1772-0106",
+     "lado": -1,
+     "segmento": 0,
+     "ancho_m": 23.0,
+     "punto": [
+      9318.98,
+      8372.68
+     ],
+     "recta": [
+      [
+       9320.93,
+       8373.13
+      ],
+      [
+       -0.974176,
+       -0.22579
       ]
      ],
      "indebida": false
@@ -581,6 +602,27 @@
       [
        -0.435419,
        0.900228
+      ]
+     ],
+     "indebida": false
+    },
+    {
+     "tramo": "L1772-0040:X1772-0089-X1772-0105",
+     "lado": -1,
+     "segmento": 0,
+     "ancho_m": 32.0,
+     "punto": [
+      9238.87,
+      8451.93
+     ],
+     "recta": [
+      [
+       9238.55,
+       8453.9
+      ],
+      [
+       0.157157,
+       -0.987574
       ]
      ],
      "indebida": false
@@ -1007,27 +1049,6 @@
      "indebida": false
     },
     {
-     "tramo": "L1772-0059:X1772-0046-X1772-0063",
-     "lado": 1,
-     "segmento": 0,
-     "ancho_m": 31.0,
-     "punto": [
-      8810.79,
-      6163.54
-     ],
-     "recta": [
-      [
-       8811.17,
-       6161.57
-      ],
-      [
-       -0.187308,
-       0.982301
-      ]
-     ],
-     "indebida": false
-    },
-    {
      "tramo": "L1772-0060:T1772-0068-X1772-0130",
      "lado": -1,
      "segmento": 0,
@@ -1201,25 +1222,68 @@
      "limite": "cierre_rompe_otra_fase"
     },
     {
-     "tramo": "L1772-0073:E1772-0007-E1772-0008",
-     "lado": 1,
-     "segmento": 0,
-     "ancho_m": 46.0,
+     "tramo": "L1772-0073:E1772-0001-E1772-0007",
+     "lado": -1,
+     "segmento": 3,
+     "ancho_m": 14.0,
      "punto": [
-      7396.1,
-      7856.5
+      7091.45,
+      8062.24
      ],
      "recta": [
       [
-       7394.77,
-       7855.0
+       7092.58,
+       8063.88
       ],
       [
-       0.620068,
-       0.784548
+       -0.628628,
+       -0.777706
       ]
      ],
      "indebida": false
+    },
+    {
+     "tramo": "L1772-0073:E1772-0007-E1772-0008",
+     "lado": 1,
+     "segmento": 0,
+     "ancho_m": 50.0,
+     "punto": [
+      7398.49,
+      7853.16
+     ],
+     "recta": [
+      [
+       7397.16,
+       7851.67
+      ],
+      [
+       0.626693,
+       0.779266
+      ]
+     ],
+     "indebida": false
+    },
+    {
+     "tramo": "L1772-0073:E1772-0007-E1772-0008",
+     "lado": -1,
+     "segmento": 0,
+     "ancho_m": 34.0,
+     "punto": [
+      7402.03,
+      7812.1
+     ],
+     "recta": [
+      [
+       7403.37,
+       7813.59
+      ],
+      [
+       -0.624782,
+       -0.780799
+      ]
+     ],
+     "indebida": true,
+     "limite": "forma_del_original"
     },
     {
      "tramo": "L1772-0080:X1772-0183-X1772-0184",
@@ -1377,7 +1441,7 @@
    "tolerancia_fachada_m": 0.5,
    "punto_de_limite_m": 2.0
   },
-  "casas_1772": 6297,
+  "casas_1772": 6315,
   "fase_7_cerrable": true
  }
 }

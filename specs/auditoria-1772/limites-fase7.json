@@ -118,6 +118,17 @@
    "ancho_maximo_m": 7.0,
    "clase": "cierre_rompe_otra_fase",
    "motivo": "Cerrarlo con la casa vecina dejaría una casa del fondo sin acceso o una fachada fuera de la recta de su frente (fase 5), o ninguna vecina da su frente a esa calle y llega al hueco: el generador no lo cierra."
+  },
+  {
+   "tramo": "L1772-0073:E1772-0007-E1772-0008",
+   "lado": -1,
+   "punto": [
+    7402.03,
+    7812.1
+   ],
+   "ancho_maximo_m": 34.0,
+   "clase": "forma_del_original",
+   "motivo": "Entre los ganchos de la franja en L del Calvario (D8-01): el original deja ahí el espacio entre los brazos de la L. Decisión del responsable del 23-11-2026 (T33j.8c)."
   }
  ]
 }
