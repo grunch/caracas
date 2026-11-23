@@ -165,3 +165,17 @@ def test_el_cierre_es_una_crujia_de_frente_y_no_llena_el_fondo_del_hueco():
     for k, g in nuevas.items():
         crecida = g.difference(dict(casas)[k])
         assert crecida.area > 0 and crecida.bounds[3] <= 12 + CIERRE_FONDO_M / METRO + 1e-6
+
+
+def test_una_casa_solo_cierra_aberturas_de_la_calle_de_su_frente():
+    # la casa 2 da su frente a otra calle (su marco corre perpendicular a esta): no crece por su costado; el hueco lo
+    # cierra la 4, cuyo frente es esta calle
+    from accesos import cerrar_aberturas
+    from shapely.geometry import box as caja
+    casas = [(k, caja(10 + k * 20, 12, 10 + (k + 1) * 20, 42)) for k in range(8) if k not in (3, 4)]
+    casas += [(4, caja(90, 12, 110, 20))]      # menos medianera con el hueco que la 2: sin la regla, crecería la 2
+    eje = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    rojo = [caja(70, 10, 90, 45)]
+    frentes = {k: (1.0, 0.0) for k in range(8)} | {2: (0.0, 1.0)}
+    nuevas = cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 4, 5, 6, 7}, edificado=rojo, frentes=frentes)
+    assert set(nuevas) == {4}

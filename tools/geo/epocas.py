@@ -477,7 +477,9 @@ def cerrar_aberturas_1772(ciudad, tramos, hitos, red72, verificadas, edificado, 
     movibles = {k for k, _ in casas if k < n and ciudad["antes"][k] and ciudad["junta"][k] >= 0}
     vedado = [c["poligono"] for c in corredores(red72, metro=metro)] + \
         [LineString(t["anclajes"]).buffer(ANCHO_INFERIDO_M / 2 / metro, cap_style="flat") for t in verificadas]
-    nuevas = cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=vedado, obstaculos=plantas_en_pie(hitos))
+    frentes = {m[0]: (m[3], m[4]) for m in ciudad.get("marcos", [])}
+    nuevas = cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=vedado, obstaculos=plantas_en_pie(hitos),
+                              frentes=frentes)
     print(f"casas de 1772 que cierran una abertura del frente: {len(nuevas)}")
     if not nuevas:
         return ciudad

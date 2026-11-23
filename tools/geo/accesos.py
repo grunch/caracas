@@ -5,6 +5,7 @@ frente, o con la casa de otro grupo a menos de una calle delante de su fachada. 
 fondo de la vecina. Se une a la vecina de su misma junta y con la misma vida (unirlas no cambia otras épocas) que sí
 da a la calle, la de más medianera compartida. La medida es la de la puerta (cierre_fase5.casas_sin_acceso).
 """
+import math
 import shapely
 from shapely.geometry import Polygon
 from shapely.ops import unary_union
@@ -84,6 +85,15 @@ def _encierra(huellas, k, unida, pieza, metro):
     return bool(despues - antes)
 
 
+def _da_al_frente(frentes, k, tangente):
+    """¿El marco de la casa k corre con la recta de la abertura (su frente da a esa calle)? Sin marco, sí."""
+    from fachadas import GIRO_MAXIMO_GRADOS
+    if not frentes or k not in frentes:
+        return True
+    eu = frentes[k]
+    return abs(eu[0] * tangente[0] + eu[1] * tangente[1]) >= math.cos(math.radians(GIRO_MAXIMO_GRADOS))
+
+
 def _desalinea(huellas, k, unida, pieza, tramos, metro, obstaculos=()):
     """¿Darle `unida` a la casa k deja alguna casa cercana fuera de la recta de su frente, que antes estaba sobre ella?
     (la medida de la puerta de la fase 5: un cierre no puede romperla)."""
@@ -95,13 +105,15 @@ def _desalinea(huellas, k, unida, pieza, tramos, metro, obstaculos=()):
     return bool(fuera([(t, unida if t == k else g) for t, g in cerca]) - fuera(cerca))
 
 
-def cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=(), obstaculos=()):
+def cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=(), obstaculos=(), frentes=None):
     """{techo: huella crecida} que cierran las aberturas indebidas de los frentes (cierre_fase7.aberturas_de_frentes:
     un hueco de al menos una puerta donde el original pinta edificado), T33j.7c. Lo edificado del original que no
     cubre ninguna casa alrededor del punto de la abertura (a no más de CIERRE_RADIO_M, fuera de lo vedado) se le suma
     a la casa movible que más borde le comparte: se cierra con fachada, según la referencia. Un hueco donde el
     original no pinta edificado (un solar, un pasaje) queda abierto, y uno que es el paso de otra casa (un zaguán: el
-    cierre la dejaría sin acceso) también, y uno que dejaría una fachada fuera de la recta de su frente. No muta nada."""
+    cierre la dejaría sin acceso) también, y uno que dejaría una fachada fuera de la recta de su frente. `frentes`
+    ({techo: eu del marco}): una casa solo cierra aberturas de la calle a la que da su frente (su marco corre con la
+    recta, dentro de GIRO_MAXIMO_GRADOS); crecer por un costado le giraría la cumbrera. No muta nada."""
     from shapely.geometry import Point
     from cierre_fase7 import aberturas_de_frentes
     if not len(edificado):
@@ -146,7 +158,10 @@ def cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=(), obsta
                 continue
             vecinas = sorted(((_medianera(pieza, huellas[k]), k) for k in (orden[j] for j in arbol.query(pieza.buffer(MEDIANERA_PX)))
                               if k in movibles), reverse=True)
+            tangente = (-a['recta'][1][1], a['recta'][1][0])
             for largo, k in vecinas:
+                if not _da_al_frente(frentes, k, tangente):
+                    continue
                 unida = _union(huellas[k], pieza) if largo > 0 else None
                 if unida is None or _encierra(huellas, k, unida, pieza, metro) or \
                         _desalinea(huellas, k, unida, pieza, tramos, metro, obstaculos):
