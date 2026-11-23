@@ -29,3 +29,15 @@ def test_el_calzado_rgba_se_lee_en_bgr_sin_cambiar_el_rojo_por_el_azul(tmp_path)
     bgr = leer_calzado(tmp_path / 'calzado.tif')
     assert bgr.shape == (2, 2, 3)
     assert tuple(bgr[0, 0]) == (0, 0, 200)
+
+
+def test_un_panel_que_no_se_pudo_escribir_falla_con_su_ruta(tmp_path):
+    # cv2.imwrite devuelve False (sin excepción) si no puede escribir: el censo no puede seguir como si el panel estuviera
+    import numpy as np
+    import pytest
+    from censo_fase8 import escribir_panel
+    ruta = tmp_path / 'no-existe' / 'S1772-11.jpg'
+    with pytest.raises(OSError, match='S1772-11.jpg'):
+        escribir_panel(ruta, np.zeros((4, 4, 3), np.uint8))
+    escribir_panel(tmp_path / 'S1772-11.jpg', np.zeros((4, 4, 3), np.uint8))
+    assert (tmp_path / 'S1772-11.jpg').stat().st_size > 0
