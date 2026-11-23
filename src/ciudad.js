@@ -212,7 +212,9 @@ function proyectarEnMarco(casa, conAlas = casa.marco.alas.length > 0) {
     ancho = u1 - u0
     fondo = v1 - v0
   }
-  anillo = alinearHuella(anillo, ancho, fondo, calles, { soloAdentro: casa.vuelo !== Infinity })
+  // solo hacia adentro (T33j.6f/6h): la línea de la cuadra es la del marco de vectorizar, de antes de la alineación
+  // de la fase 5; correr hacia ella los vértices de detrás adelantaba el techo sobre la calle o sobre la vecina
+  anillo = alinearHuella(anillo, ancho, fondo, calles, { soloAdentro: true })
   return {
     marco: { origen: o, eu, ev, ancho, fondo }, anillo, libres: calles, alas, crujia,
     lleno: Math.min(1, Math.abs(areaConSigno(anillo)) / (ancho * fondo)),

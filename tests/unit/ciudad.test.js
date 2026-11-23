@@ -546,3 +546,16 @@ describe('alinearHuella: solo hacia adentro (T33j.6f)', () => {
       .toEqual([[0.5, 0], [10, 0], [10, 12], [0.5, 12]])
   })
 })
+
+describe('extruirTechos: el techo no se adelanta a la línea de la cuadra (T33j.6h)', () => {
+  test('una casa con marco cuyo frente queda 1 m detrás de la línea no lleva el techo hasta ella', () => {
+    // el marco pone la línea de fachada en z = 0; la casa empieza en z = 1 (sin tope de vuelo)
+    const datos = {
+      ...ciudadDe([{ puntos: rect(0, 1, 10, 14), semilla: 5, estilo: REPUBLICANO }]),
+      marcos: Float32Array.from([0, 0, 0, 1, 0, 20, 28, 0, 14, 0, 0]), alas: Float32Array.from([]),
+    }
+    const tejas = vertices(extruirTechos(datos, coords)).filter((v) => v.cubierta === CUBIERTA.TEJA)
+    expect(tejas.length).toBeGreaterThan(0)
+    expect(Math.min(...tejas.map((v) => v.z))).toBeGreaterThanOrEqual(1 - 1e-6)
+  })
+})
