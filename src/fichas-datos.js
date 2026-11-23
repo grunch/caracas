@@ -78,12 +78,14 @@ export const FICHAS = Object.freeze({
   },
   capitolio: {
     textos: [
-      [1, 'Aquí estuvo el convento de las Concepciones, en la manzana al suroeste de la plaza.'],
-      [3, 'El plano de 1889 numera dos edificios en la manzana: 1, «Capitolio», y 2, «Palacio Federal». El de 1936 dibuja cuatro alas alrededor de un jardín, con un óvalo en el ala norte.'],
-      [4, 'Una foto de entre 1915 y 1920 muestra por dentro un salón de planta ovalada, con una batalla pintada en la cúpula: el óvalo del plano.'],
+      [1, 'Toda esta manzana pertenecía al convento de las Concepciones (fundado en 1636–1637), que dio nombre a la esquina de Las Monjas. La reconstrucción sitúa la iglesia al norte, orientada hacia el este, un claustro principal de dos plantas, dependencias al oeste y una amplia huerta amurallada al sur.'],
+      [2, 'El terremoto de 1812 dañó la iglesia, los claustros y las tapias del convento, aunque la comunidad permaneció aquí hasta 1874. Mientras tanto, el Congreso sesionaba en el vecino convento de San Francisco, cruzando la calle hacia el sur.'],
+      [3, 'Tras expropiar la huerta sur en 1872 y clausurar el convento en 1874, se levantó el conjunto neoclásico de Luciano Urdaneta: el Palacio Legislativo al sur (1873) y el Palacio Federal al norte, con el Salón Elíptico y las cariátides (1876–1877), en torno al patio con la fuente de hierro de 1875. El plano de 1889 numera 1, «Capitolio», y 2, «Palacio Federal»; el salón aún conservaba su bóveda elíptica achatada original.'],
+      [4, 'Entre 1890 y 1891 se montó la sobrecúpula metálica belga de hierro y zinc con linterna calada, proyectada por Antonio Malaussena para proteger de filtraciones la Batalla de Carabobo, pintada por Martín Tovar y Tovar en 1888. Una foto de entre 1915 y 1920 muestra el salón ovalado por dentro.'],
+      [5, 'El plano de 1936 rotula «Palacio Federal» y dibuja las cuatro alas en torno al jardín y el óvalo del Salón Elíptico al norte, todavía coronado por la sobrecúpula de zinc y la linterna calada de Malaussena.'],
     ],
-    hoy: 'el Palacio Federal Legislativo.',
-    dudas: `Que aquí estuvo el convento de las Concepciones es un dato general: ${SIN_LEYENDA}.`,
+    hoy: 'el Palacio Federal Legislativo (sede de la Asamblea Nacional), coronado desde 1958 por su sobrecúpula elíptica dorada de aluminio anodizado.',
+    dudas: `Modelo interpretativo aprobado visualmente, no un levantamiento: los alzados del convento y sus reparaciones posteriores a 1812 no tienen testimonio de época, y la bóveda de 1877 y la altura de los chaguaramos son aproximadas; ${SIN_LEYENDA}.`,
   },
   universidad: {
     textos: [

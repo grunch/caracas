@@ -114,7 +114,7 @@ describe('los edificios civiles', () => {
   })
 
   test.each([
-    ['casa-amarilla', 'Principal', 1, 60], ['capitolio', 'La Bolsa', 3, 110], ['capitolio', 'Las Monjas', 3, 110],
+    ['casa-amarilla', 'Principal', 1, 60], ['capitolio', 'La Bolsa', 1, 110], ['capitolio', 'Las Monjas', 1, 110],
     ['universidad', 'San Francisco', 3, 90], ['miraflores', 'Miraflores', 4, 80],
   ])('%s: cerca de la esquina de %s y desde su época', (id, nombreEsquina, nace, metros) => {
     const h = hito(id)
@@ -131,16 +131,17 @@ describe('los edificios civiles', () => {
   })
 
   test('el Capitolio lleva la cúpula en el ala norte y la Universidad mira hacia él', () => {
-    const cupula = hito('capitolio').partes.find((p) => p.tipo === 'cupula')
-    expect(cupula.b).toBeLessThan(0)
+    // la cúpula al norte (−b) se verifica con los vértices del modelo en hitos-capitolio.test.js
+    expect(hito('capitolio').partes.filter((p) => p.componente === 'cupula').length).toBeGreaterThan(0)
     expect(hito('universidad').partes.find((p) => p.tipo === 'frenteNeogotico').mira).toEqual([0, -1])
     expect(hito('universidad').y).toBeGreaterThan(hito('capitolio').y)
   })
 
   test('todo junto sigue siendo una malla liviana', () => {
     const d = construirHitos(HITOS, coords)
-    // T41c añade cinco etapas de Casa Amarilla (<220 mil, con envolvente compartida), siempre en el mismo draw call.
-    expect(d.indices.length / 3).toBeLessThan(400_000)
+    // T41c añade cinco etapas de Casa Amarilla (<220 mil, con envolvente compartida); T41d, el Capitolio desde
+    // 1772 (~73 mil, con el cuerpo neoclásico compartido de 1889 a 1936). Siempre en el mismo draw call.
+    expect(d.indices.length / 3).toBeLessThan(450_000)
     expect(d.rangos.length).toBe(HITOS.length)
   }, 15_000)
 })

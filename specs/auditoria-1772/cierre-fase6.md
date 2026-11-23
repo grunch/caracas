@@ -106,6 +106,10 @@ No se tocan fachadas ni ocupación.
 
 Las fases 3, 4 y 5 siguen cerrables.
 
+## Con el Capitolio por épocas (#143)
+
+#143 puso el Capitolio en pie desde 1772 (el convento de las Concepciones), y su planta esconde 8 casas de la reconstrucción. Con los datos regenerados sobre la mezcla de `main` 4a7cb16 en T33j.6f (dba25dd) quedan 6303 casas de 1772 a la vista y con techo, 82053 triángulos y 4495 casas con cumbrera medida. Las cuentas de la puerta no cambian: 39 triángulos degenerados, 92 pares de techos que se cortan, 91 cumbreras desviadas y aleros fuera de la calle cumple (325 casas con tope de vuelo). Las fases 3, 4 y 5 siguen cerrables, y las 53 desalineadas siguen todas en límite.
+
 ## Lo que sigue
 
 - Los 92 cruces que quedan: aleros que montan sobre la vecina y teja contra teja.
