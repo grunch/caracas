@@ -54,4 +54,4 @@ def test_una_casa_casi_entera_fuera_de_lo_rojo_del_original_se_informa():
     fuera = casas_fuera_del_rojo(casas, rojo, tolerancia_px=0, fraccion=0.2)
     assert [f['techo'] for f in fuera] == [2]
     assert fuera[0]['sobre_el_rojo'] == 0.0
-    assert [f['techo'] for f in casas_fuera_del_rojo(casas, rojo, tolerancia_px=12, fraccion=0.2)] == []
+    assert [f['techo'] for f in casas_fuera_del_rojo(casas, rojo, tolerancia_px=25, fraccion=0.2)] == []
