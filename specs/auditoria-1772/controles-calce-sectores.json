@@ -1,9 +1,9 @@
 {
- "fecha": "2026-11-21",
+ "fecha": "2026-11-23",
  "alcance": "Controles independientes del TPS por identidad de damero; miden discrepancia, no exactitud geográfica.",
  "fuentes": {
   "trazado": "b60398ecd825521108fac4a008e4410cf0169ddf4f516dd3cb03583edc867817",
-  "esquinas_1936": "a73b47c7aeec0420aed8bc4bd66e8304846ad358dc35ccb48e25f90f0fc61444",
+  "esquinas_1936": "6cabf75819f6a68a5cecc15abdb05e7a517db4796d4bbcd6b69c2ae8fd564f9f",
   "gcp": "b482a462b3ff735e3995663eb20e52f42425573a8ca00c426bcfe12f9a4acf6a"
  },
  "parametros": {
@@ -53,9 +53,9 @@
   {
    "sector": "S1772-22",
    "controles": 25,
-   "rms_m": 5.89,
+   "rms_m": 6.41,
    "mediana_m": 5.15,
-   "max_m": 11.635
+   "max_m": 17.226
   },
   {
    "sector": "S1772-23",
@@ -1547,17 +1547,17 @@
    ],
    "esquina_1936": 185,
    "mosaico_identidad": [
-    8732.4,
-    7393.6
+    8744.8,
+    7446.6
    ],
    "mosaico_calce": [
     8728.1,
     7416.47
    ],
-   "desvio_m": 11.635,
+   "desvio_m": 17.226,
    "delta_m": [
-    -2.152,
-    11.434
+    -8.352,
+    -15.066
    ],
    "esquina_1936_nombre": "Pajaritos"
   },
@@ -4880,139 +4880,6 @@
    "fuente": "src/hitos/datos/iglesias.js (la-pastora, plano DCN 1936); unidad «Templo de La Pastora» del censo",
    "desvio_tps_m": 12.66,
    "desvio_control_m": 12.66
-  }
- ],
- "recortes": {
-  "directorio": ".cache/damero-1772",
-  "en_git": false,
-  "regenerar": ".venv/bin/python tools/geo/controles_damero.py --ciudad fuentes/derivados/epocas/ciudad-estilos.json --original fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg --mosaico fuentes/derivados/1936/mosaico.tif --recortes .cache/damero-1772 --muestra 2",
-  "nota": "archivo_local es relativo a directorio; los PNG quedan fuera de git y se comprueban por su sha256"
- },
- "evidencias": [
-  {
-   "archivo_local": "controles/S1772-11-X1772-0002.png",
-   "sha256": "3c83bc9b980f9891563c4b07e64ffc7744c33648c3badd25435e4917bfde609b",
-   "nodo": "X1772-0002"
-  },
-  {
-   "archivo_local": "controles/S1772-12-X1772-0012.png",
-   "sha256": "1592d7cbf7881f5a2ac24c0d8b40d129acf80adc1a88ba9a114f6fa68ff41daf",
-   "nodo": "X1772-0012"
-  },
-  {
-   "archivo_local": "controles/S1772-13-X1772-0005.png",
-   "sha256": "4f960dd339cf34b90c5269e7207c80b0cb7fd3f8a21f54531f44aa86a82ee4e6",
-   "nodo": "X1772-0005"
-  },
-  {
-   "archivo_local": "controles/S1772-13-X1772-0017.png",
-   "sha256": "a8a01430edd7e32eb4f85aa563b312e845491687356469b9adc9385fae78721c",
-   "nodo": "X1772-0017"
-  },
-  {
-   "archivo_local": "controles/S1772-21-X1772-0182.png",
-   "sha256": "812efc27e4b9ba29a0ec99c09f3899d7c55a76fc6315b01096c3883f5eaa4418",
-   "nodo": "X1772-0182"
-  },
-  {
-   "archivo_local": "controles/S1772-21-X1772-0070.png",
-   "sha256": "a3902ba785327381a43d67b7b26017516581a9cf1a747e985bda07b79a8200c0",
-   "nodo": "X1772-0070"
-  },
-  {
-   "archivo_local": "controles/S1772-22-X1772-0058.png",
-   "sha256": "3b683ff576871cd48d6062cebf9a20272f6f0429f779d64fdb01cd32b876fe9f",
-   "nodo": "X1772-0058"
-  },
-  {
-   "archivo_local": "controles/S1772-22-X1772-0054.png",
-   "sha256": "3dee47ae71fe4c85db4233ef8d335652255edf68b8658c82bed7b10eb42e663a",
-   "nodo": "X1772-0054"
-  },
-  {
-   "archivo_local": "controles/S1772-23-X1772-0064.png",
-   "sha256": "47b65ddcfda65b91c11b0899dd06041d61d24af330c97f2f4ad78e082956f143",
-   "nodo": "X1772-0064"
-  },
-  {
-   "archivo_local": "controles/S1772-23-X1772-0194.png",
-   "sha256": "79be3ee203d194f7e76f7a395a07b70b066109b1192757aa8a0e93f8f2dc84e5",
-   "nodo": "X1772-0194"
-  },
-  {
-   "archivo_local": "controles/S1772-24-X1772-0032.png",
-   "sha256": "4d81cbdb694a38e21c1b7c7016937938864dce5fb675c564163847eb87ad10a2",
-   "nodo": "X1772-0032"
-  },
-  {
-   "archivo_local": "controles/S1772-24-X1772-0082.png",
-   "sha256": "006e3271877261e4b1a29a1e98605b1055229f82f9889dd4b66dfbcb1526d6e2",
-   "nodo": "X1772-0082"
-  },
-  {
-   "archivo_local": "controles/S1772-31-X1772-0119.png",
-   "sha256": "8ee65dfce0f625642543cca979094515eaa04b77a20b5110c32d2f7a5325cbfe",
-   "nodo": "X1772-0119"
-  },
-  {
-   "archivo_local": "controles/S1772-31-X1772-0120.png",
-   "sha256": "62ab0d988733129ca79deffc1816d508b73bc0ae92da354e3a89a8e19ec17921",
-   "nodo": "X1772-0120"
-  },
-  {
-   "archivo_local": "controles/S1772-32-X1772-0188.png",
-   "sha256": "fb007e5a8a7dc999971437e720879003673c1b74b264f91ad2b6e89cac215ed9",
-   "nodo": "X1772-0188"
-  },
-  {
-   "archivo_local": "controles/S1772-32-X1772-0192.png",
-   "sha256": "0700ee04e0f5583d383be87d5f77c6b720e491c1e425eb5ede5a72f1d4345b1b",
-   "nodo": "X1772-0192"
-  },
-  {
-   "archivo_local": "controles/S1772-33-X1772-0129.png",
-   "sha256": "d09d918f991848dca99dffca70f15072c48fa7623e7e144b9e09cb781a50bb1e",
-   "nodo": "X1772-0129"
-  },
-  {
-   "archivo_local": "controles/S1772-33-X1772-0094.png",
-   "sha256": "51aa765705a691891a71b56b9a630862c8e23fb19a6b1caac1a2ed6240fc0402",
-   "nodo": "X1772-0094"
-  },
-  {
-   "archivo_local": "controles/S1772-34-X1772-0116.png",
-   "sha256": "dd3eb6101ca34dc6e5255d7eadea67a8f1197e828d27a968b527f2b751289acb",
-   "nodo": "X1772-0116"
-  },
-  {
-   "archivo_local": "controles/S1772-34-X1772-0117.png",
-   "sha256": "bff5dfab7b9b6fb3512e0ed810520ca9ae0b8b7d7cbd39601ca75d21359fb684",
-   "nodo": "X1772-0117"
-  },
-  {
-   "archivo_local": "controles/S1772-42-X1772-0167.png",
-   "sha256": "9a420094ef4d4f2c2535f9b1040b2f57cbe6875e2af5e4cfa4dccc69575812b9",
-   "nodo": "X1772-0167"
-  },
-  {
-   "archivo_local": "controles/S1772-42-X1772-0169.png",
-   "sha256": "85a12d231c080746cb38d9f9b12d370f20300ed84a5e79cb2e9ee96a8a2e677f",
-   "nodo": "X1772-0169"
-  },
-  {
-   "archivo_local": "controles/S1772-43-X1772-0174.png",
-   "sha256": "3c053835db89e8651371ea3b33e69aa267d6ba55b4cc81f41bc13645af71c5a2",
-   "nodo": "X1772-0174"
-  },
-  {
-   "archivo_local": "controles/S1772-43-X1772-0181.png",
-   "sha256": "091affc5fbb7d2f10f5b5d59398281fc0947ec04ef23651c687e2797a3a3ad83",
-   "nodo": "X1772-0181"
-  },
-  {
-   "archivo_local": "controles/S1772-44-X1772-0165.png",
-   "sha256": "5d84e09f187d77e07d56cd5114e936b108c65a51dee97f10c9ccaa9b9be39568",
-   "nodo": "X1772-0165"
   }
  ]
 }

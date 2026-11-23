@@ -15,11 +15,14 @@
   "correspondencia_por_unidad": {
    "cumplido": true,
    "clases": {
-    "ausente": 168,
-    "fusionada": 6,
-    "incierta": 6,
-    "uno_a_uno": 36,
-    "vacio_coincide": 76
+    "adicional_sobre_vacio": 1,
+    "ausente": 43,
+    "desplazada_o_parcial": 6,
+    "dividida": 16,
+    "fusionada": 1,
+    "incierta": 71,
+    "uno_a_uno": 79,
+    "vacio_coincide": 75
    }
   },
   "validadores_detectan_fallos": {
@@ -72,6 +75,7 @@
     "vectorizar: specs/auditoria-1772/limites-calce.json",
     "vectorizar: tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json",
     "vectorizar: tools/geo/calles-historicas.json",
+    "vectorizar: tools/geo/referencias/1772-calles-1936.json",
     "epocas: fuentes/derivados/1578/ciudad-1578.json",
     "epocas: fuentes/derivados/1911/calzado.tif",
     "epocas: fuentes/derivados/1889/calzado.tif",
@@ -79,7 +83,13 @@
     "epocas: fuentes/derivados/1772/calzado.tif",
     "epocas: tools/geo/referencias/1772-calles-1936.json",
     "epocas: tools/geo/referencias/1772-red.json",
-    "epocas: tools/geo/calles-historicas.json"
+    "epocas: tools/geo/calles-historicas.json",
+    "epocas: tools/geo/referencias/1772-unidades.json",
+    "epocas: specs/auditoria-1772/edificado-original.json",
+    "epocas: specs/auditoria-1772/edificado-revisado.json",
+    "epocas: specs/auditoria-1772/limites-calce.json",
+    "epocas: tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json",
+    "epocas: tools/geo/referencias/1772-plazuelas.json"
    ],
    "heuristicas": [
     "calles-nuevas: fuentes/derivados/1936/segmentacion/mosaico/clases-costura.png",

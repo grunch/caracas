@@ -1,7 +1,7 @@
 {
- "fecha": "2026-11-21",
+ "fecha": "2026-11-23",
  "alcance": "Clasificación geométrica bajo el calce de control; la aprobación exige la muestra visual registrada en verificacion_visual.",
- "entrada_sha256": "501f0c2b501fccf6687d09475889fec28cb28c85fc137dafbd21223e1767a2c0",
+ "entrada_sha256": "2d1ff4ee3920cd156c7b356345621f03d82e617ee20fbd09d132a95d01573004",
  "epoca": 1,
  "calce_de_control": {
   "calce": "vigente, por identidad (tools/geo/gcp, anclas_identidad.py)",
@@ -16,30 +16,39 @@
  },
  "resumen": {
   "clases": {
-   "ausente": 168,
-   "fusionada": 6,
-   "incierta": 6,
-   "uno_a_uno": 36,
-   "vacio_coincide": 76
+   "adicional_sobre_vacio": 1,
+   "ausente": 43,
+   "desplazada_o_parcial": 6,
+   "dividida": 16,
+   "fusionada": 1,
+   "incierta": 71,
+   "uno_a_uno": 79,
+   "vacio_coincide": 75
   },
   "extrapoladas": 68,
-  "cuadras_sistema_1772": 45,
-  "cuadras_sobrantes": 0
+  "cuadras_sistema_1772": 189,
+  "cuadras_sobrantes": 1
  },
  "por_sector": [
   {
    "sector": "S1772-11",
-   "ausente": 7,
+   "ausente": 4,
+   "incierta": 2,
+   "uno_a_uno": 1,
    "vacio_coincide": 7
   },
   {
    "sector": "S1772-12",
-   "ausente": 8,
-   "vacio_coincide": 1
+   "adicional_sobre_vacio": 1,
+   "ausente": 2,
+   "dividida": 2,
+   "fusionada": 1,
+   "incierta": 3
   },
   {
    "sector": "S1772-13",
-   "ausente": 6,
+   "ausente": 5,
+   "uno_a_uno": 1,
    "vacio_coincide": 6
   },
   {
@@ -48,50 +57,63 @@
   },
   {
    "sector": "S1772-21",
-   "ausente": 12,
+   "ausente": 1,
+   "dividida": 1,
+   "incierta": 5,
+   "uno_a_uno": 5,
    "vacio_coincide": 7
   },
   {
    "sector": "S1772-22",
-   "ausente": 22,
-   "uno_a_uno": 12,
+   "ausente": 5,
+   "desplazada_o_parcial": 1,
+   "dividida": 3,
+   "incierta": 9,
+   "uno_a_uno": 16,
    "vacio_coincide": 1
   },
   {
    "sector": "S1772-23",
-   "ausente": 23,
-   "fusionada": 3,
-   "uno_a_uno": 8,
+   "ausente": 3,
+   "desplazada_o_parcial": 2,
+   "dividida": 2,
+   "incierta": 8,
+   "uno_a_uno": 19,
    "vacio_coincide": 1
   },
   {
    "sector": "S1772-24",
-   "ausente": 4,
+   "ausente": 1,
+   "desplazada_o_parcial": 3,
    "vacio_coincide": 13
   },
   {
    "sector": "S1772-31",
-   "ausente": 11,
+   "ausente": 5,
+   "incierta": 3,
+   "uno_a_uno": 3,
    "vacio_coincide": 7
   },
   {
    "sector": "S1772-32",
-   "ausente": 16,
-   "incierta": 4,
-   "uno_a_uno": 10,
+   "ausente": 1,
+   "dividida": 4,
+   "incierta": 9,
+   "uno_a_uno": 16,
    "vacio_coincide": 2
   },
   {
    "sector": "S1772-33",
-   "ausente": 26,
-   "fusionada": 3,
-   "incierta": 2,
-   "uno_a_uno": 6,
+   "ausente": 4,
+   "dividida": 2,
+   "incierta": 18,
+   "uno_a_uno": 13,
    "vacio_coincide": 5
   },
   {
    "sector": "S1772-34",
-   "ausente": 6,
+   "ausente": 4,
+   "incierta": 2,
    "vacio_coincide": 16
   },
   {
@@ -99,12 +121,17 @@
   },
   {
    "sector": "S1772-42",
-   "ausente": 9,
+   "ausente": 1,
+   "incierta": 5,
+   "uno_a_uno": 3,
    "vacio_coincide": 2
   },
   {
    "sector": "S1772-43",
-   "ausente": 12,
+   "ausente": 1,
+   "dividida": 2,
+   "incierta": 7,
+   "uno_a_uno": 2,
    "vacio_coincide": 6
   },
   {
@@ -116,8 +143,24 @@
   {
    "unidad": "U1772-0001",
    "ocupacion": "aislada",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8196,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.28
+    },
+    {
+     "cuadra": 8199,
+     "fraccion_cuadra": 0.13,
+     "fraccion_unidad": 0.08
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-11",
    "extrapolada": true,
    "mosaico_poligono": [
@@ -168,8 +211,19 @@
   {
    "unidad": "U1772-0003",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8198,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.24
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-11",
    "extrapolada": true,
    "mosaico_poligono": [
@@ -194,8 +248,34 @@
   {
    "unidad": "U1772-0004",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8199,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.11
+    },
+    {
+     "cuadra": 8200,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.03
+    },
+    {
+     "cuadra": 8196,
+     "fraccion_cuadra": 0.3,
+     "fraccion_unidad": 0.02
+    },
+    {
+     "cuadra": 8326,
+     "fraccion_cuadra": 0.2,
+     "fraccion_unidad": 0.01
+    },
+    {
+     "cuadra": 8335,
+     "fraccion_cuadra": 0.04,
+     "fraccion_unidad": 0.01
+    }
+   ],
    "sector": "S1772-12",
    "extrapolada": true,
    "mosaico_poligono": [
@@ -298,8 +378,24 @@
   {
    "unidad": "U1772-0008",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8070,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.31
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     2,
+     -6
+    ],
+    "celda_1936": [
+     2,
+     -6
+    ]
+   },
    "sector": "S1772-13",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -376,8 +472,24 @@
   {
    "unidad": "U1772-0011",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8072,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.37
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -7,
+     -5
+    ],
+    "celda_1936": [
+     -7,
+     -5
+    ]
+   },
    "sector": "S1772-11",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -402,8 +514,24 @@
   {
    "unidad": "U1772-0012",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8204,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.83
+    },
+    {
+     "cuadra": 8210,
+     "fraccion_cuadra": 0.02,
+     "fraccion_unidad": 0.02
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-12",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -428,8 +556,24 @@
   {
    "unidad": "U1772-0013",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "fusionada",
+   "cuadras": [
+    {
+     "cuadra": 8205,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.58
+    },
+    {
+     "cuadra": 8335,
+     "fraccion_cuadra": 0.17,
+     "fraccion_unidad": 0.13
+    },
+    {
+     "cuadra": 8211,
+     "fraccion_cuadra": 0.0,
+     "fraccion_unidad": 0.0
+    }
+   ],
    "sector": "S1772-12",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -454,8 +598,29 @@
   {
    "unidad": "U1772-0014",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8206,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.36
+    },
+    {
+     "cuadra": 8212,
+     "fraccion_cuadra": 0.13,
+     "fraccion_unidad": 0.1
+    },
+    {
+     "cuadra": 8335,
+     "fraccion_cuadra": 0.06,
+     "fraccion_unidad": 0.03
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-12",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -559,7 +724,13 @@
    "unidad": "U1772-0018",
    "ocupacion": "parcial",
    "clase": "ausente",
-   "cuadras": [],
+   "cuadras": [
+    {
+     "cuadra": 8347,
+     "fraccion_cuadra": 0.02,
+     "fraccion_unidad": 0.06
+    }
+   ],
    "sector": "S1772-14",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -584,8 +755,24 @@
   {
    "unidad": "U1772-0019",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8207,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.26
+    },
+    {
+     "cuadra": 8208,
+     "fraccion_cuadra": 0.1,
+     "fraccion_unidad": 0.03
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-21",
    "extrapolada": true,
    "mosaico_poligono": [
@@ -610,8 +797,24 @@
   {
    "unidad": "U1772-0020",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8208,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.39
+    },
+    {
+     "cuadra": 8207,
+     "fraccion_cuadra": 0.12,
+     "fraccion_unidad": 0.04
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-21",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -636,8 +839,19 @@
   {
    "unidad": "U1772-0021",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8209,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.34
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-21",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -662,8 +876,29 @@
   {
    "unidad": "U1772-0022",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8210,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.69
+    },
+    {
+     "cuadra": 8211,
+     "fraccion_cuadra": 0.06,
+     "fraccion_unidad": 0.04
+    },
+    {
+     "cuadra": 8204,
+     "fraccion_cuadra": 0.02,
+     "fraccion_unidad": 0.01
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -688,8 +923,39 @@
   {
    "unidad": "U1772-0023",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 4447,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.0
+    },
+    {
+     "cuadra": 8211,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.46
+    },
+    {
+     "cuadra": 8205,
+     "fraccion_cuadra": 0.12,
+     "fraccion_unidad": 0.02
+    },
+    {
+     "cuadra": 8210,
+     "fraccion_cuadra": 0.08,
+     "fraccion_unidad": 0.03
+    },
+    {
+     "cuadra": 8335,
+     "fraccion_cuadra": 0.01,
+     "fraccion_unidad": 0.0
+    },
+    {
+     "cuadra": 8204,
+     "fraccion_cuadra": 0.0,
+     "fraccion_unidad": 0.0
+    }
+   ],
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -714,8 +980,29 @@
   {
    "unidad": "U1772-0024",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8212,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.49
+    },
+    {
+     "cuadra": 4108,
+     "fraccion_cuadra": 0.65,
+     "fraccion_unidad": 0.01
+    },
+    {
+     "cuadra": 8226,
+     "fraccion_cuadra": 0.35,
+     "fraccion_unidad": 0.07
+    },
+    {
+     "cuadra": 8206,
+     "fraccion_cuadra": 0.29,
+     "fraccion_unidad": 0.06
+    }
+   ],
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -740,8 +1027,19 @@
   {
    "unidad": "U1772-0025",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8213,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.69
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -766,8 +1064,19 @@
   {
    "unidad": "U1772-0026",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8214,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.74
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -818,8 +1127,24 @@
   {
    "unidad": "U1772-0028",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8215,
+     "fraccion_cuadra": 0.99,
+     "fraccion_unidad": 0.87
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     1,
+     -3
+    ],
+    "celda_1936": [
+     1,
+     -3
+    ]
+   },
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -844,8 +1169,29 @@
   {
    "unidad": "U1772-0029",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8216,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.78
+    },
+    {
+     "cuadra": 2649,
+     "fraccion_cuadra": 0.12,
+     "fraccion_unidad": 0.02
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     2,
+     -3
+    ],
+    "celda_1936": [
+     2,
+     -3
+    ]
+   },
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -870,8 +1216,19 @@
   {
    "unidad": "U1772-0030",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8078,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.09
+    },
+    {
+     "cuadra": 8079,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.12
+    }
+   ],
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -922,8 +1279,24 @@
   {
    "unidad": "U1772-0032",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8082,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.15
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     3,
+     -4
+    ],
+    "celda_1936": [
+     3,
+     -4
+    ]
+   },
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -948,8 +1321,19 @@
   {
    "unidad": "U1772-0033",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8218,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.14
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -974,8 +1358,24 @@
   {
    "unidad": "U1772-0034",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8219,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.12
+    },
+    {
+     "cuadra": 8347,
+     "fraccion_cuadra": 0.0,
+     "fraccion_unidad": 0.0
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1000,8 +1400,14 @@
   {
    "unidad": "U1772-0035",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "desplazada_o_parcial",
+   "cuadras": [
+    {
+     "cuadra": 8347,
+     "fraccion_cuadra": 0.27,
+     "fraccion_unidad": 0.34
+    }
+   ],
    "sector": "S1772-24",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1026,8 +1432,22 @@
   {
    "unidad": "U1772-0036",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8220,
+     "fraccion_cuadra": 0.94,
+     "fraccion_unidad": 0.19
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -9,
+     -2
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-21",
    "extrapolada": true,
    "mosaico_poligono": [
@@ -1104,8 +1524,19 @@
   {
    "unidad": "U1772-0039",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8224,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.25
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1130,8 +1561,24 @@
   {
    "unidad": "U1772-0040",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8225,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.4
+    },
+    {
+     "cuadra": 8211,
+     "fraccion_cuadra": 0.01,
+     "fraccion_unidad": 0.01
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1156,8 +1603,24 @@
   {
    "unidad": "U1772-0041",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8226,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.38
+    },
+    {
+     "cuadra": 8212,
+     "fraccion_cuadra": 0.13,
+     "fraccion_unidad": 0.13
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1182,8 +1645,19 @@
   {
    "unidad": "U1772-0042",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8227,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.86
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1208,8 +1682,19 @@
   {
    "unidad": "U1772-0043",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8228,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.69
+    },
+    {
+     "cuadra": 3542,
+     "fraccion_cuadra": 0.91,
+     "fraccion_unidad": 0.07
+    }
+   ],
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1234,8 +1719,19 @@
   {
    "unidad": "U1772-0044",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8229,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.48
+    },
+    {
+     "cuadra": 2044,
+     "fraccion_cuadra": 0.79,
+     "fraccion_unidad": 0.06
+    }
+   ],
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1261,7 +1757,13 @@
    "unidad": "U1772-0045",
    "ocupacion": "parcial",
    "clase": "ausente",
-   "cuadras": [],
+   "cuadras": [
+    {
+     "cuadra": 8347,
+     "fraccion_cuadra": 0.02,
+     "fraccion_unidad": 0.02
+    }
+   ],
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1286,8 +1788,14 @@
   {
    "unidad": "U1772-0046",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "desplazada_o_parcial",
+   "cuadras": [
+    {
+     "cuadra": 8347,
+     "fraccion_cuadra": 0.24,
+     "fraccion_unidad": 0.44
+    }
+   ],
    "sector": "S1772-24",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1312,8 +1820,24 @@
   {
    "unidad": "U1772-0047",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8083,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.2
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -8,
+     -2
+    ],
+    "celda_1936": [
+     -8,
+     -2
+    ]
+   },
    "sector": "S1772-21",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1338,8 +1862,19 @@
   {
    "unidad": "U1772-0048",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8086,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.26
+    },
+    {
+     "cuadra": 8085,
+     "fraccion_cuadra": 0.91,
+     "fraccion_unidad": 0.17
+    }
+   ],
    "sector": "S1772-21",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1364,8 +1899,24 @@
   {
    "unidad": "U1772-0049",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8087,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.65
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -6,
+     -2
+    ],
+    "celda_1936": [
+     -6,
+     -2
+    ]
+   },
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1393,9 +1944,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 4527,
-     "fraccion_cuadra": 0.94,
-     "fraccion_unidad": 0.97
+     "cuadra": 8088,
+     "fraccion_cuadra": 0.95,
+     "fraccion_unidad": 0.98
     }
    ],
    "identidad_pareja": {
@@ -1435,9 +1986,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 4374,
-     "fraccion_cuadra": 0.97,
-     "fraccion_unidad": 0.43
+     "cuadra": 8089,
+     "fraccion_cuadra": 0.96,
+     "fraccion_unidad": 0.71
     }
    ],
    "identidad_pareja": {
@@ -1477,9 +2028,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 3827,
-     "fraccion_cuadra": 0.95,
-     "fraccion_unidad": 0.85
+     "cuadra": 8090,
+     "fraccion_cuadra": 0.97,
+     "fraccion_unidad": 0.77
     }
    ],
    "identidad_pareja": {
@@ -1519,9 +2070,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 3600,
-     "fraccion_cuadra": 0.94,
-     "fraccion_unidad": 0.92
+     "cuadra": 8091,
+     "fraccion_cuadra": 0.92,
+     "fraccion_unidad": 1.0
     }
    ],
    "identidad_pareja": {
@@ -1561,9 +2112,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 3389,
-     "fraccion_cuadra": 0.88,
-     "fraccion_unidad": 0.97
+     "cuadra": 8092,
+     "fraccion_cuadra": 0.9,
+     "fraccion_unidad": 1.0
     }
    ],
    "identidad_pareja": {
@@ -1600,14 +2151,24 @@
   {
    "unidad": "U1772-0055",
    "ocupacion": "conjunto_especial",
-   "clase": "fusionada",
+   "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8079,
-     "fraccion_cuadra": 0.48,
-     "fraccion_unidad": 0.96
+     "cuadra": 8093,
+     "fraccion_cuadra": 0.97,
+     "fraccion_unidad": 0.88
     }
    ],
+   "identidad_pareja": {
+    "celda_original": [
+     2,
+     -2
+    ],
+    "celda_1936": [
+     2,
+     -2
+    ]
+   },
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1635,9 +2196,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8081,
-     "fraccion_cuadra": 0.95,
-     "fraccion_unidad": 0.96
+     "cuadra": 8094,
+     "fraccion_cuadra": 0.98,
+     "fraccion_unidad": 0.97
     }
    ],
    "identidad_pareja": {
@@ -1677,8 +2238,8 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 2072,
-     "fraccion_cuadra": 0.91,
+     "cuadra": 8095,
+     "fraccion_cuadra": 0.89,
      "fraccion_unidad": 1.0
     }
    ],
@@ -1716,8 +2277,24 @@
   {
    "unidad": "U1772-0058",
    "ocupacion": "conjunto_especial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8233,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.6
+    },
+    {
+     "cuadra": 8236,
+     "fraccion_cuadra": 0.04,
+     "fraccion_unidad": 0.02
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1742,8 +2319,24 @@
   {
    "unidad": "U1772-0059",
    "ocupacion": "conjunto_especial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8236,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.37
+    },
+    {
+     "cuadra": 8233,
+     "fraccion_cuadra": 0.14,
+     "fraccion_unidad": 0.06
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1820,8 +2413,24 @@
   {
    "unidad": "U1772-0062",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8096,
+     "fraccion_cuadra": 0.99,
+     "fraccion_unidad": 0.83
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -8,
+     -1
+    ],
+    "celda_1936": [
+     -8,
+     -1
+    ]
+   },
    "sector": "S1772-21",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1846,8 +2455,24 @@
   {
    "unidad": "U1772-0063",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8097,
+     "fraccion_cuadra": 0.99,
+     "fraccion_unidad": 0.78
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -6,
+     -1
+    ],
+    "celda_1936": [
+     -6,
+     -1
+    ]
+   },
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -1875,9 +2500,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 4591,
-     "fraccion_cuadra": 0.86,
-     "fraccion_unidad": 0.99
+     "cuadra": 8098,
+     "fraccion_cuadra": 0.84,
+     "fraccion_unidad": 1.0
     }
    ],
    "identidad_pareja": {
@@ -1917,14 +2542,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 4288,
-     "fraccion_cuadra": 0.93,
-     "fraccion_unidad": 0.88
-    },
-    {
-     "cuadra": 4591,
-     "fraccion_cuadra": 0.0,
-     "fraccion_unidad": 0.0
+     "cuadra": 8099,
+     "fraccion_cuadra": 0.88,
+     "fraccion_unidad": 0.94
     }
    ],
    "identidad_pareja": {
@@ -1964,14 +2584,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 3947,
-     "fraccion_cuadra": 0.94,
-     "fraccion_unidad": 0.89
-    },
-    {
-     "cuadra": 3827,
-     "fraccion_cuadra": 0.0,
-     "fraccion_unidad": 0.0
+     "cuadra": 8100,
+     "fraccion_cuadra": 0.89,
+     "fraccion_unidad": 0.99
     }
    ],
    "identidad_pareja": {
@@ -2011,7 +2626,7 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 2806,
+     "cuadra": 8101,
      "fraccion_cuadra": 0.93,
      "fraccion_unidad": 0.75
     }
@@ -2053,9 +2668,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 2426,
-     "fraccion_cuadra": 0.96,
-     "fraccion_unidad": 0.94
+     "cuadra": 8102,
+     "fraccion_cuadra": 0.88,
+     "fraccion_unidad": 0.99
     }
    ],
    "identidad_pareja": {
@@ -2092,8 +2707,24 @@
   {
    "unidad": "U1772-0069",
    "ocupacion": "conjunto_especial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8103,
+     "fraccion_cuadra": 0.94,
+     "fraccion_unidad": 0.95
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     4,
+     -1
+    ],
+    "celda_1936": [
+     4,
+     -1
+    ]
+   },
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -2118,8 +2749,19 @@
   {
    "unidad": "U1772-0070",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8237,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.62
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -2170,8 +2812,22 @@
   {
    "unidad": "U1772-0072",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8238,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.34
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -9,
+     0
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-21",
    "extrapolada": true,
    "mosaico_poligono": [
@@ -2196,8 +2852,24 @@
   {
    "unidad": "U1772-0073",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8104,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.62
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -8,
+     0
+    ],
+    "celda_1936": [
+     -8,
+     0
+    ]
+   },
    "sector": "S1772-21",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -2222,8 +2894,24 @@
   {
    "unidad": "U1772-0074",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8106,
+     "fraccion_cuadra": 0.96,
+     "fraccion_unidad": 0.53
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -7,
+     0
+    ],
+    "celda_1936": [
+     -7,
+     0
+    ]
+   },
    "sector": "S1772-21",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -2274,8 +2962,24 @@
   {
    "unidad": "U1772-0076",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8107,
+     "fraccion_cuadra": 0.9,
+     "fraccion_unidad": 0.97
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -5,
+     0
+    ],
+    "celda_1936": [
+     -5,
+     0
+    ]
+   },
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -2303,9 +3007,14 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 4430,
+     "cuadra": 8108,
      "fraccion_cuadra": 1.0,
-     "fraccion_unidad": 0.33
+     "fraccion_unidad": 0.37
+    },
+    {
+     "cuadra": 8107,
+     "fraccion_cuadra": 0.0,
+     "fraccion_unidad": 0.0
     }
    ],
    "identidad_pareja": {
@@ -2345,14 +3054,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8088,
-     "fraccion_cuadra": 1.0,
-     "fraccion_unidad": 0.73
-    },
-    {
-     "cuadra": 3947,
-     "fraccion_cuadra": 0.0,
-     "fraccion_unidad": 0.0
+     "cuadra": 8109,
+     "fraccion_cuadra": 0.92,
+     "fraccion_unidad": 0.95
     }
    ],
    "identidad_pareja": {
@@ -2392,9 +3096,14 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 3689,
-     "fraccion_cuadra": 0.94,
-     "fraccion_unidad": 0.82
+     "cuadra": 8110,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.89
+    },
+    {
+     "cuadra": 8109,
+     "fraccion_cuadra": 0.01,
+     "fraccion_unidad": 0.01
     }
    ],
    "identidad_pareja": {
@@ -2434,9 +3143,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8085,
-     "fraccion_cuadra": 0.91,
-     "fraccion_unidad": 0.96
+     "cuadra": 8111,
+     "fraccion_cuadra": 0.94,
+     "fraccion_unidad": 0.92
     }
    ],
    "identidad_pareja": {
@@ -2476,14 +3185,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8090,
-     "fraccion_cuadra": 0.84,
-     "fraccion_unidad": 0.89
-    },
-    {
-     "cuadra": 3071,
-     "fraccion_cuadra": 0.0,
-     "fraccion_unidad": 0.0
+     "cuadra": 8112,
+     "fraccion_cuadra": 0.9,
+     "fraccion_unidad": 0.75
     }
    ],
    "identidad_pareja": {
@@ -2520,14 +3224,24 @@
   {
    "unidad": "U1772-0082",
    "ocupacion": "continua",
-   "clase": "fusionada",
+   "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8091,
-     "fraccion_cuadra": 0.42,
-     "fraccion_unidad": 0.92
+     "cuadra": 8113,
+     "fraccion_cuadra": 0.98,
+     "fraccion_unidad": 0.94
     }
    ],
+   "identidad_pareja": {
+    "celda_original": [
+     2,
+     0
+    ],
+    "celda_1936": [
+     2,
+     0
+    ]
+   },
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -2555,9 +3269,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 2488,
-     "fraccion_cuadra": 1.0,
-     "fraccion_unidad": 0.91
+     "cuadra": 8114,
+     "fraccion_cuadra": 0.97,
+     "fraccion_unidad": 0.93
     }
    ],
    "identidad_pareja": {
@@ -2594,8 +3308,19 @@
   {
    "unidad": "U1772-0084",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8240,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.38
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -2698,8 +3423,24 @@
   {
    "unidad": "U1772-0088",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8115,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.16
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -8,
+     1
+    ],
+    "celda_1936": [
+     -8,
+     1
+    ]
+   },
    "sector": "S1772-31",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -2724,8 +3465,24 @@
   {
    "unidad": "U1772-0089",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8116,
+     "fraccion_cuadra": 0.88,
+     "fraccion_unidad": 0.97
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -7,
+     1
+    ],
+    "celda_1936": [
+     -7,
+     1
+    ]
+   },
    "sector": "S1772-31",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -2750,8 +3507,24 @@
   {
    "unidad": "U1772-0090",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8117,
+     "fraccion_cuadra": 0.92,
+     "fraccion_unidad": 0.99
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -6,
+     1
+    ],
+    "celda_1936": [
+     -6,
+     1
+    ]
+   },
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -2779,9 +3552,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8086,
-     "fraccion_cuadra": 0.92,
-     "fraccion_unidad": 0.94
+     "cuadra": 8118,
+     "fraccion_cuadra": 0.89,
+     "fraccion_unidad": 0.97
     }
    ],
    "identidad_pareja": {
@@ -2821,9 +3594,9 @@
    "clase": "incierta",
    "cuadras": [
     {
-     "cuadra": 8087,
-     "fraccion_cuadra": 0.85,
-     "fraccion_unidad": 1.0
+     "cuadra": 8242,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.91
     }
    ],
    "identidad_pareja": {
@@ -2861,9 +3634,9 @@
    "clase": "incierta",
    "cuadras": [
     {
-     "cuadra": 3487,
-     "fraccion_cuadra": 0.84,
-     "fraccion_unidad": 0.99
+     "cuadra": 8243,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.87
     }
    ],
    "identidad_pareja": {
@@ -2901,9 +3674,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8093,
-     "fraccion_cuadra": 0.87,
-     "fraccion_unidad": 0.8
+     "cuadra": 8119,
+     "fraccion_cuadra": 0.91,
+     "fraccion_unidad": 0.57
     }
    ],
    "identidad_pareja": {
@@ -2943,9 +3716,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8094,
-     "fraccion_cuadra": 0.82,
-     "fraccion_unidad": 0.99
+     "cuadra": 8120,
+     "fraccion_cuadra": 0.81,
+     "fraccion_unidad": 1.0
     }
    ],
    "identidad_pareja": {
@@ -2982,19 +3755,24 @@
   {
    "unidad": "U1772-0096",
    "ocupacion": "continua",
-   "clase": "fusionada",
+   "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8091,
-     "fraccion_cuadra": 0.49,
-     "fraccion_unidad": 0.88
-    },
-    {
-     "cuadra": 8094,
-     "fraccion_cuadra": 0.0,
-     "fraccion_unidad": 0.0
+     "cuadra": 8121,
+     "fraccion_cuadra": 0.87,
+     "fraccion_unidad": 0.96
     }
    ],
+   "identidad_pareja": {
+    "celda_original": [
+     2,
+     1
+    ],
+    "celda_1936": [
+     2,
+     1
+    ]
+   },
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3022,13 +3800,13 @@
    "clase": "incierta",
    "cuadras": [
     {
-     "cuadra": 2568,
-     "fraccion_cuadra": 0.91,
-     "fraccion_unidad": 0.82
+     "cuadra": 8244,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.88
     },
     {
-     "cuadra": 8091,
-     "fraccion_cuadra": 0.0,
+     "cuadra": 2568,
+     "fraccion_cuadra": 0.26,
      "fraccion_unidad": 0.0
     }
    ],
@@ -3061,8 +3839,19 @@
   {
    "unidad": "U1772-0098",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8245,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.53
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3088,7 +3877,13 @@
    "unidad": "U1772-0099",
    "ocupacion": "parcial",
    "clase": "ausente",
-   "cuadras": [],
+   "cuadras": [
+    {
+     "cuadra": 8245,
+     "fraccion_cuadra": 0.01,
+     "fraccion_unidad": 0.0
+    }
+   ],
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3166,7 +3961,13 @@
    "unidad": "U1772-0102",
    "ocupacion": "parcial",
    "clase": "ausente",
-   "cuadras": [],
+   "cuadras": [
+    {
+     "cuadra": 8116,
+     "fraccion_cuadra": 0.0,
+     "fraccion_unidad": 0.0
+    }
+   ],
    "sector": "S1772-31",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3191,8 +3992,19 @@
   {
    "unidad": "U1772-0103",
    "ocupacion": "conjunto_especial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8252,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.48
+    },
+    {
+     "cuadra": 5089,
+     "fraccion_cuadra": 0.65,
+     "fraccion_unidad": 0.03
+    }
+   ],
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3217,8 +4029,24 @@
   {
    "unidad": "U1772-0104",
    "ocupacion": "conjunto_especial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8122,
+     "fraccion_cuadra": 0.83,
+     "fraccion_unidad": 0.85
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -5,
+     2
+    ],
+    "celda_1936": [
+     -5,
+     2
+    ]
+   },
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3246,9 +4074,14 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 4475,
-     "fraccion_cuadra": 0.85,
-     "fraccion_unidad": 0.86
+     "cuadra": 8123,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.52
+    },
+    {
+     "cuadra": 8122,
+     "fraccion_cuadra": 0.01,
+     "fraccion_unidad": 0.01
     }
    ],
    "identidad_pareja": {
@@ -3288,9 +4121,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8095,
-     "fraccion_cuadra": 0.88,
-     "fraccion_unidad": 0.93
+     "cuadra": 8125,
+     "fraccion_cuadra": 0.86,
+     "fraccion_unidad": 0.96
     }
    ],
    "identidad_pareja": {
@@ -3330,14 +4163,9 @@
    "clase": "incierta",
    "cuadras": [
     {
-     "cuadra": 8096,
-     "fraccion_cuadra": 0.87,
-     "fraccion_unidad": 0.95
-    },
-    {
-     "cuadra": 8087,
-     "fraccion_cuadra": 0.01,
-     "fraccion_unidad": 0.01
+     "cuadra": 8253,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.9
     }
    ],
    "identidad_pareja": {
@@ -3375,14 +4203,9 @@
    "clase": "incierta",
    "cuadras": [
     {
-     "cuadra": 8097,
-     "fraccion_cuadra": 0.86,
-     "fraccion_unidad": 0.64
-    },
-    {
-     "cuadra": 3487,
-     "fraccion_cuadra": 0.01,
-     "fraccion_unidad": 0.01
+     "cuadra": 8254,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.68
     }
    ],
    "identidad_pareja": {
@@ -3420,14 +4243,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8099,
-     "fraccion_cuadra": 0.85,
-     "fraccion_unidad": 0.93
-    },
-    {
-     "cuadra": 8094,
-     "fraccion_cuadra": 0.01,
-     "fraccion_unidad": 0.01
+     "cuadra": 8126,
+     "fraccion_cuadra": 0.88,
+     "fraccion_unidad": 0.97
     }
    ],
    "identidad_pareja": {
@@ -3467,9 +4285,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8101,
-     "fraccion_cuadra": 0.89,
-     "fraccion_unidad": 0.75
+     "cuadra": 8127,
+     "fraccion_cuadra": 0.92,
+     "fraccion_unidad": 0.95
     }
    ],
    "identidad_pareja": {
@@ -3506,19 +4324,24 @@
   {
    "unidad": "U1772-0111",
    "ocupacion": "continua",
-   "clase": "ausente",
+   "clase": "incierta",
    "cuadras": [
     {
-     "cuadra": 8101,
-     "fraccion_cuadra": 0.01,
-     "fraccion_unidad": 0.01
+     "cuadra": 8255,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.5
     },
     {
-     "cuadra": 8091,
-     "fraccion_cuadra": 0.0,
-     "fraccion_unidad": 0.0
+     "cuadra": 8343,
+     "fraccion_cuadra": 0.08,
+     "fraccion_unidad": 0.01
     }
    ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3543,8 +4366,19 @@
   {
    "unidad": "U1772-0112",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8256,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.36
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3569,8 +4403,22 @@
   {
    "unidad": "U1772-0113",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8257,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.3
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     5,
+     2
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3595,8 +4443,22 @@
   {
    "unidad": "U1772-0114",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8258,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.11
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     6,
+     2
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-34",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3647,8 +4509,22 @@
   {
    "unidad": "U1772-0116",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8259,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.28
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -8,
+     3
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-31",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3673,8 +4549,22 @@
   {
    "unidad": "U1772-0117",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8260,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.91
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -7,
+     3
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-31",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3699,8 +4589,29 @@
   {
    "unidad": "U1772-0118",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8128,
+     "fraccion_cuadra": 0.98,
+     "fraccion_unidad": 0.6
+    },
+    {
+     "cuadra": 8122,
+     "fraccion_cuadra": 0.01,
+     "fraccion_unidad": 0.01
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -5,
+     3
+    ],
+    "celda_1936": [
+     -5,
+     3
+    ]
+   },
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3725,14 +4636,29 @@
   {
    "unidad": "U1772-0119",
    "ocupacion": "parcial",
-   "clase": "ausente",
+   "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 4475,
-     "fraccion_cuadra": 0.01,
-     "fraccion_unidad": 0.01
+     "cuadra": 8133,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.09
+    },
+    {
+     "cuadra": 8122,
+     "fraccion_cuadra": 0.0,
+     "fraccion_unidad": 0.0
     }
    ],
+   "identidad_pareja": {
+    "celda_original": [
+     -4,
+     3
+    ],
+    "celda_1936": [
+     -4,
+     3
+    ]
+   },
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3760,14 +4686,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 4233,
+     "cuadra": 8135,
      "fraccion_cuadra": 0.9,
-     "fraccion_unidad": 0.88
-    },
-    {
-     "cuadra": 8095,
-     "fraccion_cuadra": 0.01,
-     "fraccion_unidad": 0.01
+     "fraccion_unidad": 0.96
     }
    ],
    "identidad_pareja": {
@@ -3807,14 +4728,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8102,
-     "fraccion_cuadra": 0.89,
-     "fraccion_unidad": 0.92
-    },
-    {
-     "cuadra": 8096,
-     "fraccion_cuadra": 0.0,
-     "fraccion_unidad": 0.0
+     "cuadra": 8136,
+     "fraccion_cuadra": 0.91,
+     "fraccion_unidad": 0.96
     }
    ],
    "identidad_pareja": {
@@ -3854,9 +4770,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 3598,
-     "fraccion_cuadra": 0.88,
-     "fraccion_unidad": 0.93
+     "cuadra": 8137,
+     "fraccion_cuadra": 0.87,
+     "fraccion_unidad": 0.99
     }
    ],
    "identidad_pareja": {
@@ -3893,19 +4809,24 @@
   {
    "unidad": "U1772-0123",
    "ocupacion": "continua",
-   "clase": "fusionada",
+   "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8103,
-     "fraccion_cuadra": 0.45,
-     "fraccion_unidad": 0.88
-    },
-    {
-     "cuadra": 3598,
-     "fraccion_cuadra": 0.0,
-     "fraccion_unidad": 0.0
+     "cuadra": 8138,
+     "fraccion_cuadra": 0.95,
+     "fraccion_unidad": 0.95
     }
    ],
+   "identidad_pareja": {
+    "celda_original": [
+     0,
+     3
+    ],
+    "celda_1936": [
+     0,
+     3
+    ]
+   },
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -3933,14 +4854,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 3212,
-     "fraccion_cuadra": 0.97,
-     "fraccion_unidad": 0.88
-    },
-    {
-     "cuadra": 8099,
-     "fraccion_cuadra": 0.01,
-     "fraccion_unidad": 0.01
+     "cuadra": 8139,
+     "fraccion_cuadra": 0.89,
+     "fraccion_unidad": 0.98
     }
    ],
    "identidad_pareja": {
@@ -3980,9 +4896,9 @@
    "clase": "incierta",
    "cuadras": [
     {
-     "cuadra": 3035,
+     "cuadra": 8261,
      "fraccion_cuadra": 1.0,
-     "fraccion_unidad": 0.25
+     "fraccion_unidad": 0.69
     }
    ],
    "identidad_pareja": {
@@ -4017,8 +4933,22 @@
   {
    "unidad": "U1772-0126",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8262,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.85
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     3,
+     3
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4043,8 +4973,22 @@
   {
    "unidad": "U1772-0127",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8264,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.09
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     4,
+     3
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4173,8 +5117,22 @@
   {
    "unidad": "U1772-0132",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8265,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.14
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -8,
+     4
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-31",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4199,8 +5157,24 @@
   {
    "unidad": "U1772-0133",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8140,
+     "fraccion_cuadra": 0.95,
+     "fraccion_unidad": 0.21
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -7,
+     4
+    ],
+    "celda_1936": [
+     -7,
+     4
+    ]
+   },
    "sector": "S1772-31",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4226,7 +5200,13 @@
    "unidad": "U1772-0134",
    "ocupacion": "parcial",
    "clase": "ausente",
-   "cuadras": [],
+   "cuadras": [
+    {
+     "cuadra": 5089,
+     "fraccion_cuadra": 0.07,
+     "fraccion_unidad": 0.0
+    }
+   ],
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4251,8 +5231,19 @@
   {
    "unidad": "U1772-0135",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8147,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.09
+    },
+    {
+     "cuadra": 8145,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.08
+    }
+   ],
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4277,8 +5268,19 @@
   {
    "unidad": "U1772-0136",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8154,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.13
+    },
+    {
+     "cuadra": 8148,
+     "fraccion_cuadra": 0.95,
+     "fraccion_unidad": 0.12
+    }
+   ],
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4303,8 +5305,24 @@
   {
    "unidad": "U1772-0137",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8155,
+     "fraccion_cuadra": 0.82,
+     "fraccion_unidad": 1.0
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -3,
+     4
+    ],
+    "celda_1936": [
+     -3,
+     4
+    ]
+   },
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4332,14 +5350,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 3974,
-     "fraccion_cuadra": 0.87,
-     "fraccion_unidad": 0.9
-    },
-    {
-     "cuadra": 8102,
-     "fraccion_cuadra": 0.01,
-     "fraccion_unidad": 0.01
+     "cuadra": 8156,
+     "fraccion_cuadra": 0.82,
+     "fraccion_unidad": 0.94
     }
    ],
    "identidad_pareja": {
@@ -4379,9 +5392,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 3652,
-     "fraccion_cuadra": 0.88,
-     "fraccion_unidad": 0.91
+     "cuadra": 8157,
+     "fraccion_cuadra": 0.85,
+     "fraccion_unidad": 0.96
     }
    ],
    "identidad_pareja": {
@@ -4418,19 +5431,24 @@
   {
    "unidad": "U1772-0140",
    "ocupacion": "continua",
-   "clase": "fusionada",
+   "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8103,
-     "fraccion_cuadra": 0.45,
-     "fraccion_unidad": 0.93
-    },
-    {
-     "cuadra": 3652,
-     "fraccion_cuadra": 0.0,
-     "fraccion_unidad": 0.0
+     "cuadra": 8158,
+     "fraccion_cuadra": 0.83,
+     "fraccion_unidad": 0.96
     }
    ],
+   "identidad_pareja": {
+    "celda_original": [
+     0,
+     4
+    ],
+    "celda_1936": [
+     0,
+     4
+    ]
+   },
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4455,8 +5473,24 @@
   {
    "unidad": "U1772-0141",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8266,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.87
+    },
+    {
+     "cuadra": 8139,
+     "fraccion_cuadra": 0.0,
+     "fraccion_unidad": 0.0
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4507,8 +5541,22 @@
   {
    "unidad": "U1772-0143",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8267,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.55
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     3,
+     4
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4533,8 +5581,22 @@
   {
    "unidad": "U1772-0144",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8268,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.09
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     4,
+     4
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4715,8 +5777,19 @@
   {
    "unidad": "U1772-0151",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8280,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.05
+    },
+    {
+     "cuadra": 8281,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.36
+    }
+   ],
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4742,7 +5815,13 @@
    "unidad": "U1772-0152",
    "ocupacion": "terreno_libre",
    "clase": "vacio_coincide",
-   "cuadras": [],
+   "cuadras": [
+    {
+     "cuadra": 8155,
+     "fraccion_cuadra": 0.01,
+     "fraccion_unidad": 0.01
+    }
+   ],
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4767,8 +5846,29 @@
   {
    "unidad": "U1772-0153",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8161,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.74
+    },
+    {
+     "cuadra": 8156,
+     "fraccion_cuadra": 0.0,
+     "fraccion_unidad": 0.0
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -2,
+     5
+    ],
+    "celda_1936": [
+     -2,
+     5
+    ]
+   },
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4793,8 +5893,19 @@
   {
    "unidad": "U1772-0154",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8282,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.66
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4819,8 +5930,19 @@
   {
    "unidad": "U1772-0155",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8283,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.72
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4845,8 +5967,19 @@
   {
    "unidad": "U1772-0156",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8284,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.71
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4871,8 +6004,19 @@
   {
    "unidad": "U1772-0157",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8285,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.83
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4897,8 +6041,24 @@
   {
    "unidad": "U1772-0158",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8162,
+     "fraccion_cuadra": 0.99,
+     "fraccion_unidad": 0.5
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     3,
+     5
+    ],
+    "celda_1936": [
+     3,
+     5
+    ]
+   },
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4923,8 +6083,24 @@
   {
    "unidad": "U1772-0159",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8163,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.15
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     4,
+     5
+    ],
+    "celda_1936": [
+     4,
+     5
+    ]
+   },
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -4949,8 +6125,24 @@
   {
    "unidad": "U1772-0160",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8164,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.08
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     5,
+     5
+    ],
+    "celda_1936": [
+     5,
+     5
+    ]
+   },
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5027,8 +6219,19 @@
   {
    "unidad": "U1772-0163",
    "ocupacion": "conjunto_especial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8286,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.43
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5053,8 +6256,19 @@
   {
    "unidad": "U1772-0164",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8287,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.75
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5079,8 +6293,19 @@
   {
    "unidad": "U1772-0165",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8288,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.64
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5105,8 +6330,19 @@
   {
    "unidad": "U1772-0166",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8289,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.32
+    },
+    {
+     "cuadra": 8290,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.09
+    }
+   ],
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5131,8 +6367,19 @@
   {
    "unidad": "U1772-0167",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8291,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.29
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5157,8 +6404,19 @@
   {
    "unidad": "U1772-0168",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8293,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.11
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5183,8 +6441,24 @@
   {
    "unidad": "U1772-0169",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8168,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.33
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     3,
+     6
+    ],
+    "celda_1936": [
+     3,
+     6
+    ]
+   },
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5261,8 +6535,19 @@
   {
    "unidad": "U1772-0172",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8294,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.38
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-42",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5287,8 +6572,24 @@
   {
    "unidad": "U1772-0173",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8295,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.86
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -1,
+     7
+    ],
+    "celda_1936": [
+     -1,
+     7
+    ]
+   },
    "sector": "S1772-42",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5313,8 +6614,24 @@
   {
    "unidad": "U1772-0174",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8169,
+     "fraccion_cuadra": 0.88,
+     "fraccion_unidad": 0.9
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     0,
+     7
+    ],
+    "celda_1936": [
+     0,
+     7
+    ]
+   },
    "sector": "S1772-43",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5339,8 +6656,19 @@
   {
    "unidad": "U1772-0175",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8296,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.9
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-43",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5391,8 +6719,24 @@
   {
    "unidad": "U1772-0177",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8170,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.14
+    },
+    {
+     "cuadra": 8171,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.17
+    },
+    {
+     "cuadra": 8172,
+     "fraccion_cuadra": 0.98,
+     "fraccion_unidad": 0.11
+    }
+   ],
    "sector": "S1772-43",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5443,8 +6787,24 @@
   {
    "unidad": "U1772-0179",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8173,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.25
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -2,
+     8
+    ],
+    "celda_1936": [
+     -2,
+     8
+    ]
+   },
    "sector": "S1772-42",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5469,8 +6829,24 @@
   {
    "unidad": "U1772-0180",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8176,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.17
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -1,
+     8
+    ],
+    "celda_1936": [
+     -1,
+     8
+    ]
+   },
    "sector": "S1772-42",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5495,8 +6871,24 @@
   {
    "unidad": "U1772-0181",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8178,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.77
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     0,
+     8
+    ],
+    "celda_1936": [
+     0,
+     8
+    ]
+   },
    "sector": "S1772-43",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5521,8 +6913,19 @@
   {
    "unidad": "U1772-0182",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8299,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.85
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-43",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5547,8 +6950,22 @@
   {
    "unidad": "U1772-0183",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8300,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.71
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     3,
+     8
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-43",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5573,8 +6990,19 @@
   {
    "unidad": "U1772-0184",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8301,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.23
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-43",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5599,8 +7027,19 @@
   {
    "unidad": "U1772-0185",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8302,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.22
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-42",
    "extrapolada": true,
    "mosaico_poligono": [
@@ -5625,8 +7064,19 @@
   {
    "unidad": "U1772-0186",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8304,
+     "fraccion_cuadra": 0.98,
+     "fraccion_unidad": 0.27
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-42",
    "extrapolada": true,
    "mosaico_poligono": [
@@ -5651,8 +7101,19 @@
   {
    "unidad": "U1772-0187",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8305,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.57
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-43",
    "extrapolada": true,
    "mosaico_poligono": [
@@ -5677,8 +7138,19 @@
   {
    "unidad": "U1772-0188",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8306,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.57
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-43",
    "extrapolada": true,
    "mosaico_poligono": [
@@ -5833,8 +7305,19 @@
   {
    "unidad": "U1772-0194",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8310,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.18
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5859,8 +7342,14 @@
   {
    "unidad": "U1772-0195",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "desplazada_o_parcial",
+   "cuadras": [
+    {
+     "cuadra": 3192,
+     "fraccion_cuadra": 0.5,
+     "fraccion_unidad": 0.82
+    }
+   ],
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5885,8 +7374,14 @@
   {
    "unidad": "U1772-0196",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "desplazada_o_parcial",
+   "cuadras": [
+    {
+     "cuadra": 8347,
+     "fraccion_cuadra": 0.42,
+     "fraccion_unidad": 0.92
+    }
+   ],
    "sector": "S1772-24",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -5940,9 +7435,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8078,
+     "cuadra": 8184,
      "fraccion_cuadra": 0.95,
-     "fraccion_unidad": 0.93
+     "fraccion_unidad": 0.94
     }
    ],
    "identidad_pareja": {
@@ -5979,14 +7474,24 @@
   {
    "unidad": "U1772-0199",
    "ocupacion": "continua",
-   "clase": "fusionada",
+   "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8079,
-     "fraccion_cuadra": 0.45,
-     "fraccion_unidad": 0.99
+     "cuadra": 8185,
+     "fraccion_cuadra": 0.9,
+     "fraccion_unidad": 1.0
     }
    ],
+   "identidad_pareja": {
+    "celda_original": [
+     1,
+     -2
+    ],
+    "celda_1936": [
+     1,
+     -2
+    ]
+   },
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -6037,8 +7542,24 @@
   {
    "unidad": "U1772-0201",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8186,
+     "fraccion_cuadra": 0.88,
+     "fraccion_unidad": 0.99
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -7,
+     -1
+    ],
+    "celda_1936": [
+     -7,
+     -1
+    ]
+   },
    "sector": "S1772-21",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -6063,8 +7584,29 @@
   {
    "unidad": "U1772-0202",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8187,
+     "fraccion_cuadra": 0.99,
+     "fraccion_unidad": 0.76
+    },
+    {
+     "cuadra": 8100,
+     "fraccion_cuadra": 0.0,
+     "fraccion_unidad": 0.0
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -2,
+     -1
+    ],
+    "celda_1936": [
+     -2,
+     -1
+    ]
+   },
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -6115,8 +7657,24 @@
   {
    "unidad": "U1772-0204",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8188,
+     "fraccion_cuadra": 0.97,
+     "fraccion_unidad": 0.73
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     0,
+     -1
+    ],
+    "celda_1936": [
+     0,
+     -1
+    ]
+   },
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -6144,9 +7702,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 3071,
-     "fraccion_cuadra": 0.89,
-     "fraccion_unidad": 0.99
+     "cuadra": 8189,
+     "fraccion_cuadra": 0.87,
+     "fraccion_unidad": 1.0
     }
    ],
    "identidad_pareja": {
@@ -6186,9 +7744,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 4685,
-     "fraccion_cuadra": 0.88,
-     "fraccion_unidad": 0.95
+     "cuadra": 8190,
+     "fraccion_cuadra": 0.86,
+     "fraccion_unidad": 1.0
     }
    ],
    "identidad_pareja": {
@@ -6228,13 +7786,13 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 8089,
-     "fraccion_cuadra": 0.89,
-     "fraccion_unidad": 0.9
+     "cuadra": 8191,
+     "fraccion_cuadra": 0.91,
+     "fraccion_unidad": 0.93
     },
     {
-     "cuadra": 4685,
-     "fraccion_cuadra": 0.0,
+     "cuadra": 8190,
+     "fraccion_cuadra": 0.01,
      "fraccion_unidad": 0.01
     }
    ],
@@ -6272,8 +7830,22 @@
   {
    "unidad": "U1772-0208",
    "ocupacion": "conjunto_especial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8311,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.29
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     6,
+     1
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-34",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -6327,14 +7899,9 @@
    "clase": "uno_a_uno",
    "cuadras": [
     {
-     "cuadra": 3382,
+     "cuadra": 8192,
      "fraccion_cuadra": 0.91,
-     "fraccion_unidad": 0.88
-    },
-    {
-     "cuadra": 8093,
-     "fraccion_cuadra": 0.01,
-     "fraccion_unidad": 0.01
+     "fraccion_unidad": 0.78
     }
    ],
    "identidad_pareja": {
@@ -6371,8 +7938,22 @@
   {
    "unidad": "U1772-0211",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8312,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.87
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     -6,
+     3
+    ],
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-32",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -6397,8 +7978,19 @@
   {
    "unidad": "U1772-0212",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8313,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.55
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -6423,8 +8015,19 @@
   {
    "unidad": "U1772-0213",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8194,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.1
+    },
+    {
+     "cuadra": 8195,
+     "fraccion_cuadra": 0.89,
+     "fraccion_unidad": 0.06
+    }
+   ],
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -6449,8 +8052,24 @@
   {
    "unidad": "U1772-0214",
    "ocupacion": "conjunto_especial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8314,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.11
+    },
+    {
+     "cuadra": 8315,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.08
+    },
+    {
+     "cuadra": 3401,
+     "fraccion_cuadra": 0.85,
+     "fraccion_unidad": 0.02
+    }
+   ],
    "sector": "S1772-43",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -6475,8 +8094,19 @@
   {
    "unidad": "U1772-0215",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8317,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.11
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-42",
    "extrapolada": true,
    "mosaico_poligono": [
@@ -6501,8 +8131,19 @@
   {
    "unidad": "U1772-0216",
    "ocupacion": "parcial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8318,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.23
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-43",
    "extrapolada": true,
    "mosaico_poligono": [
@@ -6917,8 +8558,19 @@
   {
    "unidad": "U1772-0232",
    "ocupacion": "conjunto_especial",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8321,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.9
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -6944,7 +8596,13 @@
    "unidad": "U1772-0233",
    "ocupacion": "plaza",
    "clase": "vacio_coincide",
-   "cuadras": [],
+   "cuadras": [
+    {
+     "cuadra": 8112,
+     "fraccion_cuadra": 0.0,
+     "fraccion_unidad": 0.0
+    }
+   ],
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -6996,7 +8654,13 @@
    "unidad": "U1772-0235",
    "ocupacion": "terreno_libre",
    "clase": "vacio_coincide",
-   "cuadras": [],
+   "cuadras": [
+    {
+     "cuadra": 8347,
+     "fraccion_cuadra": 0.01,
+     "fraccion_unidad": 0.02
+    }
+   ],
    "sector": "S1772-24",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -7385,8 +9049,19 @@
   {
    "unidad": "U1772-0250",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "desplazada_o_parcial",
+   "cuadras": [
+    {
+     "cuadra": 3192,
+     "fraccion_cuadra": 0.43,
+     "fraccion_unidad": 0.88
+    },
+    {
+     "cuadra": 3333,
+     "fraccion_cuadra": 0.0,
+     "fraccion_unidad": 0.0
+    }
+   ],
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -7411,8 +9086,29 @@
   {
    "unidad": "U1772-0251",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8322,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.68
+    },
+    {
+     "cuadra": 2972,
+     "fraccion_cuadra": 0.42,
+     "fraccion_unidad": 0.08
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     1,
+     -3
+    ],
+    "celda_1936": [
+     1,
+     -3
+    ]
+   },
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -7437,8 +9133,24 @@
   {
    "unidad": "U1772-0252",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8323,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.81
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     2,
+     -3
+    ],
+    "celda_1936": [
+     2,
+     -3
+    ]
+   },
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -7463,8 +9175,24 @@
   {
    "unidad": "U1772-0253",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "uno_a_uno",
+   "cuadras": [
+    {
+     "cuadra": 8324,
+     "fraccion_cuadra": 0.99,
+     "fraccion_unidad": 0.77
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": [
+     3,
+     -3
+    ],
+    "celda_1936": [
+     3,
+     -3
+    ]
+   },
    "sector": "S1772-23",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -7489,8 +9217,19 @@
   {
    "unidad": "U1772-0254",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 3333,
+     "fraccion_cuadra": 0.59,
+     "fraccion_unidad": 0.88
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -7515,8 +9254,24 @@
   {
    "unidad": "U1772-0255",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8325,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.62
+    },
+    {
+     "cuadra": 3333,
+     "fraccion_cuadra": 0.08,
+     "fraccion_unidad": 0.12
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -7541,8 +9296,19 @@
   {
    "unidad": "U1772-0256",
    "ocupacion": "aislada",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8326,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.59
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-12",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -7567,8 +9333,19 @@
   {
    "unidad": "U1772-0257",
    "ocupacion": "parte_de_otra_unidad",
-   "clase": "vacio_coincide",
-   "cuadras": [],
+   "clase": "adicional_sobre_vacio",
+   "cuadras": [
+    {
+     "cuadra": 8200,
+     "fraccion_cuadra": 0.94,
+     "fraccion_unidad": 0.48
+    },
+    {
+     "cuadra": 8335,
+     "fraccion_cuadra": 0.01,
+     "fraccion_unidad": 0.02
+    }
+   ],
    "sector": "S1772-12",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -7957,8 +9734,24 @@
   {
    "unidad": "U1772-0272",
    "ocupacion": "aislada",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "dividida",
+   "cuadras": [
+    {
+     "cuadra": 8205,
+     "fraccion_cuadra": 0.93,
+     "fraccion_unidad": 0.2
+    },
+    {
+     "cuadra": 8335,
+     "fraccion_cuadra": 0.9,
+     "fraccion_unidad": 0.26
+    },
+    {
+     "cuadra": 8200,
+     "fraccion_cuadra": 0.09,
+     "fraccion_unidad": 0.01
+    }
+   ],
    "sector": "S1772-12",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -8062,7 +9855,13 @@
    "unidad": "U1772-0276",
    "ocupacion": "aislada",
    "clase": "ausente",
-   "cuadras": [],
+   "cuadras": [
+    {
+     "cuadra": 3542,
+     "fraccion_cuadra": 0.05,
+     "fraccion_unidad": 0.07
+    }
+   ],
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -8087,8 +9886,14 @@
   {
    "unidad": "U1772-0277",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "desplazada_o_parcial",
+   "cuadras": [
+    {
+     "cuadra": 8213,
+     "fraccion_cuadra": 0.09,
+     "fraccion_unidad": 0.23
+    }
+   ],
    "sector": "S1772-22",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -8373,8 +10178,19 @@
   {
    "unidad": "U1772-0288",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8343,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.37
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-33",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -8451,8 +10267,19 @@
   {
    "unidad": "U1772-0291",
    "ocupacion": "continua",
-   "clase": "ausente",
-   "cuadras": [],
+   "clase": "incierta",
+   "cuadras": [
+    {
+     "cuadra": 8345,
+     "fraccion_cuadra": 1.0,
+     "fraccion_unidad": 0.51
+    }
+   ],
+   "identidad_pareja": {
+    "celda_original": null,
+    "celda_1936": null
+   },
+   "motivo": "sin celda completa del damero para comprobar la pareja",
    "sector": "S1772-42",
    "extrapolada": false,
    "mosaico_poligono": [
@@ -8501,194 +10328,11 @@
    ]
   }
  ],
- "cuadras_sobrantes": [],
- "verificacion_visual": [],
- "recortes": {
-  "directorio": ".cache/damero-1772",
-  "en_git": false,
-  "regenerar": ".venv/bin/python tools/geo/controles_damero.py --ciudad fuentes/derivados/epocas/ciudad-estilos.json --original fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg --mosaico fuentes/derivados/1936/mosaico.tif --recortes .cache/damero-1772 --muestra 2",
-  "nota": "archivo_local es relativo a directorio; los PNG quedan fuera de git y se comprueban por su sha256"
- },
- "evidencias": [
+ "cuadras_sobrantes": [
   {
-   "archivo_local": "correspondencias/ausente-U1772-0001.png",
-   "sha256": "fe3ac1c5e7a3a23a3162c8a73dd81a16fac89e63b3507c63283babd394bf15fe",
-   "unidad": "U1772-0001",
-   "clase": "ausente"
-  },
-  {
-   "archivo_local": "correspondencias/ausente-U1772-0035.png",
-   "sha256": "3c7434ea91707fe1f0e13ea5a470b2585333b9af1e7967e61e97004f406a3eb2",
-   "unidad": "U1772-0035",
-   "clase": "ausente"
-  },
-  {
-   "archivo_local": "correspondencias/ausente-U1772-0090.png",
-   "sha256": "a948cb409a9bbc3fbb66f556e32ac29cfbee8f598029c7a6ebacfd78af1a63dd",
-   "unidad": "U1772-0090",
-   "clase": "ausente"
-  },
-  {
-   "archivo_local": "correspondencias/ausente-U1772-0149.png",
-   "sha256": "98bbfb10a8c3cf3d74fc62e293781672e189624caa33a924e65e82e2092ada6d",
-   "unidad": "U1772-0149",
-   "clase": "ausente"
-  },
-  {
-   "archivo_local": "correspondencias/ausente-U1772-0184.png",
-   "sha256": "cb412bc01e00f484478423682f43d2edd24c8e6c6bb1124359550aac087eb901",
-   "unidad": "U1772-0184",
-   "clase": "ausente"
-  },
-  {
-   "archivo_local": "correspondencias/ausente-U1772-0254.png",
-   "sha256": "9a73e3d22ce7b27447548245440bcf5b83ba333081ce4165b837a8218e56a223",
-   "unidad": "U1772-0254",
-   "clase": "ausente"
-  },
-  {
-   "archivo_local": "correspondencias/vacio_coincide-U1772-0006.png",
-   "sha256": "07e3e3d646e497e0f2012f75cd481fc0ea487e425311a868bb6999c5a8adf98c",
-   "unidad": "U1772-0006",
-   "clase": "vacio_coincide"
-  },
-  {
-   "archivo_local": "correspondencias/vacio_coincide-U1772-0086.png",
-   "sha256": "784fbd8a7eff75b0a9e2d35ca91a591baec07c385e51ac60ca21e0755b0a935c",
-   "unidad": "U1772-0086",
-   "clase": "vacio_coincide"
-  },
-  {
-   "archivo_local": "correspondencias/vacio_coincide-U1772-0161.png",
-   "sha256": "8be68e680266c32b4e5db7f5f5fe26acaecf5857fe5c85b2a62cf5a8c5b2eefc",
-   "unidad": "U1772-0161",
-   "clase": "vacio_coincide"
-  },
-  {
-   "archivo_local": "correspondencias/vacio_coincide-U1772-0219.png",
-   "sha256": "6878833b36f269e60639fb08bed022b8b3939a921d6ca944e7f72c0bcf652980",
-   "unidad": "U1772-0219",
-   "clase": "vacio_coincide"
-  },
-  {
-   "archivo_local": "correspondencias/vacio_coincide-U1772-0233.png",
-   "sha256": "89ac1b471aa0e4fd4083815a3bc707bb2cfd90377bdf99c34db1c4af7beca3d5",
-   "unidad": "U1772-0233",
-   "clase": "vacio_coincide"
-  },
-  {
-   "archivo_local": "correspondencias/vacio_coincide-U1772-0245.png",
-   "sha256": "c42f22ec549a9bcfc928a54461a56319b6dc695b0b766ec3e11cddef26e40de0",
-   "unidad": "U1772-0245",
-   "clase": "vacio_coincide"
-  },
-  {
-   "archivo_local": "correspondencias/uno_a_uno-U1772-0050.png",
-   "sha256": "02d2f83ea4ba5ef0fe5167cb91d94cd494f87374df06e9f68acd4ad4e9123427",
-   "unidad": "U1772-0050",
-   "clase": "uno_a_uno"
-  },
-  {
-   "archivo_local": "correspondencias/uno_a_uno-U1772-0057.png",
-   "sha256": "c924de555b71ee593d19850490268f0c1892130c54688a893c9a7743689c970d",
-   "unidad": "U1772-0057",
-   "clase": "uno_a_uno"
-  },
-  {
-   "archivo_local": "correspondencias/uno_a_uno-U1772-0077.png",
-   "sha256": "7899179ee73f57cce25ad8dd008caf3821d61bfa3f0ad0a99adf695b1e1a4769",
-   "unidad": "U1772-0077",
-   "clase": "uno_a_uno"
-  },
-  {
-   "archivo_local": "correspondencias/uno_a_uno-U1772-0091.png",
-   "sha256": "0ac9b161dd40332284020231c9dcb2cce4337b5d50ca9da995ce37a77c4047a4",
-   "unidad": "U1772-0091",
-   "clase": "uno_a_uno"
-  },
-  {
-   "archivo_local": "correspondencias/uno_a_uno-U1772-0110.png",
-   "sha256": "9db64bea2a5ff11c812e58c8268ed53bcc9b0617d05f45f30caee8d8ac41d0d0",
-   "unidad": "U1772-0110",
-   "clase": "uno_a_uno"
-  },
-  {
-   "archivo_local": "correspondencias/uno_a_uno-U1772-0139.png",
-   "sha256": "2aebee57e91518fd7fefc85c0ceb52f265c11d7c1139034a68dadd3520ecb98f",
-   "unidad": "U1772-0139",
-   "clase": "uno_a_uno"
-  },
-  {
-   "archivo_local": "correspondencias/fusionada-U1772-0055.png",
-   "sha256": "408c703c4eb61dfc14d4737bb6b363010b0c68632b759ad0264217726fdebbbd",
-   "unidad": "U1772-0055",
-   "clase": "fusionada"
-  },
-  {
-   "archivo_local": "correspondencias/fusionada-U1772-0082.png",
-   "sha256": "0217d649ab424c41273386da9549fa49604e07d165f7e19165584cbe1a30b7c9",
-   "unidad": "U1772-0082",
-   "clase": "fusionada"
-  },
-  {
-   "archivo_local": "correspondencias/fusionada-U1772-0096.png",
-   "sha256": "051ed56cab95d2c9a5f0e133bc04901cf76788cfade3c287d1f8c97f065f2ddb",
-   "unidad": "U1772-0096",
-   "clase": "fusionada"
-  },
-  {
-   "archivo_local": "correspondencias/fusionada-U1772-0123.png",
-   "sha256": "45f71b8a6044fca7a679c8f4ced8b1575ae37b06bfce6628a75100ac9394d6ba",
-   "unidad": "U1772-0123",
-   "clase": "fusionada"
-  },
-  {
-   "archivo_local": "correspondencias/fusionada-U1772-0140.png",
-   "sha256": "d834dc31dbf370d8721ccaa20ae1c03b89943a88b8a6dd995fae5aff907147b9",
-   "unidad": "U1772-0140",
-   "clase": "fusionada"
-  },
-  {
-   "archivo_local": "correspondencias/fusionada-U1772-0199.png",
-   "sha256": "bec3f97544c892873f381a836d22b00548d7e01e97afbd202a9dae9e82de24b8",
-   "unidad": "U1772-0199",
-   "clase": "fusionada"
-  },
-  {
-   "archivo_local": "correspondencias/incierta-U1772-0092.png",
-   "sha256": "1a0df50f43e81b700aeaa05019c1bd97335c3b8ca07aeeab38e28da01b8a7e8a",
-   "unidad": "U1772-0092",
-   "clase": "incierta"
-  },
-  {
-   "archivo_local": "correspondencias/incierta-U1772-0093.png",
-   "sha256": "af95201dac91b54f384db32c189ba6b2016d79cfabc6f4a00c4475b17685d124",
-   "unidad": "U1772-0093",
-   "clase": "incierta"
-  },
-  {
-   "archivo_local": "correspondencias/incierta-U1772-0097.png",
-   "sha256": "58e0759ab6db0e95a2210bcfd1c91490797467cfa36facc29731946f666a736b",
-   "unidad": "U1772-0097",
-   "clase": "incierta"
-  },
-  {
-   "archivo_local": "correspondencias/incierta-U1772-0107.png",
-   "sha256": "9d8c6784f3b77bcbd5f1482d49dcd91cd6c530bd20b7c5df94e4cef03d59b756",
-   "unidad": "U1772-0107",
-   "clase": "incierta"
-  },
-  {
-   "archivo_local": "correspondencias/incierta-U1772-0108.png",
-   "sha256": "42de7521644f77141629c32b6802def297bfcb01c726e6162147335003da6ddd",
-   "unidad": "U1772-0108",
-   "clase": "incierta"
-  },
-  {
-   "archivo_local": "correspondencias/incierta-U1772-0125.png",
-   "sha256": "aa1d7a91d70049d0001d3f2f56e69465c96bf96c10d534dd5f385202da91b2b4",
-   "unidad": "U1772-0125",
-   "clase": "incierta"
+   "cuadra": 2649,
+   "huellas": 2
   }
- ]
+ ],
+ "verificacion_visual": []
 }

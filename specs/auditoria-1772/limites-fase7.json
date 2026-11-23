@@ -129,6 +129,46 @@
    "ancho_maximo_m": 34.0,
    "clase": "forma_del_original",
    "motivo": "Entre los ganchos de la franja en L del Calvario (D8-01): el original deja ahí el espacio entre los brazos de la L. Decisión del responsable del 23-11-2026 (T33j.8c)."
+  },
+  {
+   "tramo": "L1772-0075:E1772-0009-E1772-0008",
+   "lado": 1,
+   "punto": [
+    7425.02,
+    8024.9
+   ],
+   "ancho_maximo_m": 25.0,
+   "clase": "forma_del_original",
+   "motivo": "La forma del original: la esquina redondeada de la manzana; las casas, rectas, no siguen la curva y dejan rendijas en el frente. Se revisa con las cuñas de esquina en el generador."
+  },
+  {
+   "tramo": "L1772-0075:E1772-0009-E1772-0008",
+   "lado": 1,
+   "punto": [
+    7448.64,
+    7824.61
+   ],
+   "ancho_maximo_m": 5.0,
+   "clase": "forma_del_original",
+   "motivo": "La forma del original: la esquina redondeada de la manzana; las casas, rectas, no siguen la curva y dejan rendijas en el frente. Se revisa con las cuñas de esquina en el generador."
+  },
+  {
+   "tramo": "L1772-0075:E1772-0009-E1772-0008",
+   "lado": -1,
+   "punto": [
+    7403.36,
+    7793.42
+   ],
+   "ancho_maximo_m": 8.0,
+   "clase": "forma_del_original",
+   "motivo": "La forma del original: la esquina redondeada de la manzana; las casas, rectas, no siguen la curva y dejan rendijas en el frente. Se revisa con las cuñas de esquina en el generador."
+  }
+ ],
+ "otras_decisiones": [
+  {
+   "fecha": "2026-11-23",
+   "responsable": "dueño del proyecto",
+   "texto": "T33j.8d: al corregir la esquina 1936 Pajaritos, el calce de 1772 se mueve y el generador reparte de nuevo algunas casas lejos de San Francisco. Los casos nuevos son de las mismas clases que ya eran límite (esquinas de dos frentes, cuñas y lotes oblicuos, contactos de esquina y la forma del original) y se registran en ellas; las cuñas de esquina y los chaflanes quedan como tarea del generador."
   }
  ]
 }

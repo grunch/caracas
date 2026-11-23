@@ -93,3 +93,16 @@ S1772-41 es rural y no tiene anclas. LOO de todo el calce: rms 18,9 m, p90 22,1 
   # --datos <checkout con fuentes/derivados/1936> si la segmentación no está en este checkout
 .venv/bin/python tools/geo/calce.py 1772-pares-agi-exato-mapa   # GCP, residuos y fuentes/derivados/1772/calzado.tif
 ```
+
+## Corrección de la esquina Pajaritos (T33j.8d, 23-11-2026)
+
+La esquina 1936 n.º 185 (Pajaritos), de la que sale el ancla X1772-0058, estaba en (8732,4, 7393,6): sobre el pliegue de
+la hoja de 1936 y dentro de la calle Sur, 27 m al norte del cruce. El cruce real, al pie de la cota ▲906.940, es el de los
+ejes de Sur (San Francisco–La Palma) y Este (Mercaderes–Camejo): (8744,8, 7446,6). El ancla torcía el calce: las calles
+alrededor de San Francisco salían en diagonal y sus manzanas, trapezoidales; con la esquina corregida, el original calzado
+muestra el damero recto. El LOO de X1772-0058 baja de 23,84 a 11,04 m; el del sector S1772-22, de 23,84 a 16,53 m como
+máximo; el rms global, de 18,86 a 18,73 m. Solo se mueve ese nodo de la red. Los sectores límite del calce tienen las
+mismas anclas y el mismo error ([limites-calce.json](limites-calce.json), revisión del 23-11-2026). El calce, al moverse,
+cambia el reparto de algunas casas lejos de San Francisco: los casos nuevos de las fases 5 a 7 son de las clases que ya eran
+límite y se registraron en ellas ([limites-fase5.json](limites-fase5.json), [6](limites-fase6.json), [7](limites-fase7.json)).
+
