@@ -40,3 +40,4 @@ Plan de corrección de la reconstrucción: [auditoría integral de 1772](08-audi
 4. Créditos: el original es de @mormonnegro; si el nuevo sitio se inspira en él, conviene decirlo en el "Acerca".
 
 - [Casa Amarilla por épocas](08-casa-amarilla-por-epocas.md): T41c, modelo aprobado desde 1772, fuentes, límites y adaptación al mapa.
+- [Capitolio por épocas](08-capitolio-por-epocas.md): T41d, convento de las Concepciones desde 1772 y Palacio Federal Legislativo hasta 1936, fuentes, límites y presupuesto.

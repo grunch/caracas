@@ -4,6 +4,7 @@
  * metros, en el marco del hito: a a lo largo del eje, b a su derecha.
  */
 import { casaAmarilla } from './casa-amarilla.js'
+import { capitolio } from './capitolio.js'
 import { panteon } from './panteon.js'
 import { miraflores } from './miraflores.js'
 import { MAT } from './lienzo.js'
@@ -55,6 +56,7 @@ export const parteDe = (tipo) => (Object.hasOwn(PARTES, tipo) ? PARTES[tipo] : u
 
 export const PARTES = Object.freeze({
   casaAmarilla(p, medidas) { casaAmarilla(p, medidas) },
+  capitolio(p, medidas) { capitolio(p, medidas) },
   panteon(p, medidas) { panteon(p, medidas) },
   miraflores(p) { miraflores(p) },
   /** Un cuerpo de edificio centrado en (a, b): paredes, tejado y, si se piden, ventanas altas en los dos largos. */

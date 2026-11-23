@@ -4,13 +4,12 @@
  * 1880, panorámica de ~1903). Lo demás va en `verificar`.
  */
 import { casaAmarilla } from './casa-amarilla.js'
+import { capitolio } from './capitolio.js'
 import { EJE_DAMERO, rectanguloPx } from './marco.js'
 
 const PLANO = 'Plano de Caracas de 1936'
 const eje = EJE_DAMERO
 
-const capitolio = { x: 8690, y: 7035, eje }
-const CAPITOLIO = { ancho: 92, fondo: 108, crujia: 15, pisos: 2, altoPiso: 6 }
 const universidad = { x: 8645, y: 7192, eje } // el medio del frente norte, sobre la calle
 const UNIVERSIDAD = { largo: 96, frente: 12, fondo: 44 }
 const miraflores = { x: 7958, y: 6360, eje }
@@ -18,23 +17,7 @@ const MIRAFLORES = { ancho: 64, fondo: 56 } // incluye explanada, escaleras y ma
 
 export const civiles = Object.freeze([
   casaAmarilla,
-  Object.freeze({
-    id: 'capitolio', nombre: 'Capitolio (Palacio Federal y Legislativo)', ...capitolio, nace: 3, muere: 0,
-    planta: [rectanguloPx(capitolio, CAPITOLIO.ancho, CAPITOLIO.fondo)], suprime: [rectanguloPx(capitolio, CAPITOLIO.ancho, CAPITOLIO.fondo)],
-    fuente: `${PLANO} (recuadro "Palacio Federal": cuatro alas alrededor de un jardín, con un óvalo en el ala norte)`,
-    verificar: [
-      'Sin imagen de referencia en fuentes/imagenes: alzado genérico de palacio de dos pisos con pabellones de esquina y pórticos.',
-      'La cúpula va en el ala norte, donde el plano dibuja el óvalo; su forma (acá redonda) y su color dorado, a verificar con una foto.',
-      'El plano de 1889 ya rotula el Capitolio: va desde esa época.',
-      'El jardín del patio es el que dibuja el plano en el suelo; no se modela la fuente.',
-    ],
-    partes: [
-      { tipo: 'palacio', ...CAPITOLIO, cubierta: 'azotea', pabellones: true },
-      { tipo: 'cupula', a: 8, b: -(CAPITOLIO.fondo - CAPITOLIO.crujia) / 2, h: CAPITOLIO.pisos * CAPITOLIO.altoPiso, radio: 7, altoTambor: 3.5, alto: 6.5, lados: 16, cubierta: 0xc9a43c },
-      { tipo: 'portico', a: 0, b: CAPITOLIO.fondo / 2, mira: [0, 1], ancho: 24, alto: 12, columnas: 8 },
-      { tipo: 'portico', a: 0, b: -CAPITOLIO.fondo / 2, mira: [0, -1], ancho: 18, alto: 12, columnas: 6 },
-    ],
-  }),
+  capitolio,
   Object.freeze({
     id: 'universidad', nombre: 'Universidad Central (fachada neogótica)', ...universidad, nace: 3, muere: 0,
     planta: [rectanguloPx(universidad, UNIVERSIDAD.largo, UNIVERSIDAD.frente + UNIVERSIDAD.fondo, 0, (UNIVERSIDAD.frente + UNIVERSIDAD.fondo) / 2)],
