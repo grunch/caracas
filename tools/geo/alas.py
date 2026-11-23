@@ -390,8 +390,9 @@ def orientar_a_una_calle(origen, eu, ancho_m, fondo_m, calles72, metro, manzana=
             return marco_con(np.array([-afuera[1], afuera[0]]))     # ev entra desde ese lado; eu = ev girado −90°
     # el lote oblicuo (T33j.6i): ningún lado corre con su calle, pero uno libre da a ella con más giro; el marco va en
     # la dirección de la calle y encierra el lote (el techo se recorta con la huella)
-    for p, q, afuera in lados:
-        if not libre(p, q, afuera):
+    for k, (p, q, afuera) in enumerate(lados):
+        # el frente ya es un lado libre (marco_de_casa lo eligió entre los libres): no se le vuelve a pedir
+        if k > 0 and not libre(p, q, afuera):
             continue
         d = _calle_del_lado(p, q, afuera, calles72, metro, giro_maximo=GIRO_DE_LOTE_OBLICUO)
         if d is not None:
