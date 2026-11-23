@@ -265,7 +265,8 @@ def casas_por_lados(manzana, origen, salida, area_min_px, tolerancia_px, distanc
                       esquina=lote['esquina'], cuadra=salida['n_cuadras'] - 1, cede=publico_que_pisa(salida['publicos'], figura))
         # el frente sobre una calle de 1772 (T33j.6g): el lote de la esquina puede quedar en un lado que no lo es
         o, eu, ancho, fondo = orientar_a_una_calle(lote['origen'], lote['eu'], lote['ancho'], lote['fondo'],
-                                                   _en_la_ventana(salida.get('_calles72', ()), origen), metro)
+                                                   _en_la_ventana(salida.get('_calles72', ()), origen), metro,
+                                                   manzana=manzana)
         alas = alas_modelo(ancho, fondo, semilla, 0, crujia)
         marco = {'origen': o, 'eu': eu, 'ancho': ancho, 'fondo': fondo, 'calles': 0, 'crujia': crujia}
         agregar_alas(salida, len(salida['techos']) - 1, marco, [[t, *(round(m / metro, 2) for m in med)] for t, *med in alas],

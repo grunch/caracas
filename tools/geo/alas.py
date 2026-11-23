@@ -333,11 +333,27 @@ def _da_a_una_calle(p, q, normal, calles72, metro):
     return False
 
 
-def orientar_a_una_calle(origen, eu, ancho_m, fondo_m, calles72, metro):
+def _lado_libre(p, q, afuera, manzana, metro):
+    """¿Lo que hay justo afuera del lado p→q (px) está fuera de la manzana? Como _libres: tres puntos a lo largo, a 2 y
+    4 m hacia afuera; libre si al menos LADO_LIBRE de ellos caen fuera de la máscara."""
+    p, q, afuera = (np.asarray(x, float) for x in (p, q, afuera))
+    fuera = total = 0
+    for t in (0.2, 0.5, 0.8):
+        for d in (2.0, 4.0):
+            x, y = p + (q - p) * t + afuera * d / metro
+            i, j = int(math.floor(y)), int(math.floor(x))
+            total += 1
+            fuera += not (0 <= i < manzana.shape[0] and 0 <= j < manzana.shape[1] and manzana[i, j])
+    return fuera >= LADO_LIBRE * total
+
+
+def orientar_a_una_calle(origen, eu, ancho_m, fondo_m, calles72, metro, manzana=None):
     """(origen, eu, ancho, fondo) del marco de un lote (origen en px, ancho y fondo en m) con el frente sobre una
     calle de 1772 (T33j.6g): si su frente no da a una (_da_a_una_calle) y otro de sus lados sí, el frente pasa a ese
     lado (ev entra desde él; eu = ev girado −90°, como en marco_de_casa). Si el frente ya da a una calle de 1772, o
-    ningún lado da, el marco queda como estaba. La huella no cambia: solo el marco con que se techa."""
+    ningún lado da, el marco queda como estaba. Con `manzana` (la máscara de la cuadra, en las mismas coordenadas), el
+    lado nuevo tiene que estar libre (_lado_libre): un costado pegado a otra casa es medianera, no calle. La huella no
+    cambia: solo el marco con que se techa."""
     if not calles72:
         return origen, eu, ancho_m, fondo_m
     o, u = np.asarray(origen, float), np.asarray(eu, float)
@@ -350,7 +366,7 @@ def orientar_a_una_calle(origen, eu, ancho_m, fondo_m, calles72, metro):
     if _da_a_una_calle(*lados[0], calles72, metro):
         return origen, eu, ancho_m, fondo_m
     for p, q, afuera in lados[1:]:
-        if _da_a_una_calle(p, q, afuera, calles72, metro):
+        if (manzana is None or _lado_libre(p, q, afuera, manzana, metro)) and _da_a_una_calle(p, q, afuera, calles72, metro):
             ev2 = -afuera
             eu2 = np.array([ev2[1], -ev2[0]])
             en_u, en_v = [float(e @ eu2) for e in esquinas], [float(e @ ev2) for e in esquinas]

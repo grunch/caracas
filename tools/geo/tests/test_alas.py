@@ -325,3 +325,15 @@ def test_orientar_a_una_calle_gira_el_marco_si_el_frente_no_da_a_una_calle_de_17
     frente = [{'tramo': 'L1:A-B', 'medible': True, 'puntos': [[-50, -6], [80, -6]]}]
     assert orientar_a_una_calle((0, 0), (1, 0), 10, 14, frente, METRO) == ((0, 0), (1, 0), 10, 14)
     assert orientar_a_una_calle((0, 0), (1, 0), 10, 14, [], METRO) == ((0, 0), (1, 0), 10, 14)
+
+
+def test_orientar_a_una_calle_no_gira_el_frente_hacia_un_costado_con_vecina():
+    # el mismo lote, pero con otra casa de la manzana pegada a su costado derecho: ahí no hay calle, hay medianera
+    from tools.geo.alas import orientar_a_una_calle
+    calle = [{'tramo': 'L1:A-B', 'medible': True, 'puntos': [[46, -50], [46, 80]]}]
+    manzana = np.zeros((40, 60), bool)
+    manzana[0:28, 0:40] = True                      # el lote (x 0..20) y su vecina (x 20..40)
+    assert orientar_a_una_calle((0, 0), (1, 0), 10, 14, calle, METRO, manzana=manzana) == ((0, 0), (1, 0), 10, 14)
+    sola = np.zeros((40, 60), bool)
+    sola[0:28, 0:20] = True                          # sin vecina, el costado da a la calle
+    assert orientar_a_una_calle((0, 0), (1, 0), 10, 14, calle, METRO, manzana=sola)[1] == pytest.approx((0, 1))
