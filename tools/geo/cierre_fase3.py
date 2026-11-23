@@ -102,15 +102,26 @@ def plazuelas_ocupadas(casas, plazuelas):
     return resultado
 
 
+def plantas_de_hitos(raiz, epoca=1):
+    """Las plantas de los hitos en pie en `epoca` y no transitables (tools/hitos-planta.mjs), en px del plano base."""
+    import subprocess
+    hitos = json.loads(subprocess.run(['node', str(Path(raiz) / 'tools' / 'hitos-planta.mjs')], check=True,
+                                      capture_output=True, text=True, cwd=raiz).stdout)
+    return [Polygon(p) for h in hitos if h['nace'] <= epoca and not (h.get('muere') and h['muere'] <= epoca)
+            and not h.get('transitable') for p in h.get('planta', [])]
+
+
 def _medianas(anillo):
     """Las dos rectas que unen los puntos medios de lados opuestos de un cuadrilátero, con el par de lados."""
     medios = [((anillo[k][0] + anillo[(k + 1) % 4][0]) / 2, (anillo[k][1] + anillo[(k + 1) % 4][1]) / 2) for k in range(4)]
     return [('0-2', LineString([medios[0], medios[2]])), ('1-3', LineString([medios[1], medios[3]]))]
 
 
-def calles_abiertas_dentro(unidades, por_id, casas, metro=METRO, retiro_m=ANCHO_INFERIDO_M / 2):
+def calles_abiertas_dentro(unidades, por_id, casas, metro=METRO, retiro_m=ANCHO_INFERIDO_M / 2, plantas=()):
     """Unidades aprobadas continuas atravesadas por una franja sin casas de lado a lado, con casas a ambos lados:
-    el generador abrió una calle (o un patio pasante) donde el original dibuja una manzana continua."""
+    el generador abrió una calle (o un patio pasante) donde el original dibuja una manzana continua. `plantas`: las de
+    los hitos en pie, que ocupan la manzana como las casas (el Capitolio en la de las Concepciones, #160)."""
+    casas = list(casas) + [(None, p) for p in plantas]
     arbol = STRtree([p for _, p in casas])
     resultado = []
     for u in unidades:
@@ -189,7 +200,7 @@ def red_conectada(calles, casas, metro=METRO):
             'sin_medir_por_limite_del_calce': dict(sorted(sin_medir.items()))}
 
 
-def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_INFERIDO_M, calles=None, plazuelas=None):
+def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_INFERIDO_M, calles=None, plazuelas=None, plantas=()):
     """Criterios de la fase 3 con su cumplimiento sobre las casas de 1772; `fase_3_cerrable` exige todos."""
     casas = casas_de_epoca(ciudad)
     por_id = {n['id']: n for n in red['nodos']}
@@ -205,7 +216,8 @@ def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_
         import plazuelas as registro
         plazuelas = registro.plazuelas_en_1936()
     plazas += plazuelas_ocupadas(casas, plazuelas)   # las plazuelas del censo final (T33j.8c)
-    dentro = calles_abiertas_dentro(unidades, por_id, casas, metro, ancho_m / 2)
+    # `plantas`: las de los hitos en pie en 1772; las pasan las puertas de las fases 3 y 5 (hitos_en_pie)
+    dentro = calles_abiertas_dentro(unidades, por_id, casas, metro, ancho_m / 2, plantas)
     criterios = OrderedDict([
         ('red_conectada', red_conectada(calles, casas, metro) if calles is not None
                           else {'cumplido': False, 'sin_entrada': True}),
@@ -232,11 +244,12 @@ def main():
     ap.add_argument('--salida', type=Path, default=None)
     ap.add_argument('--datos', default=None, help='release datos-* del que sale la ciudad medida, si se publicó')
     args = ap.parse_args()
+    raiz = Path(__file__).resolve().parents[2]
     red = _leer(args.referencias / '1772-red.json')
     unidades = _leer(args.referencias / '1772-unidades.json')['unidades']
     verificadas = _leer(Path(__file__).parent / 'calles-historicas.json')['tramos']
     calles = _leer(args.referencias / '1772-calles-1936.json')['tramos']
-    puerta = puerta_fase3(_leer(args.ciudad), red, unidades, verificadas, calles=calles)
+    puerta = puerta_fase3(_leer(args.ciudad), red, unidades, verificadas, calles=calles, plantas=plantas_de_hitos(raiz))
     informe = OrderedDict([
         ('alcance', 'Puerta de salida de la fase 3 de 1772 (specs/08), medida sobre la salida del generador contra la '
                     'referencia histórica. Cuenta lo medido; no certifica fidelidad.'),

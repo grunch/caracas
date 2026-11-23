@@ -114,3 +114,11 @@ Esta puerta cuenta lo medido; no certifica la fidelidad del mapa.
 npm run datos -- --desde vectorizar
 .venv/bin/python tools/geo/cierre_fase4.py specs/auditoria-1772 fuentes/derivados/epocas/ciudad-epocas.json --datos <release o commit>
 ```
+
+## Después de #160: la planta de un hito ocupa su manzana
+
+#160 llevó el Capitolio (el convento de las Concepciones) a la manzana entera de U1772-0203, una continua aprobada. El hito suprime las casas de la reconstrucción en ella, así que esta puerta la veía «edificada sin casas» y la de la fase 3, con «una calle abierta dentro». No hay defecto: la manzana está edificada, ocupada por el convento.
+
+Las dos puertas cuentan ahora la planta de los hitos en pie y no transitables como ocupación (T33j.8a). La planta cubre el 94 % del interior de la manzana; lo que queda es un anillo de 2,4 m de ancho medio junto a la calle, entre la planta y el retiro de la calzada, sin ninguna franja que pida casas. `medidas` informa aparte `cobertura_con_hitos`. Una planta transitable, como una plaza, no cuenta.
+
+Medido sobre los datos publicados (`datos-2026-11-23-82cd470`, `main` 82cd470), las fases 3 a 7 dan cerrable.

@@ -211,7 +211,7 @@ def main():
     hitos = json.loads(subprocess.run(['node', str(raiz / 'tools' / 'hitos-planta.mjs')], check=True, capture_output=True,
                                       text=True, cwd=raiz).stdout)
     ciudad = _leer(args.ciudad)
-    fase3 = puerta_fase3(ciudad, red, unidades, verificadas, calles=calles)
+    fase3 = puerta_fase3(ciudad, red, unidades, verificadas, calles=calles, plantas=plantas_en_pie(hitos))
     registro = args.carpeta / 'limites-fase5.json'
     limites = _leer(registro)['frentes'] if registro.exists() else []
     puerta = puerta_fase5(ciudad, calles, hitos, fase3, limites=limites)

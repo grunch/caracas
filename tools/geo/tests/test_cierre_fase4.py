@@ -118,7 +118,9 @@ def test_la_puerta_no_se_cierra_con_una_unidad_sin_ubicar():
 
 
 def test_una_casa_suprimida_por_un_hito_no_cuenta_como_casa_de_la_unidad():
-    hito = {'id': 'h', 'nace': 1, 'muere': 0, 'planta': [[[0, 0], [100, 0], [100, 100], [0, 100]]],
+    # la planta del hito es una esquina chica (la que ocupa toda la manzana la cuenta como edificada, #160); su zona de
+    # supresión, la manzana entera
+    hito = {'id': 'h', 'nace': 1, 'muere': 0, 'planta': [[[0, 0], [10, 0], [10, 10], [0, 10]]],
             'suprime': [[[0, 0], [100, 0], [100, 100], [0, 100]]]}
     p = puerta_fase4(ciudad=ciudad((0, 0, 100, 100), (300, 0, 340, 100)), red=red(), unidades=unidades(), cajas=cajas(),
                      hitos=[hito], metro=METRO)
@@ -166,3 +168,25 @@ def test_la_medida_de_una_unidad_con_lo_edificado_revisado_registra_la_cobertura
     u3 = next(m for m in p['medidas'] if m['unidad'] == 'U3')
     assert u3['cobertura_del_rojo'] == 0.5
     assert 'cobertura_del_rojo' not in next(m for m in p['medidas'] if m['unidad'] == 'U1')
+
+
+def test_una_edificada_ocupada_por_la_planta_de_un_hito_en_pie_no_esta_sin_casas():
+    # #160: la planta del Capitolio cubre U1772-0203 y el hito suprime sus casas: la manzana está edificada (el
+    # convento). Una planta transitable (una plaza) no cuenta
+    hito = {'id': 'convento', 'nace': 1, 'muere': 0, 'planta': [[[0, 0], [100, 0], [100, 100], [0, 100]]]}
+    entradas = dict(red=red(), unidades=unidades()[:1], cajas={}, metro=METRO)
+    p = puerta_fase4(ciudad=ciudad(), hitos=[hito], **entradas)
+    assert p['edificadas_con_casas']['cumplido'] is True
+    plaza = puerta_fase4(ciudad=ciudad(), hitos=[{**hito, 'transitable': True}], **entradas)
+    assert plaza['edificadas_con_casas']['sin_casas'] == [{'unidad': 'U1', 'medida': 'anillo'}]
+
+
+def test_el_patio_de_una_casa_suprimida_no_le_resta_a_la_planta_del_hito():
+    # revisión de #162: los patios y solares se descuentan de las casas, no de la planta del hito. Una casa de patio
+    # suprimida bajo la planta no le recorta a la ocupación lo que ya no se ve
+    hito = {'id': 'convento', 'nace': 1, 'muere': 0, 'planta': [[[0, 0], [100, 0], [100, 100], [0, 100]]],
+            'suprime': [[[0, 0], [100, 0], [100, 100], [0, 100]]]}
+    c = {**ciudad((0, 0, 100, 100)), 'marcos': [[0, 0, 0, 1, 0, 100, 100, 0, 0, 0, 1]], 'alas': [[0, 10, 10, 90, 90]]}
+    p = puerta_fase4(ciudad=c, red=red(), unidades=unidades()[:1], cajas={}, hitos=[hito], metro=METRO)
+    (u1,) = [m for m in p['medidas'] if m['unidad'] == 'U1']
+    assert u1['cobertura_con_hitos'] == 1.0

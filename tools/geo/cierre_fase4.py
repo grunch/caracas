@@ -78,6 +78,18 @@ def cobertura(figura, casas, abiertos=None):
     return round(cubierto.area / figura.area, 4)
 
 
+def ocupacion_con_hitos(figura, casas, plantas, abiertos=None):
+    """Fracción de la figura ocupada por casas o por plantas de hitos. Los patios y solares abiertos se descuentan de
+    las casas, no de las plantas: un patio de una casa suprimida bajo la planta ya no se ve (revisión de #162)."""
+    if figura.area == 0:
+        return 0.0
+    de_casas = unary_union([c.intersection(figura) for c in casas if c.intersects(figura)])
+    if abiertos is not None and not abiertos.is_empty:
+        de_casas = de_casas.difference(abiertos)
+    de_plantas = unary_union([p.intersection(figura) for p in plantas if p.intersects(figura)])
+    return round(unary_union([de_casas, de_plantas]).area / figura.area, 4)
+
+
 def visibles(casas, hitos, epoca=EPOCA_1772):
     """Las casas que el visor deja a la vista en `epoca`: sin las que suprime un hito en pie (se_suprime, la regla de
     src/hitos/suprimir.js). No modela la excepción de las casas cuyo solar es lo único que toca el hito: es más
@@ -139,6 +151,7 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
     todas = casas_de_epoca(ciudad)
     casas = visibles(todas, hitos)
     abiertos = abiertos_de_casas(ciudad)
+    plantas = [Polygon(p) for h in hitos if _en_pie(h, EPOCA_1772) and not h.get('transitable') for p in h.get('planta', [])]
     figuras = [c for _, c in casas]
     arbol = STRtree(figuras) if figuras else None
     por_id = {n['id']: n for n in red['nodos']}
@@ -155,7 +168,11 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
             continue
         cerca = [] if arbol is None else [figuras[j] for j in arbol.query(figura, predicate='intersects')]
         cubierta = cobertura(figura, cerca, abiertos)
-        medidas.append({'unidad': u['id'], 'ocupacion': u['ocupacion'], 'medida': medida, 'cobertura': cubierta})
+        # una edificada que ocupa la planta de un hito en pie está edificada aunque el hito suprima sus casas (el
+        # Capitolio en la manzana de las Concepciones, #160)
+        ocupada = ocupacion_con_hitos(figura, cerca, plantas, abiertos) if plantas else cubierta
+        medidas.append({'unidad': u['id'], 'ocupacion': u['ocupacion'], 'medida': medida, 'cobertura': cubierta,
+                        **({'cobertura_con_hitos': ocupada} if ocupada != cubierta else {})})
         rojo = (edificado or {}).get(u['id'])
         if u['ocupacion'] in EDIFICADAS and rojo:
             # con lo edificado revisado del original: las casas tienen que cubrir lo que el original pinta rojo
@@ -164,7 +181,7 @@ def puerta_fase4(ciudad, red, unidades, cajas, hitos, metro=METRO, limites=froze
             medidas[-1] = {**medidas[-1], 'cobertura_del_rojo': cobertura(manchas, cerca_rojo)}
             if medidas[-1]['cobertura_del_rojo'] < COBERTURA_DEL_ROJO:
                 sin_casas.append({'unidad': u['id'], 'medida': 'edificado'})
-        elif u['ocupacion'] in EDIFICADAS and cubierta < COBERTURA_MINIMA:
+        elif u['ocupacion'] in EDIFICADAS and ocupada < COBERTURA_MINIMA:
             sin_casas.append({'unidad': u['id'], 'medida': medida})
         if u['ocupacion'] in LIBRES and cubierta >= COBERTURA_MINIMA:
             con_casas.append({'unidad': u['id'], 'medida': medida})
