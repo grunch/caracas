@@ -1,0 +1,123 @@
+{
+ "alcance": "Aberturas de frente aceptadas como límite documentado de la fase 7 de 1772 (specs/08, cierres y accesos). Los umbrales no cambian: siguen listadas en la puerta con su clase. Cada abertura se reconoce por su tramo, su lado y su punto (a menos de 2 m), y cuenta como límite solo si no pasa su ancho máximo.",
+ "decision": {
+  "fecha": "2026-11-23",
+  "responsable": "dueño del proyecto",
+  "texto": "El generador cierra con fachada las aberturas que puede cerrar sin romper otra fase; las que quedan (un hueco de edificado sin casas y las rendijas cuyo cierre dejaría una casa sin acceso o una fachada fuera de su recta) quedan como límite documentado, y la fase 7 cierra."
+ },
+ "ciudad": {
+  "datos": "1682c13 (sin publicar)"
+ },
+ "aberturas": [
+  {
+   "tramo": "L1772-0011:X1772-0048-T1772-0051",
+   "lado": 1,
+   "punto": [
+    8856.94,
+    5482.38
+   ],
+   "ancho_maximo_m": 23.0,
+   "clase": "edificado_sin_casas",
+   "motivo": "El original pinta edificado en el hueco y no hay casa que lo ocupe: cerrarlo pide una casa nueva, que es ocupación (fase 4). Se revisa en la fase 8 contra el original."
+  },
+  {
+   "tramo": "L1772-0011:X1772-0048-T1772-0051",
+   "lado": -1,
+   "punto": [
+    8824.99,
+    5482.12
+   ],
+   "ancho_maximo_m": 3.0,
+   "clase": "cierre_rompe_otra_fase",
+   "motivo": "Cerrarlo con la casa vecina dejaría una casa del fondo sin acceso o una fachada fuera de la recta de su frente (fase 5), o ninguna vecina da su frente a esa calle y llega al hueco: el generador no lo cierra."
+  },
+  {
+   "tramo": "L1772-0019:X1772-0106-X1772-0107",
+   "lado": 1,
+   "punto": [
+    9405.87,
+    8042.86
+   ],
+   "ancho_maximo_m": 39.0,
+   "clase": "edificado_sin_casas",
+   "motivo": "El original pinta edificado en el hueco y no hay casa que lo ocupe: cerrarlo pide una casa nueva, que es ocupación (fase 4). Se revisa en la fase 8 contra el original."
+  },
+  {
+   "tramo": "L1772-0033:E1772-0012-T1772-0023",
+   "lado": 1,
+   "punto": [
+    7469.19,
+    8917.64
+   ],
+   "ancho_maximo_m": 4.0,
+   "clase": "cierre_rompe_otra_fase",
+   "motivo": "Cerrarlo con la casa vecina dejaría una casa del fondo sin acceso o una fachada fuera de la recta de su frente (fase 5), o ninguna vecina da su frente a esa calle y llega al hueco: el generador no lo cierra."
+  },
+  {
+   "tramo": "L1772-0051:X1772-0160-X1772-0170",
+   "lado": 1,
+   "punto": [
+    10798.64,
+    7385.76
+   ],
+   "ancho_maximo_m": 2.0,
+   "clase": "cierre_rompe_otra_fase",
+   "motivo": "Cerrarlo con la casa vecina dejaría una casa del fondo sin acceso o una fachada fuera de la recta de su frente (fase 5), o ninguna vecina da su frente a esa calle y llega al hueco: el generador no lo cierra."
+  },
+  {
+   "tramo": "L1772-0060:T1772-0068-X1772-0130",
+   "lado": -1,
+   "punto": [
+    9957.14,
+    6357.77
+   ],
+   "ancho_maximo_m": 14.0,
+   "clase": "cierre_rompe_otra_fase",
+   "motivo": "Cerrarlo con la casa vecina dejaría una casa del fondo sin acceso o una fachada fuera de la recta de su frente (fase 5), o ninguna vecina da su frente a esa calle y llega al hueco: el generador no lo cierra."
+  },
+  {
+   "tramo": "L1772-0065:X1772-0065-T1772-0056",
+   "lado": -1,
+   "punto": [
+    9122.24,
+    5630.5
+   ],
+   "ancho_maximo_m": 14.0,
+   "clase": "cierre_rompe_otra_fase",
+   "motivo": "Cerrarlo con la casa vecina dejaría una casa del fondo sin acceso o una fachada fuera de la recta de su frente (fase 5), o ninguna vecina da su frente a esa calle y llega al hueco: el generador no lo cierra."
+  },
+  {
+   "tramo": "L1772-0072:X1772-0140-T1772-0077",
+   "lado": 1,
+   "punto": [
+    9905.76,
+    8314.47
+   ],
+   "ancho_maximo_m": 14.0,
+   "clase": "cierre_rompe_otra_fase",
+   "motivo": "Cerrarlo con la casa vecina dejaría una casa del fondo sin acceso o una fachada fuera de la recta de su frente (fase 5), o ninguna vecina da su frente a esa calle y llega al hueco: el generador no lo cierra."
+  },
+  {
+   "tramo": "L1772-0073:E1772-0001-E1772-0007",
+   "lado": -1,
+   "punto": [
+    6821.28,
+    8194.24
+   ],
+   "ancho_maximo_m": 5.0,
+   "clase": "cierre_rompe_otra_fase",
+   "motivo": "Cerrarlo con la casa vecina dejaría una casa del fondo sin acceso o una fachada fuera de la recta de su frente (fase 5), o ninguna vecina da su frente a esa calle y llega al hueco: el generador no lo cierra."
+  },
+  {
+   "tramo": "L1772-0073:E1772-0001-E1772-0007",
+   "lado": -1,
+   "punto": [
+    6833.92,
+    8188.23
+   ],
+   "ancho_maximo_m": 7.0,
+   "clase": "cierre_rompe_otra_fase",
+   "motivo": "Cerrarlo con la casa vecina dejaría una casa del fondo sin acceso o una fachada fuera de la recta de su frente (fase 5), o ninguna vecina da su frente a esa calle y llega al hueco: el generador no lo cierra."
+  }
+ ]
+}

@@ -81,3 +81,47 @@ def test_el_punto_de_prueba_de_un_hito_esta_junto_al_borde_de_su_planta():
     hitos = [{'id': 'capitolio', 'nace': 1, 'muere': 0, 'planta': [[[0, 0], [184, 0], [184, 216], [0, 216]]]}]
     (i, (x, y)), *_ = puntos_de_hitos(hitos)
     assert min(x, y, 184 - x, 216 - y) <= 4 + 1e-6
+
+
+def test_una_abertura_registrada_como_limite_no_impide_cerrar_y_una_mas_ancha_si():
+    # límites de la fase 7 (decisión del 23-11-2026): la abertura se reconoce por su tramo, su lado y su punto (a menos
+    # de PUNTO_M); cuenta como límite solo si no pasa su ancho máximo
+    from cierre_fase7 import con_limites_fase7
+    aberturas = [
+        {'tramo': 'L1:A-B', 'lado': 1, 'segmento': 0, 'ancho_m': 14.0, 'punto': [100.0, 50.0], 'indebida': True},
+        {'tramo': 'L1:A-B', 'lado': -1, 'segmento': 0, 'ancho_m': 3.0, 'punto': [100.0, 50.0], 'indebida': True},
+        {'tramo': 'L2:C-D', 'lado': 1, 'segmento': 0, 'ancho_m': 9.0, 'punto': [300.0, 50.0], 'indebida': True},
+        {'tramo': 'L2:C-D', 'lado': 1, 'segmento': 0, 'ancho_m': 30.0, 'punto': [400.0, 50.0], 'indebida': False},
+    ]
+    limites = {'aberturas': [
+        {'tramo': 'L1:A-B', 'lado': 1, 'punto': [101.0, 50.5], 'ancho_maximo_m': 14.0, 'clase': 'cierre_rompe_otra_fase'},
+        {'tramo': 'L2:C-D', 'lado': 1, 'punto': [300.0, 50.0], 'ancho_maximo_m': 6.0, 'clase': 'edificado_sin_casas'},
+    ]}
+    salida = con_limites_fase7(aberturas, limites, metro=0.5)
+    assert [a.get('limite') for a in salida] == ['cierre_rompe_otra_fase', None, None, None]
+    assert [a for a in salida if a['indebida'] and not a.get('limite')] == [salida[1], salida[2]]
+
+
+def test_la_puerta_de_la_fase_7_cierra_con_las_indebidas_en_limite():
+    from cierre_fase7 import puerta_fase7
+    from shapely.geometry import box as caja
+    casas = [caja(10 + k * 20, 12, 10 + (k + 1) * 20, 42) for k in range(8) if k != 3]
+    vertices, techos = [], []
+    for f in casas:
+        puntos = list(f.exterior.coords)[:-1]
+        techos.append([len(vertices) // 2, len(puntos), 1, 0, 0])
+        vertices.extend(c for p in puntos for c in p)
+    ciudad = {'vertices': vertices, 'techos': techos, 'vida': [[1, 0]] * len(casas)}
+    eje = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    rojo = [caja(60, 10, 100, 45)]
+    fases = {k: {'ciudad': {'sha256': 'x'}, 'puerta_de_salida': {
+        'calles_libres': {'cumplido': True}, 'libres_sin_casas': {'cumplido': True},
+        'casas_con_acceso': {'cumplido': True}}} for k in (3, 4, 5)}
+    sin = puerta_fase7(ciudad, eje, [], fases, 'x', rojo, lambda x, y: True)
+    assert not sin['fase_7_cerrable']
+    (a,) = [a for a in sin['sin_aberturas_indebidas']['lista'] if a['indebida']]
+    limites = {'aberturas': [{'tramo': a['tramo'], 'lado': a['lado'], 'punto': a['punto'], 'ancho_maximo_m': a['ancho_m'],
+                              'clase': 'edificado_sin_casas'}]}
+    con = puerta_fase7(ciudad, eje, [], fases, 'x', rojo, lambda x, y: True, limites=limites)
+    assert con['sin_aberturas_indebidas']['indebidas_en_limite'] == 1
+    assert con['fase_7_cerrable']
