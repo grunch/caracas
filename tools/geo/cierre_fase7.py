@@ -45,7 +45,7 @@ def _de_la_manzana(golpes, manzana):
     return [g for g in golpes if manzana[g[0]] == suya]
 
 
-def _tramos_abiertos(golpes, suyos, n, metro):
+def _tramos_abiertos(golpes, suyos, n, metro, cerradas=frozenset()):
     """([(primera, última)] estaciones seguidas donde el rayo no pega sobre la fachada, recta). La recta sale de los
     golpes de la manzana que arma el frente (`suyos`, como en la fase 5); sobre la fachada está cualquier golpe a no más
     de ANCHO_ABERTURA_M de ella (un hueco grande parte la manzana edificada, pero sigue siendo del frente). Solo entre
@@ -57,6 +57,7 @@ def _tramos_abiertos(golpes, suyos, n, metro):
     if normal @ n < 0:
         normal = -normal
     pega = {k for _, h, k in golpes if abs(float((np.array([h.x, h.y]) - centro) @ normal)) <= ANCHO_ABERTURA_M / metro}
+    pega |= set(cerradas)   # las estaciones cuyo rayo pega en un hito están cerradas
     if not pega:
         return [], None
     tramos, actual = [], None
@@ -82,6 +83,7 @@ def aberturas_de_frentes(calles, casas, metro=METRO, obstaculos=(), edificado=()
     manzana = manzanas_de([c for _, c in casas], metro) + [-1] * len(obstaculos)
     rojo = unary_union(list(edificado)) if len(edificado) else None
     alcance = ALCANCE_M / metro
+    ninguno = [False] * len(figuras)
     salida = []
     for eje in calles:
         if not eje['medible']:
@@ -92,12 +94,18 @@ def aberturas_de_frentes(calles, casas, metro=METRO, obstaculos=(), edificado=()
                 continue
             for lado in (1, -1):
                 n = np.array([-d[1], d[0]]) * lado
-                golpes = []
+                golpes, en_hito = [], set()
                 for k, p in enumerate(estaciones):
-                    g = _primero(LineString([p, p + n * alcance]), Point(p), arbol, figuras, son_obstaculo)
-                    if g is not None:
+                    # sin tratar los hitos como obstáculo: un rayo que pega primero en la planta de un hito no ve un
+                    # hueco, ve el hito (revisión de #151)
+                    g = _primero(LineString([p, p + n * alcance]), Point(p), arbol, figuras, ninguno)
+                    if g is None:
+                        continue
+                    if son_obstaculo[g[0]]:
+                        en_hito.add(k)
+                    else:
                         golpes.append((g[0], g[1], k))
-                tramos, recta = _tramos_abiertos(golpes, _de_la_manzana(golpes, manzana), n, metro)
+                tramos, recta = _tramos_abiertos(golpes, _de_la_manzana(golpes, manzana), n, metro, cerradas=en_hito)
                 for k0, k1 in tramos:
                     ancho_m = (k1 - k0 + 1) * PASO_M
                     if ancho_m < ANCHO_ABERTURA_M:

@@ -6,14 +6,15 @@ import { readFileSync } from 'node:fs'
 import { gunzipSync } from 'node:zlib'
 import { decodificarPak } from '../src/pak.js'
 import { crearCoords } from '../src/coords.js'
-import { choca, rejillaDeCasas } from '../src/a-pie.js'
+import { choca } from '../src/a-pie.js'
+import { rejillaComoElVisor } from './choca-a-pie-lib.mjs'
 
 const epoca = Number(process.argv[2] ?? 1)
 const pak = gunzipSync(readFileSync('public/datos/ciudad.pak'))
 const datos = decodificarPak(pak.buffer.slice(pak.byteOffset, pak.byteOffset + pak.byteLength),
   { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array }, () => {})
 const coords = crearCoords(JSON.parse(readFileSync('public/datos/ciudad.json', 'utf8')).plano)
-const rejilla = rejillaDeCasas(datos, epoca, coords.aMundo)
+const rejilla = rejillaComoElVisor(datos, epoca, coords.aMundo)
 const puntos = JSON.parse(readFileSync(0, 'utf8'))
 console.log(JSON.stringify(puntos.map(([px, py]) => {
   const { x, z } = coords.aMundo(px, py)

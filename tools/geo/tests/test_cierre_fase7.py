@@ -67,3 +67,11 @@ def test_la_planta_de_un_hito_transitable_no_se_cuenta_como_pared():
     hitos = [{'id': 'plaza-bolivar', 'nace': 0, 'muere': 0, 'transitable': True, 'planta': [[[0, 0], [9, 0], [9, 9], [0, 9]]]},
              {'id': 'catedral', 'nace': 0, 'muere': 0, 'planta': [[[20, 0], [30, 0], [30, 9], [20, 9]]]}]
     assert hitos_atravesables(hitos, lambda x, y: False) == ['catedral']
+
+
+def test_un_hito_que_ocupa_parte_del_frente_no_es_una_abertura():
+    # revisión de #151: la planta de un hito tapa el hueco de la casa 3; el rayo pega en ella, no en el fondo
+    casas = hilera(sin=(3,)) + [(9, box(70, 60, 90, 80))]
+    rojo = [box(60, 10, 100, 45)]
+    planta = [box(70, 12, 90, 42)]
+    assert aberturas_de_frentes([eje((0, 0), (180, 0))], casas, METRO, obstaculos=planta, edificado=rojo) == []
