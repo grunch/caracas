@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import { rectDeCalles, epocaDeCalles, SIN_EPOCA_DE_CALLES, ponerCallesDeEpoca } from '../../src/calles-epoca.js'
-import { GLSL_CALLES } from '../../src/shader/calles.js'
+import { GLSL_CALLES, DIST_MAX_M, NUCLEO_M } from '../../src/shader/calles.js'
 import { crearMaterialCiudad } from '../../src/material.js'
 
 const PLANO = { ancho: 18600, alto: 14800 }
@@ -62,5 +62,16 @@ describe('GLSL_CALLES', () => {
   test('fuera de su rectángulo no hay calle, y la distancia se lee con la fila 0 al norte', () => {
     expect(GLSL_CALLES).toContain('step(0.0, local.x) * step(local.x, 1.0) * step(0.0, local.y) * step(local.y, 1.0)')
     expect(GLSL_CALLES).toContain('texture2D(uCalles, vec2(local.x, 1.0 - local.y)).r')
+  })
+
+  test('de lejos, un texel sin calle (distancia saturada en DIST_MAX_M) no pinta calzada', () => {
+    // la misma cuenta que el shader: el filo crece con px, pero no pasa de DIST_MAX_M - NUCLEO_M/2
+    const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t) }
+    const m = GLSL_CALLES.match(/float filo = min\(max\(px, 0\.25\), ([\d.]+)\);/)
+    expect(m).not.toBe(null)
+    const media = NUCLEO_M / 2
+    const calzada = (d, px) => { const filo = Math.min(Math.max(px, 0.25), Number(m[1])); return 1 - smooth(media - filo, media + filo, d) }
+    for (const px of [1, 8, 20, 200]) expect(calzada(DIST_MAX_M, px)).toBe(0)
+    expect(calzada(0, 20)).toBeGreaterThan(0.5) // sobre el eje sigue habiendo calzada
   })
 })

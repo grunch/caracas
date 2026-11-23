@@ -82,6 +82,20 @@ describe('campoDeDistancia: cuánto falta hasta el eje de una calle, por texel',
   })
 })
 
+describe('campoDeDistancia: la textura cubre exactamente su caja', () => {
+  test('con una caja que no es múltiplo de M_POR_PX, cada texel guarda la distancia del punto donde el shader lo pone', () => {
+    // 5 × 4 m a 1 m/px: 3 × 2 texeles que el shader estira sobre la caja; una calle vertical en x = 4 m
+    const t = tramosDibujables({ tramos: [tramo('v', [[4, 0], [4, 4]])] })
+    const caja = [0, 0, 5, 4]
+    const c = campoDeDistancia(t, caja, { metro: 1 })
+    expect([c.ancho, c.alto]).toEqual([3, 2])
+    for (let i = 0; i < c.ancho; i++) {
+      const x = (i + 0.5) / c.ancho * (caja[2] - caja[0]) // el centro del texel i en la caja, como lo muestrea el shader
+      expect(c.datos[i] / 255 * DIST_MAX_M).toBeCloseTo(Math.abs(x - 4), 1)
+    }
+  })
+})
+
 describe('metaCalles: lo que el sitio necesita para ubicar la textura y decir de dónde sale', () => {
   test('la época, la caja en píxeles del plano, el tamaño, las medidas del dibujo y la fuente', () => {
     const t = tramosDibujables({ tramos: [tramo('a', [[0, 40], [160, 40]]), tramo('b', [[0, 0], [1, 1]], false)] })
