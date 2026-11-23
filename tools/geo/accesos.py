@@ -83,13 +83,24 @@ def _encierra(huellas, k, unida, pieza, metro):
     return bool(despues - antes)
 
 
+def _desalinea(huellas, k, unida, pieza, tramos, metro, obstaculos=()):
+    """¿Darle `unida` a la casa k deja alguna casa cercana fuera de la recta de su frente, que antes estaba sobre ella?
+    (la medida de la puerta de la fase 5: un cierre no puede romperla)."""
+    from cierre_fase5 import frentes_desalineados
+    zona = pieza.buffer(ALREDEDOR_M / metro)
+    cerca = [(t, g) for t, g in huellas.items() if g.intersects(zona)]
+    fuera = lambda casas: {c['techo'] for f in frentes_desalineados(tramos, casas, metro, obstaculos)['desalineados']  # noqa: E731
+                           for c in f['casas']}
+    return bool(fuera([(t, unida if t == k else g) for t, g in cerca]) - fuera(cerca))
+
+
 def cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=(), obstaculos=()):
     """{techo: huella crecida} que cierran las aberturas indebidas de los frentes (cierre_fase7.aberturas_de_frentes:
     un hueco de al menos una puerta donde el original pinta edificado), T33j.7c. Lo edificado del original que no
     cubre ninguna casa alrededor del punto de la abertura (a no más de CIERRE_RADIO_M, fuera de lo vedado) se le suma
     a la casa movible que más borde le comparte: se cierra con fachada, según la referencia. Un hueco donde el
     original no pinta edificado (un solar, un pasaje) queda abierto, y uno que es el paso de otra casa (un zaguán: el
-    cierre la dejaría sin acceso) también. No muta nada."""
+    cierre la dejaría sin acceso) también, y uno que dejaría una fachada fuera de la recta de su frente. No muta nada."""
     from shapely.geometry import Point
     from cierre_fase7 import aberturas_de_frentes
     if not len(edificado):
@@ -117,13 +128,25 @@ def cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=(), obsta
             if not partes:
                 continue
             pieza = min(partes, key=lambda q: q.distance(punto))
+            # el cierre llega a la línea de fachada y no la pasa: se corta en la recta del frente
+            (fx, fy), (nx, ny) = a['recta']
+            lejos = CIERRE_RADIO_M / metro * 4
+            adentro = Polygon([(fx - ny * lejos, fy + nx * lejos), (fx + ny * lejos, fy - nx * lejos),
+                               (fx + ny * lejos + nx * lejos, fy - nx * lejos + ny * lejos),
+                               (fx - ny * lejos + nx * lejos, fy + nx * lejos + ny * lejos)])
+            cortada = [q for q in getattr(pieza.intersection(adentro), 'geoms', [pieza.intersection(adentro)])
+                       if q.geom_type == 'Polygon' and not q.is_empty]
+            if not cortada:
+                continue
+            pieza = min(cortada, key=lambda q: q.distance(punto))
             if pieza.area * metro ** 2 < CIERRE_MINIMO_M2:
                 continue
             vecinas = sorted(((_medianera(pieza, huellas[k]), k) for k in (orden[j] for j in arbol.query(pieza.buffer(MEDIANERA_PX)))
                               if k in movibles), reverse=True)
             for largo, k in vecinas:
                 unida = _union(huellas[k], pieza) if largo > 0 else None
-                if unida is None or _encierra(huellas, k, unida, pieza, metro):
+                if unida is None or _encierra(huellas, k, unida, pieza, metro) or \
+                        _desalinea(huellas, k, unida, pieza, tramos, metro, obstaculos):
                     continue
                 huellas[k] = nuevas[k] = unida
                 cambio = True

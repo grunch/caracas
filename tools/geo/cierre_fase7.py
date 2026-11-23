@@ -73,7 +73,8 @@ def _tramos_abiertos(golpes, suyos, n, metro, cerradas=frozenset()):
 
 
 def aberturas_de_frentes(calles, casas, metro=METRO, obstaculos=(), edificado=()):
-    """Las aberturas de los frentes medibles: [{tramo, lado, segmento, ancho_m, punto (px), indebida}]. `edificado`:
+    """Las aberturas de los frentes medibles: [{tramo, lado, segmento, ancho_m, punto (px), recta: [un punto de la
+    fachada, su normal hacia la manzana], indebida}]. `edificado`:
     polígonos (px) de lo que el original pinta edificado; una abertura cuyo punto cae ahí es indebida."""
     figuras = [c for _, c in casas] + list(obstaculos)
     son_obstaculo = [False] * len(casas) + [True] * len(obstaculos)
@@ -116,6 +117,8 @@ def aberturas_de_frentes(calles, casas, metro=METRO, obstaculos=(), edificado=()
                     punto = sobre + n * (ADENTRO_M / metro)
                     salida.append({'tramo': eje['tramo'], 'lado': lado, 'segmento': segmento, 'ancho_m': ancho_m,
                                    'punto': [round(float(punto[0]), 2), round(float(punto[1]), 2)],
+                                   'recta': [[round(float(sobre[0]), 2), round(float(sobre[1]), 2)],
+                                             [round(float(normal[0]), 6), round(float(normal[1]), 6)]],
                                    'indebida': bool(rojo is not None and rojo.contains(Point(punto)))})
     return salida
 

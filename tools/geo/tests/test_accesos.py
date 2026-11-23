@@ -136,3 +136,17 @@ def test_cerrar_aberturas_no_cierra_el_paso_de_una_casa_del_fondo():
     nuevas = cerrar_aberturas(casas, eje, METRO, movibles=movibles, edificado=rojo)
     final = [(k, nuevas.get(k, g)) for k, g in casas]
     assert casas_sin_acceso(final, METRO)['sin_acceso'] == []
+
+
+def test_un_cierre_que_dejaria_una_fachada_fuera_de_la_recta_no_se_hace():
+    # un hueco de dos casas (x 70..110), rojo desde 0,95 m detrás de la línea: la vecina que lo cierra quedaría con la
+    # mayor parte de su frente retirado; ese cierre no se hace (no puede romper la fase 5)
+    from accesos import cerrar_aberturas
+    from cierre_fase5 import frentes_desalineados
+    from shapely.geometry import box as caja
+    casas = [(k, caja(10 + k * 20, 12, 10 + (k + 1) * 20, 42)) for k in range(8) if k not in (3, 4)]
+    eje = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    rojo = [caja(70, 13.9, 110, 45)]     # empieza 0,95 m detrás de la línea: el punto de la abertura (a 1 m) cae adentro
+    nuevas = cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 5, 6, 7}, edificado=rojo)
+    final = [(k, nuevas.get(k, g)) for k, g in casas]
+    assert frentes_desalineados(eje, final, METRO)['desalineados'] == []
