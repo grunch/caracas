@@ -20,6 +20,11 @@
    "fecha": "2026-11-23",
    "responsable": "dueño del proyecto",
    "texto": "La franja en L del Calvario (U1772-0272, D8-01 del censo final) entra con la forma del original, con sus ganchos perpendiculares a la calle; lo que eso deja fuera de las puertas de las fases 5, 6 y 7 queda como límite documentado de clase forma_del_original (T33j.8c)."
+  },
+  {
+   "fecha": "2026-11-23",
+   "responsable": "dueño del proyecto",
+   "texto": "T33j.8d: al corregir la esquina 1936 Pajaritos, el calce de 1772 se mueve y el generador reparte de nuevo algunas casas lejos de San Francisco. Los casos nuevos son de las mismas clases que ya eran límite (esquinas de dos frentes, cuñas y lotes oblicuos, contactos de esquina y la forma del original) y se registran en ellas; las cuñas de esquina y los chaflanes quedan como tarea del generador."
   }
  ],
  "ciudad": {
@@ -858,6 +863,117 @@
      "techo": 19818,
      "desvio_m": 15.73,
      "clase": "forma_del_original"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0019:X1772-0103-X1772-0104",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-31",
+   "clase": "esquina_dos_frentes",
+   "casas_maximas": 2,
+   "motivo": "Casa de esquina con frente a dos calles cuyas rectas medidas no se cortan en la casa (el calce o una cuadra que no es rectángulo): llevarla a una recta la saca de la otra, y oscila.",
+   "casas_al_decidir": [
+    {
+     "techo": 37290,
+     "desvio_m": 10.49,
+     "clase": "esquina_dos_frentes"
+    },
+    {
+     "techo": 37291,
+     "desvio_m": 16.94,
+     "clase": "esquina_dos_frentes"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0019:X1772-0108-X1772-0109",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-32",
+   "clase": "esquina_dos_frentes",
+   "casas_maximas": 1,
+   "motivo": "Casa de esquina con frente a dos calles cuyas rectas medidas no se cortan en la casa (el calce o una cuadra que no es rectángulo): llevarla a una recta la saca de la otra, y oscila.",
+   "casas_al_decidir": [
+    {
+     "techo": 37080,
+     "desvio_m": 7.67,
+     "clase": "esquina_dos_frentes"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0043:E1772-0014-X1772-0187",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-22",
+   "clase": "forma_del_original",
+   "casas_maximas": 1,
+   "motivo": "La forma del original: el borde de la manzana no es recto (un chaflán, una esquina redondeada o un entrante escalonado dibujados en 1772) y la casa sigue ese borde; llevarla a la recta del frente la sacaría de lo dibujado.",
+   "casas_al_decidir": [
+    {
+     "techo": 36559,
+     "desvio_m": 8.36,
+     "clase": "forma_del_original"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0048:X1772-0177-T1772-0104",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-42",
+   "clase": "forma_del_original",
+   "casas_maximas": 1,
+   "motivo": "La forma del original: el borde de la manzana no es recto (un chaflán, una esquina redondeada o un entrante escalonado dibujados en 1772) y la casa sigue ese borde; llevarla a la recta del frente la sacaría de lo dibujado.",
+   "casas_al_decidir": [
+    {
+     "techo": 38232,
+     "desvio_m": 9.64,
+     "clase": "forma_del_original"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0073:E1772-0010-E1772-0014",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-12",
+   "clase": "forma_del_original",
+   "casas_maximas": 2,
+   "motivo": "La forma del original: el borde de la manzana no es recto (un chaflán, una esquina redondeada o un entrante escalonado dibujados en 1772) y la casa sigue ese borde; llevarla a la recta del frente la sacaría de lo dibujado.",
+   "casas_al_decidir": [
+    {
+     "techo": 36016,
+     "desvio_m": 16.36,
+     "clase": "forma_del_original"
+    },
+    {
+     "techo": 36017,
+     "desvio_m": 12.93,
+     "clase": "forma_del_original"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0075:X1772-0020-E1772-0009",
+   "lado": 1,
+   "segmento": 0,
+   "sector": "S1772-22",
+   "clase": "esquina_dos_frentes",
+   "casas_maximas": 2,
+   "motivo": "Casa de esquina con frente a dos calles cuyas rectas medidas no se cortan en la casa (el calce o una cuadra que no es rectángulo): llevarla a una recta la saca de la otra, y oscila.",
+   "casas_al_decidir": [
+    {
+     "techo": 36140,
+     "desvio_m": 0.76,
+     "clase": "forma_del_original"
+    },
+    {
+     "techo": 36180,
+     "desvio_m": 13.56,
+     "clase": "esquina_dos_frentes"
     }
    ]
   }

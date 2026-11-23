@@ -1,6 +1,6 @@
 {
  "alcance": "Calce de 1772 por identidad (T33j.2a). El error dejando uno fuera mide cuánto se aparta cada ancla del TPS ajustado sin ella; no certifica exactitud geográfica.",
- "huella_calce": "45aeae8a4c1d3c619d5b4b3bbd45e85641db88e44113410e79339848c9e3748f",
+ "huella_calce": "df34db5b4ad191a69d428d7c368d6a34b7aaa51cf0ce5d0f53e48a23997d958b",
  "suavizado": 0.005,
  "semillas": 4,
  "anclas": 166,
@@ -72,16 +72,16 @@
  "residuos_loo_m": {
   "metodo": "dejando uno fuera (TPS sin ese GCP), en metros sobre 1936",
   "n": 170,
-  "rms": 18.86,
-  "p90": 22.13,
-  "max": 145.23
+  "rms": 18.73,
+  "p90": 21.66,
+  "max": 145.22
  },
  "por_sector": [
   {
    "sector": "S1772-11",
    "anclas": 2,
    "mediana_loo_m": 3.66,
-   "max_loo_m": 4.84,
+   "max_loo_m": 4.83,
    "mediana_residuo_m": 1.13,
    "bajo_umbral": true
   },
@@ -89,7 +89,7 @@
    "sector": "S1772-12",
    "anclas": 3,
    "mediana_loo_m": 1.86,
-   "max_loo_m": 11.97,
+   "max_loo_m": 12.04,
    "mediana_residuo_m": 0.88,
    "bajo_umbral": true
   },
@@ -97,15 +97,15 @@
    "sector": "S1772-13",
    "anclas": 8,
    "mediana_loo_m": 11.74,
-   "max_loo_m": 31.16,
+   "max_loo_m": 31.17,
    "mediana_residuo_m": 5.25,
    "bajo_umbral": true
   },
   {
    "sector": "S1772-14",
    "anclas": 1,
-   "mediana_loo_m": 145.23,
-   "max_loo_m": 145.23,
+   "mediana_loo_m": 145.22,
+   "max_loo_m": 145.22,
    "mediana_residuo_m": 12.66,
    "bajo_umbral": false
   },
@@ -114,23 +114,23 @@
    "anclas": 9,
    "mediana_loo_m": 5.33,
    "max_loo_m": 49.19,
-   "mediana_residuo_m": 2.59,
+   "mediana_residuo_m": 2.6,
    "bajo_umbral": true
   },
   {
    "sector": "S1772-22",
    "anclas": 25,
-   "mediana_loo_m": 11.18,
-   "max_loo_m": 23.84,
+   "mediana_loo_m": 11.04,
+   "max_loo_m": 16.53,
    "mediana_residuo_m": 5.15,
    "bajo_umbral": true
   },
   {
    "sector": "S1772-23",
    "anclas": 29,
-   "mediana_loo_m": 8.03,
-   "max_loo_m": 34.19,
-   "mediana_residuo_m": 3.69,
+   "mediana_loo_m": 8.04,
+   "max_loo_m": 34.18,
+   "mediana_residuo_m": 3.68,
    "bajo_umbral": true
   },
   {
@@ -160,7 +160,7 @@
   {
    "sector": "S1772-33",
    "anclas": 23,
-   "mediana_loo_m": 7.01,
+   "mediana_loo_m": 6.95,
    "max_loo_m": 21.61,
    "mediana_residuo_m": 3.27,
    "bajo_umbral": true
@@ -203,14 +203,14 @@
   {
    "id": "X1772-0002",
    "sector": "S1772-11",
-   "loo_m": 4.84,
+   "loo_m": 4.83,
    "residuo_m": 1.24
   },
   {
    "id": "X1772-0005",
    "sector": "S1772-13",
-   "loo_m": 31.16,
-   "residuo_m": 8.83
+   "loo_m": 31.17,
+   "residuo_m": 8.84
   },
   {
    "id": "X1772-0006",
@@ -245,8 +245,8 @@
   {
    "id": "X1772-0012",
    "sector": "S1772-12",
-   "loo_m": 11.97,
-   "residuo_m": 3.03
+   "loo_m": 12.04,
+   "residuo_m": 3.04
   },
   {
    "id": "X1772-0014",
@@ -275,25 +275,25 @@
   {
    "id": "X1772-0019",
    "sector": "S1772-21",
-   "loo_m": 9.17,
-   "residuo_m": 3.28
+   "loo_m": 9.16,
+   "residuo_m": 3.27
   },
   {
    "id": "X1772-0020",
    "sector": "S1772-22",
    "loo_m": 16.53,
-   "residuo_m": 6.28
+   "residuo_m": 6.29
   },
   {
    "id": "X1772-0021",
    "sector": "S1772-23",
-   "loo_m": 34.19,
+   "loo_m": 34.18,
    "residuo_m": 12.63
   },
   {
    "id": "X1772-0022",
    "sector": "S1772-23",
-   "loo_m": 15.09,
+   "loo_m": 15.1,
    "residuo_m": 7.33
   },
   {
@@ -317,25 +317,25 @@
   {
    "id": "X1772-0026",
    "sector": "S1772-23",
-   "loo_m": 16.7,
-   "residuo_m": 6.27
+   "loo_m": 16.58,
+   "residuo_m": 6.22
   },
   {
    "id": "X1772-0027",
    "sector": "S1772-23",
-   "loo_m": 17.03,
-   "residuo_m": 8.3
+   "loo_m": 17.01,
+   "residuo_m": 8.29
   },
   {
    "id": "X1772-0028",
    "sector": "S1772-23",
-   "loo_m": 7.53,
-   "residuo_m": 3.69
+   "loo_m": 7.52,
+   "residuo_m": 3.68
   },
   {
    "id": "X1772-0029",
    "sector": "S1772-23",
-   "loo_m": 4.79,
+   "loo_m": 4.8,
    "residuo_m": 2.37
   },
   {
@@ -365,56 +365,56 @@
   {
    "id": "X1772-0037",
    "sector": "S1772-22",
-   "loo_m": 7.01,
+   "loo_m": 7.03,
    "residuo_m": 3.44
   },
   {
    "id": "X1772-0038",
    "sector": "S1772-22",
-   "loo_m": 12.03,
-   "residuo_m": 5.91
+   "loo_m": 12.1,
+   "residuo_m": 5.95
   },
   {
    "id": "X1772-0039",
    "sector": "S1772-22",
-   "loo_m": 8.15,
-   "residuo_m": 4.01
+   "loo_m": 7.78,
+   "residuo_m": 3.83
   },
   {
    "id": "X1772-0040",
    "sector": "S1772-22",
-   "loo_m": 11.78,
-   "residuo_m": 5.76
+   "loo_m": 12.35,
+   "residuo_m": 6.04
   },
   {
    "id": "X1772-0041",
    "sector": "S1772-22",
-   "loo_m": 9.29,
-   "residuo_m": 4.52
+   "loo_m": 3.27,
+   "residuo_m": 1.59
   },
   {
    "id": "X1772-0042",
    "sector": "S1772-22",
-   "loo_m": 9.09,
-   "residuo_m": 4.43
+   "loo_m": 8.82,
+   "residuo_m": 4.3
   },
   {
    "id": "X1772-0043",
    "sector": "S1772-23",
-   "loo_m": 7.17,
-   "residuo_m": 3.53
+   "loo_m": 6.79,
+   "residuo_m": 3.34
   },
   {
    "id": "X1772-0044",
    "sector": "S1772-23",
-   "loo_m": 9.58,
-   "residuo_m": 4.7
+   "loo_m": 9.69,
+   "residuo_m": 4.75
   },
   {
    "id": "X1772-0045",
    "sector": "S1772-23",
-   "loo_m": 1.27,
-   "residuo_m": 0.62
+   "loo_m": 1.28,
+   "residuo_m": 0.63
   },
   {
    "id": "X1772-0046",
@@ -443,7 +443,7 @@
   {
    "id": "X1772-0053",
    "sector": "S1772-21",
-   "loo_m": 3.37,
+   "loo_m": 3.36,
    "residuo_m": 1.64
   },
   {
@@ -455,32 +455,32 @@
   {
    "id": "X1772-0055",
    "sector": "S1772-22",
-   "loo_m": 14.29,
-   "residuo_m": 7.04
+   "loo_m": 14.5,
+   "residuo_m": 7.14
   },
   {
    "id": "X1772-0056",
    "sector": "S1772-22",
-   "loo_m": 13.1,
-   "residuo_m": 6.47
+   "loo_m": 13.01,
+   "residuo_m": 6.43
   },
   {
    "id": "X1772-0057",
    "sector": "S1772-22",
-   "loo_m": 15.85,
-   "residuo_m": 7.78
+   "loo_m": 11.06,
+   "residuo_m": 5.43
   },
   {
    "id": "X1772-0058",
    "sector": "S1772-22",
-   "loo_m": 23.84,
-   "residuo_m": 11.64
+   "loo_m": 11.04,
+   "residuo_m": 5.39
   },
   {
    "id": "X1772-0059",
    "sector": "S1772-22",
-   "loo_m": 16.87,
-   "residuo_m": 8.29
+   "loo_m": 11.64,
+   "residuo_m": 5.72
   },
   {
    "id": "X1772-0062",
@@ -492,7 +492,7 @@
    "id": "X1772-0063",
    "sector": "S1772-23",
    "loo_m": 7.14,
-   "residuo_m": 3.52
+   "residuo_m": 3.51
   },
   {
    "id": "X1772-0064",
@@ -516,43 +516,43 @@
    "id": "X1772-0070",
    "sector": "S1772-21",
    "loo_m": 5.33,
-   "residuo_m": 2.59
+   "residuo_m": 2.6
   },
   {
    "id": "X1772-0071",
    "sector": "S1772-22",
-   "loo_m": 7.07,
-   "residuo_m": 3.47
+   "loo_m": 7.08,
+   "residuo_m": 3.48
   },
   {
    "id": "X1772-0072",
    "sector": "S1772-22",
-   "loo_m": 15.57,
-   "residuo_m": 7.67
+   "loo_m": 15.67,
+   "residuo_m": 7.72
   },
   {
    "id": "X1772-0073",
    "sector": "S1772-22",
-   "loo_m": 16.69,
-   "residuo_m": 8.24
+   "loo_m": 16.29,
+   "residuo_m": 8.05
   },
   {
    "id": "X1772-0074",
    "sector": "S1772-22",
-   "loo_m": 6.48,
-   "residuo_m": 3.18
+   "loo_m": 6.75,
+   "residuo_m": 3.32
   },
   {
    "id": "X1772-0075",
    "sector": "S1772-22",
-   "loo_m": 9.33,
-   "residuo_m": 4.53
+   "loo_m": 9.62,
+   "residuo_m": 4.67
   },
   {
    "id": "X1772-0076",
    "sector": "S1772-22",
-   "loo_m": 13.42,
-   "residuo_m": 6.21
+   "loo_m": 13.02,
+   "residuo_m": 6.02
   },
   {
    "id": "X1772-0079",
@@ -599,44 +599,44 @@
   {
    "id": "X1772-0088",
    "sector": "S1772-32",
-   "loo_m": 6.42,
+   "loo_m": 6.43,
    "residuo_m": 2.97
   },
   {
    "id": "X1772-0089",
    "sector": "S1772-32",
-   "loo_m": 12.5,
-   "residuo_m": 6.12
+   "loo_m": 12.54,
+   "residuo_m": 6.14
   },
   {
    "id": "X1772-0090",
    "sector": "S1772-32",
-   "loo_m": 9.92,
-   "residuo_m": 4.9
+   "loo_m": 9.67,
+   "residuo_m": 4.77
   },
   {
    "id": "X1772-0091",
    "sector": "S1772-32",
-   "loo_m": 4.17,
-   "residuo_m": 2.05
+   "loo_m": 4.46,
+   "residuo_m": 2.19
   },
   {
    "id": "X1772-0092",
    "sector": "S1772-32",
-   "loo_m": 1.37,
-   "residuo_m": 0.63
+   "loo_m": 1.54,
+   "residuo_m": 0.71
   },
   {
    "id": "X1772-0094",
    "sector": "S1772-33",
-   "loo_m": 7.01,
-   "residuo_m": 3.23
+   "loo_m": 6.65,
+   "residuo_m": 3.07
   },
   {
    "id": "X1772-0095",
    "sector": "S1772-33",
-   "loo_m": 10.04,
-   "residuo_m": 4.89
+   "loo_m": 10.07,
+   "residuo_m": 4.91
   },
   {
    "id": "X1772-0096",
@@ -665,43 +665,43 @@
   {
    "id": "X1772-0105",
    "sector": "S1772-32",
-   "loo_m": 7.49,
+   "loo_m": 7.47,
    "residuo_m": 3.49
   },
   {
    "id": "X1772-0106",
    "sector": "S1772-32",
-   "loo_m": 18.35,
-   "residuo_m": 9.09
+   "loo_m": 18.34,
+   "residuo_m": 9.08
   },
   {
    "id": "X1772-0107",
    "sector": "S1772-32",
-   "loo_m": 9.12,
-   "residuo_m": 4.49
+   "loo_m": 9.24,
+   "residuo_m": 4.55
   },
   {
    "id": "X1772-0108",
    "sector": "S1772-32",
-   "loo_m": 4.2,
-   "residuo_m": 2.05
+   "loo_m": 4.19,
+   "residuo_m": 2.04
   },
   {
    "id": "X1772-0109",
    "sector": "S1772-32",
-   "loo_m": 4.94,
-   "residuo_m": 2.27
+   "loo_m": 5.16,
+   "residuo_m": 2.38
   },
   {
    "id": "X1772-0110",
    "sector": "S1772-33",
-   "loo_m": 7.01,
-   "residuo_m": 3.43
+   "loo_m": 6.95,
+   "residuo_m": 3.4
   },
   {
    "id": "X1772-0111",
    "sector": "S1772-33",
-   "loo_m": 4.25,
+   "loo_m": 4.23,
    "residuo_m": 2.08
   },
   {
@@ -749,7 +749,7 @@
   {
    "id": "X1772-0121",
    "sector": "S1772-32",
-   "loo_m": 11.51,
+   "loo_m": 11.5,
    "residuo_m": 5.27
   },
   {
@@ -761,7 +761,7 @@
   {
    "id": "X1772-0123",
    "sector": "S1772-32",
-   "loo_m": 13.9,
+   "loo_m": 13.92,
    "residuo_m": 6.84
   },
   {
@@ -779,13 +779,13 @@
   {
    "id": "X1772-0126",
    "sector": "S1772-32",
-   "loo_m": 3.85,
-   "residuo_m": 1.88
+   "loo_m": 3.84,
+   "residuo_m": 1.87
   },
   {
    "id": "X1772-0127",
    "sector": "S1772-33",
-   "loo_m": 6.05,
+   "loo_m": 6.06,
    "residuo_m": 2.97
   },
   {
@@ -821,7 +821,7 @@
   {
    "id": "X1772-0137",
    "sector": "S1772-31",
-   "loo_m": 11.84,
+   "loo_m": 11.85,
    "residuo_m": 4.91
   },
   {
@@ -839,19 +839,19 @@
   {
    "id": "X1772-0141",
    "sector": "S1772-32",
-   "loo_m": 11.89,
+   "loo_m": 11.88,
    "residuo_m": 5.3
   },
   {
    "id": "X1772-0142",
    "sector": "S1772-32",
    "loo_m": 6.07,
-   "residuo_m": 2.94
+   "residuo_m": 2.95
   },
   {
    "id": "X1772-0143",
    "sector": "S1772-32",
-   "loo_m": 4.03,
+   "loo_m": 4.02,
    "residuo_m": 1.95
   },
   {
@@ -923,7 +923,7 @@
   {
    "id": "X1772-0155",
    "sector": "S1772-33",
-   "loo_m": 9.71,
+   "loo_m": 9.7,
    "residuo_m": 4.74
   },
   {
@@ -1043,7 +1043,7 @@
   {
    "id": "X1772-0183",
    "sector": "S1772-21",
-   "loo_m": 18.16,
+   "loo_m": 18.15,
    "residuo_m": 7.96
   },
   {
@@ -1055,26 +1055,26 @@
   {
    "id": "X1772-0185",
    "sector": "S1772-22",
-   "loo_m": 11.18,
-   "residuo_m": 4.88
+   "loo_m": 11.23,
+   "residuo_m": 4.91
   },
   {
    "id": "X1772-0186",
    "sector": "S1772-22",
-   "loo_m": 16.01,
-   "residuo_m": 6.92
+   "loo_m": 15.75,
+   "residuo_m": 6.8
   },
   {
    "id": "X1772-0187",
    "sector": "S1772-22",
-   "loo_m": 3.19,
-   "residuo_m": 1.35
+   "loo_m": 2.87,
+   "residuo_m": 1.22
   },
   {
    "id": "X1772-0189",
    "sector": "S1772-22",
-   "loo_m": 2.43,
-   "residuo_m": 1.02
+   "loo_m": 2.61,
+   "residuo_m": 1.1
   },
   {
    "id": "X1772-0190",
@@ -1085,8 +1085,8 @@
   {
    "id": "X1772-0191",
    "sector": "S1772-22",
-   "loo_m": 6.89,
-   "residuo_m": 3.05
+   "loo_m": 7.37,
+   "residuo_m": 3.27
   },
   {
    "id": "X1772-0192",
@@ -1097,20 +1097,20 @@
   {
    "id": "X1772-0193",
    "sector": "S1772-23",
-   "loo_m": 10.32,
-   "residuo_m": 5.05
+   "loo_m": 10.06,
+   "residuo_m": 4.92
   },
   {
    "id": "X1772-0194",
    "sector": "S1772-23",
-   "loo_m": 8.03,
-   "residuo_m": 3.93
+   "loo_m": 8.04,
+   "residuo_m": 3.94
   },
   {
    "id": "X1772-0195",
    "sector": "S1772-23",
-   "loo_m": 1.62,
-   "residuo_m": 0.79
+   "loo_m": 1.63,
+   "residuo_m": 0.8
   },
   {
    "id": "X1772-0196",
@@ -1181,7 +1181,7 @@
   {
    "id": "X1772-0199",
    "sector": "S1772-24",
-   "loo_m": 23.97,
+   "loo_m": 23.96,
    "residuo_m": 8.1
   },
   {
@@ -1193,7 +1193,7 @@
   {
    "id": "H1772-la-pastora",
    "sector": "S1772-14",
-   "loo_m": 145.23,
+   "loo_m": 145.22,
    "residuo_m": 12.66
   }
  ],

@@ -184,7 +184,7 @@
  {"nombre": "El Chorro", "px": [9515.0, 7338.5], "fuente": "plano DCN 1936", "verificado": true, "cota_m": 905.935, "notas": ""},
  {"nombre": "Miguelacho", "px": [10994.1, 7386.4], "fuente": "plano DCN 1936", "verificado": true, "cota_m": null, "notas": ""},
  {"nombre": "Mercaderes", "px": [8472.8, 7391.1], "fuente": "plano DCN 1936", "verificado": true, "cota_m": null, "notas": "cota ilegible (pliegue del papel)"},
- {"nombre": "Pajaritos", "px": [8732.4, 7393.6], "fuente": "plano DCN 1936", "verificado": true, "cota_m": 906.94, "notas": ""},
+ {"nombre": "Pajaritos", "px": [8744.8, 7446.6], "fuente": "plano DCN 1936", "verificado": true, "cota_m": 906.94, "notas": "corregida el 23-11-2026: estaba en (8732.4, 7393.6), sobre el pliegue de la hoja y dentro de la calle Sur; el cruce es el de los ejes de Sur (San Francisco–La Palma) y Este (Mercaderes–Camejo), al pie de la cota ▲906.940"},
  {"nombre": "El Peligro", "px": [11276.0, 7429.0], "fuente": "plano DCN 1936", "verificado": true, "cota_m": 887.3, "notas": ""},
  {"nombre": "El Coliseo", "px": [9786.0, 7396.0], "fuente": "plano DCN 1936", "verificado": true, "cota_m": null, "notas": ""},
  {"nombre": "La Amargura", "px": [7641.6, 7453.6], "fuente": "plano DCN 1936", "verificado": true, "cota_m": null, "notas": ""},

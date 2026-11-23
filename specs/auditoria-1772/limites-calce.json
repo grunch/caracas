@@ -5,13 +5,14 @@
   "responsable": "dueño del proyecto",
   "texto": "Aceptar S1772-14, S1772-24 y S1772-44 como límite documentado; el defecto de S1772-24 pasa a la fase 2 como incidencia (I1772-014)."
  },
- "huella_calce": "45aeae8a4c1d3c619d5b4b3bbd45e85641db88e44113410e79339848c9e3748f",
+ "huella_calce": "df34db5b4ad191a69d428d7c368d6a34b7aaa51cf0ce5d0f53e48a23997d958b",
  "calce": "tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json",
+ "revisiones": [{"fecha": "2026-11-23", "texto": "El calce cambió solo en el ancla X1772-0058 (S1772-22: la esquina 1936 Pajaritos corregida, 27 m). Los tres sectores límite tienen las mismas anclas y el mismo error (S1772-14: 145,23 → 145,22 m, redondeo; S1772-24 y S1772-44, idénticos): el registro sigue valiendo y se actualiza la huella."}],
  "sectores": [
   {
    "sector": "S1772-14",
    "anclas": 1,
-   "mediana_loo_m": 145.23,
+   "mediana_loo_m": 145.22,
    "motivo": "Una sola ancla (iglesia de La Pastora, a 12,7 m de su pareja en 1936). Sin cruces rectos en 1772; la alcabala del camino de La Guaira y los cauces no tienen pareja segura en 1936. Con una sola ancla el LOO es una extrapolación fuera del casco y no mide nada.",
    "revision": "recortes del original revisados a mano (calce-identidad.md)"
   },
