@@ -126,7 +126,8 @@ export function revisarPruebaAMano(s, esFix) {
 
 /** Si el diff cambia lo que se ve, la comparación: captura de antes (main) y de después, sea fix o mejora. */
 export function revisarCapturas(s, archivos, cfg) {
-  if (!archivos.some((a) => !esTest(a.nombre) && enRutas(a.nombre, cfg.rutas.visuales))) return revision('capturas')
+  const seVe = (n) => !esTest(n) && enRutas(n, cfg.rutas.visuales) && !enRutas(n, cfg.rutas.no_visuales ?? [])
+  if (!archivos.some((a) => seVe(a.nombre))) return revision('capturas')
   const hay = (subseccion(s, 'Prueba a mano', 'Capturas').replace(COMENTARIO, '').match(IMAGEN) ?? []).length
   if (hay >= 2) return revision('capturas')
   return revision('capturas', [`Capturas: el PR cambia lo que se ve; lleva captura de antes (main) y de después (esta rama), misma vista y época (trae ${hay})`])
