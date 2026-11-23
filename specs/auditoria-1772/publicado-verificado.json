@@ -1,12 +1,13 @@
 {
-  "observado_utc": "2026-11-20T19:57:47.519765+00:00",
+  "observado_utc": "2026-11-23T17:53:32+00:00",
   "sitio": "https://caracas.city/",
-  "codigo_en_bundle": "a94b9b961cc5b4a9867388f37bbe0e679b3479ff",
+  "codigo_en_bundle": "3d2e7950cfcbaf1f64407ddf92e5d1f36f7a2971",
   "sucio": false,
-  "bundle": "assets/main-D15Qgn4u.js",
-  "bundle_sha256": "3d199d4703cb83bd4d99c158ca326aec47e69fa2324499c99e90d0050737ae12",
-  "manifiesto_sha256": "0b7921b5ca0651e11137bab3312c80721597a16a9b93d4336c6bbb1212205a2e",
-  "pak_sha256": "c27f09ea3ef25d3ea20b980067c913c5d80b78ddf184c43768bb448c985b24e4",
-  "pak_bytes": 2622644,
-  "alcance": "Lectura HTTP del bundle, manifiesto y bytes del pak. No certifica todos los archivos ni una inspección visual del sitio."
+  "bundle": "assets/main-D2xMKRU_.js",
+  "bundle_sha256": "732cf3289fa7dfedd04fc23131d3b68e58e0821f83cb776ccec505d5287849ad",
+  "manifiesto_sha256": "38c043106d5832d327eb2bd13f676591decac33cfeebd8a2199ff0e867bc0523",
+  "pak_sha256": "5a2e3ed2b424e843f2fe911ac2768c3cfc2de33b244deaf88402c1ba9f78050f",
+  "pak_bytes": 3847044,
+  "release": "datos-2026-11-23-82cd470",
+  "alcance": "Lectura HTTP del bundle, manifiesto y bytes del pak del sitio publicado (fase 8, T33j.8a). El manifiesto es el del release; el pak coincide con el que regenera main desde los escaneos. No certifica todos los archivos ni una inspección visual del sitio."
 }
