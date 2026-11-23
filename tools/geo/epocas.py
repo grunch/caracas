@@ -479,7 +479,11 @@ def cerrar_aberturas_1772(ciudad, tramos, hitos, red72, verificadas, edificado, 
         [LineString(t["anclajes"]).buffer(ANCHO_INFERIDO_M / 2 / metro, cap_style="flat") for t in verificadas]
     nuevas = cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=vedado, obstaculos=plantas_en_pie(hitos))
     print(f"casas de 1772 que cierran una abertura del frente: {len(nuevas)}")
-    return con_huellas(ciudad, nuevas) if nuevas else ciudad
+    if not nuevas:
+        return ciudad
+    # la casa que crece pierde su marco, como en dar_acceso_1772: era de la casa sin el hueco; el visor la techa por su
+    # huella, con el frente hacia el lado libre
+    return {**con_huellas(ciudad, nuevas), "marcos": [m for m in ciudad.get("marcos", []) if m[0] not in nuevas]}
 
 
 def sin_solapes_residuales(ciudad, hitos, metro):
