@@ -559,3 +559,30 @@ describe('extruirTechos: el techo no se adelanta a la línea de la cuadra (T33j.
     expect(Math.min(...tejas.map((v) => v.z))).toBeGreaterThanOrEqual(1 - 1e-6)
   })
 })
+
+describe('extruirTechos: el alero solo sale hacia un lado libre (T33j.6h)', () => {
+  test('el frente de una casa con marco que da a otra casa de su época no lleva alero sobre ella', () => {
+    // la casa 0 tiene el frente (marco) en z = 0 y, delante, la casa 1 (z < 0), que vive en las mismas épocas
+    const conVecina = {
+      ...ciudadDe([{ puntos: rect(0, 0, 10, 14), semilla: 5, nace: 1, muere: 2 }, { puntos: rect(0, -12, 10, 0), semilla: 6, nace: 1, muere: 2 }]),
+      marcos: Float32Array.from([0, 0, 0, 1, 0, 20, 28, 0, 14, 0, 0]), alas: Float32Array.from([]),
+    }
+    const sobre = (g) => vertices(g).filter((v) => v.semilla === 5 && v.cubierta !== CUBIERTA.PARED && v.z < -0.01)
+    expect(sobre(extruirTechos(conVecina, coords))).toHaveLength(0)
+    // si la de delante es de otra época (nace cuando la primera ya murió), el frente da a la calle y vuela
+    const otraEpoca = { ...conVecina, vida: Uint32Array.from([1 + 8 * 2, 3]) }
+    expect(sobre(extruirTechos(otraEpoca, coords)).length).toBeGreaterThan(0)
+  })
+})
+
+describe('extruirTechos: el alero tramo por tramo (T33j.6h)', () => {
+  test('una vecina de su época que tapa solo una parte del frente no recibe el alero (el tramo entero queda sin él)', () => {
+    // la casa 0 (frente en z = 0, de x = 0 a 20) y delante, solo de x = 12 a 20, la casa 1
+    const datos = {
+      ...ciudadDe([{ puntos: rect(0, 0, 20, 14), semilla: 5, nace: 1, muere: 2 }, { puntos: rect(12, -10, 20, 0), semilla: 6, nace: 1, muere: 2 }]),
+      marcos: Float32Array.from([0, 0, 0, 1, 0, 40, 28, 0, 14, 0, 0]), alas: Float32Array.from([]),
+    }
+    const vuela = vertices(extruirTechos(datos, coords)).filter((v) => v.semilla === 5 && v.cubierta !== CUBIERTA.PARED && v.z < -0.01)
+    expect(vuela.some((v) => v.x > 12.01)).toBe(false)
+  })
+})

@@ -166,10 +166,11 @@ export function crearIndice(anillos, celda = 16) {
     }
   })
   return {
-    ocupado(x, z, salvo = -1) {
+    // `cuenta(n)`, si se da: solo las casas para las que da true (las que viven a la vez que la que pregunta)
+    ocupado(x, z, salvo = -1, cuenta = null) {
       const lista = grilla.get(clave(Math.floor(x / celda), Math.floor(z / celda)))
       if (!lista) return false
-      for (const n of lista) if (n !== salvo && estaDentro(anillos[n], x, z)) return true
+      for (const n of lista) if (n !== salvo && (!cuenta || cuenta(n)) && estaDentro(anillos[n], x, z)) return true
       return false
     },
   }

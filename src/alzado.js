@@ -59,7 +59,8 @@ function costado([nu, nv]) {
   return nu > HACIA_AFUERA ? 'der' : null
 }
 
-const daALaCalle = (lado, libres) => lado === 'frente' || Boolean(lado && libres[lado])
+// el frente da a la calle salvo que el lote diga que no (libres.frente === false: una casa de su época delante, T33j.6h)
+const daALaCalle = (lado, libres) => (lado === 'frente' ? libres.frente !== false : Boolean(lado && libres[lado]))
 
 /** Cuánto vuela el alero de un faldón: lo que dice el plan si cae hacia la calle; si no, nada. */
 const vueloDe = ({ plan, libres }, f) => (plan.alero > 0 && f.tan > 0 && !f.hueco && daALaCalle(costado(f.caida), libres) ? plan.alero : 0)
@@ -235,7 +236,22 @@ function tramoDePared({ casa, a, b, largo, n, aLaCalle }, t0, t1, salida) {
   if (pretil) muro(salida, p0, p1, techo, techo, [-n[0], -n[1]], lisa, lisa, [0, pretil])
   else if (arriba[0] > techo[0] + 1e-4 || arriba[1] > techo[1] + 1e-4) muro(salida, p0, p1, techo, arriba, [-n[0], -n[1]], lisa, lisa)
   const vuelo = f && aLaCalle ? vueloDe(casa, f) : 0
-  if (vuelo > 0 && f.caida[0] * n[0] + f.caida[1] * n[1] > HACIA_AFUERA) alero(salida, f, p0, p1, n, vuelo)
+  if (vuelo > 0 && f.caida[0] * n[0] + f.caida[1] * n[1] > HACIA_AFUERA && !hayVecinaAfuera(casa, p0, p1, n, vuelo)) {
+    alero(salida, f, p0, p1, n, vuelo)
+  }
+}
+
+/**
+ * ¿Hay otra casa de su época justo afuera de este tramo de pared, donde iría el alero? (`casa.ocupado(u, v)`, en el
+ * marco del lote; T33j.6h): el marco y sus lados libres son de vectorizar, y la fase 5 movió casas.
+ */
+function hayVecinaAfuera(casa, p0, p1, n, vuelo) {
+  if (!casa.ocupado) return false
+  for (const t of [0.1, 0.5, 0.9]) {
+    const [u, v] = mezcla(p0, p1, t)
+    for (const d of [0.1, vuelo]) if (casa.ocupado(u + n[0] * d, v + n[1] * d)) return true
+  }
+  return false
 }
 
 /**
@@ -280,8 +296,8 @@ function escalon({ anillo, plan, f, n }, p0, p1, salida) {
  * Levanta una casa. `anillo`: su huella en el marco del lote; `plan`: planDeTecho(); `libres`: qué
  * costados dan a la calle además del frente ({ izq, der, fondo }).
  */
-export function alzarCasa({ anillo, plan, libres = {} }, salida) {
-  const casa = { anillo, plan, libres }
+export function alzarCasa({ anillo, plan, libres = {}, ocupado = null }, salida) {
+  const casa = { anillo, plan, libres, ocupado }
   tejados(casa, salida)
   paredes(casa, salida)
   escalones(casa, salida)
