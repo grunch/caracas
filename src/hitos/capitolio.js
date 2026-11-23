@@ -1,3 +1,4 @@
+import { Matrix4 } from 'three'
 import { crearCapitolio } from './capitolio-modelo.js'
 import { MAT } from './lienzo.js'
 
@@ -5,12 +6,14 @@ const CUPULA = 'Cúpula del Salón Elíptico'
 const PALMAS = 'Chaguaramos del patio'
 
 /** Lleva el estudio del Convento de las Concepciones / Capitolio al lienzo común de hitos.
- * Ejes del modelo: +X este, +Y arriba, +Z sur, origen al centro de la manzana de 92 × 108 m: es el mismo
- * marco del hito (eje = EJE_DAMERO, +a este, +b sur), así que no hay giro ni desplazamiento.
+ * Ejes del modelo: +X este, +Y arriba, +Z sur, origen al centro de la manzana nominal de 92 × 108 m: es el mismo
+ * marco del hito (+a este, +b sur), así que no hay giro ni desplazamiento. `escala` [a, b] lo estira en planta
+ * hasta la manzana del hito (la altura no cambia).
  * `componente` separa lo que cambia entre 1889, 1911 y 1936 (la cúpula y los chaguaramos) del cuerpo
  * neoclásico, que se dibuja una sola vez. Vida, tinta, relieve y sombras los aporta el lienzo.
  */
-export function capitolio(p, { anio, componente = 'todo' }) {
+export function capitolio(p, { anio, componente = 'todo', escala = [1, 1] }) {
+  const estirar = new Matrix4().makeScale(escala[0], 1, escala[1])
   const { edificio } = crearCapitolio({ anio, nivelDetalle: 'ciudad' })
   const cupula = edificio.getObjectByName(CUPULA), palmas = edificio.getObjectByName(PALMAS)
   // Sin estos grupos, el cuerpo se tragaría la cúpula y las palmas y quedarían duplicadas entre épocas.
@@ -35,7 +38,7 @@ export function capitolio(p, { anio, componente = 'todo' }) {
       geometrias.add(objeto.geometry)
       materiales.add(objeto.material)
       if (!entra(objeto)) return
-      p.geo(objeto.geometry.clone().applyMatrix4(objeto.matrixWorld), {
+      p.geo(objeto.geometry.clone().applyMatrix4(objeto.matrixWorld).applyMatrix4(estirar), {
         color: objeto.material.color.toArray(), // Three.js guarda el color en lineal
         mat: MAT.LISO,
       })

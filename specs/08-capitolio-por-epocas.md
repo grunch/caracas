@@ -34,10 +34,18 @@ leyendas de los planos de 1772 y 1843 siguen sin transcribir.
 
 ## Implantación y render
 
-- Se conservan el ancla (8690, 7035) del plano de 1936, `EJE_DAMERO` y la huella de 92 × 108 m (planta y supresión).
+- **La manzana entera (T41e).** La planta y la supresión son la manzana de calle a calle: 131,4 × 123,4 m con centro en
+  (8683,3, 7022,0) y eje 1,56° sobre `EJE_DAMERO` ([0,9813, 0,1927]). Se midió sobre el 1772 calzado, desde la celda
+  de los ejes de la referencia (`tools/geo/referencias/1772-red.json`) hasta el borde de la manzana roja del original
+  (entre 5,25 y 7 m hacia adentro de cada eje), y coincide con la línea de las manzanas vecinas del plano de 1936 (la
+  Academia, el Palacio de Justicia). Antes era la huella del edificio rayado de 1936 (92 × 108 m en 8690, 7035), y en
+  1772 quedaban casas en las franjas este y oeste. Hoy el conjunto, con sus jardines, también llega a la calle.
+- El modelo se hizo sobre la huella nominal de 92 × 108 m, con una plataforma de 94 × 110 m. El adaptador lo estira en
+  planta (`escala`, 40 % E–O y 12 % N–S; la altura no cambia) para que la plataforma llene la manzana. Solo la
+  escalinata del Palacio Legislativo baja a la acera sur. Las proporciones estiradas son interpretativas.
 - El modelo ya usa los ejes del marco del hito (+X este = +a, +Y arriba, +Z sur = +b, origen al centro de la manzana):
-  el adaptador `src/hitos/capitolio.js` **no gira ni desplaza**. La cúpula queda al norte (−b).
-- La escalinata del Palacio Legislativo baja unos 3,8 m sobre la acera sur (b ≈ 57,8 m), lejos de la Universidad (b ≈ 78 m).
+  el adaptador `src/hitos/capitolio.js` **no gira ni desplaza**; solo estira. La cúpula queda al norte (−b).
+- La escalinata del Palacio Legislativo baja unos 4,3 m sobre la acera sur (b ≈ 64,8 m, con la escala), lejos de la Universidad.
 - `nace` pasa de 3 a **1**: la supresión apaga las casas genéricas de la manzana desde 1772, sin tocar su vida.
 - Todas las piezas entran en la única malla de hitos con `MAT.LISO` y colores lineales, y heredan relieve,
   ola, tinta/color y sombras. Se liberan las geometrías y materiales temporales.
