@@ -18,6 +18,7 @@ import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
 import { cargarCalles, crearRotulos } from './calles.js'
 import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo, hinchado, subdivisionDeLaHoja } from './relieve.js'
+import { COLOR_MESA } from './mesa.js'
 import { vectorSol, ajustesDeAcabado, esRenderPorSoftware } from './luz.js'
 import { crearAcabado } from './acabado.js'
 import { normalizarMarcas, distanciaDeVuelo } from './marcas.js'
@@ -40,7 +41,6 @@ import { crearModoManejar } from './manejar-modo.js'
 import { crearCielo, cieloDeModo } from './cielo.js'
 
 const params = new URLSearchParams(location.search)
-const COLOR_FONDO = 0x1d1a17
 const EXAGERACION = 1.3 // el valle se lee mejor con el relieve un poco exagerado
 
 // --- la bienvenida y el «Acerca» (src/acerca-panel.js): antes que nada, para que la bienvenida se vea mientras
@@ -104,7 +104,7 @@ const porSoftware = esRenderPorSoftware(gpu) // SwiftShader en CI y en los E2E: 
 
 
 const scene = new Scene()
-scene.background = new Color(COLOR_FONDO)
+scene.background = new Color(COLOR_MESA) // fuera de la hoja: la mesa (src/mesa.js)
 const camera = new PerspectiveCamera(35, innerWidth / innerHeight, 5, 60000)
 
 // --- render bajo demanda: solo se dibuja mientras haya cuadros pedidos ---

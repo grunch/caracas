@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import { PerspectiveCamera, Raycaster, Vector2, Vector3, Plane } from 'three'
-import { crearCamara } from '../../src/camara.js'
+import { crearCamara, distanciaMaxima, ALEJAR_HOJAS } from '../../src/camara.js'
 
 const lienzo = { addEventListener() {}, setPointerCapture() {}, getBoundingClientRect: () => ({ left: 0, top: 0, width: 100, height: 100 }) }
 const hoja = { x0: -1000, z0: -1000, ancho: 2000, alto: 2000 }
@@ -19,6 +19,33 @@ describe('crearCamara', () => {
     const cam = crearCamara(new PerspectiveCamera(), lienzo, { pedirCuadro: () => {}, hoja })
     cam.jump({ x: 0, z: 0, dist: 50000, pitch: 2 })
     expect(cam.now).toMatchObject({ dist: 9000, pitch: 1.5 })
+  })
+
+  test('con una hoja grande se aleja hasta verla entera y chica, rodeada de mesa (como un plano sobre la mesa)', () => {
+    // Arrange: la hoja de Caracas (9300 × 7400 m)
+    const grande = { x0: -2900, z0: -3700, ancho: 9300, alto: 7400 }
+    const cam = crearCamara(new PerspectiveCamera(35, 1.6), lienzo, { pedirCuadro: () => {}, hoja: grande })
+    // Act
+    cam.jump({ x: 0, z: 0, dist: 1e6, pitch: 1.5 })
+    // Assert: llega a ALEJAR_HOJAS veces el lado mayor, y de arriba la hoja ocupa menos de la mitad del ancho
+    expect(cam.now.dist).toBe(distanciaMaxima(grande))
+    expect(distanciaMaxima(grande)).toBe(9300 * ALEJAR_HOJAS)
+    const anchoVisto = 2 * cam.now.dist * Math.tan((35 / 2) * Math.PI / 180) * 1.6
+    expect(grande.ancho / anchoVisto).toBeLessThan(0.5)
+  })
+
+  test('la distancia máxima nunca baja de la de siempre (9000 m), aunque la hoja sea chica', () => {
+    expect(distanciaMaxima(hoja)).toBe(9000)
+    expect(distanciaMaxima({ ancho: 100, alto: 50 })).toBe(9000)
+  })
+
+  test('arranca mirando la hoja entera, dentro de los límites: la primera vuelta de rueda no la acerca de golpe', () => {
+    const grande = { x0: -2900, z0: -3700, ancho: 9300, alto: 7400 }
+    const cam = crearCamara(new PerspectiveCamera(), lienzo, { pedirCuadro: () => {}, hoja: grande })
+    expect(cam.goal.dist).toBeLessThanOrEqual(distanciaMaxima(grande))
+    const antes = cam.goal.dist
+    cam.acercar(-1)
+    expect(cam.goal.dist).toBeGreaterThan(antes)
   })
 
   test('volar() cambia el destino sin saltar: la cámara llega animada, dentro de la hoja y de los límites', () => {
