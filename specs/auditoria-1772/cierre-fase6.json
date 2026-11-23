@@ -2,19 +2,19 @@
  "alcance": "Puerta de salida de la fase 6 de 1772 (specs/08), medida sobre los techos del visor reproducidos en CPU (tools/cubiertas.mjs). Cuenta lo medido; no certifica fidelidad.",
  "ciudad": {
   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
-  "sha256": "898058c529ac4a5714fe8f2517d8ab3230422651538defb9f39e3b3a728e720f",
-  "datos": "5e9cf55 (sin publicar)"
+  "sha256": "d5bf33280e14e50253652f415e9978199b9f5f3006e4322c8a71daa953a1f036",
+  "datos": "8ba68f1 (sin publicar)"
  },
  "puerta_de_salida": {
   "triangulos_sin_degenerar": {
    "cumplido": true,
-   "triangulos": 103985,
+   "triangulos": 103687,
    "degenerados": 0,
    "casas": []
   },
   "techos_sin_cruces": {
    "cumplido": false,
-   "pares": 18,
+   "pares": 17,
    "mayores": [
     {
      "techos": [
@@ -90,14 +90,6 @@
     },
     {
      "techos": [
-      38471,
-      38479
-     ],
-     "pares_de_triangulos": 11,
-     "area_proyectada_m2": 0.0054
-    },
-    {
-     "techos": [
       34079,
       34100
      ],
@@ -165,16 +157,12 @@
   "cumbreras_con_el_frente": {
    "cumplido": false,
    "giro_maximo_grados": 20.0,
-   "casas_medidas": 4468,
-   "desviadas": 48,
+   "casas_medidas": 4469,
+   "desviadas": 31,
    "casas": [
     {
      "techo": 32746,
      "giro_grados": 84.8
-    },
-    {
-     "techo": 32767,
-     "giro_grados": 84.9
     },
     {
      "techo": 32905,
@@ -193,32 +181,8 @@
      "giro_grados": 81.6
     },
     {
-     "techo": 35888,
-     "giro_grados": 27.6
-    },
-    {
-     "techo": 35889,
-     "giro_grados": 27.6
-    },
-    {
      "techo": 35903,
      "giro_grados": 42.9
-    },
-    {
-     "techo": 35927,
-     "giro_grados": 40.5
-    },
-    {
-     "techo": 35931,
-     "giro_grados": 49.5
-    },
-    {
-     "techo": 35935,
-     "giro_grados": 41.3
-    },
-    {
-     "techo": 35939,
-     "giro_grados": 41.3
     },
     {
      "techo": 35940,
@@ -234,27 +198,15 @@
     },
     {
      "techo": 36069,
-     "giro_grados": 77.0
+     "giro_grados": 43.4
     },
     {
      "techo": 36083,
      "giro_grados": 43.1
     },
     {
-     "techo": 36084,
-     "giro_grados": 45.1
-    },
-    {
-     "techo": 36085,
-     "giro_grados": 46.9
-    },
-    {
      "techo": 36102,
      "giro_grados": 69.4
-    },
-    {
-     "techo": 36107,
-     "giro_grados": 43.8
     },
     {
      "techo": 36112,
@@ -262,10 +214,6 @@
     },
     {
      "techo": 36120,
-     "giro_grados": 43.8
-    },
-    {
-     "techo": 36124,
      "giro_grados": 43.8
     },
     {
@@ -281,15 +229,7 @@
      "giro_grados": 54.3
     },
     {
-     "techo": 36168,
-     "giro_grados": 54.3
-    },
-    {
      "techo": 36206,
-     "giro_grados": 21.3
-    },
-    {
-     "techo": 36211,
      "giro_grados": 21.3
     },
     {
@@ -325,16 +265,8 @@
      "giro_grados": 39.8
     },
     {
-     "techo": 36314,
-     "giro_grados": 39.8
-    },
-    {
      "techo": 36533,
      "giro_grados": 80.4
-    },
-    {
-     "techo": 36548,
-     "giro_grados": 84.3
     },
     {
      "techo": 37742,
@@ -345,20 +277,12 @@
      "giro_grados": 81.4
     },
     {
-     "techo": 37861,
-     "giro_grados": 51.2
-    },
-    {
      "techo": 37958,
      "giro_grados": 89.7
     },
     {
      "techo": 38324,
      "giro_grados": 61.8
-    },
-    {
-     "techo": 38479,
-     "giro_grados": 59.6
     }
    ]
   },

@@ -308,15 +308,16 @@ def _sin_salientes(grilla, banda, con_frente=True):
     return i0, i1, j0, j1
 
 
-def _da_a_una_calle(p, q, normal, calles72, metro):
-    """¿El lado p→q (px) da a una calle de 1772? Un eje medible de `calles72` (los tramos de 1772-calles-1936.json, en
-    las mismas coordenadas) que corre con el lado (dentro de GIRO_MAXIMO_GRADOS), pasa frente a su punto medio y queda
-    hacia afuera a no más de ALCANCE_M: lo mismo que mide la puerta de la fase 5."""
+def _calle_del_lado(p, q, normal, calles72, metro, giro_maximo=None):
+    """La dirección unitaria del eje de 1772 al que da el lado p→q (px), o None: un eje medible de `calles72` (los
+    tramos de 1772-calles-1936.json, en las mismas coordenadas) que corre con el lado dentro de `giro_maximo` grados
+    (por omisión GIRO_MAXIMO_GRADOS), pasa frente a su punto medio y queda hacia afuera a no más de ALCANCE_M: lo
+    mismo que mide la puerta de la fase 5."""
     from fachadas import ALCANCE_M, GIRO_MAXIMO_GRADOS
     medio = (np.asarray(p, float) + np.asarray(q, float)) / 2
     lado = np.asarray(q, float) - np.asarray(p, float)
     lado /= max(float(np.hypot(*lado)), 1e-9)
-    paralelo = math.cos(math.radians(GIRO_MAXIMO_GRADOS))
+    paralelo = math.cos(math.radians(GIRO_MAXIMO_GRADOS if giro_maximo is None else giro_maximo))
     for eje in calles72:
         if not eje.get('medible', True):
             continue
@@ -329,15 +330,24 @@ def _da_a_una_calle(p, q, normal, calles72, metro):
             t = float((medio - a) @ d)
             hacia = float((a + d * t - medio) @ np.asarray(normal, float))
             if abs(float(d @ lado)) >= paralelo and 0 <= t <= largo and 0 < hacia <= ALCANCE_M / metro:
-                return True
-    return False
+                return d if float(d @ lado) >= 0 else -d
+    return None
+
+
+def _da_a_una_calle(p, q, normal, calles72, metro):
+    """¿El lado p→q (px) da a una calle de 1772? (_calle_del_lado)"""
+    return _calle_del_lado(p, q, normal, calles72, metro) is not None
+
+
+GIRO_DE_LOTE_OBLICUO = 60.0   # un lado a más que el giro de fachada (20°) y hasta esto de su calle: lote oblicuo
+LIBRE_DE_LADO = 0.8           # parte de las sondas que caen fuera de la manzana para que un costado sea libre
 
 
 def _lado_libre(p, q, afuera, manzana, metro):
     """¿Lo que hay justo afuera del lado p→q (px) está fuera de la manzana? Cinco puntos a lo largo (hasta cerca de
     las puntas, donde toca el lote de la otra calle en la esquina), a 2 y
-    4 m hacia afuera; libre si todos caen fuera de la máscara (un costado que toca otra casa en parte llevaría su
-    alero encima de ella)."""
+    4 m hacia afuera; libre si al menos LIBRE_DE_LADO de ellos caen fuera de la máscara: un contacto solo en la punta
+    no lo cierra (el visor no pone alero sobre una casa de su época, T33j.6h), uno más largo sí."""
     p, q, afuera = (np.asarray(x, float) for x in (p, q, afuera))
     fuera = total = 0
     for t in (0.05, 0.2, 0.5, 0.8, 0.95):
@@ -346,7 +356,7 @@ def _lado_libre(p, q, afuera, manzana, metro):
             i, j = int(math.floor(y)), int(math.floor(x))
             total += 1
             fuera += not (0 <= i < manzana.shape[0] and 0 <= j < manzana.shape[1] and manzana[i, j])
-    return fuera == total
+    return fuera >= LIBRE_DE_LADO * total
 
 
 def orientar_a_una_calle(origen, eu, ancho_m, fondo_m, calles72, metro, manzana=None):
@@ -367,14 +377,28 @@ def orientar_a_una_calle(origen, eu, ancho_m, fondo_m, calles72, metro, manzana=
              (esquinas[3], esquinas[0], -u)]
     if _da_a_una_calle(*lados[0], calles72, metro):
         return origen, eu, ancho_m, fondo_m
+    def marco_con(eu2):
+        ev2 = np.array([-eu2[1], eu2[0]])
+        en_u, en_v = [float(e @ eu2) for e in esquinas], [float(e @ ev2) for e in esquinas]
+        nuevo = min(en_u) * eu2 + min(en_v) * ev2
+        return ((float(nuevo[0]), float(nuevo[1])), (float(eu2[0]), float(eu2[1])),
+                (max(en_u) - min(en_u)) * metro, (max(en_v) - min(en_v)) * metro)
+
+    libre = (lambda p, q, afuera: True) if manzana is None else (lambda p, q, afuera: _lado_libre(p, q, afuera, manzana, metro))
     for p, q, afuera in lados[1:]:
-        if (manzana is None or _lado_libre(p, q, afuera, manzana, metro)) and _da_a_una_calle(p, q, afuera, calles72, metro):
-            ev2 = -afuera
-            eu2 = np.array([ev2[1], -ev2[0]])
-            en_u, en_v = [float(e @ eu2) for e in esquinas], [float(e @ ev2) for e in esquinas]
-            nuevo = min(en_u) * eu2 + min(en_v) * ev2
-            return ((float(nuevo[0]), float(nuevo[1])), (float(eu2[0]), float(eu2[1])),
-                    (max(en_u) - min(en_u)) * metro, (max(en_v) - min(en_v)) * metro)
+        if libre(p, q, afuera) and _da_a_una_calle(p, q, afuera, calles72, metro):
+            return marco_con(np.array([-afuera[1], afuera[0]]))     # ev entra desde ese lado; eu = ev girado −90°
+    # el lote oblicuo (T33j.6i): ningún lado corre con su calle, pero uno libre da a ella con más giro; el marco va en
+    # la dirección de la calle y encierra el lote (el techo se recorta con la huella)
+    for p, q, afuera in lados:
+        if not libre(p, q, afuera):
+            continue
+        d = _calle_del_lado(p, q, afuera, calles72, metro, giro_maximo=GIRO_DE_LOTE_OBLICUO)
+        if d is not None:
+            ev2 = np.array([-d[1], d[0]])
+            if float(ev2 @ afuera) > 0:      # ev entra al lote, desde la calle
+                d = -d
+            return marco_con(d)
     return origen, eu, ancho_m, fondo_m
 
 
