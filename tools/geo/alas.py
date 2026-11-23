@@ -308,7 +308,32 @@ def _sin_salientes(grilla, banda, con_frente=True):
     return i0, i1, j0, j1
 
 
-def marco_de_casa(casa, manzana, angulo, metro, frentes=()):
+def _da_a_una_calle(p, q, normal, calles72, metro):
+    """¿El lado p→q (px) da a una calle de 1772? Un eje medible de `calles72` (los tramos de 1772-calles-1936.json, en
+    las mismas coordenadas) que corre con el lado (dentro de GIRO_MAXIMO_GRADOS), pasa frente a su punto medio y queda
+    hacia afuera a no más de ALCANCE_M: lo mismo que mide la puerta de la fase 5."""
+    from fachadas import ALCANCE_M, GIRO_MAXIMO_GRADOS
+    medio = (np.asarray(p, float) + np.asarray(q, float)) / 2
+    lado = np.asarray(q, float) - np.asarray(p, float)
+    lado /= max(float(np.hypot(*lado)), 1e-9)
+    paralelo = math.cos(math.radians(GIRO_MAXIMO_GRADOS))
+    for eje in calles72:
+        if not eje.get('medible', True):
+            continue
+        for a, b in zip(eje['puntos'], eje['puntos'][1:]):
+            a, b = np.asarray(a, float), np.asarray(b, float)
+            largo = float(np.hypot(*(b - a)))
+            if largo == 0:
+                continue
+            d = (b - a) / largo
+            t = float((medio - a) @ d)
+            hacia = float((a + d * t - medio) @ np.asarray(normal, float))
+            if abs(float(d @ lado)) >= paralelo and 0 <= t <= largo and 0 < hacia <= ALCANCE_M / metro:
+                return True
+    return False
+
+
+def marco_de_casa(casa, manzana, angulo, metro, frentes=(), calles72=()):
     """El marco del lote de una casa: su rectángulo en la dirección de la manzana, con el frente en la calle.
 
     `casa` y `manzana`: máscaras de la misma forma (la manzana incluye sus patios y jardines); `angulo`:
@@ -344,7 +369,11 @@ def marco_de_casa(casa, manzana, angulo, metro, frentes=()):
     sueltos = [k for k in range(4) if libres[k] >= LADO_LIBRE]
     if not sueltos:
         return None
-    frente = min(sueltos, key=lambda k: (largos[k], k))   # el frente es el lado corto: los lotes son tiras
+    # el frente es un lado libre que da a una calle de 1772, si lo hay (T33j.6c: un lado libre que da a un patio de
+    # la manzana o a un solar no es la calle); entre ellos, el corto: los lotes son tiras
+    a_la_calle = [k for k in sueltos if calles72 and _da_a_una_calle(
+        a_px(*lados[k][0][0]), a_px(*lados[k][0][1]), a_px(*lados[k][1]), calles72, metro)]
+    frente = min(a_la_calle or sueltos, key=lambda k: (largos[k], k))
     # el marco del lote: ev entra desde el frente; eu = ev girado −90° (así ev = eu girado 90°)
     normales = [a_px(*n) for _, n in lados]
     ev = (-normales[frente][0], -normales[frente][1])
@@ -386,14 +415,14 @@ def _edificado(grilla, ala, metro):
     return float(parte.mean()) if parte.size else 0.0
 
 
-def alas_de_casa(casa, manzana, angulo, metro, semilla, distancia_m, frentes=(), crujia=None):
+def alas_de_casa(casa, manzana, angulo, metro, semilla, distancia_m, frentes=(), crujia=None, calles72=()):
     """(marco, alas) de una casa que da a la calle, o None si no da a ninguna.
 
     Las alas van en píxeles del marco: [[tipo, u0, v0, u1, v1], …]; ninguna si la casa queda simple (chica,
     angosta o irregular: el visor la techa en su marco, sin patios). El marco, como lo da marco_de_casa
     (ancho y fondo en metros), sin la grilla y con "crujia": el fondo de la crujía del frente, en metros.
     """
-    marco = marco_de_casa(casa, manzana, angulo, metro, frentes)
+    marco = marco_de_casa(casa, manzana, angulo, metro, frentes, calles72)
     if marco is None:
         return None
     if crujia is None:

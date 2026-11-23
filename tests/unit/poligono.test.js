@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import {
-  areaConSigno, simplificar, simplificarAdentro, rectanguloMinimo, recortar, recortarConvexo, estaDentro, crearIndice, cruces,
+  areaConSigno, simplificar, simplificarAdentro, sinColineales, rectanguloMinimo, recortar, recortarConvexo, estaDentro, crearIndice, cruces,
 } from '../../src/poligono.js'
 
 const cuadrado = [[0, 0], [10, 0], [10, 10], [0, 10]]
@@ -209,5 +209,22 @@ describe('simplificarAdentro', () => {
     const copia = cuadrado.map((p) => [...p])
     simplificarAdentro(cuadrado, 0.5)
     expect(cuadrado).toEqual(copia)
+  })
+})
+
+describe('sinColineales', () => {
+  test('quita los vértices a menos de la tolerancia de la recta entre sus vecinos y los repetidos', () => {
+    const con = [[0, 0], [5, 0.0004], [10, 0], [10, 10], [10, 10.0001], [0, 10]]
+    const s = sinColineales(con, 1e-3)
+    expect(s).toHaveLength(4)
+    ;[[0, 0], [10, 0], [10, 10], [0, 10]].forEach(([x, z], k) => {   // de dos casi iguales queda uno, el que sea
+      expect(Math.hypot(s[k][0] - x, s[k][1] - z)).toBeLessThan(1e-3)
+    })
+  })
+
+  test('conserva las esquinas y no devuelve menos de tres vértices', () => {
+    const ele = [[0, 0], [10, 0], [10, 4], [4, 4], [4, 10], [0, 10]]
+    expect(sinColineales(ele, 1e-3)).toEqual(ele)
+    expect(sinColineales([[0, 0], [5, 0], [10, 0]], 1e-3)).toEqual([[0, 0], [5, 0], [10, 0]])
   })
 })

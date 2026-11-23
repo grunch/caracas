@@ -34,9 +34,11 @@ from fachadas import ALCANCE_M, ESTACIONES_MINIMAS, GIRO_MAXIMO_GRADOS, de_su_ma
 AREA_MINIMA_M2 = 1e-4          # un triángulo con menos área es degenerado (1 cm²; el umbral de T33j.1l)
 ALTURA_MINIMA_M = 1e-3         # o con menos altura sobre su lado mayor: una aguja
 CRUCE_AREA_M2 = 1e-4           # proyección común mínima de dos triángulos para medir su cruce (T33j.1l)
+CONTACTO_M = 1e-3             # una superficie común más angosta que esto es un contacto, no un cruce (la altura mínima)
 CRUCE_ALTO_M = 1e-3            # se cortan si uno pasa más que esto por encima y por debajo del otro (T33j.1l)
 CUMBRE_MISMO_ALTO_M = 0.01     # los dos extremos de una arista de cumbrera, a la misma altura
 CUMBRE_MINIMA_M = 0.5          # una arista de cumbrera más corta no da dirección
+EMPATE_CUMBRERA_M = 0.5      # dos cumbreras a menos de esto del eje empatan: gana la más paralela (la tolerancia de fachada)
 ALERO_EN_CALLE_M2 = 0.01       # lo que un techo puede pisar del núcleo de la calzada (el umbral de solapes de la fase 5)
 
 
@@ -69,8 +71,8 @@ def _plano(t, metro):
 
 def techos_cruzados(triangulos, metro=METRO):
     """Los pares de casas con superficies que se atraviesan (T33j.1l): dos triángulos de casas distintas con proyección
-    común y un plano que pasa por encima y por debajo del otro dentro de ella. Los contactos de borde y los solapes
-    coplanares no son cruces."""
+    común y un plano que pasa por encima y por debajo del otro dentro de ella. Los contactos de borde (una superficie
+    común de menos de CONTACTO_M de ancho) y los solapes coplanares no son cruces."""
     planos = [(t['techo'], _plano(t, metro)) for t in triangulos]
     planos = [(techo, p) for techo, p in planos if p is not None]
     if not planos:
@@ -83,7 +85,9 @@ def techos_cruzados(triangulos, metro=METRO):
             if j <= i or ti == tj:
                 continue
             comun = pi.intersection(pj)
-            if comun.area <= CRUCE_AREA_M2:
+            # un contacto de borde no es un cruce (T33j.1l); con la precisión del visor (Float32 a cientos de metros del
+            # origen) la medianera compartida aparece como una tira de décimas de milímetro: menos de CONTACTO_M de ancho
+            if comun.area <= CRUCE_AREA_M2 or comun.buffer(-CONTACTO_M / 2).is_empty:
                 continue
             puntos = np.array([c for g in getattr(comun, 'geoms', [comun]) if g.geom_type == 'Polygon'
                                for c in g.exterior.coords])
@@ -123,21 +127,27 @@ def _distancia_al_eje(extremos, origen, normal):
     return 0.0 if a * b <= 0 else min(abs(a), abs(b))
 
 
-def cumbreras_desviadas(triangulos, frentes, metro=METRO, giro_maximo=GIRO_MAXIMO_GRADOS):
-    """Las casas cuya cumbrera de frente no corre con su calle: por cada frente de la casa ({techo: [(dirección del
-    eje, punto del eje)]}, en px), la cumbrera más cercana a ese eje; la casa está bien si en alguno de sus frentes esa
-    cumbrera se aparta menos de `giro_maximo` grados. Las casas sin cumbrera de teja (azotea, zinc) no se miden."""
+def cumbreras_desviadas(triangulos, frentes, metro=METRO, giro_maximo=GIRO_MAXIMO_GRADOS, fuera_de_recta=frozenset()):
+    """Las casas cuya cumbrera de frente no corre con su calle. `frentes`: {techo: [(dirección del eje, punto del eje,
+    tramo, lado, segmento)]}, en px. Por cada frente, la cumbrera más cercana a ese eje; si hay varias a menos de
+    EMPATE_CUMBRERA_M de ella (un ala que nace en la cumbrera del frente, en T), la más paralela. La casa está bien si
+    en alguno de sus frentes esa cumbrera se aparta menos de `giro_maximo` grados. No se mide una casa en un frente
+    donde la fase 5 la ve fuera de la recta (`fuera_de_recta`: {(techo, tramo, lado, segmento)}): no es su fachada. Las
+    casas sin cumbrera de teja (azotea, zinc) no se miden."""
     salida = []
     for techo, aristas in sorted(_cumbreras(triangulos, metro).items()):
-        if techo not in frentes:
+        suyos = [f for f in frentes.get(techo, []) if (techo, *f[2:]) not in fuera_de_recta]
+        if not suyos:
             continue
         giros = []
-        for d, origen in frentes[techo]:
+        for d, origen, *_frente in suyos:
             d = np.asarray(d, float) / np.hypot(*d)
             o = np.asarray(origen, float) * metro
             normal = np.array([-d[1], d[0]])
-            _extremos, direccion = min(aristas, key=lambda x: _distancia_al_eje(x[0], o, normal))
-            giros.append(float(np.degrees(np.arccos(min(1.0, abs(float(direccion @ d)))))))
+            distancias = [_distancia_al_eje(x[0], o, normal) for x in aristas]
+            cerca = min(distancias)
+            giros.append(min(float(np.degrees(np.arccos(min(1.0, abs(float(x[1] @ d))))))
+                             for x, dist in zip(aristas, distancias) if dist <= cerca + EMPATE_CUMBRERA_M))
         if min(giros) > giro_maximo:
             salida.append({'techo': techo, 'giro_grados': round(min(giros), 1)})
     return salida
@@ -191,7 +201,7 @@ def mismo_trazado(fases, sha256):
 
 
 def frentes_de_casas(calles, casas, metro=METRO, obstaculos=()):
-    """{techo: [(dirección del eje, punto del eje)]} de los frentes medibles en que la casa es fachada, como en la puerta
+    """{techo: [(dirección del eje, punto del eje, tramo, lado, segmento)]} de los frentes medibles en que la casa es fachada, como en la puerta
     de la fase 5 (frentes_desalineados): los rayos de cada lado, la manzana que arma el frente."""
     figuras = [c for _, c in casas] + list(obstaculos)
     son_obstaculo = [False] * len(casas) + [True] * len(obstaculos)
@@ -204,7 +214,7 @@ def frentes_de_casas(calles, casas, metro=METRO, obstaculos=()):
     for eje in calles:
         if not eje['medible']:
             continue
-        for a, b in zip(eje['puntos'], eje['puntos'][1:]):
+        for segmento, (a, b) in enumerate(zip(eje['puntos'], eje['puntos'][1:])):
             d, estaciones = _estaciones(a, b, metro)
             if d is None:
                 continue
@@ -217,7 +227,7 @@ def frentes_de_casas(calles, casas, metro=METRO, obstaculos=()):
                 if len(golpes) < ESTACIONES_MINIMAS or len(techos) < 2:
                     continue
                 for techo in techos:
-                    salida.setdefault(techo, []).append((tuple(d), tuple(a)))
+                    salida.setdefault(techo, []).append((tuple(d), tuple(a), eje['tramo'], lado, segmento))
     return salida
 
 
@@ -229,7 +239,10 @@ def puerta_fase6(cubiertas, ciudad, calles, red, hitos, fases, sha256, metro=MET
     degenerados = triangulos_degenerados(triangulos, metro)
     cruces = techos_cruzados(triangulos, metro)
     frentes = frentes_de_casas(calles, casas, metro, plantas_en_pie(hitos))
-    desviadas = cumbreras_desviadas(triangulos, frentes, metro)
+    # las casas que la fase 5 ve fuera de la recta de un frente (vistas por una abertura): no son su fachada
+    fuera = {(c['techo'], f['tramo'], f['lado'], f.get('segmento', 0))
+             for f in fases[5]['puerta_de_salida']['frentes_alineados']['desalineados'] for c in f['casas']}
+    desviadas = cumbreras_desviadas(triangulos, frentes, metro, fuera_de_recta=fuera)
     con_cumbrera = set(_cumbreras(triangulos, metro)) & set(frentes)
     aleros = aleros_en_la_calle(triangulos, [c['poligono'] for c in corredores(red, metro=metro)], metro)
     criterios = OrderedDict([
@@ -245,7 +258,7 @@ def puerta_fase6(cubiertas, ciudad, calles, red, hitos, fases, sha256, metro=MET
     ])
     return {**criterios,
             'umbrales_inferidos': {'area_minima_m2': AREA_MINIMA_M2, 'altura_minima_m': ALTURA_MINIMA_M,
-                                   'cruce_area_m2': CRUCE_AREA_M2, 'cruce_alto_m': CRUCE_ALTO_M,
+                                   'cruce_area_m2': CRUCE_AREA_M2, 'cruce_alto_m': CRUCE_ALTO_M, 'contacto_m': CONTACTO_M,
                                    'giro_maximo_grados': GIRO_MAXIMO_GRADOS, 'alero_en_calle_m2': ALERO_EN_CALLE_M2},
             'casas_1772': len(casas), 'casas_con_techo': len({t['techo'] for t in triangulos}),
             'fase_6_cerrable': all(c['cumplido'] for c in criterios.values())}
