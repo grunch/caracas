@@ -45,3 +45,17 @@ test('«Recorrer» despliega los modos, se cierra con Esc o tocando afuera, y el
   await expect(recorrer).toBeVisible()
   await expect(page.locator('#volar')).toBeHidden()
 })
+
+test('con el teclado, abrir «Recorrer» y apretar Tab lleva a los modos, en orden', async ({ page }) => {
+  // revisión de #167: el menú iba antes del botón en el DOM y Tab saltaba de «Recorrer» a la gota
+  await page.goto('/?sinintro&capture')
+  await page.waitForFunction(() => window.lab?.ready === true, null, { timeout: 60_000 })
+  await page.locator('#recorrer').focus()
+  await page.keyboard.press('Enter')
+  await expect(page.locator('#recorrer')).toHaveAttribute('aria-expanded', 'true')
+  const enfocado = () => page.evaluate(() => document.activeElement?.id)
+  for (const id of ['caminar', 'volar', 'manejar']) {
+    await page.keyboard.press('Tab')
+    expect(await enfocado()).toBe(id)
+  }
+})
