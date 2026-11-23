@@ -54,12 +54,15 @@ Datos regenerados desde `vectorizar` sobre la rama, con 6315 casas de 1772 a la 
 
 | Sector | Casas | Sector | Casas |
 |---|---:|---|---:|
-| S1772-11 | 26 | S1772-31 | 32 |
-| S1772-12 | 29 | S1772-32 | 59 |
-| S1772-13 | 5 | S1772-33 | 24 |
-| S1772-21 | 12 | S1772-42 | 24 |
-| S1772-22 | 55 | S1772-43 | 13 |
-| S1772-23 | 58 | S1772-24 | 9 |
+| S1772-11 | 20 | S1772-31 | 24 |
+| S1772-12 | 13 | S1772-32 | 68 |
+| S1772-13 | 5 | S1772-33 | 32 |
+| S1772-21 | 11 | S1772-34 | 2 |
+| S1772-22 | 72 | S1772-42 | 19 |
+| S1772-23 | 52 | S1772-43 | 18 |
+| S1772-24 | 10 | | |
+
+Cada casa va al sector cuyo edificado o tramo de calle queda más cerca.
 
 `tools/geo/censo_fase8.py --informe-rojo` arma un panel de cada una de las 12 zonas de 150 m con más casas, fuera de git. Revisé a ojo las 8 primeras:
 - **La mayoría** son casas aisladas chicas, corridas unos metros respecto de su propia mancha roja. Es el error del calce: una casa de 10 m corrida 4 m ya cae casi entera fuera de un rojo ensanchado 2 m. El original sí la dibuja.

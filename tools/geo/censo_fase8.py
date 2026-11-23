@@ -83,6 +83,16 @@ def casas_fuera_del_rojo(casas, rojo, tolerancia_px, fraccion=FUERA_DEL_ROJO):
     return salida
 
 
+def sector_de_punto(punto, edificado, sector_de, tramos):
+    """El sector de un punto (px del plano base) por pertenencia: el de lo edificado de sus unidades o de sus tramos de
+    calle que queda más cerca. Las cajas de extension_de_sectores son para recortar paneles y se solapan."""
+    from shapely.geometry import LineString, Point
+    p = Point(punto)
+    candidatos = [(q.distance(p), sector_de[e['id']]) for e in edificado if e['id'] in sector_de for q in e['poligonos']]
+    candidatos += [(LineString(t['puntos']).distance(p), t['sector']) for t in tramos if len(t['puntos']) >= 2]
+    return min(candidatos)[1] if candidatos else 'sin_sector'
+
+
 def recorte_de(extension, imagen, metro=METRO, margen_m=MARGEN_M):
     """El recorte (px del plano base, enteros) de una extensión con su margen, dentro de lo que cubre la imagen."""
     m = margen_m / metro
@@ -157,12 +167,8 @@ def informe_rojo(args, raiz, a_la_vista, edificado, sector_de, tramos, calzado, 
     rojo = cv2.imread(str(raiz / 'fuentes' / 'derivados' / '1936' / 'edificado-1772.png'), cv2.IMREAD_UNCHANGED)
     rojo = (rojo if rojo.ndim == 2 else rojo[..., 0]) > 0
     fuera = casas_fuera_del_rojo(a_la_vista, rojo, TOLERANCIA_ROJO_M / METRO)
-    extension = extension_de_sectores(edificado, sector_de, tramos)
-
-    def sector(c):
-        return next((s for s, (x0, y0, x1, y1) in extension.items() if x0 <= c[0] <= x1 and y0 <= c[1] <= y1), 'sin_sector')
     for f in fuera:
-        f['sector'] = sector(f['centro'])
+        f['sector'] = sector_de_punto(f['centro'], edificado, sector_de, tramos)
     zonas = Counter((f['centro'][0] // ZONA_PX, f['centro'][1] // ZONA_PX) for f in fuera).most_common(ZONAS_EN_PANELES)
     por_id = dict(a_la_vista)
     for i, ((zx, zy), n) in enumerate(zonas):

@@ -55,3 +55,16 @@ def test_una_casa_casi_entera_fuera_de_lo_rojo_del_original_se_informa():
     assert [f['techo'] for f in fuera] == [2]
     assert fuera[0]['sobre_el_rojo'] == 0.0
     assert [f['techo'] for f in casas_fuera_del_rojo(casas, rojo, tolerancia_px=25, fraccion=0.2)] == []
+
+
+def test_una_casa_va_al_sector_de_lo_que_tiene_mas_cerca_aunque_las_cajas_se_solapen():
+    # revisión de #159: las cajas de los paneles se solapan; el sector es el de la geometría propia más cercana
+    from censo_fase8 import extension_de_sectores, sector_de_punto
+    edificado = [{'id': 'U1', 'poligonos': [box(0, 0, 100, 100)]}, {'id': 'U2', 'poligonos': [box(90, 90, 200, 200)]}]
+    sector_de = {'U1': 'S1', 'U2': 'S2'}
+    tramos = [{'tramo': 'L1', 'sector': 'S1', 'puntos': [[0, 150], [60, 150]]}]
+    ext = extension_de_sectores(edificado, sector_de, tramos)
+    punto = (95, 140)    # dentro de las cajas de S1 y de S2; dentro de lo edificado de S2
+    assert all(x0 <= punto[0] <= x1 and y0 <= punto[1] <= y1 for x0, y0, x1, y1 in [ext['S1'], ext['S2']])
+    assert sector_de_punto(punto, edificado, sector_de, tramos) == 'S2'
+    assert sector_de_punto((20, 148), edificado, sector_de, tramos) == 'S1'
