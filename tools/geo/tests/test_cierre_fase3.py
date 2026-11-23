@@ -152,3 +152,13 @@ def test_sin_las_calles_la_red_conectada_queda_incompleta_y_la_puerta_no_se_cier
     p = puerta_fase3(ciudad=ciudad((10, 10, 90, 90)), red=red(), unidades=unidades(), verificadas=[], metro=METRO)
     assert p['red_conectada'] == {'cumplido': False, 'sin_entrada': True}
     assert p['fase_3_cerrable'] is False
+
+
+def test_una_plazuela_del_censo_final_con_una_casa_dentro_no_deja_cerrar_la_fase_3():
+    # T33j.8c: las plazuelas de 1772-plazuelas.json cuentan como plazas: ninguna casa con la mitad o más dentro
+    from shapely.geometry import box as caja
+    from cierre_fase3 import plazuelas_ocupadas
+    casas = [(7, caja(0, 0, 10, 10)), (8, caja(97.5, 0, 107.5, 10))]   # la 8, un cuarto dentro
+    plazuelas = [{'id': 'P1772-001', 'poligono': caja(-5, -5, 100, 20)}]
+    assert plazuelas_ocupadas(casas, plazuelas) == [{'plazuela': 'P1772-001', 'casas': [7]}]
+    assert plazuelas_ocupadas(casas, [{'id': 'P2', 'poligono': caja(300, 300, 310, 310)}]) == []

@@ -371,6 +371,34 @@ def abrir_calles_de_1772(ciudad, vida, quitar, calles, metro, area_minima_m2=1.0
     return vida, quitar, sin_abrir
 
 
+def despejar_plazuelas_de_1772(ciudad, vida, quitar, plazuelas, desde=0):
+    """(vida, quitar): las casas vivas en 1772 con la mitad o más dentro de una plazuela del censo final
+    (plazuelas.en_plazuela; T33j.8c) dejan 1772 como al abrir una calle (abrir_calles_de_1772): una «de antes» se
+    quita, una de 1936 nace en 1843 y una de 1578 (índice más allá de "antes") vive solo hasta 1772. `desde`: solo se
+    tocan los techos desde ese índice. No muta las entradas."""
+    from shapely.geometry import Polygon
+    from plazuelas import en_plazuela
+    vida, quitar = [list(v) for v in vida], set(quitar)
+    v, antes = ciudad["vertices"], ciudad.get("antes", [])
+    for k, t in enumerate(ciudad["techos"]):
+        nace_, muere = vida[k]
+        if k < desde or k in quitar or nace_ > 1 or (muere and muere <= 1):
+            continue
+        figura = Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])])
+        if not figura.is_valid or not en_plazuela(figura, plazuelas):
+            continue
+        if k >= len(antes):
+            if nace_ < 1:
+                vida[k] = [nace_, 1]
+            else:
+                quitar.add(k)
+        elif antes[k] or (muere and muere <= 2):
+            quitar.add(k)
+        else:
+            vida[k] = [max(2, nace_), muere]
+    return vida, quitar
+
+
 SOLAPE_1772_M2 = 0.01   # como la puerta de la fase 5: una casa de 1578 que pisa esto de una de 1772 le cede el lugar
 
 
@@ -445,12 +473,14 @@ def alinear_1772(ciudad, tramos, hitos, red72, verificadas, metro):
     from cierre_fase3 import ANCHO_INFERIDO_M, casas_de_epoca, corredores
     from cierre_fase4 import visibles
     from cierre_fase5 import plantas_en_pie
+    from plazuelas import plazuelas_en_1936
     import fachadas
     casas = visibles(casas_de_epoca(ciudad), hitos)
     n = len(ciudad.get("antes", []))
     movibles = {k for k, _ in casas if k < n and ciudad["antes"][k] and ciudad["junta"][k] >= 0}
     vedado = [c["poligono"] for c in corredores(red72, metro=metro)] + \
-        [LineString(t["anclajes"]).buffer(ANCHO_INFERIDO_M / 2 / metro, cap_style="flat") for t in verificadas]
+        [LineString(t["anclajes"]).buffer(ANCHO_INFERIDO_M / 2 / metro, cap_style="flat") for t in verificadas] + \
+        [p["poligono"] for p in plazuelas_en_1936()]   # las plazuelas del censo final (T33j.8c): ninguna casa crece ahí
     nuevas = {}
     # una saliente que se ajusta corre la recta de sus vecinas: la segunda pasada mide sobre las huellas ya ajustadas
     for _ in range(PASADAS_ALINEAR):
@@ -472,11 +502,13 @@ def cerrar_aberturas_1772(ciudad, tramos, hitos, red72, verificadas, edificado, 
     from cierre_fase3 import ANCHO_INFERIDO_M, casas_de_epoca, corredores
     from cierre_fase4 import visibles
     from cierre_fase5 import plantas_en_pie
+    from plazuelas import plazuelas_en_1936
     casas = visibles(casas_de_epoca(ciudad), hitos)
     n = len(ciudad.get("antes", []))
     movibles = {k for k, _ in casas if k < n and ciudad["antes"][k] and ciudad["junta"][k] >= 0}
     vedado = [c["poligono"] for c in corredores(red72, metro=metro)] + \
-        [LineString(t["anclajes"]).buffer(ANCHO_INFERIDO_M / 2 / metro, cap_style="flat") for t in verificadas]
+        [LineString(t["anclajes"]).buffer(ANCHO_INFERIDO_M / 2 / metro, cap_style="flat") for t in verificadas] + \
+        [p["poligono"] for p in plazuelas_en_1936()]   # las plazuelas del censo final (T33j.8c): ninguna casa crece ahí
     frentes = {m[0]: (m[3], m[4]) for m in ciudad.get("marcos", [])}
     nuevas = cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=vedado, obstaculos=plantas_en_pie(hitos),
                               frentes=frentes)
@@ -779,6 +811,9 @@ def main():
         vida36, quitar, sin_abrir = abrir_calles_de_1772(ciudad36, vida36, quitar,
                                                           json.loads(calles72.read_text())["tramos"], metro)
         print(f"calles de 1772 que siguen bloqueadas: {len(sin_abrir)} {sin_abrir[:10]}")
+    from plazuelas import plazuelas_en_1936
+    plazuelas72 = [p["poligono"] for p in plazuelas_en_1936()]
+    vida36, quitar = despejar_plazuelas_de_1772(ciudad36, vida36, quitar, plazuelas72)
     vida78 = vida_de_1578(ciudad78, *relevos(huellas36, vida36, quitar), construido, escala)
     ciudad = unir(*sin_techos(ciudad36, vida36, quitar), ciudad78, vida78)
     if calles72.exists():
@@ -792,6 +827,7 @@ def main():
         vida_f, quitar_f, sin_abrir = abrir_calles_de_1772(ciudad, ciudad["vida"], set(),
                                                             json.loads(calles72.read_text())["tramos"] + conocidas, metro,
                                                             desde=desde)
+        vida_f, quitar_f = despejar_plazuelas_de_1772(ciudad, vida_f, quitar_f, plazuelas72, desde=desde)
         ciudad, vida_f = sin_techos(ciudad, vida_f, quitar_f)
         ciudad["vida"] = ceder_a_1772(ciudad, vida_f, desde, metro)
         import subprocess

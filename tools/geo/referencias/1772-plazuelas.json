@@ -1,0 +1,120 @@
+{
+ "alcance": "Plazuelas y ensanches abiertos del original de 1772 que la referencia de la fase 2 no registra como plaza (censo final, T33j.8c). En el original son espacio en blanco, sin rojo, entre manzanas; ninguna casa de 1772 vive en ellas. El contorno va en px del original y se lleva a 1936 por el calce elegido.",
+ "fuente": "fuentes/mapas/1772-pares-agi-exato-mapa/original.jpg",
+ "fuente_sha256": "4696d038a55b8088302a496b6eb4678b11173d98d3a15c589530cf78ee7bb62b",
+ "metodo": "Trazado a mano sobre el original ampliado ×5 con una grilla de 10 px y revisado a ojo sobre el mismo recorte (23-11-2026). La iglesia (el rectángulo blanco con la cruz) no entra: es un edificio.",
+ "plazuelas": [
+  {
+   "id": "P1772-001",
+   "hallazgo": "D8-02",
+   "sector": "S1772-23",
+   "descripcion": "ensanche de la calle junto a la iglesia de la cruz al oeste (plazuela de Altagracia por el hito vecino; identidad del espacio no verificada)",
+   "contorno_original": [
+    [
+     1147,
+     703
+    ],
+    [
+     1172,
+     703
+    ],
+    [
+     1172,
+     765
+    ],
+    [
+     1147,
+     765
+    ]
+   ]
+  },
+  {
+   "id": "P1772-002",
+   "hallazgo": "D8-03",
+   "sector": "S1772-23",
+   "descripcion": "ensanche en escalón a una cuadra al sureste de la Plaza Mayor",
+   "contorno_original": [
+    [
+     938,
+     928
+    ],
+    [
+     1003,
+     928
+    ],
+    [
+     1003,
+     946
+    ],
+    [
+     938,
+     946
+    ]
+   ]
+  },
+  {
+   "id": "P1772-003",
+   "hallazgo": "D8-04",
+   "sector": "S1772-31",
+   "descripcion": "plazuela con borde punteado alrededor de una iglesia (cruz); la iglesia no entra",
+   "contorno_original": [
+    [
+     574,
+     928
+    ],
+    [
+     611,
+     928
+    ],
+    [
+     611,
+     968
+    ],
+    [
+     603,
+     968
+    ],
+    [
+     603,
+     947
+    ],
+    [
+     583,
+     947
+    ],
+    [
+     583,
+     968
+    ],
+    [
+     574,
+     968
+    ]
+   ]
+  },
+  {
+   "id": "P1772-004",
+   "hallazgo": "D8-05",
+   "sector": "S1772-32",
+   "descripcion": "entrante en blanco de una manzana junto a una esquina",
+   "contorno_original": [
+    [
+     631,
+     966
+    ],
+    [
+     662,
+     966
+    ],
+    [
+     662,
+     982
+    ],
+    [
+     631,
+     982
+    ]
+   ]
+  }
+ ]
+}

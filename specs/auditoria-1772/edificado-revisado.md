@@ -41,7 +41,7 @@ En el original, una manzana tiene un borde negro y lo edificado va pintado de ro
 - **U1772-0250** (dudoso): se pega el puente y entra un pedazo del otro lado de la calle.
 - **U1772-0254** (dudoso): se pegan el puente y un pedazo del otro lado de la calle.
 - **U1772-0264** (corregido): edificio diagonal muy fino: solo se trazaba una parte. Se retraza con saturación y brillo mínimos de 40.
-- **U1772-0272** (dudoso): dos manchas igual de dentro de la caja, una del otro lado de la diagonal: no se decide cuál es la suya.
+- **U1772-0272** (fiel_solo_la_mayor; dudoso hasta el censo final): la mancha mayor es la franja en L de la unidad al pie del Calvario; la otra es el triángulo del otro lado de la diagonal (U1772-0013), que ya tiene sus casas. Revisado de nuevo a ojo el 23-11-2026 (D8-01, T33j.8c).
 - **U1772-0277** (corregido): el triángulo y el puente quedan en una sola mancha. Se recorta a la caja de la unidad.
 
 La revisión queda atada al sha256 del recorte y de los polígonos: si el trazado cambia, deja de valer (`edificado_original.edificado_aprobado`). Una corregida guarda su polígono corregido en la revisión, con el mismo atado al trazado original.

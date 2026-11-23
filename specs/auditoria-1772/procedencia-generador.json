@@ -234,6 +234,11 @@
     "entrada": "tools/geo/gcp/calce-1772-pares-agi-exato-mapa.json",
     "clase": "historica_por_identidad",
     "nota": "El calce por identidad lleva a 1936 lo edificado de las unidades sin anillo."
+   },
+   {
+    "entrada": "tools/geo/referencias/1772-plazuelas.json",
+    "clase": "historica_curada",
+    "nota": "Plazuelas y ensanches del original de 1772 que la referencia no registraba (censo final, T33j.8c), trazados a mano sobre el original y revisados a ojo: ninguna casa vive en ellas en 1772."
    }
   ]
  },
