@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest'
 import { DataUtils, HalfFloatType, RedFormat } from 'three'
 import {
   decodificarRelieve, muestrear, crearRelieve, hinchado, alturaSuelo, texturaRelieve, uniformsRelieve, subdivisionDeLaHoja,
-  terrazasDeHitos, ponerRelieve, GLSL_RELIEVE, GLSL_TERRAZAS_TAPADAS, TALUD_M, MAX_TERRAZAS,
+  terrazasDeHitos, ponerRelieve, GLSL_RELIEVE, GLSL_TERRAZAS_TAPADAS, TALUD_M, MAX_TERRAZAS, UNIFORMS_RELIEVE,
 } from '../../src/relieve.js'
 
 /** relieve.bin sintético: Uint16 LE [w, h, alturas en dm…] */
@@ -160,5 +160,15 @@ describe('terrazas: un hito grande asentado en la ladera (el convento de las Con
     expect(U.uTerrazaVida.value[0].toArray()).toEqual([1, 0])
     expect(GLSL_TERRAZAS_TAPADAS).toContain('bool bajoUnHito(vec2 xz)')
     expect(GLSL_TERRAZAS_TAPADAS).toContain('vivoEn(uTerrazaVida[i], epocaAqui(length(xz)))')
+  })
+
+  test('UNIFORMS_RELIEVE nombra todo lo que lee GLSL_RELIEVE: los hitos y los árboles lo copian entero', () => {
+    const U = uniformsRelieve(hoja31, [terraza])
+    expect([...UNIFORMS_RELIEVE].sort()).toEqual(Object.keys(U).filter((k) => k !== 'uTerrazaVida').sort())
+  })
+
+  test('acostada la ciudad (el hito escondido por la ola), el suelo de la terraza se dibuja: no queda un hueco', () => {
+    // el hito sube con la ola desde su distancia a la plaza, corrida hasta 60 m por su azar (src/hitos/material.js)
+    expect(GLSL_TERRAZAS_TAPADAS).toContain('smoothstep(0.0, 1.0, (uOla - length(m.xy) - 60.0) / uAnchoOla) > 0.99')
   })
 })

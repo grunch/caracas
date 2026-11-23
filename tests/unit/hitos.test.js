@@ -271,6 +271,8 @@ describe('la malla', () => {
   test('el hito va apenas sobre su piso: el suelo de una terraza, al ras, no parpadea con sus patios (z-fighting)', () => {
     expect(LEVANTE_M).toBeGreaterThan(0.05); expect(LEVANTE_M).toBeLessThan(0.3)
     expect(crearMaterialHitos({ U }).vertexShader).toContain(`float y = piso + ${LEVANTE_M.toFixed(2)} + position.y * sube * vExiste;`)
+    // los pies bajan al mismo suelo que la ciudad: con sus terrazas
+    expect(crearMaterialHitos({ U }).uniforms.uTerrazaMedida).toBe(U.uTerrazaMedida)
   })
 
   test('el material: los dos shaders usan lo que comparten y cada material tiene su rama', () => {
