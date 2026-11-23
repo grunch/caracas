@@ -215,7 +215,8 @@ test('sin ?planos, la hoja muestra siempre el plano de 1936 (no se pega el plano
   expect(pedidos.filter((u) => u.includes('plano/epocas.json'))).toEqual([])
 })
 
-// a 800 px, con la ciudad levantada, #alzar dice «Acostar la ciudad» y la barra tiene ocho botones: por encima
+// a 800 px, con la ciudad levantada, #alzar dice «Acostar la ciudad» y la barra tiene seis botones (los modos, bajo
+// «Recorrer»; antes eran ocho): por encima
 // de 640 px no partía en filas y su borde derecho fijo dejaba los de la izquierda fuera de la ventana (o los
 // apretaba hasta partirles el texto); con lo de hoy prendido, la leyenda queda encima de la barra
 for (const ancho of [700, 800]) {
@@ -231,7 +232,7 @@ for (const ancho of [700, 800]) {
       const r = b.getBoundingClientRect()
       return { id: b.id, izq: r.left, der: r.right, arriba: r.top, abajo: r.bottom, alto: r.height }
     }))
-    expect(cajas.length).toBeGreaterThanOrEqual(8)
+    expect(cajas.length).toBeGreaterThanOrEqual(6)
     for (const c of cajas) {
       expect(c.izq, c.id).toBeGreaterThanOrEqual(0)
       expect(c.der, c.id).toBeLessThanOrEqual(ancho)
