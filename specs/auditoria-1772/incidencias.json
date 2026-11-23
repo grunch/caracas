@@ -19,7 +19,7 @@
         580
       ],
       "categoria": "abertura",
-      "estado": "confirmado_visual",
+      "estado": "resuelto_verificado_en_planta",
       "prioridad": "P1",
       "observacion": "Discontinuidad del frente oeste en su mitad norte; comunica visualmente calle e interior. El original y la referencia curada muestran frente continuo.",
       "causa": "Localizada antes del visor: huellas 33285–33287 del paquete, idénticas a 34071–34073 de ciudad-1936.json, cuadra 8090, junta 22, antes=1. La abertura y el contorno irregular están en las huellas reconstruidas. Falta reproducir la máscara y aislar la operación que los introduce; no se atribuye todavía a un descarte de época.",
@@ -38,7 +38,12 @@
         "T33j.3a",
         "T33j.5a",
         "T33j.7a"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "Frente oeste continuo en la ciudad publicada; las aberturas cercanas son legítimas (solares del original). Fases 5 y 7 cerrables."
+      }
     },
     {
       "id": "I1772-002",
@@ -58,7 +63,7 @@
         980
       ],
       "categoria": "abertura_esquina",
-      "estado": "confirmado_visual",
+      "estado": "resuelto_verificado_en_planta",
       "prioridad": "P1",
       "observacion": "Esquina suroeste abierta: el frente oeste termina antes de enlazar con el sur, en una manzana roja de contorno regular.",
       "causa": "Posible descarte de lote de esquina; falta trazar el registro hasta el generador.",
@@ -75,7 +80,12 @@
       "subtareas": [
         "T33j.5a",
         "T33j.7a"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "Esquina suroeste cerrada en la ciudad publicada."
+      }
     },
     {
       "id": "I1772-003",
@@ -95,7 +105,7 @@
         845
       ],
       "categoria": "alineacion_cubierta",
-      "estado": "confirmado_visual",
+      "estado": "resuelto_verificado_en_planta",
       "prioridad": "P1",
       "observacion": "Frente oeste con cambios de alineación y alas diagonales cerca del tramo medio, frente a un lado recto de la manzana de referencia.",
       "causa": "Localizada antes del visor: huellas 33079, 33080 y 33084 corresponden a 33865, 33866 y 33870 de ciudad-1936.json, cuadra 8085, junta 17, antes=1. El quiebre y el cuerpo diagonal ya existen en la huella. Falta reproducir la rama de reconstrucción y separar máscara, reparto y recorte.",
@@ -115,7 +125,12 @@
         "T33j.3a",
         "T33j.5a",
         "T33j.7a"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "Frente oeste sin casas fuera de su recta (fase 5)."
+      }
     },
     {
       "id": "I1772-004",
@@ -135,7 +150,7 @@
         660
       ],
       "categoria": "hito_cierre",
-      "estado": "incierto",
+      "estado": "resuelto_verificado_en_planta",
       "prioridad": "P1",
       "observacion": "Separación visible entre extremo oriental de Catedral y casas del frente norte. La imagen sola no permite decidir si el cerramiento del conjunto está ausente.",
       "causa": "Contrastar planta histórica del conjunto y distinguir solar, edificio y paso público antes de cerrar.",
@@ -149,7 +164,12 @@
       "verificacion_acceso": "pendiente recorrido a pie",
       "subtareas": [
         "T33j.4b"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "Las casas llegan a la planta de la Catedral, sin vacío (fase 4, hitos sin vacíos artificiales)."
+      }
     },
     {
       "id": "I1772-005",
@@ -169,7 +189,7 @@
         425
       ],
       "categoria": "cubierta_esquina",
-      "estado": "candidato",
+      "estado": "resuelto_en_medida",
       "prioridad": "P1",
       "observacion": "Encuentro de faldones y ala diagonal en esquina noroeste; requiere inspección oblicua y validez de caras.",
       "causa": "Un inglete triangular por sí solo no demuestra techo degenerado. Medir sin sustituir el contorno.",
@@ -182,7 +202,12 @@
       "verificacion_acceso": "pendiente recorrido a pie",
       "subtareas": [
         "T33j.6a"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "Sin techos cruzados ni cumbreras desviadas en la esquina (fase 6, medida en CPU)."
+      }
     },
     {
       "id": "I1772-006",
@@ -201,12 +226,17 @@
       "evidencia_correccion": "conteos-publicados.md",
       "subtareas": [
         "T33j.8a"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "Conteos del manifiesto publicado iguales a los registros del pak y de arboles.bin publicados (conteos-publicados.md)."
+      }
     },
     {
       "id": "I1772-007",
       "categoria": "ocupacion_periferica",
-      "estado": "confirmado_general_pendiente_por_unidad",
+      "estado": "resuelto_con_limite",
       "prioridad": "P1",
       "sectores": [
         "S1772-11",
@@ -233,12 +263,17 @@
       "subtareas": [
         "T33j.3b",
         "T33j.4a"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "Ocupación periférica con lo edificado revisado del original (fase 4) y el censo final (D8-01); queda el límite de los sectores del calce (limites-calce.json)."
+      }
     },
     {
       "id": "I1772-008",
       "categoria": "fondo_de_otra_epoca",
-      "estado": "corregido_en_codigo_pendiente_revision_visual",
+      "estado": "corregido_y_publicado_pendiente_revision_visual",
       "prioridad": "P1",
       "observacion": "En 1772 se conserva por defecto el plano de 1936: los planos de época están detrás de ?planos. Las capturas muestran tinta y edificios planos de 1936 dentro/fuera de la ciudad 3D.",
       "causa": "src/main.js, indicePlanos: desactivación intencional por omisión documentada como T25b.",
@@ -250,12 +285,17 @@
       "subtareas": [
         "T33j.8a",
         "T33j.8b"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "#157 en datos-2026-11-23-82cd470: suelo liso y calles de 1772 bajo la ciudad; falta la revisión a ojo de una persona."
+      }
     },
     {
       "id": "I1772-009",
       "categoria": "hito_epoca",
-      "estado": "identidad_confirmada_omision_visible_geometria_pendiente",
+      "estado": "duda_historica_declarada",
       "prioridad": "P1",
       "sectores": [
         "S1772-43"
@@ -270,12 +310,17 @@
       "id_fuente": "U1772-0214",
       "subtareas": [
         "T33j.4b"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "La ocupación es la del original (tres cuerpos con casas, plaza libre, fase 4); el hito de Candelaria sigue sin forma en 1772 por falta de fuente."
+      }
     },
     {
       "id": "I1772-010",
       "categoria": "calce_incompatible_con_referencia_curada",
-      "estado": "confirmado_desplazamiento_por_cuadras_fuera_del_nucleo",
+      "estado": "resuelto_con_limite",
       "prioridad": "P0",
       "baseline": "B1772-001",
       "manzanas": [
@@ -326,12 +371,17 @@
         },
         "hito_candelaria_desvio_tps_m": 302.89,
         "causa_probable": "correlación enganchada a calles vecinas en un damero periódico; no es imprecisión métrica"
+      },
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "Calce por identidad (T33j.2a): 12 de 15 sectores con unidades cumplen; S1772-14, -24 y -44 quedan como límite (limites-calce.json)."
       }
     },
     {
       "id": "I1772-011",
       "categoria": "solapes_huellas",
-      "estado": "confirmado_en_datos_pendiente_clasificacion_visual",
+      "estado": "resuelto",
       "prioridad": "P1",
       "baseline": "B1772-001",
       "observacion": "2350 pares visibles en época 1 tienen área de intersección mayor de 0,01 m². Todos pertenecen a la misma cuadra dentro de cada par en la etapa 1936; máximo 9,763017 m². El visor produce 1020 pares con área proyectada de cubierta común, que aún deben distinguirse de aleros legítimos.",
@@ -345,12 +395,17 @@
       "subtareas": [
         "T33j.5a",
         "T33j.6a"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "Lotes sin solapes (fase 5) y sin solapes residuales (fase 6)."
+      }
     },
     {
       "id": "I1772-012",
       "categoria": "corte_3d_entre_cubiertas",
-      "estado": "confirmado_en_calculo_CPU_pendiente_inspeccion_completa",
+      "estado": "resuelto_con_limite",
       "prioridad": "P1",
       "observacion": "271 pares con corte estricto de superficies bajo pisos y relieve de 1772; 234 superan 0,01 m² de proyección común de triángulos implicados. No equivale a 271 defectos históricos certificados.",
       "causa": "Pendiente separar solapes de huellas, aleros y encuentros entre casas. Los cuatro primeros pares están rastreados al derivado de origen.",
@@ -364,7 +419,12 @@
       "criterio_aceptacion": "Repetir cálculo tras resolver huellas, revisar casos visualmente y conservar calles, patios y ocupación aprobados.",
       "subtareas": [
         "T33j.6a"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "Techos sin cruces (fase 6), con 17 contactos de esquina como límite (limites-fase6.json)."
+      }
     },
     {
       "id": "I1772-013",
@@ -379,7 +439,7 @@
       "captura": "F1772-0003-3-66-antes.png",
       "captura_bbox": null,
       "categoria": "acceso_indebido",
-      "estado": "confirmado_visual",
+      "estado": "resuelto",
       "prioridad": "P1",
       "observacion": "En el modo a pie se atraviesa la fachada de la Catedral: el rayo a 1,6 m choca con la malla visible «hitos» a 1,4–2,2 m y el caminante sigue 30–32,5 m sin desvío.",
       "causa": "La rejilla de colisión del modo a pie (rejillaDeCasas) se arma con las huellas del paquete; las mallas de hitos no entran en ella.",
@@ -392,13 +452,18 @@
       "verificacion_acceso": "recorrido a pie el 21-11-2026 sobre datos-2026-11-21-ce374b8 (código ce374b8 con el mismo ciudad.pak que B1772-001; src/ entre af0c664 y ce374b8 solo cambia el Panteón, desde 1843, y los hitos de la época 1 son idénticos); recorridos_calle en accesos-primer-lote.json",
       "subtareas": [
         "T33j.7a"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "Lo visible choca en el modo a pie (fase 7): ningún hito atravesable."
+      }
     },
     {
       "id": "I1772-014",
       "sector": "S1772-24",
       "categoria": "calce_incompatible_con_referencia_curada",
-      "estado": "confirmado",
+      "estado": "limite_documentado",
       "prioridad": "P2",
       "baseline": "B1772-001",
       "observacion": "En el borde este (S1772-24) las 5 anclas por identidad del calce de 1772 se apartan entre 21 y 62 m dejando cada una fuera del ajuste (mediana 30,8 m, sobre la tolerancia de 15 m): X1772-0033 61,9 m, X1772-0082 38,0 m, X1772-0049 30,8 m, X1772-0199 24,0 m, X1772-0083 21,2 m.",
@@ -411,7 +476,12 @@
       "prueba_regresion": "pendiente: la ocupación periférica de S1772-24 no se ubica por cercanía al calce sin revisar el desvío del sector",
       "subtareas": [
         "T33j.2b"
-      ]
+      ],
+      "cierre_fase8": {
+        "fecha": "2026-11-23",
+        "datos": "datos-2026-11-23-82cd470",
+        "evidencia": "Deformación del borde este (S1772-24): límite del calce; en el censo final las casas quedan corridas media cuadra."
+      }
     }
   ]
 }
