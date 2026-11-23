@@ -28,6 +28,8 @@ async function abrir(page, { urbano }) {
   // en el centro de la hoja, y se mide el papel)
   await page.route(/\/plano\/((primero|chico|medio|suelo|rotulos)(-[24]k)?\.webp|f\/)/, (ruta) => ruta.abort())
   await page.route(/\/datos\/(ciudad\.pak|arboles\.bin)/, (ruta) => ruta.abort())
+  // ni las calles de época (src/calles-epoca.js): aquí se mide el suelo liso
+  await page.route(/\/datos\/calles-\d{4}\.json/, (ruta) => ruta.abort())
   await page.goto('/?sinintro&capture&sinmarcas')
   await page.waitForFunction(() => window.lab?.ready === true && window.lab.lineaDeTiempo && window.lab.ciudad.U.uCrece.value.image?.width === 4)
 }
@@ -52,12 +54,16 @@ async function tintaEn(page, epoca) {
     gl.readPixels(Math.round(gl.drawingBufferWidth / 2 - lado / 2), Math.round(gl.drawingBufferHeight / 2 - lado / 2), lado, lado, gl.RGBA, gl.UNSIGNED_BYTE, px)
     let oscuros = 0
     let suma = 0
+    let cuadrados = 0
     for (let i = 0; i < px.length; i += 4) {
       const luz = 0.299 * px[i] + 0.587 * px[i + 1] + 0.114 * px[i + 2]
       suma += luz
+      cuadrados += luz * luz
       if (luz < 130) oscuros++
     }
-    return { oscuros, media: suma / (lado * lado) }
+    const media = suma / (lado * lado)
+    // cuánto cambia la luz de un píxel a otro: el dibujo de un plano la mueve; un suelo liso, apenas
+    return { oscuros, media, desvio: Math.sqrt(Math.max(0, cuadrados / (lado * lado) - media * media)) }
   })
 }
 
@@ -76,7 +82,7 @@ test('en tinta, antes de 1936, donde todavía no hay ciudad la hoja es papel en 
 })
 
 // una sola página para todo lo que pide la ciudad urbanizada desde siempre: en CI cada carga cuesta medio minuto
-test('«Ver el plano de {año}» (o P) abre el plano de la época aparte, con su crédito; y donde ya es ciudad la hoja sigue siendo el plano', async ({ page }) => {
+test('«Ver el plano de {año}» (o P) abre el plano de la época aparte, con su crédito; y donde ya es ciudad, antes de 1936, el suelo es liso', async ({ page }) => {
   await abrir(page, { urbano: true })
   const boton = page.locator('#ver-plano')
   await expect(boton).toHaveText('Ver el plano de 1772')
@@ -108,7 +114,7 @@ test('«Ver el plano de {año}» (o P) abre el plano de la época aparte, con su
   await expect(visor).toBeHidden()
   await expect(boton).toBeFocused()
 
-  // donde ya es ciudad, la hoja de 1772 sigue siendo el plano (aquí no hay rótulos que quitar)
+  // en 1936, donde ya es ciudad, la hoja es el plano
   const en1936 = await tintaEn(page, 5)
   expect(en1936.oscuros).toBeGreaterThan(150)
 
@@ -122,6 +128,16 @@ test('«Ver el plano de {año}» (o P) abre el plano de la época aparte, con su
   await visor.locator('.cerrar').click()
   await expect(visor).toBeHidden()
 
+  // dentro de la ciudad, antes de 1936, no va la hoja de 1936: sus calles y manzanas serían trazas falsas
+  // bajo la ciudad de la época (I1772-008). En tinta, papel liso
   const en1772 = await tintaEn(page, 1)
-  expect(Math.abs(en1772.oscuros - en1936.oscuros)).toBeLessThan(en1936.oscuros * 0.15)
+  expect(en1772.oscuros).toBeLessThan(en1936.oscuros / 5)
+  expect(en1772.media).toBeGreaterThan(200) // papel claro, no un hueco negro
+
+  // y en color, la tierra de la calle, sin el dibujo del plano
+  await page.evaluate(() => window.lab.alternarColor(true))
+  await page.waitForFunction(() => window.lab.ciudad.U.uColor.value === 1)
+  const colorEn1936 = await tintaEn(page, 5)
+  const colorEn1772 = await tintaEn(page, 1)
+  expect(colorEn1772.desvio).toBeLessThan(colorEn1936.desvio / 3)
 })
