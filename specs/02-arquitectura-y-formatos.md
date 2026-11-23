@@ -109,6 +109,7 @@ gzip(
 | `vida` *(opcional)* | Uint32 | 4 | una por techo, en el mismo orden: `nace + 8·muere` |
 | `historia` *(opcional)* | Uint8 | 6 | una por techo, en el mismo orden: un byte por época (0 = 1578 … 5 = 1936) = `estilo + 16·pisos` |
 | `marcos` *(opcional)* | Float32 | 44 (11 f32) | una por casa que da a la calle: `[techo, ox, oy, eux, euy, ancho, fondo, calles, crujía, primera ala, cuántas]` |
+| `vuelos` *(opcional)* | Uint8 | 1 | uno por techo: los centímetros que puede volar su alero sin entrar en la calzada de 1772 (255 = sin tope; `tools/geo/epocas.py`, `vuelos_1772`, T33j.6f) |
 | `alas` *(opcional)* | Float32 | 20 (5 f32) | las alas de las casas de patio: `[tipo, u0, v0, u1, v1]`, en píxeles del marco de su casa |
 
 `vida` sale de `tools/geo/epocas.py` (`"vida": [[nace, muere], …]` en el JSON). Épocas: 0 = 1578 (Pimentel), 1 = 1772 (*Exato mapa*), 2 = 1843 (Jesurún), 3 = 1889 (Mestre), 4 = 1911 (Razetti), 5 = 1936 (DCN). `nace` = primera época en que el techo existe; `muere` = primera época en que ya no está, 0 = no muere. Un techo se ve en la época `e` si `nace ≤ e` y (`muere = 0` o `e < muere`). Los techos de 1936 tienen `muere = 0`; al final van las casas de 1578 que no llegan a 1936, con `nace = 0`. Si el JSON no trae `vida`, el `.pak` no lleva esa parte. El lector (`src/pak.js`) rechaza las partes sin tipo, así que el visor tiene que declarar `vida: Uint32Array` antes de cargar un `.pak` que la traiga.

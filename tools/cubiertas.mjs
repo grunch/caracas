@@ -16,7 +16,7 @@ const salida = process.argv[2] ?? 'fuentes/derivados/epocas/cubiertas-1772.json'
 
 const pak = readFileSync('public/datos/ciudad.pak')
 const datos = decodificarPak(comoBuffer(gunzipSync(pak)), {
-  vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array,
+  vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array,
 })
 const coords = crearCoords(JSON.parse(readFileSync('public/datos/ciudad.json', 'utf8')).plano)
 const relieveBin = readFileSync('public/datos/relieve.bin')

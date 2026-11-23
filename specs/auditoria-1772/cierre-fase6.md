@@ -85,11 +85,36 @@ Dos ajustes de la medida, sin tocar el giro máximo de 20°:
 
 Las fases 3, 4 y 5 siguen cerrables sobre la ciudad regenerada, y las 53 desalineadas siguen todas en límite.
 
+## Después de T33j.6f: aleros fuera de la calzada
+
+Por decisión del responsable del 22-11-2026, en las calles angostas de 1772 el alero se acorta. 129 casas tenían el alero (0,5 a 0,8 m de vuelo) sobre el núcleo de 4 m de la calzada, y en 128 la huella no pisaba la calle.
+
+- **Generador** (`epocas.vuelos_1772`): por cada casa de 1772 a la vista, cuánto puede volar su alero sin entrar en el núcleo, que es la distancia de su huella al núcleo, porque todo el alero queda a menos de su vuelo de la huella. Lo guarda en `vuelos`, un byte por techo en centímetros (255 = sin tope): 325 casas llevan tope.
+- **Pak**: `vuelos` es una parte opcional (specs/02). Un visor anterior la saltea, y la muestra del CI la recorta con los techos.
+- **Visor**: el alero de la casa no pasa su tope. En las casas con tope, `alinearHuella` solo lleva a la línea de la cuadra los vértices que la pasan hacia la calle. La línea es la del marco de `vectorizar`, de antes de la alineación de la fase 5, y correr los de detrás adelantaba el techo sobre la calzada.
+- **Medida**: solo cuenta como alero el techo que sale de la huella de su casa. Si la huella misma pisa la calzada (la casa 23222, 0,18 m², por debajo del umbral de la fase 3), lo mide la fase 3.
+
+No se tocan fachadas ni ocupación.
+
+| Criterio | Después de T33j.6e | Después de T33j.6f (9b1f5a0) |
+|---|---|---|
+| Triángulos sin degenerar | 32 | 39 |
+| Techos sin cruces | 92 pares | 92 |
+| Cumbreras con el frente | 91 desviadas | 91 |
+| Aleros fuera de la calle | 129 casas | **0 (cumple)** |
+| Mismo trazado que la fase 5 | cumple | cumple |
+
+Las fases 3, 4 y 5 siguen cerrables.
+
+## Con el Capitolio por épocas (#143)
+
+#143 puso el Capitolio en pie desde 1772 (el convento de las Concepciones), y su planta esconde 8 casas de la reconstrucción. Con los datos regenerados sobre la mezcla de `main` 4a7cb16 en T33j.6f (dba25dd) quedan 6303 casas de 1772 a la vista y con techo, 82053 triángulos y 4495 casas con cumbrera medida. Las cuentas de la puerta no cambian: 39 triángulos degenerados, 92 pares de techos que se cortan, 91 cumbreras desviadas y aleros fuera de la calle cumple (325 casas con tope de vuelo). Las fases 3, 4 y 5 siguen cerrables, y las 53 desalineadas siguen todas en límite.
+
 ## Lo que sigue
 
 - Los 92 cruces que quedan: aleros que montan sobre la vecina y teja contra teja.
 - Las cumbreras de fondo: casas cuyo marco elige el frente por el lado equivocado (`elegirFrente`).
-- Los triángulos degenerados y los aleros sobre la calzada.
+- Los triángulos degenerados.
 - La regla de specs/08 vale: un PR de techos no cambia calles, lotes ni ocupación para que un techo deje de fallar.
 
 ## Reproducir

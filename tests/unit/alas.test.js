@@ -431,3 +431,25 @@ describe('un ala estirada por delante de su fachada', () => {
     expect(alturaDe(delFrente, 6, -20)).toBeCloseTo(plan.alto, 9) // 20 m por delante, a la misma altura
   })
 })
+
+describe('los vuelos de los aleros (T33j.6f)', () => {
+  const json = {
+    vertices: [0, 0, 24, 0, 24, 80, 0, 80, 30, 0, 50, 0, 50, 40, 30, 40], techos: [[0, 4, 1, 0, 21], [4, 4, 1, 0, 22]],
+    vuelos: [30, 255],
+  }
+
+  test('van como una parte Uint8 del pak, un byte por techo, y vuelven iguales', () => {
+    const partes = partesDeCiudad(json)
+    expect(partes.vuelos.registro).toBe(1)
+    const crudo = gunzipSync(codificarPak(partes))
+    const leido = decodificarPak(crudo.buffer.slice(crudo.byteOffset, crudo.byteOffset + crudo.byteLength),
+      { vertices: Float32Array, techos: Uint32Array, vuelos: Uint8Array })
+    expect(Array.from(leido.vuelos)).toEqual([30, 255])
+  })
+
+  test('sin vuelos no agrega la parte; con uno por techo de menos, o fuera de 0..255, falla', () => {
+    expect(partesDeCiudad({ vertices: json.vertices, techos: json.techos }).vuelos).toBeUndefined()
+    expect(() => partesDeCiudad({ ...json, vuelos: [30] })).toThrow(/vuelos/)
+    expect(() => partesDeCiudad({ ...json, vuelos: [30, 300] })).toThrow(/vuelos/)
+  })
+})

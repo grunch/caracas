@@ -125,3 +125,21 @@ def test_dos_techos_que_solo_se_tocan_en_la_medianera_con_ruido_de_float32_no_se
     # 5 mm de solape ya no es un contacto: es un cruce
     c = tri(2, (-0.01, 0, 10.0), (-0.01, 8, 8.4), (10, 4, 9.0))
     assert [p['techos'] for p in techos_cruzados([a, c], METRO)] == [[1, 2]]
+
+
+def test_el_techo_sobre_la_propia_huella_no_es_un_alero_aunque_pise_la_calzada():
+    # la huella misma entra 1 px en la calzada (lo mide la fase 3): su techo no es un alero; lo que vuela más allá, sí
+    casa = [tri(1, (0, -1, 5), (20, -1, 5), (0, 20, 5))]
+    huellas = {1: box(-5, -1, 25, 30)}
+    calzada = [box(-100, -20, 100, 0)]
+    assert aleros_en_la_calle(casa, calzada, METRO, huellas=huellas) == []
+    vuela = [tri(1, (0, -3, 5), (20, -3, 5), (0, 20, 5))]
+    assert [x['techo'] for x in aleros_en_la_calle(vuela, calzada, METRO, huellas=huellas)] == [1]
+
+
+def test_las_casas_medidas_son_las_que_tienen_algun_frente_que_se_mide():
+    from cierre_fase6 import casas_con_cumbrera_medible
+    girada = [{**t, 'puntos': [[p[1], p[0], p[2]] for p in t['puntos']]} for t in dos_aguas(2, 10, 40, 40, 60)]
+    frentes = {2: [((1.0, 0.0), (0.0, 0.0), 'L1:A-B', 1, 0)]}
+    assert casas_con_cumbrera_medible(girada, frentes, METRO) == {2}
+    assert casas_con_cumbrera_medible(girada, frentes, METRO, fuera_de_recta={(2, 'L1:A-B', 1, 0)}) == set()

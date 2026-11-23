@@ -381,3 +381,21 @@ def test_alinear_1772_da_una_segunda_pasada_sobre_las_huellas_de_la_primera(monk
     assert vistas == [(0, 0, 10, 10), (0, -2, 10, 10)]
     v = nueva['vertices']
     assert min(v[1::2]) == -2
+
+
+def test_vuelos_1772_topa_el_alero_de_la_casa_que_queda_cerca_del_nucleo_de_la_calzada():
+    # T33j.6f: el núcleo de 4 m (8 px) de una calle horizontal en y = 0 va de y = -4 a 4 px; una casa a 0,3 m de él
+    # (y desde 4,6 px) vuela como mucho 30 cm; una a 10 m, sin tope (255)
+    from tools.geo.epocas import vuelos_1772
+    figuras = [box(0, 4.6, 20, 30), box(30, 24, 50, 50)]
+    vertices, techos = [], []
+    for f in figuras:
+        puntos = list(f.exterior.coords)[:-1]
+        techos.append([len(vertices) // 2, len(puntos), 1, 0, 0])
+        vertices.extend(c for p in puntos for c in p)
+    ciudad = {'vertices': vertices, 'techos': techos, 'vida': [[1, 2]] * 2, 'antes': [1, 1], 'junta': [7, 7]}
+    red = {'nodos': [{'id': 'A', 'mosaico': [-100, 0]}, {'id': 'B', 'mosaico': [200, 0]}],
+           'calles': [{'id': 'L1', 'tipo': 'calle_recta', 'nodos': ['A', 'B']}]}
+    nueva = vuelos_1772(ciudad, [], red, METRO)
+    assert nueva['vuelos'] == [30, 255]
+    assert 'vuelos' not in ciudad

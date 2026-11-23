@@ -20,7 +20,8 @@
  * [primer vértice, cuántos, empacarTecho({pisos, estilo}), semilla]; vida Uint32: nace + 8 · muere;
  * historia (opcional) Uint8 de a 6: por techo, un byte por época = estilo + 16·pisos (specs/02);
  * marcos y alas (opcionales, Float32): el marco del lote de cada casa que da a la calle y las alas de
- * las casas de patio (src/alas.js).
+ * las casas de patio (src/alas.js); vuelos (opcional, Uint8): por techo, los centímetros que puede volar su
+ * alero sin entrar en la calzada de 1772 (tools/geo/epocas.py, vuelos_1772), 255 = sin tope.
  */
 import { BufferGeometry, BufferAttribute } from 'three'
 import { simplificarAdentro, rectanguloMinimo, areaConSigno, crearIndice } from './poligono.js'
@@ -28,6 +29,7 @@ import { planDeTecho, elegirFrente, etapasDe, LADO_LIBRE } from './techos.js'
 import { alzarCasa } from './alzado.js'
 import { leerMarcos, planDeAlas, esDePatio } from './alas.js'
 
+export const SIN_TOPE = 255 // en la parte "vuelos" del pak: el alero de esa casa no tiene tope
 export const TOLERANCIA_HUELLA_M = 0.6 // los dientes del trazado a píxeles que se le quitan a cada huella
 const A_LA_LINEA_M = 1.5 // los vértices de la huella a menos de esto de la línea de fachada se llevan a ella
 const SONDAS_M = [2, 4] // a qué distancia de cada lado se mira si hay calle o hay vecino (las calles miden 5 m o más)
@@ -47,7 +49,7 @@ export function historiaEnEpoca([h0, h1], e) {
 }
 
 /** Las casas del pak, con su huella en metros (la original y la simplificada) y su vida. */
-function leerCasas({ vertices, techos, vida = null, historia = null, marcos = null, alas = null }, coords, tolerancia) {
+function leerCasas({ vertices, techos, vida = null, historia = null, marcos = null, alas = null, vuelos = null }, coords, tolerancia) {
   const conMarco = leerMarcos({ marcos, alas }, coords)
   if (historia && historia.length !== (techos.length / 4) * EPOCAS_HISTORIA) {
     throw new Error(`ciudad: la historia trae ${historia.length} bytes y hacen falta ${EPOCAS_HISTORIA} por techo`)
@@ -63,10 +65,12 @@ function leerCasas({ vertices, techos, vida = null, historia = null, marcos = nu
     const v = vida ? vida[t / 4] : 0
     const centro = anillo.reduce((s, p) => [s[0] + p[0] / cuantos, s[1] + p[1] / cuantos], [0, 0])
     const casa = { ...desempacarTecho(techos[t + 2]), semilla: techos[t + 3], nace: v % 8, muere: Math.floor(v / 8) }
+    // "vuelos" (opcional): centímetros que puede volar el alero; SIN_TOPE (o sin la parte), lo que diga el estilo
+    const vuelo = vuelos && vuelos[t / 4] !== SIN_TOPE ? vuelos[t / 4] / 100 : Infinity
     const marco = conMarco.get(t / 4) ?? null
     const bytes = historia?.subarray((t / 4) * EPOCAS_HISTORIA, (t / 4 + 1) * EPOCAS_HISTORIA)
     casas.push({
-      ...casa, centro, huella: cuantos >= 3 ? simplificarAdentro(anillo, tolerancia) : null, marco,
+      ...casa, vuelo, centro, huella: cuantos >= 3 ? simplificarAdentro(anillo, tolerancia) : null, marco,
       etapas: etapasDe(casa, bytes, { conAlas: Boolean(marco?.alas.length) }),
       // sin historia (datos viejos, la ciudad de demostración), todas las épocas valen lo de `techos`
       historia: empacarHistoria(bytes ?? Array(EPOCAS_HISTORIA).fill((casa.estilo & 15) + 16 * Math.min(casa.pisos, 15))),
@@ -167,11 +171,13 @@ function escritor(b, casa, etapa, { origen: o, eu, ev }) {
  * llevan a ella, y lo mismo con los otros lados que dan a una calle. Así el alero y la cumbrera corren
  * seguidos por la cuadra, sin los dientes del trazado. Si lo que queda no es un polígono, la huella como vino.
  */
-export function alinearHuella(anillo, ancho, fondo, calles = {}) {
-  const cerca = (x, linea) => Math.abs(x - linea) < A_LA_LINEA_M
+export function alinearHuella(anillo, ancho, fondo, calles = {}, { soloAdentro = false } = {}) {
+  // soloAdentro (T33j.6f): solo se llevan a la línea los vértices que la pasan hacia la calle; los que quedan detrás
+  // se quedan (en una calle angosta de 1772, correrlos adelantaba el techo sobre la calzada)
+  const cerca = (x, linea, afuera) => Math.abs(x - linea) < A_LA_LINEA_M && (!soloAdentro || afuera)
   const llevado = anillo.map(([u, v]) => [
-    calles.izq && cerca(u, 0) ? 0 : calles.der && cerca(u, ancho) ? ancho : u,
-    cerca(v, 0) ? 0 : calles.fondo && cerca(v, fondo) ? fondo : v,
+    calles.izq && cerca(u, 0, u < 0) ? 0 : calles.der && cerca(u, ancho, u > ancho) ? ancho : u,
+    cerca(v, 0, v < 0) ? 0 : calles.fondo && cerca(v, fondo, v > fondo) ? fondo : v,
   ])
   // fuera los repetidos (dos vértices llevados a la misma esquina) y, después, los que quedan en medio de un tramo recto
   const unicos = llevado.filter((p, k) => {
@@ -206,7 +212,7 @@ function proyectarEnMarco(casa, conAlas = casa.marco.alas.length > 0) {
     ancho = u1 - u0
     fondo = v1 - v0
   }
-  anillo = alinearHuella(anillo, ancho, fondo, calles)
+  anillo = alinearHuella(anillo, ancho, fondo, calles, { soloAdentro: casa.vuelo !== Infinity })
   return {
     marco: { origen: o, eu, ev, ancho, fondo }, anillo, libres: calles, alas, crujia,
     lleno: Math.min(1, Math.abs(areaConSigno(anillo)) / (ancho * fondo)),
@@ -237,7 +243,9 @@ function planDeEtapa(casa, etapa, { marco, libres, lleno, alas, crujia }) {
     ancho: marco.ancho, fondo: marco.fondo, estilo: etapa.estilo, pisos: etapa.pisos, semilla: casa.semilla, nace: etapa.nace,
     conAlero: etapa.conAlero, conPretil: etapa.conPretil,
   }
-  return alas?.length ? planDeAlas({ ...comun, alas }) : planDeTecho({ ...comun, libres, lleno, crujia })
+  const plan = alas?.length ? planDeAlas({ ...comun, alas }) : planDeTecho({ ...comun, libres, lleno, crujia })
+  // el alero no pasa el tope de la casa: en una calle angosta de 1772 entraría en la calzada (T33j.6f)
+  return plan.alero > casa.vuelo ? { ...plan, alero: casa.vuelo } : plan
 }
 
 /** El lote con que se levanta una etapa: el de las alas si en ella la casa es de patio; si no, el de la huella entera. */

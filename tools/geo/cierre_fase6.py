@@ -127,6 +127,12 @@ def _distancia_al_eje(extremos, origen, normal):
     return 0.0 if a * b <= 0 else min(abs(a), abs(b))
 
 
+def casas_con_cumbrera_medible(triangulos, frentes, metro=METRO, fuera_de_recta=frozenset()):
+    """Las casas que cumbreras_desviadas mide de verdad: con cumbrera de teja y algún frente que no se excluye."""
+    return {techo for techo in _cumbreras(triangulos, metro)
+            if any((techo, *f[2:]) not in fuera_de_recta for f in frentes.get(techo, []))}
+
+
 def cumbreras_desviadas(triangulos, frentes, metro=METRO, giro_maximo=GIRO_MAXIMO_GRADOS, fuera_de_recta=frozenset()):
     """Las casas cuya cumbrera de frente no corre con su calle. `frentes`: {techo: [(dirección del eje, punto del eje,
     tramo, lado, segmento)]}, en px. Por cada frente, la cumbrera más cercana a ese eje; si hay varias a menos de
@@ -153,8 +159,10 @@ def cumbreras_desviadas(triangulos, frentes, metro=METRO, giro_maximo=GIRO_MAXIM
     return salida
 
 
-def aleros_en_la_calle(triangulos, calzada, metro=METRO, umbral_m2=ALERO_EN_CALLE_M2):
-    """Las casas con techo sobre el núcleo de la calzada (`calzada`: polígonos en px) en más de `umbral_m2`."""
+def aleros_en_la_calle(triangulos, calzada, metro=METRO, umbral_m2=ALERO_EN_CALLE_M2, huellas=None):
+    """Las casas con techo sobre el núcleo de la calzada (`calzada`: polígonos en px) en más de `umbral_m2`. Con
+    `huellas` ({techo: Polygon}), solo cuenta lo que sale de la huella de la casa: el techo sobre su propia huella no
+    es un alero, y si la huella pisa la calzada lo mide la fase 3."""
     if not calzada:
         return []
     zona = unary_union(calzada)
@@ -165,7 +173,10 @@ def aleros_en_la_calle(triangulos, calzada, metro=METRO, umbral_m2=ALERO_EN_CALL
             por_casa.setdefault(t['techo'], []).append(p.intersection(zona))
     salida = []
     for techo, partes in sorted(por_casa.items()):
-        area = unary_union(partes).area * metro ** 2
+        sobre = unary_union(partes)
+        if huellas is not None and techo in huellas:
+            sobre = sobre.difference(huellas[techo])
+        area = sobre.area * metro ** 2
         if area > umbral_m2:
             salida.append({'techo': techo, 'area_m2': round(area, 3)})
     return salida
@@ -243,8 +254,8 @@ def puerta_fase6(cubiertas, ciudad, calles, red, hitos, fases, sha256, metro=MET
     fuera = {(c['techo'], f['tramo'], f['lado'], f.get('segmento', 0))
              for f in fases[5]['puerta_de_salida']['frentes_alineados']['desalineados'] for c in f['casas']}
     desviadas = cumbreras_desviadas(triangulos, frentes, metro, fuera_de_recta=fuera)
-    con_cumbrera = set(_cumbreras(triangulos, metro)) & set(frentes)
-    aleros = aleros_en_la_calle(triangulos, [c['poligono'] for c in corredores(red, metro=metro)], metro)
+    con_cumbrera = casas_con_cumbrera_medible(triangulos, frentes, metro, fuera_de_recta=fuera)
+    aleros = aleros_en_la_calle(triangulos, [c['poligono'] for c in corredores(red, metro=metro)], metro, huellas=dict(casas))
     criterios = OrderedDict([
         ('triangulos_sin_degenerar', {'cumplido': not degenerados, 'triangulos': len(triangulos),
                                       'degenerados': len(degenerados),

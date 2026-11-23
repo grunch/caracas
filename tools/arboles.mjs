@@ -52,7 +52,7 @@ const crece = await siHay(Promise.all([
 const ciudad = await siHay(leer('public/datos/ciudad.pak').then((b) => {
   const crudo = gunzipSync(b)
   return decodificarPak(crudo.buffer.slice(crudo.byteOffset, crudo.byteOffset + crudo.byteLength),
-    { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array })
+    { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array })
 }), 'ciudad.pak')
 
 const grilla = crece && {
