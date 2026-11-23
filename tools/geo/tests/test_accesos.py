@@ -102,3 +102,21 @@ def test_no_se_une_si_la_huella_unida_no_se_admite():
     nuevas, quitar = lotes_encerrados(casas, METRO, movibles={1, 2, 3, 4, 5, 6}, junta=todas(casas),
                                       vida={k: (1, 2) for k, _ in casas}, admite=lambda huella: huella.area < 1000)
     assert (nuevas, quitar) == ({}, set())
+
+
+def test_cerrar_aberturas_llena_el_hueco_del_frente_donde_el_original_pinta_edificado():
+    # T33j.7c: una hilera con un hueco de 10 m (x 70..90) donde el original es rojo; se lo lleva la vecina
+    from accesos import cerrar_aberturas
+    from cierre_fase7 import aberturas_de_frentes
+    from shapely.geometry import box as caja
+    casas = [(k, caja(10 + k * 20, 12, 10 + (k + 1) * 20, 42)) for k in range(8) if k != 3]
+    eje = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    rojo = [caja(60, 10, 100, 45)]
+    nuevas = cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 4, 5, 6, 7}, edificado=rojo)
+    assert set(nuevas) & {2, 4}
+    final = [(k, nuevas.get(k, g)) for k, g in casas]
+    assert [a for a in aberturas_de_frentes(eje, final, METRO, edificado=rojo) if a['indebida']] == []
+    for k, g in nuevas.items():
+        assert g.geom_type == 'Polygon' and g.is_valid and not g.interiors
+    # sin rojo en el hueco (un solar del original), no se cierra
+    assert cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 4, 5, 6, 7}, edificado=[caja(200, 200, 210, 210)]) == {}

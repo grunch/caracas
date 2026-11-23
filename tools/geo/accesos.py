@@ -64,3 +64,56 @@ def lotes_encerrados(casas, metro, movibles, junta, vida, admite=None):
         if not cambio:
             break
     return nuevas, quitar
+
+
+CIERRE_RADIO_M = 12.0     # lo que se busca de edificado sin casas alrededor del punto de una abertura
+CIERRE_MINIMO_M2 = 2.0    # menos que esto no es un hueco que cerrar
+VUELTAS_CIERRE = 3        # cerrar un tramo de frente puede dejar a la vista el que sigue
+
+
+def cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=(), obstaculos=()):
+    """{techo: huella crecida} que cierran las aberturas indebidas de los frentes (cierre_fase7.aberturas_de_frentes:
+    un hueco de al menos una puerta donde el original pinta edificado), T33j.7c. Lo edificado del original que no
+    cubre ninguna casa alrededor del punto de la abertura (a no más de CIERRE_RADIO_M, fuera de lo vedado) se le suma
+    a la casa movible que más borde le comparte: se cierra con fachada, según la referencia. Un hueco donde el
+    original no pinta edificado (un solar, un pasaje) queda abierto. No muta nada."""
+    from shapely.geometry import Point
+    from cierre_fase7 import aberturas_de_frentes
+    if not len(edificado):
+        return {}
+    rojo = unary_union(list(edificado))
+    prohibido = unary_union(list(vedado) + list(obstaculos)) if len(vedado) or len(obstaculos) else None
+    huellas = dict(casas)
+    nuevas = {}
+    for _ in range(VUELTAS_CIERRE):
+        actuales = [(k, huellas[k]) for k, _ in casas]
+        indebidas = [a for a in aberturas_de_frentes(tramos, actuales, metro, obstaculos, edificado) if a['indebida']]
+        if not indebidas:
+            break
+        orden = [k for k, _ in actuales]
+        arbol = STRtree([g for _, g in actuales])
+        cambio = False
+        for a in indebidas:
+            punto = Point(a['punto'])
+            zona = rojo.intersection(punto.buffer(CIERRE_RADIO_M / metro))
+            cerca = [huellas[orden[j]] for j in arbol.query(zona)]
+            hueco = zona.difference(unary_union(cerca)) if cerca else zona
+            if prohibido is not None:
+                hueco = hueco.difference(prohibido)
+            partes = [q for q in getattr(hueco, 'geoms', [hueco]) if q.geom_type == 'Polygon' and not q.is_empty]
+            if not partes:
+                continue
+            pieza = min(partes, key=lambda q: q.distance(punto))
+            if pieza.area * metro ** 2 < CIERRE_MINIMO_M2:
+                continue
+            vecinas = sorted(((_medianera(pieza, huellas[k]), k) for k in (orden[j] for j in arbol.query(pieza.buffer(MEDIANERA_PX)))
+                              if k in movibles), reverse=True)
+            for largo, k in vecinas:
+                unida = _union(huellas[k], pieza) if largo > 0 else None
+                if unida is not None:
+                    huellas[k] = nuevas[k] = unida
+                    cambio = True
+                    break
+        if not cambio:
+            break
+    return nuevas
