@@ -38,6 +38,7 @@ export const civiles = Object.freeze([
   Object.freeze({
     id: 'miraflores', nombre: 'Palacio de Miraflores', ...miraflores, nace: 4, muere: 0,
     planta: [rectanguloPx(miraflores, MIRAFLORES.ancho, MIRAFLORES.fondo)], suprime: [rectanguloPx(miraflores, MIRAFLORES.ancho, MIRAFLORES.fondo)],
+    patio: true, // crujías y galerías alrededor de un patio abierto (src/hitos/miraflores-modelo.js)
     fuente: `${PLANO} (recuadro "Palacio Miraflores"); panorámica de ~1903 desde El Calvario (fuentes/imagenes); estudio aprobado en miraflores, referencias y límites en specs/08-miraflores.md`,
     verificar: [
       'Modelo procedural aprobado: cuatro accesos, patio con arcadas y fuente, mansarda central y pabellones; medidas aproximadas.',

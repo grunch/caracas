@@ -30,9 +30,18 @@ Datos regenerados con el Capitolio de #143, con 6303 casas de 1772 a la vista.
 
 Las 38 aberturas de frente que la fase 5 dejó como límite hasta la fase 7 están entre las 64. Las legítimas, donde el original deja un solar o un hueco, no se cierran: specs/08 pide no llenar con casas un terreno libre.
 
+## Después de T33j.7b: lo visible choca
+
+La rejilla de colisión del modo a pie (`src/a-pie.js`, `rejillaDeCasas`) se armaba solo con las huellas de las casas, así que se atravesaba la fachada de la Catedral (I1772-013) y la de los otros hitos. Ahora también lleva las plantas de los hitos en pie en la época: `src/hitos/plantas.js`, la misma lista que leen las puertas (`tools/hitos-planta.mjs` la reusa). La planta de un hito transitable, la Plaza Bolívar, no entra.
+
+| Criterio | Línea base | Después de T33j.7b |
+|---|---|---|
+| Sin aberturas indebidas | 12 de 64 | 12 de 64 |
+| Casas con acceso / pasajes / terreno libre | cumplen | cumplen |
+| Lo visible choca | 6 hitos atravesables | **0 (cumple)** |
+
 ## Lo que sigue
 
-- La rejilla de colisión del modo a pie con las plantas de los hitos en pie (I1772-013).
 - Las 12 aberturas indebidas: cerrarlas con fachada, medianera o tapia según la referencia (I1772-001, -002).
 - Volver a medir los frentes de abertura que la fase 5 dejó como límite.
 

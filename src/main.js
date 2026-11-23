@@ -36,6 +36,7 @@ import { debeArrancar, esperaDeArranque, velocidadDeOla, vistaDeHoja, VISTA_CENT
 import { accionDeTecla, movimientoDeTecla } from './controles.js'
 import { esLiviano, proporcionDePixeles } from './calidad.js'
 import { crearModoAPie } from './a-pie-modo.js'
+import { hitosConPlanta } from './hitos/plantas.js'
 import { crearModoVolar } from './volar-modo.js'
 import { crearModoManejar } from './manejar-modo.js'
 import { crearCielo, cieloDeModo } from './cielo.js'
@@ -434,7 +435,7 @@ function cambioDeModo(nombre, dentro) {
 }
 const aPie = crearModoAPie({
   camera, lienzo: renderer.domElement, cam, coords, suelo: sueloEn, pedirCuadro,
-  casas: () => datosCiudad, epoca: () => ciudad.U.uEpocaA.value, alCambiar: (dentro) => cambioDeModo('caminar', dentro),
+  casas: () => datosCiudad, hitos: hitosConPlanta, epoca: () => ciudad.U.uEpocaA.value, alCambiar: (dentro) => cambioDeModo('caminar', dentro),
 })
 const enAvion = crearModoVolar({
   camera, lienzo: renderer.domElement, cam, escena: scene, suelo: sueloEn, hoja, pedirCuadro,

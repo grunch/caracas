@@ -88,7 +88,7 @@ export const PASOS = [
       'tools/geo/calles-historicas.json', 'tools/geo/referencias/1772-calles-1936.json'],
     salidas: [`${D}/ciudad-1936.json`, `${D}/patios-de-casas.png`],
     codigo: [...GEO('vectorizar', 'lotes', 'alas', 'cuadra', 'lados', 'caras', 'huellas', 'cuadras_historicas', 'edificado_original', 'calce', 'tps', 'cierre_fase3', 'fachadas'),
-      'tools/hitos-planta.mjs', ...['catedral', 'iglesias', 'civiles', 'panteon', 'plaza-bolivar', 'marco'].map((n) => `src/hitos/datos/${n}.js`)],
+      'tools/hitos-planta.mjs', 'src/hitos/plantas.js', ...['catedral', 'iglesias', 'civiles', 'panteon', 'plaza-bolivar', 'marco'].map((n) => `src/hitos/datos/${n}.js`)],
     cmd: async () => {
       const { plaza, metro } = await leerJson(`${D}/mosaico.json`)
       return [PY, 'tools/geo/vectorizar.py', `${D}/segmentacion/mosaico/clases-costura.png`, `${D}/ciudad-1936.json`,
@@ -116,7 +116,7 @@ export const PASOS = [
     opcionales: ['public/datos/relieve.bin'],
     codigo: [...GEO('epocas', 'valle', 'calce_correlacion', 'vectorizar', 'segmentar_clases', 'calles_1772', 'cuadras_historicas', 'cierre_fase3',
       'cierre_fase4', 'cierre_fase5', 'fachadas', 'accesos'),
-      'tools/hitos-planta.mjs', ...['catedral', 'iglesias', 'civiles', 'panteon', 'plaza-bolivar', 'marco'].map((n) => `src/hitos/datos/${n}.js`)],
+      'tools/hitos-planta.mjs', 'src/hitos/plantas.js', ...['catedral', 'iglesias', 'civiles', 'panteon', 'plaza-bolivar', 'marco'].map((n) => `src/hitos/datos/${n}.js`)],
     cmd: () => [PY, 'tools/geo/epocas.py'],
   },
   {

@@ -3,7 +3,7 @@
  "ciudad": {
   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
   "sha256": "7cebad6701fb3f7ea193daa231c559f6dcb28c29c469b9f670cf24f925fa46e5",
-  "datos": "3a94760 (sin publicar)"
+  "datos": "x"
  },
  "puerta_de_salida": {
   "sin_aberturas_indebidas": {
@@ -737,15 +737,8 @@
    "misma_ciudad": true
   },
   "lo_visible_choca": {
-   "cumplido": false,
-   "hitos_atravesables": [
-    "altagracia",
-    "capitolio",
-    "casa-amarilla",
-    "catedral",
-    "la-pastora",
-    "san-francisco"
-   ]
+   "cumplido": true,
+   "hitos_atravesables": []
   },
   "umbrales_inferidos": {
    "ancho_abertura_m": 2.0,
