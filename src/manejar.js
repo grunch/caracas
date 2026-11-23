@@ -7,9 +7,13 @@
  * genéricos a propósito: no se afirma qué modelo exacto circulaba. El tranvía no está: va por sus rieles.
  */
 
+const MINIMA = 30 / 3.6 // m/s: ningún vehículo va más despacio que esto
+
 export const VEHICULOS = Object.freeze([
-  { id: 'carreta', nombre: 'Carreta de bueyes', desde: 1, maxima: 2, aceleracion: 0.6, traccion: 'animal', largo: 4, ancho: 1.8 },
-  { id: 'coche-de-caballos', nombre: 'Coche de caballos', desde: 2, maxima: 5, aceleracion: 1.5, traccion: 'animal', largo: 5, ancho: 1.8 },
+  // los de tiro van a 30 km/h, la máxima más baja que se maneja (más rápido que de verdad: a su paso no se recorre la
+  // ciudad), y llegan a ella en 3,3 s
+  { id: 'carreta', nombre: 'Carreta de bueyes', desde: 1, maxima: MINIMA, aceleracion: MINIMA * 0.3, traccion: 'animal', largo: 4, ancho: 1.8 },
+  { id: 'coche-de-caballos', nombre: 'Coche de caballos', desde: 2, maxima: MINIMA, aceleracion: MINIMA * 0.3, traccion: 'animal', largo: 5, ancho: 1.8 },
   { id: 'ford-t', nombre: 'Ford T', desde: 4, maxima: 12, aceleracion: 2, traccion: 'motor', largo: 3.4, ancho: 1.7 },
   { id: 'ford-v8', nombre: 'Ford V8', desde: 5, maxima: 20, aceleracion: 3, traccion: 'motor', largo: 4.3, ancho: 1.8 },
 ].map(Object.freeze))

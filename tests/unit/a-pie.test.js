@@ -176,3 +176,10 @@ describe('la colisión de los hitos grandes y la entrada (revisión de #152)', (
     expect(choca(rejilla, p.x, p.z)).toBe(false)
   })
 })
+
+describe('la velocidad a pie', () => {
+  test('anda a trote rápido, 12 km/h, y con Mayús corre a 25 km/h', () => {
+    expect(VELOCIDAD.paso * 3.6).toBeCloseTo(12)
+    expect(VELOCIDAD.corre * 3.6).toBeCloseTo(25.2)
+  })
+})
