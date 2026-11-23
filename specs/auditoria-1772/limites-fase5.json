@@ -15,6 +15,11 @@
    "fecha": "2026-11-22",
    "responsable": "dueño del proyecto",
    "texto": "Las 3 casas de esquina con frente a dos calles que oscilan entre las dos rectas quedan como límite, y la fase 5 se cierra con los límites documentados."
+  },
+  {
+   "fecha": "2026-11-23",
+   "responsable": "dueño del proyecto",
+   "texto": "La franja en L del Calvario (U1772-0272, D8-01 del censo final) entra con la forma del original, con sus ganchos perpendiculares a la calle; lo que eso deja fuera de las puertas de las fases 5, 6 y 7 queda como límite documentado de clase forma_del_original (T33j.8c)."
   }
  ],
  "ciudad": {
@@ -811,6 +816,48 @@
      "techo": 36086,
      "desvio_m": 13.47,
      "clase": "abertura"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0073:E1772-0007-E1772-0008",
+   "lado": -1,
+   "segmento": 0,
+   "sector": "S1772-12",
+   "clase": "forma_del_original",
+   "casas_maximas": 3,
+   "motivo": "La franja en L del original (U1772-0272, D8-01) tiene ganchos perpendiculares a la calle en sus puntas: la reconstrucción los sigue, así que esas casas no caen sobre la recta del frente.",
+   "casas_al_decidir": [
+    {
+     "techo": 38735,
+     "desvio_m": 11.49,
+     "clase": "forma_del_original"
+    },
+    {
+     "techo": 38736,
+     "desvio_m": 12.01,
+     "clase": "forma_del_original"
+    },
+    {
+     "techo": 38737,
+     "desvio_m": 12.44,
+     "clase": "forma_del_original"
+    }
+   ]
+  },
+  {
+   "tramo": "L1772-0075:E1772-0009-E1772-0008",
+   "lado": 1,
+   "segmento": 1,
+   "sector": "S1772-12",
+   "clase": "forma_del_original",
+   "casas_maximas": 1,
+   "motivo": "La franja en L del original (U1772-0272, D8-01) tiene ganchos perpendiculares a la calle en sus puntas: la reconstrucción los sigue, así que esas casas no caen sobre la recta del frente.",
+   "casas_al_decidir": [
+    {
+     "techo": 19818,
+     "desvio_m": 15.73,
+     "clase": "forma_del_original"
     }
    ]
   }

@@ -2,18 +2,18 @@
  "alcance": "Puerta de salida de la fase 5 de 1772 (specs/08), medida sobre la salida del generador. Cuenta lo medido; no certifica fidelidad.",
  "ciudad": {
   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
-  "sha256": "e79e6fe191efba938cca3bb2455dd8e0ab24a6b6ea555e3fc52dbe1733cf5a7d",
-  "datos": "1682c13 (sin publicar)"
+  "sha256": "c0998b3d232c703f041e1afd1a4f3a543e14b2ff769942f16cfd5100d67f3729",
+  "datos": "789e85a (sin publicar)"
  },
  "puerta_de_salida": {
   "frentes_alineados": {
    "cumplido": true,
    "tolerancia_m": 0.5,
-   "casas_desalineadas": 53,
-   "casas_en_limite": 53,
+   "casas_desalineadas": 54,
+   "casas_en_limite": 54,
    "casas_fuera_de_limite": 0,
-   "frentes_medidos": 568,
-   "casas_medidas": 4492,
+   "frentes_medidos": 569,
+   "casas_medidas": 4480,
    "desalineados": [
     {
      "tramo": "L1772-0004:X1772-0010-X1772-0011",
@@ -48,7 +48,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 33889,
+       "techo": 33879,
        "desvio_m": 12.7
       }
      ],
@@ -61,7 +61,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 33559,
+       "techo": 33549,
        "desvio_m": 15.92
       }
      ],
@@ -74,7 +74,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 34142,
+       "techo": 34132,
        "desvio_m": 16.21
       }
      ],
@@ -87,7 +87,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 34532,
+       "techo": 34517,
        "desvio_m": 9.03
       }
      ],
@@ -100,7 +100,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37470,
+       "techo": 37448,
        "desvio_m": 3.47
       }
      ],
@@ -113,7 +113,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 34834,
+       "techo": 34819,
        "desvio_m": 12.04
       }
      ],
@@ -126,7 +126,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37501,
+       "techo": 37479,
        "desvio_m": 14.15
       }
      ],
@@ -139,7 +139,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38031,
+       "techo": 38009,
        "desvio_m": 11.27
       }
      ],
@@ -152,7 +152,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 35310,
+       "techo": 35295,
        "desvio_m": 15.24
       }
      ],
@@ -165,7 +165,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 35410,
+       "techo": 35395,
        "desvio_m": 6.02
       }
      ],
@@ -178,7 +178,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38242,
+       "techo": 38220,
        "desvio_m": 8.27
       }
      ],
@@ -191,7 +191,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36507,
+       "techo": 36485,
        "desvio_m": 14.08
       }
      ],
@@ -204,7 +204,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 33293,
+       "techo": 33286,
        "desvio_m": 11.24
       }
      ],
@@ -217,24 +217,11 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37342,
+       "techo": 37320,
        "desvio_m": 13.72
       }
      ],
      "limite": "abertura"
-    },
-    {
-     "tramo": "L1772-0038:X1772-0088-X1772-0104",
-     "sector": "S1772-32",
-     "lado": -1,
-     "segmento": 0,
-     "casas": [
-      {
-       "techo": 23244,
-       "desvio_m": 5.18
-      }
-     ],
-     "limite": "casa_de_1936"
     },
     {
      "tramo": "L1772-0040:X1772-0139-T1772-0082",
@@ -243,11 +230,11 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37675,
+       "techo": 37653,
        "desvio_m": 14.49
       },
       {
-       "techo": 37676,
+       "techo": 37654,
        "desvio_m": 8.59
       }
      ],
@@ -260,7 +247,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36313,
+       "techo": 36291,
        "desvio_m": 10.89
       }
      ],
@@ -273,7 +260,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 33751,
+       "techo": 33741,
        "desvio_m": 10.74
       }
      ],
@@ -286,7 +273,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36080,
+       "techo": 36058,
        "desvio_m": 11.07
       }
      ],
@@ -299,7 +286,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 34132,
+       "techo": 34122,
        "desvio_m": 16.21
       }
      ],
@@ -325,7 +312,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 35580,
+       "techo": 35565,
        "desvio_m": 15.19
       }
      ],
@@ -338,7 +325,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 35061,
+       "techo": 35046,
        "desvio_m": 13.11
       }
      ],
@@ -351,7 +338,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 35628,
+       "techo": 35613,
        "desvio_m": 15.96
       }
      ],
@@ -364,7 +351,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37180,
+       "techo": 37158,
        "desvio_m": 15.35
       }
      ],
@@ -377,7 +364,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38388,
+       "techo": 38366,
        "desvio_m": 19.1
       }
      ],
@@ -416,7 +403,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36960,
+       "techo": 36938,
        "desvio_m": 2.13
       }
      ],
@@ -429,7 +416,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38472,
+       "techo": 38450,
        "desvio_m": 14.41
       }
      ],
@@ -442,7 +429,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38317,
+       "techo": 38295,
        "desvio_m": 13.99
       }
      ],
@@ -455,7 +442,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37418,
+       "techo": 37396,
        "desvio_m": 7.17
       }
      ],
@@ -468,7 +455,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 33625,
+       "techo": 33615,
        "desvio_m": 8.72
       }
      ],
@@ -481,7 +468,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38603,
+       "techo": 38581,
        "desvio_m": 10.12
       }
      ],
@@ -494,7 +481,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 37568,
+       "techo": 37546,
        "desvio_m": 8.49
       }
      ],
@@ -507,11 +494,11 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38407,
+       "techo": 38385,
        "desvio_m": 8.82
       },
       {
-       "techo": 38411,
+       "techo": 38389,
        "desvio_m": 10.29
       }
      ],
@@ -524,7 +511,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 38315,
+       "techo": 38293,
        "desvio_m": 9.18
       }
      ],
@@ -537,11 +524,11 @@
      "segmento": 1,
      "casas": [
       {
-       "techo": 35963,
+       "techo": 35941,
        "desvio_m": 8.48
       },
       {
-       "techo": 35971,
+       "techo": 35949,
        "desvio_m": 16.1
       }
      ],
@@ -554,24 +541,11 @@
      "segmento": 2,
      "casas": [
       {
-       "techo": 35954,
+       "techo": 35932,
        "desvio_m": 8.26
       }
      ],
      "limite": "manzana_retirada"
-    },
-    {
-     "tramo": "L1772-0073:E1772-0001-E1772-0007",
-     "sector": "S1772-11",
-     "lado": -1,
-     "segmento": 3,
-     "casas": [
-      {
-       "techo": 35988,
-       "desvio_m": 12.27
-      }
-     ],
-     "limite": "abertura"
     },
     {
      "tramo": "L1772-0073:E1772-0007-E1772-0008",
@@ -580,11 +554,32 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36063,
-       "desvio_m": 9.01
+       "techo": 36041,
+       "desvio_m": 9.38
       }
      ],
      "limite": "abertura"
+    },
+    {
+     "tramo": "L1772-0073:E1772-0007-E1772-0008",
+     "sector": "S1772-12",
+     "lado": -1,
+     "segmento": 0,
+     "casas": [
+      {
+       "techo": 38735,
+       "desvio_m": 11.49
+      },
+      {
+       "techo": 38736,
+       "desvio_m": 12.01
+      },
+      {
+       "techo": 38737,
+       "desvio_m": 12.44
+      }
+     ],
+     "limite": "forma_del_original"
     },
     {
      "tramo": "L1772-0073:E1772-0010-E1772-0014",
@@ -593,7 +588,7 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36079,
+       "techo": 36057,
        "desvio_m": 15.51
       }
      ],
@@ -606,11 +601,24 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36048,
+       "techo": 36026,
        "desvio_m": 10.23
       }
      ],
      "limite": "abertura"
+    },
+    {
+     "tramo": "L1772-0075:E1772-0009-E1772-0008",
+     "sector": "S1772-12",
+     "lado": 1,
+     "segmento": 1,
+     "casas": [
+      {
+       "techo": 19818,
+       "desvio_m": 15.73
+      }
+     ],
+     "limite": "forma_del_original"
     },
     {
      "tramo": "L1772-0080:X1772-0182-X1772-0183",
@@ -649,12 +657,8 @@
      "segmento": 0,
      "casas": [
       {
-       "techo": 36062,
+       "techo": 36040,
        "desvio_m": 11.41
-      },
-      {
-       "techo": 36064,
-       "desvio_m": 13.47
       }
      ],
      "limite": "abertura"
@@ -689,7 +693,7 @@
    "cierre_m": 1.0,
    "acceso_minimo_m": 2.0
   },
-  "casas_1772": 6297,
+  "casas_1772": 6315,
   "fase_5_cerrable": true
  }
 }

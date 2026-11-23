@@ -8,7 +8,7 @@ histórica de la fase 2 (`tools/geo/referencias/1772-*.json`), sobre las casas q
 
 - calles libres: ninguna casa ocupa el núcleo de calzada de un tramo recto entre dos cruces identificados;
 - calles históricas verificadas libres (`calles-historicas.json`, San Jacinto–Traposos entre ellas);
-- plazas aprobadas sin casas;
+- plazas aprobadas sin casas, y las plazuelas del censo final (referencias/1772-plazuelas.json, T33j.8c);
 - ninguna calle abierta dentro de una unidad aprobada continua (una franja vacía de lado a lado con casas a ambos lados).
 
 El ancho del núcleo de calzada es **inferido**, no medido: el original no da anchos. Cuenta lo medido; no certifica
@@ -88,6 +88,17 @@ def plazas_ocupadas(unidades, por_id, casas, metro=METRO, retiro_m=ANCHO_INFERID
             quienes = _ocupantes(_interior(u, por_id, metro, retiro_m), arbol, casas, metro, AREA_MINIMA_M2)
             if quienes:
                 resultado.append({'unidad': u['id'], 'casas': quienes})
+    return resultado
+
+
+def plazuelas_ocupadas(casas, plazuelas):
+    """Las plazuelas del censo final (plazuelas.cargar_plazuelas; T33j.8c) con alguna casa con la mitad o más dentro."""
+    from plazuelas import en_plazuela
+    resultado = []
+    for p in plazuelas:
+        quienes = sorted(k for k, g in casas if g.intersects(p['poligono']) and en_plazuela(g, [p['poligono']]))
+        if quienes:
+            resultado.append({'plazuela': p['id'], 'casas': quienes})
     return resultado
 
 
@@ -178,7 +189,7 @@ def red_conectada(calles, casas, metro=METRO):
             'sin_medir_por_limite_del_calce': dict(sorted(sin_medir.items()))}
 
 
-def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_INFERIDO_M, calles=None):
+def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_INFERIDO_M, calles=None, plazuelas=None):
     """Criterios de la fase 3 con su cumplimiento sobre las casas de 1772; `fase_3_cerrable` exige todos."""
     casas = casas_de_epoca(ciudad)
     por_id = {n['id']: n for n in red['nodos']}
@@ -189,6 +200,11 @@ def puerta_fase3(ciudad, red, unidades, verificadas, metro=METRO, ancho_m=ANCHO_
                   for v in medidas]
     historicas_ocupadas = [o['tramo'] for o in calles_ocupadas(historicas, casas, metro)]
     plazas = plazas_ocupadas(unidades, por_id, casas, metro, ancho_m / 2)
+    if plazuelas is None:
+        # sin plazuelas pasadas, las del registro: toda puerta que mide la fase 3 (también la de la fase 5) ve las mismas
+        import plazuelas as registro
+        plazuelas = registro.plazuelas_en_1936()
+    plazas += plazuelas_ocupadas(casas, plazuelas)   # las plazuelas del censo final (T33j.8c)
     dentro = calles_abiertas_dentro(unidades, por_id, casas, metro, ancho_m / 2)
     criterios = OrderedDict([
         ('red_conectada', red_conectada(calles, casas, metro) if calles is not None

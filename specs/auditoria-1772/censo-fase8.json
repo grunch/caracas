@@ -132,7 +132,8 @@
    "tipo": "edificado_sin_casas",
    "observacion": "La franja edificada en L del lado oeste de la calle diagonal del Calvario no tiene casas. Ninguna unidad de la referencia la cubre, así que la fase 4 no la mide.",
    "causa": "unidad del original sin edificado revisado en la referencia (I1772-007)",
-   "subtarea": "T33j.8c"
+   "subtarea": "T33j.8c",
+   "resultado": "corregido: U1772-0272 revisada de nuevo (fiel_solo_la_mayor); la franja tiene sus casas. Sus ganchos, dos cumbreras y una abertura quedan como límite forma_del_original (fases 5 a 7)."
   },
   {
    "id": "D8-02",
@@ -146,7 +147,8 @@
    "tipo": "casas_en_plazuela",
    "observacion": "Plazuela de Altagracia: hay una casa en su parte oeste. La planta del hito Altagracia queda dentro de la plazuela; en el original, la cruz está en la manzana del sur. La posición del hito queda por verificar.",
    "causa": "la plazuela no está en la referencia como plaza; posición del hito no verificada",
-   "subtarea": "T33j.8c"
+   "subtarea": "T33j.8c",
+   "resultado": "corregido: plazuela P1772-001 (referencias/1772-plazuelas.json) sin casas en 1772. La posición del hito Altagracia sigue por verificar."
   },
   {
    "id": "D8-03",
@@ -162,7 +164,8 @@
    "tipo": "casas_en_plazuela",
    "observacion": "Espacio abierto a una cuadra al sureste de la Plaza Mayor, en blanco en el original, con casas en la reconstrucción.",
    "causa": "la plazuela no está en la referencia como plaza",
-   "subtarea": "T33j.8c"
+   "subtarea": "T33j.8c",
+   "resultado": "corregido: plazuela P1772-002 sin casas en 1772."
   },
   {
    "id": "D8-04",
@@ -177,7 +180,8 @@
    "tipo": "casas_en_plazuela",
    "observacion": "Plazuela con una iglesia (cruz) en el original. La reconstrucción le pone casas encima y no hay hito en 1772. La identidad de la iglesia no está verificada.",
    "causa": "la plazuela no está en la referencia como plaza; iglesia del original sin hito",
-   "subtarea": "T33j.8c"
+   "subtarea": "T33j.8c",
+   "resultado": "corregido: plazuela P1772-003 sin casas en 1772. La iglesia (cruz) queda con casas genéricas: duda histórica declarada."
   },
   {
    "id": "D8-05",
@@ -191,7 +195,8 @@
    "tipo": "casas_en_plazuela",
    "observacion": "Espacio abierto en blanco en el original, con casas en la reconstrucción.",
    "causa": "el espacio no está en la referencia como plaza ni terreno libre",
-   "subtarea": "T33j.8c"
+   "subtarea": "T33j.8c",
+   "resultado": "corregido: plazuela P1772-004 sin casas en 1772."
   },
   {
    "id": "D8-06",
@@ -202,10 +207,11 @@
     9444,
     5361
    ],
-   "tipo": "casas_en_atrio",
-   "observacion": "Iglesia del original (cruz con atrio en blanco) junto a donde está el hito del Panteón, que nace en 1843. En 1772 hay casas genéricas sobre el atrio. La identidad de la iglesia en 1772 no está verificada.",
-   "causa": "iglesia del original sin hito en 1772; atrio sin registrar",
-   "subtarea": "T33j.8c"
+   "tipo": "iglesia_sin_hito",
+   "observacion": "Iglesia del original (el rectángulo blanco con la cruz, dentro de una manzana roja) junto a donde está el hito del Panteón, que nace en 1843. En 1772 la cubren casas genéricas. La identidad de la iglesia en 1772 no está verificada.",
+   "causa": "iglesia del original sin hito en 1772 (no es un espacio abierto)",
+   "subtarea": "T33j.8c",
+   "resultado": "duda histórica declarada: es el signo de una iglesia (rectángulo blanco con cruz) dentro de una manzana roja, no un atrio. Hay un edificio, así que las casas genéricas no están mal; la iglesia no tiene hito en 1772 ni identidad verificada."
   }
  ]
 }

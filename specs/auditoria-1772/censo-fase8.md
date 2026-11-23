@@ -31,11 +31,22 @@ La extensión de cada sector sale de lo edificado revisado de sus unidades (fase
 | D8-03 | S1772-23/32/33 (9350, 6940) | Espacio abierto a una cuadra al sureste de la Plaza Mayor, con casas. | No está en la referencia como plaza. |
 | D8-04 | S1772-31/32 (9090, 8640) | Plazuela con una iglesia en el original, con casas encima y sin hito en 1772. | No está en la referencia como plaza. Iglesia sin identidad verificada. |
 | D8-05 | S1772-32 (9281, 8409) | Espacio en blanco en el original, con casas. | No está en la referencia como plaza ni terreno libre. |
-| D8-06 | S1772-34 (9444, 5361) | Iglesia del original, con atrio en blanco, junto al hito del Panteón (que nace en 1843). En 1772 hay casas sobre el atrio. | Iglesia sin hito en 1772. Identidad no verificada. |
+| D8-06 | S1772-34 (9444, 5361) | El signo de una iglesia (rectángulo blanco con la cruz) dentro de una manzana roja, junto al hito del Panteón (que nace en 1843). En 1772 la cubren casas genéricas. | Iglesia sin hito en 1772. No es un atrio: hay un edificio. Identidad no verificada. |
 
 **Ninguno es un fallo del generador.** Son espacios abiertos y una franja edificada que la referencia de la fase 2 no registra. Las fases 3 y 4 miden contra la referencia, así que no podían verlos. Por la regla de specs/08 («si aparece una causa anterior, abrir una subtarea de esa fase»), se corrigen en la referencia (T33j.8c). Después se regenera y se repiten las puertas.
 
 **Las iglesias.** No se les pone nombre ni forma sin fuente: las de D8-04 y D8-06 quedan como dudas históricas declaradas hasta tener una.
+
+## Después de T33j.8c: los hallazgos corregidos en la referencia
+
+- **D8-01, la franja del Calvario.** Era U1772-0272, una de las 4 dudosas de la fase 4: su caja alcanzaba dos manchas rojas. Revisada de nuevo a ojo: la mayor es su franja en L, que sigue lo dibujado en rojo; la otra es el triángulo de U1772-0013, que ya tiene sus casas (`fiel_solo_la_mayor` en [edificado-revisado.json](edificado-revisado.json)). La franja entra con la forma del original, ganchos incluidos. **Por decisión del responsable del 23-11-2026**, lo que esos ganchos dejan fuera de las puertas queda como límite de clase `forma_del_original`: 4 casas en dos frentes de la fase 5, 2 cumbreras de la fase 6 y la abertura entre los brazos de la L de la fase 7.
+- **D8-02 a D8-05, las plazuelas.** Nueva referencia [1772-plazuelas.json](../../tools/geo/referencias/1772-plazuelas.json). Son cuatro plazuelas y ensanches del original, trazados a mano sobre el original ampliado ×5 y revisados a ojo; la iglesia de D8-04 no entra.
+  - En 1772 ninguna casa con la mitad o más dentro vive ahí (`epocas.despejar_plazuelas_de_1772`, como al abrir una calle).
+  - Son terreno vedado para alinear y para cerrar aberturas.
+  - La puerta de la fase 3 las mide con las plazas.
+- **D8-06** no es un espacio abierto: queda como duda histórica declarada (ver la tabla).
+
+Datos regenerados desde `vectorizar` sobre la rama, con 6315 casas de 1772 a la vista: la franja suma 18. **Las puertas de las fases 3, 4, 5, 6 y 7 dan cerrable** sobre la misma ciudad, con los límites documentados.
 
 ## Reproducir
 

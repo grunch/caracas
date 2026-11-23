@@ -453,3 +453,25 @@ def test_dos_versiones_de_una_misma_casa_no_cuentan_doble_para_tapar_una_de_1578
     construido = [np.ones((50, 50), bool) for _ in range(4)]
     vida = ep.vida_de_1578(c78, huellas36, nace36=np.array([1, 1]), construido=construido, escala=1.0)
     assert vida == [[0, ep.ULTIMA]]
+
+
+def test_despejar_plazuelas_de_1772_le_quita_1772_a_cada_casa_como_al_abrir_una_calle():
+    # T33j.8c: una «de antes» se quita, una de 1936 nace en 1843, una de 1578 (más allá de "antes") vive hasta 1772;
+    # una casa con menos de la mitad dentro no se toca
+    from shapely.geometry import box as caja
+    from epocas import despejar_plazuelas_de_1772
+    figuras = [caja(0, 0, 10, 10), caja(20, 0, 30, 10), caja(40, 0, 50, 10), caja(95, 0, 105, 10), caja(60, 0, 70, 10)]
+    vertices, techos = [], []
+    for f in figuras:
+        puntos = list(f.exterior.coords)[:-1]
+        techos.append([len(vertices) // 2, len(puntos), 1, 0, 0])
+        vertices.extend(c for p in puntos for c in p)
+    ciudad = {'vertices': vertices, 'techos': techos, 'antes': [1, 0, 0, 0]}
+    vida = [[1, 0], [1, 0], [1, 0], [1, 0], [0, 0]]
+    plazuela = [caja(-5, -5, 75, 15)]
+    nueva, quitar = despejar_plazuelas_de_1772(ciudad, vida, set(), plazuela)
+    assert quitar == {0}
+    assert nueva[1] == [2, 0] and nueva[2] == [2, 0]
+    assert nueva[3] == [1, 0]              # un cuarto dentro: queda
+    assert nueva[4] == [0, 1]              # de 1578: vive hasta 1772
+    assert vida[1] == [1, 0]               # no muta la entrada
