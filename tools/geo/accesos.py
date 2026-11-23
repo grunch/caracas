@@ -71,12 +71,25 @@ CIERRE_MINIMO_M2 = 2.0    # menos que esto no es un hueco que cerrar
 VUELTAS_CIERRE = 3        # cerrar un tramo de frente puede dejar a la vista el que sigue
 
 
+ALREDEDOR_M = 40.0        # las casas que puede dejar sin acceso un cierre: las de su manzana, a esto del hueco
+
+
+def _encierra(huellas, k, unida, pieza, metro):
+    """¿Darle `unida` a la casa k deja sin acceso a alguna casa cercana que lo tenía? (el hueco era un zaguán)."""
+    zona = pieza.buffer(ALREDEDOR_M / metro)
+    cerca = [(t, g) for t, g in huellas.items() if g.intersects(zona)]
+    antes = set(casas_sin_acceso(cerca, metro)['sin_acceso'])
+    despues = set(casas_sin_acceso([(t, unida if t == k else g) for t, g in cerca], metro)['sin_acceso'])
+    return bool(despues - antes)
+
+
 def cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=(), obstaculos=()):
     """{techo: huella crecida} que cierran las aberturas indebidas de los frentes (cierre_fase7.aberturas_de_frentes:
     un hueco de al menos una puerta donde el original pinta edificado), T33j.7c. Lo edificado del original que no
     cubre ninguna casa alrededor del punto de la abertura (a no más de CIERRE_RADIO_M, fuera de lo vedado) se le suma
     a la casa movible que más borde le comparte: se cierra con fachada, según la referencia. Un hueco donde el
-    original no pinta edificado (un solar, un pasaje) queda abierto. No muta nada."""
+    original no pinta edificado (un solar, un pasaje) queda abierto, y uno que es el paso de otra casa (un zaguán: el
+    cierre la dejaría sin acceso) también. No muta nada."""
     from shapely.geometry import Point
     from cierre_fase7 import aberturas_de_frentes
     if not len(edificado):
@@ -110,10 +123,11 @@ def cerrar_aberturas(casas, tramos, metro, movibles, edificado, vedado=(), obsta
                               if k in movibles), reverse=True)
             for largo, k in vecinas:
                 unida = _union(huellas[k], pieza) if largo > 0 else None
-                if unida is not None:
-                    huellas[k] = nuevas[k] = unida
-                    cambio = True
-                    break
+                if unida is None or _encierra(huellas, k, unida, pieza, metro):
+                    continue
+                huellas[k] = nuevas[k] = unida
+                cambio = True
+                break
         if not cambio:
             break
     return nuevas

@@ -120,3 +120,19 @@ def test_cerrar_aberturas_llena_el_hueco_del_frente_donde_el_original_pinta_edif
         assert g.geom_type == 'Polygon' and g.is_valid and not g.interiors
     # sin rojo en el hueco (un solar del original), no se cierra
     assert cerrar_aberturas(casas, eje, METRO, movibles={0, 1, 2, 4, 5, 6, 7}, edificado=[caja(200, 200, 210, 210)]) == {}
+
+
+def test_cerrar_aberturas_no_cierra_el_paso_de_una_casa_del_fondo():
+    # el hueco del frente es el único paso de la casa del fondo (un zaguán): cerrarlo la dejaría encerrada
+    from accesos import cerrar_aberturas
+    from shapely.geometry import box as caja
+    casas = [(k, caja(10 + k * 20, 12, 10 + (k + 1) * 20, 42)) for k in range(8) if k != 3]
+    casas += [(9, caja(10, 42, 170, 70))]      # detrás de la hilera, la cierra por el fondo
+    casas += [(11, caja(70, 30, 90, 42))]      # la casa del fondo del hueco: su único borde a la calle es el zaguán
+    eje = [{'tramo': 'L1:A-B', 'sector': 'S1', 'puntos': [[0, 0], [180, 0]], 'banda_m': 6.0, 'medible': True}]
+    rojo = [caja(60, 10, 100, 45)]
+    movibles = {0, 1, 2, 4, 5, 6, 7, 9, 11}
+    assert casas_sin_acceso(casas, METRO)['sin_acceso'] == []
+    nuevas = cerrar_aberturas(casas, eje, METRO, movibles=movibles, edificado=rojo)
+    final = [(k, nuevas.get(k, g)) for k, g in casas]
+    assert casas_sin_acceso(final, METRO)['sin_acceso'] == []
