@@ -213,6 +213,12 @@ describe('evaluar', () => {
     expect(r.motivos).toHaveLength(1)
     expect(r.motivos[0]).toContain('3001')
   })
+  it('la etiqueta de exento manda sobre «solo markdown»: también salta las fuentes', () => {
+    const r = evaluar(pr({ etiquetas: ['calidad:exento'] }), hechos({ archivos: [archivo('fuentes/imagenes/README.md')] }), cfg, plantilla)
+    expect(r.exento).toBe('etiqueta calidad:exento')
+    expect(r.motivos).toEqual([])
+    expect(r.ok).toBe(true)
+  })
   it('solo lee los primeros bytes de la descripción', () => {
     const r = evaluar(pr({ cuerpo: cuerpo() + 'x'.repeat(70000) }), hechos(issueAceptado), cfg, plantilla)
     expect(r.ok).toBe(true)

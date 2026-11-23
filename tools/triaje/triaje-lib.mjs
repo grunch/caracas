@@ -176,11 +176,12 @@ export function revisarPrsAbiertos(otros, primeraVez, cfg) {
 
 const esBot = (pr, cfg) => pr.tipoAutor === 'Bot' || cfg.autores.bots.includes(pr.autor)
 
-/** Por qué se salta el contenido, o null. Un renombre cuenta con sus dos nombres: pasar código a .md lo borra. */
+/** Por qué se salta el contenido, o null. Un renombre cuenta con sus dos nombres: pasar código a .md lo borra.
+ * La etiqueta va primero: es la decisión explícita de quien mantiene y también salta `fuentes` (§ 5.3). */
 function exencion(pr, hechos, cfg) {
+  if (pr.etiquetas.includes(cfg.etiquetas.exento)) return `etiqueta ${cfg.etiquetas.exento}`
   const nombres = hechos.archivos.flatMap((a) => [a.nombre, a.antes]).filter(Boolean)
   if (nombres.length && nombres.every((n) => n.endsWith('.md'))) return 'solo markdown'
-  if (pr.etiquetas.includes(cfg.etiquetas.exento)) return `etiqueta ${cfg.etiquetas.exento}`
   return null
 }
 
