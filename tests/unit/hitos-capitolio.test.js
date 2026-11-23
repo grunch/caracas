@@ -1,5 +1,6 @@
+import { readFileSync } from 'node:fs'
 import { expect, test } from 'vitest'
-import { Box3, Matrix3, Vector3 } from 'three'
+import { Box3, Matrix3, PlaneGeometry, Vector3 } from 'three'
 import { HITOS, construirHitos, validarHitos, zonasDeSupresion, suprimirTechos } from '../../src/hitos.js'
 import { crearCoords } from '../../src/coords.js'
 import { MARCAS } from '../../src/marcas-datos.js'
@@ -7,6 +8,7 @@ import { normalizarMarcas } from '../../src/marcas.js'
 import { FICHAS } from '../../src/fichas-datos.js'
 import { contenidoDeFicha } from '../../src/fichas.js'
 import { crearCapitolio } from '../../src/hitos/capitolio-modelo.js'
+import { llevarAEsquinas } from '../../src/hitos/capitolio.js'
 import { etapaCapitolio } from '../../src/hitos/capitolio-datos.js'
 
 const plano = { ancho: 18600, alto: 14800, metro: .5, plaza: [8968.2, 6839] }
@@ -102,11 +104,44 @@ test('las casas genéricas de la manzana se apagan desde 1772 sin mutar sus dato
   expect([...casa.vida]).toEqual([0])
 })
 
-test('el convento ocupa la manzana entera del original: las casas de sus costados se apagan desde 1772', () => {
-  // la manzana medida sobre el 1772 calzado (los ejes de la referencia, hasta el borde de la manzana roja): 131,4 × 123,4 m
+// la manzana de la referencia: sus cuatro ejes (NO, NE, SE, SO) y la banda de cada calle (tools/geo/referencias)
+const red = JSON.parse(readFileSync('tools/geo/referencias/1772-red.json', 'utf8'))
+const tramos = JSON.parse(readFileSync('tools/geo/referencias/1772-calles-1936.json', 'utf8')).tramos
+const nodo = (id) => red.nodos.find(n => n.id === id).mosaico
+const banda = (tramo) => tramos.find(t => t.tramo === tramo).banda_m
+const LADOS = [ // planta[i] → planta[i + 1], con el eje de su calle
+  { ejes: ['X1772-0043', 'X1772-0060'], banda: banda('L1772-0050:X1772-0043-X1772-0060') },
+  { ejes: ['X1772-0060', 'X1772-0059'], banda: banda('L1772-0013:X1772-0059-X1772-0060') },
+  { ejes: ['X1772-0059', 'X1772-0042'], banda: banda('L1772-0047:X1772-0042-X1772-0059') },
+  { ejes: ['X1772-0042', 'X1772-0043'], banda: banda('L1772-0011:X1772-0042-X1772-0043') },
+]
+const aEje = ([a, b], [x, y]) => Math.abs((b[0] - a[0]) * (a[1] - y) - (a[0] - x) * (b[1] - a[1])) / Math.hypot(b[0] - a[0], b[1] - a[1]) * plano.metro
+
+test('la planta es la manzana de la referencia: cada lado a media banda del eje de su calle, sin invadirla', () => {
+  // la manzana no es un rectángulo: con uno de 131 m la esquina noroeste quedaba sobre el eje de la calle oeste
   const [p] = hito.planta
-  const lado = (i) => Math.hypot(p[(i + 1) % 4][0] - p[i][0], p[(i + 1) % 4][1] - p[i][1]) * plano.metro
-  expect(lado(0)).toBeCloseTo(131.4, 0); expect(lado(1)).toBeCloseTo(123.4, 0)
+  LADOS.forEach(({ ejes, banda }, i) => {
+    const eje = ejes.map(nodo)
+    expect(aEje(eje, p[i]), `lado ${i}`).toBeCloseTo(banda / 2, 1)
+    expect(aEje(eje, p[(i + 1) % 4]), `lado ${i}`).toBeCloseTo(banda / 2, 1)
+  })
+})
+
+test('el modelo no pasa la fachada oeste hacia la calle: sigue la planta, no un rectángulo', () => {
+  const d = construirHitos([hito], coords)
+  const [p] = hito.planta
+  const [so, no] = [p[3], p[0]]   // la fachada oeste, de sur a norte
+  const cruz = (x, y) => ((no[0] - so[0]) * (y - so[1]) - (no[1] - so[1]) * (x - so[0])) / Math.hypot(no[0] - so[0], no[1] - so[1])
+  const haciaLaCalle = -Math.sign(cruz(...p.reduce(([sx, sy], [x, y]) => [sx + x / 4, sy + y / 4], [0, 0])))
+  let peor = -Infinity
+  for (let i = 0; i < d.posiciones.length / 3; i++) {
+    const [x, y] = [d.posiciones[i * 3] / plano.metro + plano.plaza[0], d.posiciones[i * 3 + 2] / plano.metro + plano.plaza[1]]
+    peor = Math.max(peor, haciaLaCalle * cruz(x, y) * plano.metro)   // positivo: pasa la fachada hacia la calle
+  }
+  expect(peor).toBeLessThan(0.5)
+}, 20_000)
+
+test('el convento ocupa la manzana entera del original: las casas de sus costados se apagan desde 1772', () => {
   // una casa de la franja oeste (entre la planta vieja de 92 m y la calle), que antes quedaba en pie
   const casaOeste = [[8552, 7060], [8572, 7064], [8576, 7044], [8556, 7040]]
   const casa = { vertices: new Float32Array(casaOeste.flat()), techos: new Uint32Array([0, 4, 1, 0]), vida: new Uint32Array([0]) }
@@ -142,5 +177,19 @@ test('las vertientes de teja del convento tienen la normal hacia arriba', () => 
     })
     expect(vertientes).toBeGreaterThan(0); expect(invertidas).toBe(0)
     liberar(edificio)
+  }
+})
+
+test('los normales siguen a sus caras después de llevar el modelo a la manzana', () => {
+  // revisión de #166: el mapeo estira el modelo un 30–40 % de este a oeste; un faldón inclinado cambia de pendiente y
+  // su normal tiene que girar con él
+  const faldon = new PlaneGeometry(10, 10).rotateX(-Math.PI / 2 + 0.6).rotateY(0.4)   // una cara inclinada, girada
+  const esquinas = [[-66, -60], [64, -62], [66, 63], [-68, 61]]                     // ~40 % más ancho, algo torcido
+  const llevada = llevarAEsquinas(faldon, esquinas)
+  const p = (q) => new Vector3().fromBufferAttribute(llevada.getAttribute('position'), q)
+  const cara = new Vector3().crossVectors(p(1).clone().sub(p(0)), p(2).clone().sub(p(0))).normalize()
+  for (let i = 0; i < 4; i++) {
+    const n = new Vector3().fromBufferAttribute(llevada.getAttribute('normal'), i)
+    expect(Math.abs(n.dot(cara))).toBeGreaterThan(Math.cos(0.5 * Math.PI / 180))
   }
 })
