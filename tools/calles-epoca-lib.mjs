@@ -54,19 +54,22 @@ export function campoDeDistancia(tramos, caja, { metro }) {
   const [x0, y0, x1, y1] = caja
   const ancho = Math.ceil((x1 - x0) * metro / M_POR_PX)
   const alto = Math.ceil((y1 - y0) * metro / M_POR_PX)
+  // el shader estira la textura sobre la caja exacta: el paso real de cada eje (≤ M_POR_PX), no M_POR_PX
+  const pasoX = (x1 - x0) * metro / ancho
+  const pasoY = (y1 - y0) * metro / alto
   const distancia = new Float32Array(ancho * alto).fill(DIST_MAX_M)
   const aMetros = ([x, y]) => [(x - x0) * metro, (y - y0) * metro] // desde la esquina de la caja
   for (const { puntos } of tramos) {
     const m = puntos.map(aMetros)
     for (let k = 0; k + 1 < m.length; k++) {
       const [a, b] = [m[k], m[k + 1]]
-      const i0 = Math.max(0, Math.floor((Math.min(a[0], b[0]) - DIST_MAX_M) / M_POR_PX))
-      const i1 = Math.min(ancho - 1, Math.ceil((Math.max(a[0], b[0]) + DIST_MAX_M) / M_POR_PX))
-      const j0 = Math.max(0, Math.floor((Math.min(a[1], b[1]) - DIST_MAX_M) / M_POR_PX))
-      const j1 = Math.min(alto - 1, Math.ceil((Math.max(a[1], b[1]) + DIST_MAX_M) / M_POR_PX))
+      const i0 = Math.max(0, Math.floor((Math.min(a[0], b[0]) - DIST_MAX_M) / pasoX))
+      const i1 = Math.min(ancho - 1, Math.ceil((Math.max(a[0], b[0]) + DIST_MAX_M) / pasoX))
+      const j0 = Math.max(0, Math.floor((Math.min(a[1], b[1]) - DIST_MAX_M) / pasoY))
+      const j1 = Math.min(alto - 1, Math.ceil((Math.max(a[1], b[1]) + DIST_MAX_M) / pasoY))
       for (let j = j0; j <= j1; j++) {
         for (let i = i0; i <= i1; i++) {
-          const d = alSegmento((i + 0.5) * M_POR_PX, (j + 0.5) * M_POR_PX, a, b)
+          const d = alSegmento((i + 0.5) * pasoX, (j + 0.5) * pasoY, a, b)
           if (d < distancia[j * ancho + i]) distancia[j * ancho + i] = d
         }
       }

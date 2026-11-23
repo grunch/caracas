@@ -31,7 +31,8 @@ export const GLSL_CALLES = /* glsl */ `
     float adentro = step(0.0, local.x) * step(local.x, 1.0) * step(0.0, local.y) * step(local.y, 1.0);
     float d = texture2D(uCalles, vec2(local.x, 1.0 - local.y)).r * ${DIST_MAX_M.toFixed(1)};
     const float MEDIA = ${(NUCLEO_M / 2).toFixed(1)};
-    float filo = max(px, 0.25);
+    // el filo crece al alejarse, pero no hasta la distancia saturada: un texel sin calle (DIST_MAX_M) no es calzada
+    float filo = min(max(px, 0.25), ${(DIST_MAX_M - NUCLEO_M / 2).toFixed(1)});
     float calzada = 1.0 - smoothstep(MEDIA - filo, MEDIA + filo, d);
     float grosor = 0.15 + 0.5 * px;
     float orilla = (1.0 - smoothstep(grosor, grosor + filo, abs(d - MEDIA))) * (1.0 - smoothstep(1.5, 4.0, px));
