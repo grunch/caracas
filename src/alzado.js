@@ -75,6 +75,14 @@ const quiebres = (f) => (f.hueco || !(f.tan > 0) ? [] : [0, ...(Number.isFinite(
 
 const ALINEADO_M = 1e-3 // un vértice a menos de esto de la recta entre sus vecinos no hace esquina: 1 mm
 
+/** ¿El triángulo (puntos en 3D) tiene menos de ALINEADO_M de alto sobre su lado mayor? */
+function esAguja(a, b, c) {
+  const [u, v] = [[b[0] - a[0], b[1] - a[1], b[2] - a[2]], [c[0] - a[0], c[1] - a[1], c[2] - a[2]]]
+  const doble = Math.hypot(u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0])
+  const lado = Math.max(Math.hypot(...u), Math.hypot(...v), Math.hypot(c[0] - b[0], c[1] - b[1], c[2] - b[2]))
+  return lado === 0 || doble / lado < ALINEADO_M
+}
+
 /**
  * El faldón recortado, partido en sus quiebres en lo que sigue plano y lo que cae, cada pedazo con su normal.
  * Si no, los triángulos interpolarían una sola pendiente por encima del quiebre y el tejado se despegaría de
@@ -113,8 +121,11 @@ function tejados(casa, salida) {
       const [poligono, n] = [sinColineales(pedazo.poligono, ALINEADO_M), pedazo.n]
       if (poligono.length < 3) continue
       const indices = poligono.map(([u, v]) => salida.vertice(u, v, alto(u, v), n, pared, [...coordsFaldon(f, u, v), largo, cubierta]))
+      const en3d = poligono.map(([u, v]) => [u, alto(u, v), v])
       for (const [a, b, c] of ShapeUtils.triangulateShape(poligono.map(([u, v]) => new Vector2(u, v)), [])) {
-        salida.triangulo(indices[a], indices[b], indices[c], n)
+        // la triangulación puede juntar tres vértices que solo quedan alineados al sacar otras orejas: una aguja
+        // de menos de 1 mm de alto no se dibuja (su rendija es menor que eso, T33j.6d)
+        if (!esAguja(en3d[a], en3d[b], en3d[c])) salida.triangulo(indices[a], indices[b], indices[c], n)
       }
     }
   }
@@ -145,6 +156,7 @@ function muro(salida, p0, p1, abajo, arriba, n, pared0, pared1, pretil = null) {
  * del tejado), con su cara de arriba y la de abajo.
  */
 function alero(salida, f, p0, p1, n, vuelo) {
+  if (Math.hypot(p1[0] - p0[0], p1[1] - p0[1]) < ALINEADO_M) return // un tramo de pared sin largo no lleva alero
   const normal = normalFaldon(f)
   const largo = largoFaldon(f) + vuelo * Math.hypot(1, f.tan)
   const afuera = (p) => [p[0] + n[0] * vuelo, p[1] + n[1] * vuelo]

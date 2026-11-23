@@ -491,6 +491,24 @@ describe('extruirTechos: sin triángulos degenerados (T33j.6d)', () => {
   })
 })
 
+// la casa 32751 de la ciudad de 1772, como viene en el pak (datos con T33j.6g): su triangulación armaba agujas
+const CASA_32751 = {
+  vertices: Float32Array.from([7849, 5712.293, 7848.825, 5712.468, 7848, 5718.442, 7848, 5720.293, 7847.703, 5720.59, 7847, 5725.681,
+    7847, 5728.293, 7846.581, 5728.712, 7844.215, 5745.844, 7862.182, 5749.134, 7869.934, 5712.314, 7868.556, 5712, 7866.707, 5712,
+    7862.706, 5710.666, 7855.398, 5709, 7853.707, 5709, 7853.208, 5708.501, 7851.011, 5708, 7848.455, 5708, 7848.324, 5708.652,
+    7849.324, 5708.854, 7849, 5711.202]),
+  techos: Uint32Array.from([0, 22, 1, 32478]), vida: Uint32Array.from([17]), historia: Uint8Array.from([16, 16, 16, 16, 17, 17]),
+  marcos: Float32Array.from([0, 7850.0498046875, 5708.33984375, 0.9757099747657776, 0.21908999979496002, 20, 39, 6, 14.51, 0, 0]),
+  alas: Float32Array.from([]), vuelos: Uint8Array.from([66]),
+}
+
+describe('extruirTechos: ninguna aguja, tampoco las que arma la triangulación (T33j.6d)', () => {
+  test('la casa 32751 de la ciudad de 1772, donde está, no deja triángulos de menos de 1 mm de alto', () => {
+    const plaza = { aMundo: (px, py) => ({ x: (px - 8968.2) * METRO, z: (py - 6839.0) * METRO }) }
+    sinAgujas(extruirTechos(CASA_32751, plaza))
+  })
+})
+
 function sinAgujas(g) {
   {
     const p = (i) => [g.posiciones[i * 3], g.posiciones[i * 3 + 1], g.posiciones[i * 3 + 2]]
