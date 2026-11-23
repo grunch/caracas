@@ -237,7 +237,7 @@
     {
       "id": "I1772-008",
       "categoria": "fondo_de_otra_epoca",
-      "estado": "confirmado",
+      "estado": "corregido_en_codigo_pendiente_revision_visual",
       "prioridad": "P1",
       "observacion": "En 1772 se conserva por defecto el plano de 1936: los planos de época están detrás de ?planos. Las capturas muestran tinta y edificios planos de 1936 dentro/fuera de la ciudad 3D.",
       "causa": "src/main.js, indicePlanos: desactivación intencional por omisión documentada como T25b.",
@@ -245,9 +245,10 @@
         8
       ],
       "criterio": "La revisión de geometría se basa en original.jpg; la entrega debe separar u ocultar la tinta anacrónica sin reintroducir el parche visual que motivó T25b.",
-      "pr_correccion": null,
+      "pr_correccion": 157,
       "subtareas": [
-        "T33j.8a"
+        "T33j.8a",
+        "T33j.8b"
       ]
     },
     {
