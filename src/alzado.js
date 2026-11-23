@@ -17,7 +17,7 @@ import { areaConSigno, recortar, recortarConvexo, cruces, estaDentro, sinColinea
 const SIN_TECHO = [0, 0, 0, CUBIERTA.PARED]
 const ALTO_MINIMO_CON_VANOS_M = 2
 const ESCALON_MINIMO_M = 0.03
-const TOLERANCIA_CUMBRE_M = 1e-3 // un vértice así de poco más allá de un quiebre no parte el faldón: lejos del origen, Float32
+const TOLERANCIA_CUMBRE_M = 2e-3 // un vértice así de poco más allá de un quiebre no parte el faldón: lejos del origen, Float32
 // deja vértices a décimas de milímetro de la cumbrera, y partir ahí dejaba una tira plana sin ancho (T33j.6d)
 export const PISO_PATIO_M = 0.4
 const SUBIDA_DE_HASTIAL_M = 0.3
@@ -59,7 +59,8 @@ function costado([nu, nv]) {
   return nu > HACIA_AFUERA ? 'der' : null
 }
 
-const daALaCalle = (lado, libres) => lado === 'frente' || Boolean(lado && libres[lado])
+// el frente da a la calle salvo que el lote diga que no (libres.frente === false: una casa de su época delante, T33j.6h)
+const daALaCalle = (lado, libres) => (lado === 'frente' ? libres.frente !== false : Boolean(lado && libres[lado]))
 
 /** Cuánto vuela el alero de un faldón: lo que dice el plan si cae hacia la calle; si no, nada. */
 const vueloDe = ({ plan, libres }, f) => (plan.alero > 0 && f.tan > 0 && !f.hueco && daALaCalle(costado(f.caida), libres) ? plan.alero : 0)
@@ -73,7 +74,17 @@ const largoConAlero = (casa, f) => largoFaldon(f) + vueloDe(casa, f) * Math.hypo
  */
 const quiebres = (f) => (f.hueco || !(f.tan > 0) ? [] : [0, ...(Number.isFinite(f.bajada) ? [f.bajada] : [])])
 
-const ALINEADO_M = 1e-3 // un vértice a menos de esto de la recta entre sus vecinos no hace esquina: 1 mm
+const ALINEADO_M = 2e-3 // un vértice a menos de esto de la recta entre sus vecinos no hace esquina: 2 mm (con margen
+// sobre el milímetro que mide la puerta de la fase 6, que lee las posiciones en Float32)
+const AREA_MINIMA_M2 = 2e-4 // un triángulo de techo con menos área no se dibuja: 2 cm², con margen sobre el de la puerta
+
+/** ¿El triángulo (puntos en 3D) tiene menos de ALINEADO_M de alto sobre su lado mayor, o menos de AREA_MINIMA_M2? */
+function esAguja(a, b, c) {
+  const [u, v] = [[b[0] - a[0], b[1] - a[1], b[2] - a[2]], [c[0] - a[0], c[1] - a[1], c[2] - a[2]]]
+  const doble = Math.hypot(u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0])
+  const lado = Math.max(Math.hypot(...u), Math.hypot(...v), Math.hypot(c[0] - b[0], c[1] - b[1], c[2] - b[2]))
+  return lado === 0 || doble / lado < ALINEADO_M || doble / 2 < AREA_MINIMA_M2
+}
 
 /**
  * El faldón recortado, partido en sus quiebres en lo que sigue plano y lo que cae, cada pedazo con su normal.
@@ -113,8 +124,11 @@ function tejados(casa, salida) {
       const [poligono, n] = [sinColineales(pedazo.poligono, ALINEADO_M), pedazo.n]
       if (poligono.length < 3) continue
       const indices = poligono.map(([u, v]) => salida.vertice(u, v, alto(u, v), n, pared, [...coordsFaldon(f, u, v), largo, cubierta]))
+      const en3d = poligono.map(([u, v]) => [u, alto(u, v), v])
       for (const [a, b, c] of ShapeUtils.triangulateShape(poligono.map(([u, v]) => new Vector2(u, v)), [])) {
-        salida.triangulo(indices[a], indices[b], indices[c], n)
+        // la triangulación puede juntar tres vértices que solo quedan alineados al sacar otras orejas: una aguja
+        // de menos de 1 mm de alto no se dibuja (su rendija es menor que eso, T33j.6d)
+        if (!esAguja(en3d[a], en3d[b], en3d[c])) salida.triangulo(indices[a], indices[b], indices[c], n)
       }
     }
   }
@@ -145,6 +159,7 @@ function muro(salida, p0, p1, abajo, arriba, n, pared0, pared1, pretil = null) {
  * del tejado), con su cara de arriba y la de abajo.
  */
 function alero(salida, f, p0, p1, n, vuelo) {
+  if (Math.hypot(p1[0] - p0[0], p1[1] - p0[1]) < ALINEADO_M) return // un tramo de pared sin largo no lleva alero
   const normal = normalFaldon(f)
   const largo = largoFaldon(f) + vuelo * Math.hypot(1, f.tan)
   const afuera = (p) => [p[0] + n[0] * vuelo, p[1] + n[1] * vuelo]
@@ -221,7 +236,22 @@ function tramoDePared({ casa, a, b, largo, n, aLaCalle }, t0, t1, salida) {
   if (pretil) muro(salida, p0, p1, techo, techo, [-n[0], -n[1]], lisa, lisa, [0, pretil])
   else if (arriba[0] > techo[0] + 1e-4 || arriba[1] > techo[1] + 1e-4) muro(salida, p0, p1, techo, arriba, [-n[0], -n[1]], lisa, lisa)
   const vuelo = f && aLaCalle ? vueloDe(casa, f) : 0
-  if (vuelo > 0 && f.caida[0] * n[0] + f.caida[1] * n[1] > HACIA_AFUERA) alero(salida, f, p0, p1, n, vuelo)
+  if (vuelo > 0 && f.caida[0] * n[0] + f.caida[1] * n[1] > HACIA_AFUERA && !hayVecinaAfuera(casa, p0, p1, n, vuelo)) {
+    alero(salida, f, p0, p1, n, vuelo)
+  }
+}
+
+/**
+ * ¿Hay otra casa de su época justo afuera de este tramo de pared, donde iría el alero? (`casa.ocupado(u, v)`, en el
+ * marco del lote; T33j.6h): el marco y sus lados libres son de vectorizar, y la fase 5 movió casas.
+ */
+function hayVecinaAfuera(casa, p0, p1, n, vuelo) {
+  if (!casa.ocupado) return false
+  for (const t of [0.02, 0.1, 0.5, 0.9, 0.98]) {
+    const [u, v] = mezcla(p0, p1, t)
+    for (const d of [0.1, vuelo]) if (casa.ocupado(u + n[0] * d, v + n[1] * d)) return true
+  }
+  return false
 }
 
 /**
@@ -266,8 +296,8 @@ function escalon({ anillo, plan, f, n }, p0, p1, salida) {
  * Levanta una casa. `anillo`: su huella en el marco del lote; `plan`: planDeTecho(); `libres`: qué
  * costados dan a la calle además del frente ({ izq, der, fondo }).
  */
-export function alzarCasa({ anillo, plan, libres = {} }, salida) {
-  const casa = { anillo, plan, libres }
+export function alzarCasa({ anillo, plan, libres = {}, ocupado = null }, salida) {
+  const casa = { anillo, plan, libres, ocupado }
   tejados(casa, salida)
   paredes(casa, salida)
   escalones(casa, salida)

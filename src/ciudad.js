@@ -30,6 +30,7 @@ import { alzarCasa } from './alzado.js'
 import { leerMarcos, planDeAlas, esDePatio } from './alas.js'
 
 export const SIN_TOPE = 255 // en la parte "vuelos" del pak: el alero de esa casa no tiene tope
+const CERCA_M = 2 // una vecina a más de esto de la huella no queda donde iría el alero (el más largo, 0,8 m)
 export const TOLERANCIA_HUELLA_M = 0.6 // los dientes del trazado a píxeles que se le quitan a cada huella
 const A_LA_LINEA_M = 1.5 // los vértices de la huella a menos de esto de la línea de fachada se llevan a ella
 const SONDAS_M = [2, 4] // a qué distancia de cada lado se mira si hay calle o hay vecino (las calles miden 5 m o más)
@@ -83,7 +84,7 @@ function leerCasas({ vertices, techos, vida = null, historia = null, marcos = nu
  * Qué parte de lo que hay justo afuera de cada lado del rectángulo está sin casas (0..1): los lados
  * van en orden v0, u1, v1, u0, con la normal hacia afuera.
  */
-function ladosLibres(rect, indice, propia) {
+function ladosLibres(rect, indice, propia, cuenta = null) {
   const { u, v, esquinas } = rect
   const normales = [[-v[0], -v[1]], u, v, [-u[0], -u[1]]]
   return normales.map((n, k) => {
@@ -91,7 +92,7 @@ function ladosLibres(rect, indice, propia) {
     let libres = 0
     for (const t of SONDAS_A_LO_LARGO) {
       for (const d of SONDAS_M) {
-        if (!indice.ocupado(a[0] + (b[0] - a[0]) * t + n[0] * d, a[1] + (b[1] - a[1]) * t + n[1] * d, propia)) libres++
+        if (!indice.ocupado(a[0] + (b[0] - a[0]) * t + n[0] * d, a[1] + (b[1] - a[1]) * t + n[1] * d, propia, cuenta)) libres++
       }
     }
     return libres / (SONDAS_A_LO_LARGO.length * SONDAS_M.length)
@@ -197,7 +198,7 @@ export function alinearHuella(anillo, ancho, fondo, calles = {}, { soloAdentro =
  * cuadra. Con alas, el rectángulo del lote es el del dato (sin los salientes de la huella, que cubren las
  * alas del borde); sin alas (casa simple, o la etapa en que la casa ya no es de patio), el de la huella entera.
  */
-function proyectarEnMarco(casa, conAlas = casa.marco.alas.length > 0) {
+function proyectarEnMarco(casa, conAlas = casa.marco.alas.length > 0, ahora = null) {
   const { eu, ev, calles, crujia } = casa.marco
   const alas = conAlas ? casa.marco.alas : []
   let { origen: o, ancho, fondo } = casa.marco
@@ -212,19 +213,32 @@ function proyectarEnMarco(casa, conAlas = casa.marco.alas.length > 0) {
     ancho = u1 - u0
     fondo = v1 - v0
   }
-  anillo = alinearHuella(anillo, ancho, fondo, calles, { soloAdentro: casa.vuelo !== Infinity })
+  // solo hacia adentro (T33j.6f/6h): la línea de la cuadra es la del marco de vectorizar, de antes de la alineación
+  // de la fase 5; correr hacia ella los vértices de detrás adelantaba el techo sobre la calle o sobre la vecina
+  anillo = alinearHuella(anillo, ancho, fondo, calles, { soloAdentro: true })
+  // qué lados dan de verdad a la calle (T33j.6h): el dato dice cuáles, pero el marco es de vectorizar y la fase 5
+  // movió casas; un lado con una casa de su época delante no lleva alero
+  const libres = ahora ? libresDelMarco(o, eu, ev, ancho, fondo, calles, ahora) : calles
   return {
-    marco: { origen: o, eu, ev, ancho, fondo }, anillo, libres: calles, alas, crujia,
+    marco: { origen: o, eu, ev, ancho, fondo }, anillo, libres, alas, crujia,
     lleno: Math.min(1, Math.abs(areaConSigno(anillo)) / (ancho * fondo)),
   }
 }
 
+/** Los lados del marco (frente, der, fondo, izq) que dan a la calle: libres de casas de su época (`ahora`). */
+function libresDelMarco(o, eu, ev, ancho, fondo, calles, { indice, numero, cuenta }) {
+  const p = (u, v) => [o[0] + u * eu[0] + v * ev[0], o[1] + u * eu[1] + v * ev[1]]
+  const rect = { u: eu, v: ev, esquinas: [p(0, 0), p(ancho, 0), p(ancho, fondo), p(0, fondo)] }
+  const [frente, der, alFondo, izq] = ladosLibres(rect, indice, numero, cuenta).map((x) => x >= LADO_LIBRE)
+  return { frente, der: Boolean(calles.der) && der, fondo: Boolean(calles.fondo) && alFondo, izq: Boolean(calles.izq) && izq }
+}
+
 /** El frente y el marco del lote de una casa, con su huella en ese marco; null si no da un polígono. */
-function proyectar(casa, numero, indice) {
+function proyectar(casa, numero, indice, ahora = null) {
   if (casa.huella && casa.marco) {
-    const lote = proyectarEnMarco(casa)
+    const lote = proyectarEnMarco(casa, undefined, ahora)
     // para las etapas en que no es de patio, el rectángulo de la huella entera: el techo cubre también sus salientes
-    return lote && lote.alas.length ? { ...lote, entero: proyectarEnMarco(casa, false) } : lote
+    return lote && lote.alas.length ? { ...lote, entero: proyectarEnMarco(casa, false, ahora) } : lote
   }
   const rect = casa.huella && rectanguloMinimo(casa.huella)
   if (!rect || rect.area < 1e-6) return null
@@ -256,15 +270,63 @@ export function extruirTechos(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M 
   const casas = leerCasas(datos, coords, tolerancia)
   // las casas que mueren (las de la fundación) se enciman con las que vienen después: no cuentan como vecinas
   const indice = crearIndice(casas.map((c) => (c.muere === 0 ? c.huella : null)))
+  // todas las casas, para ver qué lados de un marco están libres de casas de su época (T33j.6h)
+  const todas = crearIndice(casas.map((c) => c.huella))
+  // ¿la casa n vive en algún momento del tramo de épocas [desde, hasta)?
+  const viveEn = (n, desde, hasta) => casas[n].nace < hasta && (casas[n].muere || Infinity) > desde
+  // las casas de la fundación (nacen en la época 0 y mueren) se enciman con lo que viene después: no son vecinas;
+  // las demás cuentan en el tramo en que conviven (revisión de #147)
+  const cuentaComoVecina = (n) => !(casas[n].nace === 0 && casas[n].muere > 0)
   const b = crearBuferes(Math.max(64, casas.length * VERTICES_POR_CASA))
+  // qué puntos alrededor de la huella (a 0,1 y 0,8 m de cada lado, a lo largo) están ocupados por las casas que
+  // cuenta(n) deja: el entorno donde puede ir un alero, como una cadena para comparar tramos de épocas
+  const entorno = (casa, numero, cuenta) => {
+    const h = casa.huella
+    const giro = areaConSigno(h) > 0 ? 1 : -1
+    let firma = ''
+    for (let k = 0; k < h.length; k++) {
+      const [p, q] = [h[k], h[(k + 1) % h.length]]
+      const largo = Math.hypot(q[0] - p[0], q[1] - p[1]) || 1
+      const n = [((q[1] - p[1]) / largo) * giro, (-(q[0] - p[0]) / largo) * giro]   // hacia afuera
+      for (const t of [0.1, 0.5, 0.9]) {
+        for (const d of [0.1, 0.8]) {
+          firma += todas.ocupado(p[0] + (q[0] - p[0]) * t + n[0] * d, p[1] + (q[1] - p[1]) * t + n[1] * d, numero, cuenta) ? '1' : '0'
+        }
+      }
+    }
+    return firma
+  }
   casas.forEach((casa, numero) => {
-    const lote = proyectar(casa, numero, indice)
-    if (!lote) return
+    if (!casa.huella) return
+    // las vecinas que pueden quedar donde iría un alero, y las épocas en que nacen o mueren: cada etapa se parte ahí,
+    // para que la casa vuele donde, en ese tramo de épocas, no hay otra (revisión de #147)
+    const xs = casa.huella.map((p) => p[0]), zs = casa.huella.map((p) => p[1])
+    const vecinas = [...todas.cerca(Math.min(...xs) - CERCA_M, Math.min(...zs) - CERCA_M, Math.max(...xs) + CERCA_M, Math.max(...zs) + CERCA_M)]
+      .filter((n) => n !== numero && cuentaComoVecina(n))
     for (const etapa of casa.etapas) {
-      const suyo = loteDeEtapa(casa, etapa, lote)
-      if (suyo) alzarCasa({ anillo: suyo.anillo, plan: planDeEtapa(casa, etapa, suyo), libres: suyo.libres }, escritor(b, casa, etapa, suyo.marco))
+      const fin = etapa.muere || Infinity
+      const cortes = new Set([etapa.nace])
+      for (const n of vecinas) for (const e of [casas[n].nace, casas[n].muere]) if (e > etapa.nace && e < fin) cortes.add(e)
+      // un corte solo cuenta si cambia lo que hay alrededor de la casa (los puntos donde iría un alero): los tramos
+      // seguidos con el mismo entorno se juntan y no duplican geometría
+      const ordenados = [...cortes].sort((a, b) => a - b)
+      const firmas = ordenados.map((desde, k) => entorno(casa, numero, (n) => viveEn(n, desde, ordenados[k + 1] ?? fin) && cuentaComoVecina(n)))
+      const bordes = ordenados.filter((_, k) => k === 0 || firmas[k] !== firmas[k - 1])
+      bordes.forEach((desde, k) => {
+        const hasta = bordes[k + 1] ?? fin
+        const cuenta = (n) => viveEn(n, desde, hasta) && cuentaComoVecina(n)
+        const lote = proyectar(casa, numero, indice, { indice: todas, numero, cuenta })
+        const suyo = lote && loteDeEtapa(casa, etapa, lote)
+        if (!suyo) return
+        const tramo = { ...etapa, nace: desde, muere: hasta === Infinity ? 0 : hasta }
+        const { origen: o, eu, ev } = suyo.marco
+        // otra casa del tramo en un punto del marco del lote: ahí no vuela el alero (T33j.6h)
+        const ocupado = (u, v) => todas.ocupado(o[0] + u * eu[0] + v * ev[0], o[1] + u * eu[1] + v * ev[1], numero, cuenta)
+        alzarCasa({ anillo: suyo.anillo, plan: planDeEtapa(casa, tramo, suyo), libres: suyo.libres, ocupado }, escritor(b, casa, tramo, suyo.marco))
+      })
     }
   })
+
   const salida = {}
   for (const [nombre, tamaño] of Object.entries(CAMPOS)) salida[nombre] = b[nombre].slice(0, b.vertices * tamaño)
   const indices = b.indices.subarray(0, b.triangulos * 3)

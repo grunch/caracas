@@ -491,6 +491,24 @@ describe('extruirTechos: sin triángulos degenerados (T33j.6d)', () => {
   })
 })
 
+// la casa 32751 de la ciudad de 1772, como viene en el pak (datos con T33j.6g): su triangulación armaba agujas
+const CASA_32751 = {
+  vertices: Float32Array.from([7849, 5712.293, 7848.825, 5712.468, 7848, 5718.442, 7848, 5720.293, 7847.703, 5720.59, 7847, 5725.681,
+    7847, 5728.293, 7846.581, 5728.712, 7844.215, 5745.844, 7862.182, 5749.134, 7869.934, 5712.314, 7868.556, 5712, 7866.707, 5712,
+    7862.706, 5710.666, 7855.398, 5709, 7853.707, 5709, 7853.208, 5708.501, 7851.011, 5708, 7848.455, 5708, 7848.324, 5708.652,
+    7849.324, 5708.854, 7849, 5711.202]),
+  techos: Uint32Array.from([0, 22, 1, 32478]), vida: Uint32Array.from([17]), historia: Uint8Array.from([16, 16, 16, 16, 17, 17]),
+  marcos: Float32Array.from([0, 7850.0498046875, 5708.33984375, 0.9757099747657776, 0.21908999979496002, 20, 39, 6, 14.51, 0, 0]),
+  alas: Float32Array.from([]), vuelos: Uint8Array.from([66]),
+}
+
+describe('extruirTechos: ninguna aguja, tampoco las que arma la triangulación (T33j.6d)', () => {
+  test('la casa 32751 de la ciudad de 1772, donde está, no deja triángulos de menos de 1 mm de alto', () => {
+    const plaza = { aMundo: (px, py) => ({ x: (px - 8968.2) * METRO, z: (py - 6839.0) * METRO }) }
+    sinAgujas(extruirTechos(CASA_32751, plaza))
+  })
+})
+
 function sinAgujas(g) {
   {
     const p = (i) => [g.posiciones[i * 3], g.posiciones[i * 3 + 1], g.posiciones[i * 3 + 2]]
@@ -526,5 +544,74 @@ describe('alinearHuella: solo hacia adentro (T33j.6f)', () => {
     const anillo = [[0.5, 0], [10, 0], [10.4, 12], [0.5, 12]]
     expect(alinearHuella(anillo, 10, 12, { izq: true, der: true }, { soloAdentro: true }))
       .toEqual([[0.5, 0], [10, 0], [10, 12], [0.5, 12]])
+  })
+})
+
+describe('extruirTechos: el techo no se adelanta a la línea de la cuadra (T33j.6h)', () => {
+  test('una casa con marco cuyo frente queda 1 m detrás de la línea no lleva el techo hasta ella', () => {
+    // el marco pone la línea de fachada en z = 0; la casa empieza en z = 1 (sin tope de vuelo)
+    const datos = {
+      ...ciudadDe([{ puntos: rect(0, 1, 10, 14), semilla: 5, estilo: REPUBLICANO }]),
+      marcos: Float32Array.from([0, 0, 0, 1, 0, 20, 28, 0, 14, 0, 0]), alas: Float32Array.from([]),
+    }
+    const tejas = vertices(extruirTechos(datos, coords)).filter((v) => v.cubierta === CUBIERTA.TEJA)
+    expect(tejas.length).toBeGreaterThan(0)
+    expect(Math.min(...tejas.map((v) => v.z))).toBeGreaterThanOrEqual(1 - 1e-6)
+  })
+})
+
+describe('extruirTechos: el alero solo sale hacia un lado libre (T33j.6h)', () => {
+  test('el frente de una casa con marco que da a otra casa de su época no lleva alero sobre ella', () => {
+    // la casa 0 tiene el frente (marco) en z = 0 y, delante, la casa 1 (z < 0), que vive en las mismas épocas
+    const conVecina = {
+      ...ciudadDe([{ puntos: rect(0, 0, 10, 14), semilla: 5, nace: 1, muere: 2 }, { puntos: rect(0, -12, 10, 0), semilla: 6, nace: 1, muere: 2 }]),
+      marcos: Float32Array.from([0, 0, 0, 1, 0, 20, 28, 0, 14, 0, 0]), alas: Float32Array.from([]),
+    }
+    const sobre = (g) => vertices(g).filter((v) => v.semilla === 5 && v.cubierta !== CUBIERTA.PARED && v.z < -0.01)
+    expect(sobre(extruirTechos(conVecina, coords))).toHaveLength(0)
+    // si la de delante es de otra época (nace cuando la primera ya murió), el frente da a la calle y vuela
+    const otraEpoca = { ...conVecina, vida: Uint32Array.from([1 + 8 * 2, 3]) }
+    expect(sobre(extruirTechos(otraEpoca, coords)).length).toBeGreaterThan(0)
+  })
+})
+
+describe('extruirTechos: el alero tramo por tramo (T33j.6h)', () => {
+  test('una vecina de su época que tapa solo una parte del frente no recibe el alero (el tramo entero queda sin él)', () => {
+    // la casa 0 (frente en z = 0, de x = 0 a 20) y delante, solo de x = 12 a 20, la casa 1
+    const datos = {
+      ...ciudadDe([{ puntos: rect(0, 0, 20, 14), semilla: 5, nace: 1, muere: 2 }, { puntos: rect(12, -10, 20, 0), semilla: 6, nace: 1, muere: 2 }]),
+      marcos: Float32Array.from([0, 0, 0, 1, 0, 40, 28, 0, 14, 0, 0]), alas: Float32Array.from([]),
+    }
+    const vuela = vertices(extruirTechos(datos, coords)).filter((v) => v.semilla === 5 && v.cubierta !== CUBIERTA.PARED && v.z < -0.01)
+    expect(vuela.some((v) => v.x > 12.01)).toBe(false)
+  })
+})
+
+describe('extruirTechos: la vecina cuenta en las épocas en que vive (revisión de #147)', () => {
+  test('una casa que nace en 1772 y nunca muere vuela en 1772 aunque delante nazca una casa en 1843', () => {
+    const datos = {
+      ...ciudadDe([{ puntos: rect(0, 0, 10, 14), semilla: 5, nace: 1, muere: 0 }, { puntos: rect(0, -12, 10, 0), semilla: 6, nace: 2, muere: 0 }]),
+      marcos: Float32Array.from([0, 0, 0, 1, 0, 20, 28, 0, 14, 0, 0]), alas: Float32Array.from([]),
+    }
+    const g = extruirTechos(datos, coords)
+    const delFrente = vertices(g).map((v, k) => ({ ...v, nace: g.vidas[k * 2], muere: g.vidas[k * 2 + 1] }))
+      .filter((v) => v.semilla === 5 && v.cubierta !== CUBIERTA.PARED && v.z < -0.01)
+    // en 1772 (época 1) vuela; desde 1843 (época 2), con la vecina delante, no
+    expect(delFrente.some((v) => v.nace <= 1 && (v.muere === 0 || v.muere > 1))).toBe(true)
+    expect(delFrente.some((v) => v.nace <= 2 && (v.muere === 0 || v.muere > 2))).toBe(false)
+  })
+})
+
+describe('extruirTechos: una vecina que muere antes también cuenta mientras convive (revisión de #147)', () => {
+  test('la casa de 1772 que muere en 1843 tapa el alero de la de enfrente en 1772, y deja de taparlo después', () => {
+    const datos = {
+      ...ciudadDe([{ puntos: rect(0, 0, 10, 14), semilla: 5, nace: 1, muere: 0 }, { puntos: rect(0, -12, 10, 0), semilla: 6, nace: 1, muere: 2 }]),
+      marcos: Float32Array.from([0, 0, 0, 1, 0, 20, 28, 0, 14, 0, 0]), alas: Float32Array.from([]),
+    }
+    const g = extruirTechos(datos, coords)
+    const delFrente = vertices(g).map((v, k) => ({ ...v, nace: g.vidas[k * 2], muere: g.vidas[k * 2 + 1] }))
+      .filter((v) => v.semilla === 5 && v.cubierta !== CUBIERTA.PARED && v.z < -0.01)
+    expect(delFrente.some((v) => v.nace <= 1 && (v.muere === 0 || v.muere > 1))).toBe(false)
+    expect(delFrente.some((v) => v.nace <= 2 && (v.muere === 0 || v.muere > 2))).toBe(true)
   })
 })
