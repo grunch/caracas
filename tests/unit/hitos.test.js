@@ -278,7 +278,9 @@ describe('la malla', () => {
   test('el material: los dos shaders usan lo que comparten y cada material tiene su rama', () => {
     const m = crearMaterialHitos({ U })
     expect(m.vertexShader).toContain('vivoEn(aVida, epocaAqui(aHito.x))')
-    expect(m.vertexShader).toContain('max(sueloEn(aAncla.xy), sueloEn(aAncla.zw))')
+    // anclado en una terraza, cada vértice sobre su plano (src/relieve.js); si no, el más alto de su ancla y su apoyo
+    expect(m.vertexShader).toContain('float piso = pisoDeHito(aAncla.xy, aAncla.zw, position.xz);')
+    expect(m.uniforms.uTerrazaPendiente).toBe(U.uTerrazaPendiente)
     for (const v of Object.values(MAT)) if (v > 0) expect(m.fragmentShader).toContain(`es(${v.toFixed(1)})`)
     expect(() => crearMaterialHitos({ U: {} })).toThrow(/uniforms/)
   })

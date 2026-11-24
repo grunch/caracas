@@ -124,16 +124,37 @@ describe('terrazas: un hito grande asentado en la ladera (el convento de las Con
   const r = crearRelieve(ladera, hoja31, [terraza])
   const sin = crearRelieve(ladera, hoja31)
 
-  test('adentro el suelo es plano, a la altura del terreno en su centro', () => {
-    for (const [x, z] of [[-29, 0], [29, 0], [0, -19], [-29, 19], [12, -7]]) expect(r.alturaEn(x, z)).toBeCloseTo(r.alturaEn(0, 0), 6)
-    expect(r.alturaEn(0, 0)).toBeCloseTo(sin.alturaEn(0, 0), 6)
+  // una ladera que no es pareja: se empina hacia el oeste
+  const curva = { w: 31, h: 1, alturas: Float32Array.from({ length: 31 }, (_, i) => 100 - i - 0.05 * (i - 15) ** 2) }
+  const rc = crearRelieve(curva, hoja31, [terraza])
+  const sinC = crearRelieve(curva, hoja31)
+
+  test('en una ladera pareja la terraza no cambia el suelo: ni pozo cuesta arriba ni zócalo cuesta abajo (revisión de #164)', () => {
+    // con el piso horizontal a la altura del centro, el convento quedaba ~6 m bajo la calle en su esquina noroeste
+    for (let x = -45; x <= 45; x += 2.5) for (const z of [-25, -19, 0, 19, 25]) expect(r.alturaEn(x, z)).toBeCloseTo(sin.alturaEn(x, z), 6)
+  })
+
+  test('adentro el suelo es un plano: el que mejor se ajusta al terreno de su rectángulo', () => {
+    // plano: el punto medio de dos puntos es el promedio de sus alturas
+    for (const [[x1, z1], [x2, z2]] of [[[-29, 0], [29, 0]], [[-29, -19], [17, 19]], [[0, -19], [-20, 11]]]) {
+      expect(rc.alturaEn((x1 + x2) / 2, (z1 + z2) / 2)).toBeCloseTo((rc.alturaEn(x1, z1) + rc.alturaEn(x2, z2)) / 2, 6)
+    }
+    // el mejor ajuste: el terreno queda por encima y por debajo, y en promedio sobre él
+    const xs = Array.from({ length: 61 }, (_, i) => i - 30)
+    const resto = xs.map((x) => sinC.alturaEn(x, 0) - rc.alturaEn(x, 0))
+    expect(Math.max(...resto)).toBeGreaterThan(0.1); expect(Math.min(...resto)).toBeLessThan(-0.1)
+    expect(Math.abs(resto.reduce((a, b) => a + b) / resto.length)).toBeLessThan(0.05)
   })
 
   test('el talud va afuera, en la calle, y a TALUD_M el terreno es el de siempre', () => {
     expect(TALUD_M).toBeLessThanOrEqual(5) // la mitad de una calle de 1772: no llega a la casa de enfrente
-    for (const x of [-30 - TALUD_M, -40, 30 + TALUD_M, 45]) expect(r.alturaEn(x, 0)).toBeCloseTo(sin.alturaEn(x, 0), 6)
-    const medio = r.alturaEn(-30 - TALUD_M / 2, 0)
-    expect(medio).toBeGreaterThan(r.alturaEn(0, 0)); expect(medio).toBeLessThan(sin.alturaEn(-30 - TALUD_M / 2, 0))
+    for (const x of [-30 - TALUD_M, -40, 30 + TALUD_M, 45]) expect(rc.alturaEn(x, 0)).toBeCloseTo(sinC.alturaEn(x, 0), 6)
+    // a mitad del talud, entre el plano (prolongado) y el terreno
+    const plano = (x) => rc.alturaEn(0, 0) + ((rc.alturaEn(29, 0) - rc.alturaEn(-29, 0)) / 58) * x
+    for (const x of [-30 - TALUD_M / 2, 30 + TALUD_M / 2]) {
+      const [a, b] = [plano(x), sinC.alturaEn(x, 0)].sort((u, v) => u - v)
+      expect(rc.alturaEn(x, 0)).toBeGreaterThan(a); expect(rc.alturaEn(x, 0)).toBeLessThan(b)
+    }
   })
 
   test('las terrazas salen de los hitos que la piden, en metros del mundo y con su eje', () => {
@@ -142,7 +163,7 @@ describe('terrazas: un hito grande asentado en la ladera (el convento de las Con
     expect(terrazasDeHitos(hitos, coords)).toEqual([{ x: 10, z: 10, eje: [0.6, 0.8], medioA: 30, medioB: 20, vida: [1, 0] }])
   })
 
-  test('el shader aplana igual: hasta MAX_TERRAZAS en uniforms, con la altura del centro al cargar el relieve', () => {
+  test('el shader hace el mismo plano: hasta MAX_TERRAZAS en uniforms, con su altura al centro y su pendiente', () => {
     const U = uniformsRelieve(hoja31, [terraza])
     expect(U.uTerrazaMarco.value).toHaveLength(MAX_TERRAZAS)
     expect(U.uTerrazaMedida.value[0].toArray().slice(0, 2)).toEqual([30, 20])
@@ -150,6 +171,10 @@ describe('terrazas: un hito grande asentado en la ladera (el convento de las Con
     ponerRelieve(U, r)
     expect(U.uTerrazaMedida.value[0].z).toBeCloseTo(r.alturaEn(0, 0), 6)
     expect(U.uTerrazaMedida.value[0].w).toBe(1)
+    // la ladera sube 1 m cada 10 m hacia el oeste (−a): la pendiente en el marco de la terraza (a, b)
+    expect(U.uTerrazaPendiente.value[0].x).toBeCloseTo(-0.1, 6)
+    expect(U.uTerrazaPendiente.value[0].y).toBeCloseTo(0, 6)
+    expect(GLSL_RELIEVE).toContain('dot(vec2(a, b), uTerrazaPendiente[i])')
     expect(GLSL_RELIEVE).toContain('float relieveCrudo(vec2 xz)')
     expect(GLSL_RELIEVE).toMatch(/sueloEn\(vec2 xz\) \{\s*return conTerrazas\(xz, relieveCrudo\(xz\)\)/)
     expect(() => uniformsRelieve(hoja31, Array(MAX_TERRAZAS + 1).fill(terraza))).toThrow(/terrazas/)
@@ -160,6 +185,11 @@ describe('terrazas: un hito grande asentado en la ladera (el convento de las Con
     expect(U.uTerrazaVida.value[0].toArray()).toEqual([1, 0])
     expect(GLSL_TERRAZAS_TAPADAS).toContain('bool bajoUnHito(vec2 xz)')
     expect(GLSL_TERRAZAS_TAPADAS).toContain('vivoEn(uTerrazaVida[i], epocaAqui(length(xz)))')
+  })
+
+  test('un hito anclado en una terraza apoya cada vértice en su plano; los demás, en el más alto de su ancla y su apoyo', () => {
+    expect(GLSL_RELIEVE).toContain('float pisoDeHito(vec2 ancla, vec2 apoyo, vec2 xz)')
+    expect(GLSL_RELIEVE).toContain('return max(sueloEn(ancla), sueloEn(apoyo));')
   })
 
   test('UNIFORMS_RELIEVE nombra todo lo que lee GLSL_RELIEVE: los hitos y los árboles lo copian entero', () => {
