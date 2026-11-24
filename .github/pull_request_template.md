@@ -28,6 +28,12 @@ otras épocas) y por qué no se rompe. Si cambia algo que genera los datos, dilo
 <!-- Cada dato histórico nuevo o corregido (fechas, nombres, formas, colores) con su fuente y licencia, con
 enlace. Si el PR no toca datos históricos: «No aplica» y por qué. -->
 
+## Rendimiento
+
+<!-- Si tocas la carga, los workers, la geometría, los shaders, las texturas o los datos que se bajan, pega la
+salida de `node tests/e2e/medir-rendimiento.mjs` en `main` y en esta rama (CONTRIBUTING.md § Rendimiento), y di
+qué no mediste (sin `--gpu` no hay tiempo por cuadro). Si no: «No aplica» y por qué. -->
+
 ## Prueba a mano
 
 <!-- Obligatoria. Ver CONTRIBUTING.md § Prueba a mano: pasos numerados que alguien hizo a mano en el sitio,
