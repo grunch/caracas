@@ -7,6 +7,7 @@ import { casaAmarilla } from './casa-amarilla.js'
 import { capitolio } from './capitolio.js'
 import { palacioArzobispal } from './palacio-arzobispal.js'
 import { panteon } from './panteon.js'
+import { sanFrancisco } from './san-francisco.js'
 import { miraflores } from './miraflores.js'
 import { MAT } from './lienzo.js'
 import { TONO, losa, zocalo, verja, escalinata, cuerpo } from './piezas.js'
@@ -60,6 +61,7 @@ export const PARTES = Object.freeze({
   capitolio(p, medidas) { capitolio(p, medidas) },
   palacioArzobispal(p, medidas) { palacioArzobispal(p, medidas) },
   panteon(p, medidas) { panteon(p, medidas) },
+  sanFrancisco(p, medidas) { sanFrancisco(p, medidas) },
   miraflores(p) { miraflores(p) },
   /** Un cuerpo de edificio centrado en (a, b): paredes, tejado y, si se piden, ventanas altas en los dos largos. */
   cuerpo(p, { a = 0, b = 0, giro = 0, ventanas: v = null, ...medidas }) {
