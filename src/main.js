@@ -653,12 +653,16 @@ renderer.setAnimationLoop((t) => {
   }
   tic++
   if (pendientes <= 0) {
-    // la vista quedó quieta: si venía dibujándose con menos píxeles, un último cuadro con todos
+    // la vista quedó quieta: si venía dibujándose con menos píxeles, un último cuadro con todos, en este mismo
+    // callback (cambiar la proporción borra el lienzo: sin dibujar ahora, se vería un cuadro en blanco)
     const nitida = resolucion?.quieta() ?? null
-    if (nitida !== null) { renderer.setPixelRatio(nitida); pedirCuadro(1); return }
-    // nadie pidió un cuadro: de paso, se sube a la GPU una baldosa de casas de las que todavía no se vieron
-    casas.subirUna(renderer)
-    return
+    if (nitida === null) {
+      // nadie pidió un cuadro: de paso, se sube a la GPU una baldosa de casas de las que todavía no se vieron
+      casas.subirUna(renderer)
+      return
+    }
+    renderer.setPixelRatio(nitida)
+    pendientes = 1
   }
   pendientes--
   if (resolucion) {
