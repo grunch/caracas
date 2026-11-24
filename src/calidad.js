@@ -6,7 +6,8 @@
 const LADO_CORTO_TELEFONO = 600
 const TEXTURA_COMPLETA = 8192
 const MEMORIA_MINIMA_GB = 4
-const PIXELES = Object.freeze({ completo: 2, liviano: 1.5 })
+const MEMORIA_MINIMO_GB = 2
+const PIXELES = Object.freeze({ completo: 2, liviano: 1.5, minimo: 1 })
 
 /**
  * ¿Va en modo liviano? `?liviano` lo fuerza y `?pesado` lo impide; si no, un teléfono (lado corto de la
@@ -20,6 +21,17 @@ export function esLiviano({ params, maxTextura, pantalla, memoria }) {
     (memoria ?? MEMORIA_MINIMA_GB) < MEMORIA_MINIMA_GB
 }
 
+/**
+ * ¿Va en el nivel mínimo? Por debajo del liviano, para equipos que no llegan: además de lo del liviano, sin
+ * sombras, un píxel por punto y un solo worker. `?minimo` lo fuerza y `?pesado` lo impide; si no, un equipo
+ * que declara 2 GB de memoria o menos.
+ */
+export function esMinimo({ params, memoria }) {
+  if (params.has('minimo')) return true
+  if (params.has('pesado')) return false
+  return (memoria ?? Infinity) <= MEMORIA_MINIMO_GB
+}
+
 const TRABAJADORES = Object.freeze({ completo: 4, liviano: 2 })
 
 /**
@@ -28,13 +40,13 @@ const TRABAJADORES = Object.freeze({ completo: 4, liviano: 2 })
  * liviano. Sin el dato de los núcleos, 2. Con el render por software (el CI, los E2E), uno solo: ahí dibujar
  * ya se lleva los núcleos.
  */
-export function cuantosTrabajadores({ nucleos, liviano, software = false }) {
-  if (software) return 1
+export function cuantosTrabajadores({ nucleos, liviano, software = false, minimo = false }) {
+  if (software || minimo) return 1
   const tope = liviano ? TRABAJADORES.liviano : TRABAJADORES.completo
   return Math.max(1, Math.min(tope, (Number.isFinite(nucleos) && nucleos > 0 ? nucleos : 3) - 1))
 }
 
 /** Píxeles de render por punto de pantalla: en un teléfono de 3×, dibujar a 3 es lo que más cuesta. */
-export function proporcionDePixeles({ dpr, liviano, captura = false }) {
-  return captura ? 1 : Math.min(dpr, liviano ? PIXELES.liviano : PIXELES.completo)
+export function proporcionDePixeles({ dpr, liviano, captura = false, minimo = false }) {
+  return captura ? 1 : Math.min(dpr, minimo ? PIXELES.minimo : liviano ? PIXELES.liviano : PIXELES.completo)
 }

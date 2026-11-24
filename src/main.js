@@ -41,7 +41,8 @@ import { leerCreditos } from './acerca.js'
 import { debeMostrarIntro, recordarIntro } from './intro.js'
 import { debeArrancar, esperaDeArranque, velocidadDeOla, vistaDeHoja, VISTA_CENTRO, DURACION_VUELO_S } from './arranque.js'
 import { accionDeTecla, movimientoDeTecla } from './controles.js'
-import { esLiviano, proporcionDePixeles, cuantosTrabajadores } from './calidad.js'
+import { esLiviano, esMinimo, proporcionDePixeles, cuantosTrabajadores } from './calidad.js'
+import { crearResolucionAdaptable } from './resolucion.js'
 import { crearModoAPie } from './a-pie-modo.js'
 import { hitosConPlanta } from './hitos/plantas.js'
 import { crearModoVolar } from './volar-modo.js'
@@ -98,8 +99,10 @@ const { hoja } = coords
 
 const renderer = new WebGLRenderer({ antialias: false, powerPreference: 'high-performance' })
 const maxTextura = renderer.capabilities.maxTextureSize
-const liviano = esLiviano({ params, maxTextura, pantalla: { ancho: screen.width, alto: screen.height }, memoria: navigator.deviceMemory })
-renderer.setPixelRatio(proporcionDePixeles({ dpr: devicePixelRatio, liviano, captura: params.has('capture') }))
+// el nivel mínimo (src/calidad.js) es el liviano y, además, sin sombras, un píxel por punto y un solo worker
+const minimo = esMinimo({ params, memoria: navigator.deviceMemory })
+const liviano = minimo || esLiviano({ params, maxTextura, pantalla: { ancho: screen.width, alto: screen.height }, memoria: navigator.deviceMemory })
+renderer.setPixelRatio(proporcionDePixeles({ dpr: devicePixelRatio, liviano, minimo, captura: params.has('capture') }))
 renderer.setSize(innerWidth, innerHeight)
 document.getElementById('view').appendChild(renderer.domElement)
 // la vista no tiene texto: su nombre accesible dice qué es y cómo se mueve (el resto, en #sobre y en el «Acerca»)
@@ -245,7 +248,7 @@ const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, tec
   return pedirCiudad({
     datos: datosCiudad, plano: meta.plano, crearTrabajador,
     // primero lo que se ve en la época con que abre el sitio; el resto, después
-    primera: PRIMERA_EPOCA, cuantos: cuantosTrabajadores({ nucleos: navigator.hardwareConcurrency, liviano, software: porSoftware }),
+    primera: PRIMERA_EPOCA, cuantos: cuantosTrabajadores({ nucleos: navigator.hardwareConcurrency, liviano, software: porSoftware, minimo }),
     alLlegar(baldosa) {
       casas.agregar(baldosa)
       olaMax = Math.max(olaMax, casas.alcance + 400)
@@ -586,7 +589,7 @@ if (params.has('vitrina')) {
 // --- la luz y el acabado: sombras arrojadas, contorno a tinta, bruma y grano de papel (src/acabado.js) ---
 const acabado = crearAcabado({
   renderer, scene, camera, U: ciudad.U,
-  ajustes: ajustesDeAcabado({ params, liviano, software: porSoftware, maxTextura }),
+  ajustes: ajustesDeAcabado({ params, liviano, software: porSoftware, maxTextura, minimo }),
   limite: { x0: hoja.x0, z0: hoja.z0, x1: hoja.x0 + hoja.ancho, z1: hoja.z0 + hoja.alto },
   vista: () => cam.now,
 })
@@ -598,6 +601,15 @@ const buscador = crearBuscador({
 })
 
 const reloj = new Timer()
+// si los cuadros salen lentos mientras la vista se mueve, se dibuja con menos píxeles; quieta, con todos
+// (src/resolucion.js). En las capturas y con render por software no: ahí importa que el cuadro sea el mismo
+const resolucion = params.has('capture') || porSoftware ? null
+  : crearResolucionAdaptable({ maxima: renderer.getPixelRatio(), minima: renderer.getPixelRatio() > 1 ? 1 : 0.75 })
+let tic = 0
+let ticDibujado = -2
+let racha = 0
+const RACHA_DE_MOVIMIENTO = 4
+let msDibujado = 0
 renderer.setAnimationLoop((t) => {
   reloj.update(t)
   const dt = pasoDeCuadro(reloj.getDelta(), porSoftware)
@@ -639,12 +651,27 @@ renderer.setAnimationLoop((t) => {
     ciudad.U.uHoy.value = acercar(ciudad.U.uHoy.value, hoyObjetivo, dt / DURACION_HOY_S)
     pedirCuadro(2)
   }
+  tic++
   if (pendientes <= 0) {
+    // la vista quedó quieta: si venía dibujándose con menos píxeles, un último cuadro con todos
+    const nitida = resolucion?.quieta() ?? null
+    if (nitida !== null) { renderer.setPixelRatio(nitida); pedirCuadro(1); return }
     // nadie pidió un cuadro: de paso, se sube a la GPU una baldosa de casas de las que todavía no se vieron
     casas.subirUna(renderer)
     return
   }
   pendientes--
+  if (resolucion) {
+    // varios cuadros seguidos: la vista se mueve, y lo que tardó el anterior dice si el equipo llega (un par de
+    // cuadros sueltos, como los que siguen a una textura que llega o al cuadro nítido de la vista quieta, no cuentan)
+    const ahora = performance.now()
+    racha = tic - ticDibujado === 1 ? racha + 1 : 0
+    // (mientras llega la ciudad no se mide: ahí los cuadros lentos son de la carga, no de dibujar)
+    const cambio = casasListas && racha >= RACHA_DE_MOVIMIENTO ? resolucion.cuadro(ahora - msDibujado) : null
+    if (cambio !== null) renderer.setPixelRatio(cambio)
+    ticDibujado = tic
+    msDibujado = ahora
+  }
   buscador.dibujar() // el alfiler del buscador sigue a su punto del terreno
   // a pie, lo que se mira es donde está el caminante
   const enRecorrido = aPie.activo || enCoche.activo || enAvion.activo
@@ -697,7 +724,8 @@ window.lab = {
   get calles() { return rotulos },
   get lineaDeTiempo() { return lineaDeTiempo },
   get planos() { return planos },
-  planoBase, liviano,
+  planoBase, liviano, minimo,
+  get resolucion() { return resolucion },
   get visorPlano() { return visorPlano },
 }
 window.lab.buscador = buscador
