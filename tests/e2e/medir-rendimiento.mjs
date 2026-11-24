@@ -53,11 +53,14 @@ const hito = async (nombre, condicion) => {
   await pagina.waitForFunction(condicion, null, { timeout: ESPERA_MS, polling: 50 })
   hitos[nombre] = Date.now() - t0
 }
-await hito('listo', () => window.lab?.ready === true)
-// las casas: la señal nueva (window.lab.casasListas) o, antes de ella, la malla con el atributo de los techos
-await hito('casas', () => window.lab.casasListas ?? window.lab.scene.children.some((m) => m.isMesh && m.geometry.hasAttribute('aTecho')))
-await hito('lineaDeTiempo', () => Boolean(window.lab.lineaDeTiempo))
-await hito('arboles', () => Boolean(window.lab.arboles))
+// todos a la vez: cada hito anota cuándo llegó él, no cuándo terminó de esperarse al anterior
+await Promise.all([
+  hito('listo', () => window.lab?.ready === true),
+  // las casas: la señal nueva (window.lab.casasListas) o, antes de ella, la malla con el atributo de los techos
+  hito('casas', () => window.lab?.ready && (window.lab.casasListas ?? window.lab.scene.children.some((m) => m.isMesh && m.geometry.hasAttribute('aTecho')))),
+  hito('lineaDeTiempo', () => Boolean(window.lab?.lineaDeTiempo)),
+  hito('arboles', () => Boolean(window.lab?.arboles)),
+])
 await pagina.waitForTimeout(QUIETO_MS)
 
 const alAbrir = resumirPedidos([...pedidos.values()], url)
