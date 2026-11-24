@@ -13,7 +13,7 @@ test('el visor arranca y expone window.lab', async ({ page }) => {
 test('no hay botón para levantar o acostar la ciudad, ni Espacio lo hace: se levanta sola al abrir la página', async ({ page }) => {
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
-  await page.waitForFunction(() => window.lab.scene.children.some((m) => m.isMesh && m.geometry.hasAttribute('aTecho')))
+  await page.waitForFunction(() => window.lab.casasListas === true)
   await expect(page.locator('#alzar')).toHaveCount(0)
   await expect(page.locator('#botones')).not.toContainText(/Levantar|Acostar/)
   await page.locator('canvas').click({ position: { x: 20, y: 20 } })
@@ -182,8 +182,8 @@ test('el material de la ciudad compila con las fachadas, en tinta y en color', a
   const dosCuadros = () => page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
   if (await hayDato(page, 'datos/ciudad.pak', 'octet-stream')) {
     // con la ciudad: sus paredes traen dónde está cada punto de la pared (aPared) y sus techos, el faldón (aTecho)
-    await page.waitForFunction(() => window.lab.scene.children.some((m) => m.geometry?.attributes?.aPared?.itemSize === 3
-      && m.geometry.attributes.aTecho?.itemSize === 4), null, { timeout: 60000 })
+    await page.waitForFunction(() => window.lab.casasListas && window.lab.casas.baldosas.every(({ malla }) =>
+      malla.geometry.attributes.aPared.itemSize === 3 && malla.geometry.attributes.aTecho.itemSize === 4), null, { timeout: 60000 })
   }
   await page.evaluate(() => window.lab.pedirCuadro(4))
   await dosCuadros()

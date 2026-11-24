@@ -28,6 +28,13 @@ const MUEVEN_LA_SOMBRA = Object.freeze(['uOla', 'uOlaEpoca', 'uEpocaDe', 'uEpoca
 const tiraSombra = (o) => o.isMesh && o.castShadow && Boolean(o.customDepthMaterial)
 
 /**
+ * Con qué se dibuja una malla en el mapa de sombras: su material de profundidad. Si su material es un array
+ * (las baldosas de casas, que dibujan solo los grupos de su geometría: src/casas.js), otro array igual de
+ * largo: así en el mapa también se dibujan solo esos grupos.
+ */
+export const materialDeSombraDe = (o) => (Array.isArray(o.material) ? o.material.map(() => o.customDepthMaterial) : o.customDepthMaterial)
+
+/**
  * Quién tira sombra entre los hijos visibles de la escena: una malla con `castShadow` y `customDepthMaterial`,
  * o las piezas así de un grupo (la avioneta, src/volar-modo.js). `ocultos`: lo que se esconde en la pasada.
  * `pose`: la posición y el giro de lo que tira (si cambia, el mapa de sombras se rehace).
@@ -128,7 +135,7 @@ export function crearAcabado({ renderer, scene, camera, U, ajustes, limite, vist
     const estado = `${firma}|${tiran.length}|${reparto.pose}|${U.tRelieve?.value?.uuid}|${MUEVEN_LA_SOMBRA.map((k) => U[k]?.value).join(',')}`
     if (estado === sombras.estado) return
     sombras.estado = estado
-    for (const [o] of tiran) o.material = o.customDepthMaterial
+    for (const [o] of tiran) o.material = materialDeSombraDe(o)
     for (const o of ocultos) o.visible = false
     const fondo = scene.background
     scene.background = null

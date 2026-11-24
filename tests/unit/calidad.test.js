@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { esLiviano, proporcionDePixeles } from '../../src/calidad.js'
+import { esLiviano, proporcionDePixeles, cuantosTrabajadores } from '../../src/calidad.js'
 
 const equipo = (cambios = {}) => ({ params: new URLSearchParams(''), maxTextura: 16384, pantalla: { ancho: 1440, alto: 900 }, memoria: 8, ...cambios })
 
@@ -33,5 +33,24 @@ describe('proporcionDePixeles', () => {
 
   test('las capturas van siempre a 1', () => {
     expect(proporcionDePixeles({ dpr: 2, liviano: false, captura: true })).toBe(1)
+  })
+})
+
+describe('cuantosTrabajadores', () => {
+  test('uno menos que los núcleos, hasta 4', () => {
+    expect(cuantosTrabajadores({ nucleos: 16, liviano: false })).toBe(4)
+    expect(cuantosTrabajadores({ nucleos: 4, liviano: false })).toBe(3)
+    expect(cuantosTrabajadores({ nucleos: 2, liviano: false })).toBe(1)
+  })
+  test('en un equipo liviano, hasta 2', () => {
+    expect(cuantosTrabajadores({ nucleos: 8, liviano: true })).toBe(2)
+  })
+  test('nunca menos de uno; sin el dato de los núcleos, 2', () => {
+    expect(cuantosTrabajadores({ nucleos: 1, liviano: false })).toBe(1)
+    expect(cuantosTrabajadores({ nucleos: undefined, liviano: false })).toBe(2)
+    expect(cuantosTrabajadores({ nucleos: 0, liviano: true })).toBe(2)
+  })
+  test('con el render por software, uno solo: dibujar ya se lleva los núcleos', () => {
+    expect(cuantosTrabajadores({ nucleos: 16, liviano: false, software: true })).toBe(1)
   })
 })

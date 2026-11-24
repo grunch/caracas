@@ -135,11 +135,9 @@ test('cada techo deja el id de su casa en el alfa del cuadro (de ahí el contorn
   const errores = await abrir(page)
   // El relieve llega antes que las casas: reproducirlo.
   await page.waitForFunction(() => window.lab.relieveU.tRelieve.value.image.width > 1)
-  const hayCasas = () => window.lab.scene.children.some((m) =>
-    m.isMesh && m.material === window.lab.ciudad.material && m.geometry.hasAttribute('aTecho'))
-  expect(await page.evaluate(hayCasas)).toBe(false)
+  expect(await page.evaluate(() => window.lab.casas.baldosas.length)).toBe(0)
   liberarCasas()
-  await page.waitForFunction(hayCasas)
+  await page.waitForFunction(() => window.lab.casasListas === true)
   const alfa = await page.evaluate(() => {
     const { renderer, acabado, cam, ciudad } = window.lab
     window.lab.levantar(true)

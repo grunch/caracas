@@ -59,11 +59,9 @@ const medida = await pagina.evaluate(() => {
     t.push(performance.now() - t0)
   }
   t.sort((a, b) => a - b)
-  let geometria = null
-  scene.traverse((o) => { if (o.geometry?.getAttribute?.('aTecho')) geometria = o.geometry })
   return {
     mediana: t[30], p90: t[54], dibujados: renderer.info.render.triangles, llamadas: renderer.info.render.calls,
-    ciudad: geometria ? geometria.index.count / 3 : null,
+    ciudad: window.lab.casas.cuenta.indices / 3,
   }
 })
 console.log(`centro a 1500 m: ${medida.mediana.toFixed(2)} ms/cuadro (p90 ${medida.p90.toFixed(2)}) · ${medida.dibujados} triángulos dibujados · ${medida.llamadas} llamadas · ciudad: ${medida.ciudad} triángulos`)
