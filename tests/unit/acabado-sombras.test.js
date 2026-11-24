@@ -55,6 +55,23 @@ describe('repartoDeSombra', () => {
     expect(movido).not.toBe(antes)
     expect(girado).not.toBe(movido)
   })
+
+  test('la pose cambia cuando un grupo de árboles pasa de cerca a lejos, aunque tire lo mismo (revisión de #180)', () => {
+    // Arrange: como src/arboles.js, una malla que tira sombra con dos hijas, una sola visible a la vez
+    const arboles = malla()
+    const cerca = malla()
+    const lejos = malla()
+    lejos.visible = false
+    arboles.add(cerca, lejos)
+    const deCerca = repartoDeSombra([arboles])
+    // Act
+    cerca.visible = false
+    lejos.visible = true
+    const deLejos = repartoDeSombra([arboles])
+    // Assert: tiran lo mismo, pero el mapa de sombras tiene que rehacerse
+    expect(deLejos.tiran).toEqual(deCerca.tiran)
+    expect(deLejos.pose).not.toBe(deCerca.pose)
+  })
 })
 
 describe('crearAvion y las sombras', () => {

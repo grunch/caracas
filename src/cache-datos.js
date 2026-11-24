@@ -53,19 +53,43 @@ export function clavesQueSobran(claves, huellas, raiz) {
   return claves.filter((clave) => !vigentes.has(clave))
 }
 
+/** El sha256 de los bytes de una respuesta, en hexadecimal (la respuesta queda sin leer). */
+export async function sha256Hex(respuesta) {
+  const bytes = await respuesta.clone().arrayBuffer()
+  return [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map((b) => b.toString(16).padStart(2, '0')).join('')
+}
+
 /**
- * El que atiende los pedidos. `caches`: la CacheStorage; `pedir`: fetch; `raiz`: el alcance del service worker.
+ * El que atiende los pedidos. `caches`: la CacheStorage; `pedir`: fetch; `raiz`: el alcance del service worker;
+ * `huellaDe(respuesta)`: el sha256 de sus bytes (para no guardar un dato bajo un sha que no es el suyo).
  * `responder(pedido)` devuelve la promesa de la respuesta, o null si ese pedido no es asunto suyo.
  */
-export function crearServidor({ caches, pedir, raiz }) {
+export function crearServidor({ caches, pedir, raiz, huellaDe = sha256Hex }) {
   let huellasPedidas = null
 
+  // si no se puede guardar o leer (la cuota llena, el almacenamiento bloqueado), lo bajado se entrega igual
+  // y lo guardado cuenta como que no está
   const guardar = async (nombre, clave, respuesta) => {
-    // si no se puede guardar (la cuota llena, el almacenamiento bloqueado), lo bajado se entrega igual
-    if (respuesta.ok) await (await caches.open(nombre)).put(clave, respuesta.clone()).catch(() => {})
+    if (respuesta.ok) await caches.open(nombre).then((cache) => cache.put(clave, respuesta.clone())).catch(() => {})
     return respuesta
   }
-  const guardado = async (nombre, clave) => (await caches.open(nombre)).match(clave)
+  const guardado = (nombre, clave) => caches.open(nombre).then((cache) => cache.match(clave)).catch(() => undefined)
+
+  /**
+   * Un dato se guarda bajo el sha del manifiesto solo si sus bytes son esos: durante una publicación a medias
+   * (o con la CDN sirviendo todavía el de antes) llega el archivo viejo, que se entrega pero no se guarda, y se
+   * vuelve a pedir la próxima vez.
+   */
+  async function guardarDato(clave, respuesta, sha) {
+    if (!respuesta.ok) return respuesta
+    const coincide = await huellaDe(respuesta).then((h) => h === sha, () => false)
+    return coincide ? guardar(CACHE_DATOS, clave, respuesta) : respuesta
+  }
+  async function datoGuardadoPrimero(pedido, ruta, huellas) {
+    const sha = huellas.get(ruta)
+    const clave = claveDeDato(ruta, sha, raiz)
+    return (await guardado(CACHE_DATOS, clave)) ?? guardarDato(clave, await pedir(pedido, { cache: 'no-cache' }), sha)
+  }
 
   /** De la red, y se guarda; si la red falla, lo guardado. */
   async function redPrimero(pedido, clave) {
@@ -116,10 +140,7 @@ export function crearServidor({ caches, pedir, raiz }) {
       if (clase === 'pagina') return redPrimero(pedido, url)
       if (clase === 'manifiesto') return redPrimero(pedido, url)
       if (clase === 'app') return guardadoPrimero(CACHE_APP, pedido, url)
-      if (clase === 'dato') {
-        const ruta = rutaEnElSitio(url, raiz)
-        return guardadoPrimero(CACHE_DATOS, pedido, claveDeDato(ruta, huellas.get(ruta), raiz), { cache: 'no-cache' })
-      }
+      if (clase === 'dato') return datoGuardadoPrimero(pedido, rutaEnElSitio(url, raiz), huellas)
       return null
     },
     /**
@@ -134,10 +155,8 @@ export function crearServidor({ caches, pedir, raiz }) {
         const clase = claseDePedido({ url }, { raiz, huellas })
         try {
           if (clase === 'app') await guardadoPrimero(CACHE_APP, url, url)
-          else if (clase === 'dato') {
-            const ruta = rutaEnElSitio(url, raiz)
-            await guardadoPrimero(CACHE_DATOS, url, claveDeDato(ruta, huellas.get(ruta), raiz), { cache: 'no-cache' })
-          } else continue
+          else if (clase === 'dato') await datoGuardadoPrimero(url, rutaEnElSitio(url, raiz), huellas)
+          else continue
           guardados++
         } catch { /* se guardará cuando se vuelva a pedir */ }
       }

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import {
-  CACHE_APP, CACHE_DATOS, huellasDelManifiesto, rutaEnElSitio, claveDeDato, claseDePedido, clavesQueSobran, crearServidor,
+  CACHE_APP, CACHE_DATOS, huellasDelManifiesto, rutaEnElSitio, claveDeDato, claseDePedido, clavesQueSobran, crearServidor, sha256Hex,
 } from '../../src/cache-datos.js'
 
 const raiz = 'https://caracas.city/'
@@ -77,6 +77,8 @@ function cachesFalsas() {
     async delete(nombre) { return todas.delete(nombre) },
   }
 }
+/** El sha de mentira de cada cuerpo publicado (el de verdad lo calcula sha256Hex sobre los bytes). */
+const huellaFalsa = async (r) => (r.cuerpo.startsWith('pak ') ? r.cuerpo.slice(4) : r.cuerpo === 'chico' ? 'bbb' : `sha de ${r.cuerpo}`)
 const respuesta = (cuerpo, ok = true) => ({ ok, cuerpo, clone() { return this }, async json() { return JSON.parse(cuerpo) } })
 const pedido = (ruta, extra = {}) => ({ url: new URL(ruta, raiz).href, method: 'GET', mode: 'cors', ...extra })
 
@@ -102,14 +104,14 @@ const publicado = (sha) => ({
 describe('crearServidor', () => {
   it('un dato se baja una vez (revalidando) y después sale de la caché', async () => {
     const red = redFalsa(publicado('aaa'))
-    const s = crearServidor({ caches: cachesFalsas(), pedir: red.pedir, raiz })
+    const s = crearServidor({ huellaDe: huellaFalsa, caches: cachesFalsas(), pedir: red.pedir, raiz })
     expect((await s.responder(pedido('datos/ciudad.pak'))).cuerpo).toBe('pak aaa')
     expect((await s.responder(pedido('datos/ciudad.pak'))).cuerpo).toBe('pak aaa')
     expect(red.pedidos).toEqual([['datos/manifiesto.json', 'no-cache'], ['datos/ciudad.pak', 'no-cache']])
   })
   it('el JS con hash se guarda para siempre', async () => {
     const red = redFalsa(publicado('aaa'))
-    const s = crearServidor({ caches: cachesFalsas(), pedir: red.pedir, raiz })
+    const s = crearServidor({ huellaDe: huellaFalsa, caches: cachesFalsas(), pedir: red.pedir, raiz })
     await s.responder(pedido('assets/main-abc.js'))
     await s.responder(pedido('assets/main-abc.js'))
     expect(red.pedidos.filter(([u]) => u.startsWith('assets/'))).toHaveLength(1)
@@ -117,7 +119,7 @@ describe('crearServidor', () => {
   it('lo que no es suyo devuelve null y no se guarda', async () => {
     const red = redFalsa(publicado('aaa'))
     const caches = cachesFalsas()
-    const s = crearServidor({ caches, pedir: red.pedir, raiz })
+    const s = crearServidor({ huellaDe: huellaFalsa, caches, pedir: red.pedir, raiz })
     expect(await s.responder(pedido('datos/desconocido.bin'))).toBe(null)
     expect(await s.responder({ url: 'https://nominatim.openstreetmap.org/search', method: 'GET', mode: 'cors' })).toBe(null)
     expect(caches.todas.get(CACHE_DATOS)?.size ?? 0).toBe(0)
@@ -127,23 +129,43 @@ describe('crearServidor', () => {
     const caches = cachesFalsas()
     const abrir = caches.open.bind(caches)
     caches.open = async (nombre) => ({ ...(await abrir(nombre)), async put() { throw new DOMException('lleno', 'QuotaExceededError') } })
-    const s = crearServidor({ caches, pedir: red.pedir, raiz })
+    const s = crearServidor({ huellaDe: huellaFalsa, caches, pedir: red.pedir, raiz })
     expect((await s.responder(pedido('', { mode: 'navigate' }))).cuerpo).toBe('<html>')
     expect((await s.responder(pedido('datos/ciudad.pak'))).cuerpo).toBe('pak aaa')
     expect((await s.responder(pedido('assets/main-abc.js'))).cuerpo).toBe('js')
+  })
+  it('si la caché ni siquiera se puede abrir, la red responde igual (revisión de #178)', async () => {
+    const red = redFalsa(publicado('aaa'))
+    const caches = { ...cachesFalsas(), async open() { throw new DOMException('lleno', 'QuotaExceededError') } }
+    const s = crearServidor({ huellaDe: huellaFalsa, caches, pedir: red.pedir, raiz })
+    expect((await s.responder(pedido('', { mode: 'navigate' }))).cuerpo).toBe('<html>')
+    expect((await s.responder(pedido('datos/ciudad.pak'))).cuerpo).toBe('pak aaa')
+    expect((await s.responder(pedido('assets/main-abc.js'))).cuerpo).toBe('js')
+  })
+  it('un dato cuyos bytes no son los del manifiesto (una publicación a medias) se entrega pero no se guarda (revisión de #178)', async () => {
+    const red = redFalsa({ ...publicado('aaa'), 'datos/ciudad.pak': 'pak viejo' })
+    const caches = cachesFalsas()
+    const s = crearServidor({ huellaDe: huellaFalsa, caches, pedir: red.pedir, raiz })
+    expect((await s.responder(pedido('datos/ciudad.pak'))).cuerpo).toBe('pak viejo')
+    expect(caches.todas.get(CACHE_DATOS)?.size ?? 0).toBe(0)
+    // cuando la publicación termina, el que corresponde se baja y se guarda
+    red.archivos['datos/ciudad.pak'] = 'pak aaa'
+    expect((await s.responder(pedido('datos/ciudad.pak'))).cuerpo).toBe('pak aaa')
+    expect(caches.todas.get(CACHE_DATOS).size).toBe(1)
+    expect(red.pedidos.filter(([u]) => u === 'datos/ciudad.pak')).toHaveLength(2)
   })
   it('una respuesta fallida no se guarda', async () => {
     const red = redFalsa({ ...publicado('aaa'), 'datos/ciudad.pak': undefined })
     delete red.archivos['datos/ciudad.pak']
     const caches = cachesFalsas()
-    const s = crearServidor({ caches, pedir: red.pedir, raiz })
+    const s = crearServidor({ huellaDe: huellaFalsa, caches, pedir: red.pedir, raiz })
     expect((await s.responder(pedido('datos/ciudad.pak'))).ok).toBe(false)
     expect(caches.todas.get(CACHE_DATOS).size).toBe(0)
   })
   it('después de publicar datos nuevos, la visita siguiente baja solo lo que cambió y borra lo viejo', async () => {
     const red = redFalsa(publicado('aaa'))
     const caches = cachesFalsas()
-    const s = crearServidor({ caches, pedir: red.pedir, raiz })
+    const s = crearServidor({ huellaDe: huellaFalsa, caches, pedir: red.pedir, raiz })
     await s.responder(pedido('', { mode: 'navigate' }))
     await s.responder(pedido('datos/ciudad.pak'))
     await s.responder(pedido('plano/chico.webp'))
@@ -159,7 +181,7 @@ describe('crearServidor', () => {
   })
   it('sin conexión, la página, el manifiesto y los datos salen de lo guardado', async () => {
     const red = redFalsa(publicado('aaa'))
-    const s = crearServidor({ caches: cachesFalsas(), pedir: red.pedir, raiz })
+    const s = crearServidor({ huellaDe: huellaFalsa, caches: cachesFalsas(), pedir: red.pedir, raiz })
     await s.responder(pedido('', { mode: 'navigate' }))
     await s.responder(pedido('datos/ciudad.pak'))
     red.caida = true
@@ -170,7 +192,7 @@ describe('crearServidor', () => {
   it('sin conexión y sin nada guardado, la página falla como fallaría sin service worker', async () => {
     const red = redFalsa(publicado('aaa'))
     red.caida = true
-    const s = crearServidor({ caches: cachesFalsas(), pedir: red.pedir, raiz })
+    const s = crearServidor({ huellaDe: huellaFalsa, caches: cachesFalsas(), pedir: red.pedir, raiz })
     await expect(s.responder(pedido('', { mode: 'navigate' }))).rejects.toThrow('sin conexión')
     // y sin manifiesto no se guarda ningún dato
     expect(await s.responder(pedido('datos/ciudad.pak'))).toBe(null)
@@ -178,7 +200,7 @@ describe('crearServidor', () => {
   it('guarda lo que la página bajó antes de que el service worker la tomara, y lo demás lo deja', async () => {
     const red = redFalsa(publicado('aaa'))
     const caches = cachesFalsas()
-    const s = crearServidor({ caches, pedir: red.pedir, raiz })
+    const s = crearServidor({ huellaDe: huellaFalsa, caches, pedir: red.pedir, raiz })
     const urls = ['datos/ciudad.pak', 'assets/main-abc.js', 'datos/desconocido.bin', 'https://nominatim.openstreetmap.org/search'].map((u) => new URL(u, raiz).href)
     expect(await s.guardarLoBajado(urls)).toBe(2)
     red.pedidos.length = 0
@@ -189,7 +211,7 @@ describe('crearServidor', () => {
   })
   it('si uno no se puede bajar, sigue con los demás', async () => {
     const red = redFalsa(publicado('aaa'))
-    const s = crearServidor({ caches: cachesFalsas(), pedir: red.pedir, raiz })
+    const s = crearServidor({ huellaDe: huellaFalsa, caches: cachesFalsas(), pedir: red.pedir, raiz })
     await s.huellas()
     const pedirDeVerdad = red.pedir.getMockImplementation()
     red.pedir.mockImplementation(async (p, o) => { if (String(p.url ?? p).includes('ciudad.pak')) throw new Error('se cortó'); return pedirDeVerdad(p, o) })
@@ -198,7 +220,15 @@ describe('crearServidor', () => {
   it('al activarse borra las cachés de versiones anteriores y deja las suyas y las ajenas', async () => {
     const caches = cachesFalsas()
     for (const n of ['caracas-app-v0', 'caracas-datos-v0', CACHE_APP, CACHE_DATOS, 'otra-cosa']) await caches.open(n)
-    await crearServidor({ caches, pedir: async () => respuesta('{}'), raiz }).borrarCachesViejas()
+    await crearServidor({ huellaDe: huellaFalsa, caches, pedir: async () => respuesta('{}'), raiz }).borrarCachesViejas()
     expect((await caches.keys()).sort()).toEqual([CACHE_APP, CACHE_DATOS, 'otra-cosa'].sort())
+  })
+})
+
+describe('sha256Hex', () => {
+  it('el sha256 de los bytes de la respuesta, en hexadecimal, sin consumirla', async () => {
+    const r = new Response('hola')
+    expect(await sha256Hex(r)).toBe('b221d9dbb083a7f33428d7c2a3c3198ae925614d70210e28716ccaa7cd4ddb79')
+    expect(await r.text()).toBe('hola')
   })
 })

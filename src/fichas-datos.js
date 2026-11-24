@@ -107,10 +107,13 @@ export const FICHAS = Object.freeze({
   },
   'san-francisco': {
     textos: [
-      [1, 'La iglesia del convento franciscano. El primer esquema de la ciudad, de 1578, ya nombra San Francisco.'],
-      [2, 'Una litografía de hacia 1845 muestra su portada barroca y, al lado, el frente bajo del convento.'],
-      [3, 'Templo VII en el plano de 1889; «Iglesia San Francisco» en el de 1936.'],
+      [1, 'La iglesia de la Inmaculada Concepción, del convento franciscano (el primer esquema de la ciudad, de 1578, ya nombra San Francisco). Reconstruida tras el terremoto de 1641 y reformada en 1745, luce una portada barroca de un solo portal con las tres esculturas genovesas de mármol de 1655 y un campanario de tres arcos en su costado oeste.'],
+      [2, 'Resistió en pie el terremoto de 1812. Aquí Bolívar recibió el título de Libertador en 1813 y se celebraron sus exequias en 1842. Una litografía de hacia 1845 muestra su portada barroca, el campanario oeste con chapitel de teja y, al lado, el frente bajo del convento.'],
+      [3, 'Templo VII en el plano de 1889. Entre 1887 y 1889 Juan Hurtado Manrique rehízo la fachada por encargo de Guzmán Blanco: sin campanario, con tres puertas, las estatuas de 1655 bajo un gran óculo y un remate de volutas y frontón curvo partido.'],
+      [5, 'En el plano de 1936, «Iglesia San Francisco», a cargo de los jesuitas desde 1922, junto a la Universidad Central.'],
     ],
+    hoy: 'la Iglesia de San Francisco (Monumento Histórico Nacional desde 1956), junto al Palacio de las Academias y la Ceiba de San Francisco.',
+    dudas: 'Los alzados laterales de 1772, los contrafuertes posteriores a 1812 y los colores de 1889 a 1936 son interpretativos; la portada de 1745 se lee en la litografía de hacia 1845. La restauración de Luis Malaussena (1953) es posterior al último mapa.',
   },
   'santa-capilla': {
     textos: [

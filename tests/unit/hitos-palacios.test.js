@@ -140,8 +140,9 @@ describe('los edificios civiles', () => {
   test('todo junto sigue siendo una malla liviana', () => {
     const d = construirHitos(HITOS, coords)
     // T41c añade cinco etapas de Casa Amarilla (<220 mil, con envolvente compartida); T41d, el Capitolio desde
-    // 1772 (~73 mil, con el cuerpo neoclásico compartido de 1889 a 1936). Siempre en el mismo draw call.
-    expect(d.indices.length / 3).toBeLessThan(450_000)
+    // 1772 (~73 mil, con el cuerpo neoclásico compartido de 1889 a 1936); T41g, San Francisco en tres tramos
+    // (~12,7 mil, sin interior). Siempre en el mismo draw call.
+    expect(d.indices.length / 3).toBeLessThan(465_000)
     expect(d.rangos.length).toBe(HITOS.length)
   }, 15_000)
 })
