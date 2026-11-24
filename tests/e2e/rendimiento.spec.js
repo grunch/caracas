@@ -31,11 +31,13 @@ test('con ?sintrabajador las casas se levantan en el hilo de la página y son la
     const { casas } = window.lab
     return { ...casas.cuenta, ids: casas.baldosas.map((b) => `${b.id}|${b.pase}`).sort() }
   }
-  await page.goto('/?sinintro')
+  // sin sombras, contorno ni grano: sin workers la página levanta las casas entre cuadro y cuadro, y con el
+  // render por software cada cuadro del acabado entero son segundos
+  await page.goto('/?sinintro&sombras=0&contorno=0&grano=0')
   await page.waitForFunction(() => window.lab?.casasListas === true, null, { timeout: 60000 })
   const conWorkers = await page.evaluate(cuenta)
   const antes = trabajadores.length
-  await page.goto('/?sinintro&sintrabajador')
+  await page.goto('/?sinintro&sintrabajador&sombras=0&contorno=0&grano=0')
   await page.waitForFunction(() => window.lab?.casasListas === true, null, { timeout: 180000 })
   expect(trabajadores.length).toBe(antes)
   expect(await page.evaluate(cuenta)).toEqual(conWorkers)
