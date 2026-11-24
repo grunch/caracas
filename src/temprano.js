@@ -8,6 +8,7 @@ export function pedirDato(url, { tempranos = globalThis.__temprano, pedir = (u) 
   const temprano = tempranos?.[url]
   if (!temprano) return pedir(url)
   delete tempranos[url]
-  // si el pedido temprano falló (se cortó la red), se intenta de nuevo
-  return temprano.catch(() => pedir(url))
+  // si el pedido temprano falló (se cortó la red) o el servidor dio un error pasajero (5xx: fetch no rechaza
+  // ante esos), se intenta una vez más; un 4xx queda como está
+  return temprano.then((r) => (r?.status >= 500 ? pedir(url) : r), () => pedir(url))
 }

@@ -174,7 +174,8 @@ const planoBase = crearPlanoPorNiveles({
 })
 async function cargarPlano() {
   await planoBase.pedir(0) // sin el primero no hay plano: queda la cuadrícula
-  await planoBase.pedir(NIVEL_CHICO).catch(() => {})
+  // si el chico falla, un cuadro más: con el render quieto, nadie volvería a mirar qué nivel pide la vista
+  await planoBase.pedir(NIVEL_CHICO).catch(() => pedirCuadro(3))
 }
 // (después de crear planoBase: llamarla antes fallaba sin avisar y la hoja quedaba con la cuadrícula)
 cargarPlano().catch(() => { /* todavía no hay escaneo procesado: queda la cuadrícula */ })
