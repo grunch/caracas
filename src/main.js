@@ -5,6 +5,7 @@ import {
 import { cargarPak } from './pak.js'
 import { pedirDato } from './temprano.js'
 import { crearMascara } from './mascaras.js'
+import { registrarServiceWorker, avisarLoBajado } from './registrar-sw.js'
 import { crearPlanoPorNiveles, nivelNecesario, NIVEL_CHICO, NIVEL_4K } from './plano-niveles.js'
 import { crearCasas } from './casas.js'
 import { pedirCiudad } from './ciudad-pedido.js'
@@ -687,6 +688,12 @@ window.lab = {
   get visorPlano() { return visorPlano },
 }
 window.lab.buscador = buscador
+// la segunda visita no baja ni revalida lo que no cambió (src/sw.js); no frena nada del arranque
+window.lab.servicio = registrarServiceWorker({ contenedor: navigator.serviceWorker, construido: import.meta.env.PROD, params })
+// cuando ya llegó la ciudad, el service worker guarda lo que esta visita bajó antes de que él existiera
+Promise.all([window.lab.servicio, casasPedidas]).then(([estado]) => {
+  if (estado === 'registrado') return avisarLoBajado(navigator.serviceWorker, performance.getEntriesByType('resource').map((e) => e.name))
+}).catch(() => {})
 window.lab.acerca = acerca
 
 /**

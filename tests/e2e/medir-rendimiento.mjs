@@ -1,6 +1,7 @@
 // Medición de rendimiento del sitio (no es un test; specs/10-rendimiento.md):
 //   node tests/e2e/medir-rendimiento.mjs [url] [--gpu] [--liviano] [--salida archivo.json] [--estricto]
-// Mide el arranque (hitos, tareas largas del hilo principal), lo que se baja antes de tocar nada, la memoria
+// Mide el arranque (hitos, tareas largas del hilo principal), lo que se baja antes de tocar nada (y en una
+// segunda visita, si hay service worker), la memoria
 // (heap de JS y arreglos de geometría) y lo que se dibuja por cuadro en tres vistas. Imprime un JSON y la
 // comparación con tools/rendimiento/presupuesto.json. Conviene medir el sitio construido (`npm run build` y
 // `npx vite preview`) con los datos completos: el servidor de desarrollo sirve los módulos sin empaquetar.
@@ -25,6 +26,8 @@ const VISTAS = { // las de tests/e2e/capturas-valle.mjs
   cerca: { x: -150, z: 450, dist: 420, yaw: 0.5, pitch: 0.55 },
 }
 
+// para ver también lo que pide el service worker por su cuenta (Playwright lo trae detrás de esta variable)
+process.env.PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS ??= '1'
 const navegador = await chromium.launch({
   args: GPU ? ['--use-angle=gl', '--enable-gpu', '--ignore-gpu-blocklist', '--disable-gpu-vsync', '--disable-frame-rate-limit']
     : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
@@ -50,7 +53,10 @@ await pagina.addInitScript(() => {
 })
 
 const t0 = Date.now()
-await pagina.goto(`${url}?sinintro${bandera('--liviano') ? '&liviano' : ''}`)
+// la primera visita, sin service worker (?sinsw): si tomara la página a mitad de la carga, parte de los
+// pedidos pasarían por él y no se contarían acá
+const extra = bandera('--liviano') ? '&liviano' : ''
+await pagina.goto(`${url}?sinintro&sinsw${extra}`)
 const hitos = {}
 const hito = async (nombre, condicion) => {
   await pagina.waitForFunction(condicion, null, { timeout: ESPERA_MS, polling: 50 })
@@ -138,11 +144,37 @@ async function medirVista(vista) {
 }
 const cuadro = {}
 for (const [nombre, vista] of Object.entries(VISTAS)) cuadro[nombre] = await medirVista(vista)
+
+// la segunda visita: la misma página abierta de nuevo, con lo que el service worker guardó (src/sw.js);
+// null si el sitio no registró ninguno (el servidor de desarrollo)
+let segundaVisita = null
+const abrir = async () => {
+  await pagina.goto(`${url}?sinintro${extra}`)
+  await pagina.waitForFunction(() => window.lab?.ready && window.lab.arboles && (window.lab.casasListas ?? true), null, { timeout: ESPERA_MS })
+  await pagina.waitForTimeout(QUIETO_MS)
+}
+await abrir() // esta visita registra el service worker y le llena la caché
+const conServicio = await pagina.evaluate(async () => (await window.lab.servicio?.catch(() => null)) === 'registrado' && Boolean(await navigator.serviceWorker.ready))
+if (conServicio) {
+  // lo que de verdad viaja en la visita siguiente: lo que la página pide a la red (nada, si todo sale del
+  // service worker) más lo que el service worker pide por su cuenta (la página y el manifiesto, para revalidar)
+  const delServicio = []
+  const anotar = async (pedido) => {
+    if (!pedido.serviceWorker()) return
+    const tamaños = await pedido.sizes().catch(() => null)
+    delServicio.push({ url: pedido.url(), bytes: tamaños ? tamaños.responseHeadersSize + tamaños.responseBodySize : 0 })
+  }
+  contexto.on('requestfinished', anotar)
+  pedidos.clear()
+  await abrir()
+  contexto.off('requestfinished', anotar)
+  segundaVisita = { pagina: resumirPedidos([...pedidos.values()], url), servicio: resumirPedidos(delServicio, url) }
+}
 await navegador.close()
 
 const medicion = {
   url, gpu, conGpu: GPU, liviano: bandera('--liviano'), ventana: [1280, 800],
-  hitos, tareas, pedidos: alAbrir, memoria, cuadro,
+  hitos, tareas, pedidos: alAbrir, segundaVisita, memoria, cuadro,
 }
 const presupuesto = JSON.parse(readFileSync(new URL('../../tools/rendimiento/presupuesto.json', import.meta.url), 'utf8'))
 const filas = compararConPresupuesto(medicion, presupuesto)
