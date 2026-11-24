@@ -710,3 +710,45 @@ describe('paqueteDeGeometria: lo que viaja del worker a la página', () => {
     expect(g.boundingSphere.center.toArray()).toEqual(paquete.esfera.centro)
   })
 })
+
+describe('los atributos compactos de las casas', () => {
+  const crudo = extruirTechos(cuadra(COLONIAL), coords)
+  const paquete = paqueteDeGeometria(crudo)
+  const bytesPorVertice = Object.entries(ATRIBUTOS).reduce((s, [, a]) => s + a.n * a.Tipo.BYTES_PER_ELEMENT, 0)
+
+  test('69 bytes por vértice (eran 77)', () => {
+    expect(bytesPorVertice).toBe(69)
+  })
+  test('aInfo va en enteros de 16 bits: la distancia a la plaza en metros enteros; semilla, estilo y pisos, exactos', () => {
+    expect(paquete.atributos.aInfo).toBeInstanceOf(Uint16Array)
+    for (let v = 0; v < crudo.info.length; v += 4) {
+      expect(paquete.atributos.aInfo[v]).toBe(Math.round(crudo.info[v]))
+      for (const k of [1, 2, 3]) expect(paquete.atributos.aInfo[v + k]).toBe(crudo.info[v + k])
+    }
+  })
+  test('aPared y aTecho quedan exactos, en Float32: de su largo sale el sorteo de vanos y tejas', () => {
+    expect(paquete.atributos.aPared).toBe(crudo.paredes)
+    expect(paquete.atributos.aTecho).toBe(crudo.cubiertas)
+  })
+})
+
+describe('geometriaDePaquete: soltar los arreglos al subirlos a la GPU', () => {
+  const nuevo = () => paqueteDeGeometria(extruirTechos(cuadra(COLONIAL), coords))
+  test('con `soltar`, cada atributo y el índice sueltan su arreglo cuando three.js avisa que los subió; la cuenta queda', () => {
+    const g = geometriaDePaquete(nuevo(), { soltar: true })
+    const n = g.attributes.position.count
+    for (const a of [...Object.values(g.attributes), g.index]) {
+      expect(a.array).not.toBe(null)
+      a.onUploadCallback()
+      expect(a.array).toBe(null)
+    }
+    expect(g.attributes.position.count).toBe(n)
+    expect(g.index.count % 3).toBe(0)
+    expect(g.boundingSphere.radius).toBeGreaterThan(20)
+  })
+  test('sin `soltar`, los arreglos se quedan', () => {
+    const g = geometriaDePaquete(nuevo())
+    g.attributes.position.onUploadCallback()
+    expect(g.attributes.position.array).not.toBe(null)
+  })
+})

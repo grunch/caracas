@@ -94,11 +94,15 @@ export function geometriaHitos({ posiciones, normales, colores, hitos, vidas, an
   return g
 }
 
-/** La malla de los hitos; `U` son los uniforms de la ciudad (crearMaterialCiudad), compartidos. */
-export function crearHitos({ hitos = HITOS, coords, U }) {
+/**
+ * La malla de los hitos; `U` son los uniforms de la ciudad (crearMaterialCiudad), compartidos. `datos`: los
+ * arrays ya construidos (construirHitos; en el sitio llegan de un worker, src/hitos-pedido.js); si faltan, se
+ * construyen acá.
+ */
+export function crearHitos({ hitos = HITOS, coords, U, datos = null }) {
   const problemas = validarHitos(hitos, { ancho: coords.hoja.ancho / coords.metro, alto: coords.hoja.alto / coords.metro })
   if (problemas.length) throw new Error(`hitos: ${problemas.join('; ')}`)
-  const datos = construirHitos(hitos, coords)
+  datos ??= construirHitos(hitos, coords)
   const malla = new Mesh(geometriaHitos(datos), crearMaterialHitos({ U }))
   malla.customDepthMaterial = crearMaterialSombraHitos(malla.material)
   malla.castShadow = true

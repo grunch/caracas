@@ -132,7 +132,9 @@ test('acostada la ciudad, los hitos no se dibujan (la hoja queda limpia)', async
 })
 
 test('con la ciudad real, las casas genéricas no pisan la Plaza Bolívar', async ({ page }) => {
-  await listo(page)
+  // ?arreglos: que las casas conserven sus arreglos (si no, los sueltan al subirlos a la GPU y no se pueden leer)
+  await page.goto('/?sinintro&capture&arreglos')
+  await page.waitForFunction(() => window.lab?.ready === true)
   // la ciudad real viene con su línea de tiempo (el .pak se sirve sin tipo de contenido: no sirve de señal)
   const hay = await hayDato(page, 'datos/crece.json', 'json')
   test.skip(!hay, 'sin la ciudad real (datos fuera del repo)')
