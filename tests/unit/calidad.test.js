@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { esLiviano, proporcionDePixeles, cuantosTrabajadores } from '../../src/calidad.js'
+import { esLiviano, esMinimo, proporcionDePixeles, cuantosTrabajadores } from '../../src/calidad.js'
 
 const equipo = (cambios = {}) => ({ params: new URLSearchParams(''), maxTextura: 16384, pantalla: { ancho: 1440, alto: 900 }, memoria: 8, ...cambios })
 
@@ -52,5 +52,21 @@ describe('cuantosTrabajadores', () => {
   })
   test('con el render por software, uno solo: dibujar ya se lleva los núcleos', () => {
     expect(cuantosTrabajadores({ nucleos: 16, liviano: false, software: true })).toBe(1)
+  })
+})
+
+describe('el nivel mínimo', () => {
+  const sin = new URLSearchParams()
+  test('lo fuerza ?minimo, lo impide ?pesado, y si no lo decide la memoria que declara el equipo (2 GB o menos)', () => {
+    expect(esMinimo({ params: new URLSearchParams('minimo'), memoria: 8 })).toBe(true)
+    expect(esMinimo({ params: new URLSearchParams('pesado'), memoria: 1 })).toBe(false)
+    expect(esMinimo({ params: sin, memoria: 2 })).toBe(true)
+    expect(esMinimo({ params: sin, memoria: 4 })).toBe(false)
+    expect(esMinimo({ params: sin, memoria: undefined })).toBe(false) // Safari y Firefox no lo dicen
+  })
+  test('un píxel por punto y un solo worker', () => {
+    expect(proporcionDePixeles({ dpr: 3, liviano: true, minimo: true })).toBe(1)
+    expect(proporcionDePixeles({ dpr: 3, liviano: true, minimo: true, captura: true })).toBe(1)
+    expect(cuantosTrabajadores({ nucleos: 8, liviano: true, minimo: true })).toBe(1)
   })
 })

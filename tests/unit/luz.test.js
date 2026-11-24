@@ -192,6 +192,11 @@ describe('qué se prende del acabado', () => {
     expect(con('sombras=512', { software: true }).sombras).toBe(512)
   })
 
+  test('en el nivel mínimo no hay sombras, salvo que la página las pida; el contorno y el grano siguen', () => {
+    expect(con('', { minimo: true, liviano: true })).toEqual({ sombras: 0, contorno: true, grano: true })
+    expect(con('sombras=1024', { minimo: true }).sombras).toBe(1024)
+  })
+
   test('los parámetros apagan cada cosa', () => {
     expect(con('sombras=0').sombras).toBe(0)
     expect(con('contorno=0').contorno).toBe(false)
