@@ -133,9 +133,10 @@ const TAMAÑOS = Object.freeze({ completo: 4096, liviano: 2048 })
  * fija el lado del mapa (256…8192, también con render por software: así se prueban en CI);
  * `contorno=0` y `grano=0` apagan lo suyo.
  */
-export function ajustesDeAcabado({ params, liviano = false, software = false, maxTextura = 4096 }) {
+export function ajustesDeAcabado({ params, liviano = false, software = false, maxTextura = 4096, minimo = false }) {
   const pedido = params.get('sombras')
-  const porOmision = software ? 0 : liviano ? TAMAÑOS.liviano : TAMAÑOS.completo
+  // (en el nivel mínimo, src/calidad.js, tampoco hay sombras: es lo que más cuesta después de los píxeles)
+  const porOmision = software || minimo ? 0 : liviano ? TAMAÑOS.liviano : TAMAÑOS.completo
   const n = pedido === null || pedido === '' ? porOmision : Number(pedido)
   const sombras = Number.isFinite(n) && n >= 1 ? Math.min(maxTextura, 8192, Math.max(256, Math.round(n))) : 0
   return Object.freeze({ sombras, contorno: params.get('contorno') !== '0', grano: params.get('grano') !== '0' })

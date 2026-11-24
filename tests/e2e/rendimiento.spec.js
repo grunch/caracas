@@ -96,3 +96,16 @@ test('el plano grande no se baja al abrir: cada nivel se pide cuando la vista lo
   // más cerca que las teselas finas, el de 8192 no hace falta
   if (liviano || conTeselas) expect(pedidos).not.toContain('plano/medio.webp')
 })
+
+test('con ?minimo: un píxel por punto, sin sombras y un solo worker para las casas', async ({ page }) => {
+  const trabajadores = []
+  page.on('worker', (w) => trabajadores.push(w.url()))
+  await page.goto('/?sinintro&minimo')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  const estado = await page.evaluate(() => ({
+    minimo: window.lab.minimo, liviano: window.lab.liviano, pixeles: window.lab.renderer.getPixelRatio(), sombras: window.lab.acabado.estado.sombras,
+  }))
+  expect(estado).toEqual({ minimo: true, liviano: true, pixeles: 1, sombras: 0 })
+  await page.waitForFunction(() => window.lab.casasListas === true, null, { timeout: 60000 })
+  expect(trabajadores.filter((url) => url.includes('ciudad-trabajador'))).toHaveLength(1)
+})
