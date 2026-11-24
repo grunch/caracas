@@ -1,20 +1,33 @@
 /**
  * Los árboles del plano de 1936 y el monte del valle antes de la ciudad (datos/arboles.bin, ver
- * specs/02): una sola InstancedMesh, un árbol por instancia (copa low‑poly abollada + tronco), un draw
- * call para todos. Los del monte (silvestres) mueren cuando su lugar se urbaniza y solo se ven en color.
+ * specs/02): un árbol por instancia (copa low‑poly abollada + tronco). Los del monte (silvestres) mueren
+ * cuando su lugar se urbaniza y solo se ven en color.
+ * - Son 37 mil, y enteros (90 triángulos cada uno) pesaban más que todas las casas. Van repartidos en grupos
+ *   por baldosa de LADO_BALDOSA_ARBOLES_M y por vida (nace, muere, silvestre), y cada grupo tiene dos mallas
+ *   instanciadas que comparten sus instancias: la de cerca, con el árbol entero, y la de lejos, con la copa en
+ *   20 triángulos y sin tronco (a más de DIST_DETALLE_M un árbol mide pocos píxeles). `actualizar` prende, de
+ *   cada grupo, la que toca: ninguna si en la época que se mira no vive, o si es monte y se mira en tinta.
+ *   three.js saltea además los grupos que quedan fuera de la vista.
  * - Follaje en tres tonos (sombra, media tinta, luz) con el borde movido "como a mano"; en tinta, papel
  *   con la sombra rayada y el contorno a pluma (specs/04).
  * - Comparte con la ciudad los uniforms de tinta/color, la ola, las épocas y el relieve (ciudad.U): se
  *   apoyan en el suelo, suben con la misma ola y aparecen cuando nace su lugar.
  */
 import {
-  InstancedMesh, ShaderMaterial, IcosahedronGeometry, CylinderGeometry, BufferAttribute,
-  InstancedBufferAttribute, Matrix4,
+  InstancedMesh, ShaderMaterial, IcosahedronGeometry, CylinderGeometry, BufferAttribute, BufferGeometry,
+  InstancedBufferAttribute, Matrix4, Group, Sphere, Vector3,
 } from 'three'
+import { seVeEntre, esferaSobreRelieve, alturasBajo } from './baldosas.js'
+import { SIN_LINEA_DE_TIEMPO } from './epocas.js'
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
 import { GLSL_RELIEVE, UNIFORMS_RELIEVE } from './relieve.js'
 import { GLSL_EPOCAS } from './shader/epocas.js'
 import { GLSL_SOMBRA, UNIFORMS_DE_LUZ, uniformsDeLuz } from './shader/sombra.js'
+
+export const LADO_BALDOSA_ARBOLES_M = 2048
+export const DIST_DETALLE_M = 1200 // más lejos que esto, la copa simple (el fragment ya lo aplana desde ahí)
+const ALTO_DE_ARBOL = 3 // en radios: hasta dónde llega la copa más alta, con sus bultos
+const MARGEN_RELIEVE_M = 15
 
 const BYTES_POR_ARBOL = 8 // 4 × Uint16 LE: x, y (px del mosaico), radio (dm), vida (nace + 8·muere + 64·silvestre)
 const DM_POR_M = 10
@@ -68,6 +81,39 @@ function geometriaArbol() {
   const parte = (g, v) => g.setAttribute('aParte', new BufferAttribute(new Float32Array(g.attributes.position.count).fill(v), 1))
   for (const g of [copa, tronco]) g.deleteAttribute('uv')
   return mergeGeometries([parte(copa, 0), parte(tronco, 1)])
+}
+
+/** La copa sola, sin subdividir (20 triángulos): el árbol de lejos. */
+function geometriaArbolLejos() {
+  const copa = new IcosahedronGeometry(1, 0).scale(1, 0.85, 1).translate(0, 1.75, 0)
+  copa.deleteAttribute('uv')
+  return copa.setAttribute('aParte', new BufferAttribute(new Float32Array(copa.attributes.position.count), 1))
+}
+
+/**
+ * Los árboles agrupados por baldosa y por vida: [{ id, nace, muere, silvestre, indices }], en un orden
+ * estable. Los de un grupo se prenden y se apagan juntos.
+ */
+export function gruposDeArboles({ posiciones, nace, muere, silvestre }, lado = LADO_BALDOSA_ARBOLES_M) {
+  const porClave = new Map()
+  for (let k = 0; k < nace.length; k++) {
+    const i = Math.floor(posiciones[k * 2] / lado), j = Math.floor(posiciones[k * 2 + 1] / lado)
+    const id = `${i},${j}|${nace[k]}-${muere[k]}${silvestre[k] ? 's' : ''}`
+    const grupo = porClave.get(id)
+    if (grupo) grupo.indices.push(k)
+    else porClave.set(id, { id, nace: nace[k], muere: muere[k], silvestre: Boolean(silvestre[k]), indices: [k] })
+  }
+  return [...porClave.values()]
+}
+
+/**
+ * Qué malla de un grupo se dibuja: 'cerca', 'lejos' o null. `epocas`: de qué época a cuál va la ola; `color`:
+ * cuánto color hay (0 = tinta); `distancia`: metros de la cámara al borde del grupo.
+ */
+export function detalleDeGrupo({ nace, muere, silvestre }, { epocas, color, distancia }) {
+  if (!seVeEntre(nace, muere, epocas[0], epocas[1])) return null
+  if (silvestre && !(color > 0)) return null // el monte solo se ve en color
+  return distancia < DIST_DETALLE_M ? 'cerca' : 'lejos'
 }
 
 const VERTICE = /* glsl */ `
@@ -149,13 +195,23 @@ const FRAGMENTO = /* glsl */ `
     #include <colorspace_fragment>
   }`
 
-/** La malla de los árboles; `U` son los uniforms de la ciudad (crearMaterialCiudad), compartidos. */
+/** Una geometría con los atributos de `base` (compartidos, no copiados) y las instancias de un grupo. */
+function geometriaDeGrupo(base, arbol) {
+  const g = new BufferGeometry()
+  for (const [nombre, atributo] of Object.entries(base.attributes)) g.setAttribute(nombre, atributo)
+  if (base.index) g.setIndex(base.index)
+  return g.setAttribute('aArbol', arbol)
+}
+
+/**
+ * Los árboles: un grupo ('arboles') con dos mallas instanciadas por cada grupo de árboles (userData.grupos).
+ * `U` son los uniforms de la ciudad (crearMaterialCiudad), compartidos. El grupo lleva además `material` y
+ * `customDepthMaterial` (los de todas sus mallas), `count` (cuántos árboles) y `actualizar(...)`.
+ */
 export function crearArboles({ datos, coords, U }) {
-  const { posiciones, radios, nace, muere, semillas, silvestre } = instanciasArboles(datos, coords)
-  const geometria = geometriaArbol()
-  const arbol = new Float32Array(datos.n * 4)
-  for (let i = 0; i < datos.n; i++) arbol.set([nace[i], muere[i], semillas[i], silvestre[i]], i * 4)
-  geometria.setAttribute('aArbol', new InstancedBufferAttribute(arbol, 4))
+  const instancias = instanciasArboles(datos, coords)
+  const { posiciones, radios, nace, muere, semillas, silvestre } = instancias
+  const [entero, simple] = [geometriaArbol(), geometriaArbolLejos()]
 
   const comunes = ['uColor', 'uOla', 'uAnchoOla', 'uEpocaDe', 'uEpocaA', 'uOlaEpoca',
     ...UNIFORMS_RELIEVE]
@@ -164,19 +220,69 @@ export function crearArboles({ datos, coords, U }) {
   const luz = Object.fromEntries(UNIFORMS_DE_LUZ.filter((k) => U[k]).map((k) => [k, U[k]]))
   const uniforms = { ...uniformsDeLuz(), ...Object.fromEntries(comunes.map((k) => [k, U[k]])), ...luz }
   const material = new ShaderMaterial({ uniforms, vertexShader: VERTICE, fragmentShader: FRAGMENTO })
-  const malla = new InstancedMesh(geometria, material, datos.n)
   // vistos desde el sol (src/acabado.js): el mismo vértice, sin color
-  malla.customDepthMaterial = new ShaderMaterial({ uniforms, vertexShader: VERTICE, fragmentShader: 'void main() { gl_FragColor = vec4(1.0); }' })
-  malla.castShadow = true
+  const materialDeSombra = new ShaderMaterial({ uniforms, vertexShader: VERTICE, fragmentShader: 'void main() { gl_FragColor = vec4(1.0); }' })
+
+  const grupo = new Group()
+  grupo.name = 'arboles'
   const m = new Matrix4()
-  for (let i = 0; i < datos.n; i++) {
-    const r = radios[i]
-    malla.setMatrixAt(i, m.makeScale(r, r, r).setPosition(posiciones[i * 2], 0, posiciones[i * 2 + 1]))
+  const grupos = gruposDeArboles(instancias).map(({ indices, ...vida }) => {
+    const arbol = new InstancedBufferAttribute(new Float32Array(indices.length * 4), 4)
+    let [x0, x1, z0, z1, alto] = [Infinity, -Infinity, Infinity, -Infinity, 0]
+    const crear = (base, nombre) => {
+      const malla = new InstancedMesh(geometriaDeGrupo(base, arbol), material, indices.length)
+      malla.customDepthMaterial = materialDeSombra
+      malla.castShadow = true
+      malla.name = `arboles ${vida.id} · ${nombre}`
+      return malla
+    }
+    const cerca = crear(entero, 'cerca')
+    const lejos = crear(simple, 'lejos')
+    indices.forEach((k, n) => {
+      const [x, z, r] = [posiciones[k * 2], posiciones[k * 2 + 1], radios[k]]
+      arbol.array.set([nace[k], muere[k], semillas[k], silvestre[k]], n * 4)
+      cerca.setMatrixAt(n, m.makeScale(r, r, r).setPosition(x, 0, z))
+      x0 = Math.min(x0, x - r); x1 = Math.max(x1, x + r); z0 = Math.min(z0, z - r); z1 = Math.max(z1, z + r)
+      alto = Math.max(alto, r * ALTO_DE_ARBOL)
+    })
+    // las dos mallas comparten las instancias: una sola copia de las matrices
+    lejos.instanceMatrix = cerca.instanceMatrix
+    cerca.instanceMatrix.needsUpdate = true
+    // la esfera del grupo sobre la hoja lisa; `actualizar` la apoya en el relieve, donde el shader lo dibuja
+    const esfera = { centro: [(x0 + x1) / 2, alto / 2, (z0 + z1) / 2], radio: Math.hypot(x1 - x0, alto, z1 - z0) / 2 }
+    lejos.visible = false
+    grupo.add(cerca, lejos)
+    return { ...vida, cuantos: indices.length, cerca, lejos, esfera, apoyada: null }
+  })
+
+  let relieveVisto
+  const ojo = new Vector3()
+  /**
+   * Prende de cada grupo la malla que toca para lo que se mira (detalleDeGrupo). `camara`: la de la vista;
+   * `epocas`: [de, a]; `color`: uColor; `alturaEn(x, z)`: la altura a la que el shader sube el suelo (null: la
+   * hoja lisa). Devuelve cuántos árboles quedan de cerca y de lejos.
+   */
+  grupo.actualizar = ({ camara, epocas = [SIN_LINEA_DE_TIEMPO, SIN_LINEA_DE_TIEMPO], color = 0, alturaEn = null }) => {
+    ojo.setFromMatrixPosition(camara.matrixWorld)
+    const cuenta = { cerca: 0, lejos: 0 }
+    for (const g of grupos) {
+      if (!g.apoyada || alturaEn !== relieveVisto) {
+        const { yMin, yMax } = alturaEn ? alturasBajo(g.esfera, alturaEn) : { yMin: 0, yMax: 0 }
+        const e = esferaSobreRelieve(g.esfera, yMin, yMax, alturaEn ? MARGEN_RELIEVE_M : 0)
+        g.apoyada = new Sphere(new Vector3(...e.centro), e.radio)
+        g.cerca.boundingSphere = g.lejos.boundingSphere = g.apoyada
+      }
+      const detalle = detalleDeGrupo(g, { epocas, color, distancia: ojo.distanceTo(g.apoyada.center) - g.apoyada.radius })
+      g.cerca.visible = detalle === 'cerca'
+      g.lejos.visible = detalle === 'lejos'
+      if (detalle) cuenta[detalle] += g.cuantos
+    }
+    relieveVisto = alturaEn
+    return cuenta
   }
-  malla.instanceMatrix.needsUpdate = true
-  malla.frustumCulled = false // el relieve y la ola los mueven en el shader: la esfera de la CPU no sirve
-  malla.name = 'arboles'
-  return malla
+  Object.assign(grupo, { material, customDepthMaterial: materialDeSombra, castShadow: true, count: datos.n })
+  grupo.userData.grupos = grupos
+  return grupo
 }
 
 /** Descarga arboles.bin y arma la malla (null si el dato no está: los árboles son opcionales). */

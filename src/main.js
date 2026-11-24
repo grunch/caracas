@@ -669,6 +669,11 @@ renderer.setAnimationLoop((t) => {
     epoca: { de: uEpocaDe.value, a: uEpocaA.value, ola: uOlaEpoca.value, ancho: uAnchoOla.value },
     sube: (d) => hinchado(d, uOla.value, uAnchoOla.value),
   })
+  // de los árboles, lo que vive en la época que se mira, entero de cerca y simple de lejos (src/arboles.js)
+  arboles?.actualizar({
+    camara: camera, color: ciudad.U.uColor.value, alturaEn: relieve ? alturaDelTerreno : null,
+    epocas: [uOlaEpoca.value < OLA_EPOCA_MAX_M ? uEpocaDe.value : uEpocaA.value, uEpocaA.value],
+  })
   fichas.actualizar() // con la ficha abierta, sigue a la época que llega con la ola
   rotulos?.dibujar({ camera, dist: cam.now.dist, x: cam.now.x, z: cam.now.z, opacidad: ciudad.U.uHoy.value, ocupados })
   acabado.dibujar()
