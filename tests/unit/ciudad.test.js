@@ -1,5 +1,10 @@
 import { describe, test, expect } from 'vitest'
-import { extruirTechos, geometriaCiudad, empacarTecho, desempacarTecho, marcoDelLote, alinearHuella } from '../../src/ciudad.js'
+import { BufferGeometry, BufferAttribute } from 'three'
+import {
+  extruirTechos, prepararCasas, extruirCasas, esferaDe, paqueteDeGeometria, transferiblesDe, ATRIBUTOS,
+  empacarTecho, desempacarTecho, marcoDelLote, alinearHuella,
+} from '../../src/ciudad.js'
+import { geometriaCiudad, geometriaDePaquete } from '../../src/ciudad-geometria.js'
 import { CUBIERTA, altoDePiso } from '../../src/techos.js'
 import { rectanguloMinimo } from '../../src/poligono.js'
 
@@ -613,5 +618,95 @@ describe('extruirTechos: una vecina que muere antes también cuenta mientras con
       .filter((v) => v.semilla === 5 && v.cubierta !== CUBIERTA.PARED && v.z < -0.01)
     expect(delFrente.some((v) => v.nace <= 1 && (v.muere === 0 || v.muere > 1))).toBe(false)
     expect(delFrente.some((v) => v.nace <= 2 && (v.muere === 0 || v.muere > 2))).toBe(true)
+  })
+})
+
+describe('prepararCasas y extruirCasas: la ciudad por partes', () => {
+  const datos = ciudadDe([
+    { puntos: rect(0, 0, 10, 24), semilla: 5, nace: 1 },
+    { puntos: rect(10, 0, 20, 24), semilla: 11, nace: 1, muere: 3 },
+    { puntos: rect(20, 0, 30, 24), semilla: 6, nace: 4 },
+  ])
+  const entera = extruirTechos(datos, coords)
+  const preparado = prepararCasas(datos, coords)
+
+  test('todas las casas, en su orden, dan lo mismo que extruirTechos', () => {
+    expect(extruirCasas(preparado)).toEqual(entera)
+    expect(extruirCasas(preparado, { numeros: [0, 1, 2] })).toEqual(entera)
+  })
+  test('con `numeros`, solo esas casas: cada una sale igual que en la ciudad entera (mira a las mismas vecinas)', () => {
+    const una = extruirCasas(preparado, { numeros: [1] })
+    const semillas = new Set(vertices(una).map((v) => v.semilla))
+    expect([...semillas]).toEqual([11])
+    const enLaEntera = vertices(entera).filter((v) => v.semilla === 11)
+    expect(vertices(una)).toEqual(enLaEntera)
+  })
+  test('las partes suman la ciudad entera', () => {
+    const partes = [[0], [1], [2]].map((numeros) => extruirCasas(preparado, { numeros }))
+    expect(partes.reduce((s, p) => s + p.posiciones.length, 0)).toBe(entera.posiciones.length)
+    expect(partes.reduce((s, p) => s + p.indices.length, 0)).toBe(entera.indices.length)
+  })
+  test('con `quiere`, solo los tramos de épocas pedidos; los dos pases juntos dan todos los vértices', () => {
+    const enLa1 = (t) => t.nace <= 1 && (t.muere === 0 || t.muere > 1)
+    const primero = extruirCasas(preparado, { quiere: enLa1 })
+    const resto = extruirCasas(preparado, { quiere: (t) => !enLa1(t) })
+    expect(primero.posiciones.length).toBeGreaterThan(0)
+    expect(resto.posiciones.length).toBeGreaterThan(0)
+    expect(primero.posiciones.length + resto.posiciones.length).toBe(entera.posiciones.length)
+    for (let v = 0; v < primero.vidas.length; v += 2) expect(enLa1({ nace: primero.vidas[v], muere: primero.vidas[v + 1] })).toBe(true)
+    for (let v = 0; v < resto.vidas.length; v += 2) expect(enLa1({ nace: resto.vidas[v], muere: resto.vidas[v + 1] })).toBe(false)
+  })
+  test('sin casas pedidas, arrays vacíos', () => {
+    const nada = extruirCasas(preparado, { numeros: [] })
+    expect(nada.posiciones).toHaveLength(0)
+    expect(nada.indices).toHaveLength(0)
+  })
+})
+
+describe('esferaDe', () => {
+  test('la misma esfera que calcula three.js', () => {
+    const { posiciones } = extruirTechos(cuadra(COLONIAL), coords)
+    const g = new BufferGeometry().setAttribute('position', new BufferAttribute(posiciones, 3))
+    g.computeBoundingSphere()
+    const esfera = esferaDe(posiciones)
+    expect(esfera.centro).toEqual(g.boundingSphere.center.toArray())
+    expect(esfera.radio).toBeCloseTo(g.boundingSphere.radius, 10)
+  })
+  test('sin puntos, una esfera de radio 0 en el origen', () => {
+    expect(esferaDe(new Float32Array(0))).toEqual({ centro: [0, 0, 0], radio: 0 })
+  })
+})
+
+describe('paqueteDeGeometria: lo que viaja del worker a la página', () => {
+  const crudo = extruirTechos(cuadra(COLONIAL), coords)
+  const paquete = paqueteDeGeometria(crudo)
+
+  test('cada atributo en su tipo final, con todos sus vértices', () => {
+    const n = crudo.posiciones.length / 3
+    for (const [nombre, { n: porVertice, Tipo }] of Object.entries(ATRIBUTOS)) {
+      expect(paquete.atributos[nombre], nombre).toBeInstanceOf(Tipo)
+      expect(paquete.atributos[nombre].length, nombre).toBe(n * porVertice)
+    }
+    expect(paquete.indices).toBe(crudo.indices)
+    expect(paquete.esfera).toEqual(esferaDe(crudo.posiciones))
+  })
+  test('las normales en bytes (por 127) y la vida tal cual', () => {
+    for (let k = 0; k < crudo.normales.length; k++) expect(paquete.atributos.normal[k]).toBe(Math.round(crudo.normales[k] * 127) || 0)
+    expect([...paquete.atributos.aVida]).toEqual([...crudo.vidas])
+  })
+  test('los transferibles son los búferes de los atributos y de los índices, sin repetir', () => {
+    const lista = transferiblesDe(paquete)
+    expect(lista).toHaveLength(Object.keys(ATRIBUTOS).length + 1)
+    expect(new Set(lista).size).toBe(lista.length)
+    for (const b of lista) expect(b).toBeInstanceOf(ArrayBuffer)
+  })
+  test('geometriaDePaquete arma la misma geometría que geometriaCiudad, con la esfera ya puesta', () => {
+    const g = geometriaDePaquete(paquete)
+    const otra = geometriaCiudad(cuadra(COLONIAL), coords)
+    for (const nombre of Object.keys(ATRIBUTOS)) expect([...g.attributes[nombre].array], nombre).toEqual([...otra.attributes[nombre].array])
+    expect([...g.index.array]).toEqual([...otra.index.array])
+    expect(g.attributes.normal.normalized).toBe(true)
+    expect(g.boundingSphere.radius).toBeCloseTo(paquete.esfera.radio, 10)
+    expect(g.boundingSphere.center.toArray()).toEqual(paquete.esfera.centro)
   })
 })
