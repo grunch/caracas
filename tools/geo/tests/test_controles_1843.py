@@ -37,3 +37,24 @@ def test_main_escribe_el_informe_con_anclas_omitidas_y_hashes(tmp_path):
     assert [o['motivo'] for o in informe['omitidas']] == ['sin_nombre']
     assert informe['calce_vigente']['mediana_desvio_m'] == 5.0
     assert set(informe['entradas']) == set(archivos) and all(len(e['sha256']) == 64 for e in informe['entradas'].values())
+
+
+def test_escribir_config_deja_el_calce_por_identidad_sin_correlacion(tmp_path):
+    pts = [(0, 0), (100, 0), (0, 100), (100, 100), (50, 50), (150, 50), (50, 150)]
+    nombres = list('ABCDEFG')
+    archivos = {
+        'esquinas': {'esquinas': [{'numero': i + 1, 'cruce_px': list(p), 'lectura': 'segura'} for i, p in enumerate(pts)]},
+        'leyenda': {'esquinas': [{'numero': i + 1, 'nombre': n, 'lectura': 'segura'} for i, n in enumerate(nombres)]},
+        'diccionario': [{'nombre': n, 'px': [p[0] * 2.0, p[1] * 2.0]} for n, p in zip(nombres, pts)],
+        'gcp': {'semillas': [], 'etapas': [{'x': 1}], 'gcps': [{'px': p[0], 'py': p[1], 'x36': p[0] * 2.0, 'y36': p[1] * 2.0} for p in pts]},
+        'sectores': {'sectores': [{'id': 'S1843-11', 'caja_px': [-10, -10, 200, 200]}]},
+    }
+    rutas = {}
+    for k, v in archivos.items():
+        rutas[k] = tmp_path / f'{k}.json'
+        rutas[k].write_text(json.dumps(v))
+
+    main([f'--{k}={r}' for k, r in rutas.items()] + [f'--salida={tmp_path / "i.json"}', '--escribir-config'])
+
+    nuevo = json.loads(rutas['gcp'].read_text())
+    assert nuevo['etapas'] == [] and len(nuevo['anclas']) == 7

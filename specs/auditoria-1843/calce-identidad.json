@@ -1,0 +1,1450 @@
+{
+ "alcance": "Calce de 1843 por identidad (T81, 1A): una esquina ancla solo con número, cruce y nombre leídos con seguridad y un nombre único en el diccionario de 1936. El desvío mide cuánto se aparta el calce vigente (por correlación) de cada ancla; el LOO, cuánto se aparta el calce que solo usa las anclas al quitar cada una.",
+ "entradas": {
+  "esquinas": {
+   "archivo": "specs/auditoria-1843/esquinas-original.json",
+   "sha256": "e2f3719f37907ad3fe17050270e78d95493f7f1fa67aebedb8c5fe04443b23c6"
+  },
+  "leyenda": {
+   "archivo": "specs/auditoria-1843/leyenda.json",
+   "sha256": "3f2a0b80309672d8fc84871ec7ee793a94e7d0901e513a5fe33ea0cde9d10b5c"
+  },
+  "diccionario": {
+   "archivo": "tools/geo/esquinas/1936-esquinas.json",
+   "sha256": "6cabf75819f6a68a5cecc15abdb05e7a517db4796d4bbcd6b69c2ae8fd564f9f"
+  },
+  "gcp": {
+   "archivo": "tools/geo/gcp/calce-1843-nypl-jesurun-facsimil-muller-stapler.json",
+   "sha256": "607bcb53e64b204dff1ed5df30d75fca2e38f797297206e4157c096bd15e01c1"
+  },
+  "sectores": {
+   "archivo": "specs/auditoria-1843/sectores.json",
+   "sha256": "9b19214311fe9e978fa1ed3d29b1bbb11c89f3884c24a8c5d0652f2d6b711085"
+  }
+ },
+ "metro": 0.5,
+ "anclas": 64,
+ "en_calce": 56,
+ "fuera_de_sectores": 0,
+ "calce_vigente": {
+  "mediana_desvio_m": 4.36,
+  "max_desvio_m": 1794.48
+ },
+ "calce_identidad": {
+  "rms_loo_m": 12.48,
+  "p90_loo_m": 18.58
+ },
+ "contradicen_a_sus_vecinas": [
+  {
+   "id": "E1843-088",
+   "loo_m": 1838.0,
+   "motivo": "contradice_a_sus_vecinas"
+  },
+  {
+   "id": "E1843-071",
+   "loo_m": 1817.8,
+   "motivo": "contradice_a_sus_vecinas"
+  },
+  {
+   "id": "E1843-084",
+   "loo_m": 1421.8,
+   "motivo": "contradice_a_sus_vecinas"
+  },
+  {
+   "id": "E1843-099",
+   "loo_m": 318.3,
+   "motivo": "contradice_a_sus_vecinas"
+  },
+  {
+   "id": "E1843-043",
+   "loo_m": 154.3,
+   "motivo": "contradice_a_sus_vecinas"
+  },
+  {
+   "id": "E1843-078",
+   "loo_m": 142.4,
+   "motivo": "contradice_a_sus_vecinas"
+  },
+  {
+   "id": "E1843-059",
+   "loo_m": 132.3,
+   "motivo": "contradice_a_sus_vecinas"
+  },
+  {
+   "id": "E1843-062",
+   "loo_m": 65.9,
+   "motivo": "contradice_a_sus_vecinas"
+  }
+ ],
+ "sectores": [
+  {
+   "sector": "S1843-22",
+   "anclas": 2,
+   "mediana_loo_m": 11.81,
+   "max_loo_m": 13.47,
+   "mediana_desvio_m": 4.26,
+   "controlado": true,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1843-23",
+   "anclas": 3,
+   "mediana_loo_m": 11.38,
+   "max_loo_m": 30.34,
+   "mediana_desvio_m": 4.29,
+   "controlado": true,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1843-32",
+   "anclas": 2,
+   "mediana_loo_m": 8.84,
+   "max_loo_m": 12.03,
+   "mediana_desvio_m": 2.71,
+   "controlado": true,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1843-33",
+   "anclas": 8,
+   "mediana_loo_m": 7.77,
+   "max_loo_m": 13.84,
+   "mediana_desvio_m": 4.04,
+   "controlado": true,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1843-34",
+   "anclas": 5,
+   "mediana_loo_m": 6.32,
+   "max_loo_m": 28.29,
+   "mediana_desvio_m": 2.21,
+   "controlado": true,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1843-42",
+   "anclas": 3,
+   "mediana_loo_m": 16.95,
+   "max_loo_m": 28.65,
+   "mediana_desvio_m": 5.8,
+   "controlado": true,
+   "bajo_umbral": false
+  },
+  {
+   "sector": "S1843-43",
+   "anclas": 20,
+   "mediana_loo_m": 9.01,
+   "max_loo_m": 22.61,
+   "mediana_desvio_m": 5.13,
+   "controlado": true,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1843-44",
+   "anclas": 4,
+   "mediana_loo_m": 9.95,
+   "max_loo_m": 21.74,
+   "mediana_desvio_m": 4.08,
+   "controlado": true,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1843-52",
+   "anclas": 3,
+   "mediana_loo_m": 10.44,
+   "max_loo_m": 10.85,
+   "mediana_desvio_m": 2.85,
+   "controlado": true,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1843-53",
+   "anclas": 4,
+   "mediana_loo_m": 7.51,
+   "max_loo_m": 12.03,
+   "mediana_desvio_m": 3.15,
+   "controlado": true,
+   "bajo_umbral": true
+  },
+  {
+   "sector": "S1843-54",
+   "anclas": 2,
+   "mediana_loo_m": 7.65,
+   "max_loo_m": 10.52,
+   "mediana_desvio_m": 2.51,
+   "controlado": true,
+   "bajo_umbral": true
+  }
+ ],
+ "detalle": [
+  {
+   "id": "E1843-003",
+   "numero": 3,
+   "nombre_1843": "de dos Pilitas",
+   "nombre_1936": "Dos Pilitas",
+   "px": 2962.0,
+   "py": 1785.0,
+   "x36": 8664.0,
+   "y36": 4736.9,
+   "sector": "S1843-23",
+   "en_calce": true,
+   "desvio_vigente_m": 2.28,
+   "loo_identidad_m": 30.34
+  },
+  {
+   "id": "E1843-007",
+   "numero": 7,
+   "nombre_1843": "del Guanábano",
+   "nombre_1936": "Guanábano",
+   "px": 2952.0,
+   "py": 2035.0,
+   "x36": 8590.0,
+   "y36": 5267.0,
+   "sector": "S1843-22",
+   "en_calce": true,
+   "desvio_vigente_m": 4.1,
+   "loo_identidad_m": 13.47
+  },
+  {
+   "id": "E1843-008",
+   "numero": 8,
+   "nombre_1843": "de la caja de agua",
+   "nombre_1936": "Caja de Agua",
+   "px": 3076.0,
+   "py": 2145.0,
+   "x36": 8838.1,
+   "y36": 5583.3,
+   "sector": "S1843-23",
+   "en_calce": true,
+   "desvio_vigente_m": 4.44,
+   "loo_identidad_m": 11.38
+  },
+  {
+   "id": "E1843-012",
+   "numero": 12,
+   "nombre_1843": "del Balconcito",
+   "nombre_1936": "Balconcito",
+   "px": 2954.0,
+   "py": 2266.0,
+   "x36": 8525.0,
+   "y36": 5824.8,
+   "sector": "S1843-22",
+   "en_calce": true,
+   "desvio_vigente_m": 4.41,
+   "loo_identidad_m": 10.15
+  },
+  {
+   "id": "E1843-013",
+   "numero": 13,
+   "nombre_1843": "de Salas",
+   "nombre_1936": "Salas",
+   "px": 3076.5,
+   "py": 2265.0,
+   "x36": 8779.8,
+   "y36": 5877.9,
+   "sector": "S1843-23",
+   "en_calce": true,
+   "desvio_vigente_m": 4.29,
+   "loo_identidad_m": 8.56
+  },
+  {
+   "id": "E1843-017",
+   "numero": 17,
+   "nombre_1843": "del Cuartel viejo",
+   "nombre_1936": "Cuartel Viejo",
+   "px": 2956.0,
+   "py": 2394.0,
+   "x36": 8473.0,
+   "y36": 6087.8,
+   "sector": "S1843-32",
+   "en_calce": true,
+   "desvio_vigente_m": 2.65,
+   "loo_identidad_m": 5.65
+  },
+  {
+   "id": "E1843-018",
+   "numero": 18,
+   "nombre_1843": "de Altagracia",
+   "nombre_1936": "Altagracia",
+   "px": 3077.0,
+   "py": 2390.5,
+   "x36": 8731.8,
+   "y36": 6140.0,
+   "sector": "S1843-33",
+   "en_calce": true,
+   "desvio_vigente_m": 1.17,
+   "loo_identidad_m": 3.26
+  },
+  {
+   "id": "E1843-026",
+   "numero": 26,
+   "nombre_1843": "del Bolero",
+   "nombre_1936": "Bolero",
+   "px": 2840.0,
+   "py": 2523.5,
+   "x36": 8149.3,
+   "y36": 6312.9,
+   "sector": "S1843-32",
+   "en_calce": true,
+   "desvio_vigente_m": 2.76,
+   "loo_identidad_m": 12.03
+  },
+  {
+   "id": "E1843-030",
+   "numero": 30,
+   "nombre_1843": "de la Pelota",
+   "nombre_1936": "La Pelota",
+   "px": 3574.5,
+   "py": 2515.0,
+   "x36": 9661.5,
+   "y36": 6589.8,
+   "sector": "S1843-33",
+   "en_calce": true,
+   "desvio_vigente_m": 1.68,
+   "loo_identidad_m": 6.06
+  },
+  {
+   "id": "E1843-033",
+   "numero": 33,
+   "nombre_1843": "del Platanal",
+   "nombre_1936": "Platanal",
+   "px": 4070.5,
+   "py": 2509.5,
+   "x36": 10786.9,
+   "y36": 6784.3,
+   "sector": "S1843-34",
+   "en_calce": true,
+   "desvio_vigente_m": 1.75,
+   "loo_identidad_m": 13.56
+  },
+  {
+   "id": "E1843-034",
+   "numero": 34,
+   "nombre_1843": "del Principal",
+   "nombre_1936": "Principal",
+   "px": 3204.0,
+   "py": 2640.8,
+   "x36": 8880.0,
+   "y36": 6719.0,
+   "sector": "S1843-33",
+   "en_calce": true,
+   "desvio_vigente_m": 7.54,
+   "loo_identidad_m": 13.84
+  },
+  {
+   "id": "E1843-035",
+   "numero": 35,
+   "nombre_1843": "de la Torre",
+   "nombre_1936": "La Torre",
+   "px": 3322.0,
+   "py": 2640.2,
+   "x36": 9088.0,
+   "y36": 6754.0,
+   "sector": "S1843-33",
+   "en_calce": true,
+   "desvio_vigente_m": 5.66,
+   "loo_identidad_m": 8.41
+  },
+  {
+   "id": "E1843-039",
+   "numero": 39,
+   "nombre_1843": "de las Madrices",
+   "nombre_1936": "Las Madrices",
+   "px": 3448.0,
+   "py": 2640.5,
+   "x36": 9347.7,
+   "y36": 6805.5,
+   "sector": "S1843-33",
+   "en_calce": true,
+   "desvio_vigente_m": 4.22,
+   "loo_identidad_m": 8.84
+  },
+  {
+   "id": "E1843-041",
+   "numero": 41,
+   "nombre_1843": "del Cují",
+   "nombre_1936": "El Cují",
+   "px": 3704.0,
+   "py": 2637.5,
+   "x36": 9881.0,
+   "y36": 6901.0,
+   "sector": "S1843-34",
+   "en_calce": true,
+   "desvio_vigente_m": 2.21,
+   "loo_identidad_m": 4.97
+  },
+  {
+   "id": "E1843-043",
+   "numero": 43,
+   "nombre_1843": "de Manduca",
+   "nombre_1936": "Manduca",
+   "px": 4071.5,
+   "py": 2629.0,
+   "x36": 10432.0,
+   "y36": 7005.0,
+   "sector": "S1843-34",
+   "en_calce": false,
+   "desvio_vigente_m": 154.47,
+   "loo_identidad_m": null
+  },
+  {
+   "id": "E1843-047",
+   "numero": 47,
+   "nombre_1843": "de San Jacinto",
+   "nombre_1936": "San Jacinto",
+   "px": 3448.2,
+   "py": 2759.5,
+   "x36": 9301.0,
+   "y36": 7011.0,
+   "sector": "S1843-33",
+   "en_calce": true,
+   "desvio_vigente_m": 3.86,
+   "loo_identidad_m": 7.14
+  },
+  {
+   "id": "E1843-050",
+   "numero": 50,
+   "nombre_1843": "de las Gradillas",
+   "nombre_1936": "Las Gradillas",
+   "px": 3323.7,
+   "py": 2758.0,
+   "x36": 9043.0,
+   "y36": 6951.0,
+   "sector": "S1843-33",
+   "en_calce": true,
+   "desvio_vigente_m": 8.91,
+   "loo_identidad_m": 13.57
+  },
+  {
+   "id": "E1843-051",
+   "numero": 51,
+   "nombre_1843": "del Doctor Paúl",
+   "nombre_1936": "Doctor Paúl",
+   "px": 3576.5,
+   "py": 2757.5,
+   "x36": 9559.0,
+   "y36": 7070.0,
+   "sector": "S1843-33",
+   "en_calce": true,
+   "desvio_vigente_m": 1.74,
+   "loo_identidad_m": 3.37
+  },
+  {
+   "id": "E1843-052",
+   "numero": 52,
+   "nombre_1843": "de Salvador de León",
+   "nombre_1936": "Salvador de León",
+   "px": 3705.5,
+   "py": 2756.0,
+   "x36": 9838.7,
+   "y36": 7134.2,
+   "sector": "S1843-34",
+   "en_calce": true,
+   "desvio_vigente_m": 1.61,
+   "loo_identidad_m": 2.97
+  },
+  {
+   "id": "E1843-053",
+   "numero": 53,
+   "nombre_1843": "de Socarrás",
+   "nombre_1936": "Socarrás",
+   "px": 3827.0,
+   "py": 2755.0,
+   "x36": 10097.9,
+   "y36": 7198.6,
+   "sector": "S1843-34",
+   "en_calce": true,
+   "desvio_vigente_m": 2.45,
+   "loo_identidad_m": 6.32
+  },
+  {
+   "id": "E1843-055",
+   "numero": 55,
+   "nombre_1843": "de Miguelacho",
+   "nombre_1936": "Miguelacho",
+   "px": 4198.5,
+   "py": 2750.5,
+   "x36": 10994.1,
+   "y36": 7386.4,
+   "sector": "S1843-34",
+   "en_calce": true,
+   "desvio_vigente_m": 3.71,
+   "loo_identidad_m": 28.29
+  },
+  {
+   "id": "E1843-058",
+   "numero": 58,
+   "nombre_1843": "de la Pedrera",
+   "nombre_1936": "La Pedrera",
+   "px": 2961.0,
+   "py": 2890.0,
+   "x36": 8261.9,
+   "y36": 7077.1,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 2.87,
+   "loo_identidad_m": 6.25
+  },
+  {
+   "id": "E1843-059",
+   "numero": 59,
+   "nombre_1843": "de Mercaderes",
+   "nombre_1936": "Mercaderes",
+   "px": 3084.0,
+   "py": 2889.0,
+   "x36": 8472.8,
+   "y36": 7391.1,
+   "sector": "S1843-43",
+   "en_calce": false,
+   "desvio_vigente_m": 134.34,
+   "loo_identidad_m": null
+  },
+  {
+   "id": "E1843-060",
+   "numero": 60,
+   "nombre_1843": "de San Francisco",
+   "nombre_1936": "San Francisco",
+   "px": 3207.5,
+   "py": 2887.5,
+   "x36": 8798.0,
+   "y36": 7182.0,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 4.33,
+   "loo_identidad_m": 12.72
+  },
+  {
+   "id": "E1843-061",
+   "numero": 61,
+   "nombre_1843": "de la Sociedad",
+   "nombre_1936": "Sociedad",
+   "px": 3324.5,
+   "py": 2885.5,
+   "x36": 8990.8,
+   "y36": 7223.8,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 5.99,
+   "loo_identidad_m": 8.69
+  },
+  {
+   "id": "E1843-062",
+   "numero": 62,
+   "nombre_1843": "de los Traposos",
+   "nombre_1936": "Traposos",
+   "px": 3451.0,
+   "py": 2884.5,
+   "x36": 9379.6,
+   "y36": 7305.6,
+   "sector": "S1843-43",
+   "en_calce": false,
+   "desvio_vigente_m": 65.69,
+   "loo_identidad_m": null
+  },
+  {
+   "id": "E1843-068",
+   "numero": 68,
+   "nombre_1843": "de San Lázaro",
+   "nombre_1936": "San Lázaro",
+   "px": 3952.0,
+   "py": 3005.0,
+   "x36": 10262.0,
+   "y36": 7783.9,
+   "sector": "S1843-44",
+   "en_calce": true,
+   "desvio_vigente_m": 2.0,
+   "loo_identidad_m": 9.01
+  },
+  {
+   "id": "E1843-070",
+   "numero": 70,
+   "nombre_1843": "de la Gorda",
+   "nombre_1936": "La Gorda",
+   "px": 2959.0,
+   "py": 3014.0,
+   "x36": 8214.3,
+   "y36": 7330.5,
+   "sector": "S1843-42",
+   "en_calce": true,
+   "desvio_vigente_m": 3.01,
+   "loo_identidad_m": 6.4
+  },
+  {
+   "id": "E1843-071",
+   "numero": 71,
+   "nombre_1843": "de Santa Ana",
+   "nombre_1936": "Santa Ana",
+   "px": 3085.0,
+   "py": 3012.0,
+   "x36": 7549.5,
+   "y36": 3930.5,
+   "sector": "S1843-43",
+   "en_calce": false,
+   "desvio_vigente_m": 1789.03,
+   "loo_identidad_m": null
+  },
+  {
+   "id": "E1843-072",
+   "numero": 72,
+   "nombre_1843": "de Pajaritos",
+   "nombre_1936": "Pajaritos",
+   "px": 3208.0,
+   "py": 3012.0,
+   "x36": 8744.8,
+   "y36": 7446.6,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 4.92,
+   "loo_identidad_m": 8.97
+  },
+  {
+   "id": "E1843-073",
+   "numero": 73,
+   "nombre_1843": "de Camejo",
+   "nombre_1936": "Camejo",
+   "px": 3326.0,
+   "py": 3011.0,
+   "x36": 8942.5,
+   "y36": 7487.0,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 6.26,
+   "loo_identidad_m": 11.23
+  },
+  {
+   "id": "E1843-074",
+   "numero": 74,
+   "nombre_1843": "de Colón",
+   "nombre_1936": "Colón",
+   "px": 3451.5,
+   "py": 3010.5,
+   "x36": 9206.5,
+   "y36": 7543.1,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 0.37,
+   "loo_identidad_m": 0.68
+  },
+  {
+   "id": "E1843-075",
+   "numero": 75,
+   "nombre_1843": "del Doctor Díaz",
+   "nombre_1936": "Doctor Díaz",
+   "px": 3579.0,
+   "py": 3009.0,
+   "x36": 9474.9,
+   "y36": 7599.9,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 3.32,
+   "loo_identidad_m": 6.11
+  },
+  {
+   "id": "E1843-076",
+   "numero": 76,
+   "nombre_1843": "del Peinero",
+   "nombre_1936": "Peinero",
+   "px": 3709.0,
+   "py": 3007.0,
+   "x36": 9734.5,
+   "y36": 7656.6,
+   "sector": "S1843-44",
+   "en_calce": true,
+   "desvio_vigente_m": 3.21,
+   "loo_identidad_m": 6.68
+  },
+  {
+   "id": "E1843-078",
+   "numero": 78,
+   "nombre_1843": "del Silencio",
+   "nombre_1936": "El Silencio",
+   "px": 2789.0,
+   "py": 3139.0,
+   "x36": 7798.6,
+   "y36": 7225.6,
+   "sector": "S1843-42",
+   "en_calce": false,
+   "desvio_vigente_m": 146.82,
+   "loo_identidad_m": null
+  },
+  {
+   "id": "E1843-081",
+   "numero": 81,
+   "nombre_1843": "de San Juan",
+   "nombre_1936": "San Juan",
+   "px": 2843.0,
+   "py": 3141.0,
+   "x36": 7891.3,
+   "y36": 7524.0,
+   "sector": "S1843-42",
+   "en_calce": true,
+   "desvio_vigente_m": 9.19,
+   "loo_identidad_m": 28.65
+  },
+  {
+   "id": "E1843-082",
+   "numero": 82,
+   "nombre_1843": "de San Pablo",
+   "nombre_1936": "San Pablo",
+   "px": 3085.5,
+   "py": 3132.0,
+   "x36": 8405.9,
+   "y36": 7644.1,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 7.64,
+   "loo_identidad_m": 14.74
+  },
+  {
+   "id": "E1843-083",
+   "numero": 83,
+   "nombre_1843": "de la Palma",
+   "nombre_1936": "La Palma",
+   "px": 3208.5,
+   "py": 3132.0,
+   "x36": 8691.7,
+   "y36": 7711.0,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 5.2,
+   "loo_identidad_m": 9.04
+  },
+  {
+   "id": "E1843-084",
+   "numero": 84,
+   "nombre_1843": "de San Felipe",
+   "nombre_1936": "San Felipe",
+   "px": 3327.5,
+   "py": 3131.0,
+   "x36": 11362.6,
+   "y36": 6313.6,
+   "sector": "S1843-43",
+   "en_calce": false,
+   "desvio_vigente_m": 1421.12,
+   "loo_identidad_m": null
+  },
+  {
+   "id": "E1843-085",
+   "numero": 85,
+   "nombre_1843": "de Cruz verde",
+   "nombre_1936": "Cruz Verde",
+   "px": 3451.5,
+   "py": 3130.5,
+   "x36": 9156.0,
+   "y36": 7816.0,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 2.45,
+   "loo_identidad_m": 4.41
+  },
+  {
+   "id": "E1843-086",
+   "numero": 86,
+   "nombre_1843": "del Zamuro",
+   "nombre_1936": "El Zamuro",
+   "px": 3580.0,
+   "py": 3129.0,
+   "x36": 9425.0,
+   "y36": 7878.5,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 5.06,
+   "loo_identidad_m": 8.66
+  },
+  {
+   "id": "E1843-087",
+   "numero": 87,
+   "nombre_1843": "del Pájaro",
+   "nombre_1936": "El Pájaro",
+   "px": 3710.0,
+   "py": 3127.0,
+   "x36": 9641.5,
+   "y36": 7933.8,
+   "sector": "S1843-44",
+   "en_calce": true,
+   "desvio_vigente_m": 10.35,
+   "loo_identidad_m": 21.74
+  },
+  {
+   "id": "E1843-088",
+   "numero": 88,
+   "nombre_1843": "de la Soledad",
+   "nombre_1936": "La Soledad",
+   "px": 3831.0,
+   "py": 3125.0,
+   "x36": 6335.0,
+   "y36": 7827.0,
+   "sector": "S1843-44",
+   "en_calce": false,
+   "desvio_vigente_m": 1794.48,
+   "loo_identidad_m": null
+  },
+  {
+   "id": "E1843-094",
+   "numero": 94,
+   "nombre_1843": "del Reducto",
+   "nombre_1936": "El Reducto",
+   "px": 3086.0,
+   "py": 3254.0,
+   "x36": 8366.0,
+   "y36": 7922.8,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 6.42,
+   "loo_identidad_m": 11.53
+  },
+  {
+   "id": "E1843-095",
+   "numero": 95,
+   "nombre_1843": "de Miracielos",
+   "nombre_1936": "Miracielos",
+   "px": 3208.0,
+   "py": 3252.5,
+   "x36": 8636.1,
+   "y36": 7985.3,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 6.71,
+   "loo_identidad_m": 12.03
+  },
+  {
+   "id": "E1843-096",
+   "numero": 96,
+   "nombre_1843": "de los Cipreses",
+   "nombre_1936": "Los Cipreses",
+   "px": 3328.0,
+   "py": 3251.5,
+   "x36": 8846.0,
+   "y36": 8024.0,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 8.31,
+   "loo_identidad_m": 15.6
+  },
+  {
+   "id": "E1843-097",
+   "numero": 97,
+   "nombre_1843": "de Velásquez",
+   "nombre_1936": "Velásquez",
+   "px": 3452.0,
+   "py": 3249.0,
+   "x36": 9107.6,
+   "y36": 8085.1,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 4.82,
+   "loo_identidad_m": 8.25
+  },
+  {
+   "id": "E1843-098",
+   "numero": 98,
+   "nombre_1843": "de la Miseria",
+   "nombre_1936": "La Miseria",
+   "px": 3582.0,
+   "py": 3249.0,
+   "x36": 9382.0,
+   "y36": 8136.2,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 12.78,
+   "loo_identidad_m": 22.61
+  },
+  {
+   "id": "E1843-099",
+   "numero": 99,
+   "nombre_1843": "de la Hoyada",
+   "nombre_1936": "La Hoyada",
+   "px": 3712.0,
+   "py": 3248.0,
+   "x36": 9996.2,
+   "y36": 7717.6,
+   "sector": "S1843-44",
+   "en_calce": false,
+   "desvio_vigente_m": 318.44,
+   "loo_identidad_m": null
+  },
+  {
+   "id": "E1843-102",
+   "numero": 102,
+   "nombre_1843": "del Quebrado",
+   "nombre_1936": "El Quebrado",
+   "px": 2725.0,
+   "py": 3378.0,
+   "x36": 7431.5,
+   "y36": 8083.0,
+   "sector": "S1843-42",
+   "en_calce": true,
+   "desvio_vigente_m": 5.8,
+   "loo_identidad_m": 16.95
+  },
+  {
+   "id": "E1843-103",
+   "numero": 103,
+   "nombre_1843": "del Maderero",
+   "nombre_1936": "Maderero",
+   "px": 2966.0,
+   "py": 3373.0,
+   "x36": 8047.4,
+   "y36": 8195.1,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 4.38,
+   "loo_identidad_m": 8.84
+  },
+  {
+   "id": "E1843-104",
+   "numero": 104,
+   "nombre_1843": "de la Glorieta",
+   "nombre_1936": "La Glorieta",
+   "px": 3087.5,
+   "py": 3370.5,
+   "x36": 8295.5,
+   "y36": 8258.0,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 8.6,
+   "loo_identidad_m": 17.0
+  },
+  {
+   "id": "E1843-107",
+   "numero": 107,
+   "nombre_1843": "de Santa Rosalía",
+   "nombre_1936": "Santa Rosalía",
+   "px": 3453.5,
+   "py": 3367.0,
+   "x36": 9043.0,
+   "y36": 8429.0,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 10.45,
+   "loo_identidad_m": 20.17
+  },
+  {
+   "id": "E1843-108",
+   "numero": 108,
+   "nombre_1843": "de Pinto",
+   "nombre_1936": "Pinto",
+   "px": 3584.0,
+   "py": 3366.0,
+   "x36": 9304.2,
+   "y36": 8471.9,
+   "sector": "S1843-43",
+   "en_calce": true,
+   "desvio_vigente_m": 4.25,
+   "loo_identidad_m": 7.95
+  },
+  {
+   "id": "E1843-109",
+   "numero": 109,
+   "nombre_1843": "del Viento",
+   "nombre_1936": "El Viento",
+   "px": 3713.0,
+   "py": 3364.0,
+   "x36": 9552.5,
+   "y36": 8522.0,
+   "sector": "S1843-44",
+   "en_calce": true,
+   "desvio_vigente_m": 4.95,
+   "loo_identidad_m": 10.88
+  },
+  {
+   "id": "E1843-115",
+   "numero": 115,
+   "nombre_1843": "de la Garita",
+   "nombre_1936": "La Garita",
+   "px": 2613.0,
+   "py": 3497.0,
+   "x36": 7104.1,
+   "y36": 8330.1,
+   "sector": "S1843-52",
+   "en_calce": true,
+   "desvio_vigente_m": 4.15,
+   "loo_identidad_m": 10.44
+  },
+  {
+   "id": "E1843-117",
+   "numero": 117,
+   "nombre_1843": "del Bucare",
+   "nombre_1936": "Bucare",
+   "px": 2967.0,
+   "py": 3491.0,
+   "x36": 7993.9,
+   "y36": 8483.1,
+   "sector": "S1843-53",
+   "en_calce": true,
+   "desvio_vigente_m": 4.58,
+   "loo_identidad_m": 12.03
+  },
+  {
+   "id": "E1843-120",
+   "numero": 120,
+   "nombre_1843": "de Castán",
+   "nombre_1936": "Castán",
+   "px": 3331.0,
+   "py": 3487.5,
+   "x36": 8733.0,
+   "y36": 8647.5,
+   "sector": "S1843-53",
+   "en_calce": true,
+   "desvio_vigente_m": 3.35,
+   "loo_identidad_m": 7.34
+  },
+  {
+   "id": "E1843-123",
+   "numero": 123,
+   "nombre_1843": "del Muerto",
+   "nombre_1936": "El Muerto",
+   "px": 3715.0,
+   "py": 3484.0,
+   "x36": 9522.9,
+   "y36": 8809.9,
+   "sector": "S1843-54",
+   "en_calce": true,
+   "desvio_vigente_m": 2.31,
+   "loo_identidad_m": 4.78
+  },
+  {
+   "id": "E1843-126",
+   "numero": 126,
+   "nombre_1843": "del Aguacate",
+   "nombre_1936": "El Aguacate",
+   "px": 2500.0,
+   "py": 3621.0,
+   "x36": 6802.4,
+   "y36": 8581.1,
+   "sector": "S1843-52",
+   "en_calce": true,
+   "desvio_vigente_m": 1.39,
+   "loo_identidad_m": 9.19
+  },
+  {
+   "id": "E1843-128",
+   "numero": 128,
+   "nombre_1843": "de la Cochera",
+   "nombre_1936": "La Cochera",
+   "px": 2725.0,
+   "py": 3615.0,
+   "x36": 7347.1,
+   "y36": 8653.5,
+   "sector": "S1843-52",
+   "en_calce": true,
+   "desvio_vigente_m": 2.85,
+   "loo_identidad_m": 10.85
+  },
+  {
+   "id": "E1843-132",
+   "numero": 132,
+   "nombre_1843": "de la Palmita",
+   "nombre_1936": "La Palmita",
+   "px": 3330.5,
+   "py": 3609.5,
+   "x36": 8681.0,
+   "y36": 8921.5,
+   "sector": "S1843-53",
+   "en_calce": true,
+   "desvio_vigente_m": 1.89,
+   "loo_identidad_m": 4.93
+  },
+  {
+   "id": "E1843-133",
+   "numero": 133,
+   "nombre_1843": "de las Tablitas",
+   "nombre_1936": "Tablitas",
+   "px": 3456.0,
+   "py": 3608.0,
+   "x36": 8949.0,
+   "y36": 8971.0,
+   "sector": "S1843-53",
+   "en_calce": true,
+   "desvio_vigente_m": 2.95,
+   "loo_identidad_m": 7.69
+  },
+  {
+   "id": "E1843-135",
+   "numero": 135,
+   "nombre_1843": "de las Peláez",
+   "nombre_1936": "Las Peláez",
+   "px": 3716.0,
+   "py": 3604.0,
+   "x36": 9485.4,
+   "y36": 9070.8,
+   "sector": "S1843-54",
+   "en_calce": true,
+   "desvio_vigente_m": 2.72,
+   "loo_identidad_m": 10.52
+  }
+ ],
+ "omitidas": [
+  {
+   "numero": 1,
+   "motivo": "cruce_dudoso",
+   "nombre": "de tío Pedrito"
+  },
+  {
+   "numero": 2,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de la Alameda"
+  },
+  {
+   "numero": 4,
+   "motivo": "sin_pareja_1936",
+   "nombre": "Cuartel Veterano"
+  },
+  {
+   "numero": 5,
+   "motivo": "cruce_dudoso",
+   "nombre": "del padre Gusmán"
+  },
+  {
+   "numero": 6,
+   "motivo": "cruce_dudoso",
+   "nombre": "de la Cruz"
+  },
+  {
+   "numero": 9,
+   "motivo": "numero_repetido",
+   "nombre": "del Truco"
+  },
+  {
+   "numero": 10,
+   "motivo": "sin_pareja_1936",
+   "nombre": "Callejón de la Merced"
+  },
+  {
+   "numero": 11,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Puente de la Trinidad"
+  },
+  {
+   "numero": 14,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de la Merced"
+  },
+  {
+   "numero": 15,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de tienda honda"
+  },
+  {
+   "numero": 16,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Basurero"
+  },
+  {
+   "numero": 19,
+   "motivo": "cruce_dudoso",
+   "nombre": "de Mijares"
+  },
+  {
+   "numero": 20,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del teniente Rei"
+  },
+  {
+   "numero": 21,
+   "motivo": "cruce_dudoso",
+   "nombre": "de Alguinsones"
+  },
+  {
+   "numero": 22,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de la Saba"
+  },
+  {
+   "numero": 24,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de San Mauricio"
+  },
+  {
+   "numero": 25,
+   "motivo": "numero_repetido",
+   "nombre": "de Candilito de Ñarauli"
+  },
+  {
+   "numero": 27,
+   "motivo": "numero_repetido",
+   "nombre": "de Llaguno"
+  },
+  {
+   "numero": 28,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Beroes"
+  },
+  {
+   "numero": 29,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de las Ybarras"
+  },
+  {
+   "numero": 31,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Punceles"
+  },
+  {
+   "numero": 32,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Cerrito del Diablo"
+  },
+  {
+   "numero": 36,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Teque"
+  },
+  {
+   "numero": 37,
+   "motivo": "nombre_dudoso",
+   "nombre": "de Ramón Pitizugo"
+  },
+  {
+   "numero": 38,
+   "motivo": "ambigua_en_1936",
+   "nombre": "del Conde"
+  },
+  {
+   "numero": 40,
+   "motivo": "numero_repetido",
+   "nombre": "de las Marones"
+  },
+  {
+   "numero": 42,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Puente de Candelaria"
+  },
+  {
+   "numero": 44,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Candelaria"
+  },
+  {
+   "numero": 45,
+   "motivo": "nombre_dudoso",
+   "nombre": "de la alcabala de la Candelaria"
+  },
+  {
+   "numero": 46,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Colegio"
+  },
+  {
+   "numero": 49,
+   "motivo": "cruce_dudoso",
+   "nombre": "del Padre Muñoz"
+  },
+  {
+   "numero": 54,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Algarrobo"
+  },
+  {
+   "numero": 56,
+   "motivo": "numero_repetido",
+   "nombre": "del Juego de Pelota"
+  },
+  {
+   "numero": 57,
+   "motivo": "numero_repetido",
+   "nombre": "de la Faltriquera"
+  },
+  {
+   "numero": 63,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del chorro de San Jacinto"
+  },
+  {
+   "numero": 64,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Sanabria"
+  },
+  {
+   "numero": 65,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de la Pilita de San Lázaro"
+  },
+  {
+   "numero": 66,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Puente de San Lázaro"
+  },
+  {
+   "numero": 67,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de la Casa de Misericordia"
+  },
+  {
+   "numero": 69,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Campo Santo"
+  },
+  {
+   "numero": 77,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Patanche"
+  },
+  {
+   "numero": 79,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Puente de San Pablo"
+  },
+  {
+   "numero": 80,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Calvario"
+  },
+  {
+   "numero": 89,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de la Matanza"
+  },
+  {
+   "numero": 90,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Campo de Marte"
+  },
+  {
+   "numero": 91,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de los Angelitos o de la Pilita"
+  },
+  {
+   "numero": 92,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Campo de Marte"
+  },
+  {
+   "numero": 93,
+   "motivo": "cruce_dudoso",
+   "nombre": "del Basurero"
+  },
+  {
+   "numero": 100,
+   "motivo": "sin_pareja_1936",
+   "nombre": "(ídem: de la Hoyada)"
+  },
+  {
+   "numero": 101,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Jesús, María y José"
+  },
+  {
+   "numero": 105,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Cuartel de Milicias"
+  },
+  {
+   "numero": 106,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Hoyo vicioso"
+  },
+  {
+   "numero": 110,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de la Carnicería"
+  },
+  {
+   "numero": 111,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del León"
+  },
+  {
+   "numero": 112,
+   "motivo": "cruce_dudoso",
+   "nombre": "de Milano"
+  },
+  {
+   "numero": 113,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de la Quebrada de Lazarinos"
+  },
+  {
+   "numero": 114,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Guarataro"
+  },
+  {
+   "numero": 116,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Vicente Hernández"
+  },
+  {
+   "numero": 118,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Padre Rodríguez"
+  },
+  {
+   "numero": 119,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de los Palacios"
+  },
+  {
+   "numero": 121,
+   "motivo": "ambigua_en_1936",
+   "nombre": "del Candilito"
+  },
+  {
+   "numero": 122,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Gobernador viejo"
+  },
+  {
+   "numero": 124,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Palo grande"
+  },
+  {
+   "numero": 125,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de la Quebrada de Lazarinos"
+  },
+  {
+   "numero": 127,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de Amaro"
+  },
+  {
+   "numero": 129,
+   "motivo": "cruce_dudoso",
+   "nombre": "del Cacho o del Carmen"
+  },
+  {
+   "numero": 130,
+   "motivo": "cruce_dudoso",
+   "nombre": "del Mamey"
+  },
+  {
+   "numero": 131,
+   "motivo": "cruce_dudoso",
+   "nombre": "del Marqués de León"
+  },
+  {
+   "numero": 134,
+   "motivo": "sin_pareja_1936",
+   "nombre": "del Sordo"
+  },
+  {
+   "numero": 136,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de la alcabala del Valle"
+  },
+  {
+   "numero": 137,
+   "motivo": "cruce_dudoso",
+   "nombre": "de Echezuría"
+  },
+  {
+   "numero": 138,
+   "motivo": "nombre_dudoso",
+   "nombre": "de Aurioli"
+  },
+  {
+   "numero": 139,
+   "motivo": "ambigua_en_1936",
+   "nombre": "del Rosario"
+  },
+  {
+   "numero": 140,
+   "motivo": "sin_pareja_1936",
+   "nombre": "de la Noria"
+  }
+ ]
+}

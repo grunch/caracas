@@ -143,3 +143,22 @@ def test_config_por_identidad_sin_correlacion_ni_anclas_sobre_las_semillas():
                                   'nota': 'esquina 35 «de la Torre» del plano de 1843 = «La Torre» de 1936'}
     assert junto_a_semilla == ['E1843-034']
     assert config['etapas'] == [{'paso': 1}] and config['anclas'] == [{'px': 9}]
+
+
+def test_las_esquinas_de_1936_sin_nombre_no_cuentan():
+    dic = DIC_1936 + [{'nombre': None, 'px': [1.0, 1.0]}]
+    anclas, _ = emparejar([_esq(34, 3204, 2639)], {34: _nom('del Principal')}, dic)
+    assert [a['id'] for a in anclas] == ['E1843-034']
+
+
+def test_depurar_quita_una_por_una_las_anclas_que_contradicen_a_sus_vecinas():
+    from esquinas_1843 import depurar_por_consistencia
+    anclas = _rejilla(n=5)
+    anclas[7] = {**anclas[7], 'x36': anclas[7]['x36'] + 2000.0}   # un homónimo de 1936 en otro barrio
+    anclas[18] = {**anclas[18], 'y36': anclas[18]['y36'] - 600.0}
+
+    quedan, fuera = depurar_por_consistencia(anclas, metro=0.5, umbral_m=55)
+
+    assert sorted(f['id'] for f in fuera) == sorted([anclas[7]['id'], anclas[18]['id']])
+    assert all(f['loo_m'] > 55 and f['motivo'] == 'contradice_a_sus_vecinas' for f in fuera)
+    assert len(quedan) == 23 and anclas[7]['x36'] == 2200.0   # sin mutar la entrada (200 + 2000)

@@ -16,7 +16,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from esquinas_1843 import emparejar, medir  # noqa: E402
+from esquinas_1843 import config_por_identidad, emparejar, medir  # noqa: E402
+from calce import json_legible  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parents[2]
 AUD = RAIZ / 'specs/auditoria-1843'
@@ -49,6 +50,8 @@ def main(argv=None):
     ap.add_argument('--gcp', type=Path, default=RAIZ / 'tools/geo/gcp/calce-1843-nypl-jesurun-facsimil-muller-stapler.json')
     ap.add_argument('--sectores', type=Path, default=AUD / 'sectores.json')
     ap.add_argument('--salida', type=Path, default=AUD / 'calce-identidad.json')
+    ap.add_argument('--escribir-config', action='store_true',
+                    help='reescribir el JSON del calce (--gcp) con las anclas que quedan y sin correlación; después, calce.py')
     a = ap.parse_args(argv)
     entradas = {k: _leer(getattr(a, k)) for k in ('esquinas', 'leyenda', 'diccionario', 'gcp', 'sectores')}
     (esquinas, _), (leyenda, _), (dic, _), (calce, _), (sectores, _) = entradas.values()
@@ -61,6 +64,11 @@ def main(argv=None):
            'entradas': {k: {'archivo': _relativa(getattr(a, k)), 'sha256': sha} for k, (_, sha) in entradas.items()},
            'metro': METRO_1936, **informe, 'omitidas': omitidas}
     a.salida.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+    if a.escribir_config:
+        en_calce = [d for d in informe['detalle'] if d['en_calce']]
+        nuevo, junto = config_por_identidad(calce, en_calce)
+        a.gcp.write_text(json_legible(nuevo), encoding='utf-8')
+        print(f"calce reescrito con {len(nuevo['anclas'])} anclas ({len(junto)} sobre semillas); correr calce.py")
     print(f"{informe['anclas']} anclas, {len(omitidas)} omitidas; calce vigente: mediana "
           f"{informe['calce_vigente']['mediana_desvio_m']} m; identidad: LOO RMS {informe['calce_identidad']['rms_loo_m']} m")
 
