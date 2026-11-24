@@ -55,7 +55,7 @@ test('la bienvenida sale una vez y se cierra con el teclado; «?» abre el Acerc
   await page.keyboard.press('?')
   const panel = page.getByRole('dialog', { name: 'Caracas, de 1772 a 1936' })
   await expect(panel).toBeVisible()
-  await expect(panel.getByRole('heading', { level: 3 })).toHaveText(['Qué estás viendo', 'Cómo moverte', 'Las épocas', 'Fuentes y licencias', 'Créditos'])
+  await expect(panel.getByRole('heading', { level: 3 })).toHaveText(['Qué estás viendo', 'Cómo moverte', 'Las épocas', 'Fuentes y licencias', 'Colabora', 'Créditos'])
   await expect(panel.locator('kbd')).toHaveText(['C', 'H', 'M', 'P', '/', '? o F1'])
   await expect(panel.getByText('no trae la línea de tiempo')).toBeVisible() // crece.json no está, como en la demo
   await panel.getByRole('navigation').getByRole('button', { name: 'Fuentes y licencias' }).click()
@@ -65,6 +65,13 @@ test('la bienvenida sale una vez y se cierra con el teclado; «?» abre el Acerc
   await expect(fuentes.locator('.lic.verificar')).toHaveText('por verificar Sin licencia declarada en la fuente; derechos por verificar.')
   await expect(fuentes.getByRole('link', { name: 'Ver en archive.org ↗' })).toHaveAttribute('rel', 'noopener')
   await expect(fuentes.getByText('© colaboradores de OpenStreetMap')).toBeVisible()
+  // «Colabora»: el proyecto es libre y los pasos para colaborar con tu IA van numerados
+  await panel.getByRole('navigation').getByRole('button', { name: 'Colabora' }).click()
+  const colabora = panel.locator('section', { has: page.getByRole('heading', { name: 'Colabora' }) })
+  await expect(colabora.getByRole('heading', { name: 'Colabora' })).toBeFocused()
+  await expect(colabora.getByText(/software libre/)).toBeVisible()
+  await expect(colabora.locator('ol.pasos > li').first()).toContainText('estado: aceptado')
+  await expect(colabora.getByRole('link', { name: 'CONTRIBUTING.md' })).toHaveAttribute('href', 'https://github.com/grunch/caracas/blob/main/CONTRIBUTING.md')
   await expect(panel.getByRole('link', { name: 'baires.mormon.garden' })).toHaveAttribute('href', 'https://baires.mormon.garden/')
   // modal también: «M» no llega al visor; Escape lo cierra y el foco vuelve al «?»
   await page.keyboard.press('m')

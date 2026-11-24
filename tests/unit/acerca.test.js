@@ -3,7 +3,7 @@ import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import {
   AUTOR,
-  REPOSITORIO, INSPIRACION, enlaceSeguro, sitioDe, enumerar, conMiles, validarCreditos, leerCreditos, epocasVisibles, queEstasViendo,
+  REPOSITORIO, INSPIRACION, CONTRIBUIR, LICENCIA, ISSUES, enlaceSeguro, sitioDe, enumerar, conMiles, validarCreditos, leerCreditos, epocasVisibles, queEstasViendo,
   bloqueDeEpoca, bloquesDeFuentes, seccionesDeAcerca, bloqueDeVersion,
 } from '../../src/acerca.js'
 import { ACCIONES } from '../../src/controles.js'
@@ -272,9 +272,9 @@ describe('seccionesDeAcerca', () => {
   const secciones = seccionesDeAcerca({ epocas: EPOCAS, desde: 1, creditos: validarCreditos(CREDITOS) })
   const seccion = (id, lista = secciones) => lista.find((s) => s.id === id)
 
-  it('trae las cinco secciones, en orden', () => {
+  it('trae las seis secciones, en orden', () => {
     expect(secciones.map((s) => [s.id, s.titulo])).toEqual([
-      ['viendo', 'Qué estás viendo'], ['moverte', 'Cómo moverte'], ['epocas', 'Las épocas'], ['fuentes', 'Fuentes y licencias'], ['creditos', 'Créditos'],
+      ['viendo', 'Qué estás viendo'], ['moverte', 'Cómo moverte'], ['epocas', 'Las épocas'], ['fuentes', 'Fuentes y licencias'], ['colabora', 'Colabora'], ['creditos', 'Créditos'],
     ])
   })
 
@@ -299,7 +299,53 @@ describe('seccionesDeAcerca', () => {
     const demo = seccionesDeAcerca({ epocas: null, desde: 1, creditos: null })
     expect(textoDe(seccion('epocas', demo))).toMatch(/no trae la línea de tiempo/)
     expect(textoDe(seccion('fuentes', demo))).toMatch(/no trae la lista de fuentes/)
-    expect(demo).toHaveLength(5)
+    expect(demo).toHaveLength(6)
+  })
+
+  describe('«Colabora»', () => {
+    const colabora = () => seccion('colabora')
+    const enlaces = (bloques) => bloques.flatMap((b) => b.partes ?? b.pasos.flat()).filter((p) => p.url).map((p) => p.url)
+
+    it('dice que el proyecto es libre, con su licencia, e invita a colaborar con o sin programar', () => {
+      const texto = textoDe(colabora())
+      expect(texto).toMatch(/software libre/)
+      expect(texto).toContain('AGPL-3.0')
+      expect(texto).toMatch(/no hace falta programar/i)
+      expect(enlaces(colabora().bloques)).toEqual(expect.arrayContaining([REPOSITORIO, LICENCIA, ISSUES]))
+    })
+
+    it('explica, en pasos numerados, cómo colaborar con tu IA: primero el issue aceptado, al final la revisión', () => {
+      const [pasos] = colabora().bloques.filter((b) => b.tipo === 'pasos')
+      expect(pasos.titulo).toBe('Con tu IA, paso a paso')
+      expect(pasos.pasos.length).toBeGreaterThanOrEqual(5)
+      const textos = pasos.pasos.map((p) => textoDe(p))
+      expect(textos[0]).toMatch(/issue/)
+      expect(textos[0]).toContain('estado: aceptado')
+      expect(textos.join(' ')).toMatch(/AGENTS\.md/)
+      expect(textos.join(' ')).toMatch(/test.*en rojo/)
+      expect(textos.at(-1)).toMatch(/revis/)
+    })
+
+    it('la prueba a mano la hace una persona: la IA ayuda pero no la reemplaza', () => {
+      const texto = textoDe(colabora())
+      expect(texto).toMatch(/a mano/)
+      expect(texto).toMatch(/no la reemplaza/)
+      expect(texto).toMatch(/captura/)
+    })
+
+    it('recuerda el estándar de calidad: respondes por cada línea, y lo que falta cierra el PR sin revisión', () => {
+      const texto = textoDe(colabora())
+      expect(texto).toMatch(/respondes por cada línea/i)
+      for (const requisito of ['issue aceptado', 'plantilla', 'prueba a mano', 'test en rojo', 'fuente']) expect(texto).toContain(requisito)
+      expect(texto).toMatch(/se cierra sin revisión/)
+      expect(enlaces(colabora().bloques)).toContain(CONTRIBUIR)
+    })
+
+    it('los enlaces van al repositorio', () => {
+      expect(CONTRIBUIR).toBe(`${REPOSITORIO}/blob/main/CONTRIBUTING.md`)
+      expect(LICENCIA).toBe(`${REPOSITORIO}/blob/main/LICENSE`)
+      expect(ISSUES).toBe(`${REPOSITORIO}/issues`)
+    })
   })
 
   it('los créditos nombran al autor (con su cuenta de X), la inspiración, a Claude y el repositorio, y a ninguna persona más', () => {
