@@ -8,7 +8,7 @@ Fecha: 24-11-2026. Base: [B1843-001](B1843-001.json) (`main` f00b74d, `datos-202
 2. **Leyenda.** Transcrita entera ([leyenda.json](leyenda.json)): 140 esquinas (no 136), iglesias A–T, ríos, puentes, puntos notables, calles y parroquias, con los recortes y sus SHA-256.
 3. **Emparejado por nombre** (`tools/geo/esquinas_1843.py`): una esquina ancla solo con número, cruce y nombre seguros y un nombre único en el diccionario de 1936. 64 anclan; 74 quedan omitidas con motivo (50 sin pareja en 1936, 12 cruces dudosos, 6 números repetidos, 3 ambiguas, 3 nombres dudosos).
 4. **Depuración por consistencia.** Se quita de a una el ancla cuyo error dejando uno fuera supera media cuadra (55 m). Salen 8: tres homónimos de 1936 a más de 1,4 km (La Soledad, Santa Ana, San Felipe) y cinco a entre 66 y 318 m (La Hoyada, Manduca, El Silencio, Mercaderes, Traposos). No se corrigen: quedan listadas en `contradicen_a_sus_vecinas` para revisarlas a ojo.
-5. **Calce nuevo** sin correlación (`etapas: []`): 4 semillas de la plaza + 53 anclas (3 de las 56 caen sobre semillas). `calce.py` declara LOO RMS 12,4 m, p90 18,3 m, máximo 30,2 m.
+5. **Calce nuevo** sin correlación (`etapas: []`): 4 semillas de la plaza + 53 anclas (3 de las 56 caen sobre semillas). `calce.py` declara LOO RMS 12,4 m, p90 18,3 m, máximo 30,2 m. Sin pliegues: 0 celdas de 10 px con el jacobiano invertido en todo el marco del mapa (`anclas_identidad.celdas_plegadas`).
 
 ## Resultado
 
