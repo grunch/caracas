@@ -3,10 +3,11 @@ import { readFileSync } from 'node:fs'
 import {
   MARCA, secciones, normalizar, seccionesDePlantilla, pasos, tipoDelPR, codigo, evaluar, comentario,
   revisarIssue, revisarPlantilla, revisarPruebaAMano, revisarCapturas, revisarFuentes, revisarFixConTest,
-  revisarPlan, revisarTamano, revisarPrsAbiertos,
+  revisarPlan, revisarTamano, revisarPrsAbiertos, revisarRendimiento, conClavesDeRendimiento,
 } from '../../tools/triaje/triaje-lib.mjs'
 
-const cfg = JSON.parse(readFileSync('tools/triaje/config.json', 'utf8'))
+const presupuesto = JSON.parse(readFileSync('tools/rendimiento/presupuesto.json', 'utf8'))
+const cfg = conClavesDeRendimiento(JSON.parse(readFileSync('tools/triaje/config.json', 'utf8')), presupuesto)
 const PLANTILLA_MD = readFileSync('.github/pull_request_template.md', 'utf8')
 const plantilla = seccionesDePlantilla(PLANTILLA_MD)
 
@@ -26,6 +27,7 @@ const CUERPO_BUENO = {
   'Qué toca': 'Buscador, todas las épocas. src/buscador.js',
   'Qué más podría romperse': 'Las fichas leen el mismo diccionario; no cambia su formato.',
   Fuentes: 'No aplica: no toca datos históricos.',
+  Rendimiento: 'No aplica: no toca la carga, la geometría, los shaders ni las texturas.',
 }
 const PRUEBA_BUENA = {
   Preparación: 'npm run dev con los datos completos, Chrome 131.',
@@ -61,7 +63,7 @@ describe('markdown de la descripción', () => {
   it('lee la plantilla del repo con todas sus secciones', () => {
     expect(Object.keys(plantilla)).toEqual([
       'Issue o tarea', 'Tipo', 'Qué cambia y por qué', 'Qué toca', 'Qué más podría romperse', 'Fuentes',
-      'Prueba a mano', 'Tests automáticos', 'Checklist', 'Asistencia de IA',
+      'Rendimiento', 'Prueba a mano', 'Tests automáticos', 'Checklist', 'Asistencia de IA',
     ])
   })
   it('junta cada paso numerado con sus líneas de continuación', () => {
@@ -149,6 +151,43 @@ describe('revisiones', () => {
     expect(revisarFuentes(conEnlace, datos, cfg).paso).toBe(true)
     expect(revisarFuentes(secciones(cuerpo()), [archivo('fuentes/imagenes/2024-x/ficha.json')], cfg).paso).toBe(false)
   })
+  it('rendimiento: lo que no toca la carga, la geometría, los shaders ni las texturas no pide medición', () => {
+    const s = secciones(cuerpo())
+    expect(revisarRendimiento(s, [archivo('src/buscador.js')], cfg).paso).toBe(true)
+    expect(revisarRendimiento(s, [archivo('src/fichas.css')], cfg).paso).toBe(true)
+    expect(revisarRendimiento(s, [archivo('tests/unit/casas.test.js')], cfg).paso).toBe(true)
+  })
+  it('rendimiento: si el diff toca lo que cuesta, pide la medición de main y la de esta rama', () => {
+    const s = secciones(cuerpo())
+    for (const nombre of ['src/shader/fachada.js', 'src/ciudad-trabajador.js', 'src/hitos/panteon-modelo.js',
+      'src/hitos-pedido.js', 'src/sw.js', 'src/temprano.js', 'src/plano-niveles.js', 'tools/empacar-ciudad.mjs', 'vite.config.js']) {
+      expect(revisarRendimiento(s, [archivo(nombre)], cfg).motivos).toEqual([
+        'Rendimiento: el PR toca la carga, la geometría, los shaders o las texturas; pega la medición de `main` y la de esta rama (`tests/e2e/medir-rendimiento.mjs`)',
+      ])
+    }
+  })
+  it('rendimiento: la medición nombra un tope del presupuesto y dice cuál es la de main', () => {
+    const shader = [archivo('src/shader/fachada.js')]
+    const sinMain = secciones(cuerpo({ Rendimiento: 'casasMs: 5600 (tope 5000) · NO PASA' }))
+    expect(revisarRendimiento(sinMain, shader, cfg).paso).toBe(false)
+    const sinTope = secciones(cuerpo({ Rendimiento: 'Igual que en main, lo miré con ?medir.' }))
+    expect(revisarRendimiento(sinTope, shader, cfg).paso).toBe(false)
+    const informe = secciones(cuerpo({ Rendimiento: [
+      'En `main`:', '```', 'casasMs: 5700 (tope 5000) · NO PASA', 'msPorCuadroCentro: — (tope 16.6) · sin medir', '```',
+      'En esta rama:', '```', 'casasMs: 5650 (tope 5000) · NO PASA', '```',
+    ].join('\n') }))
+    expect(revisarRendimiento(informe, shader, cfg).paso).toBe(true)
+    const tabla = secciones(cuerpo({ Rendimiento: '| tope | main | esta rama |\n|---|---|---|\n| `triangulosCentro` | 4,4 M | 4,5 M |' }))
+    expect(revisarRendimiento(tabla, [archivo('src/hitos/panteon.js')], cfg).paso).toBe(true)
+  })
+  it('rendimiento: «main» tiene que ser la palabra, no parte de otra', () => {
+    const r = secciones(cuerpo({ Rendimiento: 'mainframe: casasMs 5600' }))
+    expect(revisarRendimiento(r, [archivo('src/casas.js')], cfg).paso).toBe(false)
+  })
+  it('rendimiento: las claves salen del presupuesto, no de una lista aparte', () => {
+    expect(cfg.claves_rendimiento).toEqual(Object.keys(presupuesto.topes))
+    expect(conClavesDeRendimiento({ a: 1 }, {}).claves_rendimiento).toEqual([])
+  })
   it('fix con test: un fix agrega un it()/test() en tests/ o un def test_ en tools/geo/tests', () => {
     const js = archivo('tests/unit/camara.test.js', { parche: "@@\n+  it('no se aleja de más', () => {" })
     const py = archivo('tools/geo/tests/test_relieve.py', { parche: '@@\n+def test_borde():' })
@@ -217,6 +256,14 @@ describe('evaluar', () => {
   it('renombrar código a .md no es «solo markdown»', () => {
     const r = evaluar(pr(), hechos({ archivos: [archivo('notas.md', { antes: 'src/a.js' })] }), cfg, plantilla)
     expect(r.exento).toBe(null)
+  })
+  it('un PR que toca un shader sin medir junta el motivo de rendimiento; la etiqueta de exento lo salta', () => {
+    const shader = hechos({ ...issueAceptado, archivos: [archivo('src/shader/fachada.js')] })
+    const conCapturas = cuerpo({}, { Capturas: '![antes](https://x/a.png) ![después](https://x/b.png)' })
+    const r = evaluar(pr({ cuerpo: conCapturas }), shader, cfg, plantilla)
+    expect(r.motivos).toEqual([expect.stringContaining('Rendimiento:')])
+    const exento = evaluar(pr({ cuerpo: conCapturas, etiquetas: ['calidad:exento'] }), shader, cfg, plantilla)
+    expect(exento.revisiones.find((c) => c.nombre === 'rendimiento').omitida).toBe(true)
   })
   it('la etiqueta de exento salta el contenido pero no el tamaño', () => {
     const r = evaluar(pr({ etiquetas: ['calidad:exento'] }), hechos({ archivos: [archivo('src/a.js', { mas: 3001 })] }), cfg, plantilla)

@@ -9,7 +9,7 @@
 import { readFileSync, appendFileSync } from 'node:fs'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { dirname, join } from 'node:path'
-import { MARCA, evaluar, comentario, resumen, seccionesDePlantilla } from './triaje-lib.mjs'
+import { MARCA, evaluar, comentario, resumen, seccionesDePlantilla, conClavesDeRendimiento } from './triaje-lib.mjs'
 
 const AQUI = dirname(fileURLToPath(import.meta.url))
 const RAIZ = join(AQUI, '..', '..')
@@ -116,7 +116,8 @@ export async function aplicarResultado(gh, numero, sha, etiquetasActuales, resul
 export async function principal(env = process.env, gh = crearGitHub(env.GITHUB_REPOSITORY, env.GITHUB_TOKEN)) {
   const pr = prDelEvento(JSON.parse(readFileSync(env.GITHUB_EVENT_PATH, 'utf8')))
   if (pr.borrador) { console.log(`#${pr.numero} es un borrador: se revisa cuando pase a listo.`); return null }
-  const cfg = JSON.parse(readFileSync(join(AQUI, 'config.json'), 'utf8'))
+  const presupuesto = JSON.parse(readFileSync(join(RAIZ, 'tools/rendimiento/presupuesto.json'), 'utf8'))
+  const cfg = conClavesDeRendimiento(JSON.parse(readFileSync(join(AQUI, 'config.json'), 'utf8')), presupuesto)
   const plantilla = seccionesDePlantilla(readFileSync(join(RAIZ, '.github/pull_request_template.md'), 'utf8'))
   const resultado = evaluar(pr, await hechosDelPR(gh, pr), cfg, plantilla)
   await aplicarResultado(gh, pr.numero, pr.sha, pr.etiquetas, resultado, cfg)

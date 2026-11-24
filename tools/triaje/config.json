@@ -31,6 +31,16 @@
     ],
     "$no_visuales": "Scripts de auditoría dentro de una ruta visual: escriben informes y nada del generador los importa. Antes de agregar uno, comprobar que ningún módulo del pipeline lo importa (cierre_fase3, 4, 5 y 7 sí se importan).",
     "$rutas": "«dir/» y «algo*» son prefijos, «.ext» una terminación, lo demás un archivo exacto. Lo de tests/ y tools/geo/tests/ nunca pide capturas, ni lo de no_visuales.",
+    "rendimiento": [
+      "src/main.js", "src/temprano.js", "src/pak.js", "src/cache-datos.js", "src/sw.js", "src/registrar-sw.js",
+      "src/calidad.js", "src/resolucion.js", "src/baldosas.js", "src/teselas.js", "src/plano-niveles.js", "src/planos.js",
+      "src/ciudad*", "src/casas.js", "src/hitos*", "src/edificios.js", "src/techos.js", "src/alzado.js", "src/alas.js",
+      "src/arboles.js", "src/relieve.js", "src/calles*", "src/mascaras.js", "src/shader/", "src/material.js",
+      "src/acabado.js", "src/luz.js", "src/cielo.js", "vite.config.js",
+      "tools/empacar*", "tools/arboles*", "tools/plano*", "tools/paquete-datos*", "tools/hitos-planta.mjs",
+      "tools/cubiertas*", "tools/suelo*", "tools/rotulos*", "tools/silvestres*"
+    ],
+    "$rendimiento": "Lo que toca la carga, los workers, la geometría, los shaders, las texturas o los datos que se bajan: el PR pega la medición de main y la de su rama (specs/10-rendimiento.md § 3). «src/hitos*» incluye los modelos de src/hitos/: un hito nuevo suma triángulos.",
     "historicas": ["fuentes/", "src/marcas-datos.js", "src/fichas-datos.js", "src/hitos/"],
     "plan": "specs/07-plan-de-implementacion.md"
   }

@@ -44,6 +44,10 @@ Si eres un agente de IA preparando un PR, sigue `CONTRIBUTING.md § El estándar
   a mano antes de pedir revisión. No presentes como hechos pasos que nadie corrió.
 - Si el cambio se ve (fix o mejora), pon captura de antes (`main`) y de después (esta rama), misma vista, época y modo.
 - En un fix, el primer commit es `test:` y solo agrega el test de regresión, que falla en `main`.
+- Si el PR toca la carga, los workers, la geometría, los hitos, los shaders o las texturas, la sección
+  **Rendimiento** trae la salida de `tests/e2e/medir-rendimiento.mjs` en `main` y en la rama, y lo que no se
+  midió (sin GPU no hay tiempo por cuadro). Nada empeora más que el ruido sin decir por qué (`CONTRIBUTING.md § Rendimiento`).
+  No presentes una medición que no corriste.
 - Cada dato histórico nuevo lleva su fuente con enlace en la sección **Fuentes**. Nunca inventes una fecha,
   un nombre, una forma o una fuente; lo no verificado se marca como tal.
 - Si no pudiste correr el sitio o los tests, dilo en el PR en vez de presentar resultados.

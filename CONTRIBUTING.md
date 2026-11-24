@@ -64,13 +64,13 @@ Las reglas son sobre la evidencia que trae el PR, no sobre cómo se escribió.
    te lo pregunten. «Lo escribió la herramienta» no es una respuesta.
 2. Un PR que no sigue la [plantilla](#la-plantilla), no enlaza un [issue aceptado](#issue-antes-del-pr) cuando hace
    falta, o no cumple la [Prueba a mano](#prueba-a-mano), el [Test en rojo](#test-en-rojo) o las
-   [Fuentes](#fuentes) **se cierra sin revisión técnica**, con el [mensaje de siempre](.github/mensaje-de-cierre.md).
+   [Fuentes](#fuentes) o la [medición de Rendimiento](#rendimiento) **se cierra sin revisión técnica**, con el [mensaje de siempre](.github/mensaje-de-cierre.md).
    Lo puedes reabrir cuando lo cumpla.
 3. Un PR cuya descripción no coincide con su diff, o cuyos pasos de la Prueba a mano no funcionan cuando alguien
    los sigue, se cierra igual. Lo mismo un dato histórico inventado o con una fuente que no dice lo que el PR dice.
 4. Una cuenta que abre una y otra vez PRs cerrados por esto puede quedar bloqueada.
 
-**Exentos** del issue, la plantilla, la Prueba a mano y el Test en rojo: los PRs que solo cambian archivos Markdown
+**Exentos** del issue, la plantilla, la Prueba a mano, el Test en rojo y la medición de Rendimiento: los PRs que solo cambian archivos Markdown
 (pero un Markdown en `fuentes/` igual lleva sus fuentes), los de bots y los que quien mantiene el repo etiqueta
 `calidad:exento`. Esa etiqueta es una decisión explícita de quien mantiene el repo y también salta la revisión de
 fuentes del bot: quien la pone responde por las fuentes de ese PR. Quien mantiene el repo no necesita issue aceptado, pero sus PRs (y los que abren sus agentes de IA)
@@ -169,6 +169,55 @@ fuente, con enlace, en la sección **Fuentes**, además de en su ficha (`fuentes
 (`src/marcas-datos.js`, `src/fichas-datos.js`). Lo que no se pudo verificar se dice. Si el PR no toca datos
 históricos, «No aplica» y por qué. Un dato inventado, o una fuente que no dice lo que el PR le atribuye, es motivo
 de cierre.
+
+### Rendimiento
+
+El sitio levanta 39 mil casas, 37 mil árboles y decenas de hitos en el navegador, también en un teléfono. Costó un
+plan entero (T76, [`specs/10-rendimiento.md`](specs/10-rendimiento.md)) dejarlo cerca de su presupuesto; un PR no
+lo devuelve atrás sin decirlo. Como en las Fuentes, lo que se pide es evidencia: una medición, no una promesa.
+
+**Si el PR toca la carga, los workers, la geometría, los shaders, las texturas o los datos que se bajan** (las
+rutas de `rutas.rendimiento` en [`tools/triaje/config.json`](tools/triaje/config.json); un hito nuevo cuenta,
+porque suma triángulos), la sección **Rendimiento** trae la medición de `main` y la de esta rama, en el mismo
+equipo y con los mismos datos:
+
+```sh
+npm run build && npx vite preview --port 4173      # en cada rama; queda sirviendo
+node tests/e2e/medir-rendimiento.mjs http://localhost:4173/ --gpu
+```
+
+- Pega las líneas del presupuesto que el script imprime al final (`casasMs: 5650 (tope 5000) · NO PASA`), las de
+  `main` y las de tu rama, rotuladas. Una tabla con una columna por rama también sirve.
+- Sin GPU, quita `--gpu`: el tiempo por cuadro queda «sin medir» y lo demás vale igual. Con la muestra en vez de
+  los datos completos, los números solo se comparan entre las dos ramas, no con los topes. Lo que no mediste, lo
+  dices.
+- **No empeorar.** Contra `main`, ningún valor empeora más que el ruido entre corridas: un 5 % en los tiempos (la
+  memoria varía más; mira el orden de magnitud). Los bytes y los triángulos no tienen ruido: si suben, la sección
+  dice cuánto y por qué vale la pena. Un tope que ya se cumple (hoy, el tiempo por cuadro) no se vuelve a pasar.
+- El tamaño del build ya lo comprueba el CI (`tools/rendimiento/presupuesto-build.mjs`): si tu PR lo pasa, el CI
+  falla, y subir un tope es una decisión que se discute en el issue, no en el diff.
+- Si el PR no toca nada de eso: «No aplica» y por qué.
+
+**Cómo no volver atrás.** No es una lista de motivos de cierre, sino lo que quien revisa va a mirar en el diff:
+
+- **No congeles la página.** Lo pesado (leer un `.pak`, armar geometría) va en los workers
+  (`src/ciudad-trabajador.js`, `src/hitos-trabajador.js`) o se reparte cediendo el hilo entre baldosas. Una tarea
+  de más de 200 ms en el hilo principal se nota.
+- **No pidas más al abrir.** Lo que la primera vista no necesita se pide después: por época, o cuando la vista lo
+  pide (como el plano de 8192, `src/plano-niveles.js`). Un dato nuevo va en `datos/manifiesto.json` con su sha256,
+  así el service worker lo guarda y lo renueva cuando cambia.
+- **Suelta la memoria.** La geometría que ya subió a la GPU no se queda en JS (`geometriaDePaquete`,
+  `src/ciudad-geometria.js`); lo que necesite leerla después abre con `?arreglos`.
+- **Dibuja poco.** Nada de una malla ni de una llamada de dibujo por casa o por árbol: `InstancedMesh`, las
+  baldosas y los materiales y uniforms que ya existen. Un hito casi siempre se ve de lejos: sus triángulos, donde
+  se notan.
+- **Dibuja solo cuando algo cambia.** El render es bajo demanda (`pedirCuadro`, `src/main.js`): nada de un
+  `requestAnimationFrame` que dibuje sin parar.
+- **Respeta los niveles de calidad** (`src/calidad.js`: completo, liviano, mínimo). Lo caro que agregues (sombras,
+  detalle, texturas grandes) tiene su versión liviana o se apaga en el mínimo.
+- **Texturas del tamaño que se ve**: no una de 4096 donde basta una de 1024.
+- Para mirar mientras trabajas, abre el sitio con `?medir`: muestra el tiempo por cuadro, las llamadas de dibujo
+  y los triángulos de lo que tienes delante.
 
 ## Convenciones
 

@@ -12,7 +12,7 @@
 export const MARCA = '<!-- triaje-calidad -->'
 export const TIPOS = new Set(['fix', 'feat', 'refactor', 'docs', 'test', 'chore', 'perf', 'ci'])
 /** Las revisiones del contenido de la descripción: las que salta un PR exento. */
-export const DE_CONTENIDO = new Set(['issue', 'plantilla', 'prueba-a-mano', 'capturas', 'fuentes', 'fix-con-test', 'plan'])
+export const DE_CONTENIDO = new Set(['issue', 'plantilla', 'prueba-a-mano', 'capturas', 'fuentes', 'rendimiento', 'fix-con-test', 'plan'])
 
 const VALLA = /^ {0,3}(`{3,}|~{3,})(.*)$/
 const COMENTARIO = /<!--[\s\S]*?-->/g
@@ -22,6 +22,7 @@ const TEST_JS = /^\+\s*(it|test)(\.\w+)?\(/
 const TEST_PY = /^\+\s*def test_/
 const IMAGEN = /!\[[^\]]*\]\([^)\s]+[^)]*\)|<img\s[^>]*src=/gi
 const ENLACE = /https?:\/\/\S+/
+const MAIN = /(^|[^\w-])main([^\w-]|$)/i
 const TAREA = /\bT\d+[a-z]?(\.\d+[a-z]?)?\b/
 
 const revision = (nombre, motivos = []) => ({ nombre, paso: motivos.length === 0, motivos, omitida: false })
@@ -138,6 +139,17 @@ export function revisarFuentes(s, archivos, cfg) {
   return revision('fuentes', ENLACE.test(normalizar(s.Fuentes ?? '')) ? [] : ['Fuentes: el PR toca datos históricos y no enlaza ninguna fuente'])
 }
 
+/** Las claves de los topes de `tools/rendimiento/presupuesto.json` en la configuración: una sola lista, la del presupuesto. */
+export const conClavesDeRendimiento = (cfg, presupuesto) => ({ ...cfg, claves_rendimiento: Object.keys(presupuesto.topes ?? {}) })
+
+/** Si el diff toca lo que cuesta (carga, geometría, shaders, texturas), la medición de main y la de la rama (specs/10 § 3). */
+export function revisarRendimiento(s, archivos, cfg) {
+  if (!archivos.some((a) => !esTest(a.nombre) && enRutas(a.nombre, cfg.rutas.rendimiento))) return revision('rendimiento')
+  const texto = (s.Rendimiento ?? '').replace(COMENTARIO, '')
+  const mide = cfg.claves_rendimiento.some((clave) => texto.includes(clave)) && MAIN.test(texto)
+  return revision('rendimiento', mide ? [] : ['Rendimiento: el PR toca la carga, la geometría, los shaders o las texturas; pega la medición de `main` y la de esta rama (`tests/e2e/medir-rendimiento.mjs`)'])
+}
+
 export function revisarFixConTest(archivos, esFix) {
   if (!esFix) return revision('fix-con-test')
   const deTest = archivos.filter((a) => esTest(a.nombre))
@@ -195,6 +207,7 @@ export function evaluar(pr, hechos, cfg, plantilla) {
     revisarPruebaAMano(s, esFix),
     revisarCapturas(s, hechos.archivos, cfg),
     revisarFuentes(s, hechos.archivos, cfg),
+    revisarRendimiento(s, hechos.archivos, cfg),
     revisarFixConTest(hechos.archivos, esFix),
     revisarPlan(s, hechos.archivos, cfg),
     revisarTamano(hechos.archivos, primeraVez, cfg),
