@@ -22,8 +22,10 @@
  * marcos y alas (opcionales, Float32): el marco del lote de cada casa que da a la calle y las alas de
  * las casas de patio (src/alas.js); vuelos (opcional, Uint8): por techo, los centímetros que puede volar su
  * alero sin entrar en la calzada de 1772 (tools/geo/epocas.py, vuelos_1772), 255 = sin tope.
+ *
+ * Este módulo no usa three.js: corre también en un worker (src/ciudad-trabajador.js), para no congelar la
+ * página mientras se levantan las casas. La BufferGeometry se arma en src/ciudad-geometria.js.
  */
-import { BufferGeometry, BufferAttribute } from 'three'
 import { simplificarAdentro, rectanguloMinimo, areaConSigno, crearIndice } from './poligono.js'
 import { planDeTecho, elegirFrente, etapasDe, LADO_LIBRE } from './techos.js'
 import { alzarCasa } from './alzado.js'
@@ -265,19 +267,32 @@ function planDeEtapa(casa, etapa, { marco, libres, lleno, alas, crujia }) {
 /** El lote con que se levanta una etapa: el de las alas si en ella la casa es de patio; si no, el de la huella entera. */
 const loteDeEtapa = (casa, etapa, lote) => (lote.entero && !esDePatio(etapa.estilo, casa.semilla, etapa.nace) ? lote.entero : lote)
 
-/** Devuelve arrays planos (posiciones, normales, info, vidas, anclas, paredes, cubiertas, historias, indices); sin three.js de por medio. */
-export function extruirTechos(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M } = {}) {
+/**
+ * Lo que no depende de qué casas se levantan: las casas leídas del pak y los dos índices espaciales con que
+ * cada una mira a sus vecinas. Se hace una vez y sirve para levantar la ciudad entera o por partes (extruirCasas).
+ */
+export function prepararCasas(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M } = {}) {
   const casas = leerCasas(datos, coords, tolerancia)
   // las casas que mueren (las de la fundación) se enciman con las que vienen después: no cuentan como vecinas
   const indice = crearIndice(casas.map((c) => (c.muere === 0 ? c.huella : null)))
   // todas las casas, para ver qué lados de un marco están libres de casas de su época (T33j.6h)
   const todas = crearIndice(casas.map((c) => c.huella))
+  return { casas, indice, todas }
+}
+
+/**
+ * Levanta las casas de `preparado` (prepararCasas) y devuelve arrays planos (posiciones, normales, info, vidas,
+ * anclas, paredes, cubiertas, historias, indices). `numeros`: cuáles (por su número en el pak; todas si falta),
+ * en ese orden. `quiere(tramo)`: de cada casa, solo los tramos de épocas ({ nace, muere }) para los que da true.
+ */
+export function extruirCasas({ casas, indice, todas }, { numeros = null, quiere = null } = {}) {
   // ¿la casa n vive en algún momento del tramo de épocas [desde, hasta)?
   const viveEn = (n, desde, hasta) => casas[n].nace < hasta && (casas[n].muere || Infinity) > desde
   // las casas de la fundación (nacen en la época 0 y mueren) se enciman con lo que viene después: no son vecinas;
   // las demás cuentan en el tramo en que conviven (revisión de #147)
   const cuentaComoVecina = (n) => !(casas[n].nace === 0 && casas[n].muere > 0)
-  const b = crearBuferes(Math.max(64, casas.length * VERTICES_POR_CASA))
+  const cuales = numeros ?? casas.map((_, n) => n)
+  const b = crearBuferes(Math.max(64, cuales.length * VERTICES_POR_CASA))
   // qué puntos alrededor de la huella (a 0,1 y 0,8 m de cada lado, a lo largo) están ocupados por las casas que
   // cuenta(n) deja: el entorno donde puede ir un alero, como una cadena para comparar tramos de épocas
   const entorno = (casa, numero, cuenta) => {
@@ -296,8 +311,9 @@ export function extruirTechos(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M 
     }
     return firma
   }
-  casas.forEach((casa, numero) => {
-    if (!casa.huella) return
+  for (const numero of cuales) {
+    const casa = casas[numero]
+    if (!casa.huella) continue
     // las vecinas que pueden quedar donde iría un alero, y las épocas en que nacen o mueren: cada etapa se parte ahí,
     // para que la casa vuele donde, en ese tramo de épocas, no hay otra (revisión de #147)
     const xs = casa.huella.map((p) => p[0]), zs = casa.huella.map((p) => p[1])
@@ -319,13 +335,14 @@ export function extruirTechos(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M 
         const suyo = lote && loteDeEtapa(casa, etapa, lote)
         if (!suyo) return
         const tramo = { ...etapa, nace: desde, muere: hasta === Infinity ? 0 : hasta }
+        if (quiere && !quiere(tramo)) return
         const { origen: o, eu, ev } = suyo.marco
         // otra casa del tramo en un punto del marco del lote: ahí no vuela el alero (T33j.6h)
         const ocupado = (u, v) => todas.ocupado(o[0] + u * eu[0] + v * ev[0], o[1] + u * eu[1] + v * ev[1], numero, cuenta)
         alzarCasa({ anillo: suyo.anillo, plan: planDeEtapa(casa, tramo, suyo), libres: suyo.libres, ocupado }, escritor(b, casa, tramo, suyo.marco))
       })
     }
-  })
+  }
 
   const salida = {}
   for (const [nombre, tamaño] of Object.entries(CAMPOS)) salida[nombre] = b[nombre].slice(0, b.vertices * tamaño)
@@ -333,19 +350,57 @@ export function extruirTechos(datos, coords, { tolerancia = TOLERANCIA_HUELLA_M 
   return { ...salida, indices: b.vertices > 65535 ? indices.slice() : new Uint16Array(indices) }
 }
 
-export function geometriaCiudad(datos, coords) {
-  const { posiciones, normales, info, vidas, anclas, paredes, cubiertas, historias, indices } = extruirTechos(datos, coords)
-  const g = new BufferGeometry()
-  g.setAttribute('position', new BufferAttribute(posiciones, 3))
-  // las normales en un byte por componente y la vida en bytes: son millones de vértices
-  g.setAttribute('normal', new BufferAttribute(Int8Array.from(normales, (v) => Math.round(v * 127)), 3, true))
-  g.setAttribute('aInfo', new BufferAttribute(info, 4))
-  g.setAttribute('aVida', new BufferAttribute(Uint8Array.from(vidas), 2))
-  g.setAttribute('aAncla', new BufferAttribute(anclas, 2))
-  g.setAttribute('aPared', new BufferAttribute(paredes, 3))
-  g.setAttribute('aTecho', new BufferAttribute(cubiertas, 4))
-  g.setAttribute('aHistoria', new BufferAttribute(historias, 2))
-  g.setIndex(new BufferAttribute(indices, 1))
-  g.computeBoundingSphere()
-  return g
+/** Las casas del pak, levantadas todas de una vez. */
+export function extruirTechos(datos, coords, opciones) {
+  return extruirCasas(prepararCasas(datos, coords, opciones))
 }
+
+/** Los atributos de la geometría: de qué array de extruirCasas sale cada uno, cuántos números por vértice y su tipo. */
+export const ATRIBUTOS = Object.freeze({
+  position: { campo: 'posiciones', n: 3, Tipo: Float32Array },
+  // las normales en un byte por componente y la vida en bytes: son millones de vértices
+  normal: { campo: 'normales', n: 3, Tipo: Int8Array, normalizado: true },
+  aInfo: { campo: 'info', n: 4, Tipo: Float32Array },
+  aVida: { campo: 'vidas', n: 2, Tipo: Uint8Array },
+  aAncla: { campo: 'anclas', n: 2, Tipo: Float32Array },
+  aPared: { campo: 'paredes', n: 3, Tipo: Float32Array },
+  aTecho: { campo: 'cubiertas', n: 4, Tipo: Float32Array },
+  aHistoria: { campo: 'historias', n: 2, Tipo: Float32Array },
+})
+
+/** La esfera que envuelve los puntos, como la de three.js: el centro de su caja y el radio hasta el más lejano. */
+export function esferaDe(posiciones) {
+  if (!posiciones.length) return { centro: [0, 0, 0], radio: 0 }
+  const min = [Infinity, Infinity, Infinity], max = [-Infinity, -Infinity, -Infinity]
+  for (let k = 0; k < posiciones.length; k++) {
+    const v = posiciones[k]
+    if (v < min[k % 3]) min[k % 3] = v
+    if (v > max[k % 3]) max[k % 3] = v
+  }
+  const centro = [(min[0] + max[0]) / 2, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2]
+  let lejos2 = 0
+  for (let k = 0; k < posiciones.length; k += 3) {
+    const dx = posiciones[k] - centro[0], dy = posiciones[k + 1] - centro[1], dz = posiciones[k + 2] - centro[2]
+    lejos2 = Math.max(lejos2, dx * dx + dy * dy + dz * dz)
+  }
+  return { centro, radio: Math.sqrt(lejos2) }
+}
+
+/**
+ * Lo que da extruirCasas, listo para la GPU: cada atributo en su tipo final (ATRIBUTOS), los índices y la esfera
+ * que lo envuelve. Es lo que viaja del worker a la página: solo arrays tipados y números.
+ */
+export function paqueteDeGeometria(crudo) {
+  const atributos = {}
+  for (const [nombre, { campo, Tipo, normalizado }] of Object.entries(ATRIBUTOS)) {
+    const origen = crudo[campo]
+    if (Tipo === Float32Array) { atributos[nombre] = origen; continue }
+    const destino = new Tipo(origen.length)
+    for (let k = 0; k < origen.length; k++) destino[k] = normalizado ? Math.round(origen[k] * 127) : origen[k]
+    atributos[nombre] = destino
+  }
+  return { atributos, indices: crudo.indices, esfera: esferaDe(crudo.posiciones) }
+}
+
+/** Los búferes de un paquete, para transferirlos sin copia (postMessage). */
+export const transferiblesDe = ({ atributos, indices }) => [...Object.values(atributos), indices].map((a) => a.buffer)

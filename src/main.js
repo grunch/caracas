@@ -3,7 +3,8 @@ import {
   CanvasTexture, TextureLoader, SRGBColorSpace, Color, Timer, HemisphereLight, DirectionalLight, LinearFilter,
 } from 'three'
 import { cargarPak } from './pak.js'
-import { geometriaCiudad } from './ciudad.js'
+import { geometriaDePaquete } from './ciudad-geometria.js'
+import { pedirCiudad } from './ciudad-pedido.js'
 import { crearMaterialCiudad, crearMaterialSombraCiudad } from './material.js'
 import { cargarArboles } from './arboles.js'
 import { HITOS, crearHitos, suprimirTechos, zonasDeSupresion } from './hitos.js'
@@ -216,16 +217,24 @@ let olaObjetivo = 0
 let olaMax = Math.hypot(Math.max(-hoja.x0, hoja.x0 + hoja.ancho), Math.max(-hoja.z0, hoja.z0 + hoja.alto)) + ciudad.U.uAnchoOla.value
 let arboles = null
 let datosCiudad = null // las partes de ciudad.pak, con la vida que dejan los hitos: el modo a pie choca con ellas
+let casasListas = false
+// las casas se levantan en un worker, para que la página no se congele mientras tanto (src/ciudad-pedido.js);
+// ?sintrabajador las levanta en este hilo, como antes (para comparar, o si el worker da problemas)
+const crearTrabajador = params.has('sintrabajador') || typeof Worker !== 'function' ? null
+  : () => new Worker(new URL('./ciudad-trabajador.js', import.meta.url), { type: 'module' })
 const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array }).then((datos) => {
   // donde hay un hito modelado a mano, la casa genérica de ese lugar no nace (src/hitos/suprimir.js)
   datosCiudad = { ...datos, vida: suprimirTechos(datos, zonasDeSupresion(HITOS)) }
-  const g = geometriaCiudad(datosCiudad, coords)
+  return pedirCiudad({ datos: datosCiudad, plano: meta.plano, crearTrabajador })
+}).then((paquete) => {
+  const g = geometriaDePaquete(paquete)
   olaMax = Math.max(olaMax, g.boundingSphere.center.length() + g.boundingSphere.radius + 400)
   const casas = new Mesh(g, ciudad.material)
   // las casas tiran sombra: desde el sol se dibujan con el mismo vértice (src/acabado.js)
   casas.customDepthMaterial = crearMaterialSombraCiudad(ciudad.U)
   casas.castShadow = true
   scene.add(casas)
+  casasListas = true
   pedirCuadro(3)
 }).catch((e) => console.warn(`ciudad: ${e.message}`))
 casasPedidas.then(() => {
@@ -622,6 +631,7 @@ if (params.has('vitrina') && window.parent !== window) window.parent.postMessage
 window.lab = {
   renderer, scene, camera, cam, cielo, aPie, enAvion, enCoche, marcasDelMapa, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
   get relieve() { return relieve },
+  get casasListas() { return casasListas },
   get teselas() { return teselas },
   get arboles() { return arboles },
   get hitos() { return hitos },
