@@ -8,6 +8,9 @@
  * three.js sube una geometría a la GPU la primera vez que la dibuja. Las baldosas que no se ven al abrir (las
  * de otras épocas, las de fuera de la vista) se subirían todas juntas al cambiar de época, con un tirón: por
  * eso `subirUna` las va subiendo de a una mientras nadie pide cuadros.
+ *
+ * Con `soltarArreglos`, cada geometría suelta sus arreglos de JS apenas quedan en la GPU: nadie los vuelve a
+ * leer (a pie y en coche se choca con el pak, no con la geometría) y son cientos de MB.
  */
 import { Camera, Group, Mesh, MeshBasicMaterial, Scene, Sphere, Vector3, WebGLRenderTarget } from 'three'
 import { geometriaDePaquete } from './ciudad-geometria.js'
@@ -17,7 +20,7 @@ import { SIN_LINEA_DE_TIEMPO } from './epocas.js'
 const ANTES_QUE_EL_SUELO = -1
 const MARGEN_RELIEVE_M = 15 // lo que el terreno puede pasarse entre las muestras con que se mide una baldosa
 
-export function crearCasas({ material, materialDeSombra }) {
+export function crearCasas({ material, materialDeSombra, soltarArreglos = false }) {
   const grupo = new Group()
   const baldosas = []
   let epocas = [SIN_LINEA_DE_TIEMPO, SIN_LINEA_DE_TIEMPO]
@@ -48,7 +51,7 @@ export function crearCasas({ material, materialDeSombra }) {
     /** Una baldosa que llega (`{ id, pase, paquete, tramos }`): su malla, ya con las épocas y el relieve de ahora. */
     agregar({ id, pase, paquete, tramos }) {
       // el material va en un array: así three.js dibuja los grupos de la geometría (los tramos vivos) y no todo
-      const malla = new Mesh(geometriaDePaquete(paquete), [material])
+      const malla = new Mesh(geometriaDePaquete(paquete, { soltar: soltarArreglos }), [material])
       malla.name = `casas ${id} · pase ${pase}`
       // las casas tiran sombra: desde el sol se dibujan con el mismo vértice (src/acabado.js)
       malla.customDepthMaterial = materialDeSombra

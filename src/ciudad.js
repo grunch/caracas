@@ -360,9 +360,12 @@ export const ATRIBUTOS = Object.freeze({
   position: { campo: 'posiciones', n: 3, Tipo: Float32Array },
   // las normales en un byte por componente y la vida en bytes: son millones de vértices
   normal: { campo: 'normales', n: 3, Tipo: Int8Array, normalizado: true },
-  aInfo: { campo: 'info', n: 4, Tipo: Float32Array },
+  // distancia a la plaza (en metros enteros: de ella sale cuándo pasa la ola), semilla (16 bits), estilo y pisos
+  aInfo: { campo: 'info', n: 4, Tipo: Uint16Array },
   aVida: { campo: 'vidas', n: 2, Tipo: Uint8Array },
   aAncla: { campo: 'anclas', n: 2, Tipo: Float32Array },
+  // (aPared y aTecho quedan en Float32: el shader sortea los vanos y las tejas con el largo de la pared y del
+  // faldón, y redondearlos, por ejemplo a medios floats, cambia el sorteo: salen otras fachadas)
   aPared: { campo: 'paredes', n: 3, Tipo: Float32Array },
   aTecho: { campo: 'cubiertas', n: 4, Tipo: Float32Array },
   aHistoria: { campo: 'historias', n: 2, Tipo: Float32Array },
@@ -396,7 +399,8 @@ export function paqueteDeGeometria(crudo) {
     const origen = crudo[campo]
     if (Tipo === Float32Array) { atributos[nombre] = origen; continue }
     const destino = new Tipo(origen.length)
-    for (let k = 0; k < origen.length; k++) destino[k] = normalizado ? Math.round(origen[k] * 127) : origen[k]
+    if (normalizado) for (let k = 0; k < origen.length; k++) destino[k] = Math.round(origen[k] * 127)
+    else for (let k = 0; k < origen.length; k++) destino[k] = Math.round(origen[k])
     atributos[nombre] = destino
   }
   return { atributos, indices: crudo.indices, esfera: esferaDe(crudo.posiciones) }
