@@ -20,6 +20,19 @@ describe('pedirDato', () => {
     const pedir = vi.fn(async () => 'nuevo')
     expect(await pedirDato('datos/crece.json', { tempranos: { 'datos/crece.json': fallido }, pedir })).toBe('nuevo')
   })
+  it('si el servidor respondió con un error pasajero (5xx), pide una vez más (revisión de #177)', async () => {
+    // fetch no rechaza ante un 503: la respuesta llega con su estado y hay que mirarlo
+    const tempranos = { 'datos/ciudad.json': Promise.resolve({ ok: false, status: 503 }) }
+    const pedir = vi.fn(async () => ({ ok: true, status: 200 }))
+    expect(await pedirDato('datos/ciudad.json', { tempranos, pedir })).toEqual({ ok: true, status: 200 })
+    expect(pedir).toHaveBeenCalledTimes(1)
+  })
+  it('un 4xx no se reintenta: lo que no está no va a aparecer', async () => {
+    const no = { ok: false, status: 404 }
+    const pedir = vi.fn()
+    expect(await pedirDato('datos/crece.json', { tempranos: { 'datos/crece.json': Promise.resolve(no) }, pedir })).toBe(no)
+    expect(pedir).not.toHaveBeenCalled()
+  })
   it('por omisión mira la tabla global y pide con fetch', async () => {
     globalThis.__temprano = { a: Promise.resolve('de la tabla') }
     expect(await pedirDato('a')).toBe('de la tabla')

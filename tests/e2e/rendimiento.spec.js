@@ -77,12 +77,14 @@ test('el plano grande no se baja al abrir: cada nivel se pide cuando la vista lo
   expect(pedidos).toContain('plano/chico.webp')
   expect(pedidos).toContain('plano/suelo-2k.webp')
   expect(pedidos.filter((u) => /medio|suelo\.webp|rotulos\.webp/.test(u))).toEqual([])
-  // al acercarse (la vista de destino, no las intermedias de un vuelo) pide el de 4096 y las máscaras completas
+  // al acercarse (la vista de destino, no las intermedias de un vuelo) pide un nivel más alto y las máscaras
+  // completas: el de 4096 si las teselas finas cubren lo que se mira o el equipo es liviano; si no, el de 8192
+  const { liviano, conTeselas } = await page.evaluate(() => ({ liviano: window.lab.liviano, conTeselas: Boolean(window.lab.teselas) }))
+  const [nivel, plano] = liviano || conTeselas ? [2, 'plano/medio-4k.webp'] : [3, 'plano/medio.webp']
   await page.evaluate(() => window.lab.cam.jump({ x: 0, z: 0, dist: 1200, yaw: 0, pitch: 0.8 }))
   await cuadros()
-  await page.waitForFunction(() => window.lab.planoBase.pedido === 2)
-  await expect.poll(() => pedidos).toContain('plano/medio-4k.webp')
-  const { liviano, conTeselas } = await page.evaluate(() => ({ liviano: window.lab.liviano, conTeselas: Boolean(window.lab.teselas) }))
+  await page.waitForFunction((n) => window.lab.planoBase.pedido === n, nivel)
+  await expect.poll(() => pedidos).toContain(plano)
   // (en un equipo liviano las máscaras se quedan en su tamaño chico)
   if (!liviano) await expect.poll(() => pedidos).toContain('plano/suelo.webp')
   // más cerca que las teselas finas, el de 8192 no hace falta
