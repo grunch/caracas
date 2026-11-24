@@ -61,6 +61,8 @@ await Promise.all([
   hito('listo', () => window.lab?.ready === true),
   // las casas: la señal nueva (window.lab.casasListas) o, antes de ella, la malla con el atributo de los techos
   hito('casas', () => window.lab?.ready && (window.lab.casasListas ?? window.lab.scene.children.some((m) => m.isMesh && m.geometry.hasAttribute('aTecho')))),
+  // las primeras casas que se ven (src/casas.js); antes de las baldosas llegaban todas juntas
+  hito('primerasCasas', () => window.lab?.ready && (window.lab.casas ? window.lab.casas.baldosas.length > 0 : window.lab.casasListas)),
   hito('lineaDeTiempo', () => Boolean(window.lab?.lineaDeTiempo)),
   hito('arboles', () => Boolean(window.lab?.arboles)),
 ])

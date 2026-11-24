@@ -3,7 +3,7 @@ import {
   CanvasTexture, TextureLoader, SRGBColorSpace, Color, Timer, HemisphereLight, DirectionalLight, LinearFilter,
 } from 'three'
 import { cargarPak } from './pak.js'
-import { geometriaDePaquete } from './ciudad-geometria.js'
+import { crearCasas } from './casas.js'
 import { pedirCiudad } from './ciudad-pedido.js'
 import { crearMaterialCiudad, crearMaterialSombraCiudad } from './material.js'
 import { cargarArboles } from './arboles.js'
@@ -36,7 +36,7 @@ import { leerCreditos } from './acerca.js'
 import { debeMostrarIntro, recordarIntro } from './intro.js'
 import { debeArrancar, esperaDeArranque, velocidadDeOla, vistaDeHoja, VISTA_CENTRO, DURACION_VUELO_S } from './arranque.js'
 import { accionDeTecla, movimientoDeTecla } from './controles.js'
-import { esLiviano, proporcionDePixeles } from './calidad.js'
+import { esLiviano, proporcionDePixeles, cuantosTrabajadores } from './calidad.js'
 import { crearModoAPie } from './a-pie-modo.js'
 import { hitosConPlanta } from './hitos/plantas.js'
 import { crearModoVolar } from './volar-modo.js'
@@ -157,6 +157,7 @@ async function cargarRelieve() {
   if (!r.ok) throw new Error(`datos/relieve.bin: ${r.status}`)
   relieve = crearRelieve(decodificarRelieve(await r.arrayBuffer()), hoja, terrazas)
   ponerRelieve(relieveU, relieve)
+  casas.ponerRelieve(alturaDelTerreno)
   pedirCuadro(3)
 }
 
@@ -218,26 +219,38 @@ let olaMax = Math.hypot(Math.max(-hoja.x0, hoja.x0 + hoja.ancho), Math.max(-hoja
 let arboles = null
 let datosCiudad = null // las partes de ciudad.pak, con la vida que dejan los hitos: el modo a pie choca con ellas
 let casasListas = false
-// las casas se levantan en un worker, para que la página no se congele mientras tanto (src/ciudad-pedido.js);
-// ?sintrabajador las levanta en este hilo, como antes (para comparar, o si el worker da problemas)
+// las casas, una malla por baldosa (src/casas.js): van llegando de a una, las del centro primero
+const casas = crearCasas({ material: ciudad.material, materialDeSombra: crearMaterialSombraCiudad(ciudad.U) })
+scene.add(casas.grupo)
+// hasta dónde sube el shader lo que está en (x, z) con la ciudad en pie: para la caja de cada baldosa
+const alturaDelTerreno = (x, z) => relieve.alturaEn(x, z) * relieveU.uExageracion.value
+let primerasCasas = () => {}
+/** Llegó lo que se ve en la época con que abre el sitio: la entrada ya puede levantar la ciudad. */
+const primerasCasasPedidas = new Promise((ok) => { primerasCasas = ok })
+// las casas se levantan en workers, para que la página no se congele mientras tanto (src/ciudad-pedido.js);
+// ?sintrabajador las levanta en este hilo (para comparar, o si los workers dan problemas)
 const crearTrabajador = params.has('sintrabajador') || typeof Worker !== 'function' ? null
   : () => new Worker(new URL('./ciudad-trabajador.js', import.meta.url), { type: 'module' })
 const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array }).then((datos) => {
   // donde hay un hito modelado a mano, la casa genérica de ese lugar no nace (src/hitos/suprimir.js)
   datosCiudad = { ...datos, vida: suprimirTechos(datos, zonasDeSupresion(HITOS)) }
-  return pedirCiudad({ datos: datosCiudad, plano: meta.plano, crearTrabajador })
-}).then((paquete) => {
-  const g = geometriaDePaquete(paquete)
-  olaMax = Math.max(olaMax, g.boundingSphere.center.length() + g.boundingSphere.radius + 400)
-  const casas = new Mesh(g, ciudad.material)
-  // las casas tiran sombra: desde el sol se dibujan con el mismo vértice (src/acabado.js)
-  casas.customDepthMaterial = crearMaterialSombraCiudad(ciudad.U)
-  casas.castShadow = true
-  scene.add(casas)
+  return pedirCiudad({
+    datos: datosCiudad, plano: meta.plano, crearTrabajador,
+    // primero lo que se ve en la época con que abre el sitio; el resto, después
+    primera: PRIMERA_EPOCA, cuantos: cuantosTrabajadores({ nucleos: navigator.hardwareConcurrency, liviano, software: porSoftware }),
+    alLlegar(baldosa) {
+      casas.agregar(baldosa)
+      olaMax = Math.max(olaMax, casas.alcance + 400)
+      pedirCuadro(3)
+    },
+    alTerminarPase(pase) { if (pase === 0) primerasCasas() },
+  })
+}).then(() => {
   casasListas = true
   pedirCuadro(3)
-}).catch((e) => console.warn(`ciudad: ${e.message}`))
+}).catch((e) => console.warn(`ciudad: ${e.message}`)).finally(() => primerasCasas()) // con casas o sin ellas, la entrada sigue
 casasPedidas.then(() => {
+  // los árboles, después de la ciudad entera (quien espera a los árboles sabe que ya llegó todo lo demás)
   // los árboles, después de la ciudad: una malla instanciada que comparte sus uniforms (src/arboles.js)
   return cargarArboles('datos/arboles.bin', { coords, U: ciudad.U }).then((m) => {
     arboles = m
@@ -592,6 +605,10 @@ renderer.setAnimationLoop((t) => {
     if (uOlaEpoca.value >= OLA_EPOCA_MAX_M) secuencia?.termino()
     pedirCuadro(2)
   }
+  // de cada baldosa de casas solo se dibuja lo que vive en la época que se mira; mientras pasa la ola de una
+  // época a otra, lo de las dos (src/casas.js)
+  const epocaA = ciudad.U.uEpocaA.value
+  if (casas.ponerEpocas(uOlaEpoca.value < OLA_EPOCA_MAX_M ? ciudad.U.uEpocaDe.value : epocaA, epocaA)) pedirCuadro(2)
   if (uColor.value !== colorObjetivo) {
     uColor.value = acercar(uColor.value, colorObjetivo, dt / DURACION_COLOR_S)
     pedirCuadro(2)
@@ -600,7 +617,11 @@ renderer.setAnimationLoop((t) => {
     ciudad.U.uHoy.value = acercar(ciudad.U.uHoy.value, hoyObjetivo, dt / DURACION_HOY_S)
     pedirCuadro(2)
   }
-  if (pendientes <= 0) return
+  if (pendientes <= 0) {
+    // nadie pidió un cuadro: de paso, se sube a la GPU una baldosa de casas de las que todavía no se vieron
+    casas.subirUna(renderer)
+    return
+  }
   pendientes--
   buscador.dibujar() // el alfiler del buscador sigue a su punto del terreno
   if (teselas) {
@@ -632,6 +653,7 @@ window.lab = {
   renderer, scene, camera, cam, cielo, aPie, enAvion, enCoche, marcasDelMapa, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
   get relieve() { return relieve },
   get casasListas() { return casasListas },
+  casas,
   get teselas() { return teselas },
   get arboles() { return arboles },
   get hitos() { return hitos },
@@ -660,7 +682,7 @@ function arrancar() {
   }
   cam.jump(vistaDeHoja(hoja))
   const desde = { ...cam.goal }
-  Promise.all([conIntro ? cierreDeIntro : null, casasPedidas]).then(() => setTimeout(() => {
+  Promise.all([conIntro ? cierreDeIntro : null, primerasCasasPedidas]).then(() => setTimeout(() => {
     // tomada: la tocó aunque no la haya movido (un dedo apoyado, quieto); movida: un vuelo a una marca, la vitrina…
     const movida = ['x', 'z', 'dist', 'yaw', 'pitch'].some((c) => Math.abs(cam.goal[c] - desde[c]) > 1e-6)
     if (!olaElegida) levantar(true)

@@ -136,17 +136,19 @@ test('con la ciudad real, las casas genéricas no pisan la Plaza Bolívar', asyn
   // la ciudad real viene con su línea de tiempo (el .pak se sirve sin tipo de contenido: no sirve de señal)
   const hay = await hayDato(page, 'datos/crece.json', 'json')
   test.skip(!hay, 'sin la ciudad real (datos fuera del repo)')
-  await page.waitForFunction(() => window.lab.scene.children.some((m) => m.geometry?.attributes?.aPared), null, { timeout: 60000 })
+  await page.waitForFunction(() => window.lab.casasListas === true, null, { timeout: 60000 })
   const pisan = await page.evaluate(() => {
-    const g = window.lab.scene.children.find((m) => m.geometry?.attributes?.aPared).geometry
-    const { aAncla, aVida } = g.attributes
     let n = 0
-    // el recuadro de la plaza (86 × 82 m) alrededor de su centro, con margen: ningún techo que viva con ella tiene el ancla ahí
-    for (let i = 0; i < aAncla.count; i++) {
-      // la plaza es hito desde la época 1: cuenta el techo que vive en alguna época de 1 a 5
-      const [nace, muere] = [aVida.getX(i), aVida.getY(i)]
-      const viveConLaPlaza = nace < 6 && (muere === 0 || muere > 1)
-      if (Math.abs(aAncla.getX(i) - 4) < 36 && Math.abs(aAncla.getY(i) - 2.5) < 34 && viveConLaPlaza) n++
+    // las casas van en una malla por baldosa (src/casas.js): se miran todas
+    for (const { malla } of window.lab.casas.baldosas) {
+      const { aAncla, aVida } = malla.geometry.attributes
+      // el recuadro de la plaza (86 × 82 m) alrededor de su centro, con margen: ningún techo que viva con ella tiene el ancla ahí
+      for (let i = 0; i < aAncla.count; i++) {
+        // la plaza es hito desde la época 1: cuenta el techo que vive en alguna época de 1 a 5
+        const [nace, muere] = [aVida.getX(i), aVida.getY(i)]
+        const viveConLaPlaza = nace < 6 && (muere === 0 || muere > 1)
+        if (Math.abs(aAncla.getX(i) - 4) < 36 && Math.abs(aAncla.getY(i) - 2.5) < 34 && viveConLaPlaza) n++
+      }
     }
     return n
   })
