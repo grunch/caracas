@@ -56,7 +56,8 @@ const t0 = Date.now()
 // la primera visita, sin service worker (?sinsw): si tomara la página a mitad de la carga, parte de los
 // pedidos pasarían por él y no se contarían acá
 const extra = bandera('--liviano') ? '&liviano' : ''
-await pagina.goto(`${url}?sinintro&sinsw${extra}`)
+// (`commit`: sin esperar a `load`, para que un hito que llegue antes no quede fechado en `load`)
+await pagina.goto(`${url}?sinintro&sinsw${extra}`, { waitUntil: 'commit' })
 const hitos = {}
 const hito = async (nombre, condicion) => {
   await pagina.waitForFunction(condicion, null, { timeout: ESPERA_MS, polling: 50 })

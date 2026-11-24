@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import {
   percentil, mediana, resumirPedidos, resumirTareas, valoresDelPresupuesto, compararConPresupuesto, informeDelPresupuesto,
+  tamanosDelBuild, compararBuild,
 } from '../../tools/rendimiento/rendimiento-lib.mjs'
 
 describe('percentil y mediana', () => {
@@ -68,5 +69,28 @@ describe('el presupuesto', () => {
     const real = JSON.parse(readFileSync('tools/rendimiento/presupuesto.json', 'utf8'))
     expect(Object.keys(real.topes).sort()).toEqual(Object.keys(valoresDelPresupuesto({})).sort())
     for (const tope of Object.values(real.topes)) expect(tope).toBeGreaterThan(0)
+  })
+})
+
+describe('el presupuesto del build', () => {
+  const html = '<link rel="modulepreload" crossorigin href="./assets/comun-B1.js"><script type="module" crossorigin src="./assets/main-A1.js"></script>'
+  const archivos = [
+    { ruta: 'assets/main-A1.js', gzip: 170 * 1024 }, { ruta: 'assets/comun-B1.js', gzip: 130 * 1024 },
+    { ruta: 'assets/ciudad-trabajador-C1.js', gzip: 40 * 1024 }, { ruta: 'assets/hitos-trabajador-D1.js', gzip: 95 * 1024 },
+    { ruta: 'assets/esquinas-E1.js', gzip: 8 * 1024 }, { ruta: 'sw.js', gzip: 1280 },
+  ]
+  it('suma lo que index.html carga o precarga, los workers y el service worker; lo que se pide después no cuenta al abrir', () => {
+    expect(tamanosDelBuild(archivos, html)).toEqual({ jsAlAbrirKB: 300, trabajadoresKB: 135, servicioKB: 1.3 })
+  })
+  it('compara con los topes; un tope sin medida no pasa', () => {
+    expect(compararBuild({ jsAlAbrirKB: 300, trabajadoresKB: 160 }, { jsAlAbrirKB: 330, trabajadoresKB: 150, servicioKB: 3 })).toEqual([
+      { clave: 'jsAlAbrirKB', valor: 300, tope: 330, pasa: true },
+      { clave: 'trabajadoresKB', valor: 160, tope: 150, pasa: false },
+      { clave: 'servicioKB', valor: null, tope: 3, pasa: false },
+    ])
+  })
+  it('los topes del repo son de claves que el build mide', () => {
+    const real = JSON.parse(readFileSync('tools/rendimiento/presupuesto.json', 'utf8'))
+    expect(Object.keys(real.build.topes).sort()).toEqual(Object.keys(tamanosDelBuild([], '')).sort())
   })
 })

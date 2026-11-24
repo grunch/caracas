@@ -35,6 +35,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build
         run: npx vite build
+      # el JS que se baja al abrir, los workers y el service worker no pasan de su tope (specs/10-rendimiento.md)
+      - name: Presupuesto del build
+        run: node tools/rendimiento/presupuesto-build.mjs
 
   # Los E2E dibujan por software (SwiftShader) y son lo lento del CI: van en tandas paralelas, por archivo.
   e2e:

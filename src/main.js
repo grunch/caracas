@@ -43,6 +43,8 @@ import { debeArrancar, esperaDeArranque, velocidadDeOla, vistaDeHoja, VISTA_CENT
 import { accionDeTecla, movimientoDeTecla } from './controles.js'
 import { esLiviano, esMinimo, proporcionDePixeles, cuantosTrabajadores } from './calidad.js'
 import { crearResolucionAdaptable } from './resolucion.js'
+import { crearPanelDeMedicion } from './medir-panel.js'
+import { NIVELES } from './plano-niveles.js'
 import { crearModoAPie } from './a-pie-modo.js'
 import { hitosConPlanta } from './hitos/plantas.js'
 import { crearModoVolar } from './volar-modo.js'
@@ -606,6 +608,18 @@ const reloj = new Timer()
 const resolucion = params.has('capture') || porSoftware ? null
   : crearResolucionAdaptable({ maxima: renderer.getPixelRatio(), minima: renderer.getPixelRatio() > 1 ? 1 : 0.75 })
 let tic = 0
+// ?medir: un panel con lo que cuesta cada cuadro (src/medir-panel.js); con él la vista se dibuja sin parar
+const medicion = !params.has('medir') ? null : crearPanelDeMedicion({
+  contenedor: document.body,
+  leer: () => ({
+    llamadas: renderer.info.render.calls, triangulos: renderer.info.render.triangles, pixeles: renderer.getPixelRatio(),
+    lienzo: [renderer.domElement.width, renderer.domElement.height],
+    heapMB: performance.memory ? Math.round(performance.memory.usedJSHeapSize / 1048576) : null,
+    nivel: NIVELES[planoBase.puesto]?.lado ?? null, calidad: minimo ? 'mínima' : liviano ? 'liviana' : 'completa',
+  }),
+})
+// (three.js reinicia la cuenta en cada pase: para sumar los de un cuadro entero se reinicia a mano)
+if (medicion) renderer.info.autoReset = false
 let ticDibujado = -2
 let racha = 0
 const RACHA_DE_MOVIMIENTO = 4
@@ -652,6 +666,7 @@ renderer.setAnimationLoop((t) => {
     pedirCuadro(2)
   }
   tic++
+  if (medicion) pedirCuadro(1)
   if (pendientes <= 0) {
     // la vista quedó quieta: si venía dibujándose con menos píxeles, un último cuadro con todos
     const nitida = resolucion?.quieta() ?? null
@@ -703,7 +718,9 @@ renderer.setAnimationLoop((t) => {
   })
   fichas.actualizar() // con la ficha abierta, sigue a la época que llega con la ola
   rotulos?.dibujar({ camera, dist: cam.now.dist, x: cam.now.x, z: cam.now.z, opacidad: ciudad.U.uHoy.value, ocupados })
+  if (medicion) renderer.info.reset()
   acabado.dibujar()
+  medicion?.cuadro(performance.now())
 })
 
 if (params.has('hoy')) alternarHoy(true)
