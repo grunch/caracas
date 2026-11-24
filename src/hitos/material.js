@@ -2,7 +2,8 @@
  * El material de los hitos: propio, pero con los uniforms de la ciudad (crearMaterialCiudad), así suben con
  * la misma ola, aparecen y se van con las épocas, se apoyan en el relieve y pasan de tinta a color con todo
  * lo demás (como los árboles, src/arboles.js).
- * - Vértice: el piso de cada objeto es el más alto entre su ancla y su apoyo; los "pies" bajan al terreno.
+ * - Vértice: el piso de cada objeto es el más alto entre su ancla y su apoyo (anclado en una terraza, el plano de
+ *   la terraza bajo el vértice, src/relieve.js); los "pies" bajan al terreno.
  * - Color: el tono del vértice con el detalle de su material (tejas, sillares, barrotes de reja, los canteros
  *   en X de la plaza, el reloj), bajo la misma luz que la ciudad.
  * - Tinta: papel; lo oscuro se raya a pluma, más tupido cuanto más oscuro, y la sombra propia va rayada fina.
@@ -34,8 +35,8 @@ const VERTICE = /* glsl */ `
     vSube = sube;
     // acostado, o fuera de su época: fuera de la vista, sin tocar el relieve (no cuesta ni un fragmento)
     if (sube < 0.01 || vExiste < 0.02) { gl_Position = vec4(2.0, 2.0, 2.0, 1.0); return; }
-    // el piso: plano a la altura del ancla donde el terreno baja; donde sube, lo sigue
-    float piso = max(sueloEn(aAncla.xy), sueloEn(aAncla.zw));
+    // el piso: plano a la altura del ancla donde el terreno baja y donde sube lo sigue; en una terraza, su plano
+    float piso = pisoDeHito(aAncla.xy, aAncla.zw, position.xz);
     float y = piso + ${LEVANTE_M.toFixed(2)} + position.y * sube * vExiste;
     if (aHito.w > 0.5) y = min(sueloEn(position.xz), piso) - ${glsl(MARGEN_PIE_M)};
     vMundo = vec3(position.x, y, position.z);

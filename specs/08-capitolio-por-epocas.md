@@ -49,6 +49,14 @@ leyendas de los planos de 1772 y 1843 siguen sin transcribir.
   plano, se apoya en la altura de su centro: el suelo le tapaba la mitad oeste. Con `terraza` (`src/relieve.js`), dentro
   de la manzana el suelo queda plano a la altura del piso, con el talud afuera, en la calle (4 m). Mientras el hito está
   en pie, el suelo bajo su plataforma no se dibuja, y el hito va 12 cm sobre su piso.
+- **La terraza inclinada (T41h).** Con el piso horizontal a la altura del centro, el lado alto quedaba en un pozo: la
+  manzana baja unos 8 m de la esquina noroeste a la sureste (10 m con la exageración), y en el noroeste el convento y
+  el pabellón del Capitolio quedaban ~6 m bajo la calle. Ahora la terraza es el plano que mejor se ajusta al terreno de
+  la manzana (mínimos cuadrados: 3,2°, 4,1° con la exageración; el terreno se aparta de él entre −0,9 y +1,9 m), y el
+  hito apoya cada vértice en ese plano (`pisoDeHito`): se corre en vertical con la ladera, con las paredes a plomo, y
+  techos, patios y huerta quedan apenas inclinados. Se descartó subir el piso al punto más alto: el lado bajo quedaba
+  sobre un zócalo de hasta ~10 m y la escalinata del Palacio Legislativo, como un bloque. Queda: el pie de esa
+  escalinata, que sale a la acera, se hunde un poco donde el terreno pasa por encima del plano.
 - La escalinata del Palacio Legislativo baja unos 4,3 m sobre la acera sur (b ≈ 64,8 m, con la escala), lejos de la Universidad.
 - `nace` pasa de 3 a **1**: la supresión apaga las casas genéricas de la manzana desde 1772, sin tocar su vida.
 - Todas las piezas entran en la única malla de hitos con `MAT.LISO` y colores lineales, y heredan relieve,
