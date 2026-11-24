@@ -12,6 +12,7 @@ import { pedirCiudad } from './ciudad-pedido.js'
 import { crearMaterialCiudad, crearMaterialSombraCiudad } from './material.js'
 import { cargarArboles } from './arboles.js'
 import { HITOS, crearHitos, suprimirTechos, zonasDeSupresion } from './hitos.js'
+import { pedirHitos } from './hitos-pedido.js'
 import { acercar, pasoDeCuadro } from './animar.js'
 import { texturasHoy, HOY_CERCA } from './hoy.js'
 import { crearBuscador } from './buscador/interfaz.js'
@@ -224,8 +225,10 @@ let olaMax = Math.hypot(Math.max(-hoja.x0, hoja.x0 + hoja.ancho), Math.max(-hoja
 let arboles = null
 let datosCiudad = null // las partes de ciudad.pak, con la vida que dejan los hitos: el modo a pie choca con ellas
 let casasListas = false
+const sinTrabajadores = params.has('sintrabajador') || typeof Worker !== 'function'
 // las casas, una malla por baldosa (src/casas.js): van llegando de a una, las del centro primero
-const casas = crearCasas({ material: ciudad.material, materialDeSombra: crearMaterialSombraCiudad(ciudad.U) })
+// (sus arreglos se sueltan al subirlos a la GPU: son cientos de MB; ?arreglos los conserva, para depurar)
+const casas = crearCasas({ material: ciudad.material, materialDeSombra: crearMaterialSombraCiudad(ciudad.U), soltarArreglos: !params.has('arreglos') })
 scene.add(casas.grupo)
 // hasta dónde sube el shader lo que está en (x, z) con la ciudad en pie: para la caja de cada baldosa
 const alturaDelTerreno = (x, z) => relieve.alturaEn(x, z) * relieveU.uExageracion.value
@@ -234,7 +237,7 @@ let primerasCasas = () => {}
 const primerasCasasPedidas = new Promise((ok) => { primerasCasas = ok })
 // las casas se levantan en workers, para que la página no se congele mientras tanto (src/ciudad-pedido.js);
 // ?sintrabajador las levanta en este hilo (para comparar, o si los workers dan problemas)
-const crearTrabajador = params.has('sintrabajador') || typeof Worker !== 'function' ? null
+const crearTrabajador = sinTrabajadores ? null
   : () => new Worker(new URL('./ciudad-trabajador.js', import.meta.url), { type: 'module' })
 const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array }, pedirDato).then((datos) => {
   // donde hay un hito modelado a mano, la casa genérica de ese lugar no nace (src/hitos/suprimir.js)
@@ -265,11 +268,16 @@ casasPedidas.then(() => {
 }).catch((e) => console.warn(`árboles: ${e.message}`))
 
 // --- los hitos: edificios y lugares modelados a mano, en una sola malla con los uniforms de la ciudad ---
+// (se construyen en un worker: en este hilo eran más de un segundo y medio de página congelada al arrancar)
 let hitos = null
-try {
-  hitos = crearHitos({ coords, U: ciudad.U })
+const hitosPedidos = pedirHitos({
+  plano: meta.plano,
+  crearTrabajador: sinTrabajadores ? null : () => new Worker(new URL('./hitos-trabajador.js', import.meta.url), { type: 'module' }),
+}).then((datos) => {
+  hitos = crearHitos({ coords, U: ciudad.U, datos })
   scene.add(hitos)
-} catch (e) { console.warn(`hitos: ${e.message}`) }
+  pedirCuadro(3)
+}).catch((e) => console.warn(`hitos: ${e.message}`))
 
 // --- la línea de tiempo: 1578 → 1936; cada época llega como una ola desde la plaza ---
 const DURACION_EPOCA_S = 3.5
@@ -674,7 +682,7 @@ if (debeArrancar(params)) arrancar()
 // la página que embebe la vitrina espera este aviso para mandar sus órdenes
 if (params.has('vitrina') && window.parent !== window) window.parent.postMessage({ vitrina: 'lista' }, location.origin)
 window.lab = {
-  renderer, scene, camera, cam, cielo, aPie, enAvion, enCoche, marcasDelMapa, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: true,
+  renderer, scene, camera, cam, cielo, aPie, enAvion, enCoche, marcasDelMapa, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: false,
   get relieve() { return relieve },
   get casasListas() { return casasListas },
   casas,
@@ -688,6 +696,8 @@ window.lab = {
   get visorPlano() { return visorPlano },
 }
 window.lab.buscador = buscador
+// «listo» para quien espera a window.lab (los tests, las capturas): con los hitos ya en la escena, o descartados
+hitosPedidos.then(() => { window.lab.ready = true })
 // la segunda visita no baja ni revalida lo que no cambió (src/sw.js); no frena nada del arranque
 window.lab.servicio = registrarServiceWorker({ contenedor: navigator.serviceWorker, construido: import.meta.env.PROD, params })
 // cuando ya llegó la ciudad, el service worker guarda lo que esta visita bajó antes de que él existiera

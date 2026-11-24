@@ -7,8 +7,9 @@ test('las casas se levantan en workers y llegan por baldosas: la página no hace
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
   await page.waitForFunction(() => window.lab.casasListas === true, null, { timeout: 60000 })
-  expect(trabajadores.length).toBeGreaterThan(0)
-  expect(trabajadores.every((url) => url.includes('ciudad-trabajador'))).toBe(true)
+  // los de las casas, y uno más que construye los hitos
+  expect(trabajadores.some((url) => url.includes('ciudad-trabajador'))).toBe(true)
+  expect(trabajadores.some((url) => url.includes('hitos-trabajador'))).toBe(true)
   const { baldosas, enEscena, tiranSombra } = await page.evaluate(() => {
     const { casas, scene, ciudad } = window.lab
     return {
@@ -30,11 +31,16 @@ test('con ?sintrabajador las casas se levantan en el hilo de la página y son la
     const { casas } = window.lab
     return { ...casas.cuenta, ids: casas.baldosas.map((b) => `${b.id}|${b.pase}`).sort() }
   }
-  await page.goto('/?sinintro')
+  // sin sombras, contorno ni grano: sin workers la página levanta las casas entre cuadro y cuadro, y con el
+  // render por software cada cuadro del acabado entero son segundos
+  await page.goto('/?sinintro&sombras=0&contorno=0&grano=0')
   await page.waitForFunction(() => window.lab?.casasListas === true, null, { timeout: 60000 })
   const conWorkers = await page.evaluate(cuenta)
+  // con los datos completos y render por software, levantar 39 mil casas en el hilo que además dibuja tarda
+  // minutos: ahí el respaldo queda cubierto por tests/unit/ciudad-pedido.test.js, y acá por el CI (la muestra)
+  test.skip(conWorkers.vertices > 1e6, 'con los datos completos tarda minutos; lo cubre el CI con la muestra')
   const antes = trabajadores.length
-  await page.goto('/?sinintro&sintrabajador')
+  await page.goto('/?sinintro&sintrabajador&sombras=0&contorno=0&grano=0')
   await page.waitForFunction(() => window.lab?.casasListas === true, null, { timeout: 180000 })
   expect(trabajadores.length).toBe(antes)
   expect(await page.evaluate(cuenta)).toEqual(conWorkers)

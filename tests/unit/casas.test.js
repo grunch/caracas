@@ -104,6 +104,18 @@ describe('crearCasas', () => {
   })
 })
 
+describe('soltarArreglos', () => {
+  it('con la opción, las geometrías sueltan sus arreglos al subirse; sin ella, no', () => {
+    const material = new MeshBasicMaterial()
+    const con = crearCasas({ material, materialDeSombra: material, soltarArreglos: true }).agregar(baldosasDe({})[0])
+    con.geometry.attributes.position.onUploadCallback()
+    expect(con.geometry.attributes.position.array).toBe(null)
+    const sin = crearCasas({ material, materialDeSombra: material }).agregar(baldosasDe({})[0])
+    sin.geometry.attributes.position.onUploadCallback()
+    expect(sin.geometry.attributes.position.array).not.toBe(null)
+  })
+})
+
 describe('subirUna: las baldosas que no se vieron se suben de a una', () => {
   /** Un renderer de mentira: anota qué geometría dibuja, con qué rango y a qué destino. */
   function rendererFalso() {

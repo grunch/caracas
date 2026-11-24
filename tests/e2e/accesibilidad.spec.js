@@ -20,7 +20,9 @@ async function quieta(page) {
 }
 
 test('sin violaciones de WCAG 2.2 AA: la bienvenida, la vista, el Acerca y el buscador', async ({ page }) => {
-  await page.goto('/?intro&sombras=0&contorno=0&grano=0')
+  // ?quieto: sin la entrada. Al cerrar la bienvenida la cámara baja volando al centro, y a mitad del vuelo los
+  // carteles de las marcas se enciman y se cortan en el borde: axe mediría un cuadro de paso, distinto cada vez
+  await page.goto('/?intro&quieto&sombras=0&contorno=0&grano=0')
   await quieta(page)
   await sinViolaciones(page, 'la bienvenida')
   await page.keyboard.press('Escape')
