@@ -115,6 +115,9 @@ lo hace a mano** y anota lo que vio; quien revisa tiene que poder seguir los mis
   `main`, el PR no mostró que el error existe.
 - **Regresión**: al menos un paso prueba algo vecino nombrado en **Qué más podría romperse** (otra época, el otro
   modo, otro recorrido) y muestra que sigue igual.
+- **Rendimiento**: si el PR toca la carga, la geometría, los shaders o las texturas, corre
+  `node tests/e2e/medir-rendimiento.mjs` antes y después (cómo, en [`specs/10-rendimiento.md`](specs/10-rendimiento.md))
+  y pega las dos mediciones.
 - **Capturas**: si el cambio se ve, sea un fix o una mejora, una captura de **antes** (`main`) y una de **después**
   (esta rama), con la misma vista, época y modo, para compararlas lado a lado. `node tests/e2e/capturas-valle.mjs` saca las mismas vistas en las dos ramas. Si no se ve: «No aplica».
 - **No cubierto** dice qué no prueban los pasos y por qué.

@@ -60,3 +60,26 @@ export function informeDelPresupuesto(filas) {
   const estado = (f) => (f.pasa === null ? 'sin medir' : f.pasa ? 'pasa' : 'NO PASA')
   return filas.map((f) => `${f.clave}: ${f.valor ?? '—'} (tope ${f.tope}) · ${estado(f)}`).join('\n')
 }
+
+/**
+ * Los grupos de JS del build, para su presupuesto. `archivos`: [{ ruta (dentro de dist), gzip (bytes) }];
+ * `html`: el index.html construido. Devuelve kB con gzip: `jsAlAbrirKB` (lo que index.html carga o
+ * precarga), `trabajadoresKB` (los workers) y `servicioKB` (el service worker).
+ */
+export function tamanosDelBuild(archivos, html) {
+  const alAbrir = new Set([...html.matchAll(/(?:src|href)="\.?\/?(assets\/[^"]+\.js)"/g)].map((m) => m[1]))
+  const kB = (filtro) => +(archivos.filter(filtro).reduce((s, a) => s + a.gzip, 0) / 1024).toFixed(1)
+  return {
+    jsAlAbrirKB: kB((a) => alAbrir.has(a.ruta)),
+    trabajadoresKB: kB((a) => /-trabajador-[^/]*\.js$/.test(a.ruta)),
+    servicioKB: kB((a) => a.ruta === 'sw.js'),
+  }
+}
+
+/** Cada tope del build contra lo medido: [{ clave, valor, tope, pasa }]; un tope sin medida no pasa. */
+export function compararBuild(tamanos, topes) {
+  return Object.entries(topes).map(([clave, tope]) => {
+    const valor = tamanos[clave] ?? null
+    return { clave, valor, tope, pasa: valor !== null && valor <= tope }
+  })
+}

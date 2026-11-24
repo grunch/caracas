@@ -109,3 +109,17 @@ test('con ?minimo: un píxel por punto, sin sombras y un solo worker para las ca
   await page.waitForFunction(() => window.lab.casasListas === true, null, { timeout: 60000 })
   expect(trabajadores.filter((url) => url.includes('ciudad-trabajador'))).toHaveLength(1)
 })
+
+test('con ?medir aparece el panel con lo que cuesta cada cuadro, y no estorba', async ({ page }) => {
+  await page.goto('/?sinintro&medir')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  const panel = page.locator('#medir')
+  await expect(panel).toContainText('ms por cuadro', { timeout: 60000 })
+  await expect(panel).toContainText('llamadas')
+  await expect(panel).toContainText('px por punto')
+  expect(await panel.evaluate((e) => [getComputedStyle(e).pointerEvents, e.getAttribute('aria-hidden')])).toEqual(['none', 'true'])
+  // sin el parámetro no existe
+  await page.goto('/?sinintro')
+  await page.waitForFunction(() => window.lab?.ready === true)
+  await expect(page.locator('#medir')).toHaveCount(0)
+})
