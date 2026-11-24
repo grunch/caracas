@@ -5,6 +5,7 @@ import {
   aPantalla, cajaDe, seTapan, despejar, calcularMarcas, distanciaDeVuelo, DIST_VUELO_M, HILO_PX,
 } from '../../src/marcas.js'
 import { MARCAS } from '../../src/marcas-datos.js'
+import { FICHAS } from '../../src/fichas-datos.js'
 import { HITOS } from '../../src/hitos.js'
 import { crearCoords } from '../../src/coords.js'
 import { PRIMERA_EPOCA, SIN_LINEA_DE_TIEMPO } from '../../src/epocas.js'
@@ -91,6 +92,39 @@ describe('las marcas de Caracas (src/marcas-datos.js)', () => {
     expect([1, 2, 3, 5].map((e) => nombre('plaza-bolivar', e))).toEqual(['Plaza Mayor', 'Plaza Mayor', 'Plaza Bolívar', 'Plaza Bolívar'])
     expect([2, 3].map((e) => nombre('capitolio', e))).toEqual(['Convento de las Concepciones', 'Capitolio'])
     expect([2, 3].map((e) => nombre('universidad', e))).toEqual(['Convento de San Francisco', 'Universidad'])
+  })
+
+  describe('cotejo con la leyenda del plano de Jesurún de 1843 (T81, specs/auditoria-1843)', () => {
+    // las que la leyenda nombra con lectura segura (specs/auditoria-1843/cotejo-leyenda.md)
+    const COTEJADAS = [
+      'guaire', 'calvario', 'catuche', 'caroata', 'anauco', 'catedral', 'palacio-arzobispal', 'capitolio',
+      'san-francisco', 'santa-capilla', 'altagracia', 'carmelitas', 'san-jacinto', 'teatro-municipal',
+      'la-pastora', 'panteon', 'santa-rosalia', 'candelaria', 'las-mercedes',
+    ]
+    const dice1843SinCotejar = (texto = '') => /(sin cotejar|no se cotej)[^.]*1843|1843[^.]*(sin cotejar|no se cotej)/.test(texto)
+    const marcas = normalizarMarcas(MARCAS, { hitos: HITOS, coords })
+    const de = (id) => marcas.find((m) => m.id === id)
+
+    test('cada marca cotejada cita la leyenda de 1843 en su fuente y vive en 1843', () => {
+      for (const id of COTEJADAS) {
+        expect(de(id).fuente, id).toMatch(/leyenda del plano de Jesurún de 1843 \(\S+ «[^»]+»\)/)
+        expect(vivaEn(de(id), 2), id).toBe(true)
+      }
+    })
+
+    test('ninguna marca ni ficha de 1843 cotejada conserva «sin cotejar» para 1843', () => {
+      const cotejadas = marcas.filter((m) => vivaEn(m, 2) && m.fuente.includes('Jesurún'))
+      expect(cotejadas.map((m) => m.id).sort()).toEqual([...COTEJADAS].sort())
+      for (const m of cotejadas) {
+        expect(dice1843SinCotejar(m.dudas), `marca ${m.id}: ${m.dudas}`).toBe(false)
+        expect(dice1843SinCotejar(FICHAS[m.id]?.dudas), `ficha ${m.id}: ${FICHAS[m.id]?.dudas}`).toBe(false)
+      }
+    })
+
+    test('Santa Rosalía, Candelaria y La Merced, que la leyenda nombra, nacen en 1843', () => {
+      expect(['santa-rosalia', 'candelaria', 'las-mercedes'].map((id) => de(id).nace)).toEqual([2, 2, 2])
+      expect([2, 3, 5].map((e) => nombreEn(de('las-mercedes'), e).nombre)).toEqual(['La Merced', 'Las Mercedes', 'Las Mercedes'])
+    })
   })
 
   test('sin línea de tiempo se ve la ciudad final: lo que murió no tiene marca', () => {
