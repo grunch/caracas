@@ -240,7 +240,12 @@ export function crearSanFrancisco({
     // Ventanas altas del clerestorio (como se ven en la foto interior img_3.jpg)
     for (let zv = -22; zv <= 22; zv += 7.4) {
       caja(sgn * xNaveCentral, hLateral + 1.65, zv, 0.72, 1.45, 1.15, 'oscuro');
-      caja(sgn * (xNaveCentral + 0.34), hLateral + 1.65, zv, 0.14, 1.65, 1.35, 'moldura');
+      // Marco de moldura alrededor del vano (jambas, dintel y alféizar): la cara oscura queda a la vista
+      const xm = sgn * (xNaveCentral + 0.38);
+      for (const s of [-1, 1]) {
+        caja(xm, hLateral + 1.65, zv + s * 0.625, 0.1, 1.65, 0.1, 'moldura');
+        caja(xm, hLateral + 1.65 + s * 0.775, zv, 0.1, 0.1, 1.35, 'moldura');
+      }
     }
   }
 
