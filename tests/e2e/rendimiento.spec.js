@@ -36,6 +36,9 @@ test('con ?sintrabajador las casas se levantan en el hilo de la página y son la
   await page.goto('/?sinintro&sombras=0&contorno=0&grano=0')
   await page.waitForFunction(() => window.lab?.casasListas === true, null, { timeout: 60000 })
   const conWorkers = await page.evaluate(cuenta)
+  // con los datos completos y render por software, levantar 39 mil casas en el hilo que además dibuja tarda
+  // minutos: ahí el respaldo queda cubierto por tests/unit/ciudad-pedido.test.js, y acá por el CI (la muestra)
+  test.skip(conWorkers.vertices > 1e6, 'con los datos completos tarda minutos; lo cubre el CI con la muestra')
   const antes = trabajadores.length
   await page.goto('/?sinintro&sintrabajador&sombras=0&contorno=0&grano=0')
   await page.waitForFunction(() => window.lab?.casasListas === true, null, { timeout: 180000 })
