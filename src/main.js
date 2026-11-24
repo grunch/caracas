@@ -4,6 +4,7 @@ import {
 } from 'three'
 import { cargarPak } from './pak.js'
 import { pedirDato } from './temprano.js'
+import { crearMascara } from './mascaras.js'
 import { crearPlanoPorNiveles, nivelNecesario, NIVEL_CHICO, NIVEL_4K } from './plano-niveles.js'
 import { crearCasas } from './casas.js'
 import { pedirCiudad } from './ciudad-pedido.js'
@@ -352,29 +353,25 @@ function levantar(arriba = olaObjetivo === 0) {
 // hoja en tinta (src/shader/papel.js): se bajan cuando arranca la línea de tiempo o se prende el color ---
 const DURACION_COLOR_S = 1.2
 let colorObjetivo = 0
-let sueloPedido = null
-let rotulosPlanoPedidos = null
-// las máscaras van al paso del plano: de 2048 mientras alcanza el plano chico; las de 4096, cuando la vista
-// se acerca (mejorarMascaras) y el equipo no es liviano
-let mascarasCompletas = false
+// las máscaras van al paso del plano (src/mascaras.js): de 2048 mientras alcanza el plano chico; las de 4096,
+// cuando la vista se acerca (mejorarMascaras) y el equipo no es liviano
+const mascaraDeSuelo = crearMascara({
+  nombre: 'suelo', chica: 'plano/suelo-2k.webp', completa: 'plano/suelo.webp',
+  cargar: (url) => cargarTextura(url, false), poner: (t) => ponerTextura(ciudad.U.uSuelo, t),
+})
+// sin la máscara de rótulos todo anda igual: el plano se marca entero, con sus nombres
+const mascaraDeRotulos = crearMascara({
+  nombre: 'rótulos del plano', chica: 'plano/rotulos-2k.webp', completa: 'plano/rotulos.webp',
+  cargar: (url) => cargarTextura(url, false), poner: (t) => ponerTextura(ciudad.U.uRotulos, t),
+})
 function pedirMascaras() {
-  const completas = mascarasCompletas
-  // (si mientras baja la de 2048 se pidió la completa, la de 2048 no la pisa al llegar)
-  const poner = (uniforme) => (t) => { if (completas === mascarasCompletas) ponerTextura(uniforme, t); else t.dispose() }
-  sueloPedido ??= cargarTextura(completas ? 'plano/suelo.webp' : 'plano/suelo-2k.webp', false)
-    .then(poner(ciudad.U.uSuelo))
-    .catch((e) => { if (completas === mascarasCompletas) sueloPedido = null; console.warn(`suelo: ${e.message}`) })
-  // sin la máscara de rótulos todo anda igual: el plano se marca entero, con sus nombres
-  rotulosPlanoPedidos ??= cargarTextura(completas ? 'plano/rotulos.webp' : 'plano/rotulos-2k.webp', false)
-    .then(poner(ciudad.U.uRotulos))
-    .catch((e) => { if (completas === mascarasCompletas) rotulosPlanoPedidos = null; console.warn(`rótulos del plano: ${e.message}`) })
+  mascaraDeSuelo.pedir()
+  mascaraDeRotulos.pedir()
 }
 function mejorarMascaras() {
-  if (liviano || mascarasCompletas) return
-  mascarasCompletas = true
-  if (!sueloPedido && !rotulosPlanoPedidos) return // nadie las pidió todavía: cuando las pidan, serán las completas
-  sueloPedido = rotulosPlanoPedidos = null
-  pedirMascaras()
+  if (liviano) return
+  mascaraDeSuelo.mejorar()
+  mascaraDeRotulos.mejorar()
 }
 function alternarColor(prender = colorObjetivo === 0) {
   colorObjetivo = prender ? 1 : 0
