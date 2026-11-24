@@ -18,12 +18,13 @@ export async function avisarLoBajado(contenedor, urls) {
 
 export async function registrarServiceWorker({
   contenedor, construido, params, avisar = (m) => console.warn(m),
-  cachesDelSitio = globalThis.caches, recargar = recargarSinWorker,
+  cachesDelSitio = globalThis.caches, recargar = recargarSinWorker, alcance = alcanceDeLaPagina(),
 }) {
   if (!contenedor) return 'sin soporte'
   if (params.has('sinsw')) {
+    // solo el de este sitio: en GitHub Pages otros proyectos comparten el origen y getRegistrations() los trae
     const registros = await contenedor.getRegistrations()
-    await Promise.all(registros.map((r) => r.unregister()))
+    await Promise.all(registros.filter((r) => r.scope === alcance).map((r) => r.unregister()))
     try {
       const nombres = await cachesDelSitio.keys()
       await Promise.all(nombres.filter((n) => n.startsWith('caracas-')).map((n) => cachesDelSitio.delete(n)))
@@ -49,4 +50,9 @@ function recargarSinWorker() {
   const url = new URL(location.href)
   url.searchParams.set('sinsw', 'recargado')
   location.replace(url.href)
+}
+
+/** El alcance con que se registra sw.js desde esta página: su carpeta. */
+function alcanceDeLaPagina() {
+  return globalThis.location ? new URL('./', globalThis.location.href).href : null
 }
