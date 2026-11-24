@@ -140,3 +140,22 @@ def medir(anclas, gcps_vigentes, sectores, metro, suavizado=0.0):
             'calce_identidad': {'rms_loo_m': round(float(np.sqrt(np.mean(np.square(loo)))), 2),
                                 'p90_loo_m': round(float(np.percentile(loo, 90)), 2)},
             'sectores': filas, 'detalle': detalle}
+
+
+TOLERANCIA_SEMILLA_PX = 6   # como anclas_identidad.py: un ancla a menos de esto de una semilla es el mismo cruce
+
+
+def config_por_identidad(config, anclas, tol=TOLERANCIA_SEMILLA_PX):
+    """Copia de la configuración del calce con las anclas por identidad y sin etapas de correlación.
+
+    Las semillas (esquinas de la plaza) se conservan; un ancla sobre una semilla se deja fuera para no
+    repetir el punto en el TPS. Devuelve (config nueva, ids dejados fuera por estar sobre una semilla)."""
+    semillas = [(s['px'], s['py']) for s in config.get('semillas', [])]
+    junto, nuevas = [], []
+    for a in anclas:
+        if any(np.hypot(a['px'] - x, a['py'] - y) < tol for x, y in semillas):
+            junto.append(a['id'])
+            continue
+        nuevas.append({'px': a['px'], 'py': a['py'], 'x36': a['x36'], 'y36': a['y36'], 'id': a['id'],
+                       'nota': f"esquina {int(a['id'][-3:])} «{a['nombre_1843']}» del plano de 1843 = «{a['nombre_1936']}» de 1936"})
+    return {**config, 'etapas': [], 'anclas': nuevas}, junto

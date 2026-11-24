@@ -126,3 +126,20 @@ def test_medir_un_calce_vigente_corrido_contra_anclas_exactas():
     assert all(f['mediana_loo_m'] < 1e-6 for f in informe['sectores'])
     assert informe['calce_vigente']['mediana_desvio_m'] == pytest.approx(15.0)
     assert [a['sector'] for a in informe['detalle']][:2] == ['S1843-11', 'S1843-11']
+
+
+def test_config_por_identidad_sin_correlacion_ni_anclas_sobre_las_semillas():
+    from esquinas_1843 import config_por_identidad
+    config = {'carpeta': 'x', 'semillas': [{'px': 100, 'py': 100, 'i': 0, 'j': 0, 'nota': 'plaza'}],
+              'etapas': [{'paso': 1}], 'gcps': [{'px': 1}], 'anclas': [{'px': 9}]}
+    anclas = [{'id': 'E1843-034', 'px': 103, 'py': 101, 'x36': 1.0, 'y36': 2.0, 'nombre_1843': 'del Principal', 'nombre_1936': 'Principal'},
+              {'id': 'E1843-035', 'px': 300, 'py': 100, 'x36': 3.0, 'y36': 4.0, 'nombre_1843': 'de la Torre', 'nombre_1936': 'La Torre'}]
+
+    nuevo, junto_a_semilla = config_por_identidad(config, anclas)
+
+    assert nuevo['etapas'] == [] and nuevo['semillas'] == config['semillas']
+    assert [a['id'] for a in nuevo['anclas']] == ['E1843-035']
+    assert nuevo['anclas'][0] == {'px': 300, 'py': 100, 'x36': 3.0, 'y36': 4.0, 'id': 'E1843-035',
+                                  'nota': 'esquina 35 «de la Torre» del plano de 1843 = «La Torre» de 1936'}
+    assert junto_a_semilla == ['E1843-034']
+    assert config['etapas'] == [{'paso': 1}] and config['anclas'] == [{'px': 9}]
