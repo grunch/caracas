@@ -1,0 +1,462 @@
+{
+ "fuente": "fuentes/mapas/1843-nypl-jesurun-facsimil-muller-stapler/original.tiff",
+ "alcance": "Rejilla regular de 5 × 5 sobre el marco del mapa (sin cartelas ni leyendas), norte arriba; fila 1 al norte, columna 1 al oeste. La caja de lectura agrega 60 px de solape. Decisión por delegación del responsable, 24-11-2026: la cuadrícula impresa del plano no se usa para los sectores porque sus líneas no están medidas.",
+ "marco_px": [
+  1656,
+  1092,
+  4915,
+  4052
+ ],
+ "sectores": [
+  {
+   "id": "S1843-11",
+   "fila": 1,
+   "columna": 1,
+   "caja_px": [
+    1656,
+    1092,
+    2308,
+    1684
+   ],
+   "caja_lectura_px": [
+    1656,
+    1092,
+    2368,
+    1744
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-12",
+   "fila": 1,
+   "columna": 2,
+   "caja_px": [
+    2308,
+    1092,
+    2960,
+    1684
+   ],
+   "caja_lectura_px": [
+    2248,
+    1092,
+    3020,
+    1744
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-13",
+   "fila": 1,
+   "columna": 3,
+   "caja_px": [
+    2960,
+    1092,
+    3611,
+    1684
+   ],
+   "caja_lectura_px": [
+    2900,
+    1092,
+    3671,
+    1744
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-14",
+   "fila": 1,
+   "columna": 4,
+   "caja_px": [
+    3611,
+    1092,
+    4263,
+    1684
+   ],
+   "caja_lectura_px": [
+    3551,
+    1092,
+    4323,
+    1744
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-15",
+   "fila": 1,
+   "columna": 5,
+   "caja_px": [
+    4263,
+    1092,
+    4915,
+    1684
+   ],
+   "caja_lectura_px": [
+    4203,
+    1092,
+    4915,
+    1744
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-21",
+   "fila": 2,
+   "columna": 1,
+   "caja_px": [
+    1656,
+    1684,
+    2308,
+    2276
+   ],
+   "caja_lectura_px": [
+    1656,
+    1624,
+    2368,
+    2336
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-22",
+   "fila": 2,
+   "columna": 2,
+   "caja_px": [
+    2308,
+    1684,
+    2960,
+    2276
+   ],
+   "caja_lectura_px": [
+    2248,
+    1624,
+    3020,
+    2336
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-23",
+   "fila": 2,
+   "columna": 3,
+   "caja_px": [
+    2960,
+    1684,
+    3611,
+    2276
+   ],
+   "caja_lectura_px": [
+    2900,
+    1624,
+    3671,
+    2336
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-24",
+   "fila": 2,
+   "columna": 4,
+   "caja_px": [
+    3611,
+    1684,
+    4263,
+    2276
+   ],
+   "caja_lectura_px": [
+    3551,
+    1624,
+    4323,
+    2336
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-25",
+   "fila": 2,
+   "columna": 5,
+   "caja_px": [
+    4263,
+    1684,
+    4915,
+    2276
+   ],
+   "caja_lectura_px": [
+    4203,
+    1624,
+    4915,
+    2336
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-31",
+   "fila": 3,
+   "columna": 1,
+   "caja_px": [
+    1656,
+    2276,
+    2308,
+    2868
+   ],
+   "caja_lectura_px": [
+    1656,
+    2216,
+    2368,
+    2928
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-32",
+   "fila": 3,
+   "columna": 2,
+   "caja_px": [
+    2308,
+    2276,
+    2960,
+    2868
+   ],
+   "caja_lectura_px": [
+    2248,
+    2216,
+    3020,
+    2928
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-33",
+   "fila": 3,
+   "columna": 3,
+   "caja_px": [
+    2960,
+    2276,
+    3611,
+    2868
+   ],
+   "caja_lectura_px": [
+    2900,
+    2216,
+    3671,
+    2928
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-34",
+   "fila": 3,
+   "columna": 4,
+   "caja_px": [
+    3611,
+    2276,
+    4263,
+    2868
+   ],
+   "caja_lectura_px": [
+    3551,
+    2216,
+    4323,
+    2928
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-35",
+   "fila": 3,
+   "columna": 5,
+   "caja_px": [
+    4263,
+    2276,
+    4915,
+    2868
+   ],
+   "caja_lectura_px": [
+    4203,
+    2216,
+    4915,
+    2928
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-41",
+   "fila": 4,
+   "columna": 1,
+   "caja_px": [
+    1656,
+    2868,
+    2308,
+    3460
+   ],
+   "caja_lectura_px": [
+    1656,
+    2808,
+    2368,
+    3520
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-42",
+   "fila": 4,
+   "columna": 2,
+   "caja_px": [
+    2308,
+    2868,
+    2960,
+    3460
+   ],
+   "caja_lectura_px": [
+    2248,
+    2808,
+    3020,
+    3520
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-43",
+   "fila": 4,
+   "columna": 3,
+   "caja_px": [
+    2960,
+    2868,
+    3611,
+    3460
+   ],
+   "caja_lectura_px": [
+    2900,
+    2808,
+    3671,
+    3520
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-44",
+   "fila": 4,
+   "columna": 4,
+   "caja_px": [
+    3611,
+    2868,
+    4263,
+    3460
+   ],
+   "caja_lectura_px": [
+    3551,
+    2808,
+    4323,
+    3520
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-45",
+   "fila": 4,
+   "columna": 5,
+   "caja_px": [
+    4263,
+    2868,
+    4915,
+    3460
+   ],
+   "caja_lectura_px": [
+    4203,
+    2808,
+    4915,
+    3520
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-51",
+   "fila": 5,
+   "columna": 1,
+   "caja_px": [
+    1656,
+    3460,
+    2308,
+    4052
+   ],
+   "caja_lectura_px": [
+    1656,
+    3400,
+    2368,
+    4052
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-52",
+   "fila": 5,
+   "columna": 2,
+   "caja_px": [
+    2308,
+    3460,
+    2960,
+    4052
+   ],
+   "caja_lectura_px": [
+    2248,
+    3400,
+    3020,
+    4052
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-53",
+   "fila": 5,
+   "columna": 3,
+   "caja_px": [
+    2960,
+    3460,
+    3611,
+    4052
+   ],
+   "caja_lectura_px": [
+    2900,
+    3400,
+    3671,
+    4052
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-54",
+   "fila": 5,
+   "columna": 4,
+   "caja_px": [
+    3611,
+    3460,
+    4263,
+    4052
+   ],
+   "caja_lectura_px": [
+    3551,
+    3400,
+    4323,
+    4052
+   ],
+   "estado": "pendiente"
+  },
+  {
+   "id": "S1843-55",
+   "fila": 5,
+   "columna": 5,
+   "caja_px": [
+    4263,
+    3460,
+    4915,
+    4052
+   ],
+   "caja_lectura_px": [
+    4203,
+    3400,
+    4915,
+    4052
+   ],
+   "estado": "pendiente"
+  }
+ ]
+}
