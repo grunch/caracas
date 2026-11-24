@@ -78,6 +78,19 @@ describe('crearPlanoPorNiveles', () => {
     await plano.pedir(3)
     expect(plano.puesto).toBe(3)
   })
+  it('resuelto: el nivel más alto cuyo pedido ya terminó, haya llegado o fallado (revisión de #177)', async () => {
+    // si chico.webp falla, el general no puede quedar clavado en 1024: el ciclo de render mira `resuelto`
+    const cargar = async (url) => { if (url.includes('chico')) throw new Error('red'); return textura(url) }
+    const plano = crearPlanoPorNiveles({ cargar, poner: vi.fn(), avisar: () => {} })
+    expect(plano.resuelto).toBe(-1)
+    await plano.pedir(0)
+    expect(plano.resuelto).toBe(0)
+    const enCamino = plano.pedir(1)
+    expect(plano.resuelto).toBe(0) // pedido, todavía sin respuesta
+    await expect(enCamino).rejects.toThrow('red')
+    expect(plano.resuelto).toBe(1)
+    expect(plano.puesto).toBe(0)
+  })
   it('por omisión avisa en la consola', async () => {
     const aviso = vi.spyOn(console, 'warn').mockImplementation(() => {})
     const plano = crearPlanoPorNiveles({ cargar: async () => { throw new Error('x') }, poner() {} })

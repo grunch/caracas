@@ -88,6 +88,20 @@ describe('crearCamara', () => {
     expect(cam.now.x).toBeCloseTo(500, 0)
   })
 
+  test('destino: durante un vuelo con guion es donde termina, no el punto del trayecto (revisión de #177)', () => {
+    // el nivel del plano se elige por el destino: un vuelo no baja los niveles intermedios por los que pasa
+    const cam = crearCamara(new PerspectiveCamera(), lienzo, { pedirCuadro: () => {}, hoja })
+    cam.jump({ x: 0, z: 0, dist: 2000, yaw: 0, pitch: 1.5 })
+    expect(cam.destino).toMatchObject({ x: 0, z: 0, dist: 2000 })
+    cam.volarA({ x: 500, z: -300, dist: 400, yaw: -0.4, pitch: 0.5 }, 2)
+    cam.update(0.6)
+    expect(cam.goal.dist).toBeGreaterThan(400)
+    expect(cam.destino).toMatchObject({ x: 500, z: -300, dist: 400, yaw: -0.4, pitch: 0.5 })
+    for (let i = 0; i < 10; i++) cam.update(0.2)
+    expect(cam.volando).toBe(false)
+    expect(cam.destino).toMatchObject({ x: 500, z: -300, dist: 400 })
+  })
+
   test('tomada: arranca en false y queda en true en cuanto la persona toca la cámara (aunque no la mueva)', () => {
     // Arrange
     const oyentes = {}
