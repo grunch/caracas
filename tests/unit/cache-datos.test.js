@@ -122,6 +122,16 @@ describe('crearServidor', () => {
     expect(await s.responder({ url: 'https://nominatim.openstreetmap.org/search', method: 'GET', mode: 'cors' })).toBe(null)
     expect(caches.todas.get(CACHE_DATOS)?.size ?? 0).toBe(0)
   })
+  it('si la caché no puede guardar (cuota llena), lo que bajó de la red llega igual (revisión de #178)', async () => {
+    const red = redFalsa(publicado('aaa'))
+    const caches = cachesFalsas()
+    const abrir = caches.open.bind(caches)
+    caches.open = async (nombre) => ({ ...(await abrir(nombre)), async put() { throw new DOMException('lleno', 'QuotaExceededError') } })
+    const s = crearServidor({ caches, pedir: red.pedir, raiz })
+    expect((await s.responder(pedido('', { mode: 'navigate' }))).cuerpo).toBe('<html>')
+    expect((await s.responder(pedido('datos/ciudad.pak'))).cuerpo).toBe('pak aaa')
+    expect((await s.responder(pedido('assets/main-abc.js'))).cuerpo).toBe('js')
+  })
   it('una respuesta fallida no se guarda', async () => {
     const red = redFalsa({ ...publicado('aaa'), 'datos/ciudad.pak': undefined })
     delete red.archivos['datos/ciudad.pak']

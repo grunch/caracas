@@ -25,6 +25,25 @@ describe('registrarServiceWorker', () => {
     for (const r of registros) expect(r.unregister).toHaveBeenCalled()
     expect(contenedor.register).not.toHaveBeenCalled()
   })
+  it('con ?sinsw y la página todavía en manos de un worker: borra sus cachés y recarga una vez, ya sin él (revisión de #178)', async () => {
+    const contenedor = { ...contenedorFalso([{ unregister: vi.fn(async () => true) }]), controller: {} }
+    const borradas = []
+    const cachesDelSitio = { keys: async () => ['caracas-app-v1', 'caracas-datos-v1', 'otra'], delete: async (n) => borradas.push(n) }
+    const recargar = vi.fn()
+    expect(await registrarServiceWorker({ contenedor, construido: true, params: params('sinsw'), cachesDelSitio, recargar })).toBe('recargando')
+    expect(borradas).toEqual(['caracas-app-v1', 'caracas-datos-v1'])
+    expect(recargar).toHaveBeenCalledTimes(1)
+    // la vuelta ya trae la marca: no recarga de nuevo aunque algo siga controlando
+    recargar.mockClear()
+    expect(await registrarServiceWorker({ contenedor, construido: true, params: params('sinsw=recargado'), cachesDelSitio, recargar })).toBe('dado de baja')
+    expect(recargar).not.toHaveBeenCalled()
+  })
+  it('con ?sinsw y ningún worker controlando, no recarga', async () => {
+    const recargar = vi.fn()
+    const cachesDelSitio = { keys: async () => [], delete: async () => true }
+    expect(await registrarServiceWorker({ contenedor: contenedorFalso(), construido: true, params: params('sinsw'), cachesDelSitio, recargar })).toBe('dado de baja')
+    expect(recargar).not.toHaveBeenCalled()
+  })
   it('si el registro falla, avisa y el sitio sigue', async () => {
     const avisar = vi.fn()
     const contenedor = { ...contenedorFalso(), register: async () => { throw new Error('bloqueado') } }
