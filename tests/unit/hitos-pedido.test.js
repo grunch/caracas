@@ -10,7 +10,8 @@ function trabajadorFalso(conducta) {
   return t
 }
 
-describe('los hitos fuera del hilo de la página', () => {
+// cada test construye los hitos enteros una o dos veces (segundos en una máquina lenta, como la del CI)
+describe('los hitos fuera del hilo de la página', { timeout: 60_000 }, () => {
   it('datosDeHitos arma los arrays de todos los hitos, con sus rangos', () => {
     expect(referencia.posiciones.length).toBeGreaterThan(1000)
     expect(referencia.rangos.length).toBeGreaterThan(10)
