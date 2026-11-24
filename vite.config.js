@@ -14,7 +14,14 @@ function commitActual() {
 export default defineConfig({
   base: './',
   define: { __COMMIT__: JSON.stringify(commitActual()) },
-  // dos páginas: el visor y «la ciudad edificio por edificio» (T71), que lo embebe como vitrina
-  build: { target: 'es2022', assetsInlineLimit: 0, rollupOptions: { input: { main: 'index.html', edificios: 'edificios.html' } } },
+  // dos páginas: el visor y «la ciudad edificio por edificio» (T71), que lo embebe como vitrina; y el service
+  // worker, que tiene que quedar en la raíz y con nombre fijo (su alcance es la carpeta donde vive)
+  build: {
+    target: 'es2022', assetsInlineLimit: 0,
+    rollupOptions: {
+      input: { main: 'index.html', edificios: 'edificios.html', sw: 'src/sw.js' },
+      output: { entryFileNames: (trozo) => (trozo.name === 'sw' ? 'sw.js' : 'assets/[name]-[hash].js') },
+    },
+  },
   test: { include: ['tests/unit/**/*.test.js'], coverage: { include: ['src/**', 'tools/**'] } },
 })
