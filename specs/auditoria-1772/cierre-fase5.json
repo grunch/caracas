@@ -3,7 +3,7 @@
  "ciudad": {
   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
   "sha256": "c4b7daaf9bb5371db415efc6d513b825b997be8a6847a2522d27bdf7bcdd496c",
-  "datos": "rama fix/cuadras-san-francisco"
+  "datos": "2ecbb92 (datos-2026-11-23-2ecbb92)"
  },
  "puerta_de_salida": {
   "frentes_alineados": {

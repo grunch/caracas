@@ -84,3 +84,16 @@ npm run datos            # o npm run datos:bajar para el release publicado
 for f in 3 4 5 6 7; do .venv/bin/python tools/geo/cierre_fase$f.py specs/auditoria-1772 fuentes/derivados/epocas/ciudad-epocas.json --datos "<commit> (<release>)"; done
 .venv/bin/python tools/geo/censo_fase8.py fuentes/derivados/epocas/ciudad-epocas.json .cache/censo-fase8 --informe-rojo specs/auditoria-1772/fuera-del-rojo.json
 ```
+
+## Medida sobre `datos-2026-11-23-2ecbb92`
+
+Fecha: 23-11-2026. Después del cierre se publicó `datos-2026-11-23-2ecbb92`: `main` con el convento alineado a su manzana (#166), los botones «Recorrer» (#167) y la esquina de Pajaritos con la referencia regenerada (#168). Se regeneró ese commit desde los escaneos y el `ciudad.pak` sale idéntico al publicado (`435db122…e994`). Sobre esa ciudad, las fases 3 a 7 dan cerrable:
+
+| | Valor |
+|---|---|
+| Casas de 1772 a la vista | 6277 |
+| Aberturas indebidas | 13, todas en límite |
+| Casas desalineadas | 55, todas en límite |
+| Cruces y cumbreras fuera de límite | ninguno |
+
+Los casos nuevos que trajo el calce movido de #168 están en los límites de las fases 5 a 7, registrados por #168 con la decisión del responsable.
