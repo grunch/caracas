@@ -7,10 +7,9 @@
 /**
  * Lo que se hace con una tecla o con un botón. `codigo`: la tecla física (`KeyboardEvent.code`); `letra`: el
  * carácter (`KeyboardEvent.key`), para los signos que cambian de lugar según el teclado. `conFoco`: también
- * vale con el foco en un botón o un enlace (Espacio y las letras, no: ahí activan o no molestan).
+ * vale con el foco en un botón o un enlace (las letras, no: ahí no molestan).
  */
 export const ACCIONES = Object.freeze([
-  { id: 'levantar', tecla: 'Espacio', codigo: 'Space', boton: '«Levantar la ciudad» / «Acostar la ciudad»', que: 'levanta la ciudad desde el plano, o la vuelve a acostar' },
   { id: 'color', tecla: 'C', codigo: 'KeyC', boton: '«Color» / «Tinta»', que: 'pasa del grabado a tinta al color, y vuelve' },
   { id: 'hoy', tecla: 'H', codigo: 'KeyH', boton: '«Ver lo de hoy»', que: 'estampa en rojo las calles, las vías y las quebradas de hoy, con sus nombres al acercarte' },
   { id: 'nombres', tecla: 'M', codigo: 'KeyM', boton: '«Nombres»', que: 'muestra u oculta los nombres de los lugares' },

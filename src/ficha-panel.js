@@ -208,7 +208,7 @@ export function crearFichas({ raiz = document.body, marcas, fichas = {}, epocaEn
       else if (e.key === 'ArrowLeft') pasarFoto(-1)
       else if (e.key === 'ArrowRight') pasarFoto(1)
       else if (e.key === 'Tab') atraparFoco(e)
-      // el visor es modal: ninguna tecla llega a los atajos de atrás («/» del buscador, C, H, M, Espacio)
+      // el visor es modal: ninguna tecla llega a los atajos de atrás («/» del buscador, C, H, M)
       e.stopPropagation()
       return
     }
