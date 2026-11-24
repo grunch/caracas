@@ -10,9 +10,11 @@
  * las notas de las marcas y de los hitos. Lo que es conocimiento general de la historia de la ciudad, sin
  * cotejar todavía con una fuente del catálogo, no va en el texto como un hecho más: va en `dudas`, que la
  * ficha muestra como «Por verificar». `hoy` nombra lo que hay en el lugar en la ciudad actual.
+ * La leyenda del plano de 1843 (Jesurún) está transcrita y cotejada en specs/auditoria-1843 (T81): se cita con su
+ * letra. La del plano de 1772, no.
  * Un lugar sin entrada muestra la nota de su marca y la fuente de su nombre.
  */
-const SIN_LEYENDA = 'los nombres de 1772 y 1843 no se cotejaron con la leyenda de esos planos'
+const SIN_LEYENDA = 'el nombre de 1772 no se cotejó con la leyenda de ese plano'
 
 export const FICHAS = Object.freeze({
   // --- el valle ---
@@ -61,6 +63,7 @@ export const FICHAS = Object.freeze({
   catedral: {
     textos: [
       [1, 'En la esquina de La Torre, con la fachada hacia la plaza y la torre a su izquierda, al norte. La torre es lo más alto de la ciudad colonial: en las vistas sobresale dos o tres veces sobre los tejados.'],
+      [2, 'La leyenda del plano de 1843 la nombra primera entre las iglesias, capillas y conventos (A).'],
       [3, 'El plano de 1889 la cuenta primera entre los templos (I). Las imágenes de 1867 a 1920 muestran la fachada barroca de dos cuerpos y la torre de tres, con reloj y cupulín.'],
     ],
     dudas: 'No tenemos imagen de la Catedral anterior a la década de 1860: en 1772 y 1843 aparece con el aspecto de esas fotos.',
@@ -68,7 +71,7 @@ export const FICHAS = Object.freeze({
   'palacio-arzobispal': {
     textos: [
       [1, 'Al sur de la Catedral, frente a la plaza y en la esquina de Las Gradillas, la residencia y el despacho del obispo. El conjunto ya existía en el siglo XVIII; se representa como hipótesis una casa de dos plantas con vanos adintelados, balcones, alero de tejas y dos patios con galerías.'],
-      [2, 'Desde la erección de la arquidiócesis en 1803 (ejecutada en 1804) es el Palacio Arzobispal. Sin un alzado fiable posterior al terremoto de 1812, el modelo conserva la misma hipótesis colonial y no inventa una reforma.'],
+      [2, 'Desde la erección de la arquidiócesis en 1803 (ejecutada en 1804) es el Palacio Arzobispal. Sin un alzado fiable posterior al terremoto de 1812, el modelo conserva la misma hipótesis colonial y no inventa una reforma. La leyenda del plano de 1843 lo nombra «Palacio Arzobispal» (j).'],
       [3, 'La reforma de la fachada de 1876–1877, en tiempos de Guzmán Blanco, le dio vanos de arco rebajado, balcones de hierro, bandas horizontales, cornisa y un pretil de recuadros, como los muestra una postal de Bernardo Roswaag de hacia 1920. Su aplicación a 1889 es una retroproyección.'],
       [5, 'La misma envolvente se mantiene en 1911 y 1936, sin cambios documentados entre ambas fechas. El plano de 1936 dibuja la manzana junto a la Catedral sin rotular el palacio.'],
     ],
@@ -84,12 +87,12 @@ export const FICHAS = Object.freeze({
       [5, 'El plano de 1936 la rotula «Min. del Exterior». Se representa una cubierta mixta por la reforma parcial de hacia 1930; la ubicación de la platabanda es hipotética. No se añade la ampliación de 1938 ni se anticipa la sustitución completa de los tejados de 1957.'],
     ],
     hoy: 'la Casa Amarilla Antonio José de Sucre, sede histórica de la Cancillería.',
-    dudas: 'Modelo interpretativo aprobado visualmente, no un levantamiento: medidas, linderos, alzados coloniales, patios y casamata son hipótesis. La pintura de 1870 orienta 1843; las fotos modernas afinan los ornamentos sin demostrar su fecha. Relieves y escudos simplificados. La localización de las cubiertas reformadas en 1930 queda por verificar.',
+    dudas: 'Modelo interpretativo aprobado visualmente, no un levantamiento: medidas, linderos, alzados coloniales, patios y casamata son hipótesis. La pintura de 1870 orienta 1843; las fotos modernas afinan los ornamentos sin demostrar su fecha. Relieves y escudos simplificados. La localización de las cubiertas reformadas en 1930 queda por verificar. La leyenda del plano de 1843 trae un «Palacio del Gobierno» (i): que sea esta casa, falta verlo en la letra del plano.',
   },
   capitolio: {
     textos: [
       [1, 'Toda esta manzana pertenecía al convento de las Concepciones (fundado en 1636–1637), que dio nombre a la esquina de Las Monjas. La reconstrucción sitúa la iglesia al norte, orientada hacia el este, un claustro principal de dos plantas, dependencias al oeste y una amplia huerta amurallada al sur.'],
-      [2, 'El terremoto de 1812 dañó la iglesia, los claustros y las tapias del convento, aunque la comunidad permaneció aquí hasta 1874. Mientras tanto, el Congreso sesionaba en el vecino convento de San Francisco, cruzando la calle hacia el sur.'],
+      [2, 'El terremoto de 1812 dañó la iglesia, los claustros y las tapias del convento, aunque la comunidad permaneció aquí hasta 1874. Mientras tanto, el Congreso sesionaba en el vecino convento de San Francisco, cruzando la calle hacia el sur. La leyenda del plano de 1843 lo nombra «Convento de Concepciones» (K).'],
       [3, 'Tras expropiar la huerta sur en 1872 y clausurar el convento en 1874, se levantó el conjunto neoclásico de Luciano Urdaneta: el Palacio Legislativo al sur (1873) y el Palacio Federal al norte, con el Salón Elíptico y las cariátides (1876–1877), en torno al patio con la fuente de hierro de 1875. El plano de 1889 numera 1, «Capitolio», y 2, «Palacio Federal»; el salón aún conservaba su bóveda elíptica achatada original.'],
       [4, 'Entre 1890 y 1891 se montó la sobrecúpula metálica belga de hierro y zinc con linterna calada, proyectada por Antonio Malaussena para proteger de filtraciones la Batalla de Carabobo, pintada por Martín Tovar y Tovar en 1888. Una foto de entre 1915 y 1920 muestra el salón ovalado por dentro.'],
       [5, 'El plano de 1936 rotula «Palacio Federal» y dibuja las cuatro alas en torno al jardín y el óvalo del Salón Elíptico al norte, todavía coronado por la sobrecúpula de zinc y la linterna calada de Malaussena.'],
@@ -103,12 +106,12 @@ export const FICHAS = Object.freeze({
       [3, 'El plano de 1889 pone aquí la Universidad (3), frente al Capitolio; el de 1936, la «Universidad Central». Las fotos muestran una fachada neogótica, con ventanas ojivales, pináculos y una torre de aguja.'],
     ],
     hoy: 'el Palacio de las Academias.',
-    dudas: `Que antes fue el convento de San Francisco es un dato general: ${SIN_LEYENDA}.`,
+    dudas: `Que antes fue el convento de San Francisco es un dato general: ${SIN_LEYENDA}. La leyenda del plano de 1843 no nombra el convento aparte: solo la iglesia, «San Francisco» (N).`,
   },
   'san-francisco': {
     textos: [
       [1, 'La iglesia de la Inmaculada Concepción, del convento franciscano (el primer esquema de la ciudad, de 1578, ya nombra San Francisco). Reconstruida tras el terremoto de 1641 y reformada en 1745, luce una portada barroca de un solo portal con las tres esculturas genovesas de mármol de 1655 y un campanario de tres arcos en su costado oeste.'],
-      [2, 'Resistió en pie el terremoto de 1812. Aquí Bolívar recibió el título de Libertador en 1813 y se celebraron sus exequias en 1842. Una litografía de hacia 1845 muestra su portada barroca, el campanario oeste con chapitel de teja y, al lado, el frente bajo del convento.'],
+      [2, 'Resistió en pie el terremoto de 1812. Aquí Bolívar recibió el título de Libertador en 1813 y se celebraron sus exequias en 1842. Una litografía de hacia 1845 muestra su portada barroca, el campanario oeste con chapitel de teja y, al lado, el frente bajo del convento. La leyenda del plano de 1843 la nombra «San Francisco» (N).'],
       [3, 'Templo VII en el plano de 1889. Entre 1887 y 1889 Juan Hurtado Manrique rehízo la fachada por encargo de Guzmán Blanco: sin campanario, con tres puertas, las estatuas de 1655 bajo un gran óculo y un remate de volutas y frontón curvo partido.'],
       [5, 'En el plano de 1936, «Iglesia San Francisco», a cargo de los jesuitas desde 1922, junto a la Universidad Central.'],
     ],
@@ -118,17 +121,18 @@ export const FICHAS = Object.freeze({
   'santa-capilla': {
     textos: [
       [1, 'En esta esquina, que el plano de 1889 todavía llama «San Mauricio», estuvo la iglesia de ese nombre.'],
+      [2, 'La leyenda del plano de 1843 nombra la iglesia de San Mauricio (I).'],
       [3, 'La Santa Capilla es el templo VIII del plano de 1889: una iglesia neogótica, con aguja.'],
     ],
-    dudas: 'Que la iglesia de San Mauricio ocupara este mismo solar en 1772 y 1843 es un dato general, sin cotejar.',
+    dudas: 'Que la iglesia de San Mauricio ocupara este mismo solar en 1772 y en 1843 es un dato general: la leyenda del plano de 1843 la nombra, pero falta ver dónde cae su letra.',
   },
   altagracia: {
-    textos: [[1, 'La iglesia del noroeste del casco. Templo II en el plano de 1889; «Iglesia de Altagracia» en el de 1936.']],
-    dudas: 'Desde cuándo está en pie, sin verificar: aquí aparece desde 1772.',
+    textos: [[1, 'La iglesia del noroeste del casco. Letra G de la leyenda del plano de 1843; templo II en el de 1889; «Iglesia de Altagracia» en el de 1936.']],
+    dudas: 'La leyenda del plano de 1843 ya la nombra. Desde cuándo está en pie antes, sin verificar: aquí aparece desde 1772.',
   },
   seminario: {
     textos: [[1, 'Del lado sur de la plaza, el seminario de Santa Rosa, donde empezó la universidad.']],
-    dudas: 'Dato general, ubicado por la cuadra y no por un rótulo. El plano de 1889 ya pone aquí el Concejo Municipal.',
+    dudas: 'Dato general, ubicado por la cuadra y no por un rótulo. El plano de 1889 ya pone aquí el Concejo Municipal. La leyenda del plano de 1843 nombra una «Universidad» (k) y la «Capilla de la Universidad» (L); falta ver en el plano si sus letras caen en esta cuadra.',
   },
   concejo: {
     textos: [[3, 'Del lado sur de la plaza, el plano de 1889 numera 7 el «Consejo municipal».']],
@@ -139,9 +143,10 @@ export const FICHAS = Object.freeze({
   carmelitas: {
     textos: [
       [1, 'El convento de las Carmelitas, que dio nombre a la esquina.'],
+      [2, 'La leyenda del plano de 1843 nombra el «Convento de Carmelitas» (H).'],
       [3, 'En la esquina de Carmelitas el plano de 1889 pone el Ministerio de Hacienda (18), y el de 1936 lo mantiene.'],
     ],
-    dudas: `El convento es un dato general: ${SIN_LEYENDA}.`,
+    dudas: `El convento, en 1772, es un dato general: ${SIN_LEYENDA}. La leyenda del plano de 1843 ya lo nombra.`,
   },
   correos: {
     textos: [[5, 'El plano de 1936 rotula aquí la «Ofic. Principal de Correos», en la esquina de Carmelitas. En 1889 el correo estaba al norte de la plaza (número 10 del plano de ese año).']],
@@ -154,17 +159,18 @@ export const FICHAS = Object.freeze({
   'san-jacinto': {
     textos: [
       [1, 'El convento de San Jacinto, con su plaza al frente.'],
+      [2, 'La leyenda del plano de 1843 nombra San Jacinto (M) entre las iglesias, capillas y conventos.'],
       [3, 'Cuando la plaza mayor se hizo jardín, el mercado vino aquí: el plano de 1889 numera 23 el «Mercado público».'],
       [5, 'El plano de 1936 lo rotula «Mercado Principal».'],
     ],
-    dudas: `El convento es un dato general: ${SIN_LEYENDA}.`,
+    dudas: `El convento, en 1772, es un dato general: ${SIN_LEYENDA}. La leyenda del plano de 1843 ya lo nombra.`,
   },
   'plaza-venezolano': {
     textos: [
       [1, 'La plaza frente al convento de San Jacinto.'],
       [3, 'El plano de 1889 la llama plaza «del Venezolano» (B); el de 1936, «Plaza El Venezolano».'],
     ],
-    dudas: `El nombre anterior es un dato general: ${SIN_LEYENDA}.`,
+    dudas: `El nombre anterior es un dato general: ${SIN_LEYENDA}. La leyenda del plano de 1843 no da letra a las plazas; el texto al pie de ese plano cuenta «San Jacinto» entre las plazas de la ciudad.`,
   },
   'casa-natal': {
     textos: [
@@ -176,6 +182,7 @@ export const FICHAS = Object.freeze({
   'teatro-municipal': {
     textos: [
       [1, 'Aquí estaban la plaza y la iglesia de San Pablo.'],
+      [2, 'La leyenda del plano de 1843 nombra la iglesia de San Pablo (P).'],
       [3, 'El teatro se levantó donde estuvo San Pablo: el plano de 1889 lo numera 25, «Teatro Municipal». En la foto de la década de 1880 el letrero del pórtico dice «Teatro Guzmán Blanco».'],
     ],
     dudas: 'La demolición de San Pablo (hacia 1876) es un dato general, sin cotejar con el catálogo.',
@@ -185,7 +192,7 @@ export const FICHAS = Object.freeze({
       [3, 'Templo III del plano de 1889; «Iglesia Santa Teresa» en el de 1936.'],
       [4, 'Una postal de 1912 muestra una de sus fachadas, de columnas pareadas y frontón, con las cúpulas detrás.'],
     ],
-    dudas: 'Antes hubo en el lugar un oratorio (dato general: San Felipe Neri), que no se marca.',
+    dudas: 'Antes hubo en el lugar un oratorio (dato general: San Felipe Neri), que no se marca. La leyenda del plano de 1843 nombra un «Oratorio de San Felipe» (Q): que estuviera aquí, falta verlo en la letra del plano.',
   },
   'teatro-nacional': {
     textos: [[4, 'El plano de 1936 lo rotula «Teatro Nacional».']],
@@ -196,12 +203,15 @@ export const FICHAS = Object.freeze({
     dudas: 'El nombre «La Rotunda» y su demolición en 1936 son datos generales; el plano de 1889 solo dice «Cárcel».',
   },
   'santa-rosalia': {
-    textos: [[3, 'Templo IV del plano de 1889; «Iglesia Santa Rosalía» en el de 1936.']],
-    dudas: 'La iglesia es anterior; sin cotejar con el plano de 1843, aparece desde 1889.',
+    textos: [
+      [2, 'La leyenda del plano de 1843 nombra la iglesia de Santa Rosalía (R).'],
+      [3, 'Templo IV del plano de 1889; «Iglesia Santa Rosalía» en el de 1936.'],
+    ],
+    dudas: 'La iglesia es anterior (dato general): aquí aparece desde 1843, cuya leyenda la nombra.',
   },
   'san-juan': {
     textos: [[3, 'La iglesia de los capuchinos: templo V del plano de 1889. El de 1936 rotula «Iglesia San Juan» y, al frente, la «Plaza de Capuchinos».']],
-    dudas: 'La iglesia es anterior; sin cotejar con el plano de 1843, aparece desde 1889.',
+    dudas: 'La iglesia es anterior. La leyenda del plano de 1843 nombra «Capuchinos» (S), no San Juan: si es este templo, falta verlo en la letra del plano; mientras, aparece desde 1889.',
   },
   'nuevo-circo': {
     textos: [[5, 'La plaza de toros: «Nuevo Circo» en el plano de 1936.']],
@@ -218,19 +228,23 @@ export const FICHAS = Object.freeze({
 
   // --- el norte ---
   'las-mercedes': {
-    textos: [[3, 'El plano de 1889 dibuja un templo en el lugar; el de 1936 lo rotula «Iglesia Las Mercedes».']],
-    dudas: 'El convento de la Merced es colonial (dato general); sin cotejar con los planos de 1772 y 1843, aparece desde 1889.',
+    textos: [
+      [2, 'La leyenda del plano de 1843 la nombra «La Merced» (E), entre las iglesias, capillas y conventos.'],
+      [3, 'El plano de 1889 dibuja un templo en el lugar; el de 1936 lo rotula «Iglesia Las Mercedes».'],
+    ],
+    dudas: 'El convento de la Merced es colonial (dato general); con el plano de 1772, sin cotejar. Aquí aparece desde 1843, cuya leyenda la nombra.',
   },
   'la-pastora': {
     textos: [
       [1, 'La iglesia del barrio del norte, con dos torres hacia su plaza: así la dibuja el plano de 1936.'],
+      [2, 'La leyenda del plano de 1843 nombra la iglesia de La Pastora (B).'],
       [3, 'Templo XI del plano de 1889.'],
     ],
-    dudas: 'Desde cuándo está en pie, sin verificar: aquí aparece desde 1772.',
+    dudas: 'La leyenda del plano de 1843 ya la nombra. Desde cuándo está en pie antes, sin verificar: aquí aparece desde 1772.',
   },
   panteon: {
     textos: [
-      [2, 'La iglesia de la Santísima Trinidad, al norte de la ciudad. Ferdinand Bellermann la dibujó en ruinas hacia 1842–1845.'],
+      [2, 'La iglesia de la Santísima Trinidad, al norte de la ciudad. Ferdinand Bellermann la dibujó en ruinas hacia 1842–1845. La leyenda del plano de 1843 la nombra «La Trinidad» (C).'],
       [3, 'Inaugurado como Panteón Nacional en 1875. En 1889 tiene dos torres con agujas y un rosetón central, como en la fotografía de Lessmann de fines del siglo XIX.'],
       [4, 'La reforma de Alejandro Chataing, terminada en 1911, cambia la ornamentación y sustituye el rosetón central por una ventana ojival.'],
       [5, 'La reforma de Manuel Mujica Millán, terminada en 1930, incorpora una torre central alta y dos torres laterales menores con cúpulas. Es la fachada representada en 1936.'],
@@ -275,8 +289,11 @@ export const FICHAS = Object.freeze({
 
   // --- el este ---
   candelaria: {
-    textos: [[3, 'La iglesia y su plaza, al este del casco: templo VI y plaza D del plano de 1889.']],
-    dudas: 'La iglesia es colonial (dato general); sin cotejar con los planos de 1772 y 1843, aparece desde 1889.',
+    textos: [
+      [2, 'La leyenda del plano de 1843 nombra la iglesia de La Candelaria (J).'],
+      [3, 'La iglesia y su plaza, al este del casco: templo VI y plaza D del plano de 1889.'],
+    ],
+    dudas: 'La iglesia es colonial (dato general): aquí aparece desde 1843, cuya leyenda la nombra.',
   },
   'fc-central': {
     textos: [[3, 'El plano de 1889 rotula aquí «Estación» y «Ferrocarril Central», al este de la ciudad.']],
