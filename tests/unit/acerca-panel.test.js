@@ -313,7 +313,7 @@ describe('la bienvenida y el panel «Acerca»', () => {
       const avisosDelPanel = panel().porClase('aviso').map((p) => p.textContent).join(' ')
       expect(avisosDelPanel).toMatch(/no trae la línea de tiempo/)
       expect(avisosDelPanel).toMatch(/no trae la lista de fuentes/)
-      expect(panel().porEtiqueta('h3')).toHaveLength(5)
+      expect(panel().porEtiqueta('h3')).toHaveLength(6)
     })
 
     test('Escape lo cierra y el foco vuelve a donde estaba', async () => {

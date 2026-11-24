@@ -13,6 +13,10 @@ import { controlesVisibles } from './controles.js'
 
 export const REPOSITORIO = 'https://github.com/grunch/caracas'
 export const INSPIRACION = 'https://baires.mormon.garden'
+/** Las puertas para colaborar: la guía (con el estándar de calidad), la licencia y los issues. */
+export const CONTRIBUIR = `${REPOSITORIO}/blob/main/CONTRIBUTING.md`
+export const LICENCIA = `${REPOSITORIO}/blob/main/LICENSE`
+export const ISSUES = `${REPOSITORIO}/issues`
 /** Quién hizo el sitio: la firma de la esquina (index.html), la bienvenida y los créditos. */
 export const AUTOR = Object.freeze({ usuario: '@negrunch', url: 'https://x.com/negrunch' })
 
@@ -150,6 +154,30 @@ export function bloquesDeFuentes(creditos) {
   return bloques
 }
 
+/**
+ * «Colabora»: el proyecto es libre, cómo ayudar sin programar y cómo hacerlo con una IA que programa, paso a
+ * paso y dentro del estándar de calidad (CONTRIBUTING.md § El estándar de calidad, AGENTS.md). Si cambian esas
+ * reglas, este texto cambia con ellas.
+ */
+export function bloquesDeColabora() {
+  return [
+    { tipo: 'p', partes: ['Este sitio es software libre: el código está bajo la licencia ', { texto: 'AGPL-3.0', url: LICENCIA }, ' y vive en ', { texto: 'github.com/grunch/caracas', url: REPOSITORIO }, ', donde cualquiera puede verlo, usarlo y mejorarlo. Levantar una ciudad entera, casa por casa y época por época, es mucho trabajo: te invitamos a sumarte.'] },
+    { tipo: 'p', partes: [{ rotulo: 'Sin programar' }, 'No hace falta programar para ayudar. Si ves un error (una casa donde no iba, un nombre equivocado, una calle torcida), cuéntalo en ', { texto: 'un issue', url: ISSUES }, ': qué viste, en qué año y en qué lugar. Si tienes un plano, una foto o un grabado viejo de Caracas de dominio público o con licencia libre, o sabes la historia de un lugar, también sirve, siempre con su fuente.'] },
+    { tipo: 'p', partes: [{ rotulo: 'Con tu IA' }, 'Hoy puedes arreglar algo con una IA que programa, como Claude Code, Codex o Cursor. El repositorio trae escritas las reglas para ella en ', { codigo: 'AGENTS.md' }, ': no necesitas saber programar para empezar, pero sí leer y probar lo que hace.'] },
+    {
+      tipo: 'pasos', titulo: 'Con tu IA, paso a paso', pasos: [
+        ['Abre ', { texto: 'un issue', url: ISSUES }, ' con el error o la idea y espera a que quien mantiene el repositorio le ponga la etiqueta ', { codigo: 'estado: aceptado' }, '. Así se conversa antes de que tú y tu IA trabajen en algo que no entra.'],
+        ['Pídele a tu IA que prepare todo: «Clona github.com/grunch/caracas, lee CONTRIBUTING.md y AGENTS.md, instala lo necesario y levanta el sitio con npm run dev».'],
+        ['Pídele el cambio: «Resuelve el issue #N siguiendo AGENTS.md: primero un test que falle, en rojo; después el arreglo, con todos los tests en verde».'],
+        ['Pruébalo tú, a mano, en el sitio corriendo: haz los pasos, anota lo que ves en cada uno y saca una captura de antes y otra de después. Tu IA puede correr pruebas automáticas, pero no la reemplaza: la prueba a mano la hace una persona.'],
+        ['Pídele que abra el PR llenando cada sección de la plantilla, y léelo antes de enviarlo: que la descripción diga lo que de verdad hace el cambio y que cada dato histórico lleve su fuente con enlace.'],
+        ['Atiende la revisión: CodeRabbit, Codex y un bot de calidad comentan el PR. Pídele a tu IA que corrija lo que aplique y responde cada comentario, también cuando no aplica (y di por qué).'],
+      ],
+    },
+    { tipo: 'p', partes: [{ rotulo: 'El estándar de calidad' }, 'Puedes usar IA, pero respondes por cada línea del PR y tienes que poder explicarla: «lo escribió la IA» no es una respuesta. Un PR sin issue aceptado, sin la plantilla llena, sin la prueba a mano, sin el test en rojo de un arreglo o sin la fuente de un dato histórico se cierra sin revisión; lo puedes reabrir cuando lo cumpla. Mejor chico: el primero, hasta 400 líneas de código. Al abrirlo aceptas que tu aporte se publique bajo la misma licencia. Todos los detalles, en ', { texto: 'CONTRIBUTING.md', url: CONTRIBUIR }, '.'] },
+  ]
+}
+
 const HEX_DE_COMMIT = /^[0-9a-f]{7,40}$/
 
 /**
@@ -188,6 +216,7 @@ export function seccionesDeAcerca({ epocas = null, desde = 0, creditos = null, a
     },
     { id: 'epocas', titulo: 'Las épocas', bloques: lasEpocas },
     { id: 'fuentes', titulo: 'Fuentes y licencias', bloques: bloquesDeFuentes(creditos) },
+    { id: 'colabora', titulo: 'Colabora', bloques: bloquesDeColabora() },
     {
       id: 'creditos', titulo: 'Créditos', bloques: [
         { tipo: 'p', partes: ['Hecho por ', { texto: AUTOR.usuario, url: AUTOR.url }, '.'] },

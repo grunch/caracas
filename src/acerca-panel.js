@@ -63,6 +63,9 @@ function bloque(b) {
         crear('dd', { textContent: f.que }),
       ]))))
   }
+  if (b.tipo === 'pasos') {
+    return [crear('h4', { textContent: b.titulo }), crear('ol', { clase: 'pasos' }, ...b.pasos.map((partes) => crear('li', {}, ...partes.map(parte))))]
+  }
   if (b.tipo === 'fuentes') {
     const filas = crear('ul', { clase: 'fuentes' }, ...b.filas.map(filaDeFuente))
     if (b.plegado) return [crear('details', {}, crear('summary', { textContent: b.titulo }), filas)]
