@@ -23,7 +23,7 @@ describe('ACCIONES', () => {
 
 describe('accionDeTecla', () => {
   it('reconoce cada atajo por su tecla física o por su carácter', () => {
-    expect(accionDeTecla(tecla({ code: 'Space', key: ' ' }))?.id).toBe('levantar')
+    expect(accionDeTecla(tecla({ code: 'Space', key: ' ' }))).toBeNull() // ya no levanta ni acuesta la ciudad
     expect(accionDeTecla(tecla({ code: 'KeyC', key: 'c' }))?.id).toBe('color')
     expect(accionDeTecla(tecla({ code: 'KeyH', key: 'h' }))?.id).toBe('hoy')
     expect(accionDeTecla(tecla({ code: 'KeyM', key: 'm' }))?.id).toBe('nombres')

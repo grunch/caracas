@@ -80,7 +80,7 @@ export function crearVisorDePlano({ contenedor, indice, base, añoBase, liviano 
       pedido++
       boton.setAttribute('aria-expanded', 'false')
     })
-    // el teclado del visor no llega a la ciudad (C, H, M, Espacio…); Escape lo cierra el propio <dialog>
+    // el teclado del visor no llega a la ciudad (C, H, M…); Escape lo cierra el propio <dialog>
     dialogo.addEventListener('keydown', (e) => {
       e.stopPropagation()
       if (e.target.closest('button, a')) return

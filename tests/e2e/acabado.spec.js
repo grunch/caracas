@@ -133,8 +133,8 @@ test('cada techo deja el id de su casa en el alfa del cuadro (de ahí el contorn
     await ruta.continue()
   })
   const errores = await abrir(page)
-  // El relieve también muestra el botón: reproducir que llega antes que las casas.
-  await expect(page.locator('#alzar')).toBeVisible()
+  // El relieve llega antes que las casas: reproducirlo.
+  await page.waitForFunction(() => window.lab.relieveU.tRelieve.value.image.width > 1)
   const hayCasas = () => window.lab.scene.children.some((m) =>
     m.isMesh && m.material === window.lab.ciudad.material && m.geometry.hasAttribute('aTecho'))
   expect(await page.evaluate(hayCasas)).toBe(false)

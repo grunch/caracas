@@ -47,7 +47,7 @@ export function crearModoAPie({ camera, lienzo, ventana = globalThis, cam, coord
     pedirCuadro(3)
   }
 
-  // --- teclado: en captura, antes que los atajos del mapa (las flechas no mueven el mapa, Espacio no lo acuesta);
+  // --- teclado: en captura, antes que los atajos del mapa (las flechas no mueven el mapa);
   // lo que pasa en un campo de texto o en un diálogo (el visor del plano: flechas para moverlo, Esc para cerrarlo) es suyo ---
   ventana.addEventListener('keydown', (e) => {
     if (!activo || teclaAjena(e)) return

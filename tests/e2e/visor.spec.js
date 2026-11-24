@@ -10,16 +10,16 @@ test('el visor arranca y expone window.lab', async ({ page }) => {
   expect(errores).toEqual([])
 })
 
-test('la ciudad se levanta con la ola y vuelve a acostarse', async ({ page }) => {
+test('no hay botón para levantar o acostar la ciudad, ni Espacio lo hace: se levanta sola al abrir la página', async ({ page }) => {
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
-  const boton = page.locator('#alzar')
-  await expect(boton).toBeVisible()
-  await boton.click()
-  await expect(boton).toHaveText('Acostar la ciudad')
-  await page.waitForFunction(() => window.lab.ciudad.U.uOla.value > 0)
+  await page.waitForFunction(() => window.lab.scene.children.some((m) => m.isMesh && m.geometry.hasAttribute('aTecho')))
+  await expect(page.locator('#alzar')).toHaveCount(0)
+  await expect(page.locator('#botones')).not.toContainText(/Levantar|Acostar/)
+  await page.locator('canvas').click({ position: { x: 20, y: 20 } })
   await page.keyboard.press('Space')
-  await expect(boton).toHaveText('Levantar la ciudad')
+  await page.waitForTimeout(500)
+  expect(await page.evaluate(() => window.lab.ciudad.U.uOla.value)).toBe(0) // ?sinintro empieza quieta y sigue así
 })
 
 test('la C alterna entre tinta y color', async ({ page }) => {
@@ -53,7 +53,7 @@ test('Espacio sobre un botón con foco activa ese botón, no levanta la ciudad',
   await page.locator('#color').focus()
   await page.keyboard.press('Space')
   await expect(page.locator('#color')).toHaveAttribute('aria-pressed', 'true')
-  await expect(page.locator('#alzar')).toHaveText('Levantar la ciudad')
+  expect(await page.evaluate(() => window.lab.ciudad.U.uOla.value)).toBe(0)
 })
 
 test('la H prende y apaga lo de hoy: botón, leyenda y estampa', async ({ page }) => {
@@ -215,8 +215,8 @@ test('sin ?planos, la hoja muestra siempre el plano de 1936 (no se pega el plano
   expect(pedidos.filter((u) => u.includes('plano/epocas.json'))).toEqual([])
 })
 
-// a 800 px, con la ciudad levantada, #alzar dice «Acostar la ciudad» y la barra tiene seis botones (los modos, bajo
-// «Recorrer»; antes eran ocho): por encima
+// a 800 px, con la ciudad levantada, la barra tiene cinco botones (los modos, bajo «Recorrer», y sin el de levantar
+// la ciudad; antes eran ocho): por encima
 // de 640 px no partía en filas y su borde derecho fijo dejaba los de la izquierda fuera de la ventana (o los
 // apretaba hasta partirles el texto); con lo de hoy prendido, la leyenda queda encima de la barra
 for (const ancho of [700, 800]) {
@@ -224,15 +224,14 @@ for (const ancho of [700, 800]) {
     await page.setViewportSize({ width: ancho, height: 600 })
     await page.goto('/?sinintro')
     await page.waitForFunction(() => window.lab?.ready === true)
-    await page.locator('#alzar').click()
-    await expect(page.locator('#alzar')).toHaveText('Acostar la ciudad')
+    await page.evaluate(() => window.lab.levantar(true))
     await page.locator('#hoy').click()
     await expect(page.locator('#leyenda')).toBeVisible()
     const cajas = await page.locator('#botones .panel:visible').evaluateAll((bs) => bs.map((b) => {
       const r = b.getBoundingClientRect()
       return { id: b.id, izq: r.left, der: r.right, arriba: r.top, abajo: r.bottom, alto: r.height }
     }))
-    expect(cajas.length).toBeGreaterThanOrEqual(6)
+    expect(cajas.length).toBeGreaterThanOrEqual(5)
     for (const c of cajas) {
       expect(c.izq, c.id).toBeGreaterThanOrEqual(0)
       expect(c.der, c.id).toBeLessThanOrEqual(ancho)

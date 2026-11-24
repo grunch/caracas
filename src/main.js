@@ -52,7 +52,6 @@ const crecePedido = fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Pro
 crecePedido.catch(() => {}) // sin crece.json (la demo de CI) no hay línea de tiempo: se avisa más abajo
 // lo que cada acción de src/controles.js hace acá; las funciones se declaran más abajo
 const HACER = {
-  levantar: () => levantar(),
   color: () => alternarColor(),
   hoy: () => alternarHoy(),
   nombres: () => alternarMarcas(),
@@ -157,7 +156,6 @@ async function cargarRelieve() {
   if (!r.ok) throw new Error(`datos/relieve.bin: ${r.status}`)
   relieve = crearRelieve(decodificarRelieve(await r.arrayBuffer()), hoja, terrazas)
   ponerRelieve(relieveU, relieve)
-  document.getElementById('alzar').hidden = false
   pedirCuadro(3)
 }
 
@@ -228,7 +226,6 @@ const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, tec
   casas.customDepthMaterial = crearMaterialSombraCiudad(ciudad.U)
   casas.castShadow = true
   scene.add(casas)
-  document.getElementById('alzar').hidden = false
   pedirCuadro(3)
 }).catch((e) => console.warn(`ciudad: ${e.message}`))
 casasPedidas.then(() => {
@@ -323,7 +320,6 @@ let olaElegida = false // alguien levantó o acostó la ciudad: la entrada (arra
 function levantar(arriba = olaObjetivo === 0) {
   olaElegida = true
   olaObjetivo = arriba ? olaMax : 0
-  document.getElementById('alzar').textContent = arriba ? 'Acostar la ciudad' : 'Levantar la ciudad'
   pedirCuadro(3)
 }
 
@@ -401,7 +397,6 @@ async function cargarHoy() {
   }).catch((e) => console.warn(`hoy de cerca: ${e.message}`))
 }
 
-document.getElementById('alzar').addEventListener('click', () => levantar())
 document.getElementById('color').addEventListener('click', () => alternarColor())
 document.getElementById('hoy').addEventListener('click', () => alternarHoy())
 addEventListener('keydown', (e) => {

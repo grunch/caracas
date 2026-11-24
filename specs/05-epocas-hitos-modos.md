@@ -18,7 +18,7 @@
 - Se arrastra, se acerca con la rueda, con dos dedos, con doble click o con + y − (hasta 8×), se mueve con las flechas y vuelve entero con 0.
 - **Crédito**: título, autor, año, fuente (con enlace si la ficha trae la dirección) y licencia, de `datos/crece.json`, que los copia de
   `fuentes/mapas/<plano>/ficha.json`. Lo que falta se dice («autor sin identificar»), no se inventa.
-- Escape, × o un click en el telón lo cierran y el foco vuelve al botón. Mientras está abierto, las teclas de la ciudad (C, H, M, Espacio) no actúan.
+- Escape, × o un click en el telón lo cierran y el foco vuelve al botón. Mientras está abierto, las teclas de la ciudad (C, H, M) no actúan.
 - `window.lab.visorPlano` expone `abrir()`, `cerrar()`, `abierto` y `estado`.
 
 ## Marcas (`marcas.js`)
