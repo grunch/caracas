@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { Matrix3, Vector3 } from 'three'
+import { Matrix3, Raycaster, Vector3 } from 'three'
 import { HITOS, construirHitos, validarHitos, zonasDeSupresion, suprimirTechos } from '../../src/hitos.js'
 import { crearCoords } from '../../src/coords.js'
 import { MAT } from '../../src/hitos/lienzo.js'
@@ -165,4 +165,21 @@ test('la ficha cuenta la portada de 1745, el Libertador en 1813 y la reforma de 
   expect(textos[2]).toContain('1813')
   expect(textos[3]).toContain('Hurtado Manrique')
   expect(FICHAS[hito.id].hoy).toContain('1956')
+})
+
+test('las ventanas altas del clerestorio se ven oscuras desde afuera, dentro de su marco', () => {
+  for (const anio of [1772, 1936]) {
+    const { edificio } = crearSanFrancisco({ anio })
+    edificio.updateMatrixWorld(true)
+    // la mitad alta del vano: la baja queda bajo el faldón de la nave lateral
+    const y = (etapaSanFrancisco(anio).colonial ? 7.4 : 7.8) + 2.1
+    for (const sgn of [-1, 1]) {
+      for (let zv = -22; zv <= 22; zv += 7.4) {
+        // un rayo horizontal desde fuera de la nave central, contra el centro de la ventana
+        const [primero] = new Raycaster(new Vector3(sgn * 6, y, zv), new Vector3(-sgn, 0, 0)).intersectObject(edificio, true)
+        expect(primero.object.material.color.getHex(), `${anio}, lado ${sgn}, z = ${zv}`).toBeLessThan(0x303030)
+      }
+    }
+    liberar(edificio)
+  }
 })
