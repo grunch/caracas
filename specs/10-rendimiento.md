@@ -68,7 +68,9 @@ se bajaron para que la tabla diera verde. Lo que falta de cada una:
 - **Triángulos**: los árboles enteros cerca de la cámara y el pase de sombras, que dibuja todo otra vez.
 
 Un PR que toca la carga, la geometría, los shaders o las texturas corre la medición antes y después y pega las
-dos en su descripción.
+dos en su descripción, en la sección **Rendimiento** de la plantilla. Las reglas (no empeorar más que el ruido,
+qué hacer sin GPU) y lo que mira quien revisa están en `CONTRIBUTING.md § Rendimiento`; el bot de triaje revisa
+que la medición esté (`specs/09` § 5.1).
 
 **En el CI** se comprueba lo que se puede comprobar sin GPU: el tamaño del build
 (`node tools/rendimiento/presupuesto-build.mjs`, después de `npx vite build`), con los topes de `build` en el

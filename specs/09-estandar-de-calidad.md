@@ -39,7 +39,7 @@ De la más barata a la más cara; cada una saca PRs antes de la siguiente.
 |---|---|---|---|
 | 1 | Reglas escritas | Da un motivo para cerrar sin discutir | `CONTRIBUTING.md § El estándar de calidad` |
 | 2 | Issue antes del PR | Arreglos de errores que no existen; ideas fuera del proyecto | `estado: aceptado` |
-| 3 | Plantilla con **Prueba a mano**, **Capturas** y **Fuentes** | Quien no sabe qué época o vista cambió, no lo corrió o no tiene fuente | `.github/pull_request_template.md` |
+| 3 | Plantilla con **Prueba a mano**, **Capturas**, **Fuentes** y **Rendimiento** | Quien no sabe qué época o vista cambió, no lo corrió, no tiene fuente o no midió lo que cuesta | `.github/pull_request_template.md` |
 | 4 | Bot de triaje | Lo anterior faltante; PRs demasiado grandes | `tools/triaje/`, `.github/workflows/calidad.yml` |
 | 5 | Test en rojo en CI (futuro) | Fixes cuyo test también pasa sin el arreglo | § 6 |
 
@@ -59,6 +59,9 @@ Diferencias con Mostro, por lo que es este proyecto:
 - **Quien mantiene el repo también llena la plantilla.** En Mostro sus PRs se saltan el contenido; aquí la mayoría
   de los PRs los abren agentes de IA para quien mantiene el repo, y son justamente los que la plantilla guía. Solo
   se salta el issue aceptado.
+- **Rendimiento**: el sitio corre en el navegador de un teléfono con 39 mil casas; un PR que toca la carga, la
+  geometría, los shaders o las texturas trae la medición de `main` y la de su rama (`specs/10-rendimiento.md`).
+  Mostro no la tiene: su rendimiento no lo paga el equipo de quien lo usa.
 - **Sin firmas obligatorias**: el repo no firma commits hoy.
 - **El plan**: si el PR nombra una tarea (`T64`), tiene que actualizar su fila en `specs/07-plan-de-implementacion.md`.
 - **El tamaño** es el de `AGENTS.md` (3000 líneas de código sin tests ni documentación) para todos, y 400 en un primer PR.
@@ -66,7 +69,7 @@ Diferencias con Mostro, por lo que es este proyecto:
 ## 4. La plantilla
 
 `.github/pull_request_template.md`, con estas secciones `##`: Issue o tarea · Tipo · Qué cambia y por qué · Qué
-toca · Qué más podría romperse · Fuentes · Prueba a mano (con `###` Preparación, Pasos, Capturas, No cubierto) ·
+toca · Qué más podría romperse · Fuentes · Rendimiento · Prueba a mano (con `###` Preparación, Pasos, Capturas, No cubierto) ·
 Tests automáticos · Checklist · Asistencia de IA. El bot lee la plantilla de `main` para saber qué secciones pedir:
 cambiar la plantilla cambia lo que se revisa, sin tocar código.
 
@@ -75,7 +78,8 @@ cambiar la plantilla cambia lo que se revisa, sin tocar código.
 `.github/workflows/calidad.yml`, en `pull_request_target` (`opened`, `edited`, `reopened`, `synchronize`,
 `ready_for_review`, y `labeled`/`unlabeled` solo para `calidad:exento`). Las revisiones son funciones puras en
 `tools/triaje/triaje-lib.mjs` (con tests en `tests/unit/triaje.test.js`), las llamadas a la API y las etiquetas en
-`tools/triaje/triaje.mjs` (`tests/unit/triaje-gh.test.js`) y los umbrales y las rutas en `tools/triaje/config.json`.
+`tools/triaje/triaje.mjs` (`tests/unit/triaje-gh.test.js`) y los umbrales y las rutas en `tools/triaje/config.json`;
+las claves de los topes de rendimiento, en `tools/rendimiento/presupuesto.json`, que el script también lee de `main`.
 Un borrador no se revisa; la primera vuelta es al pasar a listo.
 
 ### 5.1 Revisiones
@@ -87,6 +91,7 @@ Un borrador no se revisa; la primera vuelta es al pasar a listo.
 | `prueba-a-mano` | **Pasos** tiene 2 o más pasos numerados, cada uno con `Se ve:`, uno de regresión y, en un fix, uno marcado `(falla en main)` | «Prueba a mano: …» |
 | `capturas` | Si el diff toca una ruta visual (`rutas.visuales`: shaders, hitos, techos, `.css`, las páginas, el pipeline…; menos los scripts de auditoría de `rutas.no_visuales`, que solo escriben informes), **Capturas** trae dos imágenes: antes y después | «Capturas: …» |
 | `fuentes` | Si el diff toca una ruta histórica (`fuentes/`, `src/marcas-datos.js`, `src/fichas-datos.js`, `src/hitos/`), **Fuentes** trae un enlace | «Fuentes: el PR toca datos históricos y no enlaza ninguna fuente» |
+| `rendimiento` | Si el diff toca una ruta de rendimiento (`rutas.rendimiento`: la carga, los workers, la geometría, los hitos, los shaders, las texturas, el pipeline que empaca los datos), **Rendimiento** nombra un tope de `presupuesto.json` (`casasMs`, `triangulosCentro`…) y dice cuál es la medición de `main` | «Rendimiento: el PR toca la carga…; pega la medición de `main` y la de esta rama» |
 | `fix-con-test` | En un fix (sección Tipo o prefijo `fix` del título), el diff agrega un `it(`/`test(` en `tests/` o un `def test_` en `tools/geo/tests/` | «Un fix necesita un test de regresión…» |
 | `plan` | Si **Issue o tarea** nombra una tarea `T…`, el diff toca `specs/07-plan-de-implementacion.md` | «Plan: …» |
 | `tamano` | Hasta 3000 líneas de código cambiadas (sin `tests/`, `tools/geo/tests/`, `specs/`, `*.md` ni el lockfile); 400 en un primer PR | «Un PR tiene hasta …» |
@@ -107,7 +112,7 @@ Primera vez: `author_association` `FIRST_TIME_CONTRIBUTOR`, `FIRST_TIMER` o `NON
 - **Bots** (`config.autores.bots` o tipo `Bot`): se saltan todo.
 - **Solo Markdown** (todos los archivos, con su nombre anterior si es un renombre, terminan en `.md`) o la etiqueta
   **`calidad:exento`**: se saltan las revisiones de contenido (`issue`, `plantilla`, `prueba-a-mano`, `capturas`,
-  `fix-con-test`, `plan`, y `fuentes` con la etiqueta). Un PR solo de Markdown **sí** pasa por `fuentes`: las
+  `rendimiento`, `fix-con-test`, `plan`, y `fuentes` con la etiqueta). Un PR solo de Markdown **sí** pasa por `fuentes`: las
   observaciones de `fuentes/imagenes/README.md` son datos históricos.
 - **Quien mantiene el repo** (`OWNER`, `MEMBER`, `COLLABORATOR`): se salta solo `issue`.
 - `tamano` y `prs-abiertos` valen para todos menos los bots.
@@ -143,6 +148,9 @@ a nadie. Sin `npm ci`: solo la biblioteca estándar de Node, así una dependenci
   la lista no pide capturas hasta que se agregue. Al revés, un script de auditoría nuevo en `tools/geo/` pide capturas hasta que se
   agrega a `rutas.no_visuales`, y solo va ahí si ningún módulo del pipeline lo importa (`epocas.py` importa varios
   `cierre_fase*`).
+- **Una medición se puede inventar, y el bot no lee números.** `rendimiento` solo ve que la sección nombra un tope
+  y a `main`; que los números sean de verdad, y que no empeoren, lo ve quien revisa (y lo vuelve a medir si duda).
+  Las rutas son otra lista a mano: un módulo nuevo que arma geometría no pide medición hasta que se agrega.
 - **`fix-con-test` pasa con diffs enormes**: GitHub omite el parche de un archivo muy grande y el bot no puede
   descartar que haya un test ahí.
 - **La carga se mueve, no desaparece**: aceptar issues es trabajo nuevo para quien mantiene el repo. Es más barato
