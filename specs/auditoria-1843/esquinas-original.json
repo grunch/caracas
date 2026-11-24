@@ -1,0 +1,4460 @@
+{
+ "alcance": "Lecturas de los números de esquina impresos en el facsímil de 1843 (T81, 1A), por cuatro lectores independientes, uno por cuadrante con solape. Una lectura se junta con otra del mismo número a menos de 8 px de cruce; es segura si un lector la dio segura y ninguno la contradice en ese lugar, o si dos coinciden. Un número en dos lugares queda dos veces (el emparejador lo omite).",
+ "original": "fuentes/mapas/1843-nypl-jesurun-facsimil-muller-stapler/original.tiff",
+ "fecha": "2026-11-24",
+ "cuadrantes": {
+  "NO": {
+   "sha256": "ff9efdee3f2a741830d2311ba9ba6ac1ccd2b4947a45622573b2e07ffbe1a400",
+   "caja": [
+    1656,
+    1092,
+    3490,
+    2850
+   ],
+   "leidas": 38,
+   "no_leidos": 0
+  },
+  "NE": {
+   "sha256": "a2083175f60c5dad4e2503c5c0bf29bd445497d8b23faebe1da3d0a9d57c46c7",
+   "caja": [
+    3090,
+    1092,
+    4915,
+    2850
+   ],
+   "leidas": 39,
+   "no_leidos": 1
+  },
+  "SO": {
+   "sha256": "27f68e10afb4d0aa308999a9ae64f21b30d7d35c8e7e839d222101e9740ba6a0",
+   "caja": [
+    1656,
+    2450,
+    3490,
+    4052
+   ],
+   "leidas": 74,
+   "no_leidos": 1
+  },
+  "SE": {
+   "sha256": "84088c561e926b7387ab215f775709d1b5bbb0246a13c99d6a47856a84e87dea",
+   "caja": [
+    3090,
+    2450,
+    4915,
+    4052
+   ],
+   "leidas": 84,
+   "no_leidos": 3
+  }
+ },
+ "esquinas": [
+  {
+   "numero": 1,
+   "cruce_px": [
+    2683.0,
+    1788.0
+   ],
+   "etiqueta_px": [
+    2690,
+    1767
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      2683,
+      1788
+     ],
+     "alternativas": [],
+     "nota": "trazo corto, podría ser solo mancha; cruce oblicuo"
+    }
+   ]
+  },
+  {
+   "numero": 2,
+   "cruce_px": [
+    2775.0,
+    1789.0
+   ],
+   "etiqueta_px": [
+    2783,
+    1772
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      2775,
+      1789
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 3,
+   "cruce_px": [
+    2962.0,
+    1785.0
+   ],
+   "etiqueta_px": [
+    2984,
+    1769
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      2962,
+      1785
+     ],
+     "alternativas": [],
+     "nota": "esquina en T"
+    }
+   ]
+  },
+  {
+   "numero": 4,
+   "cruce_px": [
+    3226.5,
+    1859.0
+   ],
+   "etiqueta_px": [
+    3240,
+    1847
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3227,
+      1859
+     ],
+     "alternativas": [],
+     "nota": "manzana aislada; cruce = esquina SO de la manzana"
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3226,
+      1859
+     ],
+     "alternativas": [],
+     "nota": "manzana aislada al norte sin calles; esquina SO de la manzana; junto a la letra S"
+    }
+   ]
+  },
+  {
+   "numero": 5,
+   "cruce_px": [
+    2772.0,
+    1920.0
+   ],
+   "etiqueta_px": [
+    2824,
+    1934
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      2772,
+      1920
+     ],
+     "alternativas": [],
+     "nota": "etiqueta algo lejos de la esquina NO de su manzana"
+    }
+   ]
+  },
+  {
+   "numero": 6,
+   "cruce_px": [
+    3312.5,
+    2032.5
+   ],
+   "etiqueta_px": [
+    3303,
+    2021
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3313,
+      2035
+     ],
+     "alternativas": [],
+     "nota": "junto a la 'b' minúscula; esquina en el borde"
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3312,
+      2030
+     ],
+     "alternativas": [
+      "b",
+      "G"
+     ],
+     "nota": "punta sur de manzana periférica junto al camino y la letra b; sin cruce claro, punto de la esquina"
+    }
+   ]
+  },
+  {
+   "numero": 7,
+   "cruce_px": [
+    2952.0,
+    2035.0
+   ],
+   "etiqueta_px": [
+    2937,
+    2049
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      2952,
+      2035
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 8,
+   "cruce_px": [
+    3076.0,
+    2145.0
+   ],
+   "etiqueta_px": [
+    3061,
+    2130
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3076,
+      2145
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 9,
+   "cruce_px": [
+    2954.0,
+    2145.0
+   ],
+   "etiqueta_px": [
+    2963,
+    2162
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      2954,
+      2145
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 9,
+   "cruce_px": [
+    3318.0,
+    2144.0
+   ],
+   "etiqueta_px": [
+    3324,
+    2171
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3318,
+      2144
+     ],
+     "alternativas": [
+      "P"
+     ],
+     "nota": "en la manzana triangular al este; comparte cruce con el 11; algo lejos de la esquina"
+    }
+   ]
+  },
+  {
+   "numero": 10,
+   "cruce_px": [
+    3175.5,
+    2143.0
+   ],
+   "etiqueta_px": [
+    3193,
+    2158
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3176,
+      2143
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3175,
+      2143
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 11,
+   "cruce_px": [
+    3317.5,
+    2143.0
+   ],
+   "etiqueta_px": [
+    3304,
+    2156
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3317,
+      2143
+     ],
+     "alternativas": [],
+     "nota": "esquina en T (borde este)"
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3318,
+      2143
+     ],
+     "alternativas": [
+      "n"
+     ],
+     "nota": "esquina NE de la manzana del 10"
+    }
+   ]
+  },
+  {
+   "numero": 12,
+   "cruce_px": [
+    2954.0,
+    2266.0
+   ],
+   "etiqueta_px": [
+    2967,
+    2284
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      2954,
+      2266
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 13,
+   "cruce_px": [
+    3076.5,
+    2265.0
+   ],
+   "etiqueta_px": [
+    3093,
+    2282
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3077,
+      2265
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3076,
+      2265
+     ],
+     "alternativas": [],
+     "nota": "etiqueta al borde oeste de la caja"
+    }
+   ]
+  },
+  {
+   "numero": 14,
+   "cruce_px": [
+    3201.0,
+    2265.0
+   ],
+   "etiqueta_px": [
+    3219,
+    2284
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3201,
+      2265
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3201,
+      2265
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 15,
+   "cruce_px": [
+    3319.0,
+    2265.0
+   ],
+   "etiqueta_px": [
+    3334,
+    2282
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3319,
+      2265
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3319,
+      2265
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 16,
+   "cruce_px": [
+    2840.0,
+    2394.0
+   ],
+   "etiqueta_px": [
+    2856,
+    2410
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      2840,
+      2394
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 17,
+   "cruce_px": [
+    2956.0,
+    2394.0
+   ],
+   "etiqueta_px": [
+    2967,
+    2412
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      2956,
+      2394
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 18,
+   "cruce_px": [
+    3077.0,
+    2390.5
+   ],
+   "etiqueta_px": [
+    3095,
+    2377
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3078,
+      2390
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3076,
+      2391
+     ],
+     "alternativas": [],
+     "nota": "esquina SO de la manzana del 13"
+    }
+   ]
+  },
+  {
+   "numero": 19,
+   "cruce_px": [
+    3202.5,
+    2390.5
+   ],
+   "etiqueta_px": [
+    3216,
+    2411
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3203,
+      2391
+     ],
+     "alternativas": [
+      22
+     ],
+     "nota": "primer dígito borroso"
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3202,
+      2390
+     ],
+     "alternativas": [
+      "9",
+      "2"
+     ],
+     "nota": "tinta empastada"
+    }
+   ]
+  },
+  {
+   "numero": 20,
+   "cruce_px": [
+    3321.0,
+    2390.5
+   ],
+   "etiqueta_px": [
+    3336,
+    2412
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3321,
+      2391
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3321,
+      2390
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 21,
+   "cruce_px": [
+    3446.5,
+    2390.0
+   ],
+   "etiqueta_px": [
+    3460,
+    2407
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3447,
+      2391
+     ],
+     "alternativas": [],
+     "nota": "dígitos borrosos"
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3446,
+      2389
+     ],
+     "alternativas": [
+      "R"
+     ],
+     "nota": "glifo empastado, parece R; 21 por la serie 19-20-22"
+    }
+   ]
+  },
+  {
+   "numero": 22,
+   "cruce_px": [
+    3946.0,
+    2380.0
+   ],
+   "etiqueta_px": [
+    3961,
+    2398
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3946,
+      2380
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 24,
+   "cruce_px": [
+    3203.0,
+    2520.7
+   ],
+   "etiqueta_px": [
+    3188,
+    2503
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3203,
+      2520
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3202,
+      2521
+     ],
+     "alternativas": [],
+     "nota": "esquina SE de la manzana de la G"
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3204,
+      2521
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 25,
+   "cruce_px": [
+    3078.5,
+    2521.5
+   ],
+   "etiqueta_px": [
+    3061,
+    2505
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3078,
+      2521
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3079,
+      2522
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 25,
+   "cruce_px": [
+    4193.0,
+    2506.5
+   ],
+   "etiqueta_px": [
+    4208,
+    2492
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      4193,
+      2506
+     ],
+     "alternativas": [],
+     "nota": "esquina SO de la manzana"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      4193,
+      2507
+     ],
+     "alternativas": [],
+     "nota": "barrio al este del río (manzanas punteadas)"
+    }
+   ]
+  },
+  {
+   "numero": 26,
+   "cruce_px": [
+    2840.0,
+    2523.5
+   ],
+   "etiqueta_px": [
+    2860,
+    2544
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      2841,
+      2523
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2839,
+      2524
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 27,
+   "cruce_px": [
+    2955.5,
+    2523.5
+   ],
+   "etiqueta_px": [
+    2973,
+    2542
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      2957,
+      2523
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2954,
+      2524
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 27,
+   "cruce_px": [
+    3202.0,
+    2520.0
+   ],
+   "etiqueta_px": [
+    3187,
+    2502
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3202,
+      2520
+     ],
+     "alternativas": [
+      25,
+      26
+     ],
+     "nota": "segundo dígito borroso; el «2» es claro; 27 por la secuencia 28-31 hacia el este"
+    }
+   ]
+  },
+  {
+   "numero": 28,
+   "cruce_px": [
+    3320.8,
+    2518.0
+   ],
+   "etiqueta_px": [
+    3338,
+    2534
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3321,
+      2520
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3321,
+      2518
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3320,
+      2516
+     ],
+     "alternativas": [],
+     "nota": "cifras borrosas; encaja en la serie 26-29"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3321,
+      2518
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 29,
+   "cruce_px": [
+    3446.5,
+    2518.0
+   ],
+   "etiqueta_px": [
+    3464,
+    2538
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3447,
+      2520
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3448,
+      2517
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3445,
+      2518
+     ],
+     "alternativas": [
+      "9"
+     ],
+     "nota": "el 2 se ve pequeño y alto"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3446,
+      2517
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 30,
+   "cruce_px": [
+    3574.5,
+    2515.0
+   ],
+   "etiqueta_px": [
+    3593,
+    2532
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3575,
+      2515
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3574,
+      2515
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 31,
+   "cruce_px": [
+    3703.5,
+    2514.0
+   ],
+   "etiqueta_px": [
+    3721,
+    2532
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3704,
+      2515
+     ],
+     "alternativas": [],
+     "nota": "esquina en T: al norte de la calle este-oeste la manzana es irregular"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3703,
+      2513
+     ],
+     "alternativas": [],
+     "nota": "borde norte de la cuadrícula, junto a «P» y «c»"
+    }
+   ]
+  },
+  {
+   "numero": 32,
+   "cruce_px": [
+    3950.0,
+    2510.5
+   ],
+   "etiqueta_px": [
+    3967,
+    2529
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3948,
+      2510
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3952,
+      2511
+     ],
+     "alternativas": [],
+     "nota": "manzanas punteadas al este de la quebrada"
+    }
+   ]
+  },
+  {
+   "numero": 33,
+   "cruce_px": [
+    4070.5,
+    2509.5
+   ],
+   "etiqueta_px": [
+    4088,
+    2527
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      4070,
+      2510
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      4071,
+      2509
+     ],
+     "alternativas": [],
+     "nota": "manzanas punteadas"
+    }
+   ]
+  },
+  {
+   "numero": 34,
+   "cruce_px": [
+    3204.0,
+    2640.8
+   ],
+   "etiqueta_px": [
+    3227,
+    2624
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3204,
+      2641
+     ],
+     "alternativas": [],
+     "nota": "NO de la Plaza Bolívar"
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3205,
+      2640
+     ],
+     "alternativas": [],
+     "nota": "esquina NO de la Plaza Bolívar (ejemplo verificado)"
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3203,
+      2640
+     ],
+     "alternativas": [],
+     "nota": "esquina NO de la Plaza Bolívar"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3204,
+      2642
+     ],
+     "alternativas": [],
+     "nota": "esquina noroeste de la Plaza Bolívar"
+    }
+   ]
+  },
+  {
+   "numero": 35,
+   "cruce_px": [
+    3322.0,
+    2640.2
+   ],
+   "etiqueta_px": [
+    3343,
+    2624
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3323,
+      2641
+     ],
+     "alternativas": [],
+     "nota": "NE de la Plaza Bolívar"
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3321,
+      2640
+     ],
+     "alternativas": [],
+     "nota": "esquina NE de la Plaza Bolívar"
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3322,
+      2639
+     ],
+     "alternativas": [],
+     "nota": "cifras empastadas; esquina NE de la plaza"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3322,
+      2641
+     ],
+     "alternativas": [
+      36
+     ],
+     "nota": "esquina noreste de la plaza; 5 y 6 se confunden en este tipo"
+    }
+   ]
+  },
+  {
+   "numero": 36,
+   "cruce_px": [
+    2843.0,
+    2647.0
+   ],
+   "etiqueta_px": [
+    2861,
+    2664
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      2843,
+      2646
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2843,
+      2648
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 37,
+   "cruce_px": [
+    2958.0,
+    2647.0
+   ],
+   "etiqueta_px": [
+    2976,
+    2664
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      2958,
+      2646
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2958,
+      2648
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 38,
+   "cruce_px": [
+    3081.0,
+    2643.0
+   ],
+   "etiqueta_px": [
+    3099,
+    2663
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3080,
+      2641
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3081,
+      2644
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3080,
+      2643
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3083,
+      2644
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 39,
+   "cruce_px": [
+    3448.0,
+    2640.5
+   ],
+   "etiqueta_px": [
+    3467,
+    2659
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3448,
+      2641
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3448,
+      2640
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3448,
+      2641
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3448,
+      2640
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 40,
+   "cruce_px": [
+    2844.0,
+    2764.0
+   ],
+   "etiqueta_px": [
+    2826,
+    2785
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      2843,
+      2764
+     ],
+     "alternativas": [
+      48
+     ],
+     "nota": "lectura visual 40/48; la secuencia sugiere 48 (el 40 parece estar al este, x≈3567, fuera de la caja)"
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      2845,
+      2764
+     ],
+     "alternativas": [
+      "48"
+     ],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 40,
+   "cruce_px": [
+    3575.5,
+    2639.5
+   ],
+   "etiqueta_px": [
+    3598,
+    2660
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3575,
+      2640
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3576,
+      2639
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 41,
+   "cruce_px": [
+    3704.0,
+    2637.5
+   ],
+   "etiqueta_px": [
+    3724,
+    2659
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3704,
+      2638
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3704,
+      2637
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 42,
+   "cruce_px": [
+    3824.5,
+    2638.0
+   ],
+   "etiqueta_px": [
+    3810,
+    2657
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3825,
+      2637
+     ],
+     "alternativas": [],
+     "nota": "esquina NE de la manzana; al norte del cruce no hay manzana (camino d, borde)"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3824,
+      2639
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 43,
+   "cruce_px": [
+    4071.5,
+    2629.0
+   ],
+   "etiqueta_px": [
+    4090,
+    2648
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      4071,
+      2630
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      4072,
+      2628
+     ],
+     "alternativas": [],
+     "nota": "manzanas punteadas"
+    }
+   ]
+  },
+  {
+   "numero": 44,
+   "cruce_px": [
+    4198.5,
+    2628.5
+   ],
+   "etiqueta_px": [
+    4217,
+    2647
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      4198,
+      2629
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      4199,
+      2628
+     ],
+     "alternativas": [],
+     "nota": "manzanas punteadas"
+    }
+   ]
+  },
+  {
+   "numero": 45,
+   "cruce_px": [
+    4317.5,
+    2628.5
+   ],
+   "etiqueta_px": [
+    4299,
+    2647
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      4318,
+      2629
+     ],
+     "alternativas": [],
+     "nota": "esquina NE de la manzana del 44"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      4317,
+      2628
+     ],
+     "alternativas": [],
+     "nota": "manzanas punteadas; al este una tira angosta"
+    }
+   ]
+  },
+  {
+   "numero": 46,
+   "cruce_px": [
+    3204.8,
+    2762.0
+   ],
+   "etiqueta_px": [
+    3188,
+    2740
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3204,
+      2760
+     ],
+     "alternativas": [],
+     "nota": "SO de la Plaza Bolívar"
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3205,
+      2762
+     ],
+     "alternativas": [],
+     "nota": "esquina SO de la Plaza Bolívar"
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3205,
+      2765
+     ],
+     "alternativas": [],
+     "nota": "esquina SO de la plaza"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3205,
+      2761
+     ],
+     "alternativas": [],
+     "nota": "esquina suroeste de la plaza"
+    }
+   ]
+  },
+  {
+   "numero": 47,
+   "cruce_px": [
+    3448.2,
+    2759.5
+   ],
+   "etiqueta_px": [
+    3430,
+    2780
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3448,
+      2760
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3449,
+      2759
+     ],
+     "alternativas": [],
+     "nota": "esquina NE de la manzana del 50"
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3447,
+      2760
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3449,
+      2759
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 49,
+   "cruce_px": [
+    2959.0,
+    2765.0
+   ],
+   "etiqueta_px": [
+    2939,
+    2750
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      2958,
+      2764
+     ],
+     "alternativas": [
+      39
+     ],
+     "nota": "glifo emborronado; 39 ya está en x≈3467"
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      2960,
+      2766
+     ],
+     "alternativas": [
+      "19"
+     ],
+     "nota": "el 4 va alzado sobre el 9"
+    }
+   ]
+  },
+  {
+   "numero": 50,
+   "cruce_px": [
+    3323.7,
+    2758.0
+   ],
+   "etiqueta_px": [
+    3341,
+    2779
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3325,
+      2759
+     ],
+     "alternativas": [
+      "56"
+     ],
+     "nota": "segunda cifra empastada; 50 por la serie 50-51-52 y porque hay un 56 al SE (fuera de la caja)"
+    },
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3323,
+      2755
+     ],
+     "alternativas": [
+      "56"
+     ],
+     "nota": "segunda cifra de altura de x (0 antiguo); podría ser 6"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3323,
+      2760
+     ],
+     "alternativas": [],
+     "nota": "esquina sureste de la plaza"
+    }
+   ]
+  },
+  {
+   "numero": 51,
+   "cruce_px": [
+    3576.5,
+    2757.5
+   ],
+   "etiqueta_px": [
+    3593,
+    2777
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3577,
+      2758
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3576,
+      2757
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 52,
+   "cruce_px": [
+    3705.5,
+    2756.0
+   ],
+   "etiqueta_px": [
+    3722,
+    2776
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3705,
+      2757
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3706,
+      2755
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 53,
+   "cruce_px": [
+    3827.0,
+    2755.0
+   ],
+   "etiqueta_px": [
+    3846,
+    2773
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3827,
+      2756
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3827,
+      2754
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 54,
+   "cruce_px": [
+    3949.5,
+    2754.5
+   ],
+   "etiqueta_px": [
+    3932,
+    2773
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      3950,
+      2755
+     ],
+     "alternativas": [],
+     "nota": "esquina NE de la manzana del 53; al este, borde (quebrada)"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3949,
+      2754
+     ],
+     "alternativas": [],
+     "nota": "esquina en T / borde: al este no sigue la cuadra (quebrada)"
+    }
+   ]
+  },
+  {
+   "numero": 55,
+   "cruce_px": [
+    4198.5,
+    2750.5
+   ],
+   "etiqueta_px": [
+    4216,
+    2772
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NE",
+     "lectura": "segura",
+     "cruce_px": [
+      4198,
+      2749
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      4199,
+      2752
+     ],
+     "alternativas": [],
+     "nota": "manzanas punteadas"
+    }
+   ]
+  },
+  {
+   "numero": 56,
+   "cruce_px": [
+    3323.0,
+    2760.0
+   ],
+   "etiqueta_px": [
+    3341,
+    2779
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "NO",
+     "lectura": "segura",
+     "cruce_px": [
+      3323,
+      2760
+     ],
+     "alternativas": [],
+     "nota": "SE de la Plaza Bolívar"
+    }
+   ]
+  },
+  {
+   "numero": 56,
+   "cruce_px": [
+    4319.0,
+    2874.0
+   ],
+   "etiqueta_px": [
+    4302,
+    2858
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      4319,
+      2874
+     ],
+     "alternativas": [],
+     "nota": "manzanas punteadas"
+    }
+   ]
+  },
+  {
+   "numero": 57,
+   "cruce_px": [
+    2845.0,
+    2891.0
+   ],
+   "etiqueta_px": [
+    2863,
+    2875
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2845,
+      2891
+     ],
+     "alternativas": [],
+     "nota": "el 7 grande baja hasta la calle"
+    }
+   ]
+  },
+  {
+   "numero": 57,
+   "cruce_px": [
+    2961.0,
+    2890.0
+   ],
+   "etiqueta_px": [
+    2943,
+    2872
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      2961,
+      2890
+     ],
+     "alternativas": [
+      "37",
+      "51"
+     ],
+     "nota": "impresión tenue; mismo cruce que el 58"
+    }
+   ]
+  },
+  {
+   "numero": 58,
+   "cruce_px": [
+    2961.0,
+    2890.0
+   ],
+   "etiqueta_px": [
+    2980,
+    2908
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2961,
+      2890
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 59,
+   "cruce_px": [
+    3084.0,
+    2889.0
+   ],
+   "etiqueta_px": [
+    3067,
+    2880
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3084,
+      2889
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 60,
+   "cruce_px": [
+    3207.5,
+    2887.5
+   ],
+   "etiqueta_px": [
+    3190,
+    2871
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3208,
+      2888
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3207,
+      2887
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 61,
+   "cruce_px": [
+    3324.5,
+    2885.5
+   ],
+   "etiqueta_px": [
+    3307,
+    2901
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3324,
+      2885
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3325,
+      2886
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 62,
+   "cruce_px": [
+    3451.0,
+    2884.5
+   ],
+   "etiqueta_px": [
+    3433,
+    2900
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3451,
+      2885
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3451,
+      2884
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 63,
+   "cruce_px": [
+    3578.0,
+    2883.0
+   ],
+   "etiqueta_px": [
+    3563,
+    2900
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3578,
+      2883
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 64,
+   "cruce_px": [
+    3707.0,
+    2881.0
+   ],
+   "etiqueta_px": [
+    3723,
+    2897
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3707,
+      2881
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 65,
+   "cruce_px": [
+    3829.0,
+    2879.0
+   ],
+   "etiqueta_px": [
+    3847,
+    2895
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3829,
+      2879
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 66,
+   "cruce_px": [
+    3950.0,
+    2877.0
+   ],
+   "etiqueta_px": [
+    3967,
+    2895
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3950,
+      2877
+     ],
+     "alternativas": [],
+     "nota": "manzana angosta al borde de la quebrada"
+    }
+   ]
+  },
+  {
+   "numero": 67,
+   "cruce_px": [
+    4199.0,
+    2874.0
+   ],
+   "etiqueta_px": [
+    4213,
+    2893
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      4199,
+      2874
+     ],
+     "alternativas": [],
+     "nota": "manzanas punteadas"
+    }
+   ]
+  },
+  {
+   "numero": 68,
+   "cruce_px": [
+    3952.0,
+    3005.0
+   ],
+   "etiqueta_px": [
+    3937,
+    2989
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3952,
+      3005
+     ],
+     "alternativas": [],
+     "nota": "borde: al sureste terreno abierto («o»)"
+    }
+   ]
+  },
+  {
+   "numero": 69,
+   "cruce_px": [
+    4314.0,
+    2971.0
+   ],
+   "etiqueta_px": [
+    4305,
+    2963
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      4314,
+      2971
+     ],
+     "alternativas": [],
+     "nota": "borde: punta sur de una manzana angosta junto a la «o»; sin cruce, es la esquina de la manzana"
+    }
+   ]
+  },
+  {
+   "numero": 70,
+   "cruce_px": [
+    2959.0,
+    3014.0
+   ],
+   "etiqueta_px": [
+    2975,
+    3032
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2959,
+      3014
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 71,
+   "cruce_px": [
+    3085.0,
+    3012.0
+   ],
+   "etiqueta_px": [
+    3067,
+    3032
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3085,
+      3012
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 72,
+   "cruce_px": [
+    3208.0,
+    3012.0
+   ],
+   "etiqueta_px": [
+    3186,
+    3029
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3208,
+      3012
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3208,
+      3012
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 73,
+   "cruce_px": [
+    3326.0,
+    3011.0
+   ],
+   "etiqueta_px": [
+    3307,
+    3027
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3326,
+      3011
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3326,
+      3011
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 74,
+   "cruce_px": [
+    3451.5,
+    3010.5
+   ],
+   "etiqueta_px": [
+    3425,
+    3033
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3451,
+      3011
+     ],
+     "alternativas": [],
+     "nota": "la segunda cifra va volada y borrosa"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3452,
+      3010
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 75,
+   "cruce_px": [
+    3579.0,
+    3009.0
+   ],
+   "etiqueta_px": [
+    3557,
+    3025
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3579,
+      3009
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 76,
+   "cruce_px": [
+    3709.0,
+    3007.0
+   ],
+   "etiqueta_px": [
+    3690,
+    3023
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3709,
+      3007
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 77,
+   "cruce_px": [
+    3830.0,
+    3006.0
+   ],
+   "etiqueta_px": [
+    3813,
+    3023
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3830,
+      3006
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 78,
+   "cruce_px": [
+    2789.0,
+    3139.0
+   ],
+   "etiqueta_px": [
+    2810,
+    3124
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2789,
+      3139
+     ],
+     "alternativas": [],
+     "nota": "manzana triangular junto al río; esquina en T"
+    }
+   ]
+  },
+  {
+   "numero": 79,
+   "cruce_px": [
+    2962.0,
+    3136.0
+   ],
+   "etiqueta_px": [
+    2980,
+    3119
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2962,
+      3136
+     ],
+     "alternativas": [],
+     "nota": "junto a la plazuela de San Pablo (cuadrado blanco)"
+    }
+   ]
+  },
+  {
+   "numero": 80,
+   "cruce_px": [
+    2745.0,
+    3139.0
+   ],
+   "etiqueta_px": [
+    2752,
+    3160
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2745,
+      3139
+     ],
+     "alternativas": [],
+     "nota": "cruce dudoso: borde de la ciudad, sin calle clara al oeste; esquina en T"
+    }
+   ]
+  },
+  {
+   "numero": 81,
+   "cruce_px": [
+    2843.0,
+    3141.0
+   ],
+   "etiqueta_px": [
+    2857,
+    3160
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2843,
+      3141
+     ],
+     "alternativas": [],
+     "nota": "cruce de calle diagonal con la horizontal; marca tipo † antes del número"
+    }
+   ]
+  },
+  {
+   "numero": 82,
+   "cruce_px": [
+    3085.5,
+    3132.0
+   ],
+   "etiqueta_px": [
+    3105,
+    3150
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3085,
+      3131
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3086,
+      3133
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 83,
+   "cruce_px": [
+    3208.5,
+    3132.0
+   ],
+   "etiqueta_px": [
+    3230,
+    3151
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3208,
+      3132
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3209,
+      3132
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 84,
+   "cruce_px": [
+    3327.5,
+    3131.0
+   ],
+   "etiqueta_px": [
+    3346,
+    3149
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3327,
+      3131
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3328,
+      3131
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 85,
+   "cruce_px": [
+    3451.5,
+    3130.5
+   ],
+   "etiqueta_px": [
+    3471,
+    3149
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3451,
+      3131
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3452,
+      3130
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 86,
+   "cruce_px": [
+    3580.0,
+    3129.0
+   ],
+   "etiqueta_px": [
+    3600,
+    3147
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3580,
+      3129
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 87,
+   "cruce_px": [
+    3710.0,
+    3127.0
+   ],
+   "etiqueta_px": [
+    3727,
+    3145
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3710,
+      3127
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 88,
+   "cruce_px": [
+    3831.0,
+    3125.0
+   ],
+   "etiqueta_px": [
+    3853,
+    3145
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3831,
+      3125
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 89,
+   "cruce_px": [
+    3953.0,
+    3124.0
+   ],
+   "etiqueta_px": [
+    3937,
+    3118
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3953,
+      3124
+     ],
+     "alternativas": [],
+     "nota": "esquina de la tira angosta, junto a la manzana del Campo de Marte"
+    }
+   ]
+  },
+  {
+   "numero": 90,
+   "cruce_px": [
+    4063.0,
+    3125.0
+   ],
+   "etiqueta_px": [
+    4063,
+    3115
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      4063,
+      3125
+     ],
+     "alternativas": [],
+     "nota": "esquina noreste de la manzana junto al Campo de Marte; al este no hay calle (borde)"
+    }
+   ]
+  },
+  {
+   "numero": 91,
+   "cruce_px": [
+    2728.0,
+    3259.0
+   ],
+   "etiqueta_px": [
+    2735,
+    3281
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2728,
+      3259
+     ],
+     "alternativas": [],
+     "nota": "cruce de dos diagonales con una calle"
+    }
+   ]
+  },
+  {
+   "numero": 92,
+   "cruce_px": [
+    4064.0,
+    3239.0
+   ],
+   "etiqueta_px": [
+    4077,
+    3250
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      4064,
+      3239
+     ],
+     "alternativas": [],
+     "nota": "esquina sureste de la manzana junto al Campo de Marte; borde"
+    }
+   ]
+  },
+  {
+   "numero": 93,
+   "cruce_px": [
+    2963.0,
+    3254.0
+   ],
+   "etiqueta_px": [
+    2980,
+    3273
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      2963,
+      3254
+     ],
+     "alternativas": [
+      "95"
+     ],
+     "nota": "orilla del río, espacio abierto al NO; cruce aproximado"
+    }
+   ]
+  },
+  {
+   "numero": 94,
+   "cruce_px": [
+    3086.0,
+    3254.0
+   ],
+   "etiqueta_px": [
+    3103,
+    3273
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3085,
+      3254
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3087,
+      3254
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 95,
+   "cruce_px": [
+    3208.0,
+    3252.5
+   ],
+   "etiqueta_px": [
+    3225,
+    3273
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3207,
+      3253
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3209,
+      3252
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 96,
+   "cruce_px": [
+    3328.0,
+    3251.5
+   ],
+   "etiqueta_px": [
+    3345,
+    3270
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3328,
+      3252
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3328,
+      3251
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 97,
+   "cruce_px": [
+    3452.0,
+    3249.0
+   ],
+   "etiqueta_px": [
+    3470,
+    3267
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3451,
+      3249
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3453,
+      3249
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 98,
+   "cruce_px": [
+    3582.0,
+    3249.0
+   ],
+   "etiqueta_px": [
+    3563,
+    3267
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3582,
+      3249
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 99,
+   "cruce_px": [
+    3712.0,
+    3248.0
+   ],
+   "etiqueta_px": [
+    3729,
+    3269
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3712,
+      3248
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 100,
+   "cruce_px": [
+    3834.0,
+    3300.0
+   ],
+   "etiqueta_px": [
+    3830,
+    3273
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3834,
+      3300
+     ],
+     "alternativas": [],
+     "nota": "sin cruce: la etiqueta va bajo una casita suelta en terreno abierto; el punto dado (boca de la calle entre la manzana 99/110 y la tira al este) es aproximado"
+    }
+   ]
+  },
+  {
+   "numero": 101,
+   "cruce_px": [
+    2614.0,
+    3380.0
+   ],
+   "etiqueta_px": [
+    2633,
+    3394
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2614,
+      3380
+     ],
+     "alternativas": [],
+     "nota": "junto al remate de una diagonal"
+    }
+   ]
+  },
+  {
+   "numero": 102,
+   "cruce_px": [
+    2725.0,
+    3378.0
+   ],
+   "etiqueta_px": [
+    2743,
+    3394
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2725,
+      3378
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 103,
+   "cruce_px": [
+    2966.0,
+    3373.0
+   ],
+   "etiqueta_px": [
+    2987,
+    3392
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2966,
+      3373
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 104,
+   "cruce_px": [
+    3087.5,
+    3370.5
+   ],
+   "etiqueta_px": [
+    3110,
+    3390
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3087,
+      3371
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3088,
+      3370
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 105,
+   "cruce_px": [
+    3209.5,
+    3371.0
+   ],
+   "etiqueta_px": [
+    3232,
+    3389
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3209,
+      3372
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3210,
+      3370
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 106,
+   "cruce_px": [
+    3329.0,
+    3369.5
+   ],
+   "etiqueta_px": [
+    3350,
+    3386
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3329,
+      3370
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3329,
+      3369
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 107,
+   "cruce_px": [
+    3453.5,
+    3367.0
+   ],
+   "etiqueta_px": [
+    3471,
+    3384
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3453,
+      3366
+     ],
+     "alternativas": [],
+     "nota": "cifras empastadas en el rayado vertical"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3454,
+      3368
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 108,
+   "cruce_px": [
+    3584.0,
+    3366.0
+   ],
+   "etiqueta_px": [
+    3607,
+    3382
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3584,
+      3366
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 109,
+   "cruce_px": [
+    3713.0,
+    3364.0
+   ],
+   "etiqueta_px": [
+    3737,
+    3382
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3713,
+      3364
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 110,
+   "cruce_px": [
+    3834.0,
+    3363.0
+   ],
+   "etiqueta_px": [
+    3817,
+    3351
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3834,
+      3363
+     ],
+     "alternativas": [],
+     "nota": "esquina sureste de la manzana trapezoidal del 99; al este, terreno abierto"
+    }
+   ]
+  },
+  {
+   "numero": 111,
+   "cruce_px": [
+    2453.0,
+    3507.0
+   ],
+   "etiqueta_px": [
+    2451,
+    3485
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2453,
+      3507
+     ],
+     "alternativas": [],
+     "nota": "en la punta sur de una manzana en cuña; cruce de diagonales"
+    }
+   ]
+  },
+  {
+   "numero": 112,
+   "cruce_px": [
+    3835.0,
+    3485.0
+   ],
+   "etiqueta_px": [
+    3817,
+    3467
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3835,
+      3485
+     ],
+     "alternativas": [
+      113,
+      119
+     ],
+     "nota": "segundo dígito final borroso"
+    }
+   ]
+  },
+  {
+   "numero": 113,
+   "cruce_px": [
+    2379.0,
+    3581.0
+   ],
+   "etiqueta_px": [
+    2398,
+    3589
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2379,
+      3581
+     ],
+     "alternativas": [],
+     "nota": "la diagonal corta la calle vertical"
+    }
+   ]
+  },
+  {
+   "numero": 114,
+   "cruce_px": [
+    2500.0,
+    3503.0
+   ],
+   "etiqueta_px": [
+    2481,
+    3516
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2500,
+      3503
+     ],
+     "alternativas": [],
+     "nota": "cruce dudoso: entre la esquina NE (elegida) y la NO (2463,3504) donde entra la diagonal"
+    }
+   ]
+  },
+  {
+   "numero": 115,
+   "cruce_px": [
+    2613.0,
+    3497.0
+   ],
+   "etiqueta_px": [
+    2593,
+    3514
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2613,
+      3497
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 116,
+   "cruce_px": [
+    2725.0,
+    3494.0
+   ],
+   "etiqueta_px": [
+    2707,
+    3511
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2725,
+      3494
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 117,
+   "cruce_px": [
+    2967.0,
+    3491.0
+   ],
+   "etiqueta_px": [
+    2983,
+    3511
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2967,
+      3491
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 118,
+   "cruce_px": [
+    3089.5,
+    3489.5
+   ],
+   "etiqueta_px": [
+    3107,
+    3506
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3090,
+      3489
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3089,
+      3490
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 119,
+   "cruce_px": [
+    3211.0,
+    3489.0
+   ],
+   "etiqueta_px": [
+    3230,
+    3509
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      3211,
+      3489
+     ],
+     "alternativas": [],
+     "nota": ""
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3211,
+      3489
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 120,
+   "cruce_px": [
+    3331.0,
+    3487.5
+   ],
+   "etiqueta_px": [
+    3349,
+    3503
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3332,
+      3487
+     ],
+     "alternativas": [],
+     "nota": "primera cifra tapada por el rayado"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3330,
+      3488
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 121,
+   "cruce_px": [
+    3455.5,
+    3486.0
+   ],
+   "etiqueta_px": [
+    3475,
+    3502
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3455,
+      3486
+     ],
+     "alternativas": [],
+     "nota": "cifras empastadas"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3456,
+      3486
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 122,
+   "cruce_px": [
+    3586.0,
+    3485.0
+   ],
+   "etiqueta_px": [
+    3610,
+    3500
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3586,
+      3485
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 123,
+   "cruce_px": [
+    3715.0,
+    3484.0
+   ],
+   "etiqueta_px": [
+    3740,
+    3500
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3715,
+      3484
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 124,
+   "cruce_px": [
+    2129.0,
+    3680.0
+   ],
+   "etiqueta_px": [
+    2153,
+    3692
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2129,
+      3680
+     ],
+     "alternativas": [],
+     "nota": "calle de arriba curva"
+    }
+   ]
+  },
+  {
+   "numero": 125,
+   "cruce_px": [
+    2378.0,
+    3622.0
+   ],
+   "etiqueta_px": [
+    2399,
+    3639
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2378,
+      3622
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 126,
+   "cruce_px": [
+    2500.0,
+    3621.0
+   ],
+   "etiqueta_px": [
+    2522,
+    3640
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2500,
+      3621
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 127,
+   "cruce_px": [
+    2616.0,
+    3620.0
+   ],
+   "etiqueta_px": [
+    2636,
+    3639
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2616,
+      3620
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 128,
+   "cruce_px": [
+    2725.0,
+    3615.0
+   ],
+   "etiqueta_px": [
+    2742,
+    3632
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "segura",
+     "cruce_px": [
+      2725,
+      3615
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 129,
+   "cruce_px": [
+    2971.0,
+    3614.0
+   ],
+   "etiqueta_px": [
+    2955,
+    3632
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      2971,
+      3614
+     ],
+     "alternativas": [],
+     "nota": "el 1 casi no se ve"
+    }
+   ]
+  },
+  {
+   "numero": 130,
+   "cruce_px": [
+    3088.0,
+    3612.0
+   ],
+   "etiqueta_px": [
+    3066,
+    3628
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3088,
+      3612
+     ],
+     "alternativas": [],
+     "nota": "empastado; se lee por la serie"
+    }
+   ]
+  },
+  {
+   "numero": 131,
+   "cruce_px": [
+    3212.0,
+    3610.5
+   ],
+   "etiqueta_px": [
+    3193,
+    3627
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3212,
+      3611
+     ],
+     "alternativas": [],
+     "nota": "empastado; se lee por la serie"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3212,
+      3610
+     ],
+     "alternativas": [],
+     "nota": "último dígito borroso; 131 por la secuencia 132-134"
+    }
+   ]
+  },
+  {
+   "numero": 132,
+   "cruce_px": [
+    3330.5,
+    3609.5
+   ],
+   "etiqueta_px": [
+    3307,
+    3626
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3330,
+      3610
+     ],
+     "alternativas": [],
+     "nota": "empastado"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3331,
+      3609
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 133,
+   "cruce_px": [
+    3456.0,
+    3608.0
+   ],
+   "etiqueta_px": [
+    3433,
+    3628
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3455,
+      3608
+     ],
+     "alternativas": [],
+     "nota": "empastado en rayado vertical"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3457,
+      3608
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 134,
+   "cruce_px": [
+    3588.0,
+    3607.0
+   ],
+   "etiqueta_px": [
+    3567,
+    3624
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3588,
+      3607
+     ],
+     "alternativas": [],
+     "nota": "al sur, terreno abierto"
+    }
+   ]
+  },
+  {
+   "numero": 135,
+   "cruce_px": [
+    3716.0,
+    3604.0
+   ],
+   "etiqueta_px": [
+    3737,
+    3622
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3716,
+      3604
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 136,
+   "cruce_px": [
+    3837.0,
+    3604.0
+   ],
+   "etiqueta_px": [
+    3857,
+    3620
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3837,
+      3604
+     ],
+     "alternativas": [],
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "numero": 137,
+   "cruce_px": [
+    3089.5,
+    3732.5
+   ],
+   "etiqueta_px": [
+    3103,
+    3749
+   ],
+   "lectura": "dudosa",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3090,
+      3731
+     ],
+     "alternativas": [],
+     "nota": "manzana angosta del borde sur; empastado"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3089,
+      3734
+     ],
+     "alternativas": [],
+     "nota": "último dígito poco claro; 137 por la secuencia 138-140"
+    }
+   ]
+  },
+  {
+   "numero": 138,
+   "cruce_px": [
+    3213.0,
+    3733.5
+   ],
+   "etiqueta_px": [
+    3234,
+    3749
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3213,
+      3734
+     ],
+     "alternativas": [],
+     "nota": "empastado; se lee por la serie"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3213,
+      3733
+     ],
+     "alternativas": [],
+     "nota": "última fila: tira de manzana al borde sur"
+    }
+   ]
+  },
+  {
+   "numero": 139,
+   "cruce_px": [
+    3330.5,
+    3732.0
+   ],
+   "etiqueta_px": [
+    3352,
+    3751
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3330,
+      3732
+     ],
+     "alternativas": [],
+     "nota": "empastado; se lee por la serie"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3331,
+      3732
+     ],
+     "alternativas": [],
+     "nota": "última fila"
+    }
+   ]
+  },
+  {
+   "numero": 140,
+   "cruce_px": [
+    3459.0,
+    3730.5
+   ],
+   "etiqueta_px": [
+    3482,
+    3745
+   ],
+   "lectura": "segura",
+   "lecturas": [
+    {
+     "cuadrante": "SO",
+     "lectura": "dudosa",
+     "cruce_px": [
+      3458,
+      3729
+     ],
+     "alternativas": [],
+     "nota": "empastado; se lee por la serie"
+    },
+    {
+     "cuadrante": "SE",
+     "lectura": "segura",
+     "cruce_px": [
+      3460,
+      3732
+     ],
+     "alternativas": [],
+     "nota": "última fila"
+    }
+   ]
+  }
+ ]
+}
