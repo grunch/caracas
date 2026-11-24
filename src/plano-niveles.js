@@ -35,11 +35,14 @@ export function nivelNecesario({ dist, altoPx, fov, anchoHoja, liviano = false, 
  * Lleva la cuenta de qué nivel está puesto y cuál viene en camino. `cargar(url)` devuelve la promesa de la
  * textura; `poner(textura, nivel)` la pone. `pedir(nivel)` no baja nunca de nivel ni pide dos veces el mismo:
  * si uno falla se avisa y no se insiste (se llama en cada cuadro; uno más alto sí se puede pedir después).
- * `alSubir(nivel)` avisa cuando se pide un nivel más alto.
+ * `alSubir(nivel)` avisa cuando se pide un nivel más alto. `resuelto`: el nivel más alto cuyo pedido ya
+ * terminó, haya llegado o fallado (un nivel intermedio que falla no traba a los de arriba).
  */
 export function crearPlanoPorNiveles({ cargar, poner, avisar = (m) => console.warn(m), alSubir = () => {} }) {
   let puesto = -1
   let pedido = -1
+  let resuelto = -1
+  const resolver = (nivel) => { resuelto = Math.max(resuelto, nivel) }
   function pedir(nivel) {
     if (nivel <= pedido) return null
     pedido = nivel
@@ -48,10 +51,12 @@ export function crearPlanoPorNiveles({ cargar, poner, avisar = (m) => console.wa
     return cargar(url).then((textura) => {
       // uno más alto pudo llegar antes: ese queda
       if (nivel > puesto) { puesto = nivel; poner(textura, nivel) } else textura.dispose?.()
+      resolver(nivel)
     }).catch((e) => {
+      resolver(nivel)
       avisar(`plano: no se pudo cargar ${url}`)
       throw e
     })
   }
-  return { pedir, get puesto() { return puesto }, get pedido() { return pedido } }
+  return { pedir, get puesto() { return puesto }, get pedido() { return pedido }, get resuelto() { return resuelto } }
 }

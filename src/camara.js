@@ -258,6 +258,8 @@ export function crearCamara(camera, lienzo, { pedirCuadro, hoja, suelo = () => 0
 
   return {
     goal, now, update, jump, volar, volarA, mover, acercar, girar, pausar,
+    /** Adónde va la vista: el final del vuelo con guion en curso o, sin vuelo, `goal`. */
+    get destino() { return vuelo ? vuelo.hasta : goal },
     get volando() { return Boolean(vuelo) },
     get tomada() { return tomada },
   }

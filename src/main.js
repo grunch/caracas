@@ -646,11 +646,12 @@ renderer.setAnimationLoop((t) => {
     const { px, py } = coords.aPixel(foco.x, foco.z)
     teselas.update(px, py, foco.dist < DIST_TESELAS_M)
   }
-  // el plano general, en el nivel que pide la vista; en el mapa, la de destino: un vuelo no baja los niveles
-  // intermedios por los que pasa
-  if (planoBase.puesto >= NIVEL_CHICO) {
+  // el plano general, en el nivel que pide la vista; en el mapa, la de destino: un vuelo (también el de la
+  // entrada, con guion) no baja los niveles intermedios por los que pasa. Se espera a que el chico haya
+  // llegado o fallado: si falla, los de arriba igual se pueden pedir
+  if (planoBase.puesto >= 0 && planoBase.resuelto >= NIVEL_CHICO) {
     planoBase.pedir(nivelNecesario({
-      dist: enRecorrido ? foco.dist : cam.goal.dist, altoPx: renderer.domElement.height, fov: camera.fov, anchoHoja: hoja.ancho,
+      dist: enRecorrido ? foco.dist : cam.destino.dist, altoPx: renderer.domElement.height, fov: camera.fov, anchoHoja: hoja.ancho,
       liviano, maxTextura, distTeselas: teselas ? DIST_TESELAS_M : null,
     }))?.catch(() => {})
   }
