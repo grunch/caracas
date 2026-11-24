@@ -4,6 +4,7 @@
  * fachada y el eje entra en la nave. Lo que no sale del plano o de una imagen va en `verificar`.
  */
 import { EJE_DAMERO, rectanguloPx } from './marco.js'
+import { sanFrancisco } from './san-francisco.js'
 
 const [ESTE, SUR] = [EJE_DAMERO, [-EJE_DAMERO[1], EJE_DAMERO[0]]]
 const NORTE_ALTO = [0.118, -0.993] // el damero de La Pastora y del Panteón, apenas menos girado (sus torres en el plano)
@@ -24,14 +25,7 @@ function iglesiaEn({ id, nombre, x, y, eje, nace, rotulo, verificar, ...medidas 
 const campanario = (lado, alto, remate) => ({ lado, cuerpos: [{ alto, vanos: 'ventana' }, { alto: lado * 0.9, vanos: 'arco' }], remate })
 
 export const iglesias = Object.freeze([
-  iglesiaEn({
-    id: 'san-francisco', nombre: 'Iglesia de San Francisco', rotulo: 'Iglesia San Francisco', x: 8768, y: 7198, eje: SUR, nace: 1,
-    largo: 62, ancho: 19, alto: 11, fachada: 'clasica', torres: { n: 1, ...campanario(4.6, 11, { tipo: 'chapitel', alto: 2.4 }) },
-    verificar: [
-      'La fachada mira al norte (la calle entre San Francisco y La Bolsa); el campanario, de un lado, a verificar con una foto.',
-      'El esquema de Pimentel (1578) ya nombra San Francisco; acá va desde la época de 1772.',
-    ],
-  }),
+  sanFrancisco, // el estudio por épocas: specs/08-san-francisco-por-epocas.md
   iglesiaEn({
     id: 'altagracia', nombre: 'Iglesia de Altagracia', rotulo: 'Iglesia Altagracia', x: 8742, y: 6218, eje: ESTE, nace: 1,
     largo: 56, ancho: 22, alto: 11, fachada: 'clasica', torres: { n: 1, ...campanario(5.5, 12, { tipo: 'cupula', alto: 3.2 }) },
