@@ -53,8 +53,11 @@ const suave = (t) => { const x = acotar(t, 0, 1); return x * x * (3 - 2 * x) }
 /**
  * Terrazas: un hito grande (una manzana entera, como el convento de las Concepciones y el Capitolio) se apoya en
  * un solo punto, su ancla, y es plano; en una ladera, el suelo de la ciudad le tapaba la mitad alta (src/hitos/
- * material.js). Dentro de su rectángulo el suelo queda plano a la altura del terreno en el centro (la del piso del
- * hito), y el talud va afuera, en la calle, en TALUD_M. Lo usan el shader (sueloEn) y la cámara (alturaEn).
+ * material.js). Dentro de su rectángulo el suelo sigue un plano, el que mejor se ajusta al terreno (mínimos
+ * cuadrados), y el talud va afuera, en la calle, en TALUD_M; el hito apoya cada vértice en ese plano (pisoDeHito):
+ * se corre en vertical con la ladera, con las paredes a plomo. Con el piso horizontal (a la altura del centro), el
+ * lado de arriba quedaba en un pozo bajo la calle (el convento, ~6 m en su esquina noroeste) y el de abajo, sobre un
+ * zócalo. Lo usan el shader (sueloEn, pisoDeHito) y la cámara (alturaEn).
  */
 export const TALUD_M = 4
 export const MAX_TERRAZAS = 4
@@ -70,23 +73,45 @@ export function terrazasDeHitos(hitos, coords) {
   })
 }
 
-/** La altura `alto` con la terraza `t` (a la altura `piso`) puesta en (x, z): la misma cuenta que conTerrazas(). */
-function conTerraza(t, piso, x, z, alto) {
-  const [px, pz] = [x - t.x, z - t.z]
-  const a = px * t.eje[0] + pz * t.eje[1]
-  const b = -px * t.eje[1] + pz * t.eje[0]
+/** (x, z) del mundo en el marco de la terraza `t`: a lo largo de su eje y a su derecha. */
+const enMarco = (t, x, z) => [(x - t.x) * t.eje[0] + (z - t.z) * t.eje[1], -(x - t.x) * t.eje[1] + (z - t.z) * t.eje[0]]
+
+/**
+ * El plano que mejor se ajusta al terreno (`absoluta`) en el rectángulo de la terraza `t`: altura = c0 + c1·a + c2·b
+ * en su marco. Lo muestrea de borde a borde cada media celda del relieve; con la grilla simétrica, las sumas
+ * cruzadas se anulan y cada coeficiente sale por su lado.
+ */
+function planoDeTerraza(t, absoluta, celda) {
+  const puntos = (medio) => {
+    const n = Math.max(2, Math.ceil((2 * medio) / (celda / 2)))
+    return Array.from({ length: n + 1 }, (_, i) => -medio + (2 * medio * i) / n)
+  }
+  const [as, bs] = [puntos(t.medioA), puntos(t.medioB)]
+  let [s0, sa, sb, aa, bb] = [0, 0, 0, 0, 0]
+  for (const a of as) for (const b of bs) {
+    const h = absoluta(t.x + a * t.eje[0] - b * t.eje[1], t.z + a * t.eje[1] + b * t.eje[0])
+    s0 += h; sa += a * h; sb += b * h; aa += a * a; bb += b * b
+  }
+  return Object.freeze({ c0: s0 / (as.length * bs.length), c1: sa / aa, c2: sb / bb })
+}
+
+/** La altura `alto` con la terraza `t` (con su `plano`) puesta en (x, z): la misma cuenta que conTerrazas(). */
+function conTerraza(t, plano, x, z, alto) {
+  const [a, b] = enMarco(t, x, z)
   const fuera = Math.max(Math.abs(a) - t.medioA, Math.abs(b) - t.medioB)
-  const f = 1 - suave(fuera / TALUD_M)
-  return alto + (piso - alto) * f
+  const piso = plano.c0 + plano.c1 * a + plano.c2 * b
+  return alto + (piso - alto) * (1 - suave(fuera / TALUD_M))
 }
 
 /** alturaEn(x, z): metros sobre la plaza en el punto del mundo, sin exagerar ni hinchar (con las terrazas). */
 export function crearRelieve(datos, hoja, terrazas = []) {
   const absoluta = (x, z) => muestrear(datos, (x - hoja.x0) / hoja.ancho, (z - hoja.z0) / hoja.alto)
   const referencia = absoluta(0, 0)
-  const pisos = terrazas.map((t) => absoluta(t.x, t.z) - referencia)
-  const alturaEn = (x, z) => terrazas.reduce((h, t, i) => conTerraza(t, pisos[i], x, z, h), absoluta(x, z) - referencia)
-  return Object.freeze({ ...datos, hoja, referencia, terrazas: Object.freeze([...terrazas]), alturaEn })
+  const celda = Math.min(hoja.ancho / datos.w, hoja.alto / datos.h)
+  const relativa = (x, z) => absoluta(x, z) - referencia
+  const planos = Object.freeze(terrazas.map((t) => planoDeTerraza(t, relativa, celda)))
+  const alturaEn = (x, z) => terrazas.reduce((h, t, i) => conTerraza(t, planos[i], x, z, h), relativa(x, z))
+  return Object.freeze({ ...datos, hoja, referencia, terrazas: Object.freeze([...terrazas]), planos, alturaEn })
 }
 
 /** Cuánto se hinchó el suelo a `dist` metros de la plaza (el mismo frente que la ciudad). */
@@ -116,7 +141,7 @@ export function texturaRelieve(relieve) {
 }
 
 /** Los uniforms que lee GLSL_RELIEVE: los materiales que lo incluyen (hitos, árboles) copian estos de la ciudad. */
-export const UNIFORMS_RELIEVE = Object.freeze(['tRelieve', 'uRelieveHoja', 'uRelieveCelda', 'uExageracion', 'uTerrazaMarco', 'uTerrazaMedida'])
+export const UNIFORMS_RELIEVE = Object.freeze(['tRelieve', 'uRelieveHoja', 'uRelieveCelda', 'uExageracion', 'uTerrazaMarco', 'uTerrazaMedida', 'uTerrazaPendiente'])
 
 /** Uniforms compartidos por la ciudad y el suelo. Sin datos, el relieve es plano (y las terrazas, inactivas). */
 export function uniformsRelieve(hoja, terrazas = []) {
@@ -129,19 +154,22 @@ export function uniformsRelieve(hoja, terrazas = []) {
     uRelieveCelda: { value: new Vector2(hoja.ancho, hoja.alto) }, // metros por celda
     uExageracion: { value: 1 },
     uTerrazaMarco: { value: marco }, // (x, z, eje) en metros del mundo
-    uTerrazaMedida: { value: medida }, // (mitad del ancho, mitad del fondo, altura del piso, activa)
+    uTerrazaMedida: { value: medida }, // (mitad del ancho, mitad del fondo, altura del plano en el centro, activa)
+    uTerrazaPendiente: { value: Array.from({ length: MAX_TERRAZAS }, () => new Vector2(0, 0)) }, // del plano, por metro de a y de b
     uTerrazaVida: { value: Array.from({ length: MAX_TERRAZAS }, (_, i) => new Vector2(...(terrazas[i]?.vida ?? [0, 0]))) }, // (nace, muere) del hito
   }
 }
 
-/** Pone los datos en los uniforms (después de cargar relieve.bin): la textura y la altura de cada terraza. */
+/** Pone los datos en los uniforms (después de cargar relieve.bin): la textura y el plano de cada terraza. */
 export function ponerRelieve(U, relieve) {
   U.tRelieve.value.dispose()
   U.tRelieve.value = texturaRelieve(relieve)
   U.uRelieveCelda.value.set(relieve.hoja.ancho / relieve.w, relieve.hoja.alto / relieve.h)
-  U.uTerrazaMarco.value.forEach((m, i) => {
-    const d = U.uTerrazaMedida.value[i]
-    if (d.x > 0) d.set(d.x, d.y, relieve.alturaEn(m.x, m.y), 1)
+  U.uTerrazaMedida.value.forEach((d, i) => {
+    const plano = relieve.planos?.[i]
+    if (d.x <= 0 || !plano) return
+    d.set(d.x, d.y, plano.c0, 1)
+    U.uTerrazaPendiente.value[i].set(plano.c1, plano.c2)
   })
 }
 
@@ -149,21 +177,37 @@ export function ponerRelieve(U, relieve) {
 export const GLSL_RELIEVE = /* glsl */ `
   uniform sampler2D tRelieve; uniform vec4 uRelieveHoja; uniform vec2 uRelieveCelda; uniform float uExageracion;
   uniform vec4 uTerrazaMarco[${MAX_TERRAZAS}]; uniform vec4 uTerrazaMedida[${MAX_TERRAZAS}];
+  uniform vec2 uTerrazaPendiente[${MAX_TERRAZAS}];
   float relieveCrudo(vec2 xz) { return texture2D(tRelieve, (xz - uRelieveHoja.xy) / uRelieveHoja.zw).r; }
-  // dentro del rectángulo de una terraza, el piso del hito; afuera, el talud hasta el terreno en TALUD_M
+  // cuánto se hincha el suelo en xz: la misma ola que levanta la ciudad
+  float hinchadoEn(vec2 xz) { return uExageracion * smoothstep(0.0, 1.0, (uOla - length(xz)) / uAnchoOla); }
+  // dentro del rectángulo de una terraza, su plano (a, b: el punto en su marco); afuera, el talud hasta el terreno
   float conTerrazas(vec2 xz, float h) {
     for (int i = 0; i < ${MAX_TERRAZAS}; i++) {
       vec4 m = uTerrazaMarco[i], d = uTerrazaMedida[i];
       if (d.w < 0.5) continue;
       vec2 p = xz - m.xy;
-      float fuera = max(abs(dot(p, m.zw)) - d.x, abs(dot(p, vec2(-m.w, m.z))) - d.y);
-      h = mix(h, d.z, 1.0 - smoothstep(0.0, ${TALUD_M.toFixed(1)}, fuera));
+      float a = dot(p, m.zw), b = dot(p, vec2(-m.w, m.z));
+      float fuera = max(abs(a) - d.x, abs(b) - d.y);
+      h = mix(h, d.z + dot(vec2(a, b), uTerrazaPendiente[i]), 1.0 - smoothstep(0.0, ${TALUD_M.toFixed(1)}, fuera));
     }
     return h;
   }
-  // el suelo se hincha con la misma ola que levanta la ciudad
   float sueloEn(vec2 xz) {
-    return conTerrazas(xz, relieveCrudo(xz)) * uExageracion * smoothstep(0.0, 1.0, (uOla - length(xz)) / uAnchoOla);
+    return conTerrazas(xz, relieveCrudo(xz)) * hinchadoEn(xz);
+  }
+  // el piso de un vértice de hito: anclado en una terraza, su plano bajo el vértice (prolongado, para lo que sale a
+  // la calle, como una escalinata); si no, el más alto de su ancla y su apoyo (plano donde el terreno baja)
+  float pisoDeHito(vec2 ancla, vec2 apoyo, vec2 xz) {
+    for (int i = 0; i < ${MAX_TERRAZAS}; i++) {
+      vec4 m = uTerrazaMarco[i], d = uTerrazaMedida[i];
+      if (d.w < 0.5) continue;
+      vec2 q = ancla - m.xy;
+      if (max(abs(dot(q, m.zw)) - d.x, abs(dot(q, vec2(-m.w, m.z))) - d.y) > 0.0) continue;
+      vec2 p = xz - m.xy;
+      return (d.z + dot(vec2(dot(p, m.zw), dot(p, vec2(-m.w, m.z))), uTerrazaPendiente[i])) * hinchadoEn(xz);
+    }
+    return max(sueloEn(ancla), sueloEn(apoyo));
   }
   // normal por diferencias finitas, una celda a cada lado
   vec3 normalSuelo(vec2 xz) {

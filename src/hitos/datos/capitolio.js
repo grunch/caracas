@@ -18,15 +18,15 @@ const esquinas = ESQUINAS_PX.map(([px, py]) => {
   return [(dx * ux + dy * uy) * METRO, (-dx * uy + dy * ux) * METRO]
 })
 // la terraza del relieve es un rectángulo en el marco: el inscrito en la manzana (uno que la cubriera se metería en
-// las calles y se vería su piso). En las puntas del trapecio queda fuera hasta ~6 m, con la pendiente de la manzana
-// (6 m en 130 m), unos 0,3 m bajo el muro
+// las calles y se vería su piso). Sigue el plano de la ladera, y el hito se apoya en él; en las puntas del trapecio,
+// que quedan fuera hasta ~6 m, el talud lleva el suelo de ese plano al terreno
 export const MANZANA = Object.freeze({
   ancho: 2 * Math.min(...esquinas.map(([a]) => Math.abs(a))), fondo: 2 * Math.min(...esquinas.map(([, b]) => Math.abs(b))),
 })
 export const capitolio = Object.freeze({
   id: 'capitolio', nombre: 'Capitolio (Palacio Federal y Legislativo)', ...marco, nace: 1, muere: 0,
   planta, suprime: planta,
-  terraza: MANZANA, // la manzana en pendiente (hasta 6 m): el suelo queda plano a la altura de su piso (src/relieve.js)
+  terraza: MANZANA, // la manzana en pendiente (8 m de la esquina noroeste a la sureste): sigue su plano (src/relieve.js)
   patio: true, // claustro (1772–1843) y patio de la fuente (desde 1873): el modo a pie choca en la crujía y no en el patio
   fuente: 'Plano de Caracas de 1936 (recuadro «Palacio Federal»: cuatro alas alrededor de un jardín, con óvalo en el ala norte); ' +
     'plano de Mestre de 1889 (1 «Capitolio», 2 «Palacio Federal»); Wikipedia https://es.wikipedia.org/wiki/Palacio_Federal_Legislativo; ' +

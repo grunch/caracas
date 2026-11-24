@@ -141,7 +141,7 @@ const sol = new DirectionalLight(0xfff1d6, 2.2)
 sol.position.fromArray(vectorSol()).multiplyScalar(2500) // la dirección del sol es una sola (src/luz.js)
 scene.add(sol)
 // el relieve: sus uniforms van en el material; sin relieve.bin la hoja queda lisa
-// los hitos de una manzana entera en ladera se asientan en una terraza plana (src/relieve.js)
+// los hitos de una manzana entera en ladera se asientan en una terraza: el plano de la ladera (src/relieve.js)
 const terrazas = terrazasDeHitos(HITOS, coords)
 const relieveU = uniformsRelieve(hoja, terrazas)
 relieveU.uExageracion.value = Number(params.get('exagerar')) || EXAGERACION
