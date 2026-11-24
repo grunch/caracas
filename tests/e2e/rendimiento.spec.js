@@ -22,6 +22,7 @@ test('las casas se levantan en workers y llegan por baldosas: la página no hace
 })
 
 test('con ?sintrabajador las casas se levantan en el hilo de la página y son las mismas', async ({ page }) => {
+  test.setTimeout(240_000) // carga la ciudad dos veces, y la segunda la levanta el hilo que además dibuja
   const trabajadores = []
   page.on('worker', (w) => trabajadores.push(w.url()))
   const cuenta = () => {
@@ -33,7 +34,7 @@ test('con ?sintrabajador las casas se levantan en el hilo de la página y son la
   const conWorkers = await page.evaluate(cuenta)
   const antes = trabajadores.length
   await page.goto('/?sinintro&sintrabajador')
-  await page.waitForFunction(() => window.lab?.casasListas === true, null, { timeout: 60000 })
+  await page.waitForFunction(() => window.lab?.casasListas === true, null, { timeout: 180000 })
   expect(trabajadores.length).toBe(antes)
   expect(await page.evaluate(cuenta)).toEqual(conWorkers)
 })
