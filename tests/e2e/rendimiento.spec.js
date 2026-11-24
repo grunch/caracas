@@ -7,8 +7,9 @@ test('las casas se levantan en workers y llegan por baldosas: la página no hace
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
   await page.waitForFunction(() => window.lab.casasListas === true, null, { timeout: 60000 })
-  expect(trabajadores.length).toBeGreaterThan(0)
-  expect(trabajadores.every((url) => url.includes('ciudad-trabajador'))).toBe(true)
+  // los de las casas, y uno más que construye los hitos
+  expect(trabajadores.some((url) => url.includes('ciudad-trabajador'))).toBe(true)
+  expect(trabajadores.some((url) => url.includes('hitos-trabajador'))).toBe(true)
   const { baldosas, enEscena, tiranSombra } = await page.evaluate(() => {
     const { casas, scene, ciudad } = window.lab
     return {
