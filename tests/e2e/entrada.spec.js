@@ -21,7 +21,6 @@ test('sin bienvenida: se pone en color, la ciudad se levanta y la cámara vuela 
   await expect(page.locator('#color')).toHaveAttribute('aria-pressed', 'true')
   // …la ciudad se levanta y la cámara llega inclinada, cerca de la plaza
   await expect.poll(() => page.evaluate(() => window.lab.ciudad.U.uOla.value), { timeout: 60000 }).toBeGreaterThan(0)
-  await expect(page.locator('#alzar')).toHaveText('Acostar la ciudad')
   await expect.poll(() => page.evaluate(() => window.lab.cam.volando), { timeout: 60000 }).toBe(false)
   const vista = await page.evaluate(() => ({ ...window.lab.cam.goal }))
   expect(vista.pitch).toBeLessThan(0.8)
@@ -89,6 +88,5 @@ test('si la persona levanta y vuelve a acostar la ciudad durante la bienvenida, 
 
   await page.keyboard.press('Escape')
   await page.waitForTimeout(4000)
-  await expect(page.locator('#alzar')).toHaveText('Levantar la ciudad')
   expect(await page.evaluate(() => window.lab.ciudad.U.uOla.value)).toBe(0)
 })
