@@ -43,3 +43,4 @@ Plan de corrección de la reconstrucción: [auditoría integral de 1772](08-audi
 - [Casa Amarilla por épocas](08-casa-amarilla-por-epocas.md): T41c, modelo aprobado desde 1772, fuentes, límites y adaptación al mapa.
 - [Capitolio por épocas](08-capitolio-por-epocas.md): T41d, convento de las Concepciones desde 1772 y Palacio Federal Legislativo hasta 1936, fuentes, límites y presupuesto.
 - [Palacio Arzobispal por épocas](08-palacio-arzobispal-por-epocas.md): T41e, hipótesis colonial desde 1772 y reforma de 1876–1877 hasta 1936, implantación junto a la Catedral, fuentes, límites y presupuesto.
+- [Rendimiento](10-rendimiento.md): T76, qué se mide, cómo (`tests/e2e/medir-rendimiento.mjs`) y contra qué presupuesto.

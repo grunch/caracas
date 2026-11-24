@@ -1,0 +1,11 @@
+{
+  "nota": "Presupuesto de rendimiento (specs/10-rendimiento.md). Topes medidos con tests/e2e/medir-rendimiento.mjs en el equipo de referencia, con los datos completos.",
+  "topes": {
+    "casasMs": 5000,
+    "tareaMasLargaMs": 200,
+    "bytesAlAbrir": 8000000,
+    "heapMB": 250,
+    "triangulosCentro": 2000000,
+    "msPorCuadroCentro": 16.6
+  }
+}
