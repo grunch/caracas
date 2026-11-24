@@ -108,3 +108,35 @@ def resumen_por_sector(anclas, loo_m, desvio_m, umbral_m=UMBRAL_SECTOR_M):
                       'mediana_desvio_m': round(float(np.median(desvio)), 2),
                       'controlado': len(loo) >= MINIMO_ANCLAS_LOO, 'bajo_umbral': mediana < umbral_m})
     return filas
+
+
+def sector_de(px, py, sectores):
+    """Id del primer sector cuya caja (sin el solape de lectura) contiene el punto, o None."""
+    for s in sectores:
+        x0, y0, x1, y1 = s['caja_px']
+        if x0 <= px < x1 and y0 <= py < y1:
+            return s['id']
+    return None
+
+
+def medir(anclas, gcps_vigentes, sectores, metro, suavizado=0.0):
+    """Desvío del calce vigente en cada ancla y error dejando uno fuera del calce que solo usa las anclas."""
+    from calce import Calce, residuos_loo_rapidos
+
+    vigente = Calce.ajustar(gcps_vigentes, metro, suavizado)
+    desvio = desvios_m(anclas, vigente.a_1936, metro)
+    origen = np.array([[a['px'], a['py']] for a in anclas], float)
+    destino = np.array([[a['x36'], a['y36']] for a in anclas], float)
+    loo = [float(v) for v in residuos_loo_rapidos(origen, destino, suavizado) * metro]
+    detalle = [{**a, 'sector': sector_de(a['px'], a['py'], sectores),
+                'desvio_vigente_m': round(d, 2), 'loo_identidad_m': round(e, 2)}
+               for a, d, e in zip(anclas, desvio, loo)]
+    con_sector = [(a, a_loo, a_d) for a, a_loo, a_d in zip(detalle, loo, desvio) if a['sector']]
+    filas = resumen_por_sector([a for a, _, _ in con_sector], [e for _, e, _ in con_sector],
+                               [d for _, _, d in con_sector])
+    return {'anclas': len(anclas), 'fuera_de_sectores': len(detalle) - len(con_sector),
+            'calce_vigente': {'mediana_desvio_m': round(float(np.median(desvio)), 2),
+                              'max_desvio_m': round(float(np.max(desvio)), 2)},
+            'calce_identidad': {'rms_loo_m': round(float(np.sqrt(np.mean(np.square(loo)))), 2),
+                                'p90_loo_m': round(float(np.percentile(loo, 90)), 2)},
+            'sectores': filas, 'detalle': detalle}

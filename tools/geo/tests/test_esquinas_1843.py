@@ -96,3 +96,33 @@ def test_resumen_por_sector_con_la_regla_de_dos_anclas():
     assert (a['sector'], a['anclas'], a['mediana_loo_m'], a['controlado']) == ('S1843-A', 2, 12.0, True)
     assert a['bajo_umbral'] is True
     assert (b['anclas'], b['controlado'], b['mediana_desvio_m']) == (1, False, 50.0)
+
+
+def _rejilla(n=4, paso=100.0, desplazar=0.0):
+    return [{'id': f'E1843-{i * n + j:03d}', 'px': j * paso, 'py': i * paso,
+             'x36': j * paso + desplazar, 'y36': i * paso} for i in range(n) for j in range(n)]
+
+
+SECTORES = [{'id': 'S1843-11', 'caja_px': [-50, -50, 150, 400]}, {'id': 'S1843-12', 'caja_px': [150, -50, 400, 400]}]
+
+
+def test_sector_de_por_la_caja_y_fuera_de_todas():
+    from esquinas_1843 import sector_de
+    assert sector_de(0, 0, SECTORES) == 'S1843-11'
+    assert sector_de(300, 10, SECTORES) == 'S1843-12'
+    assert sector_de(900, 900, SECTORES) is None
+
+
+def test_medir_un_calce_vigente_corrido_contra_anclas_exactas():
+    from esquinas_1843 import medir
+    anclas = _rejilla()
+    vigente = [{'px': a['px'], 'py': a['py'], 'x36': a['x36'] + 30.0, 'y36': a['y36']} for a in anclas]
+
+    informe = medir(anclas, vigente, SECTORES, metro=0.5)
+
+    assert informe['anclas'] == 16
+    assert {f['sector'] for f in informe['sectores']} == {'S1843-11', 'S1843-12'}
+    assert all(f['mediana_desvio_m'] == pytest.approx(15.0) for f in informe['sectores'])
+    assert all(f['mediana_loo_m'] < 1e-6 for f in informe['sectores'])
+    assert informe['calce_vigente']['mediana_desvio_m'] == pytest.approx(15.0)
+    assert [a['sector'] for a in informe['detalle']][:2] == ['S1843-11', 'S1843-11']
