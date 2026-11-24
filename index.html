@@ -120,6 +120,15 @@
   </div>
   <form id="buscar" role="search" hidden></form>
   <a id="firma" class="panel" href="https://x.com/negrunch" target="_blank" rel="noopener" title="@negrunch en X">Hecho por <b>@negrunch</b></a>
+  <script>
+    // los datos que el visor necesita sí o sí, pedidos ya: así viajan a la vez que el JS, y no después de que
+    // se bajó y corrió (src/temprano.js los recoge)
+    window.__temprano = {}
+    for (const url of ['datos/ciudad.json', 'datos/crece.json', 'datos/ciudad.pak', 'datos/relieve.bin']) {
+      window.__temprano[url] = fetch(url)
+      window.__temprano[url].catch(function () {}) // si falla, el visor lo vuelve a pedir y avisa
+    }
+  </script>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

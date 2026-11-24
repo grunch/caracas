@@ -3,6 +3,8 @@ import {
   CanvasTexture, TextureLoader, SRGBColorSpace, Color, Timer, HemisphereLight, DirectionalLight, LinearFilter,
 } from 'three'
 import { cargarPak } from './pak.js'
+import { pedirDato } from './temprano.js'
+import { crearPlanoPorNiveles, nivelNecesario, NIVEL_CHICO, NIVEL_4K } from './plano-niveles.js'
 import { crearCasas } from './casas.js'
 import { pedirCiudad } from './ciudad-pedido.js'
 import { crearMaterialCiudad, crearMaterialSombraCiudad } from './material.js'
@@ -49,7 +51,7 @@ const EXAGERACION = 1.3 // el valle se lee mejor con el relieve un poco exagerad
 
 // --- la bienvenida y el «Acerca» (src/acerca-panel.js): antes que nada, para que la bienvenida se vea mientras
 // carga el plano y sus teclas valgan antes que las de los demás paneles. No esperan a nada ni frenan la carga ---
-const crecePedido = fetch('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))))
+const crecePedido = pedirDato('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))))
 crecePedido.catch(() => {}) // sin crece.json (la demo de CI) no hay línea de tiempo: se avisa más abajo
 // lo que cada acción de src/controles.js hace acá; las funciones se declaran más abajo
 const HACER = {
@@ -82,7 +84,7 @@ function verCrecer() {
   if (lineaDeTiempo) lineaDeTiempo.andar(); else andarAlLlegar = true
 }
 
-const meta = await fetch('datos/ciudad.json')
+const meta = await pedirDato('datos/ciudad.json')
   .then((r) => { if (!r.ok) throw new Error(`datos/ciudad.json: ${r.status}`); return r.json() })
   .catch((e) => {
     document.getElementById('loading').textContent = 'No se pudo cargar el plano. Recarga la página para intentarlo de nuevo.'
@@ -149,11 +151,10 @@ suelo.setAttribute('aInfo', new BufferAttribute(new Float32Array(suelo.attribute
 suelo.setAttribute('aAncla', new BufferAttribute(new Float32Array(suelo.attributes.position.count * 2), 2))
 scene.add(new Mesh(suelo, ciudad.material))
 
-cargarPlano().catch(() => { /* todavía no hay escaneo procesado: queda la cuadrícula */ })
 cargarRelieve().catch((e) => console.warn(`relieve: ${e.message}`))
 
 async function cargarRelieve() {
-  const r = await fetch('datos/relieve.bin')
+  const r = await pedirDato('datos/relieve.bin')
   if (!r.ok) throw new Error(`datos/relieve.bin: ${r.status}`)
   relieve = crearRelieve(decodificarRelieve(await r.arrayBuffer()), hoja, terrazas)
   ponerRelieve(relieveU, relieve)
@@ -162,20 +163,21 @@ async function cargarRelieve() {
 }
 
 /**
- * Carga progresiva: primero.webp (1024) para el primer cuadro, después chico (2048) y medio
- * (8192, o 4096 en equipos livianos). Las teselas finas de 3072 llegan con el material propio.
+ * Carga progresiva (src/plano-niveles.js): primero.webp (1024) para el primer cuadro y después chico (2048).
+ * Los de 4096 y 8192 se piden recién cuando la vista se acerca tanto que hacen falta (en el ciclo de render);
+ * con ellos suben también las máscaras de suelo y de rótulos. Las teselas finas de 3072 van aparte.
  */
+const planoBase = crearPlanoPorNiveles({
+  cargar: (url) => cargarTextura(url, true),
+  poner: (t) => ponerTextura(ciudad.U.uMapa, t),
+  alSubir: (nivel) => { if (nivel >= NIVEL_4K) mejorarMascaras() },
+})
 async function cargarPlano() {
-  const niveles = ['plano/primero.webp', 'plano/chico.webp', liviano ? 'plano/medio-4k.webp' : 'plano/medio.webp']
-  for (const url of niveles) {
-    try {
-      ponerTextura(ciudad.U.uMapa, await cargarTextura(url, true))
-    } catch (e) {
-      if (url === niveles[0]) throw e // sin el primero no hay plano: queda la cuadrícula
-      console.warn(`plano: no se pudo cargar ${url}`)
-    }
-  }
+  await planoBase.pedir(0) // sin el primero no hay plano: queda la cuadrícula
+  await planoBase.pedir(NIVEL_CHICO).catch(() => {})
 }
+// (después de crear planoBase: llamarla antes fallaba sin avisar y la hoja quedaba con la cuadrícula)
+cargarPlano().catch(() => { /* todavía no hay escaneo procesado: queda la cuadrícula */ })
 
 async function cargarTextura(url, esColor) {
   const t = await new TextureLoader().loadAsync(url)
@@ -231,7 +233,7 @@ const primerasCasasPedidas = new Promise((ok) => { primerasCasas = ok })
 // ?sintrabajador las levanta en este hilo (para comparar, o si los workers dan problemas)
 const crearTrabajador = params.has('sintrabajador') || typeof Worker !== 'function' ? null
   : () => new Worker(new URL('./ciudad-trabajador.js', import.meta.url), { type: 'module' })
-const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array }).then((datos) => {
+const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array }, pedirDato).then((datos) => {
   // donde hay un hito modelado a mano, la casa genérica de ese lugar no nace (src/hitos/suprimir.js)
   datosCiudad = { ...datos, vida: suprimirTechos(datos, zonasDeSupresion(HITOS)) }
   return pedirCiudad({
@@ -351,14 +353,27 @@ const DURACION_COLOR_S = 1.2
 let colorObjetivo = 0
 let sueloPedido = null
 let rotulosPlanoPedidos = null
+// las máscaras van al paso del plano: de 2048 mientras alcanza el plano chico; las de 4096, cuando la vista
+// se acerca (mejorarMascaras) y el equipo no es liviano
+let mascarasCompletas = false
 function pedirMascaras() {
-  sueloPedido ??= cargarTextura(liviano ? 'plano/suelo-2k.webp' : 'plano/suelo.webp', false)
-    .then((t) => ponerTextura(ciudad.U.uSuelo, t))
-    .catch((e) => { sueloPedido = null; console.warn(`suelo: ${e.message}`) })
+  const completas = mascarasCompletas
+  // (si mientras baja la de 2048 se pidió la completa, la de 2048 no la pisa al llegar)
+  const poner = (uniforme) => (t) => { if (completas === mascarasCompletas) ponerTextura(uniforme, t); else t.dispose() }
+  sueloPedido ??= cargarTextura(completas ? 'plano/suelo.webp' : 'plano/suelo-2k.webp', false)
+    .then(poner(ciudad.U.uSuelo))
+    .catch((e) => { if (completas === mascarasCompletas) sueloPedido = null; console.warn(`suelo: ${e.message}`) })
   // sin la máscara de rótulos todo anda igual: el plano se marca entero, con sus nombres
-  rotulosPlanoPedidos ??= cargarTextura(liviano ? 'plano/rotulos-2k.webp' : 'plano/rotulos.webp', false)
-    .then((t) => ponerTextura(ciudad.U.uRotulos, t))
-    .catch((e) => { rotulosPlanoPedidos = null; console.warn(`rótulos del plano: ${e.message}`) })
+  rotulosPlanoPedidos ??= cargarTextura(completas ? 'plano/rotulos.webp' : 'plano/rotulos-2k.webp', false)
+    .then(poner(ciudad.U.uRotulos))
+    .catch((e) => { if (completas === mascarasCompletas) rotulosPlanoPedidos = null; console.warn(`rótulos del plano: ${e.message}`) })
+}
+function mejorarMascaras() {
+  if (liviano || mascarasCompletas) return
+  mascarasCompletas = true
+  if (!sueloPedido && !rotulosPlanoPedidos) return // nadie las pidió todavía: cuando las pidan, serán las completas
+  sueloPedido = rotulosPlanoPedidos = null
+  pedirMascaras()
 }
 function alternarColor(prender = colorObjetivo === 0) {
   colorObjetivo = prender ? 1 : 0
@@ -624,11 +639,20 @@ renderer.setAnimationLoop((t) => {
   }
   pendientes--
   buscador.dibujar() // el alfiler del buscador sigue a su punto del terreno
+  // a pie, lo que se mira es donde está el caminante
+  const enRecorrido = aPie.activo || enCoche.activo || enAvion.activo
+  const foco = aPie.activo ? { ...aPie.estado, dist: 0 } : enCoche.activo ? { ...enCoche.estado, dist: 0 } : enAvion.activo ? { ...enAvion.estado, dist: enAvion.altura } : cam.now
   if (teselas) {
-    // a pie, las teselas finas son las de donde está el caminante
-    const foco = aPie.activo ? { ...aPie.estado, dist: 0 } : enCoche.activo ? { ...enCoche.estado, dist: 0 } : enAvion.activo ? { ...enAvion.estado, dist: enAvion.altura } : cam.now
     const { px, py } = coords.aPixel(foco.x, foco.z)
     teselas.update(px, py, foco.dist < DIST_TESELAS_M)
+  }
+  // el plano general, en el nivel que pide la vista; en el mapa, la de destino: un vuelo no baja los niveles
+  // intermedios por los que pasa
+  if (planoBase.puesto >= NIVEL_CHICO) {
+    planoBase.pedir(nivelNecesario({
+      dist: enRecorrido ? foco.dist : cam.goal.dist, altoPx: renderer.domElement.height, fov: camera.fov, anchoHoja: hoja.ancho,
+      liviano, maxTextura, distTeselas: teselas ? DIST_TESELAS_M : null,
+    }))?.catch(() => {})
   }
   // las marcas primero: sus carteles tienen prioridad sobre los nombres de las calles
   const { uEpocaDe, uEpocaA, uAnchoOla } = ciudad.U
@@ -660,6 +684,7 @@ window.lab = {
   get calles() { return rotulos },
   get lineaDeTiempo() { return lineaDeTiempo },
   get planos() { return planos },
+  planoBase, liviano,
   get visorPlano() { return visorPlano },
 }
 window.lab.buscador = buscador

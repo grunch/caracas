@@ -42,10 +42,10 @@ function desordenar(entrada, registro) {
   return salida
 }
 
-/** Descarga y decodifica un .pak gzip en el navegador. */
-export async function cargarPak(url, tipos) {
+/** Descarga y decodifica un .pak gzip en el navegador. `pedir(url)`: con qué se pide (por omisión, fetch). */
+export async function cargarPak(url, tipos, pedir = (u) => fetch(u)) {
   if (typeof DecompressionStream !== 'function') throw new Error('sin DecompressionStream')
-  const r = await fetch(url)
+  const r = await pedir(url)
   if (!r.ok) throw new Error(`${url}: ${r.status}`)
   const crudo = await new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer()
   return decodificarPak(crudo, tipos)
