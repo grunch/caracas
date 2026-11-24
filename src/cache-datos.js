@@ -61,7 +61,8 @@ export function crearServidor({ caches, pedir, raiz }) {
   let huellasPedidas = null
 
   const guardar = async (nombre, clave, respuesta) => {
-    if (respuesta.ok) await (await caches.open(nombre)).put(clave, respuesta.clone())
+    // si no se puede guardar (la cuota llena, el almacenamiento bloqueado), lo bajado se entrega igual
+    if (respuesta.ok) await (await caches.open(nombre)).put(clave, respuesta.clone()).catch(() => {})
     return respuesta
   }
   const guardado = async (nombre, clave) => (await caches.open(nombre)).match(clave)
