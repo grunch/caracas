@@ -37,7 +37,8 @@ export const materialDeSombraDe = (o) => (Array.isArray(o.material) ? o.material
 /**
  * Quién tira sombra entre los hijos visibles de la escena: una malla con `castShadow` y `customDepthMaterial`,
  * o las piezas así de un grupo (la avioneta, src/volar-modo.js). `ocultos`: lo que se esconde en la pasada.
- * `pose`: la posición y el giro de lo que tira (si cambia, el mapa de sombras se rehace).
+ * `pose`: la posición y el giro de lo que tira, y cuáles de sus hijas están visibles (si cambia, el mapa de
+ * sombras se rehace).
  */
 export function repartoDeSombra(objetos) {
   const tiran = []
@@ -49,7 +50,9 @@ export function repartoDeSombra(objetos) {
     if (!piezas.length) { ocultos.push(o); continue }
     tiran.push(...piezas)
     if (o.isGroup) ocultos.push(...o.children.filter((h) => h.visible && !piezas.includes(h)))
-    poses.push([...o.position.toArray(), ...o.quaternion.toArray()].join(','))
+    // qué hijas de lo que tira están prendidas (los árboles cambian de detalle sin cambiar de cuenta ni de pose)
+    const hijas = piezas.flatMap((p) => p.children.filter((h) => h.visible).map((h) => h.id)).join('.')
+    poses.push([...o.position.toArray(), ...o.quaternion.toArray()].join(',') + (hijas ? `:${hijas}` : ''))
   }
   return { tiran, ocultos, pose: poses.join(';') }
 }
