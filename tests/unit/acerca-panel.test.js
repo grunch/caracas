@@ -216,7 +216,7 @@ describe('la bienvenida y el panel «Acerca»', () => {
   })
 
   describe('el panel', () => {
-    test('el «?» lo abre: diálogo modal con las cinco secciones y el foco en el título', async () => {
+    test('el «?» lo abre: diálogo modal con las seis secciones y el foco en el título', async () => {
       // Arrange
       const acerca = armar()
       // Act
@@ -228,8 +228,8 @@ describe('la bienvenida y el panel «Acerca»', () => {
       expect(doc.body.classList.contains('acerca')).toBe(true)
       expect(boton.atributos['aria-expanded']).toBe('true')
       expect(panel().hijos[0].atributos).toMatchObject({ role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'acerca-t' })
-      expect(panel().porEtiqueta('h3').map((h) => h.textContent)).toEqual(['Qué estás viendo', 'Cómo moverte', 'Las épocas', 'Fuentes y licencias', 'Créditos'])
-      expect(panel().porEtiqueta('nav')[0].hijos.map((b) => b.textContent)).toEqual(['Qué estás viendo', 'Cómo moverte', 'Las épocas', 'Fuentes y licencias', 'Créditos'])
+      expect(panel().porEtiqueta('h3').map((h) => h.textContent)).toEqual(['Qué estás viendo', 'Cómo moverte', 'Las épocas', 'Fuentes y licencias', 'Colabora', 'Créditos'])
+      expect(panel().porEtiqueta('nav')[0].hijos.map((b) => b.textContent)).toEqual(['Qué estás viendo', 'Cómo moverte', 'Las épocas', 'Fuentes y licencias', 'Colabora', 'Créditos'])
       expect(doc.activeElement.id).toBe('acerca-t')
     })
 
@@ -291,6 +291,15 @@ describe('la bienvenida y el panel «Acerca»', () => {
       expect(panel().porEtiqueta('kbd').map((k) => k.textContent)).toEqual(['C', '? o F1'])
     })
 
+    test('los pasos de «Colabora» van en una lista numerada, con su título', async () => {
+      const acerca = armar()
+      await acerca.abrir()
+      const [lista] = panel().porEtiqueta('ol')
+      expect(lista.classList.contains('pasos')).toBe(true)
+      expect(lista.porEtiqueta('li').length).toBeGreaterThanOrEqual(5)
+      expect(panel().porEtiqueta('h4').map((h) => h.textContent)).toContain('Con tu IA, paso a paso')
+    })
+
     test('al final de los créditos dice qué commit está corriendo', async () => {
       const acerca = armar({ commit: { hash: '01cb4ca2f3e4d5c6b7a8901234567890abcdef12', sucio: false } })
       await acerca.abrir()
@@ -304,7 +313,7 @@ describe('la bienvenida y el panel «Acerca»', () => {
       const avisosDelPanel = panel().porClase('aviso').map((p) => p.textContent).join(' ')
       expect(avisosDelPanel).toMatch(/no trae la línea de tiempo/)
       expect(avisosDelPanel).toMatch(/no trae la lista de fuentes/)
-      expect(panel().porEtiqueta('h3')).toHaveLength(5)
+      expect(panel().porEtiqueta('h3')).toHaveLength(6)
     })
 
     test('Escape lo cierra y el foco vuelve a donde estaba', async () => {

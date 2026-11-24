@@ -29,11 +29,14 @@ Un panel tipo hoja de papel con:
   cierran. Queda anotada en `localStorage` (`caracas:intro-vista`, con try/catch: si el almacenamiento falla, se
   muestra y no se recuerda); `?intro` la fuerza, `?sinintro` y `?capture` la saltean. No espera a nada ni frena
   la carga: aparece mientras se despliega el plano.
-- **Acerca** (`#acerca`, botón «?» entre los botones de abajo, teclas `?` o `F1`): diálogo modal con índice y cinco
+- **Acerca** (`#acerca`, botón «?» entre los botones de abajo, teclas `?` o `F1`): diálogo modal con índice y seis
   secciones — *Qué estás viendo* (qué sale del plano y qué es reconstrucción, y con qué error), *Cómo moverte*
   (de la tabla de `src/controles.js`, la misma que atiende el teclado), *Las épocas* (un párrafo por año, con el
   texto de la línea de tiempo de `crece.json`), *Fuentes y licencias* (de `datos/creditos.json`, ver `02`: cada
-  plano, dato, foto y biblioteca con la licencia que declara su ficha; lo pendiente, marcado «por verificar») y
+  plano, dato, foto y biblioteca con la licencia que declara su ficha; lo pendiente, marcado «por verificar»),
+  *Colabora* (el proyecto es software libre, AGPL-3.0; cómo ayudar sin programar y, paso a paso, cómo colaborar
+  con una IA que programa dentro del estándar de calidad de `CONTRIBUTING.md`: issue aceptado, test en rojo, prueba
+  a mano de una persona, plantilla y fuentes) y
   *Créditos* (la inspiración de @mormonnegro, Claude, el repositorio). Foco atrapado, Esc, el foco vuelve a donde
   estaba; en el teléfono ocupa la pantalla y el índice es una fila que se desliza. Sin `crece.json` o sin
   `creditos.json` (la demo de CI) lo dice en su sección. Capturas: `ANGLE=gl node tests/e2e/capturas-intro.mjs`.

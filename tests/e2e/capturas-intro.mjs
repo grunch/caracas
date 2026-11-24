@@ -12,7 +12,7 @@ const PANTALLAS = {
   telefono: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true },
   acostado: { viewport: { width: 844, height: 390 }, hasTouch: true, isMobile: true },
 }
-const SECCIONES = ['viendo', 'moverte', 'epocas', 'fuentes', 'creditos']
+const SECCIONES = ['viendo', 'moverte', 'epocas', 'fuentes', 'colabora', 'creditos']
 
 const navegador = await chromium.launch({ args: gl })
 await mkdir(carpeta, { recursive: true })
