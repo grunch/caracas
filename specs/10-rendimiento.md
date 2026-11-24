@@ -12,7 +12,8 @@ Este spec fija **qué se mide, cómo y contra qué tope**.
 ## 2. Cómo se mide
 
 ```sh
-npm run build && npx vite preview --port 4173        # el sitio construido, con los datos completos
+npm run build && npx vite preview --port 4173        # el sitio construido, con los datos completos; queda sirviendo
+# en otra terminal (o con el servidor en segundo plano):
 node tests/e2e/medir-rendimiento.mjs http://localhost:4173/ --gpu --salida medicion.json
 ```
 
@@ -22,7 +23,7 @@ node tests/e2e/medir-rendimiento.mjs http://localhost:4173/ --gpu --salida medic
 |---|---|
 | **Hitos del arranque** (ms desde la navegación) | `window.lab.ready`, las casas, la línea de tiempo y los árboles |
 | **Tareas largas** del hilo principal | `PerformanceObserver` de `longtask`: cuántas, cuánto suman y la mayor |
-| **Pedidos al abrir** | protocolo de DevTools, bytes que viajan (comprimidos), hasta 4 s después del último hito, sin tocar nada |
+| **Pedidos al abrir** | protocolo de DevTools, bytes que viajan (comprimidos), hasta 4 s después del último hito, sin tocar nada; de una descarga que sigue en curso al cortar se cuenta lo que ya llegó |
 | **Memoria** | heap de JS (`performance.memory`) y los arreglos de geometría que siguen vivos en JS, con la ciudad en pie y en color |
 | **Cuadro** | llamadas de dibujo y triángulos de un cuadro entero (sombras incluidas) en tres vistas: centro, valle y cerca |
 | **Tiempo por cuadro** (solo con `--gpu`) | 40 cuadros por vista girando la cámara, sin tope de vsync, con un `readPixels` de 1 píxel para esperar a la GPU; mediana y percentil 90 |

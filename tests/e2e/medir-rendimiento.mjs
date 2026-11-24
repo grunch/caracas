@@ -38,6 +38,9 @@ const cdp = await contexto.newCDPSession(pagina)
 await cdp.send('Network.enable')
 const pedidos = new Map()
 cdp.on('Network.requestWillBeSent', (e) => pedidos.set(e.requestId, { url: e.request.url }))
+// lo que va llegando se suma: una descarga todavía en curso cuando se corta la medición cuenta lo que ya viajó
+cdp.on('Network.dataReceived', (e) => { const p = pedidos.get(e.requestId); if (p) p.bytes = (p.bytes ?? 0) + e.encodedDataLength })
+// al terminar, el total exacto (con las cabeceras) reemplaza a la suma
 cdp.on('Network.loadingFinished', (e) => { const p = pedidos.get(e.requestId); if (p) p.bytes = e.encodedDataLength })
 
 await pagina.addInitScript(() => {
