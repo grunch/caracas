@@ -25,7 +25,7 @@ Consecuencias:
 
 1. **Calce por identidad desde el primer día.** Cada esquina numerada del original se empareja por su nombre con el diccionario de esquinas de 1936 (`tools/geo/esquinas/1936-esquinas.json`); solo los nombres que se conservan y no son ambiguos sirven de ancla. El calce vigente es por correlación (56 GCP, LOO RMS 13,3 m): en un damero periódico ese método se engancha a la calle vecina (hallazgo de [controles-damero.md](auditoria-1772/controles-damero.md)); se mide antes de usarlo.
 2. **La unidad del censo es la manzana** (U1843) con su contorno, sus cuatro frentes y sus lotes especiales. La ocupación se clasifica como `rayada` (urbanizada), `lote_especial` (blanco con letra), `plaza`, `huerta` o `terreno_libre`, más `parte_de_otra_unidad` y `descartada_no_edificacion` como en 1772. «Rayada» no dice qué parte de la manzana está edificada: el sitio la llena con las casas de 1936 que caben en ella y eso se audita como reconstrucción, no como dato.
-3. **Los sectores son bloques de la cuadrícula impresa** (S1843-…), con solape de lectura, de modo que cualquier caja sea reproducible por fila y columna del propio plano.
+3. **Los sectores son una rejilla regular de 5 × 5 sobre el marco del mapa** (S1843-‹fila›‹columna›, fila 1 al norte), con 60 px de solape de lectura ([sectores.json](auditoria-1843/sectores.json)). La cuadrícula impresa del plano no se usa para los sectores mientras sus líneas no estén medidas (decisión por delegación del responsable, 24-11-2026).
 4. **Las diferencias con 1936 son la materia de la corrección**: calles abiertas después de 1843 que hoy cortan una manzana de 1843, manzanas que 1843 no tiene, lotes especiales ocupados por casas genéricas, ensanches y quebradas. Donde la ciudad de 1936 no puede representar 1843, hace falta referencia propia (como la de 1772 en sus fases 2 y 3).
 
 ## Decisiones del responsable (24-11-2026)
@@ -43,7 +43,7 @@ Mismo orden y mismos criterios de salida que 08. Evidencia en `auditoria-1843/`.
 | Fase | Trabajo propio de 1843 | Estado |
 |---|---|---|
 | 0. Preparación | Este plan; herramientas de 1772 que se reutilizan, parametrizadas por época solo cuando una fase las necesita, con la prueba de que los JSON de 1772 se regeneran idénticos | En curso |
-| 1. Inventario | 1A baseline y calce por identidad con las esquinas numeradas; 1B sectores sobre la cuadrícula impresa y censo de manzanas, tramos y frentes; 1C incidencias; 1D puerta de salida y subtareas | Pendiente |
+| 1. Inventario | 1A baseline y calce por identidad con las esquinas numeradas; 1B censo por sectores de manzanas, tramos y frentes; 1C incidencias; 1D puerta de salida y subtareas | Pendiente |
 | 2. Referencia | Red y manzanas de 1843 con procedencia; lotes especiales con su letra de la leyenda | Pendiente |
 | 3. Calles y manzanas | Ninguna casa sobre una calle de 1843; calles de 1843 presentes; calles posteriores sin cortar manzanas de 1843 | Pendiente |
 | 4. Ocupación | Cada manzana rayada con casas; lotes especiales, plazas y huertas sin casas genéricas; hitos sin dobles edificios | Pendiente |
