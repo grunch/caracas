@@ -24,6 +24,7 @@ export const GLSL_TECHO = /* glsl */ `
    * todos gastados, de marrón grisáceo a terroso claro; una de cada ocho, de teja nueva, naranja vivo.
    */
   vec3 teja(float semilla) {
+    if(vPaleta>0.5)return tejaDeManzana(mod(vPaleta-1.0,6.0));
     vec3 gris = vec3(0.47, 0.35, 0.29), marron = vec3(0.59, 0.37, 0.25), clara = vec3(0.73, 0.47, 0.30), nueva = vec3(0.86, 0.45, 0.23);
     float k = azar(semilla * 1.7);
     vec3 c = k < 0.5 ? mix(gris, marron, k * 2.0) : mix(marron, clara, k * 2.0 - 1.0);
@@ -151,6 +152,10 @@ export const GLSL_TECHO = /* glsl */ `
     else if (es(cubierta, CUB_ALERO)) bajoAlero(c, k, s, t, w2);
     else if (es(cubierta, CUB_PATIO)) pisoDePatio(c, k, semilla, s, t, 0.0, w2);
     else if (es(cubierta, CUB_SOLAR)) pisoDePatio(c, k, semilla, s, t, 1.0, w2);
-    else tejado(c, k, semilla, s, t, largo, sombra, w2);
+    else {
+      tejado(c, k, semilla, s, t, largo, sombra, w2);
+      // El estudio conserva la terracota con variación leve, sin la pátina gris del mapa.
+      if(vPaleta>0.5)c=mix(teja(semilla),c,0.18);
+    }
     return vec4(c, clamp(k, 0.0, 1.0));
   }`

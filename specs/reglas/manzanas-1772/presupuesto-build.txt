@@ -1,0 +1,3 @@
+jsAlAbrirKB: 308.3 (tope 330) · pasa
+trabajadoresKB: 139.7 (tope 150) · pasa
+servicioKB: 1.3 (tope 3) · pasa

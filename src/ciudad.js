@@ -52,7 +52,7 @@ export function historiaEnEpoca([h0, h1], e) {
 }
 
 /** Las casas del pak, con su huella en metros (la original y la simplificada) y su vida. */
-function leerCasas({ vertices, techos, vida = null, historia = null, marcos = null, alas = null, vuelos = null }, coords, tolerancia) {
+function leerCasas({ vertices, techos, vida = null, historia = null, marcos = null, alas = null, vuelos = null, paletas = null }, coords, tolerancia) {
   const conMarco = leerMarcos({ marcos, alas }, coords)
   if (historia && historia.length !== (techos.length / 4) * EPOCAS_HISTORIA) {
     throw new Error(`ciudad: la historia trae ${historia.length} bytes y hacen falta ${EPOCAS_HISTORIA} por techo`)
@@ -73,7 +73,7 @@ function leerCasas({ vertices, techos, vida = null, historia = null, marcos = nu
     const marco = conMarco.get(t / 4) ?? null
     const bytes = historia?.subarray((t / 4) * EPOCAS_HISTORIA, (t / 4 + 1) * EPOCAS_HISTORIA)
     casas.push({
-      ...casa, vuelo, centro, huella: cuantos >= 3 ? simplificarAdentro(anillo, tolerancia) : null, marco,
+      ...casa, paleta:paletas?.[t/4]??0, vuelo, centro, huella: cuantos >= 3 ? simplificarAdentro(anillo, tolerancia) : null, marco,
       etapas: etapasDe(casa, bytes, { conAlas: Boolean(marco?.alas.length) }),
       // sin historia (datos viejos, la ciudad de demostración), todas las épocas valen lo de `techos`
       historia: empacarHistoria(bytes ?? Array(EPOCAS_HISTORIA).fill((casa.estilo & 15) + 16 * Math.min(casa.pisos, 15))),
@@ -144,7 +144,7 @@ function escritor(b, casa, etapa, { origen: o, eu, ev }) {
       b.normales[k * 3] = n[0] * eu[0] + n[2] * ev[0]
       b.normales[k * 3 + 1] = n[1]
       b.normales[k * 3 + 2] = n[0] * eu[1] + n[2] * ev[1]
-      b.info.set([dist, semilla, etapa.estilo, etapa.pisos], k * 4)
+      b.info.set([dist, semilla, etapa.estilo+256*(casa.paleta??0), etapa.pisos], k * 4)
       b.vidas[k * 2] = etapa.nace
       b.vidas[k * 2 + 1] = etapa.muere
       b.historias[k * 2] = casa.historia[0]
@@ -360,6 +360,7 @@ export const ATRIBUTOS = Object.freeze({
   position: { campo: 'posiciones', n: 3, Tipo: Float32Array },
   // las normales en un byte por componente y la vida en bytes: son millones de vértices
   normal: { campo: 'normales', n: 3, Tipo: Int8Array, normalizado: true },
+  // aInfo.z: estilo en el byte bajo, paleta colonial opcional en el alto.
   // distancia a la plaza (en metros enteros: de ella sale cuándo pasa la ola), semilla (16 bits), estilo y pisos
   aInfo: { campo: 'info', n: 4, Tipo: Uint16Array },
   aVida: { campo: 'vidas', n: 2, Tipo: Uint8Array },

@@ -1,0 +1,2050 @@
+{
+  "manzanas": [
+    {
+      "id": "U1772-0053",
+      "poligono": [
+        [
+          8221.256239637127,
+          7325.968080685629
+        ],
+        [
+          8266.68165990715,
+          7084.1445198363845
+        ],
+        [
+          8511.096769388883,
+          7131.767768423414
+        ],
+        [
+          8467.96160941701,
+          7383.803072595342
+        ]
+      ],
+      "distancia": 359.07427969692674,
+      "cantidadCasas": 24,
+      "semilla": "1772-U1772-0053",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 24
+    },
+    {
+      "id": "U1772-0054",
+      "poligono": [
+        [
+          8269.004103108538,
+          7072.3713707316865
+        ],
+        [
+          8321.660484784512,
+          6817.594758121623
+        ],
+        [
+          8574.303499763493,
+          6870.013887079847
+        ],
+        [
+          8513.52343072169,
+          7120.01492578009
+        ]
+      ],
+      "distancia": 282.0006762918058,
+      "cantidadCasas": 26,
+      "semilla": "1772-U1772-0054",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 26
+    },
+    {
+      "id": "U1772-0056",
+      "poligono": [
+        [
+          8480.045387041799,
+          6083.1002234990465
+        ],
+        [
+          8529.710271377404,
+          5831.910520032432
+        ],
+        [
+          8772.843293847085,
+          5882.579136567519
+        ],
+        [
+          8726.998519148028,
+          6132.910708413827
+        ]
+      ],
+      "distancia": 460.8478489432786,
+      "cantidadCasas": 26,
+      "semilla": "1772-U1772-0056",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 26
+    },
+    {
+      "id": "U1772-0057",
+      "poligono": [
+        [
+          8531.610112217828,
+          5820.048633691692
+        ],
+        [
+          8565.589638219773,
+          5535.542093946586
+        ],
+        [
+          8831.049137798424,
+          5588.02220387409
+        ],
+        [
+          8775.090738393763,
+          5870.789690402611
+        ]
+      ],
+      "distancia": 586.218606695594,
+      "cantidadCasas": 22,
+      "semilla": "1772-U1772-0057",
+      "estado": "integrada",
+      "anteriores": 48,
+      "nuevas": 22
+    },
+    {
+      "id": "U1772-0064",
+      "poligono": [
+        [
+          8302.543538463011,
+          8253.662520673888
+        ],
+        [
+          8370.611559316678,
+          7930.025632870356
+        ],
+        [
+          8628.964576780647,
+          7989.807430691526
+        ],
+        [
+          8556.086293675304,
+          8320.993376829849
+        ]
+      ],
+      "distancia": 689.9123349633568,
+      "cantidadCasas": 21,
+      "semilla": "1772-U1772-0064",
+      "estado": "integrada",
+      "anteriores": 51,
+      "nuevas": 21
+    },
+    {
+      "id": "U1772-0065",
+      "poligono": [
+        [
+          8372.720235651468,
+          7918.196496657631
+        ],
+        [
+          8410.91103902472,
+          7651.4351708399445
+        ],
+        [
+          8684.662816178017,
+          7715.51492553398
+        ],
+        [
+          8631.444654957279,
+          7978.064235297442
+        ]
+      ],
+      "distancia": 536.3365703448828,
+      "cantidadCasas": 24,
+      "semilla": "1772-U1772-0065",
+      "estado": "integrada",
+      "anteriores": 45,
+      "nuevas": 24
+    },
+    {
+      "id": "U1772-0066",
+      "poligono": [
+        [
+          8413.27893509039,
+          7639.6650715263995
+        ],
+        [
+          8477.15214973496,
+          7398.111658894466
+        ],
+        [
+          8737.739695953544,
+          7451.283014832449
+        ],
+        [
+          8687.036972802378,
+          7703.746291690612
+        ]
+      ],
+      "distancia": 404.53604013860075,
+      "cantidadCasas": 26,
+      "semilla": "1772-U1772-0066",
+      "estado": "integrada",
+      "anteriores": 45,
+      "nuevas": 26
+    },
+    {
+      "id": "U1772-0068",
+      "poligono": [
+        [
+          8738.775198648835,
+          6135.2198866995395
+        ],
+        [
+          8784.775218267636,
+          5884.0406129060475
+        ],
+        [
+          9063.551218275177,
+          5891.7897055624
+        ],
+        [
+          8990.0658980594,
+          6183.0483410982
+        ]
+      ],
+      "distancia": 409.40886595162357,
+      "cantidadCasas": 26,
+      "semilla": "1772-U1772-0068",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 26
+    },
+    {
+      "id": "U1772-0076",
+      "poligono": [
+        [
+          8567.734871965924,
+          8323.8950744085
+        ],
+        [
+          8640.71379351966,
+          7992.251789837803
+        ],
+        [
+          8839.020288464319,
+          8028.8142546036825
+        ],
+        [
+          8776.228932918737,
+          8372.234668395291
+        ]
+      ],
+      "distancia": 682.8597439371379,
+      "cantidadCasas": 20,
+      "semilla": "1772-U1772-0076",
+      "estado": "integrada",
+      "anteriores": 48,
+      "nuevas": 20
+    },
+    {
+      "id": "U1772-0078",
+      "poligono": [
+        [
+          8698.755354750616,
+          7706.341629118965
+        ],
+        [
+          8749.497138983517,
+          7453.6838560270735
+        ],
+        [
+          8935.630534130883,
+          7491.7202200329075
+        ],
+        [
+          8893.108649833723,
+          7746.85152581588
+        ]
+      ],
+      "distancia": 387.5480911081559,
+      "cantidadCasas": 25,
+      "semilla": "1772-U1772-0078",
+      "estado": "integrada",
+      "anteriores": 39,
+      "nuevas": 25
+    },
+    {
+      "id": "U1772-0079",
+      "poligono": [
+        [
+          8751.8612317718,
+          7441.918967334156
+        ],
+        [
+          8802.681622375501,
+          7189.154393015751
+        ],
+        [
+          8983.849689171724,
+          7228.432531978833
+        ],
+        [
+          8937.703497196582,
+          7479.895838973818
+        ]
+      ],
+      "distancia": 252.83568216347862,
+      "cantidadCasas": 29,
+      "semilla": "1772-U1772-0079",
+      "estado": "integrada",
+      "anteriores": 38,
+      "nuevas": 29
+    },
+    {
+      "id": "U1772-0080",
+      "poligono": [
+        [
+          8804.926122095583,
+          7177.362223783477
+        ],
+        [
+          8850.839271284112,
+          6921.013807480852
+        ],
+        [
+          9035.975429644513,
+          6955.785573264277
+        ],
+        [
+          8986.062450112862,
+          7216.633481621249
+        ]
+      ],
+      "distancia": 116.91835914506576,
+      "cantidadCasas": 14,
+      "semilla": "1772-U1772-0080",
+      "estado": "integrada",
+      "anteriores": 38,
+      "nuevas": 14
+    },
+    {
+      "id": "U1772-0082",
+      "poligono": [
+        [
+          8946.8265821726,
+          6453.097588955826
+        ],
+        [
+          8999.181532742408,
+          6197.055129964793
+        ],
+        [
+          9182.34836472734,
+          6233.6884963617795
+        ],
+        [
+          9128.442227705784,
+          6483.147747472174
+        ]
+      ],
+      "distancia": 253.21741873120274,
+      "cantidadCasas": 28,
+      "semilla": "1772-U1772-0082",
+      "estado": "integrada",
+      "anteriores": 38,
+      "nuevas": 28
+    },
+    {
+      "id": "U1772-0083",
+      "poligono": [
+        [
+          9001.860408917586,
+          6185.353258367205
+        ],
+        [
+          9075.162075249827,
+          5894.822533921295
+        ],
+        [
+          9237.46575152932,
+          5979.2091940319515
+        ],
+        [
+          9184.88608309245,
+          6221.958393202179
+        ]
+      ],
+      "distancia": 392.23137126755785,
+      "cantidadCasas": 26,
+      "semilla": "1772-U1772-0083",
+      "estado": "integrada",
+      "anteriores": 39,
+      "nuevas": 26
+    },
+    {
+      "id": "U1772-0089",
+      "poligono": [
+        [
+          8688.019004875465,
+          8916.694935030617
+        ],
+        [
+          8737.761695719095,
+          8654.589217893033
+        ],
+        [
+          8989.578013516099,
+          8705.7170091725
+        ],
+        [
+          8944.139212596021,
+          8964.00071966557
+        ]
+      ],
+      "distancia": 987.711478097801,
+      "cantidadCasas": 13,
+      "semilla": "1772-U1772-0089",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 13
+    },
+    {
+      "id": "U1772-0090",
+      "poligono": [
+        [
+          8739.939670016995,
+          8642.786581222264
+        ],
+        [
+          8785.838122946114,
+          8386.520219034683
+        ],
+        [
+          9036.092186949652,
+          8433.801044104053
+        ],
+        [
+          8991.628701515514,
+          8693.88852879407
+        ]
+      ],
+      "distancia": 851.0609646908209,
+      "cantidadCasas": 18,
+      "semilla": "1772-U1772-0090",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 18
+    },
+    {
+      "id": "U1772-0091",
+      "poligono": [
+        [
+          8904.837383072736,
+          7749.472276745369
+        ],
+        [
+          8947.387340388348,
+          7494.172532851701
+        ],
+        [
+          9199.536858059182,
+          7547.754305356754
+        ],
+        [
+          9151.251215770379,
+          7808.6880039827865
+        ]
+      ],
+      "distancia": 407.6062309145796,
+      "cantidadCasas": 24,
+      "semilla": "1772-U1772-0091",
+      "estado": "integrada",
+      "anteriores": 42,
+      "nuevas": 24
+    },
+    {
+      "id": "U1772-0095",
+      "poligono": [
+        [
+          9094.898190673031,
+          6749.251112882962
+        ],
+        [
+          9137.990510977399,
+          6497.00338427203
+        ],
+        [
+          9390.107174768706,
+          6543.511268842623
+        ],
+        [
+          9342.906597912031,
+          6798.432602959237
+        ]
+      ],
+      "distancia": 166.97643752288766,
+      "cantidadCasas": 15,
+      "semilla": "1772-U1772-0095",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 15
+    },
+    {
+      "id": "U1772-0096",
+      "poligono": [
+        [
+          9140.27106052817,
+          6485.22161016858
+        ],
+        [
+          9194.161138639985,
+          6235.8366742255985
+        ],
+        [
+          9444.374717359902,
+          6276.520256109066
+        ],
+        [
+          9392.396179615049,
+          6531.731054484985
+        ]
+      ],
+      "distancia": 280.14082496119437,
+      "cantidadCasas": 26,
+      "semilla": "1772-U1772-0096",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 26
+    },
+    {
+      "id": "U1772-0106",
+      "poligono": [
+        [
+          9162.943214720239,
+          7811.453380554055
+        ],
+        [
+          9211.279796848454,
+          7550.244405053267
+        ],
+        [
+          9467.968780111996,
+          7604.566067681319
+        ],
+        [
+          9420.207252002823,
+          7871.226623417109
+        ]
+      ],
+      "distancia": 468.57098984570496,
+      "cantidadCasas": 23,
+      "semilla": "1772-U1772-0106",
+      "estado": "integrada",
+      "anteriores": 46,
+      "nuevas": 23
+    },
+    {
+      "id": "U1772-0109",
+      "poligono": [
+        [
+          9354.705047158075,
+          6800.622722856474
+        ],
+        [
+          9401.89875719513,
+          6545.738475125983
+        ],
+        [
+          9654.41159648648,
+          6594.541070011718
+        ],
+        [
+          9603.682821520772,
+          6843.694827282088
+        ]
+      ],
+      "distancia": 277.1007622034131,
+      "cantidadCasas": 27,
+      "semilla": "1772-U1772-0109",
+      "estado": "integrada",
+      "anteriores": 43,
+      "nuevas": 27
+    },
+    {
+      "id": "U1772-0110",
+      "poligono": [
+        [
+          9404.188773419575,
+          6533.959001479203
+        ],
+        [
+          9456.132339829239,
+          6278.919909787643
+        ],
+        [
+          9704.019190944782,
+          6339.96025578488
+        ],
+        [
+          9656.755404201867,
+          6582.771992526764
+        ]
+      ],
+      "distancia": 356.6369111275655,
+      "cantidadCasas": 28,
+      "semilla": "1772-U1772-0110",
+      "estado": "integrada",
+      "anteriores": 43,
+      "nuevas": 28
+    },
+    {
+      "id": "U1772-0120",
+      "poligono": [
+        [
+          9431.88945412806,
+          7874.067117503452
+        ],
+        [
+          9479.707422101656,
+          7607.091448616803
+        ],
+        [
+          9726.683643864499,
+          7661.034252060383
+        ],
+        [
+          9637.584483415014,
+          7926.607233529173
+        ]
+      ],
+      "distancia": 552.8280365972082,
+      "cantidadCasas": 21,
+      "semilla": "1772-U1772-0120",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 21
+    },
+    {
+      "id": "U1772-0121",
+      "poligono": [
+        [
+          9481.684980646874,
+          7595.240482183819
+        ],
+        [
+          9519.967580031549,
+          7345.687577466761
+        ],
+        [
+          9778.96674719017,
+          7400.641275295619
+        ],
+        [
+          9729.800482941515,
+          7649.43211924124
+        ]
+      ],
+      "distancia": 466.03833708389527,
+      "cantidadCasas": 23,
+      "semilla": "1772-U1772-0121",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 23
+    },
+    {
+      "id": "U1772-0122",
+      "poligono": [
+        [
+          9521.847084255769,
+          7333.8192239964155
+        ],
+        [
+          9563.88738628928,
+          7077.277835451014
+        ],
+        [
+          9831.665470051801,
+          7138.741378452636
+        ],
+        [
+          9781.314447954555,
+          7388.872262419591
+        ]
+      ],
+      "distancia": 404.8681361784699,
+      "cantidadCasas": 25,
+      "semilla": "1772-U1772-0122",
+      "estado": "integrada",
+      "anteriores": 46,
+      "nuevas": 25
+    },
+    {
+      "id": "U1772-0123",
+      "poligono": [
+        [
+          9566.165952707404,
+          7065.488787228954
+        ],
+        [
+          9612.985469129535,
+          6857.549477451306
+        ],
+        [
+          9874.029090603946,
+          6905.812861612386
+        ],
+        [
+          9833.91783367975,
+          7126.946315861148
+        ]
+      ],
+      "distancia": 384.17426650869913,
+      "cantidadCasas": 24,
+      "semilla": "1772-U1772-0123",
+      "estado": "integrada",
+      "anteriores": 42,
+      "nuevas": 24
+    },
+    {
+      "id": "U1772-0124",
+      "poligono": [
+        [
+          9615.498227861173,
+          6845.810677825039
+        ],
+        [
+          9666.208781361265,
+          6596.74641506
+        ],
+        [
+          9964.946037631124,
+          6650.643794842877
+        ],
+        [
+          9877.084048845887,
+          6894.17430723674
+        ]
+      ],
+      "distancia": 408.97119869332823,
+      "cantidadCasas": 26,
+      "semilla": "1772-U1772-0124",
+      "estado": "integrada",
+      "anteriores": 45,
+      "nuevas": 26
+    },
+    {
+      "id": "U1772-0137",
+      "poligono": [
+        [
+          9649.24943139987,
+          7929.565226829042
+        ],
+        [
+          9738.452624351487,
+          7663.68216138616
+        ],
+        [
+          9989.267746882297,
+          7722.14499086411
+        ],
+        [
+          9937.952595856405,
+          8002.316123848467
+        ]
+      ],
+      "distancia": 656.0218754493493,
+      "cantidadCasas": 22,
+      "semilla": "1772-U1772-0137",
+      "estado": "integrada",
+      "anteriores": 49,
+      "nuevas": 22
+    },
+    {
+      "id": "U1772-0138",
+      "poligono": [
+        [
+          9741.51061534135,
+          7652.073274690505
+        ],
+        [
+          9790.663424791803,
+          7403.350514636378
+        ],
+        [
+          10031.197332717553,
+          7463.483991617815
+        ],
+        [
+          9991.30248161015,
+          7710.29759200956
+        ]
+      ],
+      "distancia": 583.7848516809242,
+      "cantidadCasas": 21,
+      "semilla": "1772-U1772-0138",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 21
+    },
+    {
+      "id": "U1772-0139",
+      "poligono": [
+        [
+          9793.012422204527,
+          7391.568447112705
+        ],
+        [
+          9843.34359833235,
+          7141.536152800296
+        ],
+        [
+          10090.730891260931,
+          7203.0012055186635
+        ],
+        [
+          10033.523403850664,
+          7451.696192524239
+        ]
+      ],
+      "distancia": 537.2174782236983,
+      "cantidadCasas": 24,
+      "semilla": "1772-U1772-0139",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 24
+    },
+    {
+      "id": "U1772-0140",
+      "poligono": [
+        [
+          9845.608006559905,
+          7129.733921872007
+        ],
+        [
+          9885.864868151837,
+          6907.797748745794
+        ],
+        [
+          10163.049451965939,
+          6949.418492259475
+        ],
+        [
+          10093.726930874662,
+          7191.380753376137
+        ]
+      ],
+      "distancia": 524.6003051031191,
+      "cantidadCasas": 25,
+      "semilla": "1772-U1772-0140",
+      "estado": "integrada",
+      "anteriores": 43,
+      "nuevas": 25
+    },
+    {
+      "id": "U1772-0174",
+      "poligono": [
+        [
+          10690.734400014879,
+          7312.915400368829
+        ],
+        [
+          10739.821608355327,
+          7067.192857450593
+        ],
+        [
+          11034.364492850185,
+          7122.5711522264555
+        ],
+        [
+          10989.276123653233,
+          7379.183199204791
+        ]
+      ],
+      "distancia": 966.6778765276665,
+      "cantidadCasas": 16,
+      "semilla": "1772-U1772-0174",
+      "estado": "integrada",
+      "anteriores": 49,
+      "nuevas": 16
+    },
+    {
+      "id": "U1772-0198",
+      "poligono": [
+        [
+          8324.130735430082,
+          6805.851719541949
+        ],
+        [
+          8362.841754457562,
+          6624.981060250939
+        ],
+        [
+          8618.779561003366,
+          6673.244164173878
+        ],
+        [
+          8577.044279323822,
+          6858.326978649153
+        ]
+      ],
+      "distancia": 253.56928533842716,
+      "cantidadCasas": 30,
+      "semilla": "1772-U1772-0198",
+      "estado": "integrada",
+      "anteriores": 38,
+      "nuevas": 30
+    },
+    {
+      "id": "U1772-0199",
+      "poligono": [
+        [
+          8365.405657207117,
+          6613.2530483714145
+        ],
+        [
+          8420.49953309762,
+          6366.1422150878325
+        ],
+        [
+          8674.638740611052,
+          6412.688207588412
+        ],
+        [
+          8621.35876988242,
+          6661.51903862572
+        ]
+      ],
+      "distancia": 276.7995766089542,
+      "cantidadCasas": 29,
+      "semilla": "1772-U1772-0199",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 29
+    },
+    {
+      "id": "U1772-0201",
+      "poligono": [
+        [
+          8194.955823551592,
+          8819.402725993506
+        ],
+        [
+          8249.885128831671,
+          8544.1810236216
+        ],
+        [
+          8504.809146364527,
+          8600.554775624743
+        ],
+        [
+          8443.549372866688,
+          8869.560917150473
+        ]
+      ],
+      "distancia": 984.7620884245841,
+      "cantidadCasas": 14,
+      "semilla": "1772-U1772-0201",
+      "estado": "integrada",
+      "anteriores": 46,
+      "nuevas": 14
+    },
+    {
+      "id": "U1772-0205",
+      "poligono": [
+        [
+          8633.14183807726,
+          6663.802494809903
+        ],
+        [
+          8686.43448448248,
+          6414.912465182657
+        ],
+        [
+          8932.468307911338,
+          6462.707325802223
+        ],
+        [
+          8875.451183382827,
+          6711.9781717308915
+        ]
+      ],
+      "distancia": 166.35823924551198,
+      "cantidadCasas": 14,
+      "semilla": "1772-U1772-0205",
+      "estado": "integrada",
+      "anteriores": 43,
+      "nuevas": 14
+    },
+    {
+      "id": "U1772-0206",
+      "poligono": [
+        [
+          8787.97497600965,
+          8374.711645081004
+        ],
+        [
+          8850.769227065526,
+          8031.275395075392
+        ],
+        [
+          9100.6428886474,
+          8089.636559917336
+        ],
+        [
+          9038.211996567014,
+          8421.989250109973
+        ]
+      ],
+      "distancia": 695.3034489177082,
+      "cantidadCasas": 20,
+      "semilla": "1772-U1772-0206",
+      "estado": "integrada",
+      "anteriores": 52,
+      "nuevas": 20
+    },
+    {
+      "id": "U1772-0207",
+      "poligono": [
+        [
+          8852.982814225248,
+          8019.46944331477
+        ],
+        [
+          8902.704094619272,
+          7761.301256653486
+        ],
+        [
+          9149.0924085746,
+          7820.51085147996
+        ],
+        [
+          9102.813014599173,
+          8077.820457240026
+        ]
+      ],
+      "distancia": 540.6503599585994,
+      "cantidadCasas": 22,
+      "semilla": "1772-U1772-0207",
+      "estado": "integrada",
+      "anteriores": 44,
+      "nuevas": 22
+    }
+  ],
+  "casasSustituidas": 1672,
+  "casasNuevas": 867,
+  "omitidas": [
+    {
+      "id": "U1772-0001",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0002",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0003",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0004",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0005",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0006",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0007",
+      "motivo": "aprobada/terreno_libre"
+    },
+    {
+      "id": "U1772-0008",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0009",
+      "motivo": "aprobada/terreno_libre"
+    },
+    {
+      "id": "U1772-0010",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0011",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0012",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0013",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0014",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0015",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0016",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0017",
+      "motivo": "aprobada/terreno_libre"
+    },
+    {
+      "id": "U1772-0018",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0019",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0020",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0021",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0022",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0023",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0024",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0025",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0026",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0027",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0028",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0029",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0030",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0031",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0032",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0033",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0034",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0035",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0036",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0037",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0038",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0039",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0040",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0041",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0042",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0043",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0044",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0045",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0046",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0047",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0048",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0049",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0050",
+      "motivo": "aprobada/conjunto_especial"
+    },
+    {
+      "id": "U1772-0051",
+      "motivo": "aprobada/conjunto_especial"
+    },
+    {
+      "id": "U1772-0052",
+      "motivo": "aprobada/conjunto_especial"
+    },
+    {
+      "id": "U1772-0055",
+      "motivo": "aprobada/conjunto_especial"
+    },
+    {
+      "id": "U1772-0058",
+      "motivo": "pendiente/conjunto_especial"
+    },
+    {
+      "id": "U1772-0059",
+      "motivo": "pendiente/conjunto_especial"
+    },
+    {
+      "id": "U1772-0060",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0061",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0062",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0063",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0067",
+      "motivo": "aprobada/conjunto_especial"
+    },
+    {
+      "id": "U1772-0069",
+      "motivo": "aprobada/conjunto_especial"
+    },
+    {
+      "id": "U1772-0070",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0071",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0072",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0073",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0074",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0075",
+      "motivo": "aprobada/terreno_libre"
+    },
+    {
+      "id": "U1772-0077",
+      "motivo": "aprobada/conjunto_especial"
+    },
+    {
+      "id": "U1772-0081",
+      "motivo": "aprobada/conjunto_especial"
+    },
+    {
+      "id": "U1772-0084",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0085",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0086",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0087",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0088",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0092",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0093",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0094",
+      "motivo": "aprobada/conjunto_especial"
+    },
+    {
+      "id": "U1772-0097",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0098",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0099",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0100",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0101",
+      "motivo": "aprobada/terreno_libre"
+    },
+    {
+      "id": "U1772-0102",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0103",
+      "motivo": "pendiente/conjunto_especial"
+    },
+    {
+      "id": "U1772-0104",
+      "motivo": "aprobada/conjunto_especial"
+    },
+    {
+      "id": "U1772-0105",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0107",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0108",
+      "motivo": "pendiente/conjunto_especial"
+    },
+    {
+      "id": "U1772-0111",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0112",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0113",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0114",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0115",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0116",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0117",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0118",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0119",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0125",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0126",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0127",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0128",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0129",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0130",
+      "motivo": "aprobada/terreno_libre"
+    },
+    {
+      "id": "U1772-0131",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0132",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0133",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0134",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0135",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0136",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0141",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0142",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0143",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0144",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0145",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0146",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0147",
+      "motivo": "aprobada/terreno_libre"
+    },
+    {
+      "id": "U1772-0148",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0149",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0150",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0151",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0152",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0153",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0154",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0155",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0156",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0157",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0158",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0159",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0160",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0161",
+      "motivo": "aprobada/terreno_libre"
+    },
+    {
+      "id": "U1772-0162",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0163",
+      "motivo": "pendiente/conjunto_especial"
+    },
+    {
+      "id": "U1772-0164",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0165",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0166",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0167",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0168",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0169",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0170",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0171",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0172",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0173",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0175",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0176",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0177",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0178",
+      "motivo": "aprobada/terreno_libre"
+    },
+    {
+      "id": "U1772-0179",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0180",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0181",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0182",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0183",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0184",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0185",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0186",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0187",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0188",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0189",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0190",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0191",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0192",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0193",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0194",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0195",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0196",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0197",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0200",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0202",
+      "motivo": "conjunto histórico: conserva su implantación"
+    },
+    {
+      "id": "U1772-0203",
+      "motivo": "conjunto histórico: conserva su implantación"
+    },
+    {
+      "id": "U1772-0204",
+      "motivo": "conjunto histórico: conserva su implantación"
+    },
+    {
+      "id": "U1772-0208",
+      "motivo": "pendiente/conjunto_especial"
+    },
+    {
+      "id": "U1772-0209",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0210",
+      "motivo": "aprobada/conjunto_especial"
+    },
+    {
+      "id": "U1772-0211",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0212",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0213",
+      "motivo": "aprobada/parcial"
+    },
+    {
+      "id": "U1772-0214",
+      "motivo": "pendiente/conjunto_especial"
+    },
+    {
+      "id": "U1772-0215",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0216",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0217",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0218",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0219",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0220",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0221",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0222",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0223",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0224",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0225",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0226",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0227",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0228",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0229",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0230",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0231",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0232",
+      "motivo": "pendiente/conjunto_especial"
+    },
+    {
+      "id": "U1772-0233",
+      "motivo": "aprobada/plaza"
+    },
+    {
+      "id": "U1772-0234",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0235",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0236",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0237",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0238",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0239",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0240",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0241",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0242",
+      "motivo": "aprobada/terreno_libre"
+    },
+    {
+      "id": "U1772-0243",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0244",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0245",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0246",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0247",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0248",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0249",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0250",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0251",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0252",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0253",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0254",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0255",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0256",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0257",
+      "motivo": "pendiente/parte_de_otra_unidad"
+    },
+    {
+      "id": "U1772-0258",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0259",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0260",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0261",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0262",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0263",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0264",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0265",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0266",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0267",
+      "motivo": "pendiente/conjunto_especial"
+    },
+    {
+      "id": "U1772-0268",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0269",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0270",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0271",
+      "motivo": "pendiente/descartada_no_edificacion"
+    },
+    {
+      "id": "U1772-0272",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0273",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0274",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0275",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0276",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0277",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0278",
+      "motivo": "pendiente/aislada"
+    },
+    {
+      "id": "U1772-0279",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0280",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0281",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0282",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0283",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0284",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0285",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0286",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0287",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0288",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0289",
+      "motivo": "pendiente/terreno_libre"
+    },
+    {
+      "id": "U1772-0290",
+      "motivo": "pendiente/parcial"
+    },
+    {
+      "id": "U1772-0291",
+      "motivo": "pendiente/continua"
+    },
+    {
+      "id": "U1772-0292",
+      "motivo": "pendiente/terreno_libre"
+    }
+  ]
+}
