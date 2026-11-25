@@ -180,6 +180,7 @@ export function crearAcabado({ renderer, scene, camera, U, ajustes, limite, vist
 
   return {
     dibujar,
+    invalidarSombras() { if (sombras) sombras.estado = null },
     ajustes,
     /** Para las pruebas y las capturas: qué está prendido y cuántas veces se rehízo el mapa de sombras. */
     get estado() {

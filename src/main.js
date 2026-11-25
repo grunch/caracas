@@ -244,6 +244,10 @@ const primerasCasasPedidas = new Promise((ok) => { primerasCasas = ok })
 // ?sintrabajador las levanta en este hilo (para comparar, o si los workers dan problemas)
 const crearTrabajador = sinTrabajadores ? null
   : () => new Worker(new URL('./ciudad-trabajador.js', import.meta.url), { type: 'module' })
+const detalleColonial = params.get('detallecasas') === '1' && !minimo
+  ? (await import('./detalle-colonial.js')).crearDetalleColonial({coords,U:ciudad.U,liviano:liviano||porSoftware}) : null
+if(detalleColonial)scene.add(detalleColonial.grupo)
+
 const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array, paletas: Uint8Array }, pedirDato).then((datos) => {
   // donde hay un hito modelado a mano, la casa genérica de ese lugar no nace (src/hitos/suprimir.js)
   datosCiudad = { ...datos, vida: suprimirTechos(datos, zonasDeSupresion(HITOS)) }
@@ -252,6 +256,7 @@ const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, tec
     // primero lo que se ve en la época con que abre el sitio; el resto, después
     primera: PRIMERA_EPOCA, cuantos: cuantosTrabajadores({ nucleos: navigator.hardwareConcurrency, liviano, software: porSoftware, minimo }),
     alLlegar(baldosa) {
+      detalleColonial?.agregar(baldosa.paquete)
       casas.agregar(baldosa)
       olaMax = Math.max(olaMax, casas.alcance + 400)
       pedirCuadro(3)
@@ -260,6 +265,7 @@ const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, tec
   })
 }).then(() => {
   casasListas = true
+  detalleColonial?.finalizar()
   pedirCuadro(3)
 }).catch((e) => console.warn(`ciudad: ${e.message}`)).finally(() => primerasCasas()) // con casas o sin ellas, la entrada sigue
 casasPedidas.then(() => {
@@ -657,6 +663,7 @@ renderer.setAnimationLoop((t) => {
   // época a otra, lo de las dos (src/casas.js)
   const epocaA = ciudad.U.uEpocaA.value
   if (casas.ponerEpocas(uOlaEpoca.value < OLA_EPOCA_MAX_M ? ciudad.U.uEpocaDe.value : epocaA, epocaA)) pedirCuadro(2)
+  if(detalleColonial?.actualizar(camera,[uOlaEpoca.value < OLA_EPOCA_MAX_M ? ciudad.U.uEpocaDe.value : epocaA,epocaA],sueloEn)){acabado.invalidarSombras();pedirCuadro(2)}
   if (uColor.value !== colorObjetivo) {
     uColor.value = acercar(uColor.value, colorObjetivo, dt / DURACION_COLOR_S)
     pedirCuadro(2)
@@ -731,13 +738,14 @@ if (params.has('hoy')) alternarHoy(true)
 document.body.classList.add('listo')
 listo = true
 if (crecerPedido) verCrecer()
-if (debeArrancar(params)) arrancar()
+if (debeArrancar(params) && !(detalleColonial && params.has('verbalcones'))) arrancar()
 // la página que embebe la vitrina espera este aviso para mandar sus órdenes
 if (params.has('vitrina') && window.parent !== window) window.parent.postMessage({ vitrina: 'lista' }, location.origin)
 window.lab = {
   renderer, scene, camera, cam, cielo, aPie, enAvion, enCoche, marcasDelMapa, coords, meta, pedirCuadro, ciudad, levantar, alternarColor, alternarHoy, alternarMarcas, marcas, fichas, relieveU, sueloEn, acabado, ready: false,
   get relieve() { return relieve },
   get casasListas() { return casasListas },
+  detalleColonial,
   casas,
   get teselas() { return teselas },
   get arboles() { return arboles },
@@ -752,6 +760,10 @@ window.lab = {
 window.lab.buscador = buscador
 // «listo» para quien espera a window.lab (los tests, las capturas): con los hitos ya en la escena, o descartados
 hitosPedidos.then(() => { window.lab.ready = true })
+if(detalleColonial && params.has('verbalcones'))Promise.all([casasPedidas,hitosPedidos]).then(()=>{
+  if(!detalleColonial.vista)return
+  levantar(true);alternarColor(true);cam.jump(detalleColonial.vista);pedirCuadro(3)
+})
 // la segunda visita no baja ni revalida lo que no cambió (src/sw.js); no frena nada del arranque
 window.lab.servicio = registrarServiceWorker({ contenedor: navigator.serviceWorker, construido: import.meta.env.PROD, params })
 // cuando ya llegó la ciudad, el service worker guarda lo que esta visita bajó antes de que él existiera
