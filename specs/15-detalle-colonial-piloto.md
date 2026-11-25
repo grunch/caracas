@@ -1,5 +1,7 @@
 # T82.3 · Prueba de detalle colonial por distancia
 
+La prueba inicial de 1772 se conserva; la sección «Extensión a 1843» documenta la segunda época.
+
 ## Alcance
 
 Prueba solicitada por el responsable para acercar el acabado de Caracas al estudio de Miraflores sin cargar toda la ciudad con el máximo detalle. Solo afecta, al activar `?detallecasas=1`, las casas nuevas de 1772 de U1772-0080, U1772-0095 y U1772-0205. El sitio normal conserva su representación actual. No se regeneran paquetes ni se amplía la prueba a las 253 unidades.
@@ -92,3 +94,61 @@ la capa. El modo mínimo no carga el módulo. Las otras épocas no dibujan este 
 Capturas locales de 1843: `../miraflores/entregables/detalle-colonial-1843/`.
 La comparación automatizada usa la cámara guardada en `reglas/detalle-colonial/1843/vistas.json`.
 La revisión de una persona y la medición en teléfonos siguen pendientes.
+
+### Validación de 1843
+
+La comparación de producción con la base del piloto usa la misma cámara, 1280 × 900, color, relieve y
+GPU. **1772, 1889, 1911 y 1936 son idénticos píxel por píxel**. En 1843 cambia el 1,04 % de los canales
+RGB de la captura, localizado en los balcones y cornisas. Sin errores de página ni compilación.
+El primer intento de 1772 aún interpolaba el color; se repitió con `uColor=1` antes de comparar.
+El índice 1578 no está disponible en la interfaz; su exclusión se verifica en la prueba unitaria del
+controlador. Resultados en `reglas/detalle-colonial/1843/comparacion.json` y capturas `main-2.png` /
+`rama-2.png` en la carpeta local indicada arriba.
+
+Vitest: **107 archivos, 1.723 tests aprobados** con `--maxWorkers=2 --testTimeout=20000`.
+Se limitó la concurrencia tras interrumpir una corrida por defecto con timeouts mientras otro proceso
+regeneraba el mosaico; no se cambiaron tests ajenos ni sus umbrales en el repositorio.
+Python: **1.001 tests aprobados**. Build: JS inicial **309,7 / 330 KB**, workers **139,7 / 150 KB**,
+service worker **1,3 / 3 KB**. Los datos de parcelación, techos, árboles e hitos no se regeneran con este
+cambio: las mediciones de reglas sobre esos datos permanecen aplicables; los vuelos de detalle conservan
+el límite de modelado ya documentado para el piloto.
+
+Playwright completo (GPU, 2 workers): **88 aprobados, 1 omitido y 2 fallidos (9,6 min)**.
+Las dos pruebas del piloto pasan, incluida la nueva vista directa de 1843 y su ida y vuelta por
+1889, 1911 y 1936. Persisten los dos resultados de `hitos.spec.js` documentados en la base #212:
+`:96` pasa aunque está marcado como fallo esperado y `:117` falla al comparar el color de la ciudad
+acostada. No se tocaron ni se ocultaron esas pruebas.
+
+### Rendimiento de 1843
+
+RTX 2060, build de producción, misma cámara y datos, una corrida por variante. La base es el piloto
+fusionado en #212 sin la extensión de 1843. Otro proceso del equipo regeneraba datos durante las
+corridas: los tiempos no están aislados y no permiten afirmar una mejora ni extrapolar a móviles.
+
+| Medición | Base | Con 1843 |
+|---|---:|---:|
+| Casas listas | 10.000 ms | 6.718 ms |
+| Tarea larga máxima | 637 ms | 728 ms |
+| Transferencia inicial | 9.996.939 B | 9.997.306 B |
+| Heap observado antes del acercamiento | 242 MB | 215 MB |
+| Buffers de geometría vivos en JS antes del acercamiento | 144,6 MB | 165,5 MB |
+| Centro: mediana / p90 por cuadro | 16,6 / 22,5 ms | 14,2 / 23,7 ms |
+| Balcones: mediana / p90 por cuadro | 11,5 / 22,5 ms | 10,9 / 19,2 ms |
+| Balcones: llamadas de dibujo, con pases | 129 | 141 |
+| Balcones: triángulos dibujados, con pases | 4.094.176 | 4.101.688 |
+
+La diferencia geométrica es **7.512 triángulos dibujados (+0,18 %)** y doce llamadas con sombras.
+Las seis mallas contienen 3.756 triángulos y crear sus buffers costó 15,3 ms acumulados la primera vez.
+Desde lejos, llamadas y triángulos no cambian. La transferencia crece 367 B en esta comparación.
+La tarea larga aumenta 91 ms y los buffers retenidos en JS 20,9 MB; el heap baja 27 MB. Se registran
+sin atribuir estos cambios de carga/retención al piloto: dependen también de la concurrencia externa,
+la entrega de baldosas, el envío a GPU y la recolección de memoria. El detalle aún no se había construido
+al tomar esa muestra de memoria. La ciudad sigue excediendo los presupuestos previos de carga, tareas
+largas, bytes y triángulos; no se declara resuelto su rendimiento global.
+
+Informes completos: `reglas/detalle-colonial/1843/rendimiento-{base,piloto}.json`.
+
+```sh
+node tests/e2e/medir-rendimiento.mjs http://localhost:5186/ --gpu --detalle-casas --epoca 1843 --vistas specs/reglas/detalle-colonial/1843/vistas.json --salida /tmp/base1843.json
+node tests/e2e/medir-rendimiento.mjs http://localhost:5183/ --gpu --detalle-casas --epoca 1843 --vistas specs/reglas/detalle-colonial/1843/vistas.json --salida /tmp/piloto1843.json
+```

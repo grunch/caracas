@@ -1,0 +1,242 @@
+{
+  "url": "http://localhost:5186/",
+  "gpu": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 2060/PCIe/SSE2, OpenGL ES 3.2)",
+  "conGpu": true,
+  "liviano": false,
+  "ventana": [
+    1280,
+    800
+  ],
+  "hitos": {
+    "lineaDeTiempo": 1397,
+    "listo": 7463,
+    "primerasCasas": 7463,
+    "casas": 10000,
+    "arboles": 10001
+  },
+  "tareas": {
+    "cuantas": 15,
+    "sumaMs": 2463,
+    "mayorMs": 637
+  },
+  "pedidos": {
+    "cuantos": 22,
+    "bytes": 9996939,
+    "mayores": [
+      {
+        "url": "datos/ciudad.pak",
+        "bytes": 4349365
+      },
+      {
+        "url": "datos/relieve.bin",
+        "bytes": 1376690
+      },
+      {
+        "url": "plano/suelo-2k.webp",
+        "bytes": 1357588
+      },
+      {
+        "url": "plano/crece.png",
+        "bytes": 899872
+      },
+      {
+        "url": "plano/chico.webp",
+        "bytes": 676404
+      },
+      {
+        "url": "plano/calles-1772.png",
+        "bytes": 404517
+      },
+      {
+        "url": "datos/arboles.bin",
+        "bytes": 328852
+      },
+      {
+        "url": "assets/main-ZIB4UTYm.js",
+        "bytes": 172709
+      }
+    ]
+  },
+  "segundaVisita": {
+    "pagina": {
+      "cuantos": 22,
+      "bytes": 0,
+      "mayores": [
+        {
+          "url": "?sinintro&detallecasas=1",
+          "bytes": 0
+        },
+        {
+          "url": "assets/main-ZIB4UTYm.js",
+          "bytes": 0
+        },
+        {
+          "url": "assets/fichas-datos-B3Ff_1A5.js",
+          "bytes": 0
+        },
+        {
+          "url": "assets/hitos-B4xzQ4ix.js",
+          "bytes": 0
+        },
+        {
+          "url": "assets/main-Cw8adeuY.css",
+          "bytes": 0
+        },
+        {
+          "url": "datos/ciudad.json",
+          "bytes": 0
+        },
+        {
+          "url": "datos/crece.json",
+          "bytes": 0
+        },
+        {
+          "url": "datos/ciudad.pak",
+          "bytes": 0
+        }
+      ]
+    },
+    "servicio": {
+      "cuantos": 5,
+      "bytes": 635,
+      "mayores": [
+        {
+          "url": "datos/manifiesto.json",
+          "bytes": 127
+        },
+        {
+          "url": "?sinintro&detallecasas=1",
+          "bytes": 127
+        },
+        {
+          "url": "datos/ciudad.pak",
+          "bytes": 127
+        },
+        {
+          "url": "datos/arboles.bin",
+          "bytes": 127
+        },
+        {
+          "url": "datos/ciudad.pak",
+          "bytes": 127
+        }
+      ]
+    }
+  },
+  "memoria": {
+    "heapMB": 242,
+    "geometriaEnJsMB": 144.6,
+    "vertices": 5801586,
+    "mallas": 593,
+    "geometrias": 268,
+    "texturas": 14
+  },
+  "cuadro": {
+    "centro": {
+      "llamadas": 222,
+      "triangulos": 4659055,
+      "medianaMs": 16.6,
+      "p90Ms": 22.5
+    },
+    "valle": {
+      "llamadas": 330,
+      "triangulos": 3187623,
+      "medianaMs": 12.7,
+      "p90Ms": 21.8
+    },
+    "cerca": {
+      "llamadas": 160,
+      "triangulos": 4456868,
+      "medianaMs": 22.5,
+      "p90Ms": 31.7
+    },
+    "balcones": {
+      "llamadas": 129,
+      "triangulos": 4094176,
+      "medianaMs": 11.5,
+      "p90Ms": 22.5
+    }
+  },
+  "detalleCasas": {
+    "creacionMs": 0,
+    "liviano": false,
+    "unidades": [
+      {
+        "id": "U1772-0080",
+        "centro": [
+          -24.374750000000404,
+          114.34937500000001
+        ],
+        "radio": 81.5758891390594,
+        "nivel": 0,
+        "frentes": 12,
+        "balcones": 18,
+        "triangulos": 0
+      },
+      {
+        "id": "U1772-0095",
+        "centro": [
+          136.63787499999944,
+          -95.97524999999996
+        ],
+        "radio": 91.13595015800918,
+        "nivel": 0,
+        "frentes": 13,
+        "balcones": 43,
+        "triangulos": 0
+      },
+      {
+        "id": "U1772-0205",
+        "centro": [
+          -93.16312500000049,
+          -137.82512499999996
+        ],
+        "radio": 90.56432970632706,
+        "nivel": 0,
+        "frentes": 12,
+        "balcones": 25,
+        "triangulos": 0
+      }
+    ],
+    "mallas": 0
+  },
+  "año": 1843,
+  "presupuesto": [
+    {
+      "clave": "casasMs",
+      "valor": 10000,
+      "tope": 5000,
+      "pasa": false
+    },
+    {
+      "clave": "tareaMasLargaMs",
+      "valor": 637,
+      "tope": 200,
+      "pasa": false
+    },
+    {
+      "clave": "bytesAlAbrir",
+      "valor": 9996939,
+      "tope": 8000000,
+      "pasa": false
+    },
+    {
+      "clave": "heapMB",
+      "valor": 242,
+      "tope": 250,
+      "pasa": true
+    },
+    {
+      "clave": "triangulosCentro",
+      "valor": 4659055,
+      "tope": 2000000,
+      "pasa": false
+    },
+    {
+      "clave": "msPorCuadroCentro",
+      "valor": 16.6,
+      "tope": 16.6,
+      "pasa": true
+    }
+  ]
+}
