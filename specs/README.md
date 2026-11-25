@@ -20,7 +20,7 @@ Se toma **un plano topográfico antiguo escaneado en altísima resolución** (do
 | [06-adaptacion-caracas.md](06-adaptacion-caracas.md) | Qué cambia para Caracas, fuentes a buscar, plan por fases, riesgos |
 | [07-plan-de-implementacion.md](07-plan-de-implementacion.md) | **Plan vivo**: tareas (un PR cada una), dependencias, criterios y estado |
 
-Plan de corrección de la reconstrucción: [auditoría integral de 1772](08-auditoria-y-correccion-1772.md) y [de 1843](11-auditoria-y-correccion-1843.md) (T81). Para la próxima época: [metodología de auditoría por época](12-metodologia-auditoria-de-epoca.md).
+Plan de corrección de la reconstrucción: [auditoría integral de 1772](08-auditoria-y-correccion-1772.md) y [de 1843](11-auditoria-y-correccion-1843.md) (T81). Para la próxima época: [metodología de auditoría por época](12-metodologia-auditoria-de-epoca.md). Lo que toda época tiene que cumplir y cómo se trabaja al arreglar algo: [reglas de construcción](13-reglas-de-construccion.md) (T82).
 | [08-panteon-por-epocas.md](08-panteon-por-epocas.md) | Trinidad y Panteón: variantes históricas, adaptación al mapa, fuentes y límites (T40a) |
 | [09-estandar-de-calidad.md](09-estandar-de-calidad.md) | El estándar de calidad de las contribuciones: qué prueba un PR y el bot de triaje que lo revisa (T75) |
 
