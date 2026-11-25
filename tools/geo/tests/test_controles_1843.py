@@ -35,7 +35,7 @@ def test_main_escribe_el_informe_con_anclas_omitidas_y_hashes(tmp_path):
     informe = json.loads(salida.read_text())
     assert informe['anclas'] == 5
     assert [o['motivo'] for o in informe['omitidas']] == ['sin_nombre']
-    assert informe['calce_vigente']['mediana_desvio_m'] == 5.0
+    assert informe['calce_medido']['mediana_desvio_m'] == 5.0
     assert set(informe['entradas']) == set(archivos) and all(len(e['sha256']) == 64 for e in informe['entradas'].values())
 
 

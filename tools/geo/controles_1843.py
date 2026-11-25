@@ -57,20 +57,25 @@ def main(argv=None):
     (esquinas, _), (leyenda, _), (dic, _), (calce, _), (sectores, _) = entradas.values()
     anclas, omitidas = emparejar(esquinas['esquinas'], nombres_de(leyenda), dic)
     informe = medir(anclas, calce['gcps'], sectores['sectores'], METRO_1936, calce.get('suavizado', 0.0))
+    metodo_calce = 'identidad (sin correlación)' if calce.get('etapas') == [] else 'correlación de calles'
     doc = {'alcance': 'Calce de 1843 por identidad (T81, 1A): una esquina ancla solo con número, cruce y nombre '
-                      'leídos con seguridad y un nombre único en el diccionario de 1936. El desvío mide cuánto se '
-                      'aparta el calce vigente (por correlación) de cada ancla; el LOO, cuánto se aparta el calce '
-                      'que solo usa las anclas al quitar cada una.',
+                      'leídos con seguridad y un nombre único en el diccionario de 1936. `calce_medido` es el calce '
+                      'del archivo --gcp al medir (ver `metodo_calce`): su desvío de cada ancla. El LOO (`metodo_loo`) '
+                      'es el del calce desplegado si las anclas son sus GCP, o el de un calce solo con las anclas.',
+           'metodo_calce': metodo_calce,
            'entradas': {k: {'archivo': _relativa(getattr(a, k)), 'sha256': sha} for k, (_, sha) in entradas.items()},
            'metro': METRO_1936, **informe, 'omitidas': omitidas}
     a.salida.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
-    if a.escribir_config:
+    if a.escribir_config and not informe.get('sin_medicion'):
         en_calce = [d for d in informe['detalle'] if d['en_calce']]
         nuevo, junto = config_por_identidad(calce, en_calce)
         a.gcp.write_text(json_legible(nuevo), encoding='utf-8')
         print(f"calce reescrito con {len(nuevo['anclas'])} anclas ({len(junto)} sobre semillas); correr calce.py")
-    print(f"{informe['anclas']} anclas, {len(omitidas)} omitidas; calce vigente: mediana "
-          f"{informe['calce_vigente']['mediana_desvio_m']} m; identidad: LOO RMS {informe['calce_identidad']['rms_loo_m']} m")
+    if informe.get('sin_medicion'):
+        print(f"{len(omitidas)} omitidas; {informe['sin_medicion']}")
+        return
+    print(f"{informe['anclas']} anclas, {len(omitidas)} omitidas; calce medido ({metodo_calce}): mediana "
+          f"{informe['calce_medido']['mediana_desvio_m']} m; LOO ({informe['metodo_loo']}) RMS {informe['calce_identidad']['rms_loo_m']} m")
 
 
 if __name__ == '__main__':

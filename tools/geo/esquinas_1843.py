@@ -120,32 +120,60 @@ def sector_de(px, py, sectores):
     return None
 
 
-def medir(anclas, gcps_vigentes, sectores, metro, suavizado=0.0):
-    """Desvío del calce vigente en cada ancla y error dejando uno fuera del calce por identidad.
+def _loo_desplegado(anclas, gcps, metro, suavizado):
+    """Error dejando uno fuera de cada ancla en el calce desplegado (todas sus GCP, semillas incluidas), si las
+    anclas son GCP de ese calce; si no (el calce aún no las usa), None."""
+    from calce import residuos_loo_rapidos
 
-    Antes del LOO se quitan las anclas que contradicen a sus vecinas (depurar_por_consistencia); el desvío
-    del calce vigente se mide en todas."""
+    if len(gcps) < 4:
+        return None
+    viejo = np.array([[g['px'], g['py']] for g in gcps], float)
+    base = np.array([[g['x36'], g['y36']] for g in gcps], float)
+    loo = residuos_loo_rapidos(viejo, base, suavizado) * metro
+    valores = []
+    for a in anclas:   # la GCP del ancla, o la semilla sobre la que cae (config_por_identidad no la repite)
+        d = np.hypot(viejo[:, 0] - a['px'], viejo[:, 1] - a['py'])
+        k = int(np.argmin(d))
+        valores.append(float(loo[k]) if d[k] < TOLERANCIA_SEMILLA_PX else None)
+    return None if any(v is None for v in valores) else dict(zip([a['id'] for a in anclas], valores))
+
+
+def medir(anclas, gcps_vigentes, sectores, metro, suavizado=0.0):
+    """Desvío del calce medido (el de `gcps_vigentes`) en cada ancla y error dejando uno fuera por sector.
+
+    Antes se quitan las anclas que contradicen a sus vecinas (depurar_por_consistencia). El LOO es el del calce
+    desplegado (sus GCP, semillas incluidas) cuando las anclas son parte de él (`metodo_loo`: «calce_desplegado»);
+    si el calce medido todavía no las usa, el de un calce que solo usa las anclas («solo_anclas»). Sin anclas
+    aceptadas no hay medición: el informe lo dice y conserva las omitidas."""
     from calce import Calce, residuos_loo_rapidos
 
-    vigente = Calce.ajustar(gcps_vigentes, metro, suavizado)
-    desvio = dict(zip([a['id'] for a in anclas], desvios_m(anclas, vigente.a_1936, metro)))
+    if not anclas:
+        return {'anclas': 0, 'en_calce': 0, 'fuera_de_sectores': 0, 'calce_medido': None, 'calce_identidad': None,
+                'metodo_loo': None, 'contradicen_a_sus_vecinas': [], 'sectores': [], 'detalle': [],
+                'sin_medicion': 'ninguna esquina ancla: no hay con qué medir el calce'}
+    medido = Calce.ajustar(gcps_vigentes, metro, suavizado)
+    desvio = dict(zip([a['id'] for a in anclas], desvios_m(anclas, medido.a_1936, metro)))
     quedan, fuera = depurar_por_consistencia(anclas, metro, suavizado=suavizado)
-    origen = np.array([[a['px'], a['py']] for a in quedan], float)
-    destino = np.array([[a['x36'], a['y36']] for a in quedan], float)
-    loo = dict(zip([a['id'] for a in quedan], residuos_loo_rapidos(origen, destino, suavizado) * metro))
+    loo = _loo_desplegado(quedan, gcps_vigentes, metro, suavizado)
+    metodo = 'calce_desplegado'
+    if loo is None:
+        metodo = 'solo_anclas'
+        origen = np.array([[a['px'], a['py']] for a in quedan], float)
+        destino = np.array([[a['x36'], a['y36']] for a in quedan], float)
+        loo = dict(zip([a['id'] for a in quedan], residuos_loo_rapidos(origen, destino, suavizado) * metro))
     detalle = [{**a, 'sector': sector_de(a['px'], a['py'], sectores), 'en_calce': a['id'] in loo,
-                'desvio_vigente_m': round(desvio[a['id']], 2),
-                'loo_identidad_m': round(float(loo[a['id']]), 2) if a['id'] in loo else None}
+                'desvio_m': round(desvio[a['id']], 2),
+                'loo_m': round(float(loo[a['id']]), 2) if a['id'] in loo else None}
                for a in anclas]
     medibles = [a for a in detalle if a['sector'] and a['en_calce']]
     filas = resumen_por_sector(medibles, [loo[a['id']] for a in medibles], [desvio[a['id']] for a in medibles])
     valores = np.array(list(loo.values()))
     return {'anclas': len(anclas), 'en_calce': len(quedan), 'fuera_de_sectores': sum(1 for a in detalle if not a['sector']),
-            'calce_vigente': {'mediana_desvio_m': round(float(np.median(list(desvio.values()))), 2),
-                              'max_desvio_m': round(float(np.max(list(desvio.values()))), 2)},
+            'calce_medido': {'mediana_desvio_m': round(float(np.median(list(desvio.values()))), 2),
+                             'max_desvio_m': round(float(np.max(list(desvio.values()))), 2)},
             'calce_identidad': {'rms_loo_m': round(float(np.sqrt(np.mean(valores ** 2))), 2),
                                 'p90_loo_m': round(float(np.percentile(valores, 90)), 2)},
-            'contradicen_a_sus_vecinas': fuera, 'sectores': filas, 'detalle': detalle}
+            'metodo_loo': metodo, 'contradicen_a_sus_vecinas': fuera, 'sectores': filas, 'detalle': detalle}
 
 
 TOLERANCIA_SEMILLA_PX = 6   # como anclas_identidad.py: un ancla a menos de esto de una semilla es el mismo cruce

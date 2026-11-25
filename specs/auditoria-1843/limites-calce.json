@@ -10,8 +10,9 @@
    "fecha": "2026-11-24",
    "decision": "por delegación del responsable",
    "anclas": 3,
-   "mediana_loo_m": 16.95,
-   "motivo": "Tres anclas en el borde suroeste de la ciudad (riberas del Guaire y quebrada); las demás esquinas numeradas del sector no tienen nombre único en 1936. La mediana supera los 15 m sin ampliar la tolerancia."
+   "mediana_loo_m": 16.88,
+   "motivo": "Tres anclas en el borde suroeste de la ciudad (riberas del Guaire y quebrada); las demás esquinas numeradas del sector no tienen nombre único en 1936. La mediana supera los 15 m sin ampliar la tolerancia.",
+   "metodo_loo": "calce_desplegado"
   }
  ],
  "sin_anclas": {

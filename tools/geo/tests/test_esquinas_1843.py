@@ -124,7 +124,7 @@ def test_medir_un_calce_vigente_corrido_contra_anclas_exactas():
     assert {f['sector'] for f in informe['sectores']} == {'S1843-11', 'S1843-12'}
     assert all(f['mediana_desvio_m'] == pytest.approx(15.0) for f in informe['sectores'])
     assert all(f['mediana_loo_m'] < 1e-6 for f in informe['sectores'])
-    assert informe['calce_vigente']['mediana_desvio_m'] == pytest.approx(15.0)
+    assert informe['calce_medido']['mediana_desvio_m'] == pytest.approx(15.0)
     assert [a['sector'] for a in informe['detalle']][:2] == ['S1843-11', 'S1843-11']
 
 
@@ -162,3 +162,20 @@ def test_depurar_quita_una_por_una_las_anclas_que_contradicen_a_sus_vecinas():
     assert sorted(f['id'] for f in fuera) == sorted([anclas[7]['id'], anclas[18]['id']])
     assert all(f['loo_m'] > 55 and f['motivo'] == 'contradice_a_sus_vecinas' for f in fuera)
     assert len(quedan) == 23 and anclas[7]['x36'] == 2200.0   # sin mutar la entrada (200 + 2000)
+
+
+def test_medir_sin_anclas_no_falla_y_lo_dice():
+    from esquinas_1843 import medir
+    informe = medir([], [{'px': 0, 'py': 0, 'x36': 0, 'y36': 0}], SECTORES, metro=0.5)
+    assert informe['anclas'] == 0 and informe['sin_medicion']
+
+
+def test_el_loo_es_el_del_calce_desplegado_cuando_las_anclas_son_sus_gcp():
+    from esquinas_1843 import medir
+    anclas = _rejilla(n=4)
+    semilla = {'px': 50.0, 'py': 50.0, 'x36': 50.0, 'y36': 50.0}
+    desplegado = [{'px': a['px'], 'py': a['py'], 'x36': a['x36'], 'y36': a['y36']} for a in anclas] + [semilla]
+    assert medir(anclas, desplegado, SECTORES, metro=0.5)['metodo_loo'] == 'calce_desplegado'
+    corrido = [{**g, 'x36': g['x36'] + 30.0} for g in desplegado]
+    corrido = [{**g, 'px': g['px'] + 1000.0} for g in corrido]   # otras GCP: las anclas no son parte de él
+    assert medir(anclas, corrido, SECTORES, metro=0.5)['metodo_loo'] == 'solo_anclas'
