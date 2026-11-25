@@ -46,7 +46,8 @@ def construir(censo, revisiones, proyectar):
                          'estado': 'aprobada' if aprobada else 'pendiente',
                          'procedencia': 'revision' if r else 'censo', 'poligono_px': poligono,
                          'poligono': _proyectar(poligono, proyectar),
-                         **({'letras': u['letras']} if u.get('letras') else {}),
+                         **({'letras': r['letras']} if r is not None and 'letras' in r else
+                            {'letras': u['letras']} if u.get('letras') else {}),
                          **({'de': u['de']} if u.get('de') else {}),
                          **({'motivo': r['motivo']} if r else {})})
     nuevas = [r for r in revisiones if r.get('decision') == 'nueva']
@@ -59,10 +60,12 @@ def construir(censo, revisiones, proyectar):
 
 
 def _figura(u):
+    """La figura de la unidad, o None si el polígono tal como está guardado no es válido (sin repararlo: la
+    máscara rasteriza las coordenadas guardadas, así que la validez tiene que ser la de ellas)."""
     if len(u['poligono']) < 3:
         return None
-    f = Polygon(u['poligono']).buffer(0)
-    return f if f.area > 0 else None
+    f = Polygon(u['poligono'])
+    return f if f.is_valid and f.area > 0 else None
 
 
 def validar(unidades):
@@ -94,13 +97,15 @@ def puerta_fase2(censo, ref, problemas):
 
 def mascara(unidades, forma, escala):
     """Lo edificado de 1843 en la grilla reducida del mosaico (`escala` px del mosaico por celda): las unidades
-    aprobadas edificables, menos los lotes especiales, plazas, huertas y terrenos libres aprobados."""
+    aprobadas edificables, menos los lotes especiales, plazas, huertas y terrenos libres aprobados. Se pintan de la
+    más grande a la más chica: manda la más chica, así un lote se vacía dentro de su manzana y un edificio
+    censado dentro de una huerta queda edificado."""
     m = np.zeros(forma, np.uint8)
-    for ocupaciones, valor in ((EDIFICABLES, 1), (LIBRES, 0)):
-        for u in unidades:
-            if u['estado'] == 'aprobada' and u['ocupacion'] in ocupaciones and len(u['poligono']) >= 3:
-                pts = np.round(np.asarray(u['poligono'], float) / escala).astype(np.int32)
-                cv2.fillPoly(m, [pts], valor)
+    pintables = [u for u in unidades if u['estado'] == 'aprobada' and u['ocupacion'] in EDIFICABLES | LIBRES
+                 and len(u['poligono']) >= 3]
+    for u in sorted(pintables, key=lambda u: -Polygon(u['poligono']).buffer(0).area):
+        pts = np.round(np.asarray(u['poligono'], float) / escala).astype(np.int32)
+        cv2.fillPoly(m, [pts], 1 if u['ocupacion'] in EDIFICABLES else 0)
     return m > 0
 
 

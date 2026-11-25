@@ -76,3 +76,22 @@ def test_puerta_fase2_pide_cada_unidad_con_referencia_validadores_limpios_y_pend
     assert r2['fase_2_cerrable'] is False
     assert r2['criterios']['unidades_con_referencia']['faltan'] == ['U4']
     assert r2['criterios']['validadores_limpios']['cumplido'] is False
+
+
+def test_un_edificio_dentro_de_una_huerta_queda_edificado():
+    unidades = [{'id': 'H', 'ocupacion': 'huerta', 'estado': 'aprobada', 'poligono': [[0, 0], [60, 0], [60, 60], [0, 60]]},
+                {'id': 'R', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': [[20, 20], [40, 20], [40, 40], [20, 40]]}]
+    m = mascara(unidades, forma=(30, 30), escala=2)
+    assert m[15, 15] and not m[2, 2]
+
+
+def test_las_letras_de_la_revision_mandan_aunque_las_quite():
+    censo = {'unidades': [{**_u('U1', [0, 0, 10, 10], lectura='dudosa'), 'letras': ['c']}]}
+    revisiones = [{'unidad': 'U1', 'decision': 'corregida', 'letras': [], 'seguridad': 'segura', 'motivo': 'la c es un puente'}]
+    u = construir(censo, revisiones, _doble)['unidades'][0]
+    assert u['letras'] == []
+
+
+def test_un_poligono_que_se_cruza_es_invalido_aunque_se_pueda_reparar():
+    moño = [{'id': 'X', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': [[0, 0], [10, 10], [0, 10], [10, 0]]}]
+    assert [p['tipo'] for p in validar(moño)] == ['geometria_invalida']
