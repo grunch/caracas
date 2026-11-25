@@ -1,0 +1,40 @@
+{
+ "alcance": "Puertas 4 y 6 de 1772 medidas antes de T81: ciudad regenerada en el checkout con el código de main f00b74d (el release datos-2026-11-24-9465608 estaba al día con ese código: npm run datos:al-dia) y el calce de 1843 de main; puertas corridas sobre una copia de specs/auditoria-1772 fuera del repo (24-11-2026). Los cierre-fase4/6.json versionados en specs/auditoria-1772 se midieron con datos anteriores (datos-2026-11-23-…).",
+ "fase_4": {
+  "cerrable": false,
+  "criterios": {
+   "edificadas_con_casas": true,
+   "libres_sin_casas": true,
+   "parciales_sin_rellenar": true,
+   "hitos_sin_dobles": true,
+   "hitos_sin_vacios_artificiales": false,
+   "unidades_medidas": true,
+   "umbrales_inferidos": null
+  },
+  "ciudad": {
+   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
+   "sha256": "a4c40062f3e762ac1763d539ce99887bfae95f17726ec779d6f97194fbef5f54",
+   "datos": "main"
+  }
+ },
+ "fase_6": {
+  "cerrable": false,
+  "criterios": {
+   "triangulos_sin_degenerar": true,
+   "techos_sin_cruces": true,
+   "cumbreras_con_el_frente": true,
+   "aleros_fuera_de_la_calle": true,
+   "mismo_trazado_que_la_fase_5": false,
+   "umbrales_inferidos": null
+  },
+  "ciudad": {
+   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
+   "sha256": "a4c40062f3e762ac1763d539ce99887bfae95f17726ec779d6f97194fbef5f54",
+   "datos": "main"
+  }
+ },
+ "logs": {
+  "fase_4": "fase 4 cerrable: False; casas de 1772: 6275; edificadas_con_casas: True; libres_sin_casas: True; parciales_sin_rellenar: True; hitos_sin_dobles: True; hitos_sin_vacios_artificiales: False; unidades_medidas: True",
+  "fase_6": "fase 6 cerrable: False; casas de 1772: 6275; triangulos_sin_degenerar: True; techos_sin_cruces: True; cumbreras_con_el_frente: True; aleros_fuera_de_la_calle: True; mismo_trazado_que_la_fase_5: False"
+ }
+}
