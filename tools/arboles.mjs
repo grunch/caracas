@@ -57,7 +57,7 @@ const ciudadNueva = await siHay(leer('public/datos/ciudad.pak').then((b) => {
     { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array, paletas: Uint8Array })
 }), 'ciudad.pak')
 
-const conManzanas=process.argv.includes('--manzanas-1772')||process.argv.includes('--manzanas-1843')
+const conManzanas=['--manzanas-1772','--manzanas-1843','--manzanas-1889'].some(b=>process.argv.includes(b))
 const ciudad=conManzanas?Object.fromEntries(Object.entries(partesDeCiudad(JSON.parse(await leer('fuentes/derivados/epocas/ciudad-estilos.json')))).map(([k,v])=>[k,v.datos])):ciudadNueva
 const grilla = crece && {
   datos: crece[1].data, cols: crece[1].info.width, rows: crece[1].info.height, canales: crece[1].info.channels,
@@ -101,9 +101,13 @@ const dePatio = ciudad ? arbolesDePatio(ciudad, metro) : []
 const originales = [...conNace, ...dePatio, ...monte]
 const manzanas=conManzanas?JSON.parse(await leer('fuentes/derivados/epocas/manzanas-1772-informe.json')).manzanas.filter(m=>m.estado==='integrada'):[]
 let todos=conManzanas?arbolesParaManzanas(originales,ciudadNueva?arbolesDePatio(ciudadNueva,metro):[],manzanas):originales
-if(process.argv.includes('--manzanas-1843')){
+if(process.argv.includes('--manzanas-1843')||process.argv.includes('--manzanas-1889')){
  const ampliadas=JSON.parse(await leer('fuentes/derivados/epocas/manzanas-1843-informe.json')).manzanas
  todos=arbolesParaManzanas(todos,[],ampliadas,{epoca:2})
+}
+if(process.argv.includes('--manzanas-1889')){
+ const ampliadas=JSON.parse(await leer('fuentes/derivados/epocas/manzanas-1889-informe.json')).manzanas
+ todos=arbolesParaManzanas(todos,[],ampliadas,{epoca:3})
 }
 const salida = path.resolve(RAIZ, 'public/datos/arboles.bin')
 await writeFile(salida, codificarArboles(todos, metro))

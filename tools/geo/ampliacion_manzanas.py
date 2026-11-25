@@ -6,17 +6,17 @@ from shapely.ops import unary_union
 from manzanas_completas import partes, anillo
 
 
-def seleccionar_ampliacion(referencias, heredadas, hitos, metro):
+def seleccionar_ampliacion(referencias, heredadas, hitos, metro, epoca=2, estado_admitido="aprobada"):
     anteriores = unary_union([Polygon(m.get('limite', m['poligono']),m.get('huecos',[])).buffer(0) for m in heredadas])
     # Mantener la calle entre los tejidos: mismo ancho inferido de 6 m usado en 1772.
     ocupados = anteriores.buffer(6/metro, join_style=2)
-    edificadas = [Polygon(r['poligono']).buffer(0) for r in referencias
-                  if r['estado']=='aprobada' and r['ocupacion'] in {'rayada','parte_de_otra_unidad'}]
+    edificadas = [Polygon(r['poligono'],r.get('huecos',[])).buffer(0) for r in referencias
+                  if r['estado']==estado_admitido and r['ocupacion'] in {'rayada','parte_de_otra_unidad','edificada'}]
     libres = []
     for r in referencias:
         if r['ocupacion'] not in {'plaza','huerta','terreno_libre','lote_especial'}:
             continue
-        p=Polygon(r['poligono']).buffer(0)
+        p=Polygon(r['poligono'],r.get('huecos',[])).buffer(0)
         # La clasificación más específica manda: una casa rayada dentro de una huerta es un enclave;
         # una huerta pequeña dentro de una manzana rayada, en cambio, sigue siendo huerta. Plazas, terrenos
         # libres y lotes especiales no tienen enclaves: van enteros, sin casas (R7, specs/13).
@@ -24,17 +24,17 @@ def seleccionar_ampliacion(referencias, heredadas, hitos, metro):
         libres.append(p.difference(enclaves))
     libres=unary_union(libres)
     reservas = [(h['id'],Polygon(p).buffer(0)) for h in hitos
-                if h.get('nace',0)<=2 and (not h.get('muere') or h['muere']>2)
+                if h.get('nace',0)<=epoca and (not h.get('muere') or h['muere']>epoca)
                 for p in (h.get('suprime') or h.get('planta',[]))]
     manzanas, cobertura = [], []
     for r in referencias:
-        if r['estado']!='aprobada':
+        if r['estado']!=estado_admitido:
             cobertura.append({'id':r['id'],'estado':'pendiente_en_referencia','ocupacion':r['ocupacion'],'motivo':r.get('motivo','')})
             continue
-        if r['ocupacion'] not in {'rayada','parte_de_otra_unidad'}:
+        if r['ocupacion'] not in {'rayada','parte_de_otra_unidad','edificada'}:
             cobertura.append({'id':r['id'],'estado':'espacio_no_residencial','ocupacion':r['ocupacion']})
             continue
-        p=Polygon(r['poligono']).buffer(0)
+        p=Polygon(r['poligono'],r.get('huecos',[])).buffer(0)
         comun=p.intersection(anteriores).area
         # Dos lecturas de la misma cuadra: prevalece la ya construida, sin franjas duplicadas por el calce.
         if comun>=p.area*.5:
@@ -54,7 +54,7 @@ def seleccionar_ampliacion(referencias, heredadas, hitos, metro):
                 puntos=puntos[1:]+puntos[:1]
             manzanas.append({'id':id,'referencia':r['id'],'poligono':puntos,'limite':anillo(q),
                              'huecos':[[list(v) for v in h.coords[:-1]] for h in q.interiors],
-                             'areaM2':q.area*metro*metro,'procedencia':'censo aprobado de 1843; expansión sin alterar 1772',
+                             'areaM2':q.area*metro*metro,'procedencia':f'expansión de la época {epoca}; conserva el tejido anterior',
                              'reservas':[{'id':nombre,'poligono':anillo(h)} for nombre,h in reservas if h.intersects(q)]})
             ids.append(id)
         cobertura.append({'id':r['id'],'estado':'ampliacion' if ids else 'sin_area_nueva_util',
@@ -65,4 +65,4 @@ def seleccionar_ampliacion(referencias, heredadas, hitos, metro):
 
 if __name__=='__main__':
     d=json.load(sys.stdin)
-    json.dump(seleccionar_ampliacion(d['referencias'],d['heredadas'],d['hitos'],d['metro']),sys.stdout)
+    json.dump(seleccionar_ampliacion(d['referencias'],d['heredadas'],d['hitos'],d['metro'],d.get('epoca',2),d.get('estado_admitido','aprobada')),sys.stdout)

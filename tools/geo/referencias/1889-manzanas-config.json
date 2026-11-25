@@ -1,0 +1,93 @@
+{
+  "fuente": "1889-bnf-mestre",
+  "nota": "Recorte de la ciudad y exclusiones leídos en el plano calzado; evita marco, leyenda, cementerio, hipódromo y estación. No es un censo revisado de linderos.",
+  "escala": 2,
+  "simplificar_m": 2,
+  "hueco_minimo_m2": 100,
+  "limite": [
+    [
+      6399,
+      3437
+    ],
+    [
+      7782,
+      3437
+    ],
+    [
+      7782,
+      3940
+    ],
+    [
+      10799,
+      4506
+    ],
+    [
+      12056,
+      6392
+    ],
+    [
+      14570,
+      7335
+    ],
+    [
+      14256,
+      8592
+    ],
+    [
+      11113,
+      9850
+    ],
+    [
+      8599,
+      9850
+    ],
+    [
+      6399,
+      9095
+    ]
+  ],
+  "exclusiones": [
+    {
+      "id": "hipodromo",
+      "poligono": [
+        [
+          12307,
+          6203
+        ],
+        [
+          12936,
+          6203
+        ],
+        [
+          12936,
+          7146
+        ],
+        [
+          12307,
+          7146
+        ]
+      ]
+    },
+    {
+      "id": "estacion-ferrocarril-central",
+      "poligono": [
+        [
+          13187,
+          7146
+        ],
+        [
+          14067,
+          7146
+        ],
+        [
+          14067,
+          7901
+        ],
+        [
+          13187,
+          7901
+        ]
+      ]
+    }
+  ]
+}
