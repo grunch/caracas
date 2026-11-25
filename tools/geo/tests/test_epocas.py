@@ -475,3 +475,22 @@ def test_despejar_plazuelas_de_1772_le_quita_1772_a_cada_casa_como_al_abrir_una_
     assert nueva[3] == [1, 0]              # un cuarto dentro: queda
     assert nueva[4] == [0, 1]              # de 1578: vive hasta 1772
     assert vida[1] == [1, 0]               # no muta la entrada
+
+
+def test_lo_edificado_de_una_epoca_con_referencia_sale_de_ella_y_no_del_color(tmp_path):
+    import json
+    ref = {'unidades': [{'id': 'A', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': [[0, 0], [40, 0], [40, 40], [0, 40]]},
+                        {'id': 'B', 'ocupacion': 'plaza', 'estado': 'aprobada', 'poligono': [[10, 10], [20, 10], [20, 20], [10, 20]]}]}
+    (tmp_path / 'ref.json').write_text(json.dumps(ref))
+    epoca = {'año': 1843, 'referencia': 'ref.json', 'holgura_m': 0}
+
+    m = ep.construido_de_epoca(tmp_path, epoca, forma=(30, 50), escala=2, metro=0.5)
+
+    assert m[2, 2] and not m[7, 7] and not m[25, 45]
+
+
+def test_la_referencia_de_una_epoca_no_cambia_lo_que_nacia_antes():
+    antes = np.array([1, 1, 2, 3, 6, 4])     # con el color: nacía en 1772, 1772, 1843, 1889, nunca, 1911
+    ahora = np.array([1, 3, 2, 2, 2, 1])     # con la referencia de 1843
+    r = ep.nace_sin_tocar_las_anteriores(antes, ahora, desde=2)
+    assert r.tolist() == [1, 1, 2, 2, 2, 2]   # 1772 intacto; desde 1843 manda la referencia (y nunca antes de 1843)

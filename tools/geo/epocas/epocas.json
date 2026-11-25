@@ -13,7 +13,7 @@
    "obras": "El plano marca en rojo lo edificado y en amarillo los solares y huertos; el damero ya llena el valle entre las quebradas y el Guaire.",
    "perfil": {"canal": "a", "umbral": 150, "sentido": "mayor", "suavizado_px": 0.5, "suave": 3},
    "cierre_m": 4, "area_minima_m2": 150, "holgura_m": 6},
-  {"año": 1843, "plano": "1843-nypl-jesurun-facsimil-muller-stapler", "corto": "plano de Jesurún (1843)",
+  {"año": 1843, "plano": "1843-nypl-jesurun-facsimil-muller-stapler", "corto": "plano de Jesurún (1843)", "referencia": "tools/geo/referencias/1843-manzanas.json",
    "obras": "Jesurún rotula el Campo de Marte al sureste del casco.",
    "perfil": {"canal": "L", "umbral": 185, "sentido": "menor", "suavizado_px": 3, "suave": 5},
    "apertura_m": 4, "cierre_m": 5, "area_minima_m2": 600, "ancho_minimo_m": 14, "holgura_m": 6},
