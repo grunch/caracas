@@ -42,7 +42,7 @@
     "specs/auditoria-1843/censo.json",
     "fuentes/derivados/epocas/qa-1843.jpg (fuera de git)"
    ],
-   "resolucion": "T81.4a (lo edificado de 1843 desde la referencia) y T81.4c (casas propias): quedan 4 de 282 rayadas sin casas, todas con motivo: U1843-0152, el convento de las Concepciones (hito del Capitolio), y 3 lecturas que siguen dudosas (pendientes en la referencia). Puerta de la fase 4: cierre-fases-3-4.json.",
+   "resolucion": "T81.4a (lo edificado de 1843 desde la referencia) y T81.4c (casas propias: la crujía de cada manzana rayada en sus frentes vacíos, sin pisar casas vivas, hitos ni lotes; cada tramo vive hasta que una casa lo pisa): 279 de 282 rayadas con casas; las 3 restantes son lecturas pendientes. La mediana de frente ocupado pasa de 86 % a casi todo el frente. Puerta de la fase 4: cierre-fases-3-4.json.",
    "pipeline": "tools/geo/epocas.py construido_de_epoca + tools/geo/epocas/epocas.json"
   },
   {

@@ -100,11 +100,13 @@ def puerta_fases_3_4(contraste, estados, vida, cubiertas_por_hito):
     pendientes = [i for i in vacias if estados.get(i) != 'aprobada']
     por_hito = [i for i in vacias if estados.get(i) == 'aprobada' and i in cubiertas_por_hito]
     sin_motivo = [i for i in vacias if i not in pendientes and i not in por_hito]
-    indebidas = [f['id'] for f in contraste['unidades'] if f['estado'] == 'con_casas_indebidas']
+    con_casas = [f['id'] for f in contraste['unidades'] if f['estado'] == 'con_casas_indebidas']
+    indebidas = [i for i in con_casas if estados.get(i) == 'aprobada']
+    libres_pendientes = [i for i in con_casas if estados.get(i) != 'aprobada']   # no entran al generador
     criterios = {'calles_de_1843_libres': {'cumplido': not nuevas, 'casas': nuevas, 'de_antes_en_limite': antes},
                  'rayadas_con_casas': {'cumplido': not sin_motivo, 'sin_casas': sin_motivo, 'por_hito': por_hito,
                                        'pendientes': pendientes},
-                 'libres_sin_casas': {'cumplido': not indebidas, 'con_casas': indebidas}}
+                 'libres_sin_casas': {'cumplido': not indebidas, 'con_casas': indebidas, 'pendientes': libres_pendientes}}
     return {'fase_3_cerrable': criterios['calles_de_1843_libres']['cumplido'],
             'fase_4_cerrable': criterios['rayadas_con_casas']['cumplido'] and criterios['libres_sin_casas']['cumplido'],
             'criterios': criterios}

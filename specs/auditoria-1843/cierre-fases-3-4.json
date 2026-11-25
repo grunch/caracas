@@ -18,7 +18,8 @@
     8419,
     8420,
     8421,
-    23228,
+    23227,
+    38808,
     38809,
     38810,
     38811,
@@ -26,15 +27,14 @@
     38813,
     38814,
     38815,
-    38816
+    38837,
+    38838
    ]
   },
   "rayadas_con_casas": {
    "cumplido": true,
    "sin_casas": [],
-   "por_hito": [
-    "U1843-0152"
-   ],
+   "por_hito": [],
    "pendientes": [
     "U1843-0021",
     "U1843-0161",
@@ -43,7 +43,10 @@
   },
   "libres_sin_casas": {
    "cumplido": true,
-   "con_casas": []
+   "con_casas": [],
+   "pendientes": [
+    "U1843-0232"
+   ]
   }
  }
 }

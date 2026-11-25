@@ -90,3 +90,10 @@ def test_una_casa_en_ele_alrededor_de_un_lote_no_cuenta_en_el_lote():
     r = clasificar(unidades, [{'techo': 1, 'poligono': ele}], metro=0.5, tolerancia_m=0)
     fila = {f['id']: f for f in r['unidades']}
     assert fila['L']['estado'] == 'sin_casas' and fila['A']['casas'] == 1
+
+
+def test_un_lote_pendiente_con_casas_no_impide_cerrar_la_fase_4():
+    from contraste_1843 import puerta_fases_3_4
+    contraste = {'unidades': [{'id': 'P', 'ocupacion': 'plaza', 'estado': 'con_casas_indebidas'}], 'sobrantes': []}
+    r = puerta_fases_3_4(contraste, {'P': 'pendiente'}, {}, cubiertas_por_hito=set())
+    assert r['fase_4_cerrable'] and r['criterios']['libres_sin_casas']['pendientes'] == ['P']
