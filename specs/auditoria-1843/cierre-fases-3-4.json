@@ -1,0 +1,49 @@
+{
+ "datos": "regenerado con la pila T81 (#189–#194, 3a, 4b, 5a), sin publicar",
+ "fase_3_cerrable": true,
+ "fase_4_cerrable": true,
+ "criterios": {
+  "calles_de_1843_libres": {
+   "cumplido": true,
+   "casas": [],
+   "de_antes_en_limite": [
+    8388,
+    8389,
+    8390,
+    8414,
+    8415,
+    8416,
+    8417,
+    8418,
+    8419,
+    8420,
+    8421,
+    23228,
+    38809,
+    38810,
+    38811,
+    38812,
+    38813,
+    38814,
+    38815,
+    38816
+   ]
+  },
+  "rayadas_con_casas": {
+   "cumplido": true,
+   "sin_casas": [],
+   "por_hito": [
+    "U1843-0152"
+   ],
+   "pendientes": [
+    "U1843-0021",
+    "U1843-0161",
+    "U1843-0165"
+   ]
+  },
+  "libres_sin_casas": {
+   "cumplido": true,
+   "con_casas": []
+  }
+ }
+}

@@ -45,11 +45,11 @@ Mismo orden y mismos criterios de salida que 08. Evidencia en `auditoria-1843/`.
 | 0. Preparación | Este plan; herramientas de 1772 que se reutilizan, parametrizadas por época solo cuando una fase las necesita, con la prueba de que los JSON de 1772 se regeneran idénticos | Hecha (#187); la fase 1 usa módulos propios (`esquinas_1843`, `controles_1843`, `manzanas_1843`, `censo_1843`, `contraste_1843`, `cierre_fase1_1843`) |
 | 1. Inventario | 1A baseline y calce por identidad con las esquinas numeradas; 1B censo por sectores de manzanas, tramos y frentes; 1C incidencias; 1D puerta de salida y subtareas | Pendiente |
 | 2. Referencia | Red y manzanas de 1843 con procedencia; lotes especiales con su letra de la leyenda | Cerrable 3/3 ([cierre-fase2.json](auditoria-1843/cierre-fase2.json)): [referencia](../tools/geo/referencias/1843-manzanas.json) de 361 unidades aprobadas (las seguras del censo y las 58 dudosas revisadas por un segundo lector, [revision-dudosas/](auditoria-1843/revision-dudosas/)), 4 pendientes que no entran al generador, 2 rechazadas por duplicadas; validadores sin problemas |
-| 3. Calles y manzanas | Ninguna casa sobre una calle de 1843; calles de 1843 presentes; calles posteriores sin cortar manzanas de 1843 | Pendiente |
-| 4. Ocupación | Cada manzana rayada con casas; lotes especiales, plazas y huertas sin casas genéricas; hitos sin dobles edificios | Pendiente |
-| 5. Alineación | Como 08 sobre lo que se ve en 1843 | Pendiente |
-| 6. Cubiertas | Como 08 | Pendiente |
-| 7. Cierres y accesos | Como 08 | Pendiente |
+| 3. Calles y manzanas | Ninguna casa sobre una calle de 1843; calles de 1843 presentes; calles posteriores sin cortar manzanas de 1843 | Cerrable ([cierre-fases-3-4.json](auditoria-1843/cierre-fases-3-4.json), T81.3a): ninguna casa nacida en 1843 fuera de las unidades de la referencia; 20 vivas desde 1772 en límite (cambiarlas tocaría 1772) |
+| 4. Ocupación | Cada manzana rayada con casas; lotes especiales, plazas y huertas sin casas genéricas; hitos sin dobles edificios | Cerrable (T81.4a–4c): lo edificado de 1843 sale de la referencia y no del color (I1843-002), sin cambiar lo que nace antes; casas propias (crujía sobre cada frente, patio libre) en las 122 manzanas sin casas de 1936; 278 de 282 rayadas con casas (las 4 restantes: el convento de las Concepciones y 3 pendientes); 0 lotes, plazas o huertas con casas |
+| 5. Alineación | Como 08 sobre lo que se ve en 1843 | Cerrable con límites ([cierre-fases-5-7.json](auditoria-1843/cierre-fases-5-7.json), T81.5a): sin solapes y las casas propias con su frente sobre la manzana (0,5 m); 2 casas de 1936 que ya se pisan en 1936 en [límite](auditoria-1843/limites-fases-5-7.json) |
+| 6. Cubiertas | Como 08 | Cerrable con límites (T81.5a): huellas que el visor puede techar (sin astillas de menos de 2 m ni triángulos sin área); 9 heredadas de 1936 en límite |
+| 7. Cierres y accesos | Como 08 | Cerrable (T81.5a): toda casa propia con frente a media calle; 1774 casas interiores heredadas de 1936 llegan a la calle por su lote de 1936 (se cuentan, no impiden cerrar); ninguna en lotes, plazas ni terrenos libres |
 | 8. Verificación | Censo final contra el original, revisión visual, sitio publicado con su pareja código/datos | Pendiente |
 
 ## Trabajo en paralelo
@@ -71,3 +71,7 @@ Creadas al cerrar la entrega 1D. Cada una con su incidencia, su prueba y su depe
 | T81.4a | I1843-002, I1843-004: lo edificado de 1843 desde la referencia, no desde el color | `epocas.py construido_de_epoca`, `epocas/epocas.json` | Manzanas rayadas sin casas: solo las que tienen motivo (hito, casa suelta sin pareja en 1936); puertas de 1772 sin empeorar | 2b |
 | T81.4b | I1843-003: lotes especiales y plazas sin casas genéricas en 1843 | reservas de ocupación, `src/hitos` (`pisaLaZona`) | 0 lotes especiales o plazas con casas, salvo excepción registrada | 4a |
 | T81.5a–8a | Alineación, cubiertas, cierres y verificación de lo que se ve en 1843, como 08 | puertas de 1772 extendidas a la época 2 | Criterios de 08 en 1843 | 4b |
+
+## Fases 3 a 7: cómo se miden en 1843
+
+Las puertas de 1772 miden contra los frentes y calles de su referencia; el plano de Jesurún dibuja manzanas enteras, sin frentes ni patios. Por decisión por delegación del responsable (25-11-2026), en 1843 se mide lo equivalente: las fases 3 y 4 desde el contraste del censo con lo que el sitio muestra en 1843 (`contraste_1843.puerta_fases_3_4`) y las fases 5 a 7 sobre las casas a la vista en 1843 (`cierre_casas_1843.py`), con los límites por casa en `limites-fases-5-7.json`. Corregir 1843 no cambia 1772: sus puertas dan lo mismo que en `main` en cada paso de esta pila.
