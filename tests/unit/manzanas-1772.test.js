@@ -109,3 +109,21 @@ it('los tejados nativos de una cuadra oblicua tampoco invaden dos reservas',asyn
   for(const r of reservas)expect(Math.abs(areaConSigno(recortarConvexo(p,r.poligono)))).toBeLessThan(.02)
  }
 })
+it('cobertura total: sustituye también una casa previa sin correspondencia aprobada',()=>{
+ const datos={vertices:[300,300,320,300,320,320,300,320],techos:[[0,4,1,0,123]],vida:[[0,0]],historia:[[16,16,17,18,19,20]],vuelos:[0],marcos:[],alas:[]}
+ const {ciudad}=integrarManzanas1772(datos,[],{metro:.5,reemplazarTodo:true})
+ expect(ciudad.vida.some(v=>v[0]<=1&&(!v[1]||v[1]>1))).toBe(false)
+ expect(ciudad.vida).toEqual([[0,1],[2,0]])
+})
+it('cobertura total incluye unidades parciales y pendientes con contorno, pero no plazas',()=>{
+ const red={nodos:[{id:'a',mosaico:[0,0]},{id:'b',mosaico:[200,0]},{id:'c',mosaico:[200,200]},{id:'d',mosaico:[0,200]}]}
+ const u={id:'U',estado:'pendiente',ocupacion:'parcial',nodos:['a','b','c','d']}
+ expect(seleccionarManzanas1772({red,unidades:[u],plaza:[0,0],metro:.5,todas:true}).manzanas).toHaveLength(1)
+})
+
+it('conserva todos los vértices de un solar irregular recortado',()=>{
+ const c={huella:[[0,0],[40,0],[40,20],[20,20],[20,40],[0,40]],paleta:1,pisos:1,semilla:1,marco:[0,0,1,0,40,40,0,5],alas:[[2,0,0,40,5]]}
+ const {ciudad}=integrarManzanas1772({vertices:[],techos:[],vida:[],historia:[],marcos:[],alas:[]},[{id:'irregular',casas:[c]}],{reemplazarTodo:true})
+ expect(ciudad.techos[0][1]).toBe(6)
+ expect(ciudad.vertices).toEqual(c.huella.flat())
+})
