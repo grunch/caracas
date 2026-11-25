@@ -100,7 +100,7 @@ const dePatio = ciudad ? arbolesDePatio(ciudad, metro) : []
 
 const originales = [...conNace, ...dePatio, ...monte]
 const manzanas=conManzanas?JSON.parse(await leer('fuentes/derivados/epocas/manzanas-1772-informe.json')).manzanas.filter(m=>m.estado==='integrada'):[]
-const todos=conManzanas?arbolesParaManzanas(originales,arbolesDePatio(ciudadNueva,metro),manzanas):originales
+const todos=conManzanas?arbolesParaManzanas(originales,ciudadNueva?arbolesDePatio(ciudadNueva,metro):[],manzanas):originales
 const salida = path.resolve(RAIZ, 'public/datos/arboles.bin')
 await writeFile(salida, codificarArboles(todos, metro))
 const porEpoca = (lista, campo) => Array.from({ length: ETAPAS }, (_, e) => lista.filter((a) => a[campo] === e).length).join(' · ')

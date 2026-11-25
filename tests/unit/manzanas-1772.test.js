@@ -59,4 +59,17 @@ it('manzana oblicua: solares contenidos, fachadas orientadas y geometría nativa
  const g=extruirTechos(datos,crearCoords({ancho:1000,alto:1000,metro:.5,plaza:[0,0]}))
  expect(g.posiciones.every(Number.isFinite)).toBe(true);expect(g.indices.length).toBeGreaterThan(0)
  for(let i=0;i<g.vidas.length;i+=2){expect(g.vidas[i]).toBe(1);expect(g.vidas[i+1]).toBe(2)}
+ // Las bases de los muros (y = 0) caen dentro de la manzana oblicua una vez de vuelta en píxeles: el paso
+ // al marco nativo no las saca del contorno. Los aleros quedan fuera de esta cuenta a propósito.
+ const coords=crearCoords({ancho:1000,alto:1000,metro:.5,plaza:[0,0]})
+ // Tolerancia de 1 cm: las posiciones son Float32 y una esquina sobre el lindero cae a milímetros de él.
+ const TOLERANCIA_PX=.01/.5
+ const dentro=([x,y])=>m.poligono.every((a,i)=>{const b=m.poligono[(i+1)%4];return ((b[0]-a[0])*(y-a[1])-(b[1]-a[1])*(x-a[0]))/Math.hypot(b[0]-a[0],b[1]-a[1])>=-TOLERANCIA_PX})
+ let bases=0
+ for(let i=0;i<g.posiciones.length;i+=3){
+  if(Math.abs(g.posiciones[i+1])>1e-6)continue
+  const {px,py}=coords.aPixel(g.posiciones[i],g.posiciones[i+2]);bases++
+  expect(dentro([px,py]),`base (${px.toFixed(2)}, ${py.toFixed(2)})`).toBe(true)
+ }
+ expect(bases).toBeGreaterThan(0)
 })

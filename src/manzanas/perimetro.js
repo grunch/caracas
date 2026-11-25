@@ -1,8 +1,10 @@
 const RAD=Math.PI/180;
 /** Vértices NO, NE, SE, SO; lados norte, este, sur, oeste. Metros, plano XZ. */
+// Por índice y no con every(), que se salta los huecos de un arreglo disperso.
+const cuatro=(a,valido)=>Array.isArray(a)&&a.length===4&&[0,1,2,3].every(i=>valido(a[i]))
 export function resolverPerimetro({lados=[96,96,96,96],angulos=[90,90,90,90]}={}){
- if(!Array.isArray(lados)||lados.length!==4||!lados.every(v=>Number.isFinite(v)&&v>=60&&v<=200))throw new RangeError('Indica cuatro lados de 60 a 200 m: norte, este, sur y oeste.');
- if(!Array.isArray(angulos)||angulos.length!==4||!angulos.every(v=>Number.isFinite(v)&&v>=30&&v<=150))throw new RangeError('Indica cuatro ángulos interiores de 30° a 150°: NO, NE, SE y SO.');
+ if(!cuatro(lados,v=>Number.isFinite(v)&&v>=60&&v<=200))throw new RangeError('Indica cuatro lados de 60 a 200 m: norte, este, sur y oeste.');
+ if(!cuatro(angulos,v=>Number.isFinite(v)&&v>=30&&v<=150))throw new RangeError('Indica cuatro ángulos interiores de 30° a 150°: NO, NE, SE y SO.');
  if(Math.abs(angulos.reduce((a,b)=>a+b,0)-360)>.01)throw new RangeError('Los cuatro ángulos interiores deben sumar 360°.');
  const vertices=[[0,0]];let x=0,z=0,direccion=0;
  for(let i=0;i<4;i++){

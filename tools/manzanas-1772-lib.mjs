@@ -24,7 +24,7 @@ export function retraerCuadra(p,d){
 }
 export function seleccionarManzanas1772({red,unidades,plaza,metro,hitos=[]}){
  const nodos=new Map(red.nodos.map(n=>[n.id,n.mosaico])),manzanas=[],omitidas=[]
- const reservas=hitos.filter(h=>(h.nace??0)<=1&&(!(h.muere??0)||h.muere>1)).flatMap(h=>h.suprime??h.planta??[])
+ const reservas=hitos.filter(h=>(h.nace??0)<=1&&(!(h.muere??0)||h.muere>1)).flatMap(h=>h.suprime?.length?h.suprime:h.planta??[])
  for(const u of unidades){
   if(u.estado!=='aprobada'||u.ocupacion!=='continua'){omitidas.push({id:u.id,motivo:`${u.estado}/${u.ocupacion}`});continue}
   try{

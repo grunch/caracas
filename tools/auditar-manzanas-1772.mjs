@@ -8,7 +8,9 @@ import {hitosConPlanta} from '../src/hitos/plantas.js'
 const [antes,despues,salida]=process.argv.slice(2)
 if(!antes||!despues||!salida)throw new Error('Uso: node tools/auditar-manzanas-1772.mjs carpeta-datos-antes carpeta-datos-despues informe.json')
 const tipos={vertices:Float32Array,techos:Uint32Array,vida:Uint32Array,historia:Uint8Array,marcos:Float32Array,alas:Float32Array,vuelos:Uint8Array,paletas:Uint8Array}
-const leer=dir=>{const b=gunzipSync(readFileSync(dir+'/ciudad.pak'));return decodificarPak(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),tipos,()=>{})}
+// Las partes opcionales faltan como en el visor (src/ciudad.js): sin marcos ni alas, historia de ceros, sin tope de vuelo.
+const leer=dir=>{const b=gunzipSync(readFileSync(dir+'/ciudad.pak')),p=decodificarPak(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),tipos,()=>{}),n=p.techos.length/4
+ return{...p,marcos:p.marcos??new Float32Array(0),alas:p.alas??new Float32Array(0),historia:p.historia??new Uint8Array(n*6),vuelos:p.vuelos??new Uint8Array(n).fill(255)}}
 const hash=a=>createHash('sha256').update(a.sort().join('\n')).digest('hex')
 const casas=(p,e)=>{
  const vida=suprimirTechos(p,zonasDeSupresion(hitosConPlanta())),marcos=new Map();for(let i=0;i<p.marcos.length;i+=11)marcos.set(p.marcos[i],Array.from(p.marcos.slice(i,i+11)))
