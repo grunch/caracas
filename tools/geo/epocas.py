@@ -885,6 +885,14 @@ def main():
             print(f"{e['año']}: {movidas} casas en lotes especiales, plazas o terrenos libres pasan a la época siguiente")
             ciudad, informe = agregar_casas(ciudad, unidades, metro, k, hitos=locals().get("hitos", ()))
             print(f"{e['año']}: casas propias en los frentes vacíos de {informe['manzanas']} manzanas ({informe['casas']} casas)")
+            if e.get("solares"):
+                # T82.9 (specs/13 § 6): las casas de la época por solares de su tamaño, en el sector del spike
+                from solares_epoca import solares_de_epoca
+                plaza_px = json.loads((raiz / "public/datos/ciudad.json").read_text())["plano"]["plaza"]
+                ciudad, informe = solares_de_epoca(ciudad, unidades, k, metro, plaza_px, e["solares"].get("sector"),
+                                                   hitos=locals().get("hitos", ()))
+                print(f"{e['año']}: solares de la época en {informe['manzanas']} manzanas: {informe['reemplazadas']} casas"
+                      f" salen de la época ({informe['copias']} vuelven después, {informe['quitadas']} se quitan) y entran {informe['casas']}")
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))
 
     casas = casas_por_epoca(ciudad["vida"])

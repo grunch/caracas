@@ -119,7 +119,7 @@ export const PASOS = [
     opcionales: ['public/datos/relieve.bin'],
     codigo: [...GEO('epocas', 'valle', 'calce_correlacion', 'vectorizar', 'segmentar_clases', 'calles_1772', 'cuadras_historicas', 'cierre_fase3',
       'cierre_fase4', 'cierre_fase5', 'cierre_fase7', 'fachadas', 'accesos', 'calce', 'edificado_original', 'plazuelas',
-      'referencia_1843', 'epocas_1843'),
+      'referencia_1843', 'epocas_1843', 'solares_epoca', 'alas'),
       'tools/hitos-planta.mjs', 'src/hitos/plantas.js', ...['catedral', 'iglesias', 'civiles', 'panteon', 'plaza-bolivar', 'marco'].map((n) => `src/hitos/datos/${n}.js`)],
     cmd: () => [PY, 'tools/geo/epocas.py'],
   },
