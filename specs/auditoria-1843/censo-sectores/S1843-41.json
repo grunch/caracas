@@ -1,0 +1,72 @@
+{
+ "sector": "S1843-41",
+ "unidades": [],
+ "observaciones": [
+  {
+   "tipo": "borde_del_plano",
+   "px": [
+    1746,
+    3160
+   ],
+   "nota": "Marco del plano (filete doble) en x≈1700–1746; a su izquierda el margen con los rótulos 10–15 de la cuadrícula. Sin ciudad."
+  },
+  {
+   "tipo": "cerro",
+   "px": [
+    2000,
+    3150
+   ],
+   "nota": "Toda la caja es sombreado de cerro (hachures radiales y en bandas concéntricas, con crestas blancas); no hay manzanas, calles ni lotes. Las candidatas K1843-0060 y K1843-0078 son falsos positivos del sombreado."
+  },
+  {
+   "tipo": "mancha",
+   "px": [
+    2257,
+    2948
+   ],
+   "nota": "Mancha de tinta oscura sobre el sombreado del cerro; origen de la candidata K1843-0069 (centro 2280,2978, dentro de la caja). No es manzana: descartada."
+  },
+  {
+   "tipo": "campo_punteado",
+   "px": [
+    2280,
+    3420
+   ],
+   "nota": "Al pie del cerro, esquina SE de la caja: terreno con trazos sueltos (campo/sabana) sin borde que lo delimite dentro de la caja; sigue al S y E. Los rectángulos con borde y rayado irregular que empiezan en x≈2280,y≈3450 tienen su centro fuera de la caja (≈2332,3488): no se registran aquí."
+  },
+  {
+   "tipo": "cuadricula",
+   "px": [
+    2000,
+    2900
+   ],
+   "nota": "Líneas de trazos horizontales en y≈2900, 3025, 3146, 3268, 3388 son la cuadrícula de referencia, no calles."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "S1843-41/v_mancha_2257_2948.png",
+   "sha256": "d9777f70f31e1a5db35d97f9f5a57c1ff49a8116e775ce65732d7433448f0b38"
+  },
+  {
+   "archivo": "S1843-41/v_esqSE_2260_3420.png",
+   "sha256": "cdbd092b0d8dfa8bebf023eac61aea4e802ee4322fdc8e101f1f4022436da005"
+  }
+ ],
+ "teselas": 4,
+ "vacio": true,
+ "borrador_descartadas": [
+  {
+   "candidata": "K1843-0060",
+   "motivo": "sombreado de cerro"
+  },
+  {
+   "candidata": "K1843-0069",
+   "motivo": "mancha de tinta sobre el cerro"
+  },
+  {
+   "candidata": "K1843-0078",
+   "motivo": "sombreado de cerro"
+  }
+ ]
+}

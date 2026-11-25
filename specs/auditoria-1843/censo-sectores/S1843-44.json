@@ -1,0 +1,1412 @@
+{
+ "sector": "S1843-44",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    3582,
+    2882,
+    3704,
+    3002
+   ],
+   "poligono_px": [
+    [
+     3582,
+     2882
+    ],
+    [
+     3704,
+     2882
+    ],
+    [
+     3704,
+     3002
+    ],
+    [
+     3582,
+     3002
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0053"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Contiene el lote blanco b ('m') al norte; el '63' a su O es de la manzana vecina. K1843-0053 (centro fuera del sector) une varias manzanas."
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    3653,
+    2887,
+    3680,
+    2907
+   ],
+   "poligono_px": [
+    [
+     3653,
+     2887
+    ],
+    [
+     3680,
+     2887
+    ],
+    [
+     3680,
+     2907
+    ],
+    [
+     3653,
+     2907
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "m"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Lote blanco pequeño; la letra bajo él parece 'm' (podría leerse '111', pero no sigue la numeración de esquinas vecina)."
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    3712,
+    2882,
+    3827,
+    3002
+   ],
+   "poligono_px": [
+    [
+     3712,
+     2882
+    ],
+    [
+     3827,
+     2882
+    ],
+    [
+     3827,
+     3002
+    ],
+    [
+     3712,
+     3002
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    64
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0053"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Trazo junto al borde E (~3820,2937) parece una 'c' suelta; no se registra como letra."
+  },
+  {
+   "local": "d",
+   "caja_px": [
+    3833,
+    2882,
+    3952,
+    3002
+   ],
+   "poligono_px": [
+    [
+     3833,
+     2882
+    ],
+    [
+     3952,
+     2882
+    ],
+    [
+     3952,
+     3002
+    ],
+    [
+     3833,
+     3002
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    65,
+    68
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0067"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "K1843-0067 la une con la manzana 66 (e)."
+  },
+  {
+   "local": "e",
+   "caja_px": [
+    3955,
+    2882,
+    4045,
+    3000
+   ],
+   "poligono_px": [
+    [
+     3955,
+     2882
+    ],
+    [
+     3987,
+     2882
+    ],
+    [
+     3987,
+     2937
+    ],
+    [
+     4045,
+     3000
+    ],
+    [
+     3955,
+     3000
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    66
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0067"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Irregular: franja O angosta y borde SE en diagonal hacia la quebrada."
+  },
+  {
+   "local": "f",
+   "caja_px": [
+    4078,
+    2879,
+    4196,
+    2997
+   ],
+   "poligono_px": [
+    [
+     4078,
+     2879
+    ],
+    [
+     4196,
+     2879
+    ],
+    [
+     4196,
+     2997
+    ],
+    [
+     4136,
+     2997
+    ],
+    [
+     4078,
+     2930
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado (trazos verticales cortos)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Mismo punteado que las manzanas 55, 56 y 67 (con número de esquina): se lee como manzana urbana de otra parroquia, pero podría ser huerta. Borde SO en diagonal; K1843-0061 corresponde a la unidad al N de la calle (centro fuera del sector)."
+  },
+  {
+   "local": "g",
+   "caja_px": [
+    4202,
+    2878,
+    4264,
+    2942
+   ],
+   "poligono_px": [
+    [
+     4202,
+     2878
+    ],
+    [
+     4264,
+     2878
+    ],
+    [
+     4264,
+     2942
+    ],
+    [
+     4202,
+     2942
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    67
+   ],
+   "rayado": "punteado (trazos verticales cortos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0062"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "K1843-0062 la une con parte de la 56 (al N) y la franja 69 (al E, centro fuera del sector). Borde E en x≈4264, en el límite del sector."
+  },
+  {
+   "local": "h",
+   "caja_px": [
+    3834,
+    3008,
+    3948,
+    3123
+   ],
+   "poligono_px": [
+    [
+     3834,
+     3008
+    ],
+    [
+     3948,
+     3008
+    ],
+    [
+     3948,
+     3123
+    ],
+    [
+     3834,
+     3123
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    89
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0075"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Manzana en L alrededor del lote blanco 'o' (i) en su cuarto NE. K1843-0075 la une con la 88 (p)."
+  },
+  {
+   "local": "i",
+   "caja_px": [
+    3872,
+    3008,
+    3948,
+    3094
+   ],
+   "poligono_px": [
+    [
+     3872,
+     3008
+    ],
+    [
+     3948,
+     3008
+    ],
+    [
+     3948,
+     3094
+    ],
+    [
+     3872,
+     3094
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "o"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco abierto a las calles N y E; dentro, un edificio rayado aislado (~3924–3936, 3047–3083)."
+  },
+  {
+   "local": "j",
+   "caja_px": [
+    3957,
+    3007,
+    4060,
+    3072
+   ],
+   "poligono_px": [
+    [
+     3957,
+     3007
+    ],
+    [
+     4060,
+     3007
+    ],
+    [
+     4060,
+     3072
+    ],
+    [
+     3957,
+     3072
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [
+    "n"
+   ],
+   "esquinas": [],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0073"
+    ]
+   },
+   "lectura": "dudosa",
+   "nota": "Letra en la esquina NO, bajo un pequeño blanco (k); se lee 'n' con duda (podría ser 'm')."
+  },
+  {
+   "local": "k",
+   "caja_px": [
+    3957,
+    3008,
+    3977,
+    3017
+   ],
+   "poligono_px": [
+    [
+     3957,
+     3008
+    ],
+    [
+     3977,
+     3008
+    ],
+    [
+     3977,
+     3017
+    ],
+    [
+     3957,
+     3017
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "n"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Blanco mínimo en la esquina NO de j, con la letra justo debajo."
+  },
+  {
+   "local": "l",
+   "caja_px": [
+    3583,
+    3010,
+    3704,
+    3125
+   ],
+   "poligono_px": [
+    [
+     3583,
+     3010
+    ],
+    [
+     3704,
+     3010
+    ],
+    [
+     3704,
+     3125
+    ],
+    [
+     3583,
+     3125
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    76
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0079"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "K1843-0079 es una franja que une 76, 86, la de 98 y 108 (y más al S)."
+  },
+  {
+   "local": "m",
+   "caja_px": [
+    3712,
+    3010,
+    3827,
+    3125
+   ],
+   "poligono_px": [
+    [
+     3712,
+     3010
+    ],
+    [
+     3827,
+     3010
+    ],
+    [
+     3827,
+     3125
+    ],
+    [
+     3712,
+     3125
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    77
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0053"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Asignación al borrador por caja: K1843-0053 parece cubrirla."
+  },
+  {
+   "local": "n",
+   "caja_px": [
+    3583,
+    3130,
+    3704,
+    3243
+   ],
+   "poligono_px": [
+    [
+     3583,
+     3130
+    ],
+    [
+     3704,
+     3130
+    ],
+    [
+     3704,
+     3243
+    ],
+    [
+     3583,
+     3243
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    86
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0079"
+    ]
+   },
+   "lectura": "segura",
+   "nota": ""
+  },
+  {
+   "local": "o",
+   "caja_px": [
+    3713,
+    3130,
+    3828,
+    3200
+   ],
+   "poligono_px": [
+    [
+     3713,
+     3130
+    ],
+    [
+     3828,
+     3130
+    ],
+    [
+     3828,
+     3200
+    ],
+    [
+     3713,
+     3147
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    87
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0053"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Trapecio: borde S en diagonal hacia el terreno abierto. Asignación al borrador por caja (dudosa)."
+  },
+  {
+   "local": "p",
+   "caja_px": [
+    3836,
+    3126,
+    3952,
+    3240
+   ],
+   "poligono_px": [
+    [
+     3836,
+     3126
+    ],
+    [
+     3952,
+     3126
+    ],
+    [
+     3952,
+     3240
+    ],
+    [
+     3900,
+     3240
+    ],
+    [
+     3836,
+     3205
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    88
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0075"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Esquina SO cortada en diagonal hacia el terreno abierto."
+  },
+  {
+   "local": "q",
+   "caja_px": [
+    3959,
+    3126,
+    4065,
+    3239
+   ],
+   "poligono_px": [
+    [
+     3959,
+     3126
+    ],
+    [
+     4065,
+     3126
+    ],
+    [
+     4065,
+     3239
+    ],
+    [
+     3959,
+     3239
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "t"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Recinto blanco con borde, con seis edificios rayados en dos columnas; la 't' está sobre su borde N. Junto al Campo de Marte (cuartel probable, no verificado)."
+  },
+  {
+   "local": "r",
+   "caja_px": [
+    3583,
+    3250,
+    3705,
+    3362
+   ],
+   "poligono_px": [
+    [
+     3583,
+     3250
+    ],
+    [
+     3705,
+     3250
+    ],
+    [
+     3705,
+     3362
+    ],
+    [
+     3583,
+     3362
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0079"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Glifo borroso en la esquina NO (~3602,3260), ilegible; el '98' impreso a su O es de la manzana vecina."
+  },
+  {
+   "local": "s",
+   "caja_px": [
+    3715,
+    3250,
+    3830,
+    3360
+   ],
+   "poligono_px": [
+    [
+     3715,
+     3250
+    ],
+    [
+     3767,
+     3250
+    ],
+    [
+     3830,
+     3302
+    ],
+    [
+     3830,
+     3360
+    ],
+    [
+     3715,
+     3360
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    99,
+    110
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0086"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Esquina NE cortada en diagonal. K1843-0086 es una franja que la une con la 109 y más al S."
+  },
+  {
+   "local": "t",
+   "caja_px": [
+    3583,
+    3367,
+    3705,
+    3480
+   ],
+   "poligono_px": [
+    [
+     3583,
+     3367
+    ],
+    [
+     3705,
+     3367
+    ],
+    [
+     3705,
+     3480
+    ],
+    [
+     3583,
+     3480
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    108
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0079"
+    ]
+   },
+   "lectura": "segura",
+   "nota": ""
+  },
+  {
+   "local": "u",
+   "caja_px": [
+    3716,
+    3367,
+    3830,
+    3480
+   ],
+   "poligono_px": [
+    [
+     3716,
+     3367
+    ],
+    [
+     3830,
+     3367
+    ],
+    [
+     3830,
+     3480
+    ],
+    [
+     3716,
+     3480
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    109,
+    112
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0086"
+    ]
+   },
+   "lectura": "segura",
+   "nota": ""
+  },
+  {
+   "local": "v",
+   "caja_px": [
+    3817,
+    3250,
+    3830,
+    3262
+   ],
+   "poligono_px": [
+    [
+     3817,
+     3250
+    ],
+    [
+     3830,
+     3250
+    ],
+    [
+     3830,
+     3262
+    ],
+    [
+     3817,
+     3262
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    100
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Edificio aislado en terreno abierto; número 100 debajo."
+  },
+  {
+   "local": "w",
+   "caja_px": [
+    3934,
+    3250,
+    3949,
+    3267
+   ],
+   "poligono_px": [
+    [
+     3934,
+     3250
+    ],
+    [
+     3949,
+     3250
+    ],
+    [
+     3949,
+     3267
+    ],
+    [
+     3934,
+     3267
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Edificio aislado (grupo al S del recinto t)."
+  },
+  {
+   "local": "x",
+   "caja_px": [
+    3959,
+    3249,
+    3978,
+    3260
+   ],
+   "poligono_px": [
+    [
+     3959,
+     3249
+    ],
+    [
+     3978,
+     3249
+    ],
+    [
+     3978,
+     3260
+    ],
+    [
+     3959,
+     3260
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "vertical (con blancos)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Edificio aislado pequeño; rayado irregular."
+  },
+  {
+   "local": "y",
+   "caja_px": [
+    3990,
+    3249,
+    4005,
+    3264
+   ],
+   "poligono_px": [
+    [
+     3990,
+     3249
+    ],
+    [
+     4005,
+     3249
+    ],
+    [
+     4005,
+     3264
+    ],
+    [
+     3990,
+     3264
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Edificio aislado."
+  },
+  {
+   "local": "z",
+   "caja_px": [
+    3935,
+    3277,
+    3950,
+    3299
+   ],
+   "poligono_px": [
+    [
+     3935,
+     3277
+    ],
+    [
+     3950,
+     3277
+    ],
+    [
+     3950,
+     3299
+    ],
+    [
+     3935,
+     3299
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Edificio aislado."
+  },
+  {
+   "local": "aa",
+   "caja_px": [
+    3959,
+    3268,
+    3985,
+    3292
+   ],
+   "poligono_px": [
+    [
+     3959,
+     3268
+    ],
+    [
+     3985,
+     3268
+    ],
+    [
+     3985,
+     3292
+    ],
+    [
+     3959,
+     3292
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Edificio aislado."
+  },
+  {
+   "local": "ab",
+   "caja_px": [
+    3837,
+    3301,
+    3859,
+    3358
+   ],
+   "poligono_px": [
+    [
+     3837,
+     3301
+    ],
+    [
+     3859,
+     3301
+    ],
+    [
+     3859,
+     3358
+    ],
+    [
+     3837,
+     3358
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Edificio aislado alargado frente a la manzana 99, al E de la calle."
+  },
+  {
+   "local": "ac",
+   "caja_px": [
+    3839,
+    3399,
+    3866,
+    3435
+   ],
+   "poligono_px": [
+    [
+     3839,
+     3399
+    ],
+    [
+     3866,
+     3399
+    ],
+    [
+     3866,
+     3435
+    ],
+    [
+     3839,
+     3435
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Edificio aislado frente a la manzana 109; otro igual al S (centro y≈3464) queda fuera del sector."
+  },
+  {
+   "local": "ad",
+   "caja_px": [
+    3909,
+    3276,
+    4286,
+    3669
+   ],
+   "poligono_px": [
+    [
+     4182,
+     3276
+    ],
+    [
+     4286,
+     3501
+    ],
+    [
+     4107,
+     3558
+    ],
+    [
+     4043,
+     3669
+    ],
+    [
+     3957,
+     3590
+    ],
+    [
+     3925,
+     3554
+    ],
+    [
+     3909,
+     3419
+    ],
+    [
+     3943,
+     3386
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "trazos cortos diagonales y horizontales (cultivo)",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0080"
+    ]
+   },
+   "lectura": "dudosa",
+   "nota": "Campo cerrado por línea continua; K1843-0080 cubre solo una parte. Su centroide (≈4082,3461) cae en el borde S del sector: puede ser de S1843-54; registrar una sola vez. Limita al S con otro campo (línea 4107,3558–4286,3501)."
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "quebrada",
+   "px": [
+    4100,
+    3060
+   ],
+   "nota": "Quebrada de doble línea que cruza el sector en diagonal NO→SE, de (4010,2840) a (4265,3365); limita las manzanas 66 y f y el Campo de Marte por el E. Sin puente visible dentro del sector."
+  },
+  {
+   "tipo": "terreno_abierto",
+   "px": [
+    4120,
+    3180
+   ],
+   "nota": "'Campo de Marte': campo abierto sin borde propio entre el recinto t (x≈4065) y la quebrada; las líneas de trazos que lo cruzan son la cuadrícula. Números 90 (≈4061,3120) y 92 (≈4075,3251) impresos sueltos en sus bordes."
+  },
+  {
+   "tipo": "letra",
+   "px": [
+    4182,
+    3135
+   ],
+   "nota": "Letra mayúscula 'V' junto a la quebrada, sin lote dibujado."
+  },
+  {
+   "tipo": "terreno_abierto",
+   "px": [
+    3830,
+    3200
+   ],
+   "nota": "Terreno abierto irregular con trazos de vegetación entre las manzanas 87, 88, 99 y los edificios aislados (≈3713–3950, 3150–3300); el damero no sigue al E de x≈3830 al S de y≈3245."
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    3708,
+    3250
+   ],
+   "nota": "Calle N–S en x≈3708 continua por todo el sector; otra en x≈3831 se corta en el terreno abierto (bordes diagonales de 87 y 88) y sigue al S como borde E de 99 y 109."
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    3900,
+    3005
+   ],
+   "nota": "Calles E–O en y≈2877, 3005, 3127, 3245 y 3364 al O; al E de x≈4060 la de y≈3005 no sigue (solo la cuadrícula). La de y≈2875 sigue hasta x≈4270 cruzando la quebrada."
+  },
+  {
+   "tipo": "lindero",
+   "px": [
+    4250,
+    3070
+   ],
+   "nota": "Línea continua de (4197,3090) curvando al NE y de (4210,3140) a (4300,3305): borde del campo al E de la quebrada (K1843-0076, centro fuera del sector)."
+  },
+  {
+   "tipo": "borrador",
+   "px": [
+    4155,
+    2869
+   ],
+   "nota": "K1843-0061 tiene el centro en la caja, pero corresponde a la unidad punteada al N de la calle y≈2875 (y≈2790–2873), centrada fuera del sector: no se registra aquí."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "../S1843-44/ver-a.png",
+   "sha256": "0ee4f171da65d56db2ea94fca612a8827eb9b12e9fa08400d062f43482c72b7a"
+  },
+  {
+   "archivo": "../S1843-44/ver-b.png",
+   "sha256": "899e5823005a475cfcc452e7c27777e4572de22b41bf08c901d78a8c8fdf85d6"
+  },
+  {
+   "archivo": "../S1843-44/ver-c.png",
+   "sha256": "69d0aff53c4172d72062f67d123d70d3e10255329f2b9a8067085b024529e575"
+  },
+  {
+   "archivo": "../S1843-44/ver-d.png",
+   "sha256": "c34573c5187780cce08a0376b213589ba0929cfb5cc2c88018a17f1fc095e31b"
+  },
+  {
+   "archivo": "../S1843-44/ver-e.png",
+   "sha256": "71c31addb6221ff1017abddd5c6ca28e9f9926f212023e2f27ddb2342455c5a6"
+  },
+  {
+   "archivo": "../S1843-44/ver-f.png",
+   "sha256": "22f08ca689611f6a3ebd44060a22798956e2df45ebc2fd161fadb4f02f0faa1d"
+  },
+  {
+   "archivo": "../S1843-44/ver-g.png",
+   "sha256": "bef31486a236061e0e76440d7e96e94953ba54e355566b919c51695bfd29d61a"
+  },
+  {
+   "archivo": "../S1843-44/ver-h.png",
+   "sha256": "fb141efca7b9cb88d132458ef1d27de3c856bddfaf055493e74dd81e74970789"
+  },
+  {
+   "archivo": "../S1843-44/ver-i.png",
+   "sha256": "18aa3ccabdc10893a368b14ee6b2deb634598bda6d6f43d55b1bef4ebb6fe072"
+  },
+  {
+   "archivo": "../S1843-44/ver-j.png",
+   "sha256": "37d59d200b25d15cb6cec8a9e8fe584f3fb1eeeec7661a93610f6302e3d328fc"
+  },
+  {
+   "archivo": "../S1843-44/ver-k.png",
+   "sha256": "282d42d0b633ab6a62aa9c0b88ea8276eff849e52616d9a630b24e9eb02e533e"
+  },
+  {
+   "archivo": "../S1843-44/ver-l.png",
+   "sha256": "22f489298b3c3381c5b5d9f1d64716e610ce7afa49353921538874c6520c7482"
+  },
+  {
+   "archivo": "../S1843-44/ver-m.png",
+   "sha256": "d54ba548d324beaecf9c88faea58f22125ab9ddcfdd2a095fbd6118658617bf4"
+  },
+  {
+   "archivo": "../S1843-44/ver-n.png",
+   "sha256": "a7729c77c11420bb0c60eada6cdd1b80132f150963427563f2ec941e9facf41d"
+  },
+  {
+   "archivo": "../S1843-44/ver-o.png",
+   "sha256": "c8dac81277bdb41c466e2d09a99b5907ceb36f1264af06f4cad19409d218aa62"
+  },
+  {
+   "archivo": "../S1843-44/ver-p.png",
+   "sha256": "2dcef8e3ccf7cedaf3f0d7081568fea47faab748a8bcfe8cd4584361c0f2f0d4"
+  },
+  {
+   "archivo": "../S1843-44/ver-q.png",
+   "sha256": "4b9ec3f0b9fab566843b0931209999afbbaea8ef1ceb967fea304179ca9f8a89"
+  },
+  {
+   "archivo": "../S1843-44/ver-r.png",
+   "sha256": "dc0094e24274c7c596a31dae038687f0f1dc74e70487fdc7004eab18c2e61c7e"
+  },
+  {
+   "archivo": "../S1843-44/ver-s.png",
+   "sha256": "103f513d31b1e4308b5dc40835a09ac2f9dad0b6afe9869378c9da9126bc44a6"
+  },
+  {
+   "archivo": "../S1843-44/ver-t.png",
+   "sha256": "7d471ef16563f1ef8ad669871ea703599042864b13cea188a1c4ef837e5968f5"
+  },
+  {
+   "archivo": "../S1843-44/ver-u.png",
+   "sha256": "37ce835b73292594a4eccf24967e35fab81c4377fb3d3583fa1ca53755b5b1e3"
+  },
+  {
+   "archivo": "../S1843-44/ver-v.png",
+   "sha256": "11963464de939805e64b2e32100a766608eb6e899559b3c7067645fa8120d498"
+  },
+  {
+   "archivo": "../S1843-44/ver-w.png",
+   "sha256": "9ffb9d098054d5fffabca8e64da56e9ba5c3fe49a9cacd04fdec9770ffa97f55"
+  },
+  {
+   "archivo": "../S1843-44/ver-x.png",
+   "sha256": "5f76f837bbe66c32f93c75f62316d2f894f70d4f110fe2e34ff1d857459e6c09"
+  },
+  {
+   "archivo": "../S1843-44/ver-y.png",
+   "sha256": "0278ff7795a7e0e363e4095b4eedeaa8d7442ba68e76bf818f8dd0c1daf8626b"
+  },
+  {
+   "archivo": "../S1843-44/ver-z.png",
+   "sha256": "4cb6db5d6a9aecf40eb6d2d05725d04801fa5b4021b6453d6eb3a3f3d0252ecb"
+  },
+  {
+   "archivo": "../S1843-44/ver-aa.png",
+   "sha256": "c2a00973cb96754858ed24efd35910b54deda985f95c8aab8dce544c15a21b55"
+  },
+  {
+   "archivo": "../S1843-44/ver-ab.png",
+   "sha256": "78e60f5a8964db54139c9cd293a2047af77b5cc2db7e962d24d2910ff2295694"
+  },
+  {
+   "archivo": "../S1843-44/ver-ac.png",
+   "sha256": "5b6b1b017d744dd33e77344f6869b90c6cd3b98f335ec0784b78098fe9315d4c"
+  },
+  {
+   "archivo": "../S1843-44/ver-ad.png",
+   "sha256": "7ea533f67395afbdc1a6b7fa2a84bef13dc8147df90a1fd2dabab218c08b6edf"
+  }
+ ],
+ "teselas": 8,
+ "vacio": false
+}

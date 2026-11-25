@@ -1,0 +1,10 @@
+{
+ "alcance": "Correcciones del censo 1B de 1843 sobre las lecturas por sector, cada una con su motivo (tools/geo/censo_1843.py). No se editan las lecturas.",
+ "correcciones": [
+  {"sector": "S1843-44", "local": "ad", "accion": "quitar", "motivo": "Duplicada de S1843-54/h (misma huerta cercada, misma caja): su centro (4097,3472) cae en S1843-54, que es su dueño."},
+  {"sector": "S1843-52", "local": "e", "accion": "mover", "a": "S1843-42", "motivo": "Su centro (2519,3459) cae 1 px dentro de S1843-42."},
+  {"sector": "S1843-35", "local": "a", "accion": "ocupacion", "valor": "parte_de_otra_unidad", "de": "S1843-34/w", "motivo": "Pieza rayada de la manzana de La Candelaria (letra J), separada por una rendija blanca; recorte revisado a ojo el 24-11-2026."},
+  {"sector": "S1843-35", "local": "b", "accion": "ocupacion", "valor": "parte_de_otra_unidad", "de": "S1843-34/w", "motivo": "Pieza rayada de la manzana de La Candelaria (letra J); recorte revisado a ojo el 24-11-2026."},
+  {"sector": "S1843-35", "local": "d", "accion": "ocupacion", "valor": "parte_de_otra_unidad", "de": "S1843-34/w", "motivo": "Pieza rayada de la manzana de La Candelaria (letra J); recorte revisado a ojo el 24-11-2026."}
+ ]
+}

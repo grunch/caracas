@@ -1,0 +1,16 @@
+{"sector":"S1843-13","unidades":[
+{"local":"a","caja_px":[2960,1115,3611,1198],"poligono_px":[[2960,1115],[3611,1115],[3611,1198],[2960,1198]],"ocupacion":"descartada_no_edificacion","letras":[],"esquinas":[],"rayado":"ninguno (franja del marco)","borrador":{"relacion":"igual","candidatas":["K1843-0001"]},"lectura":"segura","nota":"K1843-0001 es la franja del marco del plano: doble filete con los números 5–10 de la cuadrícula de referencia (en y≈1138) y, encima, la leyenda en cursiva («…Registrado conforme a…»). No es manzana. La caja de K1843-0001 recorre todo el ancho del plano (x 1702–4915); aquí solo el tramo de este sector."},
+{"local":"b","caja_px":[3355,1265,3440,1481],"poligono_px":[[3355,1265],[3440,1265],[3440,1481],[3355,1481]],"ocupacion":"descartada_no_edificacion","letras":["N"],"esquinas":[],"rayado":"ninguno (grabado)","borrador":{"relacion":"igual","candidatas":["K1843-0004"]},"lectura":"segura","nota":"K1843-0004 es la flor de lis de la rosa de los vientos (aguja N, letra N encima en x≈3370,y≈1225). No es manzana."}
+],
+"observaciones":[
+{"tipo":"marco","px":[3285,1172],"nota":"Filete inferior del marco superior del plano, de lado a lado del sector; por encima, números de cuadrícula 5,6,7,8,9,10 (x≈2972,3090,3215,3330,3455,3580; y≈1138) y la leyenda."},
+{"tipo":"sombreado_de_borde","px":[3200,1215],"nota":"Franja de rayitas verticales densas pegada al marco (y≈1175–1260): sombreado del borde del marco o de cerro, no manzanas."},
+{"tipo":"rosa_de_los_vientos","px":[3416,1558],"nota":"Centro de la rosa de los vientos: ejes N–S y O–E (letras O en x≈3240,y≈1590 y E en x≈3615,y≈1525) y diagonales de trazos. Decoración, no trazado urbano."},
+{"tipo":"terreno","px":[3285,1450],"nota":"Todo el sector bajo el marco está cubierto de trazos cortos dispersos (campo/pasto o ladera sin delimitar), sin calles, manzanas, lotes ni huertas cerradas. Las líneas verticales de trazos (x≈2985,3105,3225,3340,3465,3585) son la cuadrícula de referencia, no calles."},
+{"tipo":"mancha","px":[3125,1395],"nota":"Pequeñas manchas oscuras (x≈3125,y≈1395 y x≈3140,y≈1385) en el papel: defectos, no signos."}
+],
+"recortes":[
+{"archivo":"/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-13/v_K0001.png","sha256":"122c4ec14c770ff8f72e3f4da69ca08542f7ebb3bb4feae5c4d0377e0c7f9a79"},
+{"archivo":"/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-13/v_K0004.png","sha256":"3c187bf349f9d457dbd4b3c8203d5126f2a5c0825f0260e25de75582bfa9ac94"}
+],
+"teselas":4,"vacio":true}

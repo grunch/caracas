@@ -1,0 +1,464 @@
+{
+ "sector": "S1843-45",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    4288,
+    2876,
+    4315,
+    2972
+   ],
+   "poligono_px": [
+    [
+     4288,
+     2876
+    ],
+    [
+     4315,
+     2876
+    ],
+    [
+     4315,
+     2972
+    ],
+    [
+     4288,
+     2972
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    69
+   ],
+   "rayado": "punteado vertical (mismo patrón que las manzanas vecinas al oeste)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Manzana angosta (≈27×96 px), última del damero hacia el este en esta fila; el 69 está impreso abajo, junto a su esquina sur. Verificación: verif-a.png"
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    4325,
+    2875,
+    4417,
+    2978
+   ],
+   "poligono_px": [
+    [
+     4325,
+     2875
+    ],
+    [
+     4417,
+     2875
+    ],
+    [
+     4417,
+     2978
+    ],
+    [
+     4325,
+     2978
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "o"
+   ],
+   "esquinas": [],
+   "rayado": "sin rayado (recinto en blanco con muro grueso)",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0068"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Recinto cuadrado aislado de borde grueso con una abertura en el lado oeste (y≈2908–2945); letra minúscula «o» al centro. No está dentro de una manzana rayada: lo rodea terreno abierto. Verificación: verif-b.png"
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    4325,
+    3100,
+    4382,
+    3127
+   ],
+   "poligono_px": [
+    [
+     4325,
+     3100
+    ],
+    [
+     4382,
+     3100
+    ],
+    [
+     4382,
+     3127
+    ],
+    [
+     4325,
+     3127
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "vertical denso",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Edificio aislado rayado dentro de la huerta d (sin calles alrededor); el rayado vertical es como el de los edificios del Campo de Marte al oeste. Dudosa: puede ser una construcción de la hacienda más que una manzana. Verificación: verif-c.png"
+  },
+  {
+   "local": "d",
+   "caja_px": [
+    4200,
+    3048,
+    4592,
+    3440
+   ],
+   "poligono_px": [
+    [
+     4200,
+     3098
+    ],
+    [
+     4225,
+     3068
+    ],
+    [
+     4265,
+     3054
+    ],
+    [
+     4330,
+     3048
+    ],
+    [
+     4430,
+     3048
+    ],
+    [
+     4482,
+     3052
+    ],
+    [
+     4503,
+     3077
+    ],
+    [
+     4592,
+     3215
+    ],
+    [
+     4487,
+     3345
+    ],
+    [
+     4375,
+     3440
+    ],
+    [
+     4350,
+     3410
+    ],
+    [
+     4300,
+     3330
+    ],
+    [
+     4250,
+     3240
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "trazos cortos horizontales con rayitas oblicuas (cultivo), sin árboles dibujados",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0076"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Terreno cultivado delimitado: al norte una línea curva, al este la ribera de la quebrada, al SE una línea recta (lindero) y al oeste una línea que corre junto a la quebrada del lado oeste. Lleva una estrella (símbolo sin leyenda leída) en (4392,3218) y el edificio c. Esquina oeste (4200,3098) apenas fuera de la caja. Centro (4392,3208). Verificación: verif-d.png"
+  },
+  {
+   "local": "e",
+   "caja_px": [
+    4487,
+    3215,
+    4802,
+    3565
+   ],
+   "poligono_px": [
+    [
+     4592,
+     3215
+    ],
+    [
+     4802,
+     3443
+    ],
+    [
+     4697,
+     3565
+    ],
+    [
+     4487,
+     3345
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "trazos cortos horizontales con rayitas oblicuas (cultivo)",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0076",
+     "K1843-0081"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Parcela cuadrilátera entre la ribera sur de la quebrada (NE), el lindero recto que viene de la huerta d (NO) y otro lindero que baja al SE desde el cruce (4487,3345). Estrella en (4634,3417). K1843-0081 cae sobre el cruce de linderos y toma un pedazo de esta parcela y de la vecina al sur. Esquina sur fuera de la caja; centro (4644,3391) dentro. Verificación: verif-e.png, verif-cruce.png"
+  },
+  {
+   "local": "f",
+   "caja_px": [
+    4440,
+    2645,
+    4865,
+    3293
+   ],
+   "poligono_px": [
+    [
+     4455,
+     2645
+    ],
+    [
+     4790,
+     2645
+    ],
+    [
+     4765,
+     2704
+    ],
+    [
+     4773,
+     2796
+    ],
+    [
+     4762,
+     2888
+    ],
+    [
+     4772,
+     2985
+    ],
+    [
+     4795,
+     3039
+    ],
+    [
+     4857,
+     3139
+    ],
+    [
+     4865,
+     3193
+    ],
+    [
+     4849,
+     3231
+    ],
+    [
+     4811,
+     3270
+    ],
+    [
+     4772,
+     3293
+    ],
+    [
+     4745,
+     3283
+    ],
+    [
+     4603,
+     3116
+    ],
+    [
+     4481,
+     2808
+    ],
+    [
+     4450,
+     2700
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "horizontal denso con rayitas oblicuas y árboles redondos dibujados",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0076",
+     "K1843-0077",
+     "K1843-0059"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Estancia/huerta con árboles, larga, entre la ribera este de la quebrada (oeste) y un lindero curvo (este), desde el camino de y≈2640 hasta la punta redondeada de (4800,3290). K1843-0077 y K1843-0059 son pedazos de ella (no son manzanas). Arriba encierra una franja punteada urbana (≈4550–4677, 2650–2672), fuera de esta caja y no registrada aquí. Borde norte aproximado. Centro (4664,2923). Verificación: verif-f.png"
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "quebrada",
+   "px": [
+    4520,
+    3000
+   ],
+   "nota": "Quebrada con riberas (doble línea y talud rayado) que cruza el sector en diagonal de NO a SE, desde (4440,2808) hasta su confluencia con el río grueso en (4870,3440). Corta todo el damero: al este no hay manzanas."
+  },
+  {
+   "tipo": "rio",
+   "px": [
+    4860,
+    3450
+   ],
+   "nota": "Río ancho de trazo oscuro que entra por la esquina SE (≈4900,3410) y sigue al SO; la quebrada desemboca en él."
+  },
+  {
+   "tipo": "quebrada",
+   "px": [
+    4230,
+    3260
+   ],
+   "nota": "Otra quebrada (doble línea) en el borde oeste, de (4150,3100) a (4320,3520), entre el Campo de Marte y la huerta d."
+  },
+  {
+   "tipo": "terreno_abierto",
+   "px": [
+    4400,
+    3015
+   ],
+   "nota": "Franja de terreno abierto (rayitas verticales sueltas, sin lindero) entre el recinto b y la huerta d, y entre la manzana a y la quebrada. Fin del damero urbano hacia el este; las calles de la cuadrícula se pierden aquí."
+  },
+  {
+   "tipo": "terreno_abierto",
+   "px": [
+    4860,
+    2950
+   ],
+   "nota": "Al este de la huerta f, campo abierto (rayitas verticales) sin linderos ni calles hasta el borde del sector."
+  },
+  {
+   "tipo": "calle_termina",
+   "px": [
+    4320,
+    2860
+   ],
+   "nota": "La calle que pasa al norte de la manzana a y del recinto b (y≈2868–2875) se pierde al este en terreno abierto antes de la quebrada."
+  },
+  {
+   "tipo": "marca_dudosa",
+   "px": [
+    4820,
+    3366
+   ],
+   "nota": "Signo pequeño oscuro (parecido a «π» o una «u») junto a la ribera, al norte del cruce con el río; no se lee si es letra o una construcción mínima. No registrado como unidad."
+  },
+  {
+   "tipo": "simbolo",
+   "px": [
+    4392,
+    3218
+   ],
+   "nota": "Estrella de seis puntas dentro de la huerta d; otra en (4634,3417) en la huerta e y otra en (4524,3524) en la parcela al sur (fuera de la caja). Símbolo sin leyenda leída."
+  },
+  {
+   "tipo": "borrador",
+   "px": [
+    4397,
+    3455
+   ],
+   "nota": "K1843-0082 (centro 4397,3455) cae en la punta norte de la parcela que queda al sur de d, entre los linderos (centro de esa parcela ≈4510,3515, fuera de la caja: sector de abajo). Es parte_de esa parcela, no una manzana."
+  },
+  {
+   "tipo": "borrador",
+   "px": [
+    4588,
+    3119
+   ],
+   "nota": "K1843-0076 es una mancha gigante que une las huertas d, e, f, la parcela del sur, las riberas y el campo abierto: une_varias."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-a-b.png",
+   "sha256": "1604ece9c1e00d0f077085b854a27addc5831adaf435b0632c8ca5ee2dcba552"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-a.png",
+   "sha256": "f608b258055f657be7d62d2a23f9e1d6eca52eb5eae7f8127990caad6d15c536"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-b.png",
+   "sha256": "8b9869175b322458374aec0e71aee4f6d7f4a397904d882c7d51bf0305aa97c7"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-c-oeste.png",
+   "sha256": "c1231680d98ab57fe3bfc95dd203949cd838934b3fbbd9648cc65fd13edf6867"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-c.png",
+   "sha256": "17a7336d3875e38e1cb9a9423652b3d47e84dbaa7bd098d23f90243692c41835"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-cruce.png",
+   "sha256": "3a84a43c137a2fd093131b48aa1e6cfbbb0fbeecdc110fb6309dafc3209eaf24"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-d-sur.png",
+   "sha256": "74259d52d37b889415a3ebc88bd2dd43e5ff6d538961e2a4e3617ec31785d5cf"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-d.png",
+   "sha256": "231b342572251c09ff3c34caa46c19dc957451d6767d3f1edebcee3dee61c6d4"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-e.png",
+   "sha256": "1750e3a8ab22f6bfc086874f7b272a226f3b828ca68fa107d5852ce6c0de0319"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-edificio.png",
+   "sha256": "26c51bd3e1c5f9616b2a9d2b5dbccd5a7318f954bb245a087e0ed428dce7a2d2"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-f.png",
+   "sha256": "37b542e2e342ededb244fd1136d92244b19d1289281d4ce99c93e94d0171dc1c"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-marca-u.png",
+   "sha256": "917af5268082e68f6aa04f8a9abecb835b69e6e61b0817210a484172fede457c"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-45/verif-marca.png",
+   "sha256": "26756195cdef03c09aba102b0c30b7d6576d71f49e3b3006a8c5117e8a02e194"
+  }
+ ],
+ "teselas": 4,
+ "vacio": false
+}

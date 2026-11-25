@@ -1,0 +1,58 @@
+{
+ "sector": "S1843-21",
+ "unidades": [],
+ "observaciones": [
+  {
+   "tipo": "borde_del_plano",
+   "px": [
+    1700,
+    1980
+   ],
+   "nota": "Marco del plano (doble filete) en x≈1693-1740; a su izquierda, margen con restos de texto de la leyenda (\"...a.\", \"...ra\") en x<1690. Las rayas verticales que el borrador toma como K1843-0045 son este marco, no una manzana."
+  },
+  {
+   "tipo": "rotulos_cuadricula",
+   "px": [
+    1712,
+    1795
+   ],
+   "nota": "Números de fila de la cuadrícula 1-5 en el margen (1 y≈1795, 2 y≈1928, 3 y≈2040, 4 y≈2155, 5 y≈2275); las líneas punteadas horizontales que salen de ellos son la cuadrícula, no calles."
+  },
+  {
+   "tipo": "cerro",
+   "px": [
+    1800,
+    2100
+   ],
+   "nota": "Sombreado de cerro (hachures en abanico) en el cuadrante suroeste, x≈1740-2000, y≈1800-2276; sigue al sur hacia K1843-0034 (centro fuera de la caja)."
+  },
+  {
+   "tipo": "sabana",
+   "px": [
+    2100,
+    1850
+   ],
+   "nota": "Resto de la caja: terreno abierto con trazos de hierba/sabana sueltos, sin límites; matas de árboles aisladas en (1780,1735) y (2290,1690). No es huerta delimitada."
+  },
+  {
+   "tipo": "linea_de_trazos",
+   "px": [
+    2147,
+    2150
+   ],
+   "nota": "Línea de trazos rotulada \"3\" en (2087,2108): baja en diagonal hacia el sureste por (2147,2150) y (2273,2273) y sigue fuera de la caja hasta (2440,2393), junto al rótulo \"Canton del Teque\" (x≈2327-2567, y≈2243). Probablemente camino o lindero; dudosa."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-21/contexto.png",
+   "sha256": "be72fe1adb42a1bc3a7fd7ef415a834d16e2e1719583cc0793abcfcec4d7552b"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-21/v_camino.png",
+   "sha256": "a6c74f19ff248ed051a478651c264f714142985abf1d04780b558fdc5dead4bf"
+  }
+ ],
+ "teselas": 4,
+ "vacio": true
+}

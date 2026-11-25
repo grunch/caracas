@@ -1,0 +1,879 @@
+{
+ "sector": "S1843-35",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    4277,
+    2506,
+    4308,
+    2566
+   ],
+   "poligono_px": [
+    [
+     4277,
+     2506
+    ],
+    [
+     4308,
+     2506
+    ],
+    [
+     4308,
+     2566
+    ],
+    [
+     4277,
+     2566
+    ]
+   ],
+   "centro_px": [
+    4292.5,
+    2536.0
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado (trazos cortos verticales densos, patrón parroquial del damero vecino)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Manzana pequeña en el borde este del damero; tiene adosado al oeste el anexo b.",
+   "recorte": "ver_a.png"
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    4249,
+    2547,
+    4278,
+    2566
+   ],
+   "poligono_px": [
+    [
+     4249,
+     2547
+    ],
+    [
+     4278,
+     2547
+    ],
+    [
+     4278,
+     2566
+    ],
+    [
+     4249,
+     2566
+    ]
+   ],
+   "centro_px": [
+    4263.5,
+    2556.5
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado (trazos cortos verticales densos, patrón parroquial del damero vecino)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Rectángulo rayado pequeño adosado al costado oeste de a (comparte su lindero x≈4277); la letra mayúscula J está impresa fuera, a su oeste (x≈4233,y≈2557), y podría referirse a él. Centro x=4263,5, justo en el borde oeste de la caja; podría leerse como parte de a.",
+   "recorte": "ver_b.png"
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    4317,
+    2506,
+    4347,
+    2566
+   ],
+   "poligono_px": [
+    [
+     4317,
+     2506
+    ],
+    [
+     4347,
+     2506
+    ],
+    [
+     4347,
+     2566
+    ],
+    [
+     4317,
+     2566
+    ]
+   ],
+   "centro_px": [
+    4332.0,
+    2536.0
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado (trazos cortos verticales densos, patrón parroquial del damero vecino)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Última manzana de la fila al este; al este solo campo hasta la quebrada.",
+   "recorte": "ver_c.png"
+  },
+  {
+   "local": "d",
+   "caja_px": [
+    4278,
+    2573,
+    4309,
+    2624
+   ],
+   "poligono_px": [
+    [
+     4278,
+     2573
+    ],
+    [
+     4309,
+     2573
+    ],
+    [
+     4309,
+     2624
+    ],
+    [
+     4278,
+     2624
+    ]
+   ],
+   "centro_px": [
+    4293.5,
+    2598.5
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado (trazos cortos verticales densos, patrón parroquial del damero vecino)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "",
+   "recorte": "ver_d.png"
+  },
+  {
+   "local": "e",
+   "caja_px": [
+    4318,
+    2573,
+    4347,
+    2624
+   ],
+   "poligono_px": [
+    [
+     4318,
+     2573
+    ],
+    [
+     4347,
+     2573
+    ],
+    [
+     4347,
+     2624
+    ],
+    [
+     4318,
+     2624
+    ]
+   ],
+   "centro_px": [
+    4332.5,
+    2598.5
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado (trazos cortos verticales densos, patrón parroquial del damero vecino)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "La letra minúscula x está impresa fuera, junto a su esquina SE (x≈4356,y≈2613).",
+   "recorte": "ver_e.png"
+  },
+  {
+   "local": "f",
+   "caja_px": [
+    4320,
+    2631,
+    4348,
+    2746
+   ],
+   "poligono_px": [
+    [
+     4320,
+     2631
+    ],
+    [
+     4348,
+     2631
+    ],
+    [
+     4348,
+     2746
+    ],
+    [
+     4320,
+     2746
+    ]
+   ],
+   "centro_px": [
+    4334.0,
+    2688.5
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado (trazos cortos verticales densos, patrón parroquial del damero vecino)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Manzana angosta al este de la manzana 43/44 (que se centra en x≈4257, fuera de la caja); sin calle al este: da al campo.",
+   "recorte": "ver_f.png"
+  },
+  {
+   "local": "g",
+   "caja_px": [
+    4321,
+    2752,
+    4350,
+    2870
+   ],
+   "poligono_px": [
+    [
+     4321,
+     2752
+    ],
+    [
+     4350,
+     2752
+    ],
+    [
+     4350,
+     2870
+    ],
+    [
+     4321,
+     2870
+    ]
+   ],
+   "centro_px": [
+    4335.5,
+    2811.0
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado (trazos cortos verticales densos, patrón parroquial del damero vecino)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Manzana angosta al este de la manzana 55/56 (centrada en x≈4258, fuera de la caja); sin calle al este.",
+   "recorte": "ver_g.png"
+  },
+  {
+   "local": "h",
+   "caja_px": [
+    4549,
+    2594,
+    4727,
+    2628
+   ],
+   "poligono_px": [
+    [
+     4549,
+     2594
+    ],
+    [
+     4727,
+     2594
+    ],
+    [
+     4727,
+     2628
+    ],
+    [
+     4549,
+     2628
+    ]
+   ],
+   "centro_px": [
+    4638.0,
+    2611.0
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado denso (trazos cortos gruesos)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Franja edificada al norte del camino E-O, al este del lindero x≈4548; su parte oeste toca la estancia n.",
+   "recorte": "ver_h.png"
+  },
+  {
+   "local": "i",
+   "caja_px": [
+    4548,
+    2637,
+    4676,
+    2671
+   ],
+   "poligono_px": [
+    [
+     4548,
+     2637
+    ],
+    [
+     4676,
+     2637
+    ],
+    [
+     4676,
+     2671
+    ],
+    [
+     4548,
+     2671
+    ]
+   ],
+   "centro_px": [
+    4612.0,
+    2654.0
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado denso (trazos cortos gruesos)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Franja edificada al sur del camino E-O, frente a h, dentro del área sombreada del sur.",
+   "recorte": "ver_i.png"
+  },
+  {
+   "local": "j",
+   "caja_px": [
+    4797,
+    2608,
+    4890,
+    2637
+   ],
+   "poligono_px": [
+    [
+     4797,
+     2608
+    ],
+    [
+     4890,
+     2608
+    ],
+    [
+     4890,
+     2637
+    ],
+    [
+     4845,
+     2634
+    ],
+    [
+     4797,
+     2631
+    ]
+   ],
+   "centro_px": [
+    4843.5,
+    2622.5
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado (trazos cortos)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Franja edificada al norte del camino E-O; el borde sur sigue la curva del camino. Al este se le adosa otra franja más alta (x 4890–≈4980, y≈2578–2640) que se centra fuera de la caja.",
+   "recorte": "ver_j.png"
+  },
+  {
+   "local": "k",
+   "caja_px": [
+    4409,
+    2228,
+    4532,
+    2437
+   ],
+   "poligono_px": [
+    [
+     4410,
+     2228
+    ],
+    [
+     4516,
+     2228
+    ],
+    [
+     4523,
+     2300
+    ],
+    [
+     4520,
+     2350
+    ],
+    [
+     4532,
+     2437
+    ],
+    [
+     4428,
+     2437
+    ],
+    [
+     4414,
+     2350
+    ],
+    [
+     4409,
+     2300
+    ]
+   ],
+   "centro_px": [
+    4470.5,
+    2332.5
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "rayado horizontal grueso con trazos oblicuos sueltos (sombreado de cultivo/estancia, no rayado parroquial)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Parcela de estancia/cultivo entre la quebrada (lindero oeste, con la ribera sombreada adentro) y un lindero N-S curvo (x≈4516–4532); linderos E-O a y≈2228 y y≈2437. La cuadrícula punteada la atraviesa en y≈2372.",
+   "recorte": "ver_k.png"
+  },
+  {
+   "local": "l",
+   "caja_px": [
+    4516,
+    2228,
+    4642,
+    2437
+   ],
+   "poligono_px": [
+    [
+     4516,
+     2228
+    ],
+    [
+     4642,
+     2228
+    ],
+    [
+     4642,
+     2437
+    ],
+    [
+     4532,
+     2437
+    ],
+    [
+     4520,
+     2350
+    ],
+    [
+     4523,
+     2300
+    ]
+   ],
+   "centro_px": [
+    4579.0,
+    2332.5
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "rayado horizontal grueso con trazos oblicuos sueltos (sombreado de cultivo/estancia, no rayado parroquial)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Parcela de estancia/cultivo entre el lindero N-S curvo y el borde este x≈4642 (campo abierto al este); y≈2228–2437.",
+   "recorte": "ver_l.png"
+  },
+  {
+   "local": "m",
+   "caja_px": [
+    4418,
+    2437,
+    4548,
+    2632
+   ],
+   "poligono_px": [
+    [
+     4428,
+     2437
+    ],
+    [
+     4532,
+     2437
+    ],
+    [
+     4541,
+     2500
+    ],
+    [
+     4540,
+     2550
+    ],
+    [
+     4547,
+     2600
+    ],
+    [
+     4548,
+     2632
+    ],
+    [
+     4418,
+     2632
+    ],
+    [
+     4419,
+     2600
+    ],
+    [
+     4422,
+     2550
+    ]
+   ],
+   "centro_px": [
+    4483.0,
+    2534.5
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "rayado horizontal grueso con trazos oblicuos sueltos (sombreado de cultivo/estancia, no rayado parroquial)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Parcela entre la quebrada y el lindero N-S (x≈4532–4548), de y≈2437 hasta el camino E-O (y≈2632).",
+   "recorte": "ver_m.png"
+  },
+  {
+   "local": "n",
+   "caja_px": [
+    4532,
+    2437,
+    4643,
+    2594
+   ],
+   "poligono_px": [
+    [
+     4532,
+     2437
+    ],
+    [
+     4642,
+     2437
+    ],
+    [
+     4643,
+     2594
+    ],
+    [
+     4548,
+     2594
+    ],
+    [
+     4540,
+     2550
+    ],
+    [
+     4541,
+     2500
+    ]
+   ],
+   "centro_px": [
+    4587.5,
+    2515.5
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "rayado horizontal grueso con trazos oblicuos sueltos (sombreado de cultivo/estancia, no rayado parroquial)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Parcela entre el lindero N-S y el borde x≈4642, de y≈2437 hasta la franja edificada h (y≈2594).",
+   "recorte": "ver_n.png"
+  },
+  {
+   "local": "o",
+   "caja_px": [
+    4701,
+    2813,
+    4773,
+    2865
+   ],
+   "poligono_px": [
+    [
+     4701,
+     2813
+    ],
+    [
+     4773,
+     2813
+    ],
+    [
+     4773,
+     2865
+    ],
+    [
+     4701,
+     2865
+    ]
+   ],
+   "centro_px": [
+    4737.0,
+    2839.0
+   ],
+   "ocupacion": "descartada_no_edificacion",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "mancha del sombreado",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0059"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Falso positivo del borrador: es una mancha oscura del sombreado de la gran área de cultivo al sur del camino, no una manzana.",
+   "recorte": "ver_o.png"
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "quebrada",
+   "px": [
+    4415,
+    2450
+   ],
+   "nota": "Quebrada/río N-S con riberas sombreadas: línea gruesa de x≈4410 (y 2276) a x≈4428 (y 2450) y x≈4419 (y 2630); al sur del camino sigue al SSE con dos líneas (x≈4436–4515 en y 2660; x≈4447 en y 2700; x≈4480 en y 2860). Separa el damero de las estancias del este."
+  },
+  {
+   "tipo": "camino",
+   "px": [
+    4600,
+    2634
+   ],
+   "nota": "Camino E-O (doble línea, ~6–8 px) que sale del damero en y≈2632–2640, cruza la quebrada en x≈4410–4440 y sigue al este hasta x=4915 bajando suavemente a y≈2650 (curva). Bordeado por las franjas edificadas h, i, j."
+  },
+  {
+   "tipo": "cruce",
+   "px": [
+    4425,
+    2636
+   ],
+   "nota": "Cruce del camino sobre la quebrada; no se ve dibujo explícito de puente (dudoso: puente o vado). La letra minúscula f está impresa junto, al oeste (x≈4398,y≈2650)."
+  },
+  {
+   "tipo": "lindero",
+   "px": [
+    4530,
+    2430
+   ],
+   "nota": "Lindero N-S curvo entre estancias: x≈4514 (y 2228) → 4523 (2300) → 4532 (2437) → 4541 (2500) → 4548 (2630)."
+  },
+  {
+   "tipo": "lindero",
+   "px": [
+    4642,
+    2400
+   ],
+   "nota": "Borde este de las estancias del norte, recto en x≈4642 de y<2276 a y≈2594; al este campo abierto (terreno sin delimitar) hasta el borde del sector."
+  },
+  {
+   "tipo": "lindero",
+   "px": [
+    4780,
+    2750
+   ],
+   "nota": "Borde este del área sombreada al sur del camino: de (4790,2640) curva a (4764,2742) y baja por x≈4766 hasta y=2868. Esa área (de la quebrada a ese borde) se centra al sur de la caja (y≈2950): no se registra aquí."
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    4313,
+    2690
+   ],
+   "nota": "Calle N-S entre la columna de manzanas a/d y c/e (x≈4309–4317), y entre las manzanas 43/44 y 55/56 y las angostas f, g (x≈4316–4320)."
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    4330,
+    2569
+   ],
+   "nota": "Calles E-O del damero en y≈2566–2573 y y≈2746–2752; en y≈2624–2631 la calle coincide con el camino E-O."
+  },
+  {
+   "tipo": "borde_ciudad",
+   "px": [
+    4348,
+    2700
+   ],
+   "nota": "Las manzanas c, e, f, g terminan en x≈4347–4350 sin calle al este: franja de campo (x≈4350–4405) hasta la ribera de la quebrada. Ahí está la letra x (4356,2613)."
+  },
+  {
+   "tipo": "letra",
+   "px": [
+    4452,
+    2788
+   ],
+   "nota": "Letra minúscula t entre las dos líneas de la quebrada al sur del camino (punto notable en el cauce; dudosa la lectura como t)."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "ver_a.png",
+   "sha256": "d2696a7760ac211ed3ef44691f72ad2d3a3bcadf6b3298c122f253d779bd3de1"
+  },
+  {
+   "archivo": "ver_b.png",
+   "sha256": "e4da4e745e5f903423b6c610d278da7e93763d70164a3d6d933c1f2c3720d625"
+  },
+  {
+   "archivo": "ver_c.png",
+   "sha256": "f99af35aa50cf36cc00633a5b9e8f5cd5a095ac9c54fdfd2a832c31dcf524e8b"
+  },
+  {
+   "archivo": "ver_d.png",
+   "sha256": "23203b3b6a6171885c79bad85b572a6074eed888196db19d65e0caf55d84ebe1"
+  },
+  {
+   "archivo": "ver_e.png",
+   "sha256": "b0dfbf0745eb2928886b605f78d8133705791c64edf431ce627b12ea3787c86d"
+  },
+  {
+   "archivo": "ver_f.png",
+   "sha256": "9965ef0b19c67a77131bd6f6227286eb1176d1d9e75b8dca85d91083cbb00485"
+  },
+  {
+   "archivo": "ver_g.png",
+   "sha256": "2c09cdc34a76b38b538e5a946f88c7c1974865cbe20bf0394bb716add44d8844"
+  },
+  {
+   "archivo": "ver_h.png",
+   "sha256": "ba6bab390e2e82a7c2aaa2c3aed2050f5a73cca13a18427b82ac2e81f73fd94e"
+  },
+  {
+   "archivo": "ver_i.png",
+   "sha256": "bdb495b29d24b11658074ca0d5afcbcc11404804b7e3859b870b813d88e7a33c"
+  },
+  {
+   "archivo": "ver_j.png",
+   "sha256": "3a34f285a5f848117abcd761036e964eab2b99911dabe10473c2231a50f88fe5"
+  },
+  {
+   "archivo": "ver_k.png",
+   "sha256": "c8358691daf5cfff9b659b7e2d1f6f64f82a5005288486e8030bf3be267e41f7"
+  },
+  {
+   "archivo": "ver_l.png",
+   "sha256": "d2a95ee8fdff16edbf21d33fd4c0dc1e7ca3da26d55da875986b585407037e4d"
+  },
+  {
+   "archivo": "ver_m.png",
+   "sha256": "45d093a819df5e70735612ff0c83e1671810238cc2fc87d5848c415bbd121eb3"
+  },
+  {
+   "archivo": "ver_n.png",
+   "sha256": "38009a0e365bf4110ff8cb8dd46a92c1f57965f00e107bff66bb6854aa6d2a6b"
+  },
+  {
+   "archivo": "ver_o.png",
+   "sha256": "4635e56f03924033cb95320debf1f9b8c4ddc632857d72b02e33bc34b2e652ce"
+  },
+  {
+   "archivo": "t1.png",
+   "sha256": "e1676e1c41904ca887d5ca2d887746f25a5c996ccb5892bd896276e934602a13"
+  },
+  {
+   "archivo": "t2.png",
+   "sha256": "4d8c4a669d70cb939d50ed928111143af7681c2402bc52166e8ec258a98045a2"
+  },
+  {
+   "archivo": "t3.png",
+   "sha256": "79b3a9c34ed1b858b447740e3062a1fa5722210d6f2ecdb8a0f1d1b913f99669"
+  },
+  {
+   "archivo": "t4.png",
+   "sha256": "4d8917cebe9b6c5f9ce9ccfbd1044364a1fe57b0974a24a3da8cee7e8784abee"
+  },
+  {
+   "archivo": "w1.png",
+   "sha256": "aed3b63d5ea5004eebd25f012c479f0ec010f1b3a298869eb623a60961811b14"
+  },
+  {
+   "archivo": "w2.png",
+   "sha256": "8f5081487e8ba7f7be1bc5a269e02b5a5c352fc1cd3d77e52f19ab8b4f700b4e"
+  },
+  {
+   "archivo": "v_J.png",
+   "sha256": "1c7ce9973541cceab91856938fffb23fd1c3b91399e343890d0339b63d62ca1f"
+  },
+  {
+   "archivo": "v_huertas_rio.png",
+   "sha256": "8646af0e88cdecd57fa17aa7fc5d5c62976a75c4c48694f481b1160958294b42"
+  },
+  {
+   "archivo": "v_este.png",
+   "sha256": "de655c2692fd68629e36e30e42439e3f9fc3cbe1b2d09802729a9d111d04e60d"
+  },
+  {
+   "archivo": "band.png",
+   "sha256": "d892062a565c8371618182fe1eed835b78dfe18f9a2de64ba18aebc054ac0f8e"
+  }
+ ],
+ "teselas": 4,
+ "vacio": false
+}

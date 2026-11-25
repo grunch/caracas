@@ -1,0 +1,19 @@
+{"sector":"S1843-11",
+"unidades":[
+{"local":"a","caja_px":[2248,1361,2282,1402],"poligono_px":[[2248,1361],[2282,1361],[2282,1402],[2248,1402]],
+"ocupacion":"rayada","letras":["r"],"esquinas":[],"rayado":"diagonal (de arriba-izquierda a abajo-derecha), con borde negro",
+"borrador":{"relacion":"sin_candidata","candidatas":[]},"lectura":"segura",
+"nota":"edificio aislado en campo abierto (pasto punteado), sin calles alrededor; la letra minúscula r va impresa en negro sobre el rayado, no en lote blanco. Al norte de la quebrada."}
+],
+"observaciones":[
+{"tipo":"borde_del_plano","px":[1735,1187],"nota":"esquina noroeste del marco interior del plano (filete doble exterior hacia x≈1690, y≈1145); la candidata K1843-0001 y la franja vertical del borrador junto a x≈1690-1725 son el marco, no manzanas"},
+{"tipo":"sombreado","px":[1900,1205],"nota":"franja de hachures cortas colgando del filete superior del marco (y≈1187-1215) a lo largo de todo el borde norte: sombreado de cerro/borde, no edificación"},
+{"tipo":"quebrada","px":[1846,1187],"nota":"quebrada (trazo negro continuo) que entra por el borde norte del marco en x≈1846"},
+{"tipo":"quebrada","px":[1925,1325],"nota":"la misma quebrada baja hacia el sureste"},
+{"tipo":"quebrada","px":[2060,1435],"nota":"la quebrada sigue al este-sureste"},
+{"tipo":"quebrada","px":[2300,1490],"nota":"la quebrada sale de la caja por el este hacia x≈2308, y≈1490 y sigue hacia el sector vecino; no corta damero alguno (no hay calles en el sector)"},
+{"tipo":"arboleda","px":[1940,1290],"nota":"grupos de árboles sueltos sin cerca (también hacia x≈1885,1420; 2125,1395; 2085,1570; 1935,1655): no delimitan huerta"},
+{"tipo":"terreno_libre","px":[2000,1500],"nota":"todo el sector dentro del marco es campo abierto con pasto punteado (rayitas sueltas), sin manzanas, calles ni cercas delimitadas"}
+],
+"recortes":[{"archivo":"/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-11/ver_a.png","sha256":"26e9d69177930c5dbb890bf0734988b18c2f54108ce8145d3164a0278d99c722"}],
+"teselas":4,"vacio":true}
