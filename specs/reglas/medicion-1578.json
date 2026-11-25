@@ -12,7 +12,7 @@
  },
  "R3": {
   "giro_maximo": 5.0,
-  "medidas": 65,
+  "medidas": 0,
   "n_giradas": 0,
   "giradas": []
  },

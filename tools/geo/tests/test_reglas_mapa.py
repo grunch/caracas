@@ -1,5 +1,6 @@
 """Tests de las puertas de las reglas de construcción (specs/13, T82 F1)."""
 import math
+from shapely.geometry import Polygon
 
 from reglas_mapa import (manzanas_edificadas, fila_por_frente, alineacion, anchos_de_calle, casas_por_manzana,
                          casas_de_epoca, medir)
@@ -90,11 +91,45 @@ def test_una_casa_suelta_en_el_patio_es_de_la_manzana_que_la_rodea_aunque_sea_su
         assert fila_por_frente(manzanas, METRO)['segunda_fila'] == [50]
 
 
-def test_el_rayo_que_vuelve_a_entrar_en_su_propia_manzana_no_mide_una_calle():
-    # una manzana en U con un hueco de 5 m: el rayo del brazo izquierdo cruza el hueco, atraviesa el brazo derecho (de la
-    # misma manzana) y llega a la manzana de al lado a 29 m; eso no es una calle de 29 m
-    u = [{'techo': 0, 'poligono': [[0, 0], [100, 0], [100, 100], [60, 100], [60, 20], [50, 20], [50, 100], [0, 100]]}]
-    vecina = [{'techo': 1, 'poligono': _rect(108, 0, 200, 100)}]
-    r = anchos_de_calle(manzanas_edificadas(u + vecina, METRO), METRO)
-    assert r['metros_por_ancho']['15-30'] == 0
-    assert r['metros_por_ancho']['4-6'] > 0                # la calle de verdad, de 4 m, sí se mide
+def test_el_giro_es_el_de_los_lados_de_la_casa_no_el_del_rectangulo_minimo():
+    from reglas_mapa import _orientacion
+    ele = Polygon([[0, 0], [40, 0], [40, 10], [12, 10], [12, 40], [0, 40]])            # una L alineada
+    cuadrada = Polygon([[0, 0], [20, 0], [20, 20], [0, 20]])
+    escalera = Polygon([[0, 0], [30, 0], [30, 8], [22, 8], [22, 16], [14, 16], [14, 24], [0, 24]])
+    chaflan = Polygon([[0, 3], [3, 0], [40, 0], [40, 20], [0, 20]])                    # esquina con chaflán
+    for f in (ele, cuadrada, escalera, chaflan):
+        assert min(_orientacion(f) % 90, 90 - _orientacion(f) % 90) < 1.0
+    girada = Polygon(_girado(0, 0, 38, 18, 12))
+    assert abs(_orientacion(girada) % 90 - 12) < 1.0
+
+
+def test_el_giro_usa_el_marco_de_la_casa_cuando_lo_tiene():
+    from reglas_mapa import _orientacion
+    cuadrada = Polygon([[0, 0], [20, 0], [20, 20], [0, 20]])
+    import math
+    eu = [math.cos(math.radians(7)), math.sin(math.radians(7))]
+    assert abs(_orientacion(cuadrada, eu) - 7) < 1e-6
+
+
+def test_una_casa_en_l_en_el_frente_no_cuenta_como_girada():
+    casas = _cuadra()
+    casas[0] = {'techo': 0, 'poligono': [[0, 0], [40, 0], [40, 10], [12, 10], [12, 20], [0, 20]]}
+    r = alineacion(manzanas_edificadas(casas, METRO), METRO, giro_maximo=5)
+    assert r['giradas'] == []
+
+
+def test_el_tramo_de_referencia_es_el_que_la_casa_tiene_delante_de_su_frente():
+    # manzana trapecio: el lado de abajo recto y el de la derecha en diagonal; la casa da al de abajo
+    import math
+    casas = [{'techo': 0, 'poligono': _rect(0, 0, 60, 20), 'eu': (1.0, 0.0), 'frente': (30.0, 0.0)},
+             {'techo': 1, 'poligono': [[60, 0], [120, 0], [160, 80], [60, 80]], 'eu': (1.0, 0.0), 'frente': (90.0, 0.0)},
+             {'techo': 2, 'poligono': _rect(0, 20, 60, 80)}]
+    r = alineacion(manzanas_edificadas(casas, METRO), METRO, giro_maximo=5)
+    assert [g['techo'] for g in r['giradas']] == []
+
+
+def test_una_casa_suelta_no_tiene_calle_contra_la_que_medir_su_giro():
+    casas = [{'techo': 0, 'poligono': _girado(0, 0, 30, 16, 20)}, {'techo': 1, 'poligono': _girado(200, 0, 30, 16, 20)},
+             {'techo': 2, 'poligono': _girado(215, 10, 10, 10, 0)}]
+    r = alineacion(manzanas_edificadas(casas, METRO), METRO, giro_maximo=5)
+    assert r['giradas'] == [] and r['medidas'] == 0

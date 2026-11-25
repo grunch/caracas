@@ -6,7 +6,8 @@ casas a la vista (las que se empaquetan, con la vida que les deja el visor bajo 
 pegadas entre sí (a menos de 2·CIERRE_M), y la calle, el hueco entre dos manzanas. Mide:
 
 - R1 · una fila por frente: las casas que no tocan el borde de su manzana (a más de FRENTE_M) están en segunda fila;
-- R3 · casas alineadas: el giro de cada casa del frente respecto del tramo de borde que tiene delante;
+- R3 · casas alineadas: el giro de cada casa del frente respecto del tramo largo de borde que tiene delante (la
+  orientación de la casa es la del `eu` de su marco, o la dominante de sus lados: no la del rectángulo mínimo);
 - R4 · calles con su ancho: la distancia, a lo largo de la normal de cada tramo de borde, hasta la manzana de enfrente;
 - R6 · casas por manzana: cuántas, cuántas en el frente y el frente medio por casa; y las manzanas más grandes que
   una cuadra del damero, que son varias unidas por casas que cruzan la calle (indicio de R2: calle tapada). En ellas
@@ -42,6 +43,7 @@ TRAMO_DIRECCION_M = 25.0  # la dirección de la calle la dan los tramos de borde
 #                           el borde que arma una sola casa girada sigue a esa casa y no la delataría)
 PASO_M = 2.0              # una muestra del ancho de calle cada esto a lo largo del borde
 CALLE_MAXIMA_M = 30.0     # más allá no hay manzana de enfrente: es campo, plaza o el borde de la ciudad
+MANZANA_MINIMA_CASAS = 3  # R3 se mide en manzanas de al menos tantas casas: una suelta (o dos) no tiene calle propia
 LISTA_MAXIMA = 300        # de las listas largas (giradas, manzanas) el JSON guarda las primeras, y dice cuántas son
 CUADRA_HA = (0.6, 1.6)    # una cuadra del damero (~100 m de lado, menos las calles); más grande, son varias unidas
 CLASES_DE_ANCHO = [(0, 2), (2, 4), (4, 6), (6, 8), (8, 10), (10, 15), (15, 30)]
@@ -110,11 +112,29 @@ def _tramos(m, metro, minimo_m=TRAMO_MINIMO_M):
     return [(a, b) for a, b in zip(pts[:-1], pts[1:]) if np.hypot(*(b - a)) * metro >= minimo_m]
 
 
-def _giro(f, direccion):
-    """Ángulo (0–45°) entre los lados del rectángulo mínimo de la casa y la dirección del tramo."""
-    rect = np.asarray(f.minimum_rotated_rectangle.exterior.coords, float)
-    lado = rect[1] - rect[0]
-    a = np.degrees(np.arctan2(lado[1], lado[0]) - np.arctan2(direccion[1], direccion[0])) % 90
+def _orientacion(f, eu=None):
+    """Orientación de la casa en grados (0–180): la del `eu` de su marco si lo tiene (el frente con que el visor arma su
+    techo); si no, la dominante de sus lados, cada uno pesado por su largo (en una casa en L, en escalera o casi
+    cuadrada, el rectángulo mínimo sale diagonal y daba 45°; un chaflán corto no la mueve)."""
+    if eu is not None:
+        return float(np.degrees(np.arctan2(eu[1], eu[0])) % 180)
+    pts = np.asarray(f.exterior.coords, float)
+    lados = np.diff(pts, axis=0)
+    largos = np.hypot(lados[:, 0], lados[:, 1])
+    angulos = np.degrees(np.arctan2(lados[:, 1], lados[:, 0])) % 90
+    peso = np.bincount(np.round(angulos).astype(int) % 90, weights=largos, minlength=90)
+    suave = sum(np.roll(peso, k) for k in (-1, 0, 1))          # cada grado con sus vecinos (0 y 89 son vecinos)
+    pico = int(np.argmax(suave))
+    cerca = np.minimum(np.abs(angulos - pico), 90 - np.abs(angulos - pico)) <= 1.5
+    if not cerca.any():
+        return float(pico)
+    desvio = ((angulos[cerca] - pico + 45) % 90) - 45                # afinado: el promedio pesado de los lados del pico
+    return float((pico + np.average(desvio, weights=largos[cerca])) % 90)
+
+
+def _giro(f, direccion, eu=None):
+    """Ángulo (0–45°) entre la orientación de la casa y la dirección del tramo."""
+    a = (_orientacion(f, eu) - np.degrees(np.arctan2(direccion[1], direccion[0]))) % 90
     return min(a, 90 - a)
 
 
@@ -123,6 +143,8 @@ def alineacion(manzanas, metro=METRO, giro_maximo=GIRO_MAXIMO_GRADOS):
     ninguno, de los lados de su rectángulo mínimo)."""
     giradas, medidas = [], 0
     for m in manzanas:
+        if len(m['casas']) < MANZANA_MINIMA_CASAS:
+            continue
         tramos = _tramos(m, metro, TRAMO_DIRECCION_M)
         if not tramos:
             rect = np.asarray(m['figura'].minimum_rotated_rectangle.exterior.coords, float)
@@ -131,9 +153,10 @@ def alineacion(manzanas, metro=METRO, giro_maximo=GIRO_MAXIMO_GRADOS):
         for c, f in m['casas']:
             if not _de_frente(m, f, metro):
                 continue
-            k = min(range(len(lineas)), key=lambda i: lineas[i].distance(f))
+            delante = Point(c['frente']) if c.get('frente') is not None else f   # el medio del frente de su marco
+            k = min(range(len(lineas)), key=lambda i: lineas[i].distance(delante))
             a, b = tramos[k]
-            giro = _giro(f, b - a)
+            giro = _giro(f, b - a, c.get('eu'))
             medidas += 1
             if giro > giro_maximo:
                 giradas.append({'techo': c['techo'], 'giro': round(float(giro), 1)})
@@ -221,12 +244,15 @@ def main():  # pragma: no cover - E/S
         raise SystemExit(f"reglas_mapa: el pak tiene {vista['techos']} techos y {ruta.name} {len(ciudad['techos'])}: "
                          'no son los mismos datos (npm run datos)')
     ciudad = {**ciudad, 'vida': vista['vida']}
+    # el frente de cada casa que da a la calle: su dirección (eu) y el medio de su fachada (origen + eu · ancho / 2)
+    eu = {int(m[0]): {'eu': (m[3], m[4]), 'frente': (m[1] + m[3] * m[5] / 2, m[2] + m[4] * m[5] / 2)}
+          for m in ciudad.get('marcos', [])}
     procedencia = {'ciudad_sha256': hashlib.sha256(ruta.read_bytes()).hexdigest(), 'pak_sha256': vista['pak_sha256']}
     salida = raiz / 'specs/reglas'
     salida.mkdir(exist_ok=True)
     for año in (AÑOS if a.todas else [a.epoca]):
         e = AÑOS.index(año)
-        casas = casas_de_epoca(ciudad, e)
+        casas = [{**c, **eu[c['techo']]} if c['techo'] in eu else c for c in casas_de_epoca(ciudad, e)]
         doc = {'alcance': __doc__.split('\n\n')[1].replace('\n', ' '), **procedencia, **medir(casas, METRO, e, año)}
         (salida / f'medicion-{año}.json').write_text(json.dumps(doc, ensure_ascii=False, indent=1) + '\n')
         r6 = doc['R6']['cuadras_del_damero']
