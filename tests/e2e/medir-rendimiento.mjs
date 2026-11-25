@@ -1,5 +1,6 @@
 // Medición de rendimiento del sitio (no es un test; specs/10-rendimiento.md):
 //   node tests/e2e/medir-rendimiento.mjs [url] [--gpu] [--liviano] [--salida archivo.json] [--estricto]
+// --detalle-casas activa el piloto; --vistas archivo.json añade cámaras fijas para comparar el detalle.
 // Mide el arranque (hitos, tareas largas del hilo principal), lo que se baja antes de tocar nada (y en una
 // segunda visita, si hay service worker), la memoria
 // (heap de JS y arreglos de geometría) y lo que se dibuja por cuadro en tres vistas. Imprime un JSON y la
@@ -14,7 +15,7 @@ import { mediana, percentil, resumirPedidos, resumirTareas, compararConPresupues
 const args = process.argv.slice(2)
 const bandera = (n) => args.includes(n)
 const valorDe = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : null)
-const conValor = new Set(['--salida'])
+const conValor = new Set(['--salida', '--vistas'])
 const url = args.find((a, k) => !a.startsWith('--') && !conValor.has(args[k - 1])) ?? 'http://localhost:4173/'
 const GPU = bandera('--gpu')
 const ESPERA_MS = 300_000
@@ -25,6 +26,8 @@ const VISTAS = { // las de tests/e2e/capturas-valle.mjs
   valle: { x: 0, z: 0, dist: 7000, yaw: 0, pitch: 0.8 },
   cerca: { x: -150, z: 450, dist: 420, yaw: 0.5, pitch: 0.55 },
 }
+
+if(valorDe('--vistas'))Object.assign(VISTAS,JSON.parse(readFileSync(valorDe('--vistas'),'utf8')))
 
 // para ver también lo que pide el service worker por su cuenta (Playwright lo trae detrás de esta variable)
 process.env.PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS ??= '1'
@@ -55,7 +58,7 @@ await pagina.addInitScript(() => {
 const t0 = Date.now()
 // la primera visita, sin service worker (?sinsw): si tomara la página a mitad de la carga, parte de los
 // pedidos pasarían por él y no se contarían acá
-const extra = bandera('--liviano') ? '&liviano' : ''
+const extra = (bandera('--liviano') ? '&liviano' : '') + (bandera('--detalle-casas') ? '&detallecasas=1' : '')
 // (`commit`: sin esperar a `load`, para que un hito que llegue antes no quede fechado en `load`)
 await pagina.goto(`${url}?sinintro&sinsw${extra}`, { waitUntil: 'commit' })
 const hitos = {}
@@ -146,6 +149,8 @@ async function medirVista(vista) {
 const cuadro = {}
 for (const [nombre, vista] of Object.entries(VISTAS)) cuadro[nombre] = await medirVista(vista)
 
+const detalleCasas=await pagina.evaluate(()=>window.lab.detalleColonial?.cuenta??null)
+
 // la segunda visita: la misma página abierta de nuevo, con lo que el service worker guardó (src/sw.js);
 // null si el sitio no registró ninguno (el servidor de desarrollo)
 let segundaVisita = null
@@ -175,7 +180,7 @@ await navegador.close()
 
 const medicion = {
   url, gpu, conGpu: GPU, liviano: bandera('--liviano'), ventana: [1280, 800],
-  hitos, tareas, pedidos: alAbrir, segundaVisita, memoria, cuadro,
+  hitos, tareas, pedidos: alAbrir, segundaVisita, memoria, cuadro, detalleCasas,
 }
 const presupuesto = JSON.parse(readFileSync(new URL('../../tools/rendimiento/presupuesto.json', import.meta.url), 'utf8'))
 const filas = compararConPresupuesto(medicion, presupuesto)
