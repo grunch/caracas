@@ -117,23 +117,36 @@ def abrir_corral(m):
 
 MARGEN_ALA_M = 40  # src/alas.js MARGEN_M: cuánto se estiran hacia afuera las alas del borde del lote
 EPS_ALA_M = .02    # src/alas.js EPS: un ala a menos de esto del borde del lote lo toca
+ALA_FRENTE, ALA_ESQUINA_IZQ, ALA_ESQUINA_DER = 2, 6, 7  # src/alas.js ALA
+ALAS_CON_TEJADO = {3, 4, 5, 8}  # cruzada, laterales y fondo: estiradas como en planDeAlas
 
 
 def techos_de_casa(c, metro):
-    """La parte de la huella bajo tejado, como la dibuja planDeAlas (src/alas.js): las alas que tocan el
-    borde del marco se estiran hacia afuera antes de recortarlas con la huella; patio y solar quedan abiertos."""
+    """La parte de la huella bajo tejado, como la dibuja planDeAlas (src/alas.js): la crujía y sus esquinas
+    como frenteYEsquinas (del ancho de la crujía, unidas a inglete), y las demás alas estiradas hacia afuera
+    si tocan el borde del marco, antes de recortarlas con la huella. alzado dibuja cada tejado aunque pise un
+    patio, así que los patios y el solar no le restan nada: solo quedan abiertos donde ningún tejado los cubre."""
     ox, oy, ex, ey, ancho, fondo = c['marco'][:6]
     margen, eps = MARGEN_ALA_M/metro, EPS_ALA_M/metro
-    def mundo(x, y):
-        return [ox+x*ex-y*ey, oy+x*ey+y*ex]
+    def caja(x0, y0, x1, y1):
+        return Polygon([[ox+x*ex-y*ey, oy+x*ey+y*ex] for x, y in [(x0,y0),(x1,y0),(x1,y1),(x0,y1)]])
     def estirada(x0, y0, x1, y1):
         x0, y0 = (-margen if x0 <= eps else x0), (-margen if y0 <= eps else y0)
         x1, y1 = (ancho+margen if x1 >= ancho-eps else x1), (fondo+margen if y1 >= fondo-eps else y1)
-        return Polygon([mundo(x0,y0),mundo(x1,y0),mundo(x1,y1),mundo(x0,y1)])
-    huella = Polygon(c['huella']).buffer(0)
-    techo = unary_union([estirada(*a[1:]) for a in c['alas'] if a[0] >= 2])
-    huecos = unary_union([estirada(*a[1:]) for a in c['alas'] if a[0] < 2])
-    return huella.intersection(techo).difference(huecos)
+        return caja(x0, y0, x1, y1)
+    de = {a[0]: a for a in c['alas']}
+    frente = de.get(ALA_FRENTE)
+    if frente is None:
+        raise ValueError('alas: la casa no trae la crujía del frente')
+    cruj = frente[4]
+    hasta = lambda a: fondo+margen if a[4] >= fondo-eps else a[4]
+    techos = [caja(-margen, -margen, ancho+margen, cruj)]
+    if ALA_ESQUINA_IZQ in de:
+        techos.append(caja(-margen, -margen, cruj, hasta(de[ALA_ESQUINA_IZQ])))
+    if ALA_ESQUINA_DER in de:
+        techos.append(caja(ancho-cruj, -margen, ancho+margen, hasta(de[ALA_ESQUINA_DER])))
+    techos += [estirada(*a[1:]) for a in c['alas'] if a[0] in ALAS_CON_TEJADO]
+    return Polygon(c['huella']).buffer(0).intersection(unary_union(techos))
 
 
 def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0):

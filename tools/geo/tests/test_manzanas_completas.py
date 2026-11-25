@@ -49,3 +49,15 @@ def test_los_arboles_respetan_el_techo_estirado_hasta_el_borde_del_lote():
     assert techo.covers(Point(24,22))
     assert not techo.intersects(Point(10,15).buffer(1))  # el patio queda abierto
     assert not techo.intersects(Point(15,35).buffer(1))  # y el solar también
+
+
+def test_los_arboles_respetan_el_ala_de_esquina_unida_a_inglete():
+    # En una esquina, frenteYEsquinas (src/alas.js) da al ala de la otra calle el ancho de la crujía
+    # (frente.v1), no el de su rectángulo; y alzado dibuja cada tejado aunque pise un patio (revisión de #211).
+    from manzanas_completas import techos_de_casa
+    c={'huella':[[0,0],[20,0],[20,40],[0,40]],'marco':[0,0,1,0,20,40,0,6],
+       'alas':[[2,0,0,20,6],[6,0,6,4,25],[0,4,6,16,25],[1,0,25,20,40]]}
+    techo=techos_de_casa(c,.5)
+    assert techo.covers(Point(5,15))
+    assert not techo.intersects(Point(11,15).buffer(1))  # el resto del patio queda abierto
+    assert not techo.intersects(Point(10,35).buffer(1))  # y el solar también
