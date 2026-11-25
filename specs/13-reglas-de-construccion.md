@@ -143,11 +143,55 @@ Además, en las mismas capturas se ven R1 (dobles filas en las manzanas al norte
 
 ## 8. Estado por época
 
-| Época | Diagnóstico | Correcciones | Cierre | Publicado |
+Diagnóstico del 25-11-2026 (`reglas/diagnostico-<año>.json`, workflow `diagnostico-epocas.js`, run `wf_501830e2-601`): revisor, verificador adversarial y planificador por época sobre las doce capturas fijas, el plano original y la medición.
+
+| Época | Diagnóstico (hallazgos / confirmados) | Correcciones | Cierre | Publicado |
 |---|---|---|---|---|
-| 1578 | — | — | — | — |
-| 1772 | — | — | — | — |
-| 1843 | revisión visual (§ 7) | — | — | — |
-| 1889 | — | — | — | — |
-| 1911 | — | — | — | — |
-| 1936 | — | — | — | — |
+| 1578 | sin capturas (fuera de la línea de tiempo); medición de base | — | — | — |
+| 1772 | 18 / 17 | — | — | — |
+| 1843 | 18 / 16 (y § 7) | — | — | — |
+| 1889 | 22 / 21 | — | — | — |
+| 1911 | 18 / 15 | — | — | — |
+| 1936 | 12 / 9 | — | — | — |
+
+Lo que se repite en todas las épocas:
+- los cauces cortados (R10);
+- los nombres de iglesias, conventos y edificios civiles sin edificio (R9);
+- las manchas de patio sin casa y el suelo urbano sin manzanas (R8);
+- la línea vertical clara frente a la plaza (D6).
+
+En 1843, 1889 y 1911 se suman la segunda fila (R1), las calles angostas (R4) y el exceso de casas (R6). En 1772 faltan calles del damero al norte y al noreste (R2).
+
+## 9. Tareas (T82.N)
+
+Consolidadas por el diagnóstico (`reglas/tareas.json`, con la causa probable, dónde se arregla y cómo se mide cada una). Un arreglo que sirve a varias épocas es una sola tarea. El orden sigue las dependencias: investigación, puertas, generador y lo puntual. T82.0, T82.1 y T82.3 son las de este spec, de las puertas de base y de la investigación (#201, #202 y #203).
+
+| Tarea | Qué | Reglas | Épocas | Depende de | Estado |
+|---|---|---|---|---|---|
+| T82.4 | Investigación F0 ampliada: ríos, quebradas y puentes por época (tema agua) | R10, R11 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.3 | pendiente |
+| T82.5 | Investigación F0 ampliada: edificios en pie por época, con planta, vida y forma (tema edificios) | R9, R11 | 1772, 1843, 1889, 1911, 1936 | T82.3 | pendiente |
+| T82.6 | Investigación F0 ampliada: casas por manzana, frente y fondo de 1889 y 1911, y calles nuevas (1871–1910) | R4, R6 | 1843, 1889, 1911 | T82.3 | pendiente |
+| T82.2 | Puertas R2, R5, R7, R8, R9 y R11 (y el retiro por casa de R3) en reglas_mapa.py, con medición de base de las seis épocas | R2, R3, R5, R7, R8, R9, R11 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.1 | pendiente |
+| T82.7 | La medida del giro de R3: por el lado de fachada y contra el tramo de delante, no por el rectángulo mínimo ni el chaflán | R3 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.1 | pendiente |
+| T82.8 | Diagnóstico y cierre de la línea vertical clara frente a la Plaza Bolívar (D6), igual en todas las épocas | R2, R8 | 1772, 1843, 1889, 1911, 1936 | T82.2 | pendiente |
+| T82.9 | F2: diseño de la corrección de fondo (solares por época y calzada con su ancho mínimo), spike en un sector y aprobación del responsable | R1, R3, R4, R6, R8 | 1772, 1843, 1889, 1911 | T82.2, T82.6, T82.7 | pendiente |
+| T82.10 | Cauces por época: referencia, puerta R10, agua continua en el suelo y en el campo, corredor sin casas y puentes | R10, R9, R11, R2, R12 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.4, T82.2 | pendiente |
+| T82.11 | Referencia de 1889: manzanas, lotes especiales, plazas, terreno libre y red de calles leídos de Mestre | R7, R8, R4, R9 | 1889 | T82.2, T82.6 | pendiente |
+| T82.12 | Referencia de 1911: manzanas de Razetti revisadas, plazas y red, en vez del perfil de color | R7, R8 | 1911 | T82.11, T82.2 | pendiente |
+| T82.13 | Dibujar todas las calles del damero de 1772, también las del norte y el noreste (sectores límite del calce) | R2 | 1772 | T82.2 | pendiente |
+| T82.14 | Lo urbanizado de cada época sale de sus manzanas y calles, no de discos alrededor de lo edificado (sin halos, lóbulos, escalones ni llanos sin ciudad) | R8, R2, R12 | 1772, 1843, 1889, 1911, 1936 | T82.2, T82.11, T82.12, T82.13 | pendiente |
+| T82.15 | Casas fuera de la referencia o sin calle de su época pasan a la época siguiente (también las que nacieron antes) | R7, R3, R8 | 1772, 1843, 1889, 1911 | T82.13, T82.11, T82.12, T82.2 | pendiente |
+| T82.16 | Abrir las calles de cada época con su ancho mínimo entre fachadas (abrir_calles_de_epoca) | R4, R2, R12 | 1772, 1843, 1889, 1911 | T82.9, T82.7, T82.11, T82.12 | pendiente |
+| T82.17 | Solares de la época: una casa de patio por solar sobre la línea de fachada y el corazón de la manzana libre (F2 aplicado) | R1, R3, R6, R12 | 1843, 1889, 1911, 1772 (solo si F2 lo aplica) | T82.9, T82.16, T82.11, T82.12, T82.2 | pendiente |
+| T82.18 | Casas alineadas y paralelas a su calle en cada época, también sobre la calle diagonal (alinear_epoca y marco con la red de la época) | R3 | 1772, 1843, 1889, 1911, 1936 (marco_de_casa es común: verificar sin cambios) | T82.7, T82.16, T82.17 | pendiente |
+| T82.19 | Manzanas de la referencia sin casas o con frentes vacíos | R7, R12 | 1843, 1889, 1911 | T82.17, T82.2 | pendiente |
+| T82.20 | Patios y solares solo dentro de casas de la época y nunca hasta la calle | R8, R1, R5 | 1772, 1843, 1889, 1911, 1936 (verificar que el solar no llegue a la calle) | T82.2, T82.17, T82.8 | pendiente |
+| T82.21 | Edificios públicos de 1936 solo en su época: sin bloques modernos ni losas grises en 1889 y 1911 | R11, R7, R3 | 1772, 1843, 1889, 1911 | T82.5, T82.11, T82.12, T82.2 | pendiente |
+| T82.22 | Edificios públicos con contorno recto sobre la línea de fachada (sin escaleras de píxel ni lenguas) | R3, R2, R12 | 1889, 1911, 1936 | T82.7, T82.21 | pendiente |
+| T82.23 | F3: fachada solo a la calle; hacia el patio corredor y puerta; medianeras ciegas (visor, todas las épocas) | R5 | 1772, 1843, 1889, 1911, 1936 | T82.2 (para medir) | #204 abierto: espera la prueba a mano |
+| T82.24 | Hitos de las iglesias y conventos marcados sin edificio (San Jacinto, Carmelitas, San Mauricio, San Pablo, Candelaria, Santa Rosalía, Las Mercedes, San Juan, El Calvario) | R9, R7, R11 | 1772, 1843, 1889, 1911, 1936 | T82.5, T82.2 | pendiente |
+| T82.25 | Hitos civiles marcados sin edificio: Seminario de Santa Rosa y Universidad, Teatro Municipal, casa natal, La Rotunda y los públicos de 1889 (Concejo, Hacienda) | R9, R11, R7 | 1772, 1843, 1889, 1911 | T82.5, T82.2, T82.21 | pendiente |
+| T82.26 | Plazas libres por época y sus marcas en su lugar: San Jacinto / El Venezolano, Candelaria y Teatro (despejar_plazas generalizado) | R9, R7 | 1772, 1843, 1889, 1911 | T82.24, T82.11, T82.12, T82.2 | pendiente |
+| T82.27 | Anacronismos de 1843: «Plaza Bolívar» desde 1842 y Altagracia, La Merced y la Trinidad en ruina | R11, R9 | 1772 (verificar Altagracia entera), 1843, 1889 | T82.5, T82.2 | pendiente |
+| T82.28 | Plazas de toros con volumen: Nuevo Circo y Circo Metropolitano | R7, R9, R11 | 1911 (si la fuente lo da), 1936 | T82.5, T82.2 | pendiente |
+| T82.29 | Plaza Bolívar de 1889 y 1911 entera ajardinada (mancha beige en la mitad norte) | R8, R7 | 1889, 1911 | T82.2 | pendiente |

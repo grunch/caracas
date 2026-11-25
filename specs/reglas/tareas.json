@@ -1,0 +1,806 @@
+{
+ "alcance": "Tareas T82.N consolidadas por el diagnóstico de las cinco épocas (un arreglo que sirve a varias épocas es una sola tarea), ordenadas por dependencia. Estado en specs/13 § 9.",
+ "fecha": "2026-11-25",
+ "tareas": [
+  {
+   "titulo": "T82.4 · Investigación F0 ampliada: ríos, quebradas y puentes por época (tema agua)",
+   "reglas": [
+    "R10",
+    "R11"
+   ],
+   "hallazgos": [
+    "1772-V01",
+    "1772-V02",
+    "1843 H3",
+    "1843 H4",
+    "1889 H1",
+    "1889 H2",
+    "1889 H3",
+    "1911-01",
+    "1911-02",
+    "1936 H1936-01",
+    "1936 H1936-02"
+   ],
+   "causa_probable": "No es un defecto del código: ninguna época tiene un trazado propio de sus cauces con fuente. specs/reglas/investigacion.json (tema agua) solo confirma el curso del Caroata hasta el Guaire y su embaulamiento bajo El Silencio en 1942–1945 (D10). Faltan el trazado del Catuche, el Anauco y el Guaire por época, los puentes (los tres del Caroata en el Exato mapa, VII–XI y XXV–XXX de Razetti 1911, Nuevo/Junín/Arauca de 1936) con sus fechas, y qué tramos estaban embaulados. Sin esto no se puede escribir tools/geo/referencias/cauces.json sin inventar.",
+   "donde_se_arregla": "Workflow investigacion.js (specs/13 § 5) sobre el tema 7, con verificador que intenta refutar cada afirmación; salida en specs/reglas/investigacion.json y en la tabla de specs/13 § 3. Se apila sobre el PR de T82.3 (#203) si sigue abierto. Tamaño estimado del PR: ~0 líneas de código (solo datos y docs, ~300–500 líneas de JSON/Markdown).",
+   "como_se_mide": "Cada afirmación (curso por época, puente con fecha de construcción y de demolición, tramo embaulado con fecha) con fuente, cita y veredicto «sobrevive». Los vacíos que queden se listan como tales y pasan a límites registrados cuando se trace cauces.json.",
+   "epocas_afectadas": [
+    "1578",
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí: es la investigación misma (specs/13 § 2.1).",
+   "depende_de": [
+    "T82.3 · Investigación F0 (#203), como base"
+   ]
+  },
+  {
+   "titulo": "T82.5 · Investigación F0 ampliada: edificios en pie por época, con planta, vida y forma (tema edificios)",
+   "reglas": [
+    "R9",
+    "R11"
+   ],
+   "hallazgos": [
+    "1772-V06",
+    "1772-V07",
+    "1772-V08",
+    "1772-V09",
+    "1772-V10",
+    "1772-V11",
+    "1772-V12",
+    "1843 H5",
+    "1843 H7",
+    "1843 H8",
+    "1843 H9",
+    "1889 H13",
+    "1889 H14",
+    "1889 H15",
+    "1889 H16",
+    "1889 H17",
+    "1889 H18",
+    "1889 H19",
+    "1889 H20",
+    "1911-03",
+    "1911-04",
+    "1911-05",
+    "1911-06",
+    "1911-14",
+    "1936 H1936-08",
+    "1936 H1936-09",
+    "1936 H1936-10",
+    "1936 H1936-11"
+   ],
+   "causa_probable": "Las marcas de src/marcas-datos.js sin `hito:` (san-jacinto, carmelitas, san-mauricio, plaza San Pablo, seminario, calvario, candelaria, santa-rosalia, las-mercedes, san-juan, casa-natal, teatro, rotunda, plaza-venezolano, nuevo-circo, circo-metropolitano) no se pueden convertir en hitos sin planta, orientación y vida con fuente. Tampoco se sabe qué edificios públicos de la planta de 1936 estaban en pie en 1889 y 1911, qué quedaba de Altagracia, La Merced y la Trinidad en 1843, ni desde cuándo la Plaza de San Jacinto / El Venezolano era espacio abierto.",
+   "donde_se_arregla": "Workflow investigacion.js sobre el tema 6 ampliado: por edificio, planta, número de pisos y torres, orientación, fechas de construcción, exclaustración, ruina, reconstrucción y demolición; leyendas de Mestre 1889 (plazas A–N, templos I–IX, edificios numerados) y Razetti 1911; fotos y grabados. Salida en specs/reglas/investigacion.json. Tamaño estimado del PR: ~0 líneas de código (datos y docs, ~500 líneas). Si pasa de un PR razonable, dos apilados: iglesias y conventos; civiles, plazas y circos.",
+   "como_se_mide": "Cada edificio con vida y planta con fuente o marcado como vacío (que después se registra como límite «hito pendiente»). La vida de cada marca contrastada con su fuente.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí: es la investigación misma.",
+   "depende_de": [
+    "T82.3 · Investigación F0 (#203), como base"
+   ]
+  },
+  {
+   "titulo": "T82.6 · Investigación F0 ampliada: casas por manzana, frente y fondo de 1889 y 1911, y calles nuevas (1871–1910)",
+   "reglas": [
+    "R4",
+    "R6"
+   ],
+   "hallazgos": [
+    "1843-A",
+    "1889-C",
+    "1889-B",
+    "1911-10",
+    "1911-11",
+    "1911-12",
+    "1911-18"
+   ],
+   "causa_probable": "specs/13 § 3 no tiene casas por manzana, frente ni fondo de lote para 1889 y 1911 («—»), ni la lista de calles abiertas o ensanchadas entre 1871 y 1889 (12 varas) y por la Ordenanza de 1910 (14,6–17,4 m). Para 1843 siguen vacíos las casas por manzana después de 1792 y la matrícula de 1840 (Codazzi). Sin esas cifras, F2 no puede parametrizar los solares ni el ancho de calle de esas épocas.",
+   "donde_se_arregla": "Workflow investigacion.js sobre los temas 1, 2 y 3: censos de 1881/1891 y 1911 por parroquia, catastro o planos de manzana de fin de siglo, lista de calles abiertas desde 1871 y de la Ordenanza de 1910. Lo que no tenga fuente se infiere de 1772 y 1936 con el razonamiento escrito y se marca «inferido». Salida en specs/reglas/investigacion.json y la tabla de specs/13 § 3. Tamaño estimado del PR: ~0 líneas de código (datos y docs, ~300 líneas).",
+   "como_se_mide": "La tabla de § 3 sin celdas «pendiente F0» para 1843, 1889 y 1911 (con fuente o con «inferido» y su razonamiento).",
+   "epocas_afectadas": [
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "Sí: es la investigación misma.",
+   "depende_de": [
+    "T82.3 · Investigación F0 (#203), como base"
+   ]
+  },
+  {
+   "titulo": "T82.2 · Puertas R2, R5, R7, R8, R9 y R11 (y el retiro por casa de R3) en reglas_mapa.py, con medición de base de las seis épocas",
+   "reglas": [
+    "R2",
+    "R3",
+    "R5",
+    "R7",
+    "R8",
+    "R9",
+    "R11"
+   ],
+   "hallazgos": [
+    "1911-01..09, 1911-13, 1911-14 (pendientes sin cifra)",
+    "1772-V03..V13, V16, V18",
+    "1843 H2, H5, H7..H12, H17, H18",
+    "1889 H5, H8..H21",
+    "1936 H1936-04, H1936-05, H1936-08..H1936-11"
+   ],
+   "causa_probable": "tools/geo/reglas_mapa.py medir() solo implementa R1, R3 (solo giro), R4 y R6 (T82.1, #202) y deja R2, R5 y R7 a R12 en «pendientes». Casi todos los hallazgos de las auditorías visuales dicen «pendiente (sin cifra)»: no hay forma de probar que un arreglo cierra ni de cumplir R12. R10 va con la referencia de cauces (T82.10), porque necesita el eje de cada cauce.",
+   "donde_se_arregla": "tools/geo/reglas_mapa.py, con tests primero en tools/geo/tests/test_reglas_mapa.py (casos sintéticos). R2: huellas y techos de tools/cubiertas.mjs --epoca contra el núcleo de calzada; solapes entre casas vivas; casas partidas en la costura. R3: retiro de la fachada de cada casa a su línea de fachada. R5: caras con vano de calle contra caras sobre la línea de fachada (sobre el pak). R7: unidades de la referencia de la época sin casas o con frente edificado bajo umbral; casas en plazas, lotes especiales y terreno libre; casas fuera de toda unidad. R8: píxeles de piso PATIO/SOLAR fuera del anillo de casas vivas o tocando una calle; área de suelo urbano (crece.png G) a más de media cuadra de toda manzana; componentes de lo urbanizado con una sola pieza suelta (halos); islas de campo < 1 ha. R9: punto de cada marca viva contra plantas de hitos (tools/hitos-planta.mjs), casas genéricas, calzada; marcas de plaza sobre casas. R11: vida de hitos, marcas y estilos públicos contra investigacion.json; casas de 3+ pisos antes de 1911. Fija como decisión delegada registrada el umbral de R8 «suelo urbano sin manzana» (F1) y el de cobertura de frente de R7 (propuesto ≥ 80 %). Escribe specs/reglas/medicion-<año>.json de las seis épocas. Tamaño estimado: ~2200 líneas; en dos PRs apilados: T82.2a (R7, R8, R9: ~1200) y T82.2b (R2, R3 retiro, R5, R11: ~1000).",
+   "como_se_mide": "Tests unitarios por puerta (una marca en la calle falla y sobre su hito pasa; un patio fuera de casa cuenta; un halo cuenta). `reglas_mapa.py --todas` con cifra en R2, R5, R7, R8, R9 y R11 en las seis épocas; la descripción del PR pega la tabla de base. Mínimos esperados en 1911: R9 ≥ 4 marcas fallidas (Candelaria, Santa Rosalía, La Rotunda, Plaza El Venezolano).",
+   "epocas_afectadas": [
+    "1578",
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "No externa. Los umbrales de R8 y R7 se fijan como decisión delegada registrada (memoria: ante dudas decido lo que recomendaría).",
+   "depende_de": [
+    "T82.1 · Puertas R1, R3, R4 y R6 (#202)"
+   ]
+  },
+  {
+   "titulo": "T82.7 · La medida del giro de R3: por el lado de fachada y contra el tramo de delante, no por el rectángulo mínimo ni el chaflán",
+   "reglas": [
+    "R3"
+   ],
+   "hallazgos": [
+    "1772-V14 (b)",
+    "1936 H1936-06",
+    "1889 H6 (casos de 45°)"
+   ],
+   "causa_probable": "tools/geo/reglas_mapa.py _giro() compara el minimum_rotated_rectangle de la huella con el tramo más cercano del borde simplificado (SIMPLIFICAR_M). En una casa en L, en escalera o casi cuadrada, el rectángulo sale diagonal; en la esquina el tramo más cercano es el chaflán. Firma: en medicion-1936.json, de las 300 giradas listadas, 204 dan 45,0° y 96 dan 44°; en 1772 las 300 primeras están entre 44,6° y 45,0° (techos 35249, 37735, 37661); en 1889, techos 21023, 4839, 4857. Las cifras de giradas de todas las épocas (8.183 en 1936, 641 en 1843, 923 en 1889, 1.981 en 1911) mezclan giros reales con el artefacto.",
+   "donde_se_arregla": "tools/geo/reglas_mapa.py alineacion() y _giro(): el giro con la dirección del lado más largo de la huella que mira al tramo (o la orientación dominante de sus lados ponderada por longitud), contra el tramo que la casa tiene delante (el eu de su marco en el pak o el tramo de calle de la época frente a su fachada). Primero confirmar en el pak los marcos de los techos 35249, 37735 y 37661. Tests primero: L alineada (0°), cuadrado alineado (0°), casa girada 12° (12°), casa de esquina con chaflán (0°). Tamaño estimado: ~300 líneas.",
+   "como_se_mide": "Volver a medir las seis épocas y comparar n_giradas antes y después en specs/reglas/medicion-<año>.json: sin pico en 44–45°. Una muestra de las giradas que quedan revisada con capturas (1-caroata, 1-plaza_cenital, 1-catuche_centro) para confirmar que son giros reales.",
+   "epocas_afectadas": [
+    "1578",
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "No (solo confirmar el artefacto en el pak).",
+   "depende_de": [
+    "T82.1 · Puertas R1, R3, R4 y R6 (#202)"
+   ]
+  },
+  {
+   "titulo": "T82.8 · Diagnóstico y cierre de la línea vertical clara frente a la Plaza Bolívar (D6), igual en todas las épocas",
+   "reglas": [
+    "R2",
+    "R8"
+   ],
+   "hallazgos": [
+    "1772-V18",
+    "1843-K (H12)",
+    "1889 H21",
+    "1911-13",
+    "1936 H1936-04"
+   ],
+   "causa_probable": "Sin confirmar; aparece con la misma cámara (plaza_baja, x≈646–652, casi el punto de fuga) en todas las épocas, así que es algo común y no del generador de una época. Candidatas, por orden: (1) rendija entre dos huellas vecinas que no se tocan (tools/geo/vectorizar.py poligono_de con buffer 0,5 px y simplify, huellas_de_casas y techos_publicos de manzanas distintas), vista de canto; (2) la costura de las hojas del DCN 1936 (tools/geo/costura.py, mosaico.py), con casas partidas o montadas; (3) borde de baldosa (src/baldosas.js) o de nivel del plano (src/plano-niveles.js); (4) sombra (src/luz.js, src/shader/acabado.js, src/shader/sombra.js). Las diagonales finas al pie son otro defecto (pisos PATIO/SOLAR, T82.20).",
+   "donde_se_arregla": "Reproducir con la cámara plaza_baja de specs/reglas/workflows/capturas.mjs girada ±5° y alternando ?planos y niveles: si la línea sigue a la geometría, son las huellas o la costura; si queda fija en pantalla, es render. Huellas: en tools/geo/vectorizar.py, snap de dos huellas vecinas a menos de una tolerancia a su medianera común. Costura: unir o recortar las casas partidas sin solaparse (como epocas.sin_solapes_residuales). Render: el módulo que la produce, con test si es lógica. El diagnóstico se escribe en el PR. Tamaño estimado: ~100–400 líneas según la causa.",
+   "como_se_mide": "Captura plaza_baja de las seis épocas sin la línea, también con la cámara girada ±5°. Control en reglas_mapa.py (dentro de R2/R8): 0 pares de casas a la vista separadas por un hueco de 0 a 0,3 m a lo largo de más de 2 m y 0 casas partidas en la costura. R12: medición de todas las épocas (toca el dato de 1936).",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "No externa; diagnóstico en el visor antes de tocar nada.",
+   "depende_de": [
+    "T82.2 · Puertas (control de huecos y solapes dentro de R2)"
+   ]
+  },
+  {
+   "titulo": "T82.9 · F2: diseño de la corrección de fondo (solares por época y calzada con su ancho mínimo), spike en un sector y aprobación del responsable",
+   "reglas": [
+    "R1",
+    "R3",
+    "R4",
+    "R6",
+    "R8"
+   ],
+   "hallazgos": [
+    "1843-A (H13, H14, H16)",
+    "1843-B (H15)",
+    "1889-C (H4, H22)",
+    "1911-10",
+    "1911-11",
+    "1911-12",
+    "1911-18",
+    "1772-V17",
+    "1772-V05"
+   ],
+   "causa_probable": "Cada época hereda la subdivisión de 1936 (tools/geo/epocas.py fracciones → nace → vida_de_1936): lotes interiores (segunda fila: 2.311 en 1843, 2.261 en 1889, 2.003 en 1911), grilla fina (46 casas por cuadra en 1843, 36 en 1889 y 1911), calles angostas (p10 4,14 / 4,26 / 4,42 m contra 6,7 m) y solares del lote de 1936 hasta el fondo. Solo 1772 pasó por alinear_1772 / ceder_frentes_a_1772 / abrir_calles_de_1772, con núcleo de 4 m (NUCLEO_M) por debajo de las 8 varas. specs/13 § 6 está «pendiente».",
+   "donde_se_arregla": "specs/13 § 6: el diseño escrito con los valores de § 3 (T82.3, T82.6) y la medición de base (T82.2): agrupar los lotes de 1936 de cada frente en solares de la época, una casa de patio por solar con la crujía sobre la línea de fachada y paralela a la calle, corazón de manzana libre, calzada con su ancho mínimo por época, solar acotado al fondo de lote de la época. Spike en un sector (San Juan o el entorno de U1843-0240) con un script en tools/geo, capturas y medición. Se muestra al responsable antes de T82.16 y T82.17. Tamaño estimado: ~600 líneas (spike) más el diseño.",
+   "como_se_mide": "Spike medido con reglas_mapa.py en el sector: R1 0, R3 retiro ≤ 0,5 m y giro ≤ 5°, R4 p10 ≥ 6,7 m, R6 en rango; capturas antes y después. Aprobación del responsable registrada en specs/13 § 6.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "Parcial: usa los valores de T82.3 y T82.6; los que falten van como inferidos con razonamiento.",
+   "depende_de": [
+    "T82.2 · Puertas",
+    "T82.6 · Investigación de valores de 1889 y 1911",
+    "T82.7 · Medida del giro de R3"
+   ]
+  },
+  {
+   "titulo": "T82.10 · Cauces por época: referencia, puerta R10, agua continua en el suelo y en el campo, corredor sin casas y puentes",
+   "reglas": [
+    "R10",
+    "R9",
+    "R11",
+    "R2",
+    "R12"
+   ],
+   "hallazgos": [
+    "1772-V01",
+    "1772-V02",
+    "1843-G (H3, H4)",
+    "1889 H1",
+    "1889 H2",
+    "1889 H3",
+    "1911-01",
+    "1911-02",
+    "1936 H1936-01",
+    "1936 H1936-02"
+   ],
+   "causa_probable": "Misma causa en las seis épocas: el agua es solo la clase AGUA (7) de la segmentación de 1936 (tools/geo/segmentar_texturas.py detectar_agua, densidad_agua_min 0,14, quitar_chicos), que se corta bajo puentes, rótulos y casas pegadas al cauce: tools/suelo-lib.mjs la lleva al canal R de uSuelo y tools/geo/epocas.py canales_del_valle (AGUA_MINIMA) al monte y la ribera. De ahí la V del Caroata en el campo, el Catuche cortado al norte y el Anauco reducido a dos rayas al entrar en la ciudad. Dentro de la ciudad src/shader/suelo.js sueloColor pinta el agua como BARRO (`mix(c, BARRO, s.r)`, antes de 1936 `mix(liso, BARRO, s.r)`) con la tinta del plano encima; solo valleColor (src/shader/valle.js) usa AGUA_CLARA. Ningún paso del generador despeja el corredor (no hay equivalente a abrir_calles_de_1772), así que hay casas sobre el Catuche. Las marcas de quebrada (src/marcas-datos.js, caroata x 7690 y 8560) son puntos fijos que caen sobre casas.",
+   "donde_se_arregla": "Tres PRs apilados. T82.10a (~900 líneas + datos): tools/geo/referencias/cauces.json (eje, ancho, vida por tramo y fuente de Guaire, Caroata, Catuche, Anauco y quebradas menores, calcados del Exato mapa, Jesurún, Mestre, Razetti y el DCN 1936) y tools/geo/cauces.py (lógica pura, TDD), con la puerta R10 en tools/geo/reglas_mapa.py: una sola componente por cauce desde su entrada al marco hasta el Guaire y 0 casas sobre el corredor, por época. T82.10b (~700): rasterizar el cauce de la época al canal R de uSuelo (tools/suelo-lib.mjs, sumado a detectar_agua; o textura por época si el canal R debe seguir siendo el de 1936) y al agua de canales_del_valle; src/shader/suelo.js pinta el cauce abierto como agua con ribera (tono de valle.js) también dentro de la ciudad, sin tinta encima. T82.10c (~800): paso abrir_cauces en tools/geo/epocas.py que pasa a la época siguiente (o quita) las casas que pisan el corredor, con nacimiento después del embaulamiento; puentes como hitos con su vida; marcas de quebrada sobre el cauce de cada época. Tamaño estimado total: ~2400 líneas.",
+   "como_se_mide": "R10 por cauce y por época (1 componente, 0 casas en el corredor, puentes donde los cruza la red de la época). R9: marcas de quebrada sobre agua. Capturas N-oeste, N-caroata, N-norte, N-catuche_centro, N-este y N-general de cada época, con el agua continua y del mismo color dentro y fuera de la ciudad y los tres puentes del Caroata en 1772 (vista.jpg x≈765, 968, 1103). R12: tabla de antes y después de las seis épocas y puertas de 08 y 11 sin empeorar.",
+   "epocas_afectadas": [
+    "1578",
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí: depende de T82.4. Los tramos sin fuente se trazan desde el plano de cada época y se registran como límite.",
+   "depende_de": [
+    "T82.4 · Investigación de agua y puentes",
+    "T82.2 · Puertas (R2, R9, R11)"
+   ]
+  },
+  {
+   "titulo": "T82.11 · Referencia de 1889: manzanas, lotes especiales, plazas, terreno libre y red de calles leídos de Mestre",
+   "reglas": [
+    "R7",
+    "R8",
+    "R4",
+    "R9"
+   ],
+   "hallazgos": [
+    "1889-A (H4, H7, H10, H11, H13, H16, H17)"
+   ],
+   "causa_probable": "1889 no tiene referencia: tools/geo/epocas.py construido_de_epoca() cae al perfil de color de fuentes/derivados/1889/calzado.tif (edificado()), que no distingue plazas, lotes especiales ni ancho de calle. El bloque `if e.get(\"referencia\")` de main() (fuera_de_la_referencia, en_lotes_libres, agregar_casas de tools/geo/epocas_1843.py) no corre en la época 3, y tools/geo/referencias/ solo tiene 1772-* y 1843-manzanas.json.",
+   "donde_se_arregla": "tools/geo/referencias/1889-manzanas.json (unidades manzana edificada / plaza / lote especial / terreno libre, con su letra o número de la leyenda de Mestre) armado como el de 1843 (generalizar tools/geo/manzanas_1843.py y referencia_1843.py a una época cualquiera, con test), revisado a ojo por sector con capturas (como la fase 4 de specs/08); red de calles de 1889 con clase de ancho (damero viejo / abiertas desde 1871) como 1772-red.json; `referencia` en la entrada de 1889 de tools/geo/epocas/epocas.json. Tamaño estimado: ~1200 líneas de código (los JSON de datos no cuentan).",
+   "como_se_mide": "reglas_mapa.py --epoca 1889: R7 con cifra contra la referencia (0 manzanas edificadas sin casas, 0 casas en plazas o terreno libre); conteo de unidades contra el plano por sector; medicion-1889.json antes y después; las otras épocas idénticas (R12).",
+   "epocas_afectadas": [
+    "1889"
+   ],
+   "necesita_investigacion": "No externa: lectura de fuentes/mapas/1889-bnf-mestre con su leyenda; la clasificación de calles usa T82.6.",
+   "depende_de": [
+    "T82.2 · Puertas (R7)",
+    "T82.6 · Calles abiertas desde 1871"
+   ]
+  },
+  {
+   "titulo": "T82.12 · Referencia de 1911: manzanas de Razetti revisadas, plazas y red, en vez del perfil de color",
+   "reglas": [
+    "R7",
+    "R8"
+   ],
+   "hallazgos": [
+    "1911-08",
+    "1911-09"
+   ],
+   "causa_probable": "tools/geo/epocas/epocas.json: 1911 no tiene `referencia`, así que construido_de_epoca() saca lo edificado del color del plano calzado (edificado(): callejidad > 0,5, cierre 5 m, area_minima 300 m², ancho_minimo 14 m) y lo dilata 6 m (holgura_m). Es el problema I1843-002 que 1843 resolvió con 1843-manzanas.json: el perfil pierde manzanas grises claras o con letras y sus casas no nacen hasta 1936 (huecos céntricos).",
+   "donde_se_arregla": "tools/geo/referencias/1911-manzanas.json con la herramienta generalizada en T82.11, revisada a ojo manzana por manzana; red de 1911 con clase de ancho (damero viejo / Ordenanza de 1910); `referencia` en la entrada de 1911 y nace_sin_tocar_las_anteriores(…, desde=4) en tools/geo/epocas.py para no cambiar 1772–1889. Tamaño estimado: ~600 líneas de código (los datos no cuentan).",
+   "como_se_mide": "R7: 0 manzanas de la referencia sin casas vivas en 1911 y 0 casas en lugares libres. Capturas 4-este, 4-sur y 4-noreste_oblicua con las manzanas llenas. R12: 1772, 1843 y 1889 idénticas antes y después.",
+   "epocas_afectadas": [
+    "1911"
+   ],
+   "necesita_investigacion": "No externa: el plano de Razetti está en fuentes/.",
+   "depende_de": [
+    "T82.11 · Referencia de 1889 (la herramienta generalizada)",
+    "T82.2 · Puertas (R7)"
+   ]
+  },
+  {
+   "titulo": "T82.13 · Dibujar todas las calles del damero de 1772, también las del norte y el noreste (sectores límite del calce)",
+   "reglas": [
+    "R2"
+   ],
+   "hallazgos": [
+    "1772-V03"
+   ],
+   "causa_probable": "tools/calles-epoca-lib.mjs tramosDibujables dibuja solo los tramos con `medible: true` de tools/geo/referencias/1772-calles-1936.json: 438 de 467. Los 29 restantes son de los sectores límite S1772-24 (norte, entre La Pastora y el Catuche) y S1772-44 (noreste). En esos sectores casi todas las unidades de 1772-unidades.json siguen pendientes (sector_limite_del_calce 25, sin_celda_del_damero 149). Puede haber calles del este que el Exato mapa dibuja y 1772-red.json (85 calles, 467 tramos) no registra.",
+   "donde_se_arregla": "tools/calles-epoca-lib.mjs: dibujar también los tramos no medibles, con su banda_m, sin usarlos para medir (test primero en tests/unit). Si el calce no alcanza, mejorarlo en tools/geo/calles_1772.py / tools/geo/calce.py. Completar las calles que falten en 1772-red.json sobre vista.jpg, revisadas a ojo, siguiendo specs/08 fase 2. Tamaño estimado: ~300 líneas de código más datos.",
+   "como_se_mide": "R2: el 100 % de los tramos de la red de 1772 en el campo de calles y ninguna calle cortada. Capturas 1-este y 1-general con el damero completo al norte y al este, comparadas con vista.jpg. Puertas de specs/08 sin empeorar.",
+   "epocas_afectadas": [
+    "1772"
+   ],
+   "necesita_investigacion": "No externa; revisión a ojo del Exato mapa.",
+   "depende_de": [
+    "T82.2 · Puertas (R2)"
+   ]
+  },
+  {
+   "titulo": "T82.14 · Lo urbanizado de cada época sale de sus manzanas y calles, no de discos alrededor de lo edificado (sin halos, lóbulos, escalones ni llanos sin ciudad)",
+   "reglas": [
+    "R8",
+    "R2",
+    "R12"
+   ],
+   "hallazgos": [
+    "1772-V03",
+    "1772-V04",
+    "1772-V13",
+    "1843-F (H11)",
+    "1889 H10",
+    "1889 H11",
+    "1911-09",
+    "1936 H1936-05"
+   ],
+   "causa_probable": "Una sola causa en el generador: tools/geo/epocas.py urbanizados() → tools/geo/valle.py urbanizado(construido, cierre_m 25, holgura_m 10, hueco_m2 40000), con `construido` = máscara de color del plano (rojo del Exato mapa en 1772, L<185 de Jesurún en 1843, perfil en 1889/1911) o casas36 = np.isin(clases, CASAS_1936) en 1936 (con PATIO y pabellones de parque). El cierre une piezas sueltas en explanadas sin manzana; la holgura deja halos redondos; en 1772 quedan fuera los solares amarillos y el verde se mete entre manzanas; en 1843 el corredor del Catuche y las huertas entran como edificado. El borde va en escalera por la celda de 8 m de crece.png y el promedio de 8 vecinos de urbanoEn (src/shader/valle.js, BORDE_CIUDAD_M 10). src/shader/suelo.js `urbano` lee el mip 5 de la manzana de 1936 sin gatear por época. Como las calles de la época solo se ven dentro de `ciudad`, donde lo urbanizado no llega la calle se corta contra el verde.",
+   "donde_se_arregla": "tools/geo/epocas.py urbanizados() y construido_de_epoca(): en las épocas con referencia (1772 con 1772-unidades.json incluidas las terreno_libre de solares, 1843, 1889 y 1911 con T82.11/T82.12) lo urbanizado son las unidades aprobadas más la red de la época con media calle, recortado a lo que tiene manzana o casa a menos de media cuadra; huertas, terreno libre y corredor de agua quedan fuera. En 1936, desde los polígonos de cuadra más media calle, sin PATIO suelto ni pabellones. tools/geo/valle.py urbanizado(): sin halos alrededor de piezas sueltas menores que una manzana mínima; rellenar huecos rodeados de manzanas; borde por campo de distancia o crece G a más resolución. src/shader/suelo.js: `urbano` desde crece G de la época; src/shader/valle.js: borde por distancia, sin escalones. Tests primero en tools/geo/tests (una casa aislada no deja halo; una manzana deja su contorno más media calle). Tamaño estimado: ~800 líneas.",
+   "como_se_mide": "R8: suelo urbano a más de media cuadra de toda manzana ≤ umbral de T82.2, 0 componentes de una sola pieza suelta, 0 islas de campo < 1 ha rodeadas de manzanas. R2: 0 m de eje de calle de la época fuera de lo urbanizado. Capturas del borde de cada época (N-general, N-norte, N-este, N-sur, N-oeste, N-caroata, N-noreste_oblicua). R12: crece.png y medición de las seis épocas antes y después; puertas de 08 y 11 sin empeorar.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "No externa: el plano de cada época dice dónde hay manzanas.",
+   "depende_de": [
+    "T82.2 · Puertas (R8, R2)",
+    "T82.11 · Referencia de 1889",
+    "T82.12 · Referencia de 1911",
+    "T82.13 · Calles de 1772 completas"
+   ]
+  },
+  {
+   "titulo": "T82.15 · Casas fuera de la referencia o sin calle de su época pasan a la época siguiente (también las que nacieron antes)",
+   "reglas": [
+    "R7",
+    "R3",
+    "R8"
+   ],
+   "hallazgos": [
+    "1772-V16",
+    "1843-D (H17, H11 halos)",
+    "1889 H11 (casas sueltas)",
+    "1911-09"
+   ],
+   "causa_probable": "tools/geo/epocas_1843.py fuera_de_la_referencia() y en_lotes_libres() solo corren las casas que nacen en la época de la referencia (`if vida[k][0] != epoca: continue`): las de 1772 siguen vivas en 1843 aunque caigan fuera de toda unidad (al este del Anauco, el cuadro rojo del noreste, grupos sueltos del oeste). En 1772 no hay paso equivalente: nace toda casa de 1936 con ≥ 0,5 dentro del rojo ensanchado 6 m, y alinear_1772 / ceder_frentes_a_1772 / cerrar_aberturas_1772 solo tocan casas cerca de tramos medibles, así que en la periferia quedan anillos y bloques de 1936 en medio del solar. 1889 y 1911 no lo corren por falta de referencia.",
+   "donde_se_arregla": "tools/geo/epocas_1843.py fuera_de_la_referencia() generalizado a cualquier época con referencia y a las casas que nacieron antes: muere en la época de la referencia y renace en la siguiente si su plano la tiene (pieza nueva de vida partida en tools/geo/epocas.py, con test primero). Para 1772, después de alinear_1772: toda casa cuya fachada no cae sobre la línea de fachada de una calle de 1772 (medible o no) pasa a la época siguiente, salvo pieza roja de la referencia sobre ese borde (revisada a ojo, memoria de la fase 4 de 1772). Aplicado a 1772, 1843, 1889 y 1911. Tamaño estimado: ~600 líneas.",
+   "como_se_mide": "R7: 0 casas vivas fuera de las unidades aprobadas (más allá de la tolerancia de calle), salvo límite. R3: 0 casas de 1772 a más de media calle de toda calle de la época. R8: sin halos de casas sueltas. Capturas 1-sur, 1-este, 2-general, 3-norte. R12: las casas de 1772 no cambian en 1772 salvo las de la periferia sin calle; medición de las seis épocas.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No externa: confirmar en Jesurún que más allá del Anauco solo hay huertas, y revisar a ojo las piezas rojas sueltas de 1772.",
+   "depende_de": [
+    "T82.13 · Calles de 1772 completas",
+    "T82.11 · Referencia de 1889",
+    "T82.12 · Referencia de 1911",
+    "T82.2 · Puertas (R7, retiro de R3)"
+   ]
+  },
+  {
+   "titulo": "T82.16 · Abrir las calles de cada época con su ancho mínimo entre fachadas (abrir_calles_de_epoca)",
+   "reglas": [
+    "R4",
+    "R2",
+    "R12"
+   ],
+   "hallazgos": [
+    "1772-V17",
+    "1843-B (H15)",
+    "1889-B (H7)",
+    "1911-12"
+   ],
+   "causa_probable": "La apertura de calles solo existe para 1772 (tools/geo/epocas.py abrir_calles_de_1772, ceder_a_1772, vuelos_1772) y con un núcleo de 4 m (ancho inferido de tools/geo/calles_1772.py y NUCLEO_M de tools/calles-epoca-lib.mjs y src/shader/calles.js), por debajo de las 8 varas (6,7 m). tools/geo/fachadas.py alinear_casas lleva cada lado a su recta sin exigir distancia entre los dos lados. 1843, 1889 y 1911 no tienen red: las casas de 1936 traen el ancho de 1936 y el calce las mete en la calzada; en 1843 TOLERANCIA_CALLE_M = 3,0 deja entrar 3 m por lado. Medido: p10 6,16 m en 1772, 4,14 en 1843, 4,26 en 1889, 4,42 en 1911.",
+   "donde_se_arregla": "tools/geo/epocas.py: generalizar abrir_calles_de_1772 en abrir_calles_de_epoca(ciudad, vida, quitar, ejes, ancho_minimo_m, epoca) con los ejes de cuadras_historicas.ejes_de_calzada sobre la red de la época (1772-red.json; 1843 derivada de los huecos entre manzanas de 1843-manzanas.json con tools/geo/referencia_red.py; 1889 y 1911 de T82.11/T82.12), con el ancho mínimo por época y por clase de calle (6,7 m damero viejo, 10 m las de 1871, 14,6–17,4 m las de 1910); la fachada se retrae o la casa pasa a la época siguiente. Bajar TOLERANCIA_CALLE_M de epocas_1843.py a la media calzada fuera del núcleo. Revisar si NUCLEO_M (lo que se dibuja) sale del ancho de la época. Tests primero en tools/geo/tests. Tamaño estimado: ~900 líneas.",
+   "como_se_mide": "R4 por época: p10 ≥ 6,7 m en el damero (≥ 10 m en las de 1871, ≥ 14,6 m en las de 1910) y 0 m de borde con calle < 4 m, salvo callejones registrados en specs/reglas/limites-<año>.json. R2: 0 invasiones del núcleo (tools/cubiertas.mjs --epoca) y red continua. Capturas 1-caroata, 1-general, 2-este, 2-catuche_centro. R12: las seis épocas.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No: 8–10 varas de F0; las clases de 1889 y 1911 de T82.6.",
+   "depende_de": [
+    "T82.9 · F2 aprobado",
+    "T82.7 · Medida del giro de R3",
+    "T82.11 · Referencia de 1889",
+    "T82.12 · Referencia de 1911"
+   ]
+  },
+  {
+   "titulo": "T82.17 · Solares de la época: una casa de patio por solar sobre la línea de fachada y el corazón de la manzana libre (F2 aplicado)",
+   "reglas": [
+    "R1",
+    "R3",
+    "R6",
+    "R12"
+   ],
+   "hallazgos": [
+    "1843-A (H13, H14, H16)",
+    "1889-C (H4, H22)",
+    "1911-10",
+    "1911-11",
+    "1911-18",
+    "1772 R6 (2,2 veces las casas de Martí, 39 por cuadra)"
+   ],
+   "causa_probable": "Una sola causa en el generador: nace(fracciones(huellas36, construido), umbral 0.5) en tools/geo/epocas.py hace nacer cada lote de 1936 bajo la máscara de la época, interiores incluidos, con la grilla fina de 1936. tools/geo/epocas_1843.py agregar_casas() solo rellena frentes vacíos con FRENTE_M = 10 y CRUJIA_M = 8 fijos y no reemplaza lo heredado. Resultado: 10.284 casas en 1843 (contra 4.000–5.400), 11.798 en 1889 (contra ~9.900), 14.195 en 1911 (contra 11.300–13.000), 52/59/64 manzanas unidas.",
+   "donde_se_arregla": "Módulo nuevo tools/geo/solares.py (lógica pura, TDD), llamado desde tools/geo/epocas.py main() por época con referencia: en cada manzana de la referencia, (1) agrupar los lotes de 1936 en solares con el frente y el fondo de la época (§ 3); (2) una casa de patio por solar con la crujía sobre la línea de fachada y paralela a la calle (tools/geo/fachadas.py recta_de_la_mayoria, alinearHuella de src/ciudad.js); (3) las casas que quedan en el corazón nacen en la época siguiente (como _correr de epocas_1843.py), salvo callejón dibujado. casas_de_manzana() de epocas_1843.py generalizado con frente y fondo como parámetros. PRs apilados: T82.17a solares.py + 1843 (~1600), T82.17b 1889 (~400), T82.17c 1911 (~400), T82.17d 1772 si el diseño aprobado lo aplica (~300). Tamaño estimado total: ~2700 líneas.",
+   "como_se_mide": "reglas_mapa.py por época: R1 0 casas en segunda fila (o límite por callejón dibujado); R3 retiro ≤ 0,5 m y giro ≤ 5° en el frente; R6 total dentro de ± 15 % de las fuentes (1843: 3.400–6.200; 1889: 8.415–11.385; 1911: según § 3), casas por cuadra y frente medio en rango, 0 manzanas unidas. R7: ninguna manzana se vacía. Capturas N-plaza_baja, N-catuche_centro, N-plaza_cenital, N-caroata, N-este, N-general. R12: tabla de las seis épocas y puertas de 08 y 11 sin empeorar.",
+   "epocas_afectadas": [
+    "1843",
+    "1889",
+    "1911",
+    "1772 (solo si F2 lo aplica)"
+   ],
+   "necesita_investigacion": "Parcial: valores de T82.3 y T82.6; los inferidos con su razonamiento.",
+   "depende_de": [
+    "T82.9 · F2 aprobado por el responsable",
+    "T82.16 · Calles con su ancho mínimo",
+    "T82.11 · Referencia de 1889",
+    "T82.12 · Referencia de 1911",
+    "T82.2 · Puertas (R7, R8)"
+   ]
+  },
+  {
+   "titulo": "T82.18 · Casas alineadas y paralelas a su calle en cada época, también sobre la calle diagonal (alinear_epoca y marco con la red de la época)",
+   "reglas": [
+    "R3"
+   ],
+   "hallazgos": [
+    "1772-V14 (a)",
+    "1889-D (H6)",
+    "1911-11",
+    "1843 R3 (641 giradas)"
+   ],
+   "causa_probable": "La alineación de frentes (tools/geo/epocas.py alinear_1772, cerrar_aberturas_1772, con tools/geo/fachadas.py alinear_casas y GIRO_MAXIMO_GRADOS) solo corre en 1772, y alinear_casas corre la fachada hasta la recta pero no gira el lote. tools/geo/alas.py marco_de_casa orienta el lote con el minAreaRect de la manzana y orientar_a_una_calle usa calles72; sobre una calle oblicua a la manzana (la diagonal del Caroata en 1772, San Juan y El Guarataro en 1889/1911) las casas quedan giradas.",
+   "donde_se_arregla": "tools/geo/epocas.py: generalizar alinear_1772 a alinear_epoca con la red de la época, después de abrir calles y de los solares; tools/geo/alas.py marco_de_casa / orientar_a_una_calle: con la red de la época y, si el frente da a una calle oblicua a la manzana, el marco va en la dirección de esa calle; tools/geo/fachadas.py alinear_casas gira el lote además de correrlo. Tests primero con los techos 21023, 4839, 4857 y el peine de la diagonal de 1772. Tamaño estimado: ~800 líneas.",
+   "como_se_mide": "R3 (con la medida de T82.7): 0 casas del frente con giro > 5° o retiro > 0,5 m, salvo límite. Capturas 1-caroata (el peine sobre la diagonal), 3-caroata, 3-plaza_cenital, 4-caroata. R12: las seis épocas, porque marco_de_casa es común.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936 (marco_de_casa es común: verificar sin cambios)"
+   ],
+   "necesita_investigacion": "No.",
+   "depende_de": [
+    "T82.7 · Medida del giro de R3",
+    "T82.16 · Calles con su ancho mínimo",
+    "T82.17 · Solares de la época"
+   ]
+  },
+  {
+   "titulo": "T82.19 · Manzanas de la referencia sin casas o con frentes vacíos",
+   "reglas": [
+    "R7",
+    "R12"
+   ],
+   "hallazgos": [
+    "1843-C (H2)",
+    "1911-08 (verificación)",
+    "1889 (verificación con la referencia nueva)"
+   ],
+   "causa_probable": "tools/geo/epocas_1843.py agregar_casas() recorta cada crujía contra todas las casas vivas ensanchadas SEPARACION_M = 0,5 m y la descarta si el frente queda < FRENTE_MINIMO_M = 3 m: una manzana con pocas casas de 1936 sueltas sobre el frente se queda sin las demás. No resta el `suprime` de los hitos (src/hitos/suprimir.js, tools/vidas-visibles.mjs), solo la planta. Las casas [1,2] de 1772 mueren en 1843 y lo que nace cubre menos. Medido: U1843-0240 17 %, U1843-0141 23 %, U1843-0142 24 %, U1843-0264 22 %, U1843-0067 24 % y otras 20 bajo 35 %.",
+   "donde_se_arregla": "tools/geo/epocas_1843.py agregar_casas() (generalizado a cualquier época con referencia): restar plantas y `suprime` de los hitos vivos (tools/hitos-planta.mjs) en vez de las casas ensanchadas; rellenar los huecos de más de un solar de la época en vez de descartar la crujía entera. Si T82.17 ya reemplazó la subdivisión, esta tarea queda en verificar y cerrar los restos. Conventos y lotes especiales con hito, como límite con su id. Test primero. Tamaño estimado: ~300 líneas.",
+   "como_se_mide": "R7 en 1843, 1889 y 1911: 0 manzanas aprobadas con cobertura de frente bajo el umbral de T82.2 y 0 manzanas vacías, salvo límite. Capturas 2-sur_oblicua y 2-noreste_oblicua. R12: 1772 sin cambios (las puertas de 08).",
+   "epocas_afectadas": [
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No externa: revisar en Jesurún si N (San Francisco) y los demás conventos con letra ocupan la manzana entera.",
+   "depende_de": [
+    "T82.17 · Solares de la época",
+    "T82.2 · Puertas (R7)"
+   ]
+  },
+  {
+   "titulo": "T82.20 · Patios y solares solo dentro de casas de la época y nunca hasta la calle",
+   "reglas": [
+    "R8",
+    "R1",
+    "R5"
+   ],
+   "hallazgos": [
+    "1772-V05",
+    "1772-V18 (trazas al pie)",
+    "1843-E (H10, H12 diagonales)",
+    "1889 H9",
+    "1911-07"
+   ],
+   "causa_probable": "Una sola causa común: tools/geo/alas.py repartir() / alas_de_casa cubren el lote de 1936 entero hasta el fondo con crujía, PATIO y SOLAR, y src/alas.js los techa como CUBIERTA.PATIO / CUBIERTA.SOLAR (src/alzado.js PISO_PATIO_M, src/shader/techo.js pisoDePatio, src/material.js `piso`). Cuando el lote atraviesa la manzana (CALLE_FONDO), cuando la crujía del frente no vive en la época (ceder_frentes_a_1772, sin_techos, relevos, src/hitos/suprimir.js) o cuando las vecinas no existen, queda el solar solo hasta la calle, con las rayas de los lotes de 1936. MARGEN_M = 40 puede estirar alas en abanico. src/shader/suelo.js pinta el patio de la manzana de 1936 gateado solo por edificadoDesde y no por las casas vivas.",
+   "donde_se_arregla": "Primero confirmar con ?medir o un volcado del pak cuáles techos dibujan las manchas (2-este, 2-norte, 1-caroata). Después: tools/geo/alas.py repartir(): el solar no pasa del fondo de lote de la época ni de la mitad de la manzana y se corta antes de un lado de calle (CALLE_FONDO, CALLE_IZQ, CALLE_DER) sin casa de la época; src/alas.js planDeAlas / loteDeEtapa: el piso PATIO/SOLAR solo en las etapas en que vive su crujía del frente, nunca sobre el lado de frente; tools/geo/epocas.py sin_techos y src/hitos/suprimir.js: al quitar techos, quitar sus pisos; src/shader/suelo.js: el patio del suelo solo bajo casas vivas de la época. Con T82.17, el solar sale del solar de la época. Tests primero (tests/unit alas, ciudad, suprimir; tools/geo/tests). Tamaño estimado: ~700 líneas.",
+   "como_se_mide": "R8: 0 píxeles de patio o solar fuera del anillo de casas vivas y 0 pisos que toquen una calle, en todas las épocas. Test de src/alas.js: ninguna pieza SOLAR toca el lado de frente del marco. Capturas 1-caroata, 1-sur, 1-plaza_baja, 2-este, 2-norte, 3-este, 3-sur, 4-sur, 4-norte sin manchas oliva con rayas. R12: las seis épocas.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936 (verificar que el solar no llegue a la calle)"
+   ],
+   "necesita_investigacion": "Sí, del código: cuál de las causas produce cada mancha, antes de tocar nada.",
+   "depende_de": [
+    "T82.2 · Puertas (R8)",
+    "T82.17 · Solares de la época",
+    "T82.8 · Diagnóstico de la línea vertical (descarta que las trazas sean otra cosa)"
+   ]
+  },
+  {
+   "titulo": "T82.21 · Edificios públicos de 1936 solo en su época: sin bloques modernos ni losas grises en 1889 y 1911",
+   "reglas": [
+    "R11",
+    "R7",
+    "R3"
+   ],
+   "hallazgos": [
+    "1889 H19",
+    "1889 H20",
+    "1911-14"
+   ],
+   "causa_probable": "tools/geo/vectorizar.py convierte cada mancha EDIFICIO_PUBLICO de 1936 en un techo ESTILO_PUBLICO; tools/geo/estilos.py asignar() le deja la misma historia en las seis épocas y tools/geo/epocas.py vida_de_1936 lo hace nacer en max(nace, PUBLICOS_DESDE = 3), aunque el edificio no exista en 1889 o 1911; las casas que pisa (`cede`) mueren cuando él nace. src/techos.js lo techa con azotea desde 1889 y src/shader/fachada.js lo pinta piedra clara con muchas ventanas (la losa del «Concejo Municipal», Hacienda / Santa Capilla, al este de Miraflores).",
+   "donde_se_arregla": "tools/geo/epocas.py vida_de_1936 y tools/geo/estilos.py asignar(): un público de 1936 nace solo si la referencia de la época lo dibuja como edificio público (rojo en Mestre/Razetti) o tiene hito, con lista de excepciones con fuente (tools/geo/referencias/publicos-<año>.json); si no, nace en 1936 y antes su lugar lo ocupan las casas de la manzana (sus `cede` viven, o solares de la época). Test primero. Tamaño estimado: ~400 líneas.",
+   "como_se_mide": "R11: 0 techos ESTILO_PUBLICO vivos fuera de su vida con fuente; 0 casas de 3+ pisos antes de 1911 (estilos.histograma por época). Capturas 3-plaza_baja, 3-plaza_cenital, 3-catuche_centro, 4-catuche_centro, 4-plaza_cenital sin losas. R12: 1889, 1911 y 1936 medidas antes y después.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "Sí, liviana: qué públicos de la planta de 1936 estaban en pie en 1889 y 1911 (T82.5).",
+   "depende_de": [
+    "T82.5 · Investigación de edificios",
+    "T82.11 · Referencia de 1889",
+    "T82.12 · Referencia de 1911",
+    "T82.2 · Puertas (R11)"
+   ]
+  },
+  {
+   "titulo": "T82.22 · Edificios públicos con contorno recto sobre la línea de fachada (sin escaleras de píxel ni lenguas)",
+   "reglas": [
+    "R3",
+    "R2",
+    "R12"
+   ],
+   "hallazgos": [
+    "1936 H1936-06"
+   ],
+   "causa_probable": "tools/geo/vectorizar.py techos_publicos(): cada componente de la clase «publico» (detectar_rayado de tools/geo/segmentar_texturas.py) se vectoriza con poligono_de() (cv2.findContours CHAIN_APPROX_NONE, buffer 0,5 px y simplify con tolerancia_px), sin ajuste a la línea de fachada ni a la red, a diferencia de las casas (casas_por_lados, ajustar_cara). Salen losas con bordes en escalera, lados curvos y entrantes en lengua donde el rayado se mezcla con casas vecinas (Correos, Hacienda, Palacio de Justicia).",
+   "donde_se_arregla": "tools/geo/vectorizar.py techos_publicos(): recortar al polígono de su cuadra (la cara de la red, como ajustar_cara), llevar cada lado que da a la calle a la línea de fachada del tramo más cercano, los interiores a rectas paralelas o perpendiculares, y cortar las lenguas de menos de una crujía. Tests primero en tools/geo/tests con una máscara en escalera y una lengua. Tamaño estimado: ~500 líneas.",
+   "como_se_mide": "R3 (medida de T82.7) sobre los públicos: retiro ≤ 0,5 m y giro ≤ 5° en los lados de fachada; vértices por metro de perímetro bajo un tope. R2: 0 invasiones de calzada. Capturas 5-catuche_centro y 5-plaza_cenital. R12: 1889, 1911 y 1936 antes y después (los públicos que T82.21 deja vivos).",
+   "epocas_afectadas": [
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "No.",
+   "depende_de": [
+    "T82.7 · Medida del giro de R3",
+    "T82.21 · Públicos de 1936 solo en su época"
+   ]
+  },
+  {
+   "titulo": "T82.23 · F3: fachada solo a la calle; hacia el patio corredor y puerta; medianeras ciegas (visor, todas las épocas)",
+   "reglas": [
+    "R5"
+   ],
+   "hallazgos": [
+    "1843-L (H18)",
+    "1889 H5"
+   ],
+   "causa_probable": "src/alzado.js tramoDePared(): `conVanos` dependía solo de la altura (bajo >= ALTO_MINIMO_CON_VANOS_M) y no de `aLaCalle`, así que toda pared exterior (medianeras, fondo, caras al patio) recibía ventanas y portón; src/shader/vanos.js y fachada.js pintan el portón en cualquier cara con vanos. Además src/ciudad.js proyectar() da `libres = [1,1,1,1]` a las casas sin marco con muere ≠ 0 (casi todas las de 1843) y elegirFrente() puede poner el frente hacia el patio; ladosLibres() / libresDelMarco() sondean con las casas de toda la vida, no con las vivas en la época. El trabajo está empezado en la rama t82-f3-fachadas (conVanos con aLaCalle, largo negativo = pared de patio con solo su puerta, tests de alzado y fachada).",
+   "donde_se_arregla": "src/alzado.js (terminar lo de la rama): vanos de fachada solo en caras a la calle, la pared de patio con su puerta (largo negativo), medianera ciega; src/shader/fachada.js y src/shader/vanos.js leen ese tipo; src/ciudad.js: no usar [1,1,1,1] para las casas que mueren, sondear con las vivas en la misma época y llevar el tipo de cara (calle / patio / medianera) al atributo de pared. Tests primero en tests/unit (alzado, fachada, ciudad). Puede adelantarse a T82.17: no tiene dependencia dura, pero con solares de la época desaparecen la mayoría de los frentes al patio. Tamaño estimado: ~600 líneas (la rama ya tiene ~70).",
+   "como_se_mide": "Tests: 0 portones o ventanas de calle en caras fuera de la línea de fachada, medianeras sin vanos, puerta al patio. R5 de T82.2 sobre el pak. Capturas a pie y N-plaza_baja de todas las épocas antes y después; prueba a mano del responsable.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Ya hecha en F0 (tipología, tema 4); revisar que cubra qué abre al patio en la casa republicana de 1889.",
+   "depende_de": [
+    "T82.2 · Puertas (R5, para medir)"
+   ]
+  },
+  {
+   "titulo": "T82.24 · Hitos de las iglesias y conventos marcados sin edificio (San Jacinto, Carmelitas, San Mauricio, San Pablo, Candelaria, Santa Rosalía, Las Mercedes, San Juan, El Calvario)",
+   "reglas": [
+    "R9",
+    "R7",
+    "R11"
+   ],
+   "hallazgos": [
+    "1772-V07",
+    "1772-V09",
+    "1772-V10",
+    "1772-V11",
+    "1772-V12",
+    "1843-I (H7)",
+    "1889 H13",
+    "1889 H14",
+    "1889 H15",
+    "1889 H18",
+    "1911-03",
+    "1911-04",
+    "1936 H1936-08",
+    "1936 H1936-09",
+    "1936 H1936-10"
+   ],
+   "causa_probable": "src/hitos/datos/iglesias.js iglesiaEn() solo define altagracia, santa-capilla, santa-teresa, la-pastora y San Francisco. Las marcas de src/marcas-datos.js para san-jacinto, carmelitas, san-mauricio, plaza de San Pablo, candelaria, santa-rosalia, las-mercedes, san-juan y calvario tienen x/y propios y no `hito:`; como las casas solo ceden ante la planta de un hito (tools/hitos-planta.mjs → ceder_frentes_a_1772, agregar_casas, sin_solapes_residuales; `suprime`), el pin cae sobre casas genéricas, en la calle o en el pasto (El Calvario, donde el Exato mapa dibuja dos edificios rojos y una cruz). La referencia de 1772 ya tiene 20 unidades conjunto_especial sin usar.",
+   "donde_se_arregla": "src/hitos/: una pieza genérica de iglesia con claustro (partes.js, piezas.js). src/hitos/datos/iglesias.js: un hito por templo o convento con planta, eje, `suprime` y vida con fuente de T82.5 (San Pablo hasta 1876; San Mauricio hasta pasar a Santa Capilla; San Jacinto y Carmelitas hasta su exclaustración; Candelaria 1708 y Santa Rosalía 1730 desde 1772; Las Mercedes en ruina en 1843 y reconstruida hacia 1857; El Calvario con sus cruces sobre el relieve), tomados del Exato mapa calzado, Jesurún, Mestre y el DCN 1936 y de las unidades conjunto_especial. En src/marcas-datos.js cada marca apunta a su hito. Lo que no tenga planta con fuente va como límite «hito pendiente» en specs/reglas/limites-<año>.json con la marca en su manzana. Regenerar los datos (agregar_casas y ceder reciben las plantas). PRs apilados por grupo: T82.24a pieza de claustro (~600), T82.24b templos de 1772 (~800), T82.24c templos de 1843 en adelante (~700), T82.24d El Calvario (~300). Tamaño estimado total: ~2400 líneas.",
+   "como_se_mide": "R9: 0 marcas de edificio sobre casas genéricas, calle o pasto, salvo límite. R7: la manzana del hito libre de casas genéricas. R11: cada hito dentro de su vida con fuente en todas las épocas. Tests en tests/unit (la marca cae sobre la planta de su hito). Capturas 1-sur_oblicua, 1-noreste_oblicua, 1-plaza_cenital, 1-catuche_centro, 1-oeste, 2-general, 3-este, 3-sur, 4-este, 4-sur, 5-sur, 5-este, 5-norte. R12: puertas de 08 y 11 sin empeorar.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí: depende de T82.5 (planta, forma y vida con fuente).",
+   "depende_de": [
+    "T82.5 · Investigación de edificios",
+    "T82.2 · Puertas (R9, R11)"
+   ]
+  },
+  {
+   "titulo": "T82.25 · Hitos civiles marcados sin edificio: Seminario de Santa Rosa y Universidad, Teatro Municipal, casa natal, La Rotunda y los públicos de 1889 (Concejo, Hacienda)",
+   "reglas": [
+    "R9",
+    "R11",
+    "R7"
+   ],
+   "hallazgos": [
+    "1772-V06",
+    "1843-H (H5 edificio)",
+    "1843-I (H5)",
+    "1889 H16",
+    "1889 H17",
+    "1889 H18",
+    "1889 H19 (los que sí existían)",
+    "1911-05"
+   ],
+   "causa_probable": "src/hitos/datos/civiles.js no tiene el seminario (la universidad nace en 1889 con la fachada neogótica), ni el Teatro Municipal (1881), ni la cárcel de 1889–1936, ni el Concejo y Hacienda de la leyenda de Mestre (7, 16, 17, 18). Las marcas seminario (x 8950, y 6975, nace 1, muere 3), teatro, casa-natal y rotunda (nace 3, muere 5, en «dudas») caen sobre casas genéricas o en la calle; la del seminario cae ~16 m al sur del borde de la unidad plaza U1843-0143.",
+   "donde_se_arregla": "src/hitos/datos/civiles.js: hito del seminario para 1772–1843 (manzana al sur de la Plaza Mayor, letras k/L de Jesurún y unidad conjunto_especial de 1772), Teatro Municipal, La Rotunda con vida [3, 5) y los públicos de 1889 con fuente; la casa natal como casa (no hito propio) si así lo dice la fuente. Marcas con `hito:` en src/marcas-datos.js. Sin planta con fuente: límite «hito pendiente» y la marca en su manzana. Tamaño estimado: ~1200 líneas (dos PRs si hace falta: 1772–1843 y 1889–1911).",
+   "como_se_mide": "R9: las marcas caen sobre su hito (o límite) en todas las épocas donde viven. R11: vida de cada hito con fuente. Capturas 1-plaza_baja, 1-plaza_cenital, 2-plaza_cenital, 2-plaza_baja, 3-plaza_cenital, 4-sur_oblicua.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "Sí: T82.5 (ubicación y forma del seminario, planta del teatro y de la cárcel, públicos de 1889).",
+   "depende_de": [
+    "T82.5 · Investigación de edificios",
+    "T82.2 · Puertas (R9, R11)",
+    "T82.21 · Públicos de 1936 solo en su época (para no duplicar Concejo y Hacienda)"
+   ]
+  },
+  {
+   "titulo": "T82.26 · Plazas libres por época y sus marcas en su lugar: San Jacinto / El Venezolano, Candelaria y Teatro (despejar_plazas generalizado)",
+   "reglas": [
+    "R9",
+    "R7"
+   ],
+   "hallazgos": [
+    "1772-V08",
+    "1843-H (H8)",
+    "1889 H13",
+    "1889 H16",
+    "1911-06"
+   ],
+   "causa_probable": "Las plazas solo se despejan en 1772 (tools/geo/epocas.py despejar_plazuelas_de_1772 con 1772-plazuelas.json, donde P1772-002 es un ensanche sin identificar) y en las épocas con referencia (en_lotes_libres de epocas_1843.py), pero la referencia de 1843 solo tiene el lote especial M (U1843-0150) y no una unidad plaza para el claro de San Jacinto. Las crujías de agregar_casas viven «hasta que nace una casa que lo pisa (o siempre)»: en una plaza ninguna casa de 1936 las pisa y siguen hasta 1911. La marca plaza-venezolano (x 9265, y 7040) cae en una esquina con casas.",
+   "donde_se_arregla": "Identificar la plaza en el Exato mapa (¿P1772-002?) y en Jesurún (claro junto a M), con procedencia, en 1772-plazuelas.json y 1843-manzanas.json; las plazas de 1889 (B, D, N de Mestre) y 1911 (R de Razetti) como unidades plaza de T82.11/T82.12. tools/geo/epocas.py: despejar_plazas(ciudad, vida, quitar, plazas, epoca) generalizado, que acorta la vida de toda casa que pisa la plaza desde que se abre; en agregar_casas, las crujías mueren cuando su manzana pasa a plaza. Marcas de plaza al centro de su plaza en src/marcas-datos.js. Test primero (plaza sintética; cada marca de plaza cae en una unidad plaza de su época). Tamaño estimado: ~600 líneas.",
+   "como_se_mide": "R7: 0 casas en plazas en 1772, 1843, 1889 y 1911 (según desde cuándo la fuente la da abierta). R9: marcas de plaza sobre su plaza. Puerta de la fase 3 de specs/08 en 0. Capturas 1-plaza_cenital, 2-plaza_cenital, 3-plaza_cenital, 4-plaza_cenital.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "Sí, corta: desde cuándo la Plaza de San Jacinto / El Venezolano es espacio abierto y su contorno por época (T82.5). Si el claro no se distingue en un plano, límite «plaza sin dibujo».",
+   "depende_de": [
+    "T82.24 · Hitos de iglesias y conventos (el convento de San Jacinto delante de la plaza)",
+    "T82.11 · Referencia de 1889",
+    "T82.12 · Referencia de 1911",
+    "T82.2 · Puertas (R7, R9)"
+   ]
+  },
+  {
+   "titulo": "T82.27 · Anacronismos de 1843: «Plaza Bolívar» desde 1842 y Altagracia, La Merced y la Trinidad en ruina",
+   "reglas": [
+    "R11",
+    "R9"
+   ],
+   "hallazgos": [
+    "1843-J (H9)"
+   ],
+   "causa_probable": "src/marcas-datos.js: la plaza tiene nombres [[1, 'Plaza Mayor'], [3, 'Plaza Bolívar']], así que 1843 dice «Plaza Mayor» aunque se llama Plaza Bolívar desde 1842 (D7, edificios-16). src/hitos/datos/iglesias.js: 'altagracia' tiene nace 1 sin muere ni variantes, entero en 1843 cuando estuvo destruido de 1812 a 1857 (D8, edificios-33). La Merced (fachada en ruina en 1842) y la Trinidad (abandonada tras 1812, fachada nueva en 1853) no están revisadas.",
+   "donde_se_arregla": "src/marcas-datos.js: [2, 'Plaza Bolívar', …], conservando el texto de 1889 para la estatua de 1874. src/hitos/datos/iglesias.js: vida partida de Altagracia (en pie en 1772, ruina o solar libre en 1843, reconstruida desde 1889) con variantes por época como src/hitos/datos/capitolio.js, y la marca con nombre por época («Ruinas de Altagracia»); lo mismo para La Merced y la Trinidad si tienen hito o marca. Test de la vida de hitos y marcas contra investigacion.json. Tamaño estimado: ~400 líneas.",
+   "como_se_mide": "R11: 0 hitos o marcas vivos fuera de sus fechas con fuente. Capturas de 1843: rótulo «Plaza Bolívar»; Altagracia en ruina o solar en 2-plaza_baja y 2-catuche_centro. 1772 y 1889 sin cambios visibles.",
+   "epocas_afectadas": [
+    "1772 (verificar Altagracia entera)",
+    "1843",
+    "1889"
+   ],
+   "necesita_investigacion": "Parcial: qué quedaba de Altagracia en 1843 (T82.5). Si no aparece, solar libre y límite registrado.",
+   "depende_de": [
+    "T82.5 · Investigación de edificios",
+    "T82.2 · Puertas (R11)"
+   ]
+  },
+  {
+   "titulo": "T82.28 · Plazas de toros con volumen: Nuevo Circo y Circo Metropolitano",
+   "reglas": [
+    "R7",
+    "R9",
+    "R11"
+   ],
+   "hallazgos": [
+    "1936 H1936-11"
+   ],
+   "causa_probable": "No existe hito de plaza de toros: src/marcas-datos.js pone 'nuevo-circo' (x 10330, y 8230) y 'circo-metropolitano' (x 7905, y 7905) con nace 5 sin fuente y sin `hito:`. El rayado curvo no pasa detectar_rayado() (tools/geo/segmentar_texturas.py): se ve el dibujo del plano en el suelo y una casa genérica que vectorizar.py saca de lo clasificado como edificado.",
+   "donde_se_arregla": "Un tipo de parte nuevo en src/hitos/partes.js y src/hitos/piezas.js (anillo de graderío con muro exterior y ruedo libre); los dos circos en src/hitos/datos/civiles.js con centro y radio medidos en el DCN, `suprime` del interior y vida con fuente; marcas con `hito:`. Tests en tests/unit (geometría del anillo, casas suprimidas, marca sobre el hito). Tamaño estimado: ~700 líneas.",
+   "como_se_mide": "R7: 0 casas genéricas dentro del circo. R9: la marca sobre el hito. R11: nace según la inauguración con fuente (si el Metropolitano es anterior a 1911, también en 1911). Capturas 5-sur_oblicua, 5-general, 5-caroata.",
+   "epocas_afectadas": [
+    "1911 (si la fuente lo da)",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí: fechas, diámetro, altura y pisos de graderío de cada circo (T82.5).",
+   "depende_de": [
+    "T82.5 · Investigación de edificios",
+    "T82.2 · Puertas (R7, R9)"
+   ]
+  },
+  {
+   "titulo": "T82.29 · Plaza Bolívar de 1889 y 1911 entera ajardinada (mancha beige en la mitad norte)",
+   "reglas": [
+    "R8",
+    "R7"
+   ],
+   "hallazgos": [
+    "1889 H8"
+   ],
+   "causa_probable": "A diagnosticar. La plaza la arma src/hitos/datos/plaza-bolivar.js (JARDIN desde la época 3, suprime el rectángulo). La mancha irregular con borde punteado tiene la textura de las losas de los públicos y patios de 1936: probablemente una losa de un techo público, un piso PATIO/SOLAR de alas que el `suprime` no cubre o el piso de tierra del MERCADO que no muere a tiempo, dibujado sobre los canteros.",
+   "donde_se_arregla": "Diagnóstico en el visor (picking en 3-plaza_cenital); después, según la causa, src/hitos/datos/plaza-bolivar.js (canteros y caminos de la mitad norte) o tools/geo/epocas.py / tools/hitos-planta.mjs (el suprime de la plaza quita toda pieza dentro de su planta, pisos incluidos). Test si es lógica. Tamaño estimado: ~100–200 líneas.",
+   "como_se_mide": "R7/R8: 0 techos, patios ni losas dentro de la planta de plaza-bolivar en 1889 y 1911. Captura 3-plaza_cenital con los cuatro cuadros de césped y los caminos diagonales completos.",
+   "epocas_afectadas": [
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No externa; diagnóstico en el visor.",
+   "depende_de": [
+    "T82.2 · Puertas (R7, R8)"
+   ]
+  }
+ ]
+}

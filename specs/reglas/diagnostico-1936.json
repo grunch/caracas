@@ -1,0 +1,389 @@
+{
+ "alcance": "Diagnóstico de las reglas de construcción (specs/13) en la época: hallazgos de la revisión visual sobre las capturas fijas y el plano original, los que el verificador no pudo refutar (confirmados) y las tareas propuestas. Capturas de caracas.city, datos-2026-11-25-09ba9f7.",
+ "fecha": "2026-11-25",
+ "workflow": "specs/reglas/workflows/diagnostico-epocas.js (run wf_501830e2-601)",
+ "año": 1936,
+ "hallazgos": [
+  {
+   "id": "H1936-01",
+   "regla": "R10",
+   "captura": "5-oeste.png, 5-caroata.png, 5-general.png",
+   "donde": "Oeste del casco, dentro del verde del Paseo Independencia (El Calvario): en 5-oeste el cauce gris-azulado entra por el borde izquierdo (x≈0, y≈440) y termina en una V cerrada hacia x≈340, y≈450. En 5-caroata es la misma V arriba a la izquierda (x≈0–130, y≈170–270). En 5-general, el rótulo «Quebrada Caroata» (x≈308, y≈745) cae sobre casas, sin agua a la vista.",
+   "que_se_ve": "El Caroata es un tramo corto que termina en V en medio del campo. No baja hacia El Silencio ni hacia el Guaire, y no hay agua en ningún tramo dentro de la ciudad. Es el mismo defecto que D5 de 1843 y sigue en 1936.",
+   "contra_el_original": "En la hoja 1 del DCN la quebrada baja del noroeste por El Buen Consejo y sigue hacia el sur, al oeste del casco y del Calvario (Potrerito), hasta el Guaire. Según specs/13 D10 la embaularon en 1942–1945, así que en 1936 estaba abierta y era continua.",
+   "medido": "R10 no se mide todavía (medicion-1936.json: R10 en 'pendientes').",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H1936-02",
+   "regla": "R10",
+   "captura": "5-este.png, 5-general.png",
+   "donde": "Borde este. En 5-este el agua azul del Anauco baja por x≈1150–1165 desde y≈70 y se corta en y≈340, donde termina la mancha verde. Al sur solo siguen dos rayas finas sobre el suelo tostado, hasta y≈620. En 5-general es el mismo corte bajo el rótulo «Río Anauco» (x≈1166, y≈353).",
+   "que_se_ve": "El río solo tiene agua mientras corre por el verde. Donde empieza el suelo urbano desaparece, y ya no llega al Guaire.",
+   "contra_el_original": "En la hoja 2 el Anauco corre continuo de norte a sur (San Bernardino, Puente Anauco) hasta el Guaire, con línea azul en todo el tramo urbano.",
+   "medido": "R10 pendiente en medicion-1936.json.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H1936-03",
+   "regla": "R10",
+   "captura": "5-norte.png, 5-catuche_centro.png",
+   "donde": "Norte del casco, a lo largo de la Quebrada Catuche. En 5-norte hay tres manchas verdes sueltas: arriba al centro (x≈510–790, y≈190–400), la que baja hasta el rótulo «Quebrada Catuche» (x≈860, y≈480) y otra aparte a la derecha (x≈910–990, y≈440–550). En 5-catuche_centro no se ve cauce.",
+   "que_se_ve": "No se ve ninguna línea de agua. El corredor de la quebrada son manchas verdes cortadas que no siguen un cauce continuo.",
+   "contra_el_original": "En la hoja 1 el Catuche baja de La Pastora hacia el centro como cauce dibujado. Falta confirmar con el plano a escala completa en qué tramo estaba ya embaulado en 1936.",
+   "medido": "R10 pendiente en medicion-1936.json.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-04",
+   "regla": "R8",
+   "captura": "5-plaza_baja.png",
+   "donde": "Vista baja de la Plaza Bolívar, primer plano abajo al centro: una línea vertical recta en x≈648–652, desde y≈560 hasta el borde inferior (y≈900).",
+   "que_se_ve": "Una costura clara, vertical y recta en la pantalla, que atraviesa techos y paredes de varios edificios distintos (corta el bloque de techos a dos aguas de la izquierda y las azoteas de la derecha). Es la «línea vertical blanca» de D6 y se repite en 1936.",
+   "contra_el_original": "No corresponde a nada del plano: es un defecto del render o de las baldosas.",
+   "medido": "Ninguna puerta lo mide.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-05",
+   "regla": "R8",
+   "captura": "5-oeste.png",
+   "donde": "Mancha verde del Paseo Independencia (El Calvario), en el centro de la captura. Halos redondos: x≈375,y≈300; x≈450,y≈330; x≈520,y≈300; x≈595,y≈385; x≈660,y≈280 (bajo el rótulo). Óvalo tostado grande: x≈440–560, y≈400–470.",
+   "que_se_ve": "Agujeros redondos de suelo urbano tostado, de borde difuso, dentro del verde, alrededor de casas o árboles sueltos. Son los «halos redondos» de D3. El borde del verde con la ciudad va en lóbulos blandos, no sigue las manzanas.",
+   "contra_el_original": "En la hoja 1 el Calvario es un cerro con curvas de nivel, caminos y edificios sueltos (los del paseo). El plano no tiene manchas de suelo urbano redondas.",
+   "medido": "R8 pendiente en medicion-1936.json.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-06",
+   "regla": "R3",
+   "captura": "5-catuche_centro.png, 5-plaza_cenital.png",
+   "donde": "En 5-catuche_centro, las losas grises planas al sur de «Correos» (x≈776, y≈656) y de «Ministerio de Hacienda» (x≈912, y≈511): la manzana de x≈850–1120, y≈640–900 y la de x≈60–180, y≈380–480, que tiene forma de C curva. En 5-plaza_cenital hay losas iguales alrededor de «Palacio de Justicia» (x≈523, y≈648).",
+   "que_se_ve": "Edificios o lotes especiales dibujados como losas planas con el contorno en escalera de píxeles, lados curvos y bordes ondulados. No tienen fachada recta sobre la línea de la calle ni son paralelos a ella. Algunas entran en forma de lengua dentro de la manzana, entre casas.",
+   "contra_el_original": "El DCN dibuja los edificios públicos con rayado y contornos rectos que siguen las calles. El contorno ondulado sale de la segmentación, no del plano.",
+   "medido": "R3: 8.183 casas giradas más de 5° de 33.449 medidas (medicion-1936.json, R3.n_giradas). Entre las 300 listadas hay muchas con giro de 45,0°.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-07",
+   "regla": "R3",
+   "captura": "5-sur.png, 5-sur_oblicua.png, 5-norte.png",
+   "donde": "En 5-sur, losas claras finas y alargadas que cruzan los patios en diagonal: x≈600–640,y≈480–560; x≈395–425,y≈180–245; x≈940–960,y≈460–500; x≈70–110,y≈580–640. En 5-sur_oblicua, x≈420–470,y≈580–620 y x≈60–110,y≈590–640. En 5-norte, x≈280–310,y≈210–280.",
+   "que_se_ve": "Cuerpos edificados planos, largos y delgados, metidos dentro de la manzana y girados respecto de las calles de la cuadra.",
+   "contra_el_original": "En el DCN lo edificado dentro de esas manzanas es naranja con lados paralelos a los lotes y a la calle.",
+   "medido": "R3: 8.183 giradas > 5° (de 33.449). La mediana de R4 (10,63 m) no lo explica.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-08",
+   "regla": "R9",
+   "captura": "5-sur.png, 5-sur_oblicua.png, 5-general.png",
+   "donde": "Rótulo «Santa Rosalía»: en 5-sur, x≈510, y≈248; en 5-sur_oblicua, x≈593, y≈770; en 5-general, x≈620, y≈743.",
+   "que_se_ve": "El rótulo de la iglesia cae sobre un solar claro vacío o sobre el borde de una manzana de casas genéricas. No hay edificio de iglesia, mientras que Altagracia y Santa Teresa sí tienen su modelo.",
+   "contra_el_original": "El DCN rotula los edificios públicos con rayado y nombre. La iglesia de Santa Rosalía (1730, en specs/13 D9) estaba en pie en 1936.",
+   "medido": "R9 pendiente en medicion-1936.json.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-09",
+   "regla": "R9",
+   "captura": "5-este.png, 5-general.png",
+   "donde": "Rótulo «Candelaria»: en 5-este, x≈960, y≈288; en 5-general, x≈1096, y≈397.",
+   "que_se_ve": "El punto cae sobre la plaza verde y una casita baja. No hay iglesia modelada.",
+   "contra_el_original": "En la hoja 2 la Candelaria se dibuja como edificio público junto a su plaza. La iglesia (1708) estaba en pie.",
+   "medido": "R9 pendiente.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-10",
+   "regla": "R9",
+   "captura": "5-norte.png",
+   "donde": "Rótulo «Las Mercedes», x≈726, y≈729.",
+   "que_se_ve": "El punto cae sobre una franja plana gris clara entre casas genéricas, sin edificio de iglesia.",
+   "contra_el_original": "La iglesia de las Mercedes estaba en pie en 1936. El DCN rotula los templos como edificios públicos.",
+   "medido": "R9 pendiente.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-11",
+   "regla": "R7",
+   "captura": "5-sur_oblicua.png, 5-general.png, 5-caroata.png",
+   "donde": "«Nuevo Circo»: en 5-sur_oblicua, x≈1200, y≈676; en 5-general, x≈898, y≈670. «Circo Metropolitano»: en 5-caroata, x≈911, y≈743.",
+   "que_se_ve": "Las plazas de toros son anillos concéntricos dibujados en el suelo, con una casita encima. No hay graderío ni volumen: el lote especial queda vacío, como suelo.",
+   "contra_el_original": "El DCN dibuja ambos circos como edificios redondos rayados (hoja 2, Nuevo Circo; hoja 1, el círculo al sur del centro).",
+   "medido": "R7 pendiente en medicion-1936.json.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-12",
+   "regla": "R9",
+   "captura": "5-plaza_cenital.png",
+   "donde": "Rótulo «Plaza El Venezolano», x≈1030, y≈713, al sureste de la Plaza Bolívar.",
+   "que_se_ve": "El punto de una plaza nombrada cae sobre una losa gris plana y casas, no sobre un espacio libre. Además, la plaza podría no existir todavía en 1936 (R11).",
+   "contra_el_original": "Hay que verificar en el DCN si la plaza está dibujada en 1936 (la plaza El Venezolano se abrió después, con las demoliciones de San Jacinto) y su fecha con fuente. En la vista reducida no se lee.",
+   "medido": "R9 y R11 pendientes.",
+   "gravedad": "baja"
+  }
+ ],
+ "confirmados": [
+  {
+   "id": "H1936-01",
+   "regla": "R10",
+   "captura": "5-oeste.png, 5-caroata.png, 5-general.png",
+   "donde": "Oeste del casco, dentro del verde del Paseo Independencia (El Calvario): en 5-oeste el cauce gris-azulado entra por el borde izquierdo (x≈0, y≈440) y termina en una V cerrada hacia x≈340, y≈450. En 5-caroata es la misma V arriba a la izquierda (x≈0–130, y≈170–270). En 5-general, el rótulo «Quebrada Caroata» (x≈308, y≈745) cae sobre casas, sin agua a la vista.",
+   "que_se_ve": "El Caroata es un tramo corto que termina en V en medio del campo. No baja hacia El Silencio ni hacia el Guaire, y no hay agua en ningún tramo dentro de la ciudad. Es el mismo defecto que D5 de 1843 y sigue en 1936.",
+   "contra_el_original": "En la hoja 1 del DCN la quebrada baja del noroeste por El Buen Consejo y sigue hacia el sur, al oeste del casco y del Calvario (Potrerito), hasta el Guaire. Según specs/13 D10 la embaularon en 1942–1945, así que en 1936 estaba abierta y era continua.",
+   "medido": "R10 no se mide todavía (medicion-1936.json: R10 en 'pendientes').",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H1936-02",
+   "regla": "R10",
+   "captura": "5-este.png, 5-general.png",
+   "donde": "Borde este. En 5-este el agua azul del Anauco baja por x≈1150–1165 desde y≈70 y se corta en y≈340, donde termina la mancha verde. Al sur solo siguen dos rayas finas sobre el suelo tostado, hasta y≈620. En 5-general es el mismo corte bajo el rótulo «Río Anauco» (x≈1166, y≈353).",
+   "que_se_ve": "El río solo tiene agua mientras corre por el verde. Donde empieza el suelo urbano desaparece, y ya no llega al Guaire.",
+   "contra_el_original": "En la hoja 2 el Anauco corre continuo de norte a sur (San Bernardino, Puente Anauco) hasta el Guaire, con línea azul en todo el tramo urbano.",
+   "medido": "R10 pendiente en medicion-1936.json.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H1936-04",
+   "regla": "R8",
+   "captura": "5-plaza_baja.png",
+   "donde": "Vista baja de la Plaza Bolívar, primer plano abajo al centro: una línea vertical recta en x≈648–652, desde y≈560 hasta el borde inferior (y≈900).",
+   "que_se_ve": "Una costura clara, vertical y recta en la pantalla, que atraviesa techos y paredes de varios edificios distintos (corta el bloque de techos a dos aguas de la izquierda y las azoteas de la derecha). Es la «línea vertical blanca» de D6 y se repite en 1936.",
+   "contra_el_original": "No corresponde a nada del plano: es un defecto del render o de las baldosas.",
+   "medido": "Ninguna puerta lo mide.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-05",
+   "regla": "R8",
+   "captura": "5-oeste.png",
+   "donde": "Mancha verde del Paseo Independencia (El Calvario), en el centro de la captura. Halos redondos: x≈375,y≈300; x≈450,y≈330; x≈520,y≈300; x≈595,y≈385; x≈660,y≈280 (bajo el rótulo). Óvalo tostado grande: x≈440–560, y≈400–470.",
+   "que_se_ve": "Agujeros redondos de suelo urbano tostado, de borde difuso, dentro del verde, alrededor de casas o árboles sueltos. Son los «halos redondos» de D3. El borde del verde con la ciudad va en lóbulos blandos, no sigue las manzanas.",
+   "contra_el_original": "En la hoja 1 el Calvario es un cerro con curvas de nivel, caminos y edificios sueltos (los del paseo). El plano no tiene manchas de suelo urbano redondas.",
+   "medido": "R8 pendiente en medicion-1936.json.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-06",
+   "regla": "R3",
+   "captura": "5-catuche_centro.png, 5-plaza_cenital.png",
+   "donde": "En 5-catuche_centro, las losas grises planas al sur de «Correos» (x≈776, y≈656) y de «Ministerio de Hacienda» (x≈912, y≈511): la manzana de x≈850–1120, y≈640–900 y la de x≈60–180, y≈380–480, que tiene forma de C curva. En 5-plaza_cenital hay losas iguales alrededor de «Palacio de Justicia» (x≈523, y≈648).",
+   "que_se_ve": "Edificios o lotes especiales dibujados como losas planas con el contorno en escalera de píxeles, lados curvos y bordes ondulados. No tienen fachada recta sobre la línea de la calle ni son paralelos a ella. Algunas entran en forma de lengua dentro de la manzana, entre casas.",
+   "contra_el_original": "El DCN dibuja los edificios públicos con rayado y contornos rectos que siguen las calles. El contorno ondulado sale de la segmentación, no del plano.",
+   "medido": "R3: 8.183 casas giradas más de 5° de 33.449 medidas (medicion-1936.json, R3.n_giradas). Entre las 300 listadas hay muchas con giro de 45,0°.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-08",
+   "regla": "R9",
+   "captura": "5-sur.png, 5-sur_oblicua.png, 5-general.png",
+   "donde": "Rótulo «Santa Rosalía»: en 5-sur, x≈510, y≈248; en 5-sur_oblicua, x≈593, y≈770; en 5-general, x≈620, y≈743.",
+   "que_se_ve": "El rótulo de la iglesia cae sobre un solar claro vacío o sobre el borde de una manzana de casas genéricas. No hay edificio de iglesia, mientras que Altagracia y Santa Teresa sí tienen su modelo.",
+   "contra_el_original": "El DCN rotula los edificios públicos con rayado y nombre. La iglesia de Santa Rosalía (1730, en specs/13 D9) estaba en pie en 1936.",
+   "medido": "R9 pendiente en medicion-1936.json.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-09",
+   "regla": "R9",
+   "captura": "5-este.png, 5-general.png",
+   "donde": "Rótulo «Candelaria»: en 5-este, x≈960, y≈288; en 5-general, x≈1096, y≈397.",
+   "que_se_ve": "El punto cae sobre la plaza verde y una casita baja. No hay iglesia modelada.",
+   "contra_el_original": "En la hoja 2 la Candelaria se dibuja como edificio público junto a su plaza. La iglesia (1708) estaba en pie.",
+   "medido": "R9 pendiente.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-10",
+   "regla": "R9",
+   "captura": "5-norte.png",
+   "donde": "Rótulo «Las Mercedes», x≈726, y≈729.",
+   "que_se_ve": "El punto cae sobre una franja plana gris clara entre casas genéricas, sin edificio de iglesia.",
+   "contra_el_original": "La iglesia de las Mercedes estaba en pie en 1936. El DCN rotula los templos como edificios públicos.",
+   "medido": "R9 pendiente.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H1936-11",
+   "regla": "R7",
+   "captura": "5-sur_oblicua.png, 5-general.png, 5-caroata.png",
+   "donde": "«Nuevo Circo»: en 5-sur_oblicua, x≈1200, y≈676; en 5-general, x≈898, y≈670. «Circo Metropolitano»: en 5-caroata, x≈911, y≈743.",
+   "que_se_ve": "Las plazas de toros son anillos concéntricos dibujados en el suelo, con una casita encima. No hay graderío ni volumen: el lote especial queda vacío, como suelo.",
+   "contra_el_original": "El DCN dibuja ambos circos como edificios redondos rayados (hoja 2, Nuevo Circo; hoja 1, el círculo al sur del centro).",
+   "medido": "R7 pendiente en medicion-1936.json.",
+   "gravedad": "media"
+  }
+ ],
+ "tareas": [
+  {
+   "titulo": "Agua continua: el Caroata y el Anauco corren de punta a punta, también dentro de la ciudad",
+   "reglas": [
+    "R10",
+    "R11",
+    "R12"
+   ],
+   "hallazgos": [
+    "H1936-01",
+    "H1936-02"
+   ],
+   "causa_probable": "Hay dos causas que se suman. (1) En la ciudad el agua no se pinta como agua. En src/shader/suelo.js, sueloColor() mezcla el canal R de uSuelo con BARRO (`c = mix(c, BARRO, s.r)` y, antes de 1936, `mix(liso, BARRO, s.r)`), y encima pone el dibujo del plano con tinta entera (`dibujo`, con ciudad = 1). El color de agua (AGUA_CLARA) solo lo pone valleColor() en src/shader/valle.js, que se usa donde ciudad = 0. Por eso el Anauco se ve azul mientras corre por el verde y, donde empieza el suelo urbano, queda reducido a dos rayas finas (5-este, y≈340). (2) La máscara de agua tiene cortes. tools/geo/segmentar_texturas.py, detectar_agua(), solo toma rayado azul denso (densidad_agua_min = 0,14 en una ventana de 3 m) y líneas azules finas cerradas con 0,5 px. Bajo los puentes (Nuevo, Junín, Arauca), los rótulos y las casas pegadas al cauce, y donde la hoja dibuja la quebrada solo con sus orillas, el agua se corta, y quitar_chicos() borra los tramos sueltos. El resultado es un Caroata que termina en V en el campo (5-oeste, x≈340) y nunca llega a El Silencio ni al Guaire. Además, canales_del_valle() en tools/geo/epocas.py usa esa misma máscara (AGUA_MINIMA) para la ribera y el monte, así que el bosque de galería se corta en el mismo punto.",
+   "donde_se_arregla": "Una referencia vectorial de los cauces, con fuente, en un módulo nuevo de tools/geo (por ejemplo tools/geo/cauces.py, más un JSON de cauces por época con su trazado tomado de la hoja 1 y la hoja 2 del DCN 1936 y de los planos de 1843 y 1889). Se rasteriza al canal R de suelo.png, sumado a detectar_agua() (tools/geo/segmentar_salidas.py y tools/suelo-lib.mjs), para que el cauce quede continuo hasta el Guaire. En src/shader/suelo.js, sueloColor() pinta el agua del cauce abierto con el tono de agua de valle.js (y no BARRO) también dentro de la ciudad, sin la tinta del plano encima. Lo embaulado, si alguna vez cae dentro del rango de épocas, va por vida en la referencia (R11). TDD: test de continuidad en tools/geo/tests y test del shader o de la lib en tests/unit.",
+   "como_se_mide": "Puerta R10 nueva en tools/geo/reglas_mapa.py: por cada cauce de la referencia, la máscara de agua de la época tiene que formar una sola componente desde su entrada al mapa hasta su confluencia (Caroata y Anauco con el Guaire); 0 casas a la vista con huella sobre el corredor del cauce. La puerta tiene que pasar de 'pendientes' a medida en specs/reglas/medicion-1936.json y en las demás épocas. En las capturas 5-oeste, 5-caroata, 5-este y 5-general, el agua se ve continua y del mismo color dentro y fuera de la ciudad. R12: medición de todas las épocas antes y después.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí (specs/13 § 2.1, tema 7 «ríos, quebradas y puentes»). El trazado del Caroata y del Anauco en cada época, cuándo se embauló cada tramo (D10 da 1942–1945 para el Caroata bajo El Silencio; falta el Anauco), qué puentes estaban en pie y desde cuándo, y si la hoja 2 del DCN está en el mosaico con su azul.",
+   "depende_de": [
+    "T82.2 (puerta R10 en reglas_mapa.py)",
+    "Investigación F0 de agua y puentes (completar los vacíos del tema 7)"
+   ]
+  },
+  {
+   "titulo": "Costura vertical clara frente a la Plaza Bolívar (vista baja): reproducir y cerrar la rendija",
+   "reglas": [
+    "R8",
+    "R3"
+   ],
+   "hallazgos": [
+    "H1936-04"
+   ],
+   "causa_probable": "Mirado de cerca (recorte de 5-plaza_baja.png, x≈646–652), no parece una costura de baldosas ni del posproceso. Las baldosas de src/baldosas.js reparten las casas por el centro de cada una y no las cortan. Lo que se ve es una rendija clara entre dos edificios vecinos que comparten una medianera larga, vista de canto. La línea es recta y vertical porque está casi en el punto de fuga de la cámara (x≈640, el centro de una pantalla de 1280 px). Probablemente las dos huellas no se tocan: la línea de lote del plano queda como un hueco de unos centímetros. Las huellas salen de tools/geo/vectorizar.py: poligono_de() con buffer de 0,5 px y simplify(), techos_publicos() y huellas_de_casas() para lotes vecinos de manzanas distintas o entre una casa y un público. Por ese hueco se ve el suelo claro o la cara interior de la medianera. Como la cámara es la misma en todas las épocas, D6 de 1843 sería el mismo defecto. No queda descartado que la causa sea otra (el corte del mapa de sombras o el acabado de src/shader/acabado.js): hay que reproducirlo antes de arreglarlo.",
+   "donde_se_arregla": "Primero reproducirlo con la cámara plaza_baja de specs/reglas/workflows/capturas.mjs, moviendo la cámara unos grados: si la línea se queda pegada a la geometría, son las huellas; si se queda fija en la pantalla, es render. Si son las huellas: en tools/geo/vectorizar.py, en huellas_de_casas() y techos_publicos(), que dos huellas vecinas a menos de una tolerancia compartan el borde (snap a la medianera común, como el recorte que ya se hace por cuadra). Si es render: en src/luz.js o src/shader/acabado.js.",
+   "como_se_mide": "Puerta nueva (dentro de R8 o como control de geometría en reglas_mapa.py): pares de casas a la vista cuyas huellas quedan separadas por un hueco de entre 0 y 0,3 m a lo largo de más de 2 m; el umbral es 0. Además, la captura plaza_baja de todas las épocas sin la línea, y con la cámara girada ±5° tampoco.",
+   "epocas_afectadas": [
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "No hace falta investigación externa. Sí hace falta reproducirlo para confirmar la causa.",
+   "depende_de": []
+  },
+  {
+   "titulo": "Suelo urbano que sigue a las manzanas: sin halos redondos ni lóbulos en el Calvario",
+   "reglas": [
+    "R8",
+    "R12"
+   ],
+   "hallazgos": [
+    "H1936-05"
+   ],
+   "causa_probable": "Lo urbanizado se calcula con discos alrededor de cada cosa edificada. tools/geo/valle.py, urbanizado(), cierra con un disco de cierre_m y dilata con un disco de holgura_m. epocas.py, urbanizados(), se lo aplica a casas36 = np.isin(clases, CASAS_1936), donde entran EDIFICADO, EDIFICIO_PUBLICO y PATIO. Así, cada casa o pabellón suelto dentro del Paseo Independencia urbaniza un disco a su alrededor (crece.png G, canales_del_valle()). En el shader se suman dos redondeos más: urbanoEn() en src/shader/valle.js promedia ocho vecinos a BORDE_CIUDAD_M = 10 m, y sueloColor() en src/shader/suelo.js usa `urbano = smoothstep(..., texture(uSuelo, uv, 5.0).a)`, un mip 5 de la manzana que pinta TIERRA_DE_CALLE en círculos difusos. El resultado son los halos tostados y el borde en lóbulos que no sigue las manzanas. Es el mismo mecanismo que D3 de 1843.",
+   "donde_se_arregla": "tools/geo/valle.py, urbanizado(): que lo urbanizado salga de las manzanas (los polígonos de cuadra más media calle hasta el eje) y no de discos alrededor de píxeles edificados. Las piezas sueltas menores que una manzana mínima y alejadas de otras no urbanizan; quedan como edificios en el campo. tools/geo/epocas.py, urbanizados() y CASAS_1936: no contar PATIO suelto ni los pabellones de parque. En src/shader/suelo.js, cambiar el `urbano` de mip 5 por la lectura de crece.png G, ya con forma de manzana. Tests primero en tools/geo/tests (una casa aislada en el campo no deja halo; una manzana deja su contorno más media calle).",
+   "como_se_mide": "Puerta R8 en reglas_mapa.py: área de suelo urbano a más de media cuadra de cualquier manzana de la época (umbral a fijar en F1), y número de componentes de lo urbanizado que contienen una sola pieza edificada menor que una manzana mínima (tiene que ser 0). En las capturas 5-oeste y 5-general, el verde del Calvario sin agujeros redondos y con el borde siguiendo las calles. R12: las puertas de 1772 y 1843 (08 y 11) y la medición de todas las épocas, antes y después.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "No hace falta investigación externa: el plano de cada época dice dónde hay manzanas.",
+   "depende_de": [
+    "T82.2 (puerta R8 en reglas_mapa.py)"
+   ]
+  },
+  {
+   "titulo": "Edificios públicos con contorno recto sobre la línea de fachada (sin escaleras de píxel ni lenguas)",
+   "reglas": [
+    "R3",
+    "R2",
+    "R12"
+   ],
+   "hallazgos": [
+    "H1936-06"
+   ],
+   "causa_probable": "tools/geo/vectorizar.py, techos_publicos(): cada componente conexa de la clase 'publico' (el rayado del DCN que detecta detectar_rayado() en tools/geo/segmentar_texturas.py) se vectoriza con poligono_de(). Esa función toma el contorno de píxeles (cv2.findContours con CHAIN_APPROX_NONE), le suma un buffer de 0,5 px y solo lo simplifica con tolerancia_px. No hay ajuste a la línea de fachada ni a la red, a diferencia de las casas, que pasan por casas_por_lados() o ajustar_cara(). Salen losas (ESTILO_PUBLICO = 9) con bordes en escalera, lados curvos y entrantes en forma de lengua donde el rayado se mezcla con casas vecinas. Además, epocas.py (PUBLICOS_DESDE = 3) hace nacer estas losas en 1889, así que el defecto aparece también en 1889 y 1911.",
+   "donde_se_arregla": "tools/geo/vectorizar.py, techos_publicos(): regularizar la figura. Recortarla al polígono de su cuadra (la cara de la red, como en ajustar_cara()) y llevar cada lado que da a la calle a la línea de fachada del tramo más cercano; los lados interiores, a rectas paralelas a esa línea o perpendiculares a ella. Las lenguas de menos de una crujía de ancho se cortan. Tests primero en tools/geo/tests con una máscara en escalera y con una lengua.",
+   "como_se_mide": "R3 sobre los edificios públicos (con la puerta R3 corregida, ver la tarea de la medida del giro): retiro ≤ 0,5 m y giro ≤ GIRO_MAXIMO_GRADOS en los lados de fachada; número de vértices por metro de perímetro por debajo de un tope (nada de escaleras). R2: 0 invasiones de calzada. En las capturas 5-catuche_centro y 5-plaza_cenital, Correos, el Ministerio de Hacienda y el Palacio de Justicia con contorno recto. R12: medición de 1889, 1911 y 1936 antes y después.",
+   "epocas_afectadas": [
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "No hace falta investigación externa: el contorno sale del plano de 1936.",
+   "depende_de": [
+    "Corregir la medida del giro de R3 (tarea siguiente)"
+   ]
+  },
+  {
+   "titulo": "La medida de R3: el giro por el lado de la fachada y no por el rectángulo mínimo",
+   "reglas": [
+    "R3"
+   ],
+   "hallazgos": [
+    "H1936-06"
+   ],
+   "causa_probable": "tools/geo/reglas_mapa.py, _giro(), mide el ángulo con minimum_rotated_rectangle. En una huella en L, en escalera o casi cuadrada, ese rectángulo puede salir diagonal aunque el lado de la fachada esté alineado. En medicion-1936.json, de las 300 casas giradas listadas, 204 dan 45,0° y 96 dan 44°: es la firma de ese artefacto. Con esto, las 8.183 giradas de 33.449 mezclan casas giradas de verdad con errores de la medida.",
+   "donde_se_arregla": "tools/geo/reglas_mapa.py: alineacion() y _giro(). El giro se mide con la dirección del lado más largo de la huella que mira al tramo (o, si no, con la orientación dominante de sus lados, ponderada por longitud), no con el rectángulo mínimo. Tests primero con una L alineada (giro 0), un cuadrado alineado (giro 0) y una casa girada 12° (giro 12).",
+   "como_se_mide": "Volver a medir las seis épocas y comparar n_giradas antes y después en specs/reglas/medicion-<año>.json. Ya no tiene que quedar el pico en 45°. Las giradas que quedan se revisan en una muestra con capturas para confirmar que son giros reales.",
+   "epocas_afectadas": [
+    "1578",
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "No.",
+   "depende_de": []
+  },
+  {
+   "titulo": "Iglesias en pie sin modelo: Santa Rosalía, Candelaria y Las Mercedes",
+   "reglas": [
+    "R9",
+    "R11"
+   ],
+   "hallazgos": [
+    "H1936-08",
+    "H1936-09",
+    "H1936-10"
+   ],
+   "causa_probable": "src/hitos/datos/iglesias.js solo modela San Francisco, Altagracia, Santa Teresa y La Pastora, y la Catedral y la Santa Capilla tienen su propio hito. En src/marcas-datos.js, las marcas 'santa-rosalia' (x 9080, y 8545, nace 2), 'candelaria' (x 11230, y 7000, nace 2) y 'las-mercedes' (x 8880, y 5830, nace 2) tienen x/y propios y no tienen `hito:`. Por eso caen sobre casas genéricas, sobre un solar o sobre la plaza, y ninguna casa cede el lugar (falta el `suprime` del hito). Esto también cubre D4 y D9 de 1843.",
+   "donde_se_arregla": "src/hitos/datos/iglesias.js: agregar tres iglesiaEn() con la planta y la orientación leídas del recuadro del DCN 1936 y con nace/muere según su vida. La Candelaria es de 1708 y Santa Rosalía de 1730, así que las dos van desde 1772. Para Las Mercedes, el estado en 1843 sale de D8: fachada en ruinas, templo nuevo hacia 1857. En src/marcas-datos.js, cambiar el x/y de las tres marcas por `hito: '<id>'`, revisando que el nace de la marca y el del hito coincidan. Tests en tests/unit de marcas y de hitos: la marca cae sobre la planta de su hito.",
+   "como_se_mide": "Puerta R9 en reglas_mapa.py (o en un test de marcas): el punto de cada marca de edificio en pie cae dentro de la planta de su hito, nunca en la calzada ni sobre casas genéricas; 0 marcas fuera, por época. R11: vida de cada hito contra sus fechas con fuente. En las capturas 5-sur, 5-este, 5-norte y 5-general, cada rótulo sobre su iglesia; también en 1772 y 1843.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí (specs/13 § 2.1, tema 6 «edificios en pie por época»). Hacen falta fotos o grabados de la fachada, el número de torres y la altura de cada iglesia, la orientación en el plano y la vida de cada una: Las Mercedes en ruina u obra en 1843 (D8) y Santa Rosalía y la Candelaria desde su fundación.",
+   "depende_de": [
+    "T82.2 (puerta R9 en reglas_mapa.py)",
+    "Investigación F0 de edificios (fotos y vida de las tres iglesias)"
+   ]
+  },
+  {
+   "titulo": "Plazas de toros con volumen: Nuevo Circo y Circo Metropolitano",
+   "reglas": [
+    "R7",
+    "R9",
+    "R11"
+   ],
+   "hallazgos": [
+    "H1936-11"
+   ],
+   "causa_probable": "No existe ningún hito de plaza de toros. src/marcas-datos.js pone 'nuevo-circo' (x 10330, y 8230) y 'circo-metropolitano' (x 7905, y 7905) como marcas sueltas, con nace 5 y sin `hito:`. La segmentación no clasifica el anillo como 'publico': el rayado curvo no pasa detectar_rayado() en tools/geo/segmentar_texturas.py. Lo que se ve es el dibujo del plano en el suelo, que src/shader/suelo.js, sueloColor(), deja entero en la ciudad (los anillos), y una casa genérica que vectorizar.py saca de lo que sí se clasificó como edificado.",
+   "donde_se_arregla": "Un tipo de parte nuevo para la plaza de toros: un anillo de graderío con su muro exterior y el ruedo libre, en src/hitos/partes.js y src/hitos/piezas.js. Los dos circos van en src/hitos/datos/civiles.js, con el centro y el radio medidos en el DCN y un `suprime` que despeja las casas del interior. En src/marcas-datos.js, sus marcas pasan a `hito:`. Tests en tests/unit: la geometría del anillo, las casas suprimidas dentro y la marca sobre el hito.",
+   "como_se_mide": "R7: 0 casas genéricas dentro del círculo del circo, y el lote ocupado por su hito. R9: la marca cae sobre el hito. R11: el nace de cada circo según su inauguración con fuente. Si el Circo Metropolitano es anterior a 1911, también aparece en 1911 y quizá en 1889. En las capturas 5-sur_oblicua, 5-general y 5-caroata, el graderío con volumen.",
+   "epocas_afectadas": [
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí (specs/13 § 2.1, tema 6). Hacen falta la fecha de inauguración y de demolición de cada circo (hoy los dos tienen nace 5, sin fuente para la fecha), su diámetro y su altura, el número de pisos de graderío y fotos de época.",
+   "depende_de": [
+    "T82.2 (puertas R7 y R9 en reglas_mapa.py)",
+    "Investigación F0 de edificios (los circos)"
+   ]
+  }
+ ]
+}

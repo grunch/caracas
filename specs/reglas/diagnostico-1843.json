@@ -1,0 +1,645 @@
+{
+ "alcance": "Diagnóstico de las reglas de construcción (specs/13) en la época: hallazgos de la revisión visual sobre las capturas fijas y el plano original, los que el verificador no pudo refutar (confirmados) y las tareas propuestas. Capturas de caracas.city, datos-2026-11-25-09ba9f7.",
+ "fecha": "2026-11-25",
+ "workflow": "specs/reglas/workflows/diagnostico-epocas.js (run wf_501830e2-601)",
+ "año": 1843,
+ "hallazgos": [
+  {
+   "id": "H1",
+   "regla": "R7",
+   "captura": "2-general.png, 2-sur_oblicua.png, 2-plaza_cenital.png, 2-plaza_baja.png",
+   "donde": "Centro, alrededor de la Plaza Mayor. En 2-general: la manzana al oeste de la plaza, donde está la Casa de Gobierno (~x550-575, y335-355), y la manzana que tiene al oeste (~x457-512, y310-365). En 2-plaza_cenital: la manzana de la Casa de Gobierno (x160-480, y240-520).",
+   "que_se_ve": "La manzana de la Casa de Gobierno es arena lisa: solo está el edificio, en su esquina noreste, y unas pocas casas en los bordes norte y oeste. La manzana vecina al oeste tampoco tiene casas. En 2-plaza_baja se ve un descampado de arena detrás de la Casa de Gobierno, con árboles sueltos (x0-620, y240-300). Es D1 confirmado.",
+   "contra_el_original": "En Jesurún, todas las manzanas que rodean la plaza llevan rayado oscuro de edificado (parroquia Catedral). Solo quedan en blanco el cuadro de la plaza y pequeños patios de los edificios con letra (i, K, L).",
+   "medido": "R7 está pendiente en medicion-1843.json (pendientes incluye R7), así que no hay cifra.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H2",
+   "regla": "R7",
+   "captura": "2-sur_oblicua.png, 2-general.png, 2-noreste_oblicua.png",
+   "donde": "En 2-sur_oblicua: la manzana justo al sur del convento de San Francisco, donde cae su pin (x385-475, y390-445), y la manzana del pin de San Jacinto (x680-780, y340-420). En 2-noreste_oblicua: la manzana entre la Plaza Mayor y Altagracia (x850-970, y370-425) y una manzana grande al sureste (x980-1160, y620-730).",
+   "que_se_ve": "Varias manzanas del damero central son arena: o no tienen ninguna casa o tienen casas solo en un tramo de un lado. La del sur de San Francisco está vacía por completo.",
+   "contra_el_original": "Todo el damero entre las filas 4 y 16 y las columnas 4 a 12 del plano de Jesurún está rayado como edificado. Los únicos claros son los patios de conventos marcados con letra (N San Francisco, M San Jacinto), y son pequeños, no manzanas enteras.",
+   "medido": "R7 está pendiente en la medición. El R6 de medicion-1843.json lista 197 manzanas (las forman las casas pegadas), menos de las que dibuja el plano en el casco.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H3",
+   "regla": "R10",
+   "captura": "2-oeste.png, 2-caroata.png, 2-general.png",
+   "donde": "Oeste. En 2-oeste: el cauce del Caroata en el campo (x0-350, y410-550). En 2-caroata: el mismo cauce arriba a la izquierda, y una mancha gris tenue (x940-1000, y700-870) que cruza una calle y una esquina de manzana. En 2-general: el pin «Quebrada Caroata» (x308, y745), con una cinta verde que solo empieza hacia y≈650.",
+   "que_se_ve": "El Caroata llega desde el oeste, gira sobre sí mismo en una V en medio del campo y se corta en x≈175, y≈545, sin llegar a la ciudad. Dentro de la ciudad no se dibuja agua: solo una cinta verde corta al sur del casco y rastros grises sueltos. Es D5 confirmado.",
+   "contra_el_original": "En Jesurún, el Caroata (X) baja continuo del noroeste, bordea el oeste del damero (columnas 4-5) y llega al Guaire. D10 lo confirma con fuentes.",
+   "medido": "R10 está pendiente en la medición.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H4",
+   "regla": "R10",
+   "captura": "2-general.png, 2-norte.png, 2-noreste_oblicua.png",
+   "donde": "Norte y este. En 2-norte: el cauce azul arriba a la derecha (x1130-1240, y130-300), y el pin «Quebrada Catuche» (x859, y479), que cae en arena. En 2-general, ampliado: líneas grises tenues (x825-835, y180-245 y x880-915, y265-290) que se cortan en el suelo urbano. En 2-noreste_oblicua: un rastro gris tenue abajo (x520-650, y690-720).",
+   "que_se_ve": "El Catuche se dibuja como línea azul en el campo del norte y desaparece al entrar en el suelo urbano. Entre el damero y la Candelaria solo quedan trazos grises cortados, y el pin de la quebrada cae en arena sin agua.",
+   "contra_el_original": "En Jesurún, el Catuche (V) cruza el norte del casco y baja en diagonal por el borde este del damero, hacia el Campo de Marte y el Guaire, con una línea continua y sus puentes.",
+   "medido": "R10 está pendiente en la medición.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H5",
+   "regla": "R9",
+   "captura": "2-plaza_cenital.png, 2-plaza_baja.png",
+   "donde": "Al sur de la Plaza Mayor. Pin «Seminario y Universidad»: en 2-plaza_cenital, x615, y627; en 2-plaza_baja, x326, y499.",
+   "que_se_ve": "El pin cae en la calle o el cruce al sur de la plaza. Ningún edificio representa el seminario ni la universidad. Es D4 confirmado.",
+   "contra_el_original": "Jesurún dibuja la Universidad (k; L, «Capilla de la Universidad») en la manzana al sur de la plaza, como edificio con letra.",
+   "medido": "R9 está pendiente en la medición.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H6",
+   "regla": "R9",
+   "captura": "2-general.png, 2-sur_oblicua.png",
+   "donde": "El pin «Convento de San Francisco» (en 2-general, x522, y438; en 2-sur_oblicua, x443, y393).",
+   "que_se_ve": "El edificio del convento, rojo con su huerto verde, está una manzana al norte (en 2-general, x510-560, y375-410). El pin cae en la manzana de al lado, que es arena vacía.",
+   "contra_el_original": "San Francisco (N) ocupa su manzana al suroeste de la plaza. La marca debe caer sobre su hito.",
+   "medido": "R9 está pendiente en la medición.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H7",
+   "regla": "R9",
+   "captura": "2-general.png, 2-sur.png, 2-catuche_centro.png, 2-norte.png, 2-plaza_cenital.png, 2-oeste.png",
+   "donde": "Ocho pines de edificio: Candelaria (general x1096, y397); Santa Rosalía (sur x510, y249); Convento de las Carmelitas (catuche_centro x912, y511); San Mauricio (catuche_centro x1172, y687); La Merced (norte x726, y729); Convento de San Jacinto (plaza_cenital x1217, y795); Casa natal del Libertador (plaza_cenital x940, y775); El Calvario (oeste x620, y279).",
+   "que_se_ve": "Los pines caen en patios, en arena o en esquinas de casas genéricas, y ningún edificio representa la iglesia, el convento o la casa. El de El Calvario cae en pasto liso, sin nada construido. Es D4 y D9 confirmados, y se suman Carmelitas, San Jacinto, la Casa natal y El Calvario.",
+   "contra_el_original": "La leyenda de Jesurún da cada uno como edificio en pie, con su letra: J Candelaria, R Santa Rosalía, H Carmelitas, I San Mauricio, E La Merced, M San Jacinto, T El Calvario (en la ladera oeste, con un edificio dibujado).",
+   "medido": "R9 está pendiente en la medición.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H8",
+   "regla": "R9",
+   "captura": "2-plaza_cenital.png",
+   "donde": "El pin «Plaza de San Jacinto» (x1030, y713), al sureste de la Plaza Mayor.",
+   "que_se_ve": "El pin cae sobre casas, en una esquina truncada y edificada. No hay espacio libre de plaza. Es D4 confirmado.",
+   "contra_el_original": "Una plaza nombrada debe estar libre. Jesurún marca un claro junto a M (San Jacinto).",
+   "medido": "R9 está pendiente en la medición.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H9",
+   "regla": "R11",
+   "captura": "todas (rótulo central), 2-plaza_baja.png, 2-catuche_centro.png",
+   "donde": "El rótulo «Plaza Mayor» en todas las vistas. La iglesia de Altagracia, un volumen completo con techo rojo (en 2-plaza_baja, x830-980, y160-210; en 2-catuche_centro, x920-1045, y405-465).",
+   "que_se_ve": "En 1843 la plaza se rotula «Plaza Mayor» (D7). Altagracia aparece como templo entero y con techo.",
+   "contra_el_original": "La leyenda manuscrita de Jesurún dice «Plaza Bolívar» (los restos de Bolívar llegaron en 1842). Altagracia, destruida en 1812, no se rehízo hasta 1857 (D8, investigación edificios-33).",
+   "medido": "R11 está pendiente en la medición.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H10",
+   "regla": "R8",
+   "captura": "2-este.png, 2-norte.png, 2-general.png",
+   "donde": "En 2-este: el bloque central (x510-720, y560-700); las rayas que salen hacia la calle (x540-610, y360-490); la manzana a la derecha (x850-1000, y330-560). En 2-norte: la manzana diagonal (x480-700, y350-540).",
+   "que_se_ve": "Hay manchas de patio oliva con las rayas de los lotes de 1936 que se extienden hasta la calle, donde no hay casas. Algunas parecen arrastradas en abanico hacia afuera de la manzana. Es D2 confirmado.",
+   "contra_el_original": "Jesurún no dibuja patios sueltos: el patio va dentro de la manzana edificada.",
+   "medido": "R8 está pendiente en la medición.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H11",
+   "regla": "R8",
+   "captura": "2-general.png, 2-norte.png, 2-noreste_oblicua.png, 2-este.png",
+   "donde": "En 2-general: la gran extensión de arena entre el damero y la Candelaria (x760-890, y185-320); el sureste (x850-1000, y550-760); los halos redondos alrededor de las casas sueltas (x130-150, y120-140; x1220-1280, y440-500; x145, y860). En 2-norte: el borde escalonado (x880-1000, y200-560). En 2-este: dos parches verdes de campo dentro de la ciudad (x450-500, y710-760; x490-540, y850-900).",
+   "que_se_ve": "Hay suelo urbano liso donde no hay manzanas. El borde con el campo baja en escalera de píxeles y hace halos redondos alrededor de grupos aislados. En medio de la ciudad aparecen islas de pasto. Es D3 confirmado.",
+   "contra_el_original": "Entre el damero y la Candelaria, Jesurún dibuja el corredor del Catuche y campo punteado. Al sureste dibuja el Campo de Marte y huertas cercadas, no suelo urbano.",
+   "medido": "R8 está pendiente en la medición.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H12",
+   "regla": "R2",
+   "captura": "2-plaza_baja.png",
+   "donde": "Al sur de la plaza, en primer plano: una línea vertical clara (x≈648, desde y≈560 hasta el borde inferior).",
+   "que_se_ve": "Una costura recta atraviesa el suelo y parte casas: una casa queda cortada por la línea y se monta con su vecina del otro lado. En el suelo hay además diagonales finas de los lotes de 1936. Es D6 confirmado.",
+   "contra_el_original": "El original no tiene nada de esto: el corte cae dentro de una manzana edificada.",
+   "medido": "R2 está pendiente en la medición.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H13",
+   "regla": "R1",
+   "captura": "2-plaza_baja.png, 2-catuche_centro.png, 2-plaza_cenital.png",
+   "donde": "En 2-plaza_baja: el primer plano bajo la plaza (x0-1280, y560-900), con hileras de casas una detrás de otra. En 2-catuche_centro: las manzanas centrales (x600-860, y300-620). En 2-plaza_cenital: la manzana del noreste (x1000-1280, y380-620).",
+   "que_se_ve": "Dentro de las manzanas hay segunda y tercera fila de casas, sueltas entre patios, en lugar de una sola crujía sobre cada frente con el corazón libre.",
+   "contra_el_original": "El plano dibuja la manzana como un bloque edificado. La regla, con su fuente (grabado de 1812 y la vista aérea colonial), exige un anillo de casas con el corazón libre.",
+   "medido": "R1: 2.311 casas en segunda fila de 10.284 (22,5 %). El umbral es 0.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H14",
+   "regla": "R3",
+   "captura": "2-caroata.png, 2-plaza_cenital.png, 2-este.png",
+   "donde": "En 2-caroata: el barrio de San Juan, al suroeste (x330-640, y520-760). En 2-plaza_cenital: hilera en diagonal al sur de la plaza (x450-590, y680-760). En 2-este: una casa larga en diagonal dentro de una manzana (x170-250, y540-570).",
+   "que_se_ve": "Hay casas giradas respecto de su calle, montadas unas sobre otras en ángulos distintos. No se alinean con la línea de fachada.",
+   "contra_el_original": "Jesurún dibuja San Juan como una franja de manzanas regulares a lo largo del camino diagonal hacia el suroeste, alineadas con él.",
+   "medido": "R3: 641 casas giradas más de 5°, de 7.973 medidas.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H15",
+   "regla": "R4",
+   "captura": "2-este.png, 2-catuche_centro.png",
+   "donde": "En 2-este: el pasillo entre la manzana en anillo (x490-570, y490-680) y la manzana de patios a su derecha. En 2-catuche_centro: calles angostas entre manzanas del centro (por ejemplo x840-870, y330-600).",
+   "que_se_ve": "Las fachadas enfrentadas casi se tocan y dejan pasillos más angostos que el resto de las calles del damero.",
+   "contra_el_original": "Según la leyenda de Jesurún, las calles de 1843 tienen de 8 a 10 varas (6,7 a 8,4 m).",
+   "medido": "R4: p10 de 4,14 m y mediana de 7,31 m. Hay 4.246 m de borde con calle de menos de 4 m (42 m de 0 a 2 m; 4.204 m de 2 a 4 m) y 10.766 m de 4 a 6 m, todos bajo 6,7 m.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H16",
+   "regla": "R6",
+   "captura": "2-general.png, 2-sur_oblicua.png",
+   "donde": "Toda la ciudad.",
+   "que_se_ve": "El damero está saturado de casas chicas en todas las manzanas, aun con las manzanas vacías de H1 y H2. En el centro no se distinguen las casas grandes de varios patios.",
+   "contra_el_original": "Las fuentes de § 3 dan 4.000 a 5.400 casas en 1843 (inferido) y unas 20 casas por cuadra de 1772 (inferido para 1843).",
+   "medido": "R6: 10.284 casas a la vista (1,9 a 2,6 veces lo estimado); mediana de 46 casas por cuadra en las 25 cuadras del damero; frente medio de 11,25 m; 52 manzanas unidas con 7.518 casas.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H17",
+   "regla": "R7",
+   "captura": "2-general.png",
+   "donde": "Extremo este, al otro lado del río Anauco (x1220-1280, y440-500), y el cuadro rojo aislado al noreste (x1225, y150).",
+   "que_se_ve": "Hay una manzana con dos hileras de casas al este del Anauco, con su halo de arena.",
+   "contra_el_original": "Jesurún dibuja a lo largo del Anauco solo la franja punteada de huertas y arboledas. No hay manzanas edificadas más allá.",
+   "medido": "R7 está pendiente en la medición.",
+   "gravedad": "baja"
+  },
+  {
+   "id": "H18",
+   "regla": "R5",
+   "captura": "2-plaza_baja.png",
+   "donde": "Primer plano al sur de la plaza: casas en (x440-560, y690-780) y (x690-830, y690-800).",
+   "que_se_ve": "Algunas casas sueltas tienen portón y ventanas en caras que dan a patios de tierra con rayas de lote, no a una calle. Muchas casas no comparten medianera: se ven sus cuatro caras con aberturas.",
+   "contra_el_original": "Según R5 (tipología con fuente en la investigación), la fachada da solo a la calle, el patio recibe el corredor y una puerta, y las medianeras son ciegas.",
+   "medido": "R5 está pendiente en la medición (es parte de F3).",
+   "gravedad": "media"
+  }
+ ],
+ "confirmados": [
+  {
+   "id": "H2",
+   "regla": "R7",
+   "captura": "2-sur_oblicua.png, 2-general.png, 2-noreste_oblicua.png",
+   "donde": "En 2-sur_oblicua: la manzana justo al sur del convento de San Francisco, donde cae su pin (x385-475, y390-445), y la manzana del pin de San Jacinto (x680-780, y340-420). En 2-noreste_oblicua: la manzana entre la Plaza Mayor y Altagracia (x850-970, y370-425) y una manzana grande al sureste (x980-1160, y620-730).",
+   "que_se_ve": "Varias manzanas del damero central son arena: o no tienen ninguna casa o tienen casas solo en un tramo de un lado. La del sur de San Francisco está vacía por completo.",
+   "contra_el_original": "Todo el damero entre las filas 4 y 16 y las columnas 4 a 12 del plano de Jesurún está rayado como edificado. Los únicos claros son los patios de conventos marcados con letra (N San Francisco, M San Jacinto), y son pequeños, no manzanas enteras.",
+   "medido": "R7 está pendiente en la medición. El R6 de medicion-1843.json lista 197 manzanas (las forman las casas pegadas), menos de las que dibuja el plano en el casco.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H3",
+   "regla": "R10",
+   "captura": "2-oeste.png, 2-caroata.png, 2-general.png",
+   "donde": "Oeste. En 2-oeste: el cauce del Caroata en el campo (x0-350, y410-550). En 2-caroata: el mismo cauce arriba a la izquierda, y una mancha gris tenue (x940-1000, y700-870) que cruza una calle y una esquina de manzana. En 2-general: el pin «Quebrada Caroata» (x308, y745), con una cinta verde que solo empieza hacia y≈650.",
+   "que_se_ve": "El Caroata llega desde el oeste, gira sobre sí mismo en una V en medio del campo y se corta en x≈175, y≈545, sin llegar a la ciudad. Dentro de la ciudad no se dibuja agua: solo una cinta verde corta al sur del casco y rastros grises sueltos. Es D5 confirmado.",
+   "contra_el_original": "En Jesurún, el Caroata (X) baja continuo del noroeste, bordea el oeste del damero (columnas 4-5) y llega al Guaire. D10 lo confirma con fuentes.",
+   "medido": "R10 está pendiente en la medición.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H4",
+   "regla": "R10",
+   "captura": "2-general.png, 2-norte.png, 2-noreste_oblicua.png",
+   "donde": "Norte y este. En 2-norte: el cauce azul arriba a la derecha (x1130-1240, y130-300), y el pin «Quebrada Catuche» (x859, y479), que cae en arena. En 2-general, ampliado: líneas grises tenues (x825-835, y180-245 y x880-915, y265-290) que se cortan en el suelo urbano. En 2-noreste_oblicua: un rastro gris tenue abajo (x520-650, y690-720).",
+   "que_se_ve": "El Catuche se dibuja como línea azul en el campo del norte y desaparece al entrar en el suelo urbano. Entre el damero y la Candelaria solo quedan trazos grises cortados, y el pin de la quebrada cae en arena sin agua.",
+   "contra_el_original": "En Jesurún, el Catuche (V) cruza el norte del casco y baja en diagonal por el borde este del damero, hacia el Campo de Marte y el Guaire, con una línea continua y sus puentes.",
+   "medido": "R10 está pendiente en la medición.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H5",
+   "regla": "R9",
+   "captura": "2-plaza_cenital.png, 2-plaza_baja.png",
+   "donde": "Al sur de la Plaza Mayor. Pin «Seminario y Universidad»: en 2-plaza_cenital, x615, y627; en 2-plaza_baja, x326, y499.",
+   "que_se_ve": "El pin cae en la calle o el cruce al sur de la plaza. Ningún edificio representa el seminario ni la universidad. Es D4 confirmado.",
+   "contra_el_original": "Jesurún dibuja la Universidad (k; L, «Capilla de la Universidad») en la manzana al sur de la plaza, como edificio con letra.",
+   "medido": "R9 está pendiente en la medición.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H7",
+   "regla": "R9",
+   "captura": "2-general.png, 2-sur.png, 2-catuche_centro.png, 2-norte.png, 2-plaza_cenital.png, 2-oeste.png",
+   "donde": "Ocho pines de edificio: Candelaria (general x1096, y397); Santa Rosalía (sur x510, y249); Convento de las Carmelitas (catuche_centro x912, y511); San Mauricio (catuche_centro x1172, y687); La Merced (norte x726, y729); Convento de San Jacinto (plaza_cenital x1217, y795); Casa natal del Libertador (plaza_cenital x940, y775); El Calvario (oeste x620, y279).",
+   "que_se_ve": "Los pines caen en patios, en arena o en esquinas de casas genéricas, y ningún edificio representa la iglesia, el convento o la casa. El de El Calvario cae en pasto liso, sin nada construido. Es D4 y D9 confirmados, y se suman Carmelitas, San Jacinto, la Casa natal y El Calvario.",
+   "contra_el_original": "La leyenda de Jesurún da cada uno como edificio en pie, con su letra: J Candelaria, R Santa Rosalía, H Carmelitas, I San Mauricio, E La Merced, M San Jacinto, T El Calvario (en la ladera oeste, con un edificio dibujado).",
+   "medido": "R9 está pendiente en la medición.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H8",
+   "regla": "R9",
+   "captura": "2-plaza_cenital.png",
+   "donde": "El pin «Plaza de San Jacinto» (x1030, y713), al sureste de la Plaza Mayor.",
+   "que_se_ve": "El pin cae sobre casas, en una esquina truncada y edificada. No hay espacio libre de plaza. Es D4 confirmado.",
+   "contra_el_original": "Una plaza nombrada debe estar libre. Jesurún marca un claro junto a M (San Jacinto).",
+   "medido": "R9 está pendiente en la medición.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H9",
+   "regla": "R11",
+   "captura": "todas (rótulo central), 2-plaza_baja.png, 2-catuche_centro.png",
+   "donde": "El rótulo «Plaza Mayor» en todas las vistas. La iglesia de Altagracia, un volumen completo con techo rojo (en 2-plaza_baja, x830-980, y160-210; en 2-catuche_centro, x920-1045, y405-465).",
+   "que_se_ve": "En 1843 la plaza se rotula «Plaza Mayor» (D7). Altagracia aparece como templo entero y con techo.",
+   "contra_el_original": "La leyenda manuscrita de Jesurún dice «Plaza Bolívar» (los restos de Bolívar llegaron en 1842). Altagracia, destruida en 1812, no se rehízo hasta 1857 (D8, investigación edificios-33).",
+   "medido": "R11 está pendiente en la medición.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H10",
+   "regla": "R8",
+   "captura": "2-este.png, 2-norte.png, 2-general.png",
+   "donde": "En 2-este: el bloque central (x510-720, y560-700); las rayas que salen hacia la calle (x540-610, y360-490); la manzana a la derecha (x850-1000, y330-560). En 2-norte: la manzana diagonal (x480-700, y350-540).",
+   "que_se_ve": "Hay manchas de patio oliva con las rayas de los lotes de 1936 que se extienden hasta la calle, donde no hay casas. Algunas parecen arrastradas en abanico hacia afuera de la manzana. Es D2 confirmado.",
+   "contra_el_original": "Jesurún no dibuja patios sueltos: el patio va dentro de la manzana edificada.",
+   "medido": "R8 está pendiente en la medición.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H11",
+   "regla": "R8",
+   "captura": "2-general.png, 2-norte.png, 2-noreste_oblicua.png, 2-este.png",
+   "donde": "En 2-general: la gran extensión de arena entre el damero y la Candelaria (x760-890, y185-320); el sureste (x850-1000, y550-760); los halos redondos alrededor de las casas sueltas (x130-150, y120-140; x1220-1280, y440-500; x145, y860). En 2-norte: el borde escalonado (x880-1000, y200-560). En 2-este: dos parches verdes de campo dentro de la ciudad (x450-500, y710-760; x490-540, y850-900).",
+   "que_se_ve": "Hay suelo urbano liso donde no hay manzanas. El borde con el campo baja en escalera de píxeles y hace halos redondos alrededor de grupos aislados. En medio de la ciudad aparecen islas de pasto. Es D3 confirmado.",
+   "contra_el_original": "Entre el damero y la Candelaria, Jesurún dibuja el corredor del Catuche y campo punteado. Al sureste dibuja el Campo de Marte y huertas cercadas, no suelo urbano.",
+   "medido": "R8 está pendiente en la medición.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H12",
+   "regla": "R2",
+   "captura": "2-plaza_baja.png",
+   "donde": "Al sur de la plaza, en primer plano: una línea vertical clara (x≈648, desde y≈560 hasta el borde inferior).",
+   "que_se_ve": "Una costura recta atraviesa el suelo y parte casas: una casa queda cortada por la línea y se monta con su vecina del otro lado. En el suelo hay además diagonales finas de los lotes de 1936. Es D6 confirmado.",
+   "contra_el_original": "El original no tiene nada de esto: el corte cae dentro de una manzana edificada.",
+   "medido": "R2 está pendiente en la medición.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H13",
+   "regla": "R1",
+   "captura": "2-plaza_baja.png, 2-catuche_centro.png, 2-plaza_cenital.png",
+   "donde": "En 2-plaza_baja: el primer plano bajo la plaza (x0-1280, y560-900), con hileras de casas una detrás de otra. En 2-catuche_centro: las manzanas centrales (x600-860, y300-620). En 2-plaza_cenital: la manzana del noreste (x1000-1280, y380-620).",
+   "que_se_ve": "Dentro de las manzanas hay segunda y tercera fila de casas, sueltas entre patios, en lugar de una sola crujía sobre cada frente con el corazón libre.",
+   "contra_el_original": "El plano dibuja la manzana como un bloque edificado. La regla, con su fuente (grabado de 1812 y la vista aérea colonial), exige un anillo de casas con el corazón libre.",
+   "medido": "R1: 2.311 casas en segunda fila de 10.284 (22,5 %). El umbral es 0.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H14",
+   "regla": "R3",
+   "captura": "2-caroata.png, 2-plaza_cenital.png, 2-este.png",
+   "donde": "En 2-caroata: el barrio de San Juan, al suroeste (x330-640, y520-760). En 2-plaza_cenital: hilera en diagonal al sur de la plaza (x450-590, y680-760). En 2-este: una casa larga en diagonal dentro de una manzana (x170-250, y540-570).",
+   "que_se_ve": "Hay casas giradas respecto de su calle, montadas unas sobre otras en ángulos distintos. No se alinean con la línea de fachada.",
+   "contra_el_original": "Jesurún dibuja San Juan como una franja de manzanas regulares a lo largo del camino diagonal hacia el suroeste, alineadas con él.",
+   "medido": "R3: 641 casas giradas más de 5°, de 7.973 medidas.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H15",
+   "regla": "R4",
+   "captura": "2-este.png, 2-catuche_centro.png",
+   "donde": "En 2-este: el pasillo entre la manzana en anillo (x490-570, y490-680) y la manzana de patios a su derecha. En 2-catuche_centro: calles angostas entre manzanas del centro (por ejemplo x840-870, y330-600).",
+   "que_se_ve": "Las fachadas enfrentadas casi se tocan y dejan pasillos más angostos que el resto de las calles del damero.",
+   "contra_el_original": "Según la leyenda de Jesurún, las calles de 1843 tienen de 8 a 10 varas (6,7 a 8,4 m).",
+   "medido": "R4: p10 de 4,14 m y mediana de 7,31 m. Hay 4.246 m de borde con calle de menos de 4 m (42 m de 0 a 2 m; 4.204 m de 2 a 4 m) y 10.766 m de 4 a 6 m, todos bajo 6,7 m.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H16",
+   "regla": "R6",
+   "captura": "2-general.png, 2-sur_oblicua.png",
+   "donde": "Toda la ciudad.",
+   "que_se_ve": "El damero está saturado de casas chicas en todas las manzanas, aun con las manzanas vacías de H1 y H2. En el centro no se distinguen las casas grandes de varios patios.",
+   "contra_el_original": "Las fuentes de § 3 dan 4.000 a 5.400 casas en 1843 (inferido) y unas 20 casas por cuadra de 1772 (inferido para 1843).",
+   "medido": "R6: 10.284 casas a la vista (1,9 a 2,6 veces lo estimado); mediana de 46 casas por cuadra en las 25 cuadras del damero; frente medio de 11,25 m; 52 manzanas unidas con 7.518 casas.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H17",
+   "regla": "R7",
+   "captura": "2-general.png",
+   "donde": "Extremo este, al otro lado del río Anauco (x1220-1280, y440-500), y el cuadro rojo aislado al noreste (x1225, y150).",
+   "que_se_ve": "Hay una manzana con dos hileras de casas al este del Anauco, con su halo de arena.",
+   "contra_el_original": "Jesurún dibuja a lo largo del Anauco solo la franja punteada de huertas y arboledas. No hay manzanas edificadas más allá.",
+   "medido": "R7 está pendiente en la medición.",
+   "gravedad": "baja"
+  },
+  {
+   "id": "H18",
+   "regla": "R5",
+   "captura": "2-plaza_baja.png",
+   "donde": "Primer plano al sur de la plaza: casas en (x440-560, y690-780) y (x690-830, y690-800).",
+   "que_se_ve": "Algunas casas sueltas tienen portón y ventanas en caras que dan a patios de tierra con rayas de lote, no a una calle. Muchas casas no comparten medianera: se ven sus cuatro caras con aberturas.",
+   "contra_el_original": "Según R5 (tipología con fuente en la investigación), la fachada da solo a la calle, el patio recibe el corredor y una puerta, y las medianeras son ciegas.",
+   "medido": "R5 está pendiente en la medición (es parte de F3).",
+   "gravedad": "media"
+  }
+ ],
+ "tareas": [
+  {
+   "titulo": "1843-A · Solares de la época: una crujía por frente y el corazón de la manzana libre (F2 aplicado a 1843)",
+   "reglas": [
+    "R1",
+    "R3",
+    "R6",
+    "R12"
+   ],
+   "hallazgos": [
+    "H13",
+    "H14",
+    "H16"
+   ],
+   "causa_probable": "1843 hereda la subdivisión de 1936 tal cual. En tools/geo/epocas.py, en main(), nace(fracciones(huellas36, construido), primera=1, umbral=0.5) hace nacer en 1843 cada lote de 1936 cuya huella cae bajo la máscara rayada de Jesurún (perfil L<185 de epocas/epocas.json). Como Jesurún raya la manzana entera, nacen también los lotes interiores (segunda y tercera fila: 2.311 casas, el 22,5 %) y la grilla fina de 1936 (46 casas por cuadra, frente de 11,25 m, 10.284 casas contra 4.000–5.400). Para 1843 no hay un paso equivalente a los de 1772, que alinean sus frentes (alinear_1772, ceder_frentes_a_1772, cerrar_aberturas_1772: por eso R1 da 0 en 1772): las casas de 1936 mantienen el giro de su lote (San Juan y el camino diagonal) y no se corren a la línea de fachada. tools/geo/epocas_1843.py agregar_casas() solo rellena los frentes vacíos de las manzanas rayadas y no reemplaza ni quita las casas heredadas. Las casas de 1772 con vida [1,2] mueren en 1843 y las reemplazan los lotes de 1936 que nacen en 1843 (por ejemplo, U1843-0240: 31 casas [1,2] y 33 que nacen en 1843).",
+   "donde_se_arregla": "Un módulo nuevo, tools/geo/solares.py (lógica pura, TDD), llamado desde tools/geo/epocas.py main() para las épocas con referencia (1843 y luego 1889 y 1911). En cada manzana rayada de la referencia (tools/geo/referencias/1843-manzanas.json): (1) agrupar los lotes de 1936 en solares con el frente y el fondo de la época (§ 3: frente de 9 a 11 m, con 23 a 33 m para las casas grandes del centro; fondo de 43 a 63 m; unas 20 casas por cuadra, de 2 a 43); (2) una casa de patio por solar, con la crujía sobre la línea de fachada y paralela a la calle (reusar la recta de tools/geo/fachadas.py recta_de_la_mayoria y alinearHuella de src/ciudad.js); (3) las casas de 1936 que quedan en el corazón de la manzana nacen en la época siguiente (como _correr de epocas_1843.py). Generalizar casas_de_manzana() de epocas_1843.py, con el frente y el fondo de la época como parámetros, en vez de FRENTE_M=10 y CRUJIA_M=8 fijos. Primero, el spike en un sector y el diseño escrito en specs/13 § 6, que se muestran al responsable antes de aplicarlo a todo (F2).",
+   "como_se_mide": "Con tools/geo/reglas_mapa.py --epoca 1843 y luego --todas: R1 da 0 casas en segunda fila (o límite registrado, para un callejón dibujado). R3: retiro ≤ 0,5 m y giro ≤ GIRO_MAXIMO_GRADOS en las casas del frente (hoy 641 giradas de 7.973). R6: total entre 3.400 y 6.200 casas (± 15 % de 4.000–5.400), mediana de casas por cuadra del damero dentro de 2–43 y cerca de 20, frente medio de 9 a 11 m, y 0 manzanas unidas (hoy 52). R12: la tabla de antes y después de las seis épocas en el PR, con las puertas de las auditorías 08 y 11 sin empeorar. Capturas 2-plaza_baja, 2-catuche_centro, 2-plaza_cenital, 2-caroata y 2-general antes y después.",
+   "epocas_afectadas": [
+    "1843",
+    "1889",
+    "1911",
+    "1772 (R6: 2,2 veces las casas de Martí, 39 por cuadra; solo si F2 lo aplica también ahí)"
+   ],
+   "necesita_investigacion": "Parcial. F0 ya da los valores de 1772 y la inferencia para 1843 (§ 3). Siguen en los vacíos de investigacion.json las casas por manzana después de 1792 y la matrícula de 1840 (Codazzi legible). Las cifras se usan como inferidas, con su razonamiento, y no hace falta esperar esa fuente para el spike.",
+   "depende_de": [
+    "F2 · diseño de la corrección de fondo (specs/13 § 6) aprobado por el responsable",
+    "T82.2 · R7 y R8 como puertas en reglas_mapa.py (para medir que no se vacían manzanas)"
+   ]
+  },
+  {
+   "titulo": "1843-B · Calzada con el ancho de la época (8 a 10 varas) entre las fachadas",
+   "reglas": [
+    "R4",
+    "R2",
+    "R12"
+   ],
+   "hallazgos": [
+    "H15"
+   ],
+   "causa_probable": "1843 no tiene red de calles de referencia: tools/geo/referencias/ trae 1772-red.json y 1772-calles-1936.json, pero de 1843 solo 1843-manzanas.json. Por eso no corre un paso como epocas.abrir_calles_de_1772(), que quita o recorta las casas que pisan la calzada de 1772, y 1843 queda con una mediana de 7,31 m contra 11,81 m en 1772. Además, en tools/geo/epocas_1843.py, fuera_de_la_referencia() deja vivir las casas a menos de TOLERANCIA_CALLE_M = 3,0 m de una manzana: una casa puede entrar hasta 3 m en la calle por cada lado. agregar_casas() levanta la crujía con RETIRO_M = 0,2 m desde el borde digitalizado de la manzana, que en Jesurún está dibujada con calles finas. Y las casas de 1936 que nacen en 1843 traen el ancho de las calles de 1936, más angostas en algunos tramos que en 1843.",
+   "donde_se_arregla": "En tools/geo/epocas.py: generalizar abrir_calles_de_1772() en abrir_calles_de_epoca(ciudad, vida, quitar, ejes, ancho_minimo_m, epoca), con los ejes de calzada de cuadras_historicas.ejes_de_calzada sobre la red de la época, y llamarla para 1843 con un núcleo de 6,7 m (8 varas, § 3). Las casas que invaden la calzada nacen en la época siguiente o se recortan, con test primero. Si 1843 no tiene red propia, derivarla de los huecos entre las manzanas aprobadas de 1843-manzanas.json (tools/geo/referencia_red.py). En epocas_1843.py, bajar TOLERANCIA_CALLE_M a la media calzada que queda más allá del núcleo. src/shader/calles.js NUCLEO_M = 4 dibuja una calzada inferida: revisar si debe salir del ancho de la época.",
+   "como_se_mide": "reglas_mapa.py --epoca 1843, R4: p10 ≥ 6,7 m y 0 m de borde con calle < 6,7 m, salvo los callejones registrados como límite en specs/reglas/limites-1843.json (hoy el p10 da 4,14 m, con 4.246 m bajo 4 m y 10.766 m de 4 a 6 m). R2 (cuando T82.2 lo mida): 0 invasiones del núcleo de calzada con tools/cubiertas.mjs --epoca 2, y la red continua. R12: la tabla de las seis épocas, con 1772 sin cambios. Capturas 2-este y 2-catuche_centro.",
+   "epocas_afectadas": [
+    "1843",
+    "1889 (6,7 m en el damero viejo, 10 m en las calles abiertas desde 1871)",
+    "1911 (6,7 m en el damero viejo, 14,6–17,4 m en las nuevas)"
+   ],
+   "necesita_investigacion": "No para 1843: F0 ya da 8 a 10 varas (6,7 a 8,4 m) desde la leyenda de Jesurún. Para 1889 y 1911 hay que saber qué calles son del damero viejo y cuáles nuevas, y para eso alcanza con leer los planos del repo.",
+   "depende_de": [
+    "1843-A · Solares de la época (las crujías nuevas se levantan ya con la línea de fachada del ancho de la época)",
+    "T82.2 · R2 como puerta"
+   ]
+  },
+  {
+   "titulo": "1843-C · Manzanas rayadas de Jesurún sin casas o con frentes vacíos",
+   "reglas": [
+    "R7",
+    "R12"
+   ],
+   "hallazgos": [
+    "H2"
+   ],
+   "causa_probable": "Las manzanas rayadas aprobadas de la referencia quedan con poca casa en 1843. Medido sobre fuentes/derivados/epocas/ciudad-epocas.json, con la parte de cada unidad cubierta por casas vivas en 1843: U1843-0240 (8638, 7286; la cuadra de San Francisco y la futura Universidad) 17 %, U1843-0141 23 %, U1843-0142 24 %, U1843-0264 22 %, U1843-0067 24 %, y otras 20 bajo el 35 %. U1843-0152 (5 %) es el Convento de las Concepciones (hito capitolio, variante 1843): ahí está bien. Hay tres causas. (1) En tools/geo/epocas_1843.py agregar_casas(), cada crujía se recorta contra `vivas`: todas las casas vivas ensanchadas SEPARACION_M = 0,5 m, más las plantas de los hitos. Si lo que pisaba le come la fachada (frente_m < FRENTE_MINIMO_M = 3 m), la crujía se descarta, y una manzana con unas pocas casas de 1936 sueltas sobre el frente se queda sin las demás. (2) Las casas de 1772 con vida [1,2] mueren en 1843 (epocas.vida_de_1936: cede, tapada72, y las ceder/alinear de 1772), y lo que nace en su lugar en 1843 cubre menos. (3) El visor quita además las casas bajo el `suprime` de los hitos (src/hitos/suprimir.js, tools/vidas-visibles.mjs), que agregar_casas() no tiene en cuenta: solo mira `planta`. Las letras N (San Francisco) y M (San Jacinto) de Jesurún no tienen una unidad lote_especial propia, salvo U1843-0150 (M).",
+   "donde_se_arregla": "tools/geo/epocas_1843.py agregar_casas(). Restar las plantas y los `suprime` de los hitos vivos (tools/hitos-planta.mjs ya los da) y no las casas ensanchadas. Cuando un frente queda con huecos de más de un solar de la época, rellenar el hueco en vez de descartar la crujía entera. Si 1843-A reemplaza la subdivisión por solares, esta tarea se reduce a verificar que ninguna manzana rayada quede vacía. Antes, la puerta R7 en tools/geo/reglas_mapa.py: la parte cubierta y los frentes edificados por unidad rayada de la referencia de la época.",
+   "como_se_mide": "reglas_mapa.py --epoca 1843, R7: 0 manzanas rayadas aprobadas con menos de la cobertura mínima de frente (umbral a fijar en T82.2, propuesto ≥ 80 % del perímetro sobre calle con casa) y 0 manzanas vacías. Los conventos y lotes especiales con hito van como límite con su id. Capturas 2-sur_oblicua (x385-475, y390-445; x680-780, y340-420) y 2-noreste_oblicua.",
+   "epocas_afectadas": [
+    "1843",
+    "1772 (las auditorías 08 ya cierran R7 con su censo: verificar que no cambie)"
+   ],
+   "necesita_investigacion": "No externa. Hay que revisar en el plano de Jesurún si N (San Francisco) y los demás conventos con letra ocupan la manzana entera. Es una lectura del original del repo.",
+   "depende_de": [
+    "T82.2 · R7 como puerta en reglas_mapa.py",
+    "1843-A · Solares de la época (si se hace antes, esta tarea queda en verificar)"
+   ]
+  },
+  {
+   "titulo": "1843-D · Casas de 1772 fuera de la referencia de 1843 (al este del Anauco y en el campo)",
+   "reglas": [
+    "R7",
+    "R8"
+   ],
+   "hallazgos": [
+    "H17",
+    "H11 (halos alrededor de las casas sueltas)"
+   ],
+   "causa_probable": "En tools/geo/epocas_1843.py, fuera_de_la_referencia() y en_lotes_libres() solo corren a la época siguiente las casas que nacen en 1843 (`if vida[k][0] != epoca: continue`): «Las que nacían antes no se tocan». Las casas que nacen en 1772 por la máscara de color del Exato mapa siguen vivas en 1843 aunque caigan fuera de toda unidad de la referencia de 1843, como la manzana al este del Anauco, el cuadro rojo aislado del noreste y los grupos sueltos del oeste. Cada grupo además arma su halo de suelo urbano (epocas.urbanizados: holgura_m = 10).",
+   "donde_se_arregla": "tools/geo/epocas_1843.py fuera_de_la_referencia(). Para las casas vivas en la época que nacieron antes y quedan fuera de toda unidad aprobada (más allá de la tolerancia), acortar su vida: muere en la época de la referencia y vuelve a nacer en la siguiente si el plano de esa época la tiene. Hace falta una pieza nueva de vida partida, o bien decidir que mueren en 1843. Con test primero. R12: las casas de 1772 no cambian en 1772.",
+   "como_se_mide": "reglas_mapa.py --epoca 1843, R7: 0 casas vivas en 1843 fuera de las unidades aprobadas de la referencia (más allá de la tolerancia de calle), salvo límite. Medición de 1772 idéntica antes y después (R12). Captura 2-general: x1220-1280, y440-500, y x1225, y150.",
+   "epocas_afectadas": [
+    "1843",
+    "1889 y 1911 si se les agrega referencia"
+   ],
+   "necesita_investigacion": "No. Hay que confirmar en el original de Jesurún que más allá del Anauco solo hay huertas, y eso es una lectura del plano del repo.",
+   "depende_de": [
+    "T82.2 · R7 como puerta"
+   ]
+  },
+  {
+   "titulo": "1843-E · Patios y solares sin casa: el piso de lote de 1936 fuera de la manzana edificada",
+   "reglas": [
+    "R8",
+    "R5"
+   ],
+   "hallazgos": [
+    "H10",
+    "H12 (las diagonales finas de lote en el suelo)"
+   ],
+   "causa_probable": "El suelo de la ciudad antes de 1936 es liso (src/shader/suelo.js sueloColor: `antes` borra lo de la segmentación de 1936). Las manchas oliva con rayas de lote son entonces el piso PATIO/SOLAR de las casas: src/alas.js hueco(…, CUBIERTA.SOLAR), con TAPIA_SOLAR_M = 0. tools/geo/alas.py repartir() corta el lote de 1936 en crujía, patios y solar hasta el fondo, y el visor techa las alas y deja el resto como piso abierto. Cada lote de 1936 vivo en 1843 dibuja así su solar hasta el fondo y su contorno (las rayas). Donde la crujía del frente no está (sale de la huella o la tapa otra casa) queda solo el solar, que llega hasta la calle. MARGEN_M = 40 estira hacia afuera las alas que tocan el borde del lote: si el recorte con la huella falla o la huella es irregular, puede dar el abanico arrastrado. Además, src/ciudad.js proyectar() da [1,1,1,1] lados libres a toda casa con muere ≠ 0 y elige el frente con eso, así que en las casas de 1843 que mueren después el «frente» puede caer hacia el patio.",
+   "donde_se_arregla": "Primero, la investigación en el código: identificar los techos que dibujan las manchas de 2-este y 2-norte (con ?medir o con un volcado del pak por centro) y confirmar si es el piso SOLAR de casas de 1936, alas estiradas o casas con el frente al revés. El arreglo va en src/alas.js planDeAlas (el piso SOLAR solo detrás de una crujía que existe en la época, nunca sobre la línea de fachada, y recortado a la huella) y en tools/geo/alas.py repartir() (que el solar no llegue a un lado que da a la calle). Con 1843-A, el solar sale del solar de la época y no del lote de 1936.",
+   "como_se_mide": "Una puerta nueva R8 en reglas_mapa.py (T82.2): metros cuadrados de piso PATIO/SOLAR fuera del anillo de crujías de las casas vivas de la época, o a menos de media calzada de una línea de fachada sin casa. El umbral es 0. Test de src/alas.js: ninguna pieza SOLAR toca el lado de frente del marco. Capturas 2-este (x510-720, y560-700; x540-610, y360-490) y 2-norte (x480-700, y350-540).",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936 (el piso de patio también se ve; revisar si el solar llega a la calle)"
+   ],
+   "necesita_investigacion": "Sí, del código (no externa): confirmar cuál de las tres causas produce las manchas antes de tocar nada.",
+   "depende_de": [
+    "T82.2 · R8 como puerta",
+    "1843-A · Solares de la época (cambia de dónde sale el solar)"
+   ]
+  },
+  {
+   "titulo": "1843-F · Suelo urbano de la época: sin llanos urbanos sin ciudad, sin escalones, halos ni islas de pasto",
+   "reglas": [
+    "R8"
+   ],
+   "hallazgos": [
+    "H11"
+   ],
+   "causa_probable": "Lo urbanizado de cada época (crece.png G) sale en tools/geo/epocas.py urbanizados() → valle.urbanizado(construido, cierre_m = 25, holgura_m = 10, hueco_m2 = 40000), y `construido` es la máscara de color del plano (construido_de_epoca, perfil L<185 de epocas/epocas.json para 1843). En Jesurún, el corredor del Catuche, el campo punteado y las huertas cercadas del sureste son trazo oscuro: entran como edificado, y el cierre de 25 m los une en un llano urbano entre el damero y la Candelaria y al sureste. El borde va en escalera porque crece.png tiene celdas de 8 m (escala_crece = 16 a 0,5 m/px) y src/shader/valle.js urbanoEn() solo promedia 8 vecinos a BORDE_CIUDAD_M = 10 m. Los halos son la holgura de 10 m alrededor de los grupos sueltos (ver 1843-D). Las islas de pasto son huecos del cierre que epocas.canales_del_valle deja como campo (etapa_g = min(urbanizado, etapa_r)).",
+   "donde_se_arregla": "tools/geo/epocas.py urbanizados() y main(): en las épocas con referencia, lo urbanizado sale de las unidades aprobadas rayadas, de lotes especiales y de plazas de la referencia, más sus calles (media calzada), y no de la máscara de color. Las huertas, el terreno libre y el corredor de agua quedan fuera. tools/geo/valle.py urbanizado(): rellenar los huecos rodeados de manzanas de la época y suavizar el borde con un campo de distancia en vez de la celda de 8 m (o subir la resolución de crece G). src/shader/valle.js urbanoEn(): borde con más muestras o con distancia. Con test primero en tools/geo/tests.",
+   "como_se_mide": "La puerta R8 de T82.2: área de suelo urbano a más de media cuadra de toda manzana de la época ≤ umbral (a fijar en F1). 0 islas de campo de menos de 1 ha rodeadas de manzanas de la época. Capturas 2-general (x760-890, y185-320; x850-1000, y550-760), 2-norte (borde x880-1000) y 2-este (x450-540, y710-900). R12: crece.png de 1772 igual o mejor, medido.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No externa. Es lectura del original: qué dibuja Jesurún entre el damero y la Candelaria (corredor del Catuche, campo punteado) y al sureste (Campo de Marte, huertas).",
+   "depende_de": [
+    "T82.2 · R8 como puerta",
+    "1843-D · Casas fuera de la referencia (los halos)"
+   ]
+  },
+  {
+   "titulo": "1843-G · Ríos y quebradas continuos por época: Caroata y Catuche de punta a punta y con agua dentro de la ciudad",
+   "reglas": [
+    "R10",
+    "R2",
+    "R11"
+   ],
+   "hallazgos": [
+    "H3",
+    "H4"
+   ],
+   "causa_probable": "El mapa no tiene cauces vectoriales: el agua es la clase 7 de la segmentación de 1936 (tools/suelo-lib.mjs CANALES → canal R de uSuelo), y en 1936 está cortada donde el plano tapa la quebrada con casas, calles, puentes o rótulos. De ahí la V del Caroata en el campo y su corte en x≈175, y los trazos grises sueltos del Catuche. Dentro de la ciudad antes de 1936, src/shader/suelo.js sueloColor() pinta el agua como BARRO (`c = mix(c, mix(liso, BARRO, s.r), antes)`) y no como agua: solo valleColor(), en el campo, usa AGUA_CLARA. Por eso el Catuche «desaparece al entrar en el suelo urbano» y el Caroata no se ve en el casco. Las marcas «Quebrada Catuche» y «Quebrada Caroata» (src/marcas-datos.js) caen donde no hay agua dibujada.",
+   "donde_se_arregla": "(1) Una referencia nueva, tools/geo/referencias/cauces.json, con el eje de cada cauce (Guaire, Caroata, Catuche, Anauco y las quebradas menores), su ancho y su vida por época, calcados de los planos de 1772, 1843 y 1889 y con fuente (investigacion.json, tema agua: D10). (2) Un paso del pipeline (tools/cauces.mjs o tools/geo/cauces.py, con test) que la rasteriza en el canal de agua por época, o en una textura aparte si el canal R tiene que seguir siendo el de 1936. (3) En src/shader/suelo.js, dentro de la ciudad, el cauce de la época se pinta como agua con su ribera y no como barro. Los puentes, en su lugar y su época. (4) En tools/geo/epocas.py, las casas sobre el corredor del cauce nacen después de su embaulamiento (Caroata 1942–45: fuera de la línea).",
+   "como_se_mide": "Una puerta R10 nueva en reglas_mapa.py (T82.2): cada cauce de cauces.json es una sola componente conexa desde el borde del mapa hasta el Guaire en cada época donde vive, y 0 casas vivas sobre su corredor. Las marcas de quebrada caen sobre su cauce (R9). Capturas 2-oeste, 2-caroata, 2-norte, 2-noreste_oblicua y 2-general: el Caroata continuo por el oeste del casco y el Catuche por el norte y el borde este del damero.",
+   "epocas_afectadas": [
+    "1578",
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí (§ 2.1). F0 ya confirma el recorrido del Caroata (D10). Falta, con fuente, el trazado del Catuche y del Anauco por época, los puentes con su fecha y dónde se embaularon. Se hace con el workflow de investigación, tema agua, ampliado.",
+   "depende_de": [
+    "T82.2 · R10 como puerta"
+   ]
+  },
+  {
+   "titulo": "1843-H · Marcas en su lugar: Seminario y Universidad, y Plaza de San Jacinto libre",
+   "reglas": [
+    "R9",
+    "R7"
+   ],
+   "hallazgos": [
+    "H5 (posición de la marca)",
+    "H8"
+   ],
+   "causa_probable": "src/marcas-datos.js pone las coordenadas a mano. 'seminario' (x 8950, y 6975) «por la cuadra (el lado sur de la plaza), no por un rótulo»: cae unos 16 m más allá del borde sur de la unidad plaza U1843-0143 (centro 8965, 6837), en la calle o el cruce. 'plaza-venezolano' / «Plaza de San Jacinto» (x 9265, y 7040) cae sobre casas: la referencia de 1843 solo tiene el lote especial M (U1843-0150, centro 9348, 7097), sin una unidad 'plaza' para el claro junto a M, así que en_lotes_libres() no despeja nada y agregar_casas() levanta casas ahí.",
+   "donde_se_arregla": "src/marcas-datos.js: mover 'seminario' dentro de la manzana que Jesurún marca k/L (leer las letras en el plano y en 1843-manzanas.json) y 'plaza-venezolano' al claro junto a M, citando el plano. tools/geo/referencias/1843-manzanas.json: digitalizar el claro de San Jacinto como unidad 'plaza' aprobada, con procedencia. Con eso, en_lotes_libres() y agregar_casas() (que ya respetan LIBRES) lo dejan sin casas. Test de marcas: cada marca de plaza cae en una unidad plaza de la época.",
+   "como_se_mide": "La puerta R9 (T82.2): 0 marcas de edificio sobre calzada o casa genérica y 0 marcas de plaza sobre casas, en 1843. Capturas 2-plaza_cenital (x615, y627; x1030, y713) y 2-plaza_baja (x326, y499).",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889 (la plaza El Venezolano, el Concejo en el lado sur)"
+   ],
+   "necesita_investigacion": "Mínima, en el repo: dónde caen las letras k y L de Jesurún y el claro de San Jacinto. Si el claro no se distingue en el original, queda como límite «plaza sin dibujo».",
+   "depende_de": [
+    "T82.2 · R9 como puerta"
+   ]
+  },
+  {
+   "titulo": "1843-I · Hitos de los edificios en pie en 1843 que hoy solo tienen marca",
+   "reglas": [
+    "R9",
+    "R11",
+    "R7"
+   ],
+   "hallazgos": [
+    "H7",
+    "H5 (el edificio del Seminario y Universidad)"
+   ],
+   "causa_probable": "Las marcas candelaria, santa-rosalia, carmelitas, san-mauricio, las-mercedes, san-jacinto, casa-natal, calvario y seminario de src/marcas-datos.js no tienen `hito:`, solo x e y. src/hitos/datos/iglesias.js y civiles.js no tienen hitos para ellas: solo altagracia, santa-capilla (desde 1889), santa-teresa (desde 1889), la-pastora, San Francisco y universidad (desde 1889). Así, el pin cae sobre las casas genéricas que el generador levantó en su manzana (agregar_casas() solo respeta las plantas de los hitos), en un patio o en pasto (El Calvario: no hay casas ni edificio en la ladera).",
+   "donde_se_arregla": "src/hitos/datos/iglesias.js (iglesiaEn) y src/hitos/datos/civiles.js: un hito por edificio, con planta, `suprime`, eje y vida por época con fuente (iglesias: Candelaria, Santa Rosalía, San Mauricio, La Merced como capilla provisional en 1843, El Calvario; conventos: Carmelitas, San Jacinto; Seminario/Universidad; Casa natal). La marca se enlaza con `hito:`. Lo que no tenga planta con fuente queda en specs/reglas/limites-1843.json como «hito pendiente», con la marca corrida a su manzana. Un PR por grupo (iglesias, conventos, civiles) para no pasar las 3000 líneas. Regenerar los datos: agregar_casas() recibe las plantas nuevas y deja el lugar libre.",
+   "como_se_mide": "La puerta R9: 0 marcas de edificio en pie en 1843 sin hito o sobre casas genéricas, salvo límite «hito pendiente». La puerta R11: la vida de cada hito nuevo coincide con sus fechas de investigacion.json (edificios-07, 38, 39, 48). Capturas 2-general, 2-sur, 2-catuche_centro, 2-norte, 2-plaza_cenital y 2-oeste en los puntos de H7. R12: 1772 con las puertas de 08 iguales.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936 (donde el edificio sigue en pie)"
+   ],
+   "necesita_investigacion": "Sí (§ 2.1): planta, tamaño, orientación y estado en 1843 de cada edificio (La Merced en ruina y capilla provisional; San Jacinto convento; El Calvario capilla en la ladera), con fuente. F0 trae la vida de varios (edificios-07, 38, 39, 48), pero no las plantas.",
+   "depende_de": [
+    "T82.2 · R9 como puerta",
+    "1843-H · Marcas en su lugar (la del seminario)"
+   ]
+  },
+  {
+   "titulo": "1843-J · Anacronismos de 1843: Plaza Bolívar y Altagracia (y La Merced y la Trinidad) en ruina",
+   "reglas": [
+    "R11",
+    "R9"
+   ],
+   "hallazgos": [
+    "H9"
+   ],
+   "causa_probable": "En src/marcas-datos.js, la marca de la plaza tiene nombres: [[1, 'Plaza Mayor', …], [3, 'Plaza Bolívar', …]], así que 1843 (época 2) sigue con «Plaza Mayor», aunque la plaza se llama Plaza Bolívar desde 1842 (D7, edificios-16). En src/hitos/datos/iglesias.js, el hito 'altagracia' tiene nace: 1 y sin muere ni variantes por época: se levanta entero, con techo, en 1843, cuando estuvo destruido de 1812 a 1857 (D8, edificios-33). La marca 'altagracia' lo sigue. No hay revisión de cómo se muestran La Merced (fachada en ruina en 1842) y la Trinidad (abandonada tras 1812, fachada nueva en 1853).",
+   "donde_se_arregla": "src/marcas-datos.js: agregar [2, 'Plaza Bolívar', …] y conservar el texto de 1889 para la estatua de 1874. src/hitos/datos/iglesias.js: partir la vida de Altagracia (pie en 1772, ruina o solar en 1843, reconstruida desde 1889), con variantes por época como las de src/hitos/datos/capitolio.js, y la marca con nombre por época («Ruinas de Altagracia»). Lo mismo para La Merced y la Trinidad si tienen hito o marca. Test de la vida de los hitos contra investigacion.json.",
+   "como_se_mide": "La puerta R11 (T82.2): 0 hitos o marcas vivos fuera de las fechas con fuente de investigacion.json. Capturas de 1843: el rótulo dice «Plaza Bolívar», y en 2-plaza_baja (x830-980, y160-210) y 2-catuche_centro (x920-1045, y405-465) Altagracia sale en ruina o como solar. 1772 y 1889 sin cambios visibles.",
+   "epocas_afectadas": [
+    "1843",
+    "1772 (verificar que Altagracia siga entera)",
+    "1889"
+   ],
+   "necesita_investigacion": "Parcial. Las fechas ya están en F0. Falta, con fuente, qué quedaba en pie de Altagracia en 1843 (solar, muros, capilla provisional), para dibujar la ruina sin inventarla. Si no aparece, se dibuja como solar libre y se registra como límite.",
+   "depende_de": [
+    "T82.2 · R11 como puerta"
+   ]
+  },
+  {
+   "titulo": "1843-K · La costura de las hojas del DCN 1936 que parte casas al sur de la plaza",
+   "reglas": [
+    "R2",
+    "R8",
+    "R12"
+   ],
+   "hallazgos": [
+    "H12"
+   ],
+   "causa_probable": "Por confirmar en el código. La línea vertical recta en x≈648 de 2-plaza_baja coincide con lo que tools/geo/costura.py describe: la franja sin datos entre las dos hojas del DCN 1936 (mosaico.py), que se rellena en la imagen y en las clases. Las casas vectorizadas de cada hoja (vectorizar.py) se cortan en el borde de su hoja, y del otro lado la casa vecina se monta sobre ella. La línea clara puede ser el borde de esa franja o la orilla de las calles de la época (src/shader/calles.js calleEn) si una calle referenciada pasa por ahí. Las diagonales finas son el contorno de los pisos SOLAR de los lotes de 1936 (ver 1843-E).",
+   "donde_se_arregla": "Primero, ubicar la línea en coordenadas del mosaico (la costura de mosaico.json) y ver qué techos la tocan. Si es la costura, se arregla en tools/geo/costura.py o en el paso de vectorizar: unir o recortar las casas partidas en la costura sin solaparse, como hace epocas.sin_solapes_residuales() para 1772. Si es una calle de la época, en tools/calles-epoca-lib.mjs.",
+   "como_se_mide": "La puerta R2 (T82.2): 0 solapes entre casas vivas de la época (área de intersección > 0) y 0 casas partidas a lo largo de la costura. En la captura 2-plaza_baja, sin línea recta ni casas montadas. R12: medición de todas las épocas, con 1936 incluida (la costura toca el dato).",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí, del código (no externa): confirmar que la línea es la costura antes de tocarla.",
+   "depende_de": [
+    "T82.2 · R2 como puerta"
+   ]
+  },
+  {
+   "titulo": "1843-L · Fachada solo a la calle: corredor y puerta al patio, medianeras ciegas (F3 en el visor)",
+   "reglas": [
+    "R5"
+   ],
+   "hallazgos": [
+    "H18"
+   ],
+   "causa_probable": "Para el shader de fachadas (src/shader/fachada.js, src/shader/vanos.js), toda pared es fachada según el estilo y la coordenada de la pared (aPared). No hay un dato por cara que diga «da a la calle», «da al patio» o «medianera». En src/ciudad.js proyectar(), las casas sin marco que mueren en alguna época (casa.muere ≠ 0: casi todas las de 1843) reciben `libres = [1, 1, 1, 1]`, todos los lados libres, y elegirFrente() puede poner el frente hacia el patio. ladosLibres() y libresDelMarco() sondean vecinas a SONDAS_M = 2 y 4 m, y una casa suelta (por no tener a sus vecinas de 1936 en la época) muestra sus cuatro caras con aberturas. Las casas de 1936 en segunda fila (ver 1843-A) tienen además su «frente» de 1936 mirando al patio de la de adelante.",
+   "donde_se_arregla": "src/ciudad.js: llevar al atributo de pared un tipo de cara (calle, patio, medianera), calculado por época con la línea de fachada (en el dato: tools/geo/alas.py marca los lados de calle en `calles`; en el visor: ladosLibres con las casas vivas en la época, no las de toda la vida). No usar [1,1,1,1] para las casas que mueren: sondear con las vivas de la misma época. src/shader/fachada.js y vanos.js: portón, reja y zócalo solo en las caras de calle; en el patio, corredor y una puerta; medianera ciega. Tests de geometría en tests/unit (qué cara recibe portón) y capturas a pie (a-pie).",
+   "como_se_mide": "Tests de src/ciudad.js y del shader: 0 portones o ventanas de calle en caras que no están sobre la línea de fachada, y medianeras sin vanos. La puerta R5 de T82.2 sobre el pak: caras con vano de calle contra caras sobre la línea de fachada. Capturas a pie y 2-plaza_baja (x440-560, y690-780; x690-830, y690-800).",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Parcial. La tipología ya está en F0 (tema 4: qué abre a la calle y qué al patio). Falta confirmar si basta o si hay que ampliar con fuentes sobre los vanos al patio.",
+   "depende_de": [
+    "1843-A · Solares de la época (sin segunda fila, la mayoría de los frentes al patio desaparecen)",
+    "T82.2 · R5 como puerta"
+   ]
+  }
+ ]
+}

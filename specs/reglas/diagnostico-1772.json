@@ -1,0 +1,631 @@
+{
+ "alcance": "Diagnóstico de las reglas de construcción (specs/13) en la época: hallazgos de la revisión visual sobre las capturas fijas y el plano original, los que el verificador no pudo refutar (confirmados) y las tareas propuestas. Capturas de caracas.city, datos-2026-11-25-09ba9f7.",
+ "fecha": "2026-11-25",
+ "workflow": "specs/reglas/workflows/diagnostico-epocas.js (run wf_501830e2-601)",
+ "año": 1772,
+ "hallazgos": [
+  {
+   "id": "1772-V01",
+   "regla": "R10",
+   "captura": "1-oeste.png, 1-caroata.png, 1-general.png",
+   "donde": "Campo al oeste/noroeste de la ciudad: en 1-oeste.png arriba a la izquierda (x 0-350, y 400-550), en 1-caroata.png arriba a la izquierda (x 0-130, y 170-280)",
+   "que_se_ve": "El cauce del Caroata entra por el borde izquierdo y termina en una V cerrada en medio del campo, sin seguir hacia la ciudad ni hacia el Guaire. Además, en 1-general.png el punto del rótulo «Quebrada Caroata» (x 308, y 746) cae sobre casas del suroeste, donde no se ve agua.",
+   "contra_el_original": "El Exato mapa dibuja la quebrada continua de punta a punta, con tres puentes donde cruza el damero (puentecitos rojos en x≈765, 968 y 1103, y≈600-630 de vista.jpg). Repite D5/D10 de la revisión de 1843.",
+   "medido": "R10 no tiene puerta en medicion-1772.json (pendientes: R2, R5 y R7 a R12)",
+   "gravedad": "alta"
+  },
+  {
+   "id": "1772-V02",
+   "regla": "R10",
+   "captura": "1-norte.png, 1-general.png, 1-catuche_centro.png",
+   "donde": "Borde norte, junto al rótulo «Quebrada Catuche» (1-norte.png, x 700-1000, y 380-560)",
+   "que_se_ve": "El hilo gris de la quebrada baja por el campo y se corta en el borde de la ciudad. Una fila de casas (1-norte.png, x≈750-810, y≈450-470) queda encima de su línea y otro tramo suelto reaparece a la derecha de la calle (x≈900-980, y≈510-560). Dentro del damero no corre agua: en 1-general.png y en 1-catuche_centro.png no aparece ningún cauce que cruce la ciudad.",
+   "contra_el_original": "El plano dibuja dos quebradas que atraviesan el damero edificado: una al poniente de la plaza (horizontal en vista.jpg, y≈600, con tres puentes) y otra en diagonal al norte y al naciente de la plaza (de x≈1420,y≈690 a x≈700,y≈1270). Las dos corren continuas entre manzanas, sin casas encima.",
+   "medido": "R10 sin puerta (pendiente en medicion-1772.json)",
+   "gravedad": "alta"
+  },
+  {
+   "id": "1772-V03",
+   "regla": "R2",
+   "captura": "1-este.png, 1-general.png",
+   "donde": "Este y noreste del centro: 1-este.png, zona central izquierda (x 140-620, y 180-700); 1-general.png, a la derecha de la plaza (x≈790-900, y≈200-330)",
+   "que_se_ve": "Grandes extensiones de suelo urbano liso en las que faltan las calles del damero: no hay trazas de calle y quedan manzanas flotando. Un anillo de casas suelto (1-este.png, x≈485-560, y≈440-500) y una manzana en U (x≈395-590, y≈315-405) no tocan ninguna calle por su lado sur. En 1-general.png, el noreste es una explanada con una sola diagonal.",
+   "contra_el_original": "Al norte y al naciente (derecha y abajo en vista.jpg), el plano dibuja el damero completo: manzanas amarillas (solares y huertos) con algunas piezas rojas y todas sus calles. Ninguna calle de la época se interrumpe.",
+   "medido": "R2 sin puerta (pendiente)",
+   "gravedad": "alta"
+  },
+  {
+   "id": "1772-V04",
+   "regla": "R8",
+   "captura": "1-este.png, 1-general.png, 1-norte.png, 1-sur.png",
+   "donde": "Las mismas explanadas del este (1-este.png, centro izquierda) y manchas redondas en el campo: 1-norte.png, x≈880-1000, y≈330-450 (mancha beige sin casas al norte del rótulo Catuche); 1-sur.png, manchas alrededor de las casas sueltas de abajo (x≈190-470, y≈800-880)",
+   "que_se_ve": "Hay suelo urbano de tierra sin manzana alrededor y, en el borde con el verde, halos redondos y escalones. En 1-norte.png hay una mancha beige en pleno campo sin ninguna casa, y cada casa suelta del sur lleva su propio halo.",
+   "contra_el_original": "Donde no hay manzanas, el plano dibuja campo con matorral; donde hay damero, solares amarillos con sus calles, no explanadas.",
+   "medido": "R8 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V05",
+   "regla": "R8",
+   "captura": "1-caroata.png, 1-sur.png, 1-catuche_centro.png",
+   "donde": "1-caroata.png: la manzana al sur de la calle horizontal, abajo al centro (x≈620-920, y≈640-900). La de arriba (x≈720-970, y≈550-650) tiene la misma mancha detrás de su fila. 1-sur.png: la manzana de arriba al centro (x≈630-810, y≈230-400)",
+   "que_se_ve": "Grandes manchas oliva de patio con las rayas radiales y paralelas de los lotes de 1936. Llegan hasta las calles de los lados oeste y sur, donde no hay ninguna casa. Son patios sin casa.",
+   "contra_el_original": "En el plano, esas manzanas del suroeste son amarillas (solares y huertos) con algunas piezas rojas. No hay patios de casas sobre frentes sin edificar.",
+   "medido": "R8 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V06",
+   "regla": "R9",
+   "captura": "1-plaza_baja.png, 1-plaza_cenital.png",
+   "donde": "Manzana al sur de la Plaza Mayor: rótulo «Seminario y Universidad» (1-plaza_baja.png x 327, y 499; 1-plaza_cenital.png x 616, y 628)",
+   "que_se_ve": "El punto del rótulo cae sobre una fila de casas genéricas de un piso, sin ningún edificio que represente el Seminario de Santa Rosa y la Universidad.",
+   "contra_el_original": "El seminario y la universidad estaban en pie junto a la plaza en 1772. En 1843 la marca cae en la calle (D4).",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "alta"
+  },
+  {
+   "id": "1772-V07",
+   "regla": "R9",
+   "captura": "1-sur_oblicua.png, 1-noreste_oblicua.png, 1-plaza_cenital.png",
+   "donde": "Rótulo «Convento de San Jacinto», una cuadra al sureste de la plaza (1-sur_oblicua.png x 725, y 375; 1-noreste_oblicua.png x 553, y 467; 1-plaza_cenital.png abajo a la derecha, x 1217, y 796)",
+   "que_se_ve": "El punto cae sobre una manzana de casas genéricas con patio. No hay iglesia ni claustro: la manzana es igual a las vecinas.",
+   "contra_el_original": "El plano marca el convento con su cruz y una manzana con un vacío (la iglesia y la plaza). Es uno de los conventos mayores de la ciudad.",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "alta"
+  },
+  {
+   "id": "1772-V08",
+   "regla": "R9",
+   "captura": "1-plaza_cenital.png",
+   "donde": "Rótulo «Plaza de San Jacinto» (x 1030, y 713), en la esquina noroeste de la manzana al sureste del Palacio Episcopal",
+   "que_se_ve": "El punto de la plaza cae sobre la esquina de una manzana llena de casas, con su anillo y su patio. No hay ningún espacio libre de plaza.",
+   "contra_el_original": "Una plaza nombrada tiene que estar libre (R9).",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V09",
+   "regla": "R9",
+   "captura": "1-catuche_centro.png",
+   "donde": "Rótulo «Convento de las Carmelitas» (x 912, y 511), en la manzana al sur de Altagracia",
+   "que_se_ve": "El punto cae en el patio de una manzana de casas genéricas. No hay convento ni iglesia (la única pieza singular es Altagracia, en la manzana de arriba).",
+   "contra_el_original": "El convento de las Carmelitas, fundado en 1732, estaba en pie. El plano lo marca con una cruz y un hueco en la manzana.",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V10",
+   "regla": "R9",
+   "captura": "1-catuche_centro.png, 1-plaza_baja.png",
+   "donde": "Rótulo «San Mauricio» (1-catuche_centro.png x 1172, y 687; 1-plaza_baja.png x 1021, y 208)",
+   "que_se_ve": "El punto cae en el borde de la calle y en la esquina de casas genéricas. En la vista baja, la iglesia no tiene ningún edificio.",
+   "contra_el_original": "La iglesia de San Mauricio estaba en pie (el plano la marca con una cruz). D4 encontró lo mismo en 1843.",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V11",
+   "regla": "R9",
+   "captura": "1-general.png, 1-sur_oblicua.png, 1-oeste_oblicua.png",
+   "donde": "Plaza de San Pablo, suroeste de la plaza mayor (1-oeste_oblicua.png x 848, y 593; 1-sur_oblicua.png x 294, y 496)",
+   "que_se_ve": "La plaza tiene rótulo pero la iglesia de San Pablo no tiene edificio: alrededor solo hay dos o tres piezas chicas grises y casas genéricas.",
+   "contra_el_original": "San Pablo estuvo en pie de 1580 a 1876 (D9). El plano marca la iglesia con su cruz junto a la plaza (cruz con plaza punteada en vista.jpg, x≈595, y≈955).",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V12",
+   "regla": "R9",
+   "captura": "1-oeste.png, 1-general.png",
+   "donde": "Rótulo «El Calvario» (1-oeste.png x 620, y 279; 1-general.png x 226, y 391)",
+   "que_se_ve": "El punto cae en pleno campo verde, sin ningún edificio: ni la capilla ni las cruces.",
+   "contra_el_original": "El plano dibuja el cerro con el rótulo «Calvario», dos edificios rojos en la cima y una cruz (vista.jpg x≈820-860, y≈280-390).",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V13",
+   "regla": "R2",
+   "captura": "1-sur.png, 1-general.png",
+   "donde": "Borde sur y sureste: 1-sur.png, lenguas verdes que bajan entre manzanas (x≈470-560, y≈270-560 y x≈800-980, y≈190-650)",
+   "que_se_ve": "Lenguas de campo verde tapan calles del damero que vienen de la ciudad. Las calles terminan contra el verde y las manzanas de los dos lados quedan sin calle entre ellas.",
+   "contra_el_original": "En el naciente y el sur el plano dibuja el damero entero, con manzanas amarillas y sus calles, hasta las quebradas. No hay campo dentro de la trama.",
+   "medido": "R2 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V14",
+   "regla": "R3",
+   "captura": "1-caroata.png, 1-plaza_cenital.png, 1-catuche_centro.png, 1-este.png",
+   "donde": "1-caroata.png: el peine de techos angostos sobre la calle diagonal (x≈640-810, y≈465-600). Las esquinas de casi todas las manzanas (1-plaza_cenital.png arriba a la derecha, x≈1100-1140, y≈410-450; 1-catuche_centro.png x≈1150-1200, y≈330-420)",
+   "que_se_ve": "Sobre la diagonal, casas angostas sueltas, cada una girada respecto de la calle (no forman una fila paralela). En las esquinas, casas en inglete a 45° con la cumbrera en diagonal, en vez de que las crujías de las dos calles se unan.",
+   "contra_el_original": "El plano dibuja frentes continuos y paralelos a cada calle, también sobre el camino diagonal.",
+   "medido": "R3: 926 de 6.292 casas giradas más de 5°; las primeras 300 de la lista, entre 44,6° y 45,0° (techos 35249, 37735, 37661…)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V15",
+   "regla": "R1",
+   "captura": "1-sur.png, 1-este.png, 1-caroata.png",
+   "donde": "1-sur.png: la manzana de arriba al centro (x≈630-810, y≈230-400) y la de abajo (x≈580-780, y≈410-600); 1-este.png, la manzana grande a la derecha (x≈590-780, y≈200-370)",
+   "que_se_ve": "Detrás de la fila del frente aparecen piezas de casa paralelas a la calle, adentro del corazón de la manzana, como una segunda fila interior. Algunas son alas perpendiculares, pero otras son tramos paralelos sueltos.",
+   "contra_el_original": "Una sola crujía por frente con el corazón libre (patios, corrales, solares).",
+   "medido": "La puerta R1 da 0 casas en segunda fila en 1772 (parte_en_segunda_fila 0,0). Habría que ver si estas piezas son alas de la misma casa o si la puerta no las ve.",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V16",
+   "regla": "R3",
+   "captura": "1-sur.png, 1-este.png",
+   "donde": "1-sur.png, a la izquierda del centro: bloques de casas sueltos (x≈515-565, y≈390-440; x≈545-580, y≈460-500; x≈480-520, y≈510-550). 1-este.png: el anillo suelto (x≈485-560, y≈440-500)",
+   "que_se_ve": "Anillos y bloques de casas cerrados, aislados en medio del suelo, a decenas de metros de toda calle. La fachada no cae sobre ninguna línea de fachada.",
+   "contra_el_original": "En el plano, las piezas rojas sueltas de la periferia están sobre los bordes de las manzanas amarillas, junto a la calle.",
+   "medido": "Retiro > 0,5 m (R3). medicion-1772.json no da el retiro por casa.",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V17",
+   "regla": "R4",
+   "captura": "1-caroata.png, 1-general.png",
+   "donde": "1-caroata.png, las manzanas del noroeste de la calle diagonal (x≈580-720, y≈450-620), donde los frentes de las dos manzanas casi se tocan",
+   "que_se_ve": "Entre fachadas enfrentadas quedan pasillos de pocos metros, más angostos que una calle.",
+   "contra_el_original": "En el plano, las calles tienen todas el mismo ancho. F0 da 6,7 a 8,4 m entre fachadas.",
+   "medido": "R4: p10 = 6,16 m, por debajo de las 8 varas (6,7 m); 150 m de borde con calle de 2 a 4 m y 2 m con calle de 0 a 2 m",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V18",
+   "regla": "R8",
+   "captura": "1-plaza_baja.png",
+   "donde": "Primer plano, abajo a la derecha (x≈580-640, y≈600-900 de la captura): la casa de dos pisos rosada y el suelo debajo",
+   "que_se_ve": "Una línea vertical blanca baja desde el alero de la casa de dos pisos y atraviesa el suelo. Al pie, líneas diagonales de lotes de 1936 cruzan el suelo abierto fuera de los patios (lo mismo que D6 en 1843).",
+   "contra_el_original": "Sin equivalente en el plano.",
+   "medido": "Sin puerta",
+   "gravedad": "baja"
+  }
+ ],
+ "confirmados": [
+  {
+   "id": "1772-V01",
+   "regla": "R10",
+   "captura": "1-oeste.png, 1-caroata.png, 1-general.png",
+   "donde": "Campo al oeste/noroeste de la ciudad: en 1-oeste.png arriba a la izquierda (x 0-350, y 400-550), en 1-caroata.png arriba a la izquierda (x 0-130, y 170-280)",
+   "que_se_ve": "El cauce del Caroata entra por el borde izquierdo y termina en una V cerrada en medio del campo, sin seguir hacia la ciudad ni hacia el Guaire. Además, en 1-general.png el punto del rótulo «Quebrada Caroata» (x 308, y 746) cae sobre casas del suroeste, donde no se ve agua.",
+   "contra_el_original": "El Exato mapa dibuja la quebrada continua de punta a punta, con tres puentes donde cruza el damero (puentecitos rojos en x≈765, 968 y 1103, y≈600-630 de vista.jpg). Repite D5/D10 de la revisión de 1843.",
+   "medido": "R10 no tiene puerta en medicion-1772.json (pendientes: R2, R5 y R7 a R12)",
+   "gravedad": "alta"
+  },
+  {
+   "id": "1772-V02",
+   "regla": "R10",
+   "captura": "1-norte.png, 1-general.png, 1-catuche_centro.png",
+   "donde": "Borde norte, junto al rótulo «Quebrada Catuche» (1-norte.png, x 700-1000, y 380-560)",
+   "que_se_ve": "El hilo gris de la quebrada baja por el campo y se corta en el borde de la ciudad. Una fila de casas (1-norte.png, x≈750-810, y≈450-470) queda encima de su línea y otro tramo suelto reaparece a la derecha de la calle (x≈900-980, y≈510-560). Dentro del damero no corre agua: en 1-general.png y en 1-catuche_centro.png no aparece ningún cauce que cruce la ciudad.",
+   "contra_el_original": "El plano dibuja dos quebradas que atraviesan el damero edificado: una al poniente de la plaza (horizontal en vista.jpg, y≈600, con tres puentes) y otra en diagonal al norte y al naciente de la plaza (de x≈1420,y≈690 a x≈700,y≈1270). Las dos corren continuas entre manzanas, sin casas encima.",
+   "medido": "R10 sin puerta (pendiente en medicion-1772.json)",
+   "gravedad": "alta"
+  },
+  {
+   "id": "1772-V03",
+   "regla": "R2",
+   "captura": "1-este.png, 1-general.png",
+   "donde": "Este y noreste del centro: 1-este.png, zona central izquierda (x 140-620, y 180-700); 1-general.png, a la derecha de la plaza (x≈790-900, y≈200-330)",
+   "que_se_ve": "Grandes extensiones de suelo urbano liso en las que faltan las calles del damero: no hay trazas de calle y quedan manzanas flotando. Un anillo de casas suelto (1-este.png, x≈485-560, y≈440-500) y una manzana en U (x≈395-590, y≈315-405) no tocan ninguna calle por su lado sur. En 1-general.png, el noreste es una explanada con una sola diagonal.",
+   "contra_el_original": "Al norte y al naciente (derecha y abajo en vista.jpg), el plano dibuja el damero completo: manzanas amarillas (solares y huertos) con algunas piezas rojas y todas sus calles. Ninguna calle de la época se interrumpe.",
+   "medido": "R2 sin puerta (pendiente)",
+   "gravedad": "alta"
+  },
+  {
+   "id": "1772-V04",
+   "regla": "R8",
+   "captura": "1-este.png, 1-general.png, 1-norte.png, 1-sur.png",
+   "donde": "Las mismas explanadas del este (1-este.png, centro izquierda) y manchas redondas en el campo: 1-norte.png, x≈880-1000, y≈330-450 (mancha beige sin casas al norte del rótulo Catuche); 1-sur.png, manchas alrededor de las casas sueltas de abajo (x≈190-470, y≈800-880)",
+   "que_se_ve": "Hay suelo urbano de tierra sin manzana alrededor y, en el borde con el verde, halos redondos y escalones. En 1-norte.png hay una mancha beige en pleno campo sin ninguna casa, y cada casa suelta del sur lleva su propio halo.",
+   "contra_el_original": "Donde no hay manzanas, el plano dibuja campo con matorral; donde hay damero, solares amarillos con sus calles, no explanadas.",
+   "medido": "R8 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V05",
+   "regla": "R8",
+   "captura": "1-caroata.png, 1-sur.png, 1-catuche_centro.png",
+   "donde": "1-caroata.png: la manzana al sur de la calle horizontal, abajo al centro (x≈620-920, y≈640-900). La de arriba (x≈720-970, y≈550-650) tiene la misma mancha detrás de su fila. 1-sur.png: la manzana de arriba al centro (x≈630-810, y≈230-400)",
+   "que_se_ve": "Grandes manchas oliva de patio con las rayas radiales y paralelas de los lotes de 1936. Llegan hasta las calles de los lados oeste y sur, donde no hay ninguna casa. Son patios sin casa.",
+   "contra_el_original": "En el plano, esas manzanas del suroeste son amarillas (solares y huertos) con algunas piezas rojas. No hay patios de casas sobre frentes sin edificar.",
+   "medido": "R8 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V06",
+   "regla": "R9",
+   "captura": "1-plaza_baja.png, 1-plaza_cenital.png",
+   "donde": "Manzana al sur de la Plaza Mayor: rótulo «Seminario y Universidad» (1-plaza_baja.png x 327, y 499; 1-plaza_cenital.png x 616, y 628)",
+   "que_se_ve": "El punto del rótulo cae sobre una fila de casas genéricas de un piso, sin ningún edificio que represente el Seminario de Santa Rosa y la Universidad.",
+   "contra_el_original": "El seminario y la universidad estaban en pie junto a la plaza en 1772. En 1843 la marca cae en la calle (D4).",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "alta"
+  },
+  {
+   "id": "1772-V07",
+   "regla": "R9",
+   "captura": "1-sur_oblicua.png, 1-noreste_oblicua.png, 1-plaza_cenital.png",
+   "donde": "Rótulo «Convento de San Jacinto», una cuadra al sureste de la plaza (1-sur_oblicua.png x 725, y 375; 1-noreste_oblicua.png x 553, y 467; 1-plaza_cenital.png abajo a la derecha, x 1217, y 796)",
+   "que_se_ve": "El punto cae sobre una manzana de casas genéricas con patio. No hay iglesia ni claustro: la manzana es igual a las vecinas.",
+   "contra_el_original": "El plano marca el convento con su cruz y una manzana con un vacío (la iglesia y la plaza). Es uno de los conventos mayores de la ciudad.",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "alta"
+  },
+  {
+   "id": "1772-V08",
+   "regla": "R9",
+   "captura": "1-plaza_cenital.png",
+   "donde": "Rótulo «Plaza de San Jacinto» (x 1030, y 713), en la esquina noroeste de la manzana al sureste del Palacio Episcopal",
+   "que_se_ve": "El punto de la plaza cae sobre la esquina de una manzana llena de casas, con su anillo y su patio. No hay ningún espacio libre de plaza.",
+   "contra_el_original": "Una plaza nombrada tiene que estar libre (R9).",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V09",
+   "regla": "R9",
+   "captura": "1-catuche_centro.png",
+   "donde": "Rótulo «Convento de las Carmelitas» (x 912, y 511), en la manzana al sur de Altagracia",
+   "que_se_ve": "El punto cae en el patio de una manzana de casas genéricas. No hay convento ni iglesia (la única pieza singular es Altagracia, en la manzana de arriba).",
+   "contra_el_original": "El convento de las Carmelitas, fundado en 1732, estaba en pie. El plano lo marca con una cruz y un hueco en la manzana.",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V10",
+   "regla": "R9",
+   "captura": "1-catuche_centro.png, 1-plaza_baja.png",
+   "donde": "Rótulo «San Mauricio» (1-catuche_centro.png x 1172, y 687; 1-plaza_baja.png x 1021, y 208)",
+   "que_se_ve": "El punto cae en el borde de la calle y en la esquina de casas genéricas. En la vista baja, la iglesia no tiene ningún edificio.",
+   "contra_el_original": "La iglesia de San Mauricio estaba en pie (el plano la marca con una cruz). D4 encontró lo mismo en 1843.",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V11",
+   "regla": "R9",
+   "captura": "1-general.png, 1-sur_oblicua.png, 1-oeste_oblicua.png",
+   "donde": "Plaza de San Pablo, suroeste de la plaza mayor (1-oeste_oblicua.png x 848, y 593; 1-sur_oblicua.png x 294, y 496)",
+   "que_se_ve": "La plaza tiene rótulo pero la iglesia de San Pablo no tiene edificio: alrededor solo hay dos o tres piezas chicas grises y casas genéricas.",
+   "contra_el_original": "San Pablo estuvo en pie de 1580 a 1876 (D9). El plano marca la iglesia con su cruz junto a la plaza (cruz con plaza punteada en vista.jpg, x≈595, y≈955).",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V12",
+   "regla": "R9",
+   "captura": "1-oeste.png, 1-general.png",
+   "donde": "Rótulo «El Calvario» (1-oeste.png x 620, y 279; 1-general.png x 226, y 391)",
+   "que_se_ve": "El punto cae en pleno campo verde, sin ningún edificio: ni la capilla ni las cruces.",
+   "contra_el_original": "El plano dibuja el cerro con el rótulo «Calvario», dos edificios rojos en la cima y una cruz (vista.jpg x≈820-860, y≈280-390).",
+   "medido": "R9 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V13",
+   "regla": "R2",
+   "captura": "1-sur.png, 1-general.png",
+   "donde": "Borde sur y sureste: 1-sur.png, lenguas verdes que bajan entre manzanas (x≈470-560, y≈270-560 y x≈800-980, y≈190-650)",
+   "que_se_ve": "Lenguas de campo verde tapan calles del damero que vienen de la ciudad. Las calles terminan contra el verde y las manzanas de los dos lados quedan sin calle entre ellas.",
+   "contra_el_original": "En el naciente y el sur el plano dibuja el damero entero, con manzanas amarillas y sus calles, hasta las quebradas. No hay campo dentro de la trama.",
+   "medido": "R2 sin puerta (pendiente)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V14",
+   "regla": "R3",
+   "captura": "1-caroata.png, 1-plaza_cenital.png, 1-catuche_centro.png, 1-este.png",
+   "donde": "1-caroata.png: el peine de techos angostos sobre la calle diagonal (x≈640-810, y≈465-600). Las esquinas de casi todas las manzanas (1-plaza_cenital.png arriba a la derecha, x≈1100-1140, y≈410-450; 1-catuche_centro.png x≈1150-1200, y≈330-420)",
+   "que_se_ve": "Sobre la diagonal, casas angostas sueltas, cada una girada respecto de la calle (no forman una fila paralela). En las esquinas, casas en inglete a 45° con la cumbrera en diagonal, en vez de que las crujías de las dos calles se unan.",
+   "contra_el_original": "El plano dibuja frentes continuos y paralelos a cada calle, también sobre el camino diagonal.",
+   "medido": "R3: 926 de 6.292 casas giradas más de 5°; las primeras 300 de la lista, entre 44,6° y 45,0° (techos 35249, 37735, 37661…)",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V16",
+   "regla": "R3",
+   "captura": "1-sur.png, 1-este.png",
+   "donde": "1-sur.png, a la izquierda del centro: bloques de casas sueltos (x≈515-565, y≈390-440; x≈545-580, y≈460-500; x≈480-520, y≈510-550). 1-este.png: el anillo suelto (x≈485-560, y≈440-500)",
+   "que_se_ve": "Anillos y bloques de casas cerrados, aislados en medio del suelo, a decenas de metros de toda calle. La fachada no cae sobre ninguna línea de fachada.",
+   "contra_el_original": "En el plano, las piezas rojas sueltas de la periferia están sobre los bordes de las manzanas amarillas, junto a la calle.",
+   "medido": "Retiro > 0,5 m (R3). medicion-1772.json no da el retiro por casa.",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V17",
+   "regla": "R4",
+   "captura": "1-caroata.png, 1-general.png",
+   "donde": "1-caroata.png, las manzanas del noroeste de la calle diagonal (x≈580-720, y≈450-620), donde los frentes de las dos manzanas casi se tocan",
+   "que_se_ve": "Entre fachadas enfrentadas quedan pasillos de pocos metros, más angostos que una calle.",
+   "contra_el_original": "En el plano, las calles tienen todas el mismo ancho. F0 da 6,7 a 8,4 m entre fachadas.",
+   "medido": "R4: p10 = 6,16 m, por debajo de las 8 varas (6,7 m); 150 m de borde con calle de 2 a 4 m y 2 m con calle de 0 a 2 m",
+   "gravedad": "media"
+  },
+  {
+   "id": "1772-V18",
+   "regla": "R8",
+   "captura": "1-plaza_baja.png",
+   "donde": "Primer plano, abajo a la derecha (x≈580-640, y≈600-900 de la captura): la casa de dos pisos rosada y el suelo debajo",
+   "que_se_ve": "Una línea vertical blanca baja desde el alero de la casa de dos pisos y atraviesa el suelo. Al pie, líneas diagonales de lotes de 1936 cruzan el suelo abierto fuera de los patios (lo mismo que D6 en 1843).",
+   "contra_el_original": "Sin equivalente en el plano.",
+   "medido": "Sin puerta",
+   "gravedad": "baja"
+  }
+ ],
+ "tareas": [
+  {
+   "titulo": "Cauces continuos de Caroata y Catuche, sin casas encima y con sus puentes",
+   "reglas": [
+    "R10",
+    "R9"
+   ],
+   "hallazgos": [
+    "1772-V01",
+    "1772-V02"
+   ],
+   "causa_probable": "El agua del suelo sale solo de la clase AGUA (7) de la segmentación de 1936: tools/suelo-lib.mjs la pone en el canal R de uSuelo, src/shader/suelo.js la pinta con `mix(c, BARRO, s.r)` y src/shader/valle.js (valleColor, ribera) la usa en el campo; tools/geo/epocas.py canales_del_valle hace lo mismo para el monte (`clases == AGUA`, AGUA_MINIMA). En 1936 las quebradas dentro de la ciudad pasan entre casas, bajo puentes o embauladas, y la segmentación solo agarra trozos: de ahí la V cerrada del Caroata en el campo y el Catuche cortado en el borde norte. Ninguna época antes de 1936 tiene un trazado propio de sus cauces, y el generador no despeja el corredor del agua: abrir_calles_de_1772 y despejar_plazuelas_de_1772 (tools/geo/epocas.py) quitan casas de calles y plazuelas, pero no hay ningún paso equivalente para los cauces. Por eso quedan casas de 1936 encima del Catuche. La marca «Quebrada Caroata» (src/marcas-datos.js, x 7690, y 8560) es un punto fijo que en 1772 cae sobre casas.",
+   "donde_se_arregla": "Una referencia nueva de cauces por época (p. ej. tools/geo/referencias/cauces.json): el eje y el ancho del Caroata y del Catuche (y del Anauco y el Guaire si hace falta) trazados sobre el Exato mapa calzado y los planos de 1843, 1889 y 1936, con los puentes y la vida de cada uno. tools/geo/epocas.py: un paso abrir_cauces (como abrir_calles_de_1772) que quita de cada época las casas que pisan el corredor. Render: un campo de distancia de cauces por época (como tools/calles-epoca-lib.mjs + src/shader/calles.js), o el cauce de la época quemado en el canal R de uSuelo, para que src/shader/suelo.js y src/shader/valle.js lo pinten continuo. Los puentes van como hitos con su época. Las marcas de las quebradas (src/marcas-datos.js) van sobre el cauce de cada época.",
+   "como_se_mide": "Hay que sumar la puerta R10 a tools/geo/reglas_mapa.py (T82.2): por cauce y por época, una sola componente continua desde donde entra al marco hasta el Guaire, 0 casas que toquen el corredor y los puentes donde los cruza la red de la época. Las capturas 1-oeste, 1-caroata, 1-norte, 1-catuche_centro y 1-general tienen que mostrar el agua continua y los tres puentes del Caroata sobre el damero (vista.jpg x≈765, 968 y 1103). Con R9, las marcas de las quebradas tienen que caer sobre agua. R12: las puertas de todas las épocas, antes y después.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí (specs/13 § 2.1): el trazado del Caroata y del Catuche en cada época, dónde estaban y cuándo vivieron los puentes (el Exato mapa dibuja tres sobre el Caroata) y cuándo se embaularon (el Caroata bajo El Silencio en 1942–1945, según D10). Partir del tema `agua` de specs/reglas/investigacion.json y completar lo que falte.",
+   "depende_de": [
+    "T82.2: puerta R10 (y R9) en tools/geo/reglas_mapa.py"
+   ]
+  },
+  {
+   "titulo": "Lo urbanizado de 1772 sigue a las manzanas y calles del plano, no a la mancha roja cerrada",
+   "reglas": [
+    "R8",
+    "R2"
+   ],
+   "hallazgos": [
+    "1772-V03",
+    "1772-V04",
+    "1772-V13"
+   ],
+   "causa_probable": "La ciudad de cada época (canal G de crece.png) sale de tools/geo/epocas.py urbanizados → valle.urbanizado(construido, cierre_m 25, holgura_m 10, hueco_m2 40000). Para 1772, construido_de_epoca usa solo el perfil de color rojo del Exato mapa (canal 'a' > 150, epocas.json). Eso deja afuera los solares y huertos amarillos: en el sur y el sureste lo urbanizado no los incluye y el campo verde se mete entre manzanas (V13). En el este y el noreste, el cierre de 25 m y la holgura de 10 m unen las piezas rojas sueltas en explanadas sin manzana, y cada pieza suelta del campo queda con su halo redondo (V04). Bajo la ciudad, src/shader/suelo.js pinta antes de 1936 el suelo liso (`antes`); las calles de la época (calleEn) solo se ven dentro de `ciudad` (`mix(campo, c, ciudad)`), así que donde lo urbanizado no llega la calle termina contra el verde. Las casas que el generador deja a la vista (nace con umbral 0,5, ceder_a_1772, ceder_frentes_a_1772) no coinciden con esa máscara de color: quedan explanadas de tierra sin casas y manchas beige en el campo.",
+   "donde_se_arregla": "tools/geo/epocas.py urbanizados y construido_de_epoca para 1772. Lo urbanizado se arma con la referencia (tools/geo/referencias/1772-unidades.json, sus manzanas, incluidas las terreno_libre de solares amarillos) más la red de 1772 (1772-red.json / 1772-calles-1936.json) con media calle de cada lado, y se recorta a lo que tiene manzana o casa de la época a menos de media cuadra. tools/geo/valle.py urbanizado: la holgura y el cierre no tienen que crear halos alrededor de piezas sueltas. El borde con el campo se ajusta en src/shader/valle.js (BORDE_CIUDAD_M), sin escalones. Test primero (pytest de valle/epocas).",
+   "como_se_mide": "Hay que sumar la puerta R8 a tools/geo/reglas_mapa.py (T82.2): el área de suelo urbano sin manzana ni casa de la época a menos de media cuadra tiene que quedar por debajo del umbral que fije F1, sin halos alrededor de casas sueltas. Con R2, 0 m de eje de calle de 1772 fuera de lo urbanizado: ninguna calle se corta contra el verde. Las capturas 1-este, 1-general, 1-norte y 1-sur se comparan con vista.jpg. R12: las épocas 1843 a 1911 se miden antes y después (comparten valle.urbanizado).",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No hace falta investigar afuera: la fuente es el propio Exato mapa (rojo edificado, amarillo solares y huertos). El umbral de suelo urbano sin manzana lo fija F1.",
+   "depende_de": [
+    "T82.2: puertas R8 y R2 en tools/geo/reglas_mapa.py"
+   ]
+  },
+  {
+   "titulo": "Dibujar todas las calles del damero de 1772: las del norte y el noreste, en sectores límite del calce",
+   "reglas": [
+    "R2"
+   ],
+   "hallazgos": [
+    "1772-V03"
+   ],
+   "causa_probable": "tools/calles-epoca-lib.mjs tramosDibujables dibuja solo los tramos con `medible: true` de tools/geo/referencias/1772-calles-1936.json: 438 de 467. Los 29 no medibles son de los sectores límite del calce, S1772-24 (el norte, entre La Pastora y el Catuche, x 8300–9500, y 4500–5400) y S1772-44 (el noreste, x≈11000, y≈5500). En el suelo no se ven y la explanada del noreste queda con una sola diagonal. En esos sectores, además, casi todas las unidades de la referencia siguen pendientes (1772-unidades.json: 195 pendientes; motivos sector_limite_del_calce 25 y sin_celda_del_damero 149), así que tampoco tienen casas alineadas. Puede que haya manzanas y calles del este que el Exato mapa dibuja y la red (85 calles, 467 tramos) no registra.",
+   "donde_se_arregla": "tools/calles-epoca-lib.mjs: dibujar también los tramos no medibles, con su banda_m, como calle de la época, sin usarlos para medir. Si el calce de esos sectores no alcanza, mejorarlo en tools/geo/calles_1772.py / tools/geo/calce.py. Las calles que falten en tools/geo/referencias/1772-red.json se completan sobre vista.jpg, revisadas a ojo, siguiendo specs/08 fase 2. Test primero en tests/unit (calles-epoca-lib).",
+   "como_se_mide": "Puerta R2 (T82.2): continuidad de la red de 1772 dibujada, con el 100 % de los tramos de la red en el campo de calles y ninguna calle cortada. En las capturas 1-este y 1-general, el damero completo al norte y al este, comparado con vista.jpg.",
+   "epocas_afectadas": [
+    "1772"
+   ],
+   "necesita_investigacion": "No hace falta investigar afuera, pero sí revisar a ojo el Exato mapa: qué calles del noreste y del este dibuja que no están en 1772-red.json.",
+   "depende_de": [
+    "Lo urbanizado de 1772 sigue a las manzanas y calles del plano (sin ciudad debajo, la calle no se pinta)",
+    "T82.2: puerta R2"
+   ]
+  },
+  {
+   "titulo": "Sin casas sueltas lejos de la calle en la periferia de 1772",
+   "reglas": [
+    "R3",
+    "R7"
+   ],
+   "hallazgos": [
+    "1772-V16"
+   ],
+   "causa_probable": "En 1772 nace cada casa de 1936 que cae al menos a la mitad (umbral 0,5) dentro de la máscara roja del Exato mapa, ensanchada 6 m (tools/geo/epocas.py nace/fracciones, construido_de_epoca con holgura_m 6). En la periferia, el error del calce y las piezas rojas sueltas hacen nacer anillos y bloques enteros de 1936 en medio del solar. Después, alinear_1772, ceder_frentes_a_1772 y cerrar_aberturas_1772 (tools/geo/epocas.py, con tools/geo/fachadas.py alinear_casas) solo tocan casas cerca de tramos medibles de 1772-calles-1936.json. Donde no hay tramo medible (sectores límite, el sur y el este), las casas se quedan donde estaban en 1936, sin fachada sobre ninguna línea de fachada. Para 1772 no hay un paso como fuera_de_la_referencia de 1843 (tools/geo/epocas_1843.py) que mande a la época siguiente lo que queda fuera de la referencia.",
+   "donde_se_arregla": "tools/geo/epocas.py, después de alinear_1772: toda casa de 1772 cuya fachada no caiga sobre la línea de fachada de una calle de 1772 (medible o no) pasa a la época siguiente, o se lleva al frente si la referencia (1772-unidades.json, ocupación aislada o parcial) pone ahí una pieza roja sobre ese borde. Va con el criterio de la memoria de la fase 4 de 1772 (contornos de la periferia revisados a ojo). Test primero.",
+   "como_se_mide": "R3 con retiro por casa: hay que sumar a tools/geo/reglas_mapa.py alineacion la distancia de la fachada de cada casa a su línea de fachada (hoy solo mide el giro). Tiene que dar retiro ≤ 0,5 m y 0 casas de 1772 a más de media calle de toda calle de la época. Con R7, 0 casas en lugares libres. Capturas 1-sur y 1-este.",
+   "epocas_afectadas": [
+    "1772"
+   ],
+   "necesita_investigacion": "No hace falta investigar afuera. Hay que revisar a ojo, contra vista.jpg, qué piezas rojas sueltas de la periferia están de verdad sobre el borde de una manzana amarilla.",
+   "depende_de": [
+    "Dibujar todas las calles del damero de 1772 (sin ellas no hay línea de fachada en esos sectores)",
+    "T82.2: puerta R7 y retiro por casa en R3"
+   ]
+  },
+  {
+   "titulo": "Casas paralelas a la calle diagonal y esquinas medidas bien",
+   "reglas": [
+    "R3"
+   ],
+   "hallazgos": [
+    "1772-V14"
+   ],
+   "causa_probable": "Hay dos causas. (a) Sobre el camino diagonal: tools/geo/alas.py marco_de_casa orienta el lote con el ángulo de la manzana (el minAreaRect de la cuadra). Las casas angostas de 1936 sobre la diagonal se quedan con ese giro: orientar_a_una_calle solo pasa al marco oblicuo si el lado da a la calle dentro de GIRO_DE_LOTE_OBLICUO, y tools/geo/fachadas.py alinear_casas corre la fachada hasta la recta pero no gira el lote. (b) Las esquinas: las 300 primeras de la lista de R3, entre 44,6° y 45,0° (techos 35249, 37735, 37661…), parecen un artefacto de la medida. tools/geo/reglas_mapa.py _giro compara el minimum_rotated_rectangle de una casa en L con el tramo más cercano del borde simplificado (SIMPLIFICAR_M), que en la esquina es el chaflán diagonal. El inglete en sí está hecho a propósito en src/alas.js frenteYEsquinas: lo que en la captura se ve como cumbrera en diagonal es la limatesa de la esquina.",
+   "donde_se_arregla": "tools/geo/reglas_mapa.py alineacion: medir el giro contra el tramo que la casa tiene delante (el eu de su marco en el pak, o el tramo de calle de 1772 frente a su fachada) y no contra el chaflán. tools/geo/alas.py marco_de_casa / orientar_a_una_calle: si el frente da a una calle de 1772 oblicua a la manzana, el marco va en la dirección de esa calle. tools/geo/fachadas.py alinear_casas: las casas del frente diagonal forman una fila paralela. Test primero.",
+   "como_se_mide": "R3 (reglas_mapa.py, ya medida) con la medida corregida: 0 casas del frente giradas más de GIRO_MAXIMO_GRADOS (5°), o límites registrados. La lista de giradas no puede seguir dominada por valores de 45°. Captura 1-caroata (el peine sobre la diagonal) y las esquinas de 1-plaza_cenital y 1-catuche_centro. R12: todas las épocas, porque marco_de_casa y la medida son comunes.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Primero hay que confirmar en los datos si las casas a 45° son un artefacto de la medida: mirar en el pak los marcos de los techos 35249, 37735 y 37661. No hace falta investigar afuera: el inglete de esquina ya está respaldado por la tipología de F0.",
+   "depende_de": []
+  },
+  {
+   "titulo": "Calles de 1772 con el ancho mínimo entre fachadas (8 varas)",
+   "reglas": [
+    "R4",
+    "R2"
+   ],
+   "hallazgos": [
+    "1772-V17"
+   ],
+   "causa_probable": "El núcleo libre de calzada que despeja el generador es de 4 m: el ancho inferido de tools/geo/calles_1772.py, el NUCLEO_M de tools/calles-epoca-lib.mjs y src/shader/calles.js, y lo que usan abrir_calles_de_1772 y vuelos_1772 (tools/geo/epocas.py). Eso queda por debajo de las 8 varas (6,7 m) de specs/13 § 3. tools/geo/fachadas.py alinear_casas lleva cada lado a su recta sin exigir distancia entre los dos lados de la calle. En las manzanas del noroeste de la diagonal del Caroata, las fachadas de 1936 enfrentadas quedan a pocos metros: p10 de 6,16 m, 150 m de borde con calle de 2 a 4 m.",
+   "donde_se_arregla": "tools/geo/epocas.py abrir_calles_de_1772 / alinear_1772 y tools/geo/fachadas.py: el núcleo libre pasa a ser el ancho mínimo de la época (un valor por época, 6,7 m en 1772, de specs/13 § 3), y la fachada se retrae hasta dejarlo libre. Hay que revisar si NUCLEO_M (lo que se dibuja) cambia a la par. Va con el diseño de F2 (calzada con su ancho mínimo).",
+   "como_se_mide": "R4 (reglas_mapa.py anchos_de_calle, ya medida): p10 ≥ 6,7 m y 0 m de borde con calle < 4 m. Con R2, 0 invasiones del núcleo. Capturas 1-caroata y 1-general. R12: todas las épocas.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No. El ancho de 6,7 a 8,4 m ya viene de F0 (inferido de 1843).",
+   "depende_de": [
+    "F2: diseño de la corrección de fondo (calzada con su ancho mínimo)",
+    "Casas paralelas a la calle diagonal y esquinas medidas bien"
+   ]
+  },
+  {
+   "titulo": "Patios y solares solo dentro de casas de la época",
+   "reglas": [
+    "R8",
+    "R1"
+   ],
+   "hallazgos": [
+    "1772-V05"
+   ],
+   "causa_probable": "tools/geo/alas.py repartir y alas_de_casa cubren el lote entero (la huella de 1936 de la casa) hasta el fondo: la crujía, los patios y el SOLAR, que src/techos.js marca como CUBIERTA.PATIO y CUBIERTA.SOLAR y src/alzado.js levanta como piso (PISO_PATIO_M). Cuando el lote de 1936 atraviesa la manzana (bit CALLE_FONDO en `calles`), o cuando las casas de los otros frentes no viven en 1772 (ceder_frentes_a_1772 y ceder_a_1772 en tools/geo/epocas.py), el solar de la casa que queda llega hasta la calle del otro lado. Así se ve un patio sin casa, y las rayas son los bordes entre los pisos de los lotes de 1936.",
+   "donde_se_arregla": "tools/geo/alas.py: el solar no pasa del fondo de lote de la época (specs/13 § 3: 43 a 63 m en 1772) ni de la mitad de la manzana, y se corta antes de cualquier lado que dé a una calle (CALLE_FONDO, CALLE_IZQ, CALLE_DER) sin casa de la época. Hay que estudiar si el recorte va mejor en tools/geo/epocas.py, sobre la huella de la casa en esa época. Va con el diseño de F2 (solares por época). Test primero.",
+   "como_se_mide": "Puerta R8 (T82.2): 0 píxeles de patio o solar fuera del anillo de casas de la época y 0 pisos de patio o solar que toquen una calle. Capturas 1-caroata y 1-sur. R12: todas las épocas (D2 se repite y es peor en 1843).",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No. El fondo de lote ya está en specs/13 § 3.",
+   "depende_de": [
+    "T82.2: puerta R8",
+    "F2: diseño de la corrección de fondo (solares por época)"
+   ]
+  },
+  {
+   "titulo": "Hitos para los conventos e iglesias en pie en 1772: San Jacinto, Carmelitas, San Mauricio y San Pablo",
+   "reglas": [
+    "R9",
+    "R7",
+    "R11"
+   ],
+   "hallazgos": [
+    "1772-V07",
+    "1772-V09",
+    "1772-V10",
+    "1772-V11"
+   ],
+   "causa_probable": "src/hitos/datos/iglesias.js (iglesiaEn) solo tiene hitos para Altagracia, Santa Capilla (nace 3), Santa Teresa (nace 3) y La Pastora. Las marcas de src/marcas-datos.js para san-jacinto (x 9400, y 7100, nace 1), carmelitas (x 8730, y 6300, nace 1), San Mauricio (que en 1889 pasa a Santa Capilla) y la plaza de San Pablo viven desde 1772 sin edificio que las represente. Las casas se apartan solo de la planta de un hito (tools/hitos-planta.mjs → ceder_frentes_a_1772, sin_solapes_residuales; `suprime`), así que en esas manzanas siguen las casas genéricas de 1936. La referencia de 1772 ya distingue 20 unidades conjunto_especial (tools/geo/referencias/1772-unidades.json) que el generador no usa para estos lugares.",
+   "donde_se_arregla": "src/hitos/datos/iglesias.js: un hito por iglesia o convento, con su vida (San Pablo hasta 1876; San Mauricio hasta que pasa a Santa Capilla; el convento de San Jacinto y el de las Carmelitas hasta su exclaustración o reforma), su planta y su eje, tomados del Exato mapa calzado (la cruz y el hueco de la manzana) y de la unidad conjunto_especial. Hace falta una pieza genérica de iglesia con claustro en src/hitos/. En src/marcas-datos.js, cada marca apunta a su hito (`hito:`). Si alguno no se puede levantar, va como límite «hito pendiente» en specs/reglas/limites-1772.json.",
+   "como_se_mide": "Puerta R9 (T82.2): 0 marcas de edificio sobre casas genéricas o en la calle. Con R7, la manzana del hito libre de casas genéricas. Con R11, cada hito dentro de su vida, en todas las épocas. Capturas 1-sur_oblicua, 1-noreste_oblicua, 1-plaza_cenital, 1-catuche_centro, 1-plaza_baja y 1-oeste_oblicua.",
+   "epocas_afectadas": [
+    "1772",
+    "1843"
+   ],
+   "necesita_investigacion": "Sí (specs/13 § 2.1): planta, ubicación y forma de cada edificio en 1772 y 1843, y fechas con fuente de demolición, exclaustración o cambio de uso. Partir del tema `edificios` de specs/reglas/investigacion.json (D9: San Pablo 1580–1876).",
+   "depende_de": [
+    "T82.2: puerta R9"
+   ]
+  },
+  {
+   "titulo": "Seminario de Santa Rosa y Universidad con su edificio junto a la plaza",
+   "reglas": [
+    "R9",
+    "R11"
+   ],
+   "hallazgos": [
+    "1772-V06"
+   ],
+   "causa_probable": "La marca seminario de src/marcas-datos.js (x 8950, y 6975, nace 1, muere 3, fuente CG) no tiene hito. En src/hitos/datos/civiles.js la universidad nace recién en 1889 (la fachada neogótica). En 1772 el punto cae sobre casas genéricas de un piso; en 1843 cae en la calle (D4). La posición de la marca no está verificada contra el plano.",
+   "donde_se_arregla": "Un hito del seminario en src/hitos/datos/civiles.js para 1772–1843, con la planta de la manzana al sur de la Plaza Mayor tomada del Exato mapa y de la unidad conjunto_especial de 1772-unidades.json, y la marca apuntando a él (`hito:`) en src/marcas-datos.js. Si no se puede levantar, va como límite «hito pendiente».",
+   "como_se_mide": "Puerta R9 (T82.2): la marca cae sobre el hito, no sobre casas ni en la calle, en 1772 y en 1843. Con R11, el hito vive solo en 1772–1843. Capturas 1-plaza_baja y 1-plaza_cenital.",
+   "epocas_afectadas": [
+    "1772",
+    "1843"
+   ],
+   "necesita_investigacion": "Sí: la ubicación exacta y la forma del seminario de Santa Rosa en 1772 y 1843 (qué solar, cuántos pisos, si tenía capilla), con fuente.",
+   "depende_de": [
+    "T82.2: puerta R9"
+   ]
+  },
+  {
+   "titulo": "Capilla y cruces de El Calvario en el cerro",
+   "reglas": [
+    "R9",
+    "R11"
+   ],
+   "hallazgos": [
+    "1772-V12"
+   ],
+   "causa_probable": "La marca calvario de src/marcas-datos.js nace en la época 1 («El Calvario»), pero no hay ningún hito para la capilla: en src/hitos/ no existe. El punto cae en pleno campo, aunque el Exato mapa dibuja en la cima dos edificios rojos y una cruz (vista.jpg x≈820–860, y≈280–390).",
+   "donde_se_arregla": "Un hito de la capilla del Calvario (con sus cruces) en src/hitos/datos/iglesias.js, apoyado en el relieve, para las épocas en que existe, y la marca apuntando a él (`hito:`) en src/marcas-datos.js. Los dos edificios se ubican calzando el dibujo del Exato mapa.",
+   "como_se_mide": "Puerta R9 (T82.2): la marca cae sobre el hito. Con R11, la vida de la capilla tiene fuente. Capturas 1-oeste y 1-general.",
+   "epocas_afectadas": [
+    "1772",
+    "1843"
+   ],
+   "necesita_investigacion": "Sí: qué había en la cima del Calvario en 1772 y en 1843 (capilla, ermita, cruces), con fechas y forma con fuente.",
+   "depende_de": [
+    "T82.2: puerta R9"
+   ]
+  },
+  {
+   "titulo": "La Plaza de San Jacinto libre de casas",
+   "reglas": [
+    "R9",
+    "R7"
+   ],
+   "hallazgos": [
+    "1772-V08"
+   ],
+   "causa_probable": "La marca plaza-venezolano de src/marcas-datos.js («Plaza de San Jacinto» desde la época 1, x 9265, y 7040) cae en la esquina de una manzana llena de casas. El registro tools/geo/referencias/1772-plazuelas.json no tiene la plaza de San Jacinto con ese nombre: P1772-002 es un «ensanche en escalón a una cuadra al sureste de la Plaza Mayor» sin identificar. Por eso epocas.despejar_plazuelas_de_1772 no despeja la plaza, o la marca no apunta a la plazuela despejada.",
+   "donde_se_arregla": "Hay que identificar la plaza en el Exato mapa: si es P1772-002, se pone su identidad en el registro; si no, se agrega un registro nuevo, trazado a mano y revisado a ojo como pide tools/geo/plazuelas.py. La marca se lleva al centro de la plazuela en src/marcas-datos.js. Va junto con el hito del convento de San Jacinto, que la plaza tiene delante.",
+   "como_se_mide": "Puerta R9 (T82.2): la plaza nombrada está libre. La puerta de la fase 3 de specs/08 da 0 casas en la plazuela. Captura 1-plaza_cenital.",
+   "epocas_afectadas": [
+    "1772",
+    "1843"
+   ],
+   "necesita_investigacion": "Sí: dónde estaba la plaza de San Jacinto en 1772, frente a qué fachada del convento, y si P1772-002 es esa plaza.",
+   "depende_de": [
+    "Hitos para los conventos e iglesias en pie en 1772: San Jacinto, Carmelitas, San Mauricio y San Pablo"
+   ]
+  },
+  {
+   "titulo": "Línea vertical blanca y trazas de lotes en el suelo junto a la plaza",
+   "reglas": [
+    "R8",
+    "R2"
+   ],
+   "hallazgos": [
+    "1772-V18"
+   ],
+   "causa_probable": "La causa no está confirmada. Las trazas diagonales al pie son probablemente los bordes de los pisos de PATIO y SOLAR de casas cuyo lote de 1936 sale del anillo de la manzana (tools/geo/alas.py repartir; src/alzado.js levanta el piso con PISO_PATIO_M; src/material.js marca `piso` / `esPiso` con sombra gruesa). La línea vertical blanca puede ser una pared de src/alzado.js (la que baja entre el piso alto y el bajo de la casa de dos pisos), un pretil o un artefacto de sombra. Es lo mismo que D6 en 1843.",
+   "donde_se_arregla": "Se decide después de diagnosticar con ?medir y picking en la vista baja de la plaza. Si son los pisos de patio o solar, se arregla con la tarea de patios y solares (tools/geo/alas.py). Si es la pared, en src/alzado.js; si es la sombra, en src/material.js o src/shader/sombra.js.",
+   "como_se_mide": "Captura 1-plaza_baja sin la línea vertical ni trazas fuera de los patios. La puerta R8 (patios sin casa) da 0 cerca de la plaza.",
+   "epocas_afectadas": [
+    "1772",
+    "1843"
+   ],
+   "necesita_investigacion": "No hace falta investigar afuera, pero sí diagnosticar en el visor qué geometría o material dibuja la línea.",
+   "depende_de": [
+    "Patios y solares solo dentro de casas de la época"
+   ]
+  }
+ ]
+}

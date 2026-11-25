@@ -1,0 +1,706 @@
+{
+ "alcance": "Diagnóstico de las reglas de construcción (specs/13) en la época: hallazgos de la revisión visual sobre las capturas fijas y el plano original, los que el verificador no pudo refutar (confirmados) y las tareas propuestas. Capturas de caracas.city, datos-2026-11-25-09ba9f7.",
+ "fecha": "2026-11-25",
+ "workflow": "specs/reglas/workflows/diagnostico-epocas.js (run wf_501830e2-601)",
+ "año": 1889,
+ "hallazgos": [
+  {
+   "id": "H1",
+   "regla": "R10",
+   "captura": "3-oeste.png, 3-caroata.png, 3-general.png",
+   "donde": "Oeste, en el campo verde al oeste de El Calvario (3-oeste: cauce azul en x 0-345, y 400-545; 3-caroata: arriba a la izquierda)",
+   "que_se_ve": "El río Caroata baja del oeste y termina en una V en medio del campo, sin llegar a la ciudad. Dentro del casco no se ve ningún cauce. En 3-general el rótulo «Quebrada Caroata» (x≈308, y≈745) cae sobre manzanas, sin agua a la vista.",
+   "contra_el_original": "Mestre dibuja el Caroata continuo. Baja de Las Tinajitas, rodea El Calvario por el oeste, cruza el oeste del casco junto a la línea roja de la parroquia de San Juan («Rio Caroata», Sur 10–Oeste 18) y desemboca en el Guaire. Es el mismo defecto que D5/D10 de 1843.",
+   "medido": "R10 pendiente en la medición (pendientes: R2, R5, R7…)",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H2",
+   "regla": "R10, R2",
+   "captura": "3-caroata.png",
+   "donde": "Abajo a la derecha (x 930-1010, y 700-870), al suroeste del Teatro Municipal",
+   "que_se_ve": "Una línea gris tenue y diagonal (el rastro del cauce) atraviesa una manzana y pasa por encima de casas, en vez de un cauce con su corredor libre.",
+   "contra_el_original": "Por ahí corre el Caroata a cielo abierto, entre manzanas (Sur 10 / la Soledad).",
+   "gravedad": "media"
+  },
+  {
+   "id": "H3",
+   "regla": "R10",
+   "captura": "3-norte.png, 3-general.png",
+   "donde": "Norte: la mancha verde con el rótulo «Quebrada Catuche» (x 600-1000, y 200-560)",
+   "que_se_ve": "El cauce del Catuche se ve solo dentro de la mancha verde. Al salir sigue como una raya gris débil sobre suelo urbano (x 870-990, y 480-560) y se pierde. En 3-general no se ve agua que atraviese la ciudad de norte a sur.",
+   "contra_el_original": "Mestre dibuja el Catuche continuo desde la Quebrada Punceles/Catuche, por el este del centro (Norte 7, Santa Rosalía), hasta el Guaire al este de Santa Rosalía («Rio Catuche»).",
+   "gravedad": "media"
+  },
+  {
+   "id": "H4",
+   "regla": "R1",
+   "captura": "3-este.png, 3-plaza_baja.png, 3-sur_oblicua.png",
+   "donde": "3-este: manzanas a la izquierda (x 170-400, y 280-620), con filas de casas sueltas en el interior. 3-plaza_baja: primer plano al sur de la plaza (x 0-700, y 560-900).",
+   "que_se_ve": "Hay filas de casas dentro de las manzanas, detrás de la fila del frente. En la vista baja se ven cuatro o más filas apiladas de casas con techo a dos aguas, una detrás de otra, sin corazón de manzana libre.",
+   "medido": "R1: 2.261 casas en segunda fila (19,2 % de 11.798). Hay 59 manzanas «unidas» (más que una cuadra) con 7.776 casas.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H5",
+   "regla": "R5",
+   "captura": "3-plaza_baja.png",
+   "donde": "Primer plano, abajo a la izquierda y al centro (x 0-700, y 560-900), manzana al sur de la Plaza Bolívar",
+   "que_se_ve": "Hay casas con portón y ventanas en las caras que dan al interior de la manzana y a las casas vecinas, enfrentadas entre sí sobre el patio. La fachada de calle no queda solo hacia la calle.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H6",
+   "regla": "R3",
+   "captura": "3-plaza_cenital.png, 3-caroata.png, 3-este.png",
+   "donde": "3-plaza_cenital: manzanas al norte y noreste de la plaza (arriba a la derecha, x 830-1280, y 60-360). 3-caroata: San Juan / El Guarataro (x 100-700, y 420-870). 3-este: fila suelta (x 395-450, y 370-460).",
+   "que_se_ve": "Casas giradas respecto de su calle, en bloques oblicuos, encimadas o sueltas en ángulos distintos. En San Juan es una maraña de filas cruzadas, y la fila de 3-este sobresale hacia la calle.",
+   "medido": "R3: 923 giradas > 5° de 9.537 del frente, con casos de 45° (techo 21023, 4839, 4857).",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H7",
+   "regla": "R4",
+   "captura": "3-sur_oblicua.png, 3-noreste_oblicua.png",
+   "donde": "Toda la ciudad. Se nota en las calles norte–sur del centro y del sur (3-sur_oblicua, x 0-1280, y 450-900).",
+   "que_se_ve": "Muchas calles quedan reducidas a pasillos de pocos metros entre las fachadas enfrentadas.",
+   "contra_el_original": "Mínimo de la época: 6,7 m en el damero viejo y 10 m en las calles abiertas desde 1871.",
+   "medido": "R4: p10 de 4,26 m (mediana de 8,01 m). 4.866 m de borde con calle de menos de 4 m (100 m de 0 a 2 m; 4.766 m de 2 a 4 m).",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H8",
+   "regla": "R8",
+   "captura": "3-plaza_cenital.png, 3-plaza_baja.png",
+   "donde": "La Plaza Bolívar: la mitad norte y noreste del jardín (cenital x 560-760, y 330-470), bajo el rótulo",
+   "que_se_ve": "Una mancha de suelo beige irregular tapa los cuadros de césped y los caminos de la mitad norte de la plaza. En la vista baja, el fondo de la plaza se ve de tierra lisa.",
+   "contra_el_original": "Mestre dibuja la plaza A entera como plaza ajardinada (verde) con sus caminos diagonales.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H9",
+   "regla": "R8",
+   "captura": "3-este.png, 3-sur.png, 3-plaza_cenital.png, 3-catuche_centro.png",
+   "donde": "3-este: x 450-800, y 330-700 (al oeste de Candelaria). 3-sur: x 480-780, y 400-560. En las otras dos, los patios de casi todas las manzanas.",
+   "que_se_ve": "Hay grandes manchas oliva de patio y solar con las rayas radiales de los lotes de 1936, en zonas sin casas alrededor o con una sola fila en un borde. El patio se derrama sobre terreno sin casas.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H10",
+   "regla": "R8",
+   "captura": "3-sur.png, 3-noreste_oblicua.png, 3-norte.png",
+   "donde": "3-sur: franja derecha (x 1000-1250, y 100-800), al este de Santa Rosalía. 3-noreste_oblicua: llano liso al centro-abajo (x 370-830, y 600-740). 3-norte: izquierda (x 0-250, y 380-680).",
+   "que_se_ve": "Grandes extensiones de suelo urbano liso sin manzanas. En 3-norte quedan tres trozos de fila de casas flotando en el llano.",
+   "contra_el_original": "Al este del Catuche, por Santa Rosalía hacia el Guaire (Cuadra Guzmán), Mestre deja terreno sin manzanas: campo, no suelo urbano. Junto al Catuche, entre Este 3 y Este 7, el plano lo deja sin edificar (con un cerro).",
+   "gravedad": "media"
+  },
+  {
+   "id": "H11",
+   "regla": "R8",
+   "captura": "3-oeste.png, 3-caroata.png, 3-general.png",
+   "donde": "El borde oeste, entre la ciudad y el campo de El Calvario (3-oeste x 600-980, y 160-800; 3-caroata x 0-700, y 170-660)",
+   "que_se_ve": "El borde del suelo urbano con el verde va en lóbulos y halos redondos que no siguen las manzanas. Hay suelo urbano sin casas y casas sueltas en la punta (3-caroata x 520-700, y 170-420).",
+   "gravedad": "media"
+  },
+  {
+   "id": "H12",
+   "regla": "R7",
+   "captura": "3-norte.png",
+   "donde": "Izquierda de la captura (x 0-250, y 380-680), al oeste de Las Mercedes",
+   "que_se_ve": "Un llano sin manzanas, con solo tres trozos de fila de casas sueltas.",
+   "contra_el_original": "Al oeste de las Mercedes (IX) y de la plaza Falcón (M), entre Oeste 5 y Oeste 9 (Altagracia / El Teque), Mestre dibuja las manzanas en ocre: edificadas. La ubicación exacta está por confirmar con coordenadas.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H13",
+   "regla": "R9, R7",
+   "captura": "3-este.png, 3-general.png",
+   "donde": "El rótulo «Candelaria» (3-este x≈960, y≈288; 3-general x≈1096, y≈397)",
+   "que_se_ve": "El rótulo cae en una esquina de suelo liso con algunas casas genéricas: no hay iglesia ni plaza.",
+   "contra_el_original": "El templo VI Candelaria y la Plaza de la Candelaria (D), ajardinada en verde, en Norte 13 / Este 1.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H14",
+   "regla": "R9",
+   "captura": "3-sur.png, 3-sur_oblicua.png, 3-general.png",
+   "donde": "El rótulo «Santa Rosalía» (3-sur x≈510, y≈250; 3-sur_oblicua x≈593, y≈770)",
+   "que_se_ve": "El rótulo cae dentro de una manzana de patio y casas genéricas, sin edificio de iglesia.",
+   "contra_el_original": "El templo IV Santa Rosalía está dibujado en Este 12 / Santa Rosalía.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H15",
+   "regla": "R9",
+   "captura": "3-norte.png, 3-plaza_baja.png",
+   "donde": "El rótulo «Las Mercedes» (3-norte x≈726, y≈729)",
+   "que_se_ve": "El rótulo cae dentro de una manzana con patio y casas genéricas, sin templo.",
+   "contra_el_original": "El templo IX Las Mercedes está dibujado al noroeste del centro (calle Mercedes).",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H16",
+   "regla": "R9, R7",
+   "captura": "3-plaza_cenital.png",
+   "donde": "El rótulo «Plaza El Venezolano» (x≈1030, y≈713) y «Casa natal del Libertador» (x≈940, y≈775), al sureste de la plaza",
+   "que_se_ve": "La plaza nombrada cae sobre techos de casas genéricas, sin espacio libre. La casa natal no tiene edificio propio: el rótulo cae sobre casas genéricas.",
+   "contra_el_original": "Plaza del Venezolano (B, verde) en Este 2 / San Jacinto; 24, «Casa donde nació Bolívar», al lado.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H17",
+   "regla": "R9",
+   "captura": "3-sur_oblicua.png, 3-noreste_oblicua.png, 3-general.png",
+   "donde": "El rótulo «Teatro Municipal» (3-sur_oblicua x≈294, y≈495; 3-noreste_oblicua x≈697, y≈280)",
+   "que_se_ve": "El rótulo cae en suelo liso o sobre casas genéricas, sin edificio de teatro.",
+   "contra_el_original": "Teatro Municipal (25) con su plaza (N) en Oeste 8, dibujado como edificio.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H18",
+   "regla": "R9",
+   "captura": "3-sur.png, 3-general.png",
+   "donde": "El rótulo «La Rotunda» (3-sur x≈222, y≈264) y «San Juan» (3-general x≈139, y≈695)",
+   "que_se_ve": "Los dos caen en una manzana vacía o sobre casas genéricas, sin edificio que los represente.",
+   "contra_el_original": "San Juan es templo parroquial (V), dibujado.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H19",
+   "regla": "R11, R3",
+   "captura": "3-plaza_baja.png, 3-plaza_cenital.png, 3-catuche_centro.png",
+   "donde": "Al norte de la Plaza Bolívar (cenital x 220-420, y 140-230 y x 560-640, y 240-300; en la vista baja, los bloques blancos de x 360-890, y 170-340) y el «Concejo Municipal» (vista baja x 0-345, y 400-640)",
+   "que_se_ve": "Hay bloques blancos y grises de tres o cuatro pisos con muchas ventanas y planta poligonal irregular que no sigue la calle. En cenital se ven como losas grises amorfas.",
+   "contra_el_original": "En 1889, la casa de patio colonial todavía, de uno o dos pisos (§ 3). El Consejo municipal (7) es un edificio de patio al sur de la plaza.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H20",
+   "regla": "R11, R7",
+   "captura": "3-catuche_centro.png",
+   "donde": "Izquierda (x 40-185, y 380-660): losas grises en forma de C y amorfas dentro de manzanas. Bajo «Ministerio de Hacienda» (x 875-1020, y 480-630) y alrededor de Santa Capilla (x 750-1120, y 610-800).",
+   "que_se_ve": "Huellas grises de contorno orgánico, sin casas ni frente a la calle, que ocupan media manzana o más. No parecen edificios de 1889.",
+   "contra_el_original": "El plano dibuja manzanas edificadas con edificios rectangulares numerados (18 Mº de Hacienda, 16 y 17, etc.).",
+   "gravedad": "media"
+  },
+  {
+   "id": "H21",
+   "regla": "R2, R8",
+   "captura": "3-plaza_baja.png",
+   "donde": "Una línea vertical blanca en x≈650, desde la plaza (y≈540) hasta el borde de abajo",
+   "que_se_ve": "La línea recta cruza el suelo y los techos de las casas del primer plano. Es lo mismo que D6 de 1843.",
+   "gravedad": "baja"
+  },
+  {
+   "id": "H22",
+   "regla": "R6",
+   "captura": "3-general.png",
+   "donde": "Toda la ciudad",
+   "que_se_ve": "Las manzanas tienen muchas casas angostas, con filas interiores.",
+   "medido": "11.798 casas a la vista contra unas 9.900 de las fuentes (interpoladas de 8.194 en 1881 y 10.379 en 1891): 1,19 veces, por encima del ± 15 %. Mediana de 36 casas por cuadra del damero y frente medio de 15,08 m.",
+   "gravedad": "media"
+  }
+ ],
+ "confirmados": [
+  {
+   "id": "H1",
+   "regla": "R10",
+   "captura": "3-oeste.png, 3-caroata.png, 3-general.png",
+   "donde": "Oeste, en el campo verde al oeste de El Calvario (3-oeste: cauce azul en x 0-345, y 400-545; 3-caroata: arriba a la izquierda)",
+   "que_se_ve": "El río Caroata baja del oeste y termina en una V en medio del campo, sin llegar a la ciudad. Dentro del casco no se ve ningún cauce. En 3-general el rótulo «Quebrada Caroata» (x≈308, y≈745) cae sobre manzanas, sin agua a la vista.",
+   "contra_el_original": "Mestre dibuja el Caroata continuo. Baja de Las Tinajitas, rodea El Calvario por el oeste, cruza el oeste del casco junto a la línea roja de la parroquia de San Juan («Rio Caroata», Sur 10–Oeste 18) y desemboca en el Guaire. Es el mismo defecto que D5/D10 de 1843.",
+   "medido": "R10 pendiente en la medición (pendientes: R2, R5, R7…)",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H2",
+   "regla": "R10, R2",
+   "captura": "3-caroata.png",
+   "donde": "Abajo a la derecha (x 930-1010, y 700-870), al suroeste del Teatro Municipal",
+   "que_se_ve": "Una línea gris tenue y diagonal (el rastro del cauce) atraviesa una manzana y pasa por encima de casas, en vez de un cauce con su corredor libre.",
+   "contra_el_original": "Por ahí corre el Caroata a cielo abierto, entre manzanas (Sur 10 / la Soledad).",
+   "gravedad": "media"
+  },
+  {
+   "id": "H3",
+   "regla": "R10",
+   "captura": "3-norte.png, 3-general.png",
+   "donde": "Norte: la mancha verde con el rótulo «Quebrada Catuche» (x 600-1000, y 200-560)",
+   "que_se_ve": "El cauce del Catuche se ve solo dentro de la mancha verde. Al salir sigue como una raya gris débil sobre suelo urbano (x 870-990, y 480-560) y se pierde. En 3-general no se ve agua que atraviese la ciudad de norte a sur.",
+   "contra_el_original": "Mestre dibuja el Catuche continuo desde la Quebrada Punceles/Catuche, por el este del centro (Norte 7, Santa Rosalía), hasta el Guaire al este de Santa Rosalía («Rio Catuche»).",
+   "gravedad": "media"
+  },
+  {
+   "id": "H4",
+   "regla": "R1",
+   "captura": "3-este.png, 3-plaza_baja.png, 3-sur_oblicua.png",
+   "donde": "3-este: manzanas a la izquierda (x 170-400, y 280-620), con filas de casas sueltas en el interior. 3-plaza_baja: primer plano al sur de la plaza (x 0-700, y 560-900).",
+   "que_se_ve": "Hay filas de casas dentro de las manzanas, detrás de la fila del frente. En la vista baja se ven cuatro o más filas apiladas de casas con techo a dos aguas, una detrás de otra, sin corazón de manzana libre.",
+   "medido": "R1: 2.261 casas en segunda fila (19,2 % de 11.798). Hay 59 manzanas «unidas» (más que una cuadra) con 7.776 casas.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H5",
+   "regla": "R5",
+   "captura": "3-plaza_baja.png",
+   "donde": "Primer plano, abajo a la izquierda y al centro (x 0-700, y 560-900), manzana al sur de la Plaza Bolívar",
+   "que_se_ve": "Hay casas con portón y ventanas en las caras que dan al interior de la manzana y a las casas vecinas, enfrentadas entre sí sobre el patio. La fachada de calle no queda solo hacia la calle.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H6",
+   "regla": "R3",
+   "captura": "3-plaza_cenital.png, 3-caroata.png, 3-este.png",
+   "donde": "3-plaza_cenital: manzanas al norte y noreste de la plaza (arriba a la derecha, x 830-1280, y 60-360). 3-caroata: San Juan / El Guarataro (x 100-700, y 420-870). 3-este: fila suelta (x 395-450, y 370-460).",
+   "que_se_ve": "Casas giradas respecto de su calle, en bloques oblicuos, encimadas o sueltas en ángulos distintos. En San Juan es una maraña de filas cruzadas, y la fila de 3-este sobresale hacia la calle.",
+   "medido": "R3: 923 giradas > 5° de 9.537 del frente, con casos de 45° (techo 21023, 4839, 4857).",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H7",
+   "regla": "R4",
+   "captura": "3-sur_oblicua.png, 3-noreste_oblicua.png",
+   "donde": "Toda la ciudad. Se nota en las calles norte–sur del centro y del sur (3-sur_oblicua, x 0-1280, y 450-900).",
+   "que_se_ve": "Muchas calles quedan reducidas a pasillos de pocos metros entre las fachadas enfrentadas.",
+   "contra_el_original": "Mínimo de la época: 6,7 m en el damero viejo y 10 m en las calles abiertas desde 1871.",
+   "medido": "R4: p10 de 4,26 m (mediana de 8,01 m). 4.866 m de borde con calle de menos de 4 m (100 m de 0 a 2 m; 4.766 m de 2 a 4 m).",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H8",
+   "regla": "R8",
+   "captura": "3-plaza_cenital.png, 3-plaza_baja.png",
+   "donde": "La Plaza Bolívar: la mitad norte y noreste del jardín (cenital x 560-760, y 330-470), bajo el rótulo",
+   "que_se_ve": "Una mancha de suelo beige irregular tapa los cuadros de césped y los caminos de la mitad norte de la plaza. En la vista baja, el fondo de la plaza se ve de tierra lisa.",
+   "contra_el_original": "Mestre dibuja la plaza A entera como plaza ajardinada (verde) con sus caminos diagonales.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H9",
+   "regla": "R8",
+   "captura": "3-este.png, 3-sur.png, 3-plaza_cenital.png, 3-catuche_centro.png",
+   "donde": "3-este: x 450-800, y 330-700 (al oeste de Candelaria). 3-sur: x 480-780, y 400-560. En las otras dos, los patios de casi todas las manzanas.",
+   "que_se_ve": "Hay grandes manchas oliva de patio y solar con las rayas radiales de los lotes de 1936, en zonas sin casas alrededor o con una sola fila en un borde. El patio se derrama sobre terreno sin casas.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H10",
+   "regla": "R8",
+   "captura": "3-sur.png, 3-noreste_oblicua.png, 3-norte.png",
+   "donde": "3-sur: franja derecha (x 1000-1250, y 100-800), al este de Santa Rosalía. 3-noreste_oblicua: llano liso al centro-abajo (x 370-830, y 600-740). 3-norte: izquierda (x 0-250, y 380-680).",
+   "que_se_ve": "Grandes extensiones de suelo urbano liso sin manzanas. En 3-norte quedan tres trozos de fila de casas flotando en el llano.",
+   "contra_el_original": "Al este del Catuche, por Santa Rosalía hacia el Guaire (Cuadra Guzmán), Mestre deja terreno sin manzanas: campo, no suelo urbano. Junto al Catuche, entre Este 3 y Este 7, el plano lo deja sin edificar (con un cerro).",
+   "gravedad": "media"
+  },
+  {
+   "id": "H11",
+   "regla": "R8",
+   "captura": "3-oeste.png, 3-caroata.png, 3-general.png",
+   "donde": "El borde oeste, entre la ciudad y el campo de El Calvario (3-oeste x 600-980, y 160-800; 3-caroata x 0-700, y 170-660)",
+   "que_se_ve": "El borde del suelo urbano con el verde va en lóbulos y halos redondos que no siguen las manzanas. Hay suelo urbano sin casas y casas sueltas en la punta (3-caroata x 520-700, y 170-420).",
+   "gravedad": "media"
+  },
+  {
+   "id": "H13",
+   "regla": "R9, R7",
+   "captura": "3-este.png, 3-general.png",
+   "donde": "El rótulo «Candelaria» (3-este x≈960, y≈288; 3-general x≈1096, y≈397)",
+   "que_se_ve": "El rótulo cae en una esquina de suelo liso con algunas casas genéricas: no hay iglesia ni plaza.",
+   "contra_el_original": "El templo VI Candelaria y la Plaza de la Candelaria (D), ajardinada en verde, en Norte 13 / Este 1.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H14",
+   "regla": "R9",
+   "captura": "3-sur.png, 3-sur_oblicua.png, 3-general.png",
+   "donde": "El rótulo «Santa Rosalía» (3-sur x≈510, y≈250; 3-sur_oblicua x≈593, y≈770)",
+   "que_se_ve": "El rótulo cae dentro de una manzana de patio y casas genéricas, sin edificio de iglesia.",
+   "contra_el_original": "El templo IV Santa Rosalía está dibujado en Este 12 / Santa Rosalía.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H15",
+   "regla": "R9",
+   "captura": "3-norte.png, 3-plaza_baja.png",
+   "donde": "El rótulo «Las Mercedes» (3-norte x≈726, y≈729)",
+   "que_se_ve": "El rótulo cae dentro de una manzana con patio y casas genéricas, sin templo.",
+   "contra_el_original": "El templo IX Las Mercedes está dibujado al noroeste del centro (calle Mercedes).",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H16",
+   "regla": "R9, R7",
+   "captura": "3-plaza_cenital.png",
+   "donde": "El rótulo «Plaza El Venezolano» (x≈1030, y≈713) y «Casa natal del Libertador» (x≈940, y≈775), al sureste de la plaza",
+   "que_se_ve": "La plaza nombrada cae sobre techos de casas genéricas, sin espacio libre. La casa natal no tiene edificio propio: el rótulo cae sobre casas genéricas.",
+   "contra_el_original": "Plaza del Venezolano (B, verde) en Este 2 / San Jacinto; 24, «Casa donde nació Bolívar», al lado.",
+   "gravedad": "alta"
+  },
+  {
+   "id": "H17",
+   "regla": "R9",
+   "captura": "3-sur_oblicua.png, 3-noreste_oblicua.png, 3-general.png",
+   "donde": "El rótulo «Teatro Municipal» (3-sur_oblicua x≈294, y≈495; 3-noreste_oblicua x≈697, y≈280)",
+   "que_se_ve": "El rótulo cae en suelo liso o sobre casas genéricas, sin edificio de teatro.",
+   "contra_el_original": "Teatro Municipal (25) con su plaza (N) en Oeste 8, dibujado como edificio.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H18",
+   "regla": "R9",
+   "captura": "3-sur.png, 3-general.png",
+   "donde": "El rótulo «La Rotunda» (3-sur x≈222, y≈264) y «San Juan» (3-general x≈139, y≈695)",
+   "que_se_ve": "Los dos caen en una manzana vacía o sobre casas genéricas, sin edificio que los represente.",
+   "contra_el_original": "San Juan es templo parroquial (V), dibujado.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H19",
+   "regla": "R11, R3",
+   "captura": "3-plaza_baja.png, 3-plaza_cenital.png, 3-catuche_centro.png",
+   "donde": "Al norte de la Plaza Bolívar (cenital x 220-420, y 140-230 y x 560-640, y 240-300; en la vista baja, los bloques blancos de x 360-890, y 170-340) y el «Concejo Municipal» (vista baja x 0-345, y 400-640)",
+   "que_se_ve": "Hay bloques blancos y grises de tres o cuatro pisos con muchas ventanas y planta poligonal irregular que no sigue la calle. En cenital se ven como losas grises amorfas.",
+   "contra_el_original": "En 1889, la casa de patio colonial todavía, de uno o dos pisos (§ 3). El Consejo municipal (7) es un edificio de patio al sur de la plaza.",
+   "gravedad": "media"
+  },
+  {
+   "id": "H20",
+   "regla": "R11, R7",
+   "captura": "3-catuche_centro.png",
+   "donde": "Izquierda (x 40-185, y 380-660): losas grises en forma de C y amorfas dentro de manzanas. Bajo «Ministerio de Hacienda» (x 875-1020, y 480-630) y alrededor de Santa Capilla (x 750-1120, y 610-800).",
+   "que_se_ve": "Huellas grises de contorno orgánico, sin casas ni frente a la calle, que ocupan media manzana o más. No parecen edificios de 1889.",
+   "contra_el_original": "El plano dibuja manzanas edificadas con edificios rectangulares numerados (18 Mº de Hacienda, 16 y 17, etc.).",
+   "gravedad": "media"
+  },
+  {
+   "id": "H21",
+   "regla": "R2, R8",
+   "captura": "3-plaza_baja.png",
+   "donde": "Una línea vertical blanca en x≈650, desde la plaza (y≈540) hasta el borde de abajo",
+   "que_se_ve": "La línea recta cruza el suelo y los techos de las casas del primer plano. Es lo mismo que D6 de 1843.",
+   "gravedad": "baja"
+  },
+  {
+   "id": "H22",
+   "regla": "R6",
+   "captura": "3-general.png",
+   "donde": "Toda la ciudad",
+   "que_se_ve": "Las manzanas tienen muchas casas angostas, con filas interiores.",
+   "medido": "11.798 casas a la vista contra unas 9.900 de las fuentes (interpoladas de 8.194 en 1881 y 10.379 en 1891): 1,19 veces, por encima del ± 15 %. Mediana de 36 casas por cuadra del damero y frente medio de 15,08 m.",
+   "gravedad": "media"
+  }
+ ],
+ "tareas": [
+  {
+   "titulo": "1889-A · Referencia de 1889: manzanas, lotes libres, plazas y red de calles leídas de Mestre",
+   "reglas": [
+    "R7",
+    "R8",
+    "R4",
+    "R9"
+   ],
+   "hallazgos": [
+    "H10",
+    "H11",
+    "H13",
+    "H16",
+    "H17",
+    "H4",
+    "H7"
+   ],
+   "causa_probable": "1889 no tiene referencia: tools/geo/epocas.py construido_de_epoca() solo usa `referencia` (referencia_1843.mascara) cuando la época la trae; para 1889 cae al perfil de color de fuentes/derivados/1889/calzado.tif (edificado()), que no distingue plazas, lotes especiales ni el ancho de calle. Por eso el bloque `if e.get(\"referencia\")` de main() (fuera_de_la_referencia, en_lotes_libres, agregar_casas de tools/geo/epocas_1843.py) no corre en 1889 y tools/geo/referencias/ solo tiene 1772-* y 1843-manzanas.json.",
+   "donde_se_arregla": "Nuevo tools/geo/referencias/1889-manzanas.json (unidades: manzana edificada / plaza / lote especial / terreno libre, con su fuente en el plano) armado como el de 1843 (tools/geo/manzanas_1843.py, referencia_1843.py) sobre el calce de Mestre; `referencia` en la entrada de 1889 de la config de épocas para que epocas.py main() aplique fuera_de_la_referencia, en_lotes_libres y agregar_casas en la época 3. Red de calles de 1889 (ejes + ancho de clase: damero viejo / abiertas desde 1871) como tools/geo/referencias/1772-red.json.",
+   "como_se_mide": "tools/geo/reglas_mapa.py --epoca 1889: R7 = 0 manzanas edificadas de la referencia sin casas y 0 casas en plazas/lotes libres (puerta de T82.2); conteo de unidades de la referencia contra el plano (revisión a ojo por sector con capturas, como fase 4 de 08); medicion-1889.json antes/después y las de las otras épocas sin cambio (R12).",
+   "epocas_afectadas": [
+    "1889"
+   ],
+   "necesita_investigacion": "No externa: lectura del plano de Mestre (fuentes/mapas/1889-bnf-mestre) con su leyenda (plazas A–N, templos I–IX, edificios numerados). Sí confirmar en investigacion.json qué calles se abrieron desde 1871 (ancho 12 varas) para clasificar la red.",
+   "depende_de": [
+    "T82.2 (puertas R2, R5, R7–R12 en reglas_mapa.py)"
+   ]
+  },
+  {
+   "titulo": "1889-B · Calles de 1889 con su ancho y libres (abrir calles generalizado)",
+   "reglas": [
+    "R4",
+    "R2"
+   ],
+   "hallazgos": [
+    "H7"
+   ],
+   "causa_probable": "Las casas de 1889 son los lotes de 1936 que el plano calzado deja edificados (epocas.py nace()/fracciones() sobre construido_de_epoca); el desplazamiento del calce y la holgura_m de la máscara meten lotes en la calzada. La apertura de calles con ancho mínimo solo existe para 1772 (epocas.py abrir_calles_de_1772(), ceder_a_1772(), ceder_frentes_a_1772(), con la red 1772-red.json y calles-historicas.json); 1889 no tiene red ni ancho, y R4 da p10 4,26 m y 4.866 m de borde con calle < 4 m.",
+   "donde_se_arregla": "tools/geo/epocas.py: generalizar abrir_calles_de_1772/ceder_a_1772 a una época cualquiera con su red y su ancho mínimo (6,7 m en el damero viejo, 10 m en las abiertas desde 1871, specs/13 § 3), invocado para la época 3 con la red de 1889-A; tests en tools/geo/tests (TDD) antes del cambio.",
+   "como_se_mide": "reglas_mapa.py --epoca 1889: R4 p10 ≥ 6,7 m en el damero y ≥ 10 m en las calles de 1871; 0 m de borde con calle < 4 m; R2 0 invasiones de la calzada y red continua (tools/cubiertas.mjs --epoca 1889). Puertas de 1772 y 1843 iguales o mejores (R12).",
+   "epocas_afectadas": [
+    "1889",
+    "1843",
+    "1911"
+   ],
+   "necesita_investigacion": "Poca: las cifras ya están en specs/13 § 3 (6,7 m y 12 varas). Falta la lista de calles abiertas o ensanchadas entre 1871 y 1889 (investigacion.json, tema calles).",
+   "depende_de": [
+    "1889-A · Referencia de 1889",
+    "T82.2 (puerta R2)"
+   ]
+  },
+  {
+   "titulo": "1889-C · Solares de su época: una fila por frente y casas por cuadra de 1889 (F2 aplicado)",
+   "reglas": [
+    "R1",
+    "R6"
+   ],
+   "hallazgos": [
+    "H4",
+    "H22"
+   ],
+   "causa_probable": "Cada época hereda la subdivisión de 1936: las casas son los techos de tools/geo/vectorizar.py casas_por_lados() (lotes de 1936) que epocas.py nace() deja vivos por fracción edificada; nada agrupa lotes en solares de la época ni vacía el corazón de manzana. Las 59 manzanas «unidas» vienen de casas que cruzan calles tapadas (ver 1889-B). Resultado: 2.261 casas en segunda fila (19,2 %), 11.798 casas contra ~9.900 de las fuentes (1,19 ×), mediana de 36 casas por cuadra.",
+   "donde_se_arregla": "El diseño de F2 (specs/13 § 6): en tools/geo/epocas.py (o un tools/geo/solares.py nuevo) agrupar los lotes de 1936 de cada frente en solares del tamaño de la época, una casa de patio por solar sobre la línea de fachada (tools/geo/alas.py repartir con el fondo de la época), y quitar las casas de segunda fila (sin_techos) salvo callejón dibujado; aplicado a la época 3 con los valores de 1889.",
+   "como_se_mide": "reglas_mapa.py --epoca 1889: R1 = 0 casas en segunda fila (o límites en specs/reglas/limites-1889.json por callejón dibujado); R6 total dentro de 9.900 ± 15 % (8.415–11.385), casas por cuadra y frente medio en el rango de la época; 0 manzanas unidas. Capturas 3-plaza_baja y 3-este con el corazón de manzana libre.",
+   "epocas_afectadas": [
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "Sí (§ 2.1): specs/13 § 3 no tiene casas por manzana ni frente de casa para 1889 («—»). Buscar en los censos de 1881/1891 por parroquia y en fuentes de catastro o planos de manzana de fin de siglo; si no hay, inferir de 1772/1936 con el razonamiento registrado.",
+   "depende_de": [
+    "F2 · diseño de la corrección de fondo (specs/13 § 6), aprobado por el responsable",
+    "1889-A · Referencia de 1889",
+    "1889-B · Calles de 1889 con su ancho"
+   ]
+  },
+  {
+   "titulo": "1889-D · Casas alineadas y paralelas a su calle en 1889",
+   "reglas": [
+    "R3"
+   ],
+   "hallazgos": [
+    "H6"
+   ],
+   "causa_probable": "La alineación de frentes (epocas.py alinear_1772(), cerrar_aberturas_1772(), con tools/geo/fachadas.py y GIRO_MAXIMO_GRADOS) solo corre para 1772; en 1889 las casas conservan el giro de su lote de 1936 y el marco que les da tools/geo/alas.py marco_de_casa()/orientar_a_una_calle() contra calles72, que en San Juan/El Guarataro no existen. 923 de 9.537 giradas > 5°, con casos de 45° (techos 21023, 4839, 4857).",
+   "donde_se_arregla": "tools/geo/epocas.py: generalizar alinear_1772 a una época con su red (la de 1889-A) y aplicarlo después de abrir calles; alas.py marco_de_casa con la red de la época en vez de calles72. Test primero con los techos 21023, 4839 y 4857.",
+   "como_se_mide": "reglas_mapa.py --epoca 1889: R3 retiro ≤ 0,5 m y giro ≤ GIRO_MAXIMO_GRADOS en todas las casas del frente (0 giradas > 5° salvo límite); captura 3-caroata (San Juan) y 3-plaza_cenital sin bloques oblicuos.",
+   "epocas_afectadas": [
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No.",
+   "depende_de": [
+    "1889-B · Calles de 1889 con su ancho",
+    "1889-C · Solares de su época"
+   ]
+  },
+  {
+   "titulo": "Fachada solo a la calle: patio con corredor y puerta, medianeras ciegas (F3)",
+   "reglas": [
+    "R5"
+   ],
+   "hallazgos": [
+    "H5"
+   ],
+   "causa_probable": "src/alzado.js paredes()/tramoDePared(): `conVanos` depende solo de la altura (bajo >= ALTO_MINIMO_CON_VANOS_M) y no de `aLaCalle`, así que toda pared exterior de la huella —medianeras y caras al patio o al vecino— recibe ventanas y portón; `aLaCalle` (daALaCalle con libres de src/ciudad.js libresDelMarco) solo decide pretil, alto de piso y alero. El shader (src/shader/vanos.js, src/shader/fachada.js) pinta el portón de calle en cualquier cara con vanos.",
+   "donde_se_arregla": "src/alzado.js: pasar a la pared el tipo de cara (calle / patio / medianera) y dar vanos de fachada solo a la calle, una puerta de corredor hacia el patio y medianera ciega; src/shader/vanos.js y fachada.js leen ese tipo. Tests de geometría en tests/unit (alzado) primero.",
+   "como_se_mide": "Test de la geometría: 0 caras que no estén sobre la línea de fachada con portón o ventanas de calle; medianeras sin vanos; puerta al patio. Capturas a pie y 3-plaza_baja de todas las épocas antes/después; prueba a mano del responsable.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Ya hecha en F0 (tema tipología de la casa en investigacion.json); revisar que cubra qué abre al patio en la casa republicana de 1889.",
+   "depende_de": [
+    "T82.2 (puerta R5)"
+   ]
+  },
+  {
+   "titulo": "Agua continua: Caroata y Catuche de punta a punta, con su corredor libre",
+   "reglas": [
+    "R10",
+    "R2"
+   ],
+   "hallazgos": [
+    "H1",
+    "H2",
+    "H3"
+   ],
+   "causa_probable": "El agua del sitio es solo la clase AGUA de la segmentación de 1936 (tools/geo/segmentar_clases.py AGUA=7 → tools/suelo-lib.mjs canal R de uSuelo; epocas.py canales_del_valle() con AGUA_MINIMA para el monte), y la hoja la dibuja con ella (src/shader/papel.js aguasEn, src/shader/suelo.js BARRO por s.r). Donde el plano de 1936 pinta el cauce angosto, bajo puentes o tapado por rótulos, la segmentación lo pierde: el Caroata termina en V en el campo y el Catuche se corta al salir de la mancha verde. No hay red de cauces por época ni corredor que quite casas (epocas.py no tiene paso de cauce), por eso hay casas sobre el rastro (H2). Mismo defecto que D5/D10 de 1843.",
+   "donde_se_arregla": "Una referencia de cauces (tools/geo/referencias/cauces.json: polilíneas del Caroata, Catuche, Anauco y Guaire con ancho y vida por época, de Mestre y 1936 calzados) rasterizada en el canal R de uSuelo (tools/suelo.mjs / suelo-lib.mjs) y en canales_del_valle; en tools/geo/epocas.py, un paso que quita (sin_techos) o pasa de época las casas sobre el corredor del cauce.",
+   "como_se_mide": "Puerta R10 de reglas_mapa.py (T82.2): cada cauce continuo de su naciente al Guaire y 0 casas sobre su corredor, en todas las épocas. Capturas 3-oeste, 3-caroata, 3-norte y 3-general con el cauce a la vista.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí: el curso del Caroata y del Catuche en cada época y sus puentes (tema agua de investigacion.json ya trae el Caroata continuo y su embaulado de 1942–1945; falta el Catuche y los puentes de 1889).",
+   "depende_de": [
+    "T82.2 (puerta R10)"
+   ]
+  },
+  {
+   "titulo": "Patios y solares solo dentro de casas de la época",
+   "reglas": [
+    "R8"
+   ],
+   "hallazgos": [
+    "H9"
+   ],
+   "causa_probable": "tools/geo/alas.py repartir() llena el lote de 1936 entero hasta el fondo con PATIO y SOLAR, y src/alas.js lo techa como CUBIERTA.PATIO/SOLAR (src/shader/techo.js pisoDePatio): un lote de 1936 hondo o una casa sola en el borde de la manzana deja una mancha oliva con las rayas de los lotes de 1936 sobre terreno sin casas. Además src/shader/suelo.js pinta patio con s.a·(1−s.b) de la manzana de 1936 gateado solo por edificadoDesde (crece R), no por las casas vivas.",
+   "donde_se_arregla": "tools/geo/alas.py: el solar acotado al fondo de lote de la época (43–63 m, specs/13 § 3) y sin solar cuando la casa no tiene vecinas de su época; con F2, el solar es el de la casa de la época. src/shader/suelo.js: el patio del suelo solo bajo casas de la época que rige.",
+   "como_se_mide": "Puerta R8 de reglas_mapa.py: 0 píxeles de patio o solar fuera de casas de la época. Capturas 3-este, 3-sur, 3-plaza_cenital y 3-catuche_centro sin manchas oliva sueltas.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No.",
+   "depende_de": [
+    "T82.2 (puerta R8)",
+    "1889-C · Solares de su época"
+   ]
+  },
+  {
+   "titulo": "Suelo urbano solo donde hay ciudad de 1889 y borde que sigue a las manzanas",
+   "reglas": [
+    "R8",
+    "R7"
+   ],
+   "hallazgos": [
+    "H10",
+    "H11"
+   ],
+   "causa_probable": "Lo urbanizado de cada época sale de valle.urbanizado() (tools/geo/valle.py, con cierre_m, holgura_m y hueco del config `urbanizado`) aplicado a la máscara de color de construido_de_epoca() (tools/geo/epocas.py urbanizados()): la holgura y el cierre hacen lóbulos y halos redondos alrededor de casas sueltas y cubren de tierra urbana zonas que Mestre deja sin manzanas (al este de Santa Rosalía, junto al Catuche). En src/shader/suelo.js, `urbano` lee la manzana de 1936 (uSuelo A, mip 5) sin gatear por la época. Las casas sueltas flotando (3-norte, punta de 3-caroata) son lotes de 1936 fuera de toda manzana de 1889, que no pasa por fuera_de_la_referencia por falta de referencia.",
+   "donde_se_arregla": "tools/geo/epocas.py urbanizados()/construido_de_epoca(): para 1889, lo urbanizado desde las manzanas de la referencia 1889-A (con su media calle) en vez del color con holgura; fuera_de_la_referencia (tools/geo/epocas_1843.py) aplicado a 1889 para las casas sueltas; src/shader/suelo.js: `urbano` gateado por la época.",
+   "como_se_mide": "Puerta R8: área de suelo urbano sin manzana a más de media cuadra ≤ umbral fijado en F1; 0 casas fuera de toda unidad de la referencia. Capturas del borde (3-oeste, 3-caroata, 3-sur, 3-norte, 3-noreste_oblicua) sin halos ni escalones.",
+   "epocas_afectadas": [
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No (lectura del plano).",
+   "depende_de": [
+    "1889-A · Referencia de 1889",
+    "T82.2 (puertas R7 y R8)"
+   ]
+  },
+  {
+   "titulo": "Iglesias en pie sin edificio: Candelaria, Santa Rosalía, Las Mercedes y San Juan",
+   "reglas": [
+    "R9",
+    "R11"
+   ],
+   "hallazgos": [
+    "H13",
+    "H14",
+    "H15",
+    "H18"
+   ],
+   "causa_probable": "Las marcas existen en src/marcas-datos.js (candelaria, santa-rosalia, las-mercedes, san-juan) pero no hay hito: src/hitos/datos/iglesias.js iglesiaEn() solo define altagracia, santa-capilla, santa-teresa y la-pastora. Sin hito, la marca cae sobre casas genéricas o suelo liso. Es D9 de 1843 en 1889.",
+   "donde_se_arregla": "src/hitos/datos/iglesias.js: una entrada iglesiaEn por templo (posición y eje del plano de 1936 y de Mestre, nace/muere con fuente; Las Mercedes como ruina o capilla según D8 en 1843); el hito suprime las casas bajo su planta (tools/hitos-planta.mjs → epocas.py). Ajustar x/y de la marca en src/marcas-datos.js al hito.",
+   "como_se_mide": "Puerta R9: 0 marcas de edificio sobre casas genéricas o en la calle en 1889 (y en las épocas donde viven); R11 vida del hito contra su fecha con fuente. Capturas 3-este, 3-sur, 3-norte, 3-general.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí: fechas y planta de cada templo (Santa Rosalía 1730, Candelaria 1708, Las Mercedes reconstruida hacia 1857, San Juan / Capuchinos) en investigacion.json tema edificios; completar lo que falte con fuentes antes de modelar.",
+   "depende_de": [
+    "T82.2 (puerta R9)"
+   ]
+  },
+  {
+   "titulo": "Plazas de 1889 libres y edificios civiles con su hito: Venezolano, Candelaria, Teatro Municipal, casa natal, La Rotunda",
+   "reglas": [
+    "R9",
+    "R7"
+   ],
+   "hallazgos": [
+    "H13",
+    "H16",
+    "H17",
+    "H18"
+   ],
+   "causa_probable": "Las plazas solo se despejan para 1772 (epocas.py despejar_plazuelas_de_1772() con tools/geo/plazuelas.py) y en las épocas con referencia (en_lotes_libres de epocas_1843.py); en 1889 la Plaza del Venezolano (B), la de la Candelaria (D) y la del Teatro (N) quedan con las casas de 1936. El Teatro Municipal, la casa natal y la cárcel (La Rotunda) tienen marca (src/marcas-datos.js teatro/plaza-san-pablo, casa-natal, rotunda) pero ningún hito en src/hitos/datos/civiles.js.",
+   "donde_se_arregla": "Plazas: como lotes libres de la referencia 1889-A (en_lotes_libres en la época 3). Edificios: entradas en src/hitos/datos/civiles.js (planta del plano, nace/muere con fuente) o, si no hay planta con fuente, límite «hito pendiente» en specs/reglas/limites-1889.json y la marca movida a su manzana.",
+   "como_se_mide": "Puertas R7 (0 casas en plazas) y R9 (0 marcas sobre casas genéricas o límite registrado) en 1889; captura 3-plaza_cenital con la Plaza El Venezolano libre.",
+   "epocas_afectadas": [
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "Sí: Teatro Guzmán Blanco/Municipal (1881) y su planta, la Cárcel de 1889 (¿«La Rotunda» ya en 1889?, la marca tiene esa duda), la casa natal como casa (no hito propio). Fuentes en investigacion.json tema edificios.",
+   "depende_de": [
+    "1889-A · Referencia de 1889",
+    "T82.2 (puertas R7 y R9)"
+   ]
+  },
+  {
+   "titulo": "Edificios públicos de 1936 en épocas anteriores: sin bloques modernos ni losas amorfas",
+   "reglas": [
+    "R11",
+    "R7",
+    "R3"
+   ],
+   "hallazgos": [
+    "H19",
+    "H20"
+   ],
+   "causa_probable": "tools/geo/estilos.py asignar(): `if estilo == ESTILO['publico']` deja cada edificio público tal como lo sacó tools/geo/vectorizar.py techos_publicos() (huella de 1936 sin regularizar, pisos de 1936) con la misma historia en las seis épocas; su vida sale de la fracción edificada (epocas.py nace()), así un bloque de 1936 de tres o cuatro pisos y planta poligonal aparece en 1889. src/techos.js lo techa con azotea desde 1889 (estilo PUBLICO) y src/shader/fachada.js lo pinta piedra clara con muchas ventanas. Es la losa gris del «Concejo Municipal» y de Hacienda / Santa Capilla.",
+   "donde_se_arregla": "tools/geo/estilos.py asignar() y tools/geo/epocas.py: un edificio público sin hito histórico nace en 1936 (o en su fecha con fuente); antes, su lugar lo ocupan casas de la época (subdividido por frentes con alas.py) o queda libre según la referencia. Los que sí existían en 1889 (Concejo, Hacienda: leyenda de Mestre 7, 16, 17, 18) van como hito en src/hitos/datos/civiles.js.",
+   "como_se_mide": "Puerta R11: 0 edificios con estilo público fuera de su vida con fuente; 0 casas de 3+ pisos antes de 1911 (estilos.histograma por época). Capturas 3-plaza_baja, 3-plaza_cenital y 3-catuche_centro sin bloques blancos ni losas grises.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "Sí: qué edificios públicos estaban en pie en 1889 en esas manzanas y su forma (leyenda de Mestre; tema edificios de investigacion.json).",
+   "depende_de": [
+    "T82.2 (puerta R11)",
+    "1889-C · Solares de su época"
+   ]
+  },
+  {
+   "titulo": "Plaza Bolívar de 1889 entera ajardinada (mancha beige en la mitad norte)",
+   "reglas": [
+    "R8",
+    "R7"
+   ],
+   "hallazgos": [
+    "H8"
+   ],
+   "causa_probable": "A diagnosticar. La plaza la arma el hito src/hitos/datos/plaza-bolivar.js (JARDIN desde la época 3, suprime el rectángulo); la mancha irregular con borde punteado tiene la misma textura que las losas de los edificios públicos y patios de 1936, así que lo probable es una pieza de suelo de otra capa (losa de un techo público o un patio/solar de alas que el `suprime` no cubre, o el piso de tierra del MERCADO que no muere a tiempo) dibujada sobre los canteros.",
+   "donde_se_arregla": "Según el diagnóstico: src/hitos/datos/plaza-bolivar.js (canteros y caminos de la mitad norte) o tools/geo/epocas.py / tools/hitos-planta.mjs (que el suprime de la plaza quite toda pieza dentro de su planta).",
+   "como_se_mide": "Puerta R7/R8: 0 techos, patios ni losas dentro de la planta de plaza-bolivar en 1889; captura 3-plaza_cenital con los cuatro cuadros de césped y los caminos diagonales completos.",
+   "epocas_afectadas": [
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No externa; diagnóstico en el visor (qué objeto es la mancha).",
+   "depende_de": []
+  },
+  {
+   "titulo": "Línea vertical blanca que cruza suelo y techos al sur de la plaza",
+   "reglas": [
+    "R2",
+    "R8"
+   ],
+   "hallazgos": [
+    "H21"
+   ],
+   "causa_probable": "A diagnosticar (es D6 de 1843). Una recta perfecta que cruza suelo y techos apunta a una costura de render, no de datos: el borde de una baldosa de casas (src/baldosas.js / ciudad-pedido.js) o de un nivel del plano (src/plano-niveles.js), o una costura del mosaico en clases-costura.png que entra en uSuelo/uRotulos.",
+   "donde_se_arregla": "Donde nazca la costura según el diagnóstico (src/baldosas.js, src/plano-niveles.js, src/shader/suelo.js o el paso `suelo` de tools/datos-pasos.mjs).",
+   "como_se_mide": "Captura 3-plaza_baja (y la vista baja de 1843) sin la línea; test de unidad del borde de baldosa o de nivel si la causa es lógica.",
+   "epocas_afectadas": [
+    "1843",
+    "1889"
+   ],
+   "necesita_investigacion": "No externa; diagnóstico en el visor.",
+   "depende_de": []
+  }
+ ]
+}

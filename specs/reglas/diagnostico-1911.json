@@ -1,0 +1,565 @@
+{
+ "alcance": "Diagnóstico de las reglas de construcción (specs/13) en la época: hallazgos de la revisión visual sobre las capturas fijas y el plano original, los que el verificador no pudo refutar (confirmados) y las tareas propuestas. Capturas de caracas.city, datos-2026-11-25-09ba9f7.",
+ "fecha": "2026-11-25",
+ "workflow": "specs/reglas/workflows/diagnostico-epocas.js (run wf_501830e2-601)",
+ "año": 1911,
+ "hallazgos": [
+  {
+   "id": "1911-01",
+   "regla": "R10",
+   "captura": "4-oeste.png, 4-caroata.png, 4-general.png",
+   "donde": "Oeste del casco: el cauce azul del Caroata entra por la izquierda y termina en una V en medio del campo verde (4-oeste ~x 0-345, y 400-545; 4-caroata ~x 0-130, y 170-270). En 4-general el rótulo «Quebrada Caroata» (~308,745) cae entre manzanas del suroeste sin agua a la vista.",
+   "que_se_ve": "El Caroata se corta en el campo y no llega ni atraviesa la ciudad; en el casco no hay ningún tramo de agua donde está su rótulo. Es D5 de 1843 repetido en 1911.",
+   "contra_el_original": "Razetti 1911 dibuja el Caroata continuo de norte (Agua Salud / Caño Amarillo) a sur por el oeste del casco hasta el Guaire, con los puentes VII-XI listados «Sobre Caroata» (Puente Caracas, Macgregor, Viaducto Unión, Mariño...).",
+   "gravedad": "alta",
+   "medido": "R10 pendiente en medicion-1911.json (no hay cifra)."
+  },
+  {
+   "id": "1911-02",
+   "regla": "R10",
+   "captura": "4-norte.png, 4-catuche_centro.png, 4-noreste_oblicua.png",
+   "donde": "Norte del casco, junto al Panteón Nacional: la franja verde de la Quebrada Catuche (4-norte ~x 470-1000, y 150-560) se acaba en manchas sueltas a la altura del rótulo (~860,480); más al sur, en 4-catuche_centro, no hay cauce alguno entre Altagracia y Santa Capilla.",
+   "que_se_ve": "El Catuche es un corredor verde que se corta y queda en un islote verde separado (~910-990, 440-550); no corre continuo hacia el sur dentro de la ciudad.",
+   "contra_el_original": "El plano de 1911 dibuja la Quebrada Catuche bajando desde el norte (Cotiza / Sabana del Blanco) y atravesando el casco hacia el sur, con los puentes XXV-XXX «Sobre Catuche» (Carlos III, 9 de Febrero, Trinidad, Páez...).",
+   "gravedad": "alta",
+   "medido": "R10 pendiente (sin cifra)."
+  },
+  {
+   "id": "1911-03",
+   "regla": "R9",
+   "captura": "4-este.png, 4-general.png",
+   "donde": "Este: pin de «Candelaria» (4-este ~960,288; 4-general ~1096,397).",
+   "que_se_ve": "El pin cae sobre suelo urbano liso junto a unas pocas casas genéricas; no hay edificio de iglesia ni plaza que lo represente.",
+   "contra_el_original": "Razetti 1911 lista la Candelaria entre los templos (4, Av. E.) y la Plaza Candelaria (L, Av. E.), en la manzana con la iglesia marcada en rojo.",
+   "gravedad": "alta",
+   "medido": "R9 pendiente."
+  },
+  {
+   "id": "1911-04",
+   "regla": "R9",
+   "captura": "4-sur.png, 4-sur_oblicua.png",
+   "donde": "Sur: pin de «Santa Rosalía» (4-sur ~510,249; 4-sur_oblicua ~593,770).",
+   "que_se_ve": "El pin cae sobre una manzana de patios oliva con casas genéricas en el borde; no hay templo.",
+   "contra_el_original": "Templo (5) Santa Rosalía, S. 1, en pie en 1911 y nombrado en el plano (letrero «Santa Rosalía» sobre la parroquia).",
+   "gravedad": "alta",
+   "medido": "R9 pendiente."
+  },
+  {
+   "id": "1911-05",
+   "regla": "R9",
+   "captura": "4-sur.png",
+   "donde": "Suroeste del encuadre: pin «La Rotunda» (~222,263).",
+   "que_se_ve": "El pin cae en el borde de una calle/suelo liso entre manzanas, sin edificio que represente la cárcel.",
+   "contra_el_original": "La cárcel de La Rotunda estaba en pie en 1911 (demolida en 1936); debería caer sobre un hito o edificio.",
+   "gravedad": "media",
+   "medido": "R9 pendiente."
+  },
+  {
+   "id": "1911-06",
+   "regla": "R9",
+   "captura": "4-plaza_cenital.png",
+   "donde": "Sureste de la Plaza Bolívar: pin «Plaza El Venezolano» (~1030,713).",
+   "que_se_ve": "La plaza nombrada no está libre: el pin cae sobre una manzana cubierta de techos de casas genéricas.",
+   "contra_el_original": "Razetti lista la plaza «El Venezolano» (R, E. 2) como espacio abierto.",
+   "gravedad": "media",
+   "medido": "R9 pendiente."
+  },
+  {
+   "id": "1911-07",
+   "regla": "R8",
+   "captura": "4-sur.png, 4-este.png, 4-caroata.png, 4-norte.png",
+   "donde": "4-sur centro (~480-800, 400-600) y abajo-centro (~560-760, 620-730); 4-este centro (~450-720, 500-690); 4-caroata (~620-760, 620-720); 4-norte gran manzana central (~480-680, 560-720).",
+   "que_se_ve": "Manchas de patio/solar oliva con las rayas de los lotes de 1936 que se extienden por zonas sin casas alrededor: el patio no está dentro de ninguna casa de la época (D2 repetido).",
+   "contra_el_original": "En Razetti esas manzanas del sur (Santa Rosalía) y del este (Candelaria) están dibujadas como manzanas grises edificadas completas, no como solares abiertos.",
+   "gravedad": "alta",
+   "medido": "R8 pendiente."
+  },
+  {
+   "id": "1911-08",
+   "regla": "R7",
+   "captura": "4-este.png, 4-sur.png, 4-noreste_oblicua.png",
+   "donde": "4-este centro-izquierda (~400-620, 330-470): una manzana entera de suelo liso sin casas; 4-sur (~270-440, 370-480) y la cuadra al este de ella; 4-noreste_oblicua abajo-centro (~480-1000, 620-800), un espacio enorme sin casas con una mancha verde, al oeste del Catuche cerca del Panteón.",
+   "que_se_ve": "Manzanas céntricas del damero vacías o casi vacías, solo suelo urbano liso (D1 repetido).",
+   "contra_el_original": "Razetti 1911 dibuja todo el damero entre Catuche y Anauco y hacia Santa Rosalía como manzanas grises edificadas; no hay huecos de esa escala dentro del casco.",
+   "gravedad": "alta",
+   "medido": "R7 pendiente."
+  },
+  {
+   "id": "1911-09",
+   "regla": "R8",
+   "captura": "4-oeste.png, 4-general.png, 4-norte.png",
+   "donde": "4-oeste: manchas beige aisladas en el campo (~165-255, 135-200; ~105-155, 333-385; ~160-200, 380-412) y borde de la ciudad en escalera con halos (~600-960, 380-700); 4-general: halos beige al oeste (~0-110, 300-470) y al sureste (~1100-1280, 580-720); 4-norte: franja izquierda (~0-260, 200-660) de suelo urbano liso con casas sueltas flotando (~55-190, 480-580).",
+   "que_se_ve": "Suelo urbano sin manzana en pleno campo, bordes en escalones y halos redondos alrededor de casas sueltas (D3 repetido).",
+   "contra_el_original": "En Razetti al oeste (El Calvario, Colombia, Agua Salud) hay laderas con curvas de nivel y sin manzanas; el borde de la ciudad es el de las manzanas grises.",
+   "gravedad": "media",
+   "medido": "R8 pendiente."
+  },
+  {
+   "id": "1911-10",
+   "regla": "R1",
+   "captura": "4-catuche_centro.png, 4-este.png, 4-sur.png",
+   "donde": "4-catuche_centro: fila de casas en el corazón de la manzana al oeste de Altagracia (~620-750, 490-545) y franja interior en la manzana de la izquierda (~330-460, 470-520); 4-este: fila interior (~130-250, 535-575); 4-sur: casas sueltas dentro de manzanas (~600-640, 400-440).",
+   "que_se_ve": "Segundas filas de casas paralelas a la calle dentro de la manzana, detrás de la crujía del frente.",
+   "contra_el_original": "Las manzanas de 1911 son anillos de casas sobre la calle; el plano no dibuja callejones interiores en esas cuadras.",
+   "gravedad": "alta",
+   "medido": "R1: 2.003 casas en segunda fila de 14.195 (14,1 %); umbral 0."
+  },
+  {
+   "id": "1911-11",
+   "regla": "R3",
+   "captura": "4-caroata.png, 4-oeste.png, 4-sur_oblicua.png",
+   "donde": "Suroeste (San Juan / El Calvario sur): 4-caroata (~0-260, 590-900 y ~460-680, 380-560), 4-oeste (~620-820, 530-830).",
+   "que_se_ve": "Casas sueltas, giradas en todas direcciones y corridas de la línea de fachada, fragmentos sin frente continuo.",
+   "contra_el_original": "Razetti dibuja en San Juan manzanas regulares grises con frentes continuos sobre las calles y la Avenida Oeste.",
+   "gravedad": "alta",
+   "medido": "R3: 1.981 giradas > 5° de 12.192 del frente (umbral 0); muchas a 45°."
+  },
+  {
+   "id": "1911-12",
+   "regla": "R4",
+   "captura": "4-norte.png, 4-caroata.png",
+   "donde": "4-norte: pasaje diagonal entre casas (~515-690, 340-545); 4-caroata: calles entre filas pegadas en el suroeste (~500-650, 380-560).",
+   "que_se_ve": "Corredores de pocos metros entre fachadas enfrentadas, más angostos que una calle.",
+   "contra_el_original": "1911: 6,7 m en el damero viejo y 14,6-17,4 m en las calles nuevas (§3).",
+   "gravedad": "media",
+   "medido": "R4: p10 4,42 m; 5.972 m de borde con calle de 2-4 m y 364 m de 0-2 m (bajo el mínimo de 6,7 m)."
+  },
+  {
+   "id": "1911-13",
+   "regla": "R2",
+   "captura": "4-plaza_baja.png",
+   "donde": "Primer plano, al sur de la plaza: línea vertical blanca (~x 645-655, y 550-900).",
+   "que_se_ve": "Una línea recta clara que corta techos y casas de arriba abajo (D6 repetido).",
+   "contra_el_original": "No corresponde a ninguna calle ni elemento del plano.",
+   "gravedad": "media",
+   "medido": "R2 pendiente."
+  },
+  {
+   "id": "1911-14",
+   "regla": "R7",
+   "captura": "4-catuche_centro.png, 4-plaza_cenital.png",
+   "donde": "4-catuche_centro: huella gris en C al este de Miraflores (~60-185, 380-490) y gran mancha gris irregular junto a Santa Capilla (~740-1120, 615-830); 4-plaza_cenital: manchas grises al norte de la plaza (~210-430, 130-230; ~555-640, 238-300).",
+   "que_se_ve": "Superficies grises planas con contorno blando, que no siguen la manzana ni la línea de fachada y ocupan cuadras enteras sin casas.",
+   "contra_el_original": "Razetti dibuja ahí manzanas grises edificadas con edificios públicos en rojo de contorno recto; no hay vacíos amorfos.",
+   "gravedad": "media",
+   "medido": "R7 pendiente."
+  },
+  {
+   "id": "1911-15",
+   "regla": "R5",
+   "captura": "4-plaza_baja.png",
+   "donde": "Primer plano, filas de casas al sur de la plaza (~380-650, 540-760) y derecha (~1080-1200, 600-750).",
+   "que_se_ve": "Caras laterales entre casas vecinas (medianeras) con ventanas y puertas, y casas que dan ventanas a su propio fondo.",
+   "contra_el_original": "Las medianeras son ciegas; la fachada va solo a la calle.",
+   "gravedad": "media",
+   "medido": "R5 pendiente."
+  },
+  {
+   "id": "1911-16",
+   "regla": "R9",
+   "captura": "4-catuche_centro.png",
+   "donde": "Pin de «Altagracia» (~925,425).",
+   "que_se_ve": "El pin queda en el borde de la calle, junto al edificio rojo y no sobre él.",
+   "contra_el_original": "Altagracia (3), N. 4, en pie.",
+   "gravedad": "baja",
+   "medido": "R9 pendiente."
+  },
+  {
+   "id": "1911-17",
+   "regla": "R10",
+   "captura": "4-este.png",
+   "donde": "Río Anauco (~1090-1280, 330-500): entre las dos franjas verdes.",
+   "que_se_ve": "El corredor verde del Anauco se corta y queda suelo urbano beige con casas cerca (~1040-1140, 330-390); el cauce casi no se ve en ese tramo.",
+   "contra_el_original": "Razetti dibuja el Anauco continuo hasta el Guaire, con puente XLV sobre él.",
+   "gravedad": "baja",
+   "medido": "R10 pendiente."
+  },
+  {
+   "id": "1911-18",
+   "regla": "R6",
+   "captura": "4-general.png",
+   "donde": "Toda la ciudad.",
+   "que_se_ve": "Casas por cuadra y total por encima de las fuentes; manzanas del centro llenas de casas chicas.",
+   "contra_el_original": "§3: 11.300-13.000 casas en 1911 (inferido).",
+   "gravedad": "baja",
+   "medido": "R6: 14.195 casas (1,1-1,3 ×); 36 casas por cuadra del damero (mediana); frente medio 16,73 m; 64 manzanas unidas con 7.657 casas."
+  }
+ ],
+ "confirmados": [
+  {
+   "id": "1911-01",
+   "regla": "R10",
+   "captura": "4-oeste.png, 4-caroata.png, 4-general.png",
+   "donde": "Oeste del casco: el cauce azul del Caroata entra por la izquierda y termina en una V en medio del campo verde (4-oeste ~x 0-345, y 400-545; 4-caroata ~x 0-130, y 170-270). En 4-general el rótulo «Quebrada Caroata» (~308,745) cae entre manzanas del suroeste sin agua a la vista.",
+   "que_se_ve": "El Caroata se corta en el campo y no llega ni atraviesa la ciudad; en el casco no hay ningún tramo de agua donde está su rótulo. Es D5 de 1843 repetido en 1911.",
+   "contra_el_original": "Razetti 1911 dibuja el Caroata continuo de norte (Agua Salud / Caño Amarillo) a sur por el oeste del casco hasta el Guaire, con los puentes VII-XI listados «Sobre Caroata» (Puente Caracas, Macgregor, Viaducto Unión, Mariño...).",
+   "gravedad": "alta",
+   "medido": "R10 pendiente en medicion-1911.json (no hay cifra)."
+  },
+  {
+   "id": "1911-02",
+   "regla": "R10",
+   "captura": "4-norte.png, 4-catuche_centro.png, 4-noreste_oblicua.png",
+   "donde": "Norte del casco, junto al Panteón Nacional: la franja verde de la Quebrada Catuche (4-norte ~x 470-1000, y 150-560) se acaba en manchas sueltas a la altura del rótulo (~860,480); más al sur, en 4-catuche_centro, no hay cauce alguno entre Altagracia y Santa Capilla.",
+   "que_se_ve": "El Catuche es un corredor verde que se corta y queda en un islote verde separado (~910-990, 440-550); no corre continuo hacia el sur dentro de la ciudad.",
+   "contra_el_original": "El plano de 1911 dibuja la Quebrada Catuche bajando desde el norte (Cotiza / Sabana del Blanco) y atravesando el casco hacia el sur, con los puentes XXV-XXX «Sobre Catuche» (Carlos III, 9 de Febrero, Trinidad, Páez...).",
+   "gravedad": "alta",
+   "medido": "R10 pendiente (sin cifra)."
+  },
+  {
+   "id": "1911-03",
+   "regla": "R9",
+   "captura": "4-este.png, 4-general.png",
+   "donde": "Este: pin de «Candelaria» (4-este ~960,288; 4-general ~1096,397).",
+   "que_se_ve": "El pin cae sobre suelo urbano liso junto a unas pocas casas genéricas; no hay edificio de iglesia ni plaza que lo represente.",
+   "contra_el_original": "Razetti 1911 lista la Candelaria entre los templos (4, Av. E.) y la Plaza Candelaria (L, Av. E.), en la manzana con la iglesia marcada en rojo.",
+   "gravedad": "alta",
+   "medido": "R9 pendiente."
+  },
+  {
+   "id": "1911-04",
+   "regla": "R9",
+   "captura": "4-sur.png, 4-sur_oblicua.png",
+   "donde": "Sur: pin de «Santa Rosalía» (4-sur ~510,249; 4-sur_oblicua ~593,770).",
+   "que_se_ve": "El pin cae sobre una manzana de patios oliva con casas genéricas en el borde; no hay templo.",
+   "contra_el_original": "Templo (5) Santa Rosalía, S. 1, en pie en 1911 y nombrado en el plano (letrero «Santa Rosalía» sobre la parroquia).",
+   "gravedad": "alta",
+   "medido": "R9 pendiente."
+  },
+  {
+   "id": "1911-05",
+   "regla": "R9",
+   "captura": "4-sur.png",
+   "donde": "Suroeste del encuadre: pin «La Rotunda» (~222,263).",
+   "que_se_ve": "El pin cae en el borde de una calle/suelo liso entre manzanas, sin edificio que represente la cárcel.",
+   "contra_el_original": "La cárcel de La Rotunda estaba en pie en 1911 (demolida en 1936); debería caer sobre un hito o edificio.",
+   "gravedad": "media",
+   "medido": "R9 pendiente."
+  },
+  {
+   "id": "1911-06",
+   "regla": "R9",
+   "captura": "4-plaza_cenital.png",
+   "donde": "Sureste de la Plaza Bolívar: pin «Plaza El Venezolano» (~1030,713).",
+   "que_se_ve": "La plaza nombrada no está libre: el pin cae sobre una manzana cubierta de techos de casas genéricas.",
+   "contra_el_original": "Razetti lista la plaza «El Venezolano» (R, E. 2) como espacio abierto.",
+   "gravedad": "media",
+   "medido": "R9 pendiente."
+  },
+  {
+   "id": "1911-07",
+   "regla": "R8",
+   "captura": "4-sur.png, 4-este.png, 4-caroata.png, 4-norte.png",
+   "donde": "4-sur centro (~480-800, 400-600) y abajo-centro (~560-760, 620-730); 4-este centro (~450-720, 500-690); 4-caroata (~620-760, 620-720); 4-norte gran manzana central (~480-680, 560-720).",
+   "que_se_ve": "Manchas de patio/solar oliva con las rayas de los lotes de 1936 que se extienden por zonas sin casas alrededor: el patio no está dentro de ninguna casa de la época (D2 repetido).",
+   "contra_el_original": "En Razetti esas manzanas del sur (Santa Rosalía) y del este (Candelaria) están dibujadas como manzanas grises edificadas completas, no como solares abiertos.",
+   "gravedad": "alta",
+   "medido": "R8 pendiente."
+  },
+  {
+   "id": "1911-08",
+   "regla": "R7",
+   "captura": "4-este.png, 4-sur.png, 4-noreste_oblicua.png",
+   "donde": "4-este centro-izquierda (~400-620, 330-470): una manzana entera de suelo liso sin casas; 4-sur (~270-440, 370-480) y la cuadra al este de ella; 4-noreste_oblicua abajo-centro (~480-1000, 620-800), un espacio enorme sin casas con una mancha verde, al oeste del Catuche cerca del Panteón.",
+   "que_se_ve": "Manzanas céntricas del damero vacías o casi vacías, solo suelo urbano liso (D1 repetido).",
+   "contra_el_original": "Razetti 1911 dibuja todo el damero entre Catuche y Anauco y hacia Santa Rosalía como manzanas grises edificadas; no hay huecos de esa escala dentro del casco.",
+   "gravedad": "alta",
+   "medido": "R7 pendiente."
+  },
+  {
+   "id": "1911-09",
+   "regla": "R8",
+   "captura": "4-oeste.png, 4-general.png, 4-norte.png",
+   "donde": "4-oeste: manchas beige aisladas en el campo (~165-255, 135-200; ~105-155, 333-385; ~160-200, 380-412) y borde de la ciudad en escalera con halos (~600-960, 380-700); 4-general: halos beige al oeste (~0-110, 300-470) y al sureste (~1100-1280, 580-720); 4-norte: franja izquierda (~0-260, 200-660) de suelo urbano liso con casas sueltas flotando (~55-190, 480-580).",
+   "que_se_ve": "Suelo urbano sin manzana en pleno campo, bordes en escalones y halos redondos alrededor de casas sueltas (D3 repetido).",
+   "contra_el_original": "En Razetti al oeste (El Calvario, Colombia, Agua Salud) hay laderas con curvas de nivel y sin manzanas; el borde de la ciudad es el de las manzanas grises.",
+   "gravedad": "media",
+   "medido": "R8 pendiente."
+  },
+  {
+   "id": "1911-10",
+   "regla": "R1",
+   "captura": "4-catuche_centro.png, 4-este.png, 4-sur.png",
+   "donde": "4-catuche_centro: fila de casas en el corazón de la manzana al oeste de Altagracia (~620-750, 490-545) y franja interior en la manzana de la izquierda (~330-460, 470-520); 4-este: fila interior (~130-250, 535-575); 4-sur: casas sueltas dentro de manzanas (~600-640, 400-440).",
+   "que_se_ve": "Segundas filas de casas paralelas a la calle dentro de la manzana, detrás de la crujía del frente.",
+   "contra_el_original": "Las manzanas de 1911 son anillos de casas sobre la calle; el plano no dibuja callejones interiores en esas cuadras.",
+   "gravedad": "alta",
+   "medido": "R1: 2.003 casas en segunda fila de 14.195 (14,1 %); umbral 0."
+  },
+  {
+   "id": "1911-11",
+   "regla": "R3",
+   "captura": "4-caroata.png, 4-oeste.png, 4-sur_oblicua.png",
+   "donde": "Suroeste (San Juan / El Calvario sur): 4-caroata (~0-260, 590-900 y ~460-680, 380-560), 4-oeste (~620-820, 530-830).",
+   "que_se_ve": "Casas sueltas, giradas en todas direcciones y corridas de la línea de fachada, fragmentos sin frente continuo.",
+   "contra_el_original": "Razetti dibuja en San Juan manzanas regulares grises con frentes continuos sobre las calles y la Avenida Oeste.",
+   "gravedad": "alta",
+   "medido": "R3: 1.981 giradas > 5° de 12.192 del frente (umbral 0); muchas a 45°."
+  },
+  {
+   "id": "1911-12",
+   "regla": "R4",
+   "captura": "4-norte.png, 4-caroata.png",
+   "donde": "4-norte: pasaje diagonal entre casas (~515-690, 340-545); 4-caroata: calles entre filas pegadas en el suroeste (~500-650, 380-560).",
+   "que_se_ve": "Corredores de pocos metros entre fachadas enfrentadas, más angostos que una calle.",
+   "contra_el_original": "1911: 6,7 m en el damero viejo y 14,6-17,4 m en las calles nuevas (§3).",
+   "gravedad": "media",
+   "medido": "R4: p10 4,42 m; 5.972 m de borde con calle de 2-4 m y 364 m de 0-2 m (bajo el mínimo de 6,7 m)."
+  },
+  {
+   "id": "1911-13",
+   "regla": "R2",
+   "captura": "4-plaza_baja.png",
+   "donde": "Primer plano, al sur de la plaza: línea vertical blanca (~x 645-655, y 550-900).",
+   "que_se_ve": "Una línea recta clara que corta techos y casas de arriba abajo (D6 repetido).",
+   "contra_el_original": "No corresponde a ninguna calle ni elemento del plano.",
+   "gravedad": "media",
+   "medido": "R2 pendiente."
+  },
+  {
+   "id": "1911-14",
+   "regla": "R7",
+   "captura": "4-catuche_centro.png, 4-plaza_cenital.png",
+   "donde": "4-catuche_centro: huella gris en C al este de Miraflores (~60-185, 380-490) y gran mancha gris irregular junto a Santa Capilla (~740-1120, 615-830); 4-plaza_cenital: manchas grises al norte de la plaza (~210-430, 130-230; ~555-640, 238-300).",
+   "que_se_ve": "Superficies grises planas con contorno blando, que no siguen la manzana ni la línea de fachada y ocupan cuadras enteras sin casas.",
+   "contra_el_original": "Razetti dibuja ahí manzanas grises edificadas con edificios públicos en rojo de contorno recto; no hay vacíos amorfos.",
+   "gravedad": "media",
+   "medido": "R7 pendiente."
+  },
+  {
+   "id": "1911-18",
+   "regla": "R6",
+   "captura": "4-general.png",
+   "donde": "Toda la ciudad.",
+   "que_se_ve": "Casas por cuadra y total por encima de las fuentes; manzanas del centro llenas de casas chicas.",
+   "contra_el_original": "§3: 11.300-13.000 casas en 1911 (inferido).",
+   "gravedad": "baja",
+   "medido": "R6: 14.195 casas (1,1-1,3 ×); 36 casas por cuadra del damero (mediana); frente medio 16,73 m; 64 manzanas unidas con 7.657 casas."
+  }
+ ],
+ "tareas": [
+  {
+   "titulo": "T82.2 · Puertas R2, R7, R8, R9 y R10 en reglas_mapa.py (prerrequisito para medir los arreglos de 1911)",
+   "reglas": [
+    "R2",
+    "R7",
+    "R8",
+    "R9",
+    "R10"
+   ],
+   "hallazgos": [
+    "1911-01",
+    "1911-02",
+    "1911-03",
+    "1911-04",
+    "1911-05",
+    "1911-06",
+    "1911-07",
+    "1911-08",
+    "1911-09",
+    "1911-13",
+    "1911-14"
+   ],
+   "causa_probable": "No es un defecto del mapa: tools/geo/reglas_mapa.py:medir() solo implementa R1, R3, R4 y R6 y deja R2, R5 y R7 a R12 en 'pendientes' (línea ~195). Por eso 11 de los 15 hallazgos de 1911 dicen «pendiente (sin cifra)» y no hay forma de probar que un arreglo cierra.",
+   "donde_se_arregla": "tools/geo/reglas_mapa.py (funciones nuevas, con tests en tools/geo/tests/test_reglas_mapa.py): R9 = punto de cada marca de src/marcas-datos.js vivo en la época contra las plantas de los hitos (tools/hitos-planta.mjs) y las huellas de casas genéricas y la calzada; R10 = continuidad de cada cauce (componentes conexas del agua por cauce) y casas sobre su corredor; R8 = píxeles de patio/solar (mascara_de_patios de tools/geo/vectorizar.py y pisos CUBIERTA.PATIO/SOLAR) fuera de casas vivas en la época y área de suelo urbano (crece.png G ≤ época) a más de media cuadra de toda manzana; R7 = manzanas de la referencia de la época sin casas vivas y casas sobre plazas/libres; R2 = huellas y techos (tools/cubiertas.mjs --epoca) contra el núcleo de calzada.",
+   "como_se_mide": "Tests unitarios por puerta con casos sintéticos (una marca en la calle falla, una sobre un hito pasa; un cauce cortado da 2 componentes). Después `tools/geo/reglas_mapa.py --todas` vuelve a escribir specs/reglas/medicion-<año>.json de las seis épocas con R2, R7-R10 con cifra; la descripción del PR pega la tabla de base de todas las épocas. Para 1911 deben salir con cifra, como mínimo: R9 ≥ 4 marcas fallidas (Candelaria, Santa Rosalía, La Rotunda, Plaza El Venezolano), R10 Caroata y Catuche con > 1 componente.",
+   "epocas_afectadas": [
+    "1578",
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "No externa. Sí definir con el responsable (o como decisión delegada registrada) el umbral de R8 «suelo urbano sin manzana» que specs/13 deja «a fijar en F1».",
+   "depende_de": []
+  },
+  {
+   "titulo": "Agua continua: cauces del Caroata y el Catuche por época, sin cortes ni casas encima",
+   "reglas": [
+    "R10",
+    "R11"
+   ],
+   "hallazgos": [
+    "1911-01",
+    "1911-02"
+   ],
+   "causa_probable": "El agua de todas las épocas sale solo de la segmentación de 1936: la clase AGUA de tools/geo/segmentar_clases.py se lleva al canal R de uSuelo (tools/suelo-lib.mjs, CANALES[7] = agua) y a crece.png en tools/geo/epocas.py:canales_del_valle() (AGUA_MINIMA = 0.15). Dentro del casco el plano de 1936 dibuja las quebradas angostas, bajo puentes y calles, y la segmentación no las clasifica como agua; en el campo el trazo se adelgaza y la clase se corta (la V del Caroata). El shader no inventa nada: src/shader/suelo.js:sueloColor() pinta BARRO solo donde s.r > 0 y src/shader/valle.js:valleColor() AGUA_CLARA solo con s.r, así que donde la máscara no tiene agua no hay cauce. Además ninguna casa se quita por estar sobre el cauce (tools/geo/epocas.py:vida_de_1936 no conoce los corredores). Es el mismo D5/D10 de 1843.",
+   "donde_se_arregla": "Nuevo tools/geo/cauces.py (lógica pura, TDD) con los ejes de cada cauce digitalizados por época en tools/geo/referencias/cauces.json (polilíneas en px del mosaico de 1936, ancho del corredor, vida por tramo y fuente: Razetti 1911 con sus puentes VII-XI «Sobre Caroata» y XXV-XXX «Sobre Catuche», Mestre 1889, Jesurún 1843, DCN 1936). Se rasterizan al canal R de uSuelo (tools/suelo-lib.mjs, función nueva tipo conPatios) y al agua de crece.png (epocas.py:canales_del_valle); las casas que pisan el corredor en una época se quitan o se acortan en tools/geo/epocas.py (junto a vida_de_1936/relevos). Si hace falta agua distinta por época, un canal o textura por época leída en src/shader/suelo.js y src/shader/papel.js.",
+   "como_se_mide": "Puerta R10 de reglas_mapa.py: Caroata y Catuche en 1 sola componente cada uno desde su entrada norte hasta el Guaire en 1772, 1843, 1889 y 1911 (y en 1936 los tramos que el plano dibuja); 0 casas con huella sobre el corredor. Capturas 4-oeste, 4-caroata, 4-norte, 4-catuche_centro y 4-general antes/después: el rótulo «Quebrada Caroata» (marcas-datos.js 'caroata', x 7690 y 8560) cae sobre agua. Puertas R1-R12 de las otras épocas sin empeorar (R12).",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí (specs/13 § 2.1), parcial: specs/reglas/investigacion.json (tema agua) ya confirma el curso del Caroata hasta el Guaire y su embaulamiento bajo El Silencio en 1942-45 (D10). Falta, con fuente: el trazado del Catuche dentro del casco por época y qué tramos estaban ya embaulados o cubiertos en 1911; la ubicación de los puentes de la leyenda de Razetti y sus fechas (para R11).",
+   "depende_de": [
+    "T82.2 · Puertas R2, R7, R8, R9 y R10 en reglas_mapa.py (prerrequisito para medir los arreglos de 1911)"
+   ]
+  },
+  {
+   "titulo": "Hitos para los edificios marcados sin edificio: Candelaria, Santa Rosalía y La Rotunda",
+   "reglas": [
+    "R9",
+    "R11"
+   ],
+   "hallazgos": [
+    "1911-03",
+    "1911-04",
+    "1911-05"
+   ],
+   "causa_probable": "Las marcas existen en src/marcas-datos.js ('candelaria' x 11230 y 7000 nace 2; 'santa-rosalia' x 9080 y 8545 nace 2; 'rotunda' x 8660 y 8560 nace 3 muere 5) pero no hay hito que las represente: src/hitos/datos/iglesias.js solo define altagracia, santa-capilla, santa-teresa y la-pastora (iglesiaEn), y src/hitos/datos/civiles.js no tiene la cárcel. El pin cae entonces sobre casas genéricas, suelo liso o la calle. Es D4/D9 de 1843 repetido en 1889 y 1911.",
+   "donde_se_arregla": "src/hitos/datos/iglesias.js: entradas iglesiaEn para Candelaria y Santa Rosalía (x, y, eje, medidas tomadas de la planta del plano de 1936 y cotejadas con 1911 y 1843, nace por fuente, suprime las casas que pisa vía src/hitos/suprimir.js); src/hitos/datos/civiles.js: La Rotunda con vida [3, 5). Si no hay planta con fuente suficiente, límite registrado «hito pendiente» en specs/reglas/limites-1911.json (y de las otras épocas) en lugar de un edificio inventado. Revisar también el punto de cada marca para que caiga en la planta.",
+   "como_se_mide": "Puerta R9: las tres marcas sobre la planta de su hito en todas las épocas en que viven (0 marcas de edificio sobre casa genérica, calle o suelo liso). Capturas 4-este, 4-sur y 4-sur_oblicua: iglesia visible bajo el pin. R11: vida del hito = vida de la marca, con fuente (tools/vidas-visibles.mjs). Tests de los datos de hitos (tests/unit) y puertas de las otras épocas sin empeorar.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911",
+    "1936"
+   ],
+   "necesita_investigacion": "Sí: planta, orientación y fechas con fuente de cada edificio (Candelaria 1708 y Santa Rosalía 1730 ya están en investigacion.json, edificios-07/38/39/48; La Rotunda: año de construcción, planta en Mestre 1889 «Cárcel» y Razetti 1911, demolición en 1936, hoy marcada CG en 'dudas'). Si Candelaria y Santa Rosalía estaban en pie en 1772, decidir si el hito nace en 1 (hoy la marca nace en 2).",
+   "depende_de": [
+    "T82.2 · Puertas R2, R7, R8, R9 y R10 en reglas_mapa.py (prerrequisito para medir los arreglos de 1911)"
+   ]
+  },
+  {
+   "titulo": "Plazas libres por época: la Plaza El Venezolano (San Jacinto) sin casas",
+   "reglas": [
+    "R9",
+    "R7"
+   ],
+   "hallazgos": [
+    "1911-06"
+   ],
+   "causa_probable": "Solo se despejan plazas en 1772 (tools/geo/epocas.py:despejar_plazuelas_de_1772 con referencias/1772-plazuelas.json); no hay lista de plazas para 1843-1911. Lo más probable es que las casas sobre la plaza sean crujías de la reconstrucción de 1843 (tools/geo/epocas_1843.py:agregar_casas), que según su docstring viven «desde 1843 hasta que nace una casa que lo pisa (o siempre, si ninguna)»: en una plaza ninguna casa de 1936 las pisa y siguen hasta 1911; o casas de la reconstrucción de 1772 que nadie hace morir. Verificar en fuentes/derivados/epocas/ciudad-epocas.json qué techos caen alrededor de (9265, 7040) y de qué capa vienen.",
+   "donde_se_arregla": "tools/geo/epocas.py: generalizar despejar_plazuelas_de_1772 a despejar_plazas(ciudad, vida, quitar, plazas, epoca) con una referencia por época (tools/geo/referencias/plazas-<año>.json: polígono, nombre, desde qué época está libre y fuente; Razetti R «El Venezolano», Mestre B «del Venezolano»), que acorta la vida de toda casa que pisa la plaza a la época en que se abre; y en tools/geo/epocas_1843.py:agregar_casas, que las crujías mueran también cuando su manzana pasa a plaza.",
+   "como_se_mide": "Puerta R9 «plaza nombrada libre» y R7 «0 casas en lugares libres»: 0 casas con huella dentro de la plaza en 1889 y 1911 (y en 1843 si la fuente dice que San Jacinto ya era plaza abierta). Captura 4-plaza_cenital: la plaza sin techos bajo el pin. Test de despejar_plazas con una plaza sintética.",
+   "epocas_afectadas": [
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "Sí, corta: desde cuándo la Plaza de San Jacinto / El Venezolano es espacio abierto (mercado en 1843 según D4) y su contorno en 1889 y 1911.",
+   "depende_de": [
+    "T82.2 · Puertas R2, R7, R8, R9 y R10 en reglas_mapa.py (prerrequisito para medir los arreglos de 1911)"
+   ]
+  },
+  {
+   "titulo": "Lo edificado de 1911 desde una referencia de manzanas revisada (como 1843), no desde el perfil de color",
+   "reglas": [
+    "R7",
+    "R8"
+   ],
+   "hallazgos": [
+    "1911-08",
+    "1911-09"
+   ],
+   "causa_probable": "tools/geo/epocas/epocas.json: 1911 no tiene 'referencia', así que tools/geo/epocas.py:construido_de_epoca() saca lo edificado del color del plano calzado con edificado() (callejidad del 'perfil' > 0,5, cierre 5 m, area_minima 300 m², ancho_minimo 14 m) y lo dilata 6 m (holgura_m). Es el problema I1843-002 que 1843 ya resolvió con referencias/1843-manzanas.json: el perfil pierde manzanas grises claras o con letras encima y las casas de 1936 de esas manzanas no nacen hasta 1936 (huecos céntricos, 1911-08). La dilatación con disco y valle.urbanizado() (cierre/holgura/hueco de epocas.json 'urbanizado') dejan halos redondos y suelo urbano en el campo alrededor de casas sueltas (1911-09).",
+   "donde_se_arregla": "Nueva referencia tools/geo/referencias/1911-manzanas.json (manzanas de Razetti proyectadas al mosaico y revisadas, como hizo tools/geo/referencia_1843.py + manzanas_1843.py), 'referencia' en la entrada 1911 de epocas.json, y en epocas.py usar nace_sin_tocar_las_anteriores(…, desde=4) para no cambiar 1772-1889. El borde urbano (crece.png G) de 1911 sale de la misma referencia y no de la dilatación (epocas.py:urbanizados).",
+   "como_se_mide": "Puerta R7: 0 manzanas de la referencia de 1911 sin casas vivas en 1911 (y 0 casas en lugares libres). R8: suelo urbano sin manzana ≤ umbral fijado en T82.2; capturas 4-este, 4-sur, 4-noreste_oblicua (manzanas llenas) y 4-oeste, 4-general, 4-norte (borde sin halos ni escalones). R12: medición de 1772, 1843 y 1889 idéntica antes y después (y casas nacidas antes de 1911 sin cambios).",
+   "epocas_afectadas": [
+    "1911",
+    "1889"
+   ],
+   "necesita_investigacion": "No externa: el plano de Razetti está en fuentes/; requiere la revisión a ojo de cada manzana de la referencia (como la fase 4 de 08). 1889 tiene el mismo origen por color y conviene repetirlo después.",
+   "depende_de": [
+    "T82.2 · Puertas R2, R7, R8, R9 y R10 en reglas_mapa.py (prerrequisito para medir los arreglos de 1911)"
+   ]
+  },
+  {
+   "titulo": "Edificios públicos de 1936 en 1889-1911: losas grises amorfas en vez de manzanas o hitos",
+   "reglas": [
+    "R7",
+    "R11"
+   ],
+   "hallazgos": [
+    "1911-14"
+   ],
+   "causa_probable": "tools/geo/vectorizar.py (línea ~175) convierte cada mancha de EDIFICIO_PUBLICO de la segmentación de 1936 en un solo techo ESTILO_PUBLICO con el contorno segmentado (blando) y techo llano (src/material.js techoLlano); tools/geo/epocas.py:vida_de_1936 los hace nacer en max(nace, PUBLICOS_DESDE = 3) aunque el edificio de 1936 no exista en 1911 y las casas que pisa ('cede') mueren cuando él nace. Resultado: superficies grises planas que ocupan cuadras sin seguir la línea de fachada (al este de Miraflores, junto a Santa Capilla, al norte de la plaza).",
+   "donde_se_arregla": "tools/geo/epocas.py:vida_de_1936: un público de 1936 nace solo si la referencia de la época lo dibuja como edificio público (rojo en Razetti/Mestre) o tiene hito; si no, sigue la regla de las casas (sus 'cede' viven) o se reemplaza por casas de la manzana. Lista de excepciones con fuente si hace falta (referencias/publicos-<año>.json).",
+   "como_se_mide": "Puerta R7 (casas/edificios en la referencia de la época) y R11 (vida de cada ESTILO_PUBLICO con fuente): 0 techos públicos de 1936 vivos en 1911 sin edificio rojo en Razetti o hito. Capturas 4-catuche_centro y 4-plaza_cenital sin las losas. Medición de 1889 y 1936 sin empeorar.",
+   "epocas_afectadas": [
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "Sí, liviana: qué edificios públicos de la planta de 1936 estaban en pie en 1889 y 1911 (leyendas de Mestre y Razetti, investigacion.json tema edificios).",
+   "depende_de": [
+    "Lo edificado de 1911 desde una referencia de manzanas revisada (como 1843), no desde el perfil de color"
+   ]
+  },
+  {
+   "titulo": "Patios y solares solo dentro de casas vivas de la época",
+   "reglas": [
+    "R8"
+   ],
+   "hallazgos": [
+    "1911-07"
+   ],
+   "causa_probable": "Los pisos de patio y solar (alas PATIO/SOLAR de tools/geo/alas.py, armados por tools/geo/vectorizar.py:techos_de_manzana con la subdivisión de lotes de 1936, de ahí las rayas) se dibujan como pisos CUBIERTA.PATIO/SOLAR (src/material.js 'piso') y en mascara_de_patios(). Sus crujías mueren o se quitan por separado (epocas.py:vida_de_1936, sin_techos, relevos; src/hitos/suprimir.js:suprimirTechos) y el piso del fondo queda vivo sin casa alrededor; con el edificado por color de 1911 faltan además las casas de la manzana. Es D2 de 1843 repetido. A confirmar con los centros de las manchas contra ciudad-epocas.json.",
+   "donde_se_arregla": "src/ciudad.js / src/alas.js (planDeAlas, loteDeEtapa): el piso PATIO/SOLAR de una casa solo se emite en las etapas en que vive su crujía del frente; tools/geo/epocas.py:sin_techos y src/hitos/suprimir.js: al quitar techos, quitar también los pisos de patio que quedan sin casa. Con TDD en tests/unit (ciudad, alas, suprimir) y tools/geo/tests.",
+   "como_se_mide": "Puerta R8 «0 píxeles de patio/solar fuera de casas vivas» en todas las épocas. Capturas 4-sur, 4-este, 4-caroata y 4-norte sin manchas oliva con rayas. Puertas R1-R12 de 1772 y 1936 sin cambio.",
+   "epocas_afectadas": [
+    "1772",
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "No.",
+   "depende_de": [
+    "T82.2 · Puertas R2, R7, R8, R9 y R10 en reglas_mapa.py (prerrequisito para medir los arreglos de 1911)",
+    "Lo edificado de 1911 desde una referencia de manzanas revisada (como 1843), no desde el perfil de color"
+   ]
+  },
+  {
+   "titulo": "F2 en 1911: solares de la época sobre la línea de fachada (una fila por frente, alineadas, calles con su ancho y casas por cuadra)",
+   "reglas": [
+    "R1",
+    "R3",
+    "R4",
+    "R6",
+    "R2"
+   ],
+   "hallazgos": [
+    "1911-10",
+    "1911-11",
+    "1911-12",
+    "1911-18"
+   ],
+   "causa_probable": "Las casas de 1911 son las de 1936 que caen en lo edificado del plano (tools/geo/epocas.py:fracciones → nace → vida_de_1936): heredan la subdivisión, las filas interiores y los pasajes de 1936. De ahí la segunda fila (2.003 casas, 14,1 %), las casas giradas de San Juan / El Calvario sur (parcelas irregulares de 1936; 1.981 > 5° de 12.192), los corredores de 2-4 m entre fachadas (p10 4,42 m contra 6,7 m) y el exceso de casas (14.195 contra 11.300-13.000; 36 por cuadra; 64 manzanas unidas con calles tapadas). Solo 1772 pasó por alinear_1772 / ceder_frentes_a_1772; 1911 no tiene equivalente.",
+   "donde_se_arregla": "El diseño F2 de specs/13 § 6 (pendiente): agrupar los lotes de 1936 en solares del frente medio de 1911, una casa de patio por solar sobre la línea de fachada y el corazón libre, calzada con su ancho mínimo (6,7 m damero viejo; 14,6-17,4 m calles nuevas de la Ordenanza de 1910). Se implementa en tools/geo/epocas.py (función de época análoga a alinear_1772/ceder_frentes_a_1772, parametrizada por los valores de § 3) o en un tools/geo/epocas_1911.py como epocas_1843.py, con el giro tope GIRO_MAXIMO_GRADOS de tools/geo/fachadas.py. Spike en un sector (San Juan) mostrado al responsable antes de aplicarlo a toda la ciudad.",
+   "como_se_mide": "reglas_mapa.py --epoca 1911: R1 0 casas en segunda fila (salvo callejones dibujados por Razetti, como límite); R3 0 casas del frente con retiro > 0,5 m o giro > 5°; R4 p10 ≥ 6,7 m y 0 m de borde con calle < 6,7 m en el damero; R6 total 11.300-13.000 (± 15 %) y 0 manzanas unidas. Capturas 4-catuche_centro, 4-este, 4-sur, 4-caroata, 4-oeste, 4-norte. R12: 1772 y 1843 sin cambio si el PR es solo de 1911.",
+   "epocas_afectadas": [
+    "1843",
+    "1889",
+    "1911"
+   ],
+   "necesita_investigacion": "Sí, parcial: § 3 de specs/13 tiene para 1911 casas (inferido) y ancho de calle, pero no casas por manzana ni frente o fondo de lote; buscarlos (catastro o censo de 1911 por parroquia) o marcarlos inferidos con razonamiento antes del spike.",
+   "depende_de": [
+    "Lo edificado de 1911 desde una referencia de manzanas revisada (como 1843), no desde el perfil de color",
+    "T82.2 · Puertas R2, R7, R8, R9 y R10 en reglas_mapa.py (prerrequisito para medir los arreglos de 1911)"
+   ]
+  },
+  {
+   "titulo": "Línea vertical blanca que cruza techos al sur de la plaza (D6)",
+   "reglas": [
+    "R2",
+    "R8"
+   ],
+   "hallazgos": [
+    "1911-13"
+   ],
+   "causa_probable": "Sin confirmar; no hay cifra ni causa en el código leído. Candidatas: la costura entre teselas/niveles del plano o de las máscaras (src/teselas.js, src/plano-niveles.js, src/mascaras.js) que deja un píxel de papel; el borde de la máscara de calles de la época (src/calles-epoca.js, src/shader/calles.js calleEn) o un corte entre baldosas de casas (src/baldosas.js). Es el D6 de 1843 repetido, lo que apunta a algo común a todas las épocas y no al generador de 1911.",
+   "donde_se_arregla": "Primero reproducir con ?quieto y la cámara de 4-plaza_baja alternando ?planos, color/tinta y niveles de plano para aislar la capa; el arreglo va en el módulo que la produce (shader o carga de teselas), con test unitario si es lógica.",
+   "como_se_mide": "Captura 4-plaza_baja (y la misma cámara en 1843 y 1936) sin la línea; puerta R2 sin invasiones nuevas.",
+   "epocas_afectadas": [
+    "1843",
+    "1911"
+   ],
+   "necesita_investigacion": "No externa; investigación interna para aislar la causa.",
+   "depende_de": []
+  }
+ ]
+}
