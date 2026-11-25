@@ -435,17 +435,31 @@
  },
  "resumen": {
   "segunda_fila": 0,
-  "giradas": 0
+  "giradas": 0,
+  "marcas_fuera": 0,
+  "suelo_sin_manzana_ha": 6.11,
+  "manchas_sueltas": 0
  },
  "pendientes": [
   "R2",
   "R5",
-  "R7",
-  "R8",
-  "R9",
   "R10",
   "R11",
   "R12"
  ],
- "umbrales_pendientes": "ancho mínimo de calle y casas por manzana de la época: specs/13 § 3 (F0)"
+ "umbrales_pendientes": "casas por manzana de 1889 y 1911 y ancho de las calles nuevas: specs/13 § 3 (T82.6)",
+ "R9": {
+  "medidas": 0,
+  "fuera": []
+ },
+ "R7": {
+  "sin_referencia": "la época no tiene referencia en px del mosaico (tools/geo/referencias/<año>-manzanas.json): 1772 la mide la fase 4 de specs/08; 1889 y 1911, T82.11 y T82.12"
+ },
+ "R8": {
+  "suelo_sin_manzana_ha": 6.11,
+  "media_cuadra_m": 50.0,
+  "manchas_sueltas": 0,
+  "manchas_sin_casas": 0,
+  "patios_sin_casa": "pendiente (T82.20): los pisos de patio y solar fuera de las casas de la época"
+ }
 }

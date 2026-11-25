@@ -5929,17 +5929,129 @@
  },
  "resumen": {
   "segunda_fila": 2312,
-  "giradas": 412
+  "giradas": 412,
+  "marcas_fuera": 11,
+  "manzanas_vacias": 1,
+  "frente_bajo": 4,
+  "casas_en_libres": 0,
+  "casas_fuera": 14,
+  "suelo_sin_manzana_ha": 16.79,
+  "manchas_sueltas": 8
  },
  "pendientes": [
   "R2",
   "R5",
-  "R7",
-  "R8",
-  "R9",
   "R10",
   "R11",
   "R12"
  ],
- "umbrales_pendientes": "ancho mínimo de calle y casas por manzana de la época: specs/13 § 3 (F0)"
+ "umbrales_pendientes": "casas por manzana de 1889 y 1911 y ancho de las calles nuevas: specs/13 § 3 (T82.6)",
+ "R9": {
+  "medidas": 20,
+  "fuera": [
+   {
+    "id": "universidad",
+    "clase": "edificio",
+    "donde": "sin_edificio"
+   },
+   {
+    "id": "santa-capilla",
+    "clase": "edificio",
+    "donde": "sobre_casas"
+   },
+   {
+    "id": "seminario",
+    "clase": "edificio",
+    "donde": "sin_edificio"
+   },
+   {
+    "id": "carmelitas",
+    "clase": "edificio",
+    "donde": "sobre_casas"
+   },
+   {
+    "id": "san-jacinto",
+    "clase": "edificio",
+    "donde": "sin_edificio"
+   },
+   {
+    "id": "plaza-venezolano",
+    "clase": "plaza",
+    "donde": "plaza_con_casas"
+   },
+   {
+    "id": "casa-natal",
+    "clase": "edificio",
+    "donde": "sobre_casas"
+   },
+   {
+    "id": "teatro-municipal",
+    "clase": "plaza",
+    "donde": "plaza_con_casas"
+   },
+   {
+    "id": "santa-rosalia",
+    "clase": "edificio",
+    "donde": "sin_edificio"
+   },
+   {
+    "id": "las-mercedes",
+    "clase": "edificio",
+    "donde": "sobre_casas"
+   },
+   {
+    "id": "candelaria",
+    "clase": "edificio",
+    "donde": "sobre_casas"
+   }
+  ]
+ },
+ "R7": {
+  "frente_minimo": 0.8,
+  "vacias": [
+   "U1843-0359"
+  ],
+  "frente_bajo": [
+   {
+    "id": "U1843-0201",
+    "frente": 0.145
+   },
+   {
+    "id": "U1843-0239",
+    "frente": 0.747
+   },
+   {
+    "id": "U1843-0255",
+    "frente": 0.765
+   },
+   {
+    "id": "U1843-0280",
+    "frente": 0.69
+   }
+  ],
+  "casas_en_libres": [],
+  "casas_fuera": [
+   8388,
+   8389,
+   8390,
+   8414,
+   8415,
+   8416,
+   8417,
+   8418,
+   8419,
+   8420,
+   8421,
+   38813,
+   38814,
+   38815
+  ]
+ },
+ "R8": {
+  "suelo_sin_manzana_ha": 16.79,
+  "media_cuadra_m": 50.0,
+  "manchas_sueltas": 8,
+  "manchas_sin_casas": 14,
+  "patios_sin_casa": "pendiente (T82.20): los pisos de patio y solar fuera de las casas de la época"
+ }
 }

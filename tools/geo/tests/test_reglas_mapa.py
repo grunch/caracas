@@ -72,7 +72,8 @@ def test_casas_de_epoca_toma_solo_las_vivas():
 def test_medir_junta_las_reglas_y_dice_lo_que_falta():
     doc = medir(_cuadra(), METRO, epoca=2, año=1843)
     assert doc['R1']['segunda_fila'] == [] and doc['R6']['total'] == 8
-    assert {'R2', 'R5', 'R7', 'R8', 'R9', 'R10', 'R11', 'R12'} <= set(doc['pendientes'])
+    assert {'R2', 'R5', 'R10', 'R11', 'R12'} <= set(doc['pendientes'])
+    assert 'sin_referencia' in doc['R7']
 
 
 def test_dos_cuadras_unidas_por_una_casa_que_tapa_la_calle_se_cuentan():
@@ -133,3 +134,59 @@ def test_una_casa_suelta_no_tiene_calle_contra_la_que_medir_su_giro():
              {'techo': 2, 'poligono': _girado(215, 10, 10, 10, 0)}]
     r = alineacion(manzanas_edificadas(casas, METRO), METRO, giro_maximo=5)
     assert r['giradas'] == [] and r['medidas'] == 0
+
+
+# --- T82.2a: R7, R8 y R9 ---
+
+def test_r9_una_marca_de_edificio_en_la_calle_o_sobre_casas_falla_y_sobre_su_hito_pasa():
+    from reglas_mapa import nombres_en_su_lugar
+    casas = _cuadra()
+    plantas = [{'id': 'iglesia', 'nace': 1, 'muere': 0, 'planta': [_rect(200, 0, 260, 60)]}]
+    marcas = [{'id': 'en-hito', 'px': 230, 'py': 30, 'nace': 1, 'muere': 0},
+              {'id': 'en-casas', 'px': 20, 'py': 10, 'nace': 1, 'muere': 0},
+              {'id': 'en-calle', 'px': 150, 'py': 30, 'nace': 1, 'muere': 0},
+              {'id': 'plaza-ocupada', 'px': 60, 'py': 10, 'nace': 1, 'muere': 0},
+              {'id': 'plaza-libre', 'px': 150, 'py': 150, 'nace': 1, 'muere': 0},
+              {'id': 'muerta', 'px': 150, 'py': 30, 'nace': 1, 'muere': 2},
+              {'id': 'cerro', 'px': 150, 'py': 30, 'nace': 1, 'muere': 0}]
+    clases = {'en-hito': 'edificio', 'en-casas': 'edificio', 'en-calle': 'edificio', 'plaza-ocupada': 'plaza',
+              'plaza-libre': [[1, 'plaza']], 'muerta': 'edificio', 'cerro': 'lugar'}
+    r = nombres_en_su_lugar(marcas, clases, 2, casas, plantas, METRO)
+    assert {(f['id'], f['donde']) for f in r['fuera']} == {('en-casas', 'sobre_casas'), ('en-calle', 'sin_edificio'),
+                                                           ('plaza-ocupada', 'plaza_con_casas')}
+    assert r['medidas'] == 5
+
+
+def test_r7_manzana_vacia_frente_bajo_casas_en_libres_y_fuera_de_toda_unidad():
+    from reglas_mapa import edificado_sigue_al_plano
+    casas = _cuadra() + [{'techo': 60, 'poligono': _rect(310, 10, 330, 30)}, {'techo': 61, 'poligono': _rect(600, 600, 620, 620)}]
+    unidades = [{'id': 'M1', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _rect(0, 0, 80, 80)},
+                {'id': 'M2', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _rect(100, 0, 180, 80)},
+                {'id': 'P1', 'ocupacion': 'plaza', 'estado': 'aprobada', 'poligono': _rect(300, 0, 380, 80)},
+                {'id': 'X', 'ocupacion': 'rayada', 'estado': 'pendiente', 'poligono': _rect(400, 0, 480, 80)}]
+    r = edificado_sigue_al_plano(unidades, casas, [], METRO)
+    assert r['vacias'] == ['M2']
+    assert r['casas_en_libres'] == [60]
+    assert r['casas_fuera'] == [61]
+    assert r['frente_bajo'] == []
+
+
+def test_r8_suelo_urbano_lejos_de_toda_manzana_y_manchas_sueltas():
+    import numpy as np
+    from reglas_mapa import suelo_coherente
+    urbanizado = np.zeros((40, 40), bool)
+    urbanizado[0:10, 0:10] = True          # alrededor de la cuadra (celdas de 16 px = 8 m)
+    urbanizado[20:40, 20:40] = True        # 160 × 160 m de suelo urbano sin ninguna casa
+    urbanizado[0:3, 30:33] = True          # una mancha suelta con una sola casa
+    casas = _cuadra() + [{'techo': 70, 'poligono': _rect(30 * 16 + 4, 4, 30 * 16 + 20, 20)}]
+    r = suelo_coherente(urbanizado, 16, casas, METRO)
+    assert r['suelo_sin_manzana_ha'] > 1.0
+    assert r['manchas_sueltas'] == 1
+
+
+def test_r9_una_marca_sobre_un_edificio_publico_del_plano_tiene_edificio():
+    from reglas_mapa import nombres_en_su_lugar, ESTILO_PUBLICO
+    casas = [{'techo': 0, 'poligono': _rect(0, 0, 40, 40), 'estilo': ESTILO_PUBLICO}, {'techo': 1, 'poligono': _rect(100, 0, 140, 40), 'estilo': 0}]
+    marcas = [{'id': 'ministerio', 'px': 20, 'py': 20, 'nace': 5, 'muere': 0}, {'id': 'teatro', 'px': 120, 'py': 20, 'nace': 5, 'muere': 0}]
+    r = nombres_en_su_lugar(marcas, {'ministerio': 'edificio', 'teatro': 'edificio'}, 5, casas, [], METRO)
+    assert [(f['id'], f['donde']) for f in r['fuera']] == [('teatro', 'sobre_casas')]

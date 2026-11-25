@@ -4668,17 +4668,67 @@
  },
  "resumen": {
   "segunda_fila": 0,
-  "giradas": 364
+  "giradas": 364,
+  "marcas_fuera": 7,
+  "suelo_sin_manzana_ha": 1.22,
+  "manchas_sueltas": 4
  },
  "pendientes": [
   "R2",
   "R5",
-  "R7",
-  "R8",
-  "R9",
   "R10",
   "R11",
   "R12"
  ],
- "umbrales_pendientes": "ancho mínimo de calle y casas por manzana de la época: specs/13 § 3 (F0)"
+ "umbrales_pendientes": "casas por manzana de 1889 y 1911 y ancho de las calles nuevas: specs/13 § 3 (T82.6)",
+ "R9": {
+  "medidas": 15,
+  "fuera": [
+   {
+    "id": "universidad",
+    "clase": "edificio",
+    "donde": "sobre_casas"
+   },
+   {
+    "id": "santa-capilla",
+    "clase": "edificio",
+    "donde": "sin_edificio"
+   },
+   {
+    "id": "seminario",
+    "clase": "edificio",
+    "donde": "sobre_casas"
+   },
+   {
+    "id": "carmelitas",
+    "clase": "edificio",
+    "donde": "sobre_casas"
+   },
+   {
+    "id": "san-jacinto",
+    "clase": "edificio",
+    "donde": "sin_edificio"
+   },
+   {
+    "id": "plaza-venezolano",
+    "clase": "plaza",
+    "donde": "plaza_con_casas"
+   },
+   {
+    "id": "teatro-municipal",
+    "clase": "plaza",
+    "donde": "plaza_con_casas"
+   }
+  ]
+ },
+ "R7": {
+  "sin_referencia": "la época no tiene referencia en px del mosaico (tools/geo/referencias/<año>-manzanas.json): 1772 la mide la fase 4 de specs/08; 1889 y 1911, T82.11 y T82.12"
+ },
+ "R8": {
+  "suelo_sin_manzana_ha": 1.22,
+  "media_cuadra_m": 50.0,
+  "manchas_sueltas": 4,
+  "manchas_sin_casas": 4,
+  "patios_sin_casa": "pendiente (T82.20): los pisos de patio y solar fuera de las casas de la época"
+ }
 }

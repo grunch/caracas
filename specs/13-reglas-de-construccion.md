@@ -73,7 +73,18 @@ Lo que sigue sin fuente está en `vacios` del JSON. Entre otros: los habitantes 
 | 1911 | 14.195 | 2.004 (14,1 %) | 1.422 de 11.683 | 8,38 m / 4,24 m | 4.320 m | 64 | 82 | 36,0 | 16,73 m |
 | 1936 | 35.440 | 1.991 (5,6 %) | 6.332 de 25.273 | 10,11 m / 4,34 m | 11.984 m | 69 | 128 | 37,0 | 17,38 m |
 
-Lectura: 1843, 1889 y 1911 tienen entre el 14 y el 22 % de sus casas en segunda fila (1772, ninguna: su auditoría alineó los frentes) y calles más angostas que 1772 (mediana de 7 a 8,4 m contra 11,3 m). Las casas por cuadra del damero (36 a 46) y el frente medio (11 a 17 m) se comparan con las fuentes cuando estén (F0).
+**R7, R8 y R9** (T82.2a; las marcas, por su clase en [`reglas/clases-marcas.json`](reglas/clases-marcas.json)):
+
+| Época | R7 manzanas vacías / frente < 80 % / casas en libres / fuera (referencia) | R8 suelo urbano sin manzana | R8 manchas sueltas | R9 marcas fuera de su lugar |
+|---|---|---|---|---|
+| 1578 | sin referencia | 6,11 ha | 0 | 0: — |
+| 1772 | sin referencia | 1,22 ha | 4 | 7: universidad (sobre casas), santa-capilla (sin edificio), seminario (sobre casas), carmelitas (sobre casas), san-jacinto (sin edificio), plaza-venezolano (plaza con casas), teatro-municipal (plaza con casas) |
+| 1843 | 1 / 4 / 0 / 14 | 16,79 ha | 8 | 11: universidad (sin edificio), santa-capilla (sobre casas), seminario (sin edificio), carmelitas (sobre casas), san-jacinto (sin edificio), plaza-venezolano (plaza con casas), casa-natal (sobre casas), teatro-municipal (plaza con casas), santa-rosalia (sin edificio), las-mercedes (sobre casas), candelaria (sobre casas) |
+| 1889 | sin referencia | 27,21 ha | 6 | 13: teatro-caracas (sobre casas), plaza-venezolano (plaza con casas), casa-natal (sobre casas), teatro-municipal (sobre casas), rotunda (sin edificio), santa-rosalia (sin edificio), san-juan (sobre casas), las-mercedes (sobre casas), san-carlos (sin edificio), hospital-vargas (sin edificio), cano-amarillo (sin edificio), candelaria (sobre casas), fc-central (sin edificio) |
+| 1911 | sin referencia | 23,3 ha | 30 | 14: teatro-caracas (sobre casas), plaza-venezolano (plaza con casas), casa-natal (sobre casas), teatro-nacional (sin edificio), rotunda (sin edificio), santa-rosalia (sin edificio), san-juan (sobre casas), las-mercedes (sobre casas), san-carlos (sobre casas), hospital-vargas (sin edificio), cano-amarillo (sin edificio), palo-grande (sin edificio), candelaria (sobre casas), fc-central (sin edificio) |
+| 1936 | sin referencia | 52,71 ha | 520 | 13: plaza-venezolano (plaza con casas), casa-natal (sobre casas), teatro-nacional (sin edificio), circo-metropolitano (sobre casas), santa-rosalia (sin edificio), san-juan (sobre casas), nuevo-circo (sin edificio), las-mercedes (sobre casas), san-carlos (sobre casas), cano-amarillo (sobre casas), palo-grande (sin edificio), candelaria (sobre casas), fc-central (sin edificio) |
+
+Lectura: 1843, 1889 y 1911 tienen entre el 14 y el 22 % de sus casas en segunda fila (1772, ninguna: su auditoría alineó los frentes) y calles más angostas que 1772 (mediana de 7 a 9 m contra 12 m). Las casas por cuadra del damero (36 a 46) y el frente medio (11 a 17 m) se comparan con las fuentes cuando estén (F0).
 
 La vista aérea del pueblo colonial que aportó el responsable (`fuentes/imagenes/README.md`) muestra lotes de 10 a 15 m de frente y 25 a 50 m de fondo y crujías de 5 a 8 m. Concuerda con las fuentes de 1772 (frente de 9 a 11 m, fondo de 43 a 63 m). Las manzanas no son de 100 m exactos: Salazar Bravo llama mito a las «cuadras de 100 metros». Se miden en el plano de cada época.
 
@@ -171,7 +182,7 @@ Consolidadas por el diagnóstico (`reglas/tareas.json`, con la causa probable, d
 | T82.4 | Investigación F0 ampliada: ríos, quebradas y puentes por época (tema agua) | R10, R11 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.3 | hecha: `reglas/investigacion-ampliada.json` |
 | T82.5 | Investigación F0 ampliada: edificios en pie por época, con planta, vida y forma (tema edificios) | R9, R11 | 1772, 1843, 1889, 1911, 1936 | T82.3 | hecha: `reglas/investigacion-ampliada.json` |
 | T82.6 | Investigación F0 ampliada: casas por manzana, frente y fondo de 1889 y 1911, y calles nuevas (1871–1910) | R4, R6 | 1843, 1889, 1911 | T82.3 | hecha: `reglas/investigacion-ampliada.json` |
-| T82.2 | Puertas R2, R5, R7, R8, R9 y R11 (y el retiro por casa de R3) en reglas_mapa.py, con medición de base de las seis épocas | R2, R3, R5, R7, R8, R9, R11 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.1 | pendiente |
+| T82.2 | Puertas R2, R5, R7, R8, R9 y R11 (y el retiro por casa de R3) en reglas_mapa.py, con medición de base de las seis épocas | R2, R3, R5, R7, R8, R9, R11 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.1 | R7, R8 y R9 hechas (T82.2a); faltan R2, el retiro de R3, R5 y R11 (T82.2b) |
 | T82.7 | La medida del giro de R3: por el lado de fachada y contra el tramo de delante, no por el rectángulo mínimo ni el chaflán | R3 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.1 | #206 abierto |
 | T82.8 | Diagnóstico y cierre de la línea vertical clara frente a la Plaza Bolívar (D6), igual en todas las épocas | R2, R8 | 1772, 1843, 1889, 1911, 1936 | T82.2 | pendiente |
 | T82.9 | F2: diseño de la corrección de fondo (solares por época y calzada con su ancho mínimo), spike en un sector y aprobación del responsable | R1, R3, R4, R6, R8 | 1772, 1843, 1889, 1911 | T82.2, T82.6, T82.7 | pendiente |

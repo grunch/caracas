@@ -13,7 +13,12 @@ pegadas entre sí (a menos de 2·CIERRE_M), y la calle, el hueco entre dos manza
   una cuadra del damero, que son varias unidas por casas que cruzan la calle (indicio de R2: calle tapada). En ellas
   las casas sobre la calle tapada cuentan como segunda fila.
 
-R2, R5 y R7 a R12 todavía no tienen puerta aquí (`pendientes`). Los umbrales que dependen de la época (ancho mínimo de
+- R7 · lo edificado sigue al plano (con la referencia de la época en px del mosaico, si la tiene);
+- R8 · suelo coherente: suelo urbano a más de media cuadra de toda casa y manchas sueltas (halos);
+- R9 · cada nombre en su lugar: las marcas de edificio sobre su hito y las de plaza sin casas
+  (specs/reglas/clases-marcas.json dice qué es cada marca).
+
+R2, R5, R10, R11 y R12 todavía no tienen puerta aquí (`pendientes`). Los umbrales que dependen de la época (ancho mínimo de
 calle, casas por manzana) salen de la investigación (specs/13 § 3): mientras no la hay, la puerta mide y no cierra.
 Cuenta lo medido; no certifica fidelidad.
 
@@ -214,16 +219,157 @@ def casas_por_manzana(manzanas, metro=METRO):
             'manzanas': sorted(filas, key=lambda f: -f['casas'])[:LISTA_MAXIMA]}
 
 
-def medir(casas, metro=METRO, epoca=None, año=None):
-    """Todas las puertas de este módulo sobre las casas a la vista de una época."""
+# --- R7, R8 y R9 (T82.2a) ---
+
+FRENTE_EDIFICADO_MINIMO = 0.8   # R7: parte del borde de una manzana edificada del plano con casa o hito a HUECO_M
+#                                 (propuesto por el diagnóstico; decisión de Claude por delegación, 25-11-2026)
+HUECO_M = 2.0
+MANZANA_VACIA = 0.05            # R7: por debajo de esto del borde con casas, la manzana del plano está vacía
+FUERA_M = 3.0                   # R7: una casa a más de esto (media calle angosta) de toda unidad del plano está fuera
+EDIFICADAS = {'rayada', 'parte_de_otra_unidad'}
+LIBRES = {'lote_especial', 'plaza', 'terreno_libre', 'huerta'}
+MEDIA_CUADRA_M = 50.0           # R8: suelo urbano a más de esto de toda casa de la época no tiene manzana
+MANCHA_MAXIMA_CASAS = 2         # R8: una mancha de suelo urbano con tan pocas casas es un halo, no un barrio
+ESTILO_PUBLICO = 9              # src/techos.js: un edificio público del plano (R9: representa al edificio de la marca)
+HITO_TOLERANCIA_M = 2.0         # R9: el punto de una marca a menos de esto de la planta de su hito cae sobre él
+
+
+def _vive(x, epoca):
+    return x['nace'] <= epoca and (x.get('muere', 0) == 0 or epoca < x['muere'])
+
+
+def _clase(clases, id_, epoca):
+    c = clases.get(id_)
+    if isinstance(c, list):
+        vigente = [k for desde, k in c if desde <= epoca]
+        return vigente[-1] if vigente else None
+    return c
+
+
+def nombres_en_su_lugar(marcas, clases, epoca, casas, hitos, metro=METRO):
+    """R9: cada marca de edificio viva cae sobre la planta de un hito en pie o sobre un edificio público del plano
+    (`estilo` de la casa en la época); si no, sobre casas genéricas
+    (`sobre_casas`) o sobre nada (`sin_edificio`). Una marca de plaza no cae sobre casas (`plaza_con_casas`)."""
+    plantas = [Polygon(z).buffer(HITO_TOLERANCIA_M / metro) for h in hitos if _vive(h, epoca) for z in h['planta']]
+    figuras = [_figura(c) for c in casas]
+    arbol_p, arbol_c = STRtree(plantas) if plantas else None, STRtree(figuras) if figuras else None
+
+    def en(arbol, geoms, punto):
+        return arbol is not None and any(geoms[k].contains(punto) for k in arbol.query(punto))
+
+    def bajo(punto):   # las casas bajo el punto
+        return [casas[k] for k in arbol_c.query(punto) if figuras[k].contains(punto)] if arbol_c is not None else []
+
+    fuera, medidas = [], 0
+    for m in marcas:
+        clase = _clase(clases, m['id'], epoca)
+        if not _vive(m, epoca) or clase not in ('edificio', 'plaza'):
+            continue
+        medidas += 1
+        punto = Point(m['px'], m['py'])
+        debajo = bajo(punto)
+        if clase == 'plaza':
+            if debajo:
+                fuera.append({'id': m['id'], 'clase': clase, 'donde': 'plaza_con_casas'})
+        elif not en(arbol_p, plantas, punto) and not any(c.get('estilo') == ESTILO_PUBLICO for c in debajo):
+            fuera.append({'id': m['id'], 'clase': clase, 'donde': 'sobre_casas' if debajo else 'sin_edificio'})
+    return {'medidas': medidas, 'fuera': fuera}
+
+
+def edificado_sigue_al_plano(unidades, casas, hitos_plantas, metro=METRO):
+    """R7 contra la referencia de la época (unidades aprobadas en px del mosaico): manzanas edificadas vacías o con
+    menos de FRENTE_EDIFICADO_MINIMO del borde con casa o hito, casas en lugares libres (manda la unidad más chica que
+    contiene su punto) y casas a más de FUERA_M de toda unidad."""
+    todas = [(u, Polygon(u['poligono']).buffer(0)) for u in unidades if u['estado'] == 'aprobada' and len(u['poligono']) >= 3]
+    figuras = [(c, _figura(c)) for c in casas]
+    ocupantes = [f for _, f in figuras] + [Polygon(z).buffer(0) for z in hitos_plantas]
+    arbol_o = STRtree(ocupantes) if ocupantes else None
+    vacias, frente_bajo = [], []
+    for u, m in todas:
+        if u['ocupacion'] not in EDIFICADAS:
+            continue
+        cerca = [ocupantes[k] for k in arbol_o.query(m.buffer(HUECO_M / metro))] if arbol_o is not None else []
+        parte = (m.exterior.intersection(unary_union(cerca).buffer(HUECO_M / metro)).length / m.exterior.length) if cerca else 0.0
+        if parte < MANZANA_VACIA:
+            vacias.append(u['id'])
+        elif parte < FRENTE_EDIFICADO_MINIMO:
+            frente_bajo.append({'id': u['id'], 'frente': round(parte, 3)})
+    arbol_u = STRtree([f for _, f in todas]) if todas else None
+    en_libres, fuera = [], []
+    for c, f in figuras:
+        punto = f.representative_point()
+        contienen = [todas[k] for k in arbol_u.query(punto, predicate='within')] if arbol_u is not None else []
+        if contienen:
+            if min(contienen, key=lambda uf: uf[1].area)[0]['ocupacion'] in LIBRES:
+                en_libres.append(c['techo'])
+        elif arbol_u is None or not len(arbol_u.query(punto.buffer(FUERA_M / metro))):
+            fuera.append(c['techo'])
+    return {'frente_minimo': FRENTE_EDIFICADO_MINIMO, 'vacias': vacias, 'frente_bajo': frente_bajo,
+            'casas_en_libres': sorted(en_libres), 'casas_fuera': sorted(fuera)}
+
+
+def suelo_coherente(urbanizado, celda_px, casas, metro=METRO):
+    """R8: el suelo urbano de la época (celdas de `urbanizado`, de `celda_px` px del mosaico) a más de MEDIA_CUADRA_M de
+    toda casa, en hectáreas, y las manchas de suelo urbano (8-conexas) con MANCHA_MAXIMA_CASAS casas o menos."""
+    import cv2
+    figuras = [_figura(c) for c in casas]
+    cerca = np.zeros(urbanizado.shape, np.uint8)
+    for k, f in enumerate(figuras):
+        x0, y0, x1, y1 = f.bounds
+        cv2.rectangle(cerca, (int(x0 // celda_px), int(y0 // celda_px)), (int(x1 // celda_px), int(y1 // celda_px)), 1, -1)
+    radio = int(np.ceil(MEDIA_CUADRA_M / metro / celda_px))
+    cerca = cv2.dilate(cerca, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * radio + 1, 2 * radio + 1)))
+    sin_manzana = urbanizado & (cerca == 0)
+    celda_ha = (celda_px * metro) ** 2 / 1e4
+    n, etiquetas = cv2.connectedComponents(urbanizado.astype(np.uint8), connectivity=8)
+    casas_por_mancha = np.zeros(n, int)
+    for f in figuras:
+        x, y = f.representative_point().coords[0]
+        i, j = int(y // celda_px), int(x // celda_px)
+        if 0 <= i < etiquetas.shape[0] and 0 <= j < etiquetas.shape[1]:
+            casas_por_mancha[etiquetas[i, j]] += 1
+    sueltas = int(sum(1 for k in range(1, n) if 0 < casas_por_mancha[k] <= MANCHA_MAXIMA_CASAS))
+    return {'suelo_sin_manzana_ha': round(float(sin_manzana.sum() * celda_ha), 2), 'media_cuadra_m': MEDIA_CUADRA_M,
+            'manchas_sueltas': sueltas, 'manchas_sin_casas': int(sum(1 for k in range(1, n) if casas_por_mancha[k] == 0))}
+
+
+def medir(casas, metro=METRO, epoca=None, año=None, contexto=None):
+    """Todas las puertas de este módulo sobre las casas a la vista de una época. `contexto` (opcional): marcas, clases,
+    hitos (plantas con su vida), unidades de la referencia de la época y lo urbanizado (máscara y celda en px)."""
+    contexto = contexto or {}
     manzanas = manzanas_edificadas(casas, metro)
     r1 = fila_por_frente(manzanas, metro)
     r3 = alineacion(manzanas, metro)
-    return {'epoca': epoca, 'año': año, 'casas': len(casas),
-            'R1': r1, 'R3': r3, 'R4': anchos_de_calle(manzanas, metro), 'R6': casas_por_manzana(manzanas, metro),
-            'resumen': {'segunda_fila': len(r1['segunda_fila']), 'giradas': r3['n_giradas']},
-            'pendientes': ['R2', 'R5', 'R7', 'R8', 'R9', 'R10', 'R11', 'R12'],
-            'umbrales_pendientes': 'ancho mínimo de calle y casas por manzana de la época: specs/13 § 3 (F0)'}
+    doc = {'epoca': epoca, 'año': año, 'casas': len(casas),
+           'R1': r1, 'R3': r3, 'R4': anchos_de_calle(manzanas, metro), 'R6': casas_por_manzana(manzanas, metro),
+           'resumen': {'segunda_fila': len(r1['segunda_fila']), 'giradas': r3['n_giradas']},
+           'pendientes': ['R2', 'R5', 'R10', 'R11', 'R12'],
+           'umbrales_pendientes': 'casas por manzana de 1889 y 1911 y ancho de las calles nuevas: specs/13 § 3 (T82.6)'}
+    hitos = contexto.get('hitos', [])
+    if 'marcas' in contexto:
+        doc['R9'] = nombres_en_su_lugar(contexto['marcas'], contexto['clases'], epoca, casas, hitos, metro)
+        doc['resumen']['marcas_fuera'] = len(doc['R9']['fuera'])
+    if contexto.get('unidades') is not None:
+        plantas = [z for h in hitos if _vive(h, epoca) for z in h['planta']]
+        doc['R7'] = edificado_sigue_al_plano(contexto['unidades'], casas, plantas, metro)
+        doc['resumen'].update({'manzanas_vacias': len(doc['R7']['vacias']), 'frente_bajo': len(doc['R7']['frente_bajo']),
+                               'casas_en_libres': len(doc['R7']['casas_en_libres']), 'casas_fuera': len(doc['R7']['casas_fuera'])})
+    else:
+        doc['R7'] = {'sin_referencia': 'la época no tiene referencia en px del mosaico (tools/geo/referencias/<año>-manzanas.json): '
+                                       '1772 la mide la fase 4 de specs/08; 1889 y 1911, T82.11 y T82.12'}
+    if contexto.get('urbanizado') is not None:
+        doc['R8'] = suelo_coherente(contexto['urbanizado'], contexto['celda_px'], casas, metro)
+        doc['R8']['patios_sin_casa'] = 'pendiente (T82.20): los pisos de patio y solar fuera de las casas de la época'
+        doc['resumen'].update({'suelo_sin_manzana_ha': doc['R8']['suelo_sin_manzana_ha'], 'manchas_sueltas': doc['R8']['manchas_sueltas']})
+    return doc
+
+
+def urbanizado_de(crece_png, epoca, cuantas=6):
+    """La máscara de lo urbanizado en `epoca` (canal G de crece.png, «desde cuándo»: specs/02)."""
+    import cv2
+    g = cv2.imread(str(crece_png), cv2.IMREAD_COLOR)[:, :, 1].astype(float) / 255   # BGR: G es el 1
+    desde = np.where(g > 0, np.round(cuantas * (1 - g)), np.inf)
+    return desde <= epoca
 
 
 def main():  # pragma: no cover - E/S
@@ -250,16 +396,27 @@ def main():  # pragma: no cover - E/S
     procedencia = {'ciudad_sha256': hashlib.sha256(ruta.read_bytes()).hexdigest(), 'pak_sha256': vista['pak_sha256']}
     salida = raiz / 'specs/reglas'
     salida.mkdir(exist_ok=True)
+    def node(script):
+        return json.loads(subprocess.run(['node', str(raiz / 'tools' / script)], check=True, capture_output=True,
+                                         text=True, cwd=raiz).stdout)
+    marcas, hitos = node('marcas-json.mjs'), node('hitos-planta.mjs')
+    clases = json.loads((raiz / 'specs/reglas/clases-marcas.json').read_text())['clases']
+    celda_px = json.loads((raiz / 'public/datos/crece.json').read_text())['celda_m'] / METRO
     for año in (AÑOS if a.todas else [a.epoca]):
         e = AÑOS.index(año)
-        casas = [{**c, **eu[c['techo']]} if c['techo'] in eu else c for c in casas_de_epoca(ciudad, e)]
-        doc = {'alcance': __doc__.split('\n\n')[1].replace('\n', ' '), **procedencia, **medir(casas, METRO, e, año)}
+        casas = [{**c, **eu.get(c['techo'], {}), 'estilo': ciudad['historia'][c['techo']][e] % 16}
+                 for c in casas_de_epoca(ciudad, e)]
+        ref = raiz / f'tools/geo/referencias/{año}-manzanas.json'
+        contexto = {'marcas': marcas, 'clases': clases, 'hitos': hitos, 'celda_px': celda_px,
+                    'unidades': json.loads(ref.read_text())['unidades'] if ref.exists() else None,
+                    'urbanizado': urbanizado_de(raiz / 'public/plano/crece.png', e)}
+        doc = {'alcance': __doc__.split('\n\n')[1].replace('\n', ' '), **procedencia, **medir(casas, METRO, e, año, contexto)}
         (salida / f'medicion-{año}.json').write_text(json.dumps(doc, ensure_ascii=False, indent=1) + '\n')
         r6 = doc['R6']['cuadras_del_damero']
         print(f"{año}: {doc['casas']} casas, {doc['R6']['n_manzanas']} manzanas; segunda fila {doc['resumen']['segunda_fila']}"
               f" ({doc['R1']['parte_en_segunda_fila']}); giradas {doc['resumen']['giradas']}; calle mediana {doc['R4']['mediana_m']} m"
               f" (p10 {doc['R4']['p10_m']}); unidas {doc['R6']['mayores_que_una_cuadra']['n']}; cuadras del damero: {r6['n']},"
-              f" mediana {r6['mediana_casas']} casas, frente {r6['mediana_frente_m']} m")
+              f" mediana {r6['mediana_casas']} casas, frente {r6['mediana_frente_m']} m; R7/R8/R9 {doc['resumen']}")
 
 
 if __name__ == '__main__':
