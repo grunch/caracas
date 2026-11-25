@@ -77,12 +77,17 @@ def test_las_casas_propias_no_pisan_los_lotes_especiales_de_su_manzana():
         assert casa.intersection(lote).area < 1e-6
 
 
-def test_un_lote_entero_dentro_de_una_casa_no_se_rellena():
-    unidades = [{'id': 'B', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 30)},
-                {'id': 'L', 'ocupacion': 'lote_especial', 'estado': 'aprobada', 'poligono': _cuadrado(10, 10, 8)}]
-    nueva, _ = agregar_casas(_ciudad([], []), unidades, metro=0.5, epoca=2)
-    v = nueva['vertices']
-    lote = Polygon(_cuadrado(10, 10, 8))
-    for t in nueva['techos']:
-        casa = Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])])
-        assert casa.intersection(lote).area < 1e-6
+def test_las_casas_nacidas_en_1843_fuera_de_toda_manzana_pasan_a_la_epoca_siguiente():
+    from epocas_1843 import fuera_de_la_referencia
+    unidades = [{'id': 'A', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 100)}]
+    casas = [_cuadrado(10, 10, 10), _cuadrado(102, 40, 4), _cuadrado(300, 0, 10), _cuadrado(300, 50, 10), _cuadrado(300, 100, 10)]
+    ciudad = _ciudad(casas, [[2, 0], [2, 0], [2, 0], [2, 3], [1, 0]])
+    copia = copy.deepcopy(ciudad)
+
+    nueva, movidas = fuera_de_la_referencia(ciudad, unidades, metro=0.5, epoca=2, tolerancia_m=3)
+
+    # dentro, a media calle, fuera (nace después), fuera y moría en la siguiente (se quita: no vive en ninguna), de 1772
+    assert nueva['vida'] == [[2, 0], [2, 0], [3, 0], [1, 0]]
+    assert len(nueva['techos']) == len(nueva['esquinas']) == len(nueva['vuelos']) == 4
+    assert nueva['vertices'][2 * nueva['techos'][3][0]] == 300   # la de 1772 conserva su huella
+    assert movidas == 2 and ciudad == copia

@@ -130,3 +130,54 @@ def agregar_casas(ciudad, unidades, metro, epoca):
             vuelos.append(VUELO_POR_OMISION)
     nueva = {**ciudad, 'vertices': vertices, 'techos': techos, 'esquinas': esquinas, 'vida': vida, 'vuelos': vuelos}
     return nueva, {'manzanas': manzanas, 'casas': len(techos) - len(ciudad['techos'])}
+
+
+TOLERANCIA_CALLE_M = 3.0   # media calle angosta de 1843: a menos de esto del borde, la casa es de la manzana
+UNIDADES = {'rayada', 'parte_de_otra_unidad'} | LIBRES
+
+
+def fuera_de_la_referencia(ciudad, unidades, metro, epoca, tolerancia_m=TOLERANCIA_CALLE_M):
+    """(ciudad nueva, cuántas) con las casas que nacen en `epoca` fuera de toda unidad aprobada de la referencia
+    (más de `tolerancia_m` de una manzana) naciendo en la época siguiente: en 1843 estarían en una calle o en el
+    campo (T81.3a). Si morían en esa época siguiente, no viven en ninguna. Las que nacían antes no se tocan."""
+    edificables, todas = [], []
+    for u in unidades:
+        if u['estado'] != 'aprobada' or len(u['poligono']) < 3 or u['ocupacion'] not in UNIDADES:
+            continue
+        f = Polygon(u['poligono']).buffer(0)
+        todas.append(f)
+        if u['ocupacion'] in {'rayada', 'parte_de_otra_unidad'}:
+            edificables.append(f.buffer(tolerancia_m / metro))
+    arbol = STRtree(todas + edificables) if todas else None
+    vida, movidas, quitar = [list(v) for v in ciudad['vida']], 0, set()
+    for k, c in enumerate(_centros(ciudad)):
+        if vida[k][0] != epoca:
+            continue
+        if arbol is not None and len(arbol.query(c, predicate='within')):
+            continue
+        movidas += 1
+        quitar |= _correr(vida, k, epoca)
+    return quitar_techos({**ciudad, 'vida': vida}, quitar), movidas
+
+
+def _correr(vida, k, epoca):
+    """La casa k nace en la época siguiente; si moría en ella no vive en ninguna: {k} para quitarla."""
+    siguiente = epoca + 1
+    if vida[k][1] != 0 and vida[k][1] <= siguiente:
+        return {k}
+    vida[k] = [siguiente, vida[k][1]]
+    return set()
+
+
+def quitar_techos(ciudad, quitar):
+    """La ciudad sin los techos de `quitar`, con los vértices y todas las listas por techo corridas (las de
+    epocas.sin_techos, la vida y los vuelos). No toca la original."""
+    if not quitar:
+        return ciudad
+    from epocas import sin_techos
+    salida, vida = sin_techos(ciudad, ciudad['vida'], quitar)
+    quedan = [k for k in range(len(ciudad['techos'])) if k not in quitar]
+    salida['vida'] = vida
+    if 'vuelos' in ciudad:
+        salida['vuelos'] = [ciudad['vuelos'][k] for k in quedan]
+    return salida
