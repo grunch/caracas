@@ -21,6 +21,12 @@ describe('manzanas coloniales de 1772',()=>{
   expect(seleccionarManzanas1772({...opciones,unidades:[{...unidad,ocupacion:'plaza'}]}).manzanas).toHaveLength(0)
   expect(seleccionarManzanas1772({...opciones,hitos:[{nace:1,muere:0,planta:[[[50,50],[90,50],[90,90],[50,90]]]}]}).manzanas).toHaveLength(0)
  })
+ it('reserva la planta de un hito activo cuando hitosConPlanta le da suprime vacío',()=>{
+  const red={nodos:[{id:'a',mosaico:[0,0]},{id:'b',mosaico:[200,0]},{id:'c',mosaico:[200,200]},{id:'d',mosaico:[0,200]}]}
+  const unidad={id:'U1',estado:'aprobada',ocupacion:'continua',nodos:['a','b','c','d']}
+  const hito={id:'h',nace:1,muere:0,planta:[[[50,50],[90,50],[90,90],[50,90]]],suprime:[]}
+  expect(seleccionarManzanas1772({red,unidades:[unidad],plaza:[0,0],metro:.5,hitos:[hito]}).manzanas).toHaveLength(0)
+ })
  it('reemplaza solo 1772 sin mutar entradas ni perder la vida anterior y posterior',()=>{
   const datos={vertices:[10,10,30,10,30,30,10,30],techos:[[0,4,1,0,123]],vida:[[0,0]],historia:[[16,16,17,18,19,20]],vuelos:[0],marcos:[],alas:[]}
   const original=structuredClone(datos)
