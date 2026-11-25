@@ -7,25 +7,25 @@ describe('manzanas coloniales de 1772',()=>{
   expect(cantidadPorDistancia(100,'U1')).toBe(cantidadPorDistancia(100,'U1'))
   expect(new Set(Array.from({length:20},(_,i)=>cantidadPorDistancia(300,`U${i}`))).size).toBeGreaterThan(1)
  })
- it('reduce un 30 % las casas del entorno inmediato de Plaza Mayor',()=>{
-  expect(cantidadPorDistancia(117,'U1772-0080')).toBe(14)
-  expect(cantidadPorDistancia(166,'U1772-0205')).toBe(14)
-  expect(cantidadPorDistancia(167,'U1772-0095')).toBe(15)
+ it('aplica otro 40 % sobre las dos reducciones anteriores junto a Plaza Mayor',()=>{
+  expect(cantidadPorDistancia(117,'U1772-0080')).toBe(8)
+  expect(cantidadPorDistancia(166,'U1772-0205')).toBe(8)
+  expect(cantidadPorDistancia(167,'U1772-0095')).toBe(9)
   expect(cantidadPorDistancia(253,'U1772-0079')).toBe(29)
  })
- it('selecciona solo manzanas continuas aprobadas y respeta terrenos libres e hitos',()=>{
+ it('selecciona unidades aprobadas, excluye plazas y reserva los hitos',()=>{
   const red={nodos:[{id:'a',mosaico:[0,0]},{id:'b',mosaico:[200,0]},{id:'c',mosaico:[200,200]},{id:'d',mosaico:[0,200]}]}
   const unidad={id:'U1',estado:'aprobada',ocupacion:'continua',nodos:['a','b','c','d']}
   const opciones={red,unidades:[unidad],plaza:[0,0],metro:.5,hitos:[]}
   const m=seleccionarManzanas1772(opciones);expect(m.manzanas).toHaveLength(1);expect(m.manzanas[0].poligono[0]).toEqual([6,6])
   expect(seleccionarManzanas1772({...opciones,unidades:[{...unidad,ocupacion:'plaza'}]}).manzanas).toHaveLength(0)
-  expect(seleccionarManzanas1772({...opciones,hitos:[{nace:1,muere:0,planta:[[[50,50],[90,50],[90,90],[50,90]]]}]}).manzanas).toHaveLength(0)
+  expect(seleccionarManzanas1772({...opciones,hitos:[{nace:1,muere:0,planta:[[[50,50],[90,50],[90,90],[50,90]]]}]}).manzanas).toHaveLength(1)
  })
  it('reserva la planta de un hito activo cuando hitosConPlanta le da suprime vacío',()=>{
   const red={nodos:[{id:'a',mosaico:[0,0]},{id:'b',mosaico:[200,0]},{id:'c',mosaico:[200,200]},{id:'d',mosaico:[0,200]}]}
   const unidad={id:'U1',estado:'aprobada',ocupacion:'continua',nodos:['a','b','c','d']}
   const hito={id:'h',nace:1,muere:0,planta:[[[50,50],[90,50],[90,90],[50,90]]],suprime:[]}
-  expect(seleccionarManzanas1772({red,unidades:[unidad],plaza:[0,0],metro:.5,hitos:[hito]}).manzanas).toHaveLength(0)
+  expect(seleccionarManzanas1772({red,unidades:[unidad],plaza:[0,0],metro:.5,hitos:[hito]}).manzanas[0].reservas).toEqual([{id:'h',poligono:hito.planta[0]}])
  })
  it('reemplaza solo 1772 sin mutar entradas ni perder la vida anterior y posterior',()=>{
   const datos={vertices:[10,10,30,10,30,30,10,30],techos:[[0,4,1,0,123]],vida:[[0,0]],historia:[[16,16,17,18,19,20]],vuelos:[0],marcos:[],alas:[]}
@@ -72,4 +72,76 @@ it('manzana oblicua: solares contenidos, fachadas orientadas y geometría nativa
   expect(dentro([px,py]),`base (${px.toFixed(2)}, ${py.toFixed(2)})`).toBe(true)
  }
  expect(bases).toBeGreaterThan(0)
+})
+
+it('integra conjuntos especiales con hitos, pero nunca rellena la plaza',()=>{
+ const red={nodos:[{id:'a',mosaico:[0,0]},{id:'b',mosaico:[200,0]},{id:'c',mosaico:[200,200]},{id:'d',mosaico:[0,200]}]}
+ const unidad={id:'U1',estado:'aprobada',ocupacion:'conjunto_especial',nodos:['a','b','c','d']}
+ const hito={id:'palacio',nace:1,planta:[[[10,10],[70,10],[70,70],[10,70]]]}
+ const o={red,unidades:[unidad],plaza:[0,0],metro:.5,hitos:[hito]}
+ expect(seleccionarManzanas1772(o).manzanas).toHaveLength(1)
+ expect(seleccionarManzanas1772({...o,unidades:[{...unidad,ocupacion:'plaza'}]}).manzanas).toHaveLength(0)
+ expect(seleccionarManzanas1772({...o,hitos:[{...hito,nace:3}]}).manzanas).toHaveLength(0)
+})
+it('reparcela junto a un edificio sin invadir su planta ni moverlo',async()=>{
+ const {casasDeManzana}=await import('../../tools/manzanas-1772-lib.mjs')
+ const {recortarConvexo,areaConSigno}=await import('../../src/poligono.js')
+ const reserva={id:'palacio',poligono:[[0,0],[80,0],[80,100],[0,100]]}
+ const m={id:'reserva',poligono:[[0,0],[200,0],[200,200],[0,200]],cantidadCasas:9,distancia:100,reservas:[reserva]}
+ const antes=structuredClone(m),casas=casasDeManzana(m,{metro:.5})
+ expect(casas.length).toBeGreaterThan(0);expect(m).toEqual(antes)
+ for(const c of casas)expect(Math.abs(areaConSigno(recortarConvexo(c.huella,reserva.poligono)))).toBeLessThan(.01)
+ expect(casas.some(c=>c.huella.some(p=>Math.abs(p[0]-80)<.01||Math.abs(p[1]-100)<.01))).toBe(true)
+})
+it('los tejados nativos de una cuadra oblicua tampoco invaden dos reservas',async()=>{
+ const {areaConSigno,recortarConvexo}=await import('../../src/poligono.js')
+ const {partesDeCiudad}=await import('../../tools/empacar-lib.mjs')
+ const {crearCoords}=await import('../../src/coords.js')
+ const {extruirTechos}=await import('../../src/ciudad.js')
+ const reservas=[{id:'iglesia',poligono:[[0,0],[80,8],[90,100],[10,92]]},{id:'palacio',poligono:[[130,140],[240,150],[250,250],[140,240]]}]
+ const m={id:'oblicua-reservada',poligono:[[0,0],[240,20],[260,260],[30,240]],cantidadCasas:20,distancia:100,reservas}
+ const {ciudad,informe}=integrarManzanas1772({vertices:[],techos:[],vida:[],historia:[],vuelos:[],marcos:[],alas:[]},[m],{metro:.5})
+ expect(informe.casasNuevas).toBeGreaterThan(0)
+ const datos=Object.fromEntries(Object.entries(partesDeCiudad(ciudad)).map(([k,v])=>[k,v.datos]))
+ const coords=crearCoords({ancho:1000,alto:1000,metro:.5,plaza:[0,0]}),g=extruirTechos(datos,coords)
+ for(let i=0;i<g.indices.length;i+=3){
+  const p=Array.from(g.indices.slice(i,i+3),k=>{const q=coords.aPixel(g.posiciones[k*3],g.posiciones[k*3+2]);return[q.px,q.py]})
+  for(const r of reservas)expect(Math.abs(areaConSigno(recortarConvexo(p,r.poligono)))).toBeLessThan(.02)
+ }
+})
+it('cobertura total: sustituye también una casa previa sin correspondencia aprobada',()=>{
+ const datos={vertices:[300,300,320,300,320,320,300,320],techos:[[0,4,1,0,123]],vida:[[0,0]],historia:[[16,16,17,18,19,20]],vuelos:[0],marcos:[],alas:[]}
+ const {ciudad}=integrarManzanas1772(datos,[],{metro:.5,reemplazarTodo:true})
+ expect(ciudad.vida.some(v=>v[0]<=1&&(!v[1]||v[1]>1))).toBe(false)
+ expect(ciudad.vida).toEqual([[0,1],[2,0]])
+})
+it('cobertura total: las casas retiradas de 1772 se levantan igual en las otras cinco épocas (revisión de #211)',async()=>{
+ const {partesDeCiudad}=await import('../../tools/empacar-lib.mjs')
+ const {crearCoords}=await import('../../src/coords.js')
+ const {extruirTechos}=await import('../../src/ciudad.js')
+ // ninguna cuadra las toca: una nace en 1578 (se parte en dos) y otra en 1772 (pasa a nacer en 1843);
+ // de colonial a republicana, la etapa que arrancó colonial tiene otro alto de piso y alero
+ const datos={vertices:[300,300,330,300,330,340,300,340, 400,300,430,300,430,340,400,340],techos:[[0,4,1,0,123],[4,4,1,0,77]],
+  vida:[[0,0],[1,4]],historia:[[16,16,17,17,17,17],[16,16,17,17,17,17]],vuelos:[255,255],marcos:[],alas:[]}
+ const coords=crearCoords({ancho:1000,alto:1000,metro:.5,plaza:[0,0]})
+ const geometria=c=>extruirTechos(Object.fromEntries(Object.entries(partesDeCiudad(c)).map(([k,v])=>[k,v.datos])),coords)
+ const enEpoca=(g,e)=>{const r=[];for(let i=0;i<g.indices.length;i+=3){const ks=[...g.indices.slice(i,i+3)],k=ks[0];if(g.vidas[k*2]>e||(g.vidas[k*2+1]&&g.vidas[k*2+1]<=e))continue
+   const t=ks.map(j=>[...g.posiciones.slice(j*3,j*3+3),...g.info.slice(j*4,j*4+4)].map(v=>v.toFixed(4)).join(',')).sort()
+   if(new Set(t).size===3)r.push(t.join('|'))}return r.sort()} // los triángulos degenerados (área nula) no se ven
+ const antes=geometria(datos),despues=geometria(integrarManzanas1772(datos,[],{metro:.5,reemplazarTodo:true}).ciudad)
+ for(const e of [0,2,3,4,5])expect(enEpoca(despues,e)).toEqual(enEpoca(antes,e))
+ expect(enEpoca(despues,1)).toEqual([])
+ expect(enEpoca(antes,2).length).toBeGreaterThan(0)
+})
+it('cobertura total incluye unidades parciales y pendientes con contorno, pero no plazas',()=>{
+ const red={nodos:[{id:'a',mosaico:[0,0]},{id:'b',mosaico:[200,0]},{id:'c',mosaico:[200,200]},{id:'d',mosaico:[0,200]}]}
+ const u={id:'U',estado:'pendiente',ocupacion:'parcial',nodos:['a','b','c','d']}
+ expect(seleccionarManzanas1772({red,unidades:[u],plaza:[0,0],metro:.5,todas:true}).manzanas).toHaveLength(1)
+})
+
+it('conserva todos los vértices de un solar irregular recortado',()=>{
+ const c={huella:[[0,0],[40,0],[40,20],[20,20],[20,40],[0,40]],paleta:1,pisos:1,semilla:1,marco:[0,0,1,0,40,40,0,5],alas:[[2,0,0,40,5]]}
+ const {ciudad}=integrarManzanas1772({vertices:[],techos:[],vida:[],historia:[],marcos:[],alas:[]},[{id:'irregular',casas:[c]}],{reemplazarTodo:true})
+ expect(ciudad.techos[0][1]).toBe(6)
+ expect(ciudad.vertices).toEqual(c.huella.flat())
 })

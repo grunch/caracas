@@ -85,14 +85,17 @@ export function cubiertaDe(estilo, semilla, epoca) {
  * a republicana) no hace otra etapa: es la misma casa, a la que el shader le sube el pretil. Cada
  * etapa trae el estilo con que arranca, sus pisos, su vida [nace, muere) y si en algún momento lleva
  * alero o pretil. Sin historia, una sola etapa con lo que dice el techo. `conAlas`: la casa trae alas
- * del dato (es de patio mientras su fachada lo sea).
+ * del dato (es de patio mientras su fachada lo sea). Las etapas se derivan desde la época 0 y después se
+ * recortan a la vida: antes de nacer, la historia repite la época en que nace (tools/geo/estilos.py), así
+ * que eso no cambia nada; una casa retirada de 1772 (tools/manzanas-1772-lib.mjs) guarda ahí su pasado real
+ * y conserva desde 1843 la etapa con que nació (revisión de #211).
  */
 export function etapasDe({ estilo, pisos, semilla, nace = 0, muere = 0 }, historia = null, { conAlas = false } = {}) {
   const pretil = DE_PRETIL.includes(estilo)
   if (!historia) return [{ estilo, pisos, nace, muere, conAlero: !pretil, conPretil: pretil }]
   const etapas = []
   let clave = null
-  for (let e = nace; e < (muere || EPOCAS); e++) {
+  for (let e = 0; e < (muere || EPOCAS); e++) {
     const [est, alt] = [historia[e] % 16, Math.floor(historia[e] / 16) || pisos]
     // una casa con alas (conAlas) cambia de forma también cuando deja de ser de patio: pasa a techarse entera
     const nueva = `${cubiertaDe(est, semilla, e)}·${alt}·${est === QUINTA}·${est === GALPON}·${conAlas && ESTILOS_DE_PATIO.includes(est)}`
@@ -105,7 +108,9 @@ export function etapasDe({ estilo, pisos, semilla, nace = 0, muere = 0 }, histor
     if (DE_PRETIL.includes(est)) actual.conPretil = true
     else actual.conAlero = true
   }
-  return etapas.length ? etapas : [{ estilo, pisos, nace, muere, conAlero: !pretil, conPretil: pretil }]
+  const vivas = etapas.filter((etapa) => !etapa.muere || etapa.muere > nace)
+  if (!vivas.length) return [{ estilo, pisos, nace, muere, conAlero: !pretil, conPretil: pretil }]
+  return [{ ...vivas[0], nace: Math.max(vivas[0].nace, nace) }, ...vivas.slice(1)]
 }
 
 /**

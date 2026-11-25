@@ -1,0 +1,1782 @@
+{
+  "alcance": "Todas las viviendas genéricas visibles en 1772; contornos de referencia o inferidos, no censo histórico.",
+  "unidades": 253,
+  "casasSustituidas": 6295,
+  "casasNuevas": 3167,
+  "casasAnterioresEn1772": 0,
+  "arboles": 5083,
+  "unidadesSinArboles": 0,
+  "porUnidad": [
+    {
+      "id": "U1772-0008",
+      "casas": 20,
+      "arboles": 15,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0011",
+      "casas": 13,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0016",
+      "casas": 17,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0027",
+      "casas": 21,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0030",
+      "casas": 22,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0032",
+      "casas": 19,
+      "arboles": 45,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0047",
+      "casas": 13,
+      "arboles": 31,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0048",
+      "casas": 13,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0049",
+      "casas": 16,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0050",
+      "casas": 21,
+      "arboles": 16,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0051",
+      "casas": 24,
+      "arboles": 16,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0052",
+      "casas": 24,
+      "arboles": 37,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0053",
+      "casas": 24,
+      "arboles": 39,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0054",
+      "casas": 26,
+      "arboles": 53,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0055",
+      "casas": 25,
+      "arboles": 16,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0056",
+      "casas": 26,
+      "arboles": 16,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0057",
+      "casas": 22,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0062",
+      "casas": 14,
+      "arboles": 47,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0063",
+      "casas": 18,
+      "arboles": 15,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0064",
+      "casas": 21,
+      "arboles": 44,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0065",
+      "casas": 24,
+      "arboles": 16,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0066",
+      "casas": 26,
+      "arboles": 55,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0067",
+      "casas": 26,
+      "arboles": 15,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0068",
+      "casas": 26,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0069",
+      "casas": 24,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0073",
+      "casas": 14,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0074",
+      "casas": 15,
+      "arboles": 32,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0076",
+      "casas": 20,
+      "arboles": 29,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0077",
+      "casas": 22,
+      "arboles": 30,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0078",
+      "casas": 25,
+      "arboles": 11,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0079",
+      "casas": 29,
+      "arboles": 10,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0080",
+      "casas": 8,
+      "arboles": 43,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0081",
+      "casas": 8,
+      "arboles": 32,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0082",
+      "casas": 28,
+      "arboles": 12,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0083",
+      "casas": 26,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0088",
+      "casas": 12,
+      "arboles": 57,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0089",
+      "casas": 13,
+      "arboles": 14,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0090",
+      "casas": 18,
+      "arboles": 15,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0091",
+      "casas": 24,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0094",
+      "casas": 8,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0095",
+      "casas": 9,
+      "arboles": 17,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0096",
+      "casas": 26,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0104",
+      "casas": 18,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0105",
+      "casas": 23,
+      "arboles": 21,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0106",
+      "casas": 23,
+      "arboles": 18,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0109",
+      "casas": 27,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0110",
+      "casas": 28,
+      "arboles": 21,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0118",
+      "casas": 20,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0119",
+      "casas": 21,
+      "arboles": 25,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0120",
+      "casas": 21,
+      "arboles": 13,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0121",
+      "casas": 23,
+      "arboles": 23,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0122",
+      "casas": 25,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0123",
+      "casas": 24,
+      "arboles": 14,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0124",
+      "casas": 26,
+      "arboles": 47,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0133",
+      "casas": 12,
+      "arboles": 28,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0134",
+      "casas": 17,
+      "arboles": 42,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0135",
+      "casas": 17,
+      "arboles": 46,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0136",
+      "casas": 21,
+      "arboles": 20,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0137",
+      "casas": 22,
+      "arboles": 16,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0138",
+      "casas": 21,
+      "arboles": 17,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0139",
+      "casas": 24,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0140",
+      "casas": 25,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0146",
+      "casas": 18,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0153",
+      "casas": 21,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0158",
+      "casas": 17,
+      "arboles": 37,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0159",
+      "casas": 16,
+      "arboles": 14,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0160",
+      "casas": 17,
+      "arboles": 43,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0169",
+      "casas": 15,
+      "arboles": 14,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0174",
+      "casas": 16,
+      "arboles": 16,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0177",
+      "casas": 16,
+      "arboles": 15,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0179",
+      "casas": 12,
+      "arboles": 15,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0180",
+      "casas": 14,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0181",
+      "casas": 12,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0190",
+      "casas": 18,
+      "arboles": 22,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0192",
+      "casas": 21,
+      "arboles": 13,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0198",
+      "casas": 30,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0199",
+      "casas": 29,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0201",
+      "casas": 14,
+      "arboles": 29,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0202",
+      "casas": 23,
+      "arboles": 25,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0203",
+      "casas": 0,
+      "arboles": 30,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0204",
+      "casas": 7,
+      "arboles": 47,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0205",
+      "casas": 8,
+      "arboles": 53,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0206",
+      "casas": 20,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0207",
+      "casas": 22,
+      "arboles": 59,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0210",
+      "casas": 28,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "U1772-0213",
+      "casas": 14,
+      "arboles": 60,
+      "contorno": "referencia",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36189-0-0",
+      "casas": 21,
+      "arboles": 59,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36674-0-0",
+      "casas": 17,
+      "arboles": 23,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36144-0-0",
+      "casas": 20,
+      "arboles": 16,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38023-0-0",
+      "casas": 20,
+      "arboles": 32,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38218-0-0",
+      "casas": 6,
+      "arboles": 6,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36235-0-0",
+      "casas": 18,
+      "arboles": 24,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37978-0-0",
+      "casas": 18,
+      "arboles": 17,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37707-0-0",
+      "casas": 22,
+      "arboles": 60,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37273-0-0",
+      "casas": 20,
+      "arboles": 41,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-35946-0-0",
+      "casas": 16,
+      "arboles": 52,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36568-0-0",
+      "casas": 29,
+      "arboles": 22,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36745-0-0",
+      "casas": 20,
+      "arboles": 10,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38363-0-0",
+      "casas": 18,
+      "arboles": 24,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37055-0-0",
+      "casas": 29,
+      "arboles": 23,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-10774-0-0",
+      "casas": 28,
+      "arboles": 13,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37775-0-0",
+      "casas": 21,
+      "arboles": 35,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37431-0-0",
+      "casas": 29,
+      "arboles": 25,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37351-0-0",
+      "casas": 27,
+      "arboles": 11,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36862-0-0",
+      "casas": 33,
+      "arboles": 42,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38075-0-0",
+      "casas": 14,
+      "arboles": 21,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38695-0-0",
+      "casas": 10,
+      "arboles": 29,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36641-0-0",
+      "casas": 15,
+      "arboles": 34,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37627-0-0",
+      "casas": 17,
+      "arboles": 18,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-35880-0-0",
+      "casas": 6,
+      "arboles": 5,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36901-0-0",
+      "casas": 9,
+      "arboles": 44,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38515-0-0",
+      "casas": 26,
+      "arboles": 60,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37936-0-0",
+      "casas": 9,
+      "arboles": 6,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36072-0-0",
+      "casas": 8,
+      "arboles": 29,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37314-0-0",
+      "casas": 23,
+      "arboles": 17,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-13836-0-0",
+      "casas": 29,
+      "arboles": 26,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38168-0-0",
+      "casas": 6,
+      "arboles": 13,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37095-0-0",
+      "casas": 22,
+      "arboles": 8,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37470-0-0",
+      "casas": 14,
+      "arboles": 30,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37574-0-0",
+      "casas": 16,
+      "arboles": 44,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38115-0-0",
+      "casas": 14,
+      "arboles": 15,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37022-0-0",
+      "casas": 13,
+      "arboles": 13,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-14651-0-0",
+      "casas": 22,
+      "arboles": 37,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36607-0-0",
+      "casas": 22,
+      "arboles": 36,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36044-0-0",
+      "casas": 5,
+      "arboles": 13,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36818-0-0",
+      "casas": 10,
+      "arboles": 16,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-11134-0-0",
+      "casas": 18,
+      "arboles": 7,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37159-0-0",
+      "casas": 13,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38484-0-0",
+      "casas": 6,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36107-0-0",
+      "casas": 8,
+      "arboles": 12,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37196-0-0",
+      "casas": 12,
+      "arboles": 17,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36273-0-0",
+      "casas": 14,
+      "arboles": 6,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36678-0-0",
+      "casas": 12,
+      "arboles": 20,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37845-0-0",
+      "casas": 11,
+      "arboles": 21,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36507-0-0",
+      "casas": 15,
+      "arboles": 7,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36015-0-0",
+      "casas": 12,
+      "arboles": 5,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36712-0-0",
+      "casas": 11,
+      "arboles": 26,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36331-0-0",
+      "casas": 20,
+      "arboles": 24,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36778-0-0",
+      "casas": 6,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-35857-0-0",
+      "casas": 5,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36304-0-0",
+      "casas": 18,
+      "arboles": 32,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37746-0-0",
+      "casas": 11,
+      "arboles": 5,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36430-0-0",
+      "casas": 8,
+      "arboles": 29,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37816-0-0",
+      "casas": 14,
+      "arboles": 13,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38404-0-0",
+      "casas": 12,
+      "arboles": 23,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-35988-0-0",
+      "casas": 9,
+      "arboles": 13,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36540-0-0",
+      "casas": 10,
+      "arboles": 25,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-14640-0-0",
+      "casas": 16,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36480-0-0",
+      "casas": 11,
+      "arboles": 14,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37886-0-0",
+      "casas": 13,
+      "arboles": 14,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37246-0-0",
+      "casas": 6,
+      "arboles": 15,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37134-0-0",
+      "casas": 14,
+      "arboles": 12,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36977-0-0",
+      "casas": 11,
+      "arboles": 19,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38603-0-0",
+      "casas": 15,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38258-0-0",
+      "casas": 7,
+      "arboles": 23,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38339-0-0",
+      "casas": 12,
+      "arboles": 21,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36398-0-0",
+      "casas": 7,
+      "arboles": 10,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38281-0-0",
+      "casas": 8,
+      "arboles": 15,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38575-0-0",
+      "casas": 17,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-35821-0-0",
+      "casas": 5,
+      "arboles": 3,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37686-0-0",
+      "casas": 12,
+      "arboles": 3,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38551-0-0",
+      "casas": 14,
+      "arboles": 12,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38315-0-0",
+      "casas": 7,
+      "arboles": 10,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38782-0-0",
+      "casas": 8,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37410-0-0",
+      "casas": 3,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38150-0-0",
+      "casas": 7,
+      "arboles": 10,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37669-0-0",
+      "casas": 10,
+      "arboles": 3,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-08388-0-0",
+      "casas": 5,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37919-0-0",
+      "casas": 5,
+      "arboles": 3,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-16495-0-0",
+      "casas": 10,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38653-0-0",
+      "casas": 5,
+      "arboles": 7,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38468-0-0",
+      "casas": 4,
+      "arboles": 9,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38762-0-0",
+      "casas": 7,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38432-0-0",
+      "casas": 5,
+      "arboles": 10,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38446-0-0",
+      "casas": 4,
+      "arboles": 6,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37231-0-0",
+      "casas": 8,
+      "arboles": 7,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37509-0-0",
+      "casas": 6,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36415-0-0",
+      "casas": 8,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37395-0-0",
+      "casas": 6,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37873-0-0",
+      "casas": 7,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-35917-0-0",
+      "casas": 5,
+      "arboles": 6,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37389-0-0",
+      "casas": 6,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38746-0-0",
+      "casas": 5,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37559-0-0",
+      "casas": 6,
+      "arboles": 6,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36392-0-0",
+      "casas": 7,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36856-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36468-0-0",
+      "casas": 5,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-12700-0-0",
+      "casas": 7,
+      "arboles": 3,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37913-0-0",
+      "casas": 5,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-16509-0-0",
+      "casas": 7,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38462-0-0",
+      "casas": 4,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37015-0-0",
+      "casas": 6,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38509-0-0",
+      "casas": 4,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37555-0-0",
+      "casas": 5,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38306-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-15581-0-0",
+      "casas": 5,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37530-0-0",
+      "casas": 5,
+      "arboles": 3,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36812-0-0",
+      "casas": 3,
+      "arboles": 3,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37543-0-0",
+      "casas": 3,
+      "arboles": 4,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38755-0-0",
+      "casas": 6,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38674-0-0",
+      "casas": 3,
+      "arboles": 3,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38071-0-0",
+      "casas": 4,
+      "arboles": 3,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37551-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38776-0-0",
+      "casas": 4,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37537-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-35931-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37524-0-0",
+      "casas": 5,
+      "arboles": 3,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-35942-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38067-0-0",
+      "casas": 4,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-35938-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37005-0-0",
+      "casas": 6,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36474-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38214-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38668-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-23212-0-0",
+      "casas": 4,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37011-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38681-0-0",
+      "casas": 3,
+      "arboles": 3,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38685-0-0",
+      "casas": 4,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38513-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37020-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-24628-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38311-0-0",
+      "casas": 4,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36671-0-0",
+      "casas": 4,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37528-0-0",
+      "casas": 4,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38691-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38759-0-0",
+      "casas": 4,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36478-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37541-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-35855-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37549-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36710-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38672-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38689-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37534-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37009-0-0",
+      "casas": 4,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38690-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38744-0-0",
+      "casas": 4,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36709-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36673-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-08387-0-0",
+      "casas": 3,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-24642-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38741-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-23194-0-0",
+      "casas": 1,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-37536-0-0",
+      "casas": 1,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-07501-0-0",
+      "casas": 1,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 1
+    },
+    {
+      "id": "V1772-37019-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38310-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-38742-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36762-0-0",
+      "casas": 1,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 1
+    },
+    {
+      "id": "V1772-38743-0-0",
+      "casas": 2,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-36230-0-0",
+      "casas": 1,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-19902-0-0",
+      "casas": 1,
+      "arboles": 2,
+      "contorno": "inferido",
+      "corralesReservados": 0
+    },
+    {
+      "id": "V1772-06220-0-0",
+      "casas": 1,
+      "arboles": 1,
+      "contorno": "inferido",
+      "corralesReservados": 1
+    }
+  ]
+}

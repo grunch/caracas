@@ -1,7 +1,8 @@
 // Los pasos del pipeline de datos (npm run datos, tools/datos.mjs): de qué entradas y de qué código sale cada
 // salida. `npm run datos:al-dia` usa la misma lista para avisar cuando el release publicado quedó viejo.
-// Sin efectos al importarse: solo constantes y los comandos de cada paso.
+// Al importarse solo enumera las fuentes locales; no ejecuta pasos ni modifica archivos.
 import { readFile } from 'node:fs/promises'
+import { readdirSync } from 'node:fs'
 import path from 'node:path'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
@@ -20,6 +21,8 @@ const PLANO = ['primero', 'chico', 'medio-4k', 'medio'].map((n) => `public/plano
 export const leerJson = async (ruta) => JSON.parse(await readFile(path.join(RAIZ, ruta), 'utf8'))
 export const leerJsonSiHay = (ruta) => leerJson(ruta).catch(() => null)
 const GEO = (...nombres) => nombres.map((n) => `tools/geo/${n}.py`)
+const CODIGO_HITOS = readdirSync(new URL('../src/hitos/', import.meta.url), {recursive:true})
+  .filter(n=>n.endsWith('.js')).sort().map(n=>`src/hitos/${n}`)
 const OSM_HOY = 'fuentes/derivados/hoy/osm.json'
 export const DESCARGAR = process.argv.includes('--descargar') // vuelve a bajar OSM aunque haya caché
 
@@ -136,8 +139,7 @@ export const PASOS = [
     id: 'manzanas-1772',
     entradas: [`${E}/ciudad-estilos.json`, `${D}/mosaico.json`, 'tools/geo/referencias/1772-red.json', 'tools/geo/referencias/1772-unidades.json'],
     salidas: [`${E}/ciudad-manzanas.json`, `${E}/manzanas-1772-informe.json`],
-    codigo: ['tools/manzanas-1772.mjs', 'tools/manzanas-1772-lib.mjs', 'src/manzanas/plan.js', 'src/manzanas/paleta.js', 'src/manzanas/perimetro.js', 'src/poligono.js', 'src/alas.js', 'src/hitos/suprimir.js', 'src/hitos/plantas.js',
-      ...['catedral', 'iglesias', 'civiles', 'panteon', 'plaza-bolivar', 'casa-amarilla', 'palacio-arzobispal', 'capitolio', 'san-francisco', 'marco'].map(n=>`src/hitos/datos/${n}.js`)],
+    codigo: ['tools/manzanas-1772.mjs', 'tools/manzanas-completas.mjs', 'tools/geo/manzanas_completas.py', 'src/hitos.js', 'src/coords.js', ...CODIGO_HITOS, 'tools/manzanas-1772-lib.mjs', 'tools/manzanas-reservas-lib.mjs', 'src/manzanas/plan.js', 'src/manzanas/paleta.js', 'src/manzanas/perimetro.js', 'src/poligono.js', 'src/alas.js'],
     cmd: () => ['node', 'tools/manzanas-1772.mjs', `${E}/ciudad-estilos.json`, `${E}/ciudad-manzanas.json`],
   },
   {

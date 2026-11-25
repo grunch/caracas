@@ -8,24 +8,24 @@
     800
   ],
   "hitos": {
-    "lineaDeTiempo": 703,
-    "listo": 3613,
-    "primerasCasas": 3613,
-    "casas": 6046,
-    "arboles": 6046
+    "lineaDeTiempo": 632,
+    "listo": 3773,
+    "primerasCasas": 3774,
+    "casas": 6292,
+    "arboles": 6293
   },
   "tareas": {
-    "cuantas": 8,
-    "sumaMs": 1231,
-    "mayorMs": 406
+    "cuantas": 7,
+    "sumaMs": 1131,
+    "mayorMs": 408
   },
   "pedidos": {
     "cuantos": 20,
-    "bytes": 9727880,
+    "bytes": 9736002,
     "mayores": [
       {
         "url": "datos/ciudad.pak",
-        "bytes": 4117496
+        "bytes": 4125722
       },
       {
         "url": "datos/relieve.bin",
@@ -49,11 +49,11 @@
       },
       {
         "url": "datos/arboles.bin",
-        "bytes": 296724
+        "bytes": 296620
       },
       {
-        "url": "assets/main-Cx4Mijx4.js",
-        "bytes": 172440
+        "url": "assets/main-C1-qrD_C.js",
+        "bytes": 172439
       }
     ]
   },
@@ -67,7 +67,7 @@
           "bytes": 0
         },
         {
-          "url": "assets/main-Cx4Mijx4.js",
+          "url": "assets/main-C1-qrD_C.js",
           "bytes": 0
         },
         {
@@ -124,9 +124,9 @@
     }
   },
   "memoria": {
-    "heapMB": 257,
+    "heapMB": 242,
     "geometriaEnJsMB": 85.6,
-    "vertices": 5997697,
+    "vertices": 5989966,
     "mallas": 579,
     "geometrias": 351,
     "texturas": 14
@@ -134,57 +134,57 @@
   "cuadro": {
     "centro": {
       "llamadas": 148,
-      "triangulos": 4352947,
-      "medianaMs": 7.3,
-      "p90Ms": 19.1
+      "triangulos": 4342983,
+      "medianaMs": 8.2,
+      "p90Ms": 13.3
     },
     "valle": {
       "llamadas": 234,
-      "triangulos": 2792015,
-      "medianaMs": 6.9,
-      "p90Ms": 11.2
+      "triangulos": 2783031,
+      "medianaMs": 8,
+      "p90Ms": 11.8
     },
     "cerca": {
       "llamadas": 112,
-      "triangulos": 4180579,
-      "medianaMs": 7.4,
-      "p90Ms": 9.3
+      "triangulos": 4169775,
+      "medianaMs": 9.4,
+      "p90Ms": 12.8
     }
   },
   "presupuesto": [
     {
       "clave": "casasMs",
-      "valor": 6046,
+      "valor": 6292,
       "tope": 5000,
       "pasa": false
     },
     {
       "clave": "tareaMasLargaMs",
-      "valor": 406,
+      "valor": 408,
       "tope": 200,
       "pasa": false
     },
     {
       "clave": "bytesAlAbrir",
-      "valor": 9727880,
+      "valor": 9736002,
       "tope": 8000000,
       "pasa": false
     },
     {
       "clave": "heapMB",
-      "valor": 257,
+      "valor": 242,
       "tope": 250,
-      "pasa": false
+      "pasa": true
     },
     {
       "clave": "triangulosCentro",
-      "valor": 4352947,
+      "valor": 4342983,
       "tope": 2000000,
       "pasa": false
     },
     {
       "clave": "msPorCuadroCentro",
-      "valor": 7.3,
+      "valor": 8.2,
       "tope": 16.6,
       "pasa": true
     }

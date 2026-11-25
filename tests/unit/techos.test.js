@@ -310,6 +310,16 @@ describe('etapasDe: la casa a lo largo de las épocas', () => {
     ])
   })
 
+  test('una casa que se retira de 1772 conserva desde 1843 la etapa con que nació (revisión de #211)', () => {
+    // antes de nacer, la historia repite la época en que nace (tools/geo/estilos.py); una casa que
+    // integrarManzanas1772 retira de 1772 guarda ahí su pasado real, y ese pasado decide su etapa
+    const h = [byte(COLONIAL, 1), byte(COLONIAL, 1), byte(REPUBLICANO, 1), byte(REPUBLICANO, 1), byte(REPUBLICANO, 2), byte(REPUBLICANO, 2)]
+    const entera = etapasDe({ estilo: REPUBLICANO, pisos: 2, semilla: 1, nace: 0, muere: 0 }, h)
+    const retirada = etapasDe({ estilo: REPUBLICANO, pisos: 2, semilla: 1, nace: 2, muere: 0 }, h)
+    expect(retirada).toEqual([{ ...entera[0], nace: 2 }, ...entera.slice(1)])
+    expect(retirada[0]).toMatchObject({ estilo: COLONIAL, conAlero: true, conPretil: true })
+  })
+
   test('lo público pasa de teja a azotea en 1889: otra etapa aunque el estilo no cambie', () => {
     const h = Array(6).fill(byte(PUBLICO, 2))
     expect(etapasDe({ estilo: PUBLICO, pisos: 2, semilla: 1, nace: 1, muere: 0 }, h).map((e) => [e.nace, e.muere])).toEqual([[1, 3], [3, 0]])
