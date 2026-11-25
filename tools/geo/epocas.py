@@ -872,6 +872,13 @@ def main():
         ciudad = sin_solapes_residuales(ciudad, hitos, metro)
         ciudad = vuelos_1772(ciudad, hitos, red72, metro)
         print(f"calles de 1772 bloqueadas en la ciudad final: {len(sin_abrir)} {sin_abrir[:10]}")
+    for k, e in enumerate(epocas):
+        if e.get("referencia"):
+            # T81.4c: las manzanas rayadas de la referencia que siguen sin casas a la vista llevan casas propias
+            from epocas_1843 import agregar_casas
+            unidades = json.loads((raiz / e["referencia"]).read_text())["unidades"]
+            ciudad, informe = agregar_casas(ciudad, unidades, metro, k)
+            print(f"{e['año']}: casas propias en {informe['manzanas']} manzanas sin casas ({informe['casas']} casas)")
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))
 
     casas = casas_por_epoca(ciudad["vida"])
