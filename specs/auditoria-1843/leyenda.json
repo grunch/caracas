@@ -1,0 +1,2293 @@
+{
+ "fuente": "fuentes/mapas/1843-nypl-jesurun-facsimil-muller-stapler/original.tiff",
+ "sha256": "f010aea63c330fd92d4046014080fdbb282eeb13a0aef60e5831374c5b172fbc",
+ "criterios": {
+  "lectura": "segura = se lee sin duda; dudosa = mejor lectura con duda; ilegible = no se puede leer (se da la mejor conjetura si la hay)",
+  "en_1936": "nombre del diccionario tools/geo/esquinas/1936-esquinas.json cuando es el mismo o variante obvia (artículo, tilde, b/v, s/z, l/r, abreviatura); null si no",
+  "ambigua": "true si el nombre de 1936 aparece más de una vez en el diccionario o si hay otra candidata (nombres dobles «X ó Y»)"
+ },
+ "leyenda_fuentes_publicas": "Las Fuentes Públicas van señaladas [signo: pequeño semicírculo/cúpula] [signo: círculo]",
+ "iglesias": [
+  {
+   "letra": "A",
+   "nombre": "Catedral",
+   "lectura": "segura"
+  },
+  {
+   "letra": "B",
+   "nombre": "La Pastora",
+   "lectura": "segura"
+  },
+  {
+   "letra": "C",
+   "nombre": "La Trinidad",
+   "lectura": "segura"
+  },
+  {
+   "letra": "D",
+   "nombre": "Convento de Dominicas",
+   "lectura": "segura",
+   "texto_literal": "Conv. de Domínicas"
+  },
+  {
+   "letra": "E",
+   "nombre": "La Merced",
+   "lectura": "segura"
+  },
+  {
+   "letra": "F",
+   "nombre": "San Antonio",
+   "lectura": "segura"
+  },
+  {
+   "letra": "G",
+   "nombre": "Altagracia",
+   "lectura": "segura"
+  },
+  {
+   "letra": "H",
+   "nombre": "Convento de Carmelitas",
+   "lectura": "segura",
+   "texto_literal": "Conv. de Carmelitas"
+  },
+  {
+   "letra": "I",
+   "nombre": "San Mauricio",
+   "lectura": "segura"
+  },
+  {
+   "letra": "J",
+   "nombre": "La Candelaria",
+   "lectura": "segura"
+  },
+  {
+   "letra": "K",
+   "nombre": "Convento de Concepciones",
+   "lectura": "segura",
+   "texto_literal": "Conv. de Concepciones",
+   "nota": "«iones» en superíndice"
+  },
+  {
+   "letra": "L",
+   "nombre": "Capilla de la Universidad",
+   "lectura": "segura",
+   "texto_literal": "Cap. de la Universidad"
+  },
+  {
+   "letra": "M",
+   "nombre": "San Jacinto",
+   "lectura": "segura"
+  },
+  {
+   "letra": "N",
+   "nombre": "San Francisco",
+   "lectura": "segura"
+  },
+  {
+   "letra": "O",
+   "nombre": "San Lazaro",
+   "lectura": "segura"
+  },
+  {
+   "letra": "P",
+   "nombre": "San Pablo",
+   "lectura": "segura"
+  },
+  {
+   "letra": "Q",
+   "nombre": "Oratorio de San Felipe",
+   "lectura": "segura",
+   "texto_literal": "Orat. de Sn Felipe"
+  },
+  {
+   "letra": "R",
+   "nombre": "Santa Rosalia",
+   "lectura": "segura"
+  },
+  {
+   "letra": "S",
+   "nombre": "Capuchinos",
+   "lectura": "segura"
+  },
+  {
+   "letra": "T",
+   "nombre": "El Calvario",
+   "lectura": "segura"
+  }
+ ],
+ "rios": [
+  {
+   "letra": "U",
+   "nombre": "Anauco",
+   "lectura": "segura"
+  },
+  {
+   "letra": "V",
+   "nombre": "Catuche",
+   "lectura": "segura"
+  },
+  {
+   "letra": "X",
+   "nombre": "Caroata",
+   "lectura": "segura"
+  },
+  {
+   "letra": "Y",
+   "nombre": "Guaire",
+   "lectura": "segura",
+   "nota": "no hay W"
+  }
+ ],
+ "puentes": [
+  {
+   "letra": "a",
+   "nombre": "de la Pastora",
+   "lectura": "segura"
+  },
+  {
+   "letra": "b",
+   "nombre": "de la Trinidad",
+   "lectura": "segura"
+  },
+  {
+   "letra": "c",
+   "nombre": "de Punceles",
+   "lectura": "segura"
+  },
+  {
+   "letra": "d",
+   "nombre": "de Candelaria",
+   "lectura": "segura"
+  },
+  {
+   "letra": "e",
+   "nombre": "de Monroy",
+   "lectura": "dudosa",
+   "texto_literal": "de Mouroy",
+   "nota": "se lee «Mouroy»; probablemente Monroy (n abierta)"
+  },
+  {
+   "letra": "f",
+   "nombre": "de Anauco",
+   "lectura": "segura"
+  },
+  {
+   "letra": "g",
+   "nombre": "de San Pablo",
+   "lectura": "segura"
+  },
+  {
+   "letra": "h",
+   "nombre": "de la Union",
+   "lectura": "segura"
+  }
+ ],
+ "puntos_notables": [
+  {
+   "letra": "i",
+   "nombre": "Palacio del Gobierno",
+   "lectura": "segura"
+  },
+  {
+   "letra": "j",
+   "nombre": "Palacio Arzobispal",
+   "lectura": "segura"
+  },
+  {
+   "letra": "k",
+   "nombre": "Universidad",
+   "lectura": "segura",
+   "texto_literal": "Univesidad",
+   "nota": "así, sin r"
+  },
+  {
+   "letra": "l",
+   "nombre": "Colejio de la Yndependencia",
+   "lectura": "segura",
+   "texto_literal": "Colejio de la Yndependª"
+  },
+  {
+   "letra": "m",
+   "nombre": "Teatro",
+   "lectura": "segura"
+  },
+  {
+   "letra": "n",
+   "nombre": "Parque",
+   "lectura": "segura"
+  },
+  {
+   "letra": "ñ",
+   "nombre": "Hospital de Lazarinos",
+   "lectura": "dudosa",
+   "texto_literal": "Hospit. de Lazarinºs",
+   "nota": "abreviatura final en superíndice"
+  },
+  {
+   "letra": "o",
+   "nombre": "Campo Santo",
+   "lectura": "segura"
+  },
+  {
+   "letra": "p",
+   "nombre": "Cementerio de San Pedro",
+   "lectura": "segura",
+   "texto_literal": "Cementerio de Sª Pedro",
+   "nota": "abreviatura S con superíndice"
+  },
+  {
+   "letra": "q",
+   "nombre": "Cementerio Britanico",
+   "lectura": "segura"
+  },
+  {
+   "letra": "r",
+   "nombre": "Almacen de Polvora",
+   "lectura": "segura"
+  },
+  {
+   "letra": "s",
+   "nombre": "Cuartel veterano",
+   "lectura": "segura",
+   "texto_literal": "Cuartel veterº"
+  },
+  {
+   "letra": "t",
+   "nombre": "Matanza",
+   "lectura": "segura"
+  },
+  {
+   "letra": "u",
+   "nombre": "Estanque de Agua",
+   "lectura": "segura",
+   "texto_literal": "Estanq. de Agua"
+  },
+  {
+   "letra": "v",
+   "nombre": "Puerta de La Guaira",
+   "lectura": "segura"
+  },
+  {
+   "letra": "w",
+   "nombre": "Alcabala del Valle",
+   "lectura": "segura"
+  },
+  {
+   "letra": "x",
+   "nombre": "Alcabala de Candelaria",
+   "lectura": "segura",
+   "texto_literal": "id. de Candelaria"
+  },
+  {
+   "letra": "y",
+   "nombre": "Camino de Sabana Grande",
+   "lectura": "segura"
+  },
+  {
+   "letra": "z",
+   "nombre": "Camino de La Guaira",
+   "lectura": "segura",
+   "texto_literal": "id. de La Guaira"
+  },
+  {
+   "letra": "ȝ̃",
+   "nombre": "Camino de Catia",
+   "lectura": "dudosa",
+   "texto_literal": "id. de Catia",
+   "nota": "signo: una z/ʒ con tilde encima; forma del signo dudosa"
+  },
+  {
+   "letra": "+",
+   "nombre": "Camino de la Vega",
+   "lectura": "segura",
+   "texto_literal": "id. de la Vega",
+   "nota": "signo: cruz"
+  },
+  {
+   "letra": "*",
+   "nombre": "Estancias",
+   "lectura": "segura",
+   "nota": "signo: asterisco/punto"
+  },
+  {
+   "letra": null,
+   "nombre": "Ñarauli",
+   "lectura": "segura",
+   "texto_literal": "Ñarauli",
+   "nota": "sin letra: rotulado en el plano (\"Narauli\")"
+  },
+  {
+   "letra": null,
+   "nombre": "Canton del Teque",
+   "lectura": "segura",
+   "nota": "sin letra: rotulado en el plano"
+  },
+  {
+   "letra": null,
+   "nombre": "Campo de Marte",
+   "lectura": "segura",
+   "nota": "sin letra: rotulado en el plano"
+  }
+ ],
+ "calles_norte_sur": [
+  {
+   "numero": 1,
+   "nombre": "Eras",
+   "lectura": "segura"
+  },
+  {
+   "numero": 2,
+   "nombre": "Verde",
+   "lectura": "segura"
+  },
+  {
+   "numero": 3,
+   "nombre": "Ricaurte",
+   "lectura": "segura",
+   "nota": "se lee «Ricaute» (sin r)"
+  },
+  {
+   "numero": 4,
+   "nombre": "Triunfo",
+   "lectura": "dudosa",
+   "nota": "manchado"
+  },
+  {
+   "numero": 5,
+   "nombre": "Lindo",
+   "lectura": "dudosa",
+   "nota": "mancha sobre la palabra"
+  },
+  {
+   "numero": 6,
+   "nombre": "Comercio",
+   "lectura": "segura"
+  },
+  {
+   "numero": 7,
+   "nombre": "Leyes patrias",
+   "lectura": "segura"
+  },
+  {
+   "numero": 8,
+   "nombre": "Carabobo",
+   "lectura": "segura"
+  },
+  {
+   "numero": 9,
+   "nombre": "Urea",
+   "lectura": "ilegible",
+   "nota": "mancha; se ve «…rea» o «…ea»; mejor lectura «Urea», sin seguridad"
+  },
+  {
+   "numero": 10,
+   "nombre": "Roscio",
+   "lectura": "segura"
+  },
+  {
+   "numero": 11,
+   "nombre": "Ustariz",
+   "lectura": "dudosa",
+   "nota": "manchado"
+  },
+  {
+   "numero": 12,
+   "nombre": "Giraldot",
+   "lectura": "segura"
+  },
+  {
+   "numero": 13,
+   "nombre": "Rivas",
+   "lectura": "segura"
+  },
+  {
+   "numero": 14,
+   "nombre": "Cedeño",
+   "lectura": "segura"
+  },
+  {
+   "numero": 15,
+   "nombre": "Los Plazas",
+   "lectura": "segura",
+   "nota": "así: «Los Plazas»"
+  },
+  {
+   "numero": 16,
+   "nombre": "Campo Elias",
+   "lectura": "segura"
+  }
+ ],
+ "calles_este_oeste": [
+  {
+   "numero": 1,
+   "nombre": "Las Fuentes",
+   "lectura": "segura"
+  },
+  {
+   "numero": 2,
+   "nombre": "La Paz",
+   "lectura": "segura"
+  },
+  {
+   "numero": 3,
+   "nombre": "Madariaga",
+   "lectura": "segura"
+  },
+  {
+   "numero": 4,
+   "nombre": "Estio",
+   "lectura": "segura"
+  },
+  {
+   "numero": 5,
+   "nombre": "Proteccion",
+   "lectura": "segura"
+  },
+  {
+   "numero": 6,
+   "nombre": "Fraternidad",
+   "lectura": "segura"
+  },
+  {
+   "numero": 7,
+   "nombre": "Margarita",
+   "lectura": "segura"
+  },
+  {
+   "numero": 8,
+   "nombre": "Bravos",
+   "lectura": "segura"
+  },
+  {
+   "numero": 9,
+   "nombre": "Ciencias",
+   "lectura": "segura"
+  },
+  {
+   "numero": 10,
+   "nombre": "Sol",
+   "lectura": "segura"
+  },
+  {
+   "numero": 11,
+   "nombre": "Orinoco",
+   "lectura": "segura"
+  },
+  {
+   "numero": 12,
+   "nombre": "Juncal",
+   "lectura": "segura"
+  },
+  {
+   "numero": 13,
+   "nombre": "Fertilidad",
+   "lectura": "segura"
+  },
+  {
+   "numero": 14,
+   "nombre": "Union",
+   "lectura": "segura"
+  },
+  {
+   "numero": 15,
+   "nombre": "Primavera",
+   "lectura": "segura"
+  },
+  {
+   "numero": 16,
+   "nombre": "Agricultura",
+   "lectura": "segura"
+  },
+  {
+   "numero": 17,
+   "nombre": "Delicias",
+   "lectura": "segura"
+  }
+ ],
+ "esquinas": [
+  {
+   "numero": 1,
+   "nombre": "de tío Pedrito",
+   "texto_literal": "de tio Pedrito",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 2,
+   "nombre": "de la Alameda",
+   "texto_literal": "de la Alameda",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 3,
+   "nombre": "de dos Pilitas",
+   "texto_literal": "de dos Pilitas",
+   "lectura": "segura",
+   "en_1936": "Dos Pilitas",
+   "ambigua": false,
+   "nota": "«dos» se lee con letras empastadas"
+  },
+  {
+   "numero": 4,
+   "nombre": "Cuartel Veterano",
+   "texto_literal": "Cuartel Veterano",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 5,
+   "nombre": "del padre Gusmán",
+   "texto_literal": "del padre Gusman",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 6,
+   "nombre": "de la Cruz",
+   "texto_literal": "de la Cruz",
+   "lectura": "segura",
+   "en_1936": "La Cruz",
+   "ambigua": true
+  },
+  {
+   "numero": 7,
+   "nombre": "del Guanábano",
+   "texto_literal": "del Guanábano",
+   "lectura": "segura",
+   "en_1936": "Guanábano",
+   "ambigua": false
+  },
+  {
+   "numero": 8,
+   "nombre": "de la caja de agua",
+   "texto_literal": "de la caja de agua",
+   "lectura": "segura",
+   "en_1936": "Caja de Agua",
+   "ambigua": false
+  },
+  {
+   "numero": 9,
+   "nombre": "del Truco",
+   "texto_literal": "del Truco",
+   "lectura": "segura",
+   "en_1936": "El Truco",
+   "ambigua": false
+  },
+  {
+   "numero": 10,
+   "nombre": "Callejón de la Merced",
+   "texto_literal": "Callejon de la Merced",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 11,
+   "nombre": "del Puente de la Trinidad",
+   "texto_literal": "del Puente de la Trinidad",
+   "lectura": "segura",
+   "en_1936": "Puente Trinidad",
+   "ambigua": false
+  },
+  {
+   "numero": 12,
+   "nombre": "del Balconcito",
+   "texto_literal": "del Balconcito",
+   "lectura": "segura",
+   "en_1936": "Balconcito",
+   "ambigua": false
+  },
+  {
+   "numero": 13,
+   "nombre": "de Salas",
+   "texto_literal": "de Salas",
+   "lectura": "segura",
+   "en_1936": "Salas",
+   "ambigua": false
+  },
+  {
+   "numero": 14,
+   "nombre": "de la Merced",
+   "texto_literal": "de la Merced",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false,
+   "nota": "1936 tiene «Las Mercedes» (dos) y «Luneta de la Merced»: no se emparejan por no ser variante obvia"
+  },
+  {
+   "numero": 15,
+   "nombre": "de tienda honda",
+   "texto_literal": "de tienda honda",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 16,
+   "nombre": "del Basurero",
+   "texto_literal": "del Basurero",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false,
+   "nota": "nombre repetido en la 93"
+  },
+  {
+   "numero": 17,
+   "nombre": "del Cuartel viejo",
+   "texto_literal": "del Cuartel viejo",
+   "lectura": "segura",
+   "en_1936": "Cuartel Viejo",
+   "ambigua": false
+  },
+  {
+   "numero": 18,
+   "nombre": "de Altagracia",
+   "texto_literal": "de Altagracia",
+   "lectura": "segura",
+   "en_1936": "Altagracia",
+   "ambigua": false
+  },
+  {
+   "numero": 19,
+   "nombre": "de Mijares",
+   "texto_literal": "de Mijares",
+   "lectura": "segura",
+   "en_1936": "Mijares",
+   "ambigua": false
+  },
+  {
+   "numero": 20,
+   "nombre": "del teniente Rei",
+   "texto_literal": "del teniente Rei",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 21,
+   "nombre": "de Alguinsones",
+   "texto_literal": "de Alguinsones",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 22,
+   "nombre": "de la Saba",
+   "texto_literal": "de la Saba",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 23,
+   "nombre": "de las Carmelitas",
+   "texto_literal": "de las Carmelitas",
+   "lectura": "segura",
+   "en_1936": "Las Carmelitas",
+   "ambigua": false
+  },
+  {
+   "numero": 24,
+   "nombre": "de San Mauricio",
+   "texto_literal": "de San Mauricio",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 25,
+   "nombre": "de Candilito de Ñarauli",
+   "texto_literal": "de Candilº de Ñarauli",
+   "lectura": "dudosa",
+   "en_1936": "Candilito",
+   "ambigua": true,
+   "nota": "«Candilº» abreviado (Candilito, desarrollo probable); «Ñ» con tilde visible"
+  },
+  {
+   "numero": 26,
+   "nombre": "del Bolero",
+   "texto_literal": "del Bolero",
+   "lectura": "segura",
+   "en_1936": "Bolero",
+   "ambigua": false
+  },
+  {
+   "numero": 27,
+   "nombre": "de Llaguno",
+   "texto_literal": "de Llaguno",
+   "lectura": "segura",
+   "en_1936": "Llaguno",
+   "ambigua": false
+  },
+  {
+   "numero": 28,
+   "nombre": "de Beroes",
+   "texto_literal": "de Beroes",
+   "lectura": "segura",
+   "en_1936": "Veroes",
+   "ambigua": false,
+   "nota": "variante b/v (Beroes ↔ Veroes)"
+  },
+  {
+   "numero": 29,
+   "nombre": "de las Ybarras",
+   "texto_literal": "de las Ybarras",
+   "lectura": "segura",
+   "en_1936": "Las Ibarras",
+   "ambigua": false
+  },
+  {
+   "numero": 30,
+   "nombre": "de la Pelota",
+   "texto_literal": "de la Pelota",
+   "lectura": "segura",
+   "en_1936": "La Pelota",
+   "ambigua": false
+  },
+  {
+   "numero": 31,
+   "nombre": "de Punceles",
+   "texto_literal": "de Punceles",
+   "lectura": "segura",
+   "en_1936": "Punceres",
+   "ambigua": false,
+   "nota": "variante l/r (Punceles ↔ Punceres)"
+  },
+  {
+   "numero": 32,
+   "nombre": "de Cerrito del Diablo",
+   "texto_literal": "de Cerrito del Diablo",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 33,
+   "nombre": "del Platanal",
+   "texto_literal": "del Platanal",
+   "lectura": "segura",
+   "en_1936": "Platanal",
+   "ambigua": false
+  },
+  {
+   "numero": 34,
+   "nombre": "del Principal",
+   "texto_literal": "del Principal",
+   "lectura": "segura",
+   "en_1936": "Principal",
+   "ambigua": false
+  },
+  {
+   "numero": 35,
+   "nombre": "de la Torre",
+   "texto_literal": "de la Torre",
+   "lectura": "segura",
+   "en_1936": "La Torre",
+   "ambigua": false
+  },
+  {
+   "numero": 36,
+   "nombre": "del Teque",
+   "texto_literal": "del Teque",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 37,
+   "nombre": "de Ramón Pitizugo",
+   "texto_literal": "de Ramon Pitizugo",
+   "lectura": "dudosa",
+   "en_1936": null,
+   "ambigua": false,
+   "nota": "apellido de lectura dudosa: «Pitizugo» / «Pittzugo»"
+  },
+  {
+   "numero": 38,
+   "nombre": "del Conde",
+   "texto_literal": "del Conde",
+   "lectura": "segura",
+   "en_1936": "El Conde",
+   "ambigua": true
+  },
+  {
+   "numero": 39,
+   "nombre": "de las Madrices",
+   "texto_literal": "de las Madrices",
+   "lectura": "segura",
+   "en_1936": "Las Madrices",
+   "ambigua": false
+  },
+  {
+   "numero": 40,
+   "nombre": "de las Marones",
+   "texto_literal": "de las Marones",
+   "lectura": "segura",
+   "en_1936": "La Marrón",
+   "ambigua": false,
+   "nota": "en 1936 «La Marrón»: variante de número y doble r"
+  },
+  {
+   "numero": 41,
+   "nombre": "del Cují",
+   "texto_literal": "del Cuji",
+   "lectura": "segura",
+   "en_1936": "El Cují",
+   "ambigua": false
+  },
+  {
+   "numero": 42,
+   "nombre": "del Puente de Candelaria",
+   "texto_literal": "del Puente Candelarª",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false,
+   "nota": "«Candelarª» abreviado, sale del margen de la columna"
+  },
+  {
+   "numero": 43,
+   "nombre": "de Manduca",
+   "texto_literal": "de Manduca",
+   "lectura": "segura",
+   "en_1936": "Manduca",
+   "ambigua": false
+  },
+  {
+   "numero": 44,
+   "nombre": "de Candelaria",
+   "texto_literal": "de Candelaria",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 45,
+   "nombre": "de la alcabala de la Candelaria",
+   "texto_literal": "de alcabala de la Candelarª",
+   "lectura": "dudosa",
+   "en_1936": null,
+   "ambigua": false,
+   "nota": "texto chico y comprimido; «del» se ve como «de l»"
+  },
+  {
+   "numero": 46,
+   "nombre": "del Colegio",
+   "texto_literal": "del Colejio",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 47,
+   "nombre": "de San Jacinto",
+   "texto_literal": "de Sⁿ Jacinto",
+   "lectura": "segura",
+   "en_1936": "San Jacinto",
+   "ambigua": false
+  },
+  {
+   "numero": 48,
+   "nombre": "de Solís",
+   "texto_literal": "de Solis",
+   "lectura": "segura",
+   "en_1936": "Solís",
+   "ambigua": false
+  },
+  {
+   "numero": 49,
+   "nombre": "del Padre Muñoz",
+   "texto_literal": "del Padre Muñoz",
+   "lectura": "segura",
+   "en_1936": "Muñoz",
+   "ambigua": false
+  },
+  {
+   "numero": 50,
+   "nombre": "de las Gradillas",
+   "texto_literal": "de las Gradillas",
+   "lectura": "segura",
+   "en_1936": "Las Gradillas",
+   "ambigua": false
+  },
+  {
+   "numero": 51,
+   "nombre": "del Doctor Paúl",
+   "texto_literal": "del Dʳ Paul",
+   "lectura": "segura",
+   "en_1936": "Doctor Paúl",
+   "ambigua": false
+  },
+  {
+   "numero": 52,
+   "nombre": "de Salvador de León",
+   "texto_literal": "de Salvador de Leon",
+   "lectura": "segura",
+   "en_1936": "Salvador de León",
+   "ambigua": false
+  },
+  {
+   "numero": 53,
+   "nombre": "de Socarrás",
+   "texto_literal": "de Socarrás",
+   "lectura": "segura",
+   "en_1936": "Socarrás",
+   "ambigua": false
+  },
+  {
+   "numero": 54,
+   "nombre": "de Algarrobo",
+   "texto_literal": "de Algarrobo",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 55,
+   "nombre": "de Miguelacho",
+   "texto_literal": "de Miguelacho",
+   "lectura": "segura",
+   "en_1936": "Miguelacho",
+   "ambigua": false
+  },
+  {
+   "numero": 56,
+   "nombre": "del Juego de Pelota",
+   "texto_literal": "del Juego de Pelota",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 57,
+   "nombre": "de la Faltriquera",
+   "texto_literal": "de la Faltriquera",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 58,
+   "nombre": "de la Pedrera",
+   "texto_literal": "de la Pedrera",
+   "lectura": "segura",
+   "en_1936": "La Pedrera",
+   "ambigua": false
+  },
+  {
+   "numero": 59,
+   "nombre": "de Mercaderes",
+   "texto_literal": "de Mercaderes",
+   "lectura": "segura",
+   "en_1936": "Mercaderes",
+   "ambigua": false
+  },
+  {
+   "numero": 60,
+   "nombre": "de San Francisco",
+   "texto_literal": "de Sⁿ Francisco",
+   "lectura": "segura",
+   "en_1936": "San Francisco",
+   "ambigua": false,
+   "nota": "superíndice de la S poco claro (n o a)"
+  },
+  {
+   "numero": 61,
+   "nombre": "de la Sociedad",
+   "texto_literal": "de la Sociedad",
+   "lectura": "segura",
+   "en_1936": "Sociedad",
+   "ambigua": false
+  },
+  {
+   "numero": 62,
+   "nombre": "de los Traposos",
+   "texto_literal": "de los Traposos",
+   "lectura": "segura",
+   "en_1936": "Traposos",
+   "ambigua": false
+  },
+  {
+   "numero": 63,
+   "nombre": "del chorro de San Jacinto",
+   "texto_literal": "del chorro Sⁿ Jacinto",
+   "lectura": "segura",
+   "en_1936": "El Chorro",
+   "ambigua": false,
+   "nota": "superíndice de la S poco claro (n o a); en 1936 «El Chorro» (sin «de San Jacinto»)"
+  },
+  {
+   "numero": 64,
+   "nombre": "de Sanabria",
+   "texto_literal": "de Sanávria",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false,
+   "nota": "«Sanávria» con tilde así; Sanabria"
+  },
+  {
+   "numero": 65,
+   "nombre": "de la Pilita de San Lázaro",
+   "texto_literal": "de Pilita Sⁿ Lazaro",
+   "lectura": "segura",
+   "en_1936": "Pilita",
+   "ambigua": true,
+   "nota": "1936 tiene dos «Pilita»"
+  },
+  {
+   "numero": 66,
+   "nombre": "del Puente de San Lázaro",
+   "texto_literal": "de Puente Sⁿ id.",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false,
+   "nota": "«id.» remite a San Lázaro de la 65"
+  },
+  {
+   "numero": 67,
+   "nombre": "de la Casa de Misericordia",
+   "texto_literal": "de Casa de Misericordia",
+   "lectura": "segura",
+   "en_1936": "Misericordia",
+   "ambigua": false
+  },
+  {
+   "numero": 68,
+   "nombre": "de San Lázaro",
+   "texto_literal": "de San Lazaro",
+   "lectura": "segura",
+   "en_1936": "San Lázaro",
+   "ambigua": false
+  },
+  {
+   "numero": 69,
+   "nombre": "del Campo Santo",
+   "texto_literal": "del Campº Santo",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 70,
+   "nombre": "de la Gorda",
+   "texto_literal": "de la Gorda",
+   "lectura": "segura",
+   "en_1936": "La Gorda",
+   "ambigua": false
+  },
+  {
+   "numero": 71,
+   "nombre": "de Santa Ana",
+   "texto_literal": "de Santana",
+   "lectura": "segura",
+   "en_1936": "Santa Ana",
+   "ambigua": false,
+   "nota": "Santana = Santa Ana"
+  },
+  {
+   "numero": 72,
+   "nombre": "de Pajaritos",
+   "texto_literal": "de Pajaritos",
+   "lectura": "segura",
+   "en_1936": "Pajaritos",
+   "ambigua": false
+  },
+  {
+   "numero": 73,
+   "nombre": "de Camejo",
+   "texto_literal": "de Camejo",
+   "lectura": "segura",
+   "en_1936": "Camejo",
+   "ambigua": false
+  },
+  {
+   "numero": 74,
+   "nombre": "de Colón",
+   "texto_literal": "de Colon",
+   "lectura": "segura",
+   "en_1936": "Colón",
+   "ambigua": false
+  },
+  {
+   "numero": 75,
+   "nombre": "del Doctor Díaz",
+   "texto_literal": "del Dʳ Diaz",
+   "lectura": "segura",
+   "en_1936": "Doctor Díaz",
+   "ambigua": false
+  },
+  {
+   "numero": 76,
+   "nombre": "del Peinero",
+   "texto_literal": "del Peinero",
+   "lectura": "segura",
+   "en_1936": "Peinero",
+   "ambigua": false
+  },
+  {
+   "numero": 77,
+   "nombre": "de Patanche",
+   "texto_literal": "de Patanche",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 78,
+   "nombre": "del Silencio",
+   "texto_literal": "del Silencio",
+   "lectura": "segura",
+   "en_1936": "El Silencio",
+   "ambigua": false
+  },
+  {
+   "numero": 79,
+   "nombre": "del Puente de San Pablo",
+   "texto_literal": "del Puente de Sⁿ Pablo",
+   "lectura": "segura",
+   "en_1936": "Puente San Pablo",
+   "ambigua": false
+  },
+  {
+   "numero": 80,
+   "nombre": "del Calvario",
+   "texto_literal": "del Calvario",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 81,
+   "nombre": "de San Juan",
+   "texto_literal": "de San Juan",
+   "lectura": "segura",
+   "en_1936": "San Juan",
+   "ambigua": false
+  },
+  {
+   "numero": 82,
+   "nombre": "de San Pablo",
+   "texto_literal": "de San Pablo",
+   "lectura": "segura",
+   "en_1936": "San Pablo",
+   "ambigua": false
+  },
+  {
+   "numero": 83,
+   "nombre": "de la Palma",
+   "texto_literal": "de la Palma",
+   "lectura": "segura",
+   "en_1936": "La Palma",
+   "ambigua": false
+  },
+  {
+   "numero": 84,
+   "nombre": "de San Felipe",
+   "texto_literal": "de San Felipe",
+   "lectura": "segura",
+   "en_1936": "San Felipe",
+   "ambigua": false
+  },
+  {
+   "numero": 85,
+   "nombre": "de Cruz verde",
+   "texto_literal": "de Cruz verde",
+   "lectura": "segura",
+   "en_1936": "Cruz Verde",
+   "ambigua": false
+  },
+  {
+   "numero": 86,
+   "nombre": "del Zamuro",
+   "texto_literal": "del Samuro",
+   "lectura": "segura",
+   "en_1936": "El Zamuro",
+   "ambigua": false,
+   "nota": "variante s/z (Samuro ↔ Zamuro)"
+  },
+  {
+   "numero": 87,
+   "nombre": "del Pájaro",
+   "texto_literal": "del Pájaro",
+   "lectura": "segura",
+   "en_1936": "El Pájaro",
+   "ambigua": false
+  },
+  {
+   "numero": 88,
+   "nombre": "de la Soledad",
+   "texto_literal": "de la Soledad",
+   "lectura": "segura",
+   "en_1936": "La Soledad",
+   "ambigua": false
+  },
+  {
+   "numero": 89,
+   "nombre": "de la Matanza",
+   "texto_literal": "de la Matanza",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 90,
+   "nombre": "del Campo de Marte",
+   "texto_literal": "del Campo de Marte",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false,
+   "nota": "nombre repetido en la 92"
+  },
+  {
+   "numero": 91,
+   "nombre": "de los Angelitos o de la Pilita",
+   "texto_literal": "de los Anjelitos ó de la Pilita",
+   "lectura": "segura",
+   "en_1936": "Los Angelitos",
+   "ambigua": true,
+   "nota": "dos nombres; en 1936 hay «Los Angelitos» y también dos «Pilita»"
+  },
+  {
+   "numero": 92,
+   "nombre": "del Campo de Marte",
+   "texto_literal": "del Campo de Marte",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false,
+   "nota": "nombre repetido en la 90"
+  },
+  {
+   "numero": 93,
+   "nombre": "del Basurero",
+   "texto_literal": "del Basurero",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false,
+   "nota": "nombre repetido en la 16"
+  },
+  {
+   "numero": 94,
+   "nombre": "del Reducto",
+   "texto_literal": "del Reducto",
+   "lectura": "segura",
+   "en_1936": "El Reducto",
+   "ambigua": false
+  },
+  {
+   "numero": 95,
+   "nombre": "de Miracielos",
+   "texto_literal": "de mira Cielos",
+   "lectura": "segura",
+   "en_1936": "Miracielos",
+   "ambigua": false
+  },
+  {
+   "numero": 96,
+   "nombre": "de los Cipreses",
+   "texto_literal": "de los Cipreses",
+   "lectura": "segura",
+   "en_1936": "Los Cipreses",
+   "ambigua": false
+  },
+  {
+   "numero": 97,
+   "nombre": "de Velásquez",
+   "texto_literal": "de Velazques",
+   "lectura": "segura",
+   "en_1936": "Velásquez",
+   "ambigua": false
+  },
+  {
+   "numero": 98,
+   "nombre": "de la Miseria",
+   "texto_literal": "de la Miseria",
+   "lectura": "segura",
+   "en_1936": "La Miseria",
+   "ambigua": false
+  },
+  {
+   "numero": 99,
+   "nombre": "de la Hoyada",
+   "texto_literal": "de la Hoyada",
+   "lectura": "segura",
+   "en_1936": "La Hoyada",
+   "ambigua": false
+  },
+  {
+   "numero": 100,
+   "nombre": "(ídem: de la Hoyada)",
+   "texto_literal": "de id. id.",
+   "lectura": "segura",
+   "en_1936": "La Hoyada",
+   "ambigua": false,
+   "nota": "«id. id.» repite la 99"
+  },
+  {
+   "numero": 101,
+   "nombre": "de Jesús, María y José",
+   "texto_literal": "de Jesus, Maria i Jose",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 102,
+   "nombre": "del Quebrado",
+   "texto_literal": "del Quebrado",
+   "lectura": "segura",
+   "en_1936": "El Quebrado",
+   "ambigua": false
+  },
+  {
+   "numero": 103,
+   "nombre": "del Maderero",
+   "texto_literal": "del Maderero",
+   "lectura": "segura",
+   "en_1936": "Maderero",
+   "ambigua": false
+  },
+  {
+   "numero": 104,
+   "nombre": "de la Glorieta",
+   "texto_literal": "de la Glorieta",
+   "lectura": "segura",
+   "en_1936": "La Glorieta",
+   "ambigua": false
+  },
+  {
+   "numero": 105,
+   "nombre": "del Cuartel de Milicias",
+   "texto_literal": "del Cuartel de Milicias",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 106,
+   "nombre": "de Hoyo vicioso",
+   "texto_literal": "de Hoyo vicioso",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 107,
+   "nombre": "de Santa Rosalía",
+   "texto_literal": "de Sª Rosalia",
+   "lectura": "segura",
+   "en_1936": "Santa Rosalía",
+   "ambigua": false
+  },
+  {
+   "numero": 108,
+   "nombre": "de Pinto",
+   "texto_literal": "de Pinto",
+   "lectura": "segura",
+   "en_1936": "Pinto",
+   "ambigua": false
+  },
+  {
+   "numero": 109,
+   "nombre": "del Viento",
+   "texto_literal": "del Viento",
+   "lectura": "segura",
+   "en_1936": "El Viento",
+   "ambigua": false
+  },
+  {
+   "numero": 110,
+   "nombre": "de la Carnicería",
+   "texto_literal": "de la Carniceria",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 111,
+   "nombre": "del León",
+   "texto_literal": "del Leon",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 112,
+   "nombre": "de Milano",
+   "texto_literal": "de Milano",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 113,
+   "nombre": "de la Quebrada de Lazarinos",
+   "texto_literal": "de la Quebrada de Lazarinºs",
+   "lectura": "segura",
+   "en_1936": "Lazarinos",
+   "ambigua": true,
+   "nota": "en 1936 hay «Lazarinos» y también «La Quebrada»"
+  },
+  {
+   "numero": 114,
+   "nombre": "del Guarataro",
+   "texto_literal": "del Guarataro",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 115,
+   "nombre": "de la Garita",
+   "texto_literal": "de la Garita",
+   "lectura": "segura",
+   "en_1936": "La Garita",
+   "ambigua": false
+  },
+  {
+   "numero": 116,
+   "nombre": "de Vicente Hernández",
+   "texto_literal": "de Vᵗᵉ Hernandᶻ",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 117,
+   "nombre": "del Bucare",
+   "texto_literal": "del Bucare",
+   "lectura": "segura",
+   "en_1936": "Bucare",
+   "ambigua": false
+  },
+  {
+   "numero": 118,
+   "nombre": "del Padre Rodríguez",
+   "texto_literal": "del Padre Rodrᶻ",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 119,
+   "nombre": "de los Palacios",
+   "texto_literal": "de los Palacios",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 120,
+   "nombre": "de Castán",
+   "texto_literal": "de Castan",
+   "lectura": "segura",
+   "en_1936": "Castán",
+   "ambigua": false
+  },
+  {
+   "numero": 121,
+   "nombre": "del Candilito",
+   "texto_literal": "del Candilito",
+   "lectura": "segura",
+   "en_1936": "Candilito",
+   "ambigua": true
+  },
+  {
+   "numero": 122,
+   "nombre": "de Gobernador viejo",
+   "texto_literal": "de Gobᵒʳ viejo",
+   "lectura": "segura",
+   "en_1936": "Gobernador",
+   "ambigua": false,
+   "nota": "«Gobᵒʳ» abreviado; en 1936 solo «Gobernador» (sin «viejo»)"
+  },
+  {
+   "numero": 123,
+   "nombre": "del Muerto",
+   "texto_literal": "del Muerto",
+   "lectura": "segura",
+   "en_1936": "El Muerto",
+   "ambigua": false
+  },
+  {
+   "numero": 124,
+   "nombre": "de Palo grande",
+   "texto_literal": "de Palo grande",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 125,
+   "nombre": "de la Quebrada de Lazarinos",
+   "texto_literal": "de la Quebª de Lazarinos",
+   "lectura": "segura",
+   "en_1936": "Lazarinos",
+   "ambigua": true,
+   "nota": "igual nombre que la 113; en 1936 hay «Lazarinos» y «La Quebrada»"
+  },
+  {
+   "numero": 126,
+   "nombre": "del Aguacate",
+   "texto_literal": "del Aguacate",
+   "lectura": "segura",
+   "en_1936": "El Aguacate",
+   "ambigua": false
+  },
+  {
+   "numero": 127,
+   "nombre": "de Amaro",
+   "texto_literal": "de Amaro",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 128,
+   "nombre": "de la Cochera",
+   "texto_literal": "de la Cochera",
+   "lectura": "segura",
+   "en_1936": "La Cochera",
+   "ambigua": false
+  },
+  {
+   "numero": 129,
+   "nombre": "del Cacho o del Carmen",
+   "texto_literal": "del Cacho ó del Carmen",
+   "lectura": "segura",
+   "en_1936": "El Carmen",
+   "ambigua": true,
+   "nota": "dos nombres; 1936 tiene dos «El Carmen»"
+  },
+  {
+   "numero": 130,
+   "nombre": "del Mamey",
+   "texto_literal": "del Mamey",
+   "lectura": "segura",
+   "en_1936": "El Mamey",
+   "ambigua": false
+  },
+  {
+   "numero": 131,
+   "nombre": "del Marqués de León",
+   "texto_literal": "del Marquez de Leon",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 132,
+   "nombre": "de la Palmita",
+   "texto_literal": "de la Palmita",
+   "lectura": "segura",
+   "en_1936": "La Palmita",
+   "ambigua": false
+  },
+  {
+   "numero": 133,
+   "nombre": "de las Tablitas",
+   "texto_literal": "de las Tablitas",
+   "lectura": "segura",
+   "en_1936": "Tablitas",
+   "ambigua": false
+  },
+  {
+   "numero": 134,
+   "nombre": "del Sordo",
+   "texto_literal": "del Sordo",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 135,
+   "nombre": "de las Peláez",
+   "texto_literal": "de las Pelaes",
+   "lectura": "segura",
+   "en_1936": "Las Peláez",
+   "ambigua": false
+  },
+  {
+   "numero": 136,
+   "nombre": "de la alcabala del Valle",
+   "texto_literal": "de la alcabª del Valle",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 137,
+   "nombre": "de Echezuría",
+   "texto_literal": "de Echezuria",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  },
+  {
+   "numero": 138,
+   "nombre": "de Aurioli",
+   "texto_literal": "de Aurioli",
+   "lectura": "dudosa",
+   "en_1936": null,
+   "ambigua": false,
+   "nota": "final dudoso: «Aurioli» / «Auriolí»"
+  },
+  {
+   "numero": 139,
+   "nombre": "del Rosario",
+   "texto_literal": "del Rosario",
+   "lectura": "segura",
+   "en_1936": "El Rosario",
+   "ambigua": true,
+   "nota": "1936 tiene «El Rosario» y «Rosario»"
+  },
+  {
+   "numero": 140,
+   "nombre": "de la Noria",
+   "texto_literal": "de la Noría",
+   "lectura": "segura",
+   "en_1936": null,
+   "ambigua": false
+  }
+ ],
+ "esquinas_nota_final": "Las Esquinas, que no están marcadas, no tienen aun Nombre.",
+ "parroquias": [
+  {
+   "nombre": "Catedral",
+   "rayado": "líneas horizontales finas y apretadas, oscuro"
+  },
+  {
+   "nombre": "San Pablo",
+   "rayado": "líneas diagonales que suben hacia la derecha (/), medio"
+  },
+  {
+   "nombre": "Altagracia",
+   "rayado": "líneas diagonales que bajan hacia la derecha (\\), medio"
+  },
+  {
+   "nombre": "Candelaria",
+   "rayado": "claro: trazos cortos en zigzag/ondulados, casi un punteado irregular"
+  },
+  {
+   "nombre": "Santa Rosalía",
+   "texto_literal": "Sta Rosalia",
+   "rayado": "líneas verticales apretadas, oscuro"
+  },
+  {
+   "nombre": "San Juan",
+   "rayado": "claro: diagonales cruzadas en ambos sentidos (enrejado en rombos)"
+  }
+ ],
+ "notas_al_pie": "TEXTO MANUSCRITO AL PIE (litografiado en cursiva, 10 renglones). [?] = lectura dudosa.\nCarácas, en otro tiempo capital de la Capitanía jeneral de las provincias de Venezuela, lo es ahora de la República de Venezuela i de la provincia de Carácas—\nEstá á la altura de 1041 varas sobre el nivel del mar, en una temperatura media de 19° 45' del centígrado. Fué fundada por Diego Losada en 1567 i recibió el nombre de Santiago de Leon de Carácas,\nque no pudo conservar, quedándose solo con el indíjena de Carácas, porque así se llamaban los naturales de aquellas comarcas. El suelo sobre que está fabricada esta capital se inclina gradual-\nmente al Guaire, rio que la baña por el sur, i que se forma por la union de los rios S. Pedro i Macarao, i sigue hasta unirse con el Tuy mas abajo de Sta Lucía. Otro declive conduce al E hasta el Anauco. Este doble de-\nclive contribuye á la salubridad de la poblacion. El Caroata separa el barrio de San Juan de la ciudad propiamente dicha. El Catuche corre casi por su centro i sus aguas alimentan las fuentes públicas i particulares. Reunidos estos rios al\nGuaire forman el fértil valle de Chacao. En 1812 se graduaba la poblacion de Carácas en 50000 almas, cuando aconteció el funesto terremoto que hizo perecer cerca de 12000 bajo las ruinas de los edificios. Carácas sufrió muchas pérdidas con\nlos acontecimientos políticos que se siguieron á aquella catástrofe, mas hoi gozando ya de una paz octaviana cuenta mas de 40000 almas. Tiene 8 plazas que son la plaza Bolívar, Catedral, Candelaria, Sn Pablo, la Trinidad, San\nJacinto, San Lázaro, la Pastora i la de San Juan, mas grande que las anteriores pero de una forma irregular i sin empedrado. Las calles están en línea recta de 8 ó 10 varas de ancho, empedrados i [?«cartando» / quizá «el Can-»: ilegible con seguridad]\nton de Carácas tiene 6 parroquias en la ciudad capital i [?11 / ¿8?] fuera de ella. Carácas posee buenos colejios particulares i escuelas públicas i particulares, tiene 3 conventos de monjas, una Universidad, un Seminario, una academia militar\nhéroe de la América del Sur, quien nació en 24 de Julio de 1783 i murió en Sta Marta el 17 de Diciembre de 1830; sus restos trasladados á Carácas el 17 de Diciembre de 1842, están en la Sta [?Y. M. = Iglesia Metropolitana] [?Catedral / «Crias»] &c.\nNOTA: entre «academia militar» y «héroe de la América del Sur» el texto salta (no se ve nada más en ese renglón); el sujeto (presumiblemente Bolívar) no aparece escrito. Fechas 1783/1830/1842 coinciden con Bolívar, pero el nombre no está en el texto.\n\nPIE IMPRESO: «CARÁCAS. AÑO 1843.» (centrado bajo el texto). Abajo a la izquierda, fuera del marco: «Lit. de Müller i Stapler.» [«de» dudoso, se lee «Lit d»]. Abajo a la derecha, fuera del marco: «No. 16» (número del facsímil/atlas).\n\nTÍTULO: «PLANO TOPOGRÁFICO / de la Ciudad de Carácas / capital de la República de Venezuela, situada á los 10°30'50\" lat. N. / i en la long. 69° 25' al O. del merid. de París, (67° 4' 45\" al O. del de Greenwich)» — debajo, en cursiva: «Rejistrado conforme á la lei.» A la derecha, un óvalo con monograma de lectura dudosa («AJ» o «AJS»). Cabeceras de las leyendas: «YGLESIAS / Capillas i Conventos» y «NOMBRES de las Esquinas».\n\nESCALA (abajo a la derecha dentro del mapa): barra con marcas «0, 75, 150, 300, 6[00]» (el último rótulo se ve «6…», presumiblemente 600) y el letrero «Escala de 600 vs castellanas» (varas castellanas).\n",
+ "recortes": [
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/escala.png",
+   "caja_px": [
+    4300,
+    3700,
+    5050,
+    4000
+   ],
+   "sha256": "96344501f977543dba133b093a1f0bdc44759766604531c2c88e720f4a6f3660"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_a0.png",
+   "caja_px": [
+    5020,
+    1035,
+    5340,
+    1475
+   ],
+   "sha256": "ed26d0d311732ed97666718783bd1f1db8991d30d16859ecee7dad6696480ba9"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_a1.png",
+   "caja_px": [
+    5020,
+    1445,
+    5340,
+    1885
+   ],
+   "sha256": "15ff5ba6c557dd9bde3229f2544240a91d2e589fa50004f583432398da228413"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_a2.png",
+   "caja_px": [
+    5020,
+    1855,
+    5340,
+    2295
+   ],
+   "sha256": "ae3ff079431bfb2156d97075bfd54f526bc94eb479d2bc442755b435f37f94d3"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_a3.png",
+   "caja_px": [
+    5020,
+    2265,
+    5340,
+    2705
+   ],
+   "sha256": "8166518090bc4e37657765d7f41dffa0a649cba9ee5f38414aa14d8a2c95f0c7"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_a4.png",
+   "caja_px": [
+    5020,
+    2675,
+    5340,
+    3115
+   ],
+   "sha256": "5b6aa6d38922ca644a60acacb4bf826aad300a94626a76c8d8acb93338dbff34"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_a5.png",
+   "caja_px": [
+    5020,
+    3085,
+    5340,
+    3525
+   ],
+   "sha256": "aaebe11df8ee2a94e8fc67be841aecd2defe43a94e213b61c16606ccfeaeb524"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_a6.png",
+   "caja_px": [
+    5020,
+    3495,
+    5340,
+    3935
+   ],
+   "sha256": "700ffd3e514cf85b2a426739deb7e6e662f862aebd09e628da05209b8abfda01"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_a7.png",
+   "caja_px": [
+    5020,
+    3905,
+    5340,
+    4345
+   ],
+   "sha256": "fe6cc8e1129204d9640d0d14d2d017e5fc2059fcf62bffca6ab17bf586e97f54"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_b0.png",
+   "caja_px": [
+    5320,
+    1035,
+    5790,
+    1475
+   ],
+   "sha256": "db18a2c1e919b56491d67f5b60372cbbfa5e8f6578bd4358c91397679cf88f53"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_b1.png",
+   "caja_px": [
+    5320,
+    1445,
+    5790,
+    1885
+   ],
+   "sha256": "96e18fc68fb5933e7232a8bbcf4da80966128ace67e9ae7de5927ae8b80f15f8"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_b2.png",
+   "caja_px": [
+    5320,
+    1855,
+    5790,
+    2295
+   ],
+   "sha256": "fd15f7080301b58a4bf74d668a1a4e2b0e3b810acd191925ee50363e1a85d281"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_b3.png",
+   "caja_px": [
+    5320,
+    2265,
+    5790,
+    2705
+   ],
+   "sha256": "e6260b56bb467f3c5cfc10518ffb3af9f6dc06313aecdbe4c89353b30c83fc63"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_b4.png",
+   "caja_px": [
+    5320,
+    2675,
+    5790,
+    3115
+   ],
+   "sha256": "ceb30f72b2a83282ed975d6ce63be3bc560cc36bc6f6aab730020fa7dc020e04"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_b5.png",
+   "caja_px": [
+    5320,
+    3085,
+    5790,
+    3525
+   ],
+   "sha256": "f873126be2a645a360da25af0179ae4ea35cbf55ac81a76553f50a51ab3a2cae"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_b6.png",
+   "caja_px": [
+    5320,
+    3495,
+    5790,
+    3935
+   ],
+   "sha256": "2c6a7dcaeb81b650eb13140dd9709d70870252dadacc3e3d457773a564ce08db"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_b7.png",
+   "caja_px": [
+    5320,
+    3905,
+    5790,
+    4345
+   ],
+   "sha256": "bc286121bcb7af5cd46dd82b5a2cf1dd6fc69104900a4c4e43826dea7a49e64a"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_cabecera.png",
+   "caja_px": [
+    4980,
+    980,
+    5700,
+    1150
+   ],
+   "sha256": "be3b69603bce7a8874aef0992e359d4ad1029ce0dbee8283db3cc72ddd492196"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_pie.png",
+   "caja_px": [
+    4980,
+    4300,
+    5700,
+    4500
+   ],
+   "sha256": "445bcfcf0c94f93daf0bb1c7fa2d49315374408f2106518c26a027d9ed4ee4b5"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/esq_tira.png",
+   "caja_px": [
+    4900,
+    950,
+    5800,
+    4500
+   ],
+   "sha256": "2fcde39ff20b152b1dbfa4c7bfd389e5149c2e01879df03d655629c8cd41bb76"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/general.png",
+   "caja_px": [
+    0,
+    0,
+    7216,
+    5412
+   ],
+   "sha256": "e678c72f676dce660436dc71cefac72366178b8fcd87253cd031db1aa64f177b"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_00.png",
+   "caja_px": [
+    1040,
+    4150,
+    2240,
+    4330
+   ],
+   "sha256": "3839f5b7986e8d3a8204dc09d274b7047c978125cd073eb135150abfd4688273"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_01.png",
+   "caja_px": [
+    2200,
+    4150,
+    3400,
+    4330
+   ],
+   "sha256": "d18f538405a73e9326ee792e213deab411e33983b9964ecd74441a2ca7218535"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_02.png",
+   "caja_px": [
+    3360,
+    4150,
+    4560,
+    4330
+   ],
+   "sha256": "187b85ee49db9e5a14673b81a6d91b92b0b86e9ebb19fabb1d74ae029aaa49af"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_03.png",
+   "caja_px": [
+    4520,
+    4150,
+    5720,
+    4330
+   ],
+   "sha256": "b5652a6d1a225af1f01807eeaafbd5decb1faf375882d1882672a2aba935a032"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_10.png",
+   "caja_px": [
+    1040,
+    4300,
+    2240,
+    4480
+   ],
+   "sha256": "2d1cb801fc12e5751c0df320f6a6e042f7addab6cecaa2aff0bc455cdbf8b3b0"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_11.png",
+   "caja_px": [
+    2200,
+    4300,
+    3400,
+    4480
+   ],
+   "sha256": "656b669b44cef4bb8e6767bb67ee6326f75e23ec77805ddcd65a8f6b2d953b30"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_12.png",
+   "caja_px": [
+    3360,
+    4300,
+    4560,
+    4480
+   ],
+   "sha256": "f9464de567ebfe1ea0e03155997c9eb9d69ed0be86cf46a4dc75cc01543a1c47"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_13.png",
+   "caja_px": [
+    4520,
+    4300,
+    5720,
+    4480
+   ],
+   "sha256": "189d359679f5af6d4e4b8699b12e2b2fe60f7d6be4ec1e610302fb8c2c526026"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_20.png",
+   "caja_px": [
+    1040,
+    4450,
+    2240,
+    4630
+   ],
+   "sha256": "34be23c0abb10dab564c77217289e01f587986eca1171bf3f7412c843a070f0d"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_21.png",
+   "caja_px": [
+    2200,
+    4450,
+    3400,
+    4630
+   ],
+   "sha256": "04de997b1e3eba8f57f411c3153aed6548f12ec0df92f69b8d28c5b23f40b292"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_22.png",
+   "caja_px": [
+    3360,
+    4450,
+    4560,
+    4630
+   ],
+   "sha256": "2a7c5bc0561b5dd65acb8cd92630c12f1cc7fc5f21c07fc6d22203a36ac1550f"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_23.png",
+   "caja_px": [
+    4520,
+    4450,
+    5720,
+    4630
+   ],
+   "sha256": "0720cbbefe154d6796bf78d51b5dab734689d04d273d4ce1907c0fc003d83c6a"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_30.png",
+   "caja_px": [
+    1040,
+    4600,
+    2240,
+    4780
+   ],
+   "sha256": "710ed3510346234d41d5fb776cdd4a3f977d3a1139b2ac2838e0f528fa9ba591"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_31.png",
+   "caja_px": [
+    2200,
+    4600,
+    3400,
+    4780
+   ],
+   "sha256": "2b9c740203bdaadcddc6a7a01c8c5b64511422d3a59dfca87d4355cdd0af2fd0"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_32.png",
+   "caja_px": [
+    3360,
+    4600,
+    4560,
+    4780
+   ],
+   "sha256": "6f0173d74ef68c36b94ce54006c9ab2a6a047c7cdd90158340ec7b30e0e69eeb"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_33.png",
+   "caja_px": [
+    4520,
+    4600,
+    5720,
+    4780
+   ],
+   "sha256": "394c367ac3591edef8e32327c1679066186c2aeccfbc1f721e07de46b8b3205b"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_imprenta.png",
+   "caja_px": [
+    1000,
+    4700,
+    1700,
+    4800
+   ],
+   "sha256": "8edab927987a0ee43fcec88db4f8f65ebd33a44dcf95ae58a3569e6000fd7e70"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_vista.png",
+   "caja_px": [
+    1000,
+    4050,
+    5800,
+    4950
+   ],
+   "sha256": "1a8e6188318fff84493cb19a875e3066c3bf948020c201a240dc11e36e71f7d2"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/pie_z_cantón.png",
+   "caja_px": [
+    4800,
+    4480,
+    5200,
+    4560
+   ],
+   "sha256": "38930856365b8416dcc8bc61e4f1aaef2988d1b96a85fbebc35ae1965460fa2f"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r01_iglesias_izq.png",
+   "caja_px": [
+    1070,
+    1060,
+    1390,
+    1500
+   ],
+   "sha256": "f53d6effbaa9bb0a63034fc8bf8ec9749993e1e1a8e1efdd75726cead514e11f"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r02_iglesias_der.png",
+   "caja_px": [
+    1370,
+    1060,
+    1650,
+    1500
+   ],
+   "sha256": "7bceb9b7226d6a65807a5f4e05f84d80950f7a92dce4df69ab6d89327cea1b65"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r03_iglesias_KQ.png",
+   "caja_px": [
+    1500,
+    1060,
+    1760,
+    1260
+   ],
+   "sha256": "44bac53b5f7f612795421bf5d76656d9928612e1ad8ab2c339bfc9520654930f"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r04_rios_fuentes.png",
+   "caja_px": [
+    1060,
+    1500,
+    1640,
+    1800
+   ],
+   "sha256": "ca5234de9b00acce0900ec10c06f1289295b63ca92e3fa9782b8a31845958a7a"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r05_puentes.png",
+   "caja_px": [
+    1060,
+    1800,
+    1650,
+    2070
+   ],
+   "sha256": "e7e8db9ccf12ca2ff14fc5ac7eb38bd1d1c0631ab5c52061259918cc8ebc9337"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r06_notables_izq.png",
+   "caja_px": [
+    1060,
+    2070,
+    1380,
+    2600
+   ],
+   "sha256": "09a0be3802797200764eaa7e2b5276ec415f0a2fe4298a8fc7b8b31ab8caac1f"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r07_notables_der.png",
+   "caja_px": [
+    1340,
+    2070,
+    1650,
+    2600
+   ],
+   "sha256": "0fd72b2f29ad2cd634b37820d8c9261fa784145cf826bf273af3176d9d0973eb"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r08_notables_izq_b.png",
+   "caja_px": [
+    1060,
+    2560,
+    1380,
+    2780
+   ],
+   "sha256": "f9fc57f3e78386ff829480ed94af7008754df31462b8dbd40bd53a4d52e48b51"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r09_notables_der_b.png",
+   "caja_px": [
+    1380,
+    2100,
+    1680,
+    2780
+   ],
+   "sha256": "93a4aa228fc62e7ce203d6694ef3e9e45dd44bc40271ff28c465c3a4ad0f272f"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r10_calles_ns_a.png",
+   "caja_px": [
+    1100,
+    2740,
+    1640,
+    3200
+   ],
+   "sha256": "9bf3ab5212c9af60a66073b83fe36290338a6b4282a1d392c5471f07c8039e1e"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r11_calles_ns_b.png",
+   "caja_px": [
+    1100,
+    3180,
+    1640,
+    3560
+   ],
+   "sha256": "165bb5e0750be755cc69f26d4ea9704032d515f97461c99636efd00a26908010"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r12_calles_eo_a.png",
+   "caja_px": [
+    1100,
+    3520,
+    1640,
+    3920
+   ],
+   "sha256": "f2614f466ee758bfd8849f9a07ddb10f118c8a801e55491a6833238055d7b3ed"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r13_calles_eo_b.png",
+   "caja_px": [
+    1060,
+    3900,
+    1640,
+    4330
+   ],
+   "sha256": "430aeba47076043856d567d633560dea93bb30f7aa02e3c00e3e5cdebfe85004"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r14_calle_ns9.png",
+   "caja_px": [
+    1180,
+    3140,
+    1460,
+    3260
+   ],
+   "sha256": "d384705701ab3c8bbdac08cafe5bf13d791f4d515044d0a2b467f7e755cfa555"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r15_calle_ns4_5.png",
+   "caja_px": [
+    1180,
+    2980,
+    1460,
+    3080
+   ],
+   "sha256": "72d725c44695a9bc6f6b623a27a5e3317e1f0871347e7ea76189acd468444df9"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r16_parroquias.png",
+   "caja_px": [
+    4460,
+    1140,
+    5020,
+    1560
+   ],
+   "sha256": "2a130885c9dec0f2ba1b8237775aa1fb0db813082d4822b66ff68cecc442810b"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/r17_rayados.png",
+   "caja_px": [
+    4780,
+    1260,
+    4900,
+    1530
+   ],
+   "sha256": "ae686004f36d0cb976626208c5e8d40e4a3bc0ae07d0d9468e78bc2d375d9bd2"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/titulo_a.png",
+   "caja_px": [
+    1900,
+    540,
+    3500,
+    1120
+   ],
+   "sha256": "ebd5e8a5853d64d095cfbd2fc345d1ea5b2690e79c28f45f78cbb11cbebab2d2"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/titulo_b.png",
+   "caja_px": [
+    3400,
+    540,
+    5000,
+    1120
+   ],
+   "sha256": "6f1020a3a87523ed62d2a907d2fed07f58c78e35ac32cf54fc582610fe47ab77"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/zoom_g1.png",
+   "caja_px": null,
+   "sha256": "b6773683699a056e429aed0e975ec5c30c892f6fe3253c92d2b238a3df14b279"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/zoom_g2.png",
+   "caja_px": null,
+   "sha256": "351f5a55089d2b753309472f57c06447b68684b7671e1e42b64e73d4acdae85b"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/leyenda1843/zoom_g3.png",
+   "caja_px": null,
+   "sha256": "6b85150a5ee4f64943fe40ffab68c715217bd55331fae966f104313369587ab5"
+  }
+ ]
+}
