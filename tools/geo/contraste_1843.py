@@ -58,7 +58,7 @@ def clasificar(unidades, casas, metro, tolerancia_m=TOLERANCIA_M):
     tol = tolerancia_m / metro
     cuenta, ubicadas = defaultdict(int), set()
     for c in casas:
-        centro = Point(np.asarray(c['poligono'], float).mean(axis=0))
+        centro = Polygon(np.asarray(c['poligono'], float)).buffer(0).representative_point()   # siempre dentro de la casa
         cerca = [figuras[i] for i in arbol.query(centro.buffer(tol) if tol > 0 else centro)]
         # manda la unidad más chica que contiene la casa: un lote dentro de su manzana, una manzana dentro de una huerta
         contienen = sorted((f.area, k) for k, (u, f) in enumerate(cerca) if f.contains(centro))
@@ -87,6 +87,40 @@ def clasificar(unidades, casas, metro, tolerancia_m=TOLERANCIA_M):
             resumen[f['ocupacion']][f['estado']] += 1
     return {'unidades': filas, 'sobrantes': sorted(c['techo'] for c in casas if c['techo'] not in ubicadas),
             'resumen': {k: dict(sorted(v.items())) for k, v in resumen.items()}}
+
+
+def puerta_fases_3_4(contraste, estados, vida, cubiertas_por_hito):
+    """Fases 3 y 4 de 1843 desde el contraste (specs/08 con lo de specs/11). Fase 3: ninguna casa nacida en 1843
+    fuera de las unidades (en una calle o en el campo); las vivas desde antes son límite (cambiarlas tocaría 1772).
+    Fase 4: cada manzana rayada aprobada con casas, salvo la que cubre un hito en pie; ningún lote especial, plaza,
+    huerta o terreno libre con casas. `estados`: id → estado en la referencia; `vida`: techo → [nace, muere]."""
+    nuevas = [t for t in contraste['sobrantes'] if vida[t][0] >= EPOCA_1843]
+    antes = [t for t in contraste['sobrantes'] if vida[t][0] < EPOCA_1843]
+    vacias = [f['id'] for f in contraste['unidades'] if f['ocupacion'] == 'rayada' and f['estado'] == 'sin_casas']
+    pendientes = [i for i in vacias if estados.get(i) != 'aprobada']
+    por_hito = [i for i in vacias if estados.get(i) == 'aprobada' and i in cubiertas_por_hito]
+    sin_motivo = [i for i in vacias if i not in pendientes and i not in por_hito]
+    con_casas = [f['id'] for f in contraste['unidades'] if f['estado'] == 'con_casas_indebidas']
+    indebidas = [i for i in con_casas if estados.get(i) == 'aprobada']
+    libres_pendientes = [i for i in con_casas if estados.get(i) != 'aprobada']   # no entran al generador
+    criterios = {'calles_de_1843_libres': {'cumplido': not nuevas, 'casas': nuevas, 'de_antes_en_limite': antes},
+                 'rayadas_con_casas': {'cumplido': not sin_motivo, 'sin_casas': sin_motivo, 'por_hito': por_hito,
+                                       'pendientes': pendientes},
+                 'libres_sin_casas': {'cumplido': not indebidas, 'con_casas': indebidas, 'pendientes': libres_pendientes}}
+    return {'fase_3_cerrable': criterios['calles_de_1843_libres']['cumplido'],
+            'fase_4_cerrable': criterios['rayadas_con_casas']['cumplido'] and criterios['libres_sin_casas']['cumplido'],
+            'criterios': criterios}
+
+
+def cubierta_por(figura, zonas):
+    """Parte de la figura bajo la unión de las zonas (una superficie que cubren dos zonas cuenta una vez)."""
+    if not zonas or figura.area == 0:
+        return 0.0
+    from shapely.ops import unary_union
+    return figura.intersection(unary_union(zonas)).area / figura.area
+
+
+CUBIERTA_POR_HITO = 0.3   # parte de la manzana bajo la zona que suprime un hito en pie para que su vacío sea del hito
 
 
 def main(argv=None):  # pragma: no cover - E/S
@@ -125,6 +159,19 @@ def main(argv=None):  # pragma: no cover - E/S
            'tolerancia_m': TOLERANCIA_M, **r}
     a.salida.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     print(f"{len(casas)} casas en 1843; {r['resumen']}; {len(r['sobrantes'])} sobrantes")
+    ref = raiz / 'tools/geo/referencias/1843-manzanas.json'
+    if ref.exists():
+        estados = {u['id']: u['estado'] for u in json.loads(ref.read_text())['unidades']}
+        zonas = [Polygon(z).buffer(0) for h in hitos if h['nace'] <= EPOCA_1843 and (h['muere'] == 0 or h['muere'] > EPOCA_1843)
+                 for z in h.get('suprime', [])]
+        cubiertas = set()
+        for u in unidades:
+            f = _figura(u['poligono'])
+            if f is not None and cubierta_por(f, zonas) > CUBIERTA_POR_HITO:
+                cubiertas.add(u['id'])
+        cierre = puerta_fases_3_4(r, estados, {k: ciudad['vida'][k] for k in r['sobrantes']}, cubiertas)
+        (raiz / 'specs/auditoria-1843/cierre-fases-3-4.json').write_text(json.dumps({'datos': a.datos, **cierre}, ensure_ascii=False, indent=1) + '\n')
+        print('fase 3 cerrable:', cierre['fase_3_cerrable'], '· fase 4 cerrable:', cierre['fase_4_cerrable'])
 
 
 if __name__ == '__main__':

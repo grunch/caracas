@@ -108,3 +108,81 @@ def test_las_casas_nacidas_en_1843_dentro_de_un_lote_o_plaza_pasan_a_la_epoca_si
     sin_vida, _ = en_lotes_libres(_ciudad([_cuadrado(40, 40, 10)], [[2, 3]]), unidades, epoca=2)
     assert sin_vida['techos'] == [] and sin_vida['vida'] == []
     assert movidas == 2
+
+
+def test_las_casas_propias_no_pisan_casas_vivas_ni_quedan_astillas():
+    from epocas_1843 import ANCHO_MINIMO_M
+    unidades = [{'id': 'B', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 200)}]
+    # una casa viva con el centro fuera de la manzana pero la huella adentro: la manzana cuenta como vacía
+    ciudad = _ciudad([[[-30, 50], [10, 50], [10, 70], [-30, 70]]], [[2, 0]])
+    nueva, _ = agregar_casas(ciudad, unidades, metro=0.5, epoca=2)
+    v = nueva['vertices']
+    viva = Polygon([[-30, 50], [10, 50], [10, 70], [-30, 70]])
+    propias = [Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]) for t in nueva['techos'][1:]]
+    assert propias and all(p.intersection(viva).area < 1e-6 for p in propias)
+    import numpy as np
+    for p in propias:
+        lados = np.diff(np.asarray(p.minimum_rotated_rectangle.exterior.coords), axis=0)
+        assert p.area * 0.25 / (max(np.hypot(*lados.T)) * 0.5) >= ANCHO_MINIMO_M - 1e-9
+
+
+def test_las_huellas_propias_son_validas_tal_como_se_guardan():
+    unidades = [{'id': 'B', 'ocupacion': 'rayada', 'estado': 'aprobada',
+                 'poligono': [[0, 0], [203.337, 1.111], [199.9, 97.71], [101.03, 160.2], [-2.5, 99.99]]},
+                {'id': 'L', 'ocupacion': 'lote_especial', 'estado': 'aprobada', 'poligono': [[60, 0.5], [90.3, 0.7], [90, 30.01], [60.2, 29.9]]}]
+    nueva, _ = agregar_casas(_ciudad([], []), unidades, metro=0.5, epoca=2)
+    v = nueva['vertices']
+    for t in nueva['techos']:
+        pts = [(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]
+        assert Polygon(pts).is_valid and len(set(pts)) == len(pts)
+
+
+def test_las_casas_propias_dan_a_la_calle_y_no_se_tocan():
+    unidades = [{'id': 'B', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 200)},
+                {'id': 'L', 'ocupacion': 'lote_especial', 'estado': 'aprobada', 'poligono': [[30, -5], [70, -5], [70, 8], [30, 8]]}]
+    nueva, _ = agregar_casas(_ciudad([], []), unidades, metro=0.5, epoca=2)
+    v = nueva['vertices']
+    borde = Polygon(_cuadrado(0, 0, 200)).exterior
+    casas = [Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]) for t in nueva['techos']]
+    assert all(c.distance(borde) * 0.5 <= 0.5 for c in casas)
+    assert all(a.intersection(b).area * 0.25 <= 0.01 for k, a in enumerate(casas) for b in casas[k + 1:])
+
+
+def test_un_edificio_dentro_de_una_huerta_lleva_sus_casas():
+    unidades = [{'id': 'H', 'ocupacion': 'huerta', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 400)},
+                {'id': 'R', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(100, 100, 80)}]
+    nueva, informe = agregar_casas(_ciudad([], []), unidades, metro=0.5, epoca=2)
+    assert informe['manzanas'] == 1 and informe['casas'] > 0
+
+
+def test_frente_sobre_la_manzana_mide_el_tramo_de_fachada_y_no_un_punto():
+    from epocas_1843 import frente_m
+    borde = Polygon(_cuadrado(0, 0, 200)).exterior
+    assert abs(frente_m(Polygon(_cuadrado(0, 0, 20)), borde, metro=0.5) - 20) < 1.5   # dos lados de 10 m sobre el borde (y los arranques de los otros)
+    from epocas_1843 import FRENTE_MINIMO_M
+    assert frente_m(Polygon([[0, 0], [10, 10], [0, 20], [-10, 10]]), borde, metro=0.5) < FRENTE_MINIMO_M   # solo arranques junto a los vértices
+
+
+def test_los_frentes_vacios_de_una_manzana_con_algunas_casas_se_rellenan_y_cada_tramo_muere_con_su_casa():
+    unidades = [{'id': 'B', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 200)}]
+    # una casa de 1936 viva en 1843 en la esquina y otra que nace en 1911 sobre el frente sur
+    ciudad = _ciudad([_cuadrado(0, 0, 40), _cuadrado(100, 180, 30)], [[2, 0], [4, 0]])
+    nueva, informe = agregar_casas(ciudad, unidades, metro=0.5, epoca=2)
+    v = nueva['vertices']
+    propias = [(Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]), vida)
+               for t, vida in zip(nueva['techos'][2:], nueva['vida'][2:])]
+    assert informe['casas'] > 20
+    assert all(p.intersection(Polygon(_cuadrado(0, 0, 40))).area < 1e-6 for p, _ in propias)
+    tardia = Polygon(_cuadrado(100, 180, 30))
+    assert {tuple(vd) for p, vd in propias if p.intersects(tardia)} == {(2, 4)}
+    assert {tuple(vd) for p, vd in propias if not p.intersects(tardia)} == {(2, 0)}
+
+
+def test_las_casas_propias_no_pisan_la_planta_de_un_hito_en_pie():
+    unidades = [{'id': 'B', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 200)}]
+    hitos = [{'nace': 1, 'muere': 0, 'planta': [_cuadrado(0, 0, 80)]}]
+    nueva, _ = agregar_casas(_ciudad([], []), unidades, metro=0.5, epoca=2, hitos=hitos)
+    v = nueva['vertices']
+    planta = Polygon(_cuadrado(0, 0, 80))
+    for t in nueva['techos']:
+        assert Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]).intersection(planta).area < 1e-6

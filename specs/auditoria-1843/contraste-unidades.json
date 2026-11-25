@@ -1,8 +1,8 @@
 {
  "alcance": "Contraste 1C de 1843 (T81): el censo del original contra las casas que el sitio muestra en 1843.",
- "datos": "regenerado con esta rama (T81.4c), sin publicar",
- "casas_1843": 7202,
- "casas_bajo_hitos": 24,
+ "datos": "regenerado sobre main con #197 (código final de T81), sin publicar",
+ "casas_1843": 10284,
+ "casas_bajo_hitos": 10,
  "entradas": {
   "censo": {
    "archivo": "specs/auditoria-1843/censo.json",
@@ -13,8 +13,8 @@
    "sha256": "607bcb53e64b204dff1ed5df30d75fca2e38f797297206e4157c096bd15e01c1"
   },
   "ciudad": {
-   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json (regenerado con T81.4c)",
-   "sha256": "2c161c6afe3c428079efed64a6690176df97c58e790660a80ec014ef038d7198"
+   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
+   "sha256": "5bd45a84fc9ce8f52cd1b132d557043c4d3f3a27806950d4027e9a92b0583673"
   }
  },
  "tolerancia_m": 3.0,
@@ -22,7 +22,7 @@
   {
    "id": "U1843-0001",
    "ocupacion": "rayada",
-   "casas": 12,
+   "casas": 14,
    "estado": "con_casas",
    "letras": [
     "r"
@@ -76,7 +76,7 @@
   {
    "id": "U1843-0008",
    "ocupacion": "rayada",
-   "casas": 37,
+   "casas": 36,
    "estado": "con_casas"
   },
   {
@@ -88,7 +88,7 @@
   {
    "id": "U1843-0010",
    "ocupacion": "rayada",
-   "casas": 33,
+   "casas": 32,
    "estado": "con_casas"
   },
   {
@@ -139,13 +139,13 @@
   {
    "id": "U1843-0018",
    "ocupacion": "rayada",
-   "casas": 26,
+   "casas": 52,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0019",
    "ocupacion": "rayada",
-   "casas": 23,
+   "casas": 56,
    "estado": "con_casas"
   },
   {
@@ -175,13 +175,13 @@
   {
    "id": "U1843-0024",
    "ocupacion": "rayada",
-   "casas": 13,
+   "casas": 46,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0025",
    "ocupacion": "rayada",
-   "casas": 25,
+   "casas": 46,
    "estado": "con_casas",
    "letras": [
     "B"
@@ -196,7 +196,7 @@
   {
    "id": "U1843-0027",
    "ocupacion": "rayada",
-   "casas": 9,
+   "casas": 26,
    "estado": "con_casas"
   },
   {
@@ -223,31 +223,31 @@
   {
    "id": "U1843-0031",
    "ocupacion": "rayada",
-   "casas": 13,
+   "casas": 24,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0032",
    "ocupacion": "rayada",
-   "casas": 18,
+   "casas": 33,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0033",
    "ocupacion": "rayada",
-   "casas": 3,
+   "casas": 5,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0034",
    "ocupacion": "rayada",
-   "casas": 4,
+   "casas": 10,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0035",
    "ocupacion": "rayada",
-   "casas": 7,
+   "casas": 10,
    "estado": "con_casas"
   },
   {
@@ -259,13 +259,13 @@
   {
    "id": "U1843-0037",
    "ocupacion": "rayada",
-   "casas": 17,
+   "casas": 26,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0038",
    "ocupacion": "rayada",
-   "casas": 36,
+   "casas": 56,
    "estado": "con_casas"
   },
   {
@@ -313,7 +313,7 @@
   {
    "id": "U1843-0046",
    "ocupacion": "rayada",
-   "casas": 25,
+   "casas": 38,
    "estado": "con_casas"
   },
   {
@@ -346,19 +346,19 @@
   {
    "id": "U1843-0051",
    "ocupacion": "rayada",
-   "casas": 29,
+   "casas": 31,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0052",
    "ocupacion": "rayada",
-   "casas": 29,
+   "casas": 70,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0053",
    "ocupacion": "rayada",
-   "casas": 17,
+   "casas": 55,
    "estado": "con_casas"
   },
   {
@@ -373,7 +373,7 @@
   {
    "id": "U1843-0055",
    "ocupacion": "rayada",
-   "casas": 5,
+   "casas": 51,
    "estado": "con_casas"
   },
   {
@@ -385,19 +385,19 @@
   {
    "id": "U1843-0057",
    "ocupacion": "rayada",
-   "casas": 4,
+   "casas": 30,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0058",
    "ocupacion": "rayada",
-   "casas": 7,
+   "casas": 17,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0059",
    "ocupacion": "rayada",
-   "casas": 27,
+   "casas": 40,
    "estado": "con_casas"
   },
   {
@@ -421,13 +421,13 @@
   {
    "id": "U1843-0063",
    "ocupacion": "rayada",
-   "casas": 48,
+   "casas": 54,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0064",
    "ocupacion": "rayada",
-   "casas": 37,
+   "casas": 51,
    "estado": "con_casas"
   },
   {
@@ -448,7 +448,7 @@
   {
    "id": "U1843-0067",
    "ocupacion": "rayada",
-   "casas": 7,
+   "casas": 45,
    "estado": "con_casas"
   },
   {
@@ -496,7 +496,7 @@
   {
    "id": "U1843-0074",
    "ocupacion": "rayada",
-   "casas": 8,
+   "casas": 12,
    "estado": "con_casas"
   },
   {
@@ -559,7 +559,7 @@
   {
    "id": "U1843-0084",
    "ocupacion": "rayada",
-   "casas": 7,
+   "casas": 12,
    "estado": "con_casas"
   },
   {
@@ -577,8 +577,8 @@
   {
    "id": "U1843-0087",
    "ocupacion": "rayada",
-   "casas": 0,
-   "estado": "sin_casas"
+   "casas": 14,
+   "estado": "con_casas"
   },
   {
    "id": "U1843-0088",
@@ -607,7 +607,7 @@
   {
    "id": "U1843-0092",
    "ocupacion": "rayada",
-   "casas": 1,
+   "casas": 6,
    "estado": "con_casas"
   },
   {
@@ -619,7 +619,7 @@
   {
    "id": "U1843-0094",
    "ocupacion": "rayada",
-   "casas": 39,
+   "casas": 59,
    "estado": "con_casas"
   },
   {
@@ -637,13 +637,13 @@
   {
    "id": "U1843-0097",
    "ocupacion": "rayada",
-   "casas": 30,
+   "casas": 25,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0098",
    "ocupacion": "rayada",
-   "casas": 2,
+   "casas": 18,
    "estado": "con_casas"
   },
   {
@@ -655,13 +655,13 @@
   {
    "id": "U1843-0100",
    "ocupacion": "rayada",
-   "casas": 2,
+   "casas": 3,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0101",
    "ocupacion": "rayada",
-   "casas": 27,
+   "casas": 49,
    "estado": "con_casas"
   },
   {
@@ -691,7 +691,7 @@
   {
    "id": "U1843-0106",
    "ocupacion": "rayada",
-   "casas": 14,
+   "casas": 20,
    "estado": "con_casas"
   },
   {
@@ -703,7 +703,7 @@
   {
    "id": "U1843-0108",
    "ocupacion": "rayada",
-   "casas": 32,
+   "casas": 48,
    "estado": "con_casas"
   },
   {
@@ -727,13 +727,13 @@
   {
    "id": "U1843-0112",
    "ocupacion": "rayada",
-   "casas": 5,
+   "casas": 37,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0113",
    "ocupacion": "rayada",
-   "casas": 42,
+   "casas": 65,
    "estado": "con_casas"
   },
   {
@@ -760,43 +760,43 @@
   {
    "id": "U1843-0117",
    "ocupacion": "rayada",
-   "casas": 34,
+   "casas": 57,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0118",
    "ocupacion": "rayada",
-   "casas": 38,
+   "casas": 63,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0119",
    "ocupacion": "rayada",
-   "casas": 43,
+   "casas": 79,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0120",
    "ocupacion": "rayada",
-   "casas": 43,
+   "casas": 68,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0121",
    "ocupacion": "rayada",
-   "casas": 44,
+   "casas": 67,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0122",
    "ocupacion": "rayada",
-   "casas": 48,
+   "casas": 83,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0123",
    "ocupacion": "rayada",
-   "casas": 47,
+   "casas": 46,
    "estado": "con_casas"
   },
   {
@@ -817,31 +817,31 @@
   {
    "id": "U1843-0126",
    "ocupacion": "rayada",
-   "casas": 33,
+   "casas": 59,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0127",
    "ocupacion": "rayada",
-   "casas": 34,
+   "casas": 49,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0128",
    "ocupacion": "rayada",
-   "casas": 30,
+   "casas": 43,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0129",
    "ocupacion": "rayada",
-   "casas": 32,
+   "casas": 46,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0130",
    "ocupacion": "rayada",
-   "casas": 41,
+   "casas": 68,
    "estado": "con_casas"
   },
   {
@@ -856,8 +856,8 @@
   {
    "id": "U1843-0132",
    "ocupacion": "lote_especial",
-   "casas": 3,
-   "estado": "con_casas_indebidas",
+   "casas": 0,
+   "estado": "sin_casas",
    "letras": [
     "h"
    ]
@@ -874,19 +874,19 @@
   {
    "id": "U1843-0134",
    "ocupacion": "rayada",
-   "casas": 32,
+   "casas": 48,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0135",
    "ocupacion": "rayada",
-   "casas": 38,
+   "casas": 44,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0136",
    "ocupacion": "rayada",
-   "casas": 31,
+   "casas": 52,
    "estado": "con_casas",
    "letras": [
     "I"
@@ -895,13 +895,13 @@
   {
    "id": "U1843-0137",
    "ocupacion": "rayada",
-   "casas": 41,
+   "casas": 56,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0138",
    "ocupacion": "rayada",
-   "casas": 44,
+   "casas": 74,
    "estado": "con_casas"
   },
   {
@@ -925,13 +925,13 @@
   {
    "id": "U1843-0141",
    "ocupacion": "rayada",
-   "casas": 44,
+   "casas": 40,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0142",
    "ocupacion": "rayada",
-   "casas": 32,
+   "casas": 33,
    "estado": "con_casas"
   },
   {
@@ -943,7 +943,7 @@
   {
    "id": "U1843-0144",
    "ocupacion": "rayada",
-   "casas": 23,
+   "casas": 43,
    "estado": "con_casas",
    "letras": [
     "A"
@@ -952,7 +952,7 @@
   {
    "id": "U1843-0145",
    "ocupacion": "rayada",
-   "casas": 39,
+   "casas": 62,
    "estado": "con_casas"
   },
   {
@@ -967,8 +967,8 @@
   {
    "id": "U1843-0147",
    "ocupacion": "lote_especial",
-   "casas": 4,
-   "estado": "con_casas_indebidas",
+   "casas": 0,
+   "estado": "sin_casas",
    "letras": [
     "L"
    ]
@@ -976,39 +976,6 @@
   {
    "id": "U1843-0148",
    "ocupacion": "lote_especial",
-   "casas": 4,
-   "estado": "con_casas_indebidas",
-   "letras": [
-    "K"
-   ]
-  },
-  {
-   "id": "U1843-0149",
-   "ocupacion": "lote_especial",
-   "casas": 3,
-   "estado": "con_casas_indebidas",
-   "letras": [
-    "J"
-   ]
-  },
-  {
-   "id": "U1843-0150",
-   "ocupacion": "lote_especial",
-   "casas": 1,
-   "estado": "con_casas_indebidas",
-   "letras": [
-    "M"
-   ]
-  },
-  {
-   "id": "U1843-0151",
-   "ocupacion": "rayada",
-   "casas": 44,
-   "estado": "con_casas"
-  },
-  {
-   "id": "U1843-0152",
-   "ocupacion": "rayada",
    "casas": 0,
    "estado": "sin_casas",
    "letras": [
@@ -1016,9 +983,42 @@
    ]
   },
   {
+   "id": "U1843-0149",
+   "ocupacion": "lote_especial",
+   "casas": 0,
+   "estado": "sin_casas",
+   "letras": [
+    "J"
+   ]
+  },
+  {
+   "id": "U1843-0150",
+   "ocupacion": "lote_especial",
+   "casas": 0,
+   "estado": "sin_casas",
+   "letras": [
+    "M"
+   ]
+  },
+  {
+   "id": "U1843-0151",
+   "ocupacion": "rayada",
+   "casas": 57,
+   "estado": "con_casas"
+  },
+  {
+   "id": "U1843-0152",
+   "ocupacion": "rayada",
+   "casas": 2,
+   "estado": "con_casas",
+   "letras": [
+    "K"
+   ]
+  },
+  {
    "id": "U1843-0153",
    "ocupacion": "rayada",
-   "casas": 26,
+   "casas": 50,
    "estado": "con_casas",
    "letras": [
     "L",
@@ -1029,43 +1029,43 @@
   {
    "id": "U1843-0154",
    "ocupacion": "rayada",
-   "casas": 42,
+   "casas": 55,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0155",
    "ocupacion": "rayada",
-   "casas": 19,
+   "casas": 44,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0156",
    "ocupacion": "rayada",
-   "casas": 16,
+   "casas": 23,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0157",
    "ocupacion": "rayada",
-   "casas": 23,
+   "casas": 43,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0158",
    "ocupacion": "rayada",
-   "casas": 44,
+   "casas": 55,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0159",
    "ocupacion": "rayada",
-   "casas": 7,
+   "casas": 34,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0160",
    "ocupacion": "rayada",
-   "casas": 17,
+   "casas": 35,
    "estado": "con_casas"
   },
   {
@@ -1077,19 +1077,19 @@
   {
    "id": "U1843-0162",
    "ocupacion": "terreno_libre",
-   "casas": 10,
-   "estado": "con_casas_indebidas"
+   "casas": 0,
+   "estado": "sin_casas"
   },
   {
    "id": "U1843-0163",
    "ocupacion": "rayada",
-   "casas": 3,
+   "casas": 8,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0164",
    "ocupacion": "rayada",
-   "casas": 14,
+   "casas": 61,
    "estado": "con_casas"
   },
   {
@@ -1104,25 +1104,25 @@
   {
    "id": "U1843-0166",
    "ocupacion": "rayada",
-   "casas": 25,
+   "casas": 41,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0167",
    "ocupacion": "rayada",
-   "casas": 46,
+   "casas": 71,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0168",
    "ocupacion": "rayada",
-   "casas": 34,
+   "casas": 67,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0169",
    "ocupacion": "rayada",
-   "casas": 32,
+   "casas": 58,
    "estado": "con_casas"
   },
   {
@@ -1134,13 +1134,13 @@
   {
    "id": "U1843-0171",
    "ocupacion": "rayada",
-   "casas": 43,
+   "casas": 80,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0172",
    "ocupacion": "rayada",
-   "casas": 38,
+   "casas": 75,
    "estado": "con_casas"
   },
   {
@@ -1152,13 +1152,13 @@
   {
    "id": "U1843-0174",
    "ocupacion": "rayada",
-   "casas": 47,
+   "casas": 55,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0175",
    "ocupacion": "rayada",
-   "casas": 34,
+   "casas": 70,
    "estado": "con_casas",
    "letras": [
     "D"
@@ -1176,7 +1176,7 @@
   {
    "id": "U1843-0177",
    "ocupacion": "rayada",
-   "casas": 9,
+   "casas": 7,
    "estado": "con_casas"
   },
   {
@@ -1191,67 +1191,67 @@
   {
    "id": "U1843-0179",
    "ocupacion": "rayada",
-   "casas": 15,
+   "casas": 24,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0180",
    "ocupacion": "rayada",
-   "casas": 19,
+   "casas": 39,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0181",
    "ocupacion": "rayada",
-   "casas": 13,
+   "casas": 30,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0182",
    "ocupacion": "rayada",
-   "casas": 22,
+   "casas": 43,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0183",
    "ocupacion": "rayada",
-   "casas": 24,
+   "casas": 53,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0184",
    "ocupacion": "rayada",
-   "casas": 46,
+   "casas": 72,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0185",
    "ocupacion": "rayada",
-   "casas": 39,
+   "casas": 54,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0186",
    "ocupacion": "rayada",
-   "casas": 37,
+   "casas": 70,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0187",
    "ocupacion": "rayada",
-   "casas": 39,
+   "casas": 54,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0188",
    "ocupacion": "rayada",
-   "casas": 36,
+   "casas": 62,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0189",
    "ocupacion": "rayada",
-   "casas": 42,
+   "casas": 73,
    "estado": "con_casas"
   },
   {
@@ -1263,7 +1263,7 @@
   {
    "id": "U1843-0191",
    "ocupacion": "rayada",
-   "casas": 15,
+   "casas": 29,
    "estado": "con_casas",
    "letras": [
     "C o G"
@@ -1272,7 +1272,7 @@
   {
    "id": "U1843-0192",
    "ocupacion": "rayada",
-   "casas": 22,
+   "casas": 51,
    "estado": "con_casas"
   },
   {
@@ -1302,7 +1302,7 @@
   {
    "id": "U1843-0197",
    "ocupacion": "rayada",
-   "casas": 16,
+   "casas": 18,
    "estado": "con_casas"
   },
   {
@@ -1344,7 +1344,7 @@
   {
    "id": "U1843-0204",
    "ocupacion": "rayada",
-   "casas": 15,
+   "casas": 34,
    "estado": "con_casas"
   },
   {
@@ -1356,13 +1356,13 @@
   {
    "id": "U1843-0206",
    "ocupacion": "rayada",
-   "casas": 15,
+   "casas": 31,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0207",
    "ocupacion": "rayada",
-   "casas": 3,
+   "casas": 27,
    "estado": "con_casas"
   },
   {
@@ -1374,13 +1374,13 @@
   {
    "id": "U1843-0209",
    "ocupacion": "rayada",
-   "casas": 22,
+   "casas": 28,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0210",
    "ocupacion": "rayada",
-   "casas": 43,
+   "casas": 59,
    "estado": "con_casas"
   },
   {
@@ -1407,7 +1407,7 @@
   {
    "id": "U1843-0214",
    "ocupacion": "rayada",
-   "casas": 3,
+   "casas": 31,
    "estado": "con_casas"
   },
   {
@@ -1431,7 +1431,7 @@
   {
    "id": "U1843-0218",
    "ocupacion": "rayada",
-   "casas": 8,
+   "casas": 7,
    "estado": "con_casas"
   },
   {
@@ -1443,13 +1443,13 @@
   {
    "id": "U1843-0220",
    "ocupacion": "rayada",
-   "casas": 43,
+   "casas": 56,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0221",
    "ocupacion": "rayada",
-   "casas": 24,
+   "casas": 60,
    "estado": "con_casas"
   },
   {
@@ -1461,7 +1461,7 @@
   {
    "id": "U1843-0223",
    "ocupacion": "rayada",
-   "casas": 48,
+   "casas": 66,
    "estado": "con_casas"
   },
   {
@@ -1479,19 +1479,19 @@
   {
    "id": "U1843-0226",
    "ocupacion": "rayada",
-   "casas": 36,
+   "casas": 59,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0227",
    "ocupacion": "rayada",
-   "casas": 42,
+   "casas": 55,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0228",
    "ocupacion": "rayada",
-   "casas": 40,
+   "casas": 39,
    "estado": "con_casas"
   },
   {
@@ -1503,37 +1503,37 @@
   {
    "id": "U1843-0230",
    "ocupacion": "rayada",
-   "casas": 9,
+   "casas": 53,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0231",
    "ocupacion": "rayada",
-   "casas": 43,
+   "casas": 71,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0232",
    "ocupacion": "plaza",
-   "casas": 2,
+   "casas": 1,
    "estado": "con_casas_indebidas"
   },
   {
    "id": "U1843-0233",
    "ocupacion": "rayada",
-   "casas": 38,
+   "casas": 35,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0234",
    "ocupacion": "rayada",
-   "casas": 43,
+   "casas": 66,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0235",
    "ocupacion": "rayada",
-   "casas": 31,
+   "casas": 43,
    "estado": "con_casas"
   },
   {
@@ -1563,7 +1563,7 @@
   {
    "id": "U1843-0239",
    "ocupacion": "rayada",
-   "casas": 24,
+   "casas": 45,
    "estado": "con_casas"
   },
   {
@@ -1575,56 +1575,56 @@
   {
    "id": "U1843-0241",
    "ocupacion": "rayada",
-   "casas": 39,
+   "casas": 72,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0242",
    "ocupacion": "rayada",
-   "casas": 43,
+   "casas": 56,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0243",
    "ocupacion": "rayada",
-   "casas": 40,
+   "casas": 64,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0244",
    "ocupacion": "rayada",
-   "casas": 18,
+   "casas": 33,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0245",
    "ocupacion": "rayada",
-   "casas": 21,
+   "casas": 32,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0246",
    "ocupacion": "rayada",
-   "casas": 35,
+   "casas": 70,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0247",
    "ocupacion": "rayada",
-   "casas": 42,
+   "casas": 56,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0248",
    "ocupacion": "rayada",
-   "casas": 43,
+   "casas": 60,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0249",
    "ocupacion": "plaza",
-   "casas": 3,
-   "estado": "con_casas_indebidas"
+   "casas": 0,
+   "estado": "sin_casas"
   },
   {
    "id": "U1843-0250",
@@ -1647,92 +1647,92 @@
   {
    "id": "U1843-0252",
    "ocupacion": "rayada",
-   "casas": 28,
+   "casas": 56,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0253",
    "ocupacion": "rayada",
-   "casas": 33,
+   "casas": 58,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0254",
    "ocupacion": "rayada",
-   "casas": 14,
+   "casas": 53,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0255",
    "ocupacion": "rayada",
-   "casas": 44,
+   "casas": 56,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0256",
    "ocupacion": "rayada",
-   "casas": 44,
+   "casas": 66,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0257",
    "ocupacion": "rayada",
-   "casas": 46,
+   "casas": 61,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0258",
    "ocupacion": "rayada",
-   "casas": 47,
+   "casas": 48,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0259",
    "ocupacion": "rayada",
-   "casas": 34,
+   "casas": 64,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0260",
    "ocupacion": "rayada",
-   "casas": 47,
+   "casas": 51,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0261",
    "ocupacion": "rayada",
-   "casas": 46,
+   "casas": 60,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0262",
    "ocupacion": "rayada",
-   "casas": 43,
+   "casas": 69,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0263",
    "ocupacion": "rayada",
-   "casas": 35,
+   "casas": 46,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0264",
    "ocupacion": "rayada",
-   "casas": 2,
+   "casas": 40,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0265",
    "ocupacion": "rayada",
-   "casas": 46,
+   "casas": 51,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0266",
    "ocupacion": "lote_especial",
-   "casas": 2,
-   "estado": "con_casas_indebidas",
+   "casas": 0,
+   "estado": "sin_casas",
    "letras": [
     "R"
    ]
@@ -1740,7 +1740,7 @@
   {
    "id": "U1843-0267",
    "ocupacion": "rayada",
-   "casas": 28,
+   "casas": 51,
    "estado": "con_casas"
   },
   {
@@ -1755,37 +1755,37 @@
   {
    "id": "U1843-0269",
    "ocupacion": "rayada",
-   "casas": 24,
+   "casas": 36,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0270",
    "ocupacion": "rayada",
-   "casas": 8,
+   "casas": 24,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0271",
    "ocupacion": "rayada",
-   "casas": 44,
+   "casas": 59,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0272",
    "ocupacion": "rayada",
-   "casas": 41,
+   "casas": 68,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0273",
    "ocupacion": "rayada",
-   "casas": 43,
+   "casas": 86,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0274",
    "ocupacion": "rayada",
-   "casas": 21,
+   "casas": 35,
    "estado": "con_casas"
   },
   {
@@ -1800,8 +1800,8 @@
   {
    "id": "U1843-0276",
    "ocupacion": "lote_especial",
-   "casas": 16,
-   "estado": "con_casas_indebidas",
+   "casas": 0,
+   "estado": "sin_casas",
    "letras": [
     "o"
    ]
@@ -1809,7 +1809,7 @@
   {
    "id": "U1843-0277",
    "ocupacion": "rayada",
-   "casas": 23,
+   "casas": 47,
    "estado": "con_casas",
    "letras": [
     "n"
@@ -1818,37 +1818,37 @@
   {
    "id": "U1843-0278",
    "ocupacion": "rayada",
-   "casas": 44,
+   "casas": 69,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0279",
    "ocupacion": "rayada",
-   "casas": 44,
+   "casas": 51,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0280",
    "ocupacion": "rayada",
-   "casas": 30,
+   "casas": 42,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0281",
    "ocupacion": "rayada",
-   "casas": 33,
+   "casas": 34,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0282",
    "ocupacion": "rayada",
-   "casas": 40,
+   "casas": 70,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0283",
    "ocupacion": "rayada",
-   "casas": 40,
+   "casas": 70,
    "estado": "con_casas"
   },
   {
@@ -1863,7 +1863,7 @@
   {
    "id": "U1843-0285",
    "ocupacion": "rayada",
-   "casas": 3,
+   "casas": 2,
    "estado": "con_casas"
   },
   {
@@ -1899,13 +1899,13 @@
   {
    "id": "U1843-0291",
    "ocupacion": "rayada",
-   "casas": 44,
+   "casas": 63,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0292",
    "ocupacion": "rayada",
-   "casas": 35,
+   "casas": 42,
    "estado": "con_casas"
   },
   {
@@ -1923,13 +1923,13 @@
   {
    "id": "U1843-0295",
    "ocupacion": "rayada",
-   "casas": 33,
+   "casas": 46,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0296",
    "ocupacion": "rayada",
-   "casas": 45,
+   "casas": 67,
    "estado": "con_casas"
   },
   {
@@ -1956,8 +1956,8 @@
   {
    "id": "U1843-0300",
    "ocupacion": "rayada",
-   "casas": 0,
-   "estado": "sin_casas"
+   "casas": 16,
+   "estado": "con_casas"
   },
   {
    "id": "U1843-0301",
@@ -1974,13 +1974,13 @@
   {
    "id": "U1843-0303",
    "ocupacion": "rayada",
-   "casas": 6,
+   "casas": 8,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0304",
    "ocupacion": "rayada",
-   "casas": 6,
+   "casas": 8,
    "estado": "con_casas"
   },
   {
@@ -1992,7 +1992,7 @@
   {
    "id": "U1843-0306",
    "ocupacion": "rayada",
-   "casas": 9,
+   "casas": 142,
    "estado": "con_casas"
   },
   {
@@ -2010,7 +2010,7 @@
   {
    "id": "U1843-0309",
    "ocupacion": "rayada",
-   "casas": 33,
+   "casas": 32,
    "estado": "con_casas"
   },
   {
@@ -2055,7 +2055,7 @@
   {
    "id": "U1843-0316",
    "ocupacion": "rayada",
-   "casas": 2,
+   "casas": 28,
    "estado": "con_casas"
   },
   {
@@ -2070,13 +2070,13 @@
   {
    "id": "U1843-0318",
    "ocupacion": "rayada",
-   "casas": 40,
+   "casas": 49,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0319",
    "ocupacion": "rayada",
-   "casas": 62,
+   "casas": 99,
    "estado": "con_casas",
    "letras": [
     "S"
@@ -2085,13 +2085,13 @@
   {
    "id": "U1843-0320",
    "ocupacion": "rayada",
-   "casas": 46,
+   "casas": 77,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0321",
    "ocupacion": "rayada",
-   "casas": 22,
+   "casas": 60,
    "estado": "con_casas"
   },
   {
@@ -2103,19 +2103,19 @@
   {
    "id": "U1843-0323",
    "ocupacion": "rayada",
-   "casas": 39,
+   "casas": 77,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0324",
    "ocupacion": "rayada",
-   "casas": 49,
+   "casas": 46,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0325",
    "ocupacion": "rayada",
-   "casas": 42,
+   "casas": 64,
    "estado": "con_casas"
   },
   {
@@ -2163,37 +2163,37 @@
   {
    "id": "U1843-0333",
    "ocupacion": "rayada",
-   "casas": 47,
+   "casas": 65,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0334",
    "ocupacion": "rayada",
-   "casas": 44,
+   "casas": 47,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0335",
    "ocupacion": "rayada",
-   "casas": 42,
+   "casas": 60,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0336",
    "ocupacion": "rayada",
-   "casas": 32,
+   "casas": 57,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0337",
    "ocupacion": "rayada",
-   "casas": 26,
+   "casas": 45,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0338",
    "ocupacion": "rayada",
-   "casas": 44,
+   "casas": 80,
    "estado": "con_casas"
   },
   {
@@ -2205,7 +2205,7 @@
   {
    "id": "U1843-0340",
    "ocupacion": "rayada",
-   "casas": 41,
+   "casas": 69,
    "estado": "con_casas"
   },
   {
@@ -2217,14 +2217,14 @@
   {
    "id": "U1843-0342",
    "ocupacion": "rayada",
-   "casas": 28,
+   "casas": 55,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0343",
    "ocupacion": "rayada",
-   "casas": 0,
-   "estado": "sin_casas"
+   "casas": 8,
+   "estado": "con_casas"
   },
   {
    "id": "U1843-0344",
@@ -2292,7 +2292,7 @@
   {
    "id": "U1843-0354",
    "ocupacion": "rayada",
-   "casas": 6,
+   "casas": 8,
    "estado": "con_casas"
   },
   {
@@ -2310,13 +2310,13 @@
   {
    "id": "U1843-0357",
    "ocupacion": "rayada",
-   "casas": 34,
+   "casas": 57,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0358",
    "ocupacion": "rayada",
-   "casas": 43,
+   "casas": 78,
    "estado": "con_casas"
   },
   {
@@ -2334,13 +2334,13 @@
   {
    "id": "U1843-0361",
    "ocupacion": "rayada",
-   "casas": 36,
+   "casas": 51,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0362",
    "ocupacion": "rayada",
-   "casas": 36,
+   "casas": 35,
    "estado": "con_casas"
   },
   {
@@ -2369,51 +2369,9 @@
   }
  ],
  "sobrantes": [
-  3408,
-  5016,
-  5125,
-  5126,
-  5129,
-  5130,
-  5131,
-  7082,
-  7083,
-  7086,
-  7092,
-  7094,
-  7102,
-  7108,
-  7110,
-  7111,
-  7112,
-  7113,
-  7114,
-  7115,
-  7116,
-  7117,
-  7118,
-  7119,
-  7173,
-  7174,
-  7175,
-  7176,
-  7184,
-  7185,
-  7186,
-  7240,
-  7241,
-  7252,
-  7253,
-  7516,
-  7726,
-  7727,
   8388,
   8389,
   8390,
-  8403,
-  8404,
-  8405,
-  8406,
   8414,
   8415,
   8416,
@@ -2422,284 +2380,35 @@
   8419,
   8420,
   8421,
-  8422,
-  8423,
-  8424,
-  8425,
-  9878,
-  9879,
-  9880,
-  9890,
-  9898,
-  9899,
-  9900,
-  10884,
-  10886,
-  10887,
-  10888,
-  10893,
-  10894,
-  10895,
-  10898,
-  10901,
-  10903,
-  10905,
-  10908,
-  10909,
-  10910,
-  10911,
-  10912,
-  10913,
-  10914,
-  10915,
-  10916,
-  11169,
-  11910,
-  11921,
-  11933,
-  11934,
-  11935,
-  11942,
-  11943,
-  12605,
-  12606,
-  12607,
-  12608,
-  12610,
-  12611,
-  12613,
-  12617,
-  12621,
-  12622,
-  12626,
-  12628,
-  12661,
-  12663,
-  12665,
-  12667,
-  12669,
-  12670,
-  12671,
-  12672,
-  12673,
-  12674,
-  12677,
-  13091,
-  13092,
-  13171,
-  13172,
-  13173,
-  13174,
-  13175,
-  13176,
-  13177,
-  13178,
-  13179,
-  13180,
-  13188,
-  13189,
-  13190,
-  13191,
-  13192,
-  13193,
-  13205,
-  13209,
-  13818,
-  13821,
-  13823,
-  13824,
-  13906,
-  13908,
-  14443,
-  14444,
-  14467,
-  15102,
-  15103,
-  15104,
-  15105,
-  15112,
-  15113,
-  15114,
-  15115,
-  15119,
-  15120,
-  15121,
-  15122,
-  15207,
-  15216,
-  15340,
-  15341,
-  15342,
-  15343,
-  15346,
-  15354,
-  15355,
-  15356,
-  15362,
-  15366,
-  15370,
-  15372,
-  15373,
-  15374,
-  15376,
-  15377,
-  15378,
-  15379,
-  15382,
-  15390,
-  15391,
-  15514,
-  15528,
-  15862,
-  16193,
-  16212,
-  16303,
-  17606,
-  17607,
-  17622,
-  17623,
-  17624,
-  17625,
-  17626,
-  17627,
-  17628,
-  17685,
-  17686,
-  17693,
-  17702,
-  17703,
-  17704,
-  17985,
-  17986,
-  17987,
-  17988,
-  17989,
-  17990,
-  17991,
-  17992,
-  17993,
-  17996,
-  18054,
-  18060,
-  18092,
-  18105,
-  18154,
-  18155,
-  18156,
-  18157,
-  18158,
-  18159,
-  18160,
-  18171,
-  18172,
-  18173,
-  18174,
-  18175,
-  18176,
-  18484,
-  18485,
-  18486,
-  18498,
-  18506,
-  18507,
-  18508,
-  18522,
-  18660,
-  18851,
-  18873,
-  19320,
-  19339,
-  19449,
-  19450,
-  19454,
-  19460,
-  19938,
-  19940,
-  19942,
-  19944,
-  19946,
-  19952,
-  19955,
-  20333,
-  20358,
-  20368,
-  20635,
-  20959,
-  21042,
-  21062,
-  21063,
-  21073,
-  21099,
-  21108,
-  21356,
-  21357,
-  21378,
-  21379,
-  21429,
-  21444,
-  21454,
-  21469,
-  21693,
-  21810,
-  22028,
-  22031,
-  22032,
-  22040,
-  22041,
-  22042,
-  22047,
-  22048,
-  22049,
-  22051,
-  22065,
-  22271,
-  23255,
-  23863,
-  26138,
-  26139,
-  26140,
-  26141,
-  26142,
-  26152,
-  26153,
-  26154,
-  26529,
-  26530,
-  26534,
-  26535,
-  26536,
-  26537,
-  26538,
-  26548,
-  26549,
-  38836,
+  23227,
+  38808,
+  38809,
+  38810,
+  38811,
+  38812,
+  38813,
+  38814,
+  38815,
   38837,
-  38838,
-  38839,
-  38840,
-  38841,
-  38842,
-  38843
+  38838
  ],
  "resumen": {
   "rayada": {
-   "con_casas": 275,
-   "sin_casas": 7
+   "con_casas": 279,
+   "sin_casas": 3
   },
   "lote_especial": {
-   "con_casas_indebidas": 7,
-   "sin_casas": 27
+   "sin_casas": 34
   },
   "huerta": {
    "sin_casas": 29
   },
   "plaza": {
-   "con_casas_indebidas": 2,
-   "sin_casas": 1
+   "con_casas_indebidas": 1,
+   "sin_casas": 2
   },
   "terreno_libre": {
-   "con_casas_indebidas": 1,
-   "sin_casas": 1
+   "sin_casas": 2
   }
  }
 }

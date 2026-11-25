@@ -1,0 +1,52 @@
+{
+ "datos": "regenerado sobre main con #197 (código final de T81), sin publicar",
+ "fase_3_cerrable": true,
+ "fase_4_cerrable": true,
+ "criterios": {
+  "calles_de_1843_libres": {
+   "cumplido": true,
+   "casas": [],
+   "de_antes_en_limite": [
+    8388,
+    8389,
+    8390,
+    8414,
+    8415,
+    8416,
+    8417,
+    8418,
+    8419,
+    8420,
+    8421,
+    23227,
+    38808,
+    38809,
+    38810,
+    38811,
+    38812,
+    38813,
+    38814,
+    38815,
+    38837,
+    38838
+   ]
+  },
+  "rayadas_con_casas": {
+   "cumplido": true,
+   "sin_casas": [],
+   "por_hito": [],
+   "pendientes": [
+    "U1843-0021",
+    "U1843-0161",
+    "U1843-0165"
+   ]
+  },
+  "libres_sin_casas": {
+   "cumplido": true,
+   "con_casas": [],
+   "pendientes": [
+    "U1843-0232"
+   ]
+  }
+ }
+}

@@ -42,33 +42,33 @@
     "specs/auditoria-1843/censo.json",
     "fuentes/derivados/epocas/qa-1843.jpg (fuera de git)"
    ],
-   "resolucion": "T81.4a (lo edificado de 1843 desde la referencia) y T81.4c (casas propias en las manzanas rayadas sin casas de 1936: crujía sobre cada frente, patio libre, sin pisar lotes ni plazas). Quedan 7 de 282 rayadas sin casas a la vista: manzanas chicas donde no cabe la crujía o que esconde un hito; se revisan en la fase 8.",
+   "resolucion": "T81.4a (lo edificado de 1843 desde la referencia) y T81.4c (casas propias: la crujía de cada manzana rayada en sus frentes vacíos, sin pisar casas vivas, hitos ni lotes; cada tramo vive hasta que una casa lo pisa): 279 de 282 rayadas con casas; las 3 restantes son lecturas pendientes. La mediana de frente ocupado pasa de 86 % a casi todo el frente. Puerta de la fase 4: cierre-fases-3-4.json.",
    "pipeline": "tools/geo/epocas.py construido_de_epoca + tools/geo/epocas/epocas.json"
   },
   {
    "id": "I1843-003",
    "categoria": "conflicto con hitos",
    "prioridad": "P1",
-   "estado": "por inspeccionar",
+   "estado": "corregido pendiente de verificar",
    "diferencia": "9 lotes especiales o plazas del original tienen casas genéricas encima en 1843: U1843-0132 (h: 3), U1843-0147 (L: 4), U1843-0148 (K: 4), U1843-0149 (J: 3), U1843-0150 (M: 1), U1843-0232 (sin letra: 2), U1843-0249 (sin letra: 3), U1843-0266 (R: 2), U1843-0276 (o: 16).",
    "diagnostico": "Hipótesis: casas de 1936 que el original pinta como lote blanco (iglesia, convento, punto notable) y que no suprime ningún hito; o bordes del lote proyectado (unos metros de calce). Falta recorrer cada uno.",
    "evidencia": [
     "specs/auditoria-1843/contraste-unidades.json"
    ],
-   "resolucion": "T81.4b (reservas de lotes especiales y plazas en 1843).",
+   "resolucion": "T81.4b: las casas que nacían en 1843 en un lote especial, plaza o terreno libre de la referencia nacen en 1889 (o se quitan si no viven en ninguna época): 0 con casas (cierre-fases-3-4.json).",
    "pipeline": "tools/geo/epocas.py; src/hitos (pisaLaZona)"
   },
   {
    "id": "I1843-004",
    "categoria": "casas faltantes o sobrantes",
    "prioridad": "P1",
-   "estado": "por inspeccionar",
+   "estado": "corregido pendiente de verificar",
    "diferencia": "230 casas viven en 1843 fuera de toda unidad del censo (en calles de 1843, en campo o fuera de la ciudad dibujada).",
    "diagnostico": "Hipótesis: casas de 1936 sobre calles o bordes de la ciudad de 1843 que la máscara de color tomó por rayado (las tiras al este del Catuche en qa-1843). Se resuelve con la máscara por referencia (T81.4a) y se vuelve a medir.",
    "evidencia": [
     "specs/auditoria-1843/contraste-unidades.json"
    ],
-   "resolucion": "T81.4a, medida de nuevo en T81.3a (calles de 1843 libres).",
+   "resolucion": "T81.3a: las casas que nacían en 1843 fuera de toda unidad de la referencia nacen en 1889 (o se quitan): de 311 quedan 20, vivas desde 1772, como límite (cambiarlas tocaría 1772). Puerta de la fase 3: cierre-fases-3-4.json.",
    "pipeline": "tools/geo/epocas.py"
   }
  ]

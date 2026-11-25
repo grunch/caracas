@@ -64,3 +64,44 @@ def test_las_casas_que_esconde_un_hito_en_pie_no_cuentan():
     hitos = [{'nace': 1, 'muere': 0, 'suprime': [_cuadrado(0, 0, 50)]}, {'nace': 3, 'muere': 0, 'suprime': [_cuadrado(100, 0, 50)]}]
     casas = [{'techo': 1, 'poligono': _cuadrado(10, 10, 10)}, {'techo': 2, 'poligono': _cuadrado(110, 10, 10)}]
     assert [c['techo'] for c in visibles_en(casas, hitos, epoca=2)] == [2]
+
+
+def test_puerta_de_las_fases_3_y_4():
+    from contraste_1843 import puerta_fases_3_4
+    contraste = {'unidades': [{'id': 'A', 'ocupacion': 'rayada', 'estado': 'con_casas'},
+                              {'id': 'B', 'ocupacion': 'rayada', 'estado': 'sin_casas'},
+                              {'id': 'C', 'ocupacion': 'rayada', 'estado': 'sin_casas'},
+                              {'id': 'L', 'ocupacion': 'lote_especial', 'estado': 'sin_casas'}],
+                 'sobrantes': [7, 8]}
+    estados = {'A': 'aprobada', 'B': 'pendiente', 'C': 'aprobada', 'L': 'aprobada'}
+    vida = {7: [1, 0], 8: [1, 4]}
+    r = puerta_fases_3_4(contraste, estados, vida, cubiertas_por_hito={'C'})
+    assert r['fase_3_cerrable'] and r['fase_4_cerrable']
+    assert r['criterios']['calles_de_1843_libres']['de_antes_en_limite'] == [7, 8]
+    assert r['criterios']['rayadas_con_casas']['por_hito'] == ['C'] and r['criterios']['rayadas_con_casas']['pendientes'] == ['B']
+    r2 = puerta_fases_3_4(contraste, estados, {7: [2, 0], 8: [1, 0]}, cubiertas_por_hito=set())
+    assert not r2['fase_3_cerrable'] and not r2['fase_4_cerrable']
+
+
+def test_una_casa_en_ele_alrededor_de_un_lote_no_cuenta_en_el_lote():
+    unidades = [{'id': 'A', 'ocupacion': 'rayada', 'poligono': _cuadrado(0, 0, 100)},
+                {'id': 'L', 'ocupacion': 'lote_especial', 'poligono': _cuadrado(10, 10, 30)}]
+    ele = [[0, 0], [50, 0], [50, 8], [8, 8], [8, 50], [0, 50]]   # el promedio de sus vértices cae dentro del lote
+    r = clasificar(unidades, [{'techo': 1, 'poligono': ele}], metro=0.5, tolerancia_m=0)
+    fila = {f['id']: f for f in r['unidades']}
+    assert fila['L']['estado'] == 'sin_casas' and fila['A']['casas'] == 1
+
+
+def test_un_lote_pendiente_con_casas_no_impide_cerrar_la_fase_4():
+    from contraste_1843 import puerta_fases_3_4
+    contraste = {'unidades': [{'id': 'P', 'ocupacion': 'plaza', 'estado': 'con_casas_indebidas'}], 'sobrantes': []}
+    r = puerta_fases_3_4(contraste, {'P': 'pendiente'}, {}, cubiertas_por_hito=set())
+    assert r['fase_4_cerrable'] and r['criterios']['libres_sin_casas']['pendientes'] == ['P']
+
+
+def test_zonas_que_se_solapan_no_cuentan_dos_veces():
+    from contraste_1843 import cubierta_por
+    from shapely.geometry import Polygon
+    manzana = Polygon(_cuadrado(0, 0, 100))
+    zonas = [Polygon(_cuadrado(0, 0, 40)), Polygon(_cuadrado(0, 0, 40))]   # la misma zona dos veces
+    assert abs(cubierta_por(manzana, zonas) - 0.16) < 1e-9

@@ -1,14 +1,15 @@
-"""Casas propias de 1843 (T81.4c): las manzanas rayadas del original sin casas a la vista en 1843.
+"""Casas propias de 1843 (T81.4c): los frentes de las manzanas rayadas del original sin casas a la vista en 1843.
 
 Donde la ciudad de 1936 no tiene casas que calcen con una manzana rayada de la referencia de 1843 (crecimiento
-posterior a 1772, trazado distinto), el plano de Jesurún no dice cómo eran las casas: solo que la manzana estaba
-urbanizada. Se levanta una crujía de casas de un piso sobre cada frente, de FRENTE_M de ancho y CRUJIA_M de fondo,
-con el patio libre (la casa de patio de specs/06 § 4), como reconstrucción y no como dato. Viven desde 1843 hasta
-la primera época en que una casa de 1936 aparece en la manzana (o siempre, si ninguna).
+posterior a 1772, trazado distinto), o solo tiene algunas y deja frentes vacíos, el plano de Jesurún no dice cómo
+eran las casas: solo que la manzana entera estaba urbanizada. Se levanta una crujía de casas de un piso sobre cada frente, de FRENTE_M de ancho y CRUJIA_M de fondo,
+con el patio libre (la casa de patio de specs/06 § 4), como reconstrucción y no como dato. Cada tramo vive desde 1843
+hasta que nace una casa que lo pisa (o siempre, si ninguna).
 
 Lógica pura sobre la ciudad del generador (vértices y techos en px del mosaico de 1936).
 """
 import numpy as np
+import shapely
 from shapely.geometry import LineString, Point, Polygon
 from shapely.geometry.polygon import orient
 from shapely.strtree import STRtree
@@ -17,8 +18,10 @@ from vectorizar import ESTILO_COLONIAL, semilla_de
 
 CRUJIA_M = 8.0       # fondo de la crujía de frente de una casa colonial de un piso (specs/06 § 4)
 FRENTE_M = 10.0      # ancho de un lote de frente
-RETIRO_M = 0.5       # la casa no toca el borde leído de la manzana (el borde va a ojo, ±1 m)
+RETIRO_M = 0.2       # la casa no toca el borde leído de la manzana; menos que la tolerancia de fachada (0,5 m)
 AREA_MINIMA_M2 = 12.0
+FRENTE_SOBRE_LA_CALLE_M = 0.5   # la fachada sobre el borde de la manzana (tolerancia de specs/11, decisión 1)
+ANCHO_MINIMO_M = 2.0  # una casa más angosta que esto (área / lado mayor) es una astilla de esquina: no se levanta
 VUELO_POR_OMISION = 255   # como las casas de 1578: sin tope de alero
 
 
@@ -62,8 +65,15 @@ def casas_de_manzana(poligono, metro, crujia_m=CRUJIA_M, frente_m=FRENTE_M, reti
 LIBRES = {'lote_especial', 'plaza', 'huerta', 'terreno_libre'}
 
 
+def _ancho_m(f, metro):
+    lados = np.diff(np.asarray(f.minimum_rotated_rectangle.exterior.coords), axis=0)
+    largo = float(max(np.hypot(*lados.T))) * metro
+    return f.area * metro ** 2 / largo if largo else 0.0
+
+
 def _sin(casa, libres, metro):
-    """La casa sin lo que pisa de un lote especial, plaza o huerta de su manzana (el pedazo mayor), o None."""
+    """La casa sin lo que pisa (lotes, plazas, huertas de su manzana; casas vivas; casas propias ya puestas), el
+    pedazo mayor, o None si queda chica, astillada o con un hueco."""
     for f in libres:
         casa = casa.difference(f)
     if casa.geom_type == 'MultiPolygon':
@@ -72,12 +82,35 @@ def _sin(casa, libres, metro):
         return None
     if casa.interiors:
         return None   # un lote entero dentro de la casa: el techo solo guarda el contorno y lo volvería a tapar
+    if _ancho_m(casa, metro) < ANCHO_MINIMO_M:
+        return None
     return casa
+
+
+def _limpia(casa, metro, grilla=0.01):
+    """La huella en una grilla de `grilla` px, válida tal como se va a guardar (sin puntos repetidos ni lados que
+    se toquen): el empaquetador y las puertas leen esas mismas coordenadas. None si no queda una casa válida."""
+    g = shapely.set_precision(casa.buffer(-2 * grilla, join_style=2), grilla)   # encogida: el ajuste no la solapa
+    if g.geom_type == 'MultiPolygon':
+        g = max(g.geoms, key=lambda x: x.area)
+    if g.is_empty or g.geom_type != 'Polygon' or not g.is_valid or g.interiors:
+        return None
+    return g if g.area * metro ** 2 >= AREA_MINIMA_M2 and _ancho_m(g, metro) >= ANCHO_MINIMO_M else None
+
+
+SEPARACION_M = 0.5      # una casa propia no se arrima a menos de esto de una casa viva
+FRENTE_MINIMO_M = 3.0   # una casa propia con menos fachada que esto sobre su manzana no da a la calle
+
+
+def frente_m(casa, borde, metro, tolerancia_m=FRENTE_SOBRE_LA_CALLE_M):
+    """Metros del contorno de la casa a menos de `tolerancia_m` del borde de la manzana: la fachada sobre la calle
+    (un vértice que toca el borde no es una fachada)."""
+    return casa.exterior.intersection(borde.buffer(tolerancia_m / metro)).length * metro
 
 
 def _centros(ciudad):
     v = np.asarray(ciudad['vertices'], float).reshape(-1, 2)
-    return [Point(v[t[0]:t[0] + t[1]].mean(axis=0)) for t in ciudad['techos']]
+    return [Polygon(v[t[0]:t[0] + t[1]]).buffer(0).representative_point() for t in ciudad['techos']]   # siempre dentro de la casa
 
 
 def _vive(vida, epoca):
@@ -100,37 +133,57 @@ def sin_casas(unidades, ciudad, epoca):
     return salida
 
 
-def agregar_casas(ciudad, unidades, metro, epoca):
-    """(ciudad nueva con las casas propias al final, {manzanas, casas}). No muta la ciudad."""
-    centros = _centros(ciudad)
-    arbol = STRtree(centros) if centros else None
+def agregar_casas(ciudad, unidades, metro, epoca, hitos=()):
+    """(ciudad nueva con las casas propias al final, {manzanas, casas}). No muta la ciudad.
+
+    En cada manzana rayada aprobada se levanta la crujía de sus frentes y se conservan los tramos que no pisan una
+    casa viva en la época (a SEPARACION_M), la planta de un hito en pie ni un lote, plaza o huerta de la manzana:
+    así se llenan tanto las manzanas vacías como los frentes vacíos de las que tienen algunas casas de 1936. Cada
+    tramo vive desde la época hasta que nace una casa que lo pisa (o siempre, si ninguna)."""
     vertices, techos = list(ciudad['vertices']), list(ciudad['techos'])
     n = len(techos)
     esquinas, vida = list(ciudad.get('esquinas', [0] * n)), list(ciudad['vida'])
     vuelos = list(ciudad.get('vuelos', [VUELO_POR_OMISION] * n))
     libres = [Polygon(u['poligono']).buffer(0) for u in unidades
               if u['estado'] == 'aprobada' and u['ocupacion'] in LIBRES and len(u['poligono']) >= 3]
-    manzanas = 0
-    for u in sin_casas(unidades, ciudad, epoca):
+    v = np.asarray(ciudad['vertices'], float).reshape(-1, 2)
+    figuras = [Polygon(v[t[0]:t[0] + t[1]]).buffer(0) for t in ciudad['techos']]
+    vivas = [f.buffer(SEPARACION_M / metro) for f, vd in zip(figuras, ciudad['vida']) if _vive(vd, epoca)]
+    vivas += [Polygon(z).buffer(0) for h in hitos if h['nace'] <= epoca and (h['muere'] == 0 or h['muere'] > epoca)
+              for z in h.get('planta', [])]
+    despues = [(f, vd[0]) for f, vd in zip(figuras, ciudad['vida']) if vd[0] > epoca]
+    arbol_v = STRtree(vivas) if vivas else None
+    arbol_d = STRtree([f for f, _ in despues]) if despues else None
+    puestas, manzanas = [], 0
+    for u in unidades:
+        if u['estado'] != 'aprobada' or u['ocupacion'] != 'rayada' or len(u['poligono']) < 3:
+            continue
         figura = Polygon(u['poligono']).buffer(0)
-        cerca = arbol.query(figura, predicate='contains') if arbol is not None else []
-        despues = [ciudad['vida'][i][0] for i in cerca if ciudad['vida'][i][0] > epoca]
-        muere = min(despues) if despues else 0
-        adentro = [f for f in libres if f.intersects(figura)]
-        casas = [_sin(casa, adentro, metro) for casa in casas_de_manzana(u['poligono'], metro)]
-        casas = [c for c in casas if c is not None]
+        # los lotes, plazas y huertas de la manzana; no la huerta que la envuelve (un edificio censado dentro de ella)
+        estorba = [f for f in libres if f.intersects(figura) and f.area < figura.area]
+        estorba += [vivas[i] for i in arbol_v.query(figura)] if arbol_v is not None else []
+        estorba += [f for f in puestas if f.intersects(figura)]
+        casas = []
+        for casa in casas_de_manzana(u['poligono'], metro):
+            casa = _sin(casa, estorba, metro)
+            casa = _limpia(casa, metro) if casa is not None else None
+            if casa is None or frente_m(casa, figura.exterior, metro) < FRENTE_MINIMO_M:
+                continue   # sin frente: lo que pisaba le comió la fachada
+            casas.append(casa)
+        puestas += casas
         manzanas += bool(casas)
         for casa in casas:
+            pisan = [despues[i][1] for i in arbol_d.query(casa) if despues[i][0].intersection(casa).area > 0] \
+                if arbol_d is not None else []
             puntos = list(casa.exterior.coords)[:-1]
             c = casa.centroid
             techos.append([len(vertices) // 2, len(puntos), 1, ESTILO_COLONIAL, semilla_de(c.x, c.y)])
-            vertices += [round(float(x), 2) for p in puntos for x in p]
+            vertices += [float(x) for p in puntos for x in p]
             esquinas.append(0)
-            vida.append([epoca, muere])
+            vida.append([epoca, min(pisan) if pisan else 0])
             vuelos.append(VUELO_POR_OMISION)
     nueva = {**ciudad, 'vertices': vertices, 'techos': techos, 'esquinas': esquinas, 'vida': vida, 'vuelos': vuelos}
     return nueva, {'manzanas': manzanas, 'casas': len(techos) - len(ciudad['techos'])}
-
 
 TOLERANCIA_CALLE_M = 3.0   # media calle angosta de 1843: a menos de esto del borde, la casa es de la manzana
 UNIDADES = {'rayada', 'parte_de_otra_unidad'} | LIBRES
