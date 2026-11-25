@@ -250,12 +250,16 @@ def nombres_en_su_lugar(marcas, clases, epoca, casas, hitos, metro=METRO):
     """R9: cada marca de edificio viva cae sobre la planta de un hito en pie o sobre un edificio público del plano
     (`estilo` de la casa en la época); si no, sobre casas genéricas
     (`sobre_casas`) o sobre nada (`sin_edificio`). Una marca de plaza no cae sobre casas (`plaza_con_casas`)."""
-    plantas = [Polygon(z).buffer(HITO_TOLERANCIA_M / metro) for h in hitos if _vive(h, epoca) for z in h['planta']]
+    # las plantas de los hitos en pie, con su id; las de los hitos de plaza (los que nombra una marca de plaza, como la
+    # Plaza Bolívar) no son edificios
+    de_plaza = {m.get('hito') for m in marcas if m.get('hito') and _clase(clases, m['id'], epoca) == 'plaza'}
+    plantas = [(h['id'], Polygon(z).buffer(HITO_TOLERANCIA_M / metro)) for h in hitos if _vive(h, epoca) for z in h['planta']]
     figuras = [_figura(c) for c in casas]
-    arbol_p, arbol_c = STRtree(plantas) if plantas else None, STRtree(figuras) if figuras else None
+    arbol_c = STRtree(figuras) if figuras else None
 
-    def en(arbol, geoms, punto):
-        return arbol is not None and any(geoms[k].contains(punto) for k in arbol.query(punto))
+    def sobre_un_hito(punto, propio):
+        """Sobre la planta de su hito (si la marca lo tiene) o de cualquier edificio modelado (si no)."""
+        return any(g.contains(punto) for i, g in plantas if (i == propio if propio else i not in de_plaza))
 
     def bajo(punto):   # las casas bajo el punto
         return [casas[k] for k in arbol_c.query(punto) if figuras[k].contains(punto)] if arbol_c is not None else []
@@ -271,7 +275,7 @@ def nombres_en_su_lugar(marcas, clases, epoca, casas, hitos, metro=METRO):
         if clase == 'plaza':
             if debajo:
                 fuera.append({'id': m['id'], 'clase': clase, 'donde': 'plaza_con_casas'})
-        elif not en(arbol_p, plantas, punto) and not any(c.get('estilo') == ESTILO_PUBLICO for c in debajo):
+        elif not sobre_un_hito(punto, m.get('hito')) and not any(c.get('estilo') == ESTILO_PUBLICO for c in debajo):
             fuera.append({'id': m['id'], 'clase': clase, 'donde': 'sobre_casas' if debajo else 'sin_edificio'})
     return {'medidas': medidas, 'fuera': fuera}
 
@@ -302,8 +306,9 @@ def edificado_sigue_al_plano(unidades, casas, hitos_plantas, metro=METRO):
         if contienen:
             if min(contienen, key=lambda uf: uf[1].area)[0]['ocupacion'] in LIBRES:
                 en_libres.append(c['techo'])
-        elif arbol_u is None or not len(arbol_u.query(punto.buffer(FUERA_M / metro))):
-            fuera.append(c['techo'])
+        elif arbol_u is None or not any(todas[k][1].distance(punto) * metro <= FUERA_M
+                                        for k in arbol_u.query(punto.buffer(FUERA_M / metro))):
+            fuera.append(c['techo'])   # (la caja de una unidad girada no alcanza: cuenta la distancia de verdad)
     return {'frente_minimo': FRENTE_EDIFICADO_MINIMO, 'vacias': vacias, 'frente_bajo': frente_bajo,
             'casas_en_libres': sorted(en_libres), 'casas_fuera': sorted(fuera)}
 

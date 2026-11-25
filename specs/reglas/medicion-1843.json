@@ -5934,7 +5934,7 @@
   "manzanas_vacias": 1,
   "frente_bajo": 4,
   "casas_en_libres": 0,
-  "casas_fuera": 14,
+  "casas_fuera": 22,
   "suelo_sin_manzana_ha": 16.79,
   "manchas_sueltas": 8
  },
@@ -6042,9 +6042,17 @@
    8419,
    8420,
    8421,
+   23227,
+   38808,
+   38809,
+   38810,
+   38811,
+   38812,
    38813,
    38814,
-   38815
+   38815,
+   38837,
+   38838
   ]
  },
  "R8": {

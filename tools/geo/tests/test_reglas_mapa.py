@@ -190,3 +190,25 @@ def test_r9_una_marca_sobre_un_edificio_publico_del_plano_tiene_edificio():
     marcas = [{'id': 'ministerio', 'px': 20, 'py': 20, 'nace': 5, 'muere': 0}, {'id': 'teatro', 'px': 120, 'py': 20, 'nace': 5, 'muere': 0}]
     r = nombres_en_su_lugar(marcas, {'ministerio': 'edificio', 'teatro': 'edificio'}, 5, casas, [], METRO)
     assert [(f['id'], f['donde']) for f in r['fuera']] == [('teatro', 'sobre_casas')]
+
+
+def test_r7_una_casa_cerca_de_la_caja_de_una_unidad_girada_pero_lejos_de_ella_esta_fuera():
+    from reglas_mapa import edificado_sigue_al_plano
+    rombo = [[100, 0], [200, 100], [100, 200], [0, 100]]           # su caja llega a (0, 0); la unidad, no
+    casas = [{'techo': 1, 'poligono': _rect(2, 2, 12, 12)}]
+    r = edificado_sigue_al_plano([{'id': 'R', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': rombo}], casas, [], METRO)
+    assert r['casas_fuera'] == [1]
+
+
+def test_r9_una_marca_con_hito_tiene_que_caer_sobre_su_hito_y_una_plaza_hito_no_es_un_edificio():
+    from reglas_mapa import nombres_en_su_lugar
+    hitos = [{'id': 'iglesia', 'nace': 1, 'muere': 0, 'planta': [_rect(0, 0, 40, 40)]},
+             {'id': 'otra', 'nace': 1, 'muere': 0, 'planta': [_rect(100, 0, 140, 40)]},
+             {'id': 'plaza-bolivar', 'nace': 1, 'muere': 0, 'planta': [_rect(200, 0, 300, 100)]}]
+    marcas = [{'id': 'bien', 'px': 20, 'py': 20, 'nace': 1, 'muere': 0, 'hito': 'iglesia'},
+              {'id': 'sobre-otra', 'px': 120, 'py': 20, 'nace': 1, 'muere': 0, 'hito': 'iglesia'},
+              {'id': 'en-la-plaza', 'px': 250, 'py': 50, 'nace': 1, 'muere': 0, 'hito': None},
+              {'id': 'plaza', 'px': 250, 'py': 60, 'nace': 1, 'muere': 0, 'hito': 'plaza-bolivar'}]
+    clases = {'bien': 'edificio', 'sobre-otra': 'edificio', 'en-la-plaza': 'edificio', 'plaza': 'plaza'}
+    r = nombres_en_su_lugar(marcas, clases, 2, [], hitos, METRO)
+    assert {(f['id'], f['donde']) for f in r['fuera']} == {('sobre-otra', 'sin_edificio'), ('en-la-plaza', 'sin_edificio')}
