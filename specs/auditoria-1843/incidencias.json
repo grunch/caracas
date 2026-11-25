@@ -68,7 +68,7 @@
    "evidencia": [
     "specs/auditoria-1843/contraste-unidades.json"
    ],
-   "resolucion": "T81.3a: las casas que nacían en 1843 fuera de toda unidad de la referencia nacen en 1889 (o se quitan): de 311 quedan 20, vivas desde 1772, como límite (cambiarlas tocaría 1772). Puerta de la fase 3: cierre-fases-3-4.json.",
+   "resolucion": "T81.3a: las casas que nacían en 1843 fuera de toda unidad de la referencia nacen en 1889 (o se quitan): de 311 quedan 22, vivas desde 1772, como límite (cambiarlas tocaría 1772). Puerta de la fase 3: cierre-fases-3-4.json.",
    "pipeline": "tools/geo/epocas.py"
   }
  ]

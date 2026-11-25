@@ -18,7 +18,7 @@ Fecha: 25-11-2026. Sitio publicado: `main` 09ba9f7 con `datos-2026-11-25-09ba9f7
 - **Fase 2** cerrable 3/3 ([cierre-fase2.json](cierre-fase2.json)).
 - **Fases 3 y 4** cerrables ([cierre-fases-3-4.json](cierre-fases-3-4.json)).
 - **Fases 5 a 7** cerrables con límites ([cierre-fases-5-7.json](cierre-fases-5-7.json), [limites-fases-5-7.json](limites-fases-5-7.json)): 11 casas heredadas de 1936 y una manzana con el 74,7 % de frente continuo.
-- **1772** da lo mismo que antes de T81: fases 3, 5 y 7 cerrables; la 4 (`hitos_sin_vacios_artificiales`) y la 6 (`mismo_trazado_que_la_fase_5`) no cierran, igual que en `main` antes de esta auditoría. Es una regresión previa, ajena a T81, que queda como tarea aparte.
+- **1772** da lo mismo que antes de T81: fases 3, 5 y 7 cerrables; la 4 (`hitos_sin_vacios_artificiales`) y la 6 (`mismo_trazado_que_la_fase_5`) no cierran, igual que en `main` antes de esta auditoría ([puertas-1772-antes-de-t81.json](puertas-1772-antes-de-t81.json): ciudad regenerada con el código de `main` f00b74d y el calce de 1843 de entonces). Los `cierre-fase4/6.json` versionados de 1772 los dan cerrables porque se midieron con datos anteriores. Es una regresión previa a T81 y queda como tarea aparte.
 
 Incidencias ([incidencias.json](incidencias.json)): I1843-001 a 004 corregidas y publicadas.
 
