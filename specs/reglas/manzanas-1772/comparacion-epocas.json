@@ -23,16 +23,16 @@
     {
       "anio": 1772,
       "antes": {
-        "cantidad": 6292,
-        "sha256": "cde043293652bdc69254d76f0879d05f48155dc92671201a90caf43b6aa35e96"
+        "cantidad": 5487,
+        "sha256": "32de58253d59662499b61616ee66052e134cdb69af841eddc400c3a06d9f6704"
       },
       "despues": {
         "cantidad": 5414,
         "sha256": "e96a2c746e3f8229422d2f7dff29dcf0f88d6550faabc2ab30bbacf9bf9af2a4"
       },
       "arbolesAntes": {
-        "cantidad": 28066,
-        "sha256": "21bad7c262a6d6aa665b90d4b42f3f1d7c7467be084eaeb47cf4493cd2545509"
+        "cantidad": 27741,
+        "sha256": "09aaed48b6f1f816bdd7a8e81932c36dc6cf2b91daf894c2d0c9dbbfb62b1ee5"
       },
       "arbolesDespues": {
         "cantidad": 27728,

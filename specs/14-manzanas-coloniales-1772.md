@@ -1,4 +1,4 @@
-# T82.1 · Manzanas coloniales procedurales en 1772
+# T82.1 / T82.2 · Manzanas coloniales procedurales en 1772
 
 ## Decisión y alcance
 
@@ -88,20 +88,15 @@ No se publican binarios. La generación específica, empaquetado y árboles fina
 
 ## Rendimiento final
 
-| Medición RTX 2060, sin otras pruebas concurrentes | main | Rama |
+| Medición | main tras #210 | Rama |
 |---|---:|---:|
-| Casas listas | 6.143 ms | 6.292 ms |
-| Tarea más larga | 431 ms | 408 ms |
-| Transferencia inicial | 9.682.696 B | 9.736.002 B |
+| Casas listas | 6.184 ms | 6.292 ms |
+| Tarea más larga | 433 ms | 408 ms |
+| Transferencia inicial | 9.727.880 B | 9.736.002 B |
 | Heap observado | 242 MB | 242 MB |
-| Geometría retenida en JS | 85,6 MB | 85,6 MB |
-| Triángulos, centro | 4.484.071 | 4.342.983 |
-| Mediana por cuadro, centro | 7,7 ms | 8,2 ms |
+| Triángulos del centro | 4.352.947 | 4.342.983 |
+| Mediana por cuadro | 8,5 ms | 8,2 ms |
 
-La transferencia aumenta 53.306 B por conservar vidas separadas y la nueva selección de paletas. La medición posterior a incorporar las reservas registra 242 MB de heap, dentro del presupuesto de 250 MB; los 257 MB de la medición anterior no se reprodujeron en esta ejecución. La mediana por cuadro sube 0,5 ms frente a la base y permanece por debajo de 16,6 ms. Los presupuestos de carga, tarea larga, transferencia y triángulos ya estaban excedidos en main. No se midió móvil físico.
-
-## Validación de reservas de edificios
-
-64 casas nuevas en las cinco cuadras con hitos; intersección máxima de sus solares con las reservas: 3,73e-9 píxeles cuadrados (redondeo numérico). El test de cuadra oblicua con dos reservas comprueba también cada triángulo de la geometría nativa, incluidos los tejados, no solo el parcelario. Auditoría de las otras cinco épocas: casas, árboles y paletas idénticos a la versión anterior.
+La carga varía +108 ms y la transferencia +8.122 B al incorporar cinco cuadras. Heap y tiempo por cuadro están dentro de presupuesto. Los presupuestos de carga, tarea larga, transferencia y triángulos ya excedidos en main siguen pendientes. Las mediciones no permiten afirmar una mejora estable de tiempos.
 
 Tras añadir las reservas: 10 tests focalizados de manzanas aprobados, suite unitaria completa 1.707/1.707 y 5/5 E2E de hitos. Las capturas de las cinco épocas terminaron sin errores. La suite integral E2E de 89 pruebas y los 996 tests Python corresponden a la validación anterior; no se repitieron íntegramente para este cambio solo de generación JavaScript.
