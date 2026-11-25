@@ -86,5 +86,8 @@ def test_las_casas_nacidas_en_1843_fuera_de_toda_manzana_pasan_a_la_epoca_siguie
 
     nueva, movidas = fuera_de_la_referencia(ciudad, unidades, metro=0.5, epoca=2, tolerancia_m=3)
 
-    assert nueva['vida'] == [[2, 0], [2, 0], [3, 0], [3, 3], [1, 0]]   # dentro, a media calle, fuera, fuera sin vida, de 1772
+    # dentro, a media calle, fuera (nace después), fuera y moría en la siguiente (se quita: no vive en ninguna), de 1772
+    assert nueva['vida'] == [[2, 0], [2, 0], [3, 0], [1, 0]]
+    assert len(nueva['techos']) == len(nueva['esquinas']) == len(nueva['vuelos']) == 4
+    assert nueva['vertices'][2 * nueva['techos'][3][0]] == 300   # la de 1772 conserva su huella
     assert movidas == 2 and ciudad == copia
