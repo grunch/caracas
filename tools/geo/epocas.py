@@ -170,6 +170,17 @@ def nace(fr, primera, umbral):
     return primera + primera_col
 
 
+def nace_sin_tocar_las_anteriores(nace_antes, nace_ahora, desde):
+    """Nacimiento con la referencia de la época `desde` sin cambiar lo que pasaba antes de ella.
+
+    Lo edificado de 1843 sale de su referencia (T81.4a), pero una casa nace en una época si está edificada en esa
+    y en todas las siguientes: una máscara de 1843 más completa haría nacer en 1772 casas que la auditoría de 1772
+    no midió. Las que nacían antes de `desde` (con el color) quedan igual; las demás nacen cuando dice la
+    referencia, nunca antes de `desde`."""
+    nace_antes, nace_ahora = np.asarray(nace_antes), np.asarray(nace_ahora)
+    return np.where(nace_antes < desde, nace_antes, np.maximum(nace_ahora, desde))
+
+
 def muere(fr, nace, umbral):
     """Primera época (desde nace+1) en que la casa ya no está; ULTIMA si llega a 1911."""
     falta = fr < umbral
@@ -760,13 +771,23 @@ def escribir_imagen(ruta, img, params=()):
 
 
 def construido_de_epoca(raiz, epoca, forma, escala, metro):
-    """Máscara de lo edificado de un plano calzado, en la grilla reducida del mosaico."""
+    """Máscara de lo edificado de un plano calzado, en la grilla reducida del mosaico.
+
+    Si la época tiene `referencia` (las manzanas censadas y revisadas, proyectadas al mosaico: T81.2b), lo
+    edificado sale de ella y no del color del plano (I1843-002: el perfil de color perdía los rayados claros)."""
+    m_px = metro * escala
+    if epoca.get("referencia"):
+        from referencia_1843 import mascara
+        unidades = json.loads((raiz / epoca["referencia"]).read_text())["unidades"]
+        mascara_ref = mascara(unidades, forma, escala)
+        if epoca.get("holgura_m"):
+            mascara_ref = cv2.dilate(mascara_ref.astype(np.uint8), _disco(epoca["holgura_m"] / m_px)) > 0
+        return mascara_ref
     import tifffile
     carpeta = raiz / "fuentes/derivados" / str(epoca["año"])
     meta = json.loads((carpeta / "calzado.json").read_text())
     x0, y0 = (int(c) for c in meta["recorte"][:2])
     rgba, (cx0, cy0) = reducir_recorte(tifffile.imread(carpeta / "calzado.tif"), x0, y0, escala)
-    m_px = metro * escala
     parcial = edificado(rgba, epoca["perfil"], epoca["cierre_m"] / m_px, epoca["area_minima_m2"] / m_px ** 2,
                         epoca.get("apertura_m", 0) / m_px, epoca.get("ancho_minimo_m", 0) / m_px)
     mascara = en_marco(parcial, (cx0, cy0, cx0 + parcial.shape[1], cy0 + parcial.shape[0]), forma)
@@ -803,6 +824,12 @@ def main():
     construido = [construido_de_epoca(raiz, e, forma, escala, metro) for e in epocas[1:ULTIMA]]
     huellas36 = huellas(ciudad36, forma, escala)
     nace36 = nace(fracciones(huellas36, construido), primera=1, umbral=config["umbral"])
+    con_referencia = [k for k, e in enumerate(epocas[1:ULTIMA], start=1) if e.get("referencia")]
+    if con_referencia:
+        por_color = [construido_de_epoca(raiz, {**e, "referencia": None}, forma, escala, metro) if e.get("referencia")
+                     else m for e, m in zip(epocas[1:ULTIMA], construido)]
+        nace_color = nace(fracciones(huellas36, por_color), primera=1, umbral=config["umbral"])
+        nace36 = nace_sin_tocar_las_anteriores(nace_color, nace36, min(con_referencia))
     apertura = apertura_de_juntas(ciudad36.get("juntas", []), construido, escala, ciudad36.get("juntas_minimo"),
                                   ciudad36.get("juntas_hasta"))
     vida36, quitar = vida_de_1936(nace36, ciudad36, apertura)

@@ -239,6 +239,11 @@
     "entrada": "tools/geo/referencias/1772-plazuelas.json",
     "clase": "historica_curada",
     "nota": "Plazuelas y ensanches del original de 1772 que la referencia no registraba (censo final, T33j.8c), trazados a mano sobre el original y revisados a ojo: ninguna casa vive en ellas en 1772."
+   },
+   {
+    "entrada": "tools/geo/referencias/1843-manzanas.json",
+    "clase": "otras_epocas",
+    "nota": "Referencia de 1843 (T81.2b): lo edificado de 1843 sale de ella (T81.4a). No cambia lo que nace en 1772: las casas que nacían antes de 1843 conservan su nacimiento (epocas.nace_sin_tocar_las_anteriores)."
    }
   ]
  },
