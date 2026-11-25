@@ -130,3 +130,32 @@ def agregar_casas(ciudad, unidades, metro, epoca):
             vuelos.append(VUELO_POR_OMISION)
     nueva = {**ciudad, 'vertices': vertices, 'techos': techos, 'esquinas': esquinas, 'vida': vida, 'vuelos': vuelos}
     return nueva, {'manzanas': manzanas, 'casas': len(techos) - len(ciudad['techos'])}
+
+
+TOLERANCIA_CALLE_M = 3.0   # media calle angosta de 1843: a menos de esto del borde, la casa es de la manzana
+UNIDADES = {'rayada', 'parte_de_otra_unidad'} | LIBRES
+
+
+def fuera_de_la_referencia(ciudad, unidades, metro, epoca, tolerancia_m=TOLERANCIA_CALLE_M):
+    """(ciudad nueva, cuántas) con las casas que nacen en `epoca` fuera de toda unidad aprobada de la referencia
+    (más de `tolerancia_m` de una manzana) naciendo en la época siguiente: en 1843 estarían en una calle o en el
+    campo (T81.3a). Si morían en esa época siguiente, no viven en ninguna. Las que nacían antes no se tocan."""
+    edificables, todas = [], []
+    for u in unidades:
+        if u['estado'] != 'aprobada' or len(u['poligono']) < 3 or u['ocupacion'] not in UNIDADES:
+            continue
+        f = Polygon(u['poligono']).buffer(0)
+        todas.append(f)
+        if u['ocupacion'] in {'rayada', 'parte_de_otra_unidad'}:
+            edificables.append(f.buffer(tolerancia_m / metro))
+    arbol = STRtree(todas + edificables) if todas else None
+    vida, movidas = [list(v) for v in ciudad['vida']], 0
+    for k, c in enumerate(_centros(ciudad)):
+        if vida[k][0] != epoca:
+            continue
+        if arbol is not None and len(arbol.query(c, predicate='within')):
+            continue
+        siguiente = epoca + 1
+        vida[k] = [siguiente, vida[k][1] if vida[k][1] == 0 or vida[k][1] > siguiente else siguiente]
+        movidas += 1
+    return {**ciudad, 'vida': vida}, movidas
