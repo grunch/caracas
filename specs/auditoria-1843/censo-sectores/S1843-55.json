@@ -1,0 +1,222 @@
+{
+ "sector": "S1843-55",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    4375,
+    3345,
+    4691,
+    3651
+   ],
+   "poligono_px": [
+    [
+     4375,
+     3440
+    ],
+    [
+     4485,
+     3345
+    ],
+    [
+     4691,
+     3564
+    ],
+    [
+     4627,
+     3620
+    ],
+    [
+     4571,
+     3651
+    ],
+    [
+     4516,
+     3642
+    ],
+    [
+     4482,
+     3609
+    ],
+    [
+     4465,
+     3575
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "trazos cortos horizontales con cruces (signo de cultivo), no rayado de parroquia; estrella de seis puntas en (4520,3525)",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0082"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Estancia entre la margen derecha del Catuche (V) y su confluencia con el Guaire. Borde O recto paralelo al Catuche, borde S curvo. La candidata K1843-0082 (centro fuera de la caja) solo toma la esquina NO de esta unidad y se derrama sobre la estancia vecina al N; la unidad está sin candidata propia. Limita al NE con otra estancia (estrella en 4635,3415; centro ≈4650,3390, fuera de la caja, sector vecino)."
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    4105,
+    3500,
+    4427,
+    3770
+   ],
+   "poligono_px": [
+    [
+     4105,
+     3557
+    ],
+    [
+     4286,
+     3500
+    ],
+    [
+     4427,
+     3673
+    ],
+    [
+     4280,
+     3770
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "trazos cortos horizontales con cruces (signo de cultivo)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Estancia en la margen izquierda del Catuche. Su centroide (≈4272,3626) cae apenas dentro de la caja (borde O x=4263): el sector vecino S1843-54 no debe registrarla. Lado SO compartido con otra estancia (centro ≈4150,3700, fuera)."
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    4424,
+    3912,
+    4902,
+    3932
+   ],
+   "poligono_px": [
+    [
+     4424,
+     3912
+    ],
+    [
+     4902,
+     3912
+    ],
+    [
+     4902,
+     3932
+    ],
+    [
+     4424,
+     3932
+    ]
+   ],
+   "ocupacion": "descartada_no_edificacion",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "ninguno (barra negra con marcas 0, 75, 150, 300, 600)",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0095"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Escala gráfica «Escala de 600 vs castellanas» (barra 4424–4902, y≈3925; rótulo debajo, y≈3945–3970). K1843-0095 toma solo el tramo E de la barra (desde x=4538). No es edificación."
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "rio",
+   "px": [
+    4335,
+    3460
+   ],
+   "nota": "Quebrada Catuche (letra V, leyenda: Catuche) entra por el borde N en x≈4335 y baja hacia el SE con doble ribera; rótulo V en (4469,3638)."
+  },
+  {
+   "tipo": "confluencia",
+   "px": [
+    4520,
+    3715
+   ],
+   "nota": "El Catuche desemboca en el Guaire."
+  },
+  {
+   "tipo": "rio",
+   "px": [
+    4263,
+    3861
+   ],
+   "nota": "Río Guaire (letra Y en 4762,3646) cruza el sector en diagonal: entra por el O en y≈3861, pasa por la confluencia (4520,3715) y sale por el N en x≈4884; más oscuro y ancho al NE."
+  },
+  {
+   "tipo": "ribera",
+   "px": [
+    4430,
+    3560
+   ],
+   "nota": "Franjas sin cultivo de 40–70 px entre el Catuche y los bordes de las estancias a ambos lados (líneas 4310,3330→4535,3655 al E y 4271,3470→4427,3673 al O); no hay rótulo de camino: se leen como ribera, dudosa como camino."
+  },
+  {
+   "tipo": "terreno",
+   "px": [
+    4700,
+    3800
+   ],
+   "nota": "Todo el S y SE del sector (al S del Guaire y al E de la confluencia) es campo abierto con trazos verticales sueltos, sin parcelas ni calles."
+  },
+  {
+   "tipo": "sin_ciudad",
+   "px": [
+    4590,
+    3756
+   ],
+   "nota": "No hay manzanas rayadas, calles, letras ni números de esquina en la caja; las líneas de trazos son la cuadrícula."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-55/vA_izq.png",
+   "sha256": "604a20365a806b1fb103aaa2f000a7c85b3f56a267f8276f5b7248ce9e5094e6"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-55/vA_der.png",
+   "sha256": "4307ecceddca47040146117137055dc06903b6f2f2be489f9609b2bf224c8b56"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-55/vE.png",
+   "sha256": "8c843ec00afe3a97858005bf70f4b3188452424d61eb28c9014a53917a88b72e"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-55/vEscala.png",
+   "sha256": "ce2e101f97f7407d21f136068729b46bc1a15f2ef8b5b9bad0270bf4c3088938"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-55/vConfluencia.png",
+   "sha256": "9aa0bef93db875cf2dbf886a63e60a4285430a0639d1511879d31fd94f35cab4"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-55/ctx.png",
+   "sha256": "7226cf8fff5795cd7f0a46b8ccc2314b706a3319ea1e244415b59c24ec7035f2"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-55/ctxL.png",
+   "sha256": "c222f9ec9f555b19bb3a009c8da39778fe8d428a12a18033cd23baa12c7b86d7"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-55/ctxT.png",
+   "sha256": "64fdff0e988a52d13214bd4c8a891e882cfaa1bc1112c697c797f34d68f1fa55"
+  }
+ ],
+ "teselas": 4,
+ "vacio": true
+}

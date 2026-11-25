@@ -1,0 +1,1111 @@
+{
+ "sector": "S1843-23",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    2970,
+    1754,
+    3070,
+    1781
+   ],
+   "poligono_px": [
+    [
+     2970,
+     1754
+    ],
+    [
+     3068,
+     1755
+    ],
+    [
+     3070,
+     1780
+    ],
+    [
+     2982,
+     1781
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "3"
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0008"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "franja trapezoidal; esquina 3 en su lado oeste; el borrador la une con las dos manzanas de abajo"
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    2983,
+    1785,
+    3182,
+    1894
+   ],
+   "poligono_px": [
+    [
+     2983,
+     1786
+    ],
+    [
+     3072,
+     1785
+    ],
+    [
+     3182,
+     1844
+    ],
+    [
+     3182,
+     1894
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0008"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "cuadrilátero alargado entre la franja 3 y la calle diagonal; borde noreste en diagonal frente a terreno libre; marca ilegible en (3053,1800), quizá un número de esquina"
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    2965,
+    1788,
+    3162,
+    1902
+   ],
+   "poligono_px": [
+    [
+     2965,
+     1788
+    ],
+    [
+     3162,
+     1900
+    ],
+    [
+     2965,
+     1902
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0008"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "manzana triangular bajo la calle diagonal; trazo vertical negro dentro en x≈3100, y 1855–1890 (¿tapia?)"
+  },
+  {
+   "local": "d",
+   "caja_px": [
+    3178,
+    1757,
+    3204,
+    1767
+   ],
+   "poligono_px": [
+    [
+     3178,
+     1757
+    ],
+    [
+     3204,
+     1757
+    ],
+    [
+     3204,
+     1767
+    ],
+    [
+     3178,
+     1767
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "edificio aislado pequeño, rayado, sin letra, en terreno libre"
+  },
+  {
+   "local": "e",
+   "caja_px": [
+    3219,
+    1775,
+    3305,
+    1860
+   ],
+   "poligono_px": [
+    [
+     3219,
+     1785
+    ],
+    [
+     3297,
+     1775
+    ],
+    [
+     3305,
+     1851
+    ],
+    [
+     3227,
+     1860
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "5",
+    "4"
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0009"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "manzana aislada, algo girada respecto al damero"
+  },
+  {
+   "local": "f",
+   "caja_px": [
+    2964,
+    1908,
+    3180,
+    1935
+   ],
+   "poligono_px": [
+    [
+     2964,
+     1908
+    ],
+    [
+     3180,
+     1908
+    ],
+    [
+     3180,
+     1935
+    ],
+    [
+     2964,
+     1935
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0012"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "franja alargada este-oeste"
+  },
+  {
+   "local": "g",
+   "caja_px": [
+    3428,
+    1748,
+    3492,
+    1812
+   ],
+   "poligono_px": [
+    [
+     3428,
+     1748
+    ],
+    [
+     3492,
+     1748
+    ],
+    [
+     3492,
+     1812
+    ],
+    [
+     3428,
+     1812
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "S"
+   ],
+   "esquinas": [],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0007"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "edificio aislado de planta lobulada, RAYADO (no blanco), con la S; un camino llega desde el norte; polígono = caja aproximada de la figura"
+  },
+  {
+   "local": "h",
+   "caja_px": [
+    3327,
+    1863,
+    3349,
+    1887
+   ],
+   "poligono_px": [
+    [
+     3327,
+     1863
+    ],
+    [
+     3349,
+     1863
+    ],
+    [
+     3349,
+     1887
+    ],
+    [
+     3327,
+     1887
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "C"
+   ],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "cuadrito RAYADO (no blanco) con la C impresa encima; edificio aislado"
+  },
+  {
+   "local": "i",
+   "caja_px": [
+    3243,
+    1923,
+    3310,
+    2037
+   ],
+   "poligono_px": [
+    [
+     3243,
+     1923
+    ],
+    [
+     3307,
+     1952
+    ],
+    [
+     3310,
+     2023
+    ],
+    [
+     3285,
+     2037
+    ],
+    [
+     3285,
+     1975
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "6"
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0013"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "irregular: lado noroeste en diagonal, punta sur; la caja del borrador baja hasta la quebrada"
+  },
+  {
+   "local": "j",
+   "caja_px": [
+    3318,
+    1905,
+    3413,
+    2046
+   ],
+   "poligono_px": [
+    [
+     3383,
+     1905
+    ],
+    [
+     3412,
+     1905
+    ],
+    [
+     3413,
+     2046
+    ],
+    [
+     3318,
+     2046
+    ],
+    [
+     3318,
+     1998
+    ],
+    [
+     3383,
+     1997
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0014"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "manzana en L (brazo norte angosto al este)"
+  },
+  {
+   "local": "k",
+   "caja_px": [
+    2952,
+    2014,
+    3070,
+    2096
+   ],
+   "poligono_px": [
+    [
+     2952,
+     2014
+    ],
+    [
+     3070,
+     2080
+    ],
+    [
+     3069,
+     2096
+    ],
+    [
+     2953,
+     2037
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0015"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "franja diagonal; el borrador K1843-0015 (centrada fuera, x≈2936) la une con la manzana 8 y con manzanas al oeste del sector"
+  },
+  {
+   "local": "l",
+   "caja_px": [
+    2955,
+    2048,
+    3072,
+    2142
+   ],
+   "poligono_px": [
+    [
+     2955,
+     2048
+    ],
+    [
+     3072,
+     2112
+    ],
+    [
+     3072,
+     2140
+    ],
+    [
+     2955,
+     2142
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "8"
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0015"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "lado norte en diagonal a lo largo de la calle diagonal"
+  },
+  {
+   "local": "m",
+   "caja_px": [
+    2955,
+    2147,
+    3072,
+    2262
+   ],
+   "poligono_px": [
+    [
+     2955,
+     2147
+    ],
+    [
+     3072,
+     2147
+    ],
+    [
+     3072,
+     2262
+    ],
+    [
+     2955,
+     2262
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "9"
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0018"
+    ]
+   },
+   "lectura": "segura",
+   "nota": ""
+  },
+  {
+   "local": "n",
+   "caja_px": [
+    3079,
+    2121,
+    3172,
+    2141
+   ],
+   "poligono_px": [
+    [
+     3079,
+     2121
+    ],
+    [
+     3172,
+     2121
+    ],
+    [
+     3172,
+     2141
+    ],
+    [
+     3079,
+     2141
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0019"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "franja angosta entre la calle de la quebrada y la calle de 10–11"
+  },
+  {
+   "local": "o",
+   "caja_px": [
+    3178,
+    2120,
+    3315,
+    2140
+   ],
+   "poligono_px": [
+    [
+     3178,
+     2120
+    ],
+    [
+     3315,
+     2120
+    ],
+    [
+     3315,
+     2140
+    ],
+    [
+     3178,
+     2140
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0019"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "franja angosta, gemela de la anterior al este"
+  },
+  {
+   "local": "p",
+   "caja_px": [
+    3078,
+    2146,
+    3173,
+    2263
+   ],
+   "poligono_px": [
+    [
+     3078,
+     2146
+    ],
+    [
+     3173,
+     2146
+    ],
+    [
+     3173,
+     2263
+    ],
+    [
+     3078,
+     2263
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0019"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "contiene un lote blanco sin letra al norte y el lote D al sur"
+  },
+  {
+   "local": "q",
+   "caja_px": [
+    3110,
+    2250,
+    3132,
+    2262
+   ],
+   "poligono_px": [
+    [
+     3110,
+     2250
+    ],
+    [
+     3132,
+     2250
+    ],
+    [
+     3132,
+     2262
+    ],
+    [
+     3110,
+     2262
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "D"
+   ],
+   "esquinas": [],
+   "rayado": "ninguno (blanco)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "lote blanco en el borde sur; la D impresa justo encima, en (3120,2237)"
+  },
+  {
+   "local": "r",
+   "caja_px": [
+    3115,
+    2147,
+    3135,
+    2158
+   ],
+   "poligono_px": [
+    [
+     3115,
+     2147
+    ],
+    [
+     3135,
+     2147
+    ],
+    [
+     3135,
+     2158
+    ],
+    [
+     3115,
+     2158
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "ninguno (blanco)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "lote blanco en el borde norte sin letra impresa"
+  },
+  {
+   "local": "s",
+   "caja_px": [
+    3178,
+    2145,
+    3315,
+    2260
+   ],
+   "poligono_px": [
+    [
+     3178,
+     2145
+    ],
+    [
+     3315,
+     2145
+    ],
+    [
+     3315,
+     2260
+    ],
+    [
+     3178,
+     2260
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "10",
+    "11"
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0019"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "contiene tres lotes blancos (E y dos sin letra)"
+  },
+  {
+   "local": "t",
+   "caja_px": [
+    3212,
+    2175,
+    3233,
+    2200
+   ],
+   "poligono_px": [
+    [
+     3212,
+     2175
+    ],
+    [
+     3233,
+     2175
+    ],
+    [
+     3233,
+     2200
+    ],
+    [
+     3212,
+     2200
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "E"
+   ],
+   "esquinas": [],
+   "rayado": "ninguno (blanco)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "la E impresa a la derecha del lote, en (3247,2185)"
+  },
+  {
+   "local": "u",
+   "caja_px": [
+    3178,
+    2175,
+    3210,
+    2200
+   ],
+   "poligono_px": [
+    [
+     3178,
+     2175
+    ],
+    [
+     3210,
+     2175
+    ],
+    [
+     3210,
+     2200
+    ],
+    [
+     3178,
+     2200
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "ninguno (blanco)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "lote blanco pegado al de E, abierto a la calle oeste; marca negra en forma de paréntesis en (3181,2185); sin letra legible"
+  },
+  {
+   "local": "v",
+   "caja_px": [
+    3208,
+    2230,
+    3233,
+    2252
+   ],
+   "poligono_px": [
+    [
+     3208,
+     2230
+    ],
+    [
+     3233,
+     2230
+    ],
+    [
+     3233,
+     2252
+    ],
+    [
+     3208,
+     2252
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "ninguno (blanco)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "lote blanco sin letra"
+  },
+  {
+   "local": "w",
+   "caja_px": [
+    3322,
+    2145,
+    3433,
+    2258
+   ],
+   "poligono_px": [
+    [
+     3322,
+     2145
+    ],
+    [
+     3327,
+     2148
+    ],
+    [
+     3358,
+     2188
+    ],
+    [
+     3359,
+     2220
+    ],
+    [
+     3387,
+     2221
+    ],
+    [
+     3433,
+     2257
+    ],
+    [
+     3322,
+     2258
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0019"
+    ]
+   },
+   "lectura": "dudosa",
+   "nota": "irregular, escalonada hacia el este frente a terreno libre; número junto a la esquina noroeste en (3323,2172) parece un 9 pero ya hay un 9 en la manzana del oeste: ilegible"
+  },
+  {
+   "local": "x",
+   "caja_px": [
+    3566,
+    2220,
+    3584,
+    2246
+   ],
+   "poligono_px": [
+    [
+     3566,
+     2220
+    ],
+    [
+     3584,
+     2220
+    ],
+    [
+     3584,
+     2246
+    ],
+    [
+     3566,
+     2246
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "P"
+   ],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "edificio aislado RAYADO con la P a la derecha, junto al rótulo Ñarauli"
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "quebrada",
+   "px": [
+    3100,
+    2045
+   ],
+   "nota": "quebrada de doble ribera que entra por el oeste (2930,1960), pasa por (3075,2040), (3280,2062) y cruza la calle norte-sur en (3310,2055), luego baja al sureste por (3420,2085), (3445,2130), (3480,2200), (3540,2265); corta el damero entre la fila 3/5/6 y la fila 8/10"
+  },
+  {
+   "tipo": "punto_notable",
+   "px": [
+    3302,
+    2045
+   ],
+   "nota": "letra b minúscula en el cruce de la calle norte-sur (x≈3314) con la quebrada; posible puente"
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    3314,
+    2000
+   ],
+   "nota": "calle norte-sur entre las manzanas 6 y la L, x≈3311–3318, de y≈1950 a la quebrada y sigue al sur entre 10–11 y la manzana irregular"
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    3070,
+    1840
+   ],
+   "nota": "calle diagonal (noroeste-sureste) entre la manzana triangular y el cuadrilátero, de (2965,1787) a (3182,1897)"
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    3010,
+    2042
+   ],
+   "nota": "calle diagonal entre la franja de (2952,2014) y la manzana 8, paralela a la quebrada"
+  },
+  {
+   "tipo": "camino",
+   "px": [
+    3440,
+    1700
+   ],
+   "nota": "camino de una línea que baja desde el norte (3433,1654) hasta el edificio S (3448,1748)"
+  },
+  {
+   "tipo": "camino",
+   "px": [
+    3215,
+    1920
+   ],
+   "nota": "línea fina desde el extremo este de la franja K1843-0012 (3180,1906) hasta la punta noroeste de la manzana 6 (3243,1923)"
+  },
+  {
+   "tipo": "punto_notable",
+   "px": [
+    3073,
+    1690
+   ],
+   "nota": "dos círculos de trazos sobre la línea de la cuadrícula, en (3073,1690) y (3073,1727); sin letra, significado desconocido"
+  },
+  {
+   "tipo": "rotulo",
+   "px": [
+    3490,
+    2195
+   ],
+   "nota": "letra V mayúscula junto a la quebrada, sin lote asociado"
+  },
+  {
+   "tipo": "rotulo",
+   "px": [
+    3405,
+    2095
+   ],
+   "nota": "marca pequeña junto a la ribera norte de la quebrada, ilegible"
+  },
+  {
+   "tipo": "rotulo",
+   "px": [
+    3620,
+    2165
+   ],
+   "nota": "rótulo Ñarauli (sigue fuera del sector, al este)"
+  },
+  {
+   "tipo": "terreno_libre",
+   "px": [
+    3520,
+    1900
+   ],
+   "nota": "todo el cuarto noreste y este (x>3420, y<2270) es terreno libre con signo de rayitas verticales sueltas, sin límites dibujados; no se registra como unidad"
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-23/v_P.png",
+   "sha256": "094ab27793bd6cb6e5c01884e1e3ef20d86d5f52551d1829a54c67b20165c5aa"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-23/v_S_C.png",
+   "sha256": "e95a584aa512bfaec7e313823282152acfcd7b83914d19bf0bdbcce910f9a53b"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-23/v_bloque13.png",
+   "sha256": "74f2b94e1ebbebd42e9d61306548bf92f69cc1d883cccf64905e354c1162ccf0"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-23/v_bloque9.png",
+   "sha256": "57d3b7a3fa3b521fb077a3606566ceaf36189882183b2d7eb77bfc52b0e4f473"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-23/v_fila_este.png",
+   "sha256": "321a858998eb6f1fa2a496c31223d927a76bad107463328fbf34b54fff187f32"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-23/v_fila_oeste.png",
+   "sha256": "bbe6109f2cdb62879aa1a7e8811f590445a9a67c496f47cab88bbd13026f54b8"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-23/v_franjas.png",
+   "sha256": "ca1bd1848db5f408ba445560b0de89ffa096a278cbd0ff0a20d02dc7076c1e8d"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-23/v_noroeste.png",
+   "sha256": "0aa9837fad21e9ac7c99bcf4b29ba32e5d722176dc040d2aed2b62fe082a0c7b"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-23/v_quebrada.png",
+   "sha256": "fc0e72205d5dc52d0881477f74c4b93487c8afc16f5a7d3747f975e7c8e0cd41"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-23/v_rect_circulos.png",
+   "sha256": "8c61b6ab6c970c235194acb9bd71ddd7129859b9134436a2fb869d63b5c78ba2"
+  }
+ ],
+ "teselas": 4,
+ "vacio": false
+}

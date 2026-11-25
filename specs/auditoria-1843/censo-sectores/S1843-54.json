@@ -1,0 +1,583 @@
+{
+ "sector": "S1843-54",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    3589,
+    3486,
+    3713,
+    3603
+   ],
+   "poligono_px": [
+    [
+     3589,
+     3486
+    ],
+    [
+     3713,
+     3486
+    ],
+    [
+     3713,
+     3603
+    ],
+    [
+     3589,
+     3603
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    129
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0079"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "K1843-0079 une esta manzana con la d y con manzanas al norte (fuera del sector). Número 129 en la esquina NO. Recorte v_a."
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    3719,
+    3485,
+    3832,
+    3601
+   ],
+   "poligono_px": [
+    [
+     3719,
+     3485
+    ],
+    [
+     3832,
+     3485
+    ],
+    [
+     3832,
+     3601
+    ],
+    [
+     3719,
+     3601
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    123
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0086"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "K1843-0086 une esta manzana con la e y con la del norte (fuera del sector). Número 123 en la esquina NO. Recorte v_b."
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    3838,
+    3481,
+    3900,
+    3599
+   ],
+   "poligono_px": [
+    [
+     3838,
+     3481
+    ],
+    [
+     3870,
+     3481
+    ],
+    [
+     3870,
+     3568
+    ],
+    [
+     3900,
+     3568
+    ],
+    [
+     3900,
+     3587
+    ],
+    [
+     3878,
+     3587
+    ],
+    [
+     3878,
+     3599
+    ],
+    [
+     3838,
+     3599
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0090"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Manzana angosta, borde este de la ciudad, con un saliente al SE (x 3870-3900, y 3568-3587). Sin calle al este: da a terreno abierto. K1843-0090 la une con la f. Recorte v_cg."
+  },
+  {
+   "local": "d",
+   "caja_px": [
+    3616,
+    3609,
+    3714,
+    3678
+   ],
+   "poligono_px": [
+    [
+     3616,
+     3609
+    ],
+    [
+     3714,
+     3609
+    ],
+    [
+     3714,
+     3678
+    ],
+    [
+     3687,
+     3678
+    ],
+    [
+     3655,
+     3629
+    ],
+    [
+     3616,
+     3629
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0079"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Manzana irregular de borde sur: la parte oeste es una franja angosta (y hasta 3629) y el lado SO corta en diagonal. Sin calle al sur ni al oeste (terreno abierto). Recorte v_d."
+  },
+  {
+   "local": "e",
+   "caja_px": [
+    3721,
+    3609,
+    3835,
+    3691
+   ],
+   "poligono_px": [
+    [
+     3721,
+     3609
+    ],
+    [
+     3835,
+     3609
+    ],
+    [
+     3835,
+     3691
+    ],
+    [
+     3721,
+     3691
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    135
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0086"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Número 135 en la esquina NO. Al sur, terreno abierto; la letra W está impresa fuera de la manzana, bajo su esquina SE (~3822,3702). Recorte v_e."
+  },
+  {
+   "local": "f",
+   "caja_px": [
+    3841,
+    3591,
+    3907,
+    3709
+   ],
+   "poligono_px": [
+    [
+     3841,
+     3606
+    ],
+    [
+     3883,
+     3606
+    ],
+    [
+     3883,
+     3591
+    ],
+    [
+     3907,
+     3591
+    ],
+    [
+     3907,
+     3624
+    ],
+    [
+     3883,
+     3636
+    ],
+    [
+     3881,
+     3709
+    ],
+    [
+     3841,
+     3709
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    136
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0090"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Manzana irregular: ala NE (x 3883-3907) con el lado SE en diagonal; borde este de la ciudad, sin calle al este ni al sur. Número 136 en la esquina NO. Un puntito blanco dentro (~3865,3654), posible defecto del papel. Recorte v_f."
+  },
+  {
+   "local": "g",
+   "caja_px": [
+    3839,
+    3454,
+    3868,
+    3476
+   ],
+   "poligono_px": [
+    [
+     3839,
+     3454
+    ],
+    [
+     3868,
+     3454
+    ],
+    [
+     3868,
+     3476
+    ],
+    [
+     3839,
+     3476
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Manzanita aislada (29x22 px) entre calles, al norte de la c; su centro (y≈3465) cae apenas dentro de la caja. Al norte hay otra igual centrada fuera del sector. Ninguna candidata propia (solo la enorme K1843-0085 la abarca). Recorte v_cg."
+  },
+  {
+   "local": "h",
+   "caja_px": [
+    3909,
+    3275,
+    4283,
+    3666
+   ],
+   "poligono_px": [
+    [
+     3909,
+     3420
+    ],
+    [
+     3943,
+     3387
+    ],
+    [
+     4073,
+     3330
+    ],
+    [
+     4183,
+     3275
+    ],
+    [
+     4253,
+     3420
+    ],
+    [
+     4283,
+     3500
+    ],
+    [
+     4200,
+     3523
+    ],
+    [
+     4103,
+     3557
+    ],
+    [
+     4045,
+     3666
+    ],
+    [
+     3957,
+     3583
+    ],
+    [
+     3920,
+     3550
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado de trazos cortos inclinados (sembradío)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0076"
+    ]
+   },
+   "lectura": "dudosa",
+   "nota": "Parcela norte de una estancia cultivada al este de la ciudad, cercada con línea continua; centroide calculado (4084,3462) apenas dentro de la caja: puede asignarse al sector vecino del norte. K1843-0076 es una candidata enorme que la abarca junto con otras parcelas. Recorte v_h."
+  },
+  {
+   "local": "i",
+   "caja_px": [
+    4041,
+    3558,
+    4279,
+    3834
+   ],
+   "poligono_px": [
+    [
+     4107,
+     3558
+    ],
+    [
+     4046,
+     3641
+    ],
+    [
+     4041,
+     3669
+    ],
+    [
+     4096,
+     3834
+    ],
+    [
+     4279,
+     3772
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado de trazos cortos inclinados (sembradío)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0076"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Parcela sur-centro de la misma estancia, cercada; lindes: al NE con la parcela este (centrada fuera del sector, ~4272,3628), al NO con la h. Recorte v_i."
+  },
+  {
+   "local": "j",
+   "caja_px": [
+    4084,
+    3490,
+    4261,
+    3620
+   ],
+   "poligono_px": [
+    [
+     4084,
+     3490
+    ],
+    [
+     4261,
+     3490
+    ],
+    [
+     4261,
+     3620
+    ],
+    [
+     4084,
+     3620
+    ]
+   ],
+   "ocupacion": "parte_de_otra_unidad",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado de trazos cortos inclinados (sembradío)",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0088"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "K1843-0088 no es una manzana: es un fragmento detectado sobre la línea divisoria de la estancia y la parcela este (polígono aprox. (4283,3503),(4428,3672),(4279,3772),(4107,3558), centro ~4272,3628, fuera de la caja). Se registra solo para cerrar la candidata. Recortes v_h y v_i."
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "borde_ciudad",
+   "px": [
+    3905,
+    3480
+   ],
+   "nota": "Las manzanas c, f y g son el borde este de la ciudad: al este de x≈3907 no hay más damero, solo terreno abierto (rayitas verticales = sabana/pasto) hasta la estancia."
+  },
+  {
+   "tipo": "borde_ciudad",
+   "px": [
+    3700,
+    3700
+   ],
+   "nota": "Al sur de las manzanas d, e y f (y≈3680-3710) termina la ciudad: las calles norte-sur (x≈3715 y x≈3836) acaban en terreno abierto."
+  },
+  {
+   "tipo": "quebrada_o_camino",
+   "px": [
+    3980,
+    3727
+   ],
+   "nota": "Línea sencilla que nace junto al saliente SE de la manzana c (~3903,3567) y baja curvando por (3980,3727), (4013,3807) hasta el río en (4080,3920), donde termina con un nudo como afluente. Probablemente una quebrada; dudosa (podría ser un camino)."
+  },
+  {
+   "tipo": "lindero",
+   "px": [
+    3920,
+    3550
+   ],
+   "nota": "Lindero oeste de la estancia cultivada: (3909,3420)-(3920,3550)-(4045,3666)-(4096,3834). Entre él y la quebrada/camino anterior queda una franja de terreno abierto."
+  },
+  {
+   "tipo": "rio",
+   "px": [
+    3800,
+    3960
+   ],
+   "nota": "Río ancho (doble ribera con rayado) que cruza todo el sur del sector de oeste a este: (3551,4005), (3700,3975), (3800,3950), (3950,3935), (4080,3920), (4200,3880), (4323,3830). Etiqueta Y al sur del río (~3782,3995)."
+  },
+  {
+   "tipo": "letra",
+   "px": [
+    3822,
+    3702
+   ],
+   "nota": "Letra W impresa en terreno abierto bajo la esquina SE de la manzana e; no hay lote blanco asociado (posible rótulo de un lugar o del terreno)."
+  },
+  {
+   "tipo": "linea_tenue",
+   "px": [
+    3950,
+    3850
+   ],
+   "nota": "Línea muy tenue en diagonal de (3880,3893) a (4007,3793) y quizás más allá; podría ser una senda o un pliegue del papel. Dudosa."
+  },
+  {
+   "tipo": "quebrada",
+   "px": [
+    4350,
+    3500
+   ],
+   "nota": "Fuera de la caja, al este (x>4263): la quebrada rotulada V baja de N a S hasta el río (~4520,3715); no entra al sector."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-54/v_a.png",
+   "sha256": "d65cae0043836083607d914864f64fe1f5a4c620bb3de107a0c6aaa7bcaf0afc"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-54/v_b.png",
+   "sha256": "00626be94f6298c160ce16f8f815adcc467e48fda3a9356872c5304e61a5d73d"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-54/v_cg.png",
+   "sha256": "2e3a2f20a62e8242d5b3628ca7a9711d3e7580b028b637d61d370ec5ae537012"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-54/v_d.png",
+   "sha256": "44281964f0a89c8dc0ddc4dae4ca5f19b0a5359c6e7f92e79bfbe7b29e1fd554"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-54/v_e.png",
+   "sha256": "025f2e7ba0ef64708b66b5847e1ac2d793099462f5d0ed8d25d213279986efda"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-54/v_f.png",
+   "sha256": "58a6c2c3b2d4976a89f6b0187fd17b11afa9c3e76dedeac91f73f2355f6a097a"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-54/v_h.png",
+   "sha256": "21e980e59e4edd6129e06272fea15e049cdf6612dd669547fbbd6ff440f79385"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-54/v_i.png",
+   "sha256": "c3c01fc95d4a21e60275cf53fa58af802283f630d7ddf09e79981eb1bd3544bb"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-54/v_q.png",
+   "sha256": "8e090d12fc7486c985a3713106a0706a10b32ea55b0b71939ff8939c7adc4d17"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-54/ctx_ne.png",
+   "sha256": "e96dc31c40d84eca8624a1ad305b5cf5f261eed703a7db1337cb4bb08fe5a06f"
+  }
+ ],
+ "teselas": 4,
+ "vacio": false
+}

@@ -1,0 +1,560 @@
+{
+ "sector": "S1843-12",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    2520,
+    1462,
+    2608,
+    1580
+   ],
+   "poligono_px": [
+    [
+     2520,
+     1467
+    ],
+    [
+     2529,
+     1462
+    ],
+    [
+     2569,
+     1462
+    ],
+    [
+     2572,
+     1478
+    ],
+    [
+     2586,
+     1495
+    ],
+    [
+     2608,
+     1579
+    ],
+    [
+     2559,
+     1580
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0005"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Manzana irregular, la más al norte de la ciudad; sin calle al oeste (da al campo). Lado este sobre la calle que continúa el camino punteado. Dentro tres blancos sin letra: lote en la esquina NE (2546-2571,1462-1479), entrante abierto a la calle este (2569-2585,1495-1524) y patio interior (2547-2570,1531-1569). Recorte v_A.png."
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    2588,
+    1492,
+    2632,
+    1550
+   ],
+   "poligono_px": [
+    [
+     2588,
+     1493
+    ],
+    [
+     2605,
+     1492
+    ],
+    [
+     2632,
+     1548
+    ],
+    [
+     2612,
+     1550
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Manzana angosta al este de la calle; el borrador no la detecta (K1843-0005 solo cubre la masa sur). Sin calle al este (campo). Recorte v_BC.png."
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    2612,
+    1555,
+    2693,
+    1670
+   ],
+   "poligono_px": [
+    [
+     2612,
+     1555
+    ],
+    [
+     2633,
+     1556
+    ],
+    [
+     2660,
+     1595
+    ],
+    [
+     2693,
+     1670
+    ],
+    [
+     2642,
+     1670
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0005"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Manzana con el lado este curvo hacia el campo (sin calle de ese lado). Recorte v_BC.png."
+  },
+  {
+   "local": "d",
+   "caja_px": [
+    2560,
+    1587,
+    2590,
+    1672
+   ],
+   "poligono_px": [
+    [
+     2560,
+     1588
+    ],
+    [
+     2588,
+     1587
+    ],
+    [
+     2590,
+     1671
+    ],
+    [
+     2561,
+     1672
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0005"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Manzana de borde oeste de la ciudad, sin calle al oeste. Recorte v_DE.png."
+  },
+  {
+   "local": "e",
+   "caja_px": [
+    2591,
+    1587,
+    2638,
+    1671
+   ],
+   "poligono_px": [
+    [
+     2591,
+     1587
+    ],
+    [
+     2613,
+     1587
+    ],
+    [
+     2638,
+     1671
+    ],
+    [
+     2595,
+     1671
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0005"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Manzana trapezoidal entre la calle N-S y la calle diagonal. Recorte v_DE.png."
+  },
+  {
+   "local": "f",
+   "caja_px": [
+    2454,
+    1201,
+    2485,
+    1245
+   ],
+   "poligono_px": [
+    [
+     2454,
+     1202
+    ],
+    [
+     2468,
+     1201
+    ],
+    [
+     2485,
+     1244
+    ],
+    [
+     2471,
+     1245
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [
+    "z"
+   ],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Edificio aislado al oeste del camino punteado, con la letra minúscula z encima (2459,1194). Unido al edificio g por una raya corta que cruza el camino (y≈1241). Recorte v_zv.png."
+  },
+  {
+   "local": "g",
+   "caja_px": [
+    2500,
+    1224,
+    2526,
+    1268
+   ],
+   "poligono_px": [
+    [
+     2500,
+     1226
+    ],
+    [
+     2510,
+     1224
+    ],
+    [
+     2526,
+     1266
+    ],
+    [
+     2515,
+     1268
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [
+    "v"
+   ],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Edificio aislado al este del camino. La letra minúscula v (2481,1257) queda entre f y g, bajo la raya que los une: no es seguro a cuál de los dos (o al par) se refiere. Recorte v_zv.png."
+  },
+  {
+   "local": "h",
+   "caja_px": [
+    2500,
+    1322,
+    2521,
+    1341
+   ],
+   "poligono_px": [
+    [
+     2500,
+     1323
+    ],
+    [
+     2510,
+     1322
+    ],
+    [
+     2521,
+     1340
+    ],
+    [
+     2511,
+     1341
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Edificio aislado pequeño al oeste del camino punteado. Recorte v_chico.png."
+  },
+  {
+   "local": "i",
+   "caja_px": [
+    2654,
+    1319,
+    2677,
+    1337
+   ],
+   "poligono_px": [
+    [
+     2654,
+     1319
+    ],
+    [
+     2677,
+     1319
+    ],
+    [
+     2677,
+     1337
+    ],
+    [
+     2654,
+     1337
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Edificio aislado cuadrado en el campo, al oeste de la quebrada. Recorte v_cuadro_oct.png."
+  },
+  {
+   "local": "j",
+   "caja_px": [
+    2655,
+    1381,
+    2696,
+    1439
+   ],
+   "poligono_px": [
+    [
+     2666,
+     1381
+    ],
+    [
+     2687,
+     1381
+    ],
+    [
+     2696,
+     1394
+    ],
+    [
+     2695,
+     1426
+    ],
+    [
+     2684,
+     1439
+    ],
+    [
+     2666,
+     1439
+    ],
+    [
+     2655,
+     1426
+    ],
+    [
+     2655,
+     1397
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [
+    "u"
+   ],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Edificio aislado octogonal con un patio blanco ovalado al centro (2668-2680,1400-1420 aprox.); la letra minúscula u a su oeste (2641,1403). No se identifica qué es. Recorte v_cuadro_oct.png."
+  },
+  {
+   "local": "k",
+   "caja_px": [
+    2561,
+    1410,
+    2590,
+    1446
+   ],
+   "poligono_px": [
+    [
+     2561,
+     1410
+    ],
+    [
+     2575,
+     1410
+    ],
+    [
+     2590,
+     1445
+    ],
+    [
+     2576,
+     1446
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Edificio aislado al este del camino punteado, justo al norte de la manzana b. Recorte v_aislado.png."
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "camino",
+   "px": [
+    2470,
+    1180
+   ],
+   "nota": "Camino punteado (doble trazo de rayas) que entra por el borde norte del mapa en (2470,1180) y baja hacia el SSE pasando entre los edificios f/g, h y k hasta (2580,1462), donde se vuelve la calle blanca entre las manzanas a y b."
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    2600,
+    1580
+   ],
+   "nota": "Calle N-S que continúa el camino entre a/b y entre d/e; sigue al sur fuera del sector. Calle E-O entre a,b y d,e,c en y≈1582-1587; otra en y≈1672-1676 (borde sur del sector). La calle entre b y c (y≈1550-1555) termina en el campo al este."
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    2640,
+    1610
+   ],
+   "nota": "Calle diagonal (NNO-SSE) que separa e de c, de (2612,1552) a (2642,1671); sigue al sur."
+  },
+  {
+   "tipo": "quebrada",
+   "px": [
+    2700,
+    1300
+   ],
+   "nota": "Línea continua (quebrada o río) que entra por el borde norte en (2660,1180), baja por (2727,1380) y sale del sector hacia (2790,1684), al este de la ciudad. Junto a ella una V (2736,1401), probablemente su rótulo; no se lee el nombre."
+  },
+  {
+   "tipo": "quebrada",
+   "px": [
+    2380,
+    1590
+   ],
+   "nota": "Otra línea continua al oeste: entra en (2308,1497) y baja en curva hasta (2458,1684), al oeste de la ciudad, sin cortar manzanas dentro del sector."
+  },
+  {
+   "tipo": "cuadricula",
+   "px": [
+    2838,
+    1400
+   ],
+   "nota": "Líneas verticales de rayas en x≈2838 y x≈2952, rotuladas 4 y 5 en el margen: cuadrícula del plano, no calles."
+  },
+  {
+   "tipo": "marco",
+   "px": [
+    2630,
+    1160
+   ],
+   "nota": "Borde norte del mapa (filete doble) en y≈1142-1180; encima, letras de la cartela. Bajo el marco entre x≈2835 y 2950 (y 1177-1210) un rayado en abanico: probable sombreado de cerro (dudoso)."
+  },
+  {
+   "tipo": "campo",
+   "px": [
+    2450,
+    1450
+   ],
+   "nota": "Todo el resto del sector es campo con trazos cortos verticales (pasto o sabana), sin linderos de huertas visibles; manchas de tinta/sucio en (2760,1240)."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-12/v_A.png",
+   "sha256": "61b7e3078c19879ab7d59be5ab4626736e295e672003b4bd65ecd88059fe477d"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-12/v_BC.png",
+   "sha256": "730f4adf9da8994fe805d80d155ad2352dc824eae68d629d865fdaafc7bc1ffc"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-12/v_DE.png",
+   "sha256": "a1fa1c5b3089ed0d4c38148b1befd10a9401af58c3474751cd9964225e607948"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-12/v_aislado.png",
+   "sha256": "ef3fc993b03414db87b8612cf063fbc10130fa158b98bf0cc86fd29e1d7d3aaf"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-12/v_chico.png",
+   "sha256": "98417e2163987ae44ac34e7698d6ab05eaec8cad3e6b489a91624c2d90a0dc71"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-12/v_ciudad.png",
+   "sha256": "b51b26a31134bb5159b7d5087dee746b4d0f0c970381b611ad80771cc7e6c01b"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-12/v_cuadro_oct.png",
+   "sha256": "244fd16b9022345fec78ff9df2e86c7b7ea7ba3389e397281cec646bfdfc50a5"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-12/v_zv.png",
+   "sha256": "d233a4b204bd43b12d4708000ac390553c46cf781cbde53e7e86cfe2d70946b7"
+  }
+ ],
+ "teselas": 4,
+ "vacio": false
+}

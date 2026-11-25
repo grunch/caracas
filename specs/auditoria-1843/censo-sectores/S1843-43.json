@@ -1,0 +1,1477 @@
+{
+ "sector": "S1843-43",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    2964,
+    2893,
+    3081,
+    3011
+   ],
+   "poligono_px": [
+    [
+     2964,
+     2894
+    ],
+    [
+     3080,
+     2893
+    ],
+    [
+     3081,
+     3010
+    ],
+    [
+     2965,
+     3011
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    58
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0070"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 1, columna A del damero del sector."
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    3088,
+    2891,
+    3204,
+    3010
+   ],
+   "poligono_px": [
+    [
+     3088,
+     2893
+    ],
+    [
+     3204,
+     2891
+    ],
+    [
+     3204,
+     3009
+    ],
+    [
+     3089,
+     3010
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Fila 1, columna B del damero del sector. Contiene en su borde norte dos lotes blancos (L y N), registrados aparte. Caja de K1843-0070 la cubre pero no consta que la incluya."
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    3212,
+    2890,
+    3322,
+    3008
+   ],
+   "poligono_px": [
+    [
+     3212,
+     2891
+    ],
+    [
+     3320,
+     2890
+    ],
+    [
+     3322,
+     3007
+    ],
+    [
+     3212,
+     3008
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    61
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0064"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 1, columna C del damero del sector."
+  },
+  {
+   "local": "d",
+   "caja_px": [
+    3328,
+    2889,
+    3448,
+    3007
+   ],
+   "poligono_px": [
+    [
+     3328,
+     2890
+    ],
+    [
+     3447,
+     2889
+    ],
+    [
+     3448,
+     3006
+    ],
+    [
+     3330,
+     3007
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    62
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0065"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 1, columna D del damero del sector."
+  },
+  {
+   "local": "e",
+   "caja_px": [
+    3455,
+    2887,
+    3575,
+    3006
+   ],
+   "poligono_px": [
+    [
+     3455,
+     2888
+    ],
+    [
+     3573,
+     2887
+    ],
+    [
+     3575,
+     3005
+    ],
+    [
+     3456,
+     3006
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    63
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0066"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 1, columna E del damero del sector."
+  },
+  {
+   "local": "f",
+   "caja_px": [
+    2965,
+    3018,
+    3081,
+    3130
+   ],
+   "poligono_px": [
+    [
+     2965,
+     3019
+    ],
+    [
+     3081,
+     3018
+    ],
+    [
+     3081,
+     3077
+    ],
+    [
+     3019,
+     3077
+    ],
+    [
+     3019,
+     3129
+    ],
+    [
+     2967,
+     3130
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    70,
+    71,
+    79
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0070"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 2, columna A del damero del sector. Manzana en L: la esquina SE la ocupa el espacio blanco con círculo punteado (unidad aparte)."
+  },
+  {
+   "local": "g",
+   "caja_px": [
+    3089,
+    3017,
+    3205,
+    3129
+   ],
+   "poligono_px": [
+    [
+     3089,
+     3018
+    ],
+    [
+     3204,
+     3017
+    ],
+    [
+     3205,
+     3128
+    ],
+    [
+     3090,
+     3129
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    72
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0070"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 2, columna B del damero del sector."
+  },
+  {
+   "local": "h",
+   "caja_px": [
+    3212,
+    3015,
+    3323,
+    3128
+   ],
+   "poligono_px": [
+    [
+     3212,
+     3016
+    ],
+    [
+     3322,
+     3015
+    ],
+    [
+     3323,
+     3127
+    ],
+    [
+     3213,
+     3128
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    73
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 2, columna C del damero del sector. Relación con K1843-0085 inferida por su caja (y desde 3011)."
+  },
+  {
+   "local": "i",
+   "caja_px": [
+    3330,
+    3014,
+    3449,
+    3127
+   ],
+   "poligono_px": [
+    [
+     3330,
+     3015
+    ],
+    [
+     3448,
+     3014
+    ],
+    [
+     3449,
+     3127
+    ],
+    [
+     3331,
+     3127
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    74
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 2, columna D del damero del sector. Relación con K1843-0085 inferida por su caja (y desde 3011)."
+  },
+  {
+   "local": "j",
+   "caja_px": [
+    3456,
+    3013,
+    3576,
+    3126
+   ],
+   "poligono_px": [
+    [
+     3456,
+     3014
+    ],
+    [
+     3575,
+     3013
+    ],
+    [
+     3576,
+     3126
+    ],
+    [
+     3457,
+     3126
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    75
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 2, columna E del damero del sector. Relación con K1843-0085 inferida por su caja (y desde 3011)."
+  },
+  {
+   "local": "k",
+   "caja_px": [
+    2977,
+    3138,
+    3083,
+    3251
+   ],
+   "poligono_px": [
+    [
+     2977,
+     3138
+    ],
+    [
+     3019,
+     3138
+    ],
+    [
+     3019,
+     3147
+    ],
+    [
+     3082,
+     3147
+    ],
+    [
+     3083,
+     3250
+    ],
+    [
+     2977,
+     3251
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 3, columna A del damero del sector. Borde oeste sobre una franja blanca (ribera/calle) junto a la quebrada, no sobre la calle del damero; la NE recortada por el espacio blanco; contiene el lote P. Mancha negra en (3077,3240), probablemente borrón."
+  },
+  {
+   "local": "l",
+   "caja_px": [
+    3090,
+    3136,
+    3205,
+    3250
+   ],
+   "poligono_px": [
+    [
+     3090,
+     3137
+    ],
+    [
+     3205,
+     3136
+    ],
+    [
+     3205,
+     3248
+    ],
+    [
+     3091,
+     3250
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    82
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 3, columna B del damero del sector."
+  },
+  {
+   "local": "m",
+   "caja_px": [
+    3213,
+    3135,
+    3324,
+    3248
+   ],
+   "poligono_px": [
+    [
+     3213,
+     3136
+    ],
+    [
+     3323,
+     3135
+    ],
+    [
+     3324,
+     3247
+    ],
+    [
+     3213,
+     3248
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    83
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 3, columna C del damero del sector. Contiene en su borde este el lote Q (dos casillas blancas), registrado aparte."
+  },
+  {
+   "local": "n",
+   "caja_px": [
+    3331,
+    3135,
+    3450,
+    3247
+   ],
+   "poligono_px": [
+    [
+     3331,
+     3135
+    ],
+    [
+     3449,
+     3135
+    ],
+    [
+     3450,
+     3246
+    ],
+    [
+     3332,
+     3247
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    84
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 3, columna D del damero del sector."
+  },
+  {
+   "local": "o",
+   "caja_px": [
+    3457,
+    3134,
+    3578,
+    3246
+   ],
+   "poligono_px": [
+    [
+     3457,
+     3134
+    ],
+    [
+     3576,
+     3134
+    ],
+    [
+     3578,
+     3244
+    ],
+    [
+     3458,
+     3246
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    85
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 3, columna E del damero del sector. Signo en forma de semicírculo bajo la calle norte, cerca de (3505,3140), significado no leído."
+  },
+  {
+   "local": "p",
+   "caja_px": [
+    2968,
+    3258,
+    3084,
+    3370
+   ],
+   "poligono_px": [
+    [
+     2968,
+     3259
+    ],
+    [
+     3083,
+     3258
+    ],
+    [
+     3084,
+     3368
+    ],
+    [
+     2970,
+     3370
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    93
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 4, columna A del damero del sector."
+  },
+  {
+   "local": "q",
+   "caja_px": [
+    3091,
+    3256,
+    3206,
+    3368
+   ],
+   "poligono_px": [
+    [
+     3091,
+     3258
+    ],
+    [
+     3205,
+     3256
+    ],
+    [
+     3206,
+     3367
+    ],
+    [
+     3092,
+     3368
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    94
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 4, columna B del damero del sector."
+  },
+  {
+   "local": "r",
+   "caja_px": [
+    3213,
+    3255,
+    3325,
+    3367
+   ],
+   "poligono_px": [
+    [
+     3213,
+     3256
+    ],
+    [
+     3324,
+     3255
+    ],
+    [
+     3325,
+     3365
+    ],
+    [
+     3214,
+     3367
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    95
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 4, columna C del damero del sector."
+  },
+  {
+   "local": "s",
+   "caja_px": [
+    3332,
+    3254,
+    3450,
+    3365
+   ],
+   "poligono_px": [
+    [
+     3332,
+     3255
+    ],
+    [
+     3450,
+     3254
+    ],
+    [
+     3450,
+     3364
+    ],
+    [
+     3333,
+     3365
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    96
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 4, columna D del damero del sector."
+  },
+  {
+   "local": "t",
+   "caja_px": [
+    3458,
+    3252,
+    3579,
+    3364
+   ],
+   "poligono_px": [
+    [
+     3458,
+     3254
+    ],
+    [
+     3578,
+     3252
+    ],
+    [
+     3579,
+     3362
+    ],
+    [
+     3458,
+     3364
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    97,
+    98
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 4, columna E del damero del sector."
+  },
+  {
+   "local": "u",
+   "caja_px": [
+    2970,
+    3376,
+    3085,
+    3488
+   ],
+   "poligono_px": [
+    [
+     2970,
+     3378
+    ],
+    [
+     3084,
+     3376
+    ],
+    [
+     3085,
+     3487
+    ],
+    [
+     2971,
+     3488
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    103
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 5, columna A del damero del sector."
+  },
+  {
+   "local": "v",
+   "caja_px": [
+    3092,
+    3375,
+    3206,
+    3487
+   ],
+   "poligono_px": [
+    [
+     3092,
+     3376
+    ],
+    [
+     3206,
+     3375
+    ],
+    [
+     3206,
+     3485
+    ],
+    [
+     3093,
+     3487
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    104
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 5, columna B del damero del sector."
+  },
+  {
+   "local": "w",
+   "caja_px": [
+    3214,
+    3373,
+    3327,
+    3485
+   ],
+   "poligono_px": [
+    [
+     3214,
+     3375
+    ],
+    [
+     3326,
+     3373
+    ],
+    [
+     3327,
+     3484
+    ],
+    [
+     3214,
+     3485
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    105
+   ],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 5, columna C del damero del sector."
+  },
+  {
+   "local": "x",
+   "caja_px": [
+    3334,
+    3372,
+    3451,
+    3484
+   ],
+   "poligono_px": [
+    [
+     3334,
+     3373
+    ],
+    [
+     3450,
+     3372
+    ],
+    [
+     3451,
+     3483
+    ],
+    [
+     3335,
+     3484
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    106
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 5, columna D del damero del sector."
+  },
+  {
+   "local": "y",
+   "caja_px": [
+    3458,
+    3370,
+    3581,
+    3483
+   ],
+   "poligono_px": [
+    [
+     3458,
+     3372
+    ],
+    [
+     3579,
+     3370
+    ],
+    [
+     3581,
+     3481
+    ],
+    [
+     3459,
+     3483
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    107
+   ],
+   "rayado": "vertical",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Fila 5, columna E del damero del sector. Contiene el lote R (dos casillas blancas) pegado al borde oeste; el número de esquina 107 lleva un signo pequeño debajo (posible letra) de lectura dudosa."
+  },
+  {
+   "local": "z",
+   "caja_px": [
+    3114,
+    2892,
+    3172,
+    2917
+   ],
+   "poligono_px": [
+    [
+     3114,
+     2892
+    ],
+    [
+     3172,
+     2892
+    ],
+    [
+     3172,
+     2917
+    ],
+    [
+     3114,
+     2917
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "L"
+   ],
+   "esquinas": [],
+   "rayado": "sin rayado (blanco)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco en el borde norte de la manzana de fila 1 col B; la L está impresa debajo, dentro del rayado."
+  },
+  {
+   "local": "aa",
+   "caja_px": [
+    3172,
+    2895,
+    3204,
+    2917
+   ],
+   "poligono_px": [
+    [
+     3172,
+     2895
+    ],
+    [
+     3204,
+     2895
+    ],
+    [
+     3204,
+     2917
+    ],
+    [
+     3172,
+     2917
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "N"
+   ],
+   "esquinas": [],
+   "rayado": "sin rayado (blanco)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Lote blanco contiguo al de la L, separado por una línea; la N está debajo. La asignación de cada letra a cada lote se deduce por posición."
+  },
+  {
+   "local": "ab",
+   "caja_px": [
+    3019,
+    3077,
+    3087,
+    3147
+   ],
+   "poligono_px": [
+    [
+     3019,
+     3077
+    ],
+    [
+     3087,
+     3077
+    ],
+    [
+     3087,
+     3147
+    ],
+    [
+     3019,
+     3147
+    ]
+   ],
+   "ocupacion": "plaza",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "sin rayado (blanco), círculo punteado al centro",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Espacio blanco con círculo punteado (¿pila?) que ocupa la esquina SE de la manzana 70-71-79, corta la calle en y≈3133 y llega a la calle x≈3087; frente al lote P. Puede ser plazuela o atrio; no se lee nombre."
+  },
+  {
+   "local": "ac",
+   "caja_px": [
+    3061,
+    3147,
+    3083,
+    3172
+   ],
+   "poligono_px": [
+    [
+     3061,
+     3147
+    ],
+    [
+     3083,
+     3147
+    ],
+    [
+     3083,
+     3172
+    ],
+    [
+     3061,
+     3172
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "P"
+   ],
+   "esquinas": [],
+   "rayado": "sin rayado (blanco)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco pequeño al sur del espacio blanco; la P está debajo, dentro del rayado."
+  },
+  {
+   "local": "ad",
+   "caja_px": [
+    3298,
+    3138,
+    3325,
+    3187
+   ],
+   "poligono_px": [
+    [
+     3298,
+     3138
+    ],
+    [
+     3325,
+     3138
+    ],
+    [
+     3325,
+     3187
+    ],
+    [
+     3298,
+     3187
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "Q"
+   ],
+   "esquinas": [],
+   "rayado": "sin rayado (blanco)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Dos casillas blancas apiladas (división en y≈3163) en el borde este de la manzana 83; una sola letra Q debajo."
+  },
+  {
+   "local": "ae",
+   "caja_px": [
+    3456,
+    3414,
+    3520,
+    3444
+   ],
+   "poligono_px": [
+    [
+     3456,
+     3414
+    ],
+    [
+     3520,
+     3414
+    ],
+    [
+     3520,
+     3444
+    ],
+    [
+     3456,
+     3444
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "R"
+   ],
+   "esquinas": [],
+   "rayado": "sin rayado (blanco)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Dos casillas blancas lado a lado (división en x≈3491) en el borde oeste de la manzana 107; una sola letra R a la derecha."
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "quebrada",
+   "px": [
+    2930,
+    3200
+   ],
+   "nota": "Quebrada (con riberas) que baja por el borde oeste del sector, de (2955,3140) a (2900,3320) aprox.; deja una franja blanca (ribera o calle) entre ella y la manzana 3A (x≈2940-2975, y≈3135-3265). Fuera de la caja_px salvo su ribera este."
+  },
+  {
+   "tipo": "calle_termina",
+   "px": [
+    2961,
+    3133
+   ],
+   "nota": "La calle N-S de x≈2961 (filas 1-2) termina en la calle E-O de y≈3133 contra la franja ribereña; al sur reaparece desplazada a x≈2965-2968 (filas 4-5)."
+  },
+  {
+   "tipo": "punto_notable",
+   "px": [
+    2961,
+    3163
+   ],
+   "nota": "Letra minúscula g en la franja blanca junto a la quebrada, frente a la manzana 3A (posible paso/puente; significado no leído)."
+  },
+  {
+   "tipo": "espacio_abierto",
+   "px": [
+    3053,
+    3112
+   ],
+   "nota": "Espacio blanco con círculo punteado que interrumpe la calle E-O de y≈3133 entre x≈3019 y 3087 (unidad ab)."
+  },
+  {
+   "tipo": "manzana_fuera",
+   "px": [
+    2945,
+    3300
+   ],
+   "nota": "Retazo rayado entre la quebrada y la calle x≈2965 en la fila 4 (y≈3258-3370); centro al oeste de x=2960, de otro sector."
+  },
+  {
+   "tipo": "signo",
+   "px": [
+    3505,
+    3140
+   ],
+   "nota": "Semicírculo impreso pegado al borde norte de la manzana 85, bajo la calle; significado no leído (dudoso)."
+  },
+  {
+   "tipo": "signo",
+   "px": [
+    3443,
+    3400
+   ],
+   "nota": "Signo curvo pequeño (¿letra c?) en el borde este de la manzana 106 / calle x≈3453; lectura dudosa."
+  },
+  {
+   "tipo": "signo",
+   "px": [
+    3605,
+    3260
+   ],
+   "nota": "Signo pequeño (¿letra minúscula?) en la esquina NO de la manzana de la fila 4, columna F (fuera de la caja, x>3611 en su centro); dudoso."
+  },
+  {
+   "tipo": "cambio_parroquia",
+   "px": [
+    3327,
+    3200
+   ],
+   "nota": "El rayado pasa de horizontal (fila 1) a diagonal (columnas A-C, filas 2-5) y vertical (columnas D-F, filas 2-5): límites de parroquia sobre las calles y≈3013 y x≈3327."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "S1843-43/v_a.png",
+   "sha256": "cdf3aeb8435fbc649d55521b42f57d40eb5c9abfffb9271fbdc213d320b033c9"
+  },
+  {
+   "archivo": "S1843-43/v_b.png",
+   "sha256": "8b7da2aeb2ef6edd8c5d423552ed4bd47172e91950fe90dc3c009a3f564854eb"
+  },
+  {
+   "archivo": "S1843-43/v_c.png",
+   "sha256": "9dd9f79f986ddcde487707d98ae42414ed48bb6681c07515d1e75246ae1b2471"
+  },
+  {
+   "archivo": "S1843-43/v_d.png",
+   "sha256": "703faa370dc423a0e8727f36a3e05d5285ebfd28cbb729d3e7eed8a475bdbc01"
+  },
+  {
+   "archivo": "S1843-43/v_e.png",
+   "sha256": "f933640acc1702b8929ce582bb5aaafc8d37827272da1c64b81d957a1ae9c873"
+  },
+  {
+   "archivo": "S1843-43/v_f.png",
+   "sha256": "b311ff8575a2f1ebddd8a592140e2dfb32c10f8e55220adaaf3aac26070482a3"
+  },
+  {
+   "archivo": "S1843-43/v_g.png",
+   "sha256": "e511cfbb320740aa95382c9645ac58023c874910d27e1792fca9d8821b50eaff"
+  },
+  {
+   "archivo": "S1843-43/v_h.png",
+   "sha256": "030e0d9c8a2306aa7335d4baae2dbb927dbf19b6887ee1defff495241e2fc8e6"
+  },
+  {
+   "archivo": "S1843-43/v_i.png",
+   "sha256": "239d353a896293f1f65deac484c59cb60c6722fecdd7e0bf39740e080e46edcd"
+  },
+  {
+   "archivo": "S1843-43/v_j.png",
+   "sha256": "35607084edbd8199200b91b1619acbfbc535083d47f37c3a6e6ffa45c387b22c"
+  },
+  {
+   "archivo": "S1843-43/v_k.png",
+   "sha256": "0ec109a5e1160cde8f201a1f84a673c71a1c16b13bedd912d89ae033bc89cb94"
+  },
+  {
+   "archivo": "S1843-43/v_l.png",
+   "sha256": "14591c1f93d1da8fd38ae34a4a7a444ca7c26dc592a3b0fe67721fe1ce154bdf"
+  },
+  {
+   "archivo": "S1843-43/v_m.png",
+   "sha256": "2a04be35b1b2d23ebdc39a3a7b984d6cf80ee52179add284b537ff296ac5ebc5"
+  },
+  {
+   "archivo": "S1843-43/v_n.png",
+   "sha256": "842f85c8467f6075aab096af7dbd17f9094021f8daaed5d10f738c1d505634c4"
+  },
+  {
+   "archivo": "S1843-43/v_o.png",
+   "sha256": "90913c29db7d13238866bfb35f8fd2aae033b998d22d23533264ed55f1bda38b"
+  },
+  {
+   "archivo": "S1843-43/v_p.png",
+   "sha256": "2fa45bd2c0e2c853354c5a288c0e2da1f71ef3a44bd53b6c8ff8df191565e8e9"
+  },
+  {
+   "archivo": "S1843-43/v_q.png",
+   "sha256": "87ab16dae39af4f8e0524f4e18ace6cee78471854c5faf5b11042b60357fffc9"
+  },
+  {
+   "archivo": "S1843-43/v_r.png",
+   "sha256": "33f447e08a70151a0e550778a0572646a917f13f33a68efed49c803cb885d290"
+  },
+  {
+   "archivo": "S1843-43/v_s.png",
+   "sha256": "5f8cca5eb491d4cd198d4090409f14b1ae05de4b7f77dff68065f8c61b67c9ec"
+  },
+  {
+   "archivo": "S1843-43/v_t.png",
+   "sha256": "2a8236a4fab3f5edb2e52daea23946258fb5af367782b24765cd871b47459386"
+  },
+  {
+   "archivo": "S1843-43/v_u.png",
+   "sha256": "4ccf3591893e2d66b2838702ce4fea9f5a38e8db14747dbc7b88062f2a908511"
+  },
+  {
+   "archivo": "S1843-43/v_v.png",
+   "sha256": "28feff0e2e9e572a8b0c31d5a7b57de17a47f64e3989e4b84a809215261500d7"
+  },
+  {
+   "archivo": "S1843-43/v_w.png",
+   "sha256": "8a2775384ef743d715ac3dadcd5c232cbc63008e4b2f9b06ff90682cc05b5d8a"
+  },
+  {
+   "archivo": "S1843-43/v_x.png",
+   "sha256": "0c04510952166d2d413d99f2c35736905e87876ec73ec3cca20c5e62d2ee6912"
+  },
+  {
+   "archivo": "S1843-43/v_y.png",
+   "sha256": "91d02a551c885b3caeae7c8c87288864f04467883b1e2ea5784fc8b183b99554"
+  },
+  {
+   "archivo": "S1843-43/v_z.png",
+   "sha256": "c97e5a0e96913b67865c1e7594e305e98edd27952c93760b0253aa14cdcc030d"
+  },
+  {
+   "archivo": "S1843-43/v_aa.png",
+   "sha256": "e2d03a56e3583a5dd346233b63b3cb047c65f7bb884782960816556ce0b1c91a"
+  },
+  {
+   "archivo": "S1843-43/v_ab.png",
+   "sha256": "95c438dcc76115065fcc621d9d6f10691ce158f7f572773d68002e00f8b18614"
+  },
+  {
+   "archivo": "S1843-43/v_ac.png",
+   "sha256": "2df6be6d0de169904d79bca9e3add632b5d0f20a664addca54553cc3917079ec"
+  },
+  {
+   "archivo": "S1843-43/v_ad.png",
+   "sha256": "d32a6fb8b6dd20149041f46136432f7aeee0248c02ec0695ba3325c8a885a634"
+  },
+  {
+   "archivo": "S1843-43/v_ae.png",
+   "sha256": "9afa4ac6521c8d526b72bc66707a924b6814b579ee0a707a1f88f2fde52368a4"
+  }
+ ],
+ "teselas": 4,
+ "vacio": false
+}

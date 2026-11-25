@@ -1,0 +1,141 @@
+{
+ "sector": "S1843-14",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    3614,
+    1165,
+    3709,
+    1222
+   ],
+   "poligono_px": [
+    [
+     3614,
+     1165
+    ],
+    [
+     3709,
+     1165
+    ],
+    [
+     3709,
+     1222
+    ],
+    [
+     3614,
+     1222
+    ]
+   ],
+   "ocupacion": "descartada_no_edificacion",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "sombreado de pendiente (hachures radiales) bajo el marco",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0002"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "No es manzana: hachures del cerro al pie del marco superior (numeros de cuadricula 11-12). Sin calles ni lotes."
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    3762,
+    1163,
+    3937,
+    1221
+   ],
+   "poligono_px": [
+    [
+     3762,
+     1163
+    ],
+    [
+     3937,
+     1163
+    ],
+    [
+     3937,
+     1221
+    ],
+    [
+     3762,
+     1221
+    ]
+   ],
+   "ocupacion": "descartada_no_edificacion",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "sombreado de pendiente (hachures radiales)",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0003"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "No es manzana: hachures del cerro entre las columnas 12 y 13 de la cuadricula del marco."
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "marco",
+   "px": [
+    3937,
+    1135
+   ],
+   "nota": "Marco superior del plano con numeros de cuadricula 11-15 (y≈1115-1160); encima, rotulo en cursiva del titulo/escala. No son esquinas."
+  },
+  {
+   "tipo": "cerro",
+   "px": [
+    3800,
+    1220
+   ],
+   "nota": "Sombreado de pendiente (hachures) en franja y≈1160-1300 entre x≈3611 y ≈4000, mas corto hacia el este: falda del cerro al norte."
+  },
+  {
+   "tipo": "campo",
+   "px": [
+    3937,
+    1450
+   ],
+   "nota": "Resto del sector: terreno abierto con trazos de hierba y lineas punteadas verticales de la cuadricula (x≈3700, 3825, 3950, 4075, 4200). Sin calles, manzanas ni huertas delimitadas."
+  },
+  {
+   "tipo": "arboles",
+   "px": [
+    3990,
+    1400
+   ],
+   "nota": "Arboles aislados dibujados en (≈3990,1400), (≈4155,1305), (≈3850,1580); no delimitan huerta."
+  },
+  {
+   "tipo": "rotulo",
+   "px": [
+    3611,
+    1522
+   ],
+   "nota": "Letra E mayuscula al extremo de una linea que llega desde el oeste (borde oeste del sector); parece referencia de linea/perfil, no lote. Dudosa su funcion."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "S1843-14/v_0002.png",
+   "sha256": "1adf1b60643e78f5919ec310e0deeab1794bee00e1b6f8fb27306cac462bb8ad"
+  },
+  {
+   "archivo": "S1843-14/v_0003.png",
+   "sha256": "f2462192ff2829ab64add4743d24c688fe7b2e7e4aee58a8bd55672daecebbd9"
+  },
+  {
+   "archivo": "S1843-14/v_E.png",
+   "sha256": "ec5d628efb7fefdcde72445ffccd1e8d918393467090f76b39b7d7958052f80a"
+  }
+ ],
+ "teselas": 4,
+ "vacio": true
+}

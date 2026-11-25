@@ -1,0 +1,1746 @@
+{
+ "sector": "S1843-33",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    2960,
+    2267,
+    3078,
+    2388
+   ],
+   "poligono_px": [
+    [
+     2960,
+     2267
+    ],
+    [
+     3078,
+     2267
+    ],
+    [
+     3078,
+     2388
+    ],
+    [
+     2960,
+     2388
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "12"
+   ],
+   "rayado": "diagonal (descendente hacia el sureste)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0026"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "el borrador une esta manzana con otras en una sola candidata (con la de abajo, esquinas 17/25: falta la calle y≈2390). Mancha negra redonda cerca de (3047,2373), sin identificar (borrón o símbolo)."
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    3083,
+    2267,
+    3201,
+    2388
+   ],
+   "poligono_px": [
+    [
+     3083,
+     2267
+    ],
+    [
+     3201,
+     2267
+    ],
+    [
+     3201,
+     2388
+    ],
+    [
+     3083,
+     2388
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "13",
+    "18"
+   ],
+   "rayado": "diagonal (descendente hacia el sureste)",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0022"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "18 junto a la esquina suroeste."
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    3205,
+    2267,
+    3320,
+    2388
+   ],
+   "poligono_px": [
+    [
+     3205,
+     2267
+    ],
+    [
+     3320,
+     2267
+    ],
+    [
+     3320,
+     2388
+    ],
+    [
+     3205,
+     2388
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "14"
+   ],
+   "rayado": "diagonal (descendente hacia el sureste)",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0023"
+    ]
+   },
+   "lectura": "segura",
+   "nota": ""
+  },
+  {
+   "local": "d",
+   "caja_px": [
+    3324,
+    2267,
+    3445,
+    2388
+   ],
+   "poligono_px": [
+    [
+     3324,
+     2267
+    ],
+    [
+     3445,
+     2267
+    ],
+    [
+     3445,
+     2388
+    ],
+    [
+     3324,
+     2388
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "15"
+   ],
+   "rayado": "diagonal (descendente hacia el sureste)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0031"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "el borrador une esta manzana con otras en una sola candidata (0031 abarca 3205–3572 × 2265–2640)."
+  },
+  {
+   "local": "e",
+   "caja_px": [
+    3449,
+    2267,
+    3574,
+    2388
+   ],
+   "poligono_px": [
+    [
+     3449,
+     2267
+    ],
+    [
+     3492,
+     2267
+    ],
+    [
+     3492,
+     2341
+    ],
+    [
+     3572,
+     2341
+    ],
+    [
+     3574,
+     2388
+    ],
+    [
+     3449,
+     2388
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal (descendente hacia el sureste)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0031"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Manzana en L: el cuarto noreste (3492–3572 × 2267–2341) no está rayado, es terreno punteado (unidad aparte). el borrador une esta manzana con otras en una sola candidata."
+  },
+  {
+   "local": "f",
+   "caja_px": [
+    3492,
+    2265,
+    3572,
+    2341
+   ],
+   "poligono_px": [
+    [
+     3492,
+     2265
+    ],
+    [
+     3572,
+     2265
+    ],
+    [
+     3572,
+     2341
+    ],
+    [
+     3492,
+     2341
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "punteado con trazos cortos verticales",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Terreno punteado con trazos cortos (¿pasto/huerta?), cerrado al norte (y≈2265) y al este (x≈3571) por líneas de trazos; al oeste y sur, la manzana rayada en L. Ocupación dudosa entre huerta y terreno libre."
+  },
+  {
+   "local": "g",
+   "caja_px": [
+    2960,
+    2392,
+    3078,
+    2517
+   ],
+   "poligono_px": [
+    [
+     2960,
+     2392
+    ],
+    [
+     3078,
+     2392
+    ],
+    [
+     3078,
+     2517
+    ],
+    [
+     2960,
+     2517
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "17",
+    "25"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0026"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "el borrador une esta manzana con otras en una sola candidata. 17 leído con algo de duda. Marca curva tipo \"<\" cerca de (3063,2414), no se lee como letra."
+  },
+  {
+   "local": "h",
+   "caja_px": [
+    3083,
+    2392,
+    3201,
+    2517
+   ],
+   "poligono_px": [
+    [
+     3128,
+     2392
+    ],
+    [
+     3201,
+     2392
+    ],
+    [
+     3201,
+     2517
+    ],
+    [
+     3083,
+     2517
+    ],
+    [
+     3083,
+     2423
+    ],
+    [
+     3128,
+     2423
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "24"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0030"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Entrante en la esquina noroeste: lote blanco G (3083–3128 × 2392–2423); lote blanco H en el borde sur. el borrador une esta manzana con otras en una sola candidata (con la de al lado, 19). 18 está al otro lado de la calle, en la manzana de arriba."
+  },
+  {
+   "local": "i",
+   "caja_px": [
+    3083,
+    2392,
+    3128,
+    2423
+   ],
+   "poligono_px": [
+    [
+     3083,
+     2392
+    ],
+    [
+     3128,
+     2392
+    ],
+    [
+     3128,
+     2423
+    ],
+    [
+     3083,
+     2423
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "G"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco en la esquina noroeste, con un edificio pequeño dibujado (3109–3128 × 2404–2422) y la G impresa al este, ya sobre el rayado."
+  },
+  {
+   "local": "j",
+   "caja_px": [
+    3095,
+    2506,
+    3124,
+    2517
+   ],
+   "poligono_px": [
+    [
+     3095,
+     2506
+    ],
+    [
+     3124,
+     2506
+    ],
+    [
+     3124,
+     2517
+    ],
+    [
+     3095,
+     2517
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "H"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco pequeño contra el borde sur de la manzana; la H está impresa justo encima, en el rayado."
+  },
+  {
+   "local": "k",
+   "caja_px": [
+    3205,
+    2392,
+    3320,
+    2517
+   ],
+   "poligono_px": [
+    [
+     3205,
+     2392
+    ],
+    [
+     3320,
+     2392
+    ],
+    [
+     3320,
+     2517
+    ],
+    [
+     3205,
+     2517
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "19"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0030"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "el borrador une esta manzana con otras en una sola candidata. 19 borroso; se lee por la secuencia 17–21."
+  },
+  {
+   "local": "l",
+   "caja_px": [
+    3324,
+    2392,
+    3445,
+    2517
+   ],
+   "poligono_px": [
+    [
+     3324,
+     2392
+    ],
+    [
+     3445,
+     2392
+    ],
+    [
+     3445,
+     2517
+    ],
+    [
+     3324,
+     2517
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "20"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0031"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "el borrador une esta manzana con otras en una sola candidata."
+  },
+  {
+   "local": "m",
+   "caja_px": [
+    3449,
+    2392,
+    3574,
+    2517
+   ],
+   "poligono_px": [
+    [
+     3449,
+     2392
+    ],
+    [
+     3574,
+     2392
+    ],
+    [
+     3574,
+     2517
+    ],
+    [
+     3449,
+     2517
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "21"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0031"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "el borrador une esta manzana con otras en una sola candidata. 21 borroso."
+  },
+  {
+   "local": "n",
+   "caja_px": [
+    2960,
+    2522,
+    3078,
+    2642
+   ],
+   "poligono_px": [
+    [
+     2960,
+     2522
+    ],
+    [
+     3078,
+     2522
+    ],
+    [
+     3078,
+     2642
+    ],
+    [
+     2960,
+     2642
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "27"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0037"
+    ]
+   },
+   "lectura": "segura",
+   "nota": ""
+  },
+  {
+   "local": "o",
+   "caja_px": [
+    3083,
+    2522,
+    3201,
+    2642
+   ],
+   "poligono_px": [
+    [
+     3083,
+     2522
+    ],
+    [
+     3167,
+     2522
+    ],
+    [
+     3167,
+     2554
+    ],
+    [
+     3201,
+     2554
+    ],
+    [
+     3201,
+     2642
+    ],
+    [
+     3083,
+     2642
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0038"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco h en la esquina noreste (unidad aparte)."
+  },
+  {
+   "local": "p",
+   "caja_px": [
+    3167,
+    2522,
+    3199,
+    2554
+   ],
+   "poligono_px": [
+    [
+     3167,
+     2522
+    ],
+    [
+     3199,
+     2522
+    ],
+    [
+     3199,
+     2554
+    ],
+    [
+     3167,
+     2554
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "h"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco recuadrado con una h minúscula en la esquina noreste de la manzana."
+  },
+  {
+   "local": "q",
+   "caja_px": [
+    3205,
+    2522,
+    3320,
+    2642
+   ],
+   "poligono_px": [
+    [
+     3232,
+     2522
+    ],
+    [
+     3320,
+     2522
+    ],
+    [
+     3320,
+     2642
+    ],
+    [
+     3205,
+     2642
+    ],
+    [
+     3205,
+     2549
+    ],
+    [
+     3232,
+     2549
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [
+    "I"
+   ],
+   "esquinas": [
+    "34"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0031"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco en la esquina noroeste (unidad aparte), con la I impresa al lado, en el rayado. el borrador une esta manzana con otras en una sola candidata."
+  },
+  {
+   "local": "r",
+   "caja_px": [
+    3207,
+    2522,
+    3232,
+    2549
+   ],
+   "poligono_px": [
+    [
+     3207,
+     2522
+    ],
+    [
+     3232,
+     2522
+    ],
+    [
+     3232,
+     2549
+    ],
+    [
+     3207,
+     2549
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "I"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco recuadrado en la esquina noroeste; la letra I está al este, sobre el rayado."
+  },
+  {
+   "local": "s",
+   "caja_px": [
+    3324,
+    2522,
+    3445,
+    2642
+   ],
+   "poligono_px": [
+    [
+     3324,
+     2522
+    ],
+    [
+     3445,
+     2522
+    ],
+    [
+     3445,
+     2642
+    ],
+    [
+     3324,
+     2642
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "28",
+    "35"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0031"
+    ]
+   },
+   "lectura": "dudosa",
+   "nota": "28 (noroeste) y 35 (suroeste) muy borrosos; 35 sale de la secuencia, no se lee. Manzana segura. el borrador une esta manzana con otras en una sola candidata."
+  },
+  {
+   "local": "t",
+   "caja_px": [
+    3449,
+    2522,
+    3574,
+    2642
+   ],
+   "poligono_px": [
+    [
+     3449,
+     2522
+    ],
+    [
+     3574,
+     2522
+    ],
+    [
+     3574,
+     2642
+    ],
+    [
+     3449,
+     2642
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "29"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0039"
+    ]
+   },
+   "lectura": "segura",
+   "nota": ""
+  },
+  {
+   "local": "u",
+   "caja_px": [
+    2960,
+    2646,
+    3078,
+    2757
+   ],
+   "poligono_px": [
+    [
+     2960,
+     2646
+    ],
+    [
+     3078,
+     2646
+    ],
+    [
+     3078,
+     2757
+    ],
+    [
+     2960,
+     2757
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "37"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0041"
+    ]
+   },
+   "lectura": "segura",
+   "nota": ""
+  },
+  {
+   "local": "v",
+   "caja_px": [
+    3083,
+    2646,
+    3201,
+    2757
+   ],
+   "poligono_px": [
+    [
+     3083,
+     2646
+    ],
+    [
+     3157,
+     2646
+    ],
+    [
+     3157,
+     2694
+    ],
+    [
+     3201,
+     2694
+    ],
+    [
+     3201,
+     2757
+    ],
+    [
+     3083,
+     2757
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "38",
+    "46"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0042"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco i en la esquina noreste, frente a la plaza (unidad aparte)."
+  },
+  {
+   "local": "w",
+   "caja_px": [
+    3157,
+    2646,
+    3201,
+    2694
+   ],
+   "poligono_px": [
+    [
+     3157,
+     2646
+    ],
+    [
+     3201,
+     2646
+    ],
+    [
+     3201,
+     2694
+    ],
+    [
+     3157,
+     2694
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "i"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco grande con una i minúscula, frente al costado oeste de la plaza."
+  },
+  {
+   "local": "x",
+   "caja_px": [
+    3205,
+    2646,
+    3320,
+    2757
+   ],
+   "poligono_px": [
+    [
+     3205,
+     2646
+    ],
+    [
+     3320,
+     2646
+    ],
+    [
+     3320,
+     2757
+    ],
+    [
+     3205,
+     2757
+    ]
+   ],
+   "ocupacion": "plaza",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "sin rayado",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Plaza Bolívar (Plaza Mayor): cuadrado blanco con borde de trazos gruesos (3207–3319 × 2646–2760), con trazos curvos en las esquinas norte."
+  },
+  {
+   "local": "y",
+   "caja_px": [
+    3324,
+    2646,
+    3445,
+    2757
+   ],
+   "poligono_px": [
+    [
+     3364,
+     2646
+    ],
+    [
+     3445,
+     2646
+    ],
+    [
+     3445,
+     2757
+    ],
+    [
+     3324,
+     2757
+    ],
+    [
+     3324,
+     2685
+    ],
+    [
+     3364,
+     2685
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [
+    "A"
+   ],
+   "esquinas": [],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0043"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco A en la esquina noroeste, frente a la plaza (unidad aparte). La caja de 0043 arranca en x=3294, dentro del borde de la plaza."
+  },
+  {
+   "local": "z",
+   "caja_px": [
+    3325,
+    2646,
+    3364,
+    2685
+   ],
+   "poligono_px": [
+    [
+     3325,
+     2646
+    ],
+    [
+     3364,
+     2646
+    ],
+    [
+     3364,
+     2685
+    ],
+    [
+     3325,
+     2685
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "A"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco en la esquina noroeste, frente al costado este de la plaza; la A está debajo, en el rayado."
+  },
+  {
+   "local": "aa",
+   "caja_px": [
+    3449,
+    2646,
+    3574,
+    2757
+   ],
+   "poligono_px": [
+    [
+     3449,
+     2646
+    ],
+    [
+     3574,
+     2646
+    ],
+    [
+     3574,
+     2757
+    ],
+    [
+     3449,
+     2757
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "39"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0044"
+    ]
+   },
+   "lectura": "segura",
+   "nota": ""
+  },
+  {
+   "local": "ab",
+   "caja_px": [
+    2960,
+    2763,
+    3078,
+    2885
+   ],
+   "poligono_px": [
+    [
+     2960,
+     2763
+    ],
+    [
+     3078,
+     2763
+    ],
+    [
+     3078,
+     2885
+    ],
+    [
+     2960,
+     2885
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "59"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "El borrador no la detecta. 59 junto a la esquina sureste."
+  },
+  {
+   "local": "ac",
+   "caja_px": [
+    3083,
+    2763,
+    3201,
+    2885
+   ],
+   "poligono_px": [
+    [
+     3083,
+     2763
+    ],
+    [
+     3175,
+     2763
+    ],
+    [
+     3175,
+     2787
+    ],
+    [
+     3201,
+     2787
+    ],
+    [
+     3201,
+     2885
+    ],
+    [
+     3083,
+     2885
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [
+    "K"
+   ],
+   "esquinas": [
+    "60"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0055"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco K en la esquina noreste (unidad aparte). 60 junto a la esquina sureste."
+  },
+  {
+   "local": "ad",
+   "caja_px": [
+    3175,
+    2765,
+    3202,
+    2787
+   ],
+   "poligono_px": [
+    [
+     3175,
+     2765
+    ],
+    [
+     3202,
+     2765
+    ],
+    [
+     3202,
+     2787
+    ],
+    [
+     3175,
+     2787
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "K"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco recuadrado en la esquina noreste; la K está al oeste, en el rayado."
+  },
+  {
+   "local": "ae",
+   "caja_px": [
+    3205,
+    2786,
+    3320,
+    2885
+   ],
+   "poligono_px": [
+    [
+     3205,
+     2786
+    ],
+    [
+     3320,
+     2786
+    ],
+    [
+     3320,
+     2885
+    ],
+    [
+     3205,
+     2885
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [
+    "L",
+    "K",
+    "J"
+   ],
+   "esquinas": [],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0056"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Al norte, una franja de tres lotes blancos frente a la plaza (3208–3320 × 2764–2786, unidades aparte); las letras L, K, J están impresas debajo de cada uno, en el rayado."
+  },
+  {
+   "local": "af",
+   "caja_px": [
+    3208,
+    2764,
+    3242,
+    2786
+   ],
+   "poligono_px": [
+    [
+     3208,
+     2764
+    ],
+    [
+     3242,
+     2764
+    ],
+    [
+     3242,
+     2786
+    ],
+    [
+     3208,
+     2786
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "L"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Primer lote de la franja frente al costado sur de la plaza; L debajo."
+  },
+  {
+   "local": "ag",
+   "caja_px": [
+    3242,
+    2764,
+    3290,
+    2786
+   ],
+   "poligono_px": [
+    [
+     3242,
+     2764
+    ],
+    [
+     3290,
+     2764
+    ],
+    [
+     3290,
+     2786
+    ],
+    [
+     3242,
+     2786
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "K"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Segundo lote de la franja; K debajo. La misma letra K aparece en la manzana vecina del oeste."
+  },
+  {
+   "local": "ah",
+   "caja_px": [
+    3290,
+    2764,
+    3320,
+    2786
+   ],
+   "poligono_px": [
+    [
+     3290,
+     2764
+    ],
+    [
+     3320,
+     2764
+    ],
+    [
+     3320,
+     2786
+    ],
+    [
+     3290,
+     2786
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "J"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "Tercer lote de la franja; la letra de abajo parece una J (podría ser una I con remate)."
+  },
+  {
+   "local": "ai",
+   "caja_px": [
+    3324,
+    2763,
+    3445,
+    2885
+   ],
+   "poligono_px": [
+    [
+     3324,
+     2763
+    ],
+    [
+     3445,
+     2763
+    ],
+    [
+     3445,
+     2885
+    ],
+    [
+     3324,
+     2885
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    "56",
+    "47"
+   ],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0051",
+     "K1843-0057"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "El borrador la parte en dos a la altura de y≈2797 (0051 + 0057); en el original no hay calle ahí, es una raya blanca del rayado."
+  },
+  {
+   "local": "aj",
+   "caja_px": [
+    3449,
+    2763,
+    3574,
+    2885
+   ],
+   "poligono_px": [
+    [
+     3510,
+     2763
+    ],
+    [
+     3574,
+     2763
+    ],
+    [
+     3574,
+     2885
+    ],
+    [
+     3449,
+     2885
+    ],
+    [
+     3449,
+     2822
+    ],
+    [
+     3510,
+     2822
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0058"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Entrante en la esquina noroeste: lote blanco M (3449–3510 × 2763–2822, unidad aparte)."
+  },
+  {
+   "local": "ak",
+   "caja_px": [
+    3449,
+    2763,
+    3510,
+    2822
+   ],
+   "poligono_px": [
+    [
+     3449,
+     2763
+    ],
+    [
+     3510,
+     2763
+    ],
+    [
+     3510,
+     2822
+    ],
+    [
+     3449,
+     2822
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "M"
+   ],
+   "esquinas": [],
+   "rayado": "",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "Lote blanco grande en la esquina noroeste, con un edificio recuadrado en su ángulo sureste (3481–3510 × 2796–2822); la M está al este, en el rayado."
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "camino",
+   "px": [
+    3560,
+    2285
+   ],
+   "nota": "Camino de doble línea en diagonal, de (3520,2245) a (3600,2328), por el terreno punteado al noreste; atraviesa la línea de trazos x≈3571."
+  },
+  {
+   "tipo": "cerca",
+   "px": [
+    3532,
+    2265
+   ],
+   "nota": "Líneas de trazos (y≈2265 de 3492 a 3575; x≈3571 de 2265 a 2341) cierran el terreno punteado: siguen la alineación de las calles, pero no hay manzana."
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    3270,
+    2700
+   ],
+   "nota": "Damero regular en todo el sector: calles norte-sur en x≈2957, 3080, 3203, 3322, 3447, 3576; este-oeste en y≈2264, 2390, 2519, 2644, 2760, 2886. Las calles tienen unos 4 px de ancho."
+  },
+  {
+   "tipo": "rayado",
+   "px": [
+    3260,
+    2390
+   ],
+   "nota": "Cambio de rayado en la calle y≈2390: diagonal al norte (fila 2267–2388), horizontal al sur. Indica el límite de parroquia."
+  },
+  {
+   "tipo": "marca",
+   "px": [
+    3047,
+    2373
+   ],
+   "nota": "Mancha negra redonda (unos 15 px) dentro de la manzana 12, sin identificar."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "S1843-33/v_huerta_NE.png",
+   "sha256": "7fd75c82bbf81beb173e27c3bd00f2dfc3fe42afbd35e629e112330004d1a7a6"
+  },
+  {
+   "archivo": "S1843-33/v_lote_A.png",
+   "sha256": "a43208557aea77e7fdd7974d3bc283ce7bc07590d21a7c6153d2ab869bdc2ba9"
+  },
+  {
+   "archivo": "S1843-33/v_lote_G.png",
+   "sha256": "8e1c8bc54c91052d60640b718932a6aaec748ee867557ce817909375924a9fea"
+  },
+  {
+   "archivo": "S1843-33/v_lote_H.png",
+   "sha256": "bff198308012c83a39f0ce879415d4cefb0d40983f7708baabd54a0aaac0c1d5"
+  },
+  {
+   "archivo": "S1843-33/v_lote_I.png",
+   "sha256": "dd1d8d4f362469ddc63a8fc670013c5352e4406c7699753cc127823f3fde3833"
+  },
+  {
+   "archivo": "S1843-33/v_lote_K59.png",
+   "sha256": "2ca9e18c9780a2602702251301bfc2e58119dc4d0273fde923897557a4db34a1"
+  },
+  {
+   "archivo": "S1843-33/v_lote_M.png",
+   "sha256": "44f638cbcc50a617eb5bf27c1e4c5b732c772155a1a0650b52dd534ff14a3fb2"
+  },
+  {
+   "archivo": "S1843-33/v_lote_h.png",
+   "sha256": "7da23637094ebff5e30d7ba636e6e7977c618b40728b96184b8b9c813a99ccfc"
+  },
+  {
+   "archivo": "S1843-33/v_lote_i.png",
+   "sha256": "2759837434dcb2c9f362de42d51028bcdfa38097e816100e509fe1da2d807b71"
+  },
+  {
+   "archivo": "S1843-33/v_lotes_LKJ.png",
+   "sha256": "7eaba3eae72a7201781c8506249fc2ecd410934b99bd0a5fa39a1dea30d115c3"
+  },
+  {
+   "archivo": "S1843-33/v_r1c1.png",
+   "sha256": "1cf7421fc1fdf5b7423ade94e1bc4545b7331025e14b42f9f7c92a5fa5316563"
+  },
+  {
+   "archivo": "S1843-33/v_r1c2.png",
+   "sha256": "e5c4f024bff519cfe8ca65889f40aad6ac00fd3eb6e9a785895ce05cdcb98129"
+  },
+  {
+   "archivo": "S1843-33/v_r1c3.png",
+   "sha256": "20d303882e7b877f5132dd67aedaad3dacbd09833d2c919270640b1a98d24eec"
+  },
+  {
+   "archivo": "S1843-33/v_r1c4.png",
+   "sha256": "a4a56f571e0ddad18d6f5e55f54ea8c96eaf4af3c3d9398facfd333441b09f6f"
+  },
+  {
+   "archivo": "S1843-33/v_r1c5.png",
+   "sha256": "ae60483f5739abecc4b5bf6f9ebac552f70e4a47fc73d3dcb7467d9fc0d27158"
+  },
+  {
+   "archivo": "S1843-33/v_r2c1.png",
+   "sha256": "cbb064597d72564b8a80c7f4ed083a4cf516b268f17ef65d80f6218cdb04c97a"
+  },
+  {
+   "archivo": "S1843-33/v_r2c2.png",
+   "sha256": "d20e504368b136df8fc676dc72294fb727487533dc1d77728376440bc8d284cc"
+  },
+  {
+   "archivo": "S1843-33/v_r2c3.png",
+   "sha256": "c10ae79a9ccb37373188ed516ba1ecf672170c80713d585b4414e67d247469d0"
+  },
+  {
+   "archivo": "S1843-33/v_r2c4.png",
+   "sha256": "b0cfbd1dfc96fdf7c46af721e63b5eb28e1d997b95388d1fbceb0d50e91aa09a"
+  },
+  {
+   "archivo": "S1843-33/v_r2c5.png",
+   "sha256": "3907bd89c076956b60cf078831f0858c8f32a738b10f0c7e768010447572e462"
+  },
+  {
+   "archivo": "S1843-33/v_r3c1.png",
+   "sha256": "5089848e773c6a8d142156e14ba60ac5e867b46a9519467752ed0ff0d6019840"
+  },
+  {
+   "archivo": "S1843-33/v_r3c2.png",
+   "sha256": "f79e277746c4c4d466e9d744bd434e283173be08e02d7ea4f833427dcb98e0ef"
+  },
+  {
+   "archivo": "S1843-33/v_r3c3.png",
+   "sha256": "110ccf08712c5c303e6f33f45eba1eea19f970dcf72d32463274f40ebe949511"
+  },
+  {
+   "archivo": "S1843-33/v_r3c4.png",
+   "sha256": "810c6c97f487c644d275dcad6e6d006d25313a83ef0cd98674c0bf1ead3783b0"
+  },
+  {
+   "archivo": "S1843-33/v_r3c5.png",
+   "sha256": "869a1f590ab99007f9c7a52ac4e9758f3f6ee4ecf2b9e2390dc33922daf2c35d"
+  },
+  {
+   "archivo": "S1843-33/v_r4c1.png",
+   "sha256": "b488e8a181598936aff0e333bee7b8f57eaabdb6563d2f91e400ff7ed257376e"
+  },
+  {
+   "archivo": "S1843-33/v_r4c2.png",
+   "sha256": "f8d79686e7eb71a809b9023e4c73f11b43dd4e7230f7b9bc5f0e9987bf388de3"
+  },
+  {
+   "archivo": "S1843-33/v_r4c3.png",
+   "sha256": "82d618e3a0f9eea6011fbfb56d24c896e5b0f01b8311d123155bcae7c3779425"
+  },
+  {
+   "archivo": "S1843-33/v_r4c4.png",
+   "sha256": "0b1a444232ea936a8cb3f8adabfec75828e1e4c62295db03717576d2c8b4c3b8"
+  },
+  {
+   "archivo": "S1843-33/v_r4c5.png",
+   "sha256": "0acea68859092e352692b23d1dfa497510d165ca3a2c7c02310d7c9ccb35b09a"
+  },
+  {
+   "archivo": "S1843-33/v_r5c1.png",
+   "sha256": "addd3001358f9e1b2159669228e558a85cb36fe35d776f778f3d0a44e9442328"
+  },
+  {
+   "archivo": "S1843-33/v_r5c2.png",
+   "sha256": "1c636be8907968112d9129d75128b00d150ac02afff1a69f08d924d923b51c32"
+  },
+  {
+   "archivo": "S1843-33/v_r5c3.png",
+   "sha256": "8cf42de62ce05014d14da554b3497b58b67e93ef87faaf06b274675a1d5d0136"
+  },
+  {
+   "archivo": "S1843-33/v_r5c4.png",
+   "sha256": "20160a8fcc03e3f59ed44d4975a12523334410b40feaf2957ad9b91ad5d3c333"
+  },
+  {
+   "archivo": "S1843-33/v_r5c5.png",
+   "sha256": "e60e70245f269170b009652098ecc0c903c0a4c958ea1071183e4192ac7f0ad6"
+  }
+ ],
+ "teselas": 4,
+ "vacio": false
+}

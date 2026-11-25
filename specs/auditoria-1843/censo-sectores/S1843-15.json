@@ -1,0 +1,15 @@
+{"sector":"S1843-15",
+"unidades":[],
+"observaciones":[
+{"tipo":"marco_y_leyenda","px":[4700,1330],"nota":"La mayor parte del sector es el recuadro de la leyenda PARROQUIAS (borde izquierdo x~4495, inferior y~1569) y el marco del plano (filetes y~1122 y y~1158; numero de cuadricula '16' en x~4310,y~1145). No es ciudad. K1843-0001 es la franja del marco (centro fuera del sector)."},
+{"tipo":"quebrada","px":[4365,1407],"nota":"Linea de quebrada/rio con ribera sombreada que baja desde el marco (x~4335,y~1180) hacia el sur (x~4374,y~1532; x~4385,y~1600) y sigue como borde oeste del recinto arbolado de mas abajo."},
+{"tipo":"linea_punteada","px":[4308,1400],"nota":"Linea vertical de trazos gruesos x~4308 de y~1160 hacia el sur, fuera del damero; posible camino o lindero (dudosa)."},
+{"tipo":"letra_suelta","px":[4347,1407],"nota":"Letra minuscula impresa junto a la quebrada, sin lote blanco; parece 'r' o 'c' (dudosa)."},
+{"tipo":"recinto_fuera_de_caja","px":[4510,1688],"nota":"Recinto rayado con arboles (x~4385-4635, y~1570-1806, dividido por una linea en y~1806 de otro igual al sur): su centro (y~1688) cae 4 px al sur de la caja, no se registra aqui. K1843-0016 (4356,1506)-(4728,2634) une al menos este recinto y el del sur: corregir en el sector vecino."},
+{"tipo":"terreno_abierto","px":[4750,1620],"nota":"Al este y al oeste del recinto, terreno con trazos cortos verticales (pasto/campo) sin limites: no se registra como unidad."}
+],
+"recortes":[
+{"archivo":"/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-15/verif_huerta.png","sha256":"368dbe4a16b39b9f6b408912bcc1d39236b0f2fc5590f421255037e85d62818b"},
+{"archivo":"/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-15/verif_letra.png","sha256":"4532cd603c23a487440e7f90357d89f20cc5a300ba2eeeeb3397271ec8e88a1b"}
+],
+"teselas":4,"vacio":true}

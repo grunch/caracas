@@ -1,0 +1,302 @@
+{
+ "sector": "S1843-25",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    4425,
+    1572,
+    4635,
+    1805
+   ],
+   "poligono_px": [
+    [
+     4425,
+     1574
+    ],
+    [
+     4595,
+     1572
+    ],
+    [
+     4632,
+     1640
+    ],
+    [
+     4635,
+     1805
+    ],
+    [
+     4428,
+     1805
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "horizontal con trazos diagonales cortos y árboles (huerta/estancia arbolada)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0016"
+    ]
+   },
+   "lectura": "dudosa",
+   "nota": "Parcela norte de la franja de huertas al este de la quebrada. El borde norte (y≈1572) coincide con el borde inferior del recuadro de la leyenda de parroquias, así que su trazo puede estar alterado; el centro (y≈1689) cae apenas 5 px dentro de la caja del sector. Borde oeste: transición difusa con el talud rayado de la ribera; borde este: lindero curvo, sin calle."
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    4428,
+    1805,
+    4635,
+    2226
+   ],
+   "poligono_px": [
+    [
+     4428,
+     1805
+    ],
+    [
+     4635,
+     1805
+    ],
+    [
+     4632,
+     2012
+    ],
+    [
+     4551,
+     2012
+    ],
+    [
+     4566,
+     2226
+    ],
+    [
+     4448,
+     2226
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "horizontal con trazos diagonales cortos y árboles",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0016"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Parcela en L: ocupa todo el ancho entre y 1805 y 2012 y sigue hacia el sur por la mitad oeste hasta y≈2226. En y≈2014 solo pasa la cuadrícula punteada por la mitad oeste (no es un lindero); la mitad este la corta un lindero continuo (unidad c). Separadas por linderos sin calle."
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    4551,
+    2012,
+    4642,
+    2226
+   ],
+   "poligono_px": [
+    [
+     4551,
+     2012
+    ],
+    [
+     4632,
+     2012
+    ],
+    [
+     4642,
+     2226
+    ],
+    [
+     4566,
+     2226
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "horizontal con trazos diagonales cortos y árboles",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0016"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Parcela al sureste de b, limitada por linderos continuos (la línea vertical va inclinada de x≈4551 a x≈4566). Contiene el edificio rayado d en su borde sur."
+  },
+  {
+   "local": "d",
+   "caja_px": [
+    4575,
+    2200,
+    4639,
+    2218
+   ],
+   "poligono_px": [
+    [
+     4575,
+     2200
+    ],
+    [
+     4639,
+     2200
+    ],
+    [
+     4639,
+     2218
+    ],
+    [
+     4575,
+     2218
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal denso (con punteado), rectángulo cerrado",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0016"
+    ]
+   },
+   "lectura": "dudosa",
+   "nota": "Edificio aislado: rectángulo estrecho rayado dentro de la huerta c, pegado a su lindero sur. Su rayado no es el de las huertas; puede ser una casa de hacienda o un trapiche. Se registra como rayada porque así lo pide la regla de la parroquia, pero no es una manzana."
+  },
+  {
+   "local": "e",
+   "caja_px": [
+    4416,
+    1988,
+    4452,
+    2020
+   ],
+   "poligono_px": [
+    [
+     4416,
+     1988
+    ],
+    [
+     4452,
+     1988
+    ],
+    [
+     4452,
+     2020
+    ],
+    [
+     4416,
+     2020
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado denso, cuadrado cerrado",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0016"
+    ]
+   },
+   "lectura": "dudosa",
+   "nota": "Edificio aislado: cuadrado pequeño con rayado cruzado en el borde oeste de la huerta b, sobre el talud de la ribera. No es una manzana."
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "quebrada",
+   "px": [
+    4388,
+    1930
+   ],
+   "nota": "Quebrada o río de trazo grueso que corre N-S a lo largo del borde oeste de la franja de huertas (x≈4383–4395, de y<1500 a y>2450), con talud rayado a ambos lados (oeste x≈4350–4385; este x≈4390–4440). No cruza ninguna manzana: en este sector no hay damero."
+  },
+  {
+   "tipo": "simbolo_dudoso",
+   "px": [
+    4383,
+    2163
+   ],
+   "nota": "Óvalo pequeño sobre la línea de la quebrada. Podría ser un puente, un pozo o una toma de agua; es dudoso."
+  },
+  {
+   "tipo": "terreno_libre",
+   "px": [
+    4780,
+    1980
+   ],
+   "nota": "Al este del lindero de las huertas (x>4640) y al oeste de la quebrada (x<4350), todo es campo con rayitas verticales sueltas (pasto/sabana). No tiene límites, así que no se registra como unidad."
+  },
+  {
+   "tipo": "lindero",
+   "px": [
+    4635,
+    1900
+   ],
+   "nota": "El borde este de la franja (x≈4632–4642) es un lindero continuo y algo curvo, sin calle. No llega ninguna calle a este sector."
+  },
+  {
+   "tipo": "leyenda",
+   "px": [
+    4500,
+    1572
+   ],
+   "nota": "El recuadro de la leyenda de parroquias (Altagracia, Candelaria, Sta Rosalía, San Juan) acaba en y≈1572, con su borde izquierdo en x≈4500. Su borde inferior coincide con el borde norte de la huerta a."
+  },
+  {
+   "tipo": "cuadricula",
+   "px": [
+    4700,
+    2017
+   ],
+   "nota": "Líneas de la cuadrícula punteada en y≈2017, 2129 y 2252, y vertical en x≈4310. No son calles."
+  },
+  {
+   "tipo": "fuera_de_caja",
+   "px": [
+    4520,
+    2340
+   ],
+   "nota": "Al sur de y≈2226 siguen dos parcelas de huerta (separadas en x≈4516) que se centran fuera de la caja (y>2276). Son de otro sector."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-25/v_bordes_sup.png",
+   "sha256": "36c05414be45400b9fac64c2be2a2beb9193534a62c8b893e145c157c51bf196"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-25/v_union.png",
+   "sha256": "487b89fa523134d9b5fee59ef3285076328d4bb90a818603de6b8df5f347dc7c"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-25/v_esquina_der.png",
+   "sha256": "1349807042255c068fab7396f55532a613b9baba214667340283ca0d7712ebe5"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-25/v_edif.png",
+   "sha256": "ac5512f629e7e126b070869cccce4baf8623cc768a86760115042c34e2500bf4"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-25/v_cuadrado.png",
+   "sha256": "112363c2d1af23e7def3730ce4dede8fa0149ed2861855eee87c7107562d8b07"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-25/v_borde_inf.png",
+   "sha256": "069926d3f037666bd70af6391f4a15e362d172e05cae8d46f1e0f5a21dc9ab9b"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-25/contexto.png",
+   "sha256": "053465c859fb111d8aa4698b544756a5b800366d7f77aaf3d307ea72830a113c"
+  }
+ ],
+ "teselas": 4,
+ "vacio": true
+}

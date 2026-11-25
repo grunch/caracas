@@ -1,0 +1,1305 @@
+{
+ "sector": "S1843-42",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    2814,
+    2893,
+    2843,
+    3013
+   ],
+   "poligono_px": [
+    [
+     2814,
+     2893
+    ],
+    [
+     2843,
+     2893
+    ],
+    [
+     2843,
+     3013
+    ],
+    [
+     2814,
+     2980
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0063"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "franja angosta separada de la manzana b por una calle (x≈2845); chaflán en la esquina SO frente a la quebrada"
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    2848,
+    2893,
+    2958,
+    3013
+   ],
+   "poligono_px": [
+    [
+     2848,
+     2893
+    ],
+    [
+     2958,
+     2893
+    ],
+    [
+     2958,
+     3013
+    ],
+    [
+     2848,
+     3013
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0063"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "el borrador la une con la franja a"
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    2868,
+    3019,
+    2958,
+    3128
+   ],
+   "poligono_px": [
+    [
+     2868,
+     3019
+    ],
+    [
+     2958,
+     3019
+    ],
+    [
+     2958,
+     3128
+    ],
+    [
+     2930,
+     3128
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0070"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "triangular; lado O paralelo a la ribera E de la quebrada; rayado distinto (otra parroquia)"
+  },
+  {
+   "local": "d",
+   "caja_px": [
+    2747,
+    3031,
+    2786,
+    3136
+   ],
+   "poligono_px": [
+    [
+     2747,
+     3031
+    ],
+    [
+     2786,
+     3031
+    ],
+    [
+     2786,
+     3136
+    ],
+    [
+     2747,
+     3136
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0070"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "borde del poblado: terreno libre al N y al O"
+  },
+  {
+   "local": "e",
+   "caja_px": [
+    2793,
+    3062,
+    2870,
+    3135
+   ],
+   "poligono_px": [
+    [
+     2793,
+     3062
+    ],
+    [
+     2870,
+     3112
+    ],
+    [
+     2857,
+     3135
+    ],
+    [
+     2795,
+     3135
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    78
+   ],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0070"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "triangular, hipotenusa hacia la quebrada"
+  },
+  {
+   "local": "f",
+   "caja_px": [
+    2861,
+    3110,
+    2890,
+    3136
+   ],
+   "poligono_px": [
+    [
+     2861,
+     3136
+    ],
+    [
+     2872,
+     3113
+    ],
+    [
+     2889,
+     3110
+    ],
+    [
+     2890,
+     3136
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0070"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "manzana pequeña entre la e y la quebrada"
+  },
+  {
+   "local": "g",
+   "caja_px": [
+    2895,
+    3112,
+    2925,
+    3136
+   ],
+   "poligono_px": [
+    [
+     2895,
+     3113
+    ],
+    [
+     2915,
+     3112
+    ],
+    [
+     2925,
+     3136
+    ],
+    [
+     2895,
+     3136
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0070"
+    ]
+   },
+   "lectura": "dudosa",
+   "nota": "manzana pequeña junto a la ribera O de la quebrada; lado E irregular"
+  },
+  {
+   "local": "h",
+   "caja_px": [
+    2625,
+    3023,
+    2707,
+    3112
+   ],
+   "poligono_px": [
+    [
+     2625,
+     3023
+    ],
+    [
+     2649,
+     3025
+    ],
+    [
+     2707,
+     3112
+    ],
+    [
+     2690,
+     3112
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0072"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "paralelogramo inclinado al pie del cerro, aislado; separado de i por una franja blanca"
+  },
+  {
+   "local": "i",
+   "caja_px": [
+    2668,
+    3040,
+    2735,
+    3112
+   ],
+   "poligono_px": [
+    [
+     2668,
+     3040
+    ],
+    [
+     2692,
+     3042
+    ],
+    [
+     2735,
+     3110
+    ],
+    [
+     2717,
+     3112
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0072"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "paralelogramo inclinado, gemelo de h"
+  },
+  {
+   "local": "j",
+   "caja_px": [
+    2392,
+    3001,
+    2422,
+    3030
+   ],
+   "poligono_px": [
+    [
+     2392,
+     3001
+    ],
+    [
+     2422,
+     3001
+    ],
+    [
+     2422,
+     3030
+    ],
+    [
+     2392,
+     3030
+    ]
+   ],
+   "ocupacion": "lote_especial",
+   "letras": [
+    "T"
+   ],
+   "esquinas": [],
+   "rayado": "horizontal",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0071"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "edificio aislado en el cerro, cuadrado rayado (no blanco) con la T impresa encima; la caja del borrador se desborda con el sombreado"
+  },
+  {
+   "local": "k",
+   "caja_px": [
+    2670,
+    3144,
+    2842,
+    3260
+   ],
+   "poligono_px": [
+    [
+     2745,
+     3144
+    ],
+    [
+     2842,
+     3144
+    ],
+    [
+     2722,
+     3260
+    ],
+    [
+     2670,
+     3214
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    86
+   ],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0083",
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "cuadrilátero entre dos calles diagonales"
+  },
+  {
+   "local": "l",
+   "caja_px": [
+    2733,
+    3144,
+    2926,
+    3254
+   ],
+   "poligono_px": [
+    [
+     2847,
+     3144
+    ],
+    [
+     2925,
+     3144
+    ],
+    [
+     2926,
+     3205
+    ],
+    [
+     2890,
+     3205
+    ],
+    [
+     2890,
+     3254
+    ],
+    [
+     2733,
+     3254
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    81
+   ],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0083",
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "lado O sobre la calle diagonal; entrante blanco en la esquina SE"
+  },
+  {
+   "local": "m",
+   "caja_px": [
+    2727,
+    3263,
+    2843,
+    3374
+   ],
+   "poligono_px": [
+    [
+     2727,
+     3263
+    ],
+    [
+     2843,
+     3263
+    ],
+    [
+     2843,
+     3330
+    ],
+    [
+     2832,
+     3332
+    ],
+    [
+     2832,
+     3374
+    ],
+    [
+     2727,
+     3374
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    91
+   ],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0083",
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "entrante en el lado E abajo"
+  },
+  {
+   "local": "n",
+   "caja_px": [
+    2852,
+    3263,
+    2888,
+    3309
+   ],
+   "poligono_px": [
+    [
+     2852,
+     3263
+    ],
+    [
+     2888,
+     3263
+    ],
+    [
+     2888,
+     3309
+    ],
+    [
+     2852,
+     3309
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado en L + patio blanco",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0083",
+     "K1843-0085"
+    ]
+   },
+   "lectura": "dudosa",
+   "nota": "manzana pequeña: rayado en L (lados O y N) y lote blanco recuadrado sin letra; frente a la quebrada"
+  },
+  {
+   "local": "o",
+   "caja_px": [
+    2557,
+    3214,
+    2719,
+    3358
+   ],
+   "poligono_px": [
+    [
+     2557,
+     3291
+    ],
+    [
+     2667,
+     3214
+    ],
+    [
+     2719,
+     3259
+    ],
+    [
+     2610,
+     3358
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0083",
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "rombo entre calles diagonales; dentro, un arco dibujado en (2674,3297) sin letra legible"
+  },
+  {
+   "local": "p",
+   "caja_px": [
+    2614,
+    3272,
+    2720,
+    3376
+   ],
+   "poligono_px": [
+    [
+     2614,
+     3362
+    ],
+    [
+     2720,
+     3272
+    ],
+    [
+     2720,
+     3374
+    ],
+    [
+     2620,
+     3376
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0083",
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "triangular entre la calle diagonal y la calle N-S x≈2723"
+  },
+  {
+   "local": "q",
+   "caja_px": [
+    2620,
+    3385,
+    2720,
+    3494
+   ],
+   "poligono_px": [
+    [
+     2620,
+     3385
+    ],
+    [
+     2720,
+     3385
+    ],
+    [
+     2720,
+     3494
+    ],
+    [
+     2620,
+     3494
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    101
+   ],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0083",
+     "K1843-0085",
+     "K1843-0084"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "K1843-0084 es solo su parte S (el borrador la parte)"
+  },
+  {
+   "local": "r",
+   "caja_px": [
+    2727,
+    3382,
+    2814,
+    3494
+   ],
+   "poligono_px": [
+    [
+     2727,
+     3382
+    ],
+    [
+     2814,
+     3382
+    ],
+    [
+     2814,
+     3494
+    ],
+    [
+     2727,
+     3494
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    102
+   ],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0083",
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "al E una franja blanca punteada hasta la quebrada"
+  },
+  {
+   "local": "s",
+   "caja_px": [
+    2555,
+    3385,
+    2615,
+    3494
+   ],
+   "poligono_px": [
+    [
+     2555,
+     3422
+    ],
+    [
+     2592,
+     3386
+    ],
+    [
+     2615,
+     3385
+    ],
+    [
+     2615,
+     3494
+    ],
+    [
+     2555,
+     3494
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0083",
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "esquina NO ochavada por la calle diagonal"
+  },
+  {
+   "local": "t",
+   "caja_px": [
+    2481,
+    3294,
+    2602,
+    3467
+   ],
+   "poligono_px": [
+    [
+     2481,
+     3327
+    ],
+    [
+     2550,
+     3294
+    ],
+    [
+     2602,
+     3362
+    ],
+    [
+     2493,
+     3467
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0083",
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "cuadrilátero irregular en el borde O del poblado"
+  },
+  {
+   "local": "u",
+   "caja_px": [
+    2409,
+    3322,
+    2487,
+    3504
+   ],
+   "poligono_px": [
+    [
+     2472,
+     3322
+    ],
+    [
+     2487,
+     3478
+    ],
+    [
+     2455,
+     3504
+    ],
+    [
+     2409,
+     3448
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    111
+   ],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0083",
+     "K1843-0085"
+    ]
+   },
+   "lectura": "dudosa",
+   "nota": "triángulo alargado en el borde O; centro cerca del límite S de la caja"
+  },
+  {
+   "local": "v",
+   "caja_px": [
+    2480,
+    3288,
+    2527,
+    3322
+   ],
+   "poligono_px": [
+    [
+     2480,
+     3303
+    ],
+    [
+     2523,
+     3288
+    ],
+    [
+     2527,
+     3305
+    ],
+    [
+     2487,
+     3322
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0083",
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "manzana o edificio pequeño aislado, inclinado, al pie del cerro"
+  },
+  {
+   "local": "w",
+   "caja_px": [
+    2397,
+    3320,
+    2445,
+    3365
+   ],
+   "poligono_px": [
+    [
+     2397,
+     3353
+    ],
+    [
+     2432,
+     3320
+    ],
+    [
+     2445,
+     3335
+    ],
+    [
+     2403,
+     3365
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado (rombos)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "edificio pequeño aislado, inclinado, en la falda del cerro; el borrador no lo separa del sombreado"
+  },
+  {
+   "local": "x",
+   "caja_px": [
+    2543,
+    3273,
+    2560,
+    3287
+   ],
+   "poligono_px": [
+    [
+     2543,
+     3273
+    ],
+    [
+     2560,
+     3273
+    ],
+    [
+     2560,
+     3287
+    ],
+    [
+     2543,
+     3287
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "trazo mínimo",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "cuadradito recuadrado (~15 px), edificio aislado; sin letra"
+  },
+  {
+   "local": "y",
+   "caja_px": [
+    2880,
+    3262,
+    2958,
+    3372
+   ],
+   "poligono_px": [
+    [
+     2945,
+     3262
+    ],
+    [
+     2958,
+     3262
+    ],
+    [
+     2958,
+     3372
+    ],
+    [
+     2880,
+     3372
+    ],
+    [
+     2883,
+     3355
+    ],
+    [
+     2910,
+     3330
+    ],
+    [
+     2935,
+     3290
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "dudosa",
+   "nota": "al E de la quebrada; lado O sigue la ribera; borde N poco claro"
+  },
+  {
+   "local": "z",
+   "caja_px": [
+    2877,
+    3380,
+    2960,
+    3489
+   ],
+   "poligono_px": [
+    [
+     2877,
+     3380
+    ],
+    [
+     2960,
+     3380
+    ],
+    [
+     2960,
+     3489
+    ],
+    [
+     2877,
+     3489
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "diagonal",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0085"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "al E de la quebrada; rayado de otra parroquia"
+  },
+  {
+   "local": "aa",
+   "caja_px": [
+    2286,
+    3086,
+    2501,
+    3236
+   ],
+   "poligono_px": [
+    [
+     2286,
+     3086
+    ],
+    [
+     2501,
+     3086
+    ],
+    [
+     2501,
+     3236
+    ],
+    [
+     2286,
+     3236
+    ]
+   ],
+   "ocupacion": "descartada_no_edificacion",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "sombreado de cerro",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0074"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "falso positivo del borrador: sombreado del cerro, sin manzana"
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "quebrada",
+   "px": [
+    2820,
+    2990
+   ],
+   "nota": "quebrada de NO a SE desde (2715,2858) hasta (2935,3135), con riberas; separa el cerro de las manzanas a-c"
+  },
+  {
+   "tipo": "quebrada",
+   "px": [
+    2890,
+    3330
+   ],
+   "nota": "sigue al S desde (2950,3150) curvando hasta (2850,3480); separa m/n/r de y/z"
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    2845,
+    2950
+   ],
+   "nota": "calle N-S angosta entre a y b (x≈2843-2848), continua al N"
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    2730,
+    3255
+   ],
+   "nota": "calle diagonal NE-SO de (2842,3144) a (2613,3360), sigue hasta (2492,3467)"
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    2615,
+    3250
+   ],
+   "nota": "calle diagonal de (2670,3214) a (2557,3291), entre k/o y el cerro; otra de (2557,3291) a (2610,3358) entre o y t"
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    2800,
+    3258
+   ],
+   "nota": "calle E-O y≈3258 de x 2722 a 2890; calle N-S x≈2723 de y 3262 al S; calle E-O y≈3379 de x 2555 a 2960"
+  },
+  {
+   "tipo": "letra",
+   "px": [
+    2853,
+    3028
+   ],
+   "nota": "X mayúscula sobre terreno blanco entre la quebrada y la manzana c, sin lote recuadrado (dudosa)"
+  },
+  {
+   "tipo": "letra",
+   "px": [
+    2864,
+    3395
+   ],
+   "nota": "h minúscula junto a la ribera O de la quebrada en el cruce con la calle y≈3379 (posible paso o puente, dudosa)"
+  },
+  {
+   "tipo": "letra",
+   "px": [
+    2960,
+    3155
+   ],
+   "nota": "g minúscula en el borde E de la caja, sobre la calle"
+  },
+  {
+   "tipo": "terreno",
+   "px": [
+    2832,
+    3480
+   ],
+   "nota": "franja blanca punteada x 2815-2850 entre r y la quebrada, desde y 3382 hacia el S (sigue fuera de la caja)"
+  },
+  {
+   "tipo": "terreno",
+   "px": [
+    2860,
+    3345
+   ],
+   "nota": "terreno blanco abierto entre m, n y la quebrada, sin delimitar"
+  },
+  {
+   "tipo": "camino",
+   "px": [
+    2500,
+    2925
+   ],
+   "nota": "línea de trazos en el cerro de (2535,2860) a (2470,2985) (camino, dudosa)"
+  },
+  {
+   "tipo": "camino",
+   "px": [
+    2530,
+    3000
+   ],
+   "nota": "línea de trazos ligeramente inclinada de (2440,3010) a (2615,2985) (camino, dudosa)"
+  },
+  {
+   "tipo": "borde",
+   "px": [
+    2520,
+    3230
+   ],
+   "nota": "borde O del poblado: la ciudad termina en la línea (2625,3023)-(2409,3448); al NO todo es cerro sombreado y terreno libre"
+  },
+  {
+   "tipo": "marca",
+   "px": [
+    2422,
+    3291
+   ],
+   "nota": "trazo rectangular mínimo en la falda del cerro, ilegible"
+  },
+  {
+   "tipo": "marca",
+   "px": [
+    2529,
+    3475
+   ],
+   "nota": "círculo pequeño fuera de la caja (al S), posible pila"
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v01.png",
+   "sha256": "3c04e0a76fc18e94696d8a85d8bfee773950d4a61059616ce569d52b34ccfecc"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v02.png",
+   "sha256": "8c21aff10325f9da0d3ce41eb962dc0499447c13b6afbc13a8934ab39afe2f03"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v03.png",
+   "sha256": "dd8251fb97f4664f513e196f2cb7615352af76d4655527da8c62d453abee9f00"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v04.png",
+   "sha256": "132a75a1b072f3592662a94abff5ab152a79e41c4f65944bb02a8654d2b99748"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v05.png",
+   "sha256": "7a298ef32cc1bac9e1fc3ddd06fe65c0b78b1c703e262bb1482ca06bfaae1c51"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v06.png",
+   "sha256": "bbdc8dccd6a0c5d3aa9159b4d329b4e60c7ffb4e816c40dbdff391cfc0626f9d"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v07.png",
+   "sha256": "4930ffaa36da7797a837c052402d3c6fef83115d12d4e5387c87580d9aa65af3"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v08.png",
+   "sha256": "14b3547b41bafd4547104047a3ca05550e84e15957922f18d6b38c07429f6d47"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v09.png",
+   "sha256": "a0a3479a9de54331cec239f0649649f1c7ff684bdb70f863ba5735edf337d8ec"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v10.png",
+   "sha256": "9600d16060f80c75fce9b041ab0d5caf54c00161a9c8bae54f40fd83488587d3"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v11.png",
+   "sha256": "adb000200ecf898c9944399f49b871334186d1bad8f8ad64280caf1307f5b83c"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v12.png",
+   "sha256": "77027277eb705a6882463a82f808312ad5d7c01a065b9a69033fcc8c632decb8"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v13.png",
+   "sha256": "a25b65464c9c84284d92085b2424e0e779bb8cdf346316b42482b241070536e7"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-42/v14.png",
+   "sha256": "a5d2993ee02cd522a7c95f1fab694cb3a110b2bbe52743a3bc99e6f26d276997"
+  }
+ ],
+ "teselas": 6,
+ "vacio": false
+}

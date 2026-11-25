@@ -1,0 +1,780 @@
+{
+ "sector": "S1843-51",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    1856,
+    3552,
+    1882,
+    3574
+   ],
+   "poligono_px": [
+    [
+     1856,
+     3552
+    ],
+    [
+     1882,
+     3552
+    ],
+    [
+     1882,
+     3574
+    ],
+    [
+     1856,
+     3574
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "relleno tenue, ilegible",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "edificio aislado pequeño al pie del cerro, sin calles; relleno muy tenue"
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    1909,
+    3545,
+    1936,
+    3567
+   ],
+   "poligono_px": [
+    [
+     1909,
+     3545
+    ],
+    [
+     1936,
+     3545
+    ],
+    [
+     1936,
+     3567
+    ],
+    [
+     1909,
+     3567
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "relleno tenue, ilegible",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "dudosa",
+   "nota": "edificio aislado pequeño al pie del cerro, junto a a; trazo corto que baja de su esquina SO"
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    1752,
+    3565,
+    1840,
+    3655
+   ],
+   "poligono_px": [
+    [
+     1752,
+     3565
+    ],
+    [
+     1827,
+     3573
+    ],
+    [
+     1840,
+     3588
+    ],
+    [
+     1838,
+     3655
+    ],
+    [
+     1752,
+     3655
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "pasto en matas con asterisco (casa de estancia)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "estancia contra el borde O del plano; esquina NE ochavada; la raya de trazos a y≈3640 es la cuadrícula (fila 16)"
+  },
+  {
+   "local": "d",
+   "caja_px": [
+    1845,
+    3607,
+    1903,
+    3665
+   ],
+   "poligono_px": [
+    [
+     1845,
+     3607
+    ],
+    [
+     1903,
+     3607
+    ],
+    [
+     1903,
+     3665
+    ],
+    [
+     1845,
+     3665
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado en rombos (parroquia)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "manzana cuadrada pequeña aislada al N del camino"
+  },
+  {
+   "local": "e",
+   "caja_px": [
+    1849,
+    3676,
+    1943,
+    3754
+   ],
+   "poligono_px": [
+    [
+     1849,
+     3676
+    ],
+    [
+     1910,
+     3678
+    ],
+    [
+     1943,
+     3693
+    ],
+    [
+     1943,
+     3754
+    ],
+    [
+     1849,
+     3726
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado en rombos (parroquia)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "borde N curvo (camino) y borde S oblicuo contra la estancia g"
+  },
+  {
+   "local": "f",
+   "caja_px": [
+    1950,
+    3462,
+    2450,
+    3704
+   ],
+   "poligono_px": [
+    [
+     1950,
+     3605
+    ],
+    [
+     2060,
+     3607
+    ],
+    [
+     2170,
+     3588
+    ],
+    [
+     2284,
+     3548
+    ],
+    [
+     2400,
+     3462
+    ],
+    [
+     2450,
+     3512
+    ],
+    [
+     2375,
+     3587
+    ],
+    [
+     2240,
+     3657
+    ],
+    [
+     2132,
+     3676
+    ],
+    [
+     2060,
+     3678
+    ],
+    [
+     1990,
+     3704
+    ],
+    [
+     1950,
+     3700
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado en rombos (parroquia)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0091"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "manzana larga en arco al pie del cerro, entre el borde del cerro y el camino curvo; remata al NE (≈2450,3512) contra una calle oblicua; K1843-0091 toma solo su extremo O y le suma la manzana h (une dos manzanas separadas por el camino)"
+  },
+  {
+   "local": "g",
+   "caja_px": [
+    1849,
+    3727,
+    1946,
+    3976
+   ],
+   "poligono_px": [
+    [
+     1849,
+     3727
+    ],
+    [
+     1943,
+     3754
+    ],
+    [
+     1946,
+     3976
+    ],
+    [
+     1938,
+     3976
+    ],
+    [
+     1881,
+     3882
+    ],
+    [
+     1874,
+     3795
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "pasto en matas con asterisco",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "estancia en cuña que termina en punta al S; borde O sinuoso (lindero o zanja)"
+  },
+  {
+   "local": "h",
+   "caja_px": [
+    1950,
+    3678,
+    2124,
+    3757
+   ],
+   "poligono_px": [
+    [
+     1950,
+     3703
+    ],
+    [
+     1990,
+     3706
+    ],
+    [
+     2080,
+     3685
+    ],
+    [
+     2124,
+     3678
+    ],
+    [
+     2124,
+     3740
+    ],
+    [
+     2080,
+     3743
+    ],
+    [
+     1950,
+     3757
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "cruzado en rombos (parroquia)",
+   "borrador": {
+    "relacion": "une_varias",
+    "candidatas": [
+     "K1843-0091"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "entre el camino curvo (N) y las estancias (S); calle al O (x≈1947) y calle al E (x≈2128); K1843-0091 la une con el extremo O de f"
+  },
+  {
+   "local": "i",
+   "caja_px": [
+    1753,
+    3682,
+    1848,
+    3957
+   ],
+   "poligono_px": [
+    [
+     1753,
+     3682
+    ],
+    [
+     1840,
+     3682
+    ],
+    [
+     1848,
+     3930
+    ],
+    [
+     1838,
+     3954
+    ],
+    [
+     1753,
+     3957
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "pasto en matas con asterisco",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "estancia contra el borde O del plano, esquina SE redondeada; raya fina vertical interior a x≈1789 (lindero) y raya de trazos a y≈3745 (cuadrícula, fila 17)"
+  },
+  {
+   "local": "j",
+   "caja_px": [
+    1951,
+    3740,
+    2122,
+    3998
+   ],
+   "poligono_px": [
+    [
+     1951,
+     3757
+    ],
+    [
+     2080,
+     3743
+    ],
+    [
+     2122,
+     3740
+    ],
+    [
+     2122,
+     3965
+    ],
+    [
+     2105,
+     3990
+    ],
+    [
+     1985,
+     3998
+    ],
+    [
+     1965,
+     3985
+    ],
+    [
+     1952,
+     3950
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "pasto en matas con asterisco",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "estancia con esquinas S redondeadas, entre las calles x≈1947 y x≈2128"
+  },
+  {
+   "local": "k",
+   "caja_px": [
+    2132,
+    3586,
+    2376,
+    3740
+   ],
+   "poligono_px": [
+    [
+     2132,
+     3676
+    ],
+    [
+     2240,
+     3657
+    ],
+    [
+     2376,
+     3586
+    ],
+    [
+     2376,
+     3738
+    ],
+    [
+     2132,
+     3740
+    ]
+   ],
+   "ocupacion": "rayada",
+   "letras": [],
+   "esquinas": [
+    124
+   ],
+   "rayado": "cruzado en rombos (parroquia)",
+   "borrador": {
+    "relacion": "sin_candidata",
+    "candidatas": []
+   },
+   "lectura": "segura",
+   "nota": "borde N curvo (camino); calle al O (x≈2128) y al E (x≈2380); esquina 124 impresa en su esquina NO; marca pequeña tipo estrella cerca de (2362,3615), no leída"
+  },
+  {
+   "local": "l",
+   "caja_px": [
+    2065,
+    3738,
+    2376,
+    4045
+   ],
+   "poligono_px": [
+    [
+     2132,
+     3739
+    ],
+    [
+     2376,
+     3738
+    ],
+    [
+     2376,
+     3940
+    ],
+    [
+     2350,
+     3965
+    ],
+    [
+     2300,
+     3995
+    ],
+    [
+     2200,
+     4030
+    ],
+    [
+     2075,
+     4045
+    ],
+    [
+     2065,
+     4035
+    ],
+    [
+     2066,
+     4012
+    ],
+    [
+     2080,
+     4005
+    ],
+    [
+     2122,
+     3990
+    ],
+    [
+     2130,
+     3970
+    ]
+   ],
+   "ocupacion": "huerta",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "pasto en matas con asterisco",
+   "borrador": {
+    "relacion": "parte_de",
+    "candidatas": [
+     "K1843-0096"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "estancia grande al S de k, hasta cerca del río; lóbulo SO que se mete bajo j (≈2065–2125, 3990–4045): K1843-0096 es solo ese lóbulo (la candidata parte la unidad)"
+  },
+  {
+   "local": "m",
+   "caja_px": [
+    1753,
+    3987,
+    2308,
+    4088
+   ],
+   "poligono_px": [
+    [
+     1753,
+     3987
+    ],
+    [
+     1850,
+     4000
+    ],
+    [
+     2012,
+     4030
+    ],
+    [
+     2082,
+     4088
+    ],
+    [
+     2200,
+     4060
+    ],
+    [
+     2308,
+     4010
+    ]
+   ],
+   "ocupacion": "descartada_no_edificacion",
+   "letras": [
+    "Y"
+   ],
+   "esquinas": [],
+   "rayado": "río con riberas (rayas paralelas)",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0097"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "K1843-0097 es un tramo del río (≈1753–1989, 3986–4052), no una manzana; polígono aproximado del eje del cauce dentro de la caja; letra Y junto al río en (1818,4038)"
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "cerro",
+   "px": [
+    2050,
+    3500
+   ],
+   "nota": "faldas del cerro con sombreado ocupan el N de la caja (y<≈3560 al O, hasta el borde N de f)"
+  },
+  {
+   "tipo": "camino",
+   "px": [
+    1776,
+    3664
+   ],
+   "nota": "camino de doble línea desde el borde O del plano (y≈3665) que curva hacia el E entre d/e y entre f/h,k; sigue al NE (≈2450,3512); cruz '+' sobre el camino en (1776,3662)"
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    1947,
+    3730
+   ],
+   "nota": "calle N-S entre e/g y f,h/j, de y≈3605 hasta ≈3976 (entre estancias)"
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    2128,
+    3860
+   ],
+   "nota": "calle N-S de doble línea entre h/j y k/l, desde el camino (y≈3678) hasta ≈4000, donde dobla al O bajo j"
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    2380,
+    3660
+   ],
+   "nota": "calle N-S en el borde E (x≈2378–2384) entre k/l y las manzanas 113/125 (fuera de la caja)"
+  },
+  {
+   "tipo": "calle",
+   "px": [
+    1845,
+    3800
+   ],
+   "nota": "pasaje entre las estancias i y g (x≈1846–1876), abierto al S"
+  },
+  {
+   "tipo": "rio",
+   "px": [
+    2082,
+    4088
+   ],
+   "nota": "río en el borde S de la caja, de (1755,3993) bajando a (2082,4088) y subiendo a (2400,3993); letra Y en (1818,4038)"
+  },
+  {
+   "tipo": "manzana_vecina",
+   "px": [
+    2334,
+    3490
+   ],
+   "nota": "franja rayada estrecha (2280–2388, 3450–3530) al N de f, separada por calle; centro fuera de la caja (x>2308), no registrada"
+  },
+  {
+   "tipo": "borde_plano",
+   "px": [
+    1751,
+    3750
+   ],
+   "nota": "borde O del plano (línea interior x≈1751; marco x≈1700); números 15, 16, 17 en el margen son rótulos de la cuadrícula"
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/b1.png",
+   "sha256": "f36f979d352b429749337d6feb826bab8f1107991d8985dc0a457e401e581361"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/b2.png",
+   "sha256": "6339bde30b5514f0bd9a2c4e2e7fb4da81e85bc70d515ab6a766e2c31ee60aa9"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/ctx_centro.png",
+   "sha256": "52887580e7085863290b5e3d1d6dfcb8f2d1468f51e2679cdc5a2da0a8b1984e"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/ctx_este.png",
+   "sha256": "162dcbbb088b266d8432e96fd526caccd45a606688b9a961b7116bce90e22852"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/e1.png",
+   "sha256": "79d24badac5add3312594014850f6c6b90811fd7b038f16b6df14171f24c4e99"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/s1.png",
+   "sha256": "31f148cb67df07c9aca83baeeb605f3ac01cd85ea562b55807da2f9874981982"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/t1.png",
+   "sha256": "0d7e63fdcfd41be5e6595b613684bce5d75061f30715c85e9adbb278bb615eee"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/t2.png",
+   "sha256": "39f76e439f17777e92e8b7b6bb8f946a5c46cf752cce6d905ff8b9127b5eb6db"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/t3.png",
+   "sha256": "1cf0d5cbb325cca524ea1a4790e8889c7e7a7fea6dd268d3add810bfc3bdcc45"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/t4.png",
+   "sha256": "2795322d0e62d7867b1aaa86f5bcc5f5f7841d471c6ca96c79fcf3d0363d9711"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/v_a.png",
+   "sha256": "de41e3e1d8b2f8f88a13815b2c59a77a639e7236fb5f38c135b62eddeb97ea1a"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/v_b.png",
+   "sha256": "435c8724cc69a0556ff1b7453a364a8929542b2280dd93c7dc5b0b171f14ea13"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/v_c.png",
+   "sha256": "aeeef1fc77c5220f1946afd1d1b6a9cd87b4d246c850625a7f901741dbc207c7"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/v_d.png",
+   "sha256": "fdc4c40f9b5650000c58cbf04c9f042f4276929728c2ac8dbc96b969ec863e27"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/v_e.png",
+   "sha256": "15b40c8a814d3818908494b7020830be6f8139eae6348561f72c050b532c785e"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/v_f.png",
+   "sha256": "b41ad836c31f57ac783b6351baf665b9b15d294ebc260e3efff577fe13ef7869"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/v_g.png",
+   "sha256": "3f918d51f6a81618ff6dcdf7a81f60183c9c2cd86d97936b218b0fd7eb7c16f0"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/v_h.png",
+   "sha256": "642eb4ab7c6f8dad3f7d8fee85bebd0055d06b106cd18e1ee54e6c2dc9e3bf51"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/v_i.png",
+   "sha256": "9512308d0da7f921cabab6332fa1484fb3a8b9f13ba250dc04c039bd692e0525"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-51/v_j.png",
+   "sha256": "2e1f4d915fa6f7d0924f4fb81455987f41848d937ac720624c7652c578a0dd64"
+  }
+ ],
+ "teselas": 4,
+ "vacio": false
+}

@@ -1,0 +1,192 @@
+{
+ "sector": "S1843-31",
+ "unidades": [
+  {
+   "local": "a",
+   "caja_px": [
+    1793,
+    2497,
+    1851,
+    2613
+   ],
+   "poligono_px": [
+    [
+     1793,
+     2497
+    ],
+    [
+     1851,
+     2497
+    ],
+    [
+     1851,
+     2613
+    ],
+    [
+     1793,
+     2613
+    ]
+   ],
+   "ocupacion": "descartada_no_edificacion",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "sombreado de cerro (normales de pendiente), no rayado parroquial",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0033"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Falso positivo: sombreado de ladera junto al marco oeste del plano; sin calles ni manzanas."
+  },
+  {
+   "local": "b",
+   "caja_px": [
+    1739,
+    2137,
+    2284,
+    2799
+   ],
+   "poligono_px": [
+    [
+     1739,
+     2137
+    ],
+    [
+     2284,
+     2137
+    ],
+    [
+     2284,
+     2799
+    ],
+    [
+     1739,
+     2799
+    ]
+   ],
+   "ocupacion": "descartada_no_edificacion",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "sombreado de cerro (normales de pendiente), no rayado parroquial",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0034"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Falso positivo: gran zona de cerro con sombreado (hachures) cruzada por una linea continua sinuosa; no hay manzanas."
+  },
+  {
+   "local": "c",
+   "caja_px": [
+    1688,
+    1352,
+    1725,
+    4052
+   ],
+   "poligono_px": [
+    [
+     1688,
+     1352
+    ],
+    [
+     1725,
+     1352
+    ],
+    [
+     1725,
+     4052
+    ],
+    [
+     1688,
+     4052
+    ]
+   ],
+   "ocupacion": "descartada_no_edificacion",
+   "letras": [],
+   "esquinas": [],
+   "rayado": "sombreado de cerro (normales de pendiente), no rayado parroquial",
+   "borrador": {
+    "relacion": "igual",
+    "candidatas": [
+     "K1843-0045"
+    ]
+   },
+   "lectura": "segura",
+   "nota": "Falso positivo: franja del marco del plano (doble filete y numeros de la cuadricula 5-10 en el margen oeste)."
+  }
+ ],
+ "observaciones": [
+  {
+   "tipo": "borde_del_plano",
+   "px": [
+    1705,
+    2570
+   ],
+   "nota": "Marco oeste del plano (filetes x~1690-1745) con numeros de fila de cuadricula 5,6,7,8,9; a la izquierda, texto de la leyenda (fuera del dibujo)."
+  },
+  {
+   "tipo": "cerro",
+   "px": [
+    1980,
+    2560
+   ],
+   "nota": "Toda la caja es ladera de cerro con sombreado por normales; sin ciudad."
+  },
+  {
+   "tipo": "linea_continua_sinuosa",
+   "px": [
+    1986,
+    2636
+   ],
+   "nota": "Linea negra continua de (1746,2423) a (1871,2561), (1986,2636), (2096,2711), (2226,2756) y sale al este por (2368,2768). Cruza el cerro siguiendo la ladera: probablemente quebrada o camino; dudosa (no tiene riberas dobles ni rotulo en el sector)."
+  },
+  {
+   "tipo": "terreno_punteado",
+   "px": [
+    2230,
+    2380
+   ],
+   "nota": "Esquina NE de la caja: terreno claro con trazos verticales cortos (prado/cultivo), sin limites cerrados dentro del sector; no se registra como unidad."
+  },
+  {
+   "tipo": "camino",
+   "px": [
+    2300,
+    2290
+   ],
+   "nota": "Linea de trazos diagonal de (2256,2221) a (2368,2346) en el borde NE, casi toda fuera de la caja_px; junto a rotulo \"Ca...\" en (2336,2246) fuera de la caja. Camino probable; dudoso."
+  },
+  {
+   "tipo": "cuadricula",
+   "px": [
+    1980,
+    2470
+   ],
+   "nota": "Las lineas horizontales de trazos (y~2400, 2530, 2655, 2770, 2900) son la cuadricula del plano, no calles."
+  }
+ ],
+ "recortes": [
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-31/v-0033.png",
+   "sha256": "a0d577b8201cea75c280576d30823f7d8f4e2d9f804122118154e2badb8b5888"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-31/v-0034.png",
+   "sha256": "7e6a372e3027819cad4253faedb36be9c7e4bb12ccd2e9651784c62a44578cc9"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-31/v-0045.png",
+   "sha256": "fd95f5cefcfaf3ced313e3650822d8a98b18357102f903443bead8d97f4ce470"
+  },
+  {
+   "archivo": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/censo1843/S1843-31/v-linea.png",
+   "sha256": "55fe66122e43611fa78bdd32041677e40763a46cf9991a2becd227dcd112ccf6"
+  }
+ ],
+ "teselas": 4,
+ "vacio": true
+}
