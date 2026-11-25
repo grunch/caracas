@@ -14,12 +14,27 @@ function enBorde(p,poligono){
  return poligono.some((a,i)=>{const b=poligono[(i+1)%poligono.length],dx=b[0]-a[0],dz=b[1]-a[1],l2=dx*dx+dz*dz,t=((p[0]-a[0])*dx+(p[1]-a[1])*dz)/l2
   return t>=-.001&&t<=1.001&&Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dz)<.3})
 }
+/** El trazado rasterizado de 1843 no coincide exactamente con la cuadra regular de 1772.
+ * Ambos extremos deben seguir el MISMO borde, a menos de 3 m, y mirar hacia la calle. */
+function frenteDeCalle(b,c,normal,poligono){
+ const area=poligono.reduce((s,p,i)=>{const q=poligono[(i+1)%poligono.length];return s+p[0]*q[1]-q[0]*p[1]},0)
+ return poligono.some((p,i)=>{
+  const q=poligono[(i+1)%poligono.length],dx=q[0]-p[0],dz=q[1]-p[1],l=Math.hypot(dx,dz),signo=Math.sign(area)
+  if((normal[0]*dz-normal[1]*dx)*signo/l<.9)return false
+  return [b,c].every(v=>{const t=((v[0]-p[0])*dx+(v[1]-p[1])*dz)/(l*l)
+   return t>=0&&t<=1&&Math.hypot(v[0]-p[0]-t*dx,v[1]-p[1]-t*dz)<3})
+ })
+}
 /** Se leen los triángulos YA extruidos: la altura y el reparto son los mismos de la fachada nativa. */
 export function extraerFrentes({atributos:a,indices},manzanas){
  const salida=[],vistos=new Set(),p=a.position
  for(let j=0;j<indices.length;j+=3){
   const k=indices[j],info=k*4
-  if(a.aInfo[info+2]<256||a.aInfo[info+2]%256!==0||a.aVida[k*2]!==1||a.aVida[k*2+1]!==2||a.aPared[k*3+1]<1.8||Math.abs(a.normal[k*3+1])>.01||a.aTecho[k*4+3]>.5)continue
+  const nace=a.aVida[k*2],muere=a.aVida[k*2+1]
+  const generado1772=a.aInfo[info+2]>=256&&a.aInfo[info+2]%256===0&&nace===1&&muere===2
+  const historia1843=a.aHistoria?Math.floor(a.aHistoria[k*2]/65536)%256:0
+  const colonial1843=nace<=2&&(!muere||muere>2)&&historia1843%16===0&&Math.floor(historia1843/16)>0
+  if((!generado1772&&!colonial1843)||a.aPared[k*3+1]<1.8||Math.abs(a.normal[k*3+1])>.01||a.aTecho[k*4+3]>.5)continue
   const ancla=Array.from(a.aAncla.slice(k*2,k*2+2)),m=manzanas.find(m=>puntoEnPoligono(ancla,m.poligono))
   if(!m)continue
   const bajos=Array.from(indices.slice(j,j+3)).filter(v=>Math.abs(p[v*3+1])<.001).sort((x,y)=>a.aPared[x*3]-a.aPared[y*3])
@@ -27,10 +42,11 @@ export function extraerFrentes({atributos:a,indices},manzanas){
   const [v,w]=bajos,desde=a.aPared[v*3],hasta=a.aPared[w*3],du=hasta-desde
   if(du<.5)continue
   const b=[p[v*3],p[v*3+2]],c=[p[w*3],p[w*3+2]]
-  if(!enBorde(b,m.poligono)||!enBorde(c,m.poligono)||!enBorde([(b[0]+c[0])/2,(b[1]+c[1])/2],m.poligono))continue
   const eje=[(c[0]-b[0])/du,(c[1]-b[1])/du],origen=[b[0]-desde*eje[0],b[1]-desde*eje[1]],normal=[a.normal[k*3],a.normal[k*3+2]].map(x=>x/Math.hypot(a.normal[k*3],a.normal[k*3+2]))
-  const clave=[...ancla,...b,...c].map(x=>x.toFixed(3)).join(',');if(vistos.has(clave))continue;vistos.add(clave)
-  salida.push({manzana:m.id,ancla,origen,eje,normal,desde,hasta,largo:a.aPared[k*3+1],altoPiso:a.aPared[k*3+2],pisos:a.aInfo[info+3],semilla:a.aInfo[info+1]})
+  const epoca=generado1772?1:2
+  if(epoca===1?(!enBorde(b,m.poligono)||!enBorde(c,m.poligono)||!enBorde([(b[0]+c[0])/2,(b[1]+c[1])/2],m.poligono)):!frenteDeCalle(b,c,normal,m.poligono))continue
+  const clave=[epoca,...ancla,...b,...c].map(x=>x.toFixed(3)).join(',');if(vistos.has(clave))continue;vistos.add(clave)
+  salida.push({manzana:m.id,epoca,vida:[epoca,epoca+1],ancla,origen,eje,normal,desde,hasta,largo:a.aPared[k*3+1],altoPiso:a.aPared[k*3+2],pisos:epoca===1?a.aInfo[info+3]:Math.floor(historia1843/16),semilla:a.aInfo[info+1]})
  }
  return salida
 }

@@ -761,8 +761,10 @@ window.lab.buscador = buscador
 // «listo» para quien espera a window.lab (los tests, las capturas): con los hitos ya en la escena, o descartados
 hitosPedidos.then(() => { window.lab.ready = true })
 if(detalleColonial && params.has('verbalcones'))Promise.all([casasPedidas,hitosPedidos]).then(()=>{
-  if(!detalleColonial.vista)return
-  levantar(true);alternarColor(true);cam.jump(detalleColonial.vista);pedirCuadro(3)
+  const epoca=params.get('verbalcones')==='1843'?2:1,vista=detalleColonial.vistaParaEpoca(epoca)
+  if(!vista)return
+  lineaDeTiempo.elegir(epoca)
+  levantar(true);alternarColor(true);cam.jump(vista);pedirCuadro(3)
 })
 // la segunda visita no baja ni revalida lo que no cambió (src/sw.js); no frena nada del arranque
 window.lab.servicio = registrarServiceWorker({ contenedor: navigator.serviceWorker, construido: import.meta.env.PROD, params })

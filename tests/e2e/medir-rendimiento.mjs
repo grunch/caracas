@@ -1,5 +1,6 @@
 // Medición de rendimiento del sitio (no es un test; specs/10-rendimiento.md):
 //   node tests/e2e/medir-rendimiento.mjs [url] [--gpu] [--liviano] [--salida archivo.json] [--estricto]
+// --epoca 1843 selecciona el año antes de medir las vistas (por defecto 1772).
 // --detalle-casas activa el piloto; --vistas archivo.json añade cámaras fijas para comparar el detalle.
 // Mide el arranque (hitos, tareas largas del hilo principal), lo que se baja antes de tocar nada (y en una
 // segunda visita, si hay service worker), la memoria
@@ -15,8 +16,10 @@ import { mediana, percentil, resumirPedidos, resumirTareas, compararConPresupues
 const args = process.argv.slice(2)
 const bandera = (n) => args.includes(n)
 const valorDe = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : null)
-const conValor = new Set(['--salida', '--vistas'])
+const conValor = new Set(['--salida', '--vistas', '--epoca'])
 const url = args.find((a, k) => !a.startsWith('--') && !conValor.has(args[k - 1])) ?? 'http://localhost:4173/'
+const epocas=[1578,1772,1843,1889,1911,1936],epoca=valorDe('--epoca')?epocas.indexOf(Number(valorDe('--epoca'))):1
+if(epoca<1)throw new Error('--epoca debe ser una época de la línea de tiempo')
 const GPU = bandera('--gpu')
 const ESPERA_MS = 300_000
 const QUIETO_MS = 4000 // después del último hito: lo que se pide solo, sin tocar nada
@@ -76,6 +79,7 @@ await Promise.all([
   hito('lineaDeTiempo', () => Boolean(window.lab?.lineaDeTiempo)),
   hito('arboles', () => Boolean(window.lab?.arboles)),
 ])
+await pagina.evaluate(e=>window.lab.lineaDeTiempo.elegir(e),epoca)
 await pagina.waitForTimeout(QUIETO_MS)
 
 const alAbrir = resumirPedidos([...pedidos.values()], url)
@@ -149,6 +153,7 @@ async function medirVista(vista) {
 const cuadro = {}
 for (const [nombre, vista] of Object.entries(VISTAS)) cuadro[nombre] = await medirVista(vista)
 
+const año=epocas[epoca]
 const detalleCasas=await pagina.evaluate(()=>window.lab.detalleColonial?.cuenta??null)
 
 // la segunda visita: la misma página abierta de nuevo, con lo que el service worker guardó (src/sw.js);
@@ -180,7 +185,7 @@ await navegador.close()
 
 const medicion = {
   url, gpu, conGpu: GPU, liviano: bandera('--liviano'), ventana: [1280, 800],
-  hitos, tareas, pedidos: alAbrir, segundaVisita, memoria, cuadro, detalleCasas,
+  hitos, tareas, pedidos: alAbrir, segundaVisita, memoria, cuadro, detalleCasas,año,
 }
 const presupuesto = JSON.parse(readFileSync(new URL('../../tools/rendimiento/presupuesto.json', import.meta.url), 'utf8'))
 const filas = compararConPresupuesto(medicion, presupuesto)

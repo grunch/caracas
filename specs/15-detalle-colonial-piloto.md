@@ -63,3 +63,32 @@ node tests/e2e/medir-rendimiento.mjs http://localhost:5183/ --gpu --detalle-casa
 - Capturas cercanas comparables antes/después sin errores de página ni compilación de shaders. Revisión visual humana y prueba en móviles pendientes; el PR se presenta listo para revisión por solicitud del responsable.
 
 Después de la optimización final: **5/5 E2E focalizados de piloto y acabado aprobados**. La prueba del piloto inspecciona primero el paquete servido y se omite de forma explícita si el release todavía no contiene paletas coloniales; con datos coloniales presentes, una extracción vacía sigue siendo un fallo.
+
+## Extensión a 1843 (T82.4)
+
+El mismo piloto se puede abrir en `?sinintro&detallecasas=1&verbalcones=1843`.
+Se mantienen las tres áreas del piloto, pero se extraen las fachadas de las casas **vivas en 1843**;
+no se prolonga la vida de las casas generadas para 1772. El estilo y el número de pisos se leen del
+byte de 1843 en `aHistoria`, como hace el shader nativo. Las fachadas republicanas quedan excluidas
+porque sus ventanas no usan el mismo reparto que los balcones coloniales.
+
+En el paquete local hay **115 tramos de fachada y 9 balcones** en 1843 (2, 5 y 2 por cuadra).
+Son menos que los 86 de 1772: no se inventan segundos pisos ni vanos para igualar el conteo.
+La referencia de calle anotada en `fuentes/imagenes/README.md` sigue siendo orientativa y de fecha
+no confirmada; no se incorpora ningún dato histórico nuevo.
+
+Para el contorno irregular procedente del plano, los dos extremos del tramo deben seguir el mismo
+lado de la cuadra a menos de 3 m y su normal debe apuntar hacia afuera (producto escalar > 0,9).
+Esta distancia es una tolerancia de selección de la geometría rasterizada, no una medida histórica:
+las piezas permanecen pegadas a la pared real, sin desplazarla. Se excluyen los muros orientados
+hacia patios y los tramos interiores. La selección de 1772 conserva su tolerancia de 30 cm.
+
+Los buffers se separan por cuadra **y época**, con vidas `[1,2)` y `[2,3)` respectivamente.
+Durante la ola pueden coexistir ambos lotes; el shader compartido decide cuál existe en cada punto.
+Cada época usa hasta seis mallas, o tres en modo liviano; durante la transición pueden ser doce.
+Después de visitar ambas épocas, el caché conserva un máximo de doce mallas y se libera al destruir
+la capa. El modo mínimo no carga el módulo. Las otras épocas no dibujan este detalle.
+
+Capturas locales de 1843: `../miraflores/entregables/detalle-colonial-1843/`.
+La comparación automatizada usa la cámara guardada en `reglas/detalle-colonial/1843/vistas.json`.
+La revisión de una persona y la medición en teléfonos siguen pendientes.

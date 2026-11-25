@@ -63,3 +63,33 @@ it('la cuenta dice si la capa va en modo liviano (render por software): ahí el 
  expect(capa.cuenta.liviano).toBe(true);expect(capa.cuenta.unidades[0].nivel).toBe(1)
  capa.liberar();material.dispose()
 })
+function paquete1843({estilo=0,pisos=2}={}){
+ const p=paquete();p.atributos.aHistoria=new Float32Array(8)
+ for(let i=0;i<4;i++){p.atributos.aInfo[i*4+2]=1;p.atributos.aVida.set([0,4],i*2);p.atributos.aHistoria.set([16+16*256+(estilo+16*pisos)*65536,16],i*2)}
+ return p
+}
+it('1843 lee estilo y pisos históricos, admite paleta nativa y limita la vida del detalle',async()=>{
+ const p=paquete1843(),[f]=extraerFrentes(p,[m]);expect(f).toMatchObject({epoca:2,pisos:2,vida:[2,3]})
+ const {geometriaDeDetalles}=await import('../../src/detalle-colonial.js');const g=geometriaDeDetalles([f]);expect(g.attributes.aVida.getX(0)).toBe(2);expect(g.attributes.aVida.getY(0)).toBe(3);g.dispose()
+ expect(extraerFrentes(paquete1843({estilo:1}),[m])).toHaveLength(0)
+ const [baja]=extraerFrentes(paquete1843({pisos:1}),[m]);expect(piezasDeFrente(baja).some(p=>p.tipo==='losa')).toBe(false)
+})
+it('1843 tolera el contorno rasterizado de calle pero excluye muros interiores e invertidos',()=>{
+ const p=paquete1843();for(let i=0;i<4;i++)p.atributos.position[i*3+2]=1.5
+ expect(extraerFrentes(p,[m])).toHaveLength(1)
+ for(let i=0;i<4;i++)p.atributos.normal[i*3+2]=1
+ expect(extraerFrentes(p,[m])).toHaveLength(0)
+ for(let i=0;i<4;i++){p.atributos.normal[i*3+2]=-1;p.atributos.position[i*3+2]=5}
+ expect(extraerFrentes(p,[m])).toHaveLength(0)
+})
+it('conserva lotes separados de 1772 y 1843 durante la ola y los reutiliza',async()=>{
+ const {crearDetalleColonial}=await import('../../src/detalle-colonial.js'),{crearMaterialCiudad}=await import('../../src/material.js')
+ const {U,material}=crearMaterialCiudad({plano:{ancho:1000,alto:1000,plaza:[0,0],metro:1},metro:1,mapa:null})
+ const capa=crearDetalleColonial({U,coords:{aMundo:(x,z)=>({x,z})},manzanas:[m]}),cam={position:{x:10,y:100,z:10}}
+ capa.agregar(paquete());capa.agregar(paquete1843());capa.finalizar();capa.actualizar(cam,[1]);expect(capa.cuenta.mallas).toBe(2)
+ capa.actualizar(cam,[1,2]);expect(capa.cuenta.mallas).toBe(4);const geometrías=capa.grupo.children.map(m=>m.geometry)
+ capa.actualizar(cam,[2]);expect(capa.cuenta.mallas).toBe(2);expect(capa.vistaParaEpoca(2)).not.toBeNull()
+ for(const e of [0,3,4,5]){capa.actualizar(cam,[e]);expect(capa.cuenta.mallas).toBe(0)}
+ capa.actualizar(cam,[1,2]);expect(capa.grupo.children.map(m=>m.geometry)).toEqual(geometrías)
+ capa.liberar();material.dispose()
+})
