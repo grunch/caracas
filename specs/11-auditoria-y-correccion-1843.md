@@ -1,6 +1,6 @@
 # Auditoría y corrección integral de Caracas en 1843
 
-Estado: plan del 24 de noviembre de 2026 (T81). Sin fases cerradas.
+Estado: plan del 24 de noviembre de 2026 (T81, #187). **Fase 1 cerrable, 7/7** ([cierre-fase1.json](auditoria-1843/cierre-fase1.json)): 25 sectores recorridos; [censo](auditoria-1843/censo.json) de 366 unidades (282 manzanas rayadas, 34 lotes especiales, 29 huertas, 3 plazas, 2 terrenos libres, 4 partes de otra, 12 descartadas; 58 lecturas dudosas a la vista); [calce por identidad](auditoria-1843/calce-identidad.md) con 53 esquinas numeradas (LOO RMS 12,4 m; el publicado se apartaba 115 m de mediana, I1843-001); [contraste](auditoria-1843/contraste-unidades.json) de cada unidad con el sitio; 10 sectores con control de calce y 8 en límite documentado sin anclas ([limites-calce.json](auditoria-1843/limites-calce.json)); 4 [incidencias](auditoria-1843/incidencias.json) con subtarea; toda la evidencia medida con el censo y el calce actuales. Los accesos a pie no son criterio de la fase 1 de 1843 (el original no dibuja frentes ni patios): se miden en la fase 7.
 
 Este documento repite para 1843 la auditoría de 1772 ([08](08-auditoria-y-correccion-1772.md)). **Valen las fases, los criterios de salida, las fichas de incidencia, las reglas para que una fase no deshaga otra y el flujo de PRs apilados de 08**; aquí se escribe solo lo que cambia en 1843 y el estado de cada fase. Donde este documento calla, manda 08 con «1843» en lugar de «1772».
 
@@ -16,7 +16,7 @@ Escaneo base: el facsímil litográfico de la NYPL (Lit. de Müller & Stapler, l
 |---|---|---|
 | Orientación | Poniente arriba | Norte arriba (rosa de los vientos en el plano) |
 | Ocupación | Rojo = edificado, amarillo = solar, por sectores de manzana | **Manzana entera rayada**: el plano no dibuja patios ni solares. El tipo de rayado identifica la **parroquia** (leyenda PARROQUIAS: Catedral, San Pablo, Altagracia, Candelaria, Santa Rosalía, San Juan), no la ocupación. Lotes en blanco con letra: iglesias y puntos notables; plazas en blanco; huertas y estancias punteadas o con árboles |
-| Identidad de los cruces | Contada a mano desde Las Monjas (damero) | **Esquinas numeradas 1–136 con su nombre** en la leyenda «Nombres de las Esquinas»; el número va impreso dentro de la manzana, junto a su esquina. Calles con nombre: 16 de norte a sur, 17 de este a oeste |
+| Identidad de los cruces | Contada a mano desde Las Monjas (damero) | **Esquinas numeradas 1–140 con su nombre** en la leyenda «Nombres de las Esquinas»; el número va impreso dentro de la manzana, junto a su esquina. Calles con nombre: 16 de norte a sur, 17 de este a oeste |
 | Cuadrícula de referencia | Ninguna | Cuadrícula impresa de columnas 1–16 y filas 1–17 sobre todo el plano |
 | Leyenda | Sin transcribir | Iglesias A–T, puntos notables a–z, puentes a–h, ríos U–Y, parroquias |
 | Casas en el sitio | Reconstrucción propia de 1772 (referencia curada) | Las casas de 1936 cuya huella cae en lo rayado de 1843 calzado (`tools/geo/epocas.py`); las de la reconstrucción de 1772 ceden a 1936 desde 1843 |
@@ -42,7 +42,7 @@ Mismo orden y mismos criterios de salida que 08. Evidencia en `auditoria-1843/`.
 
 | Fase | Trabajo propio de 1843 | Estado |
 |---|---|---|
-| 0. Preparación | Este plan; herramientas de 1772 que se reutilizan, parametrizadas por época solo cuando una fase las necesita, con la prueba de que los JSON de 1772 se regeneran idénticos | En curso |
+| 0. Preparación | Este plan; herramientas de 1772 que se reutilizan, parametrizadas por época solo cuando una fase las necesita, con la prueba de que los JSON de 1772 se regeneran idénticos | Hecha (#187); la fase 1 usa módulos propios (`esquinas_1843`, `controles_1843`, `manzanas_1843`, `censo_1843`, `contraste_1843`, `cierre_fase1_1843`) |
 | 1. Inventario | 1A baseline y calce por identidad con las esquinas numeradas; 1B censo por sectores de manzanas, tramos y frentes; 1C incidencias; 1D puerta de salida y subtareas | Pendiente |
 | 2. Referencia | Red y manzanas de 1843 con procedencia; lotes especiales con su letra de la leyenda | Pendiente |
 | 3. Calles y manzanas | Ninguna casa sobre una calle de 1843; calles de 1843 presentes; calles posteriores sin cortar manzanas de 1843 | Pendiente |
@@ -61,4 +61,13 @@ Las fases son secuenciales (PRs apilados), pero el trabajo de lectura dentro de 
 
 ## Subtareas
 
-Se crean al cerrar la entrega 1D, como en 08, con su incidencia, archivos, prueba y dependencia.
+Creadas al cerrar la entrega 1D. Cada una con su incidencia, su prueba y su dependencia; un PR por subtarea, apilados.
+
+| Subtarea | Incidencias / alcance | Archivos o capa | Prueba y aceptación | Dependencia |
+|---|---|---|---|---|
+| T81.2a | I1843-001: calce por identidad | `tools/geo/gcp/calce-1843-…json`, `esquinas_1843.py` | Hecha en #189: desvío mediano por sector bajo 15 m con al menos 2 anclas o límite documentado; sin pliegues; puertas de 1772 sin empeorar | 1A |
+| T81.2b | Referencia de 1843: manzanas rayadas, lotes especiales y plazas del censo como geometría con ID y procedencia, proyectada con el calce; validadores de duplicados, cruces y geometría inválida | `specs/auditoria-1843/`, `tools/geo/` | Cada unidad corregible con referencia; las dudosas no entran sin revisión; lo pendiente, explícito | 1D |
+| T81.3a | Calles de 1843 libres: ninguna casa viva en 1843 sobre una calle del original; calles posteriores sin cortar manzanas de 1843 | generador (`epocas.py`), puerta de fase 3 de 1843 | Casas sobre calles de 1843 = 0 medido sobre la referencia; las de I1843-004 reubicadas o quitadas | 2b |
+| T81.4a | I1843-002, I1843-004: lo edificado de 1843 desde la referencia, no desde el color | `epocas.py construido_de_epoca`, `epocas/epocas.json` | Manzanas rayadas sin casas: solo las que tienen motivo (hito, casa suelta sin pareja en 1936); puertas de 1772 sin empeorar | 2b |
+| T81.4b | I1843-003: lotes especiales y plazas sin casas genéricas en 1843 | reservas de ocupación, `src/hitos` (`pisaLaZona`) | 0 lotes especiales o plazas con casas, salvo excepción registrada | 4a |
+| T81.5a–8a | Alineación, cubiertas, cierres y verificación de lo que se ve en 1843, como 08 | puertas de 1772 extendidas a la época 2 | Criterios de 08 en 1843 | 4b |

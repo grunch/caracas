@@ -29,6 +29,47 @@
    ],
    "resolucion": "T81.2a: calce por identidad (etapas de correlación vacías, 53 anclas + 4 semillas); datos regenerados. Verificar sobre el sitio en la fase 8.",
    "pipeline": "tools/geo/gcp/calce-1843-nypl-jesurun-facsimil-muller-stapler.json → calce.py → epocas.py"
+  },
+  {
+   "id": "I1843-002",
+   "categoria": "casas faltantes o sobrantes",
+   "prioridad": "P1",
+   "estado": "confirmado",
+   "diferencia": "150 de las 282 manzanas rayadas del original no tienen ninguna casa a la vista en el sitio en 1843 (contraste-unidades.json: tolerancia 3.0 m, sin las casas que esconde un hito). Por rayado: diagonal 56 de 102 vacías; punteado 11 de 11 vacías; cruzado 19 de 34 vacías; horizontal 16 de 61 vacías; vertical 44 de 70 vacías.",
+   "diagnostico": "Confirmado en la lámina qa-1843 del generador: lo edificado de 1843 sale de un perfil de color único (epocas.json, canal L, umbral 185) que reconoce el rayado denso de la parroquia Catedral y pierde los rayados claros de las otras (zigzag, vertical, punteado, cruzado), sobre todo al este del Catuche y al sur. Una parte menor son casas sueltas en el campo (61 de las vacías miden menos de 2000 m²) y lotes de hitos que suprimen las casas genéricas.",
+   "evidencia": [
+    "specs/auditoria-1843/contraste-unidades.json",
+    "specs/auditoria-1843/censo.json",
+    "fuentes/derivados/epocas/qa-1843.jpg (fuera de git)"
+   ],
+   "resolucion": "T81.4a: lo edificado de 1843 desde la referencia del censo (manzanas rayadas proyectadas con el calce), no desde el color; depende de T81.2b (referencia).",
+   "pipeline": "tools/geo/epocas.py construido_de_epoca + tools/geo/epocas/epocas.json"
+  },
+  {
+   "id": "I1843-003",
+   "categoria": "conflicto con hitos",
+   "prioridad": "P1",
+   "estado": "por inspeccionar",
+   "diferencia": "9 lotes especiales o plazas del original tienen casas genéricas encima en 1843: U1843-0132 (h: 3), U1843-0147 (L: 4), U1843-0148 (K: 4), U1843-0149 (J: 3), U1843-0150 (M: 1), U1843-0232 (sin letra: 2), U1843-0249 (sin letra: 3), U1843-0266 (R: 2), U1843-0276 (o: 16).",
+   "diagnostico": "Hipótesis: casas de 1936 que el original pinta como lote blanco (iglesia, convento, punto notable) y que no suprime ningún hito; o bordes del lote proyectado (unos metros de calce). Falta recorrer cada uno.",
+   "evidencia": [
+    "specs/auditoria-1843/contraste-unidades.json"
+   ],
+   "resolucion": "T81.4b (reservas de lotes especiales y plazas en 1843).",
+   "pipeline": "tools/geo/epocas.py; src/hitos (pisaLaZona)"
+  },
+  {
+   "id": "I1843-004",
+   "categoria": "casas faltantes o sobrantes",
+   "prioridad": "P1",
+   "estado": "por inspeccionar",
+   "diferencia": "230 casas viven en 1843 fuera de toda unidad del censo (en calles de 1843, en campo o fuera de la ciudad dibujada).",
+   "diagnostico": "Hipótesis: casas de 1936 sobre calles o bordes de la ciudad de 1843 que la máscara de color tomó por rayado (las tiras al este del Catuche en qa-1843). Se resuelve con la máscara por referencia (T81.4a) y se vuelve a medir.",
+   "evidencia": [
+    "specs/auditoria-1843/contraste-unidades.json"
+   ],
+   "resolucion": "T81.4a, medida de nuevo en T81.3a (calles de 1843 libres).",
+   "pipeline": "tools/geo/epocas.py"
   }
  ]
 }
