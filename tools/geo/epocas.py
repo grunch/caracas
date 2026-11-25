@@ -883,8 +883,8 @@ def main():
             # T81.4b: ni en los lotes especiales, plazas y terrenos libres que el plano pinta en blanco
             ciudad, movidas = en_lotes_libres(ciudad, unidades, k)
             print(f"{e['año']}: {movidas} casas en lotes especiales, plazas o terrenos libres pasan a la época siguiente")
-            ciudad, informe = agregar_casas(ciudad, unidades, metro, k)
-            print(f"{e['año']}: casas propias en {informe['manzanas']} manzanas sin casas ({informe['casas']} casas)")
+            ciudad, informe = agregar_casas(ciudad, unidades, metro, k, hitos=locals().get("hitos", ()))
+            print(f"{e['año']}: casas propias en los frentes vacíos de {informe['manzanas']} manzanas ({informe['casas']} casas)")
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))
 
     casas = casas_por_epoca(ciudad["vida"])

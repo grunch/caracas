@@ -161,3 +161,28 @@ def test_frente_sobre_la_manzana_mide_el_tramo_de_fachada_y_no_un_punto():
     assert abs(frente_m(Polygon(_cuadrado(0, 0, 20)), borde, metro=0.5) - 20) < 1.5   # dos lados de 10 m sobre el borde (y los arranques de los otros)
     from epocas_1843 import FRENTE_MINIMO_M
     assert frente_m(Polygon([[0, 0], [10, 10], [0, 20], [-10, 10]]), borde, metro=0.5) < FRENTE_MINIMO_M   # solo arranques junto a los vértices
+
+
+def test_los_frentes_vacios_de_una_manzana_con_algunas_casas_se_rellenan_y_cada_tramo_muere_con_su_casa():
+    unidades = [{'id': 'B', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 200)}]
+    # una casa de 1936 viva en 1843 en la esquina y otra que nace en 1911 sobre el frente sur
+    ciudad = _ciudad([_cuadrado(0, 0, 40), _cuadrado(100, 180, 30)], [[2, 0], [4, 0]])
+    nueva, informe = agregar_casas(ciudad, unidades, metro=0.5, epoca=2)
+    v = nueva['vertices']
+    propias = [(Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]), vida)
+               for t, vida in zip(nueva['techos'][2:], nueva['vida'][2:])]
+    assert informe['casas'] > 20
+    assert all(p.intersection(Polygon(_cuadrado(0, 0, 40))).area < 1e-6 for p, _ in propias)
+    tardia = Polygon(_cuadrado(100, 180, 30))
+    assert {tuple(vd) for p, vd in propias if p.intersects(tardia)} == {(2, 4)}
+    assert {tuple(vd) for p, vd in propias if not p.intersects(tardia)} == {(2, 0)}
+
+
+def test_las_casas_propias_no_pisan_la_planta_de_un_hito_en_pie():
+    unidades = [{'id': 'B', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 200)}]
+    hitos = [{'nace': 1, 'muere': 0, 'planta': [_cuadrado(0, 0, 80)]}]
+    nueva, _ = agregar_casas(_ciudad([], []), unidades, metro=0.5, epoca=2, hitos=hitos)
+    v = nueva['vertices']
+    planta = Polygon(_cuadrado(0, 0, 80))
+    for t in nueva['techos']:
+        assert Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]).intersection(planta).area < 1e-6
