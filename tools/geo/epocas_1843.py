@@ -98,6 +98,15 @@ def _limpia(casa, metro, grilla=0.01):
     return g if g.area * metro ** 2 >= AREA_MINIMA_M2 and _ancho_m(g, metro) >= ANCHO_MINIMO_M else None
 
 
+FRENTE_MINIMO_M = 3.0   # una casa propia con menos fachada que esto sobre su manzana no da a la calle
+
+
+def frente_m(casa, borde, metro, tolerancia_m=FRENTE_SOBRE_LA_CALLE_M):
+    """Metros del contorno de la casa a menos de `tolerancia_m` del borde de la manzana: la fachada sobre la calle
+    (un vértice que toca el borde no es una fachada)."""
+    return casa.exterior.intersection(borde.buffer(tolerancia_m / metro)).length * metro
+
+
 def _centros(ciudad):
     v = np.asarray(ciudad['vertices'], float).reshape(-1, 2)
     return [Point(v[t[0]:t[0] + t[1]].mean(axis=0)) for t in ciudad['techos']]
@@ -153,7 +162,7 @@ def agregar_casas(ciudad, unidades, metro, epoca):
         manzanas += bool(casas)
         for casa in casas:
             casa = _limpia(casa, metro)
-            if casa is None or casa.distance(figura.exterior) * metro > FRENTE_SOBRE_LA_CALLE_M:
+            if casa is None or frente_m(casa, figura.exterior, metro) < FRENTE_MINIMO_M:
                 continue   # sin frente: lo que pisaba le comió la fachada
             puntos = list(casa.exterior.coords)[:-1]
             c = casa.centroid

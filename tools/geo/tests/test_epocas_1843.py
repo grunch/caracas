@@ -153,3 +153,11 @@ def test_un_edificio_dentro_de_una_huerta_lleva_sus_casas():
                 {'id': 'R', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(100, 100, 80)}]
     nueva, informe = agregar_casas(_ciudad([], []), unidades, metro=0.5, epoca=2)
     assert informe['manzanas'] == 1 and informe['casas'] > 0
+
+
+def test_frente_sobre_la_manzana_mide_el_tramo_de_fachada_y_no_un_punto():
+    from epocas_1843 import frente_m
+    borde = Polygon(_cuadrado(0, 0, 200)).exterior
+    assert abs(frente_m(Polygon(_cuadrado(0, 0, 20)), borde, metro=0.5) - 20) < 1.5   # dos lados de 10 m sobre el borde (y los arranques de los otros)
+    from epocas_1843 import FRENTE_MINIMO_M
+    assert frente_m(Polygon([[0, 0], [10, 10], [0, 20], [-10, 10]]), borde, metro=0.5) < FRENTE_MINIMO_M   # solo arranques junto a los vértices

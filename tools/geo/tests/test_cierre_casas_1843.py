@@ -52,3 +52,10 @@ def test_las_heredadas_en_limite_documentado_no_impiden_cerrar():
     r2 = con_limites(r, [astilla], limites, metro=0.5)
     assert r['cerrable'] is False and r2['cerrable'] is True
     assert r2['criterios']['huellas_sin_degenerar']['en_limite'] == [4]
+
+
+def test_una_casa_propia_que_solo_toca_la_manzana_con_una_esquina_no_tiene_frente():
+    esquina = [{'techo': 9, 'poligono': [[0, 0], [10, 10], [0, 20], [-10, 10]], 'propia': True}]   # rombo: un vértice en el borde
+    unidades = [{'id': 'A', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': [[0, -50], [100, -50], [100, 50], [0, 50]]}]
+    r = puerta(esquina, unidades, metro=0.5)
+    assert r['criterios']['frentes_propios_sobre_la_manzana']['fuera'] == [9]

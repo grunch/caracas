@@ -3,7 +3,7 @@
 
 Las puertas de 1772 miden contra los frentes y calles de su referencia, que 1843 no tiene: el plano de Jesurún
 dibuja manzanas enteras, sin frentes ni patios. Se mide lo equivalente (decisión por delegación del responsable,
-25-11-2026): casas sin solapes (fase 5), las casas propias con su frente sobre el borde de su manzana (fase 5),
+25-11-2026): casas sin solapes (fase 5), las casas propias con al menos 3 m de fachada a 0,5 m del borde de su manzana (fase 5),
 huellas que el visor puede techar (fase 6: sin astillas ni triángulos sin área), cada casa con un lado a media
 calle del borde de una manzana (fase 7: acceso; se exige a las casas propias de 1843: las heredadas de 1936 que
 quedan en el interior llegan a la calle por su lote de 1936 y se cuentan aparte) y ninguna casa en lotes especiales, plazas o terrenos libres.
@@ -21,6 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 SOLAPE_M2 = 0.01        # como la fase 5 de 1772
 FRENTE_M = 0.5          # tolerancia de la fachada sobre su recta (decisión 1 de specs/11)
+FRENTE_MINIMO_M = 3.0   # metros de fachada sobre la manzana para que la casa propia dé a la calle
 ACCESO_M = 3.0          # media calle angosta de 1843
 ANCHO_MINIMO_M = 2.0    # una huella más angosta que esto (área / lado mayor) es una astilla
 LIBRES = {'lote_especial', 'plaza', 'terreno_libre'}
@@ -52,7 +53,13 @@ def puerta(casas, unidades, metro):
         return min(f.exterior.distance(bordes[k]) for k in arbol_b.query(f.buffer(ACCESO_M / metro * 4))) \
             if len(arbol_b.query(f.buffer(ACCESO_M / metro * 4))) else np.inf
 
-    fuera = [c['techo'] for c, f in figuras if c.get('propia') and distancia_al_borde(f) * metro > FRENTE_M]
+    def frente(f):   # metros de fachada a menos de FRENTE_M del borde de alguna manzana (no el punto más cercano)
+        if arbol_b is None:
+            return 0.0
+        return max((f.exterior.intersection(bordes[k].buffer(FRENTE_M / metro)).length * metro
+                    for k in arbol_b.query(f.buffer(FRENTE_M / metro))), default=0.0)
+
+    fuera = [c['techo'] for c, f in figuras if c.get('propia') and frente(f) < FRENTE_MINIMO_M]
     lejos = [(c, distancia_al_borde(f) * metro > ACCESO_M) for c, f in figuras]
     sin_acceso = [c['techo'] for c, es in lejos if es and c.get('propia')]
     heredadas = [c['techo'] for c, es in lejos if es and not c.get('propia')]
