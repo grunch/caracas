@@ -80,3 +80,11 @@ def test_dos_cuadras_unidas_por_una_casa_que_tapa_la_calle_se_cuentan():
     tapon = [{'techo': 300, 'poligono': _rect(0, 320, 240, 600)}]    # con la fila de arriba, 120 × 150 m: más que una cuadra
     r = casas_por_manzana(manzanas_edificadas(_cuadra() + lejos + grande + tapon, METRO), METRO)
     assert r['mayores_que_una_cuadra']['n'] == 1
+
+
+def test_una_casa_suelta_en_el_patio_es_de_la_manzana_que_la_rodea_aunque_sea_su_propia_mancha():
+    for x0 in (26, 30, 34, 38, 42):   # la casa se mueve dentro del patio: el resultado no depende del árbol espacial
+        casas = _cuadra() + [{'techo': 50, 'poligono': _rect(x0, 30, x0 + 10, 44)}]
+        manzanas = manzanas_edificadas(casas, METRO)
+        assert len(manzanas) == 1
+        assert fila_por_frente(manzanas, METRO)['segunda_fila'] == [50]

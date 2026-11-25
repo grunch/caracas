@@ -60,9 +60,9 @@ Se llenan en F0 con fuente por celda. Hasta entonces, la puerta mide y reporta, 
 |---|---|---|---|---|---|---|---|---|---|
 | 1578 | 65 | 0 (0,0 %) | 0 de 65 | 9,8 m / 9,71 m | 0 m | 0 | 0 | — | — |
 | 1772 | 6.292 | 0 (0,0 %) | 926 de 6.292 | 11,81 m / 6,16 m | 152 m | 29 | 77 | 39,0 | 12,15 m |
-| 1843 | 10.284 | 2.311 (22,5 %) | 641 de 7.973 | 7,31 m / 4,14 m | 4.246 m | 52 | 25 | 46,0 | 11,25 m |
-| 1889 | 11.798 | 2.261 (19,2 %) | 923 de 9.537 | 8,01 m / 4,26 m | 4.866 m | 59 | 59 | 36,0 | 15,08 m |
-| 1911 | 14.195 | 2.003 (14,1 %) | 1.981 de 12.192 | 8,73 m / 4,42 m | 6.336 m | 64 | 82 | 36,0 | 16,73 m |
+| 1843 | 10.284 | 2.312 (22,5 %) | 641 de 7.972 | 7,31 m / 4,14 m | 4.228 m | 52 | 25 | 46,0 | 11,25 m |
+| 1889 | 11.798 | 2.262 (19,2 %) | 923 de 9.536 | 8,01 m / 4,26 m | 4.848 m | 59 | 59 | 36,0 | 15,08 m |
+| 1911 | 14.195 | 2.004 (14,1 %) | 1.981 de 12.191 | 8,74 m / 4,43 m | 6.274 m | 64 | 82 | 36,0 | 16,73 m |
 | 1936 | 35.440 | 1.991 (5,6 %) | 8.183 de 33.449 | 10,63 m / 4,55 m | 20.314 m | 69 | 128 | 37,0 | 17,38 m |
 
 Lectura: 1843, 1889 y 1911 tienen entre el 14 y el 22 % de sus casas en segunda fila (1772, ninguna: su auditoría alineó los frentes) y calles más angostas que 1772 (mediana de 7 a 9 m contra 12 m). Las casas por cuadra del damero (36 a 46) y el frente medio (11 a 17 m) se comparan con las fuentes cuando estén (F0).

@@ -705,6 +705,7 @@
    14162,
    14163,
    14164,
+   14171,
    14250,
    14251,
    14252,
@@ -2270,11 +2271,11 @@
    44375,
    44376
   ],
-  "parte_en_segunda_fila": 0.1916
+  "parte_en_segunda_fila": 0.1917
  },
  "R3": {
   "giro_maximo": 5.0,
-  "medidas": 9537,
+  "medidas": 9536,
   "n_giradas": 923,
   "giradas": [
    {
@@ -3480,10 +3481,10 @@
   ]
  },
  "R4": {
-  "muestras": 31179,
+  "muestras": 31170,
   "paso_m": 2.0,
   "metros_por_ancho": {
-   "0-2": 100.0,
+   "0-2": 82.0,
    "2-4": 4766.0,
    "4-6": 11424.0,
    "6-8": 14804.0,
@@ -3496,7 +3497,7 @@
  },
  "R6": {
   "total": 11798,
-  "n_manzanas": 262,
+  "n_manzanas": 261,
   "cuadras_del_damero": {
    "n": 59,
    "mediana_casas": 36.0,
@@ -3504,7 +3505,7 @@
   },
   "mayores_que_una_cuadra": {
    "n": 59,
-   "casas": 7776,
+   "casas": 7777,
    "centros": [
     [
      6174.2,
@@ -3835,7 +3836,7 @@
     ]
    },
    {
-    "casas": 260,
+    "casas": 261,
     "de_frente": 170,
     "borde_m": 2335.4,
     "area_ha": 6.564,
@@ -6213,17 +6214,6 @@
    {
     "casas": 1,
     "de_frente": 1,
-    "borde_m": 23.4,
-    "area_ha": 0.003,
-    "frente_medio_m": 23.44,
-    "centro": [
-     11227.8,
-     6664.4
-    ]
-   },
-   {
-    "casas": 1,
-    "de_frente": 1,
     "borde_m": 93.4,
     "area_ha": 0.053,
     "frente_medio_m": 93.44,
@@ -6631,7 +6621,7 @@
   ]
  },
  "resumen": {
-  "segunda_fila": 2261,
+  "segunda_fila": 2262,
   "giradas": 923
  },
  "pendientes": [

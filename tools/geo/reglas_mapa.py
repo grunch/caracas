@@ -72,6 +72,11 @@ def manzanas_edificadas(casas, metro=METRO):
     r = CIERRE_M / metro
     union = unary_union([f.buffer(r, join_style='mitre') for _, f in figuras]).buffer(-r, join_style='mitre')
     partes = [Polygon(p.exterior) for p in getattr(union, 'geoms', [union]) if not p.is_empty]
+    # una casa suelta en el patio de un anillo es su propia mancha, pero su manzana es la que la rodea: las manchas
+    # que caen dentro del contorno lleno de otra no son manzanas (como cierre_fase5.casas_sin_acceso)
+    arbol_p = STRtree(partes)
+    partes = [p for i, p in enumerate(partes)
+              if not any(j != i and partes[j].area > p.area and partes[j].contains(p) for j in arbol_p.query(p))]
     arbol = STRtree(partes)
     manzanas = [{'figura': p, 'casas': []} for p in partes]
     for c, f in figuras:
