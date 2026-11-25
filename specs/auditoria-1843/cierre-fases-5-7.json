@@ -1,7 +1,7 @@
 {
- "alcance": "Las puertas de 1772 miden contra los frentes y calles de su referencia, que 1843 no tiene: el plano de Jesurún dibuja manzanas enteras, sin frentes ni patios. Se mide lo equivalente (decisión por delegación del responsable, 25-11-2026): casas sin solapes (fase 5), las casas propias con su frente sobre el borde de su manzana (fase 5), huellas que el visor puede techar (fase 6: sin astillas ni triángulos sin área), cada casa con un lado a media calle del borde de una manzana (fase 7: acceso; se exige a las casas propias de 1843: las heredadas de 1936 que quedan en el interior llegan a la calle por su lote de 1936 y se cuentan aparte) y ninguna casa en lotes especiales, plazas o terrenos libres. Las casas que vienen de 1772 se miden igual, pero las de 1772 tienen su propia auditoría. Cuenta lo medido. ",
+ "alcance": "Las puertas de 1772 miden contra los frentes y calles de su referencia, que 1843 no tiene: el plano de Jesurún dibuja manzanas enteras, sin frentes ni patios. Se mide lo equivalente (decisión por delegación del responsable, 25-11-2026): casas sin solapes (fase 5), las casas propias con al menos 3 m de fachada a 0,5 m del borde de su manzana (fase 5), huellas que el visor puede techar (fase 6: sin astillas ni triángulos sin área), cada casa con un lado a media calle del borde de una manzana (fase 7: acceso; se exige a las casas propias de 1843: las heredadas de 1936 que quedan en el interior llegan a la calle por su lote de 1936 y se cuentan aparte) y ninguna casa en lotes especiales, plazas o terrenos libres. Las casas que vienen de 1772 se miden igual, pero las de 1772 tienen su propia auditoría. Cuenta lo medido. ",
  "cerrable": true,
- "casas": 6927,
+ "casas": 6926,
  "criterios": {
   "lotes_sin_solapes": {
    "cumplido": true,

@@ -1,7 +1,7 @@
 {
  "alcance": "Contraste 1C de 1843 (T81): el censo del original contra las casas que el sitio muestra en 1843.",
- "datos": "regenerado con la pila T81 (#189–#194, 3a, 4b, 5a), sin publicar",
- "casas_1843": 6927,
+ "datos": "regenerado sobre main con #197 (código final de T81), sin publicar",
+ "casas_1843": 6926,
  "casas_bajo_hitos": 23,
  "entradas": {
   "censo": {
@@ -14,7 +14,7 @@
   },
   "ciudad": {
    "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
-   "sha256": "17481730fe21f8e348892f6d5217c13a36b30f4b5cdbfc864c2ffa54c607ed60"
+   "sha256": "f8c67549b799133e9897541b5af9190904c1da5c04952b04017b5d16b9ffaf68"
   }
  },
  "tolerancia_m": 3.0,
@@ -2109,7 +2109,7 @@
   {
    "id": "U1843-0324",
    "ocupacion": "rayada",
-   "casas": 48,
+   "casas": 47,
    "estado": "con_casas"
   },
   {
