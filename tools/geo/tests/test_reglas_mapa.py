@@ -88,3 +88,13 @@ def test_una_casa_suelta_en_el_patio_es_de_la_manzana_que_la_rodea_aunque_sea_su
         manzanas = manzanas_edificadas(casas, METRO)
         assert len(manzanas) == 1
         assert fila_por_frente(manzanas, METRO)['segunda_fila'] == [50]
+
+
+def test_el_rayo_que_vuelve_a_entrar_en_su_propia_manzana_no_mide_una_calle():
+    # una manzana en U con un hueco de 5 m: el rayo del brazo izquierdo cruza el hueco, atraviesa el brazo derecho (de la
+    # misma manzana) y llega a la manzana de al lado a 29 m; eso no es una calle de 29 m
+    u = [{'techo': 0, 'poligono': [[0, 0], [100, 0], [100, 100], [60, 100], [60, 20], [50, 20], [50, 100], [0, 100]]}]
+    vecina = [{'techo': 1, 'poligono': _rect(108, 0, 200, 100)}]
+    r = anchos_de_calle(manzanas_edificadas(u + vecina, METRO), METRO)
+    assert r['metros_por_ancho']['15-30'] == 0
+    assert r['metros_por_ancho']['4-6'] > 0                # la calle de verdad, de 4 m, sí se mide

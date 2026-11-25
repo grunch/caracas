@@ -158,7 +158,9 @@ def anchos_de_calle(manzanas, metro=METRO):
                 rayo = LineString([p + afuera * 1e-3, p + afuera * alcance])
                 cortes = [Point(p).distance(rayo.intersection(figuras[k])) for k in arbol.query(rayo)
                           if k != i and rayo.intersects(figuras[k])]
-                if cortes:
+                # si antes vuelve a entrar en su propia manzana (el hueco de una U), lo que cruza no es una calle
+                propia = rayo.intersection(figuras[i])
+                if cortes and (propia.is_empty or Point(p).distance(propia) > min(cortes)):
                     anchos.append(min(cortes) * metro)
     por_clase = {f'{lo}-{hi}': round(sum(PASO_M for w in anchos if lo <= w < hi), 1) for lo, hi in CLASES_DE_ANCHO}
     return {'muestras': len(anchos), 'paso_m': PASO_M, 'metros_por_ancho': por_clase,
