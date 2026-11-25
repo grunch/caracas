@@ -124,3 +124,25 @@ def test_las_casas_propias_no_pisan_casas_vivas_ni_quedan_astillas():
     for p in propias:
         lados = np.diff(np.asarray(p.minimum_rotated_rectangle.exterior.coords), axis=0)
         assert p.area * 0.25 / (max(np.hypot(*lados.T)) * 0.5) >= ANCHO_MINIMO_M - 1e-9
+
+
+def test_las_huellas_propias_son_validas_tal_como_se_guardan():
+    unidades = [{'id': 'B', 'ocupacion': 'rayada', 'estado': 'aprobada',
+                 'poligono': [[0, 0], [203.337, 1.111], [199.9, 97.71], [101.03, 160.2], [-2.5, 99.99]]},
+                {'id': 'L', 'ocupacion': 'lote_especial', 'estado': 'aprobada', 'poligono': [[60, 0.5], [90.3, 0.7], [90, 30.01], [60.2, 29.9]]}]
+    nueva, _ = agregar_casas(_ciudad([], []), unidades, metro=0.5, epoca=2)
+    v = nueva['vertices']
+    for t in nueva['techos']:
+        pts = [(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]
+        assert Polygon(pts).is_valid and len(set(pts)) == len(pts)
+
+
+def test_las_casas_propias_dan_a_la_calle_y_no_se_tocan():
+    unidades = [{'id': 'B', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 200)},
+                {'id': 'L', 'ocupacion': 'lote_especial', 'estado': 'aprobada', 'poligono': [[30, -5], [70, -5], [70, 8], [30, 8]]}]
+    nueva, _ = agregar_casas(_ciudad([], []), unidades, metro=0.5, epoca=2)
+    v = nueva['vertices']
+    borde = Polygon(_cuadrado(0, 0, 200)).exterior
+    casas = [Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]) for t in nueva['techos']]
+    assert all(c.distance(borde) * 0.5 <= 0.5 for c in casas)
+    assert all(a.intersection(b).area * 0.25 <= 0.01 for k, a in enumerate(casas) for b in casas[k + 1:])

@@ -9,6 +9,7 @@ la primera época en que una casa de 1936 aparece en la manzana (o siempre, si n
 Lógica pura sobre la ciudad del generador (vértices y techos en px del mosaico de 1936).
 """
 import numpy as np
+import shapely
 from shapely.geometry import LineString, Point, Polygon
 from shapely.geometry.polygon import orient
 from shapely.strtree import STRtree
@@ -19,6 +20,7 @@ CRUJIA_M = 8.0       # fondo de la crujía de frente de una casa colonial de un 
 FRENTE_M = 10.0      # ancho de un lote de frente
 RETIRO_M = 0.2       # la casa no toca el borde leído de la manzana; menos que la tolerancia de fachada (0,5 m)
 AREA_MINIMA_M2 = 12.0
+FRENTE_SOBRE_LA_CALLE_M = 0.5   # la fachada sobre el borde de la manzana (tolerancia de specs/11, decisión 1)
 ANCHO_MINIMO_M = 2.0  # una casa más angosta que esto (área / lado mayor) es una astilla de esquina: no se levanta
 VUELO_POR_OMISION = 255   # como las casas de 1578: sin tope de alero
 
@@ -85,6 +87,17 @@ def _sin(casa, libres, metro):
     return casa
 
 
+def _limpia(casa, metro, grilla=0.01):
+    """La huella en una grilla de `grilla` px, válida tal como se va a guardar (sin puntos repetidos ni lados que
+    se toquen): el empaquetador y las puertas leen esas mismas coordenadas. None si no queda una casa válida."""
+    g = shapely.set_precision(casa.buffer(-2 * grilla, join_style=2), grilla)   # encogida: el ajuste no la solapa
+    if g.geom_type == 'MultiPolygon':
+        g = max(g.geoms, key=lambda x: x.area)
+    if g.is_empty or g.geom_type != 'Polygon' or not g.is_valid or g.interiors:
+        return None
+    return g if g.area * metro ** 2 >= AREA_MINIMA_M2 and _ancho_m(g, metro) >= ANCHO_MINIMO_M else None
+
+
 def _centros(ciudad):
     v = np.asarray(ciudad['vertices'], float).reshape(-1, 2)
     return [Point(v[t[0]:t[0] + t[1]].mean(axis=0)) for t in ciudad['techos']]
@@ -138,10 +151,13 @@ def agregar_casas(ciudad, unidades, metro, epoca):
         puestas += casas
         manzanas += bool(casas)
         for casa in casas:
+            casa = _limpia(casa, metro)
+            if casa is None or casa.distance(figura.exterior) * metro > FRENTE_SOBRE_LA_CALLE_M:
+                continue   # sin frente: lo que pisaba le comió la fachada
             puntos = list(casa.exterior.coords)[:-1]
             c = casa.centroid
             techos.append([len(vertices) // 2, len(puntos), 1, ESTILO_COLONIAL, semilla_de(c.x, c.y)])
-            vertices += [round(float(x), 2) for p in puntos for x in p]
+            vertices += [float(x) for p in puntos for x in p]
             esquinas.append(0)
             vida.append([epoca, muere])
             vuelos.append(VUELO_POR_OMISION)
