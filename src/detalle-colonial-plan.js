@@ -19,7 +19,7 @@ export function extraerFrentes({atributos:a,indices},manzanas){
  const salida=[],vistos=new Set(),p=a.position
  for(let j=0;j<indices.length;j+=3){
   const k=indices[j],info=k*4
-  if(a.aInfo[info+2]<256||a.aInfo[info+2]%256!==0||a.aVida[k*2]!==1||a.aVida[k*2+1]!==2||a.aPared[k*3+1]<1.8||Math.abs(a.normal[k*3+1])>.01||a.aTecho[k*4+3]>.5)continue
+  if(a.aInfo[info+2]<256||a.aInfo[info+2]%256!==0||a.aVida[k*2]!==1||![2,3].includes(a.aVida[k*2+1])||a.aPared[k*3+1]<1.8||Math.abs(a.normal[k*3+1])>.01||a.aTecho[k*4+3]>.5)continue
   const ancla=Array.from(a.aAncla.slice(k*2,k*2+2)),m=manzanas.find(m=>puntoEnPoligono(ancla,m.poligono))
   if(!m)continue
   const bajos=Array.from(indices.slice(j,j+3)).filter(v=>Math.abs(p[v*3+1])<.001).sort((x,y)=>a.aPared[x*3]-a.aPared[y*3])
@@ -30,7 +30,7 @@ export function extraerFrentes({atributos:a,indices},manzanas){
   if(!enBorde(b,m.poligono)||!enBorde(c,m.poligono)||!enBorde([(b[0]+c[0])/2,(b[1]+c[1])/2],m.poligono))continue
   const eje=[(c[0]-b[0])/du,(c[1]-b[1])/du],origen=[b[0]-desde*eje[0],b[1]-desde*eje[1]],normal=[a.normal[k*3],a.normal[k*3+2]].map(x=>x/Math.hypot(a.normal[k*3],a.normal[k*3+2]))
   const clave=[...ancla,...b,...c].map(x=>x.toFixed(3)).join(',');if(vistos.has(clave))continue;vistos.add(clave)
-  salida.push({manzana:m.id,ancla,origen,eje,normal,desde,hasta,largo:a.aPared[k*3+1],altoPiso:a.aPared[k*3+2],pisos:a.aInfo[info+3],semilla:a.aInfo[info+1]})
+  salida.push({manzana:m.id,vida:[1,a.aVida[k*2+1]],ancla,origen,eje,normal,desde,hasta,largo:a.aPared[k*3+1],altoPiso:a.aPared[k*3+2],pisos:a.aInfo[info+3],semilla:a.aInfo[info+1]})
  }
  return salida
 }

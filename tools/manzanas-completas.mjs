@@ -5,16 +5,16 @@ import {casasDeManzana,cantidadPorDistancia} from './manzanas-1772-lib.mjs'
 import {areaConSigno} from '../src/poligono.js'
 const PY=process.env.PY??new URL('../.venv/bin/python',import.meta.url).pathname
 const SCRIPT=new URL('./geo/manzanas_completas.py',import.meta.url).pathname
-function espacial(modo,entrada,archivo){
+export function espacial(modo,entrada,archivo){
  const r=spawnSync(PY,[SCRIPT,modo,...(archivo?[archivo]:[])],{input:JSON.stringify(entrada),encoding:'utf8',maxBuffer:128*1024*1024})
  if(r.error||r.status!==0)throw new Error(r.error?.message??r.stderr)
  return JSON.parse(r.stdout)
 }
-function techosDeHitos(meta){
+export function techosDeHitos(meta,epoca=1){
  const coords=crearCoords(meta),g=construirHitos(HITOS,coords),poligonos=[]
  for(let i=0;i<g.indices.length;i+=3){
   const k=g.indices[i],n=g.vidas[k*2],f=g.vidas[k*2+1]
-  if(n>1||f&&f<=1||g.normales[k*3+1]<.2)continue
+  if(n>epoca||f&&f<=epoca||g.normales[k*3+1]<.2)continue
   const [r,v,b]=g.colores.slice(k*3,k*3+3)
   if(v>r*1.05&&v>b*1.1)continue // vegetación del propio modelo: no es un tejado
   const ks=Array.from(g.indices.slice(i,i+3));if(ks.every(j=>g.posiciones[j*3+1]<2))continue

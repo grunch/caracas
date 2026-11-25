@@ -22,7 +22,7 @@ export function geometriaDeDetalles(frentes,fino=false){
    const k=j*24+i,x=c.x+p.getX(i)*c.w,z=c.z+p.getZ(i)*c.d
    datos.posiciones.set([f.origen[0]+f.eje[0]*x+f.normal[0]*z,c.y+p.getY(i)*c.h,f.origen[1]+f.eje[1]*x+f.normal[1]*z],k*3)
    datos.normales.set([f.eje[0]*n.getX(i)+f.normal[0]*n.getZ(i),n.getY(i),f.eje[1]*n.getX(i)+f.normal[1]*n.getZ(i)],k*3)
-   datos.colores.set(color,k*3);datos.hitos.set([dist,f.semilla,0,0],k*4);datos.vidas.set([1,2],k*2)
+   datos.colores.set(color,k*3);datos.hitos.set([dist,f.semilla,0,0],k*4);datos.vidas.set(f.vida,k*2)
    datos.anclas.set([...f.ancla,...f.ancla],k*4);datos.uvs.set([uv.getX(i),uv.getY(i)],k*2)
   }
   for(let i=0;i<36;i++)datos.indices[j*36+i]=j*24+unidad.index.array[i]
@@ -60,7 +60,7 @@ export function crearDetalleColonial({coords,U,liviano=false,manzanas=PILOTO_COL
    let cambio=false
    for(const m of unidades){
     const y=alturaEn(...m.centro)+5,d=Math.max(0,Math.hypot(camera.position.x-m.centro[0],camera.position.y-y,camera.position.z-m.centro[1])-m.radio)
-    const nivel=epocas.includes(1)&&m.frentes.length?nivelDetalle(d,m.nivel,liviano):0
+    const nivel=m.frentes.some(f=>epocas.some(e=>e>=f.vida[0]&&e<f.vida[1]))?nivelDetalle(d,m.nivel,liviano):0
     if(nivel===m.nivel)continue
     if(nivel&&!m.mallas)construir(m)
     m.nivel=nivel;cambio=true
