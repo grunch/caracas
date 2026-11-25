@@ -85,11 +85,11 @@ describe('alzarCasa: lote profundo con patio', () => {
     }
   })
 
-  test('las paredes del patio bajan del alero de cada ala hasta el suelo y llevan vanos', () => {
+  test('las paredes del patio bajan del alero de cada ala hasta el suelo y llevan su puerta (largo negativo, R5)', () => {
     const deAdentro = vertices.filter((v) => esPared(v) && enElPatio(v) && v.u > 0.01 && v.u < 11.99)
     expect(deAdentro.length).toBeGreaterThanOrEqual(12) // la crujía, las dos alas y el fondo
     expect(Math.min(...deAdentro.map((v) => v.y))).toBe(0)
-    expect(deAdentro.filter((v) => v.pared[1] > 0).length).toBeGreaterThanOrEqual(12)
+    expect(deAdentro.filter((v) => v.pared[1] < 0).length).toBeGreaterThanOrEqual(12)
     // miran hacia el patio
     const centro = [(Math.min(...pu) + Math.max(...pu)) / 2, (Math.min(...pv) + Math.max(...pv)) / 2]
     for (const v of deAdentro.filter((q) => q.y === 0)) {
@@ -189,7 +189,8 @@ describe('alzarCasa: azotea y tapia', () => {
     const tapia = vertices.filter((v) => esPared(v) && Math.abs(v.u - lado) < 1e-9 && v.v > Math.min(...patio.region.map((p) => p[1])) + 0.01
       && v.v < Math.max(...patio.region.map((p) => p[1])) - 0.01)
     const delBorde = vertices.filter((v) => esPared(v) && Math.abs(v.u - lado) < 1e-9 && Math.abs(v.n[0]) > 0.9
-      && v.v >= Math.min(...patio.region.map((p) => p[1])) - 1e-9 && v.v <= Math.max(...patio.region.map((p) => p[1])) + 1e-9 && v.pared[1] === 0)
+      && v.v > Math.min(...patio.region.map((p) => p[1])) + 0.01 && v.v < Math.max(...patio.region.map((p) => p[1])) - 0.01 && v.pared[1] === 0)
+    // (estrictamente dentro del tramo del patio: desde R5 la medianera de la crujía también es ciega, y es más alta)
     expect(tapia.length + delBorde.length).toBeGreaterThanOrEqual(8) // por fuera y por dentro
     expect(Math.max(...delBorde.map((v) => v.y))).toBeCloseTo(2.6, 9)
   })
@@ -275,5 +276,34 @@ describe('alzarCasa: un ala estirada fuera de su lote', () => {
       const [u, v, y] = ['u', 'v', 'y'].map((c) => (vs[0][c] + vs[1][c] + vs[2][c]) / 3)
       expect(plan.faldones.filter((f) => !f.hueco).some((f) => Math.abs(alturaDe(f, u, v) - y) < 1e-6), `(${u.toFixed(2)}, ${v.toFixed(2)})`).toBe(true)
     }
+  })
+})
+
+describe('R5 (specs/13): la fachada da a la calle; al patio, una puerta; las medianeras, ciegas', () => {
+  const afuera = (L, D) => (v) => esPared(v) && v.n[1] === 0 && (Math.abs(v.v) < 1e-6 || Math.abs(v.v - D) < 1e-6 || Math.abs(v.u) < 1e-6 || Math.abs(v.u - L) < 1e-6)
+  const lado = (v, L, D) => (v.n[2] < -0.9 ? 'frente' : v.n[2] > 0.9 ? 'fondo' : v.n[0] < -0.9 ? 'izq' : v.n[0] > 0.9 ? 'der' : null)
+
+  test('entre medianeras, solo el frente lleva vanos: los costados y el fondo quedan ciegos', () => {
+    const { vertices } = alzar(10, 8)
+    const exteriores = vertices.filter(afuera(10, 8)).filter((v) => v.y === 0)
+    const conVanos = new Set(exteriores.filter((v) => v.pared[1] !== 0).map((v) => lado(v, 10, 8)))
+    expect(conVanos).toEqual(new Set(['frente']))
+  })
+
+  test('en la esquina, las dos calles llevan fachada; la medianera y el fondo, no', () => {
+    const { vertices } = alzar(10, 8, {}, { der: true })
+    const exteriores = vertices.filter(afuera(10, 8)).filter((v) => v.y === 0)
+    expect(new Set(exteriores.filter((v) => v.pared[1] > 0).map((v) => lado(v, 10, 8)))).toEqual(new Set(['frente', 'der']))
+    expect(exteriores.filter((v) => lado(v, 10, 8) === 'izq' || lado(v, 10, 8) === 'fondo').every((v) => v.pared[1] === 0)).toBe(true)
+  })
+
+  test('las paredes que dan al patio propio se marcan de patio (largo negativo): el shader les pone solo una puerta', () => {
+    const { vertices } = alzar(12, 26, { alas: ALAS_12X26 })
+    const delPatio = vertices.filter((v) => esPared(v) && v.u > 4 - 1e-6 && v.u < 8 + 1e-6 && v.v > 7 - 1e-6 && v.v < 20 + 1e-6 && v.y === 0)
+    expect(delPatio.length).toBeGreaterThan(0)
+    expect(delPatio.every((v) => v.pared[1] <= 0)).toBe(true)
+    expect(delPatio.some((v) => v.pared[1] < 0)).toBe(true)
+    const frente = vertices.filter((v) => esPared(v) && Math.abs(v.v) < 1e-6 && v.n[2] < -0.9)
+    expect(frente.some((v) => v.pared[1] > 0)).toBe(true)
   })
 })

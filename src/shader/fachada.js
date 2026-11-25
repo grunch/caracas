@@ -240,12 +240,20 @@ export const GLSL_FACHADA = /* glsl */ `
     return clamp(2.0 * m.medio / m.pano * (m.dintel - m.alfeizar) / gAltoPiso * (1.0 - 0.5 * m.ciegos), 0.0, 0.6);
   }
 
+  /** El vano de una pared que da al patio propio (R5 de specs/13): la puerta por donde se sale al patio, en el paño
+   *  del medio de la planta baja; lo demás, liso. La fachada con ventanas es solo para la calle. */
+  float vanoDePatio(float i, float n, float piso) {
+    if (piso > 0.5) return NADA;
+    return abs(i - floor(0.5 * n)) < 0.5 ? PUERTA : NADA;
+  }
+
   /** La fachada de una pared: rgb, su color; a, su tinta en el grabado. pared = (metros desde la esquina,
    *  largo de la pared); h = altura sobre la base de la casa; info = aInfo; base = paredColor(); w2 =
    *  metros por píxel a lo largo y a lo alto (fwidth, tomado en el main fuera de toda rama). La pared se
    *  parte en paños y pisos; cada paño lleva su vano según el estilo y la semilla. */
   vec4 fachadaEn(vec2 pared, float h, vec4 info, vec3 base, vec2 w2) {
-    float largo = pared.y;
+    float largo = abs(pared.y);
+    bool dePatio = pared.y < 0.0; // la pared que da al patio propio: solo su puerta (src/alzado.js, R5 de specs/13)
     if (largo < 0.01 || info.w < 0.5) return vec4(base, 0.0);
     float u = pared.x, semilla = info.y, estilo = info.z, pisos = info.w;
     float alto = pisos * gAltoPiso + gPretil, t = alto - h;
@@ -260,17 +268,17 @@ export const GLSL_FACHADA = /* glsl */ `
 
     // de lejos, el tono medio de la pared con sus vanos; tan lejos que no queda detalle, ni se dibuja
     float cerca = detalle(2.5, max(w2.x, w2.y));
-    float cob = n > 0.5 ? cobertura(m) : 0.0;
+    float cob = n > 0.5 ? (dePatio ? cobertura(m) / max(n, 1.0) : cobertura(m)) : 0.0;
     vec4 lejos = vec4(base * (1.0 - 0.4 * cob), 0.5 * cob);
     if (cerca <= 0.0) return lejos;
 
     vec3 c = base;
     float k = 0.0;
     textura(c, k, estilo, semilla, sem, piso, u, h, w2);
-    pilastras(c, k, estilo, x, p, h, alto - m.remate, w2);
+    if (!dePatio) pilastras(c, k, estilo, x, p, h, alto - m.remate, w2); // el ornato es de la fachada a la calle
     losas(c, k, estilo, piso, pisos, y, w2);
-    if (n > 0.5 && t > m.remate) vano(c, k, tipoDeVano(m, estilo, sem, i, n, piso), m, estilo, semilla, sem, i, piso, p, x, y, w2);
-    porche(c, k, estilo, i, n, piso, x, y, p, w2);
+    if (n > 0.5 && t > m.remate) vano(c, k, dePatio ? vanoDePatio(i, n, piso) : tipoDeVano(m, estilo, sem, i, n, piso), m, estilo, semilla, sem, i, piso, p, x, y, w2);
+    if (!dePatio) porche(c, k, estilo, i, n, piso, x, y, p, w2);
     remate(c, k, estilo, semilla, m, x, p, u, t, w2);
     return mix(lejos, vec4(c, clamp(k, 0.0, 1.0)), cerca);
   }`

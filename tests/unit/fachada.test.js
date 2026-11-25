@@ -158,3 +158,19 @@ describe('fachadas: tinta y LOD', () => {
     expect(cuerpo(GLSL_FACHADA, 'barras')).toMatch(/mix\(g \/ per, /) // lo fino se vuelve su promedio
   })
 })
+
+describe('R5 (specs/13): la pared de patio (largo negativo) lleva solo su puerta', () => {
+  test('fachadaEn toma el largo en valor absoluto y reconoce la pared de patio por el signo', () => {
+    const f = cuerpo(GLSL_FACHADA, 'fachadaEn')
+    expect(f).toMatch(/float largo = abs\(pared\.y\);/)
+    expect(f).toMatch(/bool dePatio = pared\.y < 0\.0;/)
+  })
+  test('en una pared de patio el vano es la puerta del paño del medio, en la planta baja; los demás paños, lisos', () => {
+    const f = cuerpo(GLSL_FACHADA, 'fachadaEn')
+    expect(f).toMatch(/dePatio \? vanoDePatio\(i, n, piso\) : tipoDeVano\(/)
+    const v = cuerpo(GLSL_FACHADA, 'vanoDePatio')
+    expect(v).toContain('PUERTA')
+    expect(v).toContain('NADA')
+    expect(v).toMatch(/piso > 0\.5/)
+  })
+})

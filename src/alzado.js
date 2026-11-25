@@ -6,7 +6,8 @@
  *
  * No sabe de buffers ni del mundo: escribe por `salida.vertice(u, v, y, normal, pared, techo)` y
  * `salida.triangulo(a, b, c, normal)`, con la normal en el marco del lote [nu, ny, nv];
- * pared = [metros a lo largo de la pared, largo de la pared (0 = sin vanos), alto de piso]; techo =
+ * pared = [metros a lo largo de la pared, largo de la pared (0 = sin vanos; negativo = pared de patio, solo con su
+ * puerta: R5 de specs/13), alto de piso]; techo =
  * [s a lo largo del alero, t bajando desde la cumbrera, largo del faldón, cubierta] (src/shader/techo.js);
  * en las paredes, techo = [lo que sube este vértice con el pretil, lo que sube su pared, 0, 0].
  */
@@ -227,7 +228,8 @@ function tramoDePared({ casa, a, b, largo, n, aLaCalle }, t0, t1, salida) {
   const esHastial = Math.max(techo[0], techo[1]) > plan.alto + SUBIDA_DE_HASTIAL_M
   const pretil = !f?.borde && aLaCalle && plan.pretil > 0 && !esHastial ? plan.pretil : 0
   const bajo = Math.min(arriba[0], arriba[1])
-  const conVanos = !f?.hueco && bajo >= ALTO_MINIMO_CON_VANOS_M
+  // la fachada (puerta y ventanas) va solo en lo que da a la calle; las medianeras y el fondo quedan ciegos (R5, specs/13)
+  const conVanos = aLaCalle && !f?.hueco && bajo >= ALTO_MINIMO_CON_VANOS_M
   const altoPiso = aLaCalle || bajo >= plan.alto ? plan.altoPiso : bajo / plan.pisos
   const pared = (t) => [t * largo, conVanos ? largo : 0, altoPiso]
   const lisa = [0, 0, plan.altoPiso]
@@ -256,7 +258,7 @@ function hayVecinaAfuera(casa, p0, p1, n, vuelo) {
 
 /**
  * Los escalones: donde un faldón queda más alto que su vecino (la crujía sobre el ala, el ala sobre el
- * patio), la pared que baja del uno al otro. Las que dan al patio llevan sus vanos.
+ * patio), la pared que baja del uno al otro. Las que dan al patio llevan su puerta (largo negativo).
  */
 function escalones({ anillo, plan }, salida) {
   for (const f of plan.faldones) {
@@ -289,7 +291,9 @@ function escalon({ anillo, plan, f, n }, p0, p1, salida) {
   const bajo = Math.min(arriba[0], arriba[1])
   const conVanos = Boolean(vecino.hueco) && bajo >= ALTO_MINIMO_CON_VANOS_M
   const altoPiso = Math.min(bajo / plan.pisos, plan.altoPiso)
-  muro(salida, p0, p1, abajo, arriba, n, [0, conVanos ? largo : 0, altoPiso], [largo, conVanos ? largo : 0, altoPiso])
+  // la pared que da al patio propio: el largo va negativo y el shader le pone solo la puerta por donde se sale al patio
+  const marca = conVanos ? -largo : 0
+  muro(salida, p0, p1, abajo, arriba, n, [0, marca, altoPiso], [largo, marca, altoPiso])
 }
 
 /**

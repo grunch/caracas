@@ -256,9 +256,9 @@ describe('alzarCasa con un plan de alas', () => {
     for (const v of vertices.filter((q) => q.cubierta === CUBIERTA.TEJA)) expect(v.techo[2]).toBeLessThan(8)
   })
 
-  test('los patios tienen paredes con vanos; el solar no lleva cerca: el fondo de la cuadra es un solo suelo abierto', () => {
+  test('los patios tienen paredes con su puerta (largo negativo, R5); el solar no lleva cerca: el fondo de la cuadra es un solo suelo abierto', () => {
     const delPatio = vertices.filter((v) => v.cubierta === CUBIERTA.PARED && v.u > 4 - 1e-6 && v.u < 8 + 1e-6 && v.v > 18 - 1e-6 && v.v < 24 + 1e-6)
-    expect(delPatio.filter((v) => v.pared[1] > 0).length).toBeGreaterThanOrEqual(16) // cuatro paredes
+    expect(delPatio.filter((v) => v.pared[1] < 0).length).toBeGreaterThanOrEqual(16) // cuatro paredes
     const tapia = vertices.filter((v) => v.cubierta === CUBIERTA.PARED && Math.abs(v.v - 40) < 1e-6 && Math.abs(v.n[2]) > 0.9)
     expect(tapia).toEqual([]) // sin cerca entre solares: ni línea levantada ni su sombra
   })
