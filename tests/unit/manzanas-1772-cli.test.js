@@ -38,6 +38,8 @@ describe('tools/auditar-manzanas-1772.mjs',()=>{
   const r=correr('tools/auditar-manzanas-1772.mjs',[path.join(dir,'antes'),path.join(dir,'despues'),informe])
   expect(r.salida).not.toMatch(/TypeError/)
   expect(r.codigo).toBe(0)
-  expect(JSON.parse(readFileSync(informe,'utf8')).epocas).toHaveLength(6)
+  const epocas=JSON.parse(readFileSync(informe,'utf8')).epocas
+  expect(epocas).toHaveLength(6)
+  expect(epocas.every(e=>e.arbolesAntes.cantidad===0&&typeof e.arbolesAntes.sha256==='string')).toBe(true)
  })
 })

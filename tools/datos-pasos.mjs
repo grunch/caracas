@@ -143,10 +143,17 @@ export const PASOS = [
     cmd: () => ['node', 'tools/manzanas-1772.mjs', `${E}/ciudad-estilos.json`, `${E}/ciudad-manzanas.json`],
   },
   {
+    id: 'manzanas-1843',
+    entradas: [`${E}/ciudad-manzanas.json`, `${E}/manzanas-1772-informe.json`, `${D}/mosaico.json`, 'tools/geo/referencias/1843-manzanas.json'],
+    salidas: [`${E}/ciudad-manzanas-1843.json`, `${E}/manzanas-1843-informe.json`],
+    codigo: ['tools/manzanas-1843.mjs', 'tools/manzanas-1843-lib.mjs', 'tools/geo/ampliacion_manzanas.py', 'tools/manzanas-completas.mjs', 'tools/geo/manzanas_completas.py', 'tools/manzanas-1772-lib.mjs', 'tools/manzanas-reservas-lib.mjs', 'src/hitos.js', 'src/coords.js', ...CODIGO_HITOS, 'src/manzanas/plan.js', 'src/manzanas/paleta.js', 'src/manzanas/perimetro.js', 'src/poligono.js', 'src/alas.js'],
+    cmd: () => ['node', 'tools/manzanas-1843.mjs', `${E}/ciudad-manzanas.json`, `${E}/ciudad-manzanas-1843.json`],
+  },
+  {
     // la ciudad que se publica: la de las épocas, con estilos (la de 1936 sola no tiene "vida")
-    id: 'empacar', entradas: [`${E}/ciudad-manzanas.json`], salidas: ['public/datos/ciudad.pak'],
+    id: 'empacar', entradas: [`${E}/ciudad-manzanas-1843.json`], salidas: ['public/datos/ciudad.pak'],
     codigo: ['tools/empacar-ciudad.mjs', 'tools/empacar-lib.mjs', 'tools/pak.mjs', 'src/ciudad.js'],
-    cmd: () => ['node', 'tools/empacar-ciudad.mjs', `${E}/ciudad-manzanas.json`],
+    cmd: () => ['node', 'tools/empacar-ciudad.mjs', `${E}/ciudad-manzanas-1843.json`],
   },
   {
     id: 'jardines', codigo: GEO('jardines'),
@@ -161,12 +168,12 @@ export const PASOS = [
     id: 'arboles',
     // y el monte del valle (los árboles silvestres) sale de crece.png (G y B) y de la segmentación de 1936
     entradas: [`${D}/segmentacion/mosaico/arboles.json`, `${D}/segmentacion/mosaico/jardines.json`, `${D}/mosaico.json`,
-      'public/datos/ciudad.pak', `${E}/ciudad-estilos.json`, `${E}/manzanas-1772-informe.json`, `${D}/segmentacion/mosaico/clases-costura.png`],
+      'public/datos/ciudad.pak', `${E}/ciudad-estilos.json`, `${E}/manzanas-1772-informe.json`, `${E}/manzanas-1843-informe.json`, `${D}/segmentacion/mosaico/clases-costura.png`],
     opcionales: ['public/plano/crece.png', 'public/datos/crece.json'],
     salidas: ['public/datos/arboles.bin'],
     codigo: ['tools/arboles.mjs', 'tools/arboles-lib.mjs', 'tools/manzanas-arboles-lib.mjs', 'tools/empacar-lib.mjs', 'tools/silvestres-lib.mjs', 'src/pak.js', 'src/epocas.js', 'src/alas.js', 'src/techos.js'],
     cmd: () => ['node', 'tools/arboles.mjs', `${D}/segmentacion/mosaico/arboles.json`, `${D}/mosaico.json`,
-      `${D}/segmentacion/mosaico/jardines.json`, `${D}/segmentacion/mosaico/clases-costura.png`, '--manzanas-1772'],
+      `${D}/segmentacion/mosaico/jardines.json`, `${D}/segmentacion/mosaico/clases-costura.png`, '--manzanas-1772', '--manzanas-1843'],
   },
   {
     // con los patios que el vectorizador abrió por regla en las casas de patio: ahí el suelo es de patio

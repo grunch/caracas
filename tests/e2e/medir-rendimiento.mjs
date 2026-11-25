@@ -15,8 +15,10 @@ import { mediana, percentil, resumirPedidos, resumirTareas, compararConPresupues
 const args = process.argv.slice(2)
 const bandera = (n) => args.includes(n)
 const valorDe = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : null)
-const conValor = new Set(['--salida', '--vistas'])
+const conValor = new Set(['--salida', '--vistas', '--epoca'])
 const url = args.find((a, k) => !a.startsWith('--') && !conValor.has(args[k - 1])) ?? 'http://localhost:4173/'
+const años=[1772,1843,1889,1911,1936],epoca=valorDe('--epoca')?años.indexOf(Number(valorDe('--epoca')))+1:1
+if(epoca<1)throw new Error('--epoca debe ser un año de la línea de tiempo')
 const GPU = bandera('--gpu')
 const ESPERA_MS = 300_000
 const QUIETO_MS = 4000 // después del último hito: lo que se pide solo, sin tocar nada
@@ -76,6 +78,8 @@ await Promise.all([
   hito('lineaDeTiempo', () => Boolean(window.lab?.lineaDeTiempo)),
   hito('arboles', () => Boolean(window.lab?.arboles)),
 ])
+await pagina.evaluate(e=>window.lab.lineaDeTiempo.elegir(e),epoca)
+await pagina.waitForFunction(e=>window.lab.ciudad.U.uEpocaA.value===e&&window.lab.ciudad.U.uOlaEpoca.value>=9000,epoca,{timeout:ESPERA_MS})
 await pagina.waitForTimeout(QUIETO_MS)
 
 const alAbrir = resumirPedidos([...pedidos.values()], url)
@@ -180,7 +184,7 @@ await navegador.close()
 
 const medicion = {
   url, gpu, conGpu: GPU, liviano: bandera('--liviano'), ventana: [1280, 800],
-  hitos, tareas, pedidos: alAbrir, segundaVisita, memoria, cuadro, detalleCasas,
+  año: años[epoca-1], hitos, tareas, pedidos: alAbrir, segundaVisita, memoria, cuadro, detalleCasas,
 }
 const presupuesto = JSON.parse(readFileSync(new URL('../../tools/rendimiento/presupuesto.json', import.meta.url), 'utf8'))
 const filas = compararConPresupuesto(medicion, presupuesto)

@@ -63,3 +63,7 @@ node tests/e2e/medir-rendimiento.mjs http://localhost:5183/ --gpu --detalle-casa
 - Capturas cercanas comparables antes/después sin errores de página ni compilación de shaders. Revisión visual humana y prueba en móviles pendientes; el PR se presenta listo para revisión por solicitud del responsable.
 
 Después de la optimización final: **5/5 E2E focalizados de piloto y acabado aprobados**. La prueba del piloto inspecciona primero el paquete servido y se omite de forma explícita si el release todavía no contiene paletas coloniales; con datos coloniales presentes, una extracción vacía sigue siendo un fallo.
+
+## Continuidad en 1843
+
+T82.5 ([manzanas completas de 1843](16-manzanas-1843.md)) prolonga las mismas casas del piloto hasta 1889. Con los nuevos datos se aceptan también vidas `[1772,1889)` y se reutilizan sus buffers al cambiar a 1843. No se añaden otras cuadras al piloto ni se activa por defecto. Las mediciones anteriores documentan su implementación inicial.

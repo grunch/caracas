@@ -63,3 +63,14 @@ it('la cuenta dice si la capa va en modo liviano (render por software): ahí el 
  expect(capa.cuenta.liviano).toBe(true);expect(capa.cuenta.unidades[0].nivel).toBe(1)
  capa.liberar();material.dispose()
 })
+it('conserva el detalle del piloto cuando las casas de 1772 continúan en 1843',async()=>{
+ const p=paquete();for(let i=0;i<4;i++)p.atributos.aVida[i*2+1]=3
+ const fs=extraerFrentes(p,[m]);expect(fs).toHaveLength(1)
+ const {geometriaDeDetalles,crearDetalleColonial}=await import('../../src/detalle-colonial.js'),{crearMaterialCiudad}=await import('../../src/material.js')
+ const g=geometriaDeDetalles(fs);expect(g.attributes.aVida.getY(0)).toBe(3);g.dispose()
+ const {U,material}=crearMaterialCiudad({plano:{ancho:1000,alto:1000,plaza:[0,0],metro:1},metro:1,mapa:null})
+ const capa=crearDetalleColonial({U,coords:{aMundo:(x,z)=>({x,z})},manzanas:[m]}),cam={position:{x:10,y:100,z:10}}
+ capa.agregar(p);capa.finalizar();capa.actualizar(cam,[1]);const geo=capa.grupo.children[0].geometry
+ capa.actualizar(cam,[2]);expect(capa.cuenta.mallas).toBe(2);expect(capa.grupo.children[0].geometry).toBe(geo)
+ capa.actualizar(cam,[3]);expect(capa.cuenta.mallas).toBe(0);capa.liberar();material.dispose()
+})
