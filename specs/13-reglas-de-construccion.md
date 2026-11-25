@@ -43,22 +43,22 @@ Cada regla dice qué, por qué, cómo se mide y qué umbral cierra. «Frente» e
 
 ## 3. Valores por época
 
-De la investigación F0 (25-11-2026, [`reglas/investigacion.json`](reglas/investigacion.json): 239 afirmaciones con fuente y cita, cada una con un verificador que intentó refutarla). La tabla usa solo las confirmadas o corregidas. *Inferido* significa sin fuente directa, interpolado entre épocas que la tienen, con el razonamiento en el JSON. Una vara castellana son 0,836 m.
+De la investigación F0 (25-11-2026, [`reglas/investigacion.json`](reglas/investigacion.json): 239 afirmaciones) y de la ampliada (T82.4–6, [`reglas/investigacion-ampliada.json`](reglas/investigacion-ampliada.json): 129 afirmaciones sobre cauces, edificios, densidad y calles). Cada afirmación tiene fuente, cita y un verificador que intentó refutarla. La tabla usa solo las confirmadas o corregidas. *Inferido* significa sin fuente directa, interpolado entre épocas que la tienen, con el razonamiento en el JSON. Una vara castellana son 0,836 m.
 
 | Valor | 1578 | 1772 | 1843 | 1889 | 1911 | 1936 |
 |---|---|---|---|---|---|---|
-| Casas en la ciudad (fuentes) | 60–65: los solares con «casa» del plano (Salazar Bravo, 2018) | **2.809**, en las cuatro parroquias (visita de Martí) | 4.000–5.400 *inferido* (habitantes ÷ habitantes por casa) | ~9.900 *interpolado*: 8.194 en 1881 y 10.379 en 1891 (censos, parroquias urbanas) | 11.300–13.000 *inferido* | el plano |
-| Casas a la vista hoy (`reglas_mapa.py`) | 65 | 6.292 (**2,2 ×**) | 10.284 (**1,9–2,6 ×**) | 11.798 (1,1–1,4 ×) | 14.195 (1,1–1,3 ×) | 35.440 |
-| Habitantes | ~60 vecinos (Relación de 1578) | 18.669 (Martí) | 30.000–40.000 *inferido* (Codazzi ilegible: 35.000 o 55.000) | 55.638 (1881) – 72.429 (1891) | ~86.000 *interpolado* | 203.342 (censo, ciudad) |
-| Habitantes por casa | — | 6,65 (de 6,0 a 7,5 según la parroquia) | 6,6–7,6 *inferido* | 6,8–7,0 | — | — |
+| Casas en la ciudad (fuentes) | 60–65: los solares con «casa» del plano (Salazar Bravo, 2018) | **2.809**, en las cuatro parroquias (visita de Martí) | 4.500–6.100 *inferido* (de las 135 manzanas y ~33 casas por manzana de 1855) | 9.500–10.379 *inferido* entre 1878 y 1891 (censos, parroquias urbanas) | 11.300–13.000 *inferido* | el plano |
+| Casas a la vista hoy (`reglas_mapa.py`) | 65 | 6.292 (**2,2 ×**) | 10.284 (**1,7–2,3 ×**) | 11.798 (1,1–1,4 ×) | 14.195 (1,1–1,3 ×) | 35.440 |
+| Habitantes | ~60 vecinos (Relación de 1578) | 18.669 (Martí) | **más de 40.000** (texto del plano de Jesurún, 1843); 35.000 en 1838 (Codazzi); 42.000 en 1855 | 55.638 (1881) – 72.429 (1891) | ~86.000 *interpolado* | 203.342 (censo, ciudad) |
+| Habitantes por casa | — | 6,65 (de 6,0 a 7,5 según la parroquia) | 6,6–9,4 *inferido* | 6,8–7,0 | — | — |
 | Solares por manzana | 4 (en 23 de 25 manzanas: 92 solares; la de la plaza y la de San Francisco, sin solares) | partidos en medios y cuartos | — | — | — | — |
-| Casas por manzana | 0–4 (una por solar; 5 o 6 manzanas vacías) | **~20 de media, de 2 a 43** (parroquia Catedral; en el centro, casas grandes y no lo más denso) | sin muestra: la de 1772 *inferido* | — | — | el plano |
+| Casas por manzana | 0–4 (una por solar; 5 o 6 manzanas vacías) | **~20 de media, de 2 a 43** (parroquia Catedral; en el centro, casas grandes y no lo más denso) | ~33 de media *inferido* (de 1855; sin separar centro y orillas); 135 manzanas | — | — | el plano |
 | Frente de casa | sin fuente: la casa no ocupa todo el frente del solar (70 varas, 58,5 m) | **9–11 m de media**, de 3,5 a 33 m (las casas grandes del centro, 23–33 m) | la de 1772 *inferido* | — | — | el plano |
 | Fondo de lote | el solar: 58,5 m | 43–63 m (fondos de 75 varas comunes) | la de 1772 *inferido* | — | — | el plano |
 | Ancho de calle entre fachadas | 6,7 m *inferido* | 6,7–8,4 m *inferido* (de 1843) | **8–10 varas: 6,7–8,4 m** | 6,7 m en el damero viejo; 12 varas (10 m) en las calles abiertas desde 1871 | 6,7 m en el damero viejo; 14,6–17,4 m en las nuevas (Ordenanza de 1910) | el plano |
 | Pisos | 1 (tapia y techo de cogollo; 3 o 4 casas de alto) | 1 la mayoría; alto en algunas casas de la élite | 1 casi todas | casa de patio colonial todavía | — | el del plano |
 
-**Qué dicen las cifras del mapa de hoy.** 1772 tiene 2,2 veces las casas de la visita de Martí y unas 39 casas por cuadra del damero, contra unas 20. 1843 tiene de 1,9 a 2,6 veces las casas estimadas. 1889 y 1911 están más cerca (de 1,1 a 1,4 veces). En 1843, el p10 de la calle (4,1 m) queda por debajo de las 8 varas (6,7 m). Es el desvío más grande y está en las épocas que más importan: las coloniales y la republicana temprana.
+**Qué dicen las cifras del mapa de hoy.** 1772 tiene 2,2 veces las casas de la visita de Martí y unas 39 casas por cuadra del damero, contra unas 20. 1843 tiene de 1,7 a 2,3 veces las casas estimadas (4.500–6.100). 1889 y 1911 están más cerca (de 1,1 a 1,4 veces). En 1843, el p10 de la calle (4,1 m) queda por debajo de las 8 varas (6,7 m). Es el desvío más grande y está en las épocas que más importan: las coloniales y la republicana temprana.
 
 Lo que sigue sin fuente está en `vacios` del JSON. Entre otros: los habitantes y las casas de 1843 (falta una edición legible de Codazzi o la matrícula de hacia 1840), las casas por manzana después de 1792, Gasparini y Duarte de primera mano, y el porcentaje de casas de dos pisos.
 
@@ -168,9 +168,9 @@ Consolidadas por el diagnóstico (`reglas/tareas.json`, con la causa probable, d
 
 | Tarea | Qué | Reglas | Épocas | Depende de | Estado |
 |---|---|---|---|---|---|
-| T82.4 | Investigación F0 ampliada: ríos, quebradas y puentes por época (tema agua) | R10, R11 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.3 | pendiente |
-| T82.5 | Investigación F0 ampliada: edificios en pie por época, con planta, vida y forma (tema edificios) | R9, R11 | 1772, 1843, 1889, 1911, 1936 | T82.3 | pendiente |
-| T82.6 | Investigación F0 ampliada: casas por manzana, frente y fondo de 1889 y 1911, y calles nuevas (1871–1910) | R4, R6 | 1843, 1889, 1911 | T82.3 | pendiente |
+| T82.4 | Investigación F0 ampliada: ríos, quebradas y puentes por época (tema agua) | R10, R11 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.3 | hecha: `reglas/investigacion-ampliada.json` |
+| T82.5 | Investigación F0 ampliada: edificios en pie por época, con planta, vida y forma (tema edificios) | R9, R11 | 1772, 1843, 1889, 1911, 1936 | T82.3 | hecha: `reglas/investigacion-ampliada.json` |
+| T82.6 | Investigación F0 ampliada: casas por manzana, frente y fondo de 1889 y 1911, y calles nuevas (1871–1910) | R4, R6 | 1843, 1889, 1911 | T82.3 | hecha: `reglas/investigacion-ampliada.json` |
 | T82.2 | Puertas R2, R5, R7, R8, R9 y R11 (y el retiro por casa de R3) en reglas_mapa.py, con medición de base de las seis épocas | R2, R3, R5, R7, R8, R9, R11 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.1 | pendiente |
 | T82.7 | La medida del giro de R3: por el lado de fachada y contra el tramo de delante, no por el rectángulo mínimo ni el chaflán | R3 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.1 | #206 abierto |
 | T82.8 | Diagnóstico y cierre de la línea vertical clara frente a la Plaza Bolívar (D6), igual en todas las épocas | R2, R8 | 1772, 1843, 1889, 1911, 1936 | T82.2 | pendiente |

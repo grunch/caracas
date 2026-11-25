@@ -1,0 +1,3276 @@
+{
+ "alcance": "Investigación ampliada de T82 (T82.4 agua, T82.5 edificios, T82.6 densidad y calles), pedida por el diagnóstico: afirmaciones con fuente y cita, cada una con el veredicto de un verificador que intentó refutarla; la tabla usa solo las confirmadas o corregidas.",
+ "fecha": "2026-11-25",
+ "workflow": "specs/reglas/workflows/investigacion.js con temas nuevos (run wf_afd68c07-8b5, 7 agentes)",
+ "temas": [
+  {
+   "tema": "agua2",
+   "afirmaciones": [
+    {
+     "id": "agua2-01",
+     "epoca": "1772",
+     "afirmacion": "El Exato mapa de 1772 dibuja la quebrada del poniente de la plaza (el Caroata) continua de punta a punta, con tres puentes donde la cruza el damero.",
+     "valor": "3",
+     "unidad": "puentes",
+     "fuente": {
+      "titulo": "specs/reglas/diagnostico-1772.json (lectura del Exato mapa, fuentes/mapas/1772-pares-agi-exato-mapa/vista.jpg)",
+      "autor": "repositorio del proyecto",
+      "año": "2026",
+      "url": "specs/reglas/diagnostico-1772.json"
+     },
+     "cita": "El Exato mapa dibuja la quebrada continua de punta a punta, con tres puentes donde cruza el damero (puentecitos rojos en x≈765, 968 y 1103, y≈600-630 de vista.jpg).",
+     "confianza": "alta",
+     "notas": "Es una lectura del original hecha en el repo, no una fuente externa. El mapa no da el nombre de los tres puentes. Uno es probablemente el de San Pablo, de mampostería, de 1737 (agua-11), pero eso es inferencia. El mismo diagnóstico ve una segunda quebrada (el Catuche) en diagonal al norte y al naciente de la plaza, sin puentes contados."
+    },
+    {
+     "id": "agua2-02",
+     "epoca": "1772",
+     "afirmacion": "En 1784 el Procurador General de Caracas calculaba que hacían falta al menos 25 puentes para salvar los barrancos de la ciudad. En esa fecha había cinco.",
+     "valor": "5",
+     "unidad": "puentes existentes (25 necesarios)",
+     "fuente": {
+      "titulo": "Capítulo XIII. Puentes en Venezuela: una historia incompleta (Historia de la Ingeniería Estructural en Venezuela)",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "s. f. (Academia Nacional de la Ingeniería y el Hábitat)",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "en 1784, el Procurador General de Caracas calculaba que se necesitaban por lo menos 25 puentes para ‘salvar los barrancos’; para esa fecha existían cinco. Durante el siglo XVIII destacan siete puentes, esencialmente de mampostería",
+     "confianza": "alta",
+     "notas": "PDF bajado por web.archive.org (captura de 2020). Cuadra con Depons, que hacia 1801 cuenta cinco puentes sobre el Catuche (agua-09), aunque Grases no dice que los cinco estén sobre el Catuche."
+    },
+    {
+     "id": "agua2-03",
+     "epoca": "1772–1843 (plano de Depons, c. 1800)",
+     "afirmacion": "Hacia 1800 la zona urbana quedaba entre el Caroata y el Catuche. Al este se pasaba a La Candelaria por el puente de Romualda y al oeste, a la parroquia de San Juan, por el puente de San Pablo.",
+     "fuente": {
+      "titulo": "Capítulo XIII. Puentes en Venezuela: una historia incompleta",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "la zona urbana de la Caracas de 1800, la cual se describe en el plano de Depons, está limitada entre las quebradas Caroata y Catuche, con posibilidades de trasladarse hacia La Candelaria por el puente de Romualda y al Oeste, hacia la Parroquia San Juan, por el puente San Pablo.",
+     "confianza": "alta",
+     "notas": "El puente de Romualda cruza el Catuche: Grases dice que la Q. Punceres le cae al Catuche «al Norte del Puente La Romualda» (agua2-07)."
+    },
+    {
+     "id": "agua2-04",
+     "epoca": "todas",
+     "afirmacion": "El Caroata nace en Catia y corre paralelo a la actual avenida Sucre. En Pagüita gira al sur, pasa por debajo de la actual Plaza Miranda y le cae al Guaire al sur de la parroquia San Juan.",
+     "fuente": {
+      "titulo": "Capítulo XIII, Tabla XIII.1: Ríos, quebradas o cursos de agua del valle de Caracas y su drenaje al río Guaire",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "Esta quebrada nace en Catia y su curso es paralelo a la Avenida Sucre. En Pagüita toma la dirección Sur pasando por debajo de la actual Plaza Miranda. [Drenaje:] Sur de la parroquia San Juan",
+     "confianza": "alta",
+     "notas": "Celda de tabla, leída de corrido. La Plaza Miranda es de la reurbanización de El Silencio (1942–1945), así que el paso bajo la plaza describe el cauce ya cubierto. Cuadra con agua-34 (Wikipedia: va al este hasta El Calvario y gira al sur)."
+    },
+    {
+     "id": "agua2-05",
+     "epoca": "1936 (antes de El Silencio)",
+     "afirmacion": "Por dónde pasaba el Caroata en El Silencio, hoy cubierto del todo, Grases lo reconstruye de una foto aérea anterior a la reurbanización (Villanueva, 1950) y de las descripciones de De Sola (1988).",
+     "fuente": {
+      "titulo": "Capítulo XIII. Puentes en Venezuela: una historia incompleta",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "el paso de la quebrada Caroata por El Silencio, hoy totalmente cubierto, se ha inferido de la foto aérea que, antes de la reurbanización de ese sector de la ciudad, se reproduce en Villanueva (1950), complementado con las descripciones que se dan en De Sola (1988, pp. 183-195).",
+     "confianza": "alta",
+     "notas": "Para trazar el cauce de 1936 conviene buscar Villanueva (1950) y De Sola Ricardo (1988, pp. 183-195). En el repo, el plano DCN de 1936 es la fuente directa."
+    },
+    {
+     "id": "agua2-06",
+     "epoca": "todas",
+     "afirmacion": "La quebrada Los Padrones le cae al Caroata entre las esquinas de Solís y Marcos Parra, y se pierde en la trama urbana al norte de Pineda a Cuartel Viejo.",
+     "fuente": {
+      "titulo": "Capítulo XIII, Tabla XIII.1",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "Se pierde en la trama urbana al Norte de Pineda a Cuartel Viejo (mapas: 1906 y 1933) [...] Drena a la quebrada Caroata según el mapa de Aristeiguieta (1913); entre Solis y Marcos Parra (Villanueva, 1950)",
+     "confianza": "media",
+     "notas": "Celda de tabla partida en columnas; la cita junta las dos columnas. Es la única esquina concreta del curso bajo del Caroata que encontré en una fuente académica."
+    },
+    {
+     "id": "agua2-07",
+     "epoca": "todas",
+     "afirmacion": "El Catuche pasa por La Puerta de Caracas, La Pastora, Altagracia y Santa Rosalía, y le cae al Guaire a la altura de Santa Rosalía. Recibe la quebrada Punceres al norte del Puente La Romualda.",
+     "fuente": {
+      "titulo": "Capítulo XIII, Tabla XIII.1",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "Río Catuche | Recibe Q. Punceres, al Norte del Puente La Romualda | La Puerta de Caracas, La Pastora, Altagracia, Santa Rosalía | A la altura de Santa Rosalía",
+     "confianza": "alta",
+     "notas": "Fila de tabla. Wikipedia (agua2-26) pone la desembocadura en San Agustín del Norte: Santa Rosalía y San Agustín del Norte están juntas en el sur del centro."
+    },
+    {
+     "id": "agua2-08",
+     "epoca": "todas",
+     "afirmacion": "La quebrada Punceres (Punceles), en San José, le cae al Catuche. Depons (1801) la llama «Ravine de la Trinité».",
+     "fuente": {
+      "titulo": "Capítulo XIII, Tabla XIII.1",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "Q. Punceres (Punceles) (‘Revine de la Trinité’, en: Depons, 1801) | ---- | San José | Drena al Catuche",
+     "confianza": "media",
+     "notas": "Celda de tabla. Si la quebrada de la Trinidad es la Punceres, los puentes «de la Trinidad» y «de Punceles» de la leyenda de 1843 podrían cruzar esa quebrada o el Catuche cerca de la confluencia. Lisboa (agua2-12) los pone a los dos sobre el Catuche. El ancho del barranco que pinta Bellermann (Puente de la Trinidad, 1844–1845) hay que revisarlo con esto."
+    },
+    {
+     "id": "agua2-09",
+     "epoca": "todas",
+     "afirmacion": "El Anauco recibe las quebradas Caraballo y Gamboa a la altura de San José–San Bernardino, y la quebrada Teñidero le cae dos o tres cuadras al sur de la avenida Este.",
+     "fuente": {
+      "titulo": "Capítulo XIII, Tabla XIII.1",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "Río Anauco | Recibe Q. Caraballo y Q. Gamboa, a la altura de San José-San Bernardino [...] Q. Teñidero. ‘Ravine des Marauties’, según Depons [...] Drena al río Anauco, unas 2 a 3 cuadras al Sur de la Avenida Este.",
+     "confianza": "media",
+     "notas": "La tabla pone la desembocadura del Anauco «A la altura de Santa Rosalía». Parece un arrastre de la fila del Catuche: Wikipedia (agua2-28) la pone al oeste del Parque Los Caobos. Esa celda no conviene usarla."
+    },
+    {
+     "id": "agua2-10",
+     "epoca": "1772–1936",
+     "afirmacion": "Grases cuenta los puentes, pontones o cajones identificados anteriores a 1900 en cada cauce: 7 en el Caroata, 9 en el Catuche, 1 en el Anauco, 9 en el Guaire y 3 en la quebrada Punceres.",
+     "valor": "Caroata 7; Catuche 9; Anauco 1; Guaire 9; Punceres 3",
+     "unidad": "estructuras anteriores a 1900",
+     "fuente": {
+      "titulo": "Capítulo XIII, Tabla XIII.2: Número de puentes identificados en la zona metropolitana de Caracas",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "Río Guaire 9 16 39 (14) [...] Q. Caroata 7 2 18 (9) [...] Q. Punceres 3 4 8 (1) Río Catuche 9 1 18 (8) [...] Río Anauco 1 9 12 (2)",
+     "confianza": "alta",
+     "notas": "Columnas: anteriores a 1900 | posteriores a 1900 | total (entre paréntesis, los que no tienen fecha). Los puentes uno por uno están en el Anexo B1, que no pude bajar: no está en web.archive.org."
+    },
+    {
+     "id": "agua2-11",
+     "epoca": "1889",
+     "afirmacion": "Entre 1872 y 1882 se construyeron en Caracas más de 25 puentes. En 1876 había 19 (17 de mampostería y 2 de hierro) y en 1891, 40 sobre quebradas y barrancos.",
+     "valor": "19 (1876); 40 (1891)",
+     "unidad": "puentes",
+     "fuente": {
+      "titulo": "Capítulo XIII. Puentes en Venezuela: una historia incompleta",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "De acuerdo con la información que reproduce Silva (2009, p. 127), entre 1872 y 1882 en Caracas se construyeron más de 25 puentes. [...] Para 1876 había 19 puentes (17 de mampostería y 2 de hierro). En 1891 Caracas pasó a tener 40 puentes por encima de quebradas y barrancos.",
+     "confianza": "alta",
+     "notas": "Viene de la tesis de Mónica Silva Contreras (2009). Para la época de 1889, la red de calles cruza las quebradas en muchos más puntos que en 1843."
+    },
+    {
+     "id": "agua2-12",
+     "epoca": "1843 (observado 1843–1854)",
+     "afirmacion": "Lisboa cuenta cinco puentes sobre el Catuche (de la Pastora, Trinidad, Punceles, Candelaria y Monroy; el más importante, el de la Trinidad), uno grande sobre el Anauco y dos sobre el Caroata, uno de ellos el de San Pablo.",
+     "valor": "Catuche 5; Anauco 1; Caroata 2",
+     "unidad": "puentes",
+     "fuente": {
+      "titulo": "Memoria – Río Guaire (entrada 1866, «Los cinco puentes de Caracas»), citando a Miguel María Lisboa, Relación de un viaje a Venezuela, Nueva Granada y Ecuador, en Pino Iturrieta y Calzadilla, La mirada del otro (2012), p. 41",
+      "autor": "Proyecto Río Guaire / Miguel María Lisboa",
+      "año": "1866 (ed. 2012)",
+      "url": "https://www.rioguaire.org/memoria"
+     },
+     "cita": "Sobre el río Katuche se tienden cinco puentes: los de la Pastora, Trinidad, Punceles, Candelario y Monroy, siendo el más importante el de la Trinidad, el Anauco tiene también un puente de buenas dimensiones; y el Caroata dos, de los cuales uno, el de San Pablo, es también grande y hermoso.",
+     "confianza": "alta",
+     "notas": "Pone los puentes de la leyenda de 1843 en su río: a, b, c, d, e (Pastora, Trinidad, Punceles, Candelaria, Monroy) sobre el Catuche; f (Anauco) sobre el Anauco; g (San Pablo) sobre el Caroata. Confirma la lectura «Monroy» de la «e» dudosa. El segundo puente del Caroata podría ser «h, de la Unión», pero eso es inferencia. agua-21 ya resumía esta fuente sin los nombres."
+    },
+    {
+     "id": "agua2-13",
+     "epoca": "1843",
+     "afirmacion": "El puente de San Pablo, sobre el Caroata, se reconstruyó tras perderlo en una avenida (crecida): el puente nuevo se terminó en 1852.",
+     "valor": "1852",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Memoria – Río Guaire (entrada 1866, «Nunca faltan los cohetes en Caracas»), citando a Lisboa en La mirada del otro (2012), p. 42",
+      "autor": "Proyecto Río Guaire / Miguel María Lisboa",
+      "año": "1866 (ed. 2012)",
+      "url": "https://www.rioguaire.org/memoria"
+     },
+     "cita": "Recientemente, en 1852, cuando se terminó el puente nuevo de San Pablo que había sido destruido por una avenida, los vecinos festejaron al acontecimiento con una corrida de toros por las calles.",
+     "confianza": "alta",
+     "notas": "Así que en el plano de 1843 el puente de San Pablo puede estar caído o ser el viejo, dañado en 1812 (agua-11). En la misma entrada, el puente del Guaire hacia El Valle está paralizado por falta de dinero."
+    },
+    {
+     "id": "agua2-14",
+     "epoca": "1843",
+     "afirmacion": "Hacia 1852 la ciudad ocupaba unas 220 ha entre el Anauco, el Caroata y el Guaire, y sobre el Guaire todavía no había ningún puente.",
+     "valor": "220",
+     "unidad": "ha",
+     "fuente": {
+      "titulo": "Memoria – Río Guaire (entrada 1852), citando a Manuel Guevara Díaz, Geografía de la región central y capital (1983), vía Rojas Benavides (UCAB, 2015), p. 101",
+      "autor": "Proyecto Río Guaire / Manuel Guevara Díaz",
+      "año": "1983",
+      "url": "https://www.rioguaire.org/memoria"
+     },
+     "cita": "Para el año 1852 ocuparía unas 220 ha. [sic] en sus límites desde el Anauco hasta el Caroata y el Guaire al sur, todavía sin ningún puente.",
+     "confianza": "media",
+     "notas": "«todavía sin ningún puente» va pegado al Guaire. No puede referirse a las quebradas, que sí tenían puentes (agua2-12). Es fuente secundaria. Cuadra con que el primer puente sobre el Guaire fue el de Hierro, de 1875 (agua-22)."
+    },
+    {
+     "id": "agua2-15",
+     "epoca": "1843",
+     "afirmacion": "La leyenda de esquinas del plano de 1843 trae cuatro esquinas que llevan nombre de puente: la 11, del Puente de la Trinidad; la 42, del Puente de Candelaria; la 66, del Puente de San Lázaro; y la 79, del Puente de San Pablo.",
+     "fuente": {
+      "titulo": "specs/auditoria-1843/leyenda.json (transcripción de la leyenda del plano de Jesurún, 1843)",
+      "autor": "repositorio del proyecto",
+      "año": "2026",
+      "url": "specs/auditoria-1843/leyenda.json"
+     },
+     "cita": "{'numero': 11, 'nombre': 'del Puente de la Trinidad' [...]} {'numero': 42, 'nombre': 'del Puente de Candelaria', 'texto_literal': 'del Puente Candelarª' [...]} {'numero': 66, 'nombre': 'del Puente de San Lázaro', 'texto_literal': 'de Puente Sⁿ id.' [...]} {'numero': 79, 'nombre': 'del Puente de San Pablo'",
+     "confianza": "alta",
+     "notas": "Fuente primaria del repo. Dan dónde estaba cada puente en la cuadrícula de 1843: el número va impreso junto a su esquina. Puente Trinidad y Puente San Pablo siguen como esquinas en 1936. El Puente de San Lázaro no figura entre los ocho puentes a–h."
+    },
+    {
+     "id": "agua2-16",
+     "epoca": "1936",
+     "afirmacion": "En el plano DCN de 1936 seis esquinas con nombre de puente siguen de norte a sur el borde oeste del casco (el Caroata): Puente Monagas, Puente San Pablo, Puente Nuevo, Puente Junín, Puente Arauca y Puente Casacoima.",
+     "fuente": {
+      "titulo": "tools/geo/esquinas/1936-esquinas.json (rótulos del plano DCN 1936)",
+      "autor": "repositorio del proyecto",
+      "año": "2026",
+      "url": "tools/geo/esquinas/1936-esquinas.json"
+     },
+     "cita": "{\"nombre\": \"Puente Monagas\", \"px\": [7764.8, 4836.6] [...]} {\"nombre\": \"Puente San Pablo\", \"px\": [8162.0, 7587.0] [...]} {\"nombre\": \"Puente Nuevo\", \"px\": [7762.8, 8087.6] [...]} {\"nombre\": \"Puente Junín\", \"px\": [7698.6, 8391.4] [...]} {\"nombre\": \"Puente Arauca\", \"px\": [7607.4, 8650.4], [...] \"notas\": \"rótulo junto a la quebrada; cruce dudoso\"} {\"nombre\": \"Puente Casacoima\", \"px\": [7620.9, 8952.1]",
+     "confianza": "media",
+     "notas": "Son nombres de esquina, no prueba de que el puente existiera en 1936. La línea x≈7600–8160 px que baja al sur es el Caroata: lo deduzco por la posición y por San Pablo (agua2-12); el archivo no lo dice. Puente Arauca está marcado como cruce dudoso. No encontré la fecha de construcción ni de demolición de los puentes Junín, Arauca, Nuevo, Casacoima y Monagas (agua2-38)."
+    },
+    {
+     "id": "agua2-17",
+     "epoca": "1936",
+     "afirmacion": "En el plano de 1936, las esquinas Puente Trinidad, Puente Yanes y Puente Victoria marcan cruces del Catuche de noroeste a sureste, y Puente Anauco y Puente Brión, del Anauco.",
+     "fuente": {
+      "titulo": "tools/geo/esquinas/1936-esquinas.json (rótulos del plano DCN 1936)",
+      "autor": "repositorio del proyecto",
+      "año": "2026",
+      "url": "tools/geo/esquinas/1936-esquinas.json"
+     },
+     "cita": "{\"nombre\": \"Puente Trinidad\", \"px\": [9318.4, 5636.6] [...]} {\"nombre\": \"Puente Anauco\", \"px\": [11591.0, 7138.0], [...] \"notas\": \"rótulo junto a la quebrada Anauco; cruce dudoso\"} {\"nombre\": \"Puente Yanes\", \"px\": [10368.0, 7257.0] [...]} {\"nombre\": \"Puente Brión\", \"px\": [11761.1, 7765.1], [...] \"notas\": \"rótulo junto al río; cruce dudoso\"} {\"nombre\": \"Puente Victoria\", \"px\": [10572.2, 7842.1]",
+     "confianza": "media",
+     "notas": "A qué cauce corresponde cada esquina lo infiero por la posición (el Catuche en diagonal, el Anauco al este). Puente Anauco y Puente Brión son cruces dudosos en el archivo. La esquina Puente Yánez sale también como extremo del puente de Catuche o Candelaria (agua2-21)."
+    },
+    {
+     "id": "agua2-18",
+     "epoca": "1772–1936",
+     "afirmacion": "El puente de Carlos III (sobre el Catuche) está entre las esquinas de Portillo y Dos Pilitas, en La Pastora.",
+     "fuente": {
+      "titulo": "Río Catuche (Wikipedia en español), que cita a H. El Troudi, «Antiguos puentes de Caracas, referencias de su historia» (2024)",
+      "autor": "Wikipedia",
+      "año": "2026 (consulta)",
+      "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Catuche"
+     },
+     "cita": "Puente Carlos III (ubicado entre las esquinas Dos Pilitas y Portillo, Parroquia La Pastora)",
+     "confianza": "media",
+     "notas": "Lo dice también el blog de El Troudi: «situado entre las esquinas de Portillo y Dos Pilitas». Las fechas ya están en agua-12 y agua-13: el primero, de madera, de 1773, se perdió en 1781; el de mampostería es de 1784. Sigue en pie: monumento desde 1976."
+    },
+    {
+     "id": "agua2-19",
+     "epoca": "1889–1936",
+     "afirmacion": "El Puente Páez, sobre la quebrada Catuche en la avenida Norte 1, entre las esquinas La Fe y Santa Bárbara (parroquia Altagracia), se inauguró en 1888.",
+     "valor": "1888",
+     "unidad": "año de inauguración",
+     "fuente": {
+      "titulo": "Antiguos puentes de Caracas, referencias de su historia",
+      "autor": "Haiman El Troudi (con información de Caracas en retrospectiva y La Guía de Caracas)",
+      "año": "2024",
+      "url": "https://haimaneltroudi.com/antiguos-puentes-de-caracas-referencias-de-su-historia/"
+     },
+     "cita": "Puente Páez, ubicado en la avenida Norte 1, entre las esquinas la Fe y Santa Bárbara, parroquia Altagracia; inaugurado en 1888. Por debajo de él pasa lo que es hoy en día la quebrada Catuche.",
+     "confianza": "media",
+     "notas": "Es un blog de divulgación que cita crónicas. Da un punto fijo del Catuche en el damero (Norte 1, entre La Fe y Santa Bárbara). Debe estar en 1889 y no en 1843."
+    },
+    {
+     "id": "agua2-20",
+     "epoca": "1578–1772",
+     "afirmacion": "El puente de Punceles (Punceres), el primero sobre el Catuche, se construyó en 1676 bajo el sargento Nicolás Puncel, cerca de la esquina La Pelota, en lo que hoy es la esquina de Punceres. Era de mampostería, ladrillo y cal.",
+     "valor": "1676",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Antiguos puentes de Caracas, referencias de su historia",
+      "autor": "Haiman El Troudi",
+      "año": "2024",
+      "url": "https://haimaneltroudi.com/antiguos-puentes-de-caracas-referencias-de-su-historia/"
+     },
+     "cita": "En 1676 bajo la dirección del sargento Nicolás Puncel, cerca de la esquina La Pelota, se construye el primero que estuvo sobre el río Catuche, en el sitio hoy conocido como esquina de Punceres. De acuerdo con la historia, el puente de Punceles (Punceres) fue una obra de mampostería, ladrillos y cal",
+     "confianza": "baja",
+     "notas": "Blog sin cita puntual. Choca con Grases, para quien los puentes más antiguos sobre el Catuche son de 1773 (agua2-34). Hay que verificarlo en De Sola Ricardo o en Valery, La nomenclatura caraqueña, antes de poner este puente en 1772."
+    },
+    {
+     "id": "agua2-21",
+     "epoca": "1772–1843",
+     "afirmacion": "El puente de Catuche o de Candelaria, de mampostería con arco ojival, estaba entre las esquinas de Manduca y Puente Yánez. Se le da fecha de 1735 y en su construcción intervino Feliciano Sojo y Palacios.",
+     "valor": "1735",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Antiguos puentes de Caracas, referencias de su historia",
+      "autor": "Haiman El Troudi",
+      "año": "2024",
+      "url": "https://haimaneltroudi.com/antiguos-puentes-de-caracas-referencias-de-su-historia/"
+     },
+     "cita": "Entre las esquinas de Manduca a Puente Yánez, se encuentra una edificación que data de 1735 de acuerdo a historiadores, originalmente denominada como puente de Catuche o Candelaria. Era un sólido puente de mampostería con bien trazado arco ojival.",
+     "confianza": "baja",
+     "notas": "Blog. Si es cierto, es el «d, de Candelaria» de 1843 y estaría ya en 1772. La esquina 42 de 1843 se llama «del Puente de Candelaria» (agua2-15). Hay que verificarlo en una fuente académica."
+    },
+    {
+     "id": "agua2-22",
+     "epoca": "1772–1843",
+     "afirmacion": "El puente de La Trinidad lo apoyó el gobernador José de Solano y Bote. El primer plano lo levantó en 1770 el ingeniero Manuel de Clemente y Francia, y se terminó en 1776.",
+     "valor": "1776",
+     "unidad": "año de conclusión",
+     "fuente": {
+      "titulo": "Antiguos puentes de Caracas, referencias de su historia",
+      "autor": "Haiman El Troudi",
+      "año": "2024",
+      "url": "https://haimaneltroudi.com/antiguos-puentes-de-caracas-referencias-de-su-historia/"
+     },
+     "cita": "Otra estructura del pasado es el puente de La Trinidad, cuya construcción fue apoyada por el gobernador Capitán José de Solano y Bote. El primer plano se levantó en el año 1770 a cargo del ingeniero Manuel de Clemente y Francia, y se concluyó en 1776.",
+     "confianza": "baja",
+     "notas": "Choca con agua-15 (Wikipedia: mediados del siglo XVIII, atribuido a Infante). Si se terminó en 1776, no debería estar en el Exato mapa de 1772. Pendiente de una fuente académica."
+    },
+    {
+     "id": "agua2-23",
+     "epoca": "todas (contradicción)",
+     "afirmacion": "Las páginas de Wikipedia en español del Caroata y del Catuche ponen el puente de La Trinidad sobre la quebrada Caroata. Eso contradice a Lisboa (agua2-12), que lo pone sobre el Catuche.",
+     "fuente": {
+      "titulo": "Quebrada Caroata (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "año": "2026 (consulta)",
+      "url": "https://es.wikipedia.org/wiki/Quebrada_Caroata"
+     },
+     "cita": "Sobre el curso de esta quebrada se halla el puente La Trinidad construido por Juan Domingo del Sacramento Infante quien también construyó el Puente Carlos III sobre el Río Catuche",
+     "confianza": "baja",
+     "notas": "Wikipedia se equivoca o confunde dos puentes. La Trinidad (hoy Panteón) queda al norte, entre el Catuche y la quebrada Punceres (agua2-08). En 1936 la esquina Puente Trinidad está en x≈9318 px, lejos de la línea del Caroata (x≈7600–8160). Bellermann lo pinta sobre la quebrada honda que el repo identifica como el Catuche. No usar Wikipedia para ubicar este puente."
+    },
+    {
+     "id": "agua2-24",
+     "epoca": "1889",
+     "afirmacion": "El puente del Guanábano, sobre el Catuche y uno de los más altos, daba paso a San José del Ávila y al cementerio de Los Hijos de Dios. Lo construyó Muñoz Tébar, primero de madera; después se reconstruyó y al final se demolió para abrir la avenida Baralt.",
+     "fuente": {
+      "titulo": "Antiguos puentes de Caracas, referencias de su historia",
+      "autor": "Haiman El Troudi",
+      "año": "2024",
+      "url": "https://haimaneltroudi.com/antiguos-puentes-de-caracas-referencias-de-su-historia/"
+     },
+     "cita": "La estructura era una de las más elevadas sobre el río Catuche, y facilitaba el acceso a San José del Ávila y al Cementerio de los hijos de Dios. Construido por el ingeniero Muñoz Tébar [...] Muchos años después de haber sido demolido para dar paso a la actual avenida Baralt",
+     "confianza": "baja",
+     "notas": "Blog sin fechas. Que la avenida Baralt toque el Catuche es raro y hay que verificarlo. Muñoz Tébar trabajó en el gobierno de Guzmán Blanco, así que el puente sería de 1870–1890."
+    },
+    {
+     "id": "agua2-25",
+     "epoca": "1772–1936",
+     "afirmacion": "El puente Anauco une las esquinas Alcabala y Puente Anauco, por encima del Paseo Anauco, que corre sobre el tramo embaulado del río. En su tiempo unía la antigua calle de La Candelaria con la vía del Este.",
+     "fuente": {
+      "titulo": "Puente Anauco (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "año": "2026 (consulta)",
+      "url": "https://es.wikipedia.org/wiki/Puente_Anauco"
+     },
+     "cita": "En la actualidad sigue en pie, hoy día conectando las esquinas Alcabala y Puente Anauco, ubicándose arriba del Paseo Anauco, el cual se extiende por encima de la parte embaulada del río homónimo.",
+     "confianza": "media",
+     "notas": "Las fechas (1786–1790) ya están en agua-14. Según Grases, el Anauco tenía un solo puente identificado antes de 1900 (agua2-10)."
+    },
+    {
+     "id": "agua2-26",
+     "epoca": "todas",
+     "afirmacion": "El Catuche entra en la ciudad por Puerta de Caracas y le cae al Guaire en San Agustín del Norte.",
+     "fuente": {
+      "titulo": "Río Catuche (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "año": "2026 (consulta)",
+      "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Catuche"
+     },
+     "cita": "entra en la ciudad por la lares de Puerta de Caracas y después de cruzar parte de la ciudad desemboca en el río Guaire en San Agustín del Norte.",
+     "confianza": "media",
+     "notas": "Wikipedia da la desembocadura en 10°29'45\"N 66°54'13\"O, tomada de Wikimapia. Cuadra con Grases (agua2-07: «a la altura de Santa Rosalía»)."
+    },
+    {
+     "id": "agua2-27",
+     "epoca": "1936 (estado actual; fecha del embaulamiento no hallada)",
+     "afirmacion": "Hoy el Anauco va embaulado desde la avenida Panteón hasta el Guaire, al oeste del Parque Los Caobos. Entre la avenida Panteón y la avenida México, el embaulamiento sostiene el Paseo Anauco.",
+     "fuente": {
+      "titulo": "Río Anauco (Wikipedia en español), que cita a Marco Aurelio Villa, Aspectos geográficos del Distrito Federal (1967), p. 90",
+      "autor": "Wikipedia / M. A. Villa",
+      "año": "1967",
+      "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Anauco"
+     },
+     "cita": "en la actualidad gran parte del de este río se halla embaulado desde la avenida Panteón transcurriendo sus aguas bajo la ciudad de Caracas hasta su desembocadura en el río Guaire al oeste del Parque Los Caobos",
+     "confianza": "media",
+     "notas": "Describe el estado actual o el de 1967, no 1936. No encontré cuándo se embauló el Anauco. Según El Troudi, el Paseo Anauco lo hizo el Centro Simón Bolívar a fines del siglo XX. En 1936 el Anauco debe dibujarse abierto mientras no haya fuente que diga lo contrario."
+    },
+    {
+     "id": "agua2-28",
+     "epoca": "1889",
+     "afirmacion": "En 1876 se terminaron las primeras cloacas de Caracas y se embauló la quebrada Caroata; las aguas servidas dejaron de correr por zanjas de tierra en medio de las calles.",
+     "valor": "1876",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Anexo A1. Obras hidráulicas, canales, sistemas de riego y embalses (Tabla A1.2)",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "2011",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Hist_Ing_Estr_Memoria_Anexo_A1.pdf"
+     },
+     "cita": "1876 Finalización de las primeras cloacas. Embaulamiento de la quebrada Caroata. Las aguas servidas dejaron de ir por zanjas de tierra en medio de las calles de la ciudad",
+     "confianza": "media",
+     "notas": "Es la fuente académica de agua-32. La tabla cita a Arcila (1961, II, pp. 433-444). No dice qué tramo se embauló. No puede ser todo el cauce, porque en 1942 El Silencio todavía tenía el Caroata por cubrir (agua2-29). PDF bajado por web.archive.org."
+    },
+    {
+     "id": "agua2-29",
+     "epoca": "1936 / después de 1936",
+     "afirmacion": "El embaulamiento del Caroata en su camino al Guaire se hizo durante la reurbanización de El Silencio (Röhl, 1988).",
+     "fuente": {
+      "titulo": "Anexo A1. Obras hidráulicas, canales, sistemas de riego y embalses (Nota 8)",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "2011",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Hist_Ing_Estr_Memoria_Anexo_A1.pdf"
+     },
+     "cita": "En 1934 se presentó el primer proyecto para su saneamiento entre Antímano y San Agustín del Sur. Por esas fechas se iniciaron obras de canalización y construcción de algunos tramos de los colectores marginales. La construcción del embaulamiento de la quebrada de Caroata, en su ruta hacia el río Guaire, durante la reurbanización de El Silencio, se da en Röhl (1988).",
+     "confianza": "alta",
+     "notas": "rioguaire.org copia este texto bajo el año 1934, pero la nota liga el embaulamiento a El Silencio, no a 1934. La reurbanización va de 1942 a 1945: demoliciones desde el 25-07-1942, obras desde el 04-01-1943, inauguración el 26-08-1945 (agua2-30). En 1936 el Caroata de El Silencio sigue abierto, como D10."
+    },
+    {
+     "id": "agua2-30",
+     "epoca": "después de 1936",
+     "afirmacion": "La demolición de El Silencio empezó el 25 de julio de 1942, las obras el 4 de enero de 1943, y la reurbanización se inauguró el 26 de agosto de 1945.",
+     "valor": "1942–1945",
+     "unidad": "años",
+     "fuente": {
+      "titulo": "Reurbanización El Silencio (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "año": "2026 (consulta)",
+      "url": "https://es.wikipedia.org/wiki/Reurbanizaci%C3%B3n_El_Silencio"
+     },
+     "cita": "decide ordenar la demolición de todas las casas, bares y prostíbulos que se encontraban en la zona para dar paso a la reurbanización de El Silencio el 25 de julio de 1942. Las labores de construcción se iniciaron el 4 de enero de 1943 [...] El 26 de agosto de 1945 es inaugurada la Reurbanización El Silencio",
+     "confianza": "media",
+     "notas": "Acota la fecha del embaulamiento del Caroata bajo El Silencio (agua2-29)."
+    },
+    {
+     "id": "agua2-31",
+     "epoca": "1911–1936",
+     "afirmacion": "Las cloacas de Caracas empezaron en 1915, según el plan del MOP de 1912–1914. Hasta 1940 se hicieron los marginales del Caroata (del Guaire a Los Flores), del Catuche (del Guaire a la esquina de Medina) y del Anauco (de Puente Mohedano a San Bernardino).",
+     "valor": "1915–1940",
+     "unidad": "años",
+     "fuente": {
+      "titulo": "Memoria – Río Guaire (entrada 1915, «Colectores en ambas orillas del Guaire»), citando a Grases, Gutiérrez y Salas, Obras hidráulicas (2011)",
+      "autor": "Proyecto Río Guaire / J. Grases, A. Gutiérrez y R. Salas J.",
+      "año": "2011",
+      "url": "https://www.rioguaire.org/memoria"
+     },
+     "cita": "Según este plan fueron construídas hasta el año 1940 las obras que enumeramos: [...] colectores marginales de Caroata desde el Guaire hasta Los Flores en el noroeste de Caracas; marginales de Catuche, desde el Guaire hasta la esquina de Medina al norte de la ciudad; colectores de Anauco, desde el Puente Mohedano hasta San Bernardino; colectores de las quebradas Los Padrones, Los Monos, Punceres, parte de Teñideros",
+     "confianza": "media",
+     "notas": "Los colectores marginales van a las orillas y llevan solo las aguas servidas: no son un embaulamiento del cauce. No sirven como prueba de que las quebradas estuvieran cubiertas. No se sabe en qué año entre 1915 y 1940 se hizo cada tramo."
+    },
+    {
+     "id": "agua2-32",
+     "epoca": "1936–1940",
+     "afirmacion": "Entre 1937 y 1940 se construyeron colectores primarios en las dos márgenes del Guaire y el marginal derecho del Caroata.",
+     "valor": "1937–1940",
+     "unidad": "años",
+     "fuente": {
+      "titulo": "Anexo A1. Obras hidráulicas, canales, sistemas de riego y embalses (Tabla A1.2)",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "2011",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Hist_Ing_Estr_Memoria_Anexo_A1.pdf"
+     },
+     "cita": "1937-40 Construcción de colectores primarios | Colectores en ambas márgenes del río Guaire y el marginal derecho del Caroata",
+     "confianza": "alta",
+     "notas": "Fila de tabla. Es posterior a 1936: no cambia el cauce del plano de 1936."
+    },
+    {
+     "id": "agua2-33",
+     "epoca": "después de 1936",
+     "afirmacion": "En la Memoria del MOP de 1944, el saneamiento de la quebrada Catuche figura terminado en un 50 %.",
+     "valor": "50",
+     "unidad": "%",
+     "fuente": {
+      "titulo": "Memoria – Río Guaire (entrada 1944), citando la Memoria y Cuenta del Ministerio de Obras Públicas (1945), vol. 2, p. 62",
+      "autor": "Proyecto Río Guaire / MOP",
+      "año": "1945",
+      "url": "https://www.rioguaire.org/memoria"
+     },
+     "cita": "-Saneamiento de la quebrada Catuche, terminado en un 50%.",
+     "confianza": "media",
+     "notas": "Es la única fecha de obras en el cauce del Catuche que encontré, y es posterior a 1936. No dice qué tramo ni si «saneamiento» quiere decir embaulamiento. No encontré la fecha del embaulamiento del Catuche (agua-39 sigue abierta)."
+    },
+    {
+     "id": "agua2-34",
+     "epoca": "1772",
+     "afirmacion": "Para Grases, los puentes más antiguos identificados en la zona metropolitana son los de la quebrada Catuche, de 1773.",
+     "valor": "1773",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Capítulo XIII. Puentes en Venezuela: una historia incompleta",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "El total de 221 estructuras [...] en el lapso que va desde los más antiguos sobre la quebrada Catuche (1773), hasta los más recientes",
+     "confianza": "alta",
+     "notas": "1773 es el primer Carlos III, de madera (agua-12). Choca con el puente de San Pablo de 1737 sobre el Caroata (agua-11, tesis UCV) y con el Punceles de 1676 (agua2-20). Grases puede no tener fecha para los coloniales anteriores. Según esta fuente, en 1772 no debe haber ningún puente sobre el Catuche."
+    },
+    {
+     "id": "agua2-35",
+     "epoca": "1936",
+     "afirmacion": "El Puente de Hierro se demolió en 1937 porque era muy angosto y estaba en ruinas, y lo sustituyó un puente moderno.",
+     "valor": "1937",
+     "unidad": "año de demolición",
+     "fuente": {
+      "titulo": "Puentes metálicos sobre el río Guaire: el carácter de la tradición académica y la imagen del diseño estructural (Tecnología y Construcción 20-II)",
+      "autor": "Mónica Silva Contreras",
+      "año": "2004",
+      "url": "https://saber.ucv.ve/ojs/index.php/rev_tc/article/view/2916/2790"
+     },
+     "cita": "En 1937 es demolido el Puente de Hierro, de inmensa significación [...] Fue desmantelado debido a su «anchura insuficiente» y a que «su estado ruinoso constituía un inminente peligro» y sustituido «por un puente moderno",
+     "confianza": "alta",
+     "notas": "Así que el Puente de Hierro (1875) va de 1889 a 1936 inclusive. Grases cita a Arnal: Hierro, Dolores y Paraíso se sustituyeron por concreto «a partir del año 1942» (agua2-37)."
+    },
+    {
+     "id": "agua2-36",
+     "epoca": "1911–1936",
+     "afirmacion": "En 1925 se decretó trasladar el Puente Sucre (calle Sur 7) a la Gran Carretera Oriental, en la entrada de Santa Teresa, y hacer en su lugar un puente de concreto armado.",
+     "valor": "1925",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Puentes metálicos sobre el río Guaire (Tecnología y Construcción 20-II), nota 11 y texto",
+      "autor": "Mónica Silva Contreras",
+      "año": "2004",
+      "url": "https://saber.ucv.ve/ojs/index.php/rev_tc/article/view/2916/2790"
+     },
+     "cita": "Los nuevos principios estéticos para las estructuras urbanas llevarán en 1925 a decretar el traslado del Puente Sucre, que se desarmaba ahora por segunda vez, así como la construcción de un nuevo puente de concreto.",
+     "confianza": "alta",
+     "notas": "Nota 11: «En 1925 se construiría un puente de concreto armado en el lugar del Puente Sucre» (MOP, Memoria 1926, pp. 339-353). Grases: H. Ayala hizo «el nuevo puente Sucre y el Puente Gómez, ambos sobre el río Guaire». En 1936, el paso de la calle Sur 7 es de concreto, no la armadura de 1895 (agua-26)."
+    },
+    {
+     "id": "agua2-37",
+     "epoca": "1936",
+     "afirmacion": "Los puentes de Hierro, Dolores y Paraíso se sustituyeron por estructuras de concreto armado a partir de 1942 (Arnal, 2000).",
+     "valor": "1942",
+     "unidad": "año de inicio",
+     "fuente": {
+      "titulo": "Capítulo XIII. Puentes en Venezuela: una historia incompleta",
+      "autor": "José Grases, Arnaldo Gutiérrez y Rafael Salas J.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "Arnal (2000, p. 12) destaca la sustitución de viejos puentes metálicos caraqueños a partir del año 1942. Así: “Puente Hierro, Dolores y Paraíso se sustituyeron por estructuras de concreto armado, hiperestáticas",
+     "confianza": "media",
+     "notas": "Choca con Silva para el Puente de Hierro (demolido en 1937, agua2-35). Para Dolores y Paraíso, en 1936 seguirían los metálicos de 1897 y 1895 (agua-27 y agua-28). Stolk proyectó en 1932 un arco de concreto para sustituir el Dolores (Silva, fig. 25), pero no hay prueba de que se construyera antes de 1936."
+    },
+    {
+     "id": "agua2-38",
+     "epoca": "1936",
+     "afirmacion": "El Puente Bolívar (antes Puente de las Barrancas), de acero, se inauguró en 1933 con la avenida de La Paz. Unía las avenidas de El Paraíso, La Vega y la Gran Carretera Occidental.",
+     "valor": "1933",
+     "unidad": "año de inauguración",
+     "fuente": {
+      "titulo": "Puentes metálicos sobre el río Guaire (Tecnología y Construcción 20-II)",
+      "autor": "Mónica Silva Contreras",
+      "año": "2004",
+      "url": "https://saber.ucv.ve/ojs/index.php/rev_tc/article/view/2916/2790"
+     },
+     "cita": "el nuevo y hermosísimo diseño estructural del Puente Bolívar, en principio llamado Puente de las Barrancas, constituye una vuelta al acero. Este, junto con la Avenida de la Paz, fue inaugurado en 1933 para comunicar las Avenidas de El Paraíso, La Vega y la Gran Carretera Occidental.",
+     "confianza": "alta",
+     "notas": "Era un arco de tres articulaciones de 50 m, decretado en 1929. Debe estar en 1936."
+    },
+    {
+     "id": "agua2-39",
+     "epoca": "1936",
+     "afirmacion": "En 1932 hubo que reparar el Puente Restaurador porque el cauce del Guaire había cambiado por la extracción continua de granzón de sus riberas.",
+     "valor": "1932",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Puentes metálicos sobre el río Guaire (Tecnología y Construcción 20-II)",
+      "autor": "Mónica Silva Contreras",
+      "año": "2004",
+      "url": "https://saber.ucv.ve/ojs/index.php/rev_tc/article/view/2916/2790"
+     },
+     "cita": "en 1932 el Puente Restaurador debió ser sometido a reparaciones debido al cambio del cauce del río ocasionado por la continua extracción de granzón de sus riberas (MOP, Memoria 1932, p. 218).",
+     "confianza": "alta",
+     "notas": "El Restaurador (1905, agua-29) sigue en pie en 1936."
+    },
+    {
+     "id": "agua2-40",
+     "epoca": "1889–1911",
+     "afirmacion": "Hacia 1869, uno de los 17 puntos públicos de agua de Caracas estaba en el Puente de La Pastora.",
+     "fuente": {
+      "titulo": "Memoria – Río Guaire (entrada 1869), citando a Leszek Zawisza, Arquitectura y obras públicas en Venezuela. Siglo XIX (1988), t. 2, p. 111",
+      "autor": "Proyecto Río Guaire / L. Zawisza",
+      "año": "1988",
+      "url": "https://www.rioguaire.org/memoria"
+     },
+     "cita": "Para el año 1869, éstos eran los 17 puntos donde se podía abastecerse del vital líquido en Caracas: 1) Puente de La Pastora;",
+     "confianza": "media",
+     "notas": "Muestra que el puente de la Pastora («a» de 1843) seguía en uso en 1869. No encontré su fecha de construcción ni de demolición."
+    },
+    {
+     "id": "agua2-41",
+     "epoca": "1911",
+     "afirmacion": "No encontré qué puentes rotula el plano de Razetti de 1911 ni una lista de ellos en fuentes publicadas.",
+     "fuente": {
+      "titulo": "fuentes/mapas/1911-princeton-plano-de-caracas-razetti/ficha.json; Grases et al., Capítulo XIII",
+      "autor": "repositorio del proyecto / J. Grases et al.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "Conjuntamente con planos publicados por Razetti (1898; 1902), De Sola (1967) y CREOLE (1966), se ha reconstruido en lo posible la secuencia de puentes dispuestos sobre las quebradas, de Oeste a Este, necesarios para el desarrollado la ciudad (Anexo B1).",
+     "confianza": "baja",
+     "notas": "La ficha del plano de 1911 en el repo no trae leyenda de puentes. Grases usó los planos de Razetti para su Anexo B1, la lista de puentes uno por uno, que no está disponible: no hay captura en web.archive.org. Hay que leer los puentes de 1911 en el propio plano de Razetti."
+    },
+    {
+     "id": "agua2-42",
+     "epoca": "1889–1936",
+     "afirmacion": "No encontré la fecha de construcción ni de demolición de los puentes Junín, Arauca y Nuevo, ni de los puentes de Monroy y de la Unión. Tampoco encontré cuándo se embauló el Catuche dentro del casco.",
+     "fuente": {
+      "titulo": "Búsquedas en la web; Grases et al., Capítulo XIII (Tabla XIII.2: 9 de los 18 puentes del Caroata y 8 de los 18 del Catuche sin fecha)",
+      "autor": "J. Grases, A. Gutiérrez y R. Salas J.",
+      "año": "s. f.",
+      "url": "http://www.acading.org.ve/info/ingenieria/pubdocs/hist_ing_est/Cap_XIII.pdf"
+     },
+     "cita": "Q. Caroata 7 2 18 (9) [...] Río Catuche 9 1 18 (8)",
+     "confianza": "baja",
+     "notas": "Junín, Arauca y Nuevo existen como esquinas sobre el Caroata en 1936 (agua2-16). Hasta tener fuente, un puente sin fecha debería ir en las épocas en que el plano de esa época lo dibuja. Fuentes por consultar: Anexo B1 de Grases; Silva Contreras (2009, tesis); De Sola Ricardo (1967, 1988); Valery, La nomenclatura caraqueña; Zawisza (1988)."
+    }
+   ],
+   "veredictos": [
+    {
+     "id": "agua2-01",
+     "veredicto": "confirmada",
+     "motivo": "La cita está literal en specs/reglas/diagnostico-1772.json (1772-V01 y V02). Recorté vista.jpg (x 650-1200, y 520-720) y se ven los tres puentecitos rojos sobre la quebrada horizontal en x≈767, 967 y 1102. Que sea el Caroata es lectura del repo, no rótulo del mapa."
+    },
+    {
+     "id": "agua2-02",
+     "veredicto": "confirmada",
+     "motivo": "Grases, Cap. XIII, § XIII.4.1.3 (PDF de web.archive.org), literal: 'en 1784, el Procurador General de Caracas calculaba que se necesitaban por lo menos 25 puentes... para esa fecha existían cinco'. Habla de la ciudad de Caracas."
+    },
+    {
+     "id": "agua2-03",
+     "veredicto": "confirmada",
+     "motivo": "Cap. XIII, literal: la zona urbana de 1800 del plano de Depons queda entre el Caroata y el Catuche, con el puente de Romualda hacia La Candelaria y el de San Pablo hacia San Juan."
+    },
+    {
+     "id": "agua2-04",
+     "veredicto": "confirmada",
+     "motivo": "Tabla XIII.1, fila 'Q. o río Caroata': nace en Catia, corre paralela a la Av. Sucre, en Pagüita toma al sur por debajo de la actual Plaza Miranda, y drena al sur de la parroquia San Juan."
+    },
+    {
+     "id": "agua2-05",
+     "veredicto": "confirmada",
+     "motivo": "Cap. XIII, literal: el paso del Caroata por El Silencio 'se ha inferido de la foto aérea... en Villanueva (1950), complementado con... De Sola (1988, pp. 183-195)'."
+    },
+    {
+     "id": "agua2-06",
+     "veredicto": "confirmada",
+     "motivo": "Tabla XIII.1, fila Q. Los Padrones: 'Se pierde en la trama urbana al Norte de Pineda a Cuartel Viejo (mapas: 1906 y 1933)' y 'Drena a la quebrada Caroata según el mapa de Aristeiguieta (1913); entre Solis y Marcos Parra (Villanueva, 1950)'. Las dos celdas se juntaron bien."
+    },
+    {
+     "id": "agua2-07",
+     "veredicto": "confirmada",
+     "motivo": "Tabla XIII.1, fila Río Catuche, literal: recibe la Q. Punceres al norte del Puente La Romualda; pasa por La Puerta de Caracas, La Pastora, Altagracia y Santa Rosalía; desemboca a la altura de Santa Rosalía."
+    },
+    {
+     "id": "agua2-08",
+     "veredicto": "confirmada",
+     "motivo": "Tabla XIII.1: 'Q. Punceres (Punceles) (‘Revine de la Trinité’, en: Depons, 1801)', San José, 'Drena al Catuche'. La relación con los puentes de 1843 es inferencia y así queda marcada en las notas."
+    },
+    {
+     "id": "agua2-09",
+     "veredicto": "confirmada",
+     "motivo": "Tabla XIII.1: el Anauco 'Recibe Q. Caraballo y Q. Gamboa, a la altura de San José-San Bernardino'. El Teñidero 'Drena al río Anauco, unas 2 a 3 cuadras al Sur de la Avenida Este'. También es correcta la nota de que la desembocadura del Anauco 'A la altura de Santa Rosalía' aparece en la tabla y es dudosa."
+    },
+    {
+     "id": "agua2-10",
+     "veredicto": "confirmada",
+     "motivo": "Tabla XIII.2, anteriores a 1900: Guaire 9, Caroata 7, Punceres 3, Catuche 9, Anauco 1. Totales 39 (14), 18 (9), 8 (1), 18 (8) y 12 (2). Todo coincide."
+    },
+    {
+     "id": "agua2-11",
+     "veredicto": "confirmada",
+     "motivo": "Cap. XIII, literal (según Silva 2009, p. 127): más de 25 puentes entre 1872 y 1882; 19 puentes en 1876 (17 de mampostería y 2 de hierro); 40 en 1891."
+    },
+    {
+     "id": "agua2-12",
+     "veredicto": "confirmada",
+     "motivo": "rioguaire.org/memoria, entrada de 1866 'Los cinco puentes de Caracas', cita literal de Lisboa con la referencia 'La mirada del otro, 2012, p. 41'. La fuente escribe 'Candelario'. Que cada letra a–h de 1843 corresponda a un río lo infiere el agente."
+    },
+    {
+     "id": "agua2-13",
+     "veredicto": "confirmada",
+     "motivo": "rioguaire.org, entrada de 1866 'Nunca faltan los cohetes en Caracas' (Lisboa, p. 42), literal: 'en 1852, cuando se terminó el puente nuevo de San Pablo que había sido destruido por una avenida'."
+    },
+    {
+     "id": "agua2-14",
+     "veredicto": "confirmada",
+     "motivo": "rioguaire.org, entrada de 1852, literal: 'unas 220 ha... desde el Anauco hasta el Caroata y el Guaire al sur, todavía sin ningún puente'. Cita a Guevara Díaz (1983) a través de Rojas Benavides (UCAB, 2015, p. 101). Que la falta de puentes se refiera al Guaire es interpretación razonable."
+    },
+    {
+     "id": "agua2-15",
+     "veredicto": "confirmada",
+     "motivo": "specs/auditoria-1843/leyenda.json trae las entradas 11 'del Puente de la Trinidad', 42 'del Puente de Candelaria' (literal 'del Puente Candelarª'), 66 'del Puente de San Lázaro' (literal 'de Puente Sⁿ id.') y 79 'del Puente de San Pablo'."
+    },
+    {
+     "id": "agua2-16",
+     "veredicto": "confirmada",
+     "motivo": "tools/geo/esquinas/1936-esquinas.json trae las seis esquinas con los px citados; ordenadas por y van de norte a sur como dice la afirmación. Puente Arauca está marcado 'cruce dudoso'. Que la línea sea el Caroata es inferencia. Además, la nota remite a agua2-38 cuando el tema de las fechas está en agua2-42."
+    },
+    {
+     "id": "agua2-17",
+     "veredicto": "confirmada",
+     "motivo": "El JSON trae Puente Trinidad (9318,5636), Puente Yanes (10368,7257) y Puente Victoria (10572,7842), en diagonal NO→SE. Puente Anauco y Puente Brión llevan la marca 'cruce dudoso'. La asignación a cada cauce es inferencia por posición. Grases, Tabla XIII.4, pone La Trinidad aguas abajo del Carlos III, sobre el Catuche, y eso respalda la asignación."
+    },
+    {
+     "id": "agua2-18",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia, Río Catuche: 'Puente Carlos III (ubicado entre las esquinas Dos Pilitas y Portillo, Parroquia La Pastora)', con la referencia [7] a El Troudi (2024). El blog lo repite. Ojo: El Troudi fecha la obra en 1782 y Grases (Tabla XIII.4) pone la reconstrucción en mampostería en 1783, no en 1784."
+    },
+    {
+     "id": "agua2-19",
+     "veredicto": "confirmada",
+     "motivo": "El blog de El Troudi, literal: 'Puente Páez, ubicado en la avenida Norte 1, entre las esquinas la Fe y Santa Bárbara, parroquia Altagracia; inaugurado en 1888', con el Catuche por debajo. Es fuente de divulgación."
+    },
+    {
+     "id": "agua2-20",
+     "veredicto": "confirmada",
+     "motivo": "El blog lo dice literal: 1676, el sargento Nicolás Puncel, cerca de La Pelota, mampostería, ladrillo y cal. Confirmo que la fuente lo dice, no el hecho: es un blog sin cita y Grases da 1773 como el puente más antiguo identificado sobre el Catuche. Debe seguir con confianza baja hasta tener fuente académica."
+    },
+    {
+     "id": "agua2-21",
+     "veredicto": "confirmada",
+     "motivo": "El blog lo dice literal: entre Manduca y Puente Yánez, 'data de 1735 de acuerdo a historiadores', puente de Catuche o Candelaria, arco ojival, con Feliciano Sojo y Palacios. Fuente de divulgación con confianza baja."
+    },
+    {
+     "id": "agua2-22",
+     "veredicto": "confirmada",
+     "motivo": "El blog lo dice literal: Solano y Bote, plano de 1770 de Manuel de Clemente y Francia, concluido en 1776. Hay segunda fuente cercana: Grases, Tabla XIII.4, dice que la creciente de 1781 destruyó 'el puente La Trinidad, aguas abajo, construido en 1775'. Eso cuadra con mediados de la década de 1770 y deja La Trinidad fuera del mapa de 1772."
+    },
+    {
+     "id": "agua2-23",
+     "veredicto": "confirmada",
+     "motivo": "Las dos páginas de Wikipedia lo dicen. Quebrada Caroata: 'Sobre el curso de esta quebrada se halla el puente La Trinidad'. Río Catuche: 'el Puente La Trinidad sobre la Quebrada Caroata'. La contradicción es real: Lisboa pone La Trinidad sobre el Catuche y Grases (Tabla XIII.4) lo pone aguas abajo del Carlos III, también sobre el Catuche."
+    },
+    {
+     "id": "agua2-24",
+     "veredicto": "confirmada",
+     "motivo": "El blog lo dice: el Guanábano era de los más elevados sobre el Catuche, daba acceso a San José del Ávila y al cementerio de los Hijos de Dios, lo construyó Muñoz Tébar, primero de madera, lo reconstruyó Ayala y se demolió para abrir la avenida Baralt. No da fechas."
+    },
+    {
+     "id": "agua2-25",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia, Puente Anauco, literal: conecta las esquinas Alcabala y Puente Anauco, sobre el Paseo Anauco que va encima de la parte embaulada, y unía la antigua calle de La Candelaria con la antigua vía del Este."
+    },
+    {
+     "id": "agua2-26",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia, Río Catuche, literal: 'entra en la ciudad por la lares de Puerta de Caracas... desemboca en el río Guaire en San Agustín del Norte'. Coordenadas 10°29′45″N 66°54′13″O tomadas de Wikimapia. El Troudi dice lo mismo: atraviesa La Pastora, Altagracia, La Candelaria y San Agustín del Norte."
+    },
+    {
+     "id": "agua2-27",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia, Río Anauco: embaulado desde la Av. Panteón hasta el Guaire, al oeste de Los Caobos, con referencia a Villa (1967, p. 90). El tramo Panteón–México sostiene el Paseo Anauco. Es el estado actual o el de 1967, no el de 1936, como bien dicen las notas."
+    },
+    {
+     "id": "agua2-28",
+     "veredicto": "confirmada",
+     "motivo": "Anexo A1, Tabla A1.2, fila de 1876, literal: 'Finalización de las primeras cloacas. Embaulamiento de la quebrada Caroata. Las aguas servidas dejaron de ir por zanjas de tierra...'. Las fuentes de la tabla son Arcila (1961, II, pp. 433-444) y González et al. (2005). No dice qué tramo."
+    },
+    {
+     "id": "agua2-29",
+     "veredicto": "confirmada",
+     "motivo": "Anexo A1, Nota 8, literal: proyecto de saneamiento de 1934 entre Antímano y San Agustín del Sur, y 'La construcción del embaulamiento de la quebrada de Caroata, en su ruta hacia el río Guaire, durante la reurbanización de El Silencio, se da en Röhl (1988)'."
+    },
+    {
+     "id": "agua2-30",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia, Reurbanización El Silencio: demolición desde el 25-07-1942, obras desde el 04-01-1943, inauguración el 26-08-1945."
+    },
+    {
+     "id": "agua2-31",
+     "veredicto": "confirmada",
+     "motivo": "rioguaire.org, entrada de 1915, literal: cloacas iniciadas en 1915 según el plan del Ministerio de 1912 a 1914. Hasta 1940: marginales del Caroata del Guaire a Los Flores, del Catuche del Guaire a la esquina de Medina, y colectores del Anauco de Puente Mohedano a San Bernardino. Cita a Grases et al., 'Obras hidráulicas...', 2011."
+    },
+    {
+     "id": "agua2-32",
+     "veredicto": "confirmada",
+     "motivo": "Anexo A1, Tabla A1.2, literal: '1937-40 Construcción de colectores primarios | Colectores en ambas márgenes del río Guaire y el marginal derecho del Caroata'."
+    },
+    {
+     "id": "agua2-33",
+     "veredicto": "confirmada",
+     "motivo": "rioguaire.org, entrada de 1944, literal: '-Saneamiento de la quebrada Catuche, terminado en un 50%', con referencia a la Memoria y Cuenta del MOP (1945), vol. 2, p. 62."
+    },
+    {
+     "id": "agua2-34",
+     "veredicto": "confirmada",
+     "motivo": "Cap. XIII, literal: 'desde los más antiguos sobre la quebrada Catuche (1773)'. La Tabla XIII.4 lo precisa: Carlos III de madera de 1773, destruido en 1781 y reconstruido en mampostería en 1783. Pero la conclusión de las notas, que en 1772 no hubo ningún puente sobre el Catuche, va más allá de la fuente: Grases solo cuenta los puentes con fecha identificada y en el mismo capítulo dice que en 1784 había cinco puentes."
+    },
+    {
+     "id": "agua2-35",
+     "veredicto": "confirmada",
+     "motivo": "Silva Contreras (2004), PDF de saber.ucv.ve, literal: 'En 1937 es demolido el Puente de Hierro... «anchura insuficiente»... «su estado ruinoso constituía un inminente peligro»... sustituido «por un puente moderno'."
+    },
+    {
+     "id": "agua2-36",
+     "veredicto": "confirmada",
+     "motivo": "Silva (2004), literal: en 1925 se decreta el traslado del Puente Sucre y un nuevo puente de concreto 'en el corte de la calle Sur 7'. Nota 11: puente de concreto armado en su lugar, traslado a la Gran Carretera Oriental en la entrada de Santa Teresa (H. Ayala, MOP, Memoria 1926, pp. 339-353)."
+    },
+    {
+     "id": "agua2-37",
+     "veredicto": "confirmada",
+     "motivo": "Cap. XIII, literal: 'Arnal (2000, p. 12) destaca la sustitución de viejos puentes metálicos caraqueños a partir del año 1942. Así: “Puente Hierro, Dolores y Paraíso se sustituyeron por estructuras de concreto armado'. El choque con la demolición de 1937 que da Silva queda bien anotado."
+    },
+    {
+     "id": "agua2-38",
+     "veredicto": "confirmada",
+     "motivo": "Silva (2004), literal: 'Puente Bolívar, en principio llamado Puente de las Barrancas, constituye una vuelta al acero. Este, junto con la Avenida de la Paz, fue inaugurado en 1933 para comunicar las Avenidas de El Paraíso, La Vega y la Gran Carretera Occidental'."
+    },
+    {
+     "id": "agua2-39",
+     "veredicto": "confirmada",
+     "motivo": "Silva (2004), literal: 'en 1932 el Puente Restaurador debió ser sometido a reparaciones debido al cambio del cauce del río ocasionado por la continua extracción de granzón de sus riberas (MOP, Memoria 1932, p. 218)'."
+    },
+    {
+     "id": "agua2-40",
+     "veredicto": "confirmada",
+     "motivo": "rioguaire.org, entrada de 1869: '17 puntos... 1) Puente de La Pastora', con referencia a Zawisza (1988), t. 2, p. 111."
+    },
+    {
+     "id": "agua2-41",
+     "veredicto": "confirmada",
+     "motivo": "La cita de Grases sobre Razetti (1898; 1902) y el Anexo B1 está literal en el Cap. XIII. fuentes/mapas/1911-princeton-plano-de-caracas-razetti/ficha.json no menciona ningún puente. Es una afirmación negativa: la acepto como 'no hallado'. No comprobé por mi cuenta que el Anexo B1 no esté disponible."
+    },
+    {
+     "id": "agua2-42",
+     "veredicto": "confirmada",
+     "motivo": "Tabla XIII.2: Caroata 7 / 2 / 18 (9) y Catuche 9 / 1 / 18 (8), así que 9 y 8 estructuras sin fecha. Esa parte se verifica. El resto es una afirmación negativa ('no encontré'), que acepto como tal."
+    }
+   ]
+  },
+  {
+   "tema": "edificios2",
+   "afirmaciones": [
+    {
+     "id": "edificios2-01",
+     "epoca": "todas",
+     "afirmacion": "El convento dominico de San Jacinto se fundó en 1595. Su cuadra conservó el uso religioso y después el de mercado hasta que se armó la parcela actual en 1998.",
+     "valor": "1595",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Estudio para la valoración y recuperación del patrimonio arquitectónico religioso venezolano a través de técnicas digitales: Iglesia de San Jacinto, caso de estudio (SIGraDi 2013)",
+      "autor": "Mariolly Dávila Cordido (Universidad Simón Bolívar)",
+      "año": "2013",
+      "url": "https://eres.scix.net/pdfs/sigradi2013_177.content.pdf"
+     },
+     "cita": "Estos periodos van desde la fundación del convento en 1595 hasta la demolición del mercado público y la conformación de la actual parcela en 1998",
+     "confianza": "alta",
+     "notas": "La guía guiaccs da 1591 (edificios2-02). El repo pone el convento desde 1772 sin cotejar (CG), y queda confirmado."
+    },
+    {
+     "id": "edificios2-02",
+     "epoca": "todas",
+     "afirmacion": "La guía de arquitectura de Caracas fecha el convento en 1591 y ubica la plaza de San Jacinto al este de la Plaza Mayor.",
+     "valor": "1591",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Plaza El Venezolano (antigua plaza de San Jacinto), Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/?p=866"
+     },
+     "cita": "(former Plaza San Jacinto) East of Plaza Mayor, was created when the Dominicans established the Convent of San Jacinto (1591).",
+     "confianza": "media",
+     "notas": "Contradice el 1595 del artículo de SIGraDi. Para el mapa da igual: las dos fechas son anteriores a 1772."
+    },
+    {
+     "id": "edificios2-03",
+     "epoca": "todas",
+     "afirmacion": "Los dominicos compraron un solar en una manzana al sureste de la plaza, en la traza del plano de Pimentel de 1578.",
+     "fuente": {
+      "titulo": "Iglesia de San Jacinto, caso de estudio (SIGraDi 2013)",
+      "autor": "Mariolly Dávila Cordido",
+      "año": "2013",
+      "url": "https://eres.scix.net/pdfs/sigradi2013_177.content.pdf"
+     },
+     "cita": "La orden de los dominicos adquirió, mediante un traspaso privado, un solar en una manzana sureste, ubicado en el plano realizado por el gobernador Juan de Pimentel de Caracas en 1578.",
+     "confianza": "alta"
+    },
+    {
+     "id": "edificios2-04",
+     "epoca": "1610",
+     "afirmacion": "En 1610 el convento recibió dos solares más en el lado este de la cuadra, hacia las esquinas de Dr. Paúl y El Chorro.",
+     "fuente": {
+      "titulo": "Plaza El Venezolano (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Plaza_El_Venezolano"
+     },
+     "cita": "los dos (2) solares adicionales al este de la cuadra, en Dr. Paul y el Chorro",
+     "confianza": "media",
+     "notas": "Cita tomada de la página con WebFetch. Wikipedia es fuente secundaria."
+    },
+    {
+     "id": "edificios2-05",
+     "epoca": "1772",
+     "afirmacion": "Planta de San Jacinto según la visita del obispo Martí (1772): iglesia de tres naves separadas por pilares con arcos de medio punto y techos de par y nudillo mudéjares, más la nave o capilla de los Terceros.",
+     "fuente": {
+      "titulo": "Iglesia de San Jacinto, caso de estudio (SIGraDi 2013)",
+      "autor": "Mariolly Dávila Cordido",
+      "año": "2013",
+      "url": "https://eres.scix.net/pdfs/sigradi2013_177.content.pdf"
+     },
+     "cita": "era de tres naves separadas por pilares que sujetaban arcos de medio punto con techos de pares y nudillos estilo mudéjar (Vivas, 1997, p. 110)",
+     "confianza": "alta",
+     "notas": "El artículo publica plantas reconstruidas para 1600-1641, 1772 y 1812 (figura 3). No da medidas en el texto; el plano de Lutowsky de 1852 está acotado en varas."
+    },
+    {
+     "id": "edificios2-06",
+     "epoca": "1772",
+     "afirmacion": "La iglesia de San Jacinto estaba en el centro del solar, con una sola puerta de fachada que daba a la plaza y un espacio libre delante.",
+     "fuente": {
+      "titulo": "Iglesia de San Jacinto, caso de estudio (SIGraDi 2013)",
+      "autor": "Mariolly Dávila Cordido",
+      "año": "2013",
+      "url": "https://eres.scix.net/pdfs/sigradi2013_177.content.pdf"
+     },
+     "cita": "se puede observar el aspecto del templo con su espacio libre frente. La iglesia dispuesta en el centro del solar poseía una fachada con una sola puerta que daba a la plaza.",
+     "confianza": "alta",
+     "notas": "Encaja con el esquema de iglesia más plaza delante. Sirve para T82.24 y T82.26: la plaza va delante de la fachada y la iglesia en medio del solar, no en una esquina."
+    },
+    {
+     "id": "edificios2-07",
+     "epoca": "1812",
+     "afirmacion": "Con el terremoto de 1812 se cayó el convento de San Jacinto y solo quedó en pie la torre.",
+     "fuente": {
+      "titulo": "Plaza El Venezolano, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/?p=866"
+     },
+     "cita": "During the 1812 earthquake, the convent was destroyed: only the turret remained standing.",
+     "confianza": "media"
+    },
+    {
+     "id": "edificios2-08",
+     "epoca": "1812-1843",
+     "afirmacion": "Después del terremoto de 1812, los dominicos tuvieron que levantar una capilla provisional en la plaza.",
+     "fuente": {
+      "titulo": "Iglesia de San Jacinto, caso de estudio (SIGraDi 2013)",
+      "autor": "Mariolly Dávila Cordido",
+      "año": "2013",
+      "url": "https://eres.scix.net/pdfs/sigradi2013_177.content.pdf"
+     },
+     "cita": "junto al terremoto de 1812, afectaron a la orden dominica, tuvieron que hacer una capilla provisional en la plaza.",
+     "confianza": "alta",
+     "notas": "No dice cuánto duró la capilla provisional."
+    },
+    {
+     "id": "edificios2-09",
+     "epoca": "1837",
+     "afirmacion": "La supresión definitiva del convento de San Jacinto se ordenó en 1837.",
+     "valor": "1837",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Iglesia de San Jacinto, caso de estudio (SIGraDi 2013)",
+      "autor": "Mariolly Dávila Cordido",
+      "año": "2013",
+      "url": "https://eres.scix.net/pdfs/sigradi2013_177.content.pdf"
+     },
+     "cita": "En 1837 se ordenó la supresión definitiva del convento.",
+     "confianza": "alta",
+     "notas": "Por eso en 1843 ya no hay convento activo. El rótulo «Convento de San Jacinto» del repo vale para 1772. Para 1843 hace falta otra cosa: iglesia o ruina más cárcel y Concejo (edificios2-10)."
+    },
+    {
+     "id": "edificios2-10",
+     "epoca": "1828",
+     "afirmacion": "En 1828 el Concejo tomó parte del terreno del convento para su sede y otra parte para una cárcel pública.",
+     "valor": "1828",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Plaza El Venezolano, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/?p=866"
+     },
+     "cita": "The City Council took part of this land for its seat and the other for a public jail (1828), among whose prisoners was Antonio Leoca-dioGuzmán.",
+     "confianza": "media"
+    },
+    {
+     "id": "edificios2-11",
+     "epoca": "1848-1852",
+     "afirmacion": "San Jacinto fue declarado lugar del mercado en 1848 y la obra se previó en 1851. En el plano de Lutowsky de 1852 todavía se ven los límites de la iglesia.",
+     "valor": "1848",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Iglesia de San Jacinto, caso de estudio (SIGraDi 2013)",
+      "autor": "Mariolly Dávila Cordido",
+      "año": "2013",
+      "url": "https://eres.scix.net/pdfs/sigradi2013_177.content.pdf"
+     },
+     "cita": "En 1848 se declara a San Jacinto como lugar de emplazamiento para el mercado y en 1851 se prevé su construcción.",
+     "confianza": "alta",
+     "notas": "Mismo artículo: «No obstante, en el plano de Lutowsky de 1852, podemos observar los límites de la iglesia.» El proyecto de 1852 «respetaba el espacio de la iglesia y del convento»."
+    },
+    {
+     "id": "edificios2-12",
+     "epoca": "1865-1874",
+     "afirmacion": "La iglesia de San Jacinto seguía en pie a mediados del siglo XIX: el artículo la reconstruye en su estado de 1865 y en el de 1874, tomado de una foto de Lessmann, en medio de la parcela.",
+     "fuente": {
+      "titulo": "Iglesia de San Jacinto, caso de estudio (SIGraDi 2013)",
+      "autor": "Mariolly Dávila Cordido",
+      "año": "2013",
+      "url": "https://eres.scix.net/pdfs/sigradi2013_177.content.pdf"
+     },
+     "cita": "usaremos la fotografía de Lessmann de 1874 (figura 2). Todos ellos ubican la iglesia del siglo XIX en el medio de la parcela.",
+     "confianza": "alta",
+     "notas": "Para 1843 hay que modelar en San Jacinto una iglesia en pie, aunque sin convento."
+    },
+    {
+     "id": "edificios2-13",
+     "epoca": "1896",
+     "afirmacion": "Juan Hurtado Manrique proyectó en 1896 el mercado de San Jacinto, que se levantó sobre los mismos cimientos de la iglesia y respetó su planta.",
+     "valor": "1896",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Iglesia de San Jacinto, caso de estudio (SIGraDi 2013)",
+      "autor": "Mariolly Dávila Cordido",
+      "año": "2013",
+      "url": "https://eres.scix.net/pdfs/sigradi2013_177.content.pdf"
+     },
+     "cita": "La otra propuesta para el mercado fue hecha por el arquitecto H. Manrique en 1896. Su construcción se realizó sobre los mismos cimientos de la iglesia, respetando, su planta y sus principios estructurales.",
+     "confianza": "alta",
+     "notas": "Choca con el repo: allí el «Mercado de San Jacinto» va desde 1889, por el rótulo 23 «Mercado público» del plano de 1889. Si en 1889 ya había un mercado en ese solar, era otro edificio, anterior al de Manrique. Falta cotejarlo con el dibujo de 1889."
+    },
+    {
+     "id": "edificios2-14",
+     "epoca": "1809-1947",
+     "afirmacion": "La plaza de San Jacinto se volvió mercado en 1809 y dejó de serlo en 1947. Desde entonces es espacio abierto; la reformó Tomás Sanabria en 1967.",
+     "valor": "1947",
+     "unidad": "año (fin del mercado en la plaza)",
+     "fuente": {
+      "titulo": "Plaza El Venezolano, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/?p=866"
+     },
+     "cita": "In 1809, the plaza became a marketplace.",
+     "confianza": "media",
+     "notas": "La misma página dice: «The plaza ceased its function as a market in 1947. In 1967, a project to reform the plaza was commissioned to TomásSanabria». No queda claro si el mercado de 1809-1947 ocupaba la plaza o el solar del convento; el mercado techado de 1896 estaba en el solar de la iglesia (edificios2-13)."
+    },
+    {
+     "id": "edificios2-15",
+     "epoca": "1882",
+     "afirmacion": "La plaza de San Jacinto pasó a llamarse Plaza El Venezolano en 1882, cuando Guzmán Blanco puso allí la estatua de su padre.",
+     "valor": "1882",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Plaza El Venezolano, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/?p=866"
+     },
+     "cita": "Later, as president, his son Antonio Guzmán Blanco placed a statue there in his father's honor, renaming it Plaza El Venezolano (1882).",
+     "confianza": "media",
+     "notas": "Coincide con el repo: «Plaza El Venezolano» desde 1889."
+    },
+    {
+     "id": "edificios2-16",
+     "epoca": "1732-1874",
+     "afirmacion": "Llegaron las primeras carmelitas en 1732 y la capilla del convento se consagró en 1739.",
+     "valor": "1732",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Convento de las Monjas Carmelitas (Caracas) (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Convento_de_las_Monjas_Carmelitas_(Caracas)"
+     },
+     "cita": "El Rey de España autorizaría su funcionamiento solo hasta 1732, cuando llegaron las primeras religiosas. Su capilla fue consagrada en 1739.",
+     "confianza": "media",
+     "notas": "Wikipedia cita a Carmen Clemente Travieso, «Las esquinas de Caracas». El convento existe en 1772, como pone el repo (CG, ahora con fuente)."
+    },
+    {
+     "id": "edificios2-17",
+     "epoca": "1874",
+     "afirmacion": "El convento de las Carmelitas se cerró por la fuerza y fue destruido en 1874, bajo Guzmán Blanco. La esquina de Carmelitas lleva su nombre.",
+     "valor": "1874",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Convento de las Monjas Carmelitas (Caracas) (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Convento_de_las_Monjas_Carmelitas_(Caracas)"
+     },
+     "cita": "El Convento fue cerrado por la fuerza y destruido bajo el gobierno del General Antonio Guzmán Blanco en el año 1874.",
+     "confianza": "media",
+     "notas": "La misma página dice que el convento funcionó donde hubo una ermita de San Mauricio en 1577. Eso choca con la Santa Capilla (edificios2-19), que pone a San Mauricio en otro solar. Hay que tomarlo con cautela."
+    },
+    {
+     "id": "edificios2-18",
+     "epoca": "1889-1936",
+     "afirmacion": "El edificio del convento tuvo usos públicos: Correos, Tesorería, Ministerio de Hacienda. Con Cipriano Castro se reformó como «Palacio de Hacienda»; hoy está ahí el Banco Central, frente al Correo de Carmelitas.",
+     "fuente": {
+      "titulo": "Convento de las Monjas Carmelitas (Caracas) (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Convento_de_las_Monjas_Carmelitas_(Caracas)"
+     },
+     "cita": "Del convento solo quedó el nombre de la referida esquina, puesto que en el gobierno de Cipriano Castro se reformó como sede del \"Palacio de Hacienda\".",
+     "confianza": "media",
+     "notas": "Coincide con el repo: 1889 «Mº de Hacienda» (P89 18) y 1936 «Minist. de Hacienda». No encontré planta ni medidas del convento."
+    },
+    {
+     "id": "edificios2-19",
+     "epoca": "1568-1883",
+     "afirmacion": "La Santa Capilla reemplazó a la ermita de San Sebastián, que mandó hacer Losada en 1568 y que pasó a llamarse San Mauricio en 1640. La obra nueva empezó en febrero de 1883.",
+     "valor": "1640",
+     "unidad": "año (nombre San Mauricio)",
+     "fuente": {
+      "titulo": "Basílica menor de Santa Capilla, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/basilica-menor-de-santa-capilla/"
+     },
+     "cita": "La edificación caraqueña, que reemplazó la antigua Ermita de San Sebastián, construida por orden de Diego de Losada en 1568 y cuyo nombre fue cambiado a San Mauricio en 1640, comenzó a construirse en febrero de 1883.",
+     "confianza": "media",
+     "notas": "Responde la duda del repo: San Mauricio estaba en el mismo solar que la Santa Capilla desde 1640, así que existe en 1772 y 1843."
+    },
+    {
+     "id": "edificios2-20",
+     "epoca": "1812",
+     "afirmacion": "El terremoto de 1812 casi destruyó la iglesia de San Mauricio, y la reconstrucción no se terminó nunca.",
+     "fuente": {
+      "titulo": "Basílica Menor Santa Capilla (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Basílica_Menor_Santa_Capilla"
+     },
+     "cita": "en 1812, otro terremoto destruye casi por completo la iglesia",
+     "confianza": "media",
+     "notas": "Cita tomada con WebFetch. En 1843 San Mauricio estaría en ruina o reconstruido a medias: pertenece a la regla R11, como Altagracia y La Merced."
+    },
+    {
+     "id": "edificios2-21",
+     "epoca": "1889-1936",
+     "afirmacion": "La Santa Capilla tiene planta de tres naves separadas por columnas con arcos ojivales, una torre central con aguja sobre el acceso y reformas en 1889, 1910 y 1921.",
+     "fuente": {
+      "titulo": "Basílica menor de Santa Capilla, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/basilica-menor-de-santa-capilla/"
+     },
+     "cita": "Reformada en varias oportunidades (1889, 1910 y 1921), la basílica, cuyas fachadas poseen elementos de estilo neogótico, está conformada por una planta de tres naves, separadas por hileras de columnas que sostienen arcos ojivales.",
+     "confianza": "media",
+     "notas": "Wikipedia la ubica «en la esquina de San Mauricio de la avenida Urdaneta»."
+    },
+    {
+     "id": "edificios2-22",
+     "epoca": "siglo XVIII-1910",
+     "afirmacion": "Frente a la Santa Capilla, la plaza Andrés Eloy Blanco ocupa el lugar del antiguo Cuartel San Mauricio, del siglo XVIII; allí se decretó en 1910 el edificio de telégrafos.",
+     "fuente": {
+      "titulo": "Plaza Andrés Eloy Blanco, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/plaza-andres-eloy-blanco/"
+     },
+     "cita": "ocupa hoy el lugar del antiguo Cuartel San Mauricio (Siglo XVIII), dejando abierta la esquina.",
+     "confianza": "media",
+     "notas": "En 1772-1911 no había plaza delante de San Mauricio: estaba el cuartel."
+    },
+    {
+     "id": "edificios2-23",
+     "epoca": "1580-1876",
+     "afirmacion": "La iglesia de San Pablo primer ermitaño se construyó en 1580 y se demolió en 1876.",
+     "valor": "1580",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Aproximación histórica al patrimonio pictórico y escultórico colonial de la iglesia de San Pablo, primer ermitaño (trabajo de grado, UCV)",
+      "autor": "Tarím S. Gois C.",
+      "año": "2007",
+      "url": "https://saber.ucv.ve/jspui/bitstream/10872/1862/1/tesis%20San%20Pablo.pdf"
+     },
+     "cita": "templo que fue uno de los más antiguos de la Caracas colonial, construido en el año de 1580",
+     "confianza": "alta",
+     "notas": "El resumen de la tesis dice además «demolido en 1876»."
+    },
+    {
+     "id": "edificios2-24",
+     "epoca": "1843-1873",
+     "afirmacion": "Ubicación de San Pablo: en 1843, calle Brayos (este-oeste) con calle Patrias (norte-sur); en 1873, el Juncal y El Comercio; hoy, avenida Lecuna con la esquina Teatro Municipal.",
+     "fuente": {
+      "titulo": "Aproximación histórica al patrimonio... de la iglesia de San Pablo (UCV)",
+      "autor": "Tarím S. Gois C.",
+      "año": "2007",
+      "url": "https://saber.ucv.ve/jspui/bitstream/10872/1862/1/tesis%20San%20Pablo.pdf"
+     },
+     "cita": "Según un informe topográfico de la ciudad de Caracas elaborado en 1843, la ubicación de la iglesia de San Pablo era calle Brayos de este a oeste con calle Patrias de norte a sur.",
+     "confianza": "alta",
+     "notas": "La tesis trae un croquis (ilustración 4) con la Plaza de San Pablo entre la calle Patria y la calle Juncal, junto a la iglesia. Con el texto que extraje no se puede saber la orientación exacta."
+    },
+    {
+     "id": "edificios2-25",
+     "epoca": "1772-1876",
+     "afirmacion": "Planta de San Pablo: una sola nave, fachada modesta de dos cuerpos y, en línea con la fachada, una torre maciza que la separaba del Hospital Real contiguo.",
+     "fuente": {
+      "titulo": "Aproximación histórica al patrimonio... de la iglesia de San Pablo (UCV), citando a Gasparini, Templos coloniales de Venezuela, p. 14",
+      "autor": "Tarím S. Gois C.",
+      "año": "2007",
+      "url": "https://saber.ucv.ve/jspui/bitstream/10872/1862/1/tesis%20San%20Pablo.pdf"
+     },
+     "cita": "era de una sola nave con una modesta fachada de dos cuerpos. Dos medias columnas a cada lado, encuadraban el vano con arco de medio punto.",
+     "confianza": "alta",
+     "notas": "La misma cita sigue: «En línea con la fachada, una maciza torre de dos cuerpos separaba la iglesia del hospital real, que quedaba contiguo». Otaduy describe la torre de tres cuerpos (1772). En 1686 se sumó al conjunto el hospicio de la Caridad, con una sala de 30 varas."
+    },
+    {
+     "id": "edificios2-26",
+     "epoca": "1812",
+     "afirmacion": "En 1812 se cayó la torre de San Pablo sobre el coro y las paredes quedaron desplomadas. La iglesia siguió en uso hasta 1876.",
+     "fuente": {
+      "titulo": "Aproximación histórica al patrimonio... de la iglesia de San Pablo (UCV), citando la carta de Domingo Herrera al obispo Coll y Prat, 10-04-1812",
+      "autor": "Tarím S. Gois C.",
+      "año": "2007",
+      "url": "https://saber.ucv.ve/jspui/bitstream/10872/1862/1/tesis%20San%20Pablo.pdf"
+     },
+     "cita": "En Iglesia de San Pablo Calló la torre sobre el coro y lo reventó, y también un altar.",
+     "confianza": "alta",
+     "notas": "La tesis supone que la torre y la fachada cambiaron después de 1812, porque las fotos de Lessmann muestran otra torre."
+    },
+    {
+     "id": "edificios2-27",
+     "epoca": "1876",
+     "afirmacion": "El decreto del 24 de marzo de 1876 nombró al inspector de los trabajos en el templo de San Pablo y el cuartel de artillería contiguo. Las Memorias del MOP del 6 de abril de 1876 dicen que los dos edificios ya se habían demolido.",
+     "valor": "1876",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Aproximación histórica al patrimonio... de la iglesia de San Pablo (UCV), citando Memorias del MOP, 6-04-1876",
+      "autor": "Tarím S. Gois C.",
+      "año": "2007",
+      "url": "https://saber.ucv.ve/jspui/bitstream/10872/1862/1/tesis%20San%20Pablo.pdf"
+     },
+     "cita": "Bajo la inspección del general Manuel María Aurrecoechea, se procedió a la demolición de ambos edificios y se confió al ingeniero Esteban Richard […] director de la nueva obra.",
+     "confianza": "alta"
+    },
+    {
+     "id": "edificios2-28",
+     "epoca": "1876",
+     "afirmacion": "El Teatro Guzmán Blanco se hizo en el lugar del templo de San Pablo y del cuartel de artillería anexo, que antes había sido Hospital y Hospicio de Mujeres.",
+     "fuente": {
+      "titulo": "Aproximación histórica al patrimonio... de la iglesia de San Pablo (UCV)",
+      "autor": "Tarím S. Gois C.",
+      "año": "2007",
+      "url": "https://saber.ucv.ve/jspui/bitstream/10872/1862/1/tesis%20San%20Pablo.pdf"
+     },
+     "cita": "destinando para ello el lugar donde se levantaba el templo de San Pablo, junto con el anexo del cuartel de artillería (antiguo Hospital y Hospicio de Mujeres).",
+     "confianza": "alta",
+     "notas": "El repo dice que el teatro está «donde estuvo la plaza de San Pablo». Según la fuente, lo que ocupa es el solar de la iglesia y el hospital."
+    },
+    {
+     "id": "edificios2-29",
+     "epoca": "1881",
+     "afirmacion": "El Teatro Guzmán Blanco (hoy Municipal) se inauguró el 1 de enero de 1881. La obra empezó en 1876 con Esteban Ricard y la terminó desde 1879 Jesús Muñoz Tébar.",
+     "valor": "1881",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Teatro Municipal de Caracas (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Teatro_Municipal_de_Caracas"
+     },
+     "cita": "el mismo se construyó sobre el terreno que antes ocupaba la Iglesia de San Pablo",
+     "confianza": "media",
+     "notas": "Fecha y arquitectos tomados de la misma página con WebFetch. La guía guiaccs (Teatro Municipal) da 1876-1881, un aforo de 1300 espectadores y un peristilo semicircular."
+    },
+    {
+     "id": "edificios2-30",
+     "epoca": "1881-1936",
+     "afirmacion": "La plazoleta delante del Teatro Municipal se demolió en un ensanche de calles, y el teatro perdió su atrio.",
+     "fuente": {
+      "titulo": "Teatro Municipal (antiguo Teatro Guzmán Blanco), Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/teatro-municipal-antiguo-teatro-guzman-blanco/"
+     },
+     "cita": "La plazoleta exterior, que fuera centro de intensa actividad social, fue demolida por una operación de ensanche de vías, donde el teatro también perdió su atrio y su carácter monumental.",
+     "confianza": "media",
+     "notas": "No da la fecha del ensanche. Probablemente es posterior a 1936 (avenida Bolívar), pero no lo verifiqué."
+    },
+    {
+     "id": "edificios2-31",
+     "epoca": "1854",
+     "afirmacion": "El Teatro Caracas se construyó en 1854, a una cuadra al norte de la Plaza Bolívar, entre Veroes e Ibarras, después de que se descartara el teatro proyectado junto a San Pablo.",
+     "valor": "1854",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Aproximación histórica al patrimonio... de la iglesia de San Pablo (UCV)",
+      "autor": "Tarím S. Gois C.",
+      "año": "2007",
+      "url": "https://saber.ucv.ve/jspui/bitstream/10872/1862/1/tesis%20San%20Pablo.pdf"
+     },
+     "cita": "se destinó un nuevo terreno a una cuadra norte de la Plaza Bolívar, entre Veroes e Ibarras, donde se construyó en 1854 lo que sería el Teatro Caracas.",
+     "confianza": "alta",
+     "notas": "Encaja con el repo («Teatro Caracas», esquina de Veroes, desde 1889)."
+    },
+    {
+     "id": "edificios2-32",
+     "epoca": "1673-1696",
+     "afirmacion": "En 1673 el obispo González de Acuña compró una casa al suroeste de la Plaza Mayor, que el 29 de agosto de 1696 pasó a ser el Colegio Santa Rosa de Lima, con capilla.",
+     "valor": "1696",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "De Seminario colonial a Museo: el Palacio Municipal de Caracas",
+      "autor": "Luisvel Ortiz (Cronista de Caracas)",
+      "año": "2025",
+      "url": "https://cronistacss-cal.mincyt.gob.ve/wp-content/uploads/2025/10/Concejo-Municipal-PATRIOMONIO-1.pdf"
+     },
+     "cita": "Para el 29 de agosto de 1696, se convirtió en el Colegio Santa Rosa de Lima, que además contaba con una capilla.",
+     "confianza": "media",
+     "notas": "La guía guiaccs (Palacio Municipal) lo pone «al sur de la plaza Bolívar». Confirma la manzana sur que usa el repo. Que la marca caiga en la calle (D4) es un problema de posición, no de manzana."
+    },
+    {
+     "id": "edificios2-33",
+     "epoca": "1721-1857",
+     "afirmacion": "El seminario fue elevado a universidad el 22 de diciembre de 1721. Universidad y seminario funcionaron juntos hasta 1857, cuando la Universidad Central se mudó al convento de San Francisco.",
+     "valor": "1857",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "De Seminario colonial a Museo: el Palacio Municipal de Caracas",
+      "autor": "Luisvel Ortiz (Cronista de Caracas)",
+      "año": "2025",
+      "url": "https://cronistacss-cal.mincyt.gob.ve/wp-content/uploads/2025/10/Concejo-Municipal-PATRIOMONIO-1.pdf"
+     },
+     "cita": "Hasta 1857 funcionó en conjunto la Universidad junto con el Seminario; luego de ese año se separan y queda funcionando para los estudiantes del clero",
+     "confianza": "media",
+     "notas": "La nota 6 de la misma página dice: «La Universidad Central de Venezuela es trasladada al convento San Francisco». En 1772 y 1843 el rótulo «Seminario y Universidad» es correcto."
+    },
+    {
+     "id": "edificios2-34",
+     "epoca": "1786",
+     "afirmacion": "La guía guiaccs fecha en 1786 el paso del convento de San Francisco a sede de la Universidad Central, que siguió allí hasta 1953.",
+     "valor": "1786",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Palacio de las Academias y Biblioteca Nacional (antiguo convento de San Francisco), Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/palacio-de-las-academias-y-biblioteca-nacional-antiguo-convento-de-san-francisco/"
+     },
+     "cita": "experimentó su transformación más importante en 1786, cuando pasó a convertirse en sede de la Universidad Central de Venezuela, hasta 1953.",
+     "confianza": "baja",
+     "notas": "Contradice el 1857 del texto del cronista (edificios2-33). Probablemente es un error de la guía. La misma página dice que la fachada neogótica de Hurtado Manrique es de 1876, como pone el repo (Universidad desde 1889)."
+    },
+    {
+     "id": "edificios2-35",
+     "epoca": "1872-1906",
+     "afirmacion": "Guzmán Blanco cerró el seminario en 1872 y Hurtado Manrique rehízo el edificio para Tribunales, Gobernación y Policía; la capilla pasó a ser el salón del Concejo Municipal. Chataing lo reformó en 1904-1906: un edificio de esquina con patio central.",
+     "valor": "1872",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Palacio Municipal de Caracas, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/palacio-municipal-de-caracas/"
+     },
+     "cita": "En 1872, con el cierre del seminario por orden de Guzmán Blanco, Hurtado Manrique reconstruye el edificio, acondicionándolo como sede para los Tribunales de Justicia, la Gobernación y la Comandancia de Policía; y convirtió la capilla en el salón de sesiones del Concejo Municipal.",
+     "confianza": "media",
+     "notas": "El texto del cronista pone el cierre en 1873. Coincide con el repo: el seminario muere en 1889, cuando el plano ya rotula el Concejo."
+    },
+    {
+     "id": "edificios2-36",
+     "epoca": "1772-1843",
+     "afirmacion": "Antes del paseo, en lo alto del cerro de El Calvario había una ermita, adonde se peregrinaba en Semana Santa.",
+     "fuente": {
+      "titulo": "Parque El Calvario, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/parque-el-calvario/"
+     },
+     "cita": "La Ermita de Nuestra Señora de Valvarena, en el tope del cerro, era lugar de peregrinación durante Semana Santa.",
+     "confianza": "media",
+     "notas": "No encontré ni la fecha de construcción de la ermita ni su planta."
+    },
+    {
+     "id": "edificios2-37",
+     "epoca": "1873-1895",
+     "afirmacion": "El paseo de El Calvario empezó en 1873 con Guzmán Blanco. Tenía una capilla de Lourdes (1885), el Arco de la Federación (1895) y el Observatorio Cajigal (1888), en un área original de 21 hectáreas.",
+     "valor": "21",
+     "unidad": "ha",
+     "fuente": {
+      "titulo": "Parque El Calvario, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/parque-el-calvario/"
+     },
+     "cita": "alberga varias obras de interés, como la Capilla de Nuestra Señora de Lourdes (1885), el Arco de la Federación (1895) y el Observatorio Cajigal (1888)",
+     "confianza": "media",
+     "notas": "Así que en 1889 hay que mostrar la capilla de Lourdes, y el arco desde 1911. La capilla mide 20 m de largo, 14 m en el crucero y 9 m de alto (guiaccs, Capilla Nuestra Señora de Lourdes)."
+    },
+    {
+     "id": "edificios2-38",
+     "epoca": "1885-1936",
+     "afirmacion": "La capilla de Lourdes de El Calvario mide 20 m de largo, 14 m de ancho en el crucero y 9 m de alto en la nave central.",
+     "valor": "20 x 14 x 9",
+     "unidad": "m",
+     "fuente": {
+      "titulo": "Capilla Nuestra Señora de Lourdes, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/capilla-nuestra-senora-de-lourdes/"
+     },
+     "cita": "La capilla de 20 metros de largo por 14 de ancho en su crucero y nueve de altura desde el piso de la nave central, presenta dos fachadas simétricas",
+     "confianza": "media"
+    },
+    {
+     "id": "edificios2-39",
+     "epoca": "1708",
+     "afirmacion": "La iglesia de la Candelaria se levantó en 1708.",
+     "valor": "1708",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Iglesia de Nuestra Señora de la Candelaria (Caracas) (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Iglesia_de_Nuestra_Señora_de_la_Candelaria_(Caracas)"
+     },
+     "cita": "La veneración a la Virgen de la Candelaria en Venezuela tiene sus orígenes en la inmigración canaria al país, por lo que en 1708 se levantó la iglesia dedicada a la Virgen María en el lugar.",
+     "confianza": "media",
+     "notas": "Wikipedia cita a Globovisión, una fuente débil. La guía guiaccs dice «La iglesia original del siglo XVIII». Si es así, ya estaba en 1772; el repo la pone desde 1843."
+    },
+    {
+     "id": "edificios2-40",
+     "epoca": "todas",
+     "afirmacion": "La plaza de la Candelaria está cerrada por calles al norte, al oeste y al sur, y la iglesia queda al este: la fachada mira al oeste, a la plaza. Al principio era solo un solar delante de la iglesia.",
+     "fuente": {
+      "titulo": "Plaza La Candelaria o Plaza Urdaneta, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/plaza-la-candelaria-o-plaza-urdaneta/"
+     },
+     "cita": "La plaza, delimitada por tres calles al norte, oeste y sur, edificaciones con comercios al oeste, y la iglesia al este, es centro de actividades vecinales.",
+     "confianza": "media",
+     "notas": "La misma página dice que la iglesia quedó «severamente dañada por el terremoto de 1812» y que la ampliación de la plaza «desde la esquina de La Cruz a la de Candilito» es de tiempos de Pérez Jiménez, después de 1936. Que la fachada mire al oeste es una deducción de la planta."
+    },
+    {
+     "id": "edificios2-41",
+     "epoca": "1697-1817",
+     "afirmacion": "Santa Rosalía empezó como ermita en 1697, en la Sabana del Viento. En 1730 se inauguró la iglesia, a unos 230 m de la ermita; el terremoto de 1812 la dañó y se rehízo en 1817.",
+     "valor": "1730",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Iglesia de Santa Rosalía (Caracas) (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Iglesia_de_Santa_Rosalía_(Caracas)"
+     },
+     "cita": "En 1730 se inaugura una iglesia a unos 230 metros de la ermita para reemplazar a esta, sin embargo, un terremoto en 1812 afectó seriamente la estructura por lo que hubo que reconstruirla en 1817.",
+     "confianza": "media",
+     "notas": "El artículo lleva aviso de falta de referencias. Si es cierto, la iglesia estaba en 1772; el repo la pone desde 1843."
+    },
+    {
+     "id": "edificios2-42",
+     "epoca": "todas",
+     "afirmacion": "Santa Rosalía está entre las esquinas de Santa Rosalía y Candilito. Es de planta rectangular, con tres naves, tres puertas en la fachada y el campanario al norte.",
+     "fuente": {
+      "titulo": "Iglesia de Santa Rosalía (Caracas) (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Iglesia_de_Santa_Rosalía_(Caracas)"
+     },
+     "cita": "La edificación colonial está construida en una base rectangular, su fachada es de estilo neoclásico integrada por tres puertas del mismo tamaño que conducen a las tres naves existentes",
+     "confianza": "media"
+    },
+    {
+     "id": "edificios2-43",
+     "epoca": "1812-1857",
+     "afirmacion": "La Merced (Las Mercedes) quedó destruida por el terremoto de 1812 y se reconstruyó en 1857. En 1843 estaba en ruina o sin reconstruir.",
+     "valor": "1857",
+     "unidad": "año (reconstrucción)",
+     "fuente": {
+      "titulo": "Iglesia Nuestra Señora de las Mercedes, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/iglesia-nuestra-senora-de-las-mercedes/"
+     },
+     "cita": "hasta que resultó devastada por tercera vez por el terremoto de 1812. En 1857, se reconstruye de nuevo el templo",
+     "confianza": "media",
+     "notas": "La guía y Wikipedia cuentan el origen en 1614 con una ermita de mulatos, lo que parece mezclarse con la cofradía de Altagracia. No encontré fuente para «fachada en ruinas en 1842, capilla provisional» (spec 13, D8)."
+    },
+    {
+     "id": "edificios2-44",
+     "epoca": "1857-1936",
+     "afirmacion": "Las Mercedes está en la esquina Las Mercedes. Al este del templo, Guzmán Blanco hizo la Plaza Falcón, hoy plaza de Las Mercedes. La iglesia es de planta rectangular con tres naves y tres entradas.",
+     "fuente": {
+      "titulo": "Iglesia de Nuestra Señora de las Mercedes (Caracas) (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Iglesia_de_Nuestra_Señora_de_las_Mercedes_(Caracas)"
+     },
+     "cita": "Al este del templo, el gobierno del general Antonio Guzmán Blanco construyó la Plaza Falcón (hoy plaza de Las Mercedes)",
+     "confianza": "media",
+     "notas": "La plaza no está antes de Guzmán Blanco: en 1889 sí, en 1843 no. Hasta 1825 hubo un cementerio detrás de la iglesia."
+    },
+    {
+     "id": "edificios2-45",
+     "epoca": "1788-1869",
+     "afirmacion": "San Juan (Capuchinos): hospicio y capilla de los capuchinos desde 1788. Tras 1812 se hizo una capilla mediana, reemplazada por una iglesia parroquial en 1843, y el templo neoclásico actual se inauguró en 1869.",
+     "valor": "1843",
+     "unidad": "año (iglesia parroquial)",
+     "fuente": {
+      "titulo": "Iglesia de San Juan Bautista (Caracas) (Wikipedia en español), citando el Registro del Patrimonio Cultural VE-IPC-0001PU",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Iglesia_de_San_Juan_Bautista_(Caracas)"
+     },
+     "cita": "se construyó en su lugar una capilla de medianas proporciones, siendo sustituida por una iglesia parroquial en 1843.",
+     "confianza": "media",
+     "notas": "Apoya leer la letra S «Capuchinos» de la leyenda de 1843 como este templo; el repo hoy lo pone desde 1889. En 1772 todavía no estaba: el hospicio es de 1788."
+    },
+    {
+     "id": "edificios2-46",
+     "epoca": "1776-1936",
+     "afirmacion": "La plaza Capuchinos, frente a San Juan, ya aparece en los planos en 1776. Es triangular y está cerrada por tres calles.",
+     "valor": "1776",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Plaza Capuchinos, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/plaza-capuchinos/"
+     },
+     "cita": "Esta plaza, cuya primera aparición en planos data de 1776, está ubicada frente a la iglesia de San Juan, y es una de las más antiguas de la ciudad. De forma triangular y delimitada por tres calles",
+     "confianza": "media",
+     "notas": "Se llamaba plaza del León en 1776, plaza de Abril en 1875 y plaza Zamora en 1881. La avenida San Martín la achicó en 1952."
+    },
+    {
+     "id": "edificios2-47",
+     "epoca": "todas",
+     "afirmacion": "La casa natal del Libertador está entre las esquinas de San Jacinto y Traposos, en una parcela estrecha entre medianeras, con una secuencia de patios rodeados de corredores.",
+     "fuente": {
+      "titulo": "Casa Natal del Libertador (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Casa_Natal_del_Libertador"
+     },
+     "cita": "La casa está ubicada entre las esquinas de San Jacinto a Traposos en la Parroquia Catedral de Caracas.",
+     "confianza": "media",
+     "notas": "La misma página dice: «La casa, de una planta, ocupa una estrecha parcela medianera». Para R1, la casa va en la fila del frente, no como hito exento."
+    },
+    {
+     "id": "edificios2-48",
+     "epoca": "1651",
+     "afirmacion": "En 1651 ya había una construcción en la parcela de la casa natal. La guía guiaccs la fecha en 1643.",
+     "valor": "1651",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Casa Natal del Libertador (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Casa_Natal_del_Libertador"
+     },
+     "cita": "en 1651 ya existía una construcción en la parcela que actualmente ocupa la Casa Natal de Bolívar",
+     "confianza": "media",
+     "notas": "La casa existe en 1772. El repo pone la marca desde 1843 a propósito, con la duda anotada."
+    },
+    {
+     "id": "edificios2-49",
+     "epoca": "1910-1921",
+     "afirmacion": "Antes de 1910 la casa natal servía de almacén. El Estado la compró en 1912 y Vicente Lecuna la restauró con elementos neocoloniales; abrió en 1921.",
+     "valor": "1912",
+     "unidad": "año (compra)",
+     "fuente": {
+      "titulo": "Casa Natal del Libertador Simón Bolívar, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/casa-natal-del-libertador-simon-bolivar/"
+     },
+     "cita": "La casa del Libertador Simón Bolívar, utilizada antes de 1910 como almacén, fue adquirida por el estado en 1912, durante el régimen de Gómez",
+     "confianza": "media",
+     "notas": "Según Wikipedia, «se inicia un programa de reconstrucción en 1916 que concluye en 1921». En 1889 y 1911 es una casa común; recién en 1936 aparece la fachada neocolonial."
+    },
+    {
+     "id": "edificios2-50",
+     "epoca": "1844-1854",
+     "afirmacion": "La Rotunda se empezó en 1844 con Soublette, al sur del Hospital de Caridad de Hombres, y se terminó en 1854 con José Gregorio Monagas. Era circular, sobre el modelo del panóptico.",
+     "valor": "1844",
+     "unidad": "año (inicio)",
+     "fuente": {
+      "titulo": "La Rotunda (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/La_Rotunda"
+     },
+     "cita": "La Rotunda fue construida en 1844 en Caracas, al sur del Hospital de Caridad de Hombres, durante la presidencia de Carlos Soublette. La construcción de la cárcel fue concluida en 1854, durante el gobierno de José Gregorio Monagas.",
+     "confianza": "media",
+     "notas": "La misma página: «El nombre de la cárcel se deriva de la forma circular del edificio». No existe en 1843; desde 1889 sí, como pone el repo. El nombre «La Rotunda», que el repo marca como CG, ya tiene fuente."
+    },
+    {
+     "id": "edificios2-51",
+     "epoca": "1889",
+     "afirmacion": "La Rotunda se reinauguró como casa de corrección el 14 de octubre de 1889, con Rojas Paúl.",
+     "valor": "1889",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "La Rotunda (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/La_Rotunda"
+     },
+     "cita": "Fue reinaugurada, aunque por el presidente Juan Pablo Rojas Paúl, el 14 de octubre de 1889, como casa de corrección.",
+     "confianza": "media"
+    },
+    {
+     "id": "edificios2-52",
+     "epoca": "1936-1940",
+     "afirmacion": "La Rotunda se demolió en 1936 por orden de López Contreras. En su lugar se hizo la plaza La Concordia, de Carlos Raúl Villanueva, construida entre 1937 y 1940.",
+     "valor": "1936",
+     "unidad": "año (demolición)",
+     "fuente": {
+      "titulo": "Plaza La Concordia (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Plaza_La_Concordia"
+     },
+     "cita": "La prisión fue demolida por orden del presidente Eleazar López Contreras, en 1936, a pocos meses de la muerte de Gómez.",
+     "confianza": "media",
+     "notas": "El plano DCN de 1936 puede mostrarla todavía o ya demolida. El repo la quita en 1936 (muere: 5); hay que confirmarlo en la hoja de 1936. Aporrea la ubica «muy cerca de la iglesia Santa Teresa»."
+    },
+    {
+     "id": "edificios2-53",
+     "epoca": "1916-1919",
+     "afirmacion": "El contrato del 17 de enero de 1916 encargó un circo o plaza de toros para reemplazar al antiguo Circo Metropolitano, en el terreno del antiguo matadero municipal. El Nuevo Circo abrió el 26 de enero de 1919.",
+     "valor": "1919",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Nuevo Circo de Caracas (Wikipedia en español), citando a Marín (2006) y Salas (1978)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Nuevo_Circo_de_Caracas"
+     },
+     "cita": "se compromete a construir un circo o plaza de toros para sustituir el antiguo Circo Metropolitano, aprovechando el espacio que ocupaba el antiguo matadero municipal.",
+     "confianza": "media",
+     "notas": "La misma página: «siendo abierta al público el domingo 26 de enero de 1919». El repo lo pone desde 1936; en 1911 todavía no estaba."
+    },
+    {
+     "id": "edificios2-54",
+     "epoca": "1919-1936",
+     "afirmacion": "El Nuevo Circo es un edificio circular de 48 m de diámetro, con aforo para 12.000 personas y la entrada principal hacia la esquina noroeste de la manzana.",
+     "valor": "48",
+     "unidad": "m de diámetro",
+     "fuente": {
+      "titulo": "Nuevo Circo, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/nuevo-circo/"
+     },
+     "cita": "Ambos desarrollan un edificio circular con 48 metros de diámetro y aforo para 12 mil espectadores, cuya expresión arquitectónica se concentra en la fachada principal: un cuerpo de dos pisos flanqueado por dos torres, cuya entrada principal se orienta hacia la esquina noroeste de la manzana.",
+     "confianza": "media",
+     "notas": "Datos para el volumen de T82.28. Entre el ruedo y el muro de la parcela había jardín y plaza."
+    },
+    {
+     "id": "edificios2-55",
+     "epoca": "1904-1916",
+     "afirmacion": "El Circo Metropolitano ya existía antes de 1916: el Nuevo Circo se hizo para reemplazarlo, y Wikipedia publica una vista del «Círculo Metropolitano» de hacia 1904.",
+     "fuente": {
+      "titulo": "Nuevo Circo, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/nuevo-circo/"
+     },
+     "cita": "la Compañía Anónima Nuevo Circo de Caracas inicia en 1916, la construcción de una plaza de toros y espectáculos ecuestres para sustituir al antiguo Circo Metropolitano.",
+     "confianza": "media",
+     "notas": "Choca con el repo, que pone el Circo Metropolitano desde 1936 (nace: 5): tendría que estar en 1911. No encontré la fecha de construcción ni la de demolición; el plano de 1936 lo rotula todavía. Pie de foto en Wikipedia: «Vista del Círculo Metropolitano, c. 1904»."
+    },
+    {
+     "id": "edificios2-56",
+     "epoca": "1744-1874",
+     "afirmacion": "La iglesia de la Trinidad se empezó el 5 de agosto de 1744 y se inauguró en 1781 (en 1780 según otro pasaje). Quedó en ruinas en 1812; los intentos de rehacerla fracasaron hasta el decreto de 1874 que la convirtió en Panteón.",
+     "valor": "1874",
+     "unidad": "año (decreto)",
+     "fuente": {
+      "titulo": "Iglesia de la Santísima Trinidad (Caracas) (Wikipedia en español)",
+      "autor": "Wikipedia",
+      "url": "https://es.wikipedia.org/wiki/Iglesia_de_la_Santísima_Trinidad_(Caracas)"
+     },
+     "cita": "Después de su destrucción en 1812, la iglesia tuvo varios intentos de ser reconstruida, resultando infructuosos.",
+     "confianza": "media",
+     "notas": "Encaja con las ruinas de Bellermann (1842-1845) que ya tiene el repo. No encontré la «fachada nueva en 1853» de la spec 13 (D8). El Panteón se inauguró el 28 de octubre de 1875 (Wikipedia, Panteón Nacional)."
+    },
+    {
+     "id": "edificios2-57",
+     "epoca": "1812-1857",
+     "afirmacion": "Altagracia quedó destruida en el terremoto de 1812 y se reconstruyó en 1857. En 1843 estaba en ruina.",
+     "valor": "1857",
+     "unidad": "año (reconstrucción)",
+     "fuente": {
+      "titulo": "Iglesia de Altagracia, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/iglesia-de-altagracia/"
+     },
+     "cita": "Esta iglesia, una de las más antiguas de la ciudad, y la quinta construida en Caracas, fue destruida en el terremoto de 1812. En 1857 se procedió a su reconstrucción.",
+     "confianza": "media",
+     "notas": "La guía la fecha en 1656. No encontré qué quedaba en pie en 1843 (muros, fachada o capilla provisional): falta fuente (T82.27)."
+    },
+    {
+     "id": "edificios2-58",
+     "epoca": "1872-1877",
+     "afirmacion": "El Capitolio ocupa toda la cuadra del antiguo convento de la Concepción. Se decretó en septiembre de 1872 y se inauguró el 20 de febrero de 1877: primero el ala sur (1873), después la norte (1877).",
+     "valor": "1877",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Capitolio, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/capitolio/"
+     },
+     "cita": "se construye el Palacio Federal y Legislativo en la totalidad de la cuadra que antes ocupara la iglesia de la Concepción.",
+     "confianza": "media",
+     "notas": "Edificio público de 1936 que ya estaba en 1889 y en 1911."
+    },
+    {
+     "id": "edificios2-59",
+     "epoca": "1787-1936",
+     "afirmacion": "El Cuartel San Carlos se construyó entre 1787 y 1792 en la planicie de La Trinidad: un cuadrado de 75 por 75 m, de dos plantas, con patio de armas y garitas en las esquinas.",
+     "valor": "75 x 75",
+     "unidad": "m",
+     "fuente": {
+      "titulo": "Cuartel San Carlos, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/cuartel-san-carlos/"
+     },
+     "cita": "El edificio, cuya dimensión original era un cuadrado de 75 por 75 metros, era una pieza única en el área para ese entonces",
+     "confianza": "media",
+     "notas": "Cuartel de 1936 que ya estaba en 1843, 1889 y 1911. En 1772 todavía no."
+    },
+    {
+     "id": "edificios2-60",
+     "epoca": "1905",
+     "afirmacion": "El Teatro Nacional es de 1905, construido por orden de Cipriano Castro con proyecto de Chataing. Tiene planta de herradura y una sala de 15 m de diámetro.",
+     "valor": "1905",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Teatro Nacional, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/teatro-nacional/"
+     },
+     "cita": "El pequeño teatro de estilo francés se construye por orden de Cipriano Castro. Con una planta en forma de herradura y decorado con altorrelieves",
+     "confianza": "media",
+     "notas": "El año sale del encabezado de la ficha («46. Teatro Nacional, 1905»). La fecha del repo (desde 1911), marcada como CG, queda confirmada."
+    },
+    {
+     "id": "edificios2-61",
+     "epoca": "1932",
+     "afirmacion": "El edificio de Correos de la esquina de Carmelitas, en el ángulo sureste, es la casona colonial del conde Martín de Tovar, rehecha por Chataing en 1932. Conservó los muros y las fachadas este y norte.",
+     "valor": "1932",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Edificio para la Dirección General de Correos, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/edificio-para-la-direccion-general-de-correos/"
+     },
+     "cita": "Juan Vicente Gómez encarga a Chataing la reedificación de la mansión colonial situada en el ángulo sureste de la esquina de Carmelitas.",
+     "confianza": "media",
+     "notas": "Antes de 1932 la casona ya estaba, como casa de esquina. Encaja con el repo: «Correos» desde 1936."
+    },
+    {
+     "id": "edificios2-62",
+     "epoca": "1933",
+     "afirmacion": "El Ministerio de Fomento, en la esquina de Carmelitas, se decretó en 1933 sobre un lote de 1584 m². No estaba ni en 1889 ni en 1911.",
+     "valor": "1584",
+     "unidad": "m²",
+     "fuente": {
+      "titulo": "Ministerio de Fomento (actual Ministerio de Relaciones Interiores), Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/ministerio-de-fomento-actual-ministerio-de-relaciones-interiores/"
+     },
+     "cita": "Su construcción, decretada por Juan Vicente Gómez en 1933, se llevó a cabo en un lote de mil 584 metros cuadrados, en la esquina de Carmelitas.",
+     "confianza": "media"
+    },
+    {
+     "id": "edificios2-63",
+     "epoca": "1870-1876",
+     "afirmacion": "En 1870 Guzmán Blanco mandó demoler el oratorio de San Felipe Neri, de 1764. En su lugar se hizo la iglesia de Santa Ana, que en 1876 pasó a llamarse Santa Teresa.",
+     "valor": "1870",
+     "unidad": "año",
+     "fuente": {
+      "titulo": "Basílica Santa Teresa, Guía de Arquitectura de Caracas",
+      "autor": "guiaccs.com",
+      "url": "https://guiaccs.com/obras/basilica-santa-teresa/"
+     },
+     "cita": "En 1870, Antonio Guzmán Blanco ordena demoler el antiguo oratorio de San Felipe Neri, de 1764.",
+     "confianza": "media",
+     "notas": "Ese solar tenía en 1772 el oratorio de San Felipe Neri y desde 1889 Santa Teresa."
+    },
+    {
+     "id": "edificios2-64",
+     "epoca": "1889-1911",
+     "afirmacion": "No encontré un inventario con fuente de qué ministerios, cuarteles, mercados y escuelas rotulados en 1936 ya existían en 1889 y 1911, aparte de los de las afirmaciones 58 a 62 y del Palacio Municipal (1872).",
+     "fuente": {
+      "titulo": "Búsqueda sin resultado (guiaccs.com, Wikipedia, repositorio saber.ucv.ve)",
+      "url": "https://guiaccs.com/wp-sitemap-posts-obras-1.xml"
+     },
+     "cita": "(sin cita: no se encontró la fuente)",
+     "confianza": "baja",
+     "notas": "Hay que cotejar rótulo por rótulo con las leyendas de 1889 (Mestre) y 1911 (Razetti) del propio repo. Es la vía más segura."
+    },
+    {
+     "id": "edificios2-65",
+     "epoca": "1772",
+     "afirmacion": "No encontré planta, medidas ni orientación del convento de las Carmelitas, ni de las iglesias de la Candelaria y Santa Rosalía en 1772.",
+     "fuente": {
+      "titulo": "Búsqueda sin resultado",
+      "url": "https://es.wikipedia.org/wiki/Convento_de_las_Monjas_Carmelitas_(Caracas)"
+     },
+     "cita": "(sin cita: no se encontró la fuente)",
+     "confianza": "baja",
+     "notas": "Fuentes candidatas que no consulté: Gasparini, «Templos coloniales de Venezuela»; Martí, «Documentos relativos a su visita pastoral»; Vivas (1997) sobre la cuadra de San Jacinto; la tesis de Gois tiene un plano del hospicio de 1757."
+    }
+   ],
+   "veredictos": [
+    {
+     "id": "edificios2-01",
+     "veredicto": "confirmada",
+     "motivo": "El PDF de SIGraDi 2013 dice literalmente: «van desde la fundación del convento en 1595 hasta la demolición del mercado público y la conformación de la actual parcela en 1998». También dice: «La fundación urbana de Caracas y de la cuadra de San Jacinto tuvo su inicio entre 1595 y 1597». La guía guiaccs pone 1595 en el encabezado de la ficha y 1591 en el texto. Wikipedia (Plaza El Venezolano) da 1595."
+    },
+    {
+     "id": "edificios2-02",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs ?p=866 dice: «(former Plaza San Jacinto) East of Plaza Mayor, was created when the Dominicans established the Convent of San Jacinto (1591)». El encabezado de la misma ficha dice «Plaza El Venezolano, 1595», así que la guía se contradice sola."
+    },
+    {
+     "id": "edificios2-03",
+     "veredicto": "confirmada",
+     "motivo": "La cita aparece literal en el PDF de SIGraDi: «adquirió, mediante un traspaso privado, un solar en una manzana sureste, ubicado en el plano realizado por el gobernador Juan de Pimentel de Caracas en 1578»."
+    },
+    {
+     "id": "edificios2-04",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia, Plaza El Venezolano: «En 1610 los dominicos piden al cabildo y se les otorga los dos (2) solares adicionales al este de la cuadra, en Dr. Paul y el Chorro». Es fuente secundaria y sin cita propia."
+    },
+    {
+     "id": "edificios2-05",
+     "veredicto": "confirmada",
+     "motivo": "SIGraDi, con el texto a dos columnas reconstruido: en la visita del obispo Martí de 1772 la iglesia «era de tres naves separadas por pilares que sujetaban arcos de medio punto con techos de pares y nudillos estilo mudéjar (Vivas, 1997, p. 110)», «además de la nueva nave de la Orden de los Terceros». La figura 3 reconstruye las plantas de 1600-1641, 1772 y 1812."
+    },
+    {
+     "id": "edificios2-06",
+     "veredicto": "confirmada",
+     "motivo": "La cita está en SIGraDi. Un matiz: la frase describe el cuadro de Nuestra Señora de Caracas pintado en el siglo XVII por la escuela de los Landaeta («se puede observar el aspecto del templo con su espacio libre frente. La iglesia dispuesta en el centro del solar poseía una fachada con una sola puerta que daba a la plaza»). Sigue: «Además de ello se le suma una nave más; la nave de los Terceros», característica de la visita de 1772. Vale para 1772, pero la imagen de base es anterior."
+    },
+    {
+     "id": "edificios2-07",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs ?p=866: «During the 1812 earthquake, the convent was destroyed: only the turret remained standing.» Segunda fuente: Wikipedia (Plaza El Venezolano), «quedando en pie solamente la torreta»."
+    },
+    {
+     "id": "edificios2-08",
+     "veredicto": "confirmada",
+     "motivo": "SIGraDi: «junto al terremoto de 1812, afectaron a la orden dominica, tuvieron que hacer una capilla provisional en la plaza». No dice cuánto duró."
+    },
+    {
+     "id": "edificios2-09",
+     "veredicto": "confirmada",
+     "motivo": "SIGraDi: «En 1821 apareció la primera Ley de Extinción de los Conventos Menores de ocho frailes. En 1837 se ordenó la supresión definitiva del convento.»"
+    },
+    {
+     "id": "edificios2-10",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs ?p=866 lo dice con el año 1828. Segunda fuente: Wikipedia (Plaza El Venezolano), «Para 1828 el ayuntamiento transforma parte del terreno en su sede y otra en una cárcel pública local»."
+    },
+    {
+     "id": "edificios2-11",
+     "veredicto": "confirmada",
+     "motivo": "SIGraDi: «En 1848 se declara a San Jacinto como lugar de emplazamiento para el mercado y en 1851 se prevé su construcción». También: «en el plano de Lutowsky de 1852, podemos observar los límites de la iglesia». El mismo artículo aclara que la propuesta de Lutowsky «nunca se llegó a concretar»."
+    },
+    {
+     "id": "edificios2-12",
+     "veredicto": "confirmada",
+     "motivo": "SIGraDi habla de la «reconstrucción del templo de San Jacinto a su estado en 1865», de «la fotografía de Lessmann de 1874» y de que «Todos ellos ubican la iglesia del siglo XIX en el medio de la parcela». Distingue tres modelos: siglo XVII, siglo XVIII con los Terceros y 1874."
+    },
+    {
+     "id": "edificios2-13",
+     "veredicto": "confirmada",
+     "motivo": "SIGraDi: «La otra propuesta para el mercado fue hecha por el arquitecto H. Manrique en 1896. Su construcción se realizó sobre los mismos cimientos de la iglesia, respetando, su planta y sus principios estructurales». También: «El mercado que funcionó en esta zona, y del que hoy en día tenemos fotos, es del proyecto del arquitecto H. Manrique»."
+    },
+    {
+     "id": "edificios2-14",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs ?p=866: «In 1809, the plaza became a marketplace», «The plaza ceased its function as a market in 1947» y la reforma encargada a Tomás Sanabria en 1967. Wikipedia: «en 1809 el ayuntamiento local decide convertir el área en un mercado». Ninguna de las dos aclara si el mercado ocupaba la plaza o el solar."
+    },
+    {
+     "id": "edificios2-15",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs ?p=866 lo dice con el año 1882. Segunda fuente: Wikipedia (Plaza El Venezolano), estatua de 1882 y nuevo nombre «El Venezolano». Wikipedia agrega que la estatua se derribó el 25 de octubre de 1889 y se repuso en 1893."
+    },
+    {
+     "id": "edificios2-16",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia, Convento de las Monjas Carmelitas: «autorizaría su funcionamiento solo hasta 1732, cuando llegaron las primeras religiosas. Su capilla fue consagrada en 1739». Es fuente secundaria."
+    },
+    {
+     "id": "edificios2-17",
+     "veredicto": "confirmada",
+     "motivo": "La misma página de Wikipedia: «cerrado por la fuerza y destruido bajo el gobierno del General Antonio Guzmán Blanco en el año 1874» y «La Esquina de Carmelitas ... recibe su nombre de este edificio». La página también ubica el convento donde estuvo una ermita de San Mauricio en 1577, lo que contradice a guiaccs y a Wikipedia (Santa Capilla). Ese dato no es fiable."
+    },
+    {
+     "id": "edificios2-18",
+     "veredicto": "confirmada",
+     "motivo": "La página de Wikipedia dice que el edificio sirvió de oficina de Correos, Tesorería Nacional y Ministerio de Hacienda, y que con Cipriano Castro se reformó como «Palacio de Hacienda». Hoy está ahí el BCV, «justo al frente del Correo de Carmelitas». No da planta ni medidas."
+    },
+    {
+     "id": "edificios2-19",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Santa Capilla) trae la cita literal: ermita de San Sebastián de 1568, nombre San Mauricio desde 1640, obra nueva desde febrero de 1883. Segunda fuente: Wikipedia, «levantada en 1568 y luego dedicada a San Mauricio en 1640»; la obra nueva empezó el 2 de febrero de 1883."
+    },
+    {
+     "id": "edificios2-20",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia (Santa Capilla): «en 1812, otro terremoto destruye casi por completo la iglesia, iniciándose su reconstrucción que jamás fue culminada». La misma página dice que San Mauricio «para el siglo XVIII ya constaba de tres naves»."
+    },
+    {
+     "id": "edificios2-21",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs da las tres naves, las columnas con arcos ojivales, la torre central con aguja sobre el acceso y las reformas de 1889, 1910 y 1921. Wikipedia: «ubicada en la esquina de San Mauricio de la avenida Urdaneta». Wikipedia detalla que la planta de tres naves es de 1917-1921: antes había una capilla en T (1883) y después un esquema en H (1889-1892)."
+    },
+    {
+     "id": "edificios2-22",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Plaza Andrés Eloy Blanco): «ocupa hoy el lugar del antiguo Cuartel San Mauricio (Siglo XVIII), dejando abierta la esquina». Agrega que después el área norte la ocupó la Compañía Guipuzcoana y la sur un cuartel de artillería, y que en 1910 se decretó allí el edificio de telégrafos. Que no hubiera plaza entre 1772 y 1911 es una inferencia razonable, pero no está dicha."
+    },
+    {
+     "id": "edificios2-23",
+     "veredicto": "confirmada",
+     "motivo": "La tesis de Gois (UCV) dice «construido en el año de 1580» y, en el resumen, «demolido en 1876»."
+    },
+    {
+     "id": "edificios2-24",
+     "veredicto": "confirmada",
+     "motivo": "La tesis cita el informe topográfico de 1843: calle Brayos (este-oeste) con calle Patrias (norte-sur). En 1873 la tesis da el Juncal (este-oeste) y El Comercio (norte-sur), y hoy la avenida Lecuna con la esquina Teatro Municipal. Trae el croquis de la ilustración 4."
+    },
+    {
+     "id": "edificios2-25",
+     "veredicto": "confirmada",
+     "motivo": "La tesis cita a Gasparini (p. 14): «era de una sola nave con una modesta fachada de dos cuerpos ... En línea con la fachada, una maciza torre de dos cuerpos separaba la iglesia del hospital real». Otaduy describe una torre de tres cuerpos (1772) y la puerta principal «mira al norte». La sala de 30 varas del hospicio está documentada (obras desde diciembre de 1685, terminadas al año siguiente). La tesis aclara que el plano de 1757 muestra una sola nave central más una nave de capillas, más pequeña."
+    },
+    {
+     "id": "edificios2-26",
+     "veredicto": "corregida",
+     "motivo": "La carta de Herrera dice literalmente: «Calló la torre sobre el coro y lo reventó ... Todas las paredes desplomadas». La tesis no dice que la iglesia «siguió en uso hasta 1876»: dice que «permaneció en pie» y que se demolió en 1876. La tesis supone que la torre y la fachada cambiaron después de 1812, porque la foto de Lesmann muestra otra torre.",
+     "valor_corregido": "En 1812 se cayó la torre sobre el coro y las paredes quedaron desplomadas. La iglesia siguió en pie (reformada) hasta su demolición en 1876. Que estuviera en uso no está dicho de forma explícita."
+    },
+    {
+     "id": "edificios2-27",
+     "veredicto": "confirmada",
+     "motivo": "La tesis transcribe la Gaceta Oficial n.º 799: resolución del 24 de marzo de 1876 que nombra a «general María Aurrecoechea» inspector de los trabajos en el templo de San Pablo y el contiguo Cuartel de Artillería. Las Memorias del MOP del 6 de abril de 1876 dicen que «se procedió a la demolición de ambos edificios»."
+    },
+    {
+     "id": "edificios2-28",
+     "veredicto": "confirmada",
+     "motivo": "La tesis: «destinando para ello el lugar donde se levantaba el templo de San Pablo, junto con el anexo del cuartel de artillería (antiguo Hospital y Hospicio de Mujeres)». guiaccs (Teatro Municipal) habla de «demoler la antigua iglesia de San Pablo y reemplazarla»."
+    },
+    {
+     "id": "edificios2-29",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia: inaugurado como Teatro Guzmán Blanco el 1 de enero de 1881, «se construyó sobre el terreno que antes ocupaba la Iglesia de San Pablo», empezado en 1876 por Esteban Ricard y completado desde 1879 por Muñoz Tébar. guiaccs da 1876-1881, aforo de 1300 y peristilo semicircular."
+    },
+    {
+     "id": "edificios2-30",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs trae la cita literal, sin fecha del ensanche. Wikipedia (Teatro Municipal) dice que en 1949 se quitó parte de la fachada semicircular para las Torres del Silencio, lo que apunta a que el ensanche es posterior a 1936."
+    },
+    {
+     "id": "edificios2-31",
+     "veredicto": "confirmada",
+     "motivo": "La tesis: «se destinó un nuevo terreno a una cuadra norte de la Plaza Bolívar, entre Veroes e Ibarras, donde se construyó en 1854 lo que sería el Teatro Caracas», tras descartar el proyecto junto a San Pablo por la cercanía de la iglesia."
+    },
+    {
+     "id": "edificios2-32",
+     "veredicto": "confirmada",
+     "motivo": "El PDF del cronista dice que en 1673 González de Acuña «adquirió un inmueble que, según el Primer Plano ..., se le asigna la etiqueta de casa al suroeste de la Plaza Mayor. Para el 29 de agosto de 1696, se convirtió en el Colegio Santa Rosa de Lima, que además contaba con una capilla». guiaccs dice «al sur de la plaza Bolívar», en la esquina de Las Monjas."
+    },
+    {
+     "id": "edificios2-33",
+     "veredicto": "confirmada",
+     "motivo": "El cronista: «se convirtió el 22 de diciembre de 1721 en Real y Pontificio Seminario Universidad» y «Hasta 1857 funcionó en conjunto la Universidad junto con el Seminario». La nota 6 dice: «La Universidad Central de Venezuela es trasladada al convento San Francisco»."
+    },
+    {
+     "id": "edificios2-34",
+     "veredicto": "confirmada",
+     "motivo": "La afirmación describe bien lo que dice la guía: «experimentó su transformación más importante en 1786, cuando pasó a convertirse en sede de la Universidad Central de Venezuela, hasta 1953». Pero el dato es dudoso: el cronista pone la universidad junto con el seminario hasta 1857. No hay que usar 1786 como fecha de la Universidad en San Francisco. La fachada de Hurtado Manrique de 1876 está confirmada."
+    },
+    {
+     "id": "edificios2-35",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Palacio Municipal) trae la cita literal de 1872, la reforma de Chataing de 1904-1906, el edificio «situado en una esquina» y el «patio central». El cronista pone la clausura del seminario en 1873."
+    },
+    {
+     "id": "edificios2-36",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Parque El Calvario): «La Ermita de Nuestra Señora de Valvarena, en el tope del cerro, era lugar de peregrinación durante Semana Santa». No da fecha ni planta."
+    },
+    {
+     "id": "edificios2-37",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Parque El Calvario) da 1873, la capilla de Lourdes (1885), el Arco de la Federación (1895), el Observatorio Cajigal (1888) y 21 ha. Ojo: la ficha propia de la Capilla de Lourdes en la misma guía la encabeza con 1896. La fecha de la capilla es dudosa (1885 o 1896), así que no se puede afirmar con seguridad que exista en 1889. Sí existe en 1911."
+    },
+    {
+     "id": "edificios2-38",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Capilla Nuestra Señora de Lourdes) trae la cita literal: 20 m de largo, 14 m en el crucero y nueve de altura. La ficha está fechada en 1896 y dice que la capilla tiene dos fachadas simétricas con accesos."
+    },
+    {
+     "id": "edificios2-39",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia: «en 1708 se levantó la iglesia dedicada a la Virgen María en el lugar». Hay matiz: guiaccs (Plaza La Candelaria) asocia 1708 a una fuente que ordenó el gobernador y solo dice «La iglesia original del siglo XVIII». El año 1708 de la iglesia tiene apoyo débil, aunque las dos fuentes coinciden en que estaba antes de 1772."
+    },
+    {
+     "id": "edificios2-40",
+     "veredicto": "corregida",
+     "motivo": "guiaccs: «La plaza, delimitada por tres calles al norte, oeste y sur, edificaciones con comercios al oeste, y la iglesia al este» e «Inicialmente el lugar era sólo un solar frente a la iglesia». La página no dice hacia dónde mira la fachada: eso es una deducción. Lo del terremoto de 1812 y la ampliación con Pérez Jiménez está confirmado.",
+     "valor_corregido": "La plaza tiene calles al norte, oeste y sur, y la iglesia queda al este. Al principio era un solar delante de la iglesia. Que la fachada mire al oeste es una inferencia, no un dato de la fuente."
+    },
+    {
+     "id": "edificios2-41",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia: devoción desde 1696 y ermita «un año después» en la Sabana del Viento, o sea 1697. «En 1730 se inaugura una iglesia a unos 230 metros de la ermita», dañada en 1812 y rehecha en 1817. El artículo no tiene referencias."
+    },
+    {
+     "id": "edificios2-42",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia: «entre las esquinas de Santa Rosalía y Candilito», «base rectangular», tres puertas que llevan a tres naves y «En la parte norte del templo hay un campanario principal». La fachada es de 1817 y se reconstruyó en 1905-1908."
+    },
+    {
+     "id": "edificios2-43",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs: «resultó devastada por tercera vez por el terremoto de 1812. En 1857, se reconstruye de nuevo el templo». Wikipedia coincide en 1812 y 1857. Que en 1843 estuviera en ruina es una inferencia coherente."
+    },
+    {
+     "id": "edificios2-44",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia trae la esquina Las Mercedes, la Plaza Falcón al este hecha con Guzmán Blanco, la planta rectangular con tres naves y tres entradas, y el cementerio detrás hasta 1825."
+    },
+    {
+     "id": "edificios2-45",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia (San Juan Bautista): real cédula del 10 de marzo de 1788 para el hospicio y la capilla; después de 1812, «una capilla de medianas proporciones, siendo sustituida por una iglesia parroquial en 1843»; templo neoclásico inaugurado en 1869. guiaccs da la solicitud de 1785."
+    },
+    {
+     "id": "edificios2-46",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Plaza Capuchinos) trae la cita literal: aparece en planos desde 1776, es triangular, la cierran tres calles y está frente a San Juan. Se llamó plaza del León (1776), de Abril (1875) y Zamora (1881), y la redujo la avenida San Martín en 1952."
+    },
+    {
+     "id": "edificios2-47",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia: «entre las esquinas de San Jacinto a Traposos» y «ocupa una estrecha parcela medianera, con 23 metros de frente y 60 metros de fondo. Presenta una secuencia de patios rodeados por corredores». guiaccs: «construida entre medianeras»."
+    },
+    {
+     "id": "edificios2-48",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia: «en 1651 ya existía una construcción en la parcela». La ficha de guiaccs está encabezada con 1643."
+    },
+    {
+     "id": "edificios2-49",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs: «utilizada antes de 1910 como almacén, fue adquirida por el estado en 1912», restaurada por Lecuna con elementos coloniales nuevos. Wikipedia precisa que la Sociedad Patriótica la donó al Estado el 28 de octubre de 1912 y que la reconstrucción fue de 1916 a 1921, año en que abrió."
+    },
+    {
+     "id": "edificios2-50",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia (La Rotunda) trae la cita literal: construida en 1844 al sur del Hospital de Caridad de Hombres con Soublette, terminada en 1854 con J. G. Monagas, forma circular por el modelo del panóptico de Bentham."
+    },
+    {
+     "id": "edificios2-51",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia (La Rotunda): «reinaugurada ... por el presidente Juan Pablo Rojas Paúl, el 14 de octubre de 1889, como casa de corrección»."
+    },
+    {
+     "id": "edificios2-52",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia (Plaza La Concordia): demolida en 1936 por orden de López Contreras; plaza de Carlos Raúl Villanueva, construida de 1937 a 1940. Wikipedia (La Rotunda) coincide en 1936. Falta saber si la hoja DCN de 1936 la muestra todavía."
+    },
+    {
+     "id": "edificios2-53",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia (Nuevo Circo): contrato del 17 de enero de 1916 para reemplazar al «antiguo Circo Metropolitano» en el terreno del antiguo matadero municipal, abierto el domingo 26 de enero de 1919. guiaccs: obra iniciada en 1916, ficha fechada en 1919."
+    },
+    {
+     "id": "edificios2-54",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Nuevo Circo) trae la cita literal: edificio circular de 48 m de diámetro, 12 mil espectadores, entrada hacia la esquina noroeste de la manzana, y jardín y plaza entre el ruedo y el muro de la parcela."
+    },
+    {
+     "id": "edificios2-55",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs: «para sustituir al antiguo Circo Metropolitano» (1916). En Wikipedia el pie de foto dice «Vista del Círculo Metropolitano, c. 1904»; la fecha es aproximada y el nombre está escrito distinto. No hay fechas de construcción ni de demolición."
+    },
+    {
+     "id": "edificios2-56",
+     "veredicto": "confirmada",
+     "motivo": "Wikipedia (Santísima Trinidad): empezada el 5 de agosto de 1744 e «inaugurada el 15 de julio de 1781», aunque otro pasaje la da por terminada en 1780. En ruinas desde 1812, con intentos de reconstrucción infructuosos, y expropiada por Guzmán Blanco para el Panteón en 1874."
+    },
+    {
+     "id": "edificios2-57",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Altagracia): «fue destruida en el terremoto de 1812. En 1857 se procedió a su reconstrucción». La ficha está fechada en 1656. No dice qué quedaba en pie en 1843."
+    },
+    {
+     "id": "edificios2-58",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Capitolio): ocupa «la totalidad de la cuadra que antes ocupara la iglesia de la Concepción», decretado en septiembre de 1872; ala sur en 1873 y ala norte en 1877; inaugurado el 20 de febrero de 1877."
+    },
+    {
+     "id": "edificios2-59",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Cuartel San Carlos): ordenado en 1787 y terminado en 1792 sobre la planicie de La Trinidad, «un cuadrado de 75 por 75 metros», de dos plantas, con patio de armas y garitas en cada esquina."
+    },
+    {
+     "id": "edificios2-60",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Teatro Nacional): la ficha está fechada en 1905 y dice que se hizo por orden de Cipriano Castro, con proyecto de Chataing y Rosales Bosques y planta de herradura. Lo que mide 15 m de diámetro es «el patio», la platea, no la sala completa."
+    },
+    {
+     "id": "edificios2-61",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Correos): renovación en 1932 de la casona del conde Martín de Tovar, «en el ángulo sureste de la esquina de Carmelitas», «manteniendo los muros y las fachadas este y norte»."
+    },
+    {
+     "id": "edificios2-62",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Ministerio de Fomento): «decretada por Juan Vicente Gómez en 1933, se llevó a cabo en un lote de mil 584 metros cuadrados, en la esquina de Carmelitas». La ficha está fechada en 1934."
+    },
+    {
+     "id": "edificios2-63",
+     "veredicto": "confirmada",
+     "motivo": "guiaccs (Basílica Santa Teresa): «En 1870, Antonio Guzmán Blanco ordena demoler el antiguo oratorio de San Felipe Neri, de 1764». En su lugar se hizo Santa Ana, que se llamó así hasta 1876, cuando pasó a ser Santa Teresa. La ficha está fechada en 1881."
+    },
+    {
+     "id": "edificios2-64",
+     "veredicto": "no_verificable",
+     "motivo": "Es una constatación de búsqueda sin resultado, sin fuente que la respalde. No hay nada que confirmar ni refutar. La recomendación de cotejar con las leyendas de 1889 y 1911 del repo es razonable."
+    },
+    {
+     "id": "edificios2-65",
+     "veredicto": "no_verificable",
+     "motivo": "Es una constatación de búsqueda sin resultado. Las páginas consultadas (Wikipedia de las Carmelitas, la Candelaria y Santa Rosalía) no dan planta ni medidas de 1772, lo que coincide con lo que dice. Para San Pablo, la tesis de Gois sí trae un plano de 1757."
+    }
+   ]
+  },
+  {
+   "tema": "densidad2",
+   "afirmaciones": [
+    {
+     "id": "densidad2-01",
+     "epoca": "1855",
+     "afirmacion": "Según la descripción «Caracas en 1855» de Manuel Landaeta Rosales, que reproduce el censo de 1891, la ciudad tenía 6 parroquias, 16 calles de norte a sur, 17 de este a oeste, 135 manzanas, 140 cuadras, 4.500 casas y 42.000 almas.",
+     "valor": "4500 casas; 135 manzanas; 42000 almas",
+     "unidad": "casas / manzanas / habitantes",
+     "fuente": {
+      "titulo": "Tercer Censo de la República (1891), t. I, Número 11 «Caracas en 1855, por M. Landaeta Rosales», pp. 73-74",
+      "autor": "Manuel Landaeta Rosales (en la Dirección General de Estadística)",
+      "año": "1891",
+      "url": "https://archive.org/details/ldpd_11899216_001"
+     },
+     "cita": "La ciudad está dividida en seis parroquias con diez y seis calles de Norte á Sur y diez y siete de Este á Oeste, con ciento treinta y cinco manzanas y ciento cuarenta cuadras y cuatro mil quinientas casas ; sus habitantes alcanzan á cuarenta y dos mil almas.",
+     "confianza": "media",
+     "notas": "Leído en el texto OCR de archive.org (ldpd_11899216_001_djvu.txt), que el índice del tomo titula «Caracas en 1855, por M. Landaeta Rosales». Landaeta lo escribe de forma retrospectiva hacia 1890 y no da su fuente. Es la cifra de casas más cercana a 1843 que encontré: la estimación «4.000–5.400 inferido» de specs/13 queda confirmada en su orden de magnitud. Da 9,4 habitantes por casa, más alto que el 6,6–7,6 de las otras fuentes, así que una de las dos cifras de Landaeta puede estar redondeada."
+    },
+    {
+     "id": "densidad2-02",
+     "epoca": "1855",
+     "afirmacion": "De la descripción de Landaeta Rosales para 1855 salen unas 33 casas por manzana de media en la ciudad (4.500 casas en 135 manzanas).",
+     "valor": "33,3",
+     "unidad": "casas por manzana (media de la ciudad)",
+     "fuente": {
+      "titulo": "Cálculo propio sobre el Tercer Censo de la República (1891), t. I, Número 11, pp. 73-74",
+      "autor": "Manuel Landaeta Rosales",
+      "año": "1891",
+      "url": "https://archive.org/details/ldpd_11899216_001"
+     },
+     "cita": "con ciento treinta y cinco manzanas y ciento cuarenta cuadras y cuatro mil quinientas casas",
+     "confianza": "media",
+     "notas": "Valor derivado (4500/135). Es una media de toda la ciudad e incluye las manzanas de la orilla, que estaban a medio ocupar. Sirve para comparar con las ~20 por manzana de la parroquia Catedral en 1766–1792 y con las ~39 por cuadra que hoy da el modelo de 1772. Las «140 cuadras» parecen contar otra unidad (¿tramos de calle?), y Landaeta no la define."
+    },
+    {
+     "id": "densidad2-03",
+     "epoca": "1843",
+     "afirmacion": "La descripción «Caracas en 1843» de Ángel Jesurún, con datos del plano levantado ese año, da a la ciudad más de 40.000 almas. No da número de casas.",
+     "valor": ">40000",
+     "unidad": "habitantes",
+     "fuente": {
+      "titulo": "Tercer Censo de la República (1891), t. I, Número 10 «Caracas en 1843, por Angel Jesurum»",
+      "autor": "Ángel Jesurún (en la Dirección General de Estadística)",
+      "año": "1891",
+      "url": "https://archive.org/details/ldpd_11899216_001"
+     },
+     "cita": "(Datos tomados del plano de la ciudad, levantado en esta fecha) [...] Caracas sufrió muchas pérdidas con los acontecimientos políticos que se siguieron á aquella catástrofe, más hoy gozando de una paz octaviana, cuenta más de 40.000 almas.",
+     "confianza": "media",
+     "notas": "Corrige casas-17 de investigacion.json, que dice que no se halló texto de Jesurún con habitantes. Es la cifra que corresponde al plano base de 1843. Con 6,6–7,6 habitantes por casa (casas-33) saldrían unas 5.300–6.100 casas (inferido). Revisé el texto entero de la sección y no trae casas ni manzanas."
+    },
+    {
+     "id": "densidad2-04",
+     "epoca": "1843",
+     "afirmacion": "Según Jesurún (1843), la ciudad tenía 16 calles de norte a sur y 17 de este a oeste, 140 esquinas con nombre (sin contar algunas que aún no lo tenían) y calles de 8 a 10 varas de ancho.",
+     "valor": "16 × 17 calles; 140 esquinas; 8–10 varas",
+     "unidad": "calles / esquinas / varas",
+     "fuente": {
+      "titulo": "Tercer Censo de la República (1891), t. I, Número 10 «Caracas en 1843, por Angel Jesurum»",
+      "autor": "Ángel Jesurún",
+      "año": "1891",
+      "url": "https://archive.org/details/ldpd_11899216_001"
+     },
+     "cita": "Las calles están en línea recta de 8 á 10 varas de ancho, empedradas y cortándose en ángulo recto. [...] La ciudad tiene 16 calles de Norte á Sur [...] y 17 de Este á Oeste [...] y sin contar algunas á quienes todavía no se les ha designado, son 140",
+     "confianza": "alta",
+     "notas": "Las 140 esquinas con nombre son un límite inferior para los cruces del damero de 1843. El ancho de 8–10 varas (6,7–8,4 m) coincide con el de Codazzi (1838), que el mismo tomo reproduce: Jesurún parece copiarlo."
+    },
+    {
+     "id": "densidad2-05",
+     "epoca": "1838-1843",
+     "afirmacion": "Hay una edición legible de la descripción de Caracas de Codazzi: el Tercer Censo de 1891 la reproduce como «Caracas en 1838, por Agustín Codazzi». Da 35.000 habitantes y no da número de casas.",
+     "valor": "35000",
+     "unidad": "habitantes",
+     "fuente": {
+      "titulo": "Tercer Censo de la República (1891), t. I, «Caracas en 1838, por Agustín Codazzi», pp. 65-67 aprox.",
+      "autor": "Agustín Codazzi (en la Dirección General de Estadística)",
+      "año": "1891",
+      "url": "https://archive.org/details/ldpd_11899216_001"
+     },
+     "cita": "Los acontecimientos políticos que han sucedido á aquella catástrofe, han reducido el número á 35.000",
+     "confianza": "alta",
+     "notas": "Así se resuelve la duda de specs/13 («Codazzi ilegible: 35.000 o 55.000»): la cifra es 35.000. En el texto reproducido, «casas» solo aparece en la frase de los pisos altos (densidad2-06), sin cifra. Las páginas son aproximadas, contadas por los pliegos (pliego 9 = p. 65)."
+    },
+    {
+     "id": "densidad2-06",
+     "epoca": "1838-1843",
+     "afirmacion": "Codazzi (1838) dice que las casas de Caracas son espaciosas y que «algunas» tienen pisos altos. Es una mención cualitativa: no da proporción.",
+     "fuente": {
+      "titulo": "Tercer Censo de la República (1891), t. I, «Caracas en 1838, por Agustín Codazzi»",
+      "autor": "Agustín Codazzi",
+      "año": "1891",
+      "url": "https://archive.org/details/ldpd_11899216_001"
+     },
+     "cita": "Las casas son espaciosas, bien edificadas, de buena apariencia y algunas tienen pisos altos : Humboldt las encontró demasiado elevadas para un país sujeto á temblores.",
+     "confianza": "alta",
+     "notas": "Sirve para la regla de pisos de 1843: las casas de dos pisos son minoría, sin cifra. No encontré ninguna proporción numérica (ver densidad2-20)."
+    },
+    {
+     "id": "densidad2-07",
+     "epoca": "1878",
+     "afirmacion": "La descripción «Caracas en 1878» de Miguel Tejera da más de 8.000 casas sin contar los edificios públicos, y más de 60.000 habitantes con las parroquias foráneas.",
+     "valor": ">8000",
+     "unidad": "casas",
+     "fuente": {
+      "titulo": "Tercer Censo de la República (1891), t. I, Número 13 «Caracas en 1878, por Miguel Tejera»",
+      "autor": "Miguel Tejera (en la Dirección General de Estadística)",
+      "año": "1891",
+      "url": "https://archive.org/details/ldpd_11899216_001"
+     },
+     "cita": "Su población, incluidas las parroquias foráneas, pasa hoy de 60,000 habitantes; y la extensión que ocupa no baja de 4.000,000 de metros cuadrados; sus casas son generalmente bien construidas [...] el número de ellas, fuera de los edificios públicos, pasa de 8,000",
+     "confianza": "media",
+     "notas": "El índice del tomo la fecha en 1878 (casas-22 decía «c. 1875»). No queda claro si las 8.000 casas incluyen las foráneas. Cuadra con los censos: 6.437 urbanas en 1873 y 8.194 en 1881 (casas-23)."
+    },
+    {
+     "id": "densidad2-08",
+     "epoca": "1891",
+     "afirmacion": "El censo de 1891 da 13.349 casas en todo el Distrito Federal, de las cuales solo 2.870 recibían agua.",
+     "valor": "13349 casas (DF); 2870 con agua",
+     "unidad": "casas",
+     "fuente": {
+      "titulo": "Hacia la emergencia del urbanismo en Venezuela, 1830-1908 (TIA, Academia Nacional de la Ingeniería y el Hábitat)",
+      "autor": "Arturo Almandoz Marte",
+      "año": "2025",
+      "url": "https://acading.org.ve/wp-content/uploads/2025/06/ANIH-IN-TIA-Arturo-Almandoz.pdf"
+     },
+     "cita": "Al abrir la década de 1890, solo 2.870 casas caraqueñas contaban con agua, según el censo, entre un total de 13.349 (TERCER CENSO DE LA REPÚBLICA, 1891, I: 114-115).",
+     "confianza": "alta",
+     "notas": "13.349 es exactamente 10.379 casas urbanas + 2.970 foráneas (casas-24 y casas-26). Es el total del Distrito y no el de la ciudad: para la ciudad hay que usar 10.379."
+    },
+    {
+     "id": "densidad2-09",
+     "epoca": "1891",
+     "afirmacion": "La descripción oficial de Caracas en el censo de 1891 dice que las calles, en su mayor parte tiradas a cordel, tienen centro de piedra y anchas aceras de cemento romano, y que a las estrechas calles «han sucedido» elegantes avenidas.",
+     "fuente": {
+      "titulo": "Tercer Censo de la República (1891), t. I, Número 14 «Caracas en 1891», pp. 86-87",
+      "autor": "M. Fombona Palacio, M. Landaeta Rosales y la Junta Directiva del Censo",
+      "año": "1891",
+      "url": "https://archive.org/details/ldpd_11899216_001"
+     },
+     "cita": "A las estrechas calles han sucedido en ella las elegantes avenidas [...] Cuenta la ciudad, dentro de su propio recinto, 10.379 casas, y las calles, en su mayor parte tiradas á cordel, tienen centro de piedra y anchas aceras de cimento romano.",
+     "confianza": "media",
+     "notas": "Es un texto oficial y laudatorio, sin anchos medidos ni nombres de avenidas. No prueba que el damero viejo se haya ensanchado."
+    },
+    {
+     "id": "densidad2-10",
+     "epoca": "1871 (vale para 1874–1889)",
+     "afirmacion": "La Ordenanza de policía urbana y rural de 1871 fijó para las calles nuevas 50 varas de largo y 12 de ancho, con aceras enlosadas de 1,5 a 2 varas.",
+     "valor": "12 (ancho); 50 (largo); 1,5–2 (aceras)",
+     "unidad": "varas",
+     "fuente": {
+      "titulo": "Hacia la emergencia del urbanismo en Venezuela, 1830-1908 (TIA, ANIH)",
+      "autor": "Arturo Almandoz Marte",
+      "año": "2025",
+      "url": "https://acading.org.ve/wp-content/uploads/2025/06/ANIH-IN-TIA-Arturo-Almandoz.pdf"
+     },
+     "cita": "las dimensiones de las nuevas calles se establecieron en 50 \"varas\" de largo y 12 de ancho, además de aceras enlosadas, entre 1,5 y 2 varas de sección",
+     "confianza": "alta",
+     "notas": "Almandoz cita al Concejo Municipal del DF (1876: 7-9), ordenanza del 18-11-1871, y aclara que la vara equivalía a 0,835 m. Eso da 10 m de calle y aceras de 1,25–1,67 m. Si las aceras van dentro de las 12 varas, la ordenanza no lo dice. Amplía calles-05, que solo tenía el ancho."
+    },
+    {
+     "id": "densidad2-11",
+     "epoca": "1879–1884 (vale para 1889)",
+     "afirmacion": "Durante el Quinquenio de Guzmán Blanco (1879–1884) se encargó al ingeniero Pedro R. Fontes prolongar la calle Norte 8 hasta la esquina de Amadores.",
+     "fuente": {
+      "titulo": "Hacia la emergencia del urbanismo en Venezuela, 1830-1908 (TIA, ANIH)",
+      "autor": "Arturo Almandoz Marte",
+      "año": "2025",
+      "url": "https://acading.org.ve/wp-content/uploads/2025/06/ANIH-IN-TIA-Arturo-Almandoz.pdf"
+     },
+     "cita": "Durante el Quinquenio, la extensión de la calle Norte 8, hasta la esquina de Amadores, fue comisionada al ingeniero Pedro R. Fontes",
+     "confianza": "media",
+     "notas": "Almandoz lo toma de Arcila Farías (1961, II: 458-459). Es una calle concreta abierta en el período, al norte (hacia La Pastora). La fuente no da su ancho: si se hizo con la ordenanza de 1871, tendría 12 varas (inferido)."
+    },
+    {
+     "id": "densidad2-12",
+     "epoca": "1886–1887 (vale para 1889)",
+     "afirmacion": "Durante la Aclamación (1886–1887), el ingeniero Henry Rudloff remodeló la avenida Norte hasta la plaza del Panteón. También hizo el viaducto de hierro entre el paseo de El Calvario y la capilla de Lourdes (134 m de largo y 8 m de ancho), inaugurado el 26 de abril de 1886.",
+     "valor": "134 × 8",
+     "unidad": "m (viaducto)",
+     "fuente": {
+      "titulo": "Hacia la emergencia del urbanismo en Venezuela, 1830-1908 (TIA, ANIH)",
+      "autor": "Arturo Almandoz Marte",
+      "año": "2025",
+      "url": "https://acading.org.ve/wp-content/uploads/2025/06/ANIH-IN-TIA-Arturo-Almandoz.pdf"
+     },
+     "cita": "para la Aclamación, la remodelación de la avenida Norte, hasta la plaza de El Panteón, estuvo a cargo del ingeniero norteamericano Henry Rudloff, quien también desarrolló el viaducto de hierro entre el paseo El Calvario y la capilla de Lourdes, inaugurado el 26 de abril de 1886",
+     "confianza": "media",
+     "notas": "La fuente no da el ancho de la avenida Norte. El censo de 1891 da 141 m de longitud al viaducto («un viaducto de 141 metros de longitud que une el paseo con la Capilla del Calvario»), contra los 134 m de Almandoz."
+    },
+    {
+     "id": "densidad2-13",
+     "epoca": "1880 (vale para 1889)",
+     "afirmacion": "El parque Carabobo, al sur, de 11.660 m² y con cuatro bulevares, según proyecto de Ramón Azpúrua, se inauguró a fines de 1880.",
+     "valor": "11660",
+     "unidad": "m²",
+     "fuente": {
+      "titulo": "Hacia la emergencia del urbanismo en Venezuela, 1830-1908 (TIA, ANIH)",
+      "autor": "Arturo Almandoz Marte",
+      "año": "2025",
+      "url": "https://acading.org.ve/wp-content/uploads/2025/06/ANIH-IN-TIA-Arturo-Almandoz.pdf"
+     },
+     "cita": "Por el sur, el parque Carabobo, con un área de 11.660 metros cuadrados y cuatro bulevares, según proyecto del ingeniero Ramón Azpúrua, había sido inaugurado a finales de 1880",
+     "confianza": "media",
+     "notas": "Es un espacio abierto nuevo dentro de la trama: en 1889 no lleva casas."
+    },
+    {
+     "id": "densidad2-14",
+     "epoca": "1872–1884 (vale para 1889)",
+     "afirmacion": "Una normativa dictada por mandato presidencial dispuso que la extensión de las calles debía llegar hasta los veinte metros de la ribera del Guaire. Además se decretaron obras «por comodidad y ensanche de algunas de sus calles» en la periferia.",
+     "valor": "20",
+     "unidad": "m (ribera del Guaire)",
+     "fuente": {
+      "titulo": "Hacia la emergencia del urbanismo en Venezuela, 1830-1908 (TIA, ANIH)",
+      "autor": "Arturo Almandoz Marte",
+      "año": "2025",
+      "url": "https://acading.org.ve/wp-content/uploads/2025/06/ANIH-IN-TIA-Arturo-Almandoz.pdf"
+     },
+     "cita": "otra normativa, promulgada por mandato presidencial, estableció que la extensión de las calles debía frisar los veinte metros de riberas del Guaire. Además, por \"comodidad y ensanche de algunas de sus calles\", diferentes obras públicas fueron decretadas en la periferia",
+     "confianza": "media",
+     "notas": "Almandoz no nombra cuáles calles se ensancharon (calles-07 ya tenía la segunda frase). Las normas son del 17-VI-1872, 10-VI-1875 y el Decreto 2609 del 9-IV-1884. Que los 20 m sean una franja libre de la ribera es interpretación mía de «frisar»."
+    },
+    {
+     "id": "densidad2-15",
+     "epoca": "1910 (vale para 1911)",
+     "afirmacion": "La Ordenanza de 1910 mantuvo la retícula colonial como patrón para las áreas nuevas, salvo en El Paraíso, que tuvo trazado y secciones viales distintos. Almandoz no nombra calles del centro ensanchadas con la ordenanza.",
+     "fuente": {
+      "titulo": "Hacia la emergencia del urbanismo en Venezuela, 1830-1908 (TIA, ANIH)",
+      "autor": "Arturo Almandoz Marte",
+      "año": "2025",
+      "url": "https://acading.org.ve/wp-content/uploads/2025/06/ANIH-IN-TIA-Arturo-Almandoz.pdf"
+     },
+     "cita": "el ancho de las calles se amplió a 12 m para la calzada y entre 1,3 y 2,7 m para las aceras; la retícula colonial se mantuvo como patrón urbano para las nuevas áreas, aunque con diseños y secciones viales diferentes en el caso de El Paraíso (CONCEJO MUNICIPAL DEL DISTRITO FEDERAL, 1911: arts. 99, 102, 118).",
+     "confianza": "media",
+     "notas": "Responde en parte a «cuáles y dónde»: las secciones de 14,6–17,4 m van a las áreas nuevas y El Paraíso es el único ejemplo con nombre. Que las calles del damero viejo no se ensancharon en 1910–1911 es inferencia, por ausencia: no lo dice la fuente."
+    },
+    {
+     "id": "densidad2-16",
+     "epoca": "c. 1868 (vale para 1843–1874)",
+     "afirmacion": "Según el viajero Friedrich Gerstäcker, citado por Almandoz, las casas coloniales de un piso eran «casi la totalidad» de Caracas.",
+     "fuente": {
+      "titulo": "Hacia la emergencia del urbanismo en Venezuela, 1830-1908 (TIA, ANIH)",
+      "autor": "Arturo Almandoz Marte",
+      "año": "2025",
+      "url": "https://acading.org.ve/wp-content/uploads/2025/06/ANIH-IN-TIA-Arturo-Almandoz.pdf"
+     },
+     "cita": "Gerstäcker apreció las innovaciones decorativas de los caraqueños en los tradicionales patios y aposentos de las casas coloniales de un piso, las cuales constituían casi la totalidad de la ciudad (GERSTÄCKER, 1968: 27-28).",
+     "confianza": "media",
+     "notas": "Gerstäcker viajó por Venezuela en 1868: la fecha de la visita es conocimiento general y no sale de la cita. Es cualitativo pero fuerte: más del 90 % de un piso es una lectura razonable, no una cifra de la fuente. Es lo más cercano a una proporción de pisos entre 1843 y 1874 que encontré."
+    },
+    {
+     "id": "densidad2-17",
+     "epoca": "1874",
+     "afirmacion": "El plano de Ricard de 1874 dibuja los límites de cada predio dentro de las manzanas, como un catastro. Se podría usar para contar lotes y medir frentes hacia 1874–1889.",
+     "fuente": {
+      "titulo": "Guzmán Blanco's city, 1874 plan (Caracas del valle al mar)",
+      "autor": "Iván González Viso, Federico Vegas y María Isabel Peña",
+      "url": "https://guiaccs.com/?p=4567"
+     },
+     "cita": "a kind of irregular brocade of little rectangles that define the edges of each property",
+     "confianza": "media",
+     "notas": "La cita viene del resumen de WebFetch de la página: no comprobé la frase exacta en el HTML. La copia del repo (fuentes/mapas/1874-commons-ricard, 1600 px) no deja ver los lotes, porque su ficha dice que se ven solo los contornos de las manzanas. Haría falta un escaneo mejor (la ficha apunta a la versión NYPL de Müller & Stapler). Si se consigue, sería la fuente directa de casas por manzana y frente medio para 1874."
+    },
+    {
+     "id": "densidad2-18",
+     "epoca": "1881",
+     "afirmacion": "El censo de 1881 adoptó el nuevo callejero (calles numeradas Norte, Sur, Este y Oeste). Un decreto presidencial reforzó la numeración de las casas y los nombres de las calles.",
+     "fuente": {
+      "titulo": "Hacia la emergencia del urbanismo en Venezuela, 1830-1908 (TIA, ANIH)",
+      "autor": "Arturo Almandoz Marte",
+      "año": "2025",
+      "url": "https://acading.org.ve/wp-content/uploads/2025/06/ANIH-IN-TIA-Arturo-Almandoz.pdf"
+     },
+     "cita": "Un decreto presidencial posterior reforzó las regulaciones sobre el pavimento y los nombres de las calles, así como la numeración de las casas, a la vez que se adoptó el nuevo callejero en el censo de 1881 (GOBERNACIÓN DEL DISTRITO FEDERAL, 1879: 14-15; SEGUNDO CENSO, 1881, II: 12 y siguientes).",
+     "confianza": "media",
+     "notas": "Pista: el t. II del Segundo Censo (1881, p. 12 y ss.) podría traer casas por calle o por manzana. No lo encontré digitalizado."
+    },
+    {
+     "id": "densidad2-19",
+     "epoca": "1881",
+     "afirmacion": "No pude leer en el texto OCR las casas por parroquia de 1881: la columna de 1881 del cuadro comparativo del censo de 1891 sale desordenada. El total de 8.194 (casas-23) sigue siendo un cálculo.",
+     "fuente": {
+      "titulo": "Tercer Censo de la República (1891), t. I, Número 21, p. 118",
+      "autor": "Dirección General de Estadística",
+      "año": "1891",
+      "url": "https://archive.org/details/ldpd_11899216_001"
+     },
+     "cita": "Diferencia en pro 2.770 9.840 9.346 19.189 [...] Diferencia en contra 585 1.272 1.123 2.395",
+     "confianza": "baja",
+     "notas": "Confirma las diferencias que usa casas-23 (8.194 = 10.379 − 2.770 + 585). El desglose por parroquia de 1881 exige leer la imagen de la hoja (PDF de 117 MB) o el Segundo Censo."
+    },
+    {
+     "id": "densidad2-20",
+     "epoca": "1843, 1889, 1911",
+     "afirmacion": "No encontré ninguna fuente con la proporción numérica de casas de dos pisos en 1843, 1889 ni 1911. Solo hay testimonios cualitativos: Codazzi (1838), «algunas tienen pisos altos»; Gerstäcker (c. 1868), un piso «casi la totalidad».",
+     "fuente": {
+      "titulo": "Búsqueda sin resultado (WebSearch; censos de 1873 y 1891 en archive.org revisados con grep)",
+      "url": "https://archive.org/details/censo-1873"
+     },
+     "cita": "(sin cita: búsqueda sin resultado)",
+     "confianza": "baja",
+     "notas": "Los censos de 1873 y 1891 cuentan «casas, ranchos, establecimientos», sin distinguir pisos. Pista: la ficha del keyplan de Goad (1897) en el repo anota la construcción por manzana («2 & 1 C.»), y si existieran las hojas de detalle de Goad tendrían el número de pisos. El artículo de Pérez Rancel (Urbana 16-17, 1995) no trae cifras de pisos en las seis páginas que leí."
+    },
+    {
+     "id": "densidad2-21",
+     "epoca": "1911-1920",
+     "afirmacion": "No encontré el número de casas de Caracas en el censo de 1920 ni desglosado por parroquias urbanas.",
+     "fuente": {
+      "titulo": "Búsqueda sin resultado (WebSearch); contexto en J. J. Pérez Rancel, «Apuntes para la historia de la vivienda en la ciudad de Caracas en la primera mitad del siglo XX», Urbana 16-17",
+      "autor": "Juan José Pérez Rancel",
+      "año": "1995",
+      "url": "https://saber.ucv.ve/ojs/index.php/rev_urb/article/view/8682"
+     },
+     "cita": "Puede afirmarse que no existe un estudio integral que permita conocer el proceso de transformaciones tipológicas que la vivienda experimentó en la ciudad de Caracas durante la primera mitad de nuestro siglo.",
+     "confianza": "baja",
+     "notas": "Para 1911 sigue valiendo la estimación de specs/13 (11.300–13.000 inferido): ~86.000 habitantes / 6,6–7,6. Falta abrir el Cuarto Censo (1920) y los anuarios del Ministerio de Fomento."
+    },
+    {
+     "id": "densidad2-22",
+     "epoca": "1843–1911",
+     "afirmacion": "No encontré en línea estudios del siglo XIX con frente y fondo medios de los lotes de Caracas (escribanías posteriores a 1792), ni el texto de Zawisza o de González Casas sobre la subdivisión de solares.",
+     "fuente": {
+      "titulo": "Búsqueda sin resultado (WebSearch: Zawisza, González Casas, Salazar Bravo, subdivisión de parcelas en el siglo XIX)",
+      "url": "https://saber.ucv.ve/jspui/handle/10872/20604"
+     },
+     "cita": "(sin cita: búsqueda sin resultado)",
+     "confianza": "baja",
+     "notas": "El último dato con fuente es el de 1792 (15 varas de frente por 55 de fondo, tipologia-09). Para el XIX, las vías más prometedoras son medir los lotes en el plano de Ricard de 1874 (densidad2-17) y en el de Goad de 1897, o conseguir el libro de Zawisza (1989) en papel."
+    }
+   ],
+   "veredictos": [
+    {
+     "id": "densidad2-01",
+     "veredicto": "confirmada",
+     "motivo": "El texto OCR del Tercer Censo (archive.org ldpd_11899216_001_djvu.txt) trae, en la sección NUMERO 11 «Por M. Landaeta Rosales» (el índice la titula «Caracas en 1855»), la frase citada palabra por palabra: seis parroquias, 16 calles N-S y 17 E-O, 135 manzanas, 140 cuadras, 4.500 casas y 42.000 almas. El texto llama a Caracas «capital de la Provincia», lo que cuadra con antes de 1864. Se refiere a la ciudad, no al cantón."
+    },
+    {
+     "id": "densidad2-02",
+     "veredicto": "confirmada",
+     "motivo": "La cuenta es correcta (4500/135 = 33,3) y sale de las cifras confirmadas en densidad2-01. Es un valor derivado, una media de toda la ciudad. Nota: las «140 cuadras» de Landaeta coinciden con las 140 esquinas con nombre de Jesurún (1843), así que pueden ser cruces y no tramos."
+    },
+    {
+     "id": "densidad2-03",
+     "veredicto": "confirmada",
+     "motivo": "La sección NUMERO 10, «por Angel Jesurum», abre con «(Datos tomados del plano de la ciudad, levantado en esta fecha)» y dice «cuenta más de 40.000 almas». Revisé esa sección y no da número de casas ni de manzanas: «Casa» solo aparece como nombre de una esquina. El párrafo copia casi literalmente el de Codazzi, así que la cifra puede ser una actualización a ojo."
+    },
+    {
+     "id": "densidad2-04",
+     "veredicto": "confirmada",
+     "motivo": "La sección de Jesurún dice, con esas palabras: «Las calles están en línea recta de 8 á 10 varas de ancho, empedradas y cortándose en ángulo recto». También da 16 calles de Norte a Sur y 17 de Este a Oeste, cada una con su nombre, y 140 esquinas «sin contar algunas á quienes todavía no se les ha designado». La frase del ancho es casi idéntica a la de Codazzi en el mismo tomo."
+    },
+    {
+     "id": "densidad2-05",
+     "veredicto": "confirmada",
+     "motivo": "El texto de Codazzi, que en el censo va justo antes de NUMERO 10, dice: «han reducido el número á 35.000». La cifra es 35.000, no 55.000. Hay un detalle que corregir en las notas: «casas» aparece dos veces sin cifra, en la frase de los pisos altos y en «Las casas de personas que gozan de comodidad, están bien amuebladas». Ninguna de las dos da un número de casas. Las páginas exactas no las comprobé."
+    },
+    {
+     "id": "densidad2-06",
+     "veredicto": "confirmada",
+     "motivo": "La cita está en la sección de Codazzi, tal cual: «Las casas son espaciosas, bien edificadas, de buena apariencia y algunas tienen pisos altos : Humboldt las encontró demasiado elevadas...». Es una mención cualitativa, sin proporción."
+    },
+    {
+     "id": "densidad2-07",
+     "veredicto": "confirmada",
+     "motivo": "La sección NUMERO 13, «Por Miguel Tejera» (el índice dice «Caracas en 1878»), da más de 60.000 habitantes «incluidas las parroquias foráneas», 4.000.000 m² y más de 8.000 casas «fuera de los edificios públicos». La cita es exacta. El texto no aclara si las casas incluyen las de las parroquias foráneas."
+    },
+    {
+     "id": "densidad2-08",
+     "veredicto": "confirmada",
+     "motivo": "El PDF de Almandoz trae la frase exacta: «solo 2.870 casas caraqueñas contaban con agua, según el censo, entre un total de 13.349 (TERCER CENSO..., 1891, I: 114-115)». En el censo, la ciudad tiene 10.379 casas y las parroquias foráneas 2.970 («Totales 2.970»). Como 10.379 + 2.970 = 13.349, el total es del Distrito y no de la ciudad, aunque Almandoz las llame «caraqueñas»."
+    },
+    {
+     "id": "densidad2-09",
+     "veredicto": "confirmada",
+     "motivo": "En la sección «Caracas en 1891» del censo están las dos frases: «A las estrechas calles han sucedido en ella las elegantes avenidas» y «Cuenta la ciudad, dentro de su propio recinto, 10.379 casas, y las calles, en su mayor parte tiradas á cordel, tienen centro de piedra y anchas aceras de cimento romano». La página 87 aparece junto a ese pasaje. No da anchos."
+    },
+    {
+     "id": "densidad2-10",
+     "veredicto": "confirmada",
+     "motivo": "Almandoz dice, con esas palabras: «las dimensiones de las nuevas calles se establecieron en 50 \"varas\" de largo y 12 de ancho, además de aceras enlosadas, entre 1,5 y 2 varas de sección (CONCEJO MUNICIPAL..., 1876: 7-9)». La nota 90 da la fecha 18-11-1871 y aclara que la vara equivalía a 0,835 m."
+    },
+    {
+     "id": "densidad2-11",
+     "veredicto": "confirmada",
+     "motivo": "La frase está en Almandoz tal cual: «Durante el Quinquenio, la extensión de la calle Norte 8, hasta la esquina de Amadores, fue comisionada al ingeniero Pedro R. Fontes», con la cita a Arcila 1961, II: 458-459. Almandoz no da el ancho. Las fechas del Quinquenio (1879-1884) son conocimiento general."
+    },
+    {
+     "id": "densidad2-12",
+     "veredicto": "confirmada",
+     "motivo": "Almandoz trae la cita exacta, con la fecha del 26 de abril de 1886. La nota 95 y otro pasaje dan 134 m de largo por 8 m de ancho. El censo de 1891 dice «un viaducto de 141 metros de longitud que une el paseo con la Capilla del Calvario», así que hay que dejar anotada la discrepancia entre 134 y 141 m."
+    },
+    {
+     "id": "densidad2-13",
+     "veredicto": "confirmada",
+     "motivo": "La frase de Almandoz es exacta: parque Carabobo, 11.660 m², cuatro bulevares, proyecto de Ramón Azpúrua, inaugurado a finales de 1880 (cita a Arcila 1961, II: 473)."
+    },
+    {
+     "id": "densidad2-14",
+     "veredicto": "confirmada",
+     "motivo": "Las dos frases están en Almandoz tal cual («frisar los veinte metros de riberas del Guaire» y «comodidad y ensanche de algunas de sus calles»). La nota 94 da 17-VI-1872, 10-VI-1875 y el Decreto 2609 del 9-IV-1884. Leer los 20 m como una franja libre junto a la ribera es interpretación del agente: la fuente no lo dice."
+    },
+    {
+     "id": "densidad2-15",
+     "veredicto": "confirmada",
+     "motivo": "La cita de Almandoz es exacta: calzada de 12 m, aceras de 1,3 a 2,7 m, la retícula colonial como patrón para las áreas nuevas y El Paraíso como excepción (CONCEJO MUNICIPAL, 1911: arts. 99, 102, 118). Que el damero viejo no se ensanchara es una inferencia por ausencia y está bien marcada como tal."
+    },
+    {
+     "id": "densidad2-16",
+     "veredicto": "confirmada",
+     "motivo": "Almandoz dice, con esas palabras: «las casas coloniales de un piso, las cuales constituían casi la totalidad de la ciudad (GERSTÄCKER, 1968: 27-28)». Es cualitativo. El año 1868 de la visita no sale del texto citado, y la lectura de «>90 %» es inferencia."
+    },
+    {
+     "id": "densidad2-17",
+     "veredicto": "confirmada",
+     "motivo": "Abrí la página guiaccs.com/?p=4567 («Guzmán Blanco's city») y la frase está tal cual: «a cadaster is made expressed in the plan of 1874 drawing a kind of backstitch in the edge of the blocks, a kind of irregular brocade of little rectangles that define the edges of each property». La autoría (González Viso, Vegas, Peña) no aparece en el HTML de esa página, así que queda sin verificar."
+    },
+    {
+     "id": "densidad2-18",
+     "veredicto": "confirmada",
+     "motivo": "La frase es exacta en Almandoz: «Un decreto presidencial posterior reforzó las regulaciones sobre el pavimento y los nombres de las calles, así como la numeración de las casas, a la vez que se adoptó el nuevo callejero en el censo de 1881 (GOBERNACIÓN..., 1879: 14-15; SEGUNDO CENSO, 1881, II: 12 y siguientes)»."
+    },
+    {
+     "id": "densidad2-19",
+     "veredicto": "confirmada",
+     "motivo": "En el OCR del censo, el cuadro de la ciudad (junto a la NOTA sobre La Pastora y San José) trae la secuencia «2.770 9.840 9.346 19.189 585 1.272 1.123 2.395». Las columnas de 1881 por parroquia salen desordenadas. La etiqueta «Diferencia en pro» de la cita está unida a mano, no va pegada a esas cifras en el OCR, y la página 118 no la comprobé. La cuenta 10.379 − 2.770 + 585 = 8.194 es correcta. El total de 1881 sigue siendo un cálculo."
+    },
+    {
+     "id": "densidad2-20",
+     "veredicto": "no_verificable",
+     "motivo": "Es una afirmación negativa: no se puede probar que una fuente no exista. Lo que sí revisé cuadra: en los OCR de los censos de 1873 y 1891, «dos pisos», «de un piso» y «altos y bajos» no aparecen, y «pisos altos» sale solo en la frase de Codazzi. Las citas cualitativas de Codazzi y Gerstäcker están confirmadas (densidad2-06 y densidad2-16)."
+    },
+    {
+     "id": "densidad2-21",
+     "veredicto": "no_verificable",
+     "motivo": "Es una búsqueda sin resultado y no abrí el artículo de Pérez Rancel para comprobar la frase citada. Que no exista la cifra de 1920 no se puede verificar."
+    },
+    {
+     "id": "densidad2-22",
+     "veredicto": "no_verificable",
+     "motivo": "Es una búsqueda sin resultado, sin cita: lo que afirma es que algo no existe en línea, y eso no se puede verificar."
+    }
+   ]
+  }
+ ],
+ "tabla": {
+  "filas": [
+   {
+    "valor": "casas en la ciudad",
+    "epoca": "1843",
+    "resultado": "unas 4.500–6.100 casas (inferido); no hay cifra de 1843",
+    "afirmaciones": [
+     "densidad2-01",
+     "densidad2-03",
+     "densidad2-05"
+    ],
+    "razonamiento": "Jesurún (1843) da más de 40.000 almas y no cuenta casas. Landaeta da 4.500 casas para 1855, con 42.000 almas. La población casi no cambió entre 1843 y 1855, así que 4.500 sirve como cota baja. La cota alta, 6.100, sale de dividir los 40.000 habitantes por 6,6 a 7,6 habitantes por casa (casas-33, citado en la nota de densidad2-03): da entre 5.300 y 6.100.",
+    "inferido": true,
+    "minimo": 4500,
+    "maximo": 6100,
+    "unidad": "casas"
+   },
+   {
+    "valor": "casas en la ciudad",
+    "epoca": "1889",
+    "resultado": "unas 9.500–10.379 casas (inferido entre 1878 y 1891)",
+    "afirmaciones": [
+     "densidad2-07",
+     "densidad2-09",
+     "densidad2-08",
+     "densidad2-19"
+    ],
+    "razonamiento": "Tejera (1878) da más de 8.000 casas sin contar los edificios públicos. El censo de 1891 da 10.379 casas «dentro de su propio recinto». Interpolando a 1889 sale algo entre ~9.500 y 10.379. No hay que usar las 13.349 de 1891, que son de todo el Distrito Federal (10.379 urbanas más 2.970 foráneas). El total de 1881 (8.194) es un cálculo que cuadra con esta serie.",
+    "inferido": true,
+    "minimo": 9500,
+    "maximo": 10379,
+    "unidad": "casas"
+   },
+   {
+    "valor": "habitantes",
+    "epoca": "1843",
+    "resultado": "más de 40.000 (Jesurún 1843); 35.000 en 1838 (Codazzi); 42.000 en 1855 (Landaeta)",
+    "afirmaciones": [
+     "densidad2-03",
+     "densidad2-05",
+     "densidad2-01"
+    ],
+    "razonamiento": "Jesurún saca sus datos del plano levantado en 1843 y es la cifra que corresponde a la época. Hay una salvedad: su párrafo copia el de Codazzi, así que la cifra puede ser una actualización a ojo. Codazzi da 35.000, no 55.000. El rango va del valor de 1843 al de 1855.",
+    "inferido": false,
+    "minimo": 40000,
+    "maximo": 42000,
+    "unidad": "habitantes"
+   },
+   {
+    "valor": "habitantes",
+    "epoca": "1889",
+    "resultado": "más de 60.000 en 1878, contando las parroquias foráneas",
+    "afirmaciones": [
+     "densidad2-07"
+    ],
+    "razonamiento": "La única cifra confirmada del período es la de Tejera (1878), que suma las foráneas. Para 1889 solo sirve como cota baja de la población del Distrito.",
+    "inferido": true,
+    "minimo": 60000,
+    "unidad": "habitantes"
+   },
+   {
+    "valor": "habitantes por casa",
+    "epoca": "1843",
+    "resultado": "6,6–9,4 (inferido)",
+    "afirmaciones": [
+     "densidad2-01",
+     "densidad2-03"
+    ],
+    "razonamiento": "Landaeta (1855) da 42.000 habitantes y 4.500 casas: 9,3–9,4 por casa. Las otras fuentes (casas-33) dan 6,6–7,6. Puede que una de las dos cifras de Landaeta esté redondeada. Doy el rango completo.",
+    "inferido": true,
+    "minimo": 6.6,
+    "maximo": 9.4,
+    "unidad": "habitantes por casa"
+   },
+   {
+    "valor": "habitantes por casa",
+    "epoca": "1889",
+    "resultado": "≤7,5 en 1878 (inferido)",
+    "afirmaciones": [
+     "densidad2-07"
+    ],
+    "razonamiento": "Tejera da más de 60.000 habitantes con las foráneas y más de 8.000 casas, sin aclarar si estas incluyen las foráneas. Como las dos cifras son mínimos, 7,5 es aproximado.",
+    "inferido": true,
+    "maximo": 7.5,
+    "unidad": "habitantes por casa"
+   },
+   {
+    "valor": "casas por manzana (media de la ciudad)",
+    "epoca": "1843",
+    "resultado": "~33 casas por manzana de media (inferido a partir de 1855); no separa centro y orillas",
+    "afirmaciones": [
+     "densidad2-01",
+     "densidad2-02"
+    ],
+    "razonamiento": "Landaeta da 4.500 casas en 135 manzanas para 1855: 33,3 de media, contando las manzanas de la orilla a medio ocupar. Por eso el centro debería tener más y las orillas menos, pero no hay fuente que dé cada valor. Como referencia: el modelo actual de 1772 da ~39 por cuadra, y la nota cita ~20 por manzana en la parroquia Catedral en 1766–1792.",
+    "inferido": true,
+    "minimo": 33.3,
+    "maximo": 33.3,
+    "unidad": "casas por manzana"
+   },
+   {
+    "valor": "manzanas, calles y esquinas",
+    "epoca": "1843",
+    "resultado": "16 calles N-S × 17 E-O; 140 esquinas con nombre (cota baja); 135 manzanas en 1855",
+    "afirmaciones": [
+     "densidad2-04",
+     "densidad2-01",
+     "densidad2-02"
+    ],
+    "razonamiento": "Jesurún (1843) da las calles y las esquinas, y Landaeta (1855) repite las mismas calles con 135 manzanas. Las «140 cuadras» de Landaeta parecen ser las 140 esquinas de Jesurún, o sea cruces y no tramos.",
+    "inferido": false,
+    "unidad": "calles / esquinas / manzanas"
+   },
+   {
+    "valor": "superficie urbana",
+    "epoca": "1843",
+    "resultado": "unas 220 ha hacia 1852, entre el Anauco, el Caroata y el Guaire",
+    "afirmaciones": [
+     "agua2-14"
+    ],
+    "razonamiento": "Guevara Díaz (1983), por vía secundaria. Es de 1852 y vale como aproximación para 1843.",
+    "inferido": false,
+    "minimo": 220,
+    "maximo": 220,
+    "unidad": "ha"
+   },
+   {
+    "valor": "superficie urbana",
+    "epoca": "1889",
+    "resultado": "no menos de 4.000.000 m² (400 ha) en 1878, con las parroquias foráneas",
+    "afirmaciones": [
+     "densidad2-07"
+    ],
+    "razonamiento": "Es la cifra de Tejera (1878), la más cercana a 1889.",
+    "inferido": true,
+    "minimo": 400,
+    "unidad": "ha"
+   },
+   {
+    "valor": "ancho mínimo de calle",
+    "epoca": "1843",
+    "resultado": "8–10 varas (6,7–8,4 m), calles rectas y empedradas",
+    "afirmaciones": [
+     "densidad2-04"
+    ],
+    "razonamiento": "Lo dicen Jesurún (1843) y Codazzi (1838) casi con las mismas palabras. Uso la vara de 0,835 m que da Almandoz (densidad2-10).",
+    "inferido": false,
+    "minimo": 6.7,
+    "maximo": 8.4,
+    "unidad": "m"
+   },
+   {
+    "valor": "ancho mínimo de calle",
+    "epoca": "1889",
+    "resultado": "damero viejo 6,7–8,4 m (inferido); calles nuevas desde 1871: 12 varas (10 m), aceras de 1,5–2 varas (1,25–1,67 m)",
+    "afirmaciones": [
+     "densidad2-10",
+     "densidad2-09",
+     "densidad2-14",
+     "densidad2-11",
+     "densidad2-12"
+    ],
+    "razonamiento": "La ordenanza de 1871 vale solo para las calles nuevas. Ninguna fuente nombra calles del damero ensanchadas: el censo de 1891 habla de «avenidas», pero sin medidas. El mínimo del damero sigue siendo el de 1843, por persistencia. Calles nuevas o rehechas con nombre: Norte 8 hasta Amadores (1879–84) y la avenida Norte hasta el Panteón (1886), las dos sin ancho en la fuente.",
+    "inferido": true,
+    "minimo": 6.7,
+    "maximo": 10,
+    "unidad": "m"
+   },
+   {
+    "valor": "ancho mínimo de calle",
+    "epoca": "1911",
+    "resultado": "damero viejo 6,7–8,4 m (inferido); áreas nuevas desde 1910: calzada de 12 m + aceras de 1,3–2,7 m (14,6–17,4 m en total)",
+    "afirmaciones": [
+     "densidad2-15",
+     "densidad2-04"
+    ],
+    "razonamiento": "La ordenanza de 1910 mantuvo la retícula para las áreas nuevas, con El Paraíso como única excepción con nombre. Que el damero viejo no se ensanchara es inferencia por ausencia de fuente.",
+    "inferido": true,
+    "minimo": 6.7,
+    "maximo": 17.4,
+    "unidad": "m"
+   },
+   {
+    "valor": "pisos",
+    "epoca": "1843",
+    "resultado": "casi todas de un piso; «algunas» con pisos altos (sin proporción)",
+    "afirmaciones": [
+     "densidad2-06",
+     "densidad2-16"
+    ],
+    "razonamiento": "Codazzi (1838): «algunas tienen pisos altos». Gerstäcker (c. 1868): las casas de un piso son «casi la totalidad». Ninguna fuente da cifra; leer «>90 % de un piso» es inferencia.",
+    "inferido": false,
+    "unidad": "pisos"
+   },
+   {
+    "valor": "pisos",
+    "epoca": "1889",
+    "resultado": "mayoría de un piso (inferido)",
+    "afirmaciones": [
+     "densidad2-16",
+     "densidad2-09"
+    ],
+    "razonamiento": "Extiendo a 1889 el testimonio de Gerstäcker de c. 1868. El censo de 1891 no distingue pisos.",
+    "inferido": true,
+    "unidad": "pisos"
+   },
+   {
+    "valor": "espacios abiertos nuevos (sin casas)",
+    "epoca": "1889",
+    "resultado": "parque Carabobo (1880, 11.660 m², 4 bulevares); franja hasta 20 m de la ribera del Guaire (norma de 1872–1884)",
+    "afirmaciones": [
+     "densidad2-13",
+     "densidad2-14"
+    ],
+    "razonamiento": "El parque está inaugurado antes de 1889. Leer los 20 m como franja libre es interpretación de «frisar».",
+    "inferido": false,
+    "unidad": "m² / m"
+   },
+   {
+    "valor": "Convento e iglesia de San Jacinto",
+    "epoca": "1772",
+    "resultado": "convento dominico (fundado en 1591 o 1595): iglesia de tres naves más la nave de los Terceros, en el centro del solar, con una puerta a la plaza y espacio libre delante",
+    "afirmaciones": [
+     "edificios2-01",
+     "edificios2-02",
+     "edificios2-03",
+     "edificios2-05",
+     "edificios2-06"
+    ],
+    "razonamiento": "La fundación es anterior a 1772 con cualquiera de las dos fechas. La planta de 1772 viene de la visita del obispo Martí. La imagen de la plaza delante es del siglo XVII.",
+    "inferido": false,
+    "unidad": "año"
+   },
+   {
+    "valor": "Convento e iglesia de San Jacinto",
+    "epoca": "1843",
+    "resultado": "iglesia en pie sin convento (suprimido en 1837); en el terreno, el Concejo y la cárcel (1828)",
+    "afirmaciones": [
+     "edificios2-07",
+     "edificios2-08",
+     "edificios2-09",
+     "edificios2-10",
+     "edificios2-11",
+     "edificios2-12"
+    ],
+    "razonamiento": "El convento cayó en 1812 y quedó en pie solo la torre. El plano de Lutowsky de 1852 y la reconstrucción de 1865–1874 muestran la iglesia en medio de la parcela, así que en 1843 estaba en pie.",
+    "inferido": true,
+    "unidad": "año"
+   },
+   {
+    "valor": "Mercado de San Jacinto / Plaza El Venezolano",
+    "epoca": "1889",
+    "resultado": "mercado en el solar (declarado en 1848), anterior al de Manrique; la plaza se llama El Venezolano desde 1882",
+    "afirmaciones": [
+     "edificios2-11",
+     "edificios2-13",
+     "edificios2-14",
+     "edificios2-15"
+    ],
+    "razonamiento": "El mercado techado de Manrique (1896) se levantó sobre los cimientos de la iglesia. El mercado que rotula el plano de 1889 tuvo que ser otro edificio, y falta cotejarlo con el dibujo. La plaza funcionó como mercado de 1809 a 1947.",
+    "inferido": true,
+    "unidad": "año"
+   },
+   {
+    "valor": "Mercado de San Jacinto",
+    "epoca": "1911–1936",
+    "resultado": "mercado de Manrique (1896) sobre la planta de la iglesia; mercado hasta 1947 y parcela actual de 1998",
+    "afirmaciones": [
+     "edificios2-13",
+     "edificios2-14",
+     "edificios2-01"
+    ],
+    "razonamiento": "Está en pie en 1911 y en 1936.",
+    "inferido": false,
+    "minimo": 1896,
+    "maximo": 1947,
+    "unidad": "año"
+   },
+   {
+    "valor": "Convento de las Carmelitas / Ministerio de Hacienda",
+    "epoca": "1772–1936",
+    "resultado": "1772 y 1843: convento (monjas desde 1732, capilla consagrada en 1739). Cerrado en 1874. 1889–1936: el edificio sirve a Correos, Tesorería y Hacienda; Castro lo reforma como Palacio de Hacienda",
+    "afirmaciones": [
+     "edificios2-16",
+     "edificios2-17",
+     "edificios2-18"
+    ],
+    "razonamiento": "La fuente se contradice: dice «destruido» en 1874 y después habla de reusos del edificio. Lo de la ermita de San Mauricio en ese solar no es fiable.",
+    "inferido": false,
+    "minimo": 1732,
+    "maximo": 1874,
+    "unidad": "año"
+   },
+   {
+    "valor": "San Mauricio / Santa Capilla",
+    "epoca": "1578–1936",
+    "resultado": "ermita de San Sebastián (1568); San Mauricio desde 1640, de tres naves en el siglo XVIII; casi destruida en 1812 y nunca reconstruida del todo (1843: ruina o reconstrucción a medias); Santa Capilla desde 1883: en T en 1883, en H en 1889–92, tres naves ojivales en 1917–21",
+    "afirmaciones": [
+     "edificios2-19",
+     "edificios2-20",
+     "edificios2-21"
+    ],
+    "razonamiento": "Estuvo en el mismo solar en todas las épocas. La forma cambia por época según las fechas citadas.",
+    "inferido": false,
+    "minimo": 1568,
+    "unidad": "año"
+   },
+   {
+    "valor": "Cuartel San Mauricio (frente a la Santa Capilla)",
+    "epoca": "1772–1911",
+    "resultado": "cuartel del siglo XVIII donde hoy está la plaza Andrés Eloy Blanco; telégrafos decretados en 1910",
+    "afirmaciones": [
+     "edificios2-22"
+    ],
+    "razonamiento": "Que no hubiera plaza delante entre 1772 y 1911 es inferencia razonable.",
+    "inferido": true,
+    "unidad": "año"
+   },
+   {
+    "valor": "Iglesia de San Pablo primer ermitaño",
+    "epoca": "1772–1843",
+    "resultado": "construida en 1580 y demolida en 1876; una nave, torre en línea con la fachada que la separaba del hospital contiguo, puerta al norte; en 1812 se cayó la torre sobre el coro y siguió en pie, reformada",
+    "afirmaciones": [
+     "edificios2-23",
+     "edificios2-24",
+     "edificios2-25",
+     "edificios2-26",
+     "edificios2-27"
+    ],
+    "razonamiento": "No está en 1578 (es de 1580). Está en 1772 y en 1843; en 1843, en calle Brayos con calle Patrias. Uso el valor corregido de edificios2-26: en pie, sin afirmar que estuviera en uso.",
+    "inferido": false,
+    "minimo": 1580,
+    "maximo": 1876,
+    "unidad": "año"
+   },
+   {
+    "valor": "Teatro Guzmán Blanco / Municipal",
+    "epoca": "1889–1936",
+    "resultado": "1876–1881, en el solar de la iglesia de San Pablo y del hospital/cuartel; la plazoleta se demolió en fecha desconocida (probablemente después de 1936)",
+    "afirmaciones": [
+     "edificios2-28",
+     "edificios2-29",
+     "edificios2-30"
+    ],
+    "razonamiento": "Corrige al repo: el teatro ocupa el solar de la iglesia, no el de la plaza.",
+    "inferido": false,
+    "minimo": 1876,
+    "maximo": 1881,
+    "unidad": "año"
+   },
+   {
+    "valor": "Teatro Caracas",
+    "epoca": "1889–1936",
+    "resultado": "construido en 1854, a una cuadra al norte de la Plaza Bolívar, entre Veroes e Ibarras",
+    "afirmaciones": [
+     "edificios2-31"
+    ],
+    "razonamiento": "No está en 1843.",
+    "inferido": false,
+    "minimo": 1854,
+    "unidad": "año"
+   },
+   {
+    "valor": "Seminario y Universidad / Palacio Municipal",
+    "epoca": "1772–1936",
+    "resultado": "casa de 1673, colegio en 1696, universidad en 1721; seminario y universidad juntos hasta 1857 (válido para 1772 y 1843); cerrado en 1872–73 y convertido en Tribunales, Gobernación y Concejo; Chataing lo reforma en 1904–06 (esquina con patio central)",
+    "afirmaciones": [
+     "edificios2-32",
+     "edificios2-33",
+     "edificios2-35"
+    ],
+    "razonamiento": "Está en la manzana sur o suroeste de la plaza.",
+    "inferido": false,
+    "minimo": 1673,
+    "unidad": "año"
+   },
+   {
+    "valor": "Universidad en el convento de San Francisco",
+    "epoca": "1889–1936",
+    "resultado": "desde 1857 hasta 1953; fachada neogótica de 1876",
+    "afirmaciones": [
+     "edificios2-33",
+     "edificios2-34"
+    ],
+    "razonamiento": "El 1786 de la guía es dudoso y no hay que usarlo. Vale el 1857 del cronista.",
+    "inferido": false,
+    "minimo": 1857,
+    "maximo": 1953,
+    "unidad": "año"
+   },
+   {
+    "valor": "El Calvario (ermita, paseo, capilla de Lourdes)",
+    "epoca": "1772–1936",
+    "resultado": "1772 y 1843: ermita de Valvarena en el tope del cerro, sin fecha. Paseo desde 1873 (21 ha); viaducto de 1886 (134 o 141 m × 8 m); Observatorio Cajigal de 1888; capilla de Lourdes de 1885 o 1896 (20 × 14 × 9 m); Arco de la Federación de 1895",
+    "afirmaciones": [
+     "edificios2-36",
+     "edificios2-37",
+     "edificios2-38",
+     "densidad2-12"
+    ],
+    "razonamiento": "La fecha dudosa de la capilla deja su presencia en 1889 sin asegurar. En 1911 sí está.",
+    "inferido": false,
+    "unidad": "año"
+   },
+   {
+    "valor": "Iglesia de la Candelaria",
+    "epoca": "1772–1936",
+    "resultado": "del siglo XVIII (1708, con apoyo débil); dañada en 1812; la plaza al oeste con calles al N, O y S",
+    "afirmaciones": [
+     "edificios2-39",
+     "edificios2-40"
+    ],
+    "razonamiento": "Estaba antes de 1772, aunque el repo la pone desde 1843. Uso el valor corregido de edificios2-40: que la fachada mire al oeste es inferencia.",
+    "inferido": false,
+    "unidad": "año"
+   },
+   {
+    "valor": "Iglesia de Santa Rosalía",
+    "epoca": "1772–1936",
+    "resultado": "ermita de 1697; iglesia de 1730; dañada en 1812 y rehecha en 1817; planta rectangular de tres naves con campanario al norte",
+    "afirmaciones": [
+     "edificios2-41",
+     "edificios2-42"
+    ],
+    "razonamiento": "Está en 1772 (Wikipedia, sin referencias).",
+    "inferido": false,
+    "minimo": 1730,
+    "unidad": "año"
+   },
+   {
+    "valor": "La Merced / Las Mercedes",
+    "epoca": "1772–1936",
+    "resultado": "destruida en 1812 (en 1843, en ruina, inferido); reconstruida en 1857; la Plaza Falcón al este es de Guzmán Blanco (está en 1889, no en 1843)",
+    "afirmaciones": [
+     "edificios2-43",
+     "edificios2-44"
+    ],
+    "razonamiento": "Las fechas son de la guía y de Wikipedia. El estado de 1843 se deduce de esas fechas.",
+    "inferido": true,
+    "unidad": "año"
+   },
+   {
+    "valor": "San Juan (Capuchinos) y plaza Capuchinos",
+    "epoca": "1772–1936",
+    "resultado": "plaza triangular desde 1776; hospicio de 1788; capilla después de 1812; iglesia parroquial en 1843; templo neoclásico de 1869. En 1772 no hay iglesia",
+    "afirmaciones": [
+     "edificios2-45",
+     "edificios2-46"
+    ],
+    "razonamiento": "Apoya leer la letra S de la leyenda de 1843 como esta iglesia.",
+    "inferido": false,
+    "unidad": "año"
+   },
+   {
+    "valor": "Casa Natal del Libertador",
+    "epoca": "1772–1936",
+    "resultado": "parcela medianera de 23 m de frente por 60 m de fondo, ocupada desde 1651 o antes; almacén antes de 1910; del Estado desde 1912; reconstrucción neocolonial de 1916–1921 (solo en 1936)",
+    "afirmaciones": [
+     "edificios2-47",
+     "edificios2-48",
+     "edificios2-49"
+    ],
+    "razonamiento": "Es casa en fila, no hito exento. Es el único frente y fondo de lote con fuente de este lote de afirmaciones.",
+    "inferido": false,
+    "minimo": 1651,
+    "unidad": "año / m"
+   },
+   {
+    "valor": "La Rotunda",
+    "epoca": "1889–1936",
+    "resultado": "1844–1854, edificio circular; reinaugurada en 1889; demolida en 1936 (está en 1889 y 1911; en 1936, a cotejar con la hoja DCN)",
+    "afirmaciones": [
+     "edificios2-50",
+     "edificios2-51",
+     "edificios2-52"
+    ],
+    "razonamiento": "No está en 1843.",
+    "inferido": false,
+    "minimo": 1844,
+    "maximo": 1936,
+    "unidad": "año"
+   },
+   {
+    "valor": "Nuevo Circo",
+    "epoca": "1936",
+    "resultado": "1916–1919; circular, de 48 m de diámetro; entrada hacia la esquina NO",
+    "afirmaciones": [
+     "edificios2-53",
+     "edificios2-54"
+    ],
+    "razonamiento": "No está en 1911.",
+    "inferido": false,
+    "minimo": 1919,
+    "unidad": "año / m"
+   },
+   {
+    "valor": "Circo Metropolitano",
+    "epoca": "1911",
+    "resultado": "existía hacia 1904 y antes de 1916; debería estar en 1911",
+    "afirmaciones": [
+     "edificios2-55",
+     "edificios2-53"
+    ],
+    "razonamiento": "La foto de c. 1904 y el reemplazo de 1916 lo acotan. No hay fechas de construcción ni de demolición. Que esté en 1911 lo infiero.",
+    "inferido": true,
+    "unidad": "año"
+   },
+   {
+    "valor": "Iglesia de la Trinidad / Panteón",
+    "epoca": "1772–1936",
+    "resultado": "1744–1781 (en construcción en 1772, inferido); en ruinas desde 1812; Panteón decretado en 1874 e inaugurado en 1875",
+    "afirmaciones": [
+     "edificios2-56"
+    ],
+    "razonamiento": "Cuadra con las ruinas de Bellermann para 1843.",
+    "inferido": false,
+    "minimo": 1744,
+    "unidad": "año"
+   },
+   {
+    "valor": "Iglesia de Altagracia",
+    "epoca": "1772–1936",
+    "resultado": "de 1656; destruida en 1812 (en 1843, en ruina); reconstruida en 1857",
+    "afirmaciones": [
+     "edificios2-57"
+    ],
+    "razonamiento": "Qué quedaba en pie en 1843 no tiene fuente.",
+    "inferido": false,
+    "minimo": 1656,
+    "unidad": "año"
+   },
+   {
+    "valor": "Capitolio",
+    "epoca": "1889–1936",
+    "resultado": "1872–1877 (ala sur de 1873, ala norte de 1877), en toda la cuadra del convento de la Concepción",
+    "afirmaciones": [
+     "edificios2-58"
+    ],
+    "razonamiento": "En 1843 en esa cuadra estaba la Concepción.",
+    "inferido": false,
+    "minimo": 1872,
+    "maximo": 1877,
+    "unidad": "año"
+   },
+   {
+    "valor": "Cuartel San Carlos",
+    "epoca": "1843–1936",
+    "resultado": "1787–1792; cuadrado de 75 × 75 m, de dos plantas, con patio",
+    "afirmaciones": [
+     "edificios2-59"
+    ],
+    "razonamiento": "No está en 1772.",
+    "inferido": false,
+    "minimo": 1787,
+    "maximo": 1792,
+    "unidad": "año / m"
+   },
+   {
+    "valor": "Teatro Nacional",
+    "epoca": "1911–1936",
+    "resultado": "1905; planta de herradura; platea de 15 m",
+    "afirmaciones": [
+     "edificios2-60"
+    ],
+    "razonamiento": "Los 15 m son de la platea, no de la sala completa.",
+    "inferido": false,
+    "minimo": 1905,
+    "unidad": "año"
+   },
+   {
+    "valor": "Correos de Carmelitas y Ministerio de Fomento",
+    "epoca": "1936",
+    "resultado": "Correos: casona colonial (esquina SE) rehecha en 1932. Fomento: decretado en 1933, lote de 1.584 m²",
+    "afirmaciones": [
+     "edificios2-61",
+     "edificios2-62"
+    ],
+    "razonamiento": "Antes de 1932 la casona era casa de esquina. Fomento no está en 1889 ni en 1911.",
+    "inferido": false,
+    "unidad": "año / m²"
+   },
+   {
+    "valor": "Oratorio de San Felipe Neri / Santa Teresa",
+    "epoca": "1772–1936",
+    "resultado": "oratorio de 1764 a 1870 (en 1772 y 1843); después Santa Ana, llamada Santa Teresa desde 1876 (en 1889–1936)",
+    "afirmaciones": [
+     "edificios2-63"
+    ],
+    "razonamiento": "Son dos edificios sucesivos en el mismo solar.",
+    "inferido": false,
+    "minimo": 1764,
+    "unidad": "año"
+   },
+   {
+    "valor": "Quebrada Caroata (cauce)",
+    "epoca": "1772–1936",
+    "resultado": "1772: dibujada continua, con 3 puentes. Hay un embaulamiento en 1876, en tramo desconocido. En El Silencio sigue abierta en 1936: allí se embauló en 1942–45",
+    "afirmaciones": [
+     "agua2-01",
+     "agua2-04",
+     "agua2-05",
+     "agua2-28",
+     "agua2-29",
+     "agua2-30",
+     "agua2-32"
+    ],
+    "razonamiento": "Los colectores marginales (1915–1940) no cubren el cauce.",
+    "inferido": false,
+    "unidad": "año"
+   },
+   {
+    "valor": "Río Catuche y Anauco (cauce)",
+    "epoca": "1772–1936",
+    "resultado": "abiertos en 1936 mientras no haya fuente: del Catuche, solo un 50 % de saneamiento en 1944; el Anauco aparece embaulado en 1967 y hoy",
+    "afirmaciones": [
+     "agua2-07",
+     "agua2-26",
+     "agua2-27",
+     "agua2-31",
+     "agua2-33"
+    ],
+    "razonamiento": "No hay fecha de embaulamiento antes de 1936. Los marginales no son prueba de cauce cubierto.",
+    "inferido": true,
+    "unidad": "año"
+   },
+   {
+    "valor": "número de puentes sobre quebradas",
+    "epoca": "1772–1911",
+    "resultado": "1772: 3 dibujados sobre el Caroata. 1784: 5 existentes, con 25 necesarios. 1843–54: Catuche 5, Anauco 1, Caroata 2, Guaire 0. 1876: 19. 1891: 40. Antes de 1900, según Grases: Caroata 7, Catuche 9, Anauco 1, Guaire 9, Punceres 3",
+    "afirmaciones": [
+     "agua2-01",
+     "agua2-02",
+     "agua2-10",
+     "agua2-11",
+     "agua2-12",
+     "agua2-14"
+    ],
+    "razonamiento": "Para 1889 hay que interpolar entre 19 (1876) y 40 (1891).",
+    "inferido": false,
+    "unidad": "puentes"
+   },
+   {
+    "valor": "puentes del Catuche con fecha",
+    "epoca": "1772–1936",
+    "resultado": "Carlos III: de madera en 1773, perdido en 1781, de mampostería en 1783–84 y en pie hoy (no está en 1772). La Trinidad: 1775–76 (no está en 1772; sí en 1843). Páez: 1888 (en 1889). Punceles (1676) y Candelaria (1735): confianza baja",
+    "afirmaciones": [
+     "agua2-18",
+     "agua2-22",
+     "agua2-34",
+     "agua2-19",
+     "agua2-20",
+     "agua2-21",
+     "agua2-12"
+    ],
+    "razonamiento": "Grases solo cuenta los puentes con fecha identificada, así que el «ningún puente en 1772» no está probado.",
+    "inferido": false,
+    "unidad": "año"
+   },
+   {
+    "valor": "puente de San Pablo (Caroata)",
+    "epoca": "1843",
+    "resultado": "destruido por una avenida (crecida) y rehecho, terminado en 1852; en 1843 puede estar caído o ser el viejo",
+    "afirmaciones": [
+     "agua2-13",
+     "agua2-03",
+     "agua2-15"
+    ],
+    "razonamiento": "La esquina 79 de 1843 lleva su nombre.",
+    "inferido": false,
+    "unidad": "año"
+   },
+   {
+    "valor": "puentes del Guaire",
+    "epoca": "1889–1936",
+    "resultado": "Puente de Hierro 1875–1937 (en 1889–1936); Restaurador de 1905, reparado en 1932; Sucre de concreto desde 1925; Bolívar de 1933. En 1843, ninguno",
+    "afirmaciones": [
+     "agua2-35",
+     "agua2-36",
+     "agua2-37",
+     "agua2-38",
+     "agua2-39",
+     "agua2-14"
+    ],
+    "razonamiento": "Para el de Hierro, Arnal da 1942: sigo a Silva, que da 1937.",
+    "inferido": false,
+    "unidad": "año"
+   }
+  ],
+  "vacios": [
+   "Casas en la ciudad en 1578, 1772, 1911 y 1936 (no hay cifra del censo de 1920; para 1911 sigue solo la estimación de specs/13, sin fuente nueva)",
+   "Habitantes en 1578, 1772, 1911 y 1936; habitantes en 1889 para la ciudad sola (1878 incluye las foráneas)",
+   "Solares por manzana en todas las épocas",
+   "Casas por manzana separadas en centro y orillas en todas las épocas; para 1772 y 1889–1936 no hay ni la media",
+   "Frente medio de casa (centro y orillas) y fondo de lote en el siglo XIX y el XX; el último dato es de 1792, fuera de este lote; la casa natal (23 × 60 m) es un caso aislado. Vía posible: catastro del plano de Ricard de 1874 y Goad 1897",
+   "Ancho mínimo de calle en 1578, 1772 y 1936; anchos de la avenida Norte y de la calle Norte 8; qué calles del damero se ensancharon",
+   "Proporción numérica de casas de dos pisos en 1843, 1889, 1911 y 1936; pisos en 1772",
+   "Desglose por parroquia de las casas de 1881 (Segundo Censo, t. II)",
+   "Planta y medidas del convento de las Carmelitas, la Candelaria y Santa Rosalía en 1772",
+   "Qué quedaba en pie de Altagracia, La Merced y San Mauricio en 1843",
+   "Fecha de la ermita de Valvarena; fecha cierta de la capilla de Lourdes (1885 o 1896)",
+   "Fechas del Circo Metropolitano y del Teatro Caracas (construcción y demolición); fecha del ensanche ante el Teatro Municipal",
+   "Si La Rotunda aparece en la hoja DCN de 1936",
+   "Qué edificio era el mercado de San Jacinto rotulado en 1889 (anterior al de Manrique de 1896)",
+   "Inventario de ministerios, cuarteles, mercados y escuelas de 1936 que ya estaban en 1889 y 1911 (cotejar las leyendas de Mestre 1889 y Razetti 1911)",
+   "Fecha del embaulamiento del Catuche y del Anauco; qué tramo del Caroata se embauló en 1876",
+   "Fechas de los puentes Junín, Arauca, Nuevo, Casacoima, Monagas, Monroy, la Unión, Pastora y Guanábano; puentes del plano de Razetti 1911 (Anexo B1 de Grases, no disponible)",
+   "Fecha académica de los puentes de Punceles (1676) y Candelaria (1735), que hoy solo tienen apoyo de blog"
+  ]
+ }
+}
