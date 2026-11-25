@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { cubiertasDeEpoca, huellasSha256 } from '../../tools/cubiertas-lib.mjs'
+import { cubiertasDeEpoca, huellasSha256, pedidoDeCubiertas, prepararCubiertas } from '../../tools/cubiertas-lib.mjs'
 import { createHash } from 'node:crypto'
 import { empacarTecho } from '../../src/ciudad.js'
 import { CUBIERTA } from '../../src/techos.js'
@@ -73,4 +73,37 @@ describe('huellasSha256: la procedencia que la puerta compara con la ciudad medi
     const bytes = Buffer.concat([Buffer.from(datos.vertices.buffer), Buffer.from(new Uint32Array([0, 3]).buffer)])
     expect(huellasSha256(datos)).toBe(createHash('sha256').update(bytes).digest('hex'))
   })
+})
+
+describe('pedidoDeCubiertas: qué épocas sacar y adónde', () => {
+  const carpeta = 'fuentes/derivados/epocas'
+  test('sin argumentos saca 1772 en su ruta de siempre (la que lee la puerta de la fase 6)', () => {
+    expect(pedidoDeCubiertas([])).toEqual([{ epoca: 1, año: 1772, salida: `${carpeta}/cubiertas-1772.json` }])
+  })
+  test('una ruta sola sigue siendo 1772 en esa ruta (tools/geo/cierre_fase6.py la llama así)', () => {
+    expect(pedidoDeCubiertas(['/tmp/x.json'])).toEqual([{ epoca: 1, año: 1772, salida: '/tmp/x.json' }])
+  })
+  test('--epoca con el año saca esa época, en su ruta por año o en la que se pida', () => {
+    expect(pedidoDeCubiertas(['--epoca', '1843'])).toEqual([{ epoca: 2, año: 1843, salida: `${carpeta}/cubiertas-1843.json` }])
+    expect(pedidoDeCubiertas(['--epoca=1936', 'b.json'])).toEqual([{ epoca: 5, año: 1936, salida: 'b.json' }])
+  })
+  test('--todas saca cada época de la línea de tiempo en su ruta por año', () => {
+    expect(pedidoDeCubiertas(['--todas']).map((p) => [p.epoca, p.salida])).toEqual(
+      [1578, 1772, 1843, 1889, 1911, 1936].map((a, i) => [i, `${carpeta}/cubiertas-${a}.json`]))
+  })
+  test('rechaza un año que no es época, --todas con una ruta y argumentos de más', () => {
+    expect(() => pedidoDeCubiertas(['--epoca', '1850'])).toThrow(/1850.*1578, 1772, 1843, 1889, 1911, 1936/)
+    expect(() => pedidoDeCubiertas(['--epoca'])).toThrow(/año/)
+    expect(() => pedidoDeCubiertas(['--todas', 'x.json'])).toThrow(/--todas/)
+    expect(() => pedidoDeCubiertas(['a.json', 'b.json'])).toThrow(/de más/)
+    expect(() => pedidoDeCubiertas(['--rapido'])).toThrow(/--rapido/)
+  })
+})
+
+test('con la geometría preparada una vez, cada época da lo mismo que sacándola sola', () => {
+  const preparada = prepararCubiertas(cuadra, coords)
+  for (const epoca of [1, 2, 3]) {
+    expect(cubiertasDeEpoca(cuadra, coords, { epoca, altura: () => 0, preparada }))
+      .toEqual(cubiertasDeEpoca(cuadra, coords, { epoca, altura: () => 0 }))
+  }
 })

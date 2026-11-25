@@ -31,7 +31,7 @@ Hecha por Claude con capturas de Chromium headless (SwiftShader), no por una per
 
 ## Lo que queda
 
-- **Revisión de una persona sobre el sitio** (vista de calle, modos a pie, en avión y en coche en 1843). Los techos de 1843 no tienen puerta de triángulos: `tools/cubiertas.mjs` solo genera los de 1772.
+- **Revisión de una persona sobre el sitio** (vista de calle, modos a pie, en avión y en coche en 1843). Los techos de 1843 no tienen puerta de triángulos (desde T81.9 `tools/cubiertas.mjs --epoca 1843` genera los triángulos; falta medirlos).
 - **Las 4 lecturas que siguen dudosas** del censo (U1843-0021, -0161, -0165 y la plaza U1843-0232). Están pendientes en la referencia y no entran al generador.
 - **Rendimiento**: con las 5579 casas propias, la memoria sube de 391 a 441 MB (+13 %) y el tiempo de las casas un 9 %. El presupuesto de triángulos ya estaba al ras antes de T81.
 - **Las puertas 4 y 6 de 1772** en `main`.

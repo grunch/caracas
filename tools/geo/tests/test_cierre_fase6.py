@@ -89,6 +89,13 @@ def test_las_cubiertas_tienen_que_ser_de_los_datos_que_se_miden():
     assert cubiertas_de_estos_datos({'triangulos': []}, datos) is not None     # sin procedencia no se acepta
 
 
+def test_las_cubiertas_de_otra_epoca_no_se_aceptan():
+    from cierre_fase6 import cubiertas_de_estos_datos
+    datos = {'pak_sha256': 'p', 'relieve_sha256': 'r', 'huellas_sha256': 'h'}
+    assert 'época' in cubiertas_de_estos_datos({**datos, 'epoca': 2, 'triangulos': []}, datos)
+    assert cubiertas_de_estos_datos({**datos, 'epoca': 1, 'triangulos': []}, datos) is None
+
+
 def test_la_huella_de_la_ciudad_es_la_de_sus_vertices_y_techos_en_float32_como_en_el_pak():
     import hashlib
     import numpy as np
