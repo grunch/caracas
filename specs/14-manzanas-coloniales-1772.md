@@ -4,9 +4,9 @@
 
 Se integra el **planificador aprobado en el estudio `../miraflores`**, perfil 4, en el formato nativo de casas de Caracas. El generador recibe cantidad de casas, semilla y dimensiones; sus solares se llevan por interpolación bilineal a las cuatro esquinas reales de cada manzana. La adaptación genera `marcos` y `alas`, no cientos de mallas de hitos: conserva los workers, las baldosas, las fachadas procedurales, el relieve por casa, las colisiones, los modos tinta/color y la vida por época.
 
-La instrucción del responsable para esta integración es **más casas cerca de la Plaza Mayor y menos lejos**, con variación entre cuadras. Sustituye, para este ensayo, la preferencia anterior de grandes solares céntricos. No se presenta como un censo histórico: R6 sigue pendiente de investigación. La regla interpolada es de aproximadamente 32 casas junto a la plaza a 8 a partir de 1.400 m, con una variación determinista de ±2. Los valores son decisiones de modelado. En el entorno inmediato de Plaza Mayor (centros de manzana a no más de 200 m), se aplican las dos reducciones sucesivas del 30 % solicitadas, redondeadas a casas enteras en cada paso. Afecta a tres manzanas procedurales: 29 → 20 → 14, 29 → 20 → 14 y 30 → 21 → 15 casas. Esta excepción puede dejar menos casas que en la siguiente corona. La semilla utiliza el ID de la unidad del plano, no su posición en una lista.
+La instrucción del responsable para esta integración es **más casas cerca de la Plaza Mayor y menos lejos**, con variación entre cuadras. Sustituye, para este ensayo, la preferencia anterior de grandes solares céntricos. No se presenta como un censo histórico: R6 sigue pendiente de investigación. La regla interpolada es de aproximadamente 32 casas junto a la plaza a 8 a partir de 1.400 m, con una variación determinista de ±2. Los valores son decisiones de modelado. En el entorno inmediato de Plaza Mayor (centros de manzana a no más de 200 m), se aplican las dos reducciones sucesivas del 30 % y otra del 40 % solicitadas, redondeadas a casas enteras en cada paso. Afecta a tres manzanas procedurales: 29 → 20 → 14 → 8, 29 → 20 → 14 → 8 y 30 → 21 → 15 → 9 casas. Esta excepción puede dejar menos casas que en la siguiente corona. La semilla utiliza el ID de la unidad del plano, no su posición en una lista.
 
-Se aplican únicamente las **38 unidades continuas, aprobadas y sin hitos superpuestos** del contrato `tools/geo/referencias/1772-unidades.json`. Las 3 unidades continuas que contienen conjuntos históricos conservan sus edificios y casas existentes. Las unidades parciales, pendientes, plazas, terrenos libres y conjuntos especiales conservan el sistema previo: no se inventan contornos ni se rellenan huertos para completar la cobertura. Esta entrega inicia la integración de 1772; **no cierra la reconstrucción de toda la época ni las reglas R1–R12**.
+Se aplican **43 unidades aprobadas** del contrato `tools/geo/referencias/1772-unidades.json`: 41 continuas y dos conjuntos especiales con edificios modelados activos. Las cinco cuadras con hitos reservan sus plantas y patios; las casas procedurales se adaptan alrededor de ellos. Las unidades parciales, pendientes, plazas, terrenos libres y conjuntos especiales sin edificio modelado conservan el sistema previo. No se inventan contornos ni se rellenan huertos para completar la cobertura. Esta entrega no cierra la reconstrucción de toda la época ni las reglas R1–R12.
 
 ## Geometría y fuentes
 
@@ -21,7 +21,17 @@ Se aplican únicamente las **38 unidades continuas, aprobadas y sin hitos superp
 
 Solo se sustituye el intervalo `[1,2)` (1772 hasta antes de 1843). Una casa original que continúa en otra época conserva su huella, semilla, historia y alas allí. Cuando su vida abarca ambos lados del intervalo, se divide sin perder ninguno. Se retiran los solares anteriores mayoritariamente contenidos en la cuadra. Si una casa mayoritariamente externa la cruza, se omite esa cuadra para no cortar viviendas vecinas. La decisión queda registrada en el informe.
 
-Los hitos mantienen sus anclas reales y sus vidas: no se coloca Miraflores en 1772 ni se reubica un edificio con el selector del prototipo. La incorporación a manzanas con hitos, con contacto adosado o separado, requiere una reserva curada compatible con su emplazamiento; queda pendiente en esta primera integración. No se exporta a la ciudad una composición de esquina elegida al azar.
+Los hitos mantienen sus anclas reales y sus vidas: no se coloca Miraflores en 1772 ni se reubica un edificio con el selector del prototipo. Se usan sus polígonos `suprime` o, si están vacíos, `planta`, incluyendo patios. Se conserva el mayor solar restante de cada vivienda con frente a la calle original; sus alas se redimensionan completas para evitar tejados cortados. El espacio posterior queda solar. Se descartan los lotes menores de 4 m de frente u 8 m de fondo y se comprueba que ninguna huella invade la reserva. La cantidad pedida es previa a reservar edificios; la cantidad efectiva consta en el informe. El contacto permite llegar al lindero de la reserva sin deformar el edificio.
+
+| Unidad nueva | Edificio conservado | Casas efectivas |
+|---|---|---:|
+| U1772-0067 | Altagracia | 26 |
+| U1772-0094 | Catedral y Palacio Arzobispal | 8 |
+| U1772-0202 | San Francisco | 23 |
+| U1772-0203 | Convento de las Concepciones, sitio del futuro Capitolio | 0 |
+| U1772-0204 | Ayuntamiento y Real Cárcel, actual Casa Amarilla | 7 |
+
+En U1772-0203 la reserva del convento ocupa el espacio disponible: se conserva el edificio y no se introducen viviendas encima.
 
 Los árboles fuera de 1772 conservan exactamente sus posiciones, radios y condición silvestre. El paso de árboles reconstruye primero la base con los índices originales y luego sustituye únicamente los árboles de 1772 en las cuadras integradas. Así la reducción de casas no vuelve a sortear los patios de 1843–1936.
 
@@ -56,23 +66,23 @@ Los colores hexadecimales se convierten de sRGB a lineal como en el prototipo. L
 
 ### Cierre del ajuste de densidad y color
 
-- 38 manzanas, 867 casas nuevas. Primera corona: 14, 14 y 15 casas tras las dos reducciones sucesivas.
-- 104 archivos / 1.697 tests unitarios aprobados; 996 tests de geoprocesamiento aprobados.
-- Capturas finales en las cinco épocas sin errores de página. Comparación de píxeles de las vistas centrales: 1843, 1889, 1911 y 1936 son idénticas a las capturas de `main` (diferencia media RGB = 0). La vista de 1772 cambia como corresponde.
+- 43 manzanas, 913 casas nuevas. Las tres cuadras procedurales originales de la primera corona: 8, 8 y 9 casas tras las tres reducciones sucesivas.
+- 106 archivos / 1.707 tests unitarios aprobados; 996 tests de geoprocesamiento aprobados.
+- Capturas finales en las cinco épocas sin errores de página. Comparación de píxeles de las vistas centrales: 1843, 1889 y 1936 son idénticas a las capturas de `main`; en 1911 solo cambia un nivel del canal azul en un píxel de 1.152.000. La vista de 1772 cambia como corresponde.
 - Regresión de paquetes aprobada: ninguna casa, árbol ni paleta cambia fuera de 1772.
 - Build aprobado; JavaScript inicial 308,3 KB / 330 KB, workers 139,7 KB / 150 KB.
 - Dos fallos de navegador en `hitos.spec.js` reproducidos también contra `main` 858c239 con la misma GPU: la prueba marcada como fallo conocido T41b pasa inesperadamente, y la lectura de color de la ciudad acostada no satisface el umbral. No se modificaron esas pruebas para ocultarlos.
 - Revisión visual humana y publicación de datos pendientes; el PR se abre como borrador.
 
-Suite Playwright final con GPU y dos workers: **86 aprobados, 1 omitido, 2 fallidos**, 5,1 min. Ambos fallos se reprodujeron contra `main`; no se presenta como una suite verde.
+Suite Playwright completa de la entrega anterior, con GPU y dos workers: **86 aprobados, 1 omitido, 2 fallidos**, 5,1 min. Ambos fallos se reprodujeron contra `main`; no se presenta como una suite verde.
 
 ## Reparto junto a Plaza Mayor
 
-| Unidad | Distancia al centro | Casas iniciales | Tras primer −30 % | Tras segundo −30 % |
-|---|---:|---:|---:|---:|
-| U1772-0080 | 117 m | 29 | 20 | 14 |
-| U1772-0205 | 166 m | 29 | 20 | 14 |
-| U1772-0095 | 167 m | 30 | 21 | 15 |
+| Unidad | Distancia al centro | Casas iniciales | Tras primer −30 % | Tras segundo −30 % | Tras −40 % |
+|---|---:|---:|---:|---:|---:|
+| U1772-0080 | 117 m | 29 | 20 | 14 | 8 |
+| U1772-0205 | 166 m | 29 | 20 | 14 | 8 |
+| U1772-0095 | 167 m | 30 | 21 | 15 | 9 |
 
 No se publican binarios. La generación específica, empaquetado y árboles finalizaron; el pipeline integral `npm run datos -- --desde manzanas-1772` terminó interrumpido con código 143 durante `epocas`, tras regenerar `calles-nuevas` y `vectorizar`. Queda pendiente repetirlo completo. La auditoría final confirma que los únicos datos públicos cambiados son las casas y árboles de 1772.
 
@@ -80,12 +90,18 @@ No se publican binarios. La generación específica, empaquetado y árboles fina
 
 | Medición RTX 2060, sin otras pruebas concurrentes | main | Rama |
 |---|---:|---:|
-| Casas listas | 6.143 ms | 6.046 ms |
-| Tarea más larga | 431 ms | 406 ms |
-| Transferencia inicial | 9.682.696 B | 9.727.880 B |
-| Heap observado | 242 MB | 257 MB |
+| Casas listas | 6.143 ms | 6.292 ms |
+| Tarea más larga | 431 ms | 408 ms |
+| Transferencia inicial | 9.682.696 B | 9.736.002 B |
+| Heap observado | 242 MB | 242 MB |
 | Geometría retenida en JS | 85,6 MB | 85,6 MB |
-| Triángulos, centro | 4.484.071 | 4.352.947 |
-| Mediana por cuadro, centro | 7,7 ms | 7,3 ms |
+| Triángulos, centro | 4.484.071 | 4.342.983 |
+| Mediana por cuadro, centro | 7,7 ms | 8,2 ms |
 
-La transferencia aumenta 45.184 B por conservar vidas separadas y la nueva selección de paletas. Se observó un aumento de heap de 15 MB que excede el presupuesto de 250 MB; su causa no está aislada y queda pendiente perfilarla antes de sacar el PR de borrador. No se atribuye sin evidencia al ruido ni se declara resuelto. Los presupuestos de carga, tarea larga, transferencia y triángulos ya estaban excedidos en main. No se midió móvil físico.
+La transferencia aumenta 53.306 B por conservar vidas separadas y la nueva selección de paletas. La medición posterior a incorporar las reservas registra 242 MB de heap, dentro del presupuesto de 250 MB; los 257 MB de la medición anterior no se reprodujeron en esta ejecución. La mediana por cuadro sube 0,5 ms frente a la base y permanece por debajo de 16,6 ms. Los presupuestos de carga, tarea larga, transferencia y triángulos ya estaban excedidos en main. No se midió móvil físico.
+
+## Validación de reservas de edificios
+
+64 casas nuevas en las cinco cuadras con hitos; intersección máxima de sus solares con las reservas: 3,73e-9 píxeles cuadrados (redondeo numérico). El test de cuadra oblicua con dos reservas comprueba también cada triángulo de la geometría nativa, incluidos los tejados, no solo el parcelario. Auditoría de las otras cinco épocas: casas, árboles y paletas idénticos a la versión anterior.
+
+Tras añadir las reservas: 10 tests focalizados de manzanas aprobados, suite unitaria completa 1.707/1.707 y 5/5 E2E de hitos. Las capturas de las cinco épocas terminaron sin errores. La suite integral E2E de 89 pruebas y los 996 tests Python corresponden a la validación anterior; no se repitieron íntegramente para este cambio solo de generación JavaScript.

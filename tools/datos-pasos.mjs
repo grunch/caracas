@@ -136,7 +136,7 @@ export const PASOS = [
     id: 'manzanas-1772',
     entradas: [`${E}/ciudad-estilos.json`, `${D}/mosaico.json`, 'tools/geo/referencias/1772-red.json', 'tools/geo/referencias/1772-unidades.json'],
     salidas: [`${E}/ciudad-manzanas.json`, `${E}/manzanas-1772-informe.json`],
-    codigo: ['tools/manzanas-1772.mjs', 'tools/manzanas-1772-lib.mjs', 'src/manzanas/plan.js', 'src/manzanas/paleta.js', 'src/manzanas/perimetro.js', 'src/poligono.js', 'src/alas.js', 'src/hitos/suprimir.js', 'src/hitos/plantas.js',
+    codigo: ['tools/manzanas-1772.mjs', 'tools/manzanas-1772-lib.mjs', 'tools/manzanas-reservas-lib.mjs', 'src/manzanas/plan.js', 'src/manzanas/paleta.js', 'src/manzanas/perimetro.js', 'src/poligono.js', 'src/alas.js', 'src/hitos/suprimir.js', 'src/hitos/plantas.js',
       ...['catedral', 'iglesias', 'civiles', 'panteon', 'plaza-bolivar', 'casa-amarilla', 'palacio-arzobispal', 'capitolio', 'san-francisco', 'marco'].map(n=>`src/hitos/datos/${n}.js`)],
     cmd: () => ['node', 'tools/manzanas-1772.mjs', `${E}/ciudad-estilos.json`, `${E}/ciudad-manzanas.json`],
   },
