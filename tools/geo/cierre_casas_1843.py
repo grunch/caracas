@@ -69,7 +69,7 @@ def puerta(casas, unidades, metro):
     def en_un_libre(f):   # manda la unidad más chica que contiene el centro (como epocas_1843.en_lotes_libres)
         if arbol_u is None:
             return False
-        centro = Point(np.asarray(f.exterior.coords)[:-1].mean(axis=0))   # el mismo centro que epocas_1843
+        centro = f.buffer(0).representative_point()   # el mismo punto que epocas_1843: siempre dentro de la casa
         contienen = [todas[k] for k in arbol_u.query(centro, predicate='within')]
         return bool(contienen) and min(contienen, key=lambda uf: uf[1].area)[0]['ocupacion'] in LIBRES
 

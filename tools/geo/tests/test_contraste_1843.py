@@ -81,3 +81,12 @@ def test_puerta_de_las_fases_3_y_4():
     assert r['criterios']['rayadas_con_casas']['por_hito'] == ['C'] and r['criterios']['rayadas_con_casas']['pendientes'] == ['B']
     r2 = puerta_fases_3_4(contraste, estados, {7: [2, 0], 8: [1, 0]}, cubiertas_por_hito=set())
     assert not r2['fase_3_cerrable'] and not r2['fase_4_cerrable']
+
+
+def test_una_casa_en_ele_alrededor_de_un_lote_no_cuenta_en_el_lote():
+    unidades = [{'id': 'A', 'ocupacion': 'rayada', 'poligono': _cuadrado(0, 0, 100)},
+                {'id': 'L', 'ocupacion': 'lote_especial', 'poligono': _cuadrado(10, 10, 30)}]
+    ele = [[0, 0], [50, 0], [50, 8], [8, 8], [8, 50], [0, 50]]   # el promedio de sus vértices cae dentro del lote
+    r = clasificar(unidades, [{'techo': 1, 'poligono': ele}], metro=0.5, tolerancia_m=0)
+    fila = {f['id']: f for f in r['unidades']}
+    assert fila['L']['estado'] == 'sin_casas' and fila['A']['casas'] == 1

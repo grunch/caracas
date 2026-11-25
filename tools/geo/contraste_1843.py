@@ -58,7 +58,7 @@ def clasificar(unidades, casas, metro, tolerancia_m=TOLERANCIA_M):
     tol = tolerancia_m / metro
     cuenta, ubicadas = defaultdict(int), set()
     for c in casas:
-        centro = Point(np.asarray(c['poligono'], float).mean(axis=0))
+        centro = Polygon(np.asarray(c['poligono'], float)).buffer(0).representative_point()   # siempre dentro de la casa
         cerca = [figuras[i] for i in arbol.query(centro.buffer(tol) if tol > 0 else centro)]
         # manda la unidad más chica que contiene la casa: un lote dentro de su manzana, una manzana dentro de una huerta
         contienen = sorted((f.area, k) for k, (u, f) in enumerate(cerca) if f.contains(centro))

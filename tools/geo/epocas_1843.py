@@ -110,7 +110,7 @@ def frente_m(casa, borde, metro, tolerancia_m=FRENTE_SOBRE_LA_CALLE_M):
 
 def _centros(ciudad):
     v = np.asarray(ciudad['vertices'], float).reshape(-1, 2)
-    return [Point(v[t[0]:t[0] + t[1]].mean(axis=0)) for t in ciudad['techos']]
+    return [Polygon(v[t[0]:t[0] + t[1]]).buffer(0).representative_point() for t in ciudad['techos']]   # siempre dentro de la casa
 
 
 def _vive(vida, epoca):
