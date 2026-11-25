@@ -3,6 +3,15 @@
  "cerrable": true,
  "casas": 10284,
  "criterios": {
+  "frentes_de_manzana_continuos": {
+   "cumplido": true,
+   "minimo": 0.75,
+   "cortadas": [],
+   "peor": 0.747,
+   "en_limite": [
+    "U1843-0239"
+   ]
+  },
   "lotes_sin_solapes": {
    "cumplido": true,
    "pares": [],

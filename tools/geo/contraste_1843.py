@@ -112,6 +112,14 @@ def puerta_fases_3_4(contraste, estados, vida, cubiertas_por_hito):
             'criterios': criterios}
 
 
+def cubierta_por(figura, zonas):
+    """Parte de la figura bajo la unión de las zonas (una superficie que cubren dos zonas cuenta una vez)."""
+    if not zonas or figura.area == 0:
+        return 0.0
+    from shapely.ops import unary_union
+    return figura.intersection(unary_union(zonas)).area / figura.area
+
+
 CUBIERTA_POR_HITO = 0.3   # parte de la manzana bajo la zona que suprime un hito en pie para que su vacío sea del hito
 
 
@@ -159,7 +167,7 @@ def main(argv=None):  # pragma: no cover - E/S
         cubiertas = set()
         for u in unidades:
             f = _figura(u['poligono'])
-            if f is not None and sum(f.intersection(z).area for z in zonas) > CUBIERTA_POR_HITO * f.area:
+            if f is not None and cubierta_por(f, zonas) > CUBIERTA_POR_HITO:
                 cubiertas.add(u['id'])
         cierre = puerta_fases_3_4(r, estados, {k: ciudad['vida'][k] for k in r['sobrantes']}, cubiertas)
         (raiz / 'specs/auditoria-1843/cierre-fases-3-4.json').write_text(json.dumps({'datos': a.datos, **cierre}, ensure_ascii=False, indent=1) + '\n')

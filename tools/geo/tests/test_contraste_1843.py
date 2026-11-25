@@ -97,3 +97,11 @@ def test_un_lote_pendiente_con_casas_no_impide_cerrar_la_fase_4():
     contraste = {'unidades': [{'id': 'P', 'ocupacion': 'plaza', 'estado': 'con_casas_indebidas'}], 'sobrantes': []}
     r = puerta_fases_3_4(contraste, {'P': 'pendiente'}, {}, cubiertas_por_hito=set())
     assert r['fase_4_cerrable'] and r['criterios']['libres_sin_casas']['pendientes'] == ['P']
+
+
+def test_zonas_que_se_solapan_no_cuentan_dos_veces():
+    from contraste_1843 import cubierta_por
+    from shapely.geometry import Polygon
+    manzana = Polygon(_cuadrado(0, 0, 100))
+    zonas = [Polygon(_cuadrado(0, 0, 40)), Polygon(_cuadrado(0, 0, 40))]   # la misma zona dos veces
+    assert abs(cubierta_por(manzana, zonas) - 0.16) < 1e-9

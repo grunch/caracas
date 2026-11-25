@@ -1,5 +1,5 @@
 {
- "alcance": "Límites documentados de las fases 5 a 7 de 1843 (specs/11, decisión 2): casas heredadas de 1936 cuya forma viene del plano de origen. Decisión por delegación del responsable, 25-11-2026. Cada casa se reconoce por su centro (px del mosaico, a menos de 1 m).",
+ "alcance": "Límites documentados de las fases 5 a 7 de 1843 (specs/11, decisión 2): casas heredadas de 1936 cuya forma viene del plano de origen. Decisión por delegación del responsable, 25-11-2026. Cada casa se reconoce por su centro; cada manzana, por su id (px del mosaico, a menos de 1 m).",
  "datos": "regenerado con la pila T81 hasta 5a, sin publicar",
  "casas": [
   {
@@ -111,6 +111,12 @@
    "criterio": "huellas_sin_degenerar",
    "origen": "de 1936, nace en 1843",
    "motivo": "Huella angosta (menos de 2 m de ancho medio) heredada del plano de 1936: el visor la techa igual; no es una casa propia de 1843."
+  },
+  {
+   "unidad": "U1843-0239",
+   "criterio": "frentes_de_manzana_continuos",
+   "continuidad": 0.747,
+   "motivo": "El 25 % de su borde queda sin casa, hito ni lote a menos de 2 m: los tramos libres son más cortos que una casa propia (3 m de fachada) o quedan a menos de 0,5 m de casas de 1936 vivas. Queda 0,3 puntos bajo el mínimo de 75 %; decisión por delegación del responsable, 25-11-2026."
   }
  ]
 }

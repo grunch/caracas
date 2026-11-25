@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Puerta de las fases 5 a 7 de la auditoría de 1843 (T81.5a–7a), sobre las casas a la vista en 1843.
+"""Puerta de las fases 5 a 7 de la auditoría de 1843 (T81.5a–7a), sobre las casas a la vista en 1843, y la continuidad del
+frente de cada manzana de la fase 3.
 
 Las puertas de 1772 miden contra los frentes y calles de su referencia, que 1843 no tiene: el plano de Jesurún
 dibuja manzanas enteras, sin frentes ni patios. Se mide lo equivalente (decisión por delegación del responsable,
@@ -15,6 +16,7 @@ from pathlib import Path
 
 import numpy as np
 from shapely.geometry import Point, Polygon
+from shapely.ops import unary_union
 from shapely.strtree import STRtree
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -25,6 +27,8 @@ FRENTE_MINIMO_M = 3.0   # metros de fachada sobre la manzana para que la casa pr
 ACCESO_M = 3.0          # media calle angosta de 1843
 ANCHO_MINIMO_M = 2.0    # una huella más angosta que esto (área / lado mayor) es una astilla
 LIBRES = {'lote_especial', 'plaza', 'terreno_libre'}
+CONTINUIDAD = 0.75      # parte del borde de cada manzana rayada con casa, hito o lote propio a menos de HUECO_M
+HUECO_M = 2.0
 
 
 def _ancho_m(f, metro):
@@ -33,7 +37,7 @@ def _ancho_m(f, metro):
     return f.area * metro ** 2 / largo if largo else 0.0
 
 
-def puerta(casas, unidades, metro):
+def puerta(casas, unidades, metro, plantas=()):
     figuras = [(c, Polygon(c['poligono'])) for c in casas]
     manzanas = [Polygon(u['poligono']).buffer(0) for u in unidades
                 if u['estado'] == 'aprobada' and u['ocupacion'] in {'rayada', 'parte_de_otra_unidad'}]
@@ -74,7 +78,23 @@ def puerta(casas, unidades, metro):
         return bool(contienen) and min(contienen, key=lambda uf: uf[1].area)[0]['ocupacion'] in LIBRES
 
     en_libres = [c['techo'] for c, f in figuras if en_un_libre(f)]
+    # fase 3 (calles posteriores sin cortar manzanas de 1843): el frente de cada manzana, continuo
+    ocupantes = [f for _, f in figuras] + [Polygon(z).buffer(0) for z in plantas]
+    arbol_o = STRtree(ocupantes) if ocupantes else None
+    cortadas, continuidad = [], {}
+    for u, m in [(u, f) for u, f in todas if u['ocupacion'] == 'rayada']:
+        propios = [ocupantes[k] for k in arbol_o.query(m.buffer(HUECO_M / metro))] if arbol_o is not None else []
+        propios += [f for v, f in todas if v['ocupacion'] in LIBRES | {'huerta'} and f.area < m.area and f.intersects(m)]
+        if not propios:
+            parte = 0.0
+        else:
+            parte = m.exterior.intersection(unary_union(propios).buffer(HUECO_M / metro)).length / m.exterior.length
+        continuidad[u['id']] = round(parte, 3)
+        if parte < CONTINUIDAD:
+            cortadas.append(u['id'])
     criterios = {
+        'frentes_de_manzana_continuos': {'cumplido': not cortadas, 'minimo': CONTINUIDAD, 'cortadas': cortadas,
+                                         'peor': min(continuidad.values()) if continuidad else None},
         'lotes_sin_solapes': {'cumplido': not pares, 'pares': pares},
         'frentes_propios_sobre_la_manzana': {'cumplido': not fuera, 'tolerancia_m': FRENTE_M, 'fuera': fuera},
         'huellas_sin_degenerar': {'cumplido': not degeneradas, 'degeneradas': degeneradas},
@@ -92,9 +112,10 @@ def con_limites(resultado, casas, limites, metro):
     fuera de lo que impide cerrar: quedan en `en_limite`, a la vista."""
     centros = {c['techo']: np.asarray(c['poligono'], float).mean(axis=0) for c in casas}
 
-    def en_limite(techo, criterio):
-        return any(lim['criterio'] == criterio and techo in centros
-                   and np.hypot(*(centros[techo] - np.asarray(lim['centro'], float))) * metro < CENTRO_M for lim in limites)
+    def en_limite(x, criterio):   # una casa por su centro, o una manzana por su id
+        return any(lim['criterio'] == criterio and (lim.get('unidad') == x if 'unidad' in lim else
+                   x in centros and np.hypot(*(centros[x] - np.asarray(lim['centro'], float))) * metro < CENTRO_M)
+                   for lim in limites)
 
     criterios = {}
     for nombre, c in resultado['criterios'].items():
@@ -121,7 +142,8 @@ def main():  # pragma: no cover - E/S
     hitos = json.loads(subprocess.run(['node', str(raiz / 'tools' / 'hitos-planta.mjs')], check=True, capture_output=True,
                                       text=True, cwd=raiz).stdout)
     casas = visibles_en(casas, hitos)
-    r = puerta(casas, unidades, metro=0.5)
+    plantas = [z for h in hitos if h['nace'] <= EPOCA_1843 and (h['muere'] == 0 or h['muere'] > EPOCA_1843) for z in h['planta']]
+    r = puerta(casas, unidades, metro=0.5, plantas=plantas)
     ruta_limites = raiz / 'specs/auditoria-1843/limites-fases-5-7.json'
     if ruta_limites.exists():
         r = con_limites(r, casas, json.loads(ruta_limites.read_text())['casas'], metro=0.5)
