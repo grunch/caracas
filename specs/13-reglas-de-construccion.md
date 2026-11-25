@@ -172,7 +172,7 @@ Consolidadas por el diagnóstico (`reglas/tareas.json`, con la causa probable, d
 | T82.5 | Investigación F0 ampliada: edificios en pie por época, con planta, vida y forma (tema edificios) | R9, R11 | 1772, 1843, 1889, 1911, 1936 | T82.3 | pendiente |
 | T82.6 | Investigación F0 ampliada: casas por manzana, frente y fondo de 1889 y 1911, y calles nuevas (1871–1910) | R4, R6 | 1843, 1889, 1911 | T82.3 | pendiente |
 | T82.2 | Puertas R2, R5, R7, R8, R9 y R11 (y el retiro por casa de R3) en reglas_mapa.py, con medición de base de las seis épocas | R2, R3, R5, R7, R8, R9, R11 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.1 | pendiente |
-| T82.7 | La medida del giro de R3: por el lado de fachada y contra el tramo de delante, no por el rectángulo mínimo ni el chaflán | R3 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.1 | PR abierto |
+| T82.7 | La medida del giro de R3: por el lado de fachada y contra el tramo de delante, no por el rectángulo mínimo ni el chaflán | R3 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.1 | #206 abierto |
 | T82.8 | Diagnóstico y cierre de la línea vertical clara frente a la Plaza Bolívar (D6), igual en todas las épocas | R2, R8 | 1772, 1843, 1889, 1911, 1936 | T82.2 | pendiente |
 | T82.9 | F2: diseño de la corrección de fondo (solares por época y calzada con su ancho mínimo), spike en un sector y aprobación del responsable | R1, R3, R4, R6, R8 | 1772, 1843, 1889, 1911 | T82.2, T82.6, T82.7 | pendiente |
 | T82.10 | Cauces por época: referencia, puerta R10, agua continua en el suelo y en el campo, corredor sin casas y puentes | R10, R9, R11, R2, R12 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.4, T82.2 | pendiente |
