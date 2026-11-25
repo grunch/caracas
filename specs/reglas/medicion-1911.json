@@ -1,12 +1,12 @@
 {
- "alcance": "Sirve para todas las épocas porque no necesita la referencia de ninguna: la manzana edificada es lo que forman las casas a la vista pegadas entre sí (a menos de 2·CIERRE_M), y la calle, el hueco entre dos manzanas. Mide:",
- "ciudad_sha256": "5bd45a84fc9ce8f52cd1b132d557043c4d3f3a27806950d4027e9a92b0583673",
+ "alcance": "Sirve para todas las épocas porque no necesita la referencia de ninguna: la manzana edificada es lo que forman las casas a la vista (las que se empaquetan, con la vida que les deja el visor bajo los hitos: tools/vidas-visibles.mjs) pegadas entre sí (a menos de 2·CIERRE_M), y la calle, el hueco entre dos manzanas. Mide:",
+ "ciudad_sha256": "6f4bded0944afcc813a2a568ffe059ed69495d9b1a7959ae9ee1ae260562a1c1",
  "pak_sha256": "5faaabcae480486f305cf5b928e0c1f9f220c344bc1aa7c882a92dec61be462a",
  "epoca": 4,
  "año": 1911,
- "casas": 14121,
+ "casas": 14195,
  "R1": {
-  "casas": 14121,
+  "casas": 14195,
   "segunda_fila": [
    110,
    172,
@@ -2012,12 +2012,12 @@
    44375,
    44376
   ],
-  "parte_en_segunda_fila": 0.1418
+  "parte_en_segunda_fila": 0.1411
  },
  "R3": {
   "giro_maximo": 5.0,
-  "medidas": 12118,
-  "n_giradas": 1963,
+  "medidas": 12192,
+  "n_giradas": 1981,
   "giradas": [
    {
     "techo": 21023,
@@ -2724,10 +2724,6 @@
     "giro": 44.2
    },
    {
-    "techo": 9344,
-    "giro": 44.2
-   },
-   {
     "techo": 15065,
     "giro": 44.1
    },
@@ -2769,6 +2765,10 @@
    },
    {
     "techo": 14101,
+    "giro": 44.1
+   },
+   {
+    "techo": 9344,
     "giro": 44.1
    },
    {
@@ -3156,10 +3156,6 @@
     "giro": 43.6
    },
    {
-    "techo": 9333,
-    "giro": 43.6
-   },
-   {
     "techo": 6641,
     "giro": 43.6
    },
@@ -3208,6 +3204,10 @@
     "giro": 43.5
    },
    {
+    "techo": 9333,
+    "giro": 43.5
+   },
+   {
     "techo": 21352,
     "giro": 43.5
    },
@@ -3222,23 +3222,23 @@
   ]
  },
  "R4": {
-  "muestras": 44855,
+  "muestras": 45170,
   "paso_m": 2.0,
   "metros_por_ancho": {
-   "0-2": 304.0,
-   "2-4": 5942.0,
-   "4-6": 13768.0,
-   "6-8": 17020.0,
-   "8-10": 19210.0,
-   "10-15": 20306.0,
-   "15-30": 13158.0
+   "0-2": 364.0,
+   "2-4": 5972.0,
+   "4-6": 13796.0,
+   "6-8": 17058.0,
+   "8-10": 19194.0,
+   "10-15": 20498.0,
+   "15-30": 13456.0
   },
-  "mediana_m": 8.72,
-  "p10_m": 4.43
+  "mediana_m": 8.73,
+  "p10_m": 4.42
  },
  "R6": {
-  "total": 14121,
-  "n_manzanas": 766,
+  "total": 14195,
+  "n_manzanas": 801,
   "cuadras_del_damero": {
    "n": 82,
    "mediana_casas": 36.0,
@@ -3421,8 +3421,8 @@
      6747.8
     ],
     [
-     8143.0,
-     8370.8
+     8142.8,
+     8371.8
     ],
     [
      10569.8,
@@ -3944,8 +3944,8 @@
     "area_ha": 1.719,
     "frente_medio_m": 10.91,
     "centro": [
-     8143.0,
-     8370.8
+     8142.8,
+     8371.8
     ]
    },
    {
@@ -5438,7 +5438,7 @@
     "de_frente": 22,
     "borde_m": 459.7,
     "area_ha": 0.176,
-    "frente_medio_m": 20.9,
+    "frente_medio_m": 20.89,
     "centro": [
      5525.2,
      8438.1
@@ -5704,8 +5704,8 @@
     "area_ha": 0.142,
     "frente_medio_m": 21.89,
     "centro": [
-     9380.9,
-     5432.8
+     9379.4,
+     5442.5
     ]
    },
    {
@@ -6415,6 +6415,17 @@
    {
     "casas": 9,
     "de_frente": 9,
+    "borde_m": 348.0,
+    "area_ha": 0.272,
+    "frente_medio_m": 38.66,
+    "centro": [
+     7321.5,
+     6177.3
+    ]
+   },
+   {
+    "casas": 9,
+    "de_frente": 9,
     "borde_m": 202.5,
     "area_ha": 0.09,
     "frente_medio_m": 22.5,
@@ -6439,7 +6450,7 @@
     "de_frente": 8,
     "borde_m": 181.2,
     "area_ha": 0.066,
-    "frente_medio_m": 22.66,
+    "frente_medio_m": 22.65,
     "centro": [
      12182.7,
      7346.7
@@ -6474,8 +6485,8 @@
     "area_ha": 0.081,
     "frente_medio_m": 14.44,
     "centro": [
-     9823.2,
-     8817.7
+     9823.3,
+     8816.7
     ]
    },
    {
@@ -6564,6 +6575,17 @@
     "centro": [
      5373.6,
      8187.8
+    ]
+   },
+   {
+    "casas": 8,
+    "de_frente": 8,
+    "borde_m": 386.7,
+    "area_ha": 0.21,
+    "frente_medio_m": 48.34,
+    "centro": [
+     4921.5,
+     8578.4
     ]
    },
    {
@@ -6785,34 +6807,12 @@
      9402.8,
      4887.4
     ]
-   },
-   {
-    "casas": 6,
-    "de_frente": 6,
-    "borde_m": 156.8,
-    "area_ha": 0.084,
-    "frente_medio_m": 26.13,
-    "centro": [
-     9135.2,
-     12692.7
-    ]
-   },
-   {
-    "casas": 6,
-    "de_frente": 6,
-    "borde_m": 112.7,
-    "area_ha": 0.06,
-    "frente_medio_m": 18.78,
-    "centro": [
-     9028.2,
-     12881.8
-    ]
    }
   ]
  },
  "resumen": {
   "segunda_fila": 2003,
-  "giradas": 1963
+  "giradas": 1981
  },
  "pendientes": [
   "R2",

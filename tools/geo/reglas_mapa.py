@@ -2,7 +2,8 @@
 """Puertas de las reglas de construcción del mapa (specs/13, T82 F1), sobre las casas a la vista de cualquier época.
 
 Sirve para todas las épocas porque no necesita la referencia de ninguna: la manzana edificada es lo que forman las
-casas a la vista pegadas entre sí (a menos de 2·CIERRE_M), y la calle, el hueco entre dos manzanas. Mide:
+casas a la vista (las que se empaquetan, con la vida que les deja el visor bajo los hitos: tools/vidas-visibles.mjs)
+pegadas entre sí (a menos de 2·CIERRE_M), y la calle, el hueco entre dos manzanas. Mide:
 
 - R1 · una fila por frente: las casas que no tocan el borde de su manzana (a más de FRENTE_M) están en segunda fila;
 - R3 · casas alineadas: el giro de cada casa del frente respecto del tramo de borde que tiene delante;
@@ -197,30 +198,35 @@ def medir(casas, metro=METRO, epoca=None, año=None):
 
 def main():  # pragma: no cover - E/S
     import subprocess
-    from contraste_1843 import visibles_en
     ap = argparse.ArgumentParser(description=__doc__.split('\n\n')[0])
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument('--epoca', type=int, choices=AÑOS)
     g.add_argument('--todas', action='store_true')
     a = ap.parse_args()
     raiz = Path(__file__).resolve().parents[2]
-    ruta = raiz / 'fuentes/derivados/epocas/ciudad-epocas.json'
+    # la ciudad que se empaqueta (después del paso de estilos, que corre la vida de algunos galpones) y la vida que le
+    # deja el visor con los hitos puestos (tools/vidas-visibles.mjs, sobre public/datos/ciudad.pak)
+    ruta = raiz / 'fuentes/derivados/epocas/ciudad-estilos.json'
     ciudad = json.loads(ruta.read_text())
-    hitos = json.loads(subprocess.run(['node', str(raiz / 'tools' / 'hitos-planta.mjs')], check=True, capture_output=True,
+    vista = json.loads(subprocess.run(['node', str(raiz / 'tools' / 'vidas-visibles.mjs')], check=True, capture_output=True,
                                       text=True, cwd=raiz).stdout)
-    procedencia = {'ciudad_sha256': hashlib.sha256(ruta.read_bytes()).hexdigest(),
-                   'pak_sha256': hashlib.sha256((raiz / 'public/datos/ciudad.pak').read_bytes()).hexdigest()}
+    if vista['techos'] != len(ciudad['techos']):
+        raise SystemExit(f"reglas_mapa: el pak tiene {vista['techos']} techos y {ruta.name} {len(ciudad['techos'])}: "
+                         'no son los mismos datos (npm run datos)')
+    ciudad = {**ciudad, 'vida': vista['vida']}
+    procedencia = {'ciudad_sha256': hashlib.sha256(ruta.read_bytes()).hexdigest(), 'pak_sha256': vista['pak_sha256']}
     salida = raiz / 'specs/reglas'
     salida.mkdir(exist_ok=True)
     for año in (AÑOS if a.todas else [a.epoca]):
         e = AÑOS.index(año)
-        casas = visibles_en(casas_de_epoca(ciudad, e), hitos, epoca=e)
+        casas = casas_de_epoca(ciudad, e)
         doc = {'alcance': __doc__.split('\n\n')[1].replace('\n', ' '), **procedencia, **medir(casas, METRO, e, año)}
         (salida / f'medicion-{año}.json').write_text(json.dumps(doc, ensure_ascii=False, indent=1) + '\n')
         r6 = doc['R6']['cuadras_del_damero']
         print(f"{año}: {doc['casas']} casas, {doc['R6']['n_manzanas']} manzanas; segunda fila {doc['resumen']['segunda_fila']}"
               f" ({doc['R1']['parte_en_segunda_fila']}); giradas {doc['resumen']['giradas']}; calle mediana {doc['R4']['mediana_m']} m"
-              f" (p10 {doc['R4']['p10_m']}); unidas {doc['R6']['mayores_que_una_cuadra']['n']}; cuadras del damero: {r6['n']}, mediana {r6['mediana_casas']} casas, frente {r6['mediana_frente_m']} m")
+              f" (p10 {doc['R4']['p10_m']}); unidas {doc['R6']['mayores_que_una_cuadra']['n']}; cuadras del damero: {r6['n']},"
+              f" mediana {r6['mediana_casas']} casas, frente {r6['mediana_frente_m']} m")
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 {
- "alcance": "Sirve para todas las épocas porque no necesita la referencia de ninguna: la manzana edificada es lo que forman las casas a la vista pegadas entre sí (a menos de 2·CIERRE_M), y la calle, el hueco entre dos manzanas. Mide:",
- "ciudad_sha256": "5bd45a84fc9ce8f52cd1b132d557043c4d3f3a27806950d4027e9a92b0583673",
+ "alcance": "Sirve para todas las épocas porque no necesita la referencia de ninguna: la manzana edificada es lo que forman las casas a la vista (las que se empaquetan, con la vida que les deja el visor bajo los hitos: tools/vidas-visibles.mjs) pegadas entre sí (a menos de 2·CIERRE_M), y la calle, el hueco entre dos manzanas. Mide:",
+ "ciudad_sha256": "6f4bded0944afcc813a2a568ffe059ed69495d9b1a7959ae9ee1ae260562a1c1",
  "pak_sha256": "5faaabcae480486f305cf5b928e0c1f9f220c344bc1aa7c882a92dec61be462a",
  "epoca": 5,
  "año": 1936,
