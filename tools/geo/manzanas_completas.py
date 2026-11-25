@@ -115,6 +115,27 @@ def abrir_corral(m):
     m['ajusteCorral'] = m.get('ajusteCorral',0)+1
 
 
+MARGEN_ALA_M = 40  # src/alas.js MARGEN_M: cuánto se estiran hacia afuera las alas del borde del lote
+EPS_ALA_M = .02    # src/alas.js EPS: un ala a menos de esto del borde del lote lo toca
+
+
+def techos_de_casa(c, metro):
+    """La parte de la huella bajo tejado, como la dibuja planDeAlas (src/alas.js): las alas que tocan el
+    borde del marco se estiran hacia afuera antes de recortarlas con la huella; patio y solar quedan abiertos."""
+    ox, oy, ex, ey, ancho, fondo = c['marco'][:6]
+    margen, eps = MARGEN_ALA_M/metro, EPS_ALA_M/metro
+    def mundo(x, y):
+        return [ox+x*ex-y*ey, oy+x*ey+y*ex]
+    def estirada(x0, y0, x1, y1):
+        x0, y0 = (-margen if x0 <= eps else x0), (-margen if y0 <= eps else y0)
+        x1, y1 = (ancho+margen if x1 >= ancho-eps else x1), (fondo+margen if y1 >= fondo-eps else y1)
+        return Polygon([mundo(x0,y0),mundo(x1,y0),mundo(x1,y1),mundo(x0,y1)])
+    huella = Polygon(c['huella']).buffer(0)
+    techo = unary_union([estirada(*a[1:]) for a in c['alas'] if a[0] >= 2])
+    huecos = unary_union([estirada(*a[1:]) for a in c['alas'] if a[0] < 2])
+    return huella.intersection(techo).difference(huecos)
+
+
 def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0):
     if intento == 0:
         ms = deepcopy(ms)
@@ -130,16 +151,7 @@ def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0):
             p = max(trozos, key=lambda p: p.area)
             casas.append({**c, 'huella': anillo(p)})
         m['casas'] = casas
-        techos = []
-        for c in casas:
-            ox, oy, ex, ey = c['marco'][:4]
-            def mundo(x, y):
-                return [ox+x*ex-y*ey, oy+x*ey+y*ex]
-            for tipo, x0, y0, x1, y1 in c['alas']:
-                if tipo < 2:  # patio y solar
-                    continue
-                r = Polygon([mundo(x0,y0),mundo(x1,y0),mundo(x1,y1),mundo(x0,y1)])
-                techos.append(r.intersection(Polygon(c['huella'])))
+        techos = [techos_de_casa(c, metro) for c in casas]
         verde = limite.difference(unary_union(techos)).difference(edificios).buffer(-.25/metro)
         zonas = [p for p in partes(verde) if p.area*metro*metro > .8]
         if not zonas:

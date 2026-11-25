@@ -29,7 +29,7 @@ def test_arboles_en_todas_variados_reproducibles_y_fuera_de_edificios():
 
 def test_abre_un_corral_si_las_casas_no_dejan_espacio_para_un_arbol():
     casas=[{'huella':[[x,0],[x+20,0],[x+20,40],[x,40]],
-            'marco':[x,0,1,0], 'alas':[[2,0,0,20,40]]} for x in [0,20]]
+            'marco':[x,0,1,0,20,40], 'alas':[[2,0,0,20,40]]} for x in [0,20]]
     m={'id':'estrecha','poligono':[[0,0],[40,0],[40,40],[0,40]],'casas':casas}
     r=recortar_y_arbolar([m],[],.5)[0]
     assert r['casas']
@@ -37,3 +37,15 @@ def test_abre_un_corral_si_las_casas_no_dejan_espacio_para_un_arbol():
     for t in r['arboles']:
         copa=Point(t['x'],t['y']).buffer(t['r'])
         assert not any(copa.intersects(Polygon(c['huella'])) for c in r['casas'])
+
+
+def test_los_arboles_respetan_el_techo_estirado_hasta_el_borde_del_lote():
+    # Huella sesgada: src/alas.js estira hasta el lindero las alas que lo tocan, así que el techo
+    # dibujado cubre también el triángulo más allá de x=20 (revisión de #211).
+    from manzanas_completas import techos_de_casa
+    c={'huella':[[0,0],[20,0],[30,40],[10,40]],'marco':[0,0,1,0,20,40,0,5],
+       'alas':[[2,0,0,20,6],[5,16,6,20,25],[0,4,6,16,25],[1,0,25,20,40]]}
+    techo=techos_de_casa(c,.5)
+    assert techo.covers(Point(24,22))
+    assert not techo.intersects(Point(10,15).buffer(1))  # el patio queda abierto
+    assert not techo.intersects(Point(15,35).buffer(1))  # y el solar también

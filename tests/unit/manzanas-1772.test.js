@@ -115,6 +115,24 @@ it('cobertura total: sustituye también una casa previa sin correspondencia apro
  expect(ciudad.vida.some(v=>v[0]<=1&&(!v[1]||v[1]>1))).toBe(false)
  expect(ciudad.vida).toEqual([[0,1],[2,0]])
 })
+it('cobertura total: las casas retiradas de 1772 se levantan igual en las otras cinco épocas (revisión de #211)',async()=>{
+ const {partesDeCiudad}=await import('../../tools/empacar-lib.mjs')
+ const {crearCoords}=await import('../../src/coords.js')
+ const {extruirTechos}=await import('../../src/ciudad.js')
+ // ninguna cuadra las toca: una nace en 1578 (se parte en dos) y otra en 1772 (pasa a nacer en 1843);
+ // de colonial a republicana, la etapa que arrancó colonial tiene otro alto de piso y alero
+ const datos={vertices:[300,300,330,300,330,340,300,340, 400,300,430,300,430,340,400,340],techos:[[0,4,1,0,123],[4,4,1,0,77]],
+  vida:[[0,0],[1,4]],historia:[[16,16,17,17,17,17],[16,16,17,17,17,17]],vuelos:[255,255],marcos:[],alas:[]}
+ const coords=crearCoords({ancho:1000,alto:1000,metro:.5,plaza:[0,0]})
+ const geometria=c=>extruirTechos(Object.fromEntries(Object.entries(partesDeCiudad(c)).map(([k,v])=>[k,v.datos])),coords)
+ const enEpoca=(g,e)=>{const r=[];for(let i=0;i<g.indices.length;i+=3){const ks=[...g.indices.slice(i,i+3)],k=ks[0];if(g.vidas[k*2]>e||(g.vidas[k*2+1]&&g.vidas[k*2+1]<=e))continue
+   const t=ks.map(j=>[...g.posiciones.slice(j*3,j*3+3),...g.info.slice(j*4,j*4+4)].map(v=>v.toFixed(4)).join(',')).sort()
+   if(new Set(t).size===3)r.push(t.join('|'))}return r.sort()} // los triángulos degenerados (área nula) no se ven
+ const antes=geometria(datos),despues=geometria(integrarManzanas1772(datos,[],{metro:.5,reemplazarTodo:true}).ciudad)
+ for(const e of [0,2,3,4,5])expect(enEpoca(despues,e)).toEqual(enEpoca(antes,e))
+ expect(enEpoca(despues,1)).toEqual([])
+ expect(enEpoca(antes,2).length).toBeGreaterThan(0)
+})
 it('cobertura total incluye unidades parciales y pendientes con contorno, pero no plazas',()=>{
  const red={nodos:[{id:'a',mosaico:[0,0]},{id:'b',mosaico:[200,0]},{id:'c',mosaico:[200,200]},{id:'d',mosaico:[0,200]}]}
  const u={id:'U',estado:'pendiente',ocupacion:'parcial',nodos:['a','b','c','d']}
