@@ -108,3 +108,19 @@ def test_las_casas_nacidas_en_1843_dentro_de_un_lote_o_plaza_pasan_a_la_epoca_si
     sin_vida, _ = en_lotes_libres(_ciudad([_cuadrado(40, 40, 10)], [[2, 3]]), unidades, epoca=2)
     assert sin_vida['techos'] == [] and sin_vida['vida'] == []
     assert movidas == 2
+
+
+def test_las_casas_propias_no_pisan_casas_vivas_ni_quedan_astillas():
+    from epocas_1843 import ANCHO_MINIMO_M
+    unidades = [{'id': 'B', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 200)}]
+    # una casa viva con el centro fuera de la manzana pero la huella adentro: la manzana cuenta como vacía
+    ciudad = _ciudad([[[-30, 50], [10, 50], [10, 70], [-30, 70]]], [[2, 0]])
+    nueva, _ = agregar_casas(ciudad, unidades, metro=0.5, epoca=2)
+    v = nueva['vertices']
+    viva = Polygon([[-30, 50], [10, 50], [10, 70], [-30, 70]])
+    propias = [Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]) for t in nueva['techos'][1:]]
+    assert propias and all(p.intersection(viva).area < 1e-6 for p in propias)
+    import numpy as np
+    for p in propias:
+        lados = np.diff(np.asarray(p.minimum_rotated_rectangle.exterior.coords), axis=0)
+        assert p.area * 0.25 / (max(np.hypot(*lados.T)) * 0.5) >= ANCHO_MINIMO_M - 1e-9

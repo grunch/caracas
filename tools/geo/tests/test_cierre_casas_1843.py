@@ -1,0 +1,44 @@
+"""Puerta de las fases 5 a 7 de 1843 sobre las casas a la vista en 1843 (T81.5a–7a)."""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from cierre_casas_1843 import puerta  # noqa: E402
+
+
+def _c(x, y, w, h):
+    return [[x, y], [x + w, y], [x + w, y + h], [x, y + h]]
+
+
+UNIDADES = [{'id': 'A', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _c(0, 0, 100, 100)},
+            {'id': 'L', 'ocupacion': 'lote_especial', 'estado': 'aprobada', 'poligono': _c(200, 0, 50, 50)}]
+
+
+def test_casas_bien_puestas_cierran():
+    casas = [{'techo': 1, 'poligono': _c(0, 0, 20, 16), 'propia': True}, {'techo': 2, 'poligono': _c(20, 0, 20, 16), 'propia': False}]
+    r = puerta(casas, UNIDADES, metro=0.5)
+    assert r['cerrable'] is True and all(c['cumplido'] for c in r['criterios'].values())
+
+
+def test_cada_criterio_falla_por_su_causa():
+    solapadas = [{'techo': 1, 'poligono': _c(0, 0, 20, 16), 'propia': False}, {'techo': 2, 'poligono': _c(10, 0, 20, 16), 'propia': False}]
+    assert puerta(solapadas, UNIDADES, metro=0.5)['criterios']['lotes_sin_solapes']['pares'] == [[1, 2]]
+    retirada = [{'techo': 3, 'poligono': _c(10, 10, 20, 16), 'propia': True}]
+    r = puerta(retirada, UNIDADES, metro=0.5)
+    assert r['criterios']['frentes_propios_sobre_la_manzana']['fuera'] == [3]
+    assert r['criterios']['casas_con_acceso']['sin_acceso'] == [3]
+    astilla = [{'techo': 4, 'poligono': [[0, 0], [40, 0], [40, 0.5]], 'propia': True}]
+    assert puerta(astilla, UNIDADES, metro=0.5)['criterios']['huellas_sin_degenerar']['degeneradas'] == [4]
+    en_lote = [{'techo': 5, 'poligono': _c(210, 10, 10, 10), 'propia': False}]
+    assert puerta(en_lote, UNIDADES, metro=0.5)['criterios']['libres_sin_casas']['casas'] == [5]
+
+
+def test_las_heredadas_interiores_se_cuentan_sin_cerrar_y_lo_anidado_en_un_lote_vale():
+    unidades = UNIDADES + [{'id': 'R', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _c(205, 5, 20, 20)}]
+    casas = [{'techo': 6, 'poligono': _c(40, 40, 10, 10), 'propia': False},   # interior de 1936: sin frente propio
+             {'techo': 7, 'poligono': _c(206, 6, 10, 10), 'propia': False}]   # en una manzana censada dentro del lote
+    r = puerta(casas, unidades, metro=0.5)
+    assert r['criterios']['casas_con_acceso']['cumplido'] is True
+    assert r['criterios']['casas_con_acceso']['heredadas_interiores'] == [6]
+    assert r['criterios']['libres_sin_casas']['casas'] == []

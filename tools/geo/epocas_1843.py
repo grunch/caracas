@@ -17,8 +17,9 @@ from vectorizar import ESTILO_COLONIAL, semilla_de
 
 CRUJIA_M = 8.0       # fondo de la crujía de frente de una casa colonial de un piso (specs/06 § 4)
 FRENTE_M = 10.0      # ancho de un lote de frente
-RETIRO_M = 0.5       # la casa no toca el borde leído de la manzana (el borde va a ojo, ±1 m)
+RETIRO_M = 0.2       # la casa no toca el borde leído de la manzana; menos que la tolerancia de fachada (0,5 m)
 AREA_MINIMA_M2 = 12.0
+ANCHO_MINIMO_M = 2.0  # una casa más angosta que esto (área / lado mayor) es una astilla de esquina: no se levanta
 VUELO_POR_OMISION = 255   # como las casas de 1578: sin tope de alero
 
 
@@ -62,8 +63,15 @@ def casas_de_manzana(poligono, metro, crujia_m=CRUJIA_M, frente_m=FRENTE_M, reti
 LIBRES = {'lote_especial', 'plaza', 'huerta', 'terreno_libre'}
 
 
+def _ancho_m(f, metro):
+    lados = np.diff(np.asarray(f.minimum_rotated_rectangle.exterior.coords), axis=0)
+    largo = float(max(np.hypot(*lados.T))) * metro
+    return f.area * metro ** 2 / largo if largo else 0.0
+
+
 def _sin(casa, libres, metro):
-    """La casa sin lo que pisa de un lote especial, plaza o huerta de su manzana (el pedazo mayor), o None."""
+    """La casa sin lo que pisa (lotes, plazas, huertas de su manzana; casas vivas; casas propias ya puestas), el
+    pedazo mayor, o None si queda chica, astillada o con un hueco."""
     for f in libres:
         casa = casa.difference(f)
     if casa.geom_type == 'MultiPolygon':
@@ -72,6 +80,8 @@ def _sin(casa, libres, metro):
         return None
     if casa.interiors:
         return None   # un lote entero dentro de la casa: el techo solo guarda el contorno y lo volvería a tapar
+    if _ancho_m(casa, metro) < ANCHO_MINIMO_M:
+        return None
     return casa
 
 
@@ -110,6 +120,10 @@ def agregar_casas(ciudad, unidades, metro, epoca):
     vuelos = list(ciudad.get('vuelos', [VUELO_POR_OMISION] * n))
     libres = [Polygon(u['poligono']).buffer(0) for u in unidades
               if u['estado'] == 'aprobada' and u['ocupacion'] in LIBRES and len(u['poligono']) >= 3]
+    v = np.asarray(ciudad['vertices'], float).reshape(-1, 2)
+    huellas = [Polygon(v[t[0]:t[0] + t[1]]).buffer(0) for t, vd in zip(ciudad['techos'], ciudad['vida']) if _vive(vd, epoca)]
+    arbol_h = STRtree(huellas) if huellas else None
+    puestas = []
     manzanas = 0
     for u in sin_casas(unidades, ciudad, epoca):
         figura = Polygon(u['poligono']).buffer(0)
@@ -117,8 +131,11 @@ def agregar_casas(ciudad, unidades, metro, epoca):
         despues = [ciudad['vida'][i][0] for i in cerca if ciudad['vida'][i][0] > epoca]
         muere = min(despues) if despues else 0
         adentro = [f for f in libres if f.intersects(figura)]
+        adentro += [huellas[i] for i in arbol_h.query(figura)] if arbol_h is not None else []
+        adentro += [f for f in puestas if f.intersects(figura)]
         casas = [_sin(casa, adentro, metro) for casa in casas_de_manzana(u['poligono'], metro)]
         casas = [c for c in casas if c is not None]
+        puestas += casas
         manzanas += bool(casas)
         for casa in casas:
             puntos = list(casa.exterior.coords)[:-1]
