@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
-from shapely.geometry import Polygon
+from shapely.geometry import Point, Polygon
 from shapely.strtree import STRtree
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -62,7 +62,8 @@ def puerta(casas, unidades, metro):
     def en_un_libre(f):   # manda la unidad más chica que contiene el centro (como epocas_1843.en_lotes_libres)
         if arbol_u is None:
             return False
-        contienen = [todas[k] for k in arbol_u.query(f.centroid, predicate='within')]
+        centro = Point(np.asarray(f.exterior.coords)[:-1].mean(axis=0))   # el mismo centro que epocas_1843
+        contienen = [todas[k] for k in arbol_u.query(centro, predicate='within')]
         return bool(contienen) and min(contienen, key=lambda uf: uf[1].area)[0]['ocupacion'] in LIBRES
 
     en_libres = [c['techo'] for c, f in figuras if en_un_libre(f)]
