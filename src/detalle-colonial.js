@@ -74,7 +74,7 @@ export function crearDetalleColonial({coords,U,liviano=false,manzanas=PILOTO_COL
    const u=(f.desde+f.hasta)/2
    return {x:f.origen[0]+f.eje[0]*u-f.normal[0]*5,z:f.origen[1]+f.eje[1]*u-f.normal[1]*5,dist:60,yaw:Math.atan2(f.normal[0],f.normal[1])+.25,pitch:.48}
   },
-  get cuenta(){return {creacionMs,unidades:unidades.map(m=>({id:m.id,centro:m.centro,radio:m.radio,nivel:m.nivel,frentes:m.frentes.length,balcones:m.frentes.reduce((s,f)=>s+piezasDeFrente(f).filter(p=>p.tipo==='losa').length,0),triangulos:m.mallas?.reduce((s,o)=>s+(o.visible?o.geometry.index.count/3:0),0)??0})),mallas:grupo.children.filter(m=>m.visible).length}},
+  get cuenta(){return {creacionMs,liviano,unidades:unidades.map(m=>({id:m.id,centro:m.centro,radio:m.radio,nivel:m.nivel,frentes:m.frentes.length,balcones:m.frentes.reduce((s,f)=>s+piezasDeFrente(f).filter(p=>p.tipo==='losa').length,0),triangulos:m.mallas?.reduce((s,o)=>s+(o.visible?o.geometry.index.count/3:0),0)??0})),mallas:grupo.children.filter(m=>m.visible).length}},
   liberar(){grupo.children.forEach(m=>m.geometry.dispose());grupo.clear();material.dispose();sombra.dispose()},
  }
 }

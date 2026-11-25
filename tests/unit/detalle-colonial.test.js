@@ -52,5 +52,14 @@ it('crea los lotes solo al acercarse, reutiliza la geometría y se apaga en otra
  expect(capa.cuenta.mallas).toBe(2);const g=capa.grupo.children[0].geometry
  capa.actualizar({position:{x:10,y:100,z:10}},[2,2]);expect(capa.cuenta.mallas).toBe(0)
  capa.actualizar({position:{x:10,y:100,z:10}},[1,1]);expect(capa.grupo.children[0].geometry).toBe(g)
+ expect(capa.cuenta.liviano).toBe(false)
  expect(capa.vista).not.toBeNull();capa.liberar();material.dispose();expect(capa.grupo.children).toHaveLength(0)
+})
+it('la cuenta dice si la capa va en modo liviano (render por software): ahí el nivel no pasa de 1',async()=>{
+ const {crearDetalleColonial}=await import('../../src/detalle-colonial.js'),{crearMaterialCiudad}=await import('../../src/material.js')
+ const {U,material}=crearMaterialCiudad({plano:{ancho:1000,alto:1000,plaza:[0,0],metro:.5},metro:.5,mapa:null})
+ const capa=crearDetalleColonial({U,coords:{aMundo:(x,z)=>({x,z})},manzanas:[m],liviano:true})
+ capa.agregar(paquete());capa.finalizar();capa.actualizar({position:{x:10,y:100,z:10}},[1,1])
+ expect(capa.cuenta.liviano).toBe(true);expect(capa.cuenta.unidades[0].nivel).toBe(1)
+ capa.liberar();material.dispose()
 })

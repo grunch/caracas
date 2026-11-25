@@ -10,7 +10,9 @@ test('piloto colonial: balcones de cerca, LOD distante y apagado fuera de 1772',
  await page.goto('/?sinintro&sinsw&detallecasas=1&verbalcones')
  await page.waitForFunction(()=>window.lab?.ready&&window.lab.casasListas&&window.lab.detalleColonial?.cuenta.mallas>0)
  const inicial=await page.evaluate(()=>window.lab.detalleColonial.cuenta)
- expect(inicial.unidades).toHaveLength(3);expect(inicial.unidades.some(m=>m.nivel===2&&m.balcones>0)).toBe(true)
+ // Con render por software (CI) la capa va liviana y no pasa del nivel 1; con GPU, de cerca, llega al 2.
+ const nivelCercano=inicial.liviano?1:2
+ expect(inicial.unidades).toHaveLength(3);expect(inicial.unidades.some(m=>m.nivel===nivelCercano&&m.balcones>0)).toBe(true)
  await page.evaluate(()=>window.lab.cam.jump({x:0,z:0,dist:2500,yaw:0,pitch:1}))
  await expect.poll(()=>page.evaluate(()=>window.lab.detalleColonial.cuenta.mallas)).toBe(0)
  await page.evaluate(()=>{window.lab.cam.jump(window.lab.detalleColonial.vista);window.lab.lineaDeTiempo.elegir(2)})
