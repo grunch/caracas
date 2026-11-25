@@ -1,0 +1,4684 @@
+{
+ "alcance": "Sirve para todas las épocas porque no necesita la referencia de ninguna: la manzana edificada es lo que forman las casas a la vista pegadas entre sí (a menos de 2·CIERRE_M), y la calle, el hueco entre dos manzanas. Mide:",
+ "ciudad_sha256": "5bd45a84fc9ce8f52cd1b132d557043c4d3f3a27806950d4027e9a92b0583673",
+ "pak_sha256": "5faaabcae480486f305cf5b928e0c1f9f220c344bc1aa7c882a92dec61be462a",
+ "epoca": 1,
+ "año": 1772,
+ "casas": 6292,
+ "R1": {
+  "casas": 6292,
+  "segunda_fila": [],
+  "parte_en_segunda_fila": 0.0
+ },
+ "R3": {
+  "giro_maximo": 5.0,
+  "medidas": 6292,
+  "n_giradas": 926,
+  "giradas": [
+   {
+    "techo": 35249,
+    "giro": 45.0
+   },
+   {
+    "techo": 37735,
+    "giro": 45.0
+   },
+   {
+    "techo": 37661,
+    "giro": 45.0
+   },
+   {
+    "techo": 33156,
+    "giro": 45.0
+   },
+   {
+    "techo": 38608,
+    "giro": 45.0
+   },
+   {
+    "techo": 33067,
+    "giro": 45.0
+   },
+   {
+    "techo": 38483,
+    "giro": 44.9
+   },
+   {
+    "techo": 35385,
+    "giro": 44.9
+   },
+   {
+    "techo": 35318,
+    "giro": 44.9
+   },
+   {
+    "techo": 35127,
+    "giro": 44.9
+   },
+   {
+    "techo": 37653,
+    "giro": 44.9
+   },
+   {
+    "techo": 37499,
+    "giro": 44.9
+   },
+   {
+    "techo": 37560,
+    "giro": 44.9
+   },
+   {
+    "techo": 34688,
+    "giro": 44.9
+   },
+   {
+    "techo": 34709,
+    "giro": 44.9
+   },
+   {
+    "techo": 35759,
+    "giro": 44.9
+   },
+   {
+    "techo": 33948,
+    "giro": 44.9
+   },
+   {
+    "techo": 33929,
+    "giro": 44.9
+   },
+   {
+    "techo": 33947,
+    "giro": 44.9
+   },
+   {
+    "techo": 35676,
+    "giro": 44.9
+   },
+   {
+    "techo": 33205,
+    "giro": 44.9
+   },
+   {
+    "techo": 32895,
+    "giro": 44.9
+   },
+   {
+    "techo": 36143,
+    "giro": 44.9
+   },
+   {
+    "techo": 35120,
+    "giro": 44.8
+   },
+   {
+    "techo": 37489,
+    "giro": 44.8
+   },
+   {
+    "techo": 37357,
+    "giro": 44.8
+   },
+   {
+    "techo": 37333,
+    "giro": 44.8
+   },
+   {
+    "techo": 34383,
+    "giro": 44.8
+   },
+   {
+    "techo": 37095,
+    "giro": 44.8
+   },
+   {
+    "techo": 37126,
+    "giro": 44.8
+   },
+   {
+    "techo": 34200,
+    "giro": 44.8
+   },
+   {
+    "techo": 34212,
+    "giro": 44.8
+   },
+   {
+    "techo": 36996,
+    "giro": 44.8
+   },
+   {
+    "techo": 33909,
+    "giro": 44.8
+   },
+   {
+    "techo": 33838,
+    "giro": 44.8
+   },
+   {
+    "techo": 33811,
+    "giro": 44.8
+   },
+   {
+    "techo": 33829,
+    "giro": 44.8
+   },
+   {
+    "techo": 33990,
+    "giro": 44.8
+   },
+   {
+    "techo": 34000,
+    "giro": 44.8
+   },
+   {
+    "techo": 35460,
+    "giro": 44.8
+   },
+   {
+    "techo": 38603,
+    "giro": 44.8
+   },
+   {
+    "techo": 33320,
+    "giro": 44.8
+   },
+   {
+    "techo": 36371,
+    "giro": 44.8
+   },
+   {
+    "techo": 13854,
+    "giro": 44.8
+   },
+   {
+    "techo": 13870,
+    "giro": 44.8
+   },
+   {
+    "techo": 38643,
+    "giro": 44.8
+   },
+   {
+    "techo": 33011,
+    "giro": 44.8
+   },
+   {
+    "techo": 32789,
+    "giro": 44.8
+   },
+   {
+    "techo": 35198,
+    "giro": 44.7
+   },
+   {
+    "techo": 35221,
+    "giro": 44.7
+   },
+   {
+    "techo": 35268,
+    "giro": 44.7
+   },
+   {
+    "techo": 37992,
+    "giro": 44.7
+   },
+   {
+    "techo": 37800,
+    "giro": 44.7
+   },
+   {
+    "techo": 37774,
+    "giro": 44.7
+   },
+   {
+    "techo": 35091,
+    "giro": 44.7
+   },
+   {
+    "techo": 34731,
+    "giro": 44.7
+   },
+   {
+    "techo": 34633,
+    "giro": 44.7
+   },
+   {
+    "techo": 36834,
+    "giro": 44.7
+   },
+   {
+    "techo": 36844,
+    "giro": 44.7
+   },
+   {
+    "techo": 34058,
+    "giro": 44.7
+   },
+   {
+    "techo": 34081,
+    "giro": 44.7
+   },
+   {
+    "techo": 33704,
+    "giro": 44.7
+   },
+   {
+    "techo": 33727,
+    "giro": 44.7
+   },
+   {
+    "techo": 36811,
+    "giro": 44.7
+   },
+   {
+    "techo": 33124,
+    "giro": 44.7
+   },
+   {
+    "techo": 38817,
+    "giro": 44.7
+   },
+   {
+    "techo": 35505,
+    "giro": 44.7
+   },
+   {
+    "techo": 32808,
+    "giro": 44.7
+   },
+   {
+    "techo": 36252,
+    "giro": 44.7
+   },
+   {
+    "techo": 36117,
+    "giro": 44.7
+   },
+   {
+    "techo": 35996,
+    "giro": 44.7
+   },
+   {
+    "techo": 38207,
+    "giro": 44.6
+   },
+   {
+    "techo": 37980,
+    "giro": 44.6
+   },
+   {
+    "techo": 35165,
+    "giro": 44.6
+   },
+   {
+    "techo": 35178,
+    "giro": 44.6
+   },
+   {
+    "techo": 37472,
+    "giro": 44.6
+   },
+   {
+    "techo": 37339,
+    "giro": 44.6
+   },
+   {
+    "techo": 36922,
+    "giro": 44.6
+   },
+   {
+    "techo": 33936,
+    "giro": 44.6
+   },
+   {
+    "techo": 33865,
+    "giro": 44.6
+   },
+   {
+    "techo": 34025,
+    "giro": 44.6
+   },
+   {
+    "techo": 33262,
+    "giro": 44.6
+   },
+   {
+    "techo": 33393,
+    "giro": 44.6
+   },
+   {
+    "techo": 33418,
+    "giro": 44.6
+   },
+   {
+    "techo": 35538,
+    "giro": 44.6
+   },
+   {
+    "techo": 13846,
+    "giro": 44.6
+   },
+   {
+    "techo": 32902,
+    "giro": 44.6
+   },
+   {
+    "techo": 36596,
+    "giro": 44.6
+   },
+   {
+    "techo": 36325,
+    "giro": 44.6
+   },
+   {
+    "techo": 36238,
+    "giro": 44.6
+   },
+   {
+    "techo": 35254,
+    "giro": 44.5
+   },
+   {
+    "techo": 35267,
+    "giro": 44.5
+   },
+   {
+    "techo": 34946,
+    "giro": 44.5
+   },
+   {
+    "techo": 34957,
+    "giro": 44.5
+   },
+   {
+    "techo": 34967,
+    "giro": 44.5
+   },
+   {
+    "techo": 34978,
+    "giro": 44.5
+   },
+   {
+    "techo": 37104,
+    "giro": 44.5
+   },
+   {
+    "techo": 34178,
+    "giro": 44.5
+   },
+   {
+    "techo": 34266,
+    "giro": 44.5
+   },
+   {
+    "techo": 34070,
+    "giro": 44.5
+   },
+   {
+    "techo": 34091,
+    "giro": 44.5
+   },
+   {
+    "techo": 33780,
+    "giro": 44.5
+   },
+   {
+    "techo": 35586,
+    "giro": 44.5
+   },
+   {
+    "techo": 35562,
+    "giro": 44.5
+   },
+   {
+    "techo": 35576,
+    "giro": 44.5
+   },
+   {
+    "techo": 33030,
+    "giro": 44.5
+   },
+   {
+    "techo": 33319,
+    "giro": 44.5
+   },
+   {
+    "techo": 35296,
+    "giro": 44.4
+   },
+   {
+    "techo": 35211,
+    "giro": 44.4
+   },
+   {
+    "techo": 35234,
+    "giro": 44.4
+   },
+   {
+    "techo": 37899,
+    "giro": 44.4
+   },
+   {
+    "techo": 37785,
+    "giro": 44.4
+   },
+   {
+    "techo": 37718,
+    "giro": 44.4
+   },
+   {
+    "techo": 34720,
+    "giro": 44.4
+   },
+   {
+    "techo": 34847,
+    "giro": 44.4
+   },
+   {
+    "techo": 34404,
+    "giro": 44.4
+   },
+   {
+    "techo": 34177,
+    "giro": 44.4
+   },
+   {
+    "techo": 36891,
+    "giro": 44.4
+   },
+   {
+    "techo": 35743,
+    "giro": 44.4
+   },
+   {
+    "techo": 35561,
+    "giro": 44.4
+   },
+   {
+    "techo": 33672,
+    "giro": 44.4
+   },
+   {
+    "techo": 35450,
+    "giro": 44.4
+   },
+   {
+    "techo": 38578,
+    "giro": 44.4
+   },
+   {
+    "techo": 14663,
+    "giro": 44.4
+   },
+   {
+    "techo": 14664,
+    "giro": 44.4
+   },
+   {
+    "techo": 14665,
+    "giro": 44.4
+   },
+   {
+    "techo": 14666,
+    "giro": 44.4
+   },
+   {
+    "techo": 32943,
+    "giro": 44.4
+   },
+   {
+    "techo": 32909,
+    "giro": 44.4
+   },
+   {
+    "techo": 36524,
+    "giro": 44.4
+   },
+   {
+    "techo": 36242,
+    "giro": 44.4
+   },
+   {
+    "techo": 36244,
+    "giro": 44.4
+   },
+   {
+    "techo": 35258,
+    "giro": 44.3
+   },
+   {
+    "techo": 37930,
+    "giro": 44.3
+   },
+   {
+    "techo": 34491,
+    "giro": 44.3
+   },
+   {
+    "techo": 24652,
+    "giro": 44.3
+   },
+   {
+    "techo": 34337,
+    "giro": 44.3
+   },
+   {
+    "techo": 34359,
+    "giro": 44.3
+   },
+   {
+    "techo": 35659,
+    "giro": 44.3
+   },
+   {
+    "techo": 35675,
+    "giro": 44.3
+   },
+   {
+    "techo": 36749,
+    "giro": 44.3
+   },
+   {
+    "techo": 33846,
+    "giro": 44.3
+   },
+   {
+    "techo": 34004,
+    "giro": 44.3
+   },
+   {
+    "techo": 35601,
+    "giro": 44.3
+   },
+   {
+    "techo": 33080,
+    "giro": 44.3
+   },
+   {
+    "techo": 33054,
+    "giro": 44.3
+   },
+   {
+    "techo": 38565,
+    "giro": 44.3
+   },
+   {
+    "techo": 12700,
+    "giro": 44.3
+   },
+   {
+    "techo": 36607,
+    "giro": 44.3
+   },
+   {
+    "techo": 32901,
+    "giro": 44.3
+   },
+   {
+    "techo": 38280,
+    "giro": 44.2
+   },
+   {
+    "techo": 37648,
+    "giro": 44.2
+   },
+   {
+    "techo": 37388,
+    "giro": 44.2
+   },
+   {
+    "techo": 35775,
+    "giro": 44.2
+   },
+   {
+    "techo": 34490,
+    "giro": 44.2
+   },
+   {
+    "techo": 38384,
+    "giro": 44.2
+   },
+   {
+    "techo": 36825,
+    "giro": 44.2
+   },
+   {
+    "techo": 35553,
+    "giro": 44.2
+   },
+   {
+    "techo": 36802,
+    "giro": 44.2
+   },
+   {
+    "techo": 33637,
+    "giro": 44.2
+   },
+   {
+    "techo": 33046,
+    "giro": 44.2
+   },
+   {
+    "techo": 14640,
+    "giro": 44.2
+   },
+   {
+    "techo": 14661,
+    "giro": 44.2
+   },
+   {
+    "techo": 12701,
+    "giro": 44.2
+   },
+   {
+    "techo": 36246,
+    "giro": 44.2
+   },
+   {
+    "techo": 38695,
+    "giro": 44.2
+   },
+   {
+    "techo": 35197,
+    "giro": 44.1
+   },
+   {
+    "techo": 37775,
+    "giro": 44.1
+   },
+   {
+    "techo": 34808,
+    "giro": 44.1
+   },
+   {
+    "techo": 34155,
+    "giro": 44.1
+   },
+   {
+    "techo": 33888,
+    "giro": 44.1
+   },
+   {
+    "techo": 33586,
+    "giro": 44.1
+   },
+   {
+    "techo": 34059,
+    "giro": 44.1
+   },
+   {
+    "techo": 34080,
+    "giro": 44.1
+   },
+   {
+    "techo": 33800,
+    "giro": 44.1
+   },
+   {
+    "techo": 33642,
+    "giro": 44.1
+   },
+   {
+    "techo": 33360,
+    "giro": 44.1
+   },
+   {
+    "techo": 36387,
+    "giro": 44.1
+   },
+   {
+    "techo": 32944,
+    "giro": 44.1
+   },
+   {
+    "techo": 35967,
+    "giro": 44.1
+   },
+   {
+    "techo": 37885,
+    "giro": 44.0
+   },
+   {
+    "techo": 37816,
+    "giro": 44.0
+   },
+   {
+    "techo": 37824,
+    "giro": 44.0
+   },
+   {
+    "techo": 37829,
+    "giro": 44.0
+   },
+   {
+    "techo": 34934,
+    "giro": 44.0
+   },
+   {
+    "techo": 37133,
+    "giro": 44.0
+   },
+   {
+    "techo": 38403,
+    "giro": 44.0
+   },
+   {
+    "techo": 34232,
+    "giro": 44.0
+   },
+   {
+    "techo": 34299,
+    "giro": 44.0
+   },
+   {
+    "techo": 34330,
+    "giro": 44.0
+   },
+   {
+    "techo": 33695,
+    "giro": 44.0
+   },
+   {
+    "techo": 33718,
+    "giro": 44.0
+   },
+   {
+    "techo": 33687,
+    "giro": 44.0
+   },
+   {
+    "techo": 33134,
+    "giro": 44.0
+   },
+   {
+    "techo": 14656,
+    "giro": 44.0
+   },
+   {
+    "techo": 14657,
+    "giro": 44.0
+   },
+   {
+    "techo": 36235,
+    "giro": 44.0
+   },
+   {
+    "techo": 36240,
+    "giro": 44.0
+   },
+   {
+    "techo": 38167,
+    "giro": 43.9
+   },
+   {
+    "techo": 35191,
+    "giro": 43.9
+   },
+   {
+    "techo": 37796,
+    "giro": 43.9
+   },
+   {
+    "techo": 35113,
+    "giro": 43.9
+   },
+   {
+    "techo": 37398,
+    "giro": 43.9
+   },
+   {
+    "techo": 34676,
+    "giro": 43.9
+   },
+   {
+    "techo": 34699,
+    "giro": 43.9
+   },
+   {
+    "techo": 36871,
+    "giro": 43.9
+   },
+   {
+    "techo": 36890,
+    "giro": 43.9
+   },
+   {
+    "techo": 33917,
+    "giro": 43.9
+   },
+   {
+    "techo": 33857,
+    "giro": 43.9
+   },
+   {
+    "techo": 36361,
+    "giro": 43.9
+   },
+   {
+    "techo": 14651,
+    "giro": 43.9
+   },
+   {
+    "techo": 38652,
+    "giro": 43.9
+   },
+   {
+    "techo": 36507,
+    "giro": 43.9
+   },
+   {
+    "techo": 36506,
+    "giro": 43.9
+   },
+   {
+    "techo": 36257,
+    "giro": 43.9
+   },
+   {
+    "techo": 38169,
+    "giro": 43.8
+   },
+   {
+    "techo": 38419,
+    "giro": 43.8
+   },
+   {
+    "techo": 37559,
+    "giro": 43.8
+   },
+   {
+    "techo": 34481,
+    "giro": 43.8
+   },
+   {
+    "techo": 37114,
+    "giro": 43.8
+   },
+   {
+    "techo": 38363,
+    "giro": 43.8
+   },
+   {
+    "techo": 38373,
+    "giro": 43.8
+   },
+   {
+    "techo": 10774,
+    "giro": 43.8
+   },
+   {
+    "techo": 37246,
+    "giro": 43.8
+   },
+   {
+    "techo": 34309,
+    "giro": 43.8
+   },
+   {
+    "techo": 33382,
+    "giro": 43.8
+   },
+   {
+    "techo": 36778,
+    "giro": 43.8
+   },
+   {
+    "techo": 36780,
+    "giro": 43.8
+   },
+   {
+    "techo": 36787,
+    "giro": 43.8
+   },
+   {
+    "techo": 38599,
+    "giro": 43.8
+   },
+   {
+    "techo": 38045,
+    "giro": 43.7
+   },
+   {
+    "techo": 35276,
+    "giro": 43.7
+   },
+   {
+    "techo": 37937,
+    "giro": 43.7
+   },
+   {
+    "techo": 37920,
+    "giro": 43.7
+   },
+   {
+    "techo": 35080,
+    "giro": 43.7
+   },
+   {
+    "techo": 37477,
+    "giro": 43.7
+   },
+   {
+    "techo": 34999,
+    "giro": 43.7
+   },
+   {
+    "techo": 34968,
+    "giro": 43.7
+   },
+   {
+    "techo": 34979,
+    "giro": 43.7
+   },
+   {
+    "techo": 34677,
+    "giro": 43.7
+   },
+   {
+    "techo": 34622,
+    "giro": 43.7
+   },
+   {
+    "techo": 34644,
+    "giro": 43.7
+   },
+   {
+    "techo": 34821,
+    "giro": 43.7
+   },
+   {
+    "techo": 37284,
+    "giro": 43.7
+   },
+   {
+    "techo": 34348,
+    "giro": 43.7
+   },
+   {
+    "techo": 34370,
+    "giro": 43.7
+   },
+   {
+    "techo": 36833,
+    "giro": 43.7
+   },
+   {
+    "techo": 35685,
+    "giro": 43.7
+   },
+   {
+    "techo": 35710,
+    "giro": 43.7
+   },
+   {
+    "techo": 35637,
+    "giro": 43.7
+   },
+   {
+    "techo": 33719,
+    "giro": 43.7
+   },
+   {
+    "techo": 33742,
+    "giro": 43.7
+   },
+   {
+    "techo": 36793,
+    "giro": 43.7
+   },
+   {
+    "techo": 35442,
+    "giro": 43.7
+   },
+   {
+    "techo": 33102,
+    "giro": 43.7
+   },
+   {
+    "techo": 35539,
+    "giro": 43.7
+   },
+   {
+    "techo": 13853,
+    "giro": 43.7
+   },
+   {
+    "techo": 38150,
+    "giro": 43.6
+   },
+   {
+    "techo": 38158,
+    "giro": 43.6
+   },
+   {
+    "techo": 37933,
+    "giro": 43.6
+   },
+   {
+    "techo": 37902,
+    "giro": 43.6
+   },
+   {
+    "techo": 35105,
+    "giro": 43.6
+   },
+   {
+    "techo": 38404,
+    "giro": 43.6
+   },
+   {
+    "techo": 34902,
+    "giro": 43.6
+   },
+   {
+    "techo": 34923,
+    "giro": 43.6
+   },
+   {
+    "techo": 34556,
+    "giro": 43.6
+   },
+   {
+    "techo": 33910,
+    "giro": 43.6
+   },
+   {
+    "techo": 33928,
+    "giro": 43.6
+   },
+   {
+    "techo": 36701,
+    "giro": 43.6
+   },
+   {
+    "techo": 35585,
+    "giro": 43.6
+   },
+   {
+    "techo": 32935,
+    "giro": 43.6
+   },
+   {
+    "techo": 32829,
+    "giro": 43.6
+   },
+   {
+    "techo": 38316,
+    "giro": 43.6
+   },
+   {
+    "techo": 35988,
+    "giro": 43.6
+   },
+   {
+    "techo": 38294,
+    "giro": 43.5
+   },
+   {
+    "techo": 35311,
+    "giro": 43.5
+   },
+   {
+    "techo": 35325,
+    "giro": 43.5
+   },
+   {
+    "techo": 37681,
+    "giro": 43.5
+   },
+   {
+    "techo": 37663,
+    "giro": 43.5
+   },
+   {
+    "techo": 35063,
+    "giro": 43.5
+   },
+   {
+    "techo": 38374,
+    "giro": 43.5
+   },
+   {
+    "techo": 34222,
+    "giro": 43.5
+   },
+   {
+    "techo": 34243,
+    "giro": 43.5
+   },
+   {
+    "techo": 34101,
+    "giro": 43.5
+   },
+   {
+    "techo": 35722,
+    "giro": 43.5
+   },
+   {
+    "techo": 36746,
+    "giro": 43.5
+   },
+   {
+    "techo": 33392,
+    "giro": 43.5
+   },
+   {
+    "techo": 33636,
+    "giro": 43.5
+   },
+   {
+    "techo": 36651,
+    "giro": 43.5
+   },
+   {
+    "techo": 13845,
+    "giro": 43.5
+   },
+   {
+    "techo": 13864,
+    "giro": 43.5
+   },
+   {
+    "techo": 36560,
+    "giro": 43.5
+   },
+   {
+    "techo": 38276,
+    "giro": 43.4
+   },
+   {
+    "techo": 35272,
+    "giro": 43.4
+   },
+   {
+    "techo": 37636,
+    "giro": 43.4
+   },
+   {
+    "techo": 37396,
+    "giro": 43.4
+   },
+   {
+    "techo": 37166,
+    "giro": 43.4
+   },
+   {
+    "techo": 34381,
+    "giro": 43.4
+   },
+   {
+    "techo": 38609,
+    "giro": 43.4
+   },
+   {
+    "techo": 38650,
+    "giro": 43.4
+   }
+  ]
+ },
+ "R4": {
+  "muestras": 23008,
+  "paso_m": 2.0,
+  "metros_por_ancho": {
+   "0-2": 2.0,
+   "2-4": 150.0,
+   "4-6": 2282.0,
+   "6-8": 14602.0,
+   "8-10": 3526.0,
+   "10-15": 8056.0,
+   "15-30": 17398.0
+  },
+  "mediana_m": 11.81,
+  "p10_m": 6.16
+ },
+ "R6": {
+  "total": 6292,
+  "n_manzanas": 302,
+  "cuadras_del_damero": {
+   "n": 77,
+   "mediana_casas": 39.0,
+   "mediana_frente_m": 12.15
+  },
+  "mayores_que_una_cuadra": {
+   "n": 29,
+   "casas": 1333,
+   "centros": [
+    [
+     7640.7,
+     7955.8
+    ],
+    [
+     8945.0,
+     8226.3
+    ],
+    [
+     8464.5,
+     8129.1
+    ],
+    [
+     8303.7,
+     5078.1
+    ],
+    [
+     9824.8,
+     7835.6
+    ],
+    [
+     8207.6,
+     8060.5
+    ],
+    [
+     10863.9,
+     7223.1
+    ],
+    [
+     7547.8,
+     8239.4
+    ],
+    [
+     8679.3,
+     5696.3
+    ],
+    [
+     9212.4,
+     8274.3
+    ],
+    [
+     8893.6,
+     6030.3
+    ],
+    [
+     9783.8,
+     6748.2
+    ],
+    [
+     8525.3,
+     7816.7
+    ],
+    [
+     8350.6,
+     8707.3
+    ],
+    [
+     9316.4,
+     7711.7
+    ],
+    [
+     8704.8,
+     8186.6
+    ],
+    [
+     9675.3,
+     7234.2
+    ],
+    [
+     8575.4,
+     7550.4
+    ],
+    [
+     8839.9,
+     8811.4
+    ],
+    [
+     9002.6,
+     7917.9
+    ],
+    [
+     8886.9,
+     8546.9
+    ],
+    [
+     10900.0,
+     6962.0
+    ],
+    [
+     9050.8,
+     7651.2
+    ],
+    [
+     9293.7,
+     6380.4
+    ],
+    [
+     9505.0,
+     6694.4
+    ],
+    [
+     9243.0,
+     6648.1
+    ],
+    [
+     8419.7,
+     6973.7
+    ],
+    [
+     9555.8,
+     6432.6
+    ],
+    [
+     8519.3,
+     6517.6
+    ]
+   ]
+  },
+  "manzanas_listadas": "las 300 con más casas",
+  "manzanas": [
+   {
+    "casas": 59,
+    "de_frente": 59,
+    "borde_m": 713.5,
+    "area_ha": 2.098,
+    "frente_medio_m": 12.09,
+    "centro": [
+     8303.7,
+     5078.1
+    ]
+   },
+   {
+    "casas": 53,
+    "de_frente": 53,
+    "borde_m": 616.2,
+    "area_ha": 1.003,
+    "frente_medio_m": 11.63,
+    "centro": [
+     10007.2,
+     8322.2
+    ]
+   },
+   {
+    "casas": 52,
+    "de_frente": 52,
+    "borde_m": 596.3,
+    "area_ha": 2.179,
+    "frente_medio_m": 11.47,
+    "centro": [
+     8945.0,
+     8226.3
+    ]
+   },
+   {
+    "casas": 51,
+    "de_frente": 51,
+    "borde_m": 596.8,
+    "area_ha": 2.165,
+    "frente_medio_m": 11.7,
+    "centro": [
+     8464.5,
+     8129.1
+    ]
+   },
+   {
+    "casas": 49,
+    "de_frente": 49,
+    "borde_m": 554.4,
+    "area_ha": 1.908,
+    "frente_medio_m": 11.31,
+    "centro": [
+     10863.9,
+     7223.1
+    ]
+   },
+   {
+    "casas": 49,
+    "de_frente": 49,
+    "borde_m": 560.3,
+    "area_ha": 1.959,
+    "frente_medio_m": 11.43,
+    "centro": [
+     9824.8,
+     7835.6
+    ]
+   },
+   {
+    "casas": 48,
+    "de_frente": 48,
+    "borde_m": 547.7,
+    "area_ha": 1.741,
+    "frente_medio_m": 11.41,
+    "centro": [
+     8704.8,
+     8186.6
+    ]
+   },
+   {
+    "casas": 48,
+    "de_frente": 48,
+    "borde_m": 544.1,
+    "area_ha": 1.845,
+    "frente_medio_m": 11.34,
+    "centro": [
+     8679.3,
+     5696.3
+    ]
+   },
+   {
+    "casas": 48,
+    "de_frente": 48,
+    "borde_m": 569.8,
+    "area_ha": 1.948,
+    "frente_medio_m": 11.87,
+    "centro": [
+     8207.6,
+     8060.5
+    ]
+   },
+   {
+    "casas": 46,
+    "de_frente": 46,
+    "borde_m": 558.9,
+    "area_ha": 0.692,
+    "frente_medio_m": 12.15,
+    "centro": [
+     11479.0,
+     7800.2
+    ]
+   },
+   {
+    "casas": 46,
+    "de_frente": 46,
+    "borde_m": 527.5,
+    "area_ha": 1.737,
+    "frente_medio_m": 11.47,
+    "centro": [
+     9675.3,
+     7234.2
+    ]
+   },
+   {
+    "casas": 46,
+    "de_frente": 46,
+    "borde_m": 528.6,
+    "area_ha": 1.748,
+    "frente_medio_m": 11.49,
+    "centro": [
+     9316.4,
+     7711.7
+    ]
+   },
+   {
+    "casas": 46,
+    "de_frente": 46,
+    "borde_m": 536.9,
+    "area_ha": 1.758,
+    "frente_medio_m": 11.67,
+    "centro": [
+     8350.6,
+     8707.3
+    ]
+   },
+   {
+    "casas": 46,
+    "de_frente": 46,
+    "borde_m": 670.3,
+    "area_ha": 0.765,
+    "frente_medio_m": 14.57,
+    "centro": [
+     7285.5,
+     7866.1
+    ]
+   },
+   {
+    "casas": 45,
+    "de_frente": 45,
+    "borde_m": 506.1,
+    "area_ha": 1.525,
+    "frente_medio_m": 11.25,
+    "centro": [
+     10800.6,
+     7491.7
+    ]
+   },
+   {
+    "casas": 45,
+    "de_frente": 45,
+    "borde_m": 547.3,
+    "area_ha": 1.79,
+    "frente_medio_m": 12.16,
+    "centro": [
+     9783.8,
+     6748.2
+    ]
+   },
+   {
+    "casas": 45,
+    "de_frente": 45,
+    "borde_m": 528.6,
+    "area_ha": 1.701,
+    "frente_medio_m": 11.75,
+    "centro": [
+     8575.4,
+     7550.4
+    ]
+   },
+   {
+    "casas": 45,
+    "de_frente": 45,
+    "borde_m": 538.1,
+    "area_ha": 1.769,
+    "frente_medio_m": 11.96,
+    "centro": [
+     8525.3,
+     7816.7
+    ]
+   },
+   {
+    "casas": 45,
+    "de_frente": 45,
+    "borde_m": 1030.1,
+    "area_ha": 2.456,
+    "frente_medio_m": 22.89,
+    "centro": [
+     7640.7,
+     7955.8
+    ]
+   },
+   {
+    "casas": 45,
+    "de_frente": 45,
+    "borde_m": 571.4,
+    "area_ha": 1.884,
+    "frente_medio_m": 12.7,
+    "centro": [
+     7547.8,
+     8239.4
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 522.6,
+    "area_ha": 1.652,
+    "frente_medio_m": 11.88,
+    "centro": [
+     10900.0,
+     6962.0
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 505.5,
+    "area_ha": 1.596,
+    "frente_medio_m": 11.49,
+    "centro": [
+     9941.5,
+     7294.9
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 503.0,
+    "area_ha": 1.581,
+    "frente_medio_m": 11.43,
+    "centro": [
+     9889.7,
+     7553.0
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 509.1,
+    "area_ha": 1.594,
+    "frente_medio_m": 11.57,
+    "centro": [
+     9628.7,
+     7500.5
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 514.6,
+    "area_ha": 1.596,
+    "frente_medio_m": 11.7,
+    "centro": [
+     9571.1,
+     7768.9
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 555.7,
+    "area_ha": 1.029,
+    "frente_medio_m": 12.63,
+    "centro": [
+     9386.0,
+     8338.0
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 514.5,
+    "area_ha": 1.626,
+    "frente_medio_m": 11.69,
+    "centro": [
+     9293.7,
+     6380.4
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 516.9,
+    "area_ha": 1.624,
+    "frente_medio_m": 11.75,
+    "centro": [
+     9243.0,
+     6648.1
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 523.7,
+    "area_ha": 1.666,
+    "frente_medio_m": 11.9,
+    "centro": [
+     9002.6,
+     7917.9
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 555.2,
+    "area_ha": 1.8,
+    "frente_medio_m": 12.62,
+    "centro": [
+     8893.6,
+     6030.3
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 514.6,
+    "area_ha": 1.655,
+    "frente_medio_m": 11.7,
+    "centro": [
+     8886.9,
+     8546.9
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 527.3,
+    "area_ha": 1.687,
+    "frente_medio_m": 11.98,
+    "centro": [
+     8839.9,
+     8811.4
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 511.8,
+    "area_ha": 1.596,
+    "frente_medio_m": 11.63,
+    "centro": [
+     8627.1,
+     5986.4
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 515.0,
+    "area_ha": 1.618,
+    "frente_medio_m": 11.7,
+    "centro": [
+     8519.3,
+     6517.6
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 561.6,
+    "area_ha": 1.62,
+    "frente_medio_m": 12.76,
+    "centro": [
+     8419.7,
+     6973.7
+    ]
+   },
+   {
+    "casas": 44,
+    "de_frente": 44,
+    "borde_m": 499.1,
+    "area_ha": 1.555,
+    "frente_medio_m": 11.34,
+    "centro": [
+     8365.6,
+     7236.3
+    ]
+   },
+   {
+    "casas": 43,
+    "de_frente": 43,
+    "borde_m": 547.4,
+    "area_ha": 0.827,
+    "frente_medio_m": 12.73,
+    "centro": [
+     10321.4,
+     6320.1
+    ]
+   },
+   {
+    "casas": 43,
+    "de_frente": 43,
+    "borde_m": 508.5,
+    "area_ha": 1.578,
+    "frente_medio_m": 11.83,
+    "centro": [
+     9997.8,
+     7051.6
+    ]
+   },
+   {
+    "casas": 43,
+    "de_frente": 43,
+    "borde_m": 514.7,
+    "area_ha": 1.619,
+    "frente_medio_m": 11.97,
+    "centro": [
+     9555.8,
+     6432.6
+    ]
+   },
+   {
+    "casas": 43,
+    "de_frente": 43,
+    "borde_m": 519.0,
+    "area_ha": 1.625,
+    "frente_medio_m": 12.07,
+    "centro": [
+     9505.0,
+     6694.4
+    ]
+   },
+   {
+    "casas": 43,
+    "de_frente": 43,
+    "borde_m": 510.9,
+    "area_ha": 1.587,
+    "frente_medio_m": 11.88,
+    "centro": [
+     8781.6,
+     6566.9
+    ]
+   },
+   {
+    "casas": 42,
+    "de_frente": 42,
+    "borde_m": 505.5,
+    "area_ha": 1.277,
+    "frente_medio_m": 12.04,
+    "centro": [
+     11141.8,
+     7285.7
+    ]
+   },
+   {
+    "casas": 42,
+    "de_frente": 42,
+    "borde_m": 486.6,
+    "area_ha": 0.692,
+    "frente_medio_m": 11.59,
+    "centro": [
+     10865.7,
+     7750.2
+    ]
+   },
+   {
+    "casas": 42,
+    "de_frente": 42,
+    "borde_m": 510.8,
+    "area_ha": 1.04,
+    "frente_medio_m": 12.16,
+    "centro": [
+     10193.4,
+     7368.4
+    ]
+   },
+   {
+    "casas": 42,
+    "de_frente": 42,
+    "borde_m": 484.0,
+    "area_ha": 1.446,
+    "frente_medio_m": 11.52,
+    "centro": [
+     9719.7,
+     6991.1
+    ]
+   },
+   {
+    "casas": 42,
+    "de_frente": 42,
+    "borde_m": 617.8,
+    "area_ha": 1.833,
+    "frente_medio_m": 14.71,
+    "centro": [
+     9212.4,
+     8274.3
+    ]
+   },
+   {
+    "casas": 42,
+    "de_frente": 42,
+    "borde_m": 531.6,
+    "area_ha": 1.645,
+    "frente_medio_m": 12.66,
+    "centro": [
+     9050.8,
+     7651.2
+    ]
+   },
+   {
+    "casas": 42,
+    "de_frente": 42,
+    "borde_m": 479.4,
+    "area_ha": 1.414,
+    "frente_medio_m": 11.41,
+    "centro": [
+     7262.6,
+     8211.8
+    ]
+   },
+   {
+    "casas": 41,
+    "de_frente": 41,
+    "borde_m": 506.2,
+    "area_ha": 1.324,
+    "frente_medio_m": 12.35,
+    "centro": [
+     10405.3,
+     7689.6
+    ]
+   },
+   {
+    "casas": 41,
+    "de_frente": 41,
+    "borde_m": 483.1,
+    "area_ha": 1.176,
+    "frente_medio_m": 11.78,
+    "centro": [
+     10137.8,
+     7631.8
+    ]
+   },
+   {
+    "casas": 41,
+    "de_frente": 41,
+    "borde_m": 509.9,
+    "area_ha": 1.369,
+    "frente_medio_m": 12.44,
+    "centro": [
+     9387.3,
+     8647.1
+    ]
+   },
+   {
+    "casas": 41,
+    "de_frente": 41,
+    "borde_m": 486.0,
+    "area_ha": 1.408,
+    "frente_medio_m": 11.85,
+    "centro": [
+     9332.9,
+     8914.8
+    ]
+   },
+   {
+    "casas": 41,
+    "de_frente": 41,
+    "borde_m": 523.2,
+    "area_ha": 0.814,
+    "frente_medio_m": 12.76,
+    "centro": [
+     9193.1,
+     7986.5
+    ]
+   },
+   {
+    "casas": 41,
+    "de_frente": 41,
+    "borde_m": 512.2,
+    "area_ha": 1.481,
+    "frente_medio_m": 12.49,
+    "centro": [
+     8934.2,
+     5736.0
+    ]
+   },
+   {
+    "casas": 41,
+    "de_frente": 41,
+    "borde_m": 481.8,
+    "area_ha": 1.217,
+    "frente_medio_m": 11.75,
+    "centro": [
+     8401.3,
+     8430.6
+    ]
+   },
+   {
+    "casas": 41,
+    "de_frente": 41,
+    "borde_m": 498.2,
+    "area_ha": 1.196,
+    "frente_medio_m": 12.15,
+    "centro": [
+     8282.4,
+     8985.3
+    ]
+   },
+   {
+    "casas": 41,
+    "de_frente": 41,
+    "borde_m": 781.8,
+    "area_ha": 1.117,
+    "frente_medio_m": 19.07,
+    "centro": [
+     8213.6,
+     6922.5
+    ]
+   },
+   {
+    "casas": 41,
+    "de_frente": 41,
+    "borde_m": 598.7,
+    "area_ha": 0.661,
+    "frente_medio_m": 14.6,
+    "centro": [
+     7323.1,
+     8470.6
+    ]
+   },
+   {
+    "casas": 40,
+    "de_frente": 40,
+    "borde_m": 735.4,
+    "area_ha": 0.789,
+    "frente_medio_m": 18.38,
+    "centro": [
+     11299.2,
+     7607.8
+    ]
+   },
+   {
+    "casas": 40,
+    "de_frente": 40,
+    "borde_m": 484.7,
+    "area_ha": 1.288,
+    "frente_medio_m": 12.12,
+    "centro": [
+     11209.0,
+     6711.0
+    ]
+   },
+   {
+    "casas": 40,
+    "de_frente": 40,
+    "borde_m": 492.6,
+    "area_ha": 1.284,
+    "frente_medio_m": 12.31,
+    "centro": [
+     9345.7,
+     6124.0
+    ]
+   },
+   {
+    "casas": 40,
+    "de_frente": 40,
+    "borde_m": 475.0,
+    "area_ha": 1.381,
+    "frente_medio_m": 11.87,
+    "centro": [
+     9352.4,
+     7443.5
+    ]
+   },
+   {
+    "casas": 39,
+    "de_frente": 39,
+    "borde_m": 527.1,
+    "area_ha": 1.412,
+    "frente_medio_m": 13.52,
+    "centro": [
+     10372.4,
+     6586.1
+    ]
+   },
+   {
+    "casas": 39,
+    "de_frente": 39,
+    "borde_m": 476.7,
+    "area_ha": 0.758,
+    "frente_medio_m": 12.22,
+    "centro": [
+     10200.5,
+     6274.6
+    ]
+   },
+   {
+    "casas": 39,
+    "de_frente": 39,
+    "borde_m": 468.3,
+    "area_ha": 1.307,
+    "frente_medio_m": 12.01,
+    "centro": [
+     10052.7,
+     6804.1
+    ]
+   },
+   {
+    "casas": 39,
+    "de_frente": 39,
+    "borde_m": 441.8,
+    "area_ha": 0.939,
+    "frente_medio_m": 11.33,
+    "centro": [
+     9400.0,
+     7199.1
+    ]
+   },
+   {
+    "casas": 39,
+    "de_frente": 39,
+    "borde_m": 454.1,
+    "area_ha": 1.202,
+    "frente_medio_m": 11.64,
+    "centro": [
+     9125.6,
+     6062.7
+    ]
+   },
+   {
+    "casas": 39,
+    "de_frente": 39,
+    "borde_m": 466.8,
+    "area_ha": 1.307,
+    "frente_medio_m": 11.97,
+    "centro": [
+     9095.9,
+     7390.8
+    ]
+   },
+   {
+    "casas": 39,
+    "de_frente": 39,
+    "borde_m": 456.1,
+    "area_ha": 1.233,
+    "frente_medio_m": 11.7,
+    "centro": [
+     8818.7,
+     7600.8
+    ]
+   },
+   {
+    "casas": 39,
+    "de_frente": 39,
+    "borde_m": 756.1,
+    "area_ha": 1.179,
+    "frente_medio_m": 19.39,
+    "centro": [
+     8320.1,
+     7475.4
+    ]
+   },
+   {
+    "casas": 39,
+    "de_frente": 39,
+    "borde_m": 480.4,
+    "area_ha": 1.348,
+    "frente_medio_m": 12.32,
+    "centro": [
+     8058.4,
+     7438.6
+    ]
+   },
+   {
+    "casas": 38,
+    "de_frente": 38,
+    "borde_m": 496.7,
+    "area_ha": 1.286,
+    "frente_medio_m": 13.07,
+    "centro": [
+     9874.6,
+     6235.8
+    ]
+   },
+   {
+    "casas": 38,
+    "de_frente": 38,
+    "borde_m": 488.1,
+    "area_ha": 0.555,
+    "frente_medio_m": 12.84,
+    "centro": [
+     9141.8,
+     5529.0
+    ]
+   },
+   {
+    "casas": 38,
+    "de_frente": 38,
+    "borde_m": 443.8,
+    "area_ha": 1.201,
+    "frente_medio_m": 11.68,
+    "centro": [
+     9144.6,
+     7127.0
+    ]
+   },
+   {
+    "casas": 38,
+    "de_frente": 38,
+    "borde_m": 441.7,
+    "area_ha": 1.188,
+    "frente_medio_m": 11.62,
+    "centro": [
+     9064.2,
+     6342.0
+    ]
+   },
+   {
+    "casas": 38,
+    "de_frente": 38,
+    "borde_m": 446.2,
+    "area_ha": 1.195,
+    "frente_medio_m": 11.74,
+    "centro": [
+     8918.6,
+     7075.4
+    ]
+   },
+   {
+    "casas": 38,
+    "de_frente": 38,
+    "borde_m": 444.3,
+    "area_ha": 1.175,
+    "frente_medio_m": 11.69,
+    "centro": [
+     8868.6,
+     7339.0
+    ]
+   },
+   {
+    "casas": 38,
+    "de_frente": 38,
+    "borde_m": 448.8,
+    "area_ha": 1.202,
+    "frente_medio_m": 11.81,
+    "centro": [
+     8468.4,
+     6751.0
+    ]
+   },
+   {
+    "casas": 38,
+    "de_frente": 38,
+    "borde_m": 442.9,
+    "area_ha": 0.547,
+    "frente_medio_m": 11.65,
+    "centro": [
+     7946.1,
+     9071.3
+    ]
+   },
+   {
+    "casas": 38,
+    "de_frente": 38,
+    "borde_m": 652.6,
+    "area_ha": 1.356,
+    "frente_medio_m": 17.17,
+    "centro": [
+     7748.3,
+     7675.3
+    ]
+   },
+   {
+    "casas": 37,
+    "de_frente": 37,
+    "borde_m": 458.0,
+    "area_ha": 1.035,
+    "frente_medio_m": 12.38,
+    "centro": [
+     9824.9,
+     6513.7
+    ]
+   },
+   {
+    "casas": 37,
+    "de_frente": 37,
+    "borde_m": 474.6,
+    "area_ha": 0.542,
+    "frente_medio_m": 12.83,
+    "centro": [
+     9734.7,
+     5874.6
+    ]
+   },
+   {
+    "casas": 37,
+    "de_frente": 37,
+    "borde_m": 533.0,
+    "area_ha": 1.459,
+    "frente_medio_m": 14.4,
+    "centro": [
+     8574.6,
+     6246.9
+    ]
+   },
+   {
+    "casas": 37,
+    "de_frente": 37,
+    "borde_m": 421.7,
+    "area_ha": 0.608,
+    "frente_medio_m": 11.4,
+    "centro": [
+     7415.7,
+     8520.0
+    ]
+   },
+   {
+    "casas": 37,
+    "de_frente": 37,
+    "borde_m": 708.3,
+    "area_ha": 0.604,
+    "frente_medio_m": 19.14,
+    "centro": [
+     6764.2,
+     8180.5
+    ]
+   },
+   {
+    "casas": 36,
+    "de_frente": 36,
+    "borde_m": 442.1,
+    "area_ha": 1.126,
+    "frente_medio_m": 12.28,
+    "centro": [
+     9173.4,
+     5803.0
+    ]
+   },
+   {
+    "casas": 35,
+    "de_frente": 35,
+    "borde_m": 409.3,
+    "area_ha": 0.977,
+    "frente_medio_m": 11.69,
+    "centro": [
+     11199.0,
+     6438.3
+    ]
+   },
+   {
+    "casas": 35,
+    "de_frente": 35,
+    "borde_m": 416.8,
+    "area_ha": 0.491,
+    "frente_medio_m": 11.91,
+    "centro": [
+     10639.8,
+     6428.1
+    ]
+   },
+   {
+    "casas": 35,
+    "de_frente": 35,
+    "borde_m": 494.1,
+    "area_ha": 0.492,
+    "frente_medio_m": 14.12,
+    "centro": [
+     9797.5,
+     5698.3
+    ]
+   },
+   {
+    "casas": 35,
+    "de_frente": 35,
+    "borde_m": 413.4,
+    "area_ha": 1.041,
+    "frente_medio_m": 11.81,
+    "centro": [
+     8212.0,
+     6691.9
+    ]
+   },
+   {
+    "casas": 35,
+    "de_frente": 35,
+    "borde_m": 540.1,
+    "area_ha": 0.672,
+    "frente_medio_m": 15.43,
+    "centro": [
+     7394.1,
+     8809.5
+    ]
+   },
+   {
+    "casas": 34,
+    "de_frente": 34,
+    "borde_m": 411.5,
+    "area_ha": 0.452,
+    "frente_medio_m": 12.1,
+    "centro": [
+     8578.7,
+     9257.4
+    ]
+   },
+   {
+    "casas": 34,
+    "de_frente": 34,
+    "borde_m": 424.7,
+    "area_ha": 1.067,
+    "frente_medio_m": 12.49,
+    "centro": [
+     8151.0,
+     8342.6
+    ]
+   },
+   {
+    "casas": 34,
+    "de_frente": 34,
+    "borde_m": 401.2,
+    "area_ha": 0.906,
+    "frente_medio_m": 11.8,
+    "centro": [
+     8135.1,
+     7188.0
+    ]
+   },
+   {
+    "casas": 34,
+    "de_frente": 34,
+    "borde_m": 410.5,
+    "area_ha": 0.296,
+    "frente_medio_m": 12.07,
+    "centro": [
+     6510.9,
+     8276.0
+    ]
+   },
+   {
+    "casas": 33,
+    "de_frente": 33,
+    "borde_m": 542.5,
+    "area_ha": 0.671,
+    "frente_medio_m": 16.44,
+    "centro": [
+     9226.0,
+     8578.0
+    ]
+   },
+   {
+    "casas": 33,
+    "de_frente": 33,
+    "borde_m": 514.5,
+    "area_ha": 1.194,
+    "frente_medio_m": 15.59,
+    "centro": [
+     8837.2,
+     6309.6
+    ]
+   },
+   {
+    "casas": 33,
+    "de_frente": 33,
+    "borde_m": 388.3,
+    "area_ha": 0.557,
+    "frente_medio_m": 11.77,
+    "centro": [
+     8755.6,
+     5297.4
+    ]
+   },
+   {
+    "casas": 33,
+    "de_frente": 33,
+    "borde_m": 515.9,
+    "area_ha": 0.769,
+    "frente_medio_m": 15.63,
+    "centro": [
+     8236.7,
+     6185.0
+    ]
+   },
+   {
+    "casas": 33,
+    "de_frente": 33,
+    "borde_m": 391.2,
+    "area_ha": 0.711,
+    "frente_medio_m": 11.85,
+    "centro": [
+     8001.7,
+     8026.3
+    ]
+   },
+   {
+    "casas": 32,
+    "de_frente": 32,
+    "borde_m": 479.6,
+    "area_ha": 1.08,
+    "frente_medio_m": 14.99,
+    "centro": [
+     9498.5,
+     6941.8
+    ]
+   },
+   {
+    "casas": 32,
+    "de_frente": 32,
+    "borde_m": 600.4,
+    "area_ha": 0.939,
+    "frente_medio_m": 18.76,
+    "centro": [
+     9028.6,
+     6611.3
+    ]
+   },
+   {
+    "casas": 32,
+    "de_frente": 32,
+    "borde_m": 651.9,
+    "area_ha": 1.023,
+    "frente_medio_m": 20.37,
+    "centro": [
+     9020.6,
+     5498.8
+    ]
+   },
+   {
+    "casas": 32,
+    "de_frente": 32,
+    "borde_m": 598.1,
+    "area_ha": 1.155,
+    "frente_medio_m": 18.69,
+    "centro": [
+     8614.2,
+     7287.3
+    ]
+   },
+   {
+    "casas": 32,
+    "de_frente": 32,
+    "borde_m": 367.7,
+    "area_ha": 0.781,
+    "frente_medio_m": 11.49,
+    "centro": [
+     8596.7,
+     8718.3
+    ]
+   },
+   {
+    "casas": 32,
+    "de_frente": 32,
+    "borde_m": 408.0,
+    "area_ha": 0.823,
+    "frente_medio_m": 12.75,
+    "centro": [
+     8503.0,
+     9029.9
+    ]
+   },
+   {
+    "casas": 32,
+    "de_frente": 32,
+    "borde_m": 377.5,
+    "area_ha": 0.424,
+    "frente_medio_m": 11.8,
+    "centro": [
+     8187.9,
+     8631.3
+    ]
+   },
+   {
+    "casas": 31,
+    "de_frente": 31,
+    "borde_m": 392.9,
+    "area_ha": 0.649,
+    "frente_medio_m": 12.68,
+    "centro": [
+     8652.1,
+     5450.0
+    ]
+   },
+   {
+    "casas": 31,
+    "de_frente": 31,
+    "borde_m": 377.8,
+    "area_ha": 0.781,
+    "frente_medio_m": 12.19,
+    "centro": [
+     7729.0,
+     7428.9
+    ]
+   },
+   {
+    "casas": 30,
+    "de_frente": 30,
+    "borde_m": 350.3,
+    "area_ha": 0.362,
+    "frente_medio_m": 11.68,
+    "centro": [
+     11092.4,
+     7755.1
+    ]
+   },
+   {
+    "casas": 30,
+    "de_frente": 30,
+    "borde_m": 458.4,
+    "area_ha": 0.912,
+    "frente_medio_m": 15.28,
+    "centro": [
+     8684.4,
+     6785.0
+    ]
+   },
+   {
+    "casas": 30,
+    "de_frente": 30,
+    "borde_m": 933.6,
+    "area_ha": 0.875,
+    "frente_medio_m": 31.12,
+    "centro": [
+     8509.8,
+     5643.9
+    ]
+   },
+   {
+    "casas": 30,
+    "de_frente": 30,
+    "borde_m": 357.0,
+    "area_ha": 0.645,
+    "frente_medio_m": 11.9,
+    "centro": [
+     8186.2,
+     6449.6
+    ]
+   },
+   {
+    "casas": 29,
+    "de_frente": 29,
+    "borde_m": 384.4,
+    "area_ha": 0.564,
+    "frente_medio_m": 13.26,
+    "centro": [
+     10443.8,
+     7933.4
+    ]
+   },
+   {
+    "casas": 29,
+    "de_frente": 29,
+    "borde_m": 336.8,
+    "area_ha": 0.582,
+    "frente_medio_m": 11.62,
+    "centro": [
+     10396.9,
+     7417.6
+    ]
+   },
+   {
+    "casas": 29,
+    "de_frente": 29,
+    "borde_m": 331.3,
+    "area_ha": 0.439,
+    "frente_medio_m": 11.42,
+    "centro": [
+     8454.9,
+     5938.8
+    ]
+   },
+   {
+    "casas": 29,
+    "de_frente": 29,
+    "borde_m": 418.7,
+    "area_ha": 0.537,
+    "frente_medio_m": 14.44,
+    "centro": [
+     7579.2,
+     7637.4
+    ]
+   },
+   {
+    "casas": 28,
+    "de_frente": 28,
+    "borde_m": 500.0,
+    "area_ha": 0.552,
+    "frente_medio_m": 17.86,
+    "centro": [
+     10514.7,
+     7108.3
+    ]
+   },
+   {
+    "casas": 28,
+    "de_frente": 28,
+    "borde_m": 349.7,
+    "area_ha": 0.535,
+    "frente_medio_m": 12.49,
+    "centro": [
+     10179.4,
+     7096.0
+    ]
+   },
+   {
+    "casas": 28,
+    "de_frente": 28,
+    "borde_m": 345.0,
+    "area_ha": 0.43,
+    "frente_medio_m": 12.32,
+    "centro": [
+     9325.3,
+     5847.4
+    ]
+   },
+   {
+    "casas": 28,
+    "de_frente": 28,
+    "borde_m": 322.0,
+    "area_ha": 0.452,
+    "frente_medio_m": 11.5,
+    "centro": [
+     8393.7,
+     6216.0
+    ]
+   },
+   {
+    "casas": 28,
+    "de_frente": 28,
+    "borde_m": 353.9,
+    "area_ha": 0.457,
+    "frente_medio_m": 12.64,
+    "centro": [
+     8072.5,
+     7664.9
+    ]
+   },
+   {
+    "casas": 28,
+    "de_frente": 28,
+    "borde_m": 479.0,
+    "area_ha": 0.506,
+    "frente_medio_m": 17.11,
+    "centro": [
+     7371.7,
+     8996.6
+    ]
+   },
+   {
+    "casas": 27,
+    "de_frente": 27,
+    "borde_m": 365.7,
+    "area_ha": 0.49,
+    "frente_medio_m": 13.54,
+    "centro": [
+     10585.7,
+     6984.6
+    ]
+   },
+   {
+    "casas": 27,
+    "de_frente": 27,
+    "borde_m": 318.8,
+    "area_ha": 0.402,
+    "frente_medio_m": 11.81,
+    "centro": [
+     9369.3,
+     9134.7
+    ]
+   },
+   {
+    "casas": 27,
+    "de_frente": 27,
+    "borde_m": 336.1,
+    "area_ha": 0.446,
+    "frente_medio_m": 12.45,
+    "centro": [
+     7965.0,
+     8295.0
+    ]
+   },
+   {
+    "casas": 27,
+    "de_frente": 27,
+    "borde_m": 327.3,
+    "area_ha": 0.61,
+    "frente_medio_m": 12.12,
+    "centro": [
+     7922.4,
+     6850.1
+    ]
+   },
+   {
+    "casas": 27,
+    "de_frente": 27,
+    "borde_m": 342.0,
+    "area_ha": 0.58,
+    "frente_medio_m": 12.67,
+    "centro": [
+     7315.3,
+     7973.3
+    ]
+   },
+   {
+    "casas": 26,
+    "de_frente": 26,
+    "borde_m": 302.2,
+    "area_ha": 0.481,
+    "frente_medio_m": 11.62,
+    "centro": [
+     7577.8,
+     6022.1
+    ]
+   },
+   {
+    "casas": 25,
+    "de_frente": 25,
+    "borde_m": 296.4,
+    "area_ha": 0.471,
+    "frente_medio_m": 11.86,
+    "centro": [
+     11450.2,
+     6965.2
+    ]
+   },
+   {
+    "casas": 25,
+    "de_frente": 25,
+    "borde_m": 526.5,
+    "area_ha": 0.442,
+    "frente_medio_m": 21.06,
+    "centro": [
+     11323.5,
+     7311.0
+    ]
+   },
+   {
+    "casas": 25,
+    "de_frente": 25,
+    "borde_m": 312.9,
+    "area_ha": 0.503,
+    "frente_medio_m": 12.52,
+    "centro": [
+     9544.5,
+     6201.6
+    ]
+   },
+   {
+    "casas": 24,
+    "de_frente": 24,
+    "borde_m": 292.7,
+    "area_ha": 0.3,
+    "frente_medio_m": 12.2,
+    "centro": [
+     10592.8,
+     7452.0
+    ]
+   },
+   {
+    "casas": 24,
+    "de_frente": 24,
+    "borde_m": 371.2,
+    "area_ha": 0.395,
+    "frente_medio_m": 15.47,
+    "centro": [
+     9445.6,
+     5337.2
+    ]
+   },
+   {
+    "casas": 24,
+    "de_frente": 24,
+    "borde_m": 293.4,
+    "area_ha": 0.369,
+    "frente_medio_m": 12.22,
+    "centro": [
+     8339.5,
+     6483.0
+    ]
+   },
+   {
+    "casas": 24,
+    "de_frente": 24,
+    "borde_m": 280.2,
+    "area_ha": 0.3,
+    "frente_medio_m": 11.67,
+    "centro": [
+     7982.3,
+     8716.9
+    ]
+   },
+   {
+    "casas": 24,
+    "de_frente": 24,
+    "borde_m": 303.4,
+    "area_ha": 0.234,
+    "frente_medio_m": 12.64,
+    "centro": [
+     8020.0,
+     6674.0
+    ]
+   },
+   {
+    "casas": 23,
+    "de_frente": 23,
+    "borde_m": 306.5,
+    "area_ha": 0.471,
+    "frente_medio_m": 13.32,
+    "centro": [
+     11434.7,
+     7100.5
+    ]
+   },
+   {
+    "casas": 23,
+    "de_frente": 23,
+    "borde_m": 418.1,
+    "area_ha": 0.362,
+    "frente_medio_m": 18.18,
+    "centro": [
+     6594.0,
+     8407.9
+    ]
+   },
+   {
+    "casas": 22,
+    "de_frente": 22,
+    "borde_m": 264.6,
+    "area_ha": 0.267,
+    "frente_medio_m": 12.03,
+    "centro": [
+     11068.5,
+     7479.7
+    ]
+   },
+   {
+    "casas": 22,
+    "de_frente": 22,
+    "borde_m": 467.9,
+    "area_ha": 0.703,
+    "frente_medio_m": 21.27,
+    "centro": [
+     9228.9,
+     6900.8
+    ]
+   },
+   {
+    "casas": 22,
+    "de_frente": 22,
+    "borde_m": 270.8,
+    "area_ha": 0.253,
+    "frente_medio_m": 12.31,
+    "centro": [
+     8178.9,
+     5829.0
+    ]
+   },
+   {
+    "casas": 21,
+    "de_frente": 21,
+    "borde_m": 273.4,
+    "area_ha": 0.423,
+    "frente_medio_m": 13.02,
+    "centro": [
+     10385.9,
+     6802.5
+    ]
+   },
+   {
+    "casas": 21,
+    "de_frente": 21,
+    "borde_m": 256.2,
+    "area_ha": 0.186,
+    "frente_medio_m": 12.2,
+    "centro": [
+     9583.0,
+     9155.4
+    ]
+   },
+   {
+    "casas": 21,
+    "de_frente": 21,
+    "borde_m": 367.4,
+    "area_ha": 0.717,
+    "frente_medio_m": 17.49,
+    "centro": [
+     8254.5,
+     7817.0
+    ]
+   },
+   {
+    "casas": 19,
+    "de_frente": 19,
+    "borde_m": 224.9,
+    "area_ha": 0.311,
+    "frente_medio_m": 11.84,
+    "centro": [
+     9667.2,
+     8906.6
+    ]
+   },
+   {
+    "casas": 19,
+    "de_frente": 19,
+    "borde_m": 237.4,
+    "area_ha": 0.179,
+    "frente_medio_m": 12.49,
+    "centro": [
+     8044.1,
+     6231.6
+    ]
+   },
+   {
+    "casas": 18,
+    "de_frente": 18,
+    "borde_m": 215.1,
+    "area_ha": 0.276,
+    "frente_medio_m": 11.95,
+    "centro": [
+     11189.3,
+     6232.9
+    ]
+   },
+   {
+    "casas": 18,
+    "de_frente": 18,
+    "borde_m": 209.5,
+    "area_ha": 0.246,
+    "frente_medio_m": 11.64,
+    "centro": [
+     10925.2,
+     6328.9
+    ]
+   },
+   {
+    "casas": 18,
+    "de_frente": 18,
+    "borde_m": 410.6,
+    "area_ha": 0.534,
+    "frente_medio_m": 22.81,
+    "centro": [
+     8708.9,
+     7901.9
+    ]
+   },
+   {
+    "casas": 18,
+    "de_frente": 18,
+    "borde_m": 216.4,
+    "area_ha": 0.248,
+    "frente_medio_m": 12.02,
+    "centro": [
+     7991.7,
+     8877.0
+    ]
+   },
+   {
+    "casas": 17,
+    "de_frente": 17,
+    "borde_m": 205.9,
+    "area_ha": 0.199,
+    "frente_medio_m": 12.11,
+    "centro": [
+     10918.5,
+     6492.5
+    ]
+   },
+   {
+    "casas": 17,
+    "de_frente": 17,
+    "borde_m": 206.7,
+    "area_ha": 0.179,
+    "frente_medio_m": 12.16,
+    "centro": [
+     10766.4,
+     6585.2
+    ]
+   },
+   {
+    "casas": 17,
+    "de_frente": 17,
+    "borde_m": 213.9,
+    "area_ha": 0.271,
+    "frente_medio_m": 12.58,
+    "centro": [
+     10368.6,
+     6934.4
+    ]
+   },
+   {
+    "casas": 17,
+    "de_frente": 17,
+    "borde_m": 207.2,
+    "area_ha": 0.231,
+    "frente_medio_m": 12.19,
+    "centro": [
+     10366.4,
+     6122.1
+    ]
+   },
+   {
+    "casas": 17,
+    "de_frente": 17,
+    "borde_m": 191.8,
+    "area_ha": 0.199,
+    "frente_medio_m": 11.28,
+    "centro": [
+     9832.6,
+     8152.1
+    ]
+   },
+   {
+    "casas": 17,
+    "de_frente": 17,
+    "borde_m": 188.5,
+    "area_ha": 0.228,
+    "frente_medio_m": 11.09,
+    "centro": [
+     8772.5,
+     9049.0
+    ]
+   },
+   {
+    "casas": 17,
+    "de_frente": 17,
+    "borde_m": 373.4,
+    "area_ha": 0.251,
+    "frente_medio_m": 21.96,
+    "centro": [
+     8204.5,
+     5676.8
+    ]
+   },
+   {
+    "casas": 16,
+    "de_frente": 16,
+    "borde_m": 186.1,
+    "area_ha": 0.166,
+    "frente_medio_m": 11.63,
+    "centro": [
+     11291.7,
+     8108.3
+    ]
+   },
+   {
+    "casas": 16,
+    "de_frente": 16,
+    "borde_m": 212.1,
+    "area_ha": 0.126,
+    "frente_medio_m": 13.25,
+    "centro": [
+     11257.3,
+     7011.4
+    ]
+   },
+   {
+    "casas": 16,
+    "de_frente": 16,
+    "borde_m": 170.0,
+    "area_ha": 0.149,
+    "frente_medio_m": 10.62,
+    "centro": [
+     9768.4,
+     8439.7
+    ]
+   },
+   {
+    "casas": 15,
+    "de_frente": 15,
+    "borde_m": 176.3,
+    "area_ha": 0.18,
+    "frente_medio_m": 11.75,
+    "centro": [
+     10822.3,
+     5801.1
+    ]
+   },
+   {
+    "casas": 15,
+    "de_frente": 15,
+    "borde_m": 181.9,
+    "area_ha": 0.129,
+    "frente_medio_m": 12.13,
+    "centro": [
+     10153.8,
+     5945.4
+    ]
+   },
+   {
+    "casas": 15,
+    "de_frente": 15,
+    "borde_m": 185.8,
+    "area_ha": 0.129,
+    "frente_medio_m": 12.39,
+    "centro": [
+     10033.2,
+     5926.3
+    ]
+   },
+   {
+    "casas": 15,
+    "de_frente": 15,
+    "borde_m": 179.6,
+    "area_ha": 0.124,
+    "frente_medio_m": 11.97,
+    "centro": [
+     9933.3,
+     8195.6
+    ]
+   },
+   {
+    "casas": 15,
+    "de_frente": 15,
+    "borde_m": 196.9,
+    "area_ha": 0.164,
+    "frente_medio_m": 13.13,
+    "centro": [
+     9673.4,
+     5371.1
+    ]
+   },
+   {
+    "casas": 15,
+    "de_frente": 15,
+    "borde_m": 174.7,
+    "area_ha": 0.162,
+    "frente_medio_m": 11.65,
+    "centro": [
+     8273.2,
+     5306.0
+    ]
+   },
+   {
+    "casas": 15,
+    "de_frente": 15,
+    "borde_m": 191.2,
+    "area_ha": 0.192,
+    "frente_medio_m": 12.75,
+    "centro": [
+     7077.6,
+     8176.5
+    ]
+   },
+   {
+    "casas": 14,
+    "de_frente": 14,
+    "borde_m": 173.4,
+    "area_ha": 0.174,
+    "frente_medio_m": 12.39,
+    "centro": [
+     11145.1,
+     6900.8
+    ]
+   },
+   {
+    "casas": 14,
+    "de_frente": 14,
+    "borde_m": 183.3,
+    "area_ha": 0.164,
+    "frente_medio_m": 13.09,
+    "centro": [
+     11061.0,
+     6359.3
+    ]
+   },
+   {
+    "casas": 14,
+    "de_frente": 14,
+    "borde_m": 191.1,
+    "area_ha": 0.163,
+    "frente_medio_m": 13.65,
+    "centro": [
+     9706.9,
+     6119.1
+    ]
+   },
+   {
+    "casas": 14,
+    "de_frente": 14,
+    "borde_m": 180.8,
+    "area_ha": 0.191,
+    "frente_medio_m": 12.91,
+    "centro": [
+     9690.6,
+     8017.2
+    ]
+   },
+   {
+    "casas": 14,
+    "de_frente": 14,
+    "borde_m": 200.7,
+    "area_ha": 0.146,
+    "frente_medio_m": 14.33,
+    "centro": [
+     7044.8,
+     8035.6
+    ]
+   },
+   {
+    "casas": 13,
+    "de_frente": 13,
+    "borde_m": 145.5,
+    "area_ha": 0.123,
+    "frente_medio_m": 11.19,
+    "centro": [
+     10904.1,
+     5909.1
+    ]
+   },
+   {
+    "casas": 13,
+    "de_frente": 13,
+    "borde_m": 160.2,
+    "area_ha": 0.154,
+    "frente_medio_m": 12.32,
+    "centro": [
+     10607.1,
+     7270.1
+    ]
+   },
+   {
+    "casas": 13,
+    "de_frente": 13,
+    "borde_m": 151.5,
+    "area_ha": 0.13,
+    "frente_medio_m": 11.65,
+    "centro": [
+     10468.9,
+     5890.8
+    ]
+   },
+   {
+    "casas": 13,
+    "de_frente": 13,
+    "borde_m": 162.4,
+    "area_ha": 0.128,
+    "frente_medio_m": 12.5,
+    "centro": [
+     9597.0,
+     8404.3
+    ]
+   },
+   {
+    "casas": 13,
+    "de_frente": 13,
+    "borde_m": 161.3,
+    "area_ha": 0.135,
+    "frente_medio_m": 12.41,
+    "centro": [
+     8043.7,
+     6048.4
+    ]
+   },
+   {
+    "casas": 12,
+    "de_frente": 12,
+    "borde_m": 304.2,
+    "area_ha": 0.384,
+    "frente_medio_m": 25.35,
+    "centro": [
+     8219.1,
+     7677.7
+    ]
+   },
+   {
+    "casas": 11,
+    "de_frente": 11,
+    "borde_m": 304.8,
+    "area_ha": 0.115,
+    "frente_medio_m": 27.71,
+    "centro": [
+     8275.3,
+     5676.5
+    ]
+   },
+   {
+    "casas": 9,
+    "de_frente": 9,
+    "borde_m": 186.2,
+    "area_ha": 0.118,
+    "frente_medio_m": 20.69,
+    "centro": [
+     7828.8,
+     7478.7
+    ]
+   },
+   {
+    "casas": 8,
+    "de_frente": 8,
+    "borde_m": 184.8,
+    "area_ha": 0.198,
+    "frente_medio_m": 23.1,
+    "centro": [
+     10310.2,
+     7296.8
+    ]
+   },
+   {
+    "casas": 8,
+    "de_frente": 8,
+    "borde_m": 171.3,
+    "area_ha": 0.123,
+    "frente_medio_m": 21.41,
+    "centro": [
+     9554.5,
+     8034.8
+    ]
+   },
+   {
+    "casas": 7,
+    "de_frente": 7,
+    "borde_m": 106.8,
+    "area_ha": 0.07,
+    "frente_medio_m": 15.26,
+    "centro": [
+     6785.0,
+     9004.8
+    ]
+   },
+   {
+    "casas": 7,
+    "de_frente": 7,
+    "borde_m": 116.4,
+    "area_ha": 0.075,
+    "frente_medio_m": 16.62,
+    "centro": [
+     6701.4,
+     7123.9
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 128.3,
+    "area_ha": 0.097,
+    "frente_medio_m": 21.38,
+    "centro": [
+     11269.0,
+     7100.4
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 137.0,
+    "area_ha": 0.097,
+    "frente_medio_m": 22.84,
+    "centro": [
+     11166.6,
+     7654.5
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 122.2,
+    "area_ha": 0.086,
+    "frente_medio_m": 20.37,
+    "centro": [
+     11005.8,
+     7608.1
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 110.1,
+    "area_ha": 0.074,
+    "frente_medio_m": 18.36,
+    "centro": [
+     10817.0,
+     8005.0
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 131.7,
+    "area_ha": 0.087,
+    "frente_medio_m": 21.94,
+    "centro": [
+     10785.0,
+     5899.6
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 136.5,
+    "area_ha": 0.103,
+    "frente_medio_m": 22.74,
+    "centro": [
+     10712.3,
+     6843.6
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 167.6,
+    "area_ha": 0.11,
+    "frente_medio_m": 27.93,
+    "centro": [
+     9842.6,
+     5891.7
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 164.7,
+    "area_ha": 0.079,
+    "frente_medio_m": 27.45,
+    "centro": [
+     9767.1,
+     8974.9
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 174.5,
+    "area_ha": 0.093,
+    "frente_medio_m": 29.09,
+    "centro": [
+     9440.9,
+     8003.5
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 117.1,
+    "area_ha": 0.086,
+    "frente_medio_m": 19.52,
+    "centro": [
+     9339.5,
+     7991.7
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 137.3,
+    "area_ha": 0.111,
+    "frente_medio_m": 22.89,
+    "centro": [
+     8759.1,
+     9386.4
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 115.8,
+    "area_ha": 0.08,
+    "frente_medio_m": 19.31,
+    "centro": [
+     8440.1,
+     9362.8
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 138.0,
+    "area_ha": 0.119,
+    "frente_medio_m": 23.0,
+    "centro": [
+     8051.1,
+     6971.7
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 158.9,
+    "area_ha": 0.111,
+    "frente_medio_m": 26.49,
+    "centro": [
+     8249.7,
+     5900.9
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 136.8,
+    "area_ha": 0.086,
+    "frente_medio_m": 22.79,
+    "centro": [
+     8099.9,
+     9011.9
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 135.0,
+    "area_ha": 0.108,
+    "frente_medio_m": 22.49,
+    "centro": [
+     7918.1,
+     8515.9
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 113.5,
+    "area_ha": 0.071,
+    "frente_medio_m": 18.91,
+    "centro": [
+     7915.1,
+     6468.2
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 120.3,
+    "area_ha": 0.088,
+    "frente_medio_m": 20.05,
+    "centro": [
+     7869.5,
+     6120.5
+    ]
+   },
+   {
+    "casas": 6,
+    "de_frente": 6,
+    "borde_m": 128.1,
+    "area_ha": 0.095,
+    "frente_medio_m": 21.35,
+    "centro": [
+     7704.4,
+     5890.6
+    ]
+   },
+   {
+    "casas": 5,
+    "de_frente": 5,
+    "borde_m": 106.2,
+    "area_ha": 0.066,
+    "frente_medio_m": 21.25,
+    "centro": [
+     7478.3,
+     5944.9
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 96.5,
+    "area_ha": 0.059,
+    "frente_medio_m": 24.13,
+    "centro": [
+     11616.1,
+     7897.3
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 108.6,
+    "area_ha": 0.062,
+    "frente_medio_m": 27.15,
+    "centro": [
+     11134.1,
+     7902.5
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 116.6,
+    "area_ha": 0.07,
+    "frente_medio_m": 29.16,
+    "centro": [
+     10970.6,
+     6583.2
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 106.2,
+    "area_ha": 0.062,
+    "frente_medio_m": 26.55,
+    "centro": [
+     10891.8,
+     6773.8
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 92.8,
+    "area_ha": 0.051,
+    "frente_medio_m": 23.19,
+    "centro": [
+     10539.9,
+     5833.4
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 124.4,
+    "area_ha": 0.087,
+    "frente_medio_m": 31.1,
+    "centro": [
+     10371.9,
+     5542.7
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 119.2,
+    "area_ha": 0.081,
+    "frente_medio_m": 29.8,
+    "centro": [
+     10233.8,
+     5688.2
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 128.4,
+    "area_ha": 0.076,
+    "frente_medio_m": 32.1,
+    "centro": [
+     10200.3,
+     6903.4
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 110.6,
+    "area_ha": 0.065,
+    "frente_medio_m": 27.66,
+    "centro": [
+     10160.3,
+     5767.7
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 76.0,
+    "area_ha": 0.037,
+    "frente_medio_m": 18.99,
+    "centro": [
+     9984.3,
+     4531.4
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 109.8,
+    "area_ha": 0.074,
+    "frente_medio_m": 27.46,
+    "centro": [
+     9936.8,
+     9088.0
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 126.8,
+    "area_ha": 0.087,
+    "frente_medio_m": 31.69,
+    "centro": [
+     9892.5,
+     8346.3
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 110.4,
+    "area_ha": 0.072,
+    "frente_medio_m": 27.61,
+    "centro": [
+     9829.7,
+     9315.9
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 102.1,
+    "area_ha": 0.057,
+    "frente_medio_m": 25.52,
+    "centro": [
+     9675.2,
+     8599.3
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 116.4,
+    "area_ha": 0.075,
+    "frente_medio_m": 29.09,
+    "centro": [
+     9658.9,
+     8519.2
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 88.0,
+    "area_ha": 0.044,
+    "frente_medio_m": 21.99,
+    "centro": [
+     9560.9,
+     8146.1
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 109.9,
+    "area_ha": 0.061,
+    "frente_medio_m": 27.48,
+    "centro": [
+     9496.3,
+     5771.2
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 87.9,
+    "area_ha": 0.044,
+    "frente_medio_m": 21.98,
+    "centro": [
+     9465.0,
+     9028.0
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 133.3,
+    "area_ha": 0.078,
+    "frente_medio_m": 33.32,
+    "centro": [
+     9291.0,
+     8422.3
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 128.5,
+    "area_ha": 0.098,
+    "frente_medio_m": 32.13,
+    "centro": [
+     9130.0,
+     8793.1
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 95.8,
+    "area_ha": 0.049,
+    "frente_medio_m": 23.95,
+    "centro": [
+     9078.5,
+     8959.1
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 123.9,
+    "area_ha": 0.095,
+    "frente_medio_m": 30.99,
+    "centro": [
+     8989.4,
+     9411.0
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 127.8,
+    "area_ha": 0.081,
+    "frente_medio_m": 31.94,
+    "centro": [
+     8613.2,
+     9068.6
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 99.4,
+    "area_ha": 0.059,
+    "frente_medio_m": 24.86,
+    "centro": [
+     8133.9,
+     6104.6
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 89.4,
+    "area_ha": 0.046,
+    "frente_medio_m": 22.36,
+    "centro": [
+     7967.8,
+     5951.2
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 84.3,
+    "area_ha": 0.039,
+    "frente_medio_m": 21.07,
+    "centro": [
+     7900.2,
+     6544.4
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 103.2,
+    "area_ha": 0.059,
+    "frente_medio_m": 25.8,
+    "centro": [
+     7888.8,
+     8727.1
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 104.0,
+    "area_ha": 0.063,
+    "frente_medio_m": 26.01,
+    "centro": [
+     7888.5,
+     5939.4
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 87.5,
+    "area_ha": 0.052,
+    "frente_medio_m": 21.88,
+    "centro": [
+     7517.6,
+     5740.5
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 121.9,
+    "area_ha": 0.074,
+    "frente_medio_m": 30.47,
+    "centro": [
+     7434.3,
+     5850.4
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 105.6,
+    "area_ha": 0.043,
+    "frente_medio_m": 26.4,
+    "centro": [
+     7177.9,
+     6420.9
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 109.6,
+    "area_ha": 0.071,
+    "frente_medio_m": 27.39,
+    "centro": [
+     7112.5,
+     8574.9
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 103.3,
+    "area_ha": 0.065,
+    "frente_medio_m": 25.83,
+    "centro": [
+     6972.6,
+     9061.9
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 89.5,
+    "area_ha": 0.05,
+    "frente_medio_m": 22.38,
+    "centro": [
+     6949.8,
+     5789.8
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 102.9,
+    "area_ha": 0.061,
+    "frente_medio_m": 25.72,
+    "centro": [
+     6906.1,
+     8898.2
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 121.7,
+    "area_ha": 0.085,
+    "frente_medio_m": 30.43,
+    "centro": [
+     6701.9,
+     8945.9
+    ]
+   },
+   {
+    "casas": 4,
+    "de_frente": 4,
+    "borde_m": 92.8,
+    "area_ha": 0.054,
+    "frente_medio_m": 23.21,
+    "centro": [
+     6100.5,
+     8920.5
+    ]
+   },
+   {
+    "casas": 3,
+    "de_frente": 3,
+    "borde_m": 84.4,
+    "area_ha": 0.04,
+    "frente_medio_m": 28.15,
+    "centro": [
+     10470.1,
+     5767.5
+    ]
+   },
+   {
+    "casas": 3,
+    "de_frente": 3,
+    "borde_m": 103.5,
+    "area_ha": 0.059,
+    "frente_medio_m": 34.49,
+    "centro": [
+     10327.4,
+     5421.8
+    ]
+   },
+   {
+    "casas": 3,
+    "de_frente": 3,
+    "borde_m": 89.3,
+    "area_ha": 0.036,
+    "frente_medio_m": 29.78,
+    "centro": [
+     10220.0,
+     6799.3
+    ]
+   },
+   {
+    "casas": 3,
+    "de_frente": 3,
+    "borde_m": 80.5,
+    "area_ha": 0.036,
+    "frente_medio_m": 26.85,
+    "centro": [
+     9704.9,
+     8733.8
+    ]
+   },
+   {
+    "casas": 3,
+    "de_frente": 3,
+    "borde_m": 144.7,
+    "area_ha": 0.062,
+    "frente_medio_m": 48.22,
+    "centro": [
+     8349.3,
+     7673.3
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 84.9,
+    "area_ha": 0.04,
+    "frente_medio_m": 42.45,
+    "centro": [
+     10492.1,
+     5699.5
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 141.4,
+    "area_ha": 0.101,
+    "frente_medio_m": 70.7,
+    "centro": [
+     10200.1,
+     7280.7
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 81.3,
+    "area_ha": 0.036,
+    "frente_medio_m": 40.63,
+    "centro": [
+     10191.1,
+     5852.9
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 68.2,
+    "area_ha": 0.03,
+    "frente_medio_m": 34.11,
+    "centro": [
+     9873.5,
+     9057.1
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 68.6,
+    "area_ha": 0.032,
+    "frente_medio_m": 34.3,
+    "centro": [
+     9862.2,
+     9205.2
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 58.8,
+    "area_ha": 0.022,
+    "frente_medio_m": 29.41,
+    "centro": [
+     9753.3,
+     9229.8
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 71.1,
+    "area_ha": 0.027,
+    "frente_medio_m": 35.54,
+    "centro": [
+     9656.9,
+     8786.6
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 44.7,
+    "area_ha": 0.011,
+    "frente_medio_m": 22.36,
+    "centro": [
+     9510.3,
+     8781.8
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 47.4,
+    "area_ha": 0.013,
+    "frente_medio_m": 23.68,
+    "centro": [
+     9502.9,
+     8824.1
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 61.0,
+    "area_ha": 0.022,
+    "frente_medio_m": 30.52,
+    "centro": [
+     9493.5,
+     5828.6
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 88.0,
+    "area_ha": 0.045,
+    "frente_medio_m": 43.99,
+    "centro": [
+     9161.4,
+     8887.4
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 46.7,
+    "area_ha": 0.013,
+    "frente_medio_m": 23.34,
+    "centro": [
+     9112.7,
+     6509.6
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 86.8,
+    "area_ha": 0.044,
+    "frente_medio_m": 43.4,
+    "centro": [
+     9007.7,
+     9338.7
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 70.0,
+    "area_ha": 0.029,
+    "frente_medio_m": 35.0,
+    "centro": [
+     8782.5,
+     5421.8
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 67.1,
+    "area_ha": 0.018,
+    "frente_medio_m": 33.56,
+    "centro": [
+     8708.3,
+     7422.7
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 79.7,
+    "area_ha": 0.04,
+    "frente_medio_m": 39.86,
+    "centro": [
+     8331.3,
+     5383.4
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 152.1,
+    "area_ha": 0.104,
+    "frente_medio_m": 76.06,
+    "centro": [
+     8274.2,
+     6529.9
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 134.1,
+    "area_ha": 0.058,
+    "frente_medio_m": 67.06,
+    "centro": [
+     8070.8,
+     7075.7
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 54.3,
+    "area_ha": 0.019,
+    "frente_medio_m": 27.16,
+    "centro": [
+     8035.1,
+     7054.7
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 73.7,
+    "area_ha": 0.033,
+    "frente_medio_m": 36.87,
+    "centro": [
+     7914.0,
+     8642.0
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 82.8,
+    "area_ha": 0.037,
+    "frente_medio_m": 41.42,
+    "centro": [
+     7864.8,
+     5737.3
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 65.2,
+    "area_ha": 0.026,
+    "frente_medio_m": 32.61,
+    "centro": [
+     7733.1,
+     5743.7
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 67.4,
+    "area_ha": 0.028,
+    "frente_medio_m": 33.69,
+    "centro": [
+     7604.9,
+     5849.5
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 68.6,
+    "area_ha": 0.028,
+    "frente_medio_m": 34.28,
+    "centro": [
+     6689.7,
+     7205.1
+    ]
+   },
+   {
+    "casas": 2,
+    "de_frente": 2,
+    "borde_m": 70.6,
+    "area_ha": 0.031,
+    "frente_medio_m": 35.28,
+    "centro": [
+     6657.4,
+     8651.4
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 25.0,
+    "area_ha": 0.003,
+    "frente_medio_m": 24.96,
+    "centro": [
+     10392.5,
+     7824.6
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 58.9,
+    "area_ha": 0.021,
+    "frente_medio_m": 58.86,
+    "centro": [
+     9971.2,
+     4734.2
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 66.7,
+    "area_ha": 0.028,
+    "frente_medio_m": 66.72,
+    "centro": [
+     9833.5,
+     4657.6
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 49.6,
+    "area_ha": 0.015,
+    "frente_medio_m": 49.57,
+    "centro": [
+     9784.9,
+     8038.2
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 39.6,
+    "area_ha": 0.01,
+    "frente_medio_m": 39.62,
+    "centro": [
+     9776.8,
+     8076.4
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 38.9,
+    "area_ha": 0.009,
+    "frente_medio_m": 38.92,
+    "centro": [
+     9769.5,
+     8114.4
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 43.2,
+    "area_ha": 0.012,
+    "frente_medio_m": 43.16,
+    "centro": [
+     9763.7,
+     8153.4
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 48.0,
+    "area_ha": 0.015,
+    "frente_medio_m": 48.02,
+    "centro": [
+     9758.5,
+     8184.6
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 44.0,
+    "area_ha": 0.01,
+    "frente_medio_m": 43.99,
+    "centro": [
+     9758.2,
+     9169.4
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 50.3,
+    "area_ha": 0.017,
+    "frente_medio_m": 50.31,
+    "centro": [
+     9719.9,
+     8653.8
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 44.3,
+    "area_ha": 0.012,
+    "frente_medio_m": 44.34,
+    "centro": [
+     9518.9,
+     8142.3
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 65.7,
+    "area_ha": 0.023,
+    "frente_medio_m": 65.73,
+    "centro": [
+     9466.9,
+     8115.3
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 57.6,
+    "area_ha": 0.015,
+    "frente_medio_m": 57.64,
+    "centro": [
+     9408.3,
+     8093.1
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 119.5,
+    "area_ha": 0.052,
+    "frente_medio_m": 119.51,
+    "centro": [
+     9108.6,
+     8664.8
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 40.4,
+    "area_ha": 0.01,
+    "frente_medio_m": 40.36,
+    "centro": [
+     9109.1,
+     8899.6
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 47.7,
+    "area_ha": 0.007,
+    "frente_medio_m": 47.69,
+    "centro": [
+     8849.0,
+     5483.4
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 57.0,
+    "area_ha": 0.01,
+    "frente_medio_m": 57.0,
+    "centro": [
+     8735.3,
+     5419.9
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 50.7,
+    "area_ha": 0.016,
+    "frente_medio_m": 50.75,
+    "centro": [
+     8696.6,
+     5368.2
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 47.7,
+    "area_ha": 0.013,
+    "frente_medio_m": 47.65,
+    "centro": [
+     8401.1,
+     5779.3
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 49.9,
+    "area_ha": 0.015,
+    "frente_medio_m": 49.87,
+    "centro": [
+     8359.5,
+     5274.2
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 99.2,
+    "area_ha": 0.025,
+    "frente_medio_m": 99.16,
+    "centro": [
+     8323.0,
+     7739.0
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 17.9,
+    "area_ha": 0.001,
+    "frente_medio_m": 17.93,
+    "centro": [
+     8345.4,
+     5002.5
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 52.6,
+    "area_ha": 0.009,
+    "frente_medio_m": 52.58,
+    "centro": [
+     8305.0,
+     7669.5
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 34.3,
+    "area_ha": 0.007,
+    "frente_medio_m": 34.25,
+    "centro": [
+     7992.3,
+     7109.5
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 38.8,
+    "area_ha": 0.009,
+    "frente_medio_m": 38.78,
+    "centro": [
+     7954.0,
+     7152.7
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 44.2,
+    "area_ha": 0.012,
+    "frente_medio_m": 44.24,
+    "centro": [
+     7922.4,
+     7102.0
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 40.9,
+    "area_ha": 0.009,
+    "frente_medio_m": 40.9,
+    "centro": [
+     7848.8,
+     6523.4
+    ]
+   },
+   {
+    "casas": 1,
+    "de_frente": 1,
+    "borde_m": 50.4,
+    "area_ha": 0.016,
+    "frente_medio_m": 50.45,
+    "centro": [
+     7822.0,
+     6075.7
+    ]
+   }
+  ]
+ },
+ "resumen": {
+  "segunda_fila": 0,
+  "giradas": 926
+ },
+ "pendientes": [
+  "R2",
+  "R5",
+  "R7",
+  "R8",
+  "R9",
+  "R10",
+  "R11",
+  "R12"
+ ],
+ "umbrales_pendientes": "ancho mínimo de calle y casas por manzana de la época: specs/13 § 3 (F0)"
+}

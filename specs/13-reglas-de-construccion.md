@@ -54,6 +54,19 @@ Se llenan en F0 con fuente por celda. Hasta entonces, la puerta mide y reporta, 
 | Frente de casa (centro / orillas) | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | el plano |
 | Ancho mínimo de calle | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | el plano |
 
+**Medición de base** (`tools/geo/reglas_mapa.py --todas`, datos `datos-2026-11-25-09ba9f7`, `specs/reglas/medicion-<año>.json`). La manzana es lo que forman las casas pegadas; en las manzanas «unidas» (más que una cuadra: casas que cruzan una calle) las casas sobre la calle tapada cuentan como segunda fila.
+
+| Época | Casas a la vista | R1 segunda fila | R3 giradas > 5° (de las del frente) | R4 calle mediana / p10 | R4 metros de borde con calle < 4 m | Manzanas unidas | Cuadras del damero | Casas por cuadra (mediana) | Frente medio (mediana) |
+|---|---|---|---|---|---|---|---|---|---|
+| 1578 | 65 | 0 (0,0 %) | 0 de 65 | 9,8 m / 9,71 m | 0 m | 0 | 0 | — | — |
+| 1772 | 6.292 | 0 (0,0 %) | 926 de 6.292 | 11,81 m / 6,16 m | 152 m | 29 | 77 | 39,0 | 12,15 m |
+| 1843 | 10.284 | 2.311 (22,5 %) | 641 de 7.973 | 7,31 m / 4,14 m | 4.246 m | 52 | 25 | 46,0 | 11,25 m |
+| 1889 | 11.753 | 2.261 (19,2 %) | 911 de 9.492 | 8,0 m / 4,26 m | 4.852 m | 59 | 59 | 36,0 | 15,08 m |
+| 1911 | 14.121 | 2.003 (14,2 %) | 1.963 de 12.118 | 8,72 m / 4,43 m | 6.246 m | 64 | 82 | 36,0 | 16,73 m |
+| 1936 | 35.440 | 1.991 (5,6 %) | 8.183 de 33.449 | 10,63 m / 4,55 m | 20.314 m | 69 | 128 | 37,0 | 17,38 m |
+
+Lectura: 1843, 1889 y 1911 tienen entre el 14 y el 22 % de sus casas en segunda fila (1772, ninguna: su auditoría alineó los frentes) y calles más angostas que 1772 (mediana de 7 a 9 m contra 12 m). Las casas por cuadra del damero (36 a 46) y el frente medio (11 a 17 m) se comparan con las fuentes cuando estén (F0).
+
 Punto de partida (no es fuente histórica): la vista aérea del pueblo colonial que aportó el responsable (`fuentes/imagenes/README.md`) muestra manzanas de unos 100 m, lotes de 10 a 15 m de frente y 25 a 50 m de fondo, y crujías de 5 a 8 m. Eso da del orden de 7 a 10 casas por frente; hay que contrastarlo con las fuentes de Caracas.
 
 ## 4. Plan de ejecución (T82)
@@ -61,7 +74,7 @@ Punto de partida (no es fuente histórica): la vista aérea del pueblo colonial 
 | Fase | Qué | Entrega | Estado |
 |---|---|---|---|
 | **F0 · Investigación** | Workflow de investigación (§ 5) sobre siete temas: (1) solares por manzana y su subdivisión; (2) casas y habitantes por época; (3) ancho de las calles; (4) tipología de la casa colonial y republicana, qué abre a la calle y qué al patio; (5) pueblos comparables conservados; (6) edificios en pie por época; (7) ríos, quebradas y puentes. Cada afirmación, verificada por un agente que intenta refutarla. | La tabla de § 3 llena con fuentes; `specs/reglas/investigacion.json` con cada afirmación, fuente, cita y veredicto | pendiente |
-| **F1 · Las reglas como puertas** | `tools/geo/reglas_mapa.py`: R1 a R12 sobre cualquier época, con tests; capturas fijas versionadas; medición de base de las seis épocas. | `specs/reglas/medicion-<año>.json` de las seis épocas | pendiente |
+| **F1 · Las reglas como puertas** | `tools/geo/reglas_mapa.py`: R1 a R12 sobre cualquier época, con tests; capturas fijas versionadas; medición de base de las seis épocas. | `specs/reglas/medicion-<año>.json` de las seis épocas | R1, R3, R4 y R6 medidas en las seis épocas (T82.1); R2, R5 y R7 a R12, pendientes (T82.2) |
 | **F2 · Diseño de la corrección de fondo** | Solares por época: los lotes de 1936 se agrupan en solares del tamaño de la época, con una casa de patio por solar sobre la línea de fachada y el corazón de la manzana libre; calzada con su ancho mínimo. Spike en un sector, con capturas y medición. **Se muestra al responsable antes de aplicarlo a todo.** | Diseño escrito aquí (§ 6) y spike medido | pendiente |
 | **F3 · Fachadas (R5)** | Fachada solo a la calle; corredor y puerta hacia el patio; medianeras ciegas. Cambia el visor en todas las épocas. | PR con tests y capturas a pie | pendiente |
 | **F4 · Época por época** | En orden 1772 → 1843 → 1889 → 1911 (y lo que aplique de 1578 y 1936): aplicar F2 con los valores de la época, corregir lo que mida mal, puertas de todas las épocas y de las auditorías ya cerradas (08 y 11), revisión visual, PR, publicación. | Una época cerrada por fila de la tabla de § 8 | pendiente |
