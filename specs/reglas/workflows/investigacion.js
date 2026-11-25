@@ -3,7 +3,7 @@ export const meta = {
   description: 'F0 de T82: investigar en la web las cifras de las reglas de construcción por época, verificarlas y armar la tabla',
   phases: [{ title: 'Buscar' }, { title: 'Verificar' }, { title: 'Sintetizar' }],
 }
-// Argumentos: { temas?: [ids de TEMAS] }  (por omisión, todos). Devuelve { temas: [{tema, afirmaciones, veredictos}], tabla }.
+// Argumentos: { temas?: [ids de TEMAS o {id, q}] }  (por omisión, todos). Devuelve { temas: [{tema, afirmaciones, veredictos}], tabla }.
 // Lo devuelto lo junta Claude en specs/reglas/investigacion.json y en la tabla de specs/13 § 3.
 const EPOCAS = '1578, 1772, 1843, 1889, 1911 y 1936'
 const TEMAS = [
@@ -43,7 +43,10 @@ const TABLA = {
     vacios: { type: 'array', items: { type: 'string' } },
   },
 }
-const elegidos = args?.temas ? TEMAS.filter((t) => args.temas.includes(t.id)) : TEMAS
+// args.temas: ids de TEMAS o temas nuevos {id, q} (la investigación ampliada que pide una tarea del diagnóstico)
+const elegidos = args?.temas
+  ? args.temas.map((t) => (typeof t === 'string' ? TEMAS.find((x) => x.id === t) : t)).filter(Boolean)
+  : TEMAS
 const buscar = (t) => agent(`Investigación para las reglas de construcción del mapa histórico de Caracas (este repositorio; reglas en specs/13-reglas-de-construccion.md, léelo primero). Tema «${t.id}»:
 
 ${t.q}

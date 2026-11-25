@@ -4,7 +4,7 @@ Scripts de la herramienta Workflow de Claude Code para aplicar y mantener las re
 
 | Script | Agentes | Qué hace | Argumentos | Salida que se junta |
 |---|---|---|---|---|
-| [investigacion.js](investigacion.js) | 7 buscadores + 7 verificadores + 1 síntesis | F0: cifras de cada época con fuente (casas, habitantes, solares, frente, ancho de calle, tipología, edificios, cauces), cada afirmación con un verificador que intenta refutarla | `{ temas?: ['solares', 'casas', 'calles', 'tipologia', 'pueblos', 'edificios', 'agua'] }` | `specs/reglas/investigacion.json`, tabla de specs/13 § 3 |
+| [investigacion.js](investigacion.js) | 7 buscadores + 7 verificadores + 1 síntesis | F0: cifras de cada época con fuente (casas, habitantes, solares, frente, ancho de calle, tipología, edificios, cauces), cada afirmación con un verificador que intenta refutarla | `{ temas?: ['solares', 'casas', 'calles', 'tipologia', 'pueblos', 'edificios', 'agua'] }`, o temas nuevos `{ id, q }` (investigación ampliada) | `specs/reglas/investigacion.json`, tabla de specs/13 § 3 |
 | [diagnostico-epocas.js](diagnostico-epocas.js) | por época: revisor + verificador + planificador; 1 consolidador | Diagnóstico de cada época contra R1–R12 sobre capturas, plano original y medición; tareas T82.N consolidadas. Con `modo: 'cierre'`, si cada regla cierra | `{ modo, epocas: [{ indice, año, capturas, original, medicion }] }` | `specs/reglas/diagnostico-<año>.json`, filas T82.N de specs/07, tabla de specs/13 § 8 |
 | [capturas.mjs](capturas.mjs) | — (script de Node) | Las capturas fijas de una época, mismas cámaras siempre | `<url> <carpeta> <índice> [vistas]` | Las capturas que recibe el diagnóstico (no van a git) |
 
