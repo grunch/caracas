@@ -43,16 +43,24 @@ Cada regla dice qué, por qué, cómo se mide y qué umbral cierra. «Frente» e
 
 ## 3. Valores por época
 
-Se llenan en F0 con fuente por celda. Hasta entonces, la puerta mide y reporta, pero no cierra.
+De la investigación F0 (25-11-2026, [`reglas/investigacion.json`](reglas/investigacion.json): 239 afirmaciones con fuente y cita, cada una con un verificador que intentó refutarla). La tabla usa solo las confirmadas o corregidas. *Inferido* significa sin fuente directa, interpolado entre épocas que la tienen, con el razonamiento en el JSON. Una vara castellana son 0,836 m.
 
 | Valor | 1578 | 1772 | 1843 | 1889 | 1911 | 1936 |
 |---|---|---|---|---|---|---|
-| Casas en la ciudad (fuentes) | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | el plano |
-| Casas a la vista hoy (25-11-2026, `cubiertas --todas`) | 65 | 6.294 | 10.287 | 11.809 | 14.233 | 35.487 |
-| Habitantes (fuentes) | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 |
-| Solares por manzana / casas por manzana | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | el plano |
-| Frente de casa (centro / orillas) | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | el plano |
-| Ancho mínimo de calle | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | pendiente F0 | el plano |
+| Casas en la ciudad (fuentes) | 60–65: los solares con «casa» del plano (Salazar Bravo, 2018) | **2.809**, en las cuatro parroquias (visita de Martí) | 4.000–5.400 *inferido* (habitantes ÷ habitantes por casa) | ~9.900 *interpolado*: 8.194 en 1881 y 10.379 en 1891 (censos, parroquias urbanas) | 11.300–13.000 *inferido* | el plano |
+| Casas a la vista hoy (`reglas_mapa.py`) | 65 | 6.292 (**2,2 ×**) | 10.284 (**1,9–2,6 ×**) | 11.753 (1,1–1,4 ×) | 14.121 (1,1–1,25 ×) | 35.440 |
+| Habitantes | ~60 vecinos (Relación de 1578) | 18.669 (Martí) | 30.000–40.000 *inferido* (Codazzi ilegible: 35.000 o 55.000) | 55.638 (1881) – 72.429 (1891) | ~86.000 *interpolado* | 203.342 (censo, ciudad) |
+| Habitantes por casa | — | 6,65 (de 6,0 a 7,5 según la parroquia) | 6,6–7,6 *inferido* | 6,8–7,0 | — | — |
+| Solares por manzana | 4 (en 23 de 25 manzanas: 92 solares; la de la plaza y la de San Francisco, sin solares) | partidos en medios y cuartos | — | — | — | — |
+| Casas por manzana | 0–4 (una por solar; 5 o 6 manzanas vacías) | **~20 de media, de 2 a 43** (parroquia Catedral; en el centro, casas grandes y no lo más denso) | sin muestra: la de 1772 *inferido* | — | — | el plano |
+| Frente de casa | el solar entero: 70 varas (58,5 m) | **9–11 m de media**, de 3,5 a 33 m (las casas grandes del centro, 23–33 m) | la de 1772 *inferido* | — | — | el plano |
+| Fondo de lote | 58,5 m | 43–63 m (fondos de 75 varas comunes) | la de 1772 *inferido* | — | — | el plano |
+| Ancho de calle entre fachadas | 6,7 m *inferido* | 6,7–8,4 m *inferido* (de 1843) | **8–10 varas: 6,7–8,4 m** | 6,7 m en el damero viejo; 12 varas (10 m) en las calles abiertas desde 1871 | 6,7 m en el damero viejo; 14,6–17,4 m en las nuevas (Ordenanza de 1910) | el plano |
+| Pisos | 1 (tapia y techo de cogollo; 3 o 4 casas de alto) | 1 la mayoría; alto en algunas casas de la élite | 1 casi todas | casa de patio colonial todavía | — | el del plano |
+
+**Qué dicen las cifras del mapa de hoy.** 1772 tiene 2,2 veces las casas de la visita de Martí y unas 39 casas por cuadra del damero, contra unas 20. 1843 tiene de 1,9 a 2,6 veces las casas estimadas. 1889 y 1911 están más cerca (de 1,1 a 1,4 veces). En 1843, el p10 de la calle (4,1 m) queda por debajo de las 8 varas (6,7 m). Es el desvío más grande y está en las épocas que más importan: las coloniales y la republicana temprana.
+
+Lo que sigue sin fuente está en `vacios` del JSON. Entre otros: los habitantes y las casas de 1843 (falta una edición legible de Codazzi o la matrícula de hacia 1840), las casas por manzana después de 1792, Gasparini y Duarte de primera mano, y el porcentaje de casas de dos pisos.
 
 **Medición de base** (`tools/geo/reglas_mapa.py --todas`, datos `datos-2026-11-25-09ba9f7`, `specs/reglas/medicion-<año>.json`). Las casas son las que se empaquetan, con la vida que les deja el visor bajo los hitos (`tools/vidas-visibles.mjs`). La manzana es lo que forman las casas pegadas; en las manzanas «unidas» (más que una cuadra: casas que cruzan una calle) las casas sobre la calle tapada cuentan como segunda fila.
 
@@ -67,18 +75,18 @@ Se llenan en F0 con fuente por celda. Hasta entonces, la puerta mide y reporta, 
 
 Lectura: 1843, 1889 y 1911 tienen entre el 14 y el 22 % de sus casas en segunda fila (1772, ninguna: su auditoría alineó los frentes) y calles más angostas que 1772 (mediana de 7 a 8,4 m contra 11,3 m). Las casas por cuadra del damero (36 a 46) y el frente medio (11 a 17 m) se comparan con las fuentes cuando estén (F0).
 
-Punto de partida (no es fuente histórica): la vista aérea del pueblo colonial que aportó el responsable (`fuentes/imagenes/README.md`) muestra manzanas de unos 100 m, lotes de 10 a 15 m de frente y 25 a 50 m de fondo, y crujías de 5 a 8 m. Eso da del orden de 7 a 10 casas por frente; hay que contrastarlo con las fuentes de Caracas.
+La vista aérea del pueblo colonial que aportó el responsable (`fuentes/imagenes/README.md`) muestra lotes de 10 a 15 m de frente y 25 a 50 m de fondo y crujías de 5 a 8 m. Concuerda con las fuentes de 1772 (frente de 9 a 11 m, fondo de 43 a 63 m). Las manzanas no son de 100 m exactos: Salazar Bravo llama mito a las «cuadras de 100 metros». Se miden en el plano de cada época.
 
 ## 4. Plan de ejecución (T82)
 
 | Fase | Qué | Entrega | Estado |
 |---|---|---|---|
-| **F0 · Investigación** | Workflow de investigación (§ 5) sobre siete temas: (1) solares por manzana y su subdivisión; (2) casas y habitantes por época; (3) ancho de las calles; (4) tipología de la casa colonial y republicana, qué abre a la calle y qué al patio; (5) pueblos comparables conservados; (6) edificios en pie por época; (7) ríos, quebradas y puentes. Cada afirmación, verificada por un agente que intenta refutarla. | La tabla de § 3 llena con fuentes; `specs/reglas/investigacion.json` con cada afirmación, fuente, cita y veredicto | pendiente |
+| **F0 · Investigación** | Workflow de investigación (§ 5) sobre siete temas: (1) solares por manzana y su subdivisión; (2) casas y habitantes por época; (3) ancho de las calles; (4) tipología de la casa colonial y republicana, qué abre a la calle y qué al patio; (5) pueblos comparables conservados; (6) edificios en pie por época; (7) ríos, quebradas y puentes. Cada afirmación, verificada por un agente que intenta refutarla. | La tabla de § 3 llena con fuentes; `specs/reglas/investigacion.json` con cada afirmación, fuente, cita y veredicto | hecha (T82.3): 239 afirmaciones, 16 vacíos listados |
 | **F1 · Las reglas como puertas** | `tools/geo/reglas_mapa.py`: R1 a R12 sobre cualquier época, con tests; capturas fijas versionadas; medición de base de las seis épocas. | `specs/reglas/medicion-<año>.json` de las seis épocas | R1, R3, R4 y R6 medidas en las seis épocas (T82.1 #202); R2, R5 y R7 a R12, pendientes (T82.2) |
 | **F2 · Diseño de la corrección de fondo** | Solares por época: los lotes de 1936 se agrupan en solares del tamaño de la época, con una casa de patio por solar sobre la línea de fachada y el corazón de la manzana libre; calzada con su ancho mínimo. Spike en un sector, con capturas y medición. **Se muestra al responsable antes de aplicarlo a todo.** | Diseño escrito aquí (§ 6) y spike medido | pendiente |
 | **F3 · Fachadas (R5)** | Fachada solo a la calle; corredor y puerta hacia el patio; medianeras ciegas. Cambia el visor en todas las épocas. | PR con tests y capturas a pie | pendiente |
 | **F4 · Época por época** | En orden 1772 → 1843 → 1889 → 1911 (y lo que aplique de 1578 y 1936): aplicar F2 con los valores de la época, corregir lo que mida mal, puertas de todas las épocas y de las auditorías ya cerradas (08 y 11), revisión visual, PR, publicación. | Una época cerrada por fila de la tabla de § 8 | pendiente |
-| **F5 · Discrepancias puntuales** | D1 a D6 (§ 7), en la época donde aparecen y en las demás si se repiten. | PRs chicos, uno por defecto | pendiente |
+| **F5 · Discrepancias puntuales** | D1 a D11 (§ 7), en la época donde aparecen y en las demás si se repiten. | PRs chicos, uno por defecto | pendiente |
 | **F6 · Mantenimiento** | Las puertas de R1 a R12 corren con `npm run datos` y fallan si una época las rompe; `specs/12` arranca toda auditoría nueva por estas reglas. | Paso de datos y `specs/12` actualizados | pendiente |
 
 ## 5. Workflows
@@ -120,6 +128,16 @@ Capturas de caracas.city (`datos-2026-11-25-09ba9f7`) con Chromium headless, com
 | D4 | R9, R11 | «Seminario y Universidad» cae en la calle; Santa Rosalía, Candelaria, La Merced, San Mauricio y San Pablo, en pie en 1843, no tienen edificio; «Plaza de San Jacinto» cae sobre casas. |
 | D5 | R10 | El río Caroata termina en una V en medio del campo, al oeste, sin llegar a la ciudad. |
 | D6 | R2, R8 | Una línea diagonal en el suelo que atraviesa casas cerca de la plaza (vista baja) y una línea vertical blanca. A confirmar. |
+
+De la investigación F0 (fuentes en `reglas/investigacion.json`, temas `edificios` y `agua`):
+
+| Id | Regla | Qué falta o sobra |
+|---|---|---|
+| D7 | R11 | En 1843 la plaza ya se llamaba **Plaza Bolívar** (desde 1842, con la llegada de los restos del Libertador; edificios-16). El sitio la rotula «Plaza Mayor». |
+| D8 | R11 | **Altagracia** (destruida en 1812, rehecha en 1857), **La Merced** (fachada en ruinas en 1842, capilla provisional; templo nuevo hacia 1857) y **la Trinidad** (abandonada tras 1812, fachada nueva en 1853) estaban en ruina o en obra en 1843. Hay que revisar cómo las muestra el sitio (edificios-33, 36, 40). |
+| D9 | R9 | **San Pablo** (1580–1876), **Santa Rosalía** (1730) y **la Candelaria** (1708) están en pie en 1772 y 1843 sin edificio. La leyenda de 1843 nombra cinco lugares sin marca en el sitio: Dominicas, San Antonio, San Lázaro, Oratorio de San Felipe y Capuchinos (edificios-07, 38, 39, 48). |
+| D10 | R10 | El **Caroata** corre continuo de norte a sur por el oeste del casco y desemboca en el Guaire frente a El Paraíso; se embauló bajo El Silencio en 1942–1945. Confirma D5. |
+| D11 | R11 | En 1578 hay **92 solares** (23 manzanas de 4), no los 100 que dice `specs/02` sobre `valle.py`. Revisar si eso cambia lo urbanizado de 1578. |
 
 Además, en las mismas capturas se ven R1 (dobles filas en las manzanas al norte y al este de la plaza), R3 (casas giradas dentro de las manzanas), R4 y R6 en toda la ciudad.
 
