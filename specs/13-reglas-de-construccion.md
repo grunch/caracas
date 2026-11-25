@@ -48,7 +48,7 @@ De la investigación F0 (25-11-2026, [`reglas/investigacion.json`](reglas/invest
 | Valor | 1578 | 1772 | 1843 | 1889 | 1911 | 1936 |
 |---|---|---|---|---|---|---|
 | Casas en la ciudad (fuentes) | 60–65: los solares con «casa» del plano (Salazar Bravo, 2018) | **2.809**, en las cuatro parroquias (visita de Martí) | 4.000–5.400 *inferido* (habitantes ÷ habitantes por casa) | ~9.900 *interpolado*: 8.194 en 1881 y 10.379 en 1891 (censos, parroquias urbanas) | 11.300–13.000 *inferido* | el plano |
-| Casas a la vista hoy (`reglas_mapa.py`) | 65 | 6.292 (**2,2 ×**) | 10.284 (**1,9–2,6 ×**) | 11.753 (1,1–1,4 ×) | 14.121 (1,1–1,25 ×) | 35.440 |
+| Casas a la vista hoy (`reglas_mapa.py`) | 65 | 6.292 (**2,2 ×**) | 10.284 (**1,9–2,6 ×**) | 11.798 (1,1–1,4 ×) | 14.195 (1,1–1,3 ×) | 35.440 |
 | Habitantes | ~60 vecinos (Relación de 1578) | 18.669 (Martí) | 30.000–40.000 *inferido* (Codazzi ilegible: 35.000 o 55.000) | 55.638 (1881) – 72.429 (1891) | ~86.000 *interpolado* | 203.342 (censo, ciudad) |
 | Habitantes por casa | — | 6,65 (de 6,0 a 7,5 según la parroquia) | 6,6–7,6 *inferido* | 6,8–7,0 | — | — |
 | Solares por manzana | 4 (en 23 de 25 manzanas: 92 solares; la de la plaza y la de San Francisco, sin solares) | partidos en medios y cuartos | — | — | — | — |
