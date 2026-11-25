@@ -77,6 +77,30 @@ def puerta(casas, unidades, metro):
     return {'cerrable': all(c['cumplido'] for c in criterios.values()), 'casas': len(casas), 'criterios': criterios}
 
 
+CENTRO_M = 1.0   # como cierre_fase6: un límite registrado por el centro de la casa, a menos de esto, es la misma
+
+
+def con_limites(resultado, casas, limites, metro):
+    """El resultado con las casas en límite documentado (`limites`: [{centro, criterio, motivo}], px del mosaico)
+    fuera de lo que impide cerrar: quedan en `en_limite`, a la vista."""
+    centros = {c['techo']: np.asarray(c['poligono'], float).mean(axis=0) for c in casas}
+
+    def en_limite(techo, criterio):
+        return any(lim['criterio'] == criterio and techo in centros
+                   and np.hypot(*(centros[techo] - np.asarray(lim['centro'], float))) * metro < CENTRO_M for lim in limites)
+
+    criterios = {}
+    for nombre, c in resultado['criterios'].items():
+        clave = next(k for k, v in c.items() if isinstance(v, list))
+        quedan, limite = [], []
+        for x in c[clave]:
+            techos = x if isinstance(x, list) else [x]
+            (limite if all(en_limite(t, nombre) for t in techos) else quedan).append(x)
+        criterios[nombre] = {**c, clave: quedan, 'en_limite': [t for x in limite for t in (x if isinstance(x, list) else [x])],
+                             'cumplido': not quedan}
+    return {**resultado, 'cerrable': all(c['cumplido'] for c in criterios.values()), 'criterios': criterios}
+
+
 def main():  # pragma: no cover - E/S
     import subprocess
     from contraste_1843 import EPOCA_1843, visibles_en, vive
@@ -91,6 +115,9 @@ def main():  # pragma: no cover - E/S
                                       text=True, cwd=raiz).stdout)
     casas = visibles_en(casas, hitos)
     r = puerta(casas, unidades, metro=0.5)
+    ruta_limites = raiz / 'specs/auditoria-1843/limites-fases-5-7.json'
+    if ruta_limites.exists():
+        r = con_limites(r, casas, json.loads(ruta_limites.read_text())['casas'], metro=0.5)
     doc = {'alcance': __doc__.split('\n\n')[1].replace('\n', ' '), **r}
     (raiz / 'specs/auditoria-1843/cierre-fases-5-7.json').write_text(json.dumps(doc, ensure_ascii=False, indent=1) + '\n')
     print('fases 5–7 de 1843 cerrables:', r['cerrable'], {k: (v['cumplido'], len(next(x for x in v.values() if isinstance(x, list)))) for k, v in r['criterios'].items()},

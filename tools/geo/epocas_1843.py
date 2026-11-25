@@ -143,7 +143,8 @@ def agregar_casas(ciudad, unidades, metro, epoca):
         cerca = arbol.query(figura, predicate='contains') if arbol is not None else []
         despues = [ciudad['vida'][i][0] for i in cerca if ciudad['vida'][i][0] > epoca]
         muere = min(despues) if despues else 0
-        adentro = [f for f in libres if f.intersects(figura)]
+        # los lotes, plazas y huertas de la manzana; no la huerta que la envuelve (un edificio censado dentro de ella)
+        adentro = [f for f in libres if f.intersects(figura) and f.area < figura.area]
         adentro += [huellas[i] for i in arbol_h.query(figura)] if arbol_h is not None else []
         adentro += [f for f in puestas if f.intersects(figura)]
         casas = [_sin(casa, adentro, metro) for casa in casas_de_manzana(u['poligono'], metro)]

@@ -42,3 +42,13 @@ def test_las_heredadas_interiores_se_cuentan_sin_cerrar_y_lo_anidado_en_un_lote_
     assert r['criterios']['casas_con_acceso']['cumplido'] is True
     assert r['criterios']['casas_con_acceso']['heredadas_interiores'] == [6]
     assert r['criterios']['libres_sin_casas']['casas'] == []
+
+
+def test_las_heredadas_en_limite_documentado_no_impiden_cerrar():
+    from cierre_casas_1843 import con_limites
+    astilla = {'techo': 4, 'poligono': [[0, 0], [40, 0], [40, 0.5]], 'propia': False}
+    r = puerta([astilla], UNIDADES, metro=0.5)
+    limites = [{'centro': [80 / 3, 1 / 6], 'criterio': 'huellas_sin_degenerar', 'motivo': 'heredada de 1936'}]
+    r2 = con_limites(r, [astilla], limites, metro=0.5)
+    assert r['cerrable'] is False and r2['cerrable'] is True
+    assert r2['criterios']['huellas_sin_degenerar']['en_limite'] == [4]

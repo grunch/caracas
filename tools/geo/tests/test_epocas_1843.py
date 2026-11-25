@@ -146,3 +146,10 @@ def test_las_casas_propias_dan_a_la_calle_y_no_se_tocan():
     casas = [Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])]) for t in nueva['techos']]
     assert all(c.distance(borde) * 0.5 <= 0.5 for c in casas)
     assert all(a.intersection(b).area * 0.25 <= 0.01 for k, a in enumerate(casas) for b in casas[k + 1:])
+
+
+def test_un_edificio_dentro_de_una_huerta_lleva_sus_casas():
+    unidades = [{'id': 'H', 'ocupacion': 'huerta', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 400)},
+                {'id': 'R', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(100, 100, 80)}]
+    nueva, informe = agregar_casas(_ciudad([], []), unidades, metro=0.5, epoca=2)
+    assert informe['manzanas'] == 1 and informe['casas'] > 0

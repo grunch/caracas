@@ -1,0 +1,116 @@
+{
+ "alcance": "Límites documentados de las fases 5 a 7 de 1843 (specs/11, decisión 2): casas heredadas de 1936 cuya forma viene del plano de origen. Decisión por delegación del responsable, 25-11-2026. Cada casa se reconoce por su centro (px del mosaico, a menos de 1 m).",
+ "datos": "regenerado con la pila T81 hasta 5a, sin publicar",
+ "casas": [
+  {
+   "techo_al_decidir": 24617,
+   "centro": [
+    9254.09,
+    8767.28
+   ],
+   "criterio": "lotes_sin_solapes",
+   "origen": "de 1936, nace en 1843",
+   "motivo": "Par de casas del plano de 1936 que ya se pisan en 1936: su forma es la del plano de origen; se corrige en el vectorizador de 1936, no en 1843."
+  },
+  {
+   "techo_al_decidir": 24656,
+   "centro": [
+    9262.06,
+    8828.32
+   ],
+   "criterio": "lotes_sin_solapes",
+   "origen": "de 1936, nace en 1843",
+   "motivo": "Par de casas del plano de 1936 que ya se pisan en 1936: su forma es la del plano de origen; se corrige en el vectorizador de 1936, no en 1843."
+  },
+  {
+   "techo_al_decidir": 6220,
+   "centro": [
+    8341.93,
+    5000.71
+   ],
+   "criterio": "huellas_sin_degenerar",
+   "origen": "de 1936, viva desde 1772",
+   "motivo": "Huella angosta (menos de 2 m de ancho medio) heredada del plano de 1936: el visor la techa igual; no es una casa propia de 1843."
+  },
+  {
+   "techo_al_decidir": 14769,
+   "centro": [
+    9623.2,
+    6818.79
+   ],
+   "criterio": "huellas_sin_degenerar",
+   "origen": "de 1936, nace en 1843",
+   "motivo": "Huella angosta (menos de 2 m de ancho medio) heredada del plano de 1936: el visor la techa igual; no es una casa propia de 1843."
+  },
+  {
+   "techo_al_decidir": 15651,
+   "centro": [
+    9415.0,
+    7143.5
+   ],
+   "criterio": "huellas_sin_degenerar",
+   "origen": "de 1936, nace en 1843",
+   "motivo": "Huella angosta (menos de 2 m de ancho medio) heredada del plano de 1936: el visor la techa igual; no es una casa propia de 1843."
+  },
+  {
+   "techo_al_decidir": 15652,
+   "centro": [
+    9417.12,
+    7158.12
+   ],
+   "criterio": "huellas_sin_degenerar",
+   "origen": "de 1936, nace en 1843",
+   "motivo": "Huella angosta (menos de 2 m de ancho medio) heredada del plano de 1936: el visor la techa igual; no es una casa propia de 1843."
+  },
+  {
+   "techo_al_decidir": 16465,
+   "centro": [
+    8796.77,
+    7219.67
+   ],
+   "criterio": "huellas_sin_degenerar",
+   "origen": "de 1936, nace en 1843",
+   "motivo": "Huella angosta (menos de 2 m de ancho medio) heredada del plano de 1936: el visor la techa igual; no es una casa propia de 1843."
+  },
+  {
+   "techo_al_decidir": 19667,
+   "centro": [
+    10345.78,
+    7843.59
+   ],
+   "criterio": "huellas_sin_degenerar",
+   "origen": "de 1936, nace en 1843",
+   "motivo": "Huella angosta (menos de 2 m de ancho medio) heredada del plano de 1936: el visor la techa igual; no es una casa propia de 1843."
+  },
+  {
+   "techo_al_decidir": 19668,
+   "centro": [
+    10338.92,
+    7881.81
+   ],
+   "criterio": "huellas_sin_degenerar",
+   "origen": "de 1936, nace en 1843",
+   "motivo": "Huella angosta (menos de 2 m de ancho medio) heredada del plano de 1936: el visor la techa igual; no es una casa propia de 1843."
+  },
+  {
+   "techo_al_decidir": 19670,
+   "centro": [
+    10360.75,
+    7941.69
+   ],
+   "criterio": "huellas_sin_degenerar",
+   "origen": "de 1936, nace en 1843",
+   "motivo": "Huella angosta (menos de 2 m de ancho medio) heredada del plano de 1936: el visor la techa igual; no es una casa propia de 1843."
+  },
+  {
+   "techo_al_decidir": 19838,
+   "centro": [
+    7246.3,
+    7816.94
+   ],
+   "criterio": "huellas_sin_degenerar",
+   "origen": "de 1936, nace en 1843",
+   "motivo": "Huella angosta (menos de 2 m de ancho medio) heredada del plano de 1936: el visor la techa igual; no es una casa propia de 1843."
+  }
+ ]
+}
