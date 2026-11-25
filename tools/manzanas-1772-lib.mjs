@@ -4,6 +4,7 @@ import {puntoEnPerimetro} from '../src/manzanas/perimetro.js'
 import {areaConSigno,recortarConvexo} from '../src/poligono.js'
 import {seSolapan} from '../src/hitos/suprimir.js'
 import {codificarPaleta} from '../src/manzanas/paleta.js'
+import {ajustarSolarAReservas} from './manzanas-reservas-lib.mjs'
 import {ALA,CALLE} from '../src/alas.js'
 
 export const RETIRO_EJES_M=3 // mismo retiro inferido de tools/geo/vectorizar.py; no es una medida histórica
@@ -12,7 +13,7 @@ export function cantidadPorDistancia(distancia,id){
  const rnd=azarDeSemilla(`densidad-1772-${id}`)
  const base=Math.max(8,Math.round(32-24*Math.min(1,Math.max(0,distancia)/1400)+(rnd()-.5)*4))
  // Ajuste visual solicitado: primera corona de manzanas, redondeando a casas enteras.
- return distancia<=RADIO_ENTORNO_PLAZA_M?Math.round(Math.round(base*.7)*.7):base
+ return distancia<=RADIO_ENTORNO_PLAZA_M?Math.round(Math.round(Math.round(base*.7)*.7)*.6):base
 }
 const centro=p=>[0,1].map(k=>p.reduce((s,v)=>s+v[k],0)/p.length)
 const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1])
@@ -24,9 +25,9 @@ export function retraerCuadra(p,d){
 }
 export function seleccionarManzanas1772({red,unidades,plaza,metro,hitos=[]}){
  const nodos=new Map(red.nodos.map(n=>[n.id,n.mosaico])),manzanas=[],omitidas=[]
- const reservas=hitos.filter(h=>(h.nace??0)<=1&&(!(h.muere??0)||h.muere>1)).flatMap(h=>h.suprime?.length?h.suprime:h.planta??[])
+ const reservas=hitos.filter(h=>(h.nace??0)<=1&&(!(h.muere??0)||h.muere>1)).flatMap(h=>(h.suprime?.length?h.suprime:h.planta??[]).map(poligono=>({id:h.id,poligono})))
  for(const u of unidades){
-  if(u.estado!=='aprobada'||u.ocupacion!=='continua'){omitidas.push({id:u.id,motivo:`${u.estado}/${u.ocupacion}`});continue}
+  if(u.estado!=='aprobada'||!['continua','conjunto_especial'].includes(u.ocupacion)){omitidas.push({id:u.id,motivo:`${u.estado}/${u.ocupacion}`});continue}
   try{
    const ejes=u.nodos?.map(n=>nodos.get(n));if(ejes?.length!==4||ejes.some(p=>!p))throw new Error('sin cuatro esquinas identificadas')
    const poligono=retraerCuadra(ejes,RETIRO_EJES_M/metro)
@@ -34,9 +35,10 @@ export function seleccionarManzanas1772({red,unidades,plaza,metro,hitos=[]}){
    if(giros.some(v=>v<=0))throw new Error('contorno no convexo')
    const lados=poligono.map((p,i)=>dist(p,poligono[(i+1)%4])*metro)
    if(lados.some(l=>l<60||l>200))throw new Error('lados fuera del intervalo 60–200 m del generador')
-   if(reservas.some(p=>seSolapan(p,poligono)))throw new Error('conjunto histórico: conserva su implantación')
+   const edificios=reservas.filter(r=>r.id!=='plaza-bolivar'&&seSolapan(r.poligono,poligono))
+   if(u.ocupacion==='conjunto_especial'&&!edificios.length)throw new Error('conjunto especial sin edificio modelado activo')
    const c=centro(poligono),distancia=dist(c,plaza)*metro
-   manzanas.push({id:u.id,poligono,distancia,cantidadCasas:cantidadPorDistancia(distancia,u.id),semilla:`1772-${u.id}`})
+   manzanas.push({id:u.id,poligono,distancia,reservas:edificios,cantidadCasas:cantidadPorDistancia(distancia,u.id),semilla:`1772-${u.id}`})
   }catch(e){omitidas.push({id:u.id,motivo:e.message})}
  }
  return {manzanas,omitidas}
@@ -66,8 +68,8 @@ export function casasDeManzana(m,{metro}){
   agregar(ALA.PATIO,-c.frente/2+ala,principal,c.frente/2-(c.tipo==='L'?0:ala),hasta-(c.tipo==='O'?ala:0))
   agregar(ALA.SOLAR,-c.frente/2,hasta,c.frente/2,c.profundidad)
   const semilla=Math.floor(azarDeSemilla(`${m.id}-${i}`)()*65536),pisos=calles&&m.distancia<300&&c.altura>6?2:1
-  return {paleta:codificarPaleta(c.muro,c.teja),huella,marco:[...o,...eu,w,d,calles,principal*sz],alas,pisos,semilla}
- })
+  return ajustarSolarAReservas({paleta:codificarPaleta(c.muro,c.teja),huella,marco:[...o,...eu,w,d,calles,principal*sz],alas,pisos,semilla},m.reservas??[],{metro})
+ }).filter(Boolean)
 }
 
 /** Sustituye el intervalo [1772,1843), preservando las otras cinco épocas y los índices originales. */

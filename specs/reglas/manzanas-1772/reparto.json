@@ -21,6 +21,7 @@
         ]
       ],
       "distancia": 359.07427969692674,
+      "reservas": [],
       "cantidadCasas": 24,
       "semilla": "1772-U1772-0053",
       "estado": "integrada",
@@ -48,6 +49,7 @@
         ]
       ],
       "distancia": 282.0006762918058,
+      "reservas": [],
       "cantidadCasas": 26,
       "semilla": "1772-U1772-0054",
       "estado": "integrada",
@@ -75,6 +77,7 @@
         ]
       ],
       "distancia": 460.8478489432786,
+      "reservas": [],
       "cantidadCasas": 26,
       "semilla": "1772-U1772-0056",
       "estado": "integrada",
@@ -102,6 +105,7 @@
         ]
       ],
       "distancia": 586.218606695594,
+      "reservas": [],
       "cantidadCasas": 22,
       "semilla": "1772-U1772-0057",
       "estado": "integrada",
@@ -129,6 +133,7 @@
         ]
       ],
       "distancia": 689.9123349633568,
+      "reservas": [],
       "cantidadCasas": 21,
       "semilla": "1772-U1772-0064",
       "estado": "integrada",
@@ -156,6 +161,7 @@
         ]
       ],
       "distancia": 536.3365703448828,
+      "reservas": [],
       "cantidadCasas": 24,
       "semilla": "1772-U1772-0065",
       "estado": "integrada",
@@ -183,10 +189,61 @@
         ]
       ],
       "distancia": 404.53604013860075,
+      "reservas": [],
       "cantidadCasas": 26,
       "semilla": "1772-U1772-0066",
       "estado": "integrada",
       "anteriores": 45,
+      "nuevas": 26
+    },
+    {
+      "id": "U1772-0067",
+      "poligono": [
+        [
+          8688.790896009907,
+          6403.145896828465
+        ],
+        [
+          8736.593406475005,
+          6147.020045756464
+        ],
+        [
+          8987.403159107316,
+          6194.756960989108
+        ],
+        [
+          8935.011874017595,
+          6450.977114347601
+        ]
+      ],
+      "distancia": 277.8729934190109,
+      "reservas": [
+        {
+          "id": "altagracia",
+          "poligono": [
+            [
+              8745.649953264756,
+              6196.304889003162
+            ],
+            [
+              8856.097791066837,
+              6214.886469260099
+            ],
+            [
+              8848.797884537325,
+              6258.2766912537745
+            ],
+            [
+              8738.350046735244,
+              6239.695110996838
+            ]
+          ]
+        }
+      ],
+      "cantidadCasas": 26,
+      "semilla": "1772-U1772-0067",
+      "estado": "integrada",
+      "anteriores": 33,
       "nuevas": 26
     },
     {
@@ -210,6 +267,7 @@
         ]
       ],
       "distancia": 409.40886595162357,
+      "reservas": [],
       "cantidadCasas": 26,
       "semilla": "1772-U1772-0068",
       "estado": "integrada",
@@ -237,6 +295,7 @@
         ]
       ],
       "distancia": 682.8597439371379,
+      "reservas": [],
       "cantidadCasas": 20,
       "semilla": "1772-U1772-0076",
       "estado": "integrada",
@@ -264,6 +323,7 @@
         ]
       ],
       "distancia": 387.5480911081559,
+      "reservas": [],
       "cantidadCasas": 25,
       "semilla": "1772-U1772-0078",
       "estado": "integrada",
@@ -291,6 +351,7 @@
         ]
       ],
       "distancia": 252.83568216347862,
+      "reservas": [],
       "cantidadCasas": 29,
       "semilla": "1772-U1772-0079",
       "estado": "integrada",
@@ -318,11 +379,12 @@
         ]
       ],
       "distancia": 116.91835914506576,
-      "cantidadCasas": 14,
+      "reservas": [],
+      "cantidadCasas": 8,
       "semilla": "1772-U1772-0080",
       "estado": "integrada",
       "anteriores": 38,
-      "nuevas": 14
+      "nuevas": 8
     },
     {
       "id": "U1772-0082",
@@ -345,6 +407,7 @@
         ]
       ],
       "distancia": 253.21741873120274,
+      "reservas": [],
       "cantidadCasas": 28,
       "semilla": "1772-U1772-0082",
       "estado": "integrada",
@@ -372,6 +435,7 @@
         ]
       ],
       "distancia": 392.23137126755785,
+      "reservas": [],
       "cantidadCasas": 26,
       "semilla": "1772-U1772-0083",
       "estado": "integrada",
@@ -399,6 +463,7 @@
         ]
       ],
       "distancia": 987.711478097801,
+      "reservas": [],
       "cantidadCasas": 13,
       "semilla": "1772-U1772-0089",
       "estado": "integrada",
@@ -426,6 +491,7 @@
         ]
       ],
       "distancia": 851.0609646908209,
+      "reservas": [],
       "cantidadCasas": 18,
       "semilla": "1772-U1772-0090",
       "estado": "integrada",
@@ -453,11 +519,104 @@
         ]
       ],
       "distancia": 407.6062309145796,
+      "reservas": [],
       "cantidadCasas": 24,
       "semilla": "1772-U1772-0091",
       "estado": "integrada",
       "anteriores": 42,
       "nuevas": 24
+    },
+    {
+      "id": "U1772-0094",
+      "poligono": [
+        [
+          9050.180245995429,
+          6946.5097111464775
+        ],
+        [
+          9092.551139534518,
+          6761.01935498646
+        ],
+        [
+          9340.482235806814,
+          6810.185513854473
+        ],
+        [
+          9296.485498038877,
+          7003.790002319372
+        ]
+      ],
+      "distancia": 115.23466407515266,
+      "reservas": [
+        {
+          "id": "catedral",
+          "poligono": [
+            [
+              9081.839019212919,
+              6774.070085207372
+            ],
+            [
+              9239.621644644465,
+              6800.615199860139
+            ],
+            [
+              9229.999040582838,
+              6857.811401579075
+            ],
+            [
+              9072.216415151292,
+              6831.266286926309
+            ]
+          ]
+        },
+        {
+          "id": "catedral",
+          "poligono": [
+            [
+              9074.686418868925,
+              6828.639676632626
+            ],
+            [
+              9165.411428492063,
+              6843.903117557967
+            ],
+            [
+              9160.26831252809,
+              6874.4735012353285
+            ],
+            [
+              9069.54330290495,
+              6859.210060309988
+            ]
+          ]
+        },
+        {
+          "id": "palacio-arzobispal",
+          "poligono": [
+            [
+              9062.574906450855,
+              6876.2833392760795
+            ],
+            [
+              9138.705023221575,
+              6889.091357096039
+            ],
+            [
+              9126.826084414462,
+              6959.699081976656
+            ],
+            [
+              9050.695967643742,
+              6946.891064156696
+            ]
+          ]
+        }
+      ],
+      "cantidadCasas": 9,
+      "semilla": "1772-U1772-0094",
+      "estado": "integrada",
+      "anteriores": 22,
+      "nuevas": 8
     },
     {
       "id": "U1772-0095",
@@ -480,11 +639,12 @@
         ]
       ],
       "distancia": 166.97643752288766,
-      "cantidadCasas": 15,
+      "reservas": [],
+      "cantidadCasas": 9,
       "semilla": "1772-U1772-0095",
       "estado": "integrada",
       "anteriores": 44,
-      "nuevas": 15
+      "nuevas": 9
     },
     {
       "id": "U1772-0096",
@@ -507,6 +667,7 @@
         ]
       ],
       "distancia": 280.14082496119437,
+      "reservas": [],
       "cantidadCasas": 26,
       "semilla": "1772-U1772-0096",
       "estado": "integrada",
@@ -534,6 +695,7 @@
         ]
       ],
       "distancia": 468.57098984570496,
+      "reservas": [],
       "cantidadCasas": 23,
       "semilla": "1772-U1772-0106",
       "estado": "integrada",
@@ -561,6 +723,7 @@
         ]
       ],
       "distancia": 277.1007622034131,
+      "reservas": [],
       "cantidadCasas": 27,
       "semilla": "1772-U1772-0109",
       "estado": "integrada",
@@ -588,6 +751,7 @@
         ]
       ],
       "distancia": 356.6369111275655,
+      "reservas": [],
       "cantidadCasas": 28,
       "semilla": "1772-U1772-0110",
       "estado": "integrada",
@@ -615,6 +779,7 @@
         ]
       ],
       "distancia": 552.8280365972082,
+      "reservas": [],
       "cantidadCasas": 21,
       "semilla": "1772-U1772-0120",
       "estado": "integrada",
@@ -642,6 +807,7 @@
         ]
       ],
       "distancia": 466.03833708389527,
+      "reservas": [],
       "cantidadCasas": 23,
       "semilla": "1772-U1772-0121",
       "estado": "integrada",
@@ -669,6 +835,7 @@
         ]
       ],
       "distancia": 404.8681361784699,
+      "reservas": [],
       "cantidadCasas": 25,
       "semilla": "1772-U1772-0122",
       "estado": "integrada",
@@ -696,6 +863,7 @@
         ]
       ],
       "distancia": 384.17426650869913,
+      "reservas": [],
       "cantidadCasas": 24,
       "semilla": "1772-U1772-0123",
       "estado": "integrada",
@@ -723,6 +891,7 @@
         ]
       ],
       "distancia": 408.97119869332823,
+      "reservas": [],
       "cantidadCasas": 26,
       "semilla": "1772-U1772-0124",
       "estado": "integrada",
@@ -750,6 +919,7 @@
         ]
       ],
       "distancia": 656.0218754493493,
+      "reservas": [],
       "cantidadCasas": 22,
       "semilla": "1772-U1772-0137",
       "estado": "integrada",
@@ -777,6 +947,7 @@
         ]
       ],
       "distancia": 583.7848516809242,
+      "reservas": [],
       "cantidadCasas": 21,
       "semilla": "1772-U1772-0138",
       "estado": "integrada",
@@ -804,6 +975,7 @@
         ]
       ],
       "distancia": 537.2174782236983,
+      "reservas": [],
       "cantidadCasas": 24,
       "semilla": "1772-U1772-0139",
       "estado": "integrada",
@@ -831,6 +1003,7 @@
         ]
       ],
       "distancia": 524.6003051031191,
+      "reservas": [],
       "cantidadCasas": 25,
       "semilla": "1772-U1772-0140",
       "estado": "integrada",
@@ -858,6 +1031,7 @@
         ]
       ],
       "distancia": 966.6778765276665,
+      "reservas": [],
       "cantidadCasas": 16,
       "semilla": "1772-U1772-0174",
       "estado": "integrada",
@@ -885,6 +1059,7 @@
         ]
       ],
       "distancia": 253.56928533842716,
+      "reservas": [],
       "cantidadCasas": 30,
       "semilla": "1772-U1772-0198",
       "estado": "integrada",
@@ -912,6 +1087,7 @@
         ]
       ],
       "distancia": 276.7995766089542,
+      "reservas": [],
       "cantidadCasas": 29,
       "semilla": "1772-U1772-0199",
       "estado": "integrada",
@@ -939,11 +1115,162 @@
         ]
       ],
       "distancia": 984.7620884245841,
+      "reservas": [],
       "cantidadCasas": 14,
       "semilla": "1772-U1772-0201",
       "estado": "integrada",
       "anteriores": 46,
       "nuevas": 14
+    },
+    {
+      "id": "U1772-0202",
+      "poligono": [
+        [
+          8479.694514885947,
+          7386.38315686458
+        ],
+        [
+          8522.876784162469,
+          7134.072596777649
+        ],
+        [
+          8790.929755524201,
+          7186.725859009417
+        ],
+        [
+          8740.103794555964,
+          7439.518138561954
+        ]
+      ],
+      "distancia": 279.5098737945689,
+      "reservas": [
+        {
+          "id": "san-francisco",
+          "poligono": [
+            [
+              8790.815838057155,
+              7199.810396020124
+            ],
+            [
+              8769.745653301521,
+              7325.050354956414
+            ],
+            [
+              8719.452441445217,
+              7316.589099660845
+            ],
+            [
+              8740.522626200851,
+              7191.349140724556
+            ]
+          ]
+        }
+      ],
+      "cantidadCasas": 28,
+      "semilla": "1772-U1772-0202",
+      "estado": "integrada",
+      "anteriores": 35,
+      "nuevas": 23
+    },
+    {
+      "id": "U1772-0203",
+      "poligono": [
+        [
+          8525.312169502276,
+          7122.321661977927
+        ],
+        [
+          8586.09092952283,
+          6872.326007553765
+        ],
+        [
+          8839.040995847201,
+          6918.821367702647
+        ],
+        [
+          8793.169625396502,
+          7174.93651938572
+        ]
+      ],
+      "distancia": 168.23902052312297,
+      "reservas": [
+        {
+          "id": "capitolio",
+          "poligono": [
+            [
+              8590.6,
+              6875.2
+            ],
+            [
+              8833.7,
+              6919.9
+            ],
+            [
+              8789.1,
+              7169
+            ],
+            [
+              8531.5,
+              7118.4
+            ]
+          ]
+        }
+      ],
+      "cantidadCasas": 9,
+      "semilla": "1772-U1772-0203",
+      "estado": "integrada",
+      "anteriores": 2,
+      "nuevas": 0
+    },
+    {
+      "id": "U1772-0204",
+      "poligono": [
+        [
+          8588.826750262115,
+          6860.627847353755
+        ],
+        [
+          8630.566472890663,
+          6675.5253386699405
+        ],
+        [
+          8873.082645566325,
+          6723.742136780652
+        ],
+        [
+          8841.12926379944,
+          6907.004179267196
+        ]
+      ],
+      "distancia": 119.75534939906514,
+      "reservas": [
+        {
+          "id": "casa-amarilla",
+          "poligono": [
+            [
+              8774.085288019001,
+              6711.236232457593
+            ],
+            [
+              8886.505408638977,
+              6730.14962664769
+            ],
+            [
+              8869.914711980999,
+              6828.763767542407
+            ],
+            [
+              8757.494591361023,
+              6809.85037335231
+            ]
+          ]
+        }
+      ],
+      "cantidadCasas": 9,
+      "semilla": "1772-U1772-0204",
+      "estado": "integrada",
+      "anteriores": 30,
+      "nuevas": 7
     },
     {
       "id": "U1772-0205",
@@ -966,11 +1293,12 @@
         ]
       ],
       "distancia": 166.35823924551198,
-      "cantidadCasas": 14,
+      "reservas": [],
+      "cantidadCasas": 8,
       "semilla": "1772-U1772-0205",
       "estado": "integrada",
       "anteriores": 43,
-      "nuevas": 14
+      "nuevas": 8
     },
     {
       "id": "U1772-0206",
@@ -993,6 +1321,7 @@
         ]
       ],
       "distancia": 695.3034489177082,
+      "reservas": [],
       "cantidadCasas": 20,
       "semilla": "1772-U1772-0206",
       "estado": "integrada",
@@ -1020,6 +1349,7 @@
         ]
       ],
       "distancia": 540.6503599585994,
+      "reservas": [],
       "cantidadCasas": 22,
       "semilla": "1772-U1772-0207",
       "estado": "integrada",
@@ -1027,8 +1357,8 @@
       "nuevas": 22
     }
   ],
-  "casasSustituidas": 1672,
-  "casasNuevas": 867,
+  "casasSustituidas": 1794,
+  "casasNuevas": 913,
   "omitidas": [
     {
       "id": "U1772-0001",
@@ -1228,19 +1558,19 @@
     },
     {
       "id": "U1772-0050",
-      "motivo": "aprobada/conjunto_especial"
+      "motivo": "conjunto especial sin edificio modelado activo"
     },
     {
       "id": "U1772-0051",
-      "motivo": "aprobada/conjunto_especial"
+      "motivo": "conjunto especial sin edificio modelado activo"
     },
     {
       "id": "U1772-0052",
-      "motivo": "aprobada/conjunto_especial"
+      "motivo": "conjunto especial sin edificio modelado activo"
     },
     {
       "id": "U1772-0055",
-      "motivo": "aprobada/conjunto_especial"
+      "motivo": "conjunto especial sin edificio modelado activo"
     },
     {
       "id": "U1772-0058",
@@ -1267,12 +1597,8 @@
       "motivo": "aprobada/parcial"
     },
     {
-      "id": "U1772-0067",
-      "motivo": "aprobada/conjunto_especial"
-    },
-    {
       "id": "U1772-0069",
-      "motivo": "aprobada/conjunto_especial"
+      "motivo": "conjunto especial sin edificio modelado activo"
     },
     {
       "id": "U1772-0070",
@@ -1300,11 +1626,11 @@
     },
     {
       "id": "U1772-0077",
-      "motivo": "aprobada/conjunto_especial"
+      "motivo": "conjunto especial sin edificio modelado activo"
     },
     {
       "id": "U1772-0081",
-      "motivo": "aprobada/conjunto_especial"
+      "motivo": "conjunto especial sin edificio modelado activo"
     },
     {
       "id": "U1772-0084",
@@ -1333,10 +1659,6 @@
     {
       "id": "U1772-0093",
       "motivo": "pendiente/continua"
-    },
-    {
-      "id": "U1772-0094",
-      "motivo": "aprobada/conjunto_especial"
     },
     {
       "id": "U1772-0097",
@@ -1368,7 +1690,7 @@
     },
     {
       "id": "U1772-0104",
-      "motivo": "aprobada/conjunto_especial"
+      "motivo": "conjunto especial sin edificio modelado activo"
     },
     {
       "id": "U1772-0105",
@@ -1695,18 +2017,6 @@
       "motivo": "pendiente/terreno_libre"
     },
     {
-      "id": "U1772-0202",
-      "motivo": "conjunto histórico: conserva su implantación"
-    },
-    {
-      "id": "U1772-0203",
-      "motivo": "conjunto histórico: conserva su implantación"
-    },
-    {
-      "id": "U1772-0204",
-      "motivo": "conjunto histórico: conserva su implantación"
-    },
-    {
       "id": "U1772-0208",
       "motivo": "pendiente/conjunto_especial"
     },
@@ -1716,7 +2026,7 @@
     },
     {
       "id": "U1772-0210",
-      "motivo": "aprobada/conjunto_especial"
+      "motivo": "conjunto especial sin edificio modelado activo"
     },
     {
       "id": "U1772-0211",
