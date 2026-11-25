@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test'
 import {gunzipSync} from 'node:zlib'
 import {decodificarPak} from '../../src/pak.js'
-test('piloto colonial: balcones de cerca, LOD distante y continuidad y apagado desde 1889',async({page})=>{
+test('piloto colonial: balcones de cerca, LOD distante y continuidad y apagado desde 1911',async({page})=>{
  const respuesta=await page.request.get('/datos/ciudad.pak');expect(respuesta.ok()).toBe(true)
  const bytes=await respuesta.body(),b=bytes[0]===31&&bytes[1]===139?gunzipSync(bytes):bytes
  const datos=decodificarPak(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),{paletas:Uint8Array},()=>{})
@@ -15,7 +15,7 @@ test('piloto colonial: balcones de cerca, LOD distante y continuidad y apagado d
  expect(inicial.unidades).toHaveLength(3);expect(inicial.unidades.some(m=>m.nivel===nivelCercano&&m.balcones>0)).toBe(true)
  await page.evaluate(()=>window.lab.cam.jump({x:0,z:0,dist:2500,yaw:0,pitch:1}))
  await expect.poll(()=>page.evaluate(()=>window.lab.detalleColonial.cuenta.mallas)).toBe(0)
- await page.evaluate(()=>{window.lab.cam.jump(window.lab.detalleColonial.vista);window.lab.lineaDeTiempo.elegir(3)})
+ await page.evaluate(()=>{window.lab.cam.jump(window.lab.detalleColonial.vista);window.lab.lineaDeTiempo.elegir(4)})
  await expect.poll(()=>page.evaluate(()=>window.lab.detalleColonial.cuenta.mallas),{timeout:15000}).toBe(0)
  await page.evaluate(()=>window.lab.lineaDeTiempo.elegir(1))
  await expect.poll(()=>page.evaluate(()=>window.lab.detalleColonial.cuenta.mallas)).toBeGreaterThan(0)

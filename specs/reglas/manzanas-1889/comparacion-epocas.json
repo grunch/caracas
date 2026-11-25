@@ -1,0 +1,127 @@
+{
+  "continuidad": {
+    "epocaAnterior": 1843,
+    "registrosAnteriores": 4210,
+    "registrosConservados": 4210,
+    "casasAnteriores": 4208,
+    "conservadasEnDatos": 4208,
+    "visibles": 4193
+  },
+  "alcance": "Conteos y firmas de huellas, marcos, alas, vuelos, estilos, pisos, paletas y árboles visibles. No sustituye las puertas R1–R12: reglas_mapa.py todavía no existe.",
+  "epocas": [
+    {
+      "anio": 1578,
+      "antes": {
+        "cantidad": 65,
+        "sha256": "12242bb345ff460a147f7e297aea504b121771e229247324fd38223306fdcfb9"
+      },
+      "despues": {
+        "cantidad": 65,
+        "sha256": "12242bb345ff460a147f7e297aea504b121771e229247324fd38223306fdcfb9"
+      },
+      "arbolesAntes": {
+        "cantidad": 27779,
+        "sha256": "74bbb5632ce3e95cce4cfe900909194741f1ed3bf96b641f46b646d25163f356"
+      },
+      "arbolesDespues": {
+        "cantidad": 27779,
+        "sha256": "74bbb5632ce3e95cce4cfe900909194741f1ed3bf96b641f46b646d25163f356"
+      }
+    },
+    {
+      "anio": 1772,
+      "antes": {
+        "cantidad": 3169,
+        "sha256": "680b7c0e6e6ab24c5d0c4e01cf9e1ad32599d3474e70e039c5ed350474b086a1"
+      },
+      "despues": {
+        "cantidad": 3169,
+        "sha256": "680b7c0e6e6ab24c5d0c4e01cf9e1ad32599d3474e70e039c5ed350474b086a1"
+      },
+      "arbolesAntes": {
+        "cantidad": 31582,
+        "sha256": "9ace406be175f439f4365937c227e02f81744e1e5731a9eff9178b3ef1435a1b"
+      },
+      "arbolesDespues": {
+        "cantidad": 31582,
+        "sha256": "9ace406be175f439f4365937c227e02f81744e1e5731a9eff9178b3ef1435a1b"
+      }
+    },
+    {
+      "anio": 1843,
+      "antes": {
+        "cantidad": 4208,
+        "sha256": "ffb20ff13363e5ca63e66420db88010c684206b787ae1e57e3527c8621149d82"
+      },
+      "despues": {
+        "cantidad": 4208,
+        "sha256": "ffb20ff13363e5ca63e66420db88010c684206b787ae1e57e3527c8621149d82"
+      },
+      "arbolesAntes": {
+        "cantidad": 32633,
+        "sha256": "d25a7888c9ca74f640d5498b75c4a1fa6527e694906c22fd84c93090b97fb515"
+      },
+      "arbolesDespues": {
+        "cantidad": 32633,
+        "sha256": "d25a7888c9ca74f640d5498b75c4a1fa6527e694906c22fd84c93090b97fb515"
+      }
+    },
+    {
+      "anio": 1889,
+      "antes": {
+        "cantidad": 11798,
+        "sha256": "ff0f1d6fd050624b8dd50c41c42d5e815aaaa831029ff4681dad900373630de9"
+      },
+      "despues": {
+        "cantidad": 4879,
+        "sha256": "ca1e7084f4fffaa8b2218058a93e4e327a22dc5de3e6f7c022910cac94567a96"
+      },
+      "arbolesAntes": {
+        "cantidad": 27547,
+        "sha256": "5eabd2d0e2bdcebd99725b039801fcf9ec6522ec8dc5d290ff6aa7bb7fde544f"
+      },
+      "arbolesDespues": {
+        "cantidad": 33394,
+        "sha256": "513c25845e7f2b58bc457176eb445d5b0c8845ab7cc5a2c717adf2b1c25a26af"
+      }
+    },
+    {
+      "anio": 1911,
+      "antes": {
+        "cantidad": 14195,
+        "sha256": "a330a8eff30b25e623bdb50a620ebc195d861b5530e685a6cafe600e3759c51e"
+      },
+      "despues": {
+        "cantidad": 14195,
+        "sha256": "a330a8eff30b25e623bdb50a620ebc195d861b5530e685a6cafe600e3759c51e"
+      },
+      "arbolesAntes": {
+        "cantidad": 27740,
+        "sha256": "9943c2e464898122fd547e73eeffc82443ce03272cdeb5a70a1aee97b64fb74a"
+      },
+      "arbolesDespues": {
+        "cantidad": 27740,
+        "sha256": "9943c2e464898122fd547e73eeffc82443ce03272cdeb5a70a1aee97b64fb74a"
+      }
+    },
+    {
+      "anio": 1936,
+      "antes": {
+        "cantidad": 35440,
+        "sha256": "0371a04ddaf35033b9c959876bed024f36a766e2cd63699c04d2409e903b966c"
+      },
+      "despues": {
+        "cantidad": 35440,
+        "sha256": "0371a04ddaf35033b9c959876bed024f36a766e2cd63699c04d2409e903b966c"
+      },
+      "arbolesAntes": {
+        "cantidad": 23101,
+        "sha256": "36447ae8cdc6d69752bc3e3070eda26e2d3547d04511f01b5234f36652c3071e"
+      },
+      "arbolesDespues": {
+        "cantidad": 23101,
+        "sha256": "36447ae8cdc6d69752bc3e3070eda26e2d3547d04511f01b5234f36652c3071e"
+      }
+    }
+  ]
+}

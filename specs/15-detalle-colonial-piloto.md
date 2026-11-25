@@ -67,3 +67,5 @@ Después de la optimización final: **5/5 E2E focalizados de piloto y acabado ap
 ## Continuidad en 1843
 
 T82.5 ([manzanas completas de 1843](16-manzanas-1843.md)) prolonga las mismas casas del piloto hasta 1889. Con los nuevos datos se aceptan también vidas `[1772,1889)` y se reutilizan sus buffers al cambiar a 1843. No se añaden otras cuadras al piloto ni se activa por defecto. Las mediciones anteriores documentan su implementación inicial.
+
+T82.6 prolonga esas mismas casas también durante 1889 (`[1772,1911)`). El piloto reutiliza sus buffers y se apaga desde 1911; véase [la integración de 1889](17-manzanas-1889.md).

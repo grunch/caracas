@@ -1,4 +1,4 @@
-"""Audita continuidad y solapes: informe1772 informe1843 ciudad1843 salida.json."""
+"""Audita continuidad y solapes: informe_anterior informe_nuevo ciudad_nueva salida.json."""
 import sys,json
 from shapely.geometry import Polygon,Point
 from shapely.ops import unary_union
@@ -6,8 +6,8 @@ from manzanas_completas import techos_de_casa
 
 
 def auditar(old,r,d,metro=.5):
-    """Lo que la ampliación de 1843 debe cumplir. Solapes y copas se miden entre todas las unidades nuevas."""
-    porid={m['id']:m for m in r['manzanas']}
+    """Lo que la ampliación debe cumplir. Solapes y copas se miden entre todas las unidades nuevas."""
+    porid={m['id']:m for m in r['manzanas']};ids_anteriores={m['id'] for m in old}
     perimetros=all(all(m.get(k)==porid[m['id']].get(k) for k in ['poligono','limite','huecos','semilla','cantidadCasas']) for m in old)
     sin_vida=lambda a:{k:v for k,v in a.items() if k not in ['nace','muere']}
     arboles=all([sin_vida(a) for a in m['arboles']]==[sin_vida(a) for a in porid[m['id']]['arboles']] for m in old)
@@ -15,7 +15,7 @@ def auditar(old,r,d,metro=.5):
     marcos={m[0]:m[1:] for m in d['marcos']};cursor=len(d['techos'])-r['casasNuevas'];fuera=solapes=0;sin_arboles=[]
     huellas,tejados,nuevas=[],[],[]
     for m in r['manzanas']:
-        if m.get('origen')==1772:continue
+        if m['id'] in ids_anteriores:continue
         nuevas.append(m)
         limite=Polygon(m.get('limite',m['poligono']),m.get('huecos',[])).buffer(0)
         for i in range(cursor,cursor+m['nuevas']):
@@ -34,7 +34,7 @@ def auditar(old,r,d,metro=.5):
 
 if __name__=='__main__':
     if len(sys.argv)!=5:
-        raise SystemExit('Uso: auditar_continuidad_manzanas.py informe1772 informe1843 ciudad1843 salida.json')
+        raise SystemExit('Uso: auditar_continuidad_manzanas.py informe_anterior informe_nuevo ciudad_nueva salida.json')
     res=auditar(json.load(open(sys.argv[1]))['manzanas'],json.load(open(sys.argv[2])),json.load(open(sys.argv[3])))
     print(json.dumps(res,ensure_ascii=False,indent=2));json.dump(res,open(sys.argv[4],'w'),ensure_ascii=False,indent=2)
     assert res['perimetrosYSemillas1772Exactos'] and res['arboles1772Exactos'] and not res['casasNuevasFueraDeManzana'] and not res['casasNuevasSobre1772'] and not res['copasNuevasSobreTejados'] and not res['manzanasNuevasSinArboles'] and res['solapeEntreSolaresNuevosM2']<.01
