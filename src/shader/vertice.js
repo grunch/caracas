@@ -13,7 +13,7 @@ export const VERTICE_COMUN = /* glsl */ `
   varying vec3 vMundo; varying float vTecho; varying float vBase; varying vec2 vPared;
   // lo que es igual en toda la casa (o en toda la pared) va sin interpolar: interpolado, la semilla
   // y el largo tiemblan en la última cifra y azar() lo vuelve ruido de píxel a píxel
-  flat varying vec4 vInfo; flat varying float vLargo; flat varying float vAltoPiso; flat varying float vCubierta; flat varying float vLuz;
+  flat varying float vPaleta; flat varying vec4 vInfo; flat varying float vLargo; flat varying float vAltoPiso; flat varying float vCubierta; flat varying float vLuz;
   flat varying float vPretil; // cuánto sube el pretil sobre esta pared en la época que rige
   flat varying float vAlzada; // cuánto se levantó la casa (0 acostada en la hoja … 1 en pie)
   varying vec3 vFaldon; // del techo: s, t y el largo del faldón (src/shader/techo.js)
@@ -45,6 +45,8 @@ export const VERTICE_OLA = /* glsl */ `
   // (src/shader/techo.js) se ajustaron con un sol más alto: con el de ahora, más bajo, se llevan a esa escala
   vLuz = ${LUZ_TECHO[0]} + ${LUZ_TECHO[1]} * dot(normalize(normal), uSol);
   vInfo = aInfo;
+  vPaleta = floor(aInfo.z / 256.0);
+  vInfo.z = mod(aInfo.z,256.0);
   vPretil = 0.0;
   // la casa cambia con las épocas (su historia, tools/geo/estilos.py): a mitad del frente de la ola toma
   // el estilo y los pisos de la época nueva, y la altura (hecha con aInfo.w pisos) va de unos a otros

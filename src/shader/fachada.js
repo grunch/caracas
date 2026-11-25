@@ -37,6 +37,7 @@ export const GLSL_FACHADA = /* glsl */ `
   bool esDeZinc(float semilla) { return azar(semilla * 8.3) > 0.5; }
 
   vec3 paredBase(float semilla, float estilo) {
+    if(vPaleta>0.5)return muroDeManzana(floor((vPaleta-1.0)/6.0));
     if (es(estilo, ESTILO_RANCHO)) return esDeZinc(semilla) ? vec3(0.55, 0.57, 0.58) : vec3(0.58, 0.48, 0.38);
     if (es(estilo, ESTILO_MODERNO)) return mix(vec3(0.92, 0.91, 0.88), vec3(0.78, 0.77, 0.74), azar(semilla * 2.9));
     if (es(estilo, ESTILO_ECLECTICO)) return mix(vec3(0.90, 0.85, 0.74), vec3(0.76, 0.73, 0.68), azar(semilla * 3.7)); // crema o piedra

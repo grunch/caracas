@@ -244,7 +244,7 @@ const primerasCasasPedidas = new Promise((ok) => { primerasCasas = ok })
 // ?sintrabajador las levanta en este hilo (para comparar, o si los workers dan problemas)
 const crearTrabajador = sinTrabajadores ? null
   : () => new Worker(new URL('./ciudad-trabajador.js', import.meta.url), { type: 'module' })
-const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array }, pedirDato).then((datos) => {
+const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array, paletas: Uint8Array }, pedirDato).then((datos) => {
   // donde hay un hito modelado a mano, la casa genérica de ese lugar no nace (src/hitos/suprimir.js)
   datosCiudad = { ...datos, vida: suprimirTechos(datos, zonasDeSupresion(HITOS)) }
   return pedirCiudad({

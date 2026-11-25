@@ -39,6 +39,12 @@ describe('recortarCiudad', () => {
     expect([...r.historia]).toEqual([16, 16, 16, 16, 16, 16, 18, 18, 18, 18, 18, 18])
   })
 
+  test('las paletas de los techos que quedan, para que la muestra pinte las casas nuevas', () => {
+    const r = recortarCiudad({ ...partes, paletas: Uint8Array.from([23, 5, 36]) }, [0, 0, 500, 500])
+    expect([...r.paletas]).toEqual([23, 36])
+    expect(recortarCiudad(partes, [0, 0, 500, 500]).paletas).toBeUndefined()
+  })
+
   test('los vuelos de los techos que quedan (T33j.6f)', () => {
     const r = recortarCiudad({ ...partes, vuelos: Uint8Array.from([30, 255, 12]) }, [0, 0, 500, 500])
     expect([...r.vuelos]).toEqual([30, 12])

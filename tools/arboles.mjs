@@ -12,6 +12,8 @@ import { readFile, writeFile } from 'node:fs/promises'
 import { gunzipSync } from 'node:zlib'
 import path from 'node:path'
 import sharp from 'sharp'
+import {partesDeCiudad} from './empacar-lib.mjs'
+import {arbolesParaManzanas} from './manzanas-arboles-lib.mjs'
 import { decodificarPak } from '../src/pak.js'
 import {
   codificarArboles, naceArbol, esDePlaza, naceEnPlaza, JARDINES_DESDE, casasQueMueren, techosQueQuedan, bajoUnTecho, desdeEnCrece, desdeDelEntorno,
@@ -49,12 +51,14 @@ const crece = await siHay(Promise.all([
   leer('public/datos/crece.json').then((b) => JSON.parse(b)),
   sharp(path.resolve(RAIZ, 'public/plano/crece.png')).raw().toBuffer({ resolveWithObject: true }),
 ]), 'crece')
-const ciudad = await siHay(leer('public/datos/ciudad.pak').then((b) => {
+const ciudadNueva = await siHay(leer('public/datos/ciudad.pak').then((b) => {
   const crudo = gunzipSync(b)
   return decodificarPak(crudo.buffer.slice(crudo.byteOffset, crudo.byteOffset + crudo.byteLength),
-    { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array })
+    { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array, paletas: Uint8Array })
 }), 'ciudad.pak')
 
+const conManzanas=process.argv.includes('--manzanas-1772')
+const ciudad=conManzanas?Object.fromEntries(Object.entries(partesDeCiudad(JSON.parse(await leer('fuentes/derivados/epocas/ciudad-estilos.json')))).map(([k,v])=>[k,v.datos])):ciudadNueva
 const grilla = crece && {
   datos: crece[1].data, cols: crece[1].info.width, rows: crece[1].info.height, canales: crece[1].info.channels,
   celdaPx: (crece[0].celda_m ?? 8) / metro, etapas: ETAPAS,
@@ -94,7 +98,9 @@ const monte = grilla && grilla.canales >= 3 ? arbolesSilvestres({
 // huella de su casa, así que no pasan por el descarte de "bajo un techo"
 const dePatio = ciudad ? arbolesDePatio(ciudad, metro) : []
 
-const todos = [...conNace, ...dePatio, ...monte]
+const originales = [...conNace, ...dePatio, ...monte]
+const manzanas=conManzanas?JSON.parse(await leer('fuentes/derivados/epocas/manzanas-1772-informe.json')).manzanas.filter(m=>m.estado==='integrada'):[]
+const todos=conManzanas?arbolesParaManzanas(originales,ciudadNueva?arbolesDePatio(ciudadNueva,metro):[],manzanas):originales
 const salida = path.resolve(RAIZ, 'public/datos/arboles.bin')
 await writeFile(salida, codificarArboles(todos, metro))
 const porEpoca = (lista, campo) => Array.from({ length: ETAPAS }, (_, e) => lista.filter((a) => a[campo] === e).length).join(' · ')

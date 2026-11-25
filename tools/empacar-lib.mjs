@@ -8,7 +8,7 @@ export const CAMPOS_MARCO = 11 // techo, ox, oy, eux, euy, ancho, fondo, calles,
 export const CAMPOS_ALA = 5 // tipo, u0, v0, u1, v1
 const TIPOS_DE_ALA = 9 // tools/geo/alas.py: patio, solar, frente, cruzada, laterales, esquinas, fondo
 
-export function partesDeCiudad({ vertices, techos, vida, historia, marcos, alas, vuelos }) {
+export function partesDeCiudad({ vertices, techos, vida, historia, marcos, alas, vuelos, paletas }) {
   if (vertices.length % 2 !== 0) throw new Error('ciudad: los vértices deben venir de a pares (px, py)')
   const nVertices = vertices.length / 2
   const datosTechos = new Uint32Array(techos.length * 4)
@@ -26,6 +26,10 @@ export function partesDeCiudad({ vertices, techos, vida, historia, marcos, alas,
   if (historia !== undefined) partes.historia = { datos: empacarHistorias(historia, techos.length), registro: CUANTAS_EPOCAS }
   if (marcos?.length) Object.assign(partes, empacarAlas(marcos, alas ?? [], techos.length))
   if (vuelos !== undefined) partes.vuelos = { datos: empacarVuelos(vuelos, techos.length), registro: 1 }
+  if(paletas !== undefined){
+    if(paletas.length!==techos.length||paletas.some(v=>!Number.isInteger(v)||v<0||v>36))throw new Error('ciudad: paletas inválidas')
+    partes.paletas={datos:Uint8Array.from(paletas),registro:1}
+  }
   return partes
 }
 

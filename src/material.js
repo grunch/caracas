@@ -19,6 +19,7 @@ import { GLSL_PAPEL } from './shader/papel.js'
 import { GLSL_CALLES, uniformsCalles } from './shader/calles.js'
 import { GLSL_FACHADA } from './shader/fachada.js'
 import { GLSL_TECHO } from './shader/techo.js'
+import { GLSL_PALETA_MANZANA } from './manzanas/paleta.js'
 import { CUBIERTA } from './techos.js'
 import { GLSL_HOY } from './shader/hoy.js'
 import { VERTICE_COMUN, VERTICE_OLA } from './shader/vertice.js'
@@ -32,7 +33,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   varying vec3 vMundo; varying float vTecho; varying float vBase; varying vec2 vPared;
   // lo que es igual en toda la casa (o en toda la pared) va sin interpolar: interpolado, la semilla
   // y el largo tiemblan en la última cifra y azar() lo vuelve ruido de píxel a píxel
-  flat varying vec4 vInfo; flat varying float vLargo; flat varying float vAltoPiso; flat varying float vCubierta; flat varying float vLuz;
+  flat varying float vPaleta; flat varying vec4 vInfo; flat varying float vLargo; flat varying float vAltoPiso; flat varying float vCubierta; flat varying float vLuz;
   flat varying float vPretil; // cuánto sube el pretil sobre esta pared en la época que rige
   flat varying float vAlzada; // cuánto se levantó la casa (0 acostada en la hoja … 1 en pie)
   varying vec3 vFaldon; // del techo: s, t y el largo del faldón (src/shader/techo.js)
@@ -45,6 +46,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   ${GLSL_TERRAZAS_TAPADAS}
   ${GLSL_CRECE}
   ${GLSL_PLANO}
+  ${GLSL_PALETA_MANZANA}
   ${GLSL_FACHADA}
   ${GLSL_TECHO}
   ${GLSL_CALLES}
@@ -123,6 +125,7 @@ const FRAGMENTO_LUZ = /* glsl */ `
   // el papel del grabado casi no cambia con la cara: el volumen lo dan el rayado y el contorno
   vec3 papelParejo = mix(outgoingLight, diffuseColor.rgb * LUZ_PAREJA, 0.65);
   vec3 conRaya = mix(papelParejo, TINTA_SOMBRA, raya);
+  if(vPaleta>0.5 && piso<0.5) conSol=iluminarManzana(diffuseColor.rgb,nMundo,sol);
   outgoingLight = mix(conRaya, conSol, uColor);
   #include <opaque_fragment>
   // a qué casa pertenece este techo, en el alfa (nadie más lo usa: nada es transparente): el contorno
