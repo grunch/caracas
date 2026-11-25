@@ -32,7 +32,7 @@
   "max_desvio_m": 1794.48
  },
  "calce_identidad": {
-  "rms_loo_m": 12.38,
+  "rms_loo_m": 12.46,
   "p90_loo_m": 18.59
  },
  "metodo_loo": "calce_desplegado",
@@ -110,7 +110,7 @@
    "sector": "S1843-33",
    "anclas": 8,
    "mediana_loo_m": 7.67,
-   "max_loo_m": 12.15,
+   "max_loo_m": 12.71,
    "mediana_desvio_m": 4.04,
    "controlado": true,
    "bajo_umbral": true
@@ -332,7 +332,7 @@
    "sector": "S1843-33",
    "en_calce": true,
    "desvio_m": 7.54,
-   "loo_m": 9.65
+   "loo_m": 12.59
   },
   {
    "id": "E1843-035",
@@ -346,7 +346,7 @@
    "sector": "S1843-33",
    "en_calce": true,
    "desvio_m": 5.66,
-   "loo_m": 12.15
+   "loo_m": 11.33
   },
   {
    "id": "E1843-039",
@@ -416,7 +416,7 @@
    "sector": "S1843-33",
    "en_calce": true,
    "desvio_m": 8.91,
-   "loo_m": 9.86
+   "loo_m": 12.71
   },
   {
    "id": "E1843-051",

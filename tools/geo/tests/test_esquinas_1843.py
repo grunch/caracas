@@ -174,8 +174,26 @@ def test_el_loo_es_el_del_calce_desplegado_cuando_las_anclas_son_sus_gcp():
     from esquinas_1843 import medir
     anclas = _rejilla(n=4)
     semilla = {'px': 50.0, 'py': 50.0, 'x36': 50.0, 'y36': 50.0}
-    desplegado = [{'px': a['px'], 'py': a['py'], 'x36': a['x36'], 'y36': a['y36']} for a in anclas] + [semilla]
+    desplegado = [{'px': a['px'], 'py': a['py'], 'x36': a['x36'], 'y36': a['y36'], 'id': a['id']} for a in anclas] + [semilla]
     assert medir(anclas, desplegado, SECTORES, metro=0.5)['metodo_loo'] == 'calce_desplegado'
     corrido = [{**g, 'x36': g['x36'] + 30.0} for g in desplegado]
-    corrido = [{**g, 'px': g['px'] + 1000.0} for g in corrido]   # otras GCP: las anclas no son parte de él
+    corrido = [{**{k: v for k, v in g.items() if k != 'id'}, 'px': g['px'] + 1000.0} for g in corrido]   # otras GCP: las anclas no son parte de él
     assert medir(anclas, corrido, SECTORES, metro=0.5)['metodo_loo'] == 'solo_anclas'
+
+
+def test_el_loo_de_un_ancla_sobre_una_semilla_usa_su_propio_destino_sin_la_semilla():
+    from esquinas_1843 import medir
+    anclas = [{**a, 'id': f'E1843-{k:03d}'} for k, a in enumerate(_rejilla(n=4))]
+    gcps = [{'px': a['px'], 'py': a['py'], 'x36': a['x36'], 'y36': a['y36'], 'id': a['id']} for a in anclas[1:]]
+    gcps.append({'px': anclas[0]['px'] + 2, 'py': anclas[0]['py'], 'x36': anclas[0]['x36'] + 20.0, 'y36': anclas[0]['y36'], 'manual': True})  # semilla corrida
+    informe = medir(anclas, gcps, SECTORES, metro=0.5)
+    assert informe['metodo_loo'] == 'calce_desplegado'
+    primera = [d for d in informe['detalle'] if d['id'] == 'E1843-000'][0]
+    assert primera['loo_m'] < 1.0   # sin la semilla, la rejilla predice bien su destino; con la semilla serían ~10 m
+
+
+def test_una_gcp_cercana_con_otro_destino_no_pasa_por_el_ancla():
+    from esquinas_1843 import medir
+    anclas = [{**a, 'id': f'E1843-{k:03d}'} for k, a in enumerate(_rejilla(n=4))]
+    gcps = [{'px': a['px'] + 1, 'py': a['py'], 'x36': a['x36'] + 500.0, 'y36': a['y36']} for a in anclas]   # sin id
+    assert medir(anclas, gcps, SECTORES, metro=0.5)['metodo_loo'] == 'solo_anclas'

@@ -15,7 +15,7 @@ Fecha: 24-11-2026. Base: [B1843-001](B1843-001.json) (`main` f00b74d, `datos-202
 | Medida | Calce publicado (correlación) | Calce por identidad |
 |---|---|---|
 | Desvío mediano a las 64 anclas | **115,4 m** | 4,4 m (residuo) |
-| Error dejando uno fuera (RMS) | 13,3 m declarado sobre sus propios GCP | 12,4 m en las anclas, quitando cada una del calce desplegado (semillas incluidas) |
+| Error dejando uno fuera (RMS) | 13,3 m declarado sobre sus propios GCP | 12,5 m en las anclas: cada una se quita del calce desplegado (o la semilla sobre la que cae) y se mide en su propio destino |
 
 El calce publicado se aparta por cuadras fuera del núcleo: en S1843-33, alrededor de la plaza, 16 m; en el sur (S1843-52/53/54), 205–282 m, casi siempre hacia el norte. Es el defecto de 1772 (I1772-010): **I1843-001** ([incidencias.json](incidencias.json)). Su residuo LOO declarado (13,3 m) no lo detectaba porque mide la coherencia de los puntos de la correlación entre sí, no su identidad.
 

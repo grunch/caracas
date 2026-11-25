@@ -121,21 +121,28 @@ def sector_de(px, py, sectores):
 
 
 def _loo_desplegado(anclas, gcps, metro, suavizado):
-    """Error dejando uno fuera de cada ancla en el calce desplegado (todas sus GCP, semillas incluidas), si las
-    anclas son GCP de ese calce; si no (el calce aún no las usa), None."""
-    from calce import residuos_loo_rapidos
+    """Error dejando uno fuera de cada ancla en el calce desplegado: se ajusta el TPS con todas sus GCP menos la del
+    ancla (la del mismo `id`; si el ancla cae sobre una semilla, que config_por_identidad no repite, esa semilla) y
+    se mide en el destino del ancla. None si alguna ancla no es GCP de ese calce (el calce aún no las usa)."""
+    from calce import Calce
 
-    if len(gcps) < 4:
+    if len(gcps) < 5:
         return None
+    por_id = {g['id']: k for k, g in enumerate(gcps) if g.get('id')}
     viejo = np.array([[g['px'], g['py']] for g in gcps], float)
-    base = np.array([[g['x36'], g['y36']] for g in gcps], float)
-    loo = residuos_loo_rapidos(viejo, base, suavizado) * metro
-    valores = []
-    for a in anclas:   # la GCP del ancla, o la semilla sobre la que cae (config_por_identidad no la repite)
-        d = np.hypot(viejo[:, 0] - a['px'], viejo[:, 1] - a['py'])
-        k = int(np.argmin(d))
-        valores.append(float(loo[k]) if d[k] < TOLERANCIA_SEMILLA_PX else None)
-    return None if any(v is None for v in valores) else dict(zip([a['id'] for a in anclas], valores))
+    salida = {}
+    for a in anclas:
+        k = por_id.get(a['id'])
+        if k is None:   # ¿sobre una semilla (GCP manual sin id: las de la plaza)?
+            d = np.hypot(viejo[:, 0] - a['px'], viejo[:, 1] - a['py'])
+            cerca = [j for j in np.argsort(d) if d[j] < TOLERANCIA_SEMILLA_PX and gcps[j].get('manual') and not gcps[j].get('id')]
+            if not cerca:
+                return None
+            k = int(cerca[0])
+        resto = gcps[:k] + gcps[k + 1:]
+        x, y = Calce.ajustar(resto, metro, suavizado).a_1936(np.array([a['px']], float), np.array([a['py']], float))
+        salida[a['id']] = float(np.hypot(np.asarray(x)[0] - a['x36'], np.asarray(y)[0] - a['y36'])) * metro
+    return salida
 
 
 def medir(anclas, gcps_vigentes, sectores, metro, suavizado=0.0):
