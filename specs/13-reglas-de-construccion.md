@@ -53,8 +53,8 @@ De la investigación F0 (25-11-2026, [`reglas/investigacion.json`](reglas/invest
 | Habitantes por casa | — | 6,65 (de 6,0 a 7,5 según la parroquia) | 6,6–7,6 *inferido* | 6,8–7,0 | — | — |
 | Solares por manzana | 4 (en 23 de 25 manzanas: 92 solares; la de la plaza y la de San Francisco, sin solares) | partidos en medios y cuartos | — | — | — | — |
 | Casas por manzana | 0–4 (una por solar; 5 o 6 manzanas vacías) | **~20 de media, de 2 a 43** (parroquia Catedral; en el centro, casas grandes y no lo más denso) | sin muestra: la de 1772 *inferido* | — | — | el plano |
-| Frente de casa | el solar entero: 70 varas (58,5 m) | **9–11 m de media**, de 3,5 a 33 m (las casas grandes del centro, 23–33 m) | la de 1772 *inferido* | — | — | el plano |
-| Fondo de lote | 58,5 m | 43–63 m (fondos de 75 varas comunes) | la de 1772 *inferido* | — | — | el plano |
+| Frente de casa | sin fuente: la casa no ocupa todo el frente del solar (70 varas, 58,5 m) | **9–11 m de media**, de 3,5 a 33 m (las casas grandes del centro, 23–33 m) | la de 1772 *inferido* | — | — | el plano |
+| Fondo de lote | el solar: 58,5 m | 43–63 m (fondos de 75 varas comunes) | la de 1772 *inferido* | — | — | el plano |
 | Ancho de calle entre fachadas | 6,7 m *inferido* | 6,7–8,4 m *inferido* (de 1843) | **8–10 varas: 6,7–8,4 m** | 6,7 m en el damero viejo; 12 varas (10 m) en las calles abiertas desde 1871 | 6,7 m en el damero viejo; 14,6–17,4 m en las nuevas (Ordenanza de 1910) | el plano |
 | Pisos | 1 (tapia y techo de cogollo; 3 o 4 casas de alto) | 1 la mayoría; alto en algunas casas de la élite | 1 casi todas | casa de patio colonial todavía | — | el del plano |
 
