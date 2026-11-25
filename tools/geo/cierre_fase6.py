@@ -26,7 +26,7 @@ from shapely.geometry import LineString, Point, Polygon
 from shapely.ops import unary_union
 from shapely.strtree import STRtree
 
-from cierre_fase3 import METRO, casas_de_epoca, corredores
+from cierre_fase3 import EPOCA_1772, METRO, casas_de_epoca, corredores
 from cierre_fase4 import visibles
 from cierre_fase5 import _estaciones, _primero, plantas_en_pie
 from fachadas import ALCANCE_M, ESTACIONES_MINIMAS, GIRO_MAXIMO_GRADOS, de_su_manzana, manzanas_de
@@ -197,7 +197,9 @@ def huellas_sha256(ciudad):
 def cubiertas_de_estos_datos(cubiertas, datos):
     """None si las cubiertas salieron de estos datos ({clave: sha256} de PROCEDENCIA: el pak, el relieve y las huellas
     de la ciudad medida); si no, el motivo: unas cubiertas de otros datos medirían techos viejos bajo el sha de la
-    ciudad nueva."""
+    ciudad nueva; y si son de otra época que 1772 (tools/cubiertas.mjs --epoca), sus techos no son los que se miden."""
+    if cubiertas.get('epoca', EPOCA_1772) != EPOCA_1772:
+        return f"las cubiertas son de la época {cubiertas['epoca']}, no de 1772 (época {EPOCA_1772})"
     for clave, que in PROCEDENCIA:
         if cubiertas.get(clave) != datos[clave]:
             return f'las cubiertas no salieron de {que} que se mide ({clave} distinto o ausente)'
