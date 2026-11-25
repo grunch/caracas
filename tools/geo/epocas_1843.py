@@ -70,6 +70,8 @@ def _sin(casa, libres, metro):
         casa = max(casa.geoms, key=lambda g: g.area)
     if casa.is_empty or casa.geom_type != 'Polygon' or casa.area * metro ** 2 < AREA_MINIMA_M2:
         return None
+    if casa.interiors:
+        return None   # un lote entero dentro de la casa: el techo solo guarda el contorno y lo volvería a tapar
     return casa
 
 

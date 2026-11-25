@@ -75,3 +75,14 @@ def test_las_casas_propias_no_pisan_los_lotes_especiales_de_su_manzana():
     for t in nueva['techos']:
         casa = Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])])
         assert casa.intersection(lote).area < 1e-6
+
+
+def test_un_lote_entero_dentro_de_una_casa_no_se_rellena():
+    unidades = [{'id': 'B', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 30)},
+                {'id': 'L', 'ocupacion': 'lote_especial', 'estado': 'aprobada', 'poligono': _cuadrado(10, 10, 8)}]
+    nueva, _ = agregar_casas(_ciudad([], []), unidades, metro=0.5, epoca=2)
+    v = nueva['vertices']
+    lote = Polygon(_cuadrado(10, 10, 8))
+    for t in nueva['techos']:
+        casa = Polygon([(v[2 * i], v[2 * i + 1]) for i in range(t[0], t[0] + t[1])])
+        assert casa.intersection(lote).area < 1e-6
