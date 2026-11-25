@@ -91,3 +91,20 @@ def test_las_casas_nacidas_en_1843_fuera_de_toda_manzana_pasan_a_la_epoca_siguie
     assert len(nueva['techos']) == len(nueva['esquinas']) == len(nueva['vuelos']) == 4
     assert nueva['vertices'][2 * nueva['techos'][3][0]] == 300   # la de 1772 conserva su huella
     assert movidas == 2 and ciudad == copia
+
+
+def test_las_casas_nacidas_en_1843_dentro_de_un_lote_o_plaza_pasan_a_la_epoca_siguiente():
+    from epocas_1843 import en_lotes_libres
+    unidades = [{'id': 'A', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 200)},
+                {'id': 'L', 'ocupacion': 'lote_especial', 'estado': 'aprobada', 'poligono': _cuadrado(0, 0, 80)},
+                {'id': 'R', 'ocupacion': 'rayada', 'estado': 'aprobada', 'poligono': _cuadrado(10, 10, 20)},
+                {'id': 'P', 'ocupacion': 'plaza', 'estado': 'aprobada', 'poligono': _cuadrado(300, 0, 50)}]
+    casas = [_cuadrado(40, 40, 10), _cuadrado(15, 15, 5), _cuadrado(150, 150, 10), _cuadrado(310, 10, 10), _cuadrado(50, 50, 5)]
+    ciudad = _ciudad(casas, [[2, 0], [2, 0], [2, 0], [2, 4], [1, 0]])
+
+    nueva, movidas = en_lotes_libres(ciudad, unidades, epoca=2)
+
+    assert nueva['vida'] == [[3, 0], [2, 0], [2, 0], [3, 4], [1, 0]]   # lote, manzana dentro del lote, manzana, plaza, de 1772
+    sin_vida, _ = en_lotes_libres(_ciudad([_cuadrado(40, 40, 10)], [[2, 3]]), unidades, epoca=2)
+    assert sin_vida['techos'] == [] and sin_vida['vida'] == []
+    assert movidas == 2

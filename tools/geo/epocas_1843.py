@@ -181,3 +181,25 @@ def quitar_techos(ciudad, quitar):
     if 'vuelos' in ciudad:
         salida['vuelos'] = [ciudad['vuelos'][k] for k in quedan]
     return salida
+
+
+def en_lotes_libres(ciudad, unidades, epoca):
+    """(ciudad nueva, cuántas) con las casas que nacen en `epoca` dentro de un lote especial, plaza o terreno libre
+    aprobado (la unidad más chica que las contiene) naciendo en la época siguiente (T81.4b): el plano los pinta
+    en blanco. Si morían en esa época siguiente, se quitan. Las que nacían antes no se tocan (límite de la fase 4)."""
+    figuras = [(u, Polygon(u['poligono']).buffer(0)) for u in unidades
+               if u['estado'] == 'aprobada' and len(u['poligono']) >= 3 and u['ocupacion'] in UNIDADES]
+    arbol = STRtree([f for _, f in figuras]) if figuras else None
+    vida, movidas, quitar = [list(v) for v in ciudad['vida']], 0, set()
+    for k, c in enumerate(_centros(ciudad)):
+        if vida[k][0] != epoca or arbol is None:
+            continue
+        contienen = [figuras[i] for i in arbol.query(c, predicate='within')]
+        if not contienen:
+            continue
+        u, _ = min(contienen, key=lambda uf: uf[1].area)
+        if u['ocupacion'] not in {'lote_especial', 'plaza', 'terreno_libre'}:
+            continue
+        movidas += 1
+        quitar |= _correr(vida, k, epoca)
+    return quitar_techos({**ciudad, 'vida': vida}, quitar), movidas
