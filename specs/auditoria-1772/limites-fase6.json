@@ -298,6 +298,16 @@
    "giro_al_decidir": 88.1,
    "clase": "esquina_u_oblicua",
    "motivo": "Lote de esquina, o con su calle de 1772 muy oblicua a los lados de la cuadra: el marco del lote no se pudo llevar a la calle donde la casa es fachada sin pisar a la vecina."
+  },
+  {
+   "techo_al_decidir": 24655,
+   "centro": [
+    9471.83,
+    9045.9
+   ],
+   "giro_al_decidir": 87.7,
+   "clase": "casa_de_1936",
+   "motivo": "Casa de 1936 (lote moderno) que vive desde 1772 porque su huella cae en lo edificado de 1772 y, con el calce de 1843 por identidad (T81, I1843-001), también en lo rayado de 1843: su cumbrera sigue la calle de 1936 de su frente, no la de 1772. Decisión por delegación del responsable, 24-11-2026 (specs/11, decisión 5); se revisa con la ocupación de 1843 (fase 4 de T81)."
   }
  ],
  "cruces": [

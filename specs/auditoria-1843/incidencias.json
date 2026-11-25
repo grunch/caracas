@@ -1,0 +1,34 @@
+{
+ "alcance": "Incidencias de la auditoría de 1843 (specs/11; ficha como specs/08 § 1C).",
+ "incidencias": [
+  {
+   "id": "I1843-001",
+   "categoria": "error de calce o datos publicados",
+   "prioridad": "P0",
+   "estado": "corregido pendiente de verificar",
+   "sectores": [
+    "S1843-22",
+    "S1843-23",
+    "S1843-32",
+    "S1843-33",
+    "S1843-34",
+    "S1843-42",
+    "S1843-43",
+    "S1843-44",
+    "S1843-52",
+    "S1843-53",
+    "S1843-54"
+   ],
+   "diferencia": "El calce publicado (TPS por correlación) se aparta de las 64 esquinas identificadas por número y nombre una mediana de 115.43 m (máximo sin homónimos ~310 m); en el sur desplaza la ciudad hasta 260 m al norte. Cerca de la plaza (S1843-33) el desvío mediano es 16.38 m.",
+   "diagnostico": "Confirmado: la correlación de calles se engancha a la calle vecina en el damero periódico, como en 1772 (I1772-010, specs/auditoria-1772/controles-damero.md).",
+   "evidencia": [
+    "specs/auditoria-1843/controles-calce-correlacion.json",
+    "specs/auditoria-1843/calce-identidad.json",
+    "specs/auditoria-1843/esquinas-original.json",
+    "specs/auditoria-1843/leyenda.json"
+   ],
+   "resolucion": "T81.2a: calce por identidad (etapas de correlación vacías, 53 anclas + 4 semillas); datos regenerados. Verificar sobre el sitio en la fase 8.",
+   "pipeline": "tools/geo/gcp/calce-1843-nypl-jesurun-facsimil-muller-stapler.json → calce.py → epocas.py"
+  }
+ ]
+}

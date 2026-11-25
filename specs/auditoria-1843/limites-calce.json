@@ -1,0 +1,37 @@
+{
+ "alcance": "Límites documentados del calce de 1843 (specs/11, decisión 2; como specs/auditoria-1772/limites-calce.json). Un límite deja de valer si cambia el calce.",
+ "calce": {
+  "archivo": "tools/geo/gcp/calce-1843-nypl-jesurun-facsimil-muller-stapler.json",
+  "sha256": "607bcb53e64b204dff1ed5df30d75fca2e38f797297206e4157c096bd15e01c1"
+ },
+ "limites": [
+  {
+   "sector": "S1843-42",
+   "fecha": "2026-11-24",
+   "decision": "por delegación del responsable",
+   "anclas": 3,
+   "mediana_loo_m": 16.88,
+   "motivo": "Tres anclas en el borde suroeste de la ciudad (riberas del Guaire y quebrada); las demás esquinas numeradas del sector no tienen nombre único en 1936. La mediana supera los 15 m sin ampliar la tolerancia.",
+   "metodo_loo": "calce_desplegado"
+  }
+ ],
+ "sin_anclas": {
+  "sectores": [
+   "S1843-11",
+   "S1843-12",
+   "S1843-13",
+   "S1843-14",
+   "S1843-15",
+   "S1843-21",
+   "S1843-24",
+   "S1843-25",
+   "S1843-31",
+   "S1843-35",
+   "S1843-41",
+   "S1843-45",
+   "S1843-51",
+   "S1843-55"
+  ],
+  "motivo": "Sin esquinas numeradas con pareja única en 1936: cerros, campo y bordes del marco, o esquinas cuyo nombre no sobrevive. Quedan como no controlados en la puerta; se revisan con el censo (1B)."
+ }
+}
