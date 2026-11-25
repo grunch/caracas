@@ -4,6 +4,8 @@ Cómo se hizo la auditoría de 1843 (T81, [11](11-auditoria-y-correccion-1843.md
 
 ## 0. Antes de empezar
 
+Toda auditoría respeta y mide las [reglas de construcción](13-reglas-de-construccion.md) (una fila por frente, calles libres, casas alineadas, ancho de calle, fachada a la calle, casas por cuadra de su época…) en todas las épocas; sus puertas se suman a las de las fases.
+
 1. **Leer** `CLAUDE.md`, `AGENTS.md`, `specs/08`, `specs/11` y este documento. Mirar el plano base entero (su `vista.jpg`) y su leyenda.
 2. **Decisiones del responsable por adelantado** (en 1843 se pidieron todas juntas y se escribieron en el spec): criterios heredados de 1772 (LOO con ≥ 2 anclas cuenta como control; 15 m por sector; 0,5 m de fachada), quién registra los límites documentados, cuándo se publican datos, cuál es el escaneo base, si se usan workflows multiagente y que las dudas las decide quien ejecuta («decisión por delegación del responsable», con fecha). Sin esto, la auditoría se frena en cada fase.
 3. **Checklist con hook**: `.claude/tarea.md` con una casilla por fase y por pista independiente; el hook `Stop` (`~/.claude/hooks/checklist-stop.sh`) no deja cerrar el turno con casillas abiertas. Una sección «Notas de trabajo» en el mismo archivo guarda el estado para retomar tras compactar el contexto (ramas, PRs, mediciones, qué falta).
