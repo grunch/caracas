@@ -34,7 +34,7 @@
    "id": "I1843-002",
    "categoria": "casas faltantes o sobrantes",
    "prioridad": "P1",
-   "estado": "confirmado",
+   "estado": "corregido en parte, pendiente de verificar",
    "diferencia": "150 de las 282 manzanas rayadas del original no tienen ninguna casa a la vista en el sitio en 1843 (contraste-unidades.json: tolerancia 3.0 m, sin las casas que esconde un hito). Por rayado: diagonal 56 de 102 vacías; punteado 11 de 11 vacías; cruzado 19 de 34 vacías; horizontal 16 de 61 vacías; vertical 44 de 70 vacías.",
    "diagnostico": "Confirmado en la lámina qa-1843 del generador: lo edificado de 1843 sale de un perfil de color único (epocas.json, canal L, umbral 185) que reconoce el rayado denso de la parroquia Catedral y pierde los rayados claros de las otras (zigzag, vertical, punteado, cruzado), sobre todo al este del Catuche y al sur. Una parte menor son casas sueltas en el campo (61 de las vacías miden menos de 2000 m²) y lotes de hitos que suprimen las casas genéricas.",
    "evidencia": [
@@ -42,7 +42,7 @@
     "specs/auditoria-1843/censo.json",
     "fuentes/derivados/epocas/qa-1843.jpg (fuera de git)"
    ],
-   "resolucion": "T81.4a: lo edificado de 1843 desde la referencia del censo (manzanas rayadas proyectadas con el calce), no desde el color; depende de T81.2b (referencia).",
+   "resolucion": "T81.4a (lo edificado de 1843 desde la referencia): 120 de 282 rayadas siguen sin casas a la vista, casi todas manzanas de 1843 sin casas de 1936 que calcen (crecimiento posterior a 1772 o trazado distinto) → T81.4c (casas propias de 1843 desde la referencia donde no hay casas de 1936).",
    "pipeline": "tools/geo/epocas.py construido_de_epoca + tools/geo/epocas/epocas.json"
   },
   {
