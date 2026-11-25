@@ -94,7 +94,7 @@ La vista aérea del pueblo colonial que aportó el responsable (`fuentes/imagene
 |---|---|---|---|
 | **F0 · Investigación** | Workflow de investigación (§ 5) sobre siete temas: (1) solares por manzana y su subdivisión; (2) casas y habitantes por época; (3) ancho de las calles; (4) tipología de la casa colonial y republicana, qué abre a la calle y qué al patio; (5) pueblos comparables conservados; (6) edificios en pie por época; (7) ríos, quebradas y puentes. Cada afirmación, verificada por un agente que intenta refutarla. | La tabla de § 3 llena con fuentes; `specs/reglas/investigacion.json` con cada afirmación, fuente, cita y veredicto | hecha (T82.3 #203): 239 afirmaciones, 16 vacíos listados |
 | **F1 · Las reglas como puertas** | `tools/geo/reglas_mapa.py`: R1 a R12 sobre cualquier época, con tests; capturas fijas versionadas; medición de base de las seis épocas. | `specs/reglas/medicion-<año>.json` de las seis épocas | R1, R3, R4 y R6 medidas en las seis épocas (T82.1 #202); R2, R5 y R7 a R12, pendientes (T82.2) |
-| **F2 · Diseño de la corrección de fondo** | Solares por época: los lotes de 1936 se agrupan en solares del tamaño de la época, con una casa de patio por solar sobre la línea de fachada y el corazón de la manzana libre; calzada con su ancho mínimo. Spike en un sector, con capturas y medición. **Se muestra al responsable antes de aplicarlo a todo.** | Diseño escrito aquí (§ 6) y spike medido | pendiente |
+| **F2 · Diseño de la corrección de fondo** | Solares por época: los lotes de 1936 se agrupan en solares del tamaño de la época, con una casa de patio por solar sobre la línea de fachada y el corazón de la manzana libre; calzada con su ancho mínimo. Spike en un sector, con capturas y medición. **Se muestra al responsable antes de aplicarlo a todo.** | Diseño escrito aquí (§ 6) y spike medido | diseño escrito (§ 6); espera las decisiones de § 6.3 |
 | **F3 · Fachadas (R5)** | Fachada solo a la calle; corredor y puerta hacia el patio; medianeras ciegas. Cambia el visor en todas las épocas. | PR con tests y capturas a pie | pendiente |
 | **F4 · Época por época** | En orden 1772 → 1843 → 1889 → 1911 (y lo que aplique de 1578 y 1936): aplicar F2 con los valores de la época, corregir lo que mida mal, puertas de todas las épocas y de las auditorías ya cerradas (08 y 11), revisión visual, PR, publicación. | Una época cerrada por fila de la tabla de § 8 | pendiente |
 | **F5 · Discrepancias puntuales** | D1 a D11 (§ 7), en la época donde aparecen y en las demás si se repiten. | PRs chicos, uno por defecto | pendiente |
@@ -125,7 +125,41 @@ Versionados en [`specs/reglas/workflows/`](reglas/workflows/README.md), con el m
 
 ## 6. Diseño de la corrección de fondo (F2)
 
-Pendiente: se escribe con los valores de F0 y la medición de F1, y se muestra al responsable antes de aplicarlo.
+Propuesta del 25-11-2026, con los valores de § 3 y la medición de base. **No se aplica hasta que el responsable la apruebe** (§ 4).
+
+### 6.1 Qué dicen los números
+
+- **El exceso está sobre todo en el total y en las orillas, no tanto en el centro.** En el siglo XVIII las manzanas del centro pasaron de 4 solares a unas 40 parcelas. Las siete manzanas estudiadas de la parroquia Catedral tenían entre 16 y 43 viviendas, con 7 a 13 por frente (tipologia-12, 13 y 15). El mapa de 1772 tiene 39 casas de mediana por cuadra del damero: en el centro, eso está en el rango. Lo que sobra es el total: 6.292 casas contra 2.809 (Martí). Sobran manzanas llenas en las orillas, donde el plano de 1772 pinta en amarillo solares y huertos y el grabado de 1812 muestra «solares grandes y baldíos con cercas, y casas sueltas».
+- **1843 sí está denso en todas partes.** Tiene 10.284 casas contra 4.500–6.100, el 22 % en segunda fila (R1) y calles con p10 de 4,1 m, cuando la mínima es de 8 varas (6,7 m, R4). Es la herencia de los lotes de 1936 y de las casas agregadas en T81.
+- **1889 y 1911** se pasan del 10 al 40 % en casas, con un 14–19 % en segunda fila y calles angostas en el damero viejo.
+
+### 6.2 La corrección
+
+En el generador (`tools/geo/epocas*.py`), para cada época anterior a 1936. Cada paso se mide con `reglas_mapa.py` en las seis épocas:
+
+1. **Una fila por frente (R1).** En las épocas anteriores a 1936, una casa sin frente a la calle (sin marco: segunda fila o corazón de manzana) no vive, salvo que dé a un callejón dibujado en el plano de la época (límite registrado). Su huella queda como solar o corral de la casa del frente. Es lo que más baja la cuenta en 1843, 1889 y 1911.
+2. **Solares de la época (R6).** Los lotes de 1936 contiguos de un mismo frente se juntan en casas de la época hasta su frente objetivo. La huella nueva es la unión de las huellas, con un solo marco sobre la línea de fachada, y el visor arma sus alas y patios como hoy. Las agrupaciones van **anidadas**: la casa de 1772 es la unión de las de 1843, y esa de las de 1889. Así una casa que no cambia entre épocas es el mismo techo con una vida más larga, y la geometría no se multiplica.
+   - **Centro** (la parroquia Catedral, unos 400 m alrededor de la plaza): casas grandes, de 15 a 25 m de frente (la casa natal mide 23 × 60 m), de 16 a 30 casas por manzana.
+   - **Intermedio:** el frente medio de la época (9 a 11 m en 1772; desde 1843, *inferido* de 1855).
+   - **Orillas:** casas más chicas, pero el frente **no se llena**. Entre casa y casa quedan solares cercados, hasta la ocupación que dé el total de la época. El plano de 1772 (rojo y amarillo) y el de 1843 (rayado y blanco) dicen qué manzanas son de orilla.
+3. **Calles con su ancho (R4).** Donde dos fachadas enfrentadas quedan a menos del mínimo de la época (6,7 m en el damero colonial), el frente de la casa se recorta hasta la línea, en esa época: la casa lleva una etapa por época con su huella. Las épocas siguientes siguen con la huella de 1936 si ahí la calle ya es la del plano.
+4. **Casas alineadas (R3).** El marco de cada casa de la época va paralelo a su tramo de calle. Lo hace el paso 2, porque la casa nueva toma la línea de fachada de su frente.
+5. **Las otras épocas intactas (R12).** Cada paso corre de la época más vieja a la más nueva, con `nace_sin_tocar_las_anteriores`, y se miden las puertas de 08 y 11 antes y después.
+
+**Metas** (total ± 15 %): 1772, 2.809; 1843, 4.500–6.100; 1889, 9.500–10.400; 1911, 11.300–13.000 (*inferido*). 1936 no se toca.
+
+**Spike:** un sector de 1843 al sur de la plaza (unas 20 manzanas, centro e intermedio) con los pasos 1 a 4, medición y capturas antes y después, mostrado al responsable antes de aplicarlo a todo.
+
+**Riesgos:**
+- La agrupación cambia el sorteo de estilos y pisos de las casas que se juntan; se conserva el de la casa más grande del grupo.
+- Las auditorías de 1772 y 1843 se vuelven a medir; sus límites por casa (centro de casa) pueden cambiar de id.
+- Las etapas por época del paso 3 suman geometría. Se miden memoria y triángulos contra `specs/10`.
+
+### 6.3 Lo que decide el responsable
+
+1. **¿La meta de casas es la de las fuentes?** Para 1772, las 2.809 de Martí: el mapa baja a menos de la mitad, sobre todo en las orillas. Propuesta: sí.
+2. **¿El centro conserva unas 16–30 casas por manzana?** Es lo que dicen las matrículas de 1766–1792, con casas grandes de la élite cerca de la plaza. La otra opción es bajar el centro más, como en un pueblo actual. Propuesta: seguir las fuentes.
+3. **¿En las orillas, solares cercados entre casa y casa?** Las tapias serían geometría nueva y baja. La otra opción es dejar el solar sin cerca. Propuesta: con tapia, como en el grabado de 1812.
 
 ## 7. Hallazgos de la revisión visual de 1843 (25-11-2026)
 
@@ -185,7 +219,7 @@ Consolidadas por el diagnóstico (`reglas/tareas.json`, con la causa probable, d
 | T82.2 | Puertas R2, R5, R7, R8, R9 y R11 (y el retiro por casa de R3) en reglas_mapa.py, con medición de base de las seis épocas | R2, R3, R5, R7, R8, R9, R11 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.1 | R7, R8 y R9 hechas (T82.2a); faltan R2, el retiro de R3, R5 y R11 (T82.2b) |
 | T82.7 | La medida del giro de R3: por el lado de fachada y contra el tramo de delante, no por el rectángulo mínimo ni el chaflán | R3 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.1 | #206 abierto |
 | T82.8 | Diagnóstico y cierre de la línea vertical clara frente a la Plaza Bolívar (D6), igual en todas las épocas | R2, R8 | 1772, 1843, 1889, 1911, 1936 | T82.2 | pendiente |
-| T82.9 | F2: diseño de la corrección de fondo (solares por época y calzada con su ancho mínimo), spike en un sector y aprobación del responsable | R1, R3, R4, R6, R8 | 1772, 1843, 1889, 1911 | T82.2, T82.6, T82.7 | pendiente |
+| T82.9 | F2: diseño de la corrección de fondo (solares por época y calzada con su ancho mínimo), spike en un sector y aprobación del responsable | R1, R3, R4, R6, R8 | 1772, 1843, 1889, 1911 | T82.2, T82.6, T82.7 | diseño en § 6; espera al responsable |
 | T82.10 | Cauces por época: referencia, puerta R10, agua continua en el suelo y en el campo, corredor sin casas y puentes | R10, R9, R11, R2, R12 | 1578, 1772, 1843, 1889, 1911, 1936 | T82.4, T82.2 | pendiente |
 | T82.11 | Referencia de 1889: manzanas, lotes especiales, plazas, terreno libre y red de calles leídos de Mestre | R7, R8, R4, R9 | 1889 | T82.2, T82.6 | pendiente |
 | T82.12 | Referencia de 1911: manzanas de Razetti revisadas, plazas y red, en vez del perfil de color | R7, R8 | 1911 | T82.11, T82.2 | pendiente |
