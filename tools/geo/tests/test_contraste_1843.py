@@ -48,3 +48,19 @@ def test_la_tolerancia_recoge_las_casas_de_la_media_calle():
     casas = [{'techo': 1, 'poligono': _cuadrado(101, 40, 6)}]   # centro a 4 px = 2 m del borde
     assert clasificar(unidades, casas, metro=0.5, tolerancia_m=3)['sobrantes'] == []
     assert clasificar(unidades, casas, metro=0.5, tolerancia_m=1)['sobrantes'] == [1]
+
+
+def test_una_manzana_censada_dentro_de_una_huerta_conserva_sus_casas():
+    unidades = [{'id': 'H', 'ocupacion': 'huerta', 'poligono': _cuadrado(0, 0, 200)},
+                {'id': 'R', 'ocupacion': 'rayada', 'poligono': _cuadrado(50, 50, 40)}]
+    casas = [{'techo': 1, 'poligono': _cuadrado(60, 60, 10)}, {'techo': 2, 'poligono': _cuadrado(150, 150, 10)}]
+    fila = {f['id']: f for f in clasificar(unidades, casas, metro=0.5, tolerancia_m=0)['unidades']}
+    assert (fila['R']['casas'], fila['R']['estado']) == (1, 'con_casas')
+    assert (fila['H']['casas'], fila['H']['estado']) == (1, 'con_casas_indebidas')
+
+
+def test_las_casas_que_esconde_un_hito_en_pie_no_cuentan():
+    from contraste_1843 import visibles_en
+    hitos = [{'nace': 1, 'muere': 0, 'suprime': [_cuadrado(0, 0, 50)]}, {'nace': 3, 'muere': 0, 'suprime': [_cuadrado(100, 0, 50)]}]
+    casas = [{'techo': 1, 'poligono': _cuadrado(10, 10, 10)}, {'techo': 2, 'poligono': _cuadrado(110, 10, 10)}]
+    assert [c['techo'] for c in visibles_en(casas, hitos, epoca=2)] == [2]

@@ -1,7 +1,8 @@
 {
  "alcance": "Contraste 1C de 1843 (T81): el censo del original contra las casas que el sitio muestra en 1843.",
- "datos": "local (rama 1A, sin publicar)",
- "casas_1843": 4209,
+ "datos": "regenerado con la rama de #189 (1A), sin publicar",
+ "casas_1843": 4199,
+ "casas_bajo_hitos": 10,
  "entradas": {
   "censo": {
    "archivo": "specs/auditoria-1843/censo.json",
@@ -12,7 +13,7 @@
    "sha256": "607bcb53e64b204dff1ed5df30d75fca2e38f797297206e4157c096bd15e01c1"
   },
   "ciudad": {
-   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json",
+   "archivo": "fuentes/derivados/epocas/ciudad-epocas.json (regenerado con #189)",
    "sha256": "ea0702c2dc5468336b0d3b4f39086acae12d7d3d05b6a246ebb4300e93ccaa56"
   }
  },
@@ -765,7 +766,7 @@
   {
    "id": "U1843-0118",
    "ocupacion": "rayada",
-   "casas": 40,
+   "casas": 38,
    "estado": "con_casas"
   },
   {
@@ -789,7 +790,7 @@
   {
    "id": "U1843-0122",
    "ocupacion": "rayada",
-   "casas": 49,
+   "casas": 48,
    "estado": "con_casas"
   },
   {
@@ -828,19 +829,19 @@
   {
    "id": "U1843-0128",
    "ocupacion": "rayada",
-   "casas": 31,
+   "casas": 30,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0129",
    "ocupacion": "rayada",
-   "casas": 33,
+   "casas": 32,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0130",
    "ocupacion": "rayada",
-   "casas": 42,
+   "casas": 41,
    "estado": "con_casas"
   },
   {
@@ -885,7 +886,7 @@
   {
    "id": "U1843-0136",
    "ocupacion": "rayada",
-   "casas": 32,
+   "casas": 31,
    "estado": "con_casas",
    "letras": [
     "I"
@@ -894,7 +895,7 @@
   {
    "id": "U1843-0137",
    "ocupacion": "rayada",
-   "casas": 42,
+   "casas": 41,
    "estado": "con_casas"
   },
   {
@@ -924,8 +925,8 @@
   {
    "id": "U1843-0141",
    "ocupacion": "rayada",
-   "casas": 1,
-   "estado": "con_casas"
+   "casas": 0,
+   "estado": "sin_casas"
   },
   {
    "id": "U1843-0142",
@@ -942,7 +943,7 @@
   {
    "id": "U1843-0144",
    "ocupacion": "rayada",
-   "casas": 31,
+   "casas": 23,
    "estado": "con_casas",
    "letras": [
     "A"
@@ -1008,8 +1009,8 @@
   {
    "id": "U1843-0152",
    "ocupacion": "rayada",
-   "casas": 2,
-   "estado": "con_casas",
+   "casas": 0,
+   "estado": "sin_casas",
    "letras": [
     "K"
    ]
@@ -1442,13 +1443,13 @@
   {
    "id": "U1843-0220",
    "ocupacion": "rayada",
-   "casas": 24,
+   "casas": 23,
    "estado": "con_casas"
   },
   {
    "id": "U1843-0221",
    "ocupacion": "rayada",
-   "casas": 26,
+   "casas": 24,
    "estado": "con_casas"
   },
   {
@@ -2601,8 +2602,8 @@
  ],
  "resumen": {
   "rayada": {
-   "con_casas": 134,
-   "sin_casas": 148
+   "con_casas": 132,
+   "sin_casas": 150
   },
   "lote_especial": {
    "con_casas_indebidas": 7,

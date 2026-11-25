@@ -2,6 +2,10 @@
  "alcance": "    .venv/bin/python tools/geo/cierre_fase1_1843.py",
  "fase_1_cerrable": true,
  "criterios": {
+  "evidencia_vigente": {
+   "cumplido": true,
+   "vieja": []
+  },
   "area_recorrida": {
    "cumplido": true,
    "sectores": 25,

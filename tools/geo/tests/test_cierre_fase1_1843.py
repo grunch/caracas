@@ -53,3 +53,16 @@ def test_un_sector_sin_unidades_no_pide_control_y_no_muta():
     r = puerta(sectores, censo2, contraste2, calce, {'limites': [], 'sin_anclas': {'sectores': []}}, incidencias)
     assert r['criterios']['controles_de_calce']['cumplido'] is True
     assert docs == copia
+
+
+def test_la_evidencia_medida_con_otras_entradas_no_cierra():
+    sectores, censo, contraste, calce, limites, incidencias = _docs()
+    vigentes = {'censo': 'a', 'gcp': 'b'}
+    contraste_viejo = {**contraste, 'entradas': {'censo': {'sha256': 'a'}, 'gcp': {'sha256': 'VIEJO'}}}
+    calce_bien = {**calce, 'entradas': {'gcp': {'sha256': 'b'}}}
+    limites_bien = {**limites, 'calce': {'sha256': 'b'}}
+    r = puerta(sectores, censo, contraste_viejo, calce_bien, limites_bien, incidencias, vigentes=vigentes)
+    assert r['criterios']['evidencia_vigente']['vieja'] == ['contraste-unidades.json: gcp']
+    assert r['fase_1_cerrable'] is False
+    contraste_bien = {**contraste, 'entradas': {'censo': {'sha256': 'a'}, 'gcp': {'sha256': 'b'}}}
+    assert puerta(sectores, censo, contraste_bien, calce_bien, limites_bien, incidencias, vigentes=vigentes)['fase_1_cerrable']

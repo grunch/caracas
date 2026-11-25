@@ -6,7 +6,7 @@
 Criterios (specs/08 § 1D, con lo propio de 1843 en specs/11): todo el área recorrida, cada unidad
 clasificada y leída (las dudosas quedan a la vista), censo sin problemas, correspondencia del original
 con el sistema por unidad, controles de calce en cada sector con unidades (o su límite documentado) e
-incidencias con subtarea. Los accesos a pie no son criterio de la fase 1 de 1843: el original no dibuja
+incidencias con subtarea, todo medido con el censo y el calce actuales (evidencia_vigente). Los accesos a pie no son criterio de la fase 1 de 1843: el original no dibuja
 frentes ni patios y se miden en la fase 7 (decisión por delegación del responsable, 24-11-2026).
 No certifica la fidelidad del mapa.
 """
@@ -23,7 +23,19 @@ LECTURAS = {'segura', 'dudosa'}
 CON_CONTROL = {'rayada', 'lote_especial', 'plaza', 'parte_de_otra_unidad'}   # lo que se calza; huertas y campo no
 
 
-def puerta(sectores, censo, contraste, calce, limites, incidencias):
+def _viejas(contraste, calce, limites, vigentes):
+    """La evidencia medida con otras entradas que las actuales (SHA-256 del censo y del calce)."""
+    viejas = []
+    for nombre, entradas in (('contraste-unidades.json', contraste.get('entradas', {})), ('calce-identidad.json', calce.get('entradas', {}))):
+        for clave, sha in vigentes.items():
+            if clave in entradas and entradas[clave].get('sha256') != sha:
+                viejas.append(f'{nombre}: {clave}')
+    if 'gcp' in vigentes and limites.get('calce', {}).get('sha256') not in (None, vigentes['gcp']):
+        viejas.append('limites-calce.json: gcp')
+    return viejas
+
+
+def puerta(sectores, censo, contraste, calce, limites, incidencias, vigentes=None):
     ids = [s['id'] for s in sectores['sectores']]
     leidos = {lect['sector'] for lect in censo['lecturas']}
     unidades = censo['unidades']
@@ -34,7 +46,9 @@ def puerta(sectores, censo, contraste, calce, limites, incidencias):
     con_unidades = sorted({u['sector'] for u in unidades if u['ocupacion'] in CON_CONTROL})
     sin_control = [s for s in con_unidades if s not in controlados | en_limite]
     sin_subtarea = [i['id'] for i in incidencias['incidencias'] if not re.match(r'T81\.\d', i.get('resolucion', ''))]
+    viejas = _viejas(contraste, calce, limites, vigentes or {})
     criterios = {
+        'evidencia_vigente': {'cumplido': not viejas, 'vieja': viejas},
         'area_recorrida': {'cumplido': set(ids) <= leidos, 'sectores': len(ids), 'leidos': len(leidos & set(ids)),
                            'faltan': sorted(set(ids) - leidos)},
         'unidades_clasificadas': {'cumplido': not mal, 'unidades': len(unidades), 'invalidas': mal,
@@ -54,8 +68,12 @@ def puerta(sectores, censo, contraste, calce, limites, incidencias):
 def main():  # pragma: no cover - E/S
     aud = Path(__file__).resolve().parents[2] / 'specs/auditoria-1843'
     leer = lambda n: json.loads((aud / n).read_text(encoding='utf-8'))  # noqa: E731
+    import hashlib
+    raiz = aud.parents[1]
+    sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()  # noqa: E731
+    vigentes = {'censo': sha(aud / 'censo.json'), 'gcp': sha(raiz / 'tools/geo/gcp/calce-1843-nypl-jesurun-facsimil-muller-stapler.json')}
     r = puerta(leer('sectores.json'), leer('censo.json'), leer('contraste-unidades.json'), leer('calce-identidad.json'),
-               leer('limites-calce.json'), leer('incidencias.json'))
+               leer('limites-calce.json'), leer('incidencias.json'), vigentes=vigentes)
     doc = {'alcance': __doc__.split('\n\n')[1].replace('\n', ' '), **r}
     (aud / 'cierre-fase1.json').write_text(json.dumps(doc, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     print('fase 1 cerrable:', r['fase_1_cerrable'], {k: v['cumplido'] for k, v in r['criterios'].items()})

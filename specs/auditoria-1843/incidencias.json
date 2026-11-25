@@ -35,7 +35,7 @@
    "categoria": "casas faltantes o sobrantes",
    "prioridad": "P1",
    "estado": "confirmado",
-   "diferencia": "148 de las 282 manzanas rayadas del original no tienen ninguna casa en el sitio en 1843 (contraste-unidades.json, tolerancia 3.0 m). Por rayado: horizontal (parroquia Catedral) 14 de 61 vacías; diagonal 56 de 102, vertical 44 de 70, cruzado 19 de 34, punteado 11 de 11.",
+   "diferencia": "150 de las 282 manzanas rayadas del original no tienen ninguna casa a la vista en el sitio en 1843 (contraste-unidades.json: tolerancia 3.0 m, sin las casas que esconde un hito). Por rayado: diagonal 56 de 102 vacías; punteado 11 de 11 vacías; cruzado 19 de 34 vacías; horizontal 16 de 61 vacías; vertical 44 de 70 vacías.",
    "diagnostico": "Confirmado en la lámina qa-1843 del generador: lo edificado de 1843 sale de un perfil de color único (epocas.json, canal L, umbral 185) que reconoce el rayado denso de la parroquia Catedral y pierde los rayados claros de las otras (zigzag, vertical, punteado, cruzado), sobre todo al este del Catuche y al sur. Una parte menor son casas sueltas en el campo (61 de las vacías miden menos de 2000 m²) y lotes de hitos que suprimen las casas genéricas.",
    "evidencia": [
     "specs/auditoria-1843/contraste-unidades.json",

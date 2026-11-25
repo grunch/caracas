@@ -10,7 +10,8 @@ cuenta en la unidad que contiene su centro; con `tolerancia_m`, también la que 
 - lote_especial, plaza, huerta, terreno_libre: sin_casas (bien) | con_casas_indebidas.
 - sobrantes: casas vivas en 1843 fuera de toda unidad (las de un lote o plaza cuentan como indebidas ahí).
 
-Cuenta lo medido; no certifica fidelidad.
+Cuentan las casas a la vista: las que un hito en pie en 1843 esconde (pisaLaZona) no. Manda la unidad más chica
+que contiene la casa. Cuenta lo medido; no certifica fidelidad.
 """
 import argparse
 import hashlib
@@ -36,6 +37,14 @@ def vive(vida, epoca):
     return nace <= epoca and (muere == 0 or epoca < muere)
 
 
+def visibles_en(casas, hitos, epoca=EPOCA_1843):
+    """Las casas que el visor deja a la vista en `epoca`: sin las que suprime un hito en pie (la regla de
+    src/hitos/suprimir.js, la misma de cierre_fase4.visibles)."""
+    from cierre_fase4 import se_suprime
+    zonas = [z for h in hitos if h['nace'] <= epoca and (h['muere'] == 0 or h['muere'] > epoca) for z in h.get('suprime', [])]
+    return [c for c in casas if not se_suprime(Polygon(np.asarray(c['poligono'], float)).buffer(0), zonas)]
+
+
 def _figura(pol):
     f = Polygon(pol).buffer(0)
     return f if not f.is_empty else None
@@ -51,13 +60,16 @@ def clasificar(unidades, casas, metro, tolerancia_m=TOLERANCIA_M):
     for c in casas:
         centro = Point(np.asarray(c['poligono'], float).mean(axis=0))
         cerca = [figuras[i] for i in arbol.query(centro.buffer(tol) if tol > 0 else centro)]
-        # un lote, plaza o huerta manda sobre la manzana que lo contiene: la casa es indebida ahí y en ningún otro lado
-        destino = [u for u, f in cerca if u['ocupacion'] in LIBRES and f.contains(centro)] or \
-                  [u for u, f in cerca if u['ocupacion'] in EDIFICABLES and (f.contains(centro) or f.distance(centro) <= tol)]
+        # manda la unidad más chica que contiene la casa: un lote dentro de su manzana, una manzana dentro de una huerta
+        contienen = sorted((f.area, k) for k, (u, f) in enumerate(cerca) if f.contains(centro))
+        if contienen:
+            destino = [cerca[contienen[0][1]][0]]
+        else:
+            destino = [u for u, f in cerca if u['ocupacion'] in EDIFICABLES and f.distance(centro) <= tol][:1]
         for u in destino:
-            cuenta[u['id']] += 1
-        if destino:
-            ubicadas.add(c['techo'])
+            if u['ocupacion'] in EDIFICABLES | LIBRES:
+                cuenta[u['id']] += 1
+                ubicadas.add(c['techo'])
     filas = []
     for u, _ in figuras:
         n = cuenta[u['id']]
@@ -100,9 +112,14 @@ def main(argv=None):  # pragma: no cover - E/S
     V = np.asarray(ciudad['vertices'], float).reshape(-1, 2)
     casas = [{'techo': i, 'poligono': V[t[0]:t[0] + t[1]]} for i, t in enumerate(ciudad['techos'])
              if vive(ciudad['vida'][i], EPOCA_1843)]
+    import subprocess
+    hitos = json.loads(subprocess.run(['node', str(raiz / 'tools' / 'hitos-planta.mjs')], check=True, capture_output=True,
+                                      text=True, cwd=raiz).stdout)
+    vivas = len(casas)
+    casas = visibles_en(casas, hitos)
     r = clasificar(unidades, casas, metro)
     sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()  # noqa: E731
-    doc = {'alcance': __doc__.split('\n\n')[0], 'datos': a.datos, 'casas_1843': len(casas),
+    doc = {'alcance': __doc__.split('\n\n')[0], 'datos': a.datos, 'casas_1843': len(casas), 'casas_bajo_hitos': vivas - len(casas),
            'entradas': {k: {'archivo': str(getattr(a, k).relative_to(raiz)) if getattr(a, k).is_relative_to(raiz) else str(getattr(a, k)),
                             'sha256': sha(getattr(a, k))} for k in ('censo', 'gcp', 'ciudad')},
            'tolerancia_m': TOLERANCIA_M, **r}
