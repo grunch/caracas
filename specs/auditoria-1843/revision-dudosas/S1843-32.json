@@ -1,0 +1,41 @@
+{
+ "sector": "S1843-32",
+ "revisiones": [
+  {
+   "unidad": "U1843-0099",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Rectángulo pequeño de rayado diagonal (el de las manzanas del norte), justo al oeste de la manzana trapecio U1843-0097 y encima de la línea de trazos; la caja calza con el dibujo. Está pegado a la manzana, no a la quebrada (que pasa unos 80 px más al oeste).",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-32/U1843-0099.png",
+   "sha256": "27e976ced406bd7551242105c70588afa7fbdfd419800036a8848a79332c3b43"
+  },
+  {
+   "unidad": "U1843-0110",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Franja rayada horizontal aislada, separada por blanco del brazo vertical de la unidad en L (que termina hacia y≈2598) y de la calle este; la caja (2799-2840 × 2632-2644) calza. Sea edificio aislado o borde de la manzana abierta, la ocupación y el contorno no cambian.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-32/U1843-0110.png",
+   "sha256": "67ae37c09477da5dc1ac7222b2dc3a35b7cd6a7c19683ae3fa0ad80b75767b40"
+  },
+  {
+   "unidad": "U1843-0115",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Rectángulo rayado horizontal (2601-2666 × 2739-2765) al este de la quebrada; abajo hay otro igual separado por una raya blanca de ~4 px por donde pasa la línea de trazos. El plano dibuja dos rectángulos, como los otros pares cortados por esa línea (U1843-0096/0098, 0099/0100); la caja calza.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-32/U1843-0115.png",
+   "sha256": "eaa43658edf64a2ac0eb63b64a0f20d3812bcf7b9df4b2935fbc7e41cac52698"
+  },
+  {
+   "unidad": "U1843-0116",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Rectángulo rayado horizontal (2601-2666 × 2770-2794), mitad sur del par con U1843-0115, separado por la raya blanca de la línea de trazos; mismo ancho y rayado. El dibujo los da como dos piezas y el censo sigue el dibujo; la caja calza.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-32/U1843-0116.png",
+   "sha256": "1c5fb768048dc9242e94fc29a5c1b153c39ac866e3b7558890e601929b0befdb"
+  }
+ ]
+}

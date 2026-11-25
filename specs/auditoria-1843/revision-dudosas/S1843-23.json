@@ -1,0 +1,41 @@
+{
+ "sector": "S1843-23",
+ "revisiones": [
+  {
+   "unidad": "U1843-0062",
+   "decision": "aprobada",
+   "ocupacion": "lote_especial",
+   "seguridad": "segura",
+   "motivo": "Rectángulo blanco sin rayar, enmarcado, pegado a la calle norte dentro de la manzana rayada de D; la caja coincide con el blanco medido (3118-3132 x 2147-2155). No lleva letra impresa: la D de la manzana está junto al lote blanco del sur, así que su identidad queda sin nombre, pero no es rayado ni marco.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-23/U1843-0062.png",
+   "sha256": "336ae419cd4e6e340d2029046cb9b5b4ea8289af43a8173f2d982b9565fd77b2"
+  },
+  {
+   "unidad": "U1843-0065",
+   "decision": "aprobada",
+   "ocupacion": "lote_especial",
+   "seguridad": "segura",
+   "motivo": "Lote blanco a la izquierda del de E, separado de él por una línea vertical y abierto a la calle oeste; la caja coincide. La marca negra en paréntesis en su borde oeste no se lee como letra; la E está al este del lote vecino.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-23/U1843-0065.png",
+   "sha256": "c459c2feed8dc3212c27bdceb78ded2cd5f0e0859b47761d9062a9f05d02ee63"
+  },
+  {
+   "unidad": "U1843-0068",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Manzana con rayado diagonal, escalonada en diagonal-vertical-horizontal-diagonal hacia el este frente al terreno libre punteado; el polígono sigue los bordes impresos. El número junto a su esquina noroeste (3323,2170) es un 9 o un paréntesis medio tapado: no se lee, pero no cambia ocupación ni contorno (en la manzana del oeste no veo otro 9; arriba se leen 8, 10 y 11).",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-23/U1843-0068.png",
+   "sha256": "f7b333a54304b2fa6486028041c928f271d28c8a99c2a1e69aae7dc2bb06ee99"
+  },
+  {
+   "unidad": "U1843-0070",
+   "decision": "aprobada",
+   "ocupacion": "lote_especial",
+   "seguridad": "segura",
+   "motivo": "Cuadrado blanco enmarcado dentro de la manzana rayada de E, cerca de la calle sur; la caja coincide con el blanco medido (3210-3226 x 2232-2247 por dentro del marco). Sin letra propia: la E queda junto al lote del norte.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-23/U1843-0070.png",
+   "sha256": "22cc08ec8259df321914f1dc01fe7fb93ddb79f2da8e08f1195df055afadd7fd"
+  }
+ ]
+}

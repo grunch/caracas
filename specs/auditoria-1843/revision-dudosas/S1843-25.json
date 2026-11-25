@@ -1,0 +1,32 @@
+{
+ "sector": "S1843-25",
+ "revisiones": [
+  {
+   "unidad": "U1843-0083",
+   "decision": "aprobada",
+   "ocupacion": "huerta",
+   "seguridad": "segura",
+   "motivo": "Parcela cercada con rayado horizontal, trazos diagonales cortos y árboles dibujados: huerta. El contorno coincide con el original: lindero norte en y≈1572 (justo bajo el recuadro de la leyenda, pero es un trazo propio), lindero este curvo hasta x≈4635, lindero sur en y≈1805 y, al oeste, el inicio del rayado de la parcela tras el sombreado del talud de la quebrada (x≈4425-4430).",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-25/U1843-0083.png",
+   "sha256": "fc30ea77bf83b0fd9e8a9b3036253c6bfc57b76344f5ee4627656416b1806830"
+  },
+  {
+   "unidad": "U1843-0084",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Cuadrado cerrado de rayado cruzado denso (x 4416-4452, y 1988-2021), claramente distinto del rayado de la huerta que lo rodea y del sombreado del talud: un edificio aislado. Caja y ocupación coinciden con el original.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-25/U1843-0084.png",
+   "sha256": "9db0da4dc82ba7832e4583a535f3cb1810cf5cd2da9c1c74e3291c2b838e9b43"
+  },
+  {
+   "unidad": "U1843-0087",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Rectángulo cerrado con rayado diagonal y punteado (x 4575-4640, y 2199-2220) pegado al lindero sur de la huerta, con el mismo patrón que la muestra de San Juan en la leyenda: edificio rayado, no huerta. Contorno coincide con el original.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-25/U1843-0087.png",
+   "sha256": "9b6bd6986ce7e3991568f9a55b290865a53119967c2567630a8b258ea668c350"
+  }
+ ]
+}

@@ -1,0 +1,223 @@
+{
+ "sector": "S1843-34",
+ "revisiones": [
+  {
+   "unidad": "U1843-0161",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "sigue_dudosa",
+   "motivo": "Cuadrito cerrado de 21×23 px aislado en el potrero al norte, relleno de puntos redondos; el contorno está bien. El punteado redondo no es ninguno de los rayados de parroquia de la leyenda y el spec da el punteado a huertas y estancias, pero el tamaño (~15 m) es de edificio o corral: el plano no deja decidir entre rayada y huerta.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-34/U1843-0161.png",
+   "sha256": "28f6f4c3176dd38408017286c2b2625d9ff6f25eb624d9e311931cee704d29c4"
+  },
+  {
+   "unidad": "U1843-0162",
+   "decision": "aprobada",
+   "ocupacion": "terreno_libre",
+   "seguridad": "segura",
+   "motivo": "Franja blanca con trazos sueltos de potrero entre g/i y m/n, abierta al potrero por el norte; no tiene rayado ni bordes de calle (las calles miden ~5 px, esto ~60 px). Contorno bien (borde oeste a x≈4064, sur a y≈2445).",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-34/U1843-0162.png",
+   "sha256": "0be282807fd695f2e925d53c076159c4c4e9954755619f9a6767beb52547d369"
+  },
+  {
+   "unidad": "U1843-0165",
+   "decision": "corregida",
+   "ocupacion": "rayada",
+   "letras": [],
+   "seguridad": "sigue_dudosa",
+   "motivo": "Rombo cerrado con puntos redondos, contorno bien. La c no es del lote: en la leyenda la c minúscula es el Puente de Punceles y está en el cruce del camino con la quebrada, así que se quitan las letras. El relleno de puntos redondos, como en U1843-0161, no es ningún rayado de parroquia: queda la duda entre rayada y huerta.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-34/U1843-0165.png",
+   "sha256": "992db880c33ae623896ae58e9a3505a6ab41cc879991d6ce0febcd573a3d65cf"
+  },
+  {
+   "unidad": "U1843-0170",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Edificio en forma de P al este del camino que baja del Puente c, con rayado horizontal fino y apretado (Catedral, igual que las manzanas del sur). El contorno coincide (3724–3747 × 2472–2509, con el asta de 3724 a 3735).",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-34/U1843-0170.png",
+   "sha256": "9fe7f033b15be71eed248576414f779b7c50904b78815cf65770b18317350466"
+  },
+  {
+   "unidad": "U1843-0176",
+   "decision": "corregida",
+   "ocupacion": "lote_especial",
+   "poligono_px": [
+    [
+     4194,
+     2530
+    ],
+    [
+     4267,
+     2530
+    ],
+    [
+     4267,
+     2506
+    ],
+    [
+     4277,
+     2506
+    ],
+    [
+     4277,
+     2547
+    ],
+    [
+     4248,
+     2547
+    ],
+    [
+     4248,
+     2566
+    ],
+    [
+     4278,
+     2566
+    ],
+    [
+     4278,
+     2627
+    ],
+    [
+     4194,
+     2627
+    ]
+   ],
+   "seguridad": "segura",
+   "motivo": "Lote blanco con la J (La Candelaria en la leyenda de iglesias). Se corrige el contorno para que no incluya el ala rayada de 4248–4277 × 2547–2566, que es un edificio pegado a la pieza rayada del este y no parte del lote blanco.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-34/U1843-0176.png",
+   "sha256": "f63b28cc2883203d2c973e80536411c121bac74d534418a4bd8205afd1b1e16d"
+  },
+  {
+   "unidad": "U1843-0177",
+   "decision": "corregida",
+   "ocupacion": "rayada",
+   "poligono_px": [
+    [
+     4277,
+     2506
+    ],
+    [
+     4309,
+     2506
+    ],
+    [
+     4309,
+     2566
+    ],
+    [
+     4248,
+     2566
+    ],
+    [
+     4248,
+     2547
+    ],
+    [
+     4277,
+     2547
+    ]
+   ],
+   "seguridad": "segura",
+   "motivo": "El rectángulo anterior cubría todo el lote J. Lo rayado son tres piezas separadas: la pieza del este con su ala hacia el oeste (este polígono), la franja norte 4197–4267 × 2508–2530 (separada por un hueco blanco en x 4267–4277) y la pieza sureste 4278–4310 × 2573–2624, al otro lado del callejón de y 2566–2573. Esas dos piezas tienen que ser unidades aparte: el polígono no puede cubrirlas.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-34/U1843-0177.png",
+   "sha256": "0b52a470e8ced6aa6f33657866c85c462ddf541e9225c832bcc31d4ec9e4f010"
+  },
+  {
+   "unidad": "U1843-0178",
+   "decision": "corregida",
+   "ocupacion": "rayada",
+   "letras": [],
+   "seguridad": "segura",
+   "motivo": "Lote chico con rayado horizontal fino (Catedral), entre la calle y la quebrada; contorno bien (3825–3844 × 2604–2630, con el lado noreste en diagonal). La d de su este es el Puente de Candelaria de la leyenda, en el cruce de la calle con la quebrada, no el nombre del lote: se quitan las letras.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-34/U1843-0178.png",
+   "sha256": "e84ecf17fea855e01d853453964a1a980cf8cb709c324e822d4a680e95cec9ed"
+  },
+  {
+   "unidad": "U1843-0181",
+   "decision": "corregida",
+   "ocupacion": "rayada",
+   "poligono_px": [
+    [
+     3885,
+     2636
+    ],
+    [
+     3947,
+     2636
+    ],
+    [
+     3947,
+     2704
+    ],
+    [
+     3944,
+     2704
+    ],
+    [
+     3885,
+     2655
+    ]
+   ],
+   "seguridad": "segura",
+   "motivo": "Manzana rayada de trazos cortos; el lado oeste baja vertical solo hasta y≈2655 y de ahí sigue una diagonal recta hasta casi la esquina sureste (3944,2704), al lado de una franja blanca a lo largo de la quebrada. No hay tramo horizontal al sur, que sí estaba en el polígono anterior.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-34/U1843-0181.png",
+   "sha256": "f417ea9cf5be3d5c55b6f2734f7f6c69e618b434bffa20ab7656a0c56dbc2871"
+  },
+  {
+   "unidad": "U1843-0190",
+   "decision": "corregida",
+   "ocupacion": "rayada",
+   "poligono_px": [
+    [
+     4028,
+     2753
+    ],
+    [
+     4069,
+     2753
+    ],
+    [
+     4069,
+     2871
+    ],
+    [
+     4050,
+     2871
+    ],
+    [
+     4050,
+     2810
+    ],
+    [
+     4028,
+     2786
+    ]
+   ],
+   "seguridad": "segura",
+   "motivo": "Resto de manzana rayada de trazos cortos al este de la quebrada, confirmado. Con detalle ×4, el lado oeste quiebra en diagonal desde (4028,2786) hasta (4050,2810), unos 10 px más al norte que en el polígono anterior; el resto coincide.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-34/U1843-0190.png",
+   "sha256": "fd93c98efdd8673a26bb6c17811052264aeb32db206af4c1f38905039062a877"
+  },
+  {
+   "unidad": "U1843-0191",
+   "decision": "corregida",
+   "ocupacion": "rayada",
+   "letras": [],
+   "seguridad": "segura",
+   "motivo": "Manzana rectangular con rayado entero de trazos cortos; contorno bien. Con ×8, la marca de (4188,2795) es un semicírculo con un trazo dentro, el mismo signo que se ve en las manzanas 33 y 55: es el signo de Fuente Pública de la leyenda, no una letra C o G (que serían La Trinidad o Altagracia, lejos de aquí). Se quitan las letras.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-34/U1843-0191.png",
+   "sha256": "e7519583b5c43afda8ca1ed108cbed650c326fbc453d93890b1a18e337bacce5"
+  },
+  {
+   "unidad": "U1843-0193",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Edificio en L con rayado horizontal fino (Catedral) al norte de la calle y al oeste de la quebrada; contorno bien (asta 3954–3968, brazo hasta 3985 en 2860–2874). La e en el círculo es el Puente de Monroy, en el cruce de la calle con la quebrada, y no tiene que ver con la unidad.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-34/U1843-0193.png",
+   "sha256": "78ce4b93c313356e38770a52f2d6b3857b93a2b08fe4bfeec33f55063cb663d8"
+  }
+ ]
+}

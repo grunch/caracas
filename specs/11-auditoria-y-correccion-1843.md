@@ -44,7 +44,7 @@ Mismo orden y mismos criterios de salida que 08. Evidencia en `auditoria-1843/`.
 |---|---|---|
 | 0. Preparación | Este plan; herramientas de 1772 que se reutilizan, parametrizadas por época solo cuando una fase las necesita, con la prueba de que los JSON de 1772 se regeneran idénticos | Hecha (#187); la fase 1 usa módulos propios (`esquinas_1843`, `controles_1843`, `manzanas_1843`, `censo_1843`, `contraste_1843`, `cierre_fase1_1843`) |
 | 1. Inventario | 1A baseline y calce por identidad con las esquinas numeradas; 1B censo por sectores de manzanas, tramos y frentes; 1C incidencias; 1D puerta de salida y subtareas | Pendiente |
-| 2. Referencia | Red y manzanas de 1843 con procedencia; lotes especiales con su letra de la leyenda | Pendiente |
+| 2. Referencia | Red y manzanas de 1843 con procedencia; lotes especiales con su letra de la leyenda | Cerrable 3/3 ([cierre-fase2.json](auditoria-1843/cierre-fase2.json)): [referencia](../tools/geo/referencias/1843-manzanas.json) de 361 unidades aprobadas (las seguras del censo y las 58 dudosas revisadas por un segundo lector, [revision-dudosas/](auditoria-1843/revision-dudosas/)), 4 pendientes que no entran al generador, 2 rechazadas por duplicadas; validadores sin problemas |
 | 3. Calles y manzanas | Ninguna casa sobre una calle de 1843; calles de 1843 presentes; calles posteriores sin cortar manzanas de 1843 | Pendiente |
 | 4. Ocupación | Cada manzana rayada con casas; lotes especiales, plazas y huertas sin casas genéricas; hitos sin dobles edificios | Pendiente |
 | 5. Alineación | Como 08 sobre lo que se ve en 1843 | Pendiente |

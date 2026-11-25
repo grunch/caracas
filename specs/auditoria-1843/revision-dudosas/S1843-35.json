@@ -1,0 +1,50 @@
+{
+ "sector": "S1843-35",
+ "revisiones": [
+  {
+   "unidad": "U1843-0194",
+   "decision": "aprobada",
+   "ocupacion": "huerta",
+   "seguridad": "segura",
+   "motivo": "Parcela de cultivo con el rayado horizontal y trazos oblicuos de las estancias, cercada: al oeste la quebrada (con su ribera sombreada), al este el lindero N-S curvo (x≈4516→4536) y linderos E-O en y≈2227 y y≈2438, que coinciden con el polígono. No es rayado parroquial; huerta es la clase del vocabulario que corresponde.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-35/U1843-0194.png",
+   "sha256": "c433d2b6b8ce09807d48f0ee4c39111d2d959b656337c733250fde8dd6da14d4"
+  },
+  {
+   "unidad": "U1843-0195",
+   "decision": "aprobada",
+   "ocupacion": "huerta",
+   "seguridad": "segura",
+   "motivo": "Mismo sombreado de cultivo, entre el lindero N-S curvo y el borde este nítido en x≈4641 (afuera, campo punteado); linderos E-O en y≈2227 y y≈2438. Contorno correcto.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-35/U1843-0195.png",
+   "sha256": "cfa499de1a60df2e8b3a6345878be510699e9d851bb6bade306238483cdd23ca"
+  },
+  {
+   "unidad": "U1843-0198",
+   "decision": "aprobada",
+   "ocupacion": "huerta",
+   "seguridad": "segura",
+   "motivo": "Parcela de cultivo entre la quebrada (x≈4420) y el lindero N-S (x≈4535→4545), desde el lindero y≈2437 hasta el camino E-O en y≈2629. Contorno correcto.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-35/U1843-0198.png",
+   "sha256": "e35e3f756a3e8fd7a3029758118cab17d94471677c5a07fd9b45ebc19bc87a5a"
+  },
+  {
+   "unidad": "U1843-0199",
+   "decision": "aprobada",
+   "ocupacion": "huerta",
+   "seguridad": "segura",
+   "motivo": "Parcela de cultivo entre el lindero N-S (x≈4540–4547) y el borde este x≈4644, desde y≈2437 hasta la franja edificada punteada que empieza en y≈2594 (x≥4549). Contorno correcto.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-35/U1843-0199.png",
+   "sha256": "0e352b8d41c7e7f8966f0496f46eec2d14db610c9f032854d631108fb32eee55"
+  },
+  {
+   "unidad": "U1843-0200",
+   "decision": "aprobada",
+   "ocupacion": "parte_de_otra_unidad",
+   "seguridad": "segura",
+   "motivo": "Rectángulo rayado chico (x 4249–4278, y 2547–2565) dibujado con su propio marco pero pegado al costado oeste de la pieza a, dentro de la manzana w de La Candelaria; la J queda afuera, en el lote blanco al oeste. Es una pieza edificada de w, no una unidad aparte.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-35/U1843-0200.png",
+   "sha256": "d6bf114defd3a92b8e627ecc1663e05fe1f0c1509fca4ce33cab8a0e24846a54"
+  }
+ ]
+}

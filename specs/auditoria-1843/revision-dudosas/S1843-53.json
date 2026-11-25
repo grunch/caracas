@@ -1,0 +1,59 @@
+{
+ "sector": "S1843-53",
+ "revisiones": [
+  {
+   "unidad": "U1843-0338",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Manzana cuadrada completa con rayado diagonal, bordeada por calles blancas en los cuatro lados; el contorno de la caja coincide con los bordes (x 2973-3086, y 3613-3731). El número de esquina sigue sin leerse más allá de '13x' en el recorte a x4 (num.png); no se registra cifra.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-53/U1843-0338.png",
+   "sha256": "0ab0b9509cf349e27ad37291bf51a4095d3dde5e440dc32cd723f197c76aa461"
+  },
+  {
+   "unidad": "U1843-0339",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Manzana completa con rayado diagonal entre calles, contorno coincide con los bordes dibujados. El número de esquina sigue sin leerse más allá de '13x' en el recorte a x4 (num.png); no se registra cifra.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-53/U1843-0339.png",
+   "sha256": "9a918125d9b561483fb6a18682aa763f4fa5bb1cab0316148cec539727c05a8d"
+  },
+  {
+   "unidad": "U1843-0340",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Manzana completa con rayado diagonal (la vecina al E cambia a rayado vertical: otra parroquia); contorno coincide. El número del NE se lee 132 con razonable claridad, pero no cambia la ocupación ni el contorno.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-53/U1843-0340.png",
+   "sha256": "18b293dbef34772ecfeaaa15ff5be489557f7694d41b11e54f6272ceb2ecb59b"
+  },
+  {
+   "unidad": "U1843-0352",
+   "decision": "corregida",
+   "ocupacion": "terreno_libre",
+   "poligono_px": [
+    [
+     3459,
+     3760
+    ],
+    [
+     3590,
+     3760
+    ],
+    [
+     3590,
+     4004
+    ],
+    [
+     3459,
+     4024
+    ]
+   ],
+   "seguridad": "segura",
+   "motivo": "Sabana abierta (rayitas verticales sueltas) entre la huerta t al O (x≈3459), la franja rayada n arriba (y≈3760) y el río abajo. El borde S de la caja (y≈3990) quedaba corto: el río empieza en y≈4024 (x 3459) a 4004 (x 3590). Al E el terreno sigue igual sin borde; se cierra en la única línea dibujada, la punteada de la calle proyectada en x≈3590, que coincide con el fin de la franja n. Ese límite E es convención de la cuadrícula, no un cerco.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-53/U1843-0352.png",
+   "sha256": "3a4034d179a5b9b46d2949f748fbc23522c45a97bed7d9aa7627630765566223"
+  }
+ ]
+}

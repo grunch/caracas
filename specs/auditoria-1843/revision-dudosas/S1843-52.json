@@ -1,0 +1,14 @@
+{
+ "sector": "S1843-52",
+ "revisiones": [
+  {
+   "unidad": "U1843-0317",
+   "decision": "aprobada",
+   "ocupacion": "lote_especial",
+   "seguridad": "segura",
+   "motivo": "Rectangulo blanco pequeno con contorno propio, adosado al borde norte de la manzana 115 frente a la plazoleta; es lo unico blanco de la manzana y la S esta centrada justo debajo, donde una manzana rayada no lleva letra (solo numero de esquina), asi que la S rotula ese lote. La caja coincide con el contorno visto.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-52/U1843-0317.png",
+   "sha256": "b213cb72c1e0dc94966dc33c38e08a94a0b234df00e2bd08888f655f9a24ca12"
+  }
+ ]
+}

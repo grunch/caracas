@@ -1,0 +1,44 @@
+{
+ "sector": "S1843-34",
+ "revisiones": [
+  {
+   "unidad": null,
+   "decision": "nueva",
+   "sector": "S1843-34",
+   "ocupacion": "parte_de_otra_unidad",
+   "de": "U1843-0177",
+   "poligono_px": [
+    [
+     4197,
+     2508
+    ],
+    [
+     4267,
+     2508
+    ],
+    [
+     4267,
+     2530
+    ],
+    [
+     4197,
+     2530
+    ]
+   ],
+   "seguridad": "segura",
+   "motivo": "Franja rayada norte de la manzana de La Candelaria (lote J), que la revisión de U1843-0177 dejó fuera al corregir su contorno (revision-dudosas/S1843-34.json)."
+  },
+  {
+   "unidad": "U1843-0196",
+   "decision": "rechazada",
+   "seguridad": "segura",
+   "motivo": "Duplicada: la pieza rayada este (a de S1843-35) quedó dentro del contorno corregido de U1843-0177 (revision-dudosas/S1843-34.json), que ahora es la pieza este de la manzana de La Candelaria con su ala."
+  },
+  {
+   "unidad": "U1843-0200",
+   "decision": "rechazada",
+   "seguridad": "segura",
+   "motivo": "Duplicada: el ala oeste (b de S1843-35) quedó dentro del contorno corregido de U1843-0177 (revision-dudosas/S1843-34.json), que ahora es la pieza este de la manzana de La Candelaria con su ala."
+  }
+ ]
+}

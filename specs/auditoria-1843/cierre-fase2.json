@@ -1,0 +1,22 @@
+{
+ "fase_2_cerrable": true,
+ "criterios": {
+  "unidades_con_referencia": {
+   "cumplido": true,
+   "faltan": []
+  },
+  "validadores_limpios": {
+   "cumplido": true,
+   "problemas": 0
+  },
+  "pendientes_explicitos": {
+   "cumplido": true,
+   "pendientes": [
+    "U1843-0021",
+    "U1843-0161",
+    "U1843-0165",
+    "U1843-0232"
+   ]
+  }
+ }
+}

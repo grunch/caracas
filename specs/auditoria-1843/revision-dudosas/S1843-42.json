@@ -1,0 +1,109 @@
+{
+ "sector": "S1843-42",
+ "revisiones": [
+  {
+   "unidad": "U1843-0218",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Es la tercera (la más al E) de las tres manzanitas triangulares entre la calle de la 81 y la ribera O de la quebrada, al NO de 'g'; rayado cruzado como sus vecinas y su lado E sigue la curva del cauce; el contorno coincide.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-42/U1843-0218.png",
+   "sha256": "7516fcb769977796f80bf10b3d0b4c7535b735c9e8deb25d93810348fd72ac9a"
+  },
+  {
+   "unidad": "U1843-0222",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Cuadradito recuadrado aislado (~15 px) en el terreno abierto al pie del cerro, con trazos de rayado dentro y sin letra: edificio suelto; caja y contorno correctos.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-42/U1843-0222.png",
+   "sha256": "c0e2e1020791c2ca7cb9ebbd22c4a0e2a7637c324ee072e284e78ef54ada1485"
+  },
+  {
+   "unidad": "U1843-0224",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "A ×4 se ve una manzanita recuadrada (2852-2889, 3262-3308) con rayado cruzado en L (franja O y franja N hasta ~2877) y el resto blanco recuadrado, sin letra: casas en L con su solar; el contorno coincide.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-42/U1843-0224.png",
+   "sha256": "44d6abb3e633ce0b07be96a2521877054744ac0355d58b25c357949f36abcf4d"
+  },
+  {
+   "unidad": "U1843-0228",
+   "decision": "corregida",
+   "ocupacion": "rayada",
+   "poligono_px": [
+    [
+     2948,
+     3264
+    ],
+    [
+     2957,
+     3264
+    ],
+    [
+     2957,
+     3268
+    ],
+    [
+     2962,
+     3271
+    ],
+    [
+     2962,
+     3372
+    ],
+    [
+     2880,
+     3373
+    ],
+    [
+     2880,
+     3357
+    ],
+    [
+     2893,
+     3353
+    ],
+    [
+     2913,
+     3347
+    ],
+    [
+     2928,
+     3333
+    ],
+    [
+     2938,
+     3317
+    ],
+    [
+     2945,
+     3293
+    ]
+   ],
+   "seguridad": "segura",
+   "motivo": "Manzana de rayado diagonal al E de la quebrada, al N de 'h' y al O de la 103; su lado O es una curva cóncava que queda 10-17 px más al E que el polígono anterior, el borde N tiene un escalón (2948-2957 y luego 2962) y el lado E llega a ~2962.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-42/U1843-0228.png",
+   "sha256": "36e9bf56b80f099d36d6bc6b9d8ad40be44ea07b0bb743c5205c54ff670bd1b7"
+  },
+  {
+   "unidad": "U1843-0230",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Manzana triangular alargada con rayado cruzado y el número 111 en su punta S; vértice N ~(2473,3323), lado E casi recto hasta ~(2488,3470), lado SO sobre el camino diagonal; el contorno coincide.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-42/U1843-0230.png",
+   "sha256": "9318a8c085274ae9060894c2316e21eda4037472a378eb64b77e7e5355277ee7"
+  },
+  {
+   "unidad": "U1843-0232",
+   "decision": "aprobada",
+   "ocupacion": "plaza",
+   "seguridad": "sigue_dudosa",
+   "motivo": "Espacio blanco amplio en el cruce del camino diagonal, entre la 111, la manzana del N, la manzana del E y las 114/115, con un círculo dibujado (pila) frente al lote 'S' y su atrio; su anchura y el círculo apuntan a plaza, pero no tiene borde, nombre ni letra propia y sus límites salen de las manzanas vecinas.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-42/U1843-0232.png",
+   "sha256": "9a4b03f1cc0946e10fd59bec39083b0aaffe4c8707f23fe72043b99e089ddeca"
+  }
+ ]
+}
