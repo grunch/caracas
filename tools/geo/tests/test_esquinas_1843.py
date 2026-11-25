@@ -197,3 +197,12 @@ def test_una_gcp_cercana_con_otro_destino_no_pasa_por_el_ancla():
     anclas = [{**a, 'id': f'E1843-{k:03d}'} for k, a in enumerate(_rejilla(n=4))]
     gcps = [{'px': a['px'] + 1, 'py': a['py'], 'x36': a['x36'] + 500.0, 'y36': a['y36']} for a in anclas]   # sin id
     assert medir(anclas, gcps, SECTORES, metro=0.5)['metodo_loo'] == 'solo_anclas'
+
+
+def test_con_menos_de_cuatro_anclas_no_hay_loo_y_no_sale_nan():
+    from esquinas_1843 import medir
+    anclas = [{'id': 'E1843-001', 'px': 0.0, 'py': 0.0, 'x36': 0.0, 'y36': 0.0}]
+    gcps = [{'px': x, 'py': y, 'x36': x + 1, 'y36': y} for x, y in ((0, 500), (500, 0), (500, 500), (250, 250))]
+    informe = medir(anclas, gcps, SECTORES, metro=0.5)
+    assert informe['metodo_loo'] is None and informe['calce_identidad'] is None
+    assert informe['detalle'][0]['loo_m'] is None and informe['sectores'] == []

@@ -15,6 +15,7 @@ import numpy as np
 
 UMBRAL_SECTOR_M = 15        # specs/08 (heredado en specs/11): desvío mediano por sector bajo 15 m
 MINIMO_ANCLAS_LOO = 2       # con una sola ancla, su LOO es una extrapolación y no controla nada
+MINIMO_LOO_SOLO_ANCLAS = 4   # un TPS con menos puntos, sin uno de ellos, no está determinado
 MISMA_LECTURA_PX = 8        # dos lecturas del mismo número a menos de esto son la misma (solape de cuadrantes)
 
 ABREVIATURAS = {'sn': 'san', 's': 'san', 'sta': 'santa', 'sto': 'santo', 'dr': 'doctor', 'pte': 'puente'}
@@ -163,11 +164,13 @@ def medir(anclas, gcps_vigentes, sectores, metro, suavizado=0.0):
     quedan, fuera = depurar_por_consistencia(anclas, metro, suavizado=suavizado)
     loo = _loo_desplegado(quedan, gcps_vigentes, metro, suavizado)
     metodo = 'calce_desplegado'
-    if loo is None:
+    if loo is None and len(quedan) >= MINIMO_LOO_SOLO_ANCLAS:
         metodo = 'solo_anclas'
         origen = np.array([[a['px'], a['py']] for a in quedan], float)
         destino = np.array([[a['x36'], a['y36']] for a in quedan], float)
         loo = dict(zip([a['id'] for a in quedan], residuos_loo_rapidos(origen, destino, suavizado) * metro))
+    elif loo is None:
+        metodo, loo = None, {}   # con menos anclas un TPS sin una de ellas no está determinado: no hay LOO
     detalle = [{**a, 'sector': sector_de(a['px'], a['py'], sectores), 'en_calce': a['id'] in loo,
                 'desvio_m': round(desvio[a['id']], 2),
                 'loo_m': round(float(loo[a['id']]), 2) if a['id'] in loo else None}
@@ -175,12 +178,12 @@ def medir(anclas, gcps_vigentes, sectores, metro, suavizado=0.0):
     medibles = [a for a in detalle if a['sector'] and a['en_calce']]
     filas = resumen_por_sector(medibles, [loo[a['id']] for a in medibles], [desvio[a['id']] for a in medibles])
     valores = np.array(list(loo.values()))
+    identidad = None if not len(valores) else {'rms_loo_m': round(float(np.sqrt(np.mean(valores ** 2))), 2),
+                                                'p90_loo_m': round(float(np.percentile(valores, 90)), 2)}
     return {'anclas': len(anclas), 'en_calce': len(quedan), 'fuera_de_sectores': sum(1 for a in detalle if not a['sector']),
             'calce_medido': {'mediana_desvio_m': round(float(np.median(list(desvio.values()))), 2),
                              'max_desvio_m': round(float(np.max(list(desvio.values()))), 2)},
-            'calce_identidad': {'rms_loo_m': round(float(np.sqrt(np.mean(valores ** 2))), 2),
-                                'p90_loo_m': round(float(np.percentile(valores, 90)), 2)},
-            'metodo_loo': metodo, 'contradicen_a_sus_vecinas': fuera, 'sectores': filas, 'detalle': detalle}
+            'calce_identidad': identidad, 'metodo_loo': metodo, 'contradicen_a_sus_vecinas': fuera, 'sectores': filas, 'detalle': detalle}
 
 
 TOLERANCIA_SEMILLA_PX = 6   # como anclas_identidad.py: un ancla a menos de esto de una semilla es el mismo cruce

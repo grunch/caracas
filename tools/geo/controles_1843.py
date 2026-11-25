@@ -75,7 +75,8 @@ def main(argv=None):
         print(f"{len(omitidas)} omitidas; {informe['sin_medicion']}")
         return
     print(f"{informe['anclas']} anclas, {len(omitidas)} omitidas; calce medido ({metodo_calce}): mediana "
-          f"{informe['calce_medido']['mediana_desvio_m']} m; LOO ({informe['metodo_loo']}) RMS {informe['calce_identidad']['rms_loo_m']} m")
+          f"{informe['calce_medido']['mediana_desvio_m']} m; LOO ({informe['metodo_loo']}) RMS "
+          f"{(informe['calce_identidad'] or {}).get('rms_loo_m', '—')} m")
 
 
 if __name__ == '__main__':
