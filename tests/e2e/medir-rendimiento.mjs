@@ -78,8 +78,6 @@ await Promise.all([
   hito('lineaDeTiempo', () => Boolean(window.lab?.lineaDeTiempo)),
   hito('arboles', () => Boolean(window.lab?.arboles)),
 ])
-await pagina.evaluate(e=>window.lab.lineaDeTiempo.elegir(e),epoca)
-await pagina.waitForFunction(e=>window.lab.ciudad.U.uEpocaA.value===e&&window.lab.ciudad.U.uOlaEpoca.value>=9000,epoca,{timeout:ESPERA_MS})
 await pagina.waitForTimeout(QUIETO_MS)
 
 const alAbrir = resumirPedidos([...pedidos.values()], url)
@@ -89,6 +87,9 @@ const gpu = await pagina.evaluate(() => {
   return gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info')?.UNMASKED_RENDERER_WEBGL ?? gl.RENDERER)
 })
 
+// la época que se mide (--epoca), después de las medidas del arranque: esa ventana sigue sin tocar nada
+await pagina.evaluate(e=>window.lab.lineaDeTiempo.elegir(e),epoca)
+await pagina.waitForFunction(e=>window.lab.ciudad.U.uEpocaA.value===e&&window.lab.ciudad.U.uOlaEpoca.value>=9000,epoca,{timeout:ESPERA_MS})
 // la ciudad en pie y en color, que es como se mira
 await pagina.evaluate(() => {
   const { levantar, alternarColor, ciudad } = window.lab

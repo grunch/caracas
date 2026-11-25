@@ -18,8 +18,9 @@ def seleccionar_ampliacion(referencias, heredadas, hitos, metro):
             continue
         p=Polygon(r['poligono']).buffer(0)
         # La clasificación más específica manda: una casa rayada dentro de una huerta es un enclave;
-        # una huerta pequeña dentro de una manzana rayada, en cambio, sigue siendo huerta.
-        enclaves=unary_union([q for q in edificadas if q.area<p.area and p.covers(q)])
+        # una huerta pequeña dentro de una manzana rayada, en cambio, sigue siendo huerta. Plazas, terrenos
+        # libres y lotes especiales no tienen enclaves: van enteros, sin casas (R7, specs/13).
+        enclaves=unary_union([q for q in edificadas if r['ocupacion']=='huerta' and q.area<p.area and p.covers(q)])
         libres.append(p.difference(enclaves))
     libres=unary_union(libres)
     reservas = [(h['id'],Polygon(p).buffer(0)) for h in hitos
