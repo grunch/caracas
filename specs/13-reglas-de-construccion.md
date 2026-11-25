@@ -21,9 +21,9 @@ Cada regla dice qué, por qué, cómo se mide y qué umbral cierra. «Frente» e
 | **R9 · Cada nombre en su lugar** | Toda marca de un edificio en pie en la época cae sobre su hito o sobre un edificio que lo representa, no en la calle ni sobre casas genéricas. Una plaza nombrada está libre. | Un rótulo de iglesia sobre un llano o sobre casas (D4) desinforma. | Punto de cada marca contra hitos, casas y calzada de la época. | 0 marcas de edificio en la calle o sobre casas genéricas (o límite «hito pendiente») |
 | **R10 · Agua continua** | Ríos y quebradas corren continuos de punta a punta, sin casas encima; los puentes, en su lugar y su época. | El Caroata cortado en el campo (D5) no tiene sentido. | Continuidad de cada cauce y casas sobre su corredor. | Cauces continuos; 0 casas sobre el cauce |
 | **R11 · Sin anacronismos** | Nada aparece antes de existir ni sigue después de desaparecer: edificios, puentes, plazas, ferrocarril, avenidas, estilos y pisos. | Es la promesa del mapa por épocas. | Vida de hitos y marcas contra sus fechas con fuente; estilos y pisos por época (`tools/geo/estilos.py`). | 0 elementos fuera de su vida |
-| **R12 · Las otras épocas intactas** | Arreglar una época no cambia las demás, salvo cuando la regla se aplica también a ellas y se miden todas. | 1772 ya está auditada; 1843 también. | Las puertas de todas las épocas antes y después (`epocas.nace_sin_tocar_las_anteriores`). | Ninguna puerta empeora sin límite registrado |
+| **R12 · Las otras épocas intactas** | Arreglar una época no cambia las demás, salvo cuando la regla se aplica también a ellas y se miden todas. | 1772 ya está auditada; 1843 también. | Las puertas de todas las épocas antes y después del cambio, comparadas: `tools/geo/reglas_mapa.py --todas` y las de las auditorías cerradas (08, 11). Que no cambie cuándo nace cada casa (`epocas.nace_sin_tocar_las_anteriores`, la herramienta del generador) no prueba que las puertas sigan igual. | Ninguna puerta de ninguna época empeora sin límite registrado |
 
-**1936 es el dato**: sus casas son las del plano. En 1936 se aplican R2, R3, R5 y R7 a R12, pero no R1 ni R6: la densidad y las filas de 1936 son las del plano.
+**1936 es el dato**: sus casas son las del plano. En 1936 se aplican R2 a R5 y R7 a R12 (el ancho de calle de R4, contra el que dibuja el plano), pero no R1 ni R6: la densidad y las filas de 1936 son las del plano.
 
 ## 2. Cómo se trabaja (siempre)
 
@@ -72,6 +72,7 @@ Punto de partida (no es fuente histórica): la vista aérea del pueblo colonial 
 
 Versionados en [`specs/reglas/workflows/`](reglas/workflows/README.md), con el mismo criterio que los de 1843: el script tal como se corre, sus argumentos y qué devuelve.
 
+- **Capturas** (`capturas.mjs`): de 1772 a 1936. 1578 queda fuera de la línea de tiempo y el sitio no la muestra, así que se revisa contra su plano y su medición.
 - **`investigacion.js` (F0)**: un agente por tema busca en la web y en `fuentes/` y devuelve afirmaciones con fuente y cita. Por cada tema, un verificador abre las fuentes e intenta refutar cada afirmación. Al final, un agente arma la tabla de § 3 solo con lo que sobrevive, con rangos cuando las fuentes difieren.
 - **`diagnostico-epocas.js` (F1, F4 y cierre)**: por época, en paralelo:
   1. un agente corre `reglas_mapa.py` y resume las puertas;

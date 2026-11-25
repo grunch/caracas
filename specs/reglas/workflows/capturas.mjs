@@ -3,6 +3,9 @@
 // Ej.: node specs/reglas/workflows/capturas.mjs https://caracas.city /tmp/rev 2
 // Escribe <carpeta>/<indice>-<vista>.png (1280×900, en color, ciudad levantada). Cámaras en metros, plaza en el origen.
 import { chromium } from '@playwright/test'
+import { PRIMERA_EPOCA } from '../../../src/epocas.js'
+import { AÑOS_DE_EPOCA } from '../../../src/fichas.js'
+import { hayDato } from '../../../tests/e2e/datos.js'
 
 export const VISTAS = {
   general: { x: 100, z: 200, dist: 3200, yaw: 0, pitch: 1.5 },
@@ -25,6 +28,12 @@ if (!url || !carpeta || epocaTxt === undefined) {
   process.exit(2)
 }
 const epoca = Number(epocaTxt)
+// la línea de tiempo acota lo que se le pide (lineaDeTiempo.elegir): un índice que no muestra no se captura.
+// 1578 (índice 0) queda fuera de la línea de tiempo y el sitio no tiene cómo mostrarlo: no se captura.
+if (!Number.isInteger(epoca) || epoca < PRIMERA_EPOCA || epoca >= AÑOS_DE_EPOCA.length) {
+  console.error(`índice de época fuera de la línea de tiempo: ${epocaTxt} (de ${PRIMERA_EPOCA} a ${AÑOS_DE_EPOCA.length - 1})`)
+  process.exit(2)
+}
 const nombres = lista ? lista.split(',') : Object.keys(VISTAS)
 const desconocidas = nombres.filter((n) => !VISTAS[n])
 if (desconocidas.length) {
@@ -36,6 +45,10 @@ const p = await nav.newPage({ viewport: { width: 1280, height: 900 } })
 p.on('pageerror', (e) => console.error('pageerror:', e.message))
 await p.goto(`${url}?capture&sinintro`)
 await p.waitForFunction(() => window.lab?.ready && window.lab.relieve && window.lab.lineaDeTiempo, null, { timeout: 240000 })
+// `ready` llega con los hitos; las casas, después (casasListas), y solo si hay datos de la ciudad (como los E2E)
+if (await hayDato(p, 'datos/ciudad.pak', 'octet-stream')) {
+  await p.waitForFunction(() => window.lab.casasListas === true, null, { timeout: 240000 })
+} else console.error('sin datos/ciudad.pak: las capturas salen sin casas')
 await p.evaluate((e) => { window.lab.levantar(true); window.lab.alternarColor?.(); window.lab.lineaDeTiempo.elegir(e) }, epoca)
 await p.waitForFunction((e) => window.lab.ciudad.U.uEpocaA.value === e, epoca, { timeout: 120000 })
 await p.evaluate(() => { window.lab.ciudad.U.uOla.value = 1e5; window.lab.ciudad.U.uOlaEpoca.value = 8999 })

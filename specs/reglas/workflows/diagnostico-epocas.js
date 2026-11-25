@@ -36,7 +36,7 @@ const CIERRE = {
   properties: { reglas: { type: 'array', items: { type: 'object', required: ['regla', 'cierra', 'evidencia'],
     properties: { regla: { type: 'string' }, cierra: { type: 'boolean' }, evidencia: { type: 'string' }, limites: { type: 'string' } } } } },
 }
-const contexto = (e) => `Proyecto /disco/dev/caracas, mapa 3D de Caracas por épocas. Las reglas de construcción están en specs/13-reglas-de-construccion.md (léelo primero: ${REGLAS}). Época ${e.año} (índice ${e.indice}). ${e.año === 1936 ? 'En 1936 no se aplican R1 ni R6 (sus casas son las del plano).' : ''}
+const contexto = (e) => `Este repositorio: mapa 3D de Caracas por épocas. Las reglas de construcción están en specs/13-reglas-de-construccion.md (léelo primero: ${REGLAS}). Época ${e.año} (índice ${e.indice}). ${e.año === 1936 ? 'En 1936 no se aplican R1 ni R6 (sus casas son las del plano).' : ''}
 Capturas del sitio (míralas todas con Read): ${e.capturas.join(', ')}.
 Plano original de la época: ${e.original ?? 'no aplica'}. Medición de las puertas: ${e.medicion ?? 'todavía no existe (F1)'}.`
 const revisar = (e) => agent(`${contexto(e)}

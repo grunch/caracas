@@ -12,7 +12,7 @@ const TEMAS = [
   { id: 'calles', q: `Ancho de las calles de Caracas por época (${EPOCAS}): en varas castellanas y metros; ordenanzas coloniales; aceras; si las calles se ensancharon en el siglo XIX o con Guzmán Blanco; ancho típico de calle en ciudades hispanoamericanas de damero.` },
   { id: 'tipologia', q: `La casa colonial y republicana caraqueña (Graziano Gasparini, «La casa colonial venezolana»; Carlos F. Duarte; estudios de la casa de patio): frente típico (varas/metros) y fondo del lote; casa grande del centro vs casa de las orillas (casa de una crujía, bahareque); zaguán, corredores, patio principal, traspatio, corral; qué abre a la calle (portón, ventanas con reja, balcón) y qué abre al patio (corredor, puertas de las habitaciones); medianeras; número de pisos por época (${EPOCAS}).` },
   { id: 'pueblos', q: `Pueblos y ciudades hispanoamericanos que conservan el tejido colonial parecido a la Caracas de 1772–1843 (por ejemplo Coro, Carora, El Tocuyo, La Asunción, Petare, Barichara, Villa de Leyva, Mompox, Antigua Guatemala, Popayán): cuántas casas hay por manzana o por frente de cuadra, frente típico de las casas, tamaño de manzana. Datos medidos o de catastro con fuente.` },
-  { id: 'edificios', q: `Edificios públicos, iglesias y conventos de Caracas en pie en cada época (${EPOCAS}), con fecha de construcción y de demolición o transformación: Catedral, San Francisco, La Merced, San Mauricio (Santa Capilla), San Pablo, Altagracia, Candelaria, Santa Rosalía, La Pastora, La Trinidad (Panteón), Concepciones, Carmelitas, San Jacinto, Seminario y Universidad, Casa de Gobierno / Casa Amarilla, Palacio Arzobispal, mercado de la Plaza Mayor, puentes. Compara con las marcas de /disco/dev/caracas/src/marcas-datos.js (lee el archivo) y avisa de diferencias.` },
+  { id: 'edificios', q: `Edificios públicos, iglesias y conventos de Caracas en pie en cada época (${EPOCAS}), con fecha de construcción y de demolición o transformación: Catedral, San Francisco, La Merced, San Mauricio (Santa Capilla), San Pablo, Altagracia, Candelaria, Santa Rosalía, La Pastora, La Trinidad (Panteón), Concepciones, Carmelitas, San Jacinto, Seminario y Universidad, Casa de Gobierno / Casa Amarilla, Palacio Arzobispal, mercado de la Plaza Mayor, puentes. Compara con las marcas de src/marcas-datos.js del repo (lee el archivo) y avisa de diferencias.` },
   { id: 'agua', q: `Ríos y quebradas de Caracas (Guaire, Catuche, Caroata, Anauco, otras quebradas) y sus puentes por época (${EPOCAS}): recorrido respecto de la ciudad, si la quebrada Caroata llegaba al Guaire por el oeste de la ciudad, fechas de los puentes (de la Pastora, Trinidad, Punceres, Candelaria, San Pablo, de Hierro…), embaulamientos.` },
 ]
 const AFIRMACIONES = {
@@ -44,7 +44,7 @@ const TABLA = {
   },
 }
 const elegidos = args?.temas ? TEMAS.filter((t) => args.temas.includes(t.id)) : TEMAS
-const buscar = (t) => agent(`Investigación para las reglas de construcción del mapa histórico de Caracas (proyecto /disco/dev/caracas; reglas en specs/13-reglas-de-construccion.md, léelo primero). Tema «${t.id}»:
+const buscar = (t) => agent(`Investigación para las reglas de construcción del mapa histórico de Caracas (este repositorio; reglas en specs/13-reglas-de-construccion.md, léelo primero). Tema «${t.id}»:
 
 ${t.q}
 
