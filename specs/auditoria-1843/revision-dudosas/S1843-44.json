@@ -1,0 +1,76 @@
+{
+ "sector": "S1843-44",
+ "revisiones": [
+  {
+   "unidad": "U1843-0268",
+   "decision": "aprobada",
+   "ocupacion": "lote_especial",
+   "seguridad": "segura",
+   "motivo": "Lote blanco con marco dentro de la manzana rayada horizontal (esquina 64), con la letra debajo; a ×6 son tres trazos verticales con remates, una 'm' cursiva, coherente con la serie m (aquí), n (j) y o (edificio cercano). Caja 3654-3677 × 2889-2907, coincide.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-44/U1843-0268.png",
+   "sha256": "89b914a8435f9835c70c587bdd37afeb5e236542fa8c9e11f6e26c071eb6efe5"
+  },
+  {
+   "unidad": "U1843-0269",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Manzana cerrada con trazo continuo, alineada con las calles, con el mismo punteado denso de trazos verticales que las manzanas numeradas 55, 56 y 67 (el campo abierto tiene trazos ralos, distintos). Es rayado de parroquia, no huerta; el contorno con el borde SO en diagonal coincide (4078-4197 × 2878-2996).",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-44/U1843-0269.png",
+   "sha256": "1ce8edf50c2a4d420dc3e83ae62dc27bae78e8012aa511d4ff6bdfc9dfb79d3c"
+  },
+  {
+   "unidad": "U1843-0275",
+   "decision": "aprobada",
+   "ocupacion": "lote_especial",
+   "seguridad": "segura",
+   "motivo": "Rectángulo blanco con marco propio en la esquina NO de la manzana j (3957-3978 × 3007-3017), con la letra 'n' justo debajo: el mismo esquema que el lote 'm' (U1843-0268), donde la letra acompaña al blanco.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-44/U1843-0275.png",
+   "sha256": "286e5ac7de58e4b100707afdc649e26cb9f3fc45eb4de03f0fc729cdd79b4f93"
+  },
+  {
+   "unidad": "U1843-0277",
+   "decision": "corregida",
+   "ocupacion": "rayada",
+   "poligono_px": [
+    [
+     3978,
+     3007
+    ],
+    [
+     4060,
+     3007
+    ],
+    [
+     4060,
+     3072
+    ],
+    [
+     3957,
+     3072
+    ],
+    [
+     3957,
+     3017
+    ],
+    [
+     3978,
+     3017
+    ]
+   ],
+   "seguridad": "segura",
+   "motivo": "Manzana de rayado vertical con contorno correcto, pero el rectángulo blanco de su esquina NO es la unidad U1843-0275; se recorta esa muesca para no contarla dos veces. La letra 'n' (no 'm': dos trazos, y la 'm' es la de U1843-0268) rotula al lote blanco, no a la manzana.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-44/U1843-0277.png",
+   "sha256": "853ca6c60c7024524a9254780ad7f4fed1135d5f4e5b08eb98c085279f69e13f"
+  },
+  {
+   "unidad": "U1843-0287",
+   "decision": "aprobada",
+   "ocupacion": "rayada",
+   "seguridad": "segura",
+   "motivo": "Edificio aislado al S del Campo de Marte, en el grupo de casitas sueltas: rectángulo con marco y trazos verticales (más ralos, como sus vecinos), 3958-3978 × 3249-3260. Es edificación rayada; el contorno coincide.",
+   "recorte": "/tmp/claude-1000/-disco-dev-caracas/19152184-a166-4ba7-b52b-c42dae76c69d/scratchpad/dudosas1843/S1843-44/U1843-0287.png",
+   "sha256": "3c682d71ecd3c69e677769772598cf1ed31c898aef9cbeacd6a95368506962f3"
+  }
+ ]
+}
