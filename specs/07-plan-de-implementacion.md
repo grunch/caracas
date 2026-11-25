@@ -155,7 +155,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T82.1 | **Generador de manzanas coloniales en 1772**: integración inicial del estudio, densidad y paleta | T82 | 38 manzanas integradas, otras épocas conservadas | ✅ [PR #210](https://github.com/grunch/caracas/pull/210) |
 | T82.2 | **Todas las manzanas de 1772**, edificios existentes, árboles en cada cuadra y reducción adicional del 40 % junto a Plaza Mayor | T82.1 | 253 unidades; 3.167 casas y 5.083 árboles, cobertura completa y edificios conservados | 🔄 [PR #211](https://github.com/grunch/caracas/pull/211), listo para revisión; pendiente revisión visual y publicación de datos |
 | T82.3 | **Piloto de balcones y detalle colonial por distancia** en tres manzanas | T82.2 | Geometría de cerca, nivel simplificado a distancia y comparación de rendimiento | 🔄 [PR #212](https://github.com/grunch/caracas/pull/212), listo para revisión; piloto medido en tres manzanas |
-| T82.5 | **Manzanas completas de 1843 con continuidad exacta del tejido de 1772** | T82.2 | Conservar parcelas y paletas, completar la expansión del censo y arbolar cada nueva unidad | 🔄 Implementado; validación y PR limpio en curso |
+| T82.5 | **Manzanas completas de 1843 con continuidad exacta del tejido de 1772** | T82.2 | Conservar parcelas y paletas, completar la expansión del censo y arbolar cada nueva unidad | 🔄 Implementado y validado; [PR #214](https://github.com/grunch/caracas/pull/214) listo para revisión |
 
 ## Riesgos que el plan vigila
 
