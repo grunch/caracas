@@ -10,13 +10,13 @@ alas, pisos, semillas, colores, tejados y árboles. Las 3.169 casas del paquete 
 vida de `[1772,1843)` a `[1772,1889)`; no se vuelve a sortear su distribución. Esto implementa la
 continuidad visual solicitada, no afirma que cada vivienda histórica sobreviviera sin cambios.
 
-El censo revisado aporta **133 áreas de ampliación**, divididas en **147 unidades** cuando la geometría
-restante tiene varios componentes. Se añaden **1.043 casas** con el mismo planificador de Miraflores
-que usa 1772. Hay **400 unidades en total**, con **6.600 árboles**: los 5.082 de las manzanas heredadas
-conservan posición, radio y semilla; las nuevas reciben 1.518, con cantidades variables y al menos uno
+El censo revisado aporta **132 áreas de ampliación**, divididas en **146 unidades** cuando la geometría
+restante tiene varios componentes. Se añaden **1.041 casas** con el mismo planificador de Miraflores
+que usa 1772. Hay **399 unidades en total**, con **6.597 árboles**: los 5.082 de las manzanas heredadas
+conservan posición, radio y semilla; las nuevas reciben 1.515, con cantidades variables y al menos uno
 por unidad. Las casas de las manzanas de 1772 no se densifican: el aumento corresponde a las zonas nuevas.
 
-En los datos hay 4.212 casas en 1843; el visor muestra **4.210**. Dos casas heredadas junto a la Trinidad
+En los datos hay 4.210 casas en 1843; el visor muestra **4.208**. Dos casas heredadas junto a la Trinidad
 quedan ocultas por la supresión del modelo histórico ya existente, activo desde 1843 (`panteon`). Sus
 parcelas y registros se conservan, y 1772 permanece intacto. No se desactiva esa protección para dibujar
 casas encima del monumento. La continuidad visible es de 3.167 de las 3.169 casas anteriores; la continuidad
@@ -30,14 +30,17 @@ La fuente y su licencia están en `fuentes/mapas/1843-nypl-jesurun-facsimil-mull
 El plano no describe el interior de las manzanas: la parcelación, densidad y arbolado siguen siendo
 reconstrucciones del generador aprobado, no mediciones históricas.
 
-- De las referencias, 149 corresponden al tejido heredado y 133 a la ampliación. Si al menos la mitad de
+- De las referencias, 149 corresponden al tejido heredado y 132 a la ampliación. Si al menos la mitad de
   una unidad coincide con 1772, prevalece la manzana ya construida: no se generan franjas duplicadas por
   pequeñas diferencias de calce.
 - En las ampliaciones se recortan los límites anteriores y se reserva una separación de 6 m respecto al
   tejido conservado, usando el mismo ancho de calle inferido de 1772. No se altera ningún lindero anterior.
 - Los espacios abiertos, huertas y lotes especiales no se rellenan con viviendas. Un edificio identificado
   explícitamente dentro de una huerta grande es un enclave edificado; una huerta pequeña dentro de una
-  manzana, en cambio, queda libre. Esto incluye las áreas revisadas U1843-0087, U1843-0300 y U1843-0343.
+  manzana, en cambio, queda libre. Esto incluye las áreas revisadas U1843-0087 y U1843-0300. Las plazas,
+  los terrenos libres y los lotes especiales no tienen enclaves (R7 de `specs/13`): U1843-0343, rayada dentro
+  del lote especial «q» (U1843-0348), queda sin área nueva útil y sin casas genéricas (2026-11-25, revisión
+  de #214; decisión de Claude por delegación del responsable).
 - 79 referencias son espacios no residenciales o descartados; otras cuatro siguen pendientes en el censo
   (tres candidatas rayadas y una huerta). No se convierten sus dudas en nuevas construcciones confirmadas.
 - Se respetan las reservas y los tejados de los edificios históricos activos en 1843. Cada ampliación

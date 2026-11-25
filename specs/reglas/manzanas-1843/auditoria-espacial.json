@@ -7,9 +7,10 @@
   "copasNuevasSobreTejados": 0,
   "manzanasNuevasSinArboles": [],
   "coberturaReferencia": {
-    "pendiente_en_referencia": 4,
-    "espacio_no_residencial": 79,
+    "ampliacion": 132,
     "heredada": 149,
-    "ampliacion": 133
+    "sin_area_nueva_util": 1,
+    "pendiente_en_referencia": 4,
+    "espacio_no_residencial": 79
   }
 }

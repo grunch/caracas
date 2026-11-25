@@ -46,3 +46,12 @@ def test_no_convierte_una_referencia_pendiente_en_construccion_confirmada():
     assert r['manzanas']==[]
     assert r['cobertura']==[{'id':'D','estado':'pendiente_en_referencia','ocupacion':'rayada',
                              'motivo':'edificio o señal de lindero'}]
+
+
+def test_una_casa_rayada_dentro_de_una_plaza_terreno_o_lote_no_es_enclave():
+    # R7 (specs/13): plazas, terrenos libres y lotes especiales van sin casas; el enclave es solo de huertas.
+    for ocupacion in ['plaza','terreno_libre','lote_especial']:
+        refs=[{'id':'P','ocupacion':ocupacion,'poligono':cuadro(0,0,300),'estado':'aprobada'},
+              {'id':'C','ocupacion':'rayada','poligono':cuadro(100,100,50),'estado':'aprobada'}]
+        r=seleccionar_ampliacion(refs,[],[],1)
+        assert r['manzanas']==[], ocupacion
