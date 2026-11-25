@@ -875,11 +875,14 @@ def main():
     for k, e in enumerate(epocas):
         if e.get("referencia"):
             # T81.4c: las manzanas rayadas de la referencia que siguen sin casas a la vista llevan casas propias
-            from epocas_1843 import agregar_casas, fuera_de_la_referencia
+            from epocas_1843 import agregar_casas, en_lotes_libres, fuera_de_la_referencia
             unidades = json.loads((raiz / e["referencia"]).read_text())["unidades"]
             # T81.3a: lo que nace en la época fuera de toda unidad de su referencia estaría en una calle o en el campo
             ciudad, movidas = fuera_de_la_referencia(ciudad, unidades, metro, k)
             print(f"{e['año']}: {movidas} casas fuera de la referencia pasan a la época siguiente")
+            # T81.4b: ni en los lotes especiales, plazas y terrenos libres que el plano pinta en blanco
+            ciudad, movidas = en_lotes_libres(ciudad, unidades, k)
+            print(f"{e['año']}: {movidas} casas en lotes especiales, plazas o terrenos libres pasan a la época siguiente")
             ciudad, informe = agregar_casas(ciudad, unidades, metro, k)
             print(f"{e['año']}: casas propias en {informe['manzanas']} manzanas sin casas ({informe['casas']} casas)")
     (salida / "ciudad-epocas.json").write_text(json.dumps(ciudad))
