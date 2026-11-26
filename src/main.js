@@ -17,6 +17,7 @@ import { acercar, pasoDeCuadro } from './animar.js'
 import { texturasHoy, HOY_CERCA } from './hoy.js'
 import { crearBuscador } from './buscador/interfaz.js'
 import { crearTeselasFinas } from './teselas.js'
+import {conElSilencio,planoBaseDe} from './el-silencio-epoca.js'
 import { crearLineaDeTiempo, crearSecuencia, escalaCrece, PRIMERA_EPOCA } from './epocas.js'
 import { crearPlanosDeEpoca, planoDeEpoca } from './planos.js'
 import { cargarCallesDeEpoca } from './calles-epoca.js'
@@ -58,7 +59,7 @@ const EXAGERACION = 1.3 // el valle se lee mejor con el relieve un poco exagerad
 
 // --- la bienvenida y el «Acerca» (src/acerca-panel.js): antes que nada, para que la bienvenida se vea mientras
 // carga el plano y sus teclas valgan antes que las de los demás paneles. No esperan a nada ni frenan la carga ---
-const crecePedido = pedirDato('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))))
+const crecePedido = pedirDato('datos/crece.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))).then(j=>({...j,epocas:conElSilencio(j.epocas)}))
 crecePedido.catch(() => {}) // sin crece.json (la demo de CI) no hay línea de tiempo: se avisa más abajo
 // lo que cada acción de src/controles.js hace acá; las funciones se declaran más abajo
 const HACER = {
@@ -282,6 +283,12 @@ casasPedidas.then(() => {
 // --- los hitos: edificios y lugares modelados a mano, en una sola malla con los uniforms de la ciudad ---
 // (se construyen en un worker: en este hilo eran más de un segundo y medio de página congelada al arrancar)
 let hitos = null
+let hitosSilencio = null, silencioPedido = null
+function prepararSilencio(){
+  return silencioPedido ??= pedirHitos({plano:meta.plano,soloSilencio:true,crearTrabajador:sinTrabajadores?null:()=>new Worker(new URL('./hitos-trabajador.js',import.meta.url),{type:'module'})}).then(datos=>{
+    hitosSilencio=crearHitos({coords,U:ciudad.U,datos,hitos:HITOS.filter(h=>h.nace===6)});hitosSilencio.name='el-silencio';scene.add(hitosSilencio);pedirCuadro(3)
+  }).catch(e=>{silencioPedido=null;throw e})
+}
 const hitosPedidos = pedirHitos({
   plano: meta.plano,
   crearTrabajador: sinTrabajadores ? null : () => new Worker(new URL('./hitos-trabajador.js', import.meta.url), { type: 'module' }),
@@ -325,25 +332,29 @@ Promise.all([crecePedido, indicePlanos])
     planos.usar(planoDe(PRIMERA_EPOCA), planoDe(PRIMERA_EPOCA))
     secuencia = crearSecuencia((de, a) => {
       const esperar = new Promise((ok) => setTimeout(ok, ESPERA_PLANO_MS))
-      Promise.race([planos.preparar(planoDe(a)), esperar]).then(() => {
+      Promise.all([Promise.race([planos.preparar(planoDe(a)), esperar]),a===6?prepararSilencio():null]).then(() => {
         planos.usar(planoDe(de), planoDe(a))
         planos.preparar(planoDe(a + 1)) // ▶ las recorre en orden: la siguiente, precargada
         U.uEpocaDe.value = de
         U.uEpocaA.value = a
         U.uOlaEpoca.value = 0
         pedirCuadro(3)
+      }).catch(e=>{
+        secuencia.cancelar(de);lineaDeTiempo.elegir(de);
+        document.querySelector('#epocas .pie').textContent='No se pudo cargar esta vista. Puedes volver a elegirla para reintentar.';
+        console.warn(`época: ${e.message}`);pedirCuadro(3)
       })
     }, PRIMERA_EPOCA)
     lineaDeTiempo = crearLineaDeTiempo({
       contenedor: document.getElementById('epocas'), epocas, desde: PRIMERA_EPOCA,
-      alElegir: (i) => { secuencia.elegir(i); visorPlano?.elegir(epocas[i]) },
+      alElegir: (i) => { secuencia.elegir(i); visorPlano?.elegir(planoBaseDe(epocas, epocas[i])) },
     })
     visorPlano = crearVisorDePlano({
-      contenedor: document.getElementById('epocas'), liviano, añoBase: epocas.at(-1).año,
+      contenedor: document.getElementById('epocas'), liviano, añoBase: epocas.at(-1).base ?? epocas.at(-1).año,
       base: ['plano/chico.webp', liviano ? 'plano/medio-4k.webp' : 'plano/medio.webp'],
       indice: () => fetch('plano/epocas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))).then((j) => j.planos),
     })
-    visorPlano.elegir(epocas[lineaDeTiempo.actual])
+    visorPlano.elegir(planoBaseDe(epocas, epocas[lineaDeTiempo.actual]))
     pedirMascaras() // el agua, para la hoja en tinta de antes de 1936
     // las calles de 1772 sobre el suelo liso de su época (src/calles-epoca.js); con ?planos se ve el plano de la época
     if (!params.has('planos')) {
@@ -365,7 +376,8 @@ Promise.all([crecePedido, indicePlanos])
       U.uCreceEscala.value.fromArray(escalaCrece(meta.plano, { cols, rows }, celda_m ?? 8))
       ponerTextura(U.uCrece, t)
     }).catch((e) => console.warn(`crece: ${e.message}`))
-  }).catch((e) => console.warn(`épocas: ${e.message}`)) // sin crece.json (p. ej. la demo de CI): la ciudad entera, sin línea de tiempo
+  }).catch((e) => {ciudad.U.uEpocaDe.value=ciudad.U.uEpocaA.value=5;pedirCuadro(3);console.warn(`épocas: ${e.message}`)}) // sin crece.json: base1936; no suprimir el barrio por una vista futura que no se puede abrir.
+// Sin índice de épocas se conserva la base de1936, sin sustituir solares por hitos no cargados.
 
 let olaElegida = false // alguien levantó o acostó la ciudad: la entrada (arrancar) no la vuelve a levantar
 function levantar(arriba = olaObjetivo === 0) {
@@ -735,6 +747,7 @@ renderer.setAnimationLoop((t) => {
   fichas.actualizar() // con la ficha abierta, sigue a la época que llega con la ola
   rotulos?.dibujar({ camera, dist: cam.now.dist, x: cam.now.x, z: cam.now.z, opacidad: ciudad.U.uHoy.value, ocupados })
   if (medicion) renderer.info.reset()
+  if(hitosSilencio)hitosSilencio.visible=uEpocaA.value>=6||(uOlaEpoca.value<OLA_EPOCA_MAX_M&&uEpocaDe.value>=6)
   acabado.dibujar()
   medicion?.cuadro(performance.now())
 })
@@ -755,6 +768,7 @@ window.lab = {
   get teselas() { return teselas },
   get arboles() { return arboles },
   get hitos() { return hitos },
+  get hitosSilencio() { return hitosSilencio },
   get calles() { return rotulos },
   get lineaDeTiempo() { return lineaDeTiempo },
   get planos() { return planos },

@@ -1,0 +1,44 @@
+[
+  {
+    "epoca": 0,
+    "antes": 65,
+    "despues": 65,
+    "cambios": 0
+  },
+  {
+    "epoca": 1,
+    "antes": 3169,
+    "despues": 3169,
+    "cambios": 0
+  },
+  {
+    "epoca": 2,
+    "antes": 4208,
+    "despues": 4208,
+    "cambios": 0
+  },
+  {
+    "epoca": 3,
+    "antes": 4873,
+    "despues": 4873,
+    "cambios": 0
+  },
+  {
+    "epoca": 4,
+    "antes": 14187,
+    "despues": 14187,
+    "cambios": 0
+  },
+  {
+    "epoca": 5,
+    "antes": 35432,
+    "despues": 35432,
+    "cambios": 0
+  },
+  {
+    "epoca": 6,
+    "antes": 35432,
+    "despues": 35099,
+    "cambios": 333
+  }
+]

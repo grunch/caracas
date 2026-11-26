@@ -60,3 +60,11 @@ describe('los hitos fuera del hilo de la página', { timeout: 60_000 }, () => {
     aviso.mockRestore()
   })
 })
+
+it('El Silencio se construye aparte: ninguna carga de1945 en el arranque histórico',()=>{
+ expect(referencia.rangos.some(r=>r.id.startsWith('silencio-'))).toBe(false)
+ const futuro=datosDeHitos(plano,true)
+ expect(futuro.rangos).toHaveLength(10)
+ expect(futuro.rangos.every(r=>r.id.startsWith('silencio-'))).toBe(true)
+ expect(futuro.indices.length/3).toBeLessThan(500_000)
+},15000)

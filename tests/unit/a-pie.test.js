@@ -183,3 +183,26 @@ describe('la velocidad a pie', () => {
     expect(VELOCIDAD.corre * 3.6).toBeCloseTo(25.2)
   })
 })
+
+ test('El Silencio bloquea la planta baja desde1945 y deja abiertos patios y galerías', async () => {
+  const { PLANTAS_SILENCIO } = await import('../../src/hitos/datos/el-silencio-plantas.js')
+  const { pixelSilencio } = await import('../../src/hitos/datos/el-silencio.js')
+  const plantas = hitosConPlanta().filter(h => h.id.startsWith('silencio-bloque-'))
+  expect(plantas).toHaveLength(7)
+  const vacio = { vertices: [], techos: [], vida: [] }
+  const antes = rejillaDeCasas(vacio, 5, aMundo, plantas)
+  const despues = rejillaDeCasas(vacio, 6, aMundo, plantas)
+  for (const h of plantas) {
+    const centro = h.planta[0].reduce((s,p)=>[s[0]+p[0]/3,s[1]+p[1]/3],[0,0])
+    expect(choca(antes,...centro)).toBe(false)
+    expect(choca(despues,...centro)).toBe(true)
+  }
+  const centro = ps => ps.reduce((s,p)=>[s[0]+p[0]/ps.length,s[1]+p[1]/ps.length],[0,0])
+  for (const id of ['6','7']) {
+    const p = PLANTAS_SILENCIO[id].plantas[0]
+    expect(choca(despues,...pixelSilencio(centro(p.patios[0])))).toBe(false)
+    const [a,b] = p.exterior
+    const medio = [(a[0]+b[0])/2,(a[1]+b[1])/2]
+    expect(choca(despues,...pixelSilencio(medio))).toBe(false)
+  }
+ })

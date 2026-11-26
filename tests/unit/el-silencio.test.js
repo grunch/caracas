@@ -1,0 +1,82 @@
+import {describe,it,expect} from 'vitest'
+import {conElSilencio,EPOCA_SILENCIO,planoBaseDe} from '../../src/el-silencio-epoca.js'
+import {silencio} from '../../src/hitos/datos/el-silencio.js'
+import {suprimirTechos,zonasDeSupresion} from '../../src/hitos/suprimir.js'
+import {visibleEn} from '../../src/epocas.js'
+
+describe('El Silencio georreferenciado',()=>{
+ it('añade una vista parcial de 1945 sin cambiar índices ni metadatos originales',()=>{
+  const originales=[1578,1772,1843,1889,1911,1936].map(año=>({año,corto:'plano original'}))
+  const epocas=conElSilencio(originales)
+  expect(epocas.slice(0,6)).toEqual(originales);expect(originales).toHaveLength(6)
+  expect(epocas[EPOCA_SILENCIO]).toMatchObject({año:1945,base:1936,parcial:true})
+  expect(conElSilencio([{año:1772}])).toEqual([{año:1772}])
+ })
+ it('el plano de la vista parcial es la hoja base, con su título y sus créditos',()=>{
+  const originales=[1578,1772,1843,1889,1911,1936].map(año=>({año,titulo:`Plano de ${año}`,autor:`autor ${año}`,fuente:`fuente ${año}`}))
+  const epocas=conElSilencio(originales)
+  expect(planoBaseDe(epocas,epocas[EPOCA_SILENCIO])).toBe(originales[5])
+  expect(planoBaseDe(epocas,epocas[2])).toBe(originales[2])
+  expect(planoBaseDe([],{año:1945,base:1936,parcial:true})).toMatchObject({año:1936})
+  expect(planoBaseDe(epocas,undefined)).toBeUndefined()
+ })
+ it('registra siete bloques y plazas, posteriores a1936',()=>{
+  expect(silencio.filter(h=>h.id.startsWith('silencio-bloque-'))).toHaveLength(7)
+  for(const h of silencio){expect(h.nace).toBe(6);expect(h.x).toBeGreaterThan(7400);expect(h.x).toBeLessThan(8250);expect(h.y).toBeGreaterThan(6900);expect(h.y).toBeLessThan(7900)}
+ })
+ it('retira las casas ocupadas únicamente desde1945 y conserva los vecinos',()=>{
+  const h=silencio.find(h=>h.id==='silencio-bloque-7'),c=[h.x,h.y]
+  const vertices=new Float32Array([c[0]-2,c[1]-2,c[0]+2,c[1]-2,c[0]+2,c[1]+2,c[0]-2,c[1]+2,9000,6000,9010,6000,9010,6010,9000,6010])
+  const vida=suprimirTechos({vertices,techos:new Uint32Array([0,4,0,0,4,4,0,0]),vida:new Uint32Array([1,1])},zonasDeSupresion(silencio))
+  expect(vida[0]).toBe(1+8*6);expect(vida[1]).toBe(1)
+  for(let e=1;e<=5;e++)expect(visibleEn(vida[0]%8,Math.floor(vida[0]/8),e)).toBe(true)
+  expect(visibleEn(1,6,6)).toBe(false)
+ })
+})
+
+it('los edificios siguen las parcelas: sólo balcones y molduras sobresalen hasta1,5m',async()=>{
+ const {PLANTAS_SILENCIO}=await import('../../src/hitos/datos/el-silencio-plantas.js')
+ const {crearBloqueSilencio}=await import('../../src/hitos/el-silencio-modelo.js')
+ const {puntoEnPoligono}=await import('../../src/hitos/suprimir.js')
+ const distancia=(p,a,b)=>{const dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dz)}
+ const {Vector3}=await import('three');const v=new Vector3()
+ for(const [id,plantas] of Object.entries(PLANTAS_SILENCIO)){
+  const g=crearBloqueSilencio(plantas);g.updateMatrixWorld(true)
+  const exterior=plantas.plantas[0].exterior
+  let peor=0
+  g.traverse(o=>{if(!o.isMesh)return;const a=o.geometry.attributes.position;for(let i=0;i<a.count;i++){
+   v.fromBufferAttribute(a,i).applyMatrix4(o.matrixWorld);if(v.y<4)continue;const p=[v.x,v.z];if(puntoEnPoligono(p,exterior))continue;
+   peor=Math.max(peor,Math.min(...exterior.map((a,i)=>distancia(p,a,exterior[(i+1)%exterior.length]))))
+  }})
+  expect(peor,`bloque ${id}`).toBeLessThan(1.5)
+  const geos=new Set(),mats=new Set();g.traverse(o=>{if(o.geometry)geos.add(o.geometry);if(o.material)mats.add(o.material)});geos.forEach(g=>g.dispose());mats.forEach(m=>m.dispose())
+ }
+},15000)
+
+it('una sustitución de solar completo retira también la casa que cruza poco el borde',()=>{
+ const d={vertices:new Float32Array([-9,1,1,1,1,9,-9,9]),techos:new Uint32Array([0,4,0,0]),vida:new Uint32Array([1])}
+ const z={poligono:[[0,0],[10,0],[10,10],[0,10]],desde:6,hasta:0}
+ expect(suprimirTechos(d,[z])[0]).toBe(1)
+ expect(suprimirTechos(d,[{...z,solarCompleto:true}])[0]).toBe(49)
+})
+
+it('una sustitución de solar completo conserva la casa que solo toca el borde o un vértice del recinto',()=>{
+ const z={poligono:[[0,0],[10,0],[10,10],[0,10]],desde:6,hasta:0,solarCompleto:true}
+ const techo=(anillo)=>({vertices:new Float32Array(anillo.flat()),techos:new Uint32Array([0,anillo.length,0,0]),vida:new Uint32Array([1])})
+ expect(suprimirTechos(techo([[-10,0],[0,0],[0,10],[-10,10]]),[z])[0]).toBe(1)
+ expect(suprimirTechos(techo([[-10,-10],[0,-10],[0,0],[-10,0]]),[z])[0]).toBe(1)
+ expect(suprimirTechos(techo([[0,0],[5,0],[5,10],[0,10]]),[z])[0]).toBe(49)
+})
+
+it('suprime un solape de área con lados alineados y admite recintos cóncavos',async()=>{
+ const {compartenArea}=await import('../../src/hitos/suprimir.js')
+ const p=[[0,0],[10,0],[10,1],[0,1]],q=[[9,0],[19,0],[19,1],[9,1]]
+ expect(compartenArea(p,q)).toBe(true)
+ expect(compartenArea([...p].reverse(),q)).toBe(true)
+ expect(compartenArea(p,[[10,0],[20,0],[20,1],[10,1]])).toBe(false)
+ const l=[[0,0],[10,0],[10,2],[2,2],[2,10],[0,10]]
+ expect(compartenArea(l,[[9,0],[19,0],[19,2],[9,2]])).toBe(true)
+ expect(compartenArea(l,[[2,2],[10,2],[10,10],[2,10]])).toBe(false)
+ const d={vertices:new Float32Array(q.flat()),techos:new Uint32Array([0,4,0,0]),vida:new Uint32Array([1])}
+ expect(suprimirTechos(d,[{poligono:p,desde:6,hasta:0,solarCompleto:true}])[0]).toBe(49)
+})

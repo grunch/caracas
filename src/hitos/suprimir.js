@@ -41,6 +41,40 @@ export function seSolapan(p, q) {
   return false
 }
 
+const BORDE = 1e-6
+const sobreElBorde = (v, poligono) => poligono.some((a, i) => {
+  const b = poligono[(i + 1) % poligono.length]
+  const [dx, dy] = [b[0] - a[0], b[1] - a[1]]
+  const largo = dx * dx + dy * dy
+  const t = largo ? Math.min(1, Math.max(0, ((v[0] - a[0]) * dx + (v[1] - a[1]) * dy) / largo)) : 0
+  return Math.hypot(v[0] - a[0] - t * dx, v[1] - a[1] - t * dy) <= BORDE
+})
+const adentroDeVerdad = (v, poligono) => puntoEnPoligono(v, poligono) && !sobreElBorde(v, poligono)
+
+/**
+ * ¿Comparten área dos polígonos simples, aunque sean cóncavos? Como seSolapan, pero un vértice sobre el borde
+ * del otro no cuenta: la casa que solo toca el recinto por un lado o una esquina no lo pisa.
+ */
+export function compartenArea(p, q) {
+  if (p.some((v) => adentroDeVerdad(v, q)) || q.some((v) => adentroDeVerdad(v, p))) return true
+  const centroInterior = (a, b) => { const c = centroDe(a); return adentroDeVerdad(c, a) && adentroDeVerdad(c, b) }
+  if (centroInterior(p, q) || centroInterior(q, p)) return true
+  const orientacion = Math.sign(areaConSigno(p)) * Math.sign(areaConSigno(q))
+  return p.some((a, i) => q.some((c, j) => {
+    const b = p[(i + 1) % p.length], d = q[(j + 1) % q.length]
+    if (seCruzan(a, b, c, d)) return true
+    // Lados colineales con tramo común: hay área sólo si ambos interiores
+    // quedan del mismo lado. Funciona también con anillos cóncavos e invertidos.
+    const dx = b[0] - a[0], dy = b[1] - a[1], largo = Math.hypot(dx, dy)
+    if (largo <= BORDE || Math.abs(giro(a, b, c)) > BORDE * largo || Math.abs(giro(a, b, d)) > BORDE * largo) return false
+    const producto = dx * (d[0] - c[0]) + dy * (d[1] - c[1])
+    if (producto * orientacion <= 0) return false
+    const proyectar = v => ((v[0] - a[0]) * dx + (v[1] - a[1]) * dy) / largo
+    const u = proyectar(c), v = proyectar(d)
+    return Math.min(largo, Math.max(u, v)) - Math.max(0, Math.min(u, v)) > BORDE
+  }))
+}
+
 // Fracción de la huella de una casa que tiene que caer en la zona de un hito para suprimirla: la que apenas la roza
 // sigue en pie (si no, el hito deja un vacío artificial alrededor; fase 4 de specs/08, I1772-004).
 export const PISA_MINIMO = 0.25
@@ -59,7 +93,7 @@ export function pisaLaZona(anillo, zona) {
 
 /** Las zonas de supresión de una lista de hitos: [{ poligono, desde, hasta }] (hasta = 0: para siempre). */
 export function zonasDeSupresion(hitos) {
-  return hitos.flatMap((h) => (h.suprime ?? []).map((poligono) => ({ poligono, desde: h.nace ?? 0, hasta: h.muere ?? 0 })))
+  return hitos.flatMap((h) => (h.suprime ?? []).map((poligono) => ({ poligono, desde: h.nace ?? 0, hasta: h.muere ?? 0, ...(h.solarCompleto ? {solarCompleto:true} : {}) })))
 }
 
 /**
@@ -84,18 +118,18 @@ export function suprimirTechos({ vertices, techos, vida = null, marcos = null, a
     const anillo = Array.from({ length: cuantos }, (_, k) => [vertices[(inicio + k) * 2], vertices[(inicio + k) * 2 + 1]])
     const caja = cajaDe(anillo)
     let construidas = null
-    zonas.forEach(({ poligono, desde, hasta }, z) => {
-      if (!cajasSePisan(caja, cajas[z]) || !pisaLaZona(anillo, poligono)) return
+    zonas.forEach(({ poligono, desde, hasta, solarCompleto }, z) => {
+      if (!cajasSePisan(caja, cajas[z]) || !(solarCompleto ? compartenArea(anillo, poligono) : pisaLaZona(anillo, poligono))) return
       const marco = porTecho.get(t)
-      if (marco) {
+      if (marco && !solarCompleto) {
         construidas ??= huellasConstruidas(anillo, marco, alas)
         if (!construidas.some((huella) => seSolapan(huella, poligono))) {
           // El solar puede quedar bajo el hito sin borrar la fachada. Si una etapa
           // posterior ocupa el lote entero, vuelve a regir la supresión normal.
-          for (let e = desde; e < (hasta || 6); e++) {
+          for (let e = desde; e < (hasta || 7); e++) {
             const estilo = historia ? historia[t * 6 + Math.min(e, 5)] % 16 : (techos[t * 4 + 2] >> 8) & 255
             if (!esDePatio(estilo, techos[t * 4 + 3], e)) {
-              salida[t] = vidaSinHito(salida[t], e, !hasta && e === 5 ? 0 : e + 1)
+              salida[t] = vidaSinHito(salida[t], e, !hasta && e === 6 ? 0 : e + 1)
             }
           }
           return

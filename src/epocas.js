@@ -34,6 +34,8 @@ export function crearSecuencia(lanzar, inicial = 0) {
         arrancar(a)
       }
     },
+    /** Revierte una preparación fallida; la siguiente elección puede reintentarse. */
+    cancelar(actual) { rige = actual; enCurso = false; espera = null },
     get rige() { return rige },
   }
 }

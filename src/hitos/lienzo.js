@@ -62,6 +62,8 @@ export function crearLienzo() {
       apoyado: () => { const o = origen(); return hijo({ apoyo: { x: o.x, z: o.z } }) },
       /** Cada vértice se apoya en el terreno que tiene debajo (rejas, pretiles, losas). */
       siguiendo: () => hijo({ apoyo: PROPIO }),
+      /** Pavimentos extensos: cada vértice toma sólo su propia cota, sin terraza horizontal. */
+      sobreTerreno: () => hijo({ ancla: PROPIO, apoyo: PROPIO }),
       /** Agrega una geometría de three.js (posición y normal; uv opcional) con un color y un material. */
       geo(g, { color = 0xffffff, mat = MAT.LISO, flota = false } = {}) {
         const { position, normal, uv } = g.attributes
@@ -80,7 +82,8 @@ export function crearLienzo() {
           b.hitos.push(dist, semilla, mat, esPie ? 1 : 0)
           b.vidas.push(vida[0], vida[1])
           const ap = apoyo === PROPIO ? v : (apoyo ?? ancla)
-          b.anclas.push(ancla.x, ancla.z, ap.x, ap.z)
+          const an = ancla === PROPIO ? v : ancla
+          b.anclas.push(an.x, an.z, ap.x, ap.z)
           b.uvs.push(uv ? uv.getX(i) : 0, uv ? uv.getY(i) : 0)
         }
         if (g.index) for (let i = 0; i < g.index.count; i++) b.indices.push(base + g.index.getX(i))

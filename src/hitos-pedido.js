@@ -8,15 +8,15 @@ import { HITOS, construirHitos } from './hitos.js'
 import { crearCoords } from './coords.js'
 
 /** Los arrays de los hitos, en este hilo. */
-export const datosDeHitos = (plano) => construirHitos(HITOS, crearCoords(plano))
+export const datosDeHitos = (plano, soloSilencio = false) => construirHitos(HITOS.filter(h=>soloSilencio ? h.nace===6 : h.nace<6), crearCoords(plano))
 
 /** Los búferes de los arrays tipados de unos datos, para transferirlos. */
 const transferibles = (datos) => Object.values(datos).filter((v) => ArrayBuffer.isView(v)).map((v) => v.buffer)
 
 /** Del lado del worker: contesta `{ datos }` o `{ error }`. */
-export function atenderHitos({ plano }, responder) {
+export function atenderHitos({ plano, soloSilencio = false }, responder) {
   try {
-    const datos = datosDeHitos(plano)
+    const datos = datosDeHitos(plano, soloSilencio)
     responder({ datos }, transferibles(datos))
   } catch (e) {
     responder({ error: e.message })
@@ -24,10 +24,10 @@ export function atenderHitos({ plano }, responder) {
 }
 
 /** Del lado de la página: la promesa de los arrays de los hitos. `crearTrabajador()`: un worker nuevo, o null. */
-export function pedirHitos({ plano, crearTrabajador = null, avisar = (m) => console.warn(m) }) {
+export function pedirHitos({ plano, soloSilencio = false, crearTrabajador = null, avisar = (m) => console.warn(m) }) {
   const aMano = (motivo) => {
     if (motivo) avisar(`hitos: se construyen en el hilo de la página (${motivo})`)
-    return datosDeHitos(plano)
+    return datosDeHitos(plano, soloSilencio)
   }
   if (!crearTrabajador) return Promise.resolve().then(() => aMano(null))
   return new Promise((listo, mal) => {
@@ -47,6 +47,6 @@ export function pedirHitos({ plano, crearTrabajador = null, avisar = (m) => cons
       if (data.error) mal(new Error(data.error)); else listo(data.datos)
     }
     trabajador.onerror = (e) => { e.preventDefault?.(); respaldo(e.message || 'el worker no arrancó') }
-    trabajador.postMessage({ plano })
+    trabajador.postMessage(soloSilencio ? {plano,soloSilencio:true} : {plano})
   })
 }
