@@ -262,8 +262,11 @@ export const FICHAS = Object.freeze({
     dudas: 'Fachadas cotejadas con Bellermann, Lessmann y las imágenes de Fundación Arquitectura y Ciudad. Planta, dimensiones, laterales y daños son aproximaciones; no se representan las obras de 1772.',
   },
   'san-carlos': {
-    textos: [[3, 'El plano de 1889 numera 21 el «Cuartel San Carlos»; el de 1936 dibuja el edificio, de patio, sin rótulo.']],
-    dudas: 'El cuartel es de fines del siglo XVIII (dato general); sin cotejar con el plano de 1843, aparece desde 1889.',
+    textos: [
+      [2, 'La leyenda del plano de Jesurún de 1843 identifica el «Cuartel Veterano» (s), al norte de la ciudad. El estudio arqueológico de Mariana Flores sitúa su construcción entre 1785 y 1790 y documenta los daños del terremoto de 1812.'],
+      [3, 'El plano de 1889 numera 21 el «Cuartel San Carlos»; el de 1936 dibuja su edificio de patio.'],
+    ],
+    dudas: 'El rótulo documenta la presencia del cuartel; su arquitectura y las reparaciones posteriores a 1812 requieren un modelo específico.',
   },
   'hospital-vargas': {
     textos: [[3, 'El plano de 1889 ya lo dibuja y lo numera 43, cuando todavía estaba en obra.']],
@@ -288,6 +291,11 @@ export const FICHAS = Object.freeze({
   },
   'el-paraiso': {
     textos: [[4, 'La ciudad cruza el Guaire: el plano de 1911 ya rotula «El Paraíso», al suroeste, con su hipódromo.']],
+  },
+  'cementerio-sur': {
+    textos: [[3, 'El Cementerio General del Sur abrió en 1876 en Tierra de Jugo, al sur del Guaire. Manuel Landaeta Rosales documenta la resolución de 1875 para construirlo y el decreto de apertura de 1876.'],
+      [5, 'El plano DCN de 1936 rotula el Cementerio General del Sur y dibuja su recinto y calles interiores en el borde sur de la hoja.']],
+    dudas: 'El rótulo localiza el cementerio; no presupone que su extensión de 1936 fuera ya la de 1889. No se modelan mausoleos ni sepulturas.',
   },
   hipodromo: {
     textos: [
