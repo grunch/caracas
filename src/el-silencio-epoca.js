@@ -11,3 +11,9 @@ export function conElSilencio(epocas) {
     licencia:'Sin licencia declarada; fecha de catálogo [1950?], fotografías de 1946. Derechos pendientes de aclaración.',
   }]
 }
+
+/** La entrada cuyo plano abre el visor: la de la hoja base en una vista parcial (título y créditos de esa hoja). */
+export function planoBaseDe(epocas, epoca) {
+  if (!epoca?.parcial) return epoca
+  return epocas.find((e) => e.año === epoca.base && !e.parcial) ?? { ...epoca, año: epoca.base }
+}

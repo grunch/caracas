@@ -1,5 +1,5 @@
 import {describe,it,expect} from 'vitest'
-import {conElSilencio,EPOCA_SILENCIO} from '../../src/el-silencio-epoca.js'
+import {conElSilencio,EPOCA_SILENCIO,planoBaseDe} from '../../src/el-silencio-epoca.js'
 import {silencio} from '../../src/hitos/datos/el-silencio.js'
 import {suprimirTechos,zonasDeSupresion} from '../../src/hitos/suprimir.js'
 import {visibleEn} from '../../src/epocas.js'
@@ -11,6 +11,14 @@ describe('El Silencio georreferenciado',()=>{
   expect(epocas.slice(0,6)).toEqual(originales);expect(originales).toHaveLength(6)
   expect(epocas[EPOCA_SILENCIO]).toMatchObject({año:1946,base:1936,plano:'1950-archiveorg-plano-de-caracas-dcn'})
   expect(conElSilencio([{año:1772}])).toEqual([{año:1772}])
+ })
+ it('el plano de la vista parcial es la hoja base, con su título y sus créditos',()=>{
+  const originales=[1578,1772,1843,1889,1911,1936].map(año=>({año,titulo:`Plano de ${año}`,autor:`autor ${año}`,fuente:`fuente ${año}`}))
+  const epocas=conElSilencio(originales)
+  expect(planoBaseDe(epocas,epocas[EPOCA_SILENCIO])).toBe(originales[5])
+  expect(planoBaseDe(epocas,epocas[2])).toBe(originales[2])
+  expect(planoBaseDe([],{año:1945,base:1936,parcial:true})).toMatchObject({año:1936})
+  expect(planoBaseDe(epocas,undefined)).toBeUndefined()
  })
  it('registra siete bloques y plazas, posteriores a1936',()=>{
   expect(silencio.filter(h=>h.id.startsWith('silencio-bloque-'))).toHaveLength(7)
@@ -50,4 +58,12 @@ it('una sustitución de solar completo retira también la casa que cruza poco el
  const z={poligono:[[0,0],[10,0],[10,10],[0,10]],desde:6,hasta:0}
  expect(suprimirTechos(d,[z])[0]).toBe(1)
  expect(suprimirTechos(d,[{...z,solarCompleto:true}])[0]).toBe(49)
+})
+
+it('una sustitución de solar completo conserva la casa que solo toca el borde o un vértice del recinto',()=>{
+ const z={poligono:[[0,0],[10,0],[10,10],[0,10]],desde:6,hasta:0,solarCompleto:true}
+ const techo=(anillo)=>({vertices:new Float32Array(anillo.flat()),techos:new Uint32Array([0,anillo.length,0,0]),vida:new Uint32Array([1])})
+ expect(suprimirTechos(techo([[-10,0],[0,0],[0,10],[-10,10]]),[z])[0]).toBe(1)
+ expect(suprimirTechos(techo([[-10,-10],[0,-10],[0,0],[-10,0]]),[z])[0]).toBe(1)
+ expect(suprimirTechos(techo([[0,0],[5,0],[5,10],[0,10]]),[z])[0]).toBe(49)
 })

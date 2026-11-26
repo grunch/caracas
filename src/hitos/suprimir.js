@@ -41,6 +41,26 @@ export function seSolapan(p, q) {
   return false
 }
 
+const BORDE = 1e-6
+const sobreElBorde = (v, poligono) => poligono.some((a, i) => {
+  const b = poligono[(i + 1) % poligono.length]
+  const [dx, dy] = [b[0] - a[0], b[1] - a[1]]
+  const largo = dx * dx + dy * dy
+  const t = largo ? Math.min(1, Math.max(0, ((v[0] - a[0]) * dx + (v[1] - a[1]) * dy) / largo)) : 0
+  return Math.hypot(v[0] - a[0] - t * dx, v[1] - a[1] - t * dy) <= BORDE
+})
+const adentroDeVerdad = (v, poligono) => puntoEnPoligono(v, poligono) && !sobreElBorde(v, poligono)
+
+/**
+ * ¿Comparten área dos polígonos simples, aunque sean cóncavos? Como seSolapan, pero un vértice sobre el borde
+ * del otro no cuenta: la casa que solo toca el recinto por un lado o una esquina no lo pisa.
+ */
+export function compartenArea(p, q) {
+  if (p.some((v) => adentroDeVerdad(v, q)) || q.some((v) => adentroDeVerdad(v, p))) return true
+  if (centroEnAmbos(p, q) || centroEnAmbos(q, p)) return true
+  return p.some((a, i) => q.some((c, j) => seCruzan(a, p[(i + 1) % p.length], c, q[(j + 1) % q.length])))
+}
+
 // Fracción de la huella de una casa que tiene que caer en la zona de un hito para suprimirla: la que apenas la roza
 // sigue en pie (si no, el hito deja un vacío artificial alrededor; fase 4 de specs/08, I1772-004).
 export const PISA_MINIMO = 0.25
@@ -85,7 +105,7 @@ export function suprimirTechos({ vertices, techos, vida = null, marcos = null, a
     const caja = cajaDe(anillo)
     let construidas = null
     zonas.forEach(({ poligono, desde, hasta, solarCompleto }, z) => {
-      if (!cajasSePisan(caja, cajas[z]) || !(solarCompleto ? seSolapan(anillo, poligono) : pisaLaZona(anillo, poligono))) return
+      if (!cajasSePisan(caja, cajas[z]) || !(solarCompleto ? compartenArea(anillo, poligono) : pisaLaZona(anillo, poligono))) return
       const marco = porTecho.get(t)
       if (marco && !solarCompleto) {
         construidas ??= huellasConstruidas(anillo, marco, alas)

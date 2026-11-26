@@ -18,7 +18,7 @@ import { texturasHoy, HOY_CERCA } from './hoy.js'
 import { crearBuscador } from './buscador/interfaz.js'
 import { crearTeselasFinas } from './teselas.js'
 import {retirarMonte1946} from './monte-1946.js'
-import {conElSilencio} from './el-silencio-epoca.js'
+import {conElSilencio,planoBaseDe} from './el-silencio-epoca.js'
 import { crearLineaDeTiempo, crearSecuencia, escalaCrece, PRIMERA_EPOCA } from './epocas.js'
 import { crearPlanosDeEpoca, planoDeEpoca } from './planos.js'
 import { cargarCallesDeEpoca } from './calles-epoca.js'
@@ -357,14 +357,14 @@ Promise.all([crecePedido, indicePlanos])
     }, PRIMERA_EPOCA)
     lineaDeTiempo = crearLineaDeTiempo({
       contenedor: document.getElementById('epocas'), epocas, desde: PRIMERA_EPOCA,
-      alElegir: (i) => { secuencia.elegir(i); visorPlano?.elegir(epocas[i]) },
+      alElegir: (i) => { secuencia.elegir(i); visorPlano?.elegir(planoBaseDe(epocas, epocas[i])) },
     })
     visorPlano = crearVisorDePlano({
       contenedor: document.getElementById('epocas'), liviano, añoBase: epocas.at(-1).base ?? epocas.at(-1).año,
       base: ['plano/chico.webp', liviano ? 'plano/medio-4k.webp' : 'plano/medio.webp'],
       indice: () => fetch('plano/epocas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))).then((j) => j.planos),
     })
-    visorPlano.elegir(epocas[lineaDeTiempo.actual])
+    visorPlano.elegir(planoBaseDe(epocas, epocas[lineaDeTiempo.actual]))
     pedirMascaras() // el agua, para la hoja en tinta de antes de 1936
     // las calles de 1772 sobre el suelo liso de su época (src/calles-epoca.js); con ?planos se ve el plano de la época
     if (!params.has('planos')) {
