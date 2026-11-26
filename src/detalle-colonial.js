@@ -35,7 +35,8 @@ export function crearDetalleColonial({coords,U,liviano=false,manzanas=PILOTO_COL
  const unidades=manzanas.map(m=>{
   const poligono=m.poligono.map(([x,y])=>{const p=coords.aMundo(x,y);return[p.x,p.z]})
   const centro=[0,1].map(k=>poligono.reduce((s,p)=>s+p[k],0)/4)
-  return {...m,poligono,centro,radio:Math.max(...poligono.map(p=>Math.hypot(p[0]-centro[0],p[1]-centro[1]))),frentes:[],nivel:0,mallas:null}
+  const contornos=(m.contornos??[]).map(c=>({...c,poligono:c.poligono.map(([x,y])=>{const p=coords.aMundo(x,y);return[p.x,p.z]})}))
+  return {...m,poligono,contornos,centro,radio:Math.max(...poligono.map(p=>Math.hypot(p[0]-centro[0],p[1]-centro[1]))),frentes:[],nivel:0,mallas:null}
  })
  const material=materialDeDetalles(U),sombra=crearMaterialSombraHitos(material);sombra.vertexShader=material.vertexShader
  let listo=false,creacionMs=0

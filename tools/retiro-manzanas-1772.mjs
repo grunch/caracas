@@ -3,6 +3,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises'
 import {spawnSync} from 'node:child_process'
 import path from 'node:path'
+import {isDeepStrictEqual} from 'node:util'
 import {casasDeManzana,integrarManzanas1772} from './manzanas-1772-lib.mjs'
 import {espacial,techosDeHitos} from './manzanas-completas.mjs'
 import {arbolesParaManzanas} from './manzanas-arboles-lib.mjs'
@@ -22,7 +23,11 @@ for(let o=0;o<bytes.length;o+=8){const vida=bytes.readUInt16LE(o+6);arboles.push
 const zonas=base.manzanas.map((m,i)=>({...m,arboles:manzanas[i].arboles}))
 const nuevos=arbolesParaManzanas(arboles,[],zonas)
 await mkdir(salida,{recursive:true})
+const versionados=await leer('src/manzanas/retiro-1772-piloto.json'),ids=Object.keys(versionados)
 const guardar=(n,d)=>writeFile(path.join(salida,n),JSON.stringify(d))
+const contornos=Object.fromEntries(manzanas.filter(m=>ids.includes(m.id)).map(m=>[m.id,[{vida:[1,2],poligono:m.poligono}]]))
+await guardar('contornos-piloto.json',contornos)
+if(Number(distancia)===1&&!isDeepStrictEqual(contornos,versionados))throw Error('Contornos de balcones desactualizados: revisar y copiar contornos-piloto.json a src/manzanas/retiro-1772-piloto.json antes de publicar.')
 await guardar('ciudad.json',ciudad)
 await guardar('manzanas-1772-informe.json',{...informe,propuestaVisual:true,retiroSolicitadoM:Number(distancia)})
 await writeFile(path.join(salida,'arboles.bin'),codificarArboles(nuevos,meta.metro))

@@ -8,7 +8,7 @@
 // (B) dice que hay monte, que mueren cuando su lugar se urbaniza (G) o, con la segmentación de 1936
 // (clases.png), cuando el plano de 1936 dibuja ahí un sembradío o un camino. Sin crece.png no hay monte.
 // Y los árboles de los patios y solares de las casas de patio (marcos y alas de ciudad.pak), por regla.
-import { readFile, writeFile } from 'node:fs/promises'
+import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import { gunzipSync } from 'node:zlib'
 import path from 'node:path'
 import sharp from 'sharp'
@@ -40,6 +40,7 @@ if (!entrada || !mosaico) {
   console.error('uso: node tools/arboles.mjs <arboles.json> <mosaico.json> [jardines.json] [clases.png]')
   process.exit(1)
 }
+const opcion=(n,def)=>{const i=process.argv.indexOf(n);return i<0?def:process.argv[i+1]}
 const leer = (ruta) => readFile(path.resolve(RAIZ, ruta))
 const siHay = (promesa, que) => promesa.catch((e) => { console.warn(`arboles: sin ${que} (${e.code ?? e.message}); nacen en la primera época`); return null })
 
@@ -51,7 +52,7 @@ const crece = await siHay(Promise.all([
   leer('public/datos/crece.json').then((b) => JSON.parse(b)),
   sharp(path.resolve(RAIZ, 'public/plano/crece.png')).raw().toBuffer({ resolveWithObject: true }),
 ]), 'crece')
-const ciudadNueva = await siHay(leer('public/datos/ciudad.pak').then((b) => {
+const ciudadNueva = await siHay(leer(opcion('--ciudad','public/datos/ciudad.pak')).then((b) => {
   const crudo = gunzipSync(b)
   return decodificarPak(crudo.buffer.slice(crudo.byteOffset, crudo.byteOffset + crudo.byteLength),
     { vertices: Float32Array, techos: Uint32Array, vida: Uint32Array, historia: Uint8Array, marcos: Float32Array, alas: Float32Array, vuelos: Uint8Array, paletas: Uint8Array })
@@ -110,7 +111,8 @@ if(process.argv.includes('--manzanas-1889')){
  const ampliadas=JSON.parse(await leer('fuentes/derivados/epocas/manzanas-1889-informe.json')).manzanas
  todos=arbolesParaManzanas(todos,[],ampliadas,{epoca:3})
 }
-const salida = path.resolve(RAIZ, 'public/datos/arboles.bin')
+const salida = path.resolve(RAIZ, opcion('--salida','public/datos/arboles.bin'))
+await mkdir(path.dirname(salida),{recursive:true})
 await writeFile(salida, codificarArboles(todos, metro))
 const porEpoca = (lista, campo) => Array.from({ length: ETAPAS }, (_, e) => lista.filter((a) => a[campo] === e).length).join(' · ')
 console.log(`${conNace.length} árboles del plano (${arboles.length - libres.length} descartados bajo un techo; nacen por época: ${porEpoca(conNace, 'nace')}; ${casas.length} casas que mueren)`)

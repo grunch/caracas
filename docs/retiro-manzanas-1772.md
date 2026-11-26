@@ -1,41 +1,49 @@
-# Piloto: más espacio para las calles de 1772
+# Más espacio para las calles de 1772
 
-Propuesta visual solicitada por el responsable del proyecto: retiro **adicional de 1 m por frente**, aproximadamente 2 m más entre dos manzanas ajustadas. No es una medida histórica documentada. Rama de prueba `feat/retiro-manzanas-1772`, basada en main `4e96d9f`.
+Retiro **adicional de 1 m por frente**, aproximadamente 2 m más entre contornos paralelos de dos manzanas ajustadas. Es una propuesta visual solicitada por el responsable del proyecto, no una medida histórica documentada. Los hitos modelados conservan su ubicación y dimensiones.
 
-El piloto reduce los contornos y vuelve a generar las casas con las mismas semillas, cantidades solicitadas, paletas y reservas de edificios. Mantiene fijos los hitos. No transforma ni escala sus modelos. Recalcula patios y árboles sobre las nuevas parcelas. Conserva los solares cuyo retiro produciría varios fragmentos o menos de 25 m²; este umbral es una salvaguarda geométrica, no una clasificación histórica.
+Se regeneran las casas con las mismas semillas, cantidades solicitadas, paletas y reservas de edificios. Se recalculan patios y árboles sobre las parcelas nuevas. Cinco solares conservan su contorno porque el retiro produciría varios fragmentos o menos de 25 m²; ese umbral es una salvaguarda geométrica, no una clasificación histórica. Sus casas y árboles también se regeneran.
 
-## Reproducción
+## Pipeline y reproducción
 
-Desde un checkout con los datos completos y `.venv` instalada:
+`npm run datos -- --desde empacar-base` ejecuta el cambio dentro del pipeline habitual, desde un checkout con los escaneos, derivados anteriores y `.venv` instalada según `tools/geo/README.md`:
+
+1. `empacar-base` empaqueta la ciudad final original de 1946 en `fuentes/derivados/retiro1772/base.pak`.
+2. `arboles-base` regenera los árboles originales desde ese paquete y los informes antiguos, en `base-arboles.bin`.
+3. `retiro-1772` modifica exclusivamente el intervalo de 1772 y produce ciudad, árboles, informe, resumen y contornos de detalle.
+4. `empacar` y `arboles` instalan las salidas en `public/datos`.
+5. `suelo-manzanas` usa el informe retraído para R/1772; mantiene los informes originales de 1843 y 1889 para G/B.
+
+No hay ciclos ni archivos con dos productores. Los árboles posteriores se generan desde la ciudad original, para que la renumeración de casas no cambie sus posiciones o semillas. `empacar-ciudad.mjs` admite una segunda ruta de salida y `arboles.mjs` admite `--ciudad` y `--salida`; conservan sus valores predeterminados para usos independientes.
+
+Para regenerar únicamente el retiro, cuando ya existen las entradas base:
 
 ```sh
-node tools/retiro-manzanas-1772.mjs fuentes/derivados/1946/ciudad-1946.json public/datos/arboles.bin fuentes/derivados/retiro1772 1
-.venv/bin/python tools/geo/verificar_retiro.py fuentes/derivados/1946/ciudad-1946.json fuentes/derivados/retiro1772/ciudad.json public/datos/arboles.bin fuentes/derivados/retiro1772/arboles.bin
-```
-
-La última cifra es el retiro adicional, en metros. Usar como entradas la ciudad final y los árboles **originales**, no los resultados de una ejecución anterior. El comando escribe solo en la carpeta de salida. Para visualizar, guardar primero una copia de los datos públicos originales y ejecutar en un checkout de prueba:
-
-```sh
+node tools/retiro-manzanas-1772.mjs fuentes/derivados/1946/ciudad-1946.json fuentes/derivados/retiro1772/base-arboles.bin fuentes/derivados/retiro1772 1
+.venv/bin/python tools/geo/verificar_retiro.py fuentes/derivados/1946/ciudad-1946.json fuentes/derivados/retiro1772/ciudad.json fuentes/derivados/retiro1772/base-arboles.bin fuentes/derivados/retiro1772/arboles.bin
 node tools/empacar-ciudad.mjs fuentes/derivados/retiro1772/ciudad.json
 cp fuentes/derivados/retiro1772/arboles.bin public/datos/arboles.bin
 node tools/suelo-manzanas.mjs fuentes/derivados/1936/mosaico.json fuentes/derivados/retiro1772/manzanas-1772-informe.json fuentes/derivados/epocas/manzanas-1843-informe.json fuentes/derivados/epocas/manzanas-1889-informe.json
 npm run dev
 ```
 
-No ejecutar después los integradores de 1843/1889: heredarían la propuesta. Este piloto sustituye exclusivamente el intervalo de 1772; por tanto, al pasar a 1843 se recuperan los contornos anteriores. La continuidad exacta entre épocas deberá restablecerse si se decide extender el ajuste. No publicar estos datos como release general mientras sea una comparación aislada.
+El último argumento del generador es el retiro adicional en metros. No usar los árboles finales como entrada de una ejecución siguiente. No ejecutar después los integradores de 1843/1889: heredarían el cambio. Al pasar a 1843 se recuperan los contornos anteriores; extender el retiro a otras épocas sería otro cambio solicitado.
 
-## Resultado observado
+## Balcones y detalle
+
+La capa opcional `?detallecasas=1&verbalcones` reconoce los contornos originales y los nuevos, sin ampliar su tolerancia de 0,3 m. Usa la vida real de cada fachada, incluida la versión conservada desde 1843, y separa las versiones en la deduplicación. Los balcones continúan sobresaliendo desde la fachada real.
+
+El generador escribe `contornos-piloto.json`. Para el retiro predeterminado de 1 m, falla si difiere de `src/manzanas/retiro-1772-piloto.json`, consumido por el renderer. Si se cambia el parámetro o la fuente, revisar y copiar ese JSON al archivo versionado y repetir las pruebas de detalle. El JSON solo se carga con la capa de detalle.
+
+## Resultado y validación
 
 - 248 de 253 manzanas retraídas; cinco excepciones enumeradas en `resumen.json`.
 - Casas visibles en 1772: 3169 → 3161; el recorte y la reserva de patios eliminan ocho viviendas pequeñas.
 - Árboles visibles en 1772: 31582 → 31425; todas las manzanas siguen teniendo árboles.
-- Igualdad semántica de geometría, atributos y árboles en todas las demás épocas, incluida 1946. Se comparan multiconjuntos, sin depender de índices renumerados.
-- Suelo: solo cambia el canal de 1772 (R); G/B y metadatos idénticos.
-- Vitest: 1778 pruebas; Python: 1021 pruebas. Build correcto, con aviso existente de tamaño de bundle.
-- Capturas automatizadas antes/después con la misma cámara cenital y oblicua. No sustituyen la revisión visual del responsable.
+- Igualdad semántica de geometría, atributos y árboles en todas las demás épocas, incluida 1946. El comparador usa multiconjuntos, no índices renumerados.
+- Árboles base regenerados: SHA256 idéntico al release original.
+- Suelo: solo cambia el canal R/1772; G/B y metadatos idénticos.
+- Pruebas de retiro, contornos, vidas de balcones, deduplicación y dependencias del pipeline; E2E de detalle cercano, LOD y apagado desde 1911.
+- Capturas automatizadas antes/después con cámara idéntica y detalle activado. No sustituyen la revisión visual de una persona.
 
-El generador no añade código al render ni publica datos. El coste de generación es offline; no se ha medido el tiempo por cuadro de esta propuesta.
-
-## Límite detectado en la prueba de navegador
-
-`tests/e2e/detalle-colonial.spec.js` agotó 180 s esperando las mallas de la capa opcional `detallecasas=1`. La inspección encontró que `extraerFrentes` reconoce las fachadas por coincidencia con los bordes estáticos de `PILOTO_COLONIAL`; las nuevas fachadas están a 1 m de esos bordes. Además, la sustitución temporal separa las vidas de las casas, y la capa selecciona nacimientos en el índice 1. Antes de publicar hay que adaptar esa selección a contornos por época y repetir el E2E, conservando el detalle en 1843/1889. No se considera el piloto listo para producción. Las capturas y el comparador muestran el render principal, sin activar esta capa experimental.
+Los binarios no se versionan. Tras revisar y fusionar, regenerar/verificar el manifiesto y publicar los datos con el procedimiento habitual de `npm run datos:publicar`; abrir el PR no actualiza el sitio público. Los resultados de tests y rendimiento de la rama se documentan en el PR.
