@@ -33,7 +33,7 @@ describe('nombresPorEpoca', () => {
   })
 
   it('un nombre de una sola época lleva solo su año; el último de un lugar que desaparece, su rango', () => {
-    expect(nombresPorEpoca(marca('san-jacinto'), 5).map((n) => n.periodo)).toEqual(['1772–1843', '1889–1911', 'desde 1936'])
+    expect(nombresPorEpoca(marca('san-jacinto'), 5).map((n) => n.periodo)).toEqual(['1772', '1843', '1889–1911', 'desde 1936'])
     // el Concejo Municipal figura en 1889 y 1911, y en 1936 ya es el Palacio de Justicia
     expect(nombresPorEpoca(marca('concejo'), 3)).toEqual([{ nombre: 'Concejo Municipal', periodo: '1889–1911', rige: true }])
     expect(nombresPorEpoca(marca('hipodromo'), 4)[0]).toEqual({ nombre: 'Hipódromo del Paraíso', periodo: '1911', rige: true })

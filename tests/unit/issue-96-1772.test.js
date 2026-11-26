@@ -14,3 +14,7 @@ it('documenta la presencia en 1772 y conserva la transición posterior (#96)', (
  expect(nombreEn(m,2).nombre).toBe('San Jacinto'); expect(nombreEn(m,3).nombre).toBe('Mercado de San Jacinto')
 })
 it('ofrece una ficha histórica propia para cada etapa (#96)', () => { expect(texto(1)).toMatch(/Martí/); expect(texto(2)).toMatch(/1812/) })
+
+it('distingue el mercado de 1889 de la sede inaugurada en 1897', () => {
+ expect(texto(3)).toMatch(/1875/); expect(texto(3)).toMatch(/anterior a la nueva sede/); expect(texto(4)).toMatch(/septiembre de 1897/)
+})
