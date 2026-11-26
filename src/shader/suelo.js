@@ -8,9 +8,10 @@ import { GLSL_VALLE } from './valle.js'
  * En la ciudad, el dibujo va sin sus rótulos (uRotulos). Antes de 1936, en la ciudad no va nada de 1936 (ni el
  * dibujo del plano ni lo edificado, los patios o los jardines de su segmentación: serían trazas falsas,
  * I1772-008): la tierra de la calle, el agua y las calles de la época que tienen referencia (calleEn,
- * src/shader/calles.js). Con ?planos, donde está el plano de la época, sigue como antes.
+ * src/shader/calles.js). En 1772, 1843 y 1889, los patios y el terreno desocupado van del verde del campo
+ * (verdeEn, src/shader/suelo-manzanas.js). Con ?planos, donde está el plano de la época, sigue como antes.
  * En tinta, la hoja de cada época la arma src/shader/papel.js con las mismas lecturas (rotuloEn).
- * Necesita GLSL_PLANO (tintaDe, planoViejo), GLSL_EPOCAS, GLSL_CRECE y GLSL_VALLE.
+ * Necesita GLSL_PLANO (tintaDe, planoViejo), GLSL_EPOCAS, GLSL_CRECE, GLSL_VALLE y GLSL_SUELO_MANZANAS.
  * uSuelo: R agua · G vegetación · B edificado · A manzana (tools/suelo-lib.mjs).
  * uRotulos: cuánto del punto es letra, cifra o símbolo del plano de 1936 (tools/rotulos-lib.mjs).
  */
@@ -29,9 +30,9 @@ export const GLSL_SUELO = /* glsl */ `
   /**
    * s = uSuelo en el punto, ribera = su agua desenfocada, rotulo = cuánto es letra del plano de 1936 (sin
    * contar los planos de época), epoca = la que rige ahí, ciudad = cuánto es ciudad en ella (ciudadDe),
-   * calle = calleEn(hoja, epoca, px) (x calzada, y orilla).
+   * calle = calleEn(hoja, epoca, px) (x calzada, y orilla), verde = verdeEn(hoja, epoca, px) (patios y terreno libre).
    */
-  vec3 sueloColor(vec2 uv, vec3 papel, vec4 s, float ribera, float rotulo, float epoca, float ciudad, vec2 calle) {
+  vec3 sueloColor(vec2 uv, vec3 papel, vec4 s, float ribera, float rotulo, float epoca, float ciudad, vec2 calle, float verde) {
     vec2 hoja = vec2(uv.x, 1.0 - uv.y);
     // el valle antes de la ciudad: lo que la época todavía no urbanizó es campo
     vec3 campo = valleColor(s, ribera, epoca, hoja);
@@ -50,6 +51,9 @@ export const GLSL_SUELO = /* glsl */ `
     float antes = (1.0 - smoothstep(4.5, 5.0, epoca)) * (1.0 - planoViejo);
     vec3 liso = mix(mix(TIERRA_DE_CALLE, CALZADA, calle.x), CALZADA * 0.8, 0.6 * calle.y);
     c = mix(c, mix(liso, BARRO, s.r), antes);
+    // en 1772, 1843 y 1889, los patios, solares y el terreno desocupado son del verde del campo de alrededor
+    // (src/shader/suelo-manzanas.js); la calzada de la época, no
+    c = mix(c, campo, antes * verde * (1.0 - calle.x));
     // el dibujo del plano: entero en la ciudad (en la de 1936); en el campo, nada (solo en 1936, tenue: es su plano)
     float dibujo = mix(${TINTA_DEL_CAMPO_1936} * smoothstep(4.5, 5.0, epoca), 1.0 - antes, ciudad);
     // los nombres, las cotas y el tranvía del plano de 1936 no se marcan: solo queda el dibujo

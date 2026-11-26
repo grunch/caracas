@@ -1,4 +1,7 @@
 import { CUBIERTA } from '../techos.js'
+import { PALETA_VALLE } from './valle.js'
+
+const lineal = (r, g, b) => `vec3(${[r, g, b].map((v) => ((v / 255) ** 2.2).toFixed(3)).join(', ')})` // de sRGB 0–255
 
 /**
  * Los techos, por dentro del faldón: aTecho (src/ciudad.js) trae s (metros a lo largo del alero), t
@@ -13,11 +16,15 @@ import { CUBIERTA } from '../techos.js'
  *
  * De lejos todo se apaga a su tono medio (detalle(), por derivadas): sin moiré. Va después de
  * GLSL_FACHADA, que trae azar(), las herramientas de dibujo y la chapa acanalada.
+ * El piso de los patios y solares es de tierra; hasta 1889 (gVerdor), del verde del campo.
  */
 export const GLSL_TECHO = /* glsl */ `
   const float CUB_TEJA = ${CUBIERTA.TEJA}.0, CUB_AZOTEA = ${CUBIERTA.AZOTEA}.0, CUB_ZINC = ${CUBIERTA.ZINC}.0, CUB_ALERO = ${CUBIERTA.ALERO}.0, CUB_PATIO = ${CUBIERTA.PATIO}.0, CUB_SOLAR = ${CUBIERTA.SOLAR}.0,
     CUB_VOLADA = ${CUBIERTA.VOLADA}.0; // lo que se le suma a la cubierta en la cara de arriba de un alero
   const float TEJA_ANCHO = 0.24, TEJA_LARGO = 0.38; // de eje a eje de las cobijas; lo que asoma cada teja
+  // el verde de los patios y solares hasta 1889: el del campo de alrededor (PALETA_VALLE, src/shader/valle.js)
+  const vec3 PATIO_VERDE = ${lineal(...PALETA_VALLE.SABANA)}, PATIO_VERDE_OSCURO = ${lineal(...PALETA_VALLE.SABANA_VERDE)};
+  float gVerdor = 0.0; // cuánto rige el patio verde en la época del fragmento (lo pone el main, src/material.js)
 
   /**
    * El tono del tejado de la casa, uno por casa (vista aérea del pueblo colonial, fuentes/imagenes): casi
@@ -114,6 +121,9 @@ export const GLSL_TECHO = /* glsl */ `
     c = mix(clara, oscura, manchas(vec2(s, t) * 0.5 + sem) * cerca + 0.5 * (1.0 - cerca));
     float matas = smoothstep(mix(0.68, 0.58, solar), mix(0.78, 0.72, solar), manchas(vec2(s, t) * 0.33 + sem * 1.7));
     c = mix(c, vec3(0.38, 0.43, 0.26), (0.7 * cerca + mix(0.05, 0.15, solar) * (1.0 - cerca)) * mix(matas, 1.0, 1.0 - cerca));
+    // en 1772, 1843 y 1889 el patio y el solar son verdes, como el campo; las matas, más oscuras
+    vec3 verde = mix(PATIO_VERDE, PATIO_VERDE_OSCURO, manchas(vec2(s, t) * 0.5 + sem) * cerca + 0.5 * (1.0 - cerca));
+    c = mix(c, mix(verde, PATIO_VERDE_OSCURO * 0.8, 0.6 * matas * cerca), gVerdor);
     k = max(k, 0.5 * matas * rayadoPantalla(0.35) * cerca);
   }
 
@@ -128,7 +138,7 @@ export const GLSL_TECHO = /* glsl */ `
     if (cubierta > CUB_VOLADA - 0.5) cubierta -= CUB_VOLADA;
     if (es(cubierta, CUB_AZOTEA)) return vec4(azotea(semilla), 0.0);
     if (es(cubierta, CUB_ZINC)) return vec4(zinc(semilla), 0.0);
-    if (es(cubierta, CUB_PATIO) || es(cubierta, CUB_SOLAR)) return vec4(0.42, 0.38, 0.30, 0.0);
+    if (es(cubierta, CUB_PATIO) || es(cubierta, CUB_SOLAR)) return vec4(mix(vec3(0.42, 0.38, 0.30), PATIO_VERDE, gVerdor), 0.0);
     return vec4(teja(semilla) * 0.84, 0.0);
   }
 
