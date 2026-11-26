@@ -1,3 +1,5 @@
+import {DIST_MAX_M,BANDA_CALLE_M} from '../manzanas/medidas-suelo.js'
+export {DIST_MAX_M,BANDA_CALLE_M} from '../manzanas/medidas-suelo.js'
 import { DataTexture, LinearFilter, RGBAFormat, Vector4 } from 'three'
 
 /**
@@ -8,10 +10,6 @@ import { DataTexture, LinearFilter, RGBAFormat, Vector4 } from 'three'
  * las manzanas del generador de cada época, no de la segmentación de 1936 (I1772-008). Lo carga
  * src/suelo-manzanas.js; sin él (uManzanasOn = 0), el suelo de la ciudad queda como estaba.
  */
-/** Hasta dónde guarda la distancia el campo (m), a cada lado: lo escribe tools/suelo-manzanas-lib.mjs. */
-export const DIST_MAX_M = 16
-/** Afuera de las manzanas, hasta esta distancia es calle; más lejos, terreno desocupado (verde). */
-export const BANDA_CALLE_M = 12
 /**
  * Cuánta saturación del verde del campo queda adentro de la ciudad (patios, solares, terreno libre): donde hay
  * mano humana hay poda, pisoteo y tierra a la vista, así que es más apagado que el campo. 1 = igual al campo.
