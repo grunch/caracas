@@ -16,7 +16,7 @@ export const BANDA_CALLE_M = 12
  * Cuánta saturación del verde del campo queda adentro de la ciudad (patios, solares, terreno libre): donde hay
  * mano humana hay poda, pisoteo y tierra a la vista, así que es más apagado que el campo. 1 = igual al campo.
  */
-export const SATURACION_VERDE_CIUDAD = 0.6
+export const SATURACION_VERDE_CIUDAD = 0.48
 /** El verde del campo, apagado para la ciudad (GLSL; c en lineal). */
 export const GLSL_VERDE_CIUDAD = /* glsl */ `
   vec3 verdeCiudad(vec3 c) { return mix(vec3(dot(c, vec3(0.2126, 0.7152, 0.0722))), c, ${SATURACION_VERDE_CIUDAD.toFixed(2)}); }`
