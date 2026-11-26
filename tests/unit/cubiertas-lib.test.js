@@ -89,11 +89,11 @@ describe('pedidoDeCubiertas: qué épocas sacar y adónde', () => {
   })
   test('--todas saca cada época de la línea de tiempo en su ruta por año', () => {
     expect(pedidoDeCubiertas(['--todas']).map((p) => [p.epoca, p.salida])).toEqual(
-      [1578, 1772, 1843, 1889, 1911, 1936].map((a, i) => [i, `${carpeta}/cubiertas-${a}.json`]))
+      [1578, 1772, 1843, 1889, 1911, 1936, 1946].map((a, i) => [i, `${carpeta}/cubiertas-${a}.json`]))
   })
   test('rechaza un año que no es época, --todas con una ruta y argumentos de más', () => {
     expect(() => pedidoDeCubiertas(['--epoca', '1850'])).toThrow(/1850.*1578, 1772, 1843, 1889, 1911, 1936/)
-    expect(() => pedidoDeCubiertas(['--epoca', '1945'])).toThrow(/1945.*parcial/)
+    expect(() => pedidoDeCubiertas(['--epoca', '1945'])).toThrow(/1945.*no es una época/)
     expect(() => pedidoDeCubiertas(['--epoca'])).toThrow(/año/)
     expect(() => pedidoDeCubiertas(['--todas', 'x.json'])).toThrow(/--todas/)
     expect(() => pedidoDeCubiertas(['a.json', 'b.json'])).toThrow(/de más/)
