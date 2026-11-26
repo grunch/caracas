@@ -21,6 +21,8 @@ test('1889 mantiene las casas generadas de 1843 y añade tejido con la misma pal
  const actual=await page.evaluate(()=>window.lab.detalleColonial.cuenta)
  expect(actual.mallas).toBe(inicial.mallas);expect(actual.unidades.map(m=>m.balcones)).toEqual(inicial.unidades.map(m=>m.balcones))
  await page.evaluate(()=>window.lab.lineaDeTiempo.elegir(4))
- await expect.poll(()=>page.evaluate(()=>window.lab.detalleColonial.cuenta.mallas),{timeout:15000}).toBe(0)
+ // la ola avanza por cuadros (paso máximo de 1 s con render por software): se espera que termine, no un plazo fijo
+ await page.waitForFunction(()=>window.lab.ciudad.U.uEpocaA.value===4&&window.lab.ciudad.U.uOlaEpoca.value>=9000)
+ await expect.poll(()=>page.evaluate(()=>window.lab.detalleColonial.cuenta.mallas)).toBe(0)
  expect(errores).toEqual([])
 })

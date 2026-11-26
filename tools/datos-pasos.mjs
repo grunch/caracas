@@ -238,6 +238,15 @@ export const PASOS = [
     cmd: () => ['node', 'tools/planos-epocas.mjs'],
   },
   {
+    // el verde de patios, solares y terreno libre de 1772, 1843 y 1889: distancia firmada a las manzanas del
+    // generador de cada época, sin nada de 1936; el sitio anda igual sin él (suelo de tierra, como antes)
+    id: 'suelo-manzanas',
+    entradas: [`${D}/mosaico.json`, `${E}/manzanas-1772-informe.json`, `${E}/manzanas-1843-informe.json`, `${E}/manzanas-1889-informe.json`],
+    salidas: ['public/plano/suelo-manzanas.png', 'public/datos/suelo-manzanas.json'],
+    codigo: ['tools/suelo-manzanas.mjs', 'tools/suelo-manzanas-lib.mjs', 'src/marcas-datos.js', 'src/hitos.js', ...CODIGO_HITOS],
+    cmd: () => ['node', 'tools/suelo-manzanas.mjs', `${D}/mosaico.json`, `${E}/manzanas-1772-informe.json`, `${E}/manzanas-1843-informe.json`, `${E}/manzanas-1889-informe.json`],
+  },
+  {
     // las calles de 1772 para el suelo de esa época (T33j.8b): un campo de distancia a los ejes de la referencia
     // curada, sin pegar ningún escaneo; el sitio anda igual sin él (suelo liso, sin calles)
     id: 'calles-1772', entradas: ['tools/geo/referencias/1772-calles-1936.json', `${D}/mosaico.json`],

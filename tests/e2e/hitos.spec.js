@@ -93,12 +93,11 @@ test('al cambiar de época cambia lo que se ve en la Plaza Bolívar: vacía, mer
   await verLaPlaza(page)
 })
 
-test('con el relieve real, el piso del mercado de la plaza se ve entero (falla conocida T41b)', async ({ page }) => {
-  // Solo con el relieve (la muestra de datos del CI; la demo no lo trae). Falla conocida (T41b): el terreno sube
-  // hacia el norte de la plaza y tapa la mitad del piso de tierra del mercado, que queda plano a la altura de sus
-  // anclas. Cuando se arregle, Playwright avisa que este test ya pasa y hay que sacar esta marca.
+test('con el relieve real, el piso del mercado de la plaza se ve entero (T41b)', async ({ page }) => {
+  // Solo con el relieve (la muestra de datos del CI; la demo no lo trae). El terreno sube hacia el norte de la plaza
+  // y tapaba la mitad del piso de tierra del mercado (T41b); la plaza lleva terraza en el relieve
+  // (src/hitos/datos/plaza-bolivar.js) y el piso se ve entero.
   test.skip(!(await hayRelieve(page)), 'sin relieve no hay nada que medir')
-  test.fail(true, 'T41b: el piso de los hitos no sigue el relieve donde sube')
   await verLaPlaza(page)
 })
 

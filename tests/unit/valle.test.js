@@ -69,7 +69,7 @@ describe('el valle antes de la ciudad, en el shader del suelo', () => {
     expect(GLSL_SUELO).toContain('vec3 liso = mix(mix(TIERRA_DE_CALLE, CALZADA, calle.x), CALZADA * 0.8, 0.6 * calle.y);')
     expect(GLSL_SUELO).toContain('c = mix(c, mix(liso, BARRO, s.r), antes);')
     // ni el dibujo del plano: con antes = 1, dibujo = 0 en la ciudad
-    expect(GLSL_SUELO).toMatch(/vec3 sueloColor\([^)]*vec2 calle\)/)
+    expect(GLSL_SUELO).toMatch(/vec3 sueloColor\([^)]*vec2 calle, float verde\)/)
   })
 
   test('el borde de la ciudad promedia vecinos a unos metros: neto, sin serrucho de celdas', () => {
