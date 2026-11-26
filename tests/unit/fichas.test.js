@@ -26,8 +26,8 @@ const contenido = (id, epoca, extra = {}) => contenidoDeFicha({ marca: marca(id)
 describe('nombresPorEpoca', () => {
   it('da cada nombre con los años en que rigió y marca el de la época elegida', () => {
     expect(nombresPorEpoca(marca('plaza-bolivar'), 1)).toEqual([
-      { nombre: 'Plaza Mayor', periodo: '1772–1843', rige: true },
-      { nombre: 'Plaza Bolívar', periodo: 'desde 1889', rige: false },
+      { nombre: 'Plaza Mayor', periodo: '1772', rige: true },
+      { nombre: 'Plaza Bolívar', periodo: 'desde 1843', rige: false },
     ])
     expect(nombresPorEpoca(marca('plaza-bolivar'), 4).map((n) => n.rige)).toEqual([false, true])
   })

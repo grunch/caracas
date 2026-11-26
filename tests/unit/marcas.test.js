@@ -86,10 +86,10 @@ describe('las marcas de Caracas (src/marcas-datos.js)', () => {
     }
   })
 
-  test('la plaza es Plaza Mayor hasta 1843 y Plaza Bolívar desde 1889; los conventos dan paso al Capitolio y la Universidad', () => {
+  test('la plaza es Plaza Mayor en 1772 y Plaza Bolívar desde 1843; los conventos dan paso al Capitolio y la Universidad', () => {
     const marcas = normalizarMarcas(MARCAS, { hitos: HITOS, coords })
     const nombre = (id, e) => nombreEn(marcas.find((m) => m.id === id), e)?.nombre
-    expect([1, 2, 3, 5].map((e) => nombre('plaza-bolivar', e))).toEqual(['Plaza Mayor', 'Plaza Mayor', 'Plaza Bolívar', 'Plaza Bolívar'])
+    expect([1, 2, 3, 5].map((e) => nombre('plaza-bolivar', e))).toEqual(['Plaza Mayor', 'Plaza Bolívar', 'Plaza Bolívar', 'Plaza Bolívar'])
     expect([2, 3].map((e) => nombre('capitolio', e))).toEqual(['Convento de las Concepciones', 'Capitolio'])
     expect([2, 3].map((e) => nombre('universidad', e))).toEqual(['Convento de San Francisco', 'Universidad'])
   })

@@ -22,3 +22,11 @@ it('en 1843 la plaza tiene nombre oficial de Bolívar sin anticipar el jardín d
  expect(nombres.find(([e])=>e===2)?.[1]).toBe('Plaza Bolívar')
  expect(nombres.find(([e])=>e===2)?.[2]).toMatch(/mercado/)
 })
+
+import {nombresPorEpoca} from '../../src/fichas.js'
+it('agrupa notas sucesivas del mismo nombre, sin fusionar nombres que regresan después de otro',()=>{
+ const m={nace:1,muere:0,nombres:[{desde:1,nombre:'A'},{desde:2,nombre:'A'},{desde:3,nombre:'B'},{desde:4,nombre:'A'}]}
+ expect(nombresPorEpoca(m,2)).toEqual([
+  {nombre:'A',periodo:'1772–1843',rige:true},{nombre:'B',periodo:'1889',rige:false},{nombre:'A',periodo:'desde 1911',rige:false},
+ ])
+})
