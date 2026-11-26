@@ -257,3 +257,17 @@ test('con las fotos de verdad: la Plaza Bolívar tiene fotos acreditadas que car
     expect(await hayDato(page, `fotos/m/${f.id}.webp`, 'image/webp'), `m/${f.id}`).toBe(true)
   }
 })
+
+test('Candelaria aparece en 1772 con la visita de Martí y mantiene la ficha de 1843', async ({ page }) => {
+  await listo(page)
+  const vista = await page.evaluate(() => ({...window.lab.coords.aMundo(11230,7000),dist:650,yaw:0,pitch:0.9}))
+  await ver(page,1,vista)
+  await cartel(page,'Candelaria').click()
+  const panel=page.locator('#ficha')
+  await expect(panel.locator('.era')).toHaveText('Hacia 1772')
+  await expect(panel.locator('.texto p.epoca.rige')).toContainText('17 de mayo de 1772')
+  await expect(panel.locator('.fuente')).toContainText('Landaeta Rosales')
+  await ver(page,2,null)
+  await expect(panel.locator('.era')).toHaveText('Hacia 1843')
+  await expect(panel.locator('.texto p.epoca.rige')).toContainText('leyenda del plano de 1843')
+})
