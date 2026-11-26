@@ -307,6 +307,14 @@ export const FICHAS = Object.freeze({
     ],
   },
 
+  'bellas-artes': {
+    textos: [
+      [5, 'El plano DCN de 1936 dibuja y rotula la nueva sede del Museo de Bellas Artes junto a Los Caobos. La institución existía desde 1917 en otra sede. Según el Diccionario de Historia de Venezuela, el edificio de Villanueva se terminó en 1936, pero su inauguración oficial esperó hasta 1938.'],
+      [6, 'Esta sede del Museo de Bellas Artes fue inaugurada el 20 de febrero de 1938. En la vista de 1946 ya corresponde a un museo abierto al público.'],
+    ],
+    dudas: 'No se deduce el estado exacto de la obra en cada mes de 1936 a partir del plano anual. La marca distingue la sede física de la inauguración del museo.',
+  },
+
   // --- el este ---
   candelaria: {
     textos: [
