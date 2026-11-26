@@ -165,6 +165,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T82.9 | **Retiro en 1843** y continuidad exacta de 1772 | T82.8 | 399 manzanas, 4193 casas; otras épocas conservadas | 🔄 [PR #223](https://github.com/grunch/caracas/pull/223), listo para revisión |
 | T82.10 | **Retiro en 1889** y continuidad de 1843 | T82.9 | 486 manzanas, 4873 casas; otras épocas conservadas | 🔄 [PR #224](https://github.com/grunch/caracas/pull/224), listo para revisión |
 | T82.11 | **Retiro del tejido vectorizado de 1911** | T82.10 | 7817 casas ajustadas, cantidades y otras fechas conservadas | 🔄 [PR #225](https://github.com/grunch/caracas/pull/225), listo para revisión |
+| T82.12 | **Retiro del tejido de 1936** | T82.11 | 16840 casas ajustadas; continuidad sin reducción acumulativa | 🔄 Implementado; PR pendiente |
 
 ## Riesgos que el plan vigila
 

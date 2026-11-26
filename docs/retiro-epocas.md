@@ -39,3 +39,11 @@ node tools/retiro-moderno.mjs 1911 fuentes/derivados/retiro1889 fuentes/derivado
 ```
 
 La comparación exige igualdad semántica completa fuera del intervalo indicado. Los modelos de hitos, las texturas de los planos y el terreno de las épocas modernas no se escalan.
+
+## 1936
+
+Se ajustan 16840 de las 35497 casas y se conservan los 23101 árboles. Utiliza exactamente las matrices originales de 1911; las casas compartidas reciben la misma transformación, sin reducción acumulativa. Las excepciones de contorno y hitos se mantienen.
+
+```sh
+node tools/retiro-moderno.mjs 1936 fuentes/derivados/retiro1911 fuentes/derivados/retiro1936
+```
