@@ -23,7 +23,7 @@ for(const m of seleccion.manzanas){
  m.cantidadCasas=Math.max(1,Math.min(48,Math.round(cantidadPorDistancia(m.distancia,m.id)*Math.sqrt(m.areaM2/9216))))
  m.semilla=`${año}-${m.id}`;m.casas=casasDeManzana(m,{metro:meta.metro})
 }
-const nuevas=espacial('recortar',{manzanas:seleccion.manzanas,obstaculosHitos:techosDeHitos(meta,epoca),metro:meta.metro})
+const nuevas=espacial('recortar',{manzanas:seleccion.manzanas,indexarHitos:epoca===6,obstaculosHitos:techosDeHitos(meta,epoca),metro:meta.metro})
 const {ciudad,informe}=integrarManzanasEpoca(datos,nuevas,epoca)
 const completas=[...heredado.manzanas,...informe.manzanas].map(m=>({...m,arboles:m.arboles.map(a=>({...a,nace:epoca,muere:epoca===6?0:epoca+1}))}))
 // Mantener también la vegetación de expansión de 1946 que queda fuera de los nuevos solares.
