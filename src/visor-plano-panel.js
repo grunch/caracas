@@ -204,7 +204,6 @@ export function crearVisorDePlano({ contenedor, indice, base, añoBase, liviano 
   return {
     /** La época elegida en la línea de tiempo (una entrada de datos/crece.json): el botón la nombra. */
     elegir(nueva) {
-      if(nueva?.parcial)nueva={...nueva,año:nueva.base};
       epoca = nueva
       boton.hidden = !nueva
       if (!nueva) return

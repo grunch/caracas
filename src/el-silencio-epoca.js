@@ -9,3 +9,9 @@ export function conElSilencio(epocas) {
     fuente:'https://entrerayas.com/a-66-anos-de-la-inauguracion-de-la-reurbanizacion-el-silencio/',
   }]
 }
+
+/** La entrada cuyo plano abre el visor: la de la hoja base en una vista parcial (título y créditos de esa hoja). */
+export function planoBaseDe(epocas, epoca) {
+  if (!epoca?.parcial) return epoca
+  return epocas.find((e) => e.año === epoca.base && !e.parcial) ?? { ...epoca, año: epoca.base }
+}
