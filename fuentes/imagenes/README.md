@@ -640,3 +640,7 @@ vegetación de cada foto, en sombra, en medio tono y en luz:
 - **De lejos el cerro se ve azul verdoso** (la frontal de 2024 tomada desde la ciudad, matiz ~200° en los
   píxeles): eso es la bruma del aire, que pone el acabado, no el color del suelo.
 
+
+## Teatro Municipal: envolvente anterior a 1949 (T40b)
+
+La fotografía de los años 1880 se cotejó con la postal histórica de la Cámara de Caracas y la foto frontal de 1947 reproducida por [Fundación Arquitectura y Ciudad](https://fundaayc.com/2026/05/27/). Se conservan pórtico semicircular, columnas altas, ventanas dobles, óculos, cornisas y linterna. La demolición de 1949 queda fuera de los mapas. Los tres mapas posteriores a la inauguración de 1881 comparten la envolvente. Dimensiones, pintura y caja escénica interpretativas; fuentes y límites en [el estudio](../../specs/08-teatro-municipal.md). No se publican las nuevas referencias fotográficas.

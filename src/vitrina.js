@@ -33,12 +33,14 @@ export function seccionesDeEdificios(marcas, fichas) {
   return marcas
     .map((m, orden) => ({ m, orden }))
     .filter(({ m }) => m.hito)
-    .sort((a, b) => a.m.nace - b.m.nace || a.orden - b.orden)
+    .sort((a, b) => (a.m.naceHito ?? a.m.nace) - (b.m.naceHito ?? b.m.nace) || a.orden - b.orden)
     .map(({ m }) => {
       const primero = m.nombres[0].nombre
       const ultimo = m.nombres.at(-1).nombre
-      const texto = fichas[m.id]?.textos?.[0]?.[1] ?? m.nombres.find((n) => n.nota)?.nota ?? ''
-      return { id: m.id, año: AÑOS_DE_EPOCA[m.nace], epoca: m.nace, nombre: ultimo, antes: primero === ultimo ? null : primero, texto }
+      const epoca = m.naceHito ?? m.nace
+      const entrada = epoca > m.nace ? fichas[m.id]?.textos?.findLast(([desde]) => desde <= epoca) : fichas[m.id]?.textos?.[0]
+      const texto = entrada?.[1] ?? m.nombres.find((n) => n.nota)?.nota ?? ''
+      return { id: m.id, año: AÑOS_DE_EPOCA[epoca], epoca, nombre: ultimo, antes: primero === ultimo ? null : primero, texto }
     })
 }
 

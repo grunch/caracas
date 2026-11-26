@@ -271,7 +271,7 @@ const casasPedidas = cargarPak('datos/ciudad.pak', { vertices: Float32Array, tec
 casasPedidas.then(() => {
   // los árboles, después de la ciudad entera (quien espera a los árboles sabe que ya llegó todo lo demás)
   // los árboles, después de la ciudad: una malla instanciada que comparte sus uniforms (src/arboles.js)
-  return cargarArboles('datos/arboles.bin', { coords, U: ciudad.U }).then((m) => {
+  return cargarArboles('datos/arboles.bin', { coords, U: ciudad.U, reservas: HITOS }).then((m) => {
     arboles = m
     scene.add(m)
     pedirCuadro(3)

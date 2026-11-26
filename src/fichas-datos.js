@@ -183,9 +183,9 @@ export const FICHAS = Object.freeze({
     textos: [
       [1, 'Aquí estaban la plaza y la iglesia de San Pablo.'],
       [2, 'La leyenda del plano de 1843 nombra la iglesia de San Pablo (P).'],
-      [3, 'El teatro se levantó donde estuvo San Pablo: el plano de 1889 lo numera 25, «Teatro Municipal». En la foto de la década de 1880 el letrero del pórtico dice «Teatro Guzmán Blanco».'],
+      [3, 'El teatro se levantó donde estuvo San Pablo: el plano de 1889 lo numera 25, «Teatro Municipal». Fue inaugurado en 1881 como Teatro Guzmán Blanco (Fundarte). Se representa con su pórtico semicircular original, columnas, óculos y linterna, visibles en la fotografía de los años 1880. Ese frente se demolió en 1949 (Fundación Arquitectura y Ciudad), después de las épocas del mapa.'],
     ],
-    dudas: 'La demolición de San Pablo (hacia 1876) es un dato general, sin cotejar con el catálogo.',
+    dudas: 'La envolvente exterior se conserva entre 1889, 1911 y 1936 como hipótesis de continuidad. Dimensiones, pintura, caja escénica y ornamentos pequeños aproximados; sin levantamiento arquitectónico. No se modela la reforma interior de 1930.',
   },
   'santa-teresa': {
     textos: [

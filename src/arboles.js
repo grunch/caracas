@@ -18,6 +18,7 @@ import {
   InstancedBufferAttribute, Matrix4, Group, Sphere, Vector3,
 } from 'three'
 import { seVeEntre, esferaSobreRelieve, alturasBajo } from './baldosas.js'
+import { suprimirArbolesDeHitos } from './hitos/suprimir-arboles.js'
 import { SIN_LINEA_DE_TIEMPO } from './epocas.js'
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
 import { GLSL_RELIEVE, UNIFORMS_RELIEVE } from './relieve.js'
@@ -290,5 +291,5 @@ export async function cargarArboles(url, opciones) {
   const r = await fetch(url)
   if (!r.ok) throw new Error(`${url}: ${r.status}`)
   if ((r.headers.get('content-type') ?? '').includes('html')) throw new Error(`${url}: no está (fallback HTML)`)
-  return crearArboles({ ...opciones, datos: decodificarArboles(await r.arrayBuffer()) })
+  return crearArboles({ ...opciones, datos: suprimirArbolesDeHitos(decodificarArboles(await r.arrayBuffer()), opciones.reservas ?? []) })
 }
