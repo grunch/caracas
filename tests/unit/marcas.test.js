@@ -121,8 +121,8 @@ describe('las marcas de Caracas (src/marcas-datos.js)', () => {
       }
     })
 
-    test('Santa Rosalía y La Merced nacen en 1843; Candelaria está documentada en 1772', () => {
-      expect(['santa-rosalia', 'candelaria', 'las-mercedes'].map((id) => de(id).nace)).toEqual([2, 1, 2])
+    test('Candelaria y La Merced están documentadas en 1772; Santa Rosalía nace en 1843', () => {
+      expect(['santa-rosalia', 'candelaria', 'las-mercedes'].map((id) => de(id).nace)).toEqual([2, 1, 1])
       expect([2, 3, 5].map((e) => nombreEn(de('las-mercedes'), e).nombre)).toEqual(['La Merced', 'Las Mercedes', 'Las Mercedes'])
     })
   })

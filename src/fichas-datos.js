@@ -231,10 +231,11 @@ export const FICHAS = Object.freeze({
   // --- el norte ---
   'las-mercedes': {
     textos: [
-      [2, 'La leyenda del plano de 1843 la nombra «La Merced» (E), entre las iglesias, capillas y conventos.'],
+      [1, 'El convento de La Merced ocupaba este sector desde el siglo XVII. En 1772 recibió la visita del obispo Mariano Martí.'],
+      [2, 'El terremoto de 1812 dañó gravemente el conjunto. Los últimos religiosos se retiraron en 1839; la leyenda del plano de 1843 conserva el nombre «La Merced» (E).'],
       [3, 'El plano de 1889 dibuja un templo en el lugar; el de 1936 lo rotula «Iglesia Las Mercedes».'],
     ],
-    dudas: 'El convento de la Merced es colonial (dato general); con el plano de 1772, sin cotejar. Aquí aparece desde 1843, cuya leyenda la nombra.',
+    dudas: 'La visita de 1772 está documentada en Historia general de la Iglesia en América Latina, tomo VII, pp. 228–229. Falta cotejar el solar en el plano de 1772 y la arquitectura de cada etapa; la marca no presupone una fachada colonial intacta en 1843 o 1889.',
   },
   'la-pastora': {
     textos: [
