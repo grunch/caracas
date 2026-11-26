@@ -12,10 +12,19 @@ import { DataTexture, LinearFilter, RGBAFormat, Vector4 } from 'three'
 export const DIST_MAX_M = 16
 /** Afuera de las manzanas, hasta esta distancia es calle; más lejos, terreno desocupado (verde). */
 export const BANDA_CALLE_M = 12
+/**
+ * Cuánta saturación del verde del campo queda adentro de la ciudad (patios, solares, terreno libre): donde hay
+ * mano humana hay poda, pisoteo y tierra a la vista, así que es más apagado que el campo. 1 = igual al campo.
+ */
+export const SATURACION_VERDE_CIUDAD = 0.6
+/** El verde del campo, apagado para la ciudad (GLSL; c en lineal). */
+export const GLSL_VERDE_CIUDAD = /* glsl */ `
+  vec3 verdeCiudad(vec3 c) { return mix(vec3(dot(c, vec3(0.2126, 0.7152, 0.0722))), c, ${SATURACION_VERDE_CIUDAD.toFixed(2)}); }`
 /** Las épocas de cada canal (índices de la línea de tiempo: 1 = 1772 · 2 = 1843 · 3 = 1889). */
 export const EPOCAS_CANALES = Object.freeze([1, 2, 3])
 
 export const GLSL_SUELO_MANZANAS = /* glsl */ `
+  ${GLSL_VERDE_CIUDAD}
   uniform sampler2D uManzanasSuelo; uniform vec4 uManzanasRect; uniform float uManzanasOn;
   /**
    * Cuánto del punto de la hoja es verde en la época: adentro de una manzana de la época (patio, solar) o más

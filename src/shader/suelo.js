@@ -51,9 +51,10 @@ export const GLSL_SUELO = /* glsl */ `
     float antes = (1.0 - smoothstep(4.5, 5.0, epoca)) * (1.0 - planoViejo);
     vec3 liso = mix(mix(TIERRA_DE_CALLE, CALZADA, calle.x), CALZADA * 0.8, 0.6 * calle.y);
     c = mix(c, mix(liso, BARRO, s.r), antes);
-    // en 1772, 1843 y 1889, los patios, solares y el terreno desocupado son del verde del campo de alrededor
+    // en 1772, 1843 y 1889, los patios, solares y el terreno desocupado son del verde del campo de alrededor,
+    // más apagado (podas y pisoteo: verdeCiudad)
     // (src/shader/suelo-manzanas.js); la calzada de la época, no
-    c = mix(c, campo, antes * verde * (1.0 - calle.x));
+    c = mix(c, verdeCiudad(campo), antes * verde * (1.0 - calle.x));
     // el dibujo del plano: entero en la ciudad (en la de 1936); en el campo, nada (solo en 1936, tenue: es su plano)
     float dibujo = mix(${TINTA_DEL_CAMPO_1936} * smoothstep(4.5, 5.0, epoca), 1.0 - antes, ciudad);
     // los nombres, las cotas y el tranvía del plano de 1936 no se marcan: solo queda el dibujo

@@ -1,6 +1,7 @@
 import { describe, test, expect, vi, afterEach } from 'vitest'
 import { ponerSueloManzanas, cargarSueloManzanas } from '../../src/suelo-manzanas.js'
-import { GLSL_SUELO_MANZANAS, DIST_MAX_M, BANDA_CALLE_M, EPOCAS_CANALES } from '../../src/shader/suelo-manzanas.js'
+import { GLSL_SUELO_MANZANAS, DIST_MAX_M, BANDA_CALLE_M, EPOCAS_CANALES, SATURACION_VERDE_CIUDAD } from '../../src/shader/suelo-manzanas.js'
+import { PALETA_VALLE } from '../../src/shader/valle.js'
 import * as lib from '../../tools/suelo-manzanas-lib.mjs'
 import { GLSL_SUELO } from '../../src/shader/suelo.js'
 import { crearMaterialCiudad } from '../../src/material.js'
@@ -33,7 +34,22 @@ describe('GLSL_SUELO_MANZANAS', () => {
   })
 
   test('el suelo pinta con el campo de alrededor solo antes de 1936 y fuera de la calzada', () => {
-    expect(GLSL_SUELO).toContain('c = mix(c, campo, antes * verde * (1.0 - calle.x));')
+    expect(GLSL_SUELO).toContain('c = mix(c, verdeCiudad(campo), antes * verde * (1.0 - calle.x));')
+  })
+})
+
+describe('el verde de la ciudad, más apagado que el campo', () => {
+  test('conserva solo parte de la saturación del campo, y la misma en el suelo y en el piso de los patios', () => {
+    expect(SATURACION_VERDE_CIUDAD).toBeGreaterThan(0)
+    expect(SATURACION_VERDE_CIUDAD).toBeLessThan(1)
+    expect(GLSL_SUELO_MANZANAS).toContain(`, c, ${SATURACION_VERDE_CIUDAD.toFixed(2)}); }`)
+    // el piso del patio: SABANA apagada, no SABANA tal cual
+    const sabana = `vec3(${PALETA_VALLE.SABANA.map((v) => ((v / 255) ** 2.2).toFixed(3)).join(', ')})`
+    expect(GLSL_TECHO).not.toContain(`PATIO_VERDE = ${sabana}`)
+    const m = GLSL_TECHO.match(/PATIO_VERDE = vec3\(([\d.]+), ([\d.]+), ([\d.]+)\)/).slice(1).map(Number)
+    const [r, g] = PALETA_VALLE.SABANA.map((v) => (v / 255) ** 2.2)
+    expect(m[1] - m[0]).toBeLessThan(g - r) // menos distancia entre verde y rojo: menos saturado
+    expect(m[1] - m[0]).toBeGreaterThan(0) // pero sigue siendo verde
   })
 })
 

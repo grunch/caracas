@@ -1,7 +1,14 @@
 import { CUBIERTA } from '../techos.js'
 import { PALETA_VALLE } from './valle.js'
+import { SATURACION_VERDE_CIUDAD } from './suelo-manzanas.js'
 
 const lineal = (r, g, b) => `vec3(${[r, g, b].map((v) => ((v / 255) ** 2.2).toFixed(3)).join(', ')})` // de sRGB 0–255
+/** El tono del campo apagado como verdeCiudad (src/shader/suelo-manzanas.js), en sRGB 0–255. */
+const apagado = (rgb) => {
+  const lin = rgb.map((v) => (v / 255) ** 2.2)
+  const gris = 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2]
+  return lin.map((v) => 255 * (gris + (v - gris) * SATURACION_VERDE_CIUDAD) ** (1 / 2.2))
+}
 
 /**
  * Los techos, por dentro del faldón: aTecho (src/ciudad.js) trae s (metros a lo largo del alero), t
@@ -22,8 +29,8 @@ export const GLSL_TECHO = /* glsl */ `
   const float CUB_TEJA = ${CUBIERTA.TEJA}.0, CUB_AZOTEA = ${CUBIERTA.AZOTEA}.0, CUB_ZINC = ${CUBIERTA.ZINC}.0, CUB_ALERO = ${CUBIERTA.ALERO}.0, CUB_PATIO = ${CUBIERTA.PATIO}.0, CUB_SOLAR = ${CUBIERTA.SOLAR}.0,
     CUB_VOLADA = ${CUBIERTA.VOLADA}.0; // lo que se le suma a la cubierta en la cara de arriba de un alero
   const float TEJA_ANCHO = 0.24, TEJA_LARGO = 0.38; // de eje a eje de las cobijas; lo que asoma cada teja
-  // el verde de los patios y solares hasta 1889: el del campo de alrededor (PALETA_VALLE, src/shader/valle.js)
-  const vec3 PATIO_VERDE = ${lineal(...PALETA_VALLE.SABANA)}, PATIO_VERDE_OSCURO = ${lineal(...PALETA_VALLE.SABANA_VERDE)};
+  // el verde de los patios y solares hasta 1889: el del campo de alrededor (PALETA_VALLE, src/shader/valle.js), apagado
+  const vec3 PATIO_VERDE = ${lineal(...apagado(PALETA_VALLE.SABANA))}, PATIO_VERDE_OSCURO = ${lineal(...apagado(PALETA_VALLE.SABANA_VERDE))};
   float gVerdor = 0.0; // cuánto rige el patio verde en la época del fragmento (lo pone el main, src/material.js)
 
   /**
