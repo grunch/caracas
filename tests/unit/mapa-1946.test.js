@@ -21,3 +21,12 @@ it('el suelo no añade samplers y mantiene inactivo el alfa de ampliación antes
  expect(GLSL_VALLE).not.toMatch(/uniform\s+sampler2D/)
  expect(GLSL_VALLE).toContain('if(e<=5.5)return vec3(0.0)')
 })
+
+it('la carga tardía del campo base mantiene1946 durante la ola de vuelta, pero no después',async()=>{
+ const {campoDeEpoca}=await import('../../src/el-silencio-epoca.js')
+ expect(campoDeEpoca('base','nuevo',6,5,true)).toBe('nuevo')
+ expect(campoDeEpoca('base','nuevo',6,5,false)).toBe('base')
+ expect(campoDeEpoca('base','nuevo',5,6,false)).toBe('nuevo')
+ expect(campoDeEpoca('base','nuevo',4,5,true)).toBe('base')
+ expect(campoDeEpoca('base',null,6,5,true)).toBe('base')
+})

@@ -16,7 +16,7 @@ import {partesDeCiudad} from './empacar-lib.mjs'
 import {arbolesParaManzanas} from './manzanas-arboles-lib.mjs'
 import { decodificarPak } from '../src/pak.js'
 import {
-  codificarArboles, naceArbol, esDePlaza, naceEnPlaza, JARDINES_DESDE, casasQueMueren, techosQueQuedan, bajoUnTecho, desdeEnCrece, desdeDelEntorno,
+  codificarArboles, finPorTechosFuturos, naceArbol, esDePlaza, naceEnPlaza, JARDINES_DESDE, casasQueMueren, techosQueQuedan, bajoUnTecho, desdeEnCrece, desdeDelEntorno,
   arbolesDePatio,
 } from './arboles-lib.mjs'
 import { arbolesSilvestres, monteEnCrece, muereSilvestre, cercaDeOtro } from './silvestres-lib.mjs'
@@ -79,10 +79,11 @@ const claseEn = segmentacion
 const MIRAR = { pasoPx: 2 / metro, maxPx: 45 / metro }
 // solo en lo que ya era ciudad antes de 1889 (crece.png G): los árboles de los caminos del campo no cambian
 const enLaCiudadVieja = (a, nace) => nace < JARDINES_DESDE && segmentacion !== null && desdeEnCrece(grilla, a.x, a.y, CANAL_URBANO) < JARDINES_DESDE
+const finFuturo=ciudadNueva?finPorTechosFuturos(ciudadNueva,CELDA_TECHOS_PX):()=>0
 const conNace = libres.map((a) => {
   const nace = naceArbol(a, { desde: a.jardin ? desdeJardin : desde, casas })
-  return { ...a, nace: naceEnPlaza(nace, enLaCiudadVieja(a, nace) && esDePlaza(claseEn, a.x, a.y, MIRAR)) }
-})
+  return { ...a, nace: naceEnPlaza(nace, enLaCiudadVieja(a, nace) && esDePlaza(claseEn, a.x, a.y, MIRAR)), muere: finFuturo(a.x,a.y) }
+}).filter(a=>!a.muere || a.nace<a.muere)
 
 // el monte: solo si crece.png trae lo urbanizado y el monte (G y B)
 const suave = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t) }

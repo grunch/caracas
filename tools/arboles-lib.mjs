@@ -91,15 +91,29 @@ export function casasQueMueren({ vertices, techos, vida }) {
   return casas
 }
 
-/** Los anillos de los techos que nunca mueren (con vida: muere = 0; sin vida, todos). */
+/** Techos permanentes que ya existen en1936; los futuros no borran árboles del pasado. */
 export function techosQueQuedan({ vertices, techos, vida }) {
   const anillos = []
   for (let t = 0; t < techos.length / 4; t++) {
-    if (vida && vida[t] >= 8) continue
+    if (vida && (vida[t] >= 8 || vida[t] % 8 > 5)) continue
     const [inicio, cuantos] = [techos[t * 4], techos[t * 4 + 1]]
     anillos.push(Array.from(vertices.subarray(inicio * 2, (inicio + cuantos) * 2)))
   }
   return anillos
+}
+
+/** Fin de vida por construcciones posteriores al plano1936;0 si ninguna ocupa el árbol. */
+export function finPorTechosFuturos({vertices,techos,vida}, celdaPx=100) {
+  const porEpoca=new Map()
+  for(let t=0;vida && t<techos.length/4;t++){
+    const nace=vida[t]%8, muere=Math.floor(vida[t]/8)
+    if(nace<=5 || nace>=7 || (muere && muere<=nace))continue
+    const [inicio,n]=techos.subarray(t*4,t*4+2)
+    if(!porEpoca.has(nace))porEpoca.set(nace,[])
+    porEpoca.get(nace).push(Array.from(vertices.subarray(inicio*2,(inicio+n)*2)))
+  }
+  const campos=[...porEpoca].sort(([a],[b])=>a-b).map(([e,anillos])=>[e,bajoUnTecho(anillos,celdaPx)])
+  return (x,y)=>campos.find(([,bajo])=>bajo(x,y))?.[0]??0
 }
 
 /**

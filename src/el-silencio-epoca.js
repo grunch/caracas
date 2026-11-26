@@ -17,3 +17,8 @@ export function planoBaseDe(epocas, epoca) {
   if (!epoca?.parcial) return epoca
   return epocas.find((e) => e.año === epoca.base && !e.parcial) ?? { ...epoca, año: epoca.base }
 }
+
+/** La máscara futura sigue vigente en ambos lados de una ola que todavía está pasando. */
+export function campoDeEpoca(base, ampliacion, de, a, enTransicion) {
+  return ampliacion && (a === EPOCA_SILENCIO || (enTransicion && de === EPOCA_SILENCIO)) ? ampliacion : base
+}

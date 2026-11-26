@@ -18,7 +18,7 @@ import { texturasHoy, HOY_CERCA } from './hoy.js'
 import { crearBuscador } from './buscador/interfaz.js'
 import { crearTeselasFinas } from './teselas.js'
 import {retirarMonte1946} from './monte-1946.js'
-import {conElSilencio,planoBaseDe} from './el-silencio-epoca.js'
+import {conElSilencio,planoBaseDe,campoDeEpoca} from './el-silencio-epoca.js'
 import { crearLineaDeTiempo, crearSecuencia, escalaCrece, PRIMERA_EPOCA } from './epocas.js'
 import { crearPlanosDeEpoca, planoDeEpoca } from './planos.js'
 import { cargarCallesDeEpoca } from './calles-epoca.js'
@@ -385,7 +385,7 @@ Promise.all([crecePedido, indicePlanos])
       t.minFilter = LinearFilter
       const { width: cols, height: rows } = t.image
       U.uCreceEscala.value.fromArray(escalaCrece(meta.plano, { cols, rows }, celda_m ?? 8))
-      creceBase=t;U.uCrece.value=U.uEpocaA.value===6&&crece1946?crece1946:t;pedirCuadro(3)
+      creceBase=t;U.uCrece.value=campoDeEpoca(t,crece1946,U.uEpocaDe.value,U.uEpocaA.value,U.uOlaEpoca.value<OLA_EPOCA_MAX_M);pedirCuadro(3)
     }).catch((e) => console.warn(`crece: ${e.message}`))
   }).catch((e) => {ciudad.U.uEpocaDe.value=ciudad.U.uEpocaA.value=5;pedirCuadro(3);console.warn(`épocas: ${e.message}`)}) // sin crece.json: base1936; no suprimir el barrio por una vista futura que no se puede abrir.
 // Sin índice de épocas se conserva la base de1936, sin sustituir solares por hitos no cargados.
