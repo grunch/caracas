@@ -93,8 +93,8 @@ export const MARCAS = Object.freeze([
   { id: 'plaza-venezolano', nombres: [[1, 'Plaza de San Jacinto'], [3, 'Plaza El Venezolano']], x: 9265, y: 7040, nace: 1, nivel: 3,
     fuente: `${P89} (plaza B «del Venezolano»); ${P36} («Plaza El Venezolano»); nombre anterior: ${CG}`,
     dudas: `${SIN_LEYENDA} La leyenda de 1843 no da letra a las plazas; el texto al pie de ese plano cuenta «San Jacinto» entre las plazas de la ciudad.` },
-  { id: 'casa-natal', nombre: 'Casa natal del Libertador', x: 9195, y: 7085, nace: 2, nivel: 3, alto: 6,
-    fuente: `${P89} (24 «Casa donde nació Bolívar»); ${P36} («Casa Natal»)`, dudas: 'La casa es anterior (Bolívar nació en 1783); la marca va desde 1843, ya muerto el Libertador.' },
+  { id: 'casa-natal', nombres: [[1, 'Casa de los Bolívar'], [2, 'Casa natal del Libertador']], x: 9195, y: 7085, nace: 1, nivel: 3, alto: 6,
+    fuente: `${P89} (24 «Casa donde nació Bolívar»); ${P36} («Casa Natal»); Rafael Fuentes Carvallo, Diccionario de Historia de Venezuela, Fundación Empresas Polar: https://bibliofep.fundacionempresaspolar.org/dhv/entradas/c/casa-natal-del-libertador/`, dudas: 'Casa de los Bolívar es una denominación descriptiva de su propiedad en 1772, no un rótulo transcrito del plano. La fecha exacta de construcción y su forma en 1772 no se fijan aquí.' },
   { id: 'banco-venezuela', nombre: 'Banco de Venezuela', x: 9130, y: 7180, nace: 5, nivel: 3, alto: 12, fuente: `${P36} («Bco. de Venezuela»)` },
   { id: 'teatro-municipal', hito: 'teatro-municipal', x: 8345, y: 7670, nace: 1, nivel: 2, alto: 16,
     nombres: [[1, 'Plaza de San Pablo', 'La plaza y la iglesia de San Pablo.'], [3, 'Teatro Municipal', 'Donde estuvo la plaza de San Pablo.']],
@@ -123,9 +123,9 @@ export const MARCAS = Object.freeze([
   { id: 'puente-sucre', nombre: 'Puente Sucre', x: 9710, y: 9430, nace: 5, nivel: 3, alto: 4, fuente: `${P36} («Puente Sucre»)` },
 
   // --- el norte: Altagracia, La Pastora, el Panteón ---
-  { id: 'las-mercedes', nombres: [[2, 'La Merced'], [3, 'Las Mercedes']], x: 8880, y: 5830, nace: 2, nivel: 3, alto: 11,
-    fuente: `${P36} («Iglesia Las Mercedes»); ${P89} (templo dibujado en el lugar); ${L43('E', 'La Merced')}`,
-    dudas: 'El convento de la Merced es colonial (CG); con el plano de 1772, sin cotejar. Va desde 1843, cuya leyenda la nombra «La Merced»; en 1889 y 1911 lleva el nombre del plano de 1936.' },
+  { id: 'las-mercedes', nombres: [[1, 'Convento de La Merced'], [2, 'La Merced'], [3, 'Las Mercedes']], x: 8880, y: 5830, nace: 1, nivel: 3, alto: 11,
+    fuente: `${P36} («Iglesia Las Mercedes»); ${P89} (templo dibujado en el lugar); ${L43('E', 'La Merced')}; Historia general de la Iglesia en América Latina, tomo VII, pp. 228–229: https://docs.enriquedussel.com/txt/Textos_Libros_Editados_ED/L.Edi.4_Tomo7_Colombia_y_Venezuela.pdf`,
+    dudas: 'Presencia documentada por la visita de Martí en 1772; la ubicación exacta en ese plano sigue sin cotejar. La fachada y el estado de reconstrucción en 1843 y 1889 no están verificados. El nombre Las Mercedes procede del plano de 1936.' },
   { id: 'la-pastora', hito: 'la-pastora', nombre: 'La Pastora', nivel: 1, alto: 10, fuente: `${P36} («Iglesia La Pastora»); ${P89} (templo XI); foto de 1892 (fuentes/imagenes); ${L43('B', 'La Pastora')}`,
     dudas: 'La leyenda de 1843 ya la nombra (B). Desde qué época antes, a verificar: va desde 1772, como el hito.' },
   { id: 'panteon', hito: 'panteon', nace: 2, nivel: 2, alto: 13,
