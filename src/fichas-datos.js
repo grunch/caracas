@@ -175,10 +175,11 @@ export const FICHAS = Object.freeze({
   },
   'casa-natal': {
     textos: [
-      [2, 'La casa donde nació Simón Bolívar, a una cuadra de la plaza mayor. El plano de 1889 la numera 24, «Casa donde nació Bolívar»; el de 1936 la rotula «Casa Natal».'],
+      [1, 'A mediados del siglo XVIII la casa pertenecía a Juan Vicente Bolívar y Ponte, según el Diccionario de Historia de Venezuela de Fundación Empresas Polar. En 1772 se identifica como casa de los Bolívar; Simón nació allí en 1783.'],
+      [2, 'La casa sufrió daños en 1812, fue reparada y perdió su piso alto. Es la casa donde nació Simón Bolívar, a una cuadra de la plaza mayor. El plano de 1889 la numera 24, «Casa donde nació Bolívar»; el de 1936 la rotula «Casa Natal».'],
       [5, 'Una revista de 1930 muestra su patio cuadrado, con corredores de pilares de madera y una pila de piedra al centro.'],
     ],
-    dudas: 'La casa es anterior (Bolívar nació en 1783): aquí se marca desde 1843.',
+    dudas: 'El rótulo de 1772 describe la propiedad familiar. No se equipara aquella vivienda con la restauración museística inaugurada en 1921 ni se da una fecha exacta de construcción.',
   },
   'teatro-municipal': {
     textos: [
