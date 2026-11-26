@@ -25,3 +25,8 @@ def test_preserva_huellas_antiguas_y_no_edifica_reservas():
     assert info['conservadas']==1
     assert nuevas and all(bloques[1].covers(q) for q in nuevas)
     assert vieja.equals(box(0,0,15,10))
+
+def test_no_construye_en_reserva_aunque_ocupe_menos_de_diez_por_ciento():
+    p=box(0,0,100,80);reserva=box(0,0,8,80)
+    casas,_=conservar_y_ampliar([p],[],[reserva])
+    assert all(c.intersection(reserva).area<.01 for c in casas)

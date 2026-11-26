@@ -50,7 +50,7 @@ def conservar_y_ampliar(bloques,anteriores,reservas):
     arbol=STRtree(anteriores);reserva=unary_union(reservas)
     nuevas=[];ms=[];existentes=0;omitidas=0
     for p in bloques:
-        if not reserva.is_empty and p.intersection(reserva).area>p.area*.1:omitidas+=1;continue
+        if not reserva.is_empty and p.intersection(reserva).area>0:omitidas+=1;continue
         # Un edificio anterior basta para conservar la manzana. No inventar reemplazos
         # ni densificación donde esta fuente no dibuja solares.
         if len(arbol.query(p.buffer(4),predicate='intersects')):existentes+=1;continue
