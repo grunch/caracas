@@ -33,10 +33,15 @@ export const FICHAS = Object.freeze({
   calvario: {
     textos: [
       [1, 'El cerro al oeste de la ciudad. Desde este lado se dibujó la vista de 1839: la ciudad baja, la torre de la Catedral y el Ávila al fondo.'],
-      [3, 'El plano de 1889 dibuja el paseo en la cima y cuenta su capilla entre los templos (XII, «el Calvario»). Desde aquí se tomaron las fotos panorámicas de comienzos del siglo XX, y aquí está el arco de la Federación.'],
+      [3, 'El paseo de El Calvario fue inaugurado en 1873. El plano de 1889 dibuja sus caminos en la cima y cuenta su capilla entre los templos (XII, «el Calvario»).'],
+      [4, 'El Arco de la Federación, construido en 1895 por Juan Hurtado Manrique con Alejandro Chataing, forma parte de los accesos al paseo.'],
       [5, 'El plano de 1936 lo rotula «Paseo Independencia» y marca la «Capilla del Calvario».'],
     ],
-    dudas: 'En 1889 el paseo llevaba el nombre de Guzmán Blanco (dato general, sin cotejar); cuándo pasó a llamarse Independencia, tampoco se cotejó.',
+    dudas: 'Las fuentes consultadas difieren sobre el año del cambio de nombre a Independencia; se mantiene la denominación descriptiva del paseo en 1889.',
+  },
+  'arco-federacion': {
+    textos: [[4, 'El Arco de la Federación se construyó en 1895 en El Calvario, con proyecto de Juan Hurtado Manrique y colaboración de Alejandro Chataing. Es posterior al paseo de 1873 y no corresponde a la vista de 1889.']],
+    dudas: 'La ubicación de la marca es aproximada; el monumento todavía no tiene un modelo arquitectónico propio.',
   },
   catuche: {
     textos: [
@@ -257,12 +262,18 @@ export const FICHAS = Object.freeze({
     dudas: 'Fachadas cotejadas con Bellermann, Lessmann y las imágenes de Fundación Arquitectura y Ciudad. Planta, dimensiones, laterales y daños son aproximaciones; no se representan las obras de 1772.',
   },
   'san-carlos': {
-    textos: [[3, 'El plano de 1889 numera 21 el «Cuartel San Carlos»; el de 1936 dibuja el edificio, de patio, sin rótulo.']],
-    dudas: 'El cuartel es de fines del siglo XVIII (dato general); sin cotejar con el plano de 1843, aparece desde 1889.',
+    textos: [
+      [2, 'La leyenda del plano de Jesurún de 1843 identifica el «Cuartel Veterano» (s), al norte de la ciudad. El estudio arqueológico de Mariana Flores sitúa su construcción entre 1785 y 1790 y documenta los daños del terremoto de 1812.'],
+      [3, 'El plano de 1889 numera 21 el «Cuartel San Carlos»; el de 1936 dibuja su edificio de patio.'],
+    ],
+    dudas: 'El rótulo documenta la presencia del cuartel; su arquitectura y las reparaciones posteriores a 1812 requieren un modelo específico.',
   },
   'hospital-vargas': {
-    textos: [[3, 'El plano de 1889 ya lo dibuja y lo numera 43, cuando todavía estaba en obra.']],
-    dudas: 'El año de inauguración (1891) es un dato general.',
+    textos: [
+      [3, 'Las obras del Hospital Vargas comenzaron en 1888. El plano de Mestre de 1889 ya dibuja su planta y lo identifica con el número 43, pero el hospital aún no estaba inaugurado.'],
+      [4, 'El Hospital Vargas fue inaugurado el 1 de enero de 1891 y comenzó a atender pacientes el 5 de julio de ese año, según la investigación de Roger Escalona publicada por la Sociedad Venezolana de Historia de la Medicina.'],
+    ],
+    dudas: 'El plano de 1889 permite localizar el proyecto, no determinar el avance exacto de sus obras.',
   },
 
   // --- el oeste ---
@@ -293,11 +304,24 @@ export const FICHAS = Object.freeze({
   'el-paraiso': {
     textos: [[4, 'La ciudad cruza el Guaire: el plano de 1911 ya rotula «El Paraíso», al suroeste, con su hipódromo.'], [5, 'El Paraíso continúa en el plano DCN de 1936. Sus calles y edificaciones forman parte del tejido del plano; la marca de sector no equivale a una reconstrucción individual de sus quintas.']],
   },
+  'cementerio-sur': {
+    textos: [[3, 'El Cementerio General del Sur abrió en 1876 en Tierra de Jugo, al sur del Guaire. Manuel Landaeta Rosales documenta la resolución de 1875 para construirlo y el decreto de apertura de 1876.'],
+      [5, 'El plano DCN de 1936 rotula el Cementerio General del Sur y dibuja su recinto y calles interiores en el borde sur de la hoja.']],
+    dudas: 'El rótulo localiza el cementerio; no presupone que su extensión de 1936 fuera ya la de 1889. No se modelan mausoleos ni sepulturas.',
+  },
   hipodromo: {
     textos: [
       [4, '«Hipódromo del Paraíso» en el plano de 1911.'],
       [5, '«Hipódromo Nacional» en el de 1936.'],
     ],
+  },
+
+  'bellas-artes': {
+    textos: [
+      [5, 'El plano DCN de 1936 dibuja y rotula la nueva sede del Museo de Bellas Artes junto a Los Caobos. La institución existía desde 1917 en otra sede. Según el Diccionario de Historia de Venezuela, el edificio de Villanueva se terminó en 1936, pero su inauguración oficial esperó hasta 1938.'],
+      [6, 'Esta sede del Museo de Bellas Artes fue inaugurada el 20 de febrero de 1938. En la vista de 1946 ya corresponde a un museo abierto al público.'],
+    ],
+    dudas: 'No se deduce el estado exacto de la obra en cada mes de 1936 a partir del plano anual. La marca distingue la sede física de la inauguración del museo.',
   },
 
   // --- el este ---
