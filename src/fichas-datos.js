@@ -287,6 +287,11 @@ export const FICHAS = Object.freeze({
   'el-paraiso': {
     textos: [[4, 'La ciudad cruza el Guaire: el plano de 1911 ya rotula «El Paraíso», al suroeste, con su hipódromo.']],
   },
+  'cementerio-sur': {
+    textos: [[3, 'El Cementerio General del Sur abrió en 1876 en Tierra de Jugo, al sur del Guaire. Manuel Landaeta Rosales documenta la resolución de 1875 para construirlo y el decreto de apertura de 1876.'],
+      [5, 'El plano DCN de 1936 rotula el Cementerio General del Sur y dibuja su recinto y calles interiores en el borde sur de la hoja.']],
+    dudas: 'El rótulo localiza el cementerio; no presupone que su extensión de 1936 fuera ya la de 1889. No se modelan mausoleos ni sepulturas.',
+  },
   hipodromo: {
     textos: [
       [4, '«Hipódromo del Paraíso» en el plano de 1911.'],
