@@ -1,3 +1,5 @@
+import {DIST_MAX_M,BANDA_CALLE_M} from '../src/manzanas/medidas-suelo.js'
+export {DIST_MAX_M,BANDA_CALLE_M} from '../src/manzanas/medidas-suelo.js'
 // El suelo verde de las manzanas de cada época: de los contornos de manzana del generador (el límite real con sus huecos)
 // (fuentes/derivados/epocas/manzanas-<año>-informe.json, px del plano base) a un campo de distancia firmada por
 // época, uno por canal (R 1772 · G 1843 · B 1889). Cada texel dice a cuántos metros está el borde de manzana más
@@ -11,9 +13,9 @@ export const M_POR_PX = 2
 /** Metros por texel de la máscara fina con que se mide la distancia (se promedia de a 2×2 al publicar). */
 export const M_FINO = 1
 /** Hasta dónde se guarda la distancia (m), a cada lado del borde. */
-export const DIST_MAX_M = 16
+
 /** Afuera de las manzanas, hasta esta distancia es calle (tierra); más lejos, terreno desocupado (verde). */
-export const BANDA_CALLE_M = 12
+
 /** Un claro mayor que esto (m²) es campo abierto, no una plaza: no se despeja. */
 export const PLAZA_MAX_M2 = 30000
 /**

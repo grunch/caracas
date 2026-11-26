@@ -1,5 +1,6 @@
 import {it,expect} from 'vitest'
-import {uniformsManzanasModernas,ponerManzanasModernas} from '../../src/suelo-manzanas-modernas.js'
+import {uniformsManzanasModernas} from '../../src/suelo-manzanas-modernas.js'
+import {ponerManzanasModernas} from '../../src/cargar-manzanas-modernas.js'
 import epocas from '../../src/manzanas/epocas-completas.json'
 const meta={caja:[0,0,100,100],ancho:25,alto:25,m_por_px:2,dist_max_m:16,banda_calle_m:12,canales:[1911]}
 it('solo activa épocas con código y datos disponibles; no interpreta canales vacíos como jardines',()=>{

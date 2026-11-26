@@ -284,14 +284,14 @@ export const PASOS = [
     id: 'suelo-manzanas',
     entradas: [`${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', (EPOCAS_RETIRO.includes(1843)?'fuentes/derivados/retiro1843/manzanas-1843-informe.json':`${E}/manzanas-1843-informe.json`), (EPOCAS_RETIRO.includes(1889)?'fuentes/derivados/retiro1889/manzanas-1889-informe.json':`${E}/manzanas-1889-informe.json`)],
     salidas: ['public/plano/suelo-manzanas.png', 'public/datos/suelo-manzanas.json'],
-    codigo: ['tools/suelo-manzanas.mjs', 'tools/suelo-manzanas-lib.mjs', 'src/marcas-datos.js', 'src/hitos.js', ...CODIGO_HITOS],
+    codigo: ['tools/suelo-manzanas.mjs', 'tools/suelo-manzanas-lib.mjs','src/manzanas/medidas-suelo.js', 'src/marcas-datos.js', 'src/hitos.js', ...CODIGO_HITOS],
     cmd: () => ['node', 'tools/suelo-manzanas.mjs', `${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', (EPOCAS_RETIRO.includes(1843)?'fuentes/derivados/retiro1843/manzanas-1843-informe.json':`${E}/manzanas-1843-informe.json`), (EPOCAS_RETIRO.includes(1889)?'fuentes/derivados/retiro1889/manzanas-1889-informe.json':`${E}/manzanas-1889-informe.json`)],
   },
   {
     id:'suelo-manzanas-modernas',
     entradas:[`${D}/mosaico.json`,...EPOCAS_COMPLETAS.map(a=>`fuentes/derivados/retiro${a}/manzanas-${a}-informe.json`)],
     salidas:['public/plano/suelo-manzanas-modernas.png','public/datos/suelo-manzanas-modernas.json'],
-    codigo:['tools/suelo-manzanas-modernas.mjs','tools/suelo-manzanas-lib.mjs','src/manzanas/epocas-completas.json','src/marcas-datos.js','src/hitos.js',...CODIGO_HITOS],
+    codigo:['tools/suelo-manzanas-modernas.mjs','tools/suelo-manzanas-lib.mjs','src/manzanas/medidas-suelo.js','src/manzanas/epocas-completas.json','src/marcas-datos.js','src/hitos.js',...CODIGO_HITOS],
     cmd:()=>['node','tools/suelo-manzanas-modernas.mjs'],
   },
   {
