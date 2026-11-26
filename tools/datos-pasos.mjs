@@ -164,10 +164,20 @@ export const PASOS = [
     cmd: () => ['node', 'tools/manzanas-1889.mjs', `${E}/ciudad-manzanas-1843.json`, `${E}/ciudad-manzanas-1889.json`],
   },
   {
+    id: 'mapa-1946',
+    entradas: [`${E}/ciudad-manzanas-1889.json`, 'fuentes/mapas/1950-archiveorg-plano-de-caracas-dcn/original.tif',
+      'fuentes/mapas/1950-archiveorg-plano-de-caracas-dcn/ficha.json','tools/geo/gcp/1946-cuadricula.json','tools/geo/referencias/1946-reservas.json','public/plano/crece.png'],
+    salidas: ['fuentes/derivados/1946/ciudad-1946.json','fuentes/derivados/1946/calzado.json','fuentes/derivados/1946/informe.json',
+      'public/datos/1946.json','public/datos/arboles-1946.bin','public/plano/1946/expansion.png','public/plano/1946/crece.png',
+      ...['chico','medio','grande'].map(n=>`public/plano/1946/${n}.webp`)],
+    codigo: [...GEO('mapa_1946','calce','calce_correlacion','tps'), 'src/hitos.js',...CODIGO_HITOS],
+    cmd: () => [PY,'tools/geo/mapa_1946.py'],
+  },
+  {
     // la ciudad que se publica: la de las épocas, con estilos (la de 1936 sola no tiene "vida")
-    id: 'empacar', entradas: [`${E}/ciudad-manzanas-1889.json`], salidas: ['public/datos/ciudad.pak'],
+    id: 'empacar', entradas: ['fuentes/derivados/1946/ciudad-1946.json'], salidas: ['public/datos/ciudad.pak'],
     codigo: ['tools/empacar-ciudad.mjs', 'tools/empacar-lib.mjs', 'tools/pak.mjs', 'src/ciudad.js'],
-    cmd: () => ['node', 'tools/empacar-ciudad.mjs', `${E}/ciudad-manzanas-1889.json`],
+    cmd: () => ['node', 'tools/empacar-ciudad.mjs', 'fuentes/derivados/1946/ciudad-1946.json'],
   },
   {
     id: 'jardines', codigo: GEO('jardines'),
@@ -223,7 +233,7 @@ export const PASOS = [
     // los planos viejos calzados sobre 1936 (pasos calce-<año>): una textura con alfa por época; las
     // salidas según el recorte de cada calzado.json (se suman en pasosCompletos)
     id: 'planos-epocas', salidas: ['public/plano/epocas.json'],
-    entradas: CALCES.flatMap(([año]) => ['tif', 'json'].map((x) => `fuentes/derivados/${año}/calzado.${x}`)),
+    entradas: [...CALCES.flatMap(([año]) => ['tif', 'json'].map((x) => `fuentes/derivados/${año}/calzado.${x}`)), 'fuentes/derivados/1946/calzado.json'],
     codigo: ['tools/planos-epocas.mjs', 'tools/planos-epocas-lib.mjs'],
     cmd: () => ['node', 'tools/planos-epocas.mjs'],
   },
@@ -262,7 +272,7 @@ export const PASOS = [
     // fichas de los planos y de fuentes/datos/ se suman en pasosCompletos
     id: 'creditos', salidas: ['public/datos/creditos.json'],
     entradas: ['public/datos/crece.json', 'public/datos/fotos.json', 'tools/geo/mosaico-1936.json', 'package.json'],
-    codigo: ['tools/creditos.mjs', 'tools/creditos-lib.mjs', 'src/epocas.js'],
+    codigo: ['tools/creditos.mjs', 'tools/creditos-lib.mjs', 'src/epocas.js', 'src/el-silencio-epoca.js'],
     cmd: () => ['node', 'tools/creditos.mjs'],
   },
 ]

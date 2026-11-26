@@ -32,6 +32,14 @@ export const PALETA_VALLE = Object.freeze({
 const tono = (nombre) => lineal(...PALETA_VALLE[nombre])
 
 export const GLSL_VALLE = /* glsl */ `
+  // El canal alfa de crece1946 conserva R/G/B históricos y describe sólo la ampliación.
+  // 255=sin ampliación,192=urbano,128=casa,64=jardín. Antes de1946 no se consulta.
+  vec3 expansion1946(vec2 hoja, float e) {
+    if(e<=5.5)return vec3(0.0);
+    vec2 c=hoja*uCreceEscala;
+    float a=texture2D(uCrece,vec2(c.x,1.0-c.y)).a;
+    return vec3(1.0-step(.9,a),step(.4,a)*(1.0-step(.6,a)),1.0-step(.4,a))*smoothstep(5.5,6.0,e);
+  }
   const vec3 SABANA = ${tono('SABANA')}, SABANA_VERDE = ${tono('SABANA_VERDE')}, LOMA = ${tono('LOMA')};
   const vec3 AVILA = ${tono('AVILA')}, AVILA_ALTO = ${tono('AVILA_ALTO')};
   const vec3 MONTE = ${tono('MONTE')}, RIBERA = ${tono('RIBERA')};
@@ -58,7 +66,7 @@ export const GLSL_VALLE = /* glsl */ `
   float yaUrbano(vec2 hoja, float e) {
     float umbral = 1.0 - (e + 0.5) / uEtapas; // espejo: umbralDesde de src/epocas.js
     float g = creceEn(hoja).g;
-    return smoothstep(umbral - 0.04, umbral + 0.04, g) * step(0.002, g); // 0 = nunca, en cualquier época
+    return max(expansion1946(hoja,e).r, smoothstep(umbral - 0.04, umbral + 0.04, g) * step(0.002, g)); // 0 = nunca, en cualquier época
   }
   /**
    * Cuánto de lo que rodea al punto es ciudad en la época e (0 campo … 1 ciudad): el promedio del punto

@@ -38,11 +38,11 @@ describe('partesDeCiudad', () => {
     expect(() => partesDeCiudad({ ...json, vida: [[8, 0], [0, 0]] })).toThrow(/época/)
   })
 
-  test('rechaza épocas fuera de las seis de la línea de tiempo (0…5)', () => {
-    for (const malo of [[6, 0], [7, 0], [0, 6], [0, 7], [-1, 0]]) {
-      expect(() => partesDeCiudad({ ...json, vida: [malo, [0, 0]] })).toThrow(/épocas 0…5/)
+  test('rechaza épocas fuera de las siete vistas (0…6), sin usar el centinela7', () => {
+    for (const malo of [[7, 0], [0, 7], [-1, 0]]) {
+      expect(() => partesDeCiudad({ ...json, vida: [malo, [0, 0]] })).toThrow(/épocas 0…6/)
     }
-    expect(Array.from(partesDeCiudad({ ...json, vida: [[5, 0], [0, 5]] }).vida.datos)).toEqual([5, 40])
+    expect(Array.from(partesDeCiudad({ ...json, vida: [[6, 0], [0, 6]] }).vida.datos)).toEqual([6, 48])
   })
 
   test('rechaza épocas que no son enteros', () => {

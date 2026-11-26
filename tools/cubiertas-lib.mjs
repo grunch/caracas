@@ -83,8 +83,8 @@ export function huellasSha256({ vertices, techos }) {
 const CARPETA = 'fuentes/derivados/epocas'
 const EPOCA_POR_OMISION = 1772   // la de la puerta de la fase 6 de specs/08, que llama sin --epoca
 const salidaDe = (año) => `${CARPETA}/cubiertas-${año}.json`
-// Las épocas posteriores son vistas parciales: la geometría de las casas sigue siendo la de esta.
-const ULTIMA_COMPLETA = 1936
+// El paquete incorpora las casas nuevas de1946; historiaEnEpoca conserva el último estilo.
+const ULTIMA_COMPLETA = 1946
 const pedido = (año, salida = salidaDe(año)) => ({ epoca: AÑOS_DE_EPOCA.indexOf(año), año, salida })
 
 /**

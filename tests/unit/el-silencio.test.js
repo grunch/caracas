@@ -5,17 +5,17 @@ import {suprimirTechos,zonasDeSupresion} from '../../src/hitos/suprimir.js'
 import {visibleEn} from '../../src/epocas.js'
 
 describe('El Silencio georreferenciado',()=>{
- it('añade una vista parcial de 1945 sin cambiar índices ni metadatos originales',()=>{
+ it('añade una época de 1946 sin cambiar índices ni metadatos originales',()=>{
   const originales=[1578,1772,1843,1889,1911,1936].map(año=>({año,corto:'plano original'}))
   const epocas=conElSilencio(originales)
   expect(epocas.slice(0,6)).toEqual(originales);expect(originales).toHaveLength(6)
-  expect(epocas[EPOCA_SILENCIO]).toMatchObject({año:1945,base:1936,parcial:true})
+  expect(epocas[EPOCA_SILENCIO]).toMatchObject({año:1946,base:1936,plano:'1950-archiveorg-plano-de-caracas-dcn'})
   expect(conElSilencio([{año:1772}])).toEqual([{año:1772}])
  })
- it('el plano de la vista parcial es la hoja base, con su título y sus créditos',()=>{
+ it('1946 abre su propio plano y las vistas parciales siguen usando la base',()=>{
   const originales=[1578,1772,1843,1889,1911,1936].map(año=>({año,titulo:`Plano de ${año}`,autor:`autor ${año}`,fuente:`fuente ${año}`}))
   const epocas=conElSilencio(originales)
-  expect(planoBaseDe(epocas,epocas[EPOCA_SILENCIO])).toBe(originales[5])
+  expect(planoBaseDe(epocas,epocas[EPOCA_SILENCIO])).toBe(epocas[EPOCA_SILENCIO])
   expect(planoBaseDe(epocas,epocas[2])).toBe(originales[2])
   expect(planoBaseDe([],{año:1945,base:1936,parcial:true})).toMatchObject({año:1936})
   expect(planoBaseDe(epocas,undefined)).toBeUndefined()

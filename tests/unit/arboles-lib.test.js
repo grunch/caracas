@@ -214,3 +214,17 @@ describe('arbolesDePatio', () => {
     }
   })
 })
+
+test('conserva árboles de1936 bajo techos futuros y termina su vida cuando se construyen',async()=>{
+ const {finPorTechosFuturos}=await import('../../tools/arboles-lib.mjs')
+ const ciudad={vertices:new Float32Array([0,0,10,0,10,10,0,10]),techos:new Uint32Array([0,4,0,1]),vida:new Uint32Array([6])}
+ expect(techosQueQuedan(ciudad)).toEqual([])
+ const muere=finPorTechosFuturos(ciudad)
+ expect(muere(5,5)).toBe(6);expect(muere(20,20)).toBe(0)
+ const nace=naceArbol({x:5,y:5,r:1},{desde:()=>1,casas:[]})
+ const b=codificarArboles([{x:5,y:5,r:1,nace,muere:muere(5,5)}],1)
+ expect(new DataView(comoArrayBuffer(b)).getUint16(6,true)).toBe(49)
+ ciudad.vida[0]=5
+ expect(techosQueQuedan(ciudad)).toHaveLength(1)
+ expect(finPorTechosFuturos(ciudad)(5,5)).toBe(0)
+})

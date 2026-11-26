@@ -1,0 +1,91 @@
+{
+  "metodo": "Comprobación visual independiente en TIFF original con retícula cada50px, puntos1936 de tools/geo/gcp/1936-wgs84.json. Predicción TPS con40GCP, excluye(2000,2000),(3000,-1000). Valores1946 aproximados, no usar como GCP de ajuste.",
+  "puntos": [
+    {
+      "nombre": "Plaza Bolívar",
+      "original1946": [
+        6857,
+        4405
+      ],
+      "mosaico1936": [
+        8968,
+        6839
+      ],
+      "original1946_predicho": [
+        6862.19,
+        4406.7
+      ],
+      "error_aproximado_m": 3.48,
+      "incertidumbre_lectura_px": 4
+    },
+    {
+      "nombre": "Panteón Nacional",
+      "original1946": [
+        7208,
+        3163
+      ],
+      "mosaico1936": [
+        9408.6,
+        5251.6
+      ],
+      "original1946_predicho": [
+        7211.39,
+        3164.04
+      ],
+      "error_aproximado_m": 2.26,
+      "incertidumbre_lectura_px": 4
+    },
+    {
+      "nombre": "Plaza La Pastora",
+      "original1946": [
+        6183,
+        2931
+      ],
+      "mosaico1936": [
+        8110.1,
+        4963.5
+      ],
+      "original1946_predicho": [
+        6185.98,
+        2936.24
+      ],
+      "error_aproximado_m": 3.84,
+      "incertidumbre_lectura_px": 4
+    },
+    {
+      "nombre": "Teatro Municipal, centro sala oval",
+      "original1946": [
+        6370,
+        5092
+      ],
+      "mosaico1936": [
+        8349.5,
+        7714
+      ],
+      "original1946_predicho": [
+        6373.58,
+        5092.31
+      ],
+      "error_aproximado_m": 2.29,
+      "incertidumbre_lectura_px": 4
+    },
+    {
+      "nombre": "Plaza Sucre, Catia",
+      "original1946": [
+        1528,
+        2544
+      ],
+      "mosaico1936": [
+        2184.1,
+        4452.2
+      ],
+      "original1946_predicho": [
+        1534.43,
+        2541.6
+      ],
+      "error_aproximado_m": 4.37,
+      "incertidumbre_lectura_px": 4
+    }
+  ],
+  "rms_aproximado_m": 3.36
+}

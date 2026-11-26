@@ -3,7 +3,7 @@
 // De cada plano calzado (fuentes/derivados/<año>/calzado.tif + calzado.json, de tools/geo/calce.py) genera
 // public/plano/<año>/{chico,medio[,grande]}.webp con alfa (0 fuera del plano) y el índice public/plano/epocas.json.
 // Las texturas cubren solo el recorte del calzado (en píxeles de la hoja de 1936); el visor las ubica con él.
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, readdir, writeFile, access } from 'node:fs/promises'
 import path from 'node:path'
 import os from 'node:os'
 import sharp from 'sharp'
@@ -25,6 +25,11 @@ export async function leerCalzados(derivados = DERIVADOS) {
 }
 
 async function generar(plano) {
+  const meta=JSON.parse(await readFile(path.join(DERIVADOS,String(plano.año),'calzado.json'),'utf8'))
+  if(meta.nivelesGenerados){
+    for(const n of plano.niveles)await access(path.join(RAIZ,'public',n.url))
+    return // generador específico: mapa_1946.py, misma cuadrícula sin TIFF intermedio gigante
+  }
   const tif = path.join(DERIVADOS, String(plano.año), 'calzado.tif')
   const abrir = () => sharp(tif, { limitInputPixels: false })
   const { width, height } = await abrir().metadata()

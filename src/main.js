@@ -17,7 +17,8 @@ import { acercar, pasoDeCuadro } from './animar.js'
 import { texturasHoy, HOY_CERCA } from './hoy.js'
 import { crearBuscador } from './buscador/interfaz.js'
 import { crearTeselasFinas } from './teselas.js'
-import {conElSilencio,planoBaseDe} from './el-silencio-epoca.js'
+import {retirarMonte1946} from './monte-1946.js'
+import {conElSilencio,planoBaseDe,campoDeEpoca} from './el-silencio-epoca.js'
 import { crearLineaDeTiempo, crearSecuencia, escalaCrece, PRIMERA_EPOCA } from './epocas.js'
 import { crearPlanosDeEpoca, planoDeEpoca } from './planos.js'
 import { cargarCallesDeEpoca } from './calles-epoca.js'
@@ -275,6 +276,7 @@ casasPedidas.then(() => {
   // los árboles, después de la ciudad: una malla instanciada que comparte sus uniforms (src/arboles.js)
   return cargarArboles('datos/arboles.bin', { coords, U: ciudad.U, reservas: HITOS }).then((m) => {
     arboles = m
+    if(mascara1946)retirarMonte1946(m,mascara1946,coords,meta.plano)
     scene.add(m)
     pedirCuadro(3)
   })
@@ -283,7 +285,14 @@ casasPedidas.then(() => {
 // --- los hitos: edificios y lugares modelados a mano, en una sola malla con los uniforms de la ciudad ---
 // (se construyen en un worker: en este hilo eran más de un segundo y medio de página congelada al arrancar)
 let hitos = null
-let hitosSilencio = null, silencioPedido = null
+let hitosSilencio = null, silencioPedido = null, arboles1946 = null, entorno1946 = null, crece1946 = null, creceBase = null, mascara1946 = null
+function prepararEntorno1946(){
+ return entorno1946 ??= Promise.all([cargarCampo('plano/1946/crece.png'),cargarArboles('datos/arboles-1946.bin',{coords,U:ciudad.U,reservas:HITOS})]).then(([t,m])=>{crece1946=t;
+ const lienzo=document.createElement('canvas');lienzo.width=t.image.width;lienzo.height=t.image.height;
+ const ctx=lienzo.getContext('2d',{willReadFrequently:true});ctx.drawImage(t.image,0,0);
+ mascara1946=ctx.getImageData(0,0,lienzo.width,lienzo.height);retirarMonte1946(arboles,mascara1946,coords,meta.plano);
+ arboles1946=m;scene.add(m);pedirCuadro(3)}).catch(e=>{entorno1946=null;throw e})
+}
 function prepararSilencio(){
   return silencioPedido ??= pedirHitos({plano:meta.plano,soloSilencio:true,crearTrabajador:sinTrabajadores?null:()=>new Worker(new URL('./hitos-trabajador.js',import.meta.url),{type:'module'})}).then(datos=>{
     hitosSilencio=crearHitos({coords,U:ciudad.U,datos,hitos:HITOS.filter(h=>h.nace===6)});hitosSilencio.name='el-silencio';scene.add(hitosSilencio);pedirCuadro(3)
@@ -312,9 +321,9 @@ let planos = null
 // el plano calzado de cada época (plano/epocas.json, tools/planos-epocas.mjs); sin él, siempre 1936
 // (con un tope: si el índice no responde, la línea de tiempo arranca igual)
 const ESPERA_INDICE_MS = 5000
-// Apagado por omisión: el plano viejo pegado como un parche sobre el de 1936 se ve mal. Queda detrás de
-// ?planos hasta rehacerlo (T25b): en tinta, la hoja muestra siempre el plano de 1936.
-const indicePlanos = !params.has('planos') ? Promise.resolve({ planos: [] }) : Promise.race([
+// Las hojas anteriores siguen detrás de ?planos (T25b). La nueva vista1946
+// carga siempre su plano calzado, también en el visor documental.
+const indicePlanos = Promise.race([
   fetch('plano/epocas.json').then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status)))),
   new Promise((_, mal) => setTimeout(() => mal(new Error('plano/epocas.json no respondió')), ESPERA_INDICE_MS)),
 ]).catch((e) => { console.warn(`planos de época: ${e.message}`); return { planos: [] } })
@@ -325,16 +334,18 @@ Promise.all([crecePedido, indicePlanos])
       planos: indice.planos, hoja: meta.plano, cargar: (url) => cargarTextura(url, true), U, pedirCuadro,
       vacio: SIN_PLANO, liviano, maxTextura,
     })
-    const planoDe = (i) => planoDeEpoca(epocas[i]?.año, indice.planos)?.año ?? null
+    const planoDe = (i) => i===6 ? (indice.planos.some(p=>p.año===1946)?1946:null) : params.has('planos') ? planoDeEpoca(epocas[i]?.año, indice.planos)?.año ?? null : null
     // arranca en la primera época sin ola; después, una ola por vez (lo elegido durante una, espera)
     U.uEpocaDe.value = U.uEpocaA.value = PRIMERA_EPOCA
     U.uOlaEpoca.value = OLA_EPOCA_MAX_M
     planos.usar(planoDe(PRIMERA_EPOCA), planoDe(PRIMERA_EPOCA))
     secuencia = crearSecuencia((de, a) => {
       const esperar = new Promise((ok) => setTimeout(ok, ESPERA_PLANO_MS))
-      Promise.all([Promise.race([planos.preparar(planoDe(a)), esperar]),a===6?prepararSilencio():null]).then(() => {
+      Promise.all([Promise.race([planos.preparar(planoDe(a)), esperar]),a===6?Promise.all([prepararSilencio(),prepararEntorno1946()]):null]).then(() => {
         planos.usar(planoDe(de), planoDe(a))
         planos.preparar(planoDe(a + 1)) // ▶ las recorre en orden: la siguiente, precargada
+        if(crece1946&&(de===6||a===6))U.uCrece.value=crece1946
+        else if(creceBase)U.uCrece.value=creceBase
         U.uEpocaDe.value = de
         U.uEpocaA.value = a
         U.uOlaEpoca.value = 0
@@ -374,7 +385,7 @@ Promise.all([crecePedido, indicePlanos])
       t.minFilter = LinearFilter
       const { width: cols, height: rows } = t.image
       U.uCreceEscala.value.fromArray(escalaCrece(meta.plano, { cols, rows }, celda_m ?? 8))
-      ponerTextura(U.uCrece, t)
+      creceBase=t;U.uCrece.value=campoDeEpoca(t,crece1946,U.uEpocaDe.value,U.uEpocaA.value,U.uOlaEpoca.value<OLA_EPOCA_MAX_M);pedirCuadro(3)
     }).catch((e) => console.warn(`crece: ${e.message}`))
   }).catch((e) => {ciudad.U.uEpocaDe.value=ciudad.U.uEpocaA.value=5;pedirCuadro(3);console.warn(`épocas: ${e.message}`)}) // sin crece.json: base1936; no suprimir el barrio por una vista futura que no se puede abrir.
 // Sin índice de épocas se conserva la base de1936, sin sustituir solares por hitos no cargados.
@@ -673,7 +684,7 @@ renderer.setAnimationLoop((t) => {
   const { uOlaEpoca } = ciudad.U
   if (uOlaEpoca.value < OLA_EPOCA_MAX_M) {
     uOlaEpoca.value = acercar(uOlaEpoca.value, OLA_EPOCA_MAX_M, (OLA_EPOCA_MAX_M / DURACION_EPOCA_S) * dt)
-    if (uOlaEpoca.value >= OLA_EPOCA_MAX_M) secuencia?.termino()
+    if (uOlaEpoca.value >= OLA_EPOCA_MAX_M) { if(ciudad.U.uEpocaA.value<6&&creceBase)ciudad.U.uCrece.value=creceBase; secuencia?.termino() }
     pedirCuadro(2)
   }
   // de cada baldosa de casas solo se dibuja lo que vive en la época que se mira; mientras pasa la ola de una
@@ -740,6 +751,7 @@ renderer.setAnimationLoop((t) => {
     sube: (d) => hinchado(d, uOla.value, uAnchoOla.value),
   })
   // de los árboles, lo que vive en la época que se mira, entero de cerca y simple de lejos (src/arboles.js)
+  arboles1946?.actualizar({ camara:camera, epocas:[uOlaEpoca.value < OLA_EPOCA_MAX_M ? uEpocaDe.value : uEpocaA.value,uEpocaA.value], color:uColor.value, alturaEn:relieve ? alturaDelTerreno : null });
   arboles?.actualizar({
     camara: camera, color: ciudad.U.uColor.value, alturaEn: relieve ? alturaDelTerreno : null,
     epocas: [uOlaEpoca.value < OLA_EPOCA_MAX_M ? uEpocaDe.value : uEpocaA.value, uEpocaA.value],

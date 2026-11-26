@@ -2,6 +2,7 @@
 import { empacarTecho } from '../src/ciudad.js'
 
 export const EPOCAS = 8 // nace y muere caben en 3 bits: nace + 8·muere
+export const EPOCAS_DE_VIDA = 7 // 0..6; 7 queda reservado para nunca
 export const CUANTAS_EPOCAS = 6 // épocas de la línea de tiempo: 0 → 1578 … 5 → 1936
 
 export const CAMPOS_MARCO = 11 // techo, ox, oy, eux, euy, ancho, fondo, calles, crujía, primera ala, cuántas
@@ -109,8 +110,8 @@ export function empacarVida(vida, cuantosTechos) {
     if (!Number.isInteger(nace) || !Number.isInteger(muere)) {
       throw new Error(`ciudad: la vida del techo ${k} tiene que ser un par de enteros [nace, muere]`)
     }
-    if (nace < 0 || nace >= CUANTAS_EPOCAS || muere < 0 || muere >= CUANTAS_EPOCAS) {
-      throw new Error(`ciudad: la vida del techo ${k} sale de las épocas 0…${CUANTAS_EPOCAS - 1}`)
+    if (nace < 0 || nace >= EPOCAS_DE_VIDA || muere < 0 || muere >= EPOCAS_DE_VIDA) {
+      throw new Error(`ciudad: la vida del techo ${k} sale de las épocas 0…${EPOCAS_DE_VIDA - 1}`)
     }
     if (muere !== 0 && muere <= nace) throw new Error(`ciudad: el techo ${k} muere (${muere}) antes de nacer (${nace})`)
     return nace + EPOCAS * muere

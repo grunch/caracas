@@ -199,3 +199,11 @@ describe('pendientes: el orden de los pasos', () => {
     expect(() => pendientes(desordenados, {})).toThrow(/a.*b\.bin.*b/)
   })
 })
+
+test('un calzado1946 nuevo invalida el índice de planos aunque los demás calces estén al día',async()=>{
+ const {PASOS}=await import('../../tools/datos-pasos.mjs')
+ const paso=PASOS.find(p=>p.id==='planos-epocas')
+ const tiempos=Object.fromEntries([...paso.entradas,...paso.salidas].map(r=>[r,2]))
+ tiempos['fuentes/derivados/1946/calzado.json']=3
+ expect(pendientes([paso],tiempos)).toEqual(['planos-epocas'])
+})

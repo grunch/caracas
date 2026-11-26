@@ -126,7 +126,7 @@ export function planDeMuestra(archivos, teselas) {
     const tesela = ruta.match(TESELA)
     if (tesela && !teselas.includes(tesela[1])) continue
     const deEpoca = ruta.match(PLANO_DE_EPOCA)
-    if (deEpoca && deEpoca[1] !== 'chico.webp') continue
+    if (deEpoca && deEpoca[1] !== 'chico.webp' && ruta !== 'public/plano/1946/crece.png') continue
     const hacer = RECORTES[ruta] ?? (ruta === 'public/plano/epocas.json' ? 'epocas' : 'copiar')
     plan.push({ destino: ruta, hacer, origen: SUSTITUTOS[ruta] ?? ruta })
   }
