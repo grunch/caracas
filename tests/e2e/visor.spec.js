@@ -209,13 +209,14 @@ test('con lo de hoy, los nombres de las calles se dibujan sobre la vista y se bo
   await page.waitForFunction(() => window.lab.calles.cuantas === 0, null, { timeout: 60000 })
 })
 
-test('sin ?planos, la hoja muestra siempre el plano de 1936 (no se pega el plano viejo encima)', async ({ page }) => {
+test('sin ?planos carga el índice para1946 pero no pega hojas antiguas al abrir', async ({ page }) => {
   const pedidos = []
   page.on('request', (r) => pedidos.push(r.url()))
   await page.goto('/?sinintro')
   await page.waitForFunction(() => window.lab?.ready === true)
   await page.waitForTimeout(1500)
-  expect(pedidos.filter((u) => u.includes('plano/epocas.json'))).toEqual([])
+  expect(pedidos.filter((u) => u.includes('plano/epocas.json'))).toHaveLength(1)
+  expect(pedidos.filter((u) => /plano\/(1772|1843|1889|1911|1946)\/.*\.webp/.test(u))).toEqual([])
 })
 
 // a 800 px, con la ciudad levantada, la barra tiene cinco botones (los modos, bajo «Recorrer», y sin el de levantar
