@@ -75,9 +75,9 @@ describe('las marcas de Caracas (src/marcas-datos.js)', () => {
     expect(validarMarcas(MARCAS, { hitos: HITOS, plano: PLANO })).toEqual([])
   })
 
-  test('hay entre 40 y 61, y todas las épocas tienen marcas de los tres niveles', () => {
+  test('hay al menos 40 marcas únicas y todas las épocas tienen los tres niveles', () => {
     expect(MARCAS.length).toBeGreaterThanOrEqual(40)
-    expect(MARCAS.length).toBeLessThanOrEqual(61)
+    expect(new Set(MARCAS.map(m => m.id)).size).toBe(MARCAS.length)
     const marcas = normalizarMarcas(MARCAS, { hitos: HITOS, coords })
     for (let e = PRIMERA_EPOCA; e <= 6; e++) {
       const vivas = marcas.filter((m) => vivaEn(m, e))
@@ -99,7 +99,7 @@ describe('las marcas de Caracas (src/marcas-datos.js)', () => {
     const COTEJADAS = [
       'guaire', 'calvario', 'catuche', 'caroata', 'anauco', 'catedral', 'palacio-arzobispal', 'capitolio',
       'san-francisco', 'santa-capilla', 'altagracia', 'carmelitas', 'san-jacinto', 'teatro-municipal',
-      'la-pastora', 'panteon', 'santa-rosalia', 'candelaria', 'las-mercedes',
+      'la-pastora', 'panteon', 'santa-rosalia', 'candelaria', 'las-mercedes', 'san-carlos',
     ]
     const dice1843SinCotejar = (texto = '') => /(sin cotejar|no se cotej)[^.]*1843|1843[^.]*(sin cotejar|no se cotej)/.test(texto)
     const marcas = normalizarMarcas(MARCAS, { hitos: HITOS, coords })

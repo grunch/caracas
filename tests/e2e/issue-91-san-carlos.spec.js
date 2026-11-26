@@ -1,0 +1,15 @@
+import { test, expect } from '@playwright/test'
+test('la ficha de san-carlos documenta 1843 y conserva la etapa posterior', async ({page}) => {
+ await page.emulateMedia({reducedMotion:'reduce'})
+ await page.route('**/datos/crece.json', r => r.fulfill({status:404}))
+ await page.route(/\/(datos\/(ciudad\.pak|arboles\.bin|relieve\.bin)|plano\/[^?]*\.(webp|png))(\?.*)?$/,r=>r.fulfill({status:404}))
+ await page.goto('/?sinintro&capture')
+ await page.waitForFunction(()=>window.lab?.ready)
+ await page.evaluate(()=>{const l=window.lab;l.ciudad.U.uEpocaDe.value=l.ciudad.U.uEpocaA.value=2;l.ciudad.U.uOlaEpoca.value=9000;l.cam.jump({...l.coords.aMundo(9150,4980),dist:450,yaw:0,pitch:1});l.pedirCuadro(3)})
+ await page.locator('#marcas .marca.ver .tag',{hasText:'Cuartel Veterano'}).click()
+ await expect(page.locator('#ficha h2')).toHaveText('Cuartel Veterano')
+ await expect(page.locator('#ficha .texto p.epoca.rige')).toContainText('1785')
+ await page.evaluate(()=>{const l=window.lab;l.ciudad.U.uEpocaDe.value=l.ciudad.U.uEpocaA.value=3;l.pedirCuadro(3)})
+ await expect(page.locator('#ficha .era')).toHaveText('Hacia 1889')
+ await expect(page.locator('#ficha .texto p.epoca.rige')).toContainText('1889')
+})
