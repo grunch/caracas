@@ -201,3 +201,14 @@ describe('los datos de las fichas', () => {
     }
   })
 })
+
+it('Candelaria tiene relato propio en 1772 y conserva las referencias posteriores', () => {
+  const de = epoca => contenidoDeFicha({marca:marca('candelaria'),ficha:FICHAS.candelaria,fotos:[],epoca})
+  expect(marca('candelaria').nace).toBe(1)
+  const colonial=de(1)
+  expect(JSON.stringify(colonial)).toContain('17 de mayo de 1772')
+  expect(FICHAS.candelaria.textos.find(([e])=>e===1)[1]).toContain('tres naves')
+  expect(FICHAS.candelaria.textos.find(([e])=>e===2)[1]).toContain('1843')
+  expect(FICHAS.candelaria.textos.find(([e])=>e===3)[1]).toContain('1889')
+  expect(marca('candelaria').fuente).toContain('laiglesiayplazad00land')
+})
