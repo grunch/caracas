@@ -27,7 +27,7 @@ def test_no_reurbaniza_el_nucleo_heredado_y_retrae_solo_la_expansion():
 def test_cara_con_isla_vacia_conserva_su_hueco():
     isla=box(40,40,60,60)
     cara=Polygon(box(0,0,100,100).exterior,[isla.exterior])
-    ds=datos([box(10,10,30,30),box(70,70,90,90)])
+    ds=datos([box(10,10,30,30),box(70,10,90,30),box(70,70,90,90),box(10,70,30,90)])
     refs=referencias(ds,4,[cara,isla],1)
     assert len(refs)==1
     r=refs[0]

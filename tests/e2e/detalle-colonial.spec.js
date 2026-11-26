@@ -6,12 +6,22 @@ test('piloto colonial: balcones de cerca, LOD distante y continuidad según las 
  test.setTimeout(180_000)
  const respuesta=await page.request.get('/datos/ciudad.pak');expect(respuesta.ok()).toBe(true)
  const bytes=await respuesta.body(),b=bytes[0]===31&&bytes[1]===139?gunzipSync(bytes):bytes
- const datos=decodificarPak(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),{paletas:Uint8Array,vida:Uint32Array},()=>{})
+ const datos=decodificarPak(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),{paletas:Uint8Array,vida:Uint32Array,vertices:Float32Array,techos:Uint32Array},()=>{})
  test.skip(!datos.paletas?.some(p=>p>0),'El release de datos aún no incluye las casas coloniales de #211')
- const continua1911=Array.from(datos.vida).some((v,i)=>datos.paletas[i]>0&&v%8>=1&&v%8<4&&(!(v>>3)||(v>>3)>4))
+ const anclas1911=Array.from(datos.vida).flatMap((v,i)=>{
+  if(!(datos.paletas[i]>0&&v%8>=1&&v%8<4&&(!(v>>3)||(v>>3)>4)))return []
+  const inicio=datos.techos[i*4],n=datos.techos[i*4+1],centro=[0,0]
+  for(let k=0;k<n;k++)for(let c=0;c<2;c++)centro[c]+=datos.vertices[(inicio+k)*2+c]/n
+  return [centro]
+ })
  const errores=[];page.on('pageerror',e=>errores.push(e.message))
  await page.goto('/?sinintro&sinsw&detallecasas=1&verbalcones')
  await page.waitForFunction(()=>window.lab?.ready&&window.lab.casasListas&&window.lab.detalleColonial?.cuenta.mallas>0)
+ const continua1911=await page.evaluate(async anclas=>{
+  const {PILOTO_COLONIAL}=await import('/src/detalle-colonial-plan.js')
+  const {puntoEnPoligono}=await import('/src/hitos/suprimir.js')
+  return anclas.some(p=>PILOTO_COLONIAL.some(m=>puntoEnPoligono(p,m.poligono)))
+ },anclas1911)
  const inicial=await page.evaluate(()=>window.lab.detalleColonial.cuenta)
  // Con render por software (CI) la capa va liviana y no pasa del nivel 1; con GPU, de cerca, llega al 2.
  const nivelCercano=inicial.liviano?1:2
