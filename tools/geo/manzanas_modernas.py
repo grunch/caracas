@@ -40,10 +40,33 @@ def referencias(datos, epoca, caras, metro):
             for i, p in enumerate(contornos) if p.area*metro**2 >= 12]
 
 
+
+def quitar_franjas_sin_espacio(seleccion, metro):
+    utiles, descartadas = [], []
+    for m in seleccion['manzanas']:
+        p = Polygon(m.get('limite', m['poligono']), m.get('huecos', [])).buffer(0)
+        bordes = list(p.minimum_rotated_rectangle.exterior.coords)
+        largo = max(((b[0]-a[0])**2+(b[1]-a[1])**2)**.5 for a,b in zip(bordes,bordes[1:]))
+        if p.area*metro**2 < 12 or p.area/max(largo,1e-9)*metro < 2:
+            descartadas.append({'id':m['id'],'referencia':m['referencia'],'motivo':'sin espacio útil después del retiro'})
+        else:
+            utiles.append(m)
+    ids = {m['id'] for m in utiles}
+    for r in seleccion['cobertura']:
+        if r['estado'] == 'ampliacion':
+            r['unidades'] = [i for i in r['unidades'] if i in ids]
+            if not r['unidades']:
+                r['estado'] = 'sin_area_nueva_util'
+    seleccion['manzanas'], seleccion['descartadasTrasRetiro'] = utiles, descartadas
+    return seleccion
+
+
 def preparar(datos, heredadas, hitos, caras, epoca, metro):
     refs = referencias(datos, epoca, caras, metro)
     seleccion = seleccionar_ampliacion(refs, heredadas, hitos, metro, epoca, 'extraida', indexar_ocupacion=epoca >= 5)
     seleccion['manzanas'] = retraer(seleccion['manzanas'], 1, metro)
+    if epoca >= 5:
+        quitar_franjas_sin_espacio(seleccion, metro)
     seleccion['referencias'] = len(refs)
     return seleccion
 
