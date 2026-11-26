@@ -35,7 +35,7 @@ def referencias(datos, epoca, caras, metro):
     for p in partes(juntas):
         contornos.extend(partes(Polygon(p.exterior).buffer(-.51/metro, join_style=2)))
     contornos.sort(key=lambda p: (p.bounds[1], p.bounds[0], p.area))
-    return [{'id': f'M{epoca}-{i:04d}', 'poligono': anillo(p), 'estado': 'extraida',
+    return [{'id': f'M{epoca}-{i:04d}', 'poligono': anillo(p), 'huecos': [[list(v) for v in h.coords[:-1]] for h in p.interiors], 'estado': 'extraida',
              'ocupacion': 'edificada', 'procedencia': 'envolvente de huellas vivas del mapa, limitada por calles'}
             for i, p in enumerate(contornos) if p.area*metro**2 >= 12]
 
