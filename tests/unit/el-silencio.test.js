@@ -67,3 +67,16 @@ it('una sustitución de solar completo conserva la casa que solo toca el borde o
  expect(suprimirTechos(techo([[-10,-10],[0,-10],[0,0],[-10,0]]),[z])[0]).toBe(1)
  expect(suprimirTechos(techo([[0,0],[5,0],[5,10],[0,10]]),[z])[0]).toBe(49)
 })
+
+it('suprime un solape de área con lados alineados y admite recintos cóncavos',async()=>{
+ const {compartenArea}=await import('../../src/hitos/suprimir.js')
+ const p=[[0,0],[10,0],[10,1],[0,1]],q=[[9,0],[19,0],[19,1],[9,1]]
+ expect(compartenArea(p,q)).toBe(true)
+ expect(compartenArea([...p].reverse(),q)).toBe(true)
+ expect(compartenArea(p,[[10,0],[20,0],[20,1],[10,1]])).toBe(false)
+ const l=[[0,0],[10,0],[10,2],[2,2],[2,10],[0,10]]
+ expect(compartenArea(l,[[9,0],[19,0],[19,2],[9,2]])).toBe(true)
+ expect(compartenArea(l,[[2,2],[10,2],[10,10],[2,10]])).toBe(false)
+ const d={vertices:new Float32Array(q.flat()),techos:new Uint32Array([0,4,0,0]),vida:new Uint32Array([1])}
+ expect(suprimirTechos(d,[{poligono:p,desde:6,hasta:0,solarCompleto:true}])[0]).toBe(49)
+})

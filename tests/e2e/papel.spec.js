@@ -31,6 +31,8 @@ async function abrir(page, { urbano, calles = null }) {
   // las calles de época (src/calles-epoca.js): solo las de prueba, si las hay; si no, se mide el suelo liso
   await page.route(/\/datos\/calles-\d{4}\.json/, (ruta) => (calles ? ruta.fulfill({ json: calles.meta }) : ruta.abort()))
   if (calles) await page.route('**/plano/calles-1772.png', (ruta) => ruta.fulfill({ body: calles.png, contentType: 'image/png' }))
+  // La prueba de papel no incluye patios verdes reales: también se aíslan sus datos.
+  await page.route('**/datos/suelo-manzanas.json', ruta => ruta.abort())
   await page.goto('/?sinintro&capture&sinmarcas')
   await page.waitForFunction(() => window.lab?.ready === true && window.lab.lineaDeTiempo && window.lab.ciudad.U.uCrece.value.image?.width === 4)
 }

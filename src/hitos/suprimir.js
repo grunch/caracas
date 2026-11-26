@@ -57,8 +57,22 @@ const adentroDeVerdad = (v, poligono) => puntoEnPoligono(v, poligono) && !sobreE
  */
 export function compartenArea(p, q) {
   if (p.some((v) => adentroDeVerdad(v, q)) || q.some((v) => adentroDeVerdad(v, p))) return true
-  if (centroEnAmbos(p, q) || centroEnAmbos(q, p)) return true
-  return p.some((a, i) => q.some((c, j) => seCruzan(a, p[(i + 1) % p.length], c, q[(j + 1) % q.length])))
+  const centroInterior = (a, b) => { const c = centroDe(a); return adentroDeVerdad(c, a) && adentroDeVerdad(c, b) }
+  if (centroInterior(p, q) || centroInterior(q, p)) return true
+  const orientacion = Math.sign(areaConSigno(p)) * Math.sign(areaConSigno(q))
+  return p.some((a, i) => q.some((c, j) => {
+    const b = p[(i + 1) % p.length], d = q[(j + 1) % q.length]
+    if (seCruzan(a, b, c, d)) return true
+    // Lados colineales con tramo común: hay área sólo si ambos interiores
+    // quedan del mismo lado. Funciona también con anillos cóncavos e invertidos.
+    const dx = b[0] - a[0], dy = b[1] - a[1], largo = Math.hypot(dx, dy)
+    if (largo <= BORDE || Math.abs(giro(a, b, c)) > BORDE * largo || Math.abs(giro(a, b, d)) > BORDE * largo) return false
+    const producto = dx * (d[0] - c[0]) + dy * (d[1] - c[1])
+    if (producto * orientacion <= 0) return false
+    const proyectar = v => ((v[0] - a[0]) * dx + (v[1] - a[1]) * dy) / largo
+    const u = proyectar(c), v = proyectar(d)
+    return Math.min(largo, Math.max(u, v)) - Math.max(0, Math.min(u, v)) > BORDE
+  }))
 }
 
 // Fracción de la huella de una casa que tiene que caer en la zona de un hito para suprimirla: la que apenas la roza
