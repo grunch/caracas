@@ -257,8 +257,11 @@ export const FICHAS = Object.freeze({
     dudas: 'Fachadas cotejadas con Bellermann, Lessmann y las imágenes de Fundación Arquitectura y Ciudad. Planta, dimensiones, laterales y daños son aproximaciones; no se representan las obras de 1772.',
   },
   'san-carlos': {
-    textos: [[3, 'El plano de 1889 numera 21 el «Cuartel San Carlos»; el de 1936 dibuja el edificio, de patio, sin rótulo.']],
-    dudas: 'El cuartel es de fines del siglo XVIII (dato general); sin cotejar con el plano de 1843, aparece desde 1889.',
+    textos: [
+      [2, 'La leyenda del plano de Jesurún de 1843 identifica el «Cuartel Veterano» (s), al norte de la ciudad. El estudio arqueológico de Mariana Flores sitúa su construcción entre 1785 y 1790 y documenta los daños del terremoto de 1812.'],
+      [3, 'El plano de 1889 numera 21 el «Cuartel San Carlos»; el de 1936 dibuja su edificio de patio.'],
+    ],
+    dudas: 'El rótulo documenta la presencia del cuartel; su arquitectura y las reparaciones posteriores a 1812 requieren un modelo específico.',
   },
   'hospital-vargas': {
     textos: [[3, 'El plano de 1889 ya lo dibuja y lo numera 43, cuando todavía estaba en obra.']],
