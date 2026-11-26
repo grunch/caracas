@@ -10,8 +10,8 @@ import { vivaEn } from './marcas.js'
 import { PRIMERA_EPOCA } from './epocas.js'
 
 /** El año de cada época (índices de src/epocas.js); con la línea de tiempo cargada mandan los de crece.json. */
-export const AÑOS_DE_EPOCA = Object.freeze([1578, 1772, 1843, 1889, 1911, 1936])
-const ULTIMA_EPOCA = 5
+export const AÑOS_DE_EPOCA = Object.freeze([1578, 1772, 1843, 1889, 1911, 1936, 1945])
+const ULTIMA_EPOCA = 6
 
 /** La época (entera) que muestra la ficha a partir de la que rige en el lugar, que en plena ola es fraccionaria. */
 export function epocaDeFicha(valor) {

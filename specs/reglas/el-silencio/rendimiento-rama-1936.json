@@ -1,0 +1,182 @@
+{
+  "url": "http://localhost:5208/",
+  "gpu": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 2060/PCIe/SSE2, OpenGL ES 3.2)",
+  "conGpu": true,
+  "liviano": false,
+  "ventana": [
+    1280,
+    800
+  ],
+  "año": 1936,
+  "hitos": {
+    "lineaDeTiempo": 650,
+    "listo": 4129,
+    "primerasCasas": 4129,
+    "casas": 5503,
+    "arboles": 5504
+  },
+  "tareas": {
+    "cuantas": 9,
+    "sumaMs": 1283,
+    "mayorMs": 412
+  },
+  "pedidos": {
+    "cuantos": 21,
+    "bytes": 10293413,
+    "mayores": [
+      {
+        "url": "datos/ciudad.pak",
+        "bytes": 4518570
+      },
+      {
+        "url": "datos/relieve.bin",
+        "bytes": 1376690
+      },
+      {
+        "url": "plano/suelo-2k.webp",
+        "bytes": 1357588
+      },
+      {
+        "url": "plano/crece.png",
+        "bytes": 899872
+      },
+      {
+        "url": "plano/chico.webp",
+        "bytes": 676404
+      },
+      {
+        "url": "datos/arboles.bin",
+        "bytes": 442260
+      },
+      {
+        "url": "plano/calles-1772.png",
+        "bytes": 404517
+      },
+      {
+        "url": "assets/main-CKlnUpuq.js",
+        "bytes": 172314
+      }
+    ]
+  },
+  "segundaVisita": {
+    "pagina": {
+      "cuantos": 21,
+      "bytes": 0,
+      "mayores": [
+        {
+          "url": "?sinintro",
+          "bytes": 0
+        },
+        {
+          "url": "assets/main-CKlnUpuq.js",
+          "bytes": 0
+        },
+        {
+          "url": "assets/fichas-datos-MHb_aViW.js",
+          "bytes": 0
+        },
+        {
+          "url": "assets/hitos-B41fe7E_.js",
+          "bytes": 0
+        },
+        {
+          "url": "assets/main-Cw8adeuY.css",
+          "bytes": 0
+        },
+        {
+          "url": "datos/ciudad.json",
+          "bytes": 0
+        },
+        {
+          "url": "datos/crece.json",
+          "bytes": 0
+        },
+        {
+          "url": "datos/ciudad.pak",
+          "bytes": 0
+        }
+      ]
+    },
+    "servicio": {
+      "cuantos": 2,
+      "bytes": 254,
+      "mayores": [
+        {
+          "url": "datos/manifiesto.json",
+          "bytes": 127
+        },
+        {
+          "url": "?sinintro",
+          "bytes": 127
+        }
+      ]
+    }
+  },
+  "memoria": {
+    "heapMB": 257,
+    "geometriaEnJsMB": 92.7,
+    "vertices": 5752621,
+    "mallas": 603,
+    "geometrias": 375,
+    "texturas": 14
+  },
+  "cuadro": {
+    "centro": {
+      "llamadas": 190,
+      "triangulos": 5766677,
+      "medianaMs": 9.8,
+      "p90Ms": 10.3
+    },
+    "valle": {
+      "llamadas": 553,
+      "triangulos": 6081324,
+      "medianaMs": 11.5,
+      "p90Ms": 12.3
+    },
+    "cerca": {
+      "llamadas": 119,
+      "triangulos": 4926612,
+      "medianaMs": 9.2,
+      "p90Ms": 10.6
+    }
+  },
+  "detalleCasas": null,
+  "presupuesto": [
+    {
+      "clave": "casasMs",
+      "valor": 5503,
+      "tope": 5000,
+      "pasa": false
+    },
+    {
+      "clave": "tareaMasLargaMs",
+      "valor": 412,
+      "tope": 200,
+      "pasa": false
+    },
+    {
+      "clave": "bytesAlAbrir",
+      "valor": 10293413,
+      "tope": 8000000,
+      "pasa": false
+    },
+    {
+      "clave": "heapMB",
+      "valor": 257,
+      "tope": 250,
+      "pasa": false
+    },
+    {
+      "clave": "triangulosCentro",
+      "valor": 5766677,
+      "tope": 2000000,
+      "pasa": false
+    },
+    {
+      "clave": "msPorCuadroCentro",
+      "valor": 9.8,
+      "tope": 16.6,
+      "pasa": true
+    }
+  ]
+}

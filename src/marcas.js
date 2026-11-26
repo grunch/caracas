@@ -10,7 +10,7 @@
  */
 import { visibleEn, vivo, epocaAqui, PRIMERA_EPOCA } from './epocas.js'
 
-const ULTIMA_EPOCA = 5
+const ULTIMA_EPOCA = 6
 /** El nivel n se ve con la cámara a menos de DIST_NIVEL[n] metros; el 1, siempre. */
 export const DIST_NIVEL = Object.freeze({ 2: 4200, 3: 1500 })
 /** Hasta qué distancia (m) se acerca la cámara al tocar una marca, según su nivel. */

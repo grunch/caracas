@@ -109,3 +109,11 @@ describe('la primera época visible', () => {
     expect(acotarEpoca(0, 0, 6)).toBe(0)
   })
 })
+
+test('una preparación fallida revierte la secuencia y permite reintentar o elegir otra época',()=>{
+ const llamadas=[],s=crearSecuencia((de,a)=>llamadas.push([de,a]),5)
+ s.elegir(6);s.elegir(4);s.cancelar(5)
+ expect(s.rige).toBe(5)
+ s.elegir(6);expect(llamadas).toEqual([[5,6],[5,6]])
+ s.termino();expect(s.rige).toBe(6)
+})

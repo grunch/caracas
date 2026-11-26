@@ -59,7 +59,7 @@ export function pisaLaZona(anillo, zona) {
 
 /** Las zonas de supresión de una lista de hitos: [{ poligono, desde, hasta }] (hasta = 0: para siempre). */
 export function zonasDeSupresion(hitos) {
-  return hitos.flatMap((h) => (h.suprime ?? []).map((poligono) => ({ poligono, desde: h.nace ?? 0, hasta: h.muere ?? 0 })))
+  return hitos.flatMap((h) => (h.suprime ?? []).map((poligono) => ({ poligono, desde: h.nace ?? 0, hasta: h.muere ?? 0, ...(h.solarCompleto ? {solarCompleto:true} : {}) })))
 }
 
 /**
@@ -84,18 +84,18 @@ export function suprimirTechos({ vertices, techos, vida = null, marcos = null, a
     const anillo = Array.from({ length: cuantos }, (_, k) => [vertices[(inicio + k) * 2], vertices[(inicio + k) * 2 + 1]])
     const caja = cajaDe(anillo)
     let construidas = null
-    zonas.forEach(({ poligono, desde, hasta }, z) => {
-      if (!cajasSePisan(caja, cajas[z]) || !pisaLaZona(anillo, poligono)) return
+    zonas.forEach(({ poligono, desde, hasta, solarCompleto }, z) => {
+      if (!cajasSePisan(caja, cajas[z]) || !(solarCompleto ? seSolapan(anillo, poligono) : pisaLaZona(anillo, poligono))) return
       const marco = porTecho.get(t)
-      if (marco) {
+      if (marco && !solarCompleto) {
         construidas ??= huellasConstruidas(anillo, marco, alas)
         if (!construidas.some((huella) => seSolapan(huella, poligono))) {
           // El solar puede quedar bajo el hito sin borrar la fachada. Si una etapa
           // posterior ocupa el lote entero, vuelve a regir la supresión normal.
-          for (let e = desde; e < (hasta || 6); e++) {
+          for (let e = desde; e < (hasta || 7); e++) {
             const estilo = historia ? historia[t * 6 + Math.min(e, 5)] % 16 : (techos[t * 4 + 2] >> 8) & 255
             if (!esDePatio(estilo, techos[t * 4 + 3], e)) {
-              salida[t] = vidaSinHito(salida[t], e, !hasta && e === 5 ? 0 : e + 1)
+              salida[t] = vidaSinHito(salida[t], e, !hasta && e === 6 ? 0 : e + 1)
             }
           }
           return

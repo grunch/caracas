@@ -1,0 +1,15 @@
+{
+  "titulo": "Huellas de los siete bloques de El Silencio y las plazas Miranda y O’Leary",
+  "autor": "OpenStreetMap contributors",
+  "fuente": "https://www.openstreetmap.org/",
+  "url_descarga": "https://www.openstreetmap.org/api/0.6/map?bbox=-66.923,10.500,-66.916,10.507",
+  "consulta": "2026-11-26",
+  "licencia": "Open Database License (ODbL) 1.0",
+  "url_licencia": "https://www.openstreetmap.org/copyright",
+  "uso": "Control de emplazamiento y perímetros; no certifica el estado de cada detalle en 1945.",
+  "transformacion": "tools/geo/geo1936.py, gcp/1936-wgs84.json; RMS5.09m. No precisión catastral.",
+  "notas": "Patios del bloque1 interpretados de la perspectiva histórica; niveles y colores no proceden de etiquetas OSM. Los datos geográficos derivados conservan ODbL.",
+  "dominio_publico": false,
+  "url_fuente": "https://www.openstreetmap.org/",
+  "atribucion_requerida": "© OpenStreetMap contributors, ODbL 1.0"
+}

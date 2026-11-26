@@ -17,7 +17,7 @@ const bandera = (n) => args.includes(n)
 const valorDe = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : null)
 const conValor = new Set(['--salida', '--vistas', '--epoca'])
 const url = args.find((a, k) => !a.startsWith('--') && !conValor.has(args[k - 1])) ?? 'http://localhost:4173/'
-const años=[1772,1843,1889,1911,1936],epoca=valorDe('--epoca')?años.indexOf(Number(valorDe('--epoca')))+1:1
+const años=[1772,1843,1889,1911,1936,1945],epoca=valorDe('--epoca')?años.indexOf(Number(valorDe('--epoca')))+1:1
 if(epoca<1)throw new Error('--epoca debe ser un año de la línea de tiempo')
 const GPU = bandera('--gpu')
 const ESPERA_MS = 300_000

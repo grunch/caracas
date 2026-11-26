@@ -17,6 +17,7 @@
 const SIN_LEYENDA = 'el nombre de 1772 no se cotejó con la leyenda de ese plano'
 
 export const FICHAS = Object.freeze({
+  'reurbanizacion-el-silencio': {textos:[[6,'Carlos Raúl Villanueva proyectó siete bloques de viviendas y comercios con patios y soportales. El bloque 7 abrió el 5 de julio de 1944; el conjunto se inauguró el 26 de agosto de 1945. La plaza central se llamó General Rafael Urdaneta, hoy O’Leary. Esta vista actualiza sólo El Silencio y conserva el resto de la ciudad de 1936.']],dudas:'Emplazamiento ajustado a huellas OSM mediante la georreferenciación del mapa (RMS 5,09 m). Dimensiones interiores, colores y esculturas interpretativos.'},
   // --- el valle ---
   avila: {
     textos: [[1, 'La sierra que cierra el valle por el norte. En las vistas del siglo XIX y en las fotos de comienzos del XX es el fondo de la ciudad: se levanta detrás de los tejados, de un extremo al otro.']],

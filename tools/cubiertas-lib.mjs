@@ -106,7 +106,7 @@ export function pedidoDeCubiertas(args) {
   if (rutas.length > 1) throw new Error(`cubiertas: argumentos de más (${rutas.join(' ')}): una sola salida`)
   if (todas) {
     if (rutas.length || año !== null) throw new Error('cubiertas: --todas escribe cada época en su ruta por año; sin --epoca ni salida')
-    return AÑOS_DE_EPOCA.map((a) => pedido(a))
+    return AÑOS_DE_EPOCA.filter(a=>a<=1936).map((a) => pedido(a))
   }
   return [pedido(año ?? EPOCA_POR_OMISION, rutas[0])]
 }

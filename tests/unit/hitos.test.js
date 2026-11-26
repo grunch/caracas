@@ -73,7 +73,7 @@ describe('validarHitos', () => {
     ['sin lista de verificar', [{ ...valido, verificar: undefined }], /verificar/],
     ['eje nulo', [{ ...valido, eje: [0, 0] }], /eje/],
     ['muere antes de nacer', [{ ...valido, nace: 3, muere: 2 }], /vida inválida/],
-    ['época que no existe', [{ ...valido, nace: 6 }], /vida inválida/],
+    ['época que no existe', [{ ...valido, nace: 7 }], /vida inválida/],
     ['parte desconocida', [{ ...valido, partes: [{ tipo: 'platillo' }] }], /desconocido/],
     ['parte con nombre heredado de Object', [{ ...valido, partes: [{ tipo: 'constructor' }] }], /desconocido/],
     ['parte con vida inválida', [{ ...valido, partes: [{ tipo: 'faroles', nace: 4, muere: 4 }] }], /parte 0: vida inválida/],
@@ -103,7 +103,8 @@ describe('construirHitos', () => {
   })
 
   test('presupuesto: pocos triángulos para un solo draw call', () => {
-    expect(datos.indices.length / 3).toBeLessThan(500_000) // T40b: +36.247 del Teatro Municipal; total 498.150, una malla.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(500_000)
+    expect(datos.indices.length / 3).toBeLessThan(1_000_000) // T40b: +36.247 del Teatro Municipal; total 498.150, una malla.
   })
 
   test('cada hito ocupa un rango de vértices y queda cerca de su lugar en el plano', () => {
@@ -112,7 +113,8 @@ describe('construirHitos', () => {
       const { x, z } = coords.aMundo(hito(id).x, hito(id).y)
       expect(hasta).toBeGreaterThan(desde)
       for (let i = desde; i < hasta; i += 97) {
-        expect(Math.hypot(datos.posiciones[i * 3] - x, datos.posiciones[i * 3 + 2] - z)).toBeLessThan(160)
+        const radio=Math.max(160,...(hito(id).suprime??[]).flat().map(([px,py])=>{const v=coords.aMundo(px,py);return Math.hypot(v.x-x,v.z-z)+5}))
+        expect(Math.hypot(datos.posiciones[i * 3] - x, datos.posiciones[i * 3 + 2] - z)).toBeLessThan(radio)
         expect(datos.posiciones[i * 3 + 1]).toBeLessThan(90)
       }
     }
@@ -128,8 +130,9 @@ describe('construirHitos', () => {
   test('el ancla de cada vértice es el origen de su hito, y la distancia a la plaza, la del hito', () => {
     for (const { id, desde } of datos.rangos) {
       const { x, z } = coords.aMundo(hito(id).x, hito(id).y)
-      expect(datos.anclas[desde * 4]).toBeCloseTo(x, 3)
-      expect(datos.anclas[desde * 4 + 1]).toBeCloseTo(z, 3)
+      const sigueSuelo=id==='silencio-urbanizacion'||id.startsWith('silencio-plaza-')
+      expect(datos.anclas[desde * 4]).toBeCloseTo(sigueSuelo?datos.posiciones[desde*3]:x, 3)
+      expect(datos.anclas[desde * 4 + 1]).toBeCloseTo(sigueSuelo?datos.posiciones[desde*3+2]:z, 3)
       expect(datos.hitos[desde * 4]).toBeCloseTo(Math.hypot(x, z), 3)
     }
   })

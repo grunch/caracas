@@ -135,9 +135,9 @@ describe('epocaDeFicha', () => {
   it('redondea la época de la ola y la deja entre la primera y la última', () => {
     expect(epocaDeFicha(2.4)).toBe(2)
     expect(epocaDeFicha(2.5)).toBe(3)
-    expect(epocaDeFicha(99)).toBe(5) // sin línea de tiempo: la ciudad final
+    expect(epocaDeFicha(99)).toBe(6) // sin línea de tiempo: la ciudad final
     expect(epocaDeFicha(0)).toBe(1)
-    expect(epocaDeFicha(NaN)).toBe(5)
+    expect(epocaDeFicha(NaN)).toBe(6)
   })
 })
 

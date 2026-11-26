@@ -27,6 +27,7 @@ const L43 = (letra, nombre) => `leyenda del plano de Jesurún de 1843 (${letra} 
 const SIN_LEYENDA = 'Nombre de la época 1772 sin cotejar con la leyenda de ese plano.'
 
 export const MARCAS = Object.freeze([
+  {id:'reurbanizacion-el-silencio',fuente:'https://entrerayas.com/a-66-anos-de-la-inauguracion-de-la-reurbanizacion-el-silencio/ · Geografía © OpenStreetMap contributors, ODbL 1.0: https://www.openstreetmap.org/copyright',hito:'silencio-bloque-1',nombre:'Reurbanización El Silencio',nace:6,nivel:1,nota:'Siete bloques y dos plazas, inaugurados en 1945. Vista parcial sobre la ciudad de 1936.'},
   // --- el valle: sierra, cerro, río y quebradas ---
   { id: 'avila', nombre: 'El Ávila', x: 9000, y: 2300, nace: 1, nivel: 1, nota: 'La sierra que cierra el valle por el norte.',
     fuente: `${P36} (la sierra, sin rótulo en la hoja); nombre: ${CG}`, dudas: 'El plano de 1936 no rotula la sierra en esta hoja.' },
@@ -145,7 +146,7 @@ export const MARCAS = Object.freeze([
   { id: 'cano-amarillo', nombre: 'Estación de Caño Amarillo', x: 7040, y: 6420, nace: 3, nivel: 2, alto: 7, nota: 'El ferrocarril de La Guaira.',
     fuente: `${P89} («Ferrocarril La Guaira a Caracas», estación); ${P36} («Estación del F.C. de La Guaira»)` },
   { id: 'viaducto-union', nombre: 'Viaducto Unión', x: 7365, y: 6760, nace: 5, nivel: 3, alto: 6, fuente: `${P36} («Viaducto Unión»)` },
-  { id: 'el-silencio', nombre: 'El Silencio', x: 7850, y: 7180, nace: 5, nivel: 3, nota: 'El barrio, antes de la reurbanización.', fuente: `${P36} (esquina «El Silencio»)` },
+  { id: 'el-silencio', muere:6, nombre: 'El Silencio', x: 7850, y: 7180, nace: 5, nivel: 3, nota: 'El barrio, antes de la reurbanización.', fuente: `${P36} (esquina «El Silencio»)` },
   { id: 'palo-grande', nombre: 'Estación Palo Grande', x: 4750, y: 8650, nace: 4, nivel: 2, alto: 7, nota: 'El Gran Ferrocarril de Venezuela.',
     fuente: `${P11} («Estación Palo Grande», «G.F.V.»); ${P36} («Estación Palo Grande»)` },
   { id: 'el-paraiso', nombre: 'El Paraíso', x: 6500, y: 10100, nace: 4, nivel: 1, fuente: `${P11} («El Paraíso»); ${P36} («El Paraíso»)` },
