@@ -140,6 +140,8 @@ def main():
     Path(salida).mkdir(parents=True,exist_ok=True)
     Path(f'{salida}/ciudad.json').write_text(json.dumps(compactar(d),separators=(',',':')))
     Path(f'{salida}/arboles.bin').write_bytes(transformar_arboles(Path(f'{entrada}/arboles.bin').read_bytes(),epoca,buscar,matrices))
+    if epoca==6:
+        Path(f'{salida}/arboles-1946.bin').write_bytes(transformar_arboles(Path('fuentes/derivados/1946/arboles-base.bin').read_bytes(),epoca,buscar,matrices))
     resumen={'año':int(año),'casasAjustadas':n,'manzanasAjustables':len(matrices),'excepciones':limites,'metodo':'Escala uniforme desde contornos fijos; retiro nominal de 1 m sobre la caja orientada. No es medida histórica.'}
     Path(f'{salida}/resumen.json').write_text(json.dumps(resumen));print(json.dumps({k:v for k,v in resumen.items() if k!='excepciones'}),flush=True)
 
