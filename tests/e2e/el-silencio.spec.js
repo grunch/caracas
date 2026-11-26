@@ -4,7 +4,10 @@ test('El Silencio aparece en1945, conserva1936 y abre el plano base correcto',as
  const errores=[];page.on('pageerror',e=>errores.push(e.message));await page.goto('/?capture&sinintro');await page.waitForFunction(()=>window.lab?.ready&&lab.lineaDeTiempo)
  await expect(page.getByRole('button',{name:'1945',exact:true})).toBeVisible()
  await page.getByRole('button',{name:'1945',exact:true}).click();await expect(page.locator('#epocas')).toContainText('Reconstrucción parcial')
- await expect(page.getByRole('button',{name:'Ver el plano de 1936',exact:true})).toBeVisible()
+ const verPlano=page.getByRole('button',{name:'Ver el plano de 1936',exact:true});await expect(verPlano).toBeVisible()
+ await verPlano.click();const visor=page.locator('#visor-plano');await expect(visor).toBeVisible()
+ await expect(visor.locator('.pie')).toContainText('1936');await expect(visor.locator('.pie')).not.toContainText('1945')
+ await page.keyboard.press('Escape');await expect(visor).toBeHidden()
  await page.waitForFunction(()=>lab.hitosSilencio&&lab.ciudad.U.uEpocaA.value===6)
  const r=await page.evaluate(async()=>{
   const {Mesh,Scene,OrthographicCamera,Color}=await import('/node_modules/three/build/three.module.js')
