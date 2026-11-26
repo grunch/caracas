@@ -117,6 +117,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T41g | Iglesia de San Francisco: portada barroca de 1745 y campanario oeste en 1772 y 1843, fachada de Juan Hurtado Manrique sin torre desde 1889 ([08-san-francisco-por-epocas.md](08-san-francisco-por-epocas.md)) | T41 | tres tramos en el lienzo común, orientación, relieve, tinta/color, supresión desde 1772, ficha y fuentes | PR [#184](https://github.com/grunch/caracas/pull/184) abierto |
 | T41h | **La terraza del convento y el Capitolio sigue la ladera**: el plano que mejor se ajusta al terreno de la manzana, y el hito apoyado en él; sin el pozo del lado alto que dejaba el piso horizontal de T41f ([08-capitolio-por-epocas.md](08-capitolio-por-epocas.md), `src/relieve.js`) | T41f | en 1772–1936 la esquina noroeste del hito no queda bajo la calle | 🔄 #186 |
 | T42 | Marcas (etiquetas 3D por época, niveles, declutter, velo al pasar el mouse) | T25 | las marcas cambian con el año | ✅ #39 |
+| T42.90 | Cronología documentada de 1772: issue #90 | T42, T43 | Marca, ficha y transición a épocas posteriores | 🔄 Implementado; pendiente PR y revisión humana |
 | T43 | Fichas con fotos de época (Commons, autor, fecha, licencia) y visor de fotos | T42 | cada marca abre su ficha con fotos acreditadas | ✅ #43 |
 | T44 | Intro y "Acerca": qué estás viendo, la Caracas de cada época, fuentes y créditos (incluida la inspiración de @mormonnegro) | T25 | intro con todas las fuentes y licencias | ✅ #44 |
 

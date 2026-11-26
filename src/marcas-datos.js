@@ -123,9 +123,9 @@ export const MARCAS = Object.freeze([
   { id: 'puente-sucre', nombre: 'Puente Sucre', x: 9710, y: 9430, nace: 5, nivel: 3, alto: 4, fuente: `${P36} («Puente Sucre»)` },
 
   // --- el norte: Altagracia, La Pastora, el Panteón ---
-  { id: 'las-mercedes', nombres: [[2, 'La Merced'], [3, 'Las Mercedes']], x: 8880, y: 5830, nace: 2, nivel: 3, alto: 11,
-    fuente: `${P36} («Iglesia Las Mercedes»); ${P89} (templo dibujado en el lugar); ${L43('E', 'La Merced')}`,
-    dudas: 'El convento de la Merced es colonial (CG); con el plano de 1772, sin cotejar. Va desde 1843, cuya leyenda la nombra «La Merced»; en 1889 y 1911 lleva el nombre del plano de 1936.' },
+  { id: 'las-mercedes', nombres: [[1, 'Convento de La Merced'], [2, 'La Merced'], [3, 'Las Mercedes']], x: 8880, y: 5830, nace: 1, nivel: 3, alto: 11,
+    fuente: `${P36} («Iglesia Las Mercedes»); ${P89} (templo dibujado en el lugar); ${L43('E', 'La Merced')}; Historia general de la Iglesia en América Latina, tomo VII, pp. 228–229: https://docs.enriquedussel.com/txt/Textos_Libros_Editados_ED/L.Edi.4_Tomo7_Colombia_y_Venezuela.pdf`,
+    dudas: 'Presencia documentada por la visita de Martí en 1772; la ubicación exacta en ese plano sigue sin cotejar. La fachada y el estado de reconstrucción en 1843 y 1889 no están verificados. El nombre Las Mercedes procede del plano de 1936.' },
   { id: 'la-pastora', hito: 'la-pastora', nombre: 'La Pastora', nivel: 1, alto: 10, fuente: `${P36} («Iglesia La Pastora»); ${P89} (templo XI); foto de 1892 (fuentes/imagenes); ${L43('B', 'La Pastora')}`,
     dudas: 'La leyenda de 1843 ya la nombra (B). Desde qué época antes, a verificar: va desde 1772, como el hito.' },
   { id: 'panteon', hito: 'panteon', nace: 2, nivel: 2, alto: 13,
