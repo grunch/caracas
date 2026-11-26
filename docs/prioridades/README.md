@@ -49,3 +49,14 @@ cotejar recinto y obra en el [original PARES de 1772](https://pares.cultura.gob.
 y obtener evidencia de alturas/fases antes de generar una variante constructiva.
 
 Todos los issues siguen abiertos si sus criterios incluyen geometría o investigación pendiente.
+
+## Coste y dependencias comprobados
+
+Build gzip: main **330,0 kB** iniciales, rama **331,3 kB**. Se amplía explícitamente
+el límite de 330 a **332 kB** por los textos/fuentes y el agrupador; workers 153,4 kB
+y service worker 1,3 kB no cambian. No es una mejora de rendimiento ni una medición de FPS.
+
+El aviso `datos:al-dia` detecta `marcas-datos.js` por archivo completo. Se compararon
+los IDs consumidos por `tools/fotos.mjs` y las salidas de `plazasDeEpoca` consumidas
+por ambos generadores de suelo entre main y rama: idénticos en las seis épocas.
+Por eso no hace falta publicar un paquete distinto de suelo/fotos para este cambio.
