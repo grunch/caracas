@@ -64,7 +64,8 @@ export const GLSL_SUELO = /* glsl */ `
     c = mix(c, TIERRA_DE_CALLE, extension.r);
     c = mix(c, CULTIVO_1936, extension.b);
     // El campo moderno sustituye el color de suelo anterior solo cuando sus datos están cargados.
-    float moderno = modernasActivas(epoca) * (1.0 - planoViejo);
+    // ?planos no carga este campo; la hoja automática de 1946 sí debe dejar verde el modo color.
+    float moderno = modernasActivas(epoca);
     c = mix(c, mix(TIERRA_DE_CALLE, verdeCiudad(campo), verde), moderno * (1.0 - s.r));
     dibujo *= 1.0 - moderno;
     return mix(campo, c, ciudad) * (1.0 - 0.4 * tintaDe(papel) * dibujo * (1.0 - rotulo));
