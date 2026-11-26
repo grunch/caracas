@@ -85,4 +85,4 @@ Se reservaron371 componentes;2.015 con tejido anterior se dejaron intactos.
 Pruebas tras sincronizar `main`69a2ea2:1.773unitarias y1.016Python pasan.
 Los informes de rendimiento completos están en `specs/reglas/1946/rendimiento-*.json`;
 se repitieron secuencialmente con GPU, sin la suiteE2E concurrente. El paquete de datos y la muestra se publicaron como
-[datos-2026-11-26-3f6715d](https://github.com/grunch/caracas/releases/tag/datos-2026-11-26-3f6715d).
+[datos-2026-11-26-751318f](https://github.com/grunch/caracas/releases/tag/datos-2026-11-26-751318f).
