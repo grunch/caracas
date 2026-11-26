@@ -37,3 +37,12 @@ def test_indice_de_ocupacion_conserva_el_resultado_del_selector():
         assert a['id']==b['id']
         assert Polygon(a['limite']).equals(Polygon(b['limite']))
         assert abs(a['areaM2']-b['areaM2'])<1e-8
+
+
+def test_retiro_no_convierte_una_franca_delgada_en_manzana_residencial():
+    # Una franja de 3 m deja solo 1 m tras retirar ambos lados: no caben casa y árbol.
+    ds=datos([box(10,10,110,13)])
+    r=preparar(ds,[],[],[],5,1)
+    assert r['manzanas']==[]
+    assert r['cobertura'][0]['estado']=='sin_area_nueva_util'
+    assert r['descartadasTrasRetiro'][0]['motivo']=='sin espacio útil después del retiro'
