@@ -53,7 +53,8 @@ def generar_matrices(base,clases,ampliacion,obstaculos,metro,caras=()):
     mascara=np.isin(clases,[2,3,4,5]).astype(np.uint8)
     _,etiquetas,stats,_=cv2.connectedComponentsWithStats(mascara,connectivity=4)
     del mascara
-    extras=[Polygon(m['poligono']).buffer(0) for m in ampliacion['nuevasManzanas']]
+    # El informe 1946 usa coordenadas a 1 m/px; la ciudad, píxeles del mosaico.
+    extras=[Polygon(np.asarray(m['poligono'])/metro).buffer(0) for m in ampliacion['nuevasManzanas']]
     indice=STRtree(extras);alto,ancho=clases.shape
     asignaciones={};indice_caras=STRtree(caras)
     def buscar(p):

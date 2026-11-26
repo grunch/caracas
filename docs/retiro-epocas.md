@@ -27,7 +27,7 @@ node tools/retiro-manzanas-epoca.mjs 1889 fuentes/derivados/retiro1843 fuentes/d
 
 ## 1911: tejido vectorizado
 
-Se conserva la cantidad de casas (14240) y de árboles (27740). Se ajustan 7817 casas; las restantes mantienen su geometría por protección de hitos, contornos estrechos/pequeños o concavidades que no admiten el retiro seguro. El resumen enumera los límites; no se eliminan casas ni se regeneran sus estilos.
+Se conserva la cantidad de casas (14240) y de árboles (27740). Se ajustan 7805 casas; las restantes mantienen su geometría por protección de hitos, contornos estrechos/pequeños o concavidades que no admiten el retiro seguro. El resumen enumera los límites; no se eliminan casas ni se regeneran sus estilos.
 
 El generador agrupa primero por las caras de la red clasificada de 1936 que ya utiliza el vectorizador base. Fuera de ellas usa las componentes del plano y los bloques de expansión de 1946. No se digitaliza una red histórica nueva. El retiro es una escala uniforme nominal de un metro sobre la caja orientada de la manzana: huellas, marcos y alas se transforman juntos, conservando ángulos, semillas, paletas, alturas y vida histórica. Se comprueba que no aumente la invasión del contorno, con la tolerancia de vectorización existente de 0,35 m; los casos incompatibles se conservan. Las manzanas que contienen techos de hitos fijos quedan protegidas.
 
