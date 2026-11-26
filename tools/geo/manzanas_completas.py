@@ -149,12 +149,16 @@ def techos_de_casa(c, metro):
     return Polygon(c['huella']).buffer(0).intersection(unary_union(techos))
 
 
-def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0):
+def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0, *, indexar_hitos=False):
     if intento == 0:
         ms = deepcopy(ms)
-    edificios = unary_union([Polygon(p).buffer(0) for p in obstaculos_hitos])
+    plantas = [Polygon(p).buffer(0) for p in obstaculos_hitos]
+    indice = STRtree(plantas) if indexar_hitos else None
+    edificios = None if indexar_hitos else unary_union(plantas)
     for m in ms:
         limite = Polygon(m.get('limite', m['poligono']),m.get('huecos',[])).buffer(0)
+        if indice is not None:
+            edificios = unary_union([plantas[int(i)] for i in indice.query(limite)])
         casas = []
         for c in m['casas']:
             inter = Polygon(c['huella']).intersection(limite)
@@ -170,7 +174,7 @@ def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0):
         if not zonas:
             if intento >= 12: raise ValueError(f"{m['id']}: no queda espacio libre para árboles")
             abrir_corral(m)
-            recortar_y_arbolar([m], obstaculos_hitos, metro, intento+1)
+            recortar_y_arbolar([m], obstaculos_hitos, metro, intento+1, indexar_hitos=indexar_hitos)
             continue
         rng = random.Random(semilla(m['id']))
         area = limite.area*metro*metro
@@ -197,7 +201,7 @@ def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0):
         if not arboles:
             if intento >= 12: raise ValueError(f"{m['id']}: ningún árbol cabe sin invadir tejados")
             abrir_corral(m)
-            recortar_y_arbolar([m], obstaculos_hitos, metro, intento+1)
+            recortar_y_arbolar([m], obstaculos_hitos, metro, intento+1, indexar_hitos=indexar_hitos)
             continue
         m['arboles'] = arboles
         m['arbolesObjetivo'] = objetivo
@@ -210,5 +214,5 @@ if __name__ == '__main__':
         datos = json.loads(Path(sys.argv[2]).read_text())
         resultado = completar(datos, entrada['seleccion'], entrada['hitos'], entrada['metro'])
     else:
-        resultado = recortar_y_arbolar(entrada['manzanas'], entrada['obstaculosHitos'], entrada['metro'])
+        resultado = recortar_y_arbolar(entrada['manzanas'], entrada['obstaculosHitos'], entrada['metro'], indexar_hitos=entrada.get('indexarHitos',False))
     json.dump(resultado, sys.stdout, separators=(',', ':'))

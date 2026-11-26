@@ -1,0 +1,3 @@
+Árboles originales de expansión: 538
+Fuera de las manzanas, conservados exactamente: 532
+Archivo adicional vacío para evitar duplicados: True
