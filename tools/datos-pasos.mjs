@@ -1,3 +1,4 @@
+import EPOCAS_COMPLETAS from '../src/manzanas/epocas-completas.json' with {type:'json'}
 import EPOCAS_RETIRO from '../src/manzanas/epocas-retiro.json' with {type:'json'}
 const RETIRO_ULTIMO=`fuentes/derivados/retiro${EPOCAS_RETIRO.at(-1)}`
 // Los pasos del pipeline de datos (npm run datos, tools/datos.mjs): de qué entradas y de qué código sale cada
@@ -210,6 +211,11 @@ export const PASOS = [
   },
   ...EPOCAS_RETIRO.slice(1).map((año,i)=>{
     const previo=`fuentes/derivados/retiro${EPOCAS_RETIRO[i]}`,salida=`fuentes/derivados/retiro${año}`
+    if(EPOCAS_COMPLETAS.includes(año))return {
+      id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,`${previo}/manzanas-${EPOCAS_RETIRO[i]}-informe.json`,`${D}/tramos.json`,`${D}/mosaico.json`],
+      salidas:[`${salida}/ciudad.json`,`${salida}/arboles.bin`,`${salida}/manzanas-${año}-informe.json`,`${salida}/resumen.json`,...(año===1946?[`${salida}/arboles-1946.bin`]:[])],
+      codigo:['tools/manzanas-modernas.mjs','tools/geo/manzanas_modernas.py','tools/geo/ampliacion_manzanas.py','tools/geo/retiro_manzanas.py','tools/geo/caras.py','tools/geo/lados.py','tools/manzanas-1843-lib.mjs','tools/manzanas-completas.mjs','tools/geo/manzanas_completas.py','tools/manzanas-1772-lib.mjs','tools/manzanas-reservas-lib.mjs','tools/manzanas-arboles-lib.mjs','tools/arboles-lib.mjs','src/manzanas/epocas-completas.json','src/manzanas/plan.js','src/manzanas/paleta.js','src/manzanas/perimetro.js','src/poligono.js','src/alas.js','src/coords.js','src/hitos.js',...CODIGO_HITOS],
+      cmd:()=>['node','tools/manzanas-modernas.mjs',String(año),previo,salida]}
     if(año>=1911)return {id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,'fuentes/derivados/1946/ciudad-1946.json','fuentes/derivados/1946/informe.json',`${D}/tramos.json`,`${D}/segmentacion/mosaico/clases-costura.png`,`${D}/mosaico.json`,...(año===1946?['fuentes/derivados/1946/arboles-base.bin']:[])],
       salidas:[`${salida}/ciudad.json`,`${salida}/arboles.bin`,`${salida}/resumen.json`,`${salida}/hitos-fijos.json`,...(año===1946?[`${salida}/arboles-1946.bin`]:[])],
       codigo:['tools/retiro-moderno.mjs','tools/geo/retiro_moderno.py','tools/geo/caras.py','tools/geo/lados.py','tools/manzanas-completas.mjs','src/manzanas/epocas-retiro.json','src/hitos.js','src/coords.js','src/poligono.js',...CODIGO_HITOS],
@@ -278,8 +284,15 @@ export const PASOS = [
     id: 'suelo-manzanas',
     entradas: [`${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', (EPOCAS_RETIRO.includes(1843)?'fuentes/derivados/retiro1843/manzanas-1843-informe.json':`${E}/manzanas-1843-informe.json`), (EPOCAS_RETIRO.includes(1889)?'fuentes/derivados/retiro1889/manzanas-1889-informe.json':`${E}/manzanas-1889-informe.json`)],
     salidas: ['public/plano/suelo-manzanas.png', 'public/datos/suelo-manzanas.json'],
-    codigo: ['tools/suelo-manzanas.mjs', 'tools/suelo-manzanas-lib.mjs', 'src/marcas-datos.js', 'src/hitos.js', ...CODIGO_HITOS],
+    codigo: ['tools/suelo-manzanas.mjs', 'tools/suelo-manzanas-lib.mjs','src/manzanas/medidas-suelo.js', 'src/marcas-datos.js', 'src/hitos.js', ...CODIGO_HITOS],
     cmd: () => ['node', 'tools/suelo-manzanas.mjs', `${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', (EPOCAS_RETIRO.includes(1843)?'fuentes/derivados/retiro1843/manzanas-1843-informe.json':`${E}/manzanas-1843-informe.json`), (EPOCAS_RETIRO.includes(1889)?'fuentes/derivados/retiro1889/manzanas-1889-informe.json':`${E}/manzanas-1889-informe.json`)],
+  },
+  {
+    id:'suelo-manzanas-modernas',
+    entradas:[`${D}/mosaico.json`,...EPOCAS_COMPLETAS.map(a=>`fuentes/derivados/retiro${a}/manzanas-${a}-informe.json`)],
+    salidas:['public/plano/suelo-manzanas-modernas.png','public/datos/suelo-manzanas-modernas.json'],
+    codigo:['tools/suelo-manzanas-modernas.mjs','tools/suelo-manzanas-lib.mjs','src/manzanas/medidas-suelo.js','src/manzanas/epocas-completas.json','src/marcas-datos.js','src/hitos.js',...CODIGO_HITOS],
+    cmd:()=>['node','tools/suelo-manzanas-modernas.mjs'],
   },
   {
     // las calles de 1772 para el suelo de esa época (T33j.8b): un campo de distancia a los ejes de la referencia

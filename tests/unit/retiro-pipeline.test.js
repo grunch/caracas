@@ -1,3 +1,4 @@
+import completas from '../../src/manzanas/epocas-completas.json'
 import {it,expect} from 'vitest'
 import epocas from '../../src/manzanas/epocas-retiro.json'
 import {PASOS} from '../../tools/datos-pasos.mjs'
@@ -15,7 +16,7 @@ it('los contornos del piloto corresponden al metro adicional del generador',asyn
  const {retraerCuadra}=await import('../../tools/manzanas-1772-lib.mjs')
  for(const m of PILOTO_COLONIAL){
   const esperado=retraerCuadra(m.poligono,2) // mosaico: 0,5 m por píxel
-  expect(m.contornos[0].vida).toEqual([1,Math.min(4,epocas.length+1)])
+  expect(m.contornos[0].vida).toEqual([1,Math.min(4+completas.length,epocas.length+1)])
   m.contornos[0].poligono.forEach((v,i)=>v.forEach((x,k)=>expect(x).toBeCloseTo(esperado[i][k],2)))
  }
 })

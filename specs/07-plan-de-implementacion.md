@@ -178,6 +178,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T82.11 | **Retiro del tejido vectorizado de 1911** | T82.10 | 7805 casas ajustadas, cantidades y otras fechas conservadas | 🔄 [PR #225](https://github.com/grunch/caracas/pull/225), listo para revisión |
 | T82.12 | **Retiro del tejido de 1936** | T82.11 | 16830 casas ajustadas; continuidad sin reducción acumulativa | 🔄 [PR #226](https://github.com/grunch/caracas/pull/226), listo para revisión |
 | T82.13 | **Retiro de 1946 y sus árboles de expansión** | T82.12 | 19102 casas ajustadas; El Silencio fijo y otras fechas conservadas | 🔄 [PR #227](https://github.com/grunch/caracas/pull/227), listo para revisión |
+| T82.1911 | Manzanas completas, patios verdes y continuidad desde 1889 en 1911 | T82 | Generador, retiro único, arbolado y comparación de siete épocas | 🔄 [PR #239](https://github.com/grunch/caracas/pull/239), listo para revisión |
 
 ## Riesgos que el plan vigila
 
@@ -185,3 +186,4 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 - **Datos fuera de git**: sin T11 y T12, un cambio en el pipeline puede romper el sitio sin que ningún test lo vea.
 - **Conflictos en `src/material.js` y `src/main.js`**: varias tareas los tocan; conviene separar el shader en módulos (vértice, suelo, fachadas) dentro de T35 o antes, si los conflictos se repiten.
 - **Rendimiento**: 34 mil casas con fachadas procedurales; medir en cada tarea de la fase 3.
+

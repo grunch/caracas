@@ -1,3 +1,5 @@
+import epocasCompletas from './manzanas/epocas-completas.json'
+const FIN_COMPLETAS=4+epocasCompletas.length
 /** Piloto visual: tres cuadras existentes; no cambia la parcelación ni los datos históricos. */
 import epocasRetiro from './manzanas/epocas-retiro.json'
 import retiros from './manzanas/retiro-1772-piloto.json'
@@ -6,7 +8,7 @@ export const PILOTO_COLONIAL = [
  {id:'U1772-0080',poligono:[[8804.926,7177.362],[8850.839,6921.014],[9035.975,6955.786],[8986.062,7216.633]]},
  {id:'U1772-0095',poligono:[[9094.898,6749.251],[9137.991,6497.003],[9390.107,6543.511],[9342.907,6798.433]]},
  {id:'U1772-0205',poligono:[[8633.142,6663.802],[8686.434,6414.912],[8932.468,6462.707],[8875.451,6711.978]]},
-].map(m=>({...m,contornos:(retiros[m.id]??[]).map(c=>({...c,vida:[1,Math.min(4,epocasRetiro.length+1)]}))}))
+].map(m=>({...m,contornos:(retiros[m.id]??[]).map(c=>({...c,vida:[1,Math.min(FIN_COMPLETAS,epocasRetiro.length+1)]}))}))
 export function nivelDetalle(distancia,anterior=0,liviano=false){
  if(distancia>(anterior?440:400))return 0
  if(liviano)return 1
@@ -21,7 +23,7 @@ export function extraerFrentes({atributos:a,indices},manzanas){
  const salida=[],vistos=new Set(),p=a.position
  for(let j=0;j<indices.length;j+=3){
   const k=indices[j],info=k*4
-  if(a.aInfo[info+2]<256||a.aInfo[info+2]%256!==0||![1,2,3].includes(a.aVida[k*2])||a.aVida[k*2]>=a.aVida[k*2+1]||![2,3,4].includes(a.aVida[k*2+1])||a.aPared[k*3+1]<1.8||Math.abs(a.normal[k*3+1])>.01||a.aTecho[k*4+3]>.5)continue
+  if(a.aInfo[info+2]<256||a.aInfo[info+2]%256!==0||a.aVida[k*2]<1||a.aVida[k*2]>=FIN_COMPLETAS||a.aVida[k*2]>=(a.aVida[k*2+1]||7)||a.aPared[k*3+1]<1.8||Math.abs(a.normal[k*3+1])>.01||a.aTecho[k*4+3]>.5)continue
   const ancla=Array.from(a.aAncla.slice(k*2,k*2+2)),m=manzanas.find(m=>puntoEnPoligono(ancla,m.poligono))
   if(!m)continue
   const bajos=Array.from(indices.slice(j,j+3)).filter(v=>Math.abs(p[v*3+1])<.001).sort((x,y)=>a.aPared[x*3]-a.aPared[y*3])
@@ -29,7 +31,7 @@ export function extraerFrentes({atributos:a,indices},manzanas){
   const [v,w]=bajos,desde=a.aPared[v*3],hasta=a.aPared[w*3],du=hasta-desde
   if(du<.5)continue
   const b=[p[v*3],p[v*3+2]],c=[p[w*3],p[w*3+2]]
-  const nace=a.aVida[k*2],muere=a.aVida[k*2+1]
+  const nace=a.aVida[k*2],muere=a.aVida[k*2+1]||7
   const contornos=[{poligono:m.poligono,vida:[1,4]},...(m.contornos??[])]
   const contorno=contornos.find(t=>nace<t.vida[1]&&muere>t.vida[0]&&[b,c,[(b[0]+c[0])/2,(b[1]+c[1])/2]].every(p=>enBorde(p,t.poligono)))
   if(!contorno)continue

@@ -130,7 +130,7 @@ describe('los patios y solares de las casas', () => {
 
   test('el suelo de la ciudad lee el verde de la época y se lo pasa a sueloColor', () => {
     const f = fragmentDeCiudad()
-    expect(f).toContain('float verde = verdeEn(uvPlano, epoca, pxMundo);')
+    expect(f).toContain('float verde = max(verdeEn(uvPlano, epoca, pxMundo), verdeModernoEn(uvPlano, epoca, pxMundo));')
     expect(f).toContain('ciudad, calle, verde), esSuelo)')
   })
 })
