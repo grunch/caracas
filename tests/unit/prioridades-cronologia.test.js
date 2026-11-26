@@ -16,3 +16,9 @@ describe('presencia física de los hallazgos prioritarios',()=>{
   expect([4,5,6].map(e=>vivaEn(marca('nuevo-circo'),e))).toEqual([false,true,true])
  })
 })
+
+it('en 1843 la plaza tiene nombre oficial de Bolívar sin anticipar el jardín de 1874',()=>{
+ const nombres=marca('plaza-bolivar').nombres
+ expect(nombres.find(([e])=>e===2)?.[1]).toBe('Plaza Bolívar')
+ expect(nombres.find(([e])=>e===2)?.[2]).toMatch(/mercado/)
+})
