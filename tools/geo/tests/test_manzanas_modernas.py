@@ -22,3 +22,18 @@ def test_no_reurbaniza_el_nucleo_heredado_y_retrae_solo_la_expansion():
     m=r['manzanas'][0]
     assert m['retiroAplicadoM']==1
     assert Polygon(m['limite']).bounds==(66,6,104,44)
+
+
+def test_indice_de_ocupacion_conserva_el_resultado_del_selector():
+    from ampliacion_manzanas import seleccionar_ampliacion
+    refs = [{'id':str(i), 'poligono':list(box(i*12,0,i*12+18,20).exterior.coords)[:-1],
+             'estado':'extraida','ocupacion':'edificada'} for i in range(150)]
+    heredadas=[{'id':'vieja','poligono':list(box(-30,0,-10,20).exterior.coords)[:-1]}]
+    normal=seleccionar_ampliacion(refs,heredadas,[],1,5,'extraida')
+    rapido=seleccionar_ampliacion(refs,heredadas,[],1,5,'extraida',indexar_ocupacion=True)
+    assert rapido['cobertura']==normal['cobertura']
+    assert len(rapido['manzanas'])==len(normal['manzanas'])
+    for a,b in zip(rapido['manzanas'],normal['manzanas']):
+        assert a['id']==b['id']
+        assert Polygon(a['limite']).equals(Polygon(b['limite']))
+        assert abs(a['areaM2']-b['areaM2'])<1e-8

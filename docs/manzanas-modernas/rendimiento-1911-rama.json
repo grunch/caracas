@@ -1,0 +1,129 @@
+{
+  "url": "http://localhost:5611/",
+  "gpu": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 2060/PCIe/SSE2, OpenGL ES 3.2)",
+  "conGpu": true,
+  "liviano": false,
+  "ventana": [
+    1280,
+    800
+  ],
+  "año": 1911,
+  "hitos": {
+    "lineaDeTiempo": 4147,
+    "listo": 6999,
+    "primerasCasas": 6999,
+    "casas": 9050,
+    "arboles": 9050
+  },
+  "tareas": {
+    "cuantas": 9,
+    "sumaMs": 3376,
+    "mayorMs": 2134
+  },
+  "pedidos": {
+    "cuantos": 166,
+    "bytes": 24838771,
+    "mayores": [
+      {
+        "url": "node_modules/.vite/deps/three.module-DHArJV33.js?v=be9dc818",
+        "bytes": 6000000
+      },
+      {
+        "url": "datos/ciudad.pak",
+        "bytes": 4990861
+      },
+      {
+        "url": "datos/relieve.bin",
+        "bytes": 1376690
+      },
+      {
+        "url": "plano/suelo-2k.webp",
+        "bytes": 1357588
+      },
+      {
+        "url": "plano/crece.png",
+        "bytes": 899872
+      },
+      {
+        "url": "plano/suelo-manzanas-modernas.png",
+        "bytes": 871984
+      },
+      {
+        "url": "plano/suelo-manzanas.png",
+        "bytes": 828078
+      },
+      {
+        "url": "plano/chico.webp",
+        "bytes": 676404
+      }
+    ]
+  },
+  "segundaVisita": null,
+  "memoria": {
+    "heapMB": 290,
+    "geometriaEnJsMB": 93.7,
+    "vertices": 6095916,
+    "mallas": 746,
+    "geometrias": 403,
+    "texturas": 18
+  },
+  "cuadro": {
+    "centro": {
+      "llamadas": 229,
+      "triangulos": 5611543,
+      "medianaMs": 9.3,
+      "p90Ms": 14.9
+    },
+    "valle": {
+      "llamadas": 404,
+      "triangulos": 3233432,
+      "medianaMs": 9,
+      "p90Ms": 10
+    },
+    "cerca": {
+      "llamadas": 162,
+      "triangulos": 5379528,
+      "medianaMs": 9.1,
+      "p90Ms": 14.5
+    }
+  },
+  "detalleCasas": null,
+  "presupuesto": [
+    {
+      "clave": "casasMs",
+      "valor": 9050,
+      "tope": 5000,
+      "pasa": false
+    },
+    {
+      "clave": "tareaMasLargaMs",
+      "valor": 2134,
+      "tope": 200,
+      "pasa": false
+    },
+    {
+      "clave": "bytesAlAbrir",
+      "valor": 24838771,
+      "tope": 8000000,
+      "pasa": false
+    },
+    {
+      "clave": "heapMB",
+      "valor": 290,
+      "tope": 250,
+      "pasa": false
+    },
+    {
+      "clave": "triangulosCentro",
+      "valor": 5611543,
+      "tope": 2000000,
+      "pasa": false
+    },
+    {
+      "clave": "msPorCuadroCentro",
+      "valor": 9.3,
+      "tope": 16.6,
+      "pasa": true
+    }
+  ]
+}
