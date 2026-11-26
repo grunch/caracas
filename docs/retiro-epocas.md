@@ -24,3 +24,18 @@ Hereda exactamente las 399 manzanas retraídas de 1843 y añade 87 unidades. Se 
 ```sh
 node tools/retiro-manzanas-epoca.mjs 1889 fuentes/derivados/retiro1843 fuentes/derivados/retiro1889
 ```
+
+## 1911: tejido vectorizado
+
+Se conserva la cantidad de casas (14240) y de árboles (27740). Se ajustan 7817 casas; las restantes mantienen su geometría por protección de hitos, contornos estrechos/pequeños o concavidades que no admiten el retiro seguro. El resumen enumera los límites; no se eliminan casas ni se regeneran sus estilos.
+
+El generador agrupa primero por las caras de la red clasificada de 1936 que ya utiliza el vectorizador base. Fuera de ellas usa las componentes del plano y los bloques de expansión de 1946. No se digitaliza una red histórica nueva. El retiro es una escala uniforme nominal de un metro sobre la caja orientada de la manzana: huellas, marcos y alas se transforman juntos, conservando ángulos, semillas, paletas, alturas y vida histórica. Se comprueba que no aumente la invasión del contorno, con la tolerancia de vectorización existente de 0,35 m; los casos incompatibles se conservan. Las manzanas que contienen techos de hitos fijos quedan protegidas.
+
+Los árboles de la fecha se trasladan con la misma transformación y ajustan su radio. Los demás intervalos permanecen intactos. Cada fecha consulta la misma ciudad original de 1946 para calcular la transformación: nunca se encoge nuevamente la salida anterior. La compactación elimina vértices/alas sin uso y une versiones idénticas en intervalos contiguos.
+
+```sh
+node tools/retiro-moderno.mjs 1911 fuentes/derivados/retiro1889 fuentes/derivados/retiro1911
+.venv/bin/python tools/geo/comparar_retiro_epoca.py fuentes/derivados/retiro1889/ciudad.json fuentes/derivados/retiro1911/ciudad.json 4 fuentes/derivados/retiro1889/arboles.bin fuentes/derivados/retiro1911/arboles.bin
+```
+
+La comparación exige igualdad semántica completa fuera del intervalo indicado. Los modelos de hitos, las texturas de los planos y el terreno de las épocas modernas no se escalan.

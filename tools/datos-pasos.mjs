@@ -210,6 +210,10 @@ export const PASOS = [
   },
   ...EPOCAS_RETIRO.slice(1).map((año,i)=>{
     const previo=`fuentes/derivados/retiro${EPOCAS_RETIRO[i]}`,salida=`fuentes/derivados/retiro${año}`
+    if(año>=1911)return {id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,'fuentes/derivados/1946/ciudad-1946.json','fuentes/derivados/1946/informe.json',`${D}/tramos.json`,`${D}/segmentacion/mosaico/clases-costura.png`,`${D}/mosaico.json`],
+      salidas:[`${salida}/ciudad.json`,`${salida}/arboles.bin`,`${salida}/resumen.json`,`${salida}/hitos-fijos.json`],
+      codigo:['tools/retiro-moderno.mjs','tools/geo/retiro_moderno.py','tools/geo/caras.py','tools/geo/lados.py','tools/manzanas-completas.mjs','src/manzanas/epocas-retiro.json','src/hitos.js','src/coords.js','src/poligono.js',...CODIGO_HITOS],
+      cmd:()=>['node','tools/retiro-moderno.mjs',String(año),previo,salida]}
     return {id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,`${previo}/manzanas-${EPOCAS_RETIRO[i]}-informe.json`,`${E}/manzanas-${año}-informe.json`,`${D}/mosaico.json`],
       salidas:[`${salida}/ciudad.json`,`${salida}/arboles.bin`,`${salida}/manzanas-${año}-informe.json`,`${salida}/resumen.json`],
       codigo:['tools/retiro-manzanas-epoca.mjs','tools/manzanas-1843-lib.mjs','tools/geo/retiro_manzanas.py','tools/geo/manzanas_completas.py','tools/manzanas-completas.mjs','tools/manzanas-1772-lib.mjs','tools/manzanas-reservas-lib.mjs','tools/manzanas-arboles-lib.mjs','tools/arboles-lib.mjs','src/manzanas/epocas-retiro.json','src/manzanas/plan.js','src/manzanas/paleta.js','src/manzanas/perimetro.js','src/poligono.js','src/alas.js','src/coords.js','src/hitos.js',...CODIGO_HITOS],

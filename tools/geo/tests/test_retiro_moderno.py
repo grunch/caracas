@@ -41,3 +41,15 @@ def test_compactacion_conserva_continuidad_sin_duplicar_geometria():
  assert c['vida']==[[4,6],[6,0]]
  assert len(c['vertices'])==16
  assert len(c['alas'])==2
+
+def test_agrupa_sin_cruzar_la_calle_y_reserva_el_hito():
+ from tools.geo.retiro_moderno import generar_matrices
+ from shapely.geometry import Point
+ d=ciudad();d['vertices'] += [32,0,52,0,52,20,32,20];d['techos'].append([4,4,1,0,2]);d['vida'].append([5,0])
+ import numpy as np
+ clases=np.zeros((30,60),dtype=np.uint8);clases[0:21,0:21]=3;clases[0:21,32:53]=3
+ buscar,matrices,limites=generar_matrices(d,clases,{'nuevasManzanas':[]},[[[1,1],[2,1],[1,2]]],.5)
+ assert buscar(Point(10,10))!=buscar(Point(42,10))
+ assert buscar(Point(10,10)) not in matrices
+ assert buscar(Point(42,10)) in matrices
+ assert any(x[1]=='contiene un hito fijo' for x in limites)
