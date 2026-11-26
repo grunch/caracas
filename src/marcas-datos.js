@@ -47,9 +47,9 @@ export const MARCAS = Object.freeze([
 
   // --- la plaza y sus alrededores (edificios modelados: la posición sale del hito) ---
   { id: 'plaza-bolivar', hito: 'plaza-bolivar', nace: 1, nivel: 1,
-    nombres: [[1, 'Plaza Mayor', 'La plaza del mercado.'], [3, 'Plaza Bolívar', 'Jardín con la estatua ecuestre, de 1874.']],
-    fuente: `${P36} y ${P89} («Plaza Bolívar»); mercado y estatua: fuentes/imagenes (1852, 1866–1880)`,
-    dudas: 'El nombre «Plaza Bolívar» es anterior a la estatua (CG: decreto de 1842); aquí cambia con el jardín, en la época de 1889.' },
+    nombres: [[1, 'Plaza Mayor', 'La plaza del mercado.'], [2, 'Plaza Bolívar', 'Nombre oficial desde 1842; todavía es la plaza del mercado, sin la estatua de 1874.'], [3, 'Plaza Bolívar', 'Jardín con la estatua ecuestre, de 1874.']],
+    fuente: `${P36} y ${P89} («Plaza Bolívar»); mercado y estatua: fuentes/imagenes (1852, 1866–1880); nombre oficial del 10 de diciembre de 1842: Landaeta Rosales, Grandes honores acordados al Libertador (1900), p. 12, https://archive.org/details/grandeshonoresac00land`,
+    dudas: 'El nombre oficial y el uso como mercado no cambiaron al mismo tiempo. Se mantiene la geometría de mercado en 1843; el jardín y la estatua corresponden a una etapa posterior.' },
   // el punto va en el medio de la nave (39 m al este de la fachada, que es el marco del hito): más lejos del cartel de la plaza
   { id: 'catedral', hito: 'catedral', x: 9156, y: 6816, nombre: 'Catedral', nivel: 2, alto: 16, fuente: `${P36} («Iglesia Catedral»); ${P89} (templo I); ${L43('A', 'Catedral')}` },
   { id: 'palacio-arzobispal', hito: 'palacio-arzobispal', nace: 1, nivel: 3, alto: 13,
@@ -109,8 +109,8 @@ export const MARCAS = Object.freeze([
     dudas: 'Inaugurado en 1905 (CG): va desde la época de 1911.' },
   { id: 'plaza-henry-clay', nombre: 'Plaza Henry Clay', x: 8795, y: 7860, nace: 5, nivel: 3, fuente: `${P36} («Plaza Henry Clay»)` },
   { id: 'plaza-miranda', nombre: 'Plaza Miranda', x: 8085, y: 7690, nace: 5, nivel: 3, fuente: `${P36} («Plaza Miranda»)` },
-  { id: 'circo-metropolitano', nombre: 'Circo Metropolitano', x: 7905, y: 7905, nace: 5, nivel: 3, alto: 10, fuente: `${P36} («Circo Metropolitano»)`,
-    dudas: 'Es anterior a 1936 (CG: fines del siglo XIX); sin cotejar, va solo en 1936.' },
+  { id: 'circo-metropolitano', nombre: 'Circo Metropolitano', x: 7905, y: 7905, nace: 4, muere: 6, nivel: 3, alto: 10, fuente: `${P36} («Circo Metropolitano»); apertura en 1896 y demolición antes de 1946: https://fundaayc.com/category/crono-arquitectura-venezuela/1940-1949/1945/; fecha alternativa de 1942: https://www.academia.edu/39601663/ACS_TESTIGO_PRESENCIAL_CARACAS_1940_1960`,
+    dudas: 'Las fuentes discrepan entre 1942 y 1945 para su desaparición. Ambas excluyen 1946. Hito pendiente de integración: la marca no representa su arquitectura.' },
   { id: 'rotunda', nombre: 'La Rotunda', x: 8660, y: 8560, nace: 3, muere: 5, nivel: 3, alto: 9, nota: 'La cárcel.',
     fuente: `${P89} (30 «Cárcel»); ${P36} (esquina «La Cárcel», el solar ya vacío); nombre: ${CG}`,
     dudas: 'El nombre «La Rotunda» y su demolición en 1936 son CG; el plano de 1889 solo dice «Cárcel».' },
@@ -142,8 +142,8 @@ export const MARCAS = Object.freeze([
   { id: 'hospital-vargas', nombres: [[3, 'Hospital Vargas (en construcción)', 'Las obras iniciadas en 1888 figuran en el plano de 1889.'], [4, 'Hospital Vargas', 'Inaugurado y puesto en funcionamiento en 1891.']], x: 9660, y: 4640, nace: 3, nivel: 2, alto: 9,
     fuente: `${P89} (43 «Hospital Vargas»); ${P36} («Hospital Vargas»); Roger Escalona, Sociedad Venezolana de Historia de la Medicina (2006): https://revista.svhm.org.ve/ediciones/2006/1-2/art-3`,
     dudas: 'La planta dibujada en 1889 no demuestra que todas sus alas estuvieran terminadas. Hito arquitectónico pendiente; no se reproduce un estado exacto de avance de obra.' },
-  { id: 'hijos-de-dios', nombre: 'Cementerio de los Hijos de Dios', x: 8700, y: 3690, nace: 5, nivel: 3, fuente: `${P36} («Cementerio de los Hijos de Dios»)`,
-    dudas: 'Es del siglo XIX (CG) y en 1936 ya estaba clausurado; sin cotejar, va solo en 1936.' },
+  { id: 'hijos-de-dios', nombre: 'Cementerio de los Hijos de Dios', x: 8700, y: 3690, nace: 3, nivel: 3, nota: 'Recinto clausurado, todavía en pie.', fuente: `${P36} («Cementerio de los Hijos de Dios»); ${P89} (cementerio a, «Concepción»); equivalencia de nombres: https://biblat.unam.mx/hevila/BoletindelaAcademiaNacionaldelaHistoriaCaracas/2009/vol92/no365/5.pdf; cronología: https://fundaayc.com/2018/02/09/1951-desaparece-el-cementerio-de-los-hijos-de-dios/`,
+    dudas: 'Abierto en 1856, cerrado al uso en el siglo XIX y demolido después de 1946. Cerrar el cementerio no hizo desaparecer sus muros y nichos. Hito pendiente de integración; se conserva el ancla cartográfica existente.' },
   { id: 'san-jose', nombre: 'San José', x: 10635, y: 5370, nace: 5, nivel: 3, alto: 11, fuente: `${P36} («Iglesia San José»)` },
 
   // --- el oeste: Miraflores, Caño Amarillo, Palo Grande, El Paraíso ---
