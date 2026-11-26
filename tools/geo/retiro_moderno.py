@@ -68,7 +68,7 @@ def generar_matrices(base,clases,ampliacion,obstaculos,metro,caras=()):
         for k in indice.query(p):
             if extras[k].covers(p):return ('1946',int(k))
         return None
-    grupos={};activos={}
+    grupos={}
     for t,vida in zip(base['techos'],base['vida']):
         if vida[1] and vida[1]<=4:continue
         original=Polygon(np.array(base['vertices'][t[0]*2:(t[0]+t[1])*2]).reshape(-1,2));p=original.buffer(0)
@@ -76,7 +76,6 @@ def generar_matrices(base,clases,ampliacion,obstaculos,metro,caras=()):
         k=buscar(p.representative_point())
         if k is not None:
             grupos.setdefault(k,[]).append(p);asignaciones[original.wkb]=k
-            if vida[0]<=4 and (not vida[1] or vida[1]>4):activos[k]=activos.get(k,0)+1
     hitos=unary_union([Polygon(p) for p in obstaculos]);matrices={};limites=[]
     for k,casas in grupos.items():
         if k[0]=='cara':p=caras[k[1]]
@@ -104,7 +103,7 @@ def generar_matrices(base,clases,ampliacion,obstaculos,metro,caras=()):
             if all(scale(c,xfact=s,yfact=s,origin=candidato).difference(envolvente).area<=c.difference(envolvente).area+.01 for c in casas):centro=candidato;break
         if centro is None:limites.append([list(k),'retiro invadiría una concavidad']);continue
         matrices[k]=(centro.x,centro.y,s)
-    return buscar,matrices,[[*limite,activos.get(tuple(limite[0]),0)] for limite in limites]
+    return buscar,matrices,limites
 
 
 def compactar(datos):
