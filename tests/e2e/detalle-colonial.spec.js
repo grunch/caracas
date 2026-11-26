@@ -16,8 +16,11 @@ test('piloto colonial: balcones de cerca, LOD distante y continuidad y apagado d
  await page.evaluate(()=>window.lab.cam.jump({x:0,z:0,dist:2500,yaw:0,pitch:1}))
  await expect.poll(()=>page.evaluate(()=>window.lab.detalleColonial.cuenta.mallas)).toBe(0)
  await page.evaluate(()=>{window.lab.cam.jump(window.lab.detalleColonial.vista);window.lab.lineaDeTiempo.elegir(4)})
- await expect.poll(()=>page.evaluate(()=>window.lab.detalleColonial.cuenta.mallas),{timeout:15000}).toBe(0)
+ // la ola avanza por cuadros (paso máximo de 1 s con render por software): se espera que termine, no un plazo fijo
+ await page.waitForFunction(()=>window.lab.ciudad.U.uEpocaA.value===4&&window.lab.ciudad.U.uOlaEpoca.value>=9000)
+ await expect.poll(()=>page.evaluate(()=>window.lab.detalleColonial.cuenta.mallas)).toBe(0)
  await page.evaluate(()=>window.lab.lineaDeTiempo.elegir(1))
+ await page.waitForFunction(()=>window.lab.ciudad.U.uEpocaA.value===1&&window.lab.ciudad.U.uOlaEpoca.value>=9000)
  await expect.poll(()=>page.evaluate(()=>window.lab.detalleColonial.cuenta.mallas)).toBeGreaterThan(0)
  expect(errores).toEqual([])
 })
