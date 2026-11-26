@@ -292,8 +292,17 @@ export const FICHAS = Object.freeze({
   'palo-grande': {
     textos: [[4, 'La estación del Gran Ferrocarril de Venezuela, al oeste: el plano de 1911 la rotula «Estación Palo Grande» y «G.F.V.».']],
   },
+  'hotel-majestic': {
+    textos: [[5, 'El Hotel Majestic fue inaugurado el 30 de diciembre de 1930 frente al Teatro Municipal y la antigua plaza de San Pablo. Por ello corresponde a la Caracas de 1936.'],
+      [6, 'El Majestic seguía abierto en 1946. La fotografía de Willem van de Poll de 1948 permite reconocer sus balcones, toldos y torre de esquina. Fue demolido en 1949 para las obras del Centro Simón Bolívar.']],
+    dudas: 'La marca ubica aproximadamente el sector. La identificación precisa del solar y el modelo arquitectónico siguen pendientes; no se representan las casas genéricas como si fueran el hotel.',
+  },
+  'san-bernardino': {
+    textos: [[6, 'En 1939 se constituyó la empresa para transformar la hacienda San Bernardino en urbanización, con proyecto de Maurice Rotival. El plano basado en fotos aéreas de 1946 ya nombra San Bernardino y dibuja sus avenidas y viviendas.']],
+    dudas: 'El conjunto no corresponde a la época de 1936. La fecha de formación de la empresa no fecha cada edificio del barrio.',
+  },
   'el-paraiso': {
-    textos: [[4, 'La ciudad cruza el Guaire: el plano de 1911 ya rotula «El Paraíso», al suroeste, con su hipódromo.']],
+    textos: [[4, 'La ciudad cruza el Guaire: el plano de 1911 ya rotula «El Paraíso», al suroeste, con su hipódromo.'], [5, 'El Paraíso continúa en el plano DCN de 1936. Sus calles y edificaciones forman parte del tejido del plano; la marca de sector no equivale a una reconstrucción individual de sus quintas.']],
   },
   'cementerio-sur': {
     textos: [[3, 'El Cementerio General del Sur abrió en 1876 en Tierra de Jugo, al sur del Guaire. Manuel Landaeta Rosales documenta la resolución de 1875 para construirlo y el decreto de apertura de 1876.'],
