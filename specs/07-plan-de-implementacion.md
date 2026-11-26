@@ -179,7 +179,6 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T82.12 | **Retiro del tejido de 1936** | T82.11 | 16830 casas ajustadas; continuidad sin reducción acumulativa | 🔄 [PR #226](https://github.com/grunch/caracas/pull/226), listo para revisión |
 | T82.13 | **Retiro de 1946 y sus árboles de expansión** | T82.12 | 19102 casas ajustadas; El Silencio fijo y otras fechas conservadas | 🔄 [PR #227](https://github.com/grunch/caracas/pull/227), listo para revisión |
 | T82.1911 | Manzanas completas, patios verdes y continuidad desde 1889 en 1911 | T82 | Generador, retiro único, arbolado y comparación de siete épocas | 🔄 [PR #239](https://github.com/grunch/caracas/pull/239), listo para revisión |
-
 | T82.1936 | Manzanas completas, patios verdes y continuidad desde 1911 en 1936 | T82.1911 | Herencia exacta, ampliación, retiro único y arbolado | 🔄 [PR #240](https://github.com/grunch/caracas/pull/240), listo para revisión |
 
 ## Riesgos que el plan vigila
