@@ -170,7 +170,7 @@ export const PASOS = [
     entradas: [`${E}/ciudad-manzanas-1889.json`, 'fuentes/mapas/1950-archiveorg-plano-de-caracas-dcn/original.tif',
       'fuentes/mapas/1950-archiveorg-plano-de-caracas-dcn/ficha.json','tools/geo/gcp/1946-cuadricula.json','tools/geo/referencias/1946-reservas.json','public/plano/crece.png'],
     salidas: ['fuentes/derivados/1946/ciudad-1946.json','fuentes/derivados/1946/calzado.json','fuentes/derivados/1946/informe.json',
-      'public/datos/1946.json','public/datos/arboles-1946.bin','public/plano/1946/expansion.png','public/plano/1946/crece.png',
+      'public/datos/1946.json','fuentes/derivados/1946/arboles-base.bin','public/plano/1946/expansion.png','public/plano/1946/crece.png',
       ...['chico','medio','grande'].map(n=>`public/plano/1946/${n}.webp`)],
     codigo: [...GEO('mapa_1946','calce','calce_correlacion','tps'), 'src/hitos.js',...CODIGO_HITOS],
     cmd: () => [PY,'tools/geo/mapa_1946.py'],
@@ -210,8 +210,8 @@ export const PASOS = [
   },
   ...EPOCAS_RETIRO.slice(1).map((año,i)=>{
     const previo=`fuentes/derivados/retiro${EPOCAS_RETIRO[i]}`,salida=`fuentes/derivados/retiro${año}`
-    if(año>=1911)return {id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,'fuentes/derivados/1946/ciudad-1946.json','fuentes/derivados/1946/informe.json',`${D}/tramos.json`,`${D}/segmentacion/mosaico/clases-costura.png`,`${D}/mosaico.json`],
-      salidas:[`${salida}/ciudad.json`,`${salida}/arboles.bin`,`${salida}/resumen.json`,`${salida}/hitos-fijos.json`],
+    if(año>=1911)return {id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,'fuentes/derivados/1946/ciudad-1946.json','fuentes/derivados/1946/informe.json',`${D}/tramos.json`,`${D}/segmentacion/mosaico/clases-costura.png`,`${D}/mosaico.json`,...(año===1946?['fuentes/derivados/1946/arboles-base.bin']:[])],
+      salidas:[`${salida}/ciudad.json`,`${salida}/arboles.bin`,`${salida}/resumen.json`,`${salida}/hitos-fijos.json`,...(año===1946?[`${salida}/arboles-1946.bin`]:[])],
       codigo:['tools/retiro-moderno.mjs','tools/geo/retiro_moderno.py','tools/geo/caras.py','tools/geo/lados.py','tools/manzanas-completas.mjs','src/manzanas/epocas-retiro.json','src/hitos.js','src/coords.js','src/poligono.js',...CODIGO_HITOS],
       cmd:()=>['node','tools/retiro-moderno.mjs',String(año),previo,salida]}
     return {id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,`${previo}/manzanas-${EPOCAS_RETIRO[i]}-informe.json`,`${E}/manzanas-${año}-informe.json`,`${D}/mosaico.json`],
@@ -223,6 +223,11 @@ export const PASOS = [
     id: 'empacar', entradas: [`${RETIRO_ULTIMO}/ciudad.json`], salidas: ['public/datos/ciudad.pak'],
     codigo: ['tools/empacar-ciudad.mjs','tools/empacar-lib.mjs','tools/pak.mjs','src/ciudad.js'],
     cmd: () => ['node','tools/empacar-ciudad.mjs',`${RETIRO_ULTIMO}/ciudad.json`],
+  },
+  {
+    id: 'arboles-1946', entradas: ['fuentes/derivados/retiro1946/arboles-1946.bin'], salidas: ['public/datos/arboles-1946.bin'],
+    codigo: [],
+    cmd: () => ['node','--input-type=module','-e',"import {copyFile} from 'node:fs/promises';await copyFile('fuentes/derivados/retiro1946/arboles-1946.bin','public/datos/arboles-1946.bin')"],
   },
   {
     id: 'arboles', entradas: [`${RETIRO_ULTIMO}/arboles.bin`], salidas: ['public/datos/arboles.bin'],

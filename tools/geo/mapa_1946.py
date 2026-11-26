@@ -155,7 +155,7 @@ def main():
     crece[:,:,3]=255
     crece[campo[:,:,2]>0,3]=192;crece[campo[:,:,1]>0,3]=128;crece[campo[:,:,0]>0,3]=64
     cv2.imwrite(str(RAIZ/'public/plano/1946/crece.png'),crece)
-    (RAIZ/'public/datos/arboles-1946.bin').write_bytes(b''.join(arboles))
+    (out/'arboles-base.bin').write_bytes(b''.join(arboles))
     info['arbolesNuevos']=len(arboles)
     escribir(out/'informe.json',info)
     escribir(RAIZ/'public/datos/1946.json',{k:v for k,v in info.items() if k!='nuevasManzanas'})
