@@ -22,3 +22,13 @@ def test_no_reurbaniza_el_nucleo_heredado_y_retrae_solo_la_expansion():
     m=r['manzanas'][0]
     assert m['retiroAplicadoM']==1
     assert Polygon(m['limite']).bounds==(66,6,104,44)
+
+
+def test_cara_con_isla_vacia_conserva_su_hueco():
+    isla=box(40,40,60,60)
+    cara=Polygon(box(0,0,100,100).exterior,[isla.exterior])
+    ds=datos([box(10,10,30,30),box(70,70,90,90)])
+    refs=referencias(ds,4,[cara,isla],1)
+    assert len(refs)==1
+    r=refs[0]
+    assert not Polygon(r['poligono'],r.get('huecos',[])).intersects(box(45,45,55,55))
