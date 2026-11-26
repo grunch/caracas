@@ -11,33 +11,40 @@ const leer = (campo, x, y, caja) => campo.distancias[
   Math.floor(((y - caja[1]) * METRO) / campo.pasoY) * campo.ancho + Math.floor(((x - caja[0]) * METRO) / campo.pasoX)]
 
 describe('poligonosDeInforme', () => {
-  test('devuelve los contornos de las manzanas, congelados, y salta las que no tienen tres puntos', () => {
+  test('devuelve el contorno de cada manzana como anillos, congelados, y salta las que no tienen tres puntos', () => {
     // Arrange
     const informe = { manzanas: [{ id: 'A', poligono: CUADRADO }, { id: 'B', poligono: [[0, 0], [1, 1]] }, { id: 'C' }] }
     // Act
-    const poligonos = poligonosDeInforme(informe)
+    const manzanas = poligonosDeInforme(informe)
     // Assert
-    expect(poligonos).toHaveLength(1)
-    expect(poligonos[0]).toEqual(CUADRADO)
-    expect(Object.isFrozen(poligonos[0])).toBe(true)
+    expect(manzanas).toEqual([[CUADRADO]])
+    expect(Object.isFrozen(manzanas[0][0])).toBe(true)
+  })
+
+  test('prefiere el límite real (con sus huecos) al rectángulo del plan', () => {
+    const limite = [[100, 100], [140, 100], [140, 180], [100, 180]]
+    const hueco = [[110, 110], [120, 110], [120, 120], [110, 120]]
+    const manzanas = poligonosDeInforme({ manzanas: [{ id: 'A', poligono: CUADRADO, limite, huecos: [hueco, [[0, 0]]] }] })
+    expect(manzanas).toEqual([[limite, hueco]])
   })
 
   test('falla sin lista de manzanas o con una coordenada que no es un par de números', () => {
     expect(() => poligonosDeInforme({})).toThrow(/manzanas/)
     expect(() => poligonosDeInforme({ manzanas: [{ id: 'X', poligono: [[0, 0], [1, 'a'], [2, 2]] }] })).toThrow(/X/)
+    expect(() => poligonosDeInforme({ manzanas: [{ id: 'Y', poligono: CUADRADO, limite: CUADRADO, huecos: [[[0, 0], [1, null], [2, 2]]] }] })).toThrow(/Y/)
   })
 })
 
 describe('cajaDeManzanas', () => {
   test('envuelve todos los contornos con DIST_MAX_M de margen, en px enteros', () => {
     const margen = DIST_MAX_M / METRO
-    expect(cajaDeManzanas([[CUADRADO]], METRO)).toEqual([100 - margen, 100 - margen, 180 + margen, 180 + margen])
+    expect(cajaDeManzanas([[[CUADRADO]]], METRO)).toEqual([100 - margen, 100 - margen, 180 + margen, 180 + margen])
   })
 })
 
 describe('distanciaFirmada', () => {
-  const caja = cajaDeManzanas([[CUADRADO]], METRO)
-  const campo = distanciaFirmada([CUADRADO], caja, { metro: METRO })
+  const caja = cajaDeManzanas([[[CUADRADO]]], METRO)
+  const campo = distanciaFirmada([[CUADRADO]], caja, { metro: METRO })
 
   test('es positiva adentro de la manzana y negativa afuera, en metros hasta el borde', () => {
     // el centro del cuadrado está a 20 m de cada lado (saturado a DIST_MAX_M)
@@ -52,10 +59,18 @@ describe('distanciaFirmada', () => {
     for (const d of campo.distancias) expect(Math.abs(d)).toBeLessThanOrEqual(DIST_MAX_M)
   })
 
+  test('un hueco de la manzana queda afuera (calle), aunque otra manzana no lo tape', () => {
+    const hueco = [[120, 120], [160, 120], [160, 160], [120, 160]] // 20 m de lado, en el medio
+    const c = cajaDeManzanas([[[CUADRADO, hueco]]], METRO)
+    const conHueco = distanciaFirmada([[CUADRADO, hueco]], c, { metro: METRO })
+    expect(leer(conHueco, 140, 140, c)).toBeLessThan(0)
+    expect(leer(conHueco, 106, 140, c)).toBeGreaterThan(0)
+  })
+
   test('une las manzanas que se pisan sin restarse', () => {
     const otro = CUADRADO.map(([x, y]) => [x + 40, y])
-    const c = cajaDeManzanas([[CUADRADO, otro]], METRO)
-    const unidos = distanciaFirmada([CUADRADO, otro], c, { metro: METRO })
+    const c = cajaDeManzanas([[[CUADRADO], [otro]]], METRO)
+    const unidos = distanciaFirmada([[CUADRADO], [otro]], c, { metro: METRO })
     // (160, 140) está adentro de los dos
     expect(leer(unidos, 160, 140, c)).toBeGreaterThan(0)
   })
@@ -84,8 +99,8 @@ describe('despejarPlazas', () => {
   // dos manzanas de 40 m separadas por 60 m de plaza; afuera de todo, campo abierto sin límite
   const oeste = CUADRADO
   const este = CUADRADO.map(([x, y]) => [x + 200, y])
-  const caja = cajaDeManzanas([[oeste, este]], METRO)
-  const campo = distanciaFirmada([oeste, este], caja, { metro: METRO })
+  const caja = cajaDeManzanas([[[oeste], [este]]], METRO)
+  const campo = distanciaFirmada([[oeste], [este]], caja, { metro: METRO })
 
   test('la plaza (el claro cerrado más lejos que la banda de calle) queda como calle', () => {
     // la plaza, en (230, 140): a 25 m de las dos manzanas → abierto antes de despejar

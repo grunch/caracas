@@ -1,4 +1,4 @@
-// El suelo verde de las manzanas de cada época: de los contornos de manzana del generador
+// El suelo verde de las manzanas de cada época: de los contornos de manzana del generador (el límite real con sus huecos)
 // (fuentes/derivados/epocas/manzanas-<año>-informe.json, px del plano base) a un campo de distancia firmada por
 // época, uno por canal (R 1772 · G 1843 · B 1889). Cada texel dice a cuántos metros está el borde de manzana más
 // cercano: positivo adentro (patios, solares, jardines de las casas: verde) y negativo afuera (calle: tierra; más
@@ -28,39 +28,52 @@ export const EPOCAS_SUELO = Object.freeze([
 
 const esCoordenada = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite)
 
-/** Los contornos de las manzanas de un informe, validados y congelados. Salta las que no tienen tres puntos. */
+const anillo = (puntos) => Object.freeze(puntos.map((p) => Object.freeze([...p])))
+
+/**
+ * Las manzanas de un informe, validadas y congeladas: cada una, sus anillos ([contorno, ...huecos]). El contorno es
+ * el límite real (`limite`, con sus `huecos`: el generador recorta las casas contra él) y, si no lo hay, el
+ * rectángulo del plan (`poligono`). Salta los anillos de menos de tres puntos y las manzanas sin contorno.
+ */
 export function poligonosDeInforme(informe) {
   if (!Array.isArray(informe?.manzanas)) throw new Error('informe de manzanas: falta la lista de manzanas')
-  return Object.freeze(informe.manzanas
-    .filter((m) => Array.isArray(m.poligono) && m.poligono.length >= 3)
-    .map((m) => {
-      if (!m.poligono.every(esCoordenada)) throw new Error(`manzana ${m.id}: hay una coordenada que no es un par de números`)
-      return Object.freeze(m.poligono.map((p) => Object.freeze([...p])))
-    }))
+  const manzanas = []
+  for (const m of informe.manzanas) {
+    const contorno = Array.isArray(m.limite) && m.limite.length >= 3 ? m.limite : m.poligono
+    if (!Array.isArray(contorno) || contorno.length < 3) continue
+    const anillos = [contorno, ...(Array.isArray(m.limite) ? (m.huecos ?? []) : [])]
+    if (!anillos.every((a) => Array.isArray(a) && a.every(esCoordenada))) throw new Error(`manzana ${m.id}: hay una coordenada que no es un par de números`)
+    manzanas.push(Object.freeze(anillos.filter((a) => a.length >= 3).map(anillo)))
+  }
+  return Object.freeze(manzanas)
 }
 
-/** [x0, y0, x1, y1] en px enteros del plano: todos los contornos de todas las épocas, con DIST_MAX_M de margen. */
-export function cajaDeManzanas(poligonosPorEpoca, metro) {
+/** [x0, y0, x1, y1] en px enteros del plano: todas las manzanas (de anillos) de todas las épocas, con DIST_MAX_M de margen. */
+export function cajaDeManzanas(manzanasPorEpoca, metro) {
   const margen = DIST_MAX_M / metro
-  const puntos = poligonosPorEpoca.flat(2)
-  const xs = puntos.map((p) => p[0])
-  const ys = puntos.map((p) => p[1])
-  return [Math.floor(Math.min(...xs) - margen), Math.floor(Math.min(...ys) - margen),
-    Math.ceil(Math.max(...xs) + margen), Math.ceil(Math.max(...ys) + margen)]
+  // sin Math.min(...): los límites reales traen decenas de miles de vértices
+  const [x0, y0, x1, y1] = manzanasPorEpoca.flat(3).reduce(([a, b, c, d], [x, y]) =>
+    [Math.min(a, x), Math.min(b, y), Math.max(c, x), Math.max(d, y)], [Infinity, Infinity, -Infinity, -Infinity])
+  return [Math.floor(x0 - margen), Math.floor(y0 - margen), Math.ceil(x1 + margen), Math.ceil(y1 + margen)]
 }
 
-/** Llena (par-impar, por fila) cada polígono en la máscara; los que se pisan se suman, no se restan. */
-function rellenar(mascara, ancho, alto, poligonos, aTexel) {
-  for (const poligono of poligonos) {
-    const p = poligono.map(aTexel)
-    const ys = p.map((q) => q[1])
+/**
+ * Llena cada manzana en la máscara: par-impar por fila con todos sus anillos juntos, así sus huecos quedan
+ * afuera. Las manzanas que se pisan se suman, no se restan.
+ */
+function rellenar(mascara, ancho, alto, manzanas, aTexel) {
+  for (const anillos of manzanas) {
+    const lados = anillos.flatMap((a) => {
+      const p = a.map(aTexel)
+      return p.map((q, k) => [q, p[(k + 1) % p.length]])
+    })
+    const ys = lados.map(([a]) => a[1])
     const j0 = Math.max(0, Math.floor(Math.min(...ys)))
     const j1 = Math.min(alto - 1, Math.ceil(Math.max(...ys)))
     for (let j = j0; j <= j1; j++) {
       const y = j + 0.5
       const cortes = []
-      for (let k = 0; k < p.length; k++) {
-        const [a, b] = [p[k], p[(k + 1) % p.length]]
+      for (const [a, b] of lados) {
         if ((a[1] <= y) !== (b[1] <= y)) cortes.push(a[0] + ((y - a[1]) / (b[1] - a[1])) * (b[0] - a[0]))
       }
       cortes.sort((u, v) => u - v)
@@ -122,11 +135,11 @@ function distanciaA(mascara, ancho, alto, objetivo) {
 }
 
 /**
- * La distancia firmada a la unión de las manzanas sobre la caja (px del plano): { ancho, alto, pasoX, pasoY,
+ * La distancia firmada a la unión de las manzanas (cada una, sus anillos) sobre la caja (px del plano): { ancho, alto, pasoX, pasoY,
  * distancias } con un Float32 por texel de M_POR_PX (fila 0 al norte), en metros, positiva adentro, saturada en
  * ±DIST_MAX_M. Se mide en una máscara de M_FINO y se promedia: la distancia a un borde recto es lineal.
  */
-export function distanciaFirmada(poligonos, caja, { metro }) {
+export function distanciaFirmada(manzanas, caja, { metro }) {
   const [x0, y0, x1, y1] = caja
   const factor = Math.round(M_POR_PX / M_FINO)
   const ancho = Math.ceil((x1 - x0) * metro / M_POR_PX)
@@ -137,7 +150,7 @@ export function distanciaFirmada(poligonos, caja, { metro }) {
   const [anchoF, altoF] = [ancho * factor, alto * factor]
   const [pasoFX, pasoFY] = [pasoX / factor, pasoY / factor]
   const mascara = new Uint8Array(anchoF * altoF)
-  rellenar(mascara, anchoF, altoF, poligonos, ([x, y]) => [(x - x0) * metro / pasoFX, (y - y0) * metro / pasoFY])
+  rellenar(mascara, anchoF, altoF, manzanas, ([x, y]) => [(x - x0) * metro / pasoFX, (y - y0) * metro / pasoFY])
   const hastaAfuera = distanciaA(mascara, anchoF, altoF, 0)
   const hastaAdentro = distanciaA(mascara, anchoF, altoF, 1)
   const pasoF = (pasoFX + pasoFY) / 2

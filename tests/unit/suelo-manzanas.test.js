@@ -120,10 +120,12 @@ describe('los patios y solares de las casas', () => {
     return s.fragmentShader
   }
 
-  test('son verdes hasta 1889 y de tierra después: el main pone gVerdor con la época del fragmento', () => {
+  test('son verdes de 1772 a 1889, con el campo cargado; de tierra en 1578, desde 1911 y sin datos', () => {
     expect(GLSL_TECHO).toContain('c = mix(c, mix(verde, PATIO_VERDE_OSCURO * 0.8, 0.6 * matas * cerca), gVerdor);')
     expect(GLSL_TECHO).toContain('mix(vec3(0.42, 0.38, 0.30), PATIO_VERDE, gVerdor)')
-    expect(fragmentDeCiudad()).toContain('gVerdor = 1.0 - smoothstep(3.5, 4.0, epocaAqui(length(vMundo.xz)));')
+    const f = fragmentDeCiudad()
+    expect(f).toContain('gVerdor = uManzanasOn * smoothstep(0.5, 1.0, epocaVerde)')
+    expect(f).toContain('* (1.0 - smoothstep(3.5, 4.0, epocaVerde));')
   })
 
   test('el suelo de la ciudad lee el verde de la época y se lo pasa a sueloColor', () => {

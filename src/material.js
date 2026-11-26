@@ -72,7 +72,10 @@ const FRAGMENTO_COLOR = /* glsl */ `
   gAltoPiso = max(vAltoPiso, 1.0);
   gPretil = vPretil;
   // los patios y solares de las casas, verdes en las épocas con suelo verde (src/shader/techo.js)
-  gVerdor = 1.0 - smoothstep(${Math.max(...EPOCAS_CANALES)}.5, ${Math.max(...EPOCAS_CANALES) + 1}.0, epocaAqui(length(vMundo.xz)));
+  // (solo con el campo de manzanas cargado, como el suelo; y solo en sus épocas: ni 1578 ni 1911)
+  float epocaVerde = epocaAqui(length(vMundo.xz));
+  gVerdor = uManzanasOn * smoothstep(${Math.min(...EPOCAS_CANALES) - 1}.5, ${Math.min(...EPOCAS_CANALES)}.0, epocaVerde)
+    * (1.0 - smoothstep(${Math.max(...EPOCAS_CANALES)}.5, ${Math.max(...EPOCAS_CANALES) + 1}.0, epocaVerde));
   // cada fragmento calcula o el techo o la fachada (y el suelo, ninguno de los dos): con if, que el
   // render por software salta enteros. Acostada en la hoja, el techo va en su tono medio, sin dibujo
   vec4 casa = vec4(diffuseColor.rgb, 0.0);
