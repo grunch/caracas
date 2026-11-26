@@ -233,7 +233,7 @@ export const PASOS = [
     // los planos viejos calzados sobre 1936 (pasos calce-<año>): una textura con alfa por época; las
     // salidas según el recorte de cada calzado.json (se suman en pasosCompletos)
     id: 'planos-epocas', salidas: ['public/plano/epocas.json'],
-    entradas: CALCES.flatMap(([año]) => ['tif', 'json'].map((x) => `fuentes/derivados/${año}/calzado.${x}`)),
+    entradas: [...CALCES.flatMap(([año]) => ['tif', 'json'].map((x) => `fuentes/derivados/${año}/calzado.${x}`)), 'fuentes/derivados/1946/calzado.json'],
     codigo: ['tools/planos-epocas.mjs', 'tools/planos-epocas-lib.mjs'],
     cmd: () => ['node', 'tools/planos-epocas.mjs'],
   },
