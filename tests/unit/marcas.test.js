@@ -75,9 +75,9 @@ describe('las marcas de Caracas (src/marcas-datos.js)', () => {
     expect(validarMarcas(MARCAS, { hitos: HITOS, plano: PLANO })).toEqual([])
   })
 
-  test('hay entre 40 y 61, y todas las épocas tienen marcas de los tres niveles', () => {
+  test('hay al menos 40 marcas únicas y todas las épocas tienen los tres niveles', () => {
     expect(MARCAS.length).toBeGreaterThanOrEqual(40)
-    expect(MARCAS.length).toBeLessThanOrEqual(61)
+    expect(new Set(MARCAS.map(m => m.id)).size).toBe(MARCAS.length)
     const marcas = normalizarMarcas(MARCAS, { hitos: HITOS, coords })
     for (let e = PRIMERA_EPOCA; e <= 6; e++) {
       const vivas = marcas.filter((m) => vivaEn(m, e))
