@@ -61,3 +61,9 @@ def test_los_arboles_respetan_el_ala_de_esquina_unida_a_inglete():
     assert techo.covers(Point(5,15))
     assert not techo.intersects(Point(11,15).buffer(1))  # el resto del patio queda abierto
     assert not techo.intersects(Point(10,35).buffer(1))  # y el solar también
+
+
+def test_indice_de_hitos_conserva_arboles_y_casas_del_recorte():
+    ms=[{'id':f'M{i}','poligono':[[i*250,0],[i*250+200,0],[i*250+200,200],[i*250,200]],'casas':[]} for i in range(6)]
+    obstaculos=[[[0,0],[70,0],[70,200],[0,200]],[[10000,10000],[10100,10000],[10100,10100],[10000,10100]]]
+    assert recortar_y_arbolar(ms,obstaculos,.5,indexar_hitos=True)==recortar_y_arbolar(ms,obstaculos,.5)
