@@ -20,6 +20,7 @@ import { crearTeselasFinas } from './teselas.js'
 import { crearLineaDeTiempo, crearSecuencia, escalaCrece, PRIMERA_EPOCA } from './epocas.js'
 import { crearPlanosDeEpoca, planoDeEpoca } from './planos.js'
 import { cargarCallesDeEpoca } from './calles-epoca.js'
+import { cargarSueloManzanas } from './suelo-manzanas.js'
 import { SIN_PLANO } from './shader/plano.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
@@ -349,6 +350,10 @@ Promise.all([crecePedido, indicePlanos])
       cargarCallesDeEpoca(1772, { U, plano: meta.plano, epocas, cargar: cargarCampo })
         .then(() => pedirCuadro(3))
         .catch((e) => console.warn(`calles de época: ${e.message}`))
+      // los patios y el terreno libre de 1772, 1843 y 1889, verdes (src/suelo-manzanas.js)
+      cargarSueloManzanas({ U, plano: meta.plano, cargar: cargarCampo })
+        .then(() => pedirCuadro(3))
+        .catch((e) => console.warn(`suelo de manzanas: ${e.message}`))
     }
     if (epocaPedida !== null) lineaDeTiempo.elegir(epocaPedida)
     if (andarAlLlegar) lineaDeTiempo.andar()

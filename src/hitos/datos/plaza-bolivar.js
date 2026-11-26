@@ -32,6 +32,9 @@ export const plazaBolivar = Object.freeze({
   nace: 1,
   muere: 0,
   planta: [rectanguloPx(marco, ANCHO, FONDO)],
+  // la explanada sigue el plano del terreno (src/relieve.js): sin ella, el suelo de la ciudad asomaba por encima del
+  // piso en la mitad norte, que sube, y la plaza quedaba de dos colores
+  terraza: { ancho: ANCHO, fondo: FONDO },
   transitable: true, // la plaza se camina: en el modo a pie chocan sus piezas, no su planta (T33j.7a)
   suprime: [rectanguloPx(marco, ANCHO, FONDO)],
   fuente: 'Plano de Caracas de 1936 (recuadro "Plaza Bolívar"); grabado del mercado de 1852; fotos de 1866, 1874, ~1880, ~1900, 1910 y ~1930 (fuentes/imagenes)',
