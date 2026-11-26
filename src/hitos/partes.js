@@ -3,6 +3,7 @@
  * está quién la dibuja. Una parte recibe el pintor del hito ya con su vida (nace, muere) y sus medidas en
  * metros, en el marco del hito: a a lo largo del eje, b a su derecha.
  */
+import { teatroMunicipal } from './teatro-municipal.js'
 import { casaAmarilla } from './casa-amarilla.js'
 import { capitolio } from './capitolio.js'
 import { palacioArzobispal } from './palacio-arzobispal.js'
@@ -57,6 +58,7 @@ const frente = (p, { a = 0, b = 0, h = 0, mira = [0, 1] }) => p.mirando(a, h, b,
 export const parteDe = (tipo) => (Object.hasOwn(PARTES, tipo) ? PARTES[tipo] : undefined)
 
 export const PARTES = Object.freeze({
+  teatroMunicipal(p, medidas) { teatroMunicipal(p, medidas) },
   casaAmarilla(p, medidas) { casaAmarilla(p, medidas) },
   capitolio(p, medidas) { capitolio(p, medidas) },
   palacioArzobispal(p, medidas) { palacioArzobispal(p, medidas) },

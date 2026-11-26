@@ -142,7 +142,8 @@ describe('los edificios civiles', () => {
     // T41c añade cinco etapas de Casa Amarilla (<220 mil, con envolvente compartida); T41d, el Capitolio desde
     // 1772 (~73 mil, con el cuerpo neoclásico compartido de 1889 a 1936); T41g, San Francisco en tres tramos
     // (~12,7 mil, sin interior). Siempre en el mismo draw call.
-    expect(d.indices.length / 3).toBeLessThan(465_000)
+    // Teatro Municipal: +36.247 triángulos, compartidos entre 1889/1911/1936. Total medido: 498.150.
+    expect(d.indices.length / 3).toBeLessThan(500_000)
     expect(d.rangos.length).toBe(HITOS.length)
   }, 15_000)
 })

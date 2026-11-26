@@ -103,7 +103,7 @@ describe('construirHitos', () => {
   })
 
   test('presupuesto: pocos triángulos para un solo draw call', () => {
-    expect(datos.indices.length / 3).toBeLessThan(465_000) // T41g: San Francisco por épocas (ver specs/08-san-francisco-por-epocas.md)
+    expect(datos.indices.length / 3).toBeLessThan(500_000) // T40b: +36.247 del Teatro Municipal; total 498.150, una malla.
   })
 
   test('cada hito ocupa un rango de vértices y queda cerca de su lugar en el plano', () => {

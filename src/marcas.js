@@ -45,7 +45,7 @@ export function normalizarMarcas(filas, { hitos = [], coords }) {
     const nace = f.nace ?? hito?.nace ?? PRIMERA_EPOCA
     const { x, z } = coords.aMundo(px, py)
     return Object.freeze({
-      id: f.id, orden, px, py, x, z, nace, muere: f.muere ?? 0, nivel: f.nivel,
+      id: f.id, orden, px, py, x, z, nace, naceHito: hito?.nace ?? nace, muere: f.muere ?? 0, nivel: f.nivel,
       alto: f.alto ?? 0, radio: f.radio ?? RADIO_M, hito: f.hito ?? null,
       nombres: Object.freeze(nombresDe(f, nace)), fuente: f.fuente, dudas: f.dudas ?? '',
     })
