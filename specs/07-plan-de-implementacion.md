@@ -163,6 +163,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T82.7 | **Patios y terreno libre verdes en 1772, 1843 y 1889**: el suelo adentro de las manzanas de la época y el terreno desocupado (a más de 12 m de toda manzana) van del verde del campo de alrededor; también el piso de patios y solares de las casas. Calles y plazas, como estaban. Paso `suelo-manzanas`: distancia firmada a las manzanas del generador de cada época, sin nada de 1936 | T82.6 | 1772, 1843 y 1889 con patios verdes; 1911 y 1936 sin cambios; sin `datos/suelo-manzanas.json`, el suelo como antes | 🔄 [PR #217](https://github.com/grunch/caracas/pull/217) en revisión; pendiente publicar los datos |
 | T82.8 | **Piloto de retiro adicional en 1772**: más espacio entre manzanas, hitos fijos | T82.7 | Comparación visual de 1 m adicional por frente; otras épocas sin cambios | 🔄 [PR #222](https://github.com/grunch/caracas/pull/222), listo para revisión; generador y balcones integrados; [guía](../docs/retiro-manzanas-1772.md), pendiente publicar datos |
 | T82.9 | **Retiro en 1843** y continuidad exacta de 1772 | T82.8 | 399 manzanas, 4193 casas; otras épocas conservadas | 🔄 [PR #223](https://github.com/grunch/caracas/pull/223), listo para revisión |
+| T82.10 | **Retiro en 1889** y continuidad de 1843 | T82.9 | 486 manzanas, 4873 casas; otras épocas conservadas | 🔄 [PR #224](https://github.com/grunch/caracas/pull/224), listo para revisión |
 
 ## Riesgos que el plan vigila
 
