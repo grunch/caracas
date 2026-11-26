@@ -24,6 +24,30 @@ def test_no_reurbaniza_el_nucleo_heredado_y_retrae_solo_la_expansion():
     assert Polygon(m['limite']).bounds==(66,6,104,44)
 
 
+def test_indice_de_ocupacion_conserva_el_resultado_del_selector():
+    from ampliacion_manzanas import seleccionar_ampliacion
+    refs = [{'id':str(i), 'poligono':list(box(i*12,0,i*12+18,20).exterior.coords)[:-1],
+             'estado':'extraida','ocupacion':'edificada'} for i in range(150)]
+    heredadas=[{'id':'vieja','poligono':list(box(-30,0,-10,20).exterior.coords)[:-1]}]
+    normal=seleccionar_ampliacion(refs,heredadas,[],1,5,'extraida')
+    rapido=seleccionar_ampliacion(refs,heredadas,[],1,5,'extraida',indexar_ocupacion=True)
+    assert rapido['cobertura']==normal['cobertura']
+    assert len(rapido['manzanas'])==len(normal['manzanas'])
+    for a,b in zip(rapido['manzanas'],normal['manzanas']):
+        assert a['id']==b['id']
+        assert Polygon(a['limite']).equals(Polygon(b['limite']))
+        assert abs(a['areaM2']-b['areaM2'])<1e-8
+
+
+def test_retiro_no_convierte_una_franca_delgada_en_manzana_residencial():
+    # Una franja de 3 m deja solo 1 m tras retirar ambos lados: no caben casa y árbol.
+    ds=datos([box(10,10,110,13)])
+    r=preparar(ds,[],[],[],5,1)
+    assert r['manzanas']==[]
+    assert r['cobertura'][0]['estado']=='sin_area_nueva_util'
+    assert r['descartadasTrasRetiro'][0]['motivo']=='sin espacio útil después del retiro'
+
+
 def test_cara_con_isla_vacia_conserva_su_hueco():
     isla=box(40,40,60,60)
     cara=Polygon(box(0,0,100,100).exterior,[isla.exterior])
