@@ -212,7 +212,7 @@ export const PASOS = [
   ...EPOCAS_RETIRO.slice(1).map((año,i)=>{
     const previo=`fuentes/derivados/retiro${EPOCAS_RETIRO[i]}`,salida=`fuentes/derivados/retiro${año}`
     if(EPOCAS_COMPLETAS.includes(año))return {
-      id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,`${previo}/manzanas-${EPOCAS_RETIRO[i]}-informe.json`,`${D}/tramos.json`,`${D}/mosaico.json`],
+      id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,`${previo}/manzanas-${EPOCAS_RETIRO[i]}-informe.json`,`${D}/tramos.json`,`${D}/mosaico.json`,...(año===1946?['fuentes/derivados/1946/arboles-base.bin']:[])],
       salidas:[`${salida}/ciudad.json`,`${salida}/arboles.bin`,`${salida}/manzanas-${año}-informe.json`,`${salida}/resumen.json`,...(año===1946?[`${salida}/arboles-1946.bin`]:[])],
       codigo:['tools/manzanas-modernas.mjs','tools/geo/manzanas_modernas.py','tools/geo/ampliacion_manzanas.py','tools/geo/retiro_manzanas.py','tools/geo/caras.py','tools/geo/lados.py','tools/manzanas-1843-lib.mjs','tools/manzanas-completas.mjs','tools/geo/manzanas_completas.py','tools/manzanas-1772-lib.mjs','tools/manzanas-reservas-lib.mjs','tools/manzanas-arboles-lib.mjs','tools/arboles-lib.mjs','src/manzanas/epocas-completas.json','src/manzanas/plan.js','src/manzanas/paleta.js','src/manzanas/perimetro.js','src/poligono.js','src/alas.js','src/coords.js','src/hitos.js',...CODIGO_HITOS],
       cmd:()=>['node','tools/manzanas-modernas.mjs',String(año),previo,salida]}
