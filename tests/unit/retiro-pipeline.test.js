@@ -19,3 +19,11 @@ it('los contornos del piloto corresponden al metro adicional del generador',asyn
   m.contornos[0].poligono.forEach((v,i)=>v.forEach((x,k)=>expect(x).toBeCloseTo(esperado[i][k],2)))
  }
 })
+it('los árboles adicionales de 1946 pasan por el retiro antes de publicarse',()=>{
+ const mapa=PASOS.find(p=>p.id==='mapa-1946'),retiro=PASOS.find(p=>p.id==='retiro-1946'),publicar=PASOS.find(p=>p.id==='arboles-1946')
+ expect(mapa.salidas).toContain('fuentes/derivados/1946/arboles-base.bin')
+ expect(retiro.entradas).toContain('fuentes/derivados/1946/arboles-base.bin')
+ expect(retiro.salidas).toContain('fuentes/derivados/retiro1946/arboles-1946.bin')
+ expect(publicar.entradas).toContain('fuentes/derivados/retiro1946/arboles-1946.bin')
+ expect(publicar.salidas).toEqual(['public/datos/arboles-1946.bin'])
+})
