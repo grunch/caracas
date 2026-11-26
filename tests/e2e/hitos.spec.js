@@ -115,19 +115,26 @@ test('la Catedral aparece en 1772 y Santa Capilla recién en 1889', async ({ pag
 
 test('acostada la ciudad, los hitos no se dibujan (la hoja queda limpia)', async ({ page }) => {
   await listo(page)
-  const levantada = await colorDeLaPlaza(page, 3)
+  await colorDeLaPlaza(page, 3)
   const acostada = await page.evaluate(() => {
-    const { ciudad: { U }, renderer, scene, camera } = window.lab
+    const { ciudad: { U }, renderer, scene, camera, hitos } = window.lab
     U.uOla.value = 0
     U.uColor.value = 0
-    renderer.render(scene, camera)
-    const gl = renderer.getContext()
-    const px = new Uint8Array(4)
-    gl.readPixels(Math.round(gl.drawingBufferWidth / 2), Math.round(gl.drawingBufferHeight / 2), 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px)
-    return [...px.slice(0, 3)]
+    const leer = () => {
+      renderer.render(scene, camera)
+      const gl = renderer.getContext(), px = new Uint8Array(40 * 40 * 4)
+      gl.readPixels(Math.round(gl.drawingBufferWidth / 2 - 20), Math.round(gl.drawingBufferHeight / 2 - 20), 40, 40, gl.RGBA, gl.UNSIGNED_BYTE, px)
+      return [...px]
+    }
+    const conHitos = leer()
+    hitos.visible = false
+    const sinHitos = leer()
+    hitos.visible = true
+    return { conHitos, sinHitos }
   })
-  // en tinta y acostada, el centro de la vista es el papel del plano (claro), no el bronce de la estatua
-  expect(acostada[0] + acostada[1] + acostada[2]).toBeGreaterThan(levantada[0] + levantada[1] + levantada[2] + 60)
+  // El plano puede contener tinta oscura: la referencia es la misma escena sin la malla de hitos,
+  // no un brillo supuesto del papel. Al acostarlos no deben aportar ningún píxel.
+  expect(acostada.conHitos).toEqual(acostada.sinHitos)
 })
 
 test('con la ciudad real, las casas genéricas no pisan la Plaza Bolívar', async ({ page }) => {
