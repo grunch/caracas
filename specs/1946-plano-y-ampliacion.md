@@ -84,6 +84,5 @@ La salida final contiene9.665 casas nuevas en934 componentes edificados y538árb
 Se reservaron371 componentes;2.015 con tejido anterior se dejaron intactos.
 Pruebas tras sincronizar `main`69a2ea2:1.773unitarias y1.016Python pasan.
 Los informes de rendimiento completos están en `specs/reglas/1946/rendimiento-*.json`;
-se midieron con GPU y actividad concurrente, por lo que no son una comparación aislada
-de arranque. El paquete de datos y la muestra se publicaron como
+se repitieron secuencialmente con GPU, sin la suiteE2E concurrente. El paquete de datos y la muestra se publicaron como
 [datos-2026-11-26-3f6715d](https://github.com/grunch/caracas/releases/tag/datos-2026-11-26-3f6715d).

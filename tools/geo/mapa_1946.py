@@ -95,8 +95,7 @@ def preparar_plano(out):
     cv2.imwrite(str(out/'edificado.png'),mask)
     cv2.imwrite(str(out/'plano.jpg'),cv2.resize(mapa,(2325,1850)))
     escribir(out/'calzado.json',{'año':1946,'plano':FUENTE,'recorte':[0,0,18600,14800],'residuos':c.residuos_m(),'nivelesGenerados':True})
-    indice=leer(RAIZ/'public/plano/epocas.json');indice['planos']=[p for p in indice['planos'] if p['año']!=1946]+[{'año':1946,'plano':FUENTE,'recorte':[0,0,18600,14800],'niveles':[{'lado':s,'url':f'plano/1946/{n}.webp'} for s,n in [(2048,'chico'),(4096,'medio'),(8192,'grande')]]}]
-    escribir(RAIZ/'public/plano/epocas.json',indice)
+    # planos-epocas arma después el índice desde calzado.json; no exige salidas previas.
     return bloques
 
 def main():

@@ -9,16 +9,16 @@
   ],
   "año": 1936,
   "hitos": {
-    "lineaDeTiempo": 964,
-    "listo": 5910,
-    "primerasCasas": 5914,
-    "casas": 7872,
-    "arboles": 7873
+    "lineaDeTiempo": 713,
+    "listo": 3798,
+    "primerasCasas": 3799,
+    "casas": 5464,
+    "arboles": 5464
   },
   "tareas": {
-    "cuantas": 10,
-    "sumaMs": 1819,
-    "mayorMs": 641
+    "cuantas": 7,
+    "sumaMs": 1153,
+    "mayorMs": 388
   },
   "pedidos": {
     "cuantos": 23,
@@ -121,7 +121,7 @@
     }
   },
   "memoria": {
-    "heapMB": 228,
+    "heapMB": 257,
     "geometriaEnJsMB": 92.7,
     "vertices": 5748170,
     "mallas": 599,
@@ -132,33 +132,33 @@
     "centro": {
       "llamadas": 182,
       "triangulos": 5766271,
-      "medianaMs": 14,
-      "p90Ms": 19.8
+      "medianaMs": 10.5,
+      "p90Ms": 25.1
     },
     "valle": {
       "llamadas": 545,
       "triangulos": 6080358,
-      "medianaMs": 15.4,
-      "p90Ms": 18.1
+      "medianaMs": 12.5,
+      "p90Ms": 13.2
     },
     "cerca": {
       "llamadas": 111,
       "triangulos": 4925646,
-      "medianaMs": 11.7,
-      "p90Ms": 14.5
+      "medianaMs": 10,
+      "p90Ms": 10.8
     }
   },
   "detalleCasas": null,
   "presupuesto": [
     {
       "clave": "casasMs",
-      "valor": 7872,
+      "valor": 5464,
       "tope": 5000,
       "pasa": false
     },
     {
       "clave": "tareaMasLargaMs",
-      "valor": 641,
+      "valor": 388,
       "tope": 200,
       "pasa": false
     },
@@ -170,9 +170,9 @@
     },
     {
       "clave": "heapMB",
-      "valor": 228,
+      "valor": 257,
       "tope": 250,
-      "pasa": true
+      "pasa": false
     },
     {
       "clave": "triangulosCentro",
@@ -182,7 +182,7 @@
     },
     {
       "clave": "msPorCuadroCentro",
-      "valor": 14,
+      "valor": 10.5,
       "tope": 16.6,
       "pasa": true
     }

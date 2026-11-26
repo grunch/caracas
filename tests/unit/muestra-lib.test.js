@@ -141,3 +141,8 @@ describe('planDeMuestra', () => {
     expect(planDeMuestra(['public/datos/manifiesto.json'], [])).toEqual([])
   })
 })
+
+test('la muestra conserva el campo de crecimiento1946 necesario para entrar en la época',()=>{
+  const campo='public/plano/1946/crece.png'
+  expect(planDeMuestra([campo,'public/plano/1946/medio.webp'],[])).toEqual([{destino:campo,hacer:'copiar',origen:campo}])
+})
