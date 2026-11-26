@@ -1,0 +1,14 @@
+{
+  "perimetrosYSemillas1772Exactos": true,
+  "arboles1772Exactos": true,
+  "casasNuevasFueraDeManzana": 0,
+  "casasNuevasSobre1772": 0,
+  "solapeEntreSolaresNuevosM2": 1e-06,
+  "copasNuevasSobreTejados": 0,
+  "manzanasNuevasSinArboles": [],
+  "coberturaReferencia": {
+    "ampliacion": 6149,
+    "heredada": 540,
+    "sin_area_nueva_util": 228
+  }
+}
