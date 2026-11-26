@@ -269,8 +269,11 @@ export const FICHAS = Object.freeze({
     dudas: 'El rótulo documenta la presencia del cuartel; su arquitectura y las reparaciones posteriores a 1812 requieren un modelo específico.',
   },
   'hospital-vargas': {
-    textos: [[3, 'El plano de 1889 ya lo dibuja y lo numera 43, cuando todavía estaba en obra.']],
-    dudas: 'El año de inauguración (1891) es un dato general.',
+    textos: [
+      [3, 'Las obras del Hospital Vargas comenzaron en 1888. El plano de Mestre de 1889 ya dibuja su planta y lo identifica con el número 43, pero el hospital aún no estaba inaugurado.'],
+      [4, 'El Hospital Vargas fue inaugurado el 1 de enero de 1891 y comenzó a atender pacientes el 5 de julio de ese año, según la investigación de Roger Escalona publicada por la Sociedad Venezolana de Historia de la Medicina.'],
+    ],
+    dudas: 'El plano de 1889 permite localizar el proyecto, no determinar el avance exacto de sus obras.',
   },
 
   // --- el oeste ---
