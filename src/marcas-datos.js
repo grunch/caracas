@@ -150,6 +150,10 @@ export const MARCAS = Object.freeze([
   { id: 'palo-grande', nombre: 'Estación Palo Grande', x: 4750, y: 8650, nace: 4, nivel: 2, alto: 7, nota: 'El Gran Ferrocarril de Venezuela.',
     fuente: `${P11} («Estación Palo Grande», «G.F.V.»); ${P36} («Estación Palo Grande»)` },
   { id: 'el-paraiso', nombre: 'El Paraíso', x: 6500, y: 10100, nace: 4, nivel: 1, fuente: `${P11} («El Paraíso»); ${P36} («El Paraíso»)` },
+  { id: 'cementerio-sur', nombre: 'Cementerio General del Sur', x: 7100, y: 12500, nace: 3, nivel: 2,
+    nota: 'Abierto en 1876, al sur del Guaire.',
+    fuente: `${P36} («Cementerio General del Sur»); Landaeta Rosales, historia de 1875–1904, reproducida por la Cámara de Caracas: https://camaradecaracas.com/la-camara-caracas-y-sus-historias/ocurrio-aqui/origenes-del-cementero-general-del-sur-en-caracas-1875-1904/`,
+    dudas: 'El punto identifica el recinto leído en 1936; no delimita su extensión en 1889 ni reproduce sus tumbas. Las fuentes discrepan en el día de apertura; se usa solo el año 1876.' },
   { id: 'hipodromo', nombres: [[4, 'Hipódromo del Paraíso'], [5, 'Hipódromo Nacional']], x: 5400, y: 9950, nace: 4, nivel: 2,
     fuente: `${P11} («Hipódromo del Paraíso»); ${P36} («Hipódromo Nacional»)` },
 
