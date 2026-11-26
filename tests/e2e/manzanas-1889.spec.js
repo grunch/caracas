@@ -3,6 +3,8 @@ import {gunzipSync} from 'node:zlib'
 import {decodificarPak} from '../../src/pak.js'
 
 test('1889 mantiene las casas generadas de 1843 y añade tejido con la misma paleta',async({page})=>{
+ // tres cambios de época y de cámara que avanzan por cuadros: con render por software (CI) cada uno tarda decenas de segundos
+ test.setTimeout(180_000)
  const respuesta=await page.request.get('/datos/ciudad.pak');expect(respuesta.ok()).toBe(true)
  const bytes=await respuesta.body(),b=bytes[0]===31&&bytes[1]===139?gunzipSync(bytes):bytes
  const d=decodificarPak(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),{vida:Uint32Array,paletas:Uint8Array,historia:Uint8Array},()=>{})
@@ -21,8 +23,8 @@ test('1889 mantiene las casas generadas de 1843 y añade tejido con la misma pal
  const actual=await page.evaluate(()=>window.lab.detalleColonial.cuenta)
  expect(actual.mallas).toBe(inicial.mallas);expect(actual.unidades.map(m=>m.balcones)).toEqual(inicial.unidades.map(m=>m.balcones))
  await page.evaluate(()=>window.lab.lineaDeTiempo.elegir(4))
- // la ola avanza por cuadros (paso máximo de 1 s con render por software): se espera que termine, no un plazo fijo
+ // la ola avanza por cuadros (paso máximo de 1 s con render por software): se espera que termine, no un plazo fijo; después, un cuadro más (por software tarda segundos)
  await page.waitForFunction(()=>window.lab.ciudad.U.uEpocaA.value===4&&window.lab.ciudad.U.uOlaEpoca.value>=9000)
- await expect.poll(()=>page.evaluate(()=>window.lab.detalleColonial.cuenta.mallas)).toBe(0)
+ await expect.poll(()=>page.evaluate(()=>window.lab.detalleColonial.cuenta.mallas),{timeout:30000}).toBe(0)
  expect(errores).toEqual([])
 })
