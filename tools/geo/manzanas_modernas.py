@@ -42,7 +42,7 @@ def referencias(datos, epoca, caras, metro):
 
 def preparar(datos, heredadas, hitos, caras, epoca, metro):
     refs = referencias(datos, epoca, caras, metro)
-    seleccion = seleccionar_ampliacion(refs, heredadas, hitos, metro, epoca, 'extraida')
+    seleccion = seleccionar_ampliacion(refs, heredadas, hitos, metro, epoca, 'extraida', indexar_ocupacion=epoca >= 5)
     seleccion['manzanas'] = retraer(seleccion['manzanas'], 1, metro)
     seleccion['referencias'] = len(refs)
     return seleccion

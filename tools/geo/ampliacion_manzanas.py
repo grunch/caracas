@@ -3,13 +3,35 @@ import json
 import sys
 from shapely.geometry import Polygon
 from shapely.ops import unary_union
+from shapely.strtree import STRtree
 from manzanas_completas import partes, anillo
 
 
-def seleccionar_ampliacion(referencias, heredadas, hitos, metro, epoca=2, estado_admitido="aprobada"):
+class IndiceOcupados:
+    """Unión local equivalente: no vuelve a unir toda la ciudad por cada solar."""
+    def __init__(self, ocupados):
+        self.geometrias = list(partes(ocupados))
+        self.pendientes = []
+        self.indice = STRtree(self.geometrias)
+
+    def relevantes(self, p):
+        candidatas = [self.geometrias[int(i)] for i in self.indice.query(p)]
+        candidatas.extend(q for q in self.pendientes if q.intersects(p))
+        return unary_union(candidatas)
+
+    def agregar(self, p):
+        self.pendientes.extend(partes(p))
+        if len(self.pendientes) >= 64:
+            self.geometrias.extend(self.pendientes)
+            self.pendientes = []
+            self.indice = STRtree(self.geometrias)
+
+
+def seleccionar_ampliacion(referencias, heredadas, hitos, metro, epoca=2, estado_admitido="aprobada", *, indexar_ocupacion=False):
     anteriores = unary_union([Polygon(m.get('limite', m['poligono']),m.get('huecos',[])).buffer(0) for m in heredadas])
     # Mantener la calle entre los tejidos: mismo ancho inferido de 6 m usado en 1772.
     ocupados = anteriores.buffer(6/metro, join_style=2)
+    indice = IndiceOcupados(ocupados) if indexar_ocupacion else None
     edificadas = [Polygon(r['poligono'],r.get('huecos',[])).buffer(0) for r in referencias
                   if r['estado']==estado_admitido and r['ocupacion'] in {'rayada','parte_de_otra_unidad','edificada'}]
     libres = []
@@ -40,7 +62,7 @@ def seleccionar_ampliacion(referencias, heredadas, hitos, metro, epoca=2, estado
         if comun>=p.area*.5:
             cobertura.append({'id':r['id'],'estado':'heredada','fraccionHeredada':comun/p.area})
             continue
-        nuevo=p.difference(ocupados).difference(libres)
+        nuevo=p.difference(indice.relevantes(p) if indice is not None else ocupados).difference(libres)
         ids=[]
         for k,q in enumerate(partes(nuevo)):
             rect=q.minimum_rotated_rectangle
@@ -59,7 +81,10 @@ def seleccionar_ampliacion(referencias, heredadas, hitos, metro, epoca=2, estado
             ids.append(id)
         cobertura.append({'id':r['id'],'estado':'ampliacion' if ids else 'sin_area_nueva_util',
                           'unidades':ids,'fraccionHeredada':comun/p.area})
-        ocupados=unary_union([ocupados,nuevo])
+        if indice is not None:
+            indice.agregar(nuevo)
+        else:
+            ocupados=unary_union([ocupados,nuevo])
     return {'manzanas':manzanas,'cobertura':cobertura}
 
 
