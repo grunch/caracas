@@ -1,3 +1,5 @@
+import {rectDeCalles} from './rect-de-calles.js'
+export {rectDeCalles} from './rect-de-calles.js'
 /**
  * Las calles de una época (datos/calles-<año>.json + su campo de distancia, tools/calles-epoca.mjs): dónde va
  * la textura en la hoja y en qué época rige. Las dibuja el suelo (src/shader/calles.js). Son opcionales: sin
@@ -8,11 +10,6 @@ import { DIST_MAX_M, NUCLEO_M, SIN_EPOCA } from './shader/calles.js'
 export const SIN_EPOCA_DE_CALLES = SIN_EPOCA
 
 /** [x0, y0, x1, y1] de la caja (px del plano) en la hoja normalizada, como el rectángulo de un plano de época. */
-export function rectDeCalles({ caja }, { ancho, alto }) {
-  const ok = Array.isArray(caja) && caja.length === 4 && caja.every(Number.isFinite) && caja[2] > caja[0] && caja[3] > caja[1]
-  if (!ok) throw new Error(`calles de época: caja inválida (${JSON.stringify(caja)})`)
-  return [caja[0] / ancho, caja[1] / alto, caja[2] / ancho, caja[3] / alto]
-}
 
 /** El índice de la época del año en la línea de tiempo (crece.json); sin ese año, SIN_EPOCA_DE_CALLES. */
 export function epocaDeCalles(año, epocas) {
