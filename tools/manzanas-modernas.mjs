@@ -33,7 +33,7 @@ const arbolado=arbolesParaManzanas(arboles,[],completas,{epoca})
 await mkdir(salida,{recursive:true})
 const guardar=(n,d)=>writeFile(`${salida}/${n}`,JSON.stringify(d))
 await guardar('ciudad.json',ciudad)
-await guardar(`manzanas-${año}-informe.json`,{...informe,manzanas:completas,cobertura:seleccion.cobertura,propuestaVisual:true,retiroSolicitadoM:1})
+await guardar(`manzanas-${año}-informe.json`,{...informe,manzanas:completas,cobertura:seleccion.cobertura,descartadasTrasRetiro:seleccion.descartadasTrasRetiro??[],propuestaVisual:true,retiroSolicitadoM:1})
 await writeFile(`${salida}/arboles.bin`,codificarArboles(arbolado,meta.metro))
 if(epoca===6)await writeFile(`${salida}/arboles-1946.bin`,Buffer.alloc(0)) // incluidos una sola vez en arboles.bin
 const resumen={año,manzanas:completas.length,heredadas:heredado.manzanas.length,nuevas:nuevas.length,casasHeredadas:informe.casasHeredadas,casasNuevas:informe.casasNuevas,casasSustituidas:informe.casasSustituidas}
