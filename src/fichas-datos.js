@@ -182,9 +182,9 @@ export const FICHAS = Object.freeze({
   },
   'teatro-municipal': {
     textos: [
-      [1, 'Aquí estaban la plaza y la iglesia de San Pablo.'],
+      [1, 'Aquí estaban la iglesia colonial y la plaza de San Pablo. Landaeta Rosales documenta una fuente en la plaza desde 1771; el teatro todavía no existía.'],
       [2, 'La leyenda del plano de 1843 nombra la iglesia de San Pablo (P).'],
-      [3, 'El teatro se levantó donde estuvo San Pablo: el plano de 1889 lo numera 25, «Teatro Municipal». Fue inaugurado en 1881 como Teatro Guzmán Blanco (Fundarte). Se representa con su pórtico semicircular original, columnas, óculos y linterna, visibles en la fotografía de los años 1880. Ese frente se demolió en 1949 (Fundación Arquitectura y Ciudad), después de las épocas del mapa.'],
+      [3, 'La iglesia fue demolida en 1876 (Landaeta Rosales). El teatro se levantó en ese lugar: el plano de 1889 lo numera 25, «Teatro Municipal». Fue inaugurado en 1881 como Teatro Guzmán Blanco (Fundarte). Se representa con su pórtico semicircular original, columnas, óculos y linterna, visibles en la fotografía de los años 1880. Ese frente se demolió en 1949 (Fundación Arquitectura y Ciudad), después de las épocas del mapa.'],
     ],
     dudas: 'La envolvente exterior se conserva entre 1889, 1911 y 1936 como hipótesis de continuidad. Dimensiones, pintura, caja escénica y ornamentos pequeños aproximados; sin levantamiento arquitectónico. No se modela la reforma interior de 1930.',
   },
