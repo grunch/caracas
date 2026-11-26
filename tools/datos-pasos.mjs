@@ -267,10 +267,10 @@ export const PASOS = [
     // el verde de patios, solares y terreno libre de 1772, 1843 y 1889: distancia firmada a las manzanas del
     // generador de cada época, sin nada de 1936; el sitio anda igual sin él (suelo de tierra, como antes)
     id: 'suelo-manzanas',
-    entradas: [`${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', (EPOCAS_RETIRO.includes(1843)?'fuentes/derivados/retiro1843/manzanas-1843-informe.json':`${E}/manzanas-1843-informe.json`), `${E}/manzanas-1889-informe.json`],
+    entradas: [`${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', (EPOCAS_RETIRO.includes(1843)?'fuentes/derivados/retiro1843/manzanas-1843-informe.json':`${E}/manzanas-1843-informe.json`), (EPOCAS_RETIRO.includes(1889)?'fuentes/derivados/retiro1889/manzanas-1889-informe.json':`${E}/manzanas-1889-informe.json`)],
     salidas: ['public/plano/suelo-manzanas.png', 'public/datos/suelo-manzanas.json'],
     codigo: ['tools/suelo-manzanas.mjs', 'tools/suelo-manzanas-lib.mjs', 'src/marcas-datos.js', 'src/hitos.js', ...CODIGO_HITOS],
-    cmd: () => ['node', 'tools/suelo-manzanas.mjs', `${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', (EPOCAS_RETIRO.includes(1843)?'fuentes/derivados/retiro1843/manzanas-1843-informe.json':`${E}/manzanas-1843-informe.json`), `${E}/manzanas-1889-informe.json`],
+    cmd: () => ['node', 'tools/suelo-manzanas.mjs', `${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', (EPOCAS_RETIRO.includes(1843)?'fuentes/derivados/retiro1843/manzanas-1843-informe.json':`${E}/manzanas-1843-informe.json`), (EPOCAS_RETIRO.includes(1889)?'fuentes/derivados/retiro1889/manzanas-1889-informe.json':`${E}/manzanas-1889-informe.json`)],
   },
   {
     // las calles de 1772 para el suelo de esa época (T33j.8b): un campo de distancia a los ejes de la referencia
