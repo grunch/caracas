@@ -1,3 +1,4 @@
+import {GLSL_MANZANAS_MODERNAS,uniformsManzanasModernas} from './suelo-manzanas-modernas.js'
 /**
  * El material de la ciudad (y del suelo): MeshLambert parcheado.
  * - La ola: cada casa sube cuando el frente, que sale de la plaza, la alcanza (desfase por semilla).
@@ -52,6 +53,7 @@ const FRAGMENTO_COMUN = /* glsl */ `
   ${GLSL_TECHO}
   ${GLSL_CALLES}
   ${GLSL_SUELO_MANZANAS}
+${GLSL_MANZANAS_MODERNAS}
   ${GLSL_SUELO}
   ${GLSL_PAPEL}
   ${GLSL_HOY}`
@@ -76,6 +78,7 @@ const FRAGMENTO_COLOR = /* glsl */ `
   float epocaVerde = epocaAqui(length(vMundo.xz));
   gVerdor = uManzanasOn * smoothstep(${Math.min(...EPOCAS_CANALES) - 1}.5, ${Math.min(...EPOCAS_CANALES)}.0, epocaVerde)
     * (1.0 - smoothstep(${Math.max(...EPOCAS_CANALES)}.5, ${Math.max(...EPOCAS_CANALES) + 1}.0, epocaVerde));
+  gVerdor = max(gVerdor, modernasActivas(epocaVerde));
   // cada fragmento calcula o el techo o la fachada (y el suelo, ninguno de los dos): con if, que el
   // render por software salta enteros. Acostada en la hoja, el techo va en su tono medio, sin dibujo
   vec4 casa = vec4(diffuseColor.rgb, 0.0);
@@ -95,7 +98,7 @@ const FRAGMENTO_COLOR = /* glsl */ `
   float rotulo = rotuloEn(uv);
   float pxMundo = max(fwidth(vMundo.x), fwidth(vMundo.z));
   vec2 calle = calleEn(uvPlano, epoca, pxMundo); // las calles de la época (src/shader/calles.js)
-  float verde = verdeEn(uvPlano, epoca, pxMundo); // patios y terreno libre de la época (src/shader/suelo-manzanas.js)
+  float verde = max(verdeEn(uvPlano, epoca, pxMundo), verdeModernoEn(uvPlano, epoca, pxMundo)); // patios y terreno libre de la época (src/shader/suelo-manzanas.js)
   float wRibera = fwidth(ribera);
 
   // tinta: el suelo es la hoja de la época (src/shader/papel.js): papel liso con sus calles donde ya hay
@@ -159,7 +162,8 @@ export function crearMaterialCiudad({
     uSuelo: { value: suelo },
     uRotulos: { value: SIN_ROTULOS }, // rótulos del plano de 1936 (src/shader/suelo.js)
     ...uniformsCalles(), // las calles de la época (src/shader/calles.js, src/calles-epoca.js)
-    ...uniformsSueloManzanas(), // el verde de patios y terreno libre (src/shader/suelo-manzanas.js, src/suelo-manzanas.js)
+    ...uniformsSueloManzanas(),
+    ...uniformsManzanasModernas(), // el verde de patios y terreno libre (src/shader/suelo-manzanas.js, src/suelo-manzanas.js)
     uHoja: { value: new Vector2(plano.ancho, plano.alto) },
     uPlaza: { value: new Vector2(plano.plaza[0], plano.plaza[1]) },
     uMetro: { value: metro },

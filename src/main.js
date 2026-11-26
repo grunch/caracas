@@ -1,3 +1,4 @@
+import {cargarManzanasModernas} from './suelo-manzanas-modernas.js'
 import {
   WebGLRenderer, Scene, PerspectiveCamera, PlaneGeometry, Mesh, BufferAttribute,
   CanvasTexture, TextureLoader, SRGBColorSpace, Color, Timer, HemisphereLight, DirectionalLight, LinearFilter,
@@ -373,6 +374,7 @@ Promise.all([crecePedido, indicePlanos])
         .then(() => pedirCuadro(3))
         .catch((e) => console.warn(`calles de época: ${e.message}`))
       // los patios y el terreno libre de 1772, 1843 y 1889, verdes (src/suelo-manzanas.js)
+      cargarManzanasModernas({ U, plano: meta.plano, cargar: cargarCampo }).then(() => pedirCuadro(3)).catch(e=>console.warn(`suelo moderno: ${e.message}`))
       cargarSueloManzanas({ U, plano: meta.plano, cargar: cargarCampo })
         .then(() => pedirCuadro(3))
         .catch((e) => console.warn(`suelo de manzanas: ${e.message}`))

@@ -9,7 +9,7 @@ export function arbolesParaManzanas(arboles,nuevos,manzanas,{epoca=1}={}){
   const fin=a.muere||Infinity
   if(a.nace>epoca||fin<=epoca||!dentro(a)){salida.push(a);continue}
   if(a.nace<epoca)salida.push({...a,muere:epoca})
-  if(fin>epoca+1)salida.push({...a,nace:epoca+1})
+  if(epoca<6&&fin>epoca+1)salida.push({...a,nace:epoca+1})
  }
  const propios=manzanas.filter(m=>m.arboles).flatMap(m=>m.arboles)
  if(manzanas.every(m=>m.arboles)){salida.push(...propios);return salida}

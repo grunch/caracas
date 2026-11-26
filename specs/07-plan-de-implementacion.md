@@ -185,3 +185,5 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 - **Datos fuera de git**: sin T11 y T12, un cambio en el pipeline puede romper el sitio sin que ningún test lo vea.
 - **Conflictos en `src/material.js` y `src/main.js`**: varias tareas los tocan; conviene separar el shader en módulos (vértice, suelo, fachadas) dentro de T35 o antes, si los conflictos se repiten.
 - **Rendimiento**: 34 mil casas con fachadas procedurales; medir en cada tarea de la fase 3.
+
+| T82.1911 | Manzanas completas, patios verdes y continuidad desde 1889 en 1911 | T82 | Generador, retiro único, arbolado y comparación de siete épocas | 🔄 PR pendiente |
