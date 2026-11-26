@@ -53,3 +53,15 @@ def test_agrupa_sin_cruzar_la_calle_y_reserva_el_hito():
  assert buscar(Point(10,10)) not in matrices
  assert buscar(Point(42,10)) in matrices
  assert any(x[1]=='contiene un hito fijo' for x in limites)
+
+
+def test_expansion_1946_convierte_metros_del_informe_a_pixeles():
+ from tools.geo.retiro_moderno import generar_matrices
+ from shapely.geometry import Point
+ import numpy as np
+ d=ciudad();d['vertices']=[100,100,120,100,120,120,100,120];d['vida']=[[6,0]]
+ informe={'nuevasManzanas':[{'poligono':[[49,49],[61,49],[61,61],[49,61]]}]}
+ buscar,matrices,_=generar_matrices(d,np.zeros((150,150),dtype=np.uint8),informe,[],.5)
+ assert buscar(Point(110,110))==('1946',0)
+ assert ('1946',0) in matrices
+ assert buscar(Point(55,55)) is None
