@@ -158,6 +158,6 @@ export const MARCAS = Object.freeze([
     fuente: `${P36} («Iglesia Candelaria», «Plaza de Candelaria»); ${P89} (templo VI, plaza D); ${L43('J', 'La Candelaria')}; Landaeta Rosales, La iglesia y plaza de la Candelaria de Caracas (1908), pp. 5–11 y 17: visita de Martí de 1772, daños de 1812 y plaza colonial (https://archive.org/details/laiglesiayplazad00land)`,
     dudas: 'Existencia documentada en 1772. La posición del rótulo no determina la planta ni las dimensiones del templo colonial.' },
   { id: 'fc-central', nombre: 'Estación del Ferrocarril Central', x: 13380, y: 7640, nace: 3, nivel: 3, alto: 7, fuente: `${P89} (rótulos «Estación» y «Ferrocarril Central»); ${P36} («Estación del F.C. Central»)` },
-  { id: 'bellas-artes', nombre: 'Museo de Bellas Artes', x: 12850, y: 7960, nace: 5, nivel: 3, alto: 10, fuente: `${P36} («Museo de Bellas Artes»)` },
+  { id: 'bellas-artes', nombres: [[5, 'Museo de Bellas Artes (sin inaugurar)', 'La nueva sede que dibuja el plano; inaugurada en 1938.'], [6, 'Museo de Bellas Artes', 'La sede inaugurada en 1938.']], x: 12850, y: 7960, nace: 5, nivel: 3, alto: 10, fuente: `${P36} («Museo de Bellas Artes»); Efraín Subero y Roldán Esteva Grillet, Museos, Fundación Empresas Polar: https://bibliofep.fundacionempresaspolar.org/dhv/entradas/m/museos/`, dudas: 'El plano muestra la sede, no acredita su apertura al público en 1936. Hito arquitectónico pendiente.' },
   { id: 'los-caobos', nombre: 'Parque Los Caobos', x: 13400, y: 8450, nace: 5, nivel: 2, fuente: `${P36} («Parque Los Caobos»)` },
 ])
