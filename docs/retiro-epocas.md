@@ -47,3 +47,14 @@ Se ajustan 16830 de las 35497 casas y se conservan los 23101 árboles. Utiliza e
 ```sh
 node tools/retiro-moderno.mjs 1936 fuentes/derivados/retiro1911 fuentes/derivados/retiro1936
 ```
+
+## 1946
+
+Se ajustan 19102 de las 45162 casas. Se conservan 22997 árboles del archivo general y los 538 árboles adicionales de expansión (48 ajustan su posición/radio). El informe de 1946 expresa sus polígonos a un metro por unidad: se convierten a píxeles del mosaico antes de buscar las manzanas.
+
+El mapa produce `fuentes/derivados/1946/arboles-base.bin`; el retiro transforma también esos árboles y el paso `arboles-1946` publica el resultado. Cada salida tiene un único productor. El Silencio y los demás modelos históricos quedan fijos. No se cambia ninguna época anterior.
+
+```sh
+node tools/retiro-moderno.mjs 1946 fuentes/derivados/retiro1936 fuentes/derivados/retiro1946
+npm run datos -- --desde retiro-1946
+```
