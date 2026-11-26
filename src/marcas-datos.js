@@ -17,7 +17,7 @@
  *    litográfico de Müller i Stapler, NYPL, dominio público: fuentes/mapas/1843-nypl-jesurun-facsimil-muller-stapler),
  *    transcrita en specs/auditoria-1843/leyenda.json. Se cita la letra y el nombre, solo con lectura segura; el
  *    cotejo, marca por marca, está en specs/auditoria-1843/cotejo-leyenda.md (T81).
- * La leyenda del plano de 1772 no se transcribió: los nombres de la época 1 son CG.
+ * La leyenda del plano de 1772 no se transcribió; cuando hay otra fuente documental, se cita en la marca.
  */
 const P36 = 'plano DCN de 1936'
 const P89 = 'plano de Mestre de 1889'
@@ -154,9 +154,9 @@ export const MARCAS = Object.freeze([
     fuente: `${P11} («Hipódromo del Paraíso»); ${P36} («Hipódromo Nacional»)` },
 
   // --- el este: Candelaria y más allá del Anauco ---
-  { id: 'candelaria', nombre: 'Candelaria', x: 11230, y: 7000, nace: 2, nivel: 1, alto: 11, nota: 'La iglesia y su plaza.',
-    fuente: `${P36} («Iglesia Candelaria», «Plaza de Candelaria»); ${P89} (templo VI, plaza D); ${L43('J', 'La Candelaria')}`,
-    dudas: 'La iglesia es colonial (CG); con el plano de 1772, sin cotejar. Va desde 1843, cuya leyenda la nombra «La Candelaria».' },
+  { id: 'candelaria', nombre: 'Candelaria', x: 11230, y: 7000, nace: 1, nivel: 1, alto: 11, nota: 'La iglesia y su plaza.',
+    fuente: `${P36} («Iglesia Candelaria», «Plaza de Candelaria»); ${P89} (templo VI, plaza D); ${L43('J', 'La Candelaria')}; Landaeta Rosales, La iglesia y plaza de la Candelaria de Caracas (1908), pp. 5–11 y 17: visita de Martí de 1772, daños de 1812 y plaza colonial (https://archive.org/details/laiglesiayplazad00land)`,
+    dudas: 'Existencia documentada en 1772. La posición del rótulo no determina la planta ni las dimensiones del templo colonial.' },
   { id: 'fc-central', nombre: 'Estación del Ferrocarril Central', x: 13380, y: 7640, nace: 3, nivel: 3, alto: 7, fuente: `${P89} (rótulos «Estación» y «Ferrocarril Central»); ${P36} («Estación del F.C. Central»)` },
   { id: 'bellas-artes', nombre: 'Museo de Bellas Artes', x: 12850, y: 7960, nace: 5, nivel: 3, alto: 10, fuente: `${P36} («Museo de Bellas Artes»)` },
   { id: 'los-caobos', nombre: 'Parque Los Caobos', x: 13400, y: 8450, nace: 5, nivel: 2, fuente: `${P36} («Parque Los Caobos»)` },
