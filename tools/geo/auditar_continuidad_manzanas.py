@@ -2,6 +2,7 @@
 import sys,json
 from shapely.geometry import Polygon,Point
 from shapely.ops import unary_union
+from shapely.strtree import STRtree
 from manzanas_completas import techos_de_casa
 
 
@@ -27,8 +28,12 @@ def auditar(old,r,d,metro=.5):
         if not m['arboles']:sin_arboles.append(m['id'])
     # entre todas las casas nuevas, no solo dentro de cada unidad; tocarse por el borde no suma área
     area_solapes=max(0,sum(f.area for f in huellas)-unary_union(huellas).area)*metro*metro
-    techo=unary_union(tejados)
-    copas=sum(Point(a['x'],a['y']).buffer(a['r']).intersection(techo).area>.01 for m in nuevas for a in m['arboles'])
+    indice_tejados=STRtree(tejados)
+    def invade(a):
+        copa=Point(a['x'],a['y']).buffer(a['r'])
+        candidatos=[tejados[int(i)] for i in indice_tejados.query(copa)]
+        return bool(candidatos) and copa.intersection(unary_union(candidatos)).area>.01
+    copas=sum(invade(a) for m in nuevas for a in m['arboles'])
     return {'perimetrosYSemillas1772Exactos':perimetros,'arboles1772Exactos':arboles,'casasNuevasFueraDeManzana':fuera,'casasNuevasSobre1772':solapes,'solapeEntreSolaresNuevosM2':round(area_solapes,6),'copasNuevasSobreTejados':copas,'manzanasNuevasSinArboles':sin_arboles,'coberturaReferencia':{k:sum(m['estado']==k for m in r['cobertura']) for k in set(m['estado'] for m in r['cobertura'])}}
 
 
