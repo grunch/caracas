@@ -2,16 +2,17 @@ import {test,expect} from '@playwright/test'
 import {gunzipSync} from 'node:zlib'
 import {decodificarPak} from '../../src/pak.js'
 
-test('1843 mantiene las casas generadas de 1772 y añade tejido con la misma paleta',async({page})=>{
+test('1843 conserva tejido colonial y expansión tras el retiro exclusivo de 1772',async({page})=>{
  // tres cambios de época y de cámara que avanzan por cuadros: con render por software (CI) cada uno tarda decenas de segundos
  test.setTimeout(180_000)
  const respuesta=await page.request.get('/datos/ciudad.pak');expect(respuesta.ok()).toBe(true)
  const bytes=await respuesta.body(),b=bytes[0]===31&&bytes[1]===139?gunzipSync(bytes):bytes
  const d=decodificarPak(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),{vida:Uint32Array,paletas:Uint8Array,historia:Uint8Array},()=>{})
- test.skip(!d.paletas?.some((p,i)=>p>0&&[25,33].includes(d.vida[i])),'El release aún no incluye la continuidad de las manzanas en 1843')
+ test.skip(!d.paletas?.some((p,i)=>p>0&&[17,25,33].includes(d.vida[i])),'El release aún no incluye la continuidad de las manzanas en 1843')
  const vivos=e=>Array.from(d.vida).flatMap((v,i)=>v%8<=e&&(!(v>>3)||e<(v>>3))?[i]:[])
  const antes=vivos(1),despues=vivos(2),indices=new Set(despues)
- expect(antes.every(i=>indices.has(i))).toBe(true);expect(despues.length).toBeGreaterThan(antes.length)
+ // Las versiones retraídas terminan en 1843; las demás deben seguir presentes.
+ expect(antes.every(i=>indices.has(i)||d.vida[i]===17)).toBe(true);expect(despues.length).toBeGreaterThan(antes.length)
  expect(despues.every(i=>d.paletas[i]>0)).toBe(true)
  expect(antes.every(i=>d.historia[i*6+1]===d.historia[i*6+2])).toBe(true)
  const errores=[];page.on('pageerror',e=>errores.push(e.message))

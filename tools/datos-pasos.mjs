@@ -175,9 +175,9 @@ export const PASOS = [
   },
   {
     // la ciudad que se publica: la de las épocas, con estilos (la de 1936 sola no tiene "vida")
-    id: 'empacar', entradas: ['fuentes/derivados/1946/ciudad-1946.json'], salidas: ['public/datos/ciudad.pak'],
+    id: 'empacar-base', entradas: ['fuentes/derivados/1946/ciudad-1946.json'], salidas: ['fuentes/derivados/retiro1772/base.pak'],
     codigo: ['tools/empacar-ciudad.mjs', 'tools/empacar-lib.mjs', 'tools/pak.mjs', 'src/ciudad.js'],
-    cmd: () => ['node', 'tools/empacar-ciudad.mjs', 'fuentes/derivados/1946/ciudad-1946.json'],
+    cmd: () => ['node', 'tools/empacar-ciudad.mjs', 'fuentes/derivados/1946/ciudad-1946.json', 'fuentes/derivados/retiro1772/base.pak'],
   },
   {
     id: 'jardines', codigo: GEO('jardines'),
@@ -189,15 +189,32 @@ export const PASOS = [
   {
     // crece.png/crece.json (tools/geo/epocas.py, fuera de este pipeline) dan la época de cada árbol si
     // están; sin ellos todos nacen en la primera: son opcionales (si aparecen o cambian, el paso se rehace)
-    id: 'arboles',
+    id: 'arboles-base',
     // y el monte del valle (los árboles silvestres) sale de crece.png (G y B) y de la segmentación de 1936
     entradas: [`${D}/segmentacion/mosaico/arboles.json`, `${D}/segmentacion/mosaico/jardines.json`, `${D}/mosaico.json`,
-      'public/datos/ciudad.pak', `${E}/ciudad-estilos.json`, `${E}/manzanas-1772-informe.json`, `${E}/manzanas-1843-informe.json`, `${E}/manzanas-1889-informe.json`, `${D}/segmentacion/mosaico/clases-costura.png`],
+      'fuentes/derivados/retiro1772/base.pak', `${E}/ciudad-estilos.json`, `${E}/manzanas-1772-informe.json`, `${E}/manzanas-1843-informe.json`, `${E}/manzanas-1889-informe.json`, `${D}/segmentacion/mosaico/clases-costura.png`],
     opcionales: ['public/plano/crece.png', 'public/datos/crece.json'],
-    salidas: ['public/datos/arboles.bin'],
+    salidas: ['fuentes/derivados/retiro1772/base-arboles.bin'],
     codigo: ['tools/arboles.mjs', 'tools/arboles-lib.mjs', 'tools/manzanas-arboles-lib.mjs', 'tools/empacar-lib.mjs', 'tools/silvestres-lib.mjs', 'src/pak.js', 'src/epocas.js', 'src/alas.js', 'src/techos.js'],
     cmd: () => ['node', 'tools/arboles.mjs', `${D}/segmentacion/mosaico/arboles.json`, `${D}/mosaico.json`,
-      `${D}/segmentacion/mosaico/jardines.json`, `${D}/segmentacion/mosaico/clases-costura.png`, '--manzanas-1772', '--manzanas-1843', '--manzanas-1889'],
+      `${D}/segmentacion/mosaico/jardines.json`, `${D}/segmentacion/mosaico/clases-costura.png`, '--manzanas-1772', '--manzanas-1843', '--manzanas-1889', '--ciudad', 'fuentes/derivados/retiro1772/base.pak', '--salida', 'fuentes/derivados/retiro1772/base-arboles.bin'],
+  },
+  {
+    id: 'retiro-1772',
+    entradas: ['fuentes/derivados/1946/ciudad-1946.json', 'fuentes/derivados/retiro1772/base-arboles.bin', `${D}/mosaico.json`, `${E}/manzanas-1772-informe.json`],
+    salidas: ['fuentes/derivados/retiro1772/ciudad.json', 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', 'fuentes/derivados/retiro1772/arboles.bin', 'fuentes/derivados/retiro1772/resumen.json', 'fuentes/derivados/retiro1772/contornos-piloto.json'],
+    codigo: ['tools/retiro-manzanas-1772.mjs','tools/geo/retiro_manzanas.py','tools/manzanas-completas.mjs','tools/geo/manzanas_completas.py','tools/manzanas-1772-lib.mjs','tools/manzanas-reservas-lib.mjs','tools/manzanas-arboles-lib.mjs','tools/arboles-lib.mjs','src/manzanas/retiro-1772-piloto.json','src/manzanas/plan.js','src/manzanas/paleta.js','src/manzanas/perimetro.js','src/poligono.js','src/alas.js','src/hitos.js','src/coords.js',...CODIGO_HITOS],
+    cmd: () => ['node','tools/retiro-manzanas-1772.mjs','fuentes/derivados/1946/ciudad-1946.json','fuentes/derivados/retiro1772/base-arboles.bin','fuentes/derivados/retiro1772'],
+  },
+  {
+    id: 'empacar', entradas: ['fuentes/derivados/retiro1772/ciudad.json'], salidas: ['public/datos/ciudad.pak'],
+    codigo: ['tools/empacar-ciudad.mjs','tools/empacar-lib.mjs','tools/pak.mjs','src/ciudad.js'],
+    cmd: () => ['node','tools/empacar-ciudad.mjs','fuentes/derivados/retiro1772/ciudad.json'],
+  },
+  {
+    id: 'arboles', entradas: ['fuentes/derivados/retiro1772/arboles.bin'], salidas: ['public/datos/arboles.bin'],
+    codigo: [],
+    cmd: () => ['node','--input-type=module','-e',"import {copyFile} from 'node:fs/promises';await copyFile('fuentes/derivados/retiro1772/arboles.bin','public/datos/arboles.bin')"],
   },
   {
     // con los patios que el vectorizador abrió por regla en las casas de patio: ahí el suelo es de patio
@@ -241,10 +258,10 @@ export const PASOS = [
     // el verde de patios, solares y terreno libre de 1772, 1843 y 1889: distancia firmada a las manzanas del
     // generador de cada época, sin nada de 1936; el sitio anda igual sin él (suelo de tierra, como antes)
     id: 'suelo-manzanas',
-    entradas: [`${D}/mosaico.json`, `${E}/manzanas-1772-informe.json`, `${E}/manzanas-1843-informe.json`, `${E}/manzanas-1889-informe.json`],
+    entradas: [`${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', `${E}/manzanas-1843-informe.json`, `${E}/manzanas-1889-informe.json`],
     salidas: ['public/plano/suelo-manzanas.png', 'public/datos/suelo-manzanas.json'],
     codigo: ['tools/suelo-manzanas.mjs', 'tools/suelo-manzanas-lib.mjs', 'src/marcas-datos.js', 'src/hitos.js', ...CODIGO_HITOS],
-    cmd: () => ['node', 'tools/suelo-manzanas.mjs', `${D}/mosaico.json`, `${E}/manzanas-1772-informe.json`, `${E}/manzanas-1843-informe.json`, `${E}/manzanas-1889-informe.json`],
+    cmd: () => ['node', 'tools/suelo-manzanas.mjs', `${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', `${E}/manzanas-1843-informe.json`, `${E}/manzanas-1889-informe.json`],
   },
   {
     // las calles de 1772 para el suelo de esa época (T33j.8b): un campo de distancia a los ejes de la referencia

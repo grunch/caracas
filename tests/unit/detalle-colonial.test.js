@@ -75,3 +75,19 @@ it.each([3,4])('conserva el detalle del piloto hasta la época %i sin reconstrui
  if(fin===4){capa.actualizar(cam,[3]);expect(capa.cuenta.mallas).toBe(2);expect(capa.grupo.children[0].geometry).toBe(geo)}
  capa.actualizar(cam,[fin]);expect(capa.cuenta.mallas).toBe(0);capa.liberar();material.dispose()
 })
+it('reconoce el frente retraído explícito y conserva el intervalo propio de cada época',()=>{
+ const p=paquete();for(let i=0;i<4;i++)p.atributos.position[i*3+2]=1
+ const manzana={...m,contornos:[{vida:[1,2],poligono:[[0,1],[20,1],[20,19],[0,19]]}]}
+ expect(extraerFrentes(p,[manzana])).toHaveLength(1)
+ expect(extraerFrentes(p,[m])).toHaveLength(0)
+ const q=paquete();for(let i=0;i<4;i++){q.atributos.aVida[i*2]=2;q.atributos.aVida[i*2+1]=4}
+ expect(extraerFrentes(q,[manzana])[0].vida).toEqual([2,4])
+ for(let i=0;i<4;i++){p.atributos.aVida[i*2]=2;p.atributos.aVida[i*2+1]=4}
+ expect(extraerFrentes(p,[manzana])).toHaveLength(0)
+})
+it('no deduplica fachadas coincidentes que tienen vidas distintas',()=>{
+ const p=paquete(),q=paquete();for(let i=0;i<4;i++){q.atributos.aVida[i*2]=2;q.atributos.aVida[i*2+1]=4}
+ const atributos=Object.fromEntries(Object.entries(p.atributos).map(([k,v])=>[k,new v.constructor([...v,...q.atributos[k]])]))
+ const f=extraerFrentes({atributos,indices:Uint32Array.from([...p.indices,...q.indices.map(i=>i+4)])},[m])
+ expect(f.map(x=>x.vida)).toEqual([[1,2],[2,4]])
+})
