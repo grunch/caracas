@@ -1,3 +1,5 @@
+import EPOCAS_RETIRO from '../src/manzanas/epocas-retiro.json' with {type:'json'}
+const RETIRO_ULTIMO=`fuentes/derivados/retiro${EPOCAS_RETIRO.at(-1)}`
 // Los pasos del pipeline de datos (npm run datos, tools/datos.mjs): de qué entradas y de qué código sale cada
 // salida. `npm run datos:al-dia` usa la misma lista para avisar cuando el release publicado quedó viejo.
 // Al importarse solo enumera las fuentes locales; no ejecuta pasos ni modifica archivos.
@@ -206,15 +208,22 @@ export const PASOS = [
     codigo: ['tools/retiro-manzanas-1772.mjs','tools/geo/retiro_manzanas.py','tools/manzanas-completas.mjs','tools/geo/manzanas_completas.py','tools/manzanas-1772-lib.mjs','tools/manzanas-reservas-lib.mjs','tools/manzanas-arboles-lib.mjs','tools/arboles-lib.mjs','src/manzanas/retiro-1772-piloto.json','src/manzanas/plan.js','src/manzanas/paleta.js','src/manzanas/perimetro.js','src/poligono.js','src/alas.js','src/hitos.js','src/coords.js',...CODIGO_HITOS],
     cmd: () => ['node','tools/retiro-manzanas-1772.mjs','fuentes/derivados/1946/ciudad-1946.json','fuentes/derivados/retiro1772/base-arboles.bin','fuentes/derivados/retiro1772'],
   },
+  ...EPOCAS_RETIRO.slice(1).map((año,i)=>{
+    const previo=`fuentes/derivados/retiro${EPOCAS_RETIRO[i]}`,salida=`fuentes/derivados/retiro${año}`
+    return {id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,`${previo}/manzanas-${EPOCAS_RETIRO[i]}-informe.json`,`${E}/manzanas-${año}-informe.json`,`${D}/mosaico.json`],
+      salidas:[`${salida}/ciudad.json`,`${salida}/arboles.bin`,`${salida}/manzanas-${año}-informe.json`,`${salida}/resumen.json`],
+      codigo:['tools/retiro-manzanas-epoca.mjs','tools/manzanas-1843-lib.mjs','tools/geo/retiro_manzanas.py','tools/geo/manzanas_completas.py','tools/manzanas-completas.mjs','tools/manzanas-1772-lib.mjs','tools/manzanas-reservas-lib.mjs','tools/manzanas-arboles-lib.mjs','tools/arboles-lib.mjs','src/manzanas/epocas-retiro.json','src/manzanas/plan.js','src/manzanas/paleta.js','src/manzanas/perimetro.js','src/poligono.js','src/alas.js','src/coords.js','src/hitos.js',...CODIGO_HITOS],
+      cmd:()=>['node','tools/retiro-manzanas-epoca.mjs',String(año),previo,salida]}
+  }),
   {
-    id: 'empacar', entradas: ['fuentes/derivados/retiro1772/ciudad.json'], salidas: ['public/datos/ciudad.pak'],
+    id: 'empacar', entradas: [`${RETIRO_ULTIMO}/ciudad.json`], salidas: ['public/datos/ciudad.pak'],
     codigo: ['tools/empacar-ciudad.mjs','tools/empacar-lib.mjs','tools/pak.mjs','src/ciudad.js'],
-    cmd: () => ['node','tools/empacar-ciudad.mjs','fuentes/derivados/retiro1772/ciudad.json'],
+    cmd: () => ['node','tools/empacar-ciudad.mjs',`${RETIRO_ULTIMO}/ciudad.json`],
   },
   {
-    id: 'arboles', entradas: ['fuentes/derivados/retiro1772/arboles.bin'], salidas: ['public/datos/arboles.bin'],
+    id: 'arboles', entradas: [`${RETIRO_ULTIMO}/arboles.bin`], salidas: ['public/datos/arboles.bin'],
     codigo: [],
-    cmd: () => ['node','--input-type=module','-e',"import {copyFile} from 'node:fs/promises';await copyFile('fuentes/derivados/retiro1772/arboles.bin','public/datos/arboles.bin')"],
+    cmd: () => ['node','--input-type=module','-e',`import {copyFile} from 'node:fs/promises';await copyFile('${RETIRO_ULTIMO}/arboles.bin','public/datos/arboles.bin')`],
   },
   {
     // con los patios que el vectorizador abrió por regla en las casas de patio: ahí el suelo es de patio
@@ -258,10 +267,10 @@ export const PASOS = [
     // el verde de patios, solares y terreno libre de 1772, 1843 y 1889: distancia firmada a las manzanas del
     // generador de cada época, sin nada de 1936; el sitio anda igual sin él (suelo de tierra, como antes)
     id: 'suelo-manzanas',
-    entradas: [`${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', `${E}/manzanas-1843-informe.json`, `${E}/manzanas-1889-informe.json`],
+    entradas: [`${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', (EPOCAS_RETIRO.includes(1843)?'fuentes/derivados/retiro1843/manzanas-1843-informe.json':`${E}/manzanas-1843-informe.json`), `${E}/manzanas-1889-informe.json`],
     salidas: ['public/plano/suelo-manzanas.png', 'public/datos/suelo-manzanas.json'],
     codigo: ['tools/suelo-manzanas.mjs', 'tools/suelo-manzanas-lib.mjs', 'src/marcas-datos.js', 'src/hitos.js', ...CODIGO_HITOS],
-    cmd: () => ['node', 'tools/suelo-manzanas.mjs', `${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', `${E}/manzanas-1843-informe.json`, `${E}/manzanas-1889-informe.json`],
+    cmd: () => ['node', 'tools/suelo-manzanas.mjs', `${D}/mosaico.json`, 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', (EPOCAS_RETIRO.includes(1843)?'fuentes/derivados/retiro1843/manzanas-1843-informe.json':`${E}/manzanas-1843-informe.json`), `${E}/manzanas-1889-informe.json`],
   },
   {
     // las calles de 1772 para el suelo de esa época (T33j.8b): un campo de distancia a los ejes de la referencia
