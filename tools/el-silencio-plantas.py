@@ -14,7 +14,7 @@ def local(p):
 def polys(g):
  if g.is_empty:return []
  return [g] if g.geom_type=='Polygon' else [p for p in g.geoms if p.geom_type=='Polygon']
-def anillo(r):return [[round(x,3),round(y,3)] for x,y in list(r.coords)[:-1]]
+def anillo(r):return [[round(x,2),round(y,2)] for x,y in list(r.coords)[:-1]]
 def serializar(g):
  return [{'exterior':anillo(p.exterior),'patios':[anillo(h) for h in p.interiors]} for p in map(lambda p:orient(p,1),polys(g))]
 out={}
@@ -28,7 +28,7 @@ for id in range(1,8):
    hueco=box(-93,z-6,-54,z+6).intersection(p.buffer(-5))
    p=p.difference(hueco)
  alta=p.intersection(box(-54,-100,-29,45)) if id==1 else Polygon()
- out[str(id)]={'plantas':serializar(p),'comercio':serializar(p.buffer(-2.6,join_style=2)), 'alta':serializar(alta), 'jardines':serializar(p.convex_hull.difference(p.buffer(1)))}
+ out[str(id)]={'plantas':serializar(p),'comercio':serializar(p.buffer(-2.6,join_style=2)), 'alta':serializar(alta), 'jardines':serializar(p.convex_hull.difference(p.buffer(1)).simplify(.05, preserve_topology=True))}
 (ROOT/'src/hitos/datos/el-silencio-plantas.js').write_text('// Derivado de OSM (ODbL), tools/el-silencio-plantas.py; patios de1 interpretativos.\nexport const PLANTAS_SILENCIO='+json.dumps(out,separators=(',',':'))+'\n')
 
 control=[{'id':h['nombre'],'osm':h['osmWay'],'px':[[round(v,3) for v in p] for p in h['px']]} for h in huellas]

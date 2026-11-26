@@ -39,3 +39,7 @@ Comparar1936 y1945 desde la misma cámara. Verificar retorno a1772/1843/1889/191
 - GPU RTX2060, build de producción,1280×800: mediana centro main1936=10,4ms; rama1936=9,8ms; rama1945=10,4ms. Una pasada, no un estudio estadístico. Los JSON completos conservan también los presupuestos que ya fallaban en main (descarga, carga, triángulos). Heap instantáneo125/257/202MB; no se forzó GC ni se atribuye esa diferencia a memoria retenida. JSON en la misma carpeta.
 - El worker fallido devuelve la selección a la época anterior y permite reintentar. Sin `crece.json`, se conserva1936 para no dejar el recinto vacío.
 - [Galería de capturas](https://gist.github.com/grunch/c665064c266dc49e7f23621a7f2ff509).
+
+## Ajustes de revisión
+
+El modo a pie triangula las crujías comerciales con sus patios y deja abiertas las galerías. El build mide 323,2 kB gzip de JS inicial (tope330), 153,3 kB de workers frente a142,5 en main y 1,3 kB del service worker. Se ajusta explícitamente el presupuesto de workers de150 a160 kB por el nuevo modelo; no se eleva el inicial. Se simplifican sólo bordes de jardines a5 cm y las plantas se redondean a1 cm; las huellas geográficas originales se conservan.

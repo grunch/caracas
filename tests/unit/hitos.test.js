@@ -260,7 +260,7 @@ describe('la malla', () => {
     expect(malla.geometry.attributes.aAncla.itemSize).toBe(4)
     for (const k of ['uOla', 'uColor', 'uEpocaDe', 'uEpocaA', 'uOlaEpoca', 'tRelieve', 'uExageracion']) expect(malla.material.uniforms[k]).toBe(U[k])
     expect(malla.userData.rangos.map((r) => r.id)).toEqual(HITOS.map((h) => h.id))
-  })
+  }, 15000) // Ensambla también los siete bloques; CI comparte CPU entre suites.
 
   test('definiciones inválidas: no arma la malla y dice por qué', () => {
     expect(() => crearHitos({ hitos: [{ ...valido, fuente: '' }], coords, U })).toThrow(/sin fuente/)

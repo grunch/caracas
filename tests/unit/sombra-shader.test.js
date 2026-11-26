@@ -217,7 +217,7 @@ describe('los árboles y los hitos con sombra', () => {
 
   test('sin los uniforms de la luz (un U a medias) quedan los de respaldo: el sol de siempre y el mapa apagado', () => {
     const sinLuz = Object.fromEntries(Object.entries(U).filter(([k]) => !UNIFORMS_DE_LUZ.includes(k)))
-    for (const material of [crearArboles({ datos, coords, U: sinLuz }).material, crearHitos({ coords, U: sinLuz }).material]) {
+    for (const material of [crearArboles({ datos, coords, U: sinLuz }).material, crearHitos({ hitos: [], coords, U: sinLuz }).material]) {
       expect(material.uniforms.uSol.value).toBeInstanceOf(Vector3)
       expect(material.uniforms.uSol.value.toArray()).toEqual(vectorSol())
       // el sampler de sombra tiene su entrada (three le pone su textura vacía) y la lectura está apagada
