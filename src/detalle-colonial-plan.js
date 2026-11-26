@@ -1,11 +1,12 @@
 /** Piloto visual: tres cuadras existentes; no cambia la parcelación ni los datos históricos. */
+import epocasRetiro from './manzanas/epocas-retiro.json'
 import retiros from './manzanas/retiro-1772-piloto.json'
 import {puntoEnPoligono} from './hitos/suprimir.js'
 export const PILOTO_COLONIAL = [
  {id:'U1772-0080',poligono:[[8804.926,7177.362],[8850.839,6921.014],[9035.975,6955.786],[8986.062,7216.633]]},
  {id:'U1772-0095',poligono:[[9094.898,6749.251],[9137.991,6497.003],[9390.107,6543.511],[9342.907,6798.433]]},
  {id:'U1772-0205',poligono:[[8633.142,6663.802],[8686.434,6414.912],[8932.468,6462.707],[8875.451,6711.978]]},
-].map(m=>({...m,contornos:retiros[m.id]??[]}))
+].map(m=>({...m,contornos:(retiros[m.id]??[]).map(c=>({...c,vida:[1,Math.min(4,epocasRetiro.length+1)]}))}))
 export function nivelDetalle(distancia,anterior=0,liviano=false){
  if(distancia>(anterior?440:400))return 0
  if(liviano)return 1
