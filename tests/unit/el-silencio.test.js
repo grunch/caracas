@@ -5,11 +5,11 @@ import {suprimirTechos,zonasDeSupresion} from '../../src/hitos/suprimir.js'
 import {visibleEn} from '../../src/epocas.js'
 
 describe('El Silencio georreferenciado',()=>{
- it('añade una vista parcial de 1945 sin cambiar índices ni metadatos originales',()=>{
+ it('añade una época de 1946 sin cambiar índices ni metadatos originales',()=>{
   const originales=[1578,1772,1843,1889,1911,1936].map(año=>({año,corto:'plano original'}))
   const epocas=conElSilencio(originales)
   expect(epocas.slice(0,6)).toEqual(originales);expect(originales).toHaveLength(6)
-  expect(epocas[EPOCA_SILENCIO]).toMatchObject({año:1945,base:1936,parcial:true})
+  expect(epocas[EPOCA_SILENCIO]).toMatchObject({año:1946,base:1936,plano:'1950-archiveorg-plano-de-caracas-dcn'})
   expect(conElSilencio([{año:1772}])).toEqual([{año:1772}])
  })
  it('registra siete bloques y plazas, posteriores a1936',()=>{

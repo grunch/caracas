@@ -53,5 +53,10 @@ export const GLSL_SUELO = /* glsl */ `
     // el dibujo del plano: entero en la ciudad (en la de 1936); en el campo, nada (solo en 1936, tenue: es su plano)
     float dibujo = mix(${TINTA_DEL_CAMPO_1936} * smoothstep(4.5, 5.0, epoca), 1.0 - antes, ciudad);
     // los nombres, las cotas y el tranvía del plano de 1936 no se marcan: solo queda el dibujo
+    // Sin máscara de rótulos de1946: su documento completo se consulta en tinta o en el visor.
+    dibujo *= 1.0 - smoothstep(5.5,6.0,epoca);
+    vec3 extension = expansion1946(hoja, epoca) * (1.0 - s.r);
+    c = mix(c, TIERRA_DE_CALLE, extension.r);
+    c = mix(c, CULTIVO_1936, extension.b);
     return mix(campo, c, ciudad) * (1.0 - 0.4 * tintaDe(papel) * dibujo * (1.0 - rotulo));
   }`

@@ -12,6 +12,7 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { armarCreditos, mapasUsados, paquetesDeCreditos } from './creditos-lib.mjs'
+import { conElSilencio } from '../src/el-silencio-epoca.js'
 import { PRIMERA_EPOCA } from '../src/epocas.js'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
@@ -21,7 +22,7 @@ const leerSiHay = (ruta) => leer(ruta).catch((e) => { if (e.code === 'ENOENT') r
 
 const { epocas } = await leer('public/datos/crece.json')
 const base = (await leer('tools/geo/mosaico-1936.json')).hojas.map((h) => h.fuente)
-const uso = { epocas, desde: PRIMERA_EPOCA, base }
+const uso = { epocas: conElSilencio(epocas), desde: PRIMERA_EPOCA, base }
 
 const fichasMapas = {}
 for (const id of mapasUsados(uso).flatMap((g) => g.ids)) fichasMapas[id] = await leerSiHay(`fuentes/mapas/${id}/ficha.json`)

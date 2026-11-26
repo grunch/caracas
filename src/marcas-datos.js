@@ -27,7 +27,7 @@ const L43 = (letra, nombre) => `leyenda del plano de Jesurún de 1843 (${letra} 
 const SIN_LEYENDA = 'Nombre de la época 1772 sin cotejar con la leyenda de ese plano.'
 
 export const MARCAS = Object.freeze([
-  {id:'reurbanizacion-el-silencio',fuente:'https://entrerayas.com/a-66-anos-de-la-inauguracion-de-la-reurbanizacion-el-silencio/ · Geografía © OpenStreetMap contributors, ODbL 1.0: https://www.openstreetmap.org/copyright',hito:'silencio-bloque-1',nombre:'Reurbanización El Silencio',nace:6,nivel:1,nota:'Siete bloques y dos plazas, inaugurados en 1945. Vista parcial sobre la ciudad de 1936.'},
+  {id:'reurbanizacion-el-silencio',fuente:'https://entrerayas.com/a-66-anos-de-la-inauguracion-de-la-reurbanizacion-el-silencio/ · Geografía © OpenStreetMap contributors, ODbL 1.0: https://www.openstreetmap.org/copyright',hito:'silencio-bloque-1',nombre:'Reurbanización El Silencio',nace:6,nivel:1,nota:'Siete bloques y dos plazas, inaugurados en 1945. En la vista del levantamiento de 1946.'},
   // --- el valle: sierra, cerro, río y quebradas ---
   { id: 'avila', nombre: 'El Ávila', x: 9000, y: 2300, nace: 1, nivel: 1, nota: 'La sierra que cierra el valle por el norte.',
     fuente: `${P36} (la sierra, sin rótulo en la hoja); nombre: ${CG}`, dudas: 'El plano de 1936 no rotula la sierra en esta hoja.' },

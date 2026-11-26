@@ -394,3 +394,10 @@ En el visor, `src/hitos/suprimir.js` comprueba las alas techadas de una casa de
 patio antes de apagarla por un monumento. Un solar que toca la Catedral no borra
 el frente de la calle opuesta. Si una época posterior ocupa ese solar con una
 cubierta de lote entero, la supresión vuelve a aplicarse desde esa época.
+
+### 1946 · plano DCN y ampliación
+
+`mapa_1946.py` añade la época1946 desde las fotografías aéreas indicadas por el plano
+catalogado hacia1950. Sustituye la vista parcial1945; mantiene la inauguración de
+El Silencio en su ficha. Véanse [fuentes, límites, calce y comandos de instalación](../../specs/1946-plano-y-ampliacion.md).
+Las casas de la ampliación son interpretativas; las anteriores se conservan exactamente.

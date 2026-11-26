@@ -1,10 +1,14 @@
 import {test,expect} from '@playwright/test'
 
-test('El Silencio aparece en1945, conserva1936 y abre el plano base correcto',async({page},info)=>{
+test('El Silencio aparece en1946, conserva1936 y abre el plano base correcto',async({page},info)=>{
  const errores=[];page.on('pageerror',e=>errores.push(e.message));await page.goto('/?capture&sinintro');await page.waitForFunction(()=>window.lab?.ready&&lab.lineaDeTiempo)
- await expect(page.getByRole('button',{name:'1945',exact:true})).toBeVisible()
- await page.getByRole('button',{name:'1945',exact:true}).click();await expect(page.locator('#epocas')).toContainText('Reconstrucción parcial')
- await expect(page.getByRole('button',{name:'Ver el plano de 1936',exact:true})).toBeVisible()
+ await expect(page.getByRole('button',{name:'1946',exact:true})).toBeVisible()
+ await page.getByRole('button',{name:'1946',exact:true}).click();await expect(page.locator('#epocas')).toContainText('plano de 1946')
+ await expect(page.getByRole('button',{name:'Ver el plano de 1946',exact:true})).toBeVisible()
+ await page.getByRole('button',{name:'Ver el plano de 1946',exact:true}).click()
+ await expect(page.locator('#visor-plano')).toBeVisible()
+ await expect(page.locator('#visor-plano')).toContainText('1946')
+ await page.getByRole('button',{name:'Cerrar el plano',exact:true}).click()
  await page.waitForFunction(()=>lab.hitosSilencio&&lab.ciudad.U.uEpocaA.value===6)
  const r=await page.evaluate(async()=>{
   const {Mesh,Scene,OrthographicCamera,Color}=await import('/node_modules/three/build/three.module.js')
@@ -20,12 +24,12 @@ test('El Silencio aparece en1945, conserva1936 y abre el plano base correcto',as
  await info.attach('visibilidad-el-silencio',{body:JSON.stringify(r),contentType:'application/json'})
 })
 
-test('si falla el worker de1945 se puede reintentar sin bloquear la línea de tiempo',async({page})=>{
+test('si falla el worker de1946 se puede reintentar sin bloquear la línea de tiempo',async({page})=>{
  await page.addInitScript(()=>{const Original=window.Worker;let fallo=false;window.Worker=class extends Original{postMessage(m,...args){if(m.soloSilencio&&!fallo){fallo=true;setTimeout(()=>this.onmessage?.({data:{error:'fallo de prueba'}}),0);return}super.postMessage(m,...args)}}})
  await page.goto('/?capture&sinintro');await page.waitForFunction(()=>window.lab?.ready&&lab.lineaDeTiempo)
- await page.getByRole('button',{name:'1945',exact:true}).click()
+ await page.getByRole('button',{name:'1946',exact:true}).click()
  await expect(page.locator('#epocas .pie')).toContainText('Puedes volver a elegirla')
- await page.getByRole('button',{name:'1945',exact:true}).click()
+ await page.getByRole('button',{name:'1946',exact:true}).click()
  await page.waitForFunction(()=>lab.hitosSilencio&&lab.ciudad.U.uEpocaA.value===6)
 })
 

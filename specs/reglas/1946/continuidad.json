@@ -1,0 +1,15 @@
+{
+  "prefijosIdenticos": {
+    "vertices": true,
+    "techos": true,
+    "vida": true,
+    "historia": true,
+    "marcos": true,
+    "alas": true,
+    "vuelos": true,
+    "paletas": true
+  },
+  "casasNuevas": 9703,
+  "epocas0a5": "geometr\u00eda, historia y vida anteriores conservadas; nuevas casas nacen6",
+  "solapesMayores005m2": []
+}
