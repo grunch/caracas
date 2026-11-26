@@ -33,10 +33,15 @@ export const FICHAS = Object.freeze({
   calvario: {
     textos: [
       [1, 'El cerro al oeste de la ciudad. Desde este lado se dibujó la vista de 1839: la ciudad baja, la torre de la Catedral y el Ávila al fondo.'],
-      [3, 'El plano de 1889 dibuja el paseo en la cima y cuenta su capilla entre los templos (XII, «el Calvario»). Desde aquí se tomaron las fotos panorámicas de comienzos del siglo XX, y aquí está el arco de la Federación.'],
+      [3, 'El paseo de El Calvario fue inaugurado en 1873. El plano de 1889 dibuja sus caminos en la cima y cuenta su capilla entre los templos (XII, «el Calvario»).'],
+      [4, 'El Arco de la Federación, construido en 1895 por Juan Hurtado Manrique con Alejandro Chataing, forma parte de los accesos al paseo.'],
       [5, 'El plano de 1936 lo rotula «Paseo Independencia» y marca la «Capilla del Calvario».'],
     ],
-    dudas: 'En 1889 el paseo llevaba el nombre de Guzmán Blanco (dato general, sin cotejar); cuándo pasó a llamarse Independencia, tampoco se cotejó.',
+    dudas: 'Las fuentes consultadas difieren sobre el año del cambio de nombre a Independencia; se mantiene la denominación descriptiva del paseo en 1889.',
+  },
+  'arco-federacion': {
+    textos: [[4, 'El Arco de la Federación se construyó en 1895 en El Calvario, con proyecto de Juan Hurtado Manrique y colaboración de Alejandro Chataing. Es posterior al paseo de 1873 y no corresponde a la vista de 1889.']],
+    dudas: 'La ubicación de la marca es aproximada; el monumento todavía no tiene un modelo arquitectónico propio.',
   },
   catuche: {
     textos: [
