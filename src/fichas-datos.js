@@ -291,10 +291,11 @@ export const FICHAS = Object.freeze({
   // --- el este ---
   candelaria: {
     textos: [
-      [2, 'La leyenda del plano de 1843 nombra la iglesia de La Candelaria (J).'],
+      [1, 'El 17 de mayo de 1772, el obispo Mariano Martí visitó la iglesia, fundada en 1708 y parroquia independiente desde 1750. Describió tres naves, tres puertas hacia el oeste, una torre de tres cuerpos y un cementerio cercado anexo. La plaza se delimitó al comenzar el templo; a mediados del siglo XVIII tenía pilastras de ladrillo en sus cuatro costados.'],
+      [2, 'La leyenda del plano de 1843 nombra la iglesia de La Candelaria (J). El terremoto de 1812 había derribado parte del templo, su fachada y el tercer cuerpo de la torre; la reconstrucción se emprendió después de la guerra de Independencia.'],
       [3, 'La iglesia y su plaza, al este del casco: templo VI y plaza D del plano de 1889.'],
     ],
-    dudas: 'La iglesia es colonial (dato general): aquí aparece desde 1843, cuya leyenda la nombra.',
+    dudas: 'La planta, las dimensiones y el aspecto preciso del templo colonial requieren un estudio específico.',
   },
   'fc-central': {
     textos: [[3, 'El plano de 1889 rotula aquí «Estación» y «Ferrocarril Central», al este de la ciudad.']],
