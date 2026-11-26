@@ -35,3 +35,7 @@ No ejecutar después los integradores de 1843/1889: heredarían la propuesta. Es
 - Capturas automatizadas antes/después con la misma cámara cenital y oblicua. No sustituyen la revisión visual del responsable.
 
 El generador no añade código al render ni publica datos. El coste de generación es offline; no se ha medido el tiempo por cuadro de esta propuesta.
+
+## Límite detectado en la prueba de navegador
+
+`tests/e2e/detalle-colonial.spec.js` agotó 180 s esperando las mallas de la capa opcional `detallecasas=1`. La inspección encontró que `extraerFrentes` reconoce las fachadas por coincidencia con los bordes estáticos de `PILOTO_COLONIAL`; las nuevas fachadas están a 1 m de esos bordes. Además, la sustitución temporal separa las vidas de las casas, y la capa selecciona nacimientos en el índice 1. Antes de publicar hay que adaptar esa selección a contornos por época y repetir el E2E, conservando el detalle en 1843/1889. No se considera el piloto listo para producción. Las capturas y el comparador muestran el render principal, sin activar esta capa experimental.
