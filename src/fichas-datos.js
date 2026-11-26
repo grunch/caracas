@@ -159,12 +159,13 @@ export const FICHAS = Object.freeze({
   // --- San Jacinto y el sur ---
   'san-jacinto': {
     textos: [
-      [1, 'El convento de San Jacinto, con su plaza al frente.'],
-      [2, 'La leyenda del plano de 1843 nombra San Jacinto (M) entre las iglesias, capillas y conventos.'],
-      [3, 'Cuando la plaza mayor se hizo jardín, el mercado vino aquí: el plano de 1889 numera 23 el «Mercado público».'],
+      [1, 'El convento de San Jacinto, con su plaza al frente, fue visitado por el obispo Mariano Martí en 1772. Su descripción del templo se recoge en el estudio de Mariolly Dávila Cordido (SIGraDi 2013).'],
+      [2, 'El conjunto sufrió daños en 1812 y la supresión definitiva del convento fue ordenada en 1837 (Dávila Cordido). La leyenda del plano de 1843 conserva «San Jacinto» (M); ese rótulo no demuestra que continuara la comunidad conventual.'],
+      [3, 'La iglesia fue demolida en 1875 para ampliar el mercado (Landaeta Rosales). El plano de 1889 identifica aquí el «Mercado público» (23), anterior a la nueva sede de 1897.'],
+      [4, 'La nueva sede del mercado se inauguró en septiembre de 1897, según la investigación de Mariana Iribarren reseñada por Fundación Arquitectura y Ciudad.'],
       [5, 'El plano de 1936 lo rotula «Mercado Principal».'],
     ],
-    dudas: `El convento, en 1772, es un dato general: ${SIN_LEYENDA}. La leyenda del plano de 1843 ya lo nombra.`,
+    dudas: `La presencia en 1772 está documentada por la visita de Martí. El mercado consta en el plano de 1889; su rótulo no demuestra que ya tuviera una cubierta de hierro.`,
   },
   'plaza-venezolano': {
     textos: [

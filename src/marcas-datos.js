@@ -88,8 +88,8 @@ export const MARCAS = Object.freeze([
 
   // --- San Jacinto y el sur del centro ---
   { id: 'san-jacinto', x: 9400, y: 7100, nace: 1, nivel: 2, alto: 9,
-    nombres: [[1, 'Convento de San Jacinto'], [3, 'Mercado de San Jacinto', 'El mercado, mudado aquí desde la plaza.'], [5, 'Mercado Principal']],
-    fuente: `${P89} (23 «Mercado público»); ${P36} («Mercado Principal»); convento: ${CG}; en 1843: ${L43('M', 'San Jacinto')}`, dudas: SIN_LEYENDA },
+    nombres: [[1, 'Convento de San Jacinto'], [2, 'San Jacinto'], [3, 'Mercado de San Jacinto', 'El mercado, mudado aquí desde la plaza.'], [5, 'Mercado Principal']],
+    fuente: `${P89} (23 «Mercado público»); ${P36} («Mercado Principal»); convento: Mariolly Dávila Cordido, SIGraDi 2013, pp. 177–181, https://pdf.blucher.com.br/designproceedings/sigradi2013/0032.pdf; demolición en 1875: Landaeta Rosales, Los cementerios de Caracas (1906), pp. 7–8, https://studylib.es/doc/5233149/los-cementerios-de-caracas---desde-1567-hasta-1906; nueva sede en 1897: https://fundaayc.com/2017/03/12/algo-mas-sobre-la-postal-no-53/; en 1843: ${L43('M', 'San Jacinto')}`, dudas: 'La visita de Martí respalda su presencia en 1772. La extensión de los daños de 1812 y la forma del mercado por época requieren un cotejo arquitectónico; no se presume que el convento siguiera activo en 1843.' },
   { id: 'plaza-venezolano', nombres: [[1, 'Plaza de San Jacinto'], [3, 'Plaza El Venezolano']], x: 9265, y: 7040, nace: 1, nivel: 3,
     fuente: `${P89} (plaza B «del Venezolano»); ${P36} («Plaza El Venezolano»); nombre anterior: ${CG}`,
     dudas: `${SIN_LEYENDA} La leyenda de 1843 no da letra a las plazas; el texto al pie de ese plano cuenta «San Jacinto» entre las plazas de la ciudad.` },
