@@ -107,9 +107,9 @@ describe('pórtico, remate y frente neogótico', () => {
 describe('los edificios civiles', () => {
   test('las definiciones pasan la validación y ninguna planta pisa la de otro hito', () => {
     expect(validarHitos(HITOS, PLANO)).toEqual([])
-    const plantas = HITOS.flatMap((h) => h.planta.map((poligono) => ({ id: h.id, poligono })))
+    const plantas = HITOS.flatMap((h) => h.planta.map((poligono) => ({ id: h.id, poligono, nace: h.nace, muere: h.muere || Infinity })))
     for (const a of plantas) {
-      for (const b of plantas) if (a.id < b.id) expect(seSolapan(a.poligono, b.poligono), `${a.id} × ${b.id}`).toBe(false)
+      for (const b of plantas) if (a.id < b.id && a.nace < b.muere && b.nace < a.muere) expect(seSolapan(a.poligono, b.poligono), `${a.id} × ${b.id}`).toBe(false)
     }
   })
 
@@ -143,8 +143,8 @@ describe('los edificios civiles', () => {
     // 1772 (~73 mil, con el cuerpo neoclásico compartido de 1889 a 1936); T41g, San Francisco en tres tramos
     // (~12,7 mil, sin interior). Siempre en el mismo draw call.
     // Teatro Municipal: +36.247 triángulos, compartidos entre 1889/1911/1936. Total medido: 498.150.
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(540_000) // Nuevo Circo: +26.398; total anterior a 1946: 524.548.
-    expect(d.indices.length / 3).toBeLessThan(1_020_000)
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(570_000) // Rotunda/solar: +23.872; total anterior a 1946: 561.916.
+    expect(d.indices.length / 3).toBeLessThan(1_050_000) // Concordia: +4.332; total: 1.041.289.
     expect(d.rangos.length).toBe(HITOS.length)
   }, 15_000)
 })

@@ -221,8 +221,16 @@ export const FICHAS = Object.freeze({
     dudas: 'Inaugurado en 1905 (dato general): por eso aparece desde 1911.',
   },
   rotunda: {
-    textos: [[3, 'La cárcel de la ciudad: el plano de 1889 la numera 30, «Cárcel». En el de 1936 la esquina se sigue llamando «La Cárcel», pero el solar ya está vacío.']],
-    dudas: 'El nombre «La Rotunda» y su demolición en 1936 son datos generales; el plano de 1889 solo dice «Cárcel».',
+    textos:[[3,'La cárcel de La Rotunda, al sur del Cuartel del Hoyo. Construida entre 1844 y 1854, tenía celdas en dos niveles alrededor de un patio circular; en 1881 se proyectó un segundo recinto al norte. El modelo representa los dos recintos, con fecha de conclusión de la ampliación no comprobada.'],[4,'El plano de Razetti de 1911 la identifica con el 39; el 40 contiguo es el Cuartel del Hoyo, fuera de la reserva de la cárcel.']],
+    dudas:'Alturas, guardia, colores y distribución interior simplificados. No se presenta el estudio como levantamiento métrico.'
+  },
+  'solar-rotunda':{
+    textos:[[5,'El plano de 1936 muestra libre el solar occidental donde estuvo La Rotunda. Se conserva ese estado, sin inventar escombros ni adelantar la plaza terminada.']],
+    dudas:'Una transcripción atribuye el decreto a 2enero 1936; Polar registra una resolución del MOP en abril. No fijan por sí solas el día efectivo del derribo. El verde es la convención de suelo libre del visor.'
+  },
+  concordia:{
+    textos:[[6,'La plaza La Concordia, diseñada por Carlos Raúl Villanueva y fechada en 1940 por Polar. El plano basado en fotos de 1946 muestra jardines y un elemento circular central. El templete se aproxima con fotografías históricas: pilares rectangulares exteriores, columnas interiores y cubierta de teja.']],
+    dudas:'Medidas, número de soportes, bancos y árboles interpretativos. No se copia la plaza actual ni las remodelaciones posteriores.'
   },
   'santa-rosalia': {
     textos: [
