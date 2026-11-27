@@ -17,6 +17,10 @@
 const SIN_LEYENDA = 'el nombre de 1772 no se cotejó con la leyenda de ese plano'
 
 export const FICHAS = Object.freeze({
+  'puente-sucre': {
+    textos: [[3, 'El puente Constitución cruza el Guaire al término de la calle Sur 7. Fue destruido por la crecida de 1892.'], [4, 'En el mismo cruce funciona el Puente Sucre de 1895, con una armadura metálica superior de 60 m y sin apoyos intermedios.'], [5, 'El cruce ya dispone de un puente de concreto. La armadura metálica anterior fue desmontada y trasladada; no debe representarse como la estructura de esta época.']],
+    dudas: 'Silva Contreras documenta la sustitución en 1925 (Memoria MOP 1926, pp. 339–353); FAC 2022 cita 1930. Ambas fechas preceden a 1936. No se fija aquí el año exacto sin cotejar los expedientes. https://fundaayc.com/2022/09/08/1924-inauguracion-del-puente-ayacucho/',
+  },
   'circo-metropolitano': {
     textos: [[4, 'Abrió el 2 de febrero de 1896, entre Miranda y Puerto Escondido. El Circo Metropolitano y el Nuevo Circo fueron edificios diferentes y coexistieron. Su estructura permanecía en la época de 1936 y ya había desaparecido en 1946.']],
     dudas: 'Las referencias difieren entre 1942 y 1945 para la demolición. No se elige un año exacto sin resolver la discrepancia; ambas fechas justifican su ausencia en 1946. Modelo propio pendiente de integración.',
@@ -241,7 +245,8 @@ export const FICHAS = Object.freeze({
     ],
   },
   'puente-hierro': {
-    textos: [[3, 'El puente sobre el Guaire, al sur de la ciudad. Una foto publicada en 1876 lo muestra recién hecho, con su hilera de chaguaramos; el plano de 1889 lo rotula «Puente de hierro».']],
+    textos: [[3, 'Puente de la Regeneración, conocido como Puente de Hierro. Su estructura de 1875 empleaba vigas inferiores y columnas de hierro.'], [6, 'El puente original fue demolido y sustituido en 1937.']],
+    dudas: 'Dimensiones y detalles de la estructura posterior por verificar.',
   },
 
   // --- el norte ---
