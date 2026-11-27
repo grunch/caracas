@@ -103,7 +103,7 @@ describe('construirHitos', () => {
   })
 
   test('presupuesto: pocos triángulos para un solo draw call', () => {
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(600_000) // San Agustín + Hijos de Dios: ~592.022 históricos.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(600_000) // presupuesto de geometría histórica antes del cierre.
     expect(datos.indices.length / 3).toBeLessThan(1_080_000) // San Agustín + Hijos de Dios: ~1.071.395 en total.
   })
 
@@ -113,7 +113,8 @@ describe('construirHitos', () => {
       const { x, z } = coords.aMundo(hito(id).x, hito(id).y)
       expect(hasta).toBeGreaterThan(desde)
       for (let i = desde; i < hasta; i += 97) {
-        const radio=Math.max(160,...(hito(id).suprime??[]).flat().map(([px,py])=>{const v=coords.aMundo(px,py);return Math.hypot(v.x-x,v.z-z)+5}))
+        const datosHito=hito(id),poligonos=[...(datosHito.suprime??[]),...(datosHito.suprimePorEpoca??[]).map(f=>f.poligono),...(datosHito.plantaPorEpoca??[]).flatMap(f=>f.poligonos??[])]
+        const radio=Math.max(160,...poligonos.flat().map(([px,py])=>{const v=coords.aMundo(px,py);return Math.hypot(v.x-x,v.z-z)+5}))
         expect(Math.hypot(datos.posiciones[i * 3] - x, datos.posiciones[i * 3 + 2] - z)).toBeLessThan(radio)
         expect(datos.posiciones[i * 3 + 1]).toBeLessThan(90)
       }

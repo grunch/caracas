@@ -9,10 +9,10 @@
     "msPorCuadroCentro": 16.6
   },
   "build": {
-    "nota": "Topes del build medidos en kB gzip y comprobados por tools/rendimiento/presupuesto-build.mjs. T40c: workers 142,5→153,3 por siete bloques de El Silencio (tope 160). T82.P1: entrada 330,0→331,3 por fuentes y fichas (tope 332). T82.NC: entrada 334,8 (tope 336), worker 156 (tope 160). T82.CM: entrada 336,1 (tope 337), worker 157,2. T82.RC: entrada 339,2 (tope 340), workers 159,5. T82.SA: entrada 341,0, workers 161,0 (topes 342/162). T82.HD combinado con San Agustín: build medido 343,2/162,7; topes explícitos 344/163. Los presupuestos de ejecución no cambian.",
+    "nota": "Topes del build medidos en kB gzip y comprobados por tools/rendimiento/presupuesto-build.mjs. T40c: workers 142,5→153,3 por siete bloques de El Silencio (tope 160). T82.P1: entrada 330,0→331,3 por fuentes y fichas (tope 332). T82.NC: entrada 334,8 (tope 336), worker 156 (tope 160). T82.CM: entrada 336,1 (tope 337), worker 157,2. T82.RC: entrada 339,2 (tope 340), workers 159,5. T82.SA: entrada 341,0, workers 161,0 (topes 342/162). T82.HD combinado con San Agustín: build medido 343,2/162,7; topes explícitos 344/163. T83: cementerio Sur en dos fases, huellas/calles y piezas tipológicas: build medido 345,6/164,4; topes explícitos 346/165. El modelo suma geometría estática y no cambia los presupuestos de ejecución.",
     "topes": {
-      "jsAlAbrirKB": 344,
-      "trabajadoresKB": 163,
+      "jsAlAbrirKB": 346,
+      "trabajadoresKB": 165,
       "servicioKB": 3
     }
   }

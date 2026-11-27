@@ -2,6 +2,7 @@ import {hijosDios} from './hijos-dios.js'
 import {conjuntoRotunda} from './rotunda.js'
 import {sanAgustin} from './san-agustin.js'
 import {metropolitano} from './metropolitano.js'
+import {cementerioSur} from './cementerio-sur.js'
 /**
  * Los tipos de parte de un hito: cada definición (src/hitos/datos/*.js) lista `partes` con un `tipo`, y acá
  * está quién la dibuja. Una parte recibe el pintor del hito ya con su vida (nace, muere) y sus medidas en
@@ -66,6 +67,7 @@ export const parteDe = (tipo) => (Object.hasOwn(PARTES, tipo) ? PARTES[tipo] : u
 export const PARTES = Object.freeze({
   'conjunto-rotunda':conjuntoRotunda,
   'hijos-de-dios':hijosDios,
+  'cementerio-sur'(p,medidas){cementerioSur(p,medidas)},
   elSilencio,
   'san-agustin'(p) { sanAgustin(p) },
   metropolitano(p) { metropolitano(p) },

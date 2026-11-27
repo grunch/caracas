@@ -1,9 +1,10 @@
 import {puntoEnPoligono,vidaSinHito} from './suprimir.js'
+import {poligonosConVida} from './datos/fases-geometricas.js'
 
 /** Reservas explícitas de edificios cerrados. Conserva los árboles de las épocas anteriores,
  * las posiciones/semillas y los datos del paquete; no aplica esta regla a jardines de otros hitos. */
 export function suprimirArbolesDeHitos(datos,hitos){
-  const zonas=hitos.flatMap(h=>(h.sinArboles??[]).map(poligono=>({poligono,desde:h.nace??0,hasta:h.muere??0,
+  const zonas=hitos.flatMap(h=>poligonosConVida(h,'sinArboles').map(({poligono,desde,hasta})=>({poligono,desde,hasta,
     x0:Math.min(...poligono.map(p=>p[0])),x1:Math.max(...poligono.map(p=>p[0])),
     y0:Math.min(...poligono.map(p=>p[1])),y1:Math.max(...poligono.map(p=>p[1]))})))
   if(!zonas.length)return datos

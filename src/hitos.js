@@ -2,6 +2,8 @@ import {hijosDios} from './hitos/datos/hijos-dios.js'
 import {rotundaYConcordia} from './hitos/datos/rotunda.js'
 import {sanAgustin} from './hitos/datos/san-agustin.js'
 import {metropolitano} from './hitos/datos/metropolitano.js'
+import {cementerioSur} from './hitos/datos/cementerio-sur.js'
+import {poligonosConVida} from './hitos/datos/fases-geometricas.js'
 /**
  * Los hitos: edificios y lugares con nombre, modelados a mano a partir del plano de 1936 y de las fotos y
  * grabados de época (specs/05). Cada uno es una definición declarativa (src/hitos/datos/*.js):
@@ -29,7 +31,7 @@ import { civiles } from './hitos/datos/civiles.js'
 export { suprimirTechos, zonasDeSupresion } from './hitos/suprimir.js'
 
 /** Todos los hitos, en el orden en que se dibujan. */
-export const HITOS = Object.freeze([plazaBolivar, catedral, ...iglesias, panteon, ...civiles, ...silencio, nuevoCirco, metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios])
+export const HITOS = Object.freeze([plazaBolivar, catedral, ...iglesias, panteon, ...civiles, ...silencio, nuevoCirco, metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios,cementerioSur])
 
 const EPOCAS = 7 // 0 = 1578 … 5 = 1936 (src/epocas.js)
 const esEpoca = (e) => Number.isInteger(e) && e >= 0 && e < EPOCAS
@@ -56,8 +58,15 @@ export function validarHitos(hitos, plano) {
     if (!dentro([h.x, h.y])) problemas.push(`${de}: fuera de la hoja`)
     if (!Array.isArray(h.eje) || !(Math.hypot(...h.eje) > 0)) problemas.push(`${de}: eje inválido`)
     vida(de, h)
-    for (const poligono of [...(h.planta ?? []), ...(h.suprime ?? [])]) {
+    const porEtapa=(h.plantaPorEpoca??[]).flatMap(f=>f.poligonos??[])
+    const poligonos=[...(h.planta??[]),...porEtapa,...poligonosConVida(h,'suprime').map(z=>z.poligono),...poligonosConVida(h,'sinArboles').map(z=>z.poligono),...poligonosConVida(h,'sueloPropio').map(z=>z.poligono)]
+    for (const poligono of poligonos) {
       if (poligono.length < 3 || !poligono.every(dentro)) problemas.push(`${de}: polígono fuera de la hoja o degenerado`)
+    }
+    for(const fase of h.plantaPorEpoca??[])vida(`${de} · planta`,{nace:fase.nace??h.nace,muere:fase.muere??h.muere})
+    for(const campo of ['suprimePorEpoca','sinArbolesPorEpoca','sueloPropioPorEpoca'])for(const fase of h[campo]??[]){
+      vida(`${de} · ${campo}`,{nace:fase.nace??h.nace,muere:fase.muere??h.muere})
+      if(fase.poligono&&(fase.poligono.length<3||!fase.poligono.every(dentro)))problemas.push(`${de}: polígono fuera de la hoja o degenerado`)
     }
     if (!h.partes?.length) problemas.push(`${de}: sin partes`)
     for (const [i, parte] of (h.partes ?? []).entries()) {

@@ -5,6 +5,7 @@
  */
 import { ALA, CAMPOS_MARCO, CAMPOS_ALA, esDePatio } from '../alas.js'
 import { recortarConvexo, areaConSigno } from '../poligono.js'
+import {poligonosConVida} from './datos/fases-geometricas.js'
 
 const ETAPAS_POR_VIDA = 8 // vida = nace + 8 · muere (ver src/ciudad.js)
 // Un intervalo vacío: nace y muere en la época 7, que no existe (hay 6: 0–5). No alcanza con "nace en 7":
@@ -93,7 +94,7 @@ export function pisaLaZona(anillo, zona) {
 
 /** Las zonas de supresión de una lista de hitos: [{ poligono, desde, hasta }] (hasta = 0: para siempre). */
 export function zonasDeSupresion(hitos) {
-  return hitos.flatMap((h) => (h.suprime ?? []).map((poligono) => ({ poligono, desde: h.nace ?? 0, hasta: h.muere ?? 0, ...(h.solarCompleto ? {solarCompleto:true} : {}) })))
+  return hitos.flatMap((h) => poligonosConVida(h,'suprime').map(({poligono,desde,hasta}) => ({ poligono, desde, hasta, ...(h.solarCompleto ? {solarCompleto:true} : {}) })))
 }
 
 /**
