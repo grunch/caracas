@@ -31,7 +31,7 @@ export const FICHAS = Object.freeze({
   },
   'hijos-de-dios': {
     textos: [[3, 'Abierto en 1856 en Sabana del Blanco. En esta época está cerrado al uso funerario, pero sus muros, nichos y sepulturas siguen formando parte de la ciudad. El plano de 1889 lo identifica como cementerio de la Concepción.'], [5, 'El cementerio clausurado conserva estructuras documentadas en fotografías de los años treinta. El cierre no equivale a su demolición, que ocurrió después de 1946.']],
-    dudas: 'La distribución individual de sepulturas y el estado de cada muro no están levantados. El modelo se estudia por separado antes de integrarlo al mapa.',
+    dudas: 'Tres recintos y contorno aproximado del plano1936, cotejados con1946. El plano1889 conserva la organización, pero difiere en proporciones; no se supone una reforma. Cuatro hileras de nichos observadas en fotografías. Alturas, espesores, sepulturas y árboles interpretativos; sin capilla independiente documentada.',
   },
 
   'reurbanizacion-el-silencio': {textos:[[6,'Carlos Raúl Villanueva proyectó siete bloques de viviendas y comercios con patios y soportales. El bloque 7 abrió el 5 de julio de 1944; el conjunto se inauguró el 26 de agosto de 1945. La plaza central se llamó General Rafael Urdaneta, hoy O’Leary. La vista de 1946 usa el levantamiento aerofotogramétrico de ese año y conserva las casas anteriores donde el plano no documenta una sustitución.']],dudas:'Emplazamiento ajustado a huellas OSM mediante la georreferenciación del mapa (RMS 5,09 m). Dimensiones interiores, colores y esculturas interpretativos.'},

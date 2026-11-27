@@ -1,3 +1,4 @@
+import {hijosDios} from './hijos-dios.js'
 import {conjuntoRotunda} from './rotunda.js'
 import {sanAgustin} from './san-agustin.js'
 import {metropolitano} from './metropolitano.js'
@@ -64,6 +65,7 @@ export const parteDe = (tipo) => (Object.hasOwn(PARTES, tipo) ? PARTES[tipo] : u
 
 export const PARTES = Object.freeze({
   'conjunto-rotunda':conjuntoRotunda,
+  'hijos-de-dios':hijosDios,
   elSilencio,
   'san-agustin'(p) { sanAgustin(p) },
   metropolitano(p) { metropolitano(p) },

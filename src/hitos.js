@@ -1,3 +1,4 @@
+import {hijosDios} from './hitos/datos/hijos-dios.js'
 import {rotundaYConcordia} from './hitos/datos/rotunda.js'
 import {sanAgustin} from './hitos/datos/san-agustin.js'
 import {metropolitano} from './hitos/datos/metropolitano.js'
@@ -28,7 +29,7 @@ import { civiles } from './hitos/datos/civiles.js'
 export { suprimirTechos, zonasDeSupresion } from './hitos/suprimir.js'
 
 /** Todos los hitos, en el orden en que se dibujan. */
-export const HITOS = Object.freeze([plazaBolivar, catedral, ...iglesias, panteon, ...civiles, ...silencio, nuevoCirco, metropolitano, ...rotundaYConcordia, sanAgustin])
+export const HITOS = Object.freeze([plazaBolivar, catedral, ...iglesias, panteon, ...civiles, ...silencio, nuevoCirco, metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios])
 
 const EPOCAS = 7 // 0 = 1578 … 5 = 1936 (src/epocas.js)
 const esEpoca = (e) => Number.isInteger(e) && e >= 0 && e < EPOCAS

@@ -1,3 +1,4 @@
+import {hijosDios} from './datos/hijos-dios.js'
 import {rotundaYConcordia} from './datos/rotunda.js'
 import {sanAgustin} from './datos/san-agustin.js'
 import {metropolitano} from './datos/metropolitano.js'
@@ -28,7 +29,7 @@ const bloquesSilencio = silencio.filter(h => h.id.startsWith('silencio-bloque-')
   }),
 }))
 
-export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar, ...bloquesSilencio, nuevoCirco, metropolitano, ...rotundaYConcordia, sanAgustin]
+export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar, ...bloquesSilencio, nuevoCirco, metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios]
   .filter((h) => h.planta)
   .map(({ id, nace, muere, planta, suprime, transitable, patio }) => ({
     id, nace, muere, planta, suprime: suprime ?? [], ...(transitable ? { transitable } : {}), ...(patio ? { patio } : {}),

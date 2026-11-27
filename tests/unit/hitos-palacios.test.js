@@ -143,8 +143,8 @@ describe('los edificios civiles', () => {
     // 1772 (~73 mil, con el cuerpo neoclásico compartido de 1889 a 1936); T41g, San Francisco en tres tramos
     // (~12,7 mil, sin interior). Siempre en el mismo draw call.
     // Teatro Municipal: +36.247 triángulos, compartidos entre 1889/1911/1936. Total medido: 498.150.
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(580_000) // Con San Agustín: histórico574.738 triángulos.
-    expect(d.indices.length / 3).toBeLessThan(1_060_000) // Con San Agustín: total1.054.111 triángulos.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(600_000) // San Agustín + Hijos de Dios: ~592.022 históricos.
+    expect(d.indices.length / 3).toBeLessThan(1_080_000) // San Agustín + Hijos de Dios: ~1.071.395 en total.
     expect(d.rangos.length).toBe(HITOS.length)
   }, 15_000)
 })
