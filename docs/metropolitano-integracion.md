@@ -23,9 +23,15 @@ alternativa de 1942 sin resolver artificialmente la discrepancia.
 | 1911, 1936 | Mismo modelo; no se inventan reformas intermedias |
 | 1946 | Sin circo; no se reconstruye el teatro posterior sin documentarlo |
 
-La planta y la orientación se contrastaron con 1936. El calce independiente de
-1911 sigue pendiente; el edificio compartido constituye una hipótesis explícita
-de continuidad. Alturas, graderío y colores son interpretativos.
+La planta y la orientación se contrastaron con 1936. También se cotejó el
+[plano de Razetti de 1911](https://maps.princeton.edu/catalog/princeton-05741v14j),
+recorte equivalente del raster calzado: aparece un símbolo anular al sur de
+Miranda, junto a la quebrada, en la misma cuadra. Su centro dibujado es aproximadamente
+(7947,7874), unos 22 m del centro de 1936, y el símbolo tiene menor diámetro.
+El calce TPS de 1911 declara RMS 6,71 m y p90 12,04 m. Esta discrepancia y la
+representación esquemática no justifican inferir un traslado o una ampliación.
+Se usa la huella detallada de 1936 y se declara la continuidad como hipótesis;
+1911 confirma el sitio y la presencia, no las dimensiones exactas. Alturas, graderío y colores son interpretativos.
 
 ## Instalación
 
@@ -43,7 +49,8 @@ Una casa genérica anterior se corta en 1911; no se le inventa una reaparición 
 1946. Las casas cuya vida empieza en 1946 conservan esa vida.
 
 Las fotografías y el escaneo se consultan, no se redistribuyen como texturas:
-no se ha establecido aquí licencia libre. Las capturas de validación son renders propios.
+para DCN/FAC no se ha establecido aquí licencia libre. Princeton declara
+«No Known Copyright» (NKC), sin determinación concluyente de derechos. Las capturas de validación son renders propios.
 
 ## Verificación
 

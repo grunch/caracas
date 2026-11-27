@@ -12,5 +12,5 @@ export const metropolitano=Object.freeze({
  planta:[...corona,portada],suprime:[exterior,portada],sinArboles:[exterior,portada],solarCompleto:true,
  terraza:{ancho:58,fondo:66},partes:[{tipo:'metropolitano'}],
  fuente:'DCN 1936, mosaico 0,5 m/px; fachada y ruedo de 36 m: https://fundaayc.com/category/crono-arquitectura-venezuela/1940-1949/1945/',
- verificar:['Centro y orientación por lectura visual del plano 1936, error estimado ±3 m; huella nominal exterior 58 m.','1911 conserva el modelo de 1936 sin reconstruir reformas no documentadas. Alturas, colores y graderío interpretativos de Miraflores.','Apertura 2-02-1896. Las fuentes discrepan entre demolición en 1942/1945; ambas lo excluyen de 1946. No se reconstruye aquí el teatro posterior.'],
+ verificar:['Centro y orientación por lectura visual del plano 1936, error estimado ±3 m; huella nominal exterior 58 m.','Razetti 1911 confirma el símbolo anular en la misma cuadra; su centro esquemático difiere unos 22 m. Se conserva la huella detallada de 1936 sin inferir traslado ni ampliación. Alturas, colores y graderío interpretativos de Miraflores.','Apertura 2-02-1896. Las fuentes discrepan entre demolición en 1942/1945; ambas lo excluyen de 1946. No se reconstruye aquí el teatro posterior.'],
 })
