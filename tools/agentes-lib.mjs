@@ -184,23 +184,32 @@ function conCerrojoReintentando(ruta, descripcion, fn) {
 }
 
 /**
- * Un reclamo ilegible (corrupto o escrito por otra herramienta) solo se considera abandonado cuando es
- * antiguo: si es reciente, alguien podría estar publicándolo y borrarlo le quitaría un reclamo válido.
+ * Estado de un reclamo: {falta}, {vigente: datos} o {abandonado}. Un reclamo ilegible (corrupto o escrito por
+ * otra herramienta) solo se considera abandonado cuando es antiguo: si es reciente, alguien podría estar
+ * publicándolo y borrarlo le quitaría un reclamo válido.
  */
-function reclamoVigente(raiz, ruta, ahora) {
+function estadoReclamo(raiz, ruta, ahora) {
   const datos = leerJson(ruta)
-  if (datos) return sesionActiva(raiz, datos.id, ahora) ? datos : null
+  if (datos) return sesionActiva(raiz, datos.id, ahora) ? {vigente: datos} : {abandonado: true}
   try {
-    return Date.now() - statSync(ruta).mtimeMs < CERROJO_HUERFANO_MS ? {id: 'desconocido'} : null
-  } catch (e) { if (e.code === 'ENOENT') return null; throw e }
+    return Date.now() - statSync(ruta).mtimeMs < CERROJO_HUERFANO_MS ? {vigente: {id: 'desconocido'}} : {abandonado: true}
+  } catch (e) { if (e.code === 'ENOENT') return {falta: true}; throw e }
 }
 
-/** Retira un reclamo cuyo dueño ya no está activo, comprobándolo de nuevo bajo el cerrojo. */
-function tomarSiAbandonado(raiz, ruta, ahora) {
-  if (reclamoVigente(raiz, ruta, ahora)) return false // dueño vivo: ni siquiera se toma el cerrojo
+/**
+ * Retira (o, con `reemplazo`, reemplaza) un reclamo cuyo dueño ya no está activo, comprobándolo de nuevo bajo
+ * el cerrojo. El reemplazo es un rename atómico sobre el reclamo viejo: el archivo nunca falta, así que nadie
+ * puede publicar con link() en el hueco entre retirar el viejo y publicar el nuevo. Un reclamo que ya no está
+ * no se borra nunca: podría ser el que alguien acaba de publicar.
+ */
+function tomarSiAbandonado(raiz, ruta, ahora, reemplazo = null) {
+  if (!estadoReclamo(raiz, ruta, ahora).abandonado) return false // dueño vivo o ya no está: ni se toma el cerrojo
   return conCerrojo(ruta, () => {
-    if (reclamoVigente(raiz, ruta, ahora)) return false
-    rmSync(ruta, {force: true})
+    if (!estadoReclamo(raiz, ruta, ahora).abandonado) return false
+    if (reemplazo === null) { rmSync(ruta, {force: true}); return true }
+    const tmp = `${ruta}.${process.pid}.${sufijo()}.tmp`
+    writeFileSync(tmp, reemplazo)
+    renameSync(tmp, ruta)
     return true
   }) ?? false
 }
@@ -217,12 +226,13 @@ function publicarReclamo(ruta, datos) {
 function crearReclamo(raiz, recurso, id, ahora) {
   const ruta = archivoReclamo(raiz, recurso)
   const datos = `${JSON.stringify({recurso, id, desde: iso(ahora)}, null, 2)}\n`
-  for (let intento = 0; intento < 2; intento += 1) {
+  for (let intento = 0; intento < 3; intento += 1) {
     try { publicarReclamo(ruta, datos); return {ok: true} } catch (e) {
       if (e.code !== 'EEXIST') throw e
-      const actual = leerJson(ruta)
-      if (actual?.id === id) return {ok: true, previo: true}
-      if (!tomarSiAbandonado(raiz, ruta, ahora)) return {ok: false, dueno: actual?.id ?? 'desconocido'}
+      if (leerJson(ruta)?.id === id) return {ok: true, previo: true}
+      if (tomarSiAbandonado(raiz, ruta, ahora, datos)) return {ok: true}
+      if (existsSync(ruta)) return {ok: false, dueno: leerJson(ruta)?.id ?? 'desconocido'}
+      // su dueño lo liberó entretanto: se vuelve a intentar publicar
     }
   }
   return {ok: false, dueno: leerJson(ruta)?.id ?? 'desconocido'}

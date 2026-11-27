@@ -60,7 +60,9 @@ node tools/agentes.mjs nota --id <ID> "<hallazgo útil para otros agentes>"
 - **Comandos largos** (`npm run datos`, `npx playwright test`, capturas, `npm run build`): lánzalos con
   `node tools/agentes.mjs ejecutar --id <ID> -- <comando>`. Late cada 10 minutos mientras corren y devuelve el
   código de salida del comando. Si la sesión caduca mientras corre (por ejemplo, la máquina se suspendió),
-  `ejecutar` detiene el comando y falla: inicia otra sesión y vuelve a reclamar.
+  `ejecutar` detiene el comando, con todos los procesos que lanzó, y falla: inicia otra sesión y vuelve a
+  reclamar. El comando corre en su propio grupo de procesos, sin leer de la terminal: úsalo para comandos no
+  interactivos (Ctrl+C sí le llega).
 - Usa `nota` para lo que otros deberían saber: un dato compartido roto, un cambio de API, un test roto que no
   es tuyo, una decisión tomada. Una línea por nota; nada de secretos.
 - `liberar --id <ID> <rutas>` suelta lo que ya no necesitas.

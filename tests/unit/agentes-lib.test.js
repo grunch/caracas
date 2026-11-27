@@ -325,3 +325,44 @@ test('la CLI sale con código 2 ante un conflicto y estado muestra sesiones y re
   assert.match(salida, new RegExp(`puerto:5199 → ${a}`))
   assert.equal(correr('desconocido').status, 1)
 }))
+
+test('al tomar un reclamo abandonado en carrera, nunca ganan dos (ni se borra el de quien ganó)', async () => {
+  for (let ronda = 0; ronda < 40; ronda += 1) {
+    const raiz = mkdtempSync(join(tmpdir(), 'agentes-'))
+    try {
+      const viejo = Date.now() - INACTIVIDAD_MS - 1000
+      const a = sesion(raiz, 'A', viejo)
+      reclamar({raiz, id: a.id, recursos: ['README.md'], ahora: viejo})
+      const ids = Array.from({length: 8}, (_, i) => sesion(raiz, `agente${i}`, Date.now()).id)
+      const ganados = await enHilos(raiz, ids, 'README.md')
+      const ganadores = ids.filter((_, i) => ganados[i] === 1)
+      assert.equal(ganadores.length, 1, `ronda ${ronda}: ganaron ${ganadores.length}`)
+      assert.deepEqual(estado({raiz}).reclamos.map((r) => r.id), ganadores)
+    } finally { rmSync(raiz, {recursive: true, force: true}) }
+  }
+}, 60_000)
+
+test('si la sesión caduca, ejecutar detiene también los procesos que lanzó el comando', async () => {
+  const raiz = mkdtempSync(join(tmpdir(), 'agentes-'))
+  try {
+    const cli = new URL('../../tools/agentes.mjs', import.meta.url).pathname
+    const env = {...process.env, AGENTES_DIR: raiz, AGENTES_LATIDO_MS: '50'}
+    const id = spawnSync('node', [cli, 'iniciar', '--agente', 'A', '--tarea', 'npm'], {env, encoding: 'utf8'}).stdout.trim()
+    const archivoPid = join(raiz, 'nieto.pid')
+    // como npm o npx: el comando lanza la herramienta de verdad en otro proceso y la espera
+    const comando = `const h=require('node:child_process').spawn(process.execPath,['-e','setTimeout(()=>{},20000)'],{stdio:'ignore'});require('node:fs').writeFileSync(${JSON.stringify(archivoPid)},String(h.pid));setTimeout(()=>{},20000)`
+    const hijo = spawn('node', [cli, 'ejecutar', '--id', id, '--', 'node', '-e', comando], {env, stdio: 'ignore'})
+    const esperar = (ms) => new Promise((ok) => setTimeout(ok, ms))
+    while (!existsSync(archivoPid)) await esperar(20)
+    const nieto = Number(readFileSync(archivoPid, 'utf8'))
+    const ruta = join(raiz, 'sesiones', `${id}.json`)
+    const s = JSON.parse(readFileSync(ruta, 'utf8'))
+    writeFileSync(ruta, JSON.stringify({...s, latido: new Date(Date.now() - INACTIVIDAD_MS - 1000).toISOString()}))
+    assert.notEqual(await new Promise((ok) => hijo.on('exit', ok)), 0)
+    const vivo = () => { try { process.kill(nieto, 0); return true } catch { return false } }
+    for (let i = 0; i < 50 && vivo(); i += 1) await esperar(50)
+    const quedo = vivo()
+    if (quedo) process.kill(nieto, 'SIGKILL')
+    assert.equal(quedo, false, 'el nieto siguió vivo después de perder la sesión')
+  } finally { rmSync(raiz, {recursive: true, force: true}) }
+}, 30_000)

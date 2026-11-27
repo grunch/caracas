@@ -96,18 +96,31 @@ const comandos = {
     latido({raiz: RAIZ, id: opciones.id})
     return new Promise((resolver) => {
       let perdida = false
-      const hijo = spawn(opciones.comando[0], opciones.comando.slice(1), {stdio: 'inherit'})
-      // Si la sesión caduca o desaparece, sus reclamos dejan de valer: se detiene el comando.
+      // En su propio grupo de procesos, para detener también lo que lance (npm y npx corren la herramienta en
+      // otro proceso). Fuera de la terminal en primer plano: las señales de Ctrl+C se reenvían a mano.
+      const grupo = process.platform !== 'win32'
+      const hijo = spawn(opciones.comando[0], opciones.comando.slice(1), {stdio: 'inherit', detached: grupo})
+      const matar = (senal) => {
+        try { if (grupo) process.kill(-hijo.pid, senal); else hijo.kill(senal) } catch (e) { if (e.code !== 'ESRCH') throw e }
+      }
+      const reenviar = ['SIGINT', 'SIGTERM', 'SIGHUP'].map((s) => [s, () => matar(s)])
+      for (const [s, f] of reenviar) process.on(s, f)
+      // Si la sesión caduca o desaparece, sus reclamos dejan de valer: se detiene el comando con todo lo que lanzó.
       const reloj = setInterval(() => {
         try { latido({raiz: RAIZ, id: opciones.id}) } catch (e) {
           perdida = true
           clearInterval(reloj)
           console.error(`Error: ${e.message}. Se detiene el comando porque sus reclamos ya no valen.`)
-          hijo.kill('SIGTERM')
-          setTimeout(() => hijo.kill('SIGKILL'), 5000).unref()
+          matar('SIGTERM')
+          setTimeout(() => matar('SIGKILL'), 5000).unref()
         }
       }, cada)
-      const fin = (codigo) => { clearInterval(reloj); resolver(perdida ? 1 : codigo) }
+      const fin = (codigo) => {
+        clearInterval(reloj)
+        for (const [s, f] of reenviar) process.off(s, f)
+        if (perdida) matar('SIGKILL') // lo que el comando dejó corriendo en su grupo tampoco sigue
+        resolver(perdida ? 1 : codigo)
+      }
       hijo.on('error', (e) => { console.error(`Error: ${e.message}`); fin(1) })
       hijo.on('exit', (codigo, senal) => fin(codigo ?? (senal ? 1 : 0)))
     })
