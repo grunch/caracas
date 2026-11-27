@@ -1,4 +1,5 @@
 import {rotundaYConcordia} from './datos/rotunda.js'
+import {sanAgustin} from './datos/san-agustin.js'
 import {metropolitano} from './datos/metropolitano.js'
 /**
  * Las plantas y zonas de supresión de los hitos modelados a mano (src/hitos/datos), con su vida: las usa el modo a
@@ -27,7 +28,7 @@ const bloquesSilencio = silencio.filter(h => h.id.startsWith('silencio-bloque-')
   }),
 }))
 
-export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar, ...bloquesSilencio, nuevoCirco, metropolitano, ...rotundaYConcordia]
+export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar, ...bloquesSilencio, nuevoCirco, metropolitano, ...rotundaYConcordia, sanAgustin]
   .filter((h) => h.planta)
   .map(({ id, nace, muere, planta, suprime, transitable, patio }) => ({
     id, nace, muere, planta, suprime: suprime ?? [], ...(transitable ? { transitable } : {}), ...(patio ? { patio } : {}),

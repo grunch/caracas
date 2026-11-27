@@ -124,7 +124,7 @@ export const MARCAS = Object.freeze([
     dudas: 'Es anterior (CG: parroquia de fines del siglo XVIII); con el plano de 1772, sin cotejar. Va desde 1843, cuya leyenda la nombra.' },
   { id: 'san-juan', nombre: 'San Juan', x: 6935, y: 8335, nace: 3, nivel: 2, alto: 11, nota: 'La iglesia de los capuchinos.', fuente: `${P36} («Iglesia San Juan», «Plaza de Capuchinos»); ${P89} (templo V)`,
     dudas: 'Es anterior (CG). La leyenda de 1843 nombra «Capuchinos» (S), no San Juan: si es este templo, falta verlo en la letra del plano; mientras, va desde 1889.' },
-  { id: 'san-agustin', nombre: 'San Agustín', x: 9775, y: 8790, nace: 5, nivel: 3, alto: 11, fuente: `${P36} («Iglesia San Agustín»)` },
+  { id: 'san-agustin', hito: 'san-agustin', nombre: 'San Agustín', nace: 5, nivel: 3, alto: 32, fuente: `${P36} («Iglesia San Agustín»); IPC, Lo construido, pp.216–217: https://albaciudad.org/wp-content/uploads/2017/01/Libertador-Construido2.pdf` },
   { id: 'nuevo-circo', hito: 'nuevo-circo', nombre: 'Nuevo Circo', nace: 5, nivel: 2, alto: 12, nota: 'La plaza de toros.', fuente: `${P36} («Nuevo Circo»)` },
   { id: 'liceo-andres-bello', nombre: 'Liceo Andrés Bello', x: 10310, y: 7860, nace: 5, nivel: 3, alto: 9, fuente: `${P36} («Liceo Andrés Bello»)` },
   { id: 'parque-carabobo', nombres: [[3, 'Plaza de Carabobo'], [5, 'Parque Carabobo']], x: 11085, y: 7830, nace: 3, nivel: 2,
