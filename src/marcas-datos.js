@@ -123,8 +123,8 @@ export const MARCAS = Object.freeze([
   { id: 'liceo-andres-bello', nombre: 'Liceo Andrés Bello', x: 10310, y: 7860, nace: 5, nivel: 3, alto: 9, fuente: `${P36} («Liceo Andrés Bello»)` },
   { id: 'parque-carabobo', nombres: [[3, 'Plaza de Carabobo'], [5, 'Parque Carabobo']], x: 11085, y: 7830, nace: 3, nivel: 2,
     fuente: `${P89} (plaza E «de Carabobo»); ${P36} («Parque Carabobo»)` },
-  { id: 'puente-hierro', nombre: 'Puente de Hierro', x: 9430, y: 9440, nace: 3, nivel: 2, alto: 4, fuente: `${P89} (rótulo «Puente de hierro»); ${P36} («Puente de Hierro»)` },
-  { id: 'puente-sucre', nombre: 'Puente Sucre', x: 9710, y: 9430, nace: 5, nivel: 3, alto: 4, fuente: `${P36} («Puente Sucre»)` },
+  { id: 'puente-hierro', nombre: 'Puente de Hierro', x: 9430, y: 9440, nace: 3, nivel: 2, alto: 4, fuente: `${P89} (rótulo «Puente de hierro»); ${P36} («Puente de Hierro»); Silva Contreras (2004), pp. 32–34 y 40: https://www.academia.edu/8853323/tradici%C3%B3n_acad%C3%A9mica_y_la_imagen_del_dise%C3%B1o_estructural` },
+  { id: 'puente-sucre', nombres: [[3, 'Puente Constitución', 'Cruce anterior de la calle Sur 7.'], [4, 'Puente Sucre', 'Estructura metálica inaugurada en 1895.'], [5, 'Puente Sucre', 'Sustituto de concreto; no es la armadura de 1895.']], x: 9710, y: 9430, nace: 3, nivel: 3, alto: 4, fuente: `${P36} («Puente Sucre»); Silva Contreras (2004), pp. 34–35 y nota 11: https://www.academia.edu/8853323/tradici%C3%B3n_acad%C3%A9mica_y_la_imagen_del_dise%C3%B1o_estructural`, dudas: 'La marca identifica el cruce Sur 7, no estribos ni anchuras de cada estructura. Modelo y calce precisos pendientes.' },
 
   // --- el norte: Altagracia, La Pastora, el Panteón ---
   { id: 'las-mercedes', nombres: [[1, 'Convento de La Merced'], [2, 'La Merced'], [3, 'Las Mercedes']], x: 8880, y: 5830, nace: 1, nivel: 3, alto: 11,
