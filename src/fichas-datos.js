@@ -333,7 +333,7 @@ export const FICHAS = Object.freeze({
     textos: [[4, 'La ciudad cruza el Guaire: el plano de 1911 ya rotula «El Paraíso», al suroeste, con su hipódromo.'], [5, 'El Paraíso continúa en el plano DCN de 1936. Sus calles y edificaciones forman parte del tejido del plano; la marca de sector no equivale a una reconstrucción individual de sus quintas.']],
   },
   'cementerio-sur': {
-    textos: [[3, 'Abierto en 1876 al sur del Guaire. El plano urbano de 1889 no cubre el cementerio con detalle utilizable; esta vista esquematiza el núcleo en cuatro cuarteles y dos avenidas norte-sur de 4 m, descritos en el reglamento de 1876. Su perímetro y parcelas son interpretativos.'],
+    textos: [[3, 'Abierto en 1876 al sur del Guaire. El plano urbano de 1889 no cubre el cementerio con detalle utilizable; el reglamento de 1876 menciona cuatro cuarteles y dos avenidas de 4 m, descritas como norte/sur. Para sugerir los cuarteles, esta vista dibuja un cruce de ejes interpretativo; la orientación y la ubicación reales no están documentadas. El perímetro y las parcelas también son interpretativos.'],
       [4, 'En 1911 se conserva la representación esquemática de cuatro cuarteles. La compra de un segundo lote en 1889 y las obras documentadas desde 1890 no bastan para reconstruir con precisión cuánto del terreno se había urbanizado.'],
       [5, 'El plano DCN de 1936 rotula el Cementerio General del Sur y dibuja una huella irregular, sus calles interiores y arbolado. El modelo calca ese contorno de forma aproximada, no como deslinde catastral.'],
       [6, 'El cementerio sigue en el área del mapa de 1946. La geometría de esta vista reutiliza la referencia de 1936: el ejemplar DCN de 1946 localizado está restringido y no se pudo inspeccionar directamente.']],
