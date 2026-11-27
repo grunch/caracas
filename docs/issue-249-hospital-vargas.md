@@ -17,7 +17,7 @@ Las ampliaciones de los pabellones Carlos J. Bello, Ángel Larralde y de lactant
 - `src/hitos/datos/hospital-vargas.js` define la huella (100 × 270 m nominales) en el sistema de píxeles de 1936, centrada aproximadamente en (9796, 4503). La ubicación se derivó de la planta de Mestre y del TPS existente. Estas dimensiones son interpretativas, no catastrales.
 - `src/hitos/hospital-vargas.js` construye los pabellones en la malla común. Las filas, vanos y galerías simplifican las fuentes; el esquema de 1889 representa la planta que el plano dibuja, no afirma que toda la construcción estuviera terminada.
 - `src/hitos/datos/civiles.js` y `src/hitos/partes.js` enlazan el hito con el render, el tiempo y la marca existente `hospital-vargas`; no duplican su ficha ni su cronología.
-- La reserva del solar suprime las casas genéricas y árboles dentro del recinto desde 1889, manteniendo intactas las manzanas exteriores.
+- La reserva del solar suprime las casas genéricas y árboles dentro del recinto desde 1889, manteniendo intactas las manzanas exteriores. La colisión peatonal se limita a los cuatro pabellones y al núcleo; jardines y corredores quedan transitables.
 - `tests/unit/hospital-vargas.test.js` verifica registro único, fases, aparición desde 1889, reservas y geometría finita. `tests/unit/hitos.test.js` incluye el suelo del pabellón en la verificación de apoyos sobre el relieve.
 - El conjunto añade 4.800 vértices (2.376 triángulos; ~0,43 MB de atributos CPU), integrado en la malla de hitos compartida.
 

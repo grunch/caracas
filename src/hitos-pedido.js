@@ -4,11 +4,12 @@
  * `pedirHitos` se lo pide a un worker (src/hitos-trabajador.js), que contesta los arrays de construirHitos
  * transferidos sin copia. Si no hay worker, o falla, se construyen acá.
  */
-import { HITOS, construirHitos } from './hitos.js'
+import { construirHitos } from './hitos/construir.js'
+import { HITOS_GEOMETRIA } from './hitos/datos/index.js'
 import { crearCoords } from './coords.js'
 
 /** Los arrays de los hitos, en este hilo. */
-export const datosDeHitos = (plano, soloSilencio = false) => construirHitos(HITOS.filter(h=>soloSilencio ? h.nace===6 : h.nace<6), crearCoords(plano))
+export const datosDeHitos = (plano, soloSilencio = false) => construirHitos(HITOS_GEOMETRIA.filter(h=>soloSilencio ? h.nace===6 : h.nace<6), crearCoords(plano))
 
 /** Los búferes de los arrays tipados de unos datos, para transferirlos. */
 const transferibles = (datos) => Object.values(datos).filter((v) => ArrayBuffer.isView(v)).map((v) => v.buffer)

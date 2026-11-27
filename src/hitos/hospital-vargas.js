@@ -2,8 +2,6 @@ import { PlaneGeometry } from 'three'
 import { MAT } from './lienzo.js'
 import { TONO, caja, cuerpo, vano } from './piezas.js'
 
-const COLOR_JARDIN = 0x78915c
-
 function pabellon(p, a, b, anio) {
   const largo = 96, ancho = 22, alto = 5.7
   // El eje longitudinal de las salas corre norte-sur (b); el eje local de cuerpo corre por a.
@@ -36,8 +34,8 @@ export function hospitalVargas(p, { anio = 1889 } = {}) {
   // Jardines longitudinales entre las filas de salas, con suelo que sigue el relieve local.
   for (const b of [-73, 73]) {
     p.en(0, 0, b).sobreTerreno().geo(
-      new PlaneGeometry(96, 18).rotateX(-Math.PI / 2).translate(0, 0.04, 0),
-      { color: COLOR_JARDIN, mat: MAT.JARDIN },
+      new PlaneGeometry(18, 96).rotateX(-Math.PI / 2).translate(0, 0.04, 0),
+      { color: [9, 48, -1], mat: MAT.JARDIN, flota: true },
     )
   }
   for (const b of [-73, 73]) {
@@ -49,7 +47,7 @@ export function hospitalVargas(p, { anio = 1889 } = {}) {
   const nucleo = p.en(0, 0, 0)
   caja(nucleo, { ancho: 28, fondo: 23, alto: 6.2, color: TONO.CAL })
   caja(nucleo.en(0, 6.2, 0), { ancho: 29.2, fondo: 24.2, alto: 0.55, color: TONO.PIEDRA_CLARA, flota: true })
-  caja(nucleo.en(0, 0, 0), { ancho: 8, fondo: 8, alto: 0.15, color: COLOR_JARDIN, mat: MAT.JARDIN })
+  caja(nucleo.en(0, 0, 0), { ancho: 8, fondo: 8, alto: 0.15, color: [4, 4, -1], mat: MAT.JARDIN })
   for (const [a, b] of [[-8, 0], [8, 0], [0, -7], [0, 7]]) {
     for (const z of [-4.2, 4.2]) vano(nucleo.mirando(a, 1.8, b + z, 0, Math.sign(z)), { ancho: 1.8, alto: 2.8, arco: false })
   }

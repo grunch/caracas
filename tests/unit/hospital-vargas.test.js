@@ -16,7 +16,8 @@ describe('Hospital Vargas', () => {
       [1889, 3, 4], [1911, 4, 5], [1936, 5, 0],
     ])
     expect(zonasDeSupresion([hospitalVargas]).map(z => [z.desde, z.hasta])).toEqual([[3, 0]])
-    expect(hitosConPlanta().find(h => h.id === 'hospital-vargas').planta).toHaveLength(1)
+    expect(hitosConPlanta().find(h => h.id === 'hospital-vargas').planta).toHaveLength(5)
+    expect(hospitalVargas.suprime[0]).toHaveLength(4)
     expect(validarHitos([hospitalVargas], plano)).toEqual([])
     expect(parteDe('hospitalVargas')).toBeTypeOf('function')
   })
