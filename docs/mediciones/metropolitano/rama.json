@@ -9,20 +9,20 @@
   ],
   "año": 1936,
   "hitos": {
-    "lineaDeTiempo": 2731,
-    "listo": 6497,
-    "primerasCasas": 6498,
-    "casas": 13262,
-    "arboles": 13264
+    "lineaDeTiempo": 2913,
+    "listo": 4376,
+    "primerasCasas": 4377,
+    "casas": 12424,
+    "arboles": 12424
   },
   "tareas": {
     "cuantas": 13,
-    "sumaMs": 4160,
-    "mayorMs": 751
+    "sumaMs": 3326,
+    "mayorMs": 944
   },
   "pedidos": {
     "cuantos": 29,
-    "bytes": 17961358,
+    "bytes": 17961455,
     "mayores": [
       {
         "url": "/datos/ciudad.pak",
@@ -68,7 +68,7 @@
           "bytes": 0
         },
         {
-          "url": "/assets/main-DebEXhFY.js",
+          "url": "/assets/main-CskNxvRl.js",
           "bytes": 0
         },
         {
@@ -76,7 +76,7 @@
           "bytes": 0
         },
         {
-          "url": "/assets/hitos-hO8DnpT8.js",
+          "url": "/assets/hitos-Dk79FkJd.js",
           "bytes": 0
         },
         {
@@ -113,29 +113,29 @@
     }
   },
   "memoria": {
-    "heapMB": 326,
-    "geometriaEnJsMB": 96.8,
-    "vertices": 3969506,
+    "heapMB": 307,
+    "geometriaEnJsMB": 96.9,
+    "vertices": 3971054,
     "mallas": 732,
-    "geometrias": 408,
+    "geometrias": 409,
     "texturas": 17
   },
   "cuadro": {
     "centro": {
       "llamadas": 100,
-      "triangulos": 3206996,
+      "triangulos": 3207512,
       "medianaMs": null,
       "p90Ms": null
     },
     "valle": {
       "llamadas": 295,
-      "triangulos": 2429225,
+      "triangulos": 2429741,
       "medianaMs": null,
       "p90Ms": null
     },
     "cerca": {
       "llamadas": 82,
-      "triangulos": 3117115,
+      "triangulos": 3117631,
       "medianaMs": null,
       "p90Ms": null
     }
@@ -144,31 +144,31 @@
   "presupuesto": [
     {
       "clave": "casasMs",
-      "valor": 13262,
+      "valor": 12424,
       "tope": 5000,
       "pasa": false
     },
     {
       "clave": "tareaMasLargaMs",
-      "valor": 751,
+      "valor": 944,
       "tope": 200,
       "pasa": false
     },
     {
       "clave": "bytesAlAbrir",
-      "valor": 17961358,
+      "valor": 17961455,
       "tope": 8000000,
       "pasa": false
     },
     {
       "clave": "heapMB",
-      "valor": 326,
+      "valor": 307,
       "tope": 250,
       "pasa": false
     },
     {
       "clave": "triangulosCentro",
-      "valor": 3206996,
+      "valor": 3207512,
       "tope": 2000000,
       "pasa": false
     },

@@ -62,6 +62,17 @@ a 540.000, con total 538.210. Es un incremento explícito, no una optimización.
 Medición de navegador: [comparación completa](mediciones/metropolitano/README.md).
 Capturas antes/después se adjuntan al PR.
 
-Build medido: 336,1 kB iniciales y 157,2 kB de workers; el límite inicial
+Build medido: 336,3 kB iniciales y 157,4 kB de workers; el límite inicial
 pasa de 336 a 337 kB para el modelo y su ficha. No se elevan los presupuestos
 de tiempo, memoria ni workers.
+
+## Referencias visuales individualizadas
+
+| Referencia de consulta | Procedencia/fecha | Uso y límites |
+|---|---|---|
+| `metropolitano-6.jpg` de Miraflores ([imagen FAC](https://fundaayc.com/wp-content/uploads/2022/07/circo-metropolitano-2.jpg)) | FAC; fotógrafo y fecha de toma no establecidos | Cinco accesos rectangulares enrejados, pilastras estriadas por bandas en el centro, cornisa y tres remates curvos de mampostería. No acredita colores. |
+| `metropolitano-7.jpg` ([imagen FAC](https://fundaayc.com/wp-content/uploads/2022/06/circo-metropolitano-3.jpg)) | Pie FAC: Foto Couret, 1906, serie C nº6 | La identificación fue cuestionada en comentarios; no se usa como guía principal para reconstruir detalles. |
+
+Licencia de ambas fotografías no establecida: solo enlaces y consulta local,
+sin redistribución de las imágenes. El remate se afinó tras volver a comparar
+la foto 6 con el render; la decoración menor y las rejas siguen simplificadas.
