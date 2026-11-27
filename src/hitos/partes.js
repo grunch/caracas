@@ -1,3 +1,4 @@
+import {metropolitano} from './metropolitano.js'
 /**
  * Los tipos de parte de un hito: cada definición (src/hitos/datos/*.js) lista `partes` con un `tipo`, y acá
  * está quién la dibuja. Una parte recibe el pintor del hito ya con su vida (nace, muere) y sus medidas en
@@ -61,6 +62,7 @@ export const parteDe = (tipo) => (Object.hasOwn(PARTES, tipo) ? PARTES[tipo] : u
 
 export const PARTES = Object.freeze({
   elSilencio,
+  metropolitano(p) { metropolitano(p) },
   nuevoCirco(p) { nuevoCirco(p) },
   teatroMunicipal(p, medidas) { teatroMunicipal(p, medidas) },
   casaAmarilla(p, medidas) { casaAmarilla(p, medidas) },

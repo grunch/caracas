@@ -103,8 +103,8 @@ describe('construirHitos', () => {
   })
 
   test('presupuesto: pocos triángulos para un solo draw call', () => {
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(530_000) // Nuevo Circo: +26.398; total anterior a 1946: 524.548.
-    expect(datos.indices.length / 3).toBeLessThan(1_000_000) // T40b: +36.247 del Teatro Municipal; total 498.150, una malla.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(540_000) // Metropolitano: +13.146; total anterior a 1946: 537.694.
+    expect(datos.indices.length / 3).toBeLessThan(1_020_000) // Metropolitano: +13.146; total de todas las fases: 1.012.735, una malla.
   })
 
   test('cada hito ocupa un rango de vértices y queda cerca de su lugar en el plano', () => {

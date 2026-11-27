@@ -1,3 +1,4 @@
+import {metropolitano} from './hitos/datos/metropolitano.js'
 /**
  * Los hitos: edificios y lugares con nombre, modelados a mano a partir del plano de 1936 y de las fotos y
  * grabados de época (specs/05). Cada uno es una definición declarativa (src/hitos/datos/*.js):
@@ -25,7 +26,7 @@ import { civiles } from './hitos/datos/civiles.js'
 export { suprimirTechos, zonasDeSupresion } from './hitos/suprimir.js'
 
 /** Todos los hitos, en el orden en que se dibujan. */
-export const HITOS = Object.freeze([plazaBolivar, catedral, ...iglesias, panteon, ...civiles, ...silencio, nuevoCirco])
+export const HITOS = Object.freeze([plazaBolivar, catedral, ...iglesias, panteon, ...civiles, ...silencio, nuevoCirco, metropolitano])
 
 const EPOCAS = 7 // 0 = 1578 … 5 = 1936 (src/epocas.js)
 const esEpoca = (e) => Number.isInteger(e) && e >= 0 && e < EPOCAS

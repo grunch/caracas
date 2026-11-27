@@ -35,3 +35,10 @@ it('reserva el solar sin borrar casas vecinas ni impedir casas nacidas después'
  expect(suprimirTechos(casa(0,6),z)[0]).toBe(6)
  expect(suprimirTechos(casa(65,1),z)[0]).toBe(1)
 })
+it('la arena queda sobre el pavimento para evitar superficies coplanares',async()=>{
+ const {crearMetropolitano}=await import('../../src/hitos/metropolitano-modelo.js')
+ const {Box3}=await import('three'),{edificio}=crearMetropolitano();edificio.updateMatrixWorld(true)
+ let arena,suelo;edificio.traverse(o=>{if(!o.isMesh)return;const c=o.material.color.getHex();if(c===0xc4a67b)arena=new Box3().setFromObject(o);if(c===0xc7b99a)suelo=new Box3().setFromObject(o)})
+ expect(arena.min.y).toBeGreaterThan(0);expect(arena.max.y-suelo.max.y).toBeGreaterThan(.04)
+ edificio.traverse(o=>{if(o.isMesh){o.geometry.dispose();o.material.dispose()}})
+})
