@@ -20,3 +20,15 @@ describe('Nuevo Circo instalado',()=>{
   expect(casa.vida[0]).toBe(1)
  })
 })
+
+import {rejillaDeCasas,choca} from '../../src/a-pie.js'
+import {hitosConPlanta} from '../../src/hitos/plantas.js'
+it('el ruedo es transitable y la reserva no borra vecinos fuera del solar',()=>{
+ const h=HITOS.find(h=>h.id==='nuevo-circo'),vacio={vertices:new Float32Array(),techos:new Uint32Array()}
+ const c=coords.aMundo(h.x,h.y),plantas=hitosConPlanta().filter(p=>p.id===h.id)
+ expect(choca(rejillaDeCasas(vacio,5,coords.aMundo,plantas),c.x,c.z)).toBe(false)
+ const fuera={vertices:new Float32Array(rectanguloPx(h,8,8,100,0).flat()),techos:new Uint32Array([0,4,1,0]),vida:new Uint32Array([1])}
+ expect(suprimirTechos(fuera,zonasDeSupresion([h]))[0]).toBe(1)
+ // La terraza queda dentro de la corona, no vacía las esquinas de una manzana.
+ expect(Math.hypot(h.terraza.ancho/2,h.terraza.fondo/2)).toBeLessThan(44)
+})

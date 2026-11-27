@@ -3,6 +3,7 @@
  * 1936; alzados: las imágenes de fuentes/imagenes cuando las hay (Casa Amarilla ~1875, fachada neogótica de
  * 1880, panorámica de ~1903). Lo demás va en `verificar`.
  */
+import {nuevoCirco} from './nuevo-circo.js'
 import { teatroMunicipal } from './teatro-municipal.js'
 import { casaAmarilla } from './casa-amarilla.js'
 import { capitolio } from './capitolio.js'
@@ -19,6 +20,7 @@ const MIRAFLORES = { ancho: 64, fondo: 56 } // incluye explanada, escaleras y ma
 
 export const civiles = Object.freeze([
   teatroMunicipal,
+  nuevoCirco,
   casaAmarilla,
   capitolio,
   palacioArzobispal,
