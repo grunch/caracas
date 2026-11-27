@@ -188,7 +188,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T82.CM | Integrar Circo Metropolitano de Miraflores en 1911/1936 | T82.NC | Solar DCN, modelo, vida y colisiones (#257) | ✅ [PR #284](https://github.com/grunch/caracas/pull/284), fusionado; publicación de derivados pendiente en seguimiento de #257 |
 | T82.RC | La Rotunda en 1889/1911, solar de 1936 y La Concordia en 1946 | T82.P1 | Modelo Miraflores, calce por parcela, vidas y colisiones (#258) | ✅ [PR #285](https://github.com/grunch/caracas/pull/285), fusionado |
 | T82.SA | San Agustín1936/1946 desde estudio Miraflores | T82.RC | Contorno DCN, alturas IPC, vida y reserva (#259 parcial) | ✅ [PR #286](https://github.com/grunch/caracas/pull/286), fusionado; CI verde |
-| T82.HD | Cementerio de los Hijos de Dios1889–1946 desde Miraflores | T82.RC | Tres recintos DCN y reserva temporal (#250 parcial) | Integración en revisión local; falta PR; #250 sigue abierto por General del Sur |
+| T82.HD | Cementerio de los Hijos de Dios1889–1946 desde Miraflores | T82.RC | Tres recintos DCN y reserva temporal (#250 parcial) | 🔄 [PR #287](https://github.com/grunch/caracas/pull/287), ready; CI y revisiones en curso; prueba manual pendiente por navegador interactivo no disponible. #250 sigue abierto por General del Sur |
 
 ## Riesgos que el plan vigila
 
