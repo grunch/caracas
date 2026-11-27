@@ -195,3 +195,5 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 
 
 | T82.CM | Integrar Circo Metropolitano de Miraflores en 1911/1936 | T82.NC | Solar DCN, modelo, vida y colisiones (#257) | 🔄 [PR #284](https://github.com/grunch/caracas/pull/284), ready; pruebas locales y capturas completas, revisiones pendientes |
+
+| T82.RC | La Rotunda en 1889/1911, solar de 1936 y La Concordia en 1946 | T82.P1 | Modelo Miraflores, calce por parcela, vidas y colisiones (#258) | En validación local, PR pendiente |

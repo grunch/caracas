@@ -28,3 +28,13 @@ it('el solar de1936 y los paseos de1946 son transitables; el templete y la cárc
  expect(choca(rejillaDeCasas(vacio,6,coords.aMundo,plantas),templo.x,templo.z)).toBe(true)
  const paseo=coords.aMundo(8558,8510);expect(choca(rejillaDeCasas(vacio,6,coords.aMundo,plantas),paseo.x,paseo.z)).toBe(false)
 })
+
+it('el relieve admite todas las terrazas registradas, incluida la transición de Concordia',async()=>{
+ const {terrazasDeHitos,MAX_TERRAZAS}=await import('../../src/relieve.js')
+ expect(terrazasDeHitos(HITOS,coords).length).toBeLessThanOrEqual(MAX_TERRAZAS)
+})
+
+it('la cárcel conserva el suelo descubierto; solo la plataforma continua de la plaza tapa el terreno',()=>{
+ expect(h('rotunda').terraza).toBeUndefined()
+ expect(h('concordia').terraza).toEqual({ancho:44,fondo:124})
+})

@@ -1,3 +1,4 @@
+import {conjuntoRotunda} from './rotunda.js'
 import {metropolitano} from './metropolitano.js'
 /**
  * Los tipos de parte de un hito: cada definición (src/hitos/datos/*.js) lista `partes` con un `tipo`, y acá
@@ -61,6 +62,7 @@ const frente = (p, { a = 0, b = 0, h = 0, mira = [0, 1] }) => p.mirando(a, h, b,
 export const parteDe = (tipo) => (Object.hasOwn(PARTES, tipo) ? PARTES[tipo] : undefined)
 
 export const PARTES = Object.freeze({
+  'conjunto-rotunda':conjuntoRotunda,
   elSilencio,
   metropolitano(p) { metropolitano(p) },
   nuevoCirco(p) { nuevoCirco(p) },

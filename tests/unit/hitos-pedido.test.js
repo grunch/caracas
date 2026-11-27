@@ -61,10 +61,12 @@ describe('los hitos fuera del hilo de la página', { timeout: 60_000 }, () => {
   })
 })
 
-it('El Silencio se construye aparte: ninguna carga de1945 en el arranque histórico',()=>{
+it('El Silencio y Concordia se construyen aparte del arranque histórico',()=>{
  expect(referencia.rangos.some(r=>r.id.startsWith('silencio-'))).toBe(false)
  const futuro=datosDeHitos(plano,true)
- expect(futuro.rangos).toHaveLength(10)
- expect(futuro.rangos.every(r=>r.id.startsWith('silencio-'))).toBe(true)
+ expect(referencia.rangos.some(r=>r.id==='concordia')).toBe(false)
+ expect(futuro.rangos).toHaveLength(11)
+ expect(futuro.rangos.filter(r=>r.id==='concordia')).toHaveLength(1)
+ expect(futuro.rangos.every(r=>r.id.startsWith('silencio-')||r.id==='concordia')).toBe(true)
  expect(futuro.indices.length/3).toBeLessThan(500_000)
 },15000)

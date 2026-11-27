@@ -60,7 +60,7 @@ const suave = (t) => { const x = acotar(t, 0, 1); return x * x * (3 - 2 * x) }
  * zócalo. Lo usan el shader (sueloEn, pisoDeHito) y la cámara (alturaEn).
  */
 export const TALUD_M = 4
-export const MAX_TERRAZAS = 4
+export const MAX_TERRAZAS = 5 // Cuatro existentes + el plano de apoyo compartido de La Concordia/Rotunda.
 /** Cuánto adentro del borde deja de dibujarse el suelo: lo tapa la plataforma del hito (src/material.js). */
 const TAPADO_M = 0.5
 
