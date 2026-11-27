@@ -115,7 +115,7 @@ export const MARCAS = Object.freeze([
     fuente:'Mestre 1889, cárcel 30; Razetti 1911, cárcel 39; https://bibliofep.fundacionempresaspolar.org/dhv/entradas/l/la-rotunda/',
     dudas:'Dos recintos; ampliación norte proyectada 1881, terminación exacta no verificada. Dimensiones, guardia y continuidad del conjunto en 1889 interpretativas.' },
   { id:'solar-rotunda',hito:'solar-rotunda',nombre:'Solar de La Rotunda',x:8595,y:8478,nace:5,muere:6,nivel:3,alto:0,
-    fuente:'DCN 1936, franja occidental libre; https://bibliofep.fundacionempresaspolar.org/_custom/static/cronologia_hv/zoom/s 20/1936-15.html',
+    fuente:'DCN 1936, franja occidental libre; https://bibliofep.fundacionempresaspolar.org/_custom/static/cronologia_hv/zoom/s20/1936-15.html',
     dudas:'Estado del plano, sin precisar el día de demolición ni adelantar el templete posterior.' },
   { id:'concordia',hito:'concordia',nombre:'Plaza La Concordia',x:8595,y:8478,nace:6,nivel:3,alto:9,
     fuente:'Plano de fotos 1946: https://archive.org/details/WCWdb_18051; fotos del templete: https://mariafsigillo.blogspot.com/2012/02/la-rotunda-y-plaza-de-la-concordia.html; cronología 1940: https://bibliofep.fundacionempresaspolar.org/media/1280009/200_educadores_vnzlns_lw.pdf',
