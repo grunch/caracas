@@ -11,8 +11,10 @@ import { crearCasas } from './casas.js'
 import { pedirCiudad } from './ciudad-pedido.js'
 import { crearMaterialCiudad, crearMaterialSombraCiudad } from './material.js'
 import { cargarArboles } from './arboles.js'
-import { HITOS, crearHitos, suprimirTechos, zonasDeSupresion } from './hitos.js'
-import { pedirHitos } from './hitos-pedido.js'
+import { HITOS } from './hitos/datos/index.js'
+import { suprimirTechos, zonasDeSupresion } from './hitos/suprimir.js'
+import { crearMallaHitos } from './hitos/malla.js'
+import { pedirHitos } from './pedir-hitos.js'
 import { acercar, pasoDeCuadro } from './animar.js'
 import { texturasHoy, HOY_CERCA } from './hoy.js'
 import { crearBuscador } from './buscador/interfaz.js'
@@ -295,14 +297,14 @@ function prepararEntorno1946(){
 }
 function prepararSilencio(){
   return silencioPedido ??= pedirHitos({plano:meta.plano,soloSilencio:true,crearTrabajador:sinTrabajadores?null:()=>new Worker(new URL('./hitos-trabajador.js',import.meta.url),{type:'module'})}).then(datos=>{
-    hitosSilencio=crearHitos({coords,U:ciudad.U,datos,hitos:HITOS.filter(h=>h.nace===6)});hitosSilencio.name='el-silencio';scene.add(hitosSilencio);pedirCuadro(3)
+    hitosSilencio=crearMallaHitos({U:ciudad.U,datos});hitosSilencio.name='el-silencio';scene.add(hitosSilencio);pedirCuadro(3)
   }).catch(e=>{silencioPedido=null;throw e})
 }
 const hitosPedidos = pedirHitos({
   plano: meta.plano,
   crearTrabajador: sinTrabajadores ? null : () => new Worker(new URL('./hitos-trabajador.js', import.meta.url), { type: 'module' }),
 }).then((datos) => {
-  hitos = crearHitos({ coords, U: ciudad.U, datos })
+  hitos = crearMallaHitos({ U: ciudad.U, datos })
   scene.add(hitos)
   pedirCuadro(3)
 }).catch((e) => console.warn(`hitos: ${e.message}`))

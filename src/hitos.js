@@ -1,8 +1,3 @@
-import {hijosDios} from './hitos/datos/hijos-dios.js'
-import {rotundaYConcordia} from './hitos/datos/rotunda.js'
-import {sanAgustin} from './hitos/datos/san-agustin.js'
-import {metropolitano} from './hitos/datos/metropolitano.js'
-import {cementerioSur} from './hitos/datos/cementerio-sur.js'
 import {poligonosConVida} from './hitos/datos/fases-geometricas.js'
 /**
  * Los hitos: edificios y lugares con nombre, modelados a mano a partir del plano de 1936 y de las fotos y
@@ -16,22 +11,16 @@ import {poligonosConVida} from './hitos/datos/fases-geometricas.js'
  * Las casas genéricas que pisan un hito se apagan al cargar la ciudad (src/hitos/suprimir.js).
  */
 import { BufferGeometry, BufferAttribute, Mesh } from 'three'
-import { crearLienzo } from './hitos/lienzo.js'
 import { parteDe } from './hitos/partes.js'
 import { crearMaterialHitos, crearMaterialSombraHitos } from './hitos/material.js'
-import { METRO } from './hitos/datos/marco.js'
-import { plazaBolivar } from './hitos/datos/plaza-bolivar.js'
-import { catedral } from './hitos/datos/catedral.js'
-import { iglesias } from './hitos/datos/iglesias.js'
-import { panteon } from './hitos/datos/panteon.js'
-import {silencio} from './hitos/datos/el-silencio.js'
-import {nuevoCirco} from './hitos/datos/nuevo-circo.js'
-import { civiles } from './hitos/datos/civiles.js'
+import { construirHitos } from './hitos/construir.js'
+import { HITOS } from './hitos/datos/index.js'
 
+export { construirHitos }
 export { suprimirTechos, zonasDeSupresion } from './hitos/suprimir.js'
 
 /** Todos los hitos, en el orden en que se dibujan. */
-export const HITOS = Object.freeze([plazaBolivar, catedral, ...iglesias, panteon, ...civiles, ...silencio, nuevoCirco, metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios,cementerioSur])
+export { HITOS }
 
 const EPOCAS = 7 // 0 = 1578 … 5 = 1936 (src/epocas.js)
 const esEpoca = (e) => Number.isInteger(e) && e >= 0 && e < EPOCAS
@@ -75,24 +64,6 @@ export function validarHitos(hitos, plano) {
     }
   }
   return problemas
-}
-
-/** Dibuja los hitos en un lienzo y devuelve sus arrays planos (sin three.js de por medio, salvo las piezas). */
-export function construirHitos(hitos, coords) {
-  if (Math.abs(coords.metro - METRO) > 1e-9) throw new Error(`hitos: definidos a ${METRO} m/px y el plano viene a ${coords.metro}`)
-  const lienzo = crearLienzo()
-  const rangos = []
-  hitos.forEach((h, i) => {
-    const desde = lienzo.vertices
-    const p = lienzo.hito({ origen: coords.aMundo(h.x, h.y), eje: h.eje, nace: h.nace ?? 0, muere: h.muere ?? 0, semilla: i + 1 })
-    for (const { tipo, nace, muere, ...medidas } of h.partes) {
-      const dibujar = parteDe(tipo)
-      if (!dibujar) throw new Error(`hito ${h.id}: parte de tipo desconocido "${tipo}"`)
-      dibujar(p.con({ nace, muere }), medidas)
-    }
-    rangos.push({ id: h.id, desde, hasta: lienzo.vertices })
-  })
-  return { ...lienzo.datos(), rangos }
 }
 
 export function geometriaHitos({ posiciones, normales, colores, hitos, vidas, anclas, uvs, indices }) {
