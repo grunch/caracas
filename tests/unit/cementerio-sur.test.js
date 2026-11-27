@@ -1,5 +1,5 @@
 import {describe,expect,test} from 'vitest'
-import {HITOS,construirHitos,validarHitos,zonasDeSupresion} from '../../src/hitos.js'
+import {HITOS,construirHitos,suprimirTechos,validarHitos,zonasDeSupresion} from '../../src/hitos.js'
 import {hitosConPlanta} from '../../src/hitos/plantas.js'
 import {rejillaDeCasas,choca} from '../../src/a-pie.js'
 import {glslSuelosPropios} from '../../src/hitos/suelos-propios.js'
@@ -29,6 +29,9 @@ describe('Cementerio General del Sur',()=>{
  test('las reservas y el suelo cambian en 1936, no antes',()=>{
   const zonas=zonasDeSupresion([cementerioSur])
   expect(zonas.map(z=>[z.desde,z.hasta])).toEqual([[3,5],[5,0]])
+  const vertices=new Float32Array([6300,12500,6308,12500,6308,12508,6300,12508])
+  const techos=new Uint32Array([0,4,0,0])
+  expect(suprimirTechos({vertices,techos,vida:new Uint32Array([5])},zonas)[0]).toBe(63)
   const shader=glslSuelosPropios(plano,.5)
   expect(shader).toContain('vivoEn(vec2(3.00000,5.00000)')
   expect(shader).toContain('vivoEn(vec2(5.00000,0.00000)')
@@ -46,6 +49,9 @@ describe('Cementerio General del Sur',()=>{
  test('construye malla finita y conserva fases de los vértices',()=>{
   const resultado=construirHitos([cementerioSur],coords),r=resultado.rangos.find(x=>x.id==='cementerio-sur')
   expect(r.hasta-r.desde).toBeGreaterThan(5000)
+  const anclas=new Set()
+  for(let i=r.desde;i<r.hasta;i++)anclas.add(`${resultado.anclas[4*i]},${resultado.anclas[4*i+1]}`)
+  expect(anclas.size).toBeGreaterThan(100)
   for(const v of resultado.posiciones)expect(Number.isFinite(v)).toBe(true)
   const vidas=new Set()
   for(let i=r.desde;i<r.hasta;i++){const nace=resultado.vidas[2*i],muere=resultado.vidas[2*i+1];vidas.add(`${nace}/${muere}`)}

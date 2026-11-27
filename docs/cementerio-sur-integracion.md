@@ -15,6 +15,7 @@ Issue relacionado: [#250](https://github.com/grunch/caracas/issues/250). Este ca
 - `src/hitos/datos/cementerio-sur.js`: ancla, dos huellas temporales y fuente cartográfica.
 - `src/hitos/cementerio-sur.js`: geometría simplificada de los campos, caminos, sepulturas y árboles.
 - `src/hitos/material.js`: tratamiento de césped verde liso para el recinto, aparte del patrón formal de plazas.
+- El suelo y los caminos se subdividen; cada vértice toma la elevación local del relieve. Sepulturas y árboles también se apoyan sobre el terreno bajo cada objeto.
 - `src/hitos/partes.js` y `src/hitos.js`: registra el constructor y su vida desde la época 1889.
 - `src/hitos/plantas.js`: las colisiones distinguen el núcleo 1889/1911 de la ampliación representada en 1936/1946.
 - `src/hitos/suprimir.js`, `src/hitos/suprimir-arboles.js` y `src/hitos/suelos-propios.js`: las reservas de casas, árboles y suelo cambian con las dos fases. Los tipos antiguos de huella siguen funcionando sin cambios.
@@ -24,7 +25,7 @@ El ancla conservada en el catálogo es `(7100, 12500)` en píxeles del mapa base
 
 ## Pruebas y revisión
 
-El test `tests/unit/cementerio-sur.test.js` comprueba las dos fases, el recorte de calles contra un polígono cóncavo, las reservas de casas/árboles/suelo, colisiones, geometría finita y cronología. También se amplió la validación general de hitos para aceptar áreas con vida propia por etapa, sin cambiar el formato de las geometrías existentes. No se agregan binarios ni texturas descargadas al repositorio.
+La reserva cóncava suprime las casas que intersectan su área, incluso cuando quedan completamente dentro y no tocan sus lados. El test `tests/unit/cementerio-sur.test.js` comprueba las dos fases, el recorte de calles contra un polígono cóncavo, la supresión de una casa interior, las reservas de árboles/suelo, los apoyos distribuidos sobre el terreno, colisiones, geometría finita y cronología. También se amplió la validación general de hitos para aceptar áreas con vida propia por etapa, sin cambiar el formato de las geometrías existentes. Las cuatro capturas WebP optimizadas están en `docs/capturas/`; no se agregaron texturas descargadas.
 
 Antes de instalar, generar capturas del visor en 1889, 1911, 1936 y 1946 y comprobar: ausencia antes de 1889; núcleo reducido para 1889/1911; contorno DCN aproximado desde 1936; continuidad explícitamente provisional en 1946; reservas sin casas ni árboles dentro del cementerio; y ausencia de errores de shader. Medir el incremento de geometría y el arranque del sitio contra `main`; no subir presupuestos sin justificarlo.
 

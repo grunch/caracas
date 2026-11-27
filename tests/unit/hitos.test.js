@@ -103,8 +103,8 @@ describe('construirHitos', () => {
   })
 
   test('presupuesto: pocos triángulos para un solo draw call', () => {
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(600_000) // presupuesto de geometría histórica antes del cierre.
-    expect(datos.indices.length / 3).toBeLessThan(1_080_000) // San Agustín + Hijos de Dios: ~1.071.395 en total.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(605_000) // Cementerio Sur sigue el relieve con malla subdividida: +2.774 triángulos.
+    expect(datos.indices.length / 3).toBeLessThan(1_090_000) // Total medido con terrenos siguiendo el DEM: 1.080.573.
   })
 
   test('cada hito ocupa un rango de vértices y queda cerca de su lugar en el plano', () => {
@@ -131,7 +131,7 @@ describe('construirHitos', () => {
   test('el ancla de cada vértice es el origen de su hito, y la distancia a la plaza, la del hito', () => {
     for (const { id, desde } of datos.rangos) {
       const { x, z } = coords.aMundo(hito(id).x, hito(id).y)
-      const sigueSuelo=id==='hijos-de-dios'||id==='silencio-urbanizacion'||id.startsWith('silencio-plaza-')
+      const sigueSuelo=id==='hijos-de-dios'||id==='cementerio-sur'||id==='silencio-urbanizacion'||id.startsWith('silencio-plaza-')
       expect(datos.anclas[desde * 4]).toBeCloseTo(sigueSuelo?datos.posiciones[desde*3]:x, 3)
       expect(datos.anclas[desde * 4 + 1]).toBeCloseTo(sigueSuelo?datos.posiciones[desde*3+2]:z, 3)
       expect(datos.hitos[desde * 4]).toBeCloseTo(Math.hypot(x, z), 3)
