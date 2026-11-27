@@ -143,8 +143,9 @@ describe('los edificios civiles', () => {
     // 1772 (~73 mil, con el cuerpo neoclásico compartido de 1889 a 1936); T41g, San Francisco en tres tramos
     // (~12,7 mil, sin interior). Siempre en el mismo draw call.
     // Cementerio Sur añade terreno/caminos siguiendo el relieve; total medido en todas las épocas: 1.080.573.
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(605_000)
-    expect(d.indices.length / 3).toBeLessThan(1_090_000)
+    // El Puente de Hierro (#272) añade 8.394 triángulos: 611.970 antes de 1946 y 1.091.343 en total.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(615_000)
+    expect(d.indices.length / 3).toBeLessThan(1_100_000)
     expect(d.rangos.length).toBe(HITOS.length)
   }, 15_000)
 })
