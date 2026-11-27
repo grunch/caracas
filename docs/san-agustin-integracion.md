@@ -37,6 +37,10 @@ Cuerpo30×56m y cubiertas dentro de envolvente32×63m. No se escala verticalment
 - Reserva temporal nace5, sin supresión en épocas anteriores. No se registra terraza adicional: revisar apoyo sobre el relieve y resolverlo según la evidencia visual.
 - Tras fusión: regenerar con `npm run datos`, verificar salida/manifiesto, publicar con `npm run datos:publicar`. Una marca enlazada no prueba que los derivados estén actualizados.
 
-## Verificación pendiente antes del PR
+## Verificación
 
-75 pruebas específicas iniciales (integración, marcas, fichas) pasan. El estudio independiente tiene20 pruebas, incluidas alturas, campanario abierto y cierre alto del crucero. Capturas urbanas de seis épocas, medición comparada, suite completa y revisión se adjuntarán antes de publicar el PR ready. No se da por cerrado #259.
+Suite completa final:138 archivos /1843 pruebas pasan (41,71s), incluidos vida, reserva, alturas, enlace de marca y ficha. Python:1034 pruebas (53,20s). El estudio independiente tiene20 pruebas, incluidas alturas, campanario abierto y cierre alto del crucero.
+
+24 comprobaciones urbanas distintas:22 pasaron en la primera tanda; las dos de fotos simuladas fallaron en preview por la interferencia del service worker de producción con `page.route`. Ambas pasaron al bloquearlo en la configuración local de esas pruebas (33,5s); el código de la aplicación no cambió para ocultar el fallo. La CI usa servidor de desarrollo, sin ese service worker.
+
+[Capturas comparables de las seis épocas y estudio](https://gist.github.com/grunch/e717cc8b4e8e4b2e9319c5886a26e136): main0c99f37 y geometría de rama0c1a92e,1440×1000, mismas cámaras, errores[]. Se inspeccionaron ausencia antes de1936 y continuidad1936/1946; ningún anexo ni avenida nueva. La [medición comparada](mediciones/san-agustin/README.md) documenta +971ms de carga en esta pareja (+7,5%), geometríaJS+3,3MB y llamadas90→90, sin prometer impacto nulo. Revisión pendiente. No se da por cerrado #259.

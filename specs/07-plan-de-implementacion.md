@@ -186,7 +186,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T82.P1.PUENTES | Cruce Constitución/Sucre y sustitución del puente de Hierro; estudios previos en Miraflores (#272) | T82.P1 | Fuentes por etapa y regresiones | 🔄 [PR #281](https://github.com/grunch/caracas/pull/281); alcance parcial |
 | T82.NC | Integrar Nuevo Circo de Miraflores en 1936/1946 | T82.P1 | Modelo, solar, vida, colisiones y rendimiento (#257) | 🔄 [PR #283](https://github.com/grunch/caracas/pull/283), listo para revisión |
 | T82.CM | Integrar Circo Metropolitano de Miraflores en 1911/1936 | T82.NC | Solar DCN, modelo, vida y colisiones (#257) | ✅ [PR #284](https://github.com/grunch/caracas/pull/284), fusionado; publicación de derivados pendiente en seguimiento de #257 |
-| T82.RC | La Rotunda en 1889/1911, solar de 1936 y La Concordia en 1946 | T82.P1 | Modelo Miraflores, calce por parcela, vidas y colisiones (#258) | 🔄 [PR #285](https://github.com/grunch/caracas/pull/285), ready; validación local y capturas completas, CI/revisiones pendientes |
+| T82.RC | La Rotunda en 1889/1911, solar de 1936 y La Concordia en 1946 | T82.P1 | Modelo Miraflores, calce por parcela, vidas y colisiones (#258) | 🔄 [PR #285](https://github.com/grunch/caracas/pull/285), fusionado; validación local y capturas completas, CI/revisiones pendientes |
 | T82.SA | San Agustín1936/1946 desde estudio Miraflores | T82.RC | Contorno DCN, alturas IPC, vida y reserva (#259 parcial) | En implementación local; PR pendiente |
 
 ## Riesgos que el plan vigila
