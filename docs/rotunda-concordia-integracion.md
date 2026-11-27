@@ -1,6 +1,6 @@
 # La Concordia de Villanueva: estudio e instalación
 
-Issue #258. Estudio creado en Miraflores, integración en rama Caracas pendiente de validación.
+Issue #258. Estudio creado en Miraflores, integración en [PR #285](https://github.com/grunch/caracas/pull/285), ready con validación local y revisiones pendientes.
 No corresponde a la plaza remodelada de 1961 ni a su estado actual.
 
 ## Evidencia

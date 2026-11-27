@@ -185,6 +185,8 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T82.P1.RED | Registro vial temporal: importación conservadora, auditoría y exportación offline (#269, #277, #278) | T82.P1 | Fuentes por etapa y regresiones | 🔄 [PR #282](https://github.com/grunch/caracas/pull/282); herramienta offline, redes aún parciales |
 | T82.P1.PUENTES | Cruce Constitución/Sucre y sustitución del puente de Hierro; estudios previos en Miraflores (#272) | T82.P1 | Fuentes por etapa y regresiones | 🔄 [PR #281](https://github.com/grunch/caracas/pull/281); alcance parcial |
 | T82.NC | Integrar Nuevo Circo de Miraflores en 1936/1946 | T82.P1 | Modelo, solar, vida, colisiones y rendimiento (#257) | 🔄 [PR #283](https://github.com/grunch/caracas/pull/283), listo para revisión |
+| T82.CM | Integrar Circo Metropolitano de Miraflores en 1911/1936 | T82.NC | Solar DCN, modelo, vida y colisiones (#257) | ✅ [PR #284](https://github.com/grunch/caracas/pull/284), fusionado; publicación de derivados pendiente en seguimiento de #257 |
+| T82.RC | La Rotunda en 1889/1911, solar de 1936 y La Concordia en 1946 | T82.P1 | Modelo Miraflores, calce por parcela, vidas y colisiones (#258) | 🔄 [PR #285](https://github.com/grunch/caracas/pull/285), ready; validación local y capturas completas, CI/revisiones pendientes |
 
 ## Riesgos que el plan vigila
 
@@ -192,8 +194,3 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 - **Datos fuera de git**: sin T11 y T12, un cambio en el pipeline puede romper el sitio sin que ningún test lo vea.
 - **Conflictos en `src/material.js` y `src/main.js`**: varias tareas los tocan; conviene separar el shader en módulos (vértice, suelo, fachadas) dentro de T35 o antes, si los conflictos se repiten.
 - **Rendimiento**: 34 mil casas con fachadas procedurales; medir en cada tarea de la fase 3.
-
-
-| T82.CM | Integrar Circo Metropolitano de Miraflores en 1911/1936 | T82.NC | Solar DCN, modelo, vida y colisiones (#257) | 🔄 [PR #284](https://github.com/grunch/caracas/pull/284), ready; pruebas locales y capturas completas, revisiones pendientes |
-
-| T82.RC | La Rotunda en 1889/1911, solar de 1936 y La Concordia en 1946 | T82.P1 | Modelo Miraflores, calce por parcela, vidas y colisiones (#258) | En validación local, PR pendiente |
