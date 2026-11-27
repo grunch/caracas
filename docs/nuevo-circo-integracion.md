@@ -32,6 +32,7 @@ Los detalles no medidos, alturas, materiales y pigmentos siguen siendo interpret
 No se inventa una fecha para la reducción del ruedo o ampliación de tendidos que
 relata la fuente: el modelo no certifica esas fases interiores.
 
+Se añade al final del catálogo para conservar las semillas de todos los hitos anteriores.
 El adaptador usa el lienzo existente, colores lineales y una sola parte compartida
 entre épocas. La cubierta tiene espesor y caras inferiores; no depende de DoubleSide.
 Gradas con menor subdivisión angular mantienen las 21 filas del estudio. No hay
@@ -52,7 +53,7 @@ se conserva la implantación de 1936 sin afirmar una medición independiente.
 
 ## Instalación y datos
 
-El edificio queda registrado en `civiles.js`, `partes.js` y enlazado a la marca
+El edificio queda registrado en `hitos.js`, `partes.js` y enlazado a la marca
 `nuevo-circo`. El runtime recorta las vidas de casas/árboles con las reservas,
 por lo que se comprueba contra el mismo paquete publicado usado en main.
 
@@ -67,8 +68,8 @@ las seis épocas. Este PR no publica nuevos datos.
 - Tests de registro, geometría finita, vida 5–6, reserva temporal, vecinos,
   ruedo transitable y terraza inscrita.
 - Capturas antes/después con la misma cámara en seis épocas, datos iguales.
-- Presupuesto geométrico: 26.146 triángulos nuevos; total antes de 1946 524.296
-  (límite explícito 530.000); incluyendo El Silencio 999.337, dentro del millón.
+- Presupuesto geométrico: 26.386 triángulos nuevos; total antes de 1946 524.536
+  (límite explícito 530.000); incluyendo El Silencio 999.577, dentro del millón.
 - Build: entrada 334,9 kB gzip, worker 156 kB. Límite de entrada 332 → 336 kB
   declarado por la geometría y metadatos añadidos; worker permanece bajo 160 kB.
 - Medición del navegador en base y rama con el script del repo; el PR incorpora

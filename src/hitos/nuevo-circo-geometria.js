@@ -9,7 +9,7 @@ export function taller(edificio,cubiertas,nivelDetalle){
  const curvas=nivelDetalle==='ciudad'?4:12;
  function pieza(geo,mat,x=0,y=0,z=0,g=edificio){const m=new T.Mesh(geo,materiales[mat]);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;g.add(m);return m;}
  const caja=(w,h,d,x,y,z,mat='cal',g=edificio)=>pieza(new T.BoxGeometry(w,h,d),mat,x,y,z,g);
- const cilindro=(r1,r2,h,x,y,z,mat='cal',g=edificio)=>pieza(new T.CylinderGeometry(r1,r2,h,segmentos),mat,x,y,z,g);
+ const cilindro=(r1,r2,h,x,y,z,mat='cal',g=edificio)=>pieza(new T.CylinderGeometry(r1,r2,h,Math.max(r1,r2)>10?72:segmentos),mat,x,y,z,g);
  function grupo(x=0,y=0,z=0,angulo=0,padre=edificio){const g=new T.Group();g.position.set(x,y,z);g.rotation.y=angulo;padre.add(g);return g;}
  function arco(w,h,rect=false){if(rect){const s=new T.Shape();s.moveTo(-w/2,0);s.lineTo(w/2,0);s.lineTo(w/2,h);s.lineTo(-w/2,h);s.closePath();return s;}const s=new T.Shape();s.moveTo(-w/2,0);s.lineTo(w/2,0);s.lineTo(w/2,h-w/2);s.absarc(0,h-w/2,w/2,0,Math.PI,false);s.closePath();return s;}
  function vano(w,h,x,y,z,g=edificio,mat='sombra',reja=false,rect=false){

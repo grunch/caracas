@@ -8,6 +8,7 @@ import { silencio, pixelSilencio } from './datos/el-silencio.js'
 import { PLANTAS_SILENCIO } from './datos/el-silencio-plantas.js'
 import { catedral } from './datos/catedral.js'
 import { iglesias } from './datos/iglesias.js'
+import {nuevoCirco} from './datos/nuevo-circo.js'
 import { civiles } from './datos/civiles.js'
 import { panteon } from './datos/panteon.js'
 import { plazaBolivar } from './datos/plaza-bolivar.js'
@@ -24,7 +25,7 @@ const bloquesSilencio = silencio.filter(h => h.id.startsWith('silencio-bloque-')
   }),
 }))
 
-export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar, ...bloquesSilencio]
+export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar, ...bloquesSilencio, nuevoCirco]
   .filter((h) => h.planta)
   .map(({ id, nace, muere, planta, suprime, transitable, patio }) => ({
     id, nace, muere, planta, suprime: suprime ?? [], ...(transitable ? { transitable } : {}), ...(patio ? { patio } : {}),
