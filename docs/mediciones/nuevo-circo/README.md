@@ -28,3 +28,9 @@ la dispersión. Sin GPU no se mide tiempo por cuadro ni FPS.
 
 El ajuste de presupuesto del PR afecta solo al tamaño del build: 335,1 kB de
 entrada, máximo 336; worker 156,1 bajo 160. No cambia límites de tiempo o memoria.
+
+Revisión posterior de CodeRabbit: el fondo de terraza y pavimento pasa de 90 a
+93 m para cubrir la portada completa. Las mediciones anteriores corresponden al
+commit indicado, no se vuelven a etiquetar como una ejecución del nuevo head.
+El ajuste no añade vértices, triángulos, materiales ni llamadas de dibujo; el
+build y las pruebas de relieve/colisión se verificaron nuevamente.

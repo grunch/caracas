@@ -46,7 +46,7 @@ casas que atraviesan el muro aunque sea menos del 25 % de su huella. Casas sin
 intersección se conservan. La misma reserva temporal excluye árboles.
 
 Las colisiones usan 64 sectores de corona y portada, dejando libre el ruedo.
-La terraza de 88 × 90 m incluye la portada: aplica el sistema existente
+La terraza de 88 × 93 m incluye la portada: aplica el sistema existente
 de apoyo en el plano de la ladera y evita que el suelo tape el ruedo. Una plataforma de pavimento cubre todo el rectángulo para evitar huecos; su acabado
 es interpretativo. No amplía los polígonos que reservan casas y árboles. El calce fino de 1946 sigue pendiente;
 se conserva la implantación de 1936 sin afirmar una medición independiente.
@@ -80,3 +80,7 @@ precisar reformas interiores, alturas y color con evidencia, y revisión humana
 cartográfica. No presentar la interpretación procedural como un levantamiento.
 
 [Mediciones completas de main y rama](mediciones/nuevo-circo/README.md), incluyendo excesos y limitaciones.
+
+Revisión #283: terraza y pavimento comparten medidas; la portada llega a b=46,5 m,
+por lo que el fondo de 93 m cubre su huella completa. Tests incluyen colisión
+positiva en el graderío y verificación del pavimento contra la terraza.
