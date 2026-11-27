@@ -94,18 +94,38 @@ export function pisaLaZona(anillo, zona) {
 }
 
 /** Fracción de solapamiento real entre dos polígonos simples, también si alguno es cóncavo. */
-export function pisaLaZonaCompleta(anillo, zona) {
+const triangular = poligono => ShapeUtils.triangulateShape(poligono.map(([x, y]) => new Vector2(x, y)), [])
+  .map(triangulo => triangulo.map(i => poligono[i]))
+const convexo = poligono => {
+  let signo = 0
+  for (let i = 0; i < poligono.length; i++) {
+    const a = poligono[i], b = poligono[(i + 1) % poligono.length], c = poligono[(i + 2) % poligono.length]
+    const giro = (b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0])
+    if (Math.abs(giro) < 1e-9) continue
+    if (signo && Math.sign(giro) !== signo) return false
+    signo = Math.sign(giro)
+  }
+  return true
+}
+
+export function pisaLaZonaCompleta(anillo, zona, geometriaZona = null) {
   const area = Math.min(Math.abs(areaConSigno(anillo)), Math.abs(areaConSigno(zona)))
   if (area === 0) return seSolapan(anillo, zona)
-  const triangular = poligono => ShapeUtils.triangulateShape(poligono.map(([x, y]) => new Vector2(x, y)), [])
-    .map(triangulo => triangulo.map(i => poligono[i]))
-  const casas = triangular(anillo), regiones = triangular(zona)
+  const casas = convexo(anillo) ? [anillo] : triangular(anillo)
+  const regiones = geometriaZona?.triangulos ?? triangular(zona)
+  const cajasRegiones = geometriaZona?.cajas ?? regiones.map(cajaDe)
+  const cajasCasas = casas.map(cajaDe), minimo = PISA_MINIMO * area
   let comun = 0
-  for (const casa of casas) for (const region of regiones) {
+  for (let i = 0; i < casas.length; i++) for (let j = 0; j < regiones.length; j++) {
+    if (!cajasSePisan(cajasCasas[i], cajasRegiones[j])) continue
+    const [casa, region] = [casas[i], regiones[j]]
     const cruce = recortarConvexo(casa, region)
-    if (cruce.length >= 3) comun += Math.abs(areaConSigno(cruce))
+    if (cruce.length >= 3) {
+      comun += Math.abs(areaConSigno(cruce))
+      if (comun >= minimo) return true
+    }
   }
-  return comun >= PISA_MINIMO * area
+  return false
 }
 
 /** Las zonas de supresión de una lista de hitos: [{ poligono, desde, hasta }] (hasta = 0: para siempre). */
@@ -130,6 +150,11 @@ export function suprimirTechos({ vertices, techos, vida = null, marcos = null, a
     }
   }
   const cajas = zonas.map(({ poligono }) => cajaDe(poligono))
+  const geometriasConcavas = zonas.map(({ poligono, poligonoConcavo }) => {
+    if (!poligonoConcavo) return null
+    const triangulos = triangular(poligono)
+    return { triangulos, cajas:triangulos.map(cajaDe) }
+  })
   for (let t = 0; t < n; t++) {
     const [inicio, cuantos] = [techos[t * 4], techos[t * 4 + 1]]
     const anillo = Array.from({ length: cuantos }, (_, k) => [vertices[(inicio + k) * 2], vertices[(inicio + k) * 2 + 1]])
@@ -137,7 +162,7 @@ export function suprimirTechos({ vertices, techos, vida = null, marcos = null, a
     let construidas = null
     zonas.forEach(({ poligono, desde, hasta, solarCompleto, poligonoConcavo }, z) => {
       if (!cajasSePisan(caja, cajas[z])) return
-      const pisa = poligonoConcavo ? pisaLaZonaCompleta(anillo, poligono) : solarCompleto ? compartenArea(anillo, poligono) : pisaLaZona(anillo, poligono)
+      const pisa = poligonoConcavo ? pisaLaZonaCompleta(anillo, poligono, geometriasConcavas[z]) : solarCompleto ? compartenArea(anillo, poligono) : pisaLaZona(anillo, poligono)
       if (!pisa) return
       const marco = porTecho.get(t)
       if (marco && !solarCompleto) {
