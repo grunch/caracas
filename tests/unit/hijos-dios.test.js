@@ -18,3 +18,22 @@ it('la marca enlaza con el modelo existente en lugar de conservar una posición 
  const {MARCAS}=await import('../../src/marcas-datos.js');const m=MARCAS.find(m=>m.id==='hijos-de-dios')
  expect(m.hito).toBe('hijos-de-dios');expect(m.x).toBeUndefined();expect(m.y).toBeUndefined()
 })
+it('el recinto sigue la ladera en cada vértice, sin enterrar su campo occidental',()=>{
+ const d=construirHitos([h()],coords)
+ for(let i=0;i<d.posiciones.length/3;i++){
+  expect(d.anclas[i*4]).toBeCloseTo(d.posiciones[i*3],3)
+  expect(d.anclas[i*4+1]).toBeCloseTo(d.posiciones[i*3+2],3)
+ }
+})
+it('la subdivisión conserva área y limita las caras del suelo a cuatro metros',async()=>{
+ const {subdividirRecinto}=await import('../../src/hitos/hijos-dios.js')
+ const {BufferGeometry,Float32BufferAttribute,Vector3}=await import('three')
+ const g=new BufferGeometry().setAttribute('position',new Float32BufferAttribute([0,.12,0,10,.12,0,0,.12,10],3));g.computeVertexNormals()
+ const sub=subdividirRecinto(g),p=sub.attributes.position;let area=0
+ for(let i=0;i<p.count;i+=3){
+  const [a,b,c]=[0,1,2].map(k=>new Vector3().fromBufferAttribute(p,i+k))
+  expect(Math.max(a.distanceTo(b),b.distanceTo(c),c.distanceTo(a))).toBeLessThanOrEqual(4.00001)
+  area+=b.clone().sub(a).cross(c.clone().sub(a)).length()/2
+ }
+ expect(area).toBeCloseTo(50,4);sub.dispose();g.dispose()
+})

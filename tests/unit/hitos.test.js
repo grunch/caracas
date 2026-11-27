@@ -103,8 +103,8 @@ describe('construirHitos', () => {
   })
 
   test('presupuesto: pocos triángulos para un solo draw call', () => {
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(580_000) // San Agustín añade12.822: histórico574.738 triángulos.
-    expect(datos.indices.length / 3).toBeLessThan(1_060_000) // San Agustín añade12.822: total1.054.111 triángulos.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(600_000) // San Agustín + Hijos de Dios: ~592.022 históricos.
+    expect(datos.indices.length / 3).toBeLessThan(1_080_000) // San Agustín + Hijos de Dios: ~1.071.395 en total.
   })
 
   test('cada hito ocupa un rango de vértices y queda cerca de su lugar en el plano', () => {
@@ -130,7 +130,7 @@ describe('construirHitos', () => {
   test('el ancla de cada vértice es el origen de su hito, y la distancia a la plaza, la del hito', () => {
     for (const { id, desde } of datos.rangos) {
       const { x, z } = coords.aMundo(hito(id).x, hito(id).y)
-      const sigueSuelo=id==='silencio-urbanizacion'||id.startsWith('silencio-plaza-')
+      const sigueSuelo=id==='hijos-de-dios'||id==='silencio-urbanizacion'||id.startsWith('silencio-plaza-')
       expect(datos.anclas[desde * 4]).toBeCloseTo(sigueSuelo?datos.posiciones[desde*3]:x, 3)
       expect(datos.anclas[desde * 4 + 1]).toBeCloseTo(sigueSuelo?datos.posiciones[desde*3+2]:z, 3)
       expect(datos.hitos[desde * 4]).toBeCloseTo(Math.hypot(x, z), 3)

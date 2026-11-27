@@ -1,3 +1,4 @@
+import {glslSuelosPropios} from './hitos/suelos-propios.js'
 import {GLSL_MANZANAS_MODERNAS,uniformsManzanasModernas} from './suelo-manzanas-modernas.js'
 /**
  * El material de la ciudad (y del suelo): MeshLambert parcheado.
@@ -59,7 +60,8 @@ ${GLSL_MANZANAS_MODERNAS}
   ${GLSL_HOY}`
 
 const FRAGMENTO_COLOR = /* glsl */ `
-  if (vInfo.w < 0.5 && bajoUnHito(vMundo.xz)) discard; // la plataforma de un hito de terraza lo tapa (src/relieve.js)
+  if (vInfo.w < 0.5 && bajoUnHito(vMundo.xz)) discard;
+  if (vInfo.w < 0.5 && bajoSueloPropio(vMundo.xz)) discard; // la plataforma de un hito de terraza lo tapa (src/relieve.js)
   if (vInfo.w > 0.5 && vExiste < 0.02) discard; // la casa todavía no existe (o ya no) en esta época
   // el alero vuela sobre la calle solo si la fachada de la época no lleva pretil
   float volado = max(1.0 - step(0.5, abs(vCubierta - ${CUBIERTA.ALERO}.0)), step(${CUBIERTA.VOLADA}.0 - 0.5, vCubierta));
@@ -197,7 +199,7 @@ export function crearMaterialCiudad({
         vMundo = (modelMatrix * vec4(transformed, 1.0)).xyz;`)
     parchearRelieveVertex(s)
     s.fragmentShader = s.fragmentShader
-      .replace('#include <common>', `#include <common>${FRAGMENTO_COMUN}`)
+      .replace('#include <common>', `#include <common>${FRAGMENTO_COMUN}${glslSuelosPropios(plano,metro)}`)
       .replace('#include <color_fragment>', `#include <color_fragment>${FRAGMENTO_COLOR}`)
       .replace('#include <opaque_fragment>', FRAGMENTO_LUZ)
   }
