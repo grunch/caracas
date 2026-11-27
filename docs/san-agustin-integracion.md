@@ -1,6 +1,6 @@
 # San Agustín: integración del estudio de Miraflores
 
-Subtarea de #259. No resuelve los otros tres templos del issue. La Trinidad/Panteón ya está implementada y no forma parte de este cambio.
+Subtarea de #259. [PR #286](https://github.com/grunch/caracas/pull/286), publicado ready. No resuelve los otros tres templos del issue. La Trinidad/Panteón ya está implementada y no forma parte de este cambio.
 
 ## Estado comprobado antes de trabajar
 
