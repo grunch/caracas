@@ -3,14 +3,22 @@ import {taller} from './nuevo-circo-geometria.js';
 // Estudio original en Miraflores; primitivas compartidas con el Nuevo Circo.
 function metropolitano(t,techo){
  const {caja,cilindro,grupo,muro,anillo,techoAnular,cornisa,reja,pieza}=t;
- cilindro(18,18,.12,0,.13,0,'arena');anillo(18,18.2,0,1.2,'madera');
- for(let i=0;i<14;i++)anillo(18.5+i*.64,19.14+i*.64,.2+i*.39,.3,'madera');
- anillo(28.3,28.7,0,7.2,'cal');
- for(let i=0;i<48;i++){const a=i*Math.PI/24,x=27.8*Math.sin(a),z=27.8*Math.cos(a);cilindro(.12,.12,8.4,x,4.2,z,'hierro');}
+ // Paso interpretativo alineado con la puerta central; las demás gradas siguen cerradas.
+ const anilloAbierto=(ri,ro,y,h,mat)=>{
+  const a=-Math.PI/2+Math.PI/32,b=3*Math.PI/2-Math.PI/32,s=new T.Shape();
+  s.absarc(0,0,ro,a,b,false);s.lineTo(ri*Math.cos(b),ri*Math.sin(b));
+  s.absarc(0,0,ri,b,a,true);s.closePath();
+  const geo=new T.ExtrudeGeometry(s,{depth:h,bevelEnabled:false,curveSegments:18});
+  geo.rotateX(-Math.PI/2);pieza(geo,mat,0,y,0);
+ };
+ cilindro(18,18,.12,0,.13,0,'arena');anilloAbierto(18,18.2,0,1.2,'madera');
+ for(let i=0;i<14;i++)anilloAbierto(18.5+i*.64,19.14+i*.64,.2+i*.39,.3,'madera');
+ anilloAbierto(28.3,28.7,0,7.2,'cal');
+ for(let i=1;i<48;i++){const a=i*Math.PI/24,x=27.8*Math.sin(a),z=27.8*Math.cos(a);cilindro(.12,.12,8.4,x,4.2,z,'hierro');}
  techoAnular(23.6,29,8.6,9.7);
  for(let i=0;i<48;i++){const a=i*Math.PI/24;const g=grupo(0,0,0,a,techo);caja(.075,.1,5.5,0,9.15,26.2,'hierro',g).rotation.x=-.2;}
  const frente=grupo(0,0,32);
- muro(44,6.1,.55,[-18,-9,0,9,18].map(x=>({x,w:x===0?4:2.7,h:4.7,y:.1,reja:true,rect:true})),frente);
+ muro(44,6.1,.55,[-18,-9,0,9,18].map(x=>({x,w:x===0?4:2.7,h:4.7,y:.1,reja:x!==0,mat:x===0?null:undefined,rect:true})),frente);
  for(const x of [-21,-12,-4,4,12,21]){caja(.6,6.3,.9,x,3.15,.12,'claro',frente);caja(.95,.3,1.1,x,5.9,.12,'claro',frente);}
  for(const x of [-4,4])for(const y of [1.3,2.2,3.1,4,4.9])caja(.72,.18,1,x,y,.18,'zocalo',frente);
  cornisa(44,6.15,0,frente);reja(43,.75,0,6.65,0,frente);

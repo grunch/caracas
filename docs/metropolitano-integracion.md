@@ -76,3 +76,9 @@ de tiempo, memoria ni workers.
 Licencia de ambas fotografías no establecida: solo enlaces y consulta local,
 sin redistribución de las imágenes. El remate se afinó tras volver a comparar
 la foto 6 con el render; la decoración menor y las rejas siguen simplificadas.
+
+## Acceso al ruedo (revisión de PR #284)
+
+Se representa la puerta central abierta y se reserva un paso axial entre la calle y el ruedo. El corte de las gradas, de unos 3,5 m en su extremo interior, es una interpretación funcional del modelo: las fotografías documentan las puertas, pero no permiten reconstruir la distribución interior de los accesos. No debe citarse como una medida histórica. Las gradas laterales conservan colisiones. La supresión de casas y árboles sigue cubriendo el solar completo, incluido el paso.
+
+La regresión comprueba el recorrido con `pasoAPie` en 1911 y 1936 y un rayo a 1,7 m de altura verifica que la geometría visible tampoco tapa ese recorrido.

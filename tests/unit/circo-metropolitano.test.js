@@ -56,3 +56,12 @@ it('permite recorrer la entrada central desde la calle hasta el ruedo sin atrave
   for(const a of [-6,6]){const p=local(a,24);expect(choca(r,p.x,p.z)).toBe(true)}
  }
 })
+
+it('la abertura visible coincide con el recorrido a la altura del caminante',async()=>{
+ const {crearMetropolitano}=await import('../../src/hitos/metropolitano-modelo.js')
+ const {Raycaster,Vector3}=await import('three'),{edificio}=crearMetropolitano()
+ edificio.updateMatrixWorld(true)
+ const r=new Raycaster(new Vector3(0,1.7,36),new Vector3(0,0,-1),0,36)
+ expect(r.intersectObject(edificio,true)).toHaveLength(0)
+ edificio.traverse(o=>{if(o.isMesh){o.geometry.dispose();o.material.dispose()}})
+})
