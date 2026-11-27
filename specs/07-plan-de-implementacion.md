@@ -193,3 +193,5 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 - **Conflictos en `src/material.js` y `src/main.js`**: varias tareas los tocan; conviene separar el shader en módulos (vértice, suelo, fachadas) dentro de T35 o antes, si los conflictos se repiten.
 - **Rendimiento**: 34 mil casas con fachadas procedurales; medir en cada tarea de la fase 3.
 
+
+| T82.CM | Integrar Circo Metropolitano de Miraflores en 1911/1936 | T82.NC | Solar DCN, modelo, vida y colisiones (#257) | 🔄 [PR #284](https://github.com/grunch/caracas/pull/284), ready; pruebas locales y capturas completas, revisiones pendientes |

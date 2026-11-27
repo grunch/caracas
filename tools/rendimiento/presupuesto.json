@@ -9,9 +9,9 @@
     "msPorCuadroCentro": 16.6
   },
   "build": {
-    "nota": "Topes del build (kB con gzip), que el CI comprueba con tools/rendimiento/presupuesto-build.mjs. Son el tamaño de hoy más un margen: un salto grande tiene que ser una decisión, no un descuido. T40c: workers 142,5 → 153,3 kB gzip por siete bloques de El Silencio; tope explícito de 160 kB, sin elevar JS inicial. T82.P1: main 330,0 → rama 331,3 kB gzip por fuentes y textos históricos de tres fichas y agrupación de nombres; tope 332 kB explícito, sin cambiar workers ni geometría. T82.NC: Nuevo Circo incorpora geometría compartida: entrada 332,0 → 334,8 kB gzip, límite 336; worker 156 kB dentro de 160.",
+    "nota": "Topes del build (kB con gzip), que el CI comprueba con tools/rendimiento/presupuesto-build.mjs. Son el tamaño de hoy más un margen: un salto grande tiene que ser una decisión, no un descuido. T40c: workers 142,5 → 153,3 kB gzip por siete bloques de El Silencio; tope explícito de 160 kB, sin elevar JS inicial. T82.P1: main 330,0 → rama 331,3 kB gzip por fuentes y textos históricos de tres fichas y agrupación de nombres; tope 332 kB explícito, sin cambiar workers ni geometría. T82.NC: Nuevo Circo incorpora geometría compartida: entrada 332,0 → 334,8 kB gzip, límite 336; worker 156 kB dentro de 160. T82.CM: Metropolitano lleva la entrada a 336,1 kB, límite 337; workers 157,2 dentro de 160.",
     "topes": {
-      "jsAlAbrirKB": 336,
+      "jsAlAbrirKB": 337,
       "trabajadoresKB": 160,
       "servicioKB": 3
     }

@@ -23,7 +23,7 @@ export const FICHAS = Object.freeze({
   },
   'circo-metropolitano': {
     textos: [[4, 'Abrió el 2 de febrero de 1896, entre Miranda y Puerto Escondido. El Circo Metropolitano y el Nuevo Circo fueron edificios diferentes y coexistieron. Su estructura permanecía en la época de 1936 y ya había desaparecido en 1946.']],
-    dudas: 'Las referencias difieren entre 1942 y 1945 para la demolición. No se elige un año exacto sin resolver la discrepancia; ambas fechas justifican su ausencia en 1946. Modelo propio pendiente de integración.',
+    dudas: 'Las referencias difieren entre 1942 y 1945 para la demolición. No se elige un año exacto sin resolver la discrepancia; ambas fechas justifican su ausencia en 1946. Modelo de Miraflores calzado al ruedo del plano de 1936. Alturas, pigmentos y graderío interpretativos; no es un levantamiento.',
   },
   'hijos-de-dios': {
     textos: [[3, 'Abierto en 1856 en Sabana del Blanco. En esta época está cerrado al uso funerario, pero sus muros, nichos y sepulturas siguen formando parte de la ciudad. El plano de 1889 lo identifica como cementerio de la Concepción.'], [5, 'El cementerio clausurado conserva estructuras documentadas en fotografías de los años treinta. El cierre no equivale a su demolición, que ocurrió después de 1946.']],

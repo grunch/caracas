@@ -109,7 +109,7 @@ export const MARCAS = Object.freeze([
     dudas: 'Inaugurado en 1905 (CG): va desde la época de 1911.' },
   { id: 'plaza-henry-clay', nombre: 'Plaza Henry Clay', x: 8795, y: 7860, nace: 5, nivel: 3, fuente: `${P36} («Plaza Henry Clay»)` },
   { id: 'plaza-miranda', nombre: 'Plaza Miranda', x: 8085, y: 7690, nace: 5, nivel: 3, fuente: `${P36} («Plaza Miranda»)` },
-  { id: 'circo-metropolitano', nombre: 'Circo Metropolitano', x: 7905, y: 7905, nace: 4, muere: 6, nivel: 3, alto: 10, fuente: `${P36} («Circo Metropolitano»); apertura en 1896 y demolición antes de 1946: https://fundaayc.com/category/crono-arquitectura-venezuela/1940-1949/1945/; fecha alternativa de 1942: https://www.academia.edu/39601663/ACS_TESTIGO_PRESENCIAL_CARACAS_1940_1960`,
+  { id: 'circo-metropolitano', hito: 'circo-metropolitano', nombre: 'Circo Metropolitano', x: 7905, y: 7905, nace: 4, muere: 6, nivel: 3, alto: 10, fuente: `${P36} («Circo Metropolitano»); apertura en 1896 y demolición antes de 1946: https://fundaayc.com/category/crono-arquitectura-venezuela/1940-1949/1945/; fecha alternativa de 1942: https://www.academia.edu/39601663/ACS_TESTIGO_PRESENCIAL_CARACAS_1940_1960`,
     dudas: 'Las fuentes discrepan entre 1942 y 1945 para su desaparición. Ambas excluyen 1946. Hito pendiente de integración: la marca no representa su arquitectura.' },
   { id: 'rotunda', nombre: 'La Rotunda', x: 8660, y: 8560, nace: 3, muere: 5, nivel: 3, alto: 9, nota: 'La cárcel.',
     fuente: `${P89} (30 «Cárcel»); ${P36} (esquina «La Cárcel», el solar ya vacío); nombre: ${CG}`,
