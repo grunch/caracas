@@ -103,8 +103,8 @@ describe('construirHitos', () => {
   })
 
   test('presupuesto: pocos triángulos para un solo draw call', () => {
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(570_000) // Rotunda/solar: +24.448; total previo a 1946: 562.492. // Metropolitano: +13.662; total anterior a 1946: 538.210.
-    expect(datos.indices.length / 3).toBeLessThan(1_050_000) /* Concordia: +4.332; total: 1.041.865. */ // Metropolitano: +13.662; total de todas las fases: 1.013.251, una malla.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(570_000) // Rotunda/solar: +23.872; total anterior a 1946: 561.916.
+    expect(datos.indices.length / 3).toBeLessThan(1_050_000) // Concordia: +4.332; total: 1.041.289.
   })
 
   test('cada hito ocupa un rango de vértices y queda cerca de su lugar en el plano', () => {

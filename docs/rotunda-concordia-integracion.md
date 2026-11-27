@@ -43,7 +43,7 @@ solo los renders propios acompañan el PR.
 
 ## Presupuesto de geometría
 
-La cárcel añade 24.436 triángulos, el solar 12 y la plaza 4.332. El total compartido anterior a 1946 pasa de 538.044 a 562.492; el total de hitos de todas las épocas pasa de 1.013.085 a 1.041.865 (+2,84 %). Los límites unitarios quedan en 570.000 y 1.050.000, respectivamente. La plaza se carga con los hitos de 1946, sin adelantar esa carga al arranque histórico. Son recuentos geométricos; no representan FPS ni una medición de GPU.
+La cárcel añade 23.860 triángulos, el solar 12 y la plaza 4.332. El total compartido anterior a 1946 pasa de 538.044 a 561.916; el total de hitos de todas las épocas pasa de 1.013.085 a 1.041.289 (+2,78 %). Los límites unitarios quedan en 570.000 y 1.050.000, respectivamente. La plaza se carga con los hitos de 1946, sin adelantar esa carga al arranque histórico. Son recuentos geométricos; no representan FPS ni una medición de GPU.
 
 El relieve usa un único plano de apoyo para la franja de La Concordia. Los dos edificios se apoyan en él; la cárcel no recorta el terreno porque sus esquinas entre celdas y muro quedan descubiertas. Solo la plataforma continua del jardín tapa el suelo en 1946. Se amplía de cuatro a cinco la capacidad de terrazas del shader, con una prueba del catálogo completo para evitar fallos de arranque.
 
@@ -58,3 +58,5 @@ El relieve usa un único plano de apoyo para la franja de La Concordia. Los dos 
 | 1946 | Jardín y templete | Plano DCN de fotografías aéreas de 1946, edición catalogada [1950?]; fotografías históricas del templete | Jardín esquemático; fecha de toma y licencia de fotos desconocidas; no se redistribuyen. |
 
 La fuente de la cárcel es el [Diccionario de Historia de Venezuela, «La Rotunda»](https://bibliofep.fundacionempresaspolar.org/dhv/entradas/l/la-rotunda/), de Ermila Troconis de Veracoechea. La [cronología de Polar para 1936](https://bibliofep.fundacionempresaspolar.org/_custom/static/cronologia_hv/zoom/s20/1936-15.html) registra una resolución del MOP en abril, mientras la transcripción secundaria del blog atribuye un decreto al 2 de enero. Son actos administrativos que no prueban por sí mismos el momento del derribo. Una referencia secundaria a enero de 1937 queda pendiente de cotejo y no modifica el estado observado en el plano.
+
+Los patios descubiertos de La Rotunda conservan el suelo verde convencional de las manzanas del visor. El modelo urbano no superpone discos de pavimento a ese terreno; la vista de estudio de Miraflores emplea el mismo verde. Esto es una convención visual del proyecto, no una afirmación de que los patios históricos fueran césped.

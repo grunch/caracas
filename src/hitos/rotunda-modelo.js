@@ -7,7 +7,7 @@ function rotunda(t,techo,meta){
  // Dos recintos: ampliación norte descrita por Polar; separaciones nominales.
  for(const xc of [-19,19]){
  const recinto=grupo(xc,0,0),cubierta=grupo(xc,0,0,0,techo);
- cilindro(12,12,.12,0,.06,0,'camino',recinto);
+ // Patio descubierto: se conserva el suelo verde del visor, sin duplicar su pavimento.
  // Anillo de celdas, dos pisos; las puertas son huecos geométricos.
  for(let i=0;i<24;i++){
   const a=i*2*Math.PI/24;const g=grupo(14.8*Math.sin(a),0,14.8*Math.cos(a),a+Math.PI,recinto);
