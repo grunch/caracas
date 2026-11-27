@@ -17,6 +17,15 @@
 const SIN_LEYENDA = 'el nombre de 1772 no se cotejó con la leyenda de ese plano'
 
 export const FICHAS = Object.freeze({
+  'circo-metropolitano': {
+    textos: [[4, 'Abrió el 2 de febrero de 1896, entre Miranda y Puerto Escondido. El Circo Metropolitano y el Nuevo Circo fueron edificios diferentes y coexistieron. Su estructura permanecía en la época de 1936 y ya había desaparecido en 1946.']],
+    dudas: 'Las referencias difieren entre 1942 y 1945 para la demolición. No se elige un año exacto sin resolver la discrepancia; ambas fechas justifican su ausencia en 1946. Modelo propio pendiente de integración.',
+  },
+  'hijos-de-dios': {
+    textos: [[3, 'Abierto en 1856 en Sabana del Blanco. En esta época está cerrado al uso funerario, pero sus muros, nichos y sepulturas siguen formando parte de la ciudad. El plano de 1889 lo identifica como cementerio de la Concepción.'], [5, 'El cementerio clausurado conserva estructuras documentadas en fotografías de los años treinta. El cierre no equivale a su demolición, que ocurrió después de 1946.']],
+    dudas: 'La distribución individual de sepulturas y el estado de cada muro no están levantados. El modelo se estudia por separado antes de integrarlo al mapa.',
+  },
+
   'reurbanizacion-el-silencio': {textos:[[6,'Carlos Raúl Villanueva proyectó siete bloques de viviendas y comercios con patios y soportales. El bloque 7 abrió el 5 de julio de 1944; el conjunto se inauguró el 26 de agosto de 1945. La plaza central se llamó General Rafael Urdaneta, hoy O’Leary. La vista de 1946 usa el levantamiento aerofotogramétrico de ese año y conserva las casas anteriores donde el plano no documenta una sustitución.']],dudas:'Emplazamiento ajustado a huellas OSM mediante la georreferenciación del mapa (RMS 5,09 m). Dimensiones interiores, colores y esculturas interpretativos.'},
   // --- el valle ---
   avila: {
@@ -60,11 +69,12 @@ export const FICHAS = Object.freeze({
   'plaza-bolivar': {
     textos: [
       [1, 'La plaza mayor era el mercado de la ciudad: una explanada de tierra rodeada de galerías de arcos, con hileras de puestos bajo toldos. Así la muestran un grabado fechado en 1852 y la pintura que Camille Pissarro hizo de ella por esos años.'],
+      [2, 'Desde el acuerdo de la Diputación Provincial del 10 de diciembre de 1842 su nombre oficial es Plaza Bolívar. Todavía funciona como mercado: el nombre no anticipa el jardín ni la estatua ecuestre inaugurada en 1874.'],
       [3, 'Hacia 1870 el mercado ya no está: la foto de Lessmann y la acuarela de Bolet muestran la plaza en obra, con los árboles recién plantados. Después llega el jardín, con canteros, faroles, una reja alrededor y, en el centro, la estatua ecuestre de Bolívar, que las fotos fechan en 1874. El plano de 1889 ya la llama Plaza Bolívar.'],
       [4, 'Las fotos de 1910 a 1920 la muestran con el piso de mosaico en damero, los faroles de varios brazos y los árboles ya crecidos.'],
     ],
     hoy: 'la Plaza Bolívar, con la misma estatua.',
-    dudas: 'El nombre «Plaza Bolívar» es anterior a la estatua (dato general: un decreto de 1842); aquí cambia junto con el jardín, en 1889.',
+    dudas: 'El nombre oficial aparece desde 1843 por el acuerdo de 1842; la plaza conserva el mercado. El jardín y la estatua de 1874 pertenecen a una etapa posterior.',
   },
   catedral: {
     textos: [

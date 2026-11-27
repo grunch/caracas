@@ -65,7 +65,7 @@ test('tocar una marca abre su ficha: nombre, época, texto y fuente; sin fotos, 
   await expect(panel).toBeVisible()
   await expect(panel.getByRole('heading', { name: 'Plaza Bolívar' })).toBeFocused()
   await expect(panel.locator('.era')).toHaveText('Hacia 1936')
-  await expect(panel.locator('.nombres li')).toHaveText(['1772–1843Plaza Mayor', 'desde 1889Plaza Bolívar'])
+  await expect(panel.locator('.nombres li')).toHaveText(['1772Plaza Mayor', 'desde 1843Plaza Bolívar'])
   await expect(panel.locator('.nombres li.rige')).toHaveText(/Plaza Bolívar/)
   await expect(panel.locator('.texto p.epoca.rige')).toContainText('damero')
   await expect(panel.locator('.sinfoto')).toHaveText('Sin imagen de época confiable de este lugar.')

@@ -34,7 +34,16 @@ export function nombresPorEpoca(marca, epoca, años = AÑOS_DE_EPOCA) {
     nombre: n.nombre, desde: Math.max(n.desde, marca.nace),
     hasta: Math.min(fin, i + 1 < marca.nombres.length ? marca.nombres[i + 1].desde - 1 : fin),
   })).filter((t) => t.desde <= t.hasta) // un nombre que dejó de regir antes de que la marca naciera no cuenta
-  return tramos.map(({ nombre, desde, hasta }) => {
+  // Las notas pueden cambiar sin que cambie el nombre (mercado/jardín de Plaza Bolívar).
+  // Solo se unen períodos contiguos; un nombre que regresa después de otro sigue separado.
+  const continuos = []
+  for (const tramo of tramos) {
+    const anterior = continuos.at(-1)
+    if (anterior?.nombre === tramo.nombre && anterior.hasta + 1 === tramo.desde) {
+      continuos[continuos.length - 1] = { ...anterior, hasta: tramo.hasta }
+    } else continuos.push({ ...tramo })
+  }
+  return continuos.map(({ nombre, desde, hasta }) => {
     const abierto = hasta === ULTIMA_EPOCA && marca.muere === 0
     return { nombre, periodo: periodo(desde, hasta, años, abierto), rige: vivaEn(marca, epoca) && epoca >= desde && epoca <= hasta }
   })

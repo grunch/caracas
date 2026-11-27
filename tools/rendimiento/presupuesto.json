@@ -9,9 +9,9 @@
     "msPorCuadroCentro": 16.6
   },
   "build": {
-    "nota": "Topes del build (kB con gzip), que el CI comprueba con tools/rendimiento/presupuesto-build.mjs. Son el tamaño de hoy más un margen: un salto grande tiene que ser una decisión, no un descuido. T40c: workers 142,5 → 153,3 kB gzip por siete bloques de El Silencio; tope explícito de 160 kB, sin elevar JS inicial.",
+    "nota": "Topes del build (kB con gzip), que el CI comprueba con tools/rendimiento/presupuesto-build.mjs. Son el tamaño de hoy más un margen: un salto grande tiene que ser una decisión, no un descuido. T40c: workers 142,5 → 153,3 kB gzip por siete bloques de El Silencio; tope explícito de 160 kB, sin elevar JS inicial. T82.P1: main 330,0 → rama 331,3 kB gzip por fuentes y textos históricos de tres fichas y agrupación de nombres; tope 332 kB explícito, sin cambiar workers ni geometría.",
     "topes": {
-      "jsAlAbrirKB": 330,
+      "jsAlAbrirKB": 332,
       "trabajadoresKB": 160,
       "servicioKB": 3
     }
