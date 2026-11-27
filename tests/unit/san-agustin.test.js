@@ -22,3 +22,9 @@ it('el modelo conserva alturas documentadas y cabe dentro de la envolvente nomin
  expect(b.max.y).toBeCloseTo(32,1);expect(s.x).toBeLessThan(32);expect(s.z).toBeLessThan(63)
  let cupula=0;const v=new Vector3();e.updateMatrixWorld(true);e.traverse(o=>{if(!o.isMesh)return;const p=o.geometry.attributes.position;for(let i=0;i<p.count;i++){v.fromBufferAttribute(p,i).applyMatrix4(o.matrixWorld);if(v.z<-5&&Math.abs(v.x)<5)cupula=Math.max(cupula,v.y)}});expect(cupula).toBeCloseTo(24,1)
 })
+it('la marca usa la ubicación del modelo y la ficha distingue evidencia e interpretación',async()=>{
+ const {MARCAS}=await import('../../src/marcas-datos.js'),{FICHAS}=await import('../../src/fichas-datos.js')
+ const m=MARCAS.find(m=>m.id==='san-agustin');expect(m.hito).toBe(h().id);expect(m.nace).toBe(h().nace);expect(m.alto).toBe(32)
+ expect(m.x).toBeUndefined();expect(m.y).toBeUndefined()
+ expect(FICHAS['san-agustin'].textos[0][0]).toBe(5);expect(FICHAS['san-agustin'].dudas).toContain('sin mensura catastral')
+})
