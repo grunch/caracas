@@ -70,7 +70,7 @@ las seis épocas. Este PR no publica nuevos datos.
 - Capturas antes/después con la misma cámara en seis épocas, datos iguales.
 - Presupuesto geométrico: 26.386 triángulos nuevos; total antes de 1946 524.536
   (límite explícito 530.000); incluyendo El Silencio 999.577, dentro del millón.
-- Build: entrada 334,9 kB gzip, worker 156 kB. Límite de entrada 332 → 336 kB
+- Build: entrada 335,1 kB gzip, worker 156 kB. Límite de entrada 332 → 336 kB
   declarado por la geometría y metadatos añadidos; worker permanece bajo 160 kB.
 - Medición del navegador en base y rama con el script del repo; el PR incorpora
   las salidas y sus limitaciones. Sin GPU no se certifican FPS.
