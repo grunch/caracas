@@ -74,7 +74,7 @@ export const FICHAS = Object.freeze({
       [4, 'Las fotos de 1910 a 1920 la muestran con el piso de mosaico en damero, los faroles de varios brazos y los árboles ya crecidos.'],
     ],
     hoy: 'la Plaza Bolívar, con la misma estatua.',
-    dudas: 'El nombre «Plaza Bolívar» es anterior a la estatua (dato general: un decreto de 1842); aquí cambia junto con el jardín, en 1889.',
+    dudas: 'El nombre oficial aparece desde 1843 por el acuerdo de 1842; la plaza conserva el mercado. El jardín y la estatua de 1874 pertenecen a una etapa posterior.',
   },
   catedral: {
     textos: [
