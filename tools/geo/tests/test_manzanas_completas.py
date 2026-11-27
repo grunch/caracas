@@ -67,3 +67,22 @@ def test_indice_de_hitos_conserva_arboles_y_casas_del_recorte():
     ms=[{'id':f'M{i}','poligono':[[i*250,0],[i*250+200,0],[i*250+200,200],[i*250,200]],'casas':[]} for i in range(6)]
     obstaculos=[[[0,0],[70,0],[70,200],[0,200]],[[10000,10000],[10100,10000],[10100,10100],[10000,10100]]]
     assert recortar_y_arbolar(ms,obstaculos,.5,indexar_hitos=True)==recortar_y_arbolar(ms,obstaculos,.5)
+
+
+def test_manzana_sin_casas_cubierta_por_un_hito_queda_sin_arboles():
+    # Un pabellón del Hospital Vargas tapa entera una manzana de 1936 que no tiene casas (M5-1048-A0):
+    # no hay corral que abrir ni patio que arbolar, y el resto de las manzanas se sigue arbolando.
+    cubierta={'id':'cubierta','poligono':[[0,0],[40,0],[40,40],[0,40]],'casas':[]}
+    libre={'id':'libre','poligono':[[100,0],[140,0],[140,40],[100,40]],'casas':[]}
+    hito=[[-5,-5],[45,-5],[45,45],[-5,45]]
+    r=recortar_y_arbolar([cubierta,libre],[hito],.5)
+    assert r[0]['arboles']==[] and r[0]['arbolesObjetivo']==0
+    assert r[0]['cubiertaPorHito'] is True
+    assert r[1]['arboles'] and 'cubiertaPorHito' not in r[1]
+
+
+def test_manzana_sin_casas_y_sin_hito_que_la_cubra_sigue_siendo_un_error():
+    import pytest
+    diminuta={'id':'diminuta','poligono':[[0,0],[1,0],[1,1],[0,1]],'casas':[]}
+    with pytest.raises(ValueError):
+        recortar_y_arbolar([diminuta],[],.5)
