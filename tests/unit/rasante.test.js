@@ -110,8 +110,8 @@ describe('el lienzo con rasante', () => {
   test('el shader de los hitos interpola la cota entre las cabezas y deja los pies como estaban', () => {
     const U = { ...uniformsRelieve({ x0: 0, z0: 0, ancho: 1, alto: 1 }), ...Object.fromEntries(['uColor', 'uOla', 'uAnchoOla', 'uEpocaDe', 'uEpocaA', 'uOlaEpoca'].map(k => [k, { value: 0 }])) }
     const { vertexShader } = crearMaterialHitos({ U })
-    expect(vertexShader).toContain('mix(sueloDibujado(aAncla.xy), sueloDibujado(aAncla.zw), t)')
-    expect(vertexShader).toContain('piso = sueloDibujado(position.xz);')
+    expect(vertexShader).toContain('piso = sueloDibujado(alSuelo ? position.xz : aAncla.xy);')
+    expect(vertexShader).toContain('if (t > 0.0) piso = mix(piso, sueloDibujado(aAncla.zw), t);')
     expect(vertexShader).toMatch(/aHito\.w > 0\.5 && aHito\.w < 1\.5/)
     expect(vertexShader).toContain('float piso = pisoDeHito(aAncla.xy, aAncla.zw, position.xz);')
   })

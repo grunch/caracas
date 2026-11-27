@@ -127,10 +127,12 @@ export function sueloDibujadoEn(alturaEn, hoja, celda, x, z) {
   const [cx, cz] = [Math.floor(qx), Math.floor(qz)]
   const [fx, fz] = [qx - cx, qz - cz]
   const en = (i, k) => alturaEn(hoja.x0 + (cx + i) * celda[0], hoja.z0 + (cz + k) * celda[1])
-  const [sur, este] = [en(0, 1), en(1, 0)]
-  if (fx + fz <= 1) { const a = en(0, 0); return a + fx * (este - a) + fz * (sur - a) }
-  const c = en(1, 1)
-  return c + (1 - fx) * (sur - c) + (1 - fz) * (este - c)
+  // de qué lado de la diagonal cae: el triángulo con la esquina (0, 0) o el de la (1, 1); e es esa esquina y
+  // (wx, wz), cuánto se avanza desde ella por cada lado del cuadro
+  const bajo = fx + fz <= 1
+  const [e, wx, wz] = bajo ? [0, fx, fz] : [1, 1 - fx, 1 - fz]
+  const h = en(e, e)
+  return h + wx * (en(1 - e, e) - h) + wz * (en(e, 1 - e) - h)
 }
 
 /** El tamaño de los cuadros de la hoja, para sueloDibujado(): se pone al armar la malla del suelo (src/main.js). */
@@ -148,10 +150,13 @@ export const GLSL_SUELO_DIBUJADO = /* glsl */ `
     if (uMallaSuelo.x <= 0.0) return sueloEn(xz);
     vec2 q = (xz - uRelieveHoja.xy) / uMallaSuelo;
     vec2 c = floor(q), f = q - c, o = uRelieveHoja.xy + c * uMallaSuelo;
-    float sur = sueloEn(o + vec2(0.0, uMallaSuelo.y)), este = sueloEn(o + vec2(uMallaSuelo.x, 0.0));
-    if (f.x + f.y <= 1.0) { float a = sueloEn(o); return a + f.x * (este - a) + f.y * (sur - a); }
-    float d = sueloEn(o + uMallaSuelo);
-    return d + (1.0 - f.x) * (sur - d) + (1.0 - f.y) * (este - d);
+    // de qué lado de la diagonal cae: el triángulo con la esquina (0, 0) o el de la (1, 1); e es esa esquina
+    // y w, cuánto se avanza desde ella por cada lado del cuadro
+    bool bajo = f.x + f.y <= 1.0;
+    vec2 e = bajo ? vec2(0.0) : vec2(1.0), w = bajo ? f : 1.0 - f;
+    float h = sueloEn(o + e * uMallaSuelo);
+    float hx = sueloEn(o + vec2(1.0 - e.x, e.y) * uMallaSuelo), hz = sueloEn(o + vec2(e.x, 1.0 - e.y) * uMallaSuelo);
+    return h + w.x * (hx - h) + w.y * (hz - h);
   }
 `
 

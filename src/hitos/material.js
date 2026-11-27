@@ -38,15 +38,15 @@ const VERTICE = /* glsl */ `
     if (sube < 0.01 || vExiste < 0.02) { gl_Position = vec4(2.0, 2.0, 2.0, 1.0); return; }
     // el piso: plano a la altura del ancla donde el terreno baja y donde sube lo sigue; en una terraza, su plano
     float piso = pisoDeHito(aAncla.xy, aAncla.zw, position.xz);
-    if (aHito.w > 2.5) {
-      // el pie de un apoyo y el lecho de un puente: sobre el suelo tal como se dibuja bajo el vértice
-      piso = sueloDibujado(position.xz);
-    } else if (aHito.w > 1.5) {
-      // la rasante de un puente: el ancla son sus dos cabezas y la cota va recta de una a otra, sin seguir el
-      // terreno intermedio (src/hitos/rasante.js); así ni el tablero ni las barandas se deforman con el relieve
+    if (aHito.w > 1.5) {
+      // un puente. Su rasante (2): el ancla son las dos cabezas y la cota va recta de una a otra, sin seguir el
+      // terreno intermedio (src/hitos/rasante.js); así ni el tablero ni las barandas se deforman con el relieve.
+      // El pie de un apoyo y el lecho (3): sobre el suelo tal como se dibuja bajo el vértice.
+      bool alSuelo = aHito.w > 2.5;
       vec2 d = aAncla.zw - aAncla.xy;
-      float t = clamp(dot(position.xz - aAncla.xy, d) / dot(d, d), 0.0, 1.0);
-      piso = mix(sueloDibujado(aAncla.xy), sueloDibujado(aAncla.zw), t);
+      float t = alSuelo ? 0.0 : clamp(dot(position.xz - aAncla.xy, d) / dot(d, d), 0.0, 1.0);
+      piso = sueloDibujado(alSuelo ? position.xz : aAncla.xy);
+      if (t > 0.0) piso = mix(piso, sueloDibujado(aAncla.zw), t);
     }
     float y = piso + ${LEVANTE_M.toFixed(2)} + position.y * sube * vExiste;
     if (aHito.w > 0.5 && aHito.w < 1.5) y = min(sueloEn(position.xz), piso) - ${glsl(MARGEN_PIE_M)};
