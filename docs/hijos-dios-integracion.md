@@ -16,8 +16,10 @@ Origen8620,3670, eje paralelo al frente del dibujo, suelo verde convencional. El
 
 Dimensiones nominales de altura5,5m, espesor0,65m, nichos, sepulturas y vegetación son interpretativas, no levantamiento. Envolvente170×68m aproximada. No se atribuyen nombres a tumbas ni se inventan cambios de abandono por fecha.
 
-## Validación pendiente
+## Validación
 
 Tres pruebas de integración fallaron primero en main. Pasan vida3→0, recinto que excluye calle/seminario/entrante y enlace de marca. Un cuarto test reprodujo el apoyo central que enterraba el campo occidental; ahora comprueba el apoyo por vértice. Un quinto verifica que la subdivisión no cambia el área y limita las caras del suelo a4m. En Miraflores22 pruebas pasan; perspectiva/planta cotejadas con1936/1946, errores de navegador vacíos. Faltan capturas urbanas de seis épocas y comparación de rendimiento contra main, revisión y publicación. Tras fusionar, regenerar datos y publicar el release; no cerrar #250 hasta resolver también General del Sur.
 
-Validación adicional:1844 pruebas unitarias pasan en138 archivos con dos workers (48,83s). El E2E1889–1946 pasa (25,3s), sin errores de shader. Geometría del recinto17.284triángulos; total histórico579.200 y todas las fases1.058.573 sobre main0c99f37. Límites explícitos580.000/1.060.000. Entrada341,4kB y workers161,2kB gzip, topes342/162; no se elevan presupuestos de ejecución. Faltan comparación contra main, mediciones de ejecución, revisión y publicación.
+Validación tras rebasar sobre main d99e17d (incluye San Agustín): npm test -- --maxWorkers=2, 1.848 pruebas en139 archivos; build y node tools/rendimiento/presupuesto-build.mjs pasan; E2E 1889–1946 pasa sin errores de shader. La geometría aislada del recinto suma17.284triángulos; total histórico592.022 y todas las fases1.071.395. Topes explícitos de hitos600.000/1.080.000. Build combinado343,2kB inicial y162,7kB workers gzip; límites344/163, sin elevar presupuestos de ejecución. Las mediciones emparejadas y sus límites constan en [mediciones de rendimiento](mediciones/hijos-dios/README.md).
+
+Capturas comparables de seis épocas antes/después: [gist secreto](https://gist.github.com/grunch/83d11c415ad724a4ea3ae720a0dffaec). La sesión actual no tiene un navegador interactivo conectado; la revisión visual automatizada y el E2E sí se corrieron, pero no se afirma una prueba manual. Issue #250 sigue parcialmente abierto: falta integrar General del Sur.

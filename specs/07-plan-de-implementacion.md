@@ -184,11 +184,11 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T82.P1 | Hallazgos prioritarios: cronología de circos, cementerios y plaza; estudios previos en Miraflores | T82 | Corregir presencia/nombres con fuentes y registrar alcance pendiente de #242 | 🔄 [PR #280](https://github.com/grunch/caracas/pull/280); cronología corregida, estudios en Miraflores y pendientes documentados |
 | T82.P1.RED | Registro vial temporal: importación conservadora, auditoría y exportación offline (#269, #277, #278) | T82.P1 | Fuentes por etapa y regresiones | 🔄 [PR #282](https://github.com/grunch/caracas/pull/282); herramienta offline, redes aún parciales |
 | T82.P1.PUENTES | Cruce Constitución/Sucre y sustitución del puente de Hierro; estudios previos en Miraflores (#272) | T82.P1 | Fuentes por etapa y regresiones | 🔄 [PR #281](https://github.com/grunch/caracas/pull/281); alcance parcial |
-| T82.NC | Integrar Nuevo Circo de Miraflores en 1936/1946 | T82.P1 | Modelo, solar, vida, colisiones y rendimiento (#257) | 🔄 [PR #283](https://github.com/grunch/caracas/pull/283), listo para revisión |
+| T82.NC | Integrar Nuevo Circo de Miraflores en 1936/1946 | T82.P1 | Modelo, solar, vida, colisiones y rendimiento (#257) | ✅ [PR #283](https://github.com/grunch/caracas/pull/283), fusionado |
 | T82.CM | Integrar Circo Metropolitano de Miraflores en 1911/1936 | T82.NC | Solar DCN, modelo, vida y colisiones (#257) | ✅ [PR #284](https://github.com/grunch/caracas/pull/284), fusionado; publicación de derivados pendiente en seguimiento de #257 |
-| T82.RC | La Rotunda en 1889/1911, solar de 1936 y La Concordia en 1946 | T82.P1 | Modelo Miraflores, calce por parcela, vidas y colisiones (#258) | 🔄 [PR #285](https://github.com/grunch/caracas/pull/285), fusionado; validación local y capturas completas, CI/revisiones pendientes |
-| T82.SA | San Agustín1936/1946 desde estudio Miraflores | T82.RC | Contorno DCN, alturas IPC, vida y reserva (#259 parcial) | PR #286 ready; revisión y CI en curso |
-| T82.HD | Cementerio de los Hijos de Dios1889–1946 desde Miraflores | T82.RC | Tres recintos DCN y reserva temporal (#250 parcial) | En integración local; PR pendiente |
+| T82.RC | La Rotunda en 1889/1911, solar de 1936 y La Concordia en 1946 | T82.P1 | Modelo Miraflores, calce por parcela, vidas y colisiones (#258) | ✅ [PR #285](https://github.com/grunch/caracas/pull/285), fusionado |
+| T82.SA | San Agustín1936/1946 desde estudio Miraflores | T82.RC | Contorno DCN, alturas IPC, vida y reserva (#259 parcial) | ✅ [PR #286](https://github.com/grunch/caracas/pull/286), fusionado; CI verde |
+| T82.HD | Cementerio de los Hijos de Dios1889–1946 desde Miraflores | T82.RC | Tres recintos DCN y reserva temporal (#250 parcial) | Integración en revisión local; falta PR; #250 sigue abierto por General del Sur |
 
 ## Riesgos que el plan vigila
 
