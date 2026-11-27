@@ -3,6 +3,7 @@
  * está quién la dibuja. Una parte recibe el pintor del hito ya con su vida (nace, muere) y sus medidas en
  * metros, en el marco del hito: a a lo largo del eje, b a su derecha.
  */
+import {nuevoCirco} from './nuevo-circo.js'
 import { teatroMunicipal } from './teatro-municipal.js'
 import {elSilencio} from './el-silencio.js'
 import { casaAmarilla } from './casa-amarilla.js'
@@ -60,6 +61,7 @@ export const parteDe = (tipo) => (Object.hasOwn(PARTES, tipo) ? PARTES[tipo] : u
 
 export const PARTES = Object.freeze({
   elSilencio,
+  nuevoCirco(p) { nuevoCirco(p) },
   teatroMunicipal(p, medidas) { teatroMunicipal(p, medidas) },
   casaAmarilla(p, medidas) { casaAmarilla(p, medidas) },
   capitolio(p, medidas) { capitolio(p, medidas) },

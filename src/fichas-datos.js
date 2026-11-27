@@ -236,7 +236,8 @@ export const FICHAS = Object.freeze({
     dudas: 'La iglesia es anterior. La leyenda del plano de 1843 nombra «Capuchinos» (S), no San Juan: si es este templo, falta verlo en la letra del plano; mientras, aparece desde 1889.',
   },
   'nuevo-circo': {
-    textos: [[5, 'La plaza de toros: «Nuevo Circo» en el plano de 1936.']],
+    textos: [[5, 'Inaugurado el 26 de enero de 1919, el Nuevo Circo aparece como plaza de toros en el plano de 1936. Su ruedo permanece abierto: la cubierta total proyectada no llegó a ejecutarse.']],
+    dudas: 'Modelo interpretativo contrastado con el plano de 1936 y fotografías históricas; alturas, pigmentos y reformas interiores sin datación precisa. Se conserva en 1946 sin afirmar un levantamiento independiente. Fuente: https://camaradecaracas.com/la-camara-caracas-y-sus-historias/cronicas-de-la-ciudad/el-nuevo-circo-de-caracas/',
   },
   'parque-carabobo': {
     textos: [
