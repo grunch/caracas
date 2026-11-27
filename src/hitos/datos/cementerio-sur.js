@@ -26,6 +26,7 @@ export const cementerioSur=Object.freeze({
  sinArbolesPorEpoca:[{nace:3,muere:5,poligono:poligonoInicial},{nace:5,muere:0,poligono:poligono1936}],
  sueloPropioPorEpoca:[{nace:3,muere:5,poligono:poligonoInicial},{nace:5,muere:0,poligono:poligono1936}],
  solarCompleto:true,
+ poligonoConcavo:true,
  fuente:'DCN 1936; Rodríguez 2011: https://servicio.bc.uc.edu.ve/postgrado/manongo36/art07.pdf',verificar:[],
  partes:[{tipo:'cementerio-sur',fase:'inicial',nace:3,muere:5},{tipo:'cementerio-sur',fase:'ampliado',nace:5,muere:0}],
 })

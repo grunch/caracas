@@ -4,6 +4,7 @@
  * borran: se les cambia la vida (src/epocas.js) para que no nazcan mientras el hito esté en pie.
  */
 import { ALA, CAMPOS_MARCO, CAMPOS_ALA, esDePatio } from '../alas.js'
+import { ShapeUtils, Vector2 } from 'three'
 import { recortarConvexo, areaConSigno } from '../poligono.js'
 import {poligonosConVida} from './datos/fases-geometricas.js'
 
@@ -92,9 +93,24 @@ export function pisaLaZona(anillo, zona) {
   return dentro.length >= 3 && Math.abs(areaConSigno(dentro)) >= PISA_MINIMO * area
 }
 
+/** Fracción de solapamiento real entre dos polígonos simples, también si alguno es cóncavo. */
+export function pisaLaZonaCompleta(anillo, zona) {
+  const area = Math.min(Math.abs(areaConSigno(anillo)), Math.abs(areaConSigno(zona)))
+  if (area === 0) return seSolapan(anillo, zona)
+  const triangular = poligono => ShapeUtils.triangulateShape(poligono.map(([x, y]) => new Vector2(x, y)), [])
+    .map(triangulo => triangulo.map(i => poligono[i]))
+  const casas = triangular(anillo), regiones = triangular(zona)
+  let comun = 0
+  for (const casa of casas) for (const region of regiones) {
+    const cruce = recortarConvexo(casa, region)
+    if (cruce.length >= 3) comun += Math.abs(areaConSigno(cruce))
+  }
+  return comun >= PISA_MINIMO * area
+}
+
 /** Las zonas de supresión de una lista de hitos: [{ poligono, desde, hasta }] (hasta = 0: para siempre). */
 export function zonasDeSupresion(hitos) {
-  return hitos.flatMap((h) => poligonosConVida(h,'suprime').map(({poligono,desde,hasta}) => ({ poligono, desde, hasta, ...(h.solarCompleto ? {solarCompleto:true} : {}) })))
+  return hitos.flatMap((h) => poligonosConVida(h,'suprime').map(({poligono,desde,hasta}) => ({ poligono, desde, hasta, ...(h.solarCompleto ? {solarCompleto:true} : {}), ...(h.poligonoConcavo ? {poligonoConcavo:true} : {}) })))
 }
 
 /**
@@ -119,8 +135,10 @@ export function suprimirTechos({ vertices, techos, vida = null, marcos = null, a
     const anillo = Array.from({ length: cuantos }, (_, k) => [vertices[(inicio + k) * 2], vertices[(inicio + k) * 2 + 1]])
     const caja = cajaDe(anillo)
     let construidas = null
-    zonas.forEach(({ poligono, desde, hasta, solarCompleto }, z) => {
-      if (!cajasSePisan(caja, cajas[z]) || !(solarCompleto ? compartenArea(anillo, poligono) : pisaLaZona(anillo, poligono))) return
+    zonas.forEach(({ poligono, desde, hasta, solarCompleto, poligonoConcavo }, z) => {
+      if (!cajasSePisan(caja, cajas[z])) return
+      const pisa = poligonoConcavo ? pisaLaZonaCompleta(anillo, poligono) : solarCompleto ? compartenArea(anillo, poligono) : pisaLaZona(anillo, poligono)
+      if (!pisa) return
       const marco = porTecho.get(t)
       if (marco && !solarCompleto) {
         construidas ??= huellasConstruidas(anillo, marco, alas)
