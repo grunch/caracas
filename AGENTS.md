@@ -2,6 +2,96 @@
 
 Leer también `CLAUDE.md` (convenciones del proyecto) y `specs/` (qué se construye y cómo).
 
+## Varios agentes a la vez
+
+Este repo puede tener **varios agentes trabajando a la vez** (Claude, Codex, Gemini u otros) en el mismo
+directorio o en worktrees del mismo repositorio. Antes de modificar cualquier archivo, sigue este protocolo.
+No es opcional.
+
+La coordinación se hace con `node tools/agentes.mjs` (o `npm run agentes -- <comando>`). **No edites a mano
+los archivos de coordinación.** Es un protocolo cooperativo: nada impide físicamente editar un archivo sin
+reclamarlo; los reclamos solo protegen a quienes lo siguen. El script sí garantiza que los propios archivos
+de coordinación nunca tengan dos escritores:
+
+- cada sesión escribe solo su propio archivo;
+- cada reclamo se publica completo, de forma atómica y exclusiva: si dos agentes reclaman lo mismo a la vez,
+  el sistema de archivos decide quién gana;
+- la bitácora solo admite añadir entradas, nunca editarlas.
+
+Por eso no hay que esperar ni reintentar escrituras: si un reclamo falla, es que otro agente tiene el recurso.
+Los datos viven en `.git/agentes/`, compartido por todos los worktrees y nunca versionado.
+
+### 1. Al empezar
+
+```sh
+node tools/agentes.mjs estado        # quién trabaja, qué tiene reclamado y notas recientes
+node tools/agentes.mjs iniciar --agente "<modelo y herramienta>" --tarea "<qué vas a hacer>" [--rama <rama>]
+```
+
+`iniciar` imprime tu **ID de sesión**: úsalo en todos los comandos siguientes. Lee la bitácora: otros agentes
+pueden haber dejado hallazgos que te afectan.
+
+### 2. Antes de tocar archivos
+
+```sh
+node tools/agentes.mjs reclamar --id <ID> src/hitos/hospital-vargas.js tests/unit/hospital-vargas.test.js puerto:5199
+```
+
+- Reclama **todo** lo que vayas a modificar, incluidos los archivos que crees y los puertos de los servidores
+  que levantes (`puerto:NNNN`). Los E2E y los scripts de capturas usan el **5199**
+  (`playwright.config.js`): con `reuseExistingServer`, si otro checkout ya lo ocupa, probarías su código.
+  Reclámalo, o usa otro con `PUERTO_E2E` y reclama ese. También puedes reclamar otros recursos con nombre,
+  como `datos:release` antes de `npm run datos:publicar`.
+- Reclamar un directorio (`src/hitos`) bloquea todo lo que contiene. Reclama lo más concreto posible.
+- Es todo o nada: si sale el código 2 (`CONFLICTO`), no obtuviste ninguno. **No toques ese recurso.** Elige
+  otra tarea, pide coordinación con `nota` o vuelve a intentarlo más tarde.
+- Si en mitad del trabajo necesitas otro archivo, reclámalo antes de editarlo. Leer no requiere reclamo.
+
+### 3. Mientras trabajas
+
+```sh
+node tools/agentes.mjs latido --id <ID> [--tarea "<tarea actualizada>"]   # cada 10 minutos como máximo
+node tools/agentes.mjs nota --id <ID> "<hallazgo útil para otros agentes>"
+```
+
+- Una sesión sin latido durante **30 minutos** se considera abandonada y cualquier agente puede tomar sus
+  reclamos. **No puede revivir:** `latido` y `reclamar` fallan con «caducada». Entonces ejecuta `terminar`,
+  revisa con `estado` qué tomaron otros, inicia una sesión nueva y vuelve a reclamar antes de seguir.
+- **Comandos largos** (`npm run datos`, `npx playwright test`, capturas, `npm run build`): lánzalos con
+  `node tools/agentes.mjs ejecutar --id <ID> -- <comando>`. Late cada 10 minutos mientras corren y devuelve el
+  código de salida del comando. Si la sesión caduca mientras corre (por ejemplo, la máquina se suspendió),
+  `ejecutar` detiene el comando y falla: inicia otra sesión y vuelve a reclamar.
+- Usa `nota` para lo que otros deberían saber: un dato compartido roto, un cambio de API, un test roto que no
+  es tuyo, una decisión tomada. Una línea por nota; nada de secretos.
+- `liberar --id <ID> <rutas>` suelta lo que ya no necesitas.
+
+### 4. Al terminar (también si abandonas la tarea)
+
+```sh
+node tools/agentes.mjs terminar --id <ID> --resumen "<qué cambió, qué quedó pendiente>"
+```
+
+Libera tus reclamos, borra tu sesión y deja el resumen en la bitácora. Si ves sesiones `[INACTIVA]`,
+`node tools/agentes.mjs limpiar` las retira.
+
+### Git con varios agentes
+
+- **Preferible:** trabaja en tu propio worktree y rama (`git worktree add ../caracas-<tarea> -b <rama> origin/main`).
+  La coordinación sigue funcionando porque `.git/agentes` es común. Aun así, reclama los archivos: dos ramas
+  que tocan lo mismo acaban en conflicto de fusión.
+- En un directorio compartido, haz stage **solo de tus archivos reclamados** (`git add <rutas>`). Nunca uses
+  `git add -A`, `git add .`, `git commit -a`, `git stash`, `git checkout -- .`, `git reset --hard` ni
+  `git clean`: arrastran o destruyen el trabajo de otros agentes.
+- Si git informa de `index.lock`, otro agente está ejecutando git. Espera unos segundos y reintenta; no borres
+  el lock.
+- **Operaciones que cambian el árbol de trabajo** (`git pull`, `rebase`, `merge`, `checkout`/`switch` de rama,
+  `restore`): **prohibidas en el directorio compartido**. Pueden cambiar archivos que otro agente ya leyó y
+  que luego sobrescribiría con su copia vieja. Hazlas solo en tu propio worktree. `estado` muestra el
+  directorio de cada sesión.
+- No reescribas historia publicada.
+
+Límites: coordina agentes de una misma máquina; agentes en máquinas distintas solo se coordinan por ramas y PRs.
+
 ## Tamaño de los PRs
 
 - **Cada PR tiene como máximo 3000 líneas de código cambiadas**, sin contar tests ni documentación

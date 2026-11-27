@@ -16,7 +16,8 @@
     "datos": "node tools/datos.mjs",
     "datos:bajar": "node tools/paquete-datos.mjs bajar",
     "datos:publicar": "node tools/paquete-datos.mjs publicar",
-    "datos:al-dia": "node tools/paquete-datos.mjs al-dia"
+    "datos:al-dia": "node tools/paquete-datos.mjs al-dia",
+    "agentes": "node tools/agentes.mjs"
   },
   "dependencies": {
     "three": "^0.187.0"

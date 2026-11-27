@@ -36,3 +36,5 @@ public/fotos/
 public/datos/fotos.json
 # generado por tools/creditos.mjs (las fuentes y licencias del «Acerca»)
 public/datos/creditos.json
+# coordinación entre agentes cuando no hay git (con git vive en .git/agentes; tools/agentes.mjs)
+.agentes/

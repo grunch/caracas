@@ -53,6 +53,7 @@ extraerlo y comprueba cada archivo contra el sha256 de `public/datos/manifiesto.
 | `npm run datos` | Regenera los datos desde los escaneos originales (ver abajo) |
 | `npm run datos:publicar` | Sube los datos regenerados como release nuevo (necesita `gh`) |
 | `npm run catalogo` | Rehace el catálogo de mapas (`fuentes/catalogo.json`, `fuentes/CATALOGO.md`) |
+| `npm run agentes -- estado` | Quién trabaja en qué, cuando hay varios agentes a la vez (ver `AGENTS.md`) |
 
 ## Cómo está hecho
 
@@ -82,6 +83,8 @@ no salen de ningún plano: son una reconstrucción hecha con las costumbres y la
 ## Contribuir
 
 Lee [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Si trabajan varios agentes (Claude, Codex, Gemini…) en paralelo, siguen el protocolo de [AGENTS.md](AGENTS.md#varios-agentes-a-la-vez): antes de editar, cada uno inicia una sesión y reclama los archivos y puertos que va a tocar con `node tools/agentes.mjs`, y comparten hallazgos en una bitácora común.
 
 ## Licencia
 
