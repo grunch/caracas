@@ -115,6 +115,7 @@ def abrir_corral(m):
     m['ajusteCorral'] = m.get('ajusteCorral',0)+1
 
 
+AREA_MINIMA_PATIO_M2 = .8  # un patio más chico no admite un árbol
 MARGEN_ALA_M = 40  # src/alas.js MARGEN_M: cuánto se estiran hacia afuera las alas del borde del lote
 EPS_ALA_M = .02    # src/alas.js EPS: un ala a menos de esto del borde del lote lo toca
 ALA_FRENTE, ALA_ESQUINA_IZQ, ALA_ESQUINA_DER = 2, 6, 7  # src/alas.js ALA
@@ -149,6 +150,14 @@ def techos_de_casa(c, metro):
     return Polygon(c['huella']).buffer(0).intersection(unary_union(techos))
 
 
+def cubierta_por_hitos(limite, edificios, metro):
+    """Si los tejados de los hitos no dejan en la manzana ni un patio donde quepa un árbol."""
+    if edificios.is_empty:
+        return False
+    libre = limite.difference(edificios).buffer(-.25/metro)
+    return all(p.area*metro*metro <= AREA_MINIMA_PATIO_M2 for p in partes(libre))
+
+
 def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0, *, indexar_hitos=False):
     if intento == 0:
         ms = deepcopy(ms)
@@ -170,8 +179,12 @@ def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0, *, indexar_hitos=
         m['casas'] = casas
         techos = [techos_de_casa(c, metro) for c in casas]
         verde = limite.difference(unary_union(techos)).difference(edificios).buffer(-.25/metro)
-        zonas = [p for p in partes(verde) if p.area*metro*metro > .8]
+        zonas = [p for p in partes(verde) if p.area*metro*metro > AREA_MINIMA_PATIO_M2]
         if not zonas:
+            if not casas and cubierta_por_hitos(limite, edificios, metro):
+                # el hito ocupa toda la manzana: el verde lo pone su propio modelo
+                m['arboles'], m['arbolesObjetivo'], m['cubiertaPorHito'] = [], 0, True
+                continue
             if intento >= 12: raise ValueError(f"{m['id']}: no queda espacio libre para árboles")
             abrir_corral(m)
             recortar_y_arbolar([m], obstaculos_hitos, metro, intento+1, indexar_hitos=indexar_hitos)
