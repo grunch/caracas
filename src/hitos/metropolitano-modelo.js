@@ -26,6 +26,6 @@ function metropolitano(t,techo){
 export function crearMetropolitano(){
  const edificio=new T.Group(),cubiertas=new T.Group();edificio.add(cubiertas);
  const t=taller(edificio,cubiertas,'ciudad');
- t.caja(58,.12,65,0,.06,0,'camino');metropolitano(t,cubiertas);t.cerrar();
+ t.caja(58,.12,66,0,.06,0,'camino');metropolitano(t,cubiertas);t.cerrar();
  return {edificio,cubiertas};
 }

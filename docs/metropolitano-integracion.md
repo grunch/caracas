@@ -37,7 +37,7 @@ El adaptador entrega geometría y colores lineales al lienzo existente.
 
 Registro al final de HITOS para no cambiar las semillas de los edificios existentes.
 Vida [4,6), reserva circular más portada, colisiones anulares dejando libre el ruedo.
-Terraza y pavimento 58 × 65 m. La reserva no es toda la manzana ni la terraza:
+Terraza y pavimento 58 × 66 m. La reserva no es toda la manzana ni la terraza:
 no alcanza la quebrada ni borra solares vecinos por pertenecer a la misma cuadra.
 Una casa genérica anterior se corta en 1911; no se le inventa una reaparición en
 1946. Las casas cuya vida empieza en 1946 conservan esa vida.
