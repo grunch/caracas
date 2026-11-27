@@ -1,4 +1,5 @@
 import {conjuntoRotunda} from './rotunda.js'
+import {sanAgustin} from './san-agustin.js'
 import {metropolitano} from './metropolitano.js'
 /**
  * Los tipos de parte de un hito: cada definición (src/hitos/datos/*.js) lista `partes` con un `tipo`, y acá
@@ -64,6 +65,7 @@ export const parteDe = (tipo) => (Object.hasOwn(PARTES, tipo) ? PARTES[tipo] : u
 export const PARTES = Object.freeze({
   'conjunto-rotunda':conjuntoRotunda,
   elSilencio,
+  'san-agustin'(p) { sanAgustin(p) },
   metropolitano(p) { metropolitano(p) },
   nuevoCirco(p) { nuevoCirco(p) },
   teatroMunicipal(p, medidas) { teatroMunicipal(p, medidas) },

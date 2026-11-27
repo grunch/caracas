@@ -17,6 +17,10 @@
 const SIN_LEYENDA = 'el nombre de 1772 no se cotejó con la leyenda de ese plano'
 
 export const FICHAS = Object.freeze({
+  'san-agustin': {
+    textos: [[5, 'El templo de Alejandro Chataing se construyó entre 1924 y 1930. Tiene tres naves y un crucero con cúpula rebajada. El catálogo del IPC documenta una torre de 32 m y una cúpula de 24 m; la dirección histórica es Este 14, esquina de Isleños.']],
+    dudas: 'Planta aproximada del contorno de los planos de 1936 y de fotos de 1946, sin mensura catastral. Pigmentos, vanos y otras alturas son interpretativos. Se conserva el mismo volumen en ambas épocas; no se ha documentado una reforma entre ellas. La fecha 1930 de la referencia FAC no fecha la toma de su fotografía.',
+  },
   'puente-sucre': {
     textos: [[3, 'El puente Constitución cruza el Guaire al término de la calle Sur 7. Fue destruido por la crecida de 1892.'], [4, 'En el mismo cruce funciona el Puente Sucre de 1895, con una armadura metálica superior de 60 m y sin apoyos intermedios.'], [5, 'El cruce ya dispone de un puente de concreto. La armadura metálica anterior fue desmontada y trasladada; no debe representarse como la estructura de esta época.']],
     dudas: 'Silva Contreras documenta la sustitución en 1925 (Memoria MOP 1926, pp. 339–353); FAC 2022 cita 1930. Ambas fechas preceden a 1936. No se fija aquí el año exacto sin cotejar los expedientes. https://fundaayc.com/2022/09/08/1924-inauguracion-del-puente-ayacucho/',
