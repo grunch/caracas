@@ -56,10 +56,11 @@ para DCN/FAC no se ha establecido aquí licencia libre. Princeton declara
 
 Tres regresiones: presencia y vida de todos los vértices, ruedo transitable con
 colisión positiva en gradas en 1911/1936, y reserva temporal sin borrar vecinos.
-El modelo suma **13.146 triángulos**. El límite de todas las fases pasa de 1.000.000
-a 1.020.000, con total 1.012.735; el subconjunto anterior a 1946 pasa de 530.000
-a 540.000, con total 537.694. Es un incremento explícito, no una optimización.
-Medición de navegador y capturas antes/después pendientes de adjuntar al PR.
+El modelo suma **13.662 triángulos**. El límite de todas las fases pasa de 1.000.000
+a 1.020.000, con total 1.013.251; el subconjunto anterior a 1946 pasa de 530.000
+a 540.000, con total 538.210. Es un incremento explícito, no una optimización.
+Medición de navegador: [comparación completa](mediciones/metropolitano/README.md).
+Capturas antes/después se adjuntan al PR.
 
 Build medido: 336,1 kB iniciales y 157,2 kB de workers; el límite inicial
 pasa de 336 a 337 kB para el modelo y su ficha. No se elevan los presupuestos

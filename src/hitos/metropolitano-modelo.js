@@ -12,10 +12,15 @@ function metropolitano(t,techo){
  const frente=grupo(0,0,32);
  muro(44,6.1,.55,[-18,-9,0,9,18].map(x=>({x,w:x===0?4:2.7,h:4.7,y:.1,reja:true,rect:true})),frente);
  for(const x of [-21,-12,-4,4,12,21]){caja(.6,6.3,.9,x,3.15,.12,'claro',frente);caja(.95,.3,1.1,x,5.9,.12,'claro',frente);}
+ for(const x of [-4,4])for(const y of [1.3,2.2,3.1,4,4.9])caja(.72,.18,1,x,y,.18,'zocalo',frente);
  cornisa(44,6.15,0,frente);reja(43,.75,0,6.65,0,frente);
  // Frontones curvos: central alto y dos remates laterales, como en las fotos de 1906.
  for(const [x,w,y] of [[0,8,6.7],[-19,5,6.5],[19,5,6.5]]){
-  const geo=new T.TorusGeometry(w/2,.22,8,32,Math.PI);pieza(geo,'claro',x,y,.1,frente);
+  // Banda de mampostería con molduras: la fotografía muestra un remate macizo, no un tubo.
+  const r=w/2,s=new T.Shape();s.absarc(0,0,r,0,Math.PI,false);
+  s.lineTo(-r+.55,0);s.absarc(0,0,r-.55,Math.PI,0,true);s.closePath();
+  pieza(new T.ExtrudeGeometry(s,{depth:.35,bevelEnabled:false,curveSegments:16}),'claro',x,y,0,frente);
+  for(const rr of [r-.08,r-.45])pieza(new T.TorusGeometry(rr,.065,4,24,Math.PI),'ocre',x,y,.39,frente);
   caja(.65,1.6,.7,x-w/2,y-.6,0,'claro',frente);caja(.65,1.6,.7,x+w/2,y-.6,0,'claro',frente);
   cilindro(.25,.4,.6,x,y+w/2+.3,0,'ocre',frente);cilindro(.12,.28,.6,x,y+w/2+.9,0,'claro',frente);
  }
