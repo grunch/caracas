@@ -30,3 +30,8 @@ it('agrupa notas sucesivas del mismo nombre, sin fusionar nombres que regresan d
   {nombre:'A',periodo:'1772–1843',rige:true},{nombre:'B',periodo:'1889',rige:false},{nombre:'A',periodo:'desde 1911',rige:false},
  ])
 })
+
+it('la duda de la ficha no vuelve a fechar el nombre de la plaza en 1889',()=>{
+ expect(FICHAS['plaza-bolivar'].dudas).not.toMatch(/cambia.*1889/);
+ expect(FICHAS['plaza-bolivar'].dudas).toMatch(/1843/);
+});
