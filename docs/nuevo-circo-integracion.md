@@ -78,3 +78,5 @@ las seis épocas. Este PR no publica nuevos datos.
 Pendientes para cerrar #257: contrastar el solar con el documento de 1946,
 precisar reformas interiores, alturas y color con evidencia, y revisión humana
 cartográfica. No presentar la interpretación procedural como un levantamiento.
+
+[Mediciones completas de main y rama](mediciones/nuevo-circo/README.md), incluyendo excesos y limitaciones.
