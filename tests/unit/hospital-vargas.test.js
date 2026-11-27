@@ -4,6 +4,9 @@ import { HITOS, construirHitos, validarHitos, zonasDeSupresion } from '../../src
 import { hitosConPlanta } from '../../src/hitos/plantas.js'
 import { hospitalVargas } from '../../src/hitos/datos/hospital-vargas.js'
 import { parteDe } from '../../src/hitos/partes.js'
+import { crearLienzo, lineal } from '../../src/hitos/lienzo.js'
+import { TONO } from '../../src/hitos/piezas.js'
+import { hospitalVargas as dibujarHospital } from '../../src/hitos/hospital-vargas.js'
 
 const plano = { ancho: 18600, alto: 14800, metro: 0.5, plaza: [8968.2, 6839] }
 const coords = crearCoords(plano)
@@ -32,5 +35,25 @@ describe('Hospital Vargas', () => {
     const vidas = new Set()
     for (let i = rango.desde; i < rango.hasta; i++) vidas.add(`${datos.vidas[2 * i]}/${datos.vidas[2 * i + 1]}`)
     expect(vidas).toEqual(new Set(['3/4', '4/5', '5/0']))
+  })
+
+  test('los vanos del núcleo central quedan en sus muros exteriores, a la vista', () => {
+    // Núcleo de 28 × 23 m centrado en el origen; las salas quedan lejos (a = ±28, b = ±73).
+    const MEDIO_ANCHO = 14, MEDIO_FONDO = 11.5
+    const vano = lineal(TONO.VANO)
+    for (const anio of [1889, 1911, 1936]) {
+      const lienzo = crearLienzo()
+      dibujarHospital(lienzo.hito({ origen: { x: 0, z: 0 } }), { anio })
+      const { posiciones, colores } = lienzo.datos()
+      const delNucleo = []
+      for (let i = 0; i < posiciones.length / 3; i++) {
+        const [x, z] = [posiciones[3 * i], posiciones[3 * i + 2]]
+        const esVano = [0, 1, 2].every(k => Math.abs(colores[3 * i + k] - vano[k]) < 1e-6)
+        if (esVano && Math.abs(x) < MEDIO_ANCHO + 2 && Math.abs(z) < MEDIO_FONDO + 2) delNucleo.push([x, z])
+      }
+      expect(delNucleo.length).toBeGreaterThan(0)
+      const escondidos = delNucleo.filter(([x, z]) => Math.abs(x) < MEDIO_ANCHO && Math.abs(z) < MEDIO_FONDO)
+      expect(escondidos, `${anio}`).toEqual([])
+    }
   })
 })

@@ -48,8 +48,13 @@ export function hospitalVargas(p, { anio = 1889 } = {}) {
   caja(nucleo, { ancho: 28, fondo: 23, alto: 6.2, color: TONO.CAL })
   caja(nucleo.en(0, 6.2, 0), { ancho: 29.2, fondo: 24.2, alto: 0.55, color: TONO.PIEDRA_CLARA, flota: true })
   caja(nucleo.en(0, 0, 0), { ancho: 8, fondo: 8, alto: 0.15, color: [4, 4, -1], mat: MAT.JARDIN })
-  for (const [a, b] of [[-8, 0], [8, 0], [0, -7], [0, 7]]) {
-    for (const z of [-4.2, 4.2]) vano(nucleo.mirando(a, 1.8, b + z, 0, Math.sign(z)), { ancho: 1.8, alto: 2.8, arco: false })
+  // Dos vanos por fachada, sobre los muros exteriores (28 × 23 m) y mirando hacia afuera.
+  const [medioAncho, medioFondo] = [28 / 2 + 0.04, 23 / 2 + 0.04]
+  for (const s of [-1, 1]) {
+    for (const d of [-4.2, 4.2]) {
+      vano(nucleo.mirando(d, 1.8, s * medioFondo, 0, s), { ancho: 1.8, alto: 2.8, arco: false })
+      vano(nucleo.mirando(s * medioAncho, 1.8, d, s, 0), { ancho: 1.8, alto: 2.8, arco: false })
+    }
   }
 
   // Los corredores y patios se leen como espacios abiertos; no se añaden anexos sin ubicación documental.
