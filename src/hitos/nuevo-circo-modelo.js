@@ -39,6 +39,6 @@ function nuevoCirco(t,techo,meta){
 
 export function crearNuevoCirco(){
  const edificio=new T.Group(),cubiertas=new T.Group(),metadatos={};edificio.add(cubiertas);
- const t=taller(edificio,cubiertas,'ciudad');nuevoCirco(t,cubiertas,metadatos);t.cerrar();
+ const t=taller(edificio,cubiertas,'ciudad');t.caja(80,.12,90/1.1,0,.06,0,'camino');nuevoCirco(t,cubiertas,metadatos);t.cerrar();
  edificio.scale.set(1.1,1,1.1);return {edificio,cubiertas,metadatos};
 }

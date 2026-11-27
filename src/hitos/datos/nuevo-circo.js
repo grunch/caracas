@@ -13,8 +13,8 @@ export const nuevoCirco=Object.freeze({
  planta:[...corona,portada],suprime:[exterior,portada],sinArboles:[exterior,portada],
  fuente:'DCN 1936, mosaico (0,5 m/px), recorte 9900,7900–10700,8500; inauguración 26-01-1919: https://camaradecaracas.com/la-camara-caracas-y-sus-historias/cronicas-de-la-ciudad/el-nuevo-circo-de-caracas/; fachada histórica: https://fundaayc.com/category/crono-arquitectura-venezuela/1910-1919/1919/',
  verificar:['Centro, diámetro exterior (~88–94 m) y portada NO contrastados con DCN 1936; lectura visual ±3 m, no levantamiento.','Alturas, gradas, pigmentos y ornamentos interpretativos del estudio Miraflores. Se conserva el ruedo abierto.','1936/1946 comparten modelo sin inventar reformas; contraste fino del solar de 1946 pendiente.'],
- // Rectángulo inscrito en el ruedo y graderío; nunca corta las calles.
- terraza:{ancho:62,fondo:62},
+ // Plataforma dentro del solar: incluye la portada para no enterrar los accesos.
+ terraza:{ancho:88,fondo:90},
  solarCompleto:true,
  partes:[{tipo:'nuevoCirco'}],
 })

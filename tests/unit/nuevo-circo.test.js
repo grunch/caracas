@@ -29,6 +29,6 @@ it('el ruedo es transitable y la reserva no borra vecinos fuera del solar',()=>{
  expect(choca(rejillaDeCasas(vacio,5,coords.aMundo,plantas),c.x,c.z)).toBe(false)
  const fuera={vertices:new Float32Array(rectanguloPx(h,8,8,100,0).flat()),techos:new Uint32Array([0,4,1,0]),vida:new Uint32Array([1])}
  expect(suprimirTechos(fuera,zonasDeSupresion([h]))[0]).toBe(1)
- // La terraza queda dentro de la corona, no vacía las esquinas de una manzana.
- expect(Math.hypot(h.terraza.ancho/2,h.terraza.fondo/2)).toBeLessThan(44)
+ // La terraza incluye los accesos, pero no se convierte en reserva rectangular.
+ expect(h.terraza).toEqual({ancho:88,fondo:90});expect(h.suprime).toHaveLength(2)
 })

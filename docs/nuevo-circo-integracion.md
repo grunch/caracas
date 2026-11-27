@@ -46,9 +46,9 @@ casas que atraviesan el muro aunque sea menos del 25 % de su huella. Casas sin
 intersección se conservan. La misma reserva temporal excluye árboles.
 
 Las colisiones usan 64 sectores de corona y portada, dejando libre el ruedo.
-La terraza de 62 × 62 m está inscrita en el círculo: aplica el sistema existente
-de apoyo en el plano de la ladera y evita que el suelo tape el ruedo. No abre un
-hueco rectangular fuera de la envolvente. El calce fino de 1946 sigue pendiente;
+La terraza de 88 × 90 m incluye la portada: aplica el sistema existente
+de apoyo en el plano de la ladera y evita que el suelo tape el ruedo. Una plataforma de pavimento cubre todo el rectángulo para evitar huecos; su acabado
+es interpretativo. No amplía los polígonos que reservan casas y árboles. El calce fino de 1946 sigue pendiente;
 se conserva la implantación de 1936 sin afirmar una medición independiente.
 
 ## Instalación y datos
@@ -66,10 +66,10 @@ las seis épocas. Este PR no publica nuevos datos.
 ## Validación
 
 - Tests de registro, geometría finita, vida 5–6, reserva temporal, vecinos,
-  ruedo transitable y terraza inscrita.
+  ruedo transitable y plataforma del solar.
 - Capturas antes/después con la misma cámara en seis épocas, datos iguales.
-- Presupuesto geométrico: 26.386 triángulos nuevos; total antes de 1946 524.536
-  (límite explícito 530.000); incluyendo El Silencio 999.577, dentro del millón.
+- Presupuesto geométrico: 26.398 triángulos nuevos; total antes de 1946 524.548
+  (límite explícito 530.000); incluyendo El Silencio 999.589, dentro del millón.
 - Build: entrada 335,1 kB gzip, worker 156 kB. Límite de entrada 332 → 336 kB
   declarado por la geometría y metadatos añadidos; worker permanece bajo 160 kB.
 - Medición del navegador en base y rama con el script del repo; el PR incorpora
