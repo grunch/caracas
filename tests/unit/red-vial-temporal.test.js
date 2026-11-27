@@ -29,3 +29,18 @@ describe('red temporal sin heredar geometría actual',()=>{
   expect(redDeEpoca(r,1843).tramos).toHaveLength(0)
  })
 })
+
+import {registroDelProyecto} from '../../tools/red-vial.mjs'
+it('audita las referencias reales sin extrapolar a las épocas sin evidencia',async()=>{
+ const red=await registroDelProyecto()
+ const antigua=redDeEpoca(red,1772),base=redDeEpoca(red,1936)
+ expect(base.tramos).toHaveLength(11)
+ expect(base.tramos.every(t=>t.tramo.startsWith('recuperado:')&&t.procedencia.original)).toBe(true)
+ expect(antigua.tramos.length).toBeGreaterThan(400)
+ for(const anio of [1843,1889,1911,1946]){
+  const salida=redDeEpoca(red,anio)
+  expect(salida.tramos).toHaveLength(0)
+  expect(salida.ausentes).toHaveLength(6)
+  expect(salida.pendientes.length).toBeGreaterThan(400)
+ }
+})

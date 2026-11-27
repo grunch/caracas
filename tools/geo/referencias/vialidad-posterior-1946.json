@@ -1,0 +1,19 @@
+{
+  "nota": "Controles de fases modernas: no describen las calles predecesoras ni asignan una fecha universal a sistemas enteros. No incluyen geometría OSM.",
+  "fuentes": {
+    "urdaneta1953": {"tipo":"historica","anios":[],"url":"https://fundaayc.com/2013/09/26/1953-inauguracion-de-la-avenida-urdaneta/"},
+    "ffaa1956": {"tipo":"historica","anios":[],"url":"https://fundaayc.com/2013/11/10/1956%E2%80%A2-avenida-fuerzas-armadas/"},
+    "libertador1965": {"tipo":"historica","anios":[],"url":"https://fundaayc.com/2026/09/15/1965-inauguracion-de-la-avenida-libertador/"},
+    "baralt1953": {"tipo":"historica","anios":[],"url":"https://fundaayc.com/2023/04/02/sabia-usted-98/"},
+    "laguaira1953": {"tipo":"historica","anios":[],"url":"https://fundaayc.com/2013/10/26/1953%E2%80%A2-se-inaugura-la-autopista-caracas-la-guaira/"},
+    "boyaca1973": {"tipo":"historica","anios":[],"url":"https://fundaayc.com/2014/10/21/1973-distribuidor-av-baralt-de-la-cota-mil/"}
+  },
+  "tramos": [
+    {"id":"moderno:urdaneta-1953","nombre":"Avenida Urdaneta, sección ensanchada","desde":1953,"fuentesCronologia":["urdaneta1953"],"predecesora":"Calles Este–Oeste 1: deben digitalizarse por separado","etapas":[]},
+    {"id":"moderno:fuerzas-armadas-1956","nombre":"Avenida Fuerzas Armadas, sección moderna","desde":1956,"fuentesCronologia":["ffaa1956"],"predecesora":"Eje Norte–Sur 7","etapas":[]},
+    {"id":"moderno:libertador-1965","nombre":"Avenida Libertador, avenida inaugurada","desde":1965,"fuentesCronologia":["libertador1965"],"predecesora":"Las obras iniciadas en 1957 no equivalen a avenida en servicio","etapas":[]},
+    {"id":"moderno:norte-sur6-ensanche","nombre":"Norte–Sur 6, ensanche de 1953 (posterior Baralt)","desde":1953,"fuentesCronologia":["baralt1953"],"predecesora":"Calle Norte–Sur 6: no se declara ausente antes del ensanche","etapas":[]},
+    {"id":"moderno:autopista-la-guaira","nombre":"Autopista Caracas–La Guaira, apertura de 1953","desde":1953,"fuentesCronologia":["laguaira1953"],"predecesora":"No confundir con camino colonial o carretera vieja","etapas":[]},
+    {"id":"moderno:distribuidor-baralt-boyaca","nombre":"Distribuidor Baralt–Boyacá, tramo de 1973","desde":1973,"fuentesCronologia":["boyaca1973"],"predecesora":"No fecha toda la avenida Boyacá ni la autopista del Este","etapas":[]}
+  ]
+}
