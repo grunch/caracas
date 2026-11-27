@@ -182,7 +182,7 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 | T82.1936 | Manzanas completas, patios verdes y continuidad desde 1911 en 1936 | T82.1911 | Herencia exacta, ampliación, retiro único y arbolado | 🔄 [PR #240](https://github.com/grunch/caracas/pull/240), listo para revisión |
 | T82.1946 | Manzanas completas, patios verdes y continuidad desde 1936 en 1946 | T82.1936 | Herencia exacta, ampliación, retiro único y arbolado | 🔄 [PR #241](https://github.com/grunch/caracas/pull/241), listo para revisión |
 | T82.P1 | Hallazgos prioritarios: cronología de circos, cementerios y plaza; estudios previos en Miraflores | T82 | Corregir presencia/nombres con fuentes y registrar alcance pendiente de #242 | 🔄 [PR #280](https://github.com/grunch/caracas/pull/280); cronología corregida, estudios en Miraflores y pendientes documentados |
-| T82.P1.RED | Registro vial temporal: importación conservadora, auditoría y exportación offline (#269, #277, #278) | T82.P1 | Fuentes por etapa y regresiones | 🔄 PR en preparación; alcance parcial |
+| T82.P1.RED | Registro vial temporal: importación conservadora, auditoría y exportación offline (#269, #277, #278) | T82.P1 | Fuentes por etapa y regresiones | 🔄 [PR #282](https://github.com/grunch/caracas/pull/282); herramienta offline, redes aún parciales |
 
 ## Riesgos que el plan vigila
 
