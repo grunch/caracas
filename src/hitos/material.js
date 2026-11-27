@@ -8,8 +8,8 @@
  *   en X de la plaza, el reloj), bajo la misma luz que la ciudad.
  * - Tinta: papel; lo oscuro se raya a pluma, más tupido cuanto más oscuro, y la sombra propia va rayada fina.
  */
-import { ShaderMaterial, DoubleSide, Color } from 'three'
-import { GLSL_RELIEVE, UNIFORMS_RELIEVE } from '../relieve.js'
+import { ShaderMaterial, DoubleSide, Color, Vector2 } from 'three'
+import { GLSL_RELIEVE, GLSL_SUELO_DIBUJADO, UNIFORMS_RELIEVE } from '../relieve.js'
 import { GLSL_EPOCAS } from '../shader/epocas.js'
 import { MAT } from './lienzo.js'
 import { GLSL_SOMBRA, UNIFORMS_DE_LUZ, uniformsDeLuz } from '../shader/sombra.js'
@@ -24,7 +24,8 @@ const VERTICE = /* glsl */ `
   uniform float uOla, uAnchoOla;
   ${GLSL_EPOCAS}
   ${GLSL_RELIEVE}
-  attribute vec4 aHito; // distancia del hito a la plaza, semilla, material, pie
+  ${GLSL_SUELO_DIBUJADO}
+  attribute vec4 aHito; // distancia del hito a la plaza, semilla, material, apoyo (0, 1 = pie, 2 = rasante, 3 = suelo dibujado)
   attribute vec2 aVida; attribute vec4 aAncla; attribute vec3 aColor; attribute vec2 aUv;
   varying vec3 vNormal, vMundo, vColor; varying vec2 vUv; varying float vExiste, vSube, vAlto;
   flat varying float vMat;
@@ -37,8 +38,18 @@ const VERTICE = /* glsl */ `
     if (sube < 0.01 || vExiste < 0.02) { gl_Position = vec4(2.0, 2.0, 2.0, 1.0); return; }
     // el piso: plano a la altura del ancla donde el terreno baja y donde sube lo sigue; en una terraza, su plano
     float piso = pisoDeHito(aAncla.xy, aAncla.zw, position.xz);
+    if (aHito.w > 2.5) {
+      // el pie de un apoyo y el lecho de un puente: sobre el suelo tal como se dibuja bajo el vértice
+      piso = sueloDibujado(position.xz);
+    } else if (aHito.w > 1.5) {
+      // la rasante de un puente: el ancla son sus dos cabezas y la cota va recta de una a otra, sin seguir el
+      // terreno intermedio (src/hitos/rasante.js); así ni el tablero ni las barandas se deforman con el relieve
+      vec2 d = aAncla.zw - aAncla.xy;
+      float t = clamp(dot(position.xz - aAncla.xy, d) / dot(d, d), 0.0, 1.0);
+      piso = mix(sueloDibujado(aAncla.xy), sueloDibujado(aAncla.zw), t);
+    }
     float y = piso + ${LEVANTE_M.toFixed(2)} + position.y * sube * vExiste;
-    if (aHito.w > 0.5) y = min(sueloEn(position.xz), piso) - ${glsl(MARGEN_PIE_M)};
+    if (aHito.w > 0.5 && aHito.w < 1.5) y = min(sueloEn(position.xz), piso) - ${glsl(MARGEN_PIE_M)};
     vMundo = vec3(position.x, y, position.z);
     vNormal = normal;
     vColor = aColor;
@@ -190,6 +201,7 @@ export function crearMaterialHitos({ U }) {
       // y el mapa apagado (el sampler de sombra necesita su entrada aunque no se lea)
       ...uniformsDeLuz(),
       ...Object.fromEntries(COMUNES.map((k) => [k, U[k]])),
+      uMallaSuelo: U.uMallaSuelo ?? { value: new Vector2(0, 0) }, // sin malla del suelo, el relieve mismo
       ...Object.fromEntries(UNIFORMS_DE_LUZ.filter((k) => U[k]).map((k) => [k, U[k]])),
       uLuzSol: { value: luz(LUZ_CIUDAD.sol) },
       uCielo: { value: luz(LUZ_CIUDAD.cielo) },

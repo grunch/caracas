@@ -18,6 +18,7 @@ import { hospitalVargas } from './hospital-vargas.js'
 import { panteon } from './panteon.js'
 import { sanFrancisco } from './san-francisco.js'
 import { miraflores } from './miraflores.js'
+import { puente } from './puente.js'
 import { MAT } from './lienzo.js'
 import { TONO, losa, zocalo, verja, escalinata, cuerpo } from './piezas.js'
 import { farol, estatuaEcuestre, puesto, tramoDeGaleria, portada } from './objetos.js'
@@ -81,6 +82,8 @@ export const PARTES = Object.freeze({
   panteon(p, medidas) { panteon(p, medidas) },
   sanFrancisco(p, medidas) { sanFrancisco(p, medidas) },
   miraflores(p) { miraflores(p) },
+  /** Un puente del Guaire entre sus dos cabezas, sobre una rasante común (src/hitos/puente.js). */
+  puente(p, medidas) { puente(p, medidas) },
   /** Un cuerpo de edificio centrado en (a, b): paredes, tejado y, si se piden, ventanas altas en los dos largos. */
   cuerpo(p, { a = 0, b = 0, giro = 0, ventanas: v = null, ...medidas }) {
     const q = p.en(a, 0, b, giro)

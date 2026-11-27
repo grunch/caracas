@@ -194,7 +194,9 @@ describe('terrazas: un hito grande asentado en la ladera (el convento de las Con
 
   test('UNIFORMS_RELIEVE nombra todo lo que lee GLSL_RELIEVE: los hitos y los árboles lo copian entero', () => {
     const U = uniformsRelieve(hoja31, [terraza])
-    expect([...UNIFORMS_RELIEVE].sort()).toEqual(Object.keys(U).filter((k) => k !== 'uTerrazaVida').sort())
+    // uMallaSuelo no lo lee GLSL_RELIEVE sino GLSL_SUELO_DIBUJADO, que solo incluyen los hitos (los puentes)
+    expect([...UNIFORMS_RELIEVE].sort()).toEqual(Object.keys(U).filter((k) => k !== 'uTerrazaVida' && k !== 'uMallaSuelo').sort())
+    expect(GLSL_RELIEVE).not.toContain('uMallaSuelo')
   })
 
   test('acostada la ciudad (el hito escondido por la ola), el suelo de la terraza se dibuja: no queda un hueco', () => {
