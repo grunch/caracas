@@ -37,3 +37,30 @@ una optimización. SwiftShader, sin GPU: no se miden FPS ni tiempo por cuadro.
 Build: 336,3 kB iniciales, máximo explícito 337; workers 157,4 kB, máximo160.
 El aumento de geometría tiene límites explícitos en los tests: 538.210 triángulos
 para fases anteriores a 1946 (<540.000), 1.013.251 total (<1.020.000).
+
+## Repetición con orden inverso, tras la corrección del acceso
+
+El 27-11-2026 se repitió secuencialmente **rama 37621f0 → main ffaec48**, sin
+pruebas ni otro benchmark concurrente. Se conservan los primeros JSON y se
+agregan `rama-inversa.json` y `main-inversa.json`; la primera pareja corresponde
+al modelo previo al paso abierto, por lo que no constituye una repetición exacta
+del mismo commit. La segunda pareja compara el modelo final con la misma base.
+
+| Medida | main inversa | Rama inversa | Diferencia |
+|---|---:|---:|---:|
+| Casas listas (ms) | 12686 | 12535 | -151 |
+| Mayor tarea principal (ms) | 933 | 972 | +39 |
+| Descarga inicial (bytes) | 17960213 | 17961676 | +1463 |
+| Heap observado (MB) | 326 | 141 | -185 |
+| Geometría JS (MB) | 93,5 | 96,8 | +3,3 |
+| Triángulos, vista centro | 3195047 | 3207346 | +12299 |
+
+En ambas parejas la rama tiene una tarea máxima mayor. La base varía de752 a933ms
+y la rama de944 a972ms; con dos parejas no se separa causalmente el efecto del
+orden, del cambio de geometría o del entorno. No se declara que el aumento sea
+solo ruido. La segunda comparación acota la diferencia observada a39ms, pero no
+sustituye un perfilado ni una muestra estadística amplia. El heap es especialmente
+variable por GC y no se anuncia como mejora. Se mantienen los límites existentes.
+
+Modelo final: **13.496 triángulos**, total **1.013.085**, fases anteriores a1946
+**538.044**. La apertura reduce166 triángulos respecto de la versión anterior.
