@@ -194,4 +194,4 @@ fase, las tareas sin dependencias entre sí pueden ir en paralelo.
 - **Rendimiento**: 34 mil casas con fachadas procedurales; medir en cada tarea de la fase 3.
 
 
-| T82.CM | Integrar Circo Metropolitano de Miraflores en 1911/1936 | T82.NC | Solar DCN, modelo, vida y colisiones (#257) | En validación, PR pendiente |
+| T82.CM | Integrar Circo Metropolitano de Miraflores en 1911/1936 | T82.NC | Solar DCN, modelo, vida y colisiones (#257) | 🔄 [PR #284](https://github.com/grunch/caracas/pull/284), ready; pruebas locales y capturas completas, revisiones pendientes |
