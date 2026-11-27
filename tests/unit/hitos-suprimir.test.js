@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { puntoEnPoligono, seSolapan, suprimirTechos, zonasDeSupresion, vidaSinHito, NUNCA } from '../../src/hitos/suprimir.js'
+import { puntoEnPoligono, pisaLaZonaCompleta, seSolapan, suprimirTechos, zonasDeSupresion, vidaSinHito, NUNCA } from '../../src/hitos/suprimir.js'
 import { SIN_LINEA_DE_TIEMPO } from '../../src/epocas.js'
 
 const cuadrado = (x, y, lado) => [[x, y], [x + lado, y], [x + lado, y + lado], [x, y + lado]]
@@ -53,6 +53,18 @@ describe('seSolapan', () => {
   })
   test('separados no se pisan', () => {
     expect(seSolapan(cuadrado(0, 0, 10), cuadrado(11, 0, 10))).toBe(false)
+  })
+})
+
+describe('pisaLaZonaCompleta', () => {
+  test('mide el área de intersección en zonas cóncavas y mantiene el umbral del 25%', () => {
+    const concava = [[0, 0], [10, 0], [10, 2], [2, 2], [2, 8], [10, 8], [10, 10], [0, 10]]
+    expect(pisaLaZonaCompleta(cuadrado(0.5, 0.5, 1), concava)).toBe(true)
+    const roce = [[-14, 0.5], [4, 0.5], [4, 1.5], [-14, 1.5]]
+    expect(pisaLaZonaCompleta(roce, concava)).toBe(false)
+    const zona={poligono:concava,desde:5,hasta:0,solarCompleto:true,poligonoConcavo:true}
+    expect(suprimirTechos(ciudadDe([cuadrado(0.5,0.5,1)],[5]),[zona])[0]).toBe(NUNCA)
+    expect(suprimirTechos(ciudadDe([roce],[5]),[zona])[0]).toBe(5)
   })
 })
 

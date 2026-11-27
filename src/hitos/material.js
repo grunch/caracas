@@ -98,22 +98,29 @@ const FRAGMENTO = /* glsl */ `
       trazo = 1.0 - murete;
     } else if (es(${glsl(MAT.JARDIN)})) {
       vec2 m = vColor.xy;
-      float d = cantero(vUv, m);
-      float cesped = smoothstep(0.0, 0.12, d);
-      float brocal = smoothstep(-0.28, -0.2, d) * (1.0 - cesped);
-      // el piso: liso y claro; con la variante 1, el mosaico en damero de ~1900
-      vec2 celda = floor(vUv / 0.9);
-      float damero = mod(celda.x + celda.y, 2.0);
-      vec3 piso = vec3(0.56, 0.52, 0.43) * (0.94 + 0.06 * azar2(floor(vUv / 2.0)));
-      piso = mix(piso, piso * mix(0.8, 1.06, damero), vColor.z);
-      vec3 verde = vec3(0.13, 0.22, 0.06) * (0.85 + 0.3 * azar2(floor(vUv * 3.0)));
-      tono = mix(mix(piso, vec3(0.38, 0.36, 0.31), brocal), verde, cesped);
-      // en tinta el césped va punteado sobre el papel, no rayado como lo oscuro
-      trazo = max(brocal * 0.8, cesped * step(0.86, azar2(floor(vUv * 9.0))) * 0.7);
-      claro = 1.0;
-      // y el damero, a pluma: las baldosas oscuras con una raya fina, solo en lo pavimentado
-      float baldosa = vColor.z * (1.0 - damero) * (1.0 - cesped) * (1.0 - brocal);
-      trazo = max(trazo, baldosa * 0.4 * step(0.5, fract((vUv.x + vUv.y) / 0.3)));
+      if (vColor.z < -0.5) {
+        // Suelo verde de cementerios: sin el diseño de canteros en cruz/X de jardines formales.
+        tono = vec3(0.13, 0.22, 0.06) * (0.85 + 0.3 * azar2(floor(vUv * 3.0)));
+        trazo = step(0.9, azar2(floor(vUv * 9.0))) * 0.25;
+        claro = 1.0;
+      } else {
+        float d = cantero(vUv, m);
+        float cesped = smoothstep(0.0, 0.12, d);
+        float brocal = smoothstep(-0.28, -0.2, d) * (1.0 - cesped);
+        // el piso: liso y claro; con la variante 1, el mosaico en damero de ~1900
+        vec2 celda = floor(vUv / 0.9);
+        float damero = mod(celda.x + celda.y, 2.0);
+        vec3 piso = vec3(0.56, 0.52, 0.43) * (0.94 + 0.06 * azar2(floor(vUv / 2.0)));
+        piso = mix(piso, piso * mix(0.8, 1.06, damero), vColor.z);
+        vec3 verde = vec3(0.13, 0.22, 0.06) * (0.85 + 0.3 * azar2(floor(vUv * 3.0)));
+        tono = mix(mix(piso, vec3(0.38, 0.36, 0.31), brocal), verde, cesped);
+        // en tinta el césped va punteado sobre el papel, no rayado como lo oscuro
+        trazo = max(brocal * 0.8, cesped * step(0.86, azar2(floor(vUv * 9.0))) * 0.7);
+        claro = 1.0;
+        // y el damero, a pluma: las baldosas oscuras con una raya fina, solo en lo pavimentado
+        float baldosa = vColor.z * (1.0 - damero) * (1.0 - cesped) * (1.0 - brocal);
+        trazo = max(trazo, baldosa * 0.4 * step(0.5, fract((vUv.x + vUv.y) / 0.3)));
+      }
     } else if (es(${glsl(MAT.TIERRA)})) {
       tono *= 0.9 + 0.16 * azar2(floor(vUv * 1.7)) + 0.06 * azar2(floor(vUv * 0.4));
       trazo = 0.35 * step(0.93, azar2(floor(vUv * 4.0)));
@@ -206,7 +213,8 @@ export function crearMaterialSombraHitos(material) {
     fragmentShader: /* glsl */ `
       varying float vExiste, vSube; flat varying float vMat;
       void main() {
-        if (vExiste < 0.02 || vSube < 0.01 || abs(vMat - ${glsl(MAT.VERJA)}) < 0.5) discard;
+        // Los suelos verdes siguen el DEM; no arrojan una sombra de losa sobre la ladera.
+        if (vExiste < 0.02 || vSube < 0.01 || abs(vMat - ${glsl(MAT.VERJA)}) < 0.5 || abs(vMat - ${glsl(MAT.JARDIN)}) < 0.5) discard;
         gl_FragColor = vec4(1.0);
       }`,
     side: DoubleSide,
