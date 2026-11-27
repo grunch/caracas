@@ -86,3 +86,11 @@ def test_manzana_sin_casas_y_sin_hito_que_la_cubra_sigue_siendo_un_error():
     diminuta={'id':'diminuta','poligono':[[0,0],[1,0],[1,1],[0,1]],'casas':[]}
     with pytest.raises(ValueError):
         recortar_y_arbolar([diminuta],[],.5)
+
+
+def test_manzana_sin_casas_con_una_franja_donde_no_cabe_un_arbol_queda_sin_arboles():
+    # El hito deja libre una franja de 1 m (M5-1064-A0): hay patio, pero ningún árbol cabe en él.
+    m={'id':'franja','poligono':[[0,0],[40,0],[40,40],[0,40]],'casas':[]}
+    hito=[[2,-5],[45,-5],[45,45],[2,45]]
+    r=recortar_y_arbolar([m],[hito],.5)[0]
+    assert r['arboles']==[] and r['arbolesObjetivo']==0 and r['cubiertaPorHito'] is True

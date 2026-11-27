@@ -150,12 +150,13 @@ def techos_de_casa(c, metro):
     return Polygon(c['huella']).buffer(0).intersection(unary_union(techos))
 
 
-def cubierta_por_hitos(limite, edificios, metro):
-    """Si los tejados de los hitos no dejan en la manzana ni un patio donde quepa un árbol."""
-    if edificios.is_empty:
-        return False
-    libre = limite.difference(edificios).buffer(-.25/metro)
-    return all(p.area*metro*metro <= AREA_MINIMA_PATIO_M2 for p in partes(libre))
+def cubierta_por_hitos(m, limite, edificios):
+    """Una manzana sin casas que ceder y ocupada por un hito: el verde lo pone el modelo del hito."""
+    return not m['casas'] and not edificios.is_empty and edificios.intersects(limite)
+
+
+def sin_arboles(m):
+    m['arboles'], m['arbolesObjetivo'], m['cubiertaPorHito'] = [], 0, True
 
 
 def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0, *, indexar_hitos=False):
@@ -181,9 +182,8 @@ def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0, *, indexar_hitos=
         verde = limite.difference(unary_union(techos)).difference(edificios).buffer(-.25/metro)
         zonas = [p for p in partes(verde) if p.area*metro*metro > AREA_MINIMA_PATIO_M2]
         if not zonas:
-            if not casas and cubierta_por_hitos(limite, edificios, metro):
-                # el hito ocupa toda la manzana: el verde lo pone su propio modelo
-                m['arboles'], m['arbolesObjetivo'], m['cubiertaPorHito'] = [], 0, True
+            if cubierta_por_hitos(m, limite, edificios):
+                sin_arboles(m)
                 continue
             if intento >= 12: raise ValueError(f"{m['id']}: no queda espacio libre para árboles")
             abrir_corral(m)
@@ -212,6 +212,9 @@ def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0, *, indexar_hitos=
             if len(arboles) >= objetivo:
                 break
         if not arboles:
+            if cubierta_por_hitos(m, limite, edificios):
+                sin_arboles(m)
+                continue
             if intento >= 12: raise ValueError(f"{m['id']}: ningún árbol cabe sin invadir tejados")
             abrir_corral(m)
             recortar_y_arbolar([m], obstaculos_hitos, metro, intento+1, indexar_hitos=indexar_hitos)
