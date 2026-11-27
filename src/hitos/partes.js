@@ -14,6 +14,7 @@ import {elSilencio} from './el-silencio.js'
 import { casaAmarilla } from './casa-amarilla.js'
 import { capitolio } from './capitolio.js'
 import { palacioArzobispal } from './palacio-arzobispal.js'
+import { hospitalVargas } from './hospital-vargas.js'
 import { panteon } from './panteon.js'
 import { sanFrancisco } from './san-francisco.js'
 import { miraflores } from './miraflores.js'
@@ -76,6 +77,7 @@ export const PARTES = Object.freeze({
   casaAmarilla(p, medidas) { casaAmarilla(p, medidas) },
   capitolio(p, medidas) { capitolio(p, medidas) },
   palacioArzobispal(p, medidas) { palacioArzobispal(p, medidas) },
+  hospitalVargas(p, medidas) { hospitalVargas(p, medidas) },
   panteon(p, medidas) { panteon(p, medidas) },
   sanFrancisco(p, medidas) { sanFrancisco(p, medidas) },
   miraflores(p) { miraflores(p) },

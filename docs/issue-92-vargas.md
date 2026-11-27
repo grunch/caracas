@@ -1,9 +1,9 @@
 # Hospital Vargas — issue #92
 
-Main `bdd418a` ya lo sitúa en 1889 y su ficha menciona obras. Está parcialmente resuelto: falta distinguir esa etapa en el rótulo y dejar de presentar el párrafo de obras como relato activo en 1911–1946.
+El issue #92 ya estaba resuelto en `main` antes de esta integración: la marca y la ficha distinguen el plano de 1889 (en obras) de la inauguración y atención de pacientes en 1891. El modelado arquitectónico se añadió después en la implementación parcial de #249; véase [docs/issue-249-hospital-vargas.md](issue-249-hospital-vargas.md).
 
-Se inspeccionó el raster calzado de Mestre 1889: planta de pabellones, rótulo Hospital Vargas y número 43; recorte en coordenadas base [9000,4000,10200,5100], restando origen [6399,2305]. Por tanto no corresponde retrasar su presencia a 1911.
+Se inspeccionó el raster de Mestre de 1889: planta de pabellones, rótulo Hospital Vargas y número 43. El calce del raster a la cuadrícula común aproxima el centro interpretativo de la planta en (9796, 4503) del plano base de 1936. La marca conserva el punto anterior (9660, 4640), situado junto al rótulo cartográfico, no en el centro geométrico del solar. La huella no se considera un lindero catastral.
 
 [Roger Escalona, Los antiguos hospitales de Caracas, Sociedad Venezolana de Historia de la Medicina, 2006](https://revista.svhm.org.ve/ediciones/2006/1-2/art-3), sección Hospital Vargas: decreto inicial de 1885, obras por decreto de 1888, inauguración el 1 de enero de 1891 y atención desde el 5 de julio de 1891. Se distinguen inauguración y puesta en servicio. Artículo contemporáneo, derechos no verificados: enlace y paráfrasis. Plano de 1889: procedencia/licencia en ficha BnF del catálogo, sin nuevo escaneo redistribuido.
 
-Se conserva la marca desde 1889 con texto en construcción, nombre normal desde 1911 y ficha propia de la etapa abierta. Coordenadas y geometría no cambian. R9: hito pendiente; R11: la planta del plano no se presenta como prueba de obra terminada. No se inventa el porcentaje construido. Las demás reglas geométricas mantienen sus entradas en las siete épocas.
+La marca se conserva desde 1889 con texto en construcción y nombre normal desde 1911. El hito representa la planta de 1889 sin afirmar que el conjunto estuviera terminado. Las cubiertas inclinadas se muestran hasta 1911 y planas en 1936 y 1946, siguiendo la fuente sobre reformas desde 1930. La ubicación de los pabellones añadidos en 1939 no está resuelta, por lo que quedan fuera del modelo y #249 permanece abierto. No se inventa el porcentaje construido.
