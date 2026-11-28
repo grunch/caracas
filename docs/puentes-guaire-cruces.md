@@ -38,6 +38,9 @@ queda escrito en `dudas`.
   marzo de 1936 ya rotula «Puente 9 de Diciembre» y «Avenida 9 de Diciembre», y el de 1946 también. FAC sitúa el
   cambio tras la muerte de Gómez, en diciembre de 1935
   ([¿Sabía usted? 104](https://fundaayc.com/2023/08/06/sabia-usted-104/)). La marca no lleva el nombre nuevo a 1911.
+- **En 1911 la marca usa la posición de 1936.** El plano de 1911 dibuja Dolores 78 m al norte y 20 m al este,
+  Restaurador 23 m al norte y 17 m al este, y el 19 de Diciembre unos 26 m al este, con un calce extrapolado. La
+  marca no sigue ese dibujo: va en `dudas` de cada marca y de cada ficha.
 - **Ayacucho desde 1936.** Se inauguró en 1924; la época anterior del sitio es 1911, cuando el plano no dibuja
   puente.
 

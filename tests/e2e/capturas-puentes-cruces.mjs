@@ -8,7 +8,8 @@ import { chromium } from '@playwright/test'
 import { mkdir, writeFile } from 'node:fs/promises'
 
 const url = process.argv[2] ?? 'http://localhost:5199/'
-const carpeta = process.argv[3] ?? 'docs/capturas/puentes-cruces'
+// Fuera de lo versionado: a docs/capturas/puentes-cruces solo van las elegidas, convertidas a webp.
+const carpeta = process.argv[3] ?? 'test-results/capturas-puentes-cruces'
 const prefijo = process.argv[4] ?? 'despues'
 const solo = process.env.CRUCES_CAPTURA
 const soloVista = process.env.CRUCES_VISTA
