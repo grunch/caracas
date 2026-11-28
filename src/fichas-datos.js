@@ -229,11 +229,11 @@ export const FICHAS = Object.freeze({
   },
   rotunda: {
     textos:[[3,'La cárcel de La Rotunda, al sur del Cuartel del Hoyo. Construida entre 1844 y 1854, tenía celdas en dos niveles alrededor de un patio circular; en 1881 se proyectó un segundo recinto al norte. El modelo representa los dos recintos, con fecha de conclusión de la ampliación no comprobada.'],[4,'El plano de Razetti de 1911 la identifica con el 39; el 40 contiguo es el Cuartel del Hoyo, fuera de la reserva de la cárcel.']],
-    dudas:'Alturas, guardia, colores y distribución interior simplificados. No se presenta el estudio como levantamiento métrico.'
+    dudas:'Alturas, guardia, colores y distribución interior simplificados. No se presenta el estudio como levantamiento métrico. La cárcel siguió en pie hasta abril de 1936; la época de 1936 del visor muestra ya el solar libre, como el plano.'
   },
   'solar-rotunda':{
-    textos:[[5,'El plano de 1936 muestra libre el solar occidental donde estuvo La Rotunda. Se conserva ese estado, sin inventar escombros ni adelantar la plaza terminada.']],
-    dudas:'Una transcripción atribuye el decreto a 2enero 1936; Polar registra una resolución del MOP en abril. No fijan por sí solas el día efectivo del derribo. El verde es la convención de suelo libre del visor.'
+    textos:[[5,'El plano de 1936 muestra libre el solar occidental donde estuvo La Rotunda. La demolición comenzó el 11 de abril de 1936, según la prensa del día siguiente. Se conserva el estado del plano, sin inventar escombros ni adelantar la plaza terminada.']],
+    dudas:'El plano dice que se fotografió en marzo de 1936, antes de que empezara la demolición, y aun así dibuja el solar libre: esa contradicción está sin resolver. No consta cuándo terminó el derribo. Una transcripción atribuye el decreto al 2 de enero de 1936 y Polar registra una resolución del MOP en abril: son actos administrativos, no la obra. El verde es la convención de suelo libre del visor.'
   },
   concordia:{
     textos:[[6,'La plaza La Concordia, diseñada por Carlos Raúl Villanueva y fechada en 1940 por Polar. El plano basado en fotos de 1946 muestra jardines y un elemento circular central. El templete se aproxima con fotografías históricas: pilares rectangulares exteriores, columnas interiores y cubierta de teja.']],
