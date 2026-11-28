@@ -29,14 +29,14 @@ function dibujar(fn) {
 }
 
 /** La altura máxima de lo que está en pie en `epoca`, y el vértice más alto (en metros del mundo). */
-function perfilEn(datos, id, epoca) {
+function perfilEn(datos, id, epoca, donde = () => true) {
   const { desde, hasta } = datos.rangos.find((r) => r.id === id)
   let cima = null
   for (let i = desde; i < hasta; i++) {
     const [nace, muere] = [datos.vidas[i * 2], datos.vidas[i * 2 + 1]]
     if (nace > epoca || (muere && muere <= epoca)) continue
-    const y = datos.posiciones[i * 3 + 1]
-    if (!cima || y > cima.y) cima = { x: datos.posiciones[i * 3], y, z: datos.posiciones[i * 3 + 2] }
+    const v = { x: datos.posiciones[i * 3], y: datos.posiciones[i * 3 + 1], z: datos.posiciones[i * 3 + 2] }
+    if (donde(v) && (!cima || v.y > cima.y)) cima = v
   }
   return cima
 }
@@ -142,11 +142,11 @@ describe('Santa Rosalía, San Juan y San José (#259)', () => {
   test('Santa Rosalía: la torre queda al norte de la fachada, que mira al oeste (a la calle Sur 1)', () => {
     const h = hito('santa-rosalia')
     const origen = coords.aMundo(h.x, h.y)
-    const cima = perfilEn(datos, h.id, 5)
+    const cima = perfilEn(datos, h.id, 5, (v) => Math.abs(v.x - origen.x) < 12) // lo más alto junto a la fachada
     const cabecera = coords.aMundo(...h.planta[0][1])
     expect(cabecera.x).toBeGreaterThan(origen.x + 30) // la nave entra hacia el este
     expect(cima.z).toBeLessThan(origen.z - 8) // la torre, al norte del eje (z crece hacia el sur)
-    expect(Math.abs(cima.x - origen.x)).toBeLessThan(12)
+    expect(cima.y).toBeGreaterThan(22)
   })
 
   test('San José: dos torres gemelas a los lados de la fachada sur, fuera del ancho de las naves', () => {

@@ -24,6 +24,7 @@ import { TONO, losa, zocalo, verja, escalinata, cuerpo } from './piezas.js'
 import { farol, estatuaEcuestre, puesto, tramoDeGaleria, portada } from './objetos.js'
 import { torre, fachadaBarroca, portadaLateral, cupulaConTambor, ventanas, iglesia } from './iglesias.js'
 import { palacio, portico, remateConEscudo, frenteNeogotico } from './palacios.js'
+import { temploDeNaves } from './templo-naves.js'
 
 const ALTO_LOSA_M = 0.25
 const MARGEN_TOLDO_M = 0.7 // lo que un toldo pasa de su largo: el alero y el giro
@@ -108,6 +109,9 @@ export const PARTES = Object.freeze({
 
   /** Iglesia paramétrica (nave, fachada, torres, cúpula) en el marco del hito: el origen, al pie de la fachada. */
   iglesia(p, medidas) { iglesia(p, medidas) },
+
+  /** Templo de tres naves con la central más alta, torres, brazos y cúpulas donde se pidan (src/hitos/templo-naves.js). */
+  temploDeNaves(p, medidas) { temploDeNaves(p, medidas) },
 
   /** Palacio de crujías alrededor de un patio, centrado en (a, b). */
   palacio(p, { a = 0, b = 0, ...medidas }) { palacio(p.en(a, 0, b), medidas) },
