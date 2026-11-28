@@ -1,0 +1,47 @@
+{
+  "fuente": "Plano DCN de 1936 (mosaico del repositorio, fuentes/mapas/1936-archiveorg-caracas-dcn-hoja1 y hoja2), contrastado con el plano de 1946 (fuentes/mapas/1950-archiveorg-plano-de-caracas-dcn, calce de 2,07 m RMS) y con el de Mestre de 1889 (fuentes/mapas/1889-bnf-mestre, calce de 7,64 m RMS)",
+  "sistema": "píxeles del mosaico base de 1936, 0,5 m por píxel; a = metros hacia el fondo del solar desde el medio de la fachada, b = metros a la derecha del eje (el norte)",
+  "certeza": "lectura a ojo sobre ampliaciones del mosaico con rejilla de 10 px; el trazo del plano mide de 1 a 2 px (0,5 a 1 m). No es mensura catastral. Las medidas del solar no salen del plano: son las que publica el Diccionario de Historia de Venezuela.",
+  "casa-natal": {
+    "origen_px": [9262.6, 7168.2],
+    "eje": [-0.9786, -0.2055],
+    "fachada": "este, sobre la calle de San Jacinto a Traposos (Sur 1 en la nomenclatura de 1912: «sur 1, Nº 22», Landaeta Rosales)",
+    "medidas_m": { "frente": 22.4, "fondo": 60.5, "de": "Fuentes Carvallo, Diccionario de Historia de Venezuela" },
+    "leido_en_1936_px": {
+      "rayado": "bloque rayado con el rótulo «CASA NATAL» al norte; al suroeste sigue, también rayado, el del «Bco. de Venezuela»",
+      "lindero_norte": [[9172, 7128], [9240, 7141]],
+      "lindero_sur": [[9180, 7172], [9240, 7186]],
+      "fondo_oeste": "el rayado llega a x ≈ 9140 entre y ≈ 7137 y 7165",
+      "ancho_leido_m": 21.9,
+      "fondo_leido_m": "unos 60 (de x ≈ 9263 a x ≈ 9142)",
+      "blancos_dentro_del_rayado": [
+        { "px": [[9221, 7152], [9240, 7162]], "nota": "sigue bajo la costura; se toma como el patio principal" },
+        { "px": [[9188, 7146], [9199, 7162]], "nota": "se toma, con el siguiente, como el segundo patio" },
+        { "px": [[9162, 7152], [9185, 7158]] },
+        { "px": [[9140, 7153], [9150, 7165]], "nota": "en el borde oeste; no se modela" }
+      ],
+      "tapado_por_la_costura": "de x ≈ 9243 a x ≈ 9290: la línea de fachada, la calle y la mitad del rótulo («CAS… NATA…»)"
+    },
+    "leido_en_1946_px": {
+      "contorno": [[9172, 7123], [9267, 7141], [9260, 7191], [9150, 7170], [9148, 7153], [9140, 7151], [9142, 7137], [9170, 7140]],
+      "linea_de_fachada": [[9268, 7141], [9258, 7191]],
+      "ancho_leido_m": 25,
+      "nota": "único solar con contorno propio dentro de la manzana; sin rótulo en el recorte. El lindero norte cae unos 5 px (2,5 m) al norte del de 1936."
+    },
+    "adoptado": {
+      "solar_px": "rectángulo de 60,5 × 22,4 m desde el origen, a lo largo del eje",
+      "eje": "pendiente media de los dos linderos de 1936 (0,19 y 0,23): 0,21",
+      "patios_m": [
+        { "a": 16.1, "b": 2.3, "largo": 10, "ancho": 9, "centro_px": [9232, 7157] },
+        { "a": 39.5, "b": -0.5, "largo": 9, "ancho": 7, "centro_px": [9185, 7153] }
+      ],
+      "tamano_de_los_patios": "interpretativo: los blancos del plano miden unos 5 m de ancho, menos que un patio con sus corredores"
+    },
+    "otros_planos": {
+      "1772": "manzana edificada, sin rótulo ni leyenda transcrita para esta casa (calce de 18,7 m RMS)",
+      "1843": "manzana edificada; la leyenda de Jesurún no trae la casa (specs/auditoria-1843/cotejo-leyenda.md)",
+      "1889": "recuadro rosado con el número 24 («Casa donde nació Bolívar») de (9205, 7125) a (9265, 7185): unos 30 × 30 m sobre la calle, símbolo y no planta",
+      "1911": "manzana sin distinguir la casa (el recuadro 48 del suroeste es otro edificio)"
+    }
+  }
+}

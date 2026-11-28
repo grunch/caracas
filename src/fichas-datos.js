@@ -202,11 +202,13 @@ export const FICHAS = Object.freeze({
   },
   'casa-natal': {
     textos: [
-      [1, 'A mediados del siglo XVIII la casa pertenecía a Juan Vicente Bolívar y Ponte, según el Diccionario de Historia de Venezuela de Fundación Empresas Polar. En 1772 se identifica como casa de los Bolívar; Simón nació allí en 1783.'],
-      [2, 'La casa sufrió daños en 1812, fue reparada y perdió su piso alto. Es la casa donde nació Simón Bolívar, a una cuadra de la plaza mayor. El plano de 1889 la numera 24, «Casa donde nació Bolívar»; el de 1936 la rotula «Casa Natal».'],
-      [5, 'Una revista de 1930 muestra su patio cuadrado, con corredores de pilares de madera y una pila de piedra al centro.'],
+      [1, 'A mediados del siglo XVIII la casa era de Juan Vicente Bolívar y Ponte: el padrón de 1759 ya anota aquí, de San Jacinto a Traposos, la «Casa de don Vicente Bolívar», según lo transcribe Manuel Landaeta Rosales (1912). Simón Bolívar nació en la sala grande del sur en 1783. Se dibuja de un piso, con el portón y las cuatro ventanas de reja de madera que Landaeta describe y muestra en una lámina. Tenía además un piso alto «interiormente» que no se dibuja: ninguna fuente dice dónde estaba ni desde cuándo.'],
+      [2, 'Los Bolívar la vendieron en 1806 a Juan de la Madriz. El terremoto de 1812 arruinó el piso alto: se le quitó y la casa quedó de un solo piso, y a las ventanas se les pusieron rejas de hierro, que aquí no se dibujan (Landaeta Rosales, 1912). Es la casa donde nació Simón Bolívar, a una cuadra de la plaza mayor. El plano de 1889 la numera 24, «Casa donde nació Bolívar»; desde 1876 era de Antonio Guzmán Blanco.'],
+      [4, 'Reformada para comercio: a la sala del sur le quitaron las tres ventanas y le pusieron puertas, y hubo aquí almacenes, un molino de maíz, un colegio y una ferretería (Landaeta Rosales, 1912, que no fecha el cambio). En octubre de 1912 la Sociedad Patriótica la compró por suscripción popular y la entregó a la Nación.'],
+      [5, 'La casa reconstruida entre 1916 y 1921 por Vicente Lecuna, con los arquitectos Alejandro Chataing y Antonio Malaussena, e inaugurada como monumento el 5 de julio de 1921. El catálogo del IPC la describe de un solo nivel, con zaguán y dos patios, y con la fachada revestida de mármol en esa obra. El plano de 1936 la rotula «Casa Natal». Una revista de 1930 muestra su patio cuadrado, con corredores de pilares de madera y una pila de piedra al centro.'],
     ],
-    dudas: 'El rótulo de 1772 describe la propiedad familiar. No se equipara aquella vivienda con la restauración museística inaugurada en 1921 ni se da una fecha exacta de construcción.',
+    hoy: 'la Casa Natal del Libertador, museo, entre las esquinas de San Jacinto y Traposos.',
+    dudas: 'Ninguna altura está medida: va un piso con tejado bajo en todas las épocas. Los patios se dibujan donde el plano de 1936 deja blancos y con tamaño interpretativo; no se sabe cómo eran antes de la obra de 1916–1921, y los corredores no se dibujan. La fachada de 1772 sale de una lámina de 1912 que parece copiar un cuadro de 1883: es una reconstrucción. En 1889 se dibuja todavía con ventanas, sin prueba: el cambio a puertas ocurrió entre 1883 y 1912. El número de ventanas de la fachada restaurada se toma de fotos de 1967 y 2013. El rótulo de 1772 describe la propiedad familiar; el Diccionario de Historia de Venezuela da la casa por del siglo XVII y Landaeta recoge la tradición de que la hizo Juan Vicente Bolívar: no se da una fecha de construcción.',
   },
   'teatro-municipal': {
     textos: [

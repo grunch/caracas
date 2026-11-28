@@ -1,28 +1,37 @@
 import { describe, test, expect } from 'vitest'
-import { crearLienzo } from '../../src/hitos/lienzo.js'
+import { crearLienzo, lineal } from '../../src/hitos/lienzo.js'
+import { TONO } from '../../src/hitos/piezas.js'
 import { HITOS, validarHitos, construirHitos } from '../../src/hitos.js'
 import { hitosConPlanta } from '../../src/hitos/plantas.js'
 import { zonasDeSupresion, puntoEnPoligono } from '../../src/hitos/suprimir.js'
-import { casaNatal as hito, SOLAR, PATIOS, FASES } from '../../src/hitos/datos/casa-natal.js'
-import { casaNatal, vanosDeFachada } from '../../src/hitos/casa-natal.js'
+import { casaNatal as hito, SOLAR, PATIOS, FASES, vanosDeFachada } from '../../src/hitos/datos/casa-natal.js'
+import { parteDe } from '../../src/hitos/partes.js'
 import { MARCAS } from '../../src/marcas-datos.js'
 import { FICHAS } from '../../src/fichas-datos.js'
 import { contenidoDeFicha } from '../../src/fichas.js'
+import { normalizarMarcas } from '../../src/marcas.js'
 import { crearCoords } from '../../src/coords.js'
 
 const PLANO = { ancho: 18600, alto: 14800, metro: 0.5, plaza: [8968.2, 6839] }
 const coords = crearCoords(PLANO)
 const lado = ([x0, y0], [x1, y1]) => Math.hypot(x1 - x0, y1 - y0) * PLANO.metro
 
-/** Dibuja una pieza en un marco sin girar: x = a (hacia el fondo del solar), z = b (b < 0 es el sur del frente). */
-function dibujar(medidas) {
+/**
+ * Dibuja las partes que cumplen `cuales` en un marco sin girar: x = a (hacia el fondo del solar), z = b
+ * (b < 0 es el sur de la fachada).
+ */
+function dibujar(cuales) {
   const lienzo = crearLienzo()
-  casaNatal(lienzo.hito({ origen: { x: 0, z: 0 } }), medidas)
+  const p = lienzo.hito({ origen: { x: 0, z: 0 } })
+  for (const { tipo, nace, muere, ...medidas } of hito.partes.filter(cuales)) parteDe(tipo)(p, medidas)
   const d = lienzo.datos()
   const vertices = []
-  for (let i = 0; i < d.posiciones.length; i += 3) vertices.push({ x: d.posiciones[i], y: d.posiciones[i + 1], z: d.posiciones[i + 2] })
+  for (let i = 0; i < d.posiciones.length; i += 3) {
+    vertices.push({ x: d.posiciones[i], y: d.posiciones[i + 1], z: d.posiciones[i + 2], color: [d.colores[i], d.colores[i + 1], d.colores[i + 2]] })
+  }
   return { vertices, triangulos: d.indices.length / 3, sano: d.posiciones.every(Number.isFinite) && d.normales.every(Number.isFinite) }
 }
+const fachada = (fase) => dibujar((p) => p.pieza === 'fachada' && p.fase === fase)
 
 /** El vértice más alto de lo que está en pie en `epoca`. */
 function cimaEn(datos, id, epoca) {
@@ -72,7 +81,9 @@ describe('Casa Natal del Libertador (#247): el solar y su vida', () => {
     const zonas = zonasDeSupresion([hito])
     expect(zonas.some((z) => puntoEnPoligono([9200, 7155], z.poligono))).toBe(true)
     expect(zonas.some((z) => puntoEnPoligono(punto, z.poligono))).toBe(false)
-    expect(zonas.every((z) => z.desde === 1 && z.hasta === 0 && z.solarCompleto)).toBe(true)
+    expect(zonas.every((z) => z.desde === 1 && z.hasta === 0)).toBe(true)
+    // entre medianeras: sin solarCompleto, la casa vecina que apenas roza el solar sigue en pie
+    expect(zonas.some((z) => z.solarCompleto)).toBe(false)
   })
 
   test('zaguán y dos patios (IPC): los patios quedan abiertos dentro del solar, donde el plano de 1936 deja blancos', () => {
@@ -98,11 +109,14 @@ describe('Casa Natal del Libertador (#247): el solar y su vida', () => {
 describe('Casa Natal: las fachadas por época', () => {
   test('cuatro fases de fachada que cubren las seis épocas sin huecos ni solapes', () => {
     const fachadas = hito.partes.filter((p) => p.pieza === 'fachada')
-    expect(fachadas.map((p) => [p.fase, p.nace, p.muere])).toEqual([
-      ['colonial', 1, 2], ['republicana', 2, 4], ['comercio', 4, 5], ['restaurada', 5, 0],
-    ])
-    expect(Object.keys(FASES)).toEqual(fachadas.map((p) => p.fase))
-    expect(hito.partes.filter((p) => p.pieza === 'cuerpos')).toHaveLength(1)
+    const vidas = [...new Set(fachadas.map((p) => `${p.fase}:${p.nace}-${p.muere}`))]
+    expect(vidas).toEqual(['colonial:1-2', 'republicana:2-4', 'comercio:4-5', 'restaurada:5-0'])
+    expect(Object.keys(FASES)).toEqual(['colonial', 'republicana', 'comercio', 'restaurada'])
+    // los cuerpos no llevan vida propia: están en pie toda la vida del hito
+    const cuerpos = hito.partes.filter((p) => p.pieza === 'cuerpos')
+    expect(cuerpos).toHaveLength(7)
+    expect(cuerpos.every((p) => p.nace === undefined && p.muere === undefined)).toBe(true)
+    expect(hito.partes).toHaveLength(cuerpos.length + fachadas.length)
   })
 
   test('colonial, republicana y restaurada: portón y cuatro ventanas, tres de ellas en la sala del sur (Landaeta, 1912)', () => {
@@ -124,21 +138,27 @@ describe('Casa Natal: las fachadas por época', () => {
 
   test('una fase desconocida es un error, no una fachada vacía', () => {
     expect(() => vanosDeFachada('moderna')).toThrow(/fase/)
-    expect(() => dibujar({ pieza: 'fachada', fase: 'moderna' })).toThrow(/fase/)
-    expect(() => dibujar({ pieza: 'techo' })).toThrow(/pieza/)
   })
 
   test('en la geometría, solo en la fase de comercio los vanos del sur llegan al piso', () => {
     // Arrange
-    const pisoDelSur = (fase) => Math.min(...dibujar({ pieza: 'fachada', fase }).vertices.filter((v) => v.z < -0.8 && v.x < -0.01).map((v) => v.y))
+    const hueco = lineal(TONO.VANO)
+    const esHueco = (v) => v.color.every((c, i) => Math.abs(c - hueco[i]) < 1e-6)
+    const huecosDelSur = (fase) => fachada(fase).vertices.filter((v) => v.z < -0.8 && esHueco(v))
+    const pisoDelSur = (fase) => Math.min(...huecosDelSur(fase).map((v) => v.y))
 
-    // Act / Assert: la fachada mira a −x (la calle); una ventana empieza en su repisa, una puerta en el suelo
+    // Act / Assert: z < 0 es el sur de la fachada; una ventana empieza en su repisa, una puerta en el suelo
+    for (const fase of Object.keys(FASES)) {
+      // los huecos dibujados están donde dice vanosDeFachada: tres al sur, cada uno centrado en su b
+      const centros = vanosDeFachada(fase).filter((v) => v.b < 0).map((v) => v.b)
+      for (const b of centros) expect(huecosDelSur(fase).some((v) => Math.abs(v.z - b) < 1)).toBe(true)
+    }
     expect(pisoDelSur('comercio')).toBeCloseTo(0, 5)
     for (const fase of ['colonial', 'republicana', 'restaurada']) expect(pisoDelSur(fase)).toBeGreaterThan(0.5)
   })
 
-  test('cada fase dibuja algo distinto y sano; ninguna pasa de la línea de fachada más de lo que vuela una reja', () => {
-    const fases = Object.keys(FASES).map((fase) => dibujar({ pieza: 'fachada', fase }))
+  test('cada fase dibuja algo distinto y sano; solo la colonial lleva las rejas voladas de madera', () => {
+    const fases = Object.keys(FASES).map(fachada)
     for (const f of fases) {
       expect(f.sano).toBe(true)
       expect(f.triangulos).toBeGreaterThan(0)
@@ -146,6 +166,10 @@ describe('Casa Natal: las fachadas por época', () => {
     }
     const firmas = fases.map((f) => `${f.triangulos}:${f.vertices.length}:${f.vertices.reduce((s, v) => s + v.x + 2 * v.y + 3 * v.z, 0).toFixed(3)}`)
     expect(new Set(firmas).size).toBe(4)
+    const vuelo = fases.map((f) => -Math.min(...f.vertices.map((v) => v.x)))
+    expect(vuelo[0]).toBeGreaterThan(0.6) // colonial: la reja vuela sobre la calle
+    for (const v of vuelo.slice(1)) expect(v).toBeLessThan(0.45)
+    expect(hito.partes.filter((p) => p.balcon).every((p) => p.fase === 'colonial')).toBe(true)
   })
 })
 
@@ -164,7 +188,7 @@ describe('Casa Natal: el volumen', () => {
   })
 
   test('los cuerpos caben en el solar y dejan los dos patios sin techo', () => {
-    const { vertices, sano } = dibujar({ pieza: 'cuerpos' })
+    const { vertices, sano } = dibujar((p) => p.pieza === 'cuerpos')
     expect(sano).toBe(true)
     const alero = 0.6
     expect(Math.min(...vertices.map((v) => v.x))).toBeGreaterThanOrEqual(-alero)
@@ -212,7 +236,8 @@ describe('Casa Natal: la marca y la ficha', () => {
   })
 
   test('cada época muestra el texto de su etapa', () => {
-    const textoEn = (epoca) => contenidoDeFicha({ marca, ficha: FICHAS['casa-natal'], epoca }).parrafos.find((p) => p.rige).texto
+    const normal = normalizarMarcas(MARCAS, { hitos: HITOS, coords }).find((m) => m.id === 'casa-natal')
+    const textoEn = (epoca) => contenidoDeFicha({ marca: normal, ficha: FICHAS['casa-natal'], epoca }).parrafos.find((p) => p.rige).texto
     expect(textoEn(1)).toMatch(/1759/)
     expect(textoEn(3)).toMatch(/1812/)
     expect(textoEn(4)).toMatch(/puertas/)
