@@ -182,13 +182,42 @@ describe('Cuartel San Carlos como hito (#248)', () => {
     expect(chocaEn(aPixeles(37, 11), 5)).toBe(false) // el patio central es transitable
   })
 
-  test('la reserva cubre el contorno leído en el plano y deja afuera la calle y los jardines del sur', () => {
-    const [zona] = zonasDeSupresion([sanCarlos])
+  test('la reserva es el recinto documentado de cada época: el cuadro en 1889 y el contorno completo desde 1911', () => {
+    // Arrange
+    const zonas = zonasDeSupresion([sanCarlos])
+    const enEpoca = (e) => zonas.filter((z) => z.desde <= e && (!z.hasta || z.hasta > e))
+    const reservado = (punto, e) => enEpoca(e).some((z) => puntoEnPoligono(punto, z.poligono))
     const haciaElCentro = ([x, y]) => { const [cx, cy] = aPixeles(LARGO_M / 2, 0); return [x + (cx - x) * 0.05, y + (cy - y) * 0.05] }
-    for (const esquina of Object.values(ESQUINAS_PX)) expect(puntoEnPoligono(haciaElCentro(esquina), zona.poligono)).toBe(true)
-    for (const afuera of [aPixeles(-8, 0), aPixeles(LARGO_M + 8, 0), aPixeles(40, -MEDIO_FRENTE_M - 8), aPixeles(40, MEDIO_FRENTE_M + 8)]) {
-      expect(puntoEnPoligono(afuera, zona.poligono)).toBe(false)
+
+    // Assert: una sola zona en pie por época
+    for (const e of [3, 4, 5, 6]) expect(enEpoca(e)).toHaveLength(1)
+    // 1889: el frente y el cuadro, pero no el traspatio ni las esquinas del fondo, que el cuartel aún no ocupaba
+    expect(reservado(haciaElCentro(ESQUINAS_PX.oeste), 3)).toBe(true)
+    expect(reservado(haciaElCentro(ESQUINAS_PX.sur), 3)).toBe(true)
+    expect(reservado(aPixeles(CUADRO_M - 2, 0), 3)).toBe(true)
+    expect(reservado(aPixeles(CUADRO_M + 2, 0), 3)).toBe(false)
+    expect(reservado(haciaElCentro(ESQUINAS_PX.norte), 3)).toBe(false)
+    // desde 1911: las cuatro esquinas leídas en el plano
+    for (const e of [4, 5, 6]) for (const esquina of Object.values(ESQUINAS_PX)) expect(reservado(haciaElCentro(esquina), e)).toBe(true)
+    // nunca la calle ni los jardines del sur
+    for (const e of [3, 4, 5, 6]) {
+      for (const afuera of [aPixeles(-8, 0), aPixeles(LARGO_M + 8, 0), aPixeles(40, -MEDIO_FRENTE_M - 8), aPixeles(40, MEDIO_FRENTE_M + 8)]) {
+        expect(reservado(afuera, e)).toBe(false)
+      }
     }
+    expect(zonas.every((z) => z.solarCompleto)).toBe(true)
+  })
+
+  test('la regla de hitos y manzanas (R13) mide el recinto de cada etapa, no el contorno completo desde 1889', () => {
+    // Arrange: lo que tools/hitos-manzanas.mjs le pasa a la medición
+    const etapas = hitosConPlanta().filter((h) => h.id === 'san-carlos')
+    const area = (poligono) => Math.abs(poligono.reduce((s, [x, y], i) => { const [x1, y1] = poligono[(i + 1) % poligono.length]; return s + x * y1 - x1 * y }, 0) / 2) * PLANO.metro ** 2
+    const recintoEn = (e) => etapas.filter((h) => h.nace <= e).flatMap((h) => h.suprime)
+
+    // Act / Assert: en 1889 solo el cuadro (72,4 × 77 m); desde 1911 entra también el contorno completo (72,4 × 98,3 m)
+    expect(recintoEn(2)).toEqual([])
+    expect(recintoEn(3).map(area).map(Math.round)).toEqual([Math.round(72.4 * CUADRO_M)])
+    expect(Math.max(...recintoEn(4).map(area))).toBeCloseTo(72.4 * LARGO_M, 0)
   })
 
   test('las esquinas del modelo caen a menos de 4 m de las leídas en el plano', () => {

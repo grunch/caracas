@@ -1,5 +1,5 @@
 from copy import deepcopy
-from hitos_manzanas import decidir, solapes, CABE, OCUPA_BUENA_PARTE, ROCE
+from hitos_manzanas import decidir, solapes, CABE, MAYOR, OCUPA_BUENA_PARTE, ROCE
 
 METRO = .5  # 100 m = 200 px
 
@@ -59,6 +59,28 @@ def test_un_hito_mayor_que_las_manzanas_que_abarca_las_retira_salvo_las_que_roza
     assert d['A']['hitos'] == [{'hito': 'hospital', 'clase': 'grande'}]
     assert d['B']['retirar']
     assert not d['C']['retirar'] and d['C']['hitos'] == [{'hito': 'hospital', 'clase': 'roce'}]
+
+
+def test_un_hito_del_tamaño_de_la_manzana_vecina_no_la_retira_por_pisarla_en_un_15_por_ciento():
+    # Arrange: el Cuartel San Carlos y U1843-0051-A0 (#248). Un recinto de 101 × 101 m (1,02 veces la manzana de
+    # 100 × 100 m) que la pisa en una franja de 15 m: el resto de la manzana no es del hito
+    ms = [manzana('vecina', 0, 0)]
+    hs = [hito('cuartel', cuadro(-172, 0, 202, 202))]
+    # Act
+    d = decision(ms, hs)['vecina']
+    # Assert
+    assert 1 < 202*202/(200*200) < MAYOR
+    assert not d['retirar']
+    assert d['hitos'] == [{'hito': 'cuartel', 'clase': 'a caballo'}]
+
+
+def test_el_mismo_cruce_con_un_recinto_claramente_mayor_si_retira_la_manzana():
+    # un recinto de 130 × 101 m (1,31 veces la manzana) con la misma franja de 15 m sobre ella
+    ms = [manzana('vecina', 0, 0)]
+    hs = [hito('recinto', cuadro(-230, 0, 260, 202))]
+    d = decision(ms, hs)['vecina']
+    assert 260*202/(200*200) > MAYOR
+    assert d['retirar'] and d['motivo'] == 'el hito es mayor que la manzana'
 
 
 def test_un_hito_chico_a_caballo_del_borde_no_retira_la_manzana():
