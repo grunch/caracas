@@ -369,11 +369,12 @@ export const FICHAS = Object.freeze({
   // --- el este ---
   candelaria: {
     textos: [
-      [1, 'El 17 de mayo de 1772, el obispo Mariano Martí visitó la iglesia, fundada en 1708 y parroquia independiente desde 1750. Describió tres naves, tres puertas hacia el oeste, una torre de tres cuerpos y un cementerio cercado anexo. La plaza se delimitó al comenzar el templo; a mediados del siglo XVIII tenía pilastras de ladrillo en sus cuatro costados.'],
-      [2, 'La leyenda del plano de 1843 nombra la iglesia de La Candelaria (J). El terremoto de 1812 había derribado parte del templo, su fachada y el tercer cuerpo de la torre; la reconstrucción se emprendió después de la guerra de Independencia.'],
-      [3, 'La iglesia y su plaza, al este del casco: templo VI y plaza D del plano de 1889.'],
+      [1, 'El 17 de mayo de 1772, el obispo Mariano Martí visitó la iglesia, fundada en 1708 y parroquia independiente desde 1750. Describió tres naves, tres puertas hacia el oeste, una torre de tres cuerpos junto a la fachada, del lado de la Epístola, y un cementerio cercado al otro lado. La plaza se delimitó al comenzar el templo; a mediados del siglo XVIII tenía pilastras de ladrillo en sus cuatro costados.'],
+      [2, 'La leyenda del plano de 1843 nombra la iglesia de La Candelaria (J). El terremoto de 1812 había derribado parte del templo, su fachada y el tercer cuerpo de la torre; después de la guerra de Independencia se empezó a reedificar «sobre el mismo plan». La fachada nueva no se comenzó hasta 1860: aquí va sin fachada, con un muro de cierre, y con la torre de dos cuerpos; no se sabe cuánto estaba reedificado ese año.'],
+      [3, 'Templo VI y plaza D del plano de 1889. La fachada se levantó entre 1860 y 1872 bajo la dirección de Juan Hurtado Manrique: Landaeta Rosales la cuenta entre las más altas de Caracas. En 1880 se le pusieron las tres puertas y el balcón central. La plaza se llamó Carabobo desde 1877 y tuvo la estatua de José Gregorio Monagas desde 1881.'],
+      [4, 'El terremoto del 29 de octubre de 1900 dañó la iglesia. Desde 1901 se reconstruyó empezando por el presbiterio, con los techos más altos «para que tengan luz y concuerden con la fachada» (ingeniero Jesús Muñoz Tébar). Entre 1889 y 1900 se había subido y techado de nuevo el campanario. En noviembre de 1908 la obra seguía: estaba casi terminado el techo de la nave central. Aquí se muestra terminada desde 1911: es una interpretación, porque no se sabe cuándo terminó la obra.'],
     ],
-    dudas: 'La planta, las dimensiones y el aspecto preciso del templo colonial requieren un estudio específico.',
+    dudas: 'Ninguna altura está medida: salen de la proporción con la planta, que es el contorno del plano de 1936. No se sabe cuánto de la reedificación estaba hecho en 1843 ni cuándo terminó la obra empezada en 1901; el cementerio y la sacristía no se dibujan.',
   },
   'fc-central': {
     textos: [[3, 'El plano de 1889 rotula aquí «Estación» y «Ferrocarril Central», al este de la ciudad.']],

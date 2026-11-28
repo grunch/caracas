@@ -1,0 +1,33 @@
+{
+  "fuente": "Plano DCN de 1936 (mosaico del repositorio, fuentes/mapas/1936-archiveorg-caracas-dcn-hoja1 y hoja2), contrastado con los planos calzados de 1772, 1843, 1889, 1911 y 1946 (fuentes/derivados/<año>/calzado.tif; 1946: fuentes/mapas/1950-archiveorg-plano-de-caracas-dcn)",
+  "sistema": "píxeles del mosaico base de 1936, 0,5 m por píxel; a = metros a lo largo del eje desde el pie de la fachada, b = metros a su derecha (al sur)",
+  "certeza": "lectura a ojo sobre una ampliación del mosaico con rejilla de 10 px; el trazo del plano mide de 1 a 2 px (0,5 a 1 m) y el rótulo tapa el muro sur. No es mensura catastral.",
+  "templos": {
+    "candelaria": {
+      "origen_px": [11184, 6990.8],
+      "eje": [0.993, 0.118],
+      "fachada": "oeste, sobre la calle que la separa de la Plaza de Candelaria («tres puertas mirando al ocaso», acta de Martí de 1772)",
+      "contorno_leido_px": {
+        "esquina_noroeste": [11187, 6966],
+        "muro_norte": [[11187, 6966], [11305, 6980]],
+        "pie_de_la_fachada_al_sur_con_la_torre": [11180, 7027],
+        "saliente_de_la_torre": [[11180, 7027], [11194, 7029], [11196, 7024], [11206, 7025], [11208, 7019]],
+        "cabecera": [[11277, 6990], [11287, 6992], [11285, 7013]],
+        "abside_o_capilla_al_norte_de_la_cabecera": [[11262, 6988], [11277, 6975]],
+        "fondo_del_solar": [[11307, 6980], [11300, 7038], [11287, 7037]]
+      },
+      "medidas_m": {
+        "largo_naves": 51, "ancho_naves": 25, "frente_con_la_torre": 30.7, "torre": 7,
+        "saliente_de_la_torre_al_sur": 5.7, "cuerpo_trasero_sacristia": 9
+      },
+      "tapado_por_el_rotulo": "el muro sur, entre la torre y la cabecera (rótulo «CANDELARIA»)",
+      "otros_planos": {
+        "1772": "símbolo de iglesia (recuadro con cruz) de unos 50 × 40 m en el mismo lugar, con la plaza abierta al oeste marcada con línea de trazos; calce del plano: 18,7 m RMS",
+        "1843": "letra J de la leyenda («La Candelaria») sobre la plaza y un bloque rayado de unos 30 × 25 m donde está el templo; calce: 12,4 m RMS",
+        "1889": "templo VI (recuadro gris con cruz, unos 60 × 30 m) y plaza D con sus caminos en estrella",
+        "1911": "bloque rojo de unos 55 × 30 m con un saliente al sur junto a la fachada (la torre) y otro al fondo; la plaza, ajardinada",
+        "1946": "contorno de unos 58 × 25 m con el saliente de la torre al suroeste y otro al sureste; unos 5 m al norte del de 1936 (calce de 1946: 2,1 m RMS)"
+      }
+    }
+  }
+}
