@@ -1,17 +1,19 @@
 import {test,expect} from '@playwright/test'
 import {gunzipSync} from 'node:zlib'
 import {decodificarPak} from '../../src/pak.js'
+import {muertesSinR13En} from './continuidad-r13-pagina.js'
 
 test('1889 mantiene las casas generadas de 1843 y añade tejido con la misma paleta',async({page})=>{
  // tres cambios de época y de cámara que avanzan por cuadros: con render por software (CI) cada uno tarda decenas de segundos
  test.setTimeout(180_000)
  const respuesta=await page.request.get('/datos/ciudad.pak');expect(respuesta.ok()).toBe(true)
  const bytes=await respuesta.body(),b=bytes[0]===31&&bytes[1]===139?gunzipSync(bytes):bytes
- const d=decodificarPak(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),{vida:Uint32Array,paletas:Uint8Array,historia:Uint8Array},()=>{})
+ const d=decodificarPak(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),{vertices:Float32Array,techos:Uint32Array,vida:Uint32Array,paletas:Uint8Array,historia:Uint8Array},()=>{})
  test.skip(!d.paletas?.some((p,i)=>p>0&&d.vida[i]%8===2&&(!(d.vida[i]>>3)||(d.vida[i]>>3)>=4)),'El release aún no incluye la continuidad de las manzanas en 1889')
  const vivos=e=>Array.from(d.vida).flatMap((v,i)=>v%8<=e&&(!(v>>3)||e<(v>>3))?[i]:[])
  const antes=vivos(2),despues=vivos(3),indices=new Set(despues)
- expect(antes.every(i=>indices.has(i))).toBe(true);expect(despues.length).toBeGreaterThan(antes.length)
+ // continuidad, con la R13 (specs/13): una casa de 1843 solo falta en 1889 si un hito retiró su manzana entera
+ expect(await muertesSinR13En(page,d,3)).toEqual([]);expect(despues.length).toBeGreaterThan(antes.length)
  expect(despues.every(i=>d.paletas[i]>0)).toBe(true)
  expect(antes.every(i=>d.historia[i*6+2]===d.historia[i*6+3])).toBe(true)
  const continua1911=antes.some(i=>indices.has(i)&&(!(d.vida[i]>>3)||(d.vida[i]>>3)>4))
