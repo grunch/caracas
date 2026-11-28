@@ -86,6 +86,7 @@ test('en tinta, antes de 1936, donde todavía no hay ciudad la hoja es papel en 
 
 // una sola página para todo lo que pide la ciudad urbanizada desde siempre: en CI cada carga cuesta medio minuto
 test('«Ver el plano de {año}» (o P) abre el plano de la época aparte, con su crédito; y donde ya es ciudad, antes de 1936, el suelo es liso', async ({ page }) => {
+  test.setTimeout(180_000) // recorre las épocas en una sola página: en un runner lento pasa de los 90 s
   await abrir(page, { urbano: true })
   const boton = page.locator('#ver-plano')
   await expect(boton).toHaveText('Ver el plano de 1772')

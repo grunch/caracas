@@ -10,13 +10,23 @@ test('sin bienvenida: se pone en color, la ciudad se levanta y la cámara vuela 
   const errores = []
   page.on('pageerror', (e) => errores.push(e.message))
   await page.addInitScript(() => localStorage.setItem('caracas:intro-vista', '1'))
+  // La inclinación de partida se anota dentro de la página, cuadro a cuadro: leerla desde afuera después de
+  // `lab.ready` llega tarde en una máquina lenta, con la cámara ya bajando (daba 1,25–1,39 en vez de > 1,4).
+  await page.addInitScript(() => {
+    const mirar = () => {
+      const cam = window.lab?.cam
+      if (cam) window.__pitchDePartida = Math.max(window.__pitchDePartida ?? -Infinity, cam.goal.pitch)
+      if (window.lab?.ready !== true) requestAnimationFrame(mirar)
+    }
+    requestAnimationFrame(mirar)
+  })
 
   // Act
   await page.goto(`/?${LIGERO}`)
   await page.waitForFunction(() => window.lab?.ready === true)
 
   // Assert: arranca desde arriba y en color
-  expect(await page.evaluate(() => window.lab.cam.goal.pitch)).toBeGreaterThan(1.4)
+  expect(await page.evaluate(() => window.__pitchDePartida)).toBeGreaterThan(1.4)
   await expect.poll(() => page.evaluate(() => window.lab.ciudad.U.uColor.value), { timeout: 60000 }).toBe(1)
   await expect(page.locator('#color')).toHaveAttribute('aria-pressed', 'true')
   // …la ciudad se levanta y la cámara llega inclinada, cerca de la plaza
