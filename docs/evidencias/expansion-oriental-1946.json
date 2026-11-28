@@ -1,0 +1,453 @@
+{
+ "nota": "Expansión oriental hacia 1946 (#279): qué cae dentro de la hoja del sitio y qué no, con una fuente por afirmación. No trae geometría ni autoriza a colocar nada: lo que queda fuera de la hoja no se dibuja. Las citas son textuales; la fecha del documento de cada entrada de FAC es el año de su URL.",
+ "clases_de_fuente": {
+  "plano de época": "Plano del catálogo del repo, calzado sobre el mosaico de 1936.",
+  "secundaria con referencias": "Artículo o libro que cita sus fuentes. Es la única clase escrita que admite la certeza «documentada»; una afirmación en disputa no la lleva nunca.",
+  "secundaria sin referencias": "Entrada de cronología sin fuentes citadas."
+ },
+ "cobertura": {
+  "metodo": "Latitud y longitud del objeto de OpenStreetMap (Nominatim, 28-11-2026), llevadas a la cuadrícula del plano de 1936 con tools/geo/geo1936.py y la transformación de tools/geo/gcp/1936-wgs84.json (13 puntos; error dejando uno fuera: 6,86 m de RMS, 14,7 m de máximo). Todos estos puntos están fuera del polígono de los controles: la posición es una extrapolación, buena para decir de qué lado del borde cae cada uno, no para colocar nada.",
+  "fuente": "© colaboradores de OpenStreetMap, ODbL 1.0 (https://www.openstreetmap.org/copyright)",
+  "borde_este_del_marco_m": 6400,
+  "plaza_bolivar_x_m": 1584.1,
+  "interior_del_plano_1936_x_m": 6240,
+  "interior_del_plano_1946_x_m": 6516,
+  "puntos": [
+   {"nombre":"Plaza Venezuela","osm":"relation/3815752","lat":10.4969243,"lon":-66.8857357,"x_m":4749,"y_m":-718,"al_este_de_la_plaza_m":3165,"fuera_del_marco_m":-1651},
+   {"nombre":"Sabana Grande (estación del metro, en el bulevar)","osm":"node/3646915549","lat":10.4938387,"lon":-66.8762072,"x_m":5792,"y_m":-1057,"al_este_de_la_plaza_m":4208,"fuera_del_marco_m":-608},
+   {"nombre":"Redoma de Las Delicias (Chacaíto)","osm":"way/235877853","lat":10.4945064,"lon":-66.8722888,"x_m":6221,"y_m":-983,"al_este_de_la_plaza_m":4637,"fuera_del_marco_m":-179},
+   {"nombre":"Plaza Bolívar de Chacao","osm":"way/222691098","lat":10.4950955,"lon":-66.8532367,"x_m":8305,"y_m":-914,"al_este_de_la_plaza_m":6721,"fuera_del_marco_m":1905},
+   {"nombre":"Obelisco de la Plaza Francia","osm":"way/294440204","lat":10.4965344,"lon":-66.8489079,"x_m":8779,"y_m":-754,"al_este_de_la_plaza_m":7195,"fuera_del_marco_m":2379},
+   {"nombre":"Plaza Francia (Altamira)","osm":"relation/3913460","lat":10.4960204,"lon":-66.8488779,"x_m":8782,"y_m":-811,"al_este_de_la_plaza_m":7198,"fuera_del_marco_m":2382}
+  ]
+ },
+ "fuentes": {
+  "plano1936": {
+   "tipo": "historica",
+   "anios": [1936],
+   "clase": "plano de época",
+   "fecha_documento": {"desde":1936,"hasta":1936},
+   "fecha_representada": {"desde":1936,"hasta":1936},
+   "url": "https://archive.org/details/WCWdb_18053"
+  },
+  "plano1946": {
+   "tipo": "historica",
+   "anios": [1946],
+   "clase": "plano de época",
+   "fecha_documento": {"desde":1946,"hasta":1950},
+   "fecha_representada": {"desde":1946,"hasta":1946},
+   "url": "https://archive.org/details/WCWdb_18051"
+  },
+  "cil": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "secundaria con referencias",
+   "fecha_documento": null,
+   "consultada": "2026-11-28",
+   "url": "https://acading.org.ve/wp-content/uploads/2023/02/LIBRO_INFRAESTRUCTURA_PET_Y_COMUNICACIONES_SIGLO_XIX_y_XX_ALFREDO_CILENTO.pdf"
+  },
+  "s50": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2020,"hasta":2020},"url":"https://fundaayc.com/2020/09/20/sabia-usted-50/"},
+  "s54": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2020,"hasta":2020},"url":"https://fundaayc.com/2020/11/15/sabia-usted-54/"},
+  "p411": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2024,"hasta":2024},"url":"https://fundaayc.com/2024/07/14/algo-mas-sobre-la-postal-no-411/"},
+  "r89": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "secundaria sin referencias",
+   "fecha_documento": {"desde":2026,"hasta":2026},
+   "url": "https://fundaayc.com/2026/05/19/1989-reinauguracion-de-la-plaza-altamira-rebautizada-como-plaza-francia/"
+  }
+ },
+ "tramos": [
+  {
+   "id": "este:calle-real-sabana-grande",
+   "tipo": "calle",
+   "nombre": "Calle Real de Sabana Grande",
+   "sistema": "Dentro de la hoja",
+   "encuadre": "dentro",
+   "nota": "El último tramo del camino del este que la hoja alcanza a dibujar. Su digitalización como tramo del registro vial es de #270.",
+   "contradicciones": [],
+   "desconocido": ["Fecha del nombre «Avenida Abraham Lincoln»","Ancho de la calle en 1936 y en 1946: no se midió"],
+   "nombres": [{"nombre":"Calle Real de Sabana Grande","desde":null,"hasta":null,"fuentes":["plano1936"]},{"nombre":"Avenida Abraham Lincoln","desde":null,"hasta":null,"fuentes":["plano1946"]}],
+   "cronologia": [
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1936,"hasta":1936},
+     "dice": "El plano de 1936 la rotula «Calle Real de Sabana Grande» y la dibuja edificada por los dos lados hasta el borde del dibujo",
+     "cita": "«CALLE REAL DE SABANA GRANDE»",
+     "fuentes": ["plano1936"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "nombre",
+     "fecha": {"desde":1946,"hasta":1946},
+     "dice": "El plano de 1946 rotula la misma calle «Avenida Abraham Lincoln» y el sector «Sabana Grande»",
+     "cita": "«AVENIDA ABRAHAM LINCOLN»",
+     "fuentes": ["plano1946"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": null,
+     "dice": "Era el arranque de la Carretera del Este hacia las urbanizaciones del este",
+     "cita": "«conectaba la Calle Real de Sabana Grande con las urbanizaciones Chacaíto, Country Club, Altamira y Los Palos Grandes»",
+     "fuentes": ["s54"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Calle Real de Sabana Grande",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[16400,9100,18300,10000]},
+     "lectura": "Calle continua y edificada desde (16500, 9180) hasta el borde del dibujo en (18280, 9950)."
+    },
+    {
+     "anio": 1946,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1946",
+     "fuentes": ["plano1946"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1946,"hasta":1946},
+     "nombre": "Avenida Abraham Lincoln",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[16400,9100,18600,10100]},
+     "lectura": "La misma calle, con el rótulo nuevo; sigue hacia el este hasta salir de la hoja cerca de (18600, 10030). Leído sobre el plano reducido a 2 m por píxel."
+    }
+   ]
+  },
+  {
+   "id": "este:carretera-del-este",
+   "tipo": "carretera",
+   "nombre": "Carretera del Este (Sabana Grande–Petare)",
+   "sistema": "Fuera de la hoja",
+   "encuadre": "fuera",
+   "nota": "Empieza donde termina la Calle Real de Sabana Grande, es decir, donde termina la hoja. La avenida Francisco de Miranda (1954) está en el catálogo de vías posteriores a 1946 (`moderno:francisco-de-miranda-1954`), que la da por abierta en 1954; acá no se repite, y para este tramo ningún plano del sitio da lectura.",
+   "contradicciones": [
+    {
+     "asunto": "Fecha de la Carretera del Este",
+     "estado": "pendiente",
+     "afirmaciones": [
+      {"dice":"Guzmán Blanco la inaugura en mayo de 1875","fuente":"cil"},
+      {"dice":"Ya llevaba del centro a Petare en el plano de Röhl de 1934","fuente":"s50"},
+      {"dice":"El gobernador Gonzalo Barrios la inaugura oficialmente el 12 de marzo de 1947","fuente":"s54"}
+     ]
+    }
+   ],
+   "desconocido": [
+    "Ancho de la carretera antes de 1954",
+    "Su trazado tramo por tramo por Chacao y Los Dos Caminos",
+    "Qué se inauguró en 1947 si la carretera ya se había inaugurado en 1875 y figuraba en 1934: pavimento, rectificación o nombre",
+    "Cómo la rotula el plano de 1946 al este de Las Delicias: el original no se releyó para este tramo"
+   ],
+   "cronologia": [
+    {
+     "tipo": "levantamiento",
+     "fecha": null,
+     "dice": "Sigue el trazado del antiguo Camino Real de Petare",
+     "cita": "«tiene su origen en el trazado del antiguo Camino Real de Petare que unía las haciendas»",
+     "fuentes": ["s54"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1875,"hasta":1875},
+     "dice": "La Carretera del Este, de Caracas a Petare, se inaugura en mayo de 1875",
+     "cita": "«La llamada “Carretera del Este”, que partía de Caracas a Petare… fue inaugurada también por Guzmán Blanco en mayo de 1875» (p. 16)",
+     "fuentes": ["cil"],
+     "certeza": "dudosa",
+     "disputa": "Fecha de la Carretera del Este"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1934,"hasta":1934},
+     "dice": "En 1934 llevaba del centro a Petare y conectaba las urbanizaciones del este",
+     "cita": "«conectados por la Carretera del Este que llevaba del centro hasta Petare»",
+     "fuentes": ["s50"],
+     "certeza": "dudosa",
+     "disputa": "Fecha de la Carretera del Este"
+    },
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1947,"hasta":1947},
+     "dice": "Inaugurada oficialmente el 12 de marzo de 1947",
+     "cita": "«el 12 de marzo de 1947 […] el entonces Gobernador de Caracas, Gonzalo Barrios, inaugurara oficialmente la que se conoció como “Carretera del Este”»",
+     "fuentes": ["s54"],
+     "certeza": "dudosa",
+     "disputa": "Fecha de la Carretera del Este"
+    },
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1954,"hasta":1954},
+     "dice": "En 1954 se termina su ampliación y el tramo de Los Palos Grandes a Petare, y cambia de nombre",
+     "cita": "«Es la ampliación de la Carretera junto a la construcción del tramo entre Los Palos Grandes y Petare lo que se termina en 1954»",
+     "fuentes": ["s54"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1954,"hasta":1954},
+     "dice": "La avenida nueva tiene calzadas de más de 30 m, seis vías y aceras de cuatro metros",
+     "cita": "«con sus calzadas de más de 30 metros de anchura (en total seis vías, tres en un sentido y otras tres en el otro […]), islas verdes en ciertos tramos y aceras de cuatro metros cada una»",
+     "fuentes": ["s54"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1936,
+     "estado": "desconocido",
+     "certeza": "inferida",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Fuera de la hoja: el plano no llega al sector."
+    },
+    {
+     "anio": 1946,
+     "estado": "desconocido",
+     "certeza": "inferida",
+     "documento": "plano1946",
+     "fuentes": ["plano1946"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Fuera de la hoja: el plano no llega al sector."
+    }
+   ]
+  },
+  {
+   "id": "este:urbanizacion-altamira",
+   "tipo": "urbanización",
+   "nombre": "Urbanización Altamira",
+   "sistema": "Fuera de la hoja",
+   "encuadre": "fuera",
+   "contradicciones": [],
+   "desconocido": [
+    "Fecha de inicio de las obras de urbanismo",
+    "Estado en 1946: cuántas parcelas estaban construidas y cuáles vacantes",
+    "Fechas de las urbanizaciones vecinas (Country Club, Campo Alegre, La Castellana, Los Palos Grandes): la fuente las nombra sin fecharlas"
+   ],
+   "cronologia": [
+    {
+     "tipo": "proyecto",
+     "fecha": {"desde":1943,"hasta":1943},
+     "dice": "Luis Roche compra la hacienda El Paraíso, de 110 hectáreas",
+     "cita": "«Roche […] compra la hacienda en 1943»",
+     "fuentes": ["s50"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "proyecto",
+     "fecha": {"desde":1944,"hasta":1944},
+     "dice": "Crea Altamira, C.A. y pide al Concejo Municipal autorización para parcelar",
+     "cita": "«crea en 1944 la empresa Altamira, C.A. con el objeto de desarrollar la urbanización y solicita autorización al Concejo Municipal para realizar el parcelamiento»",
+     "fuentes": ["s50"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1950,"hasta":1950},
+     "dice": "Ya parcelada, entrega formalmente los espacios públicos en 1950",
+     "cita": "«En 1950, ya parcelada, se procedió hacer entrega formal de los espacios públicos»",
+     "fuentes": ["s50"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": null,
+     "dice": "Dos avenidas principales de 24 m, El Ávila al este y El Parque al oeste",
+     "cita": "«de 24 metros de ancho denominadas entonces como El Ávila -al este- y El Parque -al oeste- (hoy Luis Roche y San Juan Bosco…)»",
+     "fuentes": ["s50"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1936,
+     "estado": "desconocido",
+     "certeza": "inferida",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Fuera de la hoja: el plano no llega al sector."
+    },
+    {
+     "anio": 1946,
+     "estado": "desconocido",
+     "certeza": "inferida",
+     "documento": "plano1946",
+     "fuentes": ["plano1946"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Fuera de la hoja: el plano no llega al sector."
+    }
+   ]
+  },
+  {
+   "id": "este:plaza-altamira",
+   "tipo": "plaza",
+   "nombre": "Plaza Altamira (hoy Plaza Francia), con su obelisco y su espejo de agua",
+   "sistema": "Fuera de la hoja",
+   "encuadre": "fuera",
+   "contradicciones": [
+    {
+     "asunto": "Fecha de inauguración de la plaza",
+     "estado": "pendiente",
+     "afirmaciones": [{"dice":"Inaugurada el 11 de agosto de 1945","fuente":"s50"},{"dice":"«Su inauguración formal data del 5 de julio de 1944», en la misma entrada","fuente":"s50"}]
+    },
+    {"asunto":"Altura del obelisco","estado":"pendiente","afirmaciones":[{"dice":"24 metros, en piedra artificial","fuente":"s50"},{"dice":"45 metros","fuente":"p411"}]},
+    {
+     "asunto": "Autor de la plaza",
+     "estado": "pendiente",
+     "afirmaciones": [{"dice":"Martín Hermanos (Luis Martín); Henry Vicente niega que la proyectara Arthur Kahn","fuente":"s50"},{"dice":"Proyectada con la participación de Arthur Kahn","fuente":"p411"}]
+    },
+    {"asunto":"Cuándo pasa a llamarse Plaza Francia","estado":"pendiente","afirmaciones":[{"dice":"Rebautizada en 1967","fuente":"s50"},{"dice":"Reinaugurada y rebautizada en 1989","fuente":"r89"}]}
+   ],
+   "desconocido": ["Fecha propia del obelisco","Fecha propia del espejo de agua y de la fuente","Autor del obelisco: la fuente deja abierta la atribución a Mujica Millán"],
+   "nombres": [{"nombre":"Plaza Altamira","desde":null,"hasta":null,"fuentes":["s50"]},{"nombre":"Plaza Francia","desde":null,"hasta":null,"fuentes":["s50","r89"]}],
+   "cronologia": [
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1945,"hasta":1945},
+     "dice": "Inaugurada el 11 de agosto de 1945",
+     "cita": "«el 11 de agosto de 1945 es inaugurada la que se conoce actualmente como la Plaza Francia de Altamira»",
+     "fuentes": ["s50"],
+     "certeza": "dudosa",
+     "disputa": "Fecha de inauguración de la plaza"
+    },
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1944,"hasta":1944},
+     "dice": "Inauguración formal el 5 de julio de 1944",
+     "cita": "«Su inauguración formal data del 5 de julio de 1944.»",
+     "fuentes": ["s50"],
+     "certeza": "dudosa",
+     "disputa": "Fecha de inauguración de la plaza"
+    },
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1945,"hasta":1945},
+     "dice": "Otra entrada la fecha en 1945 y la atribuye a Martín Hermanos",
+     "cita": "«Plaza Altamira (Martín Hermanos,1945)»",
+     "fuentes": ["s54"],
+     "certeza": "dudosa",
+     "disputa": "Fecha de inauguración de la plaza"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": null,
+     "dice": "Obelisco de 24 m en piedra artificial",
+     "cita": "«el propio obelisco de 24 metros de altura erigido en piedra artificial»",
+     "fuentes": ["s50"],
+     "certeza": "dudosa",
+     "disputa": "Altura del obelisco"
+    },
+    {"tipo":"levantamiento","fecha":null,"dice":"Fuente con espejo de agua","cita":"«la fuente conformada por un espejo de agua con boquillas o chorros»","fuentes":["s50"],"certeza":"dudosa"},
+    {
+     "tipo": "nombre",
+     "fecha": {"desde":1967,"hasta":1967},
+     "dice": "Rebautizada Plaza Francia en 1967",
+     "cita": "«es rebautizado en 1967 como “Plaza Francia”»",
+     "fuentes": ["s50"],
+     "certeza": "dudosa",
+     "disputa": "Cuándo pasa a llamarse Plaza Francia"
+    },
+    {
+     "tipo": "nombre",
+     "fecha": {"desde":1989,"hasta":1989},
+     "dice": "Reinaugurada y rebautizada Plaza Francia en 1989",
+     "cita": "«reinauguran la Plaza Altamira rebautizándola como Plaza Francia»",
+     "fuentes": ["r89"],
+     "certeza": "dudosa",
+     "disputa": "Cuándo pasa a llamarse Plaza Francia"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1936,
+     "estado": "desconocido",
+     "certeza": "inferida",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Fuera de la hoja: el plano no llega al sector."
+    },
+    {
+     "anio": 1946,
+     "estado": "desconocido",
+     "certeza": "inferida",
+     "documento": "plano1946",
+     "fuentes": ["plano1946"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Fuera de la hoja: el plano no llega al sector."
+    }
+   ]
+  },
+  {
+   "id": "este:edificio-altamira",
+   "tipo": "edificio",
+   "nombre": "Edificio Altamira",
+   "sistema": "Fuera de la hoja",
+   "encuadre": "fuera",
+   "nota": "Terminado en 1947: no puede figurar como edificio acabado en 1946. Que en 1946 no hubiera nada, o que estuviera en obra, no lo dice ninguna fuente leída y ningún plano del sitio cubre el sector: los seis cortes quedan sin lectura, que no es ausencia.",
+   "contradicciones": [],
+   "desconocido": ["Fecha de inicio de la obra: no se sabe si en 1946 ya se veía en construcción"],
+   "cronologia": [
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1947,"hasta":1947},
+     "dice": "Terminado en 1947; de Arthur Kahn",
+     "cita": "«Arthur Kahn como autor del […] edificio que cierra el extremo norte de la plaza: el edificio Altamira, finalizado en 1947»",
+     "fuentes": ["s50"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": []
+  }
+ ]
+}
