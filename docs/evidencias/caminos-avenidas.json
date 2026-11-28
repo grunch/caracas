@@ -23,6 +23,14 @@
    "fecha_representada": {"desde":1843,"hasta":1843},
    "url": "https://commons.wikimedia.org/wiki/File:Plano_topografico_de_la_ciudad_de_Caracas_(NYPL_b13925947-5382478).tiff"
   },
+  "plano1911": {
+   "tipo": "historica",
+   "anios": [1911],
+   "clase": "plano de época",
+   "fecha_documento": {"desde":1911,"hasta":1911},
+   "fecha_representada": {"desde":1911,"hasta":1911},
+   "url": "https://maps.princeton.edu/catalog/princeton-05741v14j"
+  },
   "plano1936": {
    "tipo": "historica",
    "anios": [1936],
@@ -506,7 +514,11 @@
    "sistema": "Alcabalas y puertas",
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": ["Fecha de instalación y de cierre","El solar: ningún plano leído dibuja el edificio","Si la esquina «Alcabala» de 1936 es el mismo lugar que la alcabala de 1843: es una inferencia por el nombre"],
+   "desconocido": [
+    "Fecha de instalación y de cierre",
+    "El solar: ningún plano leído dibuja el edificio",
+    "Si la esquina «Alcabala» de 1936 es el mismo lugar que la alcabala de 1843: la letra x cae unos 55 m al este de esa esquina, con un calce de 18 m de error; es una inferencia por nombre y cercanía"
+   ],
    "cronologia": [
     {
      "tipo": "levantamiento",
@@ -536,10 +548,10 @@
      "nombre": "Alcabala de Candelaria",
      "contradicciones": [],
      "ancho_m": null,
-     "error_m": null,
+     "error_m": 18.27,
      "medible": false,
-     "recorte": null,
-     "lectura": "Letra x de la leyenda. La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición."
+     "recorte": {"caja":[11300,7040,11540,7280]},
+     "lectura": "Letra x de la leyenda, dibujada en (11420, 7160) sobre la calle que sale al este, unos 65 m antes de la letra f (el puente de Anauco). El plano no dibuja un edificio propio."
     },
     {
      "anio": 1936,
@@ -616,8 +628,16 @@
    "sistema": "Alcabalas y puertas",
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": ["Toda su historia: ninguna fuente leída dice cuándo hubo ahí una alcabala; la leyenda de 1843 no la enumera","El solar"],
+   "desconocido": ["Toda su historia: ninguna fuente leída dice cuándo hubo ahí una alcabala; la leyenda de 1843 no la enumera","El plano de 1911 se leyó solo en este punto","El solar"],
    "cronologia": [
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1911,"hasta":1911},
+     "dice": "El plano de 1911 rotula «Alcabala Palo Grande» la manzana vecina",
+     "cita": "«ALCABALA PALO GRANDE»",
+     "fuentes": ["plano1911"],
+     "certeza": "documentada"
+    },
     {
      "tipo": "levantamiento",
      "fecha": {"desde":1936,"hasta":1936},
@@ -636,6 +656,21 @@
     }
    ],
    "etapas": [
+    {
+     "anio": 1911,
+     "estado": "desconocido",
+     "certeza": "documentada",
+     "documento": "plano1911",
+     "fuentes": ["plano1911"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1911,"hasta":1911},
+     "nombre": "Alcabala Palo Grande",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 12.04,
+     "medible": false,
+     "recorte": {"caja":[5350,8700,5650,9000]},
+     "lectura": "Rótulo «ALCABALA PALO GRANDE» sobre una manzana, hacia (5500, 8850), al sur de la «Est. Palo Gr.»; el tranvía pasa en rojo por su borde. Es un nombre de lugar: el plano no dibuja un edificio de alcabala."
+    },
     {
      "anio": 1936,
      "estado": "desconocido",

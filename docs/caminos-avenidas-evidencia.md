@@ -101,9 +101,9 @@ Venezuela», «Colección Fundación Arquitectura y Ciudad», redes) sin licenci
 | Camino de La Vega (camino de Antímano, Carretera de Occidente) | **Existe** (documentada). Trazo L1772-0083, de (5923, 8653) a (6332, 8753): doble trazo hasta la orilla. Eje aproximado leído sobre el original, inspeccionado y no aprobado para generar; el doble trazo no se midió, así que no hay ancho. Cae sobre la calle que el plano de 1936 rotula «Sur Ocho», a unos 6 m de la esquina «Cruz de la Vega». | **Existe** (documentada). «Camino de la Vega». «id. de la Vega», con una cruz por signo. La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición. | Sin lectura | Sin lectura | **Existe** (documentada). «Sur Ocho». La calle sigue ahí: «Sur Ocho» entre la Plaza de Capuchinos (6800, 8330) y la Plaza Italia (5760, 8830), con la esquina «Cruz de la Vega» en (6230, 8700). | Sin lectura |
 | Camino de El Valle | **Existe** (documentada). Trazo L1772-0084, de (9603, 10378) a (9817, 9443). Eje aproximado leído sobre el original, inspeccionado y no aprobado para generar; el doble trazo no se midió, así que no hay ancho. La conexión con la trama urbana está sin resolver. | **Existe** (inferida). La leyenda no enumera un camino del Valle, pero sí su alcabala (letra w) y la calle «de la alcabala del Valle» (n.º 136). | Sin lectura | Sin lectura | Sin lectura | Sin lectura |
 | Camino de Sabana Grande (Camino Real de Petare, Carretera del Este) | Sin lectura | **Existe** (documentada). «Camino de Sabana Grande». Letra y de la leyenda. La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición. | Sin lectura | Sin lectura | **Existe** (documentada). «Calle Real de Sabana Grande». Calle edificada desde (16500, 9180) hasta el borde del dibujo en (18280, 9950). | Sin lectura |
-| Alcabala de Candelaria | Sin lectura | **Existe** (documentada). «Alcabala de Candelaria». Letra x de la leyenda. La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición. | Sin lectura | Sin lectura | **No se sabe** (documentada). «Alcabala». Queda el nombre en una esquina, (11310, 7151), a unos 140 m al oeste del rótulo «Puente Anauco». Es un topónimo: no prueba que hubiera alcabala en 1936. | Sin lectura |
+| Alcabala de Candelaria | Sin lectura | **Existe** (documentada). «Alcabala de Candelaria». Letra x de la leyenda, dibujada en (11420, 7160) sobre la calle que sale al este, unos 65 m antes de la letra f (el puente de Anauco). El plano no dibuja un edificio propio. | Sin lectura | Sin lectura | **No se sabe** (documentada). «Alcabala». Queda el nombre en una esquina, (11310, 7151), a unos 140 m al oeste del rótulo «Puente Anauco». Es un topónimo: no prueba que hubiera alcabala en 1936. | Sin lectura |
 | Alcabala del Valle | Sin lectura | **Existe** (documentada). «Alcabala del Valle». Letra w de la leyenda. La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición. | Sin lectura | Sin lectura | **No se sabe** (documentada). «Alcabala Vieja». Queda el nombre en una esquina, (9745, 9120), con la cota 879,29. Es un topónimo: «vieja» dice que ya no lo era. | Sin lectura |
-| Esquina de Alcabala (camino de La Vega) | Sin lectura | Sin lectura | Sin lectura | Sin lectura | **No se sabe** (documentada). «Alcabala». Nombre de esquina en (5480, 8980), al suroeste de la Plaza Italia. Es un topónimo. | Sin lectura |
+| Esquina de Alcabala (camino de La Vega) | Sin lectura | Sin lectura | Sin lectura | **No se sabe** (documentada). «Alcabala Palo Grande». Rótulo «ALCABALA PALO GRANDE» sobre una manzana, hacia (5500, 8850), al sur de la «Est. Palo Gr.»; el tranvía pasa en rojo por su borde. Es un nombre de lugar: el plano no dibuja un edificio de alcabala. | **No se sabe** (documentada). «Alcabala». Nombre de esquina en (5480, 8980), al suroeste de la Plaza Italia. Es un topónimo. | Sin lectura |
 | Puerta de La Guaira | **No se sabe** (dudosa). El original dibuja una alcabala en el camino de La Guaira (`EX1772-012`), sin pareja segura en 1936; nadie transcribió su rótulo. | **Existe** (documentada). «Puerta de La Guaira». Letra v de la leyenda. La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición. | Sin lectura | Sin lectura | Sin lectura | Sin lectura |
 | Avenida Sucre (Catia) | Sin lectura | Sin lectura | Sin lectura | Sin lectura | **Existe** (documentada). «Avenida Sucre». Rótulo «AVENIDA SUCRE» desde la Plaza La Libertad (2180, 4450) hacia el este, hasta pasar (4000, 5000); edificada a trechos, con la Capilla de Catia y el depósito del MOP sobre ella. | **Existe** (documentada). «Avenida Sucre». El mismo rótulo, de la plaza a Agua Salud (4900, 4900), y la avenida sigue al sureste. Leído sobre el plano reducido a 2 m por píxel. |
 | Avenida San Martín | Sin lectura | Sin lectura | Sin lectura | Sin lectura | **Existe** (documentada). «Avenida San Martín». Rótulo «AVENIDA SAN MARTIN» al suroeste de la esquina Alcabala, de (5400, 9000) a (4700, 9500), frente a la Casa de Maternidad. Al noreste, de la Plaza Italia a Capuchinos, la misma vía se rotula «Sur Ocho». | **Existe** (documentada). «Avenida San Martín». Rótulo «AVENIDA SAN MARTIN» en el mismo tramo, de (5400, 9050) a (4300, 9600). Leído sobre el plano reducido a 2 m por píxel. |
@@ -254,7 +254,7 @@ El tramo de la hoja y lo que queda fuera de ella están en el diagnóstico de #2
 
 - Fecha de instalación y de cierre.
 - El solar: ningún plano leído dibuja el edificio.
-- Si la esquina «Alcabala» de 1936 es el mismo lugar que la alcabala de 1843: es una inferencia por el nombre.
+- Si la esquina «Alcabala» de 1936 es el mismo lugar que la alcabala de 1843: la letra x cae unos 55 m al este de esa esquina, con un calce de 18 m de error; es una inferencia por nombre y cercanía.
 
 ### Alcabala del Valle
 
@@ -276,12 +276,14 @@ El tramo de la hoja y lo que queda fuera de ella están en el diagnóstico de #2
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
+| 1911 | Levantamiento | El plano de 1911 rotula «Alcabala Palo Grande» la manzana vecina | «ALCABALA PALO GRANDE» | documentada | [12] |
 | 1936 | Levantamiento | El plano de 1936 rotula «Alcabala» la esquina donde empieza el rótulo «Avenida San Martín» | «Alcabala», con la cota 885,739 | documentada | [5] |
-| 1954 | Reforma | La ampliación de 1954 de la avenida San Martín va «de Angelitos a Alcabala» | «concluye la construcción del tramo de la Avenida San Martín comprendido entre las esquinas Angelitos a Alcabala, unos 1.232 metros de longitud» | documentada | [12] |
+| 1954 | Reforma | La ampliación de 1954 de la avenida San Martín va «de Angelitos a Alcabala» | «concluye la construcción del tramo de la Avenida San Martín comprendido entre las esquinas Angelitos a Alcabala, unos 1.232 metros de longitud» | documentada | [13] |
 
 **No se pudo documentar:**
 
 - Toda su historia: ninguna fuente leída dice cuándo hubo ahí una alcabala; la leyenda de 1843 no la enumera.
+- El plano de 1911 se leyó solo en este punto.
 - El solar.
 
 ### Puerta de La Guaira
@@ -313,7 +315,7 @@ El tercer tramo, de 1952, está en el catálogo de vías posteriores a 1946 (`mo
 | 1922 | Nombre | El «Viejo Camino del Oeste» se llama avenida Sucre desde 1922 | «ya el “Viejo Camino del Oeste” era conocido como avenida Sucre desde 1922» | documentada | [6] |
 | 1924 | Reforma | En enero de 1924 el gobernador da cuenta de mejoras y de 22 focos más de alumbrado, no de un ensanche | «ordené a la compañía respectiva que se hicieran instalaciones para veintidós focos más, los cuales fueron distribuidos del puente de Catia a las jabonerías» | documentada | [6] |
 | 1952 | Reforma | El tercer tramo se inaugura el 23 de noviembre de 1952: 26 m de ancho y 314 casas demolidas en todo o en parte | «Tiene 3.234 metros de longitud y está comprendida entre la Plaza de Catia y la Plazoleta de las Tinajitas con un ancho de 26 Ms.» | documentada | [6] |
-| 1954 | Reforma | Se cierra en 1954 con el viaducto Nueva República, que sustituye al puente de Pagüita | «concluyéndose el tercero en 1952 y cerrándose finalmente con la construcción en 1954 del viaducto Nueva República que sustituyó al antiguo puente de Pagüita» | documentada | [6] [13] |
+| 1954 | Reforma | Se cierra en 1954 con el viaducto Nueva República, que sustituye al puente de Pagüita | «concluyéndose el tercero en 1952 y cerrándose finalmente con la construcción en 1954 del viaducto Nueva República que sustituyó al antiguo puente de Pagüita» | documentada | [6] [14] |
 
 **No se pudo documentar:**
 
@@ -337,11 +339,11 @@ La ampliación de 1954 está en el catálogo de vías posteriores a 1946 (`moder
 | Sin fecha | Levantamiento | El tramo antiguo iba de la esquina de Angelitos a Palo Grande, donde remataba en la Plaza Italia | «desde la esquina de Angelitos en la parroquia San Juan hasta el sector Palo Grande donde remataba en una plaza (la plaza de Italia que toma ese nombre en 1911…)» | documentada | [7] |
 | 1922 | Levantamiento | Desde 1922 la estatua ecuestre de Sucre está en el cruce con la avenida 19 de Diciembre | «el cruce con la 19 de diciembre (donde se ubica desde 1922 la estatua ecuestre de Antonio José de Sucre realizada por el escultor venezolano Lorenzo González)» | documentada | [7] |
 | 1924 | Levantamiento | La estatua de San Martín estuvo desde 1924 en el eje de la avenida | «inicialmente estuvo ubicada desde 1924 en el eje de la avenida. La plaza, realizada en 1955 al concluirse la ampliación de la vía» | documentada | [7] |
-| 1954 | Reforma | En 1954 se amplía a 30 m de fachada a fachada y se reducen las plazas Capuchinos e Italia | «El ancho de la nueva vía tiene 30 metros de fachada a fachada, la calzada de 18 metros de ancho y el ancho de las aceras 5,90 metros.» | documentada | [12] [7] |
+| 1954 | Reforma | En 1954 se amplía a 30 m de fachada a fachada y se reducen las plazas Capuchinos e Italia | «El ancho de la nueva vía tiene 30 metros de fachada a fachada, la calzada de 18 metros de ancho y el ancho de las aceras 5,90 metros.» | documentada | [13] [7] |
 
 **Contradicción pendiente — Extensión de la obra de 1954:**
 
-- De la esquina de Angelitos a la de Alcabala, 1.232 m [12]
+- De la esquina de Angelitos a la de Alcabala, 1.232 m [13]
 - Entre El Silencio y Palo Grande [7]
 
 **No se pudo documentar:**
@@ -407,5 +409,6 @@ La ampliación de 1954 está en el catálogo de vías posteriores a 1946 (`moder
 | 9 | secundaria con referencias | 2020 | <https://fundaayc.com/2020/09/20/sabia-usted-50/> |
 | 10 | secundaria con referencias | 2020 | <https://fundaayc.com/2020/11/15/sabia-usted-54/> |
 | 11 | crónica sin referencias | sin fecha; consultada el 2026-11-28 | <https://www.soydonrefran.com/esquina-de-alcabala/> |
-| 12 | secundaria sin referencias | 2019 | <https://fundaayc.com/2019/10/01/1954-avenida-san-martin/> |
-| 13 | secundaria con referencias | 2025 | <https://fundaayc.com/2025/01/19/sabia-usted-128/> |
+| 12 | plano de época | 1911 | <https://maps.princeton.edu/catalog/princeton-05741v14j> |
+| 13 | secundaria sin referencias | 2019 | <https://fundaayc.com/2019/10/01/1954-avenida-san-martin/> |
+| 14 | secundaria con referencias | 2025 | <https://fundaayc.com/2025/01/19/sabia-usted-128/> |
