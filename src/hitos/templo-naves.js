@@ -11,6 +11,7 @@ const CUBIERTAS = Object.freeze(['teja', 'plana'])
 const PENDIENTE_LATERAL = 0.3 // lo que sube el tejado de una nave lateral por metro de ancho
 const PENDIENTE_CENTRAL = 0.28
 const VANOS_CADA_M = 8
+const RETIRO_TEJADO_M = 1.2 // lo que el tejado se aparta de una fachada de pantalla: más que su alero
 
 /**
  * `largo` × `ancho` de las tres naves; `altoLateral` y `altoCentral` al borde de los muros; `anchoCentral` de la
@@ -30,12 +31,14 @@ export function temploDeNaves(p, {
   const caida = plana ? 0 : Math.min(anchoLateral * PENDIENTE_LATERAL, (altoCentral - altoLateral) * 0.6)
   const vanos = Math.max(2, Math.round(largo / VANOS_CADA_M))
 
-  naveCentral(p, { largo, anchoCentral, altoCentral, plana, color, teja })
+  // detrás de una fachada de pantalla los tejados arrancan después del muro: si no, el alero lo atraviesa
+  const retiro = pantalla && !plana ? RETIRO_TEJADO_M : 0
+  naveCentral(p, { largo, anchoCentral, altoCentral, plana, retiro, color, teja })
   for (const s of [-1, 1]) {
     const b = (s * (anchoCentral + anchoLateral)) / 2
     caja(p.en(largo / 2, 0, b), { ancho: largo, alto: altoLateral, fondo: anchoLateral, color })
     if (plana) cornisa(p.en(largo / 2, altoLateral, b), { largo, ancho: anchoLateral, alto: 0.45, vuelo: 0.15, color })
-    else tejado(p.mirando(largo / 2, altoLateral, b, 0, s), { largo, ancho: anchoLateral, alto: caida, tipo: 'una', alero: 0.3, color: teja, hastial: color })
+    else tejado(p.mirando((largo + retiro) / 2, altoLateral, b, 0, s), { largo: largo - retiro, ancho: anchoLateral, alto: caida, tipo: 'una', alero: 0.3, color: teja, hastial: color })
     ventanas(p.mirando(largo / 2, 0, (s * ancho) / 2, 0, s), { largo: largo * 0.82, n: vanos, y: altoLateral * 0.42, ancho: 1.2, alto: altoLateral * 0.3 })
     // las ventanas altas de la nave central, sobre el tejado de las laterales
     const claro = altoCentral - altoLateral - caida
@@ -47,11 +50,11 @@ export function temploDeNaves(p, {
   for (const { a, b = 0, ...medidas } of cupulas) cupulaConTambor(p.en(a, b === 0 ? altoCentral : altoLateral, b), { color, ...medidas })
 }
 
-function naveCentral(p, { largo, anchoCentral, altoCentral, plana, color, teja }) {
+function naveCentral(p, { largo, anchoCentral, altoCentral, plana, retiro, color, teja }) {
   const q = p.en(largo / 2, 0, 0)
   caja(q, { ancho: largo, alto: altoCentral, fondo: anchoCentral, color })
   if (plana) cornisa(q.en(0, altoCentral, 0), { largo, ancho: anchoCentral, alto: 0.45, vuelo: 0.2, color })
-  else tejado(q.en(0, altoCentral, 0), { largo, ancho: anchoCentral, alto: anchoCentral * PENDIENTE_CENTRAL, color: teja, hastial: color })
+  else tejado(q.en(retiro / 2, altoCentral, 0), { largo: largo - retiro, ancho: anchoCentral, alto: anchoCentral * PENDIENTE_CENTRAL, color: teja, hastial: color })
 }
 
 /** Los brazos: un cuerpo bajo atravesado a las naves, con la cumbrera de lado a lado. */
