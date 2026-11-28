@@ -123,7 +123,7 @@ describe('La Candelaria (#243)', () => {
 
   test('está en HITOS, al final para no mover las semillas de los anteriores, y pasa la validación', () => {
     expect(h).toBe(candelaria)
-    expect(HITOS.at(-1).id).toBe('candelaria')
+    expect(HITOS[HITOS.findIndex((x) => x.id === 'san-jose') + 1].id).toBe('candelaria') // detrás de los templos de #259
     expect(validarHitos([candelaria], PLANO)).toEqual([])
   })
 
