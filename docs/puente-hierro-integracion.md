@@ -101,5 +101,5 @@ más corto. Las dos edificaciones del lado este quedan a 1,2 m del terraplén: n
 
 - Sin GPU el suelo es una malla de 96 m. El lecho empalma con él, pero las casas vecinas siguen apoyadas en el
   relieve fino.
-- El puente sustituto de 1937 y los demás cruces (Constitución, Sucre, Dolores, Restaurador, 19 de Diciembre,
-  Ayacucho) quedan para los PR siguientes.
+- El puente sustituto de 1937 y los demás cruces (Dolores, Restaurador, 19 de Diciembre, Ayacucho) quedan para
+  los PR siguientes. Constitución y Sucre metálico: [`puente-sucre-integracion.md`](puente-sucre-integracion.md).

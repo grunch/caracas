@@ -1,0 +1,47 @@
+{
+  "descripcion": "Calce del cruce de la calle Sur 7 (Puente Constitución en 1889, Puente Sucre metálico en 1911), issue #272. Completa y corrige la sección «puente-sucre» de docs/puentes-guaire-calce.json. «mosaico» = píxeles del mosaico DCN de 1936 (0,5 m/px).",
+  "metodo": {
+    "lectura": "Recorte ×12 con rejilla de 20 px de las teselas del plano de 1936 (public/plano/f/); recortes ×5 de public/plano/1889/grande.webp y public/plano/1911/grande.webp, ya calzados. Lectura a ojo: ±1 px en 1936, ±2 px en los demás.",
+    "manzanas": "public/plano/suelo-manzanas.png (1889) y suelo-manzanas-modernas.png (1911): distancia firmada al borde de la manzana, 2 m/px, release datos-2026-11-28-c5b8180.",
+    "relieve": "public/datos/relieve.bin"
+  },
+  "eje_1936": {
+    "medio_de_la_calzada": [[9718.0, 9340], [9703.4, 9460]],
+    "bordes_en_y_9340": [9710.5, 9725.5],
+    "bordes_en_y_9460": [9695.6, 9711.2],
+    "direccion": [-0.12078, 0.99268],
+    "ancho_de_calzada_m": 7.5,
+    "nota": "El primer calce da (9704, 9440) con dirección (-0,096, 0,995): a la altura de la cabeza norte queda 2 m al oeste de este."
+  },
+  "adoptado": {
+    "cabeza_norte": { "mosaico": [9713.5, 9377.3], "origen": "medio de los pedestales del norte de Razetti (1911), (9703, 9376), proyectado sobre el eje de 1936" },
+    "cabeza_sur": { "mosaico": [9699.0, 9496.4], "origen": "a 60 m de la norte sobre el eje: luz documentada del Puente Sucre (Silva Contreras, p. 34)" },
+    "centro": { "mosaico": [9706.3, 9436.9], "mundo_m": [369.0, 1298.9] },
+    "largo_m": { "sucre": 60, "constitucion": 60, "nota": "El Constitución va entre las mismas cabezas. El estudio de Miraflores le da 59,56 m, sin fuente localizada; el símbolo de Mestre mide 60,7 m." },
+    "cotas_m": { "cabeza_norte": 872.9, "cabeza_sur": 872.7, "pendiente": 0.003 },
+    "error_m": 7,
+    "rio_sobre_el_eje_y": [9422, 9445],
+    "rio_desde_el_centro_m": [-7.5, 4.1]
+  },
+  "descartado": {
+    "cabezas_de_mestre_1889": {
+      "mosaico": [[9720.5, 9338.5], [9699, 9458]],
+      "centro_a_m_del_adoptado": 19.4,
+      "motivo": "En 1889 el sitio tiene una manzana al este de la calle hasta y = 9370-9380 que Mestre no dibuja: el tablero entraría en ella de 1,9 a 2,8 m en sus 17 m del norte. Además el suelo pinta el río de 1936, 27 m al sur del de Mestre."
+    },
+    "pedestales_del_sur_de_razetti_1911": {
+      "mosaico": [9684, 9470],
+      "motivo": "Quedan a 48 m de los del norte; la luz documentada es de 60 m."
+    }
+  },
+  "manzana_vecina": {
+    "lote": "techo 4255 de public/datos/ciudad.pak, vive desde 1843",
+    "mosaico": [[9730, 9269], [9789, 9280], [9786, 9298], [9784, 9309], [9778, 9345], [9786, 9347], [9780, 9380], [9716, 9367]],
+    "borde_oeste_a_m_del_eje": [0.8, 1.7]
+  },
+  "distancia_a_la_manzana_mas_cercana_m": {
+    "nota": "Negativa = afuera.",
+    "1889": { "tablero_8m": -3.6, "estribos_9m": -2.6, "cauce_32m": -1.6, "margen_sin_arboles_51m": -0.9, "acceso_sur": "fuera de la imagen de 1889" },
+    "1911": { "tablero_8m": -5.0, "estribos_9m": -4.0, "cauce_32m": -3.2, "margen_sin_arboles_51m": -2.2, "acceso_sur": "a más de 16 m" }
+  }
+}
