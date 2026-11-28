@@ -1,5 +1,6 @@
 import { describe, test, expect } from 'vitest'
-import { crearLienzo } from '../../src/hitos/lienzo.js'
+import { crearLienzo, MAT } from '../../src/hitos/lienzo.js'
+import { temploDeNaves } from '../../src/hitos/templo-naves.js'
 import { iglesia } from '../../src/hitos/iglesias.js'
 import { HITOS, validarHitos, construirHitos } from '../../src/hitos.js'
 import { hitosConPlanta } from '../../src/hitos/plantas.js'
@@ -78,6 +79,25 @@ describe('iglesia paramétrica: fachada lisa, tres puertas y fachada más alta q
   })
 })
 
+describe('templo de naves con fachada de pantalla y tejado', () => {
+  test('ningún tejado asoma por delante de la pantalla', () => {
+    // Arrange
+    const medidas = { largo: 40, ancho: 24, altoLateral: 9, altoCentral: 14, cubierta: 'teja' }
+    const frenteDeLaTeja = (d) => {
+      let min = Infinity
+      for (let i = 0; i < d.posiciones.length / 3; i++) if (d.hitos[i * 4 + 2] === MAT.TEJA) min = Math.min(min, d.posiciones[i * 3])
+      return min
+    }
+
+    // Act
+    const [con, sin] = [true, false].map((pantalla) => dibujar((p) => temploDeNaves(p, { ...medidas, pantalla })))
+
+    // Assert
+    expect(frenteDeLaTeja(con)).toBeGreaterThan(0)
+    expect(frenteDeLaTeja(sin)).toBeLessThan(0) // sin pantalla, el alero vuela sobre la fachada como antes
+  })
+})
+
 describe('La Candelaria (#243)', () => {
   const datos = construirHitos(HITOS, coords)
   const h = HITOS.find((x) => x.id === 'candelaria')
@@ -132,7 +152,7 @@ describe('La Candelaria (#243)', () => {
     expect(h.partes.filter((p) => p.tipo !== 'torre').map((p) => [p.tipo, p.fachada ?? null, p.nace, p.muere])).toEqual([
       ['iglesia', 'lisa', 1, 3], ['iglesia', 'clasica', 3, 4], ['temploDeNaves', null, 4, 0],
     ])
-    const [de1889, de1911] = [h.partes[1], h.partes[2]]
+    const [, de1889, de1911] = h.partes.filter((p) => p.tipo !== 'torre')
     expect(de1889.altoFachada).toBeGreaterThan(de1889.alto + de1889.altoTecho) // «levantando los techos para que… concuerden con la fachada»
     expect(de1911.altoCentral).toBeGreaterThan(de1911.altoLateral)
     // la nave sube en 1911: los techos se levantaron después del terremoto de 1900
