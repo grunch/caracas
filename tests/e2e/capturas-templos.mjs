@@ -1,4 +1,4 @@
-// Capturas comparables de los templos (Santa Rosalía, San Juan y San José, #259; La Candelaria, #243):
+// Capturas comparables de los templos (Santa Rosalía, San Juan y San José, #259; La Candelaria, #243; Las Mercedes, #244):
 //   node tests/e2e/capturas-templos.mjs [url] [carpeta] [prefijo]
 // Misma cámara en las seis épocas, desde arriba y de costado (hacia la fachada). TEMPLO=san-jose saca solo ese;
 // TEMPLO_EPOCA=1911, solo esa época; TEMPLO_VISTA=arriba, solo esa vista; TEMPLO_MODO=tinta, sin color;
@@ -16,6 +16,7 @@ const TEMPLOS = {
   'santa-rosalia': { x: 74, z: 853, yaw: -Math.PI / 2 + 0.45 },
   'san-juan': { x: -1020, z: 762, yaw: Math.PI - 0.45 },
   'san-jose': { x: 831, z: -758, yaw: 0.45 },
+  'las-mercedes': { x: 51, z: -498, yaw: 0.45 }, // docs/la-merced-georreferencia.json; mira al sur
   candelaria: { x: 1133, z: 79, yaw: -Math.PI / 2 + 0.45 }, // docs/candelaria-georreferencia.json; mira al oeste, a su plaza
 }
 const vistasDe = ({ x, z, yaw }) => ({

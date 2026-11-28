@@ -41,13 +41,16 @@ con los datos completos y siguen sin pasar en la rama: **no se tocaron**.
 
 Lo que sí se tocó, y por qué:
 
-- **Topes unitarios de triángulos de los hitos** (`tests/unit/hitos.test.js`, `hitos-palacios.test.js`): de
-  645.000 a 650.000 antes de 1946 y de 1.125.000 a 1.130.000 en total. Con La Candelaria en `main` había 644.174 y
-  1.123.547; San Mauricio (1.322) y la Santa Capilla por etapas (de 756 a 1.846) suman 2.412: 646.586 y
-  1.125.959. El margen deja lugar a Las Mercedes (#316) y San Pablo (#317), que suman unos 2.500 más.
-- **Tope de workers del build** (`tools/rendimiento/presupuesto.json`): de 174 a 177 kB. `npx vite build` y
-  `node tools/rendimiento/presupuesto-build.mjs`: `main` 306,3 kB de entrada y 173,6 kB de workers; la rama, 310,2
-  y 176,3 (los textos de fuente y de dudas de los dos hitos viajan en el módulo de datos que carga el worker; se
-  abreviaron una vez, de 177,1).
+- **Topes unitarios de triángulos de los hitos** (`tests/unit/hitos.test.js`, `hitos-palacios.test.js`): 650.000
+  antes de 1946 y 1.130.000 en total (en `main`, con Las Mercedes, 647.000 y 1.127.000). San Mauricio (1.322) y la
+  Santa Capilla por etapas (de 756 a 1.846) suman 2.412: con La Candelaria eran 646.586 y 1.125.959; **después de
+  fusionar Las Mercedes (#316), 647.937 y 1.127.310**. El margen deja lugar a San Pablo (#317), que suma unos 1.200.
+- **Tope de workers del build** (`tools/rendimiento/presupuesto.json`): 178 kB (en `main`, 176). `npx vite build` y
+  `node tools/rendimiento/presupuesto-build.mjs`: antes de Las Mercedes, `main` 306,3 kB de entrada y 173,6 kB de
+  workers y la rama 310,2 y 176,3 (los textos de fuente y de dudas de los dos hitos viajan en el módulo de datos
+  que carga el worker; se abreviaron una vez, de 177,1). **Con Las Mercedes fusionada, la rama mide 311,2 y 177,0.**
+
+La medición de carga y de cuadro de la tabla es anterior a la fusión de Las Mercedes (#316) y **no se repitió**:
+#316 suma 1.351 triángulos a los dos lados por igual.
 
 **No se midió**: el sitio construido, una máquina en reposo ni un teléfono.

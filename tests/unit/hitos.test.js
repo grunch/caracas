@@ -109,8 +109,10 @@ describe('construirHitos', () => {
     // de 625.000 a 630.000 (0,8 %).
     // Dolores (4.698) y Restaurador (11.628, por sus barandas y faroles), solo en 1911 (#272): +16.326, medido 641.619;
     // el tope sube de 630.000 a 645.000.
-    // San Mauricio (1.322) y la Santa Capilla por etapas (de 756 a 1.846), #253: +2.412; con La Candelaria (#243, 2.555) ya en
-    // main, medido 646.586 y 1.125.959. Los topes suben de 645.000 a 650.000 y de 1.125.000 a 1.130.000 (0,8 % y 0,4 %).
+    // La Candelaria (2.555, #243) cabía en los topes: 644.174 y 1.123.547. Las Mercedes (1.351, #244): 645.525 y 1.124.898;
+    // los topes suben de 645.000 a 647.000 y de 1.125.000 a 1.127.000.
+    // San Mauricio (1.322) y la Santa Capilla por etapas (de 756 a 1.846), #253: +2.412, medido 647.937 y 1.127.310;
+    // los topes suben a 650.000 y 1.130.000 (0,5 % y 0,3 %).
     expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(650_000)
     // Total medido con terrenos siguiendo el DEM: 1.080.573 entonces; con el Puente de Hierro, 1.091.159; con el cruce de Sur 7, 1.099.919;
     // con los tres templos de #259, 1.104.666; con Dolores y Restaurador, 1.120.992 (tope de 1.110.000 a 1.125.000).

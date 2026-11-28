@@ -168,9 +168,11 @@ pisar las reservas. `npm run datos:al-dia` avisa por `src/hitos/`.
 
 ## Rendimiento
 
-2.412 triángulos más (San Mauricio, 1.322; la Santa Capilla pasa de 756 a 1.846): 646.586 antes de 1946 y
-1.125.959 en total, con La Candelaria ya en `main`. Los topes unitarios suben de 645.000 a 650.000 y de 1.125.000
-a 1.130.000. La medición de carga y de cuadro, en [`mediciones/santa-capilla-253`](mediciones/santa-capilla-253/README.md).
+2.412 triángulos más (San Mauricio, 1.322; la Santa Capilla pasa de 756 a 1.846): 647.937 antes de 1946 y
+1.127.310 en total, con La Candelaria y Las Mercedes ya en `main`. Los topes unitarios quedan en 650.000 y
+1.130.000 (en `main`, 647.000 y 1.127.000) y el de workers del build, en 178 kB (mide 177,0; en `main`, tope de
+176). La medición de carga y de cuadro, hecha con la máquina muy cargada, en
+[`mediciones/santa-capilla-253`](mediciones/santa-capilla-253/README.md).
 
 ## Capturas
 
