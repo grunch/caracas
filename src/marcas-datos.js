@@ -151,7 +151,7 @@ export const MARCAS = Object.freeze([
     fuente: `${P89} (43 «Hospital Vargas»); ${P36} («Hospital Vargas»); Roger Escalona, Sociedad Venezolana de Historia de la Medicina (2006): https://revista.svhm.org.ve/ediciones/2006/1-2/art-3`,
     dudas: 'La planta dibujada en 1889 no demuestra que todas sus alas estuvieran terminadas. Hito arquitectónico pendiente; no se reproduce un estado exacto de avance de obra.' },
   { id: 'hijos-de-dios', nombre: 'Cementerio de los Hijos de Dios', hito: 'hijos-de-dios', alto: 5.5, nace: 3, nivel: 3, nota: 'Recinto clausurado, todavía en pie.', fuente: `${P36} («Cementerio de los Hijos de Dios»); ${P89} (cementerio a, «Concepción»); equivalencia de nombres: https://biblat.unam.mx/hevila/BoletindelaAcademiaNacionaldelaHistoriaCaracas/2009/vol92/no365/5.pdf; cronología: https://fundaayc.com/2018/02/09/1951-desaparece-el-cementerio-de-los-hijos-de-dios/`,
-    dudas: 'Abierto en 1856, cerrado al uso en el siglo XIX y demolido después de 1946. Cerrar el cementerio no hizo desaparecer sus muros y nichos. Hito pendiente de integración; se conserva el ancla cartográfica existente.' },
+    dudas: 'Abierto en 1856, cerrado al uso en el siglo XIX y demolido después de 1946. Cerrar el cementerio no hizo desaparecer sus muros y nichos. El modelo conserva la misma geometría de 1889 a 1946: ninguna fuente fecha su deterioro.' },
   { id: 'san-jose', hito: 'san-jose', nombre: 'San José', nace: 4, nivel: 3, alto: 18, fuente: `${P36} («Iglesia San José»); ${P11} (dibuja el templo, con planta en cruz); IPC, Lo construido: https://albaciudad.org/wp-content/uploads/2017/01/Libertador-Construido2.pdf (pp. 125–126 y 148)`,
     dudas: 'La parroquia es de 1889 y el IPC da el templo por construido ese año, pero el plano de Mestre de 1889 deja la manzana vacía: va desde 1911, con el primer plano que lo dibuja.' },
 
@@ -169,10 +169,10 @@ export const MARCAS = Object.freeze([
   { id: 'palo-grande', nombre: 'Estación Palo Grande', x: 4750, y: 8650, nace: 4, nivel: 2, alto: 7, nota: 'El Gran Ferrocarril de Venezuela.',
     fuente: `${P11} («Estación Palo Grande», «G.F.V.»); ${P36} («Estación Palo Grande»)` },
   { id: 'el-paraiso', nombre: 'El Paraíso', x: 6500, y: 10100, nace: 4, nivel: 1, fuente: `${P11} («El Paraíso»); ${P36} («El Paraíso»)` },
-  { id: 'cementerio-sur', nombre: 'Cementerio General del Sur', x: 7100, y: 12500, nace: 3, nivel: 2,
+  { id: 'cementerio-sur', hito: 'cementerio-sur', nombre: 'Cementerio General del Sur', nace: 3, nivel: 2,
     nota: 'Abierto en 1876, al sur del Guaire.',
-    fuente: `${P36} («Cementerio General del Sur»); Landaeta Rosales, historia de 1875–1904, reproducida por la Cámara de Caracas: https://camaradecaracas.com/la-camara-caracas-y-sus-historias/ocurrio-aqui/origenes-del-cementero-general-del-sur-en-caracas-1875-1904/`,
-    dudas: 'El punto identifica el recinto leído en 1936; no delimita su extensión en 1889 ni reproduce sus tumbas. Las fuentes discrepan en el día de apertura; se usa solo el año 1876.' },
+    fuente: `${P36} («Cementerio General del Sur»); plano DCN de fotografías de 1946 («Cementerio General del Sur»): https://archive.org/details/WCWdb_18051; Landaeta Rosales, historia de 1875–1904, reproducida por la Cámara de Caracas: https://camaradecaracas.com/la-camara-caracas-y-sus-historias/ocurrio-aqui/origenes-del-cementero-general-del-sur-en-caracas-1875-1904/`,
+    dudas: 'El recinto de 1936 es un calco aproximado del plano; el de 1889 y 1911 es un esquema, porque los planos de esos años no cubren el sitio. El plano de 1946 confirma el núcleo y dibuja campos nuevos al norte que no se representan. Las fuentes discrepan en el día de apertura; se usa solo el año 1876.' },
   { id: 'hipodromo', nombres: [[4, 'Hipódromo del Paraíso'], [5, 'Hipódromo Nacional']], x: 5400, y: 9950, nace: 4, nivel: 2,
     fuente: `${P11} («Hipódromo del Paraíso»); ${P36} («Hipódromo Nacional»)` },
 
