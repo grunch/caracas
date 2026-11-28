@@ -2,7 +2,7 @@
  "nota": "Lectura del corredor de la futura avenida Bolívar en el plano DCN (fotografías aéreas de 1946, edición catalogada [1950?]) y ficha de evidencias por etapa (#276). Polígonos leídos a ojo sobre original.tif con una cuadrícula de 20 px (±5 px, unos 3 m) y llevados al mosaico de 1936 con tools/geo/gcp/1946-cuadricula.json (RMS 2,07 m). No son linderos catastrales. La hoja no trae leyenda de signos: el significado del trazo discontinuo no está declarado.",
  "plano": "1950-archiveorg-plano-de-caracas-dcn",
  "certezas": {
-  "alta": "documento de la época o fotografía fechada",
+  "alta": "documento de la época o fotografía fechada (la fuente lleva deEpoca)",
   "media": "una sola fuente secundaria, o varias que se copian",
   "baja": "paráfrasis de segunda mano o dato que otra fuente contradice",
   "sin-acreditar": "ninguna fuente consultada lo fecha"
@@ -423,7 +423,7 @@
    "tipo": "plan",
    "hecho": "El Plan Monumental (Plan Rotival) propone una «avenida Central» de 30 m entre El Calvario y Los Caobos, sobre las manzanas entre la Este 6 y la Este 8.",
    "fechaHecho": "1939-07",
-   "certeza": "alta",
+   "certeza": "media",
    "fuentes": [
     {
      "url": "https://bibliofep.fundacionempresaspolar.org/dhv/entradas/r/rotival-maurice/",
@@ -544,15 +544,18 @@
    "fuentes": [
     {
      "url": "https://commons.wikimedia.org/wiki/File:Doorbraak_ten_behoeve_van_een_verkeersweg_in_Venezuela,_Bestanddeelnr_252-8459.jpg",
-     "documento": "Willem van de Poll, Nationaal Archief, 1948 (CC0)"
+     "documento": "Willem van de Poll, Nationaal Archief, 1948 (CC0)",
+     "deEpoca": true
     },
     {
      "url": "https://commons.wikimedia.org/wiki/File:Doorbraak_ten_behoeve_van_een_verkeersweg_in_Venezuela,_Bestanddeelnr_252-8458.jpg",
-     "documento": "Willem van de Poll, Nationaal Archief, 1948 (CC0)"
+     "documento": "Willem van de Poll, Nationaal Archief, 1948 (CC0)",
+     "deEpoca": true
     },
     {
      "url": "https://commons.wikimedia.org/wiki/File:Stadsgezicht_met_Hotel_Majestica_in_Caracas_in_Venezuela,_Bestanddeelnr_252-8437.jpg",
-     "documento": "Willem van de Poll, Nationaal Archief, 1948 (CC0)"
+     "documento": "Willem van de Poll, Nationaal Archief, 1948 (CC0)",
+     "deEpoca": true
     }
    ],
    "contradicciones": "La fotografía prueba que en 1948 estaba despejada, no cuándo se demolió. El catálogo da el año, sin mes."
@@ -584,7 +587,7 @@
    "tipo": "obra",
    "hecho": "El 31 de diciembre de 1949 se abre el primer tramo, de unos 1.600 m y 33 m de ancho, de El Silencio al Parque Carabobo. Cortó la cinta Carlos Delgado Chalbaud, presidente de la Junta Militar.",
    "fechaHecho": "1949-12-31",
-   "certeza": "alta",
+   "certeza": "media",
    "fuentes": [
     {
      "url": "https://camaradecaracas.com/la-camara-caracas-y-sus-historias/cronicas-de-la-ciudad/inauguracion-de-la-avenida-bolivar/",

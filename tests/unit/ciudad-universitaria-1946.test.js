@@ -13,7 +13,7 @@ import { puntoEnPoligono } from '../../src/hitos/suprimir.js'
 const UCV = JSON.parse(readFileSync(new URL('../../tools/geo/referencias/1946-ciudad-universitaria.json', import.meta.url), 'utf8'))
 const [EPOCA_1936, EPOCA_1946] = [5, 6]
 const TIFF = { ancho: 14954, alto: 9952 }
-const coords = crearCoords({ ancho: 18600, alto: 14800, metro: 0.5, plaza: [8968.2, 6839] })
+const coords = crearCoords(JSON.parse(readFileSync(new URL('../../public/datos/ciudad.json', import.meta.url), 'utf8')).plano)
 const marcas = normalizarMarcas(MARCAS, { hitos: HITOS, coords })
 const marca = (id) => marcas.find((m) => m.id === id)
 const textoDe = (id, epoca) => contenidoDeFicha({ marca: marca(id), ficha: FICHAS[id], epoca }).parrafos.filter((p) => p.rige).map((p) => p.texto).join(' ')

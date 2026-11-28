@@ -13,7 +13,7 @@ const BOLIVAR = leer('tools/geo/referencias/1946-avenida-bolivar.json')
 const RESERVAS = leer('tools/geo/referencias/1946-reservas.json')
 const EPOCA_1946 = 6
 const AÑO_DEL_MAPA = 1946
-const coords = crearCoords({ ancho: 18600, alto: 14800, metro: 0.5, plaza: [8968.2, 6839] })
+const coords = crearCoords(leer('public/datos/ciudad.json').plano)
 const marcas = normalizarMarcas(MARCAS, { hitos: HITOS, coords })
 const añoDe = (fecha) => Math.min(...fecha.match(/\d{4}/g).map(Number))
 const centro = (poligono) => [0, 1].map((k) => poligono.reduce((s, v) => s + v[k], 0) / poligono.length)
@@ -30,6 +30,13 @@ describe('ficha de evidencias de la avenida Bolívar', () => {
     // Assert
     expect(BOLIVAR.etapas.length).toBeGreaterThanOrEqual(8)
     expect(mal.map((e) => e.id)).toEqual([])
+  })
+
+  it('la certeza alta exige una fuente de la época', () => {
+    const altas = BOLIVAR.etapas.filter((e) => e.certeza === 'alta')
+
+    expect(altas.length).toBeGreaterThan(0)
+    expect(altas.filter((e) => !e.fuentes.some((f) => f.deEpoca)).map((e) => e.id)).toEqual([])
   })
 
   it('solo queda sin fuente lo que se declara sin acreditar', () => {
@@ -83,7 +90,7 @@ describe('lectura del corredor en el plano de 1946', () => {
     expect(puntoEnPoligono(centro(franja.poligono_mosaico), BOLIVAR.corredor.poligono_mosaico)).toBe(true)
   })
 
-  it('el paquete conserva en 1946 los techos que el corredor tenía en 1936', () => {
+  it('la ficha anota los mismos techos en el corredor para 1936 y 1946 (el paquete lo mide el E2E)', () => {
     expect(BOLIVAR.corredor.techos['1946']).toBe(BOLIVAR.corredor.techos['1936'])
     expect(BOLIVAR.corredor.techos['1936']).toBeGreaterThan(200)
   })
@@ -108,13 +115,12 @@ describe('el mapa de 1946 no adelanta la avenida', () => {
     }
   })
 
-  it('el Hotel Majestic cae en la mitad sur de la manzana que el plano parte, no en la franja', () => {
+  it('la marca del Hotel Majestic, que es aproximada, no cae en nada de lo que el plano deja en blanco', () => {
     // Arrange
     const majestic = MARCAS.find((m) => m.id === 'hotel-majestic')
-    const tramo = (id) => BOLIVAR.tramos.find((t) => t.id === id).poligono_mosaico
+    const enBlanco = BOLIVAR.tramos.filter((t) => t.trazo === 'en blanco')
 
     // Assert
-    expect(puntoEnPoligono([majestic.x, majestic.y], tramo('resto-sur'))).toBe(true)
-    expect(puntoEnPoligono([majestic.x, majestic.y], tramo('franja-entre-bloques'))).toBe(false)
+    expect(enBlanco.filter((t) => puntoEnPoligono([majestic.x, majestic.y], t.poligono_mosaico)).map((t) => t.id)).toEqual([])
   })
 })
