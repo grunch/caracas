@@ -29,7 +29,7 @@ export const FICHAS = Object.freeze({
   },
   'circo-metropolitano': {
     textos: [[4, 'Abrió el 2 de febrero de 1896, entre Miranda y Puerto Escondido. El Circo Metropolitano y el Nuevo Circo fueron edificios diferentes y coexistieron. Su estructura permanecía en la época de 1936 y ya había desaparecido en 1946.']],
-    dudas: 'Las referencias difieren entre 1942 y 1945 para la demolición. No se elige un año exacto sin resolver la discrepancia; ambas fechas justifican su ausencia en 1946. Modelo de Miraflores calzado al ruedo del plano de 1936. Alturas, pigmentos y graderío interpretativos; no es un levantamiento.',
+    dudas: 'Las referencias difieren entre 1942 y 1945 para la demolición. La mejor sustentada es 1945: Marín (2011) registra la última corrida el 19-04-1945 y la atribuye a Salas (1978), y la cronología de FAC fecha ese año el cierre; la de 1942 viene de una memoria posterior. Las dos están sin cotejar con la prensa de la época. Ambas justifican su ausencia en 1946, y el plano de 1946 dibuja vacío el solar. Modelo de Miraflores calzado al ruedo del plano de 1936. Alturas, pigmentos y graderío interpretativos; no es un levantamiento.',
   },
   'hijos-de-dios': {
     textos: [[3, 'Abierto en 1856 en Sabana del Blanco. En esta época está cerrado al uso funerario, pero sus muros, nichos y sepulturas siguen formando parte de la ciudad. El plano de 1889 lo identifica como cementerio de la Concepción.'], [5, 'El cementerio clausurado conserva estructuras documentadas en fotografías de los años treinta. El cierre no equivale a su demolición, que ocurrió después de 1946.']],
@@ -257,8 +257,9 @@ export const FICHAS = Object.freeze({
     dudas: 'Va solo el volumen de la nave que dibuja el plano de 1936: no se halló descripción ni vista fechada de la fachada, la torre o la cubierta, y ninguna altura está medida. La leyenda de 1843 nombra «Capuchinos» (S) sobre este solar, pero el templo estaba en obra: aparece desde 1889.',
   },
   'nuevo-circo': {
-    textos: [[5, 'Inaugurado el 26 de enero de 1919, el Nuevo Circo aparece como plaza de toros en el plano de 1936. Su ruedo permanece abierto: la cubierta total proyectada no llegó a ejecutarse.']],
-    dudas: 'Modelo interpretativo contrastado con el plano de 1936 y fotografías históricas; alturas, pigmentos y reformas interiores sin datación precisa. Se conserva en 1946 sin afirmar un levantamiento independiente. Fuente: https://camaradecaracas.com/la-camara-caracas-y-sus-historias/cronicas-de-la-ciudad/el-nuevo-circo-de-caracas/',
+    textos: [[5, 'Inaugurado el 26 de enero de 1919, el Nuevo Circo aparece como plaza de toros en el plano de 1936. Su ruedo permanece abierto: la cubierta total proyectada no llegó a ejecutarse.'],
+      [6, 'El plano DCN de fotografías de 1946 dibuja el Nuevo Circo en el mismo solar y con la misma portada al noroeste que el de 1936. El modelo es el mismo: ninguna fuente fecha las reformas de sus tendidos.']],
+    dudas: 'Modelo interpretativo contrastado con los planos de 1936 y de 1946 y con una fotografía histórica de la portada; alturas, pigmentos y reformas interiores sin datación precisa. La Cámara de Caracas da la inauguración el 26 de enero de 1919; la cronología de FAC, el 25. Fuente: https://camaradecaracas.com/la-camara-caracas-y-sus-historias/cronicas-de-la-ciudad/el-nuevo-circo-de-caracas/',
   },
   'parque-carabobo': {
     textos: [
