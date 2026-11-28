@@ -1,6 +1,7 @@
 # Calce de los cruces Dolores, Restaurador, 19 de Diciembre y Ayacucho
 
-Avance de [#272](https://github.com/grunch/caracas/issues/272), previo a instalar los modelos. Sigue el método y el
+Avance de [#272](https://github.com/grunch/caracas/issues/272), previo a instalar los modelos (los de Dolores y
+Restaurador ya están: [`puentes-cruces-integracion.md`](puentes-cruces-integracion.md)). Sigue el método y el
 formato de [`puentes-guaire-calce.md`](puentes-guaire-calce.md) (Puente de Hierro y Constitución/Sucre, PR #292), que
 ya trae medidas las cabezas del cruce de la calle Sur 7: no se repiten acá. Los números completos están en el
 mismo archivo que los de esos puentes, [`puentes-guaire-calce.json`](puentes-guaire-calce.json); la cronología y las marcas, en
@@ -57,15 +58,16 @@ vector unitario en píxeles del mosaico (x al este, y al sur).
 
 | Cruce | Centro | Eje | Cabezas | Cauce dibujado en 1936 | Cotas del relieve | Error |
 |---|---|---|---|---|---|---|
-| Dolores | (7908, 10122) | (−0,161, 0,987) | Las del símbolo de 1936: norte (7915, 10079), sur (7901, 10165) | y = 10128–10160: 16 m | 875,9 m y 876,6 m | 1 m de través; 8 m a lo largo |
+| Dolores | (7908, 10122) | (−0,199, 0,980) | Derivadas: norte (7920,0, 10063,2), sur (7896,0, 10180,8); 60 m centrados en el símbolo de 1936 | y = 10128–10160: 16 m | 876,0 m y 877,1 m | 1 m de través; 8 m a lo largo |
 | Restaurador | (8500,5, 9879,5) | (−0,203, 0,979) | Derivadas: norte (8520,9, 9781,1), sur (8480,1, 9977,9) | y = 9858–9893: 18 m | 873,3 m y 875,5 m | 3 m |
 | 19 de Diciembre | (3284, 10727) | (0,358, 0,934) | Sin medir | y = 10712–10742: 16 m | 884,2 m en el centro | 2 m, solo del eje |
 | Ayacucho | (6726, 9180) | (−0,099, 0,995) | Sin medir | y = 9155–9205: 25 m | 879,4 m en el centro | 3 m, solo del eje |
 
 - **Dolores.** El símbolo de 1936 mide 43,6 m y la luz documentada es de 60 m. Desde 1916 había dos pilas de concreto
-  a 10 m de cada extremo, con 40 m entre ellas: el plano no permite decidir qué representa el símbolo. Con los 60 m
-  centrados en él, las cabezas quedarían 8,2 m más afuera: norte (7917,7, 10062,8), sur (7898,3, 10181,2). Hay que
-  decidirlo antes de instalar el modelo.
+  a 10 m de cada extremo, con 40 m entre ellas: el plano no permite decidir qué representa el símbolo. Resuelto al
+  instalar el modelo ([`puentes-cruces-integracion.md`](puentes-cruces-integracion.md)): los 60 m documentados
+  van centrados en el símbolo, porque su centro es el del puente en las dos lecturas. Las cabezas quedan 8,2 m más
+  afuera que las aletas. El eje se releyó sobre los bordes del símbolo.
 - **Restaurador.** Ningún plano marca sus cabezas con un calce fiable. Se derivan del centro de la plazoleta de 1936
   (la Memoria del MOP de 1905 la sitúa «en el centro» del puente), del eje de la calzada y del largo documentado,
   100,50 m. La norte cae donde termina la manzana edificada del plano de 1936. Vale para 1911 y 1936; en 1946 el
@@ -87,7 +89,7 @@ vector unitario en píxeles del mosaico (x al este, y al sur).
 | Cabezas del Ayacucho, en todas las épocas | Los planos de 1936 y 1946 dibujan la calzada continua; en 1911 no existía. Sin largo documentado no se pueden derivar |
 | Cabezas del 19 de Diciembre | Calzada continua en 1936 y 1946; el plano de 1911 las marca, pero sin puntos de control a menos de 500 m |
 | Cabezas de Dolores y Restaurador en 1946 | Calzada continua; además no consta qué estructura había |
-| Largo real de Dolores sobre el plano | El símbolo de 1936 (43,6 m) no coincide con la luz documentada (60 m) |
+| Largo real de Dolores sobre el plano | El símbolo de 1936 (43,6 m) no coincide con la luz documentada (60 m): se adoptó la documentada, con hasta 8 m de error a lo largo del eje |
 | Lecho del río y rasante | El relieve no trae el cauce; ningún plano da la cota del tablero |
 | Píxeles del escaneo original de 1936 | El mosaico es la grilla del repo; no se deshizo la costura de las dos hojas |
 

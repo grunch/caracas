@@ -88,12 +88,25 @@ const cortes = (desde, hasta, extra = []) => {
 }
 
 /**
+ * La grilla del lecho corrida al sesgo: entre los dos bordes de la franja de agua, cada punto se mueve `sesgo` metros
+ * a lo largo por metro a lo ancho; de ahí a cada borde del vano el corrimiento se apaga, y el borde queda quieto.
+ */
+function correrAlSesgo([x0, x1], ancho, [a0, a1], sesgo) {
+  const maximo = (Math.abs(sesgo) * ancho) / 2
+  if (!(a0 - x0 > maximo && x1 - a1 > maximo)) throw new Error('puente: con ese sesgo la franja de agua se sale del vano')
+  const peso = (x) => (x < a0 ? (x - x0) / (a0 - x0) : x > a1 ? (x1 - x) / (x1 - a1) : 1)
+  return (x, z) => x + sesgo * z * peso(x)
+}
+
+/**
  * El suelo propio del puente en [x0, x1] × ancho: una grilla que baja lo que dice `lecho` bajo el terreno de cada
  * vértice (todos van con el suelo). Devuelve { orilla, agua }: `agua` = [desde, hasta] es la franja del río a lo
- * largo del puente, que cruza el lecho de borde a borde; sin ella, `agua` es null.
+ * largo del puente, que cruza el lecho de borde a borde; sin ella, `agua` es null. `sesgo`: si el río cruza en
+ * diagonal, cuántos metros se corre la franja a lo largo por cada metro a lo ancho; los bordes del vano no se mueven.
  */
-export function sueloDelPuente(lecho, [x0, x1], ancho, agua = null) {
+export function sueloDelPuente(lecho, [x0, x1], ancho, agua = null, sesgo = 0) {
   const [xs, zs] = [cortes(x0, x1, agua ?? []), cortes(-ancho / 2, ancho / 2)]
+  const corrido = agua !== null && sesgo !== 0 ? correrAlSesgo([x0, x1], ancho, agua, sesgo) : (x) => x
   const capas = { orilla: [], agua: [] }
   const mojado = (x) => agua !== null && x > agua[0] && x < agua[1]
   for (let i = 0; i + 1 < xs.length; i++) {
@@ -106,7 +119,8 @@ export function sueloDelPuente(lecho, [x0, x1], ancho, agua = null) {
   const geometria = (puntos) => {
     if (!puntos.length) return null
     const [posicion, normal] = [[], []]
-    for (const [x, z] of puntos) {
+    for (const [x0Grilla, z] of puntos) {
+      const x = corrido(x0Grilla, z)
       posicion.push(x, -lecho(x, z) - HUNDIDO_LECHO_M, z)
       // la normal del lecho, de su pendiente: así el talud se sombrea liso y no por facetas
       const dx = (lecho(x + PASO_NORMAL_M, z) - lecho(x - PASO_NORMAL_M, z)) / (2 * PASO_NORMAL_M)
@@ -117,7 +131,7 @@ export function sueloDelPuente(lecho, [x0, x1], ancho, agua = null) {
     const g = new BufferGeometry()
     g.setAttribute('position', new Float32BufferAttribute(posicion, 3))
     g.setAttribute('normal', new Float32BufferAttribute(normal, 3))
-    g.setAttribute('uv', new Float32BufferAttribute(puntos.flat(), 2)) // en metros: el punteado del pasto no se estira
+    g.setAttribute('uv', new Float32BufferAttribute(puntos.flatMap(([x, z]) => [corrido(x, z), z]), 2)) // en metros: el punteado del pasto no se estira
     g.setAttribute('suelo', new Float32BufferAttribute(new Float32Array(puntos.length).fill(1), 1))
     return g
   }
@@ -129,11 +143,12 @@ export function sueloDelPuente(lecho, [x0, x1], ancho, agua = null) {
  * alzado, no dibuja nada: el cruce sigue en la marca); `largo`, la distancia medida entre cabezas; `vano` y
  * `anchoCauce`, el lecho abierto bajo el tablero (sin `vano`, el puente va a ras del terreno), con `taludAncho`
  * si las orillas de los lados tienen que ser más cortas que lo usual; `agua`, la franja
- * del río dentro del lecho; `aRas` y `anchoRas`, un tramo donde el tablero va a ras, sobre un terraplén propio
+ * del río dentro del lecho, y `sesgoAgua` si cruza en diagonal (metros a lo largo por metro a lo ancho); `aRas` y
+ * `anchoRas`, un tramo donde el tablero va a ras, sobre un terraplén propio
  * (ahí el suelo de la ciudad se abre: podría tapar el tablero); `capa`, si la parte dibuja solo la estructura o solo el
  * cauce (CAPA; por omisión, todo).
  */
-export function puente(p, { id, anio, largo = null, vano = null, anchoCauce = 0, taludAncho, agua = null, aRas = null, anchoRas = 0, capa = null }) {
+export function puente(p, { id, anio, largo = null, vano = null, anchoCauce = 0, taludAncho, agua = null, sesgoAgua = 0, aRas = null, anchoRas = 0, capa = null }) {
   if (capa && !Object.values(CAPA).includes(capa)) throw new Error(`puente ${id}: capa desconocida "${capa}"`)
   const { edificio, apoyos, etapa, metadatos } = crearPuente({ id, anio, nivelDetalle: 'ciudad', largo })
   try {
@@ -156,7 +171,7 @@ export function puente(p, { id, anio, largo = null, vano = null, anchoCauce = 0,
     }
     if (!dibuja(capa, CAPA.CAUCE)) return
     if (vano) {
-      const suelo = sueloDelPuente(lecho, vano, anchoCauce, agua)
+      const suelo = sueloDelPuente(lecho, vano, anchoCauce, agua, sesgoAgua)
       if (suelo.orilla) r.geo(suelo.orilla, { color: SUELO_VERDE, mat: MAT.JARDIN }) // un lecho que es todo agua no tiene orilla
       if (suelo.agua) r.geo(suelo.agua, { color: AGUA, mat: MAT.LISO })
     }

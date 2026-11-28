@@ -7,6 +7,7 @@
 import { rectanguloPx } from './marco.js'
 import { marcoDeCabezas } from '../rasante.js'
 import { puenteSucre } from './puentes-sur7.js'
+import { puentesDoloresRestaurador } from './puentes-dolores-restaurador.js'
 
 const SILVA = 'https://www.academia.edu/8853323/tradici%C3%B3n_acad%C3%A9mica_y_la_imagen_del_dise%C3%B1o_estructural'
 const FAC = 'https://fundaayc.com/2023/10/15/sabia-usted-107/'
@@ -88,5 +89,8 @@ export const puenteHierro = Object.freeze({
   ]),
 })
 
-/** Los instalados, de oeste a este: el de Hierro (calle Sur 5) y el cruce de la calle Sur 7 (./puentes-sur7.js). */
-export const puentesGuaire = Object.freeze([puenteHierro, puenteSucre])
+/**
+ * Los instalados: el de Hierro (calle Sur 5), el cruce de la calle Sur 7 (./puentes-sur7.js) y, río arriba, Dolores
+ * y Restaurador (./puentes-dolores-restaurador.js).
+ */
+export const puentesGuaire = Object.freeze([puenteHierro, puenteSucre, ...puentesDoloresRestaurador])

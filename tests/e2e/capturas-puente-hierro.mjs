@@ -1,8 +1,10 @@
 // Capturas comparables del Puente de Hierro: node tests/e2e/capturas-puente-hierro.mjs [url] [carpeta] [prefijo]
 // Misma cámara en 1889, 1911, 1936 y 1946: desde arriba, baja de costado (desde el este) y desde el cauce (oeste).
-// PUENTE_CAPTURA=1936 saca solo esa época; PUENTE_VISTA=arriba,costado, solo esas vistas; PUENTE_MODO=tinta, sin color.
+// PUENTE_CAPTURA=1936 (o 1911,1936) saca solo esas épocas; PUENTE_VISTA=arriba,costado, solo esas vistas; PUENTE_MODO=tinta, sin color.
 // Otro puente: PUENTE_CRUCE=x,z (el centro del tablero en metros del mundo) y su carpeta. El cruce de la calle Sur 7
 // (Constitución y Sucre): PUENTE_CRUCE=369,1299 PUENTE_VISTA=arriba,costado node tests/e2e/capturas-puente-hierro.mjs <url> docs/capturas/puente-sucre
+// Dolores: PUENTE_CRUCE=-530.1,1641.5; Restaurador: PUENTE_CRUCE=-233.85,1520.25 (docs/puentes-cruces-integracion.md).
+// PUENTE_LEJOS=1.6 aleja la vista de costado esa cantidad de veces: un puente de 100 m no cabe a 85 m.
 import { chromium } from '@playwright/test'
 import { mkdir } from 'node:fs/promises'
 
@@ -17,9 +19,11 @@ const enTinta = process.env.PUENTE_MODO === 'tinta'
 const campos = (process.env.PUENTE_CRUCE ?? '235,1301').split(',').map(c => c.trim())
 if (campos.length !== 2 || campos.some(c => c === '' || !Number.isFinite(Number(c)))) throw new Error('PUENTE_CRUCE debe ser «x,z» en metros del mundo')
 const CRUCE = { x: Number(campos[0]), z: Number(campos[1]) }
+const lejos = Number(process.env.PUENTE_LEJOS ?? 1)
+if (!(lejos > 0)) throw new Error('PUENTE_LEJOS debe ser un número mayor que cero')
 const VISTAS = {
   arriba: { ...CRUCE, dist: 190, yaw: 0, pitch: 1.05 },
-  costado: { ...CRUCE, dist: 85, yaw: Math.PI / 2, pitch: 0.3 },
+  costado: { ...CRUCE, dist: 85 * lejos, yaw: Math.PI / 2, pitch: 0.3 },
   cauce: { ...CRUCE, dist: 60, yaw: -Math.PI / 2 + 0.5, pitch: 0.14 },
 }
 const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] })
@@ -37,7 +41,7 @@ await page.evaluate((tinta) => {
 }, enTinta)
 await page.waitForFunction(tinta => window.lab.ciudad.U.uColor.value === (tinta ? 0 : 1), enTinta, { timeout: 60000 })
 await page.waitForTimeout(4000)
-for (const [epoca, año] of años.filter(([, año]) => !solo || solo === año)) {
+for (const [epoca, año] of años.filter(([, año]) => !solo || solo.split(',').includes(año))) {
   await page.evaluate(e => window.lab.lineaDeTiempo.elegir(e), epoca)
   await page.waitForFunction(e => window.lab.ciudad.U.uEpocaA.value === e && window.lab.ciudad.U.uOlaEpoca.value >= 9000, epoca, { timeout: 300000 })
   for (const [nombre, vista] of Object.entries(VISTAS).filter(([nombre]) => !soloVista || soloVista.split(',').includes(nombre))) {

@@ -139,16 +139,17 @@
       "desvio_del_eje_de_1936_m": 2.4
     },
     "adoptado": {
-      "eje": { "punto": [7908, 10122], "direccion": [-0.161, 0.987], "de": "el símbolo del plano de 1936" },
-      "centro": { "mosaico": [7908, 10122] },
-      "cabeza_norte": { "mosaico": [7915, 10079] },
-      "cabeza_sur": { "mosaico": [7901, 10165] },
-      "largo_m": 43.6,
-      "error_m": 1,
-      "incertidumbre_a_lo_largo_del_eje_m": 8,
-      "nota": "Las cabezas son las del símbolo de 1936. Con la luz documentada de 60 m centrada en él, quedarían 8,2 m más afuera en cada extremo: norte (7917,7, 10062,8) y sur (7898,3, 10181,2). Hay que decidirlo antes de instalar el modelo.",
-      "cotas_m": { "cabeza_norte": 875.9, "cabeza_sur": 876.6, "centro": 875.9 },
-      "vale_para": "1911 y 1936. El plano de 1911 no se usa para la posición: dibuja el río 78 m al norte, más que el error de su calce."
+      "eje": { "punto": [7908, 10122], "direccion": [-0.199, 0.980], "de": "el medio de los dos bordes del símbolo del plano de 1936, leído en y = 10100 (7912,25) y en y = 10170 (7898); la calle Sur 4 llega a la cabeza norte por la misma recta" },
+      "centro": { "mosaico": [7908, 10122], "de": "el centro del símbolo de 1936" },
+      "cabeza_norte": { "mosaico": [7920.0, 10063.2], "derivada": true },
+      "cabeza_sur": { "mosaico": [7896.0, 10180.8], "derivada": true },
+      "largo_m": 60,
+      "error_m": 8,
+      "error_de_traves_m": 1,
+      "nota": "60 m, la luz documentada (Silva Contreras, p. 37), centrados en el símbolo de 1936, que mide 43,6 m. El centro del símbolo es el del puente tanto si el símbolo es una convención como si fuera el tramo de 40 m entre las pilas de 1916, que estaban a 10 m de cada extremo. Indicio de que no está a escala: en el mismo plano, el símbolo del Puente Paraíso mide 37,5 m (de y = 9243 a 9318) y su armadura de 1895 medía «poco más de 24 m»; no consta que en 1936 siguiera esa armadura. El error es a lo largo del eje: los 8,2 m que el símbolo es más corto por lado.",
+      "eje_del_primer_calce": { "direccion": [-0.161, 0.987], "nota": "Salía de las dos esquinas del símbolo (86 px de base). Releído sobre los bordes, fila por fila: a 30 m del centro la diferencia es de 1,2 m." },
+      "cotas_m": { "cabeza_norte": 876.0, "cabeza_sur": 877.1, "centro": 875.8, "pendiente": 0.019 },
+      "vale_para": "1911, la única época con alzado. El plano de 1911 no se usa para la posición: dibuja el río 78 m al norte, más que el error de su calce."
     }
   },
   "puente-restaurador": {
@@ -191,7 +192,8 @@
       "error_m": 3,
       "nota": "Las cabezas no se leen en ningún plano: se derivan del centro de la plazoleta, del eje de la calzada y del largo documentado (100,50 m). La norte cae donde termina la manzana edificada del plano de 1936.",
       "cotas_m": { "cabeza_norte": 873.3, "cabeza_sur": 875.5, "centro": 874.1 },
-      "vale_para": "1911 y 1936. En 1946 el plano ya no dibuja la plazoleta y la calzada mide el triple: no consta que sea la misma estructura."
+      "medio_de_la_calzada_1936": [[8520.5, 9785], [8473, 10020]],
+      "vale_para": "1911, la única época con alzado. En 1936 el plano dibuja la plazoleta, pero el estudio no restituye el puente reparado en 1932. En 1946 el plano ya no dibuja la plazoleta y la calzada mide el triple: no consta que sea la misma estructura."
     }
   },
   "puente-19-diciembre": {
