@@ -1,6 +1,8 @@
 // Capturas comparables del Puente de Hierro: node tests/e2e/capturas-puente-hierro.mjs [url] [carpeta] [prefijo]
 // Misma cámara en 1889, 1911, 1936 y 1946: desde arriba, baja de costado (desde el este) y desde el cauce (oeste).
-// PUENTE_CAPTURA=1936 saca solo esa época; PUENTE_VISTA=costado, solo esa vista; PUENTE_MODO=tinta, sin color.
+// PUENTE_CAPTURA=1936 saca solo esa época; PUENTE_VISTA=arriba,costado, solo esas vistas; PUENTE_MODO=tinta, sin color.
+// Otro puente: PUENTE_CRUCE=x,z (el centro del tablero en metros del mundo) y su carpeta. El cruce de la calle Sur 7
+// (Constitución y Sucre): PUENTE_CRUCE=369,1299 PUENTE_VISTA=arriba,costado node tests/e2e/capturas-puente-hierro.mjs <url> docs/capturas/puente-sucre
 import { chromium } from '@playwright/test'
 import { mkdir } from 'node:fs/promises'
 
@@ -11,8 +13,10 @@ const años = [[3, '1889'], [4, '1911'], [5, '1936'], [6, '1946']]
 const solo = process.env.PUENTE_CAPTURA
 const soloVista = process.env.PUENTE_VISTA
 const enTinta = process.env.PUENTE_MODO === 'tinta'
-// El cruce medido (docs/puentes-guaire-calce.md), en metros del mundo: el centro del tablero.
-const CRUCE = { x: 235, z: 1301 }
+// El cruce medido (docs/puentes-guaire-calce.md), en metros del mundo: el centro del tablero. Por omisión, el de Hierro.
+const [x, z] = (process.env.PUENTE_CRUCE ?? '235,1301').split(',').map(Number)
+if (![x, z].every(Number.isFinite)) throw new Error('PUENTE_CRUCE debe ser «x,z» en metros del mundo')
+const CRUCE = { x, z }
 const VISTAS = {
   arriba: { ...CRUCE, dist: 190, yaw: 0, pitch: 1.05 },
   costado: { ...CRUCE, dist: 85, yaw: Math.PI / 2, pitch: 0.3 },
@@ -36,7 +40,7 @@ await page.waitForTimeout(4000)
 for (const [epoca, año] of años.filter(([, año]) => !solo || solo === año)) {
   await page.evaluate(e => window.lab.lineaDeTiempo.elegir(e), epoca)
   await page.waitForFunction(e => window.lab.ciudad.U.uEpocaA.value === e && window.lab.ciudad.U.uOlaEpoca.value >= 9000, epoca, { timeout: 300000 })
-  for (const [nombre, vista] of Object.entries(VISTAS).filter(([nombre]) => !soloVista || soloVista === nombre)) {
+  for (const [nombre, vista] of Object.entries(VISTAS).filter(([nombre]) => !soloVista || soloVista.split(',').includes(nombre))) {
     await page.evaluate(v => { window.lab.cam.jump(v); window.lab.pedirCuadro(6) }, vista)
     await page.waitForTimeout(4500)
     await page.screenshot({ path: `${carpeta}/${prefijo}-${año}-${nombre}${enTinta ? '-tinta' : ''}.png`, timeout: 400000 })
