@@ -11,6 +11,7 @@ const P36 = 'plano DCN de 1936'
 const P46 = 'plano DCN de 1946'
 const SILVA = 'https://saber.ucv.ve/ojs/index.php/rev_tc/article/view/2916'
 const FAC_98 = 'https://fundaayc.com/2023/04/02/sabia-usted-98/'
+const FAC_104 = 'https://fundaayc.com/2023/08/06/sabia-usted-104/'
 const FAC_107 = 'https://fundaayc.com/2023/10/15/sabia-usted-107/'
 const FAC_AYACUCHO = 'https://fundaayc.com/2022/09/08/1924-inauguracion-del-puente-ayacucho/'
 const silva = (paginas) => `Silva Contreras (2004), ${paginas}: ${SILVA}`
@@ -31,9 +32,9 @@ export const MARCAS_PUENTES_CRUCES = Object.freeze([
     dudas: 'La marca es el cruce de la avenida Sur, en el centro de la plazoleta que dibuja el plano de 1936. Si en 1946 seguía la estructura de 1905 queda sin resolver.' },
   { id: 'puente-19-diciembre', x: 3284, y: 10727, nace: 4, nivel: 3, alto: 4,
     nombres: [[4, 'Puente 19 de Diciembre', 'Vigas de acero sobre pilas de concreto, de 1910.'],
-      [5, 'Puente 9 de Diciembre', 'Así lo rotulan los planos de 1936 y 1946.']],
+      [5, 'Puente 9 de Diciembre', 'El nombre que tomó tras la muerte de Gómez, en 1935.']],
     fuente: `${P11} (VI «19 de Diciembre», Av. 19 de Dic.); ${P36} («Puente 9 de Diciembre»); ${P46} («Puente 9 de Diciembre»); ${silva('p. 38 y nota 15')}`,
-    dudas: 'No se encontró cuándo cambió el nombre: sale de los rótulos de los planos. Qué estructura había en 1946 queda sin resolver. El punto es el cruce del eje de la calzada de 1936 con el río; las cabezas están sin medir.' },
+    dudas: `El nombre de 1936 sale del rótulo del plano; FAC sitúa el cambio tras la muerte de Gómez, en 1935 (${FAC_104}). Qué estructura había en 1946 queda sin resolver. El punto es el cruce del eje de la calzada de 1936 con el río; las cabezas están sin medir.` },
   { id: 'puente-ayacucho', nombre: 'Puente Ayacucho', x: 6726, y: 9180, nace: 5, nivel: 3, alto: 4,
     nota: 'Arcos de concreto armado, de 1924, en la calle Sur 14.',
     fuente: `${P36} («Puente Ayacucho»); ${P46} («Puente Ayacucho»); ${silva('p. 38')}; FAC, inauguración de 1924: ${FAC_AYACUCHO}`,
@@ -60,9 +61,9 @@ export const FICHAS_PUENTES_CRUCES = Object.freeze({
   'puente-19-diciembre': {
     textos: [
       [4, 'Construido por Herman Stelling en 1910, sostiene la avenida del mismo nombre entre la Carretera del Oeste y la avenida de La Vega. La estructura se fabricó en Estados Unidos, con planos autorizados por la American Bridge Company: un tramo central de 30 m sobre el río, de vigas trianguladas, y dos laterales de 15 m, de vigas de palastro, sobre pilas de concreto armado. El nombre es la fecha que celebraba el gomecismo. El plano de 1911 lo numera VI.'],
-      [5, 'El plano de 1936 rotula el puente y la avenida «9 de Diciembre», y el de 1946 también. La calzada que dibujan mide unos 11 m.'],
+      [5, 'Muerto Gómez en 1935, la avenida y el puente pasaron a llamarse 9 de Diciembre, la fecha de la batalla de Ayacucho. El plano de 1936, fotografiado en marzo, ya los rotula así, y el de 1946 también. La calzada que dibujan mide unos 11 m.'],
     ],
-    dudas: `No se encontró cuándo pasó a llamarse 9 de Diciembre. Tampoco cuál era la estructura en 1946: ${DESDE_1940}. Descripción: ${silva('p. 38 y nota 15')}. El plano de 1911 dibuja unos 300 m de puente y accesos, pero su calce ahí es extrapolado: cabezas sin medir.`,
+    dudas: `No consta cuál era la estructura en 1946: ${DESDE_1940}. Cambio de nombre: FAC (${FAC_104}). Descripción: ${silva('p. 38 y nota 15')}. El plano de 1911 dibuja unos 300 m de puente y accesos, pero su calce ahí es extrapolado: cabezas sin medir.`,
   },
   'puente-ayacucho': {
     textos: [
