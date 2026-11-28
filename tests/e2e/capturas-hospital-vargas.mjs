@@ -1,12 +1,15 @@
-// Capturas comparables del Hospital Vargas: node tests/e2e/capturas-hospital-vargas.mjs [url] [carpeta]
+// Capturas comparables del Hospital Vargas en las seis épocas (en 1772 y 1843 todavía no hay hospital):
+// node tests/e2e/capturas-hospital-vargas.mjs [url] [carpeta]
 import { chromium } from '@playwright/test'
 import { mkdir } from 'node:fs/promises'
 
 const url = process.argv[2] ?? 'http://localhost:5199/'
 const carpeta = process.argv[3] ?? 'docs/capturas/hospital-vargas'
-const años = [[3, '1889'], [4, '1911'], [5, '1936'], [6, '1946']]
+const años = [[1, '1772'], [2, '1843'], [3, '1889'], [4, '1911'], [5, '1936'], [6, '1946']]
 const solo = process.env.HV_CAPTURA
-const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] })
+// HV_GPU=1 usa la GPU de la máquina (rápido); sin él, SwiftShader, como el CI
+const gpu = process.env.HV_GPU ? ['--use-angle=gl', '--ignore-gpu-blocklist', '--enable-gpu'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader']
+const browser = await chromium.launch({ args: gpu })
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
 page.on('pageerror', e => console.error('pageerror:', e.message))
 await mkdir(carpeta, { recursive: true })

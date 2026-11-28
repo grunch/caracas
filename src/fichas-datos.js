@@ -30,7 +30,7 @@ export const FICHAS = Object.freeze({
   },
   'circo-metropolitano': {
     textos: [[4, 'Abrió el 2 de febrero de 1896, entre Miranda y Puerto Escondido. El Circo Metropolitano y el Nuevo Circo fueron edificios diferentes y coexistieron. Su estructura permanecía en la época de 1936 y ya había desaparecido en 1946.']],
-    dudas: 'Las referencias difieren entre 1942 y 1945 para la demolición. No se elige un año exacto sin resolver la discrepancia; ambas fechas justifican su ausencia en 1946. Modelo de Miraflores calzado al ruedo del plano de 1936. Alturas, pigmentos y graderío interpretativos; no es un levantamiento.',
+    dudas: 'Las referencias difieren entre 1942 y 1945 para la demolición. La cronología de FAC, que sí se leyó, fecha en 1945 el cierre. El issue #257 recoge, de segunda mano, que Marín (2011) registra la última corrida el 19-04-1945 citando a Salas (1978), y que 1942 viene de una memoria posterior de Cilento: ni Marín, ni Salas, ni Cilento se leyeron para esta ficha, y nada está cotejado con la prensa de la época. 1945 tiene más apoyos, pero no es una fecha comprobada. Ambas justifican su ausencia en 1946; leído a ojo, el plano de 1946 dibuja vacío el solar. Modelo de Miraflores calzado al ruedo del plano de 1936. Alturas, pigmentos y graderío interpretativos; no es un levantamiento.',
   },
   'hijos-de-dios': {
     textos: [[3, 'Abierto en 1856 en Sabana del Blanco. En esta época está cerrado al uso funerario, pero sus muros, nichos y sepulturas siguen formando parte de la ciudad. El plano de 1889 lo identifica como cementerio de la Concepción.'], [5, 'El cementerio clausurado conserva estructuras documentadas en fotografías de los años treinta. El cierre no equivale a su demolición, que ocurrió después de 1946.']],
@@ -229,11 +229,11 @@ export const FICHAS = Object.freeze({
   },
   rotunda: {
     textos:[[3,'La cárcel de La Rotunda, al sur del Cuartel del Hoyo. Construida entre 1844 y 1854, tenía celdas en dos niveles alrededor de un patio circular; en 1881 se proyectó un segundo recinto al norte. El modelo representa los dos recintos, con fecha de conclusión de la ampliación no comprobada.'],[4,'El plano de Razetti de 1911 la identifica con el 39; el 40 contiguo es el Cuartel del Hoyo, fuera de la reserva de la cárcel.']],
-    dudas:'Alturas, guardia, colores y distribución interior simplificados. No se presenta el estudio como levantamiento métrico.'
+    dudas:'Alturas, guardia, colores y distribución interior simplificados. No se presenta el estudio como levantamiento métrico. La cárcel siguió en pie hasta abril de 1936; la época de 1936 del visor muestra ya el solar libre, como el plano.'
   },
   'solar-rotunda':{
-    textos:[[5,'El plano de 1936 muestra libre el solar occidental donde estuvo La Rotunda. Se conserva ese estado, sin inventar escombros ni adelantar la plaza terminada.']],
-    dudas:'Una transcripción atribuye el decreto a 2enero 1936; Polar registra una resolución del MOP en abril. No fijan por sí solas el día efectivo del derribo. El verde es la convención de suelo libre del visor.'
+    textos:[[5,'El plano de 1936 muestra libre el solar occidental donde estuvo La Rotunda. La demolición comenzó el 11 de abril de 1936, según la prensa del día siguiente. Se conserva el estado del plano, sin inventar escombros ni adelantar la plaza terminada.']],
+    dudas:'El plano dice que se fotografió en marzo de 1936, antes de que empezara la demolición, y aun así dibuja el solar libre: esa contradicción está sin resolver. No consta cuándo terminó el derribo. Una transcripción atribuye el decreto al 2 de enero de 1936 y Polar registra una resolución del MOP en abril: son actos administrativos, no la obra. El verde es la convención de suelo libre del visor.'
   },
   concordia:{
     textos:[[6,'La plaza La Concordia, diseñada por Carlos Raúl Villanueva y fechada en 1940 por Polar. El plano basado en fotos de 1946 muestra jardines y un elemento circular central. El templete se aproxima con fotografías históricas: pilares rectangulares exteriores, columnas interiores y cubierta de teja.']],
@@ -258,8 +258,9 @@ export const FICHAS = Object.freeze({
     dudas: 'Va solo el volumen de la nave que dibuja el plano de 1936: no se halló descripción ni vista fechada de la fachada, la torre o la cubierta, y ninguna altura está medida. La leyenda de 1843 nombra «Capuchinos» (S) sobre este solar, pero el templo estaba en obra: aparece desde 1889.',
   },
   'nuevo-circo': {
-    textos: [[5, 'Inaugurado el 26 de enero de 1919, el Nuevo Circo aparece como plaza de toros en el plano de 1936. Su ruedo permanece abierto: la cubierta total proyectada no llegó a ejecutarse.']],
-    dudas: 'Modelo interpretativo contrastado con el plano de 1936 y fotografías históricas; alturas, pigmentos y reformas interiores sin datación precisa. Se conserva en 1946 sin afirmar un levantamiento independiente. Fuente: https://camaradecaracas.com/la-camara-caracas-y-sus-historias/cronicas-de-la-ciudad/el-nuevo-circo-de-caracas/',
+    textos: [[5, 'Inaugurado el 26 de enero de 1919, el Nuevo Circo aparece como plaza de toros en el plano de 1936. Su ruedo permanece abierto: la cubierta total proyectada no llegó a ejecutarse.'],
+      [6, 'Leído a ojo, el plano DCN de fotografías de 1946 dibuja el anillo del Nuevo Circo en el mismo sitio que el de 1936 y con la portada al noroeste. No dibuja el cuerpo en cuña del sureste que sí está en 1936, y dibuja un elemento rectangular chico en ese lado: el modelo no representa ese cambio. Es el mismo modelo de 1936; ninguna fuente fecha las reformas de sus tendidos.']],
+    dudas: 'Modelo interpretativo contrastado con el plano de 1936, con una lectura a ojo del de 1946 y con una fotografía histórica de la portada; alturas, pigmentos y reformas interiores sin datación precisa. La Cámara de Caracas da la inauguración el 26 de enero de 1919; la cronología de FAC, el 25. Fuente: https://camaradecaracas.com/la-camara-caracas-y-sus-historias/cronicas-de-la-ciudad/el-nuevo-circo-de-caracas/',
   },
   'parque-carabobo': {
     textos: [
@@ -310,8 +311,9 @@ export const FICHAS = Object.freeze({
     textos: [
       [3, 'Las obras del Hospital Vargas comenzaron en 1888. El plano de Mestre de 1889 ya dibuja su planta y lo identifica con el número 43, pero el hospital aún no estaba inaugurado.'],
       [4, 'El Hospital Vargas fue inaugurado el 1 de enero de 1891 y comenzó a atender pacientes el 5 de julio de ese año, según la investigación de Roger Escalona publicada por la Sociedad Venezolana de Historia de la Medicina.'],
+      [5, 'El Hospital Vargas, en servicio desde 1891, cambió de techos después de 1930: según Caracas en 450, las cubiertas ojivales de madera se sustituyeron por platabandas, sin fecha para cada pabellón. Aquí llevan cubierta plana desde 1936.'],
     ],
-    dudas: 'El plano de 1889 permite localizar el proyecto, no determinar el avance exacto de sus obras.',
+    dudas: 'El plano de 1889 permite localizar el proyecto, no determinar el avance exacto de sus obras: el modelo de ese año levanta la planta que el plano dibuja. No consta en qué año se cambió la cubierta de cada pabellón: que en 1936 ya fueran planas es una interpretación. Una fuente médica de 1953 fecha en 1939 tres pabellones nuevos (Carlos J. Bello, Ángel Larralde y de lactantes), pero no hay planta que los ubique: no se modelan.',
   },
 
   // --- el oeste ---
@@ -346,7 +348,7 @@ export const FICHAS = Object.freeze({
     textos: [[3, 'Abierto en 1876 al sur del Guaire. El plano urbano de 1889 no cubre el cementerio con detalle utilizable; el reglamento de 1876 menciona cuatro cuarteles y dos avenidas de 4 m, descritas como norte/sur. Para sugerir los cuarteles, esta vista dibuja un cruce de ejes interpretativo; la orientación y la ubicación reales no están documentadas. El perímetro y las parcelas también son interpretativos.'],
       [4, 'En 1911 se conserva la representación esquemática de cuatro cuarteles. La compra de un segundo lote en 1889 y las obras documentadas desde 1890 no bastan para reconstruir con precisión cuánto del terreno se había urbanizado.'],
       [5, 'El plano DCN de 1936 rotula el Cementerio General del Sur y dibuja una huella irregular, sus calles interiores y arbolado. El modelo calca ese contorno de forma aproximada, no como deslinde catastral.'],
-      [6, 'El cementerio sigue en el área del mapa de 1946. La geometría de esta vista reutiliza la referencia de 1936: el ejemplar DCN de 1946 localizado está restringido y no se pudo inspeccionar directamente.']],
+      [6, 'Leído a ojo sobre una copia reducida del plano DCN de fotografías de 1946, el núcleo y las calles interiores principales coinciden con los de 1936; por eso esta vista conserva ese trazado. El plano añade campos al norte, con caminos a trazos, que el modelo todavía no representa.']],
     dudas: 'La propiedad inicial y el lote comprado en 1889 no equivalen a superficie urbanizada. Los planos urbanos de 1889 y 1911 no permiten medir el recinto; el plano original del cementerio se reporta extraviado. Sepulturas, panteones y árboles son tipológicos, sin posiciones o propietarios asignados.',
   },
   hipodromo: {
