@@ -57,7 +57,9 @@ pp. 150–151. «Guía CCS» es la ficha n.º 49 de [guiaccs.com](https://guiacc
 - **Qué es de 1857.** El IPC describe el templo de hoy y no dice si las torres son de la obra de 1842–1857 o
   posteriores; la Guía CCS dice que el terremoto de 1900 lo dañó «levemente». Va el mismo volumen de 1889 a 1946.
 - **«Jannato Madalaine»** es la grafía del IPC; no se halló al proyectista en otra fuente.
-- La letra de la leyenda de 1843 cae una cuadra al oeste del recuadro en blanco: de ahí venía el ancla anterior.
+- **El lugar en los planos antiguos** coincide con el de 1936 solo dentro del calce de cada plano: en 1772 el
+  símbolo cae unos 20 m al noroeste (calce de 18,7 m RMS) y en 1843 el recuadro en blanco está en el lugar, pero
+  la letra E de la leyenda cae una cuadra al oeste: de ahí venía el ancla anterior. La marca lo dice en sus dudas.
 
 ## Entorno
 

@@ -129,5 +129,8 @@ describe('Las Mercedes (#244)', () => {
     expect(f.dudas).toMatch(/altura/i)
     expect(f.dudas).toMatch(/no se dibuja/)
     expect(MARCAS.find((x) => x.id === 'las-mercedes').fuente).toMatch(/albaciudad\.org/)
+    const dudas = MARCAS.find((x) => x.id === 'las-mercedes').dudas
+    expect(dudas).toMatch(/dentro del calce/) // los planos antiguos no «ponen la iglesia en el mismo sitio» sin más
+    expect(dudas).toMatch(/letra E/)
   })
 })
