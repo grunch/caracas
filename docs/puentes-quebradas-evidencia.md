@@ -28,15 +28,17 @@ abajo se generan desde ahí; `tests/unit/puentes-quebradas.test.js` comprueba qu
 ## Hallazgos
 
 1. **Pastora y Trinidad son dos puentes.** El Cabildo, el 9 de febrero de 1784, habla del «puente nuevo del Barrio
-   de la Divina Pastora» y del «de la Trinidad» como cosas distintas (Blondet). El que hoy se llama Carlos III es
-   el de la Pastora: el objeto de OpenStreetMap cae a unos 30 m del símbolo de puente del plano de 1889. El issue
-   los trataba juntos («Carlos III/Trinidad»).
+   de la Divina Pastora» y del «de la Trinidad» como cosas distintas (Blondet). **Este documento identifica el de
+   la Pastora con el que hoy se llama Carlos III; es una identificación propia, no un hecho documentado.** Se apoya
+   en la glosa de Blondet y en que el objeto de OpenStreetMap cae a unos 30 m del símbolo de puente del plano de
+   1889; ningún plano leído escribe «Carlos III». El issue los trataba juntos («Carlos III/Trinidad»).
 2. **Para 1772 no hay nada firme.** Que el Carlos III estuviera «iniciado» ese año solo lo dice Wikipedia, sin
    referencia; los documentos de archivo lo llaman «nuevo» en 1784. Del puente de la Trinidad hay dos fechas
    (mediados del siglo XVIII; 1770–1776), las dos de fuentes sin referencias. **No se modela ninguno en 1772.**
-3. **El Anauco no corresponde a 1772.** Se ordena en 1786 y se termina en 1790 según Wikipedia y crónicas; no se
-   encontró fuente primaria. En 1843 la leyenda lo trae (letra f) y a unos 65 m está la letra x, la Alcabala de
-   Candelaria.
+3. **El Anauco en 1772 queda «no se sabe».** Wikipedia y las crónicas lo fechan en 1786–1790, lo que haría que no
+   correspondiera a 1772; no se encontró fuente primaria y el plano de 1772 no se leyó en ese punto, así que no se
+   afirma la ausencia. Lo mismo vale para el de la Unión (hacia 1835, según una crónica). En 1843 la leyenda trae
+   el Anauco (letra f) y a unos 65 m está la letra x, la Alcabala de Candelaria.
 4. **Los nombres cambian, el cruce no.** «De Punceles» (1843) es la esquina «Punceles» (1889) y «Punceres» (1936);
    «de Candelaria» es «Ña Romualda»; «de la Unión» es «Puente Nuevo», como dice una crónica. Las dos últimas
    identidades son inferencias por posición.
@@ -80,7 +82,7 @@ No están en la leyenda de 1843 y no se estudiaron. Posiciones del diccionario d
 
 - **Cabezas.** Releer cada cruce ampliado ×4 con rejilla de 20 px, como en `puentes-guaire-calce.md`, en 1843, 1889
   y 1911. Con cabezas se pueden instalar marcas y fichas (el formato de `src/puentes-cruces-datos.js`).
-- **Modelos.** Solo dos tienen de dónde salir: el de la Pastora (Carlos III), que sigue en pie, y el de la
+- **Modelos.** Solo dos tienen de dónde salir: el de la Pastora (si es el Carlos III, que sigue en pie), y el de la
   Trinidad, con la pintura de Bellermann. Los dos piden primero su estudio en Miraflores: **hoy no existe**
   (Miraflores solo estudió los puentes del Guaire). Los demás no tienen ninguna vista ni medida.
 - **1772.** Calzar los tres pasos de agua del original y decidir, con el plano delante, cuáles son puentes.
@@ -102,22 +104,22 @@ de 1843.
 
 | Elemento | 1772 | 1843 | 1889 | 1911 | 1936 | 1946 |
 |---|---|---|---|---|---|---|
-| Puente de la Pastora (hoy Puente Carlos III) | **No se sabe** (dudosa). Nadie leyó este cruce en el original de 1772. El sector es de calce débil (S1772-24). Las fuentes de archivo lo llaman «nuevo» en 1784. | **Existe** (dudosa). «de la Pastora». Letra a de la leyenda. Sobre el dibujo, una calle cruza la quebrada cerca de (8390, 4660) con un signo al lado; que ese signo sea la letra a es una lectura dudosa. | **Existe** (documentada). Símbolo de puente (dos trazos paralelos) sobre la calle que cruza el Catuche, en (8350, 4670). Sin rótulo. | Sin lectura | **Existe** (documentada). La calle cruza la quebrada entre (8300, 4600) y (8350, 4700); el cauce se dibuja abierto, en raya y punto azul, al norte y al sur. Sin rótulo de puente. | Sin lectura |
+| Puente de la Pastora (identificado acá con el actual Puente Carlos III) | **No se sabe** (dudosa). Nadie leyó este cruce en el original de 1772. El sector es de calce débil (S1772-24). Las fuentes de archivo lo llaman «nuevo» en 1784. | **Existe** (dudosa). «de la Pastora». Letra a de la leyenda. Sobre el dibujo, una calle cruza la quebrada cerca de (8390, 4660) con un signo al lado; que ese signo sea la letra a es una lectura dudosa. | **Existe** (documentada). Símbolo de puente (dos trazos paralelos) sobre la calle que cruza el Catuche, en (8350, 4670). Sin rótulo. | Sin lectura | **Existe** (documentada). La calle cruza la quebrada entre (8300, 4600) y (8350, 4700); el cauce se dibuja abierto, en raya y punto azul, al norte y al sur. Sin rótulo de puente. | Sin lectura |
 | Puente de la Trinidad | **No se sabe** (dudosa). Nadie leyó este cruce en el original de 1772. La marca de la iglesia de la Trinidad tiene su propia matriz en `docs/issue-268-trinidad-plaza.md`. | **Existe** (documentada). «de la Trinidad». Letra b de la leyenda, dibujada en (9335, 5475) junto al cruce de la calle con la quebrada en (9360, 5500). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce. | **Existe** (documentada). «Pte. de la Trinidad». Rótulo a lo largo de la calle; el Catuche, en azul, pasa bajo ella en (9335, 5620), junto al n.º 3. | Sin lectura | **Existe** (documentada). «Puente Trinidad». Nombre de la esquina en (9318, 5637). La quebrada se dibuja abierta al noroeste, hasta (9470, 5600), y no sigue al sureste. | Sin lectura |
 | Puente de Punceles (Punceres) | **No se sabe** (dudosa). Nadie leyó este cruce en el original de 1772. | **Existe** (documentada). «de Punceles». Letra c de la leyenda, dibujada en (10040, 6520) junto al cruce de la calle con la quebrada en (10020, 6540). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce. | **Existe** (documentada). «Punceles». El nombre ya es el de la esquina, en (9850, 6640). En este tramo el plano no dibuja el cauce. | Sin lectura | **No se sabe** (documentada). «Punceres». Nombre de esquina en (9973, 6646), junto a la «Plaza España». No hay cauce dibujado: no se sabe si el puente seguía a la vista. | Sin lectura |
 | Puente de Candelaria (Catuche o Ña Romualda) | **No se sabe** (dudosa). Nadie leyó este cruce en el original de 1772. | **Existe** (documentada). «de Candelaria». Letra d de la leyenda, dibujada en (10230, 6960) junto al cruce de la calle con la quebrada en (10250, 6990). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce. | **Existe** (documentada). «Ña Romualda». Esquina «Ña Romualda» en (10100, 6990); el Catuche aparece en azul justo al sureste, desde (10110, 7010). La calle lleva una línea de trazos de tranvía. | Sin lectura | **No se sabe** (documentada). «Ña Romualda». Nombre de esquina en (10171, 6945), con la «Plaza López» al norte. No hay cauce dibujado. | Sin lectura |
 | Puente de Monroy | **No se sabe** (dudosa). Nadie leyó este cruce en el original de 1772. | **Existe** (dudosa). «de Monroy». Letra e de la leyenda, dibujada en (10440, 7510) junto al cruce de la calle con la quebrada en (10480, 7540). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce. El nombre se lee «Mouroy». | **Existe** (documentada). «Monroy». El Catuche, en azul, cruza la calle entre las esquinas «Perico» y «Monroy», en (10530, 7565). | Sin lectura | **Existe** (documentada). «Monroy». El cauce se dibuja abierto y encajonado, de doble línea, y pasa bajo la calle en (10590, 7570), junto a la esquina «Monroy» (10624, 7579). | Sin lectura |
-| Puente Anauco | **No está** (inferida). No se leyó el plano en este punto. Que no existía sale de la fecha de la obra (1786–1790), que solo dan fuentes terciarias. | **Existe** (documentada). «de Anauco». Letra f de la leyenda, dibujada en (11510, 7250) junto al cruce de la calle con la quebrada en (11560, 7230). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce. Unos 65 m al noroeste está la letra x, la Alcabala de Candelaria, en (11420, 7160). | **Existe** (documentada). La calle, con su línea de trazos de tranvía, cruza el Anauco en (11490, 7190); al lado, el n.º 7 de la leyenda, que no está transcrita. | Sin lectura | **Existe** (documentada). «Puente Anauco». Rótulo en (11650, 7150); la calle es continua y el río, de doble línea azul clara, pasa bajo ella en (11520, 7200). | Sin lectura |
+| Puente Anauco | **No se sabe** (dudosa). Nadie leyó este cruce en el original de 1772. Las fuentes terciarias fechan la obra en 1786–1790, lo que haría improbable el puente en 1772; no alcanza para darlo por ausente. | **Existe** (documentada). «de Anauco». Letra f de la leyenda, dibujada en (11510, 7250) junto al cruce de la calle con la quebrada en (11560, 7230). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce. Unos 65 m al noroeste está la letra x, la Alcabala de Candelaria, en (11420, 7160). | **Existe** (documentada). La calle, con su línea de trazos de tranvía, cruza el Anauco en (11490, 7190); al lado, el n.º 7 de la leyenda, que no está transcrita. | Sin lectura | **Existe** (documentada). «Puente Anauco». Rótulo en (11650, 7150); la calle es continua y el río, de doble línea azul clara, pasa bajo ella en (11520, 7200). | Sin lectura |
 | Puente de San Pablo | **No se sabe** (dudosa). El original dibuja un rectángulo rojo que interrumpe la franja de agua (P1772-001), en la misma calle que el cruce que el calce lleva a la esquina «Puente San Pablo». Está sin calzar y con la nota «confirmar geometría del puente». | **Existe** (documentada). «de San Pablo». Letra g de la leyenda, dibujada en (8130, 7640) junto al cruce de la calle con la quebrada en (8110, 7590). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce. | **Existe** (documentada). «Puente Sn. Pablo». Rótulo sobre la calle. El Caroata, en azul, llega desde el norte hasta la calle en (8110, 7560) y no sigue al sur; una línea de trazos de tranvía baja junto a él. | Sin lectura | **No se sabe** (documentada). «Puente San Pablo». Nombre de esquina en (8162, 7587), frente al Teatro Municipal y la «Plaza Miranda». No hay cauce dibujado: no se sabe si el puente seguía a la vista. | Sin lectura |
-| Puente de la Unión (Puente Nuevo) | **No está** (inferida). No se leyó el plano en este punto. Que no existía sale de la fecha de hacia 1835, que solo da una crónica. | **Existe** (documentada). «de la Unión». Letra h de la leyenda, dibujada en (7790, 8190) junto al cruce de la calle con la quebrada en (7770, 8150). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce. | **Existe** (documentada). «Puente Nuevo». Rótulo sobre la calle; el Caroata, en azul, pasa bajo ella en (7775, 8115), junto al n.º 12. | Sin lectura | **Existe** (documentada). «Puente Nuevo». Nombre de esquina en (7763, 8088); el Caroata se dibuja abierto, en raya y punto azul, al noreste y al sur del cruce. | Sin lectura |
+| Puente de la Unión (Puente Nuevo) | **No se sabe** (dudosa). Nadie leyó este cruce en el original de 1772. Una crónica sin referencias lo fecha hacia 1835, lo que haría improbable el puente en 1772; no alcanza para darlo por ausente. | **Existe** (documentada). «de la Unión». Letra h de la leyenda, dibujada en (7790, 8190) junto al cruce de la calle con la quebrada en (7770, 8150). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce. | **Existe** (documentada). «Puente Nuevo». Rótulo sobre la calle; el Caroata, en azul, pasa bajo ella en (7775, 8115), junto al n.º 12. | Sin lectura | **Existe** (documentada). «Puente Nuevo». Nombre de esquina en (7763, 8088); el Caroata se dibuja abierto, en raya y punto azul, al noreste y al sur del cruce. | Sin lectura |
 
 ## Quebrada Catuche
 
-### Puente de la Pastora (hoy Puente Carlos III)
+### Puente de la Pastora (identificado acá con el actual Puente Carlos III)
 
-`puente:pastora` · puente · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`puente:pastora` · puente · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
-No es el puente de la Trinidad: las fuentes de archivo los nombran como dos puentes. El objeto «Puente de Carlos III» de OpenStreetMap (`way/987814944`) cae en (8295, 4647), a unos 30 m del cruce leído en 1889.
+Que el «puente de la Pastora» de 1784 y de la leyenda de 1843 sea el que hoy se llama Carlos III es una identificación de este catálogo, no un hecho documentado. Se apoya en dos cosas: Blondet glosa el «puente nuevo» de 1784 como el Carlos III, y el objeto «Puente de Carlos III» de OpenStreetMap (`way/987814944`) cae en (8295, 4647), a unos 30 m del cruce leído en 1889. Ningún plano leído escribe «Carlos III». Las fuentes de archivo nombran este puente y el de la Trinidad como dos puentes distintos.
 
 **Nombres:** «Puente de la Pastora» (¿?–¿?) [4] [1]; «Puente Carlos III» (¿?–¿?) [2].
 
@@ -142,6 +144,7 @@ No es el puente de la Trinidad: las fuentes de archivo los nombran como dos puen
 
 **No se pudo documentar:**
 
+- Un documento que una los dos nombres, Pastora y Carlos III.
 - Si en 1772 había obra iniciada: solo lo afirma Wikipedia, sin referencia.
 - Su luz en metros: una crónica dice «unos 30 m» de largo y 6 m de calzada, sin fuente.
 - La letra a de la leyenda de 1843 no se pudo leer con seguridad sobre el dibujo.
@@ -150,7 +153,7 @@ No es el puente de la Trinidad: las fuentes de archivo los nombran como dos puen
 
 ### Puente de la Trinidad
 
-`puente:trinidad` · puente · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`puente:trinidad` · puente · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 **Nombres:** «Puente de la Trinidad» (¿?–¿?) [4] [9]; «Puente Trinidad» (¿?–¿?) [10].
 
@@ -180,7 +183,7 @@ No es el puente de la Trinidad: las fuentes de archivo los nombran como dos puen
 
 ### Puente de Punceles (Punceres)
 
-`puente:punceres` · puente · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`puente:punceres` · puente · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 **Nombres:** «Puente de Punceles» (¿?–¿?) [4]; «Punceres» (¿?–¿?) [10].
 
@@ -203,7 +206,7 @@ No es el puente de la Trinidad: las fuentes de archivo los nombran como dos puen
 
 ### Puente de Candelaria (Catuche o Ña Romualda)
 
-`puente:candelaria` · puente · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`puente:candelaria` · puente · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 **Nombres:** «Puente de Candelaria» (¿?–¿?) [4]; «Ña Romualda» (¿?–¿?) [9] [10].
 
@@ -226,7 +229,7 @@ No es el puente de la Trinidad: las fuentes de archivo los nombran como dos puen
 
 ### Puente de Monroy
 
-`puente:monroy` · puente · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`puente:monroy` · puente · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 **Nombres:** «Puente de Monroy» (¿?–¿?) [4]; «Monroy» (¿?–¿?) [9] [10].
 
@@ -245,9 +248,9 @@ No es el puente de la Trinidad: las fuentes de archivo los nombran como dos puen
 
 ### Puente Anauco
 
-`puente:anauco` · puente · ausente en los cortes anteriores a **1790**.
+`puente:anauco` · puente · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
-No corresponde a 1772: se ordena en 1786 y se termina en 1790. La apertura va como dudosa porque solo la dan Wikipedia y crónicas; aun así, es lo que hay.
+Wikipedia y las crónicas lo fechan en 1786–1790, lo que haría que no correspondiera a 1772. Son fuentes terciarias y el plano de 1772 no se leyó en este punto: no se afirma una apertura firme y el corte de 1772 queda «no se sabe». No se modela en 1772.
 
 **Nombres:** «Puente Anauco» (¿?–¿?) [4] [10].
 
@@ -275,13 +278,13 @@ No corresponde a 1772: se ordena en 1786 y se termina en 1790. La apertura va co
 
 ### Puente de San Pablo
 
-`puente:san-pablo` · puente · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`puente:san-pablo` · puente · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 **Nombres:** «Puente de San Pablo» (¿?–¿?) [4] [9]; «Puente San Pablo» (¿?–¿?) [10].
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
-| 1737 | Obra | Primer puente de mampostería sobre el Caroata, de 1737 | «el primer puente de mampostería sobre el río Caroata construido en 1737» (p. 25) | documentada | [18] |
+| 1737 | Obra | Primer puente de mampostería sobre el Caroata, de 1737 | «el primer puente de mampostería sobre el río Caroata construido en 1737» (p. 25) | dudosa | [18] |
 | 1814 | Reforma | Averiado en 1812 y reparado en 1814 | Reparos de 1814 por «87 pesos» (p. 25) | documentada | [18] |
 | 1843 | Levantamiento | En 1843 una calle lleva su nombre | Calle 79, «del Puente de Sⁿ Pablo» | documentada | [4] |
 
@@ -299,7 +302,7 @@ No corresponde a 1772: se ordena en 1786 y se termina en 1790. La apertura va co
 
 ### Puente de la Unión (Puente Nuevo)
 
-`puente:union` · puente · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`puente:union` · puente · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 **Nombres:** «Puente de la Unión» (¿?–¿?) [4]; «Puente Nuevo» (¿?–¿?) [9] [10].
 

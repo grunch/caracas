@@ -3,7 +3,7 @@
  "clases_de_fuente": {
   "plano de época": "Plano del catálogo del repo, calzado sobre el mosaico de 1936.",
   "pintura de época": "Vista pintada en la época, con ficha en fuentes/imagenes.",
-  "secundaria con referencias": "Artículo académico o tesis que cita documentos de archivo.",
+  "secundaria con referencias": "Artículo académico o tesis que cita documentos de archivo. Es la única clase escrita que admite la certeza «documentada»; una afirmación en disputa no la lleva nunca.",
   "terciaria": "Wikipedia: lo que solo ella afirma va como dudoso.",
   "crónica sin referencias": "Crónica o nota de prensa sin aparato: lo que afirma va como dudoso."
  },
@@ -120,10 +120,10 @@
   {
    "id": "puente:pastora",
    "tipo": "puente",
-   "nombre": "Puente de la Pastora (hoy Puente Carlos III)",
+   "nombre": "Puente de la Pastora (identificado acá con el actual Puente Carlos III)",
    "sistema": "Quebrada Catuche",
    "encuadre": "dentro",
-   "nota": "No es el puente de la Trinidad: las fuentes de archivo los nombran como dos puentes. El objeto «Puente de Carlos III» de OpenStreetMap (`way/987814944`) cae en (8295, 4647), a unos 30 m del cruce leído en 1889.",
+   "nota": "Que el «puente de la Pastora» de 1784 y de la leyenda de 1843 sea el que hoy se llama Carlos III es una identificación de este catálogo, no un hecho documentado. Se apoya en dos cosas: Blondet glosa el «puente nuevo» de 1784 como el Carlos III, y el objeto «Puente de Carlos III» de OpenStreetMap (`way/987814944`) cae en (8295, 4647), a unos 30 m del cruce leído en 1889. Ningún plano leído escribe «Carlos III». Las fuentes de archivo nombran este puente y el de la Trinidad como dos puentes distintos.",
    "contradicciones": [
     {
      "asunto": "Fecha y promotor",
@@ -142,6 +142,7 @@
     }
    ],
    "desconocido": [
+    "Un documento que una los dos nombres, Pastora y Carlos III",
     "Si en 1772 había obra iniciada: solo lo afirma Wikipedia, sin referencia",
     "Su luz en metros: una crónica dice «unos 30 m» de largo y 6 m de calzada, sin fuente",
     "La letra a de la leyenda de 1843 no se pudo leer con seguridad sobre el dibujo",
@@ -172,7 +173,8 @@
      "dice": "Las obras se inician hacia 1772",
      "cita": "«Las obras… se inician cerca del año 1772, por disposición del entonces gobernador José Carlos de Agüero, con fondos del Cabildo»",
      "fuentes": ["wc3"],
-     "certeza": "dudosa"
+     "certeza": "dudosa",
+     "disputa": "Fecha y promotor"
     },
     {
      "tipo": "levantamiento",
@@ -287,7 +289,8 @@
      "dice": "Proyecto de 1770, concluido en 1776",
      "cita": "«el puente de La Trinidad… El primer plano se levantó en el año 1770 a cargo del ingeniero Manuel de Clemente y Francia, y se concluyó en 1776»",
      "fuentes": ["hai"],
-     "certeza": "dudosa"
+     "certeza": "dudosa",
+     "disputa": "Fecha"
     },
     {
      "tipo": "levantamiento",
@@ -388,7 +391,8 @@
      "dice": "Lo fabrica Nicolás Puncel hacia 1676, de mampostería",
      "cita": "«lo fabricó a sus expensas el Sargento Nicolás Puncel, por el año 1676… obra de mampostería, ladrillos y cal»",
      "fuentes": ["sig"],
-     "certeza": "dudosa"
+     "certeza": "dudosa",
+     "disputa": "Fecha"
     },
     {
      "tipo": "levantamiento",
@@ -489,7 +493,8 @@
      "dice": "Entra en servicio en 1736; una crecida lo destruye en enero de 1742",
      "cita": "«comenzó a prestar servicio en 1736… mampostería con bien trazado arco ojival… la descomunal crecida… de enero de 1742, destruyó la estructura»",
      "fuentes": ["sig"],
-     "certeza": "dudosa"
+     "certeza": "dudosa",
+     "disputa": "Año en que entra en servicio"
     },
     {"tipo":"levantamiento","fecha":{"desde":1843,"hasta":1843},"dice":"En 1843 una calle lleva su nombre","cita":"Calle 42, «del Puente Candelarª»","fuentes":["plano1843"],"certeza":"documentada"}
    ],
@@ -640,9 +645,7 @@
    "nombre": "Puente Anauco",
    "sistema": "Quebrada Anauco",
    "encuadre": "dentro",
-   "desde": 1790,
-   "fuentesCronologia": ["wan"],
-   "nota": "No corresponde a 1772: se ordena en 1786 y se termina en 1790. La apertura va como dudosa porque solo la dan Wikipedia y crónicas; aun así, es lo que hay.",
+   "nota": "Wikipedia y las crónicas lo fechan en 1786–1790, lo que haría que no correspondiera a 1772. Son fuentes terciarias y el plano de 1772 no se leyó en este punto: no se afirma una apertura firme y el corte de 1772 queda «no se sabe». No se modela en 1772.",
    "contradicciones": [
     {
      "asunto": "Material",
@@ -688,8 +691,8 @@
    "etapas": [
     {
      "anio": 1772,
-     "estado": "ausente",
-     "certeza": "inferida",
+     "estado": "desconocido",
+     "certeza": "dudosa",
      "documento": "plano1772",
      "fuentes": ["plano1772"],
      "fecha_hecho": null,
@@ -699,7 +702,7 @@
      "error_m": null,
      "medible": false,
      "recorte": null,
-     "lectura": "No se leyó el plano en este punto. Que no existía sale de la fecha de la obra (1786–1790), que solo dan fuentes terciarias."
+     "lectura": "Nadie leyó este cruce en el original de 1772. Las fuentes terciarias fechan la obra en 1786–1790, lo que haría improbable el puente en 1772; no alcanza para darlo por ausente."
     },
     {
      "anio": 1843,
@@ -769,7 +772,8 @@
      "dice": "Primer puente de mampostería sobre el Caroata, de 1737",
      "cita": "«el primer puente de mampostería sobre el río Caroata construido en 1737» (p. 25)",
      "fuentes": ["tsp"],
-     "certeza": "documentada"
+     "certeza": "dudosa",
+     "disputa": "Año"
     },
     {"tipo":"reforma","fecha":{"desde":1814,"hasta":1814},"dice":"Averiado en 1812 y reparado en 1814","cita":"Reparos de 1814 por «87 pesos» (p. 25)","fuentes":["tsp"],"certeza":"documentada"},
     {"tipo":"levantamiento","fecha":{"desde":1843,"hasta":1843},"dice":"En 1843 una calle lleva su nombre","cita":"Calle 79, «del Puente de Sⁿ Pablo»","fuentes":["plano1843"],"certeza":"documentada"}
@@ -864,8 +868,8 @@
    "etapas": [
     {
      "anio": 1772,
-     "estado": "ausente",
-     "certeza": "inferida",
+     "estado": "desconocido",
+     "certeza": "dudosa",
      "documento": "plano1772",
      "fuentes": ["plano1772"],
      "fecha_hecho": null,
@@ -875,7 +879,7 @@
      "error_m": null,
      "medible": false,
      "recorte": null,
-     "lectura": "No se leyó el plano en este punto. Que no existía sale de la fecha de hacia 1835, que solo da una crónica."
+     "lectura": "Nadie leyó este cruce en el original de 1772. Una crónica sin referencias lo fecha hacia 1835, lo que haría improbable el puente en 1772; no alcanza para darlo por ausente."
     },
     {
      "anio": 1843,

@@ -36,7 +36,10 @@ describe('puentes sobre Catuche, Caroata y Anauco: ficha de evidencias (#271)', 
     }
   })
 
-  it('Pastora (Carlos III) y Trinidad son dos puentes, a más de 500 m uno del otro', () => {
+  it('Pastora y Trinidad son dos puentes, a más de 500 m uno del otro; que Pastora sea el Carlos III de hoy va como identificación propia', () => {
+    expect(de('pastora').nombre).toBe('Puente de la Pastora (identificado acá con el actual Puente Carlos III)')
+    expect(de('pastora').nota).toMatch(/es una identificación de este catálogo, no un hecho documentado/)
+    expect(documento).toContain('es una identificación propia, no un hecho documentado')
     const pastora = puntos(etapa('pastora', 1889).lectura)[0], trinidad = puntos(etapa('trinidad', 1889).lectura)[0]
     expect(metros(pastora, trinidad)).toBeGreaterThan(500)
     expect(de('pastora').cronologia.filter((c) => c.fuentes.includes('blo')).every((c) => c.fecha.desde >= 1784)).toBe(true)
@@ -47,9 +50,11 @@ describe('puentes sobre Catuche, Caroata y Anauco: ficha de evidencias (#271)', 
     expect([etapa('pastora', 1772).estado, etapa('trinidad', 1772).estado]).toEqual(['desconocido', 'desconocido'])
   })
 
-  it('el Anauco no corresponde a 1772: obra de 1786 a 1790, y esas fechas van como dudosas', () => {
-    expect(de('anauco').desde).toBe(1790)
-    expect(etapa('anauco', 1772).estado).toBe('ausente')
+  it('el Anauco y el de la Unión quedan «no se sabe» en 1772: sus fechas son de fuentes terciarias o crónicas y no dan una apertura firme', () => {
+    for (const id of ['anauco', 'union']) {
+      expect(de(id).desde, id).toBeUndefined()
+      expect([etapa(id, 1772).estado, etapa(id, 1772).certeza], id).toEqual(['desconocido', 'dudosa'])
+    }
     expect(de('anauco').cronologia.filter((c) => [1786, 1790].includes(c.fecha?.desde)).map((c) => c.certeza)).toEqual(['dudosa', 'dudosa'])
   })
 
