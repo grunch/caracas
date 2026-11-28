@@ -35,14 +35,14 @@ no hay una causa en el cambio que lo explique, pero **no se midió otra vez** pa
 Los topes de tarea larga, bytes, memoria y triángulos del presupuesto ya no pasan en `main` con los datos completos
 y siguen sin pasar en la rama: **no se tocaron**.
 
-Después de esta medición entró en `main` Las Mercedes (#316, `580168b`) y se fusionó en la rama. **No se volvió a
-medir la carga ni el cuadro**; lo que sí se volvió a contar:
+Después de esta medición entraron en `main` Las Mercedes (#316) y San Pablo (#317, `4c3765b`) y se fusionaron en
+la rama. **No se volvió a medir la carga ni el cuadro**; lo que sí se volvió a contar:
 
-- Triángulos de los hitos: 645.705 de 647.000 antes de 1946 y 1.125.078 de 1.127.000 en total (el convento suma
-  180). Los topes unitarios no se tocaron.
-- Build: 309,7 kB de entrada (tope 346) y 175,8 kB de workers, contra 174,2 de `main`. **El tope de workers (176)
-  no se tocó**, pero queda a 0,2 kB: el módulo del hito pesa 1,6 kB en los workers, que lo cargan con sus textos
-  de fuente y de pendientes. El próximo hito que entre tendrá que subirlo.
+- Triángulos de los hitos: 646.693 de 647.000 antes de 1946 y 1.126.066 de 1.127.000 en total (el convento suma
+  180). Los topes unitarios no se tocaron; quedan a 307 y 934 triángulos.
+- Build: 311,6 kB de entrada (tope 346) y 177,1 kB de workers, contra 175,6 de `main`. **El tope de workers sube
+  de 176 a 178**: el módulo del hito pesa 1,5 kB en los workers, que lo cargan con sus textos de fuente y de
+  pendientes.
 
 **No se midió**: el sitio construido, una máquina en reposo, un teléfono, ni la época de 1772 o 1843 (la medición
 es en 1946, como las anteriores).

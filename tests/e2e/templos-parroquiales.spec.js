@@ -107,3 +107,19 @@ test('la marca de Las Mercedes sale de su hito, vive desde 1772 y su ficha dice 
   await expect(page.locator('#ficha')).toContainText('1857')
   await expect(page.locator('#ficha')).toContainText('no se dibuja ningún edificio')
 })
+
+test('la iglesia de San Pablo se dibuja en 1772 y 1843 y ya no en 1889, cuando está el teatro', async ({ page }) => {
+  test.setTimeout(300_000)
+  await page.goto('/?sinintro&capture&sinsw')
+  await page.waitForFunction(() => window.lab?.ready && window.lab?.lineaDeTiempo && window.lab?.hitos?.userData?.rangos)
+  const centro = { x: -296, z: 436 }
+  for (const epoca of [1, 2, 3]) {
+    await page.evaluate((e) => window.lab.lineaDeTiempo.elegir(e), epoca)
+    await page.waitForFunction((e) => window.lab.ciudad.U.uEpocaA.value === e, epoca)
+    const iglesia = await pixelesDelTemplo(page, 'san-pablo', centro, epoca)
+    if (epoca < 3) expect(iglesia, `San Pablo se ve en la época ${epoca}`).toBeGreaterThan(10)
+    else expect(iglesia, 'San Pablo ya no existe en 1889').toBe(0)
+  }
+  expect(await pixelesDelTemplo(page, 'teatro-municipal', centro, 3), 'el teatro se ve en 1889').toBeGreaterThan(10)
+  expect(await pixelesDelTemplo(page, 'teatro-municipal', centro, 2), 'el teatro no existe en 1843').toBe(0)
+})

@@ -211,11 +211,11 @@ export const FICHAS = Object.freeze({
   },
   'teatro-municipal': {
     textos: [
-      [1, 'Aquí estaban la iglesia colonial y la plaza de San Pablo. Landaeta Rosales documenta una fuente en la plaza desde 1771; el teatro todavía no existía.'],
-      [2, 'La leyenda del plano de 1843 nombra la iglesia de San Pablo (P).'],
+      [1, 'Aquí estaban la iglesia colonial y la plaza de San Pablo; el teatro todavía no existía. El templo databa de 1580 (Landaeta Rosales). Según Otaduy, citado por Gois (2007), la visita del obispo Martí de 1772 lo describe de una nave, con otra menor del lado de la Epístola, la puerta principal al norte y una torre de tres cuerpos junto a la fachada; la cita no se cotejó con el original. Pegado a la torre estaba el Hospital Real, y después el Hospicio de la Caridad (plano de 1757, reproducido por Gois). La plaza tenía una fuente de piedra desde 1771.'],
+      [2, 'La leyenda del plano de 1843 nombra la iglesia de San Pablo (P) y dibuja la plazuela delante. Una carta de 1812 citada por Gois dice que el terremoto tumbó la torre sobre el coro. Gasparini, también citado por Gois y sin dar fecha, describe una fachada de dos cuerpos con frontispicio triangular y una torre maciza de dos cuerpos; que ese fuera el templo de 1843 es una lectura de Gois, y así se dibuja.'],
       [3, 'La iglesia fue demolida en 1876 (Landaeta Rosales). El teatro se levantó en ese lugar: el plano de 1889 lo numera 25, «Teatro Municipal». Fue inaugurado en 1881 como Teatro Guzmán Blanco (Fundarte). Se representa con su pórtico semicircular original, columnas, óculos y linterna, visibles en la fotografía de los años 1880. Ese frente se demolió en 1949 (Fundación Arquitectura y Ciudad), después de las épocas del mapa.'],
     ],
-    dudas: 'La envolvente exterior se conserva entre 1889, 1911 y 1936 como hipótesis de continuidad. Dimensiones, pintura, caja escénica y ornamentos pequeños aproximados; sin levantamiento arquitectónico. No se modela la reforma interior de 1930.',
+    dudas: 'De la iglesia de San Pablo no hay medidas: su planta sale de la proporción de un plano de 1757 puesta a escala con el recuadro del plano de 1843. Según cómo se lea esa escala el templo mediría 41 m de largo (así se dibuja) o hasta unos 57 m, y el modelo se sale unos 13 m del recuadro de 1843 hacia el sur. Sus alturas son interpretativas y las descripciones son citas de segunda mano. El hospital y el hospicio vecinos no se dibujan. Del teatro: la envolvente exterior se conserva entre 1889, 1911 y 1936 como hipótesis de continuidad. Dimensiones, pintura, caja escénica y ornamentos pequeños aproximados; sin levantamiento arquitectónico. No se modela la reforma interior de 1930.',
   },
   'santa-teresa': {
     textos: [
