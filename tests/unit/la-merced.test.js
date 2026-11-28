@@ -31,7 +31,7 @@ describe('Las Mercedes (#244)', () => {
 
   test('está en HITOS, detrás de los que ya estaban (no mueve sus semillas), y pasa la validación', () => {
     expect(h).toBe(laMerced)
-    expect(HITOS[HITOS.findIndex((x) => x.id === 'candelaria') + 1].id).toBe('las-mercedes') // detrás de La Candelaria; no «el último»: después entran otros
+    expect(HITOS[HITOS.findIndex((x) => x.id === 'candelaria') + 1].id).toBe('las-mercedes') // detrás de La Candelaria
     expect(validarHitos([laMerced], PLANO)).toEqual([])
   })
 
