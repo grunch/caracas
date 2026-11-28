@@ -10,7 +10,7 @@ en la malla de los hitos, y el Puente de Hierro de 1875 en 1889, 1911 y 1936. No
 |---|---|
 | 1772, 1843 | Nada: el puente no existe |
 | 1889, 1911 | El puente de 77,4 m con sus nueve apoyos, sobre el cauce abierto de cabeza a cabeza |
-| 1936 | La misma estructura. El tramo norte va a ras, sobre un terraplén: el plano dibuja dos edificaciones pegadas a la calzada y se conservan. Se ven seis apoyos |
+| 1936 | La misma estructura. El tramo norte va a ras, sobre un terraplén: el plano dibuja dos edificaciones pegadas a la calzada y se conservan. El cauce es más angosto, para no pisar la manzana del oeste. Se ven seis apoyos |
 | 1946 | Nada: lo sustituyó otro puente en 1937, sin alzado. La marca y la ficha siguen; no se reserva un vacío |
 
 ## El mecanismo
@@ -63,7 +63,7 @@ Un puente de un solo vano (Sucre, Dolores) no tiene pilas: el cauce solo dibuja 
 
 ## Qué es interpretativo
 
-- **El lecho.** Su forma, su fondo de 5 m y su ancho de 31 m no están medidos. La franja de agua va donde el plano
+- **El lecho.** Su forma, su fondo de 5 m y su ancho (31 m; 22 m en 1936) no están medidos. La franja de agua va donde el plano
   de 1936 dibuja el río sobre el eje. El río de los lados es el que pinta el suelo, a ras: en el borde del cuenco
   el agua baja 5 m en talud.
 - **El largo**, 77,4 m: el del símbolo de Mestre (±3 m). El estudio traía 90 m nominales.
@@ -75,9 +75,27 @@ Documentado: el puente de 1875, sus nueve apoyos intermedios, las vigas inferior
 
 ## Reserva
 
-Solo el cauce abierto bajo el tablero: 79 × 31 m en 1889 y 1911, 52 × 31 m en 1936. Sin planta de colisión: el
-puente se cruza. Con los datos del release `datos-2026-11-27-eb21bf8` no suprime ninguna casa en ninguna época y
-quita los árboles que caen dentro del cauce.
+- **Casas:** solo el cauce abierto bajo el tablero: 79 × 31 m en 1889 y 1911, 52 × 22 m en 1936. Con los datos del
+  release `datos-2026-11-27-eb21bf8` no le cambia la vida a ninguna casa en ninguna época.
+- **Árboles:** la huella y los accesos, con la vida del puente. A los lados del cauce, 9,5 m más (lo que mide una
+  copa grande: plantada al borde, tapa el tablero); en cada acceso, la calzada (9 m) hasta 12 m más allá de la
+  cabeza. En 1936 el margen es de 3 m y, junto al tramo a ras, solo la calzada: los árboles de los patios vecinos
+  no se tocan. Con el release actual se retiran ocho árboles, todos anteriores a 1889.
+- **Colisión:** ninguna. El puente se cruza.
+
+## Manzanas
+
+Ningún hito va encima de una manzana. Medido sobre el suelo de manzanas del release (`public/plano/suelo-manzanas*.png`,
+distancia firmada al borde de cada manzana), cada metro a lo largo y cada medio metro a lo ancho:
+
+| Época | Tablero, cabezas y accesos (9 m de ancho) | Cauce |
+|---|---|---|
+| 1889 | A más de 16 m de toda manzana | A más de 16 m |
+| 1911 | A más de 16 m | A más de 16 m |
+| 1936 | Fuera: la más cercana queda a 1,2 m | Fuera: a 1,2 m |
+
+En 1936 el cauce de 31 m entraba hasta 2,1 m en la manzana del oeste. Por eso en esa época mide 22 m, con el talud
+más corto. Las dos edificaciones del lado este quedan a 1,2 m del terraplén: no se pisan, pero están pegadas.
 
 ## Límites
 

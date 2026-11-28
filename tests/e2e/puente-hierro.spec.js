@@ -7,7 +7,7 @@ test('el Puente de Hierro se dibuja en 1889, 1911 y 1936, y no antes ni en 1946'
   const errores = []
   page.on('pageerror', e => errores.push(e.message))
   await page.goto('/?sinintro&capture&sinsw')
-  await page.waitForFunction(() => window.lab?.ready)
+  await page.waitForFunction(() => window.lab?.ready && window.lab?.lineaDeTiempo)
 
   // Arrange: los vértices del puente en la malla de los hitos, con su vida y su modo de apoyo
   const datos = await page.evaluate(() => {

@@ -42,7 +42,7 @@ const SUELO_VERDE = Object.freeze([1, 1, -1])
 const AGUA = Object.freeze([0.21, 0.26, 0.175])
 
 const sinLecho = () => 0
-const lechoDeParte = ({ vano = null, anchoCauce = 0 }, fondo) => (vano ? lechoDe({ vano, ancho: anchoCauce, fondo }) : sinLecho)
+const lechoDeParte = ({ vano = null, anchoCauce = 0, taludAncho }, fondo) => (vano ? lechoDe({ vano, ancho: anchoCauce, fondo, taludAncho }) : sinLecho)
 
 function soltar(edificio) {
   const [geometrias, materiales] = [new Set(), new Set()]
@@ -127,18 +127,19 @@ export function sueloDelPuente(lecho, [x0, x1], ancho, agua = null) {
 /**
  * Dibuja un puente del catálogo entre sus dos cabezas: `id` y `anio` eligen la estructura (si esa época no tiene
  * alzado, no dibuja nada: el cruce sigue en la marca); `largo`, la distancia medida entre cabezas; `vano` y
- * `anchoCauce`, el lecho abierto bajo el tablero (sin `vano`, el puente va a ras del terreno); `agua`, la franja
+ * `anchoCauce`, el lecho abierto bajo el tablero (sin `vano`, el puente va a ras del terreno), con `taludAncho`
+ * si las orillas de los lados tienen que ser más cortas que lo usual; `agua`, la franja
  * del río dentro del lecho; `aRas` y `anchoRas`, un tramo donde el tablero va a ras, sobre un terraplén propio
  * (ahí el suelo de la ciudad se abre: podría tapar el tablero); `capa`, si la parte dibuja solo la estructura o solo el
  * cauce (CAPA; por omisión, todo).
  */
-export function puente(p, { id, anio, largo = null, vano = null, anchoCauce = 0, agua = null, aRas = null, anchoRas = 0, capa = null }) {
+export function puente(p, { id, anio, largo = null, vano = null, anchoCauce = 0, taludAncho, agua = null, aRas = null, anchoRas = 0, capa = null }) {
   if (capa && !Object.values(CAPA).includes(capa)) throw new Error(`puente ${id}: capa desconocida "${capa}"`)
   const { edificio, apoyos, etapa, metadatos } = crearPuente({ id, anio, nivelDetalle: 'ciudad', largo })
   try {
     if (!etapa.modelo) return
     const { largo: L, cotaTablero } = metadatos
-    const lecho = lechoDeParte({ vano, anchoCauce }, cotaTablero)
+    const lecho = lechoDeParte({ vano, anchoCauce, taludAncho }, cotaTablero)
     const r = p.rasante([-L / 2, 0], [L / 2, 0])
     const pintar = (malla, geometria) => r.geo(geometria, { color: malla.material.color.toArray(), mat: MAT.LISO }) // three guarda el color lineal
     if (dibuja(capa, CAPA.ESTRUCTURA)) {
@@ -156,7 +157,7 @@ export function puente(p, { id, anio, largo = null, vano = null, anchoCauce = 0,
     if (!dibuja(capa, CAPA.CAUCE)) return
     if (vano) {
       const suelo = sueloDelPuente(lecho, vano, anchoCauce, agua)
-      r.geo(suelo.orilla, { color: SUELO_VERDE, mat: MAT.JARDIN })
+      if (suelo.orilla) r.geo(suelo.orilla, { color: SUELO_VERDE, mat: MAT.JARDIN }) // un lecho que es todo agua no tiene orilla
       if (suelo.agua) r.geo(suelo.agua, { color: AGUA, mat: MAT.LISO })
     }
     // a ras, el puente va sobre un terraplén que sigue la rasante: el tablero no se hunde en el suelo ni vuela

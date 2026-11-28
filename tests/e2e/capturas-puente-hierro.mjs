@@ -35,11 +35,11 @@ await page.waitForFunction(tinta => window.lab.ciudad.U.uColor.value === (tinta 
 await page.waitForTimeout(4000)
 for (const [epoca, año] of años.filter(([, año]) => !solo || solo === año)) {
   await page.evaluate(e => window.lab.lineaDeTiempo.elegir(e), epoca)
-  await page.waitForFunction(e => window.lab.ciudad.U.uEpocaA.value === e && window.lab.ciudad.U.uOlaEpoca.value >= 9000, epoca, { timeout: 90000 })
+  await page.waitForFunction(e => window.lab.ciudad.U.uEpocaA.value === e && window.lab.ciudad.U.uOlaEpoca.value >= 9000, epoca, { timeout: 300000 })
   for (const [nombre, vista] of Object.entries(VISTAS).filter(([nombre]) => !soloVista || soloVista === nombre)) {
     await page.evaluate(v => { window.lab.cam.jump(v); window.lab.pedirCuadro(6) }, vista)
     await page.waitForTimeout(4500)
-    await page.screenshot({ path: `${carpeta}/${prefijo}-${año}-${nombre}${enTinta ? '-tinta' : ''}.png`, timeout: 150000 })
+    await page.screenshot({ path: `${carpeta}/${prefijo}-${año}-${nombre}${enTinta ? '-tinta' : ''}.png`, timeout: 400000 })
     console.log(`captura ${prefijo} ${año} ${nombre}`)
   }
 }

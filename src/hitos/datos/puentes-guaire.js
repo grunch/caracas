@@ -36,9 +36,26 @@ const ANCHO_RAS_M = ANCHO_TABLERO_M + 2
 // del plano de 1936 (y = 9447 y 9458 px), que es el que el suelo de la ciudad pinta en todas estas épocas.
 const AGUA = Object.freeze([2.6, 8.1])
 const franja = (tramo, ancho) => rectanguloPx(marco, tramo[1] - tramo[0], ancho, (tramo[0] + tramo[1]) / 2, 0)
+// En 1936 hay una manzana al oeste cuyo borde queda a unos 12 m del eje: el cauce se angosta a 11 m por lado
+// para no pisarla (ningún hito va encima de una manzana), con el talud más corto.
+const ANCHO_CAUCE_1936_M = 22
+const TALUD_1936_M = 6.5
 const cauces = Object.freeze([
   Object.freeze({ nace: 3, muere: 5, poligono: franja(vanoEntero, ANCHO_CAUCE_M) }),
-  Object.freeze({ nace: 5, muere: 6, poligono: franja(vano1936, ANCHO_CAUCE_M) }),
+  Object.freeze({ nace: 5, muere: 6, poligono: franja(vano1936, ANCHO_CAUCE_1936_M) }),
+])
+// Los árboles se retiran de la huella y de los accesos, no solo del cauce: una copa plantada al borde tapa el
+// tablero. A los lados del cauce, lo que mide una copa grande; en cada acceso, la calzada y 12 m más allá de la
+// cabeza. En 1936 el margen es de 3 m y, junto al tramo a ras, solo la calzada: los árboles de los patios
+// vecinos son ajenos.
+const MARGEN_COPA_M = 9.5
+const MARGEN_COPA_1936_M = 3
+const ACCESO_M = 12
+const calzada = Object.freeze([vanoEntero[0] - ACCESO_M, vanoEntero[1] + ACCESO_M])
+const sinArboles = Object.freeze([
+  Object.freeze({ nace: 3, muere: 5, poligono: franja(vanoEntero, ANCHO_CAUCE_M + 2 * MARGEN_COPA_M) }),
+  Object.freeze({ nace: 5, muere: 6, poligono: franja(vano1936, ANCHO_CAUCE_1936_M + 2 * MARGEN_COPA_1936_M) }),
+  Object.freeze({ nace: 3, muere: 6, poligono: franja(calzada, ANCHO_RAS_M) }),
 ])
 const parte = { tipo: 'puente', id: 'hierro', largo: marco.largo }
 const cauce = { ...parte, capa: 'cauce', anchoCauce: ANCHO_CAUCE_M, agua: AGUA }
@@ -48,16 +65,16 @@ export const puenteHierro = Object.freeze({
   // 1889, 1911 y 1936: en 1937 lo sustituyó otro puente, sin alzado restituido; en 1946 no se dibuja ni se reserva
   nace: 3, muere: 6,
   largo: marco.largo, cabezas: CALCE_HIERRO.cabezas,
-  // Sin planta: no es un obstáculo, se cruza. La reserva (casas y árboles) es solo el cauce abierto bajo el tablero.
+  // Sin planta: no es un obstáculo, se cruza. La reserva de casas es solo el cauce abierto bajo el tablero.
   planta: Object.freeze([]),
-  suprimePorEpoca: cauces, sinArbolesPorEpoca: cauces,
+  suprimePorEpoca: cauces, sinArbolesPorEpoca: sinArboles,
   // El suelo de la ciudad se abre en el cauce y, en 1936, también bajo el tramo a ras.
   sueloPropioPorEpoca: Object.freeze([...cauces, Object.freeze({ nace: 5, muere: 6, poligono: franja(aRas1936, ANCHO_RAS_M) })]),
   // La estructura es una sola de 1889 a 1936; el cauce (lecho y pilas a la vista) cambia en 1936.
   partes: Object.freeze([
     Object.freeze({ ...parte, capa: 'estructura', anio: 1889, nace: 3, muere: 6 }),
     Object.freeze({ ...cauce, anio: 1889, nace: 3, muere: 5, vano: vanoEntero }),
-    Object.freeze({ ...cauce, anio: 1936, nace: 5, muere: 6, vano: vano1936, aRas: aRas1936, anchoRas: ANCHO_RAS_M }),
+    Object.freeze({ ...cauce, anio: 1936, nace: 5, muere: 6, vano: vano1936, anchoCauce: ANCHO_CAUCE_1936_M, taludAncho: TALUD_1936_M, aRas: aRas1936, anchoRas: ANCHO_RAS_M }),
   ]),
   fuente: `Planos de Mestre (1889), Razetti (1911) y DCN (1936), calzados: docs/puentes-guaire-calce.md; Silva Contreras, Tecnología y Construcción 20-II (2004), pp. 32–34 y 40: ${SILVA}; FAC (inauguración en 1875, sustitución en 1937): ${FAC}; estudio de Miraflores (grunch/miraflores, docs/puentes-guaire/hierro.md)`,
   verificar: Object.freeze([
@@ -65,7 +82,7 @@ export const puenteHierro = Object.freeze({
     'Largo de 77,4 m: el del símbolo de Mestre, que en el Puente Constitución da 60,7 m contra 59,56 m del estudio. Los pedestales de Razetti quedan a 95,5 m, pero ese plano da 48 m para el Sucre de 60 m: no se usa para el largo. El estudio traía 90 m nominales; ninguna fuente consultada da el largo.',
     'Ancho (7 m), altura del tablero sobre el lecho (5 m), espesores y colores: nominales del estudio de Miraflores. Nueve apoyos intermedios, vigas inferiores, columnas y barandas: Silva Contreras y grabado histórico.',
     'Lecho interpretativo: el relieve (Copernicus GLO-30) no trae el cauce del Guaire. Se abre un cuenco de 5 m bajo el tablero, de cabeza a cabeza; ni su forma ni su fondo son medidos. La franja de agua va donde el plano de 1936 dibuja el río sobre el eje.',
-    'En 1936 el tramo norte va a ras del terreno para conservar dos edificaciones del plano pegadas a la calzada; ahí las pilas no se ven.',
+    'En 1936 el tramo norte va a ras del terreno para conservar dos edificaciones del plano pegadas a la calzada; ahí las pilas no se ven. El cauce se angosta a 22 m para no pisar la manzana del oeste.',
     'En 1946 el cruce existe (puente sustituto de 1937) pero no tiene alzado: no se dibuja ni se reserva.',
   ]),
 })

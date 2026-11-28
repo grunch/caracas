@@ -173,14 +173,36 @@ describe('Puente de Hierro: reserva limitada', () => {
   })
 
   test('quita los árboles del cauce y conserva los ajenos, antes y después de la estructura', () => {
-    // Arrange: uno bajo el tablero, uno a 40 m del eje
-    const dentro = [puenteHierro.x, puenteHierro.y + 20]
-    const datos = { n: 2, x: Float32Array.of(dentro[0], dentro[0] + 80), y: Float32Array.of(dentro[1], dentro[1]), nace: Uint16Array.of(1, 1), muere: Uint16Array.of(0, 0) }
+    // Arrange: en el marco del puente (a lo largo, a lo ancho, en metros) → píxeles
+    const [ux, uy] = puenteHierro.eje
+    const px = (a, b) => [puenteHierro.x + (a * ux - b * uy) / plano.metro, puenteHierro.y + (a * uy + b * ux) / plano.metro]
+    const casos = [
+      [[10, 0], [1, 3]], // bajo el tablero
+      [[10, 22], [1, 3]], // al borde del cauce: su copa taparía el tablero
+      [[-puenteHierro.largo / 2 - 8, 2], [1, 3]], // en el acceso norte, sobre la calzada
+      [[puenteHierro.largo / 2 + 8, -2], [1, 3]], // en el acceso sur
+      [[10, 40], [1, 0]], // a 40 m del eje: ajeno
+      [[-puenteHierro.largo / 2 - 8, 12], [1, 0]], // al lado del acceso, fuera de la calzada: ajeno
+      [[puenteHierro.largo / 2 + 30, 0], [1, 0]], // sobre la calle, más allá del acceso: ajeno
+    ]
+    const puntos = casos.map(([[a, b]]) => px(a, b))
+    const datos = { n: casos.length, x: Float32Array.from(puntos, p => p[0]), y: Float32Array.from(puntos, p => p[1]), nace: new Uint16Array(casos.length).fill(1), muere: new Uint16Array(casos.length) }
     // Act
     const salida = suprimirArbolesDeHitos(datos, [puenteHierro])
     // Assert
-    expect([salida.nace[0], salida.muere[0]]).toEqual([1, 3])
-    expect([salida.nace[1], salida.muere[1]]).toEqual([1, 0])
+    casos.forEach(([, vida], i) => expect([salida.nace[i], salida.muere[i]], `árbol ${i}`).toEqual(vida))
+  })
+
+  test('en 1936, junto al tramo a ras, solo se despeja la calzada: los árboles de los patios vecinos siguen', () => {
+    const [ux, uy] = puenteHierro.eje
+    const px = (a, b) => [puenteHierro.x + (a * ux - b * uy) / plano.metro, puenteHierro.y + (a * uy + b * ux) / plano.metro]
+    // nacidos en 1936: uno en un patio a 12 m del eje, frente al tramo a ras; otro sobre la calzada de ese tramo
+    const puntos = [px(-23, -12), px(-23, 0)]
+    const datos = { n: 2, x: Float32Array.from(puntos, p => p[0]), y: Float32Array.from(puntos, p => p[1]), nace: Uint16Array.of(5, 5), muere: Uint16Array.of(6, 6) }
+    const salida = suprimirArbolesDeHitos(datos, [puenteHierro])
+    expect([salida.nace[0], salida.muere[0]]).toEqual([5, 6])
+    expect(salida.nace[1]).toBeGreaterThanOrEqual(6) // no llega a nacer mientras el puente está en pie
+    for (const { desde, hasta } of poligonosConVida(puenteHierro, 'sinArboles')) expect(vivo(desde, hasta, 6)).toBe(false)
   })
 
   test('el lecho empalma con el terreno en el borde y lleva la franja del río de lado a lado', () => {
@@ -204,8 +226,10 @@ describe('Puente de Hierro: reserva limitada', () => {
       expect([...g.attributes.suelo.array].every(s => s === 1)).toBe(true)
       for (let i = 0; i < g.attributes.normal.count; i++) expect(g.attributes.normal.getY(i)).toBeGreaterThan(0.5)
     }
-    // sin franja de río no hay agua
+    // sin franja de río no hay agua; y un lecho que es todo agua no tiene orilla ni rompe el dibujo
     expect(sueloDelPuente(lecho, cauce.vano, cauce.anchoCauce).agua).toBeNull()
+    expect(sueloDelPuente(lecho, cauce.vano, cauce.anchoCauce, [cauce.vano[0] - 1, cauce.vano[1] + 1]).orilla).toBeNull()
+    expect(() => construirHitos([{ ...puenteHierro, partes: [{ ...cauce, agua: [cauce.vano[0] - 1, cauce.vano[1] + 1] }] }], coords)).not.toThrow()
   })
 
   test('en 1936 el tramo norte va a ras, con suelo propio bajo el tablero, y conserva lo edificado al lado', () => {
@@ -214,6 +238,11 @@ describe('Puente de Hierro: reserva limitada', () => {
     expect(cauce1936.aRas[1]).toBe(cauce1936.vano[0])
     expect(cauce1936.anchoRas).toBeLessThan(10) // apenas más que el tablero de 7 m
     expect(zonasDeSupresion([puenteHierro])).toHaveLength(2) // el tramo a ras no suprime casas
+    // el cauce de 1936 es más angosto (hay una manzana al oeste) y bajo las pilas sigue llegando al fondo
+    expect(cauce1936.anchoCauce).toBeLessThan(puenteHierro.partes[1].anchoCauce)
+    const lecho1936 = lechoDe({ vano: cauce1936.vano, ancho: cauce1936.anchoCauce, fondo: 5, taludAncho: cauce1936.taludAncho })
+    expect(lecho1936(10, 2.4)).toBeCloseTo(5, 6)
+    expect(lecho1936(10, cauce1936.anchoCauce / 2)).toBe(0)
     // el terraplén va bajo el tablero, sobre la rasante: ni un vértice suyo sigue el suelo ni pasa de la losa
     const terraplen = verticesDelPuente().filter(v => v.nace === 5 && v.mat === MAT.JARDIN && v.modo === APOYO.RASANTE)
     expect(terraplen).toHaveLength(24)
