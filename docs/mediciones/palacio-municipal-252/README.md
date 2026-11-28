@@ -39,8 +39,10 @@ Lo que no depende de la carga se repite exacto en las dos pasadas.
 Los topes de carga, tarea larga, bytes, memoria y triángulos del presupuesto ya no pasan en `main` con los datos
 completos y siguen sin pasar en la rama: **no se tocaron**.
 
-Topes que sí suben, medidos con `npx vitest run tests/unit/hitos.test.js tests/unit/hitos-palacios.test.js` y
-`node tools/rendimiento/presupuesto-build.mjs`: ver la sección Rendimiento del PR.
+Topes que sí suben, medidos después de fusionar también #316 (Las Mercedes): triángulos de los hitos antes de
+1946, de 647.000 a 650.000 (648.121); total, de 1.127.000 a 1.130.000 (1.127.494); workers del build, de 176 a
+178 kB (176,6 contra 174,2 de `main`; `node tools/rendimiento/presupuesto-build.mjs`). La tabla de arriba es
+anterior a esa fusión.
 
 **No medí**: el sitio construido en un navegador (solo el tamaño del build), un teléfono, ni una máquina en reposo.
 Una primera tanda contra `main` `b482621` (sin La Candelaria) se descartó: mezclaba los dos templos.
