@@ -155,7 +155,8 @@ solo lo menciona en 1843, por la pintura de Bellermann.
 ### Correcciones listas para código
 
 Son cambios de **texto y de cita**; ninguno toca geometría, vidas de hitos ni datos generados, y ninguno crea una
-época. No se aplican en este PR porque esos archivos están en uso por otros PRs abiertos.
+época. No se aplicaron en el PR de esta matriz porque esos archivos estaban en uso por otros PRs abiertos; se
+aplicaron después, en un PR aparte (rama `fix/citas-268`), con `tests/unit/citas-268.test.js`.
 
 1. `src/hitos/datos/plaza-bolivar.js`, `verificar`: cambiar «la estatua se puso en 1874 (fechas de las fotos, a
    verificar)» por la fecha documentada: decreto del 18-11-1872, inauguración el 7-11-1874 (F9, p. 13). El retiro del

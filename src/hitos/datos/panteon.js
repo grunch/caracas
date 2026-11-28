@@ -7,9 +7,9 @@ const planta = [rectanguloPx(marco, 62, 26, 26, 0)]
 export const panteon = Object.freeze({
   id: 'panteon', nombre: 'Panteón Nacional', ...marco, nace: 2, muere: 0,
   planta, suprime: planta,
-  fuente: 'Plano de Caracas de 1936 (Panteón Nacional); Bellermann, circa 1842–1845; Lessmann, circa 1885–1900 (https://elarchivo.org/producto/panteon-nacional/); Fundación Arquitectura y Ciudad (https://fundaayc.com/tag/panteon-nacional/).',
+  fuente: 'Plano de Caracas de 1936 (Panteón Nacional); Bellermann, circa 1842–1845; Lessmann, ca. 1885 (https://elarchivo.org/producto/panteon-nacional/); Fundación Arquitectura y Ciudad (https://fundaayc.com/tag/panteon-nacional/).',
   verificar: [
-    'Iglesia inaugurada en 1781, destruida parcialmente en 1812; en 1843 se representan sus ruinas según Bellermann. No se reconstruyen las obras de 1772.',
+    'Iglesia inaugurada en 1781 según unas fuentes y bendecida en 1783 según otras (https://iamvenezuela.com/2016/05/panteon-nacional/; https://fundaayc.com/2019/12/15/algo-mas-sobre-la-postal-no-191/; https://camaradecaracas.com/la-camara-caracas-y-sus-historias/cronicas-de-la-ciudad/biografia-del-panteon-nacional/); ninguna cita un documento. Destruida parcialmente en 1812; en 1843 se representan sus ruinas según Bellermann. No se reconstruyen las obras de 1772.',
     'Panteón inaugurado en 1875. Rosetón y dos agujas para 1889; reforma de Chataing de 1911 con ventana ojival; reforma de Mujica Millán terminada en 1930, con tres torres, para 1936.',
     'Modelo interpretativo: medidas, planta, laterales, cubiertas, daños y ornamentación simplificados, sin levantamiento. La posición y orientación requieren cotejo georreferenciado.',
   ],

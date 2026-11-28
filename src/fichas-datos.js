@@ -80,7 +80,7 @@ export const FICHAS = Object.freeze({
     textos: [
       [1, 'La plaza mayor era el mercado de la ciudad: una explanada de tierra rodeada de galerías de arcos, con hileras de puestos bajo toldos. Así la muestran un grabado fechado en 1852 y la pintura que Camille Pissarro hizo de ella por esos años.'],
       [2, 'Desde el acuerdo de la Diputación Provincial del 10 de diciembre de 1842 su nombre oficial es Plaza Bolívar. Todavía funciona como mercado: el nombre no anticipa el jardín ni la estatua ecuestre inaugurada en 1874.'],
-      [3, 'Hacia 1870 el mercado ya no está: la foto de Lessmann y la acuarela de Bolet muestran la plaza en obra, con los árboles recién plantados. Después llega el jardín, con canteros, faroles, una reja alrededor y, en el centro, la estatua ecuestre de Bolívar, que las fotos fechan en 1874. El plano de 1889 ya la llama Plaza Bolívar.'],
+      [3, 'Hacia 1870 el mercado ya no está: la foto de Lessmann y la acuarela de Bolet muestran la plaza en obra, con los árboles recién plantados. Después llega el jardín, con canteros, faroles, una reja alrededor y, en el centro, la estatua ecuestre de Bolívar, inaugurada el 7 de noviembre de 1874. El plano de 1889 ya la llama Plaza Bolívar.'],
       [4, 'Las fotos de 1910 a 1920 la muestran con el piso de mosaico en damero, los faroles de varios brazos y los árboles ya crecidos.'],
     ],
     hoy: 'la Plaza Bolívar, con la misma estatua.',

@@ -591,7 +591,7 @@ El modelo `src/hitos/panteon-modelo.js` se elaboró en el estudio independiente 
 al lienzo común mediante `src/hitos/panteon.js`. Se cotejaron las imágenes de
 [Fundación Arquitectura y Ciudad](https://fundaayc.com/tag/panteon-nacional/), incluida la fotografía de
 la reforma terminada y el alzado de concurso de Chataing, con
-[la fotografía de Lessmann catalogada circa 1885–1900](https://elarchivo.org/producto/panteon-nacional/).
+[la fotografía de Lessmann catalogada ca. 1885](https://elarchivo.org/producto/panteon-nacional/).
 
 - 1843: Bellermann, fachada colonial con volutas, ruinas y arcadas sin techo.
 - 1889: dos torres con agujas caladas, tres portales ojivales y rosetón circular central.
