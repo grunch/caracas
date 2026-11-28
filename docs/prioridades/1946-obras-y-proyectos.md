@@ -58,6 +58,12 @@ con el eje de OSM actual. No hay reserva de avenida Bolívar en el archivo de 19
 agrega una sin polígonos de demolición fechados. Tampoco se añaden las torres del Centro
 Simón Bolívar como consecuencia automática de tener El Silencio.
 
-**Pendiente de #276:** superponer fotografías aéreas fechadas, localizar lotes demolidos
-por fase y registrar si el plano los actualizó después de la toma. No se declara resuelta
-la obra de 1946 por conocer la inauguración de 1949.
+**Revisión del 28-11-2026:** la ficha de evidencias por etapa, las demoliciones por tramo y la lectura
+manzana por manzana están en [`docs/issue-276-avenida-bolivar.md`](../issue-276-avenida-bolivar.md). El plano
+deja en blanco una franja de unos 30 m en la primera manzana al este de El Silencio; el resto del corredor,
+hasta la calle Sur 11, sigue edificado. Ninguna fuente fecha esa franja en 1946: la primera evidencia fechada
+de terreno despejado es de 1948. El mapa de 1946 no cambia.
+
+**Pendiente de #276:** fechar las demoliciones de la primera manzana (entre 1945 y 1948) y las del resto del
+tramo, con fotografías aéreas o partes de obra. No se declara resuelta la obra de 1946 por conocer la
+inauguración de 1949.
