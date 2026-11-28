@@ -101,16 +101,33 @@ test('con el relieve real, el piso del mercado de la plaza se ve entero (T41b)',
   await verLaPlaza(page)
 })
 
-test('la Catedral aparece en 1772 y Santa Capilla recién en 1889', async ({ page }) => {
+test('la Catedral aparece en 1772 y no cambia; en la esquina de San Mauricio el edificio cambia con la época (#253)', async ({ page }) => {
   await listo(page)
-  // el tejado de la nave de la Catedral (al este de la plaza) y el de Santa Capilla (al norte), desde arriba
+  // el tejado de la nave de la Catedral (al este de la plaza), desde arriba
   const catedral = { x: 80, z: -12, lado: 20 }
-  const capilla = { x: 0, z: -175, lado: 12 }
   const [c0, c1, c5] = [await colorDeLaPlaza(page, 0, catedral), await colorDeLaPlaza(page, 1, catedral), await colorDeLaPlaza(page, 5, catedral)]
   expect(distancia(c0, c1)).toBeGreaterThan(12)
   expect(distancia(c1, c5)).toBeLessThan(6)
-  const [s2, s3] = [await colorDeLaPlaza(page, 2, capilla), await colorDeLaPlaza(page, 3, capilla)]
-  expect(distancia(s2, s3)).toBeGreaterThan(12)
+  // la nave de San Mauricio, que después es la nave norte de la Santa Capilla: suelo antes de 1772, tejado desde entonces
+  const naveNorte = { x: 0, z: -175, lado: 12 }
+  const [n0, n1, n2] = [await colorDeLaPlaza(page, 0, naveNorte), await colorDeLaPlaza(page, 1, naveNorte), await colorDeLaPlaza(page, 2, naveNorte)]
+  expect(distancia(n0, n1)).toBeGreaterThan(12)
+  expect(distancia(n1, n2)).toBeLessThan(6)
+  // la torre de San Mauricio (al suroeste): con su cupulita en 1772, el muñón encalado en 1843 y el atrio de la capilla en 1889
+  const torreVieja = { x: -6.45, z: -161.85, lado: 8 }
+  const [t1, t2, t3] = [await colorDeLaPlaza(page, 1, torreVieja), await colorDeLaPlaza(page, 2, torreVieja), await colorDeLaPlaza(page, 3, torreVieja)]
+  expect(distancia(t1, t2)).toBeGreaterThan(12)
+  expect(distancia(t2, t3)).toBeGreaterThan(12)
+  // la nave sur es del ensanche de 1889–1891: suelo en 1889, tejado en 1911 y después
+  const naveSur = { x: 0.7, z: -152.7, lado: 12 }
+  const [s3, s4, s5] = [await colorDeLaPlaza(page, 3, naveSur), await colorDeLaPlaza(page, 4, naveSur), await colorDeLaPlaza(page, 5, naveSur)]
+  expect(distancia(s3, s4)).toBeGreaterThan(12)
+  expect(distancia(s4, s5)).toBeLessThan(6)
+  // el medio del solar: el patio del ensanche en 1911 y la azotea de la nave central en 1936
+  const medio = { x: -1.5, z: -163.85, lado: 8 }
+  const [m4, m5, m6] = [await colorDeLaPlaza(page, 4, medio), await colorDeLaPlaza(page, 5, medio), await colorDeLaPlaza(page, 6, medio)]
+  expect(distancia(m4, m5)).toBeGreaterThan(12)
+  expect(distancia(m5, m6)).toBeLessThan(6)
 })
 
 test('acostada la ciudad, los hitos no se dibujan (la hoja queda limpia)', async ({ page }) => {

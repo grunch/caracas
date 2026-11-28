@@ -148,8 +148,10 @@ describe('los edificios civiles', () => {
     // Santa Rosalía, San Juan y San José (#259) añaden 4.747: 625.293 antes de 1946 y 1.104.666 en total (tope 625→630 mil).
     // Dolores y Restaurador (#272), solo en 1911, añaden 16.326: 641.619 antes de 1946 y 1.120.992 en total
     // (topes 630→645 mil y 1.110→1.125 mil).
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(645_000)
-    expect(d.indices.length / 3).toBeLessThan(1_125_000)
+    // San Mauricio y la Santa Capilla por etapas (#253) añaden 2.412: con La Candelaria (#243) en main, 646.586 antes de
+    // 1946 y 1.125.959 en total (topes 645→650 mil y 1.125→1.130 mil).
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(650_000)
+    expect(d.indices.length / 3).toBeLessThan(1_130_000)
     expect(d.rangos.length).toBe(HITOS.length)
   }, 15_000)
 })

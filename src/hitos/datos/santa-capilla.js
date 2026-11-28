@@ -23,7 +23,7 @@ export const SOLAR_SANTA_CAPILLA = rect(0, FRENTE, NORTE, SUR)
 
 const ASCENSO = 'Francisco Pérez Gallego, «De la ermita de San Sebastián a la Santa Capilla, Caracas: la vocación religiosa de un lugar. 1567-1900», trabajo de ascenso, Facultad de Arquitectura y Urbanismo, Universidad Central de Venezuela, 2017: https://saber.ucv.ve/jspui/handle/10872/21681'
 const MAESTRIA = 'Francisco Pérez Gallego, «Santuario Eucarístico Santa Capilla: estudio y proyecto para su restauración y puesta en valor», trabajo final de maestría, Universidad Central de Venezuela, 2011, vol. I: https://saber.ucv.ve/jspui/handle/10872/24360'
-const HIPOTESIS = 'Las medidas de la planta salen de poner a escala, sobre el solar del plano de 1936, la «hipótesis gráfica» de Pérez Gallego para la etapa: una reconstrucción suya, no un levantamiento de época. El solar del plano y su dibujo coinciden en la proporción con un 2 % de diferencia.'
+const HIPOTESIS = 'Planta: la «hipótesis gráfica» de Pérez Gallego para la etapa, puesta a escala sobre el solar del plano de 1936. Es una reconstrucción suya, no un levantamiento de época; su proporción difiere un 2 % de la del solar.'
 
 // ============================ San Mauricio (1772 y 1843) ============================
 
@@ -63,16 +63,16 @@ export const sanMauricio = Object.freeze({
     // «al costado, que mira al sur, tiene un corredor, y por cabeza de él, la sacristía, que es muy pequeña»
     { tipo: 'cuerpo', ...SACRISTIA_MAURICIO, alto: 4.2, altoTecho: 1.4 },
   ],
-  fuente: `${ASCENSO} (pp. 94–117: documento de 1737 con las medidas de la nave, AGI, Santo Domingo, 728-A, citado por Rosario Salazar y este por Pérez Gallego; visita del obispo Mariano Martí de 1772 según Ernesto Otaduy, Iglesias de la antigua Caracas, 1974, pp. 20–21, citado por Pérez Gallego; inventario de la cofradía de Nuestra Señora de Guía de 1794; Arístides Rojas, Crónica de Caracas, sobre la torre después de 1812, citado por Pérez Gallego; dibujo de Carl Geldner de la década de 1860); lugar: símbolo de iglesia del plano de 1772 y recuadro en blanco del plano de Jesurún de 1843 (I «San Mauricio») en la esquina sureste del cruce, y solar del plano de 1936`,
+  fuente: `${ASCENSO} (pp. 94–117; de segunda mano, citados por Pérez Gallego: el documento de 1737 con las medidas de la nave, la visita del obispo Martí de 1772 según Ernesto Otaduy, el inventario de 1794, Arístides Rojas sobre la torre después de 1812 y el dibujo de Carl Geldner); lugar: símbolo de iglesia del plano de 1772 y recuadro en blanco del plano de Jesurún de 1843 (I «San Mauricio»), en la esquina del solar del plano de 1936`,
   verificar: [
-    'Alturas sin fuente: ninguna está medida. Las naves van de 7 y 9 m al borde de los muros y la torre, de 21 m hasta el arranque del remate, por proporción. La hipótesis gráfica de Pérez Gallego dibuja la torre de 43,2 m (21,60 + 10,14 + 5,73 + 3,54 + 2,19) porque, dice, «competía en altura con la torre de la Catedral»; Martí solo escribe «con proporcionada elevación». No se siguió: acá va más baja que la torre de la Catedral del mapa.',
+    'Alturas sin medida: naves de 7 y 9 m y torre de 21 m hasta el remate, por proporción. La hipótesis gráfica de Pérez Gallego dibuja la torre de 43,2 m porque «competía en altura con la torre de la Catedral»; Martí solo dice «con proporcionada elevación». No se siguió: va más baja que la torre de la Catedral del mapa.',
     HIPOTESIS,
-    'Lo que sí tiene medida de época es la nave del medio: «25 varas de largo y nueve de ancho» (20,9 × 7,5 m) en el documento de 1737, citado de segunda mano. El ancho de las naves laterales, el largo total de 26 m, el atrio de 2,7 m y el lugar de la torre y de la sacristía son de la hipótesis gráfica.',
-    'La nave central va más alta que las laterales porque así es la pieza del mapa; ninguna fuente lo dice. La fachada es la de pilastras y frontón de esa pieza, encalada: Martí dice «frontispicio de ladrillo» y Pérez Gallego lo lee, por un lienzo, de líneas cóncavas y convexas y de ladrillo a la vista.',
-    'En 1843 va con el primer cuerpo de la torre y con todas las cubiertas puestas. El terremoto de 1812 tumbó la torre «y parte de las cubiertas»; la iglesia siguió en uso «entre ruinas parciales y espacios provisionales» hasta 1883. No se sabe qué cubiertas seguían caídas en 1843 ni cuándo se rehicieron: el dibujo no lo muestra.',
-    'Tres cuerpos de la torre en 1772: Pérez Gallego. Él mismo escribe en otro lugar que en 1812 se derrumbaron «tres cuerpos» y cita a Rojas, para quien quedó «su primer cuerpo»: su alzado tiene cuatro niveles bajo la cupulita. Va de tres, y en 1843 queda uno.',
-    'La media naranja del presbiterio sigue en 1843: Pérez Gallego la reconoce en el dibujo de la Plaza Bolívar de Carl Geldner, que fecha una vez en 1863 y otra en 1866. El tambor con ventanas y linterna es el de la pieza del mapa.',
-    'No se modelan el corredor del sur ni las casas de las cofradías, al sur del templo. El lugar tiene el error de los calces de 1772 (18,7 m) y 1843 (12,4 m): los dos planos ponen la iglesia en esta esquina, no su contorno.',
+    'Con medida de época, solo la nave del medio: «25 varas de largo y nueve de ancho» (1737). El ancho de las laterales, el largo de 26 m, el atrio y el lugar de la torre y de la sacristía son de la hipótesis gráfica.',
+    'La nave central más alta que las laterales y la fachada de pilastras y frontón, encalada, son de la pieza del mapa: Martí dice «frontispicio de ladrillo».',
+    'En 1843 va con el primer cuerpo de la torre y todas las cubiertas puestas. El terremoto de 1812 tumbó la torre «y parte de las cubiertas», y la iglesia siguió en uso «entre ruinas parciales» hasta 1883: no se sabe qué techos faltaban en 1843.',
+    'Tres cuerpos en 1772 y uno en 1843: Pérez Gallego la describe de tres cuerpos y cita a Rojas, para quien quedó «su primer cuerpo»; su alzado tiene cuatro niveles.',
+    'La media naranja sigue en 1843 por el dibujo de Geldner (1863 o 1866, según el lugar de la tesis).',
+    'Sin modelar: el corredor del sur y las casas de las cofradías. Los calces de 1772 (18,7 m) y 1843 (12,4 m) dan el lugar, no el contorno.',
   ],
 })
 
@@ -155,16 +155,15 @@ export const santaCapilla = Object.freeze({
   ],
   suprime: [SOLAR_SANTA_CAPILLA], sinArboles: [SOLAR_SANTA_CAPILLA], solarCompleto: true,
   partes: [...capillaDe1883, ...desdeElEnsanche, ...ensancheDe1891, ...reformaDeCastillo],
-  fuente: `Plano de Caracas de 1936 (rótulo «Iglesia Santa Capilla»: el solar); ${ASCENSO} (pp. 195 y 212–214: la capilla de 1883, con la descripción de Leszek Zawisza citada por Pérez Gallego; pp. 277–305: el ensanche de 1889–1891 y los recibos de obra de 1890 del Ministerio de Obras Públicas, citados por Pérez Gallego); ${MAESTRIA} (pp. 226 y 266–284: la torre, el terremoto del 29-10-1900, los techos de 1910 y la nave central de Luis B. Castillo, de 1917 a 1924, con el testimonio de monseñor Manuel A. Pacheco citado por Pérez Gallego)`,
+  fuente: `Plano de Caracas de 1936 (rótulo «Iglesia Santa Capilla»: el solar); ${ASCENSO} (pp. 195 y 212–214: la capilla de 1883, con Leszek Zawisza citado por Pérez Gallego; pp. 277–305: el ensanche de 1889–1891 y los recibos de obra de 1890, citados por Pérez Gallego); ${MAESTRIA} (pp. 226 y 266–284: la torre, el terremoto de 1900, los techos de 1910 y la nave central de Luis B. Castillo, de 1917 a 1924, con monseñor Pacheco citado por Pérez Gallego)`,
   verificar: [
-    'Alturas: solo dos tienen documento, y de segunda mano: los recibos de obra de 1890 que cita Pérez Gallego hablan de una «cornisa a 11 metros de altura» y de un «muro de mampostería de ladrillo a 18 metros de altura». De ahí los 11 m de las naves; qué muro llegaba a 18 m no lo dicen. La torre va de unos 35 m con la aguja, tomados de la proporción de la hipótesis gráfica de Pérez Gallego; la de 1936, igual, sin fuente propia.',
+    'Alturas: con documento, y de segunda mano, solo la «cornisa a 11 metros» de un recibo de 1890 (los 11 m de las naves); otro habla de un «muro a 18 metros» sin decir cuál. La torre, de unos 35 m con la aguja, sale de la proporción de la hipótesis gráfica; la de 1936, igual, sin fuente propia.',
     HIPOTESIS,
-    'La torre es de planta cuadrada en todos sus cuerpos porque así es la pieza del mapa: la de 1890 tenía el basamento cuadrado y, encima, un campanario y una linterna de planta octogonal con balaustrada (Pérez Gallego). Tampoco se dibujan los contrafuertes, la crestería ni la aguja menor que la foto de 1883 muestra sobre la fachada.',
-    'En 1889 va la capilla de 1883 sola, con su atrio: el ensanche se decretó a fines de 1889 y se inauguró el 28-5-1891, después del plano de ese año. En 1911 va el ensanche con la torre rehecha: el terremoto del 29-10-1900 la tumbó «en tres trozos» y una foto de 1919 la muestra otra vez en pie, con su aguja; no se halló la fecha de esa reconstrucción (la capilla reabrió antes de septiembre de 1902).',
-    'En 1936 y 1946 va con la nave central y la torre de Castillo (obras de 1917 a 1924). De la torre de Castillo solo se sabe que abrió el gran arco de la puerta, cambió la linterna y quitó la balaustrada: las medidas son las de la torre anterior, apenas más ancha.',
-    'La reserva es todo el solar del plano de 1936 desde 1889. En 1889 la mitad sur todavía eran dos casas (la del capellán y otra, según la hipótesis gráfica): no se modelan y ese suelo queda vacío.',
-    'Colores: va encalada y con teja en las naves (en 1910 se cambiaron «las cubiertas de madera, caña amarga y tejas»). Pérez Gallego habla de un paso de amarillo a gris en 1937: no se siguió por época.',
-    'La avenida Urdaneta le quitó en 1952 la capilla del noroeste y el frente norte: es posterior al último mapa y no se dibuja.',
-    'La casa del sur va como un cuerpo bajo corrido; en 1891 no estaba concluida y el terremoto de 1900 la dejó «inservible»: su forma en 1911 y después no tiene fuente.',
+    'La torre va de planta cuadrada: la de 1890 tenía, sobre el basamento, campanario y linterna de planta octogonal con balaustrada. Tampoco van los contrafuertes, la crestería ni la aguja menor de la fachada de 1883.',
+    'En 1889, la capilla de 1883 sola: el ensanche se decretó a fines de 1889 y se inauguró el 28-5-1891. En 1911, el ensanche con la torre rehecha: cayó el 29-10-1900 y una foto de 1919 la muestra en pie; no se halló la fecha de la obra.',
+    'De la torre de Castillo (1917–1924) solo se sabe que abrió el gran arco de la puerta y quitó la balaustrada: lleva las medidas de la anterior, apenas más ancha.',
+    'La reserva es todo el solar desde 1889; ese año su mitad sur eran todavía dos casas, que no se modelan. La casa del sur va como un cuerpo bajo corrido, sin fuente para su forma.',
+    'Cal y teja en todas las épocas (en 1910 se cambiaron «las cubiertas de madera, caña amarga y tejas»).',
+    'La avenida Urdaneta le quitó en 1952 la capilla del noroeste y el frente norte: posterior al último mapa.',
   ],
 })
