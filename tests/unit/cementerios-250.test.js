@@ -37,6 +37,9 @@ describe('cierre de #250: los dos cementerios ya tienen hito', () => {
     expect(texto).not.toMatch(/no se pudo inspeccionar/)
     expect(texto).toMatch(/1946/)
     expect(texto).toMatch(/norte/)
+    // el cotejo es una lectura a ojo sobre un raster reducido, y la ficha lo dice
+    expect(texto).toMatch(/a ojo/)
+    expect(texto).not.toMatch(/dibuja el mismo núcleo/)
     expect(dato('cementerio-sur').fuente).toContain('https://archive.org/details/WCWdb_18051')
   })
 })

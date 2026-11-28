@@ -58,8 +58,8 @@ calce «dejando uno fuera» RMS 2,07 m, p90 3,53 m, máximo 5,06 m), recorte 610
   modelo. `CONTORNO_SUR_1936` es una envolvente aproximada del núcleo, no del recinto completo: ya lo decía la
   guía y sigue igual.
 
-Consecuencia: 1946 deja de ser «provisional sin fuente» y pasa a «trazado de 1936 confirmado en su núcleo por el
-plano de 1946». No se añadió una tercera fase con los campos del norte: haría falta primero digitalizar su contorno
+Consecuencia: 1946 deja de ser «provisional sin fuente» y pasa a «trazado de 1936 que coincide en su núcleo con
+una lectura a ojo del plano de 1946»; la ficha y la marca lo dicen con esas palabras. No se añadió una tercera fase con los campos del norte: haría falta primero digitalizar su contorno
 y sus caminos en el estudio de Miraflores (que hoy declara `huellaDeReferencia: 1936`) y regenerar los datos,
 porque cambia la reserva de casas, árboles y suelo. Es una lectura a ojo sobre un raster reducido, no una
 medición del original.

@@ -172,7 +172,7 @@ export const MARCAS = Object.freeze([
   { id: 'cementerio-sur', hito: 'cementerio-sur', nombre: 'Cementerio General del Sur', nace: 3, nivel: 2,
     nota: 'Abierto en 1876, al sur del Guaire.',
     fuente: `${P36} («Cementerio General del Sur»); plano DCN de fotografías de 1946 («Cementerio General del Sur»): https://archive.org/details/WCWdb_18051; Landaeta Rosales, historia de 1875–1904, reproducida por la Cámara de Caracas: https://camaradecaracas.com/la-camara-caracas-y-sus-historias/ocurrio-aqui/origenes-del-cementero-general-del-sur-en-caracas-1875-1904/`,
-    dudas: 'El recinto de 1936 es un calco aproximado del plano; el de 1889 y 1911 es un esquema, porque los planos de esos años no cubren el sitio. El plano de 1946 confirma el núcleo y dibuja campos nuevos al norte que no se representan. Las fuentes discrepan en el día de apertura; se usa solo el año 1876.' },
+    dudas: 'El recinto de 1936 es un calco aproximado del plano; el de 1889 y 1911 es un esquema, porque los planos de esos años no cubren el sitio. Una lectura a ojo del plano de 1946, sobre una copia reducida, coincide con el núcleo y encuentra campos nuevos al norte que no se representan. Las fuentes discrepan en el día de apertura; se usa solo el año 1876.' },
   { id: 'hipodromo', nombres: [[4, 'Hipódromo del Paraíso'], [5, 'Hipódromo Nacional']], x: 5400, y: 9950, nace: 4, nivel: 2,
     fuente: `${P11} («Hipódromo del Paraíso»); ${P36} («Hipódromo Nacional»)` },
 
