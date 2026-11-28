@@ -67,3 +67,38 @@ def test_indice_de_hitos_conserva_arboles_y_casas_del_recorte():
     ms=[{'id':f'M{i}','poligono':[[i*250,0],[i*250+200,0],[i*250+200,200],[i*250,200]],'casas':[]} for i in range(6)]
     obstaculos=[[[0,0],[70,0],[70,200],[0,200]],[[10000,10000],[10100,10000],[10100,10100],[10000,10100]]]
     assert recortar_y_arbolar(ms,obstaculos,.5,indexar_hitos=True)==recortar_y_arbolar(ms,obstaculos,.5)
+
+
+def test_manzana_sin_casas_cubierta_por_un_hito_queda_sin_arboles():
+    # Un pabellón del Hospital Vargas tapa entera una manzana de 1936 que no tiene casas (M5-1048-A0):
+    # no hay corral que abrir ni patio que arbolar, y el resto de las manzanas se sigue arbolando.
+    cubierta={'id':'cubierta','poligono':[[0,0],[40,0],[40,40],[0,40]],'casas':[]}
+    libre={'id':'libre','poligono':[[100,0],[140,0],[140,40],[100,40]],'casas':[]}
+    hito=[[-5,-5],[45,-5],[45,45],[-5,45]]
+    r=recortar_y_arbolar([cubierta,libre],[hito],.5)
+    assert r[0]['arboles']==[] and r[0]['arbolesObjetivo']==0
+    assert r[0]['cubiertaPorHito'] is True
+    assert r[1]['arboles'] and 'cubiertaPorHito' not in r[1]
+
+
+def test_manzana_sin_casas_y_sin_hito_que_la_cubra_sigue_siendo_un_error():
+    import pytest
+    diminuta={'id':'diminuta','poligono':[[0,0],[1,0],[1,1],[0,1]],'casas':[]}
+    with pytest.raises(ValueError):
+        recortar_y_arbolar([diminuta],[],.5)
+
+
+def test_un_hito_que_solo_toca_el_borde_de_la_manzana_no_la_cubre():
+    import pytest
+    diminuta={'id':'diminuta','poligono':[[0,0],[1,0],[1,1],[0,1]],'casas':[]}
+    vecino=[[1,0],[5,0],[5,1],[1,1]]  # comparte un lado, no ocupa nada de ella
+    with pytest.raises(ValueError):
+        recortar_y_arbolar([diminuta],[vecino],.5)
+
+
+def test_manzana_sin_casas_con_una_franja_donde_no_cabe_un_arbol_queda_sin_arboles():
+    # El hito deja libre una franja de 1 m (M5-1064-A0): hay patio, pero ningún árbol cabe en él.
+    m={'id':'franja','poligono':[[0,0],[40,0],[40,40],[0,40]],'casas':[]}
+    hito=[[2,-5],[45,-5],[45,45],[2,45]]
+    r=recortar_y_arbolar([m],[hito],.5)[0]
+    assert r['arboles']==[] and r['arbolesObjetivo']==0 and r['cubiertaPorHito'] is True
