@@ -8,6 +8,7 @@ import { rectanguloPx } from './marco.js'
 
 const IPC = 'IPC, Catálogo del Patrimonio Cultural Venezolano 2004-2007, municipio Libertador, «Lo construido»: https://albaciudad.org/wp-content/uploads/2017/01/Libertador-Construido2.pdf'
 const P36 = 'contorno del plano DCN de 1936, contrastado con el de 1946'
+const ALTO_TECHO_ENVOLVENTE = 4.5 // un tejado bajo: con la pendiente por omisión, una nave de 22 a 26 m de ancho subiría 7 m más
 const ALTURAS = 'Alturas sin fuente: ninguna está medida ni publicada; salen de la proporción con el ancho leído del plano.'
 
 // --- Santa Rosalía: fachada al oeste, sobre el atrio de la calle Sur 1 ---
@@ -24,7 +25,7 @@ const santaRosalia = Object.freeze({
   suprime: recintoRosalia, sinArboles: recintoRosalia, solarCompleto: true,
   partes: [
     // 1843 y 1889: el templo de 1817, del que solo se sabe que era neoclásico; va la envolvente, sin torre ni cúpulas
-    { tipo: 'iglesia', ...NAVES_ROSALIA, alto: 10, fachada: 'clasica', nace: 2, muere: 4 },
+    { tipo: 'iglesia', ...NAVES_ROSALIA, alto: 10, altoTecho: ALTO_TECHO_ENVOLVENTE, fachada: 'clasica', nace: 2, muere: 4 },
     // desde 1911: el templo tras las obras de 1904–1908, como lo describe el IPC
     {
       tipo: 'temploDeNaves', ...NAVES_ROSALIA, altoLateral: 9, altoCentral: 13, cubierta: 'plana', pantalla: true,
@@ -53,7 +54,7 @@ const recintoJuan = [...plantaJuan, rectanguloPx(juan, 6, 30.4, 32.5, -1.1)]
 const sanJuan = Object.freeze({
   id: 'san-juan', nombre: 'Iglesia de San Juan Bautista', ...juan, nace: 3, muere: 0,
   planta: plantaJuan, suprime: recintoJuan, sinArboles: recintoJuan, solarCompleto: true,
-  partes: [{ tipo: 'iglesia', ...NAVE_JUAN, alto: 10, fachada: 'clasica' }],
+  partes: [{ tipo: 'iglesia', ...NAVE_JUAN, alto: 10, altoTecho: ALTO_TECHO_ENVOLVENTE, fachada: 'clasica' }],
   fuente: `H. D. Elschnig, «Santiago de León de Caracas: una guía práctica histórica-cultural», p. 99 (hospicio y capilla de 1788–1791, destruidos en 1812; templo empezado en 1841 y concluido en 1868): https://bibliodor.wordpress.com/wp-content/uploads/2012/03/parroquia-san-juan.pdf; ${P36}`,
   verificar: [
     ALTURAS,
