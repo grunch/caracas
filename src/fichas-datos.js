@@ -240,14 +240,21 @@ export const FICHAS = Object.freeze({
   },
   'santa-rosalia': {
     textos: [
-      [2, 'La leyenda del plano de 1843 nombra la iglesia de Santa Rosalía (R).'],
-      [3, 'Templo IV del plano de 1889; «Iglesia Santa Rosalía» en el de 1936.'],
+      [2, 'El templo neoclásico que la parroquia levantó desde 1817, después de que el terremoto de 1812 destruyera el anterior. La leyenda del plano de 1843 lo nombra (R) y el de 1889 lo dibuja con su atrio sobre la calle (templo IV). De cómo era entonces no hay vista fechada: va solo su volumen.'],
+      [4, 'El terremoto de 1900 lo dañó y las obras duraron de 1904 a 1908. El catálogo del IPC describe el templo que quedó: tres naves, la central más alta, fachada neoclásica, una cúpula con linterna sobre el presbiterio, dos menores a los lados y una torre. «Iglesia Santa Rosalía» en el plano de 1936.'],
     ],
-    dudas: 'La iglesia es anterior (dato general): aquí aparece desde 1843, cuya leyenda la nombra.',
+    hoy: 'la iglesia de Santa Rosalía de Palermo, Monumento Histórico Nacional desde 1960.',
+    dudas: 'La planta sale del contorno del plano de 1936; ninguna altura está medida. No se sabe qué partes del templo actual vienen de 1817 y cuáles de 1904–1908: hasta 1889 va sin torre ni cúpulas, sin prueba de que no las tuviera. El plano de 1772 dibuja una iglesia aquí (la parroquia la da por terminada en 1734): no se modela.',
+  },
+  'san-jose': {
+    textos: [[4, 'El templo de la parroquia San José, creada en 1889. El plano de 1911 ya lo dibuja con planta en cruz; el de 1936 rotula «Iglesia San José». El catálogo del IPC lo describe neoclásico, de tres naves con la central más alta, tres puertas, frontón y dos torres gemelas de tres cuerpos a los lados de la fachada.']],
+    hoy: 'la iglesia parroquial de San José, frente a su plazuela.',
+    dudas: 'El IPC lo da por construido en 1889, pero el plano de 1889 deja la manzana vacía: aquí aparece desde 1911. La planta sale del contorno del plano de 1936; ninguna altura está medida. No se hallaron las reparaciones posteriores al terremoto de 1900. El reloj de una torre no se dibuja: no se sabe desde cuándo está.',
   },
   'san-juan': {
-    textos: [[3, 'La iglesia de los capuchinos: templo V del plano de 1889. El de 1936 rotula «Iglesia San Juan» y, al frente, la «Plaza de Capuchinos».']],
-    dudas: 'La iglesia es anterior. La leyenda del plano de 1843 nombra «Capuchinos» (S), no San Juan: si es este templo, falta verlo en la letra del plano; mientras, aparece desde 1889.',
+    textos: [[3, 'La iglesia de los capuchinos: los monjes tuvieron aquí hospicio y capilla desde 1788–1791, que el terremoto de 1812 destruyó. El templo parroquial se empezó en 1841 y se concluyó en 1868. Es el templo V del plano de 1889; el de 1936 rotula «Iglesia San Juan» y, al frente, la «Plaza de Capuchinos».']],
+    hoy: 'la iglesia de San Juan Bautista, frente a la plaza Capuchinos.',
+    dudas: 'Va solo el volumen de la nave que dibuja el plano de 1936: no se halló descripción ni vista fechada de la fachada, la torre o la cubierta, y ninguna altura está medida. La leyenda de 1843 nombra «Capuchinos» (S) sobre este solar, pero el templo estaba en obra: aparece desde 1889.',
   },
   'nuevo-circo': {
     textos: [[5, 'Inaugurado el 26 de enero de 1919, el Nuevo Circo aparece como plaza de toros en el plano de 1936. Su ruedo permanece abierto: la cubierta total proyectada no llegó a ejecutarse.']],

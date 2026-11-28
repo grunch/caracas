@@ -1,0 +1,73 @@
+{
+  "fuente": "Plano DCN de 1936 (mosaico del repositorio, fuentes/mapas/1936-archiveorg-caracas-dcn-hoja1 y hoja2), contrastado con el plano de 1946 (fuentes/mapas/1950-archiveorg-plano-de-caracas-dcn)",
+  "sistema": "píxeles del mosaico base de 1936, 0,5 m por píxel; a = metros a lo largo del eje desde el pie de la fachada, b = metros a su derecha",
+  "certeza": "lectura a ojo sobre una ampliación del mosaico con rejilla de 10 px; el trazo del plano mide de 1 a 2 px (0,5 a 1 m) y los rótulos tapan tramos. No es mensura catastral.",
+  "templos": {
+    "santa-rosalia": {
+      "origen_px": [9075.8, 8535.8],
+      "eje": [0.9701, 0.2425],
+      "fachada": "oeste, sobre el atrio de la calle Sur 1 (el plano dibuja el atrio entre la calle y el templo; el IPC lo llama «antigua plazoleta de Santa Rosalía»)",
+      "contorno_leido_px": {
+        "esquina_noroeste": [9082, 8506],
+        "esquina_suroeste": [9071, 8562],
+        "esquina_noreste": [9161, 8527],
+        "esquina_sureste_aprox": [9152, 8580],
+        "muro_norte": [[9111, 8518], [9161, 8527]],
+        "salientes_al_norte": [[9104, 8508], [9134, 8513]],
+        "atrio": [[9042, 8493], [9026, 8580], [9066, 8588]]
+      },
+      "medidas_m": { "largo": 41, "ancho": 25.8, "torre": 6.5, "atrio_hasta_la_calle": 19 },
+      "tapado_por_el_rotulo": "muro sur y muro este (rótulo «IGLESIA SANTA ROSALIA»)",
+      "otros_planos": {
+        "1772": "símbolo de iglesia en un solar chico junto a una plazuela, unos 40 m al sur (calce del plano: 18,7 m RMS)",
+        "1843": "dos recuadros en blanco con la letra R de la leyenda («Santa Rosalia») al lado",
+        "1889": "templo IV, con su atrio al oeste",
+        "1911": "bloque rojo con atrio al oeste",
+        "1946": "contorno escalonado de unos 42 × 29 m, con el atrio ajardinado"
+      }
+    },
+    "san-juan": {
+      "origen_px": [6929.6, 8323.5],
+      "eje": [-0.07, 0.9975],
+      "fachada": "norte, sobre la Plaza de Capuchinos (inferida: la plaza queda al frente en todos los planos)",
+      "contorno_leido_px": {
+        "fachada": [[6908, 8322], [6950, 8325]],
+        "muro_oeste_fin": [6903, 8383],
+        "muro_este_fin": [6950, 8384],
+        "cuerpo_trasero": [[6897, 8385], [6958, 8384]],
+        "fondo": [[6913, 8404], [6947, 8407]]
+      },
+      "medidas_m": { "largo": 41, "ancho": 22, "ancho_leido_al_frente": 21, "ancho_leido_al_fondo": 23.5, "cuerpo_trasero": [6, 30.4] },
+      "otros_planos": {
+        "1772": "campo: no existe",
+        "1843": "letra S de la leyenda («Capuchinos») sobre el solar y un recuadro chico al borde de la plaza; el templo estaba en obra",
+        "1889": "templo V, unos 37 m al suroeste de su lugar en 1936 (calce del plano: 7,6 m RMS, 19 m máximo): se usa para la presencia, no para el lugar",
+        "1911": "bloque rojo al sur de la plaza",
+        "1946": "contorno de unos 25 × 40 m con un cuerpo adelantado al norte"
+      }
+    },
+    "san-jose": {
+      "origen_px": [10622, 5371],
+      "eje": [0.1659, -0.9861],
+      "fachada": "sur, sobre los jardines y la plazuela (el plano de 1936 dibuja los jardines y el de 1946, dos círculos en las esquinas del frente)",
+      "contorno_leido_px": {
+        "cabecera": [[10619, 5269], [10659, 5275]],
+        "brazo_oeste": [[10602, 5299], [10601, 5318]],
+        "brazo_este": [[10663, 5303], [10661, 5320]],
+        "naves_a_media_altura": [[10606.5, 5340], [10647.5, 5340]],
+        "torre_oeste": [[10592, 5353], [10602, 5367]],
+        "torre_este": [[10643, 5361], [10653, 5375]],
+        "portada": [[10612, 5373.5], [10630, 5376]]
+      },
+      "medidas_m": { "largo": 50, "ancho_naves": 20.4, "ancho_brazos": 30.6, "fondo_brazos": 11, "torres": 6.2 },
+      "tapado_por_el_rotulo": "el frente, entre las torres (rótulo «SAN JOSE»)",
+      "otros_planos": {
+        "1772": "campo: no existe",
+        "1843": "campo: no existe",
+        "1889": "manzana vacía: el plano de Mestre no dibuja templo",
+        "1911": "bloque rojo con planta en cruz, en el mismo lugar",
+        "1946": "planta en cruz con dos círculos en las esquinas del frente"
+      }
+    }
+  }
+}

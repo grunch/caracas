@@ -9,10 +9,10 @@
     "msPorCuadroCentro": 16.6
   },
   "build": {
-    "nota": "Topes del build medidos en kB gzip y comprobados por tools/rendimiento/presupuesto-build.mjs. T40c: workers 142,5→153,3 por siete bloques de El Silencio (tope 160). T82.P1: entrada 330,0→331,3 por fuentes y fichas (tope 332). T82.NC: entrada 334,8 (tope 336), worker 156 (tope 160). T82.CM: entrada 336,1 (tope 337), worker 157,2. T82.RC: entrada 339,2 (tope 340), workers 159,5. T82.SA: entrada 341,0, workers 161,0 (topes 342/162). T82.HD combinado con San Agustín: build medido 343,2/162,7; topes explícitos 344/163. T83: cementerio Sur en dos fases, huellas/calles y piezas tipológicas: build medido 345,6/164,4; topes explícitos 346/165. El modelo suma geometría estática y no cambia los presupuestos de ejecución. T82.P1.PUENTES: adaptador de puentes y modelos del Guaire (siete estructuras del estudio de Miraflores; instalado el Puente de Hierro): build medido 294,7/167,4 contra 292,6/162,8 de main; tope de workers 168. T82.P1.PUENTES (Sur 7): Puente Constitución y Puente Sucre metálico instalados; build medido 295,6/168,3 contra 294,9/167,5 de main; tope de workers 170.",
+    "nota": "Topes del build medidos en kB gzip y comprobados por tools/rendimiento/presupuesto-build.mjs. T40c: workers 142,5→153,3 por siete bloques de El Silencio (tope 160). T82.P1: entrada 330,0→331,3 por fuentes y fichas (tope 332). T82.NC: entrada 334,8 (tope 336), worker 156 (tope 160). T82.CM: entrada 336,1 (tope 337), worker 157,2. T82.RC: entrada 339,2 (tope 340), workers 159,5. T82.SA: entrada 341,0, workers 161,0 (topes 342/162). T82.HD combinado con San Agustín: build medido 343,2/162,7; topes explícitos 344/163. T83: cementerio Sur en dos fases, huellas/calles y piezas tipológicas: build medido 345,6/164,4; topes explícitos 346/165. El modelo suma geometría estática y no cambia los presupuestos de ejecución. T82.P1.PUENTES: adaptador de puentes y modelos del Guaire (siete estructuras del estudio de Miraflores; instalado el Puente de Hierro): build medido 294,7/167,4 contra 292,6/162,8 de main; tope de workers 168. T82.P1.PUENTES (Sur 7): Puente Constitución y Puente Sucre metálico instalados; build medido 295,6/168,3 contra 294,9/167,5 de main; tope de workers 170. T82.TP (#259): Santa Rosalía, San Juan y San José (parte temploDeNaves y sus definiciones con fuente y pendientes); build medido 298,2/170,8 contra 295,6/168,3 de main; tope de workers 172.",
     "topes": {
       "jsAlAbrirKB": 346,
-      "trabajadoresKB": 170,
+      "trabajadoresKB": 172,
       "servicioKB": 3
     }
   }
