@@ -14,9 +14,9 @@ const solo = process.env.PUENTE_CAPTURA
 const soloVista = process.env.PUENTE_VISTA
 const enTinta = process.env.PUENTE_MODO === 'tinta'
 // El cruce medido (docs/puentes-guaire-calce.md), en metros del mundo: el centro del tablero. Por omisión, el de Hierro.
-const [x, z] = (process.env.PUENTE_CRUCE ?? '235,1301').split(',').map(Number)
-if (![x, z].every(Number.isFinite)) throw new Error('PUENTE_CRUCE debe ser «x,z» en metros del mundo')
-const CRUCE = { x, z }
+const campos = (process.env.PUENTE_CRUCE ?? '235,1301').split(',').map(c => c.trim())
+if (campos.length !== 2 || campos.some(c => c === '' || !Number.isFinite(Number(c)))) throw new Error('PUENTE_CRUCE debe ser «x,z» en metros del mundo')
+const CRUCE = { x: Number(campos[0]), z: Number(campos[1]) }
 const VISTAS = {
   arriba: { ...CRUCE, dist: 190, yaw: 0, pitch: 1.05 },
   costado: { ...CRUCE, dist: 85, yaw: Math.PI / 2, pitch: 0.3 },
