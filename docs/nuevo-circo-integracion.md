@@ -103,12 +103,13 @@ calce «dejando uno fuera» RMS 2,07 m, p90 3,53 m, máximo 5,06 m, `fuentes/der
 | Medida | 1936 (modelo) | 1946 (lectura) | Diferencia |
 |---|---|---|---|
 | Centro del anillo | (10316, 8234) px | cerca de (10324, 8231) px | unos 4 m al este y 1,5 m al norte |
-| Diámetro exterior | 88 m adoptados (lectura de 88 a 94 m) | de 91 a 98 m, con un trazo de unos 3 m de grueso | dentro de la lectura de 1936 y del grueso del trazo |
+| Diámetro exterior | 88 m adoptados (lectura de 88 a 94 m) | de 91 a 98 m, con un trazo de unos 3 m de grueso | las dos lecturas solapan solo en parte (91 a 94 m); la diferencia es del orden del grueso del trazo |
 | Portada | Al noroeste | Al noroeste, misma diagonal | — |
 
 La diferencia de centro es menor que el error máximo del calce (5,06 m) y del orden del error de lectura de 1936
-(±3 m): **no hay indicio de traslado ni de reforma del solar entre 1936 y 1946**, y se conserva la implantación de
-1936. El plano de 1946 no dibuja el cuerpo en cuña del sureste que sí está en 1936 y dibuja un elemento
+(±3 m). El diámetro leído en 1946 es algo mayor y solo solapa en parte con el de 1936; con un trazo de 3 m y un
+raster de 1,14 m/px eso no alcanza para afirmar un cambio. **No se infiere traslado ni reforma del solar entre 1936
+y 1946**, y se conserva la implantación de 1936. El plano de 1946 no dibuja el cuerpo en cuña del sureste que sí está en 1936 y dibuja un elemento
 rectangular chico en ese lado; a esa escala no alcanza para modelarlos, y tampoco fecha las reformas interiores.
 Es una lectura a ojo sobre un raster reducido, no una medición del original.
 

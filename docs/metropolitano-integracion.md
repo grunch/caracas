@@ -46,7 +46,8 @@ Ninguna de las dos fechas cambia lo que muestra el visor: el circo está en 1911
 | 1946 | [Plano DCN de fotografías de 1946](https://archive.org/details/WCWdb_18051), edición catalogada [1950?] | El sitio del ruedo está en blanco (sin edificar) dentro de su cuadra | No dice cuándo se demolió | Primaria (cartográfica) |
 
 Si la corrida del 19-04-1945 se confirma en la prensa, 1942 queda descartado como año de demolición. Hasta entonces
-la ficha dice que 1945 es la fecha mejor sustentada y deja anotada la de 1942. **Falta:** leer directamente a Salas
+la ficha dice que 1945 tiene más apoyos (FAC, leída; Marín y Salas, de segunda mano) sin darla por comprobada, y
+deja anotada la de 1942. **Falta:** leer directamente a Salas
 (1978) o la prensa de abril de 1945. La *Guía de Caracas* de Arreaza (1942) podría decir si seguía en pie, pero su
 ejemplar está restringido (`fuentes/mapas/1942-princeton-guia-de-caracas-arreaza/ficha.json`).
 
