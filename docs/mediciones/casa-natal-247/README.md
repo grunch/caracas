@@ -33,11 +33,14 @@ esconde lo que no está en pie) y deja de dibujarse la casa genérica que ocupab
 Los topes de ejecución del presupuesto (carga, tarea larga, bytes, memoria, triángulos, ms por cuadro) ya no pasan
 en `main` con los datos completos y siguen sin pasar en la rama: **no se tocaron**.
 
-Topes unitarios de triángulos de los hitos, sin tocar: 641.929 de 645.000 antes de 1946 (641.619 en `main`) y
-1.121.302 de 1.125.000 en total.
+Después de medir se fusionó `main` con La Candelaria (#314, `fab5b25`); lo que sigue está contado sobre esa
+fusión y **no se volvió a medir en el navegador** (la casa no cambió).
 
-Build (`npx vite build` y `node tools/rendimiento/presupuesto-build.mjs`): entrada 307,7 kB (tope 346), workers
-**174,6 kB** contra 172,4 de `main`: pasaba del tope de 174 y se subió a **176**. Los 2,2 kB son el módulo de datos
+Topes unitarios de triángulos de los hitos, sin tocar: 644.484 de 645.000 antes de 1946 (644.174 sin la casa) y
+1.123.857 de 1.125.000 en total. La casa son 310 triángulos.
+
+Build (`npx vite build` y `node tools/rendimiento/presupuesto-build.mjs`): entrada 309,1 kB (tope 346), workers
+**175,7 kB** contra 173,5 de `main`: pasa del tope de 174 y se sube a **176**. Los 2,2 kB son el módulo de datos
 de la casa (sobre todo los textos de `fuente` y `verificar`), que el worker de los hitos carga entero.
 
 **No se midió**: una máquina en reposo, un teléfono, ni el modo liviano.
