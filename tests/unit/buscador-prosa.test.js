@@ -83,10 +83,19 @@ describe('responder', () => {
     expect(responde('De La Torre a Veroes', SIN_EPOCAS).texto).toBe('La cuadra al norte de la Catedral. Va hacia el norte, unos 135 m.')
   })
 
+  test('donde hubo dos edificios sucesivos, la referencia es el que está en pie: San Mauricio hasta 1843, la Santa Capilla desde 1889', () => {
+    for (const e of [1, 2]) expect(responde('De Santa Capilla a Veroes', ctx(e)).texto).toMatch(/^La cuadra que pasa junto a la iglesia de San Mauricio\./)
+    for (const e of [3, 4, 5]) expect(responde('De Santa Capilla a Veroes', ctx(e)).texto).toMatch(/^La cuadra que pasa junto a la Santa Capilla\./)
+    // sin época elegida no hay cómo desempatar: va el primero de la lista, que es el de hoy
+    expect(responde('De Santa Capilla a Veroes', SIN_EPOCAS).texto).toMatch(/^La cuadra que pasa junto a la Santa Capilla\./)
+    expect(responde('San Mauricio', ctx(1)).titulo).toBe('Iglesia de San Mauricio')
+  })
+
   test('un hito que todavía no existe en la época elegida no se da por hecho', () => {
-    // la Santa Capilla está modelada desde 1889 (el Capitolio ya no sirve de ejemplo: desde T41d es convento en 1772)
-    expect(responde('De Mijares a Jesuitas', ctx(1)).texto).toMatch(/^La cuadra (junto a|al \w+ de) donde esta reconstrucción pone después la Santa Capilla\./)
-    expect(responde('De Mijares a Jesuitas', ctx(3)).texto).toMatch(/^La cuadra (que pasa junto a la|al \w+ de la) Santa Capilla\./)
+    // Santa Teresa está modelada desde 1889 (el Capitolio y la Santa Capilla ya no sirven de ejemplo: en 1772 tienen
+    // en su lugar el convento y la iglesia de San Mauricio, #253)
+    expect(responde('De Santa Teresa a Cipreses', ctx(1)).texto).toBe('La cuadra al sureste de donde esta reconstrucción pone después la basílica de Santa Teresa. Va hacia el sur, unos 135 m. En 1772 ya estaba edificada.')
+    expect(responde('De Santa Teresa a Cipreses', ctx(3)).texto).toMatch(/^La cuadra al sureste de la basílica de Santa Teresa\./)
     expect(responde('De Padre Sierra a La Bolsa', ctx(1)).texto).toMatch(/^La cuadra (que pasa junto al|al \w+ del) Capitolio\./)
   })
 

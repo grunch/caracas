@@ -212,7 +212,9 @@ describe('la Catedral y las iglesias', () => {
   })
 
   test('el perfil: la aguja de Santa Capilla y las torres del Panteón pasan los 35 m; Santa Teresa tiene cúpula', () => {
-    expect(alturaDe('santa-capilla')).toBeGreaterThan(38)
+    // 36,7 m con la torre de 1936: la proporción de la hipótesis gráfica de Pérez Gallego (#253), no una medida
+    expect(alturaDe('santa-capilla')).toBeGreaterThan(35)
+    expect(alturaDe('santa-capilla')).toBeLessThan(38)
     expect(alturaDe('panteon')).toBeGreaterThan(28)
     expect(hito('santa-teresa').partes[0].cupula.radio).toBeGreaterThan(5)
     expect(hito('la-pastora').partes[0].torres.n).toBe(2)

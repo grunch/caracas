@@ -55,13 +55,16 @@ function partes(px, lugar, ctx) {
 /** "a una cuadra al norte de la Catedral", "junto a la Santa Capilla". */
 const respectoDe = (px, lugar, ctx) => { const p = partes(px, lugar, ctx); return `${p.distancia} ${p.hacia}` }
 
+const enPie = (lugar, ctx) => { const e = epocaDe(ctx); return e === null || vivo(lugar.nace, lugar.muere, e) >= 0.5 ? 1 : 0 }
+
 /** El hito a menos de 150 m, si hay; si no, la plaza (el primer lugar del índice que se llame así, o el origen). */
 function referencia(px, ctx, excepto = null) {
   const cerca = ctx.indice.lugares
     .filter((l) => l !== excepto)
     .map((l) => ({ l, m: ctx.indice.metros({ px }, l) }))
     .filter((c) => c.m <= RADIO_HITO_M)
-    .sort((p, q) => p.m - q.m)[0]
+    // a igual distancia (dos hitos sucesivos en el mismo lugar: San Mauricio y la Santa Capilla), el que está en pie
+    .sort((p, q) => p.m - q.m || enPie(q.l, ctx) - enPie(p.l, ctx))[0]
   return cerca?.l ?? { nombre: 'la Plaza Bolívar', corto: 'la Plaza Bolívar', px: ctx.indice.plaza, nace: 0, muere: 0 }
 }
 

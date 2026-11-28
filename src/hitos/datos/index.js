@@ -17,6 +17,7 @@ import { candelaria } from './candelaria.js'
 import { laMerced } from './la-merced.js'
 import { sanPablo } from './san-pablo.js'
 import { conventoSanFrancisco } from './convento-san-francisco.js'
+import { sanMauricio } from './santa-capilla.js'
 
 /** Datos de hitos sin los constructores de geometría; lo usa el hilo principal para áreas y marcas. */
 export const HITOS = Object.freeze([
@@ -24,6 +25,7 @@ export const HITOS = Object.freeze([
   metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios, cementerioSur, ...puentesGuaire,
   ...templosParroquiales, candelaria, laMerced, sanPablo, // al final: cada hito lleva de semilla su lugar en la lista
   conventoSanFrancisco,
+  sanMauricio, // #253: la antecesora de la Santa Capilla, de 1772 a 1889
 ])
 
 /** Campos geométricos que consume el worker, sin fichas y huellas de colisión. */

@@ -107,11 +107,11 @@ export const PARTES = Object.freeze({
   /** Cúpula sobre tambor, con el arranque a la altura h. */
   cupula(p, { a = 0, b = 0, h = 0, ...medidas }) { cupulaConTambor(p.en(a, h, b), medidas) },
 
-  /** Iglesia paramétrica (nave, fachada, torres, cúpula) en el marco del hito: el origen, al pie de la fachada. */
-  iglesia(p, medidas) { iglesia(p, medidas) },
+  /** Iglesia paramétrica (nave, fachada, torres, cúpula): el pie de la fachada, en (a, b) del marco del hito (por omisión, su origen). */
+  iglesia(p, { a = 0, b = 0, ...medidas }) { iglesia(p.en(a, 0, b), medidas) },
 
-  /** Templo de tres naves con la central más alta, torres, brazos y cúpulas donde se pidan (src/hitos/templo-naves.js). */
-  temploDeNaves(p, medidas) { temploDeNaves(p, medidas) },
+  /** Templo de tres naves con la central más alta, torres, brazos y cúpulas donde se pidan (src/hitos/templo-naves.js); el pie de la fachada, en (a, b). */
+  temploDeNaves(p, { a = 0, b = 0, ...medidas }) { temploDeNaves(p.en(a, 0, b), medidas) },
 
   /** Palacio de crujías alrededor de un patio, centrado en (a, b). */
   palacio(p, { a = 0, b = 0, ...medidas }) { palacio(p.en(a, 0, b), medidas) },

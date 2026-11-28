@@ -5,6 +5,7 @@
  */
 import { EJE_DAMERO, rectanguloPx } from './marco.js'
 import { sanFrancisco } from './san-francisco.js'
+import { santaCapilla } from './santa-capilla.js'
 
 const [ESTE, SUR] = [EJE_DAMERO, [-EJE_DAMERO[1], EJE_DAMERO[0]]]
 const NORTE_ALTO = [0.118, -0.993] // el damero de La Pastora y del Panteón, apenas menos girado (sus torres en el plano)
@@ -31,12 +32,7 @@ export const iglesias = Object.freeze([
     largo: 56, ancho: 22, alto: 11, fachada: 'clasica', torres: { n: 1, ...campanario(5.5, 12, { tipo: 'cupula', alto: 3.2 }) },
     verificar: ['Orientación (fachada al oeste, sobre la calle de la esquina de Altagracia) leída del recuadro del plano; a verificar.', 'Desde qué época, a verificar: va desde 1772.'],
   }),
-  iglesiaEn({
-    id: 'santa-capilla', nombre: 'Santa Capilla', rotulo: 'Iglesia Santa Capilla', x: 8973, y: 6467, eje: SUR, nace: 3,
-    largo: 50, ancho: 22, alto: 12, altoTecho: 8, fachada: 'neogotica', teja: 0x4b4f55,
-    torres: { n: 1, centrada: true, lado: 6, cuerpos: [{ alto: 21, vanos: 'ventana' }, { alto: 7, vanos: 'arco' }], remate: { tipo: 'aguja', alto: 14 } },
-    verificar: ['La aguja neogótica es la que se ve en la panorámica de ~1903 (identificación a ojo).', 'Va desde la época de 1889 (obra de tiempos de Guzmán Blanco; fecha a verificar).'],
-  }),
+  santaCapilla, // por etapas desde 1883, con la fachada al oeste: docs/santa-capilla-integracion.md (San Mauricio, su antecesora, va al final de HITOS)
   iglesiaEn({
     id: 'santa-teresa', nombre: 'Basílica de Santa Teresa', rotulo: 'Iglesia Santa Teresa', x: 8762, y: 7775, eje: ESTE, nace: 3,
     largo: 64, ancho: 30, alto: 14, fachada: 'clasica', dosFachadas: true, cupula: { a: 32, radio: 7 },

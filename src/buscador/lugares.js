@@ -9,6 +9,7 @@ const APODOS = Object.freeze({
   'san-francisco': { corto: 'la iglesia de San Francisco', alias: ['Iglesia San Francisco'] },
   altagracia: { corto: 'la iglesia de Altagracia', alias: ['Iglesia Altagracia'] },
   'santa-capilla': { corto: 'la Santa Capilla', alias: ['Iglesia Santa Capilla'] },
+  'san-mauricio': { corto: 'la iglesia de San Mauricio', alias: ['San Mauricio'] },
   'santa-teresa': { corto: 'la basílica de Santa Teresa', alias: ['Iglesia Santa Teresa', 'Basílica Santa Teresa'] },
   'la-pastora': { corto: 'la iglesia de La Pastora', alias: ['Iglesia La Pastora'] },
   panteon: { corto: 'el Panteón Nacional', alias: [] },
