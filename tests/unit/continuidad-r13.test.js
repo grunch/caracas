@@ -121,6 +121,36 @@ describe('muertes que la R13 no explica', () => {
     ])
   })
 
+  // Una casa más angosta que un texel, pegada al borde de su manzana: está adentro, pero el centro del texel bajo
+  // su centro cae afuera (la casa 2520 de los datos del 28-11-2026: 7 m² contra un chaflán, en una manzana que El
+  // Silencio retira en 1946; el campo tiene texeles de 2 m)
+  const astilla = { casa: 2520, huella: [[6, 22], [12, 22], [12, 28], [6, 28]] }
+
+  it('una casa angosta en el borde de su manzana: la manzana es la que pisa su huella, aunque su centro caiga en un texel de afuera', () => {
+    expect(hayManzana(campo, 0, texelDe(campo, centroDeHuella(astilla.huella)))).toBe(false)
+    expect(muertesSinR13({ muertas: [astilla], antes, ahora, recintos: [HITO_SOBRE_A] })).toEqual([])
+  })
+
+  it('la casa angosta del borde no se salva sola: su manzana tiene que haberse retirado por un hito', () => {
+    expect(muertesSinR13({ muertas: [astilla], antes, ahora, recintos: [] }))
+      .toEqual([{ casa: 2520, motivo: 'ningún hito pisa su manzana' }])
+    expect(muertesSinR13({ muertas: [astilla], antes, ahora: antes, recintos: [HITO_SOBRE_A] }))
+      .toEqual([{ casa: 2520, motivo: 'su manzana sigue en pie' }])
+  })
+
+  it('entre los texeles que pisa la huella, la manzana es la del que está más adentro', () => {
+    // dos manzanas separadas por una calle de un texel; la casa pisa el borde de las dos y está más adentro de la derecha
+    const fila = (bytes) => ({ caja: [0, 0, bytes.length * 10, 10], ancho: bytes.length, alto: 1, canales: 1, datos: Uint8Array.from(bytes) })
+    const antesDos = { campo: fila([200, 130, 100, 150, 200]), canal: 0 }
+    const sinDerecha = { campo: fila([200, 130, 100, 60, 60]), canal: 0 }
+    const sinIzquierda = { campo: fila([60, 60, 100, 150, 200]), canal: 0 }
+    const entreDos = { casa: 5, huella: [[18, 2], [32, 2], [32, 8], [18, 8]] }
+    const hitos = [[[0, 0], [50, 0], [50, 10], [0, 10]]]
+    expect(muertesSinR13({ muertas: [entreDos], antes: antesDos, ahora: sinDerecha, recintos: hitos })).toEqual([])
+    expect(muertesSinR13({ muertas: [entreDos], antes: antesDos, ahora: sinIzquierda, recintos: hitos }))
+      .toEqual([{ casa: 5, motivo: 'su manzana sigue en pie' }])
+  })
+
   it('mide cada manzana una sola vez y no toca lo que recibe', () => {
     const otraEnA = { casa: 9, huella: cuadro(30, 30) }
     const muertas = Object.freeze([enA, otraEnA])
