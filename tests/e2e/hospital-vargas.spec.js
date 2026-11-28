@@ -15,6 +15,8 @@ test('el Hospital Vargas aparece desde 1889 y conserva fases hasta 1946', async 
   })
   expect(datos?.vertices).toBeGreaterThan(1000)
   expect(datos?.fases).toEqual(expect.arrayContaining(['3/4', '4/5', '5/0']))
+  // ningún vértice nace antes de 1889 (época 3): en 1772 y 1843 el hospital no se dibuja
+  expect(datos.fases.filter(f => Number(f.split('/')[0]) < 3)).toEqual([])
   for (const epoca of [1, 2, 3, 4, 5, 6]) {
     await page.evaluate(e => window.lab.lineaDeTiempo.elegir(e), epoca)
     await page.waitForFunction(e => Math.round(window.lab.ciudad.U.uEpocaA.value) === e, epoca)

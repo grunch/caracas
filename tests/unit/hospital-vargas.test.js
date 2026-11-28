@@ -7,6 +7,10 @@ import { parteDe } from '../../src/hitos/partes.js'
 import { crearLienzo, lineal } from '../../src/hitos/lienzo.js'
 import { TONO } from '../../src/hitos/piezas.js'
 import { hospitalVargas as dibujarHospital } from '../../src/hitos/hospital-vargas.js'
+import { MARCAS } from '../../src/marcas-datos.js'
+import { FICHAS } from '../../src/fichas-datos.js'
+import { normalizarMarcas } from '../../src/marcas.js'
+import { contenidoDeFicha } from '../../src/fichas.js'
 
 const plano = { ancho: 18600, alto: 14800, metro: 0.5, plaza: [8968.2, 6839] }
 const coords = crearCoords(plano)
@@ -55,5 +59,27 @@ describe('Hospital Vargas', () => {
       const escondidos = delNucleo.filter(([x, z]) => Math.abs(x) < MEDIO_ANCHO && Math.abs(z) < MEDIO_FONDO)
       expect(escondidos, `${anio}`).toEqual([])
     }
+  })
+  test('la marca va enlazada al hito y cae sobre su núcleo, no en el borde del solar', () => {
+    const dato = MARCAS.find(m => m.id === 'hospital-vargas')
+    expect(dato.hito).toBe('hospital-vargas')
+    expect(dato.x).toBeUndefined()
+    expect(dato.y).toBeUndefined()
+    const marca = normalizarMarcas(MARCAS, { hitos: HITOS, coords }).find(m => m.id === 'hospital-vargas')
+    expect([marca.px, marca.py]).toEqual([hospitalVargas.x, hospitalVargas.y])
+    expect(marca.nace).toBe(3)
+    expect(dato.dudas).not.toMatch(/pendiente/i)
+  })
+
+  test('la ficha cuenta las cubiertas planas desde 1936 y deja los anexos de 1939 como duda', () => {
+    const marca = normalizarMarcas(MARCAS, { hitos: HITOS, coords }).find(m => m.id === 'hospital-vargas')
+    const rige = epoca => contenidoDeFicha({ marca, ficha: FICHAS['hospital-vargas'], epoca }).parrafos.find(p => p.rige).texto
+    expect(rige(4)).not.toMatch(/platabanda/)
+    for (const epoca of [5, 6]) {
+      expect(rige(epoca)).toMatch(/platabandas/)
+      expect(rige(epoca)).toMatch(/1891/)
+    }
+    expect(FICHAS['hospital-vargas'].dudas).toMatch(/1939/)
+    expect(FICHAS['hospital-vargas'].dudas).toMatch(/1889/)
   })
 })
