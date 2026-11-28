@@ -8,14 +8,16 @@ su forma.
 
 - En 1946 lo único documentado en obra es la **zona médica**: el Hospital Clínico y los institutos Anatómico,
   de Medicina Experimental y Anatomopatológico, con obra desde 1945, más el movimiento de tierras de 1944.
-- **Ningún edificio estaba terminado en 1946.** Los primeros se completan en 1949; el hospital se inaugura en
+- **Ningún edificio consta como terminado en 1946.** De la Lavandería y de «Cirugía Experimental» no hay
+  ninguna fecha, así que de esos dos no se puede afirmar nada. Los primeros que constan se completan en 1949; el hospital se inaugura en
   1954 y abre en 1956.
 - **Ninguna fuente consultada describe el avance de cada edificio en 1946** (cimientos, estructura, pisos). Hay
   rangos de obra, gasto y cronogramas.
 - El plano de 1946 no sirve para suplirlo: dibuja con el mismo relleno la Escuela Técnica Industrial, cuya obra
   es de 1949 a 1952.
-- El mapa de 1946 muestra el recinto **en construcción, sin edificios**: una marca y una ficha nuevas, y la
-  reserva sin casas, que ahora cubre todo lo que el plano dibuja.
+- El mapa de 1946 muestra el recinto **en construcción, sin edificios**: una marca y una ficha nuevas. La
+  reserva sin casas se amplía para cubrir todo lo que el plano dibuja, pero **eso no se ve hasta regenerar y
+  publicar los datos**: el paquete actual todavía trae casas genéricas sobre la Escuela Técnica Industrial y la pista.
 
 ## Matriz por edificio
 
@@ -32,7 +34,7 @@ Ubicación: caja en píxeles de `fuentes/mapas/1950-archiveorg-plano-de-caracas-
 | Instituto Anatomopatológico | 10327, 6821, 10635, 6955 | Lleno, 5.580 m² | «Project 1945–1956» [U p. 388] | «Construction 1945–S/F» [U]; banqueo en 1944 [R p. 70] | **En obra**; avance desconocido | Completado en 1949 y ocupado en parte en 1950 [TX]; inauguración oficial el 4-12-1954 [U] |
 | Instituto de Higiene | 9902, 6976, 10136, 7153 | Lleno, siete cuerpos, 4.490 m² | «Project 1939–1960» [U p. 397] | «Construction 1945–S/F» [U] | **En obra**; avance desconocido | Se concluye en 1951 [FAC] |
 | Lavandería | 9706, 7004, 9815, 7102 | Lleno, dos cuerpos, 1.600 m² | Desconocido | Desconocida | **Desconocido** | Desconocida |
-| Escuela Técnica Industrial | 10153, 7623, 10549, 7862 | Lleno, 9.500 m², con alas de trazo discontinuo | Maqueta en enero de 1944; plano de 1946 y perspectiva del 31-1-1947 [T pp. 199 y 206]; aulas, «Project 1948» [U p. 627] | «Construction 1949–1952» [U]; ICOMOS dice que empezó en 1947 | **No construida** | Aulas inauguradas en 1955 [U] |
+| Escuela Técnica Industrial | 10153, 7623, 10549, 7862 | Lleno, 9.500 m², con alas de trazo discontinuo | Maqueta en enero de 1944; plano de 1946 y perspectiva del 31-1-1947 [T pp. 199 y 206]; aulas, «Project 1948» [U p. 627] | «Construction 1949–1952» [U]; la evaluación de ICOMOS, en el mismo expediente, dice que empezó en 1947 | **No construida** | Aulas inauguradas en 1955 [U] |
 | Pista ovalada, sin rótulo | 11699, 6814, 11921, 7143 | Lleno (anillo) | El Estadio Olímpico está en la maqueta de diciembre de 1944 [T p. 213]; proyecto de 1949–1950 [FAC] | Banqueo en 1944 [R p. 70]; estadio de 1950–1951 [FAC] | **No construido** el estadio; qué había en la pista, desconocido | Inaugurado el 5-12-1951 [FAC] |
 | Casa de dos patios, sin rótulo | 11650, 6460, 11716, 6542 | Lleno | — | — | **Anterior**: es una de las casas de la «Hda. Ybarra» del plano de 1936 | El Instituto instaló sus oficinas «en una de las casas de dicho fundo» [S]; cuál, no consta |
 | Barra al norte del hospital y barra al noreste, sin rótulo | 10324, 6944, 10431, 6972 · 11617, 6792, 11691, 6865 | Lleno, 890 m² cada una | Desconocido | Desconocida | **Desconocido** | — |
@@ -47,7 +49,7 @@ Fuera del plano, y posteriores: el **Aula Magna y la Plaza Cubierta** (proyecto 
 
 | Sigla | Fuente |
 |---|---|
-| U | [Expediente de nominación UNESCO n.º 986](https://whc.unesco.org/uploads/nominations/986.pdf), fichas «Chronological data» por edificio. Son páginas escaneadas; se cita la página del PDF |
+| U | [Expediente de nominación UNESCO n.º 986](https://whc.unesco.org/uploads/nominations/986.pdf), fichas «Chronological data» por edificio. Son páginas escaneadas; se cita la página del PDF. El mismo PDF trae la evaluación de ICOMOS (*Advisory Body Evaluation*), que es texto |
 | T | Roger Corbacho Moreno, *La Plaza Cubierta de la Ciudad Universitaria de Caracas (1953)*, tesis doctoral, UPC, 2001, [capítulo 5](https://www.tdx.cat/bitstream/handle/10803/6074/05CAPITOL5.pdf?sequence=6&isAllowed=y). Es la tesis que cita el issue; el enlace de tesisenred.net ya no resuelve |
 | S | Ariadna Santacruz, [«Hitos en la gestación del proyecto de construcción de la CUC»](https://trienal.fau.ucv.ve/2008/documentos/cs/CS-8.pdf), Trienal FAU-UCV 2008. Cita las Memorias del MOP |
 | R | Alejandro Rivas Correa, [tesis de grado sobre el Hospital Universitario, 1943–1956](https://saber.ucv.ve/jspui/bitstream/10872/24363/1/TESIS%20HISTORIA%20--%20RIVAS.pdf), UCV, 2024 |
@@ -89,7 +91,7 @@ los dos calces).
 ## Contradicciones y datos desconocidos
 
 1. **El plano frente a la cronología.** La Escuela Técnica Industrial está dibujada con relleno y rótulo, pero
-   su obra es de 1949–1952 [U], o empieza en 1947 según ICOMOS. O el ejemplar, catalogado [1950?], se
+   su obra es de 1949–1952 [U], o empieza en 1947 según la evaluación de ICOMOS [U]. O el ejemplar, catalogado [1950?], se
    actualizó después de las fotografías, o el plano dibuja proyectos como si fueran edificios. En los dos casos,
    **el relleno de esta hoja no prueba que un edificio existiera en 1946**.
 2. **Inicio de la obra del hospital:** 1943 [RCM], 31-10-1944 [R], enero de 1945 [S, T], 1945 [U].

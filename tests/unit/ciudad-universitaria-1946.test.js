@@ -117,12 +117,12 @@ describe('el mapa de 1946 la muestra en construcción', () => {
     expect(vivaEn(hacienda, EPOCA_1946)).toBe(false)
   })
 
-  it('la ficha dice qué estaba en obra y que nada estaba terminado', () => {
+  it('la ficha dice qué estaba en obra y que nada consta como terminado', () => {
     const texto = textoDe('ciudad-universitaria', EPOCA_1946)
 
     expect(texto).toContain('1943')
     expect(texto).toContain('Hospital Clínico')
-    expect(texto).toMatch(/[Nn]ingún edificio estaba terminado/)
+    expect(texto).toContain('Ningún edificio consta como terminado en 1946')
     expect(FICHAS['ciudad-universitaria'].dudas).toBeTruthy()
   })
 

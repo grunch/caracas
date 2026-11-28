@@ -34,7 +34,7 @@ no se deduce de ese grafismo una altura o un porcentaje de avance.
 **Revisión del 28-11-2026:** la matriz por edificio (ubicación en el plano, proyecto, obra, estado en 1946 y
 terminación, con fuente por afirmación), las contradicciones y las referencias visuales están en
 [`docs/issue-264-ciudad-universitaria.md`](../issue-264-ciudad-universitaria.md). Sustituye a la tabla de
-arriba donde difieran. En 1946 solo consta en obra la zona médica y ningún edificio estaba terminado; el plano
+arriba donde difieran. En 1946 solo consta en obra la zona médica y ningún edificio consta como terminado; el plano
 dibuja con el mismo relleno la Escuela Técnica Industrial, cuya obra es posterior.
 
 **Implementado:** la reserva sin casas, ampliada a la Escuela Técnica Industrial y a la pista (falta
