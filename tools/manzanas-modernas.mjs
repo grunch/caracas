@@ -9,7 +9,7 @@ import {espacial,techosDeHitos} from './manzanas-completas.mjs'
 import {arbolesParaManzanas} from './manzanas-arboles-lib.mjs'
 import {codificarArboles} from './arboles-lib.mjs'
 import {retirarPorHitos} from './hitos-manzanas.mjs'
-import {resumenDeRetiradas,zonasSinArboles} from './hitos-manzanas-lib.mjs'
+import {ocupadasParaAmpliar,resumenDeRetiradas,zonasSinArboles} from './hitos-manzanas-lib.mjs'
 
 const [añoTxt,anterior,salida]=process.argv.slice(2),año=Number(añoTxt)
 const años=[1772,1843,1889,1911,1936,1946],epoca=años.indexOf(año)+1,previo=años[epoca-2]
@@ -19,10 +19,12 @@ const [datos,heredado,meta]=await Promise.all([leer(`${anterior}/ciudad.json`),l
 // Ningún hito sobre una manzana (specs/13, R13): la que un hito ocupa en esta época se retira entera, sea heredada o nueva.
 // Las heredadas se retiran antes de ampliar: lo que el plano de la época dibuje en su lugar se mide de nuevo.
 const heredadas=retirarPorHitos(heredado.manzanas,epoca,meta.metro)
-const r=spawnSync(process.env.PY??'.venv/bin/python',['tools/geo/manzanas_modernas.py'],{input:JSON.stringify({entrada:`${anterior}/ciudad.json`,heredadas:heredadas.quedan,hitos:hitosConPlanta(),epoca,metro:meta.metro}),encoding:'utf8',maxBuffer:128*1024*1024})
+// Las que un hito retiró en épocas anteriores y sigue retirando: su suelo no vuelve a edificarse mientras él esté en pie.
+const previas=retirarPorHitos(heredado.retiradasPorHito??[],epoca,meta.metro).retiradas
+const r=spawnSync(process.env.PY??'.venv/bin/python',['tools/geo/manzanas_modernas.py'],{input:JSON.stringify({entrada:`${anterior}/ciudad.json`,heredadas:ocupadasParaAmpliar(heredadas,previas),hitos:hitosConPlanta(),epoca,metro:meta.metro}),encoding:'utf8',maxBuffer:128*1024*1024})
 if(r.error||r.status!==0)throw Error(r.error?.message??r.stderr)
 const seleccion=JSON.parse(r.stdout),propias=retirarPorHitos(seleccion.manzanas,epoca,meta.metro)
-const retiradas=[...heredadas.retiradas,...propias.retiradas]
+const retiradas=[...previas,...heredadas.retiradas,...propias.retiradas]
 for(const m of propias.quedan){
  const c=[0,1].map(k=>m.poligono.reduce((s,p)=>s+p[k],0)/4)
  m.distancia=Math.hypot(c[0]-meta.plaza[0],c[1]-meta.plaza[1])*meta.metro

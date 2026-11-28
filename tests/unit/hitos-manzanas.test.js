@@ -1,5 +1,5 @@
 import {describe,it,expect} from 'vitest'
-import {paraMedir,separarRetiradas,casaEnZonas,zonasSinArboles,resumenDeRetiradas,tablaMd} from '../../tools/hitos-manzanas-lib.mjs'
+import {paraMedir,separarRetiradas,casaEnZonas,zonasSinArboles,resumenDeRetiradas,tablaMd,ocupadasParaAmpliar} from '../../tools/hitos-manzanas-lib.mjs'
 import {integrarManzanasEpoca} from '../../tools/manzanas-1843-lib.mjs'
 import {arbolesParaManzanas} from '../../tools/manzanas-arboles-lib.mjs'
 
@@ -82,5 +82,17 @@ describe('la regla «ningún hito sobre una manzana» en el pipeline (specs/13, 
   expect(lineas[0]).toMatch(/^\| Época \| Hito \| Manzana \|/)
   expect(lineas[2]).toMatch(/^\| 1772 \| catedral \| U1772-0094 \|/)
   expect(lineas[3]).toBe('| 1936 | hospital-vargas | M5-1088-A0 | 15.006 | 9.092 | 27.000 | 12 % | 35 % | 20 % | 20 % | 35 % | grande | **retirar** |')
+ })
+})
+
+describe('el suelo de una manzana retirada no vuelve a edificarse mientras el hito siga en pie',()=>{
+ it('para ampliar la ciudad cuentan como ocupadas las que quedan, las que se retiran ahora y las retiradas antes',()=>{
+  // Arrange: el Nuevo Circo retiró su manzana en 1936; el plano de 1946 dibuja casas en toda la cuadra
+  const heredadas={quedan:[manzana('A',0,0)],retiradas:[{id:'B',poligono:cuadro(200,0),limite:cuadro(200,0),huecos:[],areaM2:2500,epoca:6,ocupacion:.6,motivo:'ocupa la mayor parte',hitos:['nuevo-circo']}]}
+  const previas=[{id:'C',poligono:cuadro(400,0),huecos:[],areaM2:2500,epoca:6,ocupacion:.9,motivo:'ocupa la mayor parte',hitos:['capitolio']}]
+  // Act
+  const ocupadas=ocupadasParaAmpliar(heredadas,previas)
+  // Assert: solo contornos, en ese orden
+  expect(ocupadas).toEqual([{id:'A',poligono:cuadro(0,0),limite:cuadro(0,0),huecos:[]},{id:'B',poligono:cuadro(200,0),limite:cuadro(200,0),huecos:[]},{id:'C',poligono:cuadro(400,0),huecos:[]}])
  })
 })

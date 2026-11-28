@@ -21,6 +21,13 @@ export function separarRetiradas(manzanas,decisiones,epoca){
  return {quedan,retiradas}
 }
 
+/**
+ * Lo que ya está ocupado al ampliar la ciudad en una época: las manzanas heredadas que quedan, las que un hito retira
+ * ahora y las que retiró en épocas anteriores y sigue retirando. Sobre ese suelo el plano de la época no levanta otra
+ * manzana: si no, la cuadra del hito volvería con otro nombre y con casas pegadas a él.
+ */
+export const ocupadasParaAmpliar=({quedan,retiradas},previas=[])=>paraMedir([...quedan,...retiradas,...previas])
+
 const CERCA_DEL_CENTRO=.1 // cada vértice se prueba corrido hacia el centro: la casa recortada comparte el borde de su manzana
 const enZona=(p,z)=>puntoEnPoligono(p,z.limite??z.poligono)&&!(z.huecos??[]).some(h=>puntoEnPoligono(p,h))
 /** ¿Cae la mayor parte de la huella en alguna de las zonas (manzanas con su límite y sus huecos)? */
