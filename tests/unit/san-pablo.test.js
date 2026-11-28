@@ -89,7 +89,7 @@ describe('la iglesia de San Pablo, anterior al Teatro Municipal (#246)', () => {
     const area = (ps) => Math.abs(ps.reduce((s, [x, y], i) => { const [x2, y2] = ps[(i + 1) % ps.length]; return s + x * y2 - x2 * y }, 0)) / 2
     const m2 = (poligonos) => poligonos.reduce((s, p) => s + area(p), 0) * PLANO.metro ** 2
     expect(m2(h.suprime)).toBeLessThan(m2(teatro.suprime) / 3)
-    expect(h.x).toBeGreaterThan(teatro.x + 30)
+    expect(h.x).toBeGreaterThan(teatro.x + 30) // el eje de la nave, 17 m al este del centro del teatro
   })
 
   test('trae sus fuentes con enlace y dice lo que queda por verificar', () => {
@@ -106,8 +106,8 @@ describe('la iglesia de San Pablo, anterior al Teatro Municipal (#246)', () => {
   test('la reserva cubre el templo solo mientras está en pie y deja afuera la plaza, la calle y el hospital', () => {
     const zonas = zonasDeSupresion([h])
     const dentro = (p) => zonas.some((z) => puntoEnPoligono(p, z.poligono))
-    for (const p of [[8390, 7700], [8376, 7690], [8384, 7745]]) expect(dentro(p), `${p}`).toBe(true)
-    for (const p of [[8390, 7650], [8355, 7570], [8425, 7700], [8340, 7700], [8380, 7770]]) expect(dentro(p), `${p}`).toBe(false)
+    for (const p of [[8380, 7700], [8366, 7690], [8374, 7745]]) expect(dentro(p), `${p}`).toBe(true)
+    for (const p of [[8380, 7650], [8355, 7570], [8405, 7700], [8330, 7700], [8370, 7770]]) expect(dentro(p), `${p}`).toBe(false)
     expect(zonas.every((z) => z.desde === 1 && z.hasta === 3)).toBe(true)
   })
 
