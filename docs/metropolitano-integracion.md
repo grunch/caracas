@@ -67,15 +67,13 @@ Lectura del 28-11-2026 sobre el mosaico DCN de 1936 (0,5 m/px) y el plano de 194
   24 %) y `V1772-36189-0-0` (1772, 9 %). El circo no pisa el borde de una cuadra: pisa las costuras entre esos
   pedazos. La tabla de [`manzanas-hitos.md`](manzanas-hitos.md) retira `U1843-0224-A0` (51 % ocupada) en 1911 y
   1936 y deja el cruce con `M4-0353-A0` como límite. Eso no cambia acá.
-- **Lo que queda mal y no se arregla acá.** En 1946 `U1843-0224-A0` no vuelve, aunque el circo dejó de estar en pie:
-  las manzanas de 1946 se heredan de las de 1936, ya sin ella. R13 retira la manzana «en las épocas en que el
-  hito está en pie»; en 1946 el pedazo debería volver como suelo de manzana sin casas (el solar en blanco del
-  plano). En el visor de 1946 el pedazo (unos 1.365 m²) se ve como un lazo de suelo de calle alrededor de un rectángulo verde, con un árbol del plano en (7856, 7969) px: parece una calle que no existe (captura `metropolitano-1946.webp`). Se arregla
-  en el generador: `tools/manzanas-modernas.mjs` vuelve a medir las `retiradasPorHito` de la época anterior y se
-  queda solo con las que un hito sigue retirando; las que ya ningún hito retira (el `quedan` de esa medida) se
-  descartan en vez de volver como manzana. El sitio queda libre para las manzanas nuevas del plano de 1946, que ahí
-  no dibuja nada edificado, y por eso no entra ninguna. Además `retiradasPorHito` guarda el polígono y las áreas, no
-  la manzana entera. Pide regenerar y publicar los datos y medir R13 antes y después; no se hizo en este cambio.
+- **El solar vuelve en 1946 (PR #315).** Con los datos publicados hasta el 28-11-2026, en 1946 `U1843-0224-A0` no
+  volvía aunque el circo ya no estaba: quedaba un hueco de unos 1.365 m² con un lazo de suelo de calle y un árbol del
+  plano en (7856, 7969) px (captura `metropolitano-1946.webp`, de antes del arreglo). `tools/manzanas-modernas.mjs`
+  descartaba las retiradas que ya ningún hito retiraba. Ahora vuelven como manzana: suelo de manzana, sin casas ni
+  árboles generados (el solar en blanco del plano). Detalle, medición de las seis épocas y capturas de antes y después
+  en [`manzanas-hitos.md`](manzanas-hitos.md#cuando-el-hito-ya-no-está-la-manzana-vuelve). **Falta regenerar y
+  publicar los datos.** Queda igual la banda de calle entre los tres pedazos de la cuadra, que el plano no dibuja.
 
 ### Capturas de las seis épocas
 
