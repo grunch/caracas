@@ -101,6 +101,9 @@ describe('la iglesia de San Pablo, anterior al Teatro Municipal (#246)', () => {
     expect(h.verificar.join(' ')).toMatch(/altura/i)
     expect(h.verificar.join(' ')).toMatch(/hospital/i)
     expect(h.verificar.join(' ')).toMatch(/1757/)
+    expect(h.verificar.join(' ')).toMatch(/39 %/) // el error de escala, sin subestimarlo
+    expect(h.verificar.join(' ')).toMatch(/se sale unos 13 m/)
+    expect(h.fuente).toMatch(/segunda mano/)
   })
 
   test('la reserva cubre el templo solo mientras está en pie y deja afuera la plaza, la calle y el hospital', () => {
@@ -134,5 +137,11 @@ describe('la iglesia de San Pablo, anterior al Teatro Municipal (#246)', () => {
     expect(f.textos[2][1]).toMatch(/1876/)
     expect(f.dudas).toMatch(/San Pablo/)
     expect(f.dudas).toMatch(/hospital/i)
+    // las citas de segunda mano van atribuidas en el texto, y el error de escala, en las dudas
+    expect(f.textos[0][1]).toMatch(/Según Otaduy, citado por Gois/)
+    expect(f.textos[1][1]).toMatch(/sin dar fecha/)
+    expect(f.textos[1][1]).toMatch(/lectura de Gois/)
+    expect(f.dudas).toMatch(/57 m/)
+    expect(f.dudas).toMatch(/segunda mano/)
   })
 })

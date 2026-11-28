@@ -18,7 +18,7 @@ plano de 1936** (se demolió en 1876), así que:
 - la **composición** sale de dos descripciones y de un plano de 1757, las tres reproducidas en la tesis de
   Tarím S. Gois C. (UCV, 2007);
 - las **medidas** son una proporción puesta a escala, no una mensura: es el punto más débil y va dicho en todas
-  partes.
+  partes. **El error puede llegar al 39 %** (ver «El largo y la escala»).
 
 ## Ficha de evidencias por etapa
 
@@ -55,8 +55,18 @@ la página impresa. «Landaeta» es *La antigua Calle del Comercio de Caracas* (
   dos en 1843. No hay prueba de la fecha de la reparación.
 - **El estado en 1843.** Tras «todas las paredes desplomadas» no se halló cuándo se rehízo. Va reparada porque el
   plano de 1843 la nombra y la foto atribuida a Lessmann (sin fecha) la muestra entera.
-- **El largo.** El recuadro del plano de 1843 mide 27,5 m de fondo; la proporción del plano de 1757 da 41 m. Va la
-  del plano de 1757, que es un levantamiento del edificio; el plano de ciudad es esquemático a esa escala.
+- **El largo y la escala.** La escala sale de igualar los 23 m de ancho del recuadro de 1843 con los 125 px que
+  ocupa en el plano de 1757 el templo **con** sus bodegones y el pasadizo: 0,184 m por píxel, nave de 10 m y
+  41 m de largo. Si esos 23 m fueran solo la nave y la nave menor (90 px), la escala sube un 39 %: nave de 14 m y
+  unos 57 m de largo. No hay cómo decidir entre las dos lecturas; va la primera porque da una nave de luz
+  corriente para una armadura de madera, lo que es un argumento y no una prueba.
+- **El modelo se sale del recuadro de 1843.** El recuadro mide 27,5 m de fondo y el modelo, 41: sobresale unos
+  13 m hacia el sur. Se siguió la proporción del plano de 1757, que es un levantamiento del edificio, y no el
+  recuadro, esquemático a la escala de un plano de ciudad. Ninguna de las dos fuentes confirma a la otra en el
+  largo.
+- **Citas de segunda mano.** Lo de Martí (por Otaduy), lo de Gasparini y la carta de 1812 se conocen por la tesis
+  de Gois; ninguna se cotejó. Gasparini no fecha su descripción: que sea el templo posterior a 1812 es la lectura
+  de Gois. La ficha lo atribuye así en sus textos de 1772 y 1843.
 - **El lugar** tiene el error del calce de 1843 (12 m). La calle del este no coincide entre el plano de 1843, el
   de 1936 y el tejido del mapa (hasta 10 m): el muro este se puso sobre el borde de la manzana `U1772-0051`.
 
@@ -125,7 +135,7 @@ fuentes del templo, y a la ficha, la descripción de 1772 y de 1843.
 
 ## Qué es interpretativo
 
-- **Todas las medidas** (ver arriba) y **todas las alturas**: nave de 8 m, nave menor de 6 m, cuerpos de la torre
+- **Todas las medidas** (con un error posible del 39 %; ver arriba) y **todas las alturas**: nave de 8 m, nave menor de 6 m, cuerpos de la torre
   de 7, 5 y 4 m.
 - La fachada (la «clásica» de la iglesia paramétrica, sin los pináculos de Gasparini) y que sea la misma en 1772.
 - El remate de la torre (chapitel bajo de teja), los vanos y el color.
@@ -133,7 +143,7 @@ fuentes del templo, y a la ficha, la descripción de 1772 y de 1843.
 
 ## Rendimiento
 
-988 triángulos más: 646.315 antes de 1946 y 1.125.688 en total (con La Candelaria y Las Mercedes), dentro de los
+988 triángulos más: 646.513 antes de 1946 y 1.125.886 en total (con La Candelaria y Las Mercedes), dentro de los
 topes que dejó #316 (647.000 y 1.127.000). Build: entrada 307,2 kB y workers 175,3 kB (tope 176, sin tocar). La
 medición de carga y de cuadro, en [`mediciones/san-pablo-246`](mediciones/san-pablo-246/README.md).
 

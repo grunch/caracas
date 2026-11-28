@@ -1,7 +1,7 @@
 {
   "fuente": "Plano de Jesurún de 1843 calzado sobre el mosaico de 1936 (fuentes/derivados/1843/calzado.tif, de fuentes/mapas/1843-nypl-jesurun-facsimil-muller-stapler; calce de 12,4 m RMS), contrastado con el plano de 1772 (calce de 18,7 m RMS), con el DCN de 1936 y con las manzanas de la reconstrucción de 1772 del mapa",
   "sistema": "píxeles del mosaico base de 1936, 0,5 m por píxel; a = metros a lo largo del eje desde el pie de la fachada, b = metros a su derecha (al oeste)",
-  "certeza": "baja. El lugar sale de un plano de 1843 calzado con 12 m de error; las medidas, de la proporción de un plano de 1757 sin escala legible. No hay contorno medido: el templo se demolió en 1876 y el plano de 1936 ya dibuja el teatro.",
+  "certeza": "baja. El lugar sale de un plano de 1843 calzado con 12 m de error; las medidas, de la proporción de un plano de 1757 sin escala legible, con un error posible del 39 %. No hay contorno medido: el templo se demolió en 1876 y el plano de 1936 ya dibuja el teatro.",
   "templos": {
     "san-pablo": {
       "origen_px": [8384, 7670],
@@ -18,7 +18,9 @@
       "proporcion_del_plano_de_1757": {
         "fuente": "«Plano de la iglesia de San Pablo, Hospital Real y Hospicio de la Caridad», 1757, reproducido en Gois (2007), ilustraciones 1 y 5",
         "lectura": "en la reproducción, el cañón de la iglesia mide unos 55 px de ancho y 225 de largo con la capilla mayor; la nave menor (torre, capillas, baptisterio, antesala y sacristía), 35 px; los bodegones y el pasadizo al hospital, otros 35",
-        "escala_supuesta": "los 125 px del ancho del conjunto del templo = los 23 m del recuadro del plano de 1843: 0,184 m por píxel"
+        "escala_supuesta": "los 125 px del ancho del conjunto del templo = los 23 m del recuadro del plano de 1843: 0,184 m por píxel",
+        "escala_alternativa": "si los 23 m fueran solo la nave y la nave menor (90 px): 0,256 m por píxel, un 39 % más; nave de 14 m y unos 57 m de largo",
+        "desacuerdo_con_1843": "el modelo de 41 m sobresale unos 13 m hacia el sur del recuadro de 1843 (27,5 m de fondo)"
       },
       "medidas_m": { "largo": 41, "nave": 10, "nave_menor": 6.5, "torre": 6.5 },
       "otros_planos": {

@@ -30,3 +30,6 @@ Los topes de carga, tarea larga, bytes, memoria y triángulos del presupuesto ya
 completos y siguen sin pasar en la rama: **no se tocaron**. Tampoco los topes unitarios de triángulos de los hitos
 que dejó #316 (646.315 de 647.000 antes de 1946; 1.125.688 de 1.127.000 en total) ni el de workers del build
 (175,3 de 176 kB).
+
+Después de esta medición La Candelaria sumó 198 triángulos (su etapa de 1843 pasó a ser una pieza aparte, revisión
+de #314): los totales quedan en 646.513 y 1.125.886, dentro de los mismos topes. **No se volvió a medir.**
