@@ -40,16 +40,16 @@ jobs:
         run: node tools/rendimiento/presupuesto-build.mjs
 
   # Los E2E dibujan por software (SwiftShader) y son lo lento del CI: van en tandas paralelas, por archivo.
-  # Cuatro tandas: con tres, cada puente o hito nuevo dejaba alguna al filo de los 25 min y el job se cancelaba
+  # Cinco tandas: con tres o cuatro, cada puente o hito nuevo dejaba alguna al filo de los 25 min y el job se cancelaba
   # sin que fallara ningún test.
   e2e:
-    name: E2E (Playwright, tanda ${{ matrix.tanda }} de 4)
+    name: E2E (Playwright, tanda ${{ matrix.tanda }} de 5)
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
-        tanda: [1, 2, 3, 4]
+        tanda: [1, 2, 3, 4, 5]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -70,7 +70,7 @@ jobs:
         # segundo intento con el índice recargado suele bastar
         run: npx playwright install --with-deps chromium || (sleep 30 && sudo apt-get update && npx playwright install --with-deps chromium)
       - name: E2E
-        run: npx playwright test --shard=${{ matrix.tanda }}/4 --reporter=line,html
+        run: npx playwright test --shard=${{ matrix.tanda }}/5 --reporter=line,html
       - name: Reporte de Playwright
         if: failure()
         uses: actions/upload-artifact@v4
