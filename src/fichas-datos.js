@@ -15,7 +15,7 @@
  * Un lugar sin entrada muestra la nota de su marca y la fuente de su nombre.
  */
 import { FICHAS_PUENTES_CRUCES } from './puentes-cruces-datos.js'
-import { FICHAS_CIUDAD_UNIVERSITARIA } from './ciudad-universitaria-datos.js'
+import { FICHAS_CIUDAD_UNIVERSITARIA } from './ucv-1946-datos.js'
 
 const SIN_LEYENDA = 'el nombre de 1772 no se cotejó con la leyenda de ese plano'
 
@@ -379,6 +379,6 @@ export const FICHAS = Object.freeze({
 
   // --- los demás cruces del Guaire (src/puentes-cruces-datos.js) ---
   ...FICHAS_PUENTES_CRUCES,
-  // --- la Ciudad Universitaria en obras y la hacienda que ocupó (src/ciudad-universitaria-datos.js) ---
+  // --- la Ciudad Universitaria en obras y la hacienda que ocupó (src/ucv-1946-datos.js) ---
   ...FICHAS_CIUDAD_UNIVERSITARIA,
 })
