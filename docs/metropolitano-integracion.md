@@ -70,8 +70,9 @@ Lectura del 28-11-2026 sobre el mosaico DCN de 1936 (0,5 m/px) y el plano de 194
   las de 1936, ya sin ella, aunque el circo dejó de estar en pie. R13 retira la manzana «en las épocas en que el
   hito está en pie»; en 1946 el pedazo debería volver como suelo de manzana sin casas (el solar en blanco del
   plano). En el visor de 1946 el pedazo (unos 1.365 m²) se ve como un lazo de suelo de calle alrededor de un rectángulo verde, con un árbol del plano en (7856, 7969) px: parece una calle que no existe (captura `metropolitano-1946.webp`). Se arregla
-  en el generador (`tools/geo/hitos_manzanas.py` y los pasos `retiro-<año>`: que la retirada por un hito caduque
-  cuando el hito muere) y pide regenerar y publicar los datos; no se hizo en este cambio.
+  en el generador: `tools/retiro-manzanas-epoca.mjs` hereda solo `manzanas` de la época anterior y no vuelve a
+  evaluar `retiradasPorHito` cuando el hito muere (y esa lista hoy guarda el polígono y las áreas, no la manzana
+  entera). Pide regenerar y publicar los datos y medir R13 antes y después; no se hizo en este cambio.
 
 ### Capturas de las seis épocas
 
