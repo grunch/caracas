@@ -26,6 +26,8 @@ export const leerJsonSiHay = (ruta) => leerJson(ruta).catch(() => null)
 const GEO = (...nombres) => nombres.map((n) => `tools/geo/${n}.py`)
 const CODIGO_HITOS = readdirSync(new URL('../src/hitos/', import.meta.url), {recursive:true})
   .filter(n=>n.endsWith('.js')).sort().map(n=>`src/hitos/${n}`)
+// «Ningún hito sobre una manzana» (specs/13, R13): la medida y la decisión que usan los pasos de retiro
+const REGLA_HITOS = ['tools/hitos-manzanas.mjs', 'tools/geo/hitos_manzanas.py']
 const OSM_HOY = 'fuentes/derivados/hoy/osm.json'
 export const DESCARGAR = process.argv.includes('--descargar') // vuelve a bajar OSM aunque haya caché
 
@@ -149,7 +151,7 @@ export const PASOS = [
     id: 'manzanas-1843',
     entradas: [`${E}/ciudad-manzanas.json`, `${E}/manzanas-1772-informe.json`, `${D}/mosaico.json`, 'tools/geo/referencias/1843-manzanas.json'],
     salidas: [`${E}/ciudad-manzanas-1843.json`, `${E}/manzanas-1843-informe.json`],
-    codigo: ['tools/manzanas-1843.mjs', 'tools/manzanas-1843-lib.mjs', 'tools/geo/ampliacion_manzanas.py', 'tools/manzanas-completas.mjs', 'tools/geo/manzanas_completas.py', 'tools/manzanas-1772-lib.mjs', 'tools/manzanas-reservas-lib.mjs', 'src/hitos.js', 'src/coords.js', ...CODIGO_HITOS, 'src/manzanas/plan.js', 'src/manzanas/paleta.js', 'src/manzanas/perimetro.js', 'src/poligono.js', 'src/alas.js'],
+    codigo: ['tools/manzanas-1843.mjs', 'tools/manzanas-1843-lib.mjs','tools/hitos-manzanas-lib.mjs', 'tools/geo/ampliacion_manzanas.py', 'tools/manzanas-completas.mjs', 'tools/geo/manzanas_completas.py', 'tools/manzanas-1772-lib.mjs', 'tools/manzanas-reservas-lib.mjs', 'src/hitos.js', 'src/coords.js', ...CODIGO_HITOS, 'src/manzanas/plan.js', 'src/manzanas/paleta.js', 'src/manzanas/perimetro.js', 'src/poligono.js', 'src/alas.js'],
     cmd: () => ['node', 'tools/manzanas-1843.mjs', `${E}/ciudad-manzanas.json`, `${E}/ciudad-manzanas-1843.json`],
   },
   {
@@ -163,7 +165,7 @@ export const PASOS = [
     id: 'manzanas-1889',
     entradas: [`${E}/ciudad-manzanas-1843.json`, `${E}/manzanas-1843-informe.json`, `${E}/referencia-1889.json`, `${D}/mosaico.json`],
     salidas: [`${E}/ciudad-manzanas-1889.json`, `${E}/manzanas-1889-informe.json`],
-    codigo: ['tools/manzanas-1889.mjs', 'tools/manzanas-1843-lib.mjs', 'tools/geo/ampliacion_manzanas.py', 'tools/manzanas-completas.mjs', 'tools/geo/manzanas_completas.py', 'tools/manzanas-1772-lib.mjs', 'tools/manzanas-reservas-lib.mjs', 'src/hitos.js', 'src/coords.js', ...CODIGO_HITOS, 'src/manzanas/plan.js', 'src/manzanas/paleta.js', 'src/manzanas/perimetro.js', 'src/poligono.js', 'src/alas.js'],
+    codigo: ['tools/manzanas-1889.mjs', 'tools/manzanas-1843-lib.mjs','tools/hitos-manzanas-lib.mjs', 'tools/geo/ampliacion_manzanas.py', 'tools/manzanas-completas.mjs', 'tools/geo/manzanas_completas.py', 'tools/manzanas-1772-lib.mjs', 'tools/manzanas-reservas-lib.mjs', 'src/hitos.js', 'src/coords.js', ...CODIGO_HITOS, 'src/manzanas/plan.js', 'src/manzanas/paleta.js', 'src/manzanas/perimetro.js', 'src/poligono.js', 'src/alas.js'],
     cmd: () => ['node', 'tools/manzanas-1889.mjs', `${E}/ciudad-manzanas-1843.json`, `${E}/ciudad-manzanas-1889.json`],
   },
   {
@@ -206,7 +208,7 @@ export const PASOS = [
     id: 'retiro-1772',
     entradas: ['fuentes/derivados/1946/ciudad-1946.json', 'fuentes/derivados/retiro1772/base-arboles.bin', `${D}/mosaico.json`, `${E}/manzanas-1772-informe.json`],
     salidas: ['fuentes/derivados/retiro1772/ciudad.json', 'fuentes/derivados/retiro1772/manzanas-1772-informe.json', 'fuentes/derivados/retiro1772/arboles.bin', 'fuentes/derivados/retiro1772/resumen.json', 'fuentes/derivados/retiro1772/contornos-piloto.json'],
-    codigo: ['tools/retiro-manzanas-1772.mjs','tools/geo/retiro_manzanas.py','tools/manzanas-completas.mjs','tools/geo/manzanas_completas.py','tools/manzanas-1772-lib.mjs','tools/manzanas-reservas-lib.mjs','tools/manzanas-arboles-lib.mjs','tools/arboles-lib.mjs','src/manzanas/retiro-1772-piloto.json','src/manzanas/plan.js','src/manzanas/paleta.js','src/manzanas/perimetro.js','src/poligono.js','src/alas.js','src/hitos.js','src/coords.js',...CODIGO_HITOS],
+    codigo: ['tools/retiro-manzanas-1772.mjs',...REGLA_HITOS,'tools/hitos-manzanas-lib.mjs','tools/geo/retiro_manzanas.py','tools/manzanas-completas.mjs','tools/geo/manzanas_completas.py','tools/manzanas-1772-lib.mjs','tools/manzanas-reservas-lib.mjs','tools/manzanas-arboles-lib.mjs','tools/arboles-lib.mjs','src/manzanas/retiro-1772-piloto.json','src/manzanas/plan.js','src/manzanas/paleta.js','src/manzanas/perimetro.js','src/poligono.js','src/alas.js','src/hitos.js','src/coords.js',...CODIGO_HITOS],
     cmd: () => ['node','tools/retiro-manzanas-1772.mjs','fuentes/derivados/1946/ciudad-1946.json','fuentes/derivados/retiro1772/base-arboles.bin','fuentes/derivados/retiro1772'],
   },
   ...EPOCAS_RETIRO.slice(1).map((año,i)=>{
@@ -214,7 +216,7 @@ export const PASOS = [
     if(EPOCAS_COMPLETAS.includes(año))return {
       id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,`${previo}/manzanas-${EPOCAS_RETIRO[i]}-informe.json`,`${D}/tramos.json`,`${D}/mosaico.json`,...(año===1946?['fuentes/derivados/1946/arboles-base.bin']:[])],
       salidas:[`${salida}/ciudad.json`,`${salida}/arboles.bin`,`${salida}/manzanas-${año}-informe.json`,`${salida}/resumen.json`,...(año===1946?[`${salida}/arboles-1946.bin`]:[])],
-      codigo:['tools/manzanas-modernas.mjs','tools/geo/manzanas_modernas.py','tools/geo/ampliacion_manzanas.py','tools/geo/retiro_manzanas.py','tools/geo/caras.py','tools/geo/lados.py','tools/manzanas-1843-lib.mjs','tools/manzanas-completas.mjs','tools/geo/manzanas_completas.py','tools/manzanas-1772-lib.mjs','tools/manzanas-reservas-lib.mjs','tools/manzanas-arboles-lib.mjs','tools/arboles-lib.mjs','src/manzanas/epocas-completas.json','src/manzanas/plan.js','src/manzanas/paleta.js','src/manzanas/perimetro.js','src/poligono.js','src/alas.js','src/coords.js','src/hitos.js',...CODIGO_HITOS],
+      codigo:['tools/manzanas-modernas.mjs',...REGLA_HITOS,'tools/geo/manzanas_modernas.py','tools/geo/ampliacion_manzanas.py','tools/geo/retiro_manzanas.py','tools/geo/caras.py','tools/geo/lados.py','tools/manzanas-1843-lib.mjs','tools/hitos-manzanas-lib.mjs','tools/manzanas-completas.mjs','tools/geo/manzanas_completas.py','tools/manzanas-1772-lib.mjs','tools/manzanas-reservas-lib.mjs','tools/manzanas-arboles-lib.mjs','tools/arboles-lib.mjs','src/manzanas/epocas-completas.json','src/manzanas/plan.js','src/manzanas/paleta.js','src/manzanas/perimetro.js','src/poligono.js','src/alas.js','src/coords.js','src/hitos.js',...CODIGO_HITOS],
       cmd:()=>['node','tools/manzanas-modernas.mjs',String(año),previo,salida]}
     if(año>=1911)return {id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,'fuentes/derivados/1946/ciudad-1946.json','fuentes/derivados/1946/informe.json',`${D}/tramos.json`,`${D}/segmentacion/mosaico/clases-costura.png`,`${D}/mosaico.json`,...(año===1946?['fuentes/derivados/1946/arboles-base.bin']:[])],
       salidas:[`${salida}/ciudad.json`,`${salida}/arboles.bin`,`${salida}/resumen.json`,`${salida}/hitos-fijos.json`,...(año===1946?[`${salida}/arboles-1946.bin`]:[])],
@@ -222,7 +224,7 @@ export const PASOS = [
       cmd:()=>['node','tools/retiro-moderno.mjs',String(año),previo,salida]}
     return {id:`retiro-${año}`,entradas:[`${previo}/ciudad.json`,`${previo}/arboles.bin`,`${previo}/manzanas-${EPOCAS_RETIRO[i]}-informe.json`,`${E}/manzanas-${año}-informe.json`,`${D}/mosaico.json`],
       salidas:[`${salida}/ciudad.json`,`${salida}/arboles.bin`,`${salida}/manzanas-${año}-informe.json`,`${salida}/resumen.json`],
-      codigo:['tools/retiro-manzanas-epoca.mjs','tools/manzanas-1843-lib.mjs','tools/geo/retiro_manzanas.py','tools/geo/manzanas_completas.py','tools/manzanas-completas.mjs','tools/manzanas-1772-lib.mjs','tools/manzanas-reservas-lib.mjs','tools/manzanas-arboles-lib.mjs','tools/arboles-lib.mjs','src/manzanas/epocas-retiro.json','src/manzanas/plan.js','src/manzanas/paleta.js','src/manzanas/perimetro.js','src/poligono.js','src/alas.js','src/coords.js','src/hitos.js',...CODIGO_HITOS],
+      codigo:['tools/retiro-manzanas-epoca.mjs',...REGLA_HITOS,'tools/manzanas-1843-lib.mjs','tools/hitos-manzanas-lib.mjs','tools/geo/retiro_manzanas.py','tools/geo/manzanas_completas.py','tools/manzanas-completas.mjs','tools/manzanas-1772-lib.mjs','tools/manzanas-reservas-lib.mjs','tools/manzanas-arboles-lib.mjs','tools/arboles-lib.mjs','src/manzanas/epocas-retiro.json','src/manzanas/plan.js','src/manzanas/paleta.js','src/manzanas/perimetro.js','src/poligono.js','src/alas.js','src/coords.js','src/hitos.js',...CODIGO_HITOS],
       cmd:()=>['node','tools/retiro-manzanas-epoca.mjs',String(año),previo,salida]}
   }),
   {
