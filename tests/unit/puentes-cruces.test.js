@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { MARCAS_PUENTES_CRUCES, FICHAS_PUENTES_CRUCES } from '../../src/puentes-cruces-datos.js'
+import { MARCAS } from '../../src/marcas-datos.js'
+import { FICHAS } from '../../src/fichas-datos.js'
 import { normalizarMarcas, validarMarcas, nombreEn, vivaEn } from '../../src/marcas.js'
 import { validarFichas, contenidoDeFicha } from '../../src/fichas.js'
 import { crearCoords } from '../../src/coords.js'
@@ -9,7 +11,7 @@ const PLANO = { ancho: 18600, alto: 14800 }
 const coords = crearCoords({ ...PLANO, metro: 0.5, plaza: [8968.2, 6839] })
 const EPOCAS = [1, 2, 3, 4, 5, 6]
 const CRUCES = ['puente-dolores', 'puente-restaurador', 'puente-19-diciembre', 'puente-ayacucho']
-const CALCE = JSON.parse(readFileSync(new URL('../../docs/puentes-guaire-calce-cruces.json', import.meta.url), 'utf8'))
+const CALCE = JSON.parse(readFileSync(new URL('../../docs/puentes-guaire-calce.json', import.meta.url), 'utf8'))
 
 const marcas = normalizarMarcas(MARCAS_PUENTES_CRUCES, { coords })
 const marca = (id) => marcas.find((m) => m.id === id)
@@ -63,6 +65,15 @@ describe('las marcas de los cruces del Guaire', () => {
   })
 })
 
+describe('los cruces en el sitio', () => {
+  it('las cuatro marcas y sus fichas están entre las del mapa, una sola vez', () => {
+    for (const id of CRUCES) {
+      expect(MARCAS.filter((m) => m.id === id), id).toEqual([fila(id)])
+      expect(FICHAS[id], id).toBe(FICHAS_PUENTES_CRUCES[id])
+    }
+  })
+})
+
 describe('las fichas de los cruces del Guaire', () => {
   it('son válidas contra sus marcas y tienen un texto por cada época en que cambia lo documentado', () => {
     expect(validarFichas(FICHAS_PUENTES_CRUCES, MARCAS_PUENTES_CRUCES)).toEqual([])
@@ -97,7 +108,7 @@ describe('las fichas de los cruces del Guaire', () => {
   })
 })
 
-describe('el calce de los cruces (docs/puentes-guaire-calce-cruces.json)', () => {
+describe('el calce de los cruces (docs/puentes-guaire-calce.json)', () => {
   const unitario = ([x, y]) => Math.abs(Math.hypot(x, y) - 1) < 0.01
   const dentro = ([x, y]) => x >= 0 && y >= 0 && x <= PLANO.ancho && y <= PLANO.alto
 

@@ -2,8 +2,8 @@
 
 Avance de [#272](https://github.com/grunch/caracas/issues/272), previo a instalar los modelos. Sigue el método y el
 formato de [`puentes-guaire-calce.md`](puentes-guaire-calce.md) (Puente de Hierro y Constitución/Sucre, PR #292), que
-ya trae medidas las cabezas del cruce de la calle Sur 7: no se repiten acá. Los números completos están en
-[`puentes-guaire-calce-cruces.json`](puentes-guaire-calce-cruces.json); la cronología y las marcas, en
+ya trae medidas las cabezas del cruce de la calle Sur 7: no se repiten acá. Los números completos están en el
+mismo archivo que los de esos puentes, [`puentes-guaire-calce.json`](puentes-guaire-calce.json); la cronología y las marcas, en
 [`puentes-guaire-cruces.md`](puentes-guaire-cruces.md).
 
 ## Cómo se midió
@@ -90,13 +90,6 @@ vector unitario en píxeles del mosaico (x al este, y al sur).
 | Largo real de Dolores sobre el plano | El símbolo de 1936 (43,6 m) no coincide con la luz documentada (60 m) |
 | Lecho del río y rasante | El relieve no trae el cauce; ningún plano da la cota del tablero |
 | Píxeles del escaneo original de 1936 | El mosaico es la grilla del repo; no se deshizo la costura de las dos hojas |
-
-## Unificación con `puentes-guaire-calce.json`
-
-Este archivo usa las mismas claves que el del Puente de Hierro (`descripcion`, `metodo`, `planos`, y por cruce los
-años y `adoptado`). Para unificarlos basta copiar las cuatro claves `puente-*` y la entrada `planos.1946` al otro
-JSON, y las secciones de este documento al otro Markdown. No se hizo acá porque esos archivos estaban reclamados por
-la sesión del PR #292.
 
 ## Fuentes
 

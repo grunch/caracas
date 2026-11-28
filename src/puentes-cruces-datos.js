@@ -3,7 +3,7 @@
  * Mismo formato que src/marcas-datos.js y src/fichas-datos.js. No traen geometría: la marca nombra el cruce, no
  * la estructura que lo salvaba en cada época.
  *
- * Posición: el centro adoptado en docs/puentes-guaire-calce-cruces.json, en píxeles del mosaico de 1936.
+ * Posición: el centro adoptado en docs/puentes-guaire-calce.json, en píxeles del mosaico de 1936.
  * Nombres: el rótulo del plano de cada época. Lo que las fuentes no resuelven va en `dudas`.
  */
 const P11 = 'plano de Razetti de 1911, leyenda de puentes sobre el Guaire'

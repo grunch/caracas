@@ -68,6 +68,12 @@ No se instalan todavía. Quedan medidos:
   puede usar ese plano para las cabezas del Sucre sin otra fuente.
 - Cotas del relieve en las cabezas de 1889: 873,2 m y 872,8 m.
 
+## Dolores, Restaurador, 19 de Diciembre y Ayacucho
+
+Su calce sobre los planos de 1911, 1936 y 1946 está en [`puentes-guaire-calce-cruces.md`](puentes-guaire-calce-cruces.md);
+los números, en el mismo JSON que los de arriba (claves `puente-dolores`, `puente-restaurador`,
+`puente-19-diciembre` y `puente-ayacucho`). Las cabezas del 19 de Diciembre y del Ayacucho quedan sin medir.
+
 ## Fuentes
 
 - Mónica Silva Contreras, «Puentes metálicos sobre el río Guaire», *Tecnología y Construcción* 20-II (2004),

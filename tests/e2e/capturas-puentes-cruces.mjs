@@ -13,7 +13,7 @@ const prefijo = process.argv[4] ?? 'despues'
 const solo = process.env.CRUCES_CAPTURA
 const soloVista = process.env.CRUCES_VISTA
 const AÑOS = [[4, '1911'], [5, '1936'], [6, '1946']]
-// Centros adoptados en docs/puentes-guaire-calce-cruces.json, en píxeles del mosaico de 1936.
+// Centros adoptados en docs/puentes-guaire-calce.json, en píxeles del mosaico de 1936.
 const CRUCES = { dolores: [7908, 10122], restaurador: [8500, 9880], diciembre: [3284, 10727], ayacucho: [6726, 9180] }
 const PLAZA = [8968.2, 6839]
 const METRO = 0.5
