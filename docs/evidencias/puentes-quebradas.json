@@ -1,0 +1,932 @@
+{
+ "nota": "Puentes sobre las quebradas Catuche, Caroata y Anauco (#271): los ocho de la leyenda de 1843, ubicados por su letra sobre el plano, y lo que dibujan los planos de 1889 y 1936 en el mismo cruce. Las posiciones son píxeles del mosaico de 1936 leídos a ojo en recortes de los planos calzados; llevan el error del calce de cada plano (p90 de 18,27 m en 1843 y 12,93 m en 1889). Son el cruce de la calle con el cauce, no las cabezas del puente: no alcanzan para una huella ni para una marca. Las citas son textuales.",
+ "clases_de_fuente": {
+  "plano de época": "Plano del catálogo del repo, calzado sobre el mosaico de 1936.",
+  "pintura de época": "Vista pintada en la época, con ficha en fuentes/imagenes.",
+  "secundaria con referencias": "Artículo académico o tesis que cita documentos de archivo. Es la única clase escrita que admite la certeza «documentada»; una afirmación en disputa no la lleva nunca.",
+  "terciaria": "Wikipedia: lo que solo ella afirma va como dudoso.",
+  "crónica sin referencias": "Crónica o nota de prensa sin aparato: lo que afirma va como dudoso."
+ },
+ "fuentes": {
+  "plano1772": {
+   "tipo": "historica",
+   "anios": [1772],
+   "clase": "plano de época",
+   "fecha_documento": {"desde":1772,"hasta":1772},
+   "fecha_representada": {"desde":1772,"hasta":1772},
+   "url": "https://pares.cultura.gob.es/ParesBusquedas20/catalogo/description/26112"
+  },
+  "plano1843": {
+   "tipo": "historica",
+   "anios": [1843],
+   "clase": "plano de época",
+   "fecha_documento": null,
+   "fecha_representada": {"desde":1843,"hasta":1843},
+   "url": "https://commons.wikimedia.org/wiki/File:Plano_topografico_de_la_ciudad_de_Caracas_(NYPL_b13925947-5382478).tiff"
+  },
+  "plano1889": {
+   "tipo": "historica",
+   "anios": [1889],
+   "clase": "plano de época",
+   "fecha_documento": {"desde":1889,"hasta":1889},
+   "fecha_representada": {"desde":1889,"hasta":1889},
+   "url": "https://commons.wikimedia.org/wiki/File:Plano_topografico_de_la_ciudad_de_Caracas,_levantado_en_1889_vajo_la_direccion_-_del_general_don_Vicente_S._Mestre_-_btv1b53027837n.jpg"
+  },
+  "plano1936": {
+   "tipo": "historica",
+   "anios": [1936],
+   "clase": "plano de época",
+   "fecha_documento": {"desde":1936,"hasta":1936},
+   "fecha_representada": {"desde":1936,"hasta":1936},
+   "url": "https://archive.org/details/WCWdb_18053"
+  },
+  "blo": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "secundaria con referencias",
+   "fecha_documento": {"desde":2008,"hasta":2008},
+   "url": "https://revistadeindias.revistas.csic.es/index.php/revistadeindias/article/download/657/728"
+  },
+  "tsp": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":null,"consultada":"2026-11-28","url":"https://saber.ucv.ve/jspui/bitstream/10872/1862/1/tesis%20San%20Pablo.pdf"},
+  "wc3": {"tipo":"historica","anios":[],"clase":"terciaria","fecha_documento":null,"consultada":"2026-11-28","url":"https://es.wikipedia.org/wiki/Puente_de_Carlos_III_(Caracas)"},
+  "wan": {"tipo":"historica","anios":[],"clase":"terciaria","fecha_documento":null,"consultada":"2026-11-28","url":"https://es.wikipedia.org/wiki/Puente_Anauco"},
+  "winf": {"tipo":"historica","anios":[],"clase":"terciaria","fecha_documento":null,"consultada":"2026-11-28","url":"https://es.wikipedia.org/wiki/Juan_Domingo_del_Sacramento_Infante"},
+  "wcar": {"tipo":"historica","anios":[],"clase":"terciaria","fecha_documento":null,"consultada":"2026-11-28","url":"https://es.wikipedia.org/wiki/Quebrada_Caroata"},
+  "abre": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "crónica sin referencias",
+   "fecha_documento": null,
+   "consultada": "2026-11-28",
+   "url": "https://web.archive.org/web/20160514075227/http://www.abrebrecha.com/articulos.php?id=64627"
+  },
+  "abre2": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "crónica sin referencias",
+   "fecha_documento": null,
+   "consultada": "2026-11-28",
+   "url": "https://web.archive.org/web/20160514114329/http://www.abrebrecha.com/articulos.php?id=240132"
+  },
+  "guia": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "crónica sin referencias",
+   "fecha_documento": null,
+   "consultada": "2026-11-28",
+   "url": "https://web.archive.org/web/20230225035401/https://laguiadecaracas.net/51710/el-historico-puente-anauco/"
+  },
+  "sig": {"tipo":"historica","anios":[],"clase":"crónica sin referencias","fecha_documento":{"desde":2011,"hasta":2011},"url":"https://mariafsigillo.blogspot.com/2011/06/los-puentes-punceres-san-pablo-y.html"},
+  "sig2": {"tipo":"historica","anios":[],"clase":"crónica sin referencias","fecha_documento":{"desde":2011,"hasta":2011},"url":"https://mariafsigillo.blogspot.com/2011/04/esquina-de-punceres.html"},
+  "ven": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "crónica sin referencias",
+   "fecha_documento": {"desde":2011,"hasta":2011},
+   "url": "https://venelib-antao.blogspot.com/2011/05/esquina-el-quebradoesquina-de-puente.html"
+  },
+  "ven2": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "crónica sin referencias",
+   "fecha_documento": {"desde":2009,"hasta":2009},
+   "url": "https://venelib-antao.blogspot.com/2009/11/historia-de-la-parroquia-la-candelaria.html"
+  },
+  "hai": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "crónica sin referencias",
+   "fecha_documento": null,
+   "consultada": "2026-11-28",
+   "url": "https://haimaneltroudi.com/antiguos-puentes-de-caracas-referencias-de-su-historia/"
+  },
+  "univ": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "crónica sin referencias",
+   "fecha_documento": null,
+   "consultada": "2026-11-28",
+   "url": "https://www.eluniversal.com/caracas/53014/puentes-mas-antiguos-de-caracas-sobreviven-al-olvido"
+  },
+  "bell": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "pintura de época",
+   "fecha_documento": {"desde":1845,"hasta":1845},
+   "url": "https://commons.wikimedia.org/wiki/File:Paisaje_de_Caracas_con_viaducto_y_puente_de_la_Trinidad_(1844-45)_Ferdinand_Bellerman.JPG"
+  }
+ },
+ "tramos": [
+  {
+   "id": "puente:pastora",
+   "tipo": "puente",
+   "nombre": "Puente de la Pastora (identificado acá con el actual Puente Carlos III)",
+   "sistema": "Quebrada Catuche",
+   "encuadre": "dentro",
+   "nota": "Que el «puente de la Pastora» de 1784 y de la leyenda de 1843 sea el que hoy se llama Carlos III es una identificación de este catálogo, no un hecho documentado. Se apoya en dos cosas: Blondet glosa el «puente nuevo» de 1784 como el Carlos III, y el objeto «Puente de Carlos III» de OpenStreetMap (`way/987814944`) cae en (8295, 4647), a unos 30 m del cruce leído en 1889. Ningún plano leído escribe «Carlos III». Las fuentes de archivo nombran este puente y el de la Trinidad como dos puentes distintos.",
+   "contradicciones": [
+    {
+     "asunto": "Fecha y promotor",
+     "estado": "pendiente",
+     "afirmaciones": [
+      {"dice":"Obras iniciadas hacia 1772 por disposición del gobernador Agüero y terminadas en 1784","fuente":"wc3"},
+      {"dice":"Construido en 1784 por el gobernador Manuel González","fuente":"abre"},
+      {"dice":"En febrero de 1784 el Cabildo lo llama «puente nuevo»; el juicio de residencia de 1787 atribuye a González la obra","fuente":"blo"},
+      {"dice":"Construido «entre 1784 y 1786»","fuente":"univ"}
+     ]
+    },
+    {
+     "asunto": "Autor",
+     "estado": "pendiente",
+     "afirmaciones": [{"dice":"Obra de Juan Domingo del Sacramento Infante","fuente":"wc3"},{"dice":"Infante murió el 12 de diciembre de 1780, antes de la conclusión que la misma fuente le atribuye","fuente":"winf"}]
+    }
+   ],
+   "desconocido": [
+    "Un documento que una los dos nombres, Pastora y Carlos III",
+    "Si en 1772 había obra iniciada: solo lo afirma Wikipedia, sin referencia",
+    "Su luz en metros: una crónica dice «unos 30 m» de largo y 6 m de calzada, sin fuente",
+    "La letra a de la leyenda de 1843 no se pudo leer con seguridad sobre el dibujo",
+    "Luz, ancho, estribos y material medidos: los planos dan el cruce, no la obra",
+    "Cómo lo dibujan los planos de 1911 y 1946: no se leyeron"
+   ],
+   "nombres": [{"nombre":"Puente de la Pastora","desde":null,"hasta":null,"fuentes":["plano1843","blo"]},{"nombre":"Puente Carlos III","desde":null,"hasta":null,"fuentes":["wc3"]}],
+   "cronologia": [
+    {
+     "tipo": "obra",
+     "fecha": {"desde":1784,"hasta":1784},
+     "dice": "El 9 de febrero de 1784 el Cabildo lo llama «puente nuevo del Barrio de la Divina Pastora»",
+     "cita": "«del puente nuevo del Barrio de la Divina Pastora a incorporarse con el de la Trinidad» (p. 70)",
+     "fuentes": ["blo"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "obra",
+     "fecha": {"desde":1787,"hasta":1787},
+     "dice": "El juicio de residencia de 1787 dice que el gobernador González construyó el puente que va de la Trinidad a la Pastora",
+     "cita": "«construyó el Puente que ba del Barrio de la Sanctisima Trinidad al de la Pastora» (p. 75)",
+     "fuentes": ["blo"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "obra",
+     "fecha": {"desde":1772,"hasta":1772},
+     "dice": "Las obras se inician hacia 1772",
+     "cita": "«Las obras… se inician cerca del año 1772, por disposición del entonces gobernador José Carlos de Agüero, con fondos del Cabildo»",
+     "fuentes": ["wc3"],
+     "certeza": "dudosa",
+     "disputa": "Fecha y promotor"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": null,
+     "dice": "Un arco de ladrillo y piedra, de unos 30 m de largo y 6 m de calzada; sigue en pie",
+     "cita": "«todo el ancho de la calzada, unos 6 m; un arco único cuya luz es equivalente a su altura… sus 30 m… pieza clave del camino que conducía de Caracas al puerto de La Guaira»",
+     "fuentes": ["abre"],
+     "certeza": "dudosa"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "desconocido",
+     "certeza": "dudosa",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Nadie leyó este cruce en el original de 1772. El sector es de calce débil (S1772-24). Las fuentes de archivo lo llaman «nuevo» en 1784."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "dudosa",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "de la Pastora",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 18.27,
+     "medible": false,
+     "recorte": {"caja":[8270,4540,8510,4780]},
+     "lectura": "Letra a de la leyenda. Sobre el dibujo, una calle cruza la quebrada cerca de (8390, 4660) con un signo al lado; que ese signo sea la letra a es una lectura dudosa."
+    },
+    {
+     "anio": 1889,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1889",
+     "fuentes": ["plano1889"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1889,"hasta":1889},
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 12.93,
+     "medible": false,
+     "recorte": {"caja":[8230,4550,8470,4790]},
+     "lectura": "Símbolo de puente (dos trazos paralelos) sobre la calle que cruza el Catuche, en (8350, 4670). Sin rótulo."
+    },
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 1,
+     "medible": false,
+     "recorte": {"caja":[8205,4530,8445,4770]},
+     "lectura": "La calle cruza la quebrada entre (8300, 4600) y (8350, 4700); el cauce se dibuja abierto, en raya y punto azul, al norte y al sur. Sin rótulo de puente."
+    }
+   ]
+  },
+  {
+   "id": "puente:trinidad",
+   "tipo": "puente",
+   "nombre": "Puente de la Trinidad",
+   "sistema": "Quebrada Catuche",
+   "encuadre": "dentro",
+   "contradicciones": [
+    {
+     "asunto": "Fecha",
+     "estado": "pendiente",
+     "afirmaciones": [{"dice":"Construido a mediados del siglo XVIII","fuente":"winf"},{"dice":"Plano de 1770 de Manuel de Clemente y Francia; concluido en 1776","fuente":"hai"}]
+    },
+    {
+     "asunto": "Sobre qué quebrada",
+     "estado": "pendiente",
+     "afirmaciones": [{"dice":"Sobre el Catuche","fuente":"winf"},{"dice":"Otros artículos de Wikipedia lo ponen sobre el Caroata; los planos de 1843, 1889 y 1936 lo dibujan sobre el Catuche","fuente":"wcar"}]
+    }
+   ],
+   "desconocido": [
+    "Si en 1772 estaba en obra o concluido: las dos fechas que hay son de fuentes sin referencias",
+    "Cuándo se cubre la quebrada al sureste de la esquina",
+    "Por qué el cruce de 1843 queda unos 60 m al norte del de 1889: es más que el error de su calce",
+    "Luz, ancho, estribos y material medidos: los planos dan el cruce, no la obra",
+    "Cómo lo dibujan los planos de 1911 y 1946: no se leyeron"
+   ],
+   "nombres": [{"nombre":"Puente de la Trinidad","desde":null,"hasta":null,"fuentes":["plano1843","plano1889"]},{"nombre":"Puente Trinidad","desde":null,"hasta":null,"fuentes":["plano1936"]}],
+   "cronologia": [
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1784,"hasta":1784},
+     "dice": "En febrero de 1784 ya existe: la alameda nueva debía unirse con él",
+     "cita": "«del puente nuevo del Barrio de la Divina Pastora a incorporarse con el de la Trinidad» (p. 70)",
+     "fuentes": ["blo"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "obra",
+     "fecha": {"desde":1770,"hasta":1776},
+     "dice": "Proyecto de 1770, concluido en 1776",
+     "cita": "«el puente de La Trinidad… El primer plano se levantó en el año 1770 a cargo del ingeniero Manuel de Clemente y Francia, y se concluyó en 1776»",
+     "fuentes": ["hai"],
+     "certeza": "dudosa",
+     "disputa": "Fecha"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1844,"hasta":1845},
+     "dice": "Bellermann pinta un puente de arcos de mampostería sobre una quebrada honda",
+     "cita": "«Paisaje de Caracas con viaducto y puente de la Trinidad (1844-45)» (título de la obra en Commons)",
+     "fuentes": ["bell"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "desconocido",
+     "certeza": "dudosa",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Nadie leyó este cruce en el original de 1772. La marca de la iglesia de la Trinidad tiene su propia matriz en `docs/issue-268-trinidad-plaza.md`."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "de la Trinidad",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 18.27,
+     "medible": false,
+     "recorte": {"caja":[9230,5370,9470,5610]},
+     "lectura": "Letra b de la leyenda, dibujada en (9335, 5475) junto al cruce de la calle con la quebrada en (9360, 5500). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce."
+    },
+    {
+     "anio": 1889,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1889",
+     "fuentes": ["plano1889"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1889,"hasta":1889},
+     "nombre": "Pte. de la Trinidad",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 12.93,
+     "medible": false,
+     "recorte": {"caja":[9215,5500,9455,5740]},
+     "lectura": "Rótulo a lo largo de la calle; el Catuche, en azul, pasa bajo ella en (9335, 5620), junto al n.º 3."
+    },
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Puente Trinidad",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 1,
+     "medible": false,
+     "recorte": {"caja":[9190,5460,9510,5780]},
+     "lectura": "Nombre de la esquina en (9318, 5637). La quebrada se dibuja abierta al noroeste, hasta (9470, 5600), y no sigue al sureste."
+    }
+   ]
+  },
+  {
+   "id": "puente:punceres",
+   "tipo": "puente",
+   "nombre": "Puente de Punceles (Punceres)",
+   "sistema": "Quebrada Catuche",
+   "encuadre": "dentro",
+   "contradicciones": [
+    {
+     "asunto": "Fecha",
+     "estado": "pendiente",
+     "afirmaciones": [{"dice":"Lo fabricó a sus expensas el sargento Nicolás Puncel hacia 1676","fuente":"sig"},{"dice":"Construido en 1775, en tiempos del gobernador Agüero","fuente":"sig2"}]
+    }
+   ],
+   "desconocido": [
+    "Toda fecha: las dos que hay son de crónicas sin referencias",
+    "Cuándo se cubre el Catuche en este cruce: el plano de 1936 ya no dibuja el cauce",
+    "Luz, ancho, estribos y material medidos: los planos dan el cruce, no la obra",
+    "Cómo lo dibujan los planos de 1911 y 1946: no se leyeron"
+   ],
+   "nombres": [{"nombre":"Puente de Punceles","desde":null,"hasta":null,"fuentes":["plano1843"]},{"nombre":"Punceres","desde":null,"hasta":null,"fuentes":["plano1936"]}],
+   "cronologia": [
+    {
+     "tipo": "obra",
+     "fecha": {"desde":1676,"hasta":1676},
+     "dice": "Lo fabrica Nicolás Puncel hacia 1676, de mampostería",
+     "cita": "«lo fabricó a sus expensas el Sargento Nicolás Puncel, por el año 1676… obra de mampostería, ladrillos y cal»",
+     "fuentes": ["sig"],
+     "certeza": "dudosa",
+     "disputa": "Fecha"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": null,
+     "dice": "Sigue existiendo, embutido en la canalización del Catuche",
+     "cita": "«Punceres y Romualda no fueron demolidos y… existen… embutidos dentro de la canalización del río Catuche»",
+     "fuentes": ["sig"],
+     "certeza": "dudosa"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "desconocido",
+     "certeza": "dudosa",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Nadie leyó este cruce en el original de 1772."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "de Punceles",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 18.27,
+     "medible": false,
+     "recorte": {"caja":[9910,6410,10150,6650]},
+     "lectura": "Letra c de la leyenda, dibujada en (10040, 6520) junto al cruce de la calle con la quebrada en (10020, 6540). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce."
+    },
+    {
+     "anio": 1889,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1889",
+     "fuentes": ["plano1889"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1889,"hasta":1889},
+     "nombre": "Punceles",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 12.93,
+     "medible": false,
+     "recorte": {"caja":[9770,6420,10130,6780]},
+     "lectura": "El nombre ya es el de la esquina, en (9850, 6640). En este tramo el plano no dibuja el cauce."
+    },
+    {
+     "anio": 1936,
+     "estado": "desconocido",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Punceres",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 1,
+     "medible": false,
+     "recorte": {"caja":[9853,6526,10093,6766]},
+     "lectura": "Nombre de esquina en (9973, 6646), junto a la «Plaza España». No hay cauce dibujado: no se sabe si el puente seguía a la vista."
+    }
+   ]
+  },
+  {
+   "id": "puente:candelaria",
+   "tipo": "puente",
+   "nombre": "Puente de Candelaria (Catuche o Ña Romualda)",
+   "sistema": "Quebrada Catuche",
+   "encuadre": "dentro",
+   "contradicciones": [
+    {
+     "asunto": "Año en que entra en servicio",
+     "estado": "pendiente",
+     "afirmaciones": [{"dice":"1736","fuente":"sig"},{"dice":"«Fue preciso esperar hasta 1735», citando a Enrique Bernardo Núñez","fuente":"ven2"}]
+    }
+   ],
+   "desconocido": [
+    "Qué se reconstruyó tras la crecida de 1742",
+    "Que el puente de Candelaria de 1843 sea el de la esquina «Ña Romualda» es una inferencia por posición y por una crónica",
+    "Luz, ancho, estribos y material medidos: los planos dan el cruce, no la obra",
+    "Cómo lo dibujan los planos de 1911 y 1946: no se leyeron"
+   ],
+   "nombres": [{"nombre":"Puente de Candelaria","desde":null,"hasta":null,"fuentes":["plano1843"]},{"nombre":"Ña Romualda","desde":null,"hasta":null,"fuentes":["plano1889","plano1936"]}],
+   "cronologia": [
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1736,"hasta":1736},
+     "dice": "Entra en servicio en 1736; una crecida lo destruye en enero de 1742",
+     "cita": "«comenzó a prestar servicio en 1736… mampostería con bien trazado arco ojival… la descomunal crecida… de enero de 1742, destruyó la estructura»",
+     "fuentes": ["sig"],
+     "certeza": "dudosa",
+     "disputa": "Año en que entra en servicio"
+    },
+    {"tipo":"levantamiento","fecha":{"desde":1843,"hasta":1843},"dice":"En 1843 una calle lleva su nombre","cita":"Calle 42, «del Puente Candelarª»","fuentes":["plano1843"],"certeza":"documentada"}
+   ],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "desconocido",
+     "certeza": "dudosa",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Nadie leyó este cruce en el original de 1772."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "de Candelaria",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 18.27,
+     "medible": false,
+     "recorte": {"caja":[10120,6855,10360,7095]},
+     "lectura": "Letra d de la leyenda, dibujada en (10230, 6960) junto al cruce de la calle con la quebrada en (10250, 6990). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce."
+    },
+    {
+     "anio": 1889,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1889",
+     "fuentes": ["plano1889"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1889,"hasta":1889},
+     "nombre": "Ña Romualda",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 12.93,
+     "medible": false,
+     "recorte": {"caja":[9990,6880,10230,7120]},
+     "lectura": "Esquina «Ña Romualda» en (10100, 6990); el Catuche aparece en azul justo al sureste, desde (10110, 7010). La calle lleva una línea de trazos de tranvía."
+    },
+    {
+     "anio": 1936,
+     "estado": "desconocido",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Ña Romualda",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 1,
+     "medible": false,
+     "recorte": {"caja":[10051,6825,10291,7065]},
+     "lectura": "Nombre de esquina en (10171, 6945), con la «Plaza López» al norte. No hay cauce dibujado."
+    }
+   ]
+  },
+  {
+   "id": "puente:monroy",
+   "tipo": "puente",
+   "nombre": "Puente de Monroy",
+   "sistema": "Quebrada Catuche",
+   "encuadre": "dentro",
+   "contradicciones": [],
+   "desconocido": [
+    "Toda su historia: no se encontró ninguna fuente escrita",
+    "La leyenda de 1843 se lee «de Mouroy»: la identificación con Monroy sale de la posición y del nombre de la esquina",
+    "Luz, ancho, estribos y material medidos: los planos dan el cruce, no la obra",
+    "Cómo lo dibujan los planos de 1911 y 1946: no se leyeron"
+   ],
+   "nombres": [{"nombre":"Puente de Monroy","desde":null,"hasta":null,"fuentes":["plano1843"]},{"nombre":"Monroy","desde":null,"hasta":null,"fuentes":["plano1889","plano1936"]}],
+   "cronologia": [{"tipo":"levantamiento","fecha":{"desde":1843,"hasta":1843},"dice":"La leyenda de 1843 lo enumera, con lectura dudosa","cita":"«de Mouroy» (letra e)","fuentes":["plano1843"],"certeza":"dudosa"}],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "desconocido",
+     "certeza": "dudosa",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Nadie leyó este cruce en el original de 1772."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "dudosa",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "de Monroy",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 18.27,
+     "medible": false,
+     "recorte": {"caja":[10340,7405,10580,7645]},
+     "lectura": "Letra e de la leyenda, dibujada en (10440, 7510) junto al cruce de la calle con la quebrada en (10480, 7540). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce. El nombre se lee «Mouroy»."
+    },
+    {
+     "anio": 1889,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1889",
+     "fuentes": ["plano1889"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1889,"hasta":1889},
+     "nombre": "Monroy",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 12.93,
+     "medible": false,
+     "recorte": {"caja":[10410,7445,10650,7685]},
+     "lectura": "El Catuche, en azul, cruza la calle entre las esquinas «Perico» y «Monroy», en (10530, 7565)."
+    },
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Monroy",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 1,
+     "medible": false,
+     "recorte": {"caja":[10480,7450,10720,7690]},
+     "lectura": "El cauce se dibuja abierto y encajonado, de doble línea, y pasa bajo la calle en (10590, 7570), junto a la esquina «Monroy» (10624, 7579)."
+    }
+   ]
+  },
+  {
+   "id": "puente:anauco",
+   "tipo": "puente",
+   "nombre": "Puente Anauco",
+   "sistema": "Quebrada Anauco",
+   "encuadre": "dentro",
+   "nota": "Wikipedia y las crónicas lo fechan en 1786–1790, lo que haría que no correspondiera a 1772. Son fuentes terciarias y el plano de 1772 no se leyó en este punto: no se afirma una apertura firme y el corte de 1772 queda «no se sabe». No se modela en 1772.",
+   "contradicciones": [
+    {
+     "asunto": "Material",
+     "estado": "pendiente",
+     "afirmaciones": [{"dice":"Estructura de ladrillos, con tres arcos","fuente":"wan"},{"dice":"La ficha del mismo artículo dice «Concreto, ladrillos»","fuente":"wan"}]
+    }
+   ],
+   "desconocido": [
+    "Sus medidas",
+    "Una fuente primaria para 1786–1790: el artículo remite al catálogo del IPC, que no se pudo consultar",
+    "La esquina «Puente Anauco» de 1936 está sin verificar en el diccionario de esquinas",
+    "Luz, ancho, estribos y material medidos: los planos dan el cruce, no la obra",
+    "Cómo lo dibujan los planos de 1911 y 1946: no se leyeron"
+   ],
+   "nombres": [{"nombre":"Puente Anauco","desde":null,"hasta":null,"fuentes":["plano1843","plano1936"]}],
+   "cronologia": [
+    {
+     "tipo": "obra",
+     "fecha": {"desde":1786,"hasta":1786},
+     "dice": "Lo ordena el gobernador Guillelmi en 1786",
+     "cita": "«Su construcción fue ordenada por… don Julián Guillelmi en 1786, pero no sería terminado sino hasta 1790… vinculaba la antigua calle de La Candelaria con la antigua vía del Este»",
+     "fuentes": ["wan"],
+     "certeza": "dudosa"
+    },
+    {"tipo":"apertura","fecha":{"desde":1790,"hasta":1790},"dice":"Terminado en 1790","cita":"«no sería terminado sino hasta 1790»","fuentes":["wan"],"certeza":"dudosa"},
+    {
+     "tipo": "levantamiento",
+     "fecha": null,
+     "dice": "Tres arcos rebajados de ladrillo",
+     "cita": "«tres arcos elípticos rebajados, construido en ladrillo… Actualmente funciona como Paseo Anauco tras el embaulamiento de la quebrada»",
+     "fuentes": ["abre2"],
+     "certeza": "dudosa"
+    },
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1983,"hasta":1983},
+     "dice": "El Paseo Anauco se inaugura el 22 de noviembre de 1983",
+     "cita": "«inaugurado el 22 de noviembre de 1983»",
+     "fuentes": ["guia"],
+     "certeza": "dudosa"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "desconocido",
+     "certeza": "dudosa",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Nadie leyó este cruce en el original de 1772. Las fuentes terciarias fechan la obra en 1786–1790, lo que haría improbable el puente en 1772; no alcanza para darlo por ausente."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "de Anauco",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 18.27,
+     "medible": false,
+     "recorte": {"caja":[11410,7120,11650,7360]},
+     "lectura": "Letra f de la leyenda, dibujada en (11510, 7250) junto al cruce de la calle con la quebrada en (11560, 7230). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce. Unos 65 m al noroeste está la letra x, la Alcabala de Candelaria, en (11420, 7160)."
+    },
+    {
+     "anio": 1889,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1889",
+     "fuentes": ["plano1889"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1889,"hasta":1889},
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 12.93,
+     "medible": false,
+     "recorte": {"caja":[11370,7070,11610,7310]},
+     "lectura": "La calle, con su línea de trazos de tranvía, cruza el Anauco en (11490, 7190); al lado, el n.º 7 de la leyenda, que no está transcrita."
+    },
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Puente Anauco",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 1,
+     "medible": false,
+     "recorte": {"caja":[11400,7020,11720,7340]},
+     "lectura": "Rótulo en (11650, 7150); la calle es continua y el río, de doble línea azul clara, pasa bajo ella en (11520, 7200)."
+    }
+   ]
+  },
+  {
+   "id": "puente:san-pablo",
+   "tipo": "puente",
+   "nombre": "Puente de San Pablo",
+   "sistema": "Quebrada Caroata",
+   "encuadre": "dentro",
+   "contradicciones": [{"asunto":"Año","estado":"pendiente","afirmaciones":[{"dice":"Primer puente de mampostería sobre el Caroata, de 1737","fuente":"tsp"},{"dice":"«es de 1728»","fuente":"sig"}]}],
+   "desconocido": [
+    "Cuándo se cubre el Caroata al sur del puente: en 1889 el cauce ya termina en la calle",
+    "Si el paso de agua P1772-001 del original de 1772 es este puente: es un indicio, no una lectura",
+    "Luz, ancho, estribos y material medidos: los planos dan el cruce, no la obra",
+    "Cómo lo dibujan los planos de 1911 y 1946: no se leyeron"
+   ],
+   "nombres": [{"nombre":"Puente de San Pablo","desde":null,"hasta":null,"fuentes":["plano1843","plano1889"]},{"nombre":"Puente San Pablo","desde":null,"hasta":null,"fuentes":["plano1936"]}],
+   "cronologia": [
+    {
+     "tipo": "obra",
+     "fecha": {"desde":1737,"hasta":1737},
+     "dice": "Primer puente de mampostería sobre el Caroata, de 1737",
+     "cita": "«el primer puente de mampostería sobre el río Caroata construido en 1737» (p. 25)",
+     "fuentes": ["tsp"],
+     "certeza": "dudosa",
+     "disputa": "Año"
+    },
+    {"tipo":"reforma","fecha":{"desde":1814,"hasta":1814},"dice":"Averiado en 1812 y reparado en 1814","cita":"Reparos de 1814 por «87 pesos» (p. 25)","fuentes":["tsp"],"certeza":"documentada"},
+    {"tipo":"levantamiento","fecha":{"desde":1843,"hasta":1843},"dice":"En 1843 una calle lleva su nombre","cita":"Calle 79, «del Puente de Sⁿ Pablo»","fuentes":["plano1843"],"certeza":"documentada"}
+   ],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "desconocido",
+     "certeza": "dudosa",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "El original dibuja un rectángulo rojo que interrumpe la franja de agua (P1772-001), en la misma calle que el cruce que el calce lleva a la esquina «Puente San Pablo». Está sin calzar y con la nota «confirmar geometría del puente»."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "de San Pablo",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 18.27,
+     "medible": false,
+     "recorte": {"caja":[8000,7490,8240,7730]},
+     "lectura": "Letra g de la leyenda, dibujada en (8130, 7640) junto al cruce de la calle con la quebrada en (8110, 7590). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce."
+    },
+    {
+     "anio": 1889,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1889",
+     "fuentes": ["plano1889"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1889,"hasta":1889},
+     "nombre": "Puente Sn. Pablo",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 12.93,
+     "medible": false,
+     "recorte": {"caja":[7990,7450,8230,7690]},
+     "lectura": "Rótulo sobre la calle. El Caroata, en azul, llega desde el norte hasta la calle en (8110, 7560) y no sigue al sur; una línea de trazos de tranvía baja junto a él."
+    },
+    {
+     "anio": 1936,
+     "estado": "desconocido",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Puente San Pablo",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 1,
+     "medible": false,
+     "recorte": {"caja":[8042,7467,8282,7707]},
+     "lectura": "Nombre de esquina en (8162, 7587), frente al Teatro Municipal y la «Plaza Miranda». No hay cauce dibujado: no se sabe si el puente seguía a la vista."
+    }
+   ]
+  },
+  {
+   "id": "puente:union",
+   "tipo": "puente",
+   "nombre": "Puente de la Unión (Puente Nuevo)",
+   "sistema": "Quebrada Caroata",
+   "encuadre": "dentro",
+   "contradicciones": [],
+   "desconocido": [
+    "Una fuente con referencias para la fecha de hacia 1835",
+    "Que el «de la Unión» de 1843 sea el «Puente Nuevo» de 1889 y 1936 sale de la posición y de una crónica",
+    "Luz, ancho, estribos y material medidos: los planos dan el cruce, no la obra",
+    "Cómo lo dibujan los planos de 1911 y 1946: no se leyeron"
+   ],
+   "nombres": [{"nombre":"Puente de la Unión","desde":null,"hasta":null,"fuentes":["plano1843"]},{"nombre":"Puente Nuevo","desde":null,"hasta":null,"fuentes":["plano1889","plano1936"]}],
+   "cronologia": [
+    {
+     "tipo": "obra",
+     "fecha": {"desde":1835,"hasta":1835},
+     "dice": "Segundo puente sobre el Caroata, de hacia 1835; el pueblo lo llamaba Puente Nuevo",
+     "cita": "«el segundo puente que se construyó sobre el Caroata, aproximadamente en el año de 1835… lo bautizaron con el nombre de Puente de la Unión… el pueblo… lo había llamado Puente Nuevo»",
+     "fuentes": ["ven"],
+     "certeza": "dudosa"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "desconocido",
+     "certeza": "dudosa",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": null,
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Nadie leyó este cruce en el original de 1772. Una crónica sin referencias lo fecha hacia 1835, lo que haría improbable el puente en 1772; no alcanza para darlo por ausente."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "de la Unión",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 18.27,
+     "medible": false,
+     "recorte": {"caja":[7660,8050,7900,8290]},
+     "lectura": "Letra h de la leyenda, dibujada en (7790, 8190) junto al cruce de la calle con la quebrada en (7770, 8150). El plano no dibuja la estructura: solo la calle que pasa sobre el cauce."
+    },
+    {
+     "anio": 1889,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1889",
+     "fuentes": ["plano1889"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1889,"hasta":1889},
+     "nombre": "Puente Nuevo",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 12.93,
+     "medible": false,
+     "recorte": {"caja":[7655,7995,7895,8235]},
+     "lectura": "Rótulo sobre la calle; el Caroata, en azul, pasa bajo ella en (7775, 8115), junto al n.º 12."
+    },
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Puente Nuevo",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 1,
+     "medible": false,
+     "recorte": {"caja":[7643,7980,7883,8220]},
+     "lectura": "Nombre de esquina en (7763, 8088); el Caroata se dibuja abierto, en raya y punto azul, al noreste y al sur del cruce."
+    }
+   ]
+  }
+ ]
+}
