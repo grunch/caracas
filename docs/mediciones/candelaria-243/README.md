@@ -34,3 +34,7 @@ lo que no está en pie.
 Los topes de carga, tarea larga, bytes, memoria y triángulos del presupuesto ya no pasan en `main` con los datos
 completos y siguen sin pasar en la rama: **no se tocaron**. Tampoco los topes unitarios de triángulos de los hitos
 (643.976 de 645.000 antes de 1946; 1.123.349 de 1.125.000 en total) ni el de workers del build (173,5 de 174 kB).
+
+Después de esta medición, la etapa de 1843 pasó a ser una pieza aparte (sin fachada): el templo suma 2.555
+triángulos en vez de 2.357 (644.174 antes de 1946 y 1.123.547 en total, todavía dentro de los topes). **No se
+volvió a medir**; son 198 triángulos más en la misma malla.

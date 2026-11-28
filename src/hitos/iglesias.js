@@ -172,6 +172,8 @@ const FACHADAS = Object.freeze({
     vano(p, { ancho: ancho * 0.14, alto: alto * 0.52 })
     if (puertas === 3) puertasLaterales(p, { ancho, alto: alto * 0.4 })
   },
+  /** Sin frente: queda el muro de cierre de la nave, sin puertas ni adorno (una fachada caída o por hacer). */
+  ninguna() {},
   /** Hastial apuntado con rosetón, puerta ojival y pináculos: el neogótico de Guzmán Blanco. */
   neogotica(p, { ancho, alto, altoTecho, color }) {
     caja(p.en(0, 0, -0.4), { ancho, alto, fondo: 0.8, color })
@@ -189,7 +191,7 @@ const FACHADAS = Object.freeze({
 
 /**
  * Iglesia paramétrica: nave de `largo` × `ancho` con tejado a dos aguas y ventanas altas, `fachada`
- * ('clasica' | 'lisa' | 'neogotica' | 'barroca'), `torres` { n: 0 | 1 | 2, lado, cuerpos, remate, centrada? }
+ * ('clasica' | 'lisa' | 'ninguna' | 'neogotica' | 'barroca'), `torres` { n: 0 | 1 | 2, lado, cuerpos, remate, centrada? }
  * a los lados de la fachada (o una sola al centro), `cupula` { a, radio, … } sobre el crucero y, si se pide,
  * `dosFachadas` (otra igual en la cabecera: Santa Teresa). `puertas`: 1 o 3 (en la clásica y en la lisa);
  * `altoFachada`: cuando la fachada sube más que los muros de la nave (por omisión, lo mismo).
