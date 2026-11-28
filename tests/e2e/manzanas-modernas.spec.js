@@ -21,8 +21,8 @@ for(const año of epocas)test(`manzanas completas, patios verdes y continuidad e
  await page.waitForFunction(()=>window.lab?.ready&&lab.casasListas&&lab.lineaDeTiempo)
  await page.evaluate(e=>lab.lineaDeTiempo.elegir(e),e)
  await page.waitForFunction(e=>lab.ciudad.U.uEpocaA.value===e&&lab.ciudad.U.uOlaEpoca.value>=9000,e)
- // el campo de las manzanas modernas es una imagen de 4666 × 3715: con la ciudad entera y render por software tarda más que los 5 s de un poll
+ // con la ciudad entera y render por software, la imagen del campo (4666 × 3715) y el detalle de cerca tardan más que los 5 s de un poll
  await expect.poll(()=>page.evaluate(k=>lab.ciudad.U.uManzanasModernasCanales.value.toArray()[k],e-4),{timeout:30000}).toBe(1)
- await expect.poll(()=>page.evaluate(()=>lab.detalleColonial.cuenta.mallas)).toBeGreaterThan(0)
+ await expect.poll(()=>page.evaluate(()=>lab.detalleColonial.cuenta.mallas),{timeout:30000}).toBeGreaterThan(0)
  expect(errores).toEqual([])
 })
