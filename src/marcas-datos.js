@@ -20,6 +20,7 @@
  * La leyenda del plano de 1772 no se transcribió; cuando hay otra fuente documental, se cita en la marca.
  */
 import { MARCAS_PUENTES_CRUCES } from './puentes-cruces-datos.js'
+import { MARCAS_CIUDAD_UNIVERSITARIA } from './ciudad-universitaria-datos.js'
 
 const P36 = 'plano DCN de 1936'
 const P89 = 'plano de Mestre de 1889'
@@ -190,4 +191,6 @@ export const MARCAS = Object.freeze([
 
   // --- los demás cruces del Guaire (src/puentes-cruces-datos.js) ---
   ...MARCAS_PUENTES_CRUCES,
+  // --- la Ciudad Universitaria en obras y la hacienda que ocupó (src/ciudad-universitaria-datos.js) ---
+  ...MARCAS_CIUDAD_UNIVERSITARIA,
 ])
