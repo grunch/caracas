@@ -48,16 +48,33 @@ describe('Hospital Vargas', () => {
     for (const anio of [1889, 1911, 1936]) {
       const lienzo = crearLienzo()
       dibujarHospital(lienzo.hito({ origen: { x: 0, z: 0 } }), { anio })
-      const { posiciones, colores } = lienzo.datos()
+      const { posiciones, colores, normales } = lienzo.datos()
       const delNucleo = []
       for (let i = 0; i < posiciones.length / 3; i++) {
         const [x, z] = [posiciones[3 * i], posiciones[3 * i + 2]]
         const esVano = [0, 1, 2].every(k => Math.abs(colores[3 * i + k] - vano[k]) < 1e-6)
-        if (esVano && Math.abs(x) < MEDIO_ANCHO + 2 && Math.abs(z) < MEDIO_FONDO + 2) delNucleo.push([x, z])
+        if (esVano && Math.abs(x) < MEDIO_ANCHO + 2 && Math.abs(z) < MEDIO_FONDO + 2) delNucleo.push({ x, z, nx: Math.round(normales[3 * i]), nz: Math.round(normales[3 * i + 2]) })
       }
-      expect(delNucleo.length).toBeGreaterThan(0)
-      const escondidos = delNucleo.filter(([x, z]) => Math.abs(x) < MEDIO_ANCHO && Math.abs(z) < MEDIO_FONDO)
+      const escondidos = delNucleo.filter(({ x, z }) => Math.abs(x) < MEDIO_ANCHO && Math.abs(z) < MEDIO_FONDO)
       expect(escondidos, `${anio}`).toEqual([])
+      // Ocho vanos rectangulares (cuatro vértices cada uno): dos en cada una de las cuatro caras del núcleo.
+      expect(delNucleo, `${anio}`).toHaveLength(8 * 4)
+      const porCara = Map.groupBy(delNucleo, v => `${v.nx}/${v.nz}`)
+      expect([...porCara.keys()].sort(), `${anio}`).toEqual(['-1/0', '0/-1', '0/1', '1/0'])
+      for (const [cara, vertices] of porCara) {
+        const [nx, nz] = cara.split('/').map(Number)
+        // dos vanos por cara, uno a cada lado del eje, de 1,8 m de ancho
+        const alLargo = vertices.map(v => (nx ? v.z : v.x))
+        expect(vertices, `${anio} ${cara}`).toHaveLength(2 * 4)
+        expect(alLargo.filter(u => u < 0), `${anio} ${cara}`).toHaveLength(4)
+        expect(alLargo.filter(u => u > 0), `${anio} ${cara}`).toHaveLength(4)
+        // cada uno sobre su muro, del lado de afuera, y con la normal hacia afuera
+        for (const v of vertices) {
+          const afuera = nx ? v.x * nx - MEDIO_ANCHO : v.z * nz - MEDIO_FONDO
+          expect(afuera, `${anio} ${cara}`).toBeGreaterThan(0)
+          expect(afuera, `${anio} ${cara}`).toBeLessThan(0.2)
+        }
+      }
     }
   })
   test('la marca va enlazada al hito y cae sobre su núcleo, no en el borde del solar', () => {
