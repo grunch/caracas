@@ -22,5 +22,5 @@ for(const [k,año] of EPOCAS_RETIRO.entries()){
 // una fila por línea: el archivo se lee y se compara sin abrir miles de líneas
 const lineas=xs=>xs.length?`[\n${xs.map(x=>`   ${JSON.stringify(x)}`).join(',\n')}\n  ]`:'[]'
 const cuerpo=epocas.map(e=>`  {"año":${e.año},"epoca":${e.epoca},"manzanas":${e.manzanas},\n  "retiradas":${lineas(e.retiradas)},\n  "filas":${lineas(e.filas)}}`).join(',\n')
-await writeFile('docs/manzanas-hitos.json',`{"regla":"specs/13-reglas-de-construccion.md, R13","umbrales":{"ocupaBuenaParte":0.5,"cabe":0.75,"roce":0.1},"epocas":[\n${cuerpo}\n]}\n`)
+await writeFile('docs/manzanas-hitos.json',`{"regla":"specs/13-reglas-de-construccion.md, R13","umbrales":{"ocupaBuenaParte":0.5,"cabe":0.75,"roce":0.1,"mayor":1.25},"epocas":[\n${cuerpo}\n]}\n`)
 console.log(tablaMd(epocas.flatMap(e=>e.filas).filter(f=>f.clase!=='chico'||f.decision==='retirar')))

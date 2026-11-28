@@ -303,10 +303,12 @@ export const FICHAS = Object.freeze({
   },
   'san-carlos': {
     textos: [
-      [2, 'La leyenda del plano de Jesurún de 1843 identifica el «Cuartel Veterano» (s), al norte de la ciudad. El estudio arqueológico de Mariana Flores sitúa su construcción entre 1785 y 1790 y documenta los daños del terremoto de 1812.'],
-      [3, 'El plano de 1889 numera 21 el «Cuartel San Carlos»; el de 1936 dibuja su edificio de patio.'],
+      [2, 'La leyenda del plano de Jesurún de 1843 identifica el «Cuartel Veterano» (s), al norte de la ciudad. Mariana Flores (2007) sitúa su construcción entre 1785 y 1790 y cuenta que el terremoto de 1812 lo dejó en ruinas; las reparaciones empezaron en 1839 y no terminaron hasta 1884, según Liendo (2001), citado por Flores. Por eso aquí el cuartel no se dibuja: no se sabe qué quedaba en pie. Las casas que el mapa muestra en el lugar son el relleno genérico de la manzana que dibuja Jesurún, no el edificio.'],
+      [3, 'El plano de 1889 numera 21 el «Cuartel San Carlos», ya restaurado: la obra se completó en 1884, según Liendo (2001), citado por Flores (2007). Va el cuadro alrededor de la plaza de armas, de unos 72 por 77 m: la guía de arquitectura CCS da un cuadro original de 75 por 75 m. La planta es la del plano de 1936; las alturas no tienen fuente y los corredores de arcos del patio no se dibujan.'],
+      [4, 'El terremoto de 1900 destruyó parte del cuartel. En la reconstrucción se prolongaron las naves este y oeste y se levantaron la enfermería y las cuatro garitas de las esquinas, según Avendaño (1999), citado por Flores (2007). Desde aquí va el contorno completo del plano de 1936, de unos 72 por 98 m, con el traspatio al norte. Las garitas y la enfermería no se dibujan: ninguna fuente con licencia da su forma ni su lugar.'],
+      [6, 'En 1946 se levantó en el patio central el edificio de la Comandancia, según Avendaño (1999), citado por Flores (2007); el plano de 1946 no dibuja nada dentro del patio, y aquí no se dibuja. Bajo el gobierno de Rómulo Betancourt (1945–1948) el cuartel pasó a ser cárcel de presos políticos, según Flores.'],
     ],
-    dudas: 'El rótulo documenta la presencia del cuartel; su arquitectura y las reparaciones posteriores a 1812 requieren un modelo específico.',
+    dudas: 'Ninguna altura está medida ni publicada: el piso único de muro y teja se estima sobre fotos de 2008. La guía CCS dice que tiene dos pisos. Que el cuadro de 1889 termine en la crujía norte del patio es una inferencia sobre el plano de 1936; el plano de Mestre lo dibuja más largo. Flores da las obras entre 1785 y 1790; la guía CCS, entre 1787 y 1792.',
   },
   'hospital-vargas': {
     textos: [

@@ -23,7 +23,8 @@ Por cada hito de `hitosConPlanta()` en pie en la época y cada manzana que compa
 Una manzana se **retira entera** en la época (casas, árboles y suelo de manzana) si:
 
 1. la ocupación es **≥ 50 %** (los hitos ocupan la mayor parte), o
-2. la pisa en **≥ 10 %** un hito cuyo recinto es **mayor que la manzana** (no puede estar «dentro» de ella: la abarca).
+2. la pisa en **≥ 10 %** un hito cuyo recinto es **claramente mayor que la manzana**: al menos 1,25 veces su área
+   (no puede estar «dentro» de ella: la abarca).
 
 Si no, se conserva, y el cruce queda en una de tres clases: **chico** (≥ 75 % del recinto cae en la manzana: el
 hito va dentro, sin casas ni árboles encima, como hasta ahora), **roce** (menos de 10 % de la manzana y del hito:
@@ -38,6 +39,11 @@ Por qué esos umbrales, con los datos:
 - **10 %** para el hito mayor que la manzana. El Hospital Vargas (recinto de 27.000 m²) declara un calce de 7,6 m
   RMS: en una cuadra de 100 m, una franja de ese ancho es un 8 %. Los cruces de un hito mayor que la manzana que se
   conservan llegan a 3 %; los que se retiran empiezan en 13 %. Tampoco hay casos en el hueco.
+- **1,25 veces** para «mayor que la manzana» (#248). Un recinto del tamaño de la manzana no la abarca: el Cuartel
+  San Carlos (7.117 m²) pisa en un 15 % a `U1843-0051-A0` (7.015 m², 1,01 veces), y con «mayor» a secas la retiraba
+  entera junto con las diez casas que tiene fuera del recinto. Entre los cruces que este criterio retira, el recinto
+  más ajustado es 1,8 veces la manzana (Hospital Vargas sobre `M5-1088-A0`): no hay ningún otro caso entre 1,01 y
+  1,8, y cualquier umbral en ese hueco da la misma tabla para los demás hitos (medido en las seis épocas).
 - **75 %** solo separa «chico» de «a caballo» (no decide retiros): los chicos empiezan en 77 % y los que quedan a
   caballo no pasan de 41 %.
 

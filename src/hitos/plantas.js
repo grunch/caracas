@@ -22,6 +22,7 @@ import { candelaria } from './datos/candelaria.js'
 import { laMerced } from './datos/la-merced.js'
 import { sanPablo } from './datos/san-pablo.js'
 import { conventoSanFrancisco } from './datos/convento-san-francisco.js'
+import { sanCarlos } from './datos/san-carlos.js'
 
 // Triángulos de las crujías de planta baja: conservan los huecos reales y el
 // retiro comercial de 2,6 m que deja las galerías abiertas al peatón.
@@ -35,10 +36,11 @@ const bloquesSilencio = silencio.filter(h => h.id.startsWith('silencio-bloque-')
   }),
 }))
 
-export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar, ...bloquesSilencio, nuevoCirco, metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios,cementerioSur, ...templosParroquiales, candelaria, laMerced, sanPablo, conventoSanFrancisco]
+export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar, ...bloquesSilencio, nuevoCirco, metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios,cementerioSur, ...templosParroquiales, candelaria, laMerced, sanPablo, conventoSanFrancisco, sanCarlos]
   .flatMap(h=>{
    const comun={id:h.id,nace:h.nace,muere:h.muere,suprime:h.suprime??[],transitable:h.transitable,patio:h.patio}
    const fijas=h.planta?.length?[{...comun,planta:h.planta}]:[]
-   const etapas=(h.plantaPorEpoca??[]).map(f=>({...comun,nace:f.nace??h.nace,muere:f.muere??h.muere,planta:f.poligonos}))
+   // una etapa puede traer su propio recinto (`suprime`): lo que el hito reserva mientras esa etapa está en pie
+   const etapas=(h.plantaPorEpoca??[]).map(f=>({...comun,...(f.suprime?{suprime:f.suprime}:{}),nace:f.nace??h.nace,muere:f.muere??h.muere,planta:f.poligonos}))
    return [...fijas,...etapas]
   })
