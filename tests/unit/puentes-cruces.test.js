@@ -56,6 +56,23 @@ describe('las marcas de los cruces del Guaire', () => {
     expect(fila('puente-19-diciembre').fuente).toMatch(/1936[^;]*«Puente 9 de Diciembre»/)
   })
 
+  it('las dudas dicen que en 1911 la marca usa la posición de 1936 y cuánto se aparta el dibujo de 1911', () => {
+    const desvios = { 'puente-dolores': /78 m al norte y 20 m al este/, 'puente-restaurador': /23 m al norte y 17 m al este/, 'puente-19-diciembre': /26 m al este/ }
+    for (const [id, desvio] of Object.entries(desvios)) {
+      for (const dudas of [fila(id).dudas, FICHAS_PUENTES_CRUCES[id].dudas]) {
+        expect(dudas, id).toMatch(/En 1911 la marca usa la posición del plano de 1936/)
+        expect(dudas, id).toMatch(desvio)
+      }
+    }
+    expect(fila('puente-19-diciembre').dudas).toMatch(/extrapolado/)
+  })
+
+  it('la primacía del Ayacucho va atribuida a su fuente, no como hecho', () => {
+    const [, texto] = FICHAS_PUENTES_CRUCES['puente-ayacucho'].textos[0]
+    expect(texto).toMatch(/Según FAC, fue el primero de tres/)
+    expect(FICHAS_PUENTES_CRUCES['puente-ayacucho'].dudas).toMatch(/fundaayc\.com\/2022\/09\/08/)
+  })
+
   it('las estructuras sin resolver después de 1911 llevan la duda escrita, sin afirmar una fecha de reemplazo', () => {
     for (const id of ['puente-dolores', 'puente-restaurador', 'puente-19-diciembre']) {
       expect(fila(id).dudas, id).toMatch(/1946/)
@@ -158,6 +175,43 @@ describe('el calce de los cruces (docs/puentes-guaire-calce.json)', () => {
     expect(norte.mosaico).toEqual(CALCE['puente-dolores']['1936'].cabeza_norte.mosaico)
     expect(dx / largo).toBeCloseTo(eje.direccion[0], 2)
     expect(dy / largo).toBeCloseTo(eje.direccion[1], 2)
+  })
+
+  it('los largos y los píxeles originales copiados coinciden con las cabezas de las que salen', () => {
+    // Arrange
+    const distancia = ([ax, ay], [bx, by]) => Math.hypot(ax - bx, ay - by)
+
+    for (const id of ['puente-dolores', 'puente-restaurador', 'puente-19-diciembre']) {
+      // Act
+      const { cabeza_norte: norte, cabeza_sur: sur, largo_m: largo, eje } = CALCE[id]['1911']
+      const [dx, dy] = [sur.mosaico[0] - norte.mosaico[0], sur.mosaico[1] - norte.mosaico[1]]
+      const px = distancia(norte.mosaico, sur.mosaico)
+
+      // Assert
+      expect(largo.sobre_el_calce, id).toBeCloseTo(px * 0.5, 0)
+      expect(largo.en_el_original_px, id).toBeCloseTo(distancia(norte.original, sur.original), 0)
+      expect(dx / px, id).toBeCloseTo(eje[0], 2)
+      expect(dy / px, id).toBeCloseTo(eje[1], 2)
+    }
+    const dolores = CALCE['puente-dolores']
+    expect(dolores['1936'].largo_m.del_simbolo).toBeCloseTo(metros(dolores['1936'].cabeza_norte.mosaico, dolores['1936'].cabeza_sur.mosaico), 0)
+    expect(dolores.adoptado.largo_m).toBe(dolores['1936'].largo_m.del_simbolo)
+    const medio = [0, 1].map((i) => (dolores.adoptado.cabeza_norte.mosaico[i] + dolores.adoptado.cabeza_sur.mosaico[i]) / 2)
+    expect(metros(medio, dolores.adoptado.centro.mosaico)).toBeLessThan(1)
+  })
+
+  it('el desvío del plano de 1911 respecto del de 1936 sale de las cabezas medidas', () => {
+    for (const id of ['puente-dolores', 'puente-restaurador']) {
+      // Arrange
+      const { cabeza_norte: norte, cabeza_sur: sur, desvio_del_centro_de_1936_m: desvio } = CALCE[id]['1911']
+      const centro1911 = [0, 1].map((i) => (norte.mosaico[i] + sur.mosaico[i]) / 2)
+
+      // Act
+      const total = metros(centro1911, CALCE[id].adoptado.centro.mosaico)
+
+      // Assert
+      expect(Math.hypot(desvio.a_lo_largo_del_eje, desvio.de_traves), id).toBeCloseTo(total, 0)
+    }
   })
 
   it('cada marca cae sobre el centro adoptado de su cruce (a menos de 1 m)', () => {
