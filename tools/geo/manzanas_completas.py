@@ -115,6 +115,7 @@ def abrir_corral(m):
     m['ajusteCorral'] = m.get('ajusteCorral',0)+1
 
 
+AREA_MINIMA_PATIO_M2 = .8  # un patio más chico no admite un árbol
 MARGEN_ALA_M = 40  # src/alas.js MARGEN_M: cuánto se estiran hacia afuera las alas del borde del lote
 EPS_ALA_M = .02    # src/alas.js EPS: un ala a menos de esto del borde del lote lo toca
 ALA_FRENTE, ALA_ESQUINA_IZQ, ALA_ESQUINA_DER = 2, 6, 7  # src/alas.js ALA
@@ -149,6 +150,17 @@ def techos_de_casa(c, metro):
     return Polygon(c['huella']).buffer(0).intersection(unary_union(techos))
 
 
+def cubierta_por_hitos(m, limite, edificios):
+    """Red de seguridad de R13 (specs/13): la manzana que un hito ocupa se retira antes de llegar acá
+    (hitos_manzanas.py). Si una que se conserva (hito chico, o un roce) no tiene casas que ceder y el hito no le
+    deja lugar a un árbol, queda sin árboles en vez de detener la regeneración."""
+    return not m['casas'] and edificios.intersection(limite).area > 0
+
+
+def sin_arboles(m):
+    m['arboles'], m['arbolesObjetivo'], m['cubiertaPorHito'] = [], 0, True
+
+
 def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0, *, indexar_hitos=False):
     if intento == 0:
         ms = deepcopy(ms)
@@ -170,8 +182,11 @@ def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0, *, indexar_hitos=
         m['casas'] = casas
         techos = [techos_de_casa(c, metro) for c in casas]
         verde = limite.difference(unary_union(techos)).difference(edificios).buffer(-.25/metro)
-        zonas = [p for p in partes(verde) if p.area*metro*metro > .8]
+        zonas = [p for p in partes(verde) if p.area*metro*metro > AREA_MINIMA_PATIO_M2]
         if not zonas:
+            if cubierta_por_hitos(m, limite, edificios):
+                sin_arboles(m)
+                continue
             if intento >= 12: raise ValueError(f"{m['id']}: no queda espacio libre para árboles")
             abrir_corral(m)
             recortar_y_arbolar([m], obstaculos_hitos, metro, intento+1, indexar_hitos=indexar_hitos)
@@ -199,6 +214,9 @@ def recortar_y_arbolar(ms, obstaculos_hitos, metro, intento=0, *, indexar_hitos=
             if len(arboles) >= objetivo:
                 break
         if not arboles:
+            if cubierta_por_hitos(m, limite, edificios):
+                sin_arboles(m)
+                continue
             if intento >= 12: raise ValueError(f"{m['id']}: ningún árbol cabe sin invadir tejados")
             abrir_corral(m)
             recortar_y_arbolar([m], obstaculos_hitos, metro, intento+1, indexar_hitos=indexar_hitos)
