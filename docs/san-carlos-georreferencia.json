@@ -1,0 +1,45 @@
+{
+  "fuente": "Plano DCN de 1936 (mosaico del repositorio, fuentes/mapas/1936-archiveorg-caracas-dcn-hoja1 y hoja2), contrastado con el plano de 1946 (fuentes/mapas/1950-archiveorg-plano-de-caracas-dcn)",
+  "sistema": "píxeles del mosaico base de 1936, 0,5 m por píxel; a = metros desde el medio de la fachada sur hacia el norte, b = metros a su derecha (hacia el este)",
+  "certeza": "lectura a ojo sobre una ampliación del mosaico (6 aumentos, rejilla de 10 px); el trazo del plano mide de 1 a 2 px (0,5 a 1 m). No es mensura catastral.",
+  "cuartel": {
+    "origen_px": [9138.5, 5065.25],
+    "eje": [0.4983, -0.867],
+    "fachada": "sur-suroeste (entrada inferida de los jardines que el plano de 1936 dibuja de ese lado y de la foto de 2008 de la «entrada»)",
+    "contorno_leido_px": {
+      "esquina_norte": [9173, 4860],
+      "esquina_oeste": [9075, 5030.5],
+      "esquina_sur": [9202, 5100],
+      "esquina_este_1946": [9293.3, 4932.5],
+      "esquina_este_calculada": [9300, 4929.5]
+    },
+    "tapado": "la esquina este cae bajo la costura de las dos hojas del plano de 1936 (x de 9257 a 9290); se cierra el rectángulo y se contrasta con el plano de 1946, que la pone a 3,5 m",
+    "patio_central_px": { "norte": [9189.7, 4953.3], "este": [9247.8, 4986.7], "sur": [9199.7, 5070.5], "oeste": [9141.7, 5036.3] },
+    "traspatio_px": { "noroeste": [9194.7, 4886.3], "noreste": [9234.2, 4909.7], "entrante": [9221.7, 4930], "suroeste": [9180, 4911.7] },
+    "tira_en_blanco_px": "entre la nave oeste y el cuerpo que da al patio: de (9164, 4940) a (9117, 5022), unos 2,5 m de ancho; el plano de 1946 no la dibuja",
+    "medidas_m": {
+      "frente": 72.4,
+      "largo": 98.3,
+      "patio_central": { "a": [13, 61.3], "b": [-5.8, 27.8] },
+      "traspatio": { "a": [77, 91.5], "b": [-20.3, 2.5], "pasaje_al_este": { "a": [77, 79.4], "b": [2.5, 23.4] } },
+      "nave_oeste": { "b": [-36.2, -20] },
+      "cuerpo_entre_nave_oeste_y_patio": { "b": [-17.5, -5.8] },
+      "nave_este": { "b": [27.8, 36.2] },
+      "frente_sur": { "a": [0, 13] },
+      "crujia_norte_del_patio": { "a": [61.3, 77] },
+      "fondo_norte": { "a": [91.5, 98.3] }
+    },
+    "plano_1946": {
+      "patio_central_m": { "a": [15, 63], "b": [-10, 20] },
+      "traspatio_m": { "a": [77, 91], "b": [-24.5, 0] },
+      "nota": "menor resolución (nivel de 8192 px para 18.600) y calce de 2,07 m RMS: el patio sale unos 4 m al oeste y más angosto. Vale la lectura de 1936."
+    },
+    "otros_planos": {
+      "1772": "campo: no existe",
+      "1843": "cuadro rayado aislado con la letra s, de unos 87 m de lado, entre x 9240–9415 e y 4840–5025: unos 45 m al este del contorno de 1936 (calce de ese plano: 12,4 m RMS, 30 m de máximo)",
+      "1889": "rectángulo rosado con el número 21 y un patio centrado, de unos 91 × 70 m, esquinas (9112, 4857), (9260, 4965), (9175, 5075), (9030, 4960): unos 21 m al oeste",
+      "1911": "bloque rojo con el número 36, sin patio, con entrantes al norte y al este; contorno esquemático",
+      "1946": "mismo contorno que en 1936, con los dos patios; nada dibujado dentro del patio central"
+    }
+  }
+}
