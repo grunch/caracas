@@ -1,0 +1,606 @@
+{
+ "nota": "Lectura del corredor de la futura avenida Bolívar en el plano DCN (fotografías aéreas de 1946, edición catalogada [1950?]) y ficha de evidencias por etapa (#276). Polígonos leídos a ojo sobre original.tif con una cuadrícula de 20 px (±5 px, unos 3 m) y llevados al mosaico de 1936 con tools/geo/gcp/1946-cuadricula.json (RMS 2,07 m). No son linderos catastrales. La hoja no trae leyenda de signos: el significado del trazo discontinuo no está declarado.",
+ "plano": "1950-archiveorg-plano-de-caracas-dcn",
+ "certezas": {
+  "alta": "documento de la época o fotografía fechada",
+  "media": "una sola fuente secundaria, o varias que se copian",
+  "baja": "paráfrasis de segunda mano o dato que otra fuente contradice",
+  "sin-acreditar": "ninguna fuente consultada lo fecha"
+ },
+ "corredor": {
+  "descripcion": "Manzanas entre las calles Este/Oeste 6 y Este/Oeste 8, desde el borde este de El Silencio hasta la calle Sur 11. Ejes de calle leídos en el plano.",
+  "poligono_original": [
+   [
+    6244,
+    4795
+   ],
+   [
+    6850,
+    4915
+   ],
+   [
+    7300,
+    5004
+   ],
+   [
+    7500,
+    5054
+   ],
+   [
+    7893,
+    5146
+   ],
+   [
+    8129,
+    5193
+   ],
+   [
+    8110,
+    5413
+   ],
+   [
+    7850,
+    5350
+   ],
+   [
+    7620,
+    5310
+   ],
+   [
+    7385,
+    5265
+   ],
+   [
+    7250,
+    5215
+   ],
+   [
+    7040,
+    5170
+   ],
+   [
+    6830,
+    5125
+   ],
+   [
+    6650,
+    5090
+   ],
+   [
+    6240,
+    5002
+   ]
+  ],
+  "poligono_mosaico": [
+   [
+    8185,
+    7335
+   ],
+   [
+    8953,
+    7488
+   ],
+   [
+    9523,
+    7601
+   ],
+   [
+    9777,
+    7664
+   ],
+   [
+    10278,
+    7782
+   ],
+   [
+    10579,
+    7842
+   ],
+   [
+    10555,
+    8122
+   ],
+   [
+    10223,
+    8042
+   ],
+   [
+    9930,
+    7991
+   ],
+   [
+    9631,
+    7933
+   ],
+   [
+    9460,
+    7870
+   ],
+   [
+    9194,
+    7813
+   ],
+   [
+    8927,
+    7755
+   ],
+   [
+    8700,
+    7711
+   ],
+   [
+    8180,
+    7599
+   ]
+  ],
+  "techos": {
+   "1936": 219,
+   "1946": 219,
+   "visiblesEn1946": 218,
+   "medidoEn": "paquete regenerado tras #291 (caracas-datos-sur), por el centro de cada techo"
+  }
+ },
+ "tramos": [
+  {
+   "id": "franja-entre-bloques",
+   "trazo": "en blanco",
+   "en1936": "Parte de una manzana entera, entre las esquinas Puente San Pablo y San Pablo",
+   "lectura": "Franja de unos 30 m de ancho y 105 m de largo que parte la manzana por el medio, en el eje que separa los bloques 2 y 3 de El Silencio. Sin relleno de edificación.",
+   "techosEnElPaquete": 4,
+   "poligono_original": [
+    [
+     6272,
+     4869
+    ],
+    [
+     6439,
+     4905
+    ],
+    [
+     6436,
+     4955
+    ],
+    [
+     6261,
+     4916
+    ]
+   ],
+   "poligono_mosaico": [
+    [
+     8221,
+     7429
+    ],
+    [
+     8432,
+     7475
+    ],
+    [
+     8429,
+     7539
+    ],
+    [
+     8207,
+     7489
+    ]
+   ]
+  },
+  {
+   "id": "resto-norte",
+   "trazo": "discontinuo",
+   "en1936": "Mitad norte de la misma manzana",
+   "lectura": "Relleno de edificación con contorno de trazo discontinuo al oeste, norte y sur.",
+   "techosEnElPaquete": 7,
+   "poligono_original": [
+    [
+     6284,
+     4816
+    ],
+    [
+     6431,
+     4843
+    ],
+    [
+     6439,
+     4905
+    ],
+    [
+     6272,
+     4869
+    ]
+   ],
+   "poligono_mosaico": [
+    [
+     8236,
+     7362
+    ],
+    [
+     8422,
+     7396
+    ],
+    [
+     8432,
+     7475
+    ],
+    [
+     8221,
+     7429
+    ]
+   ]
+  },
+  {
+   "id": "resto-sur",
+   "trazo": "discontinuo",
+   "en1936": "Mitad sur de la misma manzana; el Hotel Majestic estaba en ella, frente al Teatro Municipal",
+   "lectura": "Relleno de edificación en forma de L, contorno de trazo discontinuo.",
+   "techosEnElPaquete": 7,
+   "poligono_original": [
+    [
+     6261,
+     4916
+    ],
+    [
+     6436,
+     4955
+    ],
+    [
+     6430,
+     4988
+    ],
+    [
+     6330,
+     4966
+    ],
+    [
+     6322,
+     5006
+    ],
+    [
+     6244,
+     4990
+    ]
+   ],
+   "poligono_mosaico": [
+    [
+     8207,
+     7489
+    ],
+    [
+     8429,
+     7539
+    ],
+    [
+     8421,
+     7581
+    ],
+    [
+     8294,
+     7553
+    ],
+    [
+     8284,
+     7604
+    ],
+    [
+     8185,
+     7584
+    ]
+   ]
+  },
+  {
+   "id": "frente-del-teatro",
+   "trazo": "en blanco",
+   "en1936": "Esquina sureste de la misma manzana",
+   "lectura": "Sin relleno: el plano deja abierto el frente norte del Teatro Municipal.",
+   "techosEnElPaquete": 3,
+   "poligono_original": [
+    [
+     6330,
+     4966
+    ],
+    [
+     6430,
+     4988
+    ],
+    [
+     6424,
+     5022
+    ],
+    [
+     6322,
+     5006
+    ]
+   ],
+   "poligono_mosaico": [
+    [
+     8294,
+     7553
+    ],
+    [
+     8421,
+     7581
+    ],
+    [
+     8413,
+     7624
+    ],
+    [
+     8284,
+     7604
+    ]
+   ]
+  },
+  {
+   "id": "manzana-al-oeste-del-teatro",
+   "trazo": "en blanco",
+   "en1936": "Manzana edificada entre Puente San Pablo y Miranda (al sur de la Oeste 8, fuera del corredor)",
+   "lectura": "Solar sin relleno, contorno de trazo discontinuo.",
+   "techosEnElPaquete": 5,
+   "poligono_original": [
+    [
+     6240,
+     5014
+    ],
+    [
+     6322,
+     5031
+    ],
+    [
+     6299,
+     5124
+    ],
+    [
+     6219,
+     5108
+    ]
+   ],
+   "poligono_mosaico": [
+    [
+     8180,
+     7614
+    ],
+    [
+     8284,
+     7636
+    ],
+    [
+     8255,
+     7754
+    ],
+    [
+     8154,
+     7734
+    ]
+   ]
+  },
+  {
+   "id": "teatro-municipal",
+   "trazo": "lleno",
+   "en1936": "Teatro Municipal, rotulado",
+   "lectura": "Planta ovalada sin rótulo en su solar; coincide con la de 1936.",
+   "techosEnElPaquete": 6,
+   "poligono_original": [
+    [
+     6340,
+     5036
+    ],
+    [
+     6419,
+     5051
+    ],
+    [
+     6399,
+     5151
+    ],
+    [
+     6316,
+     5135
+    ]
+   ],
+   "poligono_mosaico": [
+    [
+     8307,
+     7642
+    ],
+    [
+     8407,
+     7661
+    ],
+    [
+     8382,
+     7789
+    ],
+    [
+     8277,
+     7768
+    ]
+   ]
+  }
+ ],
+ "restoDelCorredor": "Desde la calle Sur 4 (esquinas Municipal y San Pablo) hasta la Sur 11, todas las manzanas entre la Este 6 y la Este 8 llevan relleno de edificación y contorno continuo, y las calles transversales siguen abiertas. El plano no dibuja ninguna calzada ancha.",
+ "etapas": [
+  {
+   "id": "plan-1939",
+   "tipo": "plan",
+   "hecho": "El Plan Monumental (Plan Rotival) propone una «avenida Central» de 30 m entre El Calvario y Los Caobos, sobre las manzanas entre la Este 6 y la Este 8.",
+   "fechaHecho": "1939-07",
+   "certeza": "alta",
+   "fuentes": [
+    {
+     "url": "https://bibliofep.fundacionempresaspolar.org/dhv/entradas/r/rotival-maurice/",
+     "documento": "Diccionario de Historia de Venezuela, Fundación Empresas Polar, «Rotival, Maurice»"
+    },
+    {
+     "url": "https://acading.org.ve/wp-content/uploads/2023/02/TI_ARTURO_ALMANDOZ-1.pdf",
+     "documento": "Arturo Almandoz, trabajo de incorporación (cita el plan de 1939, p. 32)"
+    },
+    {
+     "url": "https://fundaayc.com/2022/05/29/algo-mas-sobre-la-postal-no-309/",
+     "documento": "Fundación Arquitectura y Ciudad, 29-5-2022"
+    }
+   ],
+   "contradicciones": "Algunas fuentes fechan el plan en 1938 (contrato) o en 1936."
+  },
+  {
+   "id": "plan-director-1940",
+   "tipo": "plan",
+   "hecho": "El Concejo Municipal aprueba el Plan Director de Calles y Avenidas, que traza la avenida por el centro de las cuadras entre la Este 6 y la Este 8.",
+   "fechaHecho": "1940",
+   "certeza": "media",
+   "fuentes": [
+    {
+     "url": "https://fundaayc.com/2024/08/04/sabia-usted-120/",
+     "documento": "Fundación Arquitectura y Ciudad, 4-8-2024"
+    },
+    {
+     "url": "https://fundaayc.com/2024/07/28/algo-mas-sobre-la-postal-no-413/",
+     "documento": "Fundación Arquitectura y Ciudad, 28-7-2024"
+    }
+   ],
+   "contradicciones": "Fecha exacta y texto del acuerdo, no encontrados."
+  },
+  {
+   "id": "decision-1945",
+   "tipo": "institucional",
+   "hecho": "Con El Silencio por terminar, se decide continuar la avenida tres cuadras hacia el este.",
+   "fechaHecho": "1945",
+   "certeza": "media",
+   "fuentes": [
+    {
+     "url": "http://docomomovenezuela.blogspot.com/2010/10/el-caso-del-del-centro-simon-bolivar.html",
+     "documento": "Docomomo Venezuela, 2010 (sin notas)"
+    }
+   ],
+   "contradicciones": null
+  },
+  {
+   "id": "inicio-de-obras",
+   "tipo": "obra",
+   "hecho": "Inicio de la construcción de la avenida.",
+   "fechaHecho": "1944-07-25 | 1945-07-25 | 1947",
+   "certeza": "sin-acreditar",
+   "fuentes": [
+    {
+     "url": "https://fundaayc.com/2014/08/03/1944-se-inicia-la-construccion-de-la-avenida-bolivar/",
+     "documento": "Fundación Arquitectura y Ciudad, 3-8-2014: 25 de julio de 1944"
+    },
+    {
+     "url": "https://camaradecaracas.com/la-camara-caracas-y-sus-historias/cronicas-de-la-ciudad/inauguracion-de-la-avenida-bolivar/",
+     "documento": "Cámara de Caracas, 4-7-2022: 25 de julio de 1945"
+    },
+    {
+     "url": "https://coam.org/media/Default%20Files/fundacion/biblioteca/revista-arquitectura-100/1946-1958/docs/revista-articulos/revista-nacional-arquitectura-1951-n117-pagXXI.pdf",
+     "documento": "Revista Nacional de Arquitectura n.º 117 (Madrid, 1951): 1947"
+    }
+   ],
+   "contradicciones": "Tres fechas incompatibles y ninguna dice qué se demolió ni dónde. La más cercana a los hechos (1951) da 1947."
+  },
+  {
+   "id": "comisiones-1946",
+   "tipo": "institucional",
+   "hecho": "A comienzos de 1946 el gobernador crea la Comisión Administradora de la Avenida Bolívar; el 10 de agosto de 1946 se crea la Comisión Nacional de Urbanismo.",
+   "fechaHecho": "1946",
+   "certeza": "media",
+   "fuentes": [
+    {
+     "url": "http://docomomovenezuela.blogspot.com/2010/10/el-caso-del-del-centro-simon-bolivar.html",
+     "documento": "Docomomo Venezuela, 2010"
+    },
+    {
+     "url": "https://bibliofep.fundacionempresaspolar.org/dhv/entradas/r/rotival-maurice/",
+     "documento": "Diccionario de Historia de Venezuela, «Rotival, Maurice»"
+    }
+   ],
+   "contradicciones": "Son actos administrativos: no prueban obra en el terreno."
+  },
+  {
+   "id": "obra-en-1946",
+   "tipo": "obra",
+   "hecho": "Demoliciones o calzada en la franja durante 1946.",
+   "fechaHecho": "1946",
+   "certeza": "sin-acreditar",
+   "fuentes": [],
+   "contradicciones": "Ninguna fuente consultada describe obra o demolición con fecha de 1946. Una nota de FAC pone la demolición del Hotel Majestic ante Rotival en 1946; la contradicen la fotografía de 1948 y las demás fuentes (1949)."
+  },
+  {
+   "id": "compania-1947",
+   "tipo": "institucional",
+   "hecho": "El 27 de febrero de 1947 se crea la Compañía Anónima Obras Avenida Bolívar, antecesora del Centro Simón Bolívar.",
+   "fechaHecho": "1947-02-27",
+   "certeza": "media",
+   "fuentes": [
+    {
+     "url": "https://fundaayc.com/2017/08/24/1947-creacion-de-la-compania-anonima-obras-avenida-bolivar/",
+     "documento": "Fundación Arquitectura y Ciudad, 24-8-2017"
+    }
+   ],
+   "contradicciones": "Fecha del cambio de nombre a Centro Simón Bolívar, no encontrada."
+  },
+  {
+   "id": "franja-despejada-1948",
+   "tipo": "obra",
+   "hecho": "Franja arrasada a ras de suelo inmediatamente al este de El Silencio, con el Pasaje Junín todavía en pie al fondo y el Hotel Majestic intacto.",
+   "fechaHecho": "1948",
+   "certeza": "alta",
+   "fuentes": [
+    {
+     "url": "https://commons.wikimedia.org/wiki/File:Doorbraak_ten_behoeve_van_een_verkeersweg_in_Venezuela,_Bestanddeelnr_252-8459.jpg",
+     "documento": "Willem van de Poll, Nationaal Archief, 1948 (CC0)"
+    },
+    {
+     "url": "https://commons.wikimedia.org/wiki/File:Doorbraak_ten_behoeve_van_een_verkeersweg_in_Venezuela,_Bestanddeelnr_252-8458.jpg",
+     "documento": "Willem van de Poll, Nationaal Archief, 1948 (CC0)"
+    },
+    {
+     "url": "https://commons.wikimedia.org/wiki/File:Stadsgezicht_met_Hotel_Majestica_in_Caracas_in_Venezuela,_Bestanddeelnr_252-8437.jpg",
+     "documento": "Willem van de Poll, Nationaal Archief, 1948 (CC0)"
+    }
+   ],
+   "contradicciones": "La fotografía prueba que en 1948 estaba despejada, no cuándo se demolió. El catálogo da el año, sin mes."
+  },
+  {
+   "id": "demoliciones-1949",
+   "tipo": "obra",
+   "hecho": "Demolición del Hotel Majestic (cerró el 18 de febrero; demolición en marzo), de la sede del Banco Caracas y de los edificios entre Camejo y Santa Teresa, y del cuerpo frontal del Teatro Municipal.",
+   "fechaHecho": "1949",
+   "certeza": "media",
+   "fuentes": [
+    {
+     "url": "https://fundaayc.com/2013/11/04/1949%E2%80%A2-demolicion-del-hotel-majestic/",
+     "documento": "Fundación Arquitectura y Ciudad, 4-11-2013"
+    },
+    {
+     "url": "https://fundaayc.com/2026/08/26/1949-demolicion-de-la-sede-del-banco-caracas/",
+     "documento": "Fundación Arquitectura y Ciudad, 26-8-2026"
+    },
+    {
+     "url": "https://fundaayc.com/2026/05/27/se-altera-la-fachada-original-del-teatro-municipal/",
+     "documento": "Fundación Arquitectura y Ciudad, 27-5-2026"
+    }
+   ],
+   "contradicciones": "El día de la demolición del Majestic varía entre el 18 de febrero y el 8 de marzo."
+  },
+  {
+   "id": "apertura-1949",
+   "tipo": "obra",
+   "hecho": "El 31 de diciembre de 1949 se abre el primer tramo, de unos 1.600 m y 33 m de ancho, de El Silencio al Parque Carabobo. Cortó la cinta Carlos Delgado Chalbaud, presidente de la Junta Militar.",
+   "fechaHecho": "1949-12-31",
+   "certeza": "alta",
+   "fuentes": [
+    {
+     "url": "https://camaradecaracas.com/la-camara-caracas-y-sus-historias/cronicas-de-la-ciudad/inauguracion-de-la-avenida-bolivar/",
+     "documento": "Cámara de Caracas, 4-7-2022, con Élite del 7-1-1950 y Últimas Noticias del 2-1-1950"
+    },
+    {
+     "url": "https://fundaayc.com/2013/11/04/1949%E2%80%A2-se-inaugura-la-primera-etapa-de-la-avenida-bolivar/",
+     "documento": "Fundación Arquitectura y Ciudad, 4-11-2013"
+    }
+   ],
+   "contradicciones": "FAC atribuye la inauguración a Marcos Pérez Jiménez como presidente: no se adopta. Las esquinas exactas de los extremos no se encontraron; la prolongación de 1954 parte de la calle Sur 11."
+  }
+ ],
+ "decision": {
+  "reservaEn1946": false,
+  "motivo": "Ninguna demolición de la franja tiene fecha acreditada en 1946 o antes. La primera evidencia fechada de terreno despejado es de 1948. El plano dibuja la franja abierta, pero su edición es posterior a las fotografías y no declara qué significa el trazo discontinuo.",
+  "siSeAcredita": "La franja y los solares en blanco ya están delimitados aquí (tramos «en blanco»): bastaría una zona de supresión que nazca en 1946 sobre esos polígonos, sin retirar las manzanas enteras, y regenerar el suelo de manzanas."
+ }
+}
