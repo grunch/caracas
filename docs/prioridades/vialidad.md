@@ -40,10 +40,10 @@ No se añadieron épocas posteriores ni un sistema vial actual tridimensional.
 | Hierro / Regeneración | 1875 | Separar estructura original y sustituciones; actual marca `(9430,9440)` no mide el tablero |
 | Constitución / Sucre | Constitución hacia 1880–1882, reconstrucción Sucre 1895 | Contrastar continuidad exacta de estribos y nombres en 1889/1911; marca actual `(9710,9430)` nace en 1936 |
 | Paraíso | Fuentes secundarias oscilan entre c.1890 y 1895 | Resolver fecha exacta, ubicación y sustituciones; ambas fechas permiten presencia en 1911, no dimensiones |
-| Dolores | 1898; desaparición referida en 1935 | Confirmar desmontaje y parcela de accesos en plano 1936 |
-| Restaurador | 1905 | Planta, luz, apoyos, cota de tablero y reformas |
-| 19 de Diciembre | 1910 | Identificación y calce con los planos |
-| Ayacucho | 1924 | Separar etapa inicial de reconstrucciones |
+| Dolores | Montado en 1897; pilas de 1916; el plano de marzo de 1936 aún lo dibuja; «Puente Soublette» en 1946 | Marca, ficha y calce en [`puentes-guaire-cruces.md`](../puentes-guaire-cruces.md). Falta decidir las cabezas y fechar el reemplazo |
+| Restaurador | 1905; reparado en 1932; rotulado en 1936 y 1946 | Marca, ficha y calce hechos. Faltan apoyos, cota de tablero y la estructura de 1946 |
+| 19 de Diciembre | 1910; «9 de Diciembre» en los planos de 1936 y 1946 | Marca, ficha y eje hechos. Cabezas sin medir |
+| Ayacucho | 1924 | Marca, ficha y eje hechos. Cabezas y luces sin medir; separar etapa inicial de reconstrucciones |
 | Bolívar / Los Leones | 1933 | Verificar identidad, estructura y accesos históricos |
 
 Fuentes: [síntesis FAC](https://fundaayc.com/2023/04/02/sabia-usted-98/) y
