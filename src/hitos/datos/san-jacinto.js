@@ -1,11 +1,11 @@
 /**
  * San Jacinto (#245): el conjunto dominico (iglesia y convento, 1772 y 1843) y el mercado que lo reemplazó (solar
- * sin edificio conocido en 1889; el Mercado Principal de 1897 desde 1911). Son dos hitos en el mismo solar, uno
- * muere cuando nace el otro. El lugar de la iglesia y del convento sale de la superposición de planos de Virginia
+ * sin edificio conocido en 1889; el Mercado Principal de 1897 desde 1911). Son tres hitos en el mismo solar, uno
+ * por etapa: cada uno muere cuando nace el siguiente. El lugar de la iglesia y del convento sale de la superposición de planos de Virginia
  * Vivas (1997) que reproduce Mariolly Dávila Cordido (SIGraDi 2013, fig. 2); el del mercado, de su contorno en el
  * plano de 1936. Ninguna altura está medida. Ver docs/san-jacinto-integracion.md.
  *
- * Los dos comparten un marco: `a` corre hacia el sur (entra en el solar desde la calle del norte) y `b`, a la
+ * Los tres comparten un marco: `a` corre hacia el sur (entra en el solar desde la calle del norte) y `b`, a la
  * derecha de quien entra: al oeste, hacia la plaza.
  */
 import { rectanguloPx } from './marco.js'
