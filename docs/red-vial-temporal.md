@@ -75,24 +75,26 @@ Se leen las referencias ya curadas del repo:
   de 1936. Se conservan anclajes, píxeles originales y notas; IDs con prefijo `recuperado:`.
 - `docs/puentes-guaire-calce.json`: los seis cruces del Guaire calzados para #272, con lo
   que **cada plano** dibuja (`tools/red-vial-puentes.mjs`). IDs con prefijo `puente:`.
-- `tools/geo/referencias/vialidad-posterior-1946.json`: fases modernas con fuente,
-  sin inventar ejes ni copiar OSM. Incluye predecesores como dato separado.
+- `tools/geo/referencias/vialidad-posterior-1946.json`: las vías posteriores a 1946 por segmento
+  y etapa, con una fuente por afirmación, sin ejes ni geometría de OSM. Cada una dice qué
+  calle la precedía, como dato separado.
 
 Salida de `node tools/red-vial.mjs auditar`:
 
 | Año | Tramos | Inferidos | Sin medir | Pendientes | Ausentes | Contradicciones |
 |---|---:|---:|---:|---:|---:|---:|
-| 1772 | 449 | 0 | 29 | 6 | 6 | 0 |
-| 1843 | 0 | 0 | 0 | 484 | 6 | 0 |
-| 1889 | 2 | 0 | 0 | 482 | 6 | 0 |
-| 1911 | 2 | 3 | 0 | 478 | 7 | 3 |
-| 1936 | 12 | 0 | 5 | 467 | 6 | 0 |
-| 1946 | 0 | 0 | 4 | 480 | 6 | 0 |
+| 1772 | 449 | 0 | 29 | 7 | 30 | 0 |
+| 1843 | 0 | 0 | 0 | 485 | 30 | 0 |
+| 1889 | 2 | 0 | 0 | 484 | 29 | 0 |
+| 1911 | 2 | 3 | 0 | 480 | 30 | 3 |
+| 1936 | 12 | 0 | 5 | 469 | 29 | 0 |
+| 1946 | 0 | 0 | 4 | 482 | 29 | 0 |
 
 Son conteos de registros, no calles únicas ni kilómetros: los once trazados
 recuperados pueden coincidir espacialmente con partes de la referencia extensa.
 No se concatenan en producción sin resolver identidad, nudos y duplicados espaciales.
-Las seis fases modernas salen como ausentes en los seis cortes.
+Los 29 segmentos posteriores a 1946 del catálogo ([`vialidad-posterior-1946.md`](vialidad-posterior-1946.md))
+salen como ausentes en los seis cortes; la carretera vieja de La Guaira (1845), solo en 1772 y 1843.
 
 ### Qué acredita cada plano en los cruces del Guaire
 
