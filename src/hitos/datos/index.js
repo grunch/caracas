@@ -16,12 +16,14 @@ import { templosParroquiales } from './templos-parroquiales.js'
 import { candelaria } from './candelaria.js'
 import { laMerced } from './la-merced.js'
 import { sanPablo } from './san-pablo.js'
+import { conventoSanFrancisco } from './convento-san-francisco.js'
 
 /** Datos de hitos sin los constructores de geometría; lo usa el hilo principal para áreas y marcas. */
 export const HITOS = Object.freeze([
   plazaBolivar, catedral, ...iglesias, panteon, ...civiles, ...silencio, nuevoCirco,
   metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios, cementerioSur, ...puentesGuaire,
   ...templosParroquiales, candelaria, laMerced, sanPablo, // al final: cada hito lleva de semilla su lugar en la lista
+  conventoSanFrancisco,
 ])
 
 /** Campos geométricos que consume el worker, sin fichas y huellas de colisión. */
