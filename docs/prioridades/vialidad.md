@@ -51,18 +51,27 @@ Fuentes: [síntesis FAC](https://fundaayc.com/2023/04/02/sabia-usted-98/) y
 Las discrepancias no se resuelven promediando fechas. No se cambió todavía el ancla de Sucre
 ni se copió un puente actual sobre una marca antigua.
 
-## Contrato para completar #269
+## Contrato de #269: qué está hecho y qué falta
 
-Cada segmento tendrá identificador estable, geometría en coordenadas del proyecto, sistema
-de referencia explícito, ancho medido y **etapas**. Cada etapa conserva inicio/fin conocido,
-nombre, fuente, recorte del plano, fecha del documento, fecha del hecho y certeza.
-`desconocido` no equivale a `ausente`; un proyecto no equivale a obra ejecutada.
+El contrato ya es código (`tools/red-vial-lib.mjs`, versión 2; guía y tabla de campos en
+[`red-vial-temporal.md`](../red-vial-temporal.md)). Cada segmento tiene identificador
+estable, geometría en píxeles del mosaico de 1936, sistema de referencia explícito y
+**etapas**; cada etapa lleva su documento, la fecha del documento, la fecha del hecho,
+la certeza, el nombre de esa época, el ancho y el error, las contradicciones pendientes y,
+si lo hay, el recorte del plano. `desconocido` no equivale a `ausente`; un proyecto no
+equivale a obra ejecutada; un documento no acredita un hecho posterior a él.
+
+Cobertura del registro (`node tools/red-vial.mjs auditar`): 449 tramos en 1772; ninguno en
+1843; en 1889, 1911, 1936 y 1946 solo los cruces del Guaire ya calzados, más los once
+trazados recuperados en 1936. El detalle, por corte y por cruce, está en la guía.
 
 Orden de ejecución pendiente:
 
-1. Digitalizar las seis redes desde sus propios planos; conservar los 11 trazados curados
-   con su procedencia sin inventar fechas intermedias.
+1. Digitalizar las redes de 1843, 1889, 1911, 1936 y 1946 desde sus propios planos, con
+   revisión a ojo; conservar los 11 trazados curados con su procedencia sin inventar
+   fechas intermedias. Los cruces del Guaire ya entraron con lo que dibuja cada plano.
 2. Separar en cada cruce las calles, los puentes y sus accesos; medir anchos e incertidumbre.
+   Ningún tramo de calle tiene todavía ancho ni nombre de época.
 3. Comparar redes y manzanas: ningún eje moderno borra automáticamente lotes antiguos.
 4. Generar campos por época y selector temporal, manteniendo el comportamiento si faltan datos.
 5. Probar presencia, ausencia y continuidad, transición entre épocas y modo Hoy; publicar datos.
