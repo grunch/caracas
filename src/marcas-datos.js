@@ -180,9 +180,9 @@ export const MARCAS = Object.freeze([
     fuente: `${P11} («Hipódromo del Paraíso»); ${P36} («Hipódromo Nacional»)` },
 
   // --- el este: Candelaria y más allá del Anauco ---
-  { id: 'candelaria', nombre: 'Candelaria', x: 11230, y: 7000, nace: 1, nivel: 1, alto: 11, nota: 'La iglesia y su plaza.',
-    fuente: `${P36} («Iglesia Candelaria», «Plaza de Candelaria»); ${P89} (templo VI, plaza D); ${L43('J', 'La Candelaria')}; Landaeta Rosales, La iglesia y plaza de la Candelaria de Caracas (1908), pp. 5–11 y 17: visita de Martí de 1772, daños de 1812 y plaza colonial (https://archive.org/details/laiglesiayplazad00land)`,
-    dudas: 'Existencia documentada en 1772. La posición del rótulo no determina la planta ni las dimensiones del templo colonial.' },
+  { id: 'candelaria', hito: 'candelaria', nombre: 'Candelaria', nivel: 1, alto: 16, nota: 'La iglesia y su plaza.',
+    fuente: `${P36} («Iglesia Candelaria», «Plaza de Candelaria»); ${P89} (templo VI, plaza D); plano de Razetti de 1911 (bloque del templo); ${L43('J', 'La Candelaria')}; Landaeta Rosales, La iglesia y plaza de la Candelaria de Caracas (1908), pp. 5–19: visita de Martí de 1772, daños de 1812, fachada de 1860–1872, obras tras el terremoto de 1900 y plaza (https://archive.org/details/laiglesiayplazad00land)`,
+    dudas: 'La planta es el contorno del plano de 1936, que Landaeta da por la misma de la fundación («sobre el mismo plan»); no hay mensura. Ninguna altura está medida.' },
   { id: 'fc-central', nombre: 'Estación del Ferrocarril Central', x: 13380, y: 7640, nace: 3, nivel: 3, alto: 7, fuente: `${P89} (rótulos «Estación» y «Ferrocarril Central»); ${P36} («Estación del F.C. Central»)` },
   { id: 'bellas-artes', nombres: [[5, 'Museo de Bellas Artes (sin inaugurar)', 'La nueva sede que dibuja el plano; inaugurada en 1938.'], [6, 'Museo de Bellas Artes', 'La sede inaugurada en 1938.']], x: 12850, y: 7960, nace: 5, nivel: 3, alto: 10, fuente: `${P36} («Museo de Bellas Artes»); Efraín Subero y Roldán Esteva Grillet, Museos, Fundación Empresas Polar: https://bibliofep.fundacionempresaspolar.org/dhv/entradas/m/museos/`, dudas: 'El plano muestra la sede, no acredita su apertura al público en 1936. Hito arquitectónico pendiente.' },
   { id: 'san-bernardino', nombre: 'Urbanización San Bernardino', x: 12069, y: 5371, nace: 6, nivel: 1,

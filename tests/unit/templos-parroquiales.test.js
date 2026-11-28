@@ -95,9 +95,11 @@ describe('templo de tres naves (parte temploDeNaves)', () => {
 describe('Santa Rosalía, San Juan y San José (#259)', () => {
   const datos = construirHitos(HITOS, coords)
 
-  test('están en HITOS, al final para no mover las semillas de los anteriores, y pasan la validación', () => {
+  test('están en HITOS, seguidos y detrás de los puentes para no mover las semillas de los anteriores, y pasan la validación', () => {
     expect(templosParroquiales.map((h) => h.id)).toEqual(IDS)
-    expect(HITOS.slice(-3).map((h) => h.id)).toEqual(IDS)
+    const desde = HITOS.findIndex((h) => h.id === IDS[0])
+    expect(HITOS.slice(desde, desde + 3).map((h) => h.id)).toEqual(IDS)
+    expect(HITOS.slice(desde + 3).every((h) => !h.id.startsWith('puente'))).toBe(true) // detrás solo van los templos que llegaron después
     expect(validarHitos(templosParroquiales, PLANO)).toEqual([])
   })
 
