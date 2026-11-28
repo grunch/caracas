@@ -121,9 +121,10 @@ describe('La Candelaria (#243)', () => {
   const h = HITOS.find((x) => x.id === 'candelaria')
   const origen = coords.aMundo(candelaria.x, candelaria.y)
 
-  test('está en HITOS, al final para no mover las semillas de los anteriores, y pasa la validación', () => {
+  test('está en HITOS, después de los que ya estaban (no mueve sus semillas), y pasa la validación', () => {
     expect(h).toBe(candelaria)
-    expect(HITOS.at(-1).id).toBe('candelaria')
+    // no «el último»: los hitos que entran después van detrás de ella
+    expect(HITOS.findIndex((x) => x.id === 'candelaria')).toBeGreaterThan(HITOS.findIndex((x) => x.id === 'san-jose'))
     expect(validarHitos([candelaria], PLANO)).toEqual([])
   })
 

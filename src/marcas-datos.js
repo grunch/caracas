@@ -81,7 +81,7 @@ export const MARCAS = Object.freeze([
     dudas: 'La leyenda de 1843 ya la nombra (G). Desde qué época antes, a verificar: va desde 1772, como el hito.' },
   // El solar del Seminario de Santa Rosa en la esquina de Las Monjas: un solo lugar, con el nombre que le da cada plano
   // (docs/palacio-municipal-integracion.md). El edificio se dibuja desde 1911; antes va solo el nombre.
-  { id: 'palacio-municipal', hito: 'palacio-municipal', nace: 1, nivel: 3, alto: 12,
+  { id: 'palacio-municipal', hito: 'palacio-municipal', x: 8883.5, y: 7014, nace: 1, nivel: 3, alto: 12, // el punto, al centro del solar
     nombres: [
       [1, 'Seminario de Santa Rosa y Universidad', 'El colegio seminario de Santa Rosa de Lima, que una real cédula de 1721 hizo también universidad.'],
       [2, 'Universidad y su capilla', 'La Universidad y la capilla de Santa Rosa, donde se declaró la independencia en 1811.'],

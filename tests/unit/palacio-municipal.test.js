@@ -5,7 +5,7 @@ import { parteDe } from '../../src/hitos/partes.js'
 import { HITOS, validarHitos, construirHitos } from '../../src/hitos.js'
 import { hitosConPlanta } from '../../src/hitos/plantas.js'
 import { zonasDeSupresion, puntoEnPoligono } from '../../src/hitos/suprimir.js'
-import { palacioMunicipal, MEDIDAS_PALACIO_MUNICIPAL as M } from '../../src/hitos/datos/palacio-municipal.js'
+import { palacioMunicipal, MEDIDAS_PALACIO_MUNICIPAL as M, CENTRO_PALACIO_MUNICIPAL as CENTRO } from '../../src/hitos/datos/palacio-municipal.js'
 import { MARCAS } from '../../src/marcas-datos.js'
 import { FICHAS } from '../../src/fichas-datos.js'
 import { crearCoords } from '../../src/coords.js'
@@ -181,8 +181,8 @@ describe('Palacio Municipal, antiguo Seminario de Santa Rosa (#252)', () => {
   })
 
   test('la planta es el recuadro rayado del plano de 1936: cada esquina a menos de 3 m de la leída', () => {
-    const [planta] = palacioMunicipal.planta
-    expect(palacioMunicipal.planta).toHaveLength(1)
+    const [planta] = palacioMunicipal.suprime
+    expect(palacioMunicipal.suprime).toHaveLength(1)
     for (const esquina of ESQUINAS_1936) {
       const cerca = Math.min(...planta.map((p) => distanciaM(p, esquina)))
       expect(cerca).toBeLessThan(TOLERANCIA_M)
@@ -193,13 +193,27 @@ describe('Palacio Municipal, antiguo Seminario de Santa Rosa (#252)', () => {
     const centroLeido = [0, 1].map((k) => PATIO_1936.reduce((s, p) => s + p[k], 0) / 4)
     const n = Math.hypot(...palacioMunicipal.eje)
     const [ux, uy] = palacioMunicipal.eje.map((c) => c / n)
-    const [dx, dy] = [centroLeido[0] - palacioMunicipal.x, centroLeido[1] - palacioMunicipal.y]
+    const [dx, dy] = [centroLeido[0] - CENTRO[0], centroLeido[1] - CENTRO[1]]
     const [a, b] = [(dx * ux + dy * uy) * PLANO.metro, (-dx * uy + dy * ux) * PLANO.metro]
     expect(Math.abs(a - M.patio.a)).toBeLessThan(1.5)
     expect(Math.abs(b - M.patio.b)).toBeLessThan(1.5)
     expect(Math.abs(distanciaM(PATIO_1936[0], PATIO_1936[1]) - M.patio.ancho)).toBeLessThan(1.5)
     expect(Math.abs(distanciaM(PATIO_1936[0], PATIO_1936[3]) - M.patio.fondo)).toBeLessThan(1.5)
-    expect(palacioMunicipal.partes[0]).toMatchObject({ tipo: 'palacioMunicipal', ancho: M.ancho, fondo: M.fondo, patio: M.patio, pisos: 2 })
+    expect(palacioMunicipal.partes[0]).toMatchObject({ tipo: 'palacioMunicipal', ancho: M.ancho, fondo: M.fondo, patio: M.patio, pisos: 2, b: M.fondo / 2 })
+  })
+
+  test('el hito se ancla al pie del frente (el suelo más alto) y el centro de la planta queda a medio fondo hacia el sur', () => {
+    const n = Math.hypot(...palacioMunicipal.eje)
+    const [ux, uy] = palacioMunicipal.eje.map((c) => c / n)
+    const [dx, dy] = [CENTRO[0] - palacioMunicipal.x, CENTRO[1] - palacioMunicipal.y]
+    expect((dx * ux + dy * uy) * PLANO.metro).toBeCloseTo(0, 1)
+    expect((-dx * uy + dy * ux) * PLANO.metro).toBeCloseTo(M.fondo / 2, 1)
+    // con el desplazamiento, la geometría es la misma corrida medio fondo
+    const centrada = dibujar((p) => dibujarPalacio(p, { ...M, pisos: 2, altoPiso: 5 }))
+    const corrida = dibujar((p) => dibujarPalacio(p, { ...M, pisos: 2, altoPiso: 5, b: M.fondo / 2 }))
+    expect(corrida.caja.min[2]).toBeCloseTo(centrada.caja.min[2] + M.fondo / 2, 4)
+    expect(corrida.caja.max[2]).toBeCloseTo(centrada.caja.max[2] + M.fondo / 2, 4)
+    expect(corrida.triangulos).toBe(centrada.triangulos)
   })
 
   test('el frente con frontón mira al norte, a la plaza', () => {
@@ -209,7 +223,7 @@ describe('Palacio Municipal, antiguo Seminario de Santa Rosa (#252)', () => {
       const v = { x: datos.posiciones[i * 3], y: datos.posiciones[i * 3 + 1], z: datos.posiciones[i * 3 + 2] }
       if (!cima || v.y > cima.y) cima = v
     }
-    const centro = coords.aMundo(palacioMunicipal.x, palacioMunicipal.y)
+    const centro = coords.aMundo(...CENTRO)
     expect(cima.z).toBeLessThan(centro.z - M.fondo / 2 + 4) // z crece hacia el sur: el frontón está en el borde norte
     expect(cima.z).toBeLessThan(0 + 60) // y del lado de la plaza (el origen del mundo es su centro)
   })
@@ -224,16 +238,17 @@ describe('Palacio Municipal, antiguo Seminario de Santa Rosa (#252)', () => {
   })
 
   test('es un solar, no la cuadra: ocupa menos de la mitad de la manzana (el umbral de «grande» de R13)', () => {
+    const [solar] = palacioMunicipal.suprime
     const area = (poligono) => Math.abs(poligono.reduce((s, [x, y], i) => { const [x2, y2] = poligono[(i + 1) % poligono.length]; return s + x * y2 - x2 * y }, 0)) / 2 * PLANO.metro ** 2
     // la cuadra entre Monjas, Gradillas, Sociedad y San Francisco en el plano de 1936 (esquinas a ojo, ±2 px)
     const cuadra = [[8853, 6929], [9037, 6970], [8985, 7215], [8805, 7180]]
-    const fraccion = area(palacioMunicipal.planta[0]) / area(cuadra)
+    const fraccion = area(solar) / area(cuadra)
     expect(fraccion).toBeGreaterThan(0.2)
     expect(fraccion).toBeLessThan(0.5)
   })
 
   test('no pisa los hitos vecinos: la Universidad de San Francisco, el Palacio Arzobispal ni la Plaza Bolívar', () => {
-    const mio = palacioMunicipal.planta[0]
+    const mio = palacioMunicipal.suprime[0]
     for (const id of ['universidad', 'palacio-arzobispal', 'plaza-bolivar']) {
       const otro = hito(id)
       for (const poligono of [...(otro.planta ?? []), ...(otro.suprime ?? [])]) {
@@ -243,10 +258,25 @@ describe('Palacio Municipal, antiguo Seminario de Santa Rosa (#252)', () => {
     }
   })
 
-  test('la planta de colisión llega a hitosConPlanta desde 1911, con su patio transitable', () => {
+  test('la colisión a pie son los cuatro cuerpos, desde 1911: el patio del plano queda abierto y el cuerpo de atrás, cerrado', () => {
+    // Arrange
     const etapas = hitosConPlanta().filter((p) => p.id === ID)
+    const choca = (p) => etapas.some((e) => e.planta.some((poligono) => puntoEnPoligono(p, poligono)))
+    const centroPatio = [0, 1].map((k) => PATIO_1936.reduce((s, p) => s + p[k], 0) / 4)
+
+    // Assert
     expect(etapas).toHaveLength(1)
-    expect(etapas[0]).toMatchObject({ nace: 4, muere: 0, patio: true })
+    expect(etapas[0]).toMatchObject({ nace: 4, muere: 0 })
+    expect(etapas[0].patio).toBeUndefined() // el patio genérico de a-pie.js abriría también el cuerpo de atrás
+    expect(etapas[0].planta).toHaveLength(4)
+    expect(choca(centroPatio)).toBe(false)
+    for (const p of PATIO_1936) expect(choca([p[0] + (centroPatio[0] - p[0]) * 0.2, p[1] + (centroPatio[1] - p[1]) * 0.2])).toBe(false)
+    // la crujía de la plaza, la del oeste, la del este y el cuerpo de atrás
+    for (const p of [[8893, 6948], [8858, 6985], [8925, 6992], [8870, 7050], [8900, 7085]]) expect(choca(p), `${p}`).toBe(true)
+    // los cuatro cuerpos llenan el solar menos el patio
+    const area = (poligono) => Math.abs(poligono.reduce((s, [x, y], i) => { const [x2, y2] = poligono[(i + 1) % poligono.length]; return s + x * y2 - x2 * y }, 0)) / 2 * PLANO.metro ** 2
+    const cuerpos = etapas[0].planta.reduce((s, poligono) => s + area(poligono), 0)
+    expect(cuerpos).toBeCloseTo(M.ancho * M.fondo - M.patio.ancho * M.patio.fondo, 3)
   })
 
   test('trae sus fuentes con enlace y dice lo que no tiene fuente', () => {
@@ -271,11 +301,10 @@ describe('una sola marca para el conjunto, con el nombre que cada plano le da', 
   test('sale del hito (sobre el solar, no sobre la calle) y existe desde 1772 aunque el edificio se dibuje desde 1911', () => {
     const m = marca(ID)
     expect(m.hito).toBe(ID)
-    expect(m.x).toBeUndefined()
-    expect(m.y).toBeUndefined()
+    expect([m.x, m.y]).toEqual([...CENTRO]) // el punto, al centro del solar; el hito se ancla al pie del frente
     expect(m.nace).toBe(1)
     expect(m.muere ?? 0).toBe(0)
-    expect(puntoEnPoligono([palacioMunicipal.x, palacioMunicipal.y], palacioMunicipal.planta[0])).toBe(true)
+    expect(puntoEnPoligono([m.x, m.y], palacioMunicipal.suprime[0])).toBe(true)
   })
 
   test('cada nombre es el de la leyenda o el rótulo del plano de esa época', () => {

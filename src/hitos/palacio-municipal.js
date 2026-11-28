@@ -2,7 +2,7 @@
  * El Palacio Municipal tras la reforma de Alejandro Chataing (1904–1906), como lo describe el catálogo del IPC
  * (citado por IAM Venezuela): un volumen de esquina de planta rectangular con un patio central con fuente,
  * corredores con columnas en planta baja y alta, y un frente de tres cuerpos, el central con frontón
- * triangular y los laterales con frontones curvos. Marco: centrado en el origen del pintor, `ancho` a lo
+ * triangular y los laterales con frontones curvos. Marco: centrado en (a, b) del pintor, `ancho` a lo
  * largo de x (este–oeste) y `fondo` a lo largo de z; el frente a la plaza es el de z = −fondo/2.
  * Lo que no tiene fuente (alturas, vanos, cuerpo de atrás) está en `verificar` del hito y en
  * docs/palacio-municipal-integracion.md.
@@ -100,9 +100,11 @@ function patioConCorredores(p, { patio, pisos, altoPiso, color }) {
 /**
  * Palacio Municipal: cuatro cuerpos de `pisos` pisos alrededor de un `patio` ({ ancho, fondo, a, b }, descentrado
  * como en el plano), azotea con cornisa y pretil, frente de tres cuerpos hacia −z y vanos sobre la calle del
- * oeste. Los lados este y sur son medianeras: van ciegos.
+ * oeste. Los lados este y sur son medianeras: van ciegos. `a`, `b`: el centro de la planta en el marco del hito
+ * (el hito se ancla al pie del frente, que es el suelo más alto: así la planta baja no queda enterrada).
  */
-export function palacioMunicipal(p, { ancho, fondo, patio, pisos = 2, altoPiso = 5, color = TONO.CAL }) {
+export function palacioMunicipal(pintor, { ancho, fondo, patio, pisos = 2, altoPiso = 5, a: ca = 0, b: cb = 0, color = TONO.CAL }) {
+  const p = pintor.en(ca, 0, cb)
   const [x0, x1] = [patio.a - patio.ancho / 2, patio.a + patio.ancho / 2]
   const [z0, z1] = [patio.b - patio.fondo / 2, patio.b + patio.fondo / 2]
   const entra = x0 >= -ancho / 2 + CRUJIA_MINIMA_M && x1 <= ancho / 2 - CRUJIA_MINIMA_M && z0 >= -fondo / 2 + CRUJIA_MINIMA_M && z1 <= fondo / 2 - CRUJIA_MINIMA_M

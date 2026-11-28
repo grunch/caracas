@@ -7,25 +7,39 @@
  */
 import { rectanguloPx } from './marco.js'
 
-// El centro del recuadro y la dirección del frente sobre la plaza (de oeste a este): el recuadro del plano es un
-// cuadrilátero algo torcido (el frente gira 14° y el fondo 11°); va el rectángulo medio, a menos de 2,5 m de cada esquina.
-const marco = { x: 8883.5, y: 7014, eje: [0.9755, 0.22] }
+// El pie del frente sobre la plaza, en su medio, y la dirección de ese frente (de oeste a este). El recuadro del
+// plano es un cuadrilátero algo torcido (el frente gira 14° y el fondo 11°); va el rectángulo medio, a menos de
+// 2,5 m de cada esquina, con centro en (8883,5, 7014). El hito se ancla al frente y no al centro porque el terreno
+// baja unos 3 m hacia el sur: anclado al centro, la planta baja del frente quedaba medio enterrada.
+const marco = { x: 8900, y: 6940.84, eje: [0.9755, 0.22] }
+/** El centro del recuadro, en píxeles del plano: ahí va el punto de la marca. */
+export const CENTRO_PALACIO_MUNICIPAL = Object.freeze([8883.5, 7014])
 
-/** Medidas leídas del plano de 1936 (0,5 m por píxel): el recuadro y su patio, que queda en la mitad norte. */
+/** Medidas leídas del plano de 1936 (0,5 m por píxel): el recuadro y su patio (a, b desde el centro del recuadro), en la mitad norte. */
 export const MEDIDAS_PALACIO_MUNICIPAL = Object.freeze({
   ancho: 45.5, fondo: 75,
   patio: Object.freeze({ ancho: 21.9, fondo: 19.4, a: 0.8, b: -14.4 }),
 })
 
-const solar = [rectanguloPx(marco, MEDIDAS_PALACIO_MUNICIPAL.ancho, MEDIDAS_PALACIO_MUNICIPAL.fondo)]
+const { ancho: ANCHO, fondo: FONDO, patio: PATIO } = MEDIDAS_PALACIO_MUNICIPAL
+const B = FONDO / 2 // del pie del frente al centro de la planta
+const solar = [rectanguloPx(marco, ANCHO, FONDO, 0, B)]
+// La colisión del modo a pie: los cuatro cuerpos, con el patio de verdad abierto (el `patio` genérico de a-pie.js
+// abriría todo el interior a 8 m de los muros, cuerpo de atrás incluido).
+const [x0, x1, z0, z1] = [PATIO.a - PATIO.ancho / 2, PATIO.a + PATIO.ancho / 2, PATIO.b - PATIO.fondo / 2, PATIO.b + PATIO.fondo / 2]
+const cuerpos = [
+  rectanguloPx(marco, ANCHO, z0 + FONDO / 2, 0, B + (z0 - FONDO / 2) / 2), // norte, sobre la plaza
+  rectanguloPx(marco, ANCHO, FONDO / 2 - z1, 0, B + (z1 + FONDO / 2) / 2), // sur, el cuerpo de atrás
+  rectanguloPx(marco, x0 + ANCHO / 2, PATIO.fondo, (x0 - ANCHO / 2) / 2, B + PATIO.b), // oeste, sobre Sur 2
+  rectanguloPx(marco, ANCHO / 2 - x1, PATIO.fondo, (x1 + ANCHO / 2) / 2, B + PATIO.b), // este
+]
 const IAM = 'https://iamvenezuela.org/2016/07/palacio-municipal-sede-de-la-alcaldia-del-municipio-libertador/'
 const GUIA = 'https://guiaccs.com/en/obras/municipal-palace-of-caracas/'
 
 export const palacioMunicipal = Object.freeze({
   id: 'palacio-municipal', nombre: 'Palacio Municipal (antiguo Seminario de Santa Rosa)', ...marco, nace: 4, muere: 0,
-  planta: solar, suprime: solar, sinArboles: solar,
-  patio: true, // el modo a pie choca en las crujías y no en el patio
-  partes: [{ tipo: 'palacioMunicipal', ...MEDIDAS_PALACIO_MUNICIPAL, pisos: 2, altoPiso: 5 }],
+  planta: cuerpos, suprime: solar, sinArboles: solar,
+  partes: [{ tipo: 'palacioMunicipal', ...MEDIDAS_PALACIO_MUNICIPAL, b: B, pisos: 2, altoPiso: 5 }],
   fuente: `Plano DCN de 1936 (recuadro rayado «Palacio de Justicia», con su patio), contrastado con el de 1946; ` +
     `Catálogo del Patrimonio Cultural Venezolano 2004–2007 del IPC, citado por IAM Venezuela (${IAM}): seminario terminado en 1696, ` +
     'Palacio de Justicia en 1872, pabellón occidental en 1881, reforma de Alejandro Chataing en 1904–1906; planta rectangular de esquina, ' +
