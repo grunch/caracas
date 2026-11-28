@@ -4,6 +4,13 @@ import { HITOS, construirHitos, validarHitos, zonasDeSupresion } from '../../src
 import { hitosConPlanta } from '../../src/hitos/plantas.js'
 import { hospitalVargas } from '../../src/hitos/datos/hospital-vargas.js'
 import { parteDe } from '../../src/hitos/partes.js'
+import { crearLienzo, lineal } from '../../src/hitos/lienzo.js'
+import { TONO } from '../../src/hitos/piezas.js'
+import { hospitalVargas as dibujarHospital } from '../../src/hitos/hospital-vargas.js'
+import { MARCAS } from '../../src/marcas-datos.js'
+import { FICHAS } from '../../src/fichas-datos.js'
+import { normalizarMarcas } from '../../src/marcas.js'
+import { contenidoDeFicha } from '../../src/fichas.js'
 
 const plano = { ancho: 18600, alto: 14800, metro: 0.5, plaza: [8968.2, 6839] }
 const coords = crearCoords(plano)
@@ -32,5 +39,64 @@ describe('Hospital Vargas', () => {
     const vidas = new Set()
     for (let i = rango.desde; i < rango.hasta; i++) vidas.add(`${datos.vidas[2 * i]}/${datos.vidas[2 * i + 1]}`)
     expect(vidas).toEqual(new Set(['3/4', '4/5', '5/0']))
+  })
+
+  test('los vanos del núcleo central quedan en sus muros exteriores, a la vista', () => {
+    // Núcleo de 28 × 23 m centrado en el origen; las salas quedan lejos (a = ±28, b = ±73).
+    const MEDIO_ANCHO = 14, MEDIO_FONDO = 11.5
+    const vano = lineal(TONO.VANO)
+    for (const anio of [1889, 1911, 1936]) {
+      const lienzo = crearLienzo()
+      dibujarHospital(lienzo.hito({ origen: { x: 0, z: 0 } }), { anio })
+      const { posiciones, colores, normales } = lienzo.datos()
+      const delNucleo = []
+      for (let i = 0; i < posiciones.length / 3; i++) {
+        const [x, z] = [posiciones[3 * i], posiciones[3 * i + 2]]
+        const esVano = [0, 1, 2].every(k => Math.abs(colores[3 * i + k] - vano[k]) < 1e-6)
+        if (esVano && Math.abs(x) < MEDIO_ANCHO + 2 && Math.abs(z) < MEDIO_FONDO + 2) delNucleo.push({ x, z, nx: Math.round(normales[3 * i]), nz: Math.round(normales[3 * i + 2]) })
+      }
+      const escondidos = delNucleo.filter(({ x, z }) => Math.abs(x) < MEDIO_ANCHO && Math.abs(z) < MEDIO_FONDO)
+      expect(escondidos, `${anio}`).toEqual([])
+      // Ocho vanos rectangulares (cuatro vértices cada uno): dos en cada una de las cuatro caras del núcleo.
+      expect(delNucleo, `${anio}`).toHaveLength(8 * 4)
+      const porCara = Map.groupBy(delNucleo, v => `${v.nx}/${v.nz}`)
+      expect([...porCara.keys()].sort(), `${anio}`).toEqual(['-1/0', '0/-1', '0/1', '1/0'])
+      for (const [cara, vertices] of porCara) {
+        const [nx, nz] = cara.split('/').map(Number)
+        // dos vanos por cara, uno a cada lado del eje, de 1,8 m de ancho
+        const alLargo = vertices.map(v => (nx ? v.z : v.x))
+        expect(vertices, `${anio} ${cara}`).toHaveLength(2 * 4)
+        expect(alLargo.filter(u => u < 0), `${anio} ${cara}`).toHaveLength(4)
+        expect(alLargo.filter(u => u > 0), `${anio} ${cara}`).toHaveLength(4)
+        // cada uno sobre su muro, del lado de afuera, y con la normal hacia afuera
+        for (const v of vertices) {
+          const afuera = nx ? v.x * nx - MEDIO_ANCHO : v.z * nz - MEDIO_FONDO
+          expect(afuera, `${anio} ${cara}`).toBeGreaterThan(0)
+          expect(afuera, `${anio} ${cara}`).toBeLessThan(0.2)
+        }
+      }
+    }
+  })
+  test('la marca va enlazada al hito y cae sobre su núcleo, no en el borde del solar', () => {
+    const dato = MARCAS.find(m => m.id === 'hospital-vargas')
+    expect(dato.hito).toBe('hospital-vargas')
+    expect(dato.x).toBeUndefined()
+    expect(dato.y).toBeUndefined()
+    const marca = normalizarMarcas(MARCAS, { hitos: HITOS, coords }).find(m => m.id === 'hospital-vargas')
+    expect([marca.px, marca.py]).toEqual([hospitalVargas.x, hospitalVargas.y])
+    expect(marca.nace).toBe(3)
+    expect(dato.dudas).not.toMatch(/pendiente/i)
+  })
+
+  test('la ficha cuenta las cubiertas planas desde 1936 y deja los anexos de 1939 como duda', () => {
+    const marca = normalizarMarcas(MARCAS, { hitos: HITOS, coords }).find(m => m.id === 'hospital-vargas')
+    const rige = epoca => contenidoDeFicha({ marca, ficha: FICHAS['hospital-vargas'], epoca }).parrafos.find(p => p.rige).texto
+    expect(rige(4)).not.toMatch(/platabanda/)
+    for (const epoca of [5, 6]) {
+      expect(rige(epoca)).toMatch(/platabandas/)
+      expect(rige(epoca)).toMatch(/1891/)
+    }
+    expect(FICHAS['hospital-vargas'].dudas).toMatch(/1939/)
+    expect(FICHAS['hospital-vargas'].dudas).toMatch(/1889/)
   })
 })

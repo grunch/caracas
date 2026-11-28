@@ -310,8 +310,9 @@ export const FICHAS = Object.freeze({
     textos: [
       [3, 'Las obras del Hospital Vargas comenzaron en 1888. El plano de Mestre de 1889 ya dibuja su planta y lo identifica con el número 43, pero el hospital aún no estaba inaugurado.'],
       [4, 'El Hospital Vargas fue inaugurado el 1 de enero de 1891 y comenzó a atender pacientes el 5 de julio de ese año, según la investigación de Roger Escalona publicada por la Sociedad Venezolana de Historia de la Medicina.'],
+      [5, 'El Hospital Vargas, en servicio desde 1891, cambió de techos después de 1930: según Caracas en 450, las cubiertas ojivales de madera se sustituyeron por platabandas, sin fecha para cada pabellón. Aquí llevan cubierta plana desde 1936.'],
     ],
-    dudas: 'El plano de 1889 permite localizar el proyecto, no determinar el avance exacto de sus obras.',
+    dudas: 'El plano de 1889 permite localizar el proyecto, no determinar el avance exacto de sus obras: el modelo de ese año levanta la planta que el plano dibuja. No consta en qué año se cambió la cubierta de cada pabellón: que en 1936 ya fueran planas es una interpretación. Una fuente médica de 1953 fecha en 1939 tres pabellones nuevos (Carlos J. Bello, Ángel Larralde y de lactantes), pero no hay planta que los ubique: no se modelan.',
   },
 
   // --- el oeste ---
