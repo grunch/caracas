@@ -20,7 +20,7 @@ publica la [Cámara de Caracas](https://camaradecaracas.com/la-camara-caracas-y-
 |---|---|---|---|---|
 | 5-07-1876 | Landaeta Rosales (1906), transcrito por la Cámara de Caracas | Que el cementerio existe antes del plano de 1889 | El primer entierro ese día | Secundaria (transcripción) |
 | 10-07-1876 | La misma | Uso efectivo desde esa fecha | Que toda la propiedad estuviera nivelada o parcelada | Secundaria (transcripción) |
-| 1876 | Reglamento de 1876, citado por [Rodríguez (2011)](https://servicio.bc.uc.edu.ve/postgrado/manongo36/art07.pdf), pp. 188–189 | Cuatro cuarteles y dos avenidas «norte y sur» de 4 m | Los ejes ni la ubicación de las avenidas | Secundaria |
+| 1876 | [Rodríguez (2011)](https://servicio.bc.uc.edu.ve/postgrado/manongo36/art07.pdf), pp. 188–189 (releído el 28-11-2026): «cuatro cuarteles y dos grandes avenidas (norte y sur) cada una de cuatro metros» | Cuatro cuarteles y dos avenidas de 4 m | Los ejes ni la ubicación de las avenidas | Secundaria |
 | 1877 | Escritura del terreno inicial (Landaeta): 117 hectáreas y 6.818 m² | El tamaño de la propiedad | La extensión del campo funerario ni un recinto rectangular amurallado | Secundaria (transcripción) |
 | 15-11-1889 | Compra de un segundo lote de 51.154 m² (Landaeta) | Que se compró terreno para el ensanche | Que el lote estuviera urbanizado en el plano de 1889 | Secundaria (transcripción) |
 | 1890 | Primeras aceras interiores (Landaeta) | Inicio de las obras de acondicionamiento | Que las calles internas tuvieran ya su forma posterior | Secundaria (transcripción) |
@@ -50,8 +50,10 @@ calce «dejando uno fuera» RMS 2,07 m, p90 3,53 m, máximo 5,06 m), recorte 610
   entrada por el este están en el mismo sitio en 1936 y en 1946. El contorno del modelo encierra el mismo núcleo
   en las dos hojas. No hay indicio de que el recinto de 1936 se achicara o se corriera.
 - **Lo que cambia en 1946.** El plano tiñe de amarillo, con cruces, campos al norte y al noroeste del núcleo,
-  fuera del contorno del modelo, con caminos a trazos; en 1936 esa ladera aparece casi sin cruces. Es una ampliación
-  posterior a 1936 que el modelo no representa.
+  fuera del contorno del modelo, con caminos a trazos; en 1936 esa ladera aparece casi sin cruces. Es terreno de
+  cementerio que aparece después de 1936 y que el modelo no representa. El plano no dice si los caminos a trazos
+  estaban hechos o proyectados. Rodríguez (2011, p. 189) dice que la expansión «se realizó principalmente hacia el
+  lado sur»: no contradice al plano, pero tampoco explica los campos del norte.
 - **Lo que ya faltaba en 1936.** Las dos hojas dibujan campos con cruces al sureste y al suroeste del contorno del
   modelo. `CONTORNO_SUR_1936` es una envolvente aproximada del núcleo, no del recinto completo: ya lo decía la
   guía y sigue igual.
