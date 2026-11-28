@@ -1,0 +1,38 @@
+// Capturas de control de las vías posteriores a 1946 (no es un test):
+//   node tests/e2e/capturas-vialidad.mjs [url] [carpeta] [prefijo]
+// La ciudad levantada, desde arriba, sobre el corredor de la calle Este–Oeste 1 (hoy avenida Urdaneta) en 1936 y
+// 1946, sin «lo de hoy»: lo que se ve tiene que ser la calle del plano, no la avenida de 1953.
+import { chromium } from '@playwright/test'
+import { mkdir } from 'node:fs/promises'
+
+const url = process.argv[2] ?? 'http://localhost:5199/'
+const carpeta = process.argv[3] ?? 'test-results/capturas-vialidad'
+const prefijo = process.argv[4] ?? 'despues'
+const AÑOS = [[5, '1936'], [6, '1946']]
+const PLAZA = [8968.2, 6839]
+const METRO = 0.5
+// Centro del corredor, entre las esquinas de Platanal y Candilito (px del mosaico de 1936).
+const CENTRO = [10100, 6690]
+const vista = { x: (CENTRO[0] - PLAZA[0]) * METRO, z: (CENTRO[1] - PLAZA[1]) * METRO, dist: 620, yaw: 0, pitch: 1.45 }
+
+const navegador = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] })
+const pagina = await navegador.newPage({ viewport: { width: 1440, height: 900 } })
+pagina.on('pageerror', (e) => console.error('pageerror:', e.message))
+await mkdir(carpeta, { recursive: true })
+await pagina.goto(`${url}?capture&sinintro&sinsw`)
+await pagina.waitForFunction(() => window.lab?.ready && window.lab?.lineaDeTiempo && window.lab?.casasListas, null, { timeout: 180000 })
+await pagina.evaluate(() => {
+  window.lab.levantar(true)
+  window.lab.ciudad.U.uOla.value = 1e5
+  window.lab.ciudad.U.uOlaEpoca.value = 8999
+})
+await pagina.waitForTimeout(4000)
+for (const [epoca, año] of AÑOS) {
+  await pagina.evaluate((e) => window.lab.lineaDeTiempo.elegir(e), epoca)
+  await pagina.waitForFunction((e) => window.lab.ciudad.U.uEpocaA.value === e && window.lab.ciudad.U.uOlaEpoca.value >= 9000, epoca, { timeout: 300000 })
+  await pagina.evaluate((v) => { window.lab.cam.jump(v); window.lab.pedirCuadro(6) }, vista)
+  await pagina.waitForTimeout(4500)
+  await pagina.screenshot({ path: `${carpeta}/${prefijo}-${año}-urdaneta.png`, timeout: 400000 })
+  console.log(`captura ${prefijo} ${año}`)
+}
+await navegador.close()
