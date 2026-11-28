@@ -12,7 +12,7 @@ import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { promisify } from 'node:util'
 import path from 'node:path'
 import sharp from 'sharp'
-import { armarManifiesto, descargable, elegibilidad, entradaDeFoto, informe, LADO_GRANDE, LADO_MINIATURA } from './fotos-lib.mjs'
+import { armarManifiesto, publicablesSinOriginal, descargable, elegibilidad, entradaDeFoto, informe, LADO_GRANDE, LADO_MINIATURA } from './fotos-lib.mjs'
 import { MARCAS } from '../src/marcas-datos.js'
 
 const RAIZ = path.resolve(import.meta.dirname, '..')
@@ -98,6 +98,13 @@ if (DESCARGAR && !SOLO_INFORME) {
 const resultado = armarManifiesto(lista, { marcas: new Set(MARCAS.map((m) => m.id)) })
 console.log(informe(resultado))
 if (SOLO_INFORME) process.exit(0)
+const faltan = publicablesSinOriginal(resultado)
+if (faltan.length) {
+  // sin este corte el paso borraba public/fotos/ y publicaba un manifiesto con menos fotos, o vacío, sin avisar
+  console.error(`\nfotos: faltan los originales de ${faltan.length} fotos publicables (${faltan.join(', ')}).\n` +
+    'No viajan en git: cópialos a fuentes/imagenes/<id>/original.* o bájalos con node tools/fotos.mjs --descargar. No se escribió nada.')
+  process.exit(1)
+}
 
 // se parte de cero: lo que dejó de ser publicable no puede quedar servido
 await rm(FOTOS, { recursive: true, force: true })
