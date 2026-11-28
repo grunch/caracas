@@ -31,10 +31,16 @@ no se deduce de ese grafismo una altura o un porcentaje de avance.
 | Instituto de Medicina Experimental | Su director fecha el traslado desde San Lázaro a la nueva sede en **1950** [testimonio institucional](https://www.tribunadelinvestigador.com/ediciones/2016/1/art-3/) | No trasladar sus actividades a la UCV en 1946; apertura posterior no demuestra ausencia de obras |
 | Aula Magna y conjunto monumental final | UNESCO describe una realización durante varias décadas [ficha](https://whc.unesco.org/en/list/986/) | No incorporar iconos terminados por pertenecer hoy al campus |
 
-**Implementado antes de esta revisión:** exclusión residencial mediante la reserva UCV.
-**Entregado ahora:** lectura reproducible y separación edificio/proyecto/apertura.
-**Pendiente de #264:** tabla de inicios y avance físico de cada bloque con partes de obra;
-levantamiento de los volúmenes realmente existentes. El issue permanece abierto.
+**Revisión del 28-11-2026:** la matriz por edificio (ubicación en el plano, proyecto, obra, estado en 1946 y
+terminación, con fuente por afirmación), las contradicciones y las referencias visuales están en
+[`docs/issue-264-ciudad-universitaria.md`](../issue-264-ciudad-universitaria.md). Sustituye a la tabla de
+arriba donde difieran. En 1946 solo consta en obra la zona médica y ningún edificio consta como terminado; el plano
+dibuja con el mismo relleno la Escuela Técnica Industrial, cuya obra es posterior.
+
+**Implementado:** la reserva sin casas, ampliada a la Escuela Técnica Industrial y a la pista (falta
+regenerar los datos); la marca y la ficha «Ciudad Universitaria (en construcción)» en 1946 y la marca
+«Hacienda Ibarra» en 1936. **Pendiente de #264:** el avance físico de cada edificio en 1946 y sus alturas; sin
+eso no se levanta ningún volumen.
 
 ## Avenida Bolívar
 

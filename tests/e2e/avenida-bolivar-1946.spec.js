@@ -8,6 +8,7 @@ import { puntoEnPoligono } from '../../src/hitos/suprimir.js'
 
 const BOLIVAR = JSON.parse(readFileSync(new URL('../../tools/geo/referencias/1946-avenida-bolivar.json', import.meta.url), 'utf8'))
 const [EPOCA_1936, EPOCA_1946] = [5, 6]
+const MINIMO_EN_LA_MUESTRA = 120
 const viva = (vida, e) => vida % 8 <= e && (!(vida >> 3) || e < vida >> 3)
 
 test('las casas del corredor Este 6–Este 8 de 1936 siguen en 1946', async ({ page }) => {
@@ -25,6 +26,7 @@ test('las casas del corredor Este 6–Este 8 de 1936 siguen en 1946', async ({ p
   }
   const de1936 = enElCorredor.filter((v) => viva(v, EPOCA_1936))
 
-  expect(de1936.length).toBeGreaterThan(20)
+  // 219 techos con los datos completos; 147 en la muestra de 1 km² del CI
+  expect(de1936.length).toBeGreaterThan(MINIMO_EN_LA_MUESTRA)
   expect(de1936.filter((v) => !viva(v, EPOCA_1946))).toEqual([])
 })

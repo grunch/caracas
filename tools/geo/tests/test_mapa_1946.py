@@ -30,3 +30,15 @@ def test_no_construye_en_reserva_aunque_ocupe_menos_de_diez_por_ciento():
     p=box(0,0,100,80);reserva=box(0,0,8,80)
     casas,_=conservar_y_ampliar([p],[],[reserva])
     assert all(c.intersection(reserva).area<.01 for c in casas)
+
+def test_ninguna_planta_de_la_ciudad_universitaria_queda_fuera_de_las_reservas():
+    # Lo que el plano dibuja con relleno de edificación en el recinto en obras (zona médica, Escuela Técnica
+    # Industrial, pista) no es una manzana: si queda fuera de las reservas, mapa_1946 le pone casas (#264).
+    import json
+    raiz=Path(__file__).resolve().parents[3]/'tools/geo/referencias'
+    reservas=[Polygon(r['poligono_original']) for r in json.loads((raiz/'1946-reservas.json').read_text(encoding='utf-8'))['reservas']]
+    lectura=json.loads((raiz/'1946-ciudad-universitaria.json').read_text(encoding='utf-8'))
+    plantas=[(e['id'],Polygon(p)) for e in lectura['elementos'] for p in e.get('plantas_original',[])]
+    assert len(plantas)>=15
+    fuera=[i for i,p in plantas if not any(p.buffer(0).intersection(r).area>0 for r in reservas)]
+    assert fuera==[]
