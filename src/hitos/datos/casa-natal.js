@@ -1,7 +1,8 @@
 /**
  * La Casa Natal del Libertador (issue #247), entre las esquinas de San Jacinto y Traposos. El solar mide lo que
  * publica el Diccionario de Historia de Venezuela (22,40 × 60,50 m) y está puesto donde el plano de 1936 raya
- * la «Casa Natal» (docs/casa-natal-georreferencia.json). La fachada cambia con las épocas según Landaeta
+ * la «Casa Natal» (docs/casa-natal-georreferencia.json), corrido 9,7 m hacia el fondo para alinear la fachada con
+ * la manzana del modelo (CORRIMIENTO_M). La fachada cambia con las épocas según Landaeta
  * Rosales (1912); el volumen, no: es de un piso en todas. Lo que no tiene fuente queda en `verificar`
  * (docs/casa-natal-integracion.md). El origen es el medio de la fachada y el eje entra al solar, hacia el oeste;
  * b > 0 es el norte. No tiene constructor propio: se arma con las partes `cuerpo` y `ventanas` de src/hitos/partes.js.
@@ -11,12 +12,30 @@ import { rectanguloPx } from './marco.js'
 // los tonos de src/hitos/piezas.js que usa (este módulo lo carga también el hilo principal, sin three.js)
 const TONO = Object.freeze({ TEJA_VIEJA: 0x7d4a36, PIEDRA: 0x8a8378, PIEDRA_CLARA: 0xbdb6a6 })
 
-const marco = { x: 9262.6, y: 7168.2, eje: [-0.9786, -0.2055] }
+const EJE = Object.freeze([-0.9786, -0.2055])
+/** El medio de la fachada donde la ponen los planos de 1889, 1911 y 1946 (en el de 1936 la tapa la costura de las hojas). */
+export const FACHADA_LEIDA_PX = Object.freeze([9262.6, 7168.2])
+/**
+ * Lo que la casa se corre hacia el fondo para quedar en la línea de fachada de su manzana del modelo. El tejido del
+ * sitio sale del mosaico de 1936, y ahí la costura de las hojas se come el frente de esta cuadra: el borde de la
+ * manzana (con su retiro de 1 m) queda de 9,0 a 9,7 m al oeste de la fachada de los planos. Se corre el solar entero (conserva sus
+ * 22,40 × 60,50 m) lo que hace falta para que ningún punto del frente pise la calle del modelo.
+ */
+export const CORRIMIENTO_M = 9.7
+const METRO_POR_PX = 0.5
+const marco = {
+  x: FACHADA_LEIDA_PX[0] + (CORRIMIENTO_M * EJE[0]) / METRO_POR_PX,
+  y: FACHADA_LEIDA_PX[1] + (CORRIMIENTO_M * EJE[1]) / METRO_POR_PX,
+  eje: [...EJE],
+}
 
 /** El solar, en metros (Fuentes Carvallo, DHV). */
 export const SOLAR = Object.freeze({ frente: 22.4, fondo: 60.5 })
 
-/** Los dos patios que nombra el IPC, centrados en los blancos que el plano de 1936 deja dentro del rayado. */
+/**
+ * Los dos patios que nombra el IPC. Su lugar dentro del solar sale de los blancos que el plano de 1936 deja en el
+ * rayado; con el solar corrido, quedan 9,7 m al oeste de esos blancos.
+ */
 export const PATIOS = Object.freeze([
   Object.freeze({ a: 16.1, b: 2.3, largo: 10, ancho: 9 }), // el principal, detrás del zaguán
   Object.freeze({ a: 39.5, b: -0.5, largo: 9, ancho: 7 }), // el de servicio
@@ -117,8 +136,9 @@ export const casaNatal = Object.freeze({
   verificar: [
     'Alturas sin fuente: ninguna está medida ni publicada. Va un piso de 5 m a la calle y 4,2 a 4,6 m adentro, con tejado bajo.',
     'El piso alto anterior a 1812 no se dibuja: Landaeta dice que la casa «era de alto interiormente» y el DHV, que Juan Vicente Bolívar y Ponte le hizo un piso alto, pero ninguno dice dónde estaba ni desde cuándo. En 1772 va de un piso, como en la lámina de 1912.',
-    'Solar de 22,40 × 60,50 m (DHV), ubicado sobre el rayado del plano de 1936: allí el ancho leído da 21,9 m y el fondo unos 60 m. El plano de 1946 dibuja un contorno 3 m más ancho. La línea de fachada sale del plano de 1946, porque en el mosaico de 1936 la costura de las hojas tapa la calle.',
-    'Zaguán y dos patios según el IPC, que describe la casa restaurada. Los patios van donde el plano de 1936 deja blancos; su tamaño es interpretativo y no se sabe cómo eran antes de 1916. Los corredores no se dibujan: quedan dentro de las crujías.',
+    'Solar de 22,40 × 60,50 m (DHV), ubicado sobre el rayado del plano de 1936: allí el ancho leído da 21,9 m y el fondo unos 60 m. El plano de 1946 dibuja un contorno 3 m más ancho.',
+    'La casa está corrida 9,7 m al oeste de donde la ponen los planos. Los de 1889, 1911 y 1946 dibujan la fachada en x ≈ 9263; en el mosaico de 1936, del que sale el tejido del sitio, la costura de las dos hojas tapa una franja de unos 23 m con la calle y el frente de esta cuadra, y la manzana del modelo termina 9,0 a 9,7 m antes. Para no dejar la casa metida en la calle se corre el solar entero hasta la línea de fachada de sus vecinas; el fondo queda 9,7 m más adentro de la manzana que el rayado del plano. Se deshace cuando el generador de manzanas corrija ese borde.',
+    'Zaguán y dos patios según el IPC, que describe la casa restaurada. Los patios van donde el plano de 1936 deja blancos, corridos con el solar; su tamaño es interpretativo y no se sabe cómo eran antes de 1916. Los corredores no se dibujan: quedan dentro de las crujías.',
     'Fachada de 1772: la de la lámina de Landaeta (1912), que por su texto parece salir del cuadro que Néstor Hernández pintó en 1883 para mostrarla «con la forma que tenía entonces»: es una reconstrucción hecha cien años después.',
     'Fachada de 1843 y 1889: las mismas ventanas sin las rejas de madera. Las de hierro «que se le pusieron después del terremoto» (Landaeta) no se dibujan, y la lámina del Papel Periódico Ilustrado de 1883 que él cita no se consultó.',
     'Fachada de 1911: Landaeta no fecha el cambio de las tres ventanas del sur por puertas; ocurrió entre 1883 y 1912. En 1889 se dibuja todavía con ventanas, sin prueba.',

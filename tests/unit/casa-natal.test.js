@@ -4,7 +4,7 @@ import { TONO } from '../../src/hitos/piezas.js'
 import { HITOS, validarHitos, construirHitos } from '../../src/hitos.js'
 import { hitosConPlanta } from '../../src/hitos/plantas.js'
 import { zonasDeSupresion, puntoEnPoligono } from '../../src/hitos/suprimir.js'
-import { casaNatal as hito, SOLAR, PATIOS, FASES, vanosDeFachada } from '../../src/hitos/datos/casa-natal.js'
+import { casaNatal as hito, SOLAR, PATIOS, FASES, vanosDeFachada, CORRIMIENTO_M, FACHADA_LEIDA_PX } from '../../src/hitos/datos/casa-natal.js'
 import { parteDe } from '../../src/hitos/partes.js'
 import { MARCAS } from '../../src/marcas-datos.js'
 import { FICHAS } from '../../src/fichas-datos.js'
@@ -76,7 +76,7 @@ describe('Casa Natal del Libertador (#247): el solar y su vida', () => {
     ['la calle, al este', [9278, 7168]],
     ['el vecino del norte', [9220, 7124]],
     ['el vecino del sur', [9220, 7200]],
-    ['el fondo de la manzana, al oeste', [9125, 7140]],
+    ['el fondo de la manzana, al oeste', [9110, 7137]],
   ])('la reserva es el solar y deja afuera %s', (_, punto) => {
     const zonas = zonasDeSupresion([hito])
     expect(zonas.some((z) => puntoEnPoligono([9200, 7155], z.poligono))).toBe(true)
@@ -90,12 +90,50 @@ describe('Casa Natal del Libertador (#247): el solar y su vida', () => {
     const enPlanta = (p) => hito.planta.some((poligono) => puntoEnPoligono(p, poligono))
     const enSolar = (p) => puntoEnPoligono(p, hito.suprime[0])
     expect(PATIOS).toHaveLength(2)
-    for (const blanco of [[9232, 7157], [9185, 7153]]) {
+    // los blancos del plano de 1936, corridos con el solar (CORRIMIENTO_M hacia el fondo)
+    const corrido = ([x, y]) => [x + (CORRIMIENTO_M * hito.eje[0]) / PLANO.metro, y + (CORRIMIENTO_M * hito.eje[1]) / PLANO.metro]
+    for (const blanco of [[9232, 7157], [9185, 7153]].map(corrido)) {
       expect(enSolar(blanco)).toBe(true)
       expect(enPlanta(blanco)).toBe(false)
     }
     // la crujía de la calle, la que separa los patios y la del fondo sí son colisión
-    for (const techado of [[9257, 7166], [9208, 7155], [9155, 7146]]) expect(enPlanta(techado)).toBe(true)
+    for (const techado of [[9257, 7166], [9208, 7155], [9155, 7146]].map(corrido)) expect(enPlanta(techado)).toBe(true)
+  })
+
+  // El borde este de la manzana del modelo frente a la casa, ya con su retiro de 1 m (el `limite` de V1772-36902-0-0,
+  // igual en las seis épocas: donde termina el suelo de manzana y empiezan las fachadas vecinas), en píxeles:
+  // informes de retiro de los datos completos (fuentes/derivados/retiro<año>, generados con 27abd10).
+  const BORDE_MANZANA_PX = [[9240.4, 7186.4], [9248.3, 7142.3]]
+  /** Metros que un punto pasa del borde de la manzana hacia la calle (positivo: en la calle). */
+  const fueraDeLaManzana = ([x, y]) => {
+    const [[x0, y0], [x1, y1]] = BORDE_MANZANA_PX
+    const largo = Math.hypot(x1 - x0, y1 - y0)
+    // la calle queda al este: a la derecha de quien recorre el borde de sur a norte
+    return (((x - x0) * (y1 - y0) - (y - y0) * (x1 - x0)) / largo) * -PLANO.metro
+  }
+
+  test('el frente no sale de la manzana del modelo hacia la calle, y tampoco queda hundido', () => {
+    // Arrange: las dos esquinas del frente y su medio
+    const frente = [hito.suprime[0][0], hito.suprime[0][3], [hito.x, hito.y]]
+
+    // Act
+    const salidas = frente.map(fueraDeLaManzana)
+
+    // Assert: ninguna pisa la calle (tolerancia: 0,1 m de redondeo) ni se mete más de 1 m en la manzana
+    expect(fueraDeLaManzana([9278, 7168])).toBeGreaterThan(5) // control: la calle sí queda afuera
+    expect(fueraDeLaManzana(FACHADA_LEIDA_PX)).toBeGreaterThan(9) // sin corrimiento, la casa salía de 9,0 a 9,7 m
+    for (const salida of salidas) {
+      expect(salida).toBeLessThanOrEqual(0.1)
+      expect(salida).toBeGreaterThan(-1)
+    }
+  })
+
+  test('el corrimiento está declarado: cuánto, hacia dónde y por qué', () => {
+    const [dx, dy] = [hito.x - FACHADA_LEIDA_PX[0], hito.y - FACHADA_LEIDA_PX[1]]
+    expect(Math.hypot(dx, dy) * PLANO.metro).toBeCloseTo(CORRIMIENTO_M, 2)
+    expect(dx).toBeLessThan(0) // hacia el oeste, al fondo del solar
+    expect(hito.verificar.join(' ')).toMatch(/corrida 9,7 m al oeste.*costura/)
+    expect(FICHAS['casa-natal'].dudas).toMatch(/9,7 m al oeste.*costura/)
   })
 
   test('las plantas llegan a hitosConPlanta desde 1772', () => {

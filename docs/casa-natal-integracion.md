@@ -84,24 +84,41 @@ debe traer el estado anterior a la obra.
   la casa está entre medianeras y, con él, se escondía toda casa vecina que tocara el solar y la Casa Natal quedaba
   sola en un claro. Así solo se esconde la casa que pisa el solar de verdad (25 % de la más chica de las dos huellas).
 - **Colisión** (`planta`): siete crujías; los dos patios quedan transitables.
-- No pisa la calle ni la plaza de San Jacinto (El Venezolano), que está del otro lado de la calle.
+- No pisa la calle (ver abajo) ni la plaza de San Jacinto (El Venezolano), que está del otro lado de la calle.
 
 Medido con `tools/hitos-manzanas.mjs` (`medirHitos`) sobre los informes de retiro de los datos completos
 (`27abd10`), en las seis épocas, con el mismo resultado en todas:
 
 | Manzana | Área | Recinto | Recinto dentro de la manzana | Manzana bajo el recinto | Clase | Decisión |
 |---|---:|---:|---:|---:|---|---|
-| `V1772-36901-0-0` | 11.572 m² | 1.355 m² | 84,6 % | 9,9 % | **chico** | se conserva |
+| `V1772-36902-0-0` | 11.572 m² | 1.355 m² | 100 % | 11,7 % | **chico** | se conserva |
 
-No retira ninguna manzana y no toca ninguna otra. El 15 % que queda fuera es el frente: **la casa sale 8,6 m de la
-manzana del modelo hacia la calle**. No es la casa la que está corrida, es el borde de la manzana: en el mosaico
-de 1936 la costura entre las dos hojas tapa una franja de unos 23 m (de x ≈ 9243 a 9290), con la calle y el frente
-de esta cuadra adentro, y la manzana del modelo termina donde empieza la costura (x ≈ 9245 a la altura de la casa).
+No retira ninguna manzana y no toca ninguna otra.
+
+### La casa está corrida 9,7 m al oeste, a propósito
+
 Los planos de 1889, 1911 y 1946 coinciden en poner la línea de fachada entre x ≈ 9263 y 9270, y el fondo del solar
-del DHV (60,5 m) cae justo donde termina el rayado de 1936 solo si la fachada está ahí. Por eso la calle del modelo
-mide en este tramo unos 25 m en vez de los 12 o 13 de los planos, y las casas vecinas quedan 8,6 m atrás de la
-Casa Natal. Corregirlo es asunto del generador de manzanas (el borde bajo la costura), no de este hito; queda
-anotado como pendiente.
+del DHV (60,5 m) cae donde termina el rayado de 1936 solo si la fachada está ahí. Pero el tejido del sitio sale
+del mosaico de 1936, y ahí la costura entre las dos hojas tapa una franja de unos 23 m (de x ≈ 9243 a 9290), con
+la calle y el frente de esta cuadra adentro: la manzana del modelo termina donde empieza la costura. Con su retiro
+de 1 m, el borde de la manzana queda de 9,0 a 9,7 m al oeste de la fachada de los planos (medido contra el `limite`
+de la manzana en los informes de retiro, igual en las seis épocas).
+
+La primera versión de este PR dejaba la casa donde dicen los planos, y quedaba metida en la calle del modelo. Eso
+no se publica así: el mapa base es el tejido del modelo. **Se corre el solar entero 9,7 m hacia el fondo**
+(`CORRIMIENTO_M` en `src/hitos/datos/casa-natal.js`; el origen pasa de (9262,6, 7168,2) a (9243,6, 7164,2)), lo
+justo para que ningún punto del frente pise la calle; queda entre 0 y 0,7 m adentro del borde. Se movió el origen
+en vez de recortar el fondo para conservar los 22,40 × 60,50 m del DHV.
+
+Lo que cuesta, y queda declarado en `verificar`, en las dudas de la ficha y aquí:
+
+- la casa está 9,7 m al oeste de su lugar documentado; el fondo entra 9,7 m más en la manzana que el rayado;
+- los patios quedan 9,7 m al oeste de los blancos del plano de 1936;
+- la calle del modelo sigue midiendo en este tramo unos 25 m en vez de los 12 o 13 de los planos.
+
+Se deshace (`CORRIMIENTO_M = 0`) cuando el generador de manzanas corrija el borde bajo la costura. Lo miden un test
+unitario (el frente contra el borde de la manzana, con el control de que sin corrimiento salía 9 m) y un E2E (el
+frente contra el campo de manzanas que sirve el sitio).
 
 ## El modelo
 
@@ -127,6 +144,7 @@ lugar exacto de cada vano, y que el volumen no cambie entre épocas.
 - Una vista fechada de la fachada entre 1883 y 1916, y de la fachada recién restaurada.
 - La casa por dentro antes de 1916 (Lecuna y Planchart, 1924).
 - Regenerar y publicar los datos: la reserva cambia el reparto de casas de la manzana.
-- El borde este de la manzana `V1772-36901-0-0`, cortado por la costura del mosaico de 1936: la calle sale el
-  doble de ancha y las casas vecinas, 8,6 m atrás de la Casa Natal.
+- El borde este de la manzana `V1772-36902-0-0`, cortado por la costura del mosaico de 1936: la calle sale el
+  doble de ancha. Mientras tanto la casa va corrida 9,7 m al oeste para no pisarla; al corregir el borde hay que
+  devolverla a su lugar (`CORRIMIENTO_M = 0`).
 - El entorno posterior a 1946 (Museo Bolivariano, Sociedad Bolivariana) queda fuera de las épocas del mapa.

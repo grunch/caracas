@@ -3,7 +3,10 @@
   "sistema": "píxeles del mosaico base de 1936, 0,5 m por píxel; a = metros hacia el fondo del solar desde el medio de la fachada, b = metros a la derecha del eje (el norte)",
   "certeza": "lectura a ojo sobre ampliaciones del mosaico con rejilla de 10 px; el trazo del plano mide de 1 a 2 px (0,5 a 1 m). No es mensura catastral. Las medidas del solar no salen del plano: son las que publica el Diccionario de Historia de Venezuela.",
   "casa-natal": {
-    "origen_px": [9262.6, 7168.2],
+    "fachada_leida_px": [9262.6, 7168.2],
+    "corrimiento_m": 9.7,
+    "origen_px": [9243.62, 7164.21],
+    "corrimiento": "el hito va 9,7 m al oeste de la fachada leída, a lo largo del eje: el borde de la manzana del modelo (V1772-36902-0-0, con su retiro de 1 m) queda de 9,0 a 9,7 m atrás porque la costura del mosaico de 1936 tapa el frente de la cuadra; borde de la manzana frente a la casa: (9240,4, 7186,4) a (9248,3, 7142,3)",
     "eje": [-0.9786, -0.2055],
     "fachada": "este, sobre la calle de San Jacinto a Traposos (Sur 1 en la nomenclatura de 1912: «sur 1, Nº 22», Landaeta Rosales)",
     "medidas_m": { "frente": 22.4, "fondo": 60.5, "de": "Fuentes Carvallo, Diccionario de Historia de Venezuela" },
