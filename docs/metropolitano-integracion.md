@@ -1,6 +1,6 @@
 # Circo Metropolitano: integración del estudio de Miraflores
 
-Avance de #257. El Nuevo Circo ya está integrado por #283; son dos edificios distintos.
+Parte de #257. Integrado por el [PR #284](https://github.com/grunch/caracas/pull/284) (fusionado el 27-11-2026); el Nuevo Circo, por #283. Son dos edificios distintos. Los datos que dependen del catálogo de hitos se regeneraron y publicaron después (`datos-2026-11-27-eb21bf8`). El 28-11-2026 se añadieron la [cronología del cierre](#cierre-y-demolición-1942-frente-a-1945) y la [lectura del solar en 1946](#el-solar-en-1946-y-las-manzanas-r13).
 
 ## Evidencia y localización
 
@@ -32,6 +32,61 @@ El calce TPS de 1911 declara RMS 6,71 m y p90 12,04 m. Esta discrepancia y la
 representación esquemática no justifican inferir un traslado o una ampliación.
 Se usa la huella detallada de 1936 y se declara la continuidad como hipótesis;
 1911 confirma el sitio y la presencia, no las dimensiones exactas. Alturas, graderío y colores son interpretativos.
+
+## Cierre y demolición: 1942 frente a 1945
+
+Ninguna de las dos fechas cambia lo que muestra el visor: el circo está en 1911 y 1936 y no está en 1946.
+
+| Fecha del hecho | Documento (fecha del documento) | Qué dice | Límite | Certeza |
+|---|---|---|---|---|
+| 2-02-1896 | [FAC, cronología de 1945](https://fundaayc.com/2022/06/29/1945-deja-de-funcionar-y-es-demolido-el-circo-metropolitano-de-caracas/) (página leída el 28-11-2026) | Inauguración; proyecto de Antonio Malaussena; ruedo de 36 m; madera sobre estructura de hierro; 4.000 espectadores | Fuente secundaria, sin cita de prensa de 1896 | Secundaria |
+| 1942 | Alfredo Cilento, [*Caracas 1940–1960*](https://www.academia.edu/39601663/ACS_TESTIGO_PRESENCIAL_CARACAS_1940_1960) (memoria retrospectiva) | Demolido por la reurbanización | Recuerdo posterior, sin documento del año. No se releyó para este cambio: se cita por el issue #257 | Secundaria, sin cotejar |
+| 19-04-1945 | Orlando Marín Castañeda, [*Valoración histórica del patrimonio arquitectónico*](https://www.academia.edu/12565798/VALORACI%C3%93N_HIST%C3%93RICA_DEL_PATRIMONIO_ARQUITECT%C3%93NICO_Estudio_de_Casos_en_el_Centro_Hist%C3%B3rico_de_Caracas) (2011), que lo atribuye a Carlos Salas, *La fiesta brava en Caracas* (1978), pp. 169–170 | Última corrida | Ni Marín ni Salas se releyeron para este cambio (el PDF pide registro): se cita por el comentario del issue #257 del 27-11-2026. Falta la prensa de abril de 1945 | Secundaria, sin cotejar |
+| 1945 | FAC, misma página | «Deja de funcionar y es demolido»; «en el terreno baldío se construyó el Teatro Metropolitano y un estacionamiento público» | La única fuente que cita la página es *La Ciudad Transfigurada* (1942), que no puede acreditar un hecho de 1945 | Secundaria |
+| 1946 | [Plano DCN de fotografías de 1946](https://archive.org/details/WCWdb_18051), edición catalogada [1950?] | El sitio del ruedo está en blanco (sin edificar) dentro de su cuadra | No dice cuándo se demolió | Primaria (cartográfica) |
+
+Si la corrida del 19-04-1945 se confirma en la prensa, 1942 queda descartado como año de demolición. Hasta entonces
+la ficha dice que 1945 tiene más apoyos (FAC, leída; Marín y Salas, de segunda mano) sin darla por comprobada, y
+deja anotada la de 1942. **Falta:** leer directamente a Salas
+(1978) o la prensa de abril de 1945. La *Guía de Caracas* de Arreaza (1942) podría decir si seguía en pie, pero su
+ejemplar está restringido (`fuentes/mapas/1942-princeton-guia-de-caracas-arreaza/ficha.json`).
+
+## El solar en 1946 y las manzanas (R13)
+
+Lectura del 28-11-2026 sobre el mosaico DCN de 1936 (0,5 m/px) y el plano de 1946 calzado (nivel «grande»,
+1,14 m/px; calce RMS 2,07 m), recorte 7650,7635–8170,8155:
+
+- **1936.** El anillo cae dentro del vacío interior de su cuadra (blanco en el plano), entre la calle Oeste al norte,
+  el callejón «H» al oeste y la quebrada Caroata al sureste. El círculo exterior del modelo (29 m de radio) coincide
+  con el anillo dibujado: la posición del hito es la del plano y no se mueve.
+- **1946.** Donde estuvo el circo el plano deja un solar en blanco, sin edificar; el resto de la cuadra sigue
+  edificado. Coincide con el «terreno baldío» que describe FAC. El visor no levanta nada ahí en 1946, y no se
+  inventa el teatro posterior.
+- **Por qué mide «a caballo» (R13).** La cuadra real es una sola, pero en los datos está partida en tres polígonos
+  según la época en que nació cada pedazo: `M4-0353-A0` (1911, 41 % del recinto del circo), `U1843-0224-A0` (1843,
+  24 %) y `V1772-36189-0-0` (1772, 9 %). El circo no pisa el borde de una cuadra: pisa las costuras entre esos
+  pedazos. La tabla de [`manzanas-hitos.md`](manzanas-hitos.md) retira `U1843-0224-A0` (51 % ocupada) en 1911 y
+  1936 y deja el cruce con `M4-0353-A0` como límite. Eso no cambia acá.
+- **El solar vuelve en 1946 (PR #315).** Con los datos publicados hasta el 28-11-2026, en 1946 `U1843-0224-A0` no
+  volvía aunque el circo ya no estaba: quedaba un hueco de unos 1.365 m² con un lazo de suelo de calle y un árbol del
+  plano en (7856, 7969) px (captura `metropolitano-1946.webp`, de antes del arreglo). `tools/manzanas-modernas.mjs`
+  descartaba las retiradas que ya ningún hito retiraba. Ahora vuelven como manzana: suelo de manzana, sin casas ni
+  árboles generados (el solar en blanco del plano). Detalle, medición de las seis épocas y capturas de antes y después
+  en [`manzanas-hitos.md`](manzanas-hitos.md#cuando-el-hito-ya-no-está-la-manzana-vuelve). **Falta regenerar y
+  publicar los datos.** Queda igual la banda de calle entre los tres pedazos de la cuadra, que el plano no dibuja.
+
+### Capturas de las seis épocas
+
+Misma cámara (centro 7909,7895 px, 300 m de distancia), `main` con los datos regenerados con R13 (`09730ac`),
+28-11-2026. El circo está en 1911 y 1936; en 1946 queda el hueco descrito arriba.
+
+| 1772 | 1843 | 1889 |
+| --- | --- | --- |
+| ![1772](capturas/circos-257/metropolitano-1772.webp) | ![1843](capturas/circos-257/metropolitano-1843.webp) | ![1889](capturas/circos-257/metropolitano-1889.webp) |
+
+| 1911 | 1936 | 1946 |
+| --- | --- | --- |
+| ![1911](capturas/circos-257/metropolitano-1911.webp) | ![1936](capturas/circos-257/metropolitano-1936.webp) | ![1946](capturas/circos-257/metropolitano-1946.webp) |
 
 ## Instalación
 
