@@ -39,6 +39,7 @@ export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon,
   .flatMap(h=>{
    const comun={id:h.id,nace:h.nace,muere:h.muere,suprime:h.suprime??[],transitable:h.transitable,patio:h.patio}
    const fijas=h.planta?.length?[{...comun,planta:h.planta}]:[]
-   const etapas=(h.plantaPorEpoca??[]).map(f=>({...comun,nace:f.nace??h.nace,muere:f.muere??h.muere,planta:f.poligonos}))
+   // una etapa puede traer su propio recinto (`suprime`): lo que el hito reserva mientras esa etapa está en pie
+   const etapas=(h.plantaPorEpoca??[]).map(f=>({...comun,...(f.suprime?{suprime:f.suprime}:{}),nace:f.nace??h.nace,muere:f.muere??h.muere,planta:f.poligonos}))
    return [...fijas,...etapas]
   })

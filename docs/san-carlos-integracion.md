@@ -76,25 +76,73 @@ Certeza: **alta** = el documento lo dice o lo dibuja; **media** = una fuente sec
 
 ## R13: el hito y las manzanas
 
-Medido con `medirHitos` (`tools/hitos-manzanas.mjs`) contra los informes de retiro de los datos completos
-(`fuentes/derivados/retiro<año>/`, generados con `27abd10`):
+El hito reserva **el recinto documentado de cada época**: en 1889, el cuadro (72,4 × 77 m, 5.575 m²); desde 1911,
+el contorno completo (7.117 m²). Medido con `medirHitos` (`tools/hitos-manzanas.mjs`) contra los informes de retiro
+de los datos completos:
 
-| Época | Manzana | Área (m²) | Recinto en la manzana | Manzana bajo el recinto | Clase | Decisión |
-|---|---|---:|---:|---:|---|---|
-| 1772, 1843 | — | | | | sin cruces (el hito no existe) | |
-| 1889–1946 | `U1843-0051-A0` | 7.015 | 15,0 % | 15,2 % | grande | **retirar** |
-| 1889–1946 | `U1843-0053-A0` | 9.074 | 12,5 % | 9,8 % | a caballo | conservar |
-| 1911–1946 | `M4-0081-A1` | 4.217 | 56,6 % | 95,5 % | grande | **retirar** |
+| Época | Manzana | Área (m²) | Clase | Decisión |
+|---|---|---:|---|---|
+| 1772, 1843 | — | | sin cruces (el hito no existe) | |
+| 1889 | `U1843-0051-A0` | 7.015 | roce | conservar |
+| 1889–1946 | `U1843-0053-A0` | 9.074 | a caballo | conservar |
+| 1911–1946 | `M4-0081-A1` | 4.217 | grande (95,5 % bajo el recinto) | **retirar** |
+| 1911–1946 | `U1843-0051-A0` | 7.015 | a caballo (15,2 % bajo el recinto) | conservar |
 
 - `M4-0081-A1` es la manzana del propio cuartel desde 1911: el hito es **grande** y la retira entera, como manda R13.
-- `U1843-0051-A0` es el cuadro «s» de Jesurún (el cuartel mismo, 45 m al este): el generador la arrastra por
-  continuidad hasta 1946 y la regla la retira desde 1889. **Ojo**: su mitad este cae donde el plano de 1936 dibuja
-  otra manzana; al retirarla se pierden esas casas hasta que el generador la parta. Queda pendiente.
+- `U1843-0051-A0` es el cuadro «s» de Jesurún (el cuartel mismo, corrido unos 45 m al este por el calce de 1843),
+  que el generador arrastra por continuidad hasta 1946. Solo su franja oeste cae bajo el cuartel; en el resto, el
+  plano de 1936 dibuja otra manzana. **No se retira**: se conserva con sus casas.
 - `U1843-0053-A0` (la de la Quinta Guzmán) solo roza: es el margen del calce.
 
-**Este PR no regenera los datos.** Hasta que se regeneren, la reserva actúa al cargar (`suprime`, `sinArboles`,
-`solarCompleto`): esconde las casas y árboles que pisan el solar, y el resto de esas manzanas sigue a la vista
-(se ve en las capturas: media manzana genérica al este del cuartel).
+### Por qué hubo que tocar la regla, y qué se eligió
+
+La primera versión de este PR reservaba el contorno completo desde 1889 y la regla decía «grande» si el recinto es
+*mayor* que la manzana y la pisa en más de un 10 %. El recinto (7.117 m²) es un 1,4 % mayor que `U1843-0051-A0`
+(7.015 m²): por ese margen, menor que el error de leer el contorno, la manzana se retiraba entera desde 1889, con
+las diez casas que tiene fuera del cuartel. Se evaluaron tres arreglos:
+
+1. **Limitar la reserva al recinto documentado de cada época** (hecho). En 1889 el cuadro mide 5.575 m², menos que
+   la manzana, y solo la roza. No alcanza desde 1911, cuando el recinto vuelve a ser un 1,4 % mayor.
+2. **Que «mayor que la manzana» sea claramente mayor: 1,25 veces** (hecho; `MAYOR` en `tools/geo/hitos_manzanas.py`).
+   Entre los cruces que ese criterio retira, el más ajustado es 1,8 veces (Hospital Vargas): con cualquier umbral
+   entre 1,02 y 1,79 **no cambia ninguna otra decisión** en las seis épocas (medido; `docs/manzanas-hitos.md`).
+3. **Partir `U1843-0051-A0`** en el paso de manzanas de 1843 o 1889 (descartado aquí). Es lo más fiel —esa manzana
+   no debería existir con esa forma después de 1843—, pero pide reescribir cómo el generador hereda las manzanas de
+   Jesurún y vuelve a repartir casas en dos manzanas nuevas: es un cambio grande del generador, con su propia
+   medición. Queda pendiente; con 1 y 2 este PR ya no borra nada ajeno.
+
+### Medición en seco
+
+Los pasos de retiro de 1889 a 1946 corridos sobre una **copia** de los intermedios (`/disco/dev/caracas-r13-seco`,
+fuera del repo; los de `caracas-datos-sur` no se tocaron), partiendo del mismo `retiro1843`, con tres códigos:
+`main` (`4c3765b`), este PR como estaba (`875ec3b`) y este PR con el arreglo.
+
+| | 1889 | 1911 | 1936 | 1946 |
+|---|---:|---:|---:|---:|
+| **Manzanas** · `main` | 484 | 876 | 7.053 | 10.665 |
+| como estaba | 483 | 874 | 7.051 | 10.663 |
+| con el arreglo | 484 | 875 | 7.052 | 10.664 |
+| **Casas en pie** · `main` | 4.865 | 5.978 | 15.335 | 19.346 |
+| como estaba | 4.852 | 5.955 | 15.312 | 19.323 |
+| con el arreglo | 4.865 | 5.968 | 15.325 | 19.336 |
+| **Casas en `U1843-0051-A0`** (fuera del recinto) · `main` | 13 (10) | 13 (10) | 13 (10) | 13 (10) |
+| como estaba | 0 | 0 | 0 | 0 |
+| con el arreglo | 13 (10) | 13 (10) | 13 (10) | 13 (10) |
+| **Árboles** (bytes de `arboles.bin`) · `main` | 434.608 | 505.152 | 692.696 | 910.768 |
+| como estaba | 434.560 | 504.928 | 692.296 | 910.192 |
+| con el arreglo | 434.608 | 505.024 | 692.440 | 910.384 |
+| **Manzanas que retira el cuartel** · como estaba | `U1843-0051-A0` | + `M4-0081-A1` | igual | igual |
+| con el arreglo | ninguna | `M4-0081-A1` | igual | igual |
+
+- Con el arreglo, **1889 queda idéntico a `main`** (mismas manzanas, casas y árboles), y desde 1911 la única
+  diferencia es la manzana propia del cuartel, `M4-0081-A1`: una manzana y diez casas menos.
+- Como estaba, se iban además las 13 casas de `U1843-0051-A0`, diez de ellas fuera del recinto.
+- Las tres casas de `U1843-0051-A0` que caen bajo el cuartel siguen en los datos y las esconde la reserva al
+  cargar, como hoy.
+- Las demás retiradas (Hospital Vargas, Capitolio, cementerios…) son las mismas en las tres corridas.
+
+**Este PR no regenera los datos publicados.** Hasta que se regeneren, la reserva actúa al cargar (`suprime`,
+`sinArboles`, `solarCompleto`) y esconde las casas y árboles que pisan el recinto de cada época.
 
 ## Qué queda abierto de #248
 
@@ -103,5 +151,6 @@ Medido con `medirHitos` (`tools/hitos-manzanas.mjs`) contra los informes de reti
 - 1843: qué quedaba en pie. La manzana genérica de 1843 sigue ahí.
 - Garitas, enfermería, arcos del patio y Comandancia de 1946: sin forma ni lugar documentados.
 - La contradicción «dos pisos» (guía CCS) frente a un piso (fotos de 2008).
-- Regenerar y publicar los datos; partir `U1843-0051-A0`.
+- Regenerar y publicar los datos.
+- Partir `U1843-0051-A0` en el generador: sigue en pie, con casas genéricas, al este del cuartel.
 - La leyenda de Razetti (n.º 36) sin transcribir.

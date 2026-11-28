@@ -39,13 +39,19 @@ ROCE_M2 = 1  # menos que esto en común es el calce, no un cruce
 OCUPA_BUENA_PARTE = .5  # los recintos cubren al menos la mitad de la manzana: es de ellos, se retira
 CABE = .75              # al menos tres cuartos del recinto caen en la manzana: el hito está dentro de ella
 ROCE = .1               # menos de un décimo en común: no se distingue del error de calce (7,6 m en una cuadra de 100 m)
+# «Mayor que la manzana» es claramente mayor: un recinto del tamaño de la manzana (el Cuartel San Carlos mide 7.117 m²
+# y la manzana vecina que pisa en un 15 %, 7.015) no la hace suya, y retirarla entera se lleva casas que no son del
+# hito. Entre los cruces que esta cláusula retira, el recinto más ajustado es 1,8 veces la manzana (Hospital Vargas
+# sobre M5-1088-A0): cualquier valor entre 1,02 y 1,79 da la misma tabla.
+MAYOR = 1.25
 
 
 def clase(fila):
-    """grande: ocupa buena parte de la manzana, o es mayor que ella y la pisa más que un roce. chico: cabe
-    dentro. roce: lo común es marginal para los dos. a caballo: ni cabe ni manda (queda como límite)."""
+    """grande: ocupa buena parte de la manzana, o es claramente mayor que ella (MAYOR veces) y la pisa más que un
+    roce. chico: cabe dentro. roce: lo común es marginal para los dos. a caballo: ni cabe ni manda (queda como
+    límite)."""
     en_manzana, del_hito = fila['manzanaBajoRecinto'], fila['recintoEnManzana']
-    if en_manzana >= OCUPA_BUENA_PARTE or (fila['areaRecintoM2'] > fila['areaManzanaM2'] and en_manzana >= ROCE):
+    if en_manzana >= OCUPA_BUENA_PARTE or (fila['areaRecintoM2'] > MAYOR*fila['areaManzanaM2'] and en_manzana >= ROCE):
         return 'grande'
     if del_hito >= CABE:
         return 'chico'

@@ -1,4 +1,4 @@
-{"regla":"specs/13-reglas-de-construccion.md, R13","umbrales":{"ocupaBuenaParte":0.5,"cabe":0.75,"roce":0.1},"epocas":[
+{"regla":"specs/13-reglas-de-construccion.md, R13","umbrales":{"ocupaBuenaParte":0.5,"cabe":0.75,"roce":0.1,"mayor":1.25},"epocas":[
   {"año":1772,"epoca":1,"manzanas":252,
   "retiradas":[
    {"id":"U1772-0203","hitos":["capitolio"],"ocupacion":0.9644,"motivo":"ocupa la mayor parte","areaM2":16614.9636}
