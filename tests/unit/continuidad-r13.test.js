@@ -97,6 +97,13 @@ describe('muertes que la R13 no explica', () => {
       .toEqual([{ casa: 8, motivo: 'su manzana sigue en pie' }])
   })
 
+  it('una manzana retirada a medias: basta un texel suyo en pie, aunque no sea el de la casa', () => {
+    const casiVacia = ['............', '............', '............', '............', '.#.....####.', '............']
+    const hueco = { campo: campoDe(ANTES, casiVacia), canal: 1 }
+    expect(muertesSinR13({ muertas: [enA], antes, ahora: hueco, recintos: [HITO_SOBRE_A] }))
+      .toEqual([{ casa: 7, motivo: 'su manzana sigue en pie' }])
+  })
+
   it('una manzana que desaparece sin que ningún hito la pise', () => {
     expect(muertesSinR13({ muertas: [enA], antes, ahora, recintos: [] }))
       .toEqual([{ casa: 7, motivo: 'ningún hito pisa su manzana' }])

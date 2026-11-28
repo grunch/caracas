@@ -67,8 +67,9 @@ const cajaDe = (poligono) => poligono.reduce(([a, b, c, d], [x, y]) => [Math.min
 /**
  * Las casas que murieron sin que la R13 lo explique: [{ casa, motivo }]. `muertas` son las que estaban en pie en la
  * época anterior y no en esta ([{ casa, huella }], la huella en px del plano); `antes` y `ahora`, el campo y el canal
- * de cada época ({ campo, canal }); `recintos`, los de los hitos en pie en esta. La R13 explica una muerte si en
- * esta época ya no hay manzana bajo la casa y la manzana en que estaba pisa el recinto de un hito.
+ * de cada época ({ campo, canal }); `recintos`, los de los hitos en pie en esta. La R13 explica una muerte si la
+ * manzana en que estaba la casa ya no existe en esta época (ninguno de sus texeles, ni bajo la casa) y pisaba el
+ * recinto de un hito.
  */
 export function muertesSinR13({ muertas, antes, ahora, recintos }) {
   const zonas = recintos.map((poligono) => ({ poligono, caja: cajaDe(poligono) }))
@@ -76,24 +77,24 @@ export function muertesSinR13({ muertas, antes, ahora, recintos }) {
     const p = centroDe(antes.campo, k)
     return zonas.some(({ poligono, caja: [x0, y0, x1, y1] }) => p[0] >= x0 && p[0] <= x1 && p[1] >= y0 && p[1] <= y1 && puntoEnPoligono(p, poligono))
   }
-  const retiradas = new Map() // por texel de la manzana de antes: ¿la pisa un hito?
+  // la manzana se retira entera: no queda en pie ninguno de sus texeles (los campos pueden tener cajas distintas)
+  const sigueEnPie = (k) => hayManzana(ahora.campo, ahora.canal, texelDe(ahora.campo, centroDe(antes.campo, k)))
+  const motivos = new Map() // por texel de la manzana de antes: por qué la R13 no explica sus muertes (null: sí)
   const sin = []
   for (const { casa, huella } of muertas) {
     const centro = centroDeHuella(huella)
-    if (hayManzana(ahora.campo, ahora.canal, texelDe(ahora.campo, centro))) {
-      sin.push({ casa, motivo: 'su manzana sigue en pie' })
-      continue
-    }
     const k = texelDe(antes.campo, centro)
-    if (!retiradas.has(k)) {
+    if (!motivos.has(k)) {
       const manzana = manzanaDe(antes.campo, antes.canal, k)
-      const pisada = manzana.some(pisaUnHito)
-      for (const t of manzana) retiradas.set(t, pisada)
-      if (!manzana.length) retiradas.set(k, null)
+      const motivo = !manzana.length ? 'no estaba en una manzana'
+        : manzana.some(sigueEnPie) ? 'su manzana sigue en pie'
+          : manzana.some(pisaUnHito) ? null : 'ningún hito pisa su manzana'
+      for (const t of manzana) motivos.set(t, motivo)
+      motivos.set(k, motivo)
     }
-    const pisada = retiradas.get(k)
-    if (pisada === null) sin.push({ casa, motivo: 'no estaba en una manzana' })
-    else if (!pisada) sin.push({ casa, motivo: 'ningún hito pisa su manzana' })
+    // bajo la casa tampoco hay otra manzana (una nueva encima de la retirada)
+    const motivo = hayManzana(ahora.campo, ahora.canal, texelDe(ahora.campo, centro)) ? 'su manzana sigue en pie' : motivos.get(k)
+    if (motivo) sin.push({ casa, motivo })
   }
   return sin
 }
