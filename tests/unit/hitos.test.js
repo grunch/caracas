@@ -111,7 +111,7 @@ describe('construirHitos', () => {
     // el tope sube de 630.000 a 645.000.
     // La Candelaria (2.555, #243) cabía en los topes: 644.174 y 1.123.547. Las Mercedes (1.351, #244): 645.525 y 1.124.898;
     // los topes suben de 645.000 a 647.000 y de 1.125.000 a 1.127.000.
-    // San Mauricio (1.322) y la Santa Capilla por etapas (de 756 a 1.846), #253: +2.412, medido 647.937 y 1.127.310;
+    // San Mauricio (1.322) y la Santa Capilla por etapas (de 756 a 1.846), #253: +2.412; con San Pablo (988, #246), medido 648.925 y 1.128.298;
     // los topes suben a 650.000 y 1.130.000 (0,5 % y 0,3 %).
     expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(650_000)
     // Total medido con terrenos siguiendo el DEM: 1.080.573 entonces; con el Puente de Hierro, 1.091.159; con el cruce de Sur 7, 1.099.919;
