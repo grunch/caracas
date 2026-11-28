@@ -32,9 +32,10 @@ máquina**.
   datos completos y siguen sin pasar en la rama: **no se tocaron**.
 
 Triángulos de los hitos (tests unitarios): convento 1.400, solar de 1889 590 y mercado 593; 2.583 en total.
-Con `main`: 646.757 antes de 1946 y 1.126.130 en total.
+Con `main` en `fab5b25`: 646.757 antes de 1946 y 1.126.130 en total; con Las Mercedes (#316, fusionada después de
+medir), 648.108 y 1.127.481.
 
 Build (`npx vite build` y `node tools/rendimiento/presupuesto-build.mjs`): entrada 310,6 kB (306,3 en `main`) y
-workers 176,9 kB (173,6 en `main`; tope de 174). Los textos de `fuente` y `verificar` viajan en los dos workers.
+workers 176,9 kB (173,6 en `main`). Con Las Mercedes, 311,5 y 177,6 kB (tope de workers: de 176 a 179). Los textos de `fuente` y `verificar` viajan en los dos workers.
 
 **No se midió**: el sitio construido, una máquina en reposo, un teléfono, ni el render por software.
