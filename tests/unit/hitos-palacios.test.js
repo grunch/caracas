@@ -150,8 +150,9 @@ describe('los edificios civiles', () => {
     // (topes 630→645 mil y 1.110→1.125 mil).
     // La Candelaria (2.555, #243) cabía en los topes: 644.174 y 1.123.547. Las Mercedes (1.351, #244): 645.525 y 1.124.898;
     // los topes suben de 645.000 a 647.000 y de 1.125.000 a 1.127.000.
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(647_000)
-    expect(d.indices.length / 3).toBeLessThan(1_127_000)
+    // El Palacio Municipal (2.596, #252): 648.121 y 1.127.494; los topes suben a 650.000 y 1.130.000.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(650_000)
+    expect(d.indices.length / 3).toBeLessThan(1_130_000)
     expect(d.rangos.length).toBe(HITOS.length)
   }, 15_000)
 })

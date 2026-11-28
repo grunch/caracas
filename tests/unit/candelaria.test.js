@@ -121,7 +121,7 @@ describe('La Candelaria (#243)', () => {
   const h = HITOS.find((x) => x.id === 'candelaria')
   const origen = coords.aMundo(candelaria.x, candelaria.y)
 
-  test('está en HITOS, al final para no mover las semillas de los anteriores, y pasa la validación', () => {
+  test('está en HITOS, después de los que ya estaban (no mueve sus semillas), y pasa la validación', () => {
     expect(h).toBe(candelaria)
     expect(HITOS[HITOS.findIndex((x) => x.id === 'san-jose') + 1].id).toBe('candelaria') // detrás de los templos de #259
     expect(validarHitos([candelaria], PLANO)).toEqual([])

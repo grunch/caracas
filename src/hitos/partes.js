@@ -25,6 +25,7 @@ import { farol, estatuaEcuestre, puesto, tramoDeGaleria, portada } from './objet
 import { torre, fachadaBarroca, portadaLateral, cupulaConTambor, ventanas, iglesia } from './iglesias.js'
 import { palacio, portico, remateConEscudo, frenteNeogotico } from './palacios.js'
 import { temploDeNaves } from './templo-naves.js'
+import { palacioMunicipal } from './palacio-municipal.js'
 
 const ALTO_LOSA_M = 0.25
 const MARGEN_TOLDO_M = 0.7 // lo que un toldo pasa de su largo: el alero y el giro
@@ -112,6 +113,9 @@ export const PARTES = Object.freeze({
 
   /** Templo de tres naves con la central más alta, torres, brazos y cúpulas donde se pidan (src/hitos/templo-naves.js). */
   temploDeNaves(p, medidas) { temploDeNaves(p, medidas) },
+
+  /** El Palacio Municipal de 1906: cuerpos de dos pisos alrededor de un patio descentrado (src/hitos/palacio-municipal.js). */
+  palacioMunicipal(p, medidas) { palacioMunicipal(p, medidas) },
 
   /** Palacio de crujías alrededor de un patio, centrado en (a, b). */
   palacio(p, { a = 0, b = 0, ...medidas }) { palacio(p.en(a, 0, b), medidas) },

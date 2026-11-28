@@ -29,7 +29,7 @@ describe('Las Mercedes (#244)', () => {
   const h = HITOS.find((x) => x.id === 'las-mercedes')
   const origen = coords.aMundo(laMerced.x, laMerced.y)
 
-  test('está en HITOS, al final para no mover las semillas de los anteriores, y pasa la validación', () => {
+  test('está en HITOS, detrás de los que ya estaban (no mueve sus semillas), y pasa la validación', () => {
     expect(h).toBe(laMerced)
     expect(HITOS[HITOS.findIndex((x) => x.id === 'candelaria') + 1].id).toBe('las-mercedes') // detrás de La Candelaria
     expect(validarHitos([laMerced], PLANO)).toEqual([])

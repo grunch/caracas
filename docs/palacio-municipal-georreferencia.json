@@ -1,0 +1,317 @@
+{
+  "fuente": "Plano DCN de 1936 (mosaico del repositorio, fuentes/mapas/1936-archiveorg-caracas-dcn-hoja1 y hoja2), contrastado con el plano de 1946 (fuentes/mapas/1950-archiveorg-plano-de-caracas-dcn) y con los planos calzados de 1843, 1889 y 1911",
+  "sistema": "píxeles del mosaico base de 1936, 0,5 m por píxel; a = metros a lo largo del eje (de oeste a este, por el frente de la plaza), b = metros a su derecha (hacia el sur), desde el centro del recuadro (las medidas del patio); el hito se ancla al pie del frente",
+  "certeza": "lectura a ojo sobre una ampliación del mosaico (8 px de pantalla por píxel) con rejilla de 10 px; el trazo del plano mide de 1 a 2 px (0,5 a 1 m). No es mensura catastral.",
+  "palacio-municipal": {
+    "centro_px": [
+      8883.5,
+      7014
+    ],
+    "origen_del_hito_px": [
+      8900,
+      6940.84
+    ],
+    "nota_origen": "El hito se ancla al pie del frente sobre la plaza, en su medio (37,5 m al norte del centro): el terreno baja unos 3 m hacia el sur (cotas 917,119 y 911,183 del plano en las esquinas de la cuadra) y, anclado al centro, la planta baja del frente quedaba medio enterrada.",
+    "eje": [
+      0.9755,
+      0.22
+    ],
+    "recuadro_rayado_1936_px": {
+      "rotulo": "PALACIO DE JUSTICIA",
+      "esquina_noroeste": [
+        8853,
+        6929
+      ],
+      "esquina_noreste": [
+        8940,
+        6951
+      ],
+      "esquina_sureste": [
+        8916,
+        7097
+      ],
+      "esquina_suroeste": [
+        8825,
+        7079
+      ],
+      "lados_m": {
+        "norte_sobre_la_plaza": 44.9,
+        "este": 74.0,
+        "sur": 46.4,
+        "oeste_sobre_Sur_2": 76.3
+      },
+      "nota": "Cuadrilátero algo torcido: el frente gira 14° respecto del este y el fondo 11°. El modelo usa el rectángulo medio de 45,5 × 75 m; sus esquinas quedan a 1,5, 2,2, 2,3 y 1,5 m de las leídas."
+    },
+    "patio_1936_px": {
+      "esquinas": [
+        [
+          8873,
+          6962.5
+        ],
+        [
+          8915.6,
+          6972.5
+        ],
+        [
+          8909,
+          7009
+        ],
+        [
+          8867.5,
+          7001
+        ]
+      ],
+      "medidas_m": {
+        "ancho": 21.9,
+        "fondo": 19.4
+      },
+      "centro_en_el_marco_m": {
+        "a": 0.8,
+        "b": -14.4
+      },
+      "nota": "Queda en la mitad norte del recuadro: crujía de 13,4 m hacia la plaza, 12,6 m al oeste, 11 m al este y un cuerpo de 42 m al sur."
+    },
+    "no_modelado_1936": [
+      "tres patios chicos en el cuerpo de atrás (uno de unos 3 × 10 m junto al muro oeste, otro de 7 × 3 m al centro y dos franjas de 20 × 2 m al sur)",
+      "la franja en blanco de unos 10 × 45 m al este del cuerpo de atrás, fuera del rayado"
+    ],
+    "1946": {
+      "esquinas_px": {
+        "noroeste": [
+          8858,
+          6933
+        ],
+        "noreste_con_escalon": [
+          8952,
+          6957
+        ],
+        "suroeste": [
+          8832,
+          7082
+        ]
+      },
+      "patio_px": [
+        [
+          8872,
+          6965
+        ],
+        [
+          8912,
+          6975
+        ],
+        [
+          8905,
+          7010
+        ],
+        [
+          8866,
+          7000
+        ]
+      ],
+      "nota": "Mismo contorno y mismo patio, sin rayado ni rótulo; diferencias de 2 a 3 m (calce del plano: 2,07 m RMS). En el frente añade un escalón de 6 × 7 m en la esquina noreste que el de 1936 no dibuja."
+    }
+  },
+  "otros_planos": {
+    "1772": {
+      "plano": "fuentes/mapas/1772-pares-agi-exato-mapa (calce 18,7 m RMS)",
+      "lectura": "la cuadra entera en rojo, sin separar edificios; ninguna letra ni rótulo sobre ella"
+    },
+    "1843": {
+      "plano": "fuentes/mapas/1843-nypl-jesurun-facsimil-muller-stapler (calce 12,4 m RMS)",
+      "lectura": "tres solares en blanco (edificios públicos) sobre el frente de la plaza, de unos 30 m de fondo, con su letra debajo, dentro del rayado de la cuadra",
+      "solares_px": {
+        "L_Cap_de_la_Universidad": {
+          "frente": [
+            [
+              8853,
+              6927
+            ],
+            [
+              8908,
+              6940
+            ]
+          ],
+          "letra": [
+            8862,
+            7010
+          ]
+        },
+        "k_Universidad": {
+          "frente": [
+            [
+              8908,
+              6940
+            ],
+            [
+              8992,
+              6958
+            ]
+          ],
+          "letra": [
+            8925,
+            7015
+          ]
+        },
+        "j_Palacio_Arzobispal": {
+          "frente": [
+            [
+              8992,
+              6958
+            ],
+            [
+              9040,
+              6968
+            ]
+          ],
+          "letra": [
+            9003,
+            7010
+          ]
+        }
+      },
+      "nota": "La letra K mayúscula que queda al oeste, en la otra cuadra, es el Convento de Concepciones."
+    },
+    "1889": {
+      "plano": "fuentes/mapas/1889-bnf-mestre (calce 7,6 m RMS)",
+      "lectura": "tres solares numerados sobre el frente: 7 «Consejo municipal» (en la esquina de Las Monjas; más hondo, hasta unos 55 m de la plaza), 8 «Gobernación» y 9 «Palacio arzobispal» (en la esquina de Las Gradillas)",
+      "solares_px": {
+        "7": [
+          [
+            8853,
+            6935
+          ],
+          [
+            8905,
+            6947
+          ],
+          [
+            8892,
+            7052
+          ],
+          [
+            8840,
+            7040
+          ]
+        ],
+        "8": [
+          [
+            8905,
+            6947
+          ],
+          [
+            8968,
+            6962
+          ],
+          [
+            8960,
+            7020
+          ],
+          [
+            8900,
+            7008
+          ]
+        ],
+        "9": [
+          [
+            8968,
+            6962
+          ],
+          [
+            9032,
+            6978
+          ],
+          [
+            9020,
+            7035
+          ],
+          [
+            8960,
+            7020
+          ]
+        ]
+      }
+    },
+    "1911": {
+      "plano": "fuentes/mapas/1911-princeton-plano-de-caracas-razetti (calce 6,7 m RMS)",
+      "lectura": "cuatro bloques rojos numerados: 12 «Concejo Municipal» (esquina de Las Monjas, sobre Sur 2), 11 «Palacio de Justicia (Gobernación, Tribunales, Prefectura, Rentas, Ingeniería Municipal)» (sobre la plaza, de Gradillas a Monjas), 13 «Cuartel de Policía» (al sur del 12, sobre Sur 2) y 18 «Palacio Arzobispal» (esquina de Gradillas)",
+      "bloques_px": {
+        "12": [
+          [
+            8858,
+            6958
+          ],
+          [
+            8900,
+            6968
+          ],
+          [
+            8895,
+            7015
+          ],
+          [
+            8850,
+            7005
+          ]
+        ],
+        "11": [
+          [
+            8900,
+            6950
+          ],
+          [
+            8938,
+            6960
+          ],
+          [
+            8922,
+            7030
+          ],
+          [
+            8895,
+            7025
+          ]
+        ],
+        "13": [
+          [
+            8845,
+            7010
+          ],
+          [
+            8920,
+            7030
+          ],
+          [
+            8915,
+            7062
+          ],
+          [
+            8838,
+            7045
+          ]
+        ],
+        "18": [
+          [
+            8940,
+            6960
+          ],
+          [
+            9030,
+            6980
+          ],
+          [
+            9022,
+            7020
+          ],
+          [
+            8935,
+            7002
+          ]
+        ]
+      }
+    }
+  },
+  "vecinos": {
+    "palacio-arzobispal": "Las leyendas de 1843 (j), 1889 (9) y 1911 (18, «E. 2, esquina Gradillas») lo ponen en esta misma cuadra, en el solar de la esquina de Las Gradillas, al este del conjunto. El hito `palacio-arzobispal` del repo está en la cuadra de la Catedral (9096, 6917), al otro lado de la calle: queda fuera de este trabajo y se anota como pendiente.",
+    "universidad": "El hito `universidad` (8645, 7192) es el convento de San Francisco, unos 150 m al suroeste, frente al Capitolio: la universidad estuvo en el seminario hasta 1856 o 1857 y después allá. No se solapan."
+  }
+}

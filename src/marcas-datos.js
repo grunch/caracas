@@ -79,11 +79,18 @@ export const MARCAS = Object.freeze([
     dudas: 'Que la iglesia de San Mauricio estuviera en este mismo solar en 1772 y 1843 es CG.' },
   { id: 'altagracia', hito: 'altagracia', nombre: 'Altagracia', nivel: 2, alto: 11, fuente: `${P36} («Iglesia de Altagracia»); ${P89} (templo II); ${L43('G', 'Altagracia')}`,
     dudas: 'La leyenda de 1843 ya la nombra (G). Desde qué época antes, a verificar: va desde 1772, como el hito.' },
-  { id: 'seminario', nombre: 'Seminario y Universidad', x: 8950, y: 6975, nace: 1, muere: 3, nivel: 3, alto: 8,
-    nota: 'El seminario de Santa Rosa, primera sede de la universidad.', fuente: CG,
-    dudas: 'Ubicación por la cuadra (el lado sur de la plaza), no por un rótulo; hasta cuándo, sin cotejar: el plano de 1889 ya pone ahí el Concejo Municipal. La leyenda de 1843 nombra una «Universidad» (k) y la «Capilla de la Universidad» (L); falta ver en el plano si sus letras caen en esta cuadra.' },
-  { id: 'concejo', nombre: 'Concejo Municipal', x: 8870, y: 6990, nace: 3, muere: 5, nivel: 3, alto: 9, fuente: `${P89} (7 «Consejo municipal», lado sur de la plaza)` },
-  { id: 'justicia', nombre: 'Palacio de Justicia', x: 8880, y: 6990, nace: 5, nivel: 3, alto: 10, fuente: `${P36} («Palacio de Justicia»)` },
+  // El solar del Seminario de Santa Rosa en la esquina de Las Monjas: un solo lugar, con el nombre que le da cada plano
+  // (docs/palacio-municipal-integracion.md). El edificio se dibuja desde 1911; antes va solo el nombre.
+  { id: 'palacio-municipal', hito: 'palacio-municipal', x: 8883.5, y: 7014, nace: 1, nivel: 3, alto: 12, // el punto, al centro del solar
+    nombres: [
+      [1, 'Seminario de Santa Rosa y Universidad', 'El colegio seminario de Santa Rosa de Lima, que una real cédula de 1721 hizo también universidad.'],
+      [2, 'Universidad y su capilla', 'La Universidad y la capilla de Santa Rosa, donde se declaró la independencia en 1811.'],
+      [3, 'Concejo Municipal y Gobernación'],
+      [4, 'Concejo Municipal y Palacio de Justicia'],
+      [5, 'Palacio de Justicia'],
+    ],
+    fuente: `${L43('k', 'Universidad')}; ${L43('L', 'Cap. de la Universidad')}; ${P89} (7 «Consejo municipal» y 8 «Gobernación»); ${P11} (11 «Palacio de Justicia» y 12 «Concejo Municipal»; al fondo, 13 «Cuartel de Policía»); ${P36} («Palacio de Justicia»); seminario (1673–1696), cierre de 1872 y reforma de 1904–1906: catálogo del IPC, citado por IAM Venezuela, https://iamvenezuela.org/2016/07/palacio-municipal-sede-de-la-alcaldia-del-municipio-libertador/; obras de 1872 y de 1906: Guía de Arquitectura y Paisaje de Caracas, https://guiaccs.com/en/obras/municipal-palace-of-caracas/; universidad (1721), daños de 1812 y reparación pedida en 1829: Luisvel Ortiz, «De Seminario colonial a Museo: el Palacio Municipal de Caracas», https://cronistacss-cal.mincyt.gob.ve/wp-content/uploads/2025/10/Concejo-Municipal-PATRIOMONIO-1.pdf`,
+    dudas: 'El nombre de 1772 no sale de un plano: la leyenda de ese año no se transcribió, y va el de la historia del edificio (IPC, citado por IAM Venezuela). En 1843 la leyenda nombra la Universidad y su capilla, no el seminario, que seguía en el mismo edificio. El plano de 1946 no rotula el edificio: se mantiene el nombre de 1936 sin saber hasta cuándo estuvieron ahí los tribunales.' },
   { id: 'gobernacion', nombre: 'Palacio de la Gobernación', x: 8960, y: 6705, nace: 5, nivel: 3, alto: 12, fuente: `${P36} («Palacio de la Gobernación»)` },
   { id: 'carmelitas', nombres: [[1, 'Convento de las Carmelitas'], [3, 'Ministerio de Hacienda']], x: 8730, y: 6300, nace: 1, nivel: 3, alto: 9,
     fuente: `${P89} (18 «Mº de Hacienda», esquina «Carmelitas»); ${P36} («Minist. de Hacienda»); convento: ${CG}; en 1843: ${L43('H', 'Conv. de Carmelitas')}`, dudas: SIN_LEYENDA },
