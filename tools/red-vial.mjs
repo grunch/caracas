@@ -5,6 +5,7 @@ import { resolve, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { ANIOS_RED, fuenteDeFicha, importarReferencias, proyeccionesIndebidas, redDeEpoca, unirRegistros, validarRedVial, VERSION_RED, SISTEMA_RED } from './red-vial-lib.mjs'
 import { importarPuentes } from './red-vial-puentes.mjs'
+import { catalogoEnMarkdown } from './red-vial-posterior.mjs'
 
 const raiz = fileURLToPath(new URL('../', import.meta.url))
 const leer = async (ruta) => JSON.parse(await readFile(resolve(raiz, ruta), 'utf8'))
@@ -19,6 +20,17 @@ export const PLANOS_DE_LA_RED = Object.freeze({
   1946: 'fuentes/mapas/1950-archiveorg-plano-de-caracas-dcn/ficha.json',
 })
 const VIALIDAD_POSTERIOR = 'tools/geo/referencias/vialidad-posterior-1946.json'
+const DOC_POSTERIOR = 'docs/vialidad-posterior-1946.md'
+const MARCA_DEL_CATALOGO = '<!-- catálogo: lo que sigue se genera con `node tools/red-vial.mjs catalogo`; no editar a mano -->'
+
+/** El documento del catálogo: el encabezado escrito a mano (hasta la marca) más lo generado desde el JSON. */
+export async function documentoDelCatalogo() {
+  const actual = await readFile(resolve(raiz, DOC_POSTERIOR), 'utf8')
+  const corte = actual.indexOf(MARCA_DEL_CATALOGO)
+  if (corte < 0) throw new Error(`${DOC_POSTERIOR}: falta la marca del catálogo`)
+  const encabezado = actual.slice(0, corte + MARCA_DEL_CATALOGO.length)
+  return { actual, generado: catalogoEnMarkdown(await leer(VIALIDAD_POSTERIOR), encabezado) }
+}
 
 /** Las fuentes `plano<año>`, con la fecha del documento y la que representa tomadas de la ficha de cada mapa. */
 export async function fuentesDePlanos() {
@@ -43,7 +55,12 @@ const fila = (r) => ({
 
 export async function ejecutar(args) {
   const [accion, salida] = args
-  if (!['auditar', 'exportar'].includes(accion) || args.length > 2 || (accion === 'exportar' && !salida)) throw new Error('uso: node tools/red-vial.mjs auditar | exportar <directorio>')
+  if (!['auditar', 'exportar', 'catalogo'].includes(accion) || args.length > 2 || (accion === 'exportar' && !salida)) throw new Error('uso: node tools/red-vial.mjs auditar | exportar <directorio> | catalogo')
+  if (accion === 'catalogo') {
+    const { generado } = await documentoDelCatalogo()
+    await writeFile(resolve(raiz, DOC_POSTERIOR), generado)
+    return []
+  }
   const red = await registroDelProyecto()
   const faltas = proyeccionesIndebidas(red)
   if (faltas.length) throw new Error(`Tramos proyectados antes de su apertura: ${faltas.map((f) => `${f.tramo} en ${f.año}`).join(', ')}`)

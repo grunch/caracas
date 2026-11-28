@@ -111,6 +111,7 @@ function validarFichaDeTramo(t, fuentes) {
   if (t.encuadre !== undefined) exigir(ENCUADRES.includes(t.encuadre), `${t.id}: encuadre inválido`)
   if (t.desconocido !== undefined) exigir(Array.isArray(t.desconocido) && t.desconocido.every(texto), `${t.id}: «desconocido» es una lista de textos`)
   if (t.contradicciones !== undefined) validarContradicciones(t.contradicciones, fuentes, t.id)
+  if (t.nombres_osm !== undefined) exigir(Array.isArray(t.nombres_osm) && t.nombres_osm.every(texto), `${t.id}: «nombres_osm» es una lista de nombres de la capa Hoy`)
   const citadas = (ids) => Array.isArray(ids) && ids.length > 0 && ids.every((id) => fuentes[id])
   validarNombres(t, fuentes, citadas)
   validarCronologia(t, citadas)
