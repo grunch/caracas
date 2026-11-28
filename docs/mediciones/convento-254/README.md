@@ -33,12 +33,16 @@ La vista «cerca» sale de 0,2 a 0,6 ms más lenta en la mediana de la rama. Con
 no hay una causa en el cambio que lo explique, pero **no se midió otra vez** para descartarlo.
 
 Los topes de tarea larga, bytes, memoria y triángulos del presupuesto ya no pasan en `main` con los datos completos
-y siguen sin pasar en la rama: **no se tocaron**. Tampoco los topes unitarios de triángulos de los hitos (644.354
-de 645.000 antes de 1946; 1.123.727 de 1.125.000 en total).
+y siguen sin pasar en la rama: **no se tocaron**.
 
-**Sí se subió** el tope de workers del build, de 174 a 176 kB: el build mide 309,1 kB de entrada y 175,4 kB de
-workers, contra 306,3 y 173,6 de `main`. Los 1,8 kB son el módulo del hito, que los workers cargan con sus textos
-de fuente y de pendientes.
+Después de esta medición entró en `main` Las Mercedes (#316, `580168b`) y se fusionó en la rama. **No se volvió a
+medir la carga ni el cuadro**; lo que sí se volvió a contar:
+
+- Triángulos de los hitos: 645.705 de 647.000 antes de 1946 y 1.125.078 de 1.127.000 en total (el convento suma
+  180). Los topes unitarios no se tocaron.
+- Build: 309,7 kB de entrada (tope 346) y 175,8 kB de workers, contra 174,2 de `main`. **El tope de workers (176)
+  no se tocó**, pero queda a 0,2 kB: el módulo del hito pesa 1,6 kB en los workers, que lo cargan con sus textos
+  de fuente y de pendientes. El próximo hito que entre tendrá que subirlo.
 
 **No se midió**: el sitio construido, una máquina en reposo, un teléfono, ni la época de 1772 o 1843 (la medición
 es en 1946, como las anteriores).

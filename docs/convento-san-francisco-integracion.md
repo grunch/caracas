@@ -189,9 +189,9 @@ No se halló ninguna vista de los claustros anterior a 1876, ni del observatorio
 
 ## Rendimiento
 
-180 triángulos más: 644.354 antes de 1946 y 1.123.727 en total, dentro de los topes (645.000 y 1.125.000), que
-no se tocaron. Build: entrada 309,1 kB (tope 346) y workers 175,4 kB; **el tope de workers sube de 174 a 176**
-(`main` mide 173,6). La medición de carga y de cuadro, en
+180 triángulos más: 645.705 antes de 1946 y 1.125.078 en total (con La Candelaria y Las Mercedes), dentro de los
+topes (647.000 y 1.127.000), que no se tocaron. Build: entrada 309,7 kB (tope 346) y workers 175,8 kB (tope 176,
+sin tocar; `main` mide 174,2). La medición de carga y de cuadro, hecha antes de que entrara Las Mercedes, en
 [`mediciones/convento-254`](mediciones/convento-254/README.md): nada cambia más que el ruido, salvo la vista
 «cerca», de 0,2 a 0,6 ms más lenta en la mediana, que no se volvió a medir.
 
