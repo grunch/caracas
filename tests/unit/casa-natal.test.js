@@ -48,7 +48,7 @@ function cimaEn(datos, id, epoca) {
 }
 
 describe('Casa Natal del Libertador (#247): el solar y su vida', () => {
-  test('es un hito válido, en pie en las seis épocas, y va al final de la lista', () => {
+  test('es un hito válido y está en pie en las seis épocas', () => {
     // Arrange / Act
     const problemas = validarHitos([hito], PLANO)
 
@@ -259,14 +259,19 @@ describe('Casa Natal: la marca y la ficha', () => {
 
   test('la ficha cuenta cada etapa con lo que se dibuja y lo que no', () => {
     const ficha = FICHAS['casa-natal']
-    expect(ficha.textos.map(([e]) => e)).toEqual([1, 2, 4, 5])
-    const [colonial, republicana, comercio, restaurada] = ficha.textos.map(([, t]) => t)
+    expect(ficha.textos.map(([e]) => e)).toEqual([1, 2, 3, 4, 5])
+    const [colonial, republicana, guzmancista, comercio, restaurada] = ficha.textos.map(([, t]) => t)
     expect(colonial).toMatch(/1759/) // el padrón que ya la llama «casa de don Vicente Bolívar»
     expect(colonial).toMatch(/piso alto[^.]*no se dibuja/i)
     expect(republicana).toMatch(/1812/)
     expect(republicana).toMatch(/un solo piso/)
+    // cada párrafo cuenta solo lo que ya había pasado en la época de su plano
+    expect(republicana).not.toMatch(/1876|1889/)
+    expect(guzmancista).toMatch(/1876/)
+    expect(guzmancista).toMatch(/sin prueba/)
     expect(comercio).toMatch(/puertas/)
-    expect(comercio).toMatch(/1912/)
+    expect(comercio).not.toMatch(/octubre de 1912|Sociedad Patriótica/) // la compra es posterior al plano de 1911
+    expect(restaurada).toMatch(/octubre de 1912/)
     expect(restaurada).toMatch(/1921/)
     expect(restaurada).toMatch(/mármol/)
     expect(ficha.dudas).toMatch(/altura/i)
