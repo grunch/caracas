@@ -1,7 +1,8 @@
-// Capturas comparables de Santa Rosalía, San Juan y San José (#259):
+// Capturas comparables de los templos (Santa Rosalía, San Juan y San José, #259; La Candelaria, #243):
 //   node tests/e2e/capturas-templos.mjs [url] [carpeta] [prefijo]
 // Misma cámara en las seis épocas, desde arriba y de costado (hacia la fachada). TEMPLO=san-jose saca solo ese;
-// TEMPLO_EPOCA=1911, solo esa época; TEMPLO_VISTA=arriba, solo esa vista; TEMPLO_MODO=tinta, sin color.
+// TEMPLO_EPOCA=1911, solo esa época; TEMPLO_VISTA=arriba, solo esa vista; TEMPLO_MODO=tinta, sin color;
+// TEMPLO_GPU=1, con la tarjeta de video en vez del render por software (mucho más rápido donde la hay).
 import { chromium } from '@playwright/test'
 import { mkdir } from 'node:fs/promises'
 
@@ -15,6 +16,7 @@ const TEMPLOS = {
   'santa-rosalia': { x: 74, z: 853, yaw: -Math.PI / 2 + 0.45 },
   'san-juan': { x: -1020, z: 762, yaw: Math.PI - 0.45 },
   'san-jose': { x: 831, z: -758, yaw: 0.45 },
+  candelaria: { x: 1133, z: 79, yaw: -Math.PI / 2 + 0.45 }, // docs/candelaria-georreferencia.json; mira al oeste, a su plaza
 }
 const vistasDe = ({ x, z, yaw }) => ({
   arriba: { x, z, dist: 170, yaw: 0, pitch: 1.1 },
@@ -25,7 +27,8 @@ const [soloTemplo, soloEpoca, soloVista] = [lista(process.env.TEMPLO), lista(pro
 const enTinta = process.env.TEMPLO_MODO === 'tinta'
 for (const id of soloTemplo ?? []) if (!TEMPLOS[id]) throw new Error(`TEMPLO desconocido: ${id}`)
 
-const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] })
+const GPU = process.env.TEMPLO_GPU === '1'
+const browser = await chromium.launch({ args: GPU ? ['--use-angle=gl', '--ignore-gpu-blocklist', '--enable-gpu'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] })
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
   page.on('pageerror', (e) => console.error('pageerror:', e.message))

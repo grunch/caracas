@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test'
 
-// Santa Rosalía, San Juan y San José (#259): cada uno se dibuja desde su época y no antes.
+// Santa Rosalía, San Juan y San José (#259) y La Candelaria (#243): cada uno se dibuja desde su época y no antes.
 // [id, centro en metros del mundo, época en que nace]
 const TEMPLOS = [
   ['santa-rosalia', { x: 74, z: 853 }, 2],
   ['san-juan', { x: -1020, z: 762 }, 3],
   ['san-jose', { x: 831, z: -758 }, 4],
+  ['candelaria', { x: 1133, z: 79 }, 1], // en pie en los seis planos
 ]
 
 test.use({ viewport: { width: 400, height: 300 } })
@@ -49,7 +50,7 @@ const pixelesDelTemplo = (page, id, centro, epoca) => page.evaluate(([id, centro
   }
 }, [id, centro, epoca])
 
-test('los tres templos se dibujan desde su época, no antes, y sin errores de shader', async ({ page }) => {
+test('los templos se dibujan desde su época, no antes, y sin errores de shader', async ({ page }) => {
   test.setTimeout(300_000)
   const errores = []
   page.on('pageerror', (e) => errores.push(e.message))
@@ -83,4 +84,14 @@ test('las marcas de los tres templos salen de su hito y San José tiene ficha pr
   await page.evaluate(() => window.lab.fichas.abrir('san-jose'))
   await expect(page.locator('#ficha h2')).toHaveText('San José')
   await expect(page.locator('#ficha')).toContainText('dos torres gemelas')
+})
+
+test('la marca de La Candelaria sale de su hito desde 1772 y su ficha cuenta la torre de tres cuerpos', async ({ page }) => {
+  await page.goto('/?sinintro&capture&sinsw')
+  await page.waitForFunction(() => window.lab?.ready && window.lab?.marcasDelMapa && window.lab?.fichas)
+  const marca = await page.evaluate(() => { const m = window.lab.marcasDelMapa.find((x) => x.id === 'candelaria'); return [m.hito, m.nace] })
+  expect(marca).toEqual(['candelaria', 1])
+  await page.evaluate(() => window.lab.fichas.abrir('candelaria'))
+  await expect(page.locator('#ficha h2')).toHaveText('Candelaria')
+  await expect(page.locator('#ficha')).toContainText('torre de tres cuerpos')
 })
