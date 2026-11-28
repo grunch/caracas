@@ -88,7 +88,7 @@ incorpora, entonces, información que no es de la toma de 1946, y no permite fec
 ## Decisión para el mapa de 1946
 
 - 1936 conserva el tejido previo. 1946 también: 219 techos en el corredor en las dos épocas (218 a la vista en
-  1946, por el hito del Teatro Municipal).
+  ambas: a uno lo oculta un hito).
 - No se agrega reserva de la avenida a `tools/geo/referencias/1946-reservas.json`, ni marca, ni las torres.
 - El Hotel Majestic y el Teatro Municipal siguen en pie, como ya estaban.
 - No cambia ningún dato generado: no hay nada que regenerar ni publicar.
