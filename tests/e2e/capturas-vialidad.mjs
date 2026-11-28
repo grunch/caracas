@@ -9,6 +9,7 @@ const url = process.argv[2] ?? 'http://localhost:5199/'
 const carpeta = process.argv[3] ?? 'test-results/capturas-vialidad'
 const prefijo = process.argv[4] ?? 'despues'
 const AÑOS = [[5, '1936'], [6, '1946']]
+const ESPERA_DEL_PLANO_MS = 20000
 const PLAZA = [8968.2, 6839]
 const METRO = 0.5
 // Centro del corredor, entre las esquinas de Platanal y Candilito (px del mosaico de 1936).
@@ -31,7 +32,10 @@ for (const [epoca, año] of AÑOS) {
   await pagina.evaluate((e) => window.lab.lineaDeTiempo.elegir(e), epoca)
   await pagina.waitForFunction((e) => window.lab.ciudad.U.uEpocaA.value === e && window.lab.ciudad.U.uOlaEpoca.value >= 9000, epoca, { timeout: 300000 })
   await pagina.evaluate((v) => { window.lab.cam.jump(v); window.lab.pedirCuadro(6) }, vista)
-  await pagina.waitForTimeout(4500)
+  // el plano de la época se baja aparte y entra después de las casas: sin esta espera sale el de 1936 debajo
+  await pagina.waitForTimeout(ESPERA_DEL_PLANO_MS)
+  await pagina.evaluate(() => window.lab.pedirCuadro(6))
+  await pagina.waitForTimeout(1500)
   await pagina.screenshot({ path: `${carpeta}/${prefijo}-${año}-urdaneta.png`, timeout: 400000 })
   console.log(`captura ${prefijo} ${año}`)
 }
