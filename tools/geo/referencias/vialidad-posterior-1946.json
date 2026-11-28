@@ -1,12 +1,12 @@
 {
   "nota": "Controles de fases modernas: no describen las calles predecesoras ni asignan una fecha universal a sistemas enteros. No incluyen geometría OSM.",
   "fuentes": {
-    "urdaneta1953": {"tipo":"historica","anios":[],"url":"https://fundaayc.com/2013/09/26/1953-inauguracion-de-la-avenida-urdaneta/"},
-    "ffaa1956": {"tipo":"historica","anios":[],"url":"https://fundaayc.com/2013/11/10/1956%E2%80%A2-avenida-fuerzas-armadas/"},
-    "libertador1965": {"tipo":"historica","anios":[],"url":"https://fundaayc.com/2026/09/15/1965-inauguracion-de-la-avenida-libertador/"},
-    "baralt1953": {"tipo":"historica","anios":[],"url":"https://fundaayc.com/2023/04/02/sabia-usted-98/"},
-    "laguaira1953": {"tipo":"historica","anios":[],"url":"https://fundaayc.com/2013/10/26/1953%E2%80%A2-se-inaugura-la-autopista-caracas-la-guaira/"},
-    "boyaca1973": {"tipo":"historica","anios":[],"url":"https://fundaayc.com/2014/10/21/1973-distribuidor-av-baralt-de-la-cota-mil/"}
+    "urdaneta1953": {"tipo":"historica","anios":[],"fecha_documento":{"desde":2013,"hasta":2013},"url":"https://fundaayc.com/2013/09/26/1953-inauguracion-de-la-avenida-urdaneta/"},
+    "ffaa1956": {"tipo":"historica","anios":[],"fecha_documento":{"desde":2013,"hasta":2013},"url":"https://fundaayc.com/2013/11/10/1956%E2%80%A2-avenida-fuerzas-armadas/"},
+    "libertador1965": {"tipo":"historica","anios":[],"fecha_documento":{"desde":2026,"hasta":2026},"url":"https://fundaayc.com/2026/09/15/1965-inauguracion-de-la-avenida-libertador/"},
+    "baralt1953": {"tipo":"historica","anios":[],"fecha_documento":{"desde":2023,"hasta":2023},"url":"https://fundaayc.com/2023/04/02/sabia-usted-98/"},
+    "laguaira1953": {"tipo":"historica","anios":[],"fecha_documento":{"desde":2013,"hasta":2013},"url":"https://fundaayc.com/2013/10/26/1953%E2%80%A2-se-inaugura-la-autopista-caracas-la-guaira/"},
+    "boyaca1973": {"tipo":"historica","anios":[],"fecha_documento":{"desde":2014,"hasta":2014},"url":"https://fundaayc.com/2014/10/21/1973-distribuidor-av-baralt-de-la-cota-mil/"}
   },
   "tramos": [
     {"id":"moderno:urdaneta-1953","nombre":"Avenida Urdaneta, sección ensanchada","desde":1953,"fuentesCronologia":["urdaneta1953"],"predecesora":"Calles Este–Oeste 1: deben digitalizarse por separado","etapas":[]},

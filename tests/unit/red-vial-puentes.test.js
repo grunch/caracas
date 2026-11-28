@@ -47,6 +47,7 @@ describe('importar los cruces del Guaire como tramos con etapas', () => {
     const t = deUnPuente({ 1946: { dibuja: 'calzada continua rotulada «Puente Soublette»; no marca las cabezas', cabeza_norte: null, cabeza_sur: null, ancho_de_calzada_m: 19.5 } })
     expect(t.etapas[0]).toMatchObject({ anio: 1946, estado: 'existente', medible: false, nombre: 'Puente Soublette', ancho_m: 19.5, error_m: 3.5 })
     expect(t.etapas[0].puntos).toBeUndefined()
+    expect(t.etapas[0].punto_del_eje).toBeNull()
     expect(t.etapas[0].fecha_hecho).toEqual({ tipo: 'levantamiento', desde: 1946, hasta: 1946 })
   })
 
@@ -80,6 +81,7 @@ describe('importar los cruces del Guaire como tramos con etapas', () => {
   it('no agrega etapas para los planos que el calce no leyó', () => {
     const t = deUnPuente({ 1936: { dibuja: 'calzada continua rotulada «Puente de Prueba»', eje: { punto: [1, 2], direccion: [0, 1] } } })
     expect(t.etapas.map((e) => e.anio)).toEqual([1936])
+    expect(t.etapas[0].punto_del_eje).toEqual([1, 2])
   })
 
   it('no toca el calce de entrada', () => {
@@ -117,6 +119,12 @@ describe('los cruces reales (docs/puentes-guaire-calce.json)', () => {
       expect(etapaDe(id, 1911).contradicciones.length, id).toBe(1)
     }
     expect(etapaDe('puente:hierro', 1911).certeza).toBe('documentada')
+  })
+
+  it('donde el plano no marca las cabezas queda un punto del eje para ubicar el cruce', () => {
+    expect(etapaDe('puente:ayacucho', 1936).punto_del_eje).toEqual([6726, 9180])
+    expect(etapaDe('puente:ayacucho', 1946).punto_del_eje).toEqual([6721, 9180])
+    expect(etapaDe('puente:restaurador', 1936).punto_del_eje).toBeNull() // el calce da ahí solo la dirección
   })
 
   it('ningún cruce tiene etapa en 1772 ni en 1843: el calce no leyó esos planos', () => {

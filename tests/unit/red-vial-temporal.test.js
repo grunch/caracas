@@ -1,6 +1,9 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { validarRedVial, redDeEpoca, importarReferencias } from '../../tools/red-vial-lib.mjs'
-import { registroDelProyecto } from '../../tools/red-vial.mjs'
+import { registroDelProyecto, ejecutar, fuentesDePlanos } from '../../tools/red-vial.mjs'
 import { registro, fuentesDePrueba } from './red-vial-ayudas.js'
 
 describe('red temporal sin heredar geometría actual', () => {
@@ -91,5 +94,47 @@ describe('el registro del proyecto', () => {
     expect(corte.tramos).toHaveLength(0)
     expect(corte.inferidos).toHaveLength(0)
     expect(corte.sinMedir).toHaveLength(0)
+  })
+})
+
+describe('la herramienta', () => {
+  const silencio = () => {
+    const tabla = vi.spyOn(console, 'table').mockImplementation(() => {})
+    const log = vi.spyOn(console, 'log').mockImplementation(() => {})
+    return () => { tabla.mockRestore(); log.mockRestore() }
+  }
+
+  it('audita los seis cortes y cuenta las contradicciones pendientes', async () => {
+    const restaurar = silencio()
+    try {
+      const resumen = await ejecutar(['auditar'])
+      expect(resumen.map((r) => r.año)).toEqual([1772, 1843, 1889, 1911, 1936, 1946])
+      expect(resumen.find((r) => r.año === 1911).contradicciones).toBe(3)
+      expect(resumen.find((r) => r.año === 1843).tramos).toBe(0)
+    } finally { restaurar() }
+  })
+
+  it('exporta un JSON por corte, con la ficha de evidencias de cada tramo', async () => {
+    const restaurar = silencio(), destino = mkdtempSync(join(tmpdir(), 'red-vial-'))
+    try {
+      await ejecutar(['exportar', destino])
+      const corte = JSON.parse(readFileSync(join(destino, 'red-1889.json'), 'utf8'))
+      expect(corte.tramos.map((t) => t.tramo)).toEqual(['puente:hierro', 'puente:sucre'])
+      expect(corte.tramos[0]).toMatchObject({ certeza: 'documentada', documento: 'plano1889', fecha_documento: { desde: 1889, hasta: 1889 }, fecha_hecho: { tipo: 'levantamiento', desde: 1889, hasta: 1889 } })
+    } finally { restaurar(); rmSync(destino, { recursive: true, force: true }) }
+  })
+
+  it('no escribe en public/ ni acepta acciones desconocidas', async () => {
+    await expect(ejecutar(['exportar', 'public/datos'])).rejects.toThrow(/fuera de public/)
+    await expect(ejecutar(['publicar'])).rejects.toThrow(/uso:/)
+    await expect(ejecutar(['exportar'])).rejects.toThrow(/uso:/)
+  })
+
+  it('toma de la ficha del plano de 1946 que las fotos son de 1946 y la hoja se catalogó en 1950', async () => {
+    const { plano1946, plano1843 } = await fuentesDePlanos()
+    expect(plano1946.fecha_documento).toEqual({ desde: 1946, hasta: 1950 })
+    expect(plano1946.fecha_representada).toEqual({ desde: 1946, hasta: 1946 })
+    expect(plano1843.fecha_documento).toBeNull() // facsímil sin fecha
+    expect(plano1843.fecha_representada).toEqual({ desde: 1843, hasta: 1843 })
   })
 })
