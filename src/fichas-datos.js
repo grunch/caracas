@@ -147,11 +147,14 @@ export const FICHAS = Object.freeze({
   },
   'santa-capilla': {
     textos: [
-      [1, 'En esta esquina, que el plano de 1889 todavía llama «San Mauricio», estuvo la iglesia de ese nombre.'],
-      [2, 'La leyenda del plano de 1843 nombra la iglesia de San Mauricio (I).'],
-      [3, 'La Santa Capilla es el templo VIII del plano de 1889: una iglesia neogótica, con aguja.'],
+      [1, 'En esta esquina estaba la iglesia de San Mauricio, que el plano de 1772 marca con el símbolo de iglesia. El obispo Martí la describió ese año, según Otaduy, citado por Pérez Gallego: «tres puertas principales hacia el occidente», tres naves, la capilla mayor de bóveda, «un hermoso frontispicio de ladrillo» y, a un lado, una torre «que se fabricó estos últimos años». Las medidas y las alturas del dibujo son una reconstrucción, no una mensura.'],
+      [2, 'La leyenda del plano de 1843 nombra la iglesia de San Mauricio (I) y el plano deja su solar en blanco en esta esquina. El terremoto de 1812 le tumbó la torre, de la que quedó el primer cuerpo (Arístides Rojas, citado por Pérez Gallego), y parte de las cubiertas. Siguió en uso, a medio reparar, hasta 1883, y no se sabe qué techos seguían caídos en 1843: acá va techada.'],
+      [3, 'La Santa Capilla es el templo VIII del plano de 1889. Guzmán Blanco la decretó el 26 de marzo de 1883 sobre «el deteriorado templo de San Mauricio» y Juan Hurtado Manrique la levantó en menos de cuatro meses: una capilla neogótica de una sola nave, con dos oratorios a los lados de la cabecera y un atrio alrededor. El ensanche se decretó a fines de 1889, después de este plano.'],
+      [4, 'El ensanche de 1889 a 1891, también de Hurtado Manrique, le sumó la nave sur, un pasadizo entre las dos naves y, en el medio del frente, una torre con aguja. El terremoto del 29 de octubre de 1900 tumbó la torre; una foto de 1919 la muestra rehecha, sin que se sepa la fecha de esa obra. En 1910 se le cambiaron los techos.'],
+      [5, 'Entre 1917 y 1924 se le hizo la nave central, donde estaban el pasadizo y los patios, con proyecto de Luis B. Castillo, que murió en 1921 con la obra en marcha; la torre quedó con un gran arco sobre la puerta. Es basílica menor desde 1926.'],
     ],
-    dudas: 'Que la iglesia de San Mauricio ocupara este mismo solar en 1772 y en 1843 es un dato general: la leyenda del plano de 1843 la nombra, pero falta ver dónde cae su letra.',
+    hoy: 'La basílica menor de Santa Capilla, en la esquina de su nombre, sobre la avenida Urdaneta.',
+    dudas: 'Las plantas de cada etapa son las hipótesis gráficas de Francisco Pérez Gallego (UCV, 2011 y 2017) puestas a escala sobre el solar del plano de 1936; las alturas no están medidas, salvo una cornisa «a 11 metros» en un recibo de obra de 1890. La torre de San Mauricio va más baja que los 43 m de esa hipótesis. La torre de la Santa Capilla tenía los cuerpos altos de planta octogonal; acá es cuadrada. En 1889 la mitad sur del solar eran todavía dos casas, que no se dibujan. La avenida Urdaneta le quitó en 1952 el frente norte: es posterior al último mapa. IAM Venezuela da la inauguración en diciembre de 1883; Pérez Gallego, con los documentos de la obra, en agosto.',
   },
   altagracia: {
     textos: [[1, 'La iglesia del noroeste del casco. Letra G de la leyenda del plano de 1843; templo II en el de 1889; «Iglesia de Altagracia» en el de 1936.']],

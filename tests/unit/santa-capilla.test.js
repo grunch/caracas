@@ -32,6 +32,8 @@ const cima = (vs) => vs.reduce((m, v) => (!m || v.y > m.y ? v : m), null)
 const [ex, ey] = santaCapilla.eje
 const aB = (v) => ({ a: v.x * ex + v.z * ey, b: -v.x * ey + v.z * ex, y: v.y })
 const partesEn = (h, epoca) => h.partes.filter((p) => (p.nace ?? h.nace) <= epoca && (!(p.muere ?? h.muere) || (p.muere ?? h.muere) > epoca))
+/** De muro a muro entre la nave norte y la sur (a 6,4 m del eje del medio), detrás de la torre y del frente: las cumbreras de las naves quedan fuera. */
+const entreLasNaves = (torre) => (v) => v.a > 8 && Math.abs(v.b - torre.b) < 6.5
 const area = (ps) => Math.abs(ps.reduce((s, [x, y], i) => { const [x2, y2] = ps[(i + 1) % ps.length]; return s + x * y2 - x2 * y }, 0)) / 2
 
 describe('San Mauricio y la Santa Capilla por etapas (#253)', () => {
@@ -185,9 +187,13 @@ describe('San Mauricio y la Santa Capilla por etapas (#253)', () => {
     expect(Math.abs(masAlto.b - torre.b)).toBeLessThan(1)
     expect(masAlto.y).toBeGreaterThan(30)
     expect(masAlto.y).toBeLessThan(40)
-    // no hay nave central todavía: nada tan alto como las naves en el medio del solar, fuera de la torre
-    const medio = enPie('santa-capilla', 4).map(aB).filter((v) => v.a > 9 && v.a < 20 && Math.abs(v.b - torre.b) < 5)
-    expect(Math.max(...medio.map((v) => v.y))).toBeLessThan(naves[0].alto - 2)
+    // no hay nave central todavía: detrás del frente, entre las dos naves, solo el pasadizo y la sacristía, más bajos
+    const medio = enPie('santa-capilla', 4).map(aB).filter(entreLasNaves(torre))
+    expect(medio.length).toBeGreaterThan(0)
+    expect(Math.max(...medio.map((v) => v.y))).toBeLessThanOrEqual(naves[0].alto + 0.01) // nada pasa de los muros de las naves
+    for (const p of partes.filter((x) => x.tipo === 'cuerpo' && Math.abs(x.b - torre.b) < 0.01)) {
+      expect(p.alto + (p.techo === 'plano' ? 0 : p.altoTecho), `cuerpo en a = ${p.a}`).toBeLessThan(naves[0].alto - 2)
+    }
   })
 
   test('1936 y 1946: la nave central de Castillo (1917–1924) llena el medio, con cubierta plana, y la torre sigue al centro', () => {
@@ -199,14 +205,14 @@ describe('San Mauricio y la Santa Capilla por etapas (#253)', () => {
       const torre = partes.find((p) => p.tipo === 'torre')
 
       // Act
-      const medio = enPie('santa-capilla', e).map(aB).filter((v) => v.a > 9 && v.a < 20 && Math.abs(v.b - torre.b) < 5)
+      const medio = enPie('santa-capilla', e).map(aB).filter(entreLasNaves(torre))
 
       // Assert
       expect(naves, `época ${e}`).toHaveLength(2)
       expect(central.b).toBeCloseTo(torre.b, 1)
       expect(central.ancho).toBeGreaterThan(12)
-      expect(central.alto).toBeGreaterThanOrEqual(naves[0].alto)
-      expect(Math.max(...medio.map((v) => v.y))).toBeGreaterThanOrEqual(naves[0].alto)
+      expect(central.alto).toBeGreaterThan(naves[0].alto)
+      expect(Math.max(...medio.map((v) => v.y))).toBeCloseTo(central.alto, 5) // la azotea de la nave central, sobre los muros de las otras dos
       expect(torre.remate.tipo).toBe('aguja')
     }
     // la torre de 1911 y la de 1936 son piezas distintas: Castillo le abrió el gran arco y le quitó la balaustrada
