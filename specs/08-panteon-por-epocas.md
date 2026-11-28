@@ -6,7 +6,7 @@ procedurales originales desarrolladas en el estudio independiente de Miraflores:
 | Época del mapa | Representación | Referencia |
 |---|---|---|
 | 1843 (2) | Iglesia en ruinas tras el terremoto de 1812, fachada colonial con volutas y arcadas sin techo | Bellermann, circa 1842–1845; ficha ya existente en fuentes/imagenes |
-| 1889 (3) | Panteón neogótico, dos agujas y rosetón central | Federico Lessmann, circa 1885–1900, [El Archivo](https://elarchivo.org/producto/panteon-nacional/) |
+| 1889 (3) | Panteón neogótico, dos agujas y rosetón central | Federico Lessmann, ca. 1885, [El Archivo](https://elarchivo.org/producto/panteon-nacional/) |
 | 1911 (4) | Reforma de Chataing, ventana ojival, crestería y nuevos remates | Alzado del concurso de 1910 y fotografía de la obra terminada, [Fundación Arquitectura y Ciudad](https://fundaayc.com/tag/panteon-nacional/) |
 | 1936 (5) | Reforma de Mujica Millán, torre central elevada y dos laterales con cúpulas | Collage y fotografías de la reforma terminada en 1930, misma fuente |
 
