@@ -16,6 +16,11 @@ const VISTAS = {
   'bolivar-corredor': { x: 300, z: 470, dist: 1350, yaw: 0, pitch: 1.25 },
   'bolivar-municipal': { x: -330, z: 390, dist: 330, yaw: 0, pitch: 1.3 },
 }
+const CUADROS_DE_ASIENTO = 10
+const cuadros = (page) => page.evaluate(() => new Promise((listo) => {
+  window.lab.pedirCuadro(4)
+  requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(listo)))
+}))
 const lista = (valor) => valor?.split(',').map((v) => v.trim()).filter(Boolean)
 const [soloObra, soloEpoca] = [lista(process.env.OBRA), lista(process.env.OBRA_EPOCA)]
 const vistas = Object.entries(VISTAS).filter(([id]) => !soloObra || soloObra.some((o) => id.startsWith(o)))
@@ -41,8 +46,10 @@ try {
     await page.evaluate((e) => window.lab.lineaDeTiempo.elegir(e), epoca)
     await page.waitForFunction((e) => window.lab.ciudad.U.uEpocaA.value === e && window.lab.ciudad.U.uOlaEpoca.value >= 9000, epoca, { timeout: 300000 })
     for (const [id, vista] of vistas) {
-      await page.evaluate((v) => { window.lab.cam.jump(v); window.lab.pedirCuadro(6) }, vista)
-      await page.waitForTimeout(6000)
+      await page.evaluate((v) => window.lab.cam.jump(v), vista)
+      // los carteles se acomodan y se funden cuadro a cuadro: sin cuadros de sobra quedan los de la vista anterior
+      for (let k = 0; k < CUADROS_DE_ASIENTO; k++) await cuadros(page)
+      await page.waitForTimeout(700)
       await page.screenshot({ path: `${carpeta}/${id}-${prefijo}-${año}.png`, timeout: 400000 })
       console.log(`captura ${id} ${prefijo} ${año}`)
     }
