@@ -146,8 +146,10 @@ describe('los edificios civiles', () => {
     // El Puente de Hierro (#272) añade 8.210 triángulos: 611.786 antes de 1946 y 1.091.159 en total.
     // Constitución y Sucre metálico (#272) añaden 8.760: 620.546 antes de 1946 y 1.099.919 en total.
     // Santa Rosalía, San Juan y San José (#259) añaden 4.747: 625.293 antes de 1946 y 1.104.666 en total (tope 625→630 mil).
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(630_000)
-    expect(d.indices.length / 3).toBeLessThan(1_110_000)
+    // Dolores y Restaurador (#272), solo en 1911, añaden 16.326: 641.619 antes de 1946 y 1.120.992 en total
+    // (topes 630→645 mil y 1.110→1.125 mil).
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(645_000)
+    expect(d.indices.length / 3).toBeLessThan(1_125_000)
     expect(d.rangos.length).toBe(HITOS.length)
   }, 15_000)
 })
