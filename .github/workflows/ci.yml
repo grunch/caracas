@@ -40,12 +40,12 @@ jobs:
         run: node tools/rendimiento/presupuesto-build.mjs
 
   # Los E2E dibujan por software (SwiftShader) y son lo lento del CI: van en tandas paralelas, por archivo.
-  # Cinco tandas: con tres o cuatro, cada puente o hito nuevo dejaba alguna al filo de los 25 min y el job se cancelaba
+  # Cinco tandas: con tres o cuatro, cada puente o hito nuevo dejaba alguna al filo del tope y el job se cancelaba
   # sin que fallara ningún test.
   e2e:
     name: E2E (Playwright, tanda ${{ matrix.tanda }} de 5)
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 35
     strategy:
       fail-fast: false
       matrix:
