@@ -58,7 +58,7 @@ Marcas vivas en 1843 antes del cotejo: 23. Más cinco que nacían en 1889 con la
 | `capitolio` | K | Conv. de Concepciones | coincide | fuente cita K; dudas solo de 1772; ficha: frase en 1843 |
 | `universidad` | — | — | no figura: la leyenda no nombra el convento de San Francisco aparte, solo la iglesia (N, marca `san-francisco`) | dudas de marca y ficha lo dicen; sigue «sin cotejar» solo para 1772 |
 | `san-francisco` | N | San Francisco | coincide | fuente cita N; ficha: frase en 1843 |
-| `santa-capilla` | I | San Mauricio | coincide (el nombre). Que esté en el mismo solar depende de la posición y sigue como duda | fuente cita I; ficha: párrafo de 1843 |
+| `santa-capilla` | I | San Mauricio | coincide, y en el mismo solar: la letra I cae hacia (8994, 6529) px, junto a un recuadro en blanco de 22 × 26 m en la esquina sureste del cruce, a unos 12 m del solar del plano de 1936 (el error del calce); ver `docs/santa-capilla-georreferencia.json` (#253) | fuente cita I; ficha: párrafo de 1843; hito `san-mauricio` de 1772 a 1889 |
 | `altagracia` | G | Altagracia | coincide | fuente cita G; dudas: ya nombrada en 1843; ficha |
 | `seminario` | k, L (puntos notables, iglesias) | Universidad; Cap. de la Universidad | nombre distinto (la marca: «Seminario y Universidad»; la leyenda no nombra el seminario). Que k y L estén en esta cuadra depende de la posición | dudas de marca y ficha lo anotan; la fuente no cambia |
 | `carmelitas` | H | Conv. de Carmelitas | coincide | fuente cita H; dudas solo de 1772; ficha: párrafo de 1843 |
@@ -95,6 +95,6 @@ Marcas vivas en 1843 antes del cotejo: 23. Más cinco que nacían en 1889 con la
 
 ## Pendiente para quien revise con el plano
 
-Las cinco dudas que dependen de la posición se resuelven mirando dónde cae cada letra en el plano calzado:
-i (`casa-amarilla`), k y L (`seminario`), I (`santa-capilla`, el solar), S (`san-juan`) y Q (`santa-teresa`).
+Las dudas que dependen de la posición se resuelven mirando dónde cae cada letra en el plano calzado:
+i (`casa-amarilla`), k y L (`seminario`), S (`san-juan`) y Q (`santa-teresa`). La I (`santa-capilla`, el solar) ya se miró (#253).
 También, si el texto al pie («la plaza Bolívar») basta para que la plaza cambie de nombre en 1843.

@@ -140,7 +140,8 @@ nave + fachada `clasica`, `neogotica` o `barroca` + torres con remate de `cupuli
 | San Francisco | 1772 | nave larga, fachada al norte, un campanario | lado del campanario; ya existía en 1578 |
 | Altagracia | 1772 | nave, una torre con cúpula | orientación y fecha |
 | La Pastora | 1772 | dos torres con cúpula hacia su plaza | fecha |
-| Santa Capilla | 1889 | neogótica, torre central con aguja | fecha exacta |
+| San Mauricio | 1772 | tres naves, fachada al oeste, media naranja y torre (un solo cuerpo en 1843) | alturas; qué techos faltaban en 1843 (`docs/santa-capilla-integracion.md`) |
+| Santa Capilla | 1889 | por etapas: capilla de una nave (1883), ensanche con torre y aguja (1891), nave central (1924) | alturas; fecha de la torre rehecha tras 1900 |
 | Santa Teresa | 1889 | dos fachadas y cúpula al centro | sin imagen de frente |
 | Panteón Nacional | 1889 | neogótico de dos torres con aguja | la reforma de ~1930 (el plano de 1936 dibuja tres torres) |
 
