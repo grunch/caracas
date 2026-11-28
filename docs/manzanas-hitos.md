@@ -43,8 +43,8 @@ Por qué esos umbrales, con los datos:
 
 Una manzana retirada deja de heredarse, y mientras el hito siga en pie su suelo cuenta como ocupado: el plano de las
 épocas siguientes no levanta otra manzana encima (si no, la cuadra del hito volvería con otro nombre y con casas
-pegadas a él). Cuando el hito muere, la manzana retirada se olvida y vuelve lo que el plano de esa época dibuja,
-sin inventar nada.
+pegadas a él). Cuando el hito ya no está en pie y ningún otro la retira, **la manzana vuelve** en esa época
+([abajo](#cuando-el-hito-ya-no-está-la-manzana-vuelve)).
 
 ## Qué se retira, por época y por hito
 
@@ -81,7 +81,8 @@ sin inventar nada.
 - panteon: `M5-1834-A0` (626 m², 91 %)
 - plaza-bolivar: `M5-3554-A0` (505 m², 100 %)
 
-**1946** — quedan 10685 manzanas, se retiran 47:
+**1946** — quedan 10665 manzanas, se retiran 47 y vuelve 1 (`U1843-0224-A0`, 1.365 m², la que el Circo
+Metropolitano retiró en 1911 y 1936):
 
 - hospital-vargas: `V1772-38689-0-0` (213 m², 100 %), `M4-0042-A0` (95 m², 13 %), `M4-0044-A0` (7.069 m², 19 %), `M5-0887-A0` (5.926 m², 21 %), `M5-1015-A0` (41 m², 100 %), `M5-1046-A0` (151 m², 22 %), `M5-1048-A0` (45 m², 100 %), `M5-1064-A0` (82 m², 100 %), `M5-1088-A0` (15.006 m², 35 %), `M5-1107-A0` (1.169 m², 82 %), `M5-1225-A0` (1.100 m², 100 %)
 - capitolio: `U1772-0203` (16.615 m², 96 %)
@@ -111,7 +112,8 @@ de lo que el plano de esa época dibuja edificado: la huella del propio edificio
 - **Nuevo Circo, 1936 y 1946.** Ocupa 64 % de `M4-0376`, heredada de 1911: se retira entera, con las casas que
   quedaban alrededor del ruedo en la misma cuadra.
 - **Circo Metropolitano, 1911 y 1936.** Se retira `U1843-0224` (51 %, la retirada por ocupación más cerca del
-  umbral). Sobre `M4-0353` queda a caballo (41 % del recinto, 13 % de la manzana): límite.
+  umbral). Sobre `M4-0353` queda a caballo (41 % del recinto, 13 % de la manzana): límite. En 1946 el circo ya no
+  está y `U1843-0224` vuelve como solar sin edificar ([abajo](#cuando-el-hito-ya-no-está-la-manzana-vuelve)).
 - **El Silencio, 1946.** Las manzanas de 1772 a 1936 bajo los siete bloques se retiran (`V1772-36568` por los
   bloques 2 y 3 juntos, 58 %: ninguno la ocupa solo).
 - **Plaza La Concordia y solar de La Rotunda (41 %), Universidad con San Francisco (40 %), Catedral con el Palacio
@@ -125,6 +127,71 @@ de lo que el plano de esa época dibuja edificado: la huella del propio edificio
 - **Roces** (se conservan): Hospital Vargas con `M4-0065` y `M4-0066` (3 % y 2 %), Teatro Municipal con
   `U1772-0052` (1 %), Circo Metropolitano con `V1772-36189` (1 %), San Agustín con `U1772-0133` (0,4 %).
 
+
+## Cuando el hito ya no está, la manzana vuelve
+
+R13 retira la manzana «en las épocas en que el hito está en pie». En cada época, las retiradas de la anterior se
+miden otra vez contra los hitos en pie (`devolverManzanas`, en `tools/hitos-manzanas-lib.mjs`):
+
+- si un hito la sigue retirando (el mismo, otra etapa suya u otro que ocupa el sitio), **sigue retirada**;
+- si ya ninguno la retira, **vuelve** como manzana de esa época: su contorno y su suelo de manzana, **sin casas y sin
+  árboles generados**. Nada dice qué se levantó en el solar cuando el hito dejó de estar, y no se inventa. Los
+  árboles que el plano dibuja ahí se conservan. Queda marcada `estado: "devuelta"` en el informe, con el hito que
+  la tenía retirada, y cuenta como suelo ocupado: el plano de la época no levanta otra manzana encima.
+
+Para poder devolverla, el registro `retiradasPorHito` de cada informe guarda la manzana entera (`manzana`, sin sus
+casas), no solo el contorno y las áreas.
+
+En 1843 y 1889 no hace falta: `tools/retiro-manzanas-epoca.mjs` vuelve a tomar cada época todas las manzanas de su
+referencia y mide de nuevo las que no heredó, así que una retirada que ya ningún hito ocupa entra como manzana
+nueva de esa época (con casas, como cualquier otra de la referencia). Hoy no hay ningún caso: ningún hito con
+manzanas retiradas deja de estar antes de 1946.
+
+**El único caso de hoy: el Circo Metropolitano (#257).** Retira `U1843-0224-A0` en 1911 y 1936 y no está en 1946.
+Antes, en 1946 la manzana no volvía: quedaba un hueco de 1.365 m² con suelo de calle alrededor. El plano de 1946
+dibuja el sitio en blanco, sin edificar, dentro de su cuadra ([`metropolitano-integracion.md`](metropolitano-integracion.md)):
+vuelve el solar, no edificios. `M4-0542-A0` es el caso contrario: la etapa del Cementerio General del Sur que la
+retira en 1911 termina en 1936, pero la etapa siguiente ocupa el mismo sitio y la manzana sigue retirada.
+
+Medido el 28-11-2026 sobre una copia de los intermedios de `main` `27abd10` (antes) y los mismos pasos `retiro-<año>`
+con esta rama (después); los datos no se publicaron:
+
+| Época | Manzanas antes | después | Retiradas antes | después | Vuelven | Casas en pie antes | después | Árboles en pie antes | después | Cruces de la tabla R13 antes | después |
+|---|---:|---:|---:|---:|---|---:|---:|---:|---:|---:|---:|
+| 1772 | 252 | 252 | 1 | 1 | — | 3.161 | 3.161 | 31.396 | 31.396 | 6 | 6 |
+| 1843 | 398 | 398 | 1 | 1 | — | 4.193 | 4.193 | 32.377 | 32.377 | 9 | 9 |
+| 1889 | 484 | 484 | 2 | 2 | — | 4.871 | 4.871 | 33.063 | 33.063 | 17 | 17 |
+| 1911 | 876 | 876 | 9 | 9 | — | 5.984 | 5.984 | 34.397 | 34.397 | 30 | 30 |
+| 1936 | 7.053 | 7.053 | 27 | 27 | — | 15.341 | 15.341 | 43.282 | 43.282 | 50 | 50 |
+| 1946 | 10.664 | 10.665 | 47 | 47 | `U1843-0224-A0` | 19.353 | 19.353 | 50.260 | 50.260 | 72 | 72 |
+
+- Las casas y los árboles son los de la ciudad final (`retiro1946/ciudad.json` y `arboles.bin`) en pie en cada época.
+  `ciudad.json` y `arboles.bin` de los seis pasos salen con los mismos bytes: `ciudad.pak` y `arboles.bin` publicados
+  no cambian. Cambia `suelo-manzanas-modernas.png` (y la cuenta de 1946 en su `.json`): el canal de 1946 suma el solar.
+- Las demás manzanas de las seis épocas son idénticas campo a campo, y las retiradas también, salvo el campo `manzana`
+  que ahora guardan.
+- La tabla R13 (`manzanas-hitos.json`) trae las mismas filas antes y después: la manzana que vuelve no cruza ningún
+  hito en 1946 (ninguno comparte 1 m² con ella). Lo único que cambia es la cuenta de manzanas de 1946.
+- En `cobertura` del informe de 1946, la cuadra `M6-5758` del plano pasa de 76 % a 82 % heredada (ahora cuenta el
+  solar); otras 499 cuadras cambian en el último decimal por el orden de la unión.
+- El `manzanas-hitos.json` del repo estaba atrasado respecto de `main`: le faltaban los cruces de los templos de #299
+  (Santa Rosalía, San Juan, San José: chicos, se conservan) y contaba 10.685 manzanas en 1946. Se regeneró.
+- No se midió: tiempo por cuadro; los modos a pie, en avión y manejando.
+
+El solar en 1946, misma cámara (centro de `U1843-0224-A0`, modo color), con Playwright y render por software:
+
+| | Antes (`main`) | Después |
+|---|---|---|
+| 1946, desde arriba | ![antes](capturas/manzana-vuelve/metropolitano-1946-arriba-antes.webp) | ![después](capturas/manzana-vuelve/metropolitano-1946-arriba-despues.webp) |
+| 1946, de costado | ![antes](capturas/manzana-vuelve/metropolitano-1946-costado-antes.webp) | ![después](capturas/manzana-vuelve/metropolitano-1946-costado-despues.webp) |
+| 1936 (regresión: píxel a píxel igual) | ![antes](capturas/manzana-vuelve/metropolitano-1936-arriba-antes.webp) | ![después](capturas/manzana-vuelve/metropolitano-1936-arriba-despues.webp) |
+
+**Lo que queda igual y no se arregla acá.** La manzana que vuelve es el triángulo que ya existía en 1843 y 1889
+([captura de 1889](capturas/manzana-vuelve/metropolitano-1889-arriba.webp), misma cámara): un pedazo de la cuadra real, que en
+los datos está partida en tres polígonos que no se tocan (`M4-0353-A0`, `U1843-0224-A0`, `V1772-36189-0-0`). Entre los
+pedazos el suelo es de calle, en todas las épocas. Por eso en 1946 el solar vuelve como suelo de manzana, pero sigue
+rodeado por una banda de calle que el plano no dibuja: es la costura entre pedazos de la cuadra, no el hueco del circo.
+Unir los pedazos de una misma cuadra es otro cambio (toca todas las cuadras que crecieron por épocas) y no se hizo.
 
 ## Puertas antes y después
 
