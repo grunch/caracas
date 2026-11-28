@@ -27,12 +27,12 @@ for(const año of epocas)test(`manzanas completas, patios verdes y continuidad e
  const d=decodificarPak(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),{vertices:Float32Array,techos:Uint32Array,vida:Uint32Array,paletas:Uint8Array},()=>{})
  const e=AÑOS_DE_EPOCA.indexOf(año),vivos=e=>Array.from(d.vida).flatMap((v,i)=>v%8<=e&&(!(v>>3)||e<(v>>3))?[i]:[])
  const anterior=vivos(e-1),ahora=new Set(vivos(e))
- // continuidad, con la R13 (specs/13): una casa en pie en la época anterior solo falta si un hito retiró su manzana entera
+ // continuidad, con la R13 (specs/13): una casa en pie en la época anterior solo falta si un hito retiró su manzana entera.
+ // No se compara la cantidad de casas: en el km² de la muestra, El Silencio retira en 1946 más de las que nacen.
  const huella=i=>Array.from({length:d.techos[i*4+1]},(_,k)=>[0,1].map(c=>d.vertices[2*(d.techos[i*4]+k)+c]))
  const muertas=anterior.filter(i=>!ahora.has(i)).map(i=>({casa:i,huella:huella(i)}))
  if(muertas.length)expect(muertesSinR13({muertas,antes:await campoDe(page,AÑOS_DE_EPOCA[e-1]),ahora:await campoDe(page,año),recintos:recintosDe(hitosConPlanta(),e)})).toEqual([])
  expect([...ahora].every(i=>d.paletas[i]>0)).toBe(true)
- expect(ahora.size).toBeGreaterThanOrEqual(anterior.length)
  const errores=[];page.on('pageerror',x=>errores.push(x.message));page.on('console',x=>{if(x.type()==='error'&&/shader|GLSL|VALIDATE_STATUS/.test(x.text()))errores.push(x.text())})
  await page.goto('/?sinintro&sinsw&detallecasas=1&verbalcones')
  await page.waitForFunction(()=>window.lab?.ready&&lab.casasListas&&lab.lineaDeTiempo)
