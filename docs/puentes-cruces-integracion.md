@@ -200,9 +200,13 @@ No se agrega al repo ninguna imagen de terceros.
 ## Capturas
 
 En [`capturas/puentes-cruces-modelos/`](capturas/puentes-cruces-modelos/): antes (`main`) y después, misma cámara,
-desde arriba y de costado, en 1911, 1936 y 1946.
+desde arriba y de costado, en 1911, 1936 y 1946; y en tinta, de costado, en 1911. El Restaurador de costado va con
+`PUENTE_LEJOS=1.6`: a 85 m no cabe.
+
+En tinta el suelo de 1911 es la hoja de Razetti, que dibuja estos cruces en otro lugar (78 m al norte el de Dolores,
+23 m el del Restaurador): el modelo no cae sobre el símbolo de esa hoja. Es el desvío del calce, ya declarado.
 
 ```sh
 PUENTE_CAPTURA=1911,1936,1946 PUENTE_CRUCE=-530.1,1641.5 PUENTE_VISTA=arriba,costado node tests/e2e/capturas-puente-hierro.mjs http://localhost:5199/ docs/capturas/puentes-cruces-modelos dolores-despues
-PUENTE_CAPTURA=1911,1936,1946 PUENTE_CRUCE=-233.85,1520.25 PUENTE_VISTA=arriba,costado node tests/e2e/capturas-puente-hierro.mjs http://localhost:5199/ docs/capturas/puentes-cruces-modelos restaurador-despues
+PUENTE_LEJOS=1.6 PUENTE_CAPTURA=1911,1936,1946 PUENTE_CRUCE=-233.85,1520.25 PUENTE_VISTA=arriba,costado node tests/e2e/capturas-puente-hierro.mjs http://localhost:5199/ docs/capturas/puentes-cruces-modelos restaurador-despues
 ```
