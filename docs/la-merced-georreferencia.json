@@ -1,0 +1,37 @@
+{
+  "fuente": "Plano DCN de 1936 (mosaico del repositorio, fuentes/mapas/1936-archiveorg-caracas-dcn-hoja1 y hoja2), contrastado con los planos calzados de 1772, 1843, 1889, 1911 y 1946 (fuentes/derivados/<año>/calzado.tif; 1946: fuentes/mapas/1950-archiveorg-plano-de-caracas-dcn)",
+  "sistema": "píxeles del mosaico base de 1936, 0,5 m por píxel; a = metros a lo largo del eje desde el pie de la fachada, b = metros a su derecha (al este)",
+  "certeza": "lectura a ojo sobre una ampliación del mosaico con rejilla de 10 px; el trazo del plano mide de 1 a 2 px (0,5 a 1 m) y el rótulo rojo de la esquina («Las Mercedes») cruza el frente. No es mensura catastral.",
+  "templos": {
+    "las-mercedes": {
+      "origen_px": [9062, 5887],
+      "eje": [0.188, -0.982],
+      "fachada": "sur, sobre el atrio que da a la calle Oeste 5, en la esquina de Las Mercedes (el plano dibuja el atrio delante; el IPC da la dirección «Esquina Las Mercedes, Norte 2 con Oeste 5»)",
+      "contorno_leido_px": {
+        "fachada": [[9039, 5882], [9085, 5892]],
+        "muro_oeste": [[9052, 5811], [9040, 5883]],
+        "nave_central_lado_oeste": [[9066, 5795], [9052, 5868]],
+        "nave_central_lado_este": [[9088, 5798], [9075, 5886]],
+        "muro_este": [[9098, 5822], [9085, 5893]],
+        "cabecera": [[9066, 5793], [9089, 5798]],
+        "saliente_al_norte_de_la_cabecera": [[9075, 5787], [9082, 5797]],
+        "arranque_de_las_naves_laterales": { "oeste": [[9052, 5811], [9063, 5813]], "este": [[9088, 5820], [9098, 5822]] },
+        "cuadros_al_pie_de_las_naves_laterales": { "oeste": [[9042, 5864], [9052, 5866]], "este": [[9076, 5870], [9088, 5872]] },
+        "atrio": [[9038, 5887], [9092, 5905]]
+      },
+      "medidas_m": {
+        "largo_total": 46, "largo_naves_laterales": 38, "ancho": 23.7, "nave_central": 13, "naves_laterales": 5.35,
+        "atrio_hasta_la_calle": 7, "saliente_de_la_cabecera": 5
+      },
+      "nota": "Los dos cuadros de unos 5 × 9 m que el plano cierra al pie de las naves laterales coinciden con el lugar que el IPC da a las torres («a cada lado» de la fachada).",
+      "marca_anterior": "La marca estaba puesta a mano en (8880, 5830), unos 95 m al oeste del pie de la fachada, sobre otra manzana (el edificio 19 del plano de 1889 y el «g» del de 1911). Ahora sale del hito.",
+      "otros_planos": {
+        "1772": "símbolo de iglesia (recuadro con cruz) unos 20 m al noroeste, con una plazuela delante, al sur; calce del plano: 18,7 m RMS",
+        "1843": "un recuadro en blanco de unos 15 × 22 m en el lugar del templo y otros dos mayores al norte; una letra de la leyenda, leída como la E de «La Merced», cae una cuadra al oeste; calce: 12,4 m RMS",
+        "1889": "templo IX (recuadro con cruz, unos 25 × 45 m) y, al este, la plaza M",
+        "1911": "bloque rojo con la letra I y la plaza (10) al norte y al este",
+        "1946": "contorno alargado de unos 20 × 55 m con el atrio al sur"
+      }
+    }
+  }
+}

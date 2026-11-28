@@ -277,11 +277,11 @@ export const FICHAS = Object.freeze({
   // --- el norte ---
   'las-mercedes': {
     textos: [
-      [1, 'El convento de La Merced ocupaba este sector desde el siglo XVII. En 1772 recibió la visita del obispo Mariano Martí.'],
-      [2, 'El terremoto de 1812 dañó gravemente el conjunto. Los últimos religiosos se retiraron en 1839; la leyenda del plano de 1843 conserva el nombre «La Merced» (E).'],
-      [3, 'El plano de 1889 dibuja un templo en el lugar; el de 1936 lo rotula «Iglesia Las Mercedes».'],
+      [1, 'El convento de La Merced ocupaba este sector desde el siglo XVII; su iglesia se trasladó a este lugar en 1681 (IPC). En 1772 recibió la visita del obispo Mariano Martí. El plano de 1772 pone aquí el símbolo de iglesia.'],
+      [2, 'El terremoto de 1812 destruyó la iglesia; en 1813 se hizo una capilla provisional. Los últimos religiosos se retiraron en 1839. El templo actual se empezó en 1842: la leyenda del plano de 1843 conserva el nombre «La Merced» (E) y deja el lugar en blanco.'],
+      [3, 'El templo se inauguró en 1857 (IPC): tres naves, fachada neoclásica de dos cuerpos con tres puertas y frontis, y dos torres campanario de dos cuerpos, el segundo ochavado, con cúpula y linterna. Es el templo IX del plano de 1889; el de 1936 lo rotula «Iglesia Las Mercedes».'],
     ],
-    dudas: 'La visita de 1772 está documentada en Historia general de la Iglesia en América Latina, tomo VII, pp. 228–229. Falta cotejar el solar en el plano de 1772 y la arquitectura de cada etapa; la marca no presupone una fachada colonial intacta en 1843 o 1889.',
+    dudas: 'En 1772 y 1843 no se dibuja ningún edificio: no se halló descripción del convento ni de su iglesia, y en 1843 el templo estaba en obra. Desde 1889 va lo que el catálogo del IPC describe del templo de hoy; no se sabe si las torres son todas de 1857 ni qué se rehízo tras el terremoto de 1900. Ninguna altura está medida.',
   },
   'la-pastora': {
     textos: [
