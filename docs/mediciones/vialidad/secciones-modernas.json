@@ -1,0 +1,334 @@
+{
+ "alcance": "Las vías posteriores a 1946 del catálogo, medidas sobre el eje de la capa Hoy contra las manzanas de cada época del sitio. Los sospechosos son tramos a revisar contra el plano de la época, no errores confirmados.",
+ "catalogo": "tools/geo/referencias/vialidad-posterior-1946.json",
+ "entradas": {
+  "public/datos/calles.bin": "df4d4243c1797679c67820111e1f2ed576a45df02c0b1188c49479b751ae1e44",
+  "public/datos/calles.json": "797b6046fa58243eb31164fae827d36024ead612b237a2680083748ff580078e",
+  "public/datos/suelo-manzanas.json": "b89392d19bdab6938349f10c06111ab93bd678648a2bcbf8eab483c3e438b57e",
+  "public/plano/suelo-manzanas.png": "3af7daad134d673340d56df39f411a78053e6e55898dd7177037553dd6a4d847",
+  "public/datos/suelo-manzanas-modernas.json": "134b06dc77e542708c5f55d3af2d69bd16b00412cb42bfcc9211c955fc606003",
+  "public/plano/suelo-manzanas-modernas.png": "cd99bdda7ee240898ab61eaf9c8e5d37b48a756ddddcb194cc85125bd62a1439"
+ },
+ "parametros": {"paso_m":10,"max_m":40,"ancho_sospechoso_m":20,"corredor_minimo":0.8,"resolucion_del_campo_m":2},
+ "vias": [
+  {
+   "id": "moderno:urdaneta-1953",
+   "desde": 1953,
+   "nombres_osm": ["Avenida Urdaneta"],
+   "tramos_de_hoy": 49,
+   "largo_m": 5334,
+   "epocas": {
+    "1772": {"muestras":535,"fuera":0,"dentro_pct":27,"abierto_pct":53,"corredor_pct":19,"ancho_mediana_m":11},
+    "1843": {"muestras":535,"fuera":0,"dentro_pct":32,"abierto_pct":42,"corredor_pct":26,"ancho_mediana_m":11},
+    "1889": {"muestras":535,"fuera":0,"dentro_pct":32,"abierto_pct":42,"corredor_pct":26,"ancho_mediana_m":11},
+    "1911": {"muestras":535,"fuera":0,"dentro_pct":35,"abierto_pct":33,"corredor_pct":31,"ancho_mediana_m":17},
+    "1936": {"muestras":535,"fuera":0,"dentro_pct":36,"abierto_pct":29,"corredor_pct":36,"ancho_mediana_m":16},
+    "1946": {"muestras":535,"fuera":0,"dentro_pct":36,"abierto_pct":29,"corredor_pct":36,"ancho_mediana_m":16}
+   },
+   "sospechosos": [
+    {"año":1911,"nombre":"Avenida Urdaneta","x":10932,"y":6809,"largo_m":139,"ancho_mediana_m":25},
+    {"año":1911,"nombre":"Avenida Urdaneta","x":10095,"y":6676,"largo_m":92,"ancho_mediana_m":26},
+    {"año":1911,"nombre":"Avenida Urdaneta","x":7805,"y":6238,"largo_m":91,"ancho_mediana_m":22},
+    {"año":1936,"nombre":"Avenida Urdaneta","x":10932,"y":6809,"largo_m":139,"ancho_mediana_m":25},
+    {"año":1936,"nombre":"Avenida Urdaneta","x":10095,"y":6676,"largo_m":92,"ancho_mediana_m":26},
+    {"año":1936,"nombre":"Avenida Urdaneta","x":7805,"y":6238,"largo_m":91,"ancho_mediana_m":22},
+    {"año":1946,"nombre":"Avenida Urdaneta","x":10932,"y":6809,"largo_m":139,"ancho_mediana_m":25},
+    {"año":1946,"nombre":"Avenida Urdaneta","x":10095,"y":6676,"largo_m":92,"ancho_mediana_m":26},
+    {"año":1946,"nombre":"Avenida Urdaneta","x":7805,"y":6238,"largo_m":91,"ancho_mediana_m":22}
+   ]
+  },
+  {
+   "id": "moderno:fuerzas-armadas-1956",
+   "desde": 1956,
+   "nombres_osm": ["Avenida Fuerzas Armadas","Elevado de la Fuerzas Armadas"],
+   "tramos_de_hoy": 58,
+   "largo_m": 6439,
+   "epocas": {
+    "1772": {"muestras":462,"fuera":184,"dentro_pct":24,"abierto_pct":57,"corredor_pct":19,"ancho_mediana_m":22},
+    "1843": {"muestras":462,"fuera":184,"dentro_pct":37,"abierto_pct":40,"corredor_pct":23,"ancho_mediana_m":13},
+    "1889": {"muestras":462,"fuera":184,"dentro_pct":38,"abierto_pct":18,"corredor_pct":44,"ancho_mediana_m":19},
+    "1911": {"muestras":646,"fuera":0,"dentro_pct":27,"abierto_pct":40,"corredor_pct":33,"ancho_mediana_m":17},
+    "1936": {"muestras":646,"fuera":0,"dentro_pct":30,"abierto_pct":34,"corredor_pct":36,"ancho_mediana_m":17},
+    "1946": {"muestras":646,"fuera":0,"dentro_pct":30,"abierto_pct":33,"corredor_pct":37,"ancho_mediana_m":18}
+   },
+   "sospechosos": [
+    {"año":1772,"nombre":"Avenida Fuerzas Armadas","x":10115,"y":7209,"largo_m":21,"ancho_mediana_m":57},
+    {"año":1843,"nombre":"Avenida Fuerzas Armadas","x":10115,"y":7209,"largo_m":21,"ancho_mediana_m":57},
+    {"año":1889,"nombre":"Avenida Fuerzas Armadas","x":10513,"y":5134,"largo_m":156,"ancho_mediana_m":20},
+    {"año":1889,"nombre":"Avenida Fuerzas Armadas","x":10115,"y":7209,"largo_m":21,"ancho_mediana_m":57},
+    {"año":1911,"nombre":"Avenida Fuerzas Armadas","x":10513,"y":5134,"largo_m":156,"ancho_mediana_m":20},
+    {"año":1911,"nombre":"Avenida Fuerzas Armadas","x":10115,"y":7209,"largo_m":21,"ancho_mediana_m":55},
+    {"año":1936,"nombre":"Avenida Fuerzas Armadas","x":10513,"y":5134,"largo_m":156,"ancho_mediana_m":20},
+    {"año":1936,"nombre":"Avenida Fuerzas Armadas","x":10115,"y":7209,"largo_m":21,"ancho_mediana_m":55},
+    {"año":1946,"nombre":"Avenida Fuerzas Armadas","x":10513,"y":5134,"largo_m":156,"ancho_mediana_m":20},
+    {"año":1946,"nombre":"Avenida Fuerzas Armadas","x":10115,"y":7209,"largo_m":21,"ancho_mediana_m":55}
+   ]
+  },
+  {
+   "id": "moderno:libertador-1965",
+   "desde": 1965,
+   "nombres_osm": ["Avenida Libertador","Prolongación Libertador"],
+   "tramos_de_hoy": 126,
+   "largo_m": 13974,
+   "epocas": {
+    "1772": {"muestras":413,"fuera":992,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1843": {"muestras":413,"fuera":992,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1889": {"muestras":413,"fuera":992,"dentro_pct":2,"abierto_pct":98,"corredor_pct":0,"ancho_mediana_m":null},
+    "1911": {"muestras":1400,"fuera":5,"dentro_pct":2,"abierto_pct":97,"corredor_pct":0,"ancho_mediana_m":10},
+    "1936": {"muestras":1400,"fuera":5,"dentro_pct":17,"abierto_pct":59,"corredor_pct":24,"ancho_mediana_m":23},
+    "1946": {"muestras":1400,"fuera":5,"dentro_pct":18,"abierto_pct":57,"corredor_pct":25,"ancho_mediana_m":25}
+   },
+   "sospechosos": [
+    {"año":1936,"nombre":"Avenida Libertador","x":17646,"y":8909,"largo_m":184,"ancho_mediana_m":20},
+    {"año":1936,"nombre":"Avenida Libertador","x":13925,"y":7829,"largo_m":182,"ancho_mediana_m":34},
+    {"año":1936,"nombre":"Avenida Libertador","x":13971,"y":7795,"largo_m":119,"ancho_mediana_m":35},
+    {"año":1936,"nombre":"Avenida Libertador","x":13989,"y":7814,"largo_m":78,"ancho_mediana_m":36},
+    {"año":1936,"nombre":"Avenida Libertador","x":16490,"y":8540,"largo_m":37,"ancho_mediana_m":43},
+    {"año":1936,"nombre":"Avenida Libertador","x":17538,"y":8847,"largo_m":27,"ancho_mediana_m":32},
+    {"año":1946,"nombre":"Avenida Libertador","x":17646,"y":8909,"largo_m":184,"ancho_mediana_m":20},
+    {"año":1946,"nombre":"Avenida Libertador","x":13925,"y":7829,"largo_m":182,"ancho_mediana_m":34},
+    {"año":1946,"nombre":"Avenida Libertador","x":13971,"y":7795,"largo_m":119,"ancho_mediana_m":35},
+    {"año":1946,"nombre":"Avenida Libertador","x":13989,"y":7814,"largo_m":78,"ancho_mediana_m":36},
+    {"año":1946,"nombre":"Avenida Libertador","x":16490,"y":8540,"largo_m":37,"ancho_mediana_m":43},
+    {"año":1946,"nombre":"Avenida Libertador","x":17538,"y":8847,"largo_m":27,"ancho_mediana_m":32}
+   ]
+  },
+  {
+   "id": "moderno:norte-sur6-ensanche",
+   "desde": 1953,
+   "nombres_osm": ["Avenida Baralt","Avenida Rafael Baralt"],
+   "tramos_de_hoy": 70,
+   "largo_m": 7928,
+   "epocas": {
+    "1772": {"muestras":773,"fuera":21,"dentro_pct":22,"abierto_pct":60,"corredor_pct":18,"ancho_mediana_m":15},
+    "1843": {"muestras":773,"fuera":21,"dentro_pct":28,"abierto_pct":45,"corredor_pct":28,"ancho_mediana_m":17},
+    "1889": {"muestras":773,"fuera":21,"dentro_pct":28,"abierto_pct":45,"corredor_pct":28,"ancho_mediana_m":17},
+    "1911": {"muestras":794,"fuera":0,"dentro_pct":27,"abierto_pct":44,"corredor_pct":28,"ancho_mediana_m":16},
+    "1936": {"muestras":794,"fuera":0,"dentro_pct":33,"abierto_pct":35,"corredor_pct":32,"ancho_mediana_m":15},
+    "1946": {"muestras":794,"fuera":0,"dentro_pct":34,"abierto_pct":37,"corredor_pct":30,"ancho_mediana_m":15}
+   },
+   "sospechosos": [
+    {"año":1772,"nombre":"Avenida Baralt","x":8619,"y":5224,"largo_m":52,"ancho_mediana_m":36},
+    {"año":1772,"nombre":"Avenida Baralt","x":8596,"y":5205,"largo_m":49,"ancho_mediana_m":36},
+    {"año":1843,"nombre":"Avenida Baralt","x":7952,"y":8626,"largo_m":152,"ancho_mediana_m":22},
+    {"año":1843,"nombre":"Avenida Baralt","x":8015,"y":8335,"largo_m":145,"ancho_mediana_m":20},
+    {"año":1843,"nombre":"Avenida Baralt","x":8619,"y":5224,"largo_m":52,"ancho_mediana_m":35},
+    {"año":1843,"nombre":"Avenida Baralt","x":8596,"y":5205,"largo_m":49,"ancho_mediana_m":36},
+    {"año":1889,"nombre":"Avenida Baralt","x":7952,"y":8626,"largo_m":152,"ancho_mediana_m":22},
+    {"año":1889,"nombre":"Avenida Baralt","x":8015,"y":8335,"largo_m":145,"ancho_mediana_m":20},
+    {"año":1889,"nombre":"Avenida Baralt","x":8619,"y":5224,"largo_m":52,"ancho_mediana_m":35},
+    {"año":1889,"nombre":"Avenida Baralt","x":8596,"y":5205,"largo_m":49,"ancho_mediana_m":36},
+    {"año":1911,"nombre":"Avenida Baralt","x":7952,"y":8626,"largo_m":152,"ancho_mediana_m":20},
+    {"año":1911,"nombre":"Avenida Baralt","x":8015,"y":8335,"largo_m":145,"ancho_mediana_m":20},
+    {"año":1911,"nombre":"Avenida Baralt","x":8619,"y":5224,"largo_m":52,"ancho_mediana_m":33},
+    {"año":1911,"nombre":"Avenida Baralt","x":8596,"y":5205,"largo_m":49,"ancho_mediana_m":36},
+    {"año":1911,"nombre":"Avenida Baralt","x":8584,"y":5233,"largo_m":21,"ancho_mediana_m":38},
+    {"año":1936,"nombre":"Avenida Baralt","x":7952,"y":8626,"largo_m":152,"ancho_mediana_m":20},
+    {"año":1936,"nombre":"Avenida Baralt","x":8015,"y":8335,"largo_m":145,"ancho_mediana_m":20},
+    {"año":1936,"nombre":"Avenida Baralt","x":8619,"y":5224,"largo_m":52,"ancho_mediana_m":33},
+    {"año":1936,"nombre":"Avenida Baralt","x":8596,"y":5205,"largo_m":49,"ancho_mediana_m":26},
+    {"año":1946,"nombre":"Avenida Baralt","x":7952,"y":8626,"largo_m":152,"ancho_mediana_m":20},
+    {"año":1946,"nombre":"Avenida Baralt","x":8015,"y":8335,"largo_m":145,"ancho_mediana_m":20},
+    {"año":1946,"nombre":"Avenida Baralt","x":8619,"y":5224,"largo_m":52,"ancho_mediana_m":33},
+    {"año":1946,"nombre":"Avenida Baralt","x":8596,"y":5205,"largo_m":49,"ancho_mediana_m":26}
+   ]
+  },
+  {
+   "id": "moderno:distribuidor-baralt-sur",
+   "desde": 1968,
+   "nombres_osm": ["Distribuidor Baralt"],
+   "tramos_de_hoy": 28,
+   "largo_m": 3161,
+   "epocas": {
+    "1772": {"muestras":0,"fuera":320,"dentro_pct":null,"abierto_pct":null,"corredor_pct":null,"ancho_mediana_m":null},
+    "1843": {"muestras":0,"fuera":320,"dentro_pct":null,"abierto_pct":null,"corredor_pct":null,"ancho_mediana_m":null},
+    "1889": {"muestras":0,"fuera":320,"dentro_pct":null,"abierto_pct":null,"corredor_pct":null,"ancho_mediana_m":null},
+    "1911": {"muestras":320,"fuera":0,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1936": {"muestras":320,"fuera":0,"dentro_pct":1,"abierto_pct":99,"corredor_pct":0,"ancho_mediana_m":null},
+    "1946": {"muestras":320,"fuera":0,"dentro_pct":2,"abierto_pct":97,"corredor_pct":1,"ancho_mediana_m":30}
+   },
+   "sospechosos": []
+  },
+  {
+   "id": "moderno:distribuidor-baralt-boyaca",
+   "desde": 1973,
+   "nombres_osm": ["Distribuidor Baralt Norte"],
+   "tramos_de_hoy": 8,
+   "largo_m": 990,
+   "epocas": {
+    "1772": {"muestras":45,"fuera":53,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1843": {"muestras":45,"fuera":53,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1889": {"muestras":45,"fuera":53,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1911": {"muestras":98,"fuera":0,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1936": {"muestras":98,"fuera":0,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1946": {"muestras":98,"fuera":0,"dentro_pct":2,"abierto_pct":92,"corredor_pct":6,"ancho_mediana_m":23}
+   },
+   "sospechosos": []
+  },
+  {
+   "id": "moderno:autopista-del-este-1953",
+   "desde": 1953,
+   "nombres_osm": ["Autopista Gran Cacique Guaicaipuro"],
+   "tramos_de_hoy": 160,
+   "largo_m": 21699,
+   "epocas": {
+    "1772": {"muestras":631,"fuera":1543,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1843": {"muestras":631,"fuera":1543,"dentro_pct":1,"abierto_pct":99,"corredor_pct":0,"ancho_mediana_m":42},
+    "1889": {"muestras":631,"fuera":1543,"dentro_pct":2,"abierto_pct":97,"corredor_pct":1,"ancho_mediana_m":36},
+    "1911": {"muestras":2171,"fuera":3,"dentro_pct":1,"abierto_pct":99,"corredor_pct":0,"ancho_mediana_m":31},
+    "1936": {"muestras":2171,"fuera":3,"dentro_pct":2,"abierto_pct":96,"corredor_pct":2,"ancho_mediana_m":27},
+    "1946": {"muestras":2171,"fuera":3,"dentro_pct":3,"abierto_pct":92,"corredor_pct":5,"ancho_mediana_m":28}
+   },
+   "sospechosos": []
+  },
+  {
+   "id": "moderno:autopista-valle-coche",
+   "desde": 1955,
+   "nombres_osm": ["Autopista Valle - Coche"],
+   "tramos_de_hoy": 42,
+   "largo_m": 5753,
+   "epocas": {
+    "1772": {"muestras":0,"fuera":574,"dentro_pct":null,"abierto_pct":null,"corredor_pct":null,"ancho_mediana_m":null},
+    "1843": {"muestras":0,"fuera":574,"dentro_pct":null,"abierto_pct":null,"corredor_pct":null,"ancho_mediana_m":null},
+    "1889": {"muestras":0,"fuera":574,"dentro_pct":null,"abierto_pct":null,"corredor_pct":null,"ancho_mediana_m":null},
+    "1911": {"muestras":570,"fuera":4,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1936": {"muestras":570,"fuera":4,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1946": {"muestras":570,"fuera":4,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":8}
+   },
+   "sospechosos": []
+  },
+  {
+   "id": "moderno:boyaca-mariperez-la-florida",
+   "desde": 1956,
+   "nombres_osm": ["Avenida Boyacá","Avenida Cota Mil"],
+   "tramos_de_hoy": 66,
+   "largo_m": 10797,
+   "epocas": {
+    "1772": {"muestras":357,"fuera":733,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1843": {"muestras":357,"fuera":733,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1889": {"muestras":357,"fuera":733,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1911": {"muestras":1084,"fuera":6,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1936": {"muestras":1084,"fuera":6,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1946": {"muestras":1084,"fuera":6,"dentro_pct":0,"abierto_pct":99,"corredor_pct":1,"ancho_mediana_m":28}
+   },
+   "sospechosos": []
+  },
+  {
+   "id": "moderno:autopista-la-guaira",
+   "desde": 1953,
+   "nombres_osm": ["Autopista Caracas - La Guaira"],
+   "tramos_de_hoy": 64,
+   "largo_m": 9631,
+   "epocas": {
+    "1772": {"muestras":0,"fuera":967,"dentro_pct":null,"abierto_pct":null,"corredor_pct":null,"ancho_mediana_m":null},
+    "1843": {"muestras":0,"fuera":967,"dentro_pct":null,"abierto_pct":null,"corredor_pct":null,"ancho_mediana_m":null},
+    "1889": {"muestras":0,"fuera":967,"dentro_pct":null,"abierto_pct":null,"corredor_pct":null,"ancho_mediana_m":null},
+    "1911": {"muestras":965,"fuera":2,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1936": {"muestras":965,"fuera":2,"dentro_pct":3,"abierto_pct":95,"corredor_pct":3,"ancho_mediana_m":18},
+    "1946": {"muestras":965,"fuera":2,"dentro_pct":3,"abierto_pct":93,"corredor_pct":4,"ancho_mediana_m":22}
+   },
+   "sospechosos": []
+  },
+  {
+   "id": "moderno:andres-bello-1952",
+   "desde": 1952,
+   "nombres_osm": ["Avenida Andrés Bello","Elevado de la Andrés Bello"],
+   "tramos_de_hoy": 47,
+   "largo_m": 6222,
+   "epocas": {
+    "1772": {"muestras":279,"fuera":344,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1843": {"muestras":279,"fuera":344,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1889": {"muestras":279,"fuera":344,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1911": {"muestras":623,"fuera":0,"dentro_pct":2,"abierto_pct":98,"corredor_pct":0,"ancho_mediana_m":48},
+    "1936": {"muestras":623,"fuera":0,"dentro_pct":8,"abierto_pct":84,"corredor_pct":8,"ancho_mediana_m":31},
+    "1946": {"muestras":623,"fuera":0,"dentro_pct":9,"abierto_pct":81,"corredor_pct":10,"ancho_mediana_m":35}
+   },
+   "sospechosos": []
+  },
+  {
+   "id": "moderno:lecuna-1970",
+   "desde": 1970,
+   "nombres_osm": ["Avenida Lecuna"],
+   "tramos_de_hoy": 22,
+   "largo_m": 2361,
+   "epocas": {
+    "1772": {"muestras":239,"fuera":0,"dentro_pct":5,"abierto_pct":55,"corredor_pct":40,"ancho_mediana_m":10},
+    "1843": {"muestras":239,"fuera":0,"dentro_pct":7,"abierto_pct":53,"corredor_pct":40,"ancho_mediana_m":10},
+    "1889": {"muestras":239,"fuera":0,"dentro_pct":7,"abierto_pct":53,"corredor_pct":40,"ancho_mediana_m":10},
+    "1911": {"muestras":239,"fuera":0,"dentro_pct":7,"abierto_pct":49,"corredor_pct":44,"ancho_mediana_m":10},
+    "1936": {"muestras":239,"fuera":0,"dentro_pct":7,"abierto_pct":29,"corredor_pct":64,"ancho_mediana_m":11},
+    "1946": {"muestras":239,"fuera":0,"dentro_pct":3,"abierto_pct":38,"corredor_pct":59,"ancho_mediana_m":11}
+   },
+   "sospechosos": [{"año":1936,"nombre":"Avenida Lecuna","x":11740,"y":8645,"largo_m":118,"ancho_mediana_m":22},{"año":1936,"nombre":"Avenida Lecuna","x":11267,"y":8563,"largo_m":109,"ancho_mediana_m":21},{"año":1946,"nombre":"Avenida Lecuna","x":11740,"y":8645,"largo_m":118,"ancho_mediana_m":22},{"año":1946,"nombre":"Avenida Lecuna","x":11267,"y":8563,"largo_m":109,"ancho_mediana_m":21}]
+  },
+  {
+   "id": "moderno:universidad-ampliacion",
+   "nombres_osm": ["Avenida Universidad"],
+   "tramos_de_hoy": 13,
+   "largo_m": 1745,
+   "epocas": {
+    "1772": {"muestras":175,"fuera":0,"dentro_pct":19,"abierto_pct":30,"corredor_pct":51,"ancho_mediana_m":17},
+    "1843": {"muestras":175,"fuera":0,"dentro_pct":23,"abierto_pct":25,"corredor_pct":52,"ancho_mediana_m":15},
+    "1889": {"muestras":175,"fuera":0,"dentro_pct":23,"abierto_pct":25,"corredor_pct":52,"ancho_mediana_m":15},
+    "1911": {"muestras":175,"fuera":0,"dentro_pct":18,"abierto_pct":25,"corredor_pct":57,"ancho_mediana_m":13},
+    "1936": {"muestras":175,"fuera":0,"dentro_pct":18,"abierto_pct":25,"corredor_pct":57,"ancho_mediana_m":13},
+    "1946": {"muestras":175,"fuera":0,"dentro_pct":18,"abierto_pct":25,"corredor_pct":57,"ancho_mediana_m":13}
+   },
+   "sospechosos": []
+  },
+  {
+   "id": "moderno:sucre-tercer-tramo-1952",
+   "desde": 1952,
+   "nombres_osm": ["Avenida Sucre"],
+   "tramos_de_hoy": 60,
+   "largo_m": 7194,
+   "epocas": {
+    "1772": {"muestras":392,"fuera":331,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1843": {"muestras":392,"fuera":331,"dentro_pct":3,"abierto_pct":95,"corredor_pct":2,"ancho_mediana_m":19},
+    "1889": {"muestras":392,"fuera":331,"dentro_pct":5,"abierto_pct":92,"corredor_pct":3,"ancho_mediana_m":18},
+    "1911": {"muestras":723,"fuera":0,"dentro_pct":4,"abierto_pct":91,"corredor_pct":5,"ancho_mediana_m":24},
+    "1936": {"muestras":723,"fuera":0,"dentro_pct":15,"abierto_pct":43,"corredor_pct":41,"ancho_mediana_m":22},
+    "1946": {"muestras":723,"fuera":0,"dentro_pct":15,"abierto_pct":46,"corredor_pct":39,"ancho_mediana_m":22}
+   },
+   "sospechosos": [{"año":1936,"nombre":"Avenida Sucre","x":6974,"y":5640,"largo_m":199,"ancho_mediana_m":20},{"año":1936,"nombre":"Avenida Sucre","x":6840,"y":5622,"largo_m":161,"ancho_mediana_m":20},{"año":1946,"nombre":"Avenida Sucre","x":6974,"y":5640,"largo_m":199,"ancho_mediana_m":20},{"año":1946,"nombre":"Avenida Sucre","x":6840,"y":5622,"largo_m":161,"ancho_mediana_m":20}]
+  },
+  {
+   "id": "moderno:san-martin-ampliacion-1954",
+   "desde": 1954,
+   "nombres_osm": ["Avenida San Martín"],
+   "tramos_de_hoy": 67,
+   "largo_m": 6649,
+   "epocas": {
+    "1772": {"muestras":308,"fuera":360,"dentro_pct":13,"abierto_pct":65,"corredor_pct":22,"ancho_mediana_m":27},
+    "1843": {"muestras":308,"fuera":360,"dentro_pct":33,"abierto_pct":38,"corredor_pct":29,"ancho_mediana_m":18},
+    "1889": {"muestras":308,"fuera":360,"dentro_pct":33,"abierto_pct":37,"corredor_pct":30,"ancho_mediana_m":18},
+    "1911": {"muestras":668,"fuera":0,"dentro_pct":16,"abierto_pct":69,"corredor_pct":15,"ancho_mediana_m":16},
+    "1936": {"muestras":668,"fuera":0,"dentro_pct":19,"abierto_pct":53,"corredor_pct":28,"ancho_mediana_m":21},
+    "1946": {"muestras":668,"fuera":0,"dentro_pct":16,"abierto_pct":58,"corredor_pct":25,"ancho_mediana_m":23}
+   },
+   "sospechosos": [
+    {"año":1772,"nombre":"Avenida San Martín","x":7528,"y":7756,"largo_m":68,"ancho_mediana_m":51},
+    {"año":1911,"nombre":"Avenida San Martín","x":7528,"y":7756,"largo_m":68,"ancho_mediana_m":45},
+    {"año":1936,"nombre":"Avenida San Martín","x":4120,"y":9742,"largo_m":149,"ancho_mediana_m":26},
+    {"año":1936,"nombre":"Avenida San Martín","x":7528,"y":7756,"largo_m":68,"ancho_mediana_m":45},
+    {"año":1946,"nombre":"Avenida San Martín","x":4120,"y":9742,"largo_m":149,"ancho_mediana_m":26}
+   ]
+  },
+  {
+   "id": "moderno:nueva-granada-1950",
+   "desde": 1950,
+   "nombres_osm": ["Avenida Nueva Granada"],
+   "tramos_de_hoy": 29,
+   "largo_m": 3704,
+   "epocas": {
+    "1772": {"muestras":0,"fuera":369,"dentro_pct":null,"abierto_pct":null,"corredor_pct":null,"ancho_mediana_m":null},
+    "1843": {"muestras":0,"fuera":369,"dentro_pct":null,"abierto_pct":null,"corredor_pct":null,"ancho_mediana_m":null},
+    "1889": {"muestras":0,"fuera":369,"dentro_pct":null,"abierto_pct":null,"corredor_pct":null,"ancho_mediana_m":null},
+    "1911": {"muestras":369,"fuera":0,"dentro_pct":0,"abierto_pct":100,"corredor_pct":0,"ancho_mediana_m":null},
+    "1936": {"muestras":369,"fuera":0,"dentro_pct":1,"abierto_pct":93,"corredor_pct":7,"ancho_mediana_m":38},
+    "1946": {"muestras":369,"fuera":0,"dentro_pct":5,"abierto_pct":79,"corredor_pct":17,"ancho_mediana_m":32}
+   },
+   "sospechosos": []
+  }
+ ]
+}
