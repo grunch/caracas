@@ -111,10 +111,12 @@ describe('construirHitos', () => {
     // el tope sube de 630.000 a 645.000.
     // La Candelaria (2.555, #243) cabía en los topes: 644.174 y 1.123.547. Las Mercedes (1.351, #244): 645.525 y 1.124.898;
     // los topes suben de 645.000 a 647.000 y de 1.125.000 a 1.127.000.
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(647_000)
+    // San Jacinto (#245): convento (1.400), solar de 1889 (590) y mercado (593) suman 2.583: 649.096 antes de 1946 y
+    // 1.128.469 en total (con San Pablo, #246); los topes suben de 647.000 a 650.000 y de 1.127.000 a 1.130.000.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(650_000)
     // Total medido con terrenos siguiendo el DEM: 1.080.573 entonces; con el Puente de Hierro, 1.091.159; con el cruce de Sur 7, 1.099.919;
     // con los tres templos de #259, 1.104.666; con Dolores y Restaurador, 1.120.992 (tope de 1.110.000 a 1.125.000).
-    expect(datos.indices.length / 3).toBeLessThan(1_127_000)
+    expect(datos.indices.length / 3).toBeLessThan(1_130_000)
   })
 
   test('cada hito ocupa un rango de vértices y queda cerca de su lugar en el plano', () => {

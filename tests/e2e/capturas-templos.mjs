@@ -14,6 +14,9 @@ const AÑOS = [[1, '1772'], [2, '1843'], [3, '1889'], [4, '1911'], [5, '1936'], 
 // El centro de cada templo en metros del mundo (su contorno en docs/templos-259-georreferencia.json) y el rumbo
 // desde el que se ve la fachada: Santa Rosalía mira al oeste, San Juan al norte y San José al sur.
 const TEMPLOS = {
+  // San Jacinto (#245): el solar del convento y del mercado (docs/san-jacinto-georreferencia.json); la iglesia y el
+  // frente del mercado miran al norte
+  'san-jacinto': { x: 236, z: 140, yaw: Math.PI - 0.45, dist: [230, 150] },
   'santa-rosalia': { x: 74, z: 853, yaw: -Math.PI / 2 + 0.45 },
   'san-juan': { x: -1020, z: 762, yaw: Math.PI - 0.45 },
   'san-jose': { x: 831, z: -758, yaw: 0.45 },
@@ -21,9 +24,9 @@ const TEMPLOS = {
   'san-pablo': { x: -289, z: 431, yaw: Math.PI - 0.45 }, // docs/san-pablo-georreferencia.json; miraba al norte, a su plazuela
   candelaria: { x: 1133, z: 79, yaw: -Math.PI / 2 + 0.45 }, // docs/candelaria-georreferencia.json; mira al oeste, a su plaza
 }
-const vistasDe = ({ x, z, yaw }) => ({
-  arriba: { x, z, dist: 170, yaw: 0, pitch: 1.1 },
-  costado: { x, z, dist: 105, yaw, pitch: 0.36 },
+const vistasDe = ({ x, z, yaw, dist = [170, 105] }) => ({
+  arriba: { x, z, dist: dist[0], yaw: 0, pitch: 1.1 },
+  costado: { x, z, dist: dist[1], yaw, pitch: 0.36 },
 })
 const lista = (valor) => valor?.split(',').map((v) => v.trim()).filter(Boolean)
 const [soloTemplo, soloEpoca, soloVista] = [lista(process.env.TEMPLO), lista(process.env.TEMPLO_EPOCA), lista(process.env.TEMPLO_VISTA)]

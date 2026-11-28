@@ -1,0 +1,47 @@
+{
+  "fuente": "Planos calzados sobre el mosaico de 1936 (fuentes/derivados/<año>/calzado.tif): Exato mapa de 1772 (calce de 18,7 m RMS), Jesurún 1843 (12,4 m RMS), Mestre 1889, Razetti 1911; mosaico DCN de 1936; plano DCN levantado con fotos de 1946 (calce de 2,07 m RMS, leído del original con tools/geo/mapa_1946.py). Para la iglesia y el convento, la figura 2 de Dávila Cordido (SIGraDi 2013), que reproduce la superposición de planos de Virginia Vivas (1997) y el plano del mercado de Hurtado Manrique de 1896.",
+  "sistema": "píxeles del mosaico base de 1936, 0,5 m por píxel. En los hitos: a = metros hacia el sur desde el origen, b = metros a la derecha de quien entra (al oeste).",
+  "certeza": "baja para la iglesia y el convento (una figura de 748 píxeles de ancho, sin escala gráfica legible); media para el contorno del mercado (plano de 1936), que después se corre para entrar en la manzana del mapa.",
+  "manzana_del_mapa": {
+    "id": "V1772-37095-0-0",
+    "nota": "La misma en las seis épocas (informes retiro-<año> de los datos completos). Sale del plano de 1772: 108 × 110 m, girada 12,6°. Su límite deja afuera, como plaza, el ángulo noroeste.",
+    "esquinas_px": [[9322, 7056], [9533, 7103], [9485, 7317], [9274, 7271]],
+    "contra_el_plano_de_1936": "la cuadra del plano de 1936 (plaza y mercado juntos) va de x = 9300 a 9550 en la calle del norte, 124 m; la manzana del mapa es 16 m más angosta, su lado norte queda de 11 a 14 m más al sur y su lado este, 7 m más al oeste"
+  },
+  "marco_de_los_hitos": {
+    "esquina_noreste_px": [9533, 7103],
+    "oeste": [-0.976, -0.2177],
+    "sur": [-0.2177, 0.976],
+    "borde_m": 0.5,
+    "nota": "Los tres hitos se miden desde la esquina noreste de la manzana del mapa (Doctor Paúl), a lo largo de sus lados, y no desde el plano de 1936: así quedan dentro de la manzana y alineados con las casas del mapa."
+  },
+  "lecturas_por_plano_px": {
+    "1772": "símbolo de iglesia (recuadro con cruz) de x = 9380 a 9430 y de y = 7065 a 7125, en el ángulo noroeste de la cuadra edificada; la plaza, en blanco, al oeste y al norte (de 9300 a 9400 y de 6950 a 7150), cruza la calle del norte",
+    "1843": "plaza en blanco de 9300 a 9420 y de 7020 a 7150; dentro de ella, un recuadro suelto de 9350 a 9410 y de 7100 a 7150, sin letra; la M de «San Jacinto» en (9430, 7150), sobre la cuadra rayada. El plano no dibuja el contorno de la iglesia",
+    "1889": "plaza B, verde, de 9295 a 9385 y de 7040 a 7150; franja libre de 9385 a 9420; cuadro 23 «Mercado público» con esquinas en (9425, 7065), (9545, 7090), (9525, 7205) y (9410, 7178): unos 60 × 57 m",
+    "1911": "mancha roja 43 en forma de L: de (9395, 7050) a (9545, 7075) por el norte y hasta (9510, 7250) por el sur; la rosa de los vientos tapa parte",
+    "1936": "«Mercado Principal», rayado: cuerpo norte de (9385, 7050) a (9550, 7078) y unos 45 m de fondo; sigue al sur hasta y = 7250 entre x = 9405 y 9520. «Plaza El Venezolano» de 9300 a 9385 y de 7030 a 7125",
+    "1946": "«Mercado Principal», el mismo contorno en L que en 1936; la plaza, sin rótulo"
+  },
+  "figura_2_de_davila": {
+    "panel_de_vivas": "cuadra de 475 px de ancho en la figura ampliada cuatro veces: 0,26 m por píxel con los 124 m de la cuadra de 1936. «IGLESIA»: franja rayada de norte a sur de 100 × 150 px (26 × 39 m), con su muro oeste a 52 m del borde oeste de la cuadra y un espacio en blanco de 50 px (13 m) entre ella y la calle del norte; recuadro con aspa (la torre) de 40 × 35 px en su ángulo noroeste; «Edificio del Convento» de 155 × 200 px (40 × 52 m) con patio, pegado al este, hasta la calle. Rótulos «Cárcel Municipal» y «Cuartel de Milicias».",
+    "panel_de_manrique": "0,25 m por píxel. Tres cuerpos sobre la calle del norte, de oeste a este: 27, 34 y 21 m de ancho y unos 37 m de fondo; al sur, hileras de puestos (55 × 46 m) y un ala al suroeste."
+  },
+  "hitos": {
+    "san-jacinto": {
+      "origen_px": [9409, 7103],
+      "origen": "pie de la fachada, en el eje de las tres naves: a 60 m de la esquina noreste y 13,5 m adentro de la línea del norte",
+      "medidas_m": { "naves": [39, 18.5], "nave_de_los_terceros": [39, 6.5], "torre": 7, "claustro": [52, 40.5], "atrio": 13 }
+    },
+    "solar-mercado-san-jacinto y mercado-san-jacinto": {
+      "origen_px": [9441.2, 7128.6],
+      "origen": "centro del cuerpo norte",
+      "medidas_m": { "cuerpo_norte": [83, 44], "frente": 8, "naves_de_oeste_a_este": [27, 34, 22] },
+      "corrimiento": "respecto del contorno de 1936, el cuerpo norte queda unos 13 m al sur y 8 m al oeste, y girado 3°"
+    }
+  },
+  "marcas_px": {
+    "san-jacinto": [9417, 7128],
+    "plaza-venezolano": [9335, 7110]
+  }
+}

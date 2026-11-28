@@ -185,20 +185,22 @@ export const FICHAS = Object.freeze({
   // --- San Jacinto y el sur ---
   'san-jacinto': {
     textos: [
-      [1, 'El convento de San Jacinto, con su plaza al frente, fue visitado por el obispo Mariano Martí en 1772. Su descripción del templo se recoge en el estudio de Mariolly Dávila Cordido (SIGraDi 2013).'],
-      [2, 'El conjunto sufrió daños en 1812 y la supresión definitiva del convento fue ordenada en 1837 (Dávila Cordido). La leyenda del plano de 1843 conserva «San Jacinto» (M); ese rótulo no demuestra que continuara la comunidad conventual.'],
-      [3, 'La iglesia fue demolida en 1875 para ampliar el mercado (Landaeta Rosales). El plano de 1889 identifica aquí el «Mercado público» (23), anterior a la nueva sede de 1897.'],
-      [4, 'La nueva sede del mercado se inauguró en septiembre de 1897, según la investigación de Mariana Iribarren reseñada por Fundación Arquitectura y Ciudad.'],
-      [5, 'El plano de 1936 lo rotula «Mercado Principal».'],
+      [1, 'El convento dominico de San Jacinto, con su iglesia y la plaza al lado. El obispo Mariano Martí lo visitó en 1772: según Virginia Vivas, citada por Mariolly Dávila Cordido (SIGraDi 2013), describió una iglesia de tres naves separadas por pilares con arcos de medio punto y techos de pares y nudillos. Dávila agrega, por fray Antonio Bueno, que tenía una sola puerta y la nave nueva de la Orden Tercera. El dibujo pone la fachada al norte, la torre al oeste y el claustro al este, como en la superposición de planos de Vivas que reproduce Dávila. Ninguna altura está medida.'],
+      [2, 'El terremoto de 1812 arruinó la iglesia y el convento, y los frailes hicieron una capilla provisional en la plaza (Dávila Cordido). La supresión definitiva del convento se ordenó en 1837; la leyenda del plano de 1843 conserva «San Jacinto» (M), y ese rótulo no demuestra que continuara la comunidad. La iglesia estaba otra vez en pie cuando se entregó y seguía en 1874, pero no se halló cuándo se reparó ni cómo quedó: va dibujado igual que en 1772.'],
+      [3, 'La iglesia se demolió en 1875 para ampliar el mercado (Landaeta Rosales); la junta que lo dispuso es de 1874 (Pérez Gallego). El plano de 1889 identifica aquí el «Mercado público» (23), anterior a la nueva sede de 1897. Las obras siguieron hasta 1895 y no se halló cómo era lo construido: no se dibuja ningún edificio, solo el solar.'],
+      [4, 'La nueva sede del mercado se inauguró en septiembre de 1897, según la investigación de Mariana Iribarren reseñada por Fundación Arquitectura y Ciudad. Fue proyecto de Juan Hurtado Manrique con Alejandro Chataing; según Francisco Pérez Gallego, eran tres cuerpos adosados, el central más alto y más ancho, detrás de un volumen de dos pisos de mampostería, con estructura metálica traída de Bélgica y techos de metal galvanizado. Las alturas no están medidas y solo se dibuja el cuerpo norte: de lo que seguía hacia el sur no hay descripción.'],
+      [5, 'El plano de 1936 lo rotula «Mercado Principal». En 1928 tuvo refacciones (Fundación Arquitectura y Ciudad) que el dibujo no distingue.'],
+      [6, 'El plano levantado con fotos de 1946 todavía lo rotula «Mercado Principal». Las fuentes no coinciden sobre su final: «desaparición en 1942» (Fundación Arquitectura y Ciudad) o cierre en 1947 (guiaccs.com). Va en pie, con la contradicción sin resolver.'],
     ],
-    dudas: `La presencia en 1772 está documentada por la visita de Martí. El mercado consta en el plano de 1889; su rótulo no demuestra que ya tuviera una cubierta de hierro.`,
+    dudas: `La visita de Martí, los retablos y la superposición de planos se conocen de segunda mano, por el artículo de Dávila Cordido; lo del mercado, por Pérez Gallego. Ninguno se cotejó con su fuente. El lugar del conjunto puede errar 15 o 20 m: se leyó de una figura pequeña y la manzana del mapa no coincide con la del plano de 1936. El rótulo de mercado de 1889 no demuestra que ya tuviera una cubierta de hierro.`,
   },
   'plaza-venezolano': {
     textos: [
-      [1, 'La plaza frente al convento de San Jacinto.'],
-      [3, 'El plano de 1889 la llama plaza «del Venezolano» (B); el de 1936, «Plaza El Venezolano».'],
+      [1, 'La plaza junto al convento de San Jacinto.'],
+      [2, 'El texto al pie del plano de 1843 cuenta «San Jacinto» entre las plazas de la ciudad. En 1845 recibió la pila de piedra que había estado en la plaza de San Pablo (Landaeta Rosales, Estatuas y pilas antiguas de Caracas).'],
+      [3, 'El plano de 1889 la llama plaza «del Venezolano» (B); el de 1936, «Plaza El Venezolano». En 1879 la pila de piedra se cambió por una de mármol, «la India», y en 1883 se quitó para poner la estatua de Antonio Leocadio Guzmán (Landaeta Rosales).'],
     ],
-    dudas: `El nombre anterior es un dato general: ${SIN_LEYENDA}. La leyenda del plano de 1843 no da letra a las plazas; el texto al pie de ese plano cuenta «San Jacinto» entre las plazas de la ciudad.`,
+    dudas: `El nombre anterior es un dato general: ${SIN_LEYENDA}. La leyenda del plano de 1843 no da letra a las plazas; el texto al pie de ese plano cuenta «San Jacinto» entre las plazas de la ciudad. La pila, la estatua y la baranda no se dibujan: no se halló su forma ni su lugar exacto.`,
   },
   'casa-natal': {
     textos: [
