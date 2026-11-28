@@ -20,6 +20,7 @@ import {cementerioSur} from './datos/cementerio-sur.js'
 import { templosParroquiales } from './datos/templos-parroquiales.js'
 import { candelaria } from './datos/candelaria.js'
 import { laMerced } from './datos/la-merced.js'
+import { sanPablo } from './datos/san-pablo.js'
 
 // Triángulos de las crujías de planta baja: conservan los huecos reales y el
 // retiro comercial de 2,6 m que deja las galerías abiertas al peatón.
@@ -33,7 +34,7 @@ const bloquesSilencio = silencio.filter(h => h.id.startsWith('silencio-bloque-')
   }),
 }))
 
-export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar, ...bloquesSilencio, nuevoCirco, metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios,cementerioSur, ...templosParroquiales, candelaria, laMerced]
+export const hitosConPlanta = () => [catedral, ...iglesias, ...civiles, panteon, plazaBolivar, ...bloquesSilencio, nuevoCirco, metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios,cementerioSur, ...templosParroquiales, candelaria, laMerced, sanPablo]
   .flatMap(h=>{
    const comun={id:h.id,nace:h.nace,muere:h.muere,suprime:h.suprime??[],transitable:h.transitable,patio:h.patio}
    const fijas=h.planta?.length?[{...comun,planta:h.planta}]:[]
