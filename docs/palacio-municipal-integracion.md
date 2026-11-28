@@ -69,12 +69,23 @@ Certeza: **alta** = el documento lo dice o lo dibuja; **media** = fuente secunda
 
 Recuadro leído en el plano de 1936 (0,5 m por píxel): esquinas (8853, 6929), (8940, 6951), (8916, 7097) y
 (8825, 7079); lados de 44,9 (plaza), 74,0, 46,4 y 76,3 m (calle Sur 2). Es un cuadrilátero algo torcido; el modelo
-usa el **rectángulo medio de 45,5 × 75 m**, con centro en (8883,5, 7014) y eje (0,9755, 0,22). Cada esquina queda a
+usa el **rectángulo medio de 45,5 × 75 m**, con centro en (8883,5, 7014) y eje (0,9755, 0,22). El hito se ancla
+al pie del frente (8900, 6940,84) y no al centro: el terreno baja unos 3 m hacia el sur y, anclado al centro, la
+planta baja del frente quedaba medio enterrada. Cada esquina queda a
 menos de 2,5 m de la leída (el test lo exige a menos de 3 m). El patio, de 21,9 × 19,4 m, queda en la mitad norte.
 El plano de 1946 repite contorno y patio con 2 a 3 m de diferencia, dentro de su calce.
 
 La reserva (`suprime`, `sinArboles`) es ese mismo rectángulo, **desde 1911**: no toca la calle de la plaza, la
-calle Sur 2 ni a los vecinos. Antes de 1911 el hito no reserva nada y la cuadra sigue como en `main`.
+calle Sur 2 ni a los vecinos. Antes de 1911 el hito no reserva nada y la cuadra sigue como en `main`: las capturas
+de 1772, 1843 y 1889 son idénticas píxel por píxel a las de `main`.
+
+La **colisión** del modo a pie son los cuatro cuerpos (2.988 m²), con el patio del plano abierto. No se usa el
+`patio: true` genérico de `a-pie.js`, que abriría todo el interior a 8 m de los muros, cuerpo de atrás incluido.
+
+Con los datos publicados hoy, la reserva **esconde tres casas** desde 1911 (los techos 716, 717 y 718 de
+`ciudad.pak`): las que pisaban el solar en más de una cuarta parte. Al sur del edificio queda un hueco de suelo
+verde de unos 15 m, donde seguían esas casas, hasta que se regeneren los datos y la manzana se reparta alrededor
+de la reserva.
 
 ### R13: ningún edificio sobre una manzana
 
@@ -84,7 +95,7 @@ manzana y no la retira.
 
 Medido con `tools/hitos-manzanas-tabla.mjs` sobre los informes de retiro de los datos completos (28-11-2026), en
 1911, 1936 y 1946: manzana `U1772-0080` (11.837 m²), 99,6 % del recuadro dentro de ella, 28,7 % de la manzana
-bajo el hito, clase **chico**, decisión **conservar**. Las filas de los demás hitos no cambian.
+bajo el recinto (25,1 % bajo los cuerpos), clase **chico**, decisión **conservar**. Las filas de los demás hitos no cambian.
 `docs/manzanas-hitos.json` no se toca: lo reescribe la herramienta al regenerar los datos.
 
 ## Lo que se dibuja y lo que no

@@ -64,13 +64,20 @@ test('el Palacio Municipal se dibuja desde 1911, no antes, y sin errores de shad
 
 test('una sola marca para el conjunto: cambia de nombre con la época y la ficha dice cuándo no se dibuja', async ({ page }) => {
   await page.goto('/?sinintro&capture&sinsw')
-  await page.waitForFunction(() => window.lab?.ready && window.lab?.marcasDelMapa && window.lab?.fichas && window.lab?.lineaDeTiempo)
+  await page.waitForFunction(() => window.lab?.ready && window.lab?.marcasDelMapa && window.lab?.fichas)
   const marcas = await page.evaluate(() => window.lab.marcasDelMapa
     .filter((m) => ['palacio-municipal', 'seminario', 'concejo', 'justicia'].includes(m.id)).map((m) => [m.id, m.hito, m.nace]))
   expect(marcas).toEqual([[ID, ID, 1]])
+  // la época se fija con los uniforms, como en fichas.spec.js: la ficha abierta la sigue
   const ver = async (epoca) => {
-    await page.evaluate((e) => window.lab.lineaDeTiempo.elegir(e), epoca)
-    await page.waitForFunction((e) => window.lab.fichas.epoca === e, epoca)
+    await page.evaluate((e) => {
+      const { ciudad: { U }, pedirCuadro } = window.lab
+      U.uEpocaDe.value = U.uEpocaA.value = e
+      U.uOlaEpoca.value = 9000
+      window.__cuadro = false
+      requestAnimationFrame(() => { pedirCuadro(3); requestAnimationFrame(() => requestAnimationFrame(() => { window.__cuadro = true })) })
+    }, epoca)
+    await page.waitForFunction(() => window.__cuadro === true)
   }
   await ver(5)
   await page.evaluate((id) => window.lab.fichas.abrir(id), ID)
