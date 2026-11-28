@@ -88,6 +88,14 @@ def test_manzana_sin_casas_y_sin_hito_que_la_cubra_sigue_siendo_un_error():
         recortar_y_arbolar([diminuta],[],.5)
 
 
+def test_un_hito_que_solo_toca_el_borde_de_la_manzana_no_la_cubre():
+    import pytest
+    diminuta={'id':'diminuta','poligono':[[0,0],[1,0],[1,1],[0,1]],'casas':[]}
+    vecino=[[1,0],[5,0],[5,1],[1,1]]  # comparte un lado, no ocupa nada de ella
+    with pytest.raises(ValueError):
+        recortar_y_arbolar([diminuta],[vecino],.5)
+
+
 def test_manzana_sin_casas_con_una_franja_donde_no_cabe_un_arbol_queda_sin_arboles():
     # El hito deja libre una franja de 1 m (M5-1064-A0): hay patio, pero ningún árbol cabe en él.
     m={'id':'franja','poligono':[[0,0],[40,0],[40,40],[0,40]],'casas':[]}

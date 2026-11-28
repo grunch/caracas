@@ -154,7 +154,7 @@ def cubierta_por_hitos(m, limite, edificios):
     """Red de seguridad de R13 (specs/13): la manzana que un hito ocupa se retira antes de llegar acá
     (hitos_manzanas.py). Si una que se conserva (hito chico, o un roce) no tiene casas que ceder y el hito no le
     deja lugar a un árbol, queda sin árboles en vez de detener la regeneración."""
-    return not m['casas'] and not edificios.is_empty and edificios.intersects(limite)
+    return not m['casas'] and edificios.intersection(limite).area > 0
 
 
 def sin_arboles(m):
