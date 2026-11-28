@@ -167,9 +167,9 @@ reservas. `npm run datos:al-dia` avisa por `src/hitos/`.
 ## Rendimiento
 
 2.583 triángulos más (convento 1.400, solar de 1889 590, mercado 593): con `main` (`fab5b25`, que ya trae La
-Candelaria), 646.757 antes de 1946 y 1.126.130 en total; con Las Mercedes (#316), 648.108 y 1.127.481. Los topes unitarios
-suben de 647.000 a 650.000 y de 1.127.000 a 1.130.000. Build: workers +3,3 kB (176,9 contra 173,6 de `main` en
-`fab5b25`); con Las Mercedes, 177,6 kB, y el tope de workers sube de 176 a 179. La medición de carga y de cuadro, con dos llamadas de dibujo de más que no se explicaron, en
+Candelaria), 646.757 antes de 1946 y 1.126.130 en total; con Las Mercedes (#316) y San Pablo (#317), 649.096 y 1.128.469. Los
+topes unitarios suben de 647.000 a 650.000 y de 1.127.000 a 1.130.000. Build: workers +3,3 kB (176,9 contra 173,6
+de `main` en `fab5b25`); con los otros dos templos, 178,8 kB, y el tope de workers sube de 176 a 180. La medición de carga y de cuadro, con dos llamadas de dibujo de más que no se explicaron, en
 [`mediciones/san-jacinto-245`](mediciones/san-jacinto-245/README.md).
 
 ## Capturas
