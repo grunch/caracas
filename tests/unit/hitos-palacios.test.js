@@ -144,8 +144,9 @@ describe('los edificios civiles', () => {
     // (~12,7 mil, sin interior). Siempre en el mismo draw call.
     // Cementerio Sur añade terreno/caminos siguiendo el relieve; total medido en todas las épocas: 1.080.573.
     // El Puente de Hierro (#272) añade 8.210 triángulos: 611.786 antes de 1946 y 1.091.159 en total.
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(615_000)
-    expect(d.indices.length / 3).toBeLessThan(1_100_000)
+    // Constitución y Sucre metálico (#272) añaden 8.760: 620.546 antes de 1946 y 1.099.919 en total.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(625_000)
+    expect(d.indices.length / 3).toBeLessThan(1_110_000)
     expect(d.rangos.length).toBe(HITOS.length)
   }, 15_000)
 })

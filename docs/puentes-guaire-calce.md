@@ -51,9 +51,11 @@ El relieve (Copernicus GLO-30) no trae el cauce: entre las cabezas el terreno ba
 **Huella.** El río, sobre el eje: y = 9400–9450 (1889), 9405–9445 (1911, con las orillas en 9385 y 9478) y
 9447–9458 (1936). En 1936 hay dos edificaciones a 1 m del borde este de la calzada, entre y = 9365 y 9410.
 
-## Constitución y Sucre (calle Sur 7), para el PR siguiente
+## Constitución y Sucre (calle Sur 7)
 
-No se instalan todavía. Quedan medidos:
+Instalados después: las cabezas adoptadas, el eje releído y lo que se descartó de esta tabla están en
+[`puente-sucre-integracion.md`](puente-sucre-integracion.md) y [`puente-sucre-calce.json`](puente-sucre-calce.json).
+Lo medido en este primer calce:
 
 | Plano | Qué dibuja | Cabeza norte (mosaico · original) | Cabeza sur (mosaico · original) | Largo |
 |---|---|---|---|---|
@@ -64,8 +66,8 @@ No se instalan todavía. Quedan medidos:
 - Eje de 1936: pasa por (9704, 9440) con dirección (−0,096, 0,995); calzada de unos 9,8 m.
 - Río sobre el eje: y = 9358–9400 (1889), 9392–9432 (1911), 9422–9445 (1936). De 1889 a 1936 el cauce dibujado
   se corre unos 30 m al sur: hay que decidir con cuál se queda cada época.
-- **Pendiente antes de instalar el Sucre:** el plano de 1911 lo dibuja 12 m más corto que su luz documentada. No se
-  puede usar ese plano para las cabezas del Sucre sin otra fuente.
+- El plano de 1911 dibuja el Sucre 12 m más corto que su luz documentada: de él se tomó solo la cabeza norte; la
+  sur va a los 60 m documentados.
 - Cotas del relieve en las cabezas de 1889: 873,2 m y 872,8 m.
 
 ## Dolores, Restaurador, 19 de Diciembre y Ayacucho

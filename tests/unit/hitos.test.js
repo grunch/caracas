@@ -103,8 +103,11 @@ describe('construirHitos', () => {
   })
 
   test('presupuesto: pocos triángulos para un solo draw call', () => {
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(615_000) // Cementerio Sur sigue el relieve con malla subdividida: +2.774 triángulos; el Puente de Hierro (estructura única de 1889 a 1936, dos cauces): +8.210, medido 611.786.
-    expect(datos.indices.length / 3).toBeLessThan(1_100_000) // Total medido con terrenos siguiendo el DEM: 1.080.573 entonces; con el Puente de Hierro, 1.091.159.
+    // Cementerio Sur sigue el relieve con malla subdividida: +2.774 triángulos; el Puente de Hierro (estructura única de
+    // 1889 a 1936, dos cauces): +8.210, medido 611.786; Constitución (4.842) y Sucre metálico (3.918): medido 620.546.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(625_000)
+    // Total medido con terrenos siguiendo el DEM: 1.080.573 entonces; con el Puente de Hierro, 1.091.159; con el cruce de Sur 7, 1.099.919.
+    expect(datos.indices.length / 3).toBeLessThan(1_110_000)
   })
 
   test('cada hito ocupa un rango de vértices y queda cerca de su lugar en el plano', () => {
