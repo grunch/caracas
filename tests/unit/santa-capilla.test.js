@@ -361,6 +361,22 @@ describe('San Mauricio y la Santa Capilla por etapas (#253)', () => {
     expect(texto(5)).toMatch(/1924/)
     expect(f.dudas).toMatch(/hipótesis/)
     expect(f.dudas).toMatch(/1952/)
+    // la torre baja respecto del modelo anterior del mapa, y la ficha lo dice con el motivo
+    expect(f.dudas).toMatch(/de unos 43 m baja a unos 37 con la cruz \(35 en 1911\)/)
+    expect(f.dudas).toMatch(/ninguna de las dos alturas está medida/)
+    // …y las cifras del texto son las del modelo: lo más alto de la Santa Capilla en 1911 y desde 1936
+    const cima = (epoca) => {
+      const { desde, hasta } = datos.rangos.find((r) => r.id === 'santa-capilla')
+      let y = 0
+      for (let i = desde; i < hasta; i++) {
+        const [nace, muere] = [datos.vidas[i * 2], datos.vidas[i * 2 + 1]]
+        if (nace <= epoca && (!muere || muere > epoca)) y = Math.max(y, datos.posiciones[i * 3 + 1])
+      }
+      return y
+    }
+    expect(Math.round(cima(4))).toBe(35)
+    expect(Math.round(cima(5))).toBe(37)
+    expect(cima(6)).toBe(cima(5))
     expect(f.dudas).not.toMatch(/falta ver dónde cae su letra/)
   })
 })

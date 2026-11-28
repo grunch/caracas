@@ -1,0 +1,50 @@
+{
+  "fuente": "Planos calzados sobre el mosaico de 1936 (fuentes/derivados/<año>/calzado.tif): 1772 (calce de 18,7 m RMS), Jesurún 1843 (12,4 m), Mestre 1889 (7,6 m), Razetti 1911 (6,7 m); mosaico DCN de 1936; plano DCN de 1946 (2,1 m); y la planta del Palacio de las Academias que publica la guía de arquitectura de Caracas (https://guiaccs.com/obras/palacio-de-las-academias/, con escala gráfica), consultada y no incorporada",
+  "sistema": "marco del hito universidad: origen en el píxel (8645, 7192) del mosaico de 1936 (0,5 m por píxel), el medio del frente norte; a = metros al este a lo largo del eje del damero (0,9861, 0,1659); b = metros al sur",
+  "certeza": "baja para 1772 y 1843: ningún plano de esas épocas dibuja el interior de la cuadra. La planta es la del edificio de hoy, confirmada en número y orden de patios por el plano de 1889 y en lugar por los de 1936 y 1946, dentro de 7 a 10 m.",
+  "convento": {
+    "columna_m": { "a": [17.7, 50], "b": [0, 97], "ancho": 32.3, "fondo": 97 },
+    "muro_este": "a = 50: sobre el muro oeste de la nave del hito san-francisco (a = 50,1)",
+    "frente": "b = 0: la línea del frente del hito universidad",
+    "crujias_m_en_b": { "frente": [0, 10], "entre_norte_y_medio": [35, 47], "entre_medio_y_sur": [71.5, 82.5], "fondo": [90, 97] },
+    "corredores_m": 3.4,
+    "patios_m": [
+      { "nombre": "norte", "a": [21.1, 46.6], "b": [10, 35] },
+      { "nombre": "medio", "a": [21.1, 46.6], "b": [47, 71.5] },
+      { "nombre": "sur", "a": [21.1, 46.6], "b": [82.5, 90] }
+    ],
+    "centro_mundo_m": { "x": -168, "z": 231, "nota": "metros desde la Plaza Bolívar; la cámara de tests/e2e/capturas-convento-254.mjs" }
+  },
+  "lectura_del_levantamiento_de_hoy": {
+    "escala": "la barra de 0 a 20 m mide 73 px en la imagen de 316 × 386 px: entre 3,6 y 3,7 px por metro; el error de lectura es de medio metro en un patio y de hasta 2 m en los 97 m del fondo",
+    "orientacion": "el norte, abajo: la fachada de la iglesia y el frente del convento dan al borde inferior",
+    "iglesia": "22 m de ancho (el hito san-francisco: 22,4 m con contrafuertes)",
+    "columna_de_claustros": "32,3 m de ancho entre muros, pegada al muro oeste de la iglesia; 97 m del frente al fondo",
+    "patios": "claustro del norte, 25,5 × 25 m entre columnas; claustro del medio, 25,5 × 24 m; patio del sur, de unos 24 × 7,5 m; corredores de 3,4 m",
+    "no_usado": "los cuerpos al oeste de la columna (paraninfo, biblioteca), de los siglos XIX y XX"
+  },
+  "otros_planos": {
+    "1772": "la cuadra entera en rojo (edificado), sin interior; su lado norte, 17 m al norte del frente (b = -17)",
+    "1843": "plazuela en blanco delante, de a = -22 a 38 y de b = -20 a 10; la iglesia, de a = 38 a 70; la leyenda solo nombra la iglesia (N «San Francisco»); el resto de la cuadra, rayado como edificado",
+    "1889": "3 «Universidad»: de a = -30 a 35 y de b = 3 a 108, con tres patios en fila (a de -19 a 18; b de 14 a 33, de 48 a 70 y de 85 a 108, este abierto a la calle del sur); 4, al oeste, de a = -56 a -30 y de b = 3 a 49; VII, la iglesia, de a = 35 a 59",
+    "1911": "16, una franja de a = 0 a 35 y de b = -15 a 100, pegada a la iglesia; 24 y 25, al noroeste",
+    "1936": "«Universidad Central» y «Academia de la Historia»: frente de a = -58 a 50; patios en a de 12 a 42, b de 18 a 38, y a de 10 a 38, b de 52 a 80; la iglesia, de a = 52 a 72",
+    "1946": "dos patios en fila junto al recuadro de la iglesia y otro, en forma de H, al noroeste"
+  },
+  "desacuerdos": [
+    "Mestre (1889) dibuja la iglesia de a = 35 a 59 y el plano de 1936, de 52 a 72: en esta cuadra el plano de 1889 calzado queda de 10 a 15 m al oeste. Por eso sus medidas no se usan, solo el número y el orden de los patios.",
+    "Mestre dibuja la Universidad de 65 m de ancho; el levantamiento de hoy da 32 m para la columna de claustros y Razetti (1911), una franja de unos 35 m.",
+    "Los planos de 1936 y 1946 ponen los dos patios grandes de 7 a 10 m más al oeste que el levantamiento de hoy.",
+    "El hito universidad (96 × 56 m, sin patios) es menos hondo que lo que dibujan los planos de 1889, 1936 y 1946 (unos 105 m): no se corrige acá."
+  ],
+  "r13": {
+    "manzana": "U1772-0202 (16.782 m²)",
+    "recinto_m2": 3133,
+    "huella_m2": { "1772": 881, "1843": 1680 },
+    "manzana_bajo_el_recinto": 0.1867,
+    "recinto_en_la_manzana": 1,
+    "ocupacion_con_la_iglesia": 0.2612,
+    "clase": "chico",
+    "decision": "conservar"
+  }
+}
