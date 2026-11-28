@@ -59,8 +59,11 @@ describe('caminos de salida, alcabalas y avenidas del oeste (#270, #275)', () =>
     }
   })
 
-  it('el camino de La Vega de 1772 pasa a menos de 10 m de la esquina «Cruz de la Vega» leída en 1936', () => {
-    // Arrange: la esquina, leída en un recorte del mosaico
+  it('el camino de La Vega de 1772 pasa a menos de 10 m de donde este catálogo leyó la esquina «Cruz de la Vega» (lectura propia, no un dato del repo)', () => {
+    // Arrange: la esquina NO está en el diccionario de esquinas; es la posición leída a ojo que cita la etapa de 1936.
+    // El test comprueba que la cuenta del documento sale de esa lectura, no que la lectura sea buena.
+    expect(esquinas.some((e) => e.nombre === 'Cruz de la Vega')).toBe(false)
+    expect(etapa('camino:la-vega', 1936).lectura).toContain('«Cruz de la Vega» en (6230, 8700)')
     const cruzDeLaVega = [6230, 8700]
 
     // Act
@@ -120,7 +123,19 @@ describe('caminos de salida, alcabalas y avenidas del oeste (#270, #275)', () =>
     const plaza = de('avenida:plaza-catia')
     expect(etapa('avenida:plaza-catia', 1936).nombre).toBe('Plaza La Libertad')
     expect(plaza.contradicciones.map((c) => [c.asunto, c.estado])).toEqual([['Nombre de la plaza en 1936', 'pendiente']])
-    expect(plaza.cronologia.find((c) => /estatua/.test(c.dice)).fecha.desde).toBe(1951)
+    // «después de 1951» es una cota inferior, no un hecho de 1951
+    const estatua = plaza.cronologia.find((c) => /estatua/.test(c.dice))
+    expect([estatua.fecha, estatua.certeza]).toEqual([null, 'inferida'])
+    expect(etapa('avenida:plaza-catia', 1936).certeza).toBe('dudosa')
+  })
+
+  it('la Carretera del Este guarda sus tres fechas como dudosas, y la obra de 1954 dice qué fuente da cada dato', () => {
+    const este = de('camino:sabana-grande')
+    expect(este.contradicciones[0].afirmaciones.map((a) => a.fuente)).toEqual(['cil', 's50', 's54'])
+    expect(este.cronologia.map((c) => [c.fecha.desde, c.certeza, c.disputa])).toEqual([1875, 1934, 1947].map((a) => [a, 'dudosa', 'Fecha de la Carretera del Este']))
+    const obra = de('avenida:san-martin').cronologia.filter((c) => c.disputa === 'Extensión de la obra de 1954')
+    expect(obra.map((c) => [c.fuentes, c.certeza])).toEqual([[['sm'], 'dudosa'], [['s93'], 'dudosa']])
+    expect(de('avenida:san-martin').cronologia.find((c) => /30 m de fachada/.test(c.dice)).fuentes).toEqual(['s93', 'sm'])
   })
 
   it('una crónica sin referencias no acredita nada como documentado', () => {

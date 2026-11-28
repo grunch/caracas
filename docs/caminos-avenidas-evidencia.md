@@ -33,7 +33,8 @@ desfasen.
    rotula «Carretera Caracas–La Guaira» en Catia.
 2. **El camino de La Vega de 1772 es la «Sur Ocho» de 1936.** El eje L1772-0083, ya calzado, cae sobre la calle que
    el plano de 1936 rotula «Sur Ocho» entre Capuchinos y la Plaza Italia, y pasa a unos 6 m de la esquina que ese
-   plano llama «Cruz de la Vega». Es la coincidencia mejor sustentada entre un camino de 1772 y una calle de 1936.
+   plano llama «Cruz de la Vega». La posición de esa esquina, (6230, 8700), es una lectura propia hecha a ojo para
+   este documento: no está en el diccionario de esquinas del repo, así que la medida vale lo que valga esa lectura. Es la coincidencia mejor sustentada entre un camino de 1772 y una calle de 1936.
 3. **En 1936 «Avenida San Martín» empieza en la esquina de Alcabala.** El rótulo va de ahí hacia el suroeste; el
    tramo de Capuchinos a la Plaza Italia se sigue llamando «Sur Ocho». FAC da el nombre San Martín desde 1922, sin
    decir en qué tramo.
@@ -44,7 +45,7 @@ desfasen.
    del puente de Anauco. Que una esquina de 1936 sea el lugar de una alcabala de 1843 sigue siendo una inferencia.
 5. **La plaza de Catia se llama «Plaza La Libertad» en el plano de 1936**, mientras FAC dice que de 1935 a 1941 se
    llamó «Agustín Codazzi». Contradicción pendiente.
-6. **La estatua de Sucre no está en Catia en 1936 ni en 1946.** Según FAC, la plaza la recibe «después de 1951»; la
+6. **La estatua de Sucre no está en Catia en 1936 ni en 1946.** Según FAC, la plaza la recibe «después de 1951» (una cota inferior: no da el año); la
    ecuestre de Lorenzo González de 1922 estaba en el cruce de la avenida San Martín con la 19 de Diciembre (foto
    de hacia 1945). El issue pedía cotejar esto antes de modelar el monumento: no se modela.
 7. **El «ensanche de 1924» de la avenida Sucre no aparece en la fuente.** La entrada de FAC solo cita, para enero
@@ -111,13 +112,13 @@ Venezuela», «Colección Fundación Arquitectura y Ciudad», redes) sin licenci
 | Avenida Sucre (Catia) | Sin lectura | Sin lectura | Sin lectura | Sin lectura | **Existe** (documentada). «Avenida Sucre». Rótulo «AVENIDA SUCRE» desde la Plaza La Libertad (2180, 4450) hacia el este, hasta pasar (4000, 5000); edificada a trechos, con la Capilla de Catia y el depósito del MOP sobre ella. | **Existe** (documentada). «Avenida Sucre». El mismo rótulo, de la plaza a Agua Salud (4900, 4900), y la avenida sigue al sureste. Leído sobre el plano reducido a 2 m por píxel. |
 | Avenida San Martín | Sin lectura | Sin lectura | Sin lectura | Sin lectura | **Existe** (documentada). «Avenida San Martín». Rótulo «AVENIDA SAN MARTIN» al suroeste de la esquina Alcabala, de (5400, 9000) a (4700, 9500), frente a la Casa de Maternidad. Al noreste, de la Plaza Italia a Capuchinos, la misma vía se rotula «Sur Ocho». | **Existe** (documentada). «Avenida San Martín». Rótulo «AVENIDA SAN MARTIN» en el mismo tramo, de (5400, 9050) a (4300, 9600). Leído sobre el plano reducido a 2 m por píxel. |
 | Nueva Caracas, avenida España y Plaza Pérez Bonalde | Sin lectura | Sin lectura | Sin lectura | Sin lectura | **Existe** (documentada). «Nueva Caracas». Retícula completa entre x 1500 y 2700, y 4700 y 6600, con la «Avenida España» de norte a sur y la «Plaza Pérez Bonalde» en (1770, 6090); calles Colombia, México, Argentina, Brasil, Bolívar y Ecuador. La mayoría de las manzanas tiene pocas casas sueltas. | **Existe** (documentada). «Nueva Caracas». La misma retícula, ahora con las manzanas del norte rellenas de edificación; rótulos «Nueva Caracas», «Avenida España» y avenidas numeradas. Leído sobre el plano reducido a 2 m por píxel. |
-| Plaza de Catia (hoy Plaza Sucre) | Sin lectura | Sin lectura | Sin lectura | Sin lectura | **Existe** (documentada). «Plaza La Libertad». Plaza ajardinada en (2180, 4450), con ese rótulo, donde empieza la avenida Sucre. | **Existe** (documentada). La plaza sigue en el mismo sitio; su rótulo, de dos líneas, no se lee en el plano reducido. |
+| Plaza de Catia (hoy Plaza Sucre) | Sin lectura | Sin lectura | Sin lectura | Sin lectura | **Existe** (dudosa). «Plaza La Libertad». Plaza ajardinada en (2180, 4450), con ese rótulo, donde empieza la avenida Sucre. | **Existe** (documentada). La plaza sigue en el mismo sitio; su rótulo, de dos líneas, no se lee en el plano reducido. |
 
 ## Caminos de salida
 
 ### Camino de La Guaira (Camino Real, «de los Españoles»)
 
-`camino:la-guaira-colonial` · camino de recuas · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`camino:la-guaira-colonial` · camino de recuas · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 No es la carretera de 1845 ni la autopista de 1953.
 
@@ -145,7 +146,7 @@ No es la carretera de 1845 ni la autopista de 1953.
 
 ### Carretera de La Guaira (carretera de Catia o Camino del Norte)
 
-`camino:carretera-la-guaira` · carretera de carruajes · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`camino:carretera-la-guaira` · carretera de carruajes · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 El catálogo de vías posteriores a 1946 la trae como `moderno:carretera-vieja-la-guaira` para separarla de la autopista; acá va su obra y lo que dibujan los planos.
 
@@ -168,7 +169,7 @@ El catálogo de vías posteriores a 1946 la trae como `moderno:carretera-vieja-l
 
 ### Camino de Catia («Viejo Camino del Oeste»)
 
-`camino:catia` · camino · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`camino:catia` · camino · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 Lo continúa la avenida Sucre, más abajo.
 
@@ -185,7 +186,7 @@ Lo continúa la avenida Sucre, más abajo.
 
 ### Camino de La Vega (camino de Antímano, Carretera de Occidente)
 
-`camino:la-vega` · camino · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`camino:la-vega` · camino · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 Lo continúa la avenida San Martín, más abajo.
 
@@ -204,7 +205,7 @@ Lo continúa la avenida San Martín, más abajo.
 
 ### Camino de El Valle
 
-`camino:el-valle` · camino · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`camino:el-valle` · camino · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
@@ -220,7 +221,7 @@ Lo continúa la avenida San Martín, más abajo.
 
 ### Camino de Sabana Grande (Camino Real de Petare, Carretera del Este)
 
-`camino:sabana-grande` · camino · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`camino:sabana-grande` · camino · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 El tramo de la hoja y lo que queda fuera de ella están en el diagnóstico de #279.
 
@@ -228,7 +229,9 @@ El tramo de la hoja y lo que queda fuera de ella están en el diagnóstico de #2
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
-| 1875 | Apertura | La Carretera del Este, de Caracas a Petare, se inaugura en mayo de 1875 | «La llamada “Carretera del Este”, que partía de Caracas a Petare… fue inaugurada también por Guzmán Blanco en mayo de 1875» (p. 16) | documentada | [1] |
+| 1875 | Apertura | La Carretera del Este, de Caracas a Petare, se inaugura en mayo de 1875 | «La llamada “Carretera del Este”, que partía de Caracas a Petare… fue inaugurada también por Guzmán Blanco en mayo de 1875» (p. 16) | dudosa | [1] |
+| 1934 | Levantamiento | En 1934 llevaba del centro a Petare y conectaba las urbanizaciones del este | «conectados por la Carretera del Este que llevaba del centro hasta Petare» | dudosa | [9] |
+| 1947 | Apertura | Inaugurada oficialmente el 12 de marzo de 1947 | «el 12 de marzo de 1947 […] el entonces Gobernador de Caracas, Gonzalo Barrios, inaugurara oficialmente la que se conoció como “Carretera del Este”» | dudosa | [10] |
 
 **Contradicción pendiente — Fecha de la Carretera del Este:**
 
@@ -246,7 +249,7 @@ El tramo de la hoja y lo que queda fuera de ella están en el diagnóstico de #2
 
 ### Alcabala de Candelaria
 
-`alcabala:candelaria` · alcabala · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`alcabala:candelaria` · alcabala · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
@@ -261,7 +264,7 @@ El tramo de la hoja y lo que queda fuera de ella están en el diagnóstico de #2
 
 ### Alcabala del Valle
 
-`alcabala:el-valle` · alcabala · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`alcabala:el-valle` · alcabala · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
@@ -275,13 +278,13 @@ El tramo de la hoja y lo que queda fuera de ella están en el diagnóstico de #2
 
 ### Esquina de Alcabala (camino de La Vega)
 
-`alcabala:la-vega` · alcabala · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`alcabala:la-vega` · alcabala · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
 | 1911 | Levantamiento | El plano de 1911 rotula «Alcabala Palo Grande» la manzana vecina | «ALCABALA PALO GRANDE» | documentada | [12] |
 | 1936 | Levantamiento | El plano de 1936 rotula «Alcabala» la esquina donde empieza el rótulo «Avenida San Martín» | «Alcabala», con la cota 885,739 | documentada | [5] |
-| 1954 | Reforma | La ampliación de 1954 de la avenida San Martín va «de Angelitos a Alcabala» | «concluye la construcción del tramo de la Avenida San Martín comprendido entre las esquinas Angelitos a Alcabala, unos 1.232 metros de longitud» | documentada | [13] |
+| 1954 | Reforma | La ampliación de 1954 de la avenida San Martín va «de Angelitos a Alcabala», según la cronología de FAC, que no cita fuentes; su artículo con referencias da otros extremos | «concluye la construcción del tramo de la Avenida San Martín comprendido entre las esquinas Angelitos a Alcabala, unos 1.232 metros de longitud» | dudosa | [13] |
 
 **No se pudo documentar:**
 
@@ -291,7 +294,7 @@ El tramo de la hoja y lo que queda fuera de ella están en el diagnóstico de #2
 
 ### Puerta de La Guaira
 
-`alcabala:puerta-la-guaira` · puerta · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`alcabala:puerta-la-guaira` · puerta · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
@@ -307,7 +310,7 @@ El tramo de la hoja y lo que queda fuera de ella están en el diagnóstico de #2
 
 ### Avenida Sucre (Catia)
 
-`avenida:sucre` · avenida · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`avenida:sucre` · avenida · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 El tercer tramo, de 1952, está en el catálogo de vías posteriores a 1946 (`moderno:sucre-tercer-tramo-1952`): su ancho de 26 m y sus 314 demoliciones no valen para 1936 ni 1946.
 
@@ -329,7 +332,7 @@ El tercer tramo, de 1952, está en el catálogo de vías posteriores a 1946 (`mo
 
 ### Avenida San Martín
 
-`avenida:san-martin` · avenida · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`avenida:san-martin` · avenida · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 La ampliación de 1954 está en el catálogo de vías posteriores a 1946 (`moderno:san-martin-ampliacion-1954`): 30 m de fachada a fachada. Antes de eso la avenida existía, más angosta.
 
@@ -342,7 +345,10 @@ La ampliación de 1954 está en el catálogo de vías posteriores a 1946 (`moder
 | Sin fecha | Levantamiento | El tramo antiguo iba de la esquina de Angelitos a Palo Grande, donde remataba en la Plaza Italia | «desde la esquina de Angelitos en la parroquia San Juan hasta el sector Palo Grande donde remataba en una plaza (la plaza de Italia que toma ese nombre en 1911…)» | documentada | [7] |
 | 1922 | Levantamiento | Desde 1922 la estatua ecuestre de Sucre está en el cruce con la avenida 19 de Diciembre | «el cruce con la 19 de diciembre (donde se ubica desde 1922 la estatua ecuestre de Antonio José de Sucre realizada por el escultor venezolano Lorenzo González)» | documentada | [7] |
 | 1924 | Levantamiento | La estatua de San Martín estuvo desde 1924 en el eje de la avenida | «inicialmente estuvo ubicada desde 1924 en el eje de la avenida. La plaza, realizada en 1955 al concluirse la ampliación de la vía» | documentada | [7] |
-| 1954 | Reforma | En 1954 se amplía a 30 m de fachada a fachada y se reducen las plazas Capuchinos e Italia | «El ancho de la nueva vía tiene 30 metros de fachada a fachada, la calzada de 18 metros de ancho y el ancho de las aceras 5,90 metros.» | documentada | [13] [7] |
+| 1954 | Reforma | En 1954 se amplía a 30 m de fachada a fachada, con 18 m de calzada: la cifra está en el artículo con referencias (¿Sabía usted? 93) y la repite la cronología de FAC | «El ancho de la nueva vía tiene 30 metros de fachada a fachada, la calzada de 18 metros de ancho y el ancho de las aceras 5,90 metros.» | documentada | [7] [13] |
+| 1954 | Reforma | La obra reduce las plazas Capuchinos e Italia | «redujo considerablemente las dimensiones de las plazas Capuchinos e Italia» | documentada | [7] |
+| 1954 | Reforma | La ampliación va de la esquina de Angelitos a la de Alcabala, 1.232 m, según la cronología de FAC, sin fuentes citadas | «concluye la construcción del tramo de la Avenida San Martín comprendido entre las esquinas Angelitos a Alcabala, unos 1.232 metros de longitud» | dudosa | [13] |
+| 1954 | Reforma | La ampliación va de El Silencio a Palo Grande, según el artículo con referencias | «su última ampliación en 1954 entre El Silencio y Palo Grande» | dudosa | [7] |
 
 **Contradicción pendiente — Extensión de la obra de 1954:**
 
@@ -358,7 +364,7 @@ La ampliación de 1954 está en el catálogo de vías posteriores a 1946 (`moder
 
 ### Nueva Caracas, avenida España y Plaza Pérez Bonalde
 
-`avenida:nueva-caracas` · urbanización · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`avenida:nueva-caracas` · urbanización · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 **Nombres:** «Nueva Caracas» (1928–hoy) [6].
 
@@ -374,16 +380,17 @@ La ampliación de 1954 está en el catálogo de vías posteriores a 1946 (`moder
 
 ### Plaza de Catia (hoy Plaza Sucre)
 
-`avenida:plaza-catia` · plaza · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`avenida:plaza-catia` · plaza · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 **Nombres:** «General Juan Crisóstomo Gómez» (1928–1935) [6]; «Agustín Codazzi» (1935–1941) [6]; «Plaza La Libertad» (¿?–¿?) [5]; «Plaza Sucre» (1941–hoy) [6].
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
 | 1928 | Apertura | Se crea en noviembre de 1928 con el nombre de Juan Crisóstomo Gómez | «plaza “General Juan Crisóstomo Gómez” bautizada así en noviembre 1928 cuando fue creada, pasando luego a llamarse “Agustín Codazzi” a la muerte de Juan Vicente Gómez en 1935, para finalmente denominarse plaza “Sucre” en 1941» | documentada | [6] |
-| 1936 | Nombre | El plano de 1936 la rotula «Plaza La Libertad» | «Plaza La Libertad» | documentada | [5] |
+| 1936 | Nombre | El plano de 1936 la rotula «Plaza La Libertad» | «Plaza La Libertad» | dudosa | [5] |
+| 1935 | Nombre | Según FAC se llama «Agustín Codazzi» de 1935 a 1941 | «pasando luego a llamarse “Agustín Codazzi” a la muerte de Juan Vicente Gómez en 1935» | dudosa | [6] |
 | 1941 | Nombre | Se llama Plaza Sucre desde 1941 | «para finalmente denominarse plaza “Sucre” en 1941» | documentada | [6] |
-| 1951 | Reforma | La estatua ecuestre de Sucre la preside después de 1951 | «pasando después de 1951 a ser presidida por una estatua ecuestre del Mariscal de Ayacucho realizada por el escultor Lorenzo González en 1922» | documentada | [6] |
+| Sin fecha | Reforma | La estatua ecuestre de Sucre la preside «después de 1951»: es una cota inferior, la fuente no da el año | «pasando después de 1951 a ser presidida por una estatua ecuestre del Mariscal de Ayacucho realizada por el escultor Lorenzo González en 1922» | inferida | [6] |
 
 **Contradicción pendiente — Nombre de la plaza en 1936:**
 

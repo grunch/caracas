@@ -2,7 +2,7 @@
  "nota": "Caminos de salida, alcabalas y avenidas del oeste (#270, #275): qué acredita cada plano calzado y qué dicen las fuentes, con una fuente por afirmación. No trae ejes nuevos ni anchos: los cuatro ejes de 1772 ya están en tools/geo/referencias/1772-calles-1936.json y acá solo se citan. Las posiciones son píxeles del mosaico de 1936 leídos en recortes; sirven para encontrar el rótulo, no son un calce. Las citas son textuales; en los PDF la página es la impresa.",
  "clases_de_fuente": {
   "plano de época": "Plano del catálogo del repo, calzado sobre el mosaico de 1936.",
-  "secundaria con referencias": "Libro o artículo que cita sus fuentes.",
+  "secundaria con referencias": "Libro o artículo que cita sus fuentes. Es la única clase escrita que admite la certeza «documentada»; una afirmación en disputa no la lleva nunca.",
   "secundaria sin referencias": "Entrada de cronología sin fuentes citadas.",
   "crónica sin referencias": "Crónica divulgativa sin aparato: lo que afirma va como dudoso."
  },
@@ -116,7 +116,8 @@
      "dice": "Empedrado en 1762",
      "cita": "«El hoy llamado “Camino de los Españoles” que data de inicios del siglo XVIII, se empedró en 1762 y, durante tres siglos, fue el único camino transitable entre Caracas y La Guaira» (p. 175)",
      "fuentes": ["cil"],
-     "certeza": "dudosa"
+     "certeza": "dudosa",
+     "disputa": "Desde cuándo es el único camino a La Guaira"
     },
     {
      "tipo": "levantamiento",
@@ -471,7 +472,26 @@
      "dice": "La Carretera del Este, de Caracas a Petare, se inaugura en mayo de 1875",
      "cita": "«La llamada “Carretera del Este”, que partía de Caracas a Petare… fue inaugurada también por Guzmán Blanco en mayo de 1875» (p. 16)",
      "fuentes": ["cil"],
-     "certeza": "documentada"
+     "certeza": "dudosa",
+     "disputa": "Fecha de la Carretera del Este"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1934,"hasta":1934},
+     "dice": "En 1934 llevaba del centro a Petare y conectaba las urbanizaciones del este",
+     "cita": "«conectados por la Carretera del Este que llevaba del centro hasta Petare»",
+     "fuentes": ["s50"],
+     "certeza": "dudosa",
+     "disputa": "Fecha de la Carretera del Este"
+    },
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1947,"hasta":1947},
+     "dice": "Inaugurada oficialmente el 12 de marzo de 1947",
+     "cita": "«el 12 de marzo de 1947 […] el entonces Gobernador de Caracas, Gonzalo Barrios, inaugurara oficialmente la que se conoció como “Carretera del Este”»",
+     "fuentes": ["s54"],
+     "certeza": "dudosa",
+     "disputa": "Fecha de la Carretera del Este"
     }
    ],
    "etapas": [
@@ -649,10 +669,10 @@
     {
      "tipo": "reforma",
      "fecha": {"desde":1954,"hasta":1954},
-     "dice": "La ampliación de 1954 de la avenida San Martín va «de Angelitos a Alcabala»",
+     "dice": "La ampliación de 1954 de la avenida San Martín va «de Angelitos a Alcabala», según la cronología de FAC, que no cita fuentes; su artículo con referencias da otros extremos",
      "cita": "«concluye la construcción del tramo de la Avenida San Martín comprendido entre las esquinas Angelitos a Alcabala, unos 1.232 metros de longitud»",
      "fuentes": ["sm"],
-     "certeza": "documentada"
+     "certeza": "dudosa"
     }
    ],
    "etapas": [
@@ -877,10 +897,36 @@
     {
      "tipo": "reforma",
      "fecha": {"desde":1954,"hasta":1954},
-     "dice": "En 1954 se amplía a 30 m de fachada a fachada y se reducen las plazas Capuchinos e Italia",
+     "dice": "En 1954 se amplía a 30 m de fachada a fachada, con 18 m de calzada: la cifra está en el artículo con referencias (¿Sabía usted? 93) y la repite la cronología de FAC",
      "cita": "«El ancho de la nueva vía tiene 30 metros de fachada a fachada, la calzada de 18 metros de ancho y el ancho de las aceras 5,90 metros.»",
-     "fuentes": ["sm","s93"],
+     "fuentes": ["s93","sm"],
      "certeza": "documentada"
+    },
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1954,"hasta":1954},
+     "dice": "La obra reduce las plazas Capuchinos e Italia",
+     "cita": "«redujo considerablemente las dimensiones de las plazas Capuchinos e Italia»",
+     "fuentes": ["s93"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1954,"hasta":1954},
+     "dice": "La ampliación va de la esquina de Angelitos a la de Alcabala, 1.232 m, según la cronología de FAC, sin fuentes citadas",
+     "cita": "«concluye la construcción del tramo de la Avenida San Martín comprendido entre las esquinas Angelitos a Alcabala, unos 1.232 metros de longitud»",
+     "fuentes": ["sm"],
+     "certeza": "dudosa",
+     "disputa": "Extensión de la obra de 1954"
+    },
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1954,"hasta":1954},
+     "dice": "La ampliación va de El Silencio a Palo Grande, según el artículo con referencias",
+     "cita": "«su última ampliación en 1954 entre El Silencio y Palo Grande»",
+     "fuentes": ["s93"],
+     "certeza": "dudosa",
+     "disputa": "Extensión de la obra de 1954"
     }
    ],
    "etapas": [
@@ -1005,22 +1051,39 @@
      "fuentes": ["s46"],
      "certeza": "documentada"
     },
-    {"tipo":"nombre","fecha":{"desde":1936,"hasta":1936},"dice":"El plano de 1936 la rotula «Plaza La Libertad»","cita":"«Plaza La Libertad»","fuentes":["plano1936"],"certeza":"documentada"},
+    {
+     "tipo": "nombre",
+     "fecha": {"desde":1936,"hasta":1936},
+     "dice": "El plano de 1936 la rotula «Plaza La Libertad»",
+     "cita": "«Plaza La Libertad»",
+     "fuentes": ["plano1936"],
+     "certeza": "dudosa",
+     "disputa": "Nombre de la plaza en 1936"
+    },
+    {
+     "tipo": "nombre",
+     "fecha": {"desde":1935,"hasta":1935},
+     "dice": "Según FAC se llama «Agustín Codazzi» de 1935 a 1941",
+     "cita": "«pasando luego a llamarse “Agustín Codazzi” a la muerte de Juan Vicente Gómez en 1935»",
+     "fuentes": ["s46"],
+     "certeza": "dudosa",
+     "disputa": "Nombre de la plaza en 1936"
+    },
     {"tipo":"nombre","fecha":{"desde":1941,"hasta":1941},"dice":"Se llama Plaza Sucre desde 1941","cita":"«para finalmente denominarse plaza “Sucre” en 1941»","fuentes":["s46"],"certeza":"documentada"},
     {
      "tipo": "reforma",
-     "fecha": {"desde":1951,"hasta":1951},
-     "dice": "La estatua ecuestre de Sucre la preside después de 1951",
+     "fecha": null,
+     "dice": "La estatua ecuestre de Sucre la preside «después de 1951»: es una cota inferior, la fuente no da el año",
      "cita": "«pasando después de 1951 a ser presidida por una estatua ecuestre del Mariscal de Ayacucho realizada por el escultor Lorenzo González en 1922»",
      "fuentes": ["s46"],
-     "certeza": "documentada"
+     "certeza": "inferida"
     }
    ],
    "etapas": [
     {
      "anio": 1936,
      "estado": "existente",
-     "certeza": "documentada",
+     "certeza": "dudosa",
      "documento": "plano1936",
      "fuentes": ["plano1936"],
      "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
