@@ -120,7 +120,8 @@ Al regenerar (`npm run datos`), los pasos de manzanas y de retiro leen `hitosCon
 
 ## Rendimiento
 
-1.351 triángulos más: 645.327 antes de 1946 y 1.124.700 en total (con La Candelaria, de #314). Los topes de los
+1.351 triángulos más: 645.525 antes de 1946 y 1.124.898 en total (con La Candelaria, de #314, que tras su revisión
+suma 198 más que cuando se midió: entonces eran 645.327 y 1.124.700). Los topes de los
 tests suben de 645.000 a 647.000 y de 1.125.000 a 1.127.000. Build: entrada 305,7 kB y workers 174,2 kB (con La
 Candelaria daban 304,7 y 173,5; `main`, 303,4 y 172,4); el tope de workers sube de 174 a 176. La medición de carga
 y de cuadro, en [`mediciones/la-merced-244`](mediciones/la-merced-244/README.md).
