@@ -49,6 +49,13 @@ describe('ancho libre de fachada a fachada', () => {
     expect(anchoLibre(campo(20, { desdeY: 60 }), 1936, [50, 30], [1, 0], OPC).estado).toBe('abierto')
   })
 
+  it('si la búsqueda se sale del campo antes de encontrar manzana, no dice «abierto»: no se sabe', () => {
+    // a 5 m del borde este del campo, mirando hacia afuera, en terreno sin manzanas
+    expect(anchoLibre(campo(20, { desdeY: 60 }), 1936, [90, 30], [1, 0], OPC)).toBeNull()
+    const m = medirVia([{ x: 90, y: 30, dx: 0, dy: 1, largo: 20, nombre: 'Al borde' }], campo(20, { desdeY: 60 }), 1936, OPC)
+    expect(m).toMatchObject({ muestras: 0, fuera: 2, abierto_pct: null })
+  })
+
   it('es null donde el campo no llega', () => {
     expect(anchoLibre(campo(20), 1936, [500, 500], [1, 0], OPC)).toBeNull()
   })

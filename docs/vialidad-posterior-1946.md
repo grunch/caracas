@@ -441,7 +441,7 @@ La capa Hoy trae la avenida entera: no separa las etapas de 1956, 1962, 1971 y 1
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
-| 1971 | Apertura | En 1971 se abren 6 km y la Cota Mil pasa a llamarse avenida Boyacá | «El tramo construido, que tiene 6 km de longitud, une las urbanizaciones La Castellana con El Marqués» | documentada | [29] [28] [12] |
+| 1971 | Apertura | En 1971 se abren 6 km y la Cota Mil pasa a llamarse avenida Boyacá | «El tramo construido, que tiene 6 km de longitud, une las urbanizaciones La Castellana con El Marqués» | dudosa | [29] [28] [12] |
 | 1971 | Obra | Distribuidores La Castellana, Altamira, Sebucán, Boleíta y El Marqués; viaductos Adolfo Ernst y Altamira | «dos estructuras elevadas: el Viaducto Adolfo Ernst (que pasa por Los Chorros) y el Viaducto Altamira» | documentada | [29] |
 
 **Contradicción pendiente — año del tramo La Castellana–El Marqués:**
@@ -562,7 +562,7 @@ La capa Hoy trae la avenida entera; los tramos primero, segundo y cuarto no tien
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
-| 1952 | Apertura | El tercer tramo se inaugura el 23 de noviembre de 1952; la avenida queda de Catia a El Silencio | «se concluye la construcción del tercer tramo de la avenida Sucre […] comprendido entre Tinajitas y la antigua placita Diego de Losada» | documentada | [34] [39] |
+| 1952 | Apertura | El tercer tramo se inaugura el 23 de noviembre de 1952; la avenida queda de Catia a El Silencio | «se concluye la construcción del tercer tramo de la avenida Sucre […] comprendido entre Tinajitas y la antigua placita Diego de Losada» | dudosa | [34] [39] |
 | 1954 | Reforma | El puente Nueva República (antes Pagüita) la une con la plaza O’Leary en 1954 | «se inaugura y pone en servicio el Puente Nueva República (antes Pagüita), que une la Av. Sucre con la Plaza O’Leary» | documentada | [40] [34] |
 
 **Contradicción pendiente — año:**

@@ -26,6 +26,7 @@ const punto = (p) => Array.isArray(p) && p.length === 2 && p.every(finito)
 const texto = (s) => typeof s === 'string' && s.trim().length > 0
 const anio = (n) => Number.isInteger(n) && n >= ANIO_MIN && n <= ANIO_MAX
 const exigir = (ok, mensaje) => { if (!ok) throw new Error(mensaje) }
+const fechaCorta = (f) => (f.desde === f.hasta ? String(f.desde) : `${f.desde}–${f.hasta}`)
 
 /** Un intervalo de años {desde, hasta}; null es «no se conoce» y hay que escribirlo. */
 function validarIntervalo(f, donde) {
@@ -81,7 +82,7 @@ function validarEvidencia(e, fuentes, donde) {
     exigir(TIPOS_DE_HECHO.includes(e.fecha_hecho?.tipo), `${donde}: tipo de hecho inválido`)
     validarIntervalo({ desde: e.fecha_hecho.desde, hasta: e.fecha_hecho.hasta }, `${donde}, fecha_hecho`)
     const tope = doc.fecha_documento?.hasta
-    exigir(tope === undefined || e.fecha_hecho.desde <= tope, `${donde}: el hecho (${e.fecha_hecho.desde}) es posterior al documento que lo acredita (${tope})`)
+    exigir(tope === undefined || e.fecha_hecho.hasta <= tope, `${donde}: el hecho (${fechaCorta(e.fecha_hecho)}) es posterior al documento que lo acredita (${tope})`)
   }
   validarContradicciones(e.contradicciones, fuentes, donde)
 }
@@ -91,6 +92,7 @@ function validarNombres(t, fuentes, citadas) {
   for (const n of t.nombres ?? []) {
     exigir(texto(n?.nombre) && citadas(n.fuentes), `${t.id}: nombre sin texto o sin fuente`)
     for (const k of ['desde', 'hasta']) exigir(n[k] === null || anio(n[k]), `${t.id}: nombre «${n.nombre}» con ${k} inválido (año o null)`)
+    exigir(n.desde === null || n.hasta === null || n.desde <= n.hasta, `${t.id}: nombre «${n.nombre}» termina antes de empezar`)
   }
 }
 

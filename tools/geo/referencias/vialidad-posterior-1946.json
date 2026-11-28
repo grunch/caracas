@@ -375,7 +375,7 @@
    "sistema": "Avenida Boyacá (Cota Mil)",
    "predecesora": "Ninguna documentada",
    "cronologia": [
-    {"tipo":"apertura","fecha":{"desde":1971,"hasta":1971},"dice":"En 1971 se abren 6 km y la Cota Mil pasa a llamarse avenida Boyacá","cita":"«El tramo construido, que tiene 6 km de longitud, une las urbanizaciones La Castellana con El Marqués»","fuentes":["fac-boy71","fac-su88","fac-p438"],"certeza":"documentada"},
+    {"tipo":"apertura","fecha":{"desde":1971,"hasta":1971},"dice":"En 1971 se abren 6 km y la Cota Mil pasa a llamarse avenida Boyacá","cita":"«El tramo construido, que tiene 6 km de longitud, une las urbanizaciones La Castellana con El Marqués»","fuentes":["fac-boy71","fac-su88","fac-p438"],"certeza":"dudosa"},
     {"tipo":"obra","fecha":{"desde":1971,"hasta":1971},"dice":"Distribuidores La Castellana, Altamira, Sebucán, Boleíta y El Marqués; viaductos Adolfo Ernst y Altamira","cita":"«dos estructuras elevadas: el Viaducto Adolfo Ernst (que pasa por Los Chorros) y el Viaducto Altamira»","fuentes":["fac-boy71"],"certeza":"documentada"}
    ],
    "etapas": []
@@ -498,7 +498,7 @@
    "nombres_osm": ["Avenida Sucre"],
    "nota": "La capa Hoy trae la avenida entera; los tramos primero, segundo y cuarto no tienen fecha en las fuentes leídas.",
    "cronologia": [
-    {"tipo":"apertura","fecha":{"desde":1952,"hasta":1952},"dice":"El tercer tramo se inaugura el 23 de noviembre de 1952; la avenida queda de Catia a El Silencio","cita":"«se concluye la construcción del tercer tramo de la avenida Sucre […] comprendido entre Tinajitas y la antigua placita Diego de Losada»","fuentes":["fac-su128","fac-suc52"],"certeza":"documentada"},
+    {"tipo":"apertura","fecha":{"desde":1952,"hasta":1952},"dice":"El tercer tramo se inaugura el 23 de noviembre de 1952; la avenida queda de Catia a El Silencio","cita":"«se concluye la construcción del tercer tramo de la avenida Sucre […] comprendido entre Tinajitas y la antigua placita Diego de Losada»","fuentes":["fac-su128","fac-suc52"],"certeza":"dudosa"},
     {"tipo":"reforma","fecha":{"desde":1954,"hasta":1954},"dice":"El puente Nueva República (antes Pagüita) la une con la plaza O’Leary en 1954","cita":"«se inaugura y pone en servicio el Puente Nueva República (antes Pagüita), que une la Av. Sucre con la Plaza O’Leary»","fuentes":["fac-nr54","fac-su128"],"certeza":"documentada"}
    ],
    "etapas": []

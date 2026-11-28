@@ -15,6 +15,16 @@ describe('JSON compacto', () => {
     expect(abierto).toContain('  {"id":"a","puntos":[[1,2],[3,4]]},')
   })
 
+  it('trata undefined y los huecos de una lista como JSON.stringify: null, también al abrirla', () => {
+    const lista = [1, undefined, , () => {}, { a: undefined, b: 2 }] // eslint-disable-line no-sparse-arrays
+    for (const ancho of [0, 400]) {
+      const texto = jsonCompacto(lista, ancho)
+      expect(JSON.parse(texto)).toEqual([1, null, null, null, { b: 2 }])
+      expect(JSON.parse(texto)).toEqual(JSON.parse(JSON.stringify(lista)))
+    }
+    expect(jsonCompacto(undefined)).toBe('null')
+  })
+
   it('escribe los valores sueltos como JSON', () => {
     expect(jsonCompacto('á')).toBe('"á"')
     expect(jsonCompacto(null)).toBe('null')

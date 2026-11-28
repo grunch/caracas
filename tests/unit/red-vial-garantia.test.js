@@ -113,27 +113,50 @@ describe('los nombres del sitio no adelantan ninguna vía', () => {
   const marcas = normalizarMarcas(MARCAS, { hitos: HITOS, coords })
   const rotulo = (m, e) => nombreEn(m, e)?.nombre ?? ''
   const sinAcentos = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
-  const nombresDe = (t) => [...(t.nombres ?? []).filter((n) => n.desde !== null).map((n) => ({ nombre: n.nombre, desde: n.desde })), ...(t.nombres_osm ?? []).map((nombre) => ({ nombre, desde: t.desde }))]
 
-  it('ninguna marca lleva el nombre de una vía antes del año en que la vía lo recibe', () => {
-    const adelantadas = []
-    for (const t of catalogo.tramos.filter((x) => x.desde !== undefined)) {
-      for (const { nombre, desde } of nombresDe(t)) {
-        for (const m of marcas) {
-          for (let e = 0; e < AÑO_DE_EPOCA.length; e++) {
-            if (!vivaEn(m, e) || AÑO_DE_EPOCA[e] >= desde) continue
-            if (sinAcentos(rotulo(m, e)).includes(sinAcentos(nombre))) adelantadas.push(`${m.id}: «${rotulo(m, e)}» en ${AÑO_DE_EPOCA[e]}, antes de ${desde}`)
-          }
+  /**
+   * Desde cuándo vale cada nombre de vía. Manda la fecha documentada del nombre (`nombres`); el nombre de la capa Hoy
+   * (`nombres_osm`) solo sirve cuando el catálogo no documenta ese nombre, y entonces vale desde la apertura. Así una
+   * avenida que ya se llamaba igual antes de su ensanche (San Martín, 1922) no se toma por adelantada.
+   */
+  function nombresConFecha(tramos) {
+    const desde = new Map()
+    for (const t of tramos) for (const n of t.nombres ?? []) if (n.desde !== null) desde.set(sinAcentos(n.nombre), Math.min(n.desde, desde.get(sinAcentos(n.nombre)) ?? Infinity))
+    for (const t of tramos) {
+      if (t.desde === undefined) continue
+      for (const nombre of t.nombres_osm ?? []) if (!desde.has(sinAcentos(nombre))) desde.set(sinAcentos(nombre), t.desde)
+    }
+    return desde
+  }
+
+  /** Las marcas que, en alguna época en que se ven, llevan el nombre de una vía antes del año en que la vía lo recibe. */
+  function adelantadas(tramos, lista) {
+    const faltas = []
+    for (const [nombre, desde] of nombresConFecha(tramos)) {
+      for (const m of lista) {
+        for (let e = 0; e < AÑO_DE_EPOCA.length; e++) {
+          if (vivaEn(m, e) && AÑO_DE_EPOCA[e] < desde && sinAcentos(rotulo(m, e)).includes(nombre)) faltas.push(`${m.id}: «${rotulo(m, e)}» en ${AÑO_DE_EPOCA[e]}, antes de ${desde}`)
         }
       }
     }
-    expect(adelantadas).toEqual([])
+    return faltas
+  }
+  const marcaDePrueba = (nombre, nace) => normalizarMarcas([{ id: 'prueba', nombre, x: 9000, y: 6500, nace, nivel: 2, fuente: 'prueba' }], { hitos: [], coords })
+
+  it('ninguna marca del sitio lleva el nombre de una vía antes del año en que la vía lo recibe', () => {
+    expect(adelantadas(catalogo.tramos, marcas)).toEqual([])
   })
 
-  it('el control ve una marca adelantada cuando la hay', () => {
-    const falsa = normalizarMarcas([{ id: 'falsa', nombre: 'Avenida Urdaneta', x: 9000, y: 6500, nace: 5, nivel: 2, fuente: 'prueba' }], { hitos: [], coords })[0]
-    expect(vivaEn(falsa, 5)).toBe(true)
-    expect(sinAcentos(rotulo(falsa, 5))).toContain(sinAcentos('Avenida Urdaneta'))
+  it('el control ve una «Avenida Urdaneta» en 1936 y en 1946', () => {
+    expect(adelantadas(catalogo.tramos, marcaDePrueba('Avenida Urdaneta', 5))).toEqual([
+      'prueba: «Avenida Urdaneta» en 1936, antes de 1953', 'prueba: «Avenida Urdaneta» en 1946, antes de 1953',
+    ])
+  })
+
+  it('y deja pasar una «Avenida San Martín» en 1936: se llama así desde 1922, aunque se ensanchó en 1954', () => {
+    expect(nombresConFecha(catalogo.tramos).get('avenida san martin')).toBe(1922)
+    expect(adelantadas(catalogo.tramos, marcaDePrueba('Avenida San Martín', 5))).toEqual([])
+    expect(adelantadas(catalogo.tramos, marcaDePrueba('Avenida San Martín', 4))).toEqual(['prueba: «Avenida San Martín» en 1911, antes de 1922'])
   })
 })
 

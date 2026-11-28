@@ -23,6 +23,11 @@ describe('ficha de evidencias de cada etapa (#269)', () => {
     expect(() => validarRedVial(r)).toThrow(/posterior al documento/)
   })
 
+  it('tampoco admite un hecho que empieza a tiempo y termina después del documento', () => {
+    const r = con((x) => { laEtapa(x).fecha_hecho = { tipo: 'levantamiento', desde: 1772, hasta: 1780 } })
+    expect(() => validarRedVial(r)).toThrow(/1772–1780.*posterior al documento/)
+  })
+
   it('admite un documento posterior al hecho: el plano de fotos de 1946 se catalogó en 1950', () => {
     const r = con((x) => {
       x.fuentes.aereo = { tipo: 'historica', anios: [1946], url: 'https://ejemplo.org/1946', fecha_documento: { desde: 1946, hasta: 1950 } }
@@ -133,6 +138,12 @@ describe('la ficha del tramo: tipo, nombres y cronología con fuente por afirmac
     expect(() => validarRedVial(moderno({ nombres: [{ nombre: 'X', desde: 1953, hasta: null, fuentes: [] }] }))).toThrow(/sin fuente/)
     expect(() => validarRedVial(moderno({ nombres: [{ nombre: 'X', fuentes: ['cr'] }] }))).toThrow(/desde inválido/)
     expect(() => validarRedVial(moderno({ desconocido: [''] }))).toThrow(/desconocido/)
+  })
+
+  it('un nombre no termina antes de empezar; los extremos desconocidos y un solo año valen', () => {
+    const nombre = (desde, hasta) => moderno({ nombres: [{ nombre: 'X', desde, hasta, fuentes: ['cr'] }] })
+    expect(() => validarRedVial(nombre(1961, 1953))).toThrow(/termina antes de empezar/)
+    for (const [d, h] of [[1953, 1953], [null, 1961], [1961, null], [null, null]]) expect(() => validarRedVial(nombre(d, h))).not.toThrow()
   })
 
   it('antes de abrir, solo está en obra o en proyecto si su cronología lo dice para ese año', () => {

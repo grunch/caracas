@@ -31,26 +31,34 @@ export function distanciaEn(campo, anio, x, y) {
   return ((campo.datos[(j * campo.ancho + i) * campo.canales + canal] - 128) / 127) * campo.meta.dist_max_m
 }
 
-/** Metros desde `p` en la dirección `n` hasta entrar en una manzana; null si no aparece ninguna en `max_m`. */
+const SIN_MANZANA = Symbol('sin manzana a la vista')
+const FUERA_DEL_CAMPO = Symbol('fuera del campo')
+
+/**
+ * Metros desde `p` en la dirección `n` hasta entrar en una manzana. SIN_MANZANA si en `max_m` no aparece ninguna;
+ * FUERA_DEL_CAMPO si la búsqueda se sale del campo antes: ahí no se sabe si hay manzana o no.
+ */
 function hastaLaManzana(campo, anio, [x, y], [nx, ny], max_m) {
   for (let m = 1; m <= max_m; m++) {
     const d = distanciaEn(campo, anio, x + nx * m * PX_POR_M, y + ny * m * PX_POR_M)
-    if (d === null) return null
+    if (d === null) return FUERA_DEL_CAMPO
     if (d > 0) return m
   }
-  return null
+  return SIN_MANZANA
 }
 
 /**
  * El ancho libre en `p` a través de la normal `n` (unitaria, en px del plano):
- * { estado: 'dentro' } · { estado: 'abierto' } · { estado: 'corredor', ancho_m } · null si el campo no llega.
+ * { estado: 'dentro' } · { estado: 'abierto' } · { estado: 'corredor', ancho_m } · null si el campo no llega al punto
+ * o se acaba antes de encontrar una manzana (no se puede decir que el terreno esté abierto).
  */
 export function anchoLibre(campo, anio, p, n, { max_m = MAX_M } = {}) {
   const aqui = distanciaEn(campo, anio, p[0], p[1])
   if (aqui === null) return null
   if (aqui > 0) return { estado: 'dentro' }
   const a = hastaLaManzana(campo, anio, p, n, max_m), b = hastaLaManzana(campo, anio, p, [-n[0], -n[1]], max_m)
-  if (a === null || b === null) return { estado: 'abierto' }
+  if (a === FUERA_DEL_CAMPO || b === FUERA_DEL_CAMPO) return null
+  if (a === SIN_MANZANA || b === SIN_MANZANA) return { estado: 'abierto' }
   return { estado: 'corredor', ancho_m: a + b }
 }
 
