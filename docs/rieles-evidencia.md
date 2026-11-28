@@ -28,8 +28,9 @@ abajo se generan desde ahí; `tests/unit/rieles.test.js` comprueba que no se des
    en 1889, «Estación Caracas» en 1911 y «Estación del F.C. de La Guaira» en 1936. La del Central es «Estación» en
    1889, «Estación del F.C.» en 1911 y «Estación del F.C. Central» en 1936. Palo Grande aparece en 1911 («G.F.V.»,
    «Estación Palo Grande»). Ningún plano escribe «Caño Amarillo» sobre la estación.
-2. **El Gran Ferrocarril no existe en 1889.** Su primer tramo abre en 1890. La marca `palo-grande` ya nace en 1911,
-   que es correcto. El comentario de `tools/geo/estilos.py` lo fecha en 1894: esa es la línea completa a Valencia
+2. **El Gran Ferrocarril no se retrotrae a 1889.** Su primer tramo abre en 1890, pero el plano de 1889 no cubre
+   Palo Grande: ese corte queda «no se sabe», no «ausente». La marca `palo-grande` ya nace en 1911, que es
+   correcto. El comentario de `tools/geo/estilos.py` lo fecha en 1894: esa es la línea completa a Valencia
    (30-12-1893 según Cilento, febrero de 1894 según Wikipedia).
 3. **En 1889 el tranvía es de caballos.** El plano de Mestre dibuja una línea de trazos desde la estación del
    ferrocarril de La Guaira hacia el este, por el Viaducto Unión: coincide con el Tranvía Bolívar de 1885. No
@@ -43,8 +44,9 @@ abajo se generan desde ahí; `tests/unit/rieles.test.js` comprueba que no se des
 7. **El Ferrocarril Central en 1946 queda sin resolver.** Sobre su traza de 1936 en Sabana Grande, el plano de 1946
    rotula «Calle La Línea» y todavía dibuja una línea. Morrison dice que levantó los rieles en 1953; FAC, que dejó
    de funcionar hacia 1947. Contradicción pendiente.
-8. **El «inicio 1881/1882» del issue se resuelve con Morrison**: 1881 es la formación de la compañía Tranvía
-   Caracas y 1882 el inicio del servicio, y él mismo advierte que la fecha es incierta.
+8. **El «inicio 1881/1882» del issue no se cierra.** Morrison separa las dos cosas (1881, la compañía Tranvía
+   Caracas; 1882, el servicio) y a la vez dice que «la fecha de su inauguración es incierta»: las dos van como
+   inferidas.
 
 ## Qué hay implementado
 
@@ -101,7 +103,7 @@ del ferrocarril de 1932 y 1933); las de FAC dan la colección y no la licencia. 
 |---|---|---|---|---|---|---|
 | Ferrocarril La Guaira–Caracas y su estación (Caño Amarillo) | Sin lectura | Sin lectura | **Existe** (documentada). «Ferrocarril La Guaira a Caracas». Rótulo de la línea y «Estación». Vía en trazo ajedrezado que sube desde el sur por (6800, 6900) y entra entre dos galpones largos (6880–7000, 6200–6540), con edificio de cabecera hacia la plaza de «Santa Inez». | **Existe** (documentada). «Estación Caracas». Dos galpones largos en rojo (7000–7150, 6150–6600) con la vía entre ellos; «Sta. Inés» al sur. Una línea roja de tranvía llega a la estación desde el este. | **Existe** (documentada). «Estación del F.C. de La Guaira». Haz de vías entre galpones (6900–7100, 6000–6550), «Plaza Sta. Inez» al sur y un segundo haz de vías al este (7180, 6000–6500). En Catia la vía baja junto al rótulo «Carretera Caracas–La Guaira», por (2450, 4000), (3000, 5100) y (4000, 5580). | **Existe** (dudosa). «Estaciones». El rótulo parece decir «ESTACIONES», en plural, sobre el mismo patio; las vías siguen dibujadas ahí y en Catia. Leído sobre el plano reducido a 2 m por píxel. La lectura del rótulo es dudosa. |
 | Ferrocarril Central y su estación (Santa Rosa) | Sin lectura | Sin lectura | **Existe** (documentada). «Estación». Rótulo «Estación» en (13450, 7630), un edificio en rosa (13500–13650, 7700–7820) y la vía en trazo ajedrezado que sale hacia el este desde (13660, 7760). Alrededor, calles en línea de puntos, sin abrir. | **Existe** (documentada). «Estación del F.C.». Dos edificios en rojo (13380–13480, 7700–7740 y 13530–13680, 7750–7800) sobre la calle que el plano llama «Santa Rosa». Una línea roja de tranvía llega desde el oeste hasta la estación. | **Existe** (documentada). «Estación del F.C. Central». Abanico de vías entre (13150, 7580) y (13900, 7800), que sale hacia el este; esquina «Sta. Rosa» en (13720, 7880). En Sabana Grande la vía cruza la hoja como línea de trazos, de (16400, 8560) al borde del dibujo en (18280, 9080). | **No se sabe** (dudosa). En la estación se ven trazos de vía y un rótulo que no se lee. En Sabana Grande, sobre la traza de 1936, el plano rotula «Calle La Línea» y sigue dibujando una línea de trazos. Leído sobre el plano reducido a 2 m por píxel. No alcanza para decir si había servicio. |
-| Gran Ferrocarril de Venezuela y la estación Palo Grande | Sin lectura | Sin lectura | **No está** (inferida). Junto a la estación del ferrocarril de La Guaira el plano no dibuja una segunda vía ni otra estación. Palo Grande queda fuera de la hoja de Mestre. Que no existía sale de la fecha de apertura (1890). | **Existe** (documentada). «Estación Palo Grande». Rótulos «G.F.V.» y «ESTACION PALO GRANDE»; edificios en rojo entre (4500, 8480) y (4800, 8700) y la vía en trazo ajedrezado de oeste a este por (5200, 8540). El tranvía llega en rojo hasta «Est. Palo Gr.» en (5450, 8540). | **Existe** (documentada). «Estación Palo Grande». Patio con haz de vías entre (4400, 8550) y (5000, 8800). La vía sigue al este y dobla al norte por la calle que el plano rotula «Calle Sucre» (6100–6500, 8200–8650), junto a la esquina «Paradero». | **Existe** (documentada). «Est. Palo Grande». El mismo patio, con el rótulo abreviado y el «Deportivo Loyola» al sur. Leído sobre el plano reducido a 2 m por píxel. |
+| Gran Ferrocarril de Venezuela y la estación Palo Grande | Sin lectura | Sin lectura | **No se sabe** (inferida). Palo Grande queda fuera de la hoja de Mestre: el plano no puede acreditar ni negar la estación. Junto a la del ferrocarril de La Guaira no dibuja una segunda vía. La apertura del primer tramo en 1890 hace improbable que existiera, y nada más. | **Existe** (documentada). «Estación Palo Grande». Rótulos «G.F.V.» y «ESTACION PALO GRANDE»; edificios en rojo entre (4500, 8480) y (4800, 8700) y la vía en trazo ajedrezado de oeste a este por (5200, 8540). El tranvía llega en rojo hasta «Est. Palo Gr.» en (5450, 8540). | **Existe** (documentada). «Estación Palo Grande». Patio con haz de vías entre (4400, 8550) y (5000, 8800). La vía sigue al este y dobla al norte por la calle que el plano rotula «Calle Sucre» (6100–6500, 8200–8650), junto a la esquina «Paradero». | **Existe** (documentada). «Est. Palo Grande». El mismo patio, con el rótulo abreviado y el «Deportivo Loyola» al sur. Leído sobre el plano reducido a 2 m por píxel. |
 | Ferrocarril del Sur o de El Valle | Sin lectura | Sin lectura | Sin lectura | Sin lectura | Sin lectura | Sin lectura |
 | Tranvías de caballos (Tranvía Caracas y Tranvía Bolívar) | Sin lectura | Sin lectura | **Existe** (inferida). Una línea de trazos, roja y negra, sale de la «Estación» del ferrocarril de La Guaira en (6960, 6560) y va al este por el «Viaducto Unión». Coincide con la línea del Tranvía Bolívar de 1885; que ese trazo sea el tranvía es una inferencia: la leyenda del plano no está transcrita. | Sin lectura | Sin lectura | Sin lectura |
 | Tranvías eléctricos | Sin lectura | Sin lectura | **No está** (inferida). El plano no puede dibujar tranvías eléctricos: el primer servicio es de 1907. La línea que dibuja junto a la estación es de caballos. | **Existe** (documentada). Líneas rojas continuas sobre las calles. En una vista de conjunto se siguen: el eje «Avenida Oeste»–«Avenida Este» desde la Estación Caracas; una calle norte–sur que cruza el Guaire por el puente de la calle Sur 5 y sigue a El Portachuelo; la «Avenida del Paraíso»; el camino a la «Est. Palo Gr.»; y la llegada a la «Estación del F.C.». No se digitalizó ninguna. | **Existe** (documentada). Líneas de puntos rojos sobre algunas calles: se vieron en Pagüita (7350, 6050–6200) y junto al Museo de Bellas Artes (13100–13250, 7900–8100). El pipeline del sitio las trata como rótulo y las borra (`tools/geo/rotulos.py`). No se recorrió el plano entero. | **Existe** (inferida). En el plano reducido a 2 m por píxel no se distingue la red. Que seguía en servicio sale de la fecha del cierre, el 13 de agosto de 1947; para entonces ya no corrían las líneas de Catia (1938) ni de El Paraíso (1941). |
@@ -116,9 +118,11 @@ del ferrocarril de 1932 y 1933); las de FAC dan la colección y no la licencia. 
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
-| 1883 | Apertura | Abre en 1883, con vía de 914 mm | «que usaba una trocha de 914 mm (36”) y que llegó a la capital en junio de 1883» | documentada | [1] |
-| 1883 | Apertura | Inaugurado el 25 de julio de 1883 | «inaugurada por el presidente Guzmán Blanco el 25 de julio de 1883» | documentada | [2] |
-| 1883 | Levantamiento | La estación de Caracas estaba en Santa Inés (Caño Amarillo); 36 km de recorrido | «entró finalmente en servicio de carga y pasajeros, el 27 de septiembre de 1883, con un recorrido de 36 Km. desde la estación Caracas en Santa Inés (Caño Amarillo)» (p. 12) | documentada | [3] |
+| 1883 | Apertura | Abre en 1883, con vía de 914 mm: en el año coinciden las cuatro fuentes | «que usaba una trocha de 914 mm (36”) y que llegó a la capital en junio de 1883» | documentada | [1] [2] [3] |
+| 1883 | Apertura | Llega a la capital en junio de 1883 | «llegó a la capital en junio de 1883» | dudosa | [1] |
+| 1883 | Apertura | Inaugurado el 25 de julio de 1883 | «inaugurada por el presidente Guzmán Blanco el 25 de julio de 1883» | dudosa | [2] |
+| 1883 | Apertura | Entra en servicio de carga y pasajeros el 27 de septiembre de 1883 | «entró finalmente en servicio de carga y pasajeros, el 27 de septiembre de 1883» | dudosa | [3] |
+| 1883 | Levantamiento | La estación de Caracas estaba en Santa Inés (Caño Amarillo); 36 km de recorrido | «con un recorrido de 36 Km. desde la estación Caracas en Santa Inés (Caño Amarillo)» (p. 12) | documentada | [3] |
 | 1928 | Reforma | Electrificado en 1928 | «El servicio eléctrico en la línea comenzó a operar el 9 abril 1928 y fue oficialmente inaugurado el 1 de mayo.» | documentada | [4] |
 | 1951 | Demolición | El gobierno lo compra en 1950; tras las tormentas de 1951 no vuelve a operar | «finalmente comprado por el gobierno de Venezuela en 1950. Varias tormentas causaron daños a la línea en 1951 y el gobierno [...] no reparó la línea. El ferrocarril nunca volvió a operar.» | dudosa | [4] |
 
@@ -173,14 +177,15 @@ del ferrocarril de 1932 y 1933); las de FAC dan la colección y no la licencia. 
 
 `riel:gran-ferrocarril` · ferrocarril · ausente en los cortes anteriores a **1890**.
 
-No existe en 1889: su primer tramo abre en 1890. `tools/geo/estilos.py` lo fecha en 1894, que es la línea completa a Valencia.
+Su primer tramo abre en 1890, lo que hace improbable que hubiera algo en 1889; pero el plano de 1889 no cubre Palo Grande y no puede acreditarlo: ese corte queda «no se sabe». `tools/geo/estilos.py` lo fecha en 1894, que es la línea completa a Valencia.
 
 **Nombres:** «Estación Palo Grande» (¿?–¿?) [5] [6].
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
 | 1890 | Apertura | El primer tramo abre en 1890 | «el Gran Ferrocarril de Venezuela abrió el primer segmento de su ferrocarril a Valencia en 1890» | documentada | [1] |
-| 1890 | Apertura | Llega a Las Adjuntas en febrero de 1890 y a Valencia el 30 de diciembre de 1893 | «a la estación de Las Adjuntas en febrero de 1890… y el 30 de diciembre del mismo año [1893] a la estación de San Blas en Valencia» (p. 15) | documentada | [3] |
+| 1890 | Apertura | Llega a Las Adjuntas en febrero de 1890 | «a la estación de Las Adjuntas en febrero de 1890» (p. 15) | documentada | [3] |
+| 1893 | Apertura | Llega a Valencia el 30 de diciembre de 1893 | «y el 30 de diciembre del mismo año [1893] a la estación de San Blas en Valencia» (p. 15) | dudosa | [3] |
 | Sin fecha | Levantamiento | Salía de la estación Caracas en Caño Amarillo, pasaba el túnel de El Calvario y seguía a Palo Grande y Antímano | «partía de la estación Caracas en Caño Amarillo, pasaba por el túnel de El Calvario… hasta la estación Palo Grande y de allí hacia Antímano» (p. 15) | documentada | [3] |
 | 1894 | Apertura | Línea completa en febrero de 1894 | «The railway was completed in February 1894.» | dudosa | [8] |
 | 1943 | Reforma | El gobierno lo expropia en 1943 | «en 1943, a la del Gran Ferrocarril de Venezuela (Caracas-Valencia)» | documentada | [2] |
@@ -218,19 +223,20 @@ No existe en 1889: su primer tramo abre en 1890. `tools/geo/estilos.py` lo fecha
 
 ### Tranvías de caballos (Tranvía Caracas y Tranvía Bolívar)
 
-`riel:tranvia-animal` · tranvía de tracción animal · ausente en los cortes anteriores a **1882**.
+`riel:tranvia-animal` · tranvía de tracción animal · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
-Sin catenaria ni postes: en 1889 no hay electricidad en la red.
+Sin catenaria ni postes: en 1889 no hay electricidad en la red. Las fechas de 1881 y 1882 son las que Morrison da por más aceptadas, y él mismo dice que la inauguración es incierta: van como inferidas y el elemento no lleva una apertura firme.
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
-| 1881 | Proyecto | La compañía Tranvía Caracas se forma en 1881 | «La fecha de su inauguración es incierta, pero la mayoría de los historiadores concuerdan en que el Tranvía Caracas fue formado como una compañía en 1881 y que comenzó a transportar pasajeros entre la Plaza Bolívar y Palo Grande en 1882» | documentada | [1] |
-| 1882 | Apertura | El servicio empieza en 1882, de la Plaza Bolívar a Palo Grande; después llega al Puente de Hierro | «El TC extendió su línea hasta el Puente de Hierro un poco después.» | documentada | [1] |
+| 1881 | Proyecto | La compañía Tranvía Caracas se forma en 1881 | «La fecha de su inauguración es incierta, pero la mayoría de los historiadores concuerdan en que el Tranvía Caracas fue formado como una compañía en 1881 y que comenzó a transportar pasajeros entre la Plaza Bolívar y Palo Grande en 1882» | inferida | [1] |
+| 1882 | Apertura | El servicio empieza en 1882, de la Plaza Bolívar a Palo Grande; después llega al Puente de Hierro | «La fecha de su inauguración es incierta, pero la mayoría de los historiadores concuerdan en que […] comenzó a transportar pasajeros entre la Plaza Bolívar y Palo Grande en 1882» y «El TC extendió su línea hasta el Puente de Hierro un poco después.» | inferida | [1] |
 | 1885 | Apertura | El Tranvía Bolívar une en 1885 la Plaza Bolívar con la estación del ferrocarril de La Guaira, y en 1886 llega a la del Ferrocarril Central | «comenzó a operar entre la Plaza Bolívar y la estación del Ferrocarril La Guaira y Caracas en 1885. El TB extendió sus vías hacia el oriente, hasta la estación del Ferrocarril Central, en 1886.» | documentada | [1] |
 | 1891 | Levantamiento | Vía de 750 mm; 31 tranvías en 1891 | «Treinta y un tranvías corrían sobre las calles de Caracas en 1891.» | documentada | [1] |
 
 **No se pudo documentar:**
 
+- La fecha cierta de la inauguración: Morrison la declara incierta.
 - Las calles de cada línea: la fuente da solo los extremos.
 - Cocheras y establos.
 - Cómo dibuja el plano de 1889 el resto de la red: solo se leyó el tramo de la estación.
@@ -244,8 +250,8 @@ No existe en 1889. En 1911 la red eléctrica ya llega a las tres estaciones. La 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
 | 1906 | Proyecto | Pruebas en octubre de 1906 | «comenzó a probar sus carros Stephenson en el mes de octubre de 1906 e inauguró el primer sistema de tranvías eléctricos de la ciudad, entre Las Flores y El Valle, el 15 de enero de 1907» | documentada | [1] |
-| 1907 | Apertura | Primer servicio eléctrico el 15 de enero de 1907, de Las Flores a El Valle | «inauguró el primer sistema de tranvías eléctricos de la ciudad, entre Las Flores y El Valle, el 15 de enero de 1907» | documentada | [1] |
-| 1908 | Reforma | En febrero de 1908 la línea de El Valle llega a la Plaza Bolívar por el Puente de Hierro y están electrificadas las líneas a las estaciones | «Hacia febrero de 1908, TEC había extendido la línea El Valle a través del Puente de Hierro hasta la Plaza Bolívar y había electrificado todas las líneas hasta las estaciones ferroviarias» | documentada | [1] [10] |
+| 1907 | Apertura | Primer servicio eléctrico el 15 de enero de 1907, de Las Flores a El Valle | «inauguró el primer sistema de tranvías eléctricos de la ciudad, entre Las Flores y El Valle, el 15 de enero de 1907» | dudosa | [1] |
+| 1908 | Reforma | En febrero de 1908 la línea de El Valle llega a la Plaza Bolívar por el Puente de Hierro y están electrificadas las líneas a las estaciones (lo dice Morrison; la cronología de FAC, sin fuentes citadas, lo repite y queda como apoyo) | «Hacia febrero de 1908, TEC había extendido la línea El Valle a través del Puente de Hierro hasta la Plaza Bolívar y había electrificado todas las líneas hasta las estaciones ferroviarias» | documentada | [1] [10] |
 | Sin fecha | Levantamiento | Oficinas y cobertizos en el costado norte de la avenida Este, esquina con la avenida Vollmer | «TEC construyó su edificio de oficinas y los cobertizos para los carros en el costado norte de la Av. Este esquina Av. Vollmer» | documentada | [1] |
 | 1917 | Obra | Túnel de vía simple bajo la Roca Tarpeya en 1917, para El Valle y Cementerio | «También en 1917 [...] construyó un túnel de vía simple bajo el cerro llamado Roca Tarpeya para sus líneas El Valle y Cementerio» | documentada | [1] |
 | 1923 | Apertura | Línea a Catia en 1923 | «En 1923, TEC construyó una nueva línea [...] llamado Catia» | documentada | [1] |

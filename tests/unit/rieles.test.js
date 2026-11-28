@@ -22,9 +22,10 @@ describe('ferrocarriles y tranvías: ficha de evidencias (#273, #274)', () => {
     expect(de('gran-ferrocarril').etapas.map((e) => e.nombre)).toEqual([null, 'Estación Palo Grande', 'Estación Palo Grande', 'Est. Palo Grande'])
   })
 
-  it('el Gran Ferrocarril no se retrotrae a 1889: abre en 1890', () => {
+  it('el Gran Ferrocarril no se retrotrae a 1889: abre en 1890, y el plano de 1889, que no cubre Palo Grande, lo deja en «no se sabe»', () => {
     expect(de('gran-ferrocarril').desde).toBe(1890)
-    expect(estados('gran-ferrocarril')).toEqual({ 1889: 'ausente', 1911: 'existente', 1936: 'existente', 1946: 'existente' })
+    expect(etapa('gran-ferrocarril', 1889).lectura).toMatch(/fuera de la hoja de Mestre/)
+    expect(estados('gran-ferrocarril')).toEqual({ 1889: 'desconocido', 1911: 'existente', 1936: 'existente', 1946: 'existente' })
   })
 
   it('en 1889 el tranvía es de caballos; el eléctrico no existe hasta 1907 y no se borra en 1946', () => {
@@ -36,9 +37,14 @@ describe('ferrocarriles y tranvías: ficha de evidencias (#273, #274)', () => {
     expect(cierre.fecha).toEqual({ desde: 1947, hasta: 1947 })
   })
 
-  it('compañía en 1881 y servicio en 1882 son dos afirmaciones distintas', () => {
+  it('compañía en 1881 y servicio en 1882 son dos afirmaciones distintas, y las dos inferidas: la fuente declara incierta la fecha', () => {
     const [compania, servicio] = de('tranvia-animal').cronologia
     expect([compania.tipo, compania.fecha.desde, servicio.tipo, servicio.fecha.desde]).toEqual(['proyecto', 1881, 'apertura', 1882])
+    expect([compania.certeza, servicio.certeza]).toEqual(['inferida', 'inferida'])
+    expect(compania.cita).toMatch(/incierta/)
+    expect(de('tranvia-animal').desde).toBeUndefined()
+    // febrero de 1908 lo sostiene Morrison; la cronología de FAC, sin fuentes citadas, queda de apoyo
+    expect(de('tranvia-electrico').cronologia.find((c) => c.fecha?.desde === 1908).fuentes).toEqual(['css', 'fv'])
   })
 
   it('el Ferrocarril Central de 1946 queda sin resolver, con su contradicción', () => {

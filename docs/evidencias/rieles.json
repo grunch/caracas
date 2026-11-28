@@ -2,7 +2,7 @@
  "nota": "Ferrocarriles y tranvías de Caracas (#273, #274): qué dibuja y rotula cada plano calzado y qué dicen las fuentes, con una fuente por afirmación. No trae trazados digitalizados, andenes ni volúmenes de estación. Las posiciones son píxeles del mosaico de 1936 leídos a ojo sobre una rejilla: sirven para encontrar el rótulo, no son un calce. Las citas son textuales; las páginas de Allen Morrison se citan por su copia en Internet Archive porque el sitio no responde por https.",
  "clases_de_fuente": {
   "plano de época": "Plano del catálogo del repo, calzado sobre el mosaico de 1936.",
-  "secundaria con referencias": "Libro, diccionario o página que cita sus fuentes.",
+  "secundaria con referencias": "Libro, diccionario o página que cita sus fuentes. Es la única clase escrita que admite la certeza «documentada»; una afirmación en disputa no la lleva nunca.",
   "secundaria sin referencias": "Entrada de cronología sin fuentes citadas.",
   "terciaria": "Wikipedia: solo donde no hay otra, y entonces la afirmación va como dudosa."
  },
@@ -98,10 +98,19 @@
     {
      "tipo": "apertura",
      "fecha": {"desde":1883,"hasta":1883},
-     "dice": "Abre en 1883, con vía de 914 mm",
+     "dice": "Abre en 1883, con vía de 914 mm: en el año coinciden las cuatro fuentes",
      "cita": "«que usaba una trocha de 914 mm (36”) y que llegó a la capital en junio de 1883»",
-     "fuentes": ["css"],
+     "fuentes": ["css","dhv","cil"],
      "certeza": "documentada"
+    },
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1883,"hasta":1883},
+     "dice": "Llega a la capital en junio de 1883",
+     "cita": "«llegó a la capital en junio de 1883»",
+     "fuentes": ["css"],
+     "certeza": "dudosa",
+     "disputa": "Fecha de la apertura de 1883"
     },
     {
      "tipo": "apertura",
@@ -109,13 +118,23 @@
      "dice": "Inaugurado el 25 de julio de 1883",
      "cita": "«inaugurada por el presidente Guzmán Blanco el 25 de julio de 1883»",
      "fuentes": ["dhv"],
-     "certeza": "documentada"
+     "certeza": "dudosa",
+     "disputa": "Fecha de la apertura de 1883"
+    },
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1883,"hasta":1883},
+     "dice": "Entra en servicio de carga y pasajeros el 27 de septiembre de 1883",
+     "cita": "«entró finalmente en servicio de carga y pasajeros, el 27 de septiembre de 1883»",
+     "fuentes": ["cil"],
+     "certeza": "dudosa",
+     "disputa": "Fecha de la apertura de 1883"
     },
     {
      "tipo": "levantamiento",
      "fecha": {"desde":1883,"hasta":1883},
      "dice": "La estación de Caracas estaba en Santa Inés (Caño Amarillo); 36 km de recorrido",
-     "cita": "«entró finalmente en servicio de carga y pasajeros, el 27 de septiembre de 1883, con un recorrido de 36 Km. desde la estación Caracas en Santa Inés (Caño Amarillo)» (p. 12)",
+     "cita": "«con un recorrido de 36 Km. desde la estación Caracas en Santa Inés (Caño Amarillo)» (p. 12)",
      "fuentes": ["cil"],
      "certeza": "documentada"
     },
@@ -133,7 +152,8 @@
      "dice": "El gobierno lo compra en 1950; tras las tormentas de 1951 no vuelve a operar",
      "cita": "«finalmente comprado por el gobierno de Venezuela en 1950. Varias tormentas causaron daños a la línea en 1951 y el gobierno [...] no reparó la línea. El ferrocarril nunca volvió a operar.»",
      "fuentes": ["lcs"],
-     "certeza": "dudosa"
+     "certeza": "dudosa",
+     "disputa": "Cuándo deja de funcionar"
     }
    ],
    "etapas": [
@@ -263,7 +283,15 @@
      "fuentes": ["dhv"],
      "certeza": "documentada"
     },
-    {"tipo":"demolicion","fecha":{"desde":1953,"hasta":1953},"dice":"Levanta sus rieles en 1953","cita":"«El Ferrocarril Central levantó sus rieles en 1953»","fuentes":["css"],"certeza":"dudosa"}
+    {
+     "tipo": "demolicion",
+     "fecha": {"desde":1953,"hasta":1953},
+     "dice": "Levanta sus rieles en 1953",
+     "cita": "«El Ferrocarril Central levantó sus rieles en 1953»",
+     "fuentes": ["css"],
+     "certeza": "dudosa",
+     "disputa": "Cuándo deja de funcionar"
+    }
    ],
    "etapas": [
     {
@@ -336,7 +364,7 @@
    "encuadre": "parcial",
    "desde": 1890,
    "fuentesCronologia": ["css","cil"],
-   "nota": "No existe en 1889: su primer tramo abre en 1890. `tools/geo/estilos.py` lo fecha en 1894, que es la línea completa a Valencia.",
+   "nota": "Su primer tramo abre en 1890, lo que hace improbable que hubiera algo en 1889; pero el plano de 1889 no cubre Palo Grande y no puede acreditarlo: ese corte queda «no se sabe». `tools/geo/estilos.py` lo fecha en 1894, que es la línea completa a Valencia.",
    "contradicciones": [
     {
      "asunto": "Cuándo queda completa la línea a Valencia",
@@ -363,10 +391,19 @@
     {
      "tipo": "apertura",
      "fecha": {"desde":1890,"hasta":1890},
-     "dice": "Llega a Las Adjuntas en febrero de 1890 y a Valencia el 30 de diciembre de 1893",
-     "cita": "«a la estación de Las Adjuntas en febrero de 1890… y el 30 de diciembre del mismo año [1893] a la estación de San Blas en Valencia» (p. 15)",
+     "dice": "Llega a Las Adjuntas en febrero de 1890",
+     "cita": "«a la estación de Las Adjuntas en febrero de 1890» (p. 15)",
      "fuentes": ["cil"],
      "certeza": "documentada"
+    },
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1893,"hasta":1893},
+     "dice": "Llega a Valencia el 30 de diciembre de 1893",
+     "cita": "«y el 30 de diciembre del mismo año [1893] a la estación de San Blas en Valencia» (p. 15)",
+     "fuentes": ["cil"],
+     "certeza": "dudosa",
+     "disputa": "Cuándo queda completa la línea a Valencia"
     },
     {
      "tipo": "levantamiento",
@@ -376,7 +413,15 @@
      "fuentes": ["cil"],
      "certeza": "documentada"
     },
-    {"tipo":"apertura","fecha":{"desde":1894,"hasta":1894},"dice":"Línea completa en febrero de 1894","cita":"«The railway was completed in February 1894.»","fuentes":["wen"],"certeza":"dudosa"},
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1894,"hasta":1894},
+     "dice": "Línea completa en febrero de 1894",
+     "cita": "«The railway was completed in February 1894.»",
+     "fuentes": ["wen"],
+     "certeza": "dudosa",
+     "disputa": "Cuándo queda completa la línea a Valencia"
+    },
     {
      "tipo": "reforma",
      "fecha": {"desde":1943,"hasta":1943},
@@ -397,7 +442,7 @@
    "etapas": [
     {
      "anio": 1889,
-     "estado": "ausente",
+     "estado": "desconocido",
      "certeza": "inferida",
      "documento": "plano1889",
      "fuentes": ["plano1889"],
@@ -408,7 +453,7 @@
      "error_m": 12.93,
      "medible": false,
      "recorte": null,
-     "lectura": "Junto a la estación del ferrocarril de La Guaira el plano no dibuja una segunda vía ni otra estación. Palo Grande queda fuera de la hoja de Mestre. Que no existía sale de la fecha de apertura (1890)."
+     "lectura": "Palo Grande queda fuera de la hoja de Mestre: el plano no puede acreditar ni negar la estación. Junto a la del ferrocarril de La Guaira no dibuja una segunda vía. La apertura del primer tramo en 1890 hace improbable que existiera, y nada más."
     },
     {
      "anio": 1911,
@@ -501,11 +546,14 @@
    "nombre": "Tranvías de caballos (Tranvía Caracas y Tranvía Bolívar)",
    "sistema": "Tranvías",
    "encuadre": "sin medir",
-   "desde": 1882,
-   "fuentesCronologia": ["css"],
-   "nota": "Sin catenaria ni postes: en 1889 no hay electricidad en la red.",
+   "nota": "Sin catenaria ni postes: en 1889 no hay electricidad en la red. Las fechas de 1881 y 1882 son las que Morrison da por más aceptadas, y él mismo dice que la inauguración es incierta: van como inferidas y el elemento no lleva una apertura firme.",
    "contradicciones": [],
-   "desconocido": ["Las calles de cada línea: la fuente da solo los extremos","Cocheras y establos","Cómo dibuja el plano de 1889 el resto de la red: solo se leyó el tramo de la estación"],
+   "desconocido": [
+    "La fecha cierta de la inauguración: Morrison la declara incierta",
+    "Las calles de cada línea: la fuente da solo los extremos",
+    "Cocheras y establos",
+    "Cómo dibuja el plano de 1889 el resto de la red: solo se leyó el tramo de la estación"
+   ],
    "cronologia": [
     {
      "tipo": "proyecto",
@@ -513,15 +561,15 @@
      "dice": "La compañía Tranvía Caracas se forma en 1881",
      "cita": "«La fecha de su inauguración es incierta, pero la mayoría de los historiadores concuerdan en que el Tranvía Caracas fue formado como una compañía en 1881 y que comenzó a transportar pasajeros entre la Plaza Bolívar y Palo Grande en 1882»",
      "fuentes": ["css"],
-     "certeza": "documentada"
+     "certeza": "inferida"
     },
     {
      "tipo": "apertura",
      "fecha": {"desde":1882,"hasta":1882},
      "dice": "El servicio empieza en 1882, de la Plaza Bolívar a Palo Grande; después llega al Puente de Hierro",
-     "cita": "«El TC extendió su línea hasta el Puente de Hierro un poco después.»",
+     "cita": "«La fecha de su inauguración es incierta, pero la mayoría de los historiadores concuerdan en que […] comenzó a transportar pasajeros entre la Plaza Bolívar y Palo Grande en 1882» y «El TC extendió su línea hasta el Puente de Hierro un poco después.»",
      "fuentes": ["css"],
-     "certeza": "documentada"
+     "certeza": "inferida"
     },
     {
      "tipo": "apertura",
@@ -596,12 +644,13 @@
      "dice": "Primer servicio eléctrico el 15 de enero de 1907, de Las Flores a El Valle",
      "cita": "«inauguró el primer sistema de tranvías eléctricos de la ciudad, entre Las Flores y El Valle, el 15 de enero de 1907»",
      "fuentes": ["css"],
-     "certeza": "documentada"
+     "certeza": "dudosa",
+     "disputa": "Desde cuándo hay tranvías"
     },
     {
      "tipo": "reforma",
      "fecha": {"desde":1908,"hasta":1908},
-     "dice": "En febrero de 1908 la línea de El Valle llega a la Plaza Bolívar por el Puente de Hierro y están electrificadas las líneas a las estaciones",
+     "dice": "En febrero de 1908 la línea de El Valle llega a la Plaza Bolívar por el Puente de Hierro y están electrificadas las líneas a las estaciones (lo dice Morrison; la cronología de FAC, sin fuentes citadas, lo repite y queda como apoyo)",
      "cita": "«Hacia febrero de 1908, TEC había extendido la línea El Valle a través del Puente de Hierro hasta la Plaza Bolívar y había electrificado todas las líneas hasta las estaciones ferroviarias»",
      "fuentes": ["css","fv"],
      "certeza": "documentada"
