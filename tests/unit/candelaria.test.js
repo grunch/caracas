@@ -83,6 +83,15 @@ describe('iglesia paramétrica: fachada lisa, tres puertas y fachada más alta q
     expect(ninguna.caja.max[0]).toBeCloseTo(lisa.caja.max[0], 5)
   })
 
+  test('sin frente, una torre centrada tampoco lleva la puerta ni el rosetón que se le ponen delante', () => {
+    const torres = { centrada: true, lado: 6, cuerpos: [{ alto: 14 }], remate: { tipo: 'chapitel', alto: 2 } }
+    const conFrente = dibujar((p) => iglesia(p, { ...base, fachada: 'lisa', torres }))
+    const sinFrente = dibujar((p) => iglesia(p, { ...base, fachada: 'ninguna', torres }))
+    const soloTorre = dibujar((p) => iglesia(p, { ...base, fachada: 'ninguna' })).triangulos
+    const laTorre = conFrente.triangulos - dibujar((p) => iglesia(p, { ...base, fachada: 'lisa' })).triangulos
+    expect(sinFrente.triangulos - soloTorre).toBeLessThan(laTorre) // la torre, sin su puerta ni su rosetón
+  })
+
   test('rechaza un número de puertas que no sea 1 o 3', () => {
     expect(() => dibujar((p) => iglesia(p, { ...base, puertas: 2 }))).toThrow(/puertas/)
   })

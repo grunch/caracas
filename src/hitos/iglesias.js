@@ -215,7 +215,7 @@ export function iglesia(p, {
     const lugares = centrada ? [0] : torres.n === 1 ? [-1] : [-1, 1]
     // en el marco de la fachada (+z hacia afuera): la torre queda a ras, medio lado hacia adentro
     for (const s of lugares) torre(q.en(s * (ancho / 2 - torres.lado / 2), 0, -torres.lado / 2 + (centrada ? 1 : 0.2)), { color, ...torres })
-    if (centrada) {
+    if (centrada && fachada !== 'ninguna') {
       // la torre del medio tapa la puerta y el rosetón de la fachada: van en su cara de afuera
       vano(q.en(0, 0, 1), { ancho: torres.lado * 0.42, alto: alto * 0.5 })
       disco(q.en(0, alto * 0.82, 1), { radio: torres.lado * 0.24 })
