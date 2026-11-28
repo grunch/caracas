@@ -1,0 +1,1018 @@
+{
+ "nota": "Caminos de salida, alcabalas y avenidas del oeste (#270, #275): qué acredita cada plano calzado y qué dicen las fuentes, con una fuente por afirmación. No trae ejes nuevos ni anchos: los cuatro ejes de 1772 ya están en tools/geo/referencias/1772-calles-1936.json y acá solo se citan. Las posiciones son píxeles del mosaico de 1936 leídos en recortes; sirven para encontrar el rótulo, no son un calce. Las citas son textuales; en los PDF la página es la impresa.",
+ "clases_de_fuente": {
+  "plano de época": "Plano del catálogo del repo, calzado sobre el mosaico de 1936.",
+  "secundaria con referencias": "Libro o artículo que cita sus fuentes.",
+  "secundaria sin referencias": "Entrada de cronología sin fuentes citadas.",
+  "crónica sin referencias": "Crónica divulgativa sin aparato: lo que afirma va como dudoso."
+ },
+ "fuentes": {
+  "plano1772": {
+   "tipo": "historica",
+   "anios": [1772],
+   "clase": "plano de época",
+   "fecha_documento": {"desde":1772,"hasta":1772},
+   "fecha_representada": {"desde":1772,"hasta":1772},
+   "url": "https://pares.cultura.gob.es/ParesBusquedas20/catalogo/description/26112"
+  },
+  "plano1843": {
+   "tipo": "historica",
+   "anios": [1843],
+   "clase": "plano de época",
+   "fecha_documento": null,
+   "fecha_representada": {"desde":1843,"hasta":1843},
+   "url": "https://commons.wikimedia.org/wiki/File:Plano_topografico_de_la_ciudad_de_Caracas_(NYPL_b13925947-5382478).tiff"
+  },
+  "plano1936": {
+   "tipo": "historica",
+   "anios": [1936],
+   "clase": "plano de época",
+   "fecha_documento": {"desde":1936,"hasta":1936},
+   "fecha_representada": {"desde":1936,"hasta":1936},
+   "url": "https://archive.org/details/WCWdb_18053"
+  },
+  "plano1946": {
+   "tipo": "historica",
+   "anios": [1946],
+   "clase": "plano de época",
+   "fecha_documento": {"desde":1946,"hasta":1950},
+   "fecha_representada": {"desde":1946,"hasta":1946},
+   "url": "https://archive.org/details/WCWdb_18051"
+  },
+  "cil": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "secundaria con referencias",
+   "fecha_documento": null,
+   "consultada": "2026-11-28",
+   "url": "https://acading.org.ve/wp-content/uploads/2023/02/LIBRO_INFRAESTRUCTURA_PET_Y_COMUNICACIONES_SIGLO_XIX_y_XX_ALFREDO_CILENTO.pdf"
+  },
+  "varg": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "secundaria con referencias",
+   "fecha_documento": null,
+   "consultada": "2026-11-28",
+   "url": "https://bibliofep.fundacionempresaspolar.org/media/1056/gv_t7_c57_p302_415_vargas_lres_single_preview.pdf"
+  },
+  "alt": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "secundaria con referencias",
+   "fecha_documento": {"desde":2008,"hasta":2008},
+   "url": "https://biblat.unam.mx/hevila/BoletindelaAcademiaNacionaldelaHistoriaCaracas/2008/vol91/no363/3.pdf"
+  },
+  "refran": {"tipo":"historica","anios":[],"clase":"crónica sin referencias","fecha_documento":null,"consultada":"2026-11-28","url":"https://www.soydonrefran.com/esquina-de-alcabala/"},
+  "s50": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2020,"hasta":2020},"url":"https://fundaayc.com/2020/09/20/sabia-usted-50/"},
+  "s54": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2020,"hasta":2020},"url":"https://fundaayc.com/2020/11/15/sabia-usted-54/"},
+  "s46": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2020,"hasta":2020},"url":"https://fundaayc.com/2020/07/26/sabia-usted-46/"},
+  "s93": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2022,"hasta":2022},"url":"https://fundaayc.com/2022/10/23/sabia-usted-93/"},
+  "s128": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2025,"hasta":2025},"url":"https://fundaayc.com/2025/01/19/sabia-usted-128/"},
+  "sm": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2019,"hasta":2019},"url":"https://fundaayc.com/2019/10/01/1954-avenida-san-martin/"}
+ },
+ "tramos": [
+  {
+   "id": "camino:la-guaira-colonial",
+   "tipo": "camino de recuas",
+   "nombre": "Camino de La Guaira (Camino Real, «de los Españoles»)",
+   "sistema": "Caminos de salida",
+   "encuadre": "parcial",
+   "nota": "No es la carretera de 1845 ni la autopista de 1953.",
+   "contradicciones": [
+    {
+     "asunto": "Desde cuándo es el único camino a La Guaira",
+     "estado": "pendiente",
+     "afirmaciones": [{"dice":"Data de inicios del siglo XVIII y se empedró en 1762","fuente":"cil"},{"dice":"Era el único camino desde principios del siglo XVII","fuente":"alt"}]
+    }
+   ],
+   "desconocido": [
+    "Su ancho",
+    "Dónde estaba la puerta o alcabala en Caracas: el plano de 1772 dibuja una en este camino y no tiene pareja segura en 1936 (`EX1772-012`)",
+    "La posición de la «Puerta de La Guaira» de la leyenda de 1843",
+    "Fortines del tramo de Caracas, con fechas",
+    "Cómo lo dibujan los planos de 1889 y 1911: no se leyeron"
+   ],
+   "nombres": [{"nombre":"Camino de La Guaira","desde":null,"hasta":null,"fuentes":["plano1843"]}],
+   "cronologia": [
+    {
+     "tipo": "obra",
+     "fecha": {"desde":1597,"hasta":1597},
+     "dice": "Osorio ordena en 1597 el «Camino de la Montaña» sobre una pica indígena",
+     "cita": "«en 1597, ordenó la construcción de un camino, el “Camino de la Montaña”, siguiendo una pica indígena llamada “La Culebrilla”» (p. 175)",
+     "fuentes": ["cil"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1762,"hasta":1762},
+     "dice": "Empedrado en 1762",
+     "cita": "«El hoy llamado “Camino de los Españoles” que data de inicios del siglo XVIII, se empedró en 1762 y, durante tres siglos, fue el único camino transitable entre Caracas y La Guaira» (p. 175)",
+     "fuentes": ["cil"],
+     "certeza": "dudosa"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": null,
+     "dice": "Camino de recuas y de gente a pie, no de carruajes",
+     "cita": "«Se trataba de un camino usado por recuas de mulas y gente a pie, de acuerdo a lo señalado por Cruxent, y no por carruajes o carretas» (p. 47)",
+     "fuentes": ["alt"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "nombre",
+     "fecha": null,
+     "dice": "Su nombre formal era Camino Real",
+     "cita": "«conocido históricamente como \"el camino de los españoles\", a pesar de que su nombre formal fuese el de Camino Real» (p. 47)",
+     "fuentes": ["alt"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1772,"hasta":1772},
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 30,
+     "medible": false,
+     "recorte": {"caja":[7940,3710,8310,4720]},
+     "lectura": "Trazo L1772-0077, de (8304, 4713) a (7976, 3719), hacia el norte de La Pastora. Eje aproximado leído sobre el original, inspeccionado y no aprobado para generar; el doble trazo no se midió, así que no hay ancho. Sector de calce débil (banda de 30 m): no medible."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "Camino de La Guaira",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Letra z de la leyenda («id. de La Guaira»); la letra v es la «Puerta de La Guaira». La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición."
+    }
+   ]
+  },
+  {
+   "id": "camino:carretera-la-guaira",
+   "tipo": "carretera de carruajes",
+   "nombre": "Carretera de La Guaira (carretera de Catia o Camino del Norte)",
+   "sistema": "Caminos de salida",
+   "encuadre": "parcial",
+   "nota": "El catálogo de vías posteriores a 1946 la trae como `moderno:carretera-vieja-la-guaira` para separarla de la autopista; acá va su obra y lo que dibujan los planos.",
+   "contradicciones": [],
+   "desconocido": [
+    "Qué tramo estaba abierto en 1843: ninguna fuente leída lo dice, solo que las «primeras ruedas» corrieron en enero de 1845",
+    "Contratista",
+    "Por dónde salía exactamente de Caracas",
+    "Si el «Camino de Catia» de la leyenda de 1843 es esta obra o el camino anterior"
+   ],
+   "nombres": [{"nombre":"Carretera Caracas–La Guaira","desde":null,"hasta":null,"fuentes":["plano1936"]}],
+   "cronologia": [
+    {
+     "tipo": "proyecto",
+     "fecha": {"desde":1837,"hasta":1837},
+     "dice": "En 1837 la Diputación Provincial autoriza contratar la apertura del camino nuevo por la pica de Amado Pérez",
+     "cita": "«En 1837 la Diputación Provincial de Caracas había autorizado a la Junta Superior de Caminos para contratar “la apertura del nuevo camino… por la pica de Amado Pérez, hasta perfeccionarlo carretero”» (p. 175)",
+     "fuentes": ["cil"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "obra",
+     "fecha": {"desde":1837,"hasta":1845},
+     "dice": "Se construye entre 1837 y 1845",
+     "cita": "«carretera de Catia o Camino del Norte, que une Caracas con La Guaira, construido entre los años 1837 y 1845» (p. 344)",
+     "fuentes": ["varg"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "obra",
+     "fecha": null,
+     "dice": "Dirección técnica de Juan José Aguerrevere; no más de 5 % de pendiente y ocho varas de piso firme",
+     "cita": "«el menor declive posible (no más del 5%)… “ocho varas de piso firme en las partes rectas, y de doce por lo menos en las oblicuas o recodos”» (p. 11)",
+     "fuentes": ["cil"],
+     "certeza": "documentada"
+    },
+    {"tipo":"apertura","fecha":{"desde":1845,"hasta":1845},"dice":"Inaugurada el 14 de enero de 1845","cita":"«inaugurada el 14 de enero de 1845» (p. 11)","fuentes":["cil"],"certeza":"documentada"},
+    {"tipo":"levantamiento","fecha":null,"dice":"Sube por el cañón del Tacagua","cita":"«aprovechando la suavidad ofrecida por el cañón del Tacagua» (p. 51)","fuentes":["alt"],"certeza":"documentada"}
+   ],
+   "etapas": [
+    {
+     "anio": 1843,
+     "estado": "obra",
+     "certeza": "inferida",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "El plano no la rotula como carretera. La leyenda trae un «Camino de Catia» de signo dudoso. Que en 1843 estaba en obra sale de las fechas de la obra (1837–1845), no del plano."
+    },
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Carretera Caracas–La Guaira",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[2300,3900,2800,4300]},
+     "lectura": "Rótulo al norte de la Plaza La Libertad de Catia, entre (2400, 4000) y (2750, 4250), junto a la vía del ferrocarril."
+    }
+   ]
+  },
+  {
+   "id": "camino:catia",
+   "tipo": "camino",
+   "nombre": "Camino de Catia («Viejo Camino del Oeste»)",
+   "sistema": "Caminos de salida",
+   "encuadre": "parcial",
+   "nota": "Lo continúa la avenida Sucre, más abajo.",
+   "contradicciones": [],
+   "desconocido": ["Si el «Camino de Catia» de 1845 y el «Viejo Camino del Oeste» son la misma vía: la fuente usa los dos nombres sin aclararlo","Su ancho","Cómo lo dibujan los planos de 1889 y 1911: no se leyeron"],
+   "cronologia": [
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1845,"hasta":1845},
+     "dice": "La fuente fecha el «Camino de Catia» en 1845",
+     "cita": "«la construcción primero del llamado Camino de Catia (1845) y más tarde (1883) del Ferrocarril Caracas-La Guaira»",
+     "fuentes": ["s46"],
+     "certeza": "dudosa"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": null,
+     "dice": "La primera conexión a Catia salía de la esquina noroeste de Santa Capilla hasta la quebrada Agua Salud",
+     "cita": "«la primera conexión hacia Catia se inicia en la esquina noroeste de Santa Capilla, hasta llegar a la quebrada Agua Salud»",
+     "fuentes": ["s46"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1772,"hasta":1772},
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 11.74,
+     "medible": false,
+     "recorte": {"caja":[6580,5690,7010,5890]},
+     "lectura": "Trazo L1772-0076, de (6585, 5696) a (7002, 5874), al oeste de Pagüita. Eje aproximado leído sobre el original, inspeccionado y no aprobado para generar; el doble trazo no se midió, así que no hay ancho."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "dudosa",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "Camino de Catia",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "«id. de Catia», con un signo de lectura dudosa. La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición."
+    }
+   ]
+  },
+  {
+   "id": "camino:la-vega",
+   "tipo": "camino",
+   "nombre": "Camino de La Vega (camino de Antímano, Carretera de Occidente)",
+   "sistema": "Caminos de salida",
+   "encuadre": "parcial",
+   "nota": "Lo continúa la avenida San Martín, más abajo.",
+   "contradicciones": [],
+   "desconocido": ["Fecha de la carretera de carruajes en el tramo urbano: la fuente solo fecha el tramo a Los Teques","Su ancho","Cómo lo dibujan los planos de 1889 y 1911: no se leyeron"],
+   "nombres": [{"nombre":"Camino de la Vega","desde":null,"hasta":null,"fuentes":["plano1843","s93"]}],
+   "cronologia": [
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1810,"hasta":1810},
+     "dice": "Antiguo «Camino de Antímano», que el plano de 1810 llama «Camino de la Vega»",
+     "cita": "«Realizada sobre parte del trazado de lo que fue el antiguo “Camino de Antímano” (señalado también como “Camino de la Vega” en el plano de 1810, una de las puertas de entrada a Caracas)»",
+     "fuentes": ["s93"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1863,"hasta":1863},
+     "dice": "En 1863 ya funcionaba el tramo de Caracas a Los Teques de la Carretera de Occidente",
+     "cita": "«En 1863 ya estaba en funcionamiento el tramo de Caracas a Los Teques, de la que fuera llamada “Carretera de Occidente”, construida por Augusto Pecherman» (p. 15)",
+     "fuentes": ["cil"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1772,"hasta":1772},
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 6,
+     "medible": false,
+     "recorte": {"caja":[5920,8650,6340,8760]},
+     "lectura": "Trazo L1772-0083, de (5923, 8653) a (6332, 8753): doble trazo hasta la orilla. Eje aproximado leído sobre el original, inspeccionado y no aprobado para generar; el doble trazo no se midió, así que no hay ancho. Cae sobre la calle que el plano de 1936 rotula «Sur Ocho», a unos 6 m de la esquina «Cruz de la Vega»."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "Camino de la Vega",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "«id. de la Vega», con una cruz por signo. La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición."
+    },
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Sur Ocho",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[5700,8300,6850,8850]},
+     "lectura": "La calle sigue ahí: «Sur Ocho» entre la Plaza de Capuchinos (6800, 8330) y la Plaza Italia (5760, 8830), con la esquina «Cruz de la Vega» en (6230, 8700)."
+    }
+   ]
+  },
+  {
+   "id": "camino:el-valle",
+   "tipo": "camino",
+   "nombre": "Camino de El Valle",
+   "sistema": "Caminos de salida",
+   "encuadre": "parcial",
+   "contradicciones": [],
+   "desconocido": [
+    "Ninguna fuente escrita leída lo describe",
+    "Fecha de una carretera de carruajes a El Valle",
+    "Por dónde cruzaba el Guaire en 1772: el eje llega a la ribera y el plano no define un puente",
+    "Cómo lo dibujan los planos de 1889 y 1911: no se leyeron"
+   ],
+   "cronologia": [
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1772,"hasta":1772},
+     "dice": "El plano de 1772 lo dibuja con doble trazo hacia la ribera del Guaire",
+     "cita": "Trazo L1772-0084 del original",
+     "fuentes": ["plano1772"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1843,"hasta":1843},
+     "dice": "En 1843 había una alcabala del Valle y una calle que llevaba su nombre",
+     "cita": "«Alcabala del Valle» (letra w); calle 136, «de la alcabª del Valle»",
+     "fuentes": ["plano1843"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1772,"hasta":1772},
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": 12.68,
+     "medible": false,
+     "recorte": {"caja":[9600,9440,9820,10380]},
+     "lectura": "Trazo L1772-0084, de (9603, 10378) a (9817, 9443). Eje aproximado leído sobre el original, inspeccionado y no aprobado para generar; el doble trazo no se midió, así que no hay ancho. La conexión con la trama urbana está sin resolver."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "inferida",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "La leyenda no enumera un camino del Valle, pero sí su alcabala (letra w) y la calle «de la alcabala del Valle» (n.º 136)."
+    }
+   ]
+  },
+  {
+   "id": "camino:sabana-grande",
+   "tipo": "camino",
+   "nombre": "Camino de Sabana Grande (Camino Real de Petare, Carretera del Este)",
+   "sistema": "Caminos de salida",
+   "encuadre": "parcial",
+   "nota": "El tramo de la hoja y lo que queda fuera de ella están en el diagnóstico de #279.",
+   "contradicciones": [
+    {
+     "asunto": "Fecha de la Carretera del Este",
+     "estado": "pendiente",
+     "afirmaciones": [
+      {"dice":"Guzmán Blanco la inaugura en mayo de 1875","fuente":"cil"},
+      {"dice":"Ya llevaba del centro a Petare en el plano de Röhl de 1934","fuente":"s50"},
+      {"dice":"El gobernador Gonzalo Barrios la inaugura oficialmente el 12 de marzo de 1947","fuente":"s54"}
+     ]
+    }
+   ],
+   "desconocido": ["No figura en el plano de 1772","Su ancho","Cómo lo dibujan los planos de 1889 y 1911: no se leyeron"],
+   "nombres": [{"nombre":"Camino de Sabana Grande","desde":null,"hasta":null,"fuentes":["plano1843"]}],
+   "cronologia": [
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1875,"hasta":1875},
+     "dice": "La Carretera del Este, de Caracas a Petare, se inaugura en mayo de 1875",
+     "cita": "«La llamada “Carretera del Este”, que partía de Caracas a Petare… fue inaugurada también por Guzmán Blanco en mayo de 1875» (p. 16)",
+     "fuentes": ["cil"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "Camino de Sabana Grande",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Letra y de la leyenda. La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición."
+    },
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Calle Real de Sabana Grande",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[16400,9100,18300,10000]},
+     "lectura": "Calle edificada desde (16500, 9180) hasta el borde del dibujo en (18280, 9950)."
+    }
+   ]
+  },
+  {
+   "id": "alcabala:candelaria",
+   "tipo": "alcabala",
+   "nombre": "Alcabala de Candelaria",
+   "sistema": "Alcabalas y puertas",
+   "encuadre": "sin medir",
+   "contradicciones": [],
+   "desconocido": ["Fecha de instalación y de cierre","El solar: ningún plano leído dibuja el edificio","Si la esquina «Alcabala» de 1936 es el mismo lugar que la alcabala de 1843: es una inferencia por el nombre"],
+   "cronologia": [
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1843,"hasta":1843},
+     "dice": "La leyenda de 1843 la enumera, y una calle lleva su nombre",
+     "cita": "«id. de Candelaria» (letra x); calle 45, «de alcabala de la Candelarª»",
+     "fuentes": ["plano1843"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": null,
+     "dice": "Una crónica la llama también Alcabala del Este",
+     "cita": "«Históricamente se le conoció como la Alcabala de La Candaria [sic] o Alcabala del Este»",
+     "fuentes": ["refran"],
+     "certeza": "dudosa"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "Alcabala de Candelaria",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Letra x de la leyenda. La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición."
+    },
+    {
+     "anio": 1936,
+     "estado": "desconocido",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Alcabala",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[11200,7050,11420,7250]},
+     "lectura": "Queda el nombre en una esquina, (11310, 7151), a unos 140 m al oeste del rótulo «Puente Anauco». Es un topónimo: no prueba que hubiera alcabala en 1936."
+    }
+   ]
+  },
+  {
+   "id": "alcabala:el-valle",
+   "tipo": "alcabala",
+   "nombre": "Alcabala del Valle",
+   "sistema": "Alcabalas y puertas",
+   "encuadre": "sin medir",
+   "contradicciones": [],
+   "desconocido": ["Fecha de instalación y de cierre","El solar","Si la esquina «Alcabala Vieja» de 1936 es el mismo lugar: el extremo norte del camino del Valle de 1772 queda unos 165 m al sur de esa esquina"],
+   "cronologia": [
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1843,"hasta":1843},
+     "dice": "La leyenda de 1843 la enumera, y una calle lleva su nombre",
+     "cita": "«Alcabala del Valle» (letra w); calle 136, «de la alcabª del Valle»",
+     "fuentes": ["plano1843"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "Alcabala del Valle",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Letra w de la leyenda. La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición."
+    },
+    {
+     "anio": 1936,
+     "estado": "desconocido",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Alcabala Vieja",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[9650,9020,9850,9220]},
+     "lectura": "Queda el nombre en una esquina, (9745, 9120), con la cota 879,29. Es un topónimo: «vieja» dice que ya no lo era."
+    }
+   ]
+  },
+  {
+   "id": "alcabala:la-vega",
+   "tipo": "alcabala",
+   "nombre": "Esquina de Alcabala (camino de La Vega)",
+   "sistema": "Alcabalas y puertas",
+   "encuadre": "sin medir",
+   "contradicciones": [],
+   "desconocido": ["Toda su historia: ninguna fuente leída dice cuándo hubo ahí una alcabala; la leyenda de 1843 no la enumera","El solar"],
+   "cronologia": [
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1936,"hasta":1936},
+     "dice": "El plano de 1936 rotula «Alcabala» la esquina donde empieza el rótulo «Avenida San Martín»",
+     "cita": "«Alcabala», con la cota 885,739",
+     "fuentes": ["plano1936"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1954,"hasta":1954},
+     "dice": "La ampliación de 1954 de la avenida San Martín va «de Angelitos a Alcabala»",
+     "cita": "«concluye la construcción del tramo de la Avenida San Martín comprendido entre las esquinas Angelitos a Alcabala, unos 1.232 metros de longitud»",
+     "fuentes": ["sm"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1936,
+     "estado": "desconocido",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Alcabala",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[5380,8880,5580,9080]},
+     "lectura": "Nombre de esquina en (5480, 8980), al suroeste de la Plaza Italia. Es un topónimo."
+    }
+   ]
+  },
+  {
+   "id": "alcabala:puerta-la-guaira",
+   "tipo": "puerta",
+   "nombre": "Puerta de La Guaira",
+   "sistema": "Alcabalas y puertas",
+   "encuadre": "sin medir",
+   "contradicciones": [],
+   "desconocido": ["Su posición","Si es la alcabala que el plano de 1772 dibuja en el camino de La Guaira","Fechas"],
+   "cronologia": [{"tipo":"levantamiento","fecha":{"desde":1843,"hasta":1843},"dice":"La leyenda de 1843 la enumera","cita":"«Puerta de La Guaira» (letra v)","fuentes":["plano1843"],"certeza":"documentada"}],
+   "etapas": [
+    {
+     "anio": 1772,
+     "estado": "desconocido",
+     "certeza": "dudosa",
+     "documento": "plano1772",
+     "fuentes": ["plano1772"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1772,"hasta":1772},
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "El original dibuja una alcabala en el camino de La Guaira (`EX1772-012`), sin pareja segura en 1936; nadie transcribió su rótulo."
+    },
+    {
+     "anio": 1843,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1843",
+     "fuentes": ["plano1843"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1843,"hasta":1843},
+     "nombre": "Puerta de La Guaira",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": null,
+     "lectura": "Letra v de la leyenda. La leyenda lo enumera; nadie ubicó su signo sobre el dibujo, así que no tiene posición."
+    }
+   ]
+  },
+  {
+   "id": "avenida:sucre",
+   "tipo": "avenida",
+   "nombre": "Avenida Sucre (Catia)",
+   "sistema": "Avenidas del oeste",
+   "encuadre": "dentro",
+   "nota": "El tercer tramo, de 1952, está en el catálogo de vías posteriores a 1946 (`moderno:sucre-tercer-tramo-1952`): su ancho de 26 m y sus 314 demoliciones no valen para 1936 ni 1946.",
+   "contradicciones": [],
+   "desconocido": [
+    "El ensanche de 1924 que nombra el issue: la fuente leída solo habla de alumbrado y mejoras ese año",
+    "Fechas de los tramos primero y segundo",
+    "El ancho anterior a 1952: ningún documento lo da",
+    "El nombre anterior a 1922 por tramo"
+   ],
+   "nombres": [{"nombre":"Avenida Sucre","desde":1922,"hasta":null,"fuentes":["s46"]}],
+   "cronologia": [
+    {
+     "tipo": "nombre",
+     "fecha": {"desde":1922,"hasta":1922},
+     "dice": "El «Viejo Camino del Oeste» se llama avenida Sucre desde 1922",
+     "cita": "«ya el “Viejo Camino del Oeste” era conocido como avenida Sucre desde 1922»",
+     "fuentes": ["s46"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1924,"hasta":1924},
+     "dice": "En enero de 1924 el gobernador da cuenta de mejoras y de 22 focos más de alumbrado, no de un ensanche",
+     "cita": "«ordené a la compañía respectiva que se hicieran instalaciones para veintidós focos más, los cuales fueron distribuidos del puente de Catia a las jabonerías»",
+     "fuentes": ["s46"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1952,"hasta":1952},
+     "dice": "El tercer tramo se inaugura el 23 de noviembre de 1952: 26 m de ancho y 314 casas demolidas en todo o en parte",
+     "cita": "«Tiene 3.234 metros de longitud y está comprendida entre la Plaza de Catia y la Plazoleta de las Tinajitas con un ancho de 26 Ms.»",
+     "fuentes": ["s46"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1954,"hasta":1954},
+     "dice": "Se cierra en 1954 con el viaducto Nueva República, que sustituye al puente de Pagüita",
+     "cita": "«concluyéndose el tercero en 1952 y cerrándose finalmente con la construcción en 1954 del viaducto Nueva República que sustituyó al antiguo puente de Pagüita»",
+     "fuentes": ["s46","s128"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Avenida Sucre",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[2100,4350,4100,5100]},
+     "lectura": "Rótulo «AVENIDA SUCRE» desde la Plaza La Libertad (2180, 4450) hacia el este, hasta pasar (4000, 5000); edificada a trechos, con la Capilla de Catia y el depósito del MOP sobre ella."
+    },
+    {
+     "anio": 1946,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1946",
+     "fuentes": ["plano1946"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1946,"hasta":1946},
+     "nombre": "Avenida Sucre",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[2100,4350,6400,5600]},
+     "lectura": "El mismo rótulo, de la plaza a Agua Salud (4900, 4900), y la avenida sigue al sureste. Leído sobre el plano reducido a 2 m por píxel."
+    }
+   ]
+  },
+  {
+   "id": "avenida:san-martin",
+   "tipo": "avenida",
+   "nombre": "Avenida San Martín",
+   "sistema": "Avenidas del oeste",
+   "encuadre": "dentro",
+   "nota": "La ampliación de 1954 está en el catálogo de vías posteriores a 1946 (`moderno:san-martin-ampliacion-1954`): 30 m de fachada a fachada. Antes de eso la avenida existía, más angosta.",
+   "contradicciones": [
+    {
+     "asunto": "Extensión de la obra de 1954",
+     "estado": "pendiente",
+     "afirmaciones": [{"dice":"De la esquina de Angelitos a la de Alcabala, 1.232 m","fuente":"sm"},{"dice":"Entre El Silencio y Palo Grande","fuente":"s93"}]
+    }
+   ],
+   "desconocido": [
+    "El ancho anterior a 1954: ningún documento lo da y no se midió sobre el plano",
+    "Cuántas casas se demolieron en 1954 y cuáles",
+    "Hasta dónde llegaba el nombre «Avenida San Martín» hacia el este en 1936: el plano rotula «Sur Ocho» el tramo de Capuchinos a la Plaza Italia",
+    "Cómo rotula el plano de 1946 ese mismo tramo: no se lee en el plano reducido"
+   ],
+   "nombres": [{"nombre":"Sur 8","desde":1897,"hasta":null,"fuentes":["s93"]},{"nombre":"Avenida San Martín","desde":1922,"hasta":null,"fuentes":["s93"]}],
+   "cronologia": [
+    {
+     "tipo": "nombre",
+     "fecha": {"desde":1897,"hasta":1897},
+     "dice": "Desde el plano de 1897 la vía figura como «Sur 8»",
+     "cita": "«desde el plano de 1897 se detecta el término “Sur 8” como denominación de la vía»",
+     "fuentes": ["s93"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "nombre",
+     "fecha": {"desde":1922,"hasta":1922},
+     "dice": "Se llama San Martín desde 1922",
+     "cita": "«así denominada desde 1922 en honor al general y prócer argentino José de San Martín»",
+     "fuentes": ["s93"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": null,
+     "dice": "El tramo antiguo iba de la esquina de Angelitos a Palo Grande, donde remataba en la Plaza Italia",
+     "cita": "«desde la esquina de Angelitos en la parroquia San Juan hasta el sector Palo Grande donde remataba en una plaza (la plaza de Italia que toma ese nombre en 1911…)»",
+     "fuentes": ["s93"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1922,"hasta":1922},
+     "dice": "Desde 1922 la estatua ecuestre de Sucre está en el cruce con la avenida 19 de Diciembre",
+     "cita": "«el cruce con la 19 de diciembre (donde se ubica desde 1922 la estatua ecuestre de Antonio José de Sucre realizada por el escultor venezolano Lorenzo González)»",
+     "fuentes": ["s93"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "levantamiento",
+     "fecha": {"desde":1924,"hasta":1924},
+     "dice": "La estatua de San Martín estuvo desde 1924 en el eje de la avenida",
+     "cita": "«inicialmente estuvo ubicada desde 1924 en el eje de la avenida. La plaza, realizada en 1955 al concluirse la ampliación de la vía»",
+     "fuentes": ["s93"],
+     "certeza": "documentada"
+    },
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1954,"hasta":1954},
+     "dice": "En 1954 se amplía a 30 m de fachada a fachada y se reducen las plazas Capuchinos e Italia",
+     "cita": "«El ancho de la nueva vía tiene 30 metros de fachada a fachada, la calzada de 18 metros de ancho y el ancho de las aceras 5,90 metros.»",
+     "fuentes": ["sm","s93"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Avenida San Martín",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[4600,8300,6850,9600]},
+     "lectura": "Rótulo «AVENIDA SAN MARTIN» al suroeste de la esquina Alcabala, de (5400, 9000) a (4700, 9500), frente a la Casa de Maternidad. Al noreste, de la Plaza Italia a Capuchinos, la misma vía se rotula «Sur Ocho»."
+    },
+    {
+     "anio": 1946,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1946",
+     "fuentes": ["plano1946"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1946,"hasta":1946},
+     "nombre": "Avenida San Martín",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[4200,8900,5500,9700]},
+     "lectura": "Rótulo «AVENIDA SAN MARTIN» en el mismo tramo, de (5400, 9050) a (4300, 9600). Leído sobre el plano reducido a 2 m por píxel."
+    }
+   ]
+  },
+  {
+   "id": "avenida:nueva-caracas",
+   "tipo": "urbanización",
+   "nombre": "Nueva Caracas, avenida España y Plaza Pérez Bonalde",
+   "sistema": "Avenidas del oeste",
+   "encuadre": "dentro",
+   "contradicciones": [],
+   "desconocido": ["Fecha de la Plaza Pérez Bonalde","Avance de la construcción manzana por manzana entre 1928 y 1946","Ancho de la avenida España"],
+   "nombres": [{"nombre":"Nueva Caracas","desde":1928,"hasta":null,"fuentes":["s46"]}],
+   "cronologia": [
+    {
+     "tipo": "obra",
+     "fecha": {"desde":1928,"hasta":1928},
+     "dice": "El Banco Obrero la construye en 1928: unas 58 manzanas trazadas por Oscar Ochoa, con la avenida España como eje norte–sur entre las dos plazas",
+     "cita": "«la construcción en 1928 como parte del plan de viviendas del recién creado Banco Obrero de una nueva urbanización que se denominó “Nueva Caracas”, organizada con base a una retícula de aproximadamente 58 manzanas rectangulares y cuadradas diseñada por el ingeniero Oscar Ochoa, que contaba con la avenida España (hoy Bulevar de Catia) como eje principal norte-sur que uniría la plaza Sucre con la Pérez Bonalde»",
+     "fuentes": ["s46"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Nueva Caracas",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[1400,4600,2800,6700]},
+     "lectura": "Retícula completa entre x 1500 y 2700, y 4700 y 6600, con la «Avenida España» de norte a sur y la «Plaza Pérez Bonalde» en (1770, 6090); calles Colombia, México, Argentina, Brasil, Bolívar y Ecuador. La mayoría de las manzanas tiene pocas casas sueltas."
+    },
+    {
+     "anio": 1946,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1946",
+     "fuentes": ["plano1946"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1946,"hasta":1946},
+     "nombre": "Nueva Caracas",
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[1400,4300,2800,6700]},
+     "lectura": "La misma retícula, ahora con las manzanas del norte rellenas de edificación; rótulos «Nueva Caracas», «Avenida España» y avenidas numeradas. Leído sobre el plano reducido a 2 m por píxel."
+    }
+   ]
+  },
+  {
+   "id": "avenida:plaza-catia",
+   "tipo": "plaza",
+   "nombre": "Plaza de Catia (hoy Plaza Sucre)",
+   "sistema": "Avenidas del oeste",
+   "encuadre": "dentro",
+   "contradicciones": [
+    {
+     "asunto": "Nombre de la plaza en 1936",
+     "estado": "pendiente",
+     "afirmaciones": [
+      {"dice":"Se llama «Agustín Codazzi» desde la muerte de Gómez, en 1935, hasta 1941","fuente":"s46"},
+      {"dice":"El plano fotografiado en marzo de 1936 la rotula «Plaza La Libertad»","fuente":"plano1936"}
+     ]
+    }
+   ],
+   "desconocido": [
+    "Fecha exacta en que la estatua de Sucre llega a la plaza: la fuente dice «después de 1951»",
+    "Si la estatua vino de la avenida San Martín: las dos fuentes hablan de una ecuestre de Lorenzo González de 1922, y que sea un traslado es una inferencia",
+    "Cómo rotula la plaza el plano de 1946: no se lee en el plano reducido",
+    "Qué había en el centro de la plaza en 1936 y 1946"
+   ],
+   "nombres": [
+    {"nombre":"General Juan Crisóstomo Gómez","desde":1928,"hasta":1935,"fuentes":["s46"]},
+    {"nombre":"Agustín Codazzi","desde":1935,"hasta":1941,"fuentes":["s46"]},
+    {"nombre":"Plaza La Libertad","desde":null,"hasta":null,"fuentes":["plano1936"]},
+    {"nombre":"Plaza Sucre","desde":1941,"hasta":null,"fuentes":["s46"]}
+   ],
+   "cronologia": [
+    {
+     "tipo": "apertura",
+     "fecha": {"desde":1928,"hasta":1928},
+     "dice": "Se crea en noviembre de 1928 con el nombre de Juan Crisóstomo Gómez",
+     "cita": "«plaza “General Juan Crisóstomo Gómez” bautizada así en noviembre 1928 cuando fue creada, pasando luego a llamarse “Agustín Codazzi” a la muerte de Juan Vicente Gómez en 1935, para finalmente denominarse plaza “Sucre” en 1941»",
+     "fuentes": ["s46"],
+     "certeza": "documentada"
+    },
+    {"tipo":"nombre","fecha":{"desde":1936,"hasta":1936},"dice":"El plano de 1936 la rotula «Plaza La Libertad»","cita":"«Plaza La Libertad»","fuentes":["plano1936"],"certeza":"documentada"},
+    {"tipo":"nombre","fecha":{"desde":1941,"hasta":1941},"dice":"Se llama Plaza Sucre desde 1941","cita":"«para finalmente denominarse plaza “Sucre” en 1941»","fuentes":["s46"],"certeza":"documentada"},
+    {
+     "tipo": "reforma",
+     "fecha": {"desde":1951,"hasta":1951},
+     "dice": "La estatua ecuestre de Sucre la preside después de 1951",
+     "cita": "«pasando después de 1951 a ser presidida por una estatua ecuestre del Mariscal de Ayacucho realizada por el escultor Lorenzo González en 1922»",
+     "fuentes": ["s46"],
+     "certeza": "documentada"
+    }
+   ],
+   "etapas": [
+    {
+     "anio": 1936,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1936",
+     "fuentes": ["plano1936"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1936,"hasta":1936},
+     "nombre": "Plaza La Libertad",
+     "contradicciones": [{"asunto":"Nombre de la plaza en 1936","estado":"pendiente","afirmaciones":[{"dice":"«Agustín Codazzi» desde 1935","fuente":"s46"},{"dice":"«Plaza La Libertad» en el plano","fuente":"plano1936"}]}],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[2080,4350,2300,4560]},
+     "lectura": "Plaza ajardinada en (2180, 4450), con ese rótulo, donde empieza la avenida Sucre."
+    },
+    {
+     "anio": 1946,
+     "estado": "existente",
+     "certeza": "documentada",
+     "documento": "plano1946",
+     "fuentes": ["plano1946"],
+     "fecha_hecho": {"tipo":"levantamiento","desde":1946,"hasta":1946},
+     "nombre": null,
+     "contradicciones": [],
+     "ancho_m": null,
+     "error_m": null,
+     "medible": false,
+     "recorte": {"caja":[2080,4350,2300,4560]},
+     "lectura": "La plaza sigue en el mismo sitio; su rótulo, de dos líneas, no se lee en el plano reducido."
+    }
+   ]
+  }
+ ]
+}
