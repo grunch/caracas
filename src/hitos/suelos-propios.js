@@ -1,13 +1,15 @@
 import {hijosDios} from './datos/hijos-dios.js'
 import {cementerioSur} from './datos/cementerio-sur.js'
+import {puentesGuaire} from './datos/puentes-guaire.js'
 import {poligonosConVida} from './datos/fases-geometricas.js'
 // El terreno grueso (96m en software) puede pasar por encima del pavimento
 // fino aunque ambos consulten el mismo DEM. Se oculta solo dentro del recinto
 // cuando el hito está totalmente levantado y existe en la época de ese punto.
 export function glslSuelosPropios(plano,metro){
  const f=n=>Number(n).toFixed(5),v=p=>`vec2(${p.map(f).join(',')})`
+ // Los puentes abren el suelo en su cauce: el lecho lo dibuja el propio puente (src/hitos/puente.js).
  const suelos=[...hijosDios.sueloPropio.map(poligono=>({h:hijosDios,poligono,desde:hijosDios.nace,hasta:hijosDios.muere})),
-   ...poligonosConVida(cementerioSur,'sueloPropio').map(z=>({h:cementerioSur,...z}))]
+   ...[cementerioSur,...puentesGuaire].flatMap(h=>poligonosConVida(h,'sueloPropio').map(z=>({h,...z})))]
  const bloques=suelos.map(({h,poligono:poly,desde,hasta})=>{
   const pts=poly.map(([x,y])=>[(x-plano.plaza[0])*metro,(y-plano.plaza[1])*metro])
   const centro=[(h.x-plano.plaza[0])*metro,(h.y-plano.plaza[1])*metro]

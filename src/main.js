@@ -29,7 +29,7 @@ import { SIN_PLANO } from './shader/plano.js'
 import { crearCoords } from './coords.js'
 import { crearCamara } from './camara.js'
 import { cargarCalles, crearRotulos } from './calles.js'
-import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, alturaSuelo, hinchado, subdivisionDeLaHoja, terrazasDeHitos } from './relieve.js'
+import { decodificarRelieve, crearRelieve, uniformsRelieve, ponerRelieve, ponerMallaDelSuelo, alturaSuelo, hinchado, subdivisionDeLaHoja, terrazasDeHitos } from './relieve.js'
 import { COLOR_MESA } from './mesa.js'
 import { vectorSol, ajustesDeAcabado, esRenderPorSoftware } from './luz.js'
 import { crearAcabado } from './acabado.js'
@@ -158,7 +158,9 @@ scene.add(cielo.malla)
 
 // --- la hoja del plano: el suelo, con el mismo material (pisos = 0 en aInfo), subdividida para
 // apoyarse en el relieve ---
-const suelo = new PlaneGeometry(hoja.ancho, hoja.alto, ...subdivisionDeLaHoja(porSoftware)).rotateX(-Math.PI / 2)
+const cuadrosDelSuelo = subdivisionDeLaHoja(porSoftware)
+const suelo = new PlaneGeometry(hoja.ancho, hoja.alto, ...cuadrosDelSuelo).rotateX(-Math.PI / 2)
+ponerMallaDelSuelo(relieveU, hoja, cuadrosDelSuelo) // los puentes empalman con el suelo dibujado, no con el relieve fino
 suelo.translate(hoja.x0 + hoja.ancho / 2, 0, hoja.z0 + hoja.alto / 2)
 suelo.setAttribute('aInfo', new BufferAttribute(new Float32Array(suelo.attributes.position.count * 4), 4))
 suelo.setAttribute('aAncla', new BufferAttribute(new Float32Array(suelo.attributes.position.count * 2), 2))

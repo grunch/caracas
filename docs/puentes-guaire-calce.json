@@ -1,0 +1,101 @@
+{
+  "descripcion": "Calce de los puentes del Guaire (issue #272): cabezas, eje y huella leídos a ojo sobre los planos calzados al mosaico DCN de 1936 (0,5 m/px). «mosaico» = píxeles del mosaico (la grilla común del repo); «original» = píxeles del escaneo sin tocar, por el TPS inverso del calce (tools/geo/calce.py, Calce.al_viejo).",
+  "metodo": {
+    "lectura": "Recortes ampliados ×4 con rejilla de 20 px de fuentes/derivados/1936/mosaico-costura.tif y de fuentes/derivados/{1889,1911}/calzado.tif; cada punto es el medio de un par de esquinas o pedestales. Lectura a ojo: ±2 px (±1 m).",
+    "transformacion": "TPS plano viejo ⇄ mosaico de 1936, con los GCP de tools/geo/gcp/calce-<plano>.json",
+    "relieve": "public/datos/relieve.bin (Copernicus GLO-30 remuestreado a 10 m y corregido con las cotas del plano de 1936)"
+  },
+  "planos": {
+    "1889": {
+      "plano": "1889-bnf-mestre",
+      "fuente": "Vicente S. Mestre, Plano topográfico de la ciudad de Caracas (1889), BnF vía Wikimedia Commons; dominio público. fuentes/mapas/1889-bnf-mestre/ficha.json",
+      "url": "https://commons.wikimedia.org/wiki/File:Plano_topografico_de_la_ciudad_de_Caracas,_levantado_en_1889_vajo_la_direccion_-_del_general_don_Vicente_S._Mestre_-_btv1b53027837n.jpg",
+      "calce": { "gcps": 479, "rms_loo_m": 7.64, "p90_m": 12.93, "max_m": 19.16 }
+    },
+    "1911": {
+      "plano": "1911-princeton-plano-de-caracas-razetti",
+      "fuente": "Ricardo Razetti, Plano de Caracas (1911), Princeton University Library; sin derechos conocidos. fuentes/mapas/1911-princeton-plano-de-caracas-razetti/ficha.json",
+      "url": "https://maps.princeton.edu/catalog/princeton-05741v14j",
+      "calce": { "gcps": 738, "rms_loo_m": 6.71, "p90_m": 12.04, "max_m": 19.84 }
+    },
+    "1936": {
+      "plano": "1936-archiveorg-caracas-dcn-hoja1 y hoja2 (mosaico)",
+      "fuente": "Ministerio de Obras Públicas, Dirección de Cartografía Nacional, Caracas (1936), vía Internet Archive; licencia sin establecer en su ficha. fuentes/mapas/1936-archiveorg-caracas-dcn-hoja1/ficha.json",
+      "url": "https://archive.org/details/WCWdb_18053",
+      "calce": { "nota": "Es la base: los demás planos se calzan sobre él." }
+    }
+  },
+  "puente-hierro": {
+    "cruce": "calle Sur 5 (Puente de Hierro o de la Regeneración, 1875)",
+    "1889": {
+      "dibuja": "símbolo rayado del tablero, numerado 14, con sus cuatro esquinas",
+      "cabeza_norte": { "mosaico": [9438, 9364], "original": [5320.2, 6791.6] },
+      "cabeza_sur": { "mosaico": [9404, 9516], "original": [5305.2, 6977.9] },
+      "eje": [-0.218, 0.976],
+      "largo_m": { "sobre_el_calce": 77.9, "en_el_original": 74.8, "nota": "En el original el símbolo mide 186,9 px; el del Puente Constitución, 148,8 px para 59,56 m del estudio de Miraflores: 0,400 m/px." },
+      "ancho_del_simbolo_m": 15.5,
+      "rio_sobre_el_eje_y": [9400, 9450],
+      "gcp_mas_cercanos_m": [80, 128, 140],
+      "loo_de_esos_gcp_m": [8.21, 6.83, 8.31],
+      "desvio_del_eje_de_1936_m": { "cabeza_norte": 4.8, "cabeza_sur": 13.2, "hacia": "oeste" }
+    },
+    "1911": {
+      "dibuja": "calzada con tranvía entre dos pares de pedestales, numerada II; orillas con sombreado de talud",
+      "cabeza_norte": { "mosaico": [9452.5, 9347], "original": [4868.8, 3401.6] },
+      "cabeza_sur": { "mosaico": [9433, 9537], "original": [4875.3, 3515.7] },
+      "eje": [-0.102, 0.995],
+      "largo_m": { "sobre_el_calce": 95.5, "nota": "No se usa: en el mismo plano los pedestales del Puente Sucre quedan a 48 m y su luz documentada es de 60 m." },
+      "orillas_sobre_el_eje_y": [9385, 9478],
+      "rio_sobre_el_eje_y": [9405, 9445],
+      "gcp_mas_cercanos_m": [76, 128, 131],
+      "loo_de_esos_gcp_m": [12.15, 3.27, 5.08],
+      "desvio_del_eje_de_1936_m": { "cabeza_norte": 1.5, "cabeza_sur": 2.3, "hacia": "este" }
+    },
+    "1936": {
+      "dibuja": "calzada continua rotulada «Puente de Hierro»; no marca las cabezas",
+      "eje": { "punto": [9438, 9450], "direccion": [-0.111, 0.994] },
+      "ancho_de_calzada_m": 8,
+      "rio_sobre_el_eje_y": [9447, 9458],
+      "edificado_al_borde_este": "dos edificaciones entre y = 9365 y 9410, a 1 m del borde de la calzada"
+    },
+    "adoptado": {
+      "eje": "el de la calzada de 1936 (el plano base, restitución fotogramétrica)",
+      "centro": { "mosaico": [9438.9, 9441.75], "nota": "Sobre ese eje, el medio del puente de 1889 y el de 1911 caen a 0,2 m uno del otro." },
+      "largo_m": 77.4,
+      "cabeza_norte": { "mosaico": [9447.5, 9364.8] },
+      "cabeza_sur": { "mosaico": [9430.3, 9518.7] },
+      "error_m": 8,
+      "incertidumbre_del_largo_m": 3,
+      "cotas_m": { "cabeza_norte": 873.5, "cabeza_sur": 874.1, "minimo_entre_cabezas": 873.2, "pendiente": 0.008, "nota": "Del relieve del sitio, que no trae el cauce: entre las cabezas el terreno baja 0,3 m." },
+      "ancla_de_la_marca_anterior": { "mosaico": [9430, 9440], "a_m_del_centro": 4.5 }
+    }
+  },
+  "puente-sucre": {
+    "nota": "Medido de paso para el PR siguiente; no se instala todavía.",
+    "cruce": "calle Sur 7 (Puente Constitución en 1889, Puente Sucre metálico en 1911, de concreto en 1936)",
+    "1889": {
+      "dibuja": "símbolo rayado del tablero, numerado 15",
+      "cabeza_norte": { "mosaico": [9720.5, 9338.5], "original": [5620.7, 6695.5] },
+      "cabeza_sur": { "mosaico": [9699, 9458], "original": [5608.5, 6843.8] },
+      "largo_m": { "sobre_el_calce": 60.7, "del_estudio": 59.56 },
+      "rio_sobre_el_eje_y": [9358, 9400],
+      "gcp_mas_cercanos_m": [64, 69, 117],
+      "loo_de_esos_gcp_m": [2.88, 6.83, 8.21]
+    },
+    "1911": {
+      "dibuja": "calzada entre dos pares de pedestales, numerada I",
+      "cabeza_norte": { "mosaico": [9703, 9376], "original": [5004.9, 3388.2] },
+      "cabeza_sur": { "mosaico": [9684, 9470], "original": [5006.1, 3449.3] },
+      "largo_m": { "sobre_el_calce": 48.0, "documentado": 60, "nota": "El plano de 1911 no sirve para el largo: hay que resolverlo antes de instalar el Sucre." },
+      "rio_sobre_el_eje_y": [9392, 9432]
+    },
+    "1936": {
+      "dibuja": "calzada con tranvía rotulada «Puente Sucre»; no marca las cabezas",
+      "eje": { "punto": [9704, 9440], "direccion": [-0.096, 0.995] },
+      "ancho_de_calzada_m": 9.8,
+      "rio_sobre_el_eje_y": [9422, 9445]
+    },
+    "cotas_m": { "cabeza_norte_1889": 873.2, "cabeza_sur_1889": 872.8 },
+    "ancla_de_la_marca": { "mosaico": [9710, 9430] }
+  }
+}
