@@ -48,8 +48,10 @@ que entra es la Calle Real de Sabana Grande hasta Chacaíto.
   `bellas-artes`, `san-bernardino` y `los-caobos`. **Es correcto**: no hay error del modelo, hay un sector fuera del encuadre.
 - La foto `fuentes/imagenes/1955-pinterest-plaza-altamira` ya está fuera de las seis épocas (`epocas: []`, sin
   licencia). Su ficha dice «casi seguro fuera del área del plano de 1936»: ahora está medido, 2,4 km afuera.
-- La avenida Francisco de Miranda (1954) ya figura en `tools/geo/referencias/vialidad-posterior-1946.json`
-  (`moderno:francisco-de-miranda-1954`) como ausente en los seis cortes.
+- La avenida Francisco de Miranda figura en `tools/geo/referencias/vialidad-posterior-1946.json`
+  (`moderno:francisco-de-miranda-1954`) con apertura en 1954. Su trazo cae fuera de la hoja: en los seis cortes
+  queda **sin lectura**, igual que el edificio Altamira (terminado en 1947). «Terminado en 1947» o «abierta en
+  1954» no dicen qué había en 1946.
 - `tests/unit/expansion-oriental-279.test.js` deja un candado: si alguien agrega una marca o un hito con esos
   nombres mientras el sector siga fuera de la hoja, el test falla.
 
@@ -108,7 +110,7 @@ píxel (`fuentes/derivados/1946/plano.jpg`), no en el escaneo original.
 
 ### Calle Real de Sabana Grande
 
-`este:calle-real-sabana-grande` · calle · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`este:calle-real-sabana-grande` · calle · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 El último tramo del camino del este que la hoja alcanza a dibujar. Su digitalización como tramo del registro vial es de #270.
 
@@ -129,40 +131,42 @@ El último tramo del camino del este que la hoja alcanza a dibujar. Su digitaliz
 
 ### Carretera del Este (Sabana Grande–Petare)
 
-`este:carretera-del-este` · carretera · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`este:carretera-del-este` · carretera · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
-Empieza donde termina la Calle Real de Sabana Grande, es decir, donde termina la hoja. La avenida Francisco de Miranda (1954) ya está en el catálogo de vías posteriores a 1946 (`moderno:francisco-de-miranda-1954`) y no se repite acá.
+Empieza donde termina la Calle Real de Sabana Grande, es decir, donde termina la hoja. La avenida Francisco de Miranda (1954) está en el catálogo de vías posteriores a 1946 (`moderno:francisco-de-miranda-1954`), que la da por abierta en 1954; acá no se repite, y para este tramo ningún plano del sitio da lectura.
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
 | Sin fecha | Levantamiento | Sigue el trazado del antiguo Camino Real de Petare | «tiene su origen en el trazado del antiguo Camino Real de Petare que unía las haciendas» | documentada | [3] |
-| 1934 | Levantamiento | En 1934 llevaba del centro a Petare y conectaba las urbanizaciones del este | «conectados por la Carretera del Este que llevaba del centro hasta Petare» | dudosa | [4] |
+| 1875 | Apertura | La Carretera del Este, de Caracas a Petare, se inaugura en mayo de 1875 | «La llamada “Carretera del Este”, que partía de Caracas a Petare… fue inaugurada también por Guzmán Blanco en mayo de 1875» (p. 16) | dudosa | [4] |
+| 1934 | Levantamiento | En 1934 llevaba del centro a Petare y conectaba las urbanizaciones del este | «conectados por la Carretera del Este que llevaba del centro hasta Petare» | dudosa | [5] |
 | 1947 | Apertura | Inaugurada oficialmente el 12 de marzo de 1947 | «el 12 de marzo de 1947 […] el entonces Gobernador de Caracas, Gonzalo Barrios, inaugurara oficialmente la que se conoció como “Carretera del Este”» | dudosa | [3] |
 | 1954 | Reforma | En 1954 se termina su ampliación y el tramo de Los Palos Grandes a Petare, y cambia de nombre | «Es la ampliación de la Carretera junto a la construcción del tramo entre Los Palos Grandes y Petare lo que se termina en 1954» | documentada | [3] |
 | 1954 | Reforma | La avenida nueva tiene calzadas de más de 30 m, seis vías y aceras de cuatro metros | «con sus calzadas de más de 30 metros de anchura (en total seis vías, tres en un sentido y otras tres en el otro […]), islas verdes en ciertos tramos y aceras de cuatro metros cada una» | documentada | [3] |
 
-**Contradicción pendiente — Desde cuándo existe la Carretera del Este:**
+**Contradicción pendiente — Fecha de la Carretera del Este:**
 
-- Ya conectaba las urbanizaciones del este en el plano de Röhl de 1934 [4]
+- Guzmán Blanco la inaugura en mayo de 1875 [4]
+- Ya llevaba del centro a Petare en el plano de Röhl de 1934 [5]
 - El gobernador Gonzalo Barrios la inaugura oficialmente el 12 de marzo de 1947 [3]
 
 **No se pudo documentar:**
 
 - Ancho de la carretera antes de 1954.
 - Su trazado tramo por tramo por Chacao y Los Dos Caminos.
-- Qué se inauguró en 1947 si la carretera ya figuraba en 1934: pavimento, rectificación o nombre.
+- Qué se inauguró en 1947 si la carretera ya se había inaugurado en 1875 y figuraba en 1934: pavimento, rectificación o nombre.
 - Cómo la rotula el plano de 1946 al este de Las Delicias: el original no se releyó para este tramo.
 
 ### Urbanización Altamira
 
-`este:urbanizacion-altamira` · urbanización · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`este:urbanizacion-altamira` · urbanización · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
-| 1943 | Proyecto | Luis Roche compra la hacienda El Paraíso, de 110 hectáreas | «Roche […] compra la hacienda en 1943» | documentada | [4] |
-| 1944 | Proyecto | Crea Altamira, C.A. y pide al Concejo Municipal autorización para parcelar | «crea en 1944 la empresa Altamira, C.A. con el objeto de desarrollar la urbanización y solicita autorización al Concejo Municipal para realizar el parcelamiento» | documentada | [4] |
-| 1950 | Apertura | Ya parcelada, entrega formalmente los espacios públicos en 1950 | «En 1950, ya parcelada, se procedió hacer entrega formal de los espacios públicos» | documentada | [4] |
-| Sin fecha | Levantamiento | Dos avenidas principales de 24 m, El Ávila al este y El Parque al oeste | «de 24 metros de ancho denominadas entonces como El Ávila -al este- y El Parque -al oeste- (hoy Luis Roche y San Juan Bosco…)» | documentada | [4] |
+| 1943 | Proyecto | Luis Roche compra la hacienda El Paraíso, de 110 hectáreas | «Roche […] compra la hacienda en 1943» | documentada | [5] |
+| 1944 | Proyecto | Crea Altamira, C.A. y pide al Concejo Municipal autorización para parcelar | «crea en 1944 la empresa Altamira, C.A. con el objeto de desarrollar la urbanización y solicita autorización al Concejo Municipal para realizar el parcelamiento» | documentada | [5] |
+| 1950 | Apertura | Ya parcelada, entrega formalmente los espacios públicos en 1950 | «En 1950, ya parcelada, se procedió hacer entrega formal de los espacios públicos» | documentada | [5] |
+| Sin fecha | Levantamiento | Dos avenidas principales de 24 m, El Ávila al este y El Parque al oeste | «de 24 metros de ancho denominadas entonces como El Ávila -al este- y El Parque -al oeste- (hoy Luis Roche y San Juan Bosco…)» | documentada | [5] |
 
 **No se pudo documentar:**
 
@@ -172,39 +176,39 @@ Empieza donde termina la Calle Real de Sabana Grande, es decir, donde termina la
 
 ### Plaza Altamira (hoy Plaza Francia), con su obelisco y su espejo de agua
 
-`este:plaza-altamira` · plaza · sin fecha de apertura: **pendiente**, no ausente, en los cortes del sitio.
+`este:plaza-altamira` · plaza · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
 
-**Nombres:** «Plaza Altamira» (¿?–¿?) [4]; «Plaza Francia» (¿?–¿?) [4] [5].
+**Nombres:** «Plaza Altamira» (¿?–¿?) [5]; «Plaza Francia» (¿?–¿?) [5] [6].
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
-| 1945 | Apertura | Inaugurada el 11 de agosto de 1945 | «el 11 de agosto de 1945 es inaugurada la que se conoce actualmente como la Plaza Francia de Altamira» | dudosa | [4] |
-| 1944 | Apertura | Inauguración formal el 5 de julio de 1944 | «Su inauguración formal data del 5 de julio de 1944.» | dudosa | [4] |
-| 1945 | Apertura | Otra entrada la fecha en 1945 y la atribuye a Martín Hermanos | «Plaza Altamira (Martín Hermanos,1945)» | documentada | [3] |
-| Sin fecha | Levantamiento | Obelisco de 24 m en piedra artificial | «el propio obelisco de 24 metros de altura erigido en piedra artificial» | dudosa | [4] |
-| Sin fecha | Levantamiento | Fuente con espejo de agua | «la fuente conformada por un espejo de agua con boquillas o chorros» | documentada | [4] |
-| 1967 | Nombre | Rebautizada Plaza Francia en 1967 | «es rebautizado en 1967 como “Plaza Francia”» | dudosa | [4] |
-| 1989 | Nombre | Reinaugurada y rebautizada Plaza Francia en 1989 | «reinauguran la Plaza Altamira rebautizándola como Plaza Francia» | dudosa | [5] |
+| 1945 | Apertura | Inaugurada el 11 de agosto de 1945 | «el 11 de agosto de 1945 es inaugurada la que se conoce actualmente como la Plaza Francia de Altamira» | dudosa | [5] |
+| 1944 | Apertura | Inauguración formal el 5 de julio de 1944 | «Su inauguración formal data del 5 de julio de 1944.» | dudosa | [5] |
+| 1945 | Apertura | Otra entrada la fecha en 1945 y la atribuye a Martín Hermanos | «Plaza Altamira (Martín Hermanos,1945)» | dudosa | [3] |
+| Sin fecha | Levantamiento | Obelisco de 24 m en piedra artificial | «el propio obelisco de 24 metros de altura erigido en piedra artificial» | dudosa | [5] |
+| Sin fecha | Levantamiento | Fuente con espejo de agua | «la fuente conformada por un espejo de agua con boquillas o chorros» | dudosa | [5] |
+| 1967 | Nombre | Rebautizada Plaza Francia en 1967 | «es rebautizado en 1967 como “Plaza Francia”» | dudosa | [5] |
+| 1989 | Nombre | Reinaugurada y rebautizada Plaza Francia en 1989 | «reinauguran la Plaza Altamira rebautizándola como Plaza Francia» | dudosa | [6] |
 
 **Contradicción pendiente — Fecha de inauguración de la plaza:**
 
-- Inaugurada el 11 de agosto de 1945 [4]
-- «Su inauguración formal data del 5 de julio de 1944», en la misma entrada [4]
+- Inaugurada el 11 de agosto de 1945 [5]
+- «Su inauguración formal data del 5 de julio de 1944», en la misma entrada [5]
 
 **Contradicción pendiente — Altura del obelisco:**
 
-- 24 metros, en piedra artificial [4]
-- 45 metros [6]
+- 24 metros, en piedra artificial [5]
+- 45 metros [7]
 
 **Contradicción pendiente — Autor de la plaza:**
 
-- Martín Hermanos (Luis Martín); Henry Vicente niega que la proyectara Arthur Kahn [4]
-- Proyectada con la participación de Arthur Kahn [6]
+- Martín Hermanos (Luis Martín); Henry Vicente niega que la proyectara Arthur Kahn [5]
+- Proyectada con la participación de Arthur Kahn [7]
 
 **Contradicción pendiente — Cuándo pasa a llamarse Plaza Francia:**
 
-- Rebautizada en 1967 [4]
-- Reinaugurada y rebautizada en 1989 [5]
+- Rebautizada en 1967 [5]
+- Reinaugurada y rebautizada en 1989 [6]
 
 **No se pudo documentar:**
 
@@ -214,11 +218,13 @@ Empieza donde termina la Calle Real de Sabana Grande, es decir, donde termina la
 
 ### Edificio Altamira
 
-`este:edificio-altamira` · edificio · ausente en los cortes anteriores a **1947**.
+`este:edificio-altamira` · edificio · sin lectura donde ningún plano lo acredita: **pendiente**, no ausente.
+
+Terminado en 1947: no puede figurar como edificio acabado en 1946. Que en 1946 no hubiera nada, o que estuviera en obra, no lo dice ninguna fuente leída y ningún plano del sitio cubre el sector: los seis cortes quedan sin lectura, que no es ausencia.
 
 | Fecha | Qué | Afirmación | Cita | Certeza | Fuente |
 |---|---|---|---|---|---|
-| 1947 | Apertura | Terminado en 1947; de Arthur Kahn | «Arthur Kahn como autor del […] edificio que cierra el extremo norte de la plaza: el edificio Altamira, finalizado en 1947» | documentada | [4] |
+| 1947 | Apertura | Terminado en 1947; de Arthur Kahn | «Arthur Kahn como autor del […] edificio que cierra el extremo norte de la plaza: el edificio Altamira, finalizado en 1947» | documentada | [5] |
 
 **No se pudo documentar:**
 
@@ -231,6 +237,7 @@ Empieza donde termina la Calle Real de Sabana Grande, es decir, donde termina la
 | 1 | plano de época | 1936 | <https://archive.org/details/WCWdb_18053> |
 | 2 | plano de época | 1946–1950 | <https://archive.org/details/WCWdb_18051> |
 | 3 | secundaria con referencias | 2020 | <https://fundaayc.com/2020/11/15/sabia-usted-54/> |
-| 4 | secundaria con referencias | 2020 | <https://fundaayc.com/2020/09/20/sabia-usted-50/> |
-| 5 | secundaria sin referencias | 2026 | <https://fundaayc.com/2026/05/19/1989-reinauguracion-de-la-plaza-altamira-rebautizada-como-plaza-francia/> |
-| 6 | secundaria con referencias | 2024 | <https://fundaayc.com/2024/07/14/algo-mas-sobre-la-postal-no-411/> |
+| 4 | secundaria con referencias | sin fecha; consultada el 2026-11-28 | <https://acading.org.ve/wp-content/uploads/2023/02/LIBRO_INFRAESTRUCTURA_PET_Y_COMUNICACIONES_SIGLO_XIX_y_XX_ALFREDO_CILENTO.pdf> |
+| 5 | secundaria con referencias | 2020 | <https://fundaayc.com/2020/09/20/sabia-usted-50/> |
+| 6 | secundaria sin referencias | 2026 | <https://fundaayc.com/2026/05/19/1989-reinauguracion-de-la-plaza-altamira-rebautizada-como-plaza-francia/> |
+| 7 | secundaria con referencias | 2024 | <https://fundaayc.com/2024/07/14/algo-mas-sobre-la-postal-no-411/> |

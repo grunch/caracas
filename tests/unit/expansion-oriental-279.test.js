@@ -60,19 +60,27 @@ describe('expansión oriental de 1946: cobertura de Altamira (#279)', () => {
     expect(de('calle-real-sabana-grande').etapas.map((e) => [e.anio, e.nombre])).toEqual([[1936, 'Calle Real de Sabana Grande'], [1946, 'Avenida Abraham Lincoln']])
   })
 
-  it('el edificio Altamira es de 1947: ausente en los seis cortes', () => {
-    expect(de('edificio-altamira').desde).toBe(1947)
-    expect(de('edificio-altamira').etapas).toEqual([])
+  it('el edificio Altamira, terminado en 1947, queda sin lectura en los seis cortes: no se afirma que estuviera ausente', () => {
+    const edificio = de('edificio-altamira')
+    expect(edificio.desde).toBeUndefined()
+    expect(edificio.etapas).toEqual([])
+    expect(edificio.cronologia.map((c) => [c.tipo, c.fecha.desde])).toEqual([['apertura', 1947]])
+    expect(documento).toContain('`este:edificio-altamira` · edificio · sin lectura donde ningún plano lo acredita')
+    expect(documento.split('\n').filter((l) => l.includes('edificio-altamira`') && l.includes('· ausente'))).toEqual([])
   })
 
   it('las fechas que las fuentes dan de dos maneras quedan como contradicciones pendientes', () => {
     const asuntos = catalogo.tramos.flatMap((t) => t.contradicciones.map((c) => [c.asunto, c.estado]))
-    for (const asunto of ['Fecha de inauguración de la plaza', 'Altura del obelisco', 'Cuándo pasa a llamarse Plaza Francia', 'Desde cuándo existe la Carretera del Este']) {
+    for (const asunto of ['Fecha de inauguración de la plaza', 'Altura del obelisco', 'Cuándo pasa a llamarse Plaza Francia', 'Fecha de la Carretera del Este']) {
       expect(asuntos).toContainEqual([asunto, 'pendiente'])
     }
     // una afirmación que otra contradice no puede ir como documentada
     const plaza = de('plaza-altamira')
-    for (const c of plaza.cronologia.filter((x) => x.tipo === 'nombre')) expect(c.certeza).toBe('dudosa')
+    for (const c of plaza.cronologia) expect(c.certeza, c.dice).toBe('dudosa')
+    // la misma contradicción de la Carretera del Este que el catálogo de caminos: 1875, 1934 y 1947, las tres dudosas
+    const carretera = de('carretera-del-este')
+    expect(carretera.contradicciones[0].afirmaciones.map((a) => a.fuente)).toEqual(['cil', 's50', 's54'])
+    expect(carretera.cronologia.filter((c) => c.disputa).map((c) => [c.fecha.desde, c.certeza])).toEqual([[1875, 'dudosa'], [1934, 'dudosa'], [1947, 'dudosa']])
   })
 
   it('ninguna marca ni hito nombra lo que queda fuera de la hoja', () => {

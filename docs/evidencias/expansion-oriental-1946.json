@@ -2,7 +2,7 @@
  "nota": "Expansión oriental hacia 1946 (#279): qué cae dentro de la hoja del sitio y qué no, con una fuente por afirmación. No trae geometría ni autoriza a colocar nada: lo que queda fuera de la hoja no se dibuja. Las citas son textuales; la fecha del documento de cada entrada de FAC es el año de su URL.",
  "clases_de_fuente": {
   "plano de época": "Plano del catálogo del repo, calzado sobre el mosaico de 1936.",
-  "secundaria con referencias": "Artículo de la Fundación Arquitectura y Ciudad que cita sus fuentes.",
+  "secundaria con referencias": "Artículo o libro que cita sus fuentes. Es la única clase escrita que admite la certeza «documentada»; una afirmación en disputa no la lleva nunca.",
   "secundaria sin referencias": "Entrada de cronología sin fuentes citadas."
  },
  "cobertura": {
@@ -37,6 +37,14 @@
    "fecha_documento": {"desde":1946,"hasta":1950},
    "fecha_representada": {"desde":1946,"hasta":1946},
    "url": "https://archive.org/details/WCWdb_18051"
+  },
+  "cil": {
+   "tipo": "historica",
+   "anios": [],
+   "clase": "secundaria con referencias",
+   "fecha_documento": null,
+   "consultada": "2026-11-28",
+   "url": "https://acading.org.ve/wp-content/uploads/2023/02/LIBRO_INFRAESTRUCTURA_PET_Y_COMUNICACIONES_SIGLO_XIX_y_XX_ALFREDO_CILENTO.pdf"
   },
   "s50": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2020,"hasta":2020},"url":"https://fundaayc.com/2020/09/20/sabia-usted-50/"},
   "s54": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2020,"hasta":2020},"url":"https://fundaayc.com/2020/11/15/sabia-usted-54/"},
@@ -125,18 +133,22 @@
    "nombre": "Carretera del Este (Sabana Grande–Petare)",
    "sistema": "Fuera de la hoja",
    "encuadre": "fuera",
-   "nota": "Empieza donde termina la Calle Real de Sabana Grande, es decir, donde termina la hoja. La avenida Francisco de Miranda (1954) ya está en el catálogo de vías posteriores a 1946 (`moderno:francisco-de-miranda-1954`) y no se repite acá.",
+   "nota": "Empieza donde termina la Calle Real de Sabana Grande, es decir, donde termina la hoja. La avenida Francisco de Miranda (1954) está en el catálogo de vías posteriores a 1946 (`moderno:francisco-de-miranda-1954`), que la da por abierta en 1954; acá no se repite, y para este tramo ningún plano del sitio da lectura.",
    "contradicciones": [
     {
-     "asunto": "Desde cuándo existe la Carretera del Este",
+     "asunto": "Fecha de la Carretera del Este",
      "estado": "pendiente",
-     "afirmaciones": [{"dice":"Ya conectaba las urbanizaciones del este en el plano de Röhl de 1934","fuente":"s50"},{"dice":"El gobernador Gonzalo Barrios la inaugura oficialmente el 12 de marzo de 1947","fuente":"s54"}]
+     "afirmaciones": [
+      {"dice":"Guzmán Blanco la inaugura en mayo de 1875","fuente":"cil"},
+      {"dice":"Ya llevaba del centro a Petare en el plano de Röhl de 1934","fuente":"s50"},
+      {"dice":"El gobernador Gonzalo Barrios la inaugura oficialmente el 12 de marzo de 1947","fuente":"s54"}
+     ]
     }
    ],
    "desconocido": [
     "Ancho de la carretera antes de 1954",
     "Su trazado tramo por tramo por Chacao y Los Dos Caminos",
-    "Qué se inauguró en 1947 si la carretera ya figuraba en 1934: pavimento, rectificación o nombre",
+    "Qué se inauguró en 1947 si la carretera ya se había inaugurado en 1875 y figuraba en 1934: pavimento, rectificación o nombre",
     "Cómo la rotula el plano de 1946 al este de Las Delicias: el original no se releyó para este tramo"
    ],
    "cronologia": [
@@ -149,12 +161,22 @@
      "certeza": "documentada"
     },
     {
+     "tipo": "apertura",
+     "fecha": {"desde":1875,"hasta":1875},
+     "dice": "La Carretera del Este, de Caracas a Petare, se inaugura en mayo de 1875",
+     "cita": "«La llamada “Carretera del Este”, que partía de Caracas a Petare… fue inaugurada también por Guzmán Blanco en mayo de 1875» (p. 16)",
+     "fuentes": ["cil"],
+     "certeza": "dudosa",
+     "disputa": "Fecha de la Carretera del Este"
+    },
+    {
      "tipo": "levantamiento",
      "fecha": {"desde":1934,"hasta":1934},
      "dice": "En 1934 llevaba del centro a Petare y conectaba las urbanizaciones del este",
      "cita": "«conectados por la Carretera del Este que llevaba del centro hasta Petare»",
      "fuentes": ["s50"],
-     "certeza": "dudosa"
+     "certeza": "dudosa",
+     "disputa": "Fecha de la Carretera del Este"
     },
     {
      "tipo": "apertura",
@@ -162,7 +184,8 @@
      "dice": "Inaugurada oficialmente el 12 de marzo de 1947",
      "cita": "«el 12 de marzo de 1947 […] el entonces Gobernador de Caracas, Gonzalo Barrios, inaugurara oficialmente la que se conoció como “Carretera del Este”»",
      "fuentes": ["s54"],
-     "certeza": "dudosa"
+     "certeza": "dudosa",
+     "disputa": "Fecha de la Carretera del Este"
     },
     {
      "tipo": "reforma",
@@ -322,7 +345,8 @@
      "dice": "Inaugurada el 11 de agosto de 1945",
      "cita": "«el 11 de agosto de 1945 es inaugurada la que se conoce actualmente como la Plaza Francia de Altamira»",
      "fuentes": ["s50"],
-     "certeza": "dudosa"
+     "certeza": "dudosa",
+     "disputa": "Fecha de inauguración de la plaza"
     },
     {
      "tipo": "apertura",
@@ -330,7 +354,8 @@
      "dice": "Inauguración formal el 5 de julio de 1944",
      "cita": "«Su inauguración formal data del 5 de julio de 1944.»",
      "fuentes": ["s50"],
-     "certeza": "dudosa"
+     "certeza": "dudosa",
+     "disputa": "Fecha de inauguración de la plaza"
     },
     {
      "tipo": "apertura",
@@ -338,7 +363,8 @@
      "dice": "Otra entrada la fecha en 1945 y la atribuye a Martín Hermanos",
      "cita": "«Plaza Altamira (Martín Hermanos,1945)»",
      "fuentes": ["s54"],
-     "certeza": "documentada"
+     "certeza": "dudosa",
+     "disputa": "Fecha de inauguración de la plaza"
     },
     {
      "tipo": "levantamiento",
@@ -346,17 +372,27 @@
      "dice": "Obelisco de 24 m en piedra artificial",
      "cita": "«el propio obelisco de 24 metros de altura erigido en piedra artificial»",
      "fuentes": ["s50"],
-     "certeza": "dudosa"
+     "certeza": "dudosa",
+     "disputa": "Altura del obelisco"
     },
-    {"tipo":"levantamiento","fecha":null,"dice":"Fuente con espejo de agua","cita":"«la fuente conformada por un espejo de agua con boquillas o chorros»","fuentes":["s50"],"certeza":"documentada"},
-    {"tipo":"nombre","fecha":{"desde":1967,"hasta":1967},"dice":"Rebautizada Plaza Francia en 1967","cita":"«es rebautizado en 1967 como “Plaza Francia”»","fuentes":["s50"],"certeza":"dudosa"},
+    {"tipo":"levantamiento","fecha":null,"dice":"Fuente con espejo de agua","cita":"«la fuente conformada por un espejo de agua con boquillas o chorros»","fuentes":["s50"],"certeza":"dudosa"},
+    {
+     "tipo": "nombre",
+     "fecha": {"desde":1967,"hasta":1967},
+     "dice": "Rebautizada Plaza Francia en 1967",
+     "cita": "«es rebautizado en 1967 como “Plaza Francia”»",
+     "fuentes": ["s50"],
+     "certeza": "dudosa",
+     "disputa": "Cuándo pasa a llamarse Plaza Francia"
+    },
     {
      "tipo": "nombre",
      "fecha": {"desde":1989,"hasta":1989},
      "dice": "Reinaugurada y rebautizada Plaza Francia en 1989",
      "cita": "«reinauguran la Plaza Altamira rebautizándola como Plaza Francia»",
      "fuentes": ["r89"],
-     "certeza": "dudosa"
+     "certeza": "dudosa",
+     "disputa": "Cuándo pasa a llamarse Plaza Francia"
     }
    ],
    "etapas": [
@@ -398,8 +434,7 @@
    "nombre": "Edificio Altamira",
    "sistema": "Fuera de la hoja",
    "encuadre": "fuera",
-   "desde": 1947,
-   "fuentesCronologia": ["s50"],
+   "nota": "Terminado en 1947: no puede figurar como edificio acabado en 1946. Que en 1946 no hubiera nada, o que estuviera en obra, no lo dice ninguna fuente leída y ningún plano del sitio cubre el sector: los seis cortes quedan sin lectura, que no es ausencia.",
    "contradicciones": [],
    "desconocido": ["Fecha de inicio de la obra: no se sabe si en 1946 ya se veía en construcción"],
    "cronologia": [
