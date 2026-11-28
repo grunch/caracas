@@ -1,7 +1,7 @@
 # Cruces del Guaire: Constitución/Sucre y Hierro
 
 Avance parcial de #272. Las fichas y marcas distinguen el cruce de la estructura.
-De los modelos estudiados en Miraflores, el primero instalado es el Puente de Hierro.
+De los modelos estudiados en Miraflores están instalados el Puente de Hierro, el Constitución y el Sucre metálico.
 
 | Época | Constitución / Sucre | Hierro |
 |---|---|---|
@@ -39,8 +39,11 @@ Ya instalado: el Puente de Hierro de 1875 en 1889, 1911 y 1936, con su calce
 ([`puentes-guaire-calce.md`](puentes-guaire-calce.md)) y el adaptador de puentes
 ([`puente-hierro-integracion.md`](puente-hierro-integracion.md)).
 
-Pendientes para cerrar #272: Constitución, Sucre y los demás cruces (calce de cabezas,
-cotas, apoyos y accesos), el sustituto de 1937 del de Hierro, variantes posteriores,
+También instalados: el Puente Constitución en 1889 y el Sucre metálico en 1911, en el mismo
+paso ([`puente-sucre-integracion.md`](puente-sucre-integracion.md)).
+
+Pendientes para cerrar #272: los demás cruces (calce de cabezas, cotas, apoyos y accesos),
+el Sucre de concreto y el sustituto de 1937 del de Hierro (sin alzado), variantes posteriores,
 Paraíso y Bolívar/Los Leones. `presente:true` con `modelo:null` significa cruce existente
 sin arquitectura restituida; no autoriza a eliminarlo del mapa.
 
