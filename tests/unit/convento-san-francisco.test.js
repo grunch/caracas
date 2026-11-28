@@ -122,8 +122,11 @@ describe('el convento de San Francisco antes de la Universidad (#254)', () => {
     expect(Math.max(...v1772.map((v) => v.b))).toBeLessThan(limite + 1) // el alero puede volar medio metro
     expect(Math.max(...v1772.map((v) => v.b))).toBeGreaterThan(norte.b1)
     expect(Math.max(...v1843.map((v) => v.b))).toBeGreaterThan(COLUMNA.b1 - 1)
-    // lo de 1772 sigue en 1843: nada del claustro del norte desaparece
-    expect(v1843.filter((v) => v.b < limite).length).toBe(v1772.length)
+    // lo de 1772 sigue en 1843, vértice por vértice, y lo de atrás se le suma
+    const clave = (v) => [v.a, v.b, v.y].map((n) => n.toFixed(2)).join(' ')
+    const en1843 = new Set(v1843.map(clave))
+    expect(v1772.filter((v) => !en1843.has(clave(v)))).toEqual([])
+    expect(v1843.length).toBeGreaterThan(v1772.length)
     // y las plantas de colisión siguen al dibujo
     expect(cajaDe(plantasEn(1)).b1).toBeCloseTo(limite, 1)
     expect(cajaDe(plantasEn(2)).b1).toBeCloseTo(COLUMNA.b1, 1)
@@ -154,7 +157,7 @@ describe('el convento de San Francisco antes de la Universidad (#254)', () => {
     const fila = MARCAS.find((m) => m.id === 'universidad')
     const [marca] = normalizarMarcas([fila], { hitos: HITOS, coords })
     expect(fila.hito).toBe('universidad')
-    expect([1, 2, 3, 6].map((e) => nombreEn(marca, e))).toEqual(['Convento de San Francisco', 'Convento de San Francisco', 'Universidad', 'Universidad'])
+    expect([1, 2, 3, 6].map((e) => nombreEn(marca, e)?.nombre)).toEqual(['Convento de San Francisco', 'Convento de San Francisco', 'Universidad', 'Universidad'])
     const enlaces = h.fuente.match(/https?:\/\/[^\s;,)]+/g)
     expect(enlaces.length).toBeGreaterThanOrEqual(3)
     for (const enlace of enlaces) expect(fila.fuente).toContain(enlace)
