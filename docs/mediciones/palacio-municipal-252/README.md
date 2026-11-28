@@ -28,11 +28,27 @@ Lo que no depende de la carga se repite exacto en las dos pasadas.
 
 - **El hito suma 2.596 triángulos y 4.646 vértices** (contados aparte, con `crearLienzo`): va en la malla única de
   los hitos y en una sola fase.
-- **No pude atribuir del todo la diferencia**: la vista del centro gana 3.066 triángulos, 470 más que el hito, la
-  malla 539 vértices más, y hay **2 llamadas de dibujo más** en las tres vistas. La escena tiene las mismas mallas
-  con los mismos nombres en los dos lados (lo comprobé). Lo único más que cambia al cargar es la vida de las tres
-  casas que la reserva esconde desde 1911 (716, 717 y 718), que pasan de vivir siempre a vivir hasta 1889; que de
-  ahí salgan las dos llamadas es una hipótesis, no lo verifiqué.
+- **La diferencia quedó atribuida** en una segunda tanda (misma orden, `main` `4c3765b` y la rama con ese `main`
+  fusionado; solo lo que no depende de la carga). La malla de los hitos suma exactamente lo del hito: 2.596
+  triángulos y 4.646 vértices, contados en la página (`lab.hitos.geometry`). Variando las reservas del hito:
+
+  | Variante | Vértices | Llamadas (centro / valle / cerca) | Triángulos por cuadro, centro |
+  |---|---:|---|---:|
+  | `main` | 5.223.157 | 236 / 609 / 149 | 8.597.478 |
+  | rama, sin reservas (ni `suprime` ni `sinArboles`) | +4.646 | 236 / 609 / 149 | +5.192 |
+  | rama, sin `suprime` (con `sinArboles`) | +4.646 | 236 / 609 / 149 | +3.392 |
+  | rama, con `suprime` desde 1772 en vez de 1911 | +4.646 | 236 / 609 / 149 | +3.066 |
+  | rama, tal cual (`suprime` desde 1911) | +5.185 | 238 / 611 / 151 | +3.066 |
+
+  - Los triángulos por cuadro cuentan el hito **dos veces** (+5.192 = 2 × 2.596; no miré en
+    qué pasadas del cuadro, pero la cuenta es exacta en las tres vistas). La reserva de árboles quita 1.800 y la de casas, 326 (los techos que esconde):
+    5.192 − 1.800 − 326 = 3.066. Los «470 de más» eran esa cuenta, no geometría sin dueño.
+  - **Las 2 llamadas y los 539 vértices de más salen de las tres casas cuya vida cambia** (716, 717 y 718, que pasan
+    de vivir siempre a vivir hasta 1889): con la misma reserva puesta desde 1772 (las casas no existen nunca)
+    desaparecen las dos llamadas y los 539 vértices, y los triángulos no cambian. La hipótesis se sostuvo. No miré
+    en el código por qué una casa con otra vida pide llamadas aparte; al regenerar los datos esas casas dejan de
+    existir y las dos llamadas se van con ellas.
+  - Los informes de esta tanda no se guardaron en el repo (cinco pasadas de un minuto, fuera de él).
 - El tiempo por cuadro no cambia en la mediana. El p90 de la vista del centro salta a ~20 ms en una pasada de
   `main` y en las dos de la rama: es la carga de la máquina, como ya anotó la medición de #243.
 
