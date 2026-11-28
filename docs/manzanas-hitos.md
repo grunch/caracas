@@ -5,7 +5,7 @@ pequeño puedes agregarlo dentro de la manzana, pero si es grande hay que quitar
 [`specs/13`](../specs/13-reglas-de-construccion.md).
 
 La medida y la decisión son de `tools/geo/hitos_manzanas.py`; los pasos `retiro-<año>` la aplican a las manzanas
-heredadas y a las nuevas de cada época. `node tools/hitos-manzanas.mjs` vuelve a escribir la tabla completa
+heredadas y a las nuevas de cada época. `node tools/hitos-manzanas-tabla.mjs` vuelve a escribir la tabla completa
 ([`manzanas-hitos.json`](manzanas-hitos.json): una fila por hito, época y manzana que se cruzan, con las áreas y
 las fracciones en los dos sentidos) desde los informes de `fuentes/derivados/retiro<año>/`.
 
