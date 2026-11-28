@@ -32,9 +32,12 @@ export const candelaria = Object.freeze({
   id: 'candelaria', nombre: 'Iglesia de La Candelaria', ...marco, nace: 1, muere: 0,
   planta, suprime: recinto, sinArboles: recinto, solarCompleto: true,
   partes: [
-    // 1772 y 1843: tres naves bajo un tejado, fachada de ladrillo con tres puertas al oeste (Martí). De su
-    // adorno no se sabe nada, y en 1812 se cayó: va lisa.
-    { tipo: 'iglesia', ...NAVES, alto: ALTO, altoTecho: ALTO_TECHO, fachada: 'lisa', puertas: 3, nace: 1, muere: 3 },
+    // 1772: tres naves bajo un tejado, fachada de ladrillo con tres puertas al oeste (Martí). De su adorno no
+    // se sabe nada: va lisa.
+    { tipo: 'iglesia', ...NAVES, alto: ALTO, altoTecho: ALTO_TECHO, fachada: 'lisa', puertas: 3, nace: 1, muere: 2 },
+    // 1843: la fachada cayó en 1812 y la nueva no se empezó hasta 1860. Va el cuerpo con un muro de cierre,
+    // sin frente ni puertas: no hay fuente para dibujarle uno.
+    { tipo: 'iglesia', ...NAVES, alto: ALTO, altoTecho: ALTO_TECHO, fachada: 'ninguna', nace: 2, muere: 3 },
     torre(3, 1, 2), // «una torre ó campanario de tres cuerpos» (Martí, 1772)
     torre(2, 2, 4), // en 1812 «el cuerpo tercero de la torre» vino a tierra; se subió entre 1889 y 1900
     // 1889: la fachada que se levantó de 1860 a 1872, «una de las más altas de los templos de Caracas», sobre
@@ -48,7 +51,7 @@ export const candelaria = Object.freeze({
   verificar: [
     'Alturas sin fuente: ninguna está medida ni publicada; salen de la proporción con el ancho leído del plano. Landaeta solo dice que la fachada de 1872 es «una de las más altas de los templos de Caracas».',
     'Planta de 51 × 25 m con la torre de 7 m al sur de la fachada: lados del contorno del plano de 1936 (0,5 m por píxel), no mensura; el rótulo tapa el muro sur. Se usa en todas las épocas porque Landaeta dice que se reedificó «sobre el mismo plan»; el plano de 1772 solo pone el símbolo de iglesia y el de 1843, un bloque.',
-    'En 1843 no se sabe cuánto de la reedificación estaba hecho: el templo cayó en parte en 1812 y la fachada nueva no se empezó hasta 1860. Va el cuerpo entero con la fachada lisa y la torre de dos cuerpos.',
+    'En 1843 no se sabe cuánto de la reedificación estaba hecho: el templo cayó en parte en 1812 y la fachada nueva no se empezó hasta 1860. Va el cuerpo entero con un muro de cierre al oeste, sin fachada ni puertas, y la torre de dos cuerpos.',
     'La torre tiene dos cuerpos también en 1889: se subió «de 1889 a 1900», sin año. El remate (chapitel de teja) es una interpretación de «se techó de nuevo».',
     'Desde 1911 va terminada, con la nave central más alta: en noviembre de 1908 solo estaba casi listo el techo de la nave central y el templo seguía «en ruinas». No se halló la fecha en que acabó la obra ni una vista fechada del resultado.',
     'El adorno de las fachadas (pilastras, frontón) es el de la iglesia paramétrica: de la de Hurtado Manrique solo se saben las tres puertas y el balcón central de 1880, que no se dibuja.',

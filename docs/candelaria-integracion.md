@@ -33,7 +33,7 @@ Certeza: **alta** = el documento lo dice o lo dibuja; **media** = se infiere de 
 | 1812 | «Parte de la Iglesia, la fachada y el cuerpo tercero de la torre vinieron á tierra»; capilla provisional en el ángulo sureste de la plaza | Landaeta, pp. 10 y 17 | alta | — |
 | después de la guerra (sin año) | «Se principió á reedificar de nuevo esta Iglesia, pero siempre sobre el mismo plan de cuando se construyó»; la capilla de la plaza se demuele «al ponerse la Iglesia en estado de servicio» | Landaeta, pp. 10 y 17 | media: sin fechas | — |
 | 1825 | El cementerio anexo deja de usarse (se abre el del Este) | Landaeta, pp. 10–11 | alta | — |
-| 1843 | Letra J «La Candelaria»; un bloque en el lugar del templo | Plano de Jesurún de 1843 (`specs/auditoria-1843/leyenda.json`), calce 12,4 m RMS | alta para la presencia | el mismo cuerpo, fachada lisa, **torre de dos cuerpos** |
+| 1843 | Letra J «La Candelaria»; un bloque en el lugar del templo | Plano de Jesurún de 1843 (`specs/auditoria-1843/leyenda.json`), calce 12,4 m RMS | alta para la presencia | el mismo cuerpo, **sin fachada** (muro de cierre, sin puertas) y **torre de dos cuerpos** |
 | 1860–1872 | El cura Torres «levantó la fachada del templo hasta una altura considerable» (1860–1867); se termina de 1868 a 1872, con Vicente Flores y otros maestros, «bajo la dirección de Don Juan Hurtado Manrique» | Landaeta, p. 11 | alta | — |
 | 1880–1881 | Arco y pilares del coro central; «las tres puertas y el balcón central»; los tres coros; «la fachada del Sur» | Landaeta, p. 12 | alta | — |
 | 1889 | Templo VI y plaza D | Plano de Mestre de 1889 | alta | el cuerpo de antes con la **fachada alta de 1872** (clásica, tres puertas) y la torre de dos cuerpos |
@@ -49,11 +49,14 @@ Certeza: **alta** = el documento lo dice o lo dibuja; **media** = se infiere de 
   templo que mira al oeste), pegada a la fachada. El plano de 1772 solo trae el símbolo y el de 1843 un bloque
   más corto (unos 30 m): ninguno de los dos da la planta.
 - **El estado en 1843 no se conoce.** Entre el terremoto y 1860 no hay fechas: ni cuándo volvió al servicio ni
-  cuánto se había reedificado. Va el cuerpo entero con la torre sin su tercer cuerpo y la fachada lisa.
+  cuánto se había reedificado. Va el cuerpo entero con la torre sin su tercer cuerpo y **sin fachada**: un muro de
+  cierre sin puertas, porque la de 1772 había caído y la nueva no se empezó hasta 1860. La ficha lo dice en el
+  texto de 1843.
 - **La torre en 1889**: se subió «de 1889 a 1900». Con el plano de 1889 va todavía de dos cuerpos; pudo estar ya
   en obra.
 - **1911**: Landaeta deja la obra a medias en noviembre de 1908. No se halló cuándo terminó. Desde 1911 va
-  terminada porque el plano de Razetti dibuja el bloque completo; el plano no distingue un templo sin techo.
+  terminada porque el plano de Razetti dibuja el bloque completo; el plano no distingue un templo sin techo. La
+  ficha lo dice en el texto de 1911.
 - **«Tres naves»** no dice si la central era más alta. Antes de 1901 van bajo un solo tejado: la reconstrucción
   levanta los techos «para que tengan luz», de donde se infiere que antes no la tenían por arriba.
 - El terremoto de Cúa (12-4-1878) tumbó la imagen de la fachada (p. 15): la imagen no se dibuja en ninguna etapa.
@@ -115,7 +118,7 @@ todas las épocas; cambian sus casas, techos, árboles y los conteos. `npm run d
 - **Todas las alturas**: muros de 10 m, nave central de 15 m desde 1911, fachada de 15 m en 1889, cuerpos de la
   torre de 8, 5 y 4,5 m. Ninguna está medida ni publicada.
 - El remate de la torre (chapitel de teja), sus vanos y los de las naves.
-- El adorno de las fachadas; la fachada lisa de 1772 y de 1843 es la manera de no inventar uno.
+- El adorno de las fachadas; la fachada lisa de 1772 es la manera de no inventar uno, y en 1843 no va ninguna.
 - El ancho de la nave central desde 1911 (44 % del total) y que la cubierta siga siendo de teja.
 - Que la torre tuviera dos cuerpos de 1843 a 1889 sin cambios y tres desde 1911.
 
@@ -123,13 +126,14 @@ todas las épocas; cambian sus casas, techos, árboles y los conteos. `npm run d
 
 - `src/hitos/datos/candelaria.js`: la definición, con su fuente y su lista `verificar`.
 - `src/hitos/iglesias.js`: la iglesia paramétrica admite fachada `lisa`, `puertas: 3` y `altoFachada` (una fachada
-  más alta que la nave). Sin esos parámetros sale igual que antes (test).
+  más alta que la nave) y fachada `ninguna` (el muro de cierre, sin frente). Sin esos parámetros sale igual que
+  antes (test).
 - `src/hitos/templo-naves.js`: detrás de una fachada de pantalla los tejados arrancan 1,2 m después del muro; el
   alero la atravesaba. Santa Rosalía (cubierta plana) y San José (sin pantalla) no cambian: mismos triángulos.
 
 ## Rendimiento
 
-2.357 triángulos más en las seis fases: 643.976 antes de 1946 y 1.123.349 en total, **dentro de los topes** de los
+2.555 triángulos más en las seis fases (2.357 antes de partir la etapa de 1843): 644.174 antes de 1946 y 1.123.547 en total, **dentro de los topes** de los
 tests (645.000 y 1.125.000), que no se tocan. Build: entrada 304,7 kB y workers 173,5 kB contra 303,4 y 172,4 de
 `main`; el tope de workers (174) tampoco se toca. La medición de carga y de cuadro, en
 [`mediciones/candelaria-243`](mediciones/candelaria-243/README.md).

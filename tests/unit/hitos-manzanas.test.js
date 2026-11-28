@@ -24,7 +24,7 @@ describe('la regla «ningún hito sobre una manzana» en el pipeline (specs/13, 
   expect(ms).toEqual(antes)
   expect(quedan).toEqual([ms[0],ms[2]])
   expect(retiradas).toEqual([{id:'B',poligono:ms[1].poligono,limite:ms[1].limite,huecos:[],areaM2:2500,epoca:5,
-   ocupacion:.82,motivo:'ocupa la mayor parte',hitos:['hospital-vargas']}])
+   ocupacion:.82,motivo:'ocupa la mayor parte',hitos:['hospital-vargas'],manzana:(({casas,...m})=>m)(ms[1])}])
  })
  it('una decisión que no corresponde a la manzana es un error, no un descarte callado',()=>{
   expect(()=>separarRetiradas([manzana('A',0,0)],[{id:'Z',retirar:true,hitos:[]}],5)).toThrow(/A/)

@@ -74,6 +74,15 @@ describe('iglesia paramétrica: fachada lisa, tres puertas y fachada más alta q
     expect([...explicita.posiciones]).toEqual([...d.posiciones])
   })
 
+  test('sin frente (fachada «ninguna») no dibuja puertas ni hastial: menos triángulos que la lisa y la misma nave', () => {
+    const lisa = dibujar((p) => iglesia(p, { ...base, fachada: 'lisa' }))
+    const ninguna = dibujar((p) => iglesia(p, { ...base, fachada: 'ninguna' }))
+    expect(ninguna.sano).toBe(true)
+    expect(ninguna.triangulos).toBeLessThan(lisa.triangulos)
+    expect(ninguna.caja.min[0]).toBeGreaterThan(lisa.caja.min[0]) // nada delante del muro de la nave
+    expect(ninguna.caja.max[0]).toBeCloseTo(lisa.caja.max[0], 5)
+  })
+
   test('rechaza un número de puertas que no sea 1 o 3', () => {
     expect(() => dibujar((p) => iglesia(p, { ...base, puertas: 2 }))).toThrow(/puertas/)
   })
@@ -119,7 +128,9 @@ describe('La Candelaria (#243)', () => {
     const cabecera = coords.aMundo(...h.planta[0][1])
     expect(cabecera.x).toBeGreaterThan(origen.x + 40)
     expect(Math.abs(cabecera.z - origen.z)).toBeLessThan(20)
-    for (const parte of h.partes.filter((p) => p.tipo !== 'torre')) expect(parte.puertas ?? 3).toBe(3)
+    // las tres puertas van donde hay fuente: 1772 (Martí) y 1889 (puertas de 1880); el templo de naves trae tres siempre
+    const iglesias = h.partes.filter((p) => p.tipo === 'iglesia')
+    expect(iglesias.map((p) => [p.nace, p.fachada, p.puertas ?? 1])).toEqual([[1, 'lisa', 3], [2, 'ninguna', 1], [3, 'clasica', 3]])
   })
 
   test('la torre queda al sur de la fachada (lado de la Epístola), fuera del ancho de las naves', () => {
@@ -148,11 +159,11 @@ describe('La Candelaria (#243)', () => {
     expect(alto(4)).toBeGreaterThan(alto(3) + 2)
   })
 
-  test('cada etapa tiene su cuerpo: envolvente lisa (1772 y 1843), fachada alta de 1872 (1889) y naves levantadas (desde 1911)', () => {
+  test('cada etapa tiene su cuerpo: fachada lisa (1772), sin frente (1843: cayó en 1812), fachada alta de 1872 (1889) y naves levantadas (desde 1911)', () => {
     expect(h.partes.filter((p) => p.tipo !== 'torre').map((p) => [p.tipo, p.fachada ?? null, p.nace, p.muere])).toEqual([
-      ['iglesia', 'lisa', 1, 3], ['iglesia', 'clasica', 3, 4], ['temploDeNaves', null, 4, 0],
+      ['iglesia', 'lisa', 1, 2], ['iglesia', 'ninguna', 2, 3], ['iglesia', 'clasica', 3, 4], ['temploDeNaves', null, 4, 0],
     ])
-    const [, de1889, de1911] = h.partes.filter((p) => p.tipo !== 'torre')
+    const [, , de1889, de1911] = h.partes.filter((p) => p.tipo !== 'torre')
     expect(de1889.altoFachada).toBeGreaterThan(de1889.alto + de1889.altoTecho) // «levantando los techos para que… concuerden con la fachada»
     expect(de1911.altoCentral).toBeGreaterThan(de1911.altoLateral)
     // la nave sube en 1911: los techos se levantaron después del terremoto de 1900
@@ -203,5 +214,9 @@ describe('La Candelaria (#243)', () => {
     expect(f.textos[3][1]).toMatch(/1900/)
     expect(f.dudas).toMatch(/altura/i)
     expect(f.dudas).toMatch(/1843/)
+    // lo que el dibujo interpreta va dicho en el texto de su época, no solo en las dudas
+    expect(f.textos[1][1]).toMatch(/sin fachada/)
+    expect(f.textos[3][1]).toMatch(/interpretación/)
+    expect(f.textos[3][1]).toMatch(/no se sabe cuándo terminó/)
   })
 })
