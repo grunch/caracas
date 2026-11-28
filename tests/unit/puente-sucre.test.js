@@ -43,7 +43,7 @@ const MANZANA_VECINA_PX = [[9730, 9269], [9789, 9280], [9786, 9298], [9784, 9309
 describe('Constitución y Sucre: dos estructuras en el mismo cruce', () => {
   test('el cruce de la calle Sur 7 es un solo hito, con vida de 1889 a 1911 y fuente', () => {
     expect(HITOS.filter(h => h.id === 'puente-sucre')).toHaveLength(1)
-    expect(puentesGuaire).toEqual([puenteHierro, puenteSucre])
+    expect(puentesGuaire.slice(0, 2)).toEqual([puenteHierro, puenteSucre])
     expect([puenteSucre.nace, puenteSucre.muere]).toEqual([3, 5])
     expect(validarHitos([puenteSucre], plano)).toEqual([])
     expect(HITOS_GEOMETRIA.find(h => h.id === 'puente-sucre').partes).toEqual(puenteSucre.partes)

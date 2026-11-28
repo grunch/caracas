@@ -1,9 +1,10 @@
 /**
  * Marcas y fichas de cuatro cruces del Guaire: Dolores, Restaurador, 19 de Diciembre y Ayacucho (#272).
- * Mismo formato que src/marcas-datos.js y src/fichas-datos.js. No traen geometría: la marca nombra el cruce, no
- * la estructura que lo salvaba en cada época.
+ * Mismo formato que src/marcas-datos.js y src/fichas-datos.js. La marca nombra el cruce, no la estructura que lo
+ * salvaba en cada época: Dolores y Restaurador tienen hito (src/hitos/datos/puentes-dolores-restaurador.js), que
+ * solo se dibuja en 1911; los otros dos no tienen geometría.
  *
- * Posición: el centro adoptado en docs/puentes-guaire-calce.json, en píxeles del mosaico de 1936.
+ * Posición: el centro adoptado en docs/puentes-guaire-calce.json, en píxeles del mosaico de 1936 (el del hito, si lo hay).
  * Nombres: el rótulo del plano de cada época. Lo que las fuentes no resuelven va en `dudas`.
  */
 const P11 = 'plano de Razetti de 1911, leyenda de puentes sobre el Guaire'
@@ -18,13 +19,13 @@ const silva = (paginas) => `Silva Contreras (2004), ${paginas}: ${SILVA}`
 const DESDE_1940 = `FAC sitúa el reemplazo de los puentes metálicos que quedaban «a partir de 1940», sin fecha para este (${FAC_107})`
 
 export const MARCAS_PUENTES_CRUCES = Object.freeze([
-  { id: 'puente-dolores', x: 7908, y: 10122, nace: 4, nivel: 3, alto: 4,
+  { id: 'puente-dolores', hito: 'puente-dolores', nace: 4, nivel: 3, alto: 4,
     nombres: [[4, 'Puente Dolores', 'Armadura de acero de 60 m, de 1897, al final de la calle Sur 4.'],
       [5, 'Puente Dolores', 'La armadura de 1897, con dos pilas de concreto desde 1916.'],
       [6, 'Puente Soublette', 'Así rotula el cruce el plano de 1946.']],
     fuente: `${P11} (IV «Dolores»); ${P36} («Puente Dolores»); ${P46} («Puente Soublette»); ${silva('pp. 36–37 y nota 13')}`,
     dudas: `La marca es el cruce, no una estructura. FAC da el puente por demolido en 1935 (${FAC_98}), pero el plano de 1936, fotografiado en marzo de ese año, todavía lo dibuja y lo rotula. Qué estructura había en 1946 queda sin resolver. En 1911 la marca usa la posición del plano de 1936: el de 1911 dibuja el cruce 78 m al norte y 20 m al este, más que el error de su calce.` },
-  { id: 'puente-restaurador', x: 8500, y: 9880, nace: 4, nivel: 3, alto: 4,
+  { id: 'puente-restaurador', hito: 'puente-restaurador', nace: 4, nivel: 3, alto: 4,
     nombres: [[4, 'Puente Restaurador', 'Puente de hierro de 100,50 m con plazoleta central, de 1905.'],
       [5, 'Puente Restaurador', 'El puente de 1905, reparado en 1932.'],
       [6, 'Puente Restaurador', 'El plano de 1946 conserva el nombre y ya no dibuja la plazoleta.']],
@@ -48,7 +49,7 @@ export const FICHAS_PUENTES_CRUCES = Object.freeze({
       [5, 'Desde 1916 dos pilas de concreto, a 10 m de cada extremo, reducen la luz a 40 m; un informe de 1922 trata de cambiar el piso de madera por pavimento de concreto. En 1932 Teunis Stolk propuso reemplazarlo por un arco de concreto armado. El plano de 1936 todavía lo dibuja, con el mismo símbolo cruzado del Puente Paraíso, y lo rotula «Puente Dolores».'],
       [6, 'El plano de 1946 rotula el cruce «Puente Soublette» y dibuja una calzada de unos 20 m, más del doble que la del puente de 1897. No se encontró la fecha del reemplazo.'],
     ],
-    dudas: `La demolición no tiene fecha firme: FAC dice 1935 (${FAC_98}), el plano de 1936 aún dibuja el puente y ${DESDE_1940}. Medidas y obras: ${silva('pp. 36–37 y nota 13')}. Las cabezas del símbolo de 1936 distan 43,6 m y la luz documentada es de 60 m. En 1911 la marca usa la posición del plano de 1936: el de 1911 dibuja el cruce 78 m al norte y 20 m al este, más que el error de su calce.`,
+    dudas: `La demolición no tiene fecha firme: FAC dice 1935 (${FAC_98}), el plano de 1936 aún dibuja el puente y ${DESDE_1940}. Medidas y obras: ${silva('pp. 36–37 y nota 13')}. El símbolo del plano de 1936 mide 43,6 m y la luz documentada es de 60 m: el puente se dibuja con 60 m, centrado en el símbolo, y solo en 1911; la variante de 1936, con las pilas de 1916, no tiene alzado. En 1911 la marca usa la posición del plano de 1936: el de 1911 dibuja el cruce 78 m al norte y 20 m al este, más que el error de su calce.`,
   },
   'puente-restaurador': {
     textos: [
@@ -56,7 +57,7 @@ export const FICHAS_PUENTES_CRUCES = Object.freeze({
       [5, 'En 1932 hubo que repararlo: la extracción de granzón de las riberas había cambiado el cauce. El plano de 1936 lo rotula «Puente Restaurador» y todavía dibuja la plazoleta circular, de unos 14 m de diámetro, en una calzada de unos 7 m.'],
       [6, 'El plano de 1946 conserva el rótulo «Puente Restaurador», pero dibuja una calzada de unos 20 m, sin plazoleta.'],
     ],
-    dudas: `No consta si la estructura de 1905 seguía en pie en 1946: ${DESDE_1940}. Historia y medidas: ${silva('pp. 37–38 y nota 14')}. Las cabezas se derivan del centro de la plazoleta y del largo documentado; no son un levantamiento. En 1911 la marca usa la posición del plano de 1936: el de 1911 dibuja el cruce 23 m al norte y 17 m al este.`,
+    dudas: `No consta si la estructura de 1905 seguía en pie en 1946: ${DESDE_1940}. Historia y medidas: ${silva('pp. 37–38 y nota 14')}. Las cabezas se derivan del centro de la plazoleta y del largo documentado; no son un levantamiento. El puente se dibuja solo en 1911: no consta qué cambió la reparación de 1932. En 1911 la marca usa la posición del plano de 1936: el de 1911 dibuja el cruce 23 m al norte y 17 m al este.`,
   },
   'puente-19-diciembre': {
     textos: [

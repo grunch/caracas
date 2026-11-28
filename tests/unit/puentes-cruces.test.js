@@ -6,6 +6,7 @@ import { FICHAS } from '../../src/fichas-datos.js'
 import { normalizarMarcas, validarMarcas, nombreEn, vivaEn } from '../../src/marcas.js'
 import { validarFichas, contenidoDeFicha } from '../../src/fichas.js'
 import { crearCoords } from '../../src/coords.js'
+import { HITOS } from '../../src/hitos/datos/index.js'
 
 const PLANO = { ancho: 18600, alto: 14800 }
 const coords = crearCoords({ ...PLANO, metro: 0.5, plaza: [8968.2, 6839] })
@@ -13,7 +14,7 @@ const EPOCAS = [1, 2, 3, 4, 5, 6]
 const CRUCES = ['puente-dolores', 'puente-restaurador', 'puente-19-diciembre', 'puente-ayacucho']
 const CALCE = JSON.parse(readFileSync(new URL('../../docs/puentes-guaire-calce.json', import.meta.url), 'utf8'))
 
-const marcas = normalizarMarcas(MARCAS_PUENTES_CRUCES, { coords })
+const marcas = normalizarMarcas(MARCAS_PUENTES_CRUCES, { hitos: HITOS, coords })
 const marca = (id) => marcas.find((m) => m.id === id)
 const fila = (id) => MARCAS_PUENTES_CRUCES.find((m) => m.id === id)
 const vida = (id) => EPOCAS.map((e) => vivaEn(marca(id), e))
@@ -26,7 +27,7 @@ describe('las marcas de los cruces del Guaire', () => {
     const ids = MARCAS_PUENTES_CRUCES.map((m) => m.id)
 
     // Act
-    const problemas = validarMarcas(MARCAS_PUENTES_CRUCES, { plano: PLANO })
+    const problemas = validarMarcas(MARCAS_PUENTES_CRUCES, { hitos: HITOS, plano: PLANO })
 
     // Assert
     expect(ids).toEqual(CRUCES)
@@ -168,13 +169,19 @@ describe('el calce de los cruces (docs/puentes-guaire-calce.json)', () => {
     expect(metros(norte.mosaico, centro.mosaico)).toBeCloseTo(50.25, 0)
   })
 
-  it('las cabezas de Dolores son las del símbolo de 1936 y quedan sobre el eje adoptado', () => {
-    const { cabeza_norte: norte, cabeza_sur: sur, eje } = CALCE['puente-dolores'].adoptado
+  it('las cabezas de Dolores salen del centro del símbolo de 1936 y de la luz documentada de 60 m', () => {
+    const { cabeza_norte: norte, cabeza_sur: sur, eje, centro, largo_m: largo } = CALCE['puente-dolores'].adoptado
     const [dx, dy] = [sur.mosaico[0] - norte.mosaico[0], sur.mosaico[1] - norte.mosaico[1]]
-    const largo = Math.hypot(dx, dy)
-    expect(norte.mosaico).toEqual(CALCE['puente-dolores']['1936'].cabeza_norte.mosaico)
-    expect(dx / largo).toBeCloseTo(eje.direccion[0], 2)
-    expect(dy / largo).toBeCloseTo(eje.direccion[1], 2)
+    expect(largo).toBe(60)
+    expect(metros(norte.mosaico, sur.mosaico)).toBeCloseTo(60, 0)
+    expect(metros(norte.mosaico, centro.mosaico)).toBeCloseTo(30, 0)
+    expect(dx / Math.hypot(dx, dy)).toBeCloseTo(eje.direccion[0], 2)
+    expect(dy / Math.hypot(dx, dy)).toBeCloseTo(eje.direccion[1], 2)
+    // el símbolo, que no está a escala, queda adentro y centrado
+    const simbolo = CALCE['puente-dolores']['1936']
+    const medio = [0, 1].map((i) => (simbolo.cabeza_norte.mosaico[i] + simbolo.cabeza_sur.mosaico[i]) / 2)
+    expect(metros(medio, centro.mosaico)).toBeLessThan(1)
+    expect(simbolo.largo_m.del_simbolo).toBeLessThan(largo)
   })
 
   it('los largos y los píxeles originales copiados coinciden con las cabezas de las que salen', () => {
@@ -195,7 +202,6 @@ describe('el calce de los cruces (docs/puentes-guaire-calce.json)', () => {
     }
     const dolores = CALCE['puente-dolores']
     expect(dolores['1936'].largo_m.del_simbolo).toBeCloseTo(metros(dolores['1936'].cabeza_norte.mosaico, dolores['1936'].cabeza_sur.mosaico), 0)
-    expect(dolores.adoptado.largo_m).toBe(dolores['1936'].largo_m.del_simbolo)
     const medio = [0, 1].map((i) => (dolores.adoptado.cabeza_norte.mosaico[i] + dolores.adoptado.cabeza_sur.mosaico[i]) / 2)
     expect(metros(medio, dolores.adoptado.centro.mosaico)).toBeLessThan(1)
   })
@@ -216,7 +222,7 @@ describe('el calce de los cruces (docs/puentes-guaire-calce.json)', () => {
 
   it('cada marca cae sobre el centro adoptado de su cruce (a menos de 1 m)', () => {
     for (const id of CRUCES) {
-      const { x, y } = fila(id)
+      const { px: x, py: y } = marca(id)
       expect(metros([x, y], CALCE[id].adoptado.centro.mosaico), id).toBeLessThan(1)
     }
   })
