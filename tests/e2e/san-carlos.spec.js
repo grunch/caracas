@@ -68,7 +68,8 @@ test('el cuartel se dibuja desde 1889, crece en 1911 y no existe en 1772 ni en 1
 
 test('la marca sale del hito desde 1843 y la ficha de cada época dice lo que el mapa muestra', async ({ page }) => {
   await page.goto('/?sinintro&capture&sinsw')
-  await page.waitForFunction(() => window.lab?.ready && window.lab?.marcasDelMapa && window.lab?.fichas)
+  // la línea de tiempo, al armarse, vuelve a la primera época: se espera antes de elegir otra
+  await page.waitForFunction(() => window.lab?.ready && window.lab?.lineaDeTiempo && window.lab?.marcasDelMapa && window.lab?.fichas)
   const marca = await page.evaluate(() => window.lab.marcasDelMapa.filter((m) => m.id === 'san-carlos').map((m) => [m.hito, m.nace, m.naceHito]))
   expect(marca).toEqual([['san-carlos', 2, 3]])
   const enEpoca = (e) => page.evaluate((e) => { const l = window.lab; l.ciudad.U.uEpocaDe.value = l.ciudad.U.uEpocaA.value = e; l.pedirCuadro(3) }, e)

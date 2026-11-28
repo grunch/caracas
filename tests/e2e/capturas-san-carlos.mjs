@@ -27,7 +27,9 @@ try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
   page.on('pageerror', (e) => console.error('pageerror:', e.message))
   await mkdir(carpeta, { recursive: true })
-  await page.goto(`${url}?capture&sinintro&sinsw`)
+  const destino = new URL(url) // conserva lo que traiga la URL (?planos…)
+  for (const bandera of ['capture', 'sinintro', 'sinsw']) destino.searchParams.set(bandera, '')
+  await page.goto(destino.href)
   await page.waitForFunction(() => window.lab?.ready && window.lab?.lineaDeTiempo && window.lab?.casasListas, null, { timeout: 180000 })
   await page.evaluate(() => {
     window.lab.levantar(true)
