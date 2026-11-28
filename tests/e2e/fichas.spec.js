@@ -94,9 +94,9 @@ test('con la ficha abierta, al cambiar la época cambian el nombre y el texto qu
 test('un lugar que todavía no existe en la época elegida lo dice', async ({ page }) => {
   await listo(page)
   await ver(page, 5)
-  await page.evaluate(() => window.lab.fichas.abrir('justicia'))
+  await page.evaluate(() => window.lab.fichas.abrir('gobernacion'))
   await ver(page, 1, null)
-  await expect(page.locator('#ficha h2')).toHaveText('Palacio de Justicia')
+  await expect(page.locator('#ficha h2')).toHaveText('Palacio de la Gobernación')
   await expect(page.locator('#ficha .era')).toHaveText('Todavía no figura en 1772: aparece en 1936')
 })
 

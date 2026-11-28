@@ -11,7 +11,7 @@ const CASOS = [
   ['plaza-1772', 1772, 'plaza-bolivar'], ['plaza-1889', 1889, 'plaza-bolivar'], ['plaza-1936', 1936, 'plaza-bolivar'],
   ['catedral-1889', 1889, 'catedral'], ['panteon-1843', 1843, 'panteon'], ['panteon-1911', 1911, 'panteon'],
   ['capitolio-1772', 1772, 'capitolio'], ['capitolio-1911', 1911, 'capitolio'], ['miraflores-1911', 1911, 'miraflores'],
-  ['calvario-1911', 1911, 'calvario'], ['sin-fotos-1936', 1936, 'nuevo-circo'], ['todavia-no-1772', 1772, 'justicia'],
+  ['calvario-1911', 1911, 'calvario'], ['sin-fotos-1936', 1936, 'nuevo-circo'], ['todavia-no-1772', 1772, 'gobernacion'],
 ]
 const EN_TELEFONO = [['telefono-plaza-1889', 1889, 'plaza-bolivar'], ['telefono-sin-fotos-1936', 1936, 'hospital-vargas']]
 

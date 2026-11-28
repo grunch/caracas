@@ -157,15 +157,16 @@ export const FICHAS = Object.freeze({
     textos: [[1, 'La iglesia del noroeste del casco. Letra G de la leyenda del plano de 1843; templo II en el de 1889; «Iglesia de Altagracia» en el de 1936.']],
     dudas: 'La leyenda del plano de 1843 ya la nombra. Desde cuándo está en pie antes, sin verificar: aquí aparece desde 1772.',
   },
-  seminario: {
-    textos: [[1, 'Del lado sur de la plaza, el seminario de Santa Rosa, donde empezó la universidad.']],
-    dudas: 'Dato general, ubicado por la cuadra y no por un rótulo. El plano de 1889 ya pone aquí el Concejo Municipal. La leyenda del plano de 1843 nombra una «Universidad» (k) y la «Capilla de la Universidad» (L); falta ver en el plano si sus letras caen en esta cuadra.',
-  },
-  concejo: {
-    textos: [[3, 'Del lado sur de la plaza, el plano de 1889 numera 7 el «Consejo municipal».']],
-  },
-  justicia: {
-    textos: [[5, 'El plano de 1936 rotula «Palacio de Justicia» el edificio del lado sur de la plaza, donde el de 1889 ponía el Concejo Municipal.']],
+  'palacio-municipal': {
+    textos: [
+      [1, 'En la esquina suroeste de la plaza, el colegio seminario de Santa Rosa de Lima: el obispo González de Acuña compró las casas en 1673 y el seminario se terminó en 1696, con su capilla (catálogo del IPC, citado por IAM Venezuela); una real cédula de 1721 lo hizo también universidad (Luisvel Ortiz, cronista de Caracas). El plano de 1772 dibuja la cuadra entera, sin separar el edificio: aquí no se dibuja, y lo que se ve son casas genéricas.'],
+      [2, 'La leyenda del plano de 1843 pone en los dos solares del oeste de esta cuadra la «Universidad» (k) y la «Capilla de la Universidad» (L): la capilla de Santa Rosa, donde el Congreso declaró la independencia el 5 de julio de 1811. Según Luisvel Ortiz, que cita a Hermann González (1987), el terremoto de 1812 y la guerra dañaron el edificio y en 1829 el arzobispo todavía pedía repararlo. No se halló cómo estaba en 1843: aquí no se dibuja.'],
+      [3, 'Guzmán Blanco cerró el seminario y, según la Guía de Arquitectura y Paisaje de Caracas, Juan Hurtado Manrique rehízo el edificio en 1872 para los tribunales, la gobernación y la policía, y la capilla quedó de salón de sesiones del Concejo; el pabellón occidental es de 1881 (IPC, citado por IAM Venezuela). El plano de 1889 numera aquí el «Consejo municipal» (7) y la «Gobernación» (8). De ese edificio no se halló descripción ni vista fechada: aquí no se dibuja.'],
+      [4, 'Entre 1904 y 1906 Alejandro Chataing reformó el edificio por encargo de Cipriano Castro. Es, según el catálogo del IPC, citado por IAM Venezuela, un volumen de esquina de planta rectangular, con un patio central con fuente rodeado de corredores con columnas en las dos plantas y un frente de tres cuerpos: el del centro, con el portón y un frontón triangular; los de los lados, con frontones curvos. El plano de 1911 pone aquí el «Palacio de Justicia» (11: gobernación, tribunales, prefectura y rentas), el «Concejo Municipal» (12) y, al fondo, el «Cuartel de Policía» (13).'],
+      [5, 'El plano de 1936 rotula todo el edificio «Palacio de Justicia» y dibuja su patio; el de 1946 repite el contorno, sin rótulo.'],
+    ],
+    hoy: 'el Palacio Municipal de Caracas, sede del Concejo y del Museo Caracas, con la capilla de Santa Rosa de Lima; Monumento Histórico Nacional.',
+    dudas: 'Ninguna altura está medida: los dos pisos son los que describe el IPC y su alto, una proporción. La planta sale del recuadro del plano de 1936. El frente descrito es el del edificio actual; que sea igual al de 1906 no está probado con una vista de época. El cuerpo de atrás va como volumen liso, sin fuente. Las fechas no coinciden entre fuentes: el cierre del seminario es de 1872 según el IPC y la Guía de Caracas, y de 1873 según Luisvel Ortiz (cronista de Caracas); la universidad se mudó a San Francisco en 1856 o en 1857; la declaratoria de monumento es de 1979 o de 1973. El nombre de 1772 no se cotejó con la leyenda de ese plano. La capilla no se dibuja aparte: no se halló su planta.',
   },
   carmelitas: {
     textos: [

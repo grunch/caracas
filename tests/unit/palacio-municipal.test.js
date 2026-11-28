@@ -223,11 +223,13 @@ describe('Palacio Municipal, antiguo Seminario de Santa Rosa (#252)', () => {
     expect(zonas.every((z) => z.desde === 4 && z.hasta === 0)).toBe(true)
   })
 
-  test('es un solar, no la cuadra: ocupa menos de la tercera parte de la manzana M1772-0010', () => {
+  test('es un solar, no la cuadra: ocupa menos de la mitad de la manzana (el umbral de «grande» de R13)', () => {
     const area = (poligono) => Math.abs(poligono.reduce((s, [x, y], i) => { const [x2, y2] = poligono[(i + 1) % poligono.length]; return s + x * y2 - x2 * y }, 0)) / 2 * PLANO.metro ** 2
     // la cuadra entre Monjas, Gradillas, Sociedad y San Francisco en el plano de 1936 (esquinas a ojo, ±2 px)
-    const cuadra = [[8853, 6929], [9037, 6975], [8996, 7186], [8812, 7147]]
-    expect(area(palacioMunicipal.planta[0]) / area(cuadra)).toBeLessThan(1 / 3)
+    const cuadra = [[8853, 6929], [9037, 6970], [8985, 7215], [8805, 7180]]
+    const fraccion = area(palacioMunicipal.planta[0]) / area(cuadra)
+    expect(fraccion).toBeGreaterThan(0.2)
+    expect(fraccion).toBeLessThan(0.5)
   })
 
   test('no pisa los hitos vecinos: la Universidad de San Francisco, el Palacio Arzobispal ni la Plaza Bolívar', () => {

@@ -99,7 +99,7 @@ describe('las marcas de Caracas (src/marcas-datos.js)', () => {
     const COTEJADAS = [
       'guaire', 'calvario', 'catuche', 'caroata', 'anauco', 'catedral', 'palacio-arzobispal', 'capitolio',
       'san-francisco', 'santa-capilla', 'altagracia', 'carmelitas', 'san-jacinto', 'teatro-municipal',
-      'la-pastora', 'panteon', 'santa-rosalia', 'candelaria', 'las-mercedes', 'san-carlos',
+      'la-pastora', 'panteon', 'santa-rosalia', 'candelaria', 'las-mercedes', 'san-carlos', 'palacio-municipal',
     ]
     const dice1843SinCotejar = (texto = '') => /(sin cotejar|no se cotej)[^.]*1843|1843[^.]*(sin cotejar|no se cotej)/.test(texto)
     const marcas = normalizarMarcas(MARCAS, { hitos: HITOS, coords })

@@ -34,8 +34,8 @@ describe('nombresPorEpoca', () => {
 
   it('un nombre de una sola época lleva solo su año; el último de un lugar que desaparece, su rango', () => {
     expect(nombresPorEpoca(marca('san-jacinto'), 5).map((n) => n.periodo)).toEqual(['1772', '1843', '1889–1911', 'desde 1936'])
-    // el Concejo Municipal figura en 1889 y 1911, y en 1936 ya es el Palacio de Justicia
-    expect(nombresPorEpoca(marca('concejo'), 3)).toEqual([{ nombre: 'Concejo Municipal', periodo: '1889–1911', rige: true }])
+    // el Teatro Caracas figura en 1889 y 1911, y en 1936 ya no está
+    expect(nombresPorEpoca(marca('teatro-caracas'), 3)).toEqual([{ nombre: 'Teatro Caracas', periodo: '1889–1911', rige: true }])
     expect(nombresPorEpoca(marca('hipodromo'), 4)[0]).toEqual({ nombre: 'Hipódromo del Paraíso', periodo: '1911', rige: true })
   })
 
@@ -45,8 +45,8 @@ describe('nombresPorEpoca', () => {
   })
 
   it('en una época en que el lugar no existe, ningún nombre rige', () => {
-    expect(nombresPorEpoca(marca('concejo'), 5).some((n) => n.rige)).toBe(false)
-    expect(nombresPorEpoca(marca('justicia'), 1).some((n) => n.rige)).toBe(false)
+    expect(nombresPorEpoca(marca('teatro-caracas'), 5).some((n) => n.rige)).toBe(false)
+    expect(nombresPorEpoca(marca('gobernacion'), 1).some((n) => n.rige)).toBe(false)
   })
 })
 
@@ -91,16 +91,16 @@ describe('contenidoDeFicha', () => {
   })
 
   it('un lugar que todavía no existe en la época lo dice, con el nombre con que aparece', () => {
-    const c = contenidoDeFicha({ marca: marca('justicia'), ficha: undefined, fotos: [], epoca: 1 })
+    const c = contenidoDeFicha({ marca: marca('gobernacion'), ficha: undefined, fotos: [], epoca: 1 })
     expect(c.existe).toBe(false)
-    expect(c.titulo).toBe('Palacio de Justicia')
+    expect(c.titulo).toBe('Palacio de la Gobernación')
     expect(c.cuando).toBe('Todavía no figura en 1772: aparece en 1936')
   })
 
   it('un lugar que ya no está lo dice, con su último nombre', () => {
-    const c = contenidoDeFicha({ marca: marca('concejo'), ficha: undefined, fotos: [], epoca: 5 })
+    const c = contenidoDeFicha({ marca: marca('teatro-caracas'), ficha: undefined, fotos: [], epoca: 5 })
     expect(c.existe).toBe(false)
-    expect(c.titulo).toBe('Concejo Municipal')
+    expect(c.titulo).toBe('Teatro Caracas')
     expect(c.cuando).toBe('Ya no figura en 1936: estuvo hasta 1911')
   })
 

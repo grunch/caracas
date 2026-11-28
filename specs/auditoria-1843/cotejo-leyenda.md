@@ -60,7 +60,7 @@ Marcas vivas en 1843 antes del cotejo: 23. Más cinco que nacían en 1889 con la
 | `san-francisco` | N | San Francisco | coincide | fuente cita N; ficha: frase en 1843 |
 | `santa-capilla` | I | San Mauricio | coincide (el nombre). Que esté en el mismo solar depende de la posición y sigue como duda | fuente cita I; ficha: párrafo de 1843 |
 | `altagracia` | G | Altagracia | coincide | fuente cita G; dudas: ya nombrada en 1843; ficha |
-| `seminario` | k, L (puntos notables, iglesias) | Universidad; Cap. de la Universidad | nombre distinto (la marca: «Seminario y Universidad»; la leyenda no nombra el seminario). Que k y L estén en esta cuadra depende de la posición | dudas de marca y ficha lo anotan; la fuente no cambia |
+| `palacio-municipal` (antes `seminario`) | k, L (puntos notables, iglesias) | Universidad; Cap. de la Universidad | coincide desde #252: las dos letras caen en esta cuadra (L en el solar de la esquina de Las Monjas, k en el del medio; la j del Palacio Arzobispal, en el de la esquina de Las Gradillas), vistas en el plano calzado ([lectura](../../docs/palacio-municipal-georreferencia.json)). La marca dice «Universidad y su capilla» en 1843 | fuente cita k y L; ficha: párrafo de 1843 |
 | `carmelitas` | H | Conv. de Carmelitas | coincide | fuente cita H; dudas solo de 1772; ficha: párrafo de 1843 |
 | `san-jacinto` | M | San Jacinto | coincide (la leyenda la pone entre «Yglesias, Capillas i Conventos») | fuente cita M; dudas solo de 1772; ficha: párrafo de 1843 |
 | `plaza-venezolano` | — | — | no figura (las plazas no llevan letra; el texto al pie cuenta «San Jacinto» entre las plazas) | dudas de marca y ficha lo anotan; el nombre de 1843 sigue siendo CG |
@@ -95,6 +95,6 @@ Marcas vivas en 1843 antes del cotejo: 23. Más cinco que nacían en 1889 con la
 
 ## Pendiente para quien revise con el plano
 
-Las cinco dudas que dependen de la posición se resuelven mirando dónde cae cada letra en el plano calzado:
-i (`casa-amarilla`), k y L (`seminario`), I (`santa-capilla`, el solar), S (`san-juan`) y Q (`santa-teresa`).
+Las cuatro dudas (la de k y L se resolvió en #252) que dependen de la posición se resuelven mirando dónde cae cada letra en el plano calzado:
+i (`casa-amarilla`), I (`santa-capilla`, el solar), S (`san-juan`) y Q (`santa-teresa`).
 También, si el texto al pie («la plaza Bolívar») basta para que la plaza cambie de nombre en 1843.
