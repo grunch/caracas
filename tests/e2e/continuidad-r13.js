@@ -62,14 +62,28 @@ export function centroDeHuella(huella) {
   return [x / (3 * a), y / (3 * a)]
 }
 
+/**
+ * El texel de la manzana en que está una casa, en el campo de una época ({ campo, canal }): el que queda bajo su
+ * centro. Si ese no es manzana, el más adentro de los que pisan sus vértices: una casa más angosta que un texel,
+ * pegada al borde de su manzana, está adentro aunque el centro del texel bajo su centro caiga afuera. Si la huella
+ * no pisa ninguna manzana, el texel del centro (−1 fuera del campo).
+ */
+export function texelDeCasa({ campo, canal }, huella) {
+  const centro = texelDe(campo, centroDeHuella(huella))
+  if (hayManzana(campo, canal, centro)) return centro
+  const adentro = (k) => campo.datos[k * campo.canales + canal]
+  const pisados = huella.map((p) => texelDe(campo, p)).filter((k) => hayManzana(campo, canal, k))
+  return pisados.reduce((a, b) => (adentro(b) > adentro(a) ? b : a), pisados[0]) ?? centro
+}
+
 const cajaDe = (poligono) => poligono.reduce(([a, b, c, d], [x, y]) => [Math.min(a, x), Math.min(b, y), Math.max(c, x), Math.max(d, y)], [Infinity, Infinity, -Infinity, -Infinity])
 
 /**
  * Las casas que murieron sin que la R13 lo explique: [{ casa, motivo }]. `muertas` son las que estaban en pie en la
  * época anterior y no en esta ([{ casa, huella }], la huella en px del plano); `antes` y `ahora`, el campo y el canal
  * de cada época ({ campo, canal }); `recintos`, los de los hitos en pie en esta. La R13 explica una muerte si la
- * manzana en que estaba la casa ya no existe en esta época (ninguno de sus texeles, ni bajo la casa) y pisaba el
- * recinto de un hito.
+ * manzana en que estaba la casa (`texelDeCasa`) ya no existe en esta época (ninguno de sus texeles, ni bajo la casa)
+ * y pisaba el recinto de un hito.
  */
 export function muertesSinR13({ muertas, antes, ahora, recintos }) {
   const zonas = recintos.map((poligono) => ({ poligono, caja: cajaDe(poligono) }))
@@ -82,8 +96,7 @@ export function muertesSinR13({ muertas, antes, ahora, recintos }) {
   const motivos = new Map() // por texel de la manzana de antes: por qué la R13 no explica sus muertes (null: sí)
   const sin = []
   for (const { casa, huella } of muertas) {
-    const centro = centroDeHuella(huella)
-    const k = texelDe(antes.campo, centro)
+    const k = texelDeCasa(antes, huella)
     if (!motivos.has(k)) {
       const manzana = manzanaDe(antes.campo, antes.canal, k)
       const motivo = !manzana.length ? 'no estaba en una manzana'
@@ -93,7 +106,7 @@ export function muertesSinR13({ muertas, antes, ahora, recintos }) {
       motivos.set(k, motivo)
     }
     // bajo la casa tampoco hay otra manzana (una nueva encima de la retirada)
-    const motivo = hayManzana(ahora.campo, ahora.canal, texelDe(ahora.campo, centro)) ? 'su manzana sigue en pie' : motivos.get(k)
+    const motivo = hayManzana(ahora.campo, ahora.canal, texelDe(ahora.campo, centroDeHuella(huella))) ? 'su manzana sigue en pie' : motivos.get(k)
     if (motivo) sin.push({ casa, motivo })
   }
   return sin

@@ -189,8 +189,9 @@ describe('Cuartel San Carlos como hito (#248)', () => {
     const reservado = (punto, e) => enEpoca(e).some((z) => puntoEnPoligono(punto, z.poligono))
     const haciaElCentro = ([x, y]) => { const [cx, cy] = aPixeles(LARGO_M / 2, 0); return [x + (cx - x) * 0.05, y + (cy - y) * 0.05] }
 
-    // Assert: una sola zona en pie por época
-    for (const e of [3, 4, 5, 6]) expect(enEpoca(e)).toHaveLength(1)
+    // Assert: en 1889 solo rige la zona del cuadro; desde 1911 se suma la del contorno completo
+    expect(enEpoca(3)).toHaveLength(1)
+    for (const e of [4, 5, 6]) expect(enEpoca(e)).toHaveLength(2)
     // 1889: el frente y el cuadro, pero no el traspatio ni las esquinas del fondo, que el cuartel aún no ocupaba
     expect(reservado(haciaElCentro(ESQUINAS_PX.oeste), 3)).toBe(true)
     expect(reservado(haciaElCentro(ESQUINAS_PX.sur), 3)).toBe(true)

@@ -32,7 +32,7 @@ describe('la iglesia de San Pablo, anterior al Teatro Municipal (#246)', () => {
 
   test('está en HITOS, al final para no mover las semillas de los anteriores, y pasa la validación', () => {
     expect(h).toBe(sanPablo)
-    expect(HITOS[HITOS.findIndex((x) => x.id === 'las-mercedes') + 1].id).toBe('san-pablo') // detrás de Las Mercedes; no «el último»: después entran otros
+    expect(HITOS[HITOS.findIndex((x) => x.id === 'las-mercedes') + 1].id).toBe('san-pablo') // detrás de Las Mercedes
     expect(validarHitos([sanPablo], PLANO)).toEqual([])
   })
 

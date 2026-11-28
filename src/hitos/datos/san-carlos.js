@@ -51,7 +51,7 @@ const rect = ([a0, a1, b0, b1]) => rectanguloPx(marco, a1 - a0, b1 - b0, (a0 + a
 // 1911, el contorno completo. Con el contorno completo desde 1889 se reservaba suelo que el cuartel aún no ocupaba.
 const cuadro = rect([0, CUADRO_M, -MEDIO, MEDIO])
 const solar = rect([0, LARGO_M, -MEDIO, MEDIO])
-const RESERVAS = [{ nace: 3, muere: 4, poligono: cuadro }, { nace: 4, muere: 0, poligono: solar }]
+const DESDE_1911 = [{ nace: 4, muere: 0, poligono: solar }]
 
 const FLORES = 'Mariana Flores, «Cuartel San Carlos. Yacimiento veterano», Memorias 4(7), 2007: https://dialnet.unirioja.es/descarga/articulo/2321930.pdf'
 const GUIA = 'Fermín de la Rueda, ficha 53 «Cuartel San Carlos», CCS Guía de arquitectura: https://guiaccs.com/obras/cuartel-san-carlos-2/'
@@ -60,12 +60,11 @@ export const sanCarlos = Object.freeze({
   // Nace en 1889: en 1843 estaba en ruinas desde 1812 y en reparación desde 1839 (Flores, que cita a Liendo,
   // 2001), y no se sabe qué quedaba en pie. En esa época el hito no existe; la marca y la ficha lo dicen.
   id: 'san-carlos', nombre: 'Cuartel San Carlos', ...marco, nace: 3, muere: 0,
-  // cada etapa lleva su recinto: es lo que mide la regla de hitos y manzanas (R13, src/hitos/plantas.js)
-  plantaPorEpoca: [
-    { nace: 3, poligonos: CUERPOS_SAN_CARLOS.cuadro.map(rect), suprime: [cuadro] },
-    { nace: 4, poligonos: CUERPOS_SAN_CARLOS.prolongacion.map(rect), suprime: [solar] },
-  ],
-  suprimePorEpoca: RESERVAS, sinArbolesPorEpoca: RESERVAS, solarCompleto: true,
+  // el cuadro, con su recinto, vale desde 1889; la prolongación trae el suyo desde 1911. El recinto de cada etapa es
+  // lo que mide la regla de hitos y manzanas (R13, src/hitos/plantas.js)
+  planta: CUERPOS_SAN_CARLOS.cuadro.map(rect),
+  plantaPorEpoca: [{ nace: 4, poligonos: CUERPOS_SAN_CARLOS.prolongacion.map(rect), suprime: [solar] }],
+  suprime: [cuadro], suprimePorEpoca: DESDE_1911, sinArboles: [cuadro], sinArbolesPorEpoca: DESDE_1911, solarCompleto: true,
   // Es una envolvente: sin arcos, garitas ni ventanas, que ninguna fuente con licencia dibuja.
   partes: [
     ...CUERPOS_SAN_CARLOS.cuadro.map((c) => parteDe(c, { nace: 3, muere: 0 })),
