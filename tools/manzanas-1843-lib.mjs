@@ -26,7 +26,7 @@ export function integrarManzanasEpoca(datos,manzanas,epoca,{retiradas=[]}={}){
   if(n<epoca)copiar(i,[n,epoca])
   if(fin&&(!f||f>fin))copiar(i,[fin,f])
  })
- if(!informe.casasHeredadas)throw new Error('Faltan las manzanas generadas de la época anterior')
+ if(!informe.casasHeredadas&&!informe.casasRetiradasPorHito)throw new Error('Faltan las manzanas generadas de la época anterior')
  for(const m of manzanas){
   for(const c of m.casas){
    const n=ciudad.techos.length,inicio=ciudad.vertices.length/2

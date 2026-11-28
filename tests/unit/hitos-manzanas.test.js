@@ -96,3 +96,16 @@ describe('el suelo de una manzana retirada no vuelve a edificarse mientras el hi
   expect(ocupadas).toEqual([{id:'A',poligono:cuadro(0,0),limite:cuadro(0,0),huecos:[]},{id:'B',poligono:cuadro(200,0),limite:cuadro(200,0),huecos:[]},{id:'C',poligono:cuadro(400,0),huecos:[]}])
  })
 })
+
+describe('una época en que todo lo heredado se retira',()=>{
+ const datos=()=>({vertices:cuadro(0,0,20).flat(),techos:[[0,4,1,0,1]],vida:[[3,4]],historia:[Array(6).fill(16)],paletas:[5],vuelos:[0],marcos:[],alas:[]})
+ it('no es un error si la única casa heredada cae en una manzana retirada',()=>{
+  const {ciudad,informe}=integrarManzanasEpoca(datos(),[],4,{retiradas:[{limite:cuadro(0,0),huecos:[]}]})
+  expect(ciudad.vida).toEqual([[3,4]])
+  expect([informe.casasHeredadas,informe.casasRetiradasPorHito]).toEqual([0,1])
+ })
+ it('sigue siendo un error si no hay nada generado en la época anterior',()=>{
+  const d={...datos(),vida:[[0,0]],paletas:[0]}
+  expect(()=>integrarManzanasEpoca(d,[],4,{retiradas:[{limite:cuadro(0,0),huecos:[]}]})).toThrow(/Faltan las manzanas/)
+ })
+})
