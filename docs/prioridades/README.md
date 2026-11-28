@@ -10,7 +10,7 @@ no se confunden con hitos tridimensionales terminados.
 | #258 | Estudio del núcleo de La Rotunda y guía en Miraflores | Ampliación de 1881, corte dentro de 1936, calce e instalación |
 | #259 | Cuatro estudios separados y guías en Miraflores | Documentar las fachadas por fecha, fases tempranas e instalación |
 | #264 | [Dossier de obras de 1946](1946-obras-y-proyectos.md), verificación de reserva UCV | Fechas y avance físico por bloque; no se inventan edificios completos |
-| #268 | Plaza Bolívar desde 1843; continuidad del nombre sin adelantar jardín/estatua | Alzado/avance de Trinidad en 1772 |
+| #268 | Plaza Bolívar desde 1843; continuidad del nombre sin adelantar jardín/estatua. [Matriz documental](../issue-268-trinidad-plaza.md) de la Trinidad y la plaza | Trinidad en obras en 1772: no se modela (decisión del responsable, 27-11-2026). Sin consultar: manuscrito de Martí y texto del acuerdo de 1842 |
 | #269 | [Diagnóstico y contrato de red temporal](vialidad.md) | Digitalización y carga de seis redes; todavía no implementada |
 | #272 | [Inventario de puentes y discrepancias](vialidad.md#puentes-del-guaire) | Anclajes históricos, estructuras, sustituciones y modelos |
 | #276 | [Lectura del corredor Bolívar en el plano](1946-obras-y-proyectos.md#avenida-bolívar) | Lotes demolidos por fase, contraste aéreo |
@@ -47,6 +47,11 @@ Se conserva el alcance de #268 para 1772: haber iniciado el templo no permite di
 la fachada posterior. La geometría actual del Panteón empieza en 1843. Es necesario
 cotejar recinto y obra en el [original PARES de 1772](https://pares.cultura.gob.es/ParesBusquedas20/catalogo/description/26112)
 y obtener evidencia de alturas/fases antes de generar una variante constructiva.
+
+Ese cotejo está en la [matriz documental de #268](../issue-268-trinidad-plaza.md): el plano marca la Trinidad
+con el signo de las demás iglesias y una transcripción atribuida a la visita de Martí (2-8-1772) describe un
+templo abovedado con las torres sin concluir, pero no hay alzado ni alturas. El responsable decidió el
+27-11-2026 no modelar esa fase: el hito sigue naciendo en 1843.
 
 Todos los issues siguen abiertos si sus criterios incluyen geometría o investigación pendiente.
 
