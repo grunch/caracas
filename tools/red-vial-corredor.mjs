@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
 import { decodificarCalles } from '../src/calles.js'
 import { ANIOS_RED } from './red-vial-lib.mjs'
+import { jsonCompacto } from './json-compacto.mjs'
 import { ANCHO_SOSPECHOSO_M, CORREDOR_MINIMO, MAX_M, PASO_M, medirVia, tramosDeVia } from './red-vial-corredor-lib.mjs'
 
 const raiz = fileURLToPath(new URL('../', import.meta.url))
@@ -67,6 +68,6 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   if (!publico) { console.error('uso: node tools/red-vial-corredor.mjs <carpeta public> [informe.json]'); process.exit(1) }
   const informe = await medir(resolve(publico))
   await mkdir(dirname(resolve(salida)), { recursive: true })
-  await writeFile(resolve(salida), JSON.stringify(informe, null, 1) + '\n')
+  await writeFile(resolve(salida), jsonCompacto(informe) + '\n')
   console.table(informe.vias.flatMap((v) => [1936, 1946].map((a) => ({ vía: v.id, año: a, ...v.epocas[a], sospechosos: v.sospechosos.filter((s) => s.año === a).length }))))
 }

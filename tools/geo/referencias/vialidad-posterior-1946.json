@@ -1,469 +1,54 @@
 {
  "nota": "Vías abiertas o ensanchadas después de 1946, por segmento y etapa, con una fuente por afirmación (#277, #278). No describen las calles que las precedieron ni dan una fecha única a sistemas enteros. No incluyen geometría: «nombres_osm» solo dice con qué nombres aparece cada vía en la capa Hoy. Las citas son textuales; la fecha del documento de cada entrada de FAC es el año de su URL, que el sitio cambia cuando la vuelve a publicar. La avenida Bolívar va en #276.",
- "clases_de_fuente": {
-  "secundaria con referencias": "Artículo que cita sus fuentes (planes, memorias, prensa, libros).",
-  "secundaria sin referencias": "Entrada de cronología sin fuentes citadas.",
-  "terciaria": "Wikipedia: solo donde no hay otra, y entonces la afirmación va como dudosa."
- },
+ "clases_de_fuente": {"secundaria con referencias":"Artículo que cita sus fuentes (planes, memorias, prensa, libros).","secundaria sin referencias":"Entrada de cronología sin fuentes citadas.","terciaria":"Wikipedia: solo donde no hay otra, y entonces la afirmación va como dudosa."},
  "fuentes": {
-  "fac-urd": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2013,
-    "hasta": 2013
-   },
-   "url": "https://fundaayc.com/2013/09/26/1953-inauguracion-de-la-avenida-urdaneta/"
-  },
-  "fac-urd2": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2013,
-    "hasta": 2013
-   },
-   "url": "https://fundaayc.com/2013/11/04/1953-efectos-urbanos-asociados-a-la-inauguracion-de-la-avenida-urdaneta/"
-  },
-  "fac-ffaa": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2013,
-    "hasta": 2013
-   },
-   "url": "https://fundaayc.com/2013/11/10/1956%E2%80%A2-avenida-fuerzas-armadas/"
-  },
-  "fac-psuc": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2014,
-    "hasta": 2014
-   },
-   "url": "https://fundaayc.com/2014/06/15/1956-colapsa-el-encofrado-del-canal-en-sentido-a-la-roca-tarpeya-del-puente-sucre/"
-  },
-  "fac-cj": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2026,
-    "hasta": 2026
-   },
-   "url": "https://fundaayc.com/2026/10/19/1956-nueva-fachada-de-la-iglesia-corazon-de-jesus/"
-  },
-  "fac-lib": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2026,
-    "hasta": 2026
-   },
-   "url": "https://fundaayc.com/2026/09/15/1965-inauguracion-de-la-avenida-libertador/"
-  },
-  "fac-lib64": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2022,
-    "hasta": 2022
-   },
-   "url": "https://fundaayc.com/2022/06/08/1964-construccion-de-la-avenida-libertador/"
-  },
-  "fac-su98": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria con referencias",
-   "fecha_documento": {
-    "desde": 2023,
-    "hasta": 2023
-   },
-   "url": "https://fundaayc.com/2023/04/02/sabia-usted-98/"
-  },
-  "fac-bar53": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2026,
-    "hasta": 2026
-   },
-   "url": "https://fundaayc.com/2026/08/26/1953-avenida-baralt/"
-  },
-  "fac-clg": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2013,
-    "hasta": 2013
-   },
-   "url": "https://fundaayc.com/2013/10/26/1953%E2%80%A2-se-inaugura-la-autopista-caracas-la-guaira/"
-  },
-  "fac-boq": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2013,
-    "hasta": 2013
-   },
-   "url": "https://fundaayc.com/2013/10/08/1953%e2%80%a2-tuneles-boqueron-1-y-boqueron-2/"
-  },
-  "fac-viad07": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2013,
-    "hasta": 2013
-   },
-   "url": "https://fundaayc.com/2013/09/15/2007-se-inaugura-el-nuevo-viaducto-caracas-la-guaira/"
-  },
-  "fac-dbar": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2026,
-    "hasta": 2026
-   },
-   "url": "https://fundaayc.com/2026/08/31/1973-distribuidor-av-baralt-de-la-cota-mil/"
-  },
-  "fac-p438": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria con referencias",
-   "fecha_documento": {
-    "desde": 2025,
-    "hasta": 2025
-   },
-   "url": "https://fundaayc.com/2025/03/02/algo-mas-sobre-la-postal-no-438/"
-  },
-  "fac-su88": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria con referencias",
-   "fecha_documento": {
-    "desde": 2022,
-    "hasta": 2022
-   },
-   "url": "https://fundaayc.com/2022/08/14/sabia-usted-88/"
-  },
-  "fac-boy71": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2013,
-    "hasta": 2013
-   },
-   "url": "https://fundaayc.com/2013/11/15/1971-nueva-etapa-de-la-la-cota-mil-la-cual-se-renombra-como-avenida-boyaca/"
-  },
-  "fac-ae53": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2013,
-    "hasta": 2013
-   },
-   "url": "https://fundaayc.com/2013/10/22/1953%e2%80%a2-se-inaugura-la-autopista-del-este/"
-  },
-  "fac-ae54": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2014,
-    "hasta": 2014
-   },
-   "url": "https://fundaayc.com/2014/12/21/1954%e2%80%a2-enlace-avenida-bolivar-autopista-del-este/"
-  },
-  "fac-ae55a": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2014,
-    "hasta": 2014
-   },
-   "url": "https://fundaayc.com/2014/06/23/1955%e2%80%a2-se-amplia-la-autopista-del-este/"
-  },
-  "fac-ae55b": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2017,
-    "hasta": 2017
-   },
-   "url": "https://fundaayc.com/2017/04/30/1955-se-inaugura-la-prolongacion-de-la-autopista-del-este-entre-la-carlota-y-petare/"
-  },
-  "fac-ae73": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2026,
-    "hasta": 2026
-   },
-   "url": "https://fundaayc.com/2026/05/26/1973-segundo-piso-de-la-autopista-de-este-hoy-francisco-fajardo/"
-  },
-  "fac-pulpo": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2017,
-    "hasta": 2017
-   },
-   "url": "https://fundaayc.com/2017/03/23/1961-distribuidor-el-pulpo/"
-  },
-  "fac-su70": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria con referencias",
-   "fecha_documento": {
-    "desde": 2021,
-    "hasta": 2021
-   },
-   "url": "https://fundaayc.com/2021/08/15/sabia-usted-70/"
-  },
-  "fac-su120": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria con referencias",
-   "fecha_documento": {
-    "desde": 2024,
-    "hasta": 2024
-   },
-   "url": "https://fundaayc.com/2024/08/04/sabia-usted-120/"
-  },
-  "fac-ban": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2014,
-    "hasta": 2014
-   },
-   "url": "https://fundaayc.com/2014/08/12/1956%e2%80%a2-se-inaugura-el-distribuidor-de-transito-la-bandera/"
-  },
-  "fac-rui": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2014,
-    "hasta": 2014
-   },
-   "url": "https://fundaayc.com/2014/08/23/1963%e2%80%a2-distribuidor-los-ruices/"
-  },
-  "fac-lec": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2014,
-    "hasta": 2014
-   },
-   "url": "https://fundaayc.com/2014/12/01/1970-se-inaugura-la-avenida-lecuna/"
-  },
-  "fac-su82": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria con referencias",
-   "fecha_documento": {
-    "desde": 2022,
-    "hasta": 2022
-   },
-   "url": "https://fundaayc.com/2022/05/01/sabia-usted-82/"
-  },
-  "fac-su133": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria con referencias",
-   "fecha_documento": {
-    "desde": 2025,
-    "hasta": 2025
-   },
-   "url": "https://fundaayc.com/2025/11/16/sabia-usted-133/"
-  },
-  "fac-suc52": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2014,
-    "hasta": 2014
-   },
-   "url": "https://fundaayc.com/2014/05/22/1952%e2%80%a2-se-concluye-la-construccion-de-la-av-sucre/"
-  },
-  "fac-nr54": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2016,
-    "hasta": 2016
-   },
-   "url": "https://fundaayc.com/2016/03/03/1954/"
-  },
-  "fac-su128": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria con referencias",
-   "fecha_documento": {
-    "desde": 2025,
-    "hasta": 2025
-   },
-   "url": "https://fundaayc.com/2025/01/19/sabia-usted-128/"
-  },
-  "fac-sm54": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2019,
-    "hasta": 2019
-   },
-   "url": "https://fundaayc.com/2019/10/01/1954-avenida-san-martin/"
-  },
-  "fac-su93": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria con referencias",
-   "fecha_documento": {
-    "desde": 2022,
-    "hasta": 2022
-   },
-   "url": "https://fundaayc.com/2022/10/23/sabia-usted-93/"
-  },
-  "fac-ng": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2019,
-    "hasta": 2019
-   },
-   "url": "https://fundaayc.com/2019/09/09/1950%e2%80%a2-se-inaugura-la-avenida-nueva-granada/"
-  },
-  "fac-c905": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2019,
-    "hasta": 2019
-   },
-   "url": "https://fundaayc.com/2019/12/05/1953-avenida-guzman-blanco-o-cota-905/"
-  },
-  "fac-su119": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria con referencias",
-   "fecha_documento": {
-    "desde": 2024,
-    "hasta": 2024
-   },
-   "url": "https://fundaayc.com/2024/07/07/sabia-usted-119/"
-  },
-  "fac-fm": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2015,
-    "hasta": 2015
-   },
-   "url": "https://fundaayc.com/2015/12/09/1954%e2%80%a2-avenida-francisco-de-miranda/"
-  },
-  "fac-vic": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2017,
-    "hasta": 2017
-   },
-   "url": "https://fundaayc.com/2017/11/18/1945%e2%80%a2-avenida-victoria/"
-  },
-  "fac-roo": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria sin referencias",
-   "fecha_documento": {
-    "desde": 2015,
-    "hasta": 2015
-   },
-   "url": "https://fundaayc.com/2015/10/15/1946-avenida-roosevelt/"
-  },
-  "wiki-cie": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "terciaria",
-   "fecha_documento": null,
-   "consultada": "2026-11-28",
-   "url": "https://es.wikipedia.org/wiki/Distribuidor_El_Ciempi%C3%A9s"
-  },
-  "wiki-clg": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "terciaria",
-   "fecha_documento": null,
-   "consultada": "2026-11-28",
-   "url": "https://es.wikipedia.org/wiki/Autopista_Caracas-La_Guaira"
-  },
-  "wiki-cv": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "terciaria",
-   "fecha_documento": null,
-   "consultada": "2026-11-28",
-   "url": "https://es.wikipedia.org/wiki/Carretera_Vieja_Caracas-La_Guaira"
-  },
-  "wiki-aff": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "terciaria",
-   "fecha_documento": null,
-   "consultada": "2026-11-28",
-   "url": "https://es.wikipedia.org/wiki/Autopista_Francisco_Fajardo"
-  },
-  "wiki-vc": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "terciaria",
-   "fecha_documento": null,
-   "consultada": "2026-11-28",
-   "url": "https://es.wikipedia.org/wiki/Autopista_Valle-Coche"
-  },
-  "wiki-boy": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "terciaria",
-   "fecha_documento": null,
-   "consultada": "2026-11-28",
-   "url": "https://es.wikipedia.org/wiki/Avenida_Boyac%C3%A1_(Caracas)"
-  },
-  "blog-sigillo": {
-   "tipo": "historica",
-   "anios": [],
-   "clase": "secundaria con referencias",
-   "fecha_documento": {
-    "desde": 2016,
-    "hasta": 2016
-   },
-   "url": "https://mariafsigillo.blogspot.com/2016/04/breve-recuento-de-la-cota-mil.html"
-  }
+  "fac-urd": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2013,"hasta":2013},"url":"https://fundaayc.com/2013/09/26/1953-inauguracion-de-la-avenida-urdaneta/"},
+  "fac-urd2": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2013,"hasta":2013},"url":"https://fundaayc.com/2013/11/04/1953-efectos-urbanos-asociados-a-la-inauguracion-de-la-avenida-urdaneta/"},
+  "fac-ffaa": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2013,"hasta":2013},"url":"https://fundaayc.com/2013/11/10/1956%E2%80%A2-avenida-fuerzas-armadas/"},
+  "fac-psuc": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2014,"hasta":2014},"url":"https://fundaayc.com/2014/06/15/1956-colapsa-el-encofrado-del-canal-en-sentido-a-la-roca-tarpeya-del-puente-sucre/"},
+  "fac-cj": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2026,"hasta":2026},"url":"https://fundaayc.com/2026/10/19/1956-nueva-fachada-de-la-iglesia-corazon-de-jesus/"},
+  "fac-lib": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2026,"hasta":2026},"url":"https://fundaayc.com/2026/09/15/1965-inauguracion-de-la-avenida-libertador/"},
+  "fac-lib64": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2022,"hasta":2022},"url":"https://fundaayc.com/2022/06/08/1964-construccion-de-la-avenida-libertador/"},
+  "fac-su98": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2023,"hasta":2023},"url":"https://fundaayc.com/2023/04/02/sabia-usted-98/"},
+  "fac-bar53": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2026,"hasta":2026},"url":"https://fundaayc.com/2026/08/26/1953-avenida-baralt/"},
+  "fac-clg": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2013,"hasta":2013},"url":"https://fundaayc.com/2013/10/26/1953%E2%80%A2-se-inaugura-la-autopista-caracas-la-guaira/"},
+  "fac-boq": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2013,"hasta":2013},"url":"https://fundaayc.com/2013/10/08/1953%e2%80%a2-tuneles-boqueron-1-y-boqueron-2/"},
+  "fac-viad07": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2013,"hasta":2013},"url":"https://fundaayc.com/2013/09/15/2007-se-inaugura-el-nuevo-viaducto-caracas-la-guaira/"},
+  "fac-dbar": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2026,"hasta":2026},"url":"https://fundaayc.com/2026/08/31/1973-distribuidor-av-baralt-de-la-cota-mil/"},
+  "fac-p438": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2025,"hasta":2025},"url":"https://fundaayc.com/2025/03/02/algo-mas-sobre-la-postal-no-438/"},
+  "fac-su88": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2022,"hasta":2022},"url":"https://fundaayc.com/2022/08/14/sabia-usted-88/"},
+  "fac-boy71": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2013,"hasta":2013},"url":"https://fundaayc.com/2013/11/15/1971-nueva-etapa-de-la-la-cota-mil-la-cual-se-renombra-como-avenida-boyaca/"},
+  "fac-ae53": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2013,"hasta":2013},"url":"https://fundaayc.com/2013/10/22/1953%e2%80%a2-se-inaugura-la-autopista-del-este/"},
+  "fac-ae54": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2014,"hasta":2014},"url":"https://fundaayc.com/2014/12/21/1954%e2%80%a2-enlace-avenida-bolivar-autopista-del-este/"},
+  "fac-ae55a": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2014,"hasta":2014},"url":"https://fundaayc.com/2014/06/23/1955%e2%80%a2-se-amplia-la-autopista-del-este/"},
+  "fac-ae55b": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2017,"hasta":2017},"url":"https://fundaayc.com/2017/04/30/1955-se-inaugura-la-prolongacion-de-la-autopista-del-este-entre-la-carlota-y-petare/"},
+  "fac-ae73": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2026,"hasta":2026},"url":"https://fundaayc.com/2026/05/26/1973-segundo-piso-de-la-autopista-de-este-hoy-francisco-fajardo/"},
+  "fac-pulpo": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2017,"hasta":2017},"url":"https://fundaayc.com/2017/03/23/1961-distribuidor-el-pulpo/"},
+  "fac-su70": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2021,"hasta":2021},"url":"https://fundaayc.com/2021/08/15/sabia-usted-70/"},
+  "fac-su120": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2024,"hasta":2024},"url":"https://fundaayc.com/2024/08/04/sabia-usted-120/"},
+  "fac-ban": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2014,"hasta":2014},"url":"https://fundaayc.com/2014/08/12/1956%e2%80%a2-se-inaugura-el-distribuidor-de-transito-la-bandera/"},
+  "fac-rui": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2014,"hasta":2014},"url":"https://fundaayc.com/2014/08/23/1963%e2%80%a2-distribuidor-los-ruices/"},
+  "fac-lec": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2014,"hasta":2014},"url":"https://fundaayc.com/2014/12/01/1970-se-inaugura-la-avenida-lecuna/"},
+  "fac-su82": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2022,"hasta":2022},"url":"https://fundaayc.com/2022/05/01/sabia-usted-82/"},
+  "fac-su133": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2025,"hasta":2025},"url":"https://fundaayc.com/2025/11/16/sabia-usted-133/"},
+  "fac-suc52": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2014,"hasta":2014},"url":"https://fundaayc.com/2014/05/22/1952%e2%80%a2-se-concluye-la-construccion-de-la-av-sucre/"},
+  "fac-nr54": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2016,"hasta":2016},"url":"https://fundaayc.com/2016/03/03/1954/"},
+  "fac-su128": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2025,"hasta":2025},"url":"https://fundaayc.com/2025/01/19/sabia-usted-128/"},
+  "fac-sm54": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2019,"hasta":2019},"url":"https://fundaayc.com/2019/10/01/1954-avenida-san-martin/"},
+  "fac-su93": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2022,"hasta":2022},"url":"https://fundaayc.com/2022/10/23/sabia-usted-93/"},
+  "fac-ng": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2019,"hasta":2019},"url":"https://fundaayc.com/2019/09/09/1950%e2%80%a2-se-inaugura-la-avenida-nueva-granada/"},
+  "fac-c905": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2019,"hasta":2019},"url":"https://fundaayc.com/2019/12/05/1953-avenida-guzman-blanco-o-cota-905/"},
+  "fac-su119": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2024,"hasta":2024},"url":"https://fundaayc.com/2024/07/07/sabia-usted-119/"},
+  "fac-fm": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2015,"hasta":2015},"url":"https://fundaayc.com/2015/12/09/1954%e2%80%a2-avenida-francisco-de-miranda/"},
+  "fac-vic": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2017,"hasta":2017},"url":"https://fundaayc.com/2017/11/18/1945%e2%80%a2-avenida-victoria/"},
+  "fac-roo": {"tipo":"historica","anios":[],"clase":"secundaria sin referencias","fecha_documento":{"desde":2015,"hasta":2015},"url":"https://fundaayc.com/2015/10/15/1946-avenida-roosevelt/"},
+  "wiki-cie": {"tipo":"historica","anios":[],"clase":"terciaria","fecha_documento":null,"consultada":"2026-11-28","url":"https://es.wikipedia.org/wiki/Distribuidor_El_Ciempi%C3%A9s"},
+  "wiki-clg": {"tipo":"historica","anios":[],"clase":"terciaria","fecha_documento":null,"consultada":"2026-11-28","url":"https://es.wikipedia.org/wiki/Autopista_Caracas-La_Guaira"},
+  "wiki-cv": {"tipo":"historica","anios":[],"clase":"terciaria","fecha_documento":null,"consultada":"2026-11-28","url":"https://es.wikipedia.org/wiki/Carretera_Vieja_Caracas-La_Guaira"},
+  "wiki-aff": {"tipo":"historica","anios":[],"clase":"terciaria","fecha_documento":null,"consultada":"2026-11-28","url":"https://es.wikipedia.org/wiki/Autopista_Francisco_Fajardo"},
+  "wiki-vc": {"tipo":"historica","anios":[],"clase":"terciaria","fecha_documento":null,"consultada":"2026-11-28","url":"https://es.wikipedia.org/wiki/Autopista_Valle-Coche"},
+  "wiki-boy": {"tipo":"historica","anios":[],"clase":"terciaria","fecha_documento":null,"consultada":"2026-11-28","url":"https://es.wikipedia.org/wiki/Avenida_Boyac%C3%A1_(Caracas)"},
+  "blog-sigillo": {"tipo":"historica","anios":[],"clase":"secundaria con referencias","fecha_documento":{"desde":2016,"hasta":2016},"url":"https://mariafsigillo.blogspot.com/2016/04/breve-recuento-de-la-cota-mil.html"}
  },
  "tramos": [
   {
@@ -471,113 +56,21 @@
    "tipo": "avenida",
    "nombre": "Avenida Urdaneta",
    "desde": 1953,
-   "fuentesCronologia": [
-    "fac-urd"
-   ],
+   "fuentesCronologia": ["fac-urd"],
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": [
-    "Decreto e inicio de las obras",
-    "Apertura por tramos",
-    "Esquinas de sus dos extremos",
-    "Fecha del elevado en el empalme con la Andrés Bello",
-    "Las otras 248 demoliciones: las fuentes solo nombran dos casas; ninguna nombra el Hotel Majestic"
-   ],
+   "desconocido": ["Decreto e inicio de las obras","Apertura por tramos","Esquinas de sus dos extremos","Fecha del elevado en el empalme con la Andrés Bello","Las otras 248 demoliciones: las fuentes solo nombran dos casas; ninguna nombra el Hotel Majestic"],
    "sistema": "Avenidas del centro",
    "predecesora": "Calle Este–Oeste 1: existía antes del ensanche y debe digitalizarse por separado",
-   "nombres_osm": [
-    "Avenida Urdaneta"
-   ],
-   "nombres": [
-    {
-     "nombre": "Avenida Urdaneta",
-     "desde": 1953,
-     "hasta": null,
-     "fuentes": [
-      "fac-urd"
-     ]
-    }
-   ],
+   "nombres_osm": ["Avenida Urdaneta"],
+   "nombres": [{"nombre":"Avenida Urdaneta","desde":1953,"hasta":null,"fuentes":["fac-urd"]}],
    "cronologia": [
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1951,
-      "hasta": 1951
-     },
-     "dice": "Obra imprescindible del Plan Municipal de Vialidad",
-     "cita": "«a 9 de ellas como imprescindibles y urgentes: la avenida Urdaneta, el tercer tramo de la avenida Sucre, la avenida Fuerzas Armadas»",
-     "fuentes": [
-      "fac-su119"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1953,
-      "hasta": 1953
-     },
-     "dice": "El MOP la construye en 120 días",
-     "cita": "«construidos por el Ministerio de Obras Públicas (MOP) en 120 días»",
-     "fuentes": [
-      "fac-urd"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1953,
-      "hasta": 1953
-     },
-     "dice": "Se inaugura el 29 de noviembre de 1953: dos kilómetros entre la avenida Sucre y la Andrés Bello",
-     "cita": "«El domingo 29 de noviembre se inaugura y pone en servicio los dos kilómetros de la Avenida Urdaneta»",
-     "fuentes": [
-      "fac-urd"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "reforma",
-     "fecha": {
-      "desde": 1953,
-      "hasta": 1953
-     },
-     "dice": "Sección de 26 m, tres canales por sentido",
-     "cita": "«La nueva vía de 26 metros de ancho (tres canales de circulación en cada sentido)»",
-     "fuentes": [
-      "fac-urd"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "demolicion",
-     "fecha": {
-      "desde": 1953,
-      "hasta": 1953
-     },
-     "dice": "250 demoliciones; entre ellas la casa de Vegas y Bertodano (Colegio Chaves) y la casa de Llaguno (Museo de Arte Colonial)",
-     "cita": "«fue necesario expropiar, realizar 250 demoliciones y reubicar todas las instalaciones existentes»",
-     "fuentes": [
-      "fac-urd",
-      "fac-urd2"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "reforma",
-     "fecha": {
-      "desde": 1953,
-      "hasta": 1953
-     },
-     "dice": "La esquina de Llaguno pasa a ser un puente sobre la Norte–Sur 6",
-     "cita": "«hacer desaparecer prácticamente la esquina de Llaguno que, convertida en un puente, dejaría pasar a la Baralt por debajo»",
-     "fuentes": [
-      "fac-su98"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"proyecto","fecha":{"desde":1951,"hasta":1951},"dice":"Obra imprescindible del Plan Municipal de Vialidad","cita":"«a 9 de ellas como imprescindibles y urgentes: la avenida Urdaneta, el tercer tramo de la avenida Sucre, la avenida Fuerzas Armadas»","fuentes":["fac-su119"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1953,"hasta":1953},"dice":"El MOP la construye en 120 días","cita":"«construidos por el Ministerio de Obras Públicas (MOP) en 120 días»","fuentes":["fac-urd"],"certeza":"documentada"},
+    {"tipo":"apertura","fecha":{"desde":1953,"hasta":1953},"dice":"Se inaugura el 29 de noviembre de 1953: dos kilómetros entre la avenida Sucre y la Andrés Bello","cita":"«El domingo 29 de noviembre se inaugura y pone en servicio los dos kilómetros de la Avenida Urdaneta»","fuentes":["fac-urd"],"certeza":"documentada"},
+    {"tipo":"reforma","fecha":{"desde":1953,"hasta":1953},"dice":"Sección de 26 m, tres canales por sentido","cita":"«La nueva vía de 26 metros de ancho (tres canales de circulación en cada sentido)»","fuentes":["fac-urd"],"certeza":"documentada"},
+    {"tipo":"demolicion","fecha":{"desde":1953,"hasta":1953},"dice":"250 demoliciones; entre ellas la casa de Vegas y Bertodano (Colegio Chaves) y la casa de Llaguno (Museo de Arte Colonial)","cita":"«fue necesario expropiar, realizar 250 demoliciones y reubicar todas las instalaciones existentes»","fuentes":["fac-urd","fac-urd2"],"certeza":"documentada"},
+    {"tipo":"reforma","fecha":{"desde":1953,"hasta":1953},"dice":"La esquina de Llaguno pasa a ser un puente sobre la Norte–Sur 6","cita":"«hacer desaparecer prácticamente la esquina de Llaguno que, convertida en un puente, dejaría pasar a la Baralt por debajo»","fuentes":["fac-su98"],"certeza":"documentada"}
    ],
    "etapas": []
   },
@@ -586,128 +79,21 @@
    "tipo": "avenida",
    "nombre": "Avenida Fuerzas Armadas",
    "desde": 1956,
-   "fuentesCronologia": [
-    "fac-ffaa",
-    "fac-psuc"
-   ],
+   "fuentesCronologia": ["fac-ffaa","fac-psuc"],
    "encuadre": "sin medir",
-   "contradicciones": [
-    {
-     "asunto": "alcance de las demoliciones",
-     "afirmaciones": [
-      {
-       "dice": "«exigió el recorte de las fachadas de las 300 edificaciones que tenían frente sobre la Avenida Norte-Sur 7»",
-       "fuente": "fac-ffaa"
-      },
-      {
-       "dice": "«fue necesario demoler 300 edificaciones y fachadas, entre ellas la de la Iglesia Corazón de Jesús»",
-       "fuente": "fac-cj"
-      }
-     ],
-     "estado": "pendiente"
-    }
-   ],
-   "desconocido": [
-    "Año del decreto",
-    "Inicio de las obras",
-    "Ancho de la sección",
-    "Esquinas de sus dos extremos",
-    "Apertura por tramos",
-    "Cuál de las dos vías pasa arriba en el cruce con la Urdaneta: la redacción no lo deja claro"
-   ],
+   "contradicciones": [{"asunto":"alcance de las demoliciones","afirmaciones":[{"dice":"«exigió el recorte de las fachadas de las 300 edificaciones que tenían frente sobre la Avenida Norte-Sur 7»","fuente":"fac-ffaa"},{"dice":"«fue necesario demoler 300 edificaciones y fachadas, entre ellas la de la Iglesia Corazón de Jesús»","fuente":"fac-cj"}],"estado":"pendiente"}],
+   "desconocido": ["Año del decreto","Inicio de las obras","Ancho de la sección","Esquinas de sus dos extremos","Apertura por tramos","Cuál de las dos vías pasa arriba en el cruce con la Urdaneta: la redacción no lo deja claro"],
    "sistema": "Avenidas del centro",
    "predecesora": "Calle Norte–Sur 7: existía; la avenida recortó sus fachadas",
-   "nombres_osm": [
-    "Avenida Fuerzas Armadas",
-    "Elevado de la Fuerzas Armadas"
-   ],
-   "nombres": [
-    {
-     "nombre": "Avenida Fuerzas Armadas",
-     "desde": 1956,
-     "hasta": null,
-     "fuentes": [
-      "fac-ffaa"
-     ]
-    }
-   ],
+   "nombres_osm": ["Avenida Fuerzas Armadas","Elevado de la Fuerzas Armadas"],
+   "nombres": [{"nombre":"Avenida Fuerzas Armadas","desde":1956,"hasta":null,"fuentes":["fac-ffaa"]}],
    "cronologia": [
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1951,
-      "hasta": 1951
-     },
-     "dice": "Obra imprescindible del Plan Municipal de Vialidad",
-     "cita": "«la avenida Urdaneta, el tercer tramo de la avenida Sucre, la avenida Fuerzas Armadas»",
-     "fuentes": [
-      "fac-su119"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "proyecto",
-     "fecha": null,
-     "dice": "Decreto del gobernador Pacanins, un 3 de noviembre; la fuente no escribe el año",
-     "cita": "«por decreto del gobernador de Caracas Guillermo Pacanins, promulgado el 3 de noviembre del año anterior»",
-     "fuentes": [
-      "fac-ffaa"
-     ],
-     "certeza": "dudosa"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1956,
-      "hasta": 1956
-     },
-     "dice": "Colapsa el encofrado del Puente Sucre la noche del 13 de noviembre",
-     "cita": "«La noche del 13 de noviembre colapsa el encofrado del canal en sentido a la Roca Tarpeya del Puente Sucre»",
-     "fuentes": [
-      "fac-psuc"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1956,
-      "hasta": 1956
-     },
-     "dice": "Se inaugura el 2 de diciembre de 1956, con 2.770 m",
-     "cita": "«Se concluyen los 2.770 metros de la Avenida Fuerzas Armadas»",
-     "fuentes": [
-      "fac-ffaa",
-      "fac-psuc"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1956,
-      "hasta": 1956
-     },
-     "dice": "Pasos a desnivel: puente en la Urdaneta, paso bajo la avenida Universidad y Puente Sucre de 270 m",
-     "cita": "«la construcción de puente sobre la Avenida Urdaneta, el paso por debajo de la Avenida Universidad y el Puente Sucre»",
-     "fuentes": [
-      "fac-ffaa"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "demolicion",
-     "fecha": {
-      "desde": 1956,
-      "hasta": 1956
-     },
-     "dice": "La iglesia Corazón de Jesús pierde 8 m de sus naves; fachada nueva consagrada en 1963",
-     "cita": "«Perdió un total de 8 metros de longitud en sus tres naves»",
-     "fuentes": [
-      "fac-cj"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"proyecto","fecha":{"desde":1951,"hasta":1951},"dice":"Obra imprescindible del Plan Municipal de Vialidad","cita":"«la avenida Urdaneta, el tercer tramo de la avenida Sucre, la avenida Fuerzas Armadas»","fuentes":["fac-su119"],"certeza":"documentada"},
+    {"tipo":"proyecto","fecha":null,"dice":"Decreto del gobernador Pacanins, un 3 de noviembre; la fuente no escribe el año","cita":"«por decreto del gobernador de Caracas Guillermo Pacanins, promulgado el 3 de noviembre del año anterior»","fuentes":["fac-ffaa"],"certeza":"dudosa"},
+    {"tipo":"obra","fecha":{"desde":1956,"hasta":1956},"dice":"Colapsa el encofrado del Puente Sucre la noche del 13 de noviembre","cita":"«La noche del 13 de noviembre colapsa el encofrado del canal en sentido a la Roca Tarpeya del Puente Sucre»","fuentes":["fac-psuc"],"certeza":"documentada"},
+    {"tipo":"apertura","fecha":{"desde":1956,"hasta":1956},"dice":"Se inaugura el 2 de diciembre de 1956, con 2.770 m","cita":"«Se concluyen los 2.770 metros de la Avenida Fuerzas Armadas»","fuentes":["fac-ffaa","fac-psuc"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1956,"hasta":1956},"dice":"Pasos a desnivel: puente en la Urdaneta, paso bajo la avenida Universidad y Puente Sucre de 270 m","cita":"«la construcción de puente sobre la Avenida Urdaneta, el paso por debajo de la Avenida Universidad y el Puente Sucre»","fuentes":["fac-ffaa"],"certeza":"documentada"},
+    {"tipo":"demolicion","fecha":{"desde":1956,"hasta":1956},"dice":"La iglesia Corazón de Jesús pierde 8 m de sus naves; fachada nueva consagrada en 1963","cita":"«Perdió un total de 8 metros de longitud en sus tres naves»","fuentes":["fac-cj"],"certeza":"documentada"}
    ],
    "etapas": []
   },
@@ -716,102 +102,19 @@
    "tipo": "avenida",
    "nombre": "Avenida Libertador",
    "desde": 1965,
-   "fuentesCronologia": [
-    "fac-lib"
-   ],
+   "fuentesCronologia": ["fac-lib"],
    "encuadre": "sin medir",
-   "contradicciones": [
-    {
-     "asunto": "qué había abierto en 1957",
-     "afirmaciones": [
-      {
-       "dice": "«fue iniciada durante el régimen de Marcos Pérez Jiménez en 1957»",
-       "fuente": "fac-lib"
-      },
-      {
-       "dice": "«se vio afectado por la conexión abierta hacia la avenida Libertador en 1957»",
-       "fuente": "fac-su82"
-      }
-     ],
-     "estado": "pendiente"
-    }
-   ],
-   "desconocido": [
-    "Decreto",
-    "Extremos con nombre",
-    "Ancho",
-    "Apertura por tramos",
-    "Edificios demolidos"
-   ],
+   "contradicciones": [{"asunto":"qué había abierto en 1957","afirmaciones":[{"dice":"«fue iniciada durante el régimen de Marcos Pérez Jiménez en 1957»","fuente":"fac-lib"},{"dice":"«se vio afectado por la conexión abierta hacia la avenida Libertador en 1957»","fuente":"fac-su82"}],"estado":"pendiente"}],
+   "desconocido": ["Decreto","Extremos con nombre","Ancho","Apertura por tramos","Edificios demolidos"],
    "sistema": "Avenidas del este",
    "predecesora": "Ninguna documentada: las fuentes no nombran una calle anterior sobre su eje",
-   "nombres_osm": [
-    "Avenida Libertador",
-    "Prolongación Libertador"
-   ],
-   "nombres": [
-    {
-     "nombre": "Avenida Libertador",
-     "desde": null,
-     "hasta": null,
-     "fuentes": [
-      "fac-lib"
-     ]
-    }
-   ],
+   "nombres_osm": ["Avenida Libertador","Prolongación Libertador"],
+   "nombres": [{"nombre":"Avenida Libertador","desde":null,"hasta":null,"fuentes":["fac-lib"]}],
    "cronologia": [
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1951,
-      "hasta": 1951
-     },
-     "dice": "En el Plan Municipal de Vialidad, con sus conexiones a la Andrés Bello y a la Francisco de Miranda",
-     "cita": "«la avenida Libertador (incluyendo sus conexiones con la Andrés Bello y la Francisco de Miranda)»",
-     "fuentes": [
-      "fac-su119"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1957,
-      "hasta": 1957
-     },
-     "dice": "Se inicia en 1957",
-     "cita": "«fue iniciada durante el régimen de Marcos Pérez Jiménez en 1957»",
-     "fuentes": [
-      "fac-lib"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1964,
-      "hasta": 1964
-     },
-     "dice": "En 1964 se levantan los muros de la trinchera en El Bosque; el paso del Country Club ya está construido",
-     "cita": "«Movimiento de tierra y construcción de los muros de concreto armado de soporte lateral de la Avenida Libertador»",
-     "fuentes": [
-      "fac-lib64"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1965,
-      "hasta": 1965
-     },
-     "dice": "Leoni la inaugura el 13 de diciembre de 1965; 7 km en dos niveles",
-     "cita": "«El 13 de diciembre el Presidente Raúl Leoni inaugura la recién concluida Avenida Libertador»",
-     "fuentes": [
-      "fac-lib"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"proyecto","fecha":{"desde":1951,"hasta":1951},"dice":"En el Plan Municipal de Vialidad, con sus conexiones a la Andrés Bello y a la Francisco de Miranda","cita":"«la avenida Libertador (incluyendo sus conexiones con la Andrés Bello y la Francisco de Miranda)»","fuentes":["fac-su119"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1957,"hasta":1957},"dice":"Se inicia en 1957","cita":"«fue iniciada durante el régimen de Marcos Pérez Jiménez en 1957»","fuentes":["fac-lib"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1964,"hasta":1964},"dice":"En 1964 se levantan los muros de la trinchera en El Bosque; el paso del Country Club ya está construido","cita":"«Movimiento de tierra y construcción de los muros de concreto armado de soporte lateral de la Avenida Libertador»","fuentes":["fac-lib64"],"certeza":"documentada"},
+    {"tipo":"apertura","fecha":{"desde":1965,"hasta":1965},"dice":"Leoni la inaugura el 13 de diciembre de 1965; 7 km en dos niveles","cita":"«El 13 de diciembre el Presidente Raúl Leoni inaugura la recién concluida Avenida Libertador»","fuentes":["fac-lib"],"certeza":"documentada"}
    ],
    "etapas": []
   },
@@ -820,137 +123,23 @@
    "tipo": "avenida",
    "nombre": "Norte–Sur 6, ensanche de 1951–1953 (avenida Baralt desde 1961)",
    "desde": 1953,
-   "fuentesCronologia": [
-    "fac-su98",
-    "fac-bar53"
-   ],
+   "fuentesCronologia": ["fac-su98","fac-bar53"],
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": [
-    "Día de la apertura de 1953",
-    "Ancho en metros: la fuente solo dice «seis canales»",
-    "Nombres de los edificios demolidos"
-   ],
+   "desconocido": ["Día de la apertura de 1953","Ancho en metros: la fuente solo dice «seis canales»","Nombres de los edificios demolidos"],
    "sistema": "Avenidas del centro",
    "predecesora": "Calle Norte–Sur 6: existía y remataba en Quinta Crespo; no se declara ausente antes del ensanche",
-   "nombres_osm": [
-    "Avenida Baralt",
-    "Avenida Rafael Baralt"
-   ],
+   "nombres_osm": ["Avenida Baralt","Avenida Rafael Baralt"],
    "nota": "La capa Hoy no separa el ensanche de 1953 de la prolongación de 1973: los dos llevan el nombre «Avenida Baralt».",
-   "nombres": [
-    {
-     "nombre": "Avenida Norte–Sur 6",
-     "desde": null,
-     "hasta": 1961,
-     "fuentes": [
-      "fac-su98"
-     ]
-    },
-    {
-     "nombre": "Avenida Baralt",
-     "desde": 1961,
-     "hasta": null,
-     "fuentes": [
-      "fac-su98",
-      "fac-bar53"
-     ]
-    }
-   ],
+   "nombres": [{"nombre":"Avenida Norte–Sur 6","desde":null,"hasta":1961,"fuentes":["fac-su98"]},{"nombre":"Avenida Baralt","desde":1961,"hasta":null,"fuentes":["fac-su98","fac-bar53"]}],
    "cronologia": [
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1939,
-      "hasta": 1939
-     },
-     "dice": "El Plan Rotival la toma como eje entre El Paraíso y la perimetral",
-     "cita": "«considerada dentro del Plan Rotival (1939) como el eje de mayor importancia en la conectividad entre El Paraíso y la perimetral»",
-     "fuentes": [
-      "fac-su98"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1948,
-      "hasta": 1948
-     },
-     "dice": "Moses la llama «Vía Expresa Capitolio»",
-     "cita": "«llamándola en su Arterial Plan for Caracas (1948) “Vía Expresa Capitolio”»",
-     "fuentes": [
-      "fac-su98"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1951,
-      "hasta": 1951
-     },
-     "dice": "Alta prioridad en el Plan Municipal de Vialidad",
-     "cita": "«fuera incorporada como de alta prioridad dentro del Plan Municipal de Vialidad de 1951»",
-     "fuentes": [
-      "fac-su98"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1951,
-      "hasta": 1951
-     },
-     "dice": "La obra empieza en 1951: unos dos kilómetros entre Quinta Crespo y Dos Pilitas",
-     "cita": "«La intervención iniciada en 1951 abarcaría un trecho de aproximadamente dos kilómetros entre las esquinas de Quinta Crespo al sur y Dos Pilitas al norte»",
-     "fuentes": [
-      "fac-su98"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "demolicion",
-     "fecha": {
-      "desde": 1951,
-      "hasta": 1953
-     },
-     "dice": "Más de un centenar de demoliciones",
-     "cita": "«numerosas expropiaciones, más de un centenar de demoliciones, la pérdida de buena parte de su memoria construida»",
-     "fuentes": [
-      "fac-su98"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1953,
-      "hasta": 1953
-     },
-     "dice": "Se concluye en 1953, poco después de la Urdaneta; pasa bajo ella en Puente Llaguno",
-     "cita": "«Al concluirse en 1953 poco después de que ocurriera lo mismo con la avenida Urdaneta»",
-     "fuentes": [
-      "fac-su98",
-      "fac-bar53"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "nombre",
-     "fecha": {
-      "desde": 1961,
-      "hasta": 1961
-     },
-     "dice": "Recibe el nombre de Baralt en 1961",
-     "cita": "«El cambio de denominación de la avenida no se dará sino hasta 1961 cuando el gobierno de Rómulo Betancourt decide nombrarla»",
-     "fuentes": [
-      "fac-su98",
-      "fac-bar53"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"proyecto","fecha":{"desde":1939,"hasta":1939},"dice":"El Plan Rotival la toma como eje entre El Paraíso y la perimetral","cita":"«considerada dentro del Plan Rotival (1939) como el eje de mayor importancia en la conectividad entre El Paraíso y la perimetral»","fuentes":["fac-su98"],"certeza":"documentada"},
+    {"tipo":"proyecto","fecha":{"desde":1948,"hasta":1948},"dice":"Moses la llama «Vía Expresa Capitolio»","cita":"«llamándola en su Arterial Plan for Caracas (1948) “Vía Expresa Capitolio”»","fuentes":["fac-su98"],"certeza":"documentada"},
+    {"tipo":"proyecto","fecha":{"desde":1951,"hasta":1951},"dice":"Alta prioridad en el Plan Municipal de Vialidad","cita":"«fuera incorporada como de alta prioridad dentro del Plan Municipal de Vialidad de 1951»","fuentes":["fac-su98"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1951,"hasta":1951},"dice":"La obra empieza en 1951: unos dos kilómetros entre Quinta Crespo y Dos Pilitas","cita":"«La intervención iniciada en 1951 abarcaría un trecho de aproximadamente dos kilómetros entre las esquinas de Quinta Crespo al sur y Dos Pilitas al norte»","fuentes":["fac-su98"],"certeza":"documentada"},
+    {"tipo":"demolicion","fecha":{"desde":1951,"hasta":1953},"dice":"Más de un centenar de demoliciones","cita":"«numerosas expropiaciones, más de un centenar de demoliciones, la pérdida de buena parte de su memoria construida»","fuentes":["fac-su98"],"certeza":"documentada"},
+    {"tipo":"apertura","fecha":{"desde":1953,"hasta":1953},"dice":"Se concluye en 1953, poco después de la Urdaneta; pasa bajo ella en Puente Llaguno","cita":"«Al concluirse en 1953 poco después de que ocurriera lo mismo con la avenida Urdaneta»","fuentes":["fac-su98","fac-bar53"],"certeza":"documentada"},
+    {"tipo":"nombre","fecha":{"desde":1961,"hasta":1961},"dice":"Recibe el nombre de Baralt en 1961","cita":"«El cambio de denominación de la avenida no se dará sino hasta 1961 cuando el gobierno de Rómulo Betancourt decide nombrarla»","fuentes":["fac-su98","fac-bar53"],"certeza":"documentada"}
    ],
    "etapas": []
   },
@@ -959,32 +148,13 @@
    "tipo": "avenida",
    "nombre": "Avenida Baralt, prolongación de Dos Pilitas a la Cota Mil",
    "desde": 1973,
-   "fuentesCronologia": [
-    "fac-su98"
-   ],
+   "fuentesCronologia": ["fac-su98"],
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": [
-    "Inicio de las obras",
-    "Qué se demolió"
-   ],
+   "desconocido": ["Inicio de las obras","Qué se demolió"],
    "sistema": "Avenidas del centro",
    "predecesora": "No documentada",
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1973,
-      "hasta": 1973
-     },
-     "dice": "En 1973 se prolonga de Dos Pilitas a la Cota Mil",
-     "cita": "«se prolongue en 1973 su trazado desde la esquina Dos Pilitas hasta la Cota Mil»",
-     "fuentes": [
-      "fac-su98"
-     ],
-     "certeza": "documentada"
-    }
-   ],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1973,"hasta":1973},"dice":"En 1973 se prolonga de Dos Pilitas a la Cota Mil","cita":"«se prolongue en 1973 su trazado desde la esquina Dos Pilitas hasta la Cota Mil»","fuentes":["fac-su98"],"certeza":"documentada"}],
    "etapas": []
   },
   {
@@ -992,49 +162,14 @@
    "tipo": "distribuidor",
    "nombre": "Distribuidor Baralt (sur, con la autopista)",
    "desde": 1968,
-   "fuentesCronologia": [
-    "fac-su98"
-   ],
+   "fuentesCronologia": ["fac-su98"],
    "encuadre": "sin medir",
-   "contradicciones": [
-    {
-     "asunto": "año del distribuidor",
-     "afirmaciones": [
-      {
-       "dice": "«9. Distribuidor Av. Baralt-Autopista Francisco Fajardo (1968).»",
-       "fuente": "fac-su98"
-      },
-      {
-       "dice": "«el Distribuidor «Baralt-Sur» (1971)»",
-       "fuente": "fac-p438"
-      }
-     ],
-     "estado": "pendiente"
-    }
-   ],
-   "desconocido": [
-    "Cuál de las dos fechas es la de la puesta en servicio"
-   ],
+   "contradicciones": [{"asunto":"año del distribuidor","afirmaciones":[{"dice":"«9. Distribuidor Av. Baralt-Autopista Francisco Fajardo (1968).»","fuente":"fac-su98"},{"dice":"«el Distribuidor «Baralt-Sur» (1971)»","fuente":"fac-p438"}],"estado":"pendiente"}],
+   "desconocido": ["Cuál de las dos fechas es la de la puesta en servicio"],
    "sistema": "Autopista del Este",
    "predecesora": "No aplica",
-   "nombres_osm": [
-    "Distribuidor Baralt"
-   ],
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1968,
-      "hasta": 1968
-     },
-     "dice": "Se construye en 1968",
-     "cita": "«cuando se construya al sur, en 1968, el Distribuido Baralt»",
-     "fuentes": [
-      "fac-su98"
-     ],
-     "certeza": "dudosa"
-    }
-   ],
+   "nombres_osm": ["Distribuidor Baralt"],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1968,"hasta":1968},"dice":"Se construye en 1968","cita":"«cuando se construya al sur, en 1968, el Distribuido Baralt»","fuentes":["fac-su98"],"certeza":"dudosa"}],
    "etapas": []
   },
   {
@@ -1042,47 +177,14 @@
    "tipo": "distribuidor",
    "nombre": "Distribuidor Baralt de la avenida Boyacá",
    "desde": 1973,
-   "fuentesCronologia": [
-    "fac-dbar"
-   ],
+   "fuentesCronologia": ["fac-dbar"],
    "encuadre": "sin medir",
-   "contradicciones": [
-    {
-     "asunto": "qué se inauguró el 18 de agosto de 1973",
-     "afirmaciones": [
-      {
-       "dice": "Solo el distribuidor: «inaugura y pone en funcionamiento el Distribuidor Av. Baralt»",
-       "fuente": "fac-dbar"
-      },
-      {
-       "dice": "Toda la avenida: «inauguración = 18 de agosto de 1973»",
-       "fuente": "wiki-boy"
-      }
-     ],
-     "estado": "pendiente"
-    }
-   ],
+   "contradicciones": [{"asunto":"qué se inauguró el 18 de agosto de 1973","afirmaciones":[{"dice":"Solo el distribuidor: «inaugura y pone en funcionamiento el Distribuidor Av. Baralt»","fuente":"fac-dbar"},{"dice":"Toda la avenida: «inauguración = 18 de agosto de 1973»","fuente":"wiki-boy"}],"estado":"pendiente"}],
    "desconocido": [],
    "sistema": "Avenida Boyacá (Cota Mil)",
    "predecesora": "No aplica. No fecha toda la avenida Boyacá",
-   "nombres_osm": [
-    "Distribuidor Baralt Norte"
-   ],
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1973,
-      "hasta": 1973
-     },
-     "dice": "Caldera lo inaugura el 18 de agosto de 1973",
-     "cita": "«El 18 de agosto, el presidente de la República Rafael Caldera […] inaugura y pone en funcionamiento el Distribuidor Av. Baralt»",
-     "fuentes": [
-      "fac-dbar"
-     ],
-     "certeza": "documentada"
-    }
-   ],
+   "nombres_osm": ["Distribuidor Baralt Norte"],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1973,"hasta":1973},"dice":"Caldera lo inaugura el 18 de agosto de 1973","cita":"«El 18 de agosto, el presidente de la República Rafael Caldera […] inaugura y pone en funcionamiento el Distribuidor Av. Baralt»","fuentes":["fac-dbar"],"certeza":"documentada"}],
    "etapas": []
   },
   {
@@ -1090,233 +192,40 @@
    "tipo": "autopista",
    "nombre": "Autopista del Este, primer tramo",
    "desde": 1953,
-   "fuentesCronologia": [
-    "fac-ae53",
-    "fac-su120"
-   ],
+   "fuentesCronologia": ["fac-ae53","fac-su120"],
    "encuadre": "sin medir",
-   "contradicciones": [
-    {
-     "asunto": "extremos del tramo de 1953",
-     "afirmaciones": [
-      {
-       "dice": "«del primer tramo de la Autopista del Este hasta Chacao (1953)»",
-       "fuente": "fac-p438"
-      },
-      {
-       "dice": "«en 1953 se inaugura la Autopista del Este que iría justamente desde Puente Mohedano hasta La Carlota»",
-       "fuente": "fac-su120"
-      }
-     ],
-     "estado": "pendiente"
-    }
-   ],
-   "desconocido": [
-    "Día y mes de la inauguración de 1953",
-    "Fecha del nombre «Francisco Fajardo»: hacia 1970 ya lo llevaba",
-    "Acto oficial del cambio de nombre de 2020: solo lo da una fuente terciaria"
-   ],
+   "contradicciones": [{"asunto":"extremos del tramo de 1953","afirmaciones":[{"dice":"«del primer tramo de la Autopista del Este hasta Chacao (1953)»","fuente":"fac-p438"},{"dice":"«en 1953 se inaugura la Autopista del Este que iría justamente desde Puente Mohedano hasta La Carlota»","fuente":"fac-su120"}],"estado":"pendiente"}],
+   "desconocido": ["Día y mes de la inauguración de 1953","Fecha del nombre «Francisco Fajardo»: hacia 1970 ya lo llevaba","Acto oficial del cambio de nombre de 2020: solo lo da una fuente terciaria"],
    "sistema": "Autopista del Este",
    "predecesora": "Ninguna: corre por la vega del Guaire",
-   "nombres_osm": [
-    "Autopista Gran Cacique Guaicaipuro"
-   ],
+   "nombres_osm": ["Autopista Gran Cacique Guaicaipuro"],
    "nota": "La capa Hoy la trae entera con su nombre actual: no separa las etapas de 1953, 1955, 1956 y 1970.",
-   "nombres": [
-    {
-     "nombre": "Autopista del Este",
-     "desde": 1953,
-     "hasta": null,
-     "fuentes": [
-      "fac-ae53"
-     ]
-    },
-    {
-     "nombre": "Autopista Francisco Fajardo",
-     "desde": null,
-     "hasta": 2020,
-     "fuentes": [
-      "fac-su120",
-      "wiki-aff"
-     ]
-    },
-    {
-     "nombre": "Autopista Gran Cacique Guaicaipuro",
-     "desde": 2020,
-     "hasta": null,
-     "fuentes": [
-      "wiki-aff"
-     ]
-    }
-   ],
+   "nombres": [{"nombre":"Autopista del Este","desde":1953,"hasta":null,"fuentes":["fac-ae53"]},{"nombre":"Autopista Francisco Fajardo","desde":null,"hasta":2020,"fuentes":["fac-su120","wiki-aff"]},{"nombre":"Autopista Gran Cacique Guaicaipuro","desde":2020,"hasta":null,"fuentes":["wiki-aff"]}],
    "cronologia": [
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1948,
-      "hasta": 1948
-     },
-     "dice": "Sale de la «Vía expresa Río Guaire» del plan de Moses",
-     "cita": "«lo que en el Plan de Moses se denominó “Vía expresa Río Guaire” daría pie al desarrollo de la […] “Autopista del Este”»",
-     "fuentes": [
-      "fac-su70"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1953,
-      "hasta": 1953
-     },
-     "dice": "Se inaugura en 1953",
-     "cita": "«Se termina la construcción e inaugura la Autopista del Este»",
-     "fuentes": [
-      "fac-ae53"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1954,
-      "hasta": 1954
-     },
-     "dice": "Distribuidor Plaza Venezuela",
-     "cita": "«los distribuidores Plaza Venezuela (1954), Altamira (1955) y La Carlota (1956) sobre la autopista del Este»",
-     "fuentes": [
-      "fac-p438"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "reforma",
-     "fecha": {
-      "desde": 1955,
-      "hasta": 1955
-     },
-     "dice": "Ampliación hasta el distribuidor Altamira",
-     "cita": "«Se concluye la ampliación de la Autopista del Este hasta llegar al distribuidor Altamira»",
-     "fuentes": [
-      "fac-ae55a"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "nombre",
-     "fecha": {
-      "desde": 2020,
-      "hasta": 2020
-     },
-     "dice": "En octubre de 2020 pasa a llamarse «Gran Cacique Guaicaipuro Jefe de Jefes»",
-     "cita": "«En octubre de 2020, el presidente Nicolás Maduro aceptó la propuesta […] llamar a partir de ahora “Gran Cacique Guaicaipuro Jefe de Jefes”»",
-     "fuentes": [
-      "wiki-aff"
-     ],
-     "certeza": "dudosa"
-    }
+    {"tipo":"proyecto","fecha":{"desde":1948,"hasta":1948},"dice":"Sale de la «Vía expresa Río Guaire» del plan de Moses","cita":"«lo que en el Plan de Moses se denominó “Vía expresa Río Guaire” daría pie al desarrollo de la […] “Autopista del Este”»","fuentes":["fac-su70"],"certeza":"documentada"},
+    {"tipo":"apertura","fecha":{"desde":1953,"hasta":1953},"dice":"Se inaugura en 1953","cita":"«Se termina la construcción e inaugura la Autopista del Este»","fuentes":["fac-ae53"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1954,"hasta":1954},"dice":"Distribuidor Plaza Venezuela","cita":"«los distribuidores Plaza Venezuela (1954), Altamira (1955) y La Carlota (1956) sobre la autopista del Este»","fuentes":["fac-p438"],"certeza":"documentada"},
+    {"tipo":"reforma","fecha":{"desde":1955,"hasta":1955},"dice":"Ampliación hasta el distribuidor Altamira","cita":"«Se concluye la ampliación de la Autopista del Este hasta llegar al distribuidor Altamira»","fuentes":["fac-ae55a"],"certeza":"documentada"},
+    {"tipo":"nombre","fecha":{"desde":2020,"hasta":2020},"dice":"En octubre de 2020 pasa a llamarse «Gran Cacique Guaicaipuro Jefe de Jefes»","cita":"«En octubre de 2020, el presidente Nicolás Maduro aceptó la propuesta […] llamar a partir de ahora “Gran Cacique Guaicaipuro Jefe de Jefes”»","fuentes":["wiki-aff"],"certeza":"dudosa"}
    ],
    "etapas": []
   },
-  {
-   "id": "moderno:autopista-del-este-enlace-bolivar",
-   "tipo": "distribuidor",
-   "nombre": "Enlace de la avenida Bolívar con la Autopista del Este",
-   "desde": 1954,
-   "fuentesCronologia": [
-    "fac-ae54"
-   ],
-   "encuadre": "sin medir",
-   "contradicciones": [],
-   "desconocido": [],
-   "sistema": "Autopista del Este",
-   "predecesora": "No aplica",
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1954,
-      "hasta": 1954
-     },
-     "dice": "Se pone en servicio en 1954",
-     "cita": "«concluye la construcción y pone en servicio el enlace de la avenida Bolívar con la Autopista del Este»",
-     "fuentes": [
-      "fac-ae54",
-      "fac-p438"
-     ],
-     "certeza": "documentada"
-    }
-   ],
-   "etapas": []
-  },
+  {"id":"moderno:autopista-del-este-enlace-bolivar","tipo":"distribuidor","nombre":"Enlace de la avenida Bolívar con la Autopista del Este","desde":1954,"fuentesCronologia":["fac-ae54"],"encuadre":"sin medir","contradicciones":[],"desconocido":[],"sistema":"Autopista del Este","predecesora":"No aplica","cronologia":[{"tipo":"apertura","fecha":{"desde":1954,"hasta":1954},"dice":"Se pone en servicio en 1954","cita":"«concluye la construcción y pone en servicio el enlace de la avenida Bolívar con la Autopista del Este»","fuentes":["fac-ae54","fac-p438"],"certeza":"documentada"}],"etapas":[]},
   {
    "id": "moderno:autopista-del-este-1955",
    "tipo": "autopista",
    "nombre": "Autopista del Este, prolongación de La Carlota a Petare",
    "desde": 1955,
-   "fuentesCronologia": [
-    "fac-ae55b"
-   ],
+   "fuentesCronologia": ["fac-ae55b"],
    "encuadre": "sin medir",
-   "contradicciones": [
-    {
-     "asunto": "extremo este de 1955",
-     "afirmaciones": [
-      {
-       "dice": "«entre La Carlota y Petare (Calle San Francisco)»",
-       "fuente": "fac-ae55b"
-      },
-      {
-       "dice": "«en 1955 se prolongará hasta Petare-La California, canalizándose a la vez buena parte del río Guaire»",
-       "fuente": "fac-su120"
-      }
-     ],
-     "estado": "pendiente"
-    }
-   ],
+   "contradicciones": [{"asunto":"extremo este de 1955","afirmaciones":[{"dice":"«entre La Carlota y Petare (Calle San Francisco)»","fuente":"fac-ae55b"},{"dice":"«en 1955 se prolongará hasta Petare-La California, canalizándose a la vez buena parte del río Guaire»","fuente":"fac-su120"}],"estado":"pendiente"}],
    "desconocido": [],
    "sistema": "Autopista del Este",
    "predecesora": "Ninguna documentada",
    "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1955,
-      "hasta": 1955
-     },
-     "dice": "Se inaugura en diciembre de 1955, tras cinco meses de obra",
-     "cita": "«En el mes de diciembre, luego de 5 meses de trabajo, se inaugura la prolongación […] entre La Carlota y Petare (Calle San Francisco)»",
-     "fuentes": [
-      "fac-ae55b"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1956,
-      "hasta": 1956
-     },
-     "dice": "En agosto de 1956 se completan el distribuidor La Carlota y el enlace con la Francisco de Miranda",
-     "cita": "«En agoste de 1956 se completó el Distribuidor La Carlota y el enlace La Carlota-Avenida Francisco de Miranda»",
-     "fuentes": [
-      "fac-ae55b"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1963,
-      "hasta": 1963
-     },
-     "dice": "En 1963 se concluye el distribuidor Los Ruices",
-     "cita": "«concluye la construcción del distribuidor de tránsito Los Ruices»",
-     "fuentes": [
-      "fac-rui"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"apertura","fecha":{"desde":1955,"hasta":1955},"dice":"Se inaugura en diciembre de 1955, tras cinco meses de obra","cita":"«En el mes de diciembre, luego de 5 meses de trabajo, se inaugura la prolongación […] entre La Carlota y Petare (Calle San Francisco)»","fuentes":["fac-ae55b"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1956,"hasta":1956},"dice":"En agosto de 1956 se completan el distribuidor La Carlota y el enlace con la Francisco de Miranda","cita":"«En agoste de 1956 se completó el Distribuidor La Carlota y el enlace La Carlota-Avenida Francisco de Miranda»","fuentes":["fac-ae55b"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1963,"hasta":1963},"dice":"En 1963 se concluye el distribuidor Los Ruices","cita":"«concluye la construcción del distribuidor de tránsito Los Ruices»","fuentes":["fac-rui"],"certeza":"documentada"}
    ],
    "etapas": []
   },
@@ -1325,59 +234,13 @@
    "tipo": "autopista",
    "nombre": "Autopista del Este, de Puente Mohedano a El Paraíso",
    "desde": 1956,
-   "fuentesCronologia": [
-    "fac-p438"
-   ],
+   "fuentesCronologia": ["fac-p438"],
    "encuadre": "sin medir",
-   "contradicciones": [
-    {
-     "asunto": "cuándo avanza hacia el oeste",
-     "afirmaciones": [
-      {
-       "dice": "«y en 1956 desde Puente Mohedano a El Paraíso en sentido oeste»",
-       "fuente": "fac-p438"
-      },
-      {
-       "dice": "«a partir de 1958 se adelanta firmemente la prolongación de la autopista hacia el oeste»",
-       "fuente": "fac-su120"
-      }
-     ],
-     "estado": "pendiente"
-    }
-   ],
-   "desconocido": [
-    "Ninguna fuente leída nombra una «autopista del Oeste» ni un tramo a Antímano"
-   ],
+   "contradicciones": [{"asunto":"cuándo avanza hacia el oeste","afirmaciones":[{"dice":"«y en 1956 desde Puente Mohedano a El Paraíso en sentido oeste»","fuente":"fac-p438"},{"dice":"«a partir de 1958 se adelanta firmemente la prolongación de la autopista hacia el oeste»","fuente":"fac-su120"}],"estado":"pendiente"}],
+   "desconocido": ["Ninguna fuente leída nombra una «autopista del Oeste» ni un tramo a Antímano"],
    "sistema": "Autopista del Este",
    "predecesora": "Ninguna documentada",
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1956,
-      "hasta": 1956
-     },
-     "dice": "En 1956 llega a El Paraíso",
-     "cita": "«y en 1956 desde Puente Mohedano a El Paraíso en sentido oeste»",
-     "fuentes": [
-      "fac-p438"
-     ],
-     "certeza": "dudosa"
-    },
-    {
-     "tipo": "demolicion",
-     "fecha": {
-      "desde": 1970,
-      "hasta": 1970
-     },
-     "dice": "En 1970 desaparecen el Puente Mohedano y el edificio de A. Planchart y Cía.",
-     "cita": "«Será el momento en que desaparece el puente Mohedano y […] la demolición del edificio de A. Planchart y Cia.»",
-     "fuentes": [
-      "fac-su120"
-     ],
-     "certeza": "documentada"
-    }
-   ],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1956,"hasta":1956},"dice":"En 1956 llega a El Paraíso","cita":"«y en 1956 desde Puente Mohedano a El Paraíso en sentido oeste»","fuentes":["fac-p438"],"certeza":"dudosa"},{"tipo":"demolicion","fecha":{"desde":1970,"hasta":1970},"dice":"En 1970 desaparecen el Puente Mohedano y el edificio de A. Planchart y Cía.","cita":"«Será el momento en que desaparece el puente Mohedano y […] la demolición del edificio de A. Planchart y Cia.»","fuentes":["fac-su120"],"certeza":"documentada"}],
    "etapas": []
   },
   {
@@ -1385,45 +248,13 @@
    "tipo": "distribuidor",
    "nombre": "Distribuidor El Pulpo",
    "desde": 1961,
-   "fuentesCronologia": [
-    "fac-pulpo"
-   ],
+   "fuentesCronologia": ["fac-pulpo"],
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": [
-    "Fechas de cada etapa"
-   ],
+   "desconocido": ["Fechas de cada etapa"],
    "sistema": "Autopista del Este",
    "predecesora": "No aplica",
-   "cronologia": [
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1958,
-      "hasta": 1958
-     },
-     "dice": "La obra empieza en septiembre de 1958",
-     "cita": "«La obra había sido iniciada en septiembre de 1958 por una sola empresa: VOLCA, C.A.»",
-     "fuentes": [
-      "fac-pulpo"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1961,
-      "hasta": 1961
-     },
-     "dice": "Entra en servicio por etapas y se termina en 1961: une la autopista del Este con la Valle–Coche",
-     "cita": "«Se puso en servicio por etapas terminándose completamente en 1961.»",
-     "fuentes": [
-      "fac-pulpo",
-      "fac-p438"
-     ],
-     "certeza": "documentada"
-    }
-   ],
+   "cronologia": [{"tipo":"obra","fecha":{"desde":1958,"hasta":1958},"dice":"La obra empieza en septiembre de 1958","cita":"«La obra había sido iniciada en septiembre de 1958 por una sola empresa: VOLCA, C.A.»","fuentes":["fac-pulpo"],"certeza":"documentada"},{"tipo":"apertura","fecha":{"desde":1961,"hasta":1961},"dice":"Entra en servicio por etapas y se termina en 1961: une la autopista del Este con la Valle–Coche","cita":"«Se puso en servicio por etapas terminándose completamente en 1961.»","fuentes":["fac-pulpo","fac-p438"],"certeza":"documentada"}],
    "etapas": []
   },
   {
@@ -1431,44 +262,13 @@
    "tipo": "distribuidor",
    "nombre": "Distribuidor La Araña",
    "desde": 1966,
-   "fuentesCronologia": [
-    "fac-su70"
-   ],
+   "fuentesCronologia": ["fac-su70"],
    "encuadre": "sin medir",
-   "contradicciones": [
-    {
-     "asunto": "años de la obra",
-     "afirmaciones": [
-      {
-       "dice": "«Raúl Leoni inaugurará “La Araña”, construido entre 1959 y 1966»",
-       "fuente": "fac-su70"
-      },
-      {
-       "dice": "«“La Araña” (1962-1968) que resolvería la conexión desde la autopista Francisco Fajardo con la Caracas-La Guaira»",
-       "fuente": "fac-p438"
-      }
-     ],
-     "estado": "pendiente"
-    }
-   ],
+   "contradicciones": [{"asunto":"años de la obra","afirmaciones":[{"dice":"«Raúl Leoni inaugurará “La Araña”, construido entre 1959 y 1966»","fuente":"fac-su70"},{"dice":"«“La Araña” (1962-1968) que resolvería la conexión desde la autopista Francisco Fajardo con la Caracas-La Guaira»","fuente":"fac-p438"}],"estado":"pendiente"}],
    "desconocido": [],
    "sistema": "Autopista del Este",
    "predecesora": "No aplica",
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1966,
-      "hasta": 1966
-     },
-     "dice": "Leoni lo inaugura; construido entre 1959 y 1966",
-     "cita": "«Raúl Leoni inaugurará “La Araña”, construido entre 1959 y 1966»",
-     "fuentes": [
-      "fac-su70"
-     ],
-     "certeza": "dudosa"
-    }
-   ],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1966,"hasta":1966},"dice":"Leoni lo inaugura; construido entre 1959 y 1966","cita":"«Raúl Leoni inaugurará “La Araña”, construido entre 1959 y 1966»","fuentes":["fac-su70"],"certeza":"dudosa"}],
    "etapas": []
   },
   {
@@ -1476,29 +276,13 @@
    "tipo": "autopista",
    "nombre": "Autopista La Araña–Caricuao",
    "desde": 1970,
-   "fuentesCronologia": [
-    "fac-p438"
-   ],
+   "fuentesCronologia": ["fac-p438"],
    "encuadre": "sin medir",
    "contradicciones": [],
    "desconocido": [],
    "sistema": "Autopista del Este",
    "predecesora": "Ninguna documentada",
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1970,
-      "hasta": 1970
-     },
-     "dice": "Diez kilómetros de La Araña a Caricuao, hechos en nueve meses",
-     "cita": "«El tramo propiamente dicho (de 10 kms) comienza en el núcleo central del Dispositivo La Araña […] y finaliza en Caricuao»",
-     "fuentes": [
-      "fac-p438"
-     ],
-     "certeza": "documentada"
-    }
-   ],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1970,"hasta":1970},"dice":"Diez kilómetros de La Araña a Caricuao, hechos en nueve meses","cita":"«El tramo propiamente dicho (de 10 kms) comienza en el núcleo central del Dispositivo La Araña […] y finaliza en Caricuao»","fuentes":["fac-p438"],"certeza":"documentada"}],
    "etapas": []
   },
   {
@@ -1506,166 +290,37 @@
    "tipo": "distribuidor",
    "nombre": "Distribuidor El Ciempiés",
    "desde": 1972,
-   "fuentesCronologia": [
-    "fac-su70"
-   ],
+   "fuentesCronologia": ["fac-su70"],
    "encuadre": "sin medir",
    "contradicciones": [],
    "desconocido": [],
    "sistema": "Autopista del Este",
    "predecesora": "No aplica",
    "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1972,
-      "hasta": 1972
-     },
-     "dice": "Caldera lo inaugura en 1972",
-     "cita": "«Rafael Caldera hará otro tanto con “El Ciempiés” en 1972 con José Curiel como su Ministro»",
-     "fuentes": [
-      "fac-su70"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1972,
-      "hasta": 1972
-     },
-     "dice": "El 23 de julio, según una fuente terciaria",
-     "cita": "«distribuidor vial inaugurado el 23 de julio de 1972»",
-     "fuentes": [
-      "wiki-cie"
-     ],
-     "certeza": "dudosa"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1972,
-      "hasta": 1972
-     },
-     "dice": "Incluye una rampa elevada y el Puente Veracruz II",
-     "cita": "«incluyó una rampa elevada y el Puente Veracruz II, que descongestionaba el antiguo Puente Veracruz»",
-     "fuentes": [
-      "fac-p438"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"apertura","fecha":{"desde":1972,"hasta":1972},"dice":"Caldera lo inaugura en 1972","cita":"«Rafael Caldera hará otro tanto con “El Ciempiés” en 1972 con José Curiel como su Ministro»","fuentes":["fac-su70"],"certeza":"documentada"},
+    {"tipo":"apertura","fecha":{"desde":1972,"hasta":1972},"dice":"El 23 de julio, según una fuente terciaria","cita":"«distribuidor vial inaugurado el 23 de julio de 1972»","fuentes":["wiki-cie"],"certeza":"dudosa"},
+    {"tipo":"obra","fecha":{"desde":1972,"hasta":1972},"dice":"Incluye una rampa elevada y el Puente Veracruz II","cita":"«incluyó una rampa elevada y el Puente Veracruz II, que descongestionaba el antiguo Puente Veracruz»","fuentes":["fac-p438"],"certeza":"documentada"}
    ],
    "etapas": []
   },
-  {
-   "id": "moderno:autopista-del-este-segundo-piso",
-   "tipo": "viaducto",
-   "nombre": "Autopista del Este, «segundo piso»",
-   "desde": 1973,
-   "fuentesCronologia": [
-    "fac-ae73"
-   ],
-   "encuadre": "sin medir",
-   "contradicciones": [],
-   "desconocido": [],
-   "sistema": "Autopista del Este",
-   "predecesora": "No aplica",
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1973,
-      "hasta": 1973
-     },
-     "dice": "Se abre en abril de 1973: 1.185 m de largo y 27 m de ancho",
-     "cita": "«En el mes de abril el Ministerio de Obras Públicas […] concluye y abre al tránsito el «segundo piso»»",
-     "fuentes": [
-      "fac-ae73"
-     ],
-     "certeza": "documentada"
-    }
-   ],
-   "etapas": []
-  },
+  {"id":"moderno:autopista-del-este-segundo-piso","tipo":"viaducto","nombre":"Autopista del Este, «segundo piso»","desde":1973,"fuentesCronologia":["fac-ae73"],"encuadre":"sin medir","contradicciones":[],"desconocido":[],"sistema":"Autopista del Este","predecesora":"No aplica","cronologia":[{"tipo":"apertura","fecha":{"desde":1973,"hasta":1973},"dice":"Se abre en abril de 1973: 1.185 m de largo y 27 m de ancho","cita":"«En el mes de abril el Ministerio de Obras Públicas […] concluye y abre al tránsito el «segundo piso»»","fuentes":["fac-ae73"],"certeza":"documentada"}],"etapas":[]},
   {
    "id": "moderno:autopista-valle-coche",
    "tipo": "autopista",
    "nombre": "Autopista Valle–Coche",
    "desde": 1955,
-   "fuentesCronologia": [
-    "fac-p438"
-   ],
+   "fuentesCronologia": ["fac-p438"],
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": [
-    "Día y mes de la apertura de 1955",
-    "Extremos en 1955: El Pulpo, su extremo norte de hoy, es de 1958–1961",
-    "Longitud, ente y empresa"
-   ],
+   "desconocido": ["Día y mes de la apertura de 1955","Extremos en 1955: El Pulpo, su extremo norte de hoy, es de 1958–1961","Longitud, ente y empresa"],
    "sistema": "Autopista Valle–Coche",
    "predecesora": "Ninguna documentada",
-   "nombres_osm": [
-    "Autopista Valle - Coche"
-   ],
-   "nombres": [
-    {
-     "nombre": "Autopista Valle–Coche",
-     "desde": null,
-     "hasta": null,
-     "fuentes": [
-      "fac-p438"
-     ]
-    },
-    {
-     "nombre": "Autopista El Valle",
-     "desde": null,
-     "hasta": null,
-     "fuentes": [
-      "fac-ban"
-     ]
-    }
-   ],
+   "nombres_osm": ["Autopista Valle - Coche"],
+   "nombres": [{"nombre":"Autopista Valle–Coche","desde":null,"hasta":null,"fuentes":["fac-p438"]},{"nombre":"Autopista El Valle","desde":null,"hasta":null,"fuentes":["fac-ban"]}],
    "cronologia": [
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1951,
-      "hasta": 1951
-     },
-     "dice": "Sale de la «Acometida del Sur» del Plan Municipal de Vialidad",
-     "cita": "«“Acometida del Sur” germen de lo que sería la Autopista Valle-Coche»",
-     "fuentes": [
-      "fac-su70"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1955,
-      "hasta": 1955
-     },
-     "dice": "Construida en 1955",
-     "cita": "«sin dejar de nombrar la construcción de la autopista Valle-Coche (1955)»",
-     "fuentes": [
-      "fac-p438",
-      "wiki-vc"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1956,
-      "hasta": 1956
-     },
-     "dice": "El distribuidor La Bandera se inaugura el 4 de diciembre de 1956",
-     "cita": "«El día martes 4 de diciembre el General Marcos Pérez Jiménez […] inauguraron el Distribuidor de Tránsito La Bandera»",
-     "fuentes": [
-      "fac-ban"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"proyecto","fecha":{"desde":1951,"hasta":1951},"dice":"Sale de la «Acometida del Sur» del Plan Municipal de Vialidad","cita":"«“Acometida del Sur” germen de lo que sería la Autopista Valle-Coche»","fuentes":["fac-su70"],"certeza":"documentada"},
+    {"tipo":"apertura","fecha":{"desde":1955,"hasta":1955},"dice":"Construida en 1955","cita":"«sin dejar de nombrar la construcción de la autopista Valle-Coche (1955)»","fuentes":["fac-p438","wiki-vc"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1956,"hasta":1956},"dice":"El distribuidor La Bandera se inaugura el 4 de diciembre de 1956","cita":"«El día martes 4 de diciembre el General Marcos Pérez Jiménez […] inauguraron el Distribuidor de Tránsito La Bandera»","fuentes":["fac-ban"],"certeza":"documentada"}
    ],
    "etapas": []
   },
@@ -1674,94 +329,20 @@
    "tipo": "avenida",
    "nombre": "Cota Mil, tramo de Maripérez a La Florida",
    "desde": 1956,
-   "fuentesCronologia": [
-    "fac-su88"
-   ],
+   "fuentesCronologia": ["fac-su88"],
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": [
-    "Inicio de las obras de cada tramo",
-    "Acto que le da el nombre oficial"
-   ],
+   "desconocido": ["Inicio de las obras de cada tramo","Acto que le da el nombre oficial"],
    "sistema": "Avenida Boyacá (Cota Mil)",
    "predecesora": "Ninguna: ladera del Ávila",
-   "nombres_osm": [
-    "Avenida Boyacá",
-    "Avenida Cota Mil"
-   ],
+   "nombres_osm": ["Avenida Boyacá","Avenida Cota Mil"],
    "nota": "La capa Hoy trae la avenida entera: no separa las etapas de 1956, 1962, 1971 y 1973.",
-   "nombres": [
-    {
-     "nombre": "Cota Mil",
-     "desde": null,
-     "hasta": null,
-     "fuentes": [
-      "fac-su88"
-     ]
-    },
-    {
-     "nombre": "Avenida Boyacá",
-     "desde": 1971,
-     "hasta": null,
-     "fuentes": [
-      "fac-boy71"
-     ]
-    }
-   ],
+   "nombres": [{"nombre":"Cota Mil","desde":null,"hasta":null,"fuentes":["fac-su88"]},{"nombre":"Avenida Boyacá","desde":1971,"hasta":null,"fuentes":["fac-boy71"]}],
    "cronologia": [
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1939,
-      "hasta": 1939
-     },
-     "dice": "Perimetral norte del Plan Rotival",
-     "cita": "«proyectada en la década de los años cuarenta del siglo XX, e incluida en el Plan Rotival»",
-     "fuentes": [
-      "fac-dbar"
-     ],
-     "certeza": "dudosa"
-    },
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1952,
-      "hasta": 1952
-     },
-     "dice": "En 1952 se intensifican los estudios",
-     "cita": "«En 1952 se intensificaron los estudios y levantamientos»",
-     "fuentes": [
-      "fac-su88"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1956,
-      "hasta": 1956
-     },
-     "dice": "En 1956 se abren los primeros 1.300 m, de Maripérez a La Florida",
-     "cita": "«se abran los primeros mil trescientos metros de la Cota Mil, que unirían Maripérez (avenida Principal) con La Florida (avenida Los Pinos)»",
-     "fuentes": [
-      "fac-su88",
-      "fac-p438"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "reforma",
-     "fecha": {
-      "desde": 1962,
-      "hasta": 1962
-     },
-     "dice": "Rectificado en 1962",
-     "cita": "«Cota Mil. Tramo Maripérez-La Florida abierto en 1956 y rectificado en 1962.»",
-     "fuentes": [
-      "fac-su88"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"proyecto","fecha":{"desde":1939,"hasta":1939},"dice":"Perimetral norte del Plan Rotival","cita":"«proyectada en la década de los años cuarenta del siglo XX, e incluida en el Plan Rotival»","fuentes":["fac-dbar"],"certeza":"dudosa"},
+    {"tipo":"proyecto","fecha":{"desde":1952,"hasta":1952},"dice":"En 1952 se intensifican los estudios","cita":"«En 1952 se intensificaron los estudios y levantamientos»","fuentes":["fac-su88"],"certeza":"documentada"},
+    {"tipo":"apertura","fecha":{"desde":1956,"hasta":1956},"dice":"En 1956 se abren los primeros 1.300 m, de Maripérez a La Florida","cita":"«se abran los primeros mil trescientos metros de la Cota Mil, que unirían Maripérez (avenida Principal) con La Florida (avenida Los Pinos)»","fuentes":["fac-su88","fac-p438"],"certeza":"documentada"},
+    {"tipo":"reforma","fecha":{"desde":1962,"hasta":1962},"dice":"Rectificado en 1962","cita":"«Cota Mil. Tramo Maripérez-La Florida abierto en 1956 y rectificado en 1962.»","fuentes":["fac-su88"],"certeza":"documentada"}
    ],
    "etapas": []
   },
@@ -1770,30 +351,13 @@
    "tipo": "avenida",
    "nombre": "Cota Mil, de Maripérez a San Bernardino",
    "desde": 1962,
-   "fuentesCronologia": [
-    "fac-su88"
-   ],
+   "fuentesCronologia": ["fac-su88"],
    "encuadre": "sin medir",
    "contradicciones": [],
    "desconocido": [],
    "sistema": "Avenida Boyacá (Cota Mil)",
    "predecesora": "Ninguna documentada",
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1962,
-      "hasta": 1962
-     },
-     "dice": "En 1962 se extiende hasta San Bernardino",
-     "cita": "«en 1962 se amplía su recorrido hasta San Bernardino y se rectifica en primer tramo entre Maripérez y La Florida»",
-     "fuentes": [
-      "fac-su88",
-      "fac-p438"
-     ],
-     "certeza": "documentada"
-    }
-   ],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1962,"hasta":1962},"dice":"En 1962 se extiende hasta San Bernardino","cita":"«en 1962 se amplía su recorrido hasta San Bernardino y se rectifica en primer tramo entre Maripérez y La Florida»","fuentes":["fac-su88","fac-p438"],"certeza":"documentada"}],
    "etapas": []
   },
   {
@@ -1801,76 +365,18 @@
    "tipo": "avenida",
    "nombre": "Avenida Boyacá, tramo de La Castellana a El Marqués",
    "desde": 1971,
-   "fuentesCronologia": [
-    "fac-boy71",
-    "fac-su88"
-   ],
+   "fuentesCronologia": ["fac-boy71","fac-su88"],
    "encuadre": "sin medir",
    "contradicciones": [
-    {
-     "asunto": "año del tramo La Castellana–El Marqués",
-     "afirmaciones": [
-      {
-       "dice": "«El tramo construido, que tiene 6 km de longitud, une las urbanizaciones La Castellana con El Marqués» (entrada de 1971)",
-       "fuente": "fac-boy71"
-      },
-      {
-       "dice": "Lo da por inaugurado en agosto de 1962",
-       "fuente": "blog-sigillo"
-      }
-     ],
-     "estado": "pendiente"
-    },
-    {
-     "asunto": "extremo oeste del tramo de 1971",
-     "afirmaciones": [
-      {
-       "dice": "«une las urbanizaciones La Castellana con El Marqués»",
-       "fuente": "fac-boy71"
-      },
-      {
-       "dice": "«en 1971 recibirá un sostenido impulso que le permitirá extenderse de La Florida a El Marqués»",
-       "fuente": "fac-p438"
-      }
-     ],
-     "estado": "pendiente"
-    }
+    {"asunto":"año del tramo La Castellana–El Marqués","afirmaciones":[{"dice":"«El tramo construido, que tiene 6 km de longitud, une las urbanizaciones La Castellana con El Marqués» (entrada de 1971)","fuente":"fac-boy71"},{"dice":"Lo da por inaugurado en agosto de 1962","fuente":"blog-sigillo"}],"estado":"pendiente"},
+    {"asunto":"extremo oeste del tramo de 1971","afirmaciones":[{"dice":"«une las urbanizaciones La Castellana con El Marqués»","fuente":"fac-boy71"},{"dice":"«en 1971 recibirá un sostenido impulso que le permitirá extenderse de La Florida a El Marqués»","fuente":"fac-p438"}],"estado":"pendiente"}
    ],
-   "desconocido": [
-    "Día de la apertura de 1971",
-    "Cuándo se abrió entre La Florida y La Castellana"
-   ],
+   "desconocido": ["Día de la apertura de 1971","Cuándo se abrió entre La Florida y La Castellana"],
    "sistema": "Avenida Boyacá (Cota Mil)",
    "predecesora": "Ninguna documentada",
    "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1971,
-      "hasta": 1971
-     },
-     "dice": "En 1971 se abren 6 km y la Cota Mil pasa a llamarse avenida Boyacá",
-     "cita": "«El tramo construido, que tiene 6 km de longitud, une las urbanizaciones La Castellana con El Marqués»",
-     "fuentes": [
-      "fac-boy71",
-      "fac-su88",
-      "fac-p438"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1971,
-      "hasta": 1971
-     },
-     "dice": "Distribuidores La Castellana, Altamira, Sebucán, Boleíta y El Marqués; viaductos Adolfo Ernst y Altamira",
-     "cita": "«dos estructuras elevadas: el Viaducto Adolfo Ernst (que pasa por Los Chorros) y el Viaducto Altamira»",
-     "fuentes": [
-      "fac-boy71"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"apertura","fecha":{"desde":1971,"hasta":1971},"dice":"En 1971 se abren 6 km y la Cota Mil pasa a llamarse avenida Boyacá","cita":"«El tramo construido, que tiene 6 km de longitud, une las urbanizaciones La Castellana con El Marqués»","fuentes":["fac-boy71","fac-su88","fac-p438"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1971,"hasta":1971},"dice":"Distribuidores La Castellana, Altamira, Sebucán, Boleíta y El Marqués; viaductos Adolfo Ernst y Altamira","cita":"«dos estructuras elevadas: el Viaducto Adolfo Ernst (que pasa por Los Chorros) y el Viaducto Altamira»","fuentes":["fac-boy71"],"certeza":"documentada"}
    ],
    "etapas": []
   },
@@ -1879,48 +385,13 @@
    "tipo": "avenida",
    "nombre": "Avenida Boyacá, de San Bernardino a la avenida Baralt",
    "desde": 1973,
-   "fuentesCronologia": [
-    "fac-su88"
-   ],
+   "fuentesCronologia": ["fac-su88"],
    "encuadre": "sin medir",
-   "contradicciones": [
-    {
-     "asunto": "longitud de la avenida",
-     "afirmaciones": [
-      {
-       "dice": "«Alcanzaría entonces la avenida Boyacá alrededor de 14 kilómetros de longitud»",
-       "fuente": "fac-su88"
-      },
-      {
-       "dice": "«tiene un recorrido de 14,5 kilómetros provista de diez distribuidores»",
-       "fuente": "fac-dbar"
-      },
-      {
-       "dice": "«teniendo una longitud aproximada de 13 km»",
-       "fuente": "wiki-boy"
-      }
-     ],
-     "estado": "pendiente"
-    }
-   ],
+   "contradicciones": [{"asunto":"longitud de la avenida","afirmaciones":[{"dice":"«Alcanzaría entonces la avenida Boyacá alrededor de 14 kilómetros de longitud»","fuente":"fac-su88"},{"dice":"«tiene un recorrido de 14,5 kilómetros provista de diez distribuidores»","fuente":"fac-dbar"},{"dice":"«teniendo una longitud aproximada de 13 km»","fuente":"wiki-boy"}],"estado":"pendiente"}],
    "desconocido": [],
    "sistema": "Avenida Boyacá (Cota Mil)",
    "predecesora": "Ninguna documentada",
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1973,
-      "hasta": 1973
-     },
-     "dice": "El último tramo se concluye en 1973, con su distribuidor",
-     "cita": "«concluido en 1973 correspondió al segmento entre San Bernardino y la Avenida Baralt que incluyó el distribuidor con ese nombre»",
-     "fuentes": [
-      "fac-su88"
-     ],
-     "certeza": "documentada"
-    }
-   ],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1973,"hasta":1973},"dice":"El último tramo se concluye en 1973, con su distribuidor","cita":"«concluido en 1973 correspondió al segmento entre San Bernardino y la Avenida Baralt que incluyó el distribuidor con ese nombre»","fuentes":["fac-su88"],"certeza":"documentada"}],
    "etapas": []
   },
   {
@@ -1928,140 +399,21 @@
    "tipo": "autopista",
    "nombre": "Autopista Caracas–La Guaira",
    "desde": 1953,
-   "fuentesCronologia": [
-    "fac-clg"
-   ],
+   "fuentesCronologia": ["fac-clg"],
    "encuadre": "sin medir",
-   "contradicciones": [
-    {
-     "asunto": "largo del túnel Boquerón 1",
-     "afirmaciones": [
-      {
-       "dice": "«los túneles Boquerón 1 de 1.800 metros de longitud y Boquerón 2 de 500 metros»",
-       "fuente": "fac-boq"
-      },
-      {
-       "dice": "«Túnel Boquerón 1 […] 1910 m […] Túnel Boquerón 2 […] 497 m»",
-       "fuente": "wiki-clg"
-      }
-     ],
-     "estado": "pendiente"
-    },
-    {
-     "asunto": "día de la inauguración del viaducto nuevo",
-     "afirmaciones": [
-      {
-       "dice": "«El 21 de junio se inaugura el nuevo Viaducto Caracas – La Guaira»",
-       "fuente": "fac-viad07"
-      },
-      {
-       "dice": "«El 22 de junio de 2007, fue inaugurado el Nuevo Viaducto N.º 1»",
-       "fuente": "wiki-clg"
-      }
-     ],
-     "estado": "pendiente"
-    }
-   ],
-   "desconocido": [
-    "Longitud total y extremos exactos",
-    "Nombres y medidas de los viaductos 2 y 3",
-    "El inicio de las obras en 1950 solo lo da una fuente terciaria"
-   ],
+   "contradicciones": [{"asunto":"largo del túnel Boquerón 1","afirmaciones":[{"dice":"«los túneles Boquerón 1 de 1.800 metros de longitud y Boquerón 2 de 500 metros»","fuente":"fac-boq"},{"dice":"«Túnel Boquerón 1 […] 1910 m […] Túnel Boquerón 2 […] 497 m»","fuente":"wiki-clg"}],"estado":"pendiente"},{"asunto":"día de la inauguración del viaducto nuevo","afirmaciones":[{"dice":"«El 21 de junio se inaugura el nuevo Viaducto Caracas – La Guaira»","fuente":"fac-viad07"},{"dice":"«El 22 de junio de 2007, fue inaugurado el Nuevo Viaducto N.º 1»","fuente":"wiki-clg"}],"estado":"pendiente"}],
+   "desconocido": ["Longitud total y extremos exactos","Nombres y medidas de los viaductos 2 y 3","El inicio de las obras en 1950 solo lo da una fuente terciaria"],
    "sistema": "Autopista Caracas–La Guaira",
    "predecesora": "Ninguna. La carretera vieja de 1845 es otra vía y corre aparte",
-   "nombres_osm": [
-    "Autopista Caracas - La Guaira"
-   ],
-   "nombres": [
-    {
-     "nombre": "Autopista Caracas–La Guaira",
-     "desde": 1953,
-     "hasta": null,
-     "fuentes": [
-      "fac-clg"
-     ]
-    }
-   ],
+   "nombres_osm": ["Autopista Caracas - La Guaira"],
+   "nombres": [{"nombre":"Autopista Caracas–La Guaira","desde":1953,"hasta":null,"fuentes":["fac-clg"]}],
    "cronologia": [
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1945,
-      "hasta": 1945
-     },
-     "dice": "Estudios preliminares desde 1945",
-     "cita": "«Desde que se comenzaron los estudios preliminares (1945) hasta que se inaiguró (1953) transcurrieron 8 años.»",
-     "fuentes": [
-      "fac-clg"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1950,
-      "hasta": 1950
-     },
-     "dice": "Las obras empiezan en enero de 1950, según una fuente terciaria",
-     "cita": "«se iniciaron los trabajos de construcción en enero de 1950»",
-     "fuentes": [
-      "wiki-clg"
-     ],
-     "certeza": "dudosa"
-    },
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1953,
-      "hasta": 1953
-     },
-     "dice": "Pérez Jiménez la inaugura el 2 de diciembre de 1953",
-     "cita": "«El 2 de diciembre el presidente Marcos Pérez Jiménez inaugura la Autopista Caracas-La Guaira.»",
-     "fuentes": [
-      "fac-clg"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1953,
-      "hasta": 1953
-     },
-     "dice": "Túneles Boquerón 1 y Boquerón 2",
-     "cita": "«los túneles Boquerón 1 de 1.800 metros de longitud y Boquerón 2 de 500 metros»",
-     "fuentes": [
-      "fac-boq"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1953,
-      "hasta": 1953
-     },
-     "dice": "Tres viaductos sobre la quebrada de Tacagua, de Freyssinet y Campenon Bernard",
-     "cita": "«los viaductos diseñados por Eugène Freyssinet y construidos por la empresa francesa Campenon Bernard para la autopista Caracas-La Guaira»",
-     "fuentes": [
-      "fac-su128",
-      "wiki-clg"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "reforma",
-     "fecha": {
-      "desde": 2007,
-      "hasta": 2007
-     },
-     "dice": "El viaducto 1 colapsa en 2006; el nuevo, de 803 m, se inaugura en junio de 2007",
-     "cita": "«El 21 de junio se inaugura el nuevo Viaducto Caracas – La Guaira […] Tiene una longitud de 803 metros»",
-     "fuentes": [
-      "fac-viad07"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"proyecto","fecha":{"desde":1945,"hasta":1945},"dice":"Estudios preliminares desde 1945","cita":"«Desde que se comenzaron los estudios preliminares (1945) hasta que se inaiguró (1953) transcurrieron 8 años.»","fuentes":["fac-clg"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1950,"hasta":1950},"dice":"Las obras empiezan en enero de 1950, según una fuente terciaria","cita":"«se iniciaron los trabajos de construcción en enero de 1950»","fuentes":["wiki-clg"],"certeza":"dudosa"},
+    {"tipo":"apertura","fecha":{"desde":1953,"hasta":1953},"dice":"Pérez Jiménez la inaugura el 2 de diciembre de 1953","cita":"«El 2 de diciembre el presidente Marcos Pérez Jiménez inaugura la Autopista Caracas-La Guaira.»","fuentes":["fac-clg"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1953,"hasta":1953},"dice":"Túneles Boquerón 1 y Boquerón 2","cita":"«los túneles Boquerón 1 de 1.800 metros de longitud y Boquerón 2 de 500 metros»","fuentes":["fac-boq"],"certeza":"documentada"},
+    {"tipo":"obra","fecha":{"desde":1953,"hasta":1953},"dice":"Tres viaductos sobre la quebrada de Tacagua, de Freyssinet y Campenon Bernard","cita":"«los viaductos diseñados por Eugène Freyssinet y construidos por la empresa francesa Campenon Bernard para la autopista Caracas-La Guaira»","fuentes":["fac-su128","wiki-clg"],"certeza":"documentada"},
+    {"tipo":"reforma","fecha":{"desde":2007,"hasta":2007},"dice":"El viaducto 1 colapsa en 2006; el nuevo, de 803 m, se inaugura en junio de 2007","cita":"«El 21 de junio se inaugura el nuevo Viaducto Caracas – La Guaira […] Tiene una longitud de 803 metros»","fuentes":["fac-viad07"],"certeza":"documentada"}
    ],
    "etapas": []
   },
@@ -2070,43 +422,14 @@
    "tipo": "carretera",
    "nombre": "Carretera vieja Caracas–La Guaira",
    "desde": 1845,
-   "fuentesCronologia": [
-    "wiki-cv"
-   ],
+   "fuentesCronologia": ["wiki-cv"],
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": [
-    "Su trazado dentro de la hoja del sitio: nadie lo leyó en el plano de 1908 del catálogo (fuentes/mapas/1908-archiveorg-laguaira-caracas-vicinity-wardept)",
-    "Una fuente que no sea terciaria"
-   ],
+   "desconocido": ["Su trazado dentro de la hoja del sitio: nadie lo leyó en el plano de 1908 del catálogo (fuentes/mapas/1908-archiveorg-laguaira-caracas-vicinity-wardept)","Una fuente que no sea terciaria"],
    "sistema": "Autopista Caracas–La Guaira",
    "predecesora": "El camino colonial, que tampoco es esta carretera",
    "nota": "No es posterior a 1946: está aquí para que nadie la confunda con la autopista de 1953. Su única fuente es terciaria.",
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1845,
-      "hasta": 1845
-     },
-     "dice": "Soublette la inaugura el 14 de enero de 1845: 37 km y unos 6 m de ancho",
-     "cita": "«la inauguró el presidente Carlos Soublette en enero de 1845 de 37 kilómetros de longitud y aproximadamente 6 metros de ancho»",
-     "fuentes": [
-      "wiki-cv"
-     ],
-     "certeza": "dudosa"
-    },
-    {
-     "tipo": "reforma",
-     "fecha": null,
-     "dice": "Mejoras en 1871, 1883, 1911–1912 y 1925",
-     "cita": "«con diferentes adaptaciones y mejoras que se realizaron en 1871, 1883, 1911-1912 y 1925»",
-     "fuentes": [
-      "wiki-cv"
-     ],
-     "certeza": "dudosa"
-    }
-   ],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1845,"hasta":1845},"dice":"Soublette la inaugura el 14 de enero de 1845: 37 km y unos 6 m de ancho","cita":"«la inauguró el presidente Carlos Soublette en enero de 1845 de 37 kilómetros de longitud y aproximadamente 6 metros de ancho»","fuentes":["wiki-cv"],"certeza":"dudosa"},{"tipo":"reforma","fecha":null,"dice":"Mejoras en 1871, 1883, 1911–1912 y 1925","cita":"«con diferentes adaptaciones y mejoras que se realizaron en 1871, 1883, 1911-1912 y 1925»","fuentes":["wiki-cv"],"certeza":"dudosa"}],
    "etapas": []
   },
   {
@@ -2114,98 +437,20 @@
    "tipo": "avenida",
    "nombre": "Avenida Andrés Bello",
    "desde": 1952,
-   "fuentesCronologia": [
-    "fac-su82"
-   ],
+   "fuentesCronologia": ["fac-su82"],
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": [
-    "Fechas por tramo: la fuente da 1952 para el conjunto",
-    "Inicio de las obras, longitud y ancho",
-    "Si algún tramo estaba en uso antes de 1952"
-   ],
+   "desconocido": ["Fechas por tramo: la fuente da 1952 para el conjunto","Inicio de las obras, longitud y ancho","Si algún tramo estaba en uso antes de 1952"],
    "sistema": "Avenidas del este",
    "predecesora": "No documentada. La fuente pone «definitiva» y «oficial» entre comillas: pudo usarse antes, sin fecha",
-   "nombres_osm": [
-    "Avenida Andrés Bello",
-    "Elevado de la Andrés Bello"
-   ],
-   "nombres": [
-    {
-     "nombre": "Avenida Andrés Bello",
-     "desde": null,
-     "hasta": null,
-     "fuentes": [
-      "fac-su82"
-     ]
-    }
-   ],
+   "nombres_osm": ["Avenida Andrés Bello","Elevado de la Andrés Bello"],
+   "nombres": [{"nombre":"Avenida Andrés Bello","desde":null,"hasta":null,"fuentes":["fac-su82"]}],
    "cronologia": [
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1936,
-      "hasta": 1939
-     },
-     "dice": "Figura en el plano de 1936 anexo al Plan Monumental de 1939",
-     "cita": "«“Plano general de la distribución de las nuevas avenidas, calles y carreteras” de 1936 (anexo al Plan Monumental de Caracas de 1939)»",
-     "fuentes": [
-      "fac-su82"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "proyecto",
-     "fecha": {
-      "desde": 1951,
-      "hasta": 1951
-     },
-     "dice": "Obra imprescindible del Plan Municipal de Vialidad",
-     "cita": "«incorporada por el Plan Municipal de Vialidad de 1951 como una de las 9 obras imprescindibles dentro de las 19»",
-     "fuentes": [
-      "fac-su82"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1952,
-      "hasta": 1952
-     },
-     "dice": "Apertura «definitiva» en 1952, de la redoma de la Vollmer a Los Jabillos",
-     "cita": "«La apertura definitiva de la avenida Andrés Bello en 1952 colaboró de manera importante al descongestionamiento del centro»",
-     "fuentes": [
-      "fac-su82"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "demolicion",
-     "fecha": {
-      "desde": 1952,
-      "hasta": 1952
-     },
-     "dice": "Corta el terreno del colegio y el oratorio de los Salesianos",
-     "cita": "«además de cortar el terreno de la escuela y del oratorio del Colegio de los Salesianos»",
-     "fuentes": [
-      "fac-su82"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "reforma",
-     "fecha": {
-      "desde": 1957,
-      "hasta": 1957
-     },
-     "dice": "En 1957 se abre la conexión con la Libertador, que afecta al Mercado Guaicaipuro",
-     "cita": "«El Mercado, que junto al colegio de los salesianos se vio afectado por la conexión abierta hacia la avenida Libertador en 1957»",
-     "fuentes": [
-      "fac-su82"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"proyecto","fecha":{"desde":1936,"hasta":1939},"dice":"Figura en el plano de 1936 anexo al Plan Monumental de 1939","cita":"«“Plano general de la distribución de las nuevas avenidas, calles y carreteras” de 1936 (anexo al Plan Monumental de Caracas de 1939)»","fuentes":["fac-su82"],"certeza":"documentada"},
+    {"tipo":"proyecto","fecha":{"desde":1951,"hasta":1951},"dice":"Obra imprescindible del Plan Municipal de Vialidad","cita":"«incorporada por el Plan Municipal de Vialidad de 1951 como una de las 9 obras imprescindibles dentro de las 19»","fuentes":["fac-su82"],"certeza":"documentada"},
+    {"tipo":"apertura","fecha":{"desde":1952,"hasta":1952},"dice":"Apertura «definitiva» en 1952, de la redoma de la Vollmer a Los Jabillos","cita":"«La apertura definitiva de la avenida Andrés Bello en 1952 colaboró de manera importante al descongestionamiento del centro»","fuentes":["fac-su82"],"certeza":"documentada"},
+    {"tipo":"demolicion","fecha":{"desde":1952,"hasta":1952},"dice":"Corta el terreno del colegio y el oratorio de los Salesianos","cita":"«además de cortar el terreno de la escuela y del oratorio del Colegio de los Salesianos»","fuentes":["fac-su82"],"certeza":"documentada"},
+    {"tipo":"reforma","fecha":{"desde":1957,"hasta":1957},"dice":"En 1957 se abre la conexión con la Libertador, que afecta al Mercado Guaicaipuro","cita":"«El Mercado, que junto al colegio de los salesianos se vio afectado por la conexión abierta hacia la avenida Libertador en 1957»","fuentes":["fac-su82"],"certeza":"documentada"}
    ],
    "etapas": []
   },
@@ -2214,55 +459,15 @@
    "tipo": "avenida",
    "nombre": "Avenida Lecuna",
    "desde": 1970,
-   "fuentesCronologia": [
-    "fac-lec"
-   ],
+   "fuentesCronologia": ["fac-lec"],
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": [
-    "Día y mes de 1970",
-    "Inicio de las obras, longitud y ancho",
-    "Demoliciones, salvo el Puente Mohedano y el edificio de A. Planchart y Cía."
-   ],
+   "desconocido": ["Día y mes de 1970","Inicio de las obras, longitud y ancho","Demoliciones, salvo el Puente Mohedano y el edificio de A. Planchart y Cía."],
    "sistema": "Avenidas del centro",
    "predecesora": "Avenida Este–Oeste 10: existía y en 1940 terminaba en una rotonda junto al Puente Mohedano",
-   "nombres_osm": [
-    "Avenida Lecuna"
-   ],
-   "nombres": [
-    {
-     "nombre": "Avenida Este–Oeste 10",
-     "desde": null,
-     "hasta": 1970,
-     "fuentes": [
-      "fac-lec"
-     ]
-    },
-    {
-     "nombre": "Avenida Lecuna",
-     "desde": 1970,
-     "hasta": null,
-     "fuentes": [
-      "fac-lec"
-     ]
-    }
-   ],
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1970,
-      "hasta": 1970
-     },
-     "dice": "Se inaugura en 1970, de Angelitos a Parque Central",
-     "cita": "«Se inaugura la Avenida Lecuna, obra vial que transformó la Avenida Este – Oeste 10 de Caracas.»",
-     "fuentes": [
-      "fac-lec",
-      "fac-su120"
-     ],
-     "certeza": "documentada"
-    }
-   ],
+   "nombres_osm": ["Avenida Lecuna"],
+   "nombres": [{"nombre":"Avenida Este–Oeste 10","desde":null,"hasta":1970,"fuentes":["fac-lec"]},{"nombre":"Avenida Lecuna","desde":1970,"hasta":null,"fuentes":["fac-lec"]}],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1970,"hasta":1970},"dice":"Se inaugura en 1970, de Angelitos a Parque Central","cita":"«Se inaugura la Avenida Lecuna, obra vial que transformó la Avenida Este – Oeste 10 de Caracas.»","fuentes":["fac-lec","fac-su120"],"certeza":"documentada"}],
    "etapas": []
   },
   {
@@ -2271,49 +476,12 @@
    "nombre": "Avenida Universidad, ampliación de las calles Oeste 4 y Este 4",
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": [
-    "Año de la apertura: por eso no lleva «desde» y queda pendiente, no ausente, en los cortes del sitio"
-   ],
+   "desconocido": ["Año de la apertura: por eso no lleva «desde» y queda pendiente, no ausente, en los cortes del sitio"],
    "sistema": "Avenidas del centro",
    "predecesora": "Calles Oeste 4 y Este 4: existían",
-   "nombres_osm": [
-    "Avenida Universidad"
-   ],
-   "nombres": [
-    {
-     "nombre": "Avenida Universidad",
-     "desde": null,
-     "hasta": null,
-     "fuentes": [
-      "fac-su133"
-     ]
-    }
-   ],
-   "cronologia": [
-    {
-     "tipo": "obra",
-     "fecha": {
-      "desde": 1957,
-      "hasta": 1957
-     },
-     "dice": "Obras hacia 1957",
-     "cita": "«Obras de construcción de la avenida Universidad sobre el trazado de las calles Oeste y Este 4 (c.1957).»",
-     "fuentes": [
-      "fac-su133"
-     ],
-     "certeza": "dudosa"
-    },
-    {
-     "tipo": "nombre",
-     "fecha": null,
-     "dice": "Toma el nombre a finales de los años cincuenta, tras la ampliación",
-     "cita": "«adoptando el nombre de avenida Universidad a finales de los años 1950 (tras ser ampliada)»",
-     "fuentes": [
-      "fac-su133"
-     ],
-     "certeza": "dudosa"
-    }
-   ],
+   "nombres_osm": ["Avenida Universidad"],
+   "nombres": [{"nombre":"Avenida Universidad","desde":null,"hasta":null,"fuentes":["fac-su133"]}],
+   "cronologia": [{"tipo":"obra","fecha":{"desde":1957,"hasta":1957},"dice":"Obras hacia 1957","cita":"«Obras de construcción de la avenida Universidad sobre el trazado de las calles Oeste y Este 4 (c.1957).»","fuentes":["fac-su133"],"certeza":"dudosa"},{"tipo":"nombre","fecha":null,"dice":"Toma el nombre a finales de los años cincuenta, tras la ampliación","cita":"«adoptando el nombre de avenida Universidad a finales de los años 1950 (tras ser ampliada)»","fuentes":["fac-su133"],"certeza":"dudosa"}],
    "etapas": []
   },
   {
@@ -2321,65 +489,17 @@
    "tipo": "avenida",
    "nombre": "Avenida Sucre, tercer tramo (Tinajitas–placita Diego de Losada)",
    "desde": 1952,
-   "fuentesCronologia": [
-    "fac-su128",
-    "fac-suc52"
-   ],
+   "fuentesCronologia": ["fac-su128","fac-suc52"],
    "encuadre": "sin medir",
-   "contradicciones": [
-    {
-     "asunto": "año",
-     "afirmaciones": [
-      {
-       "dice": "«Se concluye la construcción de la Av. Sucre desde Catia hasta El Silencio.» (entrada de 1952)",
-       "fuente": "fac-suc52"
-      },
-      {
-       "dice": "«así como la ampliación de la Av. Urdaneta y la Av. Sucre» (entre lo inaugurado en 1953)",
-       "fuente": "fac-ae53"
-      }
-     ],
-     "estado": "pendiente"
-    }
-   ],
-   "desconocido": [
-    "Fechas de los tramos primero, segundo y cuarto"
-   ],
+   "contradicciones": [{"asunto":"año","afirmaciones":[{"dice":"«Se concluye la construcción de la Av. Sucre desde Catia hasta El Silencio.» (entrada de 1952)","fuente":"fac-suc52"},{"dice":"«así como la ampliación de la Av. Urdaneta y la Av. Sucre» (entre lo inaugurado en 1953)","fuente":"fac-ae53"}],"estado":"pendiente"}],
+   "desconocido": ["Fechas de los tramos primero, segundo y cuarto"],
    "sistema": "Avenidas del oeste",
    "predecesora": "No documentada para este tramo",
-   "nombres_osm": [
-    "Avenida Sucre"
-   ],
+   "nombres_osm": ["Avenida Sucre"],
    "nota": "La capa Hoy trae la avenida entera; los tramos primero, segundo y cuarto no tienen fecha en las fuentes leídas.",
    "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1952,
-      "hasta": 1952
-     },
-     "dice": "El tercer tramo se inaugura el 23 de noviembre de 1952; la avenida queda de Catia a El Silencio",
-     "cita": "«se concluye la construcción del tercer tramo de la avenida Sucre […] comprendido entre Tinajitas y la antigua placita Diego de Losada»",
-     "fuentes": [
-      "fac-su128",
-      "fac-suc52"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "reforma",
-     "fecha": {
-      "desde": 1954,
-      "hasta": 1954
-     },
-     "dice": "El puente Nueva República (antes Pagüita) la une con la plaza O’Leary en 1954",
-     "cita": "«se inaugura y pone en servicio el Puente Nueva República (antes Pagüita), que une la Av. Sucre con la Plaza O’Leary»",
-     "fuentes": [
-      "fac-nr54",
-      "fac-su128"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"apertura","fecha":{"desde":1952,"hasta":1952},"dice":"El tercer tramo se inaugura el 23 de noviembre de 1952; la avenida queda de Catia a El Silencio","cita":"«se concluye la construcción del tercer tramo de la avenida Sucre […] comprendido entre Tinajitas y la antigua placita Diego de Losada»","fuentes":["fac-su128","fac-suc52"],"certeza":"documentada"},
+    {"tipo":"reforma","fecha":{"desde":1954,"hasta":1954},"dice":"El puente Nueva República (antes Pagüita) la une con la plaza O’Leary en 1954","cita":"«se inaugura y pone en servicio el Puente Nueva República (antes Pagüita), que une la Av. Sucre con la Plaza O’Leary»","fuentes":["fac-nr54","fac-su128"],"certeza":"documentada"}
    ],
    "etapas": []
   },
@@ -2388,83 +508,18 @@
    "tipo": "avenida",
    "nombre": "Avenida San Martín, ampliación de Angelitos a Alcabala",
    "desde": 1954,
-   "fuentesCronologia": [
-    "fac-sm54"
-   ],
+   "fuentesCronologia": ["fac-sm54"],
    "encuadre": "sin medir",
-   "contradicciones": [
-    {
-     "asunto": "extremos de la ampliación de 1954",
-     "afirmaciones": [
-      {
-       "dice": "«el tramo de la Avenida San Martín comprendido entre las esquinas Angelitos a Alcabala, unos 1.232 metros de longitud»",
-       "fuente": "fac-sm54"
-      },
-      {
-       "dice": "«se termina su última ampliación en 1954 entre El Silencio y Palo Grande»",
-       "fuente": "fac-su93"
-      }
-     ],
-     "estado": "pendiente"
-    }
-   ],
+   "contradicciones": [{"asunto":"extremos de la ampliación de 1954","afirmaciones":[{"dice":"«el tramo de la Avenida San Martín comprendido entre las esquinas Angelitos a Alcabala, unos 1.232 metros de longitud»","fuente":"fac-sm54"},{"dice":"«se termina su última ampliación en 1954 entre El Silencio y Palo Grande»","fuente":"fac-su93"}],"estado":"pendiente"}],
    "desconocido": [],
    "sistema": "Avenidas del oeste",
    "predecesora": "La propia avenida San Martín, que lleva ese nombre desde 1922: existía, más angosta",
-   "nombres_osm": [
-    "Avenida San Martín"
-   ],
-   "nombres": [
-    {
-     "nombre": "Avenida San Martín",
-     "desde": 1922,
-     "hasta": null,
-     "fuentes": [
-      "fac-su93"
-     ]
-    }
-   ],
+   "nombres_osm": ["Avenida San Martín"],
+   "nombres": [{"nombre":"Avenida San Martín","desde":1922,"hasta":null,"fuentes":["fac-su93"]}],
    "cronologia": [
-    {
-     "tipo": "nombre",
-     "fecha": {
-      "desde": 1922,
-      "hasta": 1922
-     },
-     "dice": "Lleva el nombre desde 1922",
-     "cita": "«así denominada desde 1922 en honor al general y prócer argentino José de San Martín»",
-     "fuentes": [
-      "fac-su93"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1954,
-      "hasta": 1954
-     },
-     "dice": "En 1954 se termina la ampliación: 1.232 m, 30 m de fachada a fachada y 18 m de calzada",
-     "cita": "«30 metros de fachada a fachada, la calzada de 18 metros de ancho y el ancho de las aceras 5,90 metros»",
-     "fuentes": [
-      "fac-sm54",
-      "fac-su93"
-     ],
-     "certeza": "documentada"
-    },
-    {
-     "tipo": "demolicion",
-     "fecha": {
-      "desde": 1954,
-      "hasta": 1954
-     },
-     "dice": "Reduce las plazas Capuchinos e Italia",
-     "cita": "«redujo considerablemente las dimensiones de las plazas Capuchinos e Italia»",
-     "fuentes": [
-      "fac-su93"
-     ],
-     "certeza": "documentada"
-    }
+    {"tipo":"nombre","fecha":{"desde":1922,"hasta":1922},"dice":"Lleva el nombre desde 1922","cita":"«así denominada desde 1922 en honor al general y prócer argentino José de San Martín»","fuentes":["fac-su93"],"certeza":"documentada"},
+    {"tipo":"apertura","fecha":{"desde":1954,"hasta":1954},"dice":"En 1954 se termina la ampliación: 1.232 m, 30 m de fachada a fachada y 18 m de calzada","cita":"«30 metros de fachada a fachada, la calzada de 18 metros de ancho y el ancho de las aceras 5,90 metros»","fuentes":["fac-sm54","fac-su93"],"certeza":"documentada"},
+    {"tipo":"demolicion","fecha":{"desde":1954,"hasta":1954},"dice":"Reduce las plazas Capuchinos e Italia","cita":"«redujo considerablemente las dimensiones de las plazas Capuchinos e Italia»","fuentes":["fac-su93"],"certeza":"documentada"}
    ],
    "etapas": []
   },
@@ -2473,35 +528,14 @@
    "tipo": "avenida",
    "nombre": "Avenida Nueva Granada",
    "desde": 1950,
-   "fuentesCronologia": [
-    "fac-ng"
-   ],
+   "fuentesCronologia": ["fac-ng"],
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": [
-    "Día y mes",
-    "Ancho"
-   ],
+   "desconocido": ["Día y mes","Ancho"],
    "sistema": "Avenidas del sur",
    "predecesora": "El camino de El Valle, colonial, sobre cuyo trazado se hizo",
-   "nombres_osm": [
-    "Avenida Nueva Granada"
-   ],
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1950,
-      "hasta": 1950
-     },
-     "dice": "El MOP la inaugura en 1950, de El Portachuelo a La Bandera",
-     "cita": "«concluye la construcción e inaugura en Caracas, la Avenida Nueva Granada, la cual une El Portachuelo con La Bandera»",
-     "fuentes": [
-      "fac-ng"
-     ],
-     "certeza": "documentada"
-    }
-   ],
+   "nombres_osm": ["Avenida Nueva Granada"],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1950,"hasta":1950},"dice":"El MOP la inaugura en 1950, de El Portachuelo a La Bandera","cita":"«concluye la construcción e inaugura en Caracas, la Avenida Nueva Granada, la cual une El Portachuelo con La Bandera»","fuentes":["fac-ng"],"certeza":"documentada"}],
    "etapas": []
   },
   {
@@ -2509,29 +543,13 @@
    "tipo": "avenida",
    "nombre": "Avenida Guzmán Blanco (Cota 905)",
    "desde": 1953,
-   "fuentesCronologia": [
-    "fac-c905"
-   ],
+   "fuentesCronologia": ["fac-c905"],
    "encuadre": "sin medir",
    "contradicciones": [],
    "desconocido": [],
    "sistema": "Avenidas del sur",
    "predecesora": "No documentada",
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1953,
-      "hasta": 1953
-     },
-     "dice": "Entra en servicio en noviembre de 1953: 6 km y 11 m de ancho, de la redoma de La Paz a El Peaje",
-     "cita": "«La Gobernación del Distrito Federal construye y pone en servicio en el mes de noviembre la Av. Guzmán Blanco o Cota 905»",
-     "fuentes": [
-      "fac-c905"
-     ],
-     "certeza": "documentada"
-    }
-   ],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1953,"hasta":1953},"dice":"Entra en servicio en noviembre de 1953: 6 km y 11 m de ancho, de la redoma de La Paz a El Peaje","cita":"«La Gobernación del Distrito Federal construye y pone en servicio en el mes de noviembre la Av. Guzmán Blanco o Cota 905»","fuentes":["fac-c905"],"certeza":"documentada"}],
    "etapas": []
   },
   {
@@ -2539,58 +557,19 @@
    "tipo": "avenida",
    "nombre": "Avenida Francisco de Miranda",
    "desde": 1954,
-   "fuentesCronologia": [
-    "fac-fm"
-   ],
+   "fuentesCronologia": ["fac-fm"],
    "encuadre": "sin medir",
    "contradicciones": [],
-   "desconocido": [
-    "Cuánto cae dentro de la hoja del sitio"
-   ],
+   "desconocido": ["Cuánto cae dentro de la hoja del sitio"],
    "sistema": "Avenidas del este",
    "predecesora": "La Carretera del Este, que la fuente da por inaugurada a partir de 1947",
-   "cronologia": [
-    {
-     "tipo": "apertura",
-     "fecha": {
-      "desde": 1954,
-      "hasta": 1954
-     },
-     "dice": "En 1954 se concluyen sus 8,2 km",
-     "cita": "«concluye la construcción de los 8,2 kilómetros de longitud de la Avenida Francisco de Miranda»",
-     "fuentes": [
-      "fac-fm"
-     ],
-     "certeza": "documentada"
-    }
-   ],
+   "cronologia": [{"tipo":"apertura","fecha":{"desde":1954,"hasta":1954},"dice":"En 1954 se concluyen sus 8,2 km","cita":"«concluye la construcción de los 8,2 kilómetros de longitud de la Avenida Francisco de Miranda»","fuentes":["fac-fm"],"certeza":"documentada"}],
    "etapas": []
   }
  ],
  "no_posteriores": [
-  {
-   "nombre": "Avenida México",
-   "dice": "Se desarrolla desde los años cuarenta como prolongación de Este 4 y toma el nombre antes de 1945. No tiene fecha de apertura en las fuentes leídas.",
-   "cita": "«se desarrollará a partir de los años 1940 como prolongación de la avenida Este 4 y adoptará muy pronto el nombre de avenida México»",
-   "fuentes": [
-    "fac-su133"
-   ]
-  },
-  {
-   "nombre": "Avenida Victoria (Presidente Medina desde 1958)",
-   "dice": "Inaugurada en 1945.",
-   "cita": "«Se concluye e inaugura la Avenida Victoria»",
-   "fuentes": [
-    "fac-vic"
-   ]
-  },
-  {
-   "nombre": "Avenida Roosevelt",
-   "dice": "Puesta en servicio el 14 de septiembre de 1946.",
-   "cita": "«los 2,99 kilómetros de la Avenida Roosevelt, la cual es puesta en servicio el 14 de septiembre»",
-   "fuentes": [
-    "fac-roo"
-   ]
-  }
+  {"nombre":"Avenida México","dice":"Se desarrolla desde los años cuarenta como prolongación de Este 4 y toma el nombre antes de 1945. No tiene fecha de apertura en las fuentes leídas.","cita":"«se desarrollará a partir de los años 1940 como prolongación de la avenida Este 4 y adoptará muy pronto el nombre de avenida México»","fuentes":["fac-su133"]},
+  {"nombre":"Avenida Victoria (Presidente Medina desde 1958)","dice":"Inaugurada en 1945.","cita":"«Se concluye e inaugura la Avenida Victoria»","fuentes":["fac-vic"]},
+  {"nombre":"Avenida Roosevelt","dice":"Puesta en servicio el 14 de septiembre de 1946.","cita":"«los 2,99 kilómetros de la Avenida Roosevelt, la cual es puesta en servicio el 14 de septiembre»","fuentes":["fac-roo"]}
  ]
 }
