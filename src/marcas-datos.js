@@ -19,6 +19,8 @@
  *    cotejo, marca por marca, está en specs/auditoria-1843/cotejo-leyenda.md (T81).
  * La leyenda del plano de 1772 no se transcribió; cuando hay otra fuente documental, se cita en la marca.
  */
+import { MARCAS_PUENTES_CRUCES } from './puentes-cruces-datos.js'
+
 const P36 = 'plano DCN de 1936'
 const P89 = 'plano de Mestre de 1889'
 const P11 = 'plano de Razetti de 1911'
@@ -185,4 +187,7 @@ export const MARCAS = Object.freeze([
     fuente: 'Plano DCN basado en fotografías aéreas de 1946, rótulo «San Bernardino»; Fundación Arquitectura y Ciudad: https://fundaayc.com/2016/11/04/1939-constitucion-de-la-empresa-que-construira-san-bernardino/',
     dudas: 'Marca de sector, no de un edificio. La hacienda anterior no se confunde con la urbanización. No se atribuye la misma fecha a todas sus casas.' },
   { id: 'los-caobos', nombre: 'Parque Los Caobos', x: 13400, y: 8450, nace: 5, nivel: 2, fuente: `${P36} («Parque Los Caobos»)` },
+
+  // --- los demás cruces del Guaire (src/puentes-cruces-datos.js) ---
+  ...MARCAS_PUENTES_CRUCES,
 ])

@@ -14,6 +14,8 @@
  * letra. La del plano de 1772, no.
  * Un lugar sin entrada muestra la nota de su marca y la fuente de su nombre.
  */
+import { FICHAS_PUENTES_CRUCES } from './puentes-cruces-datos.js'
+
 const SIN_LEYENDA = 'el nombre de 1772 no se cotejó con la leyenda de ese plano'
 
 export const FICHAS = Object.freeze({
@@ -373,4 +375,7 @@ export const FICHAS = Object.freeze({
   'fc-central': {
     textos: [[3, 'El plano de 1889 rotula aquí «Estación» y «Ferrocarril Central», al este de la ciudad.']],
   },
+
+  // --- los demás cruces del Guaire (src/puentes-cruces-datos.js) ---
+  ...FICHAS_PUENTES_CRUCES,
 })
