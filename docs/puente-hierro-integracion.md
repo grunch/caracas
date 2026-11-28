@@ -56,6 +56,7 @@ export const puenteSucre = Object.freeze({
 - `capa: 'estructura'` (tablero y estribos) y `capa: 'cauce'` (lecho y pilas) permiten cambiar el cauce de una época
   a otra sin repetir la estructura. Sin `capa`, la parte dibuja todo.
 - `vano` = [desde, hasta] en metros desde el centro; `anchoCauce`; `agua` = la franja del río sobre el eje.
+  `sesgoAgua`, si el río cruza en diagonal: metros que se corre la franja a lo largo por cada metro a lo ancho.
 - `aRas` y `anchoRas`: un tramo a ras sobre terraplén. Hay que sumar su rectángulo a `sueloPropioPorEpoca`.
 - Sumarlo a `puentesGuaire` y poner `hito: '<id>'` en su marca.
 
@@ -101,5 +102,6 @@ más corto. Las dos edificaciones del lado este quedan a 1,2 m del terraplén: n
 
 - Sin GPU el suelo es una malla de 96 m. El lecho empalma con él, pero las casas vecinas siguen apoyadas en el
   relieve fino.
-- El puente sustituto de 1937 y los demás cruces (Dolores, Restaurador, 19 de Diciembre, Ayacucho) quedan para
-  los PR siguientes. Constitución y Sucre metálico: [`puente-sucre-integracion.md`](puente-sucre-integracion.md).
+- El puente sustituto de 1937 queda pendiente. Constitución y Sucre metálico:
+  [`puente-sucre-integracion.md`](puente-sucre-integracion.md). Dolores y Restaurador (1911), y por qué no el 19 de
+  Diciembre ni el Ayacucho: [`puentes-cruces-integracion.md`](puentes-cruces-integracion.md).

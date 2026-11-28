@@ -1,8 +1,10 @@
 # Cruces del Guaire: Dolores, Restaurador, 19 de Diciembre y Ayacucho
 
 Avance parcial de [#272](https://github.com/grunch/caracas/issues/272). Suma la marca y la ficha de cuatro cruces
-que no tenían ninguna, con su calce en [`puentes-guaire-calce-cruces.md`](puentes-guaire-calce-cruces.md). No
-instala geometría: los modelos siguen en Miraflores (`grunch/miraflores`, `docs/puentes-guaire/`). La cronología de
+que no tenían ninguna, con su calce en [`puentes-guaire-calce-cruces.md`](puentes-guaire-calce-cruces.md). Los
+modelos de Dolores y Restaurador se instalaron después, solo en 1911
+([`puentes-cruces-integracion.md`](puentes-cruces-integracion.md)); los del 19 de Diciembre y el Ayacucho siguen en
+Miraflores (`grunch/miraflores`, `docs/puentes-guaire/`), sin instalar. La cronología de
 Hierro y Constitución/Sucre está en [`puentes-guaire-cronologia.md`](puentes-guaire-cronologia.md).
 
 Los datos viven en `src/puentes-cruces-datos.js`, con el formato de `src/marcas-datos.js` y `src/fichas-datos.js`.
@@ -86,5 +88,6 @@ escribir con cuidado.
 
 ## Pendientes para cerrar #272
 
-Modelos y adaptador de los cuatro cruces, decisión sobre las cabezas de Dolores, cabezas del 19 de Diciembre y del
-Ayacucho, rasante, estructuras de 1946, y los cinco puentes de la tabla anterior.
+Cabezas del 19 de Diciembre y del Ayacucho (y con ellas, sus modelos), las estructuras de 1936 de Dolores y
+Restaurador, las de 1946, y los cinco puentes de la tabla anterior. El detalle de lo que falta para cada uno está
+en [`puentes-cruces-integracion.md`](puentes-cruces-integracion.md).
