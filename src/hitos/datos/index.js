@@ -11,11 +11,12 @@ import { panteon } from './panteon.js'
 import { silencio } from './el-silencio.js'
 import { nuevoCirco } from './nuevo-circo.js'
 import { civiles } from './civiles.js'
+import { puentesGuaire } from './puentes-guaire.js'
 
 /** Datos de hitos sin los constructores de geometría; lo usa el hilo principal para áreas y marcas. */
 export const HITOS = Object.freeze([
   plazaBolivar, catedral, ...iglesias, panteon, ...civiles, ...silencio, nuevoCirco,
-  metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios, cementerioSur,
+  metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios, cementerioSur, ...puentesGuaire,
 ])
 
 /** Campos geométricos que consume el worker, sin fichas y huellas de colisión. */

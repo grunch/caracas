@@ -3,7 +3,7 @@ import { readdirSync, readFileSync, existsSync } from 'node:fs'
 import path from 'node:path'
 import { MARCAS } from '../../src/marcas-datos.js'
 import {
-  elegibilidad, fechaDe, licenciaVisible, medidasDerivadas, entradaDeFoto, armarManifiesto, descargable, informe, salidasDeFotos, fotosSinOrigen,
+  elegibilidad, fechaDe, licenciaVisible, medidasDerivadas, entradaDeFoto, armarManifiesto, publicablesSinOriginal, descargable, informe, salidasDeFotos, fotosSinOrigen,
 } from '../../tools/fotos-lib.mjs'
 
 const COMMONS = 'https://commons.wikimedia.org/wiki/File:Algo.jpg'
@@ -153,6 +153,19 @@ describe('armarManifiesto', () => {
   it('una imagen sin derechos claros queda fuera aunque tenga marcas y original', () => {
     const r = armarManifiesto(lista, { marcas })
     expect(r.publicables.some((p) => /nacional|dudosa/.test(p.id))).toBe(false)
+  })
+
+  it('las publicables a las que solo les falta el original se nombran aparte: sin ellas el paquete saldría sin fotos', () => {
+    // el release datos-2026-11-27-eb21bf8 se generó en un worktree sin fuentes/imagenes/*/original.* y publicó cero fotos
+    const r = armarManifiesto(lista, { marcas })
+    expect(publicablesSinOriginal(r)).toEqual(['1900-sin-original'])
+    // la que no tiene marca o no tiene derechos claros no cuenta, aunque también le falte el original
+    const otras = armarManifiesto([
+      { id: '1839-sin-marca', ficha: libre({ marcas: undefined }), original: null },
+      { id: '1955-nacional', ficha: libre({ licencia: 'Derechos reservados El Nacional', dominio_publico: false }), original: null },
+    ], { marcas })
+    expect(publicablesSinOriginal(otras)).toEqual([])
+    expect(publicablesSinOriginal(armarManifiesto(lista.filter((f) => f.original), { marcas }))).toEqual([])
   })
 
   it('falla si una ficha nombra una marca que no existe', () => {

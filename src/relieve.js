@@ -114,6 +114,52 @@ export function crearRelieve(datos, hoja, terrazas = []) {
   return Object.freeze({ ...datos, hoja, referencia, terrazas: Object.freeze([...terrazas]), planos, alturaEn })
 }
 
+/**
+ * La altura del suelo tal como se dibuja en (x, z): la hoja es una malla de cuadros de `celda` = [ancho, alto]
+ * metros partidos por una diagonal (PlaneGeometry: del vértice sur-oeste al nor-este), con la altura exacta
+ * (`alturaEn`) solo en los vértices; adentro va recta. Con la malla gruesa del render por software (96 m), ese
+ * suelo se aparta decímetros del relieve: lo que tiene que empalmar con él a ras (el lecho y la rasante de un
+ * puente) usa esta altura y no la del relieve. Espejo de sueloDibujado() (GLSL_SUELO_DIBUJADO).
+ */
+export function sueloDibujadoEn(alturaEn, hoja, celda, x, z) {
+  if (!celda || !(celda[0] > 0 && celda[1] > 0)) return alturaEn(x, z)
+  const [qx, qz] = [(x - hoja.x0) / celda[0], (z - hoja.z0) / celda[1]]
+  const [cx, cz] = [Math.floor(qx), Math.floor(qz)]
+  const [fx, fz] = [qx - cx, qz - cz]
+  const en = (i, k) => alturaEn(hoja.x0 + (cx + i) * celda[0], hoja.z0 + (cz + k) * celda[1])
+  // de qué lado de la diagonal cae: el triángulo con la esquina (0, 0) o el de la (1, 1); e es esa esquina y
+  // (wx, wz), cuánto se avanza desde ella por cada lado del cuadro
+  const bajo = fx + fz <= 1
+  const [e, wx, wz] = bajo ? [0, fx, fz] : [1, 1 - fx, 1 - fz]
+  const h = en(e, e)
+  return h + wx * (en(1 - e, e) - h) + wz * (en(e, 1 - e) - h)
+}
+
+/** El tamaño de los cuadros de la hoja, para sueloDibujado(): se pone al armar la malla del suelo (src/main.js). */
+export function ponerMallaDelSuelo(U, hoja, [cuadrosX, cuadrosZ]) {
+  U.uMallaSuelo.value.set(hoja.ancho / cuadrosX, hoja.alto / cuadrosZ)
+}
+
+/**
+ * GLSL (después de GLSL_RELIEVE): el suelo tal como se dibuja, interpolado en su malla. Sin malla puesta
+ * (uMallaSuelo en cero), es el relieve mismo.
+ */
+export const GLSL_SUELO_DIBUJADO = /* glsl */ `
+  uniform vec2 uMallaSuelo;
+  float sueloDibujado(vec2 xz) {
+    if (uMallaSuelo.x <= 0.0) return sueloEn(xz);
+    vec2 q = (xz - uRelieveHoja.xy) / uMallaSuelo;
+    vec2 c = floor(q), f = q - c, o = uRelieveHoja.xy + c * uMallaSuelo;
+    // de qué lado de la diagonal cae: el triángulo con la esquina (0, 0) o el de la (1, 1); e es esa esquina
+    // y w, cuánto se avanza desde ella por cada lado del cuadro
+    bool bajo = f.x + f.y <= 1.0;
+    vec2 e = bajo ? vec2(0.0) : vec2(1.0), w = bajo ? f : 1.0 - f;
+    float h = sueloEn(o + e * uMallaSuelo);
+    float hx = sueloEn(o + vec2(1.0 - e.x, e.y) * uMallaSuelo), hz = sueloEn(o + vec2(e.x, 1.0 - e.y) * uMallaSuelo);
+    return h + w.x * (hx - h) + w.y * (hz - h);
+  }
+`
+
 /** Cuánto se hinchó el suelo a `dist` metros de la plaza (el mismo frente que la ciudad). */
 export const hinchado = (dist, ola, anchoOla) => suave((ola - dist) / anchoOla)
 
@@ -153,6 +199,7 @@ export function uniformsRelieve(hoja, terrazas = []) {
     uRelieveHoja: { value: new Vector4(hoja.x0, hoja.z0, hoja.ancho, hoja.alto) },
     uRelieveCelda: { value: new Vector2(hoja.ancho, hoja.alto) }, // metros por celda
     uExageracion: { value: 1 },
+    uMallaSuelo: { value: new Vector2(0, 0) }, // metros por cuadro de la malla del suelo (0: sin malla; ponerMallaDelSuelo)
     uTerrazaMarco: { value: marco }, // (x, z, eje) en metros del mundo
     uTerrazaMedida: { value: medida }, // (mitad del ancho, mitad del fondo, altura del plano en el centro, activa)
     uTerrazaPendiente: { value: Array.from({ length: MAX_TERRAZAS }, () => new Vector2(0, 0)) }, // del plano, por metro de a y de b

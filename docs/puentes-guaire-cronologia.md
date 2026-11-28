@@ -1,7 +1,7 @@
 # Cruces del Guaire: Constitución/Sucre y Hierro
 
 Avance parcial de #272. Las fichas y marcas distinguen el cruce de la estructura.
-La geometría aún se estudia en Miraflores y no se instala con este cambio.
+De los modelos estudiados en Miraflores, el primero instalado es el Puente de Hierro.
 
 | Época | Constitución / Sucre | Hierro |
 |---|---|---|
@@ -35,9 +35,13 @@ Restaurador, 19 de Diciembre y Ayacucho. Guía `docs/integracion-caracas-puentes
 y seis fichas en `docs/puentes-guaire/`. Incluyen dimensiones documentadas y
 supuestos separados; 36 combinaciones de cruce/época comprobadas en navegador.
 
-Pendientes para cerrar #272: calce de cabezas, cotas del tablero, apoyos y accesos,
-variantes posteriores, Paraíso y Bolívar/Los Leones, integración, rendimiento y
-regeneración de datos. `presente:true` con `modelo:null` significa cruce existente
+Ya instalado: el Puente de Hierro de 1875 en 1889, 1911 y 1936, con su calce
+([`puentes-guaire-calce.md`](puentes-guaire-calce.md)) y el adaptador de puentes
+([`puente-hierro-integracion.md`](puente-hierro-integracion.md)).
+
+Pendientes para cerrar #272: Constitución, Sucre y los demás cruces (calce de cabezas,
+cotas, apoyos y accesos), el sustituto de 1937 del de Hierro, variantes posteriores,
+Paraíso y Bolívar/Los Leones. `presente:true` con `modelo:null` significa cruce existente
 sin arquitectura restituida; no autoriza a eliminarlo del mapa.
 
 ## Validación del cambio en Caracas

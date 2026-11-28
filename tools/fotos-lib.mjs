@@ -76,6 +76,8 @@ export function entradaDeFoto(id, ficha, { ancho, alto }) {
 
 const añoDe = (ficha) => ficha.año_representado ?? ficha.año ?? Infinity
 
+const FALTA_ORIGINAL = 'falta el original (fuentes/imagenes/…/original.*)'
+
 /**
  * De todas las fichas, cuáles se publican y cuáles no (con sus motivos). `lista`: [{ id, ficha, original }]
  * (`original`: nombre del archivo original, o null si no está); `marcas`: Set con los ids de src/marcas-datos.js.
@@ -90,12 +92,20 @@ export function armarManifiesto(lista, { marcas }) {
     const { motivos } = elegibilidad(ficha)
     const faltas = [...motivos]
     if (!motivos.length && !(ficha.marcas ?? []).length) faltas.push('elegible, pero sin marca asignada (campo marcas)')
-    if (!motivos.length && !original) faltas.push('falta el original (fuentes/imagenes/…/original.*)')
+    if (!motivos.length && !original) faltas.push(FALTA_ORIGINAL)
     if (faltas.length) excluidas.push({ id, motivos: faltas })
     else publicables.push({ id, ficha, original })
   }
   const porAño = (a, b) => añoDe(a.ficha) - añoDe(b.ficha) || a.id.localeCompare(b.id)
   return { publicables: publicables.sort(porAño), excluidas: excluidas.sort((a, b) => a.id.localeCompare(b.id)) }
+}
+
+/**
+ * Los id de las fotos que se publicarían si estuviera su original: tienen derechos claros y marca, y lo único
+ * que les falta es el archivo, que no viaja en git. Con alguna así, el paso no debe escribir el manifiesto.
+ */
+export function publicablesSinOriginal({ excluidas }) {
+  return excluidas.filter(({ motivos }) => motivos.length === 1 && motivos[0] === FALTA_ORIGINAL).map(({ id }) => id)
 }
 
 /** El informe de consola: qué entra y qué queda afuera, con el motivo. */

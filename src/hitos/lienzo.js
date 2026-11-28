@@ -11,11 +11,18 @@
  * - apoyo: el punto bajo cada objeto; el piso es el más alto de los dos (una terraza es plana donde el
  *   terreno baja y lo sigue donde sube). "Siguiendo", el apoyo es el propio vértice (rejas, pretiles, losas).
  * - pie = 1: el vértice baja hasta el terreno, para que las paredes no floten.
+ * - pie = 2 (rasante de un puente): el ancla son las dos cabezas (x, z de cada una) y el vértice va sobre la
+ *   recta que une la cota del suelo en una con la de la otra; no mira el terreno que tiene debajo.
+ * - pie = 3 (el pie de un apoyo y el lecho de un puente): sobre el suelo tal como se dibuja bajo el vértice
+ *   (la malla de la hoja, src/relieve.js), para empalmar con él sin escalón.
  */
 import { Matrix4, Vector3, Color } from 'three'
 
 /** Materiales del shader de los hitos (src/hitos/material.js); van en aHito.z. */
 export const MAT = Object.freeze({ LISO: 0, TEJA: 1, VERJA: 2, JARDIN: 3, TIERRA: 4, LONA: 5, LUZ: 6, RELOJ: 7, SILLAR: 8 })
+
+/** Cómo se apoya un vértice (aHito.w): sobre su piso, bajando al terreno (pie) o sobre la rasante de un puente. */
+export const APOYO = Object.freeze({ NINGUNO: 0, PIE: 1, RASANTE: 2, SUELO: 3 })
 
 const UMBRAL_PIE_M = 0.01 // por debajo de esto un vértice es "pie" y baja hasta el terreno
 const PROPIO = 'propio'
@@ -64,26 +71,38 @@ export function crearLienzo() {
       siguiendo: () => hijo({ apoyo: PROPIO }),
       /** Pavimentos extensos: cada vértice toma sólo su propia cota, sin terraza horizontal. */
       sobreTerreno: () => hijo({ ancla: PROPIO, apoyo: PROPIO }),
+      /**
+       * Sobre la rasante de un puente: recta entre el terreno de dos cabezas ([x, z] de este marco). Lo dibujado
+       * no sigue el relieve intermedio ni lleva pies; los vértices con el atributo `suelo` en 1 (el pie de un
+       * apoyo, el lecho) van con el suelo dibujado que tienen debajo.
+       */
+      rasante: (desde, hasta) => hijo({
+        rasante: [desde, hasta].flatMap(([x, z]) => { const c = new Vector3(x, 0, z).applyMatrix4(estado.matriz); return [c.x, c.z] }),
+      }),
       /** Agrega una geometría de three.js (posición y normal; uv opcional) con un color y un material. */
       geo(g, { color = 0xffffff, mat = MAT.LISO, flota = false } = {}) {
-        const { position, normal, uv } = g.attributes
+        const { position, normal, uv, suelo } = g.attributes
         if (!position || !normal) throw new Error('hito: la geometría necesita position y normal')
         const [r, gg, bl] = lineal(color)
         const base = b.posiciones.length / 3
-        const { ancla, apoyo, vida, dist, semilla, matriz } = estado
+        const { ancla, apoyo, vida, dist, semilla, matriz, rasante } = estado
         for (let i = 0; i < position.count; i++) {
           v.fromBufferAttribute(position, i)
           v.applyMatrix4(matriz) // el marco no inclina: la altura del mundo es la local
-          const esPie = !flota && v.y < UMBRAL_PIE_M
+          const alSuelo = rasante && suelo && suelo.getX(i) > 0.5
+          const esPie = !rasante && !flota && v.y < UMBRAL_PIE_M
           n.fromBufferAttribute(normal, i).transformDirection(matriz)
           b.posiciones.push(v.x, v.y, v.z)
           b.normales.push(n.x, n.y, n.z)
           b.colores.push(r, gg, bl)
-          b.hitos.push(dist, semilla, mat, esPie ? 1 : 0)
+          b.hitos.push(dist, semilla, mat, alSuelo ? APOYO.SUELO : rasante ? APOYO.RASANTE : esPie ? APOYO.PIE : APOYO.NINGUNO)
           b.vidas.push(vida[0], vida[1])
-          const ap = apoyo === PROPIO ? v : (apoyo ?? ancla)
-          const an = ancla === PROPIO ? v : ancla
-          b.anclas.push(an.x, an.z, ap.x, ap.z)
+          if (rasante && !alSuelo) b.anclas.push(...rasante)
+          else {
+            const ap = alSuelo || apoyo === PROPIO ? v : (apoyo ?? ancla)
+            const an = alSuelo || ancla === PROPIO ? v : ancla
+            b.anclas.push(an.x, an.z, ap.x, ap.z)
+          }
           b.uvs.push(uv ? uv.getX(i) : 0, uv ? uv.getY(i) : 0)
         }
         if (g.index) for (let i = 0; i < g.index.count; i++) b.indices.push(base + g.index.getX(i))
@@ -97,7 +116,7 @@ export function crearLienzo() {
     /** El pintor de un hito: origen {x, z} en el mundo, eje (ux, uy), vida y ancla (por omisión, el origen). */
     hito({ origen, eje = [1, 0], nace = 0, muere = 0, semilla = 0, ancla = origen }) {
       return pintor({
-        matriz: matrizDeMarco(origen, eje), vida: [nace, muere], ancla, apoyo: null, semilla,
+        matriz: matrizDeMarco(origen, eje), vida: [nace, muere], ancla, apoyo: null, rasante: null, semilla,
         dist: Math.hypot(origen.x, origen.z),
       })
     },

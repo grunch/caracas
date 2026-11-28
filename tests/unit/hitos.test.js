@@ -103,8 +103,8 @@ describe('construirHitos', () => {
   })
 
   test('presupuesto: pocos triángulos para un solo draw call', () => {
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(605_000) // Cementerio Sur sigue el relieve con malla subdividida: +2.774 triángulos.
-    expect(datos.indices.length / 3).toBeLessThan(1_090_000) // Total medido con terrenos siguiendo el DEM: 1.080.573.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(615_000) // Cementerio Sur sigue el relieve con malla subdividida: +2.774 triángulos; el Puente de Hierro (estructura única de 1889 a 1936, dos cauces): +8.210, medido 611.786.
+    expect(datos.indices.length / 3).toBeLessThan(1_100_000) // Total medido con terrenos siguiendo el DEM: 1.080.573 entonces; con el Puente de Hierro, 1.091.159.
   })
 
   test('cada hito ocupa un rango de vértices y queda cerca de su lugar en el plano', () => {
@@ -132,8 +132,10 @@ describe('construirHitos', () => {
     for (const { id, desde } of datos.rangos) {
       const { x, z } = coords.aMundo(hito(id).x, hito(id).y)
       const sigueSuelo=id==='hijos-de-dios'||id==='cementerio-sur'||id==='hospital-vargas'||id==='silencio-urbanizacion'||id.startsWith('silencio-plaza-')
-      expect(datos.anclas[desde * 4]).toBeCloseTo(sigueSuelo?datos.posiciones[desde*3]:x, 3)
-      expect(datos.anclas[desde * 4 + 1]).toBeCloseTo(sigueSuelo?datos.posiciones[desde*3+2]:z, 3)
+      // un puente no se ancla en su origen: su ancla es la primera de sus dos cabezas (src/hitos/rasante.js)
+      const cabeza=hito(id).cabezas?coords.aMundo(...hito(id).cabezas[0]):null
+      expect(datos.anclas[desde * 4]).toBeCloseTo(cabeza?cabeza.x:sigueSuelo?datos.posiciones[desde*3]:x, 3)
+      expect(datos.anclas[desde * 4 + 1]).toBeCloseTo(cabeza?cabeza.z:sigueSuelo?datos.posiciones[desde*3+2]:z, 3)
       expect(datos.hitos[desde * 4]).toBeCloseTo(Math.hypot(x, z), 3)
     }
   })
