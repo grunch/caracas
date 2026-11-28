@@ -50,8 +50,8 @@ export const MARCAS = Object.freeze([
   // --- la plaza y sus alrededores (edificios modelados: la posición sale del hito) ---
   { id: 'plaza-bolivar', hito: 'plaza-bolivar', nace: 1, nivel: 1,
     nombres: [[1, 'Plaza Mayor', 'La plaza del mercado.'], [2, 'Plaza Bolívar', 'Nombre oficial desde 1842; todavía es la plaza del mercado, sin la estatua de 1874.'], [3, 'Plaza Bolívar', 'Jardín con la estatua ecuestre, de 1874.']],
-    fuente: `${P36} y ${P89} («Plaza Bolívar»); mercado y estatua: fuentes/imagenes (1852, 1866–1880); nombre oficial del 10 de diciembre de 1842: Landaeta Rosales, Grandes honores acordados al Libertador (1900), p. 12, https://archive.org/details/grandeshonoresac00land`,
-    dudas: 'El nombre oficial y el uso como mercado no cambiaron al mismo tiempo. Se mantiene la geometría de mercado en 1843; el jardín y la estatua corresponden a una etapa posterior.' },
+    fuente: `${P36} y ${P89} («Plaza Bolívar»); mercado y estatua: fuentes/imagenes (1852, 1866–1880); nombre oficial del 10 de diciembre de 1842 e inauguración de la estatua el 7 de noviembre de 1874: Landaeta Rosales, Grandes honores acordados al Libertador (1900), pp. 12 y 13, https://archive.org/details/grandeshonoresac00land`,
+    dudas: 'El nombre oficial y el uso como mercado no cambiaron al mismo tiempo. Se mantiene la geometría de mercado en 1843; el jardín y la estatua corresponden a una etapa posterior. El plano de 1772 no rotula la plaza; en 1842 se la llamaba también «de Catedral».' },
   // el punto va en el medio de la nave (39 m al este de la fachada, que es el marco del hito): más lejos del cartel de la plaza
   { id: 'catedral', hito: 'catedral', x: 9156, y: 6816, nombre: 'Catedral', nivel: 2, alto: 16, fuente: `${P36} («Iglesia Catedral»); ${P89} (templo I); ${L43('A', 'Catedral')}` },
   { id: 'palacio-arzobispal', hito: 'palacio-arzobispal', nace: 1, nivel: 3, alto: 13,
@@ -142,8 +142,8 @@ export const MARCAS = Object.freeze([
     dudas: 'La leyenda de 1843 ya la nombra (B). Desde qué época antes, a verificar: va desde 1772, como el hito.' },
   { id: 'panteon', hito: 'panteon', nace: 2, nivel: 2, alto: 13,
     nombres: [[2, 'La Trinidad', 'La iglesia de la Santísima Trinidad.'], [3, 'Panteón Nacional', 'La iglesia de la Trinidad, hecha panteón.']],
-    fuente: `${P89} (22 «Panteón nacional»); ${P36} («Panteón Nacional»); Bellermann (1842–1845); Lessmann (1885–1900), https://elarchivo.org/producto/panteon-nacional/; reformas de 1911 y 1930: https://fundaayc.com/tag/panteon-nacional/; nombre en 1843: ${L43('C', 'La Trinidad')}`,
-    dudas: 'La iglesia fue inaugurada en 1781 y quedó en ruinas tras el terremoto de 1812. Las obras de 1772 no están modeladas: la marca va desde 1843.' },
+    fuente: `${P89} (22 «Panteón nacional»); ${P36} («Panteón Nacional»); Bellermann (1842–1845); Lessmann (ca. 1885), https://elarchivo.org/producto/panteon-nacional/; reformas de 1911 y 1930: https://fundaayc.com/tag/panteon-nacional/; apertura de la iglesia (1781 o 1783): https://iamvenezuela.com/2016/05/panteon-nacional/, https://fundaayc.com/2019/12/15/algo-mas-sobre-la-postal-no-191/ y https://camaradecaracas.com/la-camara-caracas-y-sus-historias/cronicas-de-la-ciudad/biografia-del-panteon-nacional/; nombre en 1843: ${L43('C', 'La Trinidad')}`,
+    dudas: 'La iglesia fue inaugurada en 1781 según unas fuentes y bendecida en 1783 según otras; quedó en ruinas tras el terremoto de 1812. Las obras de 1772 no están modeladas: la marca va desde 1843.' },
   { id: 'san-carlos', nombres: [[2, 'Cuartel Veterano'], [3, 'Cuartel San Carlos']], x: 9150, y: 4980, nace: 2, nivel: 3, alto: 9,
     fuente: `${L43('s', 'Cuartel veterano')}; ${P89} (21 «Cuartel San Carlos»); ${P36} (edificio de patio); Mariana Flores, Cuartel San Carlos. Yacimiento veterano (2007): https://dialnet.unirioja.es/descarga/articulo/2321930.pdf`,
     dudas: 'Flores sitúa la construcción entre 1785 y 1790. No se representan obras en 1772. Hito arquitectónico pendiente: se conserva la posición del rótulo existente, no un nuevo levantamiento del edificio.' },
