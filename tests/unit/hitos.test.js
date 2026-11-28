@@ -109,10 +109,12 @@ describe('construirHitos', () => {
     // de 625.000 a 630.000 (0,8 %).
     // Dolores (4.698) y Restaurador (11.628, por sus barandas y faroles), solo en 1911 (#272): +16.326, medido 641.619;
     // el tope sube de 630.000 a 645.000.
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(645_000)
+    // La Candelaria (2.357, #243) cabía en los topes: 643.976 y 1.123.349. Las Mercedes (1.351, #244): 645.327 y 1.124.700;
+    // los topes suben de 645.000 a 647.000 y de 1.125.000 a 1.127.000.
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(647_000)
     // Total medido con terrenos siguiendo el DEM: 1.080.573 entonces; con el Puente de Hierro, 1.091.159; con el cruce de Sur 7, 1.099.919;
     // con los tres templos de #259, 1.104.666; con Dolores y Restaurador, 1.120.992 (tope de 1.110.000 a 1.125.000).
-    expect(datos.indices.length / 3).toBeLessThan(1_125_000)
+    expect(datos.indices.length / 3).toBeLessThan(1_127_000)
   })
 
   test('cada hito ocupa un rango de vértices y queda cerca de su lugar en el plano', () => {

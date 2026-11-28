@@ -14,12 +14,13 @@ import { civiles } from './civiles.js'
 import { puentesGuaire } from './puentes-guaire.js'
 import { templosParroquiales } from './templos-parroquiales.js'
 import { candelaria } from './candelaria.js'
+import { laMerced } from './la-merced.js'
 
 /** Datos de hitos sin los constructores de geometría; lo usa el hilo principal para áreas y marcas. */
 export const HITOS = Object.freeze([
   plazaBolivar, catedral, ...iglesias, panteon, ...civiles, ...silencio, nuevoCirco,
   metropolitano, ...rotundaYConcordia, sanAgustin, hijosDios, cementerioSur, ...puentesGuaire,
-  ...templosParroquiales, candelaria, // al final: cada hito lleva de semilla su lugar en la lista
+  ...templosParroquiales, candelaria, laMerced, // al final: cada hito lleva de semilla su lugar en la lista
 ])
 
 /** Campos geométricos que consume el worker, sin fichas y huellas de colisión. */
