@@ -1,12 +1,14 @@
 import { test, expect } from '@playwright/test'
 
-// Santa Rosalía, San Juan y San José (#259) y La Candelaria (#243): cada uno se dibuja desde su época y no antes.
+// Santa Rosalía, San Juan y San José (#259), La Candelaria (#243) y Las Mercedes (#244): cada uno se dibuja desde
+// su época y no antes.
 // [id, centro en metros del mundo, época en que nace]
 const TEMPLOS = [
   ['santa-rosalia', { x: 74, z: 853 }, 2],
   ['san-juan', { x: -1020, z: 762 }, 3],
   ['san-jose', { x: 831, z: -758 }, 4],
   ['candelaria', { x: 1133, z: 79 }, 1], // en pie en los seis planos
+  ['las-mercedes', { x: 51, z: -498 }, 3], // el templo de 1857; en 1843 estaba en obra
 ]
 
 test.use({ viewport: { width: 400, height: 300 } })
@@ -94,4 +96,30 @@ test('la marca de La Candelaria sale de su hito desde 1772 y su ficha cuenta la 
   await page.evaluate(() => window.lab.fichas.abrir('candelaria'))
   await expect(page.locator('#ficha h2')).toHaveText('Candelaria')
   await expect(page.locator('#ficha')).toContainText('torre de tres cuerpos')
+})
+
+test('la marca de Las Mercedes sale de su hito, vive desde 1772 y su ficha dice que el templo es de 1857', async ({ page }) => {
+  await page.goto('/?sinintro&capture&sinsw')
+  await page.waitForFunction(() => window.lab?.ready && window.lab?.marcasDelMapa && window.lab?.fichas)
+  const marca = await page.evaluate(() => { const m = window.lab.marcasDelMapa.find((x) => x.id === 'las-mercedes'); return [m.hito, m.nace, m.naceHito] })
+  expect(marca).toEqual(['las-mercedes', 1, 3])
+  await page.evaluate(() => window.lab.fichas.abrir('las-mercedes'))
+  await expect(page.locator('#ficha')).toContainText('1857')
+  await expect(page.locator('#ficha')).toContainText('no se dibuja ningún edificio')
+})
+
+test('la iglesia de San Pablo se dibuja en 1772 y 1843 y ya no en 1889, cuando está el teatro', async ({ page }) => {
+  test.setTimeout(300_000)
+  await page.goto('/?sinintro&capture&sinsw')
+  await page.waitForFunction(() => window.lab?.ready && window.lab?.lineaDeTiempo && window.lab?.hitos?.userData?.rangos)
+  const centro = { x: -296, z: 436 }
+  for (const epoca of [1, 2, 3]) {
+    await page.evaluate((e) => window.lab.lineaDeTiempo.elegir(e), epoca)
+    await page.waitForFunction((e) => window.lab.ciudad.U.uEpocaA.value === e, epoca)
+    const iglesia = await pixelesDelTemplo(page, 'san-pablo', centro, epoca)
+    if (epoca < 3) expect(iglesia, `San Pablo se ve en la época ${epoca}`).toBeGreaterThan(10)
+    else expect(iglesia, 'San Pablo ya no existe en 1889').toBe(0)
+  }
+  expect(await pixelesDelTemplo(page, 'teatro-municipal', centro, 3), 'el teatro se ve en 1889').toBeGreaterThan(10)
+  expect(await pixelesDelTemplo(page, 'teatro-municipal', centro, 2), 'el teatro no existe en 1843').toBe(0)
 })

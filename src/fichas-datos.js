@@ -212,11 +212,11 @@ export const FICHAS = Object.freeze({
   },
   'teatro-municipal': {
     textos: [
-      [1, 'Aquí estaban la iglesia colonial y la plaza de San Pablo. Landaeta Rosales documenta una fuente en la plaza desde 1771; el teatro todavía no existía.'],
-      [2, 'La leyenda del plano de 1843 nombra la iglesia de San Pablo (P).'],
+      [1, 'Aquí estaban la iglesia colonial y la plaza de San Pablo; el teatro todavía no existía. El templo databa de 1580 (Landaeta Rosales). Según Otaduy, citado por Gois (2007), la visita del obispo Martí de 1772 lo describe de una nave, con otra menor del lado de la Epístola, la puerta principal al norte y una torre de tres cuerpos junto a la fachada; la cita no se cotejó con el original. Pegado a la torre estaba el Hospital Real, y después el Hospicio de la Caridad (plano de 1757, reproducido por Gois). La plaza tenía una fuente de piedra desde 1771.'],
+      [2, 'La leyenda del plano de 1843 nombra la iglesia de San Pablo (P) y dibuja la plazuela delante. Una carta de 1812 citada por Gois dice que el terremoto tumbó la torre sobre el coro. Gasparini, también citado por Gois y sin dar fecha, describe una fachada de dos cuerpos con frontispicio triangular y una torre maciza de dos cuerpos; que ese fuera el templo de 1843 es una lectura de Gois, y así se dibuja.'],
       [3, 'La iglesia fue demolida en 1876 (Landaeta Rosales). El teatro se levantó en ese lugar: el plano de 1889 lo numera 25, «Teatro Municipal». Fue inaugurado en 1881 como Teatro Guzmán Blanco (Fundarte). Se representa con su pórtico semicircular original, columnas, óculos y linterna, visibles en la fotografía de los años 1880. Ese frente se demolió en 1949 (Fundación Arquitectura y Ciudad), después de las épocas del mapa.'],
     ],
-    dudas: 'La envolvente exterior se conserva entre 1889, 1911 y 1936 como hipótesis de continuidad. Dimensiones, pintura, caja escénica y ornamentos pequeños aproximados; sin levantamiento arquitectónico. No se modela la reforma interior de 1930.',
+    dudas: 'De la iglesia de San Pablo no hay medidas: su planta sale de la proporción de un plano de 1757 puesta a escala con el recuadro del plano de 1843. Según cómo se lea esa escala el templo mediría 41 m de largo (así se dibuja) o hasta unos 57 m, y el modelo se sale unos 13 m del recuadro de 1843 hacia el sur. Sus alturas son interpretativas y las descripciones son citas de segunda mano. El hospital y el hospicio vecinos no se dibujan. Del teatro: la envolvente exterior se conserva entre 1889, 1911 y 1936 como hipótesis de continuidad. Dimensiones, pintura, caja escénica y ornamentos pequeños aproximados; sin levantamiento arquitectónico. No se modela la reforma interior de 1930.',
   },
   'santa-teresa': {
     textos: [
@@ -278,11 +278,11 @@ export const FICHAS = Object.freeze({
   // --- el norte ---
   'las-mercedes': {
     textos: [
-      [1, 'El convento de La Merced ocupaba este sector desde el siglo XVII. En 1772 recibió la visita del obispo Mariano Martí.'],
-      [2, 'El terremoto de 1812 dañó gravemente el conjunto. Los últimos religiosos se retiraron en 1839; la leyenda del plano de 1843 conserva el nombre «La Merced» (E).'],
-      [3, 'El plano de 1889 dibuja un templo en el lugar; el de 1936 lo rotula «Iglesia Las Mercedes».'],
+      [1, 'El convento de La Merced ocupaba este sector desde el siglo XVII; su iglesia se trasladó a este lugar en 1681 (IPC). En 1772 recibió la visita del obispo Mariano Martí. El plano de 1772 pone aquí el símbolo de iglesia.'],
+      [2, 'El terremoto de 1812 destruyó la iglesia; en 1813 se hizo una capilla provisional. Los últimos religiosos se retiraron en 1839. El templo actual se empezó en 1842: la leyenda del plano de 1843 conserva el nombre «La Merced» (E) y deja el lugar en blanco.'],
+      [3, 'El templo se inauguró en 1857 (IPC): tres naves, fachada neoclásica de dos cuerpos con tres puertas y frontis, y dos torres campanario de dos cuerpos, el segundo ochavado, con cúpula y linterna. Es el templo IX del plano de 1889; el de 1936 lo rotula «Iglesia Las Mercedes».'],
     ],
-    dudas: 'La visita de 1772 está documentada en Historia general de la Iglesia en América Latina, tomo VII, pp. 228–229. Falta cotejar el solar en el plano de 1772 y la arquitectura de cada etapa; la marca no presupone una fachada colonial intacta en 1843 o 1889.',
+    dudas: 'En 1772 y 1843 no se dibuja ningún edificio: no se halló descripción del convento ni de su iglesia, y en 1843 el templo estaba en obra. Desde 1889 va lo que el catálogo del IPC describe del templo de hoy; no se sabe si las torres son todas de 1857 ni qué se rehízo tras el terremoto de 1900. Ninguna altura está medida.',
   },
   'la-pastora': {
     textos: [
