@@ -129,11 +129,12 @@ export const FICHAS = Object.freeze({
   },
   universidad: {
     textos: [
-      [1, 'El convento de San Francisco, junto a su iglesia.'],
-      [3, 'El plano de 1889 pone aquí la Universidad (3), frente al Capitolio; el de 1936, la «Universidad Central». Las fotos muestran una fachada neogótica, con ventanas ojivales, pináculos y una torre de aguja.'],
+      [1, 'El convento de San Francisco, pegado al costado de su iglesia. El plano de 1772 pinta la cuadra entera como edificada, sin su interior, y no se halló una descripción del convento de esos años: el claustro que ves es una lectura hacia atrás, con la planta del edificio de hoy. La parte de atrás no se dibuja: según Wikipedia, que no cita de dónde lo toma, se terminó en 1794.'],
+      [2, 'El convento se suprimió con la ley de 1821 y el edificio fue cuartel y hospital. En 1838 alojaba la Dirección General de Instrucción y el Colegio de la Independencia, y desde 1844 las Cámaras Legislativas, según Leopoldo Briceño-Iragorry (2001); Wikipedia pone a la Cámara de Diputados entre 1840 y 1845. El plano de 1843 deja en blanco una plazuela delante, que aquí todavía tiene casas, y una litografía de hacia 1845 muestra el frente, bajo y con tejado. Los tres patios en fila son los que dibuja el plano de 1889 y los que tiene el edificio de hoy; cuánto tumbó el terremoto de 1812 y cuándo se rehízo, no se halló. Las alturas y los corredores cerrados son una interpretación.'],
+      [3, 'La Universidad se mudó al antiguo convento en 1856, según Briceño-Iragorry (2001). Guzmán Blanco le mandó cambiar la fachada colonial por la neogótica, obra de Juan Hurtado Manrique, y el paraninfo del piso alto se inauguró el 3 de diciembre de 1876. A su lado, según IAM Venezuela, el 28 de octubre de 1875 se inauguró la fachada del Museo, con una torre pensada como observatorio; el edificio se completó en 1883 para la Exposición Nacional. El plano de 1889 pone aquí la Universidad (3), con tres patios en fila, frente al Capitolio; el de 1936, la «Universidad Central». Las fotos muestran ventanas ojivales, pináculos y una torre de aguja. El dibujo es un bloque sin patios, menos hondo que el de los planos.'],
     ],
     hoy: 'el Palacio de las Academias.',
-    dudas: `Que antes fue el convento de San Francisco es un dato general: ${SIN_LEYENDA}. La leyenda del plano de 1843 no nombra el convento aparte: solo la iglesia, «San Francisco» (N).`,
+    dudas: `${SIN_LEYENDA} La leyenda del plano de 1843 no nombra el convento aparte: solo la iglesia, «San Francisco» (N). Las fuentes no coinciden en cuándo se hizo el convento (1577–1586 según Wikipedia; desde 1684–1687 según Briceño-Iragorry e IAM Venezuela) ni en si la reforma de 1873–1876 le agregó un segundo piso (Wikipedia) o mantuvo la altura (guía de arquitectura de Caracas). Lo que hubo al oeste de los claustros antes de 1875 no tiene fuente: queda vacío.`,
   },
   'san-francisco': {
     textos: [
