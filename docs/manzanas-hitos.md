@@ -126,3 +126,55 @@ de lo que el plano de esa época dibuja edificado: la huella del propio edificio
   `U1772-0052` (1 %), Circo Metropolitano con `V1772-36189` (1 %), San Agustín con `U1772-0133` (0,4 %).
 
 
+## Puertas antes y después
+
+Medido el 28-11-2026 con las auditorías que existen en el repo. `tools/geo/reglas_mapa.py` (R1 a R12, specs/13 F1)
+todavía no existe: esto no lo reemplaza. **Antes** son los datos publicados (`datos-2026-11-28-c5b8180`, generados
+con `eb21bf8`, anteriores al Hospital Vargas de #289) y los intermedios de `main` `c5b8180`, que llega hasta
+`retiro-1911` y aborta en `retiro-1936`. **Después**, los regenerados con esta rama, sin publicar. Las puertas
+escriben en `specs/`: corrieron sobre copias fuera del repo.
+
+| Puerta | Épocas | Antes | Después |
+|---|---|---|---|
+| `npm run datos` completo | todas | aborta en `retiro-1936` (`M5-1048-A0`) | termina, código 0 |
+| Intermedios anteriores a los pasos de retiro (`ciudad-epocas`, `ciudad-estilos`, `ciudad-manzanas`, `-1843`, `-1889`, `1946/ciudad-1946`) | todas | — | los mismos bytes (sha256 igual): R13 solo actúa en los pasos `retiro-<año>` |
+| Puertas de 08, fases 3, 4, 5 y 7 de 1772 (`cierre_fase3…7.py`) sobre `ciudad-epocas.json`, como las define specs/12 | 1772 | 3, 5 y 7 cierran; la 4 no (`hitos_sin_vacios_artificiales`) | informes idénticos |
+| Puerta de 08, fase 6 de 1772 (`cierre_fase6.py`) sobre `ciudad-epocas.json` | 1772 | no se puede medir: el `ciudad.pak` sale de las manzanas reconstruidas, no de esas huellas | igual |
+| Puertas de 11 (`contraste_1843.py`, `cierre_casas_1843.py`) sobre `ciudad-epocas.json` | 1843 | fases 3 y 4 cierran; 5 a 7 cierran con límites | informes idénticos |
+| Las mismas puertas de 08 (fases 3 a 7) y de 11 sobre la **ciudad publicada** (el `ciudad.pak` decodificado) | 1772, 1843 | ninguna cierra salvo la fase 3 de 1843 | informes idénticos, hallazgo por hallazgo |
+| `auditar_huellas.py` sobre la ciudad publicada: inválidas / pares con solape > 0,01 m² | 1578 a 1936 | 0/0 · 0/0 · 0/1 · 0/1 · 1/1 · 5/9 | 0/0 · 0/0 · 0/1 · 0/1 · 1/1 · 5/9: los mismos, ninguno nuevo |
+| La misma función con el tope de época ampliado (el script solo admite hasta 1936) | 1946 | 261 inválidas, 10 pares | 261 y 10: los mismos, ninguno nuevo |
+| `auditar_continuidad_manzanas.py` (1772→1843 y 1843→1889) | 1843, 1889 | sin casas fuera de manzana, sin solapes, perímetros y árboles heredados exactos | los mismos valores |
+| `auditar_1946.py` | 1946 | prefijos idénticos, 9.665 casas nuevas, sin solapes | idéntico |
+| `auditar-manzanas-1772.mjs` (casas a la vista, sin las que esconde un hito) | 1578 a 1936 | 65 · 3.161 · 4.191 · 4.841 · 5.957 · 15.332 | 65 · 3.161 · 4.191 · 4.841 · 5.947 · 15.298; las firmas cambian en 1911 y 1936, los árboles desde 1772 |
+| Manzanas conservadas, campo a campo, entre los informes `retiro-<año>` de esta rama justo antes de R13 (`8540a6f`) y los de ahora | 1772 a 1946 | 252 · 398 · 484 · 876 · 7.053 · 10.685 | todas idénticas; solo salen las retiradas (1, 1, 2, 9, 27, 47) y `U1843-0224-A0` en 1946 |
+
+Lo que hay que leer con cuidado:
+
+- **Las puertas de 08 y 11 no cierran sobre la ciudad publicada, ni antes ni después.** Se diseñaron para
+  `ciudad-epocas.json`; desde que las manzanas de 1772 a 1889 se reconstruyen (specs/14, 16 y 17), lo que se
+  publica es otra ciudad y nadie las había corrido sobre ella. Sobre la publicada fallan `plazas_sin_casas`,
+  `edificadas_con_casas`, `frentes_alineados`, `techos_sin_cruces`, `cumbreras_con_el_frente` y
+  `sin_aberturas_indebidas` en 1772, y en 1843 la fase 4 y las 5 a 7. No lo causa R13 (da lo mismo con los datos
+  publicados) y este PR no lo corrige: queda como hallazgo aparte. En `cierre_casas_1843.py` la distinción entre
+  casa propia y heredada depende del orden de `ciudad-epocas.json` y sobre la ciudad publicada no vale; se usó solo
+  para comparar.
+- **Contra los datos publicados, la diferencia no es solo R13.** Los publicados son anteriores a #289: alrededor
+  del Hospital Vargas cambian además dos casas y unos árboles en `M4-0065`, `M4-0066` y `M5-1016` (roces, se
+  conservan), porque #289 las reparte de otro modo. Contra los intermedios de `main` `c5b8180` (hasta 1911), R13
+  solo quita: 2 casas en 1889 y 13 en 1911, todas en manzanas retiradas, y no entra ninguna.
+- **1946, Circo Metropolitano.** Además de salir `U1843-0224-A0` (sus casas y 2 árboles), aparece un árbol del plano
+  en (7856, 7969) px, donde antes estaba esa manzana.
+- **Los datos de «después» se generaron antes de los dos últimos arreglos del generador** (`3ed3f25`, `ca2fd1a`)
+  y no se regeneraron: quedaron marcados al día. El primero solo cambia la red de seguridad `cubierta_por_hitos`,
+  que no se dispara en ninguna época (ningún informe trae `cubiertaPorHito`); el segundo solo afloja un error que
+  no saltó. Por lectura del código dan los mismos datos; no se comprobó regenerando.
+
+No se pudo medir:
+
+- R1 a R12 con `reglas_mapa.py`: no existe.
+- Las puertas de 08 y 11 con el código de `main` `c5b8180` en 1936 y 1946: `main` no termina `npm run datos`.
+- 1889, 1911, 1936 y 1946 no tienen puertas de auditoría propias (calles libres, alineación, cubiertas, accesos):
+  solo huellas, continuidad y conteos.
+- Los triángulos de cubierta de 1843 en adelante: no hay puerta.
+- Tiempo por cuadro, y los modos a pie, en avión y manejando: no se corrieron. Falta la revisión de una persona.
