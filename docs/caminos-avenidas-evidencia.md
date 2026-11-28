@@ -15,8 +15,9 @@ desfasen.
 - **Planos.** Se leyeron recortes del mosaico de 1936 (0,5 m por píxel) y del plano de 1946 ya reducido a 2 m por
   píxel, en Catia, Palo Grande y Sabana Grande. Para 1772 y 1843 no se volvió a mirar el plano: se usa lo que ya
   está transcrito en `specs/auditoria-1772/trazado-calles-original.json`, `tools/geo/referencias/1772-calles-1936.json`
-  y `specs/auditoria-1843/leyenda.json`. **Los planos de 1889 y 1911 no se leyeron** para estos elementos: en la
-  tabla salen «Sin lectura», que no es una ausencia.
+  y `specs/auditoria-1843/leyenda.json`, salvo la letra x (Alcabala de Candelaria), que se ubicó sobre el plano de
+  1843 al leer los puentes de #271. **Los planos de 1889 y 1911 no se leyeron** para estos elementos (el de 1911,
+  solo en Palo Grande): en la tabla salen «Sin lectura», que no es una ausencia.
 - **Fuentes escritas.** Cilento (Academia Nacional de la Ingeniería y el Hábitat), el capítulo de Vargas de
   *GeoVenezuela* (Fundación Empresas Polar), Altez (Boletín de la Academia Nacional de la Historia, 2008) y cinco
   entradas de la Fundación Arquitectura y Ciudad. Todas secundarias. Las leyeron dos subagentes, que devolvieron
@@ -37,9 +38,10 @@ desfasen.
    tramo de Capuchinos a la Plaza Italia se sigue llamando «Sur Ocho». FAC da el nombre San Martín desde 1922, sin
    decir en qué tramo.
 4. **Tres topónimos de alcabala en 1936**, ninguno con solar: «Alcabala» en Candelaria, «Alcabala Vieja» al sur y
-   «Alcabala» en el camino de La Vega. La leyenda de 1843 solo enumera dos alcabalas (Valle y Candelaria) y la
-   Puerta de La Guaira. Que una esquina de 1936 sea el lugar de una alcabala de 1843 es una inferencia por el
-   nombre, y así queda escrito.
+   «Alcabala» en el camino de La Vega, que el plano de 1911 ya llama «Alcabala Palo Grande». La leyenda de 1843
+   solo enumera dos alcabalas (Valle y Candelaria) y la Puerta de La Guaira. La de Candelaria es la única ubicada:
+   su letra x está sobre la calle del este, unos 55 m al este de la esquina «Alcabala» de 1936 y unos 65 m antes
+   del puente de Anauco. Que una esquina de 1936 sea el lugar de una alcabala de 1843 sigue siendo una inferencia.
 5. **La plaza de Catia se llama «Plaza La Libertad» en el plano de 1936**, mientras FAC dice que de 1935 a 1941 se
    llamó «Agustín Codazzi». Contradicción pendiente.
 6. **La estatua de Sucre no está en Catia en 1936 ni en 1946.** Según FAC, la plaza la recibe «después de 1951»; la
@@ -63,7 +65,7 @@ de 1936. Es una medida de las manzanas del sitio sobre un eje moderno, no el anc
 
 | Criterio | #270 | #275 |
 |---|---|---|
-| Ficha de evidencias por etapa | Hecha para 1772, 1843 y 1936; 1889, 1911 y 1946 sin leer | Hecha para 1936 y 1946; antes de 1936, solo fuentes escritas |
+| Ficha de evidencias por etapa | Hecha para 1772, 1843 y 1936; 1889 y 1946 sin leer, 1911 solo en Palo Grande | Hecha para 1936 y 1946; antes de 1936, solo fuentes escritas |
 | Huella georreferenciada | No: los cuatro ejes de 1772 siguen sin aprobar y sin ancho; las alcabalas no tienen solar | No: solo cajas de lectura; no se digitalizaron ejes |
 | Variantes por época | No hay marca ni ficha | No hay marca ni ficha |
 | Referencias visuales | Ninguna imagen con licencia; las de las fuentes no se incorporan | Igual |
@@ -73,7 +75,8 @@ de 1936. Es una medida de las manzanas del sitio sobre un eje moderno, no el anc
 
 ## Qué sigue
 
-- Leer los planos de 1889 y 1911 para los mismos elementos y ubicar las letras v a z de la leyenda de 1843.
+- Leer los planos de 1889 y 1911 para los mismos elementos y ubicar las letras v, w, y, z y los dos signos de la
+  leyenda de 1843 (la x ya está).
 - Digitalizar como tramos del registro vial la «Sur Ocho»/San Martín y la avenida Sucre de 1936 y 1946, y medir su
   ancho sobre el mosaico.
 - Marcas: solo cuando haya posición leída. Hoy la tendrían la Plaza La Libertad y la Plaza Pérez Bonalde (son

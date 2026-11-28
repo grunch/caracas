@@ -73,6 +73,11 @@ describe('caminos de salida, alcabalas y avenidas del oeste (#270, #275)', () =>
 
   it('las esquinas de alcabala de 1936 son las del diccionario de esquinas y quedan como topónimos, no como alcabalas', () => {
     const esquina = (nombre) => esquinas.find((e) => e.nombre === nombre).px
+    // la letra x de 1843 (Alcabala de Candelaria) cae a unos 55 m de la esquina «Alcabala» de 1936
+    const letraX = [11420, 7160], [ex, ey] = esquina('Alcabala')
+    expect(etapa('alcabala:candelaria', 1843).lectura).toContain(`(${letraX[0]}, ${letraX[1]})`)
+    expect(Math.round(Math.hypot(letraX[0] - ex, letraX[1] - ey) * METRO / 5) * 5).toBe(55)
+    expect(etapa('alcabala:la-vega', 1911).nombre).toBe('Alcabala Palo Grande')
     for (const [id, nombre] of [['alcabala:candelaria', 'Alcabala'], ['alcabala:el-valle', 'Alcabala Vieja']]) {
       const e = etapa(id, 1936), [x, y] = esquina(nombre)
       expect([e.estado, e.nombre], id).toEqual(['desconocido', nombre])
