@@ -3,7 +3,7 @@
 // tools/hitos-manzanas-tabla.mjs.
 import {spawnSync} from 'node:child_process'
 import {hitosConPlanta} from '../src/hitos/plantas.js'
-import {paraMedir,separarRetiradas} from './hitos-manzanas-lib.mjs'
+import {paraMedir,separarRetiradas,devolverManzanas} from './hitos-manzanas-lib.mjs'
 
 const PY=process.env.PY??new URL('../.venv/bin/python',import.meta.url).pathname
 const SCRIPT=new URL('./geo/hitos_manzanas.py',import.meta.url).pathname
@@ -18,4 +18,9 @@ export function medirHitos(manzanas,epoca,metro,hitos=hitosConPlanta()){
 /** Las manzanas que quedan en la época y el registro de las que un hito retira enteras. */
 export function retirarPorHitos(manzanas,epoca,metro){
  return separarRetiradas(manzanas,medirHitos(manzanas,epoca,metro).decisiones,epoca)
+}
+
+/** Las retiradas de la época anterior, medidas otra vez: las que un hito sigue retirando y las que vuelven como manzanas. */
+export function devolverPorHitos(registros,epoca,metro){
+ return devolverManzanas(registros,medirHitos(registros,epoca,metro).decisiones,epoca)
 }
