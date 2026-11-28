@@ -10,7 +10,7 @@ procedurales originales desarrolladas en el estudio independiente de Miraflores:
 | 1911 (4) | Reforma de Chataing, ventana ojival, crestería y nuevos remates | Alzado del concurso de 1910 y fotografía de la obra terminada, [Fundación Arquitectura y Ciudad](https://fundaayc.com/tag/panteon-nacional/) |
 | 1936 (5) | Reforma de Mujica Millán, torre central elevada y dos laterales con cúpulas | Collage y fotografías de la reforma terminada en 1930, misma fuente |
 
-La iglesia se inauguró en 1781 (consagración en 1783 según FAC). El decreto de conversión es de 1874,
+La iglesia se inauguró en 1781 según unas fuentes y se bendijo en 1783 según otras (`docs/issue-268-trinidad-plaza.md`). El decreto de conversión es de 1874,
 y la inauguración del Panteón de 1875. Las obras de 1772 no se modelan; en 1843 se representa una ruina,
 no una iglesia intacta ni la fachada neogótica posterior. No se agregan el Foro Libertador ni el
 Mausoleo moderno. Las imágenes nuevas son referencias internas con licencia de reproducción sin
