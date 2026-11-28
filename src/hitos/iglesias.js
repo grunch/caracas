@@ -148,17 +148,32 @@ export function cupulaConTambor(p, { radio, altoTambor = radio * 0.7, alto = rad
   barra(p, [-0.4, y + 1.05, 0], [0.4, y + 1.05, 0], { radio: 0.06, lados: 4 })
 }
 
+/** Las dos puertas menores de una fachada de tres, entre las pilastras de los lados. */
+function puertasLaterales(p, { ancho, alto }) {
+  for (const s of [-1, 1]) vano(p.en(s * ancho * 0.33, 0, 0), { ancho: ancho * 0.1, alto })
+}
+
 /** Fachadas sencillas de la iglesia paramétrica, en el plano xy con el frente hacia +z. */
 const FACHADAS = Object.freeze({
   /** Hastial triangular, pilastras, puerta de arco y óculo: la iglesia colonial o neoclásica. */
-  clasica(p, { ancho, alto, color }) {
+  clasica(p, { ancho, alto, puertas, color }) {
     caja(p.en(0, 0, -0.4), { ancho, alto, fondo: 0.8, color })
     for (const k of [-0.46, -0.2, 0.2, 0.46]) columna(p.en(k * ancho, 0, 0.3), { radio: 0.32, alto: alto - 0.5, color })
     caja(p.en(0, alto - 0.5, 0.1), { ancho: ancho + 0.4, alto: 0.5, fondo: 1, color, flota: true })
     fronton(p.en(0, alto, 0.4), { ancho: ancho + 0.5, alto: ancho * 0.22, fondo: 0.8, color })
     vano(p, { ancho: ancho * 0.16, alto: alto * 0.6 })
     disco(p.en(0, alto * 0.78, 0), { radio: ancho * 0.045 })
+    if (puertas === 3) puertasLaterales(p, { ancho, alto: alto * 0.42 })
   },
+  /** Hastial liso con su puerta de arco: la fachada de la que solo se sabe que estaba (sin columnas ni adornos). */
+  lisa(p, { ancho, alto, altoTecho, puertas, color }) {
+    caja(p.en(0, 0, -0.4), { ancho, alto, fondo: 0.8, color })
+    fronton(p.en(0, alto, 0), { ancho, alto: altoTecho, fondo: 0.8, color })
+    vano(p, { ancho: ancho * 0.14, alto: alto * 0.52 })
+    if (puertas === 3) puertasLaterales(p, { ancho, alto: alto * 0.4 })
+  },
+  /** Sin frente: queda el muro de cierre de la nave, sin puertas ni adorno (una fachada caída o por hacer). */
+  ninguna() {},
   /** Hastial apuntado con rosetón, puerta ojival y pináculos: el neogótico de Guzmán Blanco. */
   neogotica(p, { ancho, alto, altoTecho, color }) {
     caja(p.en(0, 0, -0.4), { ancho, alto, fondo: 0.8, color })
@@ -176,14 +191,16 @@ const FACHADAS = Object.freeze({
 
 /**
  * Iglesia paramétrica: nave de `largo` × `ancho` con tejado a dos aguas y ventanas altas, `fachada`
- * ('clasica' | 'neogotica' | 'barroca'), `torres` { n: 0 | 1 | 2, lado, cuerpos, remate, centrada? }
+ * ('clasica' | 'lisa' | 'ninguna' | 'neogotica' | 'barroca'), `torres` { n: 0 | 1 | 2, lado, cuerpos, remate, centrada? }
  * a los lados de la fachada (o una sola al centro), `cupula` { a, radio, … } sobre el crucero y, si se pide,
- * `dosFachadas` (otra igual en la cabecera: Santa Teresa).
+ * `dosFachadas` (otra igual en la cabecera: Santa Teresa). `puertas`: 1 o 3 (en la clásica y en la lisa);
+ * `altoFachada`: cuando la fachada sube más que los muros de la nave (por omisión, lo mismo).
  */
 export function iglesia(p, {
   largo, ancho, alto, altoTecho = ancho * 0.28, fachada = 'clasica', torres = null, cupula: domo = null,
-  dosFachadas = false, color = TONO.CAL, teja = TONO.TEJA,
+  dosFachadas = false, puertas = 1, altoFachada = alto, color = TONO.CAL, teja = TONO.TEJA,
 }) {
+  if (puertas !== 1 && puertas !== 3) throw new Error(`iglesia: las puertas son 1 o 3 (vino ${puertas})`)
   cuerpo(p.en(largo / 2, 0, 0), { largo, ancho, alto, altoTecho, color, teja })
   const vanos = Math.max(2, Math.round(largo / 9))
   for (const s of [-1, 1]) ventanas(p.mirando(largo / 2, 0, (s * ancho) / 2, 0, s), { largo: largo * 0.8, n: vanos, y: alto * 0.52, ancho: 1.2, alto: alto * 0.28 })
@@ -193,12 +210,12 @@ export function iglesia(p, {
     const centrada = torres?.centrada
     const anchoFachada = torres && !centrada ? ancho - 2 * torres.lado + 0.4 : ancho
     if (fachada === 'barroca') fachadaBarroca(q, { ancho: anchoFachada, alto1: alto * 0.6, alto2: alto * 0.4, altoFronton: altoTecho + 1, color })
-    else (FACHADAS[fachada] ?? (() => { throw new Error(`iglesia: fachada desconocida "${fachada}"`) }))(q, { ancho: anchoFachada, alto, altoTecho, color })
+    else (FACHADAS[fachada] ?? (() => { throw new Error(`iglesia: fachada desconocida "${fachada}"`) }))(q, { ancho: anchoFachada, alto: altoFachada, altoTecho, puertas, color })
     if (!torres) continue
     const lugares = centrada ? [0] : torres.n === 1 ? [-1] : [-1, 1]
     // en el marco de la fachada (+z hacia afuera): la torre queda a ras, medio lado hacia adentro
     for (const s of lugares) torre(q.en(s * (ancho / 2 - torres.lado / 2), 0, -torres.lado / 2 + (centrada ? 1 : 0.2)), { color, ...torres })
-    if (centrada) {
+    if (centrada && fachada !== 'ninguna') {
       // la torre del medio tapa la puerta y el rosetón de la fachada: van en su cara de afuera
       vano(q.en(0, 0, 1), { ancho: torres.lado * 0.42, alto: alto * 0.5 })
       disco(q.en(0, alto * 0.82, 1), { radio: torres.lado * 0.24 })
