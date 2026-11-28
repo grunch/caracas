@@ -105,8 +105,11 @@ describe('construirHitos', () => {
   test('presupuesto: pocos triángulos para un solo draw call', () => {
     // Cementerio Sur sigue el relieve con malla subdividida: +2.774 triángulos; el Puente de Hierro (estructura única de
     // 1889 a 1936, dos cauces): +8.210, medido 611.786; Constitución (4.842) y Sucre metálico (3.918): medido 620.546.
-    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(625_000)
-    // Total medido con terrenos siguiendo el DEM: 1.080.573 entonces; con el Puente de Hierro, 1.091.159; con el cruce de Sur 7, 1.099.919.
+    // Santa Rosalía (2.871, en dos fases), San Juan (470) y San José (1.406), #259: +4.747, medido 625.293; el tope sube
+    // de 625.000 a 630.000 (0,8 %).
+    expect(construirHitos(HITOS.filter(h=>h.nace<6),coords).indices.length / 3).toBeLessThan(630_000)
+    // Total medido con terrenos siguiendo el DEM: 1.080.573 entonces; con el Puente de Hierro, 1.091.159; con el cruce de Sur 7, 1.099.919;
+    // con los tres templos de #259, 1.104.666.
     expect(datos.indices.length / 3).toBeLessThan(1_110_000)
   })
 
