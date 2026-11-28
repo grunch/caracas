@@ -5,9 +5,9 @@ no se confunden con hitos tridimensionales terminados.
 
 | Issue | Entregado en esta etapa | Pendiente |
 |---|---|---|
-| #250 | Hijos de Dios visible desde 1889 aunque clausurado; ficha con fuentes. Dos estudios de cementerios en Miraflores | Calzar perímetros y extensión histórica del Sur; instalar modelos |
-| #257 | Metropolitano presente en 1911/1936 y ausente en 1946; ficha. Dos circos distintos en Miraflores | Medir solares, instalar y resolver año exacto de demolición |
-| #258 | Estudio del núcleo de La Rotunda y guía en Miraflores | Ampliación de 1881, corte dentro de 1936, calce e instalación |
+| #250 | Hijos de Dios visible desde 1889 aunque clausurado; ficha con fuentes. Los dos cementerios instalados desde Miraflores (#287, #288), marcas enlazadas y [cotejo del Sur con el plano de 1946](../cementerio-sur-integracion.md#cotejo-con-el-plano-de-1946) | Huella medida del Sur en 1889 y 1911 (los planos no cubren el sitio), su ampliación de 1946, portada, y estado de abandono de Hijos de Dios por fecha: [qué falta](../cementerio-sur-integracion.md#qué-falta) |
+| #257 | Metropolitano presente en 1911/1936 y ausente en 1946; ficha. Los dos circos instalados desde Miraflores con su solar medido (#283, #284) | Año exacto de demolición del Metropolitano (1942 o 1945) con fuente primaria; alturas, colores y reformas interiores con evidencia medible |
+| #258 | La Rotunda (1889, 1911), su solar (1936) y La Concordia (1946) instalados desde Miraflores (#285) | Cuándo terminó la ampliación de 1881 y cuándo terminó el derribo de 1936 |
 | #259 | Cuatro estudios separados y guías en Miraflores | Documentar las fachadas por fecha, fases tempranas e instalación |
 | #264 | [Dossier de obras de 1946](1946-obras-y-proyectos.md), verificación de reserva UCV | Fechas y avance físico por bloque; no se inventan edificios completos |
 | #268 | Plaza Bolívar desde 1843; continuidad del nombre sin adelantar jardín/estatua. [Matriz documental](../issue-268-trinidad-plaza.md) de la Trinidad y la plaza | Trinidad en obras en 1772: no se modela (decisión del responsable, 27-11-2026). Sin consultar: manuscrito de Martí y texto del acuerdo de 1842 |
@@ -54,6 +54,9 @@ templo abovedado con las torres sin concluir, pero no hay alzado ni alturas. El 
 27-11-2026 no modelar esa fase: el hito sigue naciendo en 1843.
 
 Todos los issues siguen abiertos si sus criterios incluyen geometría o investigación pendiente.
+Las filas de #250, #257 y #258 se pusieron al día el 28-11-2026 con lo ya fusionado; el detalle de cada una
+está en su guía (`docs/cementerio-sur-integracion.md`, `docs/hijos-dios-integracion.md`,
+`docs/metropolitano-integracion.md`, `docs/nuevo-circo-integracion.md`, `docs/rotunda-concordia-integracion.md`).
 
 ## Coste y dependencias comprobados
 
