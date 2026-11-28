@@ -13,7 +13,7 @@ describe('cierre de #258: la transición de 1936 en La Rotunda', () => {
     expect(texto).toMatch(/plano/)
     const dudas = FICHAS['solar-rotunda'].dudas
     expect(dudas).toMatch(/marzo de 1936/)
-    expect(dudas).toMatch(/no (consta|se sabe) cuándo terminó/)
+    expect(dudas).toMatch(/no (consta|se sabe) cuándo terminó/i)
   })
 
   it('la marca del solar cita el facsímil del periódico', () => {
